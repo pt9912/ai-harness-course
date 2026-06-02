@@ -1,0 +1,14 @@
+{
+  "id": "case-003-negative-empty-query",
+  "bezug": "LH-FA-02 Negative",
+  "expected": {
+    "status": 400,
+    "error_code": "E002",
+    "log_event": "search_invalid"
+  },
+  "must_not_include": ["status:200", "results:["],
+  "tool_calls": {
+    "embedder.encode": {"min": 0, "max": 0},
+    "index.search": {"min": 0, "max": 0}
+  }
+}

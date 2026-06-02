@@ -10,7 +10,7 @@
 - Indexierung (LH-FA-01) und Suche (LH-FA-02) mit Akzeptanzkriterien grün.
 - Drei ADRs Accepted (siehe [`../../adr/README.md`](../../adr/README.md)).
 - `make gates` mit Linter, Typecheck, Architekturtest, Coverage (bootstrap-aware), Tests.
-- Erstes Replay-Beispiel in `evals/golden/welle-1-baseline.json`.
+- Erstes Replay-Beispiel in `evals/golden/welle-1-baseline/` (siehe `manifest.yaml` + drei Cases unter `inputs/` und `expectations/`).
 
 ## Was hat funktioniert?
 

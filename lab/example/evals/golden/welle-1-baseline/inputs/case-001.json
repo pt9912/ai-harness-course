@@ -1,0 +1,9 @@
+{
+  "id": "case-001-happy-path",
+  "kind": "happy",
+  "bezug": "LH-FA-02",
+  "input": {
+    "endpoint": "/search",
+    "body": {"q": "Wie initialisiere ich den Index?", "k": 5}
+  }
+}

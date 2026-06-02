@@ -76,85 +76,112 @@ teuerste Span trägt:
 
 ```json
 {
+  "span_id": "impl-2",
   "name": "tool_call:writer.write_index",
   "duration_ms": 412,
-  "attributes": {
-    "slice.id": "SL-009",
-    "agent.role": "implementation",
-    "tool.name": "writer.write_index",
-    "tool.arguments": "<redacted>",
-    "tool.result.status": "ok",
-    "cache.hit": false,
-    "tokens.input": 2480,
-    "tokens.output": 187
-  }
+  "tool.name": "writer.write_index",
+  "tool.arguments.redacted": {"docs": 100, "target": "internal/index/store.bin"},
+  "tool.result.status": "ok",
+  "requirement.id": "LH-FA-IDX-003",
+  "adr.id": "ADR-0012",
+  "tokens": {"input": 2480, "output": 187},
+  "cache": {"hit": false}
 }
 ```
 
-**Schritt 1 — Slice-ID aus dem Span lesen.**
-`attributes.slice.id = SL-009`. Das ist der Anker — *jede* spätere
-Verbindung läuft über diese ID.
+**Schritt 1 — Slice-ID aus dem Trace lesen.**
+Der Trace-Header trägt `slice.id = slice-009` (Lab-Schreibweise mit
+Bindestrich) und `requirement.refs = ["LH-QA-02", "LH-FA-IDX-003"]`.
+Innerhalb des Spans selbst hängt der teure `writer.write_index`-Call
+zusätzlich an `requirement.id = LH-FA-IDX-003` — der direkte Anker
+zur konkreten Anforderung.
 
 **Schritt 2 — Slice-Datei finden.**
-`docs/plan/planning/done/SL-009-index-writer.md`. Frontmatter:
-```yaml
----
-id: SL-009
-status: done
-closed_at: 2026-06-14
-adr_refs: [ADR-0012]
-lastenheft_refs: [LH-FA-IDX-003]
----
+[`docs/plan/planning/done/slice-009-tie-break-determinismus.md`](../../../lab/example/docs/plan/planning/done/slice-009-tie-break-determinismus.md).
+Die Lab-Datei trägt keine YAML-Frontmatter, sondern eine Klartext-
+Bezug-Zeile:
+```markdown
+**Bezug:** LH-QA-02 (Reproduzierbarkeit, primär), LH-FA-IDX-003
+(Index-Schreib-Idempotenz, sekundär — deterministischer Tie-Break ist
+Voraussetzung für bit-identische Schreib-Ergebnisse), ADR-0003
+(Index-Format), ADR-0012 (Index-Write-Strategie, sekundär).
 ```
-Das `adr_refs`-Feld führt zur ADR, `lastenheft_refs` zur Anforderung.
+Das ist eine *alternative Operationalisierung* zum Frontmatter-Schema
+(siehe Notiz unten). Lesepfad bleibt derselbe: die Zeile führt zu den
+ADRs und Anforderungen.
 
 **Schritt 3 — ADR aufrufen.**
-`docs/plan/adr/0012-index-write-strategy.md`. Kopf:
+[`docs/plan/adr/0012-index-write-strategy.md`](../../../lab/example/docs/plan/adr/0012-index-write-strategy.md).
+Kopf:
 ```markdown
-* Status: Accepted
-* Bezug: LH-FA-IDX-003
-* Konsequenz: Fitness Function `arch-index-writer` in
-  arch-check, siehe Modul 12.
+**Status:** Accepted
+**Bezug:** LH-FA-IDX-003 (Index-Schreib-Idempotenz und Atomarität),
+ADR-0003 (Index-Storage-Format)
 ```
-Bestätigt: die ADR begründet die Index-Schreib-Strategie, und sie
-referenziert dieselbe LH-ID wie der Slice. Die Kette schließt sich.
+Bestätigt: die ADR begründet die Index-Write-Strategie (Temp-File +
+Atomic Rename) und referenziert dieselbe LH-ID, die der Span trägt.
+Die Kette schließt sich.
 
 **Schritt 4 — Lastenheft prüfen.**
-`spec/lastenheft.md` § `LH-FA-IDX-003`:
+[`spec/lastenheft.md` § `LH-FA-IDX-003`](../../../lab/example/spec/lastenheft.md):
 ```markdown
-## LH-FA-IDX-003: Index-Schreiben
-**Anforderung:** Index-Schreiboperationen sind idempotent und atomar.
-**Akzeptanzkriterien:** Happy/Boundary/Negative ...
+### LH-FA-IDX-003 — Index-Schreib-Idempotenz und Atomarität
+Anforderung: Index-Schreiboperationen sind idempotent (gleicher
+Datei-Hash bei gleicher Eingabe) und atomar (kein partieller
+Index-Stand beobachtbar).
+Akzeptanzkriterien: Happy / Boundary (Crash-Recovery via fsync+rename)
+/ Negative (E099 bei nicht beschreibbarem Verzeichnis).
 ```
 Bestätigt: der teuerste Tool-Call (im Span) bedient eine konkrete
 Lastenheft-Anforderung mit Akzeptanzkriterien.
 
 **Schritt 5 — Make-Target-Kommentar gegenprüfen.**
-`make verify SLICE=slice-009` Targets im Makefile tragen `## LH-FA-IDX-003`
-als Kommentar. Damit ist die Kette **auch maschinell prüfbar**: ein
-Commit ohne `LH-FA-IDX-003` in der Message würde der Traceability-Hook
-ablehnen
+ADR-0012 §Fitness Function definiert die maschinelle Prüfung:
+Architekturtest pro Sprache erzwingt die `rename`-Sequenz im
+Writer-Code; Property-Test (slice-013) vergleicht zwei aufeinander
+folgende `writer.write_index`-Hashes. Damit ist die Kette **auch
+maschinell prüfbar**: ein Commit, der den `rename`-Aufruf entfernt,
+würde `make arch-check` rot machen
 ([`konventionen.md` §Traceability-Constraint](../grundlagen/konventionen.md#traceability-constraint)).
 
 **Schritt 6 — Bruchpunkt benennen.**
 Vollständige Kette:
 ```
-span.attributes.slice.id  →  SL-009
-                          →  done/SL-009-index-writer.md (adr_refs, lastenheft_refs)
+trace.slice.id            →  slice-009
+span.requirement.id       →  LH-FA-IDX-003
+                          →  done/slice-009-tie-break-determinismus.md (Bezug-Zeile)
                           →  ADR-0012 (Bezug: LH-FA-IDX-003)
                           →  LH-FA-IDX-003 (Akzeptanzkriterien)
-                          ↩  Make-Target-Kommentar prüft Bezug
+                          ↩  ADR-0012 §Fitness Function prüft Architekturregel
 ```
-Schwächste Stelle in *diesem* Beispiel-Repo: das Tool-Call-Audit-Log
-enthält `slice.id`, aber nicht direkt `lastenheft_refs`. Wenn die
-Slice-Datei in einer späteren Welle umbenannt oder ohne Frontmatter
-gepflegt wird, **bricht die Kette an Schritt 2**. Steering-Loop-Aktion:
-Frontmatter-Pflichtfeld-Check als Gate (computational feedback)
-ergänzen.
+Schwächste Stelle in *diesem* Beispiel-Repo: der Lesepfad zwischen
+Slice-Datei und ADRs läuft über eine *Klartext*-Zeile, nicht über ein
+maschinell parsbares Frontmatter. Wenn die Bezug-Zeile umformuliert
+wird, fehlt der direkte Anker. Steering-Loop-Aktion: entweder
+Frontmatter-Pflichtfeld als Gate ergänzen (computational feedforward),
+oder einen Doku-Konsistenz-Agenten die Bezug-Zeile prüfen lassen
+(inferential feedback).
 
-Sechs Schritte, eine durchgängige Traceability. Vergleich:
-[`../../../lab/example/otel/`](../../../lab/example/otel/) (reduziertes
-Fixture, dieselbe Strukturlogik).
+> **Operationalisierungs-Variante.** Ein anderes Repo kann denselben
+> Lesepfad über YAML-Frontmatter abbilden:
+> ```yaml
+> ---
+> id: SL-009
+> adr_refs: [ADR-0012]
+> lastenheft_refs: [LH-FA-IDX-003]
+> ---
+> ```
+> Vorteil: maschinell trivial parsbar. Nachteil: zusätzliche Disziplin
+> im Slice-Template. Das Lab wählt die Klartext-Variante, weil die
+> bestehenden Slices ohne Frontmatter angelegt waren — Migration wäre
+> teurer als der Komfort des Schemas. Die *Erschaffens-Leistung* dieses
+> Moduls ist das Span-Schema mit IDs; *welche* Schreibvariante die
+> Slice-Seite wählt, ist Repo-spezifisch.
+
+Sechs Schritte, eine durchgängige Traceability. Vergleich im Lab:
+[`../../../lab/example/otel/sl-009-agent-run.trace.json`](../../../lab/example/otel/sl-009-agent-run.trace.json)
+(Span `impl-2` ist der `writer.write_index`-Call mit `requirement.id`
+und `adr.id`).
 
 ## Übungen
 

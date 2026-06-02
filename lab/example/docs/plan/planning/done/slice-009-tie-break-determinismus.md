@@ -4,7 +4,7 @@
 
 **Welle:** welle-1-mvp
 
-**Bezug:** LH-QA-02 (Reproduzierbarkeit), ADR-0003 (Index-Format)
+**Bezug:** LH-QA-02 (Reproduzierbarkeit, primär), LH-FA-IDX-003 (Index-Schreib-Idempotenz, sekundär — deterministischer Tie-Break ist Voraussetzung für bit-identische Schreib-Ergebnisse), ADR-0003 (Index-Format), ADR-0012 (Index-Write-Strategie, sekundär)
 
 **Autor:** Kurs-Lab. **Datum:** 2026-05-26.
 

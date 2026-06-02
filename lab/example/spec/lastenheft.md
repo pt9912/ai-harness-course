@@ -1,6 +1,6 @@
 # Lastenheft — DocSearch
 
-**Version:** 0.3.0
+**Version:** 0.4.0
 **Status:** Accepted
 **Autor:** Kurs-Lab, **Datum:** 2026-06-02
 
@@ -72,6 +72,39 @@ Anzahl Ergebnisse, Latenz, anonymisierte User-ID.
 
 ---
 
+### LH-FA-IDX-003 — Index-Schreib-Idempotenz und Atomarität
+
+> **Schema-Konvention.** Ab Welle 2 vergeben wir neue funktionale
+> Anforderungen mit *Bereichskürzel* (`LH-FA-<BEREICH>-<NNN>`). Das
+> entspricht der Stratifizierung in
+> [Kurs Modul 1](../../../../kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren).
+> Bestehende Anforderungen (`LH-FA-01..03`, `LH-QA-01..04`) behalten ihr
+> zweistelliges Welle-1-Schema; Migration ist *nicht* vorgesehen
+> (Doku-Drift teurer als Schema-Mischung).
+
+**Beschreibung:** Index-Schreiboperationen (`writer.write_index`) sind
+**idempotent** (zweimaliges Anwenden derselben Eingabe ergibt denselben
+Index-Stand) und **atomar** (entweder ist der neue Index vollständig
+sichtbar oder der vorherige Stand bleibt unverändert; kein partieller
+Index ist beobachtbar).
+
+**Akzeptanzkriterien:**
+
+- **Happy Path:** Given identische Dokumentliste, when `writer.write_index` zweimal in Folge ausgeführt wird, then identischer Datei-Hash des Index-Outputs (`internal/index/store.bin`).
+- **Boundary:** Given ein Crash während `writer.write_index` (simuliert via `kill -9` zwischen Temp-File-Schreiben und Rename), when der Service neu startet, then der Index-Lese-Pfad lädt den letzten konsistenten Stand — kein halb geschriebener Block.
+- **Negative:** Given ein nicht beschreibbares Zielverzeichnis, when `writer.write_index` aufgerufen wird, then Statuscode `E099`, kein Teil-Schreib-Artefakt im Verzeichnis.
+
+**Bezug:** verschärft LH-FA-01 (Indexierung) um Schreib-Semantik;
+operationalisiert durch [ADR-0012](../docs/plan/adr/0012-index-write-strategy.md).
+LH-QA-02 (Reproduzierbarkeit) ist eine *Konsequenz* dieser Anforderung
+— deterministischer Tie-Break (siehe `slice-009`) und idempotente
+Schreib-Operationen zusammen garantieren bit-identische Index-Files
+bei identischer Eingabe.
+
+**Out-of-Scope:** Verteilter Index (Single-Writer-Annahme).
+
+---
+
 ## 4. Nichtfunktionale Anforderungen
 
 ### LH-QA-01 — Performance
@@ -117,3 +150,4 @@ Anzahl Ergebnisse, Latenz, anonymisierte User-ID.
 | 0.1.0 | 2026-05-15 | Initiale Fassung | slice-001 |
 | 0.2.0 | 2026-05-22 | Boundary-Kriterium für `k > 100` ergänzt | slice-007 |
 | 0.3.0 | 2026-06-01 | LH-QA-04 Audit-Datenschutz ergänzt | slice-012 |
+| 0.4.0 | 2026-06-02 | LH-FA-IDX-003 Index-Schreib-Idempotenz; Schema-Konvention "Bereichskürzel ab Welle 2" dokumentiert | Welle-9-Lab-Ausbau, Modul 14 |

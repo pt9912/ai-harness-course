@@ -6,7 +6,16 @@ Replay-Eingaben mit Erwartungen für [Modul 11](../../../../kurs/de/04-qualitaet
 
 | Set | Beschreibung |
 |---|---|
-| [`welle-1-baseline.json`](welle-1-baseline.json) | Baseline nach Welle-1-Abschluss: Happy + Boundary + Negative für LH-FA-02 |
+| [`welle-1-baseline/`](welle-1-baseline/) | Baseline nach Welle-1-Abschluss: Happy + Boundary + Negative für LH-FA-02 — `manifest.yaml` + `inputs/case-{001,002,003}.json` + `expectations/case-{001,002,003}.json` + `CHANGELOG.md` |
+
+**Verzeichnisform.** Bis Welle 9 lag jedes Set als einzelne JSON-Datei.
+Seit dem Welle-9-Lab-Ausbau folgen die Sets dem Schema aus
+[Kurs Modul 11 §Worked Example](../../../../kurs/de/04-qualitaet/modul-11-replay-evaluierung.md#worked-example-ein-replay-manifest-aufbauen):
+`manifest.yaml` (Top-Level-Konfiguration, Modell, Runtime, Determinismus-
+Anker) + `inputs/` (eine JSON-Datei pro Case) + `expectations/`
+(parallel benannt) + `CHANGELOG.md`. Vorteil: Modell-/Tool-Call-
+Erwartungen liegen pro Case getrennt, ohne dass eine Sammeldatei mit
+jedem Case-Edit anwächst. Migration siehe `welle-1-baseline/CHANGELOG.md`.
 
 ## Replay-Vertrag
 

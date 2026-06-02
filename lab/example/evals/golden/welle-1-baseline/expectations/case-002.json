@@ -1,0 +1,14 @@
+{
+  "id": "case-002-boundary-k-clamped",
+  "bezug": "LH-FA-02 Boundary",
+  "expected": {
+    "status": 200,
+    "result_count_max": 100,
+    "response_header": {"X-Topk-Clamped": "100"}
+  },
+  "must_not_include": ["result_count:500"],
+  "tool_calls": {
+    "embedder.encode": {"min": 1, "max": 1},
+    "index.search": {"min": 1, "max": 1}
+  }
+}

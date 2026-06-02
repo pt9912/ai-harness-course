@@ -1,7 +1,8 @@
 {
   "trace_id": "trace-sl-009-agent-run",
   "slice.id": "slice-009",
-  "requirement.id": "LH-QA-02",
+  "requirement.refs": ["LH-QA-02", "LH-FA-IDX-003"],
+  "adr.refs": ["ADR-0003", "ADR-0012"],
   "spans": [
     {
       "span_id": "plan-1",
@@ -21,6 +22,19 @@
       "duration_ms": 310,
       "tokens": {"input": 950, "output": 120},
       "cache": {"hit": true}
+    },
+    {
+      "span_id": "impl-2",
+      "agent.role": "Implementation",
+      "name": "tool_call:writer.write_index",
+      "tool.name": "writer.write_index",
+      "tool.arguments.redacted": {"docs": 100, "target": "internal/index/store.bin"},
+      "tool.result.status": "ok",
+      "requirement.id": "LH-FA-IDX-003",
+      "adr.id": "ADR-0012",
+      "duration_ms": 412,
+      "tokens": {"input": 2480, "output": 187},
+      "cache": {"hit": false}
     },
     {
       "span_id": "review-1",

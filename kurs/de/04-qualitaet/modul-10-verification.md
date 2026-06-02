@@ -198,8 +198,16 @@ Damit liegt die Hard Rule in zwei Quadranten: *inferential feedforward*
 (AGENTS.md sagt es) + *computational feedback* (Make-Target prüft es).
 
 Sieben Schritte, eine Fitness Function für eine ADR-Aussage, die kein
-Standard-Tool prüft. Vergleich:
-[`../../../lab/example/verification/checks/`](../../../lab/example/verification/checks/).
+Standard-Tool prüft. Vergleich im Lab:
+[`../../../lab/example/docs/plan/adr/0011-closure-note-pflicht.md`](../../../lab/example/docs/plan/adr/0011-closure-note-pflicht.md),
+[`../../../lab/example/tools/check_closure_notes.py`](../../../lab/example/tools/check_closure_notes.py)
+und das `verify-closure-notes`-Target im
+[`../../../lab/example/Makefile`](../../../lab/example/Makefile).
+Das Lab wählt bewusst **Option C** (Closure-Sektion im Markdown-Body,
+siehe ADR-0011 §Verglichene Alternativen) statt des oben gezeigten
+Frontmatter-Schemas — beide operationalisieren dieselbe ADR-Aussage,
+die Wahl ist Repo-spezifisch. Genau diese Wahlfreiheit ist die
+Erschaffens-Leistung dieses Moduls.
 
 ## Übungen
 

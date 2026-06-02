@@ -5,7 +5,7 @@
 COURSE_LANG ?= go
 RUN ?= welle-1-baseline
 
-.PHONY: help gates ci fullbuild agent-implement agent-review verify replay trace release
+.PHONY: help gates ci fullbuild agent-implement agent-review verify verify-slice verify-closure-notes replay trace release
 
 help: ## Targets anzeigen
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -44,18 +44,34 @@ agent-review: ## Review-Fixture fuer Modul 9 anzeigen
 	echo "3. spec/lastenheft.md"; \
 	echo "Expected: HIGH, MEDIUM and LOW finding categories"
 
-verify: ## Slice-DoD gegen sichtbare Artefakte plausibilisieren: make verify SLICE=slice-009
-	@test -n "$(SLICE)" || (echo "Usage: make verify SLICE=slice-009"; exit 2)
+verify-closure-notes: ## ADR-0011 — Closure-Note-Pflicht fuer done/-Slices pruefen
+	@python3 tools/check_closure_notes.py
+
+verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-009
+	@test -n "$(SLICE)" || (echo "Usage: make verify-slice SLICE=slice-009"; exit 2)
 	@slice_path=$$(find docs/plan/planning -name "$(SLICE)*.md" -print -quit); \
 	test -n "$$slice_path" || (echo "Slice not found: $(SLICE)"; exit 1); \
 	grep -q "Definition of Done" "$$slice_path" || (echo "Missing Definition of Done: $$slice_path"; exit 1); \
 	grep -Eq "LH-|ADR-" "$$slice_path" || (echo "Missing traceability ID: $$slice_path"; exit 1); \
 	grep -q "make gates" "$$slice_path" || (echo "Missing gates evidence in DoD: $$slice_path"; exit 1); \
-	echo "verify ok: $$slice_path"
+	echo "verify-slice ok: $$slice_path"
 
-replay: ## Golden-Set-Replay-Fixture validieren: make replay RUN=welle-1-baseline
-	@test -f "evals/golden/$(RUN).json" || (echo "Replay fixture not found: evals/golden/$(RUN).json"; exit 1)
-	@node -e 'const fs=require("fs"); const p="evals/golden/$(RUN).json"; const j=JSON.parse(fs.readFileSync(p,"utf8")); if(!j.model_version||!Array.isArray(j.cases)||j.cases.length<3) { throw new Error("Replay needs model_version and >=3 cases"); } console.log("replay fixture ok: " + p + " (" + j.cases.length + " cases)");'
+verify: verify-closure-notes ## Verifikation: Closure-Pflicht immer, Slice-DoD wenn SLICE gesetzt
+	@if [ -n "$(SLICE)" ]; then $(MAKE) verify-slice SLICE=$(SLICE); fi
+
+replay: ## Golden-Set-Replay-Verzeichnis validieren: make replay RUN=welle-1-baseline
+	@set -e; \
+	base="evals/golden/$(RUN)"; \
+	if [ ! -f "$$base/manifest.yaml" ]; then echo "Manifest fehlt: $$base/manifest.yaml"; exit 1; fi; \
+	if [ ! -d "$$base/inputs" ]; then echo "inputs/ fehlt: $$base/inputs"; exit 1; fi; \
+	if [ ! -d "$$base/expectations" ]; then echo "expectations/ fehlt: $$base/expectations"; exit 1; fi; \
+	grep -q "^model:" "$$base/manifest.yaml" || { echo "manifest.yaml: model-Block fehlt"; exit 1; }; \
+	grep -q "^runtime:" "$$base/manifest.yaml" || { echo "manifest.yaml: runtime-Block fehlt"; exit 1; }; \
+	in_count=$$(find "$$base/inputs" -maxdepth 1 -name 'case-*.json' | wc -l); \
+	exp_count=$$(find "$$base/expectations" -maxdepth 1 -name 'case-*.json' | wc -l); \
+	if [ "$$in_count" -lt 3 ]; then echo "Replay braucht mindestens 3 inputs (Happy/Boundary/Negative), gefunden: $$in_count"; exit 1; fi; \
+	if [ "$$in_count" != "$$exp_count" ]; then echo "inputs/expectations-Mismatch: $$in_count vs $$exp_count"; exit 1; fi; \
+	echo "replay set ok: $$base ($$in_count cases)"
 
 trace: ## Agentenlauf-Trace-Fixture ausgeben: make trace RUN=sl-009-agent-run
 	@test -f "otel/$(RUN).trace.json" || (echo "Trace fixture not found: otel/$(RUN).trace.json"; exit 1)

@@ -1,0 +1,9 @@
+{
+  "id": "case-002-boundary-k-clamped",
+  "kind": "boundary",
+  "bezug": "LH-FA-02 Boundary",
+  "input": {
+    "endpoint": "/search",
+    "body": {"q": "Frage X", "k": 500}
+  }
+}

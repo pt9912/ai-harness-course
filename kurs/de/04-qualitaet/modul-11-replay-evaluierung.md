@@ -195,8 +195,14 @@ Replay-Sets verrotten (siehe Mini-Glossar oben, *Drift*). In
              Schnittstelle geändert, Fall war giftig.
 ```
 
-Sieben Schritte, ein reproduzierbares Manifest. Vergleich:
-[`../../../lab/example/evals/golden/`](../../../lab/example/evals/golden/).
+Sieben Schritte, ein reproduzierbares Manifest. Vergleich im Lab:
+[`../../../lab/example/evals/golden/welle-1-baseline/`](../../../lab/example/evals/golden/welle-1-baseline/)
+mit `manifest.yaml`, `inputs/case-{001,002,003}.json`,
+`expectations/case-{001,002,003}.json` und `CHANGELOG.md` in derselben
+Verzeichnis-Struktur. Das Lab zeigt ein *Retrieval*-Replay (Embedding-
+Modell `local-embed-v3`, drei Search-Cases gegen LH-FA-02); das Worked
+Example oben demonstriert dasselbe Schema für einen *LLM-Agentenlauf*
+— die Struktur trägt beides.
 
 ## Übungen
 

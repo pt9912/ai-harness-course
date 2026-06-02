@@ -1,0 +1,43 @@
+# Replay-Manifest für welle-1-baseline.
+# Schema entspricht Kurs Modul 11 §"Worked Example: ein Replay-Manifest aufbauen".
+
+set_name: welle-1-baseline
+slice: welle-1-mvp
+description: >
+  Baseline-Replays für DocSearch nach Welle-1-Abschluss.
+  Drei Cases decken Happy Path, Boundary und Negative je LH-FA-02 ab.
+
+recorded_at: 2026-05-28T16:42:00Z
+
+model:
+  name: local-embed-v3
+  version: "2026-05-15"
+  seed: 42
+
+runtime:
+  image_hash: sha256:abc123def4567890abc123def4567890abc123def4567890abc123def4567890
+  toolchain:
+    go: "1.23"
+    python: "3.12.4"
+    node: "20.11"
+
+# Pfade relativ zu diesem Manifest.
+inputs_ref: inputs/
+expectations_ref: expectations/
+
+# Determinismus-Anker, gelten für alle Cases dieses Sets.
+determinism:
+  tie_break_strategy: sort_stable_then_doc_path_then_section_index  # siehe ADR-0003 + slice-009
+  max_topk: 100                                                     # siehe LH-FA-02 Boundary
+  embedding_dim: 1024
+
+# Verifikations-Erwartung: zwei Läufe identischer Eingabe müssen
+# byte-identische `actual.results`-Listen erzeugen (Reihenfolge auch
+# bei gleichen Scores). Hash-Vergleich pro Case in CI verpflichtend.
+verification:
+  per_case_hash: sha256
+  determinism_check: two_runs_same_hash
+
+notes: >
+  Bei Modell-Wechsel: top_score_min und top_doc_path-Erwartung neu
+  kalibrieren, top_section_title_contains bleibt semantischer Anker.
