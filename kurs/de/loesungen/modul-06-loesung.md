@@ -38,7 +38,7 @@ Pflicht-Inhalt einer Carveout-Datei:
 - **Datum** der Anlage und letzten Prüfung
 
 Vergleich-Möglichkeit:
-[`/lab/example/docs/plan/carveouts/`](../../lab/example/docs/plan/carveouts/)
+[`/lab/example/docs/plan/carveouts/`](../../../lab/example/docs/plan/carveouts/)
 (im Lab nach Phase B).
 
 ### Verknüpfe ihn mit einem konkreten Folge-Slice

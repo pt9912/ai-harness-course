@@ -46,7 +46,7 @@ Maßstab für ein gutes Lastenheft:
 - Mindestens *eine* Negativbedingung pro Feature ("dieses System *darf nicht*…"). Negativ ist genauso präzise wie positiv.
 
 Vergleich-Möglichkeit: Das Lab-Beispiel unter
-[`/lab/example/spec/lastenheft.md`](../../lab/example/spec/lastenheft.md)
+[`/lab/example/spec/lastenheft.md`](../../../lab/example/spec/lastenheft.md)
 zeigt das vollständige Schema mit IDs.
 
 ### Provoziere absichtlich einen Spec-Bug

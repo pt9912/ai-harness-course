@@ -50,7 +50,7 @@ schärfen, eine Verifikations-Lücke kann die Spec präzisieren.
 
 ### Identifiziere im Begleit-Repo einen Slice und folge der Kette
 
-Das Lab unter [`/lab/example/`](../../lab/example/) liefert mindestens
+Das Lab unter [`/lab/example/`](../../../lab/example/) liefert mindestens
 einen voll ausgespielten Slice. Übung: in der `done/`-Datei die
 referenzierten IDs (LH-*, ADR-*) suchen, sie in `spec/` und
 `docs/plan/adr/` aufschlagen, prüfen, ob die ID-Verweise konsistent

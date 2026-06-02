@@ -45,7 +45,7 @@ Maßstab:
 ### Reviewe den fingierten kaputten Slice
 
 Der Slice unter
-[`/lab/example/exercises/09-review-fixture/`](../../lab/example/exercises/09-review-fixture/)
+[`/lab/example/exercises/09-review-fixture/`](../../../lab/example/exercises/09-review-fixture/)
 (im Lab nach Phase B) enthält drei eingebaute Fehler, die in *drei
 verschiedene Kategorien* fallen sollen. Erwarteter Befund:
 

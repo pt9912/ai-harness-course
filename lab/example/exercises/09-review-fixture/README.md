@@ -30,7 +30,7 @@ Ein vollständiger Review-Lauf identifiziert:
 | LOW | Stilistisch unschön, keine semantische Auswirkung. |
 
 Die konkrete Auflösung steht in
-[`../../../kurs/de/loesungen/modul-09-loesung.md`](../../../kurs/de/loesungen/modul-09-loesung.md)
+[`../../../../kurs/de/loesungen/modul-09-loesung.md`](../../../../kurs/de/loesungen/modul-09-loesung.md)
 — nach dem eigenen Versuch dort vergleichen.
 
 ## Lerneffekt

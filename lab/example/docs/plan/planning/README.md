@@ -4,7 +4,7 @@ Slice-Lifecycle: `open/` → `next/` → `in-progress/` → `done/`.
 
 Reine `git mv`-Commits beim Wechsel zwischen Verzeichnissen — siehe
 Hard Rule "git mv + Inhaltsänderung = zwei Commits" in
-[`../../AGENTS.md`](../../AGENTS.md).
+[`../../../AGENTS.md`](../../../AGENTS.md).
 
 ## Lifecycle-Bedeutungen
 

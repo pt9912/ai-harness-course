@@ -28,7 +28,7 @@ Maßstab:
 - Jeder Slice in jeder Welle hat eine LH-/HSM-/GG-ID-Referenz (siehe [ID-Schema](../grundlagen/konventionen.md#id-schema-als-klammer)).
 - Mindestens ein expliziter "Wir-tun-X-nicht-in-dieser-Welle"-Eintrag pro Welle. Negativ-Scope ist Roadmap-Disziplin.
 
-Vergleich-Möglichkeit: [`/lab/example/docs/plan/roadmap.md`](../../lab/example/docs/plan/roadmap.md)
+Vergleich-Möglichkeit: [`/lab/example/docs/plan/planning/in-progress/roadmap.md`](../../../lab/example/docs/plan/planning/in-progress/roadmap.md)
 (im Lab nach Phase B).
 
 ### Modelliere eine Abhängigkeit, die eine spätere Welle blockiert

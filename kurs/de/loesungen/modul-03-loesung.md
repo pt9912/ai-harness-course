@@ -98,6 +98,6 @@ Pre-integration, erst im Reviewer-Agent? Je früher, desto billiger.
 ## Verweise
 
 - 2×2-Klassifikation (ADR als Feedforward + Quelle für Computational Feedback): [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
-- ADR-Beispiele: [`/lab/example/docs/plan/adr/`](../../lab/example/docs/plan/adr/) (im Lab nach Phase B)
+- ADR-Beispiele: [`/lab/example/docs/plan/adr/`](../../../lab/example/docs/plan/adr/) (im Lab nach Phase B)
 - Vorherige Lösung: [Modul 2](modul-02-loesung.md)
 - Nächste Lösung: [Modul 4](modul-04-loesung.md)

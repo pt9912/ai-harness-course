@@ -73,6 +73,6 @@ Eskalationspfad:
 
 ## Verweise
 
-- Spec/ADR/Plan-Trennung: [`../grundlagen/konventionen.md#trennscharfen`](../grundlagen/konventionen.md#trennscharfen)
+- Spec/ADR/Plan-Trennung: [`../grundlagen/konventionen.md#trennschärfen`](../grundlagen/konventionen.md#trennschärfen)
 - Vorherige Lösung: [Modul 6](modul-06-loesung.md)
 - Nächste Lösung: [Modul 8](modul-08-loesung.md)
