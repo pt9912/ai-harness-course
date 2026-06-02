@@ -7,6 +7,6 @@ COPY src ./src
 RUN mvn -q package -DskipTests
 
 FROM gcr.io/distroless/java21-debian12:nonroot
-COPY --from=build /src/target/docsearch-*.jar /app/docsearch.jar
+COPY --from=build /src/target/docsearch.jar /app/docsearch.jar
 USER nonroot
 ENTRYPOINT ["java", "-jar", "/app/docsearch.jar"]

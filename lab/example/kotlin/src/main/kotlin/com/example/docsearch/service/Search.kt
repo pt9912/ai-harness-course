@@ -8,7 +8,10 @@ import com.example.docsearch.types.SearchRequest
 import com.example.docsearch.types.SearchResult
 
 class EmptyQueryException(msg: String = "E002: empty query") : IllegalArgumentException(msg)
-class EmbeddingUnavailableException(msg: String = "E003: embedding unavailable") : RuntimeException(msg)
+class EmbeddingUnavailableException(
+    msg: String = "E003: embedding unavailable",
+    cause: Throwable? = null,
+) : RuntimeException(msg, cause)
 
 data class SearchResponse(
     val results: List<SearchResult>,
@@ -28,7 +31,7 @@ class Searcher(
             clamped = true
         }
         val vec = runCatching { embedder.embed(req.q) }
-            .getOrElse { throw EmbeddingUnavailableException() }
+            .getOrElse { throw EmbeddingUnavailableException(cause = it) }
         return SearchResponse(results = index.topK(vec, k), kClamped = clamped)
     }
 }

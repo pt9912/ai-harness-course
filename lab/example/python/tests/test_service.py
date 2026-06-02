@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import asdict
 
 import pytest
 
@@ -61,8 +62,8 @@ def test_determinism() -> None:
     req = SearchRequest(q="deterministisch?", k=10)
     resp1 = s.search(req)
     resp2 = s.search(req)
-    h1 = hashlib.sha256(json.dumps([r.__dict__ for r in resp1.results]).encode()).hexdigest()
-    h2 = hashlib.sha256(json.dumps([r.__dict__ for r in resp2.results]).encode()).hexdigest()
+    h1 = hashlib.sha256(json.dumps([asdict(r) for r in resp1.results]).encode()).hexdigest()
+    h2 = hashlib.sha256(json.dumps([asdict(r) for r in resp2.results]).encode()).hexdigest()
     assert h1 == h2
 
 

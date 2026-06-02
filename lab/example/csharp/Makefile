@@ -37,10 +37,11 @@ test-determinism:
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet test DocSearch.sln --filter "FullyQualifiedName~DeterminismTests"
 
-coverage-gate: ## coverlet, 70 %
+coverage-gate: ## coverlet, 70 % (Schwelle via msbuild-Properties)
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
-		dotnet test DocSearch.sln --collect:"XPlat Code Coverage" \
-		-- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Threshold=70
+		dotnet test DocSearch.sln --settings coverlet.runsettings \
+		/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura \
+		/p:Threshold=70 /p:ThresholdType=line /p:ThresholdStat=total
 
 coverage-gate-critical:
 	@echo "Critical coverage — CO-001 (Index) ausgenommen"

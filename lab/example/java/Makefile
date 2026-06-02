@@ -33,9 +33,9 @@ test:
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
 		mvn -q test
 
-test-determinism:
+test-determinism: ## LH-QA-02: @RepeatedTest(100) in DeterminismTest
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
-		mvn -q test -Dtest=DeterminismTest -Dsurefire.rerunFailingTestsCount=100
+		mvn -q test -Dtest=DeterminismTest
 
 coverage-gate: ## JaCoCo 70 %
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \

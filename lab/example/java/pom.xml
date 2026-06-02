@@ -31,6 +31,20 @@
 
     <build>
         <plugins>
+            <!-- Main-Class-Manifest, sonst schlägt `java -jar docsearch.jar` fehl -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.example.docsearch.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <finalName>docsearch</finalName>
+                </configuration>
+            </plugin>
             <!-- Checkstyle: AGENTS.md §J-1 Suppression-Verbot -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

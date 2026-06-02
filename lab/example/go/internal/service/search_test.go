@@ -3,6 +3,7 @@ package service
 import (
 	"crypto/sha256"
 	"encoding/json"
+	"errors"
 	"testing"
 
 	"github.com/example/docsearch/internal/embedding"
@@ -47,7 +48,7 @@ func TestSearch_LHFA02_Negative_EmptyQuery(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected ErrEmptyQuery, got nil")
 	}
-	if err != ErrEmptyQuery {
+	if !errors.Is(err, ErrEmptyQuery) {
 		t.Errorf("expected ErrEmptyQuery, got %v", err)
 	}
 }

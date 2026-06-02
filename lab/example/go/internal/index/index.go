@@ -86,5 +86,10 @@ func cosine(a, b [types.EmbeddingDim]float32) float32 {
 	if na == 0 || nb == 0 {
 		return 0
 	}
-	return float32(dot / (math.Sqrt(na) * math.Sqrt(nb)))
+	res := float32(dot / (math.Sqrt(na) * math.Sqrt(nb)))
+	// NaN auf 0 mappen — sonst ist slice-009 Tie-Break undefiniert.
+	if res != res {
+		return 0
+	}
+	return res
 }

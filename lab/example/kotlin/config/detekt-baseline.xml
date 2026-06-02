@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<!--
+  Zentrale Detekt-Baseline (AGENTS.md §K-1).
+  Inline @Suppress ist verboten; Ausnahmen leben hier mit Begründung
+  und ADR-/Slice-Bezug.
+
+  Aktuell keine Ausnahmen.
+-->
+<SmellBaseline>
+    <ManuallySuppressedIssues/>
+    <CurrentIssues/>
+</SmellBaseline>

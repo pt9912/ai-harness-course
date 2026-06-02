@@ -37,12 +37,27 @@ class ArchitectureTest {
     }
 
     @Test
-    fun `index darf nicht service oder ui importieren (ADR-0001)`() {
+    fun `index darf nicht service, ui oder embedding importieren (ADR-0001)`() {
         scope.files
             .withPackage("..index..")
             .assertFalse { file ->
                 file.imports.any {
-                    it.name.contains("docsearch.service") || it.name.contains("docsearch.ui")
+                    it.name.contains("docsearch.service") ||
+                        it.name.contains("docsearch.ui") ||
+                        it.name.contains("docsearch.embedding")
+                }
+            }
+    }
+
+    @Test
+    fun `embedding darf nicht service, ui oder index importieren (ADR-0001)`() {
+        scope.files
+            .withPackage("..embedding..")
+            .assertFalse { file ->
+                file.imports.any {
+                    it.name.contains("docsearch.service") ||
+                        it.name.contains("docsearch.ui") ||
+                        it.name.contains("docsearch.index")
                 }
             }
     }

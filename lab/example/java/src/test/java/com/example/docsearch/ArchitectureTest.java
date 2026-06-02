@@ -31,11 +31,12 @@ public class ArchitectureTest {
     }
 
     @Test
-    void indexDoesNotDependOnServiceOrUi() {
+    void indexDoesNotDependOnServiceUiOrEmbedding() {
         noClasses().that().resideInAPackage("..index..")
             .should().dependOnClassesThat().resideInAnyPackage(
                 "com.example.docsearch.service..",
-                "com.example.docsearch.ui..")
+                "com.example.docsearch.ui..",
+                "com.example.docsearch.embedding..")
             .check(CLASSES);
     }
 

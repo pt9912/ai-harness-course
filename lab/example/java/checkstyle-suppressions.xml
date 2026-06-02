@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+<!--
+  Zentrale Ausnahmen zum Checkstyle-Linter (AGENTS.md §J-1).
+  Inline @SuppressWarnings ist verboten; jede Ausnahme lebt hier mit
+  Begründung und ADR-/Slice-Bezug.
+
+  Format: <suppress checks="<RuleName>" files="<RegexPath>"/>
+  Beispiel:
+    <suppress checks="MissingJavadocType" files="src/test/.*"/>
+    <!-= Tests brauchen keine Class-JavaDoc, slice-001 ==->
+-->
+<suppressions>
+    <!-- Aktuell keine Ausnahmen. -->
+</suppressions>

@@ -4,6 +4,9 @@ import com.example.docsearch.embedding.MockEmbedder;
 import com.example.docsearch.index.Index;
 import com.example.docsearch.service.Searcher;
 
+/**
+ * DocSearch Entry-Point. Wiring der Schichten gemäß ADR-0001.
+ */
 public final class Main {
     public static final String VERSION = "0.3.0";
 

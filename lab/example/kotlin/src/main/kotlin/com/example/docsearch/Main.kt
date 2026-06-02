@@ -19,7 +19,9 @@ fun main(args: Array<String>) {
 
     val idx = Index()
     val emb = MockEmbedder()
-    @Suppress("UNUSED_VARIABLE")
     val service = Searcher(idx, emb)
-    println("DocSearch wired. HTTP-Start ist in Welle-4-Slice geplant.")
+    println(
+        "DocSearch wired. service=$service, index-size=${idx.size()}. " +
+            "HTTP-Start ist in Welle-4-Slice geplant.",
+    )
 }
