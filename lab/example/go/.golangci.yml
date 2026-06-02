@@ -1,0 +1,71 @@
+# golangci-lint config — DocSearch Go-Skelett
+# Quelle der Wahrheit für AGENTS.md §G-2 (Layering via depguard).
+
+run:
+  timeout: 5m
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - depguard
+    - gosec
+    - gofmt
+    - revive
+
+linters-settings:
+  depguard:
+    rules:
+      # ADR-0001 Layering: ui darf nur service + types
+      ui-layer:
+        files:
+          - "**/internal/ui/**"
+        deny:
+          - pkg: "github.com/example/docsearch/internal/index"
+            desc: "ADR-0001: UI muss durch service gehen, nicht direkt auf index"
+          - pkg: "github.com/example/docsearch/internal/embedding"
+            desc: "ADR-0001: UI muss durch service gehen, nicht direkt auf embedding"
+
+      # service darf nicht ui importieren
+      service-layer:
+        files:
+          - "**/internal/service/**"
+        deny:
+          - pkg: "github.com/example/docsearch/internal/ui"
+            desc: "ADR-0001: service ist unter ui, kein Aufwärts-Import"
+
+      # index darf nur types importieren
+      index-layer:
+        files:
+          - "**/internal/index/**"
+        deny:
+          - pkg: "github.com/example/docsearch/internal/service"
+            desc: "ADR-0001: index hat keine Service-Abhängigkeit"
+          - pkg: "github.com/example/docsearch/internal/ui"
+            desc: "ADR-0001"
+          - pkg: "github.com/example/docsearch/internal/embedding"
+            desc: "ADR-0001"
+
+      # embedding darf nur types importieren
+      embedding-layer:
+        files:
+          - "**/internal/embedding/**"
+        deny:
+          - pkg: "github.com/example/docsearch/internal/service"
+            desc: "ADR-0001"
+          - pkg: "github.com/example/docsearch/internal/ui"
+            desc: "ADR-0001"
+          - pkg: "github.com/example/docsearch/internal/index"
+            desc: "ADR-0001"
+
+issues:
+  # AGENTS.md §G-1: Suppression-Verbot.
+  # Inline `//nolint` ist blockiert (siehe exclude-use-default: false +
+  # explizit keine exclude-Regeln). Pfad-Ausnahmen kommen hier mit
+  # Begründung und Slice-ID, falls überhaupt nötig.
+  exclude-use-default: false
+  exclude-rules: []

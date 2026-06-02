@@ -1,0 +1,15 @@
+# Detekt-Config — AGENTS.md §K-1 Suppression-Verbot.
+# @Suppress wird durch eine Custom-Regel im Build erkannt;
+# Ausnahmen leben in config/detekt-baseline.xml mit Begründung.
+
+style:
+  active: true
+  ForbiddenAnnotation:
+    active: true
+    annotations:
+      - "kotlin.Suppress"
+    excludes: ['**/test/**', '**/tests/**']
+
+build:
+  maxIssues: 0
+  excludeCorrectable: false

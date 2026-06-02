@@ -45,15 +45,36 @@ example/
 └── (Sprach-Skelette in Phase C: go/, python/, kotlin/, java/, csharp/)
 ```
 
-## Was hier *kein* funktionierender Code ist
+## Sprach-Skelette
 
-Die `.md`-Artefakte (Spec, ADR, Plan, Carveout, AGENTS, harness/README)
-sind **vollständig**. Die Sprach-Skelette unter `go/`, `python/` etc.
-folgen in Phase C — dort werden `make gates` grün laufen.
+Fünf parallele Implementierungen derselben Spec, jede mit eigener
+Toolchain:
 
-Aktuell (Phase B) sind nur die Doku-Artefakte fertig — sie sind die
-Grundlage, gegen die später jedes Sprach-Skelett dieselbe Spec
-implementiert.
+| Sprache | Stack | Linter | Architekturtest | Vorbild |
+|---|---|---|---|---|
+| [Go](go/) | Go 1.23 | `golangci-lint` | `depguard` | u-boot, c-hsm-doc |
+| [Python](python/) | Python 3.12 + uv | `ruff` (noqa-Gate) | `import-linter` | grid-gym |
+| [Kotlin](kotlin/) | Kotlin/JVM 21 + Gradle KTS | `detekt` | **Konsist** | (neu) |
+| [Java](java/) | Java 21 + Maven | Checkstyle | **ArchUnit** | (neu) |
+| [C#](csharp/) | .NET 10 + CPM | `dotnet format` | **NetArchTest** | bess-ems |
+
+Jedes Skelett implementiert:
+
+- Hexagonales Layering (ADR-0001) — UI → Service → {Index, Embedding} → Types.
+- Tie-Break-Logik aus slice-009 (deterministische Sortierung bei gleichem Score).
+- LH-FA-02 Akzeptanzkriterien (Happy/Boundary/Negative) als Tests.
+- LH-QA-02 Determinismus-Test (gleiche Eingabe → gleiches Ergebnis).
+- `make gates` als einheitlicher Vertrag.
+
+## Lerneffekt aus Sprach-Vergleich
+
+| Konzept | Was unterscheidet sich? |
+|---|---|
+| Suppression-Verbot | `//nolint` vs. `# noqa` vs. `@Suppress` vs. `@SuppressWarnings` vs. `#pragma warning disable` — siehe [Modul 8](../../kurs/de/03-agenten/modul-08-implementierung.md) |
+| Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) |
+| Lockfile | `go.sum`, `uv.lock`, `gradle.lockfile`, Maven (transitive), CPM `packages.lock.json` |
+| Container | Distroless Static (Go), python-slim, Distroless Java, Distroless .NET |
+| Tie-Break | `sort.SliceStable` vs. `sorted(key=…)` vs. `compareBy(…).thenBy(…)` vs. `Comparator.thenComparing` vs. LINQ `OrderBy().ThenBy()` |
 
 ## Lernweg
 
