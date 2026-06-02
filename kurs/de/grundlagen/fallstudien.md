@@ -12,6 +12,7 @@ Stände gemeint.
 | **`pt9912/u-boot`** | Referenz/Tooling | Go-CLI für reproduzierbare Docker-Setups | LH-ID-Schema in Make-Target-Kommentaren, `verify-depguard` als Architekturtest, bootstrap-aware Coverage. **Kein AGENTS.md** — typischer "vor dem Harness"-Zustand. |
 | **`pt9912/grid-gym`** | Referenz (Domäne) | Python-EMS-Simulator, hexagonale Architektur | Reichste AGENTS.md (Docker-only, noqa-Verbot, Welle-Self-Close), 18 Gates, Test-Diversität (`determinism`/`replay`/`fault`). |
 | **`pt9912/c-hsm-doc`** | Safety + Compliance | Go-Tool mit PKCS#11/HSM-Integration | Spec-Stratifizierung (Lastenheft *vertraglich* / Spezifikation *technisch* / Architektur *diagrammatisch*), `HSM-*`-IDs, `proto-check` als Drift-Sensor gegen generierten Code, Hard Rule "Accepted-ADRs immutable". |
+| **`pt9912/bess-ems`** | Safety/Control-Flagship | C#/.NET 10 + native C/C++-Interop, BESS-EMS mit MPC | **Central Package Management** (`Directory.Packages.props` + `packages.lock.json`) als Reproduzierbarkeits-Anker, eigener **`solid-suppression-gate`** als Hard Rule, **`test-mpc-property`** als Property-Based-Sensor neben Unit-Tests, **`native-sanitizer`** für C/C++-Anteile. Zeigt: Safety/Control-Repos tragen oft mehrere Toolchains. |
 
 ## Repo-Klassen
 
@@ -40,12 +41,13 @@ treiben skaliert nicht — der Agent verteilt dann halbgare Standardtexte
 
 ## Beobachtung aus dem Ist-Zustand
 
-Keines der drei Repos hat (Stand 2026-06) ein `harness/README.md`. Sie
-haben aber alle drei *die kanonischen Quellen* (Spec, ADR, Planning,
-Makefile-Gates) — der Harness existiert bereits, nur ohne formellen
-Einstiegspunkt. Das ist der realistische Ausgangspunkt für die meisten
-Teams: nicht "Greenfield-Harness", sondern "Ein Einstieg in einen schon
-vorhandenen Harness".
+Keines der vier Repos hat (Stand 2026-06) ein `harness/README.md`.
+`bess-ems` hat sogar (Stand jetzt) noch *kein* AGENTS.md, obwohl es das
+sicherheitskritischste Repo ist. Alle haben aber *die kanonischen Quellen*
+(Spec, ADR, Planning, Makefile-Gates) — der Harness existiert bereits,
+nur ohne formellen Einstiegspunkt. Das ist der realistische Ausgangspunkt
+für die meisten Teams: nicht "Greenfield-Harness", sondern "Ein Einstieg
+in einen schon vorhandenen Harness".
 
 ## Branchen-Anwendungsanker
 

@@ -25,6 +25,14 @@ der Typchecker erzwingt, braucht keinen Reviewer-Agent. Ein ADR, das den
 Agenten gar nicht erst in die falsche Richtung schickt, spart das
 nachgelagerte Review.
 
+## Sprach-übergreifende Konkretion
+
+Die 2×2-Matrix ist sprach-neutral; die Sensoren in jedem Quadranten
+sind es nicht. Das Begleit-Lab zeigt das für fünf Sprachen
+(Go, Python, Kotlin, Java, C#/.NET) — jeweils mit eigener
+Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette. Die Module 8,
+12 und 13 verweisen direkt auf die Lab-Varianten.
+
 ## Drei Harness-Kategorien (Böckeler)
 
 Jede Kontrolle adressiert genau eine der drei Kategorien:

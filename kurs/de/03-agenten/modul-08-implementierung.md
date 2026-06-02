@@ -52,6 +52,13 @@ Beispiele aus realen Repos (siehe
   *Richtig:* `docker compose run --rm test-runner uv run python tools/foo.py`.
   *Begründung:* Toolchain-Reproduzierbarkeit + Supply-Chain-Defense.
 * **`# noqa` ist verboten** (grid-gym): bricht das `noqa-gate` in `make gates`. Ausnahmen werden in `pyproject.toml` mit Begründung dokumentiert.
+* **Suppression-Verbot pro Sprache** — derselbe Mechanismus, andere Syntax:
+  * Python: `# noqa` (grid-gym `noqa-gate`)
+  * Go: `//nolint`
+  * C#: `#pragma warning disable`, `[SuppressMessage]` (bess-ems `solid-suppression-gate`)
+  * Kotlin: `@Suppress("...")`
+  * Java: `@SuppressWarnings("...")`
+  In jeder Sprache gilt: Inline-Suppression bricht das Suppression-Gate; Ausnahmen wandern in eine zentrale Konfigurations-Datei mit Begründung.
 * **git mv + Inhaltsänderung = zwei Commits** (grid-gym): erst reiner `git mv` (Git erkennt R-Rename), dann Inhalt umschreiben.
   *Begründung:* Sonst fällt die Rename-Detection unter die 50 %-Similarity-Schwelle und `git log --follow` wird unzuverlässig.
 * **Architektur ist sprach- und meilensteinfrei** (grid-gym, c-hsm-doc): `spec/architecture.md` referenziert ADRs und Modul-Pfade, aber keine Wellen, Slices oder Closure-Daten. Die zeitliche Schicht lebt in `docs/plan/planning/`.

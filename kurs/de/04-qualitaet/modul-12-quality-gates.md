@@ -83,6 +83,34 @@ Pointe: Domänenspezifische Gates (`test-determinism`, `test-replay`,
 Standard-Setup. Wenn dein Repo nur die generischen sechs hat, weißt du
 nur, dass du noch keine Schmerzen hattest.
 
+Ein zweites Beispiel aus einer anderen Sprach-Welt — Safety/Control
+in C#/.NET, Repo `pt9912/bess-ems`:
+
+```
+lint (mit solid-suppression-gate)
+arch-check
+test · test-safety · test-mpc-property · test-replay
+coverage-gate
+helm-lint · schema-validate · schema-drift-check
+simulator-test · simulator-race · simulator-lint · simulator-coverage-gate
+test-integration
+test-hil-opcua · test-hil-modbus · test-hil-closed-loop · test-hil-optimization-core
+native-build · native-lint · native-sanitizer · native-coverage-gate
+docs-check
+```
+
+Beobachtungen:
+
+* **`solid-suppression-gate`** ist das C#-Pendant zu grid-gyms `noqa-gate` — derselbe Lerneffekt in zwei Sprachen.
+* **`test-mpc-property`** ist ein Property-Based-Test als eigener Sensor neben Unit-Tests — typisch für regelungstechnische Logik.
+* **`native-sanitizer`** zeigt: in Safety/Control-Repos mit nativem Code wandert der Harness in *zwei* Toolchains gleichzeitig (C#-Welt und C/C++-Welt).
+* **`test-hil-*`** (Hardware-in-the-Loop) sind Beispiele für Sensors, die *Realität* einbeziehen — der äußerste Ring um den eigentlichen Code.
+
+Pro Sprache wachsen also unterschiedliche Gate-Familien. Der Harness
+ist sprach-unabhängig im Konzept, aber sprach-abhängig in der
+Konkretion — genau deshalb deckt das Begleit-Lab fünf Sprachen
+parallel ab.
+
 ## Übungen
 
 * Schreibe einen Architekturtest, der ADR-3 als Regel umsetzt
