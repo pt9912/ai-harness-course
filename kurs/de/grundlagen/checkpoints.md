@@ -97,7 +97,7 @@ wäre redundant zum Abschluss.
 ## Wann ist ein Checkpoint "bestanden"?
 
 Nicht: "alle Häkchen gesetzt".
-Sondern: *Du kannst die drei Reflexionsfragen aus
+Sondern: *Du kannst die vier Reflexionsfragen aus
 [`reflexion-vorlage.md`](reflexion-vorlage.md) für jeden absichtlich
 provozierten Fehler in der Phase beantworten — schriftlich.*
 

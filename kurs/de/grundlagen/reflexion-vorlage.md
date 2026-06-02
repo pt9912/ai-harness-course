@@ -22,7 +22,7 @@ Die Reflexion unten macht beide Formen erst zu Lernen. Verwende sie nach
 jeder Fehler-Provokations- *und* nach jeder Exploration-Vorab-Übung.
 Schreibe die Antworten auf — nicht nur "im Kopf durchspielen".
 
-## Die drei Standardfragen
+## Die vier Standardfragen
 
 ### 1. Was ist beobachtbar passiert?
 
