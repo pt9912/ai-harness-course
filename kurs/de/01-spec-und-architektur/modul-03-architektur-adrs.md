@@ -64,6 +64,9 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 - **"Wenn ich die Entscheidung ändere, schreibe ich die ADR um."** — Hard Rule: Accepted-ADRs werden nicht überschrieben. Folge-ADR mit `supersedes ADR-N`. Sonst kann der Reviewer-Agent nicht auf ältere Entscheidungen vertrauen.
 - **"Eine ADR ohne Fitness Function ist eine ADR."** — Eine ADR ohne Fitness Function ist eine Absichtserklärung. Wer architecture fitness im Kopf hat, schreibt parallel den ArchUnit-Test.
 - **"MADR ist Pflicht."** — MADR ist ein Format unter mehreren (auch Nygard, Tyree/Akerman). Wichtig ist, dass dein Repo *eines* konsequent benutzt.
+- **"Architektur ist Bilder zeichnen."** — Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur in diesem Kurs heißt: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
+
+Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
 
 ## Worked Example: vom Diskussionsfaden zum prüfbaren ADR
 
@@ -151,6 +154,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 * Wann wird aus einer ADR eine Architekturtest-Regel?
 * Was ist der Unterschied zwischen *superseded* und *deprecated* ADR?
 * **(Anwenden)** Nimm eine ADR aus dem Lab oder einem eigenen Repo — formuliere in einem Satz, *was* eine Fitness Function maschinell prüfen würde, wenn du sie dazu schreiben müsstest.
+* **(Erschaffens-Prozess)** Welcher Schritt deines ADR-Schreibens war der *unsicherste* — und warum? (Erfahrungsgemäß: Schritt 4 "Optionen mit Trade-offs" oder Schritt 6 "Fitness Function".)
 
 ### Selbstcheck-Rubrik
 
@@ -160,6 +164,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Wann wird aus einer ADR eine Architekturtest-Regel? | "Wenn man sie prüfen will." | Wenn die ADR-Aussage maschinell formulierbar ist (Modul `X` darf `Y` nicht importieren; Layer `A` ruft `B` nicht direkt auf); Übersetzung in ArchUnit/dep-cruiser/import-linter. | + Hinweis, dass ohne Fitness Function die ADR Absichtserklärung bleibt; und dass *jede* ADR diese Frage beantworten muss — auch wenn die Antwort "lässt sich nicht maschinell prüfen" lautet. |
 | *Superseded* vs. *deprecated* ADR? | "Beides bedeutet alt." | Superseded: durch konkrete Nachfolge-ADR ersetzt (mit ID-Bezug). Deprecated: nicht mehr gültig, aber kein Ersatz benannt. | + Folge für Reviewer: superseded → Reviewer prüft gegen Nachfolger; deprecated → Reviewer markiert als Lücke und fordert Folge-ADR. |
 | Fitness-Function-Übersetzung in einem Satz? | "Test schreiben." | Eine maschinell prüfbare Aussage in der Form "Komponente/Datei/Layer X darf (nicht) Y" — mit konkretem Werkzeug (ArchUnit/dep-cruiser/import-linter) und konkreter Gate-Verdrahtung (`make arch-check`). | + Wenn dir kein Satz einfällt: ADR-Aussage ist zu vage formuliert (nicht "lose koppeln", sondern "Service-Layer importiert nicht aus `runtime.*`"). Vage ADRs sind unprüfbare ADRs. |
+| Unsicherster Schritt des ADR-Schreibens? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 4 Optionen, weil ich zwei der drei erst beim Hinschreiben nachträglich überhaupt erwogen habe"). | + Pointe: wer Schritt 4 (Optionen mit Trade-offs) überspringt oder schwammig hält, postet ein *Entscheidungs-Ergebnis* ohne *Entscheidungs-Belege* — und genau das macht ADRs unverteidigbar im Review. Schritt 6 (Fitness Function) ist die zweite häufige unsichere Stelle; wer hier "lässt sich nicht prüfen" schreibt, hat oft nur zu vage formuliert. |
 
 ## Weiterlesen
 

@@ -32,6 +32,27 @@ Nach diesem Modul kannst du:
 * Architekturkonformität
 * Pre-completion Checklist Middleware (vom Agenten selbst durchlaufen, bevor er "fertig" meldet — siehe [Modul 8 Schritt 8](../03-agenten/modul-08-implementierung.md#minimal-agent-workflow-8-schritte))
 
+## Vorgriff: zwei Begriffe aus späteren bzw. früheren Modulen
+
+Dieses Modul nutzt zwei Begriffe, deren tiefe Behandlung außerhalb von
+Modul 10 liegt — hier reichen Kurzdefinitionen, damit der Lesefluss
+nicht abbricht (Isolated-Elements-Strategie, vgl. Image-Hash-Vorgriff in
+[Modul 11](modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13)):
+
+* **Pre-completion Checklist Middleware** — eine vom Implementation-Agent
+  selbst durchlaufene Checkliste *vor* der "fertig"-Meldung. Sie ist
+  Schritt 8 des 8-Schritt-Workflows (siehe
+  [Modul 8 §Minimal Agent Workflow](../03-agenten/modul-08-implementierung.md#minimal-agent-workflow-8-schritte)).
+  In diesem Modul betrachten wir sie als *Eingabe* für die Verifikation:
+  was die Checkliste *behauptet*, ist von der Verifikation maschinell
+  oder semantisch zu *bestätigen*. Behauptung ohne Bestätigung ist die
+  häufigste Verifier-Lücke.
+* **DoD-Verletzung** — Differenz zwischen DoD-Punkten des Slice
+  (Modul 4) und tatsächlichem Code-/Artefakt-Stand. Wichtig: eine
+  DoD-Verletzung ist *kein* Review-Finding (Reviewer prüft gegen
+  Plan/ADR, nicht gegen DoD/Spec) — sie ist eine eigene Klasse, die
+  *nur* die Verifikation fängt.
+
 ## Harness-Einordnung
 
 Verifikation = primär *inferential feedback* in der Behaviour-Kategorie,
@@ -83,6 +104,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 ## Selbstcheck
 
 * **(Erinnern)** Welche drei Eingabe-Artefakte braucht ein Verifier minimal — und wodurch unterscheiden sie sich von den Eingaben des Reviewers?
+* **(Erinnern)** Welche drei Fragen-Klassen unterscheidet der Kurs: Review, Verifikation, Validation — in einem Halbsatz pro Klasse.
 * Warum reicht ein grünes Testsuite-Ergebnis nicht als Verifikation?
 * Wer löst den Konflikt, wenn Verification rot, Review grün ist?
 
@@ -91,6 +113,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Drei Verifier-Eingaben + Abgrenzung zu Reviewer? | "Code und Plan." | Verifier: DoD + Spec + Plan. Reviewer: Plan + ADR + Diff. Schnittmenge ist nur der Plan — die Trennung erzeugt die unterschiedlichen Findings. | + Hinweis: Wer dem Verifier *zusätzlich* den ADR gibt, macht ihn zum zweiten Reviewer und verliert die Kontext-Trennung. Verifier prüft "Plan↔Code↔DoD↔Spec", Reviewer prüft "Plan↔Diff↔ADR". |
+| Drei Fragen-Klassen: Review/Verifikation/Validation? | "Verschiedene Prüfungen." | Review: "ist der Diff *riskant*?" (gegen Plan/ADR). Verifikation: "*erfüllt* der Diff Plan und DoD?" (gegen DoD/Spec). Validation: "*trifft* das Ergebnis den realen Bedarf?" (gegen Nutzer/Markt). | + Pointe: jede Klasse hat *eigene* Eingaben (siehe Frage 1) und *eigene* Findings — keine darf eine andere "mit erledigen", sonst wiederholen sich blinde Flecken. |
 | Warum reichen grüne Tests nicht? | "Tests sind unvollständig." | Tests prüfen, ob Code tut, was *Tests testen*. Verifikation prüft, ob Code tut, was *Plan/DoD/Spec verlangt*. Tests können Spec-Lücken nicht selbst erkennen. | + Hinweis auf Behaviour-Kategorie (Modul 11): Tests gegen Beispiele decken Realität *nur* da ab, wo das Golden Set repräsentativ ist; Verifikation gegen Spec wird daher *nicht* von Tests ersetzt. |
 | Verification rot, Review grün — wer entscheidet? | "Der Architekt." | Architect-Rolle prüft: hat Reviewer gegen veralteten Plan geprüft, oder ist der Plan unvollständig? Konflikt löst sich entweder als Folge-ADR oder als Plan-Update — *nicht* als "wir nehmen das mildere Ergebnis". | + Folge: Wenn dieses Pattern dreimal auftritt, liegt eine Lücke in der Plan→Review-Kette (Reviewer bekommt nicht den aktuellen Plan als Eingabe). Steering-Loop-Aktion: Plan-Verteilung an Reviewer als Schritt im 8-Schritt-Workflow. |
 

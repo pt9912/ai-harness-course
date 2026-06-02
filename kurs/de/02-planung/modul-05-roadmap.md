@@ -62,6 +62,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 ## Selbstcheck
 
 * **(Erinnern)** Welche drei Bestandteile braucht ein Welle-Eintrag minimal, damit "fertig" beobachtbar wird?
+* **(Erinnern)** Nenne drei Beispiele für *beobachtbare* Trigger aus diesem Modul — nicht erfundene, sondern aus den Engage-/Fehlvorstellungs-Blöcken.
 * Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
 * Was unterscheidet eine Welle von einem Meilenstein?
 
@@ -70,6 +71,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Drei Bestandteile eines Welle-Eintrags? | "Slices und Datum." | Slice-IDs (Inhalt) · Trigger als beobachtbare Bedingung (kein Datum) · Closure-Kriterien (z. B. Replay grün, alle Slices in `done/`). | + Datum darf *erwähnt* werden (Prognose), darf aber nie Trigger sein — sonst kappt die Welle halbfertige Slices am Kalendertag und das Auditierbarkeits-Versprechen bricht. |
+| Drei beobachtbare Trigger-Beispiele? | "Wenn etwas fertig ist." | Drei aus dem Modul: "SL-024 liegt in `done/`" · "Replay-Lauf gegen Golden Set grün" · "Carveout `CO-007` aufgelöst". | + Pointe: ein Trigger ist beobachtbar dann, wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er eingetreten ist. "Sobald wir Zeit haben" scheitert daran; "SL-024 in `done/`" besteht. |
 | Welle 30 % über Schätzung — was tun? | "Mehr Zeit geben." | Diagnose vor Aktion: liegt es an Slice-Größe (→ neu schneiden), an Reihenfolge (→ neu planen), oder an unerwarteter Komplexität (→ Carveout)? | + Hinweis, dass 30 % früh ein Steering-Loop-Signal sein können (Slice-Sizing-Regel schärfen), 30 % spät (vor Welle-Closure) eher Carveout. |
 | Welle vs. Meilenstein? | "Größe." | Welle = Bündel paralleler/serialisierter Slices mit Closure-Kriterien. Meilenstein = extern beobachtbarer Zustand (Release, Audit-Punkt). | + Eine Welle endet *durch* Closure-Kriterien; ein Meilenstein endet durch *Datum oder externe Bestätigung* — und genau deshalb leitet sich der Meilenstein aus Wellen ab, nicht umgekehrt. |
 

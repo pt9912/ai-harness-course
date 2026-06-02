@@ -233,6 +233,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 * Was muss ein Replay festhalten, damit er deterministisch ist?
 * Wann wird ein Golden Set giftig (überfittet)?
 * **(Anwenden)** In deinem eigenen Repo: welche zwei Drift-Quellen würdest du *zuerst* messen, wenn du nur eine Woche Zeit hast?
+* **(Erschaffens-Prozess)** Welcher Schritt beim Aufbau deines Replay-Manifests war der *unsicherste* — und warum? (Erfahrungsgemäß: Schritt 3 "Erwartungen als Verhalten, nicht als Wortlaut" oder Schritt 6 "Drift-Diagnose-Reihenfolge".)
 
 ### Selbstcheck-Rubrik
 
@@ -242,6 +243,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Was braucht ein deterministischer Replay? | "Seed." | Modellversion + Seed + Inputs *und* Tool-Versionen + Zeitstempel-Maskierung + Image-Hash (Docker-Harness, Modul 13). | + Hinweis: wer nur Seed pinnt, hat ~60 % Determinismus. Reale Drift-Quellen: Tool-Subversions, Lokale-Zeit, Netz-Latenz, Modell-Routing innerhalb derselben Version. |
 | Wann wird ein Golden Set giftig? | "Wenn es nicht passt." | Wenn Replay reproduzierbar grün ist, aber Realität rot — typisch durch jahrelang konstantes Set. Symptome: keine Failure-Klasse seit X Wochen, neue Eingabe-Klassen tauchen *nur* in Produktion auf. | + Gegenmaßnahmen: Rotation (alte Beispiele rausnehmen), Sampling aus Produktions-Traces, Adversarial-Beispiele aus Steering-Loop-Einträgen ([`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) ziehen. |
 | Zwei Drift-Quellen — welche zuerst? | "Modell ändert sich." | Zwei konkrete: (a) Modellversion-/Routing-Drift (gleicher Tag, anderes Subroute beim Provider) und (b) Toolchain-Drift (Tool-Subversion oder Image-Hash anders als geplant). Beide sind in der ersten Woche messbar, beide haben einen sofortigen Sensor (Replay-Manifest-Vergleich). | + Begründung: andere Quellen (Eingabe-Distribution, Tool-Allowlist-Drift, Cache-Verhalten) sind nachgelagert — wer sie misst, bevor Modell und Toolchain gepinnt sind, misst Rauschen. Reihenfolge ist nicht beliebig. |
+| Unsicherster Schritt beim Replay-Manifest? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 3 Erwartungen, weil ich nicht entscheiden konnte, was *semantisch* gleich genug ist"). | + Pointe: Schritt 3 ist die häufigste Bruchstelle — wer Erwartungen wortwörtlich formuliert, bricht beim ersten Modellwechsel. Schritt 6 (Drift-Diagnose-Reihenfolge) ist die zweithäufigste: wer ohne Reihenfolge testet, klassifiziert echte Regressionen als Toolchain-Drift und umgekehrt. |
 
 ## Weiterlesen
 

@@ -28,11 +28,17 @@ Jedes Modul folgt demselben Aufbau:
 3. **Themen** — die Konzepte des Moduls.
 4. **Kernidee** — die eine Aussage, an der das Modul hängt.
 5. **Übungen** — Hands-on, mindestens eine mit absichtlichem Fehlerfall.
-6. **Selbstcheck** — Fragen, die du nach dem Modul beantworten können solltest.
+6. **Reflexion** — vier Standardfragen (Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change). Vollform: [`reflexion-vorlage.md`](reflexion-vorlage.md).
+7. **Selbstcheck** — Fragen, die du nach dem Modul beantworten können solltest, mit Drei-Stufen-Rubrik (rudimentär/solide/exzellent).
 
-Manche Module haben zusätzlich einen Block **Harness-Einordnung**, der das
-Modul-Thema in die Klassifikation aus [`klassifikation.md`](klassifikation.md)
-einordnet.
+Optional zusätzlich, jeweils mit eigener Überschrift:
+
+* **Harness-Einordnung** — ordnet das Modul-Thema in die Klassifikation aus [`klassifikation.md`](klassifikation.md) ein (häufig in Phase 03–05).
+* **Mini-Glossar** — drei bis sechs Begriffsanker mit Ein-Satz-Definition und "Bild im Kopf", wenn ein Modul mindestens drei neue Begriffe einführt (Pre-Training-Effekt, Mayer/Sweller).
+* **Vorgriff** — Kurzdefinition für Begriffe, deren Tiefen in späteren Modulen liegen (Isolated-Elements-Strategie). Vorbild: Image-Hash in [Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13).
+* **Worked Example** — fünf bis sieben prozedurale Schritte mit Anfangs- und Endzustand, ein Skip-Hinweis am Anfang (Expertise-Reversal-Schutz). Vorbilder: Modul 2, 3, 9, 12; ab Welle 6 auch Modul 8, 11, 14, 15.
+* **Typische Fehlvorstellungen** — Konfrontation typischer Präkonzepte mit Begründung; offene Sammlung in [`lernervorstellungen.md`](lernervorstellungen.md).
+* **Optionale Explorations-Vorab-Übung** — Kapur-Stil-Vorab-Aufgabe vor dem Lesen des Moduls, in Modul 0 und 2 modelliert.
 
 ## Begleit-Lab
 

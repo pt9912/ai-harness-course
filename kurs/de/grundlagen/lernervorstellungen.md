@@ -35,13 +35,12 @@ Iteration.
 - "Ein Agent ist ein besserer/schnellerer Programmierer." \* — *nicht
   explizit benannt*; klingt im Engage von Modul 8 an (800 Zeilen in 4
   Minuten), wird aber nicht als Präkonzept aufgeschlagen.
-- "Halluzinationen sind ein Bug des Modells." \* — Modul 0 streift den
-  Punkt im Satz "der Agent rät, weil ihm niemand widerspricht", benennt
-  die Vorstellung aber nicht als typische Fehlattribution.
-- "Agenten lernen mit der Zeit, wenn man sie länger benutzt." \* — Folge
-  der Praktikant-Metapher (Modul 2). Stateless wird im Glossar
-  erläutert, der Konflikt zum Praktikant-Bild ist seit der Überarbeitung
-  in Modul 2 explizit aufgelöst.
+- "Halluzinationen sind ein Bug des Modells." — Modul 0
+  (Fehlvorstellungs-Block; seit Welle 7 explizit benannt mit Verweis auf
+  Kontext-Ursachen und Wiederholungs-Empirie nach Modellwechsel).
+- "Agenten lernen mit der Zeit, wenn man sie länger benutzt." — Modul 2
+  (Kernidee-Block "Grenze der Metapher"; seit Welle 7 explizit gegen
+  Praktikant-Metapher abgegrenzt).
 
 ### Über Spec und Anforderungen (Modul 2)
 
@@ -63,9 +62,9 @@ Iteration.
 - "ADRs sind Dokumentation, nicht Constraints." \* — die Vorstellung
   einer *passiven* Dokumentation wird in Modul 3 widerlegt, aber nicht
   explizit als Präkonzept beschriftet.
-- "Architektur ist Bilder zeichnen." \* — verbreitete Vorstellung in
-  vielen Teams; Modul 3 setzt MADR voraus, ohne diese Vorstellung als
-  Hindernis zu adressieren.
+- "Architektur ist Bilder zeichnen." — Modul 3
+  (Fehlvorstellungs-Block; seit Welle 7 explizit benannt mit Bezug auf
+  Spec-Stratifizierung).
 
 ### Über Planung (Modul 4–6)
 
@@ -109,9 +108,8 @@ Iteration.
 - "Wenn ein Gate manchmal rot sein darf, ist das pragmatisch." — Modul 12
 - "Coverage 80 % ist die richtige Schwelle." — Modul 12
 - "`make gates` lokal grün heißt fertig." — Modul 12
-- "Mehr Tests sind immer besser." \* — verbreitete Vorstellung in vielen
-  Teams; Modul 12 behandelt Critical Coverage als Antwort, ohne die
-  Vorstellung explizit zu benennen.
+- "Mehr Tests sind immer besser." — Modul 12 (Fehlvorstellungs-Block;
+  seit Welle 7 explizit benannt mit Faustregel *Verteilung vor Anzahl*).
 
 ### Über Betrieb (Modul 13–15)
 
@@ -130,9 +128,8 @@ Iteration.
 - "DevOps ist YAML schreiben." \* — Vorstellung "Container = Deployment"
   (statt "Container = Reproduzierbarkeitsanker") wird in Modul 13 nicht
   explizit aufgegriffen.
-- "Postmortems sind Schuldzuweisung." \* — wird im DevOps-Umfeld oft
-  gegen blameless-Postmortems gehalten; die Productive-Failure-Übungen
-  des Kurses verteidigen sich gegen diese Skepsis nicht explizit.
+- "Postmortems sind Schuldzuweisung." — Modul 15 (Fehlvorstellungs-Block;
+  seit Welle 7 explizit benannt mit Sensor-Schutz-Argument für blameless).
 
 ## Wie diese Liste verwendet wird
 

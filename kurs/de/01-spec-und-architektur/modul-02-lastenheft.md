@@ -77,6 +77,15 @@ Spec steht, existiert für ihn nicht — Lopopolos Maxime: *"anything it
 can't access in-context doesn't exist."* Was zweideutig in der Spec
 steht, wird auf die für dich ungünstigste Weise interpretiert.
 
+**Grenze der Metapher.** Die Praktikant-Metapher trägt nur die
+*Buchstabentreue*. Anders als ein echter Praktikant **vergisst** der
+Agent zwischen den Aufgaben — was nicht im Kontext steht, war für ihn
+nie da (siehe Glossar in
+[`../grundlagen/konventionen.md#kernbegriffe`](../grundlagen/konventionen.md#kernbegriffe):
+LLM ist *stateless*). Wer die Metapher zu weit treibt, erwartet
+"Mitlernen" — und plant Reviews, als würden sie *einmal* erklärt
+ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
+
 ## Typische Fehlvorstellungen
 
 - **"Akzeptanzkriterien sind 'der Happy Path'."** — Happy Path widerlegt nur die These "es funktioniert gar nicht". Boundary und Negative widerlegen die stillen Annahmen, *die ein Agent am liebsten als selbstverständlich behandelt*.
@@ -150,6 +159,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 * **(Erinnern)** Welche drei Akzeptanzkriterien-Arten muss ein vollständiger `LH-FA-*`-Eintrag laut Worked Example tragen?
 * Welche drei Tests würden ein Akzeptanzkriterium falsifizieren?
 * Wo gehört "Performance < 200 ms" hin — funktional oder nichtfunktional?
+* **(Erschaffens-Prozess)** Welcher Schritt deines Lastenheft-Schreibens war der *unsicherste* — und warum? (Erfahrungsgemäß: Schritt 5 "Negative" oder Schritt 6 "Out-of-Scope".)
 
 ### Selbstcheck-Rubrik
 
@@ -158,6 +168,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Drei Akzeptanzkriterien-Arten eines vollständigen `LH-FA-*`? | "Tests." | Happy Path, Boundary, Negative — alle drei im Given/When/Then-Stil, ergänzt um eine explizite Out-of-Scope-Liste. | + Begründung: ohne Boundary und Negative trifft der Agent die *für dich ungünstigste* Interpretation; Out-of-Scope ist die einzige Klammer, die plausibel-Anbau verhindert. |
 | Drei Tests, die ein Akzeptanzkriterium falsifizieren? | "Tests dagegen." | Happy Path · Boundary · Negative — drei verschiedene Test*arten*, nicht drei Test*fälle*. | + Hinweis, dass Boundary/Negative die stillen Annahmen des Happy Path widerlegen — *genau die*, die ein Agent als "selbstverständlich" behandelt. |
 | "Performance < 200 ms" — funktional oder nichtfunktional? | "Nichtfunktional." | Nichtfunktional, weil ohne Lasttest nicht prüfbar; gehört in QA-Block oder `spec/spezifikation.md`. | + Abgrenzung "*Antwort innerhalb von* 200 ms" ist Latenz-*Garantie* (nichtfunktional); "System antwortet mit gültigem JSON" wäre funktional. |
+| Unsicherster Schritt des Lastenheft-Schreibens? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 5 Negative, weil ich erst beim Hinschreiben gemerkt habe, *was* ausgeschlossen werden muss"). | + Pointe: wer keinen unsicheren Schritt findet, hat den Worked Example *gelesen* statt *nachgebaut*. Schritte 5 (Negative) und 6 (Out-of-Scope) sind die häufigsten unsicheren Stellen — und damit auch die häufigsten Spec-Lücken. |
 
 ## Weiterlesen
 

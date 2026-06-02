@@ -117,6 +117,9 @@ parallel ab.
 - **"Wenn ein Gate manchmal rot sein darf, ist das pragmatisch."** — Dann ist es kein Gate, sondern ein Vorschlag. Pragmatik gehört in Carveouts oder bootstrap-aware Gates — mit Trigger und Folge-Slice.
 - **"Coverage 80 % ist die richtige Schwelle."** — Es gibt keine universelle Schwelle. Critical Coverage (Security, Geld, Datenintegrität) ≠ Gesamt-Coverage. Schwellen sind ADR-pflichtig.
 - **"`make gates` lokal grün heißt fertig."** — Nur wenn lokal und CI dasselbe Image benutzen (Modul 13). Sonst debuggst du den Unterschied.
+- **"Mehr Tests sind immer besser."** — Falsch in zwei Richtungen. Erstens: 80 % Gesamt-Coverage über *unkritischem* Code verbirgt 0 % Coverage auf dem Sicherheitspfad — Critical Coverage misst *gezielt*. Zweitens: Tests gegen Beispiele decken nur Realität ab, *wo das Golden Set repräsentativ ist* ([Modul 11](modul-11-replay-evaluierung.md)); Tests gegen die *Spec* erschließt Verifikation ([Modul 10](modul-10-verification.md)). Wer Test-Anzahl als Qualitätsmaß nimmt, baut Coverage-Anstiege, deren Wert auf 0 fällt, sobald die Realität die Coverage-Annahme bricht. Faustregel: *Verteilung vor Anzahl*. Ein zusätzlicher Test gegen einen bereits gut abgedeckten Pfad ist Boilerplate; ein zusätzlicher Test gegen einen *bisher unabgedeckten kritischen* Pfad ist Sensor.
+
+Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
 
 ## Worked Example: vom ADR-Satz zur Fitness Function
 

@@ -42,6 +42,9 @@ ohne den Autor zu kennen. Runbooks und Replay sind dafür da.
 - **"Runbook beschreibt den Happy Path."** — Nein. Runbook beschreibt *Entscheidungen unter Unsicherheit*, mit Triggern. Wenn das Runbook nur sagt "Service neu starten", ist es kein Runbook.
 - **"Produktionsfreigabe ist eine formale Checkbox."** — Eine Checkliste ohne *Belege* pro Item (Replay-Lauf-Link, ADR-ID, Trace-Hash) ist Bürokratie. Mit Belegen ist sie das einzige nicht-fragmentierte Audit-Artefakt.
 - **"Prompt-Injection ist eine Modell-Frage."** — Nein. Erkennung von Injection ist eine *Telemetrie-Frage*: Eingabe-Logging + Tool-Call-Audit + Output-Drift-Marker. Wer das nicht hat, erkennt Injection nur durch Glück.
+- **"Postmortem ist Schuldzuweisung — also macht man's leise."** — Genau das Gegenteil. Ein produktiver Postmortem ist *blameless* (vgl. Etsy/Google SRE-Tradition): er sucht den Pfad, auf dem ein vernünftiger Mensch unter Druck dieselbe Entscheidung getroffen hätte, und fragt, *welcher Sensor oder Guide gefehlt hat*. Closure-Einträge in `done/` ([Modul 4](../02-planung/modul-04-planning-harness.md)) und Reflexions-Einträge ([`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) sind beide *strukturell* blameless: sie fragen "welche Harness-Lücke war Ursache", nicht "wer war es". Wer Postmortems als Schuldzuweisung erlebt hat, wird Drift-Symptome zukünftig verschweigen — und genau dadurch wachsen sie. Blameless ist keine moralische Wahl; es ist eine Sensor-Schutz-Maßnahme.
+
+Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
 
 ## Worked Example: eine Produktionsfreigabe-Checkliste schreiben
 
@@ -182,6 +185,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 * **(Erinnern)** Welche drei Antwortoptionen prüft das Runbook bei einem produktiven Incident?
 * Welche Telemetrie brauchst du, um einen Prompt-Injection-Versuch nachträglich zu erkennen?
 * Wann ist Rollback der falsche Reflex?
+* **(Erschaffens-Prozess)** Welcher Schritt beim Schreiben deiner Freigabe-Checkliste war der *unsicherste* — und warum? (Erfahrungsgemäß: Schritt 3 "Anti-Items" oder Schritt 5 "Item-für-Item belegen".)
 
 ### Selbstcheck-Rubrik
 
@@ -190,6 +194,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Drei Runbook-Optionen bei Incident? | "Rollback oder weitermachen." | Rollback · Fix-Forward · Datenkorrektur. Drei *verschiedene* Antwortklassen, mit jeweils anderen Voraussetzungen (Rückwärtskompatibilität, Test-Coverage des Fix, Vorhandensein des Originaldatensatzes). | + Hinweis: Welche der drei greift, ist *vor* dem Incident im Runbook festzulegen — mit Triggern wie "DB-Migration rückwärtskompatibel?" und "Buggy-Daten bereits ausgeliefert?". Wer im Incident wählt, wählt typischerweise unter Stress die teuerste Option. |
 | Telemetrie für nachträgliche Injection-Erkennung? | "Logs." | Drei Spuren: Eingabe-Roh-Logging (mit Redaction), Tool-Call-Audit-Log, Output-vs-Eingabe-Konsistenz-Marker. | + Ergänzende Indikatoren: Cache-Miss-Spike, Tool-Allowlist-Reject-Counter — ohne mindestens *eines* der drei Pflicht-Felder bleibt Erkennung Glücksache. |
 | Wann ist Rollback der falsche Reflex? | "Wenn es nicht hilft." | Drei Szenarien: nicht-rückwärtskompatible DB-Migration, bereits erzeugte Buggy-Daten, ungetesteter Rollback-Pfad. | + Folge: Rollback gehört *vor* den Incident im Runbook entschieden — als bedingte Regel mit Trigger, nicht als Universal-Reflex. Wer im Incident entscheidet, entscheidet schlecht. |
+| Unsicherster Schritt der Freigabe-Checkliste? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 3 Anti-Items, weil ich nicht wusste, was bewusst *nicht* gefragt sein sollte"). | + Pointe: Schritt 3 (Anti-Items) verhindert schleichende Pflichten-Ausweitung. Schritt 5 (Beleg pro Item) ist der zweithäufigste unsichere Schritt — wer die Beleg-Pflicht aufgibt, baut Bürokratie. Beides sind keine Formfragen, sondern die einzigen Stellen, an denen die Freigabe vor Verschleiß geschützt ist. |
 
 ## Weiterlesen
 

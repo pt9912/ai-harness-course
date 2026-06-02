@@ -80,6 +80,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 ## Selbstcheck
 
 * **(Erinnern)** Nenne für drei verschiedene Sprachen je ein typisches Lock-File.
+* **(Erinnern)** Welche zwei Artefakte sind die Mindestkombination für Reproduzierbarkeit eines Builds — und warum reicht keines davon allein?
 * Warum ist `make gates` im Host-OS keine valide Gate-Ausführung?
 * Wann lohnt sich ein Devcontainer zusätzlich zum Compose-Setup?
 
@@ -88,6 +89,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Drei Sprache↔Lock-File-Paare? | zwei genannt | Python: `poetry.lock` oder `uv.lock` · Node: `package-lock.json` oder `pnpm-lock.yaml` · Go: `go.sum` · .NET: `packages.lock.json` (mit Central Package Management, siehe `bess-ems`) · Rust: `Cargo.lock`. | + Pointe: Ein gepinnter Lock-File ist *nicht* ausreichend für Reproduzierbarkeit — er sichert Transitive-Versionen, aber nicht die Runtime-Version. Lock-File **plus** Image-Hash ist die Mindestkombination (siehe [Modul 11 §Image-Hash](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13)). |
+| Mindestkombination für Build-Reproduzierbarkeit? | "Docker." | Lock-File (sichert Abhängigkeits-Versionen) + Image-Hash (sichert Runtime-/Toolchain-Version). Ohne Lock-File driftet das Dependency-Tree, ohne Image-Hash driftet die Sprach-/Tool-Version. | + Folge: ein Replay-Manifest (Modul 11) referenziert *beide* — ohne Image-Hash lässt sich Modell-Drift nicht von Toolchain-Drift trennen; ohne Lock-File-Hash nicht von Dependency-Drift. Drei Drift-Quellen, drei Anker. |
 | Warum reicht `make gates` im Host-OS nicht? | "Andere Umgebung." | Host-Toolchain ist nicht versionsgleich mit CI; Gate-Ergebnisse divergieren; Debugging erfolgt am Unterschied, nicht am Bug. | + Konsequenz: ohne Image-Hash-Vertrag zwischen lokal und CI sind grüne lokale Gates *kein* Vertrag — sie sind eine private Information. |
 | Devcontainer zusätzlich zu Compose? | "Wenn man möchte." | Devcontainer für IDE-Setup (Sprache-Server, Debugger-Anschluss). Compose für Lauf- und CI-Vertrag. Beides parallel, wenn das Team mehrere IDEs nutzt. | + Faustregel: Compose ist *Pflicht* (CI-Vertrag), Devcontainer ist *Komfort*. Wer mit Devcontainer beginnt, baut sich eine zweite Toolchain ohne die erste. |
 

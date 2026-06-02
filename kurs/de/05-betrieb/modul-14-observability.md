@@ -160,6 +160,45 @@ Fixture, dieselbe Strukturlogik).
 
 * Analyse eines KI-Agenten-Laufs im Trace-Viewer
 * Identifiziere den teuersten Tool-Call und begründe, ob er nötig war
+* **Cache-Hit-Rate spezifizieren** — aktiviert das Erschaffens-Lernziel
+  zur Cache-Beobachtbarkeit und vorbereitet die Abschluss-Achse
+  *Reproduzierbarkeit/exzellent* (siehe
+  [`../abschluss/abschlussprojekt.md`](../abschluss/abschlussprojekt.md#achse-reproduzierbarkeit)).
+  Skizziere die *drei* OTel-Counter, die du brauchst, um Cache-Hit-Rate
+  *und* Cache-Miss-Spikes zu unterscheiden — und nenne pro Counter:
+
+  | Frage | Antwort |
+  |---|---|
+  | Name | z. B. `prompt_cache_hits_total` |
+  | Unit | Cardinality (Counter, Gauge, Histogram?) |
+  | Labels | mindestens `slice.id`, `agent.role`, `model.version` |
+  | Aggregation | Hit-Rate als `hits / (hits + misses)` — wo wird die Division ausgeführt: in der Metrik-DB oder im Dashboard? |
+
+  Begründe, warum eine *einzelne* Metrik `cache.hit_ratio` nicht
+  reicht: ohne separate Counter für Hits *und* Misses kannst du
+  Cache-Miss-Spikes (Sicherheits-Indikator!) nicht von
+  Cache-Hit-Rückgängen (Kosten-Indikator) trennen.
+
+* **Doku-Konsistenz-Agent — Regeln formulieren** — aktiviert das
+  Erschaffens-Lernziel zur Drift-Detektion und vorbereitet die
+  Abschluss-Achse *Konsistenz/exzellent* (siehe
+  [`../abschluss/abschlussprojekt.md`](../abschluss/abschlussprojekt.md#achse-konsistenz)).
+  Schreibe **drei konkrete Konsistenz-Regeln**, die ein
+  Doku-Konsistenz-Agent zwischen AGENTS.md und realen Make-Targets /
+  Skill-Dateien / `harness/README.md` prüfen würde. Pro Regel:
+
+  | Feld | Inhalt |
+  |---|---|
+  | **Regel-Name** | z. B. *"AGENTS.md-Befehl existiert im Makefile"* |
+  | **Quelle** | welche Datei wird gelesen (z. B. `AGENTS.md` §Tool-Regeln) |
+  | **Vergleichs-Ziel** | welche Datei wird dagegen geprüft (z. B. `Makefile`-Target-Namen) |
+  | **Drift-Symptom** | wie sieht ein Drift-Treffer konkret aus (z. B. *"AGENTS.md nennt `make fullbuild`, Makefile kennt nur `make build`"*) |
+  | **Lebenszyklus** | ist das ein Pre-commit-Check, Pre-integration, oder Continuous (vgl. [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md))? |
+
+  Mindestens *eine* Regel muss die Hard Rule aus
+  [Modul 12 §"Hard Rule (Doku-Disziplin)"](../04-qualitaet/modul-12-quality-gates.md#hard-rule-doku-disziplin)
+  durchsetzen ("keine Befehle behaupten, die es nicht gibt").
+
 * **End-to-End-Trace bis LH-ID** — aktiviert die Abschluss-Achse
   *Auditierbarkeit/exzellent* (siehe
   [`../abschluss/abschlussprojekt.md`](../abschluss/abschlussprojekt.md#achse-auditierbarkeit)).
@@ -215,6 +254,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 * **(Erinnern)** Welche drei Telemetrie-Typen unterscheidet der Kurs, und welche Frage beantwortet jeder?
 * Welche drei Felder muss ein Tool-Call-Span mindestens tragen?
 * Wo schlägt sich ein Prompt-Cache-Miss in den Metriken nieder?
+* **(Erschaffens-Prozess)** Welcher Schritt der End-to-End-Trace-Übung (Span → Slice → ADR → LH-ID) war bei dir der *unsicherste* — und woran lag es? (Erfahrungsgemäß: Frontmatter-Feldnamen oder die Make-Target-Kommentar-Konvention.)
 
 ### Selbstcheck-Rubrik
 
@@ -223,6 +263,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Drei Telemetrie-Typen + jeweilige Frage? | nur Logs genannt | Logs (*was passierte*) · Metriken (*wie oft, wie schnell, wie viel*) · Traces (*wer rief wen, in welcher Reihenfolge*). Drei verschiedene Fragen, drei verschiedene Werkzeuge. | + Operative Folge: Wer nur Logs hat, kann Cost-Attribution nicht durchführen (braucht Metriken) und Tool-Call-Ketten nicht rekonstruieren (braucht Traces). Ein Agent-System mit nur einem Typ ist forensisch nicht antwortfähig. |
 | Drei Mindestfelder eines Tool-Call-Spans? | "Name, Zeit, Ergebnis." | `tool.name`, `tool.arguments` (redacted), `tool.result.status` plus Korrelations-IDs zu Slice/PR/Agent-Rolle. | + Begründung: Ohne `slice.id` / `requirement.id` ist Token-Attribuierung pro Slice nicht möglich; ohne `agent.role` bricht die Rollen-Trennung in der Forensik. |
 | Prompt-Cache-Miss in den Metriken — wo? | "In den Kosten." | Anstieg der Token-Eingabe-Metrik *ohne* Anstieg der Cache-Hit-Rate-Metrik (`cache.hit_ratio` fällt). | + Zweck: Cache-Miss-Spikes sind oft Injection-Symptome (variable Eingaben umgehen Cache absichtlich) — Metrik dient also gleichzeitig Kosten- *und* Sicherheitsüberwachung. |
+| Unsicherster Schritt der E2E-Trace-Übung? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 2 Slice-Datei finden, weil mein Repo kein einheitliches Frontmatter-Schema hat"). | + Pointe: der unsicherste Schritt *ist* der Bruchpunkt deiner Traceability-Kette. Wer ihn benennt, hat den ersten Steering-Loop-Eintrag schon halb formuliert. |
 
 ## Weiterlesen
 
