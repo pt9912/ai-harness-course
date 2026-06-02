@@ -5,38 +5,56 @@
 //   2. Bild-Referenzen ![alt](pfad.png|jpg|svg|gif|webp)
 //   3. Code-/Config-Referenzen [text](pfad.go|.py|...)
 // Exit-Code 1 bei Fehlern, 0 sonst.
+//
+// Bewusste Einschränkungen:
+//   - Reference-style Links [text][ref] und [ref]: url werden nicht
+//     geprüft. In diesem Lehr-Repo werden ausschließlich Inline-Links
+//     verwendet (dokumentiert in tools/README.md).
+//   - Anker werden nur in .md-Zielen geprüft. `code.go#L42` wird
+//     stillschweigend akzeptiert (Konvention für Source-Line-Anker).
+//   - Symlinks werden vor dem Sicherheits-Check auf ihren realpath
+//     aufgelöst — Symlinks aus dem Repo-Baum werden erkannt.
 
-import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
-import { join, dirname, resolve, relative, basename } from "node:path";
+import { readFileSync, readdirSync, statSync, existsSync, realpathSync } from "node:fs";
+import { join, dirname, resolve, relative, basename, isAbsolute } from "node:path";
 
+// ---- CLI-Parser ----
 const args = process.argv.slice(2);
 const options = {
-  verbose: args.includes("--verbose") || args.includes("-v"),
-  noWarn: args.includes("--no-warn"),
-  help: args.includes("--help") || args.includes("-h"),
+  verbose: false,
+  noWarn: false,
+  help: false,
   ignore: [],
 };
-
-// --ignore <pfad> kann mehrfach vorkommen. Default: lab/templates ist
-// symbolisch (Pfade sind Platzhalter im Ziel-Repo des Lerners).
-for (let i = 0; i < args.length; i++) {
-  if (args[i] === "--ignore" && args[i + 1]) {
-    options.ignore.push(args[i + 1]);
-    i++;
-  }
-}
-if (options.ignore.length === 0) {
-  options.ignore.push("lab/templates");
-}
-
 const targets = [];
-{
-  let skipNext = false;
-  for (const a of args) {
-    if (skipNext) { skipNext = false; continue; }
-    if (a === "--ignore") { skipNext = true; continue; }
-    if (!a.startsWith("-")) targets.push(a);
+
+for (let i = 0; i < args.length; i++) {
+  const a = args[i];
+  if (a === "-v" || a === "--verbose") { options.verbose = true; continue; }
+  if (a === "--no-warn") { options.noWarn = true; continue; }
+  if (a === "-h" || a === "--help") { options.help = true; continue; }
+  if (a === "--ignore") {
+    if (i + 1 >= args.length) {
+      process.stderr.write("docs-check: --ignore braucht ein Argument.\n");
+      process.exit(2);
+    }
+    options.ignore.push(args[++i]);
+    continue;
   }
+  if (a.startsWith("--ignore=")) {
+    options.ignore.push(a.slice("--ignore=".length));
+    continue;
+  }
+  if (a.startsWith("-")) {
+    process.stderr.write(`docs-check: unbekannte Option ${a} (--help für Hilfe).\n`);
+    process.exit(2);
+  }
+  targets.push(a);
+}
+
+if (options.ignore.length === 0) {
+  // Default: Templates sind by-design symbolisch (Pfade im Ziel-Repo).
+  options.ignore.push("lab/templates");
 }
 
 if (options.help) {
@@ -46,27 +64,32 @@ USAGE:
   docs-check [OPTIONS] [TARGET ...]
 
 OPTIONS:
-  -v, --verbose      OK-Items auch ausgeben
-      --no-warn      Warnungen unterdrücken (Exit-Code unverändert)
-      --ignore PATH  Pfad ausnehmen (mehrfach erlaubt). Default: lab/templates.
-  -h, --help         Diese Hilfe
+  -v, --verbose          OK-Items auch ausgeben (an stdout)
+      --no-warn          Warnungen unterdrücken (Exit-Code unverändert)
+      --ignore PATH      Pfad ausnehmen (mehrfach erlaubt, --ignore=PATH ok)
+                         Default: lab/templates
+  -h, --help             Diese Hilfe
 
-TARGETS:
-  Pfade oder Glob-Wildcards. Ohne Argumente: rekursiv ab CWD.
-
-EXAMPLES:
-  docs-check                              # alles ab CWD
-  docs-check kurs/de/                     # nur Kurs-Verzeichnis
-  docs-check --verbose lab/example/       # mit OK-Meldungen
+EINSCHRÄNKUNGEN:
+  - Nur Inline-Links: [text](url). Reference-Style nicht geprüft.
+  - Anker nur in .md-Zielen geprüft. \`code.go#L42\` wird ignoriert.
+  - Symlinks aus dem Repo werden erkannt (realpath).
 `);
   process.exit(0);
 }
 
 const ROOT = process.cwd();
+const ROOT_REAL = (() => {
+  try { return realpathSync(ROOT); } catch { return ROOT; }
+})();
 const startPaths = targets.length > 0 ? targets : ["."];
 
 // ---- Markdown-Datei-Liste ermitteln ----
 const ignoreAbs = options.ignore.map((i) => resolve(i));
+const SKIP_DIRS = new Set([
+  "node_modules", ".git", "target", "build", ".gradle",
+  "dist", ".next", ".venv", "__pycache__", "vendor", "bin", "obj",
+]);
 
 function isIgnored(absPath) {
   for (const ig of ignoreAbs) {
@@ -83,7 +106,10 @@ function collectMarkdown(start) {
     let st;
     try {
       st = statSync(p);
-    } catch {
+    } catch (e) {
+      if (e.code !== "ENOENT") {
+        process.stderr.write(`WARN  Filesystem-Fehler bei ${p}: ${e.code || e.message}\n`);
+      }
       return;
     }
     if (st.isFile()) {
@@ -91,9 +117,15 @@ function collectMarkdown(start) {
       return;
     }
     if (st.isDirectory()) {
-      const base = basename(p);
-      if (base === "node_modules" || base === ".git" || base === "target" || base === "build" || base === ".gradle") return;
-      for (const child of readdirSync(p)) walk(join(p, child));
+      if (SKIP_DIRS.has(basename(p))) return;
+      let children;
+      try {
+        children = readdirSync(p, { withFileTypes: true });
+      } catch (e) {
+        process.stderr.write(`WARN  readdir fehlgeschlagen ${p}: ${e.code || e.message}\n`);
+        return;
+      }
+      for (const child of children) walk(join(p, child.name));
     }
   }
   walk(start);
@@ -110,45 +142,47 @@ if (mdFiles.size === 0) {
   process.exit(0);
 }
 
-// ---- Heading-Slugs pro Datei extrahieren (GitHub-Konvention) ----
+// ---- Slugify (GitHub-Konvention, Unicode-aware) ----
 function slugify(text) {
-  // GitHub-Slug: lowercase, Whitespace → "-", interpunktion entfernt
-  // (Bindestrich und Unterstrich bleiben).
   return text
+    .replace(/\s+#+\s*$/, "")           // ATX-closing "## ## " entfernen
     .toLowerCase()
     .replace(/<[^>]+>/g, "")            // HTML-Tags weg
-    .replace(/[`*_~]/g, "")             // Markdown-Inline weg
-    .replace(/[^\p{Letter}\p{Number}\s-]/gu, "")
+    .replace(/`[^`]*`/g, "")            // Inline-Code weg
+    .replace(/[*_~]/g, "")              // Markdown-Inline-Marker weg
+    .replace(/[^\p{Letter}\p{Number}\p{Emoji_Presentation}\s-]/gu, "")
     .trim()
     .replace(/\s+/g, "-");
 }
 
-const headingsCache = new Map(); // absPath → Set<slug>
+const headingsCache = new Map(); // absPath → { slugs:Set<string> } | "ENOENT" | "EACCES" | ...
 function getHeadings(absPath) {
   if (headingsCache.has(absPath)) return headingsCache.get(absPath);
-  if (!existsSync(absPath)) {
-    headingsCache.set(absPath, null);
-    return null;
-  }
   let text;
   try {
     text = readFileSync(absPath, "utf8");
-  } catch {
-    headingsCache.set(absPath, null);
-    return null;
+  } catch (e) {
+    headingsCache.set(absPath, e.code || "EREAD");
+    return e.code || "EREAD";
   }
   const slugs = new Set();
   const counter = new Map();
-  let inCodeFence = false;
-  for (const line of text.split("\n")) {
-    if (line.startsWith("```")) {
-      inCodeFence = !inCodeFence;
+  let inFence = false;
+  let fenceMarker = "";
+  for (const rawLine of text.split("\n")) {
+    // CommonMark: bis zu 3 führende Spaces erlaubt
+    const indented = rawLine.replace(/^ {0,3}/, "");
+    const fm = indented.match(/^(```+|~~~+)/);
+    if (fm) {
+      if (!inFence) { inFence = true; fenceMarker = fm[1][0]; }
+      else if (indented.startsWith(fenceMarker)) { inFence = false; fenceMarker = ""; }
       continue;
     }
-    if (inCodeFence) continue;
-    const m = line.match(/^(#{1,6})\s+(.+?)\s*$/);
+    if (inFence) continue;
+    const m = indented.match(/^(#{1,6})\s+(.+?)\s*$/);
     if (m) {
       let s = slugify(m[2]);
+      if (s === "") continue;
       if (counter.has(s)) {
         const n = counter.get(s) + 1;
         counter.set(s, n);
@@ -159,37 +193,95 @@ function getHeadings(absPath) {
       slugs.add(s);
     }
   }
-  headingsCache.set(absPath, slugs);
-  return slugs;
+  headingsCache.set(absPath, { slugs });
+  return { slugs };
 }
 
-// ---- Links pro Datei parsen ----
-// [text](target)  oder  ![alt](target)
-// Hinweis: Wir ignorieren Code-Fences und Inline-Code.
+// ---- Inline-Code-Spans entfernen (Multi-Backtick-aware) ----
+function stripInlineCode(line) {
+  // Multi-Backtick: ` `, `` ``, ``` ``` etc. Match das gleiche
+  // Backtick-Count am Anfang und am Ende. CommonMark-konform.
+  return line.replace(/(`+)[^`]*?\1/g, "");
+}
+
+// ---- Link-Parser mit Klammer-Balancing ----
 function extractLinks(text) {
   const links = [];
   const lines = text.split("\n");
   let inFence = false;
+  let fenceMarker = "";
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    if (line.startsWith("```")) {
-      inFence = !inFence;
+    const rawLine = lines[i];
+    const indented = rawLine.replace(/^ {0,3}/, "");
+    const fm = indented.match(/^(```+|~~~+)/);
+    if (fm) {
+      if (!inFence) { inFence = true; fenceMarker = fm[1][0]; }
+      else if (indented.startsWith(fenceMarker)) { inFence = false; fenceMarker = ""; }
       continue;
     }
     if (inFence) continue;
-    // Inline-Code-Spans aus der Zeile entfernen.
-    const stripped = line.replace(/`[^`]*`/g, "");
-    // Markdown-Link: [text](target) oder ![alt](target)
-    const re = /(!?)\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
-    let m;
-    while ((m = re.exec(stripped)) !== null) {
-      links.push({ image: m[1] === "!", text: m[2], target: m[3], line: i + 1 });
+    const stripped = stripInlineCode(rawLine);
+
+    // Token-basiertes Link-Parsing: [text](target ggf. "title")
+    // mit Klammer-Balancing in target.
+    let idx = 0;
+    while (idx < stripped.length) {
+      let isImage = false;
+      let openBracket = stripped.indexOf("[", idx);
+      if (openBracket === -1) break;
+      if (openBracket > 0 && stripped[openBracket - 1] === "!") isImage = true;
+
+      // Bracket-Balance für link text
+      let depth = 1;
+      let textEnd = openBracket + 1;
+      while (textEnd < stripped.length && depth > 0) {
+        const ch = stripped[textEnd];
+        if (ch === "[") depth++;
+        else if (ch === "]") depth--;
+        if (depth > 0) textEnd++;
+      }
+      if (depth !== 0 || textEnd >= stripped.length || stripped[textEnd + 1] !== "(") {
+        idx = openBracket + 1;
+        continue;
+      }
+
+      // Parse target with paren balancing
+      const linkText = stripped.slice(openBracket + 1, textEnd);
+      let p = textEnd + 2;
+      let parenDepth = 1;
+      let target = "";
+      let inTitle = false;
+      while (p < stripped.length && parenDepth > 0) {
+        const ch = stripped[p];
+        if (!inTitle && ch === "(") parenDepth++;
+        else if (!inTitle && ch === ")") parenDepth--;
+        else if (ch === '"' && !inTitle && /\s/.test(stripped[p - 1] || " ")) {
+          inTitle = true;
+        } else if (ch === '"' && inTitle) {
+          inTitle = false;
+        }
+        if (parenDepth > 0) {
+          if (!inTitle && /\s/.test(ch) && target.length > 0) {
+            // Whitespace + Titel beginnt
+            inTitle = false;
+            while (p < stripped.length && stripped[p] !== ")") p++;
+            break;
+          }
+          if (!inTitle) target += ch;
+        }
+        p++;
+      }
+      if (parenDepth === 0 || (parenDepth > 0 && stripped[p] === ")")) {
+        if (target) {
+          links.push({ image: isImage, text: linkText, target, line: i + 1 });
+        }
+      }
+      idx = p + 1;
     }
   }
   return links;
 }
 
-// ---- Externer Link? Mailto? Anker-only? ----
 function isExternal(target) {
   return /^[a-z][a-z0-9+.-]*:/i.test(target);
 }
@@ -202,14 +294,15 @@ let errors = 0;
 let warnings = 0;
 let okCount = 0;
 
-const sorted = [...mdFiles].sort();
+const collator = new Intl.Collator("en", { sensitivity: "variant" });
+const sorted = [...mdFiles].sort(collator.compare);
 for (const absMd of sorted) {
   const rel = relative(ROOT, absMd);
   let text;
   try {
     text = readFileSync(absMd, "utf8");
   } catch (e) {
-    process.stderr.write(`ERROR ${rel}: lesen fehlgeschlagen (${e.message})\n`);
+    process.stderr.write(`ERROR ${rel}: lesen fehlgeschlagen (${e.code || e.message})\n`);
     errors++;
     continue;
   }
@@ -220,10 +313,14 @@ for (const absMd of sorted) {
     const { target, line } = link;
     if (isExternal(target)) continue;
     if (isAnchorOnly(target)) {
-      // In-Datei-Anker
-      const ownHeadings = getHeadings(absMd) || new Set();
+      const own = getHeadings(absMd);
       const anchor = target.slice(1);
-      if (!ownHeadings.has(anchor)) {
+      if (typeof own === "string") {
+        process.stderr.write(`WARN  ${rel}:${line}: eigener Heading-Index nicht ermittelbar (${own})\n`);
+        warnings++;
+        continue;
+      }
+      if (!own.slugs.has(anchor)) {
         process.stderr.write(`ERROR ${rel}:${line}: Anker "#${anchor}" existiert nicht in dieser Datei\n`);
         errors++;
       } else if (options.verbose) {
@@ -233,13 +330,27 @@ for (const absMd of sorted) {
       continue;
     }
 
-    // Datei-Link, ggf. mit Anker.
     const [pathPart, anchor] = target.split("#");
+
+    // Absolute Pfade explizit ablehnen — File-System-Roots haben in
+    // Repo-Doku nichts zu suchen.
+    if (isAbsolute(pathPart)) {
+      process.stderr.write(`ERROR ${rel}:${line}: absoluter Pfad "${target}" nicht erlaubt\n`);
+      errors++;
+      continue;
+    }
+
     const targetAbs = resolve(fileDir, pathPart);
 
-    // Sicherheitsnetz: Pfad darf nicht aus dem Repo führen.
-    const relFromRoot = relative(ROOT, targetAbs);
-    if (relFromRoot.startsWith("..")) {
+    // Sicherheitsnetz: realpath + relativer Pfad zum Repo-Realpath.
+    // Symlinks, die aus dem Repo-Baum führen, werden erkannt.
+    let realTarget = targetAbs;
+    try {
+      if (existsSync(targetAbs)) realTarget = realpathSync(targetAbs);
+    } catch { /* realpath kann scheitern, dann targetAbs nutzen */ }
+
+    const relFromRoot = relative(ROOT_REAL, realTarget);
+    if (relFromRoot.startsWith("..") || isAbsolute(relFromRoot)) {
       process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" zeigt aus dem Repo heraus\n`);
       errors++;
       continue;
@@ -251,15 +362,18 @@ for (const absMd of sorted) {
       continue;
     }
 
-    // Wenn Anker und Markdown-Ziel: prüfen.
+    // Anker nur in .md-Zielen prüfen
     if (anchor && targetAbs.endsWith(".md")) {
-      const headings = getHeadings(targetAbs);
-      if (headings === null) {
-        if (!options.noWarn) {
-          process.stderr.write(`WARN  ${rel}:${line}: Ziel "${target}" lesbar, aber Heading-Index nicht ermittelbar\n`);
+      const h = getHeadings(targetAbs);
+      if (typeof h === "string") {
+        if (h === "EACCES" || h === "EPERM") {
+          process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" nicht lesbar (${h}) — Anker nicht prüfbar\n`);
+          errors++;
+        } else if (!options.noWarn) {
+          process.stderr.write(`WARN  ${rel}:${line}: Ziel "${target}" Heading-Index nicht ermittelbar (${h})\n`);
           warnings++;
         }
-      } else if (!headings.has(anchor)) {
+      } else if (!h.slugs.has(anchor)) {
         process.stderr.write(`ERROR ${rel}:${line}: Anker "#${anchor}" existiert nicht in ${relative(ROOT, targetAbs)}\n`);
         errors++;
       } else if (options.verbose) {
@@ -277,8 +391,8 @@ for (const absMd of sorted) {
 }
 
 // ---- Zusammenfassung ----
+// Immer auf stderr — Diagnostik-Stream, konsistent für CI.
 const summary = `\ndocs-check: ${mdFiles.size} Datei(en) geprüft, ${errors} ERROR, ${warnings} WARN${options.verbose ? `, ${okCount} OK` : ""}.\n`;
-if (errors > 0) process.stderr.write(summary);
-else process.stdout.write(summary);
+process.stderr.write(summary);
 
 process.exit(errors > 0 ? 1 : 0);
