@@ -78,6 +78,117 @@ macht. Wer geplant hat, prüft nicht; wer geschrieben hat, reviewt nicht.
 - **"Validation machen wir vor Release."** — Zu spät. Validation gehört *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
 - **"Architect entscheidet, Implementation widerspricht nicht."** — Implementation darf Folge-ADRs vorschlagen. Was sie *nicht* darf: stillschweigend einer ADR widersprechen.
 
+## Worked Example: einen Konflikt-Pfad als Rollen-Sequenz mit Übergabe-Artefakten modellieren
+
+> **Wenn du Konflikte zwischen Rollen routiniert über Übergabe-Artefakte auflöst (und nicht über "wer setzt sich durch?"), springe zu [§Übungen](#übungen).** Worked Example zeigt die Sequenz-Modellierung an einem typischen Konflikt; ist das Schema vertraut, kostet das Mitlesen Last (Expertise-Reversal).
+
+**Ausgangs-Konflikt:** Reviewer-Agent gibt ein HIGH-Finding: *"Slice
+verstößt gegen ADR-0001 (hexagonale Architektur) — Optimizer schreibt
+direkt aufs Device."* Implementer-Agent widerspricht: *"ADR-0001 wurde
+in der letzten Welle gelockert; ich verweise auf die Diskussion in
+Slice-Plan SL-024."*
+
+Wer entscheidet? Wer übergibt was an wen? Der naive Pfad — *"Reviewer
+hat mehr Senioritätsgefühl, also Reviewer"* — wiederholt blinde Flecken
+und entspricht *keiner* der sechs Rollen. Die saubere Form modelliert
+den Konflikt als Sequenz mit Übergabe-Artefakten.
+
+**Schritt 1 — Beteiligte Rollen identifizieren.** Nicht jeder Konflikt
+betrifft alle sechs. Hier: *Reviewer* (hat das Finding), *Implementer*
+(widerspricht), *Architect* (hütet die ADR), *Planner* (besitzt den
+Slice-Plan, der angeblich die ADR lockert). Verifier und Validator
+sind *nicht* beteiligt — sie kommen später, nach der Konfliktauflösung.
+Wer sie früher hineinzieht, lädt blinde Flecken aus deren Kontext in
+die Auflösung.
+
+**Schritt 2 — Sequenz zeichnen.** Mermaid-Form:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant R as Reviewer
+    participant I as Implementer
+    participant A as Architect
+    participant P as Planner
+
+    R->>I: Finding HIGH (ADR-0001-Verstoß)
+    I->>A: Widerspruch + Verweis auf SL-024
+    A->>P: ADR-0001-Aktualität prüfen, SL-024 vorlegen
+    P-->>A: Slice-Plan SL-024 (Lockerung erwähnt?)
+    A-->>R: Verdikt (ADR gilt / Folge-ADR / SL-024 falsch)
+    A->>I: Übergabe-Artefakt (Folge-ADR-Hülle oder Bestätigung HIGH)
+```
+
+Sechs Pfeile, keine Rückwärts-Schleife ohne Artefakt. Wer einen Pfeil
+nicht beschriften kann, hat einen blinden Übergang — exakt die Stelle,
+an der Konflikte später aufbrechen.
+
+**Schritt 3 — Übergabe-Artefakte pro Pfeil benennen.** Sequenz wirkt
+nur, wenn jeder Pfeil ein *konkretes* Artefakt trägt. Tabelle:
+
+| Pfeil | Übergabe-Artefakt | Inhalt minimal |
+|---|---|---|
+| R → I | Finding HIGH | Datei:Zeile · ADR-ID · Kategorie HIGH · ein-Satz-Begründung |
+| I → A | Widerspruchs-Notiz | Verweis auf Slice-Plan + behauptete Lockerung + Position des Implementers |
+| A → P | ADR-Aktualitäts-Anfrage | ADR-ID · Welle, in der gelockert worden sein soll · konkrete Frage |
+| P → A | Slice-Plan-Auszug | exakte Textstelle aus SL-024, die die Lockerung enthält *oder nicht enthält* |
+| A → R | Verdikt | ADR-Stand bestätigt / Folge-ADR-Hülle / SL-024-Korrektur |
+| A → I | Folge-Übergabe | Folge-ADR-Hülle ODER Pflicht zur Korrektur ODER Bestätigung der Lockerung mit ID |
+
+Die zentrale Disziplin: das Verdikt von Architect nach Reviewer (Pfeil
+A → R) *muss* ein Artefakt sein, das Reviewer in seine Skill-Datei
+übernehmen kann. *"Mündliche Klärung"* ist keine Übergabe; sie ist
+Drift mit Kaffeepause.
+
+**Schritt 4 — Drei mögliche Verdikte mit Folge-Sequenzen.** Konflikt
+hat drei Auflösungs-Klassen, jede mit eigener Folge-Sequenz. Wer das
+nicht vorab durchdenkt, fällt im realen Konflikt in die bequemste —
+typischerweise *"wir nehmen das mildere Finding"*, die *keine* der
+drei sauberen Klassen ist:
+
+| Verdikt | Folge-Sequenz | Übergabe-Artefakt |
+|---|---|---|
+| ADR-0001 gilt unverändert, SL-024 hat falsch behauptet | A → P: Slice-Plan-Korrektur; P → I: aktualisierter Plan; I implementiert ADR-konform neu | Plan-Diff mit Korrektur-Begründung |
+| ADR-0001 wird per Folge-ADR `supersedes`d | A → R: Folge-ADR mit `supersedes: ADR-0001`; R aktualisiert Skill-Datei (welche Regel jetzt gilt) | Folge-ADR (Accepted) · Skill-Patch |
+| Lockerung war legitim, aber nicht dokumentiert | A → P → I: Sofort-PR, der die Lockerung als Folge-ADR nachzieht; bestehender Slice darf trotzdem nicht stillschweigend abgeschlossen werden | Folge-ADR + Erinnerungs-Slice in `next/` |
+
+*Keine* dieser Sequenzen enthält "Reviewer-Finding herabstufen, weil
+Implementer widerspricht". Das wäre der vierte, *falsche* Pfad — und
+er existiert nur, weil Übergabe-Artefakte fehlen.
+
+**Schritt 5 — Sequenz auf "kein Sprung ohne Artefakt" prüfen.** Lege
+die gezeichnete Sequenz aus Schritt 2 neben die Tabelle aus Schritt 3.
+Für jeden Pfeil: hast du das Artefakt benennen können? Wenn ein Pfeil
+übrig bleibt, ist die Sequenz *nicht* fertig — sondern dort liegt der
+nächste blinde Fleck. Häufige Lücken:
+
+- *"Reviewer → Implementer: schnelles Update im Chat"* — kein
+  Artefakt, kein dokumentierbarer Übergang, kein Re-Run gegen die
+  Sequenz möglich.
+- *"Architect entscheidet — fertig"* — Verdikt ohne `supersedes`-ADR
+  oder Plan-Korrektur ist eine Erklärung, kein Akt.
+
+**Schritt 6 — Folge-ADR-Hülle vorbereiten, *bevor* der Konflikt
+auftritt.** Damit Verdikt 2 (Folge-ADR) keine Stundenarbeit bei jeder
+Konfliktwiederholung wird, lebt unter `docs/plan/adr/templates/` eine
+Hülle mit `supersedes`-Feld, leerem Begründungsblock, leerem
+Fitness-Function-Anker. Der Architect füllt sie in fünf Zeilen aus,
+Reviewer kann den Skill-Patch ableiten. Ohne Hülle wird Verdikt 2 das
+Verdikt mit dem höchsten Aufwand — und damit das, das *nicht* gewählt
+wird, auch wenn es das richtige wäre.
+
+**Schritt 7 — Wann *nicht* eine Sequenz modellieren?** Bei isolierten
+LOW/INFO-Findings ist die Sequenz Overkill — Implementer akzeptiert
+oder begründet, Reviewer schließt das Finding. Die Sequenz greift ab
+*HIGH*-Findings mit Rollen-Widerspruch oder ab dem dritten Mal, dass
+derselbe Konflikttyp auftritt. Dreimal derselbe Konflikt ist ein
+Steering-Loop-Signal (siehe [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md#wann-darf-eine-reflexion-nicht-zu-einer-harness-änderung-führen)):
+die Sequenz wird *Pflicht* im 8-Schritt-Workflow ([Modul 8](modul-08-implementierung.md#minimal-agent-workflow-8-schritte)).
+
+Sieben Schritte, eine Sequenz, sechs benannte Übergaben. Der Test, ob
+die Modellierung trägt: der nächste Konflikt durchläuft die Pfeile
+*ohne* dass jemand neu erfindet, wer wem was übergibt.
+
 ## Übungen
 
 * Ordne 10 typische Tätigkeiten den Rollen zu
