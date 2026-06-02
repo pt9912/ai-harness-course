@@ -103,3 +103,37 @@ provozierten Fehler in der Phase beantworten — schriftlich.*
 
 Wer einen Checkpoint nur halb schafft, schafft das Abschlussprojekt
 nicht ganz. Lieber im Checkpoint stolpern als am Abschluss.
+
+## Pass-Through-Logik zum Abschlussprojekt
+
+Die Checkpoints und das [Abschlussprojekt](../abschluss/abschlussprojekt.md)
+sind keine getrennten Welten. Jede Bewertungsachse des Abschlussprojekts
+hat einen direkten Vorboten in einem Checkpoint:
+
+| Abschluss-Achse | Vorbereitender Checkpoint | Wenn dort nicht erreicht … |
+|---|---|---|
+| Vollständigkeit | A (Spec/ADR/Harness-Skizze vorhanden) | → später keine "solide" auf Vollständigkeit; Modul 1–3 vertiefen. |
+| Konsistenz | A (Source Precedence) + B (Carveout-Folge-Slice) | → Konsistenz bleibt auf "funktional"; Modul 1 §Source Precedence und Modul 6 vertiefen. |
+| Reproduzierbarkeit | C (8-Schritt-Workflow reproduzierbar) + D (Gates auf frischem Klon) | → Reproduzierbarkeit auf "rudimentär"; Modul 8, 12, 13 vertiefen. |
+| Auditierbarkeit | B (Slice-IDs) + C (Hard Rules mit ID) | → Auditierbarkeit bleibt auf "funktional"; ID-Schema und Traceability-Hook nachholen (Modul 2, 12). |
+| Steering-Loop-Reife | D (DoD-Verstoß provoziert + Reflexion) | → Steering-Loop bleibt auf "rudimentär"; Reflexionsvorlage und Modul 11 vertiefen. |
+
+**Diagnose-Regel:** Wer im Abschlussprojekt mehr als eine Achse auf
+*rudimentär* hat, schließt typischerweise eine Phase-Lücke nicht — nicht
+eine Modul-Lücke. Die Tabelle oben sagt dir, *welche Phase*. Geh dort
+zurück, mache den entsprechenden Checkpoint vollständig, **bevor** du
+das Abschlussprojekt erneut versuchst.
+
+**Empfohlene Sequenz:**
+
+1. Modul lesen und Übungen machen.
+2. Phasen-Checkpoint vollständig — *inkl. schriftlicher Reflexionsfragen*.
+3. Erst dann nächste Phase beginnen.
+4. Nach Phase 05: Abschlussprojekt mit den Kalibrierungsbeispielen aus
+   [`kalibrierungsbeispiele.md`](../abschluss/kalibrierungsbeispiele.md)
+   gegenlesen, *bevor* du abgibst.
+
+Wer Checkpoints überspringt und das Abschlussprojekt direkt angeht, lernt
+nur, wo die Lücken sind, ohne sie geschlossen zu haben — und gibt ein
+Abschlussprojekt ab, das in der Bewertung typischerweise auf zwei
+*rudimentär*-Achsen landet. Das ist behebbar, aber nicht effizient.

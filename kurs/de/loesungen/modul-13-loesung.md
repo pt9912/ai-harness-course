@@ -4,6 +4,27 @@ Zugehöriges Modul: [Modul 13 — Docker Harness](../05-betrieb/modul-13-docker-
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Nenne drei Sprache↔Lock-File-Paare
+
+| Sprache | typisches Lock-File |
+|---|---|
+| Python | `poetry.lock` oder `uv.lock` |
+| Node | `package-lock.json` oder `pnpm-lock.yaml` |
+| Go | `go.sum` |
+| .NET | `packages.lock.json` (mit Central Package Management) |
+| Rust | `Cargo.lock` |
+| Java/Maven | `pom.xml` mit pinned Versionen + (für reine Reproduzierbarkeit) `dependency-tree`-Snapshot |
+
+Drei Beispiele genügen — kennt der Lerner *kein* Lock-File für die
+Sprache seines Repos, fehlt eine zentrale Reproduzierbarkeits-Klammer.
+
+Pointe: Ein gepinntes Lock-File ist *nicht* ausreichend für volle
+Reproduzierbarkeit. Es sichert die *Bibliotheks-Versionen*, aber nicht
+die *Runtime-Version* (Python 3.11 vs. 3.12, Go 1.21 vs. 1.23). Lock-File
+**plus** Image-Hash ist die Mindestkombination. Genau diese Kombination
+liefert das Bündel "byteidentische Toolchain", auf das Modul 11 sich für
+deterministische Replays stützt.
+
 ### Warum ist `make gates` im Host-OS keine valide Gate-Ausführung?
 
 Drei Gründe:

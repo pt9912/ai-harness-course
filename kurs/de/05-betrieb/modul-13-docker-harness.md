@@ -70,6 +70,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Nenne für drei verschiedene Sprachen je ein typisches Lock-File.
 * Warum ist `make gates` im Host-OS keine valide Gate-Ausführung?
 * Wann lohnt sich ein Devcontainer zusätzlich zum Compose-Setup?
 
@@ -77,6 +78,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Drei Sprache↔Lock-File-Paare? | zwei genannt | Python: `poetry.lock` oder `uv.lock` · Node: `package-lock.json` oder `pnpm-lock.yaml` · Go: `go.sum` · .NET: `packages.lock.json` (mit Central Package Management, siehe `bess-ems`) · Rust: `Cargo.lock`. | + Pointe: Ein gepinnter Lock-File ist *nicht* ausreichend für Reproduzierbarkeit — er sichert Transitive-Versionen, aber nicht die Runtime-Version. Lock-File **plus** Image-Hash ist die Mindestkombination (siehe [Modul 11 §Image-Hash](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13)). |
 | Warum reicht `make gates` im Host-OS nicht? | "Andere Umgebung." | Host-Toolchain ist nicht versionsgleich mit CI; Gate-Ergebnisse divergieren; Debugging erfolgt am Unterschied, nicht am Bug. | + Konsequenz: ohne Image-Hash-Vertrag zwischen lokal und CI sind grüne lokale Gates *kein* Vertrag — sie sind eine private Information. |
 | Devcontainer zusätzlich zu Compose? | "Wenn man möchte." | Devcontainer für IDE-Setup (Sprache-Server, Debugger-Anschluss). Compose für Lauf- und CI-Vertrag. Beides parallel, wenn das Team mehrere IDEs nutzt. | + Faustregel: Compose ist *Pflicht* (CI-Vertrag), Devcontainer ist *Komfort*. Wer mit Devcontainer beginnt, baut sich eine zweite Toolchain ohne die erste. |
 

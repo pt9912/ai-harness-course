@@ -57,6 +57,25 @@ Schwerpunkt: Agentenbedienung, Review-Disziplin, Hard Rules.
 Tieferes Lesen: [`fallstudien.md`](fallstudien.md) — Hard Rules in
 `grid-gym` (Docker-only, noqa-Verbot, git mv + Inhalt = zwei Commits).
 
+## Domänen-Anker — welche Fallstudie passt zu dir?
+
+Die Lernpfade sortieren nach *Rolle*, die folgende Tabelle nach *Domäne
+deines Repos*. Beide Sortierungen sind orthogonal: ein DevOps-Engineer im
+regulierten Umfeld liest Pfad B *und* zieht primär die Compliance-Fallstudien
+heran.
+
+| Domäne deines Repos | Primäre Fallstudien (in [`fallstudien.md`](fallstudien.md)) | Was du dort priorisierst |
+|---|---|---|
+| **Reguliert (Finanzen, Medizin, Behörden)** | `c-hsm-doc` (Policy/Compliance) | Spec-Stratifizierung, ID-Schema `HSM-*`, Hard Rule "Accepted-ADRs immutable", Traceability als Pflicht. |
+| **Safety-/Control-kritisch (Industrie-, Energie-Systeme, Hardware)** | `bess-ems` (Safety/Control-Flagship) | Hard Rules (Optimierer schreibt nie direkt), `solid-suppression-gate`, Property-Based-Sensors, native Sanitizer-Gates. |
+| **Embedded LLM-Anwendung (Cost/Latency-kritisch)** | `grid-gym` (Referenz, Domäne) + Modul 14 | Cost-Attribution pro Slice, Cache-Hit-Rate als Metrik, Determinism/Replay/Fault als eigene Test-Klassen. |
+| **Internes Developer-Tool** | `grid-gym` (Referenz, Domäne) | AGENTS.md-Disziplin, Welle-Self-Close, Replay-Lauf gegen Modellwechsel. |
+| **Plattform/Multi-Repo-Landschaft** | `grid-gym` + `bess-ems` + `c-hsm-doc` parallel | Repo-Klassen (Referenz/Safety/Compliance), Einführungsregel "erst Referenz, dann Flagship", Carveout-Management über Teams. |
+| **Migration / Brownfield (kein Greenfield-Harness)** | alle drei Repos (Stand 2026-06 ohne `harness/README.md`) | Beobachtung in [`fallstudien.md` §Beobachtung aus dem Ist-Zustand](fallstudien.md#beobachtung-aus-dem-ist-zustand): kanonische Quellen existieren oft, ein formeller Einstiegspunkt fehlt — *das* ist der typische Ausgangspunkt. |
+
+Die vollständige Liste der Branchen-Anwendungsanker steht in
+[`fallstudien.md` §Branchen-Anwendungsanker](fallstudien.md#branchen-anwendungsanker).
+
 ## Hinweis
 
 Die Pfade ersetzen die Module nicht — sie schlagen vor, wo du *zusätzlich

@@ -87,6 +87,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Nenne die sechs Rollen in der Reihenfolge, in der ein Slice sie typischerweise durchläuft.
 * Warum braucht es Verification *und* Validation?
 * Welche Rolle besitzt ein ADR — wer darf es ändern?
 
@@ -94,6 +95,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Sechs Rollen in Reihenfolge? | Rollen genannt, aber Reihenfolge unklar | Planner → Architect → Implementation → Reviewer → Verifier → Validator. Übergaben jeweils mit Artefakt (Plan, ADR-Bezug, PR, Findings, Verifikationsbeleg, Validierungsbeleg). | + Hinweis: Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung. Eine Person kann mehrere Rollen spielen — aber nicht im selben Kontextfenster, sonst wiederholen sich blinde Flecken. |
 | Warum Verification *und* Validation? | "Verschiedene Prüfungen." | Verification: "built the thing right" (gegen Plan/DoD); Validation: "built the right thing" (gegen realen Bedarf). | + Gefährlichster Fall: Verifikation grün, Validation rot — Team baut *perfekt das Falsche*. Umgekehrter Fall (Verifikation rot, Validation grün) ist Prozess-Drift, auch wenn das Ergebnis zufällig passt. |
 | Wer darf ein ADR ändern? | "Der Architekt." | Architect schreibt; Reviewer prüft auf Konsistenz; Implementer liest als Constraint; Accepted-ADRs *niemand* überschreibt — Folge-ADR mit `supersedes`. | + Konfliktpfad: Implementer darf höchstens Folge-ADR vorschlagen, niemals stillschweigend einer ADR widersprechen. Das wäre Drift, kein "pragmatisches Implementieren". |
 

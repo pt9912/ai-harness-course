@@ -19,7 +19,8 @@ Nach diesem Modul kannst du:
 * Token-Kosten pro Slice *attribuieren* (Anwenden),
 * Logs, Metriken und Traces *unterscheiden* und ein Telemetrie-Fehlszenario *zuordnen* (Analysieren),
 * einen Prompt-Cache-Miss in den Metriken *erkennen* (Analysieren),
-* Doku-Konsistenz-Drift mit einem Konsistenz-Agent *detektieren* (Bewerten — Brücke zu *Entropy Management*).
+* Doku-Konsistenz-Drift mit einem Konsistenz-Agent *detektieren* (Bewerten — Brücke zu *Entropy Management*),
+* ein Tool-Call-Audit-Span-Schema *entwerfen*, das Slice-ID, Agent-Rolle und Cache-Status trägt, sodass Token-Kosten und Forensik bis zur Anforderungs-ID rückverfolgbar sind (Erschaffen).
 
 ## Lab-Bezug
 
@@ -74,6 +75,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Welche drei Telemetrie-Typen unterscheidet der Kurs, und welche Frage beantwortet jeder?
 * Welche drei Felder muss ein Tool-Call-Span mindestens tragen?
 * Wo schlägt sich ein Prompt-Cache-Miss in den Metriken nieder?
 
@@ -81,6 +83,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Drei Telemetrie-Typen + jeweilige Frage? | nur Logs genannt | Logs (*was passierte*) · Metriken (*wie oft, wie schnell, wie viel*) · Traces (*wer rief wen, in welcher Reihenfolge*). Drei verschiedene Fragen, drei verschiedene Werkzeuge. | + Operative Folge: Wer nur Logs hat, kann Cost-Attribution nicht durchführen (braucht Metriken) und Tool-Call-Ketten nicht rekonstruieren (braucht Traces). Ein Agent-System mit nur einem Typ ist forensisch nicht antwortfähig. |
 | Drei Mindestfelder eines Tool-Call-Spans? | "Name, Zeit, Ergebnis." | `tool.name`, `tool.arguments` (redacted), `tool.result.status` plus Korrelations-IDs zu Slice/PR/Agent-Rolle. | + Begründung: Ohne `slice.id` / `requirement.id` ist Token-Attribuierung pro Slice nicht möglich; ohne `agent.role` bricht die Rollen-Trennung in der Forensik. |
 | Prompt-Cache-Miss in den Metriken — wo? | "In den Kosten." | Anstieg der Token-Eingabe-Metrik *ohne* Anstieg der Cache-Hit-Rate-Metrik (`cache.hit_ratio` fällt). | + Zweck: Cache-Miss-Spikes sind oft Injection-Symptome (variable Eingaben umgehen Cache absichtlich) — Metrik dient also gleichzeitig Kosten- *und* Sicherheitsüberwachung. |
 

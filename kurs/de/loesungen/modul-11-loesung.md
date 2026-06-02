@@ -4,6 +4,25 @@ Zugehöriges Modul: [Modul 11 — Replay und Evaluierung](../04-qualitaet/modul-
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche drei Felder muss ein Replay-Manifest mindestens festhalten?
+
+1. **Modellversion** (konkrete API-Version oder Snapshot, nicht nur Familie).
+2. **Seed** (falls der Provider Seed-Parameter unterstützt).
+3. **Eingaben** als referenzierter Datensatz (Hash + Pfad), nicht inline-Text.
+
+Pflichtfelder #4 und #5 in jedem ernsten Setup, wie im Modul-Abschnitt
+[Begriff: Image-Hash](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13)
+erklärt:
+
+4. **Image-Hash** der Toolchain — sonst lässt sich Modell-Drift nicht
+   von Toolchain-Drift trennen.
+5. **Aufnahme-Zeitpunkt** — damit spätere Läufe ihren Diff datieren
+   können.
+
+Wer nur Modell + Seed pinnt, hat ~60 % Determinismus (siehe Modul 11
+§"Typische Fehlvorstellungen"). Die fehlenden 40 % erscheinen als
+diffuse Drift, die niemand klar zuordnen kann.
+
 ### Was muss ein Replay festhalten, damit er deterministisch ist?
 
 Mindestens diese Inputs eines Agentenlaufs:
@@ -37,6 +56,31 @@ Gegenmittel:
 - Rotieren: alte Golden-Items, deren Klasse durch andere abgedeckt ist, retiren.
 - Mischformen: semantische Bewertungsmetrik *zusätzlich* zur Exact-Match. Modelle ändern Formulierung, ohne Inhalt zu ändern.
 - Mindestens eine Welle pro Quartal: "Golden-Set-Audit", wer hat zuletzt was eingespeist, was wurde nie getriggert?
+
+### (Anwenden) Zwei Drift-Quellen — welche zuerst messen?
+
+In der ersten Woche zwei konkrete:
+
+1. **Modellversion-/Routing-Drift.** Der Provider routet "gleicher Tag"
+   intern auf verschiedene Subversions — der API-Tag bleibt stabil, das
+   Verhalten driftet. Sensor: zwei Replays desselben Manifests im Abstand
+   von Tagen vergleichen, Diff betrachten.
+2. **Toolchain-Drift.** Tool-Subversion oder Image-Hash anders als im
+   Manifest — Test-Library aktualisiert, Linter strenger, Compiler
+   anders. Sensor: Image-Hash-Vergleich zwischen Manifest und aktuellem
+   Build.
+
+Warum *diese* beiden zuerst:
+
+- Beide haben einen *sofortigen* Sensor (Manifest-Vergleich).
+- Beide sind in einer Woche messbar (drei Läufe reichen für ein Signal).
+- Beide sind *Voraussetzungen* für andere Messungen. Eingabe-Distribution
+  oder Cache-Verhalten zu messen, *bevor* Modell und Toolchain stabil
+  sind, misst Rauschen.
+
+Die Reihenfolge ist nicht beliebig. Wer zuerst Eingabe-Distribution
+analysiert, sieht Drift — aber ohne Toolchain-Pinning kann er nicht
+sagen, ob das an der Distribution oder am Linter liegt.
 
 ## Übungshinweise
 

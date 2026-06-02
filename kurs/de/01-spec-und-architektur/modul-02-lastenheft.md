@@ -108,6 +108,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Welche drei Akzeptanzkriterien-Arten muss ein vollständiger `LH-FA-*`-Eintrag laut Worked Example tragen?
 * Welche drei Tests würden ein Akzeptanzkriterium falsifizieren?
 * Wo gehört "Performance < 200 ms" hin — funktional oder nichtfunktional?
 
@@ -115,6 +116,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Drei Akzeptanzkriterien-Arten eines vollständigen `LH-FA-*`? | "Tests." | Happy Path, Boundary, Negative — alle drei im Given/When/Then-Stil, ergänzt um eine explizite Out-of-Scope-Liste. | + Begründung: ohne Boundary und Negative trifft der Agent die *für dich ungünstigste* Interpretation; Out-of-Scope ist die einzige Klammer, die plausibel-Anbau verhindert. |
 | Drei Tests, die ein Akzeptanzkriterium falsifizieren? | "Tests dagegen." | Happy Path · Boundary · Negative — drei verschiedene Test*arten*, nicht drei Test*fälle*. | + Hinweis, dass Boundary/Negative die stillen Annahmen des Happy Path widerlegen — *genau die*, die ein Agent als "selbstverständlich" behandelt. |
 | "Performance < 200 ms" — funktional oder nichtfunktional? | "Nichtfunktional." | Nichtfunktional, weil ohne Lasttest nicht prüfbar; gehört in QA-Block oder `spec/spezifikation.md`. | + Abgrenzung "*Antwort innerhalb von* 200 ms" ist Latenz-*Garantie* (nichtfunktional); "System antwortet mit gültigem JSON" wäre funktional. |
 

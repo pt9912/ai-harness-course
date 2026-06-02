@@ -4,6 +4,25 @@ Zugehöriges Modul: [Modul 10 — Verification Harness](../04-qualitaet/modul-10
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche drei Eingabe-Artefakte braucht ein Verifier minimal — und wodurch unterscheiden sie sich von den Eingaben des Reviewers?
+
+**Verifier-Eingaben:** DoD · Spec · Plan.
+
+**Reviewer-Eingaben:** Plan · ADR · Diff.
+
+Schnittmenge: nur der Plan. Genau das *erzeugt* die unterschiedlichen
+Findings — Verifier prüft "Plan↔Code↔DoD↔Spec", Reviewer prüft
+"Plan↔Diff↔ADR".
+
+Wer dem Verifier *zusätzlich* den ADR übergibt, macht ihn zum zweiten
+Reviewer und verliert die Kontext-Trennung. Wer dem Reviewer *zusätzlich*
+die Spec mit DoD übergibt, macht ihn zum vorgezogenen Verifier — auch das
+bricht die Rollen-Trennung (siehe [Lösung Modul 7](modul-07-loesung.md)).
+
+Praktische Folge: Verifier braucht eine Datei mit *allen referenzierten
+Anforderungs-IDs* und ihren Akzeptanzkriterien wörtlich (nicht nur IDs).
+Ohne das vergleicht er gegen leere Container.
+
 ### Warum reicht ein grünes Testsuite-Ergebnis nicht als Verifikation?
 
 Tests prüfen *implementierte* Eigenschaften — Verification prüft, ob

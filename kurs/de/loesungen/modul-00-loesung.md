@@ -4,6 +4,21 @@ Zugehöriges Modul: [Modul 0 — Einführung](../00-einfuehrung/modul-00-einfueh
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche drei Bestandteile hat ein Tool-Call laut Mini-Glossar?
+
+`name`, `arguments`, `result`. Das ist der strukturierte Aufruf einer
+Funktion durch das LLM. Bildlich: das LLM zeigt mit dem Finger (`name`),
+übergibt eine Liste Parameter (`arguments`), und bekommt eine Antwort
+zurück (`result`).
+
+In ernsten Setups kommen Korrelationsfelder hinzu — `agent.role`,
+`slice.id`, `requirement.id` — aber das sind Erweiterungen, die in
+Modul 14 behandelt werden. Die drei Pflichtfelder stehen darüber: ohne
+sie ist es kein Tool-Call, sondern eine Texteingabe.
+
+Falle: "vier Bestandteile" (mit Zeitstempel oder Status) ist nicht
+*Definition*, sondern Telemetrie-Erweiterung. Das Minimum sind drei.
+
 ### Wo verläuft die Grenze zwischen "guter Prompt" und "guter Harness"?
 
 Ein guter Prompt verbessert *eine* Interaktion. Ein guter Harness

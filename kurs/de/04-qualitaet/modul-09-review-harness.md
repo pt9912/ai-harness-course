@@ -18,7 +18,8 @@ Nach diesem Modul kannst du:
 * Findings nach HIGH/MEDIUM/LOW/INFO *klassifizieren* und Grenzfälle (LOW↔HIGH-Wanderung) *bewerten* (Bewerten),
 * Plan-, Design- und Code-Reviews *unterscheiden* (Verstehen),
 * einen Reviewer-Lauf so *einrichten*, dass er reproduzierbar wird (gleiche Eingabe → ähnliche Findings) (Anwenden),
-* einen Konflikt zwischen zwei Reviewer-Läufen (selbes Finding, unterschiedliche Kategorie) *diagnostizieren* (Analysieren).
+* einen Konflikt zwischen zwei Reviewer-Läufen (selbes Finding, unterschiedliche Kategorie) *diagnostizieren* (Analysieren),
+* einen Reviewer-Skill für ein konkretes Repo *schreiben*, der die Klassifikation HIGH/MEDIUM/LOW/INFO mit repo-spezifischen Anker-Regeln durchsetzt (Erschaffen).
 
 ## Lab-Bezug
 
@@ -191,15 +192,19 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Welche vier Finding-Kategorien gibt es, und welche zwei davon blockieren typischerweise den Merge?
 * Wann wird aus einem LOW-Finding ein HIGH-Finding?
 * Was tust du, wenn der Reviewer-Agent dasselbe Finding zweimal mit unterschiedlicher Kategorie meldet?
+* **(Anwenden)** Du erhältst 17 Findings auf einen PR. Beschreibe deine ersten drei Aktionen — in dieser Reihenfolge.
 
 ### Selbstcheck-Rubrik
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Vier Finding-Kategorien + welche blockieren? | drei genannt, ohne Blocker-Trennung | HIGH (blockiert Merge: Sicherheit, Korrektheit, ADR-Verstoß) · MEDIUM (sollte vor Merge geklärt sein, blockiert formal nicht immer) · LOW (nice-to-fix) · INFO (Hinweis, keine Aktion). HIGH ist der harte Blocker; MEDIUM ist Soll-Blocker. | + Trennlinie LOW/MEDIUM ist im Reviewer-Skill *repo-spezifisch* zu fixieren; ohne wandert dieselbe Beobachtung zwischen Läufen — das ist der Hauptgrund, warum Reviewer-Konsistenz ohne Skill-Datei bricht. |
 | Wann LOW → HIGH? | "Wenn es wichtig wird." | Vier Trigger: Geltungsbereich erweitert (z. B. Sicherheits-Check-Pfad), Wiederholungs-Muster (3×), externe Wirkung (Compliance), Slice geht in Produktion. | + Hinweis: Wenn Reviewer/Implementer über die Kategorie streiten, ist die Klassifikations-Regel im Reviewer-Skill zu vage — das ist ein Steering-Loop-Signal, kein Reviewer-Fehler. |
 | Reviewer meldet dasselbe Finding zweimal anders kategorisiert? | "Die strengere nehmen." | Beide ernstnehmen → Differenz erklären (Kontext-Unterschied?) → Reviewer-Skill schärfen, nicht mildere/strengere Antwort auswählen. | + Anti-Antwort "Agent hat sich selbst korrigiert" — das belohnt Inkonsistenz; mildere Antwort als Wahrheit zu akzeptieren ist *Reward Hacking* der Klassifikations-Disziplin. |
+| 17 Findings — erste drei Aktionen? | sequentiell abarbeiten | (1) Nach Kategorie sortieren, HIGH zuerst lesen · (2) HIGH-Findings prüfen: ADR-Verstoß / Sicherheit / Korrektheit? gegen Plan oder gegen Spec? · (3) MEDIUM clustern, LOW/INFO erstmal überspringen — Reviewer-Skill anpassen, falls Cluster auf vage Regel hinweist. | + Falle: wer am ersten LOW-Finding hängenbleibt (typischer Fehler aus dem Engage), arbeitet HIGH-Findings nicht ab — und genau dadurch wird die Findings-Liste zur Mängelliste statt Entscheidungsvorlage. |
 
 ## Weiterlesen
 

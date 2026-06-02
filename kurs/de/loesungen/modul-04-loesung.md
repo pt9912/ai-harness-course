@@ -4,6 +4,21 @@ Zugehöriges Modul: [Modul 4 — Planning Harness](../02-planung/modul-04-planni
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Nenne die vier Lifecycle-Verzeichnisse in Reihenfolge
+
+`open/` → `next/` → `in-progress/` → `done/`.
+
+Plus zwei Rückführungen, die im Lifecycle-State-Diagramm explizit sind:
+
+- `in-progress/ → next/` — Slice ist zu groß, geht zurück zur Zerlegung.
+- `in-progress/ → open/` — Slice ist blockiert (typisch mit Carveout,
+  siehe Modul 6).
+
+Faustregel: WIP-Limit auf 1 pro Implementer. Wer mehrere Slices
+gleichzeitig in `in-progress/` hat, hat kein Lifecycle, sondern ein
+Buffet — und keinen Punkt, an dem reproduzierbar geprüft wird, ob der
+8-Schritt-Workflow durchlaufen wurde.
+
 ### Welcher Trigger bewegt einen Slice von `next/` nach `in-progress/`?
 
 Der erste Commit, der die Arbeit am Slice startet — *nicht* der Wunsch,

@@ -4,6 +4,28 @@ Zugehöriges Modul: [Modul 14 — Observability](../05-betrieb/modul-14-observab
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche drei Telemetrie-Typen unterscheidet der Kurs?
+
+| Typ | Antwortet auf | Werkzeug |
+|---|---|---|
+| **Logs** | *was* passierte | strukturierte Log-Aggregation |
+| **Metriken** | *wie oft, wie schnell, wie viel* | Prometheus/OpenMetrics-Pendant |
+| **Traces** | *wer rief wen, in welcher Reihenfolge* | OpenTelemetry/Jaeger |
+
+Drei verschiedene Fragen, drei verschiedene Werkzeuge. Sie überlappen
+sich nicht — Logs ersetzen Traces nicht, und Metriken ersetzen Logs
+nicht. Ein Agent-System mit nur einem Typ ist forensisch nicht
+antwortfähig:
+
+- *Nur Logs:* Cost-Attribution unmöglich (das ist eine Metrik-Frage),
+  Tool-Call-Ketten nicht rekonstruierbar (das ist eine Trace-Frage).
+- *Nur Metriken:* der einzelne Vorfall lässt sich nicht erzählen.
+- *Nur Traces:* die *Häufigkeit* eines Problems über Zeit verschwindet.
+
+Im Kurs gilt: alle drei Typen mit demselben `slice.id`-Korrelations-Feld,
+sodass eine Slice-Bearbeitung über Logs, Metriken und Traces hinweg
+verfolgbar ist.
+
 ### Welche drei Felder muss ein Tool-Call-Span mindestens tragen?
 
 Mindestens:

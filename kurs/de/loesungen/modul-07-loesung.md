@@ -4,6 +4,22 @@ Zugehöriges Modul: [Modul 7 — Agentenrollen](../03-agenten/modul-07-agentenro
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Nenne die sechs Rollen in Reihenfolge
+
+Planner → Architect → Implementation → Reviewer → Verifier → Validator.
+
+Die Übergaben tragen jeweils ein Artefakt — siehe Sequenzdiagramm in
+[Modul 7](../03-agenten/modul-07-agentenrollen.md#rollen-sequenz-für-einen-slice):
+Slice-Plan (P → A), ADR-Bezüge (A → P), Slice in `in-progress/` (P → I),
+PR mit Diff + Plan-Verweis (I → R), Findings (R → I), Verifikationsbeleg
+(Vf → P), Validierungsbeleg (Vl → P).
+
+Wichtig: Rollen-Trennung ist *Kontext-Trennung*, nicht Personen-Trennung.
+Eine Person kann mehrere Rollen spielen — aber nicht im selben
+Kontextfenster, sonst wiederholen sich die blinden Flecken. Wer
+implementiert hat, soll nicht im selben Lauf reviewen; wer ADRs schreibt,
+soll nicht im selben Lauf verifizieren.
+
 ### Warum braucht es Verification *und* Validation?
 
 Sie prüfen unterschiedliche Fragen:

@@ -4,6 +4,22 @@ Zugehöriges Modul: [Modul 9 — Review Harness](../04-qualitaet/modul-09-review
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche vier Finding-Kategorien gibt es, und welche zwei blockieren typischerweise den Merge?
+
+Die vier Kategorien:
+
+- **HIGH** — blockiert Merge: Sicherheits-, Korrektheits- oder ADR-Verstoß.
+- **MEDIUM** — sollte vor Merge geklärt werden; formal nicht *immer* Blocker, aber Standard-Erwartung.
+- **LOW** — nice-to-fix, blockiert nicht.
+- **INFO** — Hinweis ohne erwartete Aktion.
+
+Harter Blocker: **HIGH**. Soll-Blocker: **MEDIUM**.
+
+Die LOW/MEDIUM-Trennlinie ist *repo-spezifisch* und gehört in den
+Reviewer-Skill (`.harness/skills/reviewer.md`). Ohne Skill-Eintrag
+wandert dieselbe Beobachtung zwischen Läufen — und genau das war der
+Anlass für das Skill-Konzept im Worked Example von Modul 9.
+
 ### Wann wird aus einem LOW-Finding ein HIGH-Finding?
 
 Die Kategorie ist *kontextabhängig*. Ein und dasselbe Finding kann
@@ -30,6 +46,24 @@ Drei Schritte:
 Anti-Antwort: "Nehmen wir die mildere — Agent hat sich selbst korrigiert."
 Das ist die Falle. Der Agent ist nicht "neutraler" geworden, sondern
 sieht jetzt einen anderen Kontext — und du belohnst gerade Inkonsistenz.
+
+### (Anwenden) 17 Findings — welche ersten drei Aktionen?
+
+1. **Nach Kategorie sortieren, HIGH zuerst lesen.** Findings ohne
+   Kategorie sind Mängelliste, nicht Entscheidungsvorlage — wenn der
+   Reviewer-Agent das nicht liefert, ist sein Skill zu schwach (Modul 9
+   §"Reviewer berichtet auch, was er nicht gefunden hat").
+2. **HIGH-Findings prüfen — gegen welche Quelle?** Jedes HIGH muss eine
+   *Quelle* nennen (ADR-ID, Hard Rule, LH-ID). Wenn keine Quelle:
+   Reviewer-Skill hat keine "Klassifikations-Anker" — Steering-Loop-Eintrag.
+3. **MEDIUM-Findings clustern, LOW/INFO erstmal überspringen.** Wenn
+   mehrere MEDIUM derselben Klasse vorliegen (z. B. "fehlende
+   Negativtests in fünf Endpunkten"), wandert das Cluster nach oben — es
+   ist ein Symptom einer Spec-Lücke, kein Einzelproblem.
+
+Die Falle (siehe Engage von Modul 9): am ersten LOW-Finding hängenbleiben,
+zwei Stunden Tippfehler beheben, vier HIGH-Findings unten gehen unter.
+HIGH zuerst, immer — auch wenn die LOW-Findings einfacher aussehen.
 
 ## Übungshinweise
 

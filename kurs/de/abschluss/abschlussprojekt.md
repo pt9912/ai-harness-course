@@ -97,6 +97,13 @@ auch nicht die Phasen-Checkpoints geschafft. In dem Fall:
 [`../grundlagen/checkpoints.md`](../grundlagen/checkpoints.md) als
 Diagnose-Werkzeug nutzen, eine Phase identifizieren, dort vertiefen.
 
+Eine Übersichts­tabelle, welche Abschluss-Achse welcher Phase entstammt,
+steht im Abschnitt [Pass-Through-Logik zum
+Abschlussprojekt](../grundlagen/checkpoints.md#pass-through-logik-zum-abschlussprojekt)
+in `checkpoints.md`. Damit kann eine rudimentär-Bewertung gezielt einer
+Phase zugeordnet werden, statt zur Pauschal-Wiederholung des ganzen
+Kurses zu führen.
+
 ## Hinweise
 
 * Beginne klein. Ein Repo, eine Repo-Klasse, drei Slices reichen.

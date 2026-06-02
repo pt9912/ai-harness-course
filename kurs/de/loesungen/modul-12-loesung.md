@@ -4,6 +4,25 @@ Zugehöriges Modul: [Modul 12 — Quality Gates](../04-qualitaet/modul-12-qualit
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Nenne fünf generische Gate-Familien
+
+1. **Linter** — Stil und lokale Mustererkennung.
+2. **Typecheck** — Statische Typen, Compiler-Schicht.
+3. **Architekturtest** — Schichtungs- und Import-Regeln (`arch-check`).
+4. **Coverage** — Test-Abdeckung (mit Critical-Variante).
+5. **Security-Gate** — Datenfluss- und Vulnerability-Analyse (Semgrep,
+   CodeQL, Bandit).
+
+Über die fünf hinaus wachsen *domänenspezifische* Gates aus dem
+Steering Loop heraus (siehe Modul 12 §"Reichhaltige Gate-Landschaft"):
+`test-determinism`, `test-replay`, `solid-suppression-gate`,
+`test-mpc-property`, `native-sanitizer`. Diese sind nicht Standard,
+sondern aus konkreten Vorfällen entstanden.
+
+Faustregel: Ein Repo mit nur den fünf generischen Gates hat noch keine
+Schmerzen verarbeitet. Es ist kein schlechtes Repo — aber es hat keine
+*spezifische* Steering-Loop-Historie.
+
 ### Warum braucht es Critical Coverage zusätzlich zur Gesamt-Coverage?
 
 Gesamt-Coverage ist ein Durchschnitt — sie ist über alle Dateien
@@ -36,6 +55,28 @@ das Architektur-Gate — *vor* dem Security-Gate.
 Faustregel: Wenn dein Security-Gate eine SQL-Injection im
 Production-Code findet, war die Schichtung lückenhaft. Security-Gates
 sollen Reste fangen, nicht das Hauptpensum tragen.
+
+### (Anwenden) Drei Vorbedingungen vor einem neuen Gate
+
+Bevor du das Make-Target schreibst:
+
+1. **Anforderungs- oder ADR-Bezug.** Welcher `LH-*`/`ADR-*` rechtfertigt
+   das Gate? Ohne diesen Bezug ist es ein Vorschlag, kein Vertrag. Das
+   Make-Target trägt die ID im Kommentar: `coverage-gate-critical: ## LH-QA-CRIT-003 / ADR-0014`.
+2. **Begründete Schwelle.** Die Zahl (40 %, 70 %, 90 %) braucht eine
+   Begründung — entweder in einer ADR ("Sicherheits-Pfad: 90 % wegen
+   LH-QA-SEC-001") oder als bootstrap-aware Stufung mit Trigger.
+   Schwellen ohne Begründung wandern unter Druck nach unten.
+3. **Lokal-CI-Parität.** Das Gate läuft in einem Image, dessen Hash
+   lokal und im CI identisch ist (Modul 13). Andernfalls debuggst du
+   *nicht* den Gate-Verstoß, sondern den Image-Unterschied — ein
+   Tagesgeschäft, das niemand will.
+
+Falle: "Tool installieren, ausführen, fertig". Ohne die drei
+Vorbedingungen ist das Gate ein lokaler Verbesserungswunsch, der im
+nächsten Repo-Refactor verschwindet. Mit den drei Vorbedingungen ist es
+eine traceable Anforderung mit Sensor — und das ist genau die Bauart,
+die der Kurs lehrt.
 
 ## Übungshinweise
 

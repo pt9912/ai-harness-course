@@ -65,6 +65,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Welche drei Antwortoptionen prüft das Runbook bei einem produktiven Incident?
 * Welche Telemetrie brauchst du, um einen Prompt-Injection-Versuch nachträglich zu erkennen?
 * Wann ist Rollback der falsche Reflex?
 
@@ -72,6 +73,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Drei Runbook-Optionen bei Incident? | "Rollback oder weitermachen." | Rollback · Fix-Forward · Datenkorrektur. Drei *verschiedene* Antwortklassen, mit jeweils anderen Voraussetzungen (Rückwärtskompatibilität, Test-Coverage des Fix, Vorhandensein des Originaldatensatzes). | + Hinweis: Welche der drei greift, ist *vor* dem Incident im Runbook festzulegen — mit Triggern wie "DB-Migration rückwärtskompatibel?" und "Buggy-Daten bereits ausgeliefert?". Wer im Incident wählt, wählt typischerweise unter Stress die teuerste Option. |
 | Telemetrie für nachträgliche Injection-Erkennung? | "Logs." | Drei Spuren: Eingabe-Roh-Logging (mit Redaction), Tool-Call-Audit-Log, Output-vs-Eingabe-Konsistenz-Marker. | + Ergänzende Indikatoren: Cache-Miss-Spike, Tool-Allowlist-Reject-Counter — ohne mindestens *eines* der drei Pflicht-Felder bleibt Erkennung Glücksache. |
 | Wann ist Rollback der falsche Reflex? | "Wenn es nicht hilft." | Drei Szenarien: nicht-rückwärtskompatible DB-Migration, bereits erzeugte Buggy-Daten, ungetesteter Rollback-Pfad. | + Folge: Rollback gehört *vor* den Incident im Runbook entschieden — als bedingte Regel mit Trigger, nicht als Universal-Reflex. Wer im Incident entscheidet, entscheidet schlecht. |
 

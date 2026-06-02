@@ -33,6 +33,25 @@ Nach diesem Modul kannst du:
 * Bewertungsmetriken (Exact-Match, semantisch, rubric-based)
 * Domänen-Test-Typen jenseits "Unit/Integration": *determinism*, *replay*, *fault* als eigene Make-Targets (Beispiel grid-gym: `make test-determinism`, `make test-replay`, `make test-fault`)
 
+## Begriff: Image-Hash (Vorgriff aus Modul 13)
+
+Dieses Modul referenziert mehrfach den *Image-Hash* — das volle Bild
+liegt in [Modul 13 (Docker-Harness)](../05-betrieb/modul-13-docker-harness.md),
+hier reicht eine operative Kurzdefinition:
+
+Der Image-Hash (typischerweise ein SHA-256 wie `sha256:9c7f…`) ist die
+**byte-genaue Adresse eines Container-Images**. Gleicher Hash heißt:
+identische Toolchain, identische Python-/Go-/.NET-Version, identische
+System-Bibliotheken — und damit identischer Replay-Lauf. Anders als ein
+Tag (`my-image:latest`), der sich überschreiben lässt, ist ein Hash
+**unveränderlich**. Wer einen Replay-Lauf festhalten will, fixiert nicht
+"das Image", sondern *den Hash dieses Images*.
+
+Praktisch heißt das: Im Replay-Manifest wird neben Modellversion und
+Seed auch der Image-Hash mitprotokolliert. Drift zwischen zwei Läufen
+mit identischem Hash ⇒ liegt am Modell oder an Eingaben, nicht an der
+Toolchain. Drift mit unterschiedlichem Hash ⇒ Toolchain-Verdacht zuerst.
+
 ## Kernidee
 
 Ohne Replay ist jeder Agenten-Lauf ein einmaliges Experiment. Mit Replay
@@ -66,15 +85,19 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Welche drei Felder muss ein Replay-Manifest mindestens festhalten?
 * Was muss ein Replay festhalten, damit er deterministisch ist?
 * Wann wird ein Golden Set giftig (überfittet)?
+* **(Anwenden)** In deinem eigenen Repo: welche zwei Drift-Quellen würdest du *zuerst* messen, wenn du nur eine Woche Zeit hast?
 
 ### Selbstcheck-Rubrik
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Drei Pflichtfelder eines Replay-Manifests? | "Modell." | Modellversion · Seed · Eingaben (Inputs als referenzierter Datensatz, nicht als Inline-Text). | + Pflichtfeld Nummer 4 in jedem ernsten Setup: Image-Hash (siehe Abschnitt oben) — sonst lässt sich Drift nicht von Toolchain-Drift trennen. Pflichtfeld Nummer 5: Zeitpunkt der Aufnahme (für Diff zu späteren Läufen). |
 | Was braucht ein deterministischer Replay? | "Seed." | Modellversion + Seed + Inputs *und* Tool-Versionen + Zeitstempel-Maskierung + Image-Hash (Docker-Harness, Modul 13). | + Hinweis: wer nur Seed pinnt, hat ~60 % Determinismus. Reale Drift-Quellen: Tool-Subversions, Lokale-Zeit, Netz-Latenz, Modell-Routing innerhalb derselben Version. |
 | Wann wird ein Golden Set giftig? | "Wenn es nicht passt." | Wenn Replay reproduzierbar grün ist, aber Realität rot — typisch durch jahrelang konstantes Set. Symptome: keine Failure-Klasse seit X Wochen, neue Eingabe-Klassen tauchen *nur* in Produktion auf. | + Gegenmaßnahmen: Rotation (alte Beispiele rausnehmen), Sampling aus Produktions-Traces, Adversarial-Beispiele aus Steering-Loop-Einträgen ([`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) ziehen. |
+| Zwei Drift-Quellen — welche zuerst? | "Modell ändert sich." | Zwei konkrete: (a) Modellversion-/Routing-Drift (gleicher Tag, anderes Subroute beim Provider) und (b) Toolchain-Drift (Tool-Subversion oder Image-Hash anders als geplant). Beide sind in der ersten Woche messbar, beide haben einen sofortigen Sensor (Replay-Manifest-Vergleich). | + Begründung: andere Quellen (Eingabe-Distribution, Tool-Allowlist-Drift, Cache-Verhalten) sind nachgelagert — wer sie misst, bevor Modell und Toolchain gepinnt sind, misst Rauschen. Reihenfolge ist nicht beliebig. |
 
 ## Weiterlesen
 

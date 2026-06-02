@@ -4,6 +4,24 @@ Zugehöriges Modul: [Modul 3 — Architektur und ADRs](../01-spec-und-architektu
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche vier Pflichtabschnitte hat ein MADR-ADR?
+
+**Kopf-Felder:** Titel mit ADR-Nummer, Status (Proposed/Accepted/
+Deprecated/Superseded), Datum, Bezug (LH-/HSM-ID).
+
+**Body-Blöcke:**
+
+1. **Kontext** — was war die Situation, was hat die Entscheidung ausgelöst?
+2. **Optionen** — *mit Trade-offs*, mindestens zwei, idealerweise drei.
+3. **Entscheidung** — welche Option, warum (verweist auf Kontext und Trade-offs).
+4. **Konsequenzen** — was folgt operativ daraus, idealerweise inklusive
+   Fitness-Function-Verweis.
+
+Die *Optionen*-Sektion ist der häufigste Drift-Punkt. Eine ADR ohne
+Optionen ist ein Postulat — sie hält fest, *was* entschieden wurde, aber
+nicht *warum gerade so und nicht anders*. Reviewer-Agenten können
+solche ADRs nicht verteidigen, weil ihnen die Vergleichsbasis fehlt.
+
 ### Wann wird aus einer ADR eine Architekturtest-Regel?
 
 Sobald die ADR-Entscheidung sich in einer maschinell prüfbaren
@@ -36,6 +54,29 @@ Praxis: *Deprecated* ohne Folge-Plan ist meistens *Superseded* ohne
 Nachfolger — also eine Lücke. Wenn du nur "deprecated" schreibst und
 keine Migrationstrigger benennst, gehört das in den Steering Loop:
 entweder ADR-Folge-Slice oder Carveout.
+
+### (Anwenden) Fitness-Function-Übersetzung in einem Satz
+
+Eine gute Übersetzung hat drei Bestandteile:
+
+1. **Strukturelle Aussage** — "Komponente/Datei/Layer X darf (nicht) Y".
+2. **Werkzeug** — ArchUnit (Java/Kotlin), dep-cruiser (Node), import-linter
+   (Python), depguard (Go).
+3. **Gate-Verdrahtung** — als `make`-Target sichtbar (`make arch-check`),
+   im CI gerötet wenn die Regel bricht.
+
+Beispiele (jeweils ein Satz):
+
+- ADR-7 ("Service über Adapter"): "Keine Datei unter `src/service/**`
+  darf `requests`, `urllib3` oder `httpx` importieren — `import-linter`
+  Contract, `make arch-check`."
+- ADR "Modul Layering": "Klassen in `runtime.*` dürfen nicht von Klassen
+  in `service.*` aufgerufen werden — ArchUnit-Predikat, `make arch-test`."
+
+Wenn dir kein einzelner Satz einfällt: die ADR ist zu vage. "Lose
+Kopplung anstreben" ist nicht prüfbar; "Layer A importiert nicht aus
+Layer B" ist prüfbar. Vage ADRs erzeugen Reviewer-Last; präzise ADRs
+erzeugen Gates.
 
 ## Übungshinweise
 

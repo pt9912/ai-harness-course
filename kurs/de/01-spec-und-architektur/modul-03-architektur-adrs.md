@@ -136,15 +136,19 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Welche vier Pflichtabschnitte hat ein MADR-ADR (Kopf-Felder + Body-Blöcke)?
 * Wann wird aus einer ADR eine Architekturtest-Regel?
 * Was ist der Unterschied zwischen *superseded* und *deprecated* ADR?
+* **(Anwenden)** Nimm eine ADR aus dem Lab oder einem eigenen Repo — formuliere in einem Satz, *was* eine Fitness Function maschinell prüfen würde, wenn du sie dazu schreiben müsstest.
 
 ### Selbstcheck-Rubrik
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Vier MADR-Pflichtabschnitte? | "Titel, Text." | Kopf-Felder (Status, Datum, Bezug, ggf. Supersedes) + Body-Blöcke (Kontext, Optionen mit Trade-offs, Entscheidung, Konsequenzen). | + Eine fehlende *Optionen*-Sektion ist die häufigste Drift: dann ist die ADR ein Postulat, kein Entscheidungsprotokoll — und Reviewer kann sie nicht verteidigen. |
 | Wann wird aus einer ADR eine Architekturtest-Regel? | "Wenn man sie prüfen will." | Wenn die ADR-Aussage maschinell formulierbar ist (Modul `X` darf `Y` nicht importieren; Layer `A` ruft `B` nicht direkt auf); Übersetzung in ArchUnit/dep-cruiser/import-linter. | + Hinweis, dass ohne Fitness Function die ADR Absichtserklärung bleibt; und dass *jede* ADR diese Frage beantworten muss — auch wenn die Antwort "lässt sich nicht maschinell prüfen" lautet. |
 | *Superseded* vs. *deprecated* ADR? | "Beides bedeutet alt." | Superseded: durch konkrete Nachfolge-ADR ersetzt (mit ID-Bezug). Deprecated: nicht mehr gültig, aber kein Ersatz benannt. | + Folge für Reviewer: superseded → Reviewer prüft gegen Nachfolger; deprecated → Reviewer markiert als Lücke und fordert Folge-ADR. |
+| Fitness-Function-Übersetzung in einem Satz? | "Test schreiben." | Eine maschinell prüfbare Aussage in der Form "Komponente/Datei/Layer X darf (nicht) Y" — mit konkretem Werkzeug (ArchUnit/dep-cruiser/import-linter) und konkreter Gate-Verdrahtung (`make arch-check`). | + Wenn dir kein Satz einfällt: ADR-Aussage ist zu vage formuliert (nicht "lose koppeln", sondern "Service-Layer importiert nicht aus `runtime.*`"). Vage ADRs sind unprüfbare ADRs. |
 
 ## Weiterlesen
 

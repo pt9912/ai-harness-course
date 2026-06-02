@@ -4,6 +4,26 @@ Zugehöriges Modul: [Modul 5 — Roadmap Engineering](../02-planung/modul-05-roa
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche drei Bestandteile braucht ein Welle-Eintrag minimal?
+
+1. **Slice-IDs** — die Inhalte der Welle, jeweils mit `LH-*`/`HSM-*`-Bezug.
+2. **Trigger** — beobachtbare Bedingung für Start/Closure (z. B. "ADR-7
+   akzeptiert", "Replay grün gegen Golden Set v2"). *Kein Datum.*
+3. **Closure-Kriterien** — was muss erreicht sein, damit die Welle als
+   *done* gilt (alle Slices in `done/`, Replay grün, Closure-Einträge
+   geschrieben).
+
+Ein Datum darf in der Roadmap *erwähnt* werden — als Prognose,
+nachdem die Wellen geschnitten sind. Sobald das Datum zum Trigger wird,
+kappt die Welle halbfertige Slices am Kalendertag und das
+Auditierbarkeits-Versprechen bricht: in `done/` landen dann Slices,
+deren DoD nur "wegen Datum" akzeptiert wurde.
+
+Falle: Wer eine Welle nur über "Slice-Liste" und "Datum" definiert, hat
+keinen Welle-Eintrag, sondern einen Sprint. Sprint ist legitim — aber
+dann gehört das in eine separate operationale Ebene, nicht in die
+Roadmap.
+
 ### Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
 
 Es kommt darauf an, *warum* die Schätzung daneben lag. Drei Diagnosen,

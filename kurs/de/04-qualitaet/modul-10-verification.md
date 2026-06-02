@@ -73,6 +73,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Welche drei Eingabe-Artefakte braucht ein Verifier minimal — und wodurch unterscheiden sie sich von den Eingaben des Reviewers?
 * Warum reicht ein grünes Testsuite-Ergebnis nicht als Verifikation?
 * Wer löst den Konflikt, wenn Verification rot, Review grün ist?
 
@@ -80,6 +81,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Drei Verifier-Eingaben + Abgrenzung zu Reviewer? | "Code und Plan." | Verifier: DoD + Spec + Plan. Reviewer: Plan + ADR + Diff. Schnittmenge ist nur der Plan — die Trennung erzeugt die unterschiedlichen Findings. | + Hinweis: Wer dem Verifier *zusätzlich* den ADR gibt, macht ihn zum zweiten Reviewer und verliert die Kontext-Trennung. Verifier prüft "Plan↔Code↔DoD↔Spec", Reviewer prüft "Plan↔Diff↔ADR". |
 | Warum reichen grüne Tests nicht? | "Tests sind unvollständig." | Tests prüfen, ob Code tut, was *Tests testen*. Verifikation prüft, ob Code tut, was *Plan/DoD/Spec verlangt*. Tests können Spec-Lücken nicht selbst erkennen. | + Hinweis auf Behaviour-Kategorie (Modul 11): Tests gegen Beispiele decken Realität *nur* da ab, wo das Golden Set repräsentativ ist; Verifikation gegen Spec wird daher *nicht* von Tests ersetzt. |
 | Verification rot, Review grün — wer entscheidet? | "Der Architekt." | Architect-Rolle prüft: hat Reviewer gegen veralteten Plan geprüft, oder ist der Plan unvollständig? Konflikt löst sich entweder als Folge-ADR oder als Plan-Update — *nicht* als "wir nehmen das mildere Ergebnis". | + Folge: Wenn dieses Pattern dreimal auftritt, liegt eine Lücke in der Plan→Review-Kette (Reviewer bekommt nicht den aktuellen Plan als Eingabe). Steering-Loop-Aktion: Plan-Verteilung an Reviewer als Schritt im 8-Schritt-Workflow. |
 

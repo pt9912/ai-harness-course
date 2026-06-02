@@ -4,6 +4,21 @@ Zugehöriges Modul: [Modul 2 — Lastenheft und Spezifikation](../01-spec-und-ar
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche drei Akzeptanzkriterien-Arten muss ein vollständiger `LH-FA-*`-Eintrag tragen?
+
+Happy Path, Boundary, Negative — alle drei im Given/When/Then-Stil.
+Plus eine *explizite* Out-of-Scope-Liste pro Anforderung.
+
+Die Out-of-Scope-Liste ist kein optionaler Anhang, sondern Teil des
+Akzeptanzkriteriums. Sie verhindert plausibel-Anbau: was nicht explizit
+ausgeschlossen ist, baut der Agent mit. Out-of-Scope ist *die* Klammer
+gegen "wir hatten das nie gefordert"-PRs.
+
+Falle: drei *Test-Fälle* zu liefern (drei Happy-Path-Varianten) ist
+nicht das gleiche wie drei *Test-Arten*. Die Arten sind orthogonal — sie
+prüfen drei *verschiedene Klassen von Annahmen*, nicht drei verschiedene
+Eingabewerte derselben Klasse.
+
 ### Welche drei Tests würden ein Akzeptanzkriterium falsifizieren?
 
 Ein Akzeptanzkriterium ist gut, wenn man es mit drei *unterschiedlichen

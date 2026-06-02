@@ -4,6 +4,24 @@ Zugehöriges Modul: [Modul 6 — Carveout Management](../02-planung/modul-06-car
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche zwei Pflichtfelder hat jeder temporäre Carveout?
+
+1. **Auflösungs-Trigger** — eine *beobachtbare* Bedingung. "Sobald wir
+   Zeit haben" zählt nicht; "wenn `pkg/x` > 500 LOC", "Meilenstein M2",
+   "Bibliothek Y bietet Funktion Z" zählen.
+2. **Folge-Slice mit ID** — der Slice, der die Auflösung übernimmt
+   (auch wenn er noch in `open/` liegt). Slice schlägt Memo.
+
+Fehlt eines der beiden Felder, ist der Carveout *de facto* permanent —
+er bleibt liegen, und das Repo lügt unter "temporär". Konsequenz: Wenn
+ein temporärer Carveout mehrfach an seinem Auflösungs-Datum vorbei läuft,
+ist er kein temporärer mehr und muss offen als permanent klassifiziert
+oder in eine ADR überführt werden.
+
+Permanente Carveouts brauchen *kein* Trigger-Feld und keinen Folge-Slice,
+aber eine technische Begründung — sonst sind sie versteckte
+Architekturentscheidungen.
+
 ### Wann darf ein Carveout das `make gates`-Ziel grün halten, und wann nicht?
 
 Grün halten ist erlaubt, wenn:

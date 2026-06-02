@@ -4,6 +4,21 @@ Zugehöriges Modul: [Modul 1 — Der Entwicklungszyklus](../01-spec-und-architek
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Nenne die sieben Stationen des Lebenszyklus in Reihenfolge
+
+Spec → ADR → Plan → Code → Review → Verifikation → Closure.
+
+Wichtig sind nicht nur die sieben Stationen, sondern auch die drei
+*Rückwärtspfade* aus dem Diagramm in Modul 1:
+
+- Closure → Spec/ADR (Lerneintrag aus dem abgeschlossenen Slice).
+- Verifikation → Spec (entdeckte Spec-Lücke).
+- Review → ADR (entdeckter Folge-ADR-Bedarf).
+
+Ohne Rückwärtspfade ist es eine Liste, keine Kette. Eine Liste ist nicht
+auditierbar — Auditierbarkeit verlangt, dass jeder Schritt nach oben
+(Begründung) und nach unten (Konsequenz) verweist.
+
 ### Welche Information darf nur in der Spec stehen, welche nur im ADR?
 
 **Nur in der Spec** gehört: *was* gebaut wird, *für wen*, mit welchen

@@ -76,6 +76,7 @@ Nach beiden Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md) du
 
 ## Selbstcheck
 
+* **(Erinnern)** Welche drei Bestandteile hat ein Tool-Call laut Mini-Glossar?
 * Wo verläuft die Grenze zwischen "guter Prompt" und "guter Harness"?
 * Welche Fehlermodi eines Agenten kann ein Linter *nicht* fangen?
 
@@ -85,6 +86,7 @@ Schema in [`../grundlagen/selbstcheck-rubrik.md`](../grundlagen/selbstcheck-rubr
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Drei Bestandteile eines Tool-Calls? | "Name und Argumente." | `name`, `arguments`, `result` — strukturierter Aufruf einer Funktion durch das LLM. | + Anwendung: ohne `result`-Feld kann der Verifier den Lauf nicht reproduzieren; ohne `arguments` ist Token-Attribution unmöglich. Diese drei sind das Minimum, *bevor* Korrelations-IDs (Slice, Agent-Rolle) dazukommen — Modul 14 erweitert. |
 | Grenze "guter Prompt" ↔ "guter Harness"? | "Harness ist umfangreicher." | Prompt verbessert *eine* Interaktion; Harness verbessert *jede zukünftige Interaktion derselben Klasse*. | + Test "wäre die Anweisung in *jedem* Lauf relevant?" und Verweis auf AGENTS.md/Fitness Function als Ablage. |
 | Fehlermodi, die ein Linter *nicht* fängt? | "Semantik." | Drei Klassen: semantische Halluzination, ADR-Verstoß, Spec-Lücken-Symptom. | + zwei weitere (implizite Annahmen, Sicherheits-Anti-Pattern im Fremdkontext) und Zuordnung zu Sensor-Typen (Compiler/ArchUnit/Verifier/Replay/Security-Gate). |
 

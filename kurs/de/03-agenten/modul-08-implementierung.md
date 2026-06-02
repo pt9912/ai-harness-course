@@ -136,17 +136,21 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
+* **(Erinnern)** Nenne die acht Schritte des Minimal Agent Workflow in Reihenfolge.
 * Welche Eingaben braucht ein Implementation-Agent minimal, um nicht zu halluzinieren?
 * Wann ist ein Implementation-Agent fertig — wenn der Code kompiliert, oder wenn die DoD erfüllt ist?
 * Welche deiner Hard Rules wandert in welche Quadranten der 2×2-Matrix?
+* **(Anwenden)** Welcher Schritt des 8-Schritt-Workflows ist in deinem eigenen Repo heute am schwächsten verankert — und woran erkennst du das?
 
 ### Selbstcheck-Rubrik
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
+| Acht Workflow-Schritte in Reihenfolge? | fünf oder weniger genannt | (1) `harness/README.md` lesen · (2) kanonische Quelle · (3) Requirement-/ADR-IDs · (4) kleinste Änderung planen · (5) engster Sensor · (6) `make gates` · (7) Doku/Indizes · (8) Bericht über Sensors + Restrisiken. | + Rücksprungkanten benannt: 5→4 und 6→4 (Plan wird *verfeinert*, nicht Kontext neu gelesen). Wer rückläufig zu Schritt 1 springt, hat keinen Plan-Defekt, sondern einen Kontext-Defekt — das ist eine andere Ursache. |
 | Minimale Eingaben gegen Halluzination? | "Klare Anweisung." | `harness/README.md` + relevante kanonische Quelle + Requirement/ADR-IDs + AGENTS.md + Tool-Allowlist. | + Hinweis Lopopolo: "anything it can't access in-context doesn't exist" — fehlende Eingaben werden *durch Raten ersetzt*, nicht durch Schweigen. |
 | Fertig: Code kompiliert oder DoD erfüllt? | "DoD." | DoD-erfüllt + Schritt 8 ausgeführt (Bericht über Sensors + Restrisiken). Kompilierender Code ist notwendig, nicht hinreichend. | + Folge: ohne Schritt-8-Bericht wird jedes Risiko in die nächste Rolle (Reviewer/Verifier) verlagert — das bricht die Kontext-Trennung der Rollen. |
 | Hard Rules ↔ Quadranten der 2×2-Matrix? | "Inferentielle Feedforward." | Jede Hard Rule liegt in *zwei* Quadranten: inferential feedforward (steht in AGENTS.md) + computational feedback (Fitness Function/Linter-Gate). | + Hard Rule nur in einem Quadranten ist halb durchgesetzt; nur in AGENTS.md vergisst der Agent sie unter Druck, nur als Fitness Function ohne AGENTS.md-Eintrag versteht der Agent das *Warum* nicht. |
+| Schwächster Schritt im eigenen Repo? | konkret benannt, aber ohne Beleg | Konkret benannter Schritt (z. B. Schritt 7: Doku-Update bleibt liegen) + Beleg (z. B. `harness/README.md` wurde seit 6 Wochen nicht angepasst, obwohl drei Gate-Targets sich änderten). | + Steering-Loop-Eintrag formuliert: was im Harness verändert wird, damit Schritt X beim nächsten Lauf nicht mehr schwächster Schritt ist (z. B. Doku-Konsistenz-Agent als Drift-Sensor, Modul 14). |
 
 ## Weiterlesen
 

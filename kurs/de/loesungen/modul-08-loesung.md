@@ -4,6 +4,29 @@ Zugehöriges Modul: [Modul 8 — Implementierung durch KI-Agenten](../03-agenten
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Nenne die acht Schritte des Minimal Agent Workflow
+
+1. `harness/README.md` lesen.
+2. Relevante kanonische Quelle lesen (Source Precedence beachten).
+3. Betroffene Requirement-/ADR-IDs identifizieren.
+4. Kleinste sinnvolle Änderung planen.
+5. Engsten nützlichen Sensor laufen lassen (z. B. nur eine Testdatei).
+6. Repo-weiten Gate-Lauf vor Handoff (`make gates`).
+7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt ist.
+8. Ausgeführte Sensors und verbleibende Risiken berichten — keine
+   Erfolgsmeldung ohne Gate-Ausführung.
+
+Wichtig sind die *Rücksprungkanten* aus dem Diagramm in Modul 8:
+**5 → 4** (Sensor rot ⇒ Plan verfeinern, nicht Code blind reparieren) und
+**6 → 4** (`make gates` rot ⇒ wieder Plan verfeinern). Es gibt *keine*
+Rücksprungkante zu Schritt 1 oder 2 — wer dort hinspringt, hat keinen
+Plan-Defekt, sondern einen Kontext-Defekt; das ist eine andere Ursache
+und braucht eine andere Aktion (typisch: AGENTS.md schärfen).
+
+Häufiger Fehler: Schritt 7 und 8 werden unter Zeitdruck weggelassen.
+Damit wird das Modul-Versprechen "Plan → Diff → Code" zur "Diff →
+Code"-Schleife — und die Risiken werden in die nächste Rolle verlagert.
+
 ### Welche Eingaben braucht ein Implementation-Agent minimal, um nicht zu halluzinieren?
 
 Mindestens diese sechs:
@@ -54,6 +77,28 @@ Beispielzuordnung (Übung aus dem Modul). Quadranten gemäß
 Die wertvollsten Hard Rules sind die, die *in mehrere Quadranten*
 fallen — sie sind redundant durchgesetzt und überleben einen
 einzelnen Tooling-Ausfall.
+
+### (Anwenden) Welcher Schritt deines Workflows ist heute am schwächsten verankert — woran erkennst du das?
+
+Eine ehrliche Antwort hat drei Bestandteile:
+
+1. **Konkret benannter Schritt.** Nicht "Plan ist immer schwach", sondern
+   "Schritt 7 (Doku/Indizes-Update) bleibt regelmäßig liegen" oder
+   "Schritt 5 (engster Sensor) wird übersprungen, alle laufen direkt
+   `make gates`".
+2. **Beobachtbarer Beleg.** Beispiele: `harness/README.md` ist seit
+   sechs Wochen unverändert, obwohl drei Gate-Targets sich geändert
+   haben (Schritt 7); Mittlere Zeit pro Slice ist auf das Doppelte
+   gestiegen, weil zu früh `make gates` läuft (Schritt 5 fehlt);
+   Schritt-8-Bericht enthält in 4 von 5 PRs identischen Text (Kabuki).
+3. **Steering-Loop-Eintrag.** Eine konkrete Harness-Änderung, die das
+   beim nächsten Lauf verhindert — z. B. Doku-Konsistenz-Agent als
+   Drift-Sensor (Modul 14), oder Pre-completion Checklist Middleware
+   mit Pflichtfeld für *einen* spezifischen Akzeptanzkriterium-Beleg.
+
+Falle: "Ich bin nicht diszipliniert genug" ist eine Anti-Antwort aus
+der Reflexionsvorlage. Die Frage ist nicht *wer*, sondern *was am
+Harness* den Schritt schwach hält.
 
 ## Übungshinweise
 

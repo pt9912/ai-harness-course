@@ -4,6 +4,29 @@ Zugehöriges Modul: [Modul 15 — Produktiver Betrieb](../05-betrieb/modul-15-pr
 
 ## Selbstcheck-Antworten
 
+### (Erinnern) Welche drei Antwortoptionen prüft das Runbook bei einem Incident?
+
+1. **Rollback** — Code-Version zurückspielen.
+2. **Fix-Forward** — Bugfix einspielen, vorhandenen Stand belassen.
+3. **Datenkorrektur** — am bereits geschriebenen Datensatz arbeiten,
+   meist parallel zu (1) oder (2).
+
+Drei *verschiedene* Antwortklassen, mit jeweils unterschiedlichen
+Voraussetzungen:
+
+- Rollback verlangt Rückwärtskompatibilität von DB-Schema und Config sowie
+  einen *getesteten* Rollback-Pfad.
+- Fix-Forward verlangt eine getestete Fix-Variante und Vertrauen in die
+  Test-Coverage des Fixes.
+- Datenkorrektur verlangt einen Original-Datensatz oder
+  rekonstruierbares Audit-Log.
+
+Welche der drei greift, gehört *vor* den Incident ins Runbook — mit
+Triggern wie "DB-Migration rückwärtskompatibel? → Rollback möglich" und
+"Buggy-Daten bereits ausgeliefert? → Datenkorrektur Pflicht". Wer im
+Incident unter Stress wählt, wählt typischerweise die teuerste oder
+falsch-greifende Option (siehe Häufige Fehler).
+
 ### Welche Telemetrie brauchst du, um einen Prompt-Injection-Versuch nachträglich zu erkennen?
 
 Mindestens drei Spuren:
