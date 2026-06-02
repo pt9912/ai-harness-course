@@ -4,7 +4,7 @@ Dieses Verzeichnis ist das **Begleit-Lab** zum Kurs unter
 [`/kurs/de/`](../kurs/de/README.md). Es liefert:
 
 1. **Templates** (`templates/`): leere Skelett-Vorlagen mit Pflicht-Gliederung für alle Dokumenttypen des Kurses (Spec, ADR, Slice, Welle, Roadmap, Carveout, AGENTS.md, `harness/README.md`).
-2. **Beispiel** (`example/`): ein voll ausgefülltes Beispiel-Repo mit konsistenten IDs, mindestens einem geschlossenen Slice, einem fingierten kaputten Slice für [Modul 9](../kurs/de/04-qualitaet/modul-09-review-harness.md) und einem Replay-Beispiel für [Modul 11](../kurs/de/04-qualitaet/modul-11-replay-evaluierung.md).
+2. **Beispiel** (`example/`): ein voll ausgefülltes Beispiel-Repo mit konsistenten IDs, mindestens einem geschlossenen Slice, geführten Übungsfixtures, einem fingierten kaputten Slice für [Modul 9](../kurs/de/04-qualitaet/modul-09-review-harness.md), einem Replay-Beispiel für [Modul 11](../kurs/de/04-qualitaet/modul-11-replay-evaluierung.md), Trace- und Runbook-Fixtures für Phase 5.
 3. **Sprach-Skelette** (`example/{go,python,kotlin,java,csharp}/`, kommen in Phase C): fünf lauffähige Implementierungs-Skelette mit eigener Toolchain (Linter, Typecheck, Architekturtest, Coverage, Container) und einheitlichem `make gates`-Vertrag.
 
 ## Lernweg
@@ -35,6 +35,7 @@ lab/
 │   └── AGENTS.template.md
 │
 └── example/                   voll ausgefülltes Beispiel-Repo
+    ├── Makefile                  Root-Harness-Targets für Module 8, 10, 11, 14, 15
     ├── README.md
     ├── AGENTS.md
     ├── harness/README.md
@@ -42,10 +43,13 @@ lab/
     ├── docs/plan/
     │   ├── adr/{README.md, 0001-*.md, …}
     │   ├── planning/{open,next,in-progress,done}/
-    │   ├── roadmap.md
+    │   ├── planning/in-progress/roadmap.md
     │   └── carveouts/{README.md, CO-001-*.md}
-    ├── exercises/09-review-fixture/    (kaputter Slice für Modul 9)
+    ├── exercises/                 (geführte Übungen für Module 0, 2, 3, 8, 9)
+    ├── verification/checks/       (DoD-/Traceability-Checks für Modul 10)
     ├── evals/golden/                   (Replay-Beispiel für Modul 11)
+    ├── otel/                           (Trace-Fixture für Modul 14)
+    ├── runbooks/                       (Release/Incident-Fixtures für Modul 15)
     │
     └── {go,python,kotlin,java,csharp}/  (Phase C — fünf Sprach-Skelette)
         Makefile · Dockerfile · AGENTS.md · harness/README.md · …
@@ -76,6 +80,22 @@ cd lab/example/go         # oder python, kotlin, java, csharp
 make build                # Docker-Image bauen
 make gates                # alle Quality Gates
 ```
+
+Root-Harness-Targets für die späteren Module:
+
+```bash
+cd lab/example
+make agent-implement SLICE=slice-009
+make agent-review
+make verify SLICE=slice-009
+make replay RUN=welle-1-baseline
+make trace RUN=sl-009-agent-run
+make release
+```
+
+Für die Root-Targets `gates`, `ci` und `fullbuild` kann das
+Sprachskelett mit `COURSE_LANG=go|python|kotlin|java|csharp` gewählt
+werden.
 
 Jedes Skelett implementiert dasselbe Lab-Beispiel (DocSearch) in der
 jeweiligen Sprache — der Lerner sieht den Kontrast zwischen

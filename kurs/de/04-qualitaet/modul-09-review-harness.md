@@ -22,8 +22,9 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `make agent-review PR=<id>`
-* fingierter "kaputter" Slice in `exercises/09-review-fixture/`
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make agent-review`
+* fingierter "kaputter" Slice in
+  [`../../../lab/example/exercises/09-review-fixture/`](../../../lab/example/exercises/09-review-fixture/)
 
 ## Themen
 

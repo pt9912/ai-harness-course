@@ -4,6 +4,7 @@
 //   1. Interne Markdown-Links [text](pfad.md#anker)
 //   2. Bild-Referenzen ![alt](pfad.png|jpg|svg|gif|webp)
 //   3. Code-/Config-Referenzen [text](pfad.go|.py|...)
+//   4. Explizite Inline-Code-Pfade `../foo.md`, `lab/example/...`
 // Exit-Code 1 bei Fehlern, 0 sonst.
 //
 // Bewusste Einschränkungen:
@@ -12,6 +13,8 @@
 //     verwendet (dokumentiert in tools/README.md).
 //   - Anker werden nur in .md-Zielen geprüft. `code.go#L42` wird
 //     stillschweigend akzeptiert (Konvention für Source-Line-Anker).
+//   - Inline-Code-Pfadprüfung ist konservativ: nur explizite relative
+//     Pfade (./, ../) und Repo-Root-Pfade (lab/, kurs/, tools/).
 //   - Symlinks werden vor dem Sicherheits-Check auf ihren realpath
 //     aufgelöst — Symlinks aus dem Repo-Baum werden erkannt.
 
@@ -74,6 +77,7 @@ EINSCHRÄNKUNGEN:
   - Nur Inline-Links: [text](url). Reference-Style nicht geprüft.
   - Anker nur in .md-Zielen geprüft. \`code.go#L42\` wird ignoriert.
   - Symlinks aus dem Repo werden erkannt (realpath).
+  - Explizite Inline-Code-Pfade werden geprüft: \`../foo.md\`, \`lab/example/...\`.
 `);
   process.exit(0);
 }
@@ -282,11 +286,119 @@ function extractLinks(text) {
   return links;
 }
 
+function extractInlineCodePaths(text) {
+  const paths = [];
+  const lines = text.split("\n");
+  let inFence = false;
+  let fenceMarker = "";
+  for (let i = 0; i < lines.length; i++) {
+    const rawLine = lines[i];
+    const indented = rawLine.replace(/^ {0,3}/, "");
+    const fm = indented.match(/^(```+|~~~+)/);
+    if (fm) {
+      if (!inFence) { inFence = true; fenceMarker = fm[1][0]; }
+      else if (indented.startsWith(fenceMarker)) { inFence = false; fenceMarker = ""; }
+      continue;
+    }
+    if (inFence) continue;
+
+    const re = /(`+)([^`]*?)\1/g;
+    let m;
+    while ((m = re.exec(rawLine)) !== null) {
+      if (rawLine[m.index - 1] === "[" && rawLine[re.lastIndex] === "]") {
+        continue;
+      }
+      const value = m[2].trim();
+      if (looksLikeExplicitPath(value)) {
+        paths.push({ target: normalizeInlinePath(value), line: i + 1 });
+      }
+    }
+  }
+  return paths;
+}
+
+function normalizeInlinePath(value) {
+  return value
+    .replace(/^["']|["']$/g, "")
+    .replace(/[.,;:]$/g, "");
+}
+
+function looksLikeExplicitPath(value) {
+  const v = normalizeInlinePath(value);
+  if (v === "" || /\s/.test(v)) return false;
+  if (v.startsWith("//")) return false;
+  if (/[{}<>|*?=]/.test(v)) return false;
+  if (v.includes("…") || v.includes("->") || v.includes("→")) return false;
+  if (isExternal(v) || v.startsWith("#")) return false;
+  return (
+    v.startsWith("./") ||
+    v.startsWith("../") ||
+    v.startsWith("lab/") ||
+    v.startsWith("kurs/") ||
+    v.startsWith("tools/")
+  );
+}
+
 function isExternal(target) {
   return /^[a-z][a-z0-9+.-]*:/i.test(target);
 }
 function isAnchorOnly(target) {
   return target.startsWith("#");
+}
+
+function checkLocalTarget({ rel, line, target, fileDir, rootRelative }) {
+  const [pathPart, anchor] = target.split("#");
+
+  if (isAbsolute(pathPart)) {
+    process.stderr.write(`ERROR ${rel}:${line}: absoluter Pfad "${target}" nicht erlaubt\n`);
+    errors++;
+    return;
+  }
+
+  const targetAbs = rootRelative ? resolve(ROOT, pathPart) : resolve(fileDir, pathPart);
+
+  let realTarget = targetAbs;
+  try {
+    if (existsSync(targetAbs)) realTarget = realpathSync(targetAbs);
+  } catch { /* realpath kann scheitern, dann targetAbs nutzen */ }
+
+  const relFromRoot = relative(ROOT_REAL, realTarget);
+  if (relFromRoot.startsWith("..") || isAbsolute(relFromRoot)) {
+    process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" zeigt aus dem Repo heraus\n`);
+    errors++;
+    return;
+  }
+
+  if (!existsSync(targetAbs)) {
+    process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" existiert nicht (resolved: ${relative(ROOT, targetAbs)})\n`);
+    errors++;
+    return;
+  }
+
+  if (anchor && targetAbs.endsWith(".md")) {
+    const h = getHeadings(targetAbs);
+    if (typeof h === "string") {
+      if (h === "EACCES" || h === "EPERM") {
+        process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" nicht lesbar (${h}) — Anker nicht prüfbar\n`);
+        errors++;
+      } else if (!options.noWarn) {
+        process.stderr.write(`WARN  ${rel}:${line}: Ziel "${target}" Heading-Index nicht ermittelbar (${h})\n`);
+        warnings++;
+      }
+    } else if (!h.slugs.has(anchor)) {
+      process.stderr.write(`ERROR ${rel}:${line}: Anker "#${anchor}" existiert nicht in ${relative(ROOT, targetAbs)}\n`);
+      errors++;
+    } else if (options.verbose) {
+      process.stdout.write(`OK    ${rel}:${line}: ${target}\n`);
+      okCount++;
+    }
+    return;
+  }
+
+  if (options.verbose) {
+    process.stdout.write(`OK    ${rel}:${line}: ${target}\n`);
+    okCount++;
+  }
 }
 
 // ---- Hauptlauf ----
@@ -307,6 +419,7 @@ for (const absMd of sorted) {
     continue;
   }
   const links = extractLinks(text);
+  const inlineCodePaths = extractInlineCodePaths(text);
   const fileDir = dirname(absMd);
 
   for (const link of links) {
@@ -330,63 +443,12 @@ for (const absMd of sorted) {
       continue;
     }
 
-    const [pathPart, anchor] = target.split("#");
+    checkLocalTarget({ rel, line, target, fileDir, rootRelative: false });
+  }
 
-    // Absolute Pfade explizit ablehnen — File-System-Roots haben in
-    // Repo-Doku nichts zu suchen.
-    if (isAbsolute(pathPart)) {
-      process.stderr.write(`ERROR ${rel}:${line}: absoluter Pfad "${target}" nicht erlaubt\n`);
-      errors++;
-      continue;
-    }
-
-    const targetAbs = resolve(fileDir, pathPart);
-
-    // Sicherheitsnetz: realpath + relativer Pfad zum Repo-Realpath.
-    // Symlinks, die aus dem Repo-Baum führen, werden erkannt.
-    let realTarget = targetAbs;
-    try {
-      if (existsSync(targetAbs)) realTarget = realpathSync(targetAbs);
-    } catch { /* realpath kann scheitern, dann targetAbs nutzen */ }
-
-    const relFromRoot = relative(ROOT_REAL, realTarget);
-    if (relFromRoot.startsWith("..") || isAbsolute(relFromRoot)) {
-      process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" zeigt aus dem Repo heraus\n`);
-      errors++;
-      continue;
-    }
-
-    if (!existsSync(targetAbs)) {
-      process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" existiert nicht (resolved: ${relative(ROOT, targetAbs)})\n`);
-      errors++;
-      continue;
-    }
-
-    // Anker nur in .md-Zielen prüfen
-    if (anchor && targetAbs.endsWith(".md")) {
-      const h = getHeadings(targetAbs);
-      if (typeof h === "string") {
-        if (h === "EACCES" || h === "EPERM") {
-          process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" nicht lesbar (${h}) — Anker nicht prüfbar\n`);
-          errors++;
-        } else if (!options.noWarn) {
-          process.stderr.write(`WARN  ${rel}:${line}: Ziel "${target}" Heading-Index nicht ermittelbar (${h})\n`);
-          warnings++;
-        }
-      } else if (!h.slugs.has(anchor)) {
-        process.stderr.write(`ERROR ${rel}:${line}: Anker "#${anchor}" existiert nicht in ${relative(ROOT, targetAbs)}\n`);
-        errors++;
-      } else if (options.verbose) {
-        process.stdout.write(`OK    ${rel}:${line}: ${target}\n`);
-        okCount++;
-      }
-      continue;
-    }
-
-    if (options.verbose) {
-      process.stdout.write(`OK    ${rel}:${line}: ${target}\n`);
-      okCount++;
-    }
+  for (const codePath of inlineCodePaths) {
+    const rootRelative = /^(lab|kurs|tools)\//.test(codePath.target);
+    checkLocalTarget({ rel, line: codePath.line, target: codePath.target, fileDir, rootRelative });
   }
 }
 

@@ -42,8 +42,8 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `evals/example-trace.json` — kommentierter Agenten-Lauf
-* `docs/glossar.md`
+* [`../../../lab/example/evals/example-trace.json`](../../../lab/example/evals/example-trace.json) — kommentierter Minimal-Trace
+* [`../../../lab/example/docs/glossar.md`](../../../lab/example/docs/glossar.md) — kleines Kurs-Glossar am DocSearch-Beispiel
 
 ## Themen
 
@@ -68,7 +68,8 @@ handelnden Agenten einen reproduzierbar handelnden Agenten macht.
 
 ## Übungen
 
-* Analyse eines fehlgeschlagenen KI-Projekts (Vorlage in `exercises/00-postmortem.md`)
+* Analyse eines fehlgeschlagenen KI-Projekts (Vorlage:
+  [`../../../lab/example/exercises/00-postmortem.md`](../../../lab/example/exercises/00-postmortem.md))
 * Provoziere absichtlich eine Halluzination, dokumentiere den Trigger
 
 Nach beiden Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md) durchlaufen.

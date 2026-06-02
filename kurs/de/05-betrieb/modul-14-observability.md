@@ -23,8 +23,8 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `otel/`, lokaler Collector im Compose-Setup
-* `make trace RUN=<id>`
+* [`../../../lab/example/otel/`](../../../lab/example/otel/) — reduziertes Trace-Fixture
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make trace RUN=sl-009-agent-run`
 
 ## Themen
 
@@ -57,6 +57,18 @@ es passiert ist; du weißt nicht, *was* passiert ist.
 
 * Analyse eines KI-Agenten-Laufs im Trace-Viewer
 * Identifiziere den teuersten Tool-Call und begründe, ob er nötig war
+
+### Minimaler Übungspfad
+
+```bash
+cd lab/example
+make trace RUN=sl-009-agent-run
+```
+
+Erwartete Beobachtung: Das Fixture enthält Rollen-, Slice-, Tool- und
+Token-Felder. Beantworte zuerst nur drei Fragen: Welcher Span gehört zum
+Reviewer? Wo ist der Cache-Miss? Welche ID verbindet Kosten mit dem
+Slice? Danach erst lohnt ein voller Trace-Viewer.
 
 Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 

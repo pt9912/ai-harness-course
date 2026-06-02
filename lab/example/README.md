@@ -22,14 +22,18 @@ Dokument-Abschnitte. Die Embedding-Erzeugung läuft über ein LLM.
 - **Ein Replay-Beispiel** in `evals/golden/` für [Modul 11](../../kurs/de/04-qualitaet/modul-11-replay-evaluierung.md).
 - **Ein fingiertes Review-Fixture** in `exercises/09-review-fixture/`
   für [Modul 9](../../kurs/de/04-qualitaet/modul-09-review-harness.md).
+- **Geführte Fixtures** für Verifikation, Trace-Analyse und Runbook-Arbeit
+  in `verification/`, `otel/` und `runbooks/`.
 
 ## Struktur
 
 ```
 example/
 ├── README.md                    (diese Datei)
+├── Makefile                     Root-Harness-Targets für Kursmodule
 ├── AGENTS.md                    Hard Rules und Source Precedence
 ├── harness/README.md            Harness-Einstieg
+├── docs/glossar.md              Mini-Glossar für Modul 0
 ├── spec/
 │   ├── lastenheft.md            LH-*-IDs, Akzeptanzkriterien
 │   ├── spezifikation.md         Algorithmen, Defaults, Codes
@@ -38,10 +42,18 @@ example/
 │   ├── adr/                     ADR-Index + 3 ADRs
 │   ├── planning/                Slices in allen Lifecycle-Stadien
 │   ├── carveouts/               1 aktiver Carveout
-│   └── roadmap.md               Wellen, Trigger, Status
+│   └── planning/in-progress/roadmap.md
 ├── exercises/
+│   ├── 00-postmortem.md
+│   ├── 02-lastenheft.md
+│   ├── 03-adr.md
+│   ├── 08-implementation.md
 │   └── 09-review-fixture/       kaputter Slice für Review-Übung
+├── verification/checks/         Verification-Fixture für Modul 10
 ├── evals/golden/                Replay-Eingang/Erwartung
+├── evals/example-trace.json     Minimal-Trace für Modul 0
+├── otel/                        Trace-Fixture für Modul 14
+├── runbooks/                    Release/Incident-Fixtures für Modul 15
 └── (Sprach-Skelette in Phase C: go/, python/, kotlin/, java/, csharp/)
 ```
 

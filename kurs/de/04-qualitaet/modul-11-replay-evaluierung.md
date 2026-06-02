@@ -22,8 +22,8 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `evals/golden/`
-* `make replay RUN=<id>`
+* [`../../../lab/example/evals/golden/`](../../../lab/example/evals/golden/)
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make replay RUN=welle-1-baseline`
 
 ## Themen
 
@@ -48,6 +48,19 @@ wird er zur Messung.
 
 * Reproduzierbare Testläufe gegen ein Golden Set
 * Erzeuge eine Regression durch Modellwechsel und miss den Drift
+
+### Minimaler Übungspfad
+
+```bash
+cd lab/example
+make replay RUN=welle-1-baseline
+```
+
+Erwartete Beobachtung: Das Target validiert nur das Golden-Set-Fixture.
+Der didaktische Punkt ist die Belegstruktur: Modellversion, mindestens
+drei Fälle und explizite Erwartungen. Für die Drift-Übung änderst du in
+einer Kopie die Modellversion oder eine Erwartung und notierst, ob der
+Replay-Lauf noch als derselbe Lauf interpretierbar ist.
 
 Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 

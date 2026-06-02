@@ -23,8 +23,8 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `make agent-implement SLICE=<id>`
-* `exercises/08-implementation.md`
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make agent-implement SLICE=slice-009`
+* [`../../../lab/example/exercises/08-implementation.md`](../../../lab/example/exercises/08-implementation.md)
 
 ## Themen
 
@@ -120,6 +120,17 @@ beiden existiert, ist die Regel nur halb durchgesetzt.
 * Implementierung eines Features aus einem Slice-Plan
 * Lass den Agenten ohne ADR-Kontext laufen und vergleiche mit dem Lauf *mit* ADR-Kontext
 * Formuliere drei Hard Rules für ein Beispiel-Repo und prüfe, ob mindestens eine maschinell durchsetzbar ist
+
+### Minimaler Übungspfad
+
+```bash
+cd lab/example
+make agent-implement SLICE=slice-009
+```
+
+Erwartete Beobachtung: Das Target erzeugt keinen Code. Es zeigt das
+Kontextpaket, das ein Implementation-Agent vor dem Plan lesen muss. Erst
+wenn du dieses Paket benennen kannst, ist der freie Agentenlauf sinnvoll.
 
 Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 

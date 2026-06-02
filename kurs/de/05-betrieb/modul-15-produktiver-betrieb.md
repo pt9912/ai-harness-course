@@ -21,8 +21,8 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `runbooks/`
-* `make release`
+* [`../../../lab/example/runbooks/`](../../../lab/example/runbooks/)
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make release`
 
 ## Themen
 
@@ -47,6 +47,19 @@ ohne den Autor zu kennen. Runbooks und Replay sind dafür da.
 
 * Produktionsfreigabe eines Projekts (Checkliste aus dem Begleit-Repo)
 * Spiele ein Incident-Szenario durch: Agent löscht versehentlich produktive Daten — was tust du in den ersten 15 Minuten?
+
+### Minimaler Übungspfad
+
+```bash
+cd lab/example
+make release
+```
+
+Erwartete Beobachtung: Das Target prüft nur, ob Release-Checkliste und
+Incident-Runbook Belege enthalten. Danach spielst du den Incident aus
+[`../../../lab/example/runbooks/incident-agent-data-loss.md`](../../../lab/example/runbooks/incident-agent-data-loss.md)
+durch und entscheidest begründet zwischen Rollback, Fix-Forward und
+Datenkorrektur.
 
 Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 

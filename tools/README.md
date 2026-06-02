@@ -14,7 +14,8 @@ Geprüft wird:
 1. **Interne Markdown-Links** `[text](pfad.md#anker)` — Datei vorhanden? Bei Anker: gibt es die zugehörige Heading-ID?
 2. **Bild-Referenzen** `![alt](pfad.png|jpg|svg|gif|webp)` — Datei vorhanden?
 3. **Code-/Config-Referenzen** `[text](pfad.go|.py|.kt|.java|.cs|.yaml|...)` — Datei vorhanden?
-4. **Sicherheitsnetz**: Relative Pfade dürfen nicht aus dem Repo führen. Absolute Pfade werden explizit abgelehnt. Symlinks werden auf den realpath aufgelöst — ein Symlink im Repo, der nach `/etc` zeigt, wird erkannt.
+4. **Explizite Inline-Code-Pfade** wie `` `../README.md` `` oder `` `lab/example/...` `` — Datei/Verzeichnis vorhanden?
+5. **Sicherheitsnetz**: Relative Pfade dürfen nicht aus dem Repo führen. Absolute Pfade werden explizit abgelehnt. Symlinks werden auf den realpath aufgelöst — ein Symlink im Repo, der nach `/etc` zeigt, wird erkannt.
 
 Externe Links (`http://`, `https://`, `mailto:`) werden ignoriert —
 der Kurs verwendet sie selten und sie zu prüfen wäre flaky.
@@ -72,6 +73,7 @@ nicht-Permission-Gründen unermittelbar. Exit-Code bleibt 0.
 
 - **Nur Inline-Links** `[text](url)` werden geprüft. Reference-Style-Links `[text][ref]` und `[ref]: url` werden nicht geparst — der Kurs verwendet ausschließlich Inline-Links.
 - **Anker nur in `.md`-Zielen** geprüft. Ein Link wie `[Zeile 42](src/foo.go#L42)` wird stillschweigend akzeptiert (Konvention für Source-Line-Anker).
+- **Inline-Code-Pfadprüfung ist konservativ.** Geprüft werden nur explizite relative Pfade (`./`, `../`) und Repo-Root-Pfade (`lab/`, `kurs/`, `tools/`). Begriffe wie `LH-*`, `make gates`, `spec/`, `/etc/foo` oder `harness/README.md` ohne expliziten Kontext bleiben unberührt.
 - **Heading-IDs** folgen GitHubs Slug-Regel: lowercase, Whitespace → `-`, HTML-Tags und Markdown-Inline-Code entfernt, Interpunktion entfernt (Bindestriche und Unterstriche bleiben), Unicode-Buchstaben/Zahlen behalten. ATX-Closing-Sequenzen (`## Heading ##`) werden vor der Slug-Erzeugung entfernt. Duplikate bekommen `-1`, `-2`, … als Suffix.
 
 ### Implementierungs-Hinweise

@@ -21,8 +21,8 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `make verify SLICE=<id>`
-* `verification/checks/`
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make verify SLICE=slice-009`
+* [`../../../lab/example/verification/checks/`](../../../lab/example/verification/checks/)
 
 ## Themen
 
@@ -56,6 +56,18 @@ nicht: "Ist es gut?"
 
 * Automatische Verifikation eines Slices
 * Provoziere eine DoD-Verletzung und prüfe, ob sie erkannt wird
+
+### Minimaler Übungspfad
+
+```bash
+cd lab/example
+make verify SLICE=slice-009
+```
+
+Erwartete Beobachtung: Der Check ist bewusst klein. Er prüft, ob der
+Slice DoD, Traceability-ID und Gate-Beleg enthält. Danach provozierst du
+den Fehlerfall: entferne in einer Kopie des Slice den `make gates`-Beleg
+und beobachte, dass die Verifikation rot wird.
 
 Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 

@@ -1,0 +1,46 @@
+{
+  "trace_id": "trace-sl-009-agent-run",
+  "slice.id": "slice-009",
+  "requirement.id": "LH-QA-02",
+  "spans": [
+    {
+      "span_id": "plan-1",
+      "agent.role": "Planner",
+      "name": "read_context",
+      "duration_ms": 420,
+      "tokens": {"input": 1800, "output": 240},
+      "cache": {"hit": true}
+    },
+    {
+      "span_id": "impl-1",
+      "agent.role": "Implementation",
+      "name": "tool_call",
+      "tool.name": "make verify",
+      "tool.arguments.redacted": {"SLICE": "slice-009"},
+      "tool.result.status": "ok",
+      "duration_ms": 310,
+      "tokens": {"input": 950, "output": 120},
+      "cache": {"hit": true}
+    },
+    {
+      "span_id": "review-1",
+      "agent.role": "Reviewer",
+      "name": "semantic_review",
+      "tool.result.status": "ok",
+      "duration_ms": 760,
+      "tokens": {"input": 2600, "output": 510},
+      "cache": {"hit": false}
+    },
+    {
+      "span_id": "verify-1",
+      "agent.role": "Verification",
+      "name": "dod_check",
+      "tool.name": "make verify",
+      "tool.arguments.redacted": {"SLICE": "slice-009"},
+      "tool.result.status": "ok",
+      "duration_ms": 290,
+      "tokens": {"input": 820, "output": 90},
+      "cache": {"hit": true}
+    }
+  ]
+}

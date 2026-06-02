@@ -23,7 +23,7 @@ Nach diesem Modul kannst du:
 ## Lab-Bezug
 
 * `spec/`
-* `exercises/02-lastenheft.md`
+* [`../../../lab/example/exercises/02-lastenheft.md`](../../../lab/example/exercises/02-lastenheft.md)
 
 ## Themen
 
@@ -92,6 +92,17 @@ mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../../../lab/example/s
 
 * Erstellung eines vollständigen Lastenhefts für ein kleines Feature
 * Provoziere absichtlich einen Spec-Bug: lass den Agenten gegen eine unterspezifizierte Anforderung laufen und benenne, was schiefging
+
+### Minimaler Übungspfad
+
+1. Öffne die Übung
+   [`../../../lab/example/exercises/02-lastenheft.md`](../../../lab/example/exercises/02-lastenheft.md).
+2. Schreibe erst nur eine `LH-FA-*`-Anforderung mit Happy Path,
+   Boundary und Negative.
+3. Vergleiche anschließend mit
+   [`../../../lab/example/spec/lastenheft.md`](../../../lab/example/spec/lastenheft.md):
+   Fehlt bei dir ein Negativsatz, ist die Spec für einen Agenten noch
+   nicht scharf genug.
 
 Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 

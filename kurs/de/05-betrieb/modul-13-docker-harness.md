@@ -22,8 +22,12 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `Dockerfile`, `docker-compose.yml` im Begleit-Repo
-* `make build`, `make run` (Smoke-Test)
+* Sprachskelett wählen: [`../../../lab/example/go/`](../../../lab/example/go/),
+  [`../../../lab/example/python/`](../../../lab/example/python/),
+  [`../../../lab/example/kotlin/`](../../../lab/example/kotlin/),
+  [`../../../lab/example/java/`](../../../lab/example/java/) oder
+  [`../../../lab/example/csharp/`](../../../lab/example/csharp/)
+* `make build`, `make run` und `make gates` im gewählten Sprachskelett
 
 ## Themen
 
@@ -48,6 +52,19 @@ Unterschied, nicht den Bug.
 
 * Aufbau eines vollständigen Build-Harness
 * Mache ein Image nicht-reproduzierbar (z. B. unpinnierte Base) und beobachte den Drift
+
+### Minimaler Übungspfad
+
+```bash
+cd lab/example/go
+make build
+make run
+```
+
+Erwartete Beobachtung: Build und Smoke laufen im Container-Kontext. Der
+Fehlerfall entsteht, wenn du in einer Kopie die Base-Image-Version
+unpinnst und den Build später erneut ausführst. Dokumentiere nicht nur
+"rot/grün", sondern den Unterschied zwischen lokalem und CI-Vertrag.
 
 Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 

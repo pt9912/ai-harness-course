@@ -38,6 +38,9 @@ Reviews und Abschlussbericht. Das Repository muss:
 Pro Achse vier Stufen. Eine Stufe gilt, wenn *alle* Indikatoren erfüllt
 sind. Lücke in einem Indikator → eine Stufe niedriger.
 
+Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
+[`kalibrierungsbeispiele.md`](kalibrierungsbeispiele.md).
+
 ### Achse: Vollständigkeit
 
 | Stufe | Indikatoren |

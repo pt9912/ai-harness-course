@@ -23,7 +23,7 @@ Nach diesem Modul kannst du:
 ## Lab-Bezug
 
 * `docs/plan/adr/`
-* `exercises/03-adr.md`
+* [`../../../lab/example/exercises/03-adr.md`](../../../lab/example/exercises/03-adr.md)
 
 ## Themen
 
@@ -120,6 +120,17 @@ Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
 * ADR für Evaluierung
 * ADR für Layering (Beispiel nach OpenAI: `Types → Config → Repo → Service → Runtime → UI` — jede Schicht darf nur "abwärts" importieren) und parallele Fitness Function in ArchUnit/dep-cruiser
 * Lass einen Agenten gegen eine vorhandene ADR-Verletzung laufen und prüfe, ob er sie erkennt
+
+### Minimaler Übungspfad
+
+1. Starte mit
+   [`../../../lab/example/exercises/03-adr.md`](../../../lab/example/exercises/03-adr.md).
+2. Kopiere die Vorlage
+   [`../../../lab/templates/docs/plan/adr/NNNN-titel.template.md`](../../../lab/templates/docs/plan/adr/NNNN-titel.template.md)
+   in dein Übungs-Repo.
+3. Prüfe am Ende, ob deine ADR mindestens eine spätere Fitness Function
+   vorbereitet. Wenn nicht, ist sie nur Entscheidungsnotiz, noch kein
+   Harness-Guide.
 
 Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 

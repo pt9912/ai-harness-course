@@ -1,0 +1,30 @@
+{
+  "trace_id": "trace-docsearch-module-00",
+  "purpose": "Kommentierter Minimal-Trace fuer Modul 0",
+  "slice_id": "slice-009",
+  "spans": [
+    {
+      "span_id": "s1",
+      "kind": "input",
+      "agent_role": "Implementation",
+      "summary": "Slice-Plan und Source-Precedence werden gelesen.",
+      "artifacts": [
+        "harness/README.md",
+        "docs/plan/planning/done/slice-009-tie-break-determinismus.md"
+      ]
+    },
+    {
+      "span_id": "s2",
+      "kind": "tool_call",
+      "tool": "make verify",
+      "arguments": {"SLICE": "slice-009"},
+      "result": {"status": "ok", "evidence": "DoD, LH-/ADR-IDs und make gates gefunden"}
+    },
+    {
+      "span_id": "s3",
+      "kind": "output",
+      "summary": "Agent meldet ausgefuehrte Sensors und verbleibende Risiken.",
+      "risk": "Replay und Trace sind im Modul-0-Beispiel nur Fixtures, keine Produktionstelemetrie."
+    }
+  ]
+}
