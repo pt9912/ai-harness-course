@@ -13,6 +13,26 @@ Playbook (siehe [`fallstudien.md`](fallstudien.md) und
 | **Computational** (deterministisch) | Typsignaturen, JSON-Schema, Tool-Allowlists, generierte Skeletons | Linter, Typecheck, ArchUnit, Coverage Gate, Schema-Validierung |
 | **Inferential** (LLM-gestützt) | Spec, ADR, AGENTS.md, Skills, Beispiel-Korpora | Reviewer-Agent, Verifier-Agent, Validator-Agent, semantischer Diff |
 
+```mermaid
+quadrantChart
+    title 2×2 — Guides und Sensors
+    x-axis "Feedforward (vor der Handlung)" --> "Feedback (nach der Handlung)"
+    y-axis "Inferential (LLM)" --> "Computational (deterministisch)"
+    quadrant-1 "Computational + Feedback<br/>Linter, ArchUnit, Coverage"
+    quadrant-2 "Computational + Feedforward<br/>Typen, Allowlists, Schemas"
+    quadrant-3 "Inferential + Feedforward<br/>Spec, ADR, AGENTS.md"
+    quadrant-4 "Inferential + Feedback<br/>Reviewer, Verifier, Validator"
+    "Spec-Lücke": [0.15, 0.25]
+    "ArchUnit-Regel": [0.78, 0.85]
+    "Reviewer-Skill": [0.85, 0.20]
+    "Tool-Allowlist": [0.20, 0.78]
+```
+
+Die Punkte zeigen, wo typische Maßnahmen liegen. Faustregel: **so weit
+links und oben wie möglich** — präventive, deterministische Kontrollen
+sind die billigsten. Punkte rechts unten (Reviewer-Skill) sind teuer und
+sollten erst greifen, was die linken Quadranten nicht abdecken können.
+
 ### Lesart
 
 * *Computational + Feedforward*: macht falsche Aktionen **technisch unmöglich**. Billigste Kontrolle.
@@ -43,9 +63,31 @@ Jede Kontrolle adressiert genau eine der drei Kategorien:
 | **Architecture Fitness Harness** | Hält die Lösung Architektur-, Performance- und Observability-Constraints ein? | Fitness Functions, Latenz-Budgets, OTel-Assertions | 3, 10, 14 |
 | **Behaviour Harness** | Tut die Lösung das Richtige? | Tests, Replay, Golden Sets, Validation-Agent | 10, 11 |
 
-Die Behaviour-Kategorie ist die schwierigste — Böckeler nennt sie offen
-die am wenigsten entwickelte. Sie ist der eigentliche Grund, warum Replay
-und Golden Sets im Kurs ein eigenes Modul bekommen
+```mermaid
+flowchart LR
+    subgraph M["Maintainability<br/>(lesbar, modular?)"]
+        M1[Linter]
+        M2[Komplexitätsmetriken]
+        M3[ArchUnit]
+        M4[Reviewer-Agent]
+    end
+    subgraph A["Architecture Fitness<br/>(Constraints eingehalten?)"]
+        A1[Fitness Functions]
+        A2[Latenz-Budgets]
+        A3[OTel-Assertions]
+    end
+    subgraph B["Behaviour<br/>(tut es das Richtige?)"]
+        B1[Tests]
+        B2[Replay]
+        B3[Golden Sets]
+        B4[Validation-Agent]
+    end
+    style B fill:#fff4d6,stroke:#d4a017
+```
+
+Die Behaviour-Kategorie (gelb) ist die schwierigste — Böckeler nennt sie
+offen die am wenigsten entwickelte. Sie ist der eigentliche Grund, warum
+Replay und Golden Sets im Kurs ein eigenes Modul bekommen
 ([Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md)).
 
 ## Drei operative Säulen (OpenAI)
@@ -58,6 +100,38 @@ orthogonal zu Böckelers Kategorien stehen:
 | **Context Engineering** | dem Agenten das Richtige zur Verfügung stellen | Spec, ADR, AGENTS.md, Skills, dynamisches Verzeichnis-Mapping beim Start | 2, 3, 4 |
 | **Architectural Constraints** | dem Agenten das Falsche unmöglich machen | Layering-Regeln, Import-Allowlists, Tool-Allowlists, ArchUnit | 3, 12 |
 | **Entropy Management** | den Harness gegen Verfall pflegen | Doku-Konsistenz-Agent, Carveout-Audit, Golden-Set-Rotation | 6, 11, 14 |
+
+```mermaid
+flowchart TB
+    subgraph CE["Context Engineering (inform)"]
+        direction TB
+        CE1["Spec"]
+        CE2["ADR"]
+        CE3["AGENTS.md"]
+        CE4["Skills"]
+    end
+    subgraph AC["Architectural Constraints (constrain)"]
+        direction TB
+        AC1["Layering-Regeln"]
+        AC2["Import-Allowlists"]
+        AC3["Tool-Allowlists"]
+        AC4["ArchUnit"]
+    end
+    subgraph EM["Entropy Management (pflegen)"]
+        direction TB
+        EM1["Doku-Konsistenz-Agent"]
+        EM2["Carveout-Audit"]
+        EM3["Golden-Set-Rotation"]
+    end
+    CE -. "Agent weiß mehr" .-> Agent((Agent))
+    AC -. "Agent kann weniger Falsches" .-> Agent
+    EM -. "morgen + übermorgen<br/>noch wahr" .-> CE
+    EM -. .-> AC
+```
+
+Lesart: **Context Engineering** schiebt Information *zum* Agenten;
+**Architectural Constraints** ziehen Grenzen *um* den Agenten;
+**Entropy Management** pflegt beides, damit es nicht verrottet.
 
 Maxime von Lopopolo: *"From the agent's perspective, anything it can't
 access in-context doesn't exist."* — daraus folgt direkt, warum Spec und
@@ -90,8 +164,17 @@ verteilt ist.
 
 Der Harness ist nicht statisch. Das wiederkehrende Muster:
 
-```
-Agentenlauf → Failure beobachtet → Guide/Sensor verbessert → Failure-Klasse seltener
+```mermaid
+flowchart LR
+    A["Agentenlauf"] --> B["Failure beobachtet"]
+    B --> C{"Wie oft?"}
+    C -- "1× (Vorfall)" --> N["notieren, weiter"]
+    C -- "2× (Symptom)" --> O["kategorisieren, beobachten"]
+    C -- "3× (Lücke)" --> D["Guide oder Sensor<br/>nachziehen"]
+    D --> E["Failure-Klasse seltener"]
+    E -. "neue Beobachtungen" .-> A
+    N -. "kommt vielleicht wieder" .-> A
+    O -. "kommt vielleicht wieder" .-> A
 ```
 
 Wenn dasselbe Versagen zweimal auftritt, ist es ein Symptom; das *dritte*
@@ -116,3 +199,22 @@ desto besser:
 | Pre-integration | volle Testsuite, ArchUnit, Reviewer-Agent | vor Merge, noch billig genug |
 | Post-integration | Mutation Tests, vollständige Verifikation, Validator-Agent | teurer, aber tolerierbar |
 | Continuous | Drift-Detection, SLO-Monitoring, Dead-Code, Replay-Regressionen | außerhalb des Change-Lifecycles |
+
+```mermaid
+timeline
+    title Wann welche Kontrolle greift
+    section Pre-commit / IDE
+        sofort, lokal : LSP : Linter : schnelle Tests : einfacher Review-Agent
+    section Pre-integration
+        vor Merge : volle Testsuite : ArchUnit : Reviewer-Agent
+    section Post-integration
+        nach Merge : Mutation Tests : vollständige Verifikation : Validator-Agent
+    section Continuous
+        außerhalb des Lifecycles : Drift-Detection : SLO-Monitoring : Dead-Code-Scan : Replay-Regressionen
+```
+
+Kosten steigen von links nach rechts. Faustregel: jede Kontrolle, die
+zwei Stufen nach rechts wandern könnte (ohne Schaden), sollte das tun.
+Eine Coverage-Prüfung, die erst im "Continuous"-Lauf greift, ist faktisch
+keine Coverage-Prüfung — die Information kommt zu spät, um auf den
+Slice zurückzuwirken.

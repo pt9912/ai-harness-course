@@ -1,10 +1,25 @@
 # Modul 8 — Implementierung durch KI-Agenten
 
+> **Aufwand:** ca. 120 Min Lesen · 120 Min Übung. Dieses Modul ist absichtlich tief — der 8-Schritt-Workflow und die Hard Rules sind die operative Brücke zwischen Theorie (Module 1–7) und Gates (Module 9–12).
+
+## Engage
+
+Du gibst deinem Implementation-Agent einen Slice. Er liefert in vier
+Minuten 800 Zeilen Diff. Du prüfst — und findest, dass er die Hälfte aus
+einem ähnlichen Repo erfunden hat, weil deine AGENTS.md schwieg. Hätte
+er stattdessen erst einen *Plan* ausgegeben, hätte er nach 30 Sekunden
+einräumen müssen, dass er den Kontext nicht hat. Plan → Diff → Code ist
+nicht eine Empfehlung; es ist *die Reihenfolge*, die "schreiben" von
+"raten" trennt.
+
 ## Lernziele
 
-* Einen Slice mit einem Implementation-Agent umsetzen
-* Architekturkonformität während der Implementierung wahren
-* Änderungspläne vor der Codegenerierung erzwingen
+Nach diesem Modul kannst du:
+
+* einen Slice nach dem 8-Schritt-Workflow *umsetzen* und die Reihenfolge Plan → Diff → Code *einhalten* (Anwenden),
+* drei Hard Rules für ein Beispiel-Repo *formulieren*, jeweils mit Falsch/Richtig-Beispiel und Begründung (Erschaffen),
+* eine Hard Rule einem Quadranten der 2×2-Matrix *zuordnen* (Analysieren),
+* die Wirkung von AGENTS.md auf einen Agentenlauf *messen*, indem du den Lauf mit und ohne AGENTS.md vergleichst (Bewerten).
 
 ## Lab-Bezug
 
@@ -40,6 +55,29 @@ in `harness/README.md` als Vertrag dokumentiert wird:
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt ist.
 8. Ausgeführte Sensors und verbleibende Risiken berichten — keine Erfolgsmeldung ohne Gate-Ausführung.
 
+### Workflow als Diagramm
+
+```mermaid
+flowchart TD
+    Start([Slice startet]) --> S1["1. harness/README.md lesen"]
+    S1 --> S2["2. kanonische Quelle lesen<br/>(Source Precedence)"]
+    S2 --> S3["3. Requirement-/ADR-IDs<br/>identifizieren"]
+    S3 --> S4["4. kleinste Änderung planen<br/>(Plan vor Code!)"]
+    S4 --> S5["5. engsten Sensor laufen<br/>(eine Testdatei)"]
+    S5 --> Check{Sensor grün?}
+    Check -- nein --> S4
+    Check -- ja --> S6["6. make gates (repo-weit)"]
+    S6 --> CheckG{alle Gates grün?}
+    CheckG -- nein --> S4
+    CheckG -- ja --> S7["7. Doku/Indizes update<br/>(falls Vertrag berührt)"]
+    S7 --> S8["8. Bericht:<br/>Sensors + Restrisiken"]
+    S8 --> Done([Handoff an Reviewer])
+```
+
+Zwei Rücksprungkanten sind didaktisch wesentlich: 5→4 und 6→4. Nicht
+zurück zu Schritt 1 — der Plan wird *verfeinert*, nicht der Kontext neu
+gelesen.
+
 ## Hard Rules (repo-spezifisch)
 
 Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
@@ -70,17 +108,34 @@ stehen in AGENTS.md (Agent liest sie) **und** werden idealerweise durch
 eine Fitness Function geprüft (Linter schlägt an). Wenn nur eines von
 beiden existiert, ist die Regel nur halb durchgesetzt.
 
+## Typische Fehlvorstellungen
+
+- **"Agent liefert schnell, also ist der Workflow Overhead."** — Geschwindigkeit ohne Plan produziert Diffs, die später als Review-Last anfallen. Plan + Diff + Code kostet 20 % länger und spart 50 % Review.
+- **"Hard Rules schreibe ich in AGENTS.md, und das reicht."** — Eine Hard Rule, die nur in AGENTS.md steht (inferential feedforward), ist halbgesetzt. Erst mit Fitness Function (computational feedback) ist sie *durchgesetzt*. Beides ist Pflicht.
+- **"Wenn die Tests grün sind, ist der Slice fertig."** — Schritt 8 verlangt einen Bericht über *Sensors und verbleibende Risiken*. Grüne Tests sind notwendig, nicht hinreichend.
+- **"Die Pre-completion Checklist ist Bürokratie."** — Sie ist der einzige Schritt, der vor Übergabe an Reviewer/Verifier eine *Selbstaussage* erzwingt. Wer keinen Selbst-Check macht, lädt jedes Risiko in die nächste Rolle.
+
 ## Übungen
 
 * Implementierung eines Features aus einem Slice-Plan
 * Lass den Agenten ohne ADR-Kontext laufen und vergleiche mit dem Lauf *mit* ADR-Kontext
 * Formuliere drei Hard Rules für ein Beispiel-Repo und prüfe, ob mindestens eine maschinell durchsetzbar ist
 
+Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+
 ## Selbstcheck
 
 * Welche Eingaben braucht ein Implementation-Agent minimal, um nicht zu halluzinieren?
 * Wann ist ein Implementation-Agent fertig — wenn der Code kompiliert, oder wenn die DoD erfüllt ist?
 * Welche deiner Hard Rules wandert in welche Quadranten der 2×2-Matrix?
+
+### Selbstcheck-Rubrik
+
+| Frage | rudimentär | solide | exzellent |
+|---|---|---|---|
+| Minimale Eingaben gegen Halluzination? | "Klare Anweisung." | `harness/README.md` + relevante kanonische Quelle + Requirement/ADR-IDs + AGENTS.md + Tool-Allowlist. | + Hinweis Lopopolo: "anything it can't access in-context doesn't exist" — fehlende Eingaben werden *durch Raten ersetzt*, nicht durch Schweigen. |
+| Fertig: Code kompiliert oder DoD erfüllt? | "DoD." | DoD-erfüllt + Schritt 8 ausgeführt (Bericht über Sensors + Restrisiken). Kompilierender Code ist notwendig, nicht hinreichend. | + Folge: ohne Schritt-8-Bericht wird jedes Risiko in die nächste Rolle (Reviewer/Verifier) verlagert — das bricht die Kontext-Trennung der Rollen. |
+| Hard Rules ↔ Quadranten der 2×2-Matrix? | "Inferentielle Feedforward." | Jede Hard Rule liegt in *zwei* Quadranten: inferential feedforward (steht in AGENTS.md) + computational feedback (Fitness Function/Linter-Gate). | + Hard Rule nur in einem Quadranten ist halb durchgesetzt; nur in AGENTS.md vergisst der Agent sie unter Druck, nur als Fitness Function ohne AGENTS.md-Eintrag versteht der Agent das *Warum* nicht. |
 
 ## Weiterlesen
 

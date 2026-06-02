@@ -1,10 +1,25 @@
 # Modul 12 — Quality Gates
 
+> **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: das ID-Schema aus [Modul 2](../01-spec-und-architektur/modul-02-lastenheft.md) bekommt hier seine maschinelle Verankerung — Make-Target-Kommentare zitieren die Anforderungs-ID.
+
+## Engage
+
+`make gates` ist grün auf deiner Maschine. Im CI ist es rot. Du investierst
+einen Nachmittag und findest: dein lokales Image hat Python 3.12, das
+CI-Image Python 3.11. Wer hat hier versagt? Nicht der CI. Nicht Python.
+Sondern *die Annahme, dass `make gates` ohne Image-Pinning sinnvoll ist*.
+Reproduzierbarkeit ist nicht "läuft auch im CI", sondern "läuft im
+*selben Image-Hash*".
+
 ## Lernziele
 
-* Gates als `make`-Targets aufsetzen
-* Critical Coverage von Gesamt-Coverage trennen
-* Gates im CI verankern
+Nach diesem Modul kannst du:
+
+* Gates als `make`-Targets mit ID-Kommentar *aufsetzen* (Anwenden),
+* Critical Coverage von Gesamt-Coverage *unterscheiden* und ihre Schwellen *begründen* (Bewerten),
+* einen ADR-Satz in eine Fitness Function *übersetzen* (Erschaffen — Brücke zu [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md)),
+* einen bootstrap-aware Gate mit Hochschalt-Trigger *entwerfen* (Erschaffen),
+* einen Gate-Typ einem Fehlerbild *zuordnen* (SQL-Injection → Security-Gate, Layer-Bruch → Architekturtest) (Analysieren).
 
 ## Lab-Bezug
 
@@ -96,15 +111,79 @@ ist sprach-unabhängig im Konzept, aber sprach-abhängig in der
 Konkretion — genau deshalb deckt das Begleit-Lab fünf Sprachen
 parallel ab.
 
+## Typische Fehlvorstellungen
+
+- **"Gate = Lint."** — Lint ist *ein* Gate-Typ. Architekturtests, Coverage-Gates, Security-Gates, Replay-Determinism-Gates sind weitere. Pro Repo entstehen sprachen- und domänenabhängige Gate-Familien.
+- **"Wenn ein Gate manchmal rot sein darf, ist das pragmatisch."** — Dann ist es kein Gate, sondern ein Vorschlag. Pragmatik gehört in Carveouts oder bootstrap-aware Gates — mit Trigger und Folge-Slice.
+- **"Coverage 80 % ist die richtige Schwelle."** — Es gibt keine universelle Schwelle. Critical Coverage (Security, Geld, Datenintegrität) ≠ Gesamt-Coverage. Schwellen sind ADR-pflichtig.
+- **"`make gates` lokal grün heißt fertig."** — Nur wenn lokal und CI dasselbe Image benutzen (Modul 13). Sonst debuggst du den Unterschied.
+
+## Worked Example: vom ADR-Satz zur Fitness Function
+
+**Ausgangs-ADR:** ADR-0007 (siehe Worked Example in [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md#worked-example-vom-diskussionsfaden-zum-prüfbaren-adr)) sagt:
+
+> "Service-Layer importiert ausschließlich aus `adapter/`-Paket."
+
+**Schritt 1 — Aussage maschinell formulieren.** Aus *"importiert
+ausschließlich aus"* wird:
+> Keine Datei unter `src/service/**` darf einen Import enthalten, dessen
+> Modul nicht mit `adapter.` beginnt oder ein Standardbibliotheks-Modul ist.
+
+**Schritt 2 — Werkzeug wählen.** Python → `import-linter` oder
+`grimp`. Java → `ArchUnit`. Go → `depguard`. Allgemein:
+`dep-cruiser` für Node, eigene AST-Scanner für Nischensprachen.
+
+**Schritt 3 — Implementierung (Python-Beispiel mit `import-linter`):**
+
+```ini
+# .importlinter
+[importlinter]
+root_packages = service
+
+[importlinter:contract:service-adapter-only]
+name = service imports only from adapter or stdlib
+type = forbidden
+source_modules =
+    service
+forbidden_modules =
+    requests
+    urllib3
+    httpx
+```
+
+**Schritt 4 — Als Gate verdrahten:**
+
+```makefile
+arch-check:  ## LH-QA-COUPLING-002 / ADR-0007 — Service-Adapter-Trennung
+	lint-imports
+```
+
+**Schritt 5 — `make gates` lokal grün — und im CI mit gepinnter
+Toolchain (Modul 13).**
+
+**Schritt 6 — Bewusstes Brechen:** Implementer fügt zu Debug-Zwecken
+`import requests` in `service/foo.py`. `make arch-check` läuft rot mit
+`ADR-0007 violated`. Genau der Effekt, der eine ADR von einer
+Absichtserklärung trennt.
+
 ## Übungen
 
 * Schreibe einen Architekturtest, der ADR-3 als Regel umsetzt
 * Provoziere absichtlich einen Coverage-Gate-Failure auf einer kritischen Datei
 
+Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+
 ## Selbstcheck
 
 * Warum braucht es Critical Coverage zusätzlich zur Gesamt-Coverage?
 * Welcher Gate-Typ erkennt eine SQL-Injection — Linter, Typecheck oder Security Gate?
+
+### Selbstcheck-Rubrik
+
+| Frage | rudimentär | solide | exzellent |
+|---|---|---|---|
+| Warum Critical Coverage *zusätzlich*? | "Wichtige Dateien besonders." | Gesamt-Coverage glättet kritische Pfade unter unkritischen Massendateien weg. Critical Coverage misst gezielt Pfade mit Sicherheits-, Geld- oder Datenintegritäts-Risiko. | + Folge: Critical Coverage hat *eigene* (höhere) Schwelle und *eigene* ADR-Kette für Schwellen-Senkung. Carveout auf Critical Coverage ist immer ein HIGH-Finding im Review. |
+| SQL-Injection: Linter / Typecheck / Security Gate? | "Security Gate." | Security Gate (Semgrep/Bandit/CodeQL). Linter sieht den String, nicht die Semantik; Typecheck sieht den Typ `str`, nicht die Vertrauensgrenze. | + Hinweis: Manche Linter haben *Semgrep-Regeln* integriert (z. B. `bandit` für Python) — Trennlinie ist nicht "Tool", sondern "Regel-Klasse". Security-Regeln verlangen *Datenfluss*-Analyse, klassische Linter machen nur lokale Mustererkennung. |
 
 ## Weiterlesen
 

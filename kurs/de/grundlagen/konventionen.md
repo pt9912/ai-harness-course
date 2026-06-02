@@ -75,6 +75,28 @@ für ein typisches Repo:
 7. `AGENTS.md`
 8. `harness/README.md`
 
+```mermaid
+flowchart TD
+    L["1. spec/lastenheft.md<br/>(vertraglich)"] --> S["2. spec/architecture.md"]
+    S --> A["3. docs/plan/adr/<br/>(ADRs)"]
+    A --> R["4. roadmap.md"]
+    R --> U["5. docs/user/*.md"]
+    U --> RM["6. README.md"]
+    RM --> AG["7. AGENTS.md"]
+    AG --> H["8. harness/README.md"]
+    style L fill:#fff4d6,stroke:#d4a017
+    style S fill:#fff4d6,stroke:#d4a017
+    style A fill:#fff4d6,stroke:#d4a017
+    style AG fill:#dceaff,stroke:#3366cc
+    style H fill:#dceaff,stroke:#3366cc
+
+    Conflict[/"Konflikt zwischen<br/>AGENTS.md und Spec?"/] -. "AGENTS.md anpassen,<br/>nie die Spec" .-> AG
+```
+
+Gelb: kanonische Quellen — Spec, Architektur, ADRs. Blau: Harness-Index
+und Agenten-Konventionen — sie *beschreiben* die kanonischen Quellen,
+sie *ersetzen* sie nicht.
+
 Regel: Widerspricht `AGENTS.md` oder `harness/README.md` einer kanonischen
 Quelle, wird `AGENTS.md`/`harness/README.md` angepasst — nie die kanonische
 Quelle. Der Harness folgt der Spec, nicht umgekehrt.
@@ -90,9 +112,30 @@ Precedence:
 | `spec/spezifikation.md` | **technisch verbindlich, fortschreibbar** (Algorithmen, Defaults, Protokolle) | ADR-Schärfung erlaubt |
 | `spec/architecture.md` | Diagramme, Komponentensicht, **keine eigenen Anforderungen** | Diagramm-Update |
 
-Folgeregel (Beispiel `c-hsm-doc`, siehe [`fallstudien.md`](fallstudien.md)):
-*"ADRs DÜRFEN die Spezifikation schärfen, DÜRFEN NICHT das Lastenheft
-schärfen."* Diese eine Regel kapselt die gesamte Trennung von
+```mermaid
+flowchart TD
+    subgraph LH["lastenheft.md — vertraglich (wir versprechen)"]
+        LH1["LH-FA-*, LH-QA-*<br/>Anforderungen mit ID<br/>Akzeptanzkriterien"]
+    end
+    subgraph SP["spezifikation.md — technisch (wir liefern wie)"]
+        SP1["Algorithmen<br/>Defaults<br/>Protokolle"]
+    end
+    subgraph AR["architecture.md — diagrammatisch (so sieht es aus)"]
+        AR1["Komponenten<br/>Schnittstellen<br/>keine eigenen Anforderungen"]
+    end
+    LH -- "begrenzt was<br/>geliefert werden darf" --> SP
+    SP -- "wird visualisiert durch" --> AR
+    ADR["ADR<br/>(begründet Lösungswahl)"] -. "darf schärfen" .-> SP
+    ADR -. "darf NICHT schärfen" .-x LH
+    style LH fill:#fff4d6,stroke:#d4a017
+    style SP fill:#e0f0e0,stroke:#3a8a3a
+    style AR fill:#dceaff,stroke:#3366cc
+```
+
+Drei Schichten, drei Änderungs-Prozesse. Die kritische Hard Rule
+(Beispiel `c-hsm-doc`, siehe [`fallstudien.md`](fallstudien.md)):
+**ADRs DÜRFEN die Spezifikation schärfen, DÜRFEN NICHT das Lastenheft
+schärfen.** Diese eine Regel kapselt die gesamte Trennung von
 "wir liefern" und "wir versprechen".
 
 ### ID-Schema als Klammer

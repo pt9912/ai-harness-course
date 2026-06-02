@@ -71,14 +71,31 @@ einen kommentierten Agenten-Lauf an. Wenn 4–5 unklar sind, plane für
 
 | Bereich | Inhalt |
 |---|---|
-| [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, 2×2-Klassifikation, drei Säulen, Steering Loop, drei reale Fallstudien — vor den Modulen zu lesen. |
+| [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, 2×2-Klassifikation, drei Säulen, Steering Loop, vier Fallstudien, **Lernpfade**, **Reflexions­vorlage**, **Phasen-Checkpoints** — vor den Modulen zu lesen. |
 | [`00-einfuehrung/`](00-einfuehrung/) | Modul 0: Worum geht es überhaupt? |
 | [`01-spec-und-architektur/`](01-spec-und-architektur/) | Module 1–3: Lebenszyklus, Lastenheft, ADRs. |
 | [`02-planung/`](02-planung/) | Module 4–6: Planning-Lifecycle, Roadmap, Carveouts. |
 | [`03-agenten/`](03-agenten/) | Module 7–8: Rollen und Implementierung. |
 | [`04-qualitaet/`](04-qualitaet/) | Module 9–12: Review, Verifikation, Replay, Gates. |
 | [`05-betrieb/`](05-betrieb/) | Module 13–15: Docker-Harness, Observability, Produktion. |
-| [`abschluss/`](abschluss/) | Abschlussprojekt, Quellen, Branchen-Anwendungsanker. |
+| [`abschluss/`](abschluss/) | Abschlussprojekt mit Bewertungsraster, Quellen, Branchen-Anwendungsanker. |
+
+## Lernpfade je nach Rolle
+
+Alle Module sind sinnvoll, aber Vertiefung lohnt je nach Rolle anders.
+Drei empfohlene Schwerpunkt-Pfade in [`grundlagen/lernpfade.md`](grundlagen/lernpfade.md):
+
+- **Pfad A** für Architects/Tech Leads: Spec-Disziplin, ADRs, Verifikation, Architecture Fitness.
+- **Pfad B** für DevOps/KI-Plattform: Gates, Reproduzierbarkeit, Observability, Incident Response.
+- **Pfad C** für implementierende Entwickler: Agentenbedienung, Reviews, Hard Rules.
+
+## Selbstdiagnose zwischen Phasen
+
+[`grundlagen/checkpoints.md`](grundlagen/checkpoints.md) enthält
+Mini-Checkpoints zwischen den Phasen (A nach Spec/Architektur, B nach
+Planung, C nach Agenten, D nach Qualität). Jeder Checkpoint ist eine
+kleine, konkrete Aufgabe mit Selbsttest — gedacht als Stolperstein
+*bevor* das Abschlussprojekt überfordert.
 
 ## Arbeitsweise
 

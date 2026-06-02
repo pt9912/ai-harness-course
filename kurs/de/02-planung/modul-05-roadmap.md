@@ -1,9 +1,23 @@
 # Modul 5 — Roadmap Engineering
 
+> **Aufwand:** ca. 45 Min Lesen · 60 Min Übung. Dieses Modul ist absichtlich kurz — die Tiefe liegt in [Modul 4 (Slice-Schnitt)](modul-04-planning-harness.md) und [Modul 6 (Carveouts)](modul-06-carveouts.md).
+
+## Engage
+
+Frage an drei Tech Leads: *"Wann ist Welle 3 fertig?"* — Antwort A:
+*"Am 30. Juni."* Antwort B: *"Wenn SL-024 und SL-027 in done/ liegen
+und der Replay-Lauf grün ist."* Antwort C: *"Wenn das Team durch ist."*
+Welche Antwort ist eine Roadmap? Genau eine. Die anderen sind Wunsch
+oder Status.
+
 ## Lernziele
 
-* Eine Roadmap mit Wellen, Triggern und Abhängigkeiten aufbauen
-* Fortschritt sichtbar machen, ohne in Burndown-Theater zu verfallen
+Nach diesem Modul kannst du:
+
+* eine Roadmap als Reihenfolge von Wellen mit Triggern *aufbauen* (Erschaffen),
+* Welle ↔ Meilenstein ↔ Release sauber *unterscheiden* (Verstehen),
+* eine Welle, die 30 % über Schätzung liegt, *bewerten* (neu schneiden / neu planen / Carveout) (Bewerten),
+* Welle-Abhängigkeiten *modellieren* und Blocker *identifizieren* (Analysieren).
 
 ## Lab-Bezug
 
@@ -21,15 +35,30 @@
 Eine Roadmap ist eine Reihenfolge von Wellen, keine Reihenfolge von
 Terminen. Termine sind eine Folge der Wellen, nicht ihr Treiber.
 
+## Typische Fehlvorstellungen
+
+- **"Roadmap ist eine Datumsleiste."** — Datum ist Output, nicht Input. Wer Datumsleisten plant, plant Wunschdenken.
+- **"Burndown ist Fortschritt."** — Burndown ist *Tempo*. Fortschritt ist, ob die Welle das verspricht, was sie sollte.
+- **"Eine Roadmap ist statisch."** — Eine Roadmap, die nach drei Wellen nicht angepasst wurde, hat den Steering Loop nicht durchlaufen.
+
 ## Übungen
 
 * Aufbau einer produktiven Roadmap für das Begleit-Lab
 * Modelliere eine Abhängigkeit, die eine spätere Welle blockiert
 
+Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+
 ## Selbstcheck
 
 * Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
 * Was unterscheidet eine Welle von einem Meilenstein?
+
+### Selbstcheck-Rubrik
+
+| Frage | rudimentär | solide | exzellent |
+|---|---|---|---|
+| Welle 30 % über Schätzung — was tun? | "Mehr Zeit geben." | Diagnose vor Aktion: liegt es an Slice-Größe (→ neu schneiden), an Reihenfolge (→ neu planen), oder an unerwarteter Komplexität (→ Carveout)? | + Hinweis, dass 30 % früh ein Steering-Loop-Signal sein können (Slice-Sizing-Regel schärfen), 30 % spät (vor Welle-Closure) eher Carveout. |
+| Welle vs. Meilenstein? | "Größe." | Welle = Bündel paralleler/serialisierter Slices mit Closure-Kriterien. Meilenstein = extern beobachtbarer Zustand (Release, Audit-Punkt). | + Eine Welle endet *durch* Closure-Kriterien; ein Meilenstein endet durch *Datum oder externe Bestätigung* — und genau deshalb leitet sich der Meilenstein aus Wellen ab, nicht umgekehrt. |
 
 ## Weiterlesen
 

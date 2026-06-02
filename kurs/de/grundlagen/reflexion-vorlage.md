@@ -1,0 +1,79 @@
+# Reflexionsvorlage für Fehler-Provokations-Übungen
+
+Mehrere Module enthalten Übungen, in denen du *absichtlich* einen Fehler
+provozierst — eine Halluzination, eine Spec-Lücke, eine DoD-Verletzung,
+einen Coverage-Failure. Productive Failure (Kapur) wird erst dann zu
+Lernen, wenn die Reflexion strukturiert ist.
+
+Verwende nach jeder solchen Übung diese drei Fragen. Schreibe die
+Antworten auf — nicht nur "im Kopf durchspielen".
+
+## Die drei Standardfragen
+
+### 1. Was ist beobachtbar passiert?
+
+Beschreibe das Ergebnis ohne Bewertung. Konkret, nicht "der Agent war
+schlecht", sondern: *Welche Tool-Calls hat er gemacht? Welche Dateien
+geändert? Welche Meldung hat das Gate produziert? An welcher Stelle in
+der Spec ist er aus dem Korridor gefallen?*
+
+Maßstab: Wenn jemand anderes nur deinen Bericht liest, kann er den Lauf
+reproduzieren.
+
+### 2. Welche Harness-Lücke war Ursache?
+
+Ordne den Fehler genau einem Quadranten der 2×2-Matrix zu (siehe
+[`klassifikation.md`](klassifikation.md)):
+
+- *Computational + Feedforward* fehlte? (z. B. Tool war nicht in der Allowlist eingeschränkt, Typ-Signatur war zu offen)
+- *Computational + Feedback* fehlte? (z. B. kein Linter-Gate für diese Klasse von Fehlern)
+- *Inferential + Feedforward* fehlte? (z. B. Spec war an dieser Stelle stumm, ADR fehlte, AGENTS.md sagte nichts)
+- *Inferential + Feedback* fehlte? (z. B. Reviewer-Skill hatte diese Failure-Klasse nicht im Blick)
+
+Anti-Antwort: "Das Modell war zu dumm." Modelle werden besser oder
+schlechter, aber der Quadrant bleibt — die Frage ist, welche Kontrolle
+*du* aus dem Lauf lernen kannst.
+
+### 3. Welche Steering-Loop-Aktion folgt?
+
+Eine konkrete Änderung am Harness, nicht eine vage Absicht. Drei
+Beispiele für gute Antworten:
+
+- "Ich ergänze in AGENTS.md den Satz: 'Optimierer darf nie direkt aufs Gerät schreiben — Output fließt durch Statemachine.' (Inferential Feedforward)"
+- "Ich schreibe einen ArchUnit-Test, der `optimizer.*` → `device.*`-Imports verbietet. (Computational Feedback)"
+- "Ich erweitere die Tool-Allowlist des Implementation-Agenten um `--no-direct-device-write`. (Computational Feedforward)"
+
+Schlechte Antworten: "Ich werde aufmerksamer", "Wir müssen besser
+testen", "Vielleicht ein anderes Modell". Diese sind nicht reproduzierbar
+und nicht prüfbar.
+
+## Wann darf eine Reflexion *nicht* zu einer Harness-Änderung führen?
+
+Nicht jeder Einzelfehler verdient einen neuen Sensor. Faustregel
+(Steering Loop, siehe [`klassifikation.md`](klassifikation.md#steering-loop)):
+
+- **Einmal:** notieren, keine Aktion.
+- **Zweimal:** Symptom — beobachten, kategorisieren.
+- **Dreimal:** Lücke im Harness — Guide oder Sensor nachziehen.
+
+Wer auf jeden Einzelfehler mit einem neuen Gate reagiert, baut sich einen
+Harness, der vor lauter Schutzschichten nicht mehr atmet. Wer auf
+*keinen* wiederkehrenden Fehler reagiert, baut sich einen Harness, der
+mit der Zeit irrelevant wird.
+
+## Eintrag in den Lern-Trace
+
+Lege pro Modul-Übung einen kurzen Eintrag an:
+
+```
+Modul: <nummer>
+Übung: <kurztitel>
+Datum: <YYYY-MM-DD>
+
+1. Beobachtung: <2-3 Sätze>
+2. Harness-Lücke (Quadrant): <Q + Begründung>
+3. Steering-Loop-Aktion: <konkret oder "noch nicht — Erstvorfall">
+```
+
+Diese Einträge sind dein eigenes Golden Set für den späteren Vergleich:
+*Welche Harness-Lücken treten in meinen Projekten wiederholt auf?*
