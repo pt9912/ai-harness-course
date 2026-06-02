@@ -260,8 +260,9 @@ sonst ist er eine schöne Konvention, die niemand prüft.
 
 ## Übungen
 
-* Dokumentiere einen Carveout für eine fehlende Coverage-Schwelle
-* Verknüpfe ihn mit einem konkreten Folge-Slice
+* **Carveout dokumentieren** (Lernziel 1 · Erschaffen·prozedural; folgt [Worked Example A](#worked-example-a-einen-carveout-dokumentieren)). Lege für eine fehlende Coverage-Schwelle eine `CO-<NNN>-*.md`-Datei mit den sechs Pflichtfeldern an (Status, Datum, betroffenes Gate, Geltungsbereich, Folge-Slice, Auflösungs-Trigger). Trage den `# CO-<NNN>`-Kommentar in die Gate-Konfiguration ein. Vergleich: [`../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md`](../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md).
+* **Folge-Slice verknüpfen** (Lernziel 1, fortgesetzt). Schreibe den Folge-Slice mit konkretem DoD und beobachtbarem Trigger so, dass die Auflösung des Carveouts maschinell erkennbar wird (Schritt 5 in Worked Example A).
+* **Carveout-Audit-Slice entwerfen** (Lernziel 4 · Erschaffen·prozedural; folgt [Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)). Schreibe für die *nächste* Welle deines Repos einen `SL-CO-AUDIT-<welle>`-Slice mit vier DoD-Punkten und Rollen-Zuweisung (Planner identifiziert · Architect entscheidet bei Permanenz · Implementer führt aus). Lege die Audit-Bericht-Tabelle (vorher/nachher/Aktion) als Closure-Notiz-Block bei. Provoziere als Fehlerfall: lass *eine* Welle ohne Audit schließen und beobachte, was nach zwei Wellen mit den unauditiierten Carveouts passiert.
 
 ## Reflexion
 
