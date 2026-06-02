@@ -15,10 +15,10 @@ gewinnt "ist halt so" gegen "weil".
 
 Nach diesem Modul kannst du:
 
-* einen ADR im MADR-Format mit Kontext, Optionen, Entscheidung und Konsequenzen *verfassen* (Erschaffen),
-* die Trennung ADR ↔ Spec ↔ Plan *erklären* und Grenzfälle *einordnen* (Analysieren),
-* eine ADR-Aussage in eine maschinell prüfbare Fitness Function *übersetzen* (Erschaffen),
-* zwischen `superseded` und `deprecated` ADRs *unterscheiden* und einen Folge-ADR *entwerfen* (Bewerten + Erschaffen).
+* einen ADR im MADR-Format mit Kontext, Optionen, Entscheidung und Konsequenzen *verfassen* (Erschaffen · prozedural),
+* die Trennung ADR ↔ Spec ↔ Plan *erklären* und Grenzfälle *einordnen* (Analysieren · konzeptuell),
+* eine ADR-Aussage in eine maschinell prüfbare Fitness Function *übersetzen* (Erschaffen · prozedural),
+* zwischen `superseded` und `deprecated` ADRs *unterscheiden* und einen Folge-ADR *entwerfen* (Bewerten + Erschaffen · konzeptuell+prozedural).
 
 ## Lab-Bezug
 
@@ -139,14 +139,14 @@ Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
 
 ## Reflexion
 
-Nach jeder Übung — besonders nach dem ADR-Verletzungs-Lauf — kurz **schriftlich**:
+Vier Standardfragen aus [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach jeder Übung, besonders nach dem ADR-Verletzungs-Lauf.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Hat der Agent die ADR erkannt? Hat er die Verletzung benannt? Oder hat er "schien einfacher" geantwortet (siehe Engage)?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). ADR-Erkennung ist *inferential feedforward*, ArchUnit-Test ist *computational feedback*.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — fehlende Fitness Function nachziehen? ADR-Bezug in `harness/README.md` schärfen?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "ADR ohne Fitness Function ist eine ADR", "ADRs sind Dokumentation, nicht Constraints").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Hat der Agent die ADR erkannt? Hat er die Verletzung benannt? Oder "schien einfacher" geantwortet (siehe Engage)?
+- **2×2-Quadrant:** ADR-Erkennung ist *inferential feedforward*, ArchUnit-Test ist *computational feedback*.
+- **Steering-Loop:** fehlende Fitness Function nachziehen? ADR-Bezug in `harness/README.md` schärfen?
+- **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "ADR ohne Fitness Function ist eine ADR", "ADRs sind Dokumentation, nicht Constraints").
 
 ## Selbstcheck
 

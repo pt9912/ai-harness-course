@@ -66,8 +66,9 @@ Die Module sind nach Phasen gruppiert:
 | [05 Betrieb](kurs/de/05-betrieb/) | 13–15 | Docker · Observability · Produktion |
 | [Abschluss](kurs/de/abschluss/) | — | Abschlussprojekt · Quellen |
 
-Eine englische Übersetzung ist für `kurs/en/` vorgesehen und folgt
-demselben Aufbau.
+> **Roadmap-Hinweis.** `kurs/en/` ist als Skelett angelegt, aber noch
+> nicht inhaltlich befüllt. Eine englische Übersetzung folgt demselben
+> Aufbau, ist aber derzeit *nicht* Bestandteil des Kurses.
 
 ## Lizenz
 

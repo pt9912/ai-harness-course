@@ -15,11 +15,11 @@ Reproduzierbarkeit ist nicht "läuft auch im CI", sondern "läuft im
 
 Nach diesem Modul kannst du:
 
-* Gates als `make`-Targets mit ID-Kommentar *aufsetzen* (Anwenden),
-* Critical Coverage von Gesamt-Coverage *unterscheiden* und ihre Schwellen *begründen* (Bewerten),
-* einen ADR-Satz in eine Fitness Function *übersetzen* (Erschaffen — Brücke zu [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md)),
-* einen bootstrap-aware Gate mit Hochschalt-Trigger *entwerfen* (Erschaffen),
-* einen Gate-Typ einem Fehlerbild *zuordnen* (SQL-Injection → Security-Gate, Layer-Bruch → Architekturtest) (Analysieren).
+* Gates als `make`-Targets mit ID-Kommentar *aufsetzen* (Anwenden · prozedural),
+* Critical Coverage von Gesamt-Coverage *unterscheiden* und ihre Schwellen *begründen* (Bewerten · konzeptuell),
+* einen ADR-Satz in eine Fitness Function *übersetzen* (Erschaffen · prozedural — Brücke zu [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md)),
+* einen bootstrap-aware Gate mit Hochschalt-Trigger *entwerfen* (Erschaffen · prozedural),
+* einen Gate-Typ einem Fehlerbild *zuordnen* (SQL-Injection → Security-Gate, Layer-Bruch → Architekturtest) (Analysieren · konzeptuell).
 
 ## Lab-Bezug
 
@@ -108,8 +108,8 @@ nicht hat — `solid-suppression-gate` (C#-Pendant zum noqa-gate),
 
 Pro Sprache wachsen also unterschiedliche Gate-Familien. Der Harness
 ist sprach-unabhängig im Konzept, aber sprach-abhängig in der
-Konkretion — genau deshalb deckt das Begleit-Lab fünf Sprachen
-parallel ab.
+Konkretion — genau deshalb wird das Begleit-Lab in Phase C fünf
+Sprachen parallel abdecken (heute noch nicht ausgeliefert).
 
 ## Typische Fehlvorstellungen
 
@@ -178,14 +178,14 @@ Absichtserklärung trennt.
 
 ## Reflexion
 
-Nach dem Architekturtest-Bau und dem provozierten Coverage-Failure kurz **schriftlich**:
+Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach dem Architekturtest-Bau und dem provozierten Coverage-Failure.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Welche ADR-Aussage hattest du schwer in eine Fitness Function übersetzt? Welcher Coverage-Lauf war auf welchem kritischen Pfad rot?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Gates sind *computational feedback*; bootstrap-aware Gates kombinieren mit Trigger-Disziplin (*inferential feedforward*).
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — bootstrap-aware Gate dokumentieren? ID-Kommentar im Make-Target nachziehen? domänenspezifisches Gate (`test-determinism`, `noqa-gate`) einführen?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Gate = Lint", "Coverage 80 % ist die richtige Schwelle", "Mehr Tests sind immer besser").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Welche ADR-Aussage hattest du schwer in eine Fitness Function übersetzt? Welcher Coverage-Lauf war auf welchem kritischen Pfad rot?
+- **2×2-Quadrant:** Gates sind *computational feedback*; bootstrap-aware Gates kombinieren mit Trigger-Disziplin (*inferential feedforward*).
+- **Steering-Loop:** bootstrap-aware Gate dokumentieren? ID-Kommentar im Make-Target nachziehen? domänenspezifisches Gate (`test-determinism`, `noqa-gate`) einführen?
+- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Gate = Lint", "Coverage 80 % ist die richtige Schwelle", "Mehr Tests sind immer besser").
 
 ## Selbstcheck
 

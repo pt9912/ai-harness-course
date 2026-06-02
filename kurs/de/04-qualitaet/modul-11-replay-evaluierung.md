@@ -28,10 +28,10 @@ bekommt man das Drift-Symptom in den Griff?
 
 Nach diesem Modul kannst du:
 
-* einen Replay-Lauf *einrichten*, der unter Beibehaltung von Modellversion + Seed deterministisch wiederholbar ist (Anwenden),
-* ein Golden Set *aufbauen* und Auswahlkriterien *begründen* (Erschaffen),
-* eine Regression durch Modellwechsel *messen* und einen Drift *quantifizieren* (Analysieren),
-* Symptome von Golden-Set-Überfitting *erkennen* und Gegenmaßnahmen (Rotation, Sampling) *entwerfen* (Bewerten + Erschaffen).
+* einen Replay-Lauf *einrichten*, der unter Beibehaltung von Modellversion + Seed deterministisch wiederholbar ist (Anwenden · prozedural),
+* ein Golden Set *aufbauen* und Auswahlkriterien *begründen* (Erschaffen · prozedural),
+* eine Regression durch Modellwechsel *messen* und einen Drift *quantifizieren* (Analysieren · prozedural),
+* Symptome von Golden-Set-Überfitting *erkennen* und Gegenmaßnahmen (Rotation, Sampling) *entwerfen* (Bewerten + Erschaffen · konzeptuell+prozedural).
 
 ## Lab-Bezug
 
@@ -218,14 +218,14 @@ Replay-Lauf noch als derselbe Lauf interpretierbar ist.
 
 ## Reflexion
 
-Nach dem Replay-Setup und der Modellwechsel-Drift-Messung kurz **schriftlich**:
+Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach dem Replay-Setup und der Modellwechsel-Drift-Messung.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Welche Pflichtfelder hattest du im Manifest? Welche fehlten? In welcher Reihenfolge hast du Verdächtige für die Drift abgearbeitet?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Replay als Sensor ist *computational feedback*; Golden-Set-Pflege ist Entropy Management.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Image-Hash als Manifest-Pflicht? Golden-Set-Rotation als Welle? Adversarial-Beispiele aus deinem Reflexions-Trace ziehen?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Wenn der Replay grün ist, ist das Modell gut", "Determinismus = Reproduzierbarkeit", "Golden Set ist statisch").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Welche Pflichtfelder hattest du im Manifest? Welche fehlten? In welcher Reihenfolge hast du Verdächtige für die Drift abgearbeitet?
+- **2×2-Quadrant:** Replay als Sensor ist *computational feedback*; Golden-Set-Pflege ist Entropy Management.
+- **Steering-Loop:** Image-Hash als Manifest-Pflicht? Golden-Set-Rotation als Welle? Adversarial-Beispiele aus deinem Reflexions-Trace ziehen?
+- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Wenn der Replay grün ist, ist das Modell gut", "Determinismus = Reproduzierbarkeit", "Golden Set ist statisch").
 
 ## Selbstcheck
 
@@ -243,7 +243,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Was braucht ein deterministischer Replay? | "Seed." | Modellversion + Seed + Inputs *und* Tool-Versionen + Zeitstempel-Maskierung + Image-Hash (Docker-Harness, Modul 13). | + Hinweis: wer nur Seed pinnt, hat ~60 % Determinismus. Reale Drift-Quellen: Tool-Subversions, Lokale-Zeit, Netz-Latenz, Modell-Routing innerhalb derselben Version. |
 | Wann wird ein Golden Set giftig? | "Wenn es nicht passt." | Wenn Replay reproduzierbar grün ist, aber Realität rot — typisch durch jahrelang konstantes Set. Symptome: keine Failure-Klasse seit X Wochen, neue Eingabe-Klassen tauchen *nur* in Produktion auf. | + Gegenmaßnahmen: Rotation (alte Beispiele rausnehmen), Sampling aus Produktions-Traces, Adversarial-Beispiele aus Steering-Loop-Einträgen ([`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) ziehen. |
 | Zwei Drift-Quellen — welche zuerst? | "Modell ändert sich." | Zwei konkrete: (a) Modellversion-/Routing-Drift (gleicher Tag, anderes Subroute beim Provider) und (b) Toolchain-Drift (Tool-Subversion oder Image-Hash anders als geplant). Beide sind in der ersten Woche messbar, beide haben einen sofortigen Sensor (Replay-Manifest-Vergleich). | + Begründung: andere Quellen (Eingabe-Distribution, Tool-Allowlist-Drift, Cache-Verhalten) sind nachgelagert — wer sie misst, bevor Modell und Toolchain gepinnt sind, misst Rauschen. Reihenfolge ist nicht beliebig. |
-| Unsicherster Schritt beim Replay-Manifest? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 3 Erwartungen, weil ich nicht entscheiden konnte, was *semantisch* gleich genug ist"). | + Pointe: Schritt 3 ist die häufigste Bruchstelle — wer Erwartungen wortwörtlich formuliert, bricht beim ersten Modellwechsel. Schritt 6 (Drift-Diagnose-Reihenfolge) ist die zweithäufigste: wer ohne Reihenfolge testet, klassifiziert echte Regressionen als Toolchain-Drift und umgekehrt. |
+| Unsicherster Schritt beim Replay-Manifest? | Schritt benannt, aber ohne Begründung ("Schritt 3 war schwer."). | Konkret benannter Schritt + Begründung (z. B. "Schritt 3 Erwartungen, weil ich nicht entscheiden konnte, was *semantisch* gleich genug ist"). | + Pointe: Schritt 3 ist die häufigste Bruchstelle — wer Erwartungen wortwörtlich formuliert, bricht beim ersten Modellwechsel. Schritt 6 (Drift-Diagnose-Reihenfolge) ist die zweithäufigste: wer ohne Reihenfolge testet, klassifiziert echte Regressionen als Toolchain-Drift und umgekehrt. |
 
 ## Weiterlesen
 

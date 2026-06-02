@@ -18,10 +18,10 @@ quadrantChart
     title 2×2 — Guides und Sensors
     x-axis "Feedforward (vor der Handlung)" --> "Feedback (nach der Handlung)"
     y-axis "Inferential (LLM)" --> "Computational (deterministisch)"
-    quadrant-1 "Computational + Feedback<br/>Linter, ArchUnit, Coverage"
-    quadrant-2 "Computational + Feedforward<br/>Typen, Allowlists, Schemas"
-    quadrant-3 "Inferential + Feedforward<br/>Spec, ADR, AGENTS.md"
-    quadrant-4 "Inferential + Feedback<br/>Reviewer, Verifier, Validator"
+    quadrant-1 "Computational + Feedback"
+    quadrant-2 "Computational + Feedforward"
+    quadrant-3 "Inferential + Feedforward"
+    quadrant-4 "Inferential + Feedback"
     "Spec-Lücke": [0.15, 0.25]
     "ArchUnit-Regel": [0.78, 0.85]
     "Reviewer-Skill": [0.85, 0.20]
@@ -48,10 +48,12 @@ nachgelagerte Review.
 ## Sprach-übergreifende Konkretion
 
 Die 2×2-Matrix ist sprach-neutral; die Sensoren in jedem Quadranten
-sind es nicht. Das Begleit-Lab zeigt das für fünf Sprachen
-(Go, Python, Kotlin, Java, C#/.NET) — jeweils mit eigener
-Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette. Die Module 8,
-12 und 13 verweisen direkt auf die Lab-Varianten.
+sind es nicht. Das Begleit-Lab wird das für fünf Sprachen
+(Go, Python, Kotlin, Java, C#/.NET) zeigen — jeweils mit eigener
+Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette. Die fünf
+Sprach-Skelette sind Phase C der Lab-Roadmap und heute noch nicht
+ausgeliefert; die Module 8, 12 und 13 verweisen bereits jetzt auf die
+geplanten Lab-Varianten.
 
 ## Drei Harness-Kategorien (Böckeler)
 
@@ -65,18 +67,18 @@ Jede Kontrolle adressiert genau eine der drei Kategorien:
 
 ```mermaid
 flowchart LR
-    subgraph M["Maintainability<br/>(lesbar, modular?)"]
+    subgraph M["Maintainability"]
         M1[Linter]
         M2[Komplexitätsmetriken]
         M3[ArchUnit]
         M4[Reviewer-Agent]
     end
-    subgraph A["Architecture Fitness<br/>(Constraints eingehalten?)"]
+    subgraph A["Architecture Fitness"]
         A1[Fitness Functions]
         A2[Latenz-Budgets]
         A3[OTel-Assertions]
     end
-    subgraph B["Behaviour<br/>(tut es das Richtige?)"]
+    subgraph B["Behaviour"]
         B1[Tests]
         B2[Replay]
         B3[Golden Sets]
@@ -126,7 +128,7 @@ flowchart TB
     CE -. "Agent weiß mehr" .-> Agent((Agent))
     AC -. "Agent kann weniger Falsches" .-> Agent
     EM -. "morgen + übermorgen<br/>noch wahr" .-> CE
-    EM -. .-> AC
+    EM -.-> AC
 ```
 
 Lesart: **Context Engineering** schiebt Information *zum* Agenten;

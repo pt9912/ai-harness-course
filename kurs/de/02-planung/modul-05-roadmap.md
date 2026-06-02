@@ -14,10 +14,10 @@ oder Status.
 
 Nach diesem Modul kannst du:
 
-* eine Roadmap als Reihenfolge von Wellen mit Triggern *aufbauen* (Erschaffen),
-* Welle ↔ Meilenstein ↔ Release sauber *unterscheiden* und für ein Beispiel-Repo den jeweiligen Trigger *zuordnen* (Analysieren),
-* eine Welle, die 30 % über Schätzung liegt, *bewerten* (neu schneiden / neu planen / Carveout) (Bewerten),
-* Welle-Abhängigkeiten *modellieren* und Blocker *identifizieren* (Analysieren).
+* eine Roadmap als Reihenfolge von Wellen mit Triggern *aufbauen* (Erschaffen · prozedural),
+* Welle ↔ Meilenstein ↔ Release sauber *unterscheiden* und für ein Beispiel-Repo den jeweiligen Trigger *zuordnen* (Analysieren · konzeptuell),
+* eine Welle, die 30 % über Schätzung liegt, *bewerten* (neu schneiden / neu planen / Carveout) (Bewerten · prozedural+metakognitiv),
+* Welle-Abhängigkeiten *modellieren* und Blocker *identifizieren* (Analysieren · konzeptuell).
 
 ## Lab-Bezug
 
@@ -50,14 +50,13 @@ Terminen. Termine sind eine Folge der Wellen, nicht ihr Treiber.
 
 ## Reflexion
 
-Nach dem Roadmap-Bau kurz **schriftlich**:
+Vier Standardfragen aus [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach dem Roadmap-Bau. Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — War dein erster Trigger ein Datum oder ein beobachtbarer Zustand? Welche Welle hattest du *nur* mit Datum gedacht?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Trigger-Disziplin ist *inferential feedforward* (Roadmap-Skill).
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Welle-Eintrag-Template mit Trigger-Pflichtfeld? Closure-Kriterien als Selbst-Checkliste vor `done/`-Verschiebung?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Welle = Sprint", "Trigger = Datum", "Roadmap ist eine Datumsleiste").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** War dein erster Trigger ein Datum oder ein beobachtbarer Zustand? Welche Welle hattest du *nur* mit Datum gedacht?
+- **2×2-Quadrant:** Trigger-Disziplin ist *inferential feedforward* (Roadmap-Skill).
+- **Steering-Loop:** Welle-Eintrag-Template mit Trigger-Pflichtfeld? Closure-Kriterien als Selbst-Checkliste vor `done/`-Verschiebung?
+- **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Welle = Sprint", "Trigger = Datum", "Roadmap ist eine Datumsleiste").
 
 ## Selbstcheck
 

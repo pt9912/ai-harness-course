@@ -14,10 +14,10 @@ einen "läuft halt"-Modus.
 
 Nach diesem Modul kannst du:
 
-* eine Produktionsfreigabe mit belegten Checklist-Items *entwerfen* (Erschaffen),
-* Prompt-Injection-Symptome aus Telemetrie *erkennen* (Analysieren),
-* einen Incident innerhalb der ersten 15 Minuten *strukturiert* angehen (Anwenden),
-* Rollback und Fix-Forward gegeneinander *abwägen* und drei Anti-Rollback-Szenarien *benennen* (Bewerten).
+* eine Produktionsfreigabe mit belegten Checklist-Items *entwerfen* (Erschaffen · prozedural),
+* Prompt-Injection-Symptome aus Telemetrie *erkennen* (Analysieren · prozedural),
+* einen Incident innerhalb der ersten 15 Minuten *strukturiert* angehen (Anwenden · prozedural),
+* Rollback und Fix-Forward gegeneinander *abwägen* und drei Anti-Rollback-Szenarien *benennen* (Bewerten · konzeptuell).
 
 ## Lab-Bezug
 
@@ -169,16 +169,16 @@ Datenkorrektur.
 
 ## Reflexion
 
-Nach der Freigabe-Checkliste und dem Incident-Szenario kurz **schriftlich**:
+Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach der Freigabe-Checkliste und dem Incident-Szenario.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Welche Items deiner Checkliste hatten *keinen* Beleg, als du sie abhaken wolltest? Welche der drei Incident-Optionen hättest du im Stress gewählt — und wäre sie richtig gewesen?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Runbook-Trigger sind *inferential feedforward*; Telemetrie für Injection-Erkennung ist *computational feedback*.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Beleg-Pflicht im Checklisten-Template? Runbook um Trigger erweitern, statt "Service neu starten"? Injection-Marker als CI-Lauf-Auswertung?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Rollback ist die Standardantwort", "Produktionsfreigabe ist eine formale Checkbox", "Prompt-Injection ist eine Modell-Frage").
+- **Beobachtung:** Welche Items deiner Checkliste hatten *keinen* Beleg, als du sie abhaken wolltest? Welche der drei Incident-Optionen hättest du im Stress gewählt — und wäre sie richtig gewesen?
+- **2×2-Quadrant:** Runbook-Trigger sind *inferential feedforward*; Telemetrie für Injection-Erkennung ist *computational feedback*.
+- **Steering-Loop:** Beleg-Pflicht im Checklisten-Template? Runbook um Trigger erweitern, statt "Service neu starten"? Injection-Marker als CI-Lauf-Auswertung?
+- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Rollback ist die Standardantwort", "Produktionsfreigabe ist eine formale Checkbox", "Prompt-Injection ist eine Modell-Frage").
 
 **(Synthese-Frage, Modul-Abschluss):** Für ein dir bekanntes Projekt — nenne die drei *schwächsten* Stellen der Produktionsfreigabe und ordne jede einer Phase des Kurses (01–05) zu, in der das Defizit entstanden ist. Vergleiche dann mit der Pass-Through-Tabelle in [`../grundlagen/checkpoints.md`](../grundlagen/checkpoints.md#pass-through-logik-zum-abschlussprojekt) — landest du auf denselben Phasen?
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
@@ -194,7 +194,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Drei Runbook-Optionen bei Incident? | "Rollback oder weitermachen." | Rollback · Fix-Forward · Datenkorrektur. Drei *verschiedene* Antwortklassen, mit jeweils anderen Voraussetzungen (Rückwärtskompatibilität, Test-Coverage des Fix, Vorhandensein des Originaldatensatzes). | + Hinweis: Welche der drei greift, ist *vor* dem Incident im Runbook festzulegen — mit Triggern wie "DB-Migration rückwärtskompatibel?" und "Buggy-Daten bereits ausgeliefert?". Wer im Incident wählt, wählt typischerweise unter Stress die teuerste Option. |
 | Telemetrie für nachträgliche Injection-Erkennung? | "Logs." | Drei Spuren: Eingabe-Roh-Logging (mit Redaction), Tool-Call-Audit-Log, Output-vs-Eingabe-Konsistenz-Marker. | + Ergänzende Indikatoren: Cache-Miss-Spike, Tool-Allowlist-Reject-Counter — ohne mindestens *eines* der drei Pflicht-Felder bleibt Erkennung Glücksache. |
 | Wann ist Rollback der falsche Reflex? | "Wenn es nicht hilft." | Drei Szenarien: nicht-rückwärtskompatible DB-Migration, bereits erzeugte Buggy-Daten, ungetesteter Rollback-Pfad. | + Folge: Rollback gehört *vor* den Incident im Runbook entschieden — als bedingte Regel mit Trigger, nicht als Universal-Reflex. Wer im Incident entscheidet, entscheidet schlecht. |
-| Unsicherster Schritt der Freigabe-Checkliste? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 3 Anti-Items, weil ich nicht wusste, was bewusst *nicht* gefragt sein sollte"). | + Pointe: Schritt 3 (Anti-Items) verhindert schleichende Pflichten-Ausweitung. Schritt 5 (Beleg pro Item) ist der zweithäufigste unsichere Schritt — wer die Beleg-Pflicht aufgibt, baut Bürokratie. Beides sind keine Formfragen, sondern die einzigen Stellen, an denen die Freigabe vor Verschleiß geschützt ist. |
+| Unsicherster Schritt der Freigabe-Checkliste? | Schritt benannt, aber ohne Begründung ("Schritt 3 war ungewohnt."). | Konkret benannter Schritt + Begründung (z. B. "Schritt 3 Anti-Items, weil ich nicht wusste, was bewusst *nicht* gefragt sein sollte"). | + Pointe: Schritt 3 (Anti-Items) verhindert schleichende Pflichten-Ausweitung. Schritt 5 (Beleg pro Item) ist der zweithäufigste unsichere Schritt — wer die Beleg-Pflicht aufgibt, baut Bürokratie. Beides sind keine Formfragen, sondern die einzigen Stellen, an denen die Freigabe vor Verschleiß geschützt ist. |
 
 ## Weiterlesen
 

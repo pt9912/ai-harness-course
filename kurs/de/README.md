@@ -46,6 +46,40 @@ einen kommentierten Agenten-Lauf an. Wenn 4–5 unklar sind, plane für
 [Phase 1 (Spec)](01-spec-und-architektur/) und
 [Phase 4 (Qualität)](04-qualitaet/) mehr Zeit ein.
 
+### Vorab-Lektüre (Pflicht)
+
+Bevor du Modul 0 öffnest, lies einmal — auch wenn die Begriffe noch
+fremd wirken:
+
+1. [`grundlagen/konzeptkarte.md`](grundlagen/konzeptkarte.md) — Artefaktkette und vier Leitfragen.
+2. [`grundlagen/klassifikation.md`](grundlagen/klassifikation.md) §2×2-Matrix — die ersten zwei Bildschirmseiten reichen.
+
+Ab Modul 0 verlangen die Reflexionsblöcke eine Quadranten-Zuordnung
+(Computational/Inferential × Feedforward/Feedback). Wer die 2×2-Matrix
+nicht einmal gesehen hat, kann die Reflexion nicht ausfüllen — und die
+Reflexion ist nach der Pass-Through-Logik die teuerste Stelle, die zu
+überspringen.
+
+### Selbst-Diagnose: vom Voraussetzungscheck zur Phase
+
+Die Items oben sind nicht symmetrisch; sie zeigen auf unterschiedliche
+Phasen des Kurses. Wenn du beim Check stolperst, kannst du die
+[Pass-Through-Tabelle](grundlagen/checkpoints.md#pass-through-logik-zum-abschlussprojekt)
+nutzen, um die Phase mit der zu erwartenden schwächsten Abschluss-Achse
+schon vor Modul 0 zu identifizieren:
+
+| Voraussetzungs-Item | Schwierigkeit dort sagt voraus | Erwartete Schwäche im Abschluss |
+|---|---|---|
+| 1 (Git/PR) | wenig | — (Mindestschwelle) |
+| 2 (Docker) | wenig–mittel | Reproduzierbarkeit |
+| 3 (LLM-Trace) | mittel | Auditierbarkeit |
+| 4 (Akzeptanzkriterien) | mittel–hoch | Vollständigkeit + Konsistenz |
+| 5 (Linter/Typecheck/Integration) | mittel | Steering-Loop-Reife |
+
+Diese Tabelle ist *probabilistisch*, kein Urteil. Sie sagt dir nur, *wo
+du beim ersten Durchlauf wahrscheinlich Zeit investieren musst* — nicht,
+was du erreichen kannst.
+
 ## Lernfortschritt
 
 | Modul | Du solltest danach können ... |

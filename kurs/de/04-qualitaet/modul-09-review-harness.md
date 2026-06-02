@@ -15,11 +15,10 @@ Entscheidungsvorlage.
 
 Nach diesem Modul kannst du:
 
-* Findings nach HIGH/MEDIUM/LOW/INFO *klassifizieren* und Grenzfälle (LOW↔HIGH-Wanderung) *bewerten* (Bewerten),
-* Plan-, Design- und Code-Reviews *unterscheiden* (Verstehen),
-* einen Reviewer-Lauf so *einrichten*, dass er reproduzierbar wird (gleiche Eingabe → ähnliche Findings) (Anwenden),
-* einen Konflikt zwischen zwei Reviewer-Läufen (selbes Finding, unterschiedliche Kategorie) *diagnostizieren* (Analysieren),
-* einen Reviewer-Skill für ein konkretes Repo *schreiben*, der die Klassifikation HIGH/MEDIUM/LOW/INFO mit repo-spezifischen Anker-Regeln durchsetzt (Erschaffen).
+* Findings nach HIGH/MEDIUM/LOW/INFO *klassifizieren*, Plan-/Design-/Code-Reviews voneinander *unterscheiden* und Grenzfälle (LOW↔HIGH-Wanderung) *bewerten* (Bewerten · konzeptuell),
+* einen Reviewer-Lauf so *einrichten*, dass er reproduzierbar wird (gleiche Eingabe → ähnliche Findings) (Anwenden · prozedural),
+* einen Konflikt zwischen zwei Reviewer-Läufen (selbes Finding, unterschiedliche Kategorie) *diagnostizieren* (Analysieren · prozedural),
+* einen Reviewer-Skill für ein konkretes Repo *schreiben*, der die Klassifikation HIGH/MEDIUM/LOW/INFO mit repo-spezifischen Anker-Regeln durchsetzt (Erschaffen · prozedural).
 
 ## Lab-Bezug
 
@@ -192,14 +191,14 @@ Skill-Pattern für *Verifier* und *Validator* in Modul 10 bzw. in
 
 ## Reflexion
 
-Nach dem Review-Lauf gegen den kaputten Slice und der Reviewer-Skill-Schreibübung kurz **schriftlich**:
+Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach dem Review-Lauf gegen den kaputten Slice und der Reviewer-Skill-
+Schreibübung. Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Welche Kategorie hat der Reviewer-Agent vergeben? Welches Finding hast du erwartet, aber nicht bekommen? Welches Finding kam, das du nicht erwartet hast?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Reviewer ist *inferential feedback*; Klassifikations-Drift ist meist Lücke in der Skill-Datei.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Skill-Anker schärfen (HIGH-Liste konkreter)? Eingangs-Kontext-Pflicht erweitern? Negativbefund-Zeile erzwingen?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Reviewer ist ein zweiter Implementer", "Wenn der Reviewer-Agent zweimal anders kategorisiert, nehmen wir die mildere").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Welche Kategorie hat der Reviewer-Agent vergeben? Welches Finding hast du erwartet, aber nicht bekommen? Welches Finding kam, das du nicht erwartet hast?
+- **2×2-Quadrant:** Reviewer ist *inferential feedback*; Klassifikations-Drift ist meist Lücke in der Skill-Datei.
+- **Steering-Loop:** Skill-Anker schärfen (HIGH-Liste konkreter)? Eingangs-Kontext-Pflicht erweitern? Negativbefund-Zeile erzwingen?
+- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Reviewer ist ein zweiter Implementer", "Wenn der Reviewer-Agent zweimal anders kategorisiert, nehmen wir die mildere").
 
 ## Selbstcheck
 

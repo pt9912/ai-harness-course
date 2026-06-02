@@ -14,10 +14,10 @@ Flecken. Genau das ist der Grund, warum es Rollen gibt.
 
 Nach diesem Modul kannst du:
 
-* zehn typische Tätigkeiten den sechs Rollen *zuordnen* und Mehrfachzuweisungen *begründen* (Analysieren),
-* Übergaben zwischen den Rollen als Sequenz *modellieren* (Erschaffen),
-* einen Konfliktfall (Reviewer lehnt, Implementer widerspricht) *strukturiert auflösen* (Bewerten),
-* den Unterschied Verifikation vs. Validation an einem realen Fall *erklären* (Analysieren).
+* zehn typische Tätigkeiten den sechs Rollen *zuordnen* und Mehrfachzuweisungen *begründen* (Analysieren · konzeptuell),
+* Übergaben zwischen den Rollen als Sequenz *modellieren* (Erschaffen · konzeptuell),
+* einen Konfliktfall (Reviewer lehnt, Implementer widerspricht) *strukturiert auflösen* (Bewerten · prozedural),
+* den Unterschied Verifikation vs. Validation an einem realen Fall *erklären* (Analysieren · konzeptuell).
 
 ## Rollen-Sequenz für einen Slice
 
@@ -85,14 +85,14 @@ macht. Wer geplant hat, prüft nicht; wer geschrieben hat, reviewt nicht.
 
 ## Reflexion
 
-Nach der Rollen-Zuordnung und dem Konfliktfall-Durchspiel kurz **schriftlich**:
+Vier Standardfragen aus [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach der Rollen-Zuordnung und dem Konfliktfall-Durchspiel.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Hast du eine Tätigkeit nur einer Rolle zugeordnet, obwohl Mehrfachzuweisung sinnvoll war? Wer hat im Konfliktfall *zuerst* entschieden — und was war das Übergabe-Artefakt?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Rollen-Trennung ist Kontext-Trennung, primär *inferential feedforward*.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Skill-Datei pro Rolle? Tool-Allowlist pro Rolle? Übergabe-Artefakt-Pflicht im 8-Schritt-Workflow?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Eine Person spielt alle Rollen", "Reviewer macht das Verification gleich mit").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Hast du eine Tätigkeit nur einer Rolle zugeordnet, obwohl Mehrfachzuweisung sinnvoll war? Wer hat im Konfliktfall *zuerst* entschieden — und was war das Übergabe-Artefakt?
+- **2×2-Quadrant:** Rollen-Trennung ist Kontext-Trennung, primär *inferential feedforward*.
+- **Steering-Loop:** Skill-Datei pro Rolle? Tool-Allowlist pro Rolle? Übergabe-Artefakt-Pflicht im 8-Schritt-Workflow?
+- **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Eine Person spielt alle Rollen", "Reviewer macht das Verification gleich mit").
 
 ## Selbstcheck
 

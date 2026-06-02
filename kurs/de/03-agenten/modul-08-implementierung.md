@@ -1,6 +1,38 @@
 # Modul 8 — Implementierung durch KI-Agenten
 
 > **Aufwand:** ca. 120 Min Lesen · 120 Min Übung. Dieses Modul ist absichtlich tief — der 8-Schritt-Workflow und die Hard Rules sind die operative Brücke zwischen Theorie (Module 1–7) und Gates (Module 9–12).
+>
+> **Segmenting-Empfehlung (Sweller).** Das Modul zerfällt natürlich in
+> zwei Teile. **Teil A (8a — Workflow):** Engage · Lernziele ·
+> Mini-Vorgriff · 8-Schritt-Workflow · Worked Example. Lies A und mache
+> den minimalen Übungspfad — *bevor* du Teil B öffnest. **Teil B (8b —
+> Regeln und Kontext):** Hard Rules · Kontext-Verdichtung · weitere
+> Übungen · Reflexion · Selbstcheck. Wer A und B in einer Sitzung liest,
+> wird die Hard Rules nicht mehr in die richtige Stelle des Workflows
+> einordnen — sie sind ein zweiter, paralleler Mechanismus, kein nächster
+> Schritt.
+
+## Mini-Vorgriff: zwei Begriffe aus Modul 14
+
+Dieser Modulteil referenziert zweimal Begriffe, deren Vollform in
+[Modul 14 (Observability)](../05-betrieb/modul-14-observability.md)
+liegt. Für den ersten Durchgang reichen Kurzdefinitionen — analog zum
+Image-Hash-Vorgriff in
+[Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13):
+
+* **Cache-Hit-Rate** — Anteil der Eingabe-Tokens, die der LLM-Provider
+  aus dem Prompt-Cache liefert (statt erneut zu berechnen). Hoher
+  Anteil = niedrige Kosten und schnellere Antwort. In diesem Modul nur
+  als Argument: wer Spec/ADR/AGENTS.md am Anfang des Kontexts hält,
+  produziert hohe Cache-Hit-Raten; wer den Kontext zwischen Läufen
+  durcheinanderwirbelt, produziert Cache-Misses. Volldefinition Modul
+  14.
+* **Doku-Konsistenz-Agent** — automatisierter Drift-Detektor, der
+  AGENTS.md, `harness/README.md` und realen Code-/Gate-Stand
+  vergleicht und Widersprüche meldet. In diesem Modul nur als
+  Steering-Loop-Verweis: wenn Schritt 7 (Doku-Update) im Workflow
+  schwach ist, ist der Doku-Konsistenz-Agent der Sensor, der Drift
+  *findet*. Volldefinition Modul 14.
 
 ## Engage
 
@@ -16,10 +48,11 @@ nicht eine Empfehlung; es ist *die Reihenfolge*, die "schreiben" von
 
 Nach diesem Modul kannst du:
 
-* einen Slice nach dem 8-Schritt-Workflow *umsetzen* und die Reihenfolge Plan → Diff → Code *einhalten* (Anwenden),
-* drei Hard Rules für ein Beispiel-Repo *formulieren*, jeweils mit Falsch/Richtig-Beispiel und Begründung (Erschaffen),
-* eine Hard Rule einem Quadranten der 2×2-Matrix *zuordnen* (Analysieren),
-* die Wirkung von AGENTS.md auf einen Agentenlauf *messen*, indem du den Lauf mit und ohne AGENTS.md vergleichst (Bewerten).
+* einen Slice nach dem 8-Schritt-Workflow *umsetzen* und die Reihenfolge Plan → Diff → Code *einhalten* (Anwenden · prozedural),
+* drei Hard Rules für ein Beispiel-Repo *formulieren*, jeweils mit Falsch/Richtig-Beispiel und Begründung (Erschaffen · prozedural),
+* eine Hard Rule einem Quadranten der 2×2-Matrix *zuordnen* (Analysieren · konzeptuell),
+* die Wirkung von AGENTS.md auf einen Agentenlauf *messen*, indem du den Lauf mit und ohne AGENTS.md vergleichst (Bewerten · prozedural),
+* den schwächsten Schritt des Workflows in deinem eigenen Repo *einschätzen* und einen konkreten Beleg dafür *benennen* (Bewerten · metakognitiv).
 
 ## Lab-Bezug
 
@@ -240,7 +273,7 @@ Schritten 1–3, bevor Schritt 4 anfängt.
 ## Übungen
 
 * Implementierung eines Features aus einem Slice-Plan
-* Lass den Agenten ohne ADR-Kontext laufen und vergleiche mit dem Lauf *mit* ADR-Kontext
+* **AGENTS.md-Wirkungsmessung** — siehe Übungsskelett unten (operationalisiert das Bewerten-Lernziel "Wirkung von AGENTS.md messen")
 * Formuliere drei Hard Rules für ein Beispiel-Repo und prüfe, ob mindestens eine maschinell durchsetzbar ist
 
 ### Minimaler Übungspfad
@@ -254,16 +287,62 @@ Erwartete Beobachtung: Das Target erzeugt keinen Code. Es zeigt das
 Kontextpaket, das ein Implementation-Agent vor dem Plan lesen muss. Erst
 wenn du dieses Paket benennen kannst, ist der freie Agentenlauf sinnvoll.
 
+### Übungsskelett: AGENTS.md-Wirkungsmessung
+
+Das *Bewerten*-Lernziel (*"Wirkung von AGENTS.md auf einen Agentenlauf
+messen, indem du den Lauf mit und ohne AGENTS.md vergleichst"*) braucht
+ein definiertes Setup, sonst zerfällt es zu einem Bauchgefühl-Vergleich.
+Folge diesem Skelett:
+
+1. **Slice fixieren.** Wähle einen kleinen, gut abgegrenzten Slice —
+   ideal `SL-014a` aus dem Worked Example oben. Friere Spec-/ADR-Stand
+   und Modellversion ein.
+2. **Lauf A (mit AGENTS.md).** Starte den Implementation-Agenten mit
+   dem vollständigen Kontextpaket: Spec-Auszug, betroffene ADRs,
+   AGENTS.md, Tool-Allowlist. Speichere Diff, Plan-Ausgabe und
+   Schritt-8-Bericht in `runs/sl-014a-with-agents.md`.
+3. **Lauf B (ohne AGENTS.md).** Wiederhole *exakt* — gleicher Slice,
+   gleiches Modell, gleicher Seed, nur AGENTS.md aus dem Kontext
+   entfernt. Speichere Ergebnisse in `runs/sl-014a-no-agents.md`.
+4. **Diff entlang vier Achsen messen** — nicht freihändig vergleichen:
+
+   | Achse | Frage | Messgröße |
+   |---|---|---|
+   | Hard-Rule-Konformität | Hält Lauf B *jede* Hard Rule, die in AGENTS.md steht? | Anzahl Verstöße (vom Reviewer-Agent benannt) |
+   | Architektur-Konformität | Bleibt das Layering eingehalten? | `make arch-check` rot/grün |
+   | Plan-Qualität | Benennt der Plan Out-of-Scope, Risiken, Folge-Slices? | Schritt-4-Ausgabe Wort für Wort vergleichen |
+   | Bericht-Qualität | Schritt 8 enthält Sensors + Restrisiken konkret? | binär: enthält / enthält nicht |
+
+5. **Quadranten-Zuordnung.** Welcher der vier Befunde liegt in welchem
+   Quadranten der 2×2-Matrix? AGENTS.md ist *inferential feedforward* —
+   wo erwartest du den größten Effekt, wo den kleinsten? Was sagt die
+   Empirie deines Diffs?
+6. **Reflexionseintrag.** Verwende die vier Standardfragen aus
+   [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md). Frage
+   4 (Conceptual Change) ist hier zentral: was hattest du *vor* Lauf B
+   erwartet, was ist *durch* Lauf B unzufriedenstellend geworden?
+
+Maßstab für eine *solide* Bearbeitung: vier Achsen befüllt, Quadrant
+benannt, mindestens eine Differenz zwischen A und B mit Beleg im Diff.
+*Exzellent*: zusätzlich Hypothese, *welche* einzelne Hard Rule in
+AGENTS.md den größten Unterschied verursacht — und ein dritter Lauf, der
+diese Hard Rule isoliert prüft.
+
+Wenn dein Modell stark genug ist, dass A und B fast identisch
+aussehen: das ist ebenfalls ein Befund. Notiere ihn — und sei vorsichtig
+beim nächsten Modellwechsel, weil dann die *unausgesprochenen* Defaults
+des neuen Modells andere werden können (Modul 11: Drift-Diagnose).
+
 ## Reflexion
 
-Nach dem Slice-Umsetzungs-Lauf, dem AGENTS.md-Vergleich und den drei Hard Rules kurz **schriftlich**:
+Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach dem Slice-Umsetzungs-Lauf, dem AGENTS.md-Vergleich und den drei
+Hard Rules. Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Welcher Schritt brauchte 5→4-Rücksprung? Wo war der Lauf *mit* AGENTS.md inhaltlich anders als ohne? Welche Hard Rule blieb halb durchgesetzt (kein Gate)?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Hard Rules liegen typisch in *zwei* Quadranten gleichzeitig.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — AGENTS.md schärfen? Tool-Allowlist enger? Fitness Function für die schwächste Hard Rule?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Agent liefert schnell, also ist der Workflow Overhead", "Hard Rules in AGENTS.md reichen", "Mehr Kontext ist immer besser").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Welcher Schritt brauchte 5→4-Rücksprung? Wo war der Lauf *mit* AGENTS.md inhaltlich anders als ohne? Welche Hard Rule blieb halb durchgesetzt (kein Gate)?
+- **2×2-Quadrant:** Hard Rules liegen typisch in *zwei* Quadranten gleichzeitig.
+- **Steering-Loop:** AGENTS.md schärfen? Tool-Allowlist enger? Fitness Function für die schwächste Hard Rule?
+- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Agent liefert schnell, also ist der Workflow Overhead", "Hard Rules in AGENTS.md reichen", "Mehr Kontext ist immer besser").
 
 ## Selbstcheck
 

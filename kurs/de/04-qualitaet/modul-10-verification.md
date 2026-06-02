@@ -14,10 +14,10 @@ umgesetzt, was geplant war?" Nicht: "Ist es gut?"
 
 Nach diesem Modul kannst du:
 
-* einen Plan-gegen-Code-Diff automatisch *prüfen* und das Ergebnis gegen Plan/DoD *interpretieren* (Bewerten),
-* eine DoD-Verletzung *erkennen* und gegen ein Review-Finding *abgrenzen* (Analysieren),
-* ADR-Konformität als Fitness Function *entwerfen* (auch dort, wo kein vorhandenes Werkzeug die ADR-Aussage 1:1 abbildet) (Erschaffen),
-* die Pre-completion Checklist eines Implementation-Agenten *bewerten* und Lücken *identifizieren* (Bewerten).
+* einen Plan-gegen-Code-Diff automatisch *prüfen* und das Ergebnis gegen Plan/DoD *interpretieren* (Bewerten · prozedural),
+* eine DoD-Verletzung *erkennen* und gegen ein Review-Finding *abgrenzen* (Analysieren · konzeptuell),
+* ADR-Konformität als Fitness Function *entwerfen* (auch dort, wo kein vorhandenes Werkzeug die ADR-Aussage 1:1 abbildet) (Erschaffen · prozedural),
+* die Pre-completion Checklist eines Implementation-Agenten *bewerten* und Lücken *identifizieren* (Bewerten · prozedural).
 
 ## Lab-Bezug
 
@@ -73,10 +73,139 @@ nicht: "Ist es gut?"
 - **"Verifier braucht denselben Kontext wie Reviewer."** — Nein. Reviewer hat *Plan + ADR*. Verifier hat *DoD + Spec + Plan*. Andere Eingabe, andere Findings.
 - **"Wenn Verifier rot und Reviewer grün, hat Reviewer recht."** — Falsch. Die wahrscheinlichere Erklärung: Reviewer hat gegen einen veralteten Plan geprüft, oder der Plan hat eine DoD-Lücke. Architect klärt — *nicht* "wir nehmen das mildere Ergebnis".
 
+## Worked Example: eine ADR-Aussage ohne fertiges Tool als Fitness Function bauen
+
+> **Wenn du ADR-Aussagen routiniert in maschinelle Prüfungen übersetzt — auch dann, wenn kein Standard-Tool den Fall 1:1 abbildet — springe zu [§Übungen](#übungen).** Modul 12 hat ein Worked Example für den Standardfall (ADR-0007 → import-linter). Dieses Worked Example zeigt den *Nicht-Standard*-Fall: eine ADR, deren Aussage kein bestehendes Werkzeug fertig prüft. Das ist der typische Fall in der Verifikations-Schicht, weil sie genau dort greift, wo Gates nicht reichen.
+
+**Ausgangs-ADR:** ADR-0011 sagt:
+> "Der Implementation-Agent darf nur Slices in `done/` verschieben,
+> wenn das Slice-Frontmatter ein Feld `closure_note` mit mindestens
+> zwei Sätzen enthält (Lerneintrag-Pflicht; Modul 1 §Closure)."
+
+Es gibt kein "Closure-Note-Linter". Diese Regel zu verifizieren heißt:
+sie selbst bauen.
+
+**Schritt 1 — Aussage in eine prüfbare Operationalisierung übersetzen.**
+*"Mindestens zwei Sätze"* ist nicht selbsterklärend. Operationalisierung:
+
+> Für jede Datei in `docs/plan/planning/done/*.md` gilt:
+> - Frontmatter enthält Schlüssel `closure_note` (string).
+> - Der String enthält mindestens **zwei Satzendezeichen** (`.`, `!`, `?`),
+>   außerhalb von Code-Blöcken und Inline-Code.
+> - Keiner der Sätze ist *leer* oder einer der bekannten Floskeln
+>   ("see PR", "n/a", "siehe Ticket").
+
+Operationalisierung ist die Stelle, an der Erschaffen passiert: die ADR
+sagt *was*, die Operationalisierung sagt *prüfbar was*.
+
+**Schritt 2 — Sensor-Schicht wählen.** Optionen, mit Kosten:
+
+| Option | Kosten | Wann sinnvoll |
+|---|---|---|
+| Pre-commit-Hook auf der Autoren-Maschine | niedrig | wenn nur lokale Disziplin gefragt ist |
+| Make-Target im `make gates`-Block | mittel | wenn auch CI prüfen soll — Standardweg |
+| Doku-Konsistenz-Agent (Modul 14) | hoch | wenn semantische Prüfung nötig ist (z. B. "Floskel-Erkennung") |
+
+Der Worked Example wählt **Make-Target + optional Doku-Konsistenz-Agent**:
+deterministische Sätze deterministisch, semantische Floskel-Erkennung
+inferentiell.
+
+**Schritt 3 — Skript schreiben (Python-Beispiel, kein neues Framework).**
+
+```python
+# tools/check_closure_notes.py
+import re
+import sys
+import pathlib
+import yaml
+
+DONE = pathlib.Path("docs/plan/planning/done")
+FLOSKELN = {"see pr", "n/a", "siehe ticket", "wird nachgereicht"}
+
+def sentences(text: str) -> list[str]:
+    no_code = re.sub(r"`[^`]+`|```.*?```", "", text, flags=re.S)
+    parts = re.split(r"[.!?]+", no_code)
+    return [p.strip() for p in parts if p.strip()]
+
+def errors_for(path: pathlib.Path) -> list[str]:
+    front, _, _ = path.read_text().partition("---")[2].partition("---")
+    note = (yaml.safe_load(front) or {}).get("closure_note", "")
+    if not note:
+        return [f"{path}: closure_note fehlt"]
+    sents = sentences(note)
+    if len(sents) < 2:
+        return [f"{path}: closure_note hat nur {len(sents)} Satz"]
+    if any(s.lower() in FLOSKELN for s in sents):
+        return [f"{path}: closure_note enthält Floskel"]
+    return []
+
+errs = [e for p in DONE.glob("*.md") for e in errors_for(p)]
+for e in errs:
+    print(e)
+sys.exit(1 if errs else 0)
+```
+
+Sieben Funktionszeilen, drei Fehlertypen. Keine externe Abhängigkeit
+außer `pyyaml`.
+
+**Schritt 4 — Als Gate verdrahten:**
+
+```makefile
+verify-closure-notes:  ## ADR-0011 — Closure-Note-Pflicht
+	python tools/check_closure_notes.py
+
+verify: verify-closure-notes
+```
+
+ID-Kommentar zeigt die ADR. *Verify* hängt das Sub-Target ein —
+damit greift es genau dort, wo Verifikation läuft, nicht in `make gates`
+(weil es keine Code-Architektur-Frage ist, sondern eine DoD-/Closure-
+Frage).
+
+**Schritt 5 — Floskel-Erkennung mit inferentieller Schicht ergänzen.**
+Floskeln wie *"war ganz okay, läuft jetzt"* sind syntaktisch zwei Sätze
+und entgehen Schritt 3. Hier kommt der Doku-Konsistenz-Agent (Modul 14)
+ins Spiel:
+
+> Prompt-Anker (in `.harness/skills/closure-note-reviewer.md`):
+> "Lies die `closure_note` jedes Slice in `done/`. Markiere alle, die
+> *keinen* der folgenden Inhalte tragen: (a) ein konkretes Lernsignal
+> (z. B. "Test rot, weil X"), (b) ein konkretes Folge-Slice, (c) eine
+> konkrete Architektur-Beobachtung. Floskeln ohne Inhalt sind ein
+> HIGH-Finding."
+
+Inferentiell, weil "Inhalt vs. Floskel" semantisch ist; computational
+deckt nur die Struktur.
+
+**Schritt 6 — Bewusstes Brechen.** Ein Slice landet in `done/` mit
+`closure_note: "Fertig."`. `make verify-closure-notes` läuft rot mit
+`docs/plan/planning/done/SL-024.md: closure_note hat nur 1 Satz`. Der
+Verifier hat *genau das* erkannt, was Tests nicht erkannt hätten und
+Reviewer übersehen würde (Reviewer prüft Diff gegen Plan/ADR — der
+fehlende Closure-Eintrag ist *kein* Diff-Symptom).
+
+**Schritt 7 — Pre-completion Checklist-Bezug.** Der Implementation-Agent
+soll vor "fertig"-Meldung *selbst* `make verify-closure-notes` laufen
+lassen. AGENTS.md-Eintrag:
+
+```markdown
+## Closure (Modul 4, ADR-0011)
+- Vor `done/`-Verschiebung: `make verify-closure-notes` muss grün sein.
+- Floskeln vermeiden — der Doku-Konsistenz-Agent prüft Inhalte.
+```
+
+Damit liegt die Hard Rule in zwei Quadranten: *inferential feedforward*
+(AGENTS.md sagt es) + *computational feedback* (Make-Target prüft es).
+
+Sieben Schritte, eine Fitness Function für eine ADR-Aussage, die kein
+Standard-Tool prüft. Vergleich:
+[`../../../lab/example/verification/checks/`](../../../lab/example/verification/checks/).
+
 ## Übungen
 
 * Automatische Verifikation eines Slices
 * Provoziere eine DoD-Verletzung und prüfe, ob sie erkannt wird
+* **Eigene ADR übersetzen** — wähle eine ADR aus deinem Repo, deren Aussage *kein* Standard-Tool 1:1 abbildet. Durchlaufe die sieben Schritte des Worked Example oben. Ergebnis: ein neues `verify-*`-Make-Target mit ID-Kommentar. Aktiviert das Erschaffens-Lernziel.
 
 ### Minimaler Übungspfad
 
@@ -92,14 +221,14 @@ und beobachte, dass die Verifikation rot wird.
 
 ## Reflexion
 
-Nach dem Verifikations-Lauf und dem provozierten DoD-Verstoß kurz **schriftlich**:
+Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach dem Verifikations-Lauf und dem provozierten DoD-Verstoß.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Welches Verifier-Findings hat den Verstoß erkannt? Hat dein Reviewer denselben Verstoß übersehen — und warum (welche Eingabe fehlte ihm)?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Verifikation kombiniert *inferential feedback* und *computational feedback* (Fitness Functions).
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Verifier-Eingabe-Pflicht (DoD+Spec+Plan) schärfen? Plan-Verteilung an Reviewer im 8-Schritt-Workflow nachziehen?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Grüne Tests sind Verifikation", "Verifier braucht denselben Kontext wie Reviewer").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Welches Verifier-Findings hat den Verstoß erkannt? Hat dein Reviewer denselben Verstoß übersehen — und warum (welche Eingabe fehlte ihm)?
+- **2×2-Quadrant:** Verifikation kombiniert *inferential feedback* und *computational feedback* (Fitness Functions).
+- **Steering-Loop:** Verifier-Eingabe-Pflicht (DoD+Spec+Plan) schärfen? Plan-Verteilung an Reviewer im 8-Schritt-Workflow nachziehen?
+- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Grüne Tests sind Verifikation", "Verifier braucht denselben Kontext wie Reviewer").
 
 ## Selbstcheck
 

@@ -139,6 +139,23 @@ Die mit `*` markierten Einträge sind dokumentierte Lücken; Mitwirkende
 sind eingeladen, sie in den jeweiligen Modulen zu adressieren oder hier
 als adressiert zu markieren, wenn sie ergänzt wurden.
 
+## Offene `*`-Lücken (nächste Schicht)
+
+Diese vier Präkonzepte sind heute nicht als Fehlvorstellungs-Block in
+ihrem Zielmodul aufgeschlagen. Sie sind die priorisierten Kandidaten
+für die nächste Welle.
+
+| Präkonzept | Zielmodul | Warum heute offen | Vorschlag für die Konfrontation |
+|---|---|---|---|
+| "Ein Agent ist ein besserer/schnellerer Programmierer." | [Modul 8](../03-agenten/modul-08-implementierung.md) | klingt im Engage an (800 Zeilen in 4 Minuten), aber wird nicht als Präkonzept aufgeschlagen | Geschwindigkeits-Argument: 20 % länger Plan + 50 % weniger Review = Netto-Gewinn. Hinweis: Geschwindigkeit ohne Plan produziert *Review-Last*, nicht *Lieferung*. |
+| "Prompts ersetzen Specs." | [Modul 2](../01-spec-und-architektur/modul-02-lastenheft.md) | wird implizit durch Engage-Geschichte beantwortet, aber nicht als Präkonzept benannt | Lebenszyklus-Argument: Spec wird *gepflegt*, Prompt nicht. Was im Prompt steht und nicht in der Spec, gilt nur für den nächsten Lauf. Verweis auf Lopopolo: was nicht im Kontext ist, existiert nicht — aber das ist Plädoyer für Spec, nicht für Mega-Prompt. |
+| "ADRs sind Dokumentation, nicht Constraints." | [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md) | wird implizit widerlegt, aber nicht explizit als Präkonzept beschriftet | Fitness-Function-Argument: Eine ADR ohne maschinelle Durchsetzung ist eine Absichtserklärung. Verweis auf Worked Example Modul 12 (ADR-0007 → import-linter). |
+| "DevOps ist YAML schreiben." (Container = Deployment) | [Modul 13](../05-betrieb/modul-13-docker-harness.md) | Vorstellung "Container = Deployment" wird in Modul 13 nicht explizit aufgegriffen | Reproduzierbarkeits-Argument: Container ist *primär* ein Reproduzierbarkeits-Anker (Image-Hash, identische Toolchain) und *sekundär* eine Deployment-Form. Wer Container nur als Deployment denkt, verzichtet auf den Hauptzweck im Kurs. |
+
+Wer einen `*`-Eintrag adressiert: in dieser Tabelle die Zeile streichen
+und im Zielmodul den `*` am entsprechenden Listen-Eintrag oben
+entfernen.
+
 ## Verweis aus Modulen
 
 Jedes Modul mit einem "Typische Fehlvorstellungen"-Block sollte am Ende
@@ -146,6 +163,55 @@ des Blocks auf diese Datei verweisen — als Einladung, eigene
 Beobachtungen zurückzuspielen. Das ist eine schwache Form von
 Lernervorstellungs-Erfassung in der Kursnutzung, kein Ersatz für
 empirische Studien.
+
+## Rückfluss: wie eine beobachtete Lernervorstellung in den Kurs zurückkommt
+
+Kattmanns Rekonstruktions-Loop lebt davon, dass Beobachtungen aus dem
+Unterricht in die didaktische Strukturierung zurückfließen. Damit das
+hier nicht nur Geste bleibt, ein konkreter Pfad:
+
+1. **Beobachten und notieren.** Sobald du in einem Workshop, einem
+   Review oder einem Postmortem einen Satz hörst, der eine
+   Vorstellung über KI-Agenten/Harness offenbart, schreibe ihn
+   wortwörtlich auf. Wortlaut zählt — paraphrasieren glättet die
+   diagnostische Schärfe.
+2. **Verorten.** Welches Modul des Kurses adressiert die *Sachfrage*,
+   die hinter dem Satz steht? Trage die Beobachtung in der passenden
+   Modul-Sektion oben ein (oder eröffne eine neue, wenn keine passt).
+3. **Konfrontation entwerfen.** Eine gute Konfrontation hat drei
+   Bestandteile: Anti-Argument (warum die Vorstellung nicht trägt),
+   Beleg (empirisch oder aus den Fallstudien), konkrete Korrektur
+   (was stattdessen gelten sollte). Vorbild: die Konfrontationen zu
+   *Halluzination* (Modul 0), *Postmortems* (Modul 15) und *Mehr
+   Tests sind immer besser* (Modul 12).
+4. **PR oder Issue öffnen.** Ein PR ergänzt die Vorstellung in dieser
+   Datei *und* den Fehlvorstellungs-Block des Zielmoduls. Ein Issue
+   beschreibt die Beobachtung, wenn die Konfrontation noch unklar
+   ist.
+
+### PR-Beispiel-Skelett
+
+```markdown
+## Lernervorstellung: "<Wortlaut>"
+
+**Wo beobachtet:** <Workshop / Review / Postmortem — Datum, Rolle des Sprechenden>
+**Zielmodul:** <Modul X>
+**Heute im Kurs adressiert?:** <ja, halb, nein>
+
+### Vorschlag — Eintrag in `lernervorstellungen.md`
+
+> "<Wortlaut>" — Modul X (Fehlvorstellungs-Block, *neu*)
+
+### Vorschlag — Konfrontation im Modul-Text
+
+- **Anti-Argument:** <warum die Vorstellung nicht trägt>
+- **Beleg:** <Fallstudie / Quelle / eigene Beobachtung>
+- **Konkrete Korrektur:** <was stattdessen gilt>
+```
+
+Ein PR mit diesem Skelett ist klein genug, um in einem Slice
+umsetzbar zu sein, und groß genug, um nicht in der Kommentar-Spalte
+zu versanden.
 
 ## Quellen-Bezug
 

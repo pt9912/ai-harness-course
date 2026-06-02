@@ -35,10 +35,10 @@ ADR, Plan) verankert — nicht hier.
 
 Nach diesem Modul kannst du:
 
-* den Lebenszyklus Spec → ADR → Plan → Code → Review → Verifikation → Closure als gerichteten Graphen *zeichnen* (Anwenden),
-* sechs Artefakte und sechs Rollen einander *zuordnen* und Kreuzungen *begründen* (Analysieren),
-* die Traceability-Kette für einen realen Slice *prüfen* (Analysieren),
-* eine Source Precedence für ein eigenes Repo *entwerfen* (Erschaffen).
+* den Lebenszyklus Spec → ADR → Plan → Code → Review → Verifikation → Closure als gerichteten Graphen *zeichnen* (Anwenden · konzeptuell),
+* sechs Artefakte und sechs Rollen einander *zuordnen* und Kreuzungen *begründen* (Analysieren · konzeptuell),
+* die Traceability-Kette für einen realen Slice *prüfen* (Analysieren · prozedural),
+* eine Source Precedence für ein eigenes Repo *entwerfen* (Erschaffen · prozedural).
 
 ## Lebenszyklus als Diagramm
 

@@ -23,12 +23,17 @@ Definitionen zurück, ohne sie erneut zu erklären.
 
 Jedes Modul folgt demselben Aufbau:
 
-1. **Lernziele** — was kannst du danach.
+1. **Lernziele** — was kannst du danach. Jedes Lernziel trägt einen
+   zweidimensionalen Tag nach Anderson/Krathwohl: `(Prozessdimension · Wissensdimension)`.
+   Prozessdimension: *Erinnern · Verstehen · Anwenden · Analysieren · Bewerten · Erschaffen*.
+   Wissensdimension: *faktisch · konzeptuell · prozedural · metakognitiv*.
+   Beispiel: `(Analysieren · konzeptuell)` für eine Quadranten-Zuordnung in der 2×2-Matrix;
+   `(Anwenden · prozedural)` für das Durchlaufen des 8-Schritt-Workflows.
 2. **Lab-Bezug** — welche Verzeichnisse, Make-Targets oder Artefakte gehören dazu.
 3. **Themen** — die Konzepte des Moduls.
 4. **Kernidee** — die eine Aussage, an der das Modul hängt.
 5. **Übungen** — Hands-on, mindestens eine mit absichtlichem Fehlerfall.
-6. **Reflexion** — vier Standardfragen (Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change). Vollform: [`reflexion-vorlage.md`](reflexion-vorlage.md).
+6. **Reflexion** — vier Standardfragen (Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change). Vollform mit Eintragsformat, Anti-Antworten und "Wann *nicht* reagieren": [`reflexion-vorlage.md`](reflexion-vorlage.md). Ab Modul 2 listen die Module nur die *modul-spezifischen Trigger* zu den vier Fragen — die Vollform wird in Modul 0 und 1 einmal aufgeschlagen und danach referenziert (Redundanz-Effekt, Sweller).
 7. **Selbstcheck** — Fragen, die du nach dem Modul beantworten können solltest, mit Drei-Stufen-Rubrik (rudimentär/solide/exzellent).
 
 Optional zusätzlich, jeweils mit eigener Überschrift:
@@ -46,7 +51,7 @@ Der Kurs liefert ein Beispiel-Repo unter [`/lab/example/`](../../../lab/example/
 mit:
 
 * lauffähigen Beispiel-Artefakten in `spec/`, `docs/plan/adr/`, `docs/plan/planning/`
-* fünf parallelen Sprach-Skeletten (Go, Python, Kotlin, Java, C#) mit eigener Toolchain
+* fünf parallelen Sprach-Skeletten (Go, Python, Kotlin, Java, C#) mit eigener Toolchain — *Roadmap, Phase C; heute noch nicht ausgeliefert*
 * Make-Targets für alle Gates (`make lint`, `make typecheck`, `make arch-check`, `make coverage-gate`, `make coverage-gate-critical`, `make gates`)
 * Root-Harness-Targets für die Kursmodule (`make agent-implement`, `make agent-review`, `make verify`, `make replay`, `make trace`, `make release`)
 * fingiertem "kaputten" Slice für die Review-Übung in [Modul 9](../04-qualitaet/modul-09-review-harness.md)

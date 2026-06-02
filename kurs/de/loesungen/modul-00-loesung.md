@@ -66,6 +66,53 @@ Gute Trigger:
 Dokumentiere den Trigger so, dass er reproduzierbar ist — das ist die
 erste kleine Replay-Übung des Kurses.
 
+## Beispiel-Antwort auf Reflexionsfrage 4 (Conceptual Change)
+
+Die vierte Reflexionsfrage — *"Welche eigene Vorstellung wurde
+unzufriedenstellend?"* — ist die schwerste zum Ausfüllen, weil sie
+einen ehrlichen Blick auf die eigenen Vor-Annahmen verlangt. Damit
+sichtbar wird, *wie* eine gute Antwort aussieht, hier eine modellierte
+Antwort zur Halluzinations-Provokations-Übung:
+
+> **Vorstellung vor der Übung:** *"Halluzinationen sind ein Defekt des
+> Modells — sie passieren, wenn das Modell 'nicht weiß'. Wenn ich ein
+> stärkeres Modell nehme, passieren sie weniger."*
+>
+> **Was die Übung gezeigt hat:** Ich habe das Modell gezielt nach
+> `os.deleteWithoutBackup()` gefragt. Es hat die Funktion *plausibel
+> beschrieben*, einschließlich Signatur und Beispielnutzung. Beim
+> Wechsel auf ein stärkeres Modell ist *dieselbe* erfundene Funktion
+> wieder aufgetaucht, nur mit anderer (ebenfalls erfundener) Doku-URL.
+> Das passte nicht zu meiner Vorstellung: das stärkere Modell hat
+> nicht "weniger erfunden", sondern *konsistenter* erfunden.
+>
+> **Was jetzt besser passt:** Eine Halluzination ist nicht ein
+> Wissens-Defekt des Modells, sondern eine *Kontext-Lücke*. Mein
+> Prompt hat *nichts* gesagt, was der Funktion widerspräche. Beide
+> Modelle haben den Kontext gleich gut (oder gleich schlecht) "gefüllt"
+> — nur unterscheidet sich die Plausibilitäts-Oberfläche. Wer den
+> Kontext stopft (Spec, ADR, AGENTS.md), reduziert Halluzinationen
+> *unabhängig vom Modell*.
+>
+> **Wo diese neue Sicht selbst scheitern könnte
+> (Fruchtbarkeits-Test):** Ich nehme jetzt an, dass *jede*
+> Halluzination eine Kontext-Lücke ist. Das stimmt vielleicht nicht
+> für reine *Faktenfragen* (Versionsnummer nach Trainingsschnitt) — da
+> ist das Modell tatsächlich blind und kein Kontext kann das füllen.
+> Diese Grenze muss ich noch klären.
+
+Vier Bestandteile, die diese Antwort exemplarisch ausführt:
+
+1. **Vorstellung vor der Übung** — wortwörtlich, peinlich klein.
+2. **Diskrepanz-Beobachtung** — konkret, mit Belegen aus dem Lauf.
+3. **Neue Sicht** — eine, die die Beobachtung *besser* erklärt
+   (Posner: Verständlichkeit + Plausibilität).
+4. **Eigene Grenze der neuen Sicht** — wo sie selbst scheitern könnte
+   (Posner: Fruchtbarkeit).
+
+Ohne den vierten Punkt ist es kein Conceptual Change, sondern eine
+neue Festlegung. Conceptual Change *lädt zur nächsten Revision ein*.
+
 ## Häufige Fehler
 
 - "Wir brauchen erst ein besseres Modell." — Häufig ist die Spec das Problem, nicht das Modell.

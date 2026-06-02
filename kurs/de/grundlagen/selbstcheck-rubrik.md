@@ -13,6 +13,28 @@ Stufen pro Frage. Diese Datei erklärt die Stufen einmal generisch.
 | **solide** | Du hast den Kernbegriff angewendet, mindestens *ein* Beispiel aus dem Kurs benutzt, eine Grenze gezogen. | Du argumentierst mit einer Quelle (ADR-ID, Hard Rule, Quadrant der 2×2-Matrix). |
 | **exzellent** | Solide *plus* ein Transfer: ein Gegenbeispiel, ein Grenzfall, eine Verbindung zu einem anderen Modul, oder eine Vorhersage ("wenn X gilt, dann ändert sich Y"). | Du nennst, was die Antwort *nicht* tut, und warum. |
 
+### Verhältnis zur Vier-Stufen-Abschluss-Rubrik
+
+Die Abschluss-Rubrik in [`../abschluss/abschlussprojekt.md`](../abschluss/abschlussprojekt.md#bewertungsraster-rubric)
+hat **vier** Stufen — *rudimentär · funktional · solide · exzellent*.
+Das ist kein Konflikt, sondern eine Erweiterung um die Mittelstufe
+*funktional*: ein Artefakt existiert und ist formal korrekt, aber noch
+nicht inhaltlich verknüpft. *Funktional* ist die häufigste Stufe bei
+Erstabgaben.
+
+| Selbstcheck-Stufe (Modul) | Abschluss-Stufe (Projekt) | Kurzformel |
+|---|---|---|
+| rudimentär | rudimentär | Kernbegriff erkannt, sonst nichts. |
+| — | **funktional** | Artefakt existiert, ist aber nicht durchgängig verknüpft. |
+| solide | solide | Anwendung mit Bezug zu Quelle/ID. |
+| exzellent | exzellent | Transfer, Gegenbeispiel, Vorhersage. |
+
+Lesart: Ein Modul-Selbstcheck kennt *funktional* nicht, weil eine
+Antwort entweder oberflächlich (rudimentär) oder schon mit Beispiel
+verbunden (solide) ist. Ein Abschluss-Repo dagegen kann formal komplett
+und trotzdem nicht verknüpft sein — dafür ist *funktional* die richtige
+Stufe.
+
 Faustregel: wenn deine Antwort *jeder* der drei Stufen entsprechen
 könnte, ist sie rudimentär. Mehrdeutigkeit nach oben ist Selbstbetrug.
 

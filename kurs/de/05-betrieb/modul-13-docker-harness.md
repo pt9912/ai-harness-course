@@ -15,10 +15,10 @@ die Versicherung gegen unreproduzierbaren Onboarding-Schmerz.
 
 Nach diesem Modul kannst du:
 
-* einen Multi-Stage-Dockerfile für eine Toolchain *schreiben* (Erschaffen),
-* Image-Hash und Lock-Files als Reproduzierbarkeits-Anker *einsetzen* (Anwenden),
-* den Drift zwischen lokal und CI durch eine bewusst unpinnierte Base-Image *messen* (Analysieren),
-* Devcontainer und Compose-Setup gegeneinander *abwägen* (Bewerten).
+* einen Multi-Stage-Dockerfile für eine Toolchain *schreiben* (Erschaffen · prozedural),
+* Image-Hash und Lock-Files als Reproduzierbarkeits-Anker *einsetzen* (Anwenden · prozedural),
+* den Drift zwischen lokal und CI durch eine bewusst unpinnierte Base-Image *messen* (Analysieren · prozedural),
+* Devcontainer und Compose-Setup gegeneinander *abwägen* (Bewerten · konzeptuell).
 
 ## Lab-Bezug
 
@@ -68,14 +68,14 @@ unpinnst und den Build später erneut ausführst. Dokumentiere nicht nur
 
 ## Reflexion
 
-Nach dem Build-Harness-Aufbau und dem provozierten Image-Drift kurz **schriftlich**:
+Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach dem Build-Harness-Aufbau und dem provozierten Image-Drift.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Welche konkrete Toolchain-Version war anders zwischen lokal und CI? Hast du Image-Hash und Lock-File-Stand festgehalten?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Image-Pinning ist *computational feedforward*; Hash-Vergleich im Replay-Manifest ist *computational feedback*.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Image-Hash als Pflichtfeld in `harness/README.md` aufnehmen? Lock-File-Hash als Gate?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "FROM python:3 ist konkret genug", "Docker-only ist Overkill für Tools", "Es läuft bei mir, das reicht").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Welche konkrete Toolchain-Version war anders zwischen lokal und CI? Hast du Image-Hash und Lock-File-Stand festgehalten?
+- **2×2-Quadrant:** Image-Pinning ist *computational feedforward*; Hash-Vergleich im Replay-Manifest ist *computational feedback*.
+- **Steering-Loop:** Image-Hash als Pflichtfeld in `harness/README.md` aufnehmen? Lock-File-Hash als Gate?
+- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "FROM python:3 ist konkret genug", "Docker-only ist Overkill für Tools", "Es läuft bei mir, das reicht").
 
 ## Selbstcheck
 

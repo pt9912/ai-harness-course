@@ -24,10 +24,10 @@ Lüge im Repo. Das ist Doku-Drift in einer der gefährlichsten Formen.
 
 Nach diesem Modul kannst du:
 
-* einen Carveout mit Trigger, Folge-Slice und Auflösungs-Kriterium *dokumentieren* (Erschaffen),
-* zwischen temporärem und permanentem Carveout *unterscheiden* und einen falsch klassifizierten Carveout *erkennen* (Bewerten),
-* den Unterschied Carveout ↔ bootstrap-aware Gate *einordnen* (Analysieren),
-* ein Carveout-Audit als wiederkehrenden Slice *entwerfen* (Erschaffen).
+* einen Carveout mit Trigger, Folge-Slice und Auflösungs-Kriterium *dokumentieren* (Erschaffen · prozedural),
+* zwischen temporärem und permanentem Carveout *unterscheiden* und einen falsch klassifizierten Carveout *erkennen* (Bewerten · konzeptuell),
+* den Unterschied Carveout ↔ bootstrap-aware Gate *einordnen* (Analysieren · konzeptuell),
+* ein Carveout-Audit als wiederkehrenden Slice *entwerfen* (Erschaffen · prozedural).
 
 ## Lab-Bezug
 
@@ -65,14 +65,14 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 
 ## Reflexion
 
-Nach der Carveout-Dokumentation und der Folge-Slice-Verknüpfung kurz **schriftlich**:
+Vier Standardfragen aus [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach der Carveout-Dokumentation und der Folge-Slice-Verknüpfung.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — War dein Trigger beobachtbar oder eine Form von "sobald wir Zeit haben"? Lebt dein Carveout in `docs/plan/carveouts/` oder im Tracker?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Trigger-Disziplin ist *inferential feedforward*; Carveout-Audit-Lauf ist *computational feedback*.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Carveout-Audit als wiederkehrender Slice (siehe Lernziel 4)? Trigger-Pflichtfeld als Frontmatter-Check?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Carveout = Workaround", "Wenn der Trigger eintritt, lösen wir den Carveout auf").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** War dein Trigger beobachtbar oder eine Form von "sobald wir Zeit haben"? Lebt dein Carveout in `docs/plan/carveouts/` oder im Tracker?
+- **2×2-Quadrant:** Trigger-Disziplin ist *inferential feedforward*; Carveout-Audit-Lauf ist *computational feedback*.
+- **Steering-Loop:** Carveout-Audit als wiederkehrender Slice (siehe Lernziel 4)? Trigger-Pflichtfeld als Frontmatter-Check?
+- **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Carveout = Workaround", "Wenn der Trigger eintritt, lösen wir den Carveout auf").
 
 ## Selbstcheck
 

@@ -28,12 +28,12 @@ damit KI-Slices als reguläre Engineering-Slices behandelt werden können.
 
 Nach diesem Modul kannst du:
 
-* OpenTelemetry-Traces eines Agentenlaufs *lesen* (Anwenden),
-* Token-Kosten pro Slice *attribuieren* (Anwenden),
-* Logs, Metriken und Traces *unterscheiden* und ein Telemetrie-Fehlszenario *zuordnen* (Analysieren),
-* einen Prompt-Cache-Miss in den Metriken *erkennen* (Analysieren),
-* Doku-Konsistenz-Drift mit einem Konsistenz-Agent *detektieren* (Bewerten — Brücke zu *Entropy Management*),
-* ein Tool-Call-Audit-Span-Schema *entwerfen*, das Slice-ID, Agent-Rolle und Cache-Status trägt, sodass Token-Kosten und Forensik bis zur Anforderungs-ID rückverfolgbar sind (Erschaffen).
+* OpenTelemetry-Traces eines Agentenlaufs *lesen* (Anwenden · prozedural),
+* Token-Kosten pro Slice *attribuieren* (Anwenden · prozedural),
+* Logs, Metriken und Traces *unterscheiden* und ein Telemetrie-Fehlszenario *zuordnen* (Analysieren · konzeptuell),
+* einen Prompt-Cache-Miss in den Metriken *erkennen* (Analysieren · prozedural),
+* Doku-Konsistenz-Drift mit einem Konsistenz-Agent *detektieren* (Bewerten · prozedural — Brücke zu *Entropy Management*),
+* ein Tool-Call-Audit-Span-Schema *entwerfen*, das Slice-ID, Agent-Rolle und Cache-Status trägt, sodass Token-Kosten und Forensik bis zur Anforderungs-ID rückverfolgbar sind (Erschaffen · prozedural).
 
 ## Lab-Bezug
 
@@ -240,14 +240,14 @@ Slice? Danach erst lohnt ein voller Trace-Viewer.
 
 ## Reflexion
 
-Nach der Trace-Analyse und der End-to-End-Trace-Übung kurz **schriftlich**:
+Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+nach der Trace-Analyse und der End-to-End-Trace-Übung.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Welche Korrelations-ID hat die Kette getragen? An welcher Stelle hattest du die Kette nur erraten? Welcher teure Tool-Call hatte einen vermeidbaren Cache-Miss?
-2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Trace-Pflichtfelder sind *computational feedforward*; Doku-Konsistenz-Agent ist *inferential feedback*.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Span-Schema-Pflicht (`slice.id`, `agent.role`, `cache.hit`) als Gate? Frontmatter-Pflichtfeld im Slice-Markdown? Cache-Hit-Rate als Dashboard?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Logs reichen", "Metriken sind nur für Performance", "Prompt-Caching ist Modell-Sache").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Welche Korrelations-ID hat die Kette getragen? An welcher Stelle hattest du die Kette nur erraten? Welcher teure Tool-Call hatte einen vermeidbaren Cache-Miss?
+- **2×2-Quadrant:** Trace-Pflichtfelder sind *computational feedforward*; Doku-Konsistenz-Agent ist *inferential feedback*.
+- **Steering-Loop:** Span-Schema-Pflicht (`slice.id`, `agent.role`, `cache.hit`) als Gate? Frontmatter-Pflichtfeld im Slice-Markdown? Cache-Hit-Rate als Dashboard?
+- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Logs reichen", "Metriken sind nur für Performance", "Prompt-Caching ist Modell-Sache").
 
 ## Selbstcheck
 

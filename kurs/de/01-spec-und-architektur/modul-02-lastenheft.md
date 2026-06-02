@@ -43,10 +43,10 @@ Boundary, oder beides.
 
 Nach diesem Modul kannst du:
 
-* ein Lastenheft mit IDs, Akzeptanzkriterien (Happy/Boundary/Negative) und expliziter Out-of-Scope-Liste *verfassen* (Erschaffen),
-* funktionale und nichtfunktionale Anforderungen *unterscheiden* und Grenzfälle (z. B. Latenz) *einordnen* (Analysieren),
-* eine Spec-Lücke *diagnostizieren*, indem du sie absichtlich provozierst und das Agentenverhalten beobachtest (Bewerten),
-* Spec-Stratifizierung (Lastenheft/Spezifikation/Architektur) für ein Repo *entwerfen* (Erschaffen).
+* ein Lastenheft mit IDs, Akzeptanzkriterien (Happy/Boundary/Negative) und expliziter Out-of-Scope-Liste *verfassen* (Erschaffen · prozedural),
+* funktionale und nichtfunktionale Anforderungen *unterscheiden* und Grenzfälle (z. B. Latenz) *einordnen* (Analysieren · konzeptuell),
+* eine Spec-Lücke *diagnostizieren*, indem du sie absichtlich provozierst und das Agentenverhalten beobachtest (Bewerten · prozedural+metakognitiv),
+* Spec-Stratifizierung (Lastenheft/Spezifikation/Architektur) für ein Repo *entwerfen* (Erschaffen · konzeptuell).
 
 ## Lab-Bezug
 
@@ -145,14 +145,15 @@ mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../../../lab/example/s
 
 ## Reflexion
 
-Nach jeder Übung — besonders nach dem absichtlich provozierten Spec-Bug — kurz **schriftlich**:
+Verwende die vier Standardfragen aus [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+(Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change) nach
+jeder Übung — besonders nach dem absichtlich provozierten Spec-Bug.
+Modul-spezifische Trigger:
 
-1. **Was ist beobachtbar passiert?** — Welcher Negativsatz fehlte? Welche stille Annahme hat der Agent gefüllt?
-2. **Welcher 2×2-Quadrant war Ursache?** — Computational/Inferential × Feedforward/Feedback (siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker)). Spec-Lücken sind klassisch *inferential feedforward*.
-3. **Welche konkrete Steering-Loop-Aktion folgt?** — Spec-Template um Negativ-Pflichtfeld erweitern? Worked Example als Repo-Skill hinterlegen?
-4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Akzeptanzkriterien sind der Happy Path", "Out-of-Scope kann implizit bleiben").
-
-Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
+- **Beobachtung:** Welcher Negativsatz fehlte? Welche stille Annahme hat der Agent gefüllt?
+- **2×2-Quadrant:** Spec-Lücken sind klassisch *inferential feedforward*.
+- **Steering-Loop:** Spec-Template um Negativ-Pflichtfeld erweitern? Worked Example als Repo-Skill hinterlegen?
+- **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Akzeptanzkriterien sind der Happy Path", "Out-of-Scope kann implizit bleiben").
 
 ## Selbstcheck
 
@@ -168,7 +169,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Drei Akzeptanzkriterien-Arten eines vollständigen `LH-FA-*`? | "Tests." | Happy Path, Boundary, Negative — alle drei im Given/When/Then-Stil, ergänzt um eine explizite Out-of-Scope-Liste. | + Begründung: ohne Boundary und Negative trifft der Agent die *für dich ungünstigste* Interpretation; Out-of-Scope ist die einzige Klammer, die plausibel-Anbau verhindert. |
 | Drei Tests, die ein Akzeptanzkriterium falsifizieren? | "Tests dagegen." | Happy Path · Boundary · Negative — drei verschiedene Test*arten*, nicht drei Test*fälle*. | + Hinweis, dass Boundary/Negative die stillen Annahmen des Happy Path widerlegen — *genau die*, die ein Agent als "selbstverständlich" behandelt. |
 | "Performance < 200 ms" — funktional oder nichtfunktional? | "Nichtfunktional." | Nichtfunktional, weil ohne Lasttest nicht prüfbar; gehört in QA-Block oder `spec/spezifikation.md`. | + Abgrenzung "*Antwort innerhalb von* 200 ms" ist Latenz-*Garantie* (nichtfunktional); "System antwortet mit gültigem JSON" wäre funktional. |
-| Unsicherster Schritt des Lastenheft-Schreibens? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 5 Negative, weil ich erst beim Hinschreiben gemerkt habe, *was* ausgeschlossen werden muss"). | + Pointe: wer keinen unsicheren Schritt findet, hat den Worked Example *gelesen* statt *nachgebaut*. Schritte 5 (Negative) und 6 (Out-of-Scope) sind die häufigsten unsicheren Stellen — und damit auch die häufigsten Spec-Lücken. |
+| Unsicherster Schritt des Lastenheft-Schreibens? | Schritt vage benannt ohne Begründung ("Schritt 5 war schwer."). | Konkret benannter Schritt + Begründung (z. B. "Schritt 5 Negative, weil ich erst beim Hinschreiben gemerkt habe, *was* ausgeschlossen werden muss"). | + Pointe: wer keinen unsicheren Schritt findet, hat den Worked Example *gelesen* statt *nachgebaut*. Schritte 5 (Negative) und 6 (Out-of-Scope) sind die häufigsten unsicheren Stellen — und damit auch die häufigsten Spec-Lücken. |
 
 ## Weiterlesen
 

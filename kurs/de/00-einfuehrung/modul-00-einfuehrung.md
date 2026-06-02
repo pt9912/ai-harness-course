@@ -60,11 +60,11 @@ Nachschlag-Schleifen* zu lesen.
 
 Nach diesem Modul kannst du:
 
-* Agent, LLM und Tool-Call in eigenen Worten *erklären* und gegeneinander *abgrenzen* (Verstehen),
-* Chatbot von Engineering-System anhand mindestens dreier Kriterien *unterscheiden* (Analysieren),
-* drei typische Scheitermuster von KI-Projekten *identifizieren* und mindestens eines davon einem Quadranten der 2×2-Matrix *zuordnen* (Analysieren),
-* den Begriff *Harness* nach Böckeler *einordnen* und gegen "Prompt Engineering" *abgrenzen* (Verstehen + Analysieren),
-* einen Mega-Prompt anhand der drei Reproduzierbarkeits-Kriterien des Moduls (jeder-Lauf-relevant, auditierbar, deterministisch) zeilenweise *kritisieren* (Bewerten).
+* Agent, LLM und Tool-Call in eigenen Worten *erklären* und gegeneinander *abgrenzen* (Verstehen · faktisch+konzeptuell),
+* Chatbot von Engineering-System anhand mindestens dreier Kriterien *unterscheiden* (Analysieren · konzeptuell),
+* drei typische Scheitermuster von KI-Projekten *identifizieren* und mindestens eines davon einem Quadranten der 2×2-Matrix *zuordnen* (Analysieren · konzeptuell),
+* den Begriff *Harness* nach Böckeler *einordnen* und gegen "Prompt Engineering" *abgrenzen* (Verstehen + Analysieren · konzeptuell),
+* einen Mega-Prompt anhand der drei Reproduzierbarkeits-Kriterien des Moduls (jeder-Lauf-relevant, auditierbar, deterministisch) zeilenweise *kritisieren* (Bewerten · prozedural).
 
 ## Lab-Bezug
 
