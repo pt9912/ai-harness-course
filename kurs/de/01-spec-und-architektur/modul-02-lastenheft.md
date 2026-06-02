@@ -2,6 +2,34 @@
 
 > **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: ID-Schema und Source Precedence kennst du aus [Modul 1](modul-01-entwicklungszyklus.md) — hier werden sie zum Arbeitswerkzeug.
 
+## Optionale Explorations-Vorab-Übung (Kapur-Stil)
+
+Wenn du eine *echte* Productive-Failure-Variante (Kapur 2008, 2014)
+ausprobieren willst: **vor** dem Lesen dieses Moduls 25 Minuten ohne
+Anleitung schreiben.
+
+> **Aufgabe (optional, 25 Min):** Wähle ein kleines Feature, das du gut
+> kennst (Konfigurations-Reader, CSV-Importer, Slack-Bot-Befehl).
+> Schreibe in **freier Form** drei Anforderungen dafür auf — so, wie du
+> es heute jemand anderem zur Implementierung geben würdest. Maximal
+> eine A4-Seite. Gib das Ergebnis dann einem LLM-Agenten und bitte ihn,
+> es zu implementieren. Beobachte: an welchen Stellen rät er, an
+> welchen erfindet er, an welchen fragt er nach (falls er das tut)?
+>
+> Erfolg ist *nicht*, dass der Agent es richtig macht. Erfolg ist, dass
+> du fühlst, wo deine Anforderung Lücken hat.
+
+Nach dem Modul-Lesen: vergleiche deine drei Anforderungen mit dem
+Worked Example unten und der `LH-FA-CFG-001`-Vorlage in
+[`/lab/example/spec/lastenheft.md`](../../../lab/example/spec/lastenheft.md).
+Reflektiere mit
+[`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md) —
+insbesondere Frage 4 (welche Vorstellung von "klar genug" wurde
+unzufriedenstellend?).
+
+Wenn du keine Zeit hast: überspringen ist okay. Das Worked Example unten
+trägt das Modul auch ohne Vorab-Übung.
+
 ## Engage
 
 In einem realen Projekt sagte das Lastenheft *"das System speichert die
@@ -58,6 +86,8 @@ steht, wird auf die für dich ungünstigste Weise interpretiert.
 
 ## Worked Example: vom vagen Satz zum prüfbaren Akzeptanzkriterium
 
+> **Wenn du Akzeptanzkriterien im Given/When/Then bereits routiniert schreibst, springe direkt zu [§Übungen](#übungen).** Worked Examples helfen beim Aufbau eines Schemas; ist das Schema da, kostet das Wiederholen nur Last (Expertise-Reversal). Bei Unsicherheit: dieses Worked Example als Schablone lesen.
+
 **Ausgangstext (vage):**
 > "Das System speichert die Konfiguration."
 
@@ -104,7 +134,16 @@ mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../../../lab/example/s
    Fehlt bei dir ein Negativsatz, ist die Spec für einen Agenten noch
    nicht scharf genug.
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach jeder Übung — besonders nach dem absichtlich provozierten Spec-Bug — kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — Welcher Negativsatz fehlte? Welche stille Annahme hat der Agent gefüllt?
+2. **Welcher 2×2-Quadrant war Ursache?** — Computational/Inferential × Feedforward/Feedback (siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker)). Spec-Lücken sind klassisch *inferential feedforward*.
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — Spec-Template um Negativ-Pflichtfeld erweitern? Worked Example als Repo-Skill hinterlegen?
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Akzeptanzkriterien sind der Happy Path", "Out-of-Scope kann implizit bleiben").
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

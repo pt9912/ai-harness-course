@@ -2,6 +2,17 @@
 
 > **Aufwand:** ca. 60 Min Lesen · 60 Min Übung. Spiralcurriculum: Carveouts sind dein erstes konkretes Werkzeug für *Entropy Management* (Säule 3, [Klassifikation](../grundlagen/klassifikation.md#drei-operative-säulen-openai)).
 
+## Mini-Glossar für dieses Modul
+
+Drei neue Begriffe in diesem Modul. Volldefinitionen in
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
+| **Carveout** | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel — mit Trigger oder explizit als permanent markiert. | ein Loch im Zaun, mit Notiz "wann wird zugemacht?". |
+| **Auflösungs-Trigger** | Beobachtbare Bedingung, mit der ein temporärer Carveout endet (nicht "wenn wir Zeit haben"). | die Kerze, die *anzeigt*, dass es jetzt soweit ist. |
+| **Bootstrap-aware Gate** | Gate mit dokumentierter Reifestufe: weich in der Frühphase, hart ab Trigger. | Tempolimit, das in der Bauzone gilt, später verschwindet. |
+
 ## Engage
 
 Ein Repo trägt 14 dokumentierte Carveouts. Acht davon sind "temporär".
@@ -52,7 +63,16 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 * Dokumentiere einen Carveout für eine fehlende Coverage-Schwelle
 * Verknüpfe ihn mit einem konkreten Folge-Slice
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach der Carveout-Dokumentation und der Folge-Slice-Verknüpfung kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — War dein Trigger beobachtbar oder eine Form von "sobald wir Zeit haben"? Lebt dein Carveout in `docs/plan/carveouts/` oder im Tracker?
+2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Trigger-Disziplin ist *inferential feedforward*; Carveout-Audit-Lauf ist *computational feedback*.
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — Carveout-Audit als wiederkehrender Slice (siehe Lernziel 4)? Trigger-Pflichtfeld als Frontmatter-Check?
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Carveout = Workaround", "Wenn der Trigger eintritt, lösen wir den Carveout auf").
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

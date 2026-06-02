@@ -15,6 +15,7 @@ Definitionen zurück, ohne sie erneut zu erklären.
 | [`fallstudien.md`](fallstudien.md) | Vier reale Open-Source-Repos als laufendes Beispiel: `pt9912/u-boot`, `pt9912/grid-gym`, `pt9912/c-hsm-doc`, `pt9912/bess-ems` |
 | [`lernpfade.md`](lernpfade.md) | Drei Schwerpunkt-Pfade (Architect/Tech Lead, DevOps/Plattform, Implementation) — Vertiefungen je nach Rolle |
 | [`reflexion-vorlage.md`](reflexion-vorlage.md) | Drei Standardfragen für jede Fehler-Provokations-Übung — productive failure systematisch in Lernen überführen |
+| [`lernervorstellungen.md`](lernervorstellungen.md) | Offene Sammlung typischer Präkonzepte der Zielgruppe — als Anker für die "Typische Fehlvorstellungen"-Blöcke der Module |
 | [`checkpoints.md`](checkpoints.md) | Mini-Integrations-Checkpoints zwischen den fünf Phasen — Selbstdiagnose vor dem Abschlussprojekt |
 | [`selbstcheck-rubrik.md`](selbstcheck-rubrik.md) | Drei-Stufen-Schema (rudimentär/solide/exzellent), nach dem die Selbstcheck-Rubriken in jedem Modul aufgebaut sind |
 

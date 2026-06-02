@@ -14,9 +14,9 @@ umgesetzt, was geplant war?" Nicht: "Ist es gut?"
 
 Nach diesem Modul kannst du:
 
-* einen Plan-gegen-Code-Diff automatisch *prüfen* (Anwenden),
+* einen Plan-gegen-Code-Diff automatisch *prüfen* und das Ergebnis gegen Plan/DoD *interpretieren* (Bewerten),
 * eine DoD-Verletzung *erkennen* und gegen ein Review-Finding *abgrenzen* (Analysieren),
-* ADR-Konformität als Fitness Function *implementieren* (Erschaffen),
+* ADR-Konformität als Fitness Function *entwerfen* (auch dort, wo kein vorhandenes Werkzeug die ADR-Aussage 1:1 abbildet) (Erschaffen),
 * die Pre-completion Checklist eines Implementation-Agenten *bewerten* und Lücken *identifizieren* (Bewerten).
 
 ## Lab-Bezug
@@ -69,7 +69,16 @@ Slice DoD, Traceability-ID und Gate-Beleg enthält. Danach provozierst du
 den Fehlerfall: entferne in einer Kopie des Slice den `make gates`-Beleg
 und beobachte, dass die Verifikation rot wird.
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach dem Verifikations-Lauf und dem provozierten DoD-Verstoß kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — Welches Verifier-Findings hat den Verstoß erkannt? Hat dein Reviewer denselben Verstoß übersehen — und warum (welche Eingabe fehlte ihm)?
+2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Verifikation kombiniert *inferential feedback* und *computational feedback* (Fitness Functions).
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — Verifier-Eingabe-Pflicht (DoD+Spec+Plan) schärfen? Plan-Verteilung an Reviewer im 8-Schritt-Workflow nachziehen?
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Grüne Tests sind Verifikation", "Verifier braucht denselben Kontext wie Reviewer").
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

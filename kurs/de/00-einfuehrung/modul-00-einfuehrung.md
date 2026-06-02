@@ -2,6 +2,31 @@
 
 > **Aufwand:** ca. 45 Min Lesen · 60 Min Übung. Optional vorgeschaltet: [Hello-Harness](hello-harness.md) (30 Min Hands-on).
 
+## Optionale Explorations-Vorab-Übung (Kapur-Stil)
+
+Wenn du Zeit für eine *echte* Productive-Failure-Variante hast: **vor**
+dem Lesen dieses Moduls 20 Minuten ohne Anleitung experimentieren.
+
+> **Aufgabe (optional, 20 Min):** Lass einen LLM-Agenten deiner Wahl
+> denselben kleinen Auftrag *zweimal hintereinander* ausführen — z. B.
+> *"Schreibe eine Python-Funktion, die die Quersumme einer ganzen Zahl
+> berechnet, mit drei Beispielen am Ende."* Speichere beide Ausgaben.
+> Versuche dann, in 5 Minuten **schriftlich** zu erklären, warum die
+> Antworten verschieden sind (oder gleich) — *bevor* du das Modul liest.
+>
+> Erfolg ist *nicht*, dass du eine richtige Erklärung findest. Erfolg
+> ist, dass du die Reibung spürst und deine Hypothesen aufschreibst.
+
+Nach dem Modul-Lesen: vergleiche deine Hypothesen mit den Begriffen
+*stateless*, *Harness*, *Reproduzierbarkeit*. Verwende
+[`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+inklusive Frage 4.
+
+Wenn du keine Zeit hast: überspringen ist okay. Der Kurs trägt mit oder
+ohne diesen Einstieg. Echter Kapur-PF braucht aber das Scheitern *vor*
+der Lehre — wer das nicht versucht, lernt das Konzept später, nicht
+schlechter.
+
 ## Engage
 
 Du hast einen Agenten gebaut, der gestern ein Ticket sauber erledigt hat.
@@ -35,10 +60,11 @@ Nachschlag-Schleifen* zu lesen.
 
 Nach diesem Modul kannst du:
 
-* Agent, LLM und Tool-Call *trennscharf benennen* (Verstehen),
+* Agent, LLM und Tool-Call in eigenen Worten *erklären* und gegeneinander *abgrenzen* (Verstehen),
 * Chatbot von Engineering-System anhand mindestens dreier Kriterien *unterscheiden* (Analysieren),
 * drei typische Scheitermuster von KI-Projekten *identifizieren* und mindestens eines davon einem Quadranten der 2×2-Matrix *zuordnen* (Analysieren),
-* den Begriff *Harness* nach Böckeler *einordnen* und gegen "Prompt Engineering" *abgrenzen* (Bewerten).
+* den Begriff *Harness* nach Böckeler *einordnen* und gegen "Prompt Engineering" *abgrenzen* (Verstehen + Analysieren),
+* einen Mega-Prompt anhand der drei Reproduzierbarkeits-Kriterien des Moduls (jeder-Lauf-relevant, auditierbar, deterministisch) zeilenweise *kritisieren* (Bewerten).
 
 ## Lab-Bezug
 
@@ -71,8 +97,35 @@ handelnden Agenten einen reproduzierbar handelnden Agenten macht.
 * Analyse eines fehlgeschlagenen KI-Projekts (Vorlage:
   [`../../../lab/example/exercises/00-postmortem.md`](../../../lab/example/exercises/00-postmortem.md))
 * Provoziere absichtlich eine Halluzination, dokumentiere den Trigger
+* **Mega-Prompt sortieren** — aktiviert das Bewertungs-Lernziel
+  *"Harness gegen Prompt Engineering abgrenzen"*: Nimm einen Mega-Prompt
+  aus einem Vorprojekt (oder erfinde einen ≥30-zeiligen) und sortiere
+  *jede* Zeile in eine der drei Spalten:
+  * **(a) gehört in AGENTS.md** — in *jedem* Lauf relevant, projektweite
+    Konvention, kein Einzelfall (Beispiele: Codestil, Tool-Regeln,
+    Verbote).
+  * **(b) gehört in eine Fitness Function** — deterministisch prüfbar,
+    sollte technisch erzwungen werden (Beispiele: Layer-Importregeln,
+    Verbot bestimmter Funktionen).
+  * **(c) gehört in *diesen* konkreten Prompt** — situativ, nur für
+    diese Aufgabe relevant (Beispiele: konkrete Eingabe, konkretes
+    Zielartefakt).
 
-Nach beiden Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md) durchlaufen.
+  Begründe pro (c)-Zeile in einem Halbsatz, *warum* sie weder (a) noch
+  (b) ist. Faustregel: Wenn ein Satz in jedem zweiten Lauf vorkommen
+  würde, gehört er nicht in (c). Wer (c) länger als (a) hat, baut sich
+  eine Anti-Spec.
+
+## Reflexion
+
+Nach jeder Übung dieses Moduls (besonders nach der Halluzinations-Provokation und der Mega-Prompt-Sortier-Übung) kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — welche Tool-Calls, welche Ausgabe, welcher Trigger, reproduzierbar beschrieben.
+2. **Welcher 2×2-Quadrant war Ursache?** — Computational/Inferential × Feedforward/Feedback (siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker)).
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — eine konkrete Harness-Änderung, keine vage Absicht.
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md).
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

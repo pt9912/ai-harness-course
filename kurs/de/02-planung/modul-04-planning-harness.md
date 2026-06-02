@@ -2,6 +2,19 @@
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung. Anschluss: erster [Phasen-Checkpoint A](../grundlagen/checkpoints.md#checkpoint-a-nach-phase-01-spec-und-architektur) sollte vor diesem Modul liegen.
 
+## Mini-Glossar für dieses Modul
+
+Vier neue Begriffe in diesem Modul. Volldefinitionen in
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe);
+für die ersten Seiten reichen die Ein-Satz-Anker:
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
+| **Welle** | Bündel von Slices, das gemeinsam geplant und abgeschlossen wird. | eine Welle bricht — alle ihre Slices liegen am Strand. |
+| **Trigger** | Beobachtbare Bedingung, bei der ein Slice/Welle/Carveout in den nächsten Status wandert. | nicht der Tag, sondern das Ereignis. |
+| **Closure** | Abschluss eines Slice oder einer Welle mit Lerneintrag in `done/`. | das Türklappen *mit* Notiz, was beim Schließen klemmte. |
+| **Lifecycle-Verzeichnis** | Eines von `open/`, `next/`, `in-progress/`, `done/` — die vier Stationen eines Slice. | vier Schubladen mit Einbahnstraße — und zwei Rückwege. |
+
 ## Engage
 
 Ein Slice mit dem Titel *"Authentifizierung implementieren"* landet in
@@ -98,7 +111,16 @@ landen mit hoher Wahrscheinlichkeit als Zombie in `in-progress/`.
 * Bewege einen Slice durch alle vier Verzeichnisse
 * Schneide einen zu großen Slice in zwei umsetzbare Slices
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach dem Slice-Schnitt-Versuch und der Lifecycle-Bewegung kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — Wie groß war dein erster Schnitt? Welche Schicht hat den Zombie-Slice erzeugt? Welcher Trigger war unscharf?
+2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Größen-Diagnose ist meist *inferential* (Planner-Skill), DoD-Pflichtfeld könnte aber *computational feedforward* sein.
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — DoD-Punkte-Maximum als Skill? Lifecycle-Verzeichnis-Pflicht als CI-Check?
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Slice = Ticket = Feature", "Wenn ein Slice in done/ ist, ist er fertig").
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

@@ -35,12 +35,22 @@ Lesart:
 
 ## 2x2-Schnellanker
 
-| Kontrolle | Quadrant | Merksatz |
-|---|---|---|
-| Spec, ADR, AGENTS.md | inferential feedforward | Agent vor der Handlung informieren. |
-| Tool-Allowlist, Typen, Schemas | computational feedforward | Falsche Handlung erschweren oder verhindern. |
-| Linter, Tests, ArchUnit, Coverage | computational feedback | Falsche Handlung deterministisch erkennen. |
-| Reviewer, Verifier, Validator | inferential feedback | Semantisch nachpruefen, wo Gates nicht reichen. |
+Vier Merksätze, einer pro Quadrant — die Vollform der Matrix mit
+Werkzeug-Listen, Quadrant-Chart und Faustregel "so weit links und oben
+wie möglich" steht **einmal** in
+[`klassifikation.md`](klassifikation.md) im ersten Abschnitt. Hier
+nur der Anker für den Schnellzugriff:
+
+| Quadrant | Merksatz |
+|---|---|
+| inferential feedforward | Agent **vor** der Handlung informieren (Spec, ADR, AGENTS.md). |
+| computational feedforward | Falsche Handlung **technisch erschweren** (Typen, Schemas, Tool-Allowlist). |
+| computational feedback | Falsche Handlung **deterministisch erkennen** (Linter, Tests, ArchUnit). |
+| inferential feedback | **Semantisch nachprüfen**, wo Gates nicht reichen (Reviewer, Verifier, Validator). |
+
+Faustregel beim Lesen eines Moduls: erst Quadrant identifizieren, dann
+zur Volltabelle in `klassifikation.md` springen, wenn du die konkrete
+Werkzeug-Familie brauchst.
 
 ## Wann zurueckspringen?
 

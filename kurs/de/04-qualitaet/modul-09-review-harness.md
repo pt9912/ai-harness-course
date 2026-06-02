@@ -57,6 +57,8 @@ Kategorisierung ist eine Entscheidungsvorlage.
 
 ## Worked Example: eine Reviewer-Skill-Datei schreiben
 
+> **Wenn du Reviewer-Skills bereits versioniert pflegst und HIGH/MEDIUM/LOW/INFO repo-spezifisch verankerst, springe zu [§Übungen](#übungen).** Die sechs Schritte unten sind die Schablone für den ersten oder zweiten Skill; ab dem dritten kostet sie eher Last als sie gibt (Expertise-Reversal).
+
 Ein Reviewer-Agent ohne Skill-Datei driftet zwischen Sessions. Dieselbe
 Eingabe → unterschiedliche Findings, unterschiedliche Kategorien.
 Skill-Dateien leben in `.harness/` und sind das Repo-spezifische
@@ -188,7 +190,16 @@ Skill-Pattern für *Verifier* und *Validator* in Modul 10 bzw. in
 * Review realer Änderungen im Begleit-Repo
 * Reviewe den fingierten kaputten Slice — finde die drei eingebauten Fehler
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach dem Review-Lauf gegen den kaputten Slice und der Reviewer-Skill-Schreibübung kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — Welche Kategorie hat der Reviewer-Agent vergeben? Welches Finding hast du erwartet, aber nicht bekommen? Welches Finding kam, das du nicht erwartet hast?
+2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Reviewer ist *inferential feedback*; Klassifikations-Drift ist meist Lücke in der Skill-Datei.
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — Skill-Anker schärfen (HIGH-Liste konkreter)? Eingangs-Kontext-Pflicht erweitern? Negativbefund-Zeile erzwingen?
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Reviewer ist ein zweiter Implementer", "Wenn der Reviewer-Agent zweimal anders kategorisiert, nehmen wir die mildere").
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

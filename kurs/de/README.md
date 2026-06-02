@@ -71,7 +71,7 @@ einen kommentierten Agenten-Lauf an. Wenn 4–5 unklar sind, plane für
 
 | Bereich | Inhalt |
 |---|---|
-| [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, **Konzeptkarte**, 2×2-Klassifikation, drei Säulen, Steering Loop, vier Fallstudien, **Lernpfade**, **Reflexions­vorlage**, **Phasen-Checkpoints** — vor den Modulen zu lesen. |
+| [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, **Konzeptkarte**, 2×2-Klassifikation, drei Säulen, Steering Loop, vier Fallstudien, **Lernpfade**, **Reflexions­vorlage**, **Lernervorstellungen**, **Phasen-Checkpoints** — vor den Modulen zu lesen. |
 | [`00-einfuehrung/`](00-einfuehrung/) | Modul 0: Worum geht es überhaupt? |
 | [`01-spec-und-architektur/`](01-spec-und-architektur/) | Module 1–3: Lebenszyklus, Lastenheft, ADRs. |
 | [`02-planung/`](02-planung/) | Module 4–6: Planning-Lifecycle, Roadmap, Carveouts. |

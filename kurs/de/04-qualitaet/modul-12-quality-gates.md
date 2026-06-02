@@ -120,6 +120,8 @@ parallel ab.
 
 ## Worked Example: vom ADR-Satz zur Fitness Function
 
+> **Wenn du ArchUnit / import-linter / dep-cruiser bereits routiniert einsetzt, springe zu [§Übungen](#übungen).** Das Worked Example zeigt die Übersetzungsschablone für den ersten oder zweiten Fall — wer sie kann, gewinnt durch Wiederholung wenig (Expertise-Reversal). Übung 1 setzt das Schema sofort produktiv.
+
 **Ausgangs-ADR:** ADR-0007 (siehe Worked Example in [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md#worked-example-vom-diskussionsfaden-zum-prüfbaren-adr)) sagt:
 
 > "Service-Layer importiert ausschließlich aus `adapter/`-Paket."
@@ -171,7 +173,16 @@ Absichtserklärung trennt.
 * Schreibe einen Architekturtest, der ADR-3 als Regel umsetzt
 * Provoziere absichtlich einen Coverage-Gate-Failure auf einer kritischen Datei
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach dem Architekturtest-Bau und dem provozierten Coverage-Failure kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — Welche ADR-Aussage hattest du schwer in eine Fitness Function übersetzt? Welcher Coverage-Lauf war auf welchem kritischen Pfad rot?
+2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Gates sind *computational feedback*; bootstrap-aware Gates kombinieren mit Trigger-Disziplin (*inferential feedforward*).
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — bootstrap-aware Gate dokumentieren? ID-Kommentar im Make-Target nachziehen? domänenspezifisches Gate (`test-determinism`, `noqa-gate`) einführen?
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Gate = Lint", "Coverage 80 % ist die richtige Schwelle", "Mehr Tests sind immer besser").
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

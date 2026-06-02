@@ -2,11 +2,25 @@
 
 Mehrere Module enthalten Übungen, in denen du *absichtlich* einen Fehler
 provozierst — eine Halluzination, eine Spec-Lücke, eine DoD-Verletzung,
-einen Coverage-Failure. Productive Failure (Kapur) wird erst dann zu
-Lernen, wenn die Reflexion strukturiert ist.
+einen Coverage-Failure.
 
-Verwende nach jeder solchen Übung diese drei Fragen. Schreibe die
-Antworten auf — nicht nur "im Kopf durchspielen".
+## Was diese Methode ist (und was nicht)
+
+Das, was der Kurs durchgängig macht, ist **Error Provocation /
+Misconception Confrontation**: erst Lehre (Konzept, Kernidee, Worked
+Example), dann gezielter Fehler, dann strukturierte Reflexion.
+
+Das ist *nicht* dasselbe wie *Productive Failure* nach **Manu Kapur**
+(2008, 2014). Kapur-PF verlangt Exploration und Scheitern **vor** der
+Instruktion — Lernende ringen mit einem komplexen Problem ohne
+Lösungsstrategie und werden erst danach unterrichtet. Diese stärkere
+Form findet sich im Kurs nur punktuell als *optionaler* Einstiegspfad
+(z. B. in [Modul 0](../00-einfuehrung/modul-00-einfuehrung.md#optionale-explorations-vorab-übung-kapur-stil)
+und [Modul 2](../01-spec-und-architektur/modul-02-lastenheft.md#optionale-explorations-vorab-übung-kapur-stil)).
+
+Die Reflexion unten macht beide Formen erst zu Lernen. Verwende sie nach
+jeder Fehler-Provokations- *und* nach jeder Exploration-Vorab-Übung.
+Schreibe die Antworten auf — nicht nur "im Kopf durchspielen".
 
 ## Die drei Standardfragen
 
@@ -47,6 +61,25 @@ Schlechte Antworten: "Ich werde aufmerksamer", "Wir müssen besser
 testen", "Vielleicht ein anderes Modell". Diese sind nicht reproduzierbar
 und nicht prüfbar.
 
+### 4. Welche eigene Vorstellung wurde durch den Vorfall unzufriedenstellend?
+
+Conceptual Change im engeren Sinn (Posner et al. 1982) verlangt, dass
+*deine* bisherige Sicht ins Wanken gerät — nicht nur, dass *der Harness*
+geändert wird. Frage dich:
+
+- Welcher Satz aus [`lernervorstellungen.md`](lernervorstellungen.md)
+  beschreibt am ehesten *die* Vorstellung, mit der du in die Übung
+  gegangen bist?
+- Wodurch genau wurde sie unzufriedenstellend — *was* hast du beobachtet,
+  das mit deiner Vorstellung nicht vereinbar war?
+- Welche neue Sicht erklärt die Beobachtung besser, **und wo könnte
+  sie wiederum scheitern**? (Conceptual-Change-Fruchtbarkeit.)
+
+Anti-Antwort: "Ich wusste das eigentlich schon." Wenn das stimmte,
+hättest du den Fehler nicht erzeugt. Schreib die *unzufriedenstellend
+gewordene Vorstellung* hin, auch wenn sie peinlich klein wirkt — genau
+das ist der Lernschritt.
+
 ## Wann darf eine Reflexion *nicht* zu einer Harness-Änderung führen?
 
 Nicht jeder Einzelfehler verdient einen neuen Sensor. Faustregel
@@ -73,6 +106,7 @@ Datum: <YYYY-MM-DD>
 1. Beobachtung: <2-3 Sätze>
 2. Harness-Lücke (Quadrant): <Q + Begründung>
 3. Steering-Loop-Aktion: <konkret oder "noch nicht — Erstvorfall">
+4. Vorstellung, die unzufriedenstellend wurde: <ein Satz oder "keine — schon vorher gewusst">
 ```
 
 Diese Einträge sind dein eigenes Golden Set für den späteren Vergleich:

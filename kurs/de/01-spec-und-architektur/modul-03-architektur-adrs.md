@@ -67,6 +67,8 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 
 ## Worked Example: vom Diskussionsfaden zum prüfbaren ADR
 
+> **Wenn du MADR-/Nygard-ADRs routiniert schreibst und Fitness Functions formulieren kannst, springe zu [§Übungen](#übungen).** Wer das Schema bereits hat, profitiert von Worked Examples weniger als Anfänger (Expertise-Reversal); für letztere ist die Sieben-Schritt-Schablone unten der Hauptlernträger.
+
 **Ausgangssituation:** Im Team kommt wiederholt der Vorschlag, den
 Service direkt mit der externen API zu sprechen ("warum Adapter? das ist
 doch nur ein REST-Call"). Drei Vorfälle innerhalb von zwei Wochen.
@@ -132,7 +134,16 @@ Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
    vorbereitet. Wenn nicht, ist sie nur Entscheidungsnotiz, noch kein
    Harness-Guide.
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach jeder Übung — besonders nach dem ADR-Verletzungs-Lauf — kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — Hat der Agent die ADR erkannt? Hat er die Verletzung benannt? Oder hat er "schien einfacher" geantwortet (siehe Engage)?
+2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). ADR-Erkennung ist *inferential feedforward*, ArchUnit-Test ist *computational feedback*.
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — fehlende Fitness Function nachziehen? ADR-Bezug in `harness/README.md` schärfen?
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "ADR ohne Fitness Function ist eine ADR", "ADRs sind Dokumentation, nicht Constraints").
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

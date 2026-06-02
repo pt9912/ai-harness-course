@@ -66,7 +66,16 @@ Fehlerfall entsteht, wenn du in einer Kopie die Base-Image-Version
 unpinnst und den Build später erneut ausführst. Dokumentiere nicht nur
 "rot/grün", sondern den Unterschied zwischen lokalem und CI-Vertrag.
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach dem Build-Harness-Aufbau und dem provozierten Image-Drift kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — Welche konkrete Toolchain-Version war anders zwischen lokal und CI? Hast du Image-Hash und Lock-File-Stand festgehalten?
+2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Image-Pinning ist *computational feedforward*; Hash-Vergleich im Replay-Manifest ist *computational feedback*.
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — Image-Hash als Pflichtfeld in `harness/README.md` aufnehmen? Lock-File-Hash als Gate?
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "FROM python:3 ist konkret genug", "Docker-only ist Overkill für Tools", "Es läuft bei mir, das reicht").
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

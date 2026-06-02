@@ -97,7 +97,16 @@ Jedes Artefakt verweist nach oben (Begründung) und nach unten
 * Identifiziere im Begleit-Repo einen Slice und folge der Kette Spec → ADR → Plan → PR
 * Schreibe einen Source-Precedence-Block für ein eigenes Repo als ersten Abschnitt einer neuen `harness/README.md` (Vorlage in [`/lab/templates/harness/README.template.md`](../../../lab/templates/harness/README.template.md))
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach jeder Übung dieses Moduls kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — welche Diagramm-Kante hat gefehlt, welcher Rückverweis brach, welche ID war ohne Bezug?
+2. **Welcher 2×2-Quadrant war Ursache?** — Computational/Inferential × Feedforward/Feedback (siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker)).
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — eine konkrete Harness-Änderung, keine vage Absicht.
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md).
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 

@@ -114,6 +114,128 @@ beiden existiert, ist die Regel nur halb durchgesetzt.
 - **"Hard Rules schreibe ich in AGENTS.md, und das reicht."** — Eine Hard Rule, die nur in AGENTS.md steht (inferential feedforward), ist halbgesetzt. Erst mit Fitness Function (computational feedback) ist sie *durchgesetzt*. Beides ist Pflicht.
 - **"Wenn die Tests grün sind, ist der Slice fertig."** — Schritt 8 verlangt einen Bericht über *Sensors und verbleibende Risiken*. Grüne Tests sind notwendig, nicht hinreichend.
 - **"Die Pre-completion Checklist ist Bürokratie."** — Sie ist der einzige Schritt, der vor Übergabe an Reviewer/Verifier eine *Selbstaussage* erzwingt. Wer keinen Selbst-Check macht, lädt jedes Risiko in die nächste Rolle.
+- **"Mehr Kontext ist immer besser — siehe Lopopolo."** — Lopopolos *"anything it can't access in-context doesn't exist"* sagt: *fehlender* Kontext schadet. Es sagt **nicht**: *jeder zusätzliche* Kontext nützt. Siehe nächster Block.
+
+## Kontext-Verdichtung (Kehrseite der Lopopolo-Maxime)
+
+Die Maxime *"anything it can't access in-context doesn't exist"* ist im
+Kurs eine Hebellinse — sie erklärt, warum Spec, ADR und AGENTS.md *die
+Hauptkontrolle* sind, nicht Beiwerk. Aber sie hat eine Kehrseite, die der
+Reflex "mehr Kontext rein" gerne überliest:
+
+- **Kontext-Pollution.** Wenn ein 14 Wochen alter ADR-Entwurf im Kontext
+  steht, der mit `superseded` markiert ist, erfindet der Agent
+  Begründungen *aus dem alten ADR*. Der Kontext besteht — die
+  Information ist falsch. Mehr Tokens, schlechteres Ergebnis.
+- **Lost in the Middle.** Auch bei großen Kontext-Fenstern fallen
+  Informationen in der Mitte des Prompts deutlich seltener in den
+  Output zurück als Anfang und Ende. Wer wichtige Anforderungen
+  ungeordnet "dazwischen" platziert, hat sie technisch im Kontext und
+  praktisch nicht.
+- **Token-Kosten.** Jedes Token im Eingangskontext wird abgerechnet —
+  pro Lauf, pro Tool-Call, pro Replay. Ein 30-zeiliger irrelevanter
+  Block, der in 1500 PRs mitläuft (siehe Lopopolos empirischer Beleg in
+  [`../abschluss/quellen.md`](../abschluss/quellen.md)), ist eine
+  Rechnung mit vier Stellen vor dem Komma.
+
+Folge: Context Engineering ist *auch* eine Reduktions-Aufgabe.
+Konkret gehört in den Lauf-Kontext:
+
+| Pflicht | Wer? |
+|---|---|
+| `harness/README.md` | jeder Lauf |
+| relevante kanonische Quelle (Source Precedence) | jeder Lauf, gezielt |
+| Requirement-/ADR-IDs des Slice | jeder Lauf |
+| AGENTS.md (Hard Rules + Konventionen) | jeder Lauf |
+| Tool-Allowlist | jeder Lauf |
+
+| Nicht in den Lauf-Kontext (Anti-Pattern) |
+|---|
+| `superseded`/`deprecated` ADRs ohne Folge-Bezug |
+| historische Spec-Diff-Notizen, die jetzt in ADR-Form gegossen sind |
+| Skills, die nicht zu dieser Rolle gehören |
+| ältere Carveouts, deren Auflösungs-Trigger bereits eingetreten ist |
+
+Die Verdichtungs-Sensoren dafür sind in [Modul 14](../05-betrieb/modul-14-observability.md):
+Token-Eingabe-Metrik pro Slice, Cache-Hit-Rate (siehe Mini-Glossar in
+Modul 14), und der **Doku-Konsistenz-Agent** als Drift-Detektor für tote
+Kontext-Stücke.
+
+Faustregel für den 8-Schritt-Workflow: Schritt 2 ist *"kanonische Quelle
+lesen"*, nicht *"alles lesen, was im Repo liegt"*. Wenn der Plan in
+Schritt 4 nicht ohne Verweis auf einen Kontext-Block auskommt, gehört
+dieser Block in den nächsten Lauf — alle anderen nicht.
+
+## Worked Example: ein Slice durch den 8-Schritt-Workflow
+
+> **Wenn du den 8-Schritt-Workflow in deinem eigenen Repo bereits routiniert läufst (Plan-vor-Code als Reflex, Sensor-Verfeinerung statt Kontext-Neulesen), springe zu [§Übungen](#übungen).** Das Worked Example unten ist die Schablone für den ersten oder zweiten Durchgang — wer den Workflow verinnerlicht hat, gewinnt durch erneutes Mitlesen wenig (Expertise-Reversal).
+
+**Ausgangs-Slice:** `SL-014a` aus dem Worked Example in
+[Modul 4](../02-planung/modul-04-planning-harness.md#worked-example-einen-zu-großen-slice-schneiden) —
+*"Login-Endpoint akzeptiert User/Passwort, gibt JWT zurück,
+Audit-Log-Eintrag entsteht. Bezug: LH-FA-AUTH-001 + ADR-0007
+(Service-Adapter-Layer)."*
+
+**Schritt 1 — `harness/README.md` lesen.**
+Implementer-Agent öffnet `harness/README.md`. Stellt fest: Source
+Precedence sagt *Spec → ADRs → Roadmap → AGENTS.md*. Tool-Allowlist
+enthält keinen direkten HTTP-Client (folgt ADR-7).
+
+**Schritt 2 — Kanonische Quelle lesen (gezielt).**
+`spec/lastenheft.md` Abschnitt `LH-FA-AUTH-001` (drei
+Akzeptanzkriterien). ADR-0007 (Service-Adapter-Layer). *Nicht* gelesen:
+ältere ADRs, irrelevante Skills — siehe oben "Kontext-Verdichtung".
+
+**Schritt 3 — Requirement-/ADR-IDs identifizieren.**
+`LH-FA-AUTH-001`, `ADR-0007`. Diese zwei IDs werden in den
+Make-Target-Kommentar (für `make verify`) und in die Commit-Message
+eingewoben.
+
+**Schritt 4 — Kleinste Änderung planen.** Agent gibt **Plan vor Code**
+aus:
+> **Plan SL-014a:**
+> 1. `service/auth/login.go` — Funktion `Login(creds)` mit
+>    JWT-Erzeugung. Import nur aus `adapter/jwt/` (ADR-0007).
+> 2. `adapter/audit/file.go` — `WriteLoginAttempt(ev)`.
+> 3. Tests: `service/auth/login_test.go` (Happy/Boundary/Negative
+>    nach LH-FA-AUTH-001).
+> *Out-of-Scope dieses Slice:* Refresh-Token (SL-014b), Revocation
+> (SL-014c).
+
+**Schritt 5 — Engsten Sensor laufen (eine Testdatei).**
+`make test FILE=service/auth/login_test.go`. Erste Iteration rot
+(Negativtest schlägt durch). Plan in 4 verfeinern, *nicht* mehr Kontext
+laden. Zweite Iteration: grün.
+
+**Schritt 6 — `make gates` (repo-weit).**
+Erste Iteration: `arch-check` rot, weil `service/auth/login.go` einen
+direkten Import aus `net/http` trägt. Rückkante zu Schritt 4: Plan
+korrigieren — Adapter-Wrapper in `adapter/jwt/sign.go`. Zweite
+Iteration: grün.
+
+**Schritt 7 — Doku/Indizes aktualisieren.**
+`spec/lastenheft.md` — `LH-FA-AUTH-001` als implementiert markiert (mit
+Slice-ID-Bezug). `harness/README.md` unverändert (keine neue
+Tool-Familie). AGENTS.md unverändert (keine neue Hard Rule).
+
+**Schritt 8 — Bericht: Sensors + Restrisiken.**
+> **Sensors gelaufen:** `make test` (3 neue Tests, alle grün), `make
+> gates` (alle grün, inkl. arch-check). **Restrisiken:**
+> Refresh-Token-Flow (SL-014b) noch nicht implementiert — JWT läuft
+> ohne Erneuerungspfad ab; das ist im Plan dokumentiert, *aber* das
+> Audit-Log braucht später eine Rotations-Regel. Vorschlag: Folge-Slice
+> SL-014b zuerst, Audit-Rotation als Hinweis in dessen DoD aufnehmen.
+
+Sieben Iterationen, ein nachvollziehbarer Slice. Beachte: **kein
+Rücksprung zu Schritt 1**, sondern nur 5→4 (Plan verfeinern) und 6→4
+(Plan korrigieren wegen Gate). Wer in Schritt 1 zurückspringt, hat einen
+Kontext-Defekt, keinen Plan-Defekt — das ist eine andere Ursache und
+gehört in den nächsten Steering-Loop-Eintrag.
+
+Vergleich:
+[`../../../lab/example/Makefile`](../../../lab/example/Makefile) Target
+`make agent-implement SLICE=slice-009` zeigt das Kontextpaket aus
+Schritten 1–3, bevor Schritt 4 anfängt.
 
 ## Übungen
 
@@ -132,7 +254,16 @@ Erwartete Beobachtung: Das Target erzeugt keinen Code. Es zeigt das
 Kontextpaket, das ein Implementation-Agent vor dem Plan lesen muss. Erst
 wenn du dieses Paket benennen kannst, ist der freie Agentenlauf sinnvoll.
 
-Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
+## Reflexion
+
+Nach dem Slice-Umsetzungs-Lauf, dem AGENTS.md-Vergleich und den drei Hard Rules kurz **schriftlich**:
+
+1. **Was ist beobachtbar passiert?** — Welcher Schritt brauchte 5→4-Rücksprung? Wo war der Lauf *mit* AGENTS.md inhaltlich anders als ohne? Welche Hard Rule blieb halb durchgesetzt (kein Gate)?
+2. **Welcher 2×2-Quadrant war Ursache?** — siehe [`konzeptkarte.md §2x2-Schnellanker`](../grundlagen/konzeptkarte.md#2x2-schnellanker). Hard Rules liegen typisch in *zwei* Quadranten gleichzeitig.
+3. **Welche konkrete Steering-Loop-Aktion folgt?** — AGENTS.md schärfen? Tool-Allowlist enger? Fitness Function für die schwächste Hard Rule?
+4. **Welche eigene Vorstellung wurde unzufriedenstellend?** — Conceptual Change; Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Agent liefert schnell, also ist der Workflow Overhead", "Hard Rules in AGENTS.md reichen", "Mehr Kontext ist immer besser").
+
+Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md).
 
 ## Selbstcheck
 
@@ -140,7 +271,7 @@ Nach den Übungen: [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md).
 * Welche Eingaben braucht ein Implementation-Agent minimal, um nicht zu halluzinieren?
 * Wann ist ein Implementation-Agent fertig — wenn der Code kompiliert, oder wenn die DoD erfüllt ist?
 * Welche deiner Hard Rules wandert in welche Quadranten der 2×2-Matrix?
-* **(Anwenden)** Welcher Schritt des 8-Schritt-Workflows ist in deinem eigenen Repo heute am schwächsten verankert — und woran erkennst du das?
+* **(Bewerten + Metakognition)** Welcher Schritt des 8-Schritt-Workflows ist in deinem eigenen Repo heute am schwächsten verankert — und woran erkennst du das?
 
 ### Selbstcheck-Rubrik
 
