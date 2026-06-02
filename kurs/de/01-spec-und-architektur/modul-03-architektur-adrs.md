@@ -34,6 +34,9 @@ nicht verteidigen.
 
 ## Hard Rule (Beispiel aus c-hsm-doc, ADR 0001)
 
+Begriff *Hard Rule* siehe Glossar in
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md).
+
 *"Eine ADR mit Status `Accepted` wird nicht inhaltlich überschrieben.
 Spätere Korrekturen oder Schärfungen entstehen als neue ADR mit
 explizitem Verweis auf die abgelöste oder geschärfte Vorgängerin."*

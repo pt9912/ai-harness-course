@@ -14,8 +14,11 @@ Entscheidungen. Diese Begriffe gelten durchgängig.
 | ADR | Architecture Decision Record unter `docs/plan/adr/`. Quelle der Wahrheit für *warum so*. |
 | Slice | Kleinste lieferbare Einheit eines Features. Hat eigenen Plan, eigene DoD. |
 | Welle | Bündel von Slices, das gemeinsam geplant und abgeschlossen wird. |
+| Trigger | Beobachtbare Bedingung, bei der ein Slice/Welle/Carveout in den nächsten Status wandert. |
+| Closure | Abschluss eines Slice oder einer Welle, dokumentiert mit Lerneintrag in `done/`. |
 | Gate | Automatisch prüfbares Qualitätskriterium (Linter, Typecheck, Architekturtest, Coverage). |
 | Carveout | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel. |
+| Skill | Repo-spezifisches Markdown/JSON-Artefakt, das einer Agenten-Rolle Checkliste oder Verhalten beibringt. Lebt typischerweise in `.harness/`. |
 | Replay | Deterministisch wiederholbarer Agentenlauf gegen fixierte Inputs. |
 | Golden Set | Kuratiertes Eingabe/Erwartungs-Paar für Regressionstests. |
 | Finding | Einzelne Beobachtung eines Reviewers, kategorisiert HIGH/MEDIUM/LOW/INFO. |
@@ -44,7 +47,7 @@ docs/plan/planning/open/    # geplante, noch nicht gestartete Slices
 docs/plan/planning/next/    # priorisiert für die nächste Welle
 docs/plan/planning/in-progress/  # aktive Slices
 docs/plan/planning/done/    # abgeschlossene Slices
-docs/plan/roadmap.md        # Meilensteine und Wellen
+docs/plan/planning/in-progress/roadmap.md   # Meilensteine, Wellen, aktive Welle
 docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
 AGENTS.md                   # maschinell lesbare Projekt-Konventionen für Agenten
 harness/README.md           # Repo-Einstiegspunkt: Source Precedence, Guides, Sensors, Safety
@@ -67,7 +70,7 @@ für ein typisches Repo:
 2. `spec/architecture.md`
 3. `docs/plan/adr/README.md` und die darin referenzierten ADRs
 4. `docs/plan/planning/in-progress/roadmap.md`
-5. `docs/user/*.md`
+5. `docs/user/*.md` (Betriebs-/Operations-Docs — Quality-Definitionen, Releasing, Runbooks)
 6. `README.md`
 7. `AGENTS.md`
 8. `harness/README.md`

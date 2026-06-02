@@ -6,17 +6,18 @@ Zugehöriges Modul: [Modul 2 — Lastenheft und Spezifikation](../01-spec-und-ar
 
 ### Welche drei Tests würden ein Akzeptanzkriterium falsifizieren?
 
-Ein Akzeptanzkriterium ist gut, wenn man drei Tests *gegen* es schreiben
-kann — nicht nur einen "Happy Path". Konkret:
+Ein Akzeptanzkriterium ist gut, wenn man es mit drei *unterschiedlichen
+Testarten* angreifen kann. "Falsifizieren" heißt hier: das Kriterium
+würde rot werden, wenn die Implementierung naiv wäre.
 
-1. **Happy Path** — Eingabe entspricht der Spec, Ergebnis entspricht der Erwartung.
-2. **Boundary** — Eingabe liegt am Rand des spezifizierten Bereichs (leer, maximal, exakt am Schwellwert). Spec sollte sagen, ob das Verhalten am Rand "noch akzeptabel" oder "schon Fehler" ist.
-3. **Negative** — Eingabe ist *außerhalb* der Spec. Spec sollte den Fehlerpfad explizit benennen (Exception, definierter Rückgabewert, Logging-Eintrag).
+1. **Happy Path** — falsifiziert die These "es funktioniert nicht überhaupt": Eingabe entspricht der Spec, Ergebnis entspricht der Erwartung.
+2. **Boundary** — falsifiziert die These "es funktioniert nur weit weg vom Rand": Eingabe liegt am Rand des spezifizierten Bereichs (leer, maximal, exakt am Schwellwert). Spec sollte sagen, ob das Verhalten am Rand "noch akzeptabel" oder "schon Fehler" ist.
+3. **Negative** — falsifiziert die These "Annahmen aus dem Happy Path sind universell": Eingabe ist *außerhalb* der Spec. Spec sollte den Fehlerpfad explizit benennen (Exception, definierter Rückgabewert, Logging-Eintrag).
 
-Wenn alle drei sich aus der Spec ableiten lassen, ist das Kriterium
-testbar. Wenn die Spec auf "Negative" mit "ist undefiniert" antwortet,
-ist das eine Spec-Lücke — und genau dort halluziniert ein Agent am
-liebsten.
+Boundary und Negative widerlegen die stillen Annahmen des Happy Path —
+genau die Annahmen, die ein Agent am liebsten als "selbstverständlich"
+behandelt. Wenn die Spec auf "Negative" mit "ist undefiniert" antwortet,
+ist das eine Spec-Lücke, und genau dort halluziniert ein Agent.
 
 ### Wo gehört "Performance < 200 ms" hin — funktional oder nichtfunktional?
 

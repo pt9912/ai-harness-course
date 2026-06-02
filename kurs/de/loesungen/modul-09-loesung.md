@@ -64,7 +64,6 @@ Wenn dein Reviewer-Agent nur HIGH-Findings produziert, ist er
 
 ## Verweise
 
-- 2×2-Klassifikation: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md) (Review = Inferential + Feedback)
-- Maintainability-Kategorie: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
+- 2×2-Klassifikation + Maintainability-Kategorie: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md) — Review ist Inferential + Feedback, primär in der Maintainability-Kategorie.
 - Vorherige Lösung: [Modul 8](modul-08-loesung.md)
 - Nächste Lösung: [Modul 10](modul-10-loesung.md)

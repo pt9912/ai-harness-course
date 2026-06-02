@@ -7,12 +7,12 @@ Stände gemeint.
 
 ## Übersicht
 
-| Repo | Klasse | Stack | Was der Kurs daraus zieht |
-|---|---|---|---|
-| **`pt9912/u-boot`** | Referenz/Tooling | Go-CLI für reproduzierbare Docker-Setups | LH-ID-Schema in Make-Target-Kommentaren, `verify-depguard` als Architekturtest, bootstrap-aware Coverage. **Kein AGENTS.md** — typischer "vor dem Harness"-Zustand. |
-| **`pt9912/grid-gym`** | Referenz (Domäne) | Python-EMS-Simulator, hexagonale Architektur | Reichste AGENTS.md (Docker-only, noqa-Verbot, Welle-Self-Close), 18 Gates, Test-Diversität (`determinism`/`replay`/`fault`). |
-| **`pt9912/c-hsm-doc`** | Safety + Compliance | Go-Tool mit PKCS#11/HSM-Integration | Spec-Stratifizierung (Lastenheft *vertraglich* / Spezifikation *technisch* / Architektur *diagrammatisch*), `HSM-*`-IDs, `proto-check` als Drift-Sensor gegen generierten Code, Hard Rule "Accepted-ADRs immutable". |
-| **`pt9912/bess-ems`** | Safety/Control-Flagship | C#/.NET 10 + native C/C++-Interop, BESS-EMS mit MPC | **Central Package Management** (`Directory.Packages.props` + `packages.lock.json`) als Reproduzierbarkeits-Anker, eigener **`solid-suppression-gate`** als Hard Rule, **`test-mpc-property`** als Property-Based-Sensor neben Unit-Tests, **`native-sanitizer`** für C/C++-Anteile. Zeigt: Safety/Control-Repos tragen oft mehrere Toolchains. |
+| Repo | Klasse | Anmerkung | Stack | Was der Kurs daraus zieht |
+|---|---|---|---|---|
+| **`pt9912/u-boot`** | Referenz | Tooling | Go-CLI für reproduzierbare Docker-Setups | LH-ID-Schema in Make-Target-Kommentaren, `verify-depguard` als Architekturtest, bootstrap-aware Coverage. **Kein AGENTS.md** — typischer "vor dem Harness"-Zustand. |
+| **`pt9912/grid-gym`** | Referenz | Domäne | Python-EMS-Simulator, hexagonale Architektur | Reichste AGENTS.md (Docker-only, noqa-Verbot, Welle-Self-Close), 18 Gates, Test-Diversität (`determinism`/`replay`/`fault`). |
+| **`pt9912/c-hsm-doc`** | Policy/Compliance | mit Safety-Anteil (HSM-Integration) | Go-Tool mit PKCS#11/HSM-Integration | Spec-Stratifizierung (Lastenheft *vertraglich* / Spezifikation *technisch* / Architektur *diagrammatisch*), `HSM-*`-IDs, `proto-check` als Drift-Sensor gegen generierten Code, Hard Rule "Accepted-ADRs immutable". |
+| **`pt9912/bess-ems`** | Safety/Control | Flagship | C#/.NET 10 + native C/C++-Interop, BESS-EMS mit MPC | **Central Package Management** (`Directory.Packages.props` + `packages.lock.json`) als Reproduzierbarkeits-Anker, eigener **`solid-suppression-gate`** als Hard Rule, **`test-mpc-property`** als Property-Based-Sensor neben Unit-Tests, **`native-sanitizer`** für C/C++-Anteile. Zeigt: Safety/Control-Repos tragen oft mehrere Toolchains. |
 
 ## Repo-Klassen
 

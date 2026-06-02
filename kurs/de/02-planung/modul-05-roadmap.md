@@ -7,7 +7,7 @@
 
 ## Lab-Bezug
 
-* `docs/plan/roadmap.md`
+* `docs/plan/planning/in-progress/roadmap.md`
 
 ## Themen
 
@@ -29,6 +29,7 @@ Terminen. Termine sind eine Folge der Wellen, nicht ihr Treiber.
 ## Selbstcheck
 
 * Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
+* Was unterscheidet eine Welle von einem Meilenstein?
 
 ## Weiterlesen
 

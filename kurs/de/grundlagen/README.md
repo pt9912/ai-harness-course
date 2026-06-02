@@ -11,7 +11,7 @@ Definitionen zurück, ohne sie erneut zu erklären.
 |---|---|
 | [`konventionen.md`](konventionen.md) | Glossar, Verzeichniskonvention, Trennschärfen, Source Precedence, Spec-Stratifizierung, ID-Schema, Traceability-Constraint, `harness/README.md`-Pattern |
 | [`klassifikation.md`](klassifikation.md) | Böckelers 2×2 (Feedforward/Feedback × Computational/Inferential), drei Harness-Kategorien (Maintainability, Architecture Fitness, Behaviour), OpenAIs drei operative Säulen (Context Engineering, Architectural Constraints, Entropy Management), Steering Loop, Lifecycle-Verteilung |
-| [`fallstudien.md`](fallstudien.md) | Drei reale Open-Source-Repos als laufendes Beispiel: `pt9912/u-boot`, `pt9912/grid-gym`, `pt9912/c-hsm-doc` |
+| [`fallstudien.md`](fallstudien.md) | Vier reale Open-Source-Repos als laufendes Beispiel: `pt9912/u-boot`, `pt9912/grid-gym`, `pt9912/c-hsm-doc`, `pt9912/bess-ems` |
 
 ## Modulschema
 
@@ -30,10 +30,11 @@ einordnet.
 
 ## Begleit-Lab
 
-Der Kurs liefert ein Beispiel-Repo `ai-harness-lab/` mit:
+Der Kurs liefert ein Beispiel-Repo unter [`/lab/example/`](../../../lab/example/)
+mit:
 
 * lauffähigen Beispiel-Artefakten in `spec/`, `docs/plan/adr/`, `docs/plan/planning/`
-* Docker-Compose-Setup für Agentenläufe (Planner, Reviewer, Verifier)
+* fünf parallelen Sprach-Skeletten (Go, Python, Kotlin, Java, C#) mit eigener Toolchain
 * Make-Targets für alle Gates (`make lint`, `make typecheck`, `make arch-check`, `make coverage-gate`, `make coverage-gate-critical`, `make gates`)
 * fingiertem "kaputten" Slice für die Review-Übung in [Modul 9](../04-qualitaet/modul-09-review-harness.md)
 * Replay-Beispiel mit Golden Set in `evals/`

@@ -17,7 +17,7 @@
 * DoD-Verifikation
 * ADR-Konformität
 * Architekturkonformität
-* Pre-completion Checklist Middleware (vom Agenten selbst durchlaufen, bevor er "fertig" meldet)
+* Pre-completion Checklist Middleware (vom Agenten selbst durchlaufen, bevor er "fertig" meldet — siehe [Modul 8 Schritt 8](../03-agenten/modul-08-implementierung.md#minimal-agent-workflow-8-schritte))
 
 ## Harness-Einordnung
 

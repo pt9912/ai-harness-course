@@ -57,11 +57,18 @@ orthogonal zu Böckelers Kategorien stehen:
 |---|---|---|---|
 | **Context Engineering** | dem Agenten das Richtige zur Verfügung stellen | Spec, ADR, AGENTS.md, Skills, dynamisches Verzeichnis-Mapping beim Start | 2, 3, 4 |
 | **Architectural Constraints** | dem Agenten das Falsche unmöglich machen | Layering-Regeln, Import-Allowlists, Tool-Allowlists, ArchUnit | 3, 12 |
-| **Entropy Management** | den Harness gegen Verfall pflegen | Doku-Konsistenz-Agent, Dead-Constraint-Scanner, Carveout-Audit | 6, 11, 14 |
+| **Entropy Management** | den Harness gegen Verfall pflegen | Doku-Konsistenz-Agent, Carveout-Audit, Golden-Set-Rotation | 6, 11, 14 |
 
 Maxime von Lopopolo: *"From the agent's perspective, anything it can't
 access in-context doesn't exist."* — daraus folgt direkt, warum Spec und
 AGENTS.md kein Beiwerk sind, sondern die Hauptkontrolle.
+
+**Constrain + Inform** sind die Linsen, durch die Lopopolo die drei
+Säulen liest: *Context Engineering* ist primär **inform** (Agent weiß
+mehr), *Architectural Constraints* ist primär **constrain** (Agent kann
+weniger Falsches), *Entropy Management* sorgt, dass beide auch
+übermorgen noch stimmen. Glossar-Eintrag in
+[`konventionen.md`](konventionen.md).
 
 ## Entropy Management
 

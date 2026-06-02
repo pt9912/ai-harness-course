@@ -36,6 +36,7 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 ## Selbstcheck
 
 * Wann darf ein Carveout das `make gates`-Ziel grün halten, und wann nicht?
+* Wie unterscheidet sich ein Carveout von einem Bootstrap-aware Gate (siehe [Modul 12](../04-qualitaet/modul-12-quality-gates.md))?
 
 ## Weiterlesen
 

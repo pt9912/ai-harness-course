@@ -9,7 +9,7 @@
 ## Lab-Bezug
 
 * `Dockerfile`, `docker-compose.yml` im Begleit-Repo
-* `make build`, `make shell`, `make smoke`
+* `make build`, `make run` (Smoke-Test)
 
 ## Themen
 

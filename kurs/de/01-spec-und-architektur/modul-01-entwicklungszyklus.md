@@ -9,7 +9,7 @@
 
 ## Lab-Bezug
 
-* `docs/plan/roadmap.md`
+* `docs/plan/planning/in-progress/roadmap.md`
 * Verzeichnisstruktur des Begleit-Repos (siehe [`../grundlagen/konventionen.md`](../grundlagen/konventionen.md))
 
 ## Themen
@@ -29,6 +29,7 @@ Jedes Artefakt verweist nach oben (Begründung) und nach unten
 
 * Zeichne den Zyklus für ein Mini-Feature auf einem Blatt
 * Identifiziere im Begleit-Repo einen Slice und folge der Kette Spec → ADR → Plan → PR
+* Schreibe einen Source-Precedence-Block für ein eigenes Repo als ersten Abschnitt einer neuen `harness/README.md` (Vorlage in [`/lab/templates/harness/README.template.md`](../../../lab/templates/harness/README.template.md))
 
 ## Selbstcheck
 

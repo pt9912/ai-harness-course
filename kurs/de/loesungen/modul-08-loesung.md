@@ -40,7 +40,8 @@ aus [Modul 8](../03-agenten/modul-08-implementierung.md).
 
 ### Welche deiner Hard Rules wandert in welche Quadranten der 2×2-Matrix?
 
-Beispielzuordnung (Übung aus dem Modul):
+Beispielzuordnung (Übung aus dem Modul). Quadranten gemäß
+[`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md):
 
 | Hard Rule | Quadrant |
 |---|---|

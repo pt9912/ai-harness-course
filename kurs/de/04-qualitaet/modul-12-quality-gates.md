@@ -39,7 +39,7 @@ Einsparung im gesamten System.
 Gates sind Aussagen, die *immer* gelten müssen. Wenn ein Gate "manchmal"
 rot sein darf, ist es kein Gate, sondern ein Vorschlag.
 
-## Disziplinregel
+## Hard Rule (Doku-Disziplin)
 
 In `harness/README.md` und in jeder Doku, die Gates aufzählt: keine
 Befehle behaupten, die es nicht gibt. Wenn `make fullbuild` aktuell rot
@@ -83,28 +83,13 @@ Pointe: Domänenspezifische Gates (`test-determinism`, `test-replay`,
 Standard-Setup. Wenn dein Repo nur die generischen sechs hat, weißt du
 nur, dass du noch keine Schmerzen hattest.
 
-Ein zweites Beispiel aus einer anderen Sprach-Welt — Safety/Control
-in C#/.NET, Repo `pt9912/bess-ems`:
-
-```
-lint (mit solid-suppression-gate)
-arch-check
-test · test-safety · test-mpc-property · test-replay
-coverage-gate
-helm-lint · schema-validate · schema-drift-check
-simulator-test · simulator-race · simulator-lint · simulator-coverage-gate
-test-integration
-test-hil-opcua · test-hil-modbus · test-hil-closed-loop · test-hil-optimization-core
-native-build · native-lint · native-sanitizer · native-coverage-gate
-docs-check
-```
-
-Beobachtungen:
-
-* **`solid-suppression-gate`** ist das C#-Pendant zu grid-gyms `noqa-gate` — derselbe Lerneffekt in zwei Sprachen.
-* **`test-mpc-property`** ist ein Property-Based-Test als eigener Sensor neben Unit-Tests — typisch für regelungstechnische Logik.
-* **`native-sanitizer`** zeigt: in Safety/Control-Repos mit nativem Code wandert der Harness in *zwei* Toolchains gleichzeitig (C#-Welt und C/C++-Welt).
-* **`test-hil-*`** (Hardware-in-the-Loop) sind Beispiele für Sensors, die *Realität* einbeziehen — der äußerste Ring um den eigentlichen Code.
+Ein zweites Beispiel in einer anderen Sprach-Welt: `pt9912/bess-ems`
+(C#/.NET, Safety/Control) bringt Gate-Familien mit, die `grid-gym`
+nicht hat — `solid-suppression-gate` (C#-Pendant zum noqa-gate),
+`test-mpc-property` (Property-Based-Sensor für Regelungstechnik),
+`native-sanitizer` (für C/C++-Interop-Anteile), `test-hil-*`
+(Hardware-in-the-Loop). Voll ausgeschrieben in
+[`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md).
 
 Pro Sprache wachsen also unterschiedliche Gate-Familien. Der Harness
 ist sprach-unabhängig im Konzept, aber sprach-abhängig in der

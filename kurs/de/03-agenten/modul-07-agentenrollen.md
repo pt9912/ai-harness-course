@@ -16,8 +16,8 @@
 * Architect Agent
 * Implementation Agent
 * Reviewer Agent
-* Verification Agent
-* Validation Agent
+* Verifier Agent (Verification)
+* Validator Agent (Validation)
 * Verantwortlichkeiten
 * Übergaben
 * Konfliktlösung (z. B. Reviewer findet ADR-Lücke)
