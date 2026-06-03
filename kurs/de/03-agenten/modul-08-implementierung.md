@@ -4,13 +4,15 @@
 >
 > **Segmenting-Empfehlung (Sweller).** Das Modul zerfällt natürlich in
 > zwei Teile. **Teil A (8a — Workflow):** Engage · Lernziele ·
-> Mini-Vorgriff · 8-Schritt-Workflow · Worked Example. Lies A und mache
-> den minimalen Übungspfad — *bevor* du Teil B öffnest. **Teil B (8b —
-> Regeln und Kontext):** Hard Rules · Kontext-Verdichtung · weitere
-> Übungen · Reflexion · Selbstcheck. Wer A und B in einer Sitzung liest,
-> wird die Hard Rules nicht mehr in die richtige Stelle des Workflows
-> einordnen — sie sind ein zweiter, paralleler Mechanismus, kein nächster
-> Schritt.
+> Mini-Vorgriff · Kernidee · 8-Schritt-Workflow. Lies A und mache
+> den [minimalen Übungspfad](#minimaler-übungspfad) — *bevor* du Teil B
+> öffnest. **Teil B (8b — Regeln, Kontext, Worked Example):** Hard
+> Rules · Typische Fehlvorstellungen · Kontext-Verdichtung · Worked
+> Example · Übungen · Reflexion · Selbstcheck. Der Trenner steht
+> sichtbar nach dem Workflow-Diagramm ([§Pause-Punkt 8a → 8b](#pause-punkt-8a--8b)).
+> Wer A und B in einer Sitzung liest, wird die Hard Rules nicht mehr in
+> die richtige Stelle des Workflows einordnen — sie sind ein zweiter,
+> paralleler Mechanismus, kein nächster Schritt.
 
 ## Mini-Vorgriff: zwei Begriffe aus Modul 14
 
@@ -110,6 +112,30 @@ flowchart TD
 Zwei Rücksprungkanten sind didaktisch wesentlich: 5→4 und 6→4. Nicht
 zurück zu Schritt 1 — der Plan wird *verfeinert*, nicht der Kontext neu
 gelesen.
+
+## Pause-Punkt 8a → 8b
+
+> *Hier endet Teil 8a.* Wenn du der Segmenting-Empfehlung folgst (siehe
+> Anlauf-Box am Modul-Kopf), mach jetzt Pause und nimm Teil 8b in einer
+> *zweiten* Sitzung. Begründung: Hard Rules sind ein paralleler
+> Mechanismus, kein nächster Schritt im Workflow. In *derselben* Sitzung
+> gelesen, kleben sie an Schritt 6 oder 7 — und das ist die
+> häufigste Quelle der Fehlvorstellung *"Hard Rules in AGENTS.md
+> reichen"* (Modul 8 §Typische Fehlvorstellungen).
+>
+> **Selbsttest vor Pause (60 Sekunden, ohne Spickzettel):**
+>
+> 1. Nenne die acht Schritte des Workflows in Reihenfolge.
+> 2. Wo sind die zwei Rücksprungkanten? Wohin springst du *nicht* zurück, und warum?
+> 3. Was ist die Eingabe von Schritt 1, und was bestimmt sie?
+>
+> Wenn du eine der drei Fragen unsicher beantwortest, ist das ein
+> Signal, Teil 8a kurz zu wiederholen — nicht, in 8b weiterzulesen. Die
+> Hard Rules in 8b setzen den Workflow voraus.
+>
+> Wer in *einer* Sitzung weiterliest: das ist okay, aber nimm das
+> Selbsttest-Trio als Anker — das Modul ist explizit auf zwei Sitzungen
+> ausgelegt (Sweller: Segmenting + Pre-Training).
 
 ## Hard Rules (repo-spezifisch)
 
@@ -287,6 +313,13 @@ make agent-implement SLICE=slice-009
 Erwartete Beobachtung: Das Target erzeugt keinen Code. Es zeigt das
 Kontextpaket, das ein Implementation-Agent vor dem Plan lesen muss. Erst
 wenn du dieses Paket benennen kannst, ist der freie Agentenlauf sinnvoll.
+
+> *Lab-Grenze:* Das Target zeigt nur das *Kontextpaket* (Schritte 1–3
+> des Workflows), nicht den Plan-vor-Code-Lauf selbst. Das volle LZ
+> "Slice nach dem 8-Schritt-Workflow *umsetzen*" wird erst durch den
+> freien Agentenlauf gegen einen realen Slice abgerufen; das LZ "Wirkung
+> von AGENTS.md *messen*" durch das Übungsskelett unten — der minimale
+> Pfad ist Aufwärm-, nicht Ziel-Niveau.
 
 ### Übungsskelett: AGENTS.md-Wirkungsmessung
 

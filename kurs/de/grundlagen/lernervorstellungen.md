@@ -18,7 +18,11 @@ methodischen Vollausbau. Die Liste ist plausibel, nicht repräsentativ.
 Wenn du den Kurs in einer Organisation einsetzt: ergänze diese Liste um
 *deine* Beobachtungen. Eine fünfminütige Eingangsfrage im Kickoff
 ("Welche Aussage über KI-Agenten würdest du sofort unterschreiben?")
-deckt oft Präkonzepte auf, die diese Liste nicht enthält.
+deckt oft Präkonzepte auf, die diese Liste nicht enthält. Eine
+strukturierte Vorlage mit drei kalibrierten Vorlauffragen und einem
+YAML-Sammelplatz steht in
+[`kickoff-vorlauf.md`](kickoff-vorlauf.md) — sie operationalisiert
+diese Aufforderung in zehn Minuten Workshop-Zeit.
 
 ## Sammlung
 

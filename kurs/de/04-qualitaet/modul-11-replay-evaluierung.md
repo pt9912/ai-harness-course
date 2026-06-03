@@ -222,6 +222,13 @@ drei Fälle und explizite Erwartungen. Für die Drift-Übung änderst du in
 einer Kopie die Modellversion oder eine Erwartung und notierst, ob der
 Replay-Lauf noch als derselbe Lauf interpretierbar ist.
 
+> *Lab-Grenze:* Das Target prüft ein *fertiges* Fixture (Retrieval-
+> Replay), nicht einen eigenen LLM-Agenten-Replay. Die LZ "Replay-Lauf
+> *einrichten*", "Golden Set *aufbauen*" und "Regression *quantifizieren*"
+> werden erst durch das Worked Example oben (Schritte 1–7) und die
+> Drift-Übung in einer Kopie abgerufen — der minimale Pfad ist Aufwärm-,
+> nicht Ziel-Niveau.
+
 ## Reflexion
 
 Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)

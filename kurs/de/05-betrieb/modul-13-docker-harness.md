@@ -2,6 +2,21 @@
 
 > **Aufwand:** ca. 60 Min Lesen · 90 Min Übung.
 
+## Mini-Glossar für dieses Modul
+
+Fünf neue Begriffe — Volldefinitionen in
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+Der Image-Hash wird hier in *Vollform* eingeführt (Vorgriff-Block in
+[Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13) löst sich hier auf).
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
+| **Multi-Stage-Dockerfile** | Dockerfile mit getrennten *Build-* und *Runtime-Stages*; der Runtime-Layer enthält nur, was die Anwendung braucht — nicht die Toolchain. | Bauphase und Bezugsphase eines Hauses; das Gerüst bleibt nicht im Wohnzimmer stehen. |
+| **Image-Hash** | Byte-genaue Adresse eines Images (SHA-256), *unveränderlich* — anders als ein Tag wie `:latest`. | die Personalausweis-Nummer eines Images. Tag = Spitzname, Hash = Pass. |
+| **Lock-File** | Vom Paketmanager generierte Datei mit *exakten* Versionen aller transitiven Abhängigkeiten. | das Inventarverzeichnis, das jeden Schraubentyp und seine Charge kennt. |
+| **Devcontainer** | Standardisierte VS-Code-/IDE-Integration einer Container-Umgebung — pinnierte Entwicklungswerkzeuge pro Repo. | das Atelier, das mit dem Auftrag mitkommt, statt dass der Maler seines mitschleppt. |
+| **Compose** | Multi-Container-Orchestrierung für lokale Stacks (Service + DB + Cache + …) per `docker-compose.yml`. | Bühnenbild mit mehreren Schauspielern, die zusammen auftreten müssen. |
+
 ## Engage
 
 Ein neuer Teamkollege klont das Repo, tippt `make gates`, bekommt einen
@@ -199,6 +214,13 @@ Erwartete Beobachtung: Build und Smoke laufen im Container-Kontext. Der
 Fehlerfall entsteht, wenn du in einer Kopie die Base-Image-Version
 unpinnst und den Build später erneut ausführst. Dokumentiere nicht nur
 "rot/grün", sondern den Unterschied zwischen lokalem und CI-Vertrag.
+
+> *Lab-Grenze:* Das Target ruft ein *fertiges* Multi-Stage-Dockerfile
+> auf. Das LZ "Multi-Stage-Dockerfile *schreiben*" (LZ 1, Erschaffen)
+> und das LZ "Drift *messen*" (LZ 3, Analysieren) werden erst durch das
+> Worked Example oben (vom einstufigen zur Multi-Stage-Pipeline) und die
+> Unpin-Übung in einer Kopie abgerufen — der minimale Pfad ist Aufwärm-,
+> nicht Ziel-Niveau.
 
 ## Reflexion
 

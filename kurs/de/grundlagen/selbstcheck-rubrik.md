@@ -35,6 +35,29 @@ verbunden (solide) ist. Ein Abschluss-Repo dagegen kann formal komplett
 und trotzdem nicht verknüpft sein — dafür ist *funktional* die richtige
 Stufe.
 
+### Warum die Asymmetrie kein Defekt ist
+
+Der Grund liegt in der Frage-Art:
+
+* Modul-Selbstchecks prüfen *Konzepte* — "Wo verläuft die Grenze
+  zwischen X und Y?", "Welche drei Felder muss Z tragen?". Eine
+  Antwort, die ein Konzept *nennt*, ohne es *anzuwenden*, ist
+  rudimentär. Es gibt keinen "Konzept vorhanden, aber nicht verknüpft"-
+  Zwischenraum — die Verknüpfung ist die Anwendung, und sie ist binär
+  vorhanden oder nicht.
+* Die Abschluss-Rubrik prüft *Artefakte* — "Ist die ADR im Repo?",
+  "Verweist der Slice auf die ADR?". Hier gibt es einen echten
+  Zwischenraum: das Artefakt liegt im Repo, aber ohne Bezug — formal
+  da, inhaltlich tot. Genau das ist *funktional*.
+
+Ein häufiger Selbstbetrug: ein Modul-Selbstcheck wird beantwortet mit
+"die Definition steht im Mini-Glossar, ich kann sie zitieren". Das ist
+*rudimentär*, nicht *funktional* — auch wenn die Versuchung groß ist,
+"vorhanden" mit *funktional* zu verwechseln. Wer im Modul-Selbstcheck
+zur Zwischenstufe greifen will, hat in Wahrheit eine rudimentäre Antwort
+und sollte sie auf *solide* anheben (Anwendung + Quelle), nicht
+umetikettieren.
+
 Faustregel: wenn deine Antwort *jeder* der drei Stufen entsprechen
 könnte, ist sie rudimentär. Mehrdeutigkeit nach oben ist Selbstbetrug.
 
@@ -46,6 +69,11 @@ könnte, ist sie rudimentär. Mehrdeutigkeit nach oben ist Selbstbetrug.
   mindestens solide auf *allen* Selbstchecks der Phase.
 - Vor dem Abschlussprojekt: exzellent auf mindestens der Hälfte aller
   Selbstchecks; solide auf allen anderen.
+- Wenn du einen [Lernpfad](lernpfade.md) läufst (A/B/C): die
+  *Mindest-Stufen-Liste* deines Pfads in
+  [`lernpfade.md` §Selbstcheck-Anker pro Pfad](lernpfade.md#selbstcheck-anker-pro-pfad)
+  ist das pfad-spezifische Minimum; Module außerhalb der Liste dürfen
+  auf *rudimentär* bleiben.
 
 ## Wie du dich selbst schärfer beurteilen kannst
 

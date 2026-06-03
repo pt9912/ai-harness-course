@@ -69,11 +69,21 @@ geändert wird. Frage dich:
 
 - Welcher Satz aus [`lernervorstellungen.md`](lernervorstellungen.md)
   beschreibt am ehesten *die* Vorstellung, mit der du in die Übung
-  gegangen bist?
+  gegangen bist? (Posner-Unzufriedenheit, Bedingung 1.)
 - Wodurch genau wurde sie unzufriedenstellend — *was* hast du beobachtet,
   das mit deiner Vorstellung nicht vereinbar war?
+- Warum erscheint dir die neue Sicht *plausibel*? Verweise auf einen
+  Beleg — eine Stelle im Kurs, ein Tool-Call-Trace, eine Fallstudie,
+  eine empirische Quelle. *"Klingt logisch"* ist keine Plausibilität;
+  *"die Fallstudien in `fallstudien.md` zeigen es so"* ist eine.
+  (Posner-Plausibilität, Bedingung 2.)
 - Welche neue Sicht erklärt die Beobachtung besser, **und wo könnte
-  sie wiederum scheitern**? (Conceptual-Change-Fruchtbarkeit.)
+  sie wiederum scheitern**? (Posner-Fruchtbarkeit, Bedingung 4.)
+
+Die zwei mittleren Stichworte (Verständlichkeit, Bedingung 3) sind
+nicht eigens abgefragt — sie sind operativ: wenn du den neuen Satz in
+einem Satz erklären kannst, ist er für dich verständlich. Wenn nicht,
+formuliere ihn um, *bevor* du Bedingung 4 angehst.
 
 Anti-Antwort: "Ich wusste das eigentlich schon." Wenn das stimmte,
 hättest du den Fehler nicht erzeugt. Schreib die *unzufriedenstellend
@@ -106,7 +116,10 @@ Datum: <YYYY-MM-DD>
 1. Beobachtung: <2-3 Sätze>
 2. Harness-Lücke (Quadrant): <Q + Begründung>
 3. Steering-Loop-Aktion: <konkret oder "noch nicht — Erstvorfall">
-4. Vorstellung, die unzufriedenstellend wurde: <ein Satz oder "keine — schon vorher gewusst">
+4. Conceptual Change:
+   - alte Vorstellung, die unzufriedenstellend wurde: <ein Satz oder "keine — schon vorher gewusst">
+   - neue Sicht + Plausibilitäts-Beleg: <Satz + Beleg-Quelle, z. B. "fallstudien.md §grid-gym">
+   - mögliche Bruchstelle der neuen Sicht: <ein Satz oder "noch unklar">
 ```
 
 Diese Einträge sind dein eigenes Golden Set für den späteren Vergleich:

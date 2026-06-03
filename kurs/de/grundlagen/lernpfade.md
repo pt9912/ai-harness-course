@@ -103,6 +103,75 @@ heran.
 Die vollständige Liste der Branchen-Anwendungsanker steht in
 [`fallstudien.md` §Branchen-Anwendungsanker](fallstudien.md#branchen-anwendungsanker).
 
+## Selbstcheck-Anker pro Pfad
+
+Damit die Pfade aus der Empfehlungs-Schicht in die Bewertungs-Schicht
+hinüberreichen, hat jeder Pfad eine *Mindest-Stufen-Liste* für eine
+Auswahl von Modul-Selbstchecks (Stufen-Schema in
+[`selbstcheck-rubrik.md`](selbstcheck-rubrik.md): rudimentär · solide ·
+exzellent). Lesart: *Wer Pfad X läuft, sollte am Ende mindestens die
+gelistete Stufe in den genannten Selbstchecks erreichen — andernfalls ist
+der Pfad nicht abgeschlossen, auch wenn die Module gelesen wurden.*
+
+Die Anker sind bewusst **schmal** (4–6 Module pro Pfad), nicht alle 16 —
+sonst zerfällt die Pfad-Idee. Module, die hier *nicht* gelistet sind, sind
+für den Pfad nicht weniger wichtig, aber unter *rudimentär* akzeptabel.
+
+### Pfad A — Architect / Tech Lead
+
+| Modul | Mindest-Stufe | Begründung |
+|---|---|---|
+| 2 (Lastenheft) | **exzellent** | Spec-Disziplin ist die Achse, an der Pfad A hängt. |
+| 3 (ADRs) | **exzellent** | ADR ↔ Fitness Function ist die Kernkompetenz. |
+| 6 (Carveouts) | **solide** | Carveout-Audit als Architect-Pflicht. |
+| 7 (Agentenrollen) | **solide** | Konfliktauflösung mit Übergabe-Artefakt. |
+| 10 (Verifikation) | **solide** | ADR-Konformität als Fitness Function entwerfen. |
+| 14 (Observability) | **rudimentär** | OTel-Assertions kennen, nicht selbst bauen. |
+
+Frühwarnsignal: *rudimentär* in 2 oder 3 → kein Pfad A. Vertiefen, bevor
+weitergegangen wird.
+
+### Pfad B — DevOps / KI-Plattform-Team
+
+| Modul | Mindest-Stufe | Begründung |
+|---|---|---|
+| 12 (Quality Gates) | **exzellent** | Gate-Vertrag und bootstrap-aware Gate. |
+| 13 (Docker-Harness) | **exzellent** | Image-Hash und Lock-Files sind die Reproduzierbarkeits-Anker. |
+| 14 (Observability) | **exzellent** | Cost-Attribution + Cache-Metrik + Doku-Konsistenz-Agent. |
+| 11 (Replay) | **solide** | Drift-Diagnose-Reihenfolge beherrschen. |
+| 15 (Produktiver Betrieb) | **solide** | Runbook-Trigger und Rollback-Anti-Reflex. |
+| 4 (Planning Harness) | **rudimentär** | Lifecycle als CI-Eingang verstehen, nicht selbst schneiden. |
+
+Frühwarnsignal: *rudimentär* in 12 oder 13 → kein Pfad B. Plattform ohne
+Gates und Image-Pinning ist Wartung ohne Werkzeug.
+
+### Pfad C — Implementierender Entwickler
+
+| Modul | Mindest-Stufe | Begründung |
+|---|---|---|
+| 8 (Implementierung) | **exzellent** | 8-Schritt-Workflow als Reflex, AGENTS.md-Wirkungsmessung. |
+| 9 (Review Harness) | **exzellent** | Reviewer-Skill schreiben, HIGH/MEDIUM/LOW/INFO sauber trennen. |
+| 1 (Entwicklungszyklus) | **solide** | Source Precedence verinnerlicht. |
+| 7 (Agentenrollen) | **solide** | Rollenbild für eigenes Arbeiten. |
+| 4 (Planning Harness) | **solide** | Slice-Größe und Closure-Kriterien. |
+| 12 (Quality Gates) | **solide** | Lokales Vor-Merge-Gate-Set lesen können. |
+
+Frühwarnsignal: *rudimentär* in 8 oder 9 → kein Pfad C. Implementer ohne
+Workflow-Reflex und ohne Reviewer-Skill liefert Diff-Last, nicht Slices.
+
+### Was dieser Anker *nicht* leistet
+
+- Keine *Bewertung* deines Projekts — die übernimmt das Abschlussprojekt
+  ([`../abschluss/abschlussprojekt.md`](../abschluss/abschlussprojekt.md)).
+- Keine *Begrenzung* deines Lernens — wer in seinem Pfad nicht gelisteten
+  Modulen über *rudimentär* hinausgeht, gewinnt; er muss nur nicht.
+- Keine *Zertifizierung* — die Selbstcheck-Stufen sind Selbsteinschätzung
+  ([`selbstcheck-rubrik.md` §"Wie du dich selbst schärfer beurteilen kannst"](selbstcheck-rubrik.md#wie-du-dich-selbst-schärfer-beurteilen-kannst)).
+
+Was er leistet: ein **konstruktives Alignment** zwischen Pfad-Empfehlung
+und Selbstcheck-Rubrik (Biggs/Tang). Ohne diesen Anker bleibt "Pfad A"
+ein Slogan; mit ihm ist es ein prüfbarer Lernkontrakt.
+
 ## Hinweis
 
 Die Pfade ersetzen die Module nicht — sie schlagen vor, wo du *zusätzlich

@@ -265,6 +265,13 @@ Token-Felder. Beantworte zuerst nur drei Fragen: Welcher Span gehört zum
 Reviewer? Wo ist der Cache-Miss? Welche ID verbindet Kosten mit dem
 Slice? Danach erst lohnt ein voller Trace-Viewer.
 
+> *Lab-Grenze:* Das Target *liest* ein fertiges Trace-Fixture. Das LZ
+> "Tool-Call-Audit-Span-Schema *entwerfen*" (LZ 6, Erschaffen) wird
+> erst durch die E2E-Trace-Übung oben (Span → Slice → ADR → LH-ID)
+> abgerufen; das LZ "Doku-Konsistenz-Drift *detektieren*" (LZ 5) durch
+> den Konsistenz-Agent-Lauf — der minimale Pfad ist Aufwärm-, nicht
+> Ziel-Niveau.
+
 ## Reflexion
 
 Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)

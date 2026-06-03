@@ -2,8 +2,8 @@
 
 Diese Sektion legt die Begriffe und das konzeptuelle Vokabular fest, das
 in allen Modulen vorausgesetzt wird. Lies sie *vor* den Modulen — die
-Modul-Texte verweisen mit `[[Begriff]]`-artigen Verlinkungen auf diese
-Definitionen zurück, ohne sie erneut zu erklären.
+Modul-Texte verlinken zurück auf diese Definitionen (Standard-Markdown),
+ohne sie erneut zu erklären.
 
 ## Inhalt
 
@@ -16,6 +16,7 @@ Definitionen zurück, ohne sie erneut zu erklären.
 | [`lernpfade.md`](lernpfade.md) | Drei Schwerpunkt-Pfade (Architect/Tech Lead, DevOps/Plattform, Implementation) — Vertiefungen je nach Rolle |
 | [`reflexion-vorlage.md`](reflexion-vorlage.md) | Vier Standardfragen für jede Fehler-Provokations-Übung — productive failure systematisch in Lernen überführen |
 | [`lernervorstellungen.md`](lernervorstellungen.md) | Offene Sammlung typischer Präkonzepte der Zielgruppe — als Anker für die "Typische Fehlvorstellungen"-Blöcke der Module |
+| [`kickoff-vorlauf.md`](kickoff-vorlauf.md) | Drei kalibrierte Vorlauffragen und YAML-Sammelplatz für die Präkonzept-Sammlung am Workshop-Anfang (Operationalisierung der zweiten Kattmann-Säule für die kollektive Kursnutzung) |
 | [`checkpoints.md`](checkpoints.md) | Mini-Integrations-Checkpoints zwischen den fünf Phasen — Selbstdiagnose vor dem Abschlussprojekt |
 | [`selbstcheck-rubrik.md`](selbstcheck-rubrik.md) | Drei-Stufen-Schema (rudimentär/solide/exzellent), nach dem die Selbstcheck-Rubriken in jedem Modul aufgebaut sind |
 
@@ -23,6 +24,17 @@ Definitionen zurück, ohne sie erneut zu erklären.
 
 Jedes Modul folgt demselben Aufbau:
 
+0. **Engage** *(empfohlen, vor Lernzielen)* — eine kurze Vignette (3–6
+   Sätze), die einen konkreten Reibungsfall schildert: zwei
+   widersprüchliche Beobachtungen, ein überraschendes Ergebnis, eine
+   Frage ohne offensichtliche Antwort. Zweck: *Unzufriedenheit* mit
+   einer bestehenden Vorstellung *vor* der Lehre auslösen (Posner et
+   al. 1982 §Bedingung 1 für Conceptual Change). Engage steht
+   *vor* den Lernzielen, weil die didaktische Wirkung darauf beruht,
+   dass Aufmerksamkeit *vor* dem expliziten Lernvertrag durch ein
+   konkretes Problem gefangen wird — eine Lernziel-Liste, die schon
+   gelesen ist, schließt die Frage, die Engage öffnen soll. Optional,
+   aber in allen aktuellen Modulen vorhanden.
 1. **Lernziele** — was kannst du danach. Jedes Lernziel trägt einen
    zweidimensionalen Tag nach Anderson/Krathwohl: `(Prozessdimension · Wissensdimension)`.
    Prozessdimension: *Erinnern · Verstehen · Anwenden · Analysieren · Bewerten · Erschaffen*.
@@ -32,13 +44,30 @@ Jedes Modul folgt demselben Aufbau:
 
    *Konvention "und"-Lernziele*: Einige Lernziele verbinden zwei
    Prozessdimensionen ("zuordnen *und* begründen"; "bewegen *und*
-   benennen"). Das Tag führt dann die **höhere** Prozessdimension —
-   "*X und Y begründen*" mit *Bewerten* statt mit *Verstehen* (für X).
-   Das bedeutet auch: Übung und Selbstcheck müssen *beide* Verben
-   abrufen, sonst bleibt die niedrigere Prozessdimension aus dem
-   konstruktiven Alignment (Biggs/Tang) ausgeblendet. Wer ein "und"-LZ
-   schreibt, prüft am Ende: gibt es *eine* alignment-geprobte Stelle pro
-   Verb? Wenn nein: trennen.
+   benennen"). Drei Schreibweisen, in dieser Vorzugsreihenfolge:
+
+   1. **Trennen.** Zwei Prozessdimensionen → zwei Lernziele mit je
+      eigenem Tag. Sauberste Form, weil jedes LZ einzeln alignment-prüfbar
+      ist. Bevorzugt, wenn die Verben tatsächlich unterschiedliche
+      Tätigkeiten beschreiben (z. B. "*aufbauen* und *bewerten*").
+   2. **Beide Verben sichtbar.** Wenn die Trennung das LZ künstlich
+      zerreißen würde (Verben sind im Kursvokabular *eine* Tätigkeit,
+      z. B. "*erkennen und entwerfen*" als Symptom→Gegenmaßnahme-Paar):
+      Tag listet beide, getrennt durch `+`: `(Bewerten + Erschaffen ·
+      konzeptuell+prozedural)`. Vorbilder: Modul 3 LZ 4, Modul 11 LZ 4.
+      Pflicht: **jedes** Verb hat eine alignment-geprobte Stelle in
+      Übung oder Selbstcheck.
+   3. **Höheres Verb.** Wenn die niedrigere Prozessdimension nur
+      *implizit* mitgemeint ist und kein eigenes Übungs-/Selbstcheck-
+      Item hat: Tag führt nur das höhere Verb. "*X und Y begründen*"
+      bekommt dann *Bewerten*, nicht *Verstehen + Bewerten*. Wer diese
+      Form wählt, gibt zu: das niedrigere Verb ist nicht alignment-
+      geprobt — was beim ersten Vorkommen in Modul 0/1 akzeptabel
+      sein kann, ab Modul 2 ein Warnzeichen ist.
+
+   Prüfschritt am Ende: zähle pro Verb im Tag die alignment-geprobten
+   Stellen in Übung und Selbstcheck. Null → Form 3 wählen oder
+   Selbstcheck ergänzen. Eins oder mehr → Form 1 oder 2.
 2. **Lab-Bezug** — welche Verzeichnisse, Make-Targets oder Artefakte gehören dazu.
 3. **Themen** — die Konzepte des Moduls.
 4. **Kernidee** — die eine Aussage, an der das Modul hängt.
@@ -49,7 +78,7 @@ Jedes Modul folgt demselben Aufbau:
 Optional zusätzlich, jeweils mit eigener Überschrift:
 
 * **Harness-Einordnung** — ordnet das Modul-Thema in die Klassifikation aus [`klassifikation.md`](klassifikation.md) ein (häufig in Phase 03–05).
-* **Mini-Glossar** — drei bis sechs Begriffsanker mit Ein-Satz-Definition und "Bild im Kopf", wenn ein Modul mindestens drei neue Begriffe einführt (Pre-Training-Effekt, Mayer/Sweller).
+* **Mini-Glossar** — drei bis sechs Begriffsanker mit Ein-Satz-Definition und "Bild im Kopf", wenn ein Modul mindestens drei neue Begriffe einführt (Pre-Training-Effekt, Mayer/Sweller). *Positions-Konvention:* typischerweise zwischen Aufwand-Zeile und Engage, sodass die Vignette das Vokabular schon nutzen kann. Ausnahme: Modul 0 hat den Mini-Glossar bewusst *nach* Engage — die Vignette verwendet dort common-language, weil die Fachbegriffe noch nicht zugänglich sind.
 * **Vorgriff** — Kurzdefinition für Begriffe, deren Tiefen in späteren Modulen liegen (Isolated-Elements-Strategie). Vorbild: Image-Hash in [Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13).
 * **Worked Example** — fünf bis sieben prozedurale Schritte mit Anfangs- und Endzustand, ein Skip-Hinweis am Anfang (Expertise-Reversal-Schutz). Vorbilder: Modul 2, 3, 9, 12; ab Welle 6 auch Modul 8, 11, 14, 15.
 * **Typische Fehlvorstellungen** — Konfrontation typischer Präkonzepte mit Begründung; offene Sammlung in [`lernervorstellungen.md`](lernervorstellungen.md).

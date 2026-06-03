@@ -2,6 +2,18 @@
 
 > **Aufwand:** ca. 60 Min Lesen · 60 Min Übung. Die konzeptuelle Tiefe liegt in [Modul 4 (Slice-Schnitt)](modul-04-planning-harness.md) und [Modul 6 (Carveouts)](modul-06-carveouts.md); das siebenschrittige Worked Example zum Wellen-Schnitt unten trägt jedoch die Hauptlast dieses Moduls — plane die volle Stunde ein.
 
+## Mini-Glossar für dieses Modul
+
+Vier neue Begriffe — Volldefinitionen in
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
+| **Welle** | Sequenz von Slices, geschlossen durch einen *Trigger*, nicht durch ein Datum. | eine Welle, die bricht, *wenn* das Wasser hoch genug ist — nicht *wann* die Uhr klingelt. |
+| **Meilenstein** | Beobachtbarer Repo-Zustand am Ende einer Welle — nicht ein Datum, sondern ein Beleg. | das Kerbholz am Bergpfad: du bist *hier*, weil du *das* erreicht hast. |
+| **Release** | Ein Artefakt, das in eine Umgebung wandert (Staging, Produktion) — kann mehrere Wellen umfassen oder eine. | das Päckchen, das das Lager verlässt, nicht der Pack-Vorgang. |
+| **Trigger** | *Beobachtbare* Bedingung, mit der eine Welle closed (vgl. Carveout-Auflösungs-Trigger, Modul 6). | die Glocke, die *anzeigt*, dass es jetzt soweit ist — nicht "wenn wir Zeit haben". |
+
 ## Engage
 
 Frage an drei Tech Leads: *"Wann ist Welle 3 fertig?"* — Antwort A:

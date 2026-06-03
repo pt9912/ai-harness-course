@@ -159,6 +159,12 @@ mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../../../lab/example/s
    Fehlt bei dir ein Negativsatz, ist die Spec für einen Agenten noch
    nicht scharf genug.
 
+> *Lab-Grenze:* Der minimale Pfad übt **eine** Anforderung mit drei
+> Akzeptanzkriterien. Das volle LZ "Lastenheft *verfassen*" und das LZ
+> "Spec-Stratifizierung *entwerfen*" werden erst durch die freie
+> Lastenheft-Übung oben und die Drei-Schichten-Übung (LZ 4) abgerufen —
+> der minimale Pfad ist Aufwärm-, nicht Ziel-Niveau.
+
 ## Reflexion
 
 Verwende die vier Standardfragen aus [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)

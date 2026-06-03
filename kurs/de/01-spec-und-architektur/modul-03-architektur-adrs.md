@@ -151,6 +151,12 @@ Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
    vorbereitet. Wenn nicht, ist sie nur Entscheidungsnotiz, noch kein
    Harness-Guide.
 
+> *Lab-Grenze:* Der minimale Pfad führt zur ersten ADR mit
+> *Fitness-Function-Anker*, nicht zur fertigen Fitness Function. Das LZ
+> "ADR-Aussage in eine maschinell prüfbare Fitness Function *übersetzen*"
+> (LZ 3) wird erst in [Modul 12 §Worked Example](../04-qualitaet/modul-12-quality-gates.md#worked-example-vom-adr-satz-zur-fitness-function)
+> abgerufen — der minimale Pfad ist Aufwärm-, nicht Ziel-Niveau.
+
 ## Reflexion
 
 Vier Standardfragen aus [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)

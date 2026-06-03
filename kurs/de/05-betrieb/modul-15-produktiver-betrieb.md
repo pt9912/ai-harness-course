@@ -183,6 +183,13 @@ Incident-Runbook Belege enthalten. Danach spielst du den Incident aus
 durch und entscheidest begründet zwischen Rollback, Fix-Forward und
 Datenkorrektur.
 
+> *Lab-Grenze:* Das Target prüft die *Beleg-Pflicht* einer fertigen
+> Checkliste. Das LZ "Produktionsfreigabe *entwerfen*" (LZ 1, Erschaffen)
+> wird erst durch die Übung "Freigabe-Checkliste aus dem leeren Skelett
+> neu entwerfen" abgerufen; das LZ "Incident strukturiert *angehen*"
+> (LZ 3) durch das Incident-Szenario — der minimale Pfad ist Aufwärm-,
+> nicht Ziel-Niveau.
+
 ## Reflexion
 
 Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
