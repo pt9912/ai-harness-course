@@ -227,6 +227,8 @@ Slice DoD, Traceability-ID und Gate-Beleg enthält. Danach provozierst du
 den Fehlerfall: entferne in einer Kopie des Slice den `make gates`-Beleg
 und beobachte, dass die Verifikation rot wird.
 
+> *Lab-Grenze:* `make verify SLICE=…` ist eine *Plausibilisierung* (vier strukturelle Markdown-Checks), keine semantische Plan-gegen-Code-Diff-Prüfung. Das volle LZ "Plan-gegen-Code-Diff *prüfen*" wird erst durch die Übung "Eigene ADR übersetzen" (siehe oben) abgerufen — der minimale Pfad ist Aufwärm-, nicht Ziel-Niveau.
+
 ## Reflexion
 
 Vier Standardfragen aus [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)

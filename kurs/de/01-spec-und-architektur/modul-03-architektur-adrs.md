@@ -40,6 +40,19 @@ gleichzeitig Quelle für *computational feedback* (ArchUnit/Fitness
 Functions, wenn die Entscheidung maschinell prüfbar ist). Eine ADR ohne
 Fitness Function ist eine Absichtserklärung.
 
+## Vorab — was hältst du heute für wahr?
+
+*Bevor du die Kernidee liest:* notiere in einem Satz deine spontane
+Antwort auf jede dieser drei Fragen.
+
+1. *"Was begründet eine ADR — eine Anforderung oder eine Lösung?"*
+2. *"Wenn du eine alte Entscheidung änderst, schreibst du die ADR um oder schreibst du eine neue?"*
+3. *"Eine ADR sagt 'lose koppeln'. Ist das eine ADR, oder fehlt noch etwas?"*
+
+Lass die Notiz neben dem Modul liegen. Am Modul-Ende prüft der
+Selbstcheck genau diese drei Punkte — und der Block *Typische
+Fehlvorstellungen* zeigt, wo die häufigsten Reibungen liegen.
+
 ## Kernidee
 
 Ein ADR ist die einzige Stelle, an der "weil" gegen "ist halt so" gewinnt.
@@ -65,6 +78,7 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 - **"Eine ADR ohne Fitness Function ist eine ADR."** — Eine ADR ohne Fitness Function ist eine Absichtserklärung. Wer architecture fitness im Kopf hat, schreibt parallel den ArchUnit-Test.
 - **"MADR ist Pflicht."** — MADR ist ein Format unter mehreren (auch Nygard, Tyree/Akerman). Wichtig ist, dass dein Repo *eines* konsequent benutzt.
 - **"Architektur ist Bilder zeichnen."** — Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur in diesem Kurs heißt: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
+- **"ADRs sind Dokumentation, nicht Constraints."** — Klingt harmlos, ist die folgenreichste Fehlvorstellung in diesem Modul. Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementation-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Worked Example in [Modul 12 §Worked Example "ADR → import-linter"](../04-qualitaet/modul-12-quality-gates.md#worked-example-eine-adr-aussage-in-eine-fitness-function-übersetzen) zeigt, was die Übersetzung kostet (kleine Tabelle: ADR-Satz, Werkzeug, Make-Target, Failure-Beispiel). Wer das nicht macht, dokumentiert *Hoffnung*.
 
 Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
 
@@ -155,6 +169,7 @@ Modul-spezifische Trigger:
 * Was ist der Unterschied zwischen *superseded* und *deprecated* ADR?
 * **(Anwenden)** Nimm eine ADR aus dem Lab oder einem eigenen Repo — formuliere in einem Satz, *was* eine Fitness Function maschinell prüfen würde, wenn du sie dazu schreiben müsstest.
 * **(Erschaffens-Prozess)** Welcher Schritt deines ADR-Schreibens war der *unsicherste* — und warum? (Erfahrungsgemäß: Schritt 4 "Optionen mit Trade-offs" oder Schritt 6 "Fitness Function".)
+* **(Erschaffen — aktiviert LZ 4 Erschaffens-Hälfte)** Gegeben: ADR-0007 *"In-Memory-Cache vor Index-Layer"* steht auf `superseded`, der Folge-ADR ist noch nicht geschrieben. Entwirf den Kopf des Folge-ADR (Status, `supersedes: ADR-0007`, `LH-*`-Bezug) plus einen Drei-Zeilen-Body-Entwurf, der mindestens *eine* explizit benannte Option und einen Trade-off enthält, der gegen ADR-0007 spricht.
 
 ### Selbstcheck-Rubrik
 
@@ -165,6 +180,7 @@ Modul-spezifische Trigger:
 | *Superseded* vs. *deprecated* ADR? | "Beides bedeutet alt." | Superseded: durch konkrete Nachfolge-ADR ersetzt (mit ID-Bezug). Deprecated: nicht mehr gültig, aber kein Ersatz benannt. | + Folge für Reviewer: superseded → Reviewer prüft gegen Nachfolger; deprecated → Reviewer markiert als Lücke und fordert Folge-ADR. |
 | Fitness-Function-Übersetzung in einem Satz? | "Test schreiben." | Eine maschinell prüfbare Aussage in der Form "Komponente/Datei/Layer X darf (nicht) Y" — mit konkretem Werkzeug (ArchUnit/dep-cruiser/import-linter) und konkreter Gate-Verdrahtung (`make arch-check`). | + Wenn dir kein Satz einfällt: ADR-Aussage ist zu vage formuliert (nicht "lose koppeln", sondern "Service-Layer importiert nicht aus `runtime.*`"). Vage ADRs sind unprüfbare ADRs. |
 | Unsicherster Schritt des ADR-Schreibens? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 4 Optionen, weil ich zwei der drei erst beim Hinschreiben nachträglich überhaupt erwogen habe"). | + Pointe: wer Schritt 4 (Optionen mit Trade-offs) überspringt oder schwammig hält, postet ein *Entscheidungs-Ergebnis* ohne *Entscheidungs-Belege* — und genau das macht ADRs unverteidigbar im Review. Schritt 6 (Fitness Function) ist die zweite häufige unsichere Stelle; wer hier "lässt sich nicht prüfen" schreibt, hat oft nur zu vage formuliert. |
+| Folge-ADR zu superseded ADR-0007 entworfen? | Kopf vorhanden, Body sagt nur "neue Entscheidung". | Kopf mit `supersedes: ADR-0007` und `LH-*`-Bezug; mindestens eine explizit benannte Option (z. B. *Read-through-Cache hinter Index-Layer* vs. *Cache entfernen*) plus ein Trade-off, der ADR-0007 widerlegt (z. B. *"Stale-Reads im Worked Example von Modul 9 zeigen, dass die ursprüngliche Annahme 'Cache kann nicht stale werden' nicht hält"*). | + Eine Konsequenzen-Zeile, die explizit auf die Fitness Function des Vorgänger-ADR zurückwirkt: bleibt sie? wird sie verschärft? entfällt sie? Wer das offen lässt, verschiebt das Drift-Risiko nur. |
 
 ## Weiterlesen
 

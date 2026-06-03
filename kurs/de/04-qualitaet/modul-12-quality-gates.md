@@ -2,6 +2,20 @@
 
 > **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: das ID-Schema aus [Modul 2](../01-spec-und-architektur/modul-02-lastenheft.md) bekommt hier seine maschinelle Verankerung — Make-Target-Kommentare zitieren die Anforderungs-ID.
 
+## Mini-Glossar für dieses Modul
+
+Sechs neue Begriffe — Volldefinitionen in
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
+| **Quality Gate** | Maschinell prüfbarer `make`-Schritt, der rot/grün entscheidet — kein Adjektiv. | Schranke vor dem Bahnübergang, nicht ein Schild. |
+| **Fitness Function** | Maschinell prüfbare *Architektur-Aussage* (ArchUnit/dep-cruiser/import-linter). | ADR-Aussage mit Schalter, nicht Absichtserklärung. |
+| **Critical Coverage** | Coverage-Schwelle für *kritische Datei-Pfade* — schärfer als Gesamt-Coverage. | Strengere TÜV-Vorgaben für Bremsanlage als für Lackoberfläche. |
+| **Bootstrap-aware Gate** | Gate mit *Reifegrad-Stufe* und *Hochschalt-Trigger* — terminierter Carveout, kein Schlupfloch. | Stützrad am Kinderfahrrad, mit Datum für den Abbau. |
+| **Halluziniertes Gate** | Im `harness/README.md` versprochener Schritt, der real nicht existiert oder dauerhaft rot ist. | Schild "Vorsicht, Stufe" ohne Stufe. |
+| **Domänen-Gate** | Repo-spezifisches Gate jenseits der generischen sechs (`test-determinism`, `noqa-gate`, `solid-suppression-gate`). | Werks-eigenes Prüfgerät neben dem TÜV-Standard. |
+
 ## Engage
 
 `make gates` ist grün auf deiner Maschine. Im CI ist es rot. Du investierst
@@ -175,6 +189,7 @@ Absichtserklärung trennt.
 
 * Schreibe einen Architekturtest, der ADR-3 als Regel umsetzt
 * Provoziere absichtlich einen Coverage-Gate-Failure auf einer kritischen Datei
+* **(Erschaffen — aktiviert LZ "bootstrap-aware Gate entwerfen")** *Entwirf ein bootstrap-aware Gate von Grund auf.* Wähle eine Gate-Klasse, die in einem frühphasigen Repo zwingend rot wäre (Coverage, Mutation-Score, Lighthouse-Score, `noqa`-Count, Doku-Konsistenz). Liefere drei Artefakte: (a) Ein-Zeilen-Make-Target-Kommentar im Stil `gate-x: ## ... (bootstrap-aware, LH-FA-...).`, (b) eine **Hochschalt-Tabelle** mit mindestens drei Stufen (heute / Meilenstein M1 / Meilenstein M2) inkl. konkreter Schwellen und Hochschalt-*Trigger* (Trigger ist ein Ereignis im Repo, kein Datum), (c) eine Hard Rule, was geschieht, wenn der Trigger eintritt, aber die Schwelle nicht eingehalten wird (z. B. *"automatische Carveout-Eröffnung mit Folge-Slice"*). Anti-Antwort: *"40 % heute, 80 % später"* ohne Trigger — das ist nicht bootstrap-aware, sondern aufgeschoben.
 
 ## Reflexion
 

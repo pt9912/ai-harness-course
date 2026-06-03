@@ -108,13 +108,18 @@ nicht ganz. Lieber im Checkpoint stolpern als am Abschluss.
 
 Die Checkpoints und das [Abschlussprojekt](../abschluss/abschlussprojekt.md)
 sind keine getrennten Welten. Jede Bewertungsachse des Abschlussprojekts
-hat einen direkten Vorboten in einem Checkpoint:
+hat einen direkten Vorboten in einem Checkpoint.
+
+> *Die folgende Tabelle ist **probabilistisch**, kein Urteil.* Sie sagt
+> dir, *wo du wahrscheinlich Reibung haben wirst* — nicht, was du
+> erreichen kannst. Dieselbe Form gilt im Voraussetzungscheck (siehe
+> [`../README.md#selbst-diagnose-vom-voraussetzungscheck-zur-phase`](../README.md#selbst-diagnose-vom-voraussetzungscheck-zur-phase)).
 
 | Abschluss-Achse | Vorbereitender Checkpoint | Wenn dort nicht erreicht … |
 |---|---|---|
 | Vollständigkeit | A (Spec/ADR/Harness-Skizze vorhanden) | → später keine "solide" auf Vollständigkeit; Modul 1–3 vertiefen. |
 | Konsistenz | A (Source Precedence) + B (Carveout-Folge-Slice) | → Konsistenz bleibt auf "funktional"; Modul 1 §Source Precedence und Modul 6 vertiefen. |
-| Reproduzierbarkeit | C (8-Schritt-Workflow reproduzierbar) + D (Gates auf frischem Klon) | → Reproduzierbarkeit auf "rudimentär"; Modul 8, 12, 13 vertiefen. |
+| Reproduzierbarkeit | C (8-Schritt-Workflow reproduzierbar) + D (Gates auf frischem Klon) **+ Modul 13** (Image-Hash, Lock-Files) | → Reproduzierbarkeit bleibt ohne Modul 13 auf "funktional" gedeckelt; Modul 8, 12, 13 vertiefen. |
 | Auditierbarkeit | B (Slice-IDs) + C (Hard Rules mit ID) | → Auditierbarkeit bleibt auf "funktional"; ID-Schema und Traceability-Hook nachholen (Modul 2, 12). |
 | Steering-Loop-Reife | D (DoD-Verstoß provoziert + Reflexion) | → Steering-Loop bleibt auf "rudimentär"; Reflexionsvorlage und Modul 11 vertiefen. |
 

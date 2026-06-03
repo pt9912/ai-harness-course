@@ -1,6 +1,6 @@
 # Modul 5 — Roadmap Engineering
 
-> **Aufwand:** ca. 45 Min Lesen · 60 Min Übung. Dieses Modul ist absichtlich kurz — die Tiefe liegt in [Modul 4 (Slice-Schnitt)](modul-04-planning-harness.md) und [Modul 6 (Carveouts)](modul-06-carveouts.md).
+> **Aufwand:** ca. 60 Min Lesen · 60 Min Übung. Die konzeptuelle Tiefe liegt in [Modul 4 (Slice-Schnitt)](modul-04-planning-harness.md) und [Modul 6 (Carveouts)](modul-06-carveouts.md); das siebenschrittige Worked Example zum Wellen-Schnitt unten trägt jedoch die Hauptlast dieses Moduls — plane die volle Stunde ein.
 
 ## Engage
 

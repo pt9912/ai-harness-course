@@ -32,9 +32,9 @@ Iteration.
 - "Wir brauchen erst ein besseres Modell." — Modul 0
 - "Wir bauen einen Mega-Prompt." — Modul 0
 - "Der Agent muss nur freier entscheiden dürfen." — Modul 0
-- "Ein Agent ist ein besserer/schnellerer Programmierer." \* — *nicht
-  explizit benannt*; klingt im Engage von Modul 8 an (800 Zeilen in 4
-  Minuten), wird aber nicht als Präkonzept aufgeschlagen.
+- "Ein Agent ist ein besserer/schnellerer Programmierer." — Modul 8
+  (Fehlvorstellungs-Block; seit Welle 13 explizit benannt mit
+  Geschwindigkeits-Argument und Lopopolo-Skalierungs-Beleg).
 - "Halluzinationen sind ein Bug des Modells." — Modul 0
   (Fehlvorstellungs-Block; seit Welle 7 explizit benannt mit Verweis auf
   Kontext-Ursachen und Wiederholungs-Empirie nach Modellwechsel).
@@ -48,10 +48,8 @@ Iteration.
 - "Negativbedingungen sind unhöflich." — Modul 2
 - "Out-of-Scope kann implizit bleiben." — Modul 2
 - "Performance gehört in den ADR." — Modul 2
-- "Prompts ersetzen Specs." \* — die agile/Lean-Tradition mancher Teams
-  ("Code statt Doku") wird nicht als Antagonist adressiert; die
-  Engage-Geschichte in Modul 2 (Spec sagt "speichert", Agent baut
-  PostgreSQL) ist eine implizite Antwort darauf.
+- "Prompts ersetzen Specs." — Modul 2 (Fehlvorstellungs-Block; seit
+  Welle 13 explizit benannt mit Lebenszyklus-Argument Spec vs. Prompt).
 
 ### Über Architektur und ADRs (Modul 3)
 
@@ -59,9 +57,9 @@ Iteration.
 - "Wenn ich die Entscheidung ändere, schreibe ich die ADR um." — Modul 3
 - "Eine ADR ohne Fitness Function ist eine ADR." — Modul 3
 - "MADR ist Pflicht." — Modul 3
-- "ADRs sind Dokumentation, nicht Constraints." \* — die Vorstellung
-  einer *passiven* Dokumentation wird in Modul 3 widerlegt, aber nicht
-  explizit als Präkonzept beschriftet.
+- "ADRs sind Dokumentation, nicht Constraints." — Modul 3
+  (Fehlvorstellungs-Block; seit Welle 13 explizit benannt mit
+  Fitness-Function-Argument und Verweis auf Worked Example Modul 12).
 - "Architektur ist Bilder zeichnen." — Modul 3
   (Fehlvorstellungs-Block; seit Welle 7 explizit benannt mit Bezug auf
   Spec-Stratifizierung).
@@ -125,9 +123,9 @@ Iteration.
 - "Runbook beschreibt den Happy Path." — Modul 15
 - "Produktionsfreigabe ist eine formale Checkbox." — Modul 15
 - "Prompt-Injection ist eine Modell-Frage." — Modul 15
-- "DevOps ist YAML schreiben." \* — Vorstellung "Container = Deployment"
-  (statt "Container = Reproduzierbarkeitsanker") wird in Modul 13 nicht
-  explizit aufgegriffen.
+- "DevOps ist YAML schreiben." — Modul 13 (Fehlvorstellungs-Block; seit
+  Welle 13 explizit benannt mit Reproduzierbarkeits-Anker-Argument und
+  Replay-Brücke zu Modul 11).
 - "Postmortems sind Schuldzuweisung." — Modul 15 (Fehlvorstellungs-Block;
   seit Welle 7 explizit benannt mit Sensor-Schutz-Argument für blameless).
 
@@ -141,20 +139,18 @@ als adressiert zu markieren, wenn sie ergänzt wurden.
 
 ## Offene `*`-Lücken (nächste Schicht)
 
-Diese vier Präkonzepte sind heute nicht als Fehlvorstellungs-Block in
-ihrem Zielmodul aufgeschlagen. Sie sind die priorisierten Kandidaten
-für die nächste Welle.
+Aktuell keine. Die vier in Welle 8 dokumentierten Lücken (*"Agent ist
+schnellerer Programmierer"*, *"Prompts ersetzen Specs"*, *"ADRs sind
+Dokumentation, nicht Constraints"*, *"DevOps ist YAML schreiben"*) wurden
+in Welle 13 in Modul 8, 2, 3 und 13 als Fehlvorstellungs-Blöcke
+aufgeschlagen.
 
-| Präkonzept | Zielmodul | Warum heute offen | Vorschlag für die Konfrontation |
-|---|---|---|---|
-| "Ein Agent ist ein besserer/schnellerer Programmierer." | [Modul 8](../03-agenten/modul-08-implementierung.md) | klingt im Engage an (800 Zeilen in 4 Minuten), aber wird nicht als Präkonzept aufgeschlagen | Geschwindigkeits-Argument: 20 % länger Plan + 50 % weniger Review = Netto-Gewinn. Hinweis: Geschwindigkeit ohne Plan produziert *Review-Last*, nicht *Lieferung*. |
-| "Prompts ersetzen Specs." | [Modul 2](../01-spec-und-architektur/modul-02-lastenheft.md) | wird implizit durch Engage-Geschichte beantwortet, aber nicht als Präkonzept benannt | Lebenszyklus-Argument: Spec wird *gepflegt*, Prompt nicht. Was im Prompt steht und nicht in der Spec, gilt nur für den nächsten Lauf. Verweis auf Lopopolo: was nicht im Kontext ist, existiert nicht — aber das ist Plädoyer für Spec, nicht für Mega-Prompt. |
-| "ADRs sind Dokumentation, nicht Constraints." | [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md) | wird implizit widerlegt, aber nicht explizit als Präkonzept beschriftet | Fitness-Function-Argument: Eine ADR ohne maschinelle Durchsetzung ist eine Absichtserklärung. Verweis auf Worked Example Modul 12 (ADR-0007 → import-linter). |
-| "DevOps ist YAML schreiben." (Container = Deployment) | [Modul 13](../05-betrieb/modul-13-docker-harness.md) | Vorstellung "Container = Deployment" wird in Modul 13 nicht explizit aufgegriffen | Reproduzierbarkeits-Argument: Container ist *primär* ein Reproduzierbarkeits-Anker (Image-Hash, identische Toolchain) und *sekundär* eine Deployment-Form. Wer Container nur als Deployment denkt, verzichtet auf den Hauptzweck im Kurs. |
-
-Wer einen `*`-Eintrag adressiert: in dieser Tabelle die Zeile streichen
-und im Zielmodul den `*` am entsprechenden Listen-Eintrag oben
-entfernen.
+Wenn dir neue Präkonzepte begegnen: trag sie in der passenden Sammlung
+oben mit `*` ein und beschreibe sie in einer neuen Tabellen-Zeile hier
+(Spalten: Präkonzept, Zielmodul, Warum heute offen, Vorschlag für die
+Konfrontation). Wer eine `*`-Lücke adressiert: in dieser Tabelle die
+Zeile streichen und im Zielmodul den `*` am entsprechenden Listen-Eintrag
+oben entfernen.
 
 ## Verweis aus Modulen
 

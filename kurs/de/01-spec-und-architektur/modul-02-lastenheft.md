@@ -70,6 +70,19 @@ Spec = *inferential feedforward* (siehe
 Sie ist die billigste Kontrolle: Was die Spec sauber ausschließt, kommt
 im Review nicht mehr vor.
 
+## Vorab — was hältst du heute für wahr?
+
+*Bevor du die Kernidee liest:* notiere in einem Satz deine spontane
+Antwort auf jede dieser drei Fragen.
+
+1. *"Sind Akzeptanzkriterien immer Happy-Path-Beschreibungen, oder gehört da noch etwas dazu?"*
+2. *"Performance < 200 ms — funktionale oder nichtfunktionale Anforderung?"*
+3. *"Was gewinnst du, wenn Out-of-Scope explizit in der Spec steht — was verlierst du, wenn es implizit bleibt?"*
+
+Lass die Notiz neben dem Modul liegen. Am Modul-Ende prüft der
+Selbstcheck genau diese drei Punkte — und vergleicht mit der scharfen
+Konfrontation im Block *Typische Fehlvorstellungen*.
+
 ## Kernidee
 
 Ein Agent ist ein extrem buchstabengetreuer Praktikant. Was nicht in der
@@ -92,10 +105,13 @@ ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
 - **"Negativbedingungen sind unhöflich."** — Im Gegenteil: ein Satz "das System *darf nicht* …" spart später drei Reviews. Negativ ist genauso präzise wie positiv.
 - **"Performance gehört in den ADR."** — Nein, Performance gehört in den nichtfunktionalen Block der Spec (oder in `spec/spezifikation.md`, wenn stratifiziert). Der ADR begründet, *wie* man die Schwelle einhält.
 - **"Out-of-Scope kann implizit bleiben."** — Was nicht explizit ausgeschlossen ist, baut der Agent plausibel mit. Das ist die häufigste Quelle für "wir hatten das nie gefordert"-PRs.
+- **"Prompts ersetzen Specs."** — Verbreitet aus der agil/Lean-Ecke ("Code statt Doku"). Falsch. Lopopolos Maxime *"anything it can't access in-context doesn't exist"* ist ein Plädoyer *für* Kontext-Verfügbarkeit — und sagt damit, dass Spec und Prompt *unterschiedliche* Lebenszyklen haben: Spec wird *gepflegt* (Versions-Geschichte, Bezüge, Audit), Prompt wird *für einen Lauf zusammengestellt*. Was im Prompt steht, aber nicht in der Spec, gilt nur für *diesen* Lauf — der nächste Agent sieht es nicht. Engage-Geschichte oben (Spec sagte *speichert*, Agent baute PostgreSQL) wäre mit einem Mega-Prompt nicht besser geworden — der Prompt würde im nächsten Lauf vergessen.
 
 ## Worked Example: vom vagen Satz zum prüfbaren Akzeptanzkriterium
 
 > **Wenn du Akzeptanzkriterien im Given/When/Then bereits routiniert schreibst, springe direkt zu [§Übungen](#übungen).** Worked Examples helfen beim Aufbau eines Schemas; ist das Schema da, kostet das Wiederholen nur Last (Expertise-Reversal). Bei Unsicherheit: dieses Worked Example als Schablone lesen.
+
+> *Rückbezug zur Kapur-Vorab-Übung* (falls du sie gemacht hast): Im nächsten Schritt 4 (Boundary) und Schritt 5 (Negative) löst sich genau die Reibung auf, die dein Vorab-Agent dir gezeigt hat. Markiere deine drei Vorab-Anforderungen jetzt mit *Happy/Boundary/Negative*-Tags — wie viele Tags bleiben leer? Die leeren Tags sind die Stellen, an denen dein Agent "geraten hat", obwohl du dachtest, du hättest die Anforderung "klar genug" formuliert.
 
 **Ausgangstext (vage):**
 > "Das System speichert die Konfiguration."
@@ -161,6 +177,7 @@ Modul-spezifische Trigger:
 * Welche drei Tests würden ein Akzeptanzkriterium falsifizieren?
 * Wo gehört "Performance < 200 ms" hin — funktional oder nichtfunktional?
 * **(Erschaffens-Prozess)** Welcher Schritt deines Lastenheft-Schreibens war der *unsicherste* — und warum? (Erfahrungsgemäß: Schritt 5 "Negative" oder Schritt 6 "Out-of-Scope".)
+* **(Erschaffen — aktiviert LZ 4)** Entwirf für dein Mini-Feature eine Drei-Schichten-Spec-Stratifizierung (`lastenheft.md` · `spezifikation.md` · `architektur.md`): nenne *je* einen Inhalt, der in dieser Schicht zwingend gehört, und einen Inhalt, der dort *fehl am Platz* wäre. Welche Regel löst den Konflikt, wenn dieselbe Aussage in zwei Schichten auftaucht?
 
 ### Selbstcheck-Rubrik
 
@@ -170,6 +187,7 @@ Modul-spezifische Trigger:
 | Drei Tests, die ein Akzeptanzkriterium falsifizieren? | "Tests dagegen." | Happy Path · Boundary · Negative — drei verschiedene Test*arten*, nicht drei Test*fälle*. | + Hinweis, dass Boundary/Negative die stillen Annahmen des Happy Path widerlegen — *genau die*, die ein Agent als "selbstverständlich" behandelt. |
 | "Performance < 200 ms" — funktional oder nichtfunktional? | "Nichtfunktional." | Nichtfunktional, weil ohne Lasttest nicht prüfbar; gehört in QA-Block oder `spec/spezifikation.md`. | + Abgrenzung "*Antwort innerhalb von* 200 ms" ist Latenz-*Garantie* (nichtfunktional); "System antwortet mit gültigem JSON" wäre funktional. |
 | Unsicherster Schritt des Lastenheft-Schreibens? | Schritt vage benannt ohne Begründung ("Schritt 5 war schwer."). | Konkret benannter Schritt + Begründung (z. B. "Schritt 5 Negative, weil ich erst beim Hinschreiben gemerkt habe, *was* ausgeschlossen werden muss"). | + Pointe: wer keinen unsicheren Schritt findet, hat den Worked Example *gelesen* statt *nachgebaut*. Schritte 5 (Negative) und 6 (Out-of-Scope) sind die häufigsten unsicheren Stellen — und damit auch die häufigsten Spec-Lücken. |
+| Drei-Schichten-Spec-Stratifizierung entworfen? | Drei Schichten genannt, aber Inhalt aus zwei Schichten austauschbar formuliert. | Pro Schicht ein Pflicht-Inhalt und ein Anti-Inhalt; Konfliktregel formuliert (z. B. "Lastenheft sticht Spezifikation sticht Architektur — Spezifikation darf Lastenheft *präzisieren*, nie *erweitern*"). | + Zweite Konfliktregel für den Fall, dass die Architektur eine Spezifikations-Aussage *technisch unmöglich* macht: Pfad zurück über ADR-Supersedure und Spec-Update, nicht durch stille Anpassung. Verweis auf Spec-Stratifizierung in `c-hsm-doc` ([`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)). |
 
 ## Weiterlesen
 

@@ -2,6 +2,21 @@
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung. Mit diesem Modul ist der inhaltliche Teil des Kurses abgeschlossen — danach folgt das [Abschlussprojekt](../abschluss/abschlussprojekt.md).
 
+## Mini-Glossar für dieses Modul
+
+Sieben neue Begriffe — Volldefinitionen in
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
+| **Produktionsfreigabe** | Belegte Checkliste mit Phasen *Vorbereitung · Reproduzierbarkeit · Replay · Runtime-Validation · Anti-Items*. | TÜV-Plakette mit Datum, nicht ein Häkchen. |
+| **Runbook** | Kurz-Anleitung für die Bereitschaft — *eine* Person, nachts, ohne Autor. | Notfall-Karte am Defibrillator, nicht ein Lehrbuch. |
+| **Rollback** | Vorherigen Zustand wiederherstellen. *Nicht* die Standardantwort. | Zurückspulen der Kassette. |
+| **Fix-Forward** | Korrektur *vorwärts* mit zusätzlichem Slice — wenn Daten nicht reversibel sind. | Schaden geradebiegen statt Maschine ausschalten. |
+| **Postmortem** | Strukturierte Nachbearbeitung — *blameless*, Sensor-Schutz für Beteiligte. | Flugschreiber-Auswertung, nicht Schuldfrage. |
+| **Incident-Klausel** | Regel, *wann* eine Produktionsfreigabe automatisch entfällt. | Brandschutzklappe, die ohne Diskussion schließt. |
+| **Bereitschaft** | Die Rolle, die nachts ohne Autor handeln können muss. | Nachtschicht im Krankenhaus. |
+
 ## Engage
 
 Drei Uhr morgens. Ein Agent hat einen produktiven Datensatz fehlerhaft
@@ -151,7 +166,8 @@ Sechs Schritte, eine Freigabe mit Belegen pro Item. Vergleich:
 
 ## Übungen
 
-* Produktionsfreigabe eines Projekts (Checkliste aus dem Begleit-Repo) — **erweitere** die Repo-Checkliste um zwei eigene Items mit Beleg-Anforderung für ein Projekt deiner Wahl (aktiviert das *Erschaffen*-Lernziel).
+* Produktionsfreigabe eines Projekts (Checkliste aus dem Begleit-Repo) — **erweitere** die Repo-Checkliste um zwei eigene Items mit Beleg-Anforderung für ein Projekt deiner Wahl.
+* **(Erschaffen — voll aktiviert LZ 1)** *Freigabe-Checkliste aus dem leeren Skelett neu entwerfen.* Lege eine `release-checklist.md` für ein eigenes Projekt (oder eines der Fallstudien-Repos) **von Grund auf** an — nicht durch Ergänzung der Lab-Vorlage. Pflicht: fünf Phasen-Abschnitte (Vorbereitung · Reproduzierbarkeits-Anker · Replay-Beleg · Runtime-Validation · Anti-Items), je Phase mindestens zwei Items mit *Beleg* (Datei, Make-Target, Trace-ID), sowie eine *Incident-Klausel*, die regelt, wann die Freigabe automatisch entfällt. Vergleich am Ende mit dem Worked Example oben und der Lab-Vorlage `runbooks/release-checklist.md` — welche Items hast du *nicht* gehabt? Welche hast du, die das Worked Example *nicht* nennt?
 * Spiele ein Incident-Szenario durch: Agent löscht versehentlich produktive Daten — was tust du in den ersten 15 Minuten?
 
 ### Minimaler Übungspfad

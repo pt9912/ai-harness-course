@@ -148,6 +148,7 @@ beiden existiert, ist die Regel nur halb durchgesetzt.
 - **"Wenn die Tests grün sind, ist der Slice fertig."** — Schritt 8 verlangt einen Bericht über *Sensors und verbleibende Risiken*. Grüne Tests sind notwendig, nicht hinreichend.
 - **"Die Pre-completion Checklist ist Bürokratie."** — Sie ist der einzige Schritt, der vor Übergabe an Reviewer/Verifier eine *Selbstaussage* erzwingt. Wer keinen Selbst-Check macht, lädt jedes Risiko in die nächste Rolle.
 - **"Mehr Kontext ist immer besser — siehe Lopopolo."** — Lopopolos *"anything it can't access in-context doesn't exist"* sagt: *fehlender* Kontext schadet. Es sagt **nicht**: *jeder zusätzliche* Kontext nützt. Siehe nächster Block.
+- **"Ein Agent ist ein besserer/schnellerer Programmierer."** — Die Engage-Geschichte (800 Zeilen in 4 Minuten) suggeriert das. Falsch verstanden, kippt es ins Gegenteil: *Geschwindigkeit ohne Plan* erzeugt Review-Last, nicht Lieferung. Faustregel: Plan-vor-Code kostet 20 % mehr Zeit *im Lauf* und spart 50 % Review-Zeit *danach* — gemessen pro Slice, nicht pro Minute. Wer den Agenten als Speed-Tool denkt, mißt am falschen Hebel: nicht Diff-pro-Stunde, sondern Slice-bis-`done/`. Belegt durch Lopopolo (~1 Mio. Zeilen Code in ~1500 PRs über fünf Monate mit *drei* Engineers — Skalierung kommt aus dem Harness, nicht aus dem Modell).
 
 ## Kontext-Verdichtung (Kehrseite der Lopopolo-Maxime)
 

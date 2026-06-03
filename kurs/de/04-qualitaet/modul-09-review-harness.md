@@ -2,6 +2,20 @@
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung.
 
+## Mini-Glossar für dieses Modul
+
+Sechs neue Begriffe — Volldefinitionen in
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
+| **Reviewer** | LLM-Agent, der einen Diff in *kategorisierte Findings* übersetzt — kein Implementer. | TÜV-Prüfer mit Checkliste, nicht der Mechaniker. |
+| **Verifier** | Prüft, ob *Plan und DoD* eingehalten sind (Modul 10). Eingang Plan + Diff, nicht ADR-Tiefe. | Bauabnahme gegen Bauplan, nicht gegen Bauverordnung. |
+| **Validator** | Prüft, ob das *Ergebnis dem Nutzen* entspricht (semantische End-zu-End-Prüfung; selten im Code-Pfad). | Endkunde, der das Produkt einmal benutzt. |
+| **Finding** | Eine Reviewer-Beobachtung mit *Pflicht-Kategorie* (HIGH/MEDIUM/LOW/INFO) und Quellen-Anker. | Notizzettel mit Farbe — ohne Farbe kein gültiger Befund. |
+| **Skill-Datei** | Markdown unter `.harness/reviewer/<repo>.md`: HIGH-Liste, Negativbefund-Pflicht, Repo-Anker. | Werkstatt-Handbuch für genau dieses Modell. |
+| **Negativbefund** | Bewusster Satz "*hier* habe ich gesucht und *nichts* gefunden" — Vertrauens-Signal. | TÜV-Stempel "Bremsanlage geprüft, ohne Befund". |
+
 ## Engage
 
 Reviewer-Agent meldet *17 Findings*. Implementer fängt mit dem ersten an
@@ -188,6 +202,7 @@ Skill-Pattern für *Verifier* und *Validator* in Modul 10 bzw. in
 
 * Review realer Änderungen im Begleit-Repo
 * Reviewe den fingierten kaputten Slice — finde die drei eingebauten Fehler
+* **(Erschaffen — aktiviert LZ 4)** *Reviewer-Skill für ein konkretes Repo schreiben.* Wähle eines der vier Fallstudien-Repos (oder dein eigenes). Schreibe eine Skill-Datei nach dem Muster des Worked Example (sechs Schritte: Geltungsbereich · Eingangs-Kontext · HIGH-Liste · MEDIUM/LOW/INFO · Negativbefund-Pflicht · Beispiel-Findings). Pflicht: die HIGH-Liste muss mindestens *zwei* Repo-spezifische Regeln nennen, die ein generischer Skill nicht abdeckt (z. B. *"git mv + Inhalt = zwei Commits"* für `grid-gym`; *"Accepted-ADRs immutable"* für `bess-ems`). Lege die Datei unter `.harness/reviewer/<repo-name>.md` ab und führe einen Lauf auf einem realen Diff durch — kommt eines deiner zwei Repo-spezifischen HIGHs zur Anwendung? Wenn nein, ist der Skill noch nicht scharf genug.
 
 ## Reflexion
 

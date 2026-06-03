@@ -2,6 +2,21 @@
 
 > **Aufwand:** ca. 90 Min Lesen · 75 Min Übung. Spiralcurriculum: Verifikation vs. Validation kennst du aus [Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md) — hier werden sie zu eigenen Rollen mit eigenem Kontext.
 
+## Vorgriff: 8-Schritt-Workflow
+
+Die Rollen-Sequenz und der Konfliktfall verweisen mehrfach auf den
+*Minimal Agent Workflow* (acht Schritte), den der Implementation-Agent
+durchläuft. **Für Modul 7 reichen drei Anker:**
+
+| Anker | Was dahintersteht | Vollform |
+|---|---|---|
+| **Plan vor Code** | Implementation-Agent gibt vor dem ersten Diff einen Plan mit Akzeptanzkriterien aus. | [Modul 8 §Minimal Agent Workflow](modul-08-implementierung.md#minimal-agent-workflow-8-schritte) |
+| **Pre-completion Checklist** | Selbstprüfung des Agenten *vor* der Übergabe an Reviewer — Schritt 7/8 des Workflows. | [Modul 8 §Minimal Agent Workflow](modul-08-implementierung.md#minimal-agent-workflow-8-schritte), Schritte 7–8 |
+| **Steering-Loop-Eintrag** | Jeder Lauf endet mit einem expliziten Notiz-Block, der das nächste Sensor-/Guide-Wachstum vorbereitet. | [Modul 8 §Worked Example](modul-08-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow) (Schluss-Block) und [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md) |
+
+Wenn dir die drei Anker reichen, lies Modul 7 zuende. Wenn nicht: kurzer
+Sprung in Modul 8 §Workflow, dann zurück.
+
 ## Engage
 
 Drei Stunden Implementation, dann reviewt der *selbe* Agent seinen

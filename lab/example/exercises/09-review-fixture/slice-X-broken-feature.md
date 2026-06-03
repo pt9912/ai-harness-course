@@ -29,7 +29,6 @@ ihren Ergebnissen direkt im Service-Layer.
 |---|---|---|
 | `internal/service/search.go` | update | LRU-Cache plus direktem Embedding-Pfad |
 | `internal/embedding/cache.go` | neu | Hilfsstruktur für Caching |
-| `internal/ui/handler.go` | update | Direktverdrahtung mit `internal/index/storage.go` für die nicht-cachebare Re-Index-Route, ohne Service-Schicht zu nutzen. # noqa erlaubt für diese Datei. |
 | `internal/service/search_test.go` | update | Cache-Hit-Test |
 
 ## 4. Trigger

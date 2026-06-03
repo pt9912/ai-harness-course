@@ -77,6 +77,8 @@ falsch.
 
 ## Worked Example: einen zu großen Slice schneiden
 
+> **Wenn du Slices schon routinemäßig nach Vertikal-Schnitt schneidest und einen Lifecycle mit `open/next/in-progress/done/` einsetzt, springe zu [§Übungen](#übungen).** (Expertise-Reversal-Schutz: das Beispiel zeigt elementar, was du dann bereits internalisiert hast.)
+
 **Ausgangs-Slice:** `SL-014 — Authentifizierung implementieren`. DoD:
 "Login funktioniert, JWT wird ausgegeben, Refresh-Token-Flow läuft,
 Token-Revocation per Admin-Endpoint, Audit-Log auf Login-Versuche."

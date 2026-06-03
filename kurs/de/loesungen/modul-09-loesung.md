@@ -80,15 +80,17 @@ Maßstab:
 
 Der Slice unter
 [`/lab/example/exercises/09-review-fixture/`](../../../lab/example/exercises/09-review-fixture/)
-(im Lab nach Phase B) enthält drei eingebaute Fehler, die in *drei
-verschiedene Kategorien* fallen sollen. Erwarteter Befund:
+enthält drei eingebaute Fehler, die in *drei verschiedene Kategorien*
+fallen sollen. Erwarteter Befund (bezogen auf das Cache/Service-Layer-Szenario):
 
-- **Ein HIGH**: ADR- oder Hard-Rule-Verstoß (z. B. direkter Optimizer-zu-Gerät-Pfad).
-- **Ein MEDIUM**: unklare Fehlerbehandlung am Rand des Spec-Bereichs.
-- **Ein LOW**: stilistisch unschön ohne semantische Auswirkung.
+- **Ein HIGH** — *ADR-Verstoß*: DoD-Item 2 *"Cache umgeht den Index-Layer komplett"* verletzt ADR-0001 (Hexagonale Architektur, [`/lab/example/docs/plan/adr/0001-hexagonale-architektur.md`](../../../lab/example/docs/plan/adr/0001-hexagonale-architektur.md)). Der Service-Layer darf den Index-Layer nicht überspringen. Korrektur: *Read-through-Cache* hinter dem Index-Layer, nicht davor. Reviewer muss ADR-0001 im Eingangs-Kontext haben — ohne ADR im Kontext bleibt der Verstoß unsichtbar (genau das ist Lehrstoff: Reviewer-Eingang ist Pflicht, nicht Komfort).
+- **Ein MEDIUM** — *Spec-Lücken-Symptom plus Selbstabsolution*: Abschnitt 6 begründet das Stale-Read-Risiko mit *"… aber das ist OK, weil Cache eh nur 1 Minute TTL hat"*. Die Begründung absolviert sich selbst, ohne gegen LH-QA-01 (Performance + Korrektheit) evaluiert zu werden. Reviewer-Frage: was geschieht, wenn ein Reindex *gleichzeitig* mit Cache-Hits läuft? Wenn der Slice das nicht beantwortet, ist die Spec an dieser Stelle stumm — und 1 Minute TTL ist eine Setzung ohne Beleg.
+- **Ein LOW** — *stilistisch ohne semantische Auswirkung*: Der Closure-Trigger (Abschnitt 5) lautet *"DoD vollständig, Cache funktioniert"*. Das ist tautologisch — ein Trigger soll ein *überprüfbares Ereignis* sein (Latenz-Messung im Closure-Eintrag, Cache-Hit-Rate über drei Tage), nicht ein Selbstbezug auf die DoD.
 
 Wenn dein Reviewer-Agent nur HIGH-Findings produziert, ist er
-übersensibilisiert; nur LOW deutet auf zu schwache Skills hin.
+übersensibilisiert; nur LOW deutet auf zu schwache Skills hin. Wenn er
+das HIGH *nicht* findet, hatte er ADR-0001 nicht im Eingangs-Kontext —
+prüfe die Reviewer-Eingabe, nicht das Modell.
 
 ## Häufige Fehler
 

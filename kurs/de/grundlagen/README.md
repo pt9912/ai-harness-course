@@ -29,6 +29,16 @@ Jedes Modul folgt demselben Aufbau:
    Wissensdimension: *faktisch · konzeptuell · prozedural · metakognitiv*.
    Beispiel: `(Analysieren · konzeptuell)` für eine Quadranten-Zuordnung in der 2×2-Matrix;
    `(Anwenden · prozedural)` für das Durchlaufen des 8-Schritt-Workflows.
+
+   *Konvention "und"-Lernziele*: Einige Lernziele verbinden zwei
+   Prozessdimensionen ("zuordnen *und* begründen"; "bewegen *und*
+   benennen"). Das Tag führt dann die **höhere** Prozessdimension —
+   "*X und Y begründen*" mit *Bewerten* statt mit *Verstehen* (für X).
+   Das bedeutet auch: Übung und Selbstcheck müssen *beide* Verben
+   abrufen, sonst bleibt die niedrigere Prozessdimension aus dem
+   konstruktiven Alignment (Biggs/Tang) ausgeblendet. Wer ein "und"-LZ
+   schreibt, prüft am Ende: gibt es *eine* alignment-geprobte Stelle pro
+   Verb? Wenn nein: trennen.
 2. **Lab-Bezug** — welche Verzeichnisse, Make-Targets oder Artefakte gehören dazu.
 3. **Themen** — die Konzepte des Moduls.
 4. **Kernidee** — die eine Aussage, an der das Modul hängt.

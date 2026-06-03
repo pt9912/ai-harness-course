@@ -11,7 +11,7 @@ Drei neue Begriffe in diesem Modul. Volldefinitionen in
 |---|---|---|
 | **Carveout** | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel — mit Trigger oder explizit als permanent markiert. | ein Loch im Zaun, mit Notiz "wann wird zugemacht?". |
 | **Auflösungs-Trigger** | Beobachtbare Bedingung, mit der ein temporärer Carveout endet (nicht "wenn wir Zeit haben"). | die Kerze, die *anzeigt*, dass es jetzt soweit ist. |
-| **Bootstrap-aware Gate** | Gate mit dokumentierter Reifestufe: weich in der Frühphase, hart ab Trigger. | Tempolimit, das in der Bauzone gilt, später verschwindet. |
+| **Bootstrap-aware Gate** *(Vorgriff)* | Gate mit dokumentierter Reifestufe: weich in der Frühphase, hart ab Trigger. **Vollform in [Modul 12](../04-qualitaet/modul-12-quality-gates.md#bootstrap-aware-gates)**. | Tempolimit, das in der Bauzone gilt, später verschwindet. |
 
 ## Engage
 

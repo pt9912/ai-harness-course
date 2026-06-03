@@ -1,6 +1,41 @@
 # Abschlussprojekt — AI Harness Platform
 
+## Aufgabe
+
+Baue einen vollständigen, auditierbaren Entwicklungsprozess mit KI-Agenten
+für *ein konkretes Repo* auf. Die Bewertung greift fünf Achsen ab
+(Vollständigkeit · Konsistenz · Reproduzierbarkeit · Auditierbarkeit ·
+Steering-Loop-Reife) — siehe Bewertungsraster unten.
+
+### Wenn du kein eigenes Mitbringprojekt hast
+
+Wähle eines der beiden Starter-Szenarien. Beide sind klein genug für ein
+Solo-Abschluss, groß genug, um alle Achsen abdecken zu können.
+
+**Szenario A — DocSearch-Mini-Service** (Default für Pfad B/C).
+Erweitere [`/lab/example/`](../../../lab/example/) (Volltext-Suche über
+Markdown-Dateien) um *ein* neues Feature in einer der fünf
+Sprach-Skelette: *Rate-Limit pro IP* oder *Query-Caching mit TTL*. Dein
+Repo trägt am Ende eine ADR (Read-through-Cache vs. Look-aside),
+mindestens drei Slices in den vier Lifecycle-Verzeichnissen, ein Replay
+mit drei Golden-Set-Fällen und einen dokumentierten Failure → Sensor-Schritt.
+
+**Szenario B — Reguliertes Compliance-Repo** (Default für Pfad A).
+Lege ein neues kleines Repo an, das eine *Policy* maschinell prüfbar
+macht (z. B. *"Jedes API-Endpoint trägt eine `X-Compliance-Class`-ID
+mit Whitelist-Werten"*). Erforderlich: Spec-Stratifizierung
+(Lastenheft/Spezifikation/Architektur), ID-Schema `POL-*`, ADR für
+*Accepted-immutable*-Regel, Fitness Function als CI-Gate. Vorbild ist
+`pt9912/c-hsm-doc` (siehe
+[`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)).
+
+Beide Szenarien sind *Default*, kein Pflicht-Pfad. Wer ein eigenes
+Mitbringprojekt nutzt, soll mindestens die Achsen-Tiefe der Szenarien
+erreichen — nicht das spezifische Feature.
+
 ## Features
+
+Aus den 16 Modulen muss das Repo am Ende belegbar enthalten:
 
 * Spezifikation
 * ADRs
@@ -66,7 +101,9 @@ Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
 | **rudimentär** | `make gates` läuft nur auf der Maschine des Autors; Toolchain ist nicht gepinnt. |
 | **funktional** | Multi-Stage-Dockerfile vorhanden, Toolchain pinned; aber Image-Hashes oder Lock-Files fehlen. |
 | **solide** | `make gates` läuft auf einem frischen Klon *und* im CI mit identischem Image-Hash; Lock-Files committet; reproduzierbares Replay (Modellversion + Seed festgehalten). |
-| **exzellent** | Zusätzlich: Image-Hash im `harness/README.md` referenziert; bootstrap-aware Gates mit dokumentierter Hochschalt-Schwelle; Cache-Hit-Rate als Metrik. |
+| **exzellent** | Zusätzlich: dokumentierte Drift-Erkennung über mindestens zwei Modellversionen am Replay (Wann hat sich was geändert?); Image-Hash im `harness/README.md` referenziert; bootstrap-aware Gates mit dokumentierter Hochschalt-Schwelle. |
+
+> *Hinweis Pass-Through:* Image-Hash-Identität (Schwelle *solide*) wird erst in [Modul 13](../05-betrieb/modul-13-docker-harness.md) gelehrt. Wer Checkpoint D durchläuft, ohne Modul 13 absolviert zu haben, bleibt auf *funktional* gedeckelt — siehe [`../grundlagen/checkpoints.md`](../grundlagen/checkpoints.md#pass-through-logik-zum-abschlussprojekt).
 
 ### Achse: Auditierbarkeit
 
@@ -75,7 +112,7 @@ Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
 | **rudimentär** | Commits ohne Bezugs-IDs; ADRs ohne Verweis auf Lastenheft. |
 | **funktional** | Konsistentes ID-Schema (`LH-*`, `ADR-*`, `SL-*`); IDs erscheinen in Commits *oder* in Make-Targets, aber nicht durchgängig. |
 | **solide** | ID-Schema in allen Artefakten konsequent: Lastenheft, Spec, ADRs, Make-Target-Kommentare, Commit-Messages, PR-Beschreibungen; Traceability-Hook prüft Commits maschinell. |
-| **exzellent** | Zusätzlich: Tool-Call-Audit-Log pro Agentenlauf; jede Änderung lässt sich vom Trace bis zur Anforderungs-ID zurückverfolgen. |
+| **exzellent** | Zusätzlich: mindestens *ein dokumentierter Fall*, in dem das Tool-Call-Audit-Log einen Pre-completion-Verstoß *retrospektiv* aufgedeckt hat — Eintrag enthält Trace-ID, betroffene Anforderungs-ID, die *aus dem Audit* gewonnene Erkenntnis und den daraus abgeleiteten Steering-Loop-Schritt. Tool-Call-Audit existiert nicht als Sammlung, sondern als forensischer Hebel mit Beleg. |
 
 ### Achse: Steering-Loop-Reife
 

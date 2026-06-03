@@ -25,9 +25,9 @@ Ein vollständiger Review-Lauf identifiziert:
 
 | Kategorie | Hinweis ohne Auflösung |
 |---|---|
-| HIGH | Berührt eine ADR oder eine Hard Rule aus AGENTS.md. |
-| MEDIUM | Schwächt die Spec ab oder fehlt eine Verifikations-Spur. |
-| LOW | Stilistisch unschön, keine semantische Auswirkung. |
+| HIGH | Berührt ADR-0001 (Hexagonale Architektur) — eine DoD-Aussage widerspricht dem Layering. |
+| MEDIUM | Eine Risiko-Begründung absolviert sich selbst, ohne gegen eine `LH-QA-*`-Anforderung evaluiert zu sein. |
+| LOW | Ein Pflichtfeld ist syntaktisch gefüllt, aber semantisch tautologisch. |
 
 Die konkrete Auflösung steht in
 [`../../../../kurs/de/loesungen/modul-09-loesung.md`](../../../../kurs/de/loesungen/modul-09-loesung.md)

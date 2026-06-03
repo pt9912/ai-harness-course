@@ -79,12 +79,27 @@ Nach diesem Modul kannst du:
 * Der Unterschied zwischen Chatbot und Engineering-System
 * LLM vs. Agent vs. Workflow
 
+## Vorab — was hältst du heute für wahr?
+
+*Bevor du die Kernidee liest:* notiere in einem Satz deine spontane
+Antwort auf jede dieser drei Fragen — auch wenn du dir unsicher bist.
+
+1. *"Was ist der schnellste Weg, ein KI-Projekt erfolgreich zu machen — besseres Modell, besserer Prompt oder etwas Drittes?"*
+2. *"Eine Halluzination ist im Kern ein Modell-Problem — wahr oder falsch?"*
+3. *"Wenn ein Agent in jedem Lauf etwas Bestimmtes tun soll, wohin schreibst du diese Regel?"*
+
+Lass deine Notiz neben dem Modul liegen. Am Modul-Ende konfrontiert dich
+der Abschnitt *Typische Fehlvorstellungen* mit den drei häufigsten
+Antwort-Mustern — wir prüfen, welches deine war.
+
 ## Kernidee
 
 Ein Chatbot antwortet. Ein Agent handelt. Engineering-Systeme handeln
 **reproduzierbar** und **auditierbar** — das ist nicht dasselbe wie
 "antwortet besser". Der Harness ist genau das System, das aus einem
 handelnden Agenten einen reproduzierbar handelnden Agenten macht.
+
+> *Rückbezug zur Kapur-Vorab-Übung* (falls du sie gemacht hast): Genau hier löst sich die Reibung deiner zwei verschiedenen Quersummen-Outputs auf. Die Antworten sind verschieden, weil der LLM *stateless* ist; reproduzierbar werden sie erst durch Harness-Elemente (Tool-Allowlist, Spec-Anker, fester Seed im Replay). Welche deiner Vorab-Hypothesen kommt diesem Befund am nächsten, welche nicht? Trag den Vergleich in die Reflexion (Frage 4) ein — *jetzt*, bevor du weiterliest.
 
 ## Typische Fehlvorstellungen
 
@@ -135,6 +150,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 * **(Erinnern)** Welche drei Bestandteile hat ein Tool-Call laut Mini-Glossar?
 * Wo verläuft die Grenze zwischen "guter Prompt" und "guter Harness"?
 * Welche Fehlermodi eines Agenten kann ein Linter *nicht* fangen?
+* **(Bewerten — aktiviert LZ 5)** Nimm den Mega-Prompt aus der Sortier-Übung. Nenne die zwei Reproduzierbarkeits-Kriterien, mit denen du *entscheidest*, ob eine Zeile in AGENTS.md, in eine Fitness Function oder in den Prompt gehört, und zeige eine Zeile, deren Zuordnung *zwischen* zwei Töpfen strittig bleibt — mit Begründung, welches Kriterium hier den Ausschlag gibt.
 
 ### Selbstcheck-Rubrik
 
@@ -145,6 +161,7 @@ Schema in [`../grundlagen/selbstcheck-rubrik.md`](../grundlagen/selbstcheck-rubr
 | Drei Bestandteile eines Tool-Calls? | "Name und Argumente." | `name`, `arguments`, `result` — strukturierter Aufruf einer Funktion durch das LLM. | + Anwendung: ohne `result`-Feld kann der Verifier den Lauf nicht reproduzieren; ohne `arguments` ist Token-Attribution unmöglich. Diese drei sind das Minimum, *bevor* Korrelations-IDs (Slice, Agent-Rolle) dazukommen — Modul 14 erweitert. |
 | Grenze "guter Prompt" ↔ "guter Harness"? | "Harness ist umfangreicher." | Prompt verbessert *eine* Interaktion; Harness verbessert *jede zukünftige Interaktion derselben Klasse*. | + Test "wäre die Anweisung in *jedem* Lauf relevant?" und Verweis auf AGENTS.md/Fitness Function als Ablage. |
 | Fehlermodi, die ein Linter *nicht* fängt? | "Semantik." | Drei Klassen: semantische Halluzination, ADR-Verstoß, Spec-Lücken-Symptom. | + zwei weitere (implizite Annahmen, Sicherheits-Anti-Pattern im Fremdkontext) und Zuordnung zu Sensor-Typen (Compiler/ArchUnit/Verifier/Replay/Security-Gate). |
+| Mega-Prompt-Zuordnung mit Begründung des Grenzfalls? | "Ich sortiere in drei Töpfe." (= Analyse, kein Bewerten.) | Zwei Kriterien benannt (z. B. *jeder-Lauf-relevant?* und *deterministisch prüfbar?*); ein konkreter Grenzfall mit Begründung, welches Kriterium ausschlaggebend ist. | + ein zweiter Grenzfall, in dem die Kriterien *gegeneinander* entscheiden, plus die Faustregel, welches Kriterium dann Vorrang hat und warum (Verweis auf Sweller-Redundanz oder Lopopolo-Constrain). |
 
 ## Weiterlesen
 

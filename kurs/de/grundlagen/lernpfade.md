@@ -6,6 +6,33 @@ aber je nach Rolle liegen die Vertiefungen anders. Drei
 empfohlene Schwerpunktpfade. Lies alle Module einmal; vertiefe entlang
 deines Pfads.
 
+## Schnell-Diagnose: welcher Pfad passt?
+
+Vier Fragen mit drei Antwortmöglichkeiten. Markiere pro Frage, welcher
+Buchstabe (A/B/C) am ehesten passt. Der Buchstabe, den du dreimal oder
+viermal markiert hast, ist *dein Pfad*. Bei Gleichstand entscheidet
+Frage 4.
+
+| Frage | Wenn du eher … | Pfad |
+|---|---|---|
+| 1. *Wer entscheidet bei dir über Architektur?* | … selbst entscheidest oder entscheidende Stimme bist | A |
+| | … die Plattform/CI für andere Teams baust | B |
+| | … in einem bestehenden Architekturrahmen umsetzt | C |
+| 2. *Was kostet dich heute am meisten Zeit?* | unklare Anforderungen / Spec-Lücken | A |
+| | rote Builds / Reproduzierbarkeits-Drift | B |
+| | Reviewer-Hin-und-Her / unklare Konventionen | C |
+| 3. *Wo schlägt eine Halluzination am ehesten zu?* | im ADR-Wissen (Lösung erfunden) | A |
+| | in der Build-/Deploy-Kette (Befehl erfunden) | B |
+| | im Code (Funktion erfunden, Test umgangen) | C |
+| 4. *Welches Modul liest du als Erstes mit Vorfreude?* | Modul 2 (Lastenheft) oder Modul 3 (ADRs) | A |
+| | Modul 12 (Quality Gates) oder Modul 13 (Docker) | B |
+| | Modul 8 (Implementierung) oder Modul 9 (Review) | C |
+
+Die Diagnose ist *probabilistisch* — gleicher Logik wie die
+Voraussetzungs-Selbst-Diagnose in
+[`../README.md`](../README.md#selbst-diagnose-vom-voraussetzungscheck-zur-phase).
+Bei Unsicherheit: Pfad A, weil Spec-Disziplin alle Rollen trägt.
+
 ## Pfad A — Architect / Tech Lead
 
 Schwerpunkt: Spec-Disziplin, ADR-Schärfe, Verifikation,

@@ -43,6 +43,36 @@ Bewertung:
 Das Projekt besteht. Es ist nicht breit, aber belegt die komplette
 Artefaktkette.
 
+## Beispiel B' — knappes Bestehen (vier solide, eine funktional)
+
+Ein Team gibt ein Repo ab, das in vier Achsen *solide* trifft, aber bei
+*Steering-Loop-Reife* nur *funktional* erreicht: ein Failure ist
+dokumentiert, ein Sensor-Vorschlag steht im Begleitprotokoll, aber der
+Sensor ist noch nicht implementiert und die Wiederholungs-Messung
+fehlt.
+
+Bewertung:
+
+| Achse | Stufe | Grund |
+|---|---|---|
+| Vollstaendigkeit | solide | Alle Artefakte vorhanden und verknuepft. |
+| Konsistenz | solide | Source Precedence sichtbar; AGENTS.md ohne Drift. |
+| Reproduzierbarkeit | solide | Gates auf frischem Klon und in CI mit gepinntem Image. |
+| Auditierbarkeit | solide | `LH-*`, `ADR-*` und `SL-*` durchgaengig in Artefakten und PR-Beschreibung. |
+| Steering-Loop-Reife | funktional | Failure beobachtet und Sensor-Vorschlag notiert; Sensor selbst nicht implementiert, Wiederholungs-Messung fehlt. |
+
+Das Projekt **besteht** — gerade noch. Die Bestehens-Regel
+([`abschlussprojekt.md`](abschlussprojekt.md#bestanden)) erlaubt *eine*
+funktional-Achse, wenn die Luecke dokumentiert und mit einem Folge-Slice
+verknuepft ist. Das Begleitprotokoll referenziert `SL-018`
+("Sensor *suppression-counter* implementieren") in `next/` — damit ist
+die Auflage erfuellt.
+
+*Lehrwert*: dies ist die haeufigste Bewertungs-Entscheidung im Kurs.
+Ohne den Folge-Slice mit ID waere dieselbe Konstellation *nicht
+bestanden*. Die Beleg-Verknuepfung ist nicht Formalitaet, sie ist die
+Schwelle.
+
 ## Beispiel C — exzellent
 
 Ein Team zeigt ueber mehrere Wochen drei Steering-Loop-Iterationen. Eine
