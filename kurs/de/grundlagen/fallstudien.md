@@ -1,6 +1,6 @@
 # Fallstudien
 
-Der Kurs benutzt drei reale Open-Source-Repos in unterschiedlichen
+Der Kurs benutzt vier reale Open-Source-Repos in unterschiedlichen
 Reifegraden als laufendes Beispiel. Wenn ein Modul mit "Beispiel aus
 grid-gym" oder "wie in c-hsm-doc" argumentiert, ist genau einer dieser
 Stände gemeint.
@@ -9,8 +9,8 @@ Stände gemeint.
 
 | Repo | Klasse | Anmerkung | Stack | Was der Kurs daraus zieht |
 |---|---|---|---|---|
-| **`pt9912/u-boot`** | Referenz | Tooling | Go-CLI für reproduzierbare Docker-Setups | LH-ID-Schema in Make-Target-Kommentaren, `verify-depguard` als Architekturtest, bootstrap-aware Coverage. **Kein AGENTS.md** — typischer "vor dem Harness"-Zustand. |
-| **`pt9912/grid-gym`** | Referenz | Domäne | Python-EMS-Simulator, hexagonale Architektur | Reichste AGENTS.md (Docker-only, noqa-Verbot, Welle-Self-Close), 18 Gates, Test-Diversität (`determinism`/`replay`/`fault`). |
+| **`pt9912/u-boot`** | Referenz | Tooling | Go-CLI für reproduzierbare Docker-Setups | LH-ID-Schema in Make-Target-Kommentaren, `verify-depguard` als Architekturtest, bootstrap-aware Coverage. `AGENTS.md` und `harness/README.md` seit 2026-06 — typischer "Tooling-Repo im Harness-Aufbau"-Zustand. |
+| **`pt9912/grid-gym`** | Referenz | Domäne | Python-EMS-Simulator, hexagonale Architektur | Reichste AGENTS.md (Docker-only, noqa-Verbot, Wave-Self-Close-Commit-Konvention), 10 A-1-Pflicht-Gates in `make gates`, Test-Diversität (`determinism`/`replay`/`fault`). |
 | **`pt9912/c-hsm-doc`** | Policy/Compliance | mit Safety-Anteil (HSM-Integration) | Go-Tool mit PKCS#11/HSM-Integration | Spec-Stratifizierung (Lastenheft *vertraglich* / Spezifikation *technisch* / Architektur *diagrammatisch*), `HSM-*`-IDs, `proto-check` als Drift-Sensor gegen generierten Code, Hard Rule "Accepted-ADRs immutable". |
 | **`pt9912/bess-ems`** | Safety/Control | Flagship | C#/.NET 10 + native C/C++-Interop, BESS-EMS mit MPC | **Central Package Management** (`Directory.Packages.props` + `packages.lock.json`) als Reproduzierbarkeits-Anker, eigener **`solid-suppression-gate`** als Hard Rule, **`test-mpc-property`** als Property-Based-Sensor neben Unit-Tests, **`native-sanitizer`** für C/C++-Anteile. Zeigt: Safety/Control-Repos tragen oft mehrere Toolchains. |
 
@@ -41,13 +41,25 @@ treiben skaliert nicht — der Agent verteilt dann halbgare Standardtexte
 
 ## Beobachtung aus dem Ist-Zustand
 
-Keines der vier Repos hat (Stand 2026-06) ein `harness/README.md`.
-`bess-ems` hat sogar (Stand jetzt) noch *kein* AGENTS.md, obwohl es das
-sicherheitskritischste Repo ist. Alle haben aber *die kanonischen Quellen*
-(Spec, ADR, Planning, Makefile-Gates) — der Harness existiert bereits,
-nur ohne formellen Einstiegspunkt. Das ist der realistische Ausgangspunkt
-für die meisten Teams: nicht "Greenfield-Harness", sondern "Ein Einstieg
-in einen schon vorhandenen Harness".
+Die vier Repos zeigen (Stand 2026-06) vier Stationen eines
+Reifegrad-Gradienten:
+
+| Repo | `AGENTS.md` | `harness/README.md` | Stadium |
+|---|---|---|---|
+| `grid-gym` | ✓ | ✓ | etablierter formeller Einstieg |
+| `u-boot` | ✓ (neu, 2026-06) | ✓ (neu, 2026-06) | formeller Einstieg seit kurzem |
+| `c-hsm-doc` | ✓ | ✗ | AGENTS.md ohne Harness-Index |
+| `bess-ems` | ✗ | ✗ | kanonische Quellen ohne Harness-Hülle, obwohl sicherheitskritischstes Repo |
+
+Alle vier Repos haben *die kanonischen Quellen* (Spec, ADR, Planning,
+Makefile-Gates) — der Harness existiert in jedem von ihnen, nur in
+unterschiedlich formalisiertem Zustand. Das ist der realistische
+Ausgangspunkt für die meisten Teams: nicht "Greenfield-Harness", sondern
+"Ein Einstieg in einen schon vorhandenen Harness" — und die Frage ist
+nicht *ob*, sondern *wie weit* der Einstieg bereits formalisiert ist.
+Die Bewegung von `u-boot` zwischen den Wellen (2026-06: AGENTS.md und
+`harness/README.md` ergänzt) ist selbst Lehrstoff: Harness-Reife ist
+beobachtbar und änderbar, nicht statisch.
 
 ## Branchen-Anwendungsanker
 
