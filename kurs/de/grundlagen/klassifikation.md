@@ -135,9 +135,11 @@ Lesart: **Context Engineering** schiebt Information *zum* Agenten;
 **Architectural Constraints** ziehen Grenzen *um* den Agenten;
 **Entropy Management** pflegt beides, damit es nicht verrottet.
 
-Maxime von Lopopolo: *"From the agent's perspective, anything it can't
-access in-context doesn't exist."* — daraus folgt direkt, warum Spec und
-AGENTS.md kein Beiwerk sind, sondern die Hauptkontrolle.
+Maxime von Lopopolo: *"Aus Sicht des Agenten existiert alles nicht,
+worauf er im Kontext nicht zugreifen kann."* (Original: *"From the
+agent's perspective, anything it can't access in-context doesn't
+exist."*) — daraus folgt direkt, warum Spec und AGENTS.md kein Beiwerk
+sind, sondern die Hauptkontrolle.
 
 **Constrain + Inform** sind die Linsen, durch die Lopopolo die drei
 Säulen liest: *Context Engineering* ist primär **inform** (Agent weiß

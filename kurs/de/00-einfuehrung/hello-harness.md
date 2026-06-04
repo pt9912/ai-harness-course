@@ -54,6 +54,8 @@ Schreibe `spec/lastenheft.md`:
 
 Eine ID, ein Given/When/Then — mehr nicht.
 
+> **Kurz zur Notation:** *Given/When/Then* stammt aus **Behavior-Driven Development** (Dan North, 2006) und ist die Keyword-Syntax der **Gherkin-Sprache** (genutzt u. a. von Cucumber, pytest-bdd, SpecFlow). Wir bleiben bei den englischen Keywords, weil sie der Industriestandard sind: reale `.feature`-Dateien, Tool-Dokumentation und Beispiele im Netz verwenden fast ausnahmslos `Given/When/Then`. Gherkin kennt zwar lokalisierte Varianten (`Angenommen/Wenn/Dann`), die sind in der Praxis aber selten — und im deutschen Fließtext kollidiert *Wenn/Dann* mit jeder normalen Konditional-Konjunktion. Englisch erspart dir die Disambiguierung und macht dein Kurs-Wissen 1:1 auf Tooling übertragbar.
+
 ### 3. Code mit ID-Kommentar (5 Minuten)
 
 Python-Beispiel — `hello.py`:

@@ -86,8 +86,8 @@ Konfrontation im Block *Typische Fehlvorstellungen*.
 ## Kernidee
 
 Ein Agent ist ein extrem buchstabengetreuer Praktikant. Was nicht in der
-Spec steht, existiert für ihn nicht — Lopopolos Maxime: *"anything it
-can't access in-context doesn't exist."* Was zweideutig in der Spec
+Spec steht, existiert für ihn nicht — Lopopolos Maxime: *"Was der Agent
+nicht im Kontext erreicht, existiert für ihn nicht."* Was zweideutig in der Spec
 steht, wird auf die für dich ungünstigste Weise interpretiert.
 
 **Grenze der Metapher.** Die Praktikant-Metapher trägt nur die
@@ -105,7 +105,7 @@ ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
 - **"Negativbedingungen sind unhöflich."** — Im Gegenteil: ein Satz "das System *darf nicht* …" spart später drei Reviews. Negativ ist genauso präzise wie positiv.
 - **"Performance gehört in den ADR."** — Nein, Performance gehört in den nichtfunktionalen Block der Spec (oder in `spec/spezifikation.md`, wenn stratifiziert). Der ADR begründet, *wie* man die Schwelle einhält.
 - **"Out-of-Scope kann implizit bleiben."** — Was nicht explizit ausgeschlossen ist, baut der Agent plausibel mit. Das ist die häufigste Quelle für "wir hatten das nie gefordert"-PRs.
-- **"Prompts ersetzen Specs."** — Verbreitet aus der agil/Lean-Ecke ("Code statt Doku"). Falsch. Lopopolos Maxime *"anything it can't access in-context doesn't exist"* ist ein Plädoyer *für* Kontext-Verfügbarkeit — und sagt damit, dass Spec und Prompt *unterschiedliche* Lebenszyklen haben: Spec wird *gepflegt* (Versions-Geschichte, Bezüge, Audit), Prompt wird *für einen Lauf zusammengestellt*. Was im Prompt steht, aber nicht in der Spec, gilt nur für *diesen* Lauf — der nächste Agent sieht es nicht. Engage-Geschichte oben (Spec sagte *speichert*, Agent baute PostgreSQL) wäre mit einem Mega-Prompt nicht besser geworden — der Prompt würde im nächsten Lauf vergessen.
+- **"Prompts ersetzen Specs."** — Verbreitet aus der agil/Lean-Ecke ("Code statt Doku"). Falsch. Lopopolos Maxime *"Was der Agent nicht im Kontext erreicht, existiert für ihn nicht"* ist ein Plädoyer *für* Kontext-Verfügbarkeit — und sagt damit, dass Spec und Prompt *unterschiedliche* Lebenszyklen haben: Spec wird *gepflegt* (Versions-Geschichte, Bezüge, Audit), Prompt wird *für einen Lauf zusammengestellt*. Was im Prompt steht, aber nicht in der Spec, gilt nur für *diesen* Lauf — der nächste Agent sieht es nicht. Engage-Geschichte oben (Spec sagte *speichert*, Agent baute PostgreSQL) wäre mit einem Mega-Prompt nicht besser geworden — der Prompt würde im nächsten Lauf vergessen.
 
 ## Worked Example: vom vagen Satz zum prüfbaren Akzeptanzkriterium
 

@@ -24,8 +24,8 @@ soll nicht im selben Lauf verifizieren.
 
 Sie prüfen unterschiedliche Fragen:
 
-- **Verification** ("Built the thing right"): *Wurde das umgesetzt, was geplant war?* Vergleich von Code gegen Plan/ADR/Spec.
-- **Validation** ("Built the right thing"): *Trifft das Ergebnis den realen Bedarf?* Vergleich von Spec/Plan gegen das, was Benutzer/Markt/Realität tatsächlich brauchen.
+- **Verification** ("Bauen wir es richtig?" — Original: "built the thing right", Boehm 1981): *Wurde das umgesetzt, was geplant war?* Vergleich von Code gegen Plan/ADR/Spec.
+- **Validation** ("Bauen wir das Richtige?" — Original: "built the right thing", Boehm 1981): *Trifft das Ergebnis den realen Bedarf?* Vergleich von Spec/Plan gegen das, was Benutzer/Markt/Realität tatsächlich brauchen.
 
 Verifikation kann komplett grün sein und Validierung trotzdem rot —
 das ist der gefährlichste Fall: das Team baut perfekt das Falsche.
