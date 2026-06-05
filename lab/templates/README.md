@@ -17,6 +17,7 @@ unabhängig davon, ob dein Repo Go, Python, Kotlin, Java oder C# nutzt.
 | [`docs/plan/carveouts/carveout.template.md`](docs/plan/carveouts/carveout.template.md) | Dokumentierte Ausnahme mit Auflösungs-Trigger | [Modul 6](../../kurs/de/02-planung/modul-06-carveouts.md) |
 | [`AGENTS.template.md`](AGENTS.template.md) | Repo-weite Hard Rules und Source Precedence | [Modul 8](../../kurs/de/03-agenten/modul-08-implementierung.md) |
 | [`harness/README.template.md`](harness/README.template.md) | Repo-Einstiegspunkt mit Guides, Sensors, Safety | [Konventionen](../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt) |
+| [`harness/conventions.template.md`](harness/conventions.template.md) | Repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Zusatzklassen-Deklaration, Modus-Deklaration pro Sub-Area | [Konventionen](../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt), [Draft Bootstrap-Zielbild](../../kurs/de/grundlagen/draft-bootstrap-zielbild.md) |
 
 ## Verwendung
 
