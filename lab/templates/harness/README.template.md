@@ -49,19 +49,29 @@ Was lenkt den Agenten *vor* der Handlung? Pointer, kein Inhalt.
 
 <!--
 WICHTIG: Nur Befehle aufzählen, die im Makefile *existieren*.
-Halluzinierte Gates sind die häufigste Form von Harness-Lüge.
-Wenn ein Gate aktuell rot ist, dokumentieren statt verstecken.
+Halluzinierte Gates sind die häufigste Form von Harness-Lüge (Modul 12).
+
+Kein Status-Feld in dieser Tabelle:
+- Lauf-Wahrheit pro Commit liegt in CI (Badge/Dashboard), nicht in
+  einer Markdown-Datei vom Rang 9.
+- Strukturell rote Gates (dauerhaft rot mit Begründung) gehören als
+  Carveout nach `docs/plan/carveouts/CO-<NNN>-…`, mit Auflösungs-Trigger
+  und Folge-Slice (Modul 6) — nicht in eine Status-Spalte hier.
 -->
 
-| Target | Charakter | Status |
-|---|---|---|
-| `make lint` | <…> | grün / rot mit Begründung |
-| `make test` | <…> | grün |
-| `make arch-check` | <…> | grün |
-| `make coverage-gate` | <…> | grün (bootstrap-aware, Schwelle X) |
-| `make gates` | alle inneren Gates | grün |
-| `make ci` | gates + extras | grün |
-| `make fullbuild` | volle Closure | grün |
+| Target | Was prüft es / Vertrag |
+|---|---|
+| `make lint` | <…> |
+| `make test` | <…> |
+| `make arch-check` | <…> |
+| `make coverage-gate` | <…> (bootstrap-aware, Schwelle X) |
+| `make gates` | alle inneren Gates |
+| `make ci` | gates + extras |
+| `make fullbuild` | volle Closure |
+
+**Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates`.
+**Strukturell rote Gates:** als Carveout in
+[`docs/plan/carveouts/`](../docs/plan/carveouts/) dokumentiert, nicht hier.
 
 <!-- Domänenspezifische Gates ergänzen, je nach Repo-Klasse: -->
 
