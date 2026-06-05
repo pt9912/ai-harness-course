@@ -37,22 +37,22 @@ kanonische Quelle und diese Datei wird angepasst.
 
 ## Sensors (Feedback-Gates)
 
-| Target | Charakter | Status |
+| Target | Vertrag | Bindung |
 |---|---|---|
-| `make lint` | Linter + Suppression-Gate | grün |
-| `make typecheck` | Statische Typprüfung | grün |
-| `make arch-check` | Layering aus ADR-0001 | grün |
-| `make test` | Unit-Tests | grün |
-| `make test-determinism` | LH-QA-02 100 Iter. | grün |
-| `make coverage-gate` | Gesamt-Coverage (bootstrap-aware) | grün, Schwelle 70 %, M2 → 80 % |
-| `make coverage-gate-critical` | Critical-Path-Coverage | **bootstrap-aware mit CO-001** (Index-Layer ausgenommen bis Welle 2 done) |
-| `make test-property` | Property-Based-Suite | **erst nach slice-013** (in-progress) |
-| `make gates` | alle inneren Gates | grün |
-| `make ci` | gates + Replay + Image-Scan | grün |
-| `make fullbuild` | volle Closure | grün, letzter Hash `sha256:abc123…` |
+| `make lint` | Linter + Suppression-Gate | — |
+| `make typecheck` | Statische Typprüfung | — |
+| `make arch-check` | Layering | [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) |
+| `make test` | Unit-Tests | — |
+| `make test-determinism` | 100 Wiederholungen identischer Eingabe | LH-QA-02 |
+| `make coverage-gate` | Gesamt-Coverage, bootstrap-aware | Schwelle 70 %, M2 → 80 % |
+| `make coverage-gate-critical` | Critical-Path-Coverage | bootstrap via [`CO-001`](../docs/plan/carveouts/CO-001-index-coverage.md) bis Welle 2 done |
+| `make gates` | alle inneren Gates | — |
+| `make ci` | gates + Replay + Image-Scan | — |
+| `make fullbuild` | volle Closure | Image-Hash `sha256:abc123…` (Modul 13) |
 
-**Nicht behauptet**, weil nicht vorhanden: `make sbom`, `make
-security-scan` (geplant in welle-4-betrieb).
+**Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates` (keine Status-Spalte hier, siehe [Konventionen §`harness/README.md` als Einstiegspunkt](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt)).
+**Rote Gates:** Begründung im verlinkten `CO-<NNN>` (Bindung-Spalte), Modul 6.
+**Nicht behauptet** (geplant, nicht in Makefile): `make test-property` (Property-Based-Suite, slice-013, in-progress), `make sbom`, `make security-scan` (welle-4-betrieb).
 
 ## Traceability rules
 

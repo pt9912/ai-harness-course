@@ -51,27 +51,35 @@ Was lenkt den Agenten *vor* der Handlung? Pointer, kein Inhalt.
 WICHTIG: Nur Befehle aufzählen, die im Makefile *existieren*.
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge (Modul 12).
 
-Kein Status-Feld in dieser Tabelle:
-- Lauf-Wahrheit pro Commit liegt in CI (Badge/Dashboard), nicht in
-  einer Markdown-Datei vom Rang 9.
-- Strukturell rote Gates (dauerhaft rot mit Begründung) gehören als
-  Carveout nach `docs/plan/carveouts/CO-<NNN>-…`, mit Auflösungs-Trigger
-  und Folge-Slice (Modul 6) — nicht in eine Status-Spalte hier.
+Drei Spalten — kein Lauf-Status:
+- Target:  der Make-Befehl.
+- Vertrag: was prüft das Gate (was wäre verletzt, wenn es rot wird).
+- Bindung: strukturelle Referenzen — Carveout-ID (`CO-<NNN>`),
+  Slice-ID, Schwelle, Image-Hash, ADR-ID. NICHT der Lauf-Status,
+  sondern was das Gate *strukturell trägt*.
+
+Lauf-Wahrheit pro Commit liegt in CI (Badge/Dashboard), nicht hier
+(`harness/README.md` ist Rang 9 in der Source Precedence).
+Strukturell rote Gates (dauerhaft rot) bekommen einen Carveout in
+`docs/plan/carveouts/CO-<NNN>-…` mit Auflösungs-Trigger und Folge-Slice
+(Modul 6); die Bindung-Spalte verweist auf die `CO-<NNN>`-ID, die
+Begründung lebt im Carveout, nicht hier.
 -->
 
-| Target | Was prüft es / Vertrag |
-|---|---|
-| `make lint` | <…> |
-| `make test` | <…> |
-| `make arch-check` | <…> |
-| `make coverage-gate` | <…> (bootstrap-aware, Schwelle X) |
-| `make gates` | alle inneren Gates |
-| `make ci` | gates + extras |
-| `make fullbuild` | volle Closure |
+| Target | Vertrag | Bindung |
+|---|---|---|
+| `make lint` | <was prüft es> | — |
+| `make test` | <…> | — |
+| `make arch-check` | <…> | ADR-<NNN> |
+| `make coverage-gate` | <…>, bootstrap-aware | Schwelle X %, M<n> → Y % |
+| `make coverage-gate-critical` | <…> | bootstrap via `CO-<NNN>` bis <Slice/Welle> |
+| `make gates` | alle inneren Gates | — |
+| `make ci` | gates + extras | — |
+| `make fullbuild` | volle Closure | Image-Hash `sha256:…` (Modul 13) |
 
 **Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates`.
-**Strukturell rote Gates:** als Carveout in
-[`docs/plan/carveouts/`](../docs/plan/carveouts/) dokumentiert, nicht hier.
+**Rote Gates:** Begründung im verlinkten `CO-<NNN>` (siehe Bindung-Spalte), Modul 6.
+**Nicht behauptet** (geplant): `<make-target-1>`, `<make-target-2>` (Welle <n>).
 
 <!-- Domänenspezifische Gates ergänzen, je nach Repo-Klasse: -->
 

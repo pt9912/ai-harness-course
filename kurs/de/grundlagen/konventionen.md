@@ -168,8 +168,17 @@ Mensch zuerst lesen muss. Pflichtgliederung:
 ```
 
 Wichtig: Die Sensors-Tabelle darf keine Befehle behaupten, die es im Repo
-nicht gibt. Wenn `make fullbuild` rot ist, wird das *dokumentiert*, nicht
-versteckt. Halluzinierte Gates sind die häufigste Form von Harness-Lüge.
+nicht gibt. Halluzinierte Gates sind die häufigste Form von Harness-Lüge.
+
+Die Sensors-Tabelle trägt **keinen Lauf-Status** ("grün"/"rot"):
+Lauf-Wahrheit pro Commit lebt in CI (Badges/Dashboard), also in höher
+rangierten Quellen, nicht in `harness/README.md` (Rang 9). Strukturell
+rote Gates werden als Carveout in `docs/plan/carveouts/` dokumentiert
+(Modul 6); die Bindung-Spalte der Tabelle (`Target | Vertrag | Bindung`)
+verweist auf die `CO-<NNN>`-ID, die Begründung lebt im Carveout, nicht
+hier. Damit ist "rot dokumentieren, nicht verstecken" ortsdiszipliniert:
+es geschieht im Carveout-Index, nicht in einer Status-Spalte, die sich
+selbst grünfärben kann.
 
 ## Traceability-Constraint
 
