@@ -10,6 +10,11 @@ für Menschen und AI-Code-Agenten.
 Wenn diese Datei einer kanonischen Quelle widerspricht, gewinnt die
 kanonische Quelle und diese Datei wird angepasst.
 
+Strukturregeln (Verzeichniskonvention, ID-Schemata, Modus-Deklarationen
+pro Sub-Area, Zusatzklassen für Sensors-Bindung) sowie Adaptionen ggü.
+der adoptierten Baseline leben in [`conventions.md`](conventions.md).
+Diese Datei dupliziert sie nicht.
+
 ## Source precedence
 
 | Rang | Datei | Charakter |
@@ -34,6 +39,7 @@ kanonische Quelle und diese Datei wird angepasst.
 | [`../docs/plan/adr/`](../docs/plan/adr/) | 3 ADRs: Layering, Modellwahl, Index-Format |
 | [`../docs/plan/planning/`](../docs/plan/planning/) | aktuelle Slices, Roadmap |
 | [`../AGENTS.md`](../AGENTS.md) | Hard Rules, Workflow |
+| [`conventions.md`](conventions.md) | repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Modus-Deklarationen |
 
 ## Sensors (Feedback-Gates)
 

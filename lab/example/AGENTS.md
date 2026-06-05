@@ -8,6 +8,11 @@ Inhalt.
 **Bei Konflikt zwischen dieser Datei und einer kanonischen Quelle gilt
 die kanonische Quelle.**
 
+Strukturregeln (ID-Schemata, Verzeichniskonvention, Adaptionen ggü.
+Baseline, Modus-Deklarationen pro Sub-Area, Zusatzklassen für
+Sensors-Bindung) leben in
+[`harness/conventions.md`](harness/conventions.md).
+
 ## 1. Kanonische Quellen (Source Precedence)
 
 1. [`spec/lastenheft.md`](spec/lastenheft.md)
