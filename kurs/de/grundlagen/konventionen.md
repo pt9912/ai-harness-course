@@ -101,6 +101,19 @@ Regel: Widerspricht `AGENTS.md` oder `harness/README.md` einer kanonischen
 Quelle, wird `AGENTS.md`/`harness/README.md` angepasst — nie die kanonische
 Quelle. Der Harness folgt der Spec, nicht umgekehrt.
 
+**Universal vs projektabhängig.** *Dass* eine Source Precedence existiert
+und dass bei Konflikt die niedriger rangierte Quelle angepasst wird, ist
+universal (Hard Rule). *Welche* Rangordnung konkret gilt, ist
+projektspezifische Entscheidung — die obige Liste ist eine pragmatische
+Default-Reihenfolge für ein typisches Referenz/Tooling-Repo, kein
+Gesetz. Andere Repo-Klassen können abweichende Rangordnungen begründen:
+ein Safety/Control-Repo kann Hardware-Specs vor Software-Specs ranken;
+ein Policy/Compliance-Repo kann Regulatorik-Anforderungen vor das
+Lastenheft ranken (weil "wir versprechen" durch "wir müssen" begrenzt
+wird). Die konkret getroffene Rangwahl und ihre Begründung gehören in
+den Adaptions-Block des repo-lokalen Konventionsdokuments (Default-Pfad
+`harness/conventions.md`).
+
 ### Spec-Stratifizierung
 
 In reiferen Repos zerfällt `spec/` selbst in mehrere Tiefen mit eigener
@@ -179,6 +192,26 @@ verweist auf die `CO-<NNN>`-ID, die Begründung lebt im Carveout, nicht
 hier. Damit ist "rot dokumentieren, nicht verstecken" ortsdiszipliniert:
 es geschieht im Carveout-Index, nicht in einer Status-Spalte, die sich
 selbst grünfärben kann.
+
+Die Bindung-Spalte trägt vier **kanonische Klassen**:
+
+- **ADR-Bindung** (`ADR-<NNN>`) — Gate setzt eine Architektur-Entscheidung
+  durch.
+- **Carveout-Bindung** (`CO-<NNN>`) — Gate bewusst geschwächt, mit
+  Auflösungs-Trigger und Folge-Slice (Modul 6).
+- **Kalibrierungs-Bindung** (`Schwelle X %, M<n> → Y %`) — bewegliche
+  Eichung mit Meilenstein-Schaltplan.
+- **Reproduzierbarkeits-Bindung** (Image-Hash, Toolchain-Pin) — Gate
+  hängt an bit-identischem Artefakt (Modul 13).
+
+Repos können **weitere Klassen** einführen — etwa Anforderungs-Bindung
+(`LH-…`), Compliance-Bindung (Regulatorik-Artikel) oder
+Modell-Version-Bindung (für KI-Evals). Diese werden im **repo-lokalen
+Konventionsdokument** deklariert (Default-Pfad `harness/conventions.md`,
+Form projektabhängig), damit ein Reviewer sie als legitim erkennt und
+nicht als Tippfehler abtut. Eine Bindung ohne Deklaration ist eine
+stille Setzung — und damit eine Harness-Lüge in derselben Klasse wie
+ein halluziniertes Gate.
 
 ## Traceability-Constraint
 

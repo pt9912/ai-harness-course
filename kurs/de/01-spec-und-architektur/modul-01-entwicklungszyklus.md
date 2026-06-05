@@ -189,7 +189,11 @@ Vorlage:
 [`/lab/templates/harness/README.template.md`](../../../lab/templates/harness/README.template.md).
 Neun Ränge sind ein Maximum — wer mehr braucht, hat
 Mehrfach-Repräsentationen, die in den Schichten 1–3 gebündelt werden
-sollten.
+sollten. Die konkrete Rangordnung selbst ist projektspezifisch
+(Safety/Control- und Policy/Compliance-Repos können abweichen); Wahl
+und Begründung gehören in den Adaptions-Block des repo-lokalen
+Konventionsdokuments (siehe
+[`../grundlagen/konventionen.md#source-precedence`](../grundlagen/konventionen.md#source-precedence)).
 
 **Schritt 4 — Konfliktauflösungs-Klausel daneben setzen.** Eine
 Tabelle allein wirkt nicht; sie braucht den Satz, der ihre Anwendung
