@@ -79,7 +79,10 @@ Ein Agent ohne Plan schreibt Code. Ein Agent mit Plan schreibt das
 ## Minimal Agent Workflow (8 Schritte)
 
 Der Pfad, den jeder Implementation-Agent pro Slice durchläuft — und der
-in `harness/README.md` als Vertrag dokumentiert wird:
+in `harness/README.md` als Vertrag dokumentiert wird. Strukturfragen
+(Bindung-Klassen für die Sensors-Tabelle, Source-Precedence-Begründung,
+Modus pro Sub-Area, Adaptionen ggü. der adoptierten Baseline) leben
+in `harness/conventions.md`:
 
 1. `harness/README.md` lesen.
 2. Relevante kanonische Quelle lesen (Source Precedence beachten).

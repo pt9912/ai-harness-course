@@ -91,8 +91,8 @@ Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
 |---|---|
 | **rudimentär** | Source Precedence existiert nur implizit; AGENTS.md widerspricht der Spec oder beschreibt nicht-existierende Tools. |
 | **funktional** | Source Precedence dokumentiert; AGENTS.md ohne offene Widersprüche; aber `harness/README.md` nennt Befehle, die im Repo nicht existieren, oder dauerhaft rote Gates haben keinen Carveout-Eintrag in `docs/plan/carveouts/`. |
-| **solide** | Source Precedence ist `harness/README.md` voran­gestellt; AGENTS.md beschreibt nur real existierende Konventionen; dauerhaft rote Gates sind als Carveouts dokumentiert (Modul 6) und in der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt. |
-| **exzellent** | Zusätzlich: Doku-Konsistenz-Agent läuft als Drift-Sensor (Modul 14); Spec-Stratifizierung (Lastenheft/Spezifikation/Architektur) mit eigener Precedence ist umgesetzt. |
+| **solide** | Source Precedence ist `harness/README.md` voran­gestellt; AGENTS.md beschreibt nur real existierende Konventionen; dauerhaft rote Gates sind als Carveouts dokumentiert (Modul 6) und in der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt; `harness/conventions.md` existiert mit Baseline-Aussage (`MR-000`) und Modus-Deklaration pro Sub-Area. |
+| **exzellent** | Zusätzlich: Doku-Konsistenz-Agent läuft als Drift-Sensor (Modul 14); Spec-Stratifizierung (Lastenheft/Spezifikation/Architektur) mit eigener Precedence ist umgesetzt; `harness/conventions.md` Adaptions-Block trägt mindestens eine bewusste `MR-<NNN>`-Adaption mit Praxis-Begründung und Auflösungs-Trigger (oder explizit als permanent markiert). |
 
 ### Achse: Reproduzierbarkeit
 

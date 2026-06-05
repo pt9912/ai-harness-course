@@ -71,10 +71,16 @@ rot sein darf, ist es kein Gate, sondern ein Vorschlag.
 ## Hard Rule (Doku-Disziplin)
 
 In `harness/README.md` und in jeder Doku, die Gates aufzählt: keine
-Befehle behaupten, die es nicht gibt. Wenn `make fullbuild` aktuell rot
-ist, wird das dokumentiert (mit Datum und Trigger), nicht ausgelassen
-oder geschönt. Halluzinierte Gates sind die häufigste Form von
-Harness-Lüge — und der Implementation-Agent vertraut ihnen.
+Befehle behaupten, die es nicht gibt. Wenn `make fullbuild` strukturell
+rot ist, wird das als Carveout in `docs/plan/carveouts/CO-<NNN>-…`
+dokumentiert ([Modul 6](../02-planung/modul-06-carveouts.md)) und in
+der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt — nicht
+ausgelassen, nicht geschönt, nicht in einer Status-Spalte versteckt
+(die Sensors-Tabelle trägt keinen Lauf-Status; Lauf-Wahrheit pro Commit
+liegt in CI, siehe
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt)).
+Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
+Implementation-Agent vertraut ihnen.
 
 ## Bootstrap-aware Gates
 

@@ -61,6 +61,16 @@ Die Bewegung von `u-boot` zwischen den Wellen (2026-06: AGENTS.md und
 `harness/README.md` ergänzt) ist selbst Lehrstoff: Harness-Reife ist
 beobachtbar und änderbar, nicht statisch.
 
+Keines der vier Repos führt bisher `harness/conventions.md` (neu im
+Kurs; Default-Ort für repo-lokale Strukturregeln, Adaptionen ggü.
+Baseline und Modus-Deklaration pro Sub-Area — siehe
+[`konventionen.md`](konventionen.md#harnessreadmemd-als-einstiegspunkt)).
+Das ist der nächste sichtbare Reife-Schritt, sobald repo-lokale
+Adaptionen ggü. Kurs-Konvention notwendig werden — und in den meisten
+realen Repos werden sie das früher als gedacht (eigene ID-Präfixe für
+Architektur/Spezifikation, Bootstrap-Modus pro Sub-Area, Compliance-
+Bindung-Klassen).
+
 ## Branchen-Anwendungsanker
 
 Über die drei konkreten Repos hinaus, einige typische Branchen, in denen
