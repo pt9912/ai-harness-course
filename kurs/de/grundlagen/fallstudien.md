@@ -64,7 +64,7 @@ beobachtbar und änderbar, nicht statisch.
 Keines der vier Repos führt bisher `harness/conventions.md` (neu im
 Kurs; Default-Ort für repo-lokale Strukturregeln, Adaptionen ggü.
 Baseline und Modus-Deklaration pro Sub-Area — siehe
-[`konventionen.md`](konventionen.md#harnessreadmemd-als-einstiegspunkt)).
+[`konventionen.md`](konventionen.md#harnessconventionsmd-als-konventionsspeicher)).
 Das ist der nächste sichtbare Reife-Schritt, sobald repo-lokale
 Adaptionen ggü. Kurs-Konvention notwendig werden — und in den meisten
 realen Repos werden sie das früher als gedacht (eigene ID-Präfixe für

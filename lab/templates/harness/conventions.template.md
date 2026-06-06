@@ -71,15 +71,40 @@ oder explizite Aufhebungen via neuen MR.
 - **Datum:** <Datum>
 - **Geltungsbereich:** gesamtes Repo
 - **Adaption:** *keine inhaltlichen Adaptionen ggü. Baseline-Default
-  für Verzeichniskonvention, Source Precedence, Lifecycle,
-  Carveout-Disziplin.*
+  für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin.*
+  (Source-Precedence-Adaptionen werden in separaten `MR-<NNN>`
+  dokumentiert — siehe Beispiel `MR-001` unten, weil das mitkopierte
+  README-Template eine 3-Schichten-Spec-Precedence zeigt.)
 - **Begründung:** Initial-Setzung. Spätere Adaptionen werden als
   `MR-<NNN>` nachgetragen.
 - **Auflösungs-Trigger:** permanent.
 
-<!-- Beispiel-Eintrag für eine konkrete Adaption: -->
+<!-- Beispiel-Eintrag für eine konkrete Adaption — passt zum 3-Schichten-
+     Spec-Default des README-Templates. Anpassen, wenn dein Repo das
+     anders handhabt, oder entfernen, wenn du eine 2-Schichten-Spec-
+     Precedence wählst. -->
 
-### MR-001 — <Titel der Adaption>
+### MR-001 — Source Precedence mit eigener Spezifikations-Schicht
+
+- **Datum:** <Datum>
+- **Geltungsbereich:** `harness/README.md` §Source precedence
+- **Adaption:** Source-Precedence-Tabelle führt `spec/spezifikation.md`
+  als eigenen **Rang 2** zwischen Lastenheft (Rang 1) und Architektur
+  (Rang 3). Der Kurs-Default
+  ([`konventionen.md` §Source Precedence](../../../kurs/de/grundlagen/konventionen.md#source-precedence))
+  setzt zwei Spec-Ränge (`lastenheft` → `architecture`); dieses Repo
+  nutzt drei.
+- **Begründung:** Das Repo verwendet die Spec-Stratifizierung
+  ([`konventionen.md` §Spec-Stratifizierung](../../../kurs/de/grundlagen/konventionen.md#spec-stratifizierung))
+  explizit mit drei Spec-Dateien. Damit die Source-Precedence-Tabelle
+  die ADR-Schärfungs-Regel ("ADR darf Spezifikation schärfen, nicht
+  Lastenheft") strukturell abbildet, muss die Spezifikation als
+  eigener Rang sichtbar sein.
+- **Auflösungs-Trigger:** permanent.
+
+<!-- Weitere konkrete Adaptionen wie folgt: -->
+
+### MR-NNN — <Titel der Adaption>
 
 - **Datum:** <Datum>
 - **Geltungsbereich:** <Dateien / Module / Sub-Areas>
