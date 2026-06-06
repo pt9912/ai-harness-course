@@ -20,6 +20,11 @@ einhalten muss.
 die kanonische Quelle** (Source Precedence — siehe
 `harness/README.md`).
 
+Strukturregeln (ID-Schemata, Verzeichniskonvention, Adaptionen ggü.
+Baseline, Modus-Deklarationen pro Sub-Area, Zusatzklassen für
+Sensors-Bindung) leben in
+[`harness/conventions.md`](harness/conventions.md).
+
 ## 2. Kanonische Quellen (Source Precedence)
 
 In dieser Reihenfolge:

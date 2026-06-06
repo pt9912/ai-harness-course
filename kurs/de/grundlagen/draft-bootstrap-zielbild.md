@@ -273,6 +273,12 @@ diesem Draft nicht weiter operationalisiert, gehört in P4-Lehrtext.
 
 ### Sequenzierung
 
-Empfohlen: **P2 als nächstes** (Template + Worked Example) — nutzt
-dieses Zielbild als Spezifikation, ist material-konkret und mittelgroß.
-P3 und P4 danach mit eigenem Fokus.
+Stand nach Branch `harness-conventions`: **P0–P3.2 sind umgesetzt**
+(siehe Aktionsliste oben mit Commit-Hashes). Offen bleibt nur
+**P4 — Bootstrap-Lehrtext** aus diesem Draft destillieren — eigene
+Session, weil substanziell: mindestens ein neuer Abschnitt in
+`konventionen.md` zum Bootstrap-Entscheidungsrahmen, Erweiterung
+von Modul 1 um einen expliziten Schritt 0 (Bootstrap-Modus-Wahl,
+Baseline-Adoption), Modus-Diskussion (GF/BF) in `fallstudien.md`,
+und ggf. eine eigene Übung in Modul 4 ("Wähle und begründe einen
+Konventionen-Modus für dein Projekt").
