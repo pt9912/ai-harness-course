@@ -42,6 +42,11 @@ besten zu deinem Projekt passt. Pflicht-Strukturen sind:
 - ADRs nach Accepted nicht überschreiben (Hard Rule aus c-hsm-doc).
 - Carveouts brauchen immer Trigger + Folge-Slice.
 - Slices brauchen DoD mit prüfbaren Kriterien.
+- Slices mit mindestens einer in BF oder Hybrid berührten Sub-Area
+  brauchen einen Sub-Area-Modus-Begründungsblock (§8 in
+  `slice.template.md`), pro berührter Sub-Area einen Block; bei
+  reinem GF genügt der Hinweis "alle berührten Sub-Areas GF".
+  Voraussetzung-Wissen: Kurs Modul 5 §Worked Mini-Example.
 
 ## Ergänzungen
 

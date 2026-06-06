@@ -89,17 +89,17 @@ Wird *nach* Abschluss ergänzt. Inhalt:
 
 ## 8. Sub-Area-Modus-Begründung
 
-<!--
-Pro vom Slice berührter Sub-Area ein Block. Pflicht, wenn der Slice
-mindestens eine Sub-Area in BF oder Hybrid berührt; bei reinem GF
-genügt der Hinweis "alle berührten Sub-Areas GF (siehe Kurs
-Modul 5 §Worked Mini-Example)". Optional bei reinem Refactor ohne
-neue Sub-Area-Berührung.
+**Status:** Pflicht-Sektion bei mindestens einer berührten Sub-Area
+in BF oder Hybrid. Bei reinem GF genügt der Hinweis
+*"alle berührten Sub-Areas GF (siehe Kurs Modul 5 §Worked
+Mini-Example)"*. Optional bei reinem Refactor ohne neue
+Sub-Area-Berührung. Die vier Pflichtkriterien (Konventionen-Dichte ·
+Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand)
+stehen in
+[`/kurs/de/02-planung/modul-05-planning-harness.md` §Worked Mini-Example](../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).
 
-Die vier Pflichtkriterien stehen in
-../../../../../kurs/de/02-planung/modul-05-planning-harness.md
-§Worked Mini-Example.
--->
+<!-- Block für jede berührte Sub-Area duplizieren. Format identisch
+mit dem in Modul 5 §Worked Mini-Example abgedruckten Block. -->
 
 ### Sub-Area: <Name>
 
@@ -111,5 +111,3 @@ Die vier Pflichtkriterien stehen in
   Inventur sichtbar machen? bei GF: meist niedrig>
 - **Reconciliation-Aufwand:** <Slice-Schätzung;
   Graduation-/Folge-Slice-Trigger>
-
-<!-- Block für jede weitere berührte Sub-Area duplizieren. -->

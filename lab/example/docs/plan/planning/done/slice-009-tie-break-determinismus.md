@@ -59,3 +59,15 @@ dokumentiert sein" (jetzt auch in `harness/README.md` als Safety-Boundary).
 **Folge-Slice:** keiner notwendig — Eigenschaft ist abgesichert in
 allen vier weiteren Sprachen, wenn diese Welle 1 portieren (Welle 1
 sortiert nach Sprach-Skelett-Roundtrip ab; siehe Roadmap M1).
+
+## 8. Sub-Area-Modus-Begründung
+
+**Status:** alle berührten Sub-Areas GF (siehe
+`harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
+für das DocSearch-Lab als Ganzes). Der Slice hat die `AGENTS.md`-Hard-
+Rule "Tie-Break explizit dokumentiert" als Konventions-Adaption
+gesetzt; das ist eine GF-Bewegung (Doku führt, Code wird gemessen) —
+keine BF/Hybrid-Begründung nötig.
+
+Voraussetzung-Wissen für den Block-Aufbau: Kurs
+[Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).

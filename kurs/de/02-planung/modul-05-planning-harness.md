@@ -93,6 +93,13 @@ Erweiterte Sammlung mit Conceptual-Change-Anker in
 "Login funktioniert, JWT wird ausgegeben, Refresh-Token-Flow läuft,
 Token-Revocation per Admin-Endpoint, Audit-Log auf Login-Versuche."
 
+> **ID-Hinweis:** `SL-014` (und die Sub-Slices `SL-014a/b/c`) sind ein
+> kurs-interner Anker für dieses Worked Example und Modul 9 §Worked
+> Example. Der ID-Raum *im Kurs* ist eigenständig — das DocSearch-
+> Lab-Beispiel in `lab/example/` führt unter `slice-014-ann-suche.md`
+> einen ganz anderen Slice (ANN-Suche). Die numerische Überlappung
+> ist Zufall der Beispielwahl, kein gemeinsamer Slice.
+
 **Diagnose:** zu groß. Anzeichen:
 1. Mehr als drei DoD-Punkte (Faustregel).
 2. Mehrere Schichten betroffen (Adapter + Service + UI + DB-Schema).
@@ -167,8 +174,10 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
   Negativ-Bedingung gegen Direkt-DB-Zugriffe aus dem Adapter.
 - *Phase-Reife:* Phase 4. Konvention steht, Code wird daran gemessen,
   Reviews zitieren `MR-014`.
-- *Evidenz-/Diskrepanz-Risiko:* niedrig. Ein voriger Slice hat einen
-  Lint-Check eingeführt, der die Pattern-Konformität automatisch prüft.
+- *Evidenz-/Diskrepanz-Risiko:* niedrig. Das `make lint-conventions`-
+  Target prüft die Pattern-Konformität automatisch und ist als Sensor
+  in `harness/README.md` §Sensors gelistet (Sensor-Zeile zitiert
+  `MR-014`).
 - *Reconciliation-Aufwand:* keiner. Kein Folge-Slice.
 - **Modus: GF.**
 
@@ -195,18 +204,25 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
 **Sub-Area 3 — Audit-Logging (faded scaffolding, Hybrid — du
 ergänzt die letzten zwei Kriterien):**
 
-- *Konventionen-Dichte:* mittel. `harness/conventions.md` führt `MR-008`
-  *Audit-Log-Pflicht für Auth-Endpunkte* als abstrakten Pflicht-Anker
-  ("jeder Login-Versuch muss ein Audit-Event erzeugen"), aber kein
-  konkretes Event-Schema. Code in `services/audit/` zeigt zwei
-  unterschiedliche Event-Formate aus früheren Slices.
-- *Phase-Reife:* Phase 3 — Sektion versprochen (Pflicht-Anker steht),
-  Code partiell vorhanden, Format-Standard und Test-Anker fehlen
-  (Matrix: gemischter Bestand zwischen GF *"Sektionen versprochen,
-  Code folgt"* und BF *"Sektionen dokumentiert, andere unentdeckt"*).
+- *Konventionen-Dichte:* mittel. `harness/conventions.md` führt im
+  Adaptions-Block `MR-008` *Audit-Log-Pflicht für Auth-Endpunkte* als
+  abstrakte Pflicht-Adaption ("jeder Login-Versuch muss ein
+  Audit-Event erzeugen"), aber kein konkretes Event-Schema. Code in
+  `services/audit/` zeigt zwei unterschiedliche Event-Formate aus
+  früheren Slices.
+- *Phase-Reife:* Phase 3 (GF-Lesart aus der Matrix: *"Sektionen
+  versprochen, Code folgt"* — die Doku verspricht eine Audit-Pflicht,
+  der Code folgt erst teilweise). Die Hybrid-Diagnose entsteht **nicht
+  aus der Phase**, sondern beim Modus: die Doku führt für die
+  Pflicht-Aussage (GF-Richtung), aber für den Format-Standard zeigt
+  der Code-Bestand Divergenz ohne Doku-Korrespondenz (BF-Symptom).
+  Phase und Modus sind orthogonal — eine Sub-Area sitzt in genau
+  einer Phase-Zelle, der Modus ergibt sich aus der Trigger-Richtung
+  pro Kriterium.
 - *Evidenz-/Diskrepanz-Risiko:* **du**.
 - *Reconciliation-Aufwand:* **du**.
-- **Modus: Hybrid (GF im Pflicht-Anker, BF im Format-Standard).**
+- **Modus: Hybrid (GF in der Pflicht-Adaption `MR-008`, BF im
+  fehlenden Format-Standard).**
 
 **Sub-Area 4 — Spec-Schreibung (knapp, GF — kein voller Block):**
 `spec/lastenheft.md` §`LH-FA-AUTH-001` trägt drei Akzeptanzkriterien;
@@ -216,19 +232,23 @@ sind Konventionen-Dichte hoch, Phase 4, Risiko niedrig, kein
 Reconciliation — **Modus: GF.** Hier reicht ein Verweis; die volle
 Begründungs-Tiefe demonstrieren Sub-Areas 1–3.
 
-**Template für den Begründungsblock** (in
+**Template für den Begründungsblock** — kanonisch in
 [§8 Sub-Area-Modus-Begründung](../../../lab/templates/docs/plan/planning/slice.template.md)
-des Slice-Plan-Templates einfügen — die Sektion liegt im
-kanonischen Slice-Template, nicht inline im Lehrmodul):
+des Slice-Plan-Templates; hier zum Lesen abgedruckt, **byte-identisch
+mit dem dortigen Format**, damit Kopieren von hier oder vom Template
+denselben Block ergibt:
 
-```
+```markdown
 ### Sub-Area: <Name>
 
-- Modus: <GF | BF | Hybrid>
-- Konventionen-Dichte: <Beleg aus harness/conventions.md, Adaptions-Block oder Code>
-- Phase-Reife: <Phase 0–5 mit Begründung gegen die Phase × Modus-Matrix>
-- Evidenz-/Diskrepanz-Risiko: <bei BF/Hybrid: was kann die Inventur sichtbar machen?>
-- Reconciliation-Aufwand: <Slice-Schätzung; Graduation-/Folge-Slice-Trigger>
+- **Modus:** GF | BF | Hybrid
+- **Konventionen-Dichte:** <Beleg aus `harness/conventions.md`,
+  Adaptions-Block oder Code>
+- **Phase-Reife:** Phase 0–5 <Begründung gegen die Phase × Modus-Matrix>
+- **Evidenz-/Diskrepanz-Risiko:** <bei BF/Hybrid: was kann die
+  Inventur sichtbar machen? bei GF: meist niedrig>
+- **Reconciliation-Aufwand:** <Slice-Schätzung;
+  Graduation-/Folge-Slice-Trigger>
 ```
 
 Pro berührter Sub-Area einen Block in §8 des Slice-Plans. So läuft die
@@ -245,12 +265,12 @@ Closure-Notiz prüfbar.
 ## Reflexion
 
 Vier Standardfragen aus [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
-nach dem Slice-Schnitt-Versuch und der Lifecycle-Bewegung.
-Modul-spezifische Trigger:
+nach dem Slice-Schnitt-Versuch, der Lifecycle-Bewegung und der
+Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 
-- **Beobachtung:** Wie groß war dein erster Schnitt? Welche Schicht hat den Zombie-Slice erzeugt? Welcher Trigger war unscharf?
-- **2×2-Quadrant:** Größen-Diagnose ist meist *inferential* (Planner-Skill), DoD-Pflichtfeld könnte aber *computational feedforward* sein.
-- **Steering-Loop:** DoD-Punkte-Maximum als Skill? Lifecycle-Verzeichnis-Pflicht als CI-Check?
+- **Beobachtung:** Wie groß war dein erster Schnitt? Welche Schicht hat den Zombie-Slice erzeugt? Welcher Trigger war unscharf? **Welche Sub-Area war beim Modus-Begründungsblock am schwersten zu bewerten — und woran lag das (Konventionen-Dichte unklar? Phase-Reife strittig? Trigger ohne Heimat?)?**
+- **2×2-Quadrant:** Größen-Diagnose ist meist *inferential* (Planner-Skill), DoD-Pflichtfeld könnte aber *computational feedforward* sein. Modus-Begründung pro Sub-Area ist klar *inferential* — die Pflichtkriterien strukturieren die Beobachtung, ersetzen sie nicht.
+- **Steering-Loop:** DoD-Punkte-Maximum als Skill? Lifecycle-Verzeichnis-Pflicht als CI-Check? **§8-Pflicht-Sektion bei BF/Hybrid als Closure-Sensor (PR-Check: "wenn berührte Sub-Area BF/Hybrid und §8 leer, blockieren")?**
 - **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Slice = Ticket = Feature", "Wenn ein Slice in done/ ist, ist er fertig", "Ein Slice hat einen Bootstrap-Modus", "Wenn der Slice klein ist, ist die berührte Sub-Area GF").
 
 ## Selbstcheck

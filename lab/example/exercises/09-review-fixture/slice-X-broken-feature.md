@@ -48,3 +48,16 @@ weil Cache eh nur 1 Minute TTL hat.
 ## 7. Closure-Notiz
 
 <!-- Erst nach Abschluss. -->
+
+## 8. Sub-Area-Modus-Begründung
+
+**Status:** alle berührten Sub-Areas GF (siehe
+`harness/conventions.md` §Modus-Deklaration pro Sub-Area).
+
+<!-- §8 ist in dieser Fixture in der Minimal-GF-Form gehalten. Die
+drei eingebauten Fehler des Slice betreffen Architektur, Carveout-
+Pflicht und Spec-Anker (siehe Hinweis am Dateianfang) — §8 ist nicht
+einer davon. Ein scharfer Reviewer wird allerdings bemerken, dass der
+"alle GF"-Status zur eigentlichen Architektur-Bruchstelle des Slice
+inkonsistent ist; diese Beobachtung ist Bonus, nicht Pflicht-Fund. -->
+

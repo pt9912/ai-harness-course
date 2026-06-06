@@ -250,6 +250,12 @@ enthält keinen direkten HTTP-Client (folgt ADR-7).
 Akzeptanzkriterien). ADR-0007 (Service-Adapter-Layer). *Nicht* gelesen:
 ältere ADRs, irrelevante Skills — siehe oben "Kontext-Verdichtung".
 
+**Auch hier gelesen, falls vorhanden:** §8 *Sub-Area-Modus-Begründung*
+des Slice-Plans (siehe [Modul 5 §Worked Mini-Example](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)).
+Die BF/Hybrid-Einträge dort steuern, welche Sub-Areas Inventur-Beweis
+in Schritt 5 brauchen (z. B. Audit-Logging als Hybrid →
+Format-Standard-Test gehört in die Sensor-Wahl, nicht in Out-of-Scope).
+
 **Schritt 3 — Requirement-/ADR-IDs identifizieren.**
 `LH-FA-AUTH-001`, `ADR-0007`. Diese zwei IDs werden in den
 Make-Target-Kommentar (für `make verify`) und in die Commit-Message

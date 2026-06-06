@@ -51,3 +51,14 @@ auch bei > 100k Index-Einträgen zu halten.
 ## 7. Closure-Notiz
 
 <!-- Erst nach Abschluss füllen. -->
+
+## 8. Sub-Area-Modus-Begründung
+
+**Status:** alle berührten Sub-Areas GF (siehe
+`harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
+für das DocSearch-Lab als Ganzes). Spec-Schreibung (LH-FA-12) und
+Architektur (ADR-0004 in Outline) führen, Code folgt — kein
+Reconciliation, keine BF/Hybrid-Begründung nötig.
+
+Voraussetzung-Wissen für den Block-Aufbau: Kurs
+[Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).

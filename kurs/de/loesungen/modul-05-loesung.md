@@ -58,21 +58,27 @@ steht im Worked Mini-Example in Modul 5:
   `harness/conventions.md` (Skelett mit Inventur-Auftrag); Phase 1 BF;
   Reconciliation 1 Slice (`SL-RC-014t` + `MR-002`); Graduation-Trigger:
   Sync-Trigger setzt `MR-002` in `harness/README.md` und `AGENTS.md`.
-- *Audit-Logging:* **Hybrid.** `MR-008` als Pflicht-Anker steht
-  (GF-Anteil), kein Format-Standard im Code (BF-Anteil); Phase 3
-  partiell; Reconciliation 0.5 Slice; Graduation-Trigger:
-  Cross-Reference zwischen `MR-008` und einer Audit-Sensor-Sektion.
+- *Audit-Logging:* **Hybrid.** Konventionen-Dichte mittel (Pflicht-
+  Adaption `MR-008` steht, Format-Standard fehlt im Code); Phase 3
+  GF-Lesart. **Evidenz-/Diskrepanz-Risiko und Reconciliation-Aufwand
+  sind die zwei vom Lerner in der Übung selbst zu füllenden Felder —
+  Mustertext-Antworten im §Übungshinweise-Block weiter unten.** Die
+  Sammel-Antwort verrät hier bewusst keinen vollständigen
+  Begründungsblock, damit der Faded-Scaffolding-Lerneffekt erhalten
+  bleibt.
 - *Spec-Schreibung:* **GF.** `LH-FA-AUTH-001` mit drei
   Akzeptanzkriterien + `ADR-0007` (Service-Adapter-Layer); Phase 4;
   Tests werden in Modul 9 §Worked Example gegen `LH-FA-AUTH-001`
   annotiert; kein Reconciliation.
 
-Faustregel zum eigenen Slice: Wenn ein Slice mehrere Sub-Areas berührt
-und *alle* in demselben Modus stehen, ist meist die Slice-Größe
-falsch — entweder zu schmal (ein Refactor, der nur eine Sub-Area
-anfasst) oder zu breit (ein Aggregat-Slice, der mehrere atomare Slices
-verdeckt). Heterogenität der Modi je Sub-Area ist das Normalbild eines
-gut geschnittenen Slice.
+Beobachtung zum eigenen Slice: Heterogenität der Modi je Sub-Area
+ist häufig, aber **kein Pflichtsignal** — Slice-Größe und
+Sub-Area-Modus sind orthogonale Achsen (siehe Distractor-Klärung im
+§Übungshinweise-Block). Ein korrekt kleiner Maintenance-Slice kann
+ausschließlich GF-Sub-Areas berühren; ein zu breit geschnittener
+Aggregat-Slice kann zufällig dieselbe Modus-Mischung haben wie ein
+gut geschnittener. Der Modus-Begründungsblock prüft nicht den
+Schnitt, sondern die Bewertungsleistung.
 
 ## Übungshinweise
 
@@ -122,23 +128,24 @@ mit Beispiel-Slice `SL-014a`.
 **Hybrid-Sub-Area `Audit-Logging` — Mustertext für die zwei vom
 Lerner zu ergänzenden Kriterien:**
 
-- *Evidenz-/Diskrepanz-Risiko:* mittel. Pflicht-Anker `MR-008` sagt
-  *"jeder Login-Versuch muss ein Audit-Event erzeugen"*; im Code
-  (`services/audit/`) liegen aber zwei unterschiedliche Event-Formate
-  aus früheren Slices (z. B. flaches JSON vs. structured-key-value).
-  Inventur kann sichtbar machen, dass die Tests nicht gegen ein
-  Schema, sondern gegen das je vorgefundene Format prüfen — Drift
-  passiert lautlos, sobald ein dritter Slice ein drittes Format
-  einführt.
-- *Reconciliation-Aufwand:* ≈ 0.5 Slice. `harness/conventions.md`
-  `MR-008` um konkretes Event-Schema ergänzen (Pflicht-Felder,
-  Format-Lock); bestehende `services/audit/`-Producer auf das
-  Schema heben (oder als Carveout mit Auflösungs-Trigger
-  dokumentieren). Graduation-Trigger: **Cross-Reference-Trigger**
-  zwischen `MR-008` und einer Audit-Sensor-Sektion in
-  `harness/conventions.md` §Sensors; sobald der Cross-Reference steht
-  und mindestens ein Test das Schema validiert, schaltet
-  `Audit-Logging` von Hybrid Richtung GF.
+- *Evidenz-/Diskrepanz-Risiko:* mittel. Die Pflicht-Adaption `MR-008`
+  in `harness/conventions.md` sagt *"jeder Login-Versuch muss ein
+  Audit-Event erzeugen"*; im Code (`services/audit/`) liegen aber
+  zwei unterschiedliche Event-Formate aus früheren Slices (z. B.
+  flaches JSON vs. structured-key-value). Inventur kann sichtbar
+  machen, dass die Tests nicht gegen ein Schema, sondern gegen das je
+  vorgefundene Format prüfen — Drift passiert lautlos, sobald ein
+  dritter Slice ein drittes Format einführt.
+- *Reconciliation-Aufwand:* ≈ 0.5 Slice. `MR-008` in
+  `harness/conventions.md` um konkretes Event-Schema ergänzen
+  (Pflicht-Felder, Format-Lock); bestehende
+  `services/audit/`-Producer auf das Schema heben (oder als Carveout
+  mit Auflösungs-Trigger dokumentieren). Graduation-Trigger:
+  **Sync-Trigger** — eine Audit-Sensor-Zeile in `harness/README.md`
+  §Sensors, die auf `MR-008` zeigt (Pattern wie Sub-Area 2:
+  Konventions-Adaption in `conventions.md` → Pointer in `README.md`).
+  Sobald der Sync steht und mindestens ein Test das Schema validiert,
+  schaltet `Audit-Logging` von Hybrid Richtung GF.
 
 **Drei Anker für die Bewertung in §8 des Slice-Plans:**
 

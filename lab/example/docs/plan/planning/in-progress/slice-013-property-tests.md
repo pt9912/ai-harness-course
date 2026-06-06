@@ -49,3 +49,15 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 ## 7. Closure-Notiz
 
 <!-- Erst nach Abschluss füllen. -->
+
+## 8. Sub-Area-Modus-Begründung
+
+**Status:** alle berührten Sub-Areas GF (siehe
+`harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
+für das DocSearch-Lab als Ganzes). Spec-Anker LH-QA-02 führt
+(Determinismus-Anforderung), Code folgt — Test-Infrastruktur (`FsCheck`-
+Adaption) hat zwar Adaptions-Aufwand, aber keinen Inventur-Auftrag
+(es wird neu gebaut, nichts retrofittet).
+
+Voraussetzung-Wissen für den Block-Aufbau: Kurs
+[Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).

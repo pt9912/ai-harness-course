@@ -247,8 +247,10 @@ wiederholt.
   [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand).
 - Lernervorstellungen für Conceptual-Change-Reflexion:
   [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md).
-- Modus-*Wahl* als Folge-Übung (P6 Modul-4-Slice — noch nicht in
-  Modul 4 vorhanden): [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harness.md).
+- Modus-*Wahl* als Folge-Übung (Diagnose aus Modul 2 →
+  Begründungs-Pflicht pro Sub-Area im nächsten Slice-Plan):
+  [Modul 5 §Worked Mini-Example "Bootstrap-Modus pro Sub-Area für einen Slice begründen"](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
+  mit zugehöriger Übung in §Übungen.
 
 - Vorherige Lösung: [Modul 1](modul-01-loesung.md)
 - Nächste Lösung: [Modul 3](modul-03-loesung.md)
