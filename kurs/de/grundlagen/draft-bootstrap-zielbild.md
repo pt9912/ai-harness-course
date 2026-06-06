@@ -6,6 +6,15 @@
 > eingearbeitet als P4-Aktion (Bootstrap-Lehrtext in `konventionen.md`
 > und ggf. Modul-1-Erweiterung).
 >
+> **Lebenszyklus:** Diese Datei existiert *nur bis P4 abgeschlossen ist*.
+> Danach wird der Inhalt in die kanonischen Stellen destilliert
+> (`konventionen.md` §Bootstrap, Modul 1 Schritt-0, `fallstudien.md`
+> §GF/BF-Modi, ggf. Modul-4-Übung) und diese Datei gelöscht.
+> Externe Verweise auf diese Datei (z. B. aus `lab/templates/README.md`)
+> wandern bei der Löschung zur destillierten Stelle, nicht ins Leere.
+> Zwei Quellen derselben Information sind das Drift-Risiko, gegen das
+> der Branch insgesamt angeht — diese Datei macht hier keine Ausnahme.
+>
 > **Lesehilfe:** Diese Datei trägt drei Sichten — (1) das erweiterte
 > Zielbild als Block-System, (2) zwei Bootstrap-Walkthroughs (Greenfield
 > und Brownfield) als Schritt-Tabellen, (3) Schnittstellen zu
