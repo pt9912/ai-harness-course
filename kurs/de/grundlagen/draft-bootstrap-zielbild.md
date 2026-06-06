@@ -270,15 +270,3 @@ diesem Draft nicht weiter operationalisiert, gehört in P4-Lehrtext.
   oder als eigene Modul-6.5-Sektion. — P4-Lehrtext.
 - **Phase × Modus + Trigger-Klassen** als neues Lehrkonzept — gehört
   ins P4-Lehrtext oder eigenes Bootstrap-Modul.
-
-### Sequenzierung
-
-Stand nach Branch `harness-conventions`: **P0–P3.2 sind umgesetzt**
-(siehe Aktionsliste oben mit Commit-Hashes). Offen bleibt nur
-**P4 — Bootstrap-Lehrtext** aus diesem Draft destillieren — eigene
-Session, weil substanziell: mindestens ein neuer Abschnitt in
-`konventionen.md` zum Bootstrap-Entscheidungsrahmen, Erweiterung
-von Modul 1 um einen expliziten Schritt 0 (Bootstrap-Modus-Wahl,
-Baseline-Adoption), Modus-Diskussion (GF/BF) in `fallstudien.md`,
-und ggf. eine eigene Übung in Modul 4 ("Wähle und begründe einen
-Konventionen-Modus für dein Projekt").
