@@ -225,15 +225,14 @@ wiederholt.
   Klassifikation unprüfbar. Maßstab für *solide*: pro Zeile ein
   Argument, das das Trigger-Merkmal benennt (Pointer vs. Promotion
   vs. wechselseitige Verlinkung vs. Phase-Übergang).
-- **Phasen-Karte mit nur einer oder zwei Phase-Stufen** (Übung 3).
-  Wer alle Sektionen auf Phase 3 *oder* Phase 4 setzt, hat die
-  Heterogenität verfehlt, die das Lehr-Ergebnis trägt. Saubere
-  Karten zeigen meist drei bis fünf der sechs Stufen.
-- **Phasen-Karte ohne Phase 0** (Übung 3). Phase 0 ("Datei existiert
-  nicht") als legitime Reife übersehen — Lerner notieren nur
-  Phase 1+ und lassen "existiert nicht" als Defekt unbenannt.
-  Phase 0 ist gerade in BF-Sub-Areas mit Inventur-Auftrag ein
-  legitimer Befund, kein Versagen.
+- **Phasen-Karte ohne Heterogenität** (Übung 3). Zwei Symptome:
+  (a) alle Sektionen auf einer oder zwei Stufen (typisch: alle auf
+  Phase 3 oder 4) — die Heterogenität verfehlt, die das Lehr-Ergebnis
+  trägt; (b) Phase 0 systematisch ausgeklammert — *"Datei existiert
+  nicht"* als legitime Reife übersehen, obwohl gerade in BF-Sub-Areas
+  mit Inventur-Auftrag ein gültiger Befund. Saubere Karten zeigen
+  meist drei bis fünf der sechs Stufen *inklusive* Phase 0 als
+  möglichen Wert.
 - **Konvictions-Check vergessen am Modul-Ende.** Wer §Vorab vor der
   Lehre nicht notiert hat, kann am Modul-Ende keine Verschiebung
   benennen. Konsequenz: Selbstcheck-Frage 5 wird inhaltsleer.

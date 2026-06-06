@@ -1,6 +1,6 @@
 # Modul 2 — Harness-Bootstrap
 
-> **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum:
+> **Aufwand:** ca. 120 Min Lesen · 90 Min Übung. Spiralcurriculum:
 > *Harness-Bootstrap*, *GF/BF-Modus* und *Phase-Reife* sind dir aus
 > [Modul 1 Mini-Glossar](modul-01-entwicklungszyklus.md#mini-glossar-für-dieses-modul)
 > dem Namen nach bekannt — hier werden sie zum Arbeitswerkzeug.
@@ -303,9 +303,54 @@ BF-Diskrepanz-Auslöse-Variante.
 
 **Anmerkung zur Tabellen-Splittung.** Die Setup-Phase (0–4) etabliert
 *was wo lebt*; die Inhalts-Phase (5–8) füllt mit *normativem Inhalt*.
-Trigger entstehen erst in der Inhalts-Phase, weil dann Bezüge zwischen
-Dokumenten und ADRs notwendig werden. Die Tabellen-Trennung macht
-das kognitiv lesbar — die Phasen verschwimmen sonst.
+Trigger entstehen ab Schritt 3 (Konventionen-Adoption); die Setup-Phase
+legt die *Quellen* an, die Inhalts-Phase erzeugt die *Folge-Bezüge*
+zwischen Dokumenten und ADRs. Die Tabellen-Trennung macht das
+kognitiv lesbar — die Phasen verschwimmen sonst.
+
+### Wie sehen T1 und T2 konkret aus?
+
+Schritt 3 ist die erste Stelle, an der Trigger entstehen — Lerner
+arbeiten danach oft mit der abstrakten Aussage *"T1 = Pointer in
+harness/README.md auf conventions.md"*, ohne ein Bild davon zu haben,
+wie der Pointer im Markdown aussieht. Drei kurze Code-Blöcke machen
+das konkret:
+
+**Schritt 3 — neu angelegte `harness/conventions.md`** (Phase 0 → 1):
+
+```markdown
+# Konventionen — docsearch
+
+## Adaptions-Block
+
+MR-000: Baseline = ai-harness-course/0.4
+MR-001: Spec-Stratifizierung mit ARC-*/SPEC-*/LH-* (Adaption)
+```
+
+**T1 — Pointer in `harness/README.md`** (existierende Sektion ergänzen):
+
+```markdown
+<!-- harness/README.md, Sektion "Konventionen" -->
+Strukturregeln und Adaptionen siehe [`conventions.md`](conventions.md).
+```
+
+**T2 — Pointer in `AGENTS.md`** (Source-Precedence-Liste ergänzen):
+
+```markdown
+<!-- AGENTS.md §Source Precedence -->
+1. spec/lastenheft.md
+2. harness/conventions.md      <!-- neu ergänzt, T2 -->
+3. docs/plan/adr/*.md
+...
+```
+
+Die zwei Pointer sind das, was die abstrakte Trigger-Klasse *Sync*
+konkret macht: sobald `conventions.md` existiert, müssen die zwei
+Dokumente, die *auf* `conventions.md` verweisen, einen entsprechenden
+Eintrag bekommen. Wer den Eintrag vergisst, hat einen klassischen
+**Sync-Drift** — der Doku-Konsistenz-Agent
+([Modul 15 §Observability](../05-betrieb/modul-15-observability.md))
+findet das später als Inkonsistenz.
 
 ## Worked Example 2: Brownfield-Bootstrap mit Discovery und Reconciliation
 
@@ -431,9 +476,10 @@ Vorlage:
 *Mindestens drei Sub-Areas befüllen.* Pro Zeile:
 
 1. **Modus** — GF, BF oder Hybrid.
-2. **Beobachtungs-Indiz** — konkretes Indiz (z. B. *"AGENTS.md
-   existiert seit drei Monaten, aber Tests-Verzeichnis verweist
-   immer noch auf alten Pfad"* → BF in *Test-Infrastruktur*).
+2. **Beobachtungs-Indiz** — konkretes Indiz (z. B. *"Tests-Verzeichnis
+   nutzt strukturell ein eigenes Pfadnaming-Schema, das in keiner
+   Konventions-Datei dokumentiert ist — Code-Pattern statt
+   Doku-Pattern"* → BF in *Test-Infrastruktur*).
 3. **Unsicherheit** — was du nachschlagen musst, um die Wahl
    abschließend zu treffen.
 
@@ -500,10 +546,14 @@ Verwende die vier Standardfragen aus
 nach den Übungen.
 
 *Hinweis zur Vorlage:* Frage 2 ("Welche Harness-Lücke war Ursache?")
-setzt einen produzierten Fehler voraus. Modul 2 hat Diagnose-Übungen,
-keine Fehler-Provokation — lies Frage 2 in diesem Modul als *"Welche
+und Frage 3 ("Welche Steering-Loop-Aktion folgt?") setzen einen
+produzierten Fehler voraus. Modul 2 hat Diagnose-Übungen, keine
+Fehler-Provokation — lies Frage 2 in diesem Modul als *"Welche
 Sub-Area-Annahme war ungeprüft?"* (z. B. *"ich habe Konventionen als
-GF angenommen, ohne den Adaptions-Block zu lesen"*).
+GF angenommen, ohne den Adaptions-Block zu lesen"*) und Frage 3 als
+*"Welche Klassifikations-Verfeinerung folgt aus der Diagnose?"* (z. B.
+*"Sub-Area 'Test-Infrastruktur' weiter aufsplitten in 'Unit-Tests'
+und 'Property-Based-Sensors', weil sie unterschiedliche Modi tragen"*).
 
 Modul-spezifische Trigger:
 

@@ -53,8 +53,10 @@ Iteration.
 - "Wer im Greenfield arbeitet, kann auf Trigger-Klassen verzichten." — Modul 2 (FV3)
 - "Brownfield ist eine Notlage, die man möglichst schnell überwindet." — Modul 2 (FV4)
 - "Trigger-Klassen sind Bürokratie-Overhead." — Modul 2 (FV3-Variante;
-  zielt nicht auf "GF braucht keine Trigger", sondern auf "auch in GF nur
-  Aufwand").
+  zielt nicht auf "GF braucht keine Trigger", sondern auf "auch in GF
+  nur Aufwand"). Modul 2 §Vorab-Frage 3 zielt explizit auf diese
+  Variante, weil sie die häufigste implizite Annahme bei
+  GF-erfahrenen Lernenden ist.
 
 ### Über Spec und Anforderungen (Modul 3)
 
