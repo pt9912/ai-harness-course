@@ -107,8 +107,7 @@ Nach diesem Modul kannst du:
   Konventionen-Iteration.
 * BF-Walkthrough: Inventur, Diskrepanz-Schock, Reconciliation-Plan,
   Graduation-Trigger.
-* Drei Anzeichen für einen Modus-Wechsel im laufenden Betrieb (siehe
-  §Wann wechselt der Modus? unten).
+* Drei Anzeichen für einen Modus-Wechsel im laufenden Betrieb.
 
 ## Harness-Einordnung
 
@@ -149,8 +148,8 @@ Antwort auf jede dieser drei Fragen.
    Modus?"*
 2. *"Wenn ein Repo in einer Sub-Area Greenfield ist, gilt das dann
    für das ganze Repo?"*
-3. *"Brauchst du Trigger-Klassen überhaupt, wenn du sauber im
-   Greenfield arbeitest — oder nur in Brownfield-Notlagen?"*
+3. *"Brauchst du Trigger-Klassen, wenn du sauber im Greenfield
+   arbeitest, oder erst im Brownfield?"*
 
 Lass die Notiz neben dem Modul liegen. Am Modul-Ende prüft der
 Selbstcheck genau diese drei Punkte — und vergleicht mit der scharfen
@@ -173,29 +172,29 @@ später in [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harnes
 Im laufenden Betrieb verändern sich Sub-Areas zwischen den Modi. Drei
 beobachtbare Anzeichen, an denen sich ein Modus-Wechsel ankündigt:
 
-1. **Diskrepanz-Häufung ändert sich.** Wenn der Reconciliation-Backlog
-   einer BF-Sub-Area über mehrere Slices schrumpft und neue Inventur-
-   Schritte keine Diskrepanzen mehr melden, nähert sich die Sub-Area
-   der **Graduation zu GF**. Umgekehrt: wenn in einer als GF gemeldeten
-   Sub-Area plötzlich Diskrepanzen aufpoppen (Tests, die ohne
-   Spec-Anker stehen), driftet sie zurück Richtung BF.
+1. **Diskrepanz-Häufung ändert sich** (Indikator in beide Richtungen):
+   - *BF → GF Graduation:* der Reconciliation-Backlog einer
+     BF-Sub-Area schrumpft über mehrere Slices, neue Inventur-
+     Schritte melden keine Diskrepanzen mehr.
+   - *GF → BF Drift:* in einer als GF gemeldeten Sub-Area werden
+     plötzlich Diskrepanzen sichtbar (Tests, die ohne Spec-Anker
+     stehen; ADRs, die Code-Verhalten nicht abdecken).
 2. **Test-Bestand übertrifft Spec-Anker.** Wenn das Test-Bestand
    strukturell mehr prüft als die Spec behauptet (z. B. Edge-Case-
-   Tests ohne `LH-*`-ID), ist die Sub-Area de facto in BF gedriftet —
-   der Code "weiß" mehr als die Doku. Symptom: bei jeder Code-Änderung
-   muss die Spec nachgezogen werden, statt umgekehrt.
-3. **Wiederkehrende Reviewer-Findings.** Wenn Reviewer dieselbe
-   Findings-Klasse über mehrere Slices melden, ist eine **Konvention
-   im Entstehen** — die Sub-Area bewegt sich von Phase 3 (partiell)
-   nach Phase 4 (kohärent) im selben Modus. Die Bewegung ist kein
-   Modus-Wechsel, das Lesemuster aber identisch: Beobachtung →
-   Konvention → Anker setzen.
+   Tests ohne `LH-*`-ID), ist die Sub-Area de facto **von GF nach BF
+   gedriftet** — der Code "weiß" mehr als die Doku. Symptom: bei
+   jeder Code-Änderung muss die Spec nachgezogen werden, statt
+   umgekehrt.
+3. **Reviewer-Findings ziehen die Spec hinterher.** Wenn Reviewer
+   wiederholt verlangen, die Spec *nach* der Code-Änderung
+   nachzuziehen (statt umgekehrt), ist die betroffene Sub-Area
+   **von GF nach BF gedriftet** — die Reviewer-Findings sind der
+   Sensor, der diese Drift sichtbar macht. Symptom: die Spec wird
+   zunehmend mit "wie schon implementiert"-Halbsätzen begründet
+   statt mit echten Anforderungs-Aussagen.
 
-Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose.
-§Reflexion fragt am Modul-Ende metakognitiv danach, in welcher
-Sub-Area du *gerade jetzt* einen solchen Wechsel beobachtest — die
-hier gelisteten Indizien sind das Werkzeug, um diese Frage konkret
-zu beantworten.
+Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose
+und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
 
 ## Typische Fehlvorstellungen
 

@@ -4,7 +4,7 @@ Zugehöriges Modul: [Modul 2 — Harness-Bootstrap](../01-spec-und-architektur/m
 
 ## Selbstcheck-Antworten
 
-### (Verstehen) Was unterscheidet GF-Modus von BF-Modus? Warum gilt der Modus *pro Sub-Area* und nicht pro Repo?
+### (Verstehen, durch Übung 1) Was unterscheidet GF-Modus von BF-Modus? Warum gilt der Modus *pro Sub-Area* und nicht pro Repo?
 
 - **GF (Greenfield):** Doku führt, Code folgt. Die Konvention wird
   *behauptet* (Spec, ADR, `harness/conventions.md`), bevor Code sie
@@ -28,7 +28,7 @@ Die vier Fallstudien-Repos in
 sind explizites Beleg: alle vier sind in BF, aber mit *unterschiedlich
 weit fortgeschrittener Sub-Area-Inventur*.
 
-### (Erinnern) Welche vier Trigger-Klassen gibt es? Nenne pro Klasse ein Beispiel aus den Worked Examples.
+### (Verstehen, Vorstufe für Übung 2) Welche vier Trigger-Klassen gibt es? Nenne pro Klasse ein Beispiel aus den Worked Examples.
 
 Vier Klassen aus
 [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen):
@@ -59,7 +59,7 @@ BF-typische Auslöse-Variante von Sync. Pointe für *exzellent*:
 genau diese Auslöse-Variante erklärt, warum BF-Repos *mehr* Sync-
 Trigger pro Welle produzieren als GF-Repos.
 
-### (Analysieren) Welcher Trigger in WE2 macht den BF-Modus-Übergang sichtbar — und warum gerade dieser?
+### (Analysieren, durch Übung 2) Welcher Trigger in WE2 macht den BF-Modus-Übergang sichtbar — und warum gerade dieser?
 
 **T3 (Sync-Trigger in BF-Diskrepanz-Auslöse-Variante)** in Schritt 5
 (Sensors-Lücken) und Schritt 8 (Diskrepanz-Schock). Begründung:
@@ -73,13 +73,14 @@ Diskrepanz explizit. T3 ist die Stelle, an der der BF-Modus seine
 Daseins-Berechtigung *vorzeigt*: ohne ihn wäre die Inventur ein
 Selbstzweck, mit ihm wird der Reconciliation-Pfad sichtbar.
 
-**Pädagogischer Wert des Diskrepanz-Schocks:** Lernende erkennen
-diesen Moment im eigenen Repo wieder. Die Phase-4-Stufe in BF
-("Inventur abgeglichen, Diskrepanz-Schock sichtbar") ist der
-Wendepunkt — vorher arbeitet die Inventur, nachher läuft
-Reconciliation. T3 *triggert* diesen Wendepunkt.
+**Pointe für *exzellent*-Stufe:** T3 ist nicht nur der Trigger,
+sondern der Wendepunkt im BF-Lebenszyklus. Phase 4 in BF heißt
+"Inventur abgeglichen, Diskrepanz-Schock sichtbar" — vorher arbeitet
+die Inventur, nachher läuft Reconciliation. Wer T3 als ersten
+Drift-Sensor im eigenen Repo erkennt, hat den Bootstrap-Begriff von
+"Setup-Event" zu "fortlaufender Modus" verinnerlicht.
 
-### (Erschaffen) Was bedeutet *Phase 4 kohärent* in GF vs. BF?
+### (Erschaffen, durch Übung 3) Was bedeutet *Phase 4 kohärent* in GF vs. BF?
 
 Aus der Phase × Modus-Matrix:
 
@@ -102,7 +103,7 @@ Diskrepanz-Schock vermieden und damit auch die Reconciliation-
 Pflicht — das Repo bleibt formal vollständig, ist aber inhaltlich
 nicht abgeglichen.
 
-### (Konvictions-Check-Rückgriff) Vergleiche deine Spontanantworten mit deiner heutigen Antwort.
+### (Conceptual Change) Vergleiche deine Spontanantworten mit deiner heutigen Antwort.
 
 Diese Frage hat keine universelle Lösung — die Antwort hängt von
 *deiner* Vorab-Notiz ab. Was eine *solide* Selbsteinschätzung
