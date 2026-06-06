@@ -253,7 +253,7 @@ Harness-Lebenszyklus eines Repos — der Weg von "leeres Repo" oder
 "Repo ohne Harness" bis zur Stelle, an der inhaltliche Arbeit (Slices,
 Code) auf einem etablierten Harness aufsetzt. Es ist eine *Trajektorie
 durch Dokument-Zustände*, kein *Ereignis*. Konkreter Walkthrough mit
-Schritten in [Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md#source-precedence).
+Schritten in [Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren).
 
 > **Begriffsklärung:** "Harness-Bootstrap" meint hier den
 > Einstiegsprozess in den Harness. Nicht zu verwechseln mit
@@ -349,7 +349,7 @@ Steering-Loop versteht, versteht Bootstrap — und umgekehrt.
 
 ### Querverweise
 
-- **Modul 1** ([§Source precedence](../01-spec-und-architektur/modul-01-entwicklungszyklus.md#source-precedence)): konkreter Walkthrough mit Schritt 0 (Baseline und Modus festlegen) plus den sechs Folge-Schritten.
+- **Modul 1** ([§Source precedence](../01-spec-und-architektur/modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren)): konkreter Walkthrough mit Schritt 0 (Baseline und Modus festlegen) plus den sechs Folge-Schritten.
 - **[`fallstudien.md` §Beobachtung aus dem Ist-Zustand](fallstudien.md#beobachtung-aus-dem-ist-zustand)**: die vier Beispiel-Repos in GF-/BF-Modus klassifiziert.
 - **§harness/conventions.md als Konventionsspeicher** (oben): Adaptions-Block trägt Modus-Deklaration pro Sub-Area; Graduation-Bedingung wird dort dokumentiert.
 
