@@ -197,16 +197,162 @@ gestartet ist, trägt FV1 implizit.)
 
 ## Worked Example 1: Greenfield-Bootstrap (DocSearch-Walkthrough)
 
-(P5 Phase F2 — Schritt 0 bis Schritt 8 als Tabelle mit Progressive
-Disclosure; Phasen-Karte als Anschauungs-Visualisierung inline;
-Trigger T1–T7 als Inline-Anker mit Rückverweis auf
-[`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen).)
+**Story.** Ein neues Repo `docsearch` soll mit dem Kurs-Harness von
+Grund auf aufgesetzt werden — eine Such-Engine über interne
+Dokumente. Es gibt noch keinen Code, kein Lastenheft, keine ADRs.
+Die Sub-Areas (Konventionen, Spec, Architektur, ADR) starten alle
+im GF-Modus: Doku führt, Code wird daran gemessen. Neun Schritte
+führen vom leeren Repo zum ersten Code-Slice.
+
+### Übersicht: GF-Walkthrough als Mermaid-Diagramm
+
+```mermaid
+flowchart TD
+    Start([leeres Repo]):::start
+    S0["0. Modus = GF pro Sub-Area"]:::orient
+    S1["1. Baseline + Repo-Klasse + ID-Schemata"]:::orient
+    S2["2. Templates adoptieren"]:::action
+    S3["3. conventions.md (MR-000 + MR-001)"]:::action
+    S4["4. lastenheft.md Outline"]:::content
+    S5["5. Roadmap + Release-Plan Outline"]:::content
+    S6["6. Sensors-Roster im Nicht-behauptet-Block"]:::content
+    S7["7. Architektur + Spezifikation Outline"]:::content
+    S8["8. ADR-0001 (Proposed)"]:::content
+    End([bereit fuer erste Code-Slices]):::endNode
+
+    Start --> S0 --> S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> End
+
+    classDef start fill:#f5f5f5,stroke:#888
+    classDef orient fill:#fff4d6,stroke:#d4a017
+    classDef action fill:#dceaff,stroke:#3366cc
+    classDef content fill:#e0f0e0,stroke:#3a8a3a
+    classDef endNode fill:#f5f5f5,stroke:#888
+```
+
+Drei Phasen sind farbig sichtbar: *Orient* (gelb, Schritte 0–1),
+*Action* (blau, Schritte 2–3), *Content* (grün, Schritte 4–8).
+
+### Detail-Tabelle (Schritte 0–4: Setup-Phase)
+
+Trigger-Anker (T1, T2, T4, T5, T6, T7) sind Instanz-Beispiele der
+vier Trigger-Klassen aus
+[`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen) —
+die abstrakten Definitionen stehen dort, hier nur die Instanzen.
+
+| # | Aktion | Berührte Dateien (Phasen-Übergang) | Trigger |
+|---|---|---|---|
+| 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
+| 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schemata festlegen (`LH-*`, `ARC-*`, `SPEC-*`, `MR-*`) | keine | reift 2/3 |
+| 2 | Templates aus [`../../../lab/templates/`](../../../lab/templates/) kopieren | alle Skelette **0 → 1** | keine |
+| 3 | `harness/conventions.md` mit MR-000 (Baseline) + MR-001 (`ARC-*`/`SPEC-*` als Adaption) | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
+| 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
+
+### Detail-Tabelle (Schritte 5–8: Inhalts-Phase)
+
+| # | Aktion | Berührte Dateien (Phasen-Übergang) | Trigger |
+|---|---|---|---|
+| 5 | `docs/plan/planning/roadmap.md` mit Welle + Release-Mapping; `releasing.md` mit Release-Strategie | `roadmap.md` 1 → 2; `releasing.md` 1 → 2 | keine |
+| 6 | Sensors-Roster im "Nicht behauptet"-Block (Prosa-Pointer-Liste, kein Status) | `harness/README.md` §Sensors Sub-1 → Sub-2; `AGENTS.md` §4 Sub-1 → Sub-2 | **T4** (Promotion-Auslöser bei erstem Code-Slice) |
+| 7 | `spec/architecture.md` + `spec/spezifikation.md` Outline mit `ARC-*`/`SPEC-*` | beide 1 → 2 | **T5** (erste ADR-Vorschläge aus Architektur-Outline) |
+| 8 | `docs/plan/adr/0001-doc-source-of-truth.md` mit Status *Proposed* | `0001-…md` 0 → 2; ADR-Index 1 → 2 | **T6** (Cross-Reference Spec ↔ ADR), **T7** (ADR-Review-Auslöser) |
+| Bootstrap-Ende | Bereit für ersten Code-Slice — Workflow-Übergang | — | — |
+
+**Anmerkung zur Tabellen-Splittung.** Die Setup-Phase (0–4) etabliert
+*was wo lebt*; die Inhalts-Phase (5–8) füllt mit *normativem Inhalt*.
+Trigger entstehen erst in der Inhalts-Phase, weil dann Bezüge zwischen
+Dokumenten und ADRs notwendig werden. Die Tabellen-Trennung macht
+das kognitiv lesbar — die Phasen verschwimmen sonst.
 
 ## Worked Example 2: Brownfield-Bootstrap mit Discovery und Reconciliation
 
-(P5 Phase F2 — Schritt 1 bis Schritt 9 mit Discovery,
-Diskrepanz-Schock, Reconciliation-Plan; gleiche
-Progressive-Disclosure-Auflage wie Worked Example 1.)
+**Story.** Ein bestehendes Repo `legacy-search` (Code, Makefile, CI,
+Tests) soll formellen Harness-Einstieg bekommen. Es gibt keine
+Spec, keine ADRs, kein `harness/conventions.md` — wohl aber
+Build-Pipeline, Tests, dokumentierte Konventionen (verstreut in
+README, Commit-Messages, Code-Kommentaren). Die Sub-Areas starten
+alle im BF-Modus: Code führt, Doku folgt mit Inventur-Auftrag. Neun
+Schritte führen vom inventur-bedürftigen Repo zum Reconciliation-
+Backlog mit sichtbarem Konvergenzpfad zu GF.
+
+### Übersicht: BF-Walkthrough als Mermaid-Diagramm
+
+```mermaid
+flowchart TD
+    Start([Repo mit Code/Makefile/CI<br/>ohne Harness]):::startBF
+    S1["1. Modus = BF + Repo-Klasse + ID-Schemata"]:::orient
+    S2["2. Code-Inventur (Discovery)"]:::discover
+    S3["3. Templates adoptieren"]:::action
+    S4["4. conventions.md (Modus = BF, MR-000)"]:::action
+    S5["5. Sensors-Haupt-Tabelle aus Makefile"]:::contentBF
+    S6["6. Lastenheft Reverse-Engineering aus Tests/CI"]:::contentBF
+    S7["7. Architektur + Spec Reverse-Engineering"]:::contentBF
+    S8["8. Diskrepanz-Schock + CO-DS + Reconc.-Slices"]:::discrepancy
+    S9["9. Roadmap als Reconciliation-Plan"]:::contentBF
+    Graduation[/"Konvergenz-Ziel: Graduation BF -> GF"/]:::goal
+
+    Start --> S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S9 -.-> Graduation
+
+    classDef startBF fill:#fef0f0,stroke:#a14040
+    classDef orient fill:#fff4d6,stroke:#d4a017
+    classDef action fill:#dceaff,stroke:#3366cc
+    classDef discover fill:#f0e5ff,stroke:#7a3acc
+    classDef contentBF fill:#ffe9d6,stroke:#cc7733
+    classDef discrepancy fill:#ffd9d9,stroke:#cc3333
+    classDef goal fill:#dff5e8,stroke:#3a8a3a,stroke-dasharray: 6 4
+```
+
+Vier Phasen sind farbig sichtbar: *Orient* (gelb), *Discover* (lila,
+neu in BF), *Action* (blau), *Content-BF* (orange), *Diskrepanz-
+Schock* (rot, neu in BF), *Goal/Graduation* (grün gestrichelt).
+
+### Detail-Tabelle (Schritte 1–4: Inventur-Phase, was bei BF anders ist)
+
+| # | Aktion | BF-Besonderheit gegenüber GF |
+|---|---|---|
+| 1 | Wie GF-Schritt 1, plus Modus-Antizipation "BF pro Sub-Area" | + explizite Modus-Setzung mit Sub-Area-Aufzählung |
+| 2 | **Code-Inventur (Discovery):** Makefile, CI, Tests, README, Commit-Messages inventarisieren als Lerner-Schritt | **neu in BF** — kein Repo-Artefakt entsteht, nur Lerner-Wissen |
+| 3 | Templates adoptieren | wie GF |
+| 4 | `harness/conventions.md` mit Modus = BF pro Sub-Area, MR-000-Aussage | Modus-Block anders strukturiert (BF-Deklarationen + Konvergenz-Auftrag pro Sub-Area) |
+
+### Detail-Tabelle (Schritte 5–9: Reconciliation-Phase)
+
+| # | Aktion | BF-Besonderheit gegenüber GF |
+|---|---|---|
+| 5 | Sensors-Haupt-Tabelle direkt aus Makefile-Kommentaren entstehen lassen | **gegenteilig zu GF** — Targets existieren, keine "Nicht behauptet"-Promotion nötig; **T3** (Diskrepanz-Trigger bei Sensor-Lücken) wird sichtbar |
+| 6 | Lastenheft aus Code/Tests/CI rückbauen | Inventur-Umkehr; Diskrepanz-Material entsteht (Code ohne Anforderung, Test ohne LH-Bezug) |
+| 7 | Architektur + Spezifikation aus `src/` rückbauen; **retroaktive ADRs** für implizite Entscheidungen | ADRs teils retroaktiv mit Status *Accepted* (oder *Superseded*, falls Entscheidung schon revidiert) |
+| 8 | **Diskrepanz-Schock:** Diskrepanzen klassifizieren als (a) `CO-DS-*` (orphan code ohne Anforderung), (b) Reconc.-Slice (orphan requirement ohne Code), (c) retro-ADR (implicit decision) | **BF-spezifischer Schritt** — die Reconciliation-Pflicht macht hier den Modus-Übergang sichtbar; **T3** als typische Trigger-Quelle |
+| 9 | Roadmap als Reconciliation-Plan; letzte Welle = Graduation pro Sub-Area | Inhalt anders als GF-Roadmap — Plan ist Diskrepanz-Auflösungs-Sequenz, nicht Feature-Sequenz |
+| Bootstrap-Ende | Reconciliation-Backlog steht, Konvergenzpfad zu GF pro Sub-Area sichtbar | — |
+
+**Diskrepanz-Schock als didaktischer Anker.** Schritt 8 ist die Stelle,
+an der BF-Erfahrene merken, dass die Inventur-Arbeit der vorigen
+Schritte überhaupt einen Sinn hat: sie macht die Diskrepanzen
+*explizit*, statt sie als implizite Last weiter zu tragen. Genau
+diesen Moment werden Lernende im eigenen Repo wiedererkennen — der
+Schock ist eine pädagogisch wertvolle Erfahrung, keine
+Pannenerscheinung.
+
+## Phasen × Modus — die zweidimensionale Reife-Matrix
+
+Beide Walkthroughs bewegen Artefakte durch **Phase-Reife** (1–5)
+pro Sektion. Die folgende Matrix macht sichtbar, *was Phase-N in
+GF bedeutet versus was sie in BF bedeutet* — dieselbe Phase-Stufe,
+unterschiedliche Bewegungsrichtung:
+
+| | Greenfield (Doc → Code) | Brownfield (Code → Doc) |
+|---|---|---|
+| **Phase 1 Skelett** | Template kopiert, *Versprechen* zu füllen | Template kopiert, *Inventur-Auftrag* an Code |
+| **Phase 2 Outline** | Top-Level-Wunschbild | Top-Level-Bestandsaufnahme |
+| **Phase 3 partiell** | Sektionen versprochen, Code folgt | Sektionen dokumentiert, andere unentdeckt |
+| **Phase 4 kohärent** | Vertrag steht, Code wird daran gemessen | Inventur abgeglichen, **Diskrepanz-Schock sichtbar** |
+| **Phase 5 stabil** | Change-Process aktiv | Reconciliation-Slice oder Carveout aktiv |
+
+Die Matrix ist *die* Lesart für jede Bootstrap-Aktion: erst
+identifizieren, *welche Sub-Area* sich bewegt; dann *welche Phase*
+sie erreicht; dann *in welchem Modus* — daraus folgt der nächste
+Schritt fast deterministisch. In Übung 3 (siehe §Übungen) füllst du
+selbst eine Phasen-Karte für ein eigenes Artefakt aus.
 
 ## Übungen
 
