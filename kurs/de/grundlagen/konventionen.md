@@ -213,6 +213,37 @@ nicht als Tippfehler abtut. Eine Bindung ohne Deklaration ist eine
 stille Setzung — und damit eine Harness-Lüge in derselben Klasse wie
 ein halluziniertes Gate.
 
+## harness/conventions.md als Konventionsspeicher
+
+`harness/conventions.md` trägt die **repo-lokalen Strukturregeln** und
+Adaptionen ggü. der adoptierten Baseline (Kurs, interner Standard,
+Industrie-Norm). Sie ist **Pflicht** (Existenz), ihre Form (Einzeldatei
+vs. Verzeichnis, ADR-artig vs. Prosa) ist **Wahl** — projektabhängig
+nach Projektgröße, Adaptions-Frequenz, Audit-Tiefe.
+
+Pflichtgliederung (Default-Form als Einzeldatei):
+
+| Abschnitt | Inhalt |
+|---|---|
+| Purpose | was die Datei trägt, was nicht |
+| Baseline | welche Konvention adoptiert, mit Stand/Version |
+| Adoptierte Konventions-Quellen | Pointer extern (Kurs/Standard) und in-Repo (Templates) |
+| Adaptions-Block | ADR-artige Liste der Abweichungen ggü. Baseline (`MR-<NNN>` mit Datum, Geltungsbereich, Begründung, Auflösungs-Trigger oder "permanent") |
+| Zusatzklassen-Deklaration für Sensors-Bindung | repo-spezifische Bindung-Klassen jenseits der vier kanonischen (`LH-…`, Compliance, Modell-Version) |
+| Modus-Deklaration pro Sub-Area | Greenfield · Brownfield (mit Konvergenz-Auftrag) · Hybrid |
+| Glossar (optional) | repo-spezifische Begriffe, die nicht im Kurs-Glossar stehen |
+
+Wichtig: `harness/conventions.md` dupliziert keinen Baseline-Text — sie
+verweist und ergänzt. Eine Kopie ginge gegen die Baseline in Drift,
+sobald letztere sich weiterentwickelt. Zwei Quellen derselben
+Konvention sind dasselbe Drift-Risiko, das die Source-Precedence-Regel
+für Spec/ADR adressiert — hier in der Form-Ebene.
+
+Vorlage:
+[`/lab/templates/harness/conventions.template.md`](../../../lab/templates/harness/conventions.template.md).
+Worked Example:
+[`/lab/example/harness/conventions.md`](../../../lab/example/harness/conventions.md).
+
 ## Traceability-Constraint
 
 Keine relevante Änderung ohne Bezug zu mindestens einem der folgenden Punkte:

@@ -34,12 +34,34 @@ Der Default-Ort für:
 - **Datum:** 2026-06-01
 - **Geltungsbereich:** gesamtes Repo
 - **Adaption:** *Keine inhaltlichen Adaptionen ggü. Baseline-Default
-  für Verzeichniskonvention, Source Precedence, Lifecycle-Regeln,
-  Carveout-Disziplin, ID-Schema (LH-FA-*, LH-QA-*, ADR-NNN, CO-NNN,
-  slice-NNN, MR-NNN).*
+  für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
+  ID-Schema (`LH-FA-*`, `LH-QA-*`, `ADR-<NNN>`, `CO-<NNN>`,
+  `slice-<NNN>`, `MR-<NNN>`).*
 - **Begründung:** Initial-Setzung. Dieses Beispiel-Repo ist
   Lehr-Vehikel und folgt der Kurs-Konvention sturer als ein realer
   Bedarfsfall, damit die Konvention als solche sichtbar bleibt.
+- **Auflösungs-Trigger:** permanent.
+
+### MR-001 — Source Precedence mit eigener Spezifikations-Schicht
+
+- **Datum:** 2026-06-01
+- **Geltungsbereich:** [`harness/README.md` §Source precedence](README.md#source-precedence)
+- **Adaption:** Die Source-Precedence-Tabelle führt
+  [`spec/spezifikation.md`](../spec/spezifikation.md) als eigenen
+  **Rang 2** zwischen Lastenheft (Rang 1) und Architektur (Rang 3).
+  Der Kurs-Default
+  ([`konventionen.md` §Source Precedence](../../../kurs/de/grundlagen/konventionen.md#source-precedence))
+  setzt nur zwei Spec-Ränge (`lastenheft` → `architecture`); dieses
+  Repo nutzt drei.
+- **Begründung:** Das Repo verwendet die Spec-Stratifizierung
+  ([`konventionen.md` §Spec-Stratifizierung](../../../kurs/de/grundlagen/konventionen.md#spec-stratifizierung))
+  explizit mit drei Spec-Dateien — Lastenheft (vertraglich),
+  Spezifikation (technisch fortschreibbar), Architektur (diagrammatisch).
+  Damit die Source-Precedence-Tabelle die ADR-Schärfungs-Regel
+  ("ADR darf Spezifikation schärfen, nicht Lastenheft") strukturell
+  abbildet, muss die Spezifikation als eigener Rang sichtbar sein —
+  sonst kollabiert die Trennschärfe zwischen "wir versprechen" und
+  "wir liefern wie".
 - **Auflösungs-Trigger:** permanent.
 
 ## Zusatzklassen-Deklaration für Sensors-Bindung

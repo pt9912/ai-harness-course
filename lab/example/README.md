@@ -33,6 +33,7 @@ example/
 ├── Makefile                     Root-Harness-Targets für Kursmodule
 ├── AGENTS.md                    Hard Rules und Source Precedence
 ├── harness/README.md            Harness-Einstieg
+├── harness/conventions.md       repo-lokale Strukturregeln (MR-NNN, Modus-Deklaration)
 ├── docs/glossar.md              Mini-Glossar für Modul 0
 ├── spec/
 │   ├── lastenheft.md            LH-*-IDs, Akzeptanzkriterien

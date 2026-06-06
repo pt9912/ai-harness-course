@@ -4,7 +4,7 @@
 > `harness/conventions.md` deines Repos. Kopiere sie nach
 > `harness/conventions.md`, ersetze `<Platzhalter>` und lösche
 > diesen Block. Pflichtgliederung folgt
-> [Kurs Konventionen / `harness/README.md` als Einstiegspunkt](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt).
+> [Kurs Konventionen / harness/conventions.md als Konventionsspeicher](../../../kurs/de/grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher).
 >
 > **Was diese Datei trägt:** repo-lokale Strukturregeln und Adaptionen
 > ggü. der adoptierten Harnesskonvention (Baseline). Sie ist
