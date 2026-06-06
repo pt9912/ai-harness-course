@@ -143,7 +143,10 @@ Code folgt; Brownfield: Code führt, Doku folgt — mit Konvergenz-Auftrag
 zu Greenfield). Diese drei Entscheidungen prägen jede Folge-Aktion: in
 Brownfield ist der nächste Schritt *Inventur des Bestands*, in Greenfield
 *Auflisten zu schaffender Quellen*. Volldefinitionen und Phasen-Modell
-in [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap).
+in [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap)
+(Konzept-Anker) und im ausgearbeiteten
+[Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md) (Lehrtext
+mit GF/BF-Walkthroughs).
 Die folgenden sechs Schritte 1–6 beschreiben den Greenfield-Pfad; in
 Brownfield-Modus läuft jeder Schritt als Code → Doc-Inventur mit
 parallelem Diskrepanz-Backlog (siehe
