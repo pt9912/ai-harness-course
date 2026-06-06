@@ -635,8 +635,9 @@ die modulspezifischen Indikatoren sind:
 * Die vier Beispiel-Repos in GF/BF-Klassifikation:
   [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand).
 * Modus-*Wahl* als Planungs-Entscheidung (Diagnose aus diesem Modul
-  → Wahl im nächsten Slice):
-  [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harness.md).
+  → Begründungs-Pflicht pro Sub-Area im nächsten Slice-Plan):
+  [Modul 5 — Planning Harness §Übung "Bestimme und begründe
+  Bootstrap-Modus für die vom nächsten Slice berührten Sub-Areas"](../02-planung/modul-05-planning-harness.md#übungen).
 * Steering-Loop im Steady-State (was Bootstrap *nach* Graduation
   wird):
   [Modul 11 — Verification Harness](../04-qualitaet/modul-11-verification.md).

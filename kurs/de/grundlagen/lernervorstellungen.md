@@ -86,6 +86,13 @@ Iteration.
 - "Slice = Ticket = Feature." — Modul 5
 - "Erst plan ich alle Slices, dann fange ich an." — Modul 5
 - "Wenn ein Slice in `done/` ist, ist er fertig." — Modul 5
+- "Ein Slice hat einen Bootstrap-Modus." — Modul 5
+  (Fehlvorstellungs-Block; entsteht typisch als Übertragung aus der
+  Klassifikations-Übung in Modul 2 — Anlass *Slice* wird mit Träger
+  der Modus-Entscheidung *Sub-Area* verwechselt).
+- "Wenn der Slice klein ist, ist die berührte Sub-Area GF." — Modul 5
+  (Fehlvorstellungs-Block; transitive Vereinfachung von Slice-Größe
+  auf Sub-Area-Reife — zwei orthogonale Achsen).
 - "Roadmap ist eine Datumsleiste." — Modul 6
 - "Burndown ist Fortschritt." — Modul 6
 - "Welle = Sprint." — Modul 6
