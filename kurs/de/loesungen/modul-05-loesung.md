@@ -82,6 +82,60 @@ Schnitt-Strategien:
 - **Horizontal**: Slice 1 baut die Schicht, Slice 2 verkabelt sie.
 - **Read-Write-Split**: Slice 1 nur Lesen, Slice 2 fügt Schreiben hinzu.
 
+### Bestimme und begründe Bootstrap-Modus pro Sub-Area
+
+Bezug: Worked Mini-Example *Bootstrap-Modus pro Sub-Area für einen
+Slice begründen* im
+[Modul 5](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
+mit Beispiel-Slice `SL-014a`.
+
+**Hybrid-Sub-Area `Spec-Schreibung` — Mustertext für die zwei vom
+Lerner zu ergänzenden Kriterien:**
+
+- *Evidenz-/Diskrepanz-Risiko:* mittel. Spec-Anker `LH-014`
+  beschreibt den Happy Path; im Code (`services/auth/`) existiert
+  bereits ein `Unauthorized`-Handler mit Negativ-Pfaden, den die Spec
+  nicht erwähnt. Inventur kann sichtbar machen, dass die Akzeptanz­
+  kriterien nachgereicht ("retrofitted") und damit am Code geeicht
+  werden statt am ursprünglichen Anforderungs-Verständnis. Risiko:
+  Spec validiert Code statt umgekehrt.
+- *Reconciliation-Aufwand:* ≈ 0.5 Slice. `spec/lastenheft.md` §LH-014
+  um Akzeptanz­kriterien (inkl. Negativ-Bedingungen) ergänzen,
+  `T6` Cross-Reference Spec↔ADR prüfen, und einen Test
+  schreiben, der `LH-014` per Anker referenziert.
+  Graduation-Trigger: Akzeptanzkriterien stehen, mindestens ein Test
+  trägt `LH-014` als Annotation, kein Negativ-Pfad im Code ohne
+  Spec-Pendant. Dann wechselt die Sub-Area `Spec-Schreibung` von
+  Hybrid Richtung GF.
+
+**Drei Anker für die Bewertung im Slice-Plan-Anhang:**
+
+1. *Pro berührte Sub-Area ein Begründungsblock* aus dem Template
+   (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko ·
+   Reconciliation-Aufwand inkl. Graduation-/Folge-Slice-Trigger). Wer
+   nur "Modus: BF, weil Doku fehlt" schreibt, hat das Kriterien-Set
+   nicht genutzt — das ist Klassifikation (Modul 2), nicht Begründung.
+2. *Bei BF und Hybrid* muss der Reconciliation-Aufwand mit einem
+   konkreten Trigger geschlossen werden (T1–T7 aus
+   [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)
+   oder ein expliziter Folge-Slice). "Werden wir später dokumentieren"
+   ist kein Trigger.
+3. *Evidenz benennen* aus Code, Doku oder `harness/conventions.md`.
+   Aussagen ohne Evidenz-Anker sind nicht prüfbar und damit nicht
+   teil der Übungs­leistung.
+
+**Distractor-Klärung "Wenn der Slice klein ist, ist die berührte
+Sub-Area GF.":** Der Beispiel-Slice `SL-014a` ist klein (≤ 3
+DoD-Punkte, zwei Schichten), trotzdem ist die Test-Infrastruktur klar
+BF. Slice-Größe und Sub-Area-Modus sind orthogonale Achsen —
+Slice-Größe ist eine Eigenschaft des Schnitts (kann ein Reviewer ihn
+in einer Sitzung prüfen?), Sub-Area-Modus ist eine Eigenschaft des
+Reifegrads der berührten Doku-/Code-Sektion. Wer beim
+Modus-Begründungsblock auf die DoD-Punkte-Zahl zeigt, hat die
+Diagnose vom falschen Träger abgeleitet. Persistente
+Lernhilfe in Modul 5 §Typische Fehlvorstellungen; hier ist sie
+*aktiver Distractor* im Übungs-Kontext.
+
 ## Häufige Fehler
 
 - **`done/` wird zur Mülltonne.** Slices wandern dort hin, weil "halt nicht mehr aktuell". Das ist kein Closure, sondern Verstecken.
