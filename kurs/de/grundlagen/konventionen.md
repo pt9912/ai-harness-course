@@ -246,6 +246,113 @@ Vorlage:
 Worked Example:
 [`/lab/example/harness/conventions.md`](../../../lab/example/harness/conventions.md).
 
+## Harness-Bootstrap
+
+*Harness-Bootstrap* bezeichnet den **Einstiegsprozess** in den
+Harness-Lebenszyklus eines Repos — der Weg von "leeres Repo" oder
+"Repo ohne Harness" bis zur Stelle, an der inhaltliche Arbeit (Slices,
+Code) auf einem etablierten Harness aufsetzt. Es ist eine *Trajektorie
+durch Dokument-Zustände*, kein *Ereignis*. Konkreter Walkthrough mit
+Schritten in [Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md#source-precedence).
+
+> **Begriffsklärung:** "Harness-Bootstrap" meint hier den
+> Einstiegsprozess in den Harness. Nicht zu verwechseln mit
+> *Bootstrap-aware Gate* ([Modul 12](../04-qualitaet/modul-12-quality-gates.md)) — das ist ein
+> einzelnes Gate mit Reifestufe und Hochschalt-Trigger (Coverage 0 →
+> 70 %). Beide Begriffe teilen das Wort, sind strukturell verschieden:
+> *Harness-Bootstrap* betrifft den **Repo-Lebenszyklus**,
+> *Bootstrap-aware Gate* die **Reifestufe eines Sensors**.
+
+### Modus pro Sub-Area: Greenfield vs Brownfield
+
+Pro Sub-Area eines Repos (Modul, Verzeichnis, Komponente) wird ein
+**Modus** deklariert (im Adaptions-Block von
+`harness/conventions.md`). Die Modus-Wahl bestimmt die
+*Trigger-Richtung* — wer wem folgt:
+
+| Modus | Trigger-Richtung | Bild im Kopf |
+|---|---|---|
+| **Greenfield** (GF) | Doc → Code | Spec führt, Code folgt. "Wir versprechen X, dann liefern wir X." Steady-State. |
+| **Brownfield** (BF) | Code → Doc | Code existiert, Doku folgt. Inventur des Bestands. **Übergangs-Modus mit Konvergenz-Auftrag** zu GF. |
+| **Hybrid** | gemischt pro Sub-Sub-Area | Realistisch: alte Komponenten BF, neue GF. |
+
+**Konvergenz-Auftrag.** BF ist *keine Daueroption*. Jede BF-Sub-Area
+trägt eine **Graduation-Bedingung** (im Adaptions-Block dokumentiert):
+*was muss erfüllt sein, damit die Sub-Area in GF-Modus wechselt?*
+Typisch: alle entdeckten Diskrepanzen aufgelöst (als Carveouts oder
+Reconciliation-Slices); Spec/ADR/Sensors decken Code-Stand ab;
+ID-Schema retrofitted. Eine BF-Sub-Area ohne Graduation-Plan ist eine
+*permanente Ausnahme als temporär getarnt* — analog zur
+Carveout-Disziplin in [Modul 6](../02-planung/modul-06-carveouts.md).
+
+Permanente BF-Erklärung (für Code, der absehbar entfernt wird —
+Legacy, Drittsystem-Adapter) ist möglich, mit Begründung und
+Folge-Slice.
+
+### Sektionsweise Reife: Phasen pro Dokument
+
+Ein Harness-Dokument ist während Bootstrap nicht "entweder leer oder
+fertig". Sektionen reifen mit unterschiedlichem Tempo durch fünf
+Phasen:
+
+| Phase | Beschreibung |
+|---|---|
+| 0 — leer | Datei existiert nicht |
+| 1 — Skelett | Template kopiert, Pflichtgliederung mit Platzhaltern |
+| 2 — Outline | Top-Level ausformuliert, Details `<…>` |
+| 3 — partiell | einige Sektionen voll, andere noch `<…>` |
+| 4 — kohärent | alle Sektionen gefüllt, intern konsistent — *freigegeben* für Verweise von außen |
+| 5 — stabil | Änderungen nur über Change-Process |
+
+*Sektionen* eines Dokuments können in unterschiedlichen Phasen sein.
+Beispiel: §Source precedence von `harness/README.md` kann durch
+Template-Adoption früh auf Phase 2 sein, während §Sensors auf Phase 1
+verharrt, bis das Makefile existiert. **Sektionsweise Reife ist Regel,
+nicht Ausnahme** — Schreibreife wird sektionsweise beurteilt, nicht
+dateiweise.
+
+### Vier Trigger-Klassen
+
+Während Bootstrap (und auch danach im Steering-Loop) lösen Änderungen
+in einem Dokument *Folgeaktionen* in anderen aus. Vier Klassen:
+
+| Klasse | Wirkung | Beispiel |
+|---|---|---|
+| **Sync-Trigger** | Pointer in einem Dokument muss in einem anderen ergänzt werden | Neuer Eintrag in `conventions.md` → Pointer in `harness/README.md` |
+| **Promotion-Trigger** | Eintrag wandert aus "Nicht behauptet"-Block in Haupt-Tabelle | Make-Target real im Makefile entstanden → Sensor-Zeile gepromoted |
+| **Cross-Reference-Trigger** | Wechselseitige Verlinkung zwischen Dokumenten | Neue ADR → Spec/Architektur verweisen darauf |
+| **Acceptance-Trigger** | Phase-Übergang via Sign-off (z. B. ADR Proposed → Accepted) | ADR-Review-Runde abgeschlossen → bindend |
+
+Trigger werden zwischen Bootstrap-Schritten ausgewertet — sie sind die
+"Inbox" der nicht-Vorderscene-Arbeit. Eine zwischen Schritten
+übersehene Trigger-Pflicht ist ein häufiges Drift-Symptom.
+
+### Harness-Bootstrap-Ende vs Workflow-Beginn
+
+Harness-Bootstrap ist *abgeschlossen*, wenn der Repo bereit ist für
+inhaltliche Slices. In **Greenfield**: erster ADR akzeptiert,
+Roadmap-Outline mit Welle-Sequenz, Sensors-Roster als "Nicht
+behauptet"-Block. In **Brownfield**: Reconciliation-Backlog steht,
+Konvergenzpfad zu GF ist sichtbar (mit ersten Reconciliation-Slices in
+`open/`). Ab dann übernimmt der **Workflow** (Slice-Lebenszyklus,
+Modul 4–8). Bootstrap und Workflow sind getrennte Lebenszyklen — kein
+Übergang ohne Sichtbarkeit.
+
+### Verbindung zum Steering-Loop
+
+Harness-Bootstrap ist im Grunde der **Steering-Loop ([Modul 10](../04-qualitaet/modul-10-verification.md)),
+einmal in Folge angewendet, bis Graduation erreicht ist**. Das
+Werkzeug ist identisch (Beobachtung → Guide/Sensor); was sich
+unterscheidet, ist die Anwendungsphase: Bootstrap = initial bis
+Steady-State; Steering-Loop = laufend im Steady-State. Wer den
+Steering-Loop versteht, versteht Bootstrap — und umgekehrt.
+
+### Querverweise
+
+- **Modul 1** ([§Source precedence](../01-spec-und-architektur/modul-01-entwicklungszyklus.md#source-precedence)): konkreter Walkthrough mit Schritt 0 (Baseline und Modus festlegen) plus den sechs Folge-Schritten.
+- **[`fallstudien.md` §Beobachtung aus dem Ist-Zustand](fallstudien.md#beobachtung-aus-dem-ist-zustand)**: die vier Beispiel-Repos in GF-/BF-Modus klassifiziert.
+- **§harness/conventions.md als Konventionsspeicher** (oben): Adaptions-Block trägt Modus-Deklaration pro Sub-Area; Graduation-Bedingung wird dort dokumentiert.
+
 ## Traceability-Constraint
 
 Keine relevante Änderung ohne Bezug zu mindestens einem der folgenden Punkte:
