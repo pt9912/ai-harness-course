@@ -46,6 +46,16 @@ Iteration.
   (Kernidee-Block "Grenze der Metapher"; seit Welle 7 explizit gegen
   Praktikant-Metapher abgegrenzt).
 
+### Über Harness-Bootstrap (Modul 2)
+
+- "Bootstrap ist ein einmaliges Initialisierungs-Event." — Modul 2 (FV1)
+- "GF/BF ist eine Eigenschaft des Repos als Ganzes." — Modul 2 (FV2)
+- "Wer im Greenfield arbeitet, kann auf Trigger-Klassen verzichten." — Modul 2 (FV3)
+- "Brownfield ist eine Notlage, die man möglichst schnell überwindet." — Modul 2 (FV4)
+- "Trigger-Klassen sind Bürokratie-Overhead." — Modul 2 (FV3-Variante;
+  zielt nicht auf "GF braucht keine Trigger", sondern auf "auch in GF nur
+  Aufwand").
+
 ### Über Spec und Anforderungen (Modul 3)
 
 - "Akzeptanzkriterien sind der Happy Path." — Modul 3

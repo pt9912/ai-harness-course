@@ -203,25 +203,40 @@ aus Selbstbild.
 
 ## Häufige Fehler
 
-- **Bootstrap als Setup-Event verstehen.** Wer FV1 trägt, sucht den
-  "Abschluss" des Bootstrap und übersieht die Modus-Wechsel im
-  laufenden Betrieb. Korrektur: Bootstrap = fortlaufender Modus.
-- **Repo-weite Modus-Klassifikation.** Wer FV2 trägt, klassifiziert
-  *das ganze Repo* als "BF" und kommentiert die GF-Sub-Areas falsch.
-  Korrektur: Modus gilt pro Sub-Area; ein Repo kann in mehreren
-  Modi gleichzeitig sein.
-- **GF ignoriert Trigger.** Wer FV3 trägt, verzichtet im
-  Greenfield-Modus auf die Trigger-Disziplin. Korrektur: auch GF
-  produziert Trigger (Diskrepanz, Promotion, etc.) — nur entstehen
-  sie aus *Konsistenzprüfung neu Geschaffenen*, nicht aus
-  *Bestandsinventur*.
-- **BF als Notlage.** Wer FV4 trägt, will BF möglichst schnell
-  überwinden, statt es als regulären Modus mit Konvergenz-Auftrag
-  zu führen. Korrektur: BF ist der typische Ausgangspunkt;
-  Graduation ist eine ausgewiesene Bedingung, nicht Wunschdenken.
-- **Phasen-Karte ohne Heterogenität.** Wer alle Sektionen auf
-  derselben Phase notiert, hat das didaktische Lehr-Ziel der Übung
-  verfehlt. Sektionsweise Reife sichtbar machen ist *der Punkt*.
+Diese Liste benennt Fehler in der *Ausführung* der Übungen; die
+zugrunde liegenden konzeptuellen Fehlvorstellungen stehen in
+Modul 2 §Typische Fehlvorstellungen (FV1–FV4) und werden hier nicht
+wiederholt.
+
+- **Sub-Area zu grob gewählt** (Übung 1). "Backend" oder "Frontend"
+  als Sub-Area klassifizieren ist meistens zu grob — die
+  Modus-Diagnose bleibt nutzlos, weil jede grobe Sub-Area in
+  Wirklichkeit mehrere kleinere mit unterschiedlichen Modi
+  zusammenfasst. Korrekt: Sub-Areas auf Konventionen, Spec-Schreibung,
+  Architektur, Test-Infrastruktur, Build/CI etc. ausdifferenzieren.
+- **Hybrid als Notausgang** (Übung 1). Wer in jeder Zeile "Hybrid"
+  schreibt, hat *nicht* differenziert, sondern die Entscheidung
+  vermieden. Hybrid ist eine *Beobachtung* (Sub-Sub-Area-
+  Heterogenität), keine Default-Antwort bei Unsicherheit. Bei einem
+  Hybrid-Eintrag zusätzlich verlangen: welche Sub-Sub-Areas sind GF,
+  welche BF?
+- **Trigger-Zuordnung ohne Begründungs-Argument** (Übung 2). T1 =
+  Sync ohne Erklärung "warum nicht Cross-Reference" macht die
+  Klassifikation unprüfbar. Maßstab für *solide*: pro Zeile ein
+  Argument, das das Trigger-Merkmal benennt (Pointer vs. Promotion
+  vs. wechselseitige Verlinkung vs. Phase-Übergang).
+- **Phasen-Karte mit nur einer oder zwei Phase-Stufen** (Übung 3).
+  Wer alle Sektionen auf Phase 3 *oder* Phase 4 setzt, hat die
+  Heterogenität verfehlt, die das Lehr-Ergebnis trägt. Saubere
+  Karten zeigen meist drei bis fünf der sechs Stufen.
+- **Phasen-Karte ohne Phase 0** (Übung 3). Phase 0 ("Datei existiert
+  nicht") als legitime Reife übersehen — Lerner notieren nur
+  Phase 1+ und lassen "existiert nicht" als Defekt unbenannt.
+  Phase 0 ist gerade in BF-Sub-Areas mit Inventur-Auftrag ein
+  legitimer Befund, kein Versagen.
+- **Konvictions-Check vergessen am Modul-Ende.** Wer §Vorab vor der
+  Lehre nicht notiert hat, kann am Modul-Ende keine Verschiebung
+  benennen. Konsequenz: Selbstcheck-Frage 5 wird inhaltsleer.
 
 ## Weiterführende Verweise
 

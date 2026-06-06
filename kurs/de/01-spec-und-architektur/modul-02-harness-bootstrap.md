@@ -148,8 +148,8 @@ Antwort auf jede dieser drei Fragen.
    Modus?"*
 2. *"Wenn ein Repo in einer Sub-Area Greenfield ist, gilt das dann
    für das ganze Repo?"*
-3. *"Brauchst du Trigger-Klassen, wenn du sauber im Greenfield
-   arbeitest, oder erst im Brownfield?"*
+3. *"Wenn du sauber im Greenfield arbeitest, sind Trigger-Klassen
+   Overhead — stimmt das?"*
 
 Lass die Notiz neben dem Modul liegen. Am Modul-Ende prüft der
 Selbstcheck genau diese drei Punkte — und vergleicht mit der scharfen
@@ -172,26 +172,27 @@ später in [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harnes
 Im laufenden Betrieb verändern sich Sub-Areas zwischen den Modi. Drei
 beobachtbare Anzeichen, an denen sich ein Modus-Wechsel ankündigt:
 
-1. **Diskrepanz-Häufung ändert sich** (Indikator in beide Richtungen):
-   - *BF → GF Graduation:* der Reconciliation-Backlog einer
-     BF-Sub-Area schrumpft über mehrere Slices, neue Inventur-
-     Schritte melden keine Diskrepanzen mehr.
-   - *GF → BF Drift:* in einer als GF gemeldeten Sub-Area werden
-     plötzlich Diskrepanzen sichtbar (Tests, die ohne Spec-Anker
-     stehen; ADRs, die Code-Verhalten nicht abdecken).
+1. **Diskrepanz-Häufung ändert sich** (Indikator in beide
+   Richtungen). *BF → GF Graduation:* der Reconciliation-Backlog
+   einer BF-Sub-Area schrumpft über mehrere Slices, neue Inventur-
+   Schritte melden keine Diskrepanzen mehr. *GF → BF Drift:* in
+   einer als GF gemeldeten Sub-Area werden plötzlich Diskrepanzen
+   sichtbar (Tests ohne Spec-Anker, ADRs ohne Code-Bezug).
 2. **Test-Bestand übertrifft Spec-Anker.** Wenn das Test-Bestand
    strukturell mehr prüft als die Spec behauptet (z. B. Edge-Case-
    Tests ohne `LH-*`-ID), ist die Sub-Area de facto **von GF nach BF
    gedriftet** — der Code "weiß" mehr als die Doku. Symptom: bei
    jeder Code-Änderung muss die Spec nachgezogen werden, statt
    umgekehrt.
-3. **Reviewer-Findings ziehen die Spec hinterher.** Wenn Reviewer
-   wiederholt verlangen, die Spec *nach* der Code-Änderung
-   nachzuziehen (statt umgekehrt), ist die betroffene Sub-Area
-   **von GF nach BF gedriftet** — die Reviewer-Findings sind der
-   Sensor, der diese Drift sichtbar macht. Symptom: die Spec wird
-   zunehmend mit "wie schon implementiert"-Halbsätzen begründet
-   statt mit echten Anforderungs-Aussagen.
+3. **Carveout-Auflösung schließt eine BF-Sub-Area.** Wenn ein
+   `CO-DS-*`-Carveout durch einen Reconciliation-Slice geschlossen
+   wird (orphan code bekommt nachträglich seinen Anforderungs-Anker
+   in der Spec oder als retroaktiver ADR), nähert sich die zugehörige
+   Sub-Area der **Graduation zu GF**. Symptom: der
+   Reconciliation-Backlog sinkt um genau einen Eintrag, der
+   schließende Slice trägt einen "CO-DS-NNN aufgelöst durch
+   LH-FA-MMM"-Hinweis im Closure-Block, und die nächste Inventur
+   meldet die Sub-Area mit einer Diskrepanz weniger.
 
 Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose
 und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
@@ -496,7 +497,15 @@ genau diese Heterogenität ist der Punkt der Übung.
 Verwende die vier Standardfragen aus
 [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
 (Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change)
-nach den Übungen. Modul-spezifische Trigger:
+nach den Übungen.
+
+*Hinweis zur Vorlage:* Frage 2 ("Welche Harness-Lücke war Ursache?")
+setzt einen produzierten Fehler voraus. Modul 2 hat Diagnose-Übungen,
+keine Fehler-Provokation — lies Frage 2 in diesem Modul als *"Welche
+Sub-Area-Annahme war ungeprüft?"* (z. B. *"ich habe Konventionen als
+GF angenommen, ohne den Adaptions-Block zu lesen"*).
+
+Modul-spezifische Trigger:
 
 - **Beobachtung:** Welche Sub-Area-Klassifikation in Übung 1 hat
   dich überrascht — und was hat dich vorher in eine andere Lesart
@@ -511,9 +520,10 @@ nach den Übungen. Modul-spezifische Trigger:
   würde das prüfen?
 - **Conceptual Change:** Vergleiche deinen Konvictions-Check
   (§Vorab — was hältst du heute für wahr?) mit deiner heutigen
-  Antwort. Welche Vorstellung hat sich verschoben? Kandidaten in
-  [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md)
-  (insbesondere FV1, FV2 aus §Typische Fehlvorstellungen).
+  Antwort. Welche Vorstellung hat sich verschoben? Primäre
+  Kandidaten: FV1–FV4 in §Typische Fehlvorstellungen weiter oben.
+  Erweiterte Sammlung mit FV3-Variante in
+  [`../grundlagen/lernervorstellungen.md` §Über Harness-Bootstrap (Modul 2)](../grundlagen/lernervorstellungen.md#über-harness-bootstrap-modul-2).
 
 **Metakognitive Reflexionsfrage** (Träger für Lernziel
 *Überwachen · metakognitiv*):
