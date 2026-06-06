@@ -90,5 +90,5 @@ Serialisierungs-Format (ADR-0003) plus deterministischem Tie-Break
 
 | Datum | Ereignis | Verweis |
 |---|---|---|
-| 2026-06-02 | Proposed | Modul 14 Worked Example, Welle-9-Lab-Ausbau |
+| 2026-06-02 | Proposed | Modul 15 Worked Example, Welle-9-Lab-Ausbau |
 | 2026-06-02 | Accepted | LH-FA-IDX-003 ergänzt, Trace-Fixture um writer.write_index Span erweitert |

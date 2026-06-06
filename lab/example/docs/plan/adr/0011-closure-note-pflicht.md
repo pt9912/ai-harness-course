@@ -6,7 +6,7 @@
 
 **Autor:** Kurs-Lab
 
-**Bezug:** LH-QA-02 (Reproduzierbarkeit/Auditierbarkeit), Modul 1 §Closure, Modul 10 Worked Example
+**Bezug:** LH-QA-02 (Reproduzierbarkeit/Auditierbarkeit), Modul 1 §Closure, Modul 11 Worked Example
 
 ---
 
@@ -22,7 +22,7 @@ der letzte gestolpert ist (siehe [Kurs Modul 1
 Reviewer prüft den Diff gegen Plan und ADR — *nicht* gegen die
 DoD-Pflicht zum Lerneintrag. Genau diese Lücke fängt eine Verification
 (siehe [Kurs Modul
-10](../../../../../kurs/de/04-qualitaet/modul-10-verification.md)). Es
+10](../../../../../kurs/de/04-qualitaet/modul-11-verification.md)). Es
 gibt für die Closure-Pflicht kein Standard-Tool; die Operationalisierung
 gehört in dieses Lab.
 
@@ -46,7 +46,7 @@ Inhaltliche Mindestform — drei Pflichten:
 
 Die maschinelle Prüfung deckt Pflicht 1 und 2 vollständig ab; Pflicht 3
 bleibt inferentiell und ist Gegenstand des Reviewer-Skills (siehe
-Modul 9), nicht des Gates.
+Modul 10), nicht des Gates.
 
 ## Verglichene Alternativen
 
@@ -82,7 +82,7 @@ Modul 9), nicht des Gates.
   ist *eine* Closure auf höherer Ebene.
 - Negativ: Reviewer-Skill bleibt für die Steering-Loop-Bezugs-Prüfung
   verantwortlich; das Gate ersetzt nicht das Lesen.
-- Folgepflicht: Reviewer-Skill `closure-note-reviewer.md` (Modul 14
+- Folgepflicht: Reviewer-Skill `closure-note-reviewer.md` (Modul 15
   Doku-Konsistenz-Agent) übernimmt die inferentielle Schicht.
 
 ## Fitness Function
@@ -108,5 +108,5 @@ Frage ist, keine Code-Architektur-Frage.
 
 | Datum | Ereignis | Verweis |
 |---|---|---|
-| 2026-06-02 | Proposed | Modul 10 Worked Example, Welle-9-Lab-Ausbau |
+| 2026-06-02 | Proposed | Modul 11 Worked Example, Welle-9-Lab-Ausbau |
 | 2026-06-02 | Accepted | bestehende done-Dateien geprüft, beide bestehen |

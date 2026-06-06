@@ -1,76 +1,96 @@
-# Lösung — Modul 5: Roadmap Engineering
+# Lösung — Modul 5: Planning Harness
 
-Zugehöriges Modul: [Modul 5 — Roadmap Engineering](../02-planung/modul-05-roadmap.md).
+Zugehöriges Modul: [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harness.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Welche drei Bestandteile braucht ein Welle-Eintrag minimal?
+### (Erinnern) Nenne die vier Lifecycle-Verzeichnisse in Reihenfolge
 
-1. **Slice-IDs** — die Inhalte der Welle, jeweils mit `LH-*`/`HSM-*`-Bezug.
-2. **Trigger** — beobachtbare Bedingung für Start/Closure (z. B. "ADR-7
-   akzeptiert", "Replay grün gegen Golden Set v2"). *Kein Datum.*
-3. **Closure-Kriterien** — was muss erreicht sein, damit die Welle als
-   *done* gilt (alle Slices in `done/`, Replay grün, Closure-Einträge
-   geschrieben).
+`open/` → `next/` → `in-progress/` → `done/`.
 
-Ein Datum darf in der Roadmap *erwähnt* werden — als Prognose,
-nachdem die Wellen geschnitten sind. Sobald das Datum zum Trigger wird,
-kappt die Welle halbfertige Slices am Kalendertag und das
-Auditierbarkeits-Versprechen bricht: in `done/` landen dann Slices,
-deren DoD nur "wegen Datum" akzeptiert wurde.
+Plus zwei Rückführungen, die im Lifecycle-State-Diagramm explizit sind:
 
-Falle: Wer eine Welle nur über "Slice-Liste" und "Datum" definiert, hat
-keinen Welle-Eintrag, sondern einen Sprint. Sprint ist legitim — aber
-dann gehört das in eine separate operationale Ebene, nicht in die
-Roadmap.
+- `in-progress/ → next/` — Slice ist zu groß, geht zurück zur Zerlegung.
+- `in-progress/ → open/` — Slice ist blockiert (typisch mit Carveout,
+  siehe Modul 7).
 
-### Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
+Faustregel: WIP-Limit auf 1 pro Implementer. Wer mehrere Slices
+gleichzeitig in `in-progress/` hat, hat kein Lifecycle, sondern ein
+Buffet — und keinen Punkt, an dem reproduzierbar geprüft wird, ob der
+8-Schritt-Workflow durchlaufen wurde.
 
-Es kommt darauf an, *warum* die Schätzung daneben lag. Drei Diagnosen,
-drei Antworten:
+### Welcher Trigger bewegt einen Slice von `next/` nach `in-progress/`?
 
-1. **Scope ist gewachsen** (neue Anforderung im Lauf der Welle): → **Neu schneiden.** Der zusätzliche Scope wandert in eine eigene Welle oder einen eigenen Slice. Die aktuelle Welle wird auf den ursprünglichen Scope reduziert und kann normal schließen.
-2. **Annahme war falsch** (z. B. "Bibliothek X liefert das schon" stellte sich als falsch heraus): → **Neu planen.** Die Welle bekommt einen neuen Plan mit korrigierter Annahme, dokumentiert als ADR-Update oder Carveout. Schätzung wird neu vorgenommen.
-3. **Unvorhergesehene Komplexität in *einem* Slice der Welle** (Rest läuft): → **Carveout** für die problematische Stelle, Welle kann mit eingeschränktem Scope schließen, Carveout-Trigger im nächsten Sprint angesetzt.
+Der erste Commit, der die Arbeit am Slice startet — *nicht* der Wunsch,
+ihn als nächstes machen zu wollen.
 
-Anti-Antwort: "Wir biegen die Schätzung gerade." Das macht den Steering
-Loop unbrauchbar — wenn Schätzungen sich an Realität anpassen statt
-umgekehrt, lernst du nichts über deine Schätzungsqualität.
+Konkret: Ein Slice wandert nach `in-progress/`, wenn ein Branch oder
+PR existiert, der ihn umsetzt. Vorher gehört er in `next/`, mit
+"als nächstes geplant" und idealerweise einem Verantwortlichen.
+
+Anti-Pattern: "Ich verschiebe ihn in `in-progress/`, damit ich nicht
+vergesse, dass ich ihn morgen anfange." Damit lügt das Lifecycle-System
+— jemand könnte annehmen, der Slice sei im Fluss.
+
+### Wann darf ein Slice in `done/` landen, obwohl ein Gate rot ist?
+
+Eigentlich nie. Eine Ausnahme:
+
+- Wenn das rote Gate von einem **Carveout** abgedeckt ist, der explizit dokumentiert ist und einen Auflösungs-Trigger nennt (siehe [Modul 7](../02-planung/modul-07-carveouts.md)).
+- Wenn das Gate ein **Bootstrap-aware Gate** ist (siehe [Modul 13](../04-qualitaet/modul-13-quality-gates.md)) und der Slice noch in der Frühphase liegt — auch dann muss der Bootstrap-Stand dokumentiert sein.
+
+In beiden Fällen ist nicht das Gate rot "trotz Closure", sondern das
+Gate ist *im aktuellen Reifegrad nicht hart* — und das ist
+dokumentiert. Wenn weder Carveout noch Bootstrap, dann ist Closure
+falsch.
 
 ## Übungshinweise
 
-### Aufbau einer produktiven Roadmap für das Begleit-Lab
+### Planung eines Features über mehrere Wellen
 
 Maßstab:
 
-- Mindestens drei Wellen, davon mindestens eine mit klar nachgelagerter Abhängigkeit ("Welle 2 startet erst, wenn Welle 1 done").
-- Jede Welle hat einen *Trigger* (was muss vorher passiert sein) und einen *Closure*-Trigger (was muss erreicht sein, damit sie als done gilt).
-- Jeder Slice in jeder Welle hat eine LH-/HSM-/GG-ID-Referenz (siehe [ID-Schema](../grundlagen/konventionen.md#id-schema-als-klammer)).
-- Mindestens ein expliziter "Wir-tun-X-nicht-in-dieser-Welle"-Eintrag pro Welle. Negativ-Scope ist Roadmap-Disziplin.
+- Die *erste* Welle liefert etwas, was sichtbar grün läuft (`make gates` grün, mindestens ein Smoke-Test). Lieber kleiner als zu groß.
+- Jede Welle hat einen Closure-Trigger ("wenn X grün und Y dokumentiert → Welle done").
+- Wellen sind in *Reihenfolge* abhängig, nicht in *Termin*. Termine ergeben sich, sobald die Wellen geschnitten sind.
+- Mindestens ein Slice pro Welle hat einen Verweis auf eine Anforderungs-ID (`LH-*`) — sonst ist die Welle "Wartungsarbeit", die nicht in die Roadmap gehört.
 
-Vergleich-Möglichkeit: [`/lab/example/docs/plan/planning/in-progress/roadmap.md`](../../../lab/example/docs/plan/planning/in-progress/roadmap.md)
-(im Lab nach Phase B).
+### Bewege einen Slice durch alle vier Verzeichnisse
 
-### Modelliere eine Abhängigkeit, die eine spätere Welle blockiert
+Vier Commits ist die saubere Variante:
 
-Beispielszenario: Welle 2 ("LLM-gestützter Replay-Diff-Reporter")
-braucht ein in Welle 1 definiertes Trace-Format. Wenn Welle 1 das
-Trace-Format ändert, blockiert sie Welle 2.
+1. Erstelle Slice in `open/`.
+2. `git mv open/X.md next/X.md` (Prioritäts-Trigger erfüllt).
+3. `git mv next/X.md in-progress/X.md` (Start-Commit, oder Branch-Commit).
+4. `git mv in-progress/X.md done/X.md` + Closure-Notiz.
 
-Modellierung:
+Wichtig: Reine Move-Commits (Git-Rename-Detection braucht 50 %
+Similarity, siehe Hard Rule aus grid-gym in [Modul 9](../03-agenten/modul-09-implementierung.md)).
+Inhaltliche Edits dazwischen sind eigene Commits.
 
-- Welle 2 deklariert in ihrem Plan: `Voraussetzung: Welle 1, Trace-Format-Vertrag (ADR-7)`.
-- ADR-7 dokumentiert den Vertrag und nennt Welle 2 als Konsument.
-- Wenn Welle 1 das Format ändern muss, ist das ein ADR-Update (ADR-7 superseded), und Welle 2 *muss* angepasst werden — als eigener Slice in Welle 2 oder als Carveout.
+### Schneide einen zu großen Slice in zwei umsetzbare Slices
+
+Kriterien für "zu groß":
+
+- Mehr als eine Schicht der Architektur betroffen ohne klare Abstraktion dazwischen.
+- DoD enthält "und" mehrfach (statt einer klaren Bedingung).
+- Geschätzte Bearbeitungsdauer überschreitet, was ein Reviewer *in einer Sitzung* prüfen kann.
+
+Schnitt-Strategien:
+
+- **Vertikal**: Slice 1 liefert minimalen End-to-End-Pfad; Slice 2 erweitert.
+- **Horizontal**: Slice 1 baut die Schicht, Slice 2 verkabelt sie.
+- **Read-Write-Split**: Slice 1 nur Lesen, Slice 2 fügt Schreiben hinzu.
 
 ## Häufige Fehler
 
-- **Roadmap als Datums-Versprechen verstehen.** Datum ist Folge der Wellen, nicht ihr Treiber. Wenn du Termine fest schreibst und Scope variabel hältst, lieferst du Scope-Kompromisse statt Lieferversprechen.
-- **Wellen ohne Closure-Trigger.** "Welle ist done, wenn alle Slices done sind." Tautologie, kein Trigger. Was ist die *Beobachtung*, die das System grün meldet?
-- **Implizite Abhängigkeiten zwischen Wellen.** Wenn die Reihenfolge "ist halt logisch", wird die Reihenfolge bei Druck umgekehrt — mit Folgen. Abhängigkeit gehört explizit in den Plan.
+- **`done/` wird zur Mülltonne.** Slices wandern dort hin, weil "halt nicht mehr aktuell". Das ist kein Closure, sondern Verstecken.
+- **`open/` enthält Wünsche, die nie umgesetzt werden.** Aufräumen ist Teil von Entropy Management — toter Backlog ist Rauschen.
+- **Closure-Notiz fehlt oder ist generisch ("done").** Damit verlierst du den Steering-Loop-Lerneffekt.
 
 ## Verweise
 
-- Slice-Lifecycle: [Modul 4](../02-planung/modul-04-planning-harness.md)
+- Carveouts: [Modul 7](../02-planung/modul-07-carveouts.md) und [Lösung Modul 7](modul-07-loesung.md)
+- Welle-Self-Close-Konvention aus grid-gym: [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
 - Vorherige Lösung: [Modul 4](modul-04-loesung.md)
 - Nächste Lösung: [Modul 6](modul-06-loesung.md)

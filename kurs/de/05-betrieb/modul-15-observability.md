@@ -1,4 +1,4 @@
-# Modul 14 — Observability
+# Modul 15 — Observability
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung.
 
@@ -223,7 +223,7 @@ und `adr.id`).
   | **Lebenszyklus** | ist das ein Pre-commit-Check, Pre-integration, oder Continuous (vgl. [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md))? |
 
   Mindestens *eine* Regel muss die Hard Rule aus
-  [Modul 12 §"Hard Rule (Doku-Disziplin)"](../04-qualitaet/modul-12-quality-gates.md#hard-rule-doku-disziplin)
+  [Modul 13 §"Hard Rule (Doku-Disziplin)"](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)
   durchsetzen ("keine Befehle behaupten, die es nicht gibt").
 
 * **End-to-End-Trace bis LH-ID** — aktiviert die Abschluss-Achse
@@ -301,4 +301,4 @@ Modul-spezifische Trigger:
 
 ## Weiterlesen
 
-* Nächstes Modul: [Modul 15 — Produktiver Betrieb](modul-15-produktiver-betrieb.md)
+* Nächstes Modul: [Modul 16 — Produktiver Betrieb](modul-16-produktiver-betrieb.md)

@@ -1,127 +1,118 @@
-# Lösung — Modul 12: Quality Gates
+# Lösung — Modul 12: Replay und Evaluierung
 
-Zugehöriges Modul: [Modul 12 — Quality Gates](../04-qualitaet/modul-12-quality-gates.md).
+Zugehöriges Modul: [Modul 12 — Replay und Evaluierung](../04-qualitaet/modul-12-replay-evaluierung.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Nenne fünf generische Gate-Familien
+### (Erinnern) Welche drei Felder muss ein Replay-Manifest mindestens festhalten?
 
-1. **Linter** — Stil und lokale Mustererkennung.
-2. **Typecheck** — Statische Typen, Compiler-Schicht.
-3. **Architekturtest** — Schichtungs- und Import-Regeln (`arch-check`).
-4. **Coverage** — Test-Abdeckung (mit Critical-Variante).
-5. **Security-Gate** — Datenfluss- und Vulnerability-Analyse (Semgrep,
-   CodeQL, Bandit).
+1. **Modellversion** (konkrete API-Version oder Snapshot, nicht nur Familie).
+2. **Seed** (falls der Provider Seed-Parameter unterstützt).
+3. **Eingaben** als referenzierter Datensatz (Hash + Pfad), nicht inline-Text.
 
-Über die fünf hinaus wachsen *domänenspezifische* Gates aus dem
-Steering Loop heraus (siehe Modul 12 §"Reichhaltige Gate-Landschaft"):
-`test-determinism`, `test-replay`, `solid-suppression-gate`,
-`test-mpc-property`, `native-sanitizer`. Diese sind nicht Standard,
-sondern aus konkreten Vorfällen entstanden.
+Pflichtfelder #4 und #5 in jedem ernsten Setup, wie im Modul-Abschnitt
+[Begriff: Image-Hash](../04-qualitaet/modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14)
+erklärt:
 
-Faustregel: Ein Repo mit nur den fünf generischen Gates hat noch keine
-Schmerzen verarbeitet. Es ist kein schlechtes Repo — aber es hat keine
-*spezifische* Steering-Loop-Historie.
+4. **Image-Hash** der Toolchain — sonst lässt sich Modell-Drift nicht
+   von Toolchain-Drift trennen.
+5. **Aufnahme-Zeitpunkt** — damit spätere Läufe ihren Diff datieren
+   können.
 
-### Warum braucht es Critical Coverage zusätzlich zur Gesamt-Coverage?
+Wer nur Modell + Seed pinnt, hat ~60 % Determinismus (siehe Modul 12
+§"Typische Fehlvorstellungen"). Die fehlenden 40 % erscheinen als
+diffuse Drift, die niemand klar zuordnen kann.
 
-Gesamt-Coverage ist ein Durchschnitt — sie ist über alle Dateien
-gleichgewichtet, auch wenn 90 % der Codebase Beispiel-Daten oder
-DTOs sind. Das verbirgt zwei Pathologien:
+### Was muss ein Replay festhalten, damit er deterministisch ist?
 
-1. **Sicherheitsrelevanter Code mit niedriger Coverage neben Daten-Klassen mit 100 %.** Der Durchschnitt sieht gut aus, der kritische Pfad ist ungetestet.
-2. **Coverage-Manipulation durch Trivialität.** Wer 100 Getter testet, kompensiert für ungeprüfte Geschäftslogik.
+Mindestens diese Inputs eines Agentenlaufs:
 
-Critical Coverage schneidet aus: definierte Pfade (z. B. `auth/`,
-`payment/`, `optimizer/`) müssen *einzeln* eine höhere Schwelle
-erfüllen. Damit wird:
+- **Modell-ID und Version** (`claude-opus-4-7@2026-06-01` reicht nicht — auch der Release-Snapshot oder die API-Version).
+- **Eingabe-Prompt** wörtlich, inklusive System-Prompt und aller injizierten Kontext-Stücke (AGENTS.md, ADRs, Spec).
+- **Tool-Definitionen** wörtlich (Name, Schema, Allowlist-Stand).
+- **Temperature, Top-P, Seed**, falls API das unterstützt.
+- **Externe Antworten**, die der Agent während des Laufs erhielt: Tool-Results, HTTP-Antworten, Dateiinhalte. Diese werden für den Replay *gemockt*, nicht neu abgerufen — sonst ist der Replay kein Replay.
 
-- Gesamt-Coverage zur *Gesundheits-Metrik* (langsame Drift),
-- Critical Coverage zum *Vertragspunkt* (harte Schwelle, fail-closed),
-- Carveouts pro kritischen Pfad sichtbar (mit Trigger und Folge-Slice).
+Was *nicht* in den Replay gehört, sondern aufgezeichnet wird:
 
-### Welcher Gate-Typ erkennt eine SQL-Injection — Linter, Typecheck oder Security Gate?
+- Aktueller Output des Agenten.
+- Aktuelle Tool-Calls.
+- Aktuelle Tokens-Verbrauch.
 
-Primär Security Gate (Semgrep, CodeQL, language-spezifische
-SAST-Tools). Linter und Typecheck sehen meist nur Typen und Stil,
-nicht Datenfluss.
+Wenn ein Replay nicht deterministisch ist, ist meist eine externe
+Antwort *nicht* gemockt — der Agent ruft die Realität an, die sich
+geändert hat. Häufiger Übeltäter: Filesystem-Stand oder Datums-Funktion.
 
-Aber: Eine ADR mit "Alle DB-Zugriffe gehen über Repository-Klasse mit
-parametrisierten Queries" plus depguard/import-linter, das direkte
-SQL-String-Builds verbietet, ist die *präventive* Variante
-(Computational + Feedforward). Das erste Gate, das anschlägt, ist dann
-das Architektur-Gate — *vor* dem Security-Gate.
+### Wann wird ein Golden Set giftig (überfittet)?
 
-Faustregel: Wenn dein Security-Gate eine SQL-Injection im
-Production-Code findet, war die Schichtung lückenhaft. Security-Gates
-sollen Reste fangen, nicht das Hauptpensum tragen.
+Drei Symptome:
 
-### (Anwenden) Drei Vorbedingungen vor einem neuen Gate
+1. **Golden grün, Realität rot**: Du fügst Replays aus echten User-Beschwerden hinzu und siehst, dass Golden weiterhin grün, aber Fehler in Produktion auftreten. Das Golden Set kennt die Realität nicht mehr.
+2. **Golden grün nur mit ein-Modell**: Du wechselst das Modell und alles ist rot. Das Set hat sich an Modell-Idiosynkrasien gewöhnt (Wort-Wahl, Reihenfolge der Tool-Calls).
+3. **Golden wird selten erweitert**: Über Wochen keine neuen Einträge. → Steering Loop läuft nicht, jedes Versagen sollte ein neues Golden-Set-Item erzeugen.
 
-Bevor du das Make-Target schreibst:
+Gegenmittel:
 
-1. **Anforderungs- oder ADR-Bezug.** Welcher `LH-*`/`ADR-*` rechtfertigt
-   das Gate? Ohne diesen Bezug ist es ein Vorschlag, kein Vertrag. Das
-   Make-Target trägt die ID im Kommentar: `coverage-gate-critical: ## LH-QA-CRIT-003 / ADR-0014`.
-2. **Begründete Schwelle.** Die Zahl (40 %, 70 %, 90 %) braucht eine
-   Begründung — entweder in einer ADR ("Sicherheits-Pfad: 90 % wegen
-   LH-QA-SEC-001") oder als bootstrap-aware Stufung mit Trigger.
-   Schwellen ohne Begründung wandern unter Druck nach unten.
-3. **Lokal-CI-Parität.** Das Gate läuft in einem Image, dessen Hash
-   lokal und im CI identisch ist (Modul 13). Andernfalls debuggst du
-   *nicht* den Gate-Verstoß, sondern den Image-Unterschied — ein
-   Tagesgeschäft, das niemand will.
+- Rotieren: alte Golden-Items, deren Klasse durch andere abgedeckt ist, retiren.
+- Mischformen: semantische Bewertungsmetrik *zusätzlich* zur Exact-Match. Modelle ändern Formulierung, ohne Inhalt zu ändern.
+- Mindestens eine Welle pro Quartal: "Golden-Set-Audit", wer hat zuletzt was eingespeist, was wurde nie getriggert?
 
-Falle: "Tool installieren, ausführen, fertig". Ohne die drei
-Vorbedingungen ist das Gate ein lokaler Verbesserungswunsch, der im
-nächsten Repo-Refactor verschwindet. Mit den drei Vorbedingungen ist es
-eine traceable Anforderung mit Sensor — und das ist genau die Bauart,
-die der Kurs lehrt.
+### (Anwenden) Zwei Drift-Quellen — welche zuerst messen?
+
+In der ersten Woche zwei konkrete:
+
+1. **Modellversion-/Routing-Drift.** Der Provider routet "gleicher Tag"
+   intern auf verschiedene Subversions — der API-Tag bleibt stabil, das
+   Verhalten driftet. Sensor: zwei Replays desselben Manifests im Abstand
+   von Tagen vergleichen, Diff betrachten.
+2. **Toolchain-Drift.** Tool-Subversion oder Image-Hash anders als im
+   Manifest — Test-Library aktualisiert, Linter strenger, Compiler
+   anders. Sensor: Image-Hash-Vergleich zwischen Manifest und aktuellem
+   Build.
+
+Warum *diese* beiden zuerst:
+
+- Beide haben einen *sofortigen* Sensor (Manifest-Vergleich).
+- Beide sind in einer Woche messbar (drei Läufe reichen für ein Signal).
+- Beide sind *Voraussetzungen* für andere Messungen. Eingabe-Distribution
+  oder Cache-Verhalten zu messen, *bevor* Modell und Toolchain stabil
+  sind, misst Rauschen.
+
+Die Reihenfolge ist nicht beliebig. Wer zuerst Eingabe-Distribution
+analysiert, sieht Drift — aber ohne Toolchain-Pinning kann er nicht
+sagen, ob das an der Distribution oder am Linter liegt.
 
 ## Übungshinweise
 
-### Schreibe einen Architekturtest, der ADR-3 als Regel umsetzt
+### Reproduzierbare Testläufe gegen ein Golden Set
 
-Wenn ADR-3 z. B. besagt "Layer Service darf nur Repo importieren,
-nicht Runtime", dann:
+Maßstab:
 
-- **Go (depguard)**: `denyList: { "**/runtime/**": { "**/service/**" } }`.
-- **Python (import-linter)**: `forbidden_modules = service` mit `from = runtime`.
-- **Java/Kotlin (ArchUnit)**:
-  ```
-  noClasses().that().resideInAPackage("..service..")
-    .should().dependOnClassesThat().resideInAPackage("..runtime..")
-  ```
+- Pro Run wird ein Run-Manifest erzeugt: Modell, Seed, alle Input-Hashes, alle gemockten Antworten, Output-Hashes.
+- Zwei aufeinanderfolgende Runs derselben Eingabe erzeugen identische Manifest-Hashes (im Output) — *oder* ein semantischer Vergleicher meldet "Outputs sind äquivalent" (mit Begründung).
+- Replay-Lauf hat keinen Netzzugriff — alles aus Mock-Files.
 
-Erfolgskriterien:
-
-- Test schlägt fehl, *bevor* du den Verstoß im Code einbaust (Vorab-Validierung).
-- Test bricht `make arch-check` und damit `make gates` — nicht nur ein Warning.
-- Test referenziert die ADR-ID im Kommentar.
-
-### Provoziere absichtlich einen Coverage-Gate-Failure auf einer kritischen Datei
+### Erzeuge eine Regression durch Modellwechsel
 
 Vorgehen:
 
-1. Lege eine neue Funktion in `optimizer/critical.go` (oder Äquivalent) ohne Test an.
-2. Stelle sicher, dass `coverage-gate-critical` die Datei sieht.
-3. Führe `make coverage-gate-critical` aus → muss rot werden.
-4. Schreibe minimalen Test → grün.
+1. Replay-Lauf mit Modell A → grün.
+2. Wechsel auf Modell B → was wird rot?
+3. Klassifiziere die roten Fälle: Format-Drift (Reihenfolge, Tokens), semantische Verschiebung, neue Fehler.
+4. Welche der drei Klassen ist akzeptabel, welche ist Show-Stopper?
 
-Warum diese Übung wichtig ist: Sie validiert, dass dein
-Critical-Coverage-Gate *funktioniert*. Häufiger Fehler: Gate ist
-konfiguriert, aber Critical-Pfad ist im Glob falsch und matched
-nichts — Gate ist also stumm.
+Diese Übung ist gleichzeitig eine Modell-Migrations-Probe. In
+Produktion bedeutet ein Modell-Update genau diesen Lauf — vorher.
 
 ## Häufige Fehler
 
-- **Gate-Existenz wird mit Gate-Wirkung verwechselt.** `make coverage-gate` *gibt* es, aber prüft 0 %. → Halluzinations-Gate, siehe Disziplinregel aus Modul 12.
-- **Schwelle in der Pipeline-YAML statt im Makefile.** → Lokales `make` und CI driften. Schwelle gehört dorthin, wo sie reproduzierbar gilt.
-- **Bootstrap-aware-Marker fehlt.** → Wenn das Gate "aktuell 40 %" prüft, ohne den Trigger für "morgen 70 %" zu nennen, wird der Bootstrap zur permanenten Lüge.
+- **Replay-Tests laufen mit echtem Netz**. → Kein Replay, sondern Live-Test mit alten Erwartungen. Wird flaky.
+- **Exact-Match als einziges Erfolgskriterium.** → Modelle sind variabel; minimaler Format-Drift erzeugt False-Positive-Failures. Mindestens *eine* semantische Metrik dazu.
+- **Golden Set wird in einem CSV gepflegt**, das niemand reviewt. → Wenn Golden-Set-Änderungen nicht durch denselben Slice-Lifecycle laufen wie Code, driften sie.
 
 ## Verweise
 
-- Reichhaltige Gate-Landschaft aus grid-gym: [Modul 12](../04-qualitaet/modul-12-quality-gates.md) und [Fallstudie](../grundlagen/fallstudien.md)
-- Computational-Feedback-Quadrant: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
+- Test-Diversität (Determinism/Replay/Fault): [Modul 12](../04-qualitaet/modul-12-replay-evaluierung.md)
+- grid-gym als reales Beispiel: [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
 - Vorherige Lösung: [Modul 11](modul-11-loesung.md)
 - Nächste Lösung: [Modul 13](modul-13-loesung.md)

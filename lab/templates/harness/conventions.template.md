@@ -126,7 +126,7 @@ sie für Reviewer nicht von Tippfehlern unterscheidbar.
 
 Eine nicht-deklarierte Zusatzklasse in der Sensors-Tabelle ist eine
 stille Setzung und damit Harness-Lüge in derselben Klasse wie ein
-halluziniertes Gate (Modul 12).
+halluziniertes Gate (Modul 13).
 -->
 
 | Klasse | Form | Bedeutung | Beispiel |
@@ -148,7 +148,7 @@ Pro Modul / Verzeichnis / Sub-Area: Modus festlegen.
   mit Begründung und Folge-Slice analog zu permanentem Carveout.
 
 Eine Sub-Area in BF *ohne* Graduation-Plan ist eine Harness-Lüge:
-"permanente Ausnahme als temporär getarnt" (Modul 6 Analogie).
+"permanente Ausnahme als temporär getarnt" (Modul 7 Analogie).
 -->
 
 | Sub-Area (Pfad / Modul) | Modus | Begründung | Graduation-Bedingung / Folge-Slice |

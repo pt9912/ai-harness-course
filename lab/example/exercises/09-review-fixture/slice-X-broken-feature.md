@@ -1,7 +1,7 @@
 # Slice X: Schnelle Such-Optimierung (Review-Fixture, BROKEN)
 
 > **Hinweis:** Dieser Slice-Plan ist **absichtlich fehlerhaft** für die
-> Übung in Modul 9. Drei Fehler sind eingebaut.
+> Übung in Modul 10. Drei Fehler sind eingebaut.
 
 **Status:** in-progress
 

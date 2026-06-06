@@ -4,7 +4,7 @@ Dieses Verzeichnis ist das **Begleit-Lab** zum Kurs unter
 [`/kurs/de/`](../kurs/de/README.md). Es liefert:
 
 1. **Templates** (`templates/`): leere Skelett-Vorlagen mit Pflicht-Gliederung für alle Dokumenttypen des Kurses (Spec, ADR, Slice, Welle, Roadmap, Carveout, AGENTS.md, `harness/README.md`).
-2. **Beispiel** (`example/`): ein voll ausgefülltes Beispiel-Repo mit konsistenten IDs, mindestens einem geschlossenen Slice, geführten Übungsfixtures, einem fingierten kaputten Slice für [Modul 9](../kurs/de/04-qualitaet/modul-09-review-harness.md), einem Replay-Beispiel für [Modul 11](../kurs/de/04-qualitaet/modul-11-replay-evaluierung.md), Trace- und Runbook-Fixtures für Phase 5.
+2. **Beispiel** (`example/`): ein voll ausgefülltes Beispiel-Repo mit konsistenten IDs, mindestens einem geschlossenen Slice, geführten Übungsfixtures, einem fingierten kaputten Slice für [Modul 10](../kurs/de/04-qualitaet/modul-10-review-harness.md), einem Replay-Beispiel für [Modul 12](../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md), Trace- und Runbook-Fixtures für Phase 5.
 3. **Sprach-Skelette** (`example/{go,python,kotlin,java,csharp}/`, kommen in Phase C): fünf lauffähige Implementierungs-Skelette mit eigener Toolchain (Linter, Typecheck, Architekturtest, Coverage, Container) und einheitlichem `make gates`-Vertrag.
 
 ## Lernweg
@@ -46,10 +46,10 @@ lab/
     │   ├── planning/in-progress/roadmap.md
     │   └── carveouts/{README.md, CO-001-*.md}
     ├── exercises/                 (geführte Übungen für Module 0, 2, 3, 8, 9)
-    ├── verification/checks/       (DoD-/Traceability-Checks für Modul 10)
-    ├── evals/golden/                   (Replay-Beispiel für Modul 11)
-    ├── otel/                           (Trace-Fixture für Modul 14)
-    ├── runbooks/                       (Release/Incident-Fixtures für Modul 15)
+    ├── verification/checks/       (DoD-/Traceability-Checks für Modul 11)
+    ├── evals/golden/                   (Replay-Beispiel für Modul 12)
+    ├── otel/                           (Trace-Fixture für Modul 15)
+    ├── runbooks/                       (Release/Incident-Fixtures für Modul 16)
     │
     └── {go,python,kotlin,java,csharp}/  (Phase C — fünf Sprach-Skelette)
         Makefile · Dockerfile · AGENTS.md · harness/README.md · …
@@ -66,7 +66,7 @@ abfragbar macht. Genug Komplexität für:
 - ein paar realistische ADRs (Modellwahl, Layering, Vektor-Datenbank),
 - mehrere Slices in unterschiedlichen Lifecycle-Stadien,
 - einen Carveout (z. B. Bootstrap-Coverage),
-- ein fingiertes Review-Fixture für Modul 9.
+- ein fingiertes Review-Fixture für Modul 10.
 
 Der Sinn ist nicht, ein produktives DocSearch zu bauen, sondern den
 Kursinhalt am konkreten Artefakt erlebbar zu machen.

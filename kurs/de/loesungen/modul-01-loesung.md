@@ -80,4 +80,4 @@ sind. Wenn ein Verweis ins Leere zeigt → Doku-Drift gefunden.
 
 - Source Precedence im Detail: [`../grundlagen/konventionen.md#source-precedence`](../grundlagen/konventionen.md#source-precedence)
 - Vorherige Lösung: [Modul 0](modul-00-loesung.md)
-- Nächste Lösung: [Modul 2](modul-02-loesung.md)
+- Nächste Lösung: [Modul 3](modul-03-loesung.md)

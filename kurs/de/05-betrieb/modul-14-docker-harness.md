@@ -1,4 +1,4 @@
-# Modul 13 — Docker Harness
+# Modul 14 — Docker Harness
 
 > **Aufwand:** ca. 60 Min Lesen · 90 Min Übung.
 
@@ -7,7 +7,7 @@
 Fünf neue Begriffe — Volldefinitionen in
 [`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
 Der Image-Hash wird hier in *Vollform* eingeführt (Vorgriff-Block in
-[Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13) löst sich hier auf).
+[Modul 12](../04-qualitaet/modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14) löst sich hier auf).
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
@@ -62,7 +62,7 @@ Unterschied, nicht den Bug.
 - **"Lock-Files sind nur für Python."** — Lock-Files gibt es für jede Sprache: `package-lock.json`, `go.sum`, `Cargo.lock`, `packages.lock.json` (mit Central Package Management, siehe `bess-ems`), `pnpm-lock.yaml`, `poetry.lock`. Wer ohne Lock-File baut, baut nicht reproduzierbar.
 - **"Docker-only ist Overkill für Tools."** — Tools driften am schnellsten. Genau dort lohnt Docker am meisten.
 - **"Devcontainer ersetzt Compose."** — Nein. Devcontainer ist für *Entwickler-IDE-Setup*, Compose für *Lauf- und CI-Vertrag*. Sie ergänzen sich.
-- **"DevOps ist YAML schreiben — Container = Deployment."** — Verbreitet, weil Container historisch über die Deployment-Seite eingeführt wurden. In diesem Kurs ist der primäre Zweck eines Containers ein anderer: er ist **Reproduzierbarkeits-Anker** — derselbe Image-Hash garantiert dieselbe Toolchain auf jeder Maschine, im CI und in sechs Monaten. Deployment ist *eine* Anwendung dieses Ankers, nicht sein Hauptzweck. Bei einem Replay-Lauf gegen ein altes Golden Set ([Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md)) brauchst du den *Image-Hash von damals*, nicht das aktuelle Deployment. Wer das Bild "Container = Auslieferung" pflegt, hat keinen Hebel für *time-travel reproducibility* — und damit kein belastbares Replay.
+- **"DevOps ist YAML schreiben — Container = Deployment."** — Verbreitet, weil Container historisch über die Deployment-Seite eingeführt wurden. In diesem Kurs ist der primäre Zweck eines Containers ein anderer: er ist **Reproduzierbarkeits-Anker** — derselbe Image-Hash garantiert dieselbe Toolchain auf jeder Maschine, im CI und in sechs Monaten. Deployment ist *eine* Anwendung dieses Ankers, nicht sein Hauptzweck. Bei einem Replay-Lauf gegen ein altes Golden Set ([Modul 12](../04-qualitaet/modul-12-replay-evaluierung.md)) brauchst du den *Image-Hash von damals*, nicht das aktuelle Deployment. Wer das Bild "Container = Auslieferung" pflegt, hat keinen Hebel für *time-travel reproducibility* — und damit kein belastbares Replay.
 
 ## Worked Example: vom einstufigen Dockerfile zur reproduzierbaren Multi-Stage-Pipeline
 
@@ -154,7 +154,7 @@ ohne interpretierbares Runtime — siehe
 als Vorbild.
 
 **Schritt 5 — Image-Hash im Build-Output festhalten.** Damit das Image
-in einem Replay-Manifest (Modul 11) referenzierbar wird:
+in einem Replay-Manifest (Modul 12) referenzierbar wird:
 
 ```makefile
 build:  ## LH-QA-03 — reproduzierbarer Build, Image-Hash erfasst
@@ -171,7 +171,7 @@ build:  ## LH-QA-03 — reproduzierbarer Build, Image-Hash erfasst
 `harness/image-hash.txt` ist ein einzeiliges Beleg-Artefakt, das in
 `harness/README.md` referenziert wird (siehe Vorlage in
 [`/lab/templates/harness/README.template.md`](../../../lab/templates/harness/README.template.md)).
-Ohne diesen Schritt ist das Replay-Manifest in Modul 11 zur Hälfte
+Ohne diesen Schritt ist das Replay-Manifest in Modul 12 zur Hälfte
 blind — der `image_hash`-Slot bleibt unbelegt.
 
 **Schritt 6 — Bewusstes Brechen: Drift provozieren.** Ändere in einer
@@ -244,12 +244,12 @@ Modul-spezifische Trigger:
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
-| Drei Sprache↔Lock-File-Paare? | zwei genannt | Python: `poetry.lock` oder `uv.lock` · Node: `package-lock.json` oder `pnpm-lock.yaml` · Go: `go.sum` · .NET: `packages.lock.json` (mit Central Package Management, siehe `bess-ems`) · Rust: `Cargo.lock`. | + Pointe: Ein gepinnter Lock-File ist *nicht* ausreichend für Reproduzierbarkeit — er sichert Transitive-Versionen, aber nicht die Runtime-Version. Lock-File **plus** Image-Hash ist die Mindestkombination (siehe [Modul 11 §Image-Hash](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13)). |
-| Mindestkombination für Build-Reproduzierbarkeit? | "Docker." | Lock-File (sichert Abhängigkeits-Versionen) + Image-Hash (sichert Runtime-/Toolchain-Version). Ohne Lock-File driftet das Dependency-Tree, ohne Image-Hash driftet die Sprach-/Tool-Version. | + Folge: ein Replay-Manifest (Modul 11) referenziert *beide* — ohne Image-Hash lässt sich Modell-Drift nicht von Toolchain-Drift trennen; ohne Lock-File-Hash nicht von Dependency-Drift. Drei Drift-Quellen, drei Anker. |
+| Drei Sprache↔Lock-File-Paare? | zwei genannt | Python: `poetry.lock` oder `uv.lock` · Node: `package-lock.json` oder `pnpm-lock.yaml` · Go: `go.sum` · .NET: `packages.lock.json` (mit Central Package Management, siehe `bess-ems`) · Rust: `Cargo.lock`. | + Pointe: Ein gepinnter Lock-File ist *nicht* ausreichend für Reproduzierbarkeit — er sichert Transitive-Versionen, aber nicht die Runtime-Version. Lock-File **plus** Image-Hash ist die Mindestkombination (siehe [Modul 12 §Image-Hash](../04-qualitaet/modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14)). |
+| Mindestkombination für Build-Reproduzierbarkeit? | "Docker." | Lock-File (sichert Abhängigkeits-Versionen) + Image-Hash (sichert Runtime-/Toolchain-Version). Ohne Lock-File driftet das Dependency-Tree, ohne Image-Hash driftet die Sprach-/Tool-Version. | + Folge: ein Replay-Manifest (Modul 12) referenziert *beide* — ohne Image-Hash lässt sich Modell-Drift nicht von Toolchain-Drift trennen; ohne Lock-File-Hash nicht von Dependency-Drift. Drei Drift-Quellen, drei Anker. |
 | Warum reicht `make gates` im Host-OS nicht? | "Andere Umgebung." | Host-Toolchain ist nicht versionsgleich mit CI; Gate-Ergebnisse divergieren; Debugging erfolgt am Unterschied, nicht am Bug. | + Konsequenz: ohne Image-Hash-Vertrag zwischen lokal und CI sind grüne lokale Gates *kein* Vertrag — sie sind eine private Information. |
 | Devcontainer zusätzlich zu Compose? | "Wenn man möchte." | Devcontainer für IDE-Setup (Sprache-Server, Debugger-Anschluss). Compose für Lauf- und CI-Vertrag. Beides parallel, wenn das Team mehrere IDEs nutzt. | + Faustregel: Compose ist *Pflicht* (CI-Vertrag), Devcontainer ist *Komfort*. Wer mit Devcontainer beginnt, baut sich eine zweite Toolchain ohne die erste. |
 
 ## Weiterlesen
 
-* Docker-only als Hard Rule mit Falsch/Richtig-Beispiel: [Modul 8](../03-agenten/modul-08-implementierung.md)
-* Nächstes Modul: [Modul 14 — Observability](modul-14-observability.md)
+* Docker-only als Hard Rule mit Falsch/Richtig-Beispiel: [Modul 9](../03-agenten/modul-09-implementierung.md)
+* Nächstes Modul: [Modul 15 — Observability](modul-15-observability.md)

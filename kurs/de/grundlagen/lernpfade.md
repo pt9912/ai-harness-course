@@ -1,7 +1,7 @@
 # Differenzierte Lernpfade
 
 Der Kurs adressiert eine heterogene Zielgruppe (Entwickler, Architekt,
-Tech Lead, DevOps, KI-Plattform-Team). Alle 16 Module sind sinnvoll —
+Tech Lead, DevOps, KI-Plattform-Team). Alle 17 Module sind sinnvoll —
 aber je nach Rolle liegen die Vertiefungen anders. Drei
 empfohlene Schwerpunktpfade. Lies alle Module einmal; vertiefe entlang
 deines Pfads.
@@ -24,9 +24,9 @@ Frage 4.
 | 3. *Wo schlägt eine Halluzination am ehesten zu?* | im ADR-Wissen (Lösung erfunden) | A |
 | | in der Build-/Deploy-Kette (Befehl erfunden) | B |
 | | im Code (Funktion erfunden, Test umgangen) | C |
-| 4. *Welches Modul liest du als Erstes mit Vorfreude?* | Modul 2 (Lastenheft) oder Modul 3 (ADRs) | A |
-| | Modul 12 (Quality Gates) oder Modul 13 (Docker) | B |
-| | Modul 8 (Implementierung) oder Modul 9 (Review) | C |
+| 4. *Welches Modul liest du als Erstes mit Vorfreude?* | Modul 3 (Lastenheft) oder Modul 4 (ADRs) | A |
+| | Modul 13 (Quality Gates) oder Modul 14 (Docker) | B |
+| | Modul 9 (Implementierung) oder Modul 10 (Review) | C |
 
 Die Diagnose ist *probabilistisch* — gleicher Logik wie die
 Voraussetzungs-Selbst-Diagnose in
@@ -40,12 +40,12 @@ Architecture-Fitness.
 
 | Modul | Vertiefung |
 |---|---|
-| [2 — Lastenheft](../01-spec-und-architektur/modul-02-lastenheft.md) | Spec-Stratifizierung, Akzeptanzkriterien Boundary/Negative |
-| [3 — ADRs](../01-spec-und-architektur/modul-03-architektur-adrs.md) | ADR ↔ Fitness Function, Hard Rule "Accepted-ADRs immutable" |
-| [6 — Carveouts](../02-planung/modul-06-carveouts.md) | Kopplung Carveout ↔ Folge-Slice, Auflösungs-Trigger |
-| [7 — Agentenrollen](../03-agenten/modul-07-agentenrollen.md) | Rollen-Übergaben, Konfliktauflösung |
-| [10 — Verifikation](../04-qualitaet/modul-10-verification.md) | Plan-gegen-Code, DoD-Erkennung |
-| [14 — Observability](../05-betrieb/modul-14-observability.md) | Architecture-Fitness-Telemetrie, OTel-Assertions |
+| [3 — Lastenheft](../01-spec-und-architektur/modul-03-lastenheft.md) | Spec-Stratifizierung, Akzeptanzkriterien Boundary/Negative |
+| [4 — ADRs](../01-spec-und-architektur/modul-04-architektur-adrs.md) | ADR ↔ Fitness Function, Hard Rule "Accepted-ADRs immutable" |
+| [7 — Carveouts](../02-planung/modul-07-carveouts.md) | Kopplung Carveout ↔ Folge-Slice, Auflösungs-Trigger |
+| [8 — Agentenrollen](../03-agenten/modul-08-agentenrollen.md) | Rollen-Übergaben, Konfliktauflösung |
+| [11 — Verifikation](../04-qualitaet/modul-11-verification.md) | Plan-gegen-Code, DoD-Erkennung |
+| [15 — Observability](../05-betrieb/modul-15-observability.md) | Architecture-Fitness-Telemetrie, OTel-Assertions |
 
 Tieferes Lesen: [`fallstudien.md`](fallstudien.md) — Spec-Stratifizierung
 in `c-hsm-doc`, Hard Rules in `bess-ems`.
@@ -57,12 +57,12 @@ Response.
 
 | Modul | Vertiefung |
 |---|---|
-| [4 — Planning Harness](../02-planung/modul-04-planning-harness.md) | Lifecycle-Verzeichnisse als CI-Eingang |
-| [12 — Quality Gates](../04-qualitaet/modul-12-quality-gates.md) | Make-Target-Vertrag, bootstrap-aware Gates |
-| [13 — Docker Harness](../05-betrieb/modul-13-docker-harness.md) | Multi-Stage, Image-Pinning, Lock-Files |
-| [14 — Observability](../05-betrieb/modul-14-observability.md) | OTel-Collector, Token-Attribuierung, Cache-Hit-Metriken |
-| [15 — Produktiver Betrieb](../05-betrieb/modul-15-produktiver-betrieb.md) | Runbooks, Replay als Forensik, Rollback-Entscheidung |
-| [11 — Replay](../04-qualitaet/modul-11-replay-evaluierung.md) | Determinism-Tests, Drift-Messung |
+| [5 — Planning Harness](../02-planung/modul-05-planning-harness.md) | Lifecycle-Verzeichnisse als CI-Eingang |
+| [13 — Quality Gates](../04-qualitaet/modul-13-quality-gates.md) | Make-Target-Vertrag, bootstrap-aware Gates |
+| [14 — Docker Harness](../05-betrieb/modul-14-docker-harness.md) | Multi-Stage, Image-Pinning, Lock-Files |
+| [15 — Observability](../05-betrieb/modul-15-observability.md) | OTel-Collector, Token-Attribuierung, Cache-Hit-Metriken |
+| [16 — Produktiver Betrieb](../05-betrieb/modul-16-produktiver-betrieb.md) | Runbooks, Replay als Forensik, Rollback-Entscheidung |
+| [12 — Replay](../04-qualitaet/modul-12-replay-evaluierung.md) | Determinism-Tests, Drift-Messung |
 
 Tieferes Lesen: [`fallstudien.md`](fallstudien.md) — reichhaltige
 Gate-Landschaft in `grid-gym` (18 Gates), Central Package Management
@@ -75,11 +75,11 @@ Schwerpunkt: Agentenbedienung, Review-Disziplin, Hard Rules.
 | Modul | Vertiefung |
 |---|---|
 | [1 — Entwicklungszyklus](../01-spec-und-architektur/modul-01-entwicklungszyklus.md) | Traceability-Kette, Source Precedence |
-| [4 — Planning Harness](../02-planung/modul-04-planning-harness.md) | Slice-Größe, "in einer Sitzung prüfbar" |
-| [7 — Agentenrollen](../03-agenten/modul-07-agentenrollen.md) | Rollenbild beim eigenen Arbeiten |
-| [8 — Implementierung](../03-agenten/modul-08-implementierung.md) | 8-Schritt-Workflow, Hard Rules, AGENTS.md |
-| [9 — Review Harness](../04-qualitaet/modul-09-review-harness.md) | Finding-Kategorisierung, Reviewer-Skill |
-| [12 — Quality Gates](../04-qualitaet/modul-12-quality-gates.md) | Lokales Vor-Merge-Gate-Set |
+| [5 — Planning Harness](../02-planung/modul-05-planning-harness.md) | Slice-Größe, "in einer Sitzung prüfbar" |
+| [8 — Agentenrollen](../03-agenten/modul-08-agentenrollen.md) | Rollenbild beim eigenen Arbeiten |
+| [9 — Implementierung](../03-agenten/modul-09-implementierung.md) | 8-Schritt-Workflow, Hard Rules, AGENTS.md |
+| [10 — Review Harness](../04-qualitaet/modul-10-review-harness.md) | Finding-Kategorisierung, Reviewer-Skill |
+| [13 — Quality Gates](../04-qualitaet/modul-13-quality-gates.md) | Lokales Vor-Merge-Gate-Set |
 
 Tieferes Lesen: [`fallstudien.md`](fallstudien.md) — Hard Rules in
 `grid-gym` (Docker-only, noqa-Verbot, git mv + Inhalt = zwei Commits).
@@ -95,7 +95,7 @@ heran.
 |---|---|---|
 | **Reguliert (Finanzen, Medizin, Behörden)** | `c-hsm-doc` (Policy/Compliance) | Spec-Stratifizierung, ID-Schema `HSM-*`, Hard Rule "Accepted-ADRs immutable", Traceability als Pflicht. |
 | **Safety-/Control-kritisch (Industrie-, Energie-Systeme, Hardware)** | `bess-ems` (Safety/Control-Flagship) | Hard Rules (Optimierer schreibt nie direkt), `solid-suppression-gate`, Property-Based-Sensors, native Sanitizer-Gates. |
-| **Embedded LLM-Anwendung (Cost/Latency-kritisch)** | `grid-gym` (Referenz, Domäne) + Modul 14 | Cost-Attribution pro Slice, Cache-Hit-Rate als Metrik, Determinism/Replay/Fault als eigene Test-Klassen. |
+| **Embedded LLM-Anwendung (Cost/Latency-kritisch)** | `grid-gym` (Referenz, Domäne) + Modul 15 | Cost-Attribution pro Slice, Cache-Hit-Rate als Metrik, Determinism/Replay/Fault als eigene Test-Klassen. |
 | **Internes Developer-Tool** | `grid-gym` (Referenz, Domäne) | AGENTS.md-Disziplin, Welle-Self-Close, Replay-Lauf gegen Modellwechsel. |
 | **Plattform/Multi-Repo-Landschaft** | `grid-gym` + `bess-ems` + `c-hsm-doc` parallel | Repo-Klassen (Referenz/Safety/Compliance), Einführungsregel "erst Referenz, dann Flagship", Carveout-Management über Teams. |
 | **Migration / Brownfield (kein Greenfield-Harness)** | alle vier Fallstudien-Repos in unterschiedlicher BF-Reife | Beobachtung in [`fallstudien.md` §Beobachtung aus dem Ist-Zustand](fallstudien.md#beobachtung-aus-dem-ist-zustand): kanonische Quellen existieren oft, der formelle Harness-Einstieg oder seine repo-lokale Konventionsschicht ist unterschiedlich reif — *das* ist der typische Ausgangspunkt. Systematische Sicht: [`konventionen.md` §Harness-Bootstrap](konventionen.md#harness-bootstrap) (BF-Modus, Konvergenz-Auftrag zu GF, Graduation-Bedingung). |

@@ -17,7 +17,7 @@ Du kannst nach 30 Minuten:
 - erklären, *warum* dieselbe Übung ohne ID-Schema später nicht skaliert.
 
 Bloom-Stufe: Anwenden — bewusst niedrig gewählt. Das Ziel ist
-Selbstwirksamkeit, nicht Tiefe. Die Tiefe kommt in Modul 2, 3, 12.
+Selbstwirksamkeit, nicht Tiefe. Die Tiefe kommt in Modul 3, 3, 12.
 
 ## Voraussetzungen
 
@@ -128,20 +128,20 @@ In 30 Minuten:
 - **Reproduzierbares Ergebnis** (`make gates`).
 
 Vier Stellen, dieselbe ID — das ist die *Klammer*, die der Harness fester
-zieht. Modul 2 und 12 vertiefen jeden dieser vier Punkte.
+zieht. Modul 3 und 12 vertiefen jeden dieser vier Punkte.
 
 ## Was du *nicht* gelernt hast
 
 Bewusst weggelassen:
 
-- Spec-Stratifizierung (kommt in Modul 2),
-- ADRs (kommt in Modul 3),
-- Reviewer-/Implementation-Agent (kommt in Modul 7, 8),
-- Replay (kommt in Modul 11),
-- Docker-Harness (kommt in Modul 13).
+- Spec-Stratifizierung (kommt in Modul 3),
+- ADRs (kommt in Modul 4),
+- Reviewer-/Implementation-Agent (kommt in Modul 8, 8),
+- Replay (kommt in Modul 12),
+- Docker-Harness (kommt in Modul 14).
 
 Das hier ist ein *Hello World für die Klammer*. Mehr nicht. Aber genug,
-um zu wissen, was am Ende von Modul 12 in echt steht.
+um zu wissen, was am Ende von Modul 13 in echt steht.
 
 ## Nächster Schritt
 

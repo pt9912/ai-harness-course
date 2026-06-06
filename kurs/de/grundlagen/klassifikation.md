@@ -36,9 +36,9 @@ sollten erst greifen, was die linken Quadranten nicht abdecken können.
 ### Lesart
 
 * *Computational + Feedforward*: macht falsche Aktionen **technisch unmöglich**. Billigste Kontrolle.
-* *Computational + Feedback*: erkennt falsche Aktionen **schnell und deterministisch**. Das sind die Gates aus [Modul 12](../04-qualitaet/modul-12-quality-gates.md).
-* *Inferential + Feedforward*: gibt dem Agenten Kontext, **bevor** er handelt. Das sind Spec, ADR, Carveouts — die Hebel aus [Modul 2](../01-spec-und-architektur/modul-02-lastenheft.md), [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md), [Modul 6](../02-planung/modul-06-carveouts.md).
-* *Inferential + Feedback*: prüft semantisch nach. Das sind Review, Verifikation, Validation — die Hebel aus [Modul 9](../04-qualitaet/modul-09-review-harness.md), [Modul 10](../04-qualitaet/modul-10-verification.md), [Modul 7](../03-agenten/modul-07-agentenrollen.md).
+* *Computational + Feedback*: erkennt falsche Aktionen **schnell und deterministisch**. Das sind die Gates aus [Modul 13](../04-qualitaet/modul-13-quality-gates.md).
+* *Inferential + Feedforward*: gibt dem Agenten Kontext, **bevor** er handelt. Das sind Spec, ADR, Carveouts — die Hebel aus [Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md), [Modul 4](../01-spec-und-architektur/modul-04-architektur-adrs.md), [Modul 7](../02-planung/modul-07-carveouts.md).
+* *Inferential + Feedback*: prüft semantisch nach. Das sind Review, Verifikation, Validation — die Hebel aus [Modul 10](../04-qualitaet/modul-10-review-harness.md), [Modul 11](../04-qualitaet/modul-11-verification.md), [Modul 8](../03-agenten/modul-08-agentenrollen.md).
 
 Die Faustregel: **so weit links und oben wie möglich**. Eine Regel, die
 der Typchecker erzwingt, braucht keinen Reviewer-Agent. Ein ADR, das den
@@ -90,7 +90,7 @@ flowchart LR
 Die Behaviour-Kategorie (gelb) ist die schwierigste — Böckeler nennt sie
 offen die am wenigsten entwickelte. Sie ist der eigentliche Grund, warum
 Replay und Golden Sets im Kurs ein eigenes Modul bekommen
-([Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md)).
+([Modul 12](../04-qualitaet/modul-12-replay-evaluierung.md)).
 
 ## Drei operative Säulen (OpenAI)
 
@@ -159,9 +159,9 @@ Code, den er schützen soll. Die typischen Verfallsformen:
 * **Golden-Set-Überfitting** — Replay grün, Realität rot. Lösung: Golden Sets rotieren, neue Beispiele ziehen.
 
 Entropy Management ist nicht ein eigenes Modul, sondern eine Pflicht, die
-durch [Modul 6 (Carveouts)](../02-planung/modul-06-carveouts.md),
-[Modul 11 (Replay)](../04-qualitaet/modul-11-replay-evaluierung.md)
-und [Modul 14 (Observability)](../05-betrieb/modul-14-observability.md)
+durch [Modul 7 (Carveouts)](../02-planung/modul-07-carveouts.md),
+[Modul 12 (Replay)](../04-qualitaet/modul-12-replay-evaluierung.md)
+und [Modul 15 (Observability)](../05-betrieb/modul-15-observability.md)
 verteilt ist.
 
 ## Steering Loop

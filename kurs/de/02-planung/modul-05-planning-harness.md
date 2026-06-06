@@ -1,4 +1,4 @@
-# Modul 4 — Planning Harness
+# Modul 5 — Planning Harness
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung. Anschluss: erster [Phasen-Checkpoint A](../grundlagen/checkpoints.md#checkpoint-a-nach-phase-01-spec-und-architektur) sollte vor diesem Modul liegen.
 
@@ -47,7 +47,7 @@ stateDiagram-v2
 
 Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
 Größen-Erkenntnis) und `in_progress → open` (Blocker — meist mit
-Carveout, siehe [Modul 6](modul-06-carveouts.md)). Der einzige Übergang
+Carveout, siehe [Modul 7](modul-07-carveouts.md)). Der einzige Übergang
 nach `done` verlangt *Lerneintrag*, nicht nur "Tests grün".
 
 ## Lab-Bezug
@@ -136,9 +136,9 @@ Modul-spezifische Trigger:
 |---|---|---|---|
 | Vier Lifecycle-Verzeichnisse in Reihenfolge? | zwei oder drei genannt | `open/` → `next/` → `in-progress/` → `done/`. Plus Rückführungen: `in-progress/ → next/` (zu groß), `in-progress/ → open/` (Blocker). | + Hinweis: WIP-Limit pro Implementer auf 1 — wer mehrere Slices gleichzeitig in `in-progress/` hat, hat keine Lifecycle, sondern ein Buffet. |
 | Trigger `next/ → in-progress/`? | "Wenn jemand anfängt." | Konkreter Trigger: Implementation-Agent (oder Person) übernimmt, Slice ist in `next/` priorisiert, Abhängigkeiten gelöst. | + Abgrenzung "WIP-Limit pro Implementer ist eine harte Größe, kein Vorschlag" — ein Implementer hat höchstens *einen* Slice in `in-progress/`. |
-| Slice in `done/` bei rotem Gate — wann? | "Gar nicht." | Nur mit dokumentiertem Carveout (Modul 6), der den roten Gate-Status auf Trigger schaltet. | + Unterscheidung Carveout (Ausnahme, mit Folge-Slice) vs. bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 12). |
+| Slice in `done/` bei rotem Gate — wann? | "Gar nicht." | Nur mit dokumentiertem Carveout (Modul 7), der den roten Gate-Status auf Trigger schaltet. | + Unterscheidung Carveout (Ausnahme, mit Folge-Slice) vs. bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). |
 
 ## Weiterlesen
 
 * Welle-Self-Close-Konvention als Hard Rule: `pt9912/grid-gym` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
-* Nächstes Modul: [Modul 5 — Roadmap Engineering](modul-05-roadmap.md)
+* Nächstes Modul: [Modul 6 — Roadmap Engineering](modul-06-roadmap.md)

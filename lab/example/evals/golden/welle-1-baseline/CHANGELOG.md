@@ -2,7 +2,7 @@
 
 Replay-Sets verrotten. Diese Datei dokumentiert die Veränderung des
 Sets über Wellen — sie ist *Pflicht* (siehe
-[Kurs Modul 11](../../../../../kurs/de/04-qualitaet/modul-11-replay-evaluierung.md)
+[Kurs Modul 12](../../../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)
 und [ADR-0011](../../../docs/plan/adr/0011-closure-note-pflicht.md)
 für die Closure-Disziplin generell).
 
@@ -21,7 +21,7 @@ ADR-0003 + slice-009 (Tie-Break-Determinismus).
 
 Bis Welle 9 lag das Set als einzelne `welle-1-baseline.json`-Datei. Mit
 ADR-0012 (Index-Write-Strategie) und der Schema-Konvention für
-LH-FA-IDX-* ergänzt um die Verzeichnis-Struktur aus Modul 11 Worked
+LH-FA-IDX-* ergänzt um die Verzeichnis-Struktur aus Modul 12 Worked
 Example. Inhalt unverändert; Form maschinell strenger prüfbar.
 
 **Migration-Schritte:**

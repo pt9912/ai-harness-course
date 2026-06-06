@@ -72,7 +72,7 @@ Anforderung gewahrt bleibt.
 ## 5. Metriken und Tracing-Felder
 
 <!--
-Verbindliche OTel-Felder pro Span (siehe Kurs Modul 14).
+Verbindliche OTel-Felder pro Span (siehe Kurs Modul 15).
 -->
 
 | Span | Pflicht-Attribute | Quelle |

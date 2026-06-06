@@ -1,4 +1,4 @@
-# Modul 9 — Review Harness
+# Modul 10 — Review Harness
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung.
 
@@ -10,7 +10,7 @@ Sechs neue Begriffe — Volldefinitionen in
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
 | **Reviewer** | LLM-Agent, der einen Diff in *kategorisierte Findings* übersetzt — kein Implementer. | TÜV-Prüfer mit Checkliste, nicht der Mechaniker. |
-| **Verifier** | Prüft, ob *Plan und DoD* eingehalten sind (Modul 10). Eingang Plan + Diff, nicht ADR-Tiefe. | Bauabnahme gegen Bauplan, nicht gegen Bauverordnung. |
+| **Verifier** | Prüft, ob *Plan und DoD* eingehalten sind (Modul 11). Eingang Plan + Diff, nicht ADR-Tiefe. | Bauabnahme gegen Bauplan, nicht gegen Bauverordnung. |
 | **Validator** | Prüft, ob das *Ergebnis dem Nutzen* entspricht (semantische End-zu-End-Prüfung; selten im Code-Pfad). | Endkunde, der das Produkt einmal benutzt. |
 | **Finding** | Eine Reviewer-Beobachtung mit *Pflicht-Kategorie* (HIGH/MEDIUM/LOW/INFO) und Quellen-Anker. | Notizzettel mit Farbe — ohne Farbe kein gültiger Befund. |
 | **Skill-Datei** | Markdown unter `.harness/reviewer/<repo>.md`: HIGH-Liste, Negativbefund-Pflicht, Repo-Anker. | Werkstatt-Handbuch für genau dieses Modell. |
@@ -145,7 +145,7 @@ der Reviewer zum zweiten Implementer wird:
 - Keine Lösungsvorschläge ("schreib das so") — Reviewer kategorisiert,
   Implementer entscheidet.
 - Kein Refactoring-Vorschlag, der über den Diff hinausgeht.
-- Keine Verifikation gegen DoD — das ist Verifier-Aufgabe (Modul 10).
+- Keine Verifikation gegen DoD — das ist Verifier-Aufgabe (Modul 11).
 - Keine Validation gegen reale Bedürfnisse — das ist Validator-Aufgabe.
 
 Wenn etwas auffällt, das in diese Kategorien gehört, ein INFO-Finding
@@ -167,7 +167,7 @@ Jedes Finding:
 - `verifizierbar`: ja/nein — gibt es einen Gate-Lauf, der es bestätigen würde?
 
 Zusätzlich am Ende: eine Zeile "geprüft, ohne Befund" pro betrachtetem
-Verzeichnis (Negativbefund-Zeile — siehe Modul 9 §"Reviewer berichtet
+Verzeichnis (Negativbefund-Zeile — siehe Modul 10 §"Reviewer berichtet
 auch, was er nicht gefunden hat").
 ```
 
@@ -181,15 +181,15 @@ Bei dreimaligem Auftreten desselben Findings:
 - gibt es einen ADR/AGENTS.md-Eintrag, der das verhindert hätte?
   → Folge-ADR oder AGENTS.md-Update
 - gibt es eine Fitness Function, die das prüfen würde?
-  → Modul 12, Gate hinzufügen
+  → Modul 13, Gate hinzufügen
 
 Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
-(siehe ADR-Hard-Rule, Modul 3).
+(siehe ADR-Hard-Rule, Modul 4).
 ```
 
 Sechs Schritte, eine reproduzierbare Reviewer-Rolle. Vergleichbares
-Skill-Pattern für *Verifier* und *Validator* in Modul 10 bzw. in
-[Modul 7 §"Konfliktfall"](../03-agenten/modul-07-agentenrollen.md).
+Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
+[Modul 8 §"Konfliktfall"](../03-agenten/modul-08-agentenrollen.md).
 
 ## Typische Fehlvorstellungen
 
@@ -233,4 +233,4 @@ Schreibübung. Modul-spezifische Trigger:
 
 ## Weiterlesen
 
-* Nächstes Modul: [Modul 10 — Verification Harness](modul-10-verification.md)
+* Nächstes Modul: [Modul 11 — Verification Harness](modul-11-verification.md)

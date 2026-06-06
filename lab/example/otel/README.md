@@ -1,6 +1,6 @@
 # OTel-Fixtures — DocSearch
 
-Dieses Verzeichnis enthaelt einen kleinen JSON-Trace fuer Modul 14. Er
+Dieses Verzeichnis enthaelt einen kleinen JSON-Trace fuer Modul 15. Er
 ist kein vollstaendiger OpenTelemetry-Export, sondern ein didaktisch
 reduziertes Fixture mit denselben Pflichtfeldern, die im Kurs geuebt
 werden.

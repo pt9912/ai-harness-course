@@ -1,144 +1,91 @@
-# Lösung — Modul 3: Architektur und ADRs
+# Lösung — Modul 3: Lastenheft und Spezifikation
 
-Zugehöriges Modul: [Modul 3 — Architektur und ADRs](../01-spec-und-architektur/modul-03-architektur-adrs.md).
+Zugehöriges Modul: [Modul 3 — Lastenheft und Spezifikation](../01-spec-und-architektur/modul-03-lastenheft.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Welche vier Pflichtabschnitte hat ein MADR-ADR?
+### (Erinnern) Welche drei Akzeptanzkriterien-Arten muss ein vollständiger `LH-FA-*`-Eintrag tragen?
 
-**Kopf-Felder:** Titel mit ADR-Nummer, Status (Proposed/Accepted/
-Deprecated/Superseded), Datum, Bezug (LH-/HSM-ID).
+Happy Path, Boundary, Negative — alle drei im Given/When/Then-Stil.
+Plus eine *explizite* Out-of-Scope-Liste pro Anforderung.
 
-**Body-Blöcke:**
+Die Out-of-Scope-Liste ist kein optionaler Anhang, sondern Teil des
+Akzeptanzkriteriums. Sie verhindert plausibel-Anbau: was nicht explizit
+ausgeschlossen ist, baut der Agent mit. Out-of-Scope ist *die* Klammer
+gegen "wir hatten das nie gefordert"-PRs.
 
-1. **Kontext** — was war die Situation, was hat die Entscheidung ausgelöst?
-2. **Optionen** — *mit Trade-offs*, mindestens zwei, idealerweise drei.
-3. **Entscheidung** — welche Option, warum (verweist auf Kontext und Trade-offs).
-4. **Konsequenzen** — was folgt operativ daraus, idealerweise inklusive
-   Fitness-Function-Verweis.
+Falle: drei *Test-Fälle* zu liefern (drei Happy-Path-Varianten) ist
+nicht das gleiche wie drei *Test-Arten*. Die Arten sind orthogonal — sie
+prüfen drei *verschiedene Klassen von Annahmen*, nicht drei verschiedene
+Eingabewerte derselben Klasse.
 
-Die *Optionen*-Sektion ist der häufigste Drift-Punkt. Eine ADR ohne
-Optionen ist ein Postulat — sie hält fest, *was* entschieden wurde, aber
-nicht *warum gerade so und nicht anders*. Reviewer-Agenten können
-solche ADRs nicht verteidigen, weil ihnen die Vergleichsbasis fehlt.
+### Welche drei Tests würden ein Akzeptanzkriterium falsifizieren?
 
-### Wann wird aus einer ADR eine Architekturtest-Regel?
+Ein Akzeptanzkriterium ist gut, wenn man es mit drei *unterschiedlichen
+Testarten* angreifen kann. "Falsifizieren" heißt hier: das Kriterium
+würde rot werden, wenn die Implementierung naiv wäre.
 
-Sobald die ADR-Entscheidung sich in einer maschinell prüfbaren
-Eigenschaft niederschlägt — typischerweise eine *strukturelle*
-Eigenschaft des Codes:
+1. **Happy Path** — falsifiziert die These "es funktioniert nicht überhaupt": Eingabe entspricht der Spec, Ergebnis entspricht der Erwartung.
+2. **Boundary** — falsifiziert die These "es funktioniert nur weit weg vom Rand": Eingabe liegt am Rand des spezifizierten Bereichs (leer, maximal, exakt am Schwellwert). Spec sollte sagen, ob das Verhalten am Rand "noch akzeptabel" oder "schon Fehler" ist.
+3. **Negative** — falsifiziert die These "Annahmen aus dem Happy Path sind universell": Eingabe ist *außerhalb* der Spec. Spec sollte den Fehlerpfad explizit benennen (Exception, definierter Rückgabewert, Logging-Eintrag).
 
-- "Schicht A darf nicht von Schicht B importieren" → ArchUnit / depguard / import-linter.
-- "Modul X darf nicht mehr als 50 öffentliche Funktionen exportieren" → Komplexitäts-Lint.
-- "Klassen, die `*Repository` heißen, müssen ein Interface implementieren" → ArchUnit-Predikat.
-- "Alle Public-API-Klassen brauchen einen `@SuppressWarnings("unused")`-Verbot" → Custom-Linter-Regel.
+Boundary und Negative widerlegen die stillen Annahmen des Happy Path —
+genau die Annahmen, die ein Agent am liebsten als "selbstverständlich"
+behandelt. Wenn die Spec auf "Negative" mit "ist undefiniert" antwortet,
+ist das eine Spec-Lücke, und genau dort halluziniert ein Agent.
 
-Faustregel: Wenn ein Reviewer-Agent dieselbe Verletzung in jedem Lauf
-wieder beanstanden müsste, hast du eine Fitness Function vergessen.
-Wenn die Entscheidung nur "es soll sauber sein" ist, ist sie noch
-keine ADR-würdige Regel.
+### Wo gehört "Performance < 200 ms" hin — funktional oder nichtfunktional?
 
-### Was ist der Unterschied zwischen *superseded* und *deprecated* ADR?
+Nichtfunktional. Funktionale Anforderungen beschreiben *was* das System
+tut; nichtfunktionale *wie gut* es das tut (Performance, Verfügbarkeit,
+Sicherheit, Wartbarkeit).
 
-- **Deprecated**: Die Entscheidung gilt weiterhin für vorhandenen Code,
-  aber für *neuen* Code nicht mehr. Es gibt (noch) keinen Nachfolger.
-  Migration ist optional. Beispiel: "Wir nutzen JUnit 4. (Deprecated:
-  neue Tests in JUnit 5.)"
-- **Superseded by ADR-N**: Eine spätere ADR-N hat diese Entscheidung
-  abgelöst. Die Begründung der Ablösung steht in ADR-N. Bestehender
-  Code soll migriert werden, der Trigger steht in ADR-N. Beispiel:
-  "ADR-7 Modellwahl Claude 3.5 (Superseded by ADR-12 Modellwahl
-  Claude 4.5)."
+Praktischer Test: Wenn ein Akzeptanzkriterium ohne Messung im
+Lasttest nicht prüfbar ist, ist es nichtfunktional. "Performance
+< 200 ms p95 bei 100 RPS" gehört in den nichtfunktionalen Block der
+Spec — oder in `spec/spezifikation.md`, wenn dein Repo
+[stratifiziert](../grundlagen/konventionen.md#spec-stratifizierung).
 
-Praxis: *Deprecated* ohne Folge-Plan ist meistens *Superseded* ohne
-Nachfolger — also eine Lücke. Wenn du nur "deprecated" schreibst und
-keine Migrationstrigger benennst, gehört das in den Steering Loop:
-entweder ADR-Folge-Slice oder Carveout.
-
-### (Anwenden) Fitness-Function-Übersetzung in einem Satz
-
-Eine gute Übersetzung hat drei Bestandteile:
-
-1. **Strukturelle Aussage** — "Komponente/Datei/Layer X darf (nicht) Y".
-2. **Werkzeug** — ArchUnit (Java/Kotlin), dep-cruiser (Node), import-linter
-   (Python), depguard (Go).
-3. **Gate-Verdrahtung** — als `make`-Target sichtbar (`make arch-check`),
-   im CI gerötet wenn die Regel bricht.
-
-Beispiele (jeweils ein Satz):
-
-- ADR-7 ("Service über Adapter"): "Keine Datei unter `src/service/**`
-  darf `requests`, `urllib3` oder `httpx` importieren — `import-linter`
-  Contract, `make arch-check`."
-- ADR "Modul Layering": "Klassen in `runtime.*` dürfen nicht von Klassen
-  in `service.*` aufgerufen werden — ArchUnit-Predikat, `make arch-test`."
-
-Wenn dir kein einzelner Satz einfällt: die ADR ist zu vage. "Lose
-Kopplung anstreben" ist nicht prüfbar; "Layer A importiert nicht aus
-Layer B" ist prüfbar. Vage ADRs erzeugen Reviewer-Last; präzise ADRs
-erzeugen Gates.
+Falle: "Antwort innerhalb von 200 ms" klingt funktional, ist aber eine
+Latenz-Garantie. Funktional wäre "System antwortet mit gültigem JSON";
+die 200 ms sind eine Qualität *dieser* Antwort.
 
 ## Übungshinweise
 
-### ADR für Modellwahl
+### Erstellung eines vollständigen Lastenhefts für ein kleines Feature
 
-Maßstab:
+Maßstab für ein gutes Lastenheft:
 
-- Mindestens drei verglichene Alternativen (z. B. Claude Opus 4.7, GPT-5, Llama-Modell).
-- Vergleich entlang messbarer Kriterien: Kosten/Token, Latenz, Context-Window, Tool-Use-Reife, On-Prem-Option.
-- Annahmen explizit ("wir setzen Caching ein", "wir akzeptieren 1k Tool-Calls/Tag").
-- Konsequenzen mit Trigger für Re-Evaluierung ("re-evaluieren, wenn Kosten > $X/Monat oder neue Modellgeneration erscheint").
+- Jede Anforderung hat eine ID (`LH-FA-*` für funktional, `LH-QA-*` für nichtfunktional, oder eigene Schema). Die IDs erscheinen später in Make-Target-Kommentaren, ADRs und Commits — sie sind die Klammer ([siehe ID-Schema](../grundlagen/konventionen.md#id-schema-als-klammer)).
+- Akzeptanzkriterien sind im Given/When/Then-Stil und enthalten Boundary + Negative.
+- Out-of-Scope ist *explizit* benannt — nicht weggelassen.
+- Mindestens *eine* Negativbedingung pro Feature ("dieses System *darf nicht*…"). Negativ ist genauso präzise wie positiv.
 
-### ADR für Tool Calling
+Vergleich-Möglichkeit: Das Lab-Beispiel unter
+[`/lab/example/spec/lastenheft.md`](../../../lab/example/spec/lastenheft.md)
+zeigt das vollständige Schema mit IDs.
 
-Konkrete Entscheidungen, die in eine solche ADR gehören:
-
-- Welche Tool-Schemas: OpenAI-Functions, JSON-Schema, Anthropic-Tools?
-- Tool-Allowlist: was darf der Agent aufrufen, was nicht (Datenbank-Schreibzugriff, Shell-Exec, externe HTTP)?
-- Fehlerverhalten bei abgelehntem Tool: hart abbrechen oder retry-mit-Erklärung?
-- Logging-Vertrag: was muss pro Tool-Call mindestens festgehalten werden (siehe Modul 14)?
-
-### ADR für Layering
-
-Beispiel-Schema:
-
-```
-Types  → keine Imports (atomarer Layer)
-Config → darf Types
-Repo   → darf Types, Config
-Service → darf Types, Config, Repo
-Runtime → darf alles oben
-UI → darf alles oben außer Repo
-```
-
-Fitness Function:
-
-- Go: `depguard` mit `denyList` pro Layer.
-- Python: `import-linter` mit `forbidden`-Contracts.
-- Java/Kotlin: ArchUnit `noClasses().that().resideIn("..service..").should().dependOn(..)`.
-
-Erfolgskriterium: Verletzungs-Provokation in einem Test bricht `make arch-check`.
-
-### Provoziere eine ADR-Verletzung
+### Provoziere absichtlich einen Spec-Bug
 
 Gute Trigger:
 
-- Lass den Agenten "schnell mal eben" eine Service-Klasse direkt aus dem Runtime-Layer instanziieren.
-- Lass ihn ein Repository-Interface direkt im UI-Layer importieren mit Begründung "ist doch nur ein DTO".
+- Lasse "Out-of-Scope" weg — der Agent wird etwas Plausibles bauen, was nicht gefordert war.
+- Verwende ein vages Wort ("schnell", "robust", "intuitiv") ohne messbares Kriterium — der Agent rät den Default.
+- Lass mehrere Anforderungen sich widersprechen (z. B. "stateless" + "merkt sich Sessions") — der Agent wählt eine, ohne den Konflikt zu melden.
 
-Frage: Wann (in welcher Phase) hat der Sensor das gemeldet? Pre-commit,
-Pre-integration, erst im Reviewer-Agent? Je früher, desto billiger.
+Dokumentiere: was hat der Agent gewählt? Welches Wort der Spec hat ihn
+in diese Richtung gedrängt? Die Antwort wird oft ein einzelnes Verb sein
+("speichern" → vermuten DB; "merken" → vermuten Cache).
 
 ## Häufige Fehler
 
-- **ADR beschreibt Implementierung statt Entscheidung.** ADR ist eine *Wahl zwischen Alternativen* mit Begründung, nicht eine "so geht's"-Beschreibung.
-- **ADR ohne Annahmen.** Annahmen sind die Stellen, an denen die Entscheidung kippt. Ohne sie kann niemand entscheiden, ob die ADR noch gilt.
-- **Accepted-ADR wird umgeschrieben.** Bricht das Geschichtsbuch-Prinzip ([c-hsm-doc-Beispiel](../grundlagen/fallstudien.md)). Korrektur als neue ADR mit "supersedes ADR-N".
-- **ADR ohne Fitness Function.** "Wir machen Hexagonal Architecture" ohne Architekturtest ist Lippenbekenntnis. Spätestens beim dritten Refactor ist die Schicht durchlöchert.
+- Lastenheft enthält Implementierungs-Details ("die REST-API verwendet POST"). → Implementierung gehört in `spec/spezifikation.md` oder ADR, nicht ins Lastenheft.
+- Lastenheft wird ohne IDs geschrieben. → Spätere Traceability-Constraint ist nicht erzwingbar.
+- Akzeptanzkriterien enden nach dem Happy Path. → Agent baut nur den Happy Path zuverlässig.
 
 ## Verweise
 
-- 2×2-Klassifikation (ADR als Feedforward + Quelle für Computational Feedback): [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
-- ADR-Beispiele: [`/lab/example/docs/plan/adr/`](../../../lab/example/docs/plan/adr/) (im Lab nach Phase B)
-- Vorherige Lösung: [Modul 2](modul-02-loesung.md)
+- Spec-Stratifizierung: [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)
+- Reales Beispiel mit Lastenheft/Spezifikation-Trennung: `pt9912/c-hsm-doc` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
+- Vorherige Lösung: [Modul 1](modul-01-loesung.md)
 - Nächste Lösung: [Modul 4](modul-04-loesung.md)

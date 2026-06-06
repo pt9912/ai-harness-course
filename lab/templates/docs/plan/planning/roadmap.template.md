@@ -8,7 +8,7 @@
 
 **Format-Regel:** Die Roadmap ist eine Reihenfolge von **Wellen**,
 keine Reihenfolge von Terminen (siehe
-[Kurs Modul 5](../../../../../kurs/de/02-planung/modul-05-roadmap.md)).
+[Kurs Modul 6](../../../../../kurs/de/02-planung/modul-06-roadmap.md)).
 Termine werden — falls überhaupt — als Konsequenz der Wellen-Schätzung
 gezeigt, nicht als Treiber.
 

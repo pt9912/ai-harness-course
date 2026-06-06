@@ -99,6 +99,6 @@ Wann sollte diese Entscheidung erneut geprüft werden?
 
 <!--
 Nach Accepted: NICHT mehr inhaltlich überschreiben (Hard Rule aus
-c-hsm-doc, siehe Kurs Modul 3). Spätere Schärfungen als neue ADR mit
+c-hsm-doc, siehe Kurs Modul 4). Spätere Schärfungen als neue ADR mit
 "Supersedes ADR-NN" anlegen.
 -->

@@ -36,101 +36,101 @@ Iteration.
 - "Wir brauchen erst ein besseres Modell." — Modul 0
 - "Wir bauen einen Mega-Prompt." — Modul 0
 - "Der Agent muss nur freier entscheiden dürfen." — Modul 0
-- "Ein Agent ist ein besserer/schnellerer Programmierer." — Modul 8
+- "Ein Agent ist ein besserer/schnellerer Programmierer." — Modul 9
   (Fehlvorstellungs-Block; seit Welle 13 explizit benannt mit
   Geschwindigkeits-Argument und Lopopolo-Skalierungs-Beleg).
 - "Halluzinationen sind ein Bug des Modells." — Modul 0
   (Fehlvorstellungs-Block; seit Welle 7 explizit benannt mit Verweis auf
   Kontext-Ursachen und Wiederholungs-Empirie nach Modellwechsel).
-- "Agenten lernen mit der Zeit, wenn man sie länger benutzt." — Modul 2
+- "Agenten lernen mit der Zeit, wenn man sie länger benutzt." — Modul 3
   (Kernidee-Block "Grenze der Metapher"; seit Welle 7 explizit gegen
   Praktikant-Metapher abgegrenzt).
 
-### Über Spec und Anforderungen (Modul 2)
+### Über Spec und Anforderungen (Modul 3)
 
-- "Akzeptanzkriterien sind der Happy Path." — Modul 2
-- "Negativbedingungen sind unhöflich." — Modul 2
-- "Out-of-Scope kann implizit bleiben." — Modul 2
-- "Performance gehört in den ADR." — Modul 2
-- "Prompts ersetzen Specs." — Modul 2 (Fehlvorstellungs-Block; seit
+- "Akzeptanzkriterien sind der Happy Path." — Modul 3
+- "Negativbedingungen sind unhöflich." — Modul 3
+- "Out-of-Scope kann implizit bleiben." — Modul 3
+- "Performance gehört in den ADR." — Modul 3
+- "Prompts ersetzen Specs." — Modul 3 (Fehlvorstellungs-Block; seit
   Welle 13 explizit benannt mit Lebenszyklus-Argument Spec vs. Prompt).
 
-### Über Architektur und ADRs (Modul 3)
+### Über Architektur und ADRs (Modul 4)
 
-- "Eine ADR begründet eine Anforderung." — Modul 3
-- "Wenn ich die Entscheidung ändere, schreibe ich die ADR um." — Modul 3
-- "Eine ADR ohne Fitness Function ist eine ADR." — Modul 3
-- "MADR ist Pflicht." — Modul 3
-- "ADRs sind Dokumentation, nicht Constraints." — Modul 3
+- "Eine ADR begründet eine Anforderung." — Modul 4
+- "Wenn ich die Entscheidung ändere, schreibe ich die ADR um." — Modul 4
+- "Eine ADR ohne Fitness Function ist eine ADR." — Modul 4
+- "MADR ist Pflicht." — Modul 4
+- "ADRs sind Dokumentation, nicht Constraints." — Modul 4
   (Fehlvorstellungs-Block; seit Welle 13 explizit benannt mit
-  Fitness-Function-Argument und Verweis auf Worked Example Modul 12).
-- "Architektur ist Bilder zeichnen." — Modul 3
+  Fitness-Function-Argument und Verweis auf Worked Example Modul 13).
+- "Architektur ist Bilder zeichnen." — Modul 4
   (Fehlvorstellungs-Block; seit Welle 7 explizit benannt mit Bezug auf
   Spec-Stratifizierung).
 
-### Über Planung (Modul 4–6)
+### Über Planung (Modul 5–7)
 
 - "Plan ist nur eine Liste von Tickets." — Modul 1
-- "Slice = Ticket = Feature." — Modul 4
-- "Erst plan ich alle Slices, dann fange ich an." — Modul 4
-- "Wenn ein Slice in `done/` ist, ist er fertig." — Modul 4
-- "Roadmap ist eine Datumsleiste." — Modul 5
-- "Burndown ist Fortschritt." — Modul 5
-- "Welle = Sprint." — Modul 5
-- "Trigger = Datum." — Modul 5
-- "Carveout = Workaround." — Modul 6
-- "Carveouts gehören ins Issue-Tracker." — Modul 6
-- "Wenn der Trigger eintritt, lösen wir den Carveout auf." — Modul 6
+- "Slice = Ticket = Feature." — Modul 5
+- "Erst plan ich alle Slices, dann fange ich an." — Modul 5
+- "Wenn ein Slice in `done/` ist, ist er fertig." — Modul 5
+- "Roadmap ist eine Datumsleiste." — Modul 6
+- "Burndown ist Fortschritt." — Modul 6
+- "Welle = Sprint." — Modul 6
+- "Trigger = Datum." — Modul 6
+- "Carveout = Workaround." — Modul 7
+- "Carveouts gehören ins Issue-Tracker." — Modul 7
+- "Wenn der Trigger eintritt, lösen wir den Carveout auf." — Modul 7
 
-### Über Agentenrollen und Implementation (Modul 7–8)
+### Über Agentenrollen und Implementation (Modul 8–9)
 
-- "Eine Person spielt alle Rollen." — Modul 7
-- "Reviewer macht das Verification gleich mit." — Modul 7
-- "Validation machen wir vor Release." — Modul 7
-- "Architect entscheidet, Implementation widerspricht nicht." — Modul 7
-- "Agent liefert schnell, also ist der Workflow Overhead." — Modul 8
-- "Hard Rules schreibe ich in AGENTS.md, und das reicht." — Modul 8
-- "Wenn die Tests grün sind, ist der Slice fertig." — Modul 8
-- "Die Pre-completion Checklist ist Bürokratie." — Modul 8
+- "Eine Person spielt alle Rollen." — Modul 8
+- "Reviewer macht das Verification gleich mit." — Modul 8
+- "Validation machen wir vor Release." — Modul 8
+- "Architect entscheidet, Implementation widerspricht nicht." — Modul 8
+- "Agent liefert schnell, also ist der Workflow Overhead." — Modul 9
+- "Hard Rules schreibe ich in AGENTS.md, und das reicht." — Modul 9
+- "Wenn die Tests grün sind, ist der Slice fertig." — Modul 9
+- "Die Pre-completion Checklist ist Bürokratie." — Modul 9
 
-### Über Qualität und Gates (Modul 9–12)
+### Über Qualität und Gates (Modul 10–13)
 
-- "Reviewer ist ein zweiter Implementer." — Modul 9
-- "Findings ohne Prioritätssortierung." — Modul 9
-- "Reviewer-Agent läuft ohne Skill-Datei." — Modul 9
+- "Reviewer ist ein zweiter Implementer." — Modul 10
+- "Findings ohne Prioritätssortierung." — Modul 10
+- "Reviewer-Agent läuft ohne Skill-Datei." — Modul 10
 - "Wenn der Reviewer-Agent dasselbe zweimal anders kategorisiert, nehmen
-  wir die mildere." — Modul 9
-- "Grüne Tests sind Verifikation." — Modul 10
-- "Verifier braucht denselben Kontext wie Reviewer." — Modul 10
-- "Wenn Verifier rot und Reviewer grün, hat Reviewer recht." — Modul 10
-- "Wenn der Replay grün ist, ist das Modell gut." — Modul 11
-- "Golden Set ist statisch." — Modul 11
-- "Determinismus = Reproduzierbarkeit." — Modul 11
-- "Gate = Lint." — Modul 12
-- "Wenn ein Gate manchmal rot sein darf, ist das pragmatisch." — Modul 12
-- "Coverage 80 % ist die richtige Schwelle." — Modul 12
-- "`make gates` lokal grün heißt fertig." — Modul 12
-- "Mehr Tests sind immer besser." — Modul 12 (Fehlvorstellungs-Block;
+  wir die mildere." — Modul 10
+- "Grüne Tests sind Verifikation." — Modul 11
+- "Verifier braucht denselben Kontext wie Reviewer." — Modul 11
+- "Wenn Verifier rot und Reviewer grün, hat Reviewer recht." — Modul 11
+- "Wenn der Replay grün ist, ist das Modell gut." — Modul 12
+- "Golden Set ist statisch." — Modul 12
+- "Determinismus = Reproduzierbarkeit." — Modul 12
+- "Gate = Lint." — Modul 13
+- "Wenn ein Gate manchmal rot sein darf, ist das pragmatisch." — Modul 13
+- "Coverage 80 % ist die richtige Schwelle." — Modul 13
+- "`make gates` lokal grün heißt fertig." — Modul 13
+- "Mehr Tests sind immer besser." — Modul 13 (Fehlvorstellungs-Block;
   seit Welle 7 explizit benannt mit Faustregel *Verteilung vor Anzahl*).
 
-### Über Betrieb (Modul 13–15)
+### Über Betrieb (Modul 14–16)
 
-- "FROM python:3 ist konkret genug." — Modul 13
-- "Lock-Files sind nur für Python." — Modul 13
-- "Docker-only ist Overkill für Tools." — Modul 13
-- "Devcontainer ersetzt Compose." — Modul 13
-- "Logs reichen." — Modul 14
-- "Metriken sind nur für Performance." — Modul 14
-- "Prompt-Caching ist Modell-Sache." — Modul 14
-- "Trace teurer Tool-Call = unnötiger Tool-Call." — Modul 14
-- "Rollback ist die Standardantwort." — Modul 15
-- "Runbook beschreibt den Happy Path." — Modul 15
-- "Produktionsfreigabe ist eine formale Checkbox." — Modul 15
-- "Prompt-Injection ist eine Modell-Frage." — Modul 15
-- "DevOps ist YAML schreiben." — Modul 13 (Fehlvorstellungs-Block; seit
+- "FROM python:3 ist konkret genug." — Modul 14
+- "Lock-Files sind nur für Python." — Modul 14
+- "Docker-only ist Overkill für Tools." — Modul 14
+- "Devcontainer ersetzt Compose." — Modul 14
+- "Logs reichen." — Modul 15
+- "Metriken sind nur für Performance." — Modul 15
+- "Prompt-Caching ist Modell-Sache." — Modul 15
+- "Trace teurer Tool-Call = unnötiger Tool-Call." — Modul 15
+- "Rollback ist die Standardantwort." — Modul 16
+- "Runbook beschreibt den Happy Path." — Modul 16
+- "Produktionsfreigabe ist eine formale Checkbox." — Modul 16
+- "Prompt-Injection ist eine Modell-Frage." — Modul 16
+- "DevOps ist YAML schreiben." — Modul 14 (Fehlvorstellungs-Block; seit
   Welle 13 explizit benannt mit Reproduzierbarkeits-Anker-Argument und
-  Replay-Brücke zu Modul 11).
-- "Postmortems sind Schuldzuweisung." — Modul 15 (Fehlvorstellungs-Block;
+  Replay-Brücke zu Modul 12).
+- "Postmortems sind Schuldzuweisung." — Modul 16 (Fehlvorstellungs-Block;
   seit Welle 7 explizit benannt mit Sensor-Schutz-Argument für blameless).
 
 ## Wie diese Liste verwendet wird
@@ -146,7 +146,7 @@ als adressiert zu markieren, wenn sie ergänzt wurden.
 Aktuell keine. Die vier in Welle 8 dokumentierten Lücken (*"Agent ist
 schnellerer Programmierer"*, *"Prompts ersetzen Specs"*, *"ADRs sind
 Dokumentation, nicht Constraints"*, *"DevOps ist YAML schreiben"*) wurden
-in Welle 13 in Modul 8, 2, 3 und 13 als Fehlvorstellungs-Blöcke
+in Welle 13 in Modul 9, 2, 3 und 13 als Fehlvorstellungs-Blöcke
 aufgeschlagen.
 
 Wenn dir neue Präkonzepte begegnen: trag sie in der passenden Sammlung
@@ -182,8 +182,8 @@ hier nicht nur Geste bleibt, ein konkreter Pfad:
    Bestandteile: Anti-Argument (warum die Vorstellung nicht trägt),
    Beleg (empirisch oder aus den Fallstudien), konkrete Korrektur
    (was stattdessen gelten sollte). Vorbild: die Konfrontationen zu
-   *Halluzination* (Modul 0), *Postmortems* (Modul 15) und *Mehr
-   Tests sind immer besser* (Modul 12).
+   *Halluzination* (Modul 0), *Postmortems* (Modul 16) und *Mehr
+   Tests sind immer besser* (Modul 13).
 4. **PR oder Issue öffnen.** Ein PR ergänzt die Vorstellung in dieser
    Datei *und* den Fehlvorstellungs-Block des Zielmoduls. Ein Issue
    beschreibt die Beobachtung, wenn die Konfrontation noch unklar

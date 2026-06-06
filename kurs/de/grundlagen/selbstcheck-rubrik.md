@@ -89,7 +89,7 @@ Drei kleine Tests, die helfen, exzellent von solide zu trennen:
    eine plausible falsche Antwort, gegen die du dich abgrenzt?
 
 Die drei Tests sind dieselbe Logik, die der Kurs an Akzeptanzkriterien
-([Modul 2](../01-spec-und-architektur/modul-02-lastenheft.md)) anlegt:
+([Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md)) anlegt:
 Happy Path, Boundary, Negative.
 
 ## Wo finde ich die Rubrik pro Modul?

@@ -1,6 +1,6 @@
 # Verification Checks — DocSearch
 
-Diese Checks sind absichtlich leichtgewichtig. Sie zeigen fuer Modul 10,
+Diese Checks sind absichtlich leichtgewichtig. Sie zeigen fuer Modul 11,
 welche Belege ein Verifier mindestens gegen einen Slice prueft.
 
 ## Minimaler Check fuer `slice-009`

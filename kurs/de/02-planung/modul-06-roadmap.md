@@ -1,6 +1,6 @@
-# Modul 5 — Roadmap Engineering
+# Modul 6 — Roadmap Engineering
 
-> **Aufwand:** ca. 60 Min Lesen · 60 Min Übung. Die konzeptuelle Tiefe liegt in [Modul 4 (Slice-Schnitt)](modul-04-planning-harness.md) und [Modul 6 (Carveouts)](modul-06-carveouts.md); das siebenschrittige Worked Example zum Wellen-Schnitt unten trägt jedoch die Hauptlast dieses Moduls — plane die volle Stunde ein.
+> **Aufwand:** ca. 60 Min Lesen · 60 Min Übung. Die konzeptuelle Tiefe liegt in [Modul 5 (Slice-Schnitt)](modul-05-planning-harness.md) und [Modul 7 (Carveouts)](modul-07-carveouts.md); das siebenschrittige Worked Example zum Wellen-Schnitt unten trägt jedoch die Hauptlast dieses Moduls — plane die volle Stunde ein.
 
 ## Mini-Glossar für dieses Modul
 
@@ -12,7 +12,7 @@ Vier neue Begriffe — Volldefinitionen in
 | **Welle** | Sequenz von Slices, geschlossen durch einen *Trigger*, nicht durch ein Datum. | eine Welle, die bricht, *wenn* das Wasser hoch genug ist — nicht *wann* die Uhr klingelt. |
 | **Meilenstein** | Beobachtbarer Repo-Zustand am Ende einer Welle — nicht ein Datum, sondern ein Beleg. | das Kerbholz am Bergpfad: du bist *hier*, weil du *das* erreicht hast. |
 | **Release** | Ein Artefakt, das in eine Umgebung wandert (Staging, Produktion) — kann mehrere Wellen umfassen oder eine. | das Päckchen, das das Lager verlässt, nicht der Pack-Vorgang. |
-| **Trigger** | *Beobachtbare* Bedingung, mit der eine Welle closed (vgl. Carveout-Auflösungs-Trigger, Modul 6). | die Glocke, die *anzeigt*, dass es jetzt soweit ist — nicht "wenn wir Zeit haben". |
+| **Trigger** | *Beobachtbare* Bedingung, mit der eine Welle closed (vgl. Carveout-Auflösungs-Trigger, Modul 7). | die Glocke, die *anzeigt*, dass es jetzt soweit ist — nicht "wenn wir Zeit haben". |
 
 ## Engage
 
@@ -142,7 +142,7 @@ Tabelle aus dem Lab:
 Der Audit-Termin (`2026-07-31`) ist Anhang im Meilenstein-Eintrag, nicht
 Trigger der Welle. Das hat eine harte Konsequenz: wenn das Audit-Datum
 gehalten werden *muss*, aber die Closure-Trigger nicht erreichbar sind,
-ist die richtige Antwort ein *Carveout* (Modul 6), nicht ein halb
+ist die richtige Antwort ein *Carveout* (Modul 7), nicht ein halb
 fertiges `done/`.
 
 **Schritt 6 — Drift-Tabelle als Pflicht-Anhang.** Eine Roadmap, die
@@ -212,4 +212,4 @@ nach dem Roadmap-Bau. Modul-spezifische Trigger:
 
 ## Weiterlesen
 
-* Nächstes Modul: [Modul 6 — Carveout Management](modul-06-carveouts.md)
+* Nächstes Modul: [Modul 7 — Carveout Management](modul-07-carveouts.md)

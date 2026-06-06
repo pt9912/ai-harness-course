@@ -1,4 +1,4 @@
-# Review-Fixture für Modul 9
+# Review-Fixture für Modul 10
 
 Dieses Verzeichnis enthält einen **fingierten kaputten Slice** mit
 **genau drei eingebauten Fehlern**, jeweils einer pro Finding-Kategorie:
@@ -6,7 +6,7 @@ HIGH, MEDIUM, LOW.
 
 ## Aufgabe
 
-**Plan Review** (siehe Modul 9): Reviewer-Lauf gegen
+**Plan Review** (siehe Modul 10): Reviewer-Lauf gegen
 [`slice-X-broken-feature.md`](slice-X-broken-feature.md). Erwartetes
 Ergebnis: drei Findings, korrekt kategorisiert.
 
@@ -30,7 +30,7 @@ Ein vollständiger Review-Lauf identifiziert:
 | LOW | Ein Pflichtfeld ist syntaktisch gefüllt, aber semantisch tautologisch. |
 
 Die konkrete Auflösung steht in
-[`../../../../kurs/de/loesungen/modul-09-loesung.md`](../../../../kurs/de/loesungen/modul-09-loesung.md)
+[`../../../../kurs/de/loesungen/modul-10-loesung.md`](../../../../kurs/de/loesungen/modul-10-loesung.md)
 — nach dem eigenen Versuch dort vergleichen.
 
 ## Lerneffekt

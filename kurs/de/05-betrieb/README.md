@@ -5,9 +5,9 @@ Drei Module, die den Schritt vom "läuft auf meiner Maschine" zum
 
 | Modul | Inhalt |
 |---|---|
-| [Modul 13](modul-13-docker-harness.md) | Docker-only Entwicklung, Multi-Stage Builds, Runtime-Smokes |
-| [Modul 14](modul-14-observability.md) | OpenTelemetry-Traces, Token-Kosten, Doku-Konsistenz-Agent |
-| [Modul 15](modul-15-produktiver-betrieb.md) | Releases, Runtime-Validation, Security, Incident Response |
+| [Modul 14](modul-14-docker-harness.md) | Docker-only Entwicklung, Multi-Stage Builds, Runtime-Smokes |
+| [Modul 15](modul-15-observability.md) | OpenTelemetry-Traces, Token-Kosten, Doku-Konsistenz-Agent |
+| [Modul 16](modul-16-produktiver-betrieb.md) | Releases, Runtime-Validation, Security, Incident Response |
 
 Voraussetzung: [Phase 4](../04-qualitaet/) abgeschlossen.
 

@@ -5,7 +5,7 @@
 > ersetze `<Platzhalter>` und lösche diesen Block. AGENTS.md *trägt
 > Hard Rules und Pointer auf kanonische Quellen*, sie *dupliziert deren
 > Inhalt nicht* — sonst entsteht Drift (siehe
-> [Kurs Modul 8](../../kurs/de/03-agenten/modul-08-implementierung.md)).
+> [Kurs Modul 9](../../kurs/de/03-agenten/modul-09-implementierung.md)).
 
 ---
 
@@ -108,7 +108,7 @@ Repo-spezifische Hard Rules ergänzen, z.B. für Safety/Control:
 
 <!--
 Nur Befehle aufzählen, die im Makefile *existieren*. Halluzinierte
-Gates sind die häufigste Form von Harness-Lüge (siehe Modul 12).
+Gates sind die häufigste Form von Harness-Lüge (siehe Modul 13).
 -->
 
 | Target | Zweck |

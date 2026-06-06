@@ -6,7 +6,7 @@
 
 **Status:** open → next → in-progress → done (Datei wird durch die
 Verzeichnisse bewegt, siehe
-[Kurs Modul 4](../../../../../kurs/de/02-planung/modul-04-planning-harness.md)).
+[Kurs Modul 5](../../../../../kurs/de/02-planung/modul-05-planning-harness.md)).
 
 **Welle:** <welle-id> oder "ohne Welle" (Wartung/Spike).
 

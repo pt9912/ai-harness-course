@@ -1,4 +1,4 @@
-# Modul 10 — Verification Harness
+# Modul 11 — Verification Harness
 
 > **Aufwand:** ca. 60 Min Lesen · 75 Min Übung.
 
@@ -30,25 +30,25 @@ Nach diesem Modul kannst du:
 * DoD-Verifikation
 * ADR-Konformität
 * Architekturkonformität
-* Pre-completion Checklist Middleware (vom Agenten selbst durchlaufen, bevor er "fertig" meldet — siehe [Modul 8 Schritt 8](../03-agenten/modul-08-implementierung.md#minimal-agent-workflow-8-schritte))
+* Pre-completion Checklist Middleware (vom Agenten selbst durchlaufen, bevor er "fertig" meldet — siehe [Modul 9 Schritt 8](../03-agenten/modul-09-implementierung.md#minimal-agent-workflow-8-schritte))
 
 ## Vorgriff: zwei Begriffe aus späteren bzw. früheren Modulen
 
 Dieses Modul nutzt zwei Begriffe, deren tiefe Behandlung außerhalb von
-Modul 10 liegt — hier reichen Kurzdefinitionen, damit der Lesefluss
+Modul 11 liegt — hier reichen Kurzdefinitionen, damit der Lesefluss
 nicht abbricht (Isolated-Elements-Strategie, vgl. Image-Hash-Vorgriff in
-[Modul 11](modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13)):
+[Modul 12](modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14)):
 
 * **Pre-completion Checklist Middleware** — eine vom Implementation-Agent
   selbst durchlaufene Checkliste *vor* der "fertig"-Meldung. Sie ist
   Schritt 8 des 8-Schritt-Workflows (siehe
-  [Modul 8 §Minimal Agent Workflow](../03-agenten/modul-08-implementierung.md#minimal-agent-workflow-8-schritte)).
+  [Modul 9 §Minimal Agent Workflow](../03-agenten/modul-09-implementierung.md#minimal-agent-workflow-8-schritte)).
   In diesem Modul betrachten wir sie als *Eingabe* für die Verifikation:
   was die Checkliste *behauptet*, ist von der Verifikation maschinell
   oder semantisch zu *bestätigen*. Behauptung ohne Bestätigung ist die
   häufigste Verifier-Lücke.
 * **DoD-Verletzung** — Differenz zwischen DoD-Punkten des Slice
-  (Modul 4) und tatsächlichem Code-/Artefakt-Stand. Wichtig: eine
+  (Modul 5) und tatsächlichem Code-/Artefakt-Stand. Wichtig: eine
   DoD-Verletzung ist *kein* Review-Finding (Reviewer prüft gegen
   Plan/ADR, nicht gegen DoD/Spec) — sie ist eine eigene Klasse, die
   *nur* die Verifikation fängt.
@@ -75,7 +75,7 @@ nicht: "Ist es gut?"
 
 ## Worked Example: eine ADR-Aussage ohne fertiges Tool als Fitness Function bauen
 
-> **Wenn du ADR-Aussagen routiniert in maschinelle Prüfungen übersetzt — auch dann, wenn kein Standard-Tool den Fall 1:1 abbildet — springe zu [§Übungen](#übungen).** Modul 12 hat ein Worked Example für den Standardfall (ADR-0007 → import-linter). Dieses Worked Example zeigt den *Nicht-Standard*-Fall: eine ADR, deren Aussage kein bestehendes Werkzeug fertig prüft. Das ist der typische Fall in der Verifikations-Schicht, weil sie genau dort greift, wo Gates nicht reichen.
+> **Wenn du ADR-Aussagen routiniert in maschinelle Prüfungen übersetzt — auch dann, wenn kein Standard-Tool den Fall 1:1 abbildet — springe zu [§Übungen](#übungen).** Modul 13 hat ein Worked Example für den Standardfall (ADR-0007 → import-linter). Dieses Worked Example zeigt den *Nicht-Standard*-Fall: eine ADR, deren Aussage kein bestehendes Werkzeug fertig prüft. Das ist der typische Fall in der Verifikations-Schicht, weil sie genau dort greift, wo Gates nicht reichen.
 
 **Ausgangs-ADR:** ADR-0011 sagt:
 > "Der Implementation-Agent darf nur Slices in `done/` verschieben,
@@ -104,7 +104,7 @@ sagt *was*, die Operationalisierung sagt *prüfbar was*.
 |---|---|---|
 | Pre-commit-Hook auf der Autoren-Maschine | niedrig | wenn nur lokale Disziplin gefragt ist |
 | Make-Target im `make gates`-Block | mittel | wenn auch CI prüfen soll — Standardweg |
-| Doku-Konsistenz-Agent (Modul 14) | hoch | wenn semantische Prüfung nötig ist (z. B. "Floskel-Erkennung") |
+| Doku-Konsistenz-Agent (Modul 15) | hoch | wenn semantische Prüfung nötig ist (z. B. "Floskel-Erkennung") |
 
 Der Worked Example wählt **Make-Target + optional Doku-Konsistenz-Agent**:
 deterministische Sätze deterministisch, semantische Floskel-Erkennung
@@ -164,7 +164,7 @@ Frage).
 
 **Schritt 5 — Floskel-Erkennung mit inferentieller Schicht ergänzen.**
 Floskeln wie *"war ganz okay, läuft jetzt"* sind syntaktisch zwei Sätze
-und entgehen Schritt 3. Hier kommt der Doku-Konsistenz-Agent (Modul 14)
+und entgehen Schritt 3. Hier kommt der Doku-Konsistenz-Agent (Modul 15)
 ins Spiel:
 
 > Prompt-Anker (in `.harness/skills/closure-note-reviewer.md`):
@@ -189,7 +189,7 @@ soll vor "fertig"-Meldung *selbst* `make verify-closure-notes` laufen
 lassen. AGENTS.md-Eintrag:
 
 ```markdown
-## Closure (Modul 4, ADR-0011)
+## Closure (Modul 5, ADR-0011)
 - Vor `done/`-Verschiebung: `make verify-closure-notes` muss grün sein.
 - Floskeln vermeiden — der Doku-Konsistenz-Agent prüft Inhalte.
 ```
@@ -214,7 +214,7 @@ Erschaffens-Leistung dieses Moduls.
 * Automatische Verifikation eines Slices
 * Provoziere eine DoD-Verletzung und prüfe, ob sie erkannt wird
 * **Eigene ADR übersetzen** — wähle eine ADR aus deinem Repo, deren Aussage *kein* Standard-Tool 1:1 abbildet. Durchlaufe die sieben Schritte des Worked Example oben. Ergebnis: ein neues `verify-*`-Make-Target mit ID-Kommentar. Aktiviert das Erschaffens-Lernziel.
-* **(Bewerten — aktiviert LZ 4)** *Pre-completion Checklist eines fremden Agentenlaufs bewerten.* Nimm den Schritt-8-Bericht aus dem [Worked Example in Modul 8](../03-agenten/modul-08-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow) (Block "Sensors gelaufen / Restrisiken") und einen frei erfundenen, weichgespülten Vergleichs-Bericht (z. B. *"Tests grün, läuft. Restrisiken: minimal."*). Bewerte beide entlang vier Kriterien: (1) *Sensors konkret benannt* (welche Targets, welche Files)? (2) *Restrisiken handlungsorientiert* (Folge-Slice-Vorschlag oder Reflexionsanker)? (3) *Selbstabsolution-Indikatoren* ("läuft", "minimal", "n/a")? (4) *Verifier-Anschlussfähigkeit* (kann der Verifier den Bericht maschinell oder semantisch prüfen)? Ergebnis: zwei Bewertungs-Tabellen plus eine Liste von **drei konkreten Lücken**, die der schwächere Bericht aufweist und die ein Verifier-Skill (Modul 9/10-Anschluss) als HIGH/MEDIUM-Findings kategorisieren würde.
+* **(Bewerten — aktiviert LZ 4)** *Pre-completion Checklist eines fremden Agentenlaufs bewerten.* Nimm den Schritt-8-Bericht aus dem [Worked Example in Modul 9](../03-agenten/modul-09-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow) (Block "Sensors gelaufen / Restrisiken") und einen frei erfundenen, weichgespülten Vergleichs-Bericht (z. B. *"Tests grün, läuft. Restrisiken: minimal."*). Bewerte beide entlang vier Kriterien: (1) *Sensors konkret benannt* (welche Targets, welche Files)? (2) *Restrisiken handlungsorientiert* (Folge-Slice-Vorschlag oder Reflexionsanker)? (3) *Selbstabsolution-Indikatoren* ("läuft", "minimal", "n/a")? (4) *Verifier-Anschlussfähigkeit* (kann der Verifier den Bericht maschinell oder semantisch prüfen)? Ergebnis: zwei Bewertungs-Tabellen plus eine Liste von **drei konkreten Lücken**, die der schwächere Bericht aufweist und die ein Verifier-Skill (Modul 10/10-Anschluss) als HIGH/MEDIUM-Findings kategorisieren würde.
 
 ### Minimaler Übungspfad
 
@@ -254,9 +254,9 @@ Modul-spezifische Trigger:
 |---|---|---|---|
 | Drei Verifier-Eingaben + Abgrenzung zu Reviewer? | "Code und Plan." | Verifier: DoD + Spec + Plan. Reviewer: Plan + ADR + Diff. Schnittmenge ist nur der Plan — die Trennung erzeugt die unterschiedlichen Findings. | + Hinweis: Wer dem Verifier *zusätzlich* den ADR gibt, macht ihn zum zweiten Reviewer und verliert die Kontext-Trennung. Verifier prüft "Plan↔Code↔DoD↔Spec", Reviewer prüft "Plan↔Diff↔ADR". |
 | Drei Fragen-Klassen: Review/Verifikation/Validation? | "Verschiedene Prüfungen." | Review: "ist der Diff *riskant*?" (gegen Plan/ADR). Verifikation: "*erfüllt* der Diff Plan und DoD?" (gegen DoD/Spec). Validation: "*trifft* das Ergebnis den realen Bedarf?" (gegen Nutzer/Markt). | + Pointe: jede Klasse hat *eigene* Eingaben (siehe Frage 1) und *eigene* Findings — keine darf eine andere "mit erledigen", sonst wiederholen sich blinde Flecken. |
-| Warum reichen grüne Tests nicht? | "Tests sind unvollständig." | Tests prüfen, ob Code tut, was *Tests testen*. Verifikation prüft, ob Code tut, was *Plan/DoD/Spec verlangt*. Tests können Spec-Lücken nicht selbst erkennen. | + Hinweis auf Behaviour-Kategorie (Modul 11): Tests gegen Beispiele decken Realität *nur* da ab, wo das Golden Set repräsentativ ist; Verifikation gegen Spec wird daher *nicht* von Tests ersetzt. |
+| Warum reichen grüne Tests nicht? | "Tests sind unvollständig." | Tests prüfen, ob Code tut, was *Tests testen*. Verifikation prüft, ob Code tut, was *Plan/DoD/Spec verlangt*. Tests können Spec-Lücken nicht selbst erkennen. | + Hinweis auf Behaviour-Kategorie (Modul 12): Tests gegen Beispiele decken Realität *nur* da ab, wo das Golden Set repräsentativ ist; Verifikation gegen Spec wird daher *nicht* von Tests ersetzt. |
 | Verification rot, Review grün — wer entscheidet? | "Der Architekt." | Architect-Rolle prüft: hat Reviewer gegen veralteten Plan geprüft, oder ist der Plan unvollständig? Konflikt löst sich entweder als Folge-ADR oder als Plan-Update — *nicht* als "wir nehmen das mildere Ergebnis". | + Folge: Wenn dieses Pattern dreimal auftritt, liegt eine Lücke in der Plan→Review-Kette (Reviewer bekommt nicht den aktuellen Plan als Eingabe). Steering-Loop-Aktion: Plan-Verteilung an Reviewer als Schritt im 8-Schritt-Workflow. |
 
 ## Weiterlesen
 
-* Nächstes Modul: [Modul 11 — Replay und Evaluierung](modul-11-replay-evaluierung.md)
+* Nächstes Modul: [Modul 12 — Replay und Evaluierung](modul-12-replay-evaluierung.md)

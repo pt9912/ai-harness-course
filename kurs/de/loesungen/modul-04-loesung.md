@@ -1,96 +1,144 @@
-# Lösung — Modul 4: Planning Harness
+# Lösung — Modul 4: Architektur und ADRs
 
-Zugehöriges Modul: [Modul 4 — Planning Harness](../02-planung/modul-04-planning-harness.md).
+Zugehöriges Modul: [Modul 4 — Architektur und ADRs](../01-spec-und-architektur/modul-04-architektur-adrs.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Nenne die vier Lifecycle-Verzeichnisse in Reihenfolge
+### (Erinnern) Welche vier Pflichtabschnitte hat ein MADR-ADR?
 
-`open/` → `next/` → `in-progress/` → `done/`.
+**Kopf-Felder:** Titel mit ADR-Nummer, Status (Proposed/Accepted/
+Deprecated/Superseded), Datum, Bezug (LH-/HSM-ID).
 
-Plus zwei Rückführungen, die im Lifecycle-State-Diagramm explizit sind:
+**Body-Blöcke:**
 
-- `in-progress/ → next/` — Slice ist zu groß, geht zurück zur Zerlegung.
-- `in-progress/ → open/` — Slice ist blockiert (typisch mit Carveout,
-  siehe Modul 6).
+1. **Kontext** — was war die Situation, was hat die Entscheidung ausgelöst?
+2. **Optionen** — *mit Trade-offs*, mindestens zwei, idealerweise drei.
+3. **Entscheidung** — welche Option, warum (verweist auf Kontext und Trade-offs).
+4. **Konsequenzen** — was folgt operativ daraus, idealerweise inklusive
+   Fitness-Function-Verweis.
 
-Faustregel: WIP-Limit auf 1 pro Implementer. Wer mehrere Slices
-gleichzeitig in `in-progress/` hat, hat kein Lifecycle, sondern ein
-Buffet — und keinen Punkt, an dem reproduzierbar geprüft wird, ob der
-8-Schritt-Workflow durchlaufen wurde.
+Die *Optionen*-Sektion ist der häufigste Drift-Punkt. Eine ADR ohne
+Optionen ist ein Postulat — sie hält fest, *was* entschieden wurde, aber
+nicht *warum gerade so und nicht anders*. Reviewer-Agenten können
+solche ADRs nicht verteidigen, weil ihnen die Vergleichsbasis fehlt.
 
-### Welcher Trigger bewegt einen Slice von `next/` nach `in-progress/`?
+### Wann wird aus einer ADR eine Architekturtest-Regel?
 
-Der erste Commit, der die Arbeit am Slice startet — *nicht* der Wunsch,
-ihn als nächstes machen zu wollen.
+Sobald die ADR-Entscheidung sich in einer maschinell prüfbaren
+Eigenschaft niederschlägt — typischerweise eine *strukturelle*
+Eigenschaft des Codes:
 
-Konkret: Ein Slice wandert nach `in-progress/`, wenn ein Branch oder
-PR existiert, der ihn umsetzt. Vorher gehört er in `next/`, mit
-"als nächstes geplant" und idealerweise einem Verantwortlichen.
+- "Schicht A darf nicht von Schicht B importieren" → ArchUnit / depguard / import-linter.
+- "Modul X darf nicht mehr als 50 öffentliche Funktionen exportieren" → Komplexitäts-Lint.
+- "Klassen, die `*Repository` heißen, müssen ein Interface implementieren" → ArchUnit-Predikat.
+- "Alle Public-API-Klassen brauchen einen `@SuppressWarnings("unused")`-Verbot" → Custom-Linter-Regel.
 
-Anti-Pattern: "Ich verschiebe ihn in `in-progress/`, damit ich nicht
-vergesse, dass ich ihn morgen anfange." Damit lügt das Lifecycle-System
-— jemand könnte annehmen, der Slice sei im Fluss.
+Faustregel: Wenn ein Reviewer-Agent dieselbe Verletzung in jedem Lauf
+wieder beanstanden müsste, hast du eine Fitness Function vergessen.
+Wenn die Entscheidung nur "es soll sauber sein" ist, ist sie noch
+keine ADR-würdige Regel.
 
-### Wann darf ein Slice in `done/` landen, obwohl ein Gate rot ist?
+### Was ist der Unterschied zwischen *superseded* und *deprecated* ADR?
 
-Eigentlich nie. Eine Ausnahme:
+- **Deprecated**: Die Entscheidung gilt weiterhin für vorhandenen Code,
+  aber für *neuen* Code nicht mehr. Es gibt (noch) keinen Nachfolger.
+  Migration ist optional. Beispiel: "Wir nutzen JUnit 4. (Deprecated:
+  neue Tests in JUnit 5.)"
+- **Superseded by ADR-N**: Eine spätere ADR-N hat diese Entscheidung
+  abgelöst. Die Begründung der Ablösung steht in ADR-N. Bestehender
+  Code soll migriert werden, der Trigger steht in ADR-N. Beispiel:
+  "ADR-7 Modellwahl Claude 3.5 (Superseded by ADR-12 Modellwahl
+  Claude 4.5)."
 
-- Wenn das rote Gate von einem **Carveout** abgedeckt ist, der explizit dokumentiert ist und einen Auflösungs-Trigger nennt (siehe [Modul 6](../02-planung/modul-06-carveouts.md)).
-- Wenn das Gate ein **Bootstrap-aware Gate** ist (siehe [Modul 12](../04-qualitaet/modul-12-quality-gates.md)) und der Slice noch in der Frühphase liegt — auch dann muss der Bootstrap-Stand dokumentiert sein.
+Praxis: *Deprecated* ohne Folge-Plan ist meistens *Superseded* ohne
+Nachfolger — also eine Lücke. Wenn du nur "deprecated" schreibst und
+keine Migrationstrigger benennst, gehört das in den Steering Loop:
+entweder ADR-Folge-Slice oder Carveout.
 
-In beiden Fällen ist nicht das Gate rot "trotz Closure", sondern das
-Gate ist *im aktuellen Reifegrad nicht hart* — und das ist
-dokumentiert. Wenn weder Carveout noch Bootstrap, dann ist Closure
-falsch.
+### (Anwenden) Fitness-Function-Übersetzung in einem Satz
+
+Eine gute Übersetzung hat drei Bestandteile:
+
+1. **Strukturelle Aussage** — "Komponente/Datei/Layer X darf (nicht) Y".
+2. **Werkzeug** — ArchUnit (Java/Kotlin), dep-cruiser (Node), import-linter
+   (Python), depguard (Go).
+3. **Gate-Verdrahtung** — als `make`-Target sichtbar (`make arch-check`),
+   im CI gerötet wenn die Regel bricht.
+
+Beispiele (jeweils ein Satz):
+
+- ADR-7 ("Service über Adapter"): "Keine Datei unter `src/service/**`
+  darf `requests`, `urllib3` oder `httpx` importieren — `import-linter`
+  Contract, `make arch-check`."
+- ADR "Modul Layering": "Klassen in `runtime.*` dürfen nicht von Klassen
+  in `service.*` aufgerufen werden — ArchUnit-Predikat, `make arch-test`."
+
+Wenn dir kein einzelner Satz einfällt: die ADR ist zu vage. "Lose
+Kopplung anstreben" ist nicht prüfbar; "Layer A importiert nicht aus
+Layer B" ist prüfbar. Vage ADRs erzeugen Reviewer-Last; präzise ADRs
+erzeugen Gates.
 
 ## Übungshinweise
 
-### Planung eines Features über mehrere Wellen
+### ADR für Modellwahl
 
 Maßstab:
 
-- Die *erste* Welle liefert etwas, was sichtbar grün läuft (`make gates` grün, mindestens ein Smoke-Test). Lieber kleiner als zu groß.
-- Jede Welle hat einen Closure-Trigger ("wenn X grün und Y dokumentiert → Welle done").
-- Wellen sind in *Reihenfolge* abhängig, nicht in *Termin*. Termine ergeben sich, sobald die Wellen geschnitten sind.
-- Mindestens ein Slice pro Welle hat einen Verweis auf eine Anforderungs-ID (`LH-*`) — sonst ist die Welle "Wartungsarbeit", die nicht in die Roadmap gehört.
+- Mindestens drei verglichene Alternativen (z. B. Claude Opus 4.7, GPT-5, Llama-Modell).
+- Vergleich entlang messbarer Kriterien: Kosten/Token, Latenz, Context-Window, Tool-Use-Reife, On-Prem-Option.
+- Annahmen explizit ("wir setzen Caching ein", "wir akzeptieren 1k Tool-Calls/Tag").
+- Konsequenzen mit Trigger für Re-Evaluierung ("re-evaluieren, wenn Kosten > $X/Monat oder neue Modellgeneration erscheint").
 
-### Bewege einen Slice durch alle vier Verzeichnisse
+### ADR für Tool Calling
 
-Vier Commits ist die saubere Variante:
+Konkrete Entscheidungen, die in eine solche ADR gehören:
 
-1. Erstelle Slice in `open/`.
-2. `git mv open/X.md next/X.md` (Prioritäts-Trigger erfüllt).
-3. `git mv next/X.md in-progress/X.md` (Start-Commit, oder Branch-Commit).
-4. `git mv in-progress/X.md done/X.md` + Closure-Notiz.
+- Welche Tool-Schemas: OpenAI-Functions, JSON-Schema, Anthropic-Tools?
+- Tool-Allowlist: was darf der Agent aufrufen, was nicht (Datenbank-Schreibzugriff, Shell-Exec, externe HTTP)?
+- Fehlerverhalten bei abgelehntem Tool: hart abbrechen oder retry-mit-Erklärung?
+- Logging-Vertrag: was muss pro Tool-Call mindestens festgehalten werden (siehe Modul 15)?
 
-Wichtig: Reine Move-Commits (Git-Rename-Detection braucht 50 %
-Similarity, siehe Hard Rule aus grid-gym in [Modul 8](../03-agenten/modul-08-implementierung.md)).
-Inhaltliche Edits dazwischen sind eigene Commits.
+### ADR für Layering
 
-### Schneide einen zu großen Slice in zwei umsetzbare Slices
+Beispiel-Schema:
 
-Kriterien für "zu groß":
+```
+Types  → keine Imports (atomarer Layer)
+Config → darf Types
+Repo   → darf Types, Config
+Service → darf Types, Config, Repo
+Runtime → darf alles oben
+UI → darf alles oben außer Repo
+```
 
-- Mehr als eine Schicht der Architektur betroffen ohne klare Abstraktion dazwischen.
-- DoD enthält "und" mehrfach (statt einer klaren Bedingung).
-- Geschätzte Bearbeitungsdauer überschreitet, was ein Reviewer *in einer Sitzung* prüfen kann.
+Fitness Function:
 
-Schnitt-Strategien:
+- Go: `depguard` mit `denyList` pro Layer.
+- Python: `import-linter` mit `forbidden`-Contracts.
+- Java/Kotlin: ArchUnit `noClasses().that().resideIn("..service..").should().dependOn(..)`.
 
-- **Vertikal**: Slice 1 liefert minimalen End-to-End-Pfad; Slice 2 erweitert.
-- **Horizontal**: Slice 1 baut die Schicht, Slice 2 verkabelt sie.
-- **Read-Write-Split**: Slice 1 nur Lesen, Slice 2 fügt Schreiben hinzu.
+Erfolgskriterium: Verletzungs-Provokation in einem Test bricht `make arch-check`.
+
+### Provoziere eine ADR-Verletzung
+
+Gute Trigger:
+
+- Lass den Agenten "schnell mal eben" eine Service-Klasse direkt aus dem Runtime-Layer instanziieren.
+- Lass ihn ein Repository-Interface direkt im UI-Layer importieren mit Begründung "ist doch nur ein DTO".
+
+Frage: Wann (in welcher Phase) hat der Sensor das gemeldet? Pre-commit,
+Pre-integration, erst im Reviewer-Agent? Je früher, desto billiger.
 
 ## Häufige Fehler
 
-- **`done/` wird zur Mülltonne.** Slices wandern dort hin, weil "halt nicht mehr aktuell". Das ist kein Closure, sondern Verstecken.
-- **`open/` enthält Wünsche, die nie umgesetzt werden.** Aufräumen ist Teil von Entropy Management — toter Backlog ist Rauschen.
-- **Closure-Notiz fehlt oder ist generisch ("done").** Damit verlierst du den Steering-Loop-Lerneffekt.
+- **ADR beschreibt Implementierung statt Entscheidung.** ADR ist eine *Wahl zwischen Alternativen* mit Begründung, nicht eine "so geht's"-Beschreibung.
+- **ADR ohne Annahmen.** Annahmen sind die Stellen, an denen die Entscheidung kippt. Ohne sie kann niemand entscheiden, ob die ADR noch gilt.
+- **Accepted-ADR wird umgeschrieben.** Bricht das Geschichtsbuch-Prinzip ([c-hsm-doc-Beispiel](../grundlagen/fallstudien.md)). Korrektur als neue ADR mit "supersedes ADR-N".
+- **ADR ohne Fitness Function.** "Wir machen Hexagonal Architecture" ohne Architekturtest ist Lippenbekenntnis. Spätestens beim dritten Refactor ist die Schicht durchlöchert.
 
 ## Verweise
 
-- Carveouts: [Modul 6](../02-planung/modul-06-carveouts.md) und [Lösung Modul 6](modul-06-loesung.md)
-- Welle-Self-Close-Konvention aus grid-gym: [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
+- 2×2-Klassifikation (ADR als Feedforward + Quelle für Computational Feedback): [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
+- ADR-Beispiele: [`/lab/example/docs/plan/adr/`](../../../lab/example/docs/plan/adr/) (im Lab nach Phase B)
 - Vorherige Lösung: [Modul 3](modul-03-loesung.md)
 - Nächste Lösung: [Modul 5](modul-05-loesung.md)

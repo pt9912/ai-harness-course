@@ -6,7 +6,7 @@
 > nach dem Ausfüllen.
 
 **Version:** 0.1.0 (`Major.Minor.Patch` — erhöhen bei Änderungen, siehe
-[Kurs Modul 2](../../../kurs/de/01-spec-und-architektur/modul-02-lastenheft.md)).
+[Kurs Modul 3](../../../kurs/de/01-spec-und-architektur/modul-03-lastenheft.md)).
 
 **Status:** Draft | In Review | Accepted (entwurfsstatus, der die
 Verbindlichkeit der IDs steuert).

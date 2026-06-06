@@ -1,101 +1,99 @@
-# Lösung — Modul 14: Observability
+# Lösung — Modul 14: Docker Harness
 
-Zugehöriges Modul: [Modul 14 — Observability](../05-betrieb/modul-14-observability.md).
+Zugehöriges Modul: [Modul 14 — Docker Harness](../05-betrieb/modul-14-docker-harness.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Welche drei Telemetrie-Typen unterscheidet der Kurs?
+### (Erinnern) Nenne drei Sprache↔Lock-File-Paare
 
-| Typ | Antwortet auf | Werkzeug |
-|---|---|---|
-| **Logs** | *was* passierte | strukturierte Log-Aggregation |
-| **Metriken** | *wie oft, wie schnell, wie viel* | Prometheus/OpenMetrics-Pendant |
-| **Traces** | *wer rief wen, in welcher Reihenfolge* | OpenTelemetry/Jaeger |
+| Sprache | typisches Lock-File |
+|---|---|
+| Python | `poetry.lock` oder `uv.lock` |
+| Node | `package-lock.json` oder `pnpm-lock.yaml` |
+| Go | `go.sum` |
+| .NET | `packages.lock.json` (mit Central Package Management) |
+| Rust | `Cargo.lock` |
+| Java/Maven | `pom.xml` mit pinned Versionen + (für reine Reproduzierbarkeit) `dependency-tree`-Snapshot |
 
-Drei verschiedene Fragen, drei verschiedene Werkzeuge. Sie überlappen
-sich nicht — Logs ersetzen Traces nicht, und Metriken ersetzen Logs
-nicht. Ein Agent-System mit nur einem Typ ist forensisch nicht
-antwortfähig:
+Drei Beispiele genügen — kennt der Lerner *kein* Lock-File für die
+Sprache seines Repos, fehlt eine zentrale Reproduzierbarkeits-Klammer.
 
-- *Nur Logs:* Cost-Attribution unmöglich (das ist eine Metrik-Frage),
-  Tool-Call-Ketten nicht rekonstruierbar (das ist eine Trace-Frage).
-- *Nur Metriken:* der einzelne Vorfall lässt sich nicht erzählen.
-- *Nur Traces:* die *Häufigkeit* eines Problems über Zeit verschwindet.
+Pointe: Ein gepinntes Lock-File ist *nicht* ausreichend für volle
+Reproduzierbarkeit. Es sichert die *Bibliotheks-Versionen*, aber nicht
+die *Runtime-Version* (Python 3.11 vs. 3.12, Go 1.21 vs. 1.23). Lock-File
+**plus** Image-Hash ist die Mindestkombination. Genau diese Kombination
+liefert das Bündel "byteidentische Toolchain", auf das Modul 12 sich für
+deterministische Replays stützt.
 
-Im Kurs gilt: alle drei Typen mit demselben `slice.id`-Korrelations-Feld,
-sodass eine Slice-Bearbeitung über Logs, Metriken und Traces hinweg
-verfolgbar ist.
+### Warum ist `make gates` im Host-OS keine valide Gate-Ausführung?
 
-### Welche drei Felder muss ein Tool-Call-Span mindestens tragen?
+Drei Gründe:
 
-Mindestens:
+1. **Toolchain-Unterschied**: Lokal hast du Go 1.23, im CI läuft Go 1.21. Linter-Regeln und Compile-Verhalten unterscheiden sich subtil. Gate grün lokal, rot im CI — der Unterschied gehört nicht in den Bug.
+2. **Abhängigkeits-Reihenfolge**: Host hat globale Pakete (Python, NodeJS), die der CI nicht hat. Importe können Lokal-Fallbacks nutzen, die im CI fehlen.
+3. **Filesystem-Annahmen**: Host hat Dateien an Pfaden, die der CI nicht hat (`~/.config`, `/etc/foo`). Gate liest sie ungeprüft.
 
-1. **`tool.name`** — welches Tool wurde aufgerufen.
-2. **`tool.arguments`** — was waren die Eingabe-Parameter (ggf. redacted für PII, aber strukturell vorhanden).
-3. **`tool.result.status`** — Erfolg/Fehler, idealerweise mit Fehlerklasse.
+Wenn lokal und CI nicht *bit-identisch* dasselbe Image benutzen,
+debuggst du den Unterschied, nicht den Bug. Docker-only ist nicht
+Mode, sondern Kosten-Senkung.
 
-Üblich darüber hinaus:
+### Wann lohnt sich ein Devcontainer zusätzlich zum Compose-Setup?
 
-- `tool.duration_ms` — Latenz.
-- `tool.cost.tokens_in`/`tokens_out` (bei LLM-Tools).
-- `tool.parent_span_id` — Verkettung in der Agenten-Schleife.
-- `agent.role` — welche Rolle (Planner, Implementer, …) den Call gemacht hat.
+Wenn der primäre Entwicklungs-Pfad eines Repos *interaktives Arbeiten
+im selben Image* ist, das auch der CI benutzt — und nicht "Code lokal
+schreiben, dann Container für Tests".
 
-Was *fehlen* darf:
+Konkrete Trigger:
 
-- Der vollständige Output, wenn er groß ist. Hash und Truncation reichen für Forensik; den vollen Inhalt nur on-demand laden.
+- Mehrere Sprachen im selben Repo (z. B. `c-hsm-doc` mit Go + Java/Kotlin-Demos).
+- Tool-spezifische Sub-Setups, die einrichtungsschwer sind (PKCS#11-Slots, SoftHSM-Init).
+- Team-Größe > 2: das "läuft auf meiner Maschine" sich häuft.
 
-Wenn dein Tool-Call-Span weniger als die ersten drei Felder hat,
-kannst du den Lauf nicht reproduzieren. Wenn er mehr als die genannten
-fünf hat ohne Begründung, ist er zu teuer pro Span — Span-Kosten sind
-selbst ein Budget.
-
-### Wo schlägt sich ein Prompt-Cache-Miss in den Metriken nieder?
-
-Drei Stellen, je nach Provider:
-
-1. **`llm.cache.hit_ratio`** als laufender Wert (sinkt bei Miss).
-2. **`llm.tokens_in.uncached`** + **`llm.tokens_in.cached`** als zwei separate Counter — die Summe ist die Eingabe, die Aufteilung zeigt den Cache-Effekt.
-3. **`llm.cost.usd`** steigt erkennbar — Cache-Hits sind typisch 10x billiger als Misses.
-
-Operative Konsequenz: Ein Span ohne Cache-Felder bedeutet *Blindflug*
-über Kosten. Bei einem Steering-Loop-Schritt "Kosten zu hoch in
-Welle X" ist der erste Blick: hat die Welle Cache-freundliche
-Kontextstücke vorne, oder injiziert jeder Slice einen neuen Block, der
-den Cache invalidiert?
+Wenn `make build && make shell` reicht (siehe grid-gym), brauchst du
+keinen Devcontainer — das ist Kosten ohne Nutzen. Devcontainer wird
+wertvoll, wenn IDE-Integration (LSP, Debugger) im Container nötig
+ist.
 
 ## Übungshinweise
 
-### Analyse eines KI-Agenten-Laufs im Trace-Viewer
+### Aufbau eines vollständigen Build-Harness
 
-Maßstab:
+Pflicht-Stages im Dockerfile:
 
-- Du kannst die *Sequenz* der Tool-Calls in Reihenfolge rekonstruieren.
-- Du kannst zu jedem Tool-Call die Latenz benennen.
-- Du findest den teuersten Tool-Call binnen einer Minute.
-- Du erkennst Wiederholungen (gleicher Tool-Call mit gleichen Args) — ein Symptom für fehlendes Caching oder schlechten Loop-Abbruch.
+1. **Toolchain-Stage**: Base-Image mit pinned Version, Compiler/Linter/Tools.
+2. **Deps-Stage**: nur Lockfile + Lock-Resolution, vor dem Quellcode. Cache-freundlich.
+3. **Build-Stage**: Quellcode + Compile.
+4. **Test-Stage**: läuft `make test` (oder Äquivalent).
+5. **Lint-Stage**: läuft Linter.
+6. **Runtime-Stage** (Distroless oder JRE-minimal): nur das Binary plus minimale Laufzeit-Abhängigkeiten.
 
-### Identifiziere den teuersten Tool-Call und begründe, ob er nötig war
+Cache-Strategie: Lockfile ändert sich selten → Stage 2 ist meist
+cached. Quellcode ändert sich oft → Stage 3+4 wiederholen. Das spart
+in einem typischen Repo 60-80 % Build-Zeit.
 
-Drei Fragen, die der Lerner beantworten soll:
+### Mache ein Image nicht-reproduzierbar und beobachte den Drift
 
-1. **Quelle**: Welches Step im Plan hat den Call ausgelöst?
-2. **Ergebnis**: Was hat der Agent mit dem Ergebnis gemacht? Ging es ins Output ein?
-3. **Vermeidbarkeit**: Wäre der Call mit besserem Kontext (AGENTS.md, ADR, Spec) vermeidbar gewesen? Wenn ja, ist das ein Steering-Loop-Eintrag.
+Trigger:
 
-Häufig zeigt sich: der teuerste Call ist ein File-Read, der dieselbe
-Datei wie drei Schritte vorher liest. Caching im Tool-Layer fehlt —
-oder der Agent hat das Result aus dem vorherigen Span nicht im
-Kontext gehalten.
+- `FROM golang:latest` statt `golang:1.23.4`.
+- `apt-get install` ohne pinned Versionen.
+- `go install github.com/...@latest`.
+
+Erwartetes Symptom: Zwei Builds an verschiedenen Tagen erzeugen
+Binaries unterschiedlicher Größe / unterschiedlicher SHA. CI grün,
+Production-Bug — und niemand kann den ursprünglichen Stand rekonstruieren.
+
+Lehrwert: Drift ist nicht etwas, das *manchmal* passiert. Es passiert
+*immer*, du siehst es nur nicht, bis es wehtut.
 
 ## Häufige Fehler
 
-- **Span ohne Tool-Result-Hash.** → Forensik geht verloren, wenn das Ergebnis-Volumen das Logging-Budget sprengt.
-- **Trace nur in Produktion, nicht in Lab.** → Replay-Läufe sind blind. Lab muss denselben OTel-Pfad haben wie Prod.
-- **Budget-Alerts ohne Slice-Attribution.** → "Wir haben heute $400 verbraten" weiß niemand zuzuordnen. Spans brauchen ein `slice.id`-Attribut.
+- **Multi-Stage ohne Cache-Trennung.** Dockerfile lädt Lockfile und Code im selben Layer. → Jede Code-Änderung triggert vollen Re-Download.
+- **Runtime-Stage enthält Dev-Tools.** Distroless wird ignoriert, "weil debugging einfacher ist". → Angriffsfläche balloniert.
+- **`make gates` startet kein eigenes Image, nutzt Host-Docker.** → Halber Schritt: Build im Container, Test am Host. Bringt die meisten Drift-Probleme zurück.
 
 ## Verweise
 
-- Entropy Management als Observability-Konsument: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
+- Hard Rule "Docker-only" aus grid-gym: [Modul 9](../03-agenten/modul-09-implementierung.md) und [Fallstudien](../grundlagen/fallstudien.md)
 - Vorherige Lösung: [Modul 13](modul-13-loesung.md)
 - Nächste Lösung: [Modul 15](modul-15-loesung.md)

@@ -3,7 +3,7 @@
 > **Template-Hinweis.** Diese Datei ist eine Vorlage für `harness/README.md`
 > deines Repos. Kopiere sie nach `harness/README.md`, ersetze
 > `<Platzhalter>` und lösche diesen Block. Pflichtgliederung folgt
-> [Kurs Modul 8 / Konventionen](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt).
+> [Kurs Modul 9 / Konventionen](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt).
 
 ---
 
@@ -55,7 +55,7 @@ Was lenkt den Agenten *vor* der Handlung? Pointer, kein Inhalt.
 
 <!--
 WICHTIG: Nur Befehle aufzählen, die im Makefile *existieren*.
-Halluzinierte Gates sind die häufigste Form von Harness-Lüge (Modul 12).
+Halluzinierte Gates sind die häufigste Form von Harness-Lüge (Modul 13).
 
 Drei Spalten — kein Lauf-Status:
 - Target:  der Make-Befehl.
@@ -68,7 +68,7 @@ Lauf-Wahrheit pro Commit liegt in CI (Badge/Dashboard), nicht hier
 (`harness/README.md` ist Rang 9 in der Source Precedence).
 Strukturell rote Gates (dauerhaft rot) bekommen einen Carveout in
 `docs/plan/carveouts/CO-<NNN>-…` mit Auflösungs-Trigger und Folge-Slice
-(Modul 6); die Bindung-Spalte verweist auf die `CO-<NNN>`-ID, die
+(Modul 7); die Bindung-Spalte verweist auf die `CO-<NNN>`-ID, die
 Begründung lebt im Carveout, nicht hier.
 -->
 
@@ -81,10 +81,10 @@ Begründung lebt im Carveout, nicht hier.
 | `make coverage-gate-critical` | <…> | bootstrap via `CO-<NNN>` bis <Slice/Welle> |
 | `make gates` | alle inneren Gates | — |
 | `make ci` | gates + extras | — |
-| `make fullbuild` | volle Closure | Image-Hash `sha256:…` (Modul 13) |
+| `make fullbuild` | volle Closure | Image-Hash `sha256:…` (Modul 14) |
 
 **Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates`.
-**Rote Gates:** Begründung im verlinkten `CO-<NNN>` (siehe Bindung-Spalte), Modul 6.
+**Rote Gates:** Begründung im verlinkten `CO-<NNN>` (siehe Bindung-Spalte), Modul 7.
 **Nicht behauptet** (geplant): `<make-target-1>`, `<make-target-2>` (Welle <n>).
 
 <!-- Domänenspezifische Gates ergänzen, je nach Repo-Klasse: -->

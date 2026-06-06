@@ -179,7 +179,7 @@ Mensch zuerst lesen muss. Pflichtgliederung:
 ## Sensors                  # Tabelle der Feedback-Gates (nur real existierende!)
 ## Traceability rules       # Welche IDs müssen in Commits/PRs auftauchen?
 ## Safety and scope boundaries  # repo-spezifische Hard Rules
-## Minimal agent workflow   # der 8-Schritt-Pfad (siehe Modul 8)
+## Minimal agent workflow   # der 8-Schritt-Pfad (siehe Modul 9)
 ```
 
 Wichtig: Die Sensors-Tabelle darf keine Befehle behaupten, die es im Repo
@@ -189,7 +189,7 @@ Die Sensors-Tabelle trägt **keinen Lauf-Status** ("grün"/"rot"):
 Lauf-Wahrheit pro Commit lebt in CI (Badges/Dashboard), also in höher
 rangierten Quellen, nicht in `harness/README.md` (Rang 9). Strukturell
 rote Gates werden als Carveout in `docs/plan/carveouts/` dokumentiert
-(Modul 6); die Bindung-Spalte der Tabelle (`Target | Vertrag | Bindung`)
+(Modul 7); die Bindung-Spalte der Tabelle (`Target | Vertrag | Bindung`)
 verweist auf die `CO-<NNN>`-ID, die Begründung lebt im Carveout, nicht
 hier. Damit ist "rot dokumentieren, nicht verstecken" ortsdiszipliniert:
 es geschieht im Carveout-Index, nicht in einer Status-Spalte, die sich
@@ -200,11 +200,11 @@ Die Bindung-Spalte trägt vier **kanonische Klassen**:
 - **ADR-Bindung** (`ADR-<NNN>`) — Gate setzt eine Architektur-Entscheidung
   durch.
 - **Carveout-Bindung** (`CO-<NNN>`) — Gate bewusst geschwächt, mit
-  Auflösungs-Trigger und Folge-Slice (Modul 6).
+  Auflösungs-Trigger und Folge-Slice (Modul 7).
 - **Kalibrierungs-Bindung** (`Schwelle X %, M<n> → Y %`) — bewegliche
   Eichung mit Meilenstein-Schaltplan.
 - **Reproduzierbarkeits-Bindung** (Image-Hash, Toolchain-Pin) — Gate
-  hängt an bit-identischem Artefakt (Modul 13).
+  hängt an bit-identischem Artefakt (Modul 14).
 
 Repos können **weitere Klassen** einführen — etwa Anforderungs-Bindung
 (`LH-…`), Compliance-Bindung (Regulatorik-Artikel) oder
@@ -257,7 +257,7 @@ Schritten in [Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md
 
 > **Begriffsklärung:** "Harness-Bootstrap" meint hier den
 > Einstiegsprozess in den Harness. Nicht zu verwechseln mit
-> *Bootstrap-aware Gate* ([Modul 12](../04-qualitaet/modul-12-quality-gates.md)) — das ist ein
+> *Bootstrap-aware Gate* ([Modul 13](../04-qualitaet/modul-13-quality-gates.md)) — das ist ein
 > einzelnes Gate mit Reifestufe und Hochschalt-Trigger (Coverage 0 →
 > 70 %). Beide Begriffe teilen das Wort, sind strukturell verschieden:
 > *Harness-Bootstrap* betrifft den **Repo-Lebenszyklus**,
@@ -283,7 +283,7 @@ Typisch: alle entdeckten Diskrepanzen aufgelöst (als Carveouts oder
 Reconciliation-Slices); Spec/ADR/Sensors decken Code-Stand ab;
 ID-Schema retrofitted. Eine BF-Sub-Area ohne Graduation-Plan ist eine
 *permanente Ausnahme als temporär getarnt* — analog zur
-Carveout-Disziplin in [Modul 6](../02-planung/modul-06-carveouts.md).
+Carveout-Disziplin in [Modul 7](../02-planung/modul-07-carveouts.md).
 
 Permanente BF-Erklärung (für Code, der absehbar entfernt wird —
 Legacy, Drittsystem-Adapter) ist möglich, mit Begründung und
@@ -335,12 +335,12 @@ Roadmap-Outline mit Welle-Sequenz, Sensors-Roster als "Nicht
 behauptet"-Block. In **Brownfield**: Reconciliation-Backlog steht,
 Konvergenzpfad zu GF ist sichtbar (mit ersten Reconciliation-Slices in
 `open/`). Ab dann übernimmt der **Workflow** (Slice-Lebenszyklus,
-Modul 4–8). Bootstrap und Workflow sind getrennte Lebenszyklen — kein
+Modul 5–9). Bootstrap und Workflow sind getrennte Lebenszyklen — kein
 Übergang ohne Sichtbarkeit.
 
 ### Verbindung zum Steering-Loop
 
-Harness-Bootstrap ist im Grunde der **Steering-Loop ([Modul 10](../04-qualitaet/modul-10-verification.md)),
+Harness-Bootstrap ist im Grunde der **Steering-Loop ([Modul 11](../04-qualitaet/modul-11-verification.md)),
 einmal in Folge angewendet, bis Graduation erreicht ist**. Das
 Werkzeug ist identisch (Beobachtung → Guide/Sensor); was sich
 unterscheidet, ist die Anwendungsphase: Bootstrap = initial bis

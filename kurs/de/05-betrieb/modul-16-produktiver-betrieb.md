@@ -1,4 +1,4 @@
-# Modul 15 — Produktiver Betrieb
+# Modul 16 — Produktiver Betrieb
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung. Mit diesem Modul ist der inhaltliche Teil des Kurses abgeschlossen — danach folgt das [Abschlussprojekt](../abschluss/abschlussprojekt.md).
 
@@ -57,7 +57,7 @@ ohne den Autor zu kennen. Runbooks und Replay sind dafür da.
 - **"Runbook beschreibt den Happy Path."** — Nein. Runbook beschreibt *Entscheidungen unter Unsicherheit*, mit Triggern. Wenn das Runbook nur sagt "Service neu starten", ist es kein Runbook.
 - **"Produktionsfreigabe ist eine formale Checkbox."** — Eine Checkliste ohne *Belege* pro Item (Replay-Lauf-Link, ADR-ID, Trace-Hash) ist Bürokratie. Mit Belegen ist sie das einzige nicht-fragmentierte Audit-Artefakt.
 - **"Prompt-Injection ist eine Modell-Frage."** — Nein. Erkennung von Injection ist eine *Telemetrie-Frage*: Eingabe-Logging + Tool-Call-Audit + Output-Drift-Marker. Wer das nicht hat, erkennt Injection nur durch Glück.
-- **"Postmortem ist Schuldzuweisung — also macht man's leise."** — Genau das Gegenteil. Ein produktiver Postmortem ist *blameless* (vgl. Etsy/Google SRE-Tradition): er sucht den Pfad, auf dem ein vernünftiger Mensch unter Druck dieselbe Entscheidung getroffen hätte, und fragt, *welcher Sensor oder Guide gefehlt hat*. Closure-Einträge in `done/` ([Modul 4](../02-planung/modul-04-planning-harness.md)) und Reflexions-Einträge ([`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) sind beide *strukturell* blameless: sie fragen "welche Harness-Lücke war Ursache", nicht "wer war es". Wer Postmortems als Schuldzuweisung erlebt hat, wird Drift-Symptome zukünftig verschweigen — und genau dadurch wachsen sie. Blameless ist keine moralische Wahl; es ist eine Sensor-Schutz-Maßnahme.
+- **"Postmortem ist Schuldzuweisung — also macht man's leise."** — Genau das Gegenteil. Ein produktiver Postmortem ist *blameless* (vgl. Etsy/Google SRE-Tradition): er sucht den Pfad, auf dem ein vernünftiger Mensch unter Druck dieselbe Entscheidung getroffen hätte, und fragt, *welcher Sensor oder Guide gefehlt hat*. Closure-Einträge in `done/` ([Modul 5](../02-planung/modul-05-planning-harness.md)) und Reflexions-Einträge ([`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) sind beide *strukturell* blameless: sie fragen "welche Harness-Lücke war Ursache", nicht "wer war es". Wer Postmortems als Schuldzuweisung erlebt hat, wird Drift-Symptome zukünftig verschweigen — und genau dadurch wachsen sie. Blameless ist keine moralische Wahl; es ist eine Sensor-Schutz-Maßnahme.
 
 Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
 
@@ -78,7 +78,7 @@ Schlechtes Format:
 Gutes Format — jedes Item trägt einen **Beleg-Slot**:
 ```markdown
 - [ ] Tests grün. **Beleg:** Link zum CI-Run + Image-Hash.
-- [ ] Replay gelaufen. **Beleg:** Link zum Replay-Manifest (Modul 11).
+- [ ] Replay gelaufen. **Beleg:** Link zum Replay-Manifest (Modul 12).
 ```
 Die Beleg-Pflicht ist der einzige Schutz gegen Bürokratie.
 
@@ -101,13 +101,13 @@ Eines pro Phase des Kurses:
 
 ### Agenten (Phase 03)
 - [ ] AGENTS.md beschreibt nur existierende Konventionen.
-      **Beleg:** Doku-Konsistenz-Agent-Lauf (Modul 14).
+      **Beleg:** Doku-Konsistenz-Agent-Lauf (Modul 15).
 
 ### Qualität (Phase 04)
 - [ ] `make gates` grün auf frischem Klon + im CI mit
       identischem Image-Hash.
       **Beleg:** zwei Run-Links (Klon-Run + CI-Run).
-- [ ] Replay-Manifest (Modul 11) mit ≥3 Fällen, alle grün.
+- [ ] Replay-Manifest (Modul 12) mit ≥3 Fällen, alle grün.
       **Beleg:** Link zum manifest.yaml + Run-Output.
 
 ### Betrieb (Phase 05)
@@ -155,7 +155,7 @@ Datum: 2026-06-30
 Checkliste: docs/release/welle-1-checkliste.md (alle Items mit Beleg)
 Restrisiken: zwei (siehe §"Bewusst NICHT", plus Folge-Slice SL-027 für
              Coverage-Erhöhung auf Critical-Pfad).
-Steering-Loop-Eintrag (Modul 14 Doku-Konsistenz-Agent meldete vor
+Steering-Loop-Eintrag (Modul 15 Doku-Konsistenz-Agent meldete vor
 Freigabe einen Drift in AGENTS.md — wurde behoben, vor Freigabe geprüft).
 ```
 

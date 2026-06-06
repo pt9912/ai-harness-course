@@ -1,4 +1,4 @@
-# Modul 6 — Carveout Management
+# Modul 7 — Carveout Management
 
 > **Aufwand:** ca. 60 Min Lesen · 60 Min Übung. Spiralcurriculum: Carveouts sind dein erstes konkretes Werkzeug für *Entropy Management* (Säule 3, [Klassifikation](../grundlagen/klassifikation.md#drei-operative-säulen-openai)).
 
@@ -11,7 +11,7 @@ Drei neue Begriffe in diesem Modul. Volldefinitionen in
 |---|---|---|
 | **Carveout** | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel — mit Trigger oder explizit als permanent markiert. | ein Loch im Zaun, mit Notiz "wann wird zugemacht?". |
 | **Auflösungs-Trigger** | Beobachtbare Bedingung, mit der ein temporärer Carveout endet (nicht "wenn wir Zeit haben"). | die Kerze, die *anzeigt*, dass es jetzt soweit ist. |
-| **Bootstrap-aware Gate** *(Vorgriff)* | Gate mit dokumentierter Reifestufe: weich in der Frühphase, hart ab Trigger. **Vollform in [Modul 12](../04-qualitaet/modul-12-quality-gates.md#bootstrap-aware-gates)**. | Tempolimit, das in der Bauzone gilt, später verschwindet. |
+| **Bootstrap-aware Gate** *(Vorgriff)* | Gate mit dokumentierter Reifestufe: weich in der Frühphase, hart ab Trigger. **Vollform in [Modul 13](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)**. | Tempolimit, das in der Bauzone gilt, später verschwindet. |
 
 ## Engage
 
@@ -215,7 +215,7 @@ Drei Status-Übergänge sind möglich: *aufgelöst* (Trigger eingetreten),
 *permanent* (Trigger wird nie eintreten — in ADR überführen),
 *weiterhin aktiv* (Trigger weiterhin sinnvoll — Datum nachtragen).
 
-**Schritt 3 — Wer führt den Audit aus?** Rollen-Bezug (Modul 7):
+**Schritt 3 — Wer führt den Audit aus?** Rollen-Bezug (Modul 8):
 *Planner* identifiziert die fälligen Carveouts vor Welle-Closure,
 *Architect* entscheidet bei "permanent" über die ADR-Überführung,
 *Implementer* führt die `git mv`-Operationen und Config-Updates aus.
@@ -227,7 +227,7 @@ verlängert das Lügen.
 ist mindestens die "Letzte Prüfung"-Frische:
 
 ```makefile
-verify-carveout-freshness:  ## Modul 6 — Audit-Pflicht pro Welle
+verify-carveout-freshness:  ## Modul 7 — Audit-Pflicht pro Welle
 	@python tools/check_carveout_freshness.py --max-age-days 90
 
 verify: verify-carveout-freshness
@@ -252,7 +252,7 @@ ist die Drift in Aktion. Re-Audit: die drei landen mit `git mv` in
 `done/`, eine vierte Drift wandert in eine ADR. Die zentrale Erkenntnis
 — *Drift entsteht nicht durch falsches Tun, sondern durch
 nicht-getanes Auditieren* — ist genau der Conceptual-Change-Punkt, den
-Modul 06 transportiert.
+Modul 07 transportiert.
 
 Sechs Schritte, ein wiederkehrender Slice. Der Carveout-Mechanismus
 hält nur, wenn er von einem *zweiten* Mechanismus auditiert wird;
@@ -280,7 +280,7 @@ Modul-spezifische Trigger:
 * **(Erinnern)** Welche zwei Pflichtfelder hat jeder *temporäre* Carveout, damit er nicht heimlich permanent wird?
 * **(Erinnern)** Wo im Repo lebt ein Carveout — Verzeichnis und Datei-Konvention?
 * Wann darf ein Carveout das `make gates`-Ziel grün halten, und wann nicht?
-* Wie unterscheidet sich ein Carveout von einem Bootstrap-aware Gate (siehe [Modul 12](../04-qualitaet/modul-12-quality-gates.md))?
+* Wie unterscheidet sich ein Carveout von einem Bootstrap-aware Gate (siehe [Modul 13](../04-qualitaet/modul-13-quality-gates.md))?
 * **(Erschaffen)** Skizziere einen Carveout-Audit-Slice für die nächste Welle deines Repos: DoD, beteiligte Rollen, Belegartefakt. Welche drei Status-Übergänge muss er möglich machen — und welcher davon ist der unbequemste?
 
 ### Selbstcheck-Rubrik
@@ -295,4 +295,4 @@ Modul-spezifische Trigger:
 
 ## Weiterlesen
 
-* Nächstes Modul: [Modul 7 — Agentenrollen](../03-agenten/modul-07-agentenrollen.md)
+* Nächstes Modul: [Modul 8 — Agentenrollen](../03-agenten/modul-08-agentenrollen.md)

@@ -1,4 +1,4 @@
-# Modul 3 — Architektur und ADRs
+# Modul 4 — Architektur und ADRs
 
 > **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: ID-Schema und Source Precedence (Module 1, 2) bekommen hier einen neuen Quadranten — ADRs sind *inferential feedforward* mit Brücke zu *computational feedback*.
 
@@ -78,7 +78,7 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 - **"Eine ADR ohne Fitness Function ist eine ADR."** — Eine ADR ohne Fitness Function ist eine Absichtserklärung. Wer architecture fitness im Kopf hat, schreibt parallel den ArchUnit-Test.
 - **"MADR ist Pflicht."** — MADR ist ein Format unter mehreren (auch Nygard, Tyree/Akerman). Wichtig ist, dass dein Repo *eines* konsequent benutzt.
 - **"Architektur ist Bilder zeichnen."** — Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur in diesem Kurs heißt: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
-- **"ADRs sind Dokumentation, nicht Constraints."** — Klingt harmlos, ist die folgenreichste Fehlvorstellung in diesem Modul. Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementation-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Worked Example in [Modul 12 §Worked Example "ADR → import-linter"](../04-qualitaet/modul-12-quality-gates.md#worked-example-vom-adr-satz-zur-fitness-function) zeigt, was die Übersetzung kostet (kleine Tabelle: ADR-Satz, Werkzeug, Make-Target, Failure-Beispiel). Wer das nicht macht, dokumentiert *Hoffnung*.
+- **"ADRs sind Dokumentation, nicht Constraints."** — Klingt harmlos, ist die folgenreichste Fehlvorstellung in diesem Modul. Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementation-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Worked Example in [Modul 13 §Worked Example "ADR → import-linter"](../04-qualitaet/modul-13-quality-gates.md#worked-example-vom-adr-satz-zur-fitness-function) zeigt, was die Übersetzung kostet (kleine Tabelle: ADR-Satz, Werkzeug, Make-Target, Failure-Beispiel). Wer das nicht macht, dokumentiert *Hoffnung*.
 
 Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
 
@@ -154,7 +154,7 @@ Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
 > *Lab-Grenze:* Der minimale Pfad führt zur ersten ADR mit
 > *Fitness-Function-Anker*, nicht zur fertigen Fitness Function. Das LZ
 > "ADR-Aussage in eine maschinell prüfbare Fitness Function *übersetzen*"
-> (LZ 3) wird erst in [Modul 12 §Worked Example](../04-qualitaet/modul-12-quality-gates.md#worked-example-vom-adr-satz-zur-fitness-function)
+> (LZ 3) wird erst in [Modul 13 §Worked Example](../04-qualitaet/modul-13-quality-gates.md#worked-example-vom-adr-satz-zur-fitness-function)
 > abgerufen — der minimale Pfad ist Aufwärm-, nicht Ziel-Niveau.
 
 ## Reflexion
@@ -186,9 +186,9 @@ Modul-spezifische Trigger:
 | *Superseded* vs. *deprecated* ADR? | "Beides bedeutet alt." | Superseded: durch konkrete Nachfolge-ADR ersetzt (mit ID-Bezug). Deprecated: nicht mehr gültig, aber kein Ersatz benannt. | + Folge für Reviewer: superseded → Reviewer prüft gegen Nachfolger; deprecated → Reviewer markiert als Lücke und fordert Folge-ADR. |
 | Fitness-Function-Übersetzung in einem Satz? | "Test schreiben." | Eine maschinell prüfbare Aussage in der Form "Komponente/Datei/Layer X darf (nicht) Y" — mit konkretem Werkzeug (ArchUnit/dep-cruiser/import-linter) und konkreter Gate-Verdrahtung (`make arch-check`). | + Wenn dir kein Satz einfällt: ADR-Aussage ist zu vage formuliert (nicht "lose koppeln", sondern "Service-Layer importiert nicht aus `runtime.*`"). Vage ADRs sind unprüfbare ADRs. |
 | Unsicherster Schritt des ADR-Schreibens? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 4 Optionen, weil ich zwei der drei erst beim Hinschreiben nachträglich überhaupt erwogen habe"). | + Pointe: wer Schritt 4 (Optionen mit Trade-offs) überspringt oder schwammig hält, postet ein *Entscheidungs-Ergebnis* ohne *Entscheidungs-Belege* — und genau das macht ADRs unverteidigbar im Review. Schritt 6 (Fitness Function) ist die zweite häufige unsichere Stelle; wer hier "lässt sich nicht prüfen" schreibt, hat oft nur zu vage formuliert. |
-| Folge-ADR zu superseded ADR-0007 entworfen? | Kopf vorhanden, Body sagt nur "neue Entscheidung". | Kopf mit `supersedes: ADR-0007` und `LH-*`-Bezug; mindestens eine explizit benannte Option (z. B. *Read-through-Cache hinter Index-Layer* vs. *Cache entfernen*) plus ein Trade-off, der ADR-0007 widerlegt (z. B. *"Stale-Reads im Worked Example von Modul 9 zeigen, dass die ursprüngliche Annahme 'Cache kann nicht stale werden' nicht hält"*). | + Eine Konsequenzen-Zeile, die explizit auf die Fitness Function des Vorgänger-ADR zurückwirkt: bleibt sie? wird sie verschärft? entfällt sie? Wer das offen lässt, verschiebt das Drift-Risiko nur. |
+| Folge-ADR zu superseded ADR-0007 entworfen? | Kopf vorhanden, Body sagt nur "neue Entscheidung". | Kopf mit `supersedes: ADR-0007` und `LH-*`-Bezug; mindestens eine explizit benannte Option (z. B. *Read-through-Cache hinter Index-Layer* vs. *Cache entfernen*) plus ein Trade-off, der ADR-0007 widerlegt (z. B. *"Stale-Reads im Worked Example von Modul 10 zeigen, dass die ursprüngliche Annahme 'Cache kann nicht stale werden' nicht hält"*). | + Eine Konsequenzen-Zeile, die explizit auf die Fitness Function des Vorgänger-ADR zurückwirkt: bleibt sie? wird sie verschärft? entfällt sie? Wer das offen lässt, verschiebt das Drift-Risiko nur. |
 
 ## Weiterlesen
 
 * Repo mit 10 ADRs als Beispiel-Korpus: `pt9912/u-boot` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
-* Nächstes Modul: [Modul 4 — Planning Harness](../02-planung/modul-04-planning-harness.md)
+* Nächstes Modul: [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harness.md)

@@ -35,7 +35,7 @@ erreichen — nicht das spezifische Feature.
 
 ## Features
 
-Aus den 16 Modulen muss das Repo am Ende belegbar enthalten:
+Aus den 17 Modulen muss das Repo am Ende belegbar enthalten:
 
 * Spezifikation
 * ADRs
@@ -91,8 +91,8 @@ Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
 |---|---|
 | **rudimentär** | Source Precedence existiert nur implizit; AGENTS.md widerspricht der Spec oder beschreibt nicht-existierende Tools. |
 | **funktional** | Source Precedence dokumentiert; AGENTS.md ohne offene Widersprüche; aber `harness/README.md` nennt Befehle, die im Repo nicht existieren, oder dauerhaft rote Gates haben keinen Carveout-Eintrag in `docs/plan/carveouts/`. |
-| **solide** | Source Precedence ist `harness/README.md` voran­gestellt; AGENTS.md beschreibt nur real existierende Konventionen; dauerhaft rote Gates sind als Carveouts dokumentiert (Modul 6) und in der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt; `harness/conventions.md` existiert mit Baseline-Aussage (`MR-000`) und Modus-Deklaration pro Sub-Area. |
-| **exzellent** | Zusätzlich: Doku-Konsistenz-Agent läuft als Drift-Sensor (Modul 14); Spec-Stratifizierung (Lastenheft/Spezifikation/Architektur) mit eigener Precedence ist umgesetzt; `harness/conventions.md` Adaptions-Block trägt mindestens eine bewusste `MR-<NNN>`-Adaption mit Praxis-Begründung und Auflösungs-Trigger (oder explizit als permanent markiert). |
+| **solide** | Source Precedence ist `harness/README.md` voran­gestellt; AGENTS.md beschreibt nur real existierende Konventionen; dauerhaft rote Gates sind als Carveouts dokumentiert (Modul 7) und in der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt; `harness/conventions.md` existiert mit Baseline-Aussage (`MR-000`) und Modus-Deklaration pro Sub-Area. |
+| **exzellent** | Zusätzlich: Doku-Konsistenz-Agent läuft als Drift-Sensor (Modul 15); Spec-Stratifizierung (Lastenheft/Spezifikation/Architektur) mit eigener Precedence ist umgesetzt; `harness/conventions.md` Adaptions-Block trägt mindestens eine bewusste `MR-<NNN>`-Adaption mit Praxis-Begründung und Auflösungs-Trigger (oder explizit als permanent markiert). |
 
 ### Achse: Reproduzierbarkeit
 
@@ -103,7 +103,7 @@ Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
 | **solide** | `make gates` läuft auf einem frischen Klon *und* im CI mit identischem Image-Hash; Lock-Files committet; reproduzierbares Replay (Modellversion + Seed festgehalten). |
 | **exzellent** | Zusätzlich: dokumentierte Drift-Erkennung über mindestens zwei Modellversionen am Replay (Wann hat sich was geändert?); Image-Hash im `harness/README.md` referenziert; bootstrap-aware Gates mit dokumentierter Hochschalt-Schwelle. |
 
-> *Hinweis Pass-Through:* Image-Hash-Identität (Schwelle *solide*) wird erst in [Modul 13](../05-betrieb/modul-13-docker-harness.md) gelehrt. Wer Checkpoint D durchläuft, ohne Modul 13 absolviert zu haben, bleibt auf *funktional* gedeckelt — siehe [`../grundlagen/checkpoints.md`](../grundlagen/checkpoints.md#pass-through-logik-zum-abschlussprojekt).
+> *Hinweis Pass-Through:* Image-Hash-Identität (Schwelle *solide*) wird erst in [Modul 14](../05-betrieb/modul-14-docker-harness.md) gelehrt. Wer Checkpoint D durchläuft, ohne Modul 14 absolviert zu haben, bleibt auf *funktional* gedeckelt — siehe [`../grundlagen/checkpoints.md`](../grundlagen/checkpoints.md#pass-through-logik-zum-abschlussprojekt).
 
 ### Achse: Auditierbarkeit
 

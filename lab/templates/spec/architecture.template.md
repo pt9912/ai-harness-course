@@ -2,7 +2,7 @@
 
 > **Template-Hinweis.** Diese Datei ist eine Vorlage. Sie ist
 > **sprach- und meilensteinfrei** (siehe Hard Rule aus grid-gym in
-> [Modul 8](../../../kurs/de/03-agenten/modul-08-implementierung.md)).
+> [Modul 9](../../../kurs/de/03-agenten/modul-09-implementierung.md)).
 > Kopiere sie nach `spec/architecture.md`, ersetze `<Platzhalter>` und
 > lösche diesen Block.
 
@@ -44,7 +44,7 @@ Pro Schicht: was sie tut, was sie *nicht* tut. Layering-Regeln, die
 durch ArchUnit / depguard / import-linter durchgesetzt werden.
 ADR-Bezug für jede Regel.
 
-Beispiel-Schema (aus OpenAI-Layering, siehe Modul 3):
+Beispiel-Schema (aus OpenAI-Layering, siehe Modul 4):
 Types → Config → Repo → Service → Runtime → UI
 -->
 

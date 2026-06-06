@@ -1,140 +1,94 @@
-# Lösung — Modul 8: Implementierung durch KI-Agenten
+# Lösung — Modul 8: Agentenrollen
 
-Zugehöriges Modul: [Modul 8 — Implementierung durch KI-Agenten](../03-agenten/modul-08-implementierung.md).
+Zugehöriges Modul: [Modul 8 — Agentenrollen](../03-agenten/modul-08-agentenrollen.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Nenne die acht Schritte des Minimal Agent Workflow
+### (Erinnern) Nenne die sechs Rollen in Reihenfolge
 
-1. `harness/README.md` lesen.
-2. Relevante kanonische Quelle lesen (Source Precedence beachten).
-3. Betroffene Requirement-/ADR-IDs identifizieren.
-4. Kleinste sinnvolle Änderung planen.
-5. Engsten nützlichen Sensor laufen lassen (z. B. nur eine Testdatei).
-6. Repo-weiten Gate-Lauf vor Handoff (`make gates`).
-7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt ist.
-8. Ausgeführte Sensors und verbleibende Risiken berichten — keine
-   Erfolgsmeldung ohne Gate-Ausführung.
+Planner → Architect → Implementation → Reviewer → Verifier → Validator.
 
-Wichtig sind die *Rücksprungkanten* aus dem Diagramm in Modul 8:
-**5 → 4** (Sensor rot ⇒ Plan verfeinern, nicht Code blind reparieren) und
-**6 → 4** (`make gates` rot ⇒ wieder Plan verfeinern). Es gibt *keine*
-Rücksprungkante zu Schritt 1 oder 2 — wer dort hinspringt, hat keinen
-Plan-Defekt, sondern einen Kontext-Defekt; das ist eine andere Ursache
-und braucht eine andere Aktion (typisch: AGENTS.md schärfen).
+Die Übergaben tragen jeweils ein Artefakt — siehe Sequenzdiagramm in
+[Modul 8](../03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-einen-slice):
+Slice-Plan (P → A), ADR-Bezüge (A → P), Slice in `in-progress/` (P → I),
+PR mit Diff + Plan-Verweis (I → R), Findings (R → I), Verifikationsbeleg
+(Vf → P), Validierungsbeleg (Vl → P).
 
-Häufiger Fehler: Schritt 7 und 8 werden unter Zeitdruck weggelassen.
-Damit wird das Modul-Versprechen "Plan → Diff → Code" zur "Diff →
-Code"-Schleife — und die Risiken werden in die nächste Rolle verlagert.
+Wichtig: Rollen-Trennung ist *Kontext-Trennung*, nicht Personen-Trennung.
+Eine Person kann mehrere Rollen spielen — aber nicht im selben
+Kontextfenster, sonst wiederholen sich die blinden Flecken. Wer
+implementiert hat, soll nicht im selben Lauf reviewen; wer ADRs schreibt,
+soll nicht im selben Lauf verifizieren.
 
-### Welche Eingaben braucht ein Implementation-Agent minimal, um nicht zu halluzinieren?
+### Warum braucht es Verification *und* Validation?
 
-Mindestens diese sechs:
+Sie prüfen unterschiedliche Fragen:
 
-1. **Den Slice-Plan** mit DoD.
-2. **Die referenzierten Anforderungs-IDs** (`LH-*`/`HSM-*`) inklusive Akzeptanzkriterien — *nicht* nur die ID, der Text.
-3. **Die relevanten ADRs** (zumindest die, deren Schichten oder Constraints berührt werden).
-4. **`AGENTS.md`** für Hard Rules und Stil.
-5. **`harness/README.md`** für Source Precedence und Sensors.
-6. **Tool-Allowlist** — was darf der Agent ausführen (Shell, HTTP, DB-Schreibzugriff)?
+- **Verification** ("Bauen wir es richtig?" — Original: "built the thing right", Boehm 1981): *Wurde das umgesetzt, was geplant war?* Vergleich von Code gegen Plan/ADR/Spec.
+- **Validation** ("Bauen wir das Richtige?" — Original: "built the right thing", Boehm 1981): *Trifft das Ergebnis den realen Bedarf?* Vergleich von Spec/Plan gegen das, was Benutzer/Markt/Realität tatsächlich brauchen.
 
-Was *fehlt* und trotzdem oft erwartet wird:
+Verifikation kann komplett grün sein und Validierung trotzdem rot —
+das ist der gefährlichste Fall: das Team baut perfekt das Falsche.
+Umgekehrt: Validierung grün und Verifikation rot bedeutet, dass der
+Lieferprozess Spec/Plan ignoriert hat, auch wenn das Ergebnis zufällig
+passt — auch das ist Drift, weil reproduzierbar wird das nicht
+gelingen.
 
-- Bestehender Code als Vor-Lesen-Vorlage. Der Agent soll sich am Stil orientieren — sonst variiert er.
-- Beispiel-Patches früherer Slices (one-shot Lerneffekt).
-- Negativ-Beispiele: "so haben wir es nicht gemacht, weil…"
+### Welche Rolle besitzt ein ADR — wer darf es ändern?
 
-Wenn eine dieser Eingaben fehlt, ist Halluzinationswahrscheinlichkeit
-nicht null, sondern systematisch erhöht in genau diesem Bereich.
+**Der Architect-Agent** schlägt ADRs vor und schreibt sie. Akzeptiert
+werden sie nach Review durch den **Reviewer-Agent** (für interne
+Konsistenz) und gegen das Lastenheft (für vertragliche
+Verträglichkeit).
 
-### Wann ist ein Implementation-Agent fertig — wenn der Code kompiliert, oder wenn die DoD erfüllt ist?
+*Niemand* schreibt eine Accepted-ADR um — auch nicht der Architect.
+Korrekturen entstehen als neue ADR mit `supersedes ADR-N` (siehe
+[Hard Rule aus c-hsm-doc](../grundlagen/fallstudien.md) und
+[Lösung Modul 4](modul-04-loesung.md)).
 
-DoD erfüllt. Kompilieren ist ein *einzelner* Sensor unter vielen
-(Computational + Feedback). Der Agent darf "fertig" erst melden, wenn:
-
-- `make gates` grün (oder Carveout dokumentiert),
-- Pre-completion Checklist Middleware abgearbeitet,
-- alle Akzeptanzkriterien der referenzierten IDs nachweisbar erfüllt,
-- öffentliche Doku-Verträge aktualisiert (Modul 8, Schritt 7).
-
-"Fertig wenn es kompiliert" ist der Erbsünden-Reflex der frühen
-LLM-Coding-Zeit. Der Harness ersetzt ihn durch die 8-Schritt-Checkliste
-aus [Modul 8](../03-agenten/modul-08-implementierung.md).
-
-### Welche deiner Hard Rules wandert in welche Quadranten der 2×2-Matrix?
-
-Beispielzuordnung (Übung aus dem Modul). Quadranten gemäß
-[`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md):
-
-| Hard Rule | Quadrant |
-|---|---|
-| "Docker-only" (grid-gym) | Computational + Feedforward (Dockerfile macht Alternative unmöglich) + Computational + Feedback (Lint, das `python -m venv` aufruft, schlägt an) |
-| "`# noqa` ist verboten" | Computational + Feedback (`noqa-gate` als Make-Target) |
-| "git mv + Inhalt = zwei Commits" | Inferential + Feedforward (steht in AGENTS.md), schwer maschinell durchsetzbar |
-| "Architektur ist meilensteinfrei" | Inferential + Feedback (Reviewer-Agent erkennt "Welle X" in `spec/architecture.md`) |
-| "Optimierer schreibt nicht direkt aufs Gerät" | Computational + Feedforward (Layering verbietet Import) + Inferential + Feedback (Reviewer prüft semantisch) |
-
-Die wertvollsten Hard Rules sind die, die *in mehrere Quadranten*
-fallen — sie sind redundant durchgesetzt und überleben einen
-einzelnen Tooling-Ausfall.
-
-### (Anwenden) Welcher Schritt deines Workflows ist heute am schwächsten verankert — woran erkennst du das?
-
-Eine ehrliche Antwort hat drei Bestandteile:
-
-1. **Konkret benannter Schritt.** Nicht "Plan ist immer schwach", sondern
-   "Schritt 7 (Doku/Indizes-Update) bleibt regelmäßig liegen" oder
-   "Schritt 5 (engster Sensor) wird übersprungen, alle laufen direkt
-   `make gates`".
-2. **Beobachtbarer Beleg.** Beispiele: `harness/README.md` ist seit
-   sechs Wochen unverändert, obwohl drei Gate-Targets sich geändert
-   haben (Schritt 7); Mittlere Zeit pro Slice ist auf das Doppelte
-   gestiegen, weil zu früh `make gates` läuft (Schritt 5 fehlt);
-   Schritt-8-Bericht enthält in 4 von 5 PRs identischen Text (Kabuki).
-3. **Steering-Loop-Eintrag.** Eine konkrete Harness-Änderung, die das
-   beim nächsten Lauf verhindert — z. B. Doku-Konsistenz-Agent als
-   Drift-Sensor (Modul 14), oder Pre-completion Checklist Middleware
-   mit Pflichtfeld für *einen* spezifischen Akzeptanzkriterium-Beleg.
-
-Falle: "Ich bin nicht diszipliniert genug" ist eine Anti-Antwort aus
-der Reflexionsvorlage. Die Frage ist nicht *wer*, sondern *was am
-Harness* den Schritt schwach hält.
+Der Implementation-Agent *liest* ADRs als Constraint und darf sie
+nicht ignorieren — er darf höchstens eine Folge-ADR vorschlagen, wenn
+er die Entscheidung im Implementierungs-Detail nicht halten kann.
 
 ## Übungshinweise
 
-### Implementierung eines Features aus einem Slice-Plan
+### Ordne 10 typische Tätigkeiten den Rollen zu
 
-Maßstab:
+Beispielsortierung:
 
-- Der Agent durchläuft *sichtbar* die 8 Schritte des Minimal Agent Workflow.
-- Der erzeugte Diff lässt sich auf den Slice-Plan zurückführen — kein Code, der nicht durch DoD gefordert ist.
-- Der Agent berichtet am Ende *was er ausgeführt hat* (welche Sensors grün, welche rot, welche Doku aktualisiert).
+| Tätigkeit | Rolle |
+|---|---|
+| "Schneide das Feature in drei Slices" | Planner |
+| "Wähle zwischen REST und gRPC" | Architect |
+| "Schreibe den Adapter für PostgreSQL" | Implementation |
+| "Prüfe, ob der PR die ADR-7-Schichtung einhält" | Reviewer |
+| "Prüfe, ob alle Akzeptanzkriterien aus LH-FA-3 erfüllt sind" | Verification |
+| "Prüfe, ob das Feature das Benutzerbedürfnis trifft" | Validation |
+| "Entscheide, ob `coverage-gate` 70 % oder 80 % verlangt" | Architect (ADR) + Planner (Slice für Schwelle) |
+| "Schreibe einen Replay-Test gegen das Golden Set" | Implementation, im Auftrag von Verification |
+| "Identifiziere, dass dieselbe Halluzination dreimal aufgetreten ist" | Planner (Steering-Loop-Eintrag) |
+| "Aktualisiere AGENTS.md mit einer neuen Hard Rule" | Architect (ADR-Folge) + Planner (Slice) |
 
-### Lass den Agenten ohne ADR-Kontext laufen und vergleiche
+Häufiger Fehler: "Reviewer macht das schon mit." → Reviewer prüft
+gegen Plan/ADR, nicht gegen Anforderung; das ist Verification.
 
-Erwartung: Ohne ADR baut der Agent etwas Plausibles, aber typischerweise
-falsch geschichtet (Service ruft direkt Repo auf, weil "kürzer" ist).
-*Mit* ADR baut er den Adapter dazwischen — auch wenn der zunächst dünn
-wirkt. Der Vergleich zeigt: ADR ist nicht Bürokratie, sondern
-Trampelpfad-Verhinderung.
+### Konfliktfall: Reviewer lehnt ab, Implementer widerspricht
 
-### Formuliere drei Hard Rules für ein Beispiel-Repo
+Eskalationspfad:
 
-Maßstab für gute Hard Rules:
-
-- Falsch/Richtig-Beispiel ist konkret und ausführbar.
-- *Technische* Begründung (nicht "wir mögen das nicht").
-- Mindestens *eine* der drei ist maschinell durchsetzbar — sonst ist die Liste reine Beschwörung.
+1. Reviewer benennt das Finding *kategorisiert* (HIGH/MEDIUM/LOW/INFO, siehe [Modul 10](../04-qualitaet/modul-10-review-harness.md)) und mit Bezug auf eine ADR-ID.
+2. Implementer hat zwei Optionen: a) Befund umsetzen, b) Folge-ADR vorschlagen, die die ADR-Lücke schließt oder die alte ADR superseded.
+3. Architect-Agent (oder Mensch in dieser Rolle) entscheidet zwischen den beiden Pfaden.
+4. **Niemand** entscheidet "Reviewer hat überreagiert, wir ignorieren". Das wäre ein Carveout — und Carveouts brauchen eigene Disziplin (siehe [Modul 7](../02-planung/modul-07-carveouts.md)).
 
 ## Häufige Fehler
 
-- **Plan wird übersprungen** ("der Slice ist klein"). → Plan-Schritt ist die Stelle, an der der Agent die *eigene* Architektur-Entscheidung sichtbar macht. Ohne Plan kein Review-Material.
-- **AGENTS.md wird gefüllt mit Beispielen statt Regeln.** → Die Datei wird länger, aber weniger durchsetzbar. Regeln gehören rein, Beispiele in den Kurs oder ins Lab.
-- **Pre-completion Checklist wird zur Pflichtformel.** → Wenn der Agent *immer* dieselbe Checklist abhakt, ohne tatsächlich zu prüfen, ist es Kabuki. Checklist muss in jedem Lauf etwas Spezifisches enthalten (z. B. "geprüft: Akzeptanzkriterium LH-FA-3.b").
+- **Eine Person spielt mehrere Rollen ohne Trennung.** Klassisch: Implementer reviewt sich selbst, weil "ich kenne den Code". Das ist genau die Klasse von Fehlern, gegen die der Harness gebaut ist.
+- **Rollen werden technisch identisch gestartet** (gleicher Prompt, gleicher Kontext). → Sie wiederholen denselben Fehler. Rollen-Trennung heißt auch: *unterschiedlicher Eingabe-Kontext, unterschiedliche Skills*.
+- **Validation wird "wir machen vor Release".** → Zu spät. Validation gehört zumindest *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
 
 ## Verweise
 
-- 2×2-Matrix: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
-- Hard-Rule-Beispiele aus realen Repos: [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
+- Spec/ADR/Plan-Trennung: [`../grundlagen/konventionen.md#trennschärfen`](../grundlagen/konventionen.md#trennschärfen)
 - Vorherige Lösung: [Modul 7](modul-07-loesung.md)
 - Nächste Lösung: [Modul 9](modul-09-loesung.md)

@@ -1,94 +1,81 @@
-# Lösung — Modul 7: Agentenrollen
+# Lösung — Modul 7: Carveout Management
 
-Zugehöriges Modul: [Modul 7 — Agentenrollen](../03-agenten/modul-07-agentenrollen.md).
+Zugehöriges Modul: [Modul 7 — Carveout Management](../02-planung/modul-07-carveouts.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Nenne die sechs Rollen in Reihenfolge
+### (Erinnern) Welche zwei Pflichtfelder hat jeder temporäre Carveout?
 
-Planner → Architect → Implementation → Reviewer → Verifier → Validator.
+1. **Auflösungs-Trigger** — eine *beobachtbare* Bedingung. "Sobald wir
+   Zeit haben" zählt nicht; "wenn `pkg/x` > 500 LOC", "Meilenstein M2",
+   "Bibliothek Y bietet Funktion Z" zählen.
+2. **Folge-Slice mit ID** — der Slice, der die Auflösung übernimmt
+   (auch wenn er noch in `open/` liegt). Slice schlägt Memo.
 
-Die Übergaben tragen jeweils ein Artefakt — siehe Sequenzdiagramm in
-[Modul 7](../03-agenten/modul-07-agentenrollen.md#rollen-sequenz-für-einen-slice):
-Slice-Plan (P → A), ADR-Bezüge (A → P), Slice in `in-progress/` (P → I),
-PR mit Diff + Plan-Verweis (I → R), Findings (R → I), Verifikationsbeleg
-(Vf → P), Validierungsbeleg (Vl → P).
+Fehlt eines der beiden Felder, ist der Carveout *de facto* permanent —
+er bleibt liegen, und das Repo lügt unter "temporär". Konsequenz: Wenn
+ein temporärer Carveout mehrfach an seinem Auflösungs-Datum vorbei läuft,
+ist er kein temporärer mehr und muss offen als permanent klassifiziert
+oder in eine ADR überführt werden.
 
-Wichtig: Rollen-Trennung ist *Kontext-Trennung*, nicht Personen-Trennung.
-Eine Person kann mehrere Rollen spielen — aber nicht im selben
-Kontextfenster, sonst wiederholen sich die blinden Flecken. Wer
-implementiert hat, soll nicht im selben Lauf reviewen; wer ADRs schreibt,
-soll nicht im selben Lauf verifizieren.
+Permanente Carveouts brauchen *kein* Trigger-Feld und keinen Folge-Slice,
+aber eine technische Begründung — sonst sind sie versteckte
+Architekturentscheidungen.
 
-### Warum braucht es Verification *und* Validation?
+### Wann darf ein Carveout das `make gates`-Ziel grün halten, und wann nicht?
 
-Sie prüfen unterschiedliche Fragen:
+Grün halten ist erlaubt, wenn:
 
-- **Verification** ("Bauen wir es richtig?" — Original: "built the thing right", Boehm 1981): *Wurde das umgesetzt, was geplant war?* Vergleich von Code gegen Plan/ADR/Spec.
-- **Validation** ("Bauen wir das Richtige?" — Original: "built the right thing", Boehm 1981): *Trifft das Ergebnis den realen Bedarf?* Vergleich von Spec/Plan gegen das, was Benutzer/Markt/Realität tatsächlich brauchen.
+1. Der Carveout *dokumentiert* ist (in `docs/plan/carveouts/`).
+2. Er einen **Trigger** für die Auflösung benennt (z. B. "wenn `pkg/x` > 500 LOC", "Meilenstein M2", "Bibliothek Y bietet Funktion Z"). Der Trigger darf nicht "irgendwann" sein.
+3. Er einem **Folge-Slice** zugeordnet ist, der die Auflösung übernimmt (auch wenn der noch in `open/` liegt).
+4. Das Gate selbst ihn explizit kennt — z. B. `coverage-gate` weiß: "Pfad X ist temporär bei 0 % Coverage, Begründung in `docs/plan/carveouts/CO-007`".
 
-Verifikation kann komplett grün sein und Validierung trotzdem rot —
-das ist der gefährlichste Fall: das Team baut perfekt das Falsche.
-Umgekehrt: Validierung grün und Verifikation rot bedeutet, dass der
-Lieferprozess Spec/Plan ignoriert hat, auch wenn das Ergebnis zufällig
-passt — auch das ist Drift, weil reproduzierbar wird das nicht
-gelingen.
+Grün halten ist *nicht* erlaubt, wenn:
 
-### Welche Rolle besitzt ein ADR — wer darf es ändern?
+- Es keine Carveout-Datei gibt ("Wir machen mal eine Ausnahme").
+- Der Trigger fehlt oder lautet "wenn Zeit ist".
+- Der Folge-Slice fehlt.
+- Mehrere Slices die gleiche Carveout-Begründung wiederverwenden, ohne dass jemand auflöst ("Cargo-Cult Carveout").
 
-**Der Architect-Agent** schlägt ADRs vor und schreibt sie. Akzeptiert
-werden sie nach Review durch den **Reviewer-Agent** (für interne
-Konsistenz) und gegen das Lastenheft (für vertragliche
-Verträglichkeit).
-
-*Niemand* schreibt eine Accepted-ADR um — auch nicht der Architect.
-Korrekturen entstehen als neue ADR mit `supersedes ADR-N` (siehe
-[Hard Rule aus c-hsm-doc](../grundlagen/fallstudien.md) und
-[Lösung Modul 3](modul-03-loesung.md)).
-
-Der Implementation-Agent *liest* ADRs als Constraint und darf sie
-nicht ignorieren — er darf höchstens eine Folge-ADR vorschlagen, wenn
-er die Entscheidung im Implementierungs-Detail nicht halten kann.
+Faustregel: Ein Carveout ohne Auflösungs-Plan ist eine *permanente
+Ausnahme*, die als *temporär* getarnt ist — und damit eine Harness-Lüge.
 
 ## Übungshinweise
 
-### Ordne 10 typische Tätigkeiten den Rollen zu
+### Dokumentiere einen Carveout für eine fehlende Coverage-Schwelle
 
-Beispielsortierung:
+Pflicht-Inhalt einer Carveout-Datei:
 
-| Tätigkeit | Rolle |
-|---|---|
-| "Schneide das Feature in drei Slices" | Planner |
-| "Wähle zwischen REST und gRPC" | Architect |
-| "Schreibe den Adapter für PostgreSQL" | Implementation |
-| "Prüfe, ob der PR die ADR-7-Schichtung einhält" | Reviewer |
-| "Prüfe, ob alle Akzeptanzkriterien aus LH-FA-3 erfüllt sind" | Verification |
-| "Prüfe, ob das Feature das Benutzerbedürfnis trifft" | Validation |
-| "Entscheide, ob `coverage-gate` 70 % oder 80 % verlangt" | Architect (ADR) + Planner (Slice für Schwelle) |
-| "Schreibe einen Replay-Test gegen das Golden Set" | Implementation, im Auftrag von Verification |
-| "Identifiziere, dass dieselbe Halluzination dreimal aufgetreten ist" | Planner (Steering-Loop-Eintrag) |
-| "Aktualisiere AGENTS.md mit einer neuen Hard Rule" | Architect (ADR-Folge) + Planner (Slice) |
+- **ID** (`CO-NNN`)
+- **Betroffenes Gate** (`coverage-gate`, `coverage-gate-critical`)
+- **Geltungsbereich** (Pfad, Modul, Datei)
+- **Begründung** (technisch, nicht "noch nicht geschafft")
+- **Auflösungs-Trigger** (Meilenstein, Code-Eigenschaft, externes Ereignis)
+- **Folge-Slice-Referenz** (`slice-X-coverage-Y.md` in `open/` oder `next/`)
+- **Datum** der Anlage und letzten Prüfung
 
-Häufiger Fehler: "Reviewer macht das schon mit." → Reviewer prüft
-gegen Plan/ADR, nicht gegen Anforderung; das ist Verification.
+Vergleich-Möglichkeit:
+[`/lab/example/docs/plan/carveouts/`](../../../lab/example/docs/plan/carveouts/)
+(im Lab nach Phase B).
 
-### Konfliktfall: Reviewer lehnt ab, Implementer widerspricht
+### Verknüpfe ihn mit einem konkreten Folge-Slice
 
-Eskalationspfad:
+Der Folge-Slice sollte:
 
-1. Reviewer benennt das Finding *kategorisiert* (HIGH/MEDIUM/LOW/INFO, siehe [Modul 9](../04-qualitaet/modul-09-review-harness.md)) und mit Bezug auf eine ADR-ID.
-2. Implementer hat zwei Optionen: a) Befund umsetzen, b) Folge-ADR vorschlagen, die die ADR-Lücke schließt oder die alte ADR superseded.
-3. Architect-Agent (oder Mensch in dieser Rolle) entscheidet zwischen den beiden Pfaden.
-4. **Niemand** entscheidet "Reviewer hat überreagiert, wir ignorieren". Das wäre ein Carveout — und Carveouts brauchen eigene Disziplin (siehe [Modul 6](../02-planung/modul-06-carveouts.md)).
+- Den Auflösungs-Trigger des Carveouts in seinen DoD übernehmen.
+- Eine Closure-Notiz vorsehen, die den Carveout *schließt* (Datei nach `docs/plan/carveouts/done/` oder Markierung "RESOLVED").
+- In der Roadmap im Block der Welle stehen, in der der Trigger erwartet wird.
 
 ## Häufige Fehler
 
-- **Eine Person spielt mehrere Rollen ohne Trennung.** Klassisch: Implementer reviewt sich selbst, weil "ich kenne den Code". Das ist genau die Klasse von Fehlern, gegen die der Harness gebaut ist.
-- **Rollen werden technisch identisch gestartet** (gleicher Prompt, gleicher Kontext). → Sie wiederholen denselben Fehler. Rollen-Trennung heißt auch: *unterschiedlicher Eingabe-Kontext, unterschiedliche Skills*.
-- **Validation wird "wir machen vor Release".** → Zu spät. Validation gehört zumindest *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
+- **Carveout = "noqa".** Carveouts sind nicht inline. Sie leben in der Plan-Doku und sind im Gate selbst verankert.
+- **Carveouts ohne Audit-Termin.** Wenn niemand regelmäßig durch `docs/plan/carveouts/` geht, sammeln sich Karteileichen. Carveout-Audit sollte als eigene Welle oder als wiederkehrender Slice geplant sein.
+- **Vergleichbare Carveouts vermehren sich.** Wenn mehrere Stellen denselben Carveout brauchen, ist die *Ursache* der gemeinsame Punkt — meist ein fehlendes ADR oder eine fehlende Bibliotheks-Wahl. Dort ansetzen, nicht überall Carveout setzen.
 
 ## Verweise
 
-- Spec/ADR/Plan-Trennung: [`../grundlagen/konventionen.md#trennschärfen`](../grundlagen/konventionen.md#trennschärfen)
+- Entropy Management als Konzept: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
+- Bootstrap-aware Gates als verwandtes Muster: [Modul 13](../04-qualitaet/modul-13-quality-gates.md)
 - Vorherige Lösung: [Modul 6](modul-06-loesung.md)
 - Nächste Lösung: [Modul 8](modul-08-loesung.md)

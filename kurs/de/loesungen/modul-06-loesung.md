@@ -1,81 +1,76 @@
-# Lösung — Modul 6: Carveout Management
+# Lösung — Modul 6: Roadmap Engineering
 
-Zugehöriges Modul: [Modul 6 — Carveout Management](../02-planung/modul-06-carveouts.md).
+Zugehöriges Modul: [Modul 6 — Roadmap Engineering](../02-planung/modul-06-roadmap.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Welche zwei Pflichtfelder hat jeder temporäre Carveout?
+### (Erinnern) Welche drei Bestandteile braucht ein Welle-Eintrag minimal?
 
-1. **Auflösungs-Trigger** — eine *beobachtbare* Bedingung. "Sobald wir
-   Zeit haben" zählt nicht; "wenn `pkg/x` > 500 LOC", "Meilenstein M2",
-   "Bibliothek Y bietet Funktion Z" zählen.
-2. **Folge-Slice mit ID** — der Slice, der die Auflösung übernimmt
-   (auch wenn er noch in `open/` liegt). Slice schlägt Memo.
+1. **Slice-IDs** — die Inhalte der Welle, jeweils mit `LH-*`/`HSM-*`-Bezug.
+2. **Trigger** — beobachtbare Bedingung für Start/Closure (z. B. "ADR-7
+   akzeptiert", "Replay grün gegen Golden Set v2"). *Kein Datum.*
+3. **Closure-Kriterien** — was muss erreicht sein, damit die Welle als
+   *done* gilt (alle Slices in `done/`, Replay grün, Closure-Einträge
+   geschrieben).
 
-Fehlt eines der beiden Felder, ist der Carveout *de facto* permanent —
-er bleibt liegen, und das Repo lügt unter "temporär". Konsequenz: Wenn
-ein temporärer Carveout mehrfach an seinem Auflösungs-Datum vorbei läuft,
-ist er kein temporärer mehr und muss offen als permanent klassifiziert
-oder in eine ADR überführt werden.
+Ein Datum darf in der Roadmap *erwähnt* werden — als Prognose,
+nachdem die Wellen geschnitten sind. Sobald das Datum zum Trigger wird,
+kappt die Welle halbfertige Slices am Kalendertag und das
+Auditierbarkeits-Versprechen bricht: in `done/` landen dann Slices,
+deren DoD nur "wegen Datum" akzeptiert wurde.
 
-Permanente Carveouts brauchen *kein* Trigger-Feld und keinen Folge-Slice,
-aber eine technische Begründung — sonst sind sie versteckte
-Architekturentscheidungen.
+Falle: Wer eine Welle nur über "Slice-Liste" und "Datum" definiert, hat
+keinen Welle-Eintrag, sondern einen Sprint. Sprint ist legitim — aber
+dann gehört das in eine separate operationale Ebene, nicht in die
+Roadmap.
 
-### Wann darf ein Carveout das `make gates`-Ziel grün halten, und wann nicht?
+### Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
 
-Grün halten ist erlaubt, wenn:
+Es kommt darauf an, *warum* die Schätzung daneben lag. Drei Diagnosen,
+drei Antworten:
 
-1. Der Carveout *dokumentiert* ist (in `docs/plan/carveouts/`).
-2. Er einen **Trigger** für die Auflösung benennt (z. B. "wenn `pkg/x` > 500 LOC", "Meilenstein M2", "Bibliothek Y bietet Funktion Z"). Der Trigger darf nicht "irgendwann" sein.
-3. Er einem **Folge-Slice** zugeordnet ist, der die Auflösung übernimmt (auch wenn der noch in `open/` liegt).
-4. Das Gate selbst ihn explizit kennt — z. B. `coverage-gate` weiß: "Pfad X ist temporär bei 0 % Coverage, Begründung in `docs/plan/carveouts/CO-007`".
+1. **Scope ist gewachsen** (neue Anforderung im Lauf der Welle): → **Neu schneiden.** Der zusätzliche Scope wandert in eine eigene Welle oder einen eigenen Slice. Die aktuelle Welle wird auf den ursprünglichen Scope reduziert und kann normal schließen.
+2. **Annahme war falsch** (z. B. "Bibliothek X liefert das schon" stellte sich als falsch heraus): → **Neu planen.** Die Welle bekommt einen neuen Plan mit korrigierter Annahme, dokumentiert als ADR-Update oder Carveout. Schätzung wird neu vorgenommen.
+3. **Unvorhergesehene Komplexität in *einem* Slice der Welle** (Rest läuft): → **Carveout** für die problematische Stelle, Welle kann mit eingeschränktem Scope schließen, Carveout-Trigger im nächsten Sprint angesetzt.
 
-Grün halten ist *nicht* erlaubt, wenn:
-
-- Es keine Carveout-Datei gibt ("Wir machen mal eine Ausnahme").
-- Der Trigger fehlt oder lautet "wenn Zeit ist".
-- Der Folge-Slice fehlt.
-- Mehrere Slices die gleiche Carveout-Begründung wiederverwenden, ohne dass jemand auflöst ("Cargo-Cult Carveout").
-
-Faustregel: Ein Carveout ohne Auflösungs-Plan ist eine *permanente
-Ausnahme*, die als *temporär* getarnt ist — und damit eine Harness-Lüge.
+Anti-Antwort: "Wir biegen die Schätzung gerade." Das macht den Steering
+Loop unbrauchbar — wenn Schätzungen sich an Realität anpassen statt
+umgekehrt, lernst du nichts über deine Schätzungsqualität.
 
 ## Übungshinweise
 
-### Dokumentiere einen Carveout für eine fehlende Coverage-Schwelle
+### Aufbau einer produktiven Roadmap für das Begleit-Lab
 
-Pflicht-Inhalt einer Carveout-Datei:
+Maßstab:
 
-- **ID** (`CO-NNN`)
-- **Betroffenes Gate** (`coverage-gate`, `coverage-gate-critical`)
-- **Geltungsbereich** (Pfad, Modul, Datei)
-- **Begründung** (technisch, nicht "noch nicht geschafft")
-- **Auflösungs-Trigger** (Meilenstein, Code-Eigenschaft, externes Ereignis)
-- **Folge-Slice-Referenz** (`slice-X-coverage-Y.md` in `open/` oder `next/`)
-- **Datum** der Anlage und letzten Prüfung
+- Mindestens drei Wellen, davon mindestens eine mit klar nachgelagerter Abhängigkeit ("Welle 2 startet erst, wenn Welle 1 done").
+- Jede Welle hat einen *Trigger* (was muss vorher passiert sein) und einen *Closure*-Trigger (was muss erreicht sein, damit sie als done gilt).
+- Jeder Slice in jeder Welle hat eine LH-/HSM-/GG-ID-Referenz (siehe [ID-Schema](../grundlagen/konventionen.md#id-schema-als-klammer)).
+- Mindestens ein expliziter "Wir-tun-X-nicht-in-dieser-Welle"-Eintrag pro Welle. Negativ-Scope ist Roadmap-Disziplin.
 
-Vergleich-Möglichkeit:
-[`/lab/example/docs/plan/carveouts/`](../../../lab/example/docs/plan/carveouts/)
+Vergleich-Möglichkeit: [`/lab/example/docs/plan/planning/in-progress/roadmap.md`](../../../lab/example/docs/plan/planning/in-progress/roadmap.md)
 (im Lab nach Phase B).
 
-### Verknüpfe ihn mit einem konkreten Folge-Slice
+### Modelliere eine Abhängigkeit, die eine spätere Welle blockiert
 
-Der Folge-Slice sollte:
+Beispielszenario: Welle 2 ("LLM-gestützter Replay-Diff-Reporter")
+braucht ein in Welle 1 definiertes Trace-Format. Wenn Welle 1 das
+Trace-Format ändert, blockiert sie Welle 2.
 
-- Den Auflösungs-Trigger des Carveouts in seinen DoD übernehmen.
-- Eine Closure-Notiz vorsehen, die den Carveout *schließt* (Datei nach `docs/plan/carveouts/done/` oder Markierung "RESOLVED").
-- In der Roadmap im Block der Welle stehen, in der der Trigger erwartet wird.
+Modellierung:
+
+- Welle 2 deklariert in ihrem Plan: `Voraussetzung: Welle 1, Trace-Format-Vertrag (ADR-7)`.
+- ADR-7 dokumentiert den Vertrag und nennt Welle 2 als Konsument.
+- Wenn Welle 1 das Format ändern muss, ist das ein ADR-Update (ADR-7 superseded), und Welle 2 *muss* angepasst werden — als eigener Slice in Welle 2 oder als Carveout.
 
 ## Häufige Fehler
 
-- **Carveout = "noqa".** Carveouts sind nicht inline. Sie leben in der Plan-Doku und sind im Gate selbst verankert.
-- **Carveouts ohne Audit-Termin.** Wenn niemand regelmäßig durch `docs/plan/carveouts/` geht, sammeln sich Karteileichen. Carveout-Audit sollte als eigene Welle oder als wiederkehrender Slice geplant sein.
-- **Vergleichbare Carveouts vermehren sich.** Wenn mehrere Stellen denselben Carveout brauchen, ist die *Ursache* der gemeinsame Punkt — meist ein fehlendes ADR oder eine fehlende Bibliotheks-Wahl. Dort ansetzen, nicht überall Carveout setzen.
+- **Roadmap als Datums-Versprechen verstehen.** Datum ist Folge der Wellen, nicht ihr Treiber. Wenn du Termine fest schreibst und Scope variabel hältst, lieferst du Scope-Kompromisse statt Lieferversprechen.
+- **Wellen ohne Closure-Trigger.** "Welle ist done, wenn alle Slices done sind." Tautologie, kein Trigger. Was ist die *Beobachtung*, die das System grün meldet?
+- **Implizite Abhängigkeiten zwischen Wellen.** Wenn die Reihenfolge "ist halt logisch", wird die Reihenfolge bei Druck umgekehrt — mit Folgen. Abhängigkeit gehört explizit in den Plan.
 
 ## Verweise
 
-- Entropy Management als Konzept: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
-- Bootstrap-aware Gates als verwandtes Muster: [Modul 12](../04-qualitaet/modul-12-quality-gates.md)
+- Slice-Lifecycle: [Modul 5](../02-planung/modul-05-planning-harness.md)
 - Vorherige Lösung: [Modul 5](modul-05-loesung.md)
 - Nächste Lösung: [Modul 7](modul-07-loesung.md)

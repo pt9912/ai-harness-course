@@ -6,8 +6,8 @@ genau tut.
 
 | Modul | Inhalt |
 |---|---|
-| [Modul 7](modul-07-agentenrollen.md) | Sechs Agentenrollen: Planner, Architect, Implementer, Reviewer, Verifier, Validator |
-| [Modul 8](modul-08-implementierung.md) | Implementation-Agent in der Praxis: AGENTS.md, Hard Rules, Minimal Agent Workflow |
+| [Modul 8](modul-08-agentenrollen.md) | Sechs Agentenrollen: Planner, Architect, Implementer, Reviewer, Verifier, Validator |
+| [Modul 9](modul-09-implementierung.md) | Implementation-Agent in der Praxis: AGENTS.md, Hard Rules, Minimal Agent Workflow |
 
 Voraussetzung: [Phase 1](../01-spec-und-architektur/) und
 [Phase 2](../02-planung/) abgeschlossen.

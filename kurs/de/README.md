@@ -86,20 +86,20 @@ was du erreichen kannst.
 |---|---|
 | [0](00-einfuehrung/modul-00-einfuehrung.md) | Agent, LLM, Tool-Call, Harness und Chatbot-vs-Engineering-System trennscharf benennen |
 | [1](01-spec-und-architektur/modul-01-entwicklungszyklus.md) | den Lebenszyklus Spec → ADR → Plan → Code → Review → Verifikation als Artefaktkette nachzeichnen |
-| [2](01-spec-und-architektur/modul-02-lastenheft.md) | ein Lastenheft mit Akzeptanzkriterien schreiben, das von einem Agenten umsetzbar ist |
-| [3](01-spec-und-architektur/modul-03-architektur-adrs.md) | Architekturentscheidungen so dokumentieren, dass spätere Agentenläufe sie als Constraint nutzen |
-| [4](02-planung/modul-04-planning-harness.md) | Slices über die Lifecycle-Verzeichnisse `open → next → in-progress → done` bewegen |
-| [5](02-planung/modul-05-roadmap.md) | eine Roadmap mit Wellen, Triggern und Closure-Kriterien aufbauen |
-| [6](02-planung/modul-06-carveouts.md) | Carveouts (temporär/permanent) sauber dokumentieren und mit Folge-Slices verknüpfen |
-| [7](03-agenten/modul-07-agentenrollen.md) | Aufgaben zwischen Planner-, Architect-, Implementation-, Reviewer-, Verification- und Validation-Agent zuordnen |
-| [8](03-agenten/modul-08-implementierung.md) | einen Slice mit einem Implementation-Agent umsetzen und die Architekturkonformität wahren |
-| [9](04-qualitaet/modul-09-review-harness.md) | Findings nach HIGH/MEDIUM/LOW/INFO klassifizieren und einen Review-Lauf reproduzierbar machen |
-| [10](04-qualitaet/modul-10-verification.md) | Plan-gegen-Code-Diffs automatisch verifizieren und DoD-Verletzungen erkennen |
-| [11](04-qualitaet/modul-11-replay-evaluierung.md) | Replay-Läufe mit Golden Sets fahren und Regressionen messen |
-| [12](04-qualitaet/modul-12-quality-gates.md) | Quality Gates als `make`-Ziele aufsetzen, im CI verankern, als computational feedback klassifizieren |
-| [13](05-betrieb/modul-13-docker-harness.md) | einen Docker-only Build-Harness aufbauen, der lokal und im CI identisch läuft |
-| [14](05-betrieb/modul-14-observability.md) | OpenTelemetry-Traces eines Agentenlaufs lesen und Token-Kosten attribuieren |
-| [15](05-betrieb/modul-15-produktiver-betrieb.md) | ein Projekt für den produktiven Betrieb freigeben (Runtime-Validation, Security, Incident Response) |
+| [2](01-spec-und-architektur/modul-03-lastenheft.md) | ein Lastenheft mit Akzeptanzkriterien schreiben, das von einem Agenten umsetzbar ist |
+| [3](01-spec-und-architektur/modul-04-architektur-adrs.md) | Architekturentscheidungen so dokumentieren, dass spätere Agentenläufe sie als Constraint nutzen |
+| [4](02-planung/modul-05-planning-harness.md) | Slices über die Lifecycle-Verzeichnisse `open → next → in-progress → done` bewegen |
+| [5](02-planung/modul-06-roadmap.md) | eine Roadmap mit Wellen, Triggern und Closure-Kriterien aufbauen |
+| [6](02-planung/modul-07-carveouts.md) | Carveouts (temporär/permanent) sauber dokumentieren und mit Folge-Slices verknüpfen |
+| [7](03-agenten/modul-08-agentenrollen.md) | Aufgaben zwischen Planner-, Architect-, Implementation-, Reviewer-, Verification- und Validation-Agent zuordnen |
+| [8](03-agenten/modul-09-implementierung.md) | einen Slice mit einem Implementation-Agent umsetzen und die Architekturkonformität wahren |
+| [9](04-qualitaet/modul-10-review-harness.md) | Findings nach HIGH/MEDIUM/LOW/INFO klassifizieren und einen Review-Lauf reproduzierbar machen |
+| [10](04-qualitaet/modul-11-verification.md) | Plan-gegen-Code-Diffs automatisch verifizieren und DoD-Verletzungen erkennen |
+| [11](04-qualitaet/modul-12-replay-evaluierung.md) | Replay-Läufe mit Golden Sets fahren und Regressionen messen |
+| [12](04-qualitaet/modul-13-quality-gates.md) | Quality Gates als `make`-Ziele aufsetzen, im CI verankern, als computational feedback klassifizieren |
+| [13](05-betrieb/modul-14-docker-harness.md) | einen Docker-only Build-Harness aufbauen, der lokal und im CI identisch läuft |
+| [14](05-betrieb/modul-15-observability.md) | OpenTelemetry-Traces eines Agentenlaufs lesen und Token-Kosten attribuieren |
+| [15](05-betrieb/modul-16-produktiver-betrieb.md) | ein Projekt für den produktiven Betrieb freigeben (Runtime-Validation, Security, Incident Response) |
 
 ## Wegweiser
 

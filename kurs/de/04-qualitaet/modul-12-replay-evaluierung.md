@@ -1,4 +1,4 @@
-# Modul 11 — Replay und Evaluierung
+# Modul 12 — Replay und Evaluierung
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung.
 
@@ -46,10 +46,10 @@ Nach diesem Modul kannst du:
 * Bewertungsmetriken (Exact-Match, semantisch, rubric-based)
 * Domänen-Test-Typen jenseits "Unit/Integration": *determinism*, *replay*, *fault* als eigene Make-Targets (Beispiel grid-gym: `make test-determinism`, `make test-replay`, `make test-fault`)
 
-## Begriff: Image-Hash (Vorgriff aus Modul 13)
+## Begriff: Image-Hash (Vorgriff aus Modul 14)
 
 Dieses Modul referenziert mehrfach den *Image-Hash* — das volle Bild
-liegt in [Modul 13 (Docker-Harness)](../05-betrieb/modul-13-docker-harness.md),
+liegt in [Modul 14 (Docker-Harness)](../05-betrieb/modul-14-docker-harness.md),
 hier reicht eine operative Kurzdefinition:
 
 Der Image-Hash (typischerweise ein SHA-256 wie `sha256:9c7f…`) ist die
@@ -101,7 +101,7 @@ evals/golden/welle-1-baseline/
 
 Drei Fälle ist das Minimum: Happy / Boundary / Negative — dieselbe
 Spec-Disziplin wie bei Akzeptanzkriterien
-([Modul 2](../01-spec-und-architektur/modul-02-lastenheft.md)). Ein
+([Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md)). Ein
 Replay mit einem Fall ist eine Demo, kein Replay.
 
 **Schritt 2 — Pflichtfelder im Manifest fixieren.**
@@ -176,7 +176,7 @@ die Reihenfolge der Verdächtigen *nicht beliebig*:
 |---|---|---|
 | 1 | Toolchain-Drift | `runtime.image_hash` verglichen |
 | 2 | Modell-Routing | `model.version` plus Provider-Status |
-| 3 | Erwartungs-Drift | Eingaben vs. Spec (Modul 2) |
+| 3 | Erwartungs-Drift | Eingaben vs. Spec (Modul 3) |
 | 4 | echte Regression | alles oben ausgeschlossen |
 
 Wer zuerst auf "echte Regression" tippt, baut den Carveout an der
@@ -253,7 +253,7 @@ Modul-spezifische Trigger:
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Drei Pflichtfelder eines Replay-Manifests? | "Modell." | Modellversion · Seed · Eingaben (Inputs als referenzierter Datensatz, nicht als Inline-Text). | + Pflichtfeld Nummer 4 in jedem ernsten Setup: Image-Hash (siehe Abschnitt oben) — sonst lässt sich Drift nicht von Toolchain-Drift trennen. Pflichtfeld Nummer 5: Zeitpunkt der Aufnahme (für Diff zu späteren Läufen). |
-| Was braucht ein deterministischer Replay? | "Seed." | Modellversion + Seed + Inputs *und* Tool-Versionen + Zeitstempel-Maskierung + Image-Hash (Docker-Harness, Modul 13). | + Hinweis: wer nur Seed pinnt, hat ~60 % Determinismus. Reale Drift-Quellen: Tool-Subversions, Lokale-Zeit, Netz-Latenz, Modell-Routing innerhalb derselben Version. |
+| Was braucht ein deterministischer Replay? | "Seed." | Modellversion + Seed + Inputs *und* Tool-Versionen + Zeitstempel-Maskierung + Image-Hash (Docker-Harness, Modul 14). | + Hinweis: wer nur Seed pinnt, hat ~60 % Determinismus. Reale Drift-Quellen: Tool-Subversions, Lokale-Zeit, Netz-Latenz, Modell-Routing innerhalb derselben Version. |
 | Wann wird ein Golden Set giftig? | "Wenn es nicht passt." | Wenn Replay reproduzierbar grün ist, aber Realität rot — typisch durch jahrelang konstantes Set. Symptome: keine Failure-Klasse seit X Wochen, neue Eingabe-Klassen tauchen *nur* in Produktion auf. | + Gegenmaßnahmen: Rotation (alte Beispiele rausnehmen), Sampling aus Produktions-Traces, Adversarial-Beispiele aus Steering-Loop-Einträgen ([`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) ziehen. |
 | Zwei Drift-Quellen — welche zuerst? | "Modell ändert sich." | Zwei konkrete: (a) Modellversion-/Routing-Drift (gleicher Tag, anderes Subroute beim Provider) und (b) Toolchain-Drift (Tool-Subversion oder Image-Hash anders als geplant). Beide sind in der ersten Woche messbar, beide haben einen sofortigen Sensor (Replay-Manifest-Vergleich). | + Begründung: andere Quellen (Eingabe-Distribution, Tool-Allowlist-Drift, Cache-Verhalten) sind nachgelagert — wer sie misst, bevor Modell und Toolchain gepinnt sind, misst Rauschen. Reihenfolge ist nicht beliebig. |
 | Unsicherster Schritt beim Replay-Manifest? | Schritt benannt, aber ohne Begründung ("Schritt 3 war schwer."). | Konkret benannter Schritt + Begründung (z. B. "Schritt 3 Erwartungen, weil ich nicht entscheiden konnte, was *semantisch* gleich genug ist"). | + Pointe: Schritt 3 ist die häufigste Bruchstelle — wer Erwartungen wortwörtlich formuliert, bricht beim ersten Modellwechsel. Schritt 6 (Drift-Diagnose-Reihenfolge) ist die zweithäufigste: wer ohne Reihenfolge testet, klassifiziert echte Regressionen als Toolchain-Drift und umgekehrt. |
@@ -261,4 +261,4 @@ Modul-spezifische Trigger:
 ## Weiterlesen
 
 * Test-Diversität als reale Praxis: `pt9912/grid-gym` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
-* Nächstes Modul: [Modul 12 — Quality Gates](modul-12-quality-gates.md)
+* Nächstes Modul: [Modul 13 — Quality Gates](modul-13-quality-gates.md)

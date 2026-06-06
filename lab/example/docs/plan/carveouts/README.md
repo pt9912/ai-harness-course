@@ -17,4 +17,4 @@ nach `done/` (reiner `git mv`).
 
 - Jeder aktive Carveout braucht: Trigger, Folge-Slice, letzten Prüf-Termin.
 - Bei Welle-Closure: Carveout-Audit zwingend. Welche sind weiterhin gültig? Welche aufgelöst?
-- Siehe [Kurs Modul 6](../../../../../kurs/de/02-planung/modul-06-carveouts.md).
+- Siehe [Kurs Modul 7](../../../../../kurs/de/02-planung/modul-07-carveouts.md).

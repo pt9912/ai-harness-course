@@ -19,9 +19,9 @@ Dokument-Abschnitte. Die Embedding-Erzeugung läuft über ein LLM.
 - **Slices in jedem Lifecycle-Status**: einer in `open/`, einer in
   `in-progress/`, mehrere in `done/`.
 - **Ein Carveout** für eine Bootstrap-Coverage.
-- **Ein Replay-Beispiel** in `evals/golden/` für [Modul 11](../../kurs/de/04-qualitaet/modul-11-replay-evaluierung.md).
+- **Ein Replay-Beispiel** in `evals/golden/` für [Modul 12](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md).
 - **Ein fingiertes Review-Fixture** in `exercises/09-review-fixture/`
-  für [Modul 9](../../kurs/de/04-qualitaet/modul-09-review-harness.md).
+  für [Modul 10](../../kurs/de/04-qualitaet/modul-10-review-harness.md).
 - **Geführte Fixtures** für Verifikation, Trace-Analyse und Runbook-Arbeit
   in `verification/`, `otel/` und `runbooks/`.
 
@@ -50,11 +50,11 @@ example/
 │   ├── 03-adr.md
 │   ├── 08-implementation.md
 │   └── 09-review-fixture/       kaputter Slice für Review-Übung
-├── verification/checks/         Verification-Fixture für Modul 10
+├── verification/checks/         Verification-Fixture für Modul 11
 ├── evals/golden/                Replay-Eingang/Erwartung
 ├── evals/example-trace.json     Minimal-Trace für Modul 0
-├── otel/                        Trace-Fixture für Modul 14
-├── runbooks/                    Release/Incident-Fixtures für Modul 15
+├── otel/                        Trace-Fixture für Modul 15
+├── runbooks/                    Release/Incident-Fixtures für Modul 16
 └── (Sprach-Skelette in Phase C: go/, python/, kotlin/, java/, csharp/)
 ```
 
@@ -83,7 +83,7 @@ Jedes Skelett implementiert:
 
 | Konzept | Was unterscheidet sich? |
 |---|---|
-| Suppression-Verbot | `//nolint` vs. `# noqa` vs. `@Suppress` vs. `@SuppressWarnings` vs. `#pragma warning disable` — siehe [Modul 8](../../kurs/de/03-agenten/modul-08-implementierung.md) |
+| Suppression-Verbot | `//nolint` vs. `# noqa` vs. `@Suppress` vs. `@SuppressWarnings` vs. `#pragma warning disable` — siehe [Modul 9](../../kurs/de/03-agenten/modul-09-implementierung.md) |
 | Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) |
 | Lockfile | `go.sum`, `uv.lock`, `gradle.lockfile`, Maven (transitive), CPM `packages.lock.json` |
 | Container | Distroless Static (Go), python-slim, Distroless Java, Distroless .NET |

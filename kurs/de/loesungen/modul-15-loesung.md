@@ -1,97 +1,101 @@
-# Lösung — Modul 15: Produktiver Betrieb
+# Lösung — Modul 15: Observability
 
-Zugehöriges Modul: [Modul 15 — Produktiver Betrieb](../05-betrieb/modul-15-produktiver-betrieb.md).
+Zugehöriges Modul: [Modul 15 — Observability](../05-betrieb/modul-15-observability.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Welche drei Antwortoptionen prüft das Runbook bei einem Incident?
+### (Erinnern) Welche drei Telemetrie-Typen unterscheidet der Kurs?
 
-1. **Rollback** — Code-Version zurückspielen.
-2. **Fix-Forward** — Bugfix einspielen, vorhandenen Stand belassen.
-3. **Datenkorrektur** — am bereits geschriebenen Datensatz arbeiten,
-   meist parallel zu (1) oder (2).
+| Typ | Antwortet auf | Werkzeug |
+|---|---|---|
+| **Logs** | *was* passierte | strukturierte Log-Aggregation |
+| **Metriken** | *wie oft, wie schnell, wie viel* | Prometheus/OpenMetrics-Pendant |
+| **Traces** | *wer rief wen, in welcher Reihenfolge* | OpenTelemetry/Jaeger |
 
-Drei *verschiedene* Antwortklassen, mit jeweils unterschiedlichen
-Voraussetzungen:
+Drei verschiedene Fragen, drei verschiedene Werkzeuge. Sie überlappen
+sich nicht — Logs ersetzen Traces nicht, und Metriken ersetzen Logs
+nicht. Ein Agent-System mit nur einem Typ ist forensisch nicht
+antwortfähig:
 
-- Rollback verlangt Rückwärtskompatibilität von DB-Schema und Config sowie
-  einen *getesteten* Rollback-Pfad.
-- Fix-Forward verlangt eine getestete Fix-Variante und Vertrauen in die
-  Test-Coverage des Fixes.
-- Datenkorrektur verlangt einen Original-Datensatz oder
-  rekonstruierbares Audit-Log.
+- *Nur Logs:* Cost-Attribution unmöglich (das ist eine Metrik-Frage),
+  Tool-Call-Ketten nicht rekonstruierbar (das ist eine Trace-Frage).
+- *Nur Metriken:* der einzelne Vorfall lässt sich nicht erzählen.
+- *Nur Traces:* die *Häufigkeit* eines Problems über Zeit verschwindet.
 
-Welche der drei greift, gehört *vor* den Incident ins Runbook — mit
-Triggern wie "DB-Migration rückwärtskompatibel? → Rollback möglich" und
-"Buggy-Daten bereits ausgeliefert? → Datenkorrektur Pflicht". Wer im
-Incident unter Stress wählt, wählt typischerweise die teuerste oder
-falsch-greifende Option (siehe Häufige Fehler).
+Im Kurs gilt: alle drei Typen mit demselben `slice.id`-Korrelations-Feld,
+sodass eine Slice-Bearbeitung über Logs, Metriken und Traces hinweg
+verfolgbar ist.
 
-### Welche Telemetrie brauchst du, um einen Prompt-Injection-Versuch nachträglich zu erkennen?
+### Welche drei Felder muss ein Tool-Call-Span mindestens tragen?
 
-Mindestens drei Spuren:
+Mindestens:
 
-1. **Eingabe-Roh-Logging** (mit Redaction-Strategie für PII, aber strukturell vollständig). Ohne die Eingabe ist Forensik nicht möglich.
-2. **Tool-Call-Audit-Log**: welche Tools wurden in welcher Reihenfolge mit welchen Args aufgerufen. Injection zeigt sich oft in *ungewöhnlicher Tool-Sequenz* (z. B. plötzlich ein File-Read auf einen sensiblen Pfad).
-3. **Output-vs-Eingabe-Konsistenz-Marker**: hat das Modell auf Anweisungen aus den *Daten* reagiert (klassisches Anzeichen von Injection)? Marker: Drift im Antwort-Stil, plötzliches Ignorieren der System-Anweisung.
+1. **`tool.name`** — welches Tool wurde aufgerufen.
+2. **`tool.arguments`** — was waren die Eingabe-Parameter (ggf. redacted für PII, aber strukturell vorhanden).
+3. **`tool.result.status`** — Erfolg/Fehler, idealerweise mit Fehlerklasse.
 
-Ergänzend wertvoll:
+Üblich darüber hinaus:
 
-- **Cache-Miss-Spike** zur selben Zeit wie ein ungewöhnliches Eingabe-Pattern — Injection-Versuche umgehen oft Cache, weil sie variabel sind.
-- **Tool-Allowlist-Reject-Counter**: jeder abgelehnte Tool-Call ist ein Verdacht.
+- `tool.duration_ms` — Latenz.
+- `tool.cost.tokens_in`/`tokens_out` (bei LLM-Tools).
+- `tool.parent_span_id` — Verkettung in der Agenten-Schleife.
+- `agent.role` — welche Rolle (Planner, Implementer, …) den Call gemacht hat.
 
-Wenn du nur die Antworten loggst, aber nicht die Eingaben + Tool-Sequenz,
-kannst du Injection nur durch Glück erkennen.
+Was *fehlen* darf:
 
-### Wann ist Rollback der falsche Reflex?
+- Der vollständige Output, wenn er groß ist. Hash und Truncation reichen für Forensik; den vollen Inhalt nur on-demand laden.
 
-Drei Szenarien, in denen Rollback schadet:
+Wenn dein Tool-Call-Span weniger als die ersten drei Felder hat,
+kannst du den Lauf nicht reproduzieren. Wenn er mehr als die genannten
+fünf hat ohne Begründung, ist er zu teuer pro Span — Span-Kosten sind
+selbst ein Budget.
 
-1. **Daten-Schemaänderung**: Wenn das Release eine DB-Migration ausgeführt hat, die nicht rückwärtskompatibel ist, macht Rollback der App das System inkonsistent. Lösung: vorwärts korrigieren oder DB-Rollback dazu.
-2. **Wenn der Bug schon Daten erzeugt hat**: Rollback der Code-Version stellt Buggy-Daten nicht her. Lösung: Bugfix + Daten-Reparatur-Slice.
-3. **Wenn Rollback selbst nicht getestet ist**: in vielen Repos ist Rollback "wir spielen die alte Version ein" — aber niemand hat geprüft, ob die alte Version mit *aktueller* DB/Config noch läuft. Lösung: Fix-Forward.
+### Wo schlägt sich ein Prompt-Cache-Miss in den Metriken nieder?
 
-Faustregel: Rollback ist *eine* Reaktion, nicht *die* Reaktion. Im
-Runbook sollte stehen, *wann* Rollback gilt und *wann* Fix-Forward — und
-das vor dem Incident, nicht im Incident.
+Drei Stellen, je nach Provider:
+
+1. **`llm.cache.hit_ratio`** als laufender Wert (sinkt bei Miss).
+2. **`llm.tokens_in.uncached`** + **`llm.tokens_in.cached`** als zwei separate Counter — die Summe ist die Eingabe, die Aufteilung zeigt den Cache-Effekt.
+3. **`llm.cost.usd`** steigt erkennbar — Cache-Hits sind typisch 10x billiger als Misses.
+
+Operative Konsequenz: Ein Span ohne Cache-Felder bedeutet *Blindflug*
+über Kosten. Bei einem Steering-Loop-Schritt "Kosten zu hoch in
+Welle X" ist der erste Blick: hat die Welle Cache-freundliche
+Kontextstücke vorne, oder injiziert jeder Slice einen neuen Block, der
+den Cache invalidiert?
 
 ## Übungshinweise
 
-### Produktionsfreigabe eines Projekts (Checkliste)
+### Analyse eines KI-Agenten-Laufs im Trace-Viewer
 
-Mindest-Punkte einer Freigabe-Checkliste:
+Maßstab:
 
-- `make gates` grün im aktuellen Image-Hash.
-- `make ci` grün im selben Image-Hash.
-- Mindestens ein Replay-Lauf gegen Golden Set, dokumentiert.
-- ADR oder Carveout für jeden bewusst offenen Punkt.
-- Runbook für mindestens drei Standard-Incidents (Out-of-Memory, Tool-Allowlist-Reject, Cache-Drift).
-- Verifizierter Rollback-Pfad (oder dokumentierte Begründung, warum Fix-Forward die Strategie ist).
-- Telemetrie-Smoke: ein Test-Trace ist im Trace-Viewer sichtbar.
+- Du kannst die *Sequenz* der Tool-Calls in Reihenfolge rekonstruieren.
+- Du kannst zu jedem Tool-Call die Latenz benennen.
+- Du findest den teuersten Tool-Call binnen einer Minute.
+- Du erkennst Wiederholungen (gleicher Tool-Call mit gleichen Args) — ein Symptom für fehlendes Caching oder schlechten Loop-Abbruch.
 
-### Spiele ein Incident-Szenario durch
+### Identifiziere den teuersten Tool-Call und begründe, ob er nötig war
 
-Beispiel: "Agent löscht versehentlich produktive Daten."
+Drei Fragen, die der Lerner beantworten soll:
 
-Erste 15 Minuten:
+1. **Quelle**: Welches Step im Plan hat den Call ausgelöst?
+2. **Ergebnis**: Was hat der Agent mit dem Ergebnis gemacht? Ging es ins Output ein?
+3. **Vermeidbarkeit**: Wäre der Call mit besserem Kontext (AGENTS.md, ADR, Spec) vermeidbar gewesen? Wenn ja, ist das ein Steering-Loop-Eintrag.
 
-1. **Stop**: weiteren Schaden verhindern. Agent abschalten, Tool-Allowlist verschärfen, ggf. Read-Only-Mode.
-2. **Forensik einfrieren**: Traces, Logs, Eingabe-Cache der letzten Stunde sichern (nicht überschreiben).
-3. **Schaden eingrenzen**: was wurde gelöscht? Aus Telemetrie ableitbar (Tool-Call-Audit-Log) oder aus DB-WAL?
-4. **Kommunikation**: betroffene Stakeholder informieren mit *minimaler* aber wahrheitsgetreuer Faktenlage. Nicht "kein Problem" sagen, wenn Forensik noch läuft.
-
-Erst danach: Wiederherstellung, Root-Cause, ADR-Folge-Slice. Die ersten
-15 Minuten sind über *Schadensbegrenzung*, nicht über Reparatur.
+Häufig zeigt sich: der teuerste Call ist ein File-Read, der dieselbe
+Datei wie drei Schritte vorher liest. Caching im Tool-Layer fehlt —
+oder der Agent hat das Result aus dem vorherigen Span nicht im
+Kontext gehalten.
 
 ## Häufige Fehler
 
-- **Runbook beschreibt den Happy Path.** "Im Incident: Agent abschalten, Service neu starten." → Das ist Anwendung, kein Runbook. Runbook beschreibt *Entscheidungen* unter Unsicherheit, mit Triggern.
-- **Freigabe als formale Checkbox.** → Wenn niemand die Checklist-Items inhaltlich prüft, ist Freigabe nicht Freigabe. Mindest-Praxis: Checklist hat *Belege* pro Item (Link auf Replay-Lauf, ADR-ID, Trace-Hash).
-- **Rollback wird als universelle Antwort gelernt.** → Siehe Selbstcheck oben. Rollback ist Kontext-abhängig.
+- **Span ohne Tool-Result-Hash.** → Forensik geht verloren, wenn das Ergebnis-Volumen das Logging-Budget sprengt.
+- **Trace nur in Produktion, nicht in Lab.** → Replay-Läufe sind blind. Lab muss denselben OTel-Pfad haben wie Prod.
+- **Budget-Alerts ohne Slice-Attribution.** → "Wir haben heute $400 verbraten" weiß niemand zuzuordnen. Spans brauchen ein `slice.id`-Attribut.
 
 ## Verweise
 
-- Spec/Plan/ADR als Kontext für Runbooks: [`../grundlagen/konventionen.md`](../grundlagen/konventionen.md)
-- Replay als Forensik-Werkzeug: [Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md)
+- Entropy Management als Observability-Konsument: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
 - Vorherige Lösung: [Modul 14](modul-14-loesung.md)
-- Zurück zur Übersicht: [README](README.md)
+- Nächste Lösung: [Modul 16](modul-16-loesung.md)

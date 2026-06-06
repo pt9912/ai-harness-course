@@ -33,9 +33,9 @@ Was die Antwort verrät:
 - **"In den Prompt"** → Mega-Prompt-Vorstellung (siehe Modul 0
   Fehlvorstellung "Wir bauen einen Mega-Prompt").
 - **"In AGENTS.md"** → Harness-Vorstellung schon präsent (selten als
-  spontane Antwort vor Modul 8).
+  spontane Antwort vor Modul 9).
 - **"Im Code/Linter"** → Fitness-Function-Vorstellung präsent (selten
-  vor Modul 12).
+  vor Modul 13).
 - **"Wir trainieren das Modell um"** → Modell-zentrierte Vorstellung
   (siehe Modul 0 Fehlvorstellung "Wir brauchen erst ein besseres Modell").
 
@@ -50,7 +50,7 @@ Was die Antwort verrät:
   Vorstellung; Sensoren-/Kontext-Frage wird übersprungen.
 - **"Der Kontext war anders"** → Harness-Vorstellung schon präsent.
 - **"Reviewer ist halt subjektiv"** → Vorstellung, dass Reviewer-
-  Schwankung *akzeptabel* ist (vgl. Modul 9 Fehlvorstellung "Wenn der
+  Schwankung *akzeptabel* ist (vgl. Modul 10 Fehlvorstellung "Wenn der
   Reviewer-Agent dasselbe zweimal anders kategorisiert, nehmen wir die
   mildere").
 
@@ -61,10 +61,10 @@ Was die Antwort verrät:
 
 Was die Antwort verrät:
 - **"Ja, 80 % reichen"** → Replay-Set wird als Bench­mark, nicht als
-  Symptom-Sensor verstanden (vgl. Modul 11 Fehlvorstellung "Wenn der
+  Symptom-Sensor verstanden (vgl. Modul 12 Fehlvorstellung "Wenn der
   Replay grün ist, ist das Modell gut").
 - **"Nein, die zwei roten müssen ich verstehen"** → Drift-Diagnose-
-  Reihenfolge bereits angedacht (selten vor Modul 11).
+  Reihenfolge bereits angedacht (selten vor Modul 12).
 - **"Ich rotiere zuerst das Golden Set"** → Entropy-Management-
   Vorstellung präsent (sehr selten als spontane Antwort).
 

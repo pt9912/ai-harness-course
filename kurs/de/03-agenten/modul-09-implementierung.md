@@ -1,4 +1,4 @@
-# Modul 8 — Implementierung durch KI-Agenten
+# Modul 9 — Implementierung durch KI-Agenten
 
 > **Aufwand:** ca. 120 Min Lesen · 120 Min Übung. Dieses Modul ist absichtlich tief — der 8-Schritt-Workflow und die Hard Rules sind die operative Brücke zwischen Theorie (Module 1–7) und Gates (Module 9–12).
 >
@@ -14,13 +14,13 @@
 > die richtige Stelle des Workflows einordnen — sie sind ein zweiter,
 > paralleler Mechanismus, kein nächster Schritt.
 
-## Mini-Vorgriff: zwei Begriffe aus Modul 14
+## Mini-Vorgriff: zwei Begriffe aus Modul 15
 
 Dieser Modulteil referenziert zweimal Begriffe, deren Vollform in
-[Modul 14 (Observability)](../05-betrieb/modul-14-observability.md)
+[Modul 15 (Observability)](../05-betrieb/modul-15-observability.md)
 liegt. Für den ersten Durchgang reichen Kurzdefinitionen — analog zum
 Image-Hash-Vorgriff in
-[Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13):
+[Modul 12](../04-qualitaet/modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14):
 
 * **Cache-Hit-Rate** — Anteil der Eingabe-Tokens, die der LLM-Provider
   aus dem Prompt-Cache liefert (statt erneut zu berechnen). Hoher
@@ -34,7 +34,7 @@ Image-Hash-Vorgriff in
   vergleicht und Widersprüche meldet. In diesem Modul nur als
   Steering-Loop-Verweis: wenn Schritt 7 (Doku-Update) im Workflow
   schwach ist, ist der Doku-Konsistenz-Agent der Sensor, der Drift
-  *findet*. Volldefinition Modul 14.
+  *findet*. Volldefinition Modul 15.
 
 ## Engage
 
@@ -124,7 +124,7 @@ gelesen.
 > Mechanismus, kein nächster Schritt im Workflow. In *derselben* Sitzung
 > gelesen, kleben sie an Schritt 6 oder 7 — und das ist die
 > häufigste Quelle der Fehlvorstellung *"Hard Rules in AGENTS.md
-> reichen"* (Modul 8 §Typische Fehlvorstellungen).
+> reichen"* (Modul 9 §Typische Fehlvorstellungen).
 >
 > **Selbsttest vor Pause (60 Sekunden, ohne Spickzettel):**
 >
@@ -220,9 +220,9 @@ Konkret gehört in den Lauf-Kontext:
 | Skills, die nicht zu dieser Rolle gehören |
 | ältere Carveouts, deren Auflösungs-Trigger bereits eingetreten ist |
 
-Die Verdichtungs-Sensoren dafür sind in [Modul 14](../05-betrieb/modul-14-observability.md):
+Die Verdichtungs-Sensoren dafür sind in [Modul 15](../05-betrieb/modul-15-observability.md):
 Token-Eingabe-Metrik pro Slice, Cache-Hit-Rate (siehe Mini-Glossar in
-Modul 14), und der **Doku-Konsistenz-Agent** als Drift-Detektor für tote
+Modul 15), und der **Doku-Konsistenz-Agent** als Drift-Detektor für tote
 Kontext-Stücke.
 
 Faustregel für den 8-Schritt-Workflow: Schritt 2 ist *"kanonische Quelle
@@ -235,7 +235,7 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
 > **Wenn du den 8-Schritt-Workflow in deinem eigenen Repo bereits routiniert läufst (Plan-vor-Code als Reflex, Sensor-Verfeinerung statt Kontext-Neulesen), springe zu [§Übungen](#übungen).** Das Worked Example unten ist die Schablone für den ersten oder zweiten Durchgang — wer den Workflow verinnerlicht hat, gewinnt durch erneutes Mitlesen wenig (Expertise-Reversal).
 
 **Ausgangs-Slice:** `SL-014a` aus dem Worked Example in
-[Modul 4](../02-planung/modul-04-planning-harness.md#worked-example-einen-zu-großen-slice-schneiden) —
+[Modul 5](../02-planung/modul-05-planning-harness.md#worked-example-einen-zu-großen-slice-schneiden) —
 *"Login-Endpoint akzeptiert User/Passwort, gibt JWT zurück,
 Audit-Log-Eintrag entsteht. Bezug: LH-FA-AUTH-001 + ADR-0007
 (Service-Adapter-Layer)."*
@@ -369,7 +369,7 @@ diese Hard Rule isoliert prüft.
 Wenn dein Modell stark genug ist, dass A und B fast identisch
 aussehen: das ist ebenfalls ein Befund. Notiere ihn — und sei vorsichtig
 beim nächsten Modellwechsel, weil dann die *unausgesprochenen* Defaults
-des neuen Modells andere werden können (Modul 11: Drift-Diagnose).
+des neuen Modells andere werden können (Modul 12: Drift-Diagnose).
 
 ## Reflexion
 
@@ -398,9 +398,9 @@ Hard Rules. Modul-spezifische Trigger:
 | Minimale Eingaben gegen Halluzination? | "Klare Anweisung." | `harness/README.md` + relevante kanonische Quelle + Requirement/ADR-IDs + AGENTS.md + Tool-Allowlist. | + Hinweis Lopopolo: "Was der Agent nicht im Kontext erreicht, existiert für ihn nicht." — fehlende Eingaben werden *durch Raten ersetzt*, nicht durch Schweigen. |
 | Fertig: Code kompiliert oder DoD erfüllt? | "DoD." | DoD-erfüllt + Schritt 8 ausgeführt (Bericht über Sensors + Restrisiken). Kompilierender Code ist notwendig, nicht hinreichend. | + Folge: ohne Schritt-8-Bericht wird jedes Risiko in die nächste Rolle (Reviewer/Verifier) verlagert — das bricht die Kontext-Trennung der Rollen. |
 | Hard Rules ↔ Quadranten der 2×2-Matrix? | "Inferentielle Feedforward." | Jede Hard Rule liegt in *zwei* Quadranten: inferential feedforward (steht in AGENTS.md) + computational feedback (Fitness Function/Linter-Gate). | + Hard Rule nur in einem Quadranten ist halb durchgesetzt; nur in AGENTS.md vergisst der Agent sie unter Druck, nur als Fitness Function ohne AGENTS.md-Eintrag versteht der Agent das *Warum* nicht. |
-| Schwächster Schritt im eigenen Repo? | konkret benannt, aber ohne Beleg | Konkret benannter Schritt (z. B. Schritt 7: Doku-Update bleibt liegen) + Beleg (z. B. `harness/README.md` wurde seit 6 Wochen nicht angepasst, obwohl drei Gate-Targets sich änderten). | + Steering-Loop-Eintrag formuliert: was im Harness verändert wird, damit Schritt X beim nächsten Lauf nicht mehr schwächster Schritt ist (z. B. Doku-Konsistenz-Agent als Drift-Sensor, Modul 14). |
+| Schwächster Schritt im eigenen Repo? | konkret benannt, aber ohne Beleg | Konkret benannter Schritt (z. B. Schritt 7: Doku-Update bleibt liegen) + Beleg (z. B. `harness/README.md` wurde seit 6 Wochen nicht angepasst, obwohl drei Gate-Targets sich änderten). | + Steering-Loop-Eintrag formuliert: was im Harness verändert wird, damit Schritt X beim nächsten Lauf nicht mehr schwächster Schritt ist (z. B. Doku-Konsistenz-Agent als Drift-Sensor, Modul 15). |
 
 ## Weiterlesen
 
 * 2×2-Matrix für Quadranten-Zuordnung: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
-* Nächstes Modul: [Modul 9 — Review Harness](../04-qualitaet/modul-09-review-harness.md)
+* Nächstes Modul: [Modul 10 — Review Harness](../04-qualitaet/modul-10-review-harness.md)

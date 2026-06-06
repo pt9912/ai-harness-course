@@ -1,4 +1,4 @@
-# Modul 2 — Lastenheft und Spezifikation
+# Modul 3 — Lastenheft und Spezifikation
 
 > **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: ID-Schema und Source Precedence kennst du aus [Modul 1](modul-01-entwicklungszyklus.md) — hier werden sie zum Arbeitswerkzeug.
 
@@ -199,4 +199,4 @@ Modul-spezifische Trigger:
 
 * Spec-Stratifizierung im Detail: [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)
 * Reales Beispiel mit Lastenheft/Spezifikation-Trennung: `pt9912/c-hsm-doc` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
-* Nächstes Modul: [Modul 3 — Architektur und ADRs](modul-03-architektur-adrs.md)
+* Nächstes Modul: [Modul 4 — Architektur und ADRs](modul-04-architektur-adrs.md)

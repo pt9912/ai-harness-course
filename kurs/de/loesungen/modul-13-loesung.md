@@ -1,99 +1,127 @@
-# Lösung — Modul 13: Docker Harness
+# Lösung — Modul 13: Quality Gates
 
-Zugehöriges Modul: [Modul 13 — Docker Harness](../05-betrieb/modul-13-docker-harness.md).
+Zugehöriges Modul: [Modul 13 — Quality Gates](../04-qualitaet/modul-13-quality-gates.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Nenne drei Sprache↔Lock-File-Paare
+### (Erinnern) Nenne fünf generische Gate-Familien
 
-| Sprache | typisches Lock-File |
-|---|---|
-| Python | `poetry.lock` oder `uv.lock` |
-| Node | `package-lock.json` oder `pnpm-lock.yaml` |
-| Go | `go.sum` |
-| .NET | `packages.lock.json` (mit Central Package Management) |
-| Rust | `Cargo.lock` |
-| Java/Maven | `pom.xml` mit pinned Versionen + (für reine Reproduzierbarkeit) `dependency-tree`-Snapshot |
+1. **Linter** — Stil und lokale Mustererkennung.
+2. **Typecheck** — Statische Typen, Compiler-Schicht.
+3. **Architekturtest** — Schichtungs- und Import-Regeln (`arch-check`).
+4. **Coverage** — Test-Abdeckung (mit Critical-Variante).
+5. **Security-Gate** — Datenfluss- und Vulnerability-Analyse (Semgrep,
+   CodeQL, Bandit).
 
-Drei Beispiele genügen — kennt der Lerner *kein* Lock-File für die
-Sprache seines Repos, fehlt eine zentrale Reproduzierbarkeits-Klammer.
+Über die fünf hinaus wachsen *domänenspezifische* Gates aus dem
+Steering Loop heraus (siehe Modul 13 §"Reichhaltige Gate-Landschaft"):
+`test-determinism`, `test-replay`, `solid-suppression-gate`,
+`test-mpc-property`, `native-sanitizer`. Diese sind nicht Standard,
+sondern aus konkreten Vorfällen entstanden.
 
-Pointe: Ein gepinntes Lock-File ist *nicht* ausreichend für volle
-Reproduzierbarkeit. Es sichert die *Bibliotheks-Versionen*, aber nicht
-die *Runtime-Version* (Python 3.11 vs. 3.12, Go 1.21 vs. 1.23). Lock-File
-**plus** Image-Hash ist die Mindestkombination. Genau diese Kombination
-liefert das Bündel "byteidentische Toolchain", auf das Modul 11 sich für
-deterministische Replays stützt.
+Faustregel: Ein Repo mit nur den fünf generischen Gates hat noch keine
+Schmerzen verarbeitet. Es ist kein schlechtes Repo — aber es hat keine
+*spezifische* Steering-Loop-Historie.
 
-### Warum ist `make gates` im Host-OS keine valide Gate-Ausführung?
+### Warum braucht es Critical Coverage zusätzlich zur Gesamt-Coverage?
 
-Drei Gründe:
+Gesamt-Coverage ist ein Durchschnitt — sie ist über alle Dateien
+gleichgewichtet, auch wenn 90 % der Codebase Beispiel-Daten oder
+DTOs sind. Das verbirgt zwei Pathologien:
 
-1. **Toolchain-Unterschied**: Lokal hast du Go 1.23, im CI läuft Go 1.21. Linter-Regeln und Compile-Verhalten unterscheiden sich subtil. Gate grün lokal, rot im CI — der Unterschied gehört nicht in den Bug.
-2. **Abhängigkeits-Reihenfolge**: Host hat globale Pakete (Python, NodeJS), die der CI nicht hat. Importe können Lokal-Fallbacks nutzen, die im CI fehlen.
-3. **Filesystem-Annahmen**: Host hat Dateien an Pfaden, die der CI nicht hat (`~/.config`, `/etc/foo`). Gate liest sie ungeprüft.
+1. **Sicherheitsrelevanter Code mit niedriger Coverage neben Daten-Klassen mit 100 %.** Der Durchschnitt sieht gut aus, der kritische Pfad ist ungetestet.
+2. **Coverage-Manipulation durch Trivialität.** Wer 100 Getter testet, kompensiert für ungeprüfte Geschäftslogik.
 
-Wenn lokal und CI nicht *bit-identisch* dasselbe Image benutzen,
-debuggst du den Unterschied, nicht den Bug. Docker-only ist nicht
-Mode, sondern Kosten-Senkung.
+Critical Coverage schneidet aus: definierte Pfade (z. B. `auth/`,
+`payment/`, `optimizer/`) müssen *einzeln* eine höhere Schwelle
+erfüllen. Damit wird:
 
-### Wann lohnt sich ein Devcontainer zusätzlich zum Compose-Setup?
+- Gesamt-Coverage zur *Gesundheits-Metrik* (langsame Drift),
+- Critical Coverage zum *Vertragspunkt* (harte Schwelle, fail-closed),
+- Carveouts pro kritischen Pfad sichtbar (mit Trigger und Folge-Slice).
 
-Wenn der primäre Entwicklungs-Pfad eines Repos *interaktives Arbeiten
-im selben Image* ist, das auch der CI benutzt — und nicht "Code lokal
-schreiben, dann Container für Tests".
+### Welcher Gate-Typ erkennt eine SQL-Injection — Linter, Typecheck oder Security Gate?
 
-Konkrete Trigger:
+Primär Security Gate (Semgrep, CodeQL, language-spezifische
+SAST-Tools). Linter und Typecheck sehen meist nur Typen und Stil,
+nicht Datenfluss.
 
-- Mehrere Sprachen im selben Repo (z. B. `c-hsm-doc` mit Go + Java/Kotlin-Demos).
-- Tool-spezifische Sub-Setups, die einrichtungsschwer sind (PKCS#11-Slots, SoftHSM-Init).
-- Team-Größe > 2: das "läuft auf meiner Maschine" sich häuft.
+Aber: Eine ADR mit "Alle DB-Zugriffe gehen über Repository-Klasse mit
+parametrisierten Queries" plus depguard/import-linter, das direkte
+SQL-String-Builds verbietet, ist die *präventive* Variante
+(Computational + Feedforward). Das erste Gate, das anschlägt, ist dann
+das Architektur-Gate — *vor* dem Security-Gate.
 
-Wenn `make build && make shell` reicht (siehe grid-gym), brauchst du
-keinen Devcontainer — das ist Kosten ohne Nutzen. Devcontainer wird
-wertvoll, wenn IDE-Integration (LSP, Debugger) im Container nötig
-ist.
+Faustregel: Wenn dein Security-Gate eine SQL-Injection im
+Production-Code findet, war die Schichtung lückenhaft. Security-Gates
+sollen Reste fangen, nicht das Hauptpensum tragen.
+
+### (Anwenden) Drei Vorbedingungen vor einem neuen Gate
+
+Bevor du das Make-Target schreibst:
+
+1. **Anforderungs- oder ADR-Bezug.** Welcher `LH-*`/`ADR-*` rechtfertigt
+   das Gate? Ohne diesen Bezug ist es ein Vorschlag, kein Vertrag. Das
+   Make-Target trägt die ID im Kommentar: `coverage-gate-critical: ## LH-QA-CRIT-003 / ADR-0014`.
+2. **Begründete Schwelle.** Die Zahl (40 %, 70 %, 90 %) braucht eine
+   Begründung — entweder in einer ADR ("Sicherheits-Pfad: 90 % wegen
+   LH-QA-SEC-001") oder als bootstrap-aware Stufung mit Trigger.
+   Schwellen ohne Begründung wandern unter Druck nach unten.
+3. **Lokal-CI-Parität.** Das Gate läuft in einem Image, dessen Hash
+   lokal und im CI identisch ist (Modul 14). Andernfalls debuggst du
+   *nicht* den Gate-Verstoß, sondern den Image-Unterschied — ein
+   Tagesgeschäft, das niemand will.
+
+Falle: "Tool installieren, ausführen, fertig". Ohne die drei
+Vorbedingungen ist das Gate ein lokaler Verbesserungswunsch, der im
+nächsten Repo-Refactor verschwindet. Mit den drei Vorbedingungen ist es
+eine traceable Anforderung mit Sensor — und das ist genau die Bauart,
+die der Kurs lehrt.
 
 ## Übungshinweise
 
-### Aufbau eines vollständigen Build-Harness
+### Schreibe einen Architekturtest, der ADR-3 als Regel umsetzt
 
-Pflicht-Stages im Dockerfile:
+Wenn ADR-3 z. B. besagt "Layer Service darf nur Repo importieren,
+nicht Runtime", dann:
 
-1. **Toolchain-Stage**: Base-Image mit pinned Version, Compiler/Linter/Tools.
-2. **Deps-Stage**: nur Lockfile + Lock-Resolution, vor dem Quellcode. Cache-freundlich.
-3. **Build-Stage**: Quellcode + Compile.
-4. **Test-Stage**: läuft `make test` (oder Äquivalent).
-5. **Lint-Stage**: läuft Linter.
-6. **Runtime-Stage** (Distroless oder JRE-minimal): nur das Binary plus minimale Laufzeit-Abhängigkeiten.
+- **Go (depguard)**: `denyList: { "**/runtime/**": { "**/service/**" } }`.
+- **Python (import-linter)**: `forbidden_modules = service` mit `from = runtime`.
+- **Java/Kotlin (ArchUnit)**:
+  ```
+  noClasses().that().resideInAPackage("..service..")
+    .should().dependOnClassesThat().resideInAPackage("..runtime..")
+  ```
 
-Cache-Strategie: Lockfile ändert sich selten → Stage 2 ist meist
-cached. Quellcode ändert sich oft → Stage 3+4 wiederholen. Das spart
-in einem typischen Repo 60-80 % Build-Zeit.
+Erfolgskriterien:
 
-### Mache ein Image nicht-reproduzierbar und beobachte den Drift
+- Test schlägt fehl, *bevor* du den Verstoß im Code einbaust (Vorab-Validierung).
+- Test bricht `make arch-check` und damit `make gates` — nicht nur ein Warning.
+- Test referenziert die ADR-ID im Kommentar.
 
-Trigger:
+### Provoziere absichtlich einen Coverage-Gate-Failure auf einer kritischen Datei
 
-- `FROM golang:latest` statt `golang:1.23.4`.
-- `apt-get install` ohne pinned Versionen.
-- `go install github.com/...@latest`.
+Vorgehen:
 
-Erwartetes Symptom: Zwei Builds an verschiedenen Tagen erzeugen
-Binaries unterschiedlicher Größe / unterschiedlicher SHA. CI grün,
-Production-Bug — und niemand kann den ursprünglichen Stand rekonstruieren.
+1. Lege eine neue Funktion in `optimizer/critical.go` (oder Äquivalent) ohne Test an.
+2. Stelle sicher, dass `coverage-gate-critical` die Datei sieht.
+3. Führe `make coverage-gate-critical` aus → muss rot werden.
+4. Schreibe minimalen Test → grün.
 
-Lehrwert: Drift ist nicht etwas, das *manchmal* passiert. Es passiert
-*immer*, du siehst es nur nicht, bis es wehtut.
+Warum diese Übung wichtig ist: Sie validiert, dass dein
+Critical-Coverage-Gate *funktioniert*. Häufiger Fehler: Gate ist
+konfiguriert, aber Critical-Pfad ist im Glob falsch und matched
+nichts — Gate ist also stumm.
 
 ## Häufige Fehler
 
-- **Multi-Stage ohne Cache-Trennung.** Dockerfile lädt Lockfile und Code im selben Layer. → Jede Code-Änderung triggert vollen Re-Download.
-- **Runtime-Stage enthält Dev-Tools.** Distroless wird ignoriert, "weil debugging einfacher ist". → Angriffsfläche balloniert.
-- **`make gates` startet kein eigenes Image, nutzt Host-Docker.** → Halber Schritt: Build im Container, Test am Host. Bringt die meisten Drift-Probleme zurück.
+- **Gate-Existenz wird mit Gate-Wirkung verwechselt.** `make coverage-gate` *gibt* es, aber prüft 0 %. → Halluzinations-Gate, siehe Disziplinregel aus Modul 13.
+- **Schwelle in der Pipeline-YAML statt im Makefile.** → Lokales `make` und CI driften. Schwelle gehört dorthin, wo sie reproduzierbar gilt.
+- **Bootstrap-aware-Marker fehlt.** → Wenn das Gate "aktuell 40 %" prüft, ohne den Trigger für "morgen 70 %" zu nennen, wird der Bootstrap zur permanenten Lüge.
 
 ## Verweise
 
-- Hard Rule "Docker-only" aus grid-gym: [Modul 8](../03-agenten/modul-08-implementierung.md) und [Fallstudien](../grundlagen/fallstudien.md)
+- Reichhaltige Gate-Landschaft aus grid-gym: [Modul 13](../04-qualitaet/modul-13-quality-gates.md) und [Fallstudie](../grundlagen/fallstudien.md)
+- Computational-Feedback-Quadrant: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
 - Vorherige Lösung: [Modul 12](modul-12-loesung.md)
 - Nächste Lösung: [Modul 14](modul-14-loesung.md)

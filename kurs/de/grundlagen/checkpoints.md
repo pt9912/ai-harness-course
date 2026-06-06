@@ -26,7 +26,7 @@ mit überprüfbarem Ergebnis.
 - Hat mindestens eines deiner Akzeptanzkriterien einen Negativ-Pfad ("System darf nicht …")? Wenn nein: Spec-Lücke wahrscheinlich.
 - Steht in deinem `harness/README.md` nur, was es im Repo *tatsächlich* gibt? Wenn nein: Halluzinierter Sensor.
 
-Wer hier hängenbleibt, sollte Modul 2 und 3 erneut durchgehen, bevor er
+Wer hier hängenbleibt, sollte Modul 3 und 3 erneut durchgehen, bevor er
 in Phase 02 startet. Lösungs-Vergleichspunkt:
 [`/lab/example/spec/`](../../../lab/example/spec/) und
 [`/lab/example/docs/plan/adr/`](../../../lab/example/docs/plan/adr/).
@@ -49,14 +49,14 @@ Slices und bewege sie durch die Lifecycle-Verzeichnisse.
 - Hat dein temporärer Carveout einen *Folge-Slice* mit ID? Wenn nein: er ist faktisch permanent.
 - Ist deine Roadmap eine Reihenfolge von Wellen, *nicht* von Terminen?
 
-Wer hier hängenbleibt, sollte Modul 4–6 erneut durchgehen. Lösungs-Vergleichspunkt:
+Wer hier hängenbleibt, sollte Modul 5–7 erneut durchgehen. Lösungs-Vergleichspunkt:
 [`/lab/example/docs/plan/planning/`](../../../lab/example/docs/plan/planning/).
 
 ## Checkpoint C — nach Phase 03 (Agenten)
 
 **Aufgabe:** Wähle einen deiner Slices aus Checkpoint B und durchlaufe
 ihn mit dem 8-Schritt-Workflow aus
-[Modul 8](../03-agenten/modul-08-implementierung.md#minimal-agent-workflow-8-schritte).
+[Modul 9](../03-agenten/modul-09-implementierung.md#minimal-agent-workflow-8-schritte).
 
 1. Implementation-Agent läuft mit AGENTS.md *und* ohne — vergleiche die Diffs.
 2. Dokumentiere zwei Hard Rules für dein Repo (jeweils mit Falsch/Richtig-Beispiel und Begründung).
@@ -67,7 +67,7 @@ ihn mit dem 8-Schritt-Workflow aus
 - Kannst du den Lauf reproduzieren? (Replay-Voraussetzung, Phase 04)
 - Liegt jede Hard Rule in *einem oder zwei* Quadranten der 2×2-Matrix (siehe [`klassifikation.md`](klassifikation.md))?
 
-Wer hier hängenbleibt, sollte Modul 7 und 8 erneut durchgehen.
+Wer hier hängenbleibt, sollte Modul 8 und 8 erneut durchgehen.
 
 ## Checkpoint D — nach Phase 04 (Qualität)
 
@@ -86,7 +86,7 @@ einen Replay-Lauf.
 - Hast du mindestens einen *bootstrap-aware* Gate (mit dokumentierter Hochschalt-Schwelle)?
 - Kannst du am Replay-Lauf erkennen, ob ein neues Modell schlechter geworden ist als das alte?
 
-Wer hier hängenbleibt, sollte Modul 9–12 erneut durchgehen.
+Wer hier hängenbleibt, sollte Modul 10–13 erneut durchgehen.
 
 ## Checkpoint E — nach Phase 05 (Betrieb)
 
@@ -117,11 +117,11 @@ hat einen direkten Vorboten in einem Checkpoint.
 
 | Abschluss-Achse | Vorbereitender Checkpoint | Wenn dort nicht erreicht … |
 |---|---|---|
-| Vollständigkeit | A (Spec/ADR/Harness-Skizze vorhanden) | → später keine "solide" auf Vollständigkeit; Modul 1–3 vertiefen. |
-| Konsistenz | A (Source Precedence) + B (Carveout-Folge-Slice) | → Konsistenz bleibt auf "funktional"; Modul 1 §Source Precedence und Modul 6 vertiefen. |
-| Reproduzierbarkeit | C (8-Schritt-Workflow reproduzierbar) + D (Gates auf frischem Klon) **+ Modul 13** (Image-Hash, Lock-Files) | → Reproduzierbarkeit bleibt ohne Modul 13 auf "funktional" gedeckelt; Modul 8, 12, 13 vertiefen. |
-| Auditierbarkeit | B (Slice-IDs) + C (Hard Rules mit ID) | → Auditierbarkeit bleibt auf "funktional"; ID-Schema und Traceability-Hook nachholen (Modul 2, 12). |
-| Steering-Loop-Reife | D (DoD-Verstoß provoziert + Reflexion) | → Steering-Loop bleibt auf "rudimentär"; Reflexionsvorlage und Modul 11 vertiefen. |
+| Vollständigkeit | A (Spec/ADR/Harness-Skizze vorhanden) | → später keine "solide" auf Vollständigkeit; Modul 1–4 vertiefen. |
+| Konsistenz | A (Source Precedence) + B (Carveout-Folge-Slice) | → Konsistenz bleibt auf "funktional"; Modul 1 §Source Precedence und Modul 7 vertiefen. |
+| Reproduzierbarkeit | C (8-Schritt-Workflow reproduzierbar) + D (Gates auf frischem Klon) **+ Modul 14** (Image-Hash, Lock-Files) | → Reproduzierbarkeit bleibt ohne Modul 14 auf "funktional" gedeckelt; Modul 9, 12, 13 vertiefen. |
+| Auditierbarkeit | B (Slice-IDs) + C (Hard Rules mit ID) | → Auditierbarkeit bleibt auf "funktional"; ID-Schema und Traceability-Hook nachholen (Modul 3, 12). |
+| Steering-Loop-Reife | D (DoD-Verstoß provoziert + Reflexion) | → Steering-Loop bleibt auf "rudimentär"; Reflexionsvorlage und Modul 12 vertiefen. |
 
 **Diagnose-Regel:** Wer im Abschlussprojekt mehr als eine Achse auf
 *rudimentär* hat, schließt typischerweise eine Phase-Lücke nicht — nicht

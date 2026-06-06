@@ -1,6 +1,6 @@
-# Modul 12 — Quality Gates
+# Modul 13 — Quality Gates
 
-> **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: das ID-Schema aus [Modul 2](../01-spec-und-architektur/modul-02-lastenheft.md) bekommt hier seine maschinelle Verankerung — Make-Target-Kommentare zitieren die Anforderungs-ID.
+> **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: das ID-Schema aus [Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md) bekommt hier seine maschinelle Verankerung — Make-Target-Kommentare zitieren die Anforderungs-ID.
 
 ## Mini-Glossar für dieses Modul
 
@@ -38,7 +38,7 @@ Nach diesem Modul kannst du:
 
 * Gates als `make`-Targets mit ID-Kommentar *aufsetzen* (Anwenden · prozedural),
 * Critical Coverage von Gesamt-Coverage *unterscheiden* und ihre Schwellen *begründen* (Bewerten · konzeptuell),
-* einen ADR-Satz in eine Fitness Function *übersetzen* (Erschaffen · prozedural — Brücke zu [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md)),
+* einen ADR-Satz in eine Fitness Function *übersetzen* (Erschaffen · prozedural — Brücke zu [Modul 4](../01-spec-und-architektur/modul-04-architektur-adrs.md)),
 * einen bootstrap-aware Gate mit Hochschalt-Trigger *entwerfen* (Erschaffen · prozedural),
 * einen Gate-Typ einem Fehlerbild *zuordnen* (SQL-Injection → Security-Gate, Layer-Bruch → Architekturtest) (Analysieren · konzeptuell).
 
@@ -80,7 +80,7 @@ rot sein darf, ist es kein Gate, sondern ein Vorschlag.
 In `harness/README.md` und in jeder Doku, die Gates aufzählt: keine
 Befehle behaupten, die es nicht gibt. Wenn `make fullbuild` strukturell
 rot ist, wird das als Carveout in `docs/plan/carveouts/CO-<NNN>-…`
-dokumentiert ([Modul 6](../02-planung/modul-06-carveouts.md)) und in
+dokumentiert ([Modul 7](../02-planung/modul-07-carveouts.md)) und in
 der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt — nicht
 ausgelassen, nicht geschönt, nicht in einer Status-Spalte versteckt
 (die Sensors-Tabelle trägt keinen Lauf-Status; Lauf-Wahrheit pro Commit
@@ -143,8 +143,8 @@ Sprachen parallel abdecken (heute noch nicht ausgeliefert).
 - **"Gate = Lint."** — Lint ist *ein* Gate-Typ. Architekturtests, Coverage-Gates, Security-Gates, Replay-Determinism-Gates sind weitere. Pro Repo entstehen sprachen- und domänenabhängige Gate-Familien.
 - **"Wenn ein Gate manchmal rot sein darf, ist das pragmatisch."** — Dann ist es kein Gate, sondern ein Vorschlag. Pragmatik gehört in Carveouts oder bootstrap-aware Gates — mit Trigger und Folge-Slice.
 - **"Coverage 80 % ist die richtige Schwelle."** — Es gibt keine universelle Schwelle. Critical Coverage (Security, Geld, Datenintegrität) ≠ Gesamt-Coverage. Schwellen sind ADR-pflichtig.
-- **"`make gates` lokal grün heißt fertig."** — Nur wenn lokal und CI dasselbe Image benutzen (Modul 13). Sonst debuggst du den Unterschied.
-- **"Mehr Tests sind immer besser."** — Falsch in zwei Richtungen. Erstens: 80 % Gesamt-Coverage über *unkritischem* Code verbirgt 0 % Coverage auf dem Sicherheitspfad — Critical Coverage misst *gezielt*. Zweitens: Tests gegen Beispiele decken nur Realität ab, *wo das Golden Set repräsentativ ist* ([Modul 11](modul-11-replay-evaluierung.md)); Tests gegen die *Spec* erschließt Verifikation ([Modul 10](modul-10-verification.md)). Wer Test-Anzahl als Qualitätsmaß nimmt, baut Coverage-Anstiege, deren Wert auf 0 fällt, sobald die Realität die Coverage-Annahme bricht. Faustregel: *Verteilung vor Anzahl*. Ein zusätzlicher Test gegen einen bereits gut abgedeckten Pfad ist Boilerplate; ein zusätzlicher Test gegen einen *bisher unabgedeckten kritischen* Pfad ist Sensor.
+- **"`make gates` lokal grün heißt fertig."** — Nur wenn lokal und CI dasselbe Image benutzen (Modul 14). Sonst debuggst du den Unterschied.
+- **"Mehr Tests sind immer besser."** — Falsch in zwei Richtungen. Erstens: 80 % Gesamt-Coverage über *unkritischem* Code verbirgt 0 % Coverage auf dem Sicherheitspfad — Critical Coverage misst *gezielt*. Zweitens: Tests gegen Beispiele decken nur Realität ab, *wo das Golden Set repräsentativ ist* ([Modul 12](modul-12-replay-evaluierung.md)); Tests gegen die *Spec* erschließt Verifikation ([Modul 11](modul-11-verification.md)). Wer Test-Anzahl als Qualitätsmaß nimmt, baut Coverage-Anstiege, deren Wert auf 0 fällt, sobald die Realität die Coverage-Annahme bricht. Faustregel: *Verteilung vor Anzahl*. Ein zusätzlicher Test gegen einen bereits gut abgedeckten Pfad ist Boilerplate; ein zusätzlicher Test gegen einen *bisher unabgedeckten kritischen* Pfad ist Sensor.
 
 Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
 
@@ -152,7 +152,7 @@ Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervor
 
 > **Wenn du ArchUnit / import-linter / dep-cruiser bereits routiniert einsetzt, springe zu [§Übungen](#übungen).** Das Worked Example zeigt die Übersetzungsschablone für den ersten oder zweiten Fall — wer sie kann, gewinnt durch Wiederholung wenig (Expertise-Reversal). Übung 1 setzt das Schema sofort produktiv.
 
-**Ausgangs-ADR:** ADR-0007 (siehe Worked Example in [Modul 3](../01-spec-und-architektur/modul-03-architektur-adrs.md#worked-example-vom-diskussionsfaden-zum-prüfbaren-adr)) sagt:
+**Ausgangs-ADR:** ADR-0007 (siehe Worked Example in [Modul 4](../01-spec-und-architektur/modul-04-architektur-adrs.md#worked-example-vom-diskussionsfaden-zum-prüfbaren-adr)) sagt:
 
 > "Service-Layer importiert ausschließlich aus `adapter/`-Paket."
 
@@ -191,7 +191,7 @@ arch-check:  ## LH-QA-COUPLING-002 / ADR-0007 — Service-Adapter-Trennung
 ```
 
 **Schritt 5 — `make gates` lokal grün — und im CI mit gepinnter
-Toolchain (Modul 13).**
+Toolchain (Modul 14).**
 
 **Schritt 6 — Bewusstes Brechen:** Implementer fügt zu Debug-Zwecken
 `import requests` in `service/foo.py`. `make arch-check` läuft rot mit
@@ -229,8 +229,8 @@ Modul-spezifische Trigger:
 | Fünf Gate-Familien? | drei oder vier genannt | Linter · Typecheck · Architekturtest · Coverage (mit Critical-Variante) · Security-Gate. Optional zusätzlich: Replay-/Determinism-Gates, Suppression-Gates, Dep-/Image-Audit. | + Hinweis: domänenspezifische Gates (z. B. `test-determinism`, `solid-suppression-gate`, `test-mpc-property`) entstehen aus dem Steering Loop, nicht aus einem Standard-Setup. Ein Repo mit nur den fünf generischen Gates hat noch keine Schmerzen verarbeitet. |
 | Warum Critical Coverage *zusätzlich*? | "Wichtige Dateien besonders." | Gesamt-Coverage glättet kritische Pfade unter unkritischen Massendateien weg. Critical Coverage misst gezielt Pfade mit Sicherheits-, Geld- oder Datenintegritäts-Risiko. | + Folge: Critical Coverage hat *eigene* (höhere) Schwelle und *eigene* ADR-Kette für Schwellen-Senkung. Carveout auf Critical Coverage ist immer ein HIGH-Finding im Review. |
 | SQL-Injection: Linter / Typecheck / Security Gate? | "Security Gate." | Security Gate (Semgrep/Bandit/CodeQL). Linter sieht den String, nicht die Semantik; Typecheck sieht den Typ `str`, nicht die Vertrauensgrenze. | + Hinweis: Manche Linter haben *Semgrep-Regeln* integriert (z. B. `bandit` für Python) — Trennlinie ist nicht "Tool", sondern "Regel-Klasse". Security-Regeln verlangen *Datenfluss*-Analyse, klassische Linter machen nur lokale Mustererkennung. |
-| Drei Vorbedingungen für ein neues Gate? | "Tool installieren." | (1) Anforderung mit ID (Spec oder ADR), die das Gate prüft — sonst ist es ein Vorschlag · (2) Schwelle ist begründet (ADR oder Carveout für Übergangsphase) · (3) Lokales und CI-Image laufen identisch (Modul 13); andernfalls debuggt das Team später den Image-Unterschied. | + Empfohlen: Gate-Target trägt ID-Kommentar (`coverage-gate-critical: ## LH-QA-CRIT-003`); ohne diesen Kommentar ist die Traceability-Kette gebrochen, und ein gerötetes Gate erzeugt keinen klaren Bezug zur verletzten Anforderung. |
+| Drei Vorbedingungen für ein neues Gate? | "Tool installieren." | (1) Anforderung mit ID (Spec oder ADR), die das Gate prüft — sonst ist es ein Vorschlag · (2) Schwelle ist begründet (ADR oder Carveout für Übergangsphase) · (3) Lokales und CI-Image laufen identisch (Modul 14); andernfalls debuggt das Team später den Image-Unterschied. | + Empfohlen: Gate-Target trägt ID-Kommentar (`coverage-gate-critical: ## LH-QA-CRIT-003`); ohne diesen Kommentar ist die Traceability-Kette gebrochen, und ein gerötetes Gate erzeugt keinen klaren Bezug zur verletzten Anforderung. |
 
 ## Weiterlesen
 
-* Nächstes Modul: [Modul 13 — Docker Harness](../05-betrieb/modul-13-docker-harness.md)
+* Nächstes Modul: [Modul 14 — Docker Harness](../05-betrieb/modul-14-docker-harness.md)

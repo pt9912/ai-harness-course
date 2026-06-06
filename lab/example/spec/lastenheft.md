@@ -150,4 +150,4 @@ bei identischer Eingabe.
 | 0.1.0 | 2026-05-15 | Initiale Fassung | slice-001 |
 | 0.2.0 | 2026-05-22 | Boundary-Kriterium für `k > 100` ergänzt | slice-007 |
 | 0.3.0 | 2026-06-01 | LH-QA-04 Audit-Datenschutz ergänzt | slice-012 |
-| 0.4.0 | 2026-06-02 | LH-FA-IDX-003 Index-Schreib-Idempotenz; Schema-Konvention "Bereichskürzel ab Welle 2" dokumentiert | Welle-9-Lab-Ausbau, Modul 14 |
+| 0.4.0 | 2026-06-02 | LH-FA-IDX-003 Index-Schreib-Idempotenz; Schema-Konvention "Bereichskürzel ab Welle 2" dokumentiert | Welle-9-Lab-Ausbau, Modul 15 |

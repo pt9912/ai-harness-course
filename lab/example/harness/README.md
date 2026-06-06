@@ -54,10 +54,10 @@ Diese Datei dupliziert sie nicht.
 | `make coverage-gate-critical` | Critical-Path-Coverage | bootstrap via [`CO-001`](../docs/plan/carveouts/CO-001-index-coverage.md) bis Welle 2 done |
 | `make gates` | alle inneren Gates | — |
 | `make ci` | gates + Replay + Image-Scan | — |
-| `make fullbuild` | volle Closure | Image-Hash `sha256:abc123…` (Modul 13) |
+| `make fullbuild` | volle Closure | Image-Hash `sha256:abc123…` (Modul 14) |
 
 **Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates` (keine Status-Spalte hier, siehe [Konventionen §`harness/README.md` als Einstiegspunkt](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt)).
-**Rote Gates:** Begründung im verlinkten `CO-<NNN>` (Bindung-Spalte), Modul 6.
+**Rote Gates:** Begründung im verlinkten `CO-<NNN>` (Bindung-Spalte), Modul 7.
 **Nicht behauptet** (geplant, nicht in Makefile): `make test-property` (Property-Based-Suite, slice-013, in-progress), `make sbom`, `make security-scan` (welle-4-betrieb).
 
 ## Traceability rules

@@ -13,7 +13,7 @@ zurück (`result`).
 
 In ernsten Setups kommen Korrelationsfelder hinzu — `agent.role`,
 `slice.id`, `requirement.id` — aber das sind Erweiterungen, die in
-Modul 14 behandelt werden. Die drei Pflichtfelder stehen darüber: ohne
+Modul 15 behandelt werden. Die drei Pflichtfelder stehen darüber: ohne
 sie ist es kein Tool-Call, sondern eine Texteingabe.
 
 Falle: "vier Bestandteile" (mit Zeitstempel oder Status) ist nicht

@@ -83,7 +83,7 @@ auditierbar.
 Wenn der Plan die ADR-Verletzung nicht antizipiert hat, sieht Review
 sie nicht. Verifikation prüft Code gegen *DoD und Spec* (und dort
 referenzierte ADRs). Das ist genau der Grund, warum Review und
-Verifikation getrennte Rollen sind — siehe [Modul 7](../03-agenten/modul-07-agentenrollen.md).
+Verifikation getrennte Rollen sind — siehe [Modul 8](../03-agenten/modul-08-agentenrollen.md).
 
 ## Lab-Bezug
 
@@ -301,4 +301,4 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 ## Weiterlesen
 
 * Source Precedence im Detail: [`../grundlagen/konventionen.md#source-precedence`](../grundlagen/konventionen.md#source-precedence)
-* Nächstes Modul: [Modul 2 — Lastenheft und Spezifikation](modul-02-lastenheft.md)
+* Nächstes Modul: [Modul 3 — Lastenheft und Spezifikation](modul-03-lastenheft.md)

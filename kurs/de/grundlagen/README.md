@@ -54,7 +54,7 @@ Jedes Modul folgt demselben Aufbau:
       zerreißen würde (Verben sind im Kursvokabular *eine* Tätigkeit,
       z. B. "*erkennen und entwerfen*" als Symptom→Gegenmaßnahme-Paar):
       Tag listet beide, getrennt durch `+`: `(Bewerten + Erschaffen ·
-      konzeptuell+prozedural)`. Vorbilder: Modul 3 LZ 4, Modul 11 LZ 4.
+      konzeptuell+prozedural)`. Vorbilder: Modul 4 LZ 4, Modul 12 LZ 4.
       Pflicht: **jedes** Verb hat eine alignment-geprobte Stelle in
       Übung oder Selbstcheck.
    3. **Höheres Verb.** Wenn die niedrigere Prozessdimension nur
@@ -63,7 +63,7 @@ Jedes Modul folgt demselben Aufbau:
       bekommt dann *Bewerten*, nicht *Verstehen + Bewerten*. Wer diese
       Form wählt, gibt zu: das niedrigere Verb ist nicht alignment-
       geprobt — was beim ersten Vorkommen in Modul 0/1 akzeptabel
-      sein kann, ab Modul 2 ein Warnzeichen ist.
+      sein kann, ab Modul 3 ein Warnzeichen ist.
 
    Prüfschritt am Ende: zähle pro Verb im Tag die alignment-geprobten
    Stellen in Übung und Selbstcheck. Null → Form 3 wählen oder
@@ -72,15 +72,15 @@ Jedes Modul folgt demselben Aufbau:
 3. **Themen** — die Konzepte des Moduls.
 4. **Kernidee** — die eine Aussage, an der das Modul hängt.
 5. **Übungen** — Hands-on, mindestens eine mit absichtlichem Fehlerfall.
-6. **Reflexion** — vier Standardfragen (Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change). Vollform mit Eintragsformat, Anti-Antworten und "Wann *nicht* reagieren": [`reflexion-vorlage.md`](reflexion-vorlage.md). Ab Modul 2 listen die Module nur die *modul-spezifischen Trigger* zu den vier Fragen — die Vollform wird in Modul 0 und 1 einmal aufgeschlagen und danach referenziert (Redundanz-Effekt, Sweller).
+6. **Reflexion** — vier Standardfragen (Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change). Vollform mit Eintragsformat, Anti-Antworten und "Wann *nicht* reagieren": [`reflexion-vorlage.md`](reflexion-vorlage.md). Ab Modul 3 listen die Module nur die *modul-spezifischen Trigger* zu den vier Fragen — die Vollform wird in Modul 0 und 1 einmal aufgeschlagen und danach referenziert (Redundanz-Effekt, Sweller).
 7. **Selbstcheck** — Fragen, die du nach dem Modul beantworten können solltest, mit Drei-Stufen-Rubrik (rudimentär/solide/exzellent).
 
 Optional zusätzlich, jeweils mit eigener Überschrift:
 
 * **Harness-Einordnung** — ordnet das Modul-Thema in die Klassifikation aus [`klassifikation.md`](klassifikation.md) ein (häufig in Phase 03–05).
 * **Mini-Glossar** — drei bis sechs Begriffsanker mit Ein-Satz-Definition und "Bild im Kopf", wenn ein Modul mindestens drei neue Begriffe einführt (Pre-Training-Effekt, Mayer/Sweller). *Positions-Konvention:* typischerweise zwischen Aufwand-Zeile und Engage, sodass die Vignette das Vokabular schon nutzen kann. Ausnahme: Modul 0 hat den Mini-Glossar bewusst *nach* Engage — die Vignette verwendet dort common-language, weil die Fachbegriffe noch nicht zugänglich sind.
-* **Vorgriff** — Kurzdefinition für Begriffe, deren Tiefen in späteren Modulen liegen (Isolated-Elements-Strategie). Vorbild: Image-Hash in [Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13).
-* **Worked Example** — fünf bis sieben prozedurale Schritte mit Anfangs- und Endzustand, ein Skip-Hinweis am Anfang (Expertise-Reversal-Schutz). Vorbilder: Modul 2, 3, 9, 12; ab Welle 6 auch Modul 8, 11, 14, 15.
+* **Vorgriff** — Kurzdefinition für Begriffe, deren Tiefen in späteren Modulen liegen (Isolated-Elements-Strategie). Vorbild: Image-Hash in [Modul 12](../04-qualitaet/modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14).
+* **Worked Example** — fünf bis sieben prozedurale Schritte mit Anfangs- und Endzustand, ein Skip-Hinweis am Anfang (Expertise-Reversal-Schutz). Vorbilder: Modul 3, 3, 9, 12; ab Welle 6 auch Modul 9, 11, 14, 15.
 * **Typische Fehlvorstellungen** — Konfrontation typischer Präkonzepte mit Begründung; offene Sammlung in [`lernervorstellungen.md`](lernervorstellungen.md).
 * **Optionale Explorations-Vorab-Übung** — Kapur-Stil-Vorab-Aufgabe vor dem Lesen des Moduls, in Modul 0 und 2 modelliert.
 
@@ -93,7 +93,7 @@ mit:
 * fünf parallelen Sprach-Skeletten (Go, Python, Kotlin, Java, C#) mit eigener Toolchain — *Roadmap, Phase C; heute noch nicht ausgeliefert*
 * Make-Targets für alle Gates (`make lint`, `make typecheck`, `make arch-check`, `make coverage-gate`, `make coverage-gate-critical`, `make gates`)
 * Root-Harness-Targets für die Kursmodule (`make agent-implement`, `make agent-review`, `make verify`, `make replay`, `make trace`, `make release`)
-* fingiertem "kaputten" Slice für die Review-Übung in [Modul 9](../04-qualitaet/modul-09-review-harness.md)
+* fingiertem "kaputten" Slice für die Review-Übung in [Modul 10](../04-qualitaet/modul-10-review-harness.md)
 * Replay-Beispiel mit Golden Set in `evals/`
 
 Arbeitsweise:

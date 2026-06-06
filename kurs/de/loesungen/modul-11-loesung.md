@@ -1,118 +1,96 @@
-# Lösung — Modul 11: Replay und Evaluierung
+# Lösung — Modul 11: Verification Harness
 
-Zugehöriges Modul: [Modul 11 — Replay und Evaluierung](../04-qualitaet/modul-11-replay-evaluierung.md).
+Zugehöriges Modul: [Modul 11 — Verification Harness](../04-qualitaet/modul-11-verification.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Welche drei Felder muss ein Replay-Manifest mindestens festhalten?
+### (Erinnern) Welche drei Eingabe-Artefakte braucht ein Verifier minimal — und wodurch unterscheiden sie sich von den Eingaben des Reviewers?
 
-1. **Modellversion** (konkrete API-Version oder Snapshot, nicht nur Familie).
-2. **Seed** (falls der Provider Seed-Parameter unterstützt).
-3. **Eingaben** als referenzierter Datensatz (Hash + Pfad), nicht inline-Text.
+**Verifier-Eingaben:** DoD · Spec · Plan.
 
-Pflichtfelder #4 und #5 in jedem ernsten Setup, wie im Modul-Abschnitt
-[Begriff: Image-Hash](../04-qualitaet/modul-11-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-13)
-erklärt:
+**Reviewer-Eingaben:** Plan · ADR · Diff.
 
-4. **Image-Hash** der Toolchain — sonst lässt sich Modell-Drift nicht
-   von Toolchain-Drift trennen.
-5. **Aufnahme-Zeitpunkt** — damit spätere Läufe ihren Diff datieren
-   können.
+Schnittmenge: nur der Plan. Genau das *erzeugt* die unterschiedlichen
+Findings — Verifier prüft "Plan↔Code↔DoD↔Spec", Reviewer prüft
+"Plan↔Diff↔ADR".
 
-Wer nur Modell + Seed pinnt, hat ~60 % Determinismus (siehe Modul 11
-§"Typische Fehlvorstellungen"). Die fehlenden 40 % erscheinen als
-diffuse Drift, die niemand klar zuordnen kann.
+Wer dem Verifier *zusätzlich* den ADR übergibt, macht ihn zum zweiten
+Reviewer und verliert die Kontext-Trennung. Wer dem Reviewer *zusätzlich*
+die Spec mit DoD übergibt, macht ihn zum vorgezogenen Verifier — auch das
+bricht die Rollen-Trennung (siehe [Lösung Modul 8](modul-08-loesung.md)).
 
-### Was muss ein Replay festhalten, damit er deterministisch ist?
+Praktische Folge: Verifier braucht eine Datei mit *allen referenzierten
+Anforderungs-IDs* und ihren Akzeptanzkriterien wörtlich (nicht nur IDs).
+Ohne das vergleicht er gegen leere Container.
 
-Mindestens diese Inputs eines Agentenlaufs:
+### Warum reicht ein grünes Testsuite-Ergebnis nicht als Verifikation?
 
-- **Modell-ID und Version** (`claude-opus-4-7@2026-06-01` reicht nicht — auch der Release-Snapshot oder die API-Version).
-- **Eingabe-Prompt** wörtlich, inklusive System-Prompt und aller injizierten Kontext-Stücke (AGENTS.md, ADRs, Spec).
-- **Tool-Definitionen** wörtlich (Name, Schema, Allowlist-Stand).
-- **Temperature, Top-P, Seed**, falls API das unterstützt.
-- **Externe Antworten**, die der Agent während des Laufs erhielt: Tool-Results, HTTP-Antworten, Dateiinhalte. Diese werden für den Replay *gemockt*, nicht neu abgerufen — sonst ist der Replay kein Replay.
+Tests prüfen *implementierte* Eigenschaften — Verification prüft, ob
+*geplante* Eigenschaften implementiert *und* getestet sind. Konkrete
+Lücken, die nur Verification fängt:
 
-Was *nicht* in den Replay gehört, sondern aufgezeichnet wird:
+- **Akzeptanzkriterien ohne Test.** Test-Suite grün, aber LH-FA-3.b ist nie geprüft worden. Verification merkt: kein Test referenziert LH-FA-3.b.
+- **Implementierter, aber unspezifizierter Code.** Tests grün, aber der getestete Code setzt eine Anforderung um, die nicht in der Spec steht (Scope-Creep). Verification meldet: Code ohne Anforderungs-Quelle.
+- **ADR-Verstoß ohne ArchUnit-Fang.** Tests grün, aber Schichtung verletzt. Verification merkt durch Strukturanalyse, dass ADR-7-Regel keinen `arch-check` hat oder dass der `arch-check` lückenhaft ist.
+- **Done ohne Closure-Notiz.** Tests grün, aber Slice landet ohne Lerneintrag in `done/`. Verification meldet: Steering-Loop-Lücke.
 
-- Aktueller Output des Agenten.
-- Aktuelle Tool-Calls.
-- Aktuelle Tokens-Verbrauch.
+Tests sind ein *Sensor*. Verification ist ein *Vergleichsmesser
+zwischen Plan und Realisierung* — sie nutzt Tests als Eingabe, ist
+aber nicht durch sie ersetzbar.
 
-Wenn ein Replay nicht deterministisch ist, ist meist eine externe
-Antwort *nicht* gemockt — der Agent ruft die Realität an, die sich
-geändert hat. Häufiger Übeltäter: Filesystem-Stand oder Datums-Funktion.
+### Wer löst den Konflikt, wenn Verification rot, Review grün ist?
 
-### Wann wird ein Golden Set giftig (überfittet)?
-
-Drei Symptome:
-
-1. **Golden grün, Realität rot**: Du fügst Replays aus echten User-Beschwerden hinzu und siehst, dass Golden weiterhin grün, aber Fehler in Produktion auftreten. Das Golden Set kennt die Realität nicht mehr.
-2. **Golden grün nur mit ein-Modell**: Du wechselst das Modell und alles ist rot. Das Set hat sich an Modell-Idiosynkrasien gewöhnt (Wort-Wahl, Reihenfolge der Tool-Calls).
-3. **Golden wird selten erweitert**: Über Wochen keine neuen Einträge. → Steering Loop läuft nicht, jedes Versagen sollte ein neues Golden-Set-Item erzeugen.
-
-Gegenmittel:
-
-- Rotieren: alte Golden-Items, deren Klasse durch andere abgedeckt ist, retiren.
-- Mischformen: semantische Bewertungsmetrik *zusätzlich* zur Exact-Match. Modelle ändern Formulierung, ohne Inhalt zu ändern.
-- Mindestens eine Welle pro Quartal: "Golden-Set-Audit", wer hat zuletzt was eingespeist, was wurde nie getriggert?
-
-### (Anwenden) Zwei Drift-Quellen — welche zuerst messen?
-
-In der ersten Woche zwei konkrete:
-
-1. **Modellversion-/Routing-Drift.** Der Provider routet "gleicher Tag"
-   intern auf verschiedene Subversions — der API-Tag bleibt stabil, das
-   Verhalten driftet. Sensor: zwei Replays desselben Manifests im Abstand
-   von Tagen vergleichen, Diff betrachten.
-2. **Toolchain-Drift.** Tool-Subversion oder Image-Hash anders als im
-   Manifest — Test-Library aktualisiert, Linter strenger, Compiler
-   anders. Sensor: Image-Hash-Vergleich zwischen Manifest und aktuellem
-   Build.
-
-Warum *diese* beiden zuerst:
-
-- Beide haben einen *sofortigen* Sensor (Manifest-Vergleich).
-- Beide sind in einer Woche messbar (drei Läufe reichen für ein Signal).
-- Beide sind *Voraussetzungen* für andere Messungen. Eingabe-Distribution
-  oder Cache-Verhalten zu messen, *bevor* Modell und Toolchain stabil
-  sind, misst Rauschen.
-
-Die Reihenfolge ist nicht beliebig. Wer zuerst Eingabe-Distribution
-analysiert, sieht Drift — aber ohne Toolchain-Pinning kann er nicht
-sagen, ob das an der Distribution oder am Linter liegt.
-
-## Übungshinweise
-
-### Reproduzierbare Testläufe gegen ein Golden Set
-
-Maßstab:
-
-- Pro Run wird ein Run-Manifest erzeugt: Modell, Seed, alle Input-Hashes, alle gemockten Antworten, Output-Hashes.
-- Zwei aufeinanderfolgende Runs derselben Eingabe erzeugen identische Manifest-Hashes (im Output) — *oder* ein semantischer Vergleicher meldet "Outputs sind äquivalent" (mit Begründung).
-- Replay-Lauf hat keinen Netzzugriff — alles aus Mock-Files.
-
-### Erzeuge eine Regression durch Modellwechsel
+Klassisches Szenario: Reviewer findet keinen Code-Smell, Verifier
+meldet "Akzeptanzkriterium LH-FA-3.b nicht erfüllt". Der Konflikt ist
+*scheinbar*: Reviewer und Verifier prüfen unterschiedliche Fragen.
 
 Vorgehen:
 
-1. Replay-Lauf mit Modell A → grün.
-2. Wechsel auf Modell B → was wird rot?
-3. Klassifiziere die roten Fälle: Format-Drift (Reihenfolge, Tokens), semantische Verschiebung, neue Fehler.
-4. Welche der drei Klassen ist akzeptabel, welche ist Show-Stopper?
+1. **Verifier-Befund hat Vorrang**, weil er gegen die *vereinbarte
+   Lieferung* misst. Reviewer-Grün bedeutet höchstens "der Code, der
+   da ist, ist sauber" — nicht "der Code, der nötig ist, ist da".
+2. **Schließe die Lücke** entweder durch Implementierung (häufigster
+   Fall) oder durch Spec-Korrektur (wenn die Anforderung im Lichte des
+   Builds keinen Sinn mehr macht — dann als Spec-Folge-Slice).
+3. **Steering-Loop-Eintrag**: warum hat der Reviewer den Mangel nicht
+   gesehen? Skill-Schärfung nötig?
 
-Diese Übung ist gleichzeitig eine Modell-Migrations-Probe. In
-Produktion bedeutet ein Modell-Update genau diesen Lauf — vorher.
+Umgekehrter Fall (Reviewer rot, Verifier grün) ist genauso informativ:
+*was* hat der Reviewer gefunden, das nicht in der Spec steht? Wenn es
+ein berechtigter Befund ist, fehlt es in der Spec — Spec-Update.
+
+## Übungshinweise
+
+### Automatische Verifikation eines Slices
+
+Mindest-Output eines Verifiers:
+
+- Liste der referenzierten Anforderungs-IDs aus dem Slice-Plan.
+- Pro ID: gibt es einen Test, der sie referenziert? Welcher?
+- Pro ID: ist mindestens ein Akzeptanzkriterium-Test grün?
+- Liste der referenzierten ADRs: gibt es einen `arch-check`, der die ADR-Regel umsetzt?
+- Liste der gefundenen "Code ohne Anforderung" — verdächtiger Scope-Creep.
+
+### Provoziere eine DoD-Verletzung
+
+Trigger:
+
+- Lass den Implementer ein Akzeptanzkriterium der DoD weglassen, aber alle Tests grün halten.
+- Lass ihn Code für eine *nicht referenzierte* Anforderung hinzufügen.
+- Lass ihn die Doku eines öffentlichen Vertrags *nicht* aktualisieren.
+
+Verifier muss alle drei melden. Wenn er nur den ersten findet, fehlen
+ihm Code-zu-Spec-Tracerouten — typisch bei ID-Schemas, die nur in der
+Spec, aber nicht in Tests verankert sind.
 
 ## Häufige Fehler
 
-- **Replay-Tests laufen mit echtem Netz**. → Kein Replay, sondern Live-Test mit alten Erwartungen. Wird flaky.
-- **Exact-Match als einziges Erfolgskriterium.** → Modelle sind variabel; minimaler Format-Drift erzeugt False-Positive-Failures. Mindestens *eine* semantische Metrik dazu.
-- **Golden Set wird in einem CSV gepflegt**, das niemand reviewt. → Wenn Golden-Set-Änderungen nicht durch denselben Slice-Lifecycle laufen wie Code, driften sie.
+- **Verification mit Test-Suite verwechseln.** "Wir haben `make test` — wir verifizieren." → Nein, du testest. Verification fragt: stimmen Plan, Code und Test miteinander überein?
+- **Verifier hat keinen Zugriff auf die Spec-IDs.** → Er kann nur ein Subset prüfen. ID-Schema mit Cross-Referenzen Spec → Test → Code ist Voraussetzung für sinnvolle Verification.
+- **Pre-completion Checklist wird zur reinen Format-Pflicht.** → Checklist muss *spezifische* Items pro Slice enthalten (siehe [Lösung Modul 9](modul-09-loesung.md)).
 
 ## Verweise
 
-- Test-Diversität (Determinism/Replay/Fault): [Modul 11](../04-qualitaet/modul-11-replay-evaluierung.md)
-- grid-gym als reales Beispiel: [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
+- Behaviour Harness als Kategorie: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
 - Vorherige Lösung: [Modul 10](modul-10-loesung.md)
 - Nächste Lösung: [Modul 12](modul-12-loesung.md)

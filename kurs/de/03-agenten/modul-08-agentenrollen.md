@@ -1,4 +1,4 @@
-# Modul 7 — Agentenrollen
+# Modul 8 — Agentenrollen
 
 > **Aufwand:** ca. 90 Min Lesen · 75 Min Übung. Spiralcurriculum: Verifikation vs. Validation kennst du aus [Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md) — hier werden sie zu eigenen Rollen mit eigenem Kontext.
 
@@ -6,16 +6,16 @@
 
 Die Rollen-Sequenz und der Konfliktfall verweisen mehrfach auf den
 *Minimal Agent Workflow* (acht Schritte), den der Implementation-Agent
-durchläuft. **Für Modul 7 reichen drei Anker:**
+durchläuft. **Für Modul 8 reichen drei Anker:**
 
 | Anker | Was dahintersteht | Vollform |
 |---|---|---|
-| **Plan vor Code** | Implementation-Agent gibt vor dem ersten Diff einen Plan mit Akzeptanzkriterien aus. | [Modul 8 §Minimal Agent Workflow](modul-08-implementierung.md#minimal-agent-workflow-8-schritte) |
-| **Pre-completion Checklist** | Selbstprüfung des Agenten *vor* der Übergabe an Reviewer — Schritt 7/8 des Workflows. | [Modul 8 §Minimal Agent Workflow](modul-08-implementierung.md#minimal-agent-workflow-8-schritte), Schritte 7–8 |
-| **Steering-Loop-Eintrag** | Jeder Lauf endet mit einem expliziten Notiz-Block, der das nächste Sensor-/Guide-Wachstum vorbereitet. | [Modul 8 §Worked Example](modul-08-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow) (Schluss-Block) und [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md) |
+| **Plan vor Code** | Implementation-Agent gibt vor dem ersten Diff einen Plan mit Akzeptanzkriterien aus. | [Modul 9 §Minimal Agent Workflow](modul-09-implementierung.md#minimal-agent-workflow-8-schritte) |
+| **Pre-completion Checklist** | Selbstprüfung des Agenten *vor* der Übergabe an Reviewer — Schritt 7/8 des Workflows. | [Modul 9 §Minimal Agent Workflow](modul-09-implementierung.md#minimal-agent-workflow-8-schritte), Schritte 7–8 |
+| **Steering-Loop-Eintrag** | Jeder Lauf endet mit einem expliziten Notiz-Block, der das nächste Sensor-/Guide-Wachstum vorbereitet. | [Modul 9 §Worked Example](modul-09-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow) (Schluss-Block) und [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md) |
 
-Wenn dir die drei Anker reichen, lies Modul 7 zuende. Wenn nicht: kurzer
-Sprung in Modul 8 §Workflow, dann zurück.
+Wenn dir die drei Anker reichen, lies Modul 8 zuende. Wenn nicht: kurzer
+Sprung in Modul 9 §Workflow, dann zurück.
 
 ## Engage
 
@@ -49,7 +49,7 @@ sequenceDiagram
     P->>A: Slice-Plan, Bezug auf LH-*
     A-->>P: ADR-Bezüge bestätigt (oder Folge-ADR)
     P->>I: Slice in in-progress/
-    I->>I: 8-Schritt-Workflow (Modul 8)
+    I->>I: 8-Schritt-Workflow (Modul 9)
     I->>R: PR mit Diff + Plan-Verweis
     R-->>I: Findings HIGH/MEDIUM/LOW/INFO
     I->>Vf: nach Review-Schluss
@@ -198,7 +198,7 @@ oder begründet, Reviewer schließt das Finding. Die Sequenz greift ab
 *HIGH*-Findings mit Rollen-Widerspruch oder ab dem dritten Mal, dass
 derselbe Konflikttyp auftritt. Dreimal derselbe Konflikt ist ein
 Steering-Loop-Signal (siehe [`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md#wann-darf-eine-reflexion-nicht-zu-einer-harness-änderung-führen)):
-die Sequenz wird *Pflicht* im 8-Schritt-Workflow ([Modul 8](modul-08-implementierung.md#minimal-agent-workflow-8-schritte)).
+die Sequenz wird *Pflicht* im 8-Schritt-Workflow ([Modul 9](modul-09-implementierung.md#minimal-agent-workflow-8-schritte)).
 
 Sieben Schritte, eine Sequenz, sechs benannte Übergaben. Der Test, ob
 die Modellierung trägt: der nächste Konflikt durchläuft die Pfeile
@@ -242,4 +242,4 @@ Modul-spezifische Trigger:
 
 ## Weiterlesen
 
-* Nächstes Modul: [Modul 8 — Implementierung durch KI-Agenten](modul-08-implementierung.md)
+* Nächstes Modul: [Modul 9 — Implementierung durch KI-Agenten](modul-09-implementierung.md)

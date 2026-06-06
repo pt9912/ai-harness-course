@@ -1,96 +1,105 @@
-# Lösung — Modul 10: Verification Harness
+# Lösung — Modul 10: Review Harness
 
-Zugehöriges Modul: [Modul 10 — Verification Harness](../04-qualitaet/modul-10-verification.md).
+Zugehöriges Modul: [Modul 10 — Review Harness](../04-qualitaet/modul-10-review-harness.md).
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Welche drei Eingabe-Artefakte braucht ein Verifier minimal — und wodurch unterscheiden sie sich von den Eingaben des Reviewers?
+### (Erinnern) Welche vier Finding-Kategorien gibt es, und welche zwei blockieren typischerweise den Merge?
 
-**Verifier-Eingaben:** DoD · Spec · Plan.
+Die vier Kategorien:
 
-**Reviewer-Eingaben:** Plan · ADR · Diff.
+- **HIGH** — blockiert Merge: Sicherheits-, Korrektheits- oder ADR-Verstoß.
+- **MEDIUM** — sollte vor Merge geklärt werden; formal nicht *immer* Blocker, aber Standard-Erwartung.
+- **LOW** — nice-to-fix, blockiert nicht.
+- **INFO** — Hinweis ohne erwartete Aktion.
 
-Schnittmenge: nur der Plan. Genau das *erzeugt* die unterschiedlichen
-Findings — Verifier prüft "Plan↔Code↔DoD↔Spec", Reviewer prüft
-"Plan↔Diff↔ADR".
+Harter Blocker: **HIGH**. Soll-Blocker: **MEDIUM**.
 
-Wer dem Verifier *zusätzlich* den ADR übergibt, macht ihn zum zweiten
-Reviewer und verliert die Kontext-Trennung. Wer dem Reviewer *zusätzlich*
-die Spec mit DoD übergibt, macht ihn zum vorgezogenen Verifier — auch das
-bricht die Rollen-Trennung (siehe [Lösung Modul 7](modul-07-loesung.md)).
+Die LOW/MEDIUM-Trennlinie ist *repo-spezifisch* und gehört in den
+Reviewer-Skill (`.harness/skills/reviewer.md`). Ohne Skill-Eintrag
+wandert dieselbe Beobachtung zwischen Läufen — und genau das war der
+Anlass für das Skill-Konzept im Worked Example von Modul 10.
 
-Praktische Folge: Verifier braucht eine Datei mit *allen referenzierten
-Anforderungs-IDs* und ihren Akzeptanzkriterien wörtlich (nicht nur IDs).
-Ohne das vergleicht er gegen leere Container.
+### Wann wird aus einem LOW-Finding ein HIGH-Finding?
 
-### Warum reicht ein grünes Testsuite-Ergebnis nicht als Verifikation?
+Die Kategorie ist *kontextabhängig*. Ein und dasselbe Finding kann
+wandern, wenn:
 
-Tests prüfen *implementierte* Eigenschaften — Verification prüft, ob
-*geplante* Eigenschaften implementiert *und* getestet sind. Konkrete
-Lücken, die nur Verification fängt:
+- Der **Geltungsbereich** sich erweitert. Eine unbenutzte Variable in einem Hilfsskript ist LOW. Dieselbe unbenutzte Variable in einem Sicherheits-Check-Pfad ist HIGH, weil sie nahelegt, dass ein Check vergessen wurde.
+- Das **Wiederholungs-Muster** sichtbar wird. Ein einmaliges Typing-Lapsus ist LOW. Dasselbe Muster zum dritten Mal in derselben Sitzung ist ein Symptom — und damit MEDIUM oder HIGH, weil es auf eine Lücke in AGENTS.md oder einer ADR hinweist.
+- **Externe Wirkung** sich ändert. Ein dokumentations-Tippfehler ist LOW. Derselbe Tippfehler in einer öffentlichen API-Beschreibung, die in eine Vertrags-Doku eingeht (Compliance-Repo), ist HIGH.
+- Der **Slice in Produktion** geht. Was im Lab LOW war, kann im Release MEDIUM oder HIGH werden — Stichwort: fail-closed.
 
-- **Akzeptanzkriterien ohne Test.** Test-Suite grün, aber LH-FA-3.b ist nie geprüft worden. Verification merkt: kein Test referenziert LH-FA-3.b.
-- **Implementierter, aber unspezifizierter Code.** Tests grün, aber der getestete Code setzt eine Anforderung um, die nicht in der Spec steht (Scope-Creep). Verification meldet: Code ohne Anforderungs-Quelle.
-- **ADR-Verstoß ohne ArchUnit-Fang.** Tests grün, aber Schichtung verletzt. Verification merkt durch Strukturanalyse, dass ADR-7-Regel keinen `arch-check` hat oder dass der `arch-check` lückenhaft ist.
-- **Done ohne Closure-Notiz.** Tests grün, aber Slice landet ohne Lerneintrag in `done/`. Verification meldet: Steering-Loop-Lücke.
+Faustregel: Wenn Reviewer und Implementer über die Kategorisierung
+streiten, ist die Spec oder die ADR-Schicht zu vage. Streit über
+Kategorisierung ist ein Steering-Loop-Signal: die Klassifikations-Regel
+gehört geschärft.
 
-Tests sind ein *Sensor*. Verification ist ein *Vergleichsmesser
-zwischen Plan und Realisierung* — sie nutzt Tests als Eingabe, ist
-aber nicht durch sie ersetzbar.
+### Was tust du, wenn der Reviewer-Agent dasselbe Finding zweimal mit unterschiedlicher Kategorie meldet?
 
-### Wer löst den Konflikt, wenn Verification rot, Review grün ist?
+Drei Schritte:
 
-Klassisches Szenario: Reviewer findet keinen Code-Smell, Verifier
-meldet "Akzeptanzkriterium LH-FA-3.b nicht erfüllt". Der Konflikt ist
-*scheinbar*: Reviewer und Verifier prüfen unterschiedliche Fragen.
+1. **Nicht eine der beiden Kategorien wählen** — beide ernst nehmen.
+2. **Frage stellen: Welcher Kontext-Unterschied erklärt die Differenz?** Wenn beim ersten Lauf andere ADRs im Kontext waren als beim zweiten, ist die Differenz informativ — der Reviewer ist ohne Kontext strenger oder lascher. Das ist eine Lücke im *Reviewer-Eingang*, nicht im Code.
+3. **Eintrag in den Steering Loop**: Reviewer-Skill braucht eine Schärfung — welche Kriterien die Kategorie HIGH von MEDIUM trennen, gehört ins Skill-Dokument.
 
-Vorgehen:
+Anti-Antwort: "Nehmen wir die mildere — Agent hat sich selbst korrigiert."
+Das ist die Falle. Der Agent ist nicht "neutraler" geworden, sondern
+sieht jetzt einen anderen Kontext — und du belohnst gerade Inkonsistenz.
 
-1. **Verifier-Befund hat Vorrang**, weil er gegen die *vereinbarte
-   Lieferung* misst. Reviewer-Grün bedeutet höchstens "der Code, der
-   da ist, ist sauber" — nicht "der Code, der nötig ist, ist da".
-2. **Schließe die Lücke** entweder durch Implementierung (häufigster
-   Fall) oder durch Spec-Korrektur (wenn die Anforderung im Lichte des
-   Builds keinen Sinn mehr macht — dann als Spec-Folge-Slice).
-3. **Steering-Loop-Eintrag**: warum hat der Reviewer den Mangel nicht
-   gesehen? Skill-Schärfung nötig?
+### (Anwenden) 17 Findings — welche ersten drei Aktionen?
 
-Umgekehrter Fall (Reviewer rot, Verifier grün) ist genauso informativ:
-*was* hat der Reviewer gefunden, das nicht in der Spec steht? Wenn es
-ein berechtigter Befund ist, fehlt es in der Spec — Spec-Update.
+1. **Nach Kategorie sortieren, HIGH zuerst lesen.** Findings ohne
+   Kategorie sind Mängelliste, nicht Entscheidungsvorlage — wenn der
+   Reviewer-Agent das nicht liefert, ist sein Skill zu schwach (Modul 10
+   §"Reviewer berichtet auch, was er nicht gefunden hat").
+2. **HIGH-Findings prüfen — gegen welche Quelle?** Jedes HIGH muss eine
+   *Quelle* nennen (ADR-ID, Hard Rule, LH-ID). Wenn keine Quelle:
+   Reviewer-Skill hat keine "Klassifikations-Anker" — Steering-Loop-Eintrag.
+3. **MEDIUM-Findings clustern, LOW/INFO erstmal überspringen.** Wenn
+   mehrere MEDIUM derselben Klasse vorliegen (z. B. "fehlende
+   Negativtests in fünf Endpunkten"), wandert das Cluster nach oben — es
+   ist ein Symptom einer Spec-Lücke, kein Einzelproblem.
+
+Die Falle (siehe Engage von Modul 10): am ersten LOW-Finding hängenbleiben,
+zwei Stunden Tippfehler beheben, vier HIGH-Findings unten gehen unter.
+HIGH zuerst, immer — auch wenn die LOW-Findings einfacher aussehen.
 
 ## Übungshinweise
 
-### Automatische Verifikation eines Slices
+### Review realer Änderungen im Begleit-Repo
 
-Mindest-Output eines Verifiers:
+Maßstab:
 
-- Liste der referenzierten Anforderungs-IDs aus dem Slice-Plan.
-- Pro ID: gibt es einen Test, der sie referenziert? Welcher?
-- Pro ID: ist mindestens ein Akzeptanzkriterium-Test grün?
-- Liste der referenzierten ADRs: gibt es einen `arch-check`, der die ADR-Regel umsetzt?
-- Liste der gefundenen "Code ohne Anforderung" — verdächtiger Scope-Creep.
+- Reviewer-Lauf ist *reproduzierbar* (gleiche Eingabe, gleicher Diff, sehr ähnliche Findings).
+- Jedes Finding ist *kategorisiert* — kein Finding ohne HIGH/MEDIUM/LOW/INFO.
+- Jedes HIGH-Finding nennt die *Quelle* (ADR-ID, Anforderungs-ID oder Hard Rule).
+- Reviewer berichtet auch das, was er *nicht* gefunden hat ("keine Sicherheits-Anti-Pattern in `internal/auth/`") — Negativbefunde sind Vertrauen.
 
-### Provoziere eine DoD-Verletzung
+### Reviewe den fingierten kaputten Slice
 
-Trigger:
+Der Slice unter
+[`/lab/example/exercises/09-review-fixture/`](../../../lab/example/exercises/09-review-fixture/)
+enthält drei eingebaute Fehler, die in *drei verschiedene Kategorien*
+fallen sollen. Erwarteter Befund (bezogen auf das Cache/Service-Layer-Szenario):
 
-- Lass den Implementer ein Akzeptanzkriterium der DoD weglassen, aber alle Tests grün halten.
-- Lass ihn Code für eine *nicht referenzierte* Anforderung hinzufügen.
-- Lass ihn die Doku eines öffentlichen Vertrags *nicht* aktualisieren.
+- **Ein HIGH** — *ADR-Verstoß*: DoD-Item 2 *"Cache umgeht den Index-Layer komplett"* verletzt ADR-0001 (Hexagonale Architektur, [`/lab/example/docs/plan/adr/0001-hexagonale-architektur.md`](../../../lab/example/docs/plan/adr/0001-hexagonale-architektur.md)). Der Service-Layer darf den Index-Layer nicht überspringen. Korrektur: *Read-through-Cache* hinter dem Index-Layer, nicht davor. Reviewer muss ADR-0001 im Eingangs-Kontext haben — ohne ADR im Kontext bleibt der Verstoß unsichtbar (genau das ist Lehrstoff: Reviewer-Eingang ist Pflicht, nicht Komfort).
+- **Ein MEDIUM** — *Spec-Lücken-Symptom plus Selbstabsolution*: Abschnitt 6 begründet das Stale-Read-Risiko mit *"… aber das ist OK, weil Cache eh nur 1 Minute TTL hat"*. Die Begründung absolviert sich selbst, ohne gegen LH-QA-01 (Performance + Korrektheit) evaluiert zu werden. Reviewer-Frage: was geschieht, wenn ein Reindex *gleichzeitig* mit Cache-Hits läuft? Wenn der Slice das nicht beantwortet, ist die Spec an dieser Stelle stumm — und 1 Minute TTL ist eine Setzung ohne Beleg.
+- **Ein LOW** — *stilistisch ohne semantische Auswirkung*: Der Closure-Trigger (Abschnitt 5) lautet *"DoD vollständig, Cache funktioniert"*. Das ist tautologisch — ein Trigger soll ein *überprüfbares Ereignis* sein (Latenz-Messung im Closure-Eintrag, Cache-Hit-Rate über drei Tage), nicht ein Selbstbezug auf die DoD.
 
-Verifier muss alle drei melden. Wenn er nur den ersten findet, fehlen
-ihm Code-zu-Spec-Tracerouten — typisch bei ID-Schemas, die nur in der
-Spec, aber nicht in Tests verankert sind.
+Wenn dein Reviewer-Agent nur HIGH-Findings produziert, ist er
+übersensibilisiert; nur LOW deutet auf zu schwache Skills hin. Wenn er
+das HIGH *nicht* findet, hatte er ADR-0001 nicht im Eingangs-Kontext —
+prüfe die Reviewer-Eingabe, nicht das Modell.
 
 ## Häufige Fehler
 
-- **Verification mit Test-Suite verwechseln.** "Wir haben `make test` — wir verifizieren." → Nein, du testest. Verification fragt: stimmen Plan, Code und Test miteinander überein?
-- **Verifier hat keinen Zugriff auf die Spec-IDs.** → Er kann nur ein Subset prüfen. ID-Schema mit Cross-Referenzen Spec → Test → Code ist Voraussetzung für sinnvolle Verification.
-- **Pre-completion Checklist wird zur reinen Format-Pflicht.** → Checklist muss *spezifische* Items pro Slice enthalten (siehe [Lösung Modul 8](modul-08-loesung.md)).
+- **Reviewer als zweiter Implementer.** "Hier ist mein Vorschlag, wie du es schreiben könntest." → Reviewer kategorisiert Findings; Lösungsvorschläge sind nett, aber kein Reviewer-Ergebnis.
+- **Reviewer ohne Skill-Datei.** → Verhalten driftet zwischen Sessions. Jeder Reviewer-Agent braucht ein Skill-Dokument mit "worauf achtest du in diesem Repo".
+- **Findings-Liste ohne Prioritätssortierung.** → Auftragnehmer arbeitet sequenziell ab und steckt oft beim LOW-Finding fest. HIGH zuerst, immer.
 
 ## Verweise
 
-- Behaviour Harness als Kategorie: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
+- 2×2-Klassifikation + Maintainability-Kategorie: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md) — Review ist Inferential + Feedback, primär in der Maintainability-Kategorie.
 - Vorherige Lösung: [Modul 9](modul-09-loesung.md)
 - Nächste Lösung: [Modul 11](modul-11-loesung.md)

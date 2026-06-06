@@ -1,6 +1,6 @@
 # Release-Checkliste — DocSearch-Lab
 
-Diese Checkliste ist ein Lehr-Fixture fuer Modul 15. Jedes Item braucht
+Diese Checkliste ist ein Lehr-Fixture fuer Modul 16. Jedes Item braucht
 einen Beleg, nicht nur ein Haekchen.
 
 | Item | Beleg |
