@@ -252,9 +252,10 @@ diesem Draft nicht weiter operationalisiert, gehört in P4-Lehrtext.
 |---|---|---|
 | P0 | Commit der initialen Status→Bindung-Edits | ✅ done (Commit `87e6030`) |
 | P1 | Konsolidierende Edits in konventionen.md und Modul 1 | ✅ done (Commit `0a99882`) |
-| P2 | `lab/templates/harness/conventions.template.md` + Index + Worked Example | offen |
-| P3 | Querverweise in `modul-08`, `modul-12`, `abschlussprojekt`, `fallstudien`, `lab/example/AGENTS.md` | offen |
-| P4 | Bootstrap-Lehrtext aus diesem Draft destillieren | offen, nicht im aktuellen Branch geplant |
+| P2 | `lab/templates/harness/conventions.template.md` + Index + Worked Example | ✅ done (Commit `625fa98`) |
+| P3.1 | Querverweise im Lab-Beispiel (`harness/README.md`, `AGENTS.md`) — Trigger T1/T2 | ✅ done (Commit `be82d7f`) |
+| P3.2 | Kurs-Querverweise (`modul-08`, `modul-12`, `abschlussprojekt`, `fallstudien`) | ✅ done (Commit `ef122b8`) |
+| P4 | Bootstrap-Lehrtext aus diesem Draft destillieren | offen, eigene Session |
 
 ### Aus der Bootstrap-Session (neu)
 

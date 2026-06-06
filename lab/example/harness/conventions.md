@@ -44,8 +44,12 @@ Der Default-Ort für:
 
 ## Zusatzklassen-Deklaration für Sensors-Bindung
 
-— keine — (DocSearch verwendet die vier kanonischen Bindung-Klassen
-ADR · Carveout · Schwelle · Reproduzierbarkeit ohne Erweiterung.)
+DocSearch nutzt neben den vier kanonischen Bindung-Klassen (ADR ·
+Carveout · Schwelle · Reproduzierbarkeit) **eine** Zusatzklasse:
+
+| Klasse | Form | Bedeutung | Beispiel im Repo |
+|---|---|---|---|
+| LH-Bindung | `LH-FA-<NNN>` · `LH-QA-<NNN>` | Gate prüft direkt eine Anforderung aus `spec/lastenheft.md` | `LH-QA-02` als Bindung von `make test-determinism` (siehe [`README.md` §Sensors](README.md#sensors-feedback-gates)) |
 
 ## Modus-Deklaration pro Sub-Area
 

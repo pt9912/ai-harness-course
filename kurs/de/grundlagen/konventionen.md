@@ -163,7 +163,7 @@ Ein konsistentes Präfix (`LH-*`, `HSM-*`, `GG-*`) verbindet:
 
 Damit wird der Traceability-Constraint maschinell prüfbar.
 
-## `harness/README.md` als Einstiegspunkt
+## harness/README.md als Einstiegspunkt
 
 Pro Repo bündelt eine einzige Datei alles, was ein Agent oder ein neuer
 Mensch zuerst lesen muss. Pflichtgliederung:
