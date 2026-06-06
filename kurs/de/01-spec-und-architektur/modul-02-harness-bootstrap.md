@@ -356,32 +356,169 @@ selbst eine Phasen-Karte für ein eigenes Artefakt aus.
 
 ## Übungen
 
-(P5 Phase F3 — drei Übungen, jede gegen genau ein Lernziel
-verankert. Trigger-Übung nutzt Alternativ-Vorlage mit
-DocSearch-Beispiel-Trigger, weil Modul 2 vor dem ersten Slice liegt.)
+Drei Übungen, jede gegen genau ein Lernziel aus dem §Lernziele-Block
+verankert. Das Lernziel *Verstehen · konzeptuell* wird durch die
+Klassifikations-Vorstufe von Übung 1 implizit geprüft — wer korrekt
+klassifiziert, hat die GF/BF/Hybrid-Unterscheidung verstanden.
+
+### Übung 1 — Modus pro Sub-Area klassifizieren (LZ Anwenden · prozedural)
+
+Klassifiziere dein eigenes Repo nach Modus pro Sub-Area. Tabellen-
+Vorlage:
+
+| Sub-Area | Modus (GF/BF/Hybrid) | Beobachtungs-Indiz | Unsicherheit? |
+|---|---|---|---|
+| Konventionen | … | … | … |
+| Spec-Schreibung | … | … | … |
+| Architektur | … | … | … |
+| Test-Infrastruktur | … | … | … |
+| Build/CI | … | … | … |
+
+*Mindestens drei Sub-Areas befüllen.* Pro Zeile:
+
+1. **Modus** — GF, BF oder Hybrid.
+2. **Beobachtungs-Indiz** — konkretes Indiz (z. B. *"AGENTS.md
+   existiert seit drei Monaten, aber Tests-Verzeichnis verweist
+   immer noch auf alten Pfad"* → BF in *Test-Infrastruktur*).
+3. **Unsicherheit** — was du nachschlagen musst, um die Wahl
+   abschließend zu treffen.
+
+*Erfolgskriterium:* mindestens *eine* Sub-Area, die du anders
+klassifizierst, als du vor dem Modul-Lesen vermutet hättest. Wenn
+deine Kapur-Vorab-Übung komplett mit dieser Übung übereinstimmt,
+hast du wahrscheinlich oberflächlich klassifiziert.
+
+### Übung 2 — Trigger-Klassen zuordnen (LZ Analysieren · konzeptuell)
+
+**Alternativ-Vorlage (Standard für dieses Modul, weil Modul 2 vor
+dem ersten Slice liegt):** Identifiziere fünf Trigger aus der
+DocSearch-Beispiel-Trigger-Liste in §Worked Example 1 und ordne sie
+den vier Trigger-Klassen aus
+[`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)
+zu:
+
+| Trigger | Klasse | Begründung |
+|---|---|---|
+| T1 (Pointer in `harness/README.md` auf `conventions.md`) | Sync-Trigger | … |
+| T2 (Pointer in `AGENTS.md`) | … | … |
+| T4 (Promotion bei Code-Slice) | … | … |
+| T5 (erste ADR-Vorschläge aus Architektur-Outline) | … | … |
+| T6 oder T7 (Cross-Reference Spec↔ADR / ADR-Review) | … | … |
+
+*Optional, falls du schon einen Slice durchlaufen hast:* Nimm fünf
+Trigger aus deinem letzten Slice statt aus dem DocSearch-Beispiel.
+Diese Variante setzt eigene Slice-Erfahrung voraus — sie ist die
+Transfer-Form der Übung.
+
+### Übung 3 — Phasen-Karte ausfüllen (LZ Erschaffen · prozedural)
+
+Erstelle eine Phasen-Karte für ein Artefakt deiner Wahl (z. B.
+`harness/conventions.md`, `spec/lastenheft.md`,
+`docs/plan/planning/roadmap.md`). **Faded scaffolding** — die Hälfte
+der Vorlage ist gefüllt, den Rest füllst du selbst:
+
+| Sektion | Aktuelle Phase (1–5) | Begründung | Nächster Modus-/Trigger-Anker |
+|---|---|---|---|
+| §Kernidee | 4 | "Vertrag steht, Code wird daran gemessen" | bei Spec-Änderung → T6 Cross-Reference-Trigger zur ADR |
+| §Sensors | … | … | … |
+| §Source Precedence | 2 | "Top-Level-Wunschbild, noch nicht durchverbunden" | … |
+| §Closure-Regel | … | … | … |
+| §Adaption | 1 | "Template kopiert, Versprechen zu füllen" | … |
+
+*Mindestens drei Zeilen vollständig ausfüllen* (auch die noch nicht
+gestarteten — Phase 1 ist eine legitime Reife). Die Phase-Stufen
+1–5 stehen in der Phase × Modus-Matrix weiter oben.
+
+*Erfolgskriterium:* mindestens eine Sektion in einer anderen Phase
+als die übrigen — sektionsweise Reife ist das Lehr-Ergebnis, und
+genau diese Heterogenität ist der Punkt der Übung.
 
 ## Reflexion
 
-(P5 Phase F3 — Reflexionsfragen nach Vorlage
-[`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md);
-metakognitive Frage als Träger für das Lernziel
-"Überwachen · metakognitiv".)
+Verwende die vier Standardfragen aus
+[`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
+(Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change)
+nach den Übungen. Modul-spezifische Trigger:
+
+- **Beobachtung:** Welche Sub-Area-Klassifikation in Übung 1 hat
+  dich überrascht — und was hat dich vorher in eine andere Lesart
+  kippen lassen?
+- **2×2-Quadrant:** Bootstrap-Diagnose ist klassisch *inferential
+  feedforward* (siehe
+  [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)) —
+  die Diagnose wirkt *vor* der Aktion, nicht *nach*.
+- **Steering-Loop:** Welche Sub-Area in deinem Repo trägt heute
+  eine Modus-Aussage, die du beim nächsten Slice prüfen lässt?
+  Welcher Sensor (Make-Target, Doc-Konsistenz-Agent, Closure-Note)
+  würde das prüfen?
+- **Conceptual Change:** Vergleiche deinen Konvictions-Check
+  (§Vorab — was hältst du heute für wahr?) mit deiner heutigen
+  Antwort. Welche Vorstellung hat sich verschoben? Kandidaten in
+  [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md)
+  (insbesondere FV1, FV2 aus §Typische Fehlvorstellungen).
+
+**Metakognitive Reflexionsfrage** (Träger für Lernziel
+*Überwachen · metakognitiv*):
+
+> In welcher Sub-Area deines Repos bist du dir *gerade jetzt*
+> unsicher, welcher Modus gilt — und was wäre dein nächster Schritt,
+> diese Unsicherheit aufzulösen?
+
+Die Frage prüft nicht *was du weißt*, sondern *ob du beobachten
+kannst, was du nicht weißt*. Diese Selbstüberwachung ist die
+metakognitive Kompetenz, ohne die Bootstrap-Diagnose im laufenden
+Betrieb still verfällt.
 
 ## Selbstcheck
 
-(P5 Phase F3 — Selbstcheck-Fragen.)
+* **(Verstehen — geprüft durch Übung 1)** Was unterscheidet
+  GF-Modus von BF-Modus? Warum gilt der Modus *pro Sub-Area* und
+  nicht pro Repo?
+* **(Erinnern)** Welche vier Trigger-Klassen gibt es laut
+  [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)?
+  Nenne pro Klasse ein Beispiel aus den beiden Worked Examples.
+* **(Analysieren — aktiviert durch Übung 2)** Welcher Trigger in
+  Worked Example 2 macht den BF-Modus-Übergang sichtbar — und
+  warum gerade dieser?
+* **(Erschaffen — aktiviert durch Übung 3)** Was bedeutet *Phase 4
+  kohärent* in GF gegenüber BF? Nenne pro Modus ein konkretes
+  Indiz aus der Phase × Modus-Matrix.
+* **(Konvictions-Check-Rückgriff)** Vergleiche jetzt deine
+  Spontanantworten zu den drei §Vorab-Fragen mit deiner heutigen
+  Antwort. Welche hat sich verschoben? Welche ist gleich geblieben
+  — und warum hält sie?
 
 ### Selbstcheck-Rubrik
 
-(P5 Phase F3 — kriteriale Rubrik nach Vorlage
-[`../grundlagen/selbstcheck-rubrik.md`](../grundlagen/selbstcheck-rubrik.md)
-mit Stufen rudimentär · solide · exzellent.)
+Die generische Erklärung der drei Stufen steht in
+[`../grundlagen/selbstcheck-rubrik.md`](../grundlagen/selbstcheck-rubrik.md);
+die modulspezifischen Indikatoren sind:
+
+| Frage | rudimentär | solide | exzellent |
+|---|---|---|---|
+| GF vs. BF, pro Sub-Area? | "GF = Doku führt, BF = Code führt." | Plus Sub-Area-Argument mit Beispiel ("ein Repo kann in *Konventionen* BF und in *Spec-Schreibung* GF sein"), Verweis auf `fallstudien.md` §Beobachtung. | + Hybrid-Fall benannt; Erklärung, warum die Repo-Ebene zu grob für die Modus-Entscheidung ist (Verweis auf die vier Trigger-Klassen als kontextuelle Differenzierung). |
+| Vier Trigger-Klassen, je ein Beispiel? | Drei Klassen genannt, ohne Worked-Example-Bezug. | Alle vier Klassen genannt + je ein Trigger aus WE1 oder WE2 als Beispiel. | + Begründung, warum die vier Klassen *erschöpfend* sind (was würde nicht in eine der vier passen?); Verweis auf `konventionen.md` §Vier Trigger-Klassen für die Definition. |
+| Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz-Trigger". | T3 (Diskrepanz-Trigger) bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht. | + Pointe: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt — ohne T3-Anker bleibt die Inventur Selbstzweck. |
+| Phase 4 kohärent in GF vs. BF? | "In GF steht der Vertrag, in BF die Inventur." | GF Phase 4: *Vertrag steht, Code wird daran gemessen* (z. B. CI-Gates greifen). BF Phase 4: *Inventur abgeglichen, Diskrepanz-Schock sichtbar* (z. B. CO-DS-* oder Reconc.-Slice-Backlog). | + Begründung, warum *Phase 4* die kritische Stufe in BF ist (vorher: Inventur arbeitet, nachher: Reconciliation läuft); Verweis auf Modul 7 §Carveouts für die `CO-DS-*`-Konvention. |
+| Konvictions-Check: welche Verschiebung? | Keine Verschiebung benannt oder pauschal "alles klarer". | Eine konkrete Antwort: welche §Vorab-Frage hat sich um welchen Halbsatz verschoben? Verweis auf eine Fehlvorstellung (FV1–FV4), die deine Spontanantwort getragen hat. | + Pointe: welche Vorstellung gleich geblieben ist und *warum sie hält* — Conceptual-Change-Reflexion verlangt, beides zu zeigen, nicht nur Verschiebung. |
 
 ## Weiterlesen
 
-* Konzept-Anker für alle Bootstrap-Begriffe:
+* Konzept-Anker für alle Bootstrap-Begriffe und die vier
+  Trigger-Klassen:
   [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap).
+* Verbindung zum Steering-Loop (Bootstrap = initiale
+  Steering-Loop-Anwendung):
+  [`../grundlagen/konventionen.md` §Verbindung zum Steering-Loop](../grundlagen/konventionen.md#verbindung-zum-steering-loop).
 * Die vier Beispiel-Repos in GF/BF-Klassifikation:
   [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand).
+* Modus-*Wahl* als Planungs-Entscheidung (Diagnose aus diesem Modul
+  → Wahl im nächsten Slice):
+  [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harness.md).
+* Steering-Loop im Steady-State (was Bootstrap *nach* Graduation
+  wird):
+  [Modul 11 — Verification Harness](../04-qualitaet/modul-11-verification.md).
+* Lernervorstellungen-Sammlung für Conceptual-Change-Reflexion:
+  [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md).
 * Vorheriges Modul: [Modul 1 — Der Entwicklungszyklus](modul-01-entwicklungszyklus.md).
 * Nächstes Modul: [Modul 3 — Lastenheft und Spezifikation](modul-03-lastenheft.md).
