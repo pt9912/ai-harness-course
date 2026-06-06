@@ -113,7 +113,7 @@ exzellent). Lesart: *Wer Pfad X läuft, sollte am Ende mindestens die
 gelistete Stufe in den genannten Selbstchecks erreichen — andernfalls ist
 der Pfad nicht abgeschlossen, auch wenn die Module gelesen wurden.*
 
-Die Anker sind bewusst **schmal** (4–6 Module pro Pfad), nicht alle 16 —
+Die Anker sind bewusst **schmal** (4–6 Module pro Pfad), nicht alle 17 —
 sonst zerfällt die Pfad-Idee. Module, die hier *nicht* gelistet sind, sind
 für den Pfad nicht weniger wichtig, aber unter *rudimentär* akzeptabel.
 
@@ -121,42 +121,42 @@ für den Pfad nicht weniger wichtig, aber unter *rudimentär* akzeptabel.
 
 | Modul | Mindest-Stufe | Begründung |
 |---|---|---|
-| 2 (Lastenheft) | **exzellent** | Spec-Disziplin ist die Achse, an der Pfad A hängt. |
-| 3 (ADRs) | **exzellent** | ADR ↔ Fitness Function ist die Kernkompetenz. |
-| 6 (Carveouts) | **solide** | Carveout-Audit als Architect-Pflicht. |
-| 7 (Agentenrollen) | **solide** | Konfliktauflösung mit Übergabe-Artefakt. |
-| 10 (Verifikation) | **solide** | ADR-Konformität als Fitness Function entwerfen. |
-| 14 (Observability) | **rudimentär** | OTel-Assertions kennen, nicht selbst bauen. |
+| 3 (Lastenheft) | **exzellent** | Spec-Disziplin ist die Achse, an der Pfad A hängt. |
+| 4 (ADRs) | **exzellent** | ADR ↔ Fitness Function ist die Kernkompetenz. |
+| 7 (Carveouts) | **solide** | Carveout-Audit als Architect-Pflicht. |
+| 8 (Agentenrollen) | **solide** | Konfliktauflösung mit Übergabe-Artefakt. |
+| 11 (Verifikation) | **solide** | ADR-Konformität als Fitness Function entwerfen. |
+| 15 (Observability) | **rudimentär** | OTel-Assertions kennen, nicht selbst bauen. |
 
-Frühwarnsignal: *rudimentär* in 2 oder 3 → kein Pfad A. Vertiefen, bevor
+Frühwarnsignal: *rudimentär* in 3 oder 4 → kein Pfad A. Vertiefen, bevor
 weitergegangen wird.
 
 ### Pfad B — DevOps / KI-Plattform-Team
 
 | Modul | Mindest-Stufe | Begründung |
 |---|---|---|
-| 12 (Quality Gates) | **exzellent** | Gate-Vertrag und bootstrap-aware Gate. |
-| 13 (Docker-Harness) | **exzellent** | Image-Hash und Lock-Files sind die Reproduzierbarkeits-Anker. |
-| 14 (Observability) | **exzellent** | Cost-Attribution + Cache-Metrik + Doku-Konsistenz-Agent. |
-| 11 (Replay) | **solide** | Drift-Diagnose-Reihenfolge beherrschen. |
-| 15 (Produktiver Betrieb) | **solide** | Runbook-Trigger und Rollback-Anti-Reflex. |
-| 4 (Planning Harness) | **rudimentär** | Lifecycle als CI-Eingang verstehen, nicht selbst schneiden. |
+| 13 (Quality Gates) | **exzellent** | Gate-Vertrag und bootstrap-aware Gate. |
+| 14 (Docker-Harness) | **exzellent** | Image-Hash und Lock-Files sind die Reproduzierbarkeits-Anker. |
+| 15 (Observability) | **exzellent** | Cost-Attribution + Cache-Metrik + Doku-Konsistenz-Agent. |
+| 12 (Replay) | **solide** | Drift-Diagnose-Reihenfolge beherrschen. |
+| 16 (Produktiver Betrieb) | **solide** | Runbook-Trigger und Rollback-Anti-Reflex. |
+| 5 (Planning Harness) | **rudimentär** | Lifecycle als CI-Eingang verstehen, nicht selbst schneiden. |
 
-Frühwarnsignal: *rudimentär* in 12 oder 13 → kein Pfad B. Plattform ohne
+Frühwarnsignal: *rudimentär* in 13 oder 14 → kein Pfad B. Plattform ohne
 Gates und Image-Pinning ist Wartung ohne Werkzeug.
 
 ### Pfad C — Implementierender Entwickler
 
 | Modul | Mindest-Stufe | Begründung |
 |---|---|---|
-| 8 (Implementierung) | **exzellent** | 8-Schritt-Workflow als Reflex, AGENTS.md-Wirkungsmessung. |
-| 9 (Review Harness) | **exzellent** | Reviewer-Skill schreiben, HIGH/MEDIUM/LOW/INFO sauber trennen. |
+| 9 (Implementierung) | **exzellent** | 8-Schritt-Workflow als Reflex, AGENTS.md-Wirkungsmessung. |
+| 10 (Review Harness) | **exzellent** | Reviewer-Skill schreiben, HIGH/MEDIUM/LOW/INFO sauber trennen. |
 | 1 (Entwicklungszyklus) | **solide** | Source Precedence verinnerlicht. |
-| 7 (Agentenrollen) | **solide** | Rollenbild für eigenes Arbeiten. |
-| 4 (Planning Harness) | **solide** | Slice-Größe und Closure-Kriterien. |
-| 12 (Quality Gates) | **solide** | Lokales Vor-Merge-Gate-Set lesen können. |
+| 8 (Agentenrollen) | **solide** | Rollenbild für eigenes Arbeiten. |
+| 5 (Planning Harness) | **solide** | Slice-Größe und Closure-Kriterien. |
+| 13 (Quality Gates) | **solide** | Lokales Vor-Merge-Gate-Set lesen können. |
 
-Frühwarnsignal: *rudimentär* in 8 oder 9 → kein Pfad C. Implementer ohne
+Frühwarnsignal: *rudimentär* in 9 oder 10 → kein Pfad C. Implementer ohne
 Workflow-Reflex und ohne Reviewer-Skill liefert Diff-Last, nicht Slices.
 
 ### Was dieser Anker *nicht* leistet

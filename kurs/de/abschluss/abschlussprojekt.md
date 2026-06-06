@@ -37,6 +37,9 @@ erreichen — nicht das spezifische Feature.
 
 Aus den 17 Modulen muss das Repo am Ende belegbar enthalten:
 
+* Harness-Bootstrap-Klassifikation pro Sub-Area (GF/BF/Hybrid-Modus,
+  Phasen-Reife, Trigger-Klassen) — entweder in `harness/conventions.md`
+  als Modus-Block oder als externes Reifegrad-Inventar
 * Spezifikation
 * ADRs
 * Planning Lifecycle

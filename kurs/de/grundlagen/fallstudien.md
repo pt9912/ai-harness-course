@@ -54,7 +54,7 @@ Reifegrad-Gradienten:
 Alle vier Repos haben *die kanonischen Quellen* (Spec, ADR, Planning,
 Makefile-Gates) — der Harness existiert in jedem von ihnen, nur in
 unterschiedlich formalisiertem Zustand. **Alle vier sind im
-Brownfield-Modus** (siehe [`konventionen.md` §Harness-Bootstrap](konventionen.md#harness-bootstrap)):
+Brownfield-Modus** (Konzept-Anker: [`konventionen.md` §Harness-Bootstrap](konventionen.md#harness-bootstrap); ausgearbeiteter Lehrtext mit GF/BF-Walkthroughs: [Modul 2 — Harness-Bootstrap](../01-spec-und-architektur/modul-02-harness-bootstrap.md)):
 Code und kanonische Quellen sind da, die Harness-Hülle entsteht als
 *Inventur des Bestands* (Trigger-Richtung Code → Doc). Damit bestätigen
 die vier Repos den allgemeinen Befund: *typischer Ausgangspunkt ist

@@ -86,20 +86,21 @@ was du erreichen kannst.
 |---|---|
 | [0](00-einfuehrung/modul-00-einfuehrung.md) | Agent, LLM, Tool-Call, Harness und Chatbot-vs-Engineering-System trennscharf benennen |
 | [1](01-spec-und-architektur/modul-01-entwicklungszyklus.md) | den Lebenszyklus Spec → ADR → Plan → Code → Review → Verifikation als Artefaktkette nachzeichnen |
-| [2](01-spec-und-architektur/modul-03-lastenheft.md) | ein Lastenheft mit Akzeptanzkriterien schreiben, das von einem Agenten umsetzbar ist |
-| [3](01-spec-und-architektur/modul-04-architektur-adrs.md) | Architekturentscheidungen so dokumentieren, dass spätere Agentenläufe sie als Constraint nutzen |
-| [4](02-planung/modul-05-planning-harness.md) | Slices über die Lifecycle-Verzeichnisse `open → next → in-progress → done` bewegen |
-| [5](02-planung/modul-06-roadmap.md) | eine Roadmap mit Wellen, Triggern und Closure-Kriterien aufbauen |
-| [6](02-planung/modul-07-carveouts.md) | Carveouts (temporär/permanent) sauber dokumentieren und mit Folge-Slices verknüpfen |
-| [7](03-agenten/modul-08-agentenrollen.md) | Aufgaben zwischen Planner-, Architect-, Implementation-, Reviewer-, Verification- und Validation-Agent zuordnen |
-| [8](03-agenten/modul-09-implementierung.md) | einen Slice mit einem Implementation-Agent umsetzen und die Architekturkonformität wahren |
-| [9](04-qualitaet/modul-10-review-harness.md) | Findings nach HIGH/MEDIUM/LOW/INFO klassifizieren und einen Review-Lauf reproduzierbar machen |
-| [10](04-qualitaet/modul-11-verification.md) | Plan-gegen-Code-Diffs automatisch verifizieren und DoD-Verletzungen erkennen |
-| [11](04-qualitaet/modul-12-replay-evaluierung.md) | Replay-Läufe mit Golden Sets fahren und Regressionen messen |
-| [12](04-qualitaet/modul-13-quality-gates.md) | Quality Gates als `make`-Ziele aufsetzen, im CI verankern, als computational feedback klassifizieren |
-| [13](05-betrieb/modul-14-docker-harness.md) | einen Docker-only Build-Harness aufbauen, der lokal und im CI identisch läuft |
-| [14](05-betrieb/modul-15-observability.md) | OpenTelemetry-Traces eines Agentenlaufs lesen und Token-Kosten attribuieren |
-| [15](05-betrieb/modul-16-produktiver-betrieb.md) | ein Projekt für den produktiven Betrieb freigeben (Runtime-Validation, Security, Incident Response) |
+| [2](01-spec-und-architektur/modul-02-harness-bootstrap.md) | den Harness-Bootstrap-Modus (Greenfield/Brownfield/Hybrid) pro Sub-Area diagnostizieren und gegen die vier Trigger-Klassen verorten |
+| [3](01-spec-und-architektur/modul-03-lastenheft.md) | ein Lastenheft mit Akzeptanzkriterien schreiben, das von einem Agenten umsetzbar ist |
+| [4](01-spec-und-architektur/modul-04-architektur-adrs.md) | Architekturentscheidungen so dokumentieren, dass spätere Agentenläufe sie als Constraint nutzen |
+| [5](02-planung/modul-05-planning-harness.md) | Slices über die Lifecycle-Verzeichnisse `open → next → in-progress → done` bewegen |
+| [6](02-planung/modul-06-roadmap.md) | eine Roadmap mit Wellen, Triggern und Closure-Kriterien aufbauen |
+| [7](02-planung/modul-07-carveouts.md) | Carveouts (temporär/permanent) sauber dokumentieren und mit Folge-Slices verknüpfen |
+| [8](03-agenten/modul-08-agentenrollen.md) | Aufgaben zwischen Planner-, Architect-, Implementation-, Reviewer-, Verification- und Validation-Agent zuordnen |
+| [9](03-agenten/modul-09-implementierung.md) | einen Slice mit einem Implementation-Agent umsetzen und die Architekturkonformität wahren |
+| [10](04-qualitaet/modul-10-review-harness.md) | Findings nach HIGH/MEDIUM/LOW/INFO klassifizieren und einen Review-Lauf reproduzierbar machen |
+| [11](04-qualitaet/modul-11-verification.md) | Plan-gegen-Code-Diffs automatisch verifizieren und DoD-Verletzungen erkennen |
+| [12](04-qualitaet/modul-12-replay-evaluierung.md) | Replay-Läufe mit Golden Sets fahren und Regressionen messen |
+| [13](04-qualitaet/modul-13-quality-gates.md) | Quality Gates als `make`-Ziele aufsetzen, im CI verankern, als computational feedback klassifizieren |
+| [14](05-betrieb/modul-14-docker-harness.md) | einen Docker-only Build-Harness aufbauen, der lokal und im CI identisch läuft |
+| [15](05-betrieb/modul-15-observability.md) | OpenTelemetry-Traces eines Agentenlaufs lesen und Token-Kosten attribuieren |
+| [16](05-betrieb/modul-16-produktiver-betrieb.md) | ein Projekt für den produktiven Betrieb freigeben (Runtime-Validation, Security, Incident Response) |
 
 ## Wegweiser
 
@@ -107,11 +108,11 @@ was du erreichen kannst.
 |---|---|
 | [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, **Konzeptkarte**, 2×2-Klassifikation, drei Säulen, Steering Loop, vier Fallstudien, **Lernpfade**, **Reflexions­vorlage**, **Lernervorstellungen**, **Phasen-Checkpoints** — vor den Modulen zu lesen. |
 | [`00-einfuehrung/`](00-einfuehrung/) | Modul 0: Worum geht es überhaupt? |
-| [`01-spec-und-architektur/`](01-spec-und-architektur/) | Module 1–3: Lebenszyklus, Lastenheft, ADRs. |
-| [`02-planung/`](02-planung/) | Module 4–6: Planning-Lifecycle, Roadmap, Carveouts. |
-| [`03-agenten/`](03-agenten/) | Module 7–8: Rollen und Implementierung. |
-| [`04-qualitaet/`](04-qualitaet/) | Module 9–12: Review, Verifikation, Replay, Gates. |
-| [`05-betrieb/`](05-betrieb/) | Module 13–15: Docker-Harness, Observability, Produktion. |
+| [`01-spec-und-architektur/`](01-spec-und-architektur/) | Module 1–4: Lebenszyklus, Harness-Bootstrap, Lastenheft, ADRs. |
+| [`02-planung/`](02-planung/) | Module 5–7: Planning-Lifecycle, Roadmap, Carveouts. |
+| [`03-agenten/`](03-agenten/) | Module 8–9: Rollen und Implementierung. |
+| [`04-qualitaet/`](04-qualitaet/) | Module 10–13: Review, Verifikation, Replay, Gates. |
+| [`05-betrieb/`](05-betrieb/) | Module 14–16: Docker-Harness, Observability, Produktion. |
 | [`abschluss/`](abschluss/) | Abschlussprojekt mit Bewertungsraster, Quellen, Branchen-Anwendungsanker. |
 
 ## Lernpfade je nach Rolle

@@ -1,6 +1,6 @@
 # Modul 9 — Implementierung durch KI-Agenten
 
-> **Aufwand:** ca. 120 Min Lesen · 120 Min Übung. Dieses Modul ist absichtlich tief — der 8-Schritt-Workflow und die Hard Rules sind die operative Brücke zwischen Theorie (Module 1–7) und Gates (Module 9–12).
+> **Aufwand:** ca. 120 Min Lesen · 120 Min Übung. Dieses Modul ist absichtlich tief — der 8-Schritt-Workflow und die Hard Rules sind die operative Brücke zwischen Theorie (Module 1–8) und Gates (Module 10–13).
 >
 > **Segmenting-Empfehlung (Sweller).** Das Modul zerfällt natürlich in
 > zwei Teile. **Teil A (8a — Workflow):** Engage · Lernziele ·

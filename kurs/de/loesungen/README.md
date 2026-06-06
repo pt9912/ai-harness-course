@@ -8,6 +8,7 @@ Hier findest du die Lösungen zu den Selbstchecks und Hinweise zu den
 |---|---|
 | [Modul 0](modul-00-loesung.md) | [Einführung](../00-einfuehrung/modul-00-einfuehrung.md) |
 | [Modul 1](modul-01-loesung.md) | [Der Entwicklungszyklus](../01-spec-und-architektur/modul-01-entwicklungszyklus.md) |
+| [Modul 2](modul-02-loesung.md) | [Harness-Bootstrap](../01-spec-und-architektur/modul-02-harness-bootstrap.md) |
 | [Modul 3](modul-03-loesung.md) | [Lastenheft und Spezifikation](../01-spec-und-architektur/modul-03-lastenheft.md) |
 | [Modul 4](modul-04-loesung.md) | [Architektur und ADRs](../01-spec-und-architektur/modul-04-architektur-adrs.md) |
 | [Modul 5](modul-05-loesung.md) | [Planning Harness](../02-planung/modul-05-planning-harness.md) |

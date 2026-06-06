@@ -301,4 +301,4 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 ## Weiterlesen
 
 * Source Precedence im Detail: [`../grundlagen/konventionen.md#source-precedence`](../grundlagen/konventionen.md#source-precedence)
-* Nächstes Modul: [Modul 3 — Lastenheft und Spezifikation](modul-03-lastenheft.md)
+* Nächstes Modul: [Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)

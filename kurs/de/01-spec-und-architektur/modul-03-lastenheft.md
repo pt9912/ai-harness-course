@@ -199,4 +199,5 @@ Modul-spezifische Trigger:
 
 * Spec-Stratifizierung im Detail: [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)
 * Reales Beispiel mit Lastenheft/Spezifikation-Trennung: `pt9912/c-hsm-doc` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
+* Vorheriges Modul: [Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)
 * Nächstes Modul: [Modul 4 — Architektur und ADRs](modul-04-architektur-adrs.md)
