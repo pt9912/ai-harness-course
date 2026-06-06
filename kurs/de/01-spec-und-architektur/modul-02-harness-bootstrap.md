@@ -164,8 +164,10 @@ Modus pro Sub-Area diagnostizieren kann, weiß, *welcher* Trigger die
 nächste sinnvolle Aktion auslöst — und spart sich das Ausprobieren auf
 der Phasen-Ebene. Genau dieses Diagnose-Vermögen ist das
 Lehr-Ergebnis dieses Moduls; die Modus-Wahl als Planungs-Entscheidung
-(also: *welcher Modus soll für den nächsten Slice gelten?*) folgt
-später in [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harness.md).
+(also: *welcher Modus gilt für jede vom nächsten Slice berührte
+Sub-Area — und warum?* — der Slice selbst trägt keinen Modus, er
+berührt nur Sub-Areas, die je einen tragen) folgt später in
+[Modul 5 — Planning Harness](../02-planung/modul-05-planning-harness.md).
 
 ### Wann wechselt der Modus? Drei Anzeichen
 
@@ -636,8 +638,8 @@ die modulspezifischen Indikatoren sind:
   [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand).
 * Modus-*Wahl* als Planungs-Entscheidung (Diagnose aus diesem Modul
   → Begründungs-Pflicht pro Sub-Area im nächsten Slice-Plan):
-  [Modul 5 — Planning Harness §Übung "Bestimme und begründe
-  Bootstrap-Modus für die vom nächsten Slice berührten Sub-Areas"](../02-planung/modul-05-planning-harness.md#übungen).
+  [Modul 5 §Worked Mini-Example "Bootstrap-Modus pro Sub-Area für einen Slice begründen"](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
+  (Übungs-Auftrag direkt darunter in §Übungen).
 * Steering-Loop im Steady-State (was Bootstrap *nach* Graduation
   wird):
   [Modul 11 — Verification Harness](../04-qualitaet/modul-11-verification.md).

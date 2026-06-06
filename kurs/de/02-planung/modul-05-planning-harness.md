@@ -34,7 +34,7 @@ Nach diesem Modul kannst du:
 * einen Slice anhand zweier Größen-Kriterien *bewerten* (in einem Agenten-Lauf abschließbar, in einer Review-Sitzung prüfbar) (Bewerten · konzeptuell),
 * einen zu großen Slice schnittfrei in zwei umsetzbare *zerlegen* und die Schnittentscheidung *begründen* (Erschaffen · prozedural),
 * Closure-Kriterien mit Lerneintrag *formulieren* (Erschaffen · prozedural),
-* für die von einem Slice berührten Sub-Areas den Bootstrap-Modus gegen das Kriterien-Set *begründen* (Bewerten · konzeptuell — Transfer aus Modul 2: aus der Klassifikations-*Diagnose* wird hier eine slice-bezogene *Wahl*).
+* für die von einem Slice berührten Sub-Areas den Bootstrap-Modus gegen das Kriterien-Set *begründen* (Bewerten · konzeptuell — Transfer aus Modul 2).
 
 ## Lifecycle als State Machine
 
@@ -66,6 +66,7 @@ nach `done` verlangt *Lerneintrag*, nicht nur "Tests grün".
 * Trigger
 * Closure
 * Was ein Plan enthalten muss, damit ein Agent ihn umsetzen kann
+* Bootstrap-Modus pro Sub-Area als Wahl-Entscheidung im Slice-Plan
 
 ## Kernidee
 
@@ -126,12 +127,17 @@ Hier wird keine neue Modus-Theorie eingeführt — das Konzept wandert von
 der *Diagnose* (Klassifikation des Ist-Zustands, Modul 2 §Übung 1) in die
 *Wahl* (Begründung pro Sub-Area für einen kommenden Slice).
 
-**Beispiel-Slice:** `SL-014a` aus dem Worked Example oben — Login-Endpoint
-akzeptiert User/Passwort, gibt JWT zurück, Audit-Log-Eintrag entsteht.
+**Beispiel-Slice:** `SL-014a` aus dem Worked Example oben. Spec-Anker
+und ADR werden in [Modul 9 §Worked Example](../03-agenten/modul-09-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow)
+mit `LH-FA-AUTH-001` und `ADR-0007` (Service-Adapter-Layer)
+konkretisiert; wir nutzen dieselben IDs hier konsistent.
 
-**Berührte Sub-Areas (Schritt 0 der Übung — Vorbedingung):** drei
-Sub-Areas — *Konventionen* (API-Pattern), *Test-Infrastruktur* und
-*Spec-Schreibung* (Authorization-Anforderung). Identifikation ist
+**Berührte Sub-Areas (Schritt 0 der Übung — Vorbedingung):** vier
+Sub-Areas — *Konventionen* (API-Pattern), *Test-Infrastruktur*,
+*Audit-Logging* und *Spec-Schreibung* (Authentifizierungs-Anforderung).
+Die DoD verlangt jede einzelne (Login-Endpoint → API-Pattern;
+Login-Tests → Test-Infrastruktur; Audit-Log-Eintrag → Audit-Logging;
+`LH-FA-AUTH-001`/`ADR-0007` → Spec-Schreibung). Identifikation ist
 Klassifikations-Vorarbeit (Anwenden auf Modul-2-Vorwissen), nicht
 Bewertungsleistung — Letztere folgt in Schritt 1.
 
@@ -142,12 +148,17 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
    Strukturregel verankert?
 2. **Phase-Reife der berührten Artefakt-Sektionen** — Phase 0–5 aus der
    Phase × Modus-Matrix in [Modul 2](../01-spec-und-architektur/modul-02-harness-bootstrap.md#phasen-modus-die-zweidimensionale-reife-matrix).
-3. **Evidenz- und Diskrepanz-Risiko bei BF** — wie groß ist die Gefahr,
-   dass Inventur den Code-Bestand und die Doku-Aussage als divergent
-   ausweist?
+3. **Evidenz- und Diskrepanz-Risiko** — wie groß ist die Gefahr, dass
+   Inventur den Code-Bestand und die Doku-Aussage als divergent
+   ausweist? Bei GF meist niedrig (Doc führt — Inventur prüft nur
+   Code-Konformität); bei BF/Hybrid das Hauptrisiko und der Grund, warum
+   das Kriterium dort die Reconciliation-Schätzung trägt.
 4. **Reconciliation-Aufwand inklusive Graduation-/Folge-Slice-Trigger** —
-   wieviel Slice-Aufwand bringt BF mit sich, und welcher Trigger schaltet
-   die Sub-Area Richtung GF?
+   wieviel Slice-Aufwand bringt BF/Hybrid mit sich, und welcher Trigger
+   (eine der vier Klassen aus
+   [`konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)
+   — Sync, Promotion, Cross-Reference, Acceptance — oder eine
+   Folge-Slice-ID) schaltet die Sub-Area Richtung GF?
 
 **Sub-Area 1 — Konventionen (vollständig ausformuliert, GF):**
 
@@ -156,9 +167,8 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
   Negativ-Bedingung gegen Direkt-DB-Zugriffe aus dem Adapter.
 - *Phase-Reife:* Phase 4. Konvention steht, Code wird daran gemessen,
   Reviews zitieren `MR-014`.
-- *Evidenz-/Diskrepanz-Risiko:* niedrig. Vorgänger-Slice `SL-013` hat
-  einen Lint-Check eingeführt, der die Pattern-Konformität automatisch
-  prüft.
+- *Evidenz-/Diskrepanz-Risiko:* niedrig. Ein voriger Slice hat einen
+  Lint-Check eingeführt, der die Pattern-Konformität automatisch prüft.
 - *Reconciliation-Aufwand:* keiner. Kein Folge-Slice.
 - **Modus: GF.**
 
@@ -167,54 +177,70 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
 - *Konventionen-Dichte:* niedrig. `tests/auth/` zeigt zwei abweichende
   Pfadnaming-Schemata (`test_*.py` vs. `*_test.py`); keines steht in
   `harness/conventions.md`.
-- *Phase-Reife:* Phase 1. Code-Pattern existiert, Doku-Sektion fehlt.
+- *Phase-Reife:* Phase 1 BF — Skelett-Sektion *Test-Layout* in
+  `harness/conventions.md` ist mit Inventur-Auftrag kopiert (leere
+  Pflicht-Felder), der Code-Bestand in `tests/auth/` füllt sie noch
+  nicht (Matrix: *"Template kopiert, Inventur-Auftrag an Code"*).
 - *Evidenz-/Diskrepanz-Risiko:* mittel. Inventur kann sichtbar machen,
-  dass die bestehenden Tests an die Authorization-Schicht andere
+  dass die bestehenden Tests an die Authentifizierungs-Schicht andere
   Annahmen tragen als die noch zu schreibenden — z. B. ob Mocking auf
   Adapter- oder Service-Ebene zulässig ist.
-- *Reconciliation-Aufwand:* 1 Slice (`SL-RC-014t` Inventur + `MR-T-001`
+- *Reconciliation-Aufwand:* 1 Slice (`SL-RC-014t` Inventur + `MR-002`
   *Test-Layout pro Sub-Schicht* in `harness/conventions.md` ergänzen).
-  Graduation-Trigger: T1 Sync setzt MR-T-001 in `harness/README.md` und
-  `AGENTS.md` als Quelle für künftige Test-Konventionen.
+  Graduation-Trigger: **Sync-Trigger** setzt `MR-002` in
+  `harness/README.md` und `AGENTS.md` als Quelle für künftige
+  Test-Konventionen.
 - **Modus: BF.**
 
-**Sub-Area 3 — Spec-Schreibung (faded scaffolding, Hybrid — du
+**Sub-Area 3 — Audit-Logging (faded scaffolding, Hybrid — du
 ergänzt die letzten zwei Kriterien):**
 
-- *Konventionen-Dichte:* mittel. `spec/lastenheft.md` führt
-  `LH-014` *Authentifizierung* als Anforderungs-Anker mit einem
-  Happy-Path-Satz, aber ohne Negativ-Bedingungen, Akzeptanzkriterien
-  oder Verweis auf eine ADR. Anker existiert, Detailtiefe fehlt.
-- *Phase-Reife:* Phase 2. Skizze steht, ist aber nicht zur Architektur
-  und zum Test-Anker durchverbunden — kein Test referenziert `LH-014`.
+- *Konventionen-Dichte:* mittel. `harness/conventions.md` führt `MR-008`
+  *Audit-Log-Pflicht für Auth-Endpunkte* als abstrakten Pflicht-Anker
+  ("jeder Login-Versuch muss ein Audit-Event erzeugen"), aber kein
+  konkretes Event-Schema. Code in `services/audit/` zeigt zwei
+  unterschiedliche Event-Formate aus früheren Slices.
+- *Phase-Reife:* Phase 3 — Sektion versprochen (Pflicht-Anker steht),
+  Code partiell vorhanden, Format-Standard und Test-Anker fehlen
+  (Matrix: gemischter Bestand zwischen GF *"Sektionen versprochen,
+  Code folgt"* und BF *"Sektionen dokumentiert, andere unentdeckt"*).
 - *Evidenz-/Diskrepanz-Risiko:* **du**.
 - *Reconciliation-Aufwand:* **du**.
-- **Modus: Hybrid (GF in Anker-Existenz, BF in Akzeptanzkriterien- und
-  Verbindungs-Tiefe).**
+- **Modus: Hybrid (GF im Pflicht-Anker, BF im Format-Standard).**
 
-**Template für den Begründungsblock** (kopiere in den Slice-Plan-Anhang):
+**Sub-Area 4 — Spec-Schreibung (knapp, GF — kein voller Block):**
+`spec/lastenheft.md` §`LH-FA-AUTH-001` trägt drei Akzeptanzkriterien;
+`ADR-0007` *Service-Adapter-Layer* bindet die Architektur; in Modul 9
+§Worked Example werden Tests gegen `LH-FA-AUTH-001` annotiert. Damit
+sind Konventionen-Dichte hoch, Phase 4, Risiko niedrig, kein
+Reconciliation — **Modus: GF.** Hier reicht ein Verweis; die volle
+Begründungs-Tiefe demonstrieren Sub-Areas 1–3.
+
+**Template für den Begründungsblock** (in
+[§8 Sub-Area-Modus-Begründung](../../../lab/templates/docs/plan/planning/slice.template.md)
+des Slice-Plan-Templates einfügen — die Sektion liegt im
+kanonischen Slice-Template, nicht inline im Lehrmodul):
 
 ```
-## Sub-Area-Modus-Begründungsblock — <Slice-ID>
+### Sub-Area: <Name>
 
-Sub-Area: <Name>
-Modus: <GF | BF | Hybrid>
+- Modus: <GF | BF | Hybrid>
 - Konventionen-Dichte: <Beleg aus harness/conventions.md, Adaptions-Block oder Code>
 - Phase-Reife: <Phase 0–5 mit Begründung gegen die Phase × Modus-Matrix>
 - Evidenz-/Diskrepanz-Risiko: <bei BF/Hybrid: was kann die Inventur sichtbar machen?>
 - Reconciliation-Aufwand: <Slice-Schätzung; Graduation-/Folge-Slice-Trigger>
 ```
 
-Pro berührter Sub-Area einen Block. Im Slice-Plan-Anhang einfügen, damit
-die Modus-Entscheidung im Planning-Harness-Slice mitläuft und in der
-Closure-Notiz prüfbar wird.
+Pro berührter Sub-Area einen Block in §8 des Slice-Plans. So läuft die
+Modus-Entscheidung im Planning-Harness-Slice mit und wird in der
+Closure-Notiz prüfbar.
 
 ## Übungen
 
 * Planung eines Features über mehrere Wellen
 * Bewege einen Slice durch alle vier Verzeichnisse
 * Schneide einen zu großen Slice in zwei umsetzbare Slices
-* **Bestimme und begründe Bootstrap-Modus für die vom nächsten Slice berührten Sub-Areas** — nimm einen kommenden Slice aus deinem eigenen Repo (Transferform) *oder* arbeite am Beispiel-Slice `SL-014a` weiter (Fallback). Schritt 0: berührte Sub-Areas identifizieren. Schritt 1: pro Sub-Area Modus bestimmen und gegen alle vier Pflichtkriterien begründen. Schritt 2: für die Hybrid-Sub-Area `Spec-Schreibung` aus dem Worked Mini-Example die zwei offenen Kriterien-Zeilen (*Evidenz-/Diskrepanz-Risiko*, *Reconciliation-Aufwand*) ergänzen. Output: Begründungsblock je Sub-Area aus dem Template oben, als Anhang in den Slice-Plan. Lösungshinweise in [`../loesungen/modul-05-loesung.md`](../loesungen/modul-05-loesung.md#bestimme-und-begründe-bootstrap-modus-pro-sub-area).
+* **Bestimme und begründe Bootstrap-Modus für die vom nächsten Slice berührten Sub-Areas** — nimm einen kommenden Slice aus deinem eigenen Repo (Transferform) *oder* arbeite am Beispiel-Slice `SL-014a` weiter (Fallback). Schritt 0: berührte Sub-Areas identifizieren. Schritt 1: pro Sub-Area Modus bestimmen und gegen alle vier Pflichtkriterien begründen. Schritt 2: für die Hybrid-Sub-Area `Audit-Logging` aus dem Worked Mini-Example die zwei offenen Kriterien-Zeilen (*Evidenz-/Diskrepanz-Risiko*, *Reconciliation-Aufwand*) ergänzen. Output: Begründungsblock je Sub-Area aus dem Template oben, in §8 des Slice-Plans (siehe [`slice.template.md`](../../../lab/templates/docs/plan/planning/slice.template.md)). Lösungshinweise in [`../loesungen/modul-05-loesung.md`](../loesungen/modul-05-loesung.md#bestimme-und-begründe-bootstrap-modus-pro-sub-area).
 
 ## Reflexion
 
@@ -241,7 +267,7 @@ Modul-spezifische Trigger:
 | Vier Lifecycle-Verzeichnisse in Reihenfolge? | zwei oder drei genannt | `open/` → `next/` → `in-progress/` → `done/`. Plus Rückführungen: `in-progress/ → next/` (zu groß), `in-progress/ → open/` (Blocker). | + Hinweis: WIP-Limit pro Implementer auf 1 — wer mehrere Slices gleichzeitig in `in-progress/` hat, hat keine Lifecycle, sondern ein Buffet. |
 | Trigger `next/ → in-progress/`? | "Wenn jemand anfängt." | Konkreter Trigger: Implementation-Agent (oder Person) übernimmt, Slice ist in `next/` priorisiert, Abhängigkeiten gelöst. | + Abgrenzung "WIP-Limit pro Implementer ist eine harte Größe, kein Vorschlag" — ein Implementer hat höchstens *einen* Slice in `in-progress/`. |
 | Slice in `done/` bei rotem Gate — wann? | "Gar nicht." | Nur mit dokumentiertem Carveout (Modul 7), der den roten Gate-Status auf Trigger schaltet. | + Unterscheidung Carveout (Ausnahme, mit Folge-Slice) vs. bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). |
-| Modus pro Sub-Area für den nächsten Slice? | berührte Sub-Areas nur teilweise identifiziert; Modus genannt ohne Kriterien-Bezug ("BF, weil Doku fehlt"). | berührte Sub-Areas vollständig identifiziert; Modus je Sub-Area bestimmt; Begründung nutzt mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte, Phase-Reife, Evidenz-/Diskrepanz-Risiko, Reconciliation-Aufwand). | + Begründung nutzt *alle vier* Pflichtkriterien · BF/Hybrid benennt expliziten Reconciliation- oder Graduation-Trigger (T1–T7 aus `konventionen.md` oder Folge-Slice-ID) · Evidenz aus Code, Doku oder `harness/conventions.md` namentlich genannt. Diese fünf Punkte (berührte Sub-Areas vollständig · Modus pro Sub-Area · alle vier Kriterien · BF/Hybrid-Trigger · benannte Evidenz) sind zugleich die Bewertungs-Kriterien für die zugehörige Übung. |
+| Modus pro Sub-Area für den nächsten Slice? | berührte Sub-Areas nur teilweise identifiziert; Modus genannt ohne Kriterien-Bezug ("BF, weil Doku fehlt"). | berührte Sub-Areas vollständig identifiziert; Modus je Sub-Area bestimmt; Begründung nutzt mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte, Phase-Reife, Evidenz-/Diskrepanz-Risiko, Reconciliation-Aufwand). | + Begründung nutzt *alle vier* Pflichtkriterien · BF/Hybrid benennt expliziten Reconciliation- oder Graduation-Trigger (Trigger-Klasse nach [`konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen) — Sync/Promotion/Cross-Reference/Acceptance — oder Folge-Slice-ID) · Evidenz aus Code, Doku oder `harness/conventions.md` namentlich genannt. |
 
 ## Weiterlesen
 

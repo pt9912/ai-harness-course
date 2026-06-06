@@ -44,6 +44,36 @@ Gate ist *im aktuellen Reifegrad nicht hart* — und das ist
 dokumentiert. Wenn weder Carveout noch Bootstrap, dann ist Closure
 falsch.
 
+### (Bewerten — Transfer aus Modul 2) Welche Sub-Areas berührt der nächste Slice — und welcher Modus passt für jede?
+
+Beispiel-Antwort für `SL-014a` (Authentifizierung implementieren). Vier
+berührte Sub-Areas, je gegen die vier Pflichtkriterien begründet —
+hier kompakt als Sammel-Antwort, der volle Block-pro-Sub-Area-Stand
+steht im Worked Mini-Example in Modul 5:
+
+- *Konventionen (API-Pattern):* **GF.** `MR-014` REST-Endpunkt-Pattern
+  steht; Phase 4 (Vertrag, Code wird daran gemessen); Lint-Check als
+  Sensor; kein Reconciliation.
+- *Test-Infrastruktur:* **BF.** Keine Sektion in
+  `harness/conventions.md` (Skelett mit Inventur-Auftrag); Phase 1 BF;
+  Reconciliation 1 Slice (`SL-RC-014t` + `MR-002`); Graduation-Trigger:
+  Sync-Trigger setzt `MR-002` in `harness/README.md` und `AGENTS.md`.
+- *Audit-Logging:* **Hybrid.** `MR-008` als Pflicht-Anker steht
+  (GF-Anteil), kein Format-Standard im Code (BF-Anteil); Phase 3
+  partiell; Reconciliation 0.5 Slice; Graduation-Trigger:
+  Cross-Reference zwischen `MR-008` und einer Audit-Sensor-Sektion.
+- *Spec-Schreibung:* **GF.** `LH-FA-AUTH-001` mit drei
+  Akzeptanzkriterien + `ADR-0007` (Service-Adapter-Layer); Phase 4;
+  Tests werden in Modul 9 §Worked Example gegen `LH-FA-AUTH-001`
+  annotiert; kein Reconciliation.
+
+Faustregel zum eigenen Slice: Wenn ein Slice mehrere Sub-Areas berührt
+und *alle* in demselben Modus stehen, ist meist die Slice-Größe
+falsch — entweder zu schmal (ein Refactor, der nur eine Sub-Area
+anfasst) oder zu breit (ein Aggregat-Slice, der mehrere atomare Slices
+verdeckt). Heterogenität der Modi je Sub-Area ist das Normalbild eines
+gut geschnittenen Slice.
+
 ## Übungshinweise
 
 ### Planung eines Features über mehrere Wellen
@@ -89,26 +119,28 @@ Slice begründen* im
 [Modul 5](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
 mit Beispiel-Slice `SL-014a`.
 
-**Hybrid-Sub-Area `Spec-Schreibung` — Mustertext für die zwei vom
+**Hybrid-Sub-Area `Audit-Logging` — Mustertext für die zwei vom
 Lerner zu ergänzenden Kriterien:**
 
-- *Evidenz-/Diskrepanz-Risiko:* mittel. Spec-Anker `LH-014`
-  beschreibt den Happy Path; im Code (`services/auth/`) existiert
-  bereits ein `Unauthorized`-Handler mit Negativ-Pfaden, den die Spec
-  nicht erwähnt. Inventur kann sichtbar machen, dass die Akzeptanz­
-  kriterien nachgereicht ("retrofitted") und damit am Code geeicht
-  werden statt am ursprünglichen Anforderungs-Verständnis. Risiko:
-  Spec validiert Code statt umgekehrt.
-- *Reconciliation-Aufwand:* ≈ 0.5 Slice. `spec/lastenheft.md` §LH-014
-  um Akzeptanz­kriterien (inkl. Negativ-Bedingungen) ergänzen,
-  `T6` Cross-Reference Spec↔ADR prüfen, und einen Test
-  schreiben, der `LH-014` per Anker referenziert.
-  Graduation-Trigger: Akzeptanzkriterien stehen, mindestens ein Test
-  trägt `LH-014` als Annotation, kein Negativ-Pfad im Code ohne
-  Spec-Pendant. Dann wechselt die Sub-Area `Spec-Schreibung` von
-  Hybrid Richtung GF.
+- *Evidenz-/Diskrepanz-Risiko:* mittel. Pflicht-Anker `MR-008` sagt
+  *"jeder Login-Versuch muss ein Audit-Event erzeugen"*; im Code
+  (`services/audit/`) liegen aber zwei unterschiedliche Event-Formate
+  aus früheren Slices (z. B. flaches JSON vs. structured-key-value).
+  Inventur kann sichtbar machen, dass die Tests nicht gegen ein
+  Schema, sondern gegen das je vorgefundene Format prüfen — Drift
+  passiert lautlos, sobald ein dritter Slice ein drittes Format
+  einführt.
+- *Reconciliation-Aufwand:* ≈ 0.5 Slice. `harness/conventions.md`
+  `MR-008` um konkretes Event-Schema ergänzen (Pflicht-Felder,
+  Format-Lock); bestehende `services/audit/`-Producer auf das
+  Schema heben (oder als Carveout mit Auflösungs-Trigger
+  dokumentieren). Graduation-Trigger: **Cross-Reference-Trigger**
+  zwischen `MR-008` und einer Audit-Sensor-Sektion in
+  `harness/conventions.md` §Sensors; sobald der Cross-Reference steht
+  und mindestens ein Test das Schema validiert, schaltet
+  `Audit-Logging` von Hybrid Richtung GF.
 
-**Drei Anker für die Bewertung im Slice-Plan-Anhang:**
+**Drei Anker für die Bewertung in §8 des Slice-Plans:**
 
 1. *Pro berührte Sub-Area ein Begründungsblock* aus dem Template
    (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko ·
@@ -116,25 +148,30 @@ Lerner zu ergänzenden Kriterien:**
    nur "Modus: BF, weil Doku fehlt" schreibt, hat das Kriterien-Set
    nicht genutzt — das ist Klassifikation (Modul 2), nicht Begründung.
 2. *Bei BF und Hybrid* muss der Reconciliation-Aufwand mit einem
-   konkreten Trigger geschlossen werden (T1–T7 aus
+   konkreten Trigger geschlossen werden — entweder eine der vier
+   Trigger-Klassen aus
    [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)
-   oder ein expliziter Folge-Slice). "Werden wir später dokumentieren"
-   ist kein Trigger.
+   (Sync, Promotion, Cross-Reference, Acceptance) oder eine
+   explizite Folge-Slice-ID. "Werden wir später dokumentieren" ist
+   kein Trigger. Die T1–T7-Notation in Modul 2 §Worked Example 1 ist
+   eine *Instanziierung* dieser Klassen für den DocSearch-Walkthrough;
+   in eigenen Slice-Plänen reicht die Klassen-Bezeichnung plus konkrete
+   Bezugs-Doku.
 3. *Evidenz benennen* aus Code, Doku oder `harness/conventions.md`.
    Aussagen ohne Evidenz-Anker sind nicht prüfbar und damit nicht
    teil der Übungs­leistung.
 
 **Distractor-Klärung "Wenn der Slice klein ist, ist die berührte
 Sub-Area GF.":** Der Beispiel-Slice `SL-014a` ist klein (≤ 3
-DoD-Punkte, zwei Schichten), trotzdem ist die Test-Infrastruktur klar
-BF. Slice-Größe und Sub-Area-Modus sind orthogonale Achsen —
-Slice-Größe ist eine Eigenschaft des Schnitts (kann ein Reviewer ihn
-in einer Sitzung prüfen?), Sub-Area-Modus ist eine Eigenschaft des
-Reifegrads der berührten Doku-/Code-Sektion. Wer beim
-Modus-Begründungsblock auf die DoD-Punkte-Zahl zeigt, hat die
-Diagnose vom falschen Träger abgeleitet. Persistente
-Lernhilfe in Modul 5 §Typische Fehlvorstellungen; hier ist sie
-*aktiver Distractor* im Übungs-Kontext.
+DoD-Punkte), trotzdem ist die Test-Infrastruktur klar BF und das
+Audit-Logging Hybrid. Slice-Größe und Sub-Area-Modus sind orthogonale
+Achsen — Slice-Größe ist eine Eigenschaft des Schnitts (kann ein
+Reviewer ihn in einer Sitzung prüfen?), Sub-Area-Modus ist eine
+Eigenschaft des Reifegrads der berührten Doku-/Code-Sektion. Wer
+beim Modus-Begründungsblock auf die DoD-Punkte-Zahl zeigt, hat die
+Diagnose vom falschen Träger abgeleitet. Persistente Lernhilfe in
+Modul 5 §Typische Fehlvorstellungen; hier ist sie *aktiver Distractor*
+im Übungs-Kontext.
 
 ## Häufige Fehler
 

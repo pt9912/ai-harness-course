@@ -86,3 +86,30 @@ Wird *nach* Abschluss ergänzt. Inhalt:
 -->
 
 <!-- Erst nach Abschluss füllen. -->
+
+## 8. Sub-Area-Modus-Begründung
+
+<!--
+Pro vom Slice berührter Sub-Area ein Block. Pflicht, wenn der Slice
+mindestens eine Sub-Area in BF oder Hybrid berührt; bei reinem GF
+genügt der Hinweis "alle berührten Sub-Areas GF (siehe Kurs
+Modul 5 §Worked Mini-Example)". Optional bei reinem Refactor ohne
+neue Sub-Area-Berührung.
+
+Die vier Pflichtkriterien stehen in
+../../../../../kurs/de/02-planung/modul-05-planning-harness.md
+§Worked Mini-Example.
+-->
+
+### Sub-Area: <Name>
+
+- **Modus:** GF | BF | Hybrid
+- **Konventionen-Dichte:** <Beleg aus `harness/conventions.md`,
+  Adaptions-Block oder Code>
+- **Phase-Reife:** Phase 0–5 <Begründung gegen die Phase × Modus-Matrix>
+- **Evidenz-/Diskrepanz-Risiko:** <bei BF/Hybrid: was kann die
+  Inventur sichtbar machen? bei GF: meist niedrig>
+- **Reconciliation-Aufwand:** <Slice-Schätzung;
+  Graduation-/Folge-Slice-Trigger>
+
+<!-- Block für jede weitere berührte Sub-Area duplizieren. -->
