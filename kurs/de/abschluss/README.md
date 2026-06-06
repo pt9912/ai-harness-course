@@ -27,4 +27,7 @@ Und noch eines: Der typische Ausgangszustand ist nicht
 guten Gates — aber ohne formellen Harness-Einstieg, ohne
 `harness/README.md`, ohne AGENTS.md. Der erste Slice deines
 Harness-Projekts ist deshalb fast immer: *die schon vorhandene Struktur
-sichtbar machen*, nicht neue Struktur erzeugen.
+sichtbar machen*, nicht neue Struktur erzeugen. Das ist der
+Brownfield-Modus (Trigger-Richtung Code → Doc, mit Konvergenz-Auftrag
+zu Greenfield); systematische Sicht in
+[`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap).

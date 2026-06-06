@@ -98,7 +98,7 @@ heran.
 | **Embedded LLM-Anwendung (Cost/Latency-kritisch)** | `grid-gym` (Referenz, Domäne) + Modul 14 | Cost-Attribution pro Slice, Cache-Hit-Rate als Metrik, Determinism/Replay/Fault als eigene Test-Klassen. |
 | **Internes Developer-Tool** | `grid-gym` (Referenz, Domäne) | AGENTS.md-Disziplin, Welle-Self-Close, Replay-Lauf gegen Modellwechsel. |
 | **Plattform/Multi-Repo-Landschaft** | `grid-gym` + `bess-ems` + `c-hsm-doc` parallel | Repo-Klassen (Referenz/Safety/Compliance), Einführungsregel "erst Referenz, dann Flagship", Carveout-Management über Teams. |
-| **Migration / Brownfield (kein Greenfield-Harness)** | alle drei Repos (Stand 2026-06 ohne `harness/README.md`) | Beobachtung in [`fallstudien.md` §Beobachtung aus dem Ist-Zustand](fallstudien.md#beobachtung-aus-dem-ist-zustand): kanonische Quellen existieren oft, ein formeller Einstiegspunkt fehlt — *das* ist der typische Ausgangspunkt. |
+| **Migration / Brownfield (kein Greenfield-Harness)** | alle drei Repos (Stand 2026-06 ohne `harness/README.md`) | Beobachtung in [`fallstudien.md` §Beobachtung aus dem Ist-Zustand](fallstudien.md#beobachtung-aus-dem-ist-zustand): kanonische Quellen existieren oft, ein formeller Einstiegspunkt fehlt — *das* ist der typische Ausgangspunkt. Systematische Sicht: [`konventionen.md` §Harness-Bootstrap](konventionen.md#harness-bootstrap) (BF-Modus, Konvergenz-Auftrag zu GF, Graduation-Bedingung). |
 
 Die vollständige Liste der Branchen-Anwendungsanker steht in
 [`fallstudien.md` §Branchen-Anwendungsanker](fallstudien.md#branchen-anwendungsanker).

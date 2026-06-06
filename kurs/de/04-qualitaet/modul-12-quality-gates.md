@@ -16,6 +16,13 @@ Sechs neue Begriffe — Volldefinitionen in
 | **Halluziniertes Gate** | Im `harness/README.md` versprochener Schritt, der real nicht existiert oder dauerhaft rot ist. | Schild "Vorsicht, Stufe" ohne Stufe. |
 | **Domänen-Gate** | Repo-spezifisches Gate jenseits der generischen sechs (`test-determinism`, `noqa-gate`, `solid-suppression-gate`). | Werks-eigenes Prüfgerät neben dem TÜV-Standard. |
 
+**Begriffsklärung:** *Bootstrap-aware Gate* (oben) ist nicht zu
+verwechseln mit *Harness-Bootstrap* aus
+[`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap).
+Letzteres ist der **Repo-Einstiegsprozess** (Lebenszyklus eines Harness
+im Repo); ersteres ist die **Reifestufe eines einzelnen Sensors**.
+Beide Begriffe teilen das Wort, sind strukturell verschieden.
+
 ## Engage
 
 `make gates` ist grün auf deiner Maschine. Im CI ist es rot. Du investierst
