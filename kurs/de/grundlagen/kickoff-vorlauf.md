@@ -18,7 +18,7 @@ genau die Stimmen, die hier am wertvollsten sind.
 ## Drei kalibrierte Vorlauffragen
 
 Drei Fragen, dieselbe Form wie der Modul-0-Vorab-Block (siehe
-[`../00-einfuehrung/modul-00-einfuehrung.md`](../00-einfuehrung/modul-00-einfuehrung.md#vorab--was-hältst-du-heute-für-wahr) §"Vorab — was hältst du heute für wahr?").
+[`../00-einfuehrung/modul-00-einfuehrung.md`](../00-einfuehrung/modul-00-einfuehrung.md#vorab-was-hältst-du-heute-für-wahr) §"Vorab — was hältst du heute für wahr?").
 Jede Frage zielt auf einen *anderen* Quadranten der 2×2-Matrix
 ([`klassifikation.md`](klassifikation.md)), damit die Sammlung am Ende
 breit streut.

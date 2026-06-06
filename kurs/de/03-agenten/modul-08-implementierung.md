@@ -9,7 +9,7 @@
 > öffnest. **Teil B (8b — Regeln, Kontext, Worked Example):** Hard
 > Rules · Typische Fehlvorstellungen · Kontext-Verdichtung · Worked
 > Example · Übungen · Reflexion · Selbstcheck. Der Trenner steht
-> sichtbar nach dem Workflow-Diagramm ([§Pause-Punkt 8a → 8b](#pause-punkt-8a--8b)).
+> sichtbar nach dem Workflow-Diagramm ([§Pause-Punkt 8a → 8b](#pause-punkt-8a-8b)).
 > Wer A und B in einer Sitzung liest, wird die Hard Rules nicht mehr in
 > die richtige Stelle des Workflows einordnen — sie sind ein zweiter,
 > paralleler Mechanismus, kein nächster Schritt.

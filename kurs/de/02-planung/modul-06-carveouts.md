@@ -76,7 +76,7 @@ noch in der Spec auf. Der bessere Weg: ein Carveout.
 **Schritt 1 — Carveout-Datei anlegen.** Konvention:
 `docs/plan/carveouts/CO-<NNN>-<kurztitel>.md`. ID läuft in `CO-*`-Reihe
 (separat von `LH-`, `ADR-`, `SL-` — siehe
-[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#id-schema)).
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#id-schema-als-klammer)).
 Für unseren Fall: `CO-001-index-coverage.md`.
 
 **Schritt 2 — Pflichtfelder im Frontmatter / Header festlegen.** Ein

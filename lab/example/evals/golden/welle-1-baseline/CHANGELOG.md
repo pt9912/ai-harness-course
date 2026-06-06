@@ -2,7 +2,7 @@
 
 Replay-Sets verrotten. Diese Datei dokumentiert die Veränderung des
 Sets über Wellen — sie ist *Pflicht* (siehe
-[Kurs Modul 11](../../../../../../kurs/de/04-qualitaet/modul-11-replay-evaluierung.md)
+[Kurs Modul 11](../../../../../kurs/de/04-qualitaet/modul-11-replay-evaluierung.md)
 und [ADR-0011](../../../docs/plan/adr/0011-closure-note-pflicht.md)
 für die Closure-Disziplin generell).
 
