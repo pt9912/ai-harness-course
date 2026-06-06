@@ -91,7 +91,7 @@ Nach diesem Modul kannst du:
 > späteren Welle (geplanter Pfad: unter
 > [`../../../lab/example/exercises/`](../../../lab/example/exercises/);
 > exakter Dateiname noch offen). Bis dahin sind die Übungen am
-> eigenen Repo oder am Beispiel-Repo aus
+> eigenen Repo oder am vollausgefüllten Beispiel-Lab unter
 > [`../../../lab/example/`](../../../lab/example/) durchführbar.
 
 ## Themen
@@ -100,17 +100,15 @@ Nach diesem Modul kannst du:
   Repo-Klasse und Phase-Reife.
 * Die vier Trigger-Klassen (siehe
   [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)):
-  Sync, Promotion, Cross-Reference, Acceptance — plus die
-  BF-typische Sync-Trigger-Variante über *Diskrepanz-Auslöser*
-  (T3), die im BF-Walkthrough sichtbar wird.
+  Sync, Promotion, Cross-Reference, Acceptance.
 * Phasen-Karte als didaktisches Instrument: sektionsweise
   Reife-Visualisierung eines Artefakts.
 * GF-Walkthrough: vom Modus-Beschluss bis zur ersten
   Konventionen-Iteration.
 * BF-Walkthrough: Inventur, Diskrepanz-Schock, Reconciliation-Plan,
   Graduation-Trigger.
-* Selbstüberwachung des Modus: woran erkenne ich einen Modus-Wechsel
-  in der laufenden Arbeit?
+* Drei Anzeichen für einen Modus-Wechsel im laufenden Betrieb (siehe
+  §Wann wechselt der Modus? unten).
 
 ## Harness-Einordnung
 
@@ -122,6 +120,12 @@ Closure), lehrt dieses Modul als *initiale Aufsetzungs-Praxis*:
 gleiche Sensoren und Guides, andere Anwendungsphase. Die abstrakte
 Verbindung steht in
 [`../grundlagen/konventionen.md` §Verbindung zum Steering-Loop](../grundlagen/konventionen.md#verbindung-zum-steering-loop).
+
+[Modul 1 §Schritt 0](modul-01-entwicklungszyklus.md#kernidee) hat den
+Bootstrap-Modus als Kurz-Vorgriff eingeführt (Baseline und Modus als
+Voraussetzung für den Lebenszyklus); dieses Modul ist die Vollform —
+die *Diagnose-Praxis*, die Schritt 0 zur Vorbedingung jeder
+modusabhängigen Aktion macht.
 
 Gegen die vier Harness-Linsen aus
 [`../grundlagen/konzeptkarte.md`](../grundlagen/konzeptkarte.md):
@@ -145,8 +149,8 @@ Antwort auf jede dieser drei Fragen.
    Modus?"*
 2. *"Wenn ein Repo in einer Sub-Area Greenfield ist, gilt das dann
    für das ganze Repo?"*
-3. *"Was ist eine Trigger-Klasse — und wozu brauche ich vier davon
-   statt einer einzigen 'Bootstrap-Aktion'?"*
+3. *"Brauchst du Trigger-Klassen überhaupt, wenn du sauber im
+   Greenfield arbeitest — oder nur in Brownfield-Notlagen?"*
 
 Lass die Notiz neben dem Modul liegen. Am Modul-Ende prüft der
 Selbstcheck genau diese drei Punkte — und vergleicht mit der scharfen
@@ -163,6 +167,35 @@ der Phasen-Ebene. Genau dieses Diagnose-Vermögen ist das
 Lehr-Ergebnis dieses Moduls; die Modus-Wahl als Planungs-Entscheidung
 (also: *welcher Modus soll für den nächsten Slice gelten?*) folgt
 später in [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harness.md).
+
+### Wann wechselt der Modus? Drei Anzeichen
+
+Im laufenden Betrieb verändern sich Sub-Areas zwischen den Modi. Drei
+beobachtbare Anzeichen, an denen sich ein Modus-Wechsel ankündigt:
+
+1. **Diskrepanz-Häufung ändert sich.** Wenn der Reconciliation-Backlog
+   einer BF-Sub-Area über mehrere Slices schrumpft und neue Inventur-
+   Schritte keine Diskrepanzen mehr melden, nähert sich die Sub-Area
+   der **Graduation zu GF**. Umgekehrt: wenn in einer als GF gemeldeten
+   Sub-Area plötzlich Diskrepanzen aufpoppen (Tests, die ohne
+   Spec-Anker stehen), driftet sie zurück Richtung BF.
+2. **Test-Bestand übertrifft Spec-Anker.** Wenn das Test-Bestand
+   strukturell mehr prüft als die Spec behauptet (z. B. Edge-Case-
+   Tests ohne `LH-*`-ID), ist die Sub-Area de facto in BF gedriftet —
+   der Code "weiß" mehr als die Doku. Symptom: bei jeder Code-Änderung
+   muss die Spec nachgezogen werden, statt umgekehrt.
+3. **Wiederkehrende Reviewer-Findings.** Wenn Reviewer dieselbe
+   Findings-Klasse über mehrere Slices melden, ist eine **Konvention
+   im Entstehen** — die Sub-Area bewegt sich von Phase 3 (partiell)
+   nach Phase 4 (kohärent) im selben Modus. Die Bewegung ist kein
+   Modus-Wechsel, das Lesemuster aber identisch: Beobachtung →
+   Konvention → Anker setzen.
+
+Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose.
+§Reflexion fragt am Modul-Ende metakognitiv danach, in welcher
+Sub-Area du *gerade jetzt* einen solchen Wechsel beobachtest — die
+hier gelisteten Indizien sind das Werkzeug, um diese Frage konkret
+zu beantworten.
 
 ## Typische Fehlvorstellungen
 
@@ -327,7 +360,7 @@ Nummerierung GF 0–8 vs. BF 1–9.
 
 | # | Aktion | BF-Besonderheit gegenüber GF |
 |---|---|---|
-| 1 | Wie GF-Schritt 1, plus Modus-Antizipation "BF pro Sub-Area" | + explizite Modus-Setzung mit Sub-Area-Aufzählung |
+| 1 | GF-Schritte 0 und 1 in einem Schritt zusammengefasst: Modus-Antizipation "BF pro Sub-Area" + Baseline-Auswahl + Repo-Klasse + ID-Schemata festlegen | + explizite Modus-Setzung mit Sub-Area-Aufzählung; Repo-Klassen-Wahl und Modus-Antizipation fallen zusammen |
 | 2 | **Code-Inventur (Discovery):** Makefile, CI, Tests, README, Commit-Messages inventarisieren als Lerner-Schritt | **neu in BF** — kein Repo-Artefakt entsteht, nur Lerner-Wissen |
 | 3 | Templates adoptieren | wie GF |
 | 4 | `harness/conventions.md` mit Modus = BF pro Sub-Area, MR-000-Aussage | Modus-Block anders strukturiert (BF-Deklarationen + Konvergenz-Auftrag pro Sub-Area) |
@@ -355,7 +388,7 @@ Pannenerscheinung.
 
 Beide Walkthroughs bewegen Artefakte durch **Phase-Reife** (0–5)
 pro Sektion (sechs Stufen, siehe
-[`../grundlagen/konventionen.md` §Sektionsweise Reife](../grundlagen/konventionen.md#harness-bootstrap)).
+[`../grundlagen/konventionen.md` §Sektionsweise Reife](../grundlagen/konventionen.md#sektionsweise-reife-phasen-pro-dokument)).
 Die folgende Matrix macht sichtbar, *was Phase-N in GF bedeutet
 versus was sie in BF bedeutet* — dieselbe Phase-Stufe,
 unterschiedliche Bewegungsrichtung:
@@ -435,21 +468,25 @@ Transfer-Form der Übung.
 
 Erstelle eine Phasen-Karte für ein Artefakt deiner Wahl (z. B.
 `harness/conventions.md`, `spec/lastenheft.md`,
-`docs/plan/planning/roadmap.md`). **Faded scaffolding** — die Hälfte
-der Vorlage ist gefüllt, den Rest füllst du selbst:
+`docs/plan/planning/roadmap.md`). **Faded scaffolding** — vier von
+sechs Vorlage-Zeilen sind gefüllt (eine pro Phase 0/1/2/4), die
+restlichen zwei füllst du selbst.
+
+Die Beispiel-Sektionen unten stammen aus `harness/conventions.md`;
+für ein anderes Artefakt eigene Sektions-Namen einsetzen:
 
 | Sektion | Aktuelle Phase (0–5) | Begründung | Nächster Modus-/Trigger-Anker |
 |---|---|---|---|
 | §Kernidee | 4 | "Vertrag steht, Code wird daran gemessen" | bei Spec-Änderung → T6 Cross-Reference-Trigger zur ADR |
 | §Sensors | … | … | … |
 | §Source Precedence | 2 | "Top-Level-Wunschbild, noch nicht durchverbunden" | … |
-| §Closure-Regel | … | … | … |
-| §Adaption | 1 | "Template kopiert, Versprechen zu füllen" | … |
+| §Adaptions-Block | 1 | "Template kopiert, Versprechen zu füllen" | T1 Sync-Trigger setzen, sobald MR-001 ergänzt wird |
+| §Closure-Regel | 0 | "Datei führt die Sektion noch nicht — Pflicht zur Anlage aus Konvention" | bei Anlage → T1 + T2 Sync-Trigger zu README und AGENTS.md |
 
 *Mindestens drei Zeilen vollständig ausfüllen* (auch die noch nicht
-gestarteten — Phase 0 oder Phase 1 sind legitime Reifegrade,
-*"existiert nicht"* ist ein gültiger Befund). Die Phase-Stufen 0–5
-stehen in der Phase × Modus-Matrix weiter oben.
+gestarteten — Phase 0 ist eine legitime Reife, *"existiert nicht,
+sollte aber"* ist ein gültiger Befund). Die Phase-Stufen 0–5 stehen
+in der Phase × Modus-Matrix weiter oben.
 
 *Erfolgskriterium:* mindestens eine Sektion in einer anderen Phase
 als die übrigen — sektionsweise Reife ist das Lehr-Ergebnis, und
@@ -498,23 +535,21 @@ metakognitiv*) wird in §Reflexion geprüft, nicht im Selbstcheck.
 Der Selbstcheck deckt die übrigen vier Lernziele plus die
 Conceptual-Change-Selbstvalidierung ab.
 
-* **(Verstehen · konzeptuell — geprüft durch Übung 1)** Was
-  unterscheidet GF-Modus von BF-Modus? Warum gilt der Modus *pro
-  Sub-Area* und nicht pro Repo?
-* **(Verstehen · konzeptuell — Voraussetzung für Anwenden in Übung 2)**
-  Welche vier Trigger-Klassen gibt es laut
+* **(Verstehen, durch Übung 1)** Was unterscheidet GF-Modus von
+  BF-Modus? Warum gilt der Modus *pro Sub-Area* und nicht pro Repo?
+* **(Verstehen, Vorstufe für Übung 2)** Welche vier Trigger-Klassen
+  gibt es laut
   [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)?
   Nenne pro Klasse ein Beispiel aus den beiden Worked Examples.
-* **(Analysieren · konzeptuell — aktiviert durch Übung 2)** Welcher
-  Trigger in Worked Example 2 macht den BF-Modus-Übergang sichtbar
-  — und warum gerade dieser?
-* **(Erschaffen · prozedural — aktiviert durch Übung 3)** Was
-  bedeutet *Phase 4 kohärent* in GF gegenüber BF? Nenne pro Modus
-  ein konkretes Indiz aus der Phase × Modus-Matrix.
-* **(Conceptual Change — Selbstvalidierung)** Vergleiche jetzt
-  deine Spontanantworten zu den drei §Vorab-Fragen mit deiner
-  heutigen Antwort. Welche hat sich verschoben? Welche ist gleich
-  geblieben — und warum hält sie?
+* **(Analysieren, durch Übung 2)** Welcher Trigger in Worked
+  Example 2 macht den BF-Modus-Übergang sichtbar — und warum gerade
+  dieser?
+* **(Erschaffen, durch Übung 3)** Was bedeutet *Phase 4 kohärent* in
+  GF gegenüber BF? Nenne pro Modus ein konkretes Indiz aus der
+  Phase × Modus-Matrix.
+* **(Conceptual Change)** Vergleiche jetzt deine Spontanantworten
+  zu den drei §Vorab-Fragen mit deiner heutigen Antwort. Welche hat
+  sich verschoben? Welche ist gleich geblieben — und warum hält sie?
 
 ### Selbstcheck-Rubrik
 
