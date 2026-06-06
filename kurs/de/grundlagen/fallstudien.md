@@ -44,32 +44,41 @@ treiben skaliert nicht — der Agent verteilt dann halbgare Standardtexte
 Die vier Repos zeigen (Stand 2026-06) vier Stationen eines
 Reifegrad-Gradienten:
 
-| Repo | `AGENTS.md` | `harness/README.md` | Stadium |
-|---|---|---|---|
-| `grid-gym` | ✓ | ✓ | etablierter formeller Einstieg |
-| `u-boot` | ✓ (neu, 2026-06) | ✓ (neu, 2026-06) | formeller Einstieg seit kurzem |
-| `c-hsm-doc` | ✓ | ✗ | AGENTS.md ohne Harness-Index |
-| `bess-ems` | ✗ | ✗ | kanonische Quellen ohne Harness-Hülle, obwohl sicherheitskritischstes Repo |
+| Repo | `AGENTS.md` | `harness/README.md` | Modus | Stadium |
+|---|---|---|---|---|
+| `grid-gym` | ✓ | ✓ | BF (graduation-nah) | etablierter formeller Einstieg |
+| `u-boot` | ✓ (neu, 2026-06) | ✓ (neu, 2026-06) | BF (in Transition) | formeller Einstieg seit kurzem |
+| `c-hsm-doc` | ✓ | ✗ | BF (früh) | AGENTS.md ohne Harness-Index |
+| `bess-ems` | ✗ | ✗ | BF (Start) | kanonische Quellen ohne Harness-Hülle, obwohl sicherheitskritischstes Repo |
 
 Alle vier Repos haben *die kanonischen Quellen* (Spec, ADR, Planning,
 Makefile-Gates) — der Harness existiert in jedem von ihnen, nur in
-unterschiedlich formalisiertem Zustand. Das ist der realistische
-Ausgangspunkt für die meisten Teams: nicht "Greenfield-Harness", sondern
-"Ein Einstieg in einen schon vorhandenen Harness" — und die Frage ist
-nicht *ob*, sondern *wie weit* der Einstieg bereits formalisiert ist.
+unterschiedlich formalisiertem Zustand. **Alle vier sind im
+Brownfield-Modus** (siehe [`konventionen.md` §Harness-Bootstrap](konventionen.md#harness-bootstrap)):
+Code und kanonische Quellen sind da, die Harness-Hülle entsteht als
+*Inventur des Bestands* (Trigger-Richtung Code → Doc). Damit bestätigen
+die vier Repos den allgemeinen Befund: *typischer Ausgangspunkt ist
+Brownfield, nicht Greenfield*. Die Frage ist nicht *ob*, sondern *wie
+weit* die BF-Inventur bereits vorangeschritten ist und wie nah die
+Graduation zu Greenfield (Trigger-Richtung kippt auf Doc → Code) ist.
+
 Die Bewegung von `u-boot` zwischen den Wellen (2026-06: AGENTS.md und
-`harness/README.md` ergänzt) ist selbst Lehrstoff: Harness-Reife ist
-beobachtbar und änderbar, nicht statisch.
+`harness/README.md` ergänzt) ist selbst Lehrstoff: BF-Reife ist
+beobachtbar und änderbar, nicht statisch — Repos können sich
+systematisch der Graduation nähern, ein Artefakt pro Welle.
 
 Keines der vier Repos führt bisher `harness/conventions.md` (neu im
 Kurs; Default-Ort für repo-lokale Strukturregeln, Adaptionen ggü.
 Baseline und Modus-Deklaration pro Sub-Area — siehe
 [`konventionen.md`](konventionen.md#harnessconventionsmd-als-konventionsspeicher)).
-Das ist der nächste sichtbare Reife-Schritt, sobald repo-lokale
-Adaptionen ggü. Kurs-Konvention notwendig werden — und in den meisten
-realen Repos werden sie das früher als gedacht (eigene ID-Präfixe für
-Architektur/Spezifikation, Bootstrap-Modus pro Sub-Area, Compliance-
-Bindung-Klassen).
+Damit auch keinen formalen Modus-Block, in dem GF/BF-Klassifikation
+pro Sub-Area dokumentiert wäre — derzeit ist die BF-Einstufung in der
+Tabelle oben eine *externe Beobachtung*, kein Repo-eigener Eintrag.
+Das ist der nächste sichtbare Reife-Schritt vor formaler Graduation,
+sobald repo-lokale Adaptionen ggü. Kurs-Konvention notwendig werden —
+und in den meisten realen Repos werden sie das früher als gedacht
+(eigene ID-Präfixe für Architektur/Spezifikation, Bootstrap-Modus pro
+Sub-Area, Compliance-Bindung-Klassen).
 
 ## Branchen-Anwendungsanker
 
