@@ -48,14 +48,15 @@ Bootstrap?"*:
 - **Brownfield-Erfahrene**: "Den Bestand auseinanderlesen, die
   Diskrepanz zur gewünschten Norm sehen, Reconciliation-Plan
   machen."
-- **Skeptiker**: "Bootstrap ist Setup. Das passiert einmal, dann ist
-  das System eingeschwungen."
+- **Skeptiker**: "Brauchen wir das wirklich, wenn das Repo eh schon
+  läuft?"
 
-Alle drei sind richtig — aber für unterschiedliche *Sub-Areas
-desselben* Repos. Wer das nicht trennt, kommentiert die falschen
-Symptome: dem GF-Erfahrenen erscheint jeder BF-Modus als Versagen,
-dem Skeptiker erscheint jede Trigger-Klasse als Ritual. Dieser Modul
-trennt.
+Alle drei Stimmen treffen einen realen Punkt — aber jeweils für
+unterschiedliche *Sub-Areas desselben* Repos. Wer das nicht trennt,
+kommentiert die falschen Symptome: dem GF-Erfahrenen erscheint jeder
+BF-Modus als Versagen; die Skeptiker-Frage ist legitim, hat aber eine
+*sub-area-spezifische* Antwort (nicht "ja/nein für das Repo", sondern
+"ja für diese, nein für jene Sub-Area"). Dieses Modul trennt.
 
 ## Lernziele
 
@@ -99,7 +100,9 @@ Nach diesem Modul kannst du:
   Repo-Klasse und Phase-Reife.
 * Die vier Trigger-Klassen (siehe
   [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)):
-  Pointer, Bestätigung, Diskrepanz, Promotion.
+  Sync, Promotion, Cross-Reference, Acceptance — plus die
+  BF-typische Sync-Trigger-Variante über *Diskrepanz-Auslöser*
+  (T3), die im BF-Walkthrough sichtbar wird.
 * Phasen-Karte als didaktisches Instrument: sektionsweise
   Reife-Visualisierung eines Artefakts.
 * GF-Walkthrough: vom Modus-Beschluss bis zur ersten
@@ -165,7 +168,7 @@ später in [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harnes
 
 * **FV1:** *"Bootstrap ist ein einmaliges Initialisierungs-Event,
   kein laufender Modus."* — Korrektur: Bootstrap ist ein fortlaufender
-  Modus, der sich über Sub-Areas und Phasen-Reife entwickelt. Jeder
+  Modus, der sich über Sub-Areas und Phase-Reife entwickelt. Jeder
   Trigger ist ein Bootstrap-Mikro-Event. Wer Bootstrap als Setup
   versteht, übersieht die Modus-Wechsel, die im laufenden Betrieb
   passieren, und produziert daher dauerhaft Findings ohne
@@ -239,6 +242,14 @@ vier Trigger-Klassen aus
 [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen) —
 die abstrakten Definitionen stehen dort, hier nur die Instanzen.
 
+*Hinweis zur T-Nummerierung:* Die Trigger sind durch das
+DocSearch-Beispiel nummeriert (T1 = Pointer in README,
+T2 = Pointer in AGENTS, T4 = Promotion, T5 = erste ADR-Vorschläge,
+T6 = Cross-Reference Spec ↔ ADR, T7 = ADR-Review-Auslöser).
+**T3 ist BF-spezifisch** und tritt im Greenfield-Walkthrough nicht
+auf — er erscheint in Worked Example 2 als Sync-Trigger in
+BF-Diskrepanz-Auslöse-Variante.
+
 | # | Aktion | Berührte Dateien (Phasen-Übergang) | Trigger |
 |---|---|---|---|
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
@@ -307,6 +318,13 @@ Schock* (rot, neu in BF), *Goal/Graduation* (grün gestrichelt).
 
 ### Detail-Tabelle (Schritte 1–4: Inventur-Phase, was bei BF anders ist)
 
+*Hinweis zur Schritt-Nummerierung:* BF nimmt die Modus-Setzung in
+Schritt 1 mit (wo GF Schritt 0 trägt), weil in BF die
+Repo-Klassen-Wahl und die Modus-Antizipation zusammenfallen — beide
+hängen von der ersten Inventur-Beobachtung ab und können nicht *vor*
+dem ersten Hinschauen entschieden werden. Daher die asymmetrische
+Nummerierung GF 0–8 vs. BF 1–9.
+
 | # | Aktion | BF-Besonderheit gegenüber GF |
 |---|---|---|
 | 1 | Wie GF-Schritt 1, plus Modus-Antizipation "BF pro Sub-Area" | + explizite Modus-Setzung mit Sub-Area-Aufzählung |
@@ -318,10 +336,10 @@ Schock* (rot, neu in BF), *Goal/Graduation* (grün gestrichelt).
 
 | # | Aktion | BF-Besonderheit gegenüber GF |
 |---|---|---|
-| 5 | Sensors-Haupt-Tabelle direkt aus Makefile-Kommentaren entstehen lassen | **gegenteilig zu GF** — Targets existieren, keine "Nicht behauptet"-Promotion nötig; **T3** (Diskrepanz-Trigger bei Sensor-Lücken) wird sichtbar |
+| 5 | Sensors-Haupt-Tabelle direkt aus Makefile-Kommentaren entstehen lassen | **gegenteilig zu GF** — Targets existieren, keine "Nicht behauptet"-Promotion nötig; **T3** (Sync-Trigger in BF-Diskrepanz-Auslöse-Variante: Sensor-Lücke = impliziter Pointer-Mismatch zwischen Makefile-Realität und Sensor-Tabelle) wird sichtbar |
 | 6 | Lastenheft aus Code/Tests/CI rückbauen | Inventur-Umkehr; Diskrepanz-Material entsteht (Code ohne Anforderung, Test ohne LH-Bezug) |
 | 7 | Architektur + Spezifikation aus `src/` rückbauen; **retroaktive ADRs** für implizite Entscheidungen | ADRs teils retroaktiv mit Status *Accepted* (oder *Superseded*, falls Entscheidung schon revidiert) |
-| 8 | **Diskrepanz-Schock:** Diskrepanzen klassifizieren als (a) `CO-DS-*` (orphan code ohne Anforderung), (b) Reconc.-Slice (orphan requirement ohne Code), (c) retro-ADR (implicit decision) | **BF-spezifischer Schritt** — die Reconciliation-Pflicht macht hier den Modus-Übergang sichtbar; **T3** als typische Trigger-Quelle |
+| 8 | **Diskrepanz-Schock:** Diskrepanzen klassifizieren als (a) `CO-DS-*` (orphan code ohne Anforderung), (b) Reconc.-Slice (orphan requirement ohne Code), (c) retro-ADR (implicit decision) | **BF-spezifischer Schritt** — die Reconciliation-Pflicht macht hier den Modus-Übergang sichtbar; **T3** (Sync-Trigger zwischen Code-Realität und Anforderungs-Anker, in BF-typischer Diskrepanz-Auslöse-Variante) als typische Trigger-Quelle |
 | 9 | Roadmap als Reconciliation-Plan; letzte Welle = Graduation pro Sub-Area | Inhalt anders als GF-Roadmap — Plan ist Diskrepanz-Auflösungs-Sequenz, nicht Feature-Sequenz |
 | Bootstrap-Ende | Reconciliation-Backlog steht, Konvergenzpfad zu GF pro Sub-Area sichtbar | — |
 
@@ -335,13 +353,16 @@ Pannenerscheinung.
 
 ## Phasen × Modus — die zweidimensionale Reife-Matrix
 
-Beide Walkthroughs bewegen Artefakte durch **Phase-Reife** (1–5)
-pro Sektion. Die folgende Matrix macht sichtbar, *was Phase-N in
-GF bedeutet versus was sie in BF bedeutet* — dieselbe Phase-Stufe,
+Beide Walkthroughs bewegen Artefakte durch **Phase-Reife** (0–5)
+pro Sektion (sechs Stufen, siehe
+[`../grundlagen/konventionen.md` §Sektionsweise Reife](../grundlagen/konventionen.md#harness-bootstrap)).
+Die folgende Matrix macht sichtbar, *was Phase-N in GF bedeutet
+versus was sie in BF bedeutet* — dieselbe Phase-Stufe,
 unterschiedliche Bewegungsrichtung:
 
 | | Greenfield (Doc → Code) | Brownfield (Code → Doc) |
 |---|---|---|
+| **Phase 0 leer** | Datei existiert nicht — Pflicht zur Anlage aus Konvention | Datei existiert nicht — Inventur stellt fest, dass Doku-Anker fehlt |
 | **Phase 1 Skelett** | Template kopiert, *Versprechen* zu füllen | Template kopiert, *Inventur-Auftrag* an Code |
 | **Phase 2 Outline** | Top-Level-Wunschbild | Top-Level-Bestandsaufnahme |
 | **Phase 3 partiell** | Sektionen versprochen, Code folgt | Sektionen dokumentiert, andere unentdeckt |
@@ -417,7 +438,7 @@ Erstelle eine Phasen-Karte für ein Artefakt deiner Wahl (z. B.
 `docs/plan/planning/roadmap.md`). **Faded scaffolding** — die Hälfte
 der Vorlage ist gefüllt, den Rest füllst du selbst:
 
-| Sektion | Aktuelle Phase (1–5) | Begründung | Nächster Modus-/Trigger-Anker |
+| Sektion | Aktuelle Phase (0–5) | Begründung | Nächster Modus-/Trigger-Anker |
 |---|---|---|---|
 | §Kernidee | 4 | "Vertrag steht, Code wird daran gemessen" | bei Spec-Änderung → T6 Cross-Reference-Trigger zur ADR |
 | §Sensors | … | … | … |
@@ -426,8 +447,9 @@ der Vorlage ist gefüllt, den Rest füllst du selbst:
 | §Adaption | 1 | "Template kopiert, Versprechen zu füllen" | … |
 
 *Mindestens drei Zeilen vollständig ausfüllen* (auch die noch nicht
-gestarteten — Phase 1 ist eine legitime Reife). Die Phase-Stufen
-1–5 stehen in der Phase × Modus-Matrix weiter oben.
+gestarteten — Phase 0 oder Phase 1 sind legitime Reifegrade,
+*"existiert nicht"* ist ein gültiger Befund). Die Phase-Stufen 0–5
+stehen in der Phase × Modus-Matrix weiter oben.
 
 *Erfolgskriterium:* mindestens eine Sektion in einer anderen Phase
 als die übrigen — sektionsweise Reife ist das Lehr-Ergebnis, und
@@ -471,22 +493,28 @@ Betrieb still verfällt.
 
 ## Selbstcheck
 
-* **(Verstehen — geprüft durch Übung 1)** Was unterscheidet
-  GF-Modus von BF-Modus? Warum gilt der Modus *pro Sub-Area* und
-  nicht pro Repo?
-* **(Erinnern)** Welche vier Trigger-Klassen gibt es laut
+Die metakognitive Selbstüberwachung (Lernziel *Überwachen ·
+metakognitiv*) wird in §Reflexion geprüft, nicht im Selbstcheck.
+Der Selbstcheck deckt die übrigen vier Lernziele plus die
+Conceptual-Change-Selbstvalidierung ab.
+
+* **(Verstehen · konzeptuell — geprüft durch Übung 1)** Was
+  unterscheidet GF-Modus von BF-Modus? Warum gilt der Modus *pro
+  Sub-Area* und nicht pro Repo?
+* **(Verstehen · konzeptuell — Voraussetzung für Anwenden in Übung 2)**
+  Welche vier Trigger-Klassen gibt es laut
   [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)?
   Nenne pro Klasse ein Beispiel aus den beiden Worked Examples.
-* **(Analysieren — aktiviert durch Übung 2)** Welcher Trigger in
-  Worked Example 2 macht den BF-Modus-Übergang sichtbar — und
-  warum gerade dieser?
-* **(Erschaffen — aktiviert durch Übung 3)** Was bedeutet *Phase 4
-  kohärent* in GF gegenüber BF? Nenne pro Modus ein konkretes
-  Indiz aus der Phase × Modus-Matrix.
-* **(Konvictions-Check-Rückgriff)** Vergleiche jetzt deine
-  Spontanantworten zu den drei §Vorab-Fragen mit deiner heutigen
-  Antwort. Welche hat sich verschoben? Welche ist gleich geblieben
-  — und warum hält sie?
+* **(Analysieren · konzeptuell — aktiviert durch Übung 2)** Welcher
+  Trigger in Worked Example 2 macht den BF-Modus-Übergang sichtbar
+  — und warum gerade dieser?
+* **(Erschaffen · prozedural — aktiviert durch Übung 3)** Was
+  bedeutet *Phase 4 kohärent* in GF gegenüber BF? Nenne pro Modus
+  ein konkretes Indiz aus der Phase × Modus-Matrix.
+* **(Conceptual Change — Selbstvalidierung)** Vergleiche jetzt
+  deine Spontanantworten zu den drei §Vorab-Fragen mit deiner
+  heutigen Antwort. Welche hat sich verschoben? Welche ist gleich
+  geblieben — und warum hält sie?
 
 ### Selbstcheck-Rubrik
 
@@ -498,7 +526,7 @@ die modulspezifischen Indikatoren sind:
 |---|---|---|---|
 | GF vs. BF, pro Sub-Area? | "GF = Doku führt, BF = Code führt." | Plus Sub-Area-Argument mit Beispiel ("ein Repo kann in *Konventionen* BF und in *Spec-Schreibung* GF sein"), Verweis auf `fallstudien.md` §Beobachtung. | + Hybrid-Fall benannt; Erklärung, warum die Repo-Ebene zu grob für die Modus-Entscheidung ist (Verweis auf die vier Trigger-Klassen als kontextuelle Differenzierung). |
 | Vier Trigger-Klassen, je ein Beispiel? | Drei Klassen genannt, ohne Worked-Example-Bezug. | Alle vier Klassen genannt + je ein Trigger aus WE1 oder WE2 als Beispiel. | + Begründung, warum die vier Klassen *erschöpfend* sind (was würde nicht in eine der vier passen?); Verweis auf `konventionen.md` §Vier Trigger-Klassen für die Definition. |
-| Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz-Trigger". | T3 (Diskrepanz-Trigger) bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht. | + Pointe: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt — ohne T3-Anker bleibt die Inventur Selbstzweck. |
+| Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz". | T3 als **Sync-Trigger in BF-Diskrepanz-Auslöse-Variante** bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht (impliziter Pointer-Mismatch). | + Pointe: T3 ist *keine fünfte Klasse*, sondern eine BF-typische Auslöse-Variante von Sync (die vier Klassen aus konventionen.md bleiben erschöpfend). Plus: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt. |
 | Phase 4 kohärent in GF vs. BF? | "In GF steht der Vertrag, in BF die Inventur." | GF Phase 4: *Vertrag steht, Code wird daran gemessen* (z. B. CI-Gates greifen). BF Phase 4: *Inventur abgeglichen, Diskrepanz-Schock sichtbar* (z. B. CO-DS-* oder Reconc.-Slice-Backlog). | + Begründung, warum *Phase 4* die kritische Stufe in BF ist (vorher: Inventur arbeitet, nachher: Reconciliation läuft); Verweis auf Modul 7 §Carveouts für die `CO-DS-*`-Konvention. |
 | Konvictions-Check: welche Verschiebung? | Keine Verschiebung benannt oder pauschal "alles klarer". | Eine konkrete Antwort: welche §Vorab-Frage hat sich um welchen Halbsatz verschoben? Verweis auf eine Fehlvorstellung (FV1–FV4), die deine Spontanantwort getragen hat. | + Pointe: welche Vorstellung gleich geblieben ist und *warum sie hält* — Conceptual-Change-Reflexion verlangt, beides zu zeigen, nicht nur Verschiebung. |
 

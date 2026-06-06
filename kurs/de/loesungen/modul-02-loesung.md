@@ -42,19 +42,27 @@ Vier Klassen aus
 3. **Cross-Reference-Trigger** — wechselseitige Verlinkung,
    typisch Spec ↔ ADR. Beispiel: **T6** (Cross-Reference in
    `spec/architecture.md` auf ADR-0001, GF-WE Schritt 8).
-4. **Review-/Acceptance-Trigger** — Phase-Übergang via Sign-off.
+4. **Acceptance-Trigger** — Phase-Übergang via Sign-off.
    Beispiel: **T7** (ADR-Review-Auslöser für *Proposed* →
    *Accepted*, GF-WE Schritt 8).
 
-Plus **T3** (Diskrepanz-Trigger) als BF-spezifischer Auslöser in
-BF-WE Schritt 5/8 — er gehört zur Klasse der Review-/Acceptance-
-Trigger insofern, als die Klassifikation der Diskrepanz selbst
-einen Phase-Übergang erzwingt (Inventur → Reconciliation-Plan).
+Plus **T3** als BF-spezifische **Sync-Trigger-Variante** in BF-WE
+Schritt 5/8: Eine Diskrepanz ist konzeptuell ein impliziter
+Pointer-Mismatch zwischen Code-Realität und Doku-Behauptung. In
+GF-Modus ist der Pointer freiwillig (man legt ihn an, wenn ein
+neues Dokument referenziert werden soll); in BF-Modus wird der
+Pointer als *Fehlen* sichtbar (die Inventur stellt fest, dass kein
+Sync-Pointer existiert, obwohl Code-Verhalten und Doku auseinander­
+fallen). Die vier Klassen aus `konventionen.md` bleiben damit
+erschöpfend; T3 ist nicht eine fünfte Klasse, sondern eine
+BF-typische Auslöse-Variante von Sync. Pointe für *exzellent*:
+genau diese Auslöse-Variante erklärt, warum BF-Repos *mehr* Sync-
+Trigger pro Welle produzieren als GF-Repos.
 
 ### (Analysieren) Welcher Trigger in WE2 macht den BF-Modus-Übergang sichtbar — und warum gerade dieser?
 
-**T3 (Diskrepanz-Trigger)** in Schritt 5 (Sensors-Lücken) und
-Schritt 8 (Diskrepanz-Schock). Begründung:
+**T3 (Sync-Trigger in BF-Diskrepanz-Auslöse-Variante)** in Schritt 5
+(Sensors-Lücken) und Schritt 8 (Diskrepanz-Schock). Begründung:
 
 In den vorigen Schritten arbeitet die Inventur "stumm" — Templates
 adoptieren, `conventions.md` mit `MR-*` füllen, Sensors aus Makefile
@@ -185,9 +193,12 @@ in Bootstrap).
 **Pointe für *exzellent*:** mindestens eine Sektion in einer
 *niedrigeren* Phase als die Standard-Annahme (z. B. §Source
 Precedence ist nicht durchverbunden, weil der zweite Konfliktfall
-fehlt — Phase 2 statt erwarteter Phase 4). Das zeigt, dass du die
-Phase-Reife nicht aus Selbstbild, sondern aus konkretem
-Verbundenheits-Kriterium ableitest.
+fehlt — Phase 2 statt erwarteter Phase 4). Erweiterte Pointe: eine
+Sektion mit **Phase 0** tragen (*"Datei existiert nicht — sollte
+aber"*) ist die häufigste übersehene Reife. Phase 0 zu nennen,
+ohne ihn als Versagen zu interpretieren, zeigt, dass du die
+Phase-Reife aus konkretem Verbundenheits-Kriterium ableitest, nicht
+aus Selbstbild.
 
 ## Häufige Fehler
 
