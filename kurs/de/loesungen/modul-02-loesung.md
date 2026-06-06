@@ -1,34 +1,228 @@
-# Lösung: Modul 2 — Harness-Bootstrap
-
-> **Skelett-Status (P5 Phase G):** Diese Datei existiert als
-> Verweis-Ziel für die Index-Aktualisierungen aus P5 Phase B. Der
-> didaktische Inhalt (Selbstcheck-Antworten, Übungshinweise, häufige
-> Fehler) entsteht in Phase G nach Abschluss von Modul 2 selbst
-> (Phase F).
+# Lösung — Modul 2: Harness-Bootstrap
 
 Zugehöriges Modul: [Modul 2 — Harness-Bootstrap](../01-spec-und-architektur/modul-02-harness-bootstrap.md).
 
 ## Selbstcheck-Antworten
 
-(P5 Phase G — Antwort auf jede Selbstcheck-Frage aus Modul 2.)
+### (Verstehen) Was unterscheidet GF-Modus von BF-Modus? Warum gilt der Modus *pro Sub-Area* und nicht pro Repo?
+
+- **GF (Greenfield):** Doku führt, Code folgt. Die Konvention wird
+  *behauptet* (Spec, ADR, `harness/conventions.md`), bevor Code sie
+  realisiert.
+- **BF (Brownfield):** Code führt, Doku folgt. Die Konvention wird
+  aus dem Bestand *inventarisiert*, Diskrepanzen werden klassifiziert
+  und durch Reconciliation-Slices oder Carveouts aufgelöst.
+- **Hybrid:** beide Richtungen aktiv (typisch beim Übergang).
+
+Pro Sub-Area, weil derselbe Repo in unterschiedlichen Sub-Areas
+unterschiedlich reif ist: Konventionen können längst GF sein
+(`harness/conventions.md` existiert mit `MR-*`-IDs), während die
+Spec-Schreibung noch BF ist (`spec/lastenheft.md` muss aus Tests
+und Commit-Messages rückgebaut werden). Wer das Repo *als Ganzes*
+klassifiziert, gibt entweder die GF-Sub-Areas auf ("ist alles BF")
+oder kommentiert die BF-Sub-Areas falsch ("ist doch GF, also wer
+hat das verbockt?").
+
+Die vier Fallstudien-Repos in
+[`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)
+sind explizites Beleg: alle vier sind in BF, aber mit *unterschiedlich
+weit fortgeschrittener Sub-Area-Inventur*.
+
+### (Erinnern) Welche vier Trigger-Klassen gibt es? Nenne pro Klasse ein Beispiel aus den Worked Examples.
+
+Vier Klassen aus
+[`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen):
+
+1. **Sync-Trigger** — Pointer-Update zwischen Dokumenten.
+   Beispiel: **T1** (Pointer in `harness/README.md` auf
+   `conventions.md`, GF-WE Schritt 3).
+2. **Promotion-Trigger** — Eintrag wandert aus dem "Nicht
+   behauptet"-Block in die Haupt-Tabelle. Beispiel: **T4**
+   (Sensors-Roster bei erstem Code-Slice, GF-WE Schritt 6).
+3. **Cross-Reference-Trigger** — wechselseitige Verlinkung,
+   typisch Spec ↔ ADR. Beispiel: **T6** (Cross-Reference in
+   `spec/architecture.md` auf ADR-0001, GF-WE Schritt 8).
+4. **Review-/Acceptance-Trigger** — Phase-Übergang via Sign-off.
+   Beispiel: **T7** (ADR-Review-Auslöser für *Proposed* →
+   *Accepted*, GF-WE Schritt 8).
+
+Plus **T3** (Diskrepanz-Trigger) als BF-spezifischer Auslöser in
+BF-WE Schritt 5/8 — er gehört zur Klasse der Review-/Acceptance-
+Trigger insofern, als die Klassifikation der Diskrepanz selbst
+einen Phase-Übergang erzwingt (Inventur → Reconciliation-Plan).
+
+### (Analysieren) Welcher Trigger in WE2 macht den BF-Modus-Übergang sichtbar — und warum gerade dieser?
+
+**T3 (Diskrepanz-Trigger)** in Schritt 5 (Sensors-Lücken) und
+Schritt 8 (Diskrepanz-Schock). Begründung:
+
+In den vorigen Schritten arbeitet die Inventur "stumm" — Templates
+adoptieren, `conventions.md` mit `MR-*` füllen, Sensors aus Makefile
+ableiten. Erst wenn die Inventur auf *Bestand trifft, der keinem
+Anforderungs-Anker entspricht* (orphan code), oder *Anforderungen,
+die keinen Code-Anker haben* (orphan requirement), wird die
+Diskrepanz explizit. T3 ist die Stelle, an der der BF-Modus seine
+Daseins-Berechtigung *vorzeigt*: ohne ihn wäre die Inventur ein
+Selbstzweck, mit ihm wird der Reconciliation-Pfad sichtbar.
+
+**Pädagogischer Wert des Diskrepanz-Schocks:** Lernende erkennen
+diesen Moment im eigenen Repo wieder. Die Phase-4-Stufe in BF
+("Inventur abgeglichen, Diskrepanz-Schock sichtbar") ist der
+Wendepunkt — vorher arbeitet die Inventur, nachher läuft
+Reconciliation. T3 *triggert* diesen Wendepunkt.
+
+### (Erschaffen) Was bedeutet *Phase 4 kohärent* in GF vs. BF?
+
+Aus der Phase × Modus-Matrix:
+
+- **GF Phase 4:** *"Vertrag steht, Code wird daran gemessen."*
+  Konkretes Indiz: CI-Gates greifen, weil die Spec scharf genug
+  ist, um Verstöße automatisch zu erkennen (z. B.
+  `make verify-lh-coverage` zählt LH-IDs gegen Tests und failt bei
+  unter-deckten Anforderungen).
+- **BF Phase 4:** *"Inventur abgeglichen, Diskrepanz-Schock
+  sichtbar."* Konkretes Indiz: `CO-DS-*`-Backlog ist gefüllt
+  (orphan code als dokumentierte Carveouts) und Reconciliation-
+  Slices stehen in `docs/plan/planning/open/`. Der "Schock" ist
+  paradoxerweise positiv: er bedeutet, dass die Inventur fertig
+  ist und die Reconciliation-Arbeit *anfangen* kann.
+
+**Pointe für *exzellent*-Stufe:** Phase 4 ist in BF die kritische
+Stufe — vorher arbeitet die Inventur unsichtbar, nachher beginnt
+die Reconciliation-Arbeit. Wer in Phase 3 stehen bleibt, hat den
+Diskrepanz-Schock vermieden und damit auch die Reconciliation-
+Pflicht — das Repo bleibt formal vollständig, ist aber inhaltlich
+nicht abgeglichen.
+
+### (Konvictions-Check-Rückgriff) Vergleiche deine Spontanantworten mit deiner heutigen Antwort.
+
+Diese Frage hat keine universelle Lösung — die Antwort hängt von
+*deiner* Vorab-Notiz ab. Was eine *solide* Selbsteinschätzung
+auszeichnet:
+
+- *Konkrete Benennung*: welche §Vorab-Frage hat sich verschoben?
+  Welcher Halbsatz ist neu?
+- *Fehlvorstellungs-Bezug*: welche der vier dokumentierten FVs hat
+  deine Spontanantwort getragen (FV1 "einmaliges Setup", FV2
+  "Repo-Eigenschaft", FV3 "GF braucht keine Trigger", FV4 "BF als
+  Notlage")?
+- *Was ist gleich geblieben*: welche Vorstellung hält weiterhin —
+  und warum? Conceptual-Change-Reflexion ist nur dann sauber,
+  wenn beides gezeigt wird (Verschiebung + Stabilität).
+
+Häufiger Fehler in der Selbstbewertung: "Alles ist klarer." ist
+keine Conceptual-Change-Antwort, sondern ein generisches
+Wohlfühl-Statement.
 
 ## Übungshinweise
 
-(P5 Phase G — Hinweise zu den drei Übungen aus Modul 2: Klassifikation
-nach Modus, Trigger-Zuordnung, Phasen-Karten-Übung mit faded
-scaffolding.)
+### Übung 1 — Modus pro Sub-Area klassifizieren
+
+**Maßstab für *solide*:**
+
+- Mindestens drei Sub-Areas befüllt, mit konkretem Beobachtungs-
+  Indiz pro Zeile (kein "ist halt GF" ohne Begründung).
+- Mindestens eine Sub-Area klassifiziert, die du *anders*
+  klassifizierst, als deine Kapur-Vorab-Übung vermutet hat.
+  Wenn beide Klassifikationen 1:1 übereinstimmen, hast du
+  oberflächlich gearbeitet — oft, weil das Beobachtungs-Indiz aus
+  der Vorab-Übung ungeprüft übernommen wurde.
+
+**Falle:** "Alle Sub-Areas sind BF" ist zwar empirisch häufig
+korrekt (siehe Fallstudien), aber pädagogisch verdächtig — selbst
+in einem BF-Repo sind manche Sub-Areas reifer (z. B. ist die
+Test-Infrastruktur oft GF, wenn der Code TDD-getrieben entstand).
+Wer pauschal "alles BF" antwortet, hat die Sub-Area-Differenzierung
+nicht ausgereizt.
+
+**Pointe für *exzellent*:** explizite Hybrid-Klassifikation für
+mindestens eine Sub-Area, mit Begründung *warum gerade hier* die
+Mischung zustande kommt (z. B. "neue Module sind GF, Legacy-Module
+sind BF — Hybrid in der Sub-Area *Konventionen*").
+
+### Übung 2 — Trigger-Klassen zuordnen
+
+**Maßstab für *solide*:**
+
+- Fünf Trigger benannt, jeder einer der vier Klassen zugeordnet.
+- Pro Zeile eine kurze Begründung, die auf das *Trigger-Merkmal*
+  zeigt (z. B. "T6 = Cross-Reference, weil ADR und Spec sich
+  wechselseitig verlinken müssen — eine Richtung allein wäre ein
+  Sync-Trigger").
+
+**Typische Fehler:**
+
+- T4 als Sync-Trigger einordnen — Promotion-Trigger geht *über*
+  Sync hinaus, weil der Eintrag den Status-Block wechselt, nicht
+  nur den Pointer.
+- T6 und T7 zusammenwerfen — T6 ist Cross-Reference (statische
+  Verlinkung), T7 ist Review/Acceptance (Phase-Übergang). Beide
+  können am selben ADR-Artefakt auftreten, sind aber unterschiedliche
+  Trigger.
+
+**Pointe für *exzellent*:** Erschöpfungs-Argument — was würde
+*nicht* in eine der vier Klassen passen? (Antwort: kaum etwas
+Klassifikatorisches; die vier Klassen decken Pointer, Promotion,
+Cross-Reference und Phase-Übergang ab — vier funktional disjunkte
+Trigger-Modi.)
+
+### Übung 3 — Phasen-Karte ausfüllen
+
+**Maßstab für *solide*:**
+
+- Mindestens drei Sektionen vollständig ausgefüllt mit Phase, Begründung
+  und nächstem Modus-/Trigger-Anker.
+- Mindestens eine Sektion in einer anderen Phase als die übrigen
+  (Heterogenität sichtbar gemacht).
+
+**Falle "alle Phasen sind gleich":** Wenn deine Phasen-Karte alle
+Sektionen auf derselben Phase zeigt, hast du die Phasen-Begründung
+zu grob gewählt. Sektionsweise Reife ist der Punkt — wenn alle
+Sektionen auf 3 stehen, schaust du nicht genau genug hin. Ein
+Artefakt, das durchgehend Phase 4 trägt, ist *fertig* (nicht mehr
+in Bootstrap).
+
+**Pointe für *exzellent*:** mindestens eine Sektion in einer
+*niedrigeren* Phase als die Standard-Annahme (z. B. §Source
+Precedence ist nicht durchverbunden, weil der zweite Konfliktfall
+fehlt — Phase 2 statt erwarteter Phase 4). Das zeigt, dass du die
+Phase-Reife nicht aus Selbstbild, sondern aus konkretem
+Verbundenheits-Kriterium ableitest.
 
 ## Häufige Fehler
 
-(P5 Phase G — typische Fehlvorstellungen bei der Modus-Diagnose und
-bei der Trigger-Klassifikation.)
+- **Bootstrap als Setup-Event verstehen.** Wer FV1 trägt, sucht den
+  "Abschluss" des Bootstrap und übersieht die Modus-Wechsel im
+  laufenden Betrieb. Korrektur: Bootstrap = fortlaufender Modus.
+- **Repo-weite Modus-Klassifikation.** Wer FV2 trägt, klassifiziert
+  *das ganze Repo* als "BF" und kommentiert die GF-Sub-Areas falsch.
+  Korrektur: Modus gilt pro Sub-Area; ein Repo kann in mehreren
+  Modi gleichzeitig sein.
+- **GF ignoriert Trigger.** Wer FV3 trägt, verzichtet im
+  Greenfield-Modus auf die Trigger-Disziplin. Korrektur: auch GF
+  produziert Trigger (Diskrepanz, Promotion, etc.) — nur entstehen
+  sie aus *Konsistenzprüfung neu Geschaffenen*, nicht aus
+  *Bestandsinventur*.
+- **BF als Notlage.** Wer FV4 trägt, will BF möglichst schnell
+  überwinden, statt es als regulären Modus mit Konvergenz-Auftrag
+  zu führen. Korrektur: BF ist der typische Ausgangspunkt;
+  Graduation ist eine ausgewiesene Bedingung, nicht Wunschdenken.
+- **Phasen-Karte ohne Heterogenität.** Wer alle Sektionen auf
+  derselben Phase notiert, hat das didaktische Lehr-Ziel der Übung
+  verfehlt. Sektionsweise Reife sichtbar machen ist *der Punkt*.
 
 ## Weiterführende Verweise
 
-(P5 Phase G — Querverweise auf
-[`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap),
-[`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md), und das
-Folgemodul [Modul 3 — Lastenheft](../01-spec-und-architektur/modul-03-lastenheft.md).)
+- Konzept-Anker und Definitionen:
+  [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap).
+- Vier Trigger-Klassen mit abstrakten Definitionen:
+  [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen).
+- Fallstudien in GF/BF-Klassifikation:
+  [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand).
+- Lernervorstellungen für Conceptual-Change-Reflexion:
+  [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md).
+- Modus-*Wahl* als Folge-Übung (P6 Modul-4-Slice — noch nicht in
+  Modul 4 vorhanden): [Modul 5 — Planning Harness](../02-planung/modul-05-planning-harness.md).
 
 - Vorherige Lösung: [Modul 1](modul-01-loesung.md)
 - Nächste Lösung: [Modul 3](modul-03-loesung.md)
