@@ -12,8 +12,10 @@ rot?* Antwort am Ende dieses Moduls — und sie liegt im Diagramm unten.
 ## Mini-Glossar für dieses Modul
 
 Modul 0 hat acht Grundbegriffe eingeführt; dieses Modul fügt acht weitere
-hinzu. Die vollständigen Definitionen stehen in
-[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe);
+hinzu plus drei Harness-Bootstrap-Begriffe, die Schritt 0 voraussetzt.
+Die vollständigen Definitionen stehen in
+[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe)
+bzw. [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap);
 für die ersten Seiten reichen die folgenden Ein-Satz-Anker:
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
@@ -26,8 +28,11 @@ für die ersten Seiten reichen die folgenden Ein-Satz-Anker:
 | **Fitness Function** | Maschinell prüfbare Architektur-Aussage (z. B. Modulgrenze, Latenzbudget). | ein Test, der nicht Code, sondern Architektur prüft. |
 | **Closure-Eintrag** | Notiz im Slice, die festhält, *was beim Abschluss gelernt wurde*. | das letzte Stück Beleg, das eine Welle wirklich schließt. |
 | **Steering Loop** | Wiederkehrendes Muster: Versagen beobachten → Guide/Sensor verbessern → Wiederholung reduzieren. | die Lernschleife, mit der der Harness mitwächst. |
+| **Harness-Bootstrap** | Einstiegsprozess in den Harness-Lebenszyklus — Trajektorie durch Dokument-Zustände, kein Ereignis. | "Hochziehen aus dem Nichts" — Repo lernt sich selbst, bis es laufen kann. |
+| **GF/BF-Modus** | Pro Sub-Area deklarierte Trigger-Richtung: Greenfield (Doc → Code) oder Brownfield (Code → Doc, Übergang mit Konvergenz-Auftrag zu GF). | wer wem folgt: Versprechen oder Inventur. |
+| **Phase-Reife** | Schreibreife eines Dokument-Abschnitts in fünf Stufen (Skelett → Outline → partiell → kohärent → stabil); pro Sektion unabhängig. | nicht "fertig oder nicht", sondern "in welcher Schicht". |
 
-Diese acht Begriffe trägt das Modul. Wenn beim ersten Lesen ein Begriff
+Diese elf Begriffe trägt das Modul. Wenn beim ersten Lesen ein Begriff
 unklar bleibt, ist die einsatzklare Tiefe später in den Modulen 2–4 (Spec,
 ADR, Plan) verankert — nicht hier.
 
@@ -128,6 +133,21 @@ welcher Quelle hört er zuerst?
 Ohne Source Precedence beantwortet jede dieser Fragen die letzte
 Person, die etwas sagt. Mit Source Precedence beantwortet sie die
 Tabelle.
+
+**Schritt 0 — Baseline und Modus festlegen.** Vor dem Sammeln
+kanonischer Quellen muss klar sein: *welche Harnesskonvention* adoptiert
+wird (AI-Harness-Kurs, interner Standard, Industrie-Norm), *welche
+Repo-Klasse* angesetzt wird (Referenz, Safety/Control, Policy/Compliance,
+Tooling) und *welcher Modus pro Sub-Area* gilt (Greenfield: Doc führt,
+Code folgt; Brownfield: Code führt, Doku folgt — mit Konvergenz-Auftrag
+zu Greenfield). Diese drei Entscheidungen prägen jede Folge-Aktion: in
+Brownfield ist der nächste Schritt *Inventur des Bestands*, in Greenfield
+*Auflisten zu schaffender Quellen*. Volldefinitionen und Phasen-Modell
+in [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap).
+Die folgenden sechs Schritte 1–6 beschreiben den Greenfield-Pfad; in
+Brownfield-Modus läuft jeder Schritt als Code → Doc-Inventur mit
+parallelem Diskrepanz-Backlog (siehe
+[`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)).
 
 **Schritt 1 — Kanonische Quellen sammeln, Mehrfach-Quellen erkennen.**
 Liste alle Dokumente, die *normativ* etwas behaupten ("so soll es
