@@ -58,6 +58,7 @@ for (let i = 0; i < args.length; i++) {
 if (options.ignore.length === 0) {
   // Default: Templates sind by-design symbolisch (Pfade im Ziel-Repo).
   options.ignore.push("lab/templates");
+  options.ignore.push(".tmp");
 }
 
 if (options.help) {
