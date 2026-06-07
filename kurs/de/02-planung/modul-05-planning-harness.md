@@ -34,7 +34,7 @@ Nach diesem Modul kannst du:
 * einen Slice anhand zweier Größen-Kriterien *bewerten* (in einem Agenten-Lauf abschließbar, in einer Review-Sitzung prüfbar) (Bewerten · konzeptuell),
 * einen zu großen Slice schnittfrei in zwei umsetzbare *zerlegen* und die Schnittentscheidung *begründen* (Erschaffen · prozedural),
 * Closure-Kriterien mit Lerneintrag *formulieren* (Erschaffen · prozedural),
-* für die von einem Slice berührten Sub-Areas den Bootstrap-Modus gegen das Kriterien-Set *begründen* (Bewerten · konzeptuell — Transfer aus Modul 2).
+* für die von einem Slice berührten Sub-Areas den Bootstrap-Modus gegen das Kriterien-Set *begründen* (Anwenden · konzeptuell — Transfer aus Modul 2).
 
 ## Lifecycle als State Machine
 
@@ -278,7 +278,7 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 * **(Erinnern)** Nenne die vier Lifecycle-Verzeichnisse in der Reihenfolge eines normalen Slice-Durchlaufs.
 * Welcher Trigger bewegt einen Slice von `next/` nach `in-progress/`?
 * Wann darf ein Slice in `done/` landen, obwohl ein Gate rot ist?
-* **(Bewerten — Transfer aus Modul 2)** Welche Sub-Areas berührt der nächste anstehende Slice — und welcher Modus passt für jede dieser Sub-Areas? Begründe je gegen mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand).
+* **(Anwenden — Transfer aus Modul 2)** Welche Sub-Areas berührt der nächste anstehende Slice — und welcher Modus passt für jede dieser Sub-Areas? Begründe je gegen mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand).
 
 ### Selbstcheck-Rubrik
 

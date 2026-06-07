@@ -44,7 +44,7 @@ Gate ist *im aktuellen Reifegrad nicht hart* — und das ist
 dokumentiert. Wenn weder Carveout noch Bootstrap, dann ist Closure
 falsch.
 
-### (Bewerten — Transfer aus Modul 2) Welche Sub-Areas berührt der nächste Slice — und welcher Modus passt für jede?
+### (Anwenden — Transfer aus Modul 2) Welche Sub-Areas berührt der nächste Slice — und welcher Modus passt für jede?
 
 Beispiel-Antwort für `SL-014a` (Authentifizierung implementieren). Vier
 berührte Sub-Areas, je gegen die vier Pflichtkriterien begründet —

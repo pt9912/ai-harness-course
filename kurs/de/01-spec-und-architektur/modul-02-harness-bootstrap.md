@@ -1,9 +1,28 @@
 # Modul 2 — Harness-Bootstrap
 
-> **Aufwand:** ca. 120 Min Lesen · 90 Min Übung. Spiralcurriculum:
+> **Aufwand:** ca. 150 Min Lesen · 90 Min Übung. Spiralcurriculum:
 > *Harness-Bootstrap*, *GF/BF-Modus* und *Phase-Reife* sind dir aus
 > [Modul 1 Mini-Glossar](modul-01-entwicklungszyklus.md#mini-glossar-für-dieses-modul)
 > dem Namen nach bekannt — hier werden sie zum Arbeitswerkzeug.
+
+## Mini-Glossar für dieses Modul
+
+Vier Begriffe — *Sub-Area* ist modul-eigen, die anderen drei sind
+Vorgriffe auf später vertiefte Konzepte (Volldefinitionen in
+[`../grundlagen/konventionen.md` §Kernbegriffe](../grundlagen/konventionen.md#kernbegriffe);
+*BF-Sub-Area-Markierung* in
+[Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren)).
+Der zentrale Begriff *Bootstrap-Modus (GF/BF/Hybrid)* wird im
+Lehrtext §Kernidee und §Phasen×Modus-Matrix systematisch entwickelt
+— sein "Bild im Kopf" ist die Matrix selbst und steht hier
+bewusst nicht im Glossar.
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
+| **Sub-Area** | Doku-/Code-Sektion, die als Träger einer Modus-Entscheidung dient — mit eigener Konventions-Härte (eigene `MR-NNN` möglich), eigener Inventur-Linie und eigener Pfad-/Datei-Familie im Repo. | nicht das Repo, nicht der Slice — die Strecke, die *ein* `MR-NNN` normiert. |
+| **Adaptions-Block** *(Vorgriff auf konventionen.md)* | Sektion in `harness/conventions.md`, in der das Repo seine Baseline-Adaptionen als `MR-NNN`-Einträge deklariert. | das Notizbuch, in dem das Repo seine Abweichungen von der Baseline aufschreibt. |
+| **BF-Sub-Area-Markierung** *(Vorgriff auf Modul 7)* | Modus-Deklaration im Adaptions-Block, die eine ganze Sub-Area als BF mit Graduation-Plan markiert — Alternative zur Carveout-Kaskade. | ein "hier wächst Wiese"-Schild für ein ganzes Beet, mit Datum für die Rasen-Graduierung. |
+| **MR-NNN** *(Vorgriff auf konventionen.md)* | ID-Schema für *Module Rules* — die Konventions-Adaptionen im Adaptions-Block (Schwester zu `LH-FA-*` für Anforderungen). | Anker-Nummer einer einzelnen Konventions-Härtung. |
 
 ## Optionale Explorations-Vorab-Übung (Kapur-Stil)
 
@@ -201,7 +220,9 @@ beobachtbare Anzeichen, an denen sich ein Modus-Wechsel ankündigt:
    ein systemisches "Code existiert vor Doku"-Muster zeigt, ist die
    richtige Antwort eine BF-Sub-Area-Markierung mit Graduation-Plan,
    nicht eine Carveout-Kaskade — siehe
-   [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
+   [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren)
+   (Vorgriff — vertieft in Modul 7, kann beim ersten Lesen
+   übersprungen werden).
    Die Carveout↔BF-Klammer trägt damit in beide Richtungen: Auflösung
    schließt eine BF-Sub-Area, Häufung eröffnet eine.
 
@@ -582,8 +603,11 @@ Modul-spezifische Trigger:
 - **Conceptual Change:** Vergleiche deinen Konvictions-Check
   (§Vorab — was hältst du heute für wahr?) mit deiner heutigen
   Antwort. Welche Vorstellung hat sich verschoben? Primäre
-  Kandidaten: FV1–FV4 in §Typische Fehlvorstellungen weiter oben.
-  Erweiterte Sammlung mit FV3-Variante in
+  Kandidaten: FV1–FV4 in §Typische Fehlvorstellungen weiter oben,
+  plus die *FV3-Variante* "Trigger-Klassen sind generell
+  Bürokratie-Overhead" (häufig bei GF-erfahrenen Lernenden; zielt
+  nicht auf "GF braucht keine Trigger", sondern auf "auch in GF nur
+  Aufwand"). Erweiterte Sammlung in
   [`../grundlagen/lernervorstellungen.md` §Über Harness-Bootstrap (Modul 2)](../grundlagen/lernervorstellungen.md#über-harness-bootstrap-modul-2).
 
 **Metakognitive Reflexionsfrage** (Träger für Lernziel

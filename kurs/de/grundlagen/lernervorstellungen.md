@@ -31,7 +31,7 @@ markieren Präkonzepte, die der Kurs heute *nicht* explizit als
 Fehlvorstellungs-Block aufgreift — Kandidaten für die nächste
 Iteration.
 
-### Über KI-Agenten und LLMs (Modul 0–1)
+### Über KI-Agenten und LLMs (Modul 0–3; Folge-Adressierung in Modul 9)
 
 - "Wir brauchen erst ein besseres Modell." — Modul 0
 - "Wir bauen einen Mega-Prompt." — Modul 0

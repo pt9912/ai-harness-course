@@ -11,6 +11,13 @@ Die Mini-Glossar-Einträge **listen** die drei legitimen Alternativen für
 gelockerte Gate-Disziplin (Carveout · BF-Sub-Area-Markierung ·
 Bootstrap-aware Gate); die Disambiguierung — *wann welches?* — leistet
 das Frage-Schema in [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
+*Wichtig zur Werkzeug-Klasse:* Carveout und Bootstrap-aware Gate sind
+**Closure-Werkzeuge** (Antworten auf eine konkrete rote Gate-Diskrepanz);
+*BF-Sub-Area-Markierung* ist demgegenüber der **Sub-Area-Kontext**, in
+dem diese Closure-Werkzeuge strukturell legitim werden — sie wirkt
+eine Ebene höher und ersetzt deren Closure-Funktion nicht
+(Disambiguierungs-Anker in
+[Modul 13 §Bootstrap-aware Gates](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)).
 Drei verwandte Begriffe erscheinen im Modul nebeneinander und meinen
 verschiedenes: *Disambiguierung* ist die kognitive Operation (Symptom
 auf Werkzeug abbilden), *Werkzeug-Wahl* ist deren Ergebnis (Carveout,
@@ -201,6 +208,13 @@ Carveouts gerade in Schritt 1–5 trainiert wurden):
      Zeit tun"* → **Permanent**, übergeführt in eine ADR. Permanente
      Carveouts gehören nicht in `carveouts/`, sondern als
      Architekturentscheidung mit Begründung in eine ADR.
+
+Die folgende Tabelle bildet die drei Wahl-Pfade für eine *konkrete
+Diskrepanz* ab. Bootstrap-aware Gate (Modul 13) erscheint hier
+absichtlich nicht — es regelt *Gate-Reifestufung*, nicht
+*Diskrepanz-Auflösung*. BF-Markierung wirkt eine Ebene höher als
+Carveout und ADR: sie kippt den Sub-Area-Kontext, in dem die
+Diskrepanz erst entsteht.
 
 | Wahl                       | Symptom-Indikator                                                                                                  | Träger                            | Folge-Artefakt                                                                            |
 |----------------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------|-------------------------------------------------------------------------------------------|
@@ -401,7 +415,7 @@ Modul-spezifische Trigger:
 | Zwei Pflichtfelder eines temporären Carveouts? | "Beschreibung." | Auflösungs-Trigger (beobachtbar, nicht "sobald wir Zeit haben") + gekoppelter Folge-Slice mit ID. | + Fehlt eines der beiden: der Carveout ist *de facto* permanent — und gehört dann offen als permanenter Carveout markiert oder in eine ADR überführt, statt unter "temporär" zu lügen. |
 | Wo lebt ein Carveout? | "Im Tracker." | `docs/plan/carveouts/` als Datei — kommt mit beim Klonen, ist neben Spec/ADR/Plan auditierbar. *Nicht* nur im Issue-Tracker. | + Folge: ein Carveout, der nur im Tracker existiert, taucht im `make gates`-Output nicht auf — und damit weiß ein Implementation-Agent nicht, dass die Schwelle bewusst gesenkt wurde. Das ist eine versteckte Spec-Lücke. |
 | Wann hält Carveout `make gates` grün? | "Wenn dokumentiert." | Nur wenn Carveout *im Repo* liegt, einen Auflösungs-Trigger nennt und an einen Folge-Slice gekoppelt ist; sonst muss das Gate rot bleiben. | + Hinweis: ein Carveout, der dauerhaft `make gates` grün hält, *ohne* dass jemals sein Trigger eintritt, ist eine versteckte Architekturentscheidung — sie gehört dann in eine permanente ADR überführt. |
-| Drei Werkzeuge für gelockerte Gate-Disziplin — wann welches? | "Beides/alles macht das Gate weicher." | **Carveout** = punktuelle Ausnahme für *einen* Fall, mit Folge-Slice und Auflösungs-Trigger. **BF-Sub-Area-Markierung** = Sub-Area-weiter Übergangs-Modus mit Graduation-Plan im Adaptions-Block von `harness/conventions.md`. **Bootstrap-aware Gate** = Stufung *des Gates selbst* (z. B. 40 % heute → 70 % bei M2). | + Disambiguierungs-Reflex: bei Diskrepanz-Häufung im selben Geltungsbereich ist die Wahl BF-Markierung, nicht Carveout-Kaskade — wer ein Dutzend Carveouts für dieselbe Sub-Area anlegt, hat den Mechanismus auf das falsche Werkzeug skaliert. Bootstrap-aware Gate skaliert mit dem Repo; Carveout ist punktueller Vertrag. Verwechslung jeder Achse führt zu "Bootstrap-Schlupfloch" — Stufung ohne Trigger ist Carveout-Wildwuchs, Carveout-Kaskade ohne BF-Markierung ist verschleierte Sub-Area-BF. |
+| Drei Werkzeuge für gelockerte Gate-Disziplin — wann welches? | "Beides/alles macht das Gate weicher." | **Carveout** = punktuelle Ausnahme für *einen* Fall, mit Folge-Slice und Auflösungs-Trigger. **BF-Sub-Area-Markierung** = Sub-Area-weiter Übergangs-Modus mit Graduation-Plan im Adaptions-Block von `harness/conventions.md` — *Sub-Area-Kontext, kein Closure-Werkzeug* (siehe [Modul 13 §Bootstrap-aware Gates](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)). **Bootstrap-aware Gate** = Stufung *des Gates selbst* (z. B. 40 % heute → 70 % bei M2). | + Disambiguierungs-Reflex: bei Diskrepanz-Häufung im selben Geltungsbereich ist die Wahl BF-Markierung, nicht Carveout-Kaskade — wer ein Dutzend Carveouts für dieselbe Sub-Area anlegt, hat den Mechanismus auf das falsche Werkzeug skaliert. Bootstrap-aware Gate skaliert mit dem Repo; Carveout ist punktueller Vertrag. Verwechslung jeder Achse führt zu "Bootstrap-Schlupfloch" — Stufung ohne Trigger ist Carveout-Wildwuchs, Carveout-Kaskade ohne BF-Markierung ist verschleierte Sub-Area-BF. |
 | Carveout-Audit-Slice skizzieren? | "Schaue mir die Carveouts an." | DoD-Punkte: Frische aller `Letzte Prüfung:`-Daten · Auflösung aller Carveouts mit eingetretenem Trigger · explizite Permanenz-Entscheidung für alles, was zwei Wellen "aktiv" stand · Audit-Bericht als Closure-Notiz. Rollen: Planner identifiziert, Architect entscheidet bei Permanenz, Implementer führt `git mv` und Config-Updates aus. Drei Status-Übergänge: *aufgelöst*, *permanent (→ADR)*, *weiterhin aktiv mit nachgetragenem Datum*. | + Der unbequemste Übergang ist *permanent → ADR*: er gibt zu, dass ein angeblich temporäres Konstrukt eine stille Architekturentscheidung war. Wer diesen Übergang nie vollzieht, hat keinen Carveout-Mechanismus, sondern eine Sammlung gut formatierter Lügen. Steering-Loop-Aktion: Audit-Slice als Schablone unter `docs/plan/planning/templates/carveout-audit.md`, sonst bricht der Mechanismus beim dritten Mal. |
 
 ## Weiterlesen
