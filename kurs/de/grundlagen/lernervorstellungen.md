@@ -105,6 +105,12 @@ Iteration.
   übertragen — Diskrepanz-Häufung in einer Sub-Area gehört nicht in
   eine Carveout-Kaskade, sondern in eine BF-Sub-Area-Markierung mit
   Graduation-Plan).
+- "Wenn Diskrepanz-Häufung BF-Markierung verlangt, ist auch jede
+  einzelne Diskrepanz eine BF-Markierung wert." — Modul 7
+  (Fehlvorstellungs-Block; Pendel-Überschwingen nach Conceptual
+  Change — die Schwester-FV zur vorigen, die typisch nach P7-Lese-
+  Erlebnis auftritt, wenn der Lerner die Carveout-FV gerade
+  überwunden hat).
 
 ### Über Agentenrollen und Implementation (Modul 8–9)
 

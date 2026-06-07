@@ -11,6 +11,12 @@ Die Mini-Glossar-Einträge **listen** die drei legitimen Alternativen für
 gelockerte Gate-Disziplin (Carveout · BF-Sub-Area-Markierung ·
 Bootstrap-aware Gate); die Disambiguierung — *wann welches?* — leistet
 das Frage-Schema in [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
+Drei verwandte Begriffe erscheinen im Modul nebeneinander und meinen
+verschiedenes: *Disambiguierung* ist die kognitive Operation (Symptom
+auf Werkzeug abbilden), *Werkzeug-Wahl* ist deren Ergebnis (Carveout,
+BF-Markierung oder ADR), *Werkzeug-Klasse* ist die Achse, auf der sich
+die drei Werkzeuge unterscheiden (punktuell vs. Sub-Area-weit vs.
+Gate-Stufung).
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
@@ -64,6 +70,7 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 - **"Carveouts gehören ins Issue-Tracker."** — Sie gehören ins Repo, neben Spec und ADRs. Tracker können vergessen werden, Repo-Files kommen mit beim Klonen.
 - **"Wenn der Trigger eintritt, lösen wir den Carveout auf."** — Realität: er bleibt liegen. Deshalb braucht jeder temporäre Carveout einen *Folge-Slice mit ID*, der das Auflösen plant. Slice schlägt Memo.
 - **"Jede entdeckte Diskrepanz ist ein eigener Carveout."** — Nein. Carveouts sind für **punktuelle** Ausnahmen mit Folge-Slice. Eine Diskrepanz-**Häufung** in einer Sub-Area (Symptom: mehrere Carveouts mit demselben Geltungsbereich, oder die Diskrepanz folgt aus generellem *"Code existiert vor Doku"*-Muster) gehört nicht in eine Carveout-Kaskade, sondern in eine **BF-Sub-Area-Markierung mit Graduation-Plan** (siehe [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Wer ein Dutzend Carveouts auf denselben Geltungsbereich anlegt, hat ein trainiertes Verfahren auf einen Fall übertragen, wo die einfachere BF-Markierung genügt — der Mechanismus ist auf das falsche Werkzeug skaliert. Maßgeblich ist das **Symptom-Muster** (gemeinsamer Geltungsbereich), nicht die Carveout-Zahl; die Wahl, welches Werkzeug bei welchem Symptom greift, leistet [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
+- **"Wenn Diskrepanz-Häufung BF-Markierung verlangt, ist auch jede einzelne Diskrepanz eine BF-Markierung wert."** — Nein, Pendel-Überschwingen nach der vorigen Fehlvorstellung (typische Conceptual-Change-Nachwirkung). BF-Markierung lohnt sich erst beim **Cluster im selben Geltungsbereich** oder beim systemischen *"Code existiert vor Doku"*-Muster — eine einzelne, gut abgrenzbare Diskrepanz mit klarem Folge-Slice ist und bleibt ein Carveout. Das Frage-Schema in [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren) trennt diese Fälle: Frage 1 leitet einzelne Diskrepanzen explizit auf den Carveout-/ADR-Pfad, nicht auf BF-Markierung. Das Werkzeug, das gerade erlernt wird, ist nicht das einzige Werkzeug.
 
 ## Worked Example A: einen Carveout dokumentieren
 
@@ -209,7 +216,48 @@ Carveouts gerade in Schritt 1–5 trainiert wurden):
 > echter Cluster entstünde, wenn zusätzlich `CO-002`/`CO-003` für
 > Boundary-Tests und Type-Coverage auf demselben `internal/index/`-
 > Pfad lägen; dann sprängen Frage 1 und Werkzeug-Wahl auf
-> BF-Sub-Area-Markierung um.
+> BF-Sub-Area-Markierung um. Die Markierungs-Mechanik selbst ist im
+> Lab strukturell bereits vorhanden: [`lab/example/harness/conventions.md`](../../../lab/example/harness/conventions.md)
+> trägt einen `## Adaptions-Block` mit `MR-000` Baseline-Aussage und
+> `MR-001` Source Precedence — die BF-Sub-Area-Markierung wäre ein
+> neuer `MR-NNN`-Eintrag im selben Block. Konkret-Format:
+>
+> ```markdown
+> ### MR-002 — `internal/index/`-Sub-Area im Brownfield-Modus
+>
+> **Modus:** Brownfield bis Welle-3-Graduation.
+> **Geltungsbereich:** `internal/index/` (Index-Layer, alle Sprach-Skelette).
+> **Graduation-Trigger:** Property-Test-Suite läuft + Coverage ≥ 90 %
+> über alle Pfade.
+> **Sync-Trigger:** nach Graduation einen Pointer-Eintrag in
+> `harness/README.md` §Sensors, der die Sub-Area als GF-bewertet
+> ausweist.
+> **Folge-Slice (für Reconciliation):** `slice-014-bf-index-reconciliation.md` (legt die Inventur und die ersten Reconciliation-Häppchen fest).
+> ```
+>
+> Das ersetzt eine Carveout-Kaskade (`CO-001`/`CO-002`/`CO-003` auf
+> denselben Pfad) durch eine einzelne Sub-Area-weite Aussage mit
+> klarem Graduations-Pfad.
+
+**Was passiert mit dem Schritt-1–5-Entwurf, wenn der Trichter nicht
+auf Carveout führt?** Der Inhalt ist nicht verloren, nur verschoben.
+Trigger-Formulierung (Schritt 3), Geltungsbereichs-Präzision
+(Schritt 2 Geltungsbereich-Feld), Verifikations-Checkliste (Schritt 5)
+wandern in das gewählte andere Werkzeug:
+
+- *BF-Sub-Area-Markierung*: der Geltungsbereich wird zum
+  Sub-Area-Geltungsbereich, der Trigger wird zum Graduation-Trigger,
+  die Verifikations-Checkliste zur Liste der
+  Reconciliation-Akzeptanzkriterien.
+- *ADR-Überführung*: der Geltungsbereich wird zum architektonischen
+  Wirkungsbereich, der Trigger fällt weg (permanent), die
+  Verifikations-Checkliste reduziert sich auf die Architektur-Folgen.
+
+Der angelegte Schritt-1-Stub `CO-<NNN>-*.md` wird nicht aktiviert,
+sondern entweder gelöscht (Inhalt vollständig in BF-Markierung/ADR
+aufgegangen) oder mit einem `Status: Überführt in <Ziel>`-Header
+nach `done/` verschoben, damit die Werkzeug-Wahl-Spur im Repo lesbar
+bleibt.
 
 Wenn die Wahl im Trichter auf "permanent" fällt, ist der
 `Status:`-Wechsel:
@@ -336,7 +384,7 @@ Modul-spezifische Trigger:
 - **Beobachtung:** War dein Trigger beobachtbar oder eine Form von "sobald wir Zeit haben"? Lebt dein Carveout in `docs/plan/carveouts/` oder im Tracker?
 - **2×2-Quadrant:** Trigger-Disziplin ist *inferential feedforward*; Carveout-Audit-Lauf ist *computational feedback*.
 - **Steering-Loop:** Carveout-Audit als wiederkehrender Slice (siehe Lernziel 4)? Trigger-Pflichtfeld als Frontmatter-Check?
-- **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Carveout = Workaround", "Wenn der Trigger eintritt, lösen wir den Carveout auf", "Jede entdeckte Diskrepanz ist ein eigener Carveout").
+- **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Carveout = Workaround", "Wenn der Trigger eintritt, lösen wir den Carveout auf", "Jede entdeckte Diskrepanz ist ein eigener Carveout", "Wenn Diskrepanz-Häufung BF-Markierung verlangt, ist auch jede einzelne Diskrepanz eine BF-Markierung wert" — Pendel-Paar).
 
 ## Selbstcheck
 
