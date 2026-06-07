@@ -196,6 +196,15 @@ beobachtbare Anzeichen, an denen sich ein Modus-Wechsel ankündigt:
    LH-FA-MMM"-Hinweis im Closure-Block, und die nächste Inventur
    meldet die Sub-Area mit einer Diskrepanz weniger.
 
+   **Umgekehrt: eine Diskrepanz-Häufung *eröffnet* eine BF-Sub-Area.**
+   Wenn mehrere Carveouts denselben Geltungsbereich tragen oder sich
+   ein systemisches "Code existiert vor Doku"-Muster zeigt, ist die
+   richtige Antwort eine BF-Sub-Area-Markierung mit Graduation-Plan,
+   nicht eine Carveout-Kaskade — siehe
+   [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
+   Die Carveout↔BF-Klammer trägt damit in beide Richtungen: Auflösung
+   schließt eine BF-Sub-Area, Häufung eröffnet eine.
+
 Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose
 und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
 
@@ -640,6 +649,11 @@ die modulspezifischen Indikatoren sind:
   → Begründungs-Pflicht pro Sub-Area im nächsten Slice-Plan):
   [Modul 5 §Worked Mini-Example "Bootstrap-Modus pro Sub-Area für einen Slice begründen"](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
   (Übungs-Auftrag direkt darunter in §Übungen).
+* Werkzeug-*Wahl* bei gelockerter Gate-Disziplin (Carveout vs.
+  BF-Sub-Area-Markierung vs. Bootstrap-aware Gate — das Spiegelbild zu
+  §Wann wechselt der Modus? Drittes Anzeichen, das die
+  Markierungs-Richtung Diskrepanz-Cluster → BF-Sub-Area zeigt):
+  [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
 * Steering-Loop im Steady-State (was Bootstrap *nach* Graduation
   wird):
   [Modul 11 — Verification Harness](../04-qualitaet/modul-11-verification.md).

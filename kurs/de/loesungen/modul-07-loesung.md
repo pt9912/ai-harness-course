@@ -41,6 +41,35 @@ Grün halten ist *nicht* erlaubt, wenn:
 Faustregel: Ein Carveout ohne Auflösungs-Plan ist eine *permanente
 Ausnahme*, die als *temporär* getarnt ist — und damit eine Harness-Lüge.
 
+### Drei Werkzeuge für gelockerte Gate-Disziplin — wann welches?
+
+Drei legitime Alternativen — nicht eine Mehrfach-Variante derselben
+Sache. Der Disambiguierungs-Reflex hängt am **Symptom**, nicht am
+Werkzeug:
+
+| Wahl                       | Symptom-Indikator (woran erkennst du es?)                                                                                          | Träger                            | Folge-Artefakt                                                                            |
+|----------------------------|------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|-------------------------------------------------------------------------------------------|
+| **Carveout**               | *Eine* konkrete Gate-/Regelausnahme, klar abgrenzbar, mit Folge-Slice und Auflösungs-Trigger.                                      | einzelne Diskrepanz               | `docs/plan/carveouts/CO-<NNN>-*.md`                                                       |
+| **BF-Sub-Area-Markierung** | Diskrepanz-**Häufung** im selben Geltungsbereich; oder generelles *"Code existiert vor Doku"*-Muster (z. B. 4 Carveouts auf `internal/index/`). | ganze Sub-Area                    | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
+| **Bootstrap-aware Gate**   | Gate, dessen Schwelle systemisch mit dem Repo-Reifegrad **mitwachsen** soll (Coverage 0 → 70 % bei M2), nicht einmalig gelockert.    | Gate-Stufung                      | Gate-Konfiguration mit Reifestufe + Trigger (Modul 13)                                    |
+
+**Häufigste Verwechslung — und die Korrektur dazu:** wer 14 Carveouts
+für `internal/index/` anlegt, hat das trainierte Carveout-Verfahren auf
+einen Fall übertragen, wo die einfachere **BF-Sub-Area-Markierung**
+genügt — eine Deklaration im Adaptions-Block, die die ganze Sub-Area
+als BF markiert und einen Graduation-Plan trägt. Anti-Pattern:
+*Carveout-Kaskade* (viele Einzel-Carveouts für ein systemisches Muster)
+und *Stufung-ohne-Trigger* (Bootstrap-aware Gate-Mimikry, dessen
+Reifestufe nie eintreten kann — entweder Carveout-Wildwuchs oder
+permanente ADR). Keine harte Carveout-Zahl als Schwelle — wer die
+Diskussion am Zähler aufhängt, hat das Symptom-Muster mit einer Quote
+verwechselt; die Faustregel ist der **gemeinsame Geltungsbereich**, nicht
+*n ≥ 3*.
+
+Vertiefung: [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren)
+führt das Frage-Schema (Carveout? BF-Markierung? ADR?) als
+Entscheidungsbaum durch.
+
 ## Übungshinweise
 
 ### Dokumentiere einen Carveout für eine fehlende Coverage-Schwelle
