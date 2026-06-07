@@ -53,11 +53,12 @@ Werkzeug:
 | **BF-Sub-Area-Markierung** | Diskrepanz-**Häufung** im selben Geltungsbereich; oder generelles *"Code existiert vor Doku"*-Muster (z. B. 4 Carveouts auf `internal/index/`). | ganze Sub-Area                    | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
 | **Bootstrap-aware Gate**   | Gate, dessen Schwelle systemisch mit dem Repo-Reifegrad **mitwachsen** soll (Coverage 0 → 70 % bei M2), nicht einmalig gelockert.    | Gate-Stufung                      | Gate-Konfiguration mit Reifestufe + Trigger (Modul 13)                                    |
 
-**Häufigste Verwechslung — und die Korrektur dazu:** wer 14 Carveouts
-für `internal/index/` anlegt, hat das trainierte Carveout-Verfahren auf
-einen Fall übertragen, wo die einfachere **BF-Sub-Area-Markierung**
-genügt — eine Deklaration im Adaptions-Block, die die ganze Sub-Area
-als BF markiert und einen Graduation-Plan trägt. Anti-Pattern:
+**Häufigste Verwechslung — und die Korrektur dazu:** wer ein Dutzend
+Carveouts auf denselben Geltungsbereich (z. B. `internal/index/`)
+anlegt, hat das trainierte Carveout-Verfahren auf einen Fall
+übertragen, wo die einfachere **BF-Sub-Area-Markierung** genügt —
+eine Deklaration im Adaptions-Block, die die ganze Sub-Area als BF
+markiert und einen Graduation-Plan trägt. Anti-Pattern:
 *Carveout-Kaskade* (viele Einzel-Carveouts für ein systemisches Muster)
 und *Stufung-ohne-Trigger* (Bootstrap-aware Gate-Mimikry, dessen
 Reifestufe nie eintreten kann — entweder Carveout-Wildwuchs oder

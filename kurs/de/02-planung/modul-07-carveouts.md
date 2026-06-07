@@ -16,7 +16,7 @@ das Frage-Schema in [§Worked Example A Schritt 6](#worked-example-a-einen-carve
 |---|---|---|
 | **Carveout** | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel — mit Trigger oder explizit als permanent markiert. | ein Loch im Zaun, mit Notiz "wann wird zugemacht?". |
 | **Auflösungs-Trigger** | Beobachtbare Bedingung, mit der ein temporärer Carveout endet (nicht "wenn wir Zeit haben"). | die Kerze, die *anzeigt*, dass es jetzt soweit ist. |
-| **BF-Sub-Area-Markierung** *(Vorgriff)* | Sub-Area-weiter Übergangs-Modus mit Graduation-Plan: die Modus-Deklaration im Adaptions-Block von `harness/conventions.md` markiert eine ganze Sub-Area als BF, statt jede Einzel-Diskrepanz als Carveout zu führen. **Vollform in [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)** (zugrundeliegende konventionen.md-Begriffe: *BF-Sub-Area* · *Modus-Deklaration* · *Adaptions-Block* in [`../grundlagen/konventionen.md` §Modus pro Sub-Area](../grundlagen/konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)). | das ganze Beet ist Wiese, mit Notiz "wann wird Rasen draus" — statt 14 einzelner Schilder *"hier wächst noch nichts"*. |
+| **BF-Sub-Area-Markierung** *(Vorgriff)* | Sub-Area-weiter Übergangs-Modus mit Graduation-Plan: die Modus-Deklaration im Adaptions-Block von `harness/conventions.md` markiert eine ganze Sub-Area als BF, statt jede Einzel-Diskrepanz als Carveout zu führen. **Vollform in [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)** (zugrundeliegende konventionen.md-Begriffe: *BF-Sub-Area* · *Modus-Deklaration* · *Adaptions-Block* in [`../grundlagen/konventionen.md` §Modus pro Sub-Area](../grundlagen/konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)). | das ganze Beet ist Wiese, mit Notiz "wann wird Rasen draus" — statt ein Dutzend einzelner Schilder *"hier wächst noch nichts"*. |
 | **Bootstrap-aware Gate** *(Vorgriff)* | Gate mit dokumentierter Reifestufe: weich in der Frühphase, hart ab Trigger. **Vollform in [Modul 13](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)**. | Tempolimit, das in der Bauzone gilt, später verschwindet. |
 
 ## Engage
@@ -63,7 +63,7 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 - **"Carveout = Workaround."** — Carveout = *dokumentierter* Workaround mit Trigger. Ohne Trigger ist es eine versteckte Annahme.
 - **"Carveouts gehören ins Issue-Tracker."** — Sie gehören ins Repo, neben Spec und ADRs. Tracker können vergessen werden, Repo-Files kommen mit beim Klonen.
 - **"Wenn der Trigger eintritt, lösen wir den Carveout auf."** — Realität: er bleibt liegen. Deshalb braucht jeder temporäre Carveout einen *Folge-Slice mit ID*, der das Auflösen plant. Slice schlägt Memo.
-- **"Jede entdeckte Diskrepanz ist ein eigener Carveout."** — Nein. Carveouts sind für **punktuelle** Ausnahmen mit Folge-Slice. Eine Diskrepanz-**Häufung** in einer Sub-Area (Symptom: mehrere Carveouts mit demselben Geltungsbereich, oder die Diskrepanz folgt aus generellem *"Code existiert vor Doku"*-Muster) gehört nicht in eine Carveout-Kaskade, sondern in eine **BF-Sub-Area-Markierung mit Graduation-Plan** (siehe [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Wer 14 Carveouts mit demselben Geltungsbereich anlegt, hat ein trainiertes Verfahren auf einen Fall übertragen, wo die einfachere BF-Markierung genügt — der Mechanismus ist auf das falsche Werkzeug skaliert. Die Wahl, welches Werkzeug bei welchem Symptom greift, leistet [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
+- **"Jede entdeckte Diskrepanz ist ein eigener Carveout."** — Nein. Carveouts sind für **punktuelle** Ausnahmen mit Folge-Slice. Eine Diskrepanz-**Häufung** in einer Sub-Area (Symptom: mehrere Carveouts mit demselben Geltungsbereich, oder die Diskrepanz folgt aus generellem *"Code existiert vor Doku"*-Muster) gehört nicht in eine Carveout-Kaskade, sondern in eine **BF-Sub-Area-Markierung mit Graduation-Plan** (siehe [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Wer ein Dutzend Carveouts auf denselben Geltungsbereich anlegt, hat ein trainiertes Verfahren auf einen Fall übertragen, wo die einfachere BF-Markierung genügt — der Mechanismus ist auf das falsche Werkzeug skaliert. Maßgeblich ist das **Symptom-Muster** (gemeinsamer Geltungsbereich), nicht die Carveout-Zahl; die Wahl, welches Werkzeug bei welchem Symptom greift, leistet [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
 
 ## Worked Example A: einen Carveout dokumentieren
 
@@ -158,37 +158,61 @@ aber weiter im aktiven Verzeichnis.
 
 **Schritt 6 — Carveout, BF-Sub-Area-Markierung oder ADR?** Bevor du
 Schritt 1–5 als endgültige Form annimmst, prüfe, ob das Werkzeug
-*Carveout* überhaupt passt. Drei legitime Alternativen — die folgenden
-drei Wenn-Dann-Fragen brechen den tri-way-Vergleich auf sequenzielle
-Entscheidungen herunter (so vermeidest du den Reflex, jede entdeckte
-Diskrepanz reflexhaft als Carveout zu führen, weil Carveouts gerade in
-Schritt 1–5 trainiert wurden):
+*Carveout* überhaupt passt. Drei legitime Alternativen, getrennt durch
+**zwei sequenzielle Wenn-Dann-Fragen** statt einen flachen
+Drei-Wege-Vergleich — Granularität *vor* Temporalität (so vermeidest
+du den Reflex, jede entdeckte Diskrepanz als Carveout zu führen, weil
+Carveouts gerade in Schritt 1–5 trainiert wurden):
 
-1. *Punktuelle Ausnahme mit Folge-Slice?* → **Carveout** (Schritt 1–5
-   wie eben durchgegangen).
-2. *Cluster von Diskrepanzen im selben Geltungsbereich, oder
-   systemisches "Code existiert vor Doku"-Muster?* → **nicht**
-   Carveout-Kaskade, sondern **BF-Sub-Area-Markierung mit
-   Graduation-Plan** als Modus-Deklaration im Adaptions-Block von
-   `harness/conventions.md` (Mechanik in
-   [`../grundlagen/konventionen.md` §Modus pro Sub-Area](../grundlagen/konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)).
-   Konkretes Symptom: wenn 4 Coverage-Carveouts alle auf
-   `internal/index/` zeigen, ist die Sub-Area im Bootstrap-Sinn BF,
-   nicht eine Carveout-Sammlung. *Kein harter Schwellwert* — Faustregel,
-   nicht Zahl: wer die Diskussion am Zähler aufhängt ("ab 3 Carveouts
-   BF?"), hat das Symptom-Muster mit einer Quote verwechselt.
-3. *Ehrliche Antwort "nichts davon werden wir in absehbarer Zeit
-   tun"?* → **Permanent**, übergeführt in eine ADR. Permanente
-   Carveouts gehören nicht in `carveouts/`, sondern als
-   Architekturentscheidung mit Begründung in eine ADR.
+1. **Granularität — einzelne Diskrepanz oder Cluster?** Trifft *eine*
+   konkrete Gate-/Regelausnahme isoliert auf, oder zeigt sich ein
+   Diskrepanz-Cluster im selben Geltungsbereich (mehrere Carveouts auf
+   denselben Pfad/dieselbe Sub-Area) bzw. ein systemisches *"Code
+   existiert vor Doku"*-Muster?
 
-| Wahl                    | Symptom-Indikator                                                                                                  | Träger                                            | Folge-Artefakt                                          |
-|-------------------------|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|---------------------------------------------------------|
-| **Carveout**            | Eine konkrete Gate-/Regelausnahme, ein klarer Folge-Slice mit Auflösungs-Trigger.                                  | einzelne Diskrepanz                               | `docs/plan/carveouts/CO-<NNN>-*.md` (Schritt 1–5)       |
-| **BF-Sub-Area-Markierung** | Diskrepanz-Cluster im selben Geltungsbereich, oder generelles "Code-vor-Doku"-Muster (z. B. 4 Carveouts auf `internal/index/`). | ganze Sub-Area                                    | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
-| **ADR (permanent)**     | Trigger ist ehrlich nie zu erreichen — die Senkung ist Architekturentscheidung, nicht Übergang.                    | dauerhafte Architekturregel                       | `docs/architecture/ADR-<NNNN>-*.md`; `Status: Permanent — übergeführt in ADR-<NNNN>` |
+   - *Cluster oder Muster* → **BF-Sub-Area-Markierung mit
+     Graduation-Plan** als Modus-Deklaration im Adaptions-Block von
+     `harness/conventions.md` (Mechanik in
+     [`../grundlagen/konventionen.md` §Modus pro Sub-Area](../grundlagen/konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)).
+     Frage 2 entfällt — eine Sub-Area-weite Markierung ist eine
+     andere Werkzeug-Klasse als ein punktueller Carveout.
+   - *Einzelne Diskrepanz* → weiter zu Frage 2.
 
-Wenn die Wahl auf "permanent" fällt, ist der `Status:`-Wechsel:
+   *Kein harter Schwellwert für "Cluster"* — Faustregel, nicht Zahl:
+   wer die Diskussion am Zähler aufhängt ("ab 3 Carveouts BF?"), hat
+   das Symptom-Muster (gemeinsamer Geltungsbereich) mit einer Quote
+   verwechselt.
+
+2. **Temporalität — Trigger ernst zu erreichen?** Bei einer einzelnen
+   Diskrepanz: wäre der Auflösungs-Trigger aus Schritt 3 mit
+   absehbarem Aufwand zu erreichen, und stünde das in realistischem
+   Verhältnis zum Nutzen?
+
+   - *Ja* → **Carveout** (Schritt 1–5 wie eben durchgegangen — der
+     Carveout dokumentiert die temporäre Ausnahme bis zum Trigger).
+   - *Nein, ehrliche Antwort "nichts davon werden wir in absehbarer
+     Zeit tun"* → **Permanent**, übergeführt in eine ADR. Permanente
+     Carveouts gehören nicht in `carveouts/`, sondern als
+     Architekturentscheidung mit Begründung in eine ADR.
+
+| Wahl                       | Symptom-Indikator                                                                                                  | Träger                            | Folge-Artefakt                                                                            |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------|-------------------------------------------------------------------------------------------|
+| **Carveout**               | Eine konkrete Gate-/Regelausnahme, klar abgrenzbar, mit Folge-Slice und ernst erreichbarem Auflösungs-Trigger.     | einzelne Diskrepanz               | `docs/plan/carveouts/CO-<NNN>-*.md` (Schritt 1–5)                                          |
+| **BF-Sub-Area-Markierung** | Diskrepanz-Cluster im selben Geltungsbereich, oder generelles *"Code-vor-Doku"*-Muster.                            | ganze Sub-Area                    | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
+| **ADR (permanent)**        | Trigger ist ehrlich nie zu erreichen — die Senkung ist Architekturentscheidung, nicht Übergang.                    | dauerhafte Architekturregel       | `docs/architecture/ADR-<NNNN>-*.md`; `Status: Permanent — übergeführt in ADR-<NNNN>`      |
+
+> **Hinweis zum Lab-Beispiel:** Das Lab unter
+> [`lab/example/docs/plan/carveouts/`](../../../lab/example/docs/plan/carveouts/)
+> trägt heute nur den einzelnen `CO-001-index-coverage.md` — Frage 1
+> führt dort folglich auf den Einzeldiskrepanz-Pfad und weiter zu
+> Frage 2 (Trigger erreichbar — ja: Welle-2-Property-Tests). Ein
+> echter Cluster entstünde, wenn zusätzlich `CO-002`/`CO-003` für
+> Boundary-Tests und Type-Coverage auf demselben `internal/index/`-
+> Pfad lägen; dann sprängen Frage 1 und Werkzeug-Wahl auf
+> BF-Sub-Area-Markierung um.
+
+Wenn die Wahl im Trichter auf "permanent" fällt, ist der
+`Status:`-Wechsel:
 
 ```markdown
 **Status:** Permanent — übergeführt in ADR-0009.
@@ -297,6 +321,12 @@ sonst ist er eine schöne Konvention, die niemand prüft.
 * **Folge-Slice verknüpfen** (Lernziel 1, fortgesetzt). Schreibe den Folge-Slice mit konkretem DoD und beobachtbarem Trigger so, dass die Auflösung des Carveouts maschinell erkennbar wird (Schritt 5 in Worked Example A).
 * **Carveout-Audit-Slice entwerfen** (Lernziel 4 · Erschaffen·prozedural; folgt [Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)). Schreibe für die *nächste* Welle deines Repos einen `SL-CO-AUDIT-<welle>`-Slice mit vier DoD-Punkten und Rollen-Zuweisung (Planner identifiziert · Architect entscheidet bei Permanenz · Implementer führt aus). Lege die Audit-Bericht-Tabelle (vorher/nachher/Aktion) als Closure-Notiz-Block bei. Provoziere als Fehlerfall: lass *eine* Welle ohne Audit schließen und beobachte, was nach zwei Wellen mit den unauditiierten Carveouts passiert.
 
+*Lernziel 3 (einordnen) ist bewusst übungsfrei — die
+Disambiguierungsleistung wird durch das Frage-Schema in
+[§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren)
+und die zugehörige Selbstcheck-Rubrik-Zeile geprüft. Eine vierte Übung
+hätte das Modul-Volumen ohne CA-Gewinn vergrößert.*
+
 ## Reflexion
 
 Vier Standardfragen aus [`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)
@@ -306,7 +336,7 @@ Modul-spezifische Trigger:
 - **Beobachtung:** War dein Trigger beobachtbar oder eine Form von "sobald wir Zeit haben"? Lebt dein Carveout in `docs/plan/carveouts/` oder im Tracker?
 - **2×2-Quadrant:** Trigger-Disziplin ist *inferential feedforward*; Carveout-Audit-Lauf ist *computational feedback*.
 - **Steering-Loop:** Carveout-Audit als wiederkehrender Slice (siehe Lernziel 4)? Trigger-Pflichtfeld als Frontmatter-Check?
-- **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Carveout = Workaround", "Wenn der Trigger eintritt, lösen wir den Carveout auf").
+- **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Carveout = Workaround", "Wenn der Trigger eintritt, lösen wir den Carveout auf", "Jede entdeckte Diskrepanz ist ein eigener Carveout").
 
 ## Selbstcheck
 
@@ -323,7 +353,7 @@ Modul-spezifische Trigger:
 | Zwei Pflichtfelder eines temporären Carveouts? | "Beschreibung." | Auflösungs-Trigger (beobachtbar, nicht "sobald wir Zeit haben") + gekoppelter Folge-Slice mit ID. | + Fehlt eines der beiden: der Carveout ist *de facto* permanent — und gehört dann offen als permanenter Carveout markiert oder in eine ADR überführt, statt unter "temporär" zu lügen. |
 | Wo lebt ein Carveout? | "Im Tracker." | `docs/plan/carveouts/` als Datei — kommt mit beim Klonen, ist neben Spec/ADR/Plan auditierbar. *Nicht* nur im Issue-Tracker. | + Folge: ein Carveout, der nur im Tracker existiert, taucht im `make gates`-Output nicht auf — und damit weiß ein Implementation-Agent nicht, dass die Schwelle bewusst gesenkt wurde. Das ist eine versteckte Spec-Lücke. |
 | Wann hält Carveout `make gates` grün? | "Wenn dokumentiert." | Nur wenn Carveout *im Repo* liegt, einen Auflösungs-Trigger nennt und an einen Folge-Slice gekoppelt ist; sonst muss das Gate rot bleiben. | + Hinweis: ein Carveout, der dauerhaft `make gates` grün hält, *ohne* dass jemals sein Trigger eintritt, ist eine versteckte Architekturentscheidung — sie gehört dann in eine permanente ADR überführt. |
-| Drei Werkzeuge für gelockerte Gate-Disziplin — wann welches? | "Beides/alles macht das Gate weicher." | **Carveout** = punktuelle Ausnahme für *einen* Fall, mit Folge-Slice und Auflösungs-Trigger. **BF-Sub-Area-Markierung** = Sub-Area-weiter Übergangs-Modus mit Graduation-Plan im Adaptions-Block von `harness/conventions.md`. **Bootstrap-aware Gate** = Stufung *des Gates selbst* (z. B. 40 % heute → 70 % bei M2). | + Disambiguierungs-Reflex: bei Diskrepanz-Häufung im selben Geltungsbereich ist die Wahl BF-Markierung, nicht Carveout-Kaskade — wer 14 Carveouts für dieselbe Sub-Area anlegt, hat den Mechanismus auf das falsche Werkzeug skaliert. Bootstrap-aware Gate skaliert mit dem Repo; Carveout ist punktueller Vertrag. Verwechslung jeder Achse führt zu "Bootstrap-Schlupfloch" — Stufung ohne Trigger ist Carveout-Wildwuchs, Carveout-Kaskade ohne BF-Markierung ist verschleierte Sub-Area-BF. |
+| Drei Werkzeuge für gelockerte Gate-Disziplin — wann welches? | "Beides/alles macht das Gate weicher." | **Carveout** = punktuelle Ausnahme für *einen* Fall, mit Folge-Slice und Auflösungs-Trigger. **BF-Sub-Area-Markierung** = Sub-Area-weiter Übergangs-Modus mit Graduation-Plan im Adaptions-Block von `harness/conventions.md`. **Bootstrap-aware Gate** = Stufung *des Gates selbst* (z. B. 40 % heute → 70 % bei M2). | + Disambiguierungs-Reflex: bei Diskrepanz-Häufung im selben Geltungsbereich ist die Wahl BF-Markierung, nicht Carveout-Kaskade — wer ein Dutzend Carveouts für dieselbe Sub-Area anlegt, hat den Mechanismus auf das falsche Werkzeug skaliert. Bootstrap-aware Gate skaliert mit dem Repo; Carveout ist punktueller Vertrag. Verwechslung jeder Achse führt zu "Bootstrap-Schlupfloch" — Stufung ohne Trigger ist Carveout-Wildwuchs, Carveout-Kaskade ohne BF-Markierung ist verschleierte Sub-Area-BF. |
 | Carveout-Audit-Slice skizzieren? | "Schaue mir die Carveouts an." | DoD-Punkte: Frische aller `Letzte Prüfung:`-Daten · Auflösung aller Carveouts mit eingetretenem Trigger · explizite Permanenz-Entscheidung für alles, was zwei Wellen "aktiv" stand · Audit-Bericht als Closure-Notiz. Rollen: Planner identifiziert, Architect entscheidet bei Permanenz, Implementer führt `git mv` und Config-Updates aus. Drei Status-Übergänge: *aufgelöst*, *permanent (→ADR)*, *weiterhin aktiv mit nachgetragenem Datum*. | + Der unbequemste Übergang ist *permanent → ADR*: er gibt zu, dass ein angeblich temporäres Konstrukt eine stille Architekturentscheidung war. Wer diesen Übergang nie vollzieht, hat keinen Carveout-Mechanismus, sondern eine Sammlung gut formatierter Lügen. Steering-Loop-Aktion: Audit-Slice als Schablone unter `docs/plan/planning/templates/carveout-audit.md`, sonst bricht der Mechanismus beim dritten Mal. |
 
 ## Weiterlesen

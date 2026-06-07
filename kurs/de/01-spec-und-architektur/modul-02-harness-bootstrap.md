@@ -649,10 +649,10 @@ die modulspezifischen Indikatoren sind:
   → Begründungs-Pflicht pro Sub-Area im nächsten Slice-Plan):
   [Modul 5 §Worked Mini-Example "Bootstrap-Modus pro Sub-Area für einen Slice begründen"](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
   (Übungs-Auftrag direkt darunter in §Übungen).
-* Werkzeug-*Wahl* bei gelockerter Gate-Disziplin (Carveout vs.
-  BF-Sub-Area-Markierung vs. Bootstrap-aware Gate — das Spiegelbild zu
-  §Wann wechselt der Modus? Drittes Anzeichen, das die
-  Markierungs-Richtung Diskrepanz-Cluster → BF-Sub-Area zeigt):
+* Werkzeug-*Wahl* bei gelockerter Gate-Disziplin (Sensor
+  *Diskrepanz-Häufung* aus diesem Modul → Wahl zwischen Carveout,
+  BF-Sub-Area-Markierung und Bootstrap-aware Gate; das Spiegelbild
+  zur Schließungs-Richtung im dritten Anzeichen oben):
   [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
 * Steering-Loop im Steady-State (was Bootstrap *nach* Graduation
   wird):
