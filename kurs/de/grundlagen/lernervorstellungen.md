@@ -100,6 +100,11 @@ Iteration.
 - "Carveout = Workaround." — Modul 7
 - "Carveouts gehören ins Issue-Tracker." — Modul 7
 - "Wenn der Trigger eintritt, lösen wir den Carveout auf." — Modul 7
+- "Jede entdeckte Diskrepanz ist ein eigener Carveout." — Modul 7
+  (Fehlvorstellungs-Block; trainiertes Verfahren auf falschen Fall
+  übertragen — Diskrepanz-Häufung in einer Sub-Area gehört nicht in
+  eine Carveout-Kaskade, sondern in eine BF-Sub-Area-Markierung mit
+  Graduation-Plan).
 
 ### Über Agentenrollen und Implementation (Modul 8–9)
 

@@ -4,13 +4,19 @@
 
 ## Mini-Glossar für dieses Modul
 
-Drei neue Begriffe in diesem Modul. Volldefinitionen in
+Vier Begriffe — zwei modul-eigene, zwei Vorgriffe auf später vertiefte
+Begriffe. Volldefinitionen der modul-eigenen Begriffe in
 [`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+Die Mini-Glossar-Einträge **listen** die drei legitimen Alternativen für
+gelockerte Gate-Disziplin (Carveout · BF-Sub-Area-Markierung ·
+Bootstrap-aware Gate); die Disambiguierung — *wann welches?* — leistet
+das Frage-Schema in [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
 | **Carveout** | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel — mit Trigger oder explizit als permanent markiert. | ein Loch im Zaun, mit Notiz "wann wird zugemacht?". |
 | **Auflösungs-Trigger** | Beobachtbare Bedingung, mit der ein temporärer Carveout endet (nicht "wenn wir Zeit haben"). | die Kerze, die *anzeigt*, dass es jetzt soweit ist. |
+| **BF-Sub-Area-Markierung** *(Vorgriff)* | Sub-Area-weiter Übergangs-Modus mit Graduation-Plan: die Modus-Deklaration im Adaptions-Block von `harness/conventions.md` markiert eine ganze Sub-Area als BF, statt jede Einzel-Diskrepanz als Carveout zu führen. **Vollform in [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)** (zugrundeliegende konventionen.md-Begriffe: *BF-Sub-Area* · *Modus-Deklaration* · *Adaptions-Block* in [`../grundlagen/konventionen.md` §Modus pro Sub-Area](../grundlagen/konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)). | das ganze Beet ist Wiese, mit Notiz "wann wird Rasen draus" — statt 14 einzelner Schilder *"hier wächst noch nichts"*. |
 | **Bootstrap-aware Gate** *(Vorgriff)* | Gate mit dokumentierter Reifestufe: weich in der Frühphase, hart ab Trigger. **Vollform in [Modul 13](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)**. | Tempolimit, das in der Bauzone gilt, später verschwindet. |
 
 ## Engage
@@ -26,7 +32,7 @@ Nach diesem Modul kannst du:
 
 * einen Carveout mit Trigger, Folge-Slice und Auflösungs-Kriterium *dokumentieren* (Erschaffen · prozedural),
 * zwischen temporärem und permanentem Carveout *unterscheiden* und einen falsch klassifizierten Carveout *erkennen* (Bewerten · konzeptuell),
-* den Unterschied Carveout ↔ bootstrap-aware Gate *einordnen* (Analysieren · konzeptuell),
+* den Unterschied Carveout ↔ BF-Sub-Area-Markierung ↔ bootstrap-aware Gate *einordnen* (Analysieren · konzeptuell),
 * ein Carveout-Audit als wiederkehrenden Slice *entwerfen* (Erschaffen · prozedural).
 
 ## Lab-Bezug
@@ -57,6 +63,7 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 - **"Carveout = Workaround."** — Carveout = *dokumentierter* Workaround mit Trigger. Ohne Trigger ist es eine versteckte Annahme.
 - **"Carveouts gehören ins Issue-Tracker."** — Sie gehören ins Repo, neben Spec und ADRs. Tracker können vergessen werden, Repo-Files kommen mit beim Klonen.
 - **"Wenn der Trigger eintritt, lösen wir den Carveout auf."** — Realität: er bleibt liegen. Deshalb braucht jeder temporäre Carveout einen *Folge-Slice mit ID*, der das Auflösen plant. Slice schlägt Memo.
+- **"Jede entdeckte Diskrepanz ist ein eigener Carveout."** — Nein. Carveouts sind für **punktuelle** Ausnahmen mit Folge-Slice. Eine Diskrepanz-**Häufung** in einer Sub-Area (Symptom: mehrere Carveouts mit demselben Geltungsbereich, oder die Diskrepanz folgt aus generellem *"Code existiert vor Doku"*-Muster) gehört nicht in eine Carveout-Kaskade, sondern in eine **BF-Sub-Area-Markierung mit Graduation-Plan** (siehe [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Wer 14 Carveouts mit demselben Geltungsbereich anlegt, hat ein trainiertes Verfahren auf einen Fall übertragen, wo die einfachere BF-Markierung genügt — der Mechanismus ist auf das falsche Werkzeug skaliert. Die Wahl, welches Werkzeug bei welchem Symptom greift, leistet [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
 
 ## Worked Example A: einen Carveout dokumentieren
 
@@ -149,13 +156,39 @@ Vier Häkchen, eines davon ein `git mv`. Auflösung ohne Verschiebung in
 `done/` ist eine zweite Lüge — der Carveout wirkt "aufgelöst", liegt
 aber weiter im aktiven Verzeichnis.
 
-**Schritt 6 — Permanent statt temporär?** Stelle dir die Frage: *Was
-würde es konkret kosten, den Trigger zu erreichen — und steht das in
-einem realistischen Verhältnis zum Nutzen?* Wenn die ehrliche Antwort
-lautet "nichts davon werden wir in absehbarer Zeit tun", ist der
-Carveout permanent. Permanente Carveouts gehören nicht in `carveouts/`,
-sondern in eine ADR — als Architekturentscheidung mit Begründung. Der
-`Status:`-Wechsel ist:
+**Schritt 6 — Carveout, BF-Sub-Area-Markierung oder ADR?** Bevor du
+Schritt 1–5 als endgültige Form annimmst, prüfe, ob das Werkzeug
+*Carveout* überhaupt passt. Drei legitime Alternativen — die folgenden
+drei Wenn-Dann-Fragen brechen den tri-way-Vergleich auf sequenzielle
+Entscheidungen herunter (so vermeidest du den Reflex, jede entdeckte
+Diskrepanz reflexhaft als Carveout zu führen, weil Carveouts gerade in
+Schritt 1–5 trainiert wurden):
+
+1. *Punktuelle Ausnahme mit Folge-Slice?* → **Carveout** (Schritt 1–5
+   wie eben durchgegangen).
+2. *Cluster von Diskrepanzen im selben Geltungsbereich, oder
+   systemisches "Code existiert vor Doku"-Muster?* → **nicht**
+   Carveout-Kaskade, sondern **BF-Sub-Area-Markierung mit
+   Graduation-Plan** als Modus-Deklaration im Adaptions-Block von
+   `harness/conventions.md` (Mechanik in
+   [`../grundlagen/konventionen.md` §Modus pro Sub-Area](../grundlagen/konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)).
+   Konkretes Symptom: wenn 4 Coverage-Carveouts alle auf
+   `internal/index/` zeigen, ist die Sub-Area im Bootstrap-Sinn BF,
+   nicht eine Carveout-Sammlung. *Kein harter Schwellwert* — Faustregel,
+   nicht Zahl: wer die Diskussion am Zähler aufhängt ("ab 3 Carveouts
+   BF?"), hat das Symptom-Muster mit einer Quote verwechselt.
+3. *Ehrliche Antwort "nichts davon werden wir in absehbarer Zeit
+   tun"?* → **Permanent**, übergeführt in eine ADR. Permanente
+   Carveouts gehören nicht in `carveouts/`, sondern als
+   Architekturentscheidung mit Begründung in eine ADR.
+
+| Wahl                    | Symptom-Indikator                                                                                                  | Träger                                            | Folge-Artefakt                                          |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|---------------------------------------------------------|
+| **Carveout**            | Eine konkrete Gate-/Regelausnahme, ein klarer Folge-Slice mit Auflösungs-Trigger.                                  | einzelne Diskrepanz                               | `docs/plan/carveouts/CO-<NNN>-*.md` (Schritt 1–5)       |
+| **BF-Sub-Area-Markierung** | Diskrepanz-Cluster im selben Geltungsbereich, oder generelles "Code-vor-Doku"-Muster (z. B. 4 Carveouts auf `internal/index/`). | ganze Sub-Area                                    | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
+| **ADR (permanent)**     | Trigger ist ehrlich nie zu erreichen — die Senkung ist Architekturentscheidung, nicht Übergang.                    | dauerhafte Architekturregel                       | `docs/architecture/ADR-<NNNN>-*.md`; `Status: Permanent — übergeführt in ADR-<NNNN>` |
+
+Wenn die Wahl auf "permanent" fällt, ist der `Status:`-Wechsel:
 
 ```markdown
 **Status:** Permanent — übergeführt in ADR-0009.
@@ -280,7 +313,7 @@ Modul-spezifische Trigger:
 * **(Erinnern)** Welche zwei Pflichtfelder hat jeder *temporäre* Carveout, damit er nicht heimlich permanent wird?
 * **(Erinnern)** Wo im Repo lebt ein Carveout — Verzeichnis und Datei-Konvention?
 * Wann darf ein Carveout das `make gates`-Ziel grün halten, und wann nicht?
-* Wie unterscheidet sich ein Carveout von einem Bootstrap-aware Gate (siehe [Modul 13](../04-qualitaet/modul-13-quality-gates.md))?
+* Drei Werkzeuge für gelockerte Gate-Disziplin — wann welches? Unterscheide **Carveout**, **BF-Sub-Area-Markierung** (siehe [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)) und **Bootstrap-aware Gate** (siehe [Modul 13](../04-qualitaet/modul-13-quality-gates.md)).
 * **(Erschaffen)** Skizziere einen Carveout-Audit-Slice für die nächste Welle deines Repos: DoD, beteiligte Rollen, Belegartefakt. Welche drei Status-Übergänge muss er möglich machen — und welcher davon ist der unbequemste?
 
 ### Selbstcheck-Rubrik
@@ -290,7 +323,7 @@ Modul-spezifische Trigger:
 | Zwei Pflichtfelder eines temporären Carveouts? | "Beschreibung." | Auflösungs-Trigger (beobachtbar, nicht "sobald wir Zeit haben") + gekoppelter Folge-Slice mit ID. | + Fehlt eines der beiden: der Carveout ist *de facto* permanent — und gehört dann offen als permanenter Carveout markiert oder in eine ADR überführt, statt unter "temporär" zu lügen. |
 | Wo lebt ein Carveout? | "Im Tracker." | `docs/plan/carveouts/` als Datei — kommt mit beim Klonen, ist neben Spec/ADR/Plan auditierbar. *Nicht* nur im Issue-Tracker. | + Folge: ein Carveout, der nur im Tracker existiert, taucht im `make gates`-Output nicht auf — und damit weiß ein Implementation-Agent nicht, dass die Schwelle bewusst gesenkt wurde. Das ist eine versteckte Spec-Lücke. |
 | Wann hält Carveout `make gates` grün? | "Wenn dokumentiert." | Nur wenn Carveout *im Repo* liegt, einen Auflösungs-Trigger nennt und an einen Folge-Slice gekoppelt ist; sonst muss das Gate rot bleiben. | + Hinweis: ein Carveout, der dauerhaft `make gates` grün hält, *ohne* dass jemals sein Trigger eintritt, ist eine versteckte Architekturentscheidung — sie gehört dann in eine permanente ADR überführt. |
-| Carveout vs. bootstrap-aware Gate? | "Beides macht das Gate weicher." | Carveout = Ausnahme für *einen* Fall mit Folge-Slice. Bootstrap-aware Gate = Stufung *des Gates selbst* (z. B. 40 % heute → 70 % bei M2). | + Folge: Bootstrap-aware Gate skaliert mit dem Repo; Carveout ist punktueller Vertrag. Verwechslung führt zu "Bootstrap-Schlupfloch" — Stufung ohne Trigger ist Carveout-Wildwuchs. |
+| Drei Werkzeuge für gelockerte Gate-Disziplin — wann welches? | "Beides/alles macht das Gate weicher." | **Carveout** = punktuelle Ausnahme für *einen* Fall, mit Folge-Slice und Auflösungs-Trigger. **BF-Sub-Area-Markierung** = Sub-Area-weiter Übergangs-Modus mit Graduation-Plan im Adaptions-Block von `harness/conventions.md`. **Bootstrap-aware Gate** = Stufung *des Gates selbst* (z. B. 40 % heute → 70 % bei M2). | + Disambiguierungs-Reflex: bei Diskrepanz-Häufung im selben Geltungsbereich ist die Wahl BF-Markierung, nicht Carveout-Kaskade — wer 14 Carveouts für dieselbe Sub-Area anlegt, hat den Mechanismus auf das falsche Werkzeug skaliert. Bootstrap-aware Gate skaliert mit dem Repo; Carveout ist punktueller Vertrag. Verwechslung jeder Achse führt zu "Bootstrap-Schlupfloch" — Stufung ohne Trigger ist Carveout-Wildwuchs, Carveout-Kaskade ohne BF-Markierung ist verschleierte Sub-Area-BF. |
 | Carveout-Audit-Slice skizzieren? | "Schaue mir die Carveouts an." | DoD-Punkte: Frische aller `Letzte Prüfung:`-Daten · Auflösung aller Carveouts mit eingetretenem Trigger · explizite Permanenz-Entscheidung für alles, was zwei Wellen "aktiv" stand · Audit-Bericht als Closure-Notiz. Rollen: Planner identifiziert, Architect entscheidet bei Permanenz, Implementer führt `git mv` und Config-Updates aus. Drei Status-Übergänge: *aufgelöst*, *permanent (→ADR)*, *weiterhin aktiv mit nachgetragenem Datum*. | + Der unbequemste Übergang ist *permanent → ADR*: er gibt zu, dass ein angeblich temporäres Konstrukt eine stille Architekturentscheidung war. Wer diesen Übergang nie vollzieht, hat keinen Carveout-Mechanismus, sondern eine Sammlung gut formatierter Lügen. Steering-Loop-Aktion: Audit-Slice als Schablone unter `docs/plan/planning/templates/carveout-audit.md`, sonst bricht der Mechanismus beim dritten Mal. |
 
 ## Weiterlesen
