@@ -102,7 +102,23 @@ coverage-gate: ## Coverage threshold gate (bootstrap-aware, LH-FA-BUILD-008).
 
 Das Gate prüft heute z. B. 40 %, schaltet bei Meilenstein M2 auf 70 %
 hoch. Das macht "bootstrap-aware" nicht zum Schlupfloch, sondern zum
-explizit terminierten Carveout.
+**explizit terminierten Reifestufen-Gate** — ein Werkzeug eigener
+Klasse, kein Subtyp von Carveout (die Werkzeug-Triade-Einordnung
+steht direkt unter diesem Absatz).
+
+**Werkzeug-Triade-Einordnung.** Bootstrap-aware Gate ist eine der
+drei legitimen Antworten auf gelockerte Gate-Disziplin neben
+*Carveout* (punktuelle Ausnahme mit Folge-Slice) und
+*BF-Sub-Area-Markierung* (Sub-Area-weiter Übergangs-Modus mit
+Graduation-Plan; Konzept-Anker
+[Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee),
+Aktion-Noun-Schärfung "Markierung" in
+[Modul 7 §Mini-Glossar](../02-planung/modul-07-carveouts.md#mini-glossar-für-dieses-modul)).
+**Die BF-Sub-Area-Markierung ist nicht selbst ein Closure-Werkzeug**,
+sondern der Sub-Area-Kontext, in dem Carveout und Bootstrap-aware
+Gate als Closure-Antworten strukturell legitim werden —
+Disambiguierung in
+[Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
 
 ## Reichhaltige Gate-Landschaft als Inspiration
 
@@ -141,7 +157,7 @@ Sprachen parallel abdecken (heute noch nicht ausgeliefert).
 ## Typische Fehlvorstellungen
 
 - **"Gate = Lint."** — Lint ist *ein* Gate-Typ. Architekturtests, Coverage-Gates, Security-Gates, Replay-Determinism-Gates sind weitere. Pro Repo entstehen sprachen- und domänenabhängige Gate-Familien.
-- **"Wenn ein Gate manchmal rot sein darf, ist das pragmatisch."** — Dann ist es kein Gate, sondern ein Vorschlag. Pragmatik gehört in Carveouts oder bootstrap-aware Gates — mit Trigger und Folge-Slice.
+- **"Wenn ein Gate manchmal rot sein darf, ist das pragmatisch."** — Dann ist es kein Gate, sondern ein Vorschlag. Pragmatik gehört in Carveouts oder bootstrap-aware Gates — mit Trigger und Folge-Slice. **Eine *BF-Sub-Area-Markierung* ist keine Pragmatik-Antwort**, sondern der Sub-Area-Kontext, in dem Carveout oder bootstrap-aware Gate in dieser Sub-Area strukturell legitim sind — Triade und Disambiguierung in [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
 - **"Coverage 80 % ist die richtige Schwelle."** — Es gibt keine universelle Schwelle. Critical Coverage (Security, Geld, Datenintegrität) ≠ Gesamt-Coverage. Schwellen sind ADR-pflichtig.
 - **"`make gates` lokal grün heißt fertig."** — Nur wenn lokal und CI dasselbe Image benutzen (Modul 14). Sonst debuggst du den Unterschied.
 - **"Mehr Tests sind immer besser."** — Falsch in zwei Richtungen. Erstens: 80 % Gesamt-Coverage über *unkritischem* Code verbirgt 0 % Coverage auf dem Sicherheitspfad — Critical Coverage misst *gezielt*. Zweitens: Tests gegen Beispiele decken nur Realität ab, *wo das Golden Set repräsentativ ist* ([Modul 12](modul-12-replay-evaluierung.md)); Tests gegen die *Spec* erschließt Verifikation ([Modul 11](modul-11-verification.md)). Wer Test-Anzahl als Qualitätsmaß nimmt, baut Coverage-Anstiege, deren Wert auf 0 fällt, sobald die Realität die Coverage-Annahme bricht. Faustregel: *Verteilung vor Anzahl*. Ein zusätzlicher Test gegen einen bereits gut abgedeckten Pfad ist Boilerplate; ein zusätzlicher Test gegen einen *bisher unabgedeckten kritischen* Pfad ist Sensor.
