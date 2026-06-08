@@ -19,6 +19,32 @@ Ohne Rückwärtspfade ist es eine Liste, keine Kette. Eine Liste ist nicht
 auditierbar — Auditierbarkeit verlangt, dass jeder Schritt nach oben
 (Begründung) und nach unten (Konsequenz) verweist.
 
+### (Analysieren) Review und Verifikation den Eingabe-Artefakten zuordnen
+
+Beide prüfen denselben Code, aber gegen *unterschiedliche* Artefakte —
+und genau daraus folgt, dass sie unterschiedliche Fehler fangen:
+
+- **Review** prüft den Diff gegen **Plan und ADR**. Frage: *Ist der Diff
+  riskant?* (Schichtung verletzt, Abhängigkeit falsch, Hard Rule
+  gebrochen.)
+- **Verifikation** prüft den Diff gegen **DoD und Spec** (und dort
+  referenzierte ADRs). Frage: *Erfüllt der Diff die Anforderung?*
+  (Akzeptanzkriterium fehlt, Out-of-Scope geliefert.)
+
+Die Kreuzung — der eigentliche Lernpunkt:
+
+- Review **übersieht eine Spec-Lücke**, wenn der Plan deren ADR-Bezug nie
+  hatte: Review prüft ja nur gegen den Plan, und der war an der Stelle
+  stumm. Die Verifikation fängt sie, weil sie gegen die *Spec* prüft.
+- Verifikation **übersieht ein lokales Architektur-Risiko**, das in
+  keiner DoD-Zeile steht (z. B. eine riskante, aber DoD-erfüllende
+  Abkürzung im Diff). Review fängt es, weil es gegen *ADR/Plan* prüft.
+
+Deshalb sind es getrennte Stationen: jede einzelne Sicht hat einen
+blinden Fleck, den nur die andere abdeckt. Wer beide in *einen* Lauf
+legt, bekommt nicht beide Prüfungen, sondern eine mit zwei Lücken (siehe
+[Modul 8](../03-agenten/modul-08-agentenrollen.md) zur Rollen-Trennung).
+
 ### Welche Information darf nur in der Spec stehen, welche nur im ADR?
 
 **Nur in der Spec** gehört: *was* gebaut wird, *für wen*, mit welchen

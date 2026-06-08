@@ -49,7 +49,7 @@ in den Modulen 2–4 (Spec, ADR, Plan) verankert — nicht hier.
 Nach diesem Modul kannst du:
 
 * den Lebenszyklus Spec → ADR → Plan → Code → Review → Verifikation → Closure als gerichteten Graphen *zeichnen* (Anwenden · konzeptuell),
-* sechs Artefakte und sechs Rollen einander *zuordnen* und Kreuzungen *begründen* (Analysieren · konzeptuell),
+* die Prüf-Stationen des Lebenszyklus ihren *Eingabe-Artefakten* zuordnen und die Kreuzungen *begründen* — insbesondere, warum Review (Code gegen Plan/ADR) und Verifikation (Code gegen DoD/Spec) unterschiedliche Fehler fangen (Analysieren · konzeptuell); die Zuordnung der Stationen zu *Rollen* (Planner, Reviewer, Verifier …) folgt in [Modul 8](../03-agenten/modul-08-agentenrollen.md),
 * die Traceability-Kette für einen realen Slice *prüfen* (Analysieren · prozedural),
 * eine Source Precedence für ein eigenes Repo *entwerfen* (Erschaffen · prozedural).
 
@@ -296,6 +296,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 ## Selbstcheck
 
 * **(Anwenden — aktiviert LZ 1)** Zeichne den Lebenszyklus *aus dem Gedächtnis* als gerichteten Graphen — Vorwärtspfad (Spec → … → Closure) *und* die drei Rückwärtskanten — und vergleiche dann mit dem Diagramm im Modul: Welche Station oder Kante hast du vergessen? (Wer nur die sieben Stationen *aufzählen*, aber nicht als Graph *anordnen* kann, bleibt auf der Erinnern-Stufe.)
+* **(Analysieren — aktiviert LZ 2)** Review und Verifikation prüfen denselben Code und fangen doch unterschiedliche Fehler. Ordne beide Prüfungen ihren *Eingabe-Artefakten* zu und begründe: Welche Fehlerklasse sieht Review, die die Verifikation übersieht — und welche umgekehrt?
 * Welche Information darf nur in der Spec stehen, welche nur im ADR?
 * Was passiert, wenn ein Slice fertig ist, aber kein Closure-Eintrag existiert?
 * **(Erschaffen — aktiviert LZ 4)** Entwirf für *dein* Repo (oder eines der vier Fallstudien-Repos) einen Source-Precedence-Block, der die fünf relevanten Quellen in dieser Reihenfolge sortiert *und* einen Konfliktfall benennt (z. B. AGENTS.md sagt X, ADR sagt Y) inkl. Auflösungs-Regel.
@@ -305,6 +306,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Lebenszyklus als Graph gezeichnet? | drei oder vier Stationen aufgezählt, ohne Reihenfolge, ohne Kanten | Vorwärtsgraph sauber gezeichnet: Spec → ADR → Plan → Code → Review → Verifikation → Closure, Closure als eigene Station. | + Rückwärtskanten eingezeichnet: Closure → Spec/ADR (Lerneintrag), Verifikation → Spec (Spec-Lücke), Review → ADR (Folge-ADR). Wer die Rückwärtspfade nicht zeichnet, hat eine Liste, keine Kette. |
+| Review vs. Verifikation den Eingabe-Artefakten zugeordnet? | "Beide prüfen den Code." — keine Artefakt-Trennung. | Review: Code gegen *Plan/ADR* (ist der Diff riskant?). Verifikation: Code gegen *DoD/Spec* (erfüllt der Diff die Anforderung?). | + Kreuzung begründet: Review übersieht eine Spec-Lücke, deren ADR-Bezug der Plan nie hatte; Verifikation übersieht ein lokales Architektur-Risiko, das nicht in der DoD steht. Deshalb sind es getrennte Stationen — eine Sicht allein hat einen blinden Fleck. |
 | Spec vs. ADR — wo welche Info? | "Spec = was, ADR = warum." | Spec = vertragliche Anforderung mit Akzeptanzkriterien; ADR = Lösungsbegründung; Bezug per ID. | + Spec-Stratifizierung (Lastenheft/Spezifikation/Architektur), inkl. Regel "ADR darf Spezifikation, nicht Lastenheft schärfen". |
 | Slice fertig, aber kein Closure-Eintrag? | "Ist nicht fertig." | Slice gilt nicht als `done/`, weil Lerneintrag fehlt; Welle kann nicht schließen. | + Folge für Steering Loop: ohne Closure-Eintrag wird das Versagensmuster nicht beobachtbar, also wird derselbe Fehler dreimal gemacht (Lücke wird unsichtbar). |
 | Source-Precedence-Block für eigenes Repo entworfen? | Eine Liste von Quellen ohne Reihenfolge, ohne Konfliktfall. | Fünf Quellen in Reihenfolge sortiert (Lastenheft/Spec über ADR über AGENTS.md über Modul-Doku über Beispiel-Repos); ein konkreter Konfliktfall mit Auflösungs-Regel benannt. | + zwei Konfliktfälle aus *verschiedenen* Quellpaaren (z. B. ADR↔AGENTS.md und Spec↔Beispiel-Repo); Verweis auf eine Hard Rule oder Fitness Function, die den Konflikt deterministisch verhindert. |

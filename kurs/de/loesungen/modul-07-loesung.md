@@ -53,6 +53,16 @@ Werkzeug:
 | **BF-Sub-Area-Markierung** | Diskrepanz-**Häufung** im selben Geltungsbereich; oder generelles *"Code existiert vor Doku"*-Muster (z. B. 4 Carveouts auf `internal/index/`). | ganze Sub-Area                    | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
 | **Bootstrap-aware Gate**   | Gate, dessen Schwelle systemisch mit dem Repo-Reifegrad **mitwachsen** soll (Coverage 0 → 70 % bei M2), nicht einmalig gelockert.    | Gate-Stufung                      | Gate-Konfiguration mit Reifestufe + Trigger (Modul 13)                                    |
 
+> *Warum diese Tabelle anders aussieht als die in Worked Example A
+> Schritt 6:* Dort lautet die Frage *"wie löse ich eine konkrete
+> Diskrepanz auf?"* — die dritte Option ist dann der **permanente ADR**,
+> und das Bootstrap-aware Gate erscheint *absichtlich nicht* (es regelt
+> Gate-Reifestufung, nicht Diskrepanz-Auflösung). Hier lautet die Frage
+> *"wie gehe ich mit gelockerter Gate-Disziplin um?"* — dann gehört das
+> Bootstrap-aware Gate dazu, und der permanente ADR ist der Sonderfall
+> "Trigger nie erreichbar". Carveout und BF-Markierung sind in beiden
+> Triaden dieselben; nur die dritte Option wechselt mit der Frage.
+
 **Häufigste Verwechslung — und die Korrektur dazu:** wer ein Dutzend
 Carveouts auf denselben Geltungsbereich (z. B. `internal/index/`)
 anlegt, hat das trainierte Carveout-Verfahren auf einen Fall

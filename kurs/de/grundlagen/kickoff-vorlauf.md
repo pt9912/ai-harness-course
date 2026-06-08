@@ -94,7 +94,7 @@ vorlauf:
   frage_2_reviewer_drift:
     - wortlaut: "Halluziniert halt manchmal"
       vermutete_klasse: modell-zentriert
-      ziel_modul: 9
+      ziel_modul: 10
     - wortlaut: "Anderer Kontext, ich gebe dem mal mehr Beispiele"
       vermutete_klasse: harness-bewusst-ohne-rolle
       ziel_modul: 7
@@ -102,7 +102,7 @@ vorlauf:
   frage_3_replay_8_von_10:
     - wortlaut: "80 % ist gut, in der Praxis reicht das"
       vermutete_klasse: benchmark-vorstellung
-      ziel_modul: 11
+      ziel_modul: 12
 
 ruckfluss:
   rohnotizen: kickoff/2026-06-30-rohnotizen.md

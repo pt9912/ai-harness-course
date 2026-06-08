@@ -173,7 +173,10 @@ In den Modulen erscheint **eine Auswahl** dieser Vorstellungen als
 "Typische Fehlvorstellungen"-Block — mit Konfrontation und Begründung.
 Die mit `*` markierten Einträge sind dokumentierte Lücken; Mitwirkende
 sind eingeladen, sie in den jeweiligen Modulen zu adressieren oder hier
-als adressiert zu markieren, wenn sie ergänzt wurden.
+als adressiert zu markieren, wenn sie ergänzt wurden. *Derzeit trägt die
+Sammlung oben **kein** `*`* — alle bis Welle 8 dokumentierten Lücken sind
+geschlossen (siehe nächster Abschnitt); die Suche nach einem offenen `*`
+oben ist also aktuell ergebnislos, das ist kein Fehler.
 
 ## Offene `*`-Lücken (nächste Schicht)
 

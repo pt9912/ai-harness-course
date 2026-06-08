@@ -8,17 +8,30 @@ Zugehöriges Modul: [Modul 8 — Agentenrollen](../03-agenten/modul-08-agentenro
 
 Planner → Architect → Implementation → Reviewer → Verifier → Validator.
 
-Die Übergaben tragen jeweils ein Artefakt — siehe Sequenzdiagramm in
-[Modul 8](../03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-einen-slice):
-Slice-Plan (P → A), ADR-Bezüge (A → P), Slice in `in-progress/` (P → I),
-PR mit Diff + Plan-Verweis (I → R), Findings (R → I), Verifikationsbeleg
-(Vf → P), Validierungsbeleg (Vl → P).
-
 Wichtig: Rollen-Trennung ist *Kontext-Trennung*, nicht Personen-Trennung.
 Eine Person kann mehrere Rollen spielen — aber nicht im selben
 Kontextfenster, sonst wiederholen sich die blinden Flecken. Wer
 implementiert hat, soll nicht im selben Lauf reviewen; wer ADRs schreibt,
 soll nicht im selben Lauf verifizieren.
+
+### (Erinnern) Welches Übergabe-Artefakt gehört zu jeder der acht Übergaben?
+
+Acht Übergaben in der Rollen-Sequenz, jede mit ihrem Artefakt (siehe
+Sequenzdiagramm in
+[Modul 8](../03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-einen-slice)):
+
+1. **Planner → Architect:** Slice-Plan mit `LH-*`-Bezug
+2. **Architect → Planner:** ADR-Bezug bestätigt oder Folge-ADR
+3. **Planner → Implementation:** Slice in `in-progress/`
+4. **Implementation → Reviewer:** PR mit Diff + Plan-Verweis
+5. **Reviewer → Implementation:** Findings HIGH/MEDIUM/LOW/INFO
+6. **Implementation → Verifier:** DoD-Bestätigung + Sensor-Belege
+7. **Verifier → Validator:** Build-Artefakt + Slice-Resultat
+8. **Validator → Planner:** Validierungsbeleg gegen realen Bedarf
+
+Pointe: ohne *jedes* dieser Artefakte gibt es keinen Rollenwechsel — nur
+einen Kontext-Switch ohne Übergabe. Ein Rollen-Sprung ohne Artefakt ist
+der häufigste Pfad zu blinden Flecken.
 
 ### Warum braucht es Verification *und* Validation?
 
@@ -71,6 +84,31 @@ Beispielsortierung:
 
 Häufiger Fehler: "Reviewer macht das schon mit." → Reviewer prüft
 gegen Plan/ADR, nicht gegen Anforderung; das ist Verification.
+
+### (Erschaffen) Übergabe-Sequenz für einen zweiten Konflikttyp modellieren
+
+Beispiel: *Der Verifier findet eine DoD-Lücke erst **nach** dem
+Review-Schluss.* Maßstab: keine Kante ohne Übergabe-Artefakt. Eine
+saubere Modellierung sieht so aus:
+
+| Pfeil | Übergabe-Artefakt | Inhalt minimal |
+|---|---|---|
+| Verifier → Planner | DoD-Lücken-Befund | welches Akzeptanzkriterium aus der Spec ist *nicht* durch einen Test/Beleg gedeckt · `LH-*`-Bezug |
+| Planner → Implementer | Re-Open-Slice oder Folge-Slice | Slice zurück nach `in-progress/` (Lücke im selben Slice) *oder* neuer Slice in `next/` (Scope-Erweiterung) |
+| Implementer → Reviewer | Nachtrag-PR | Diff, der die Lücke schließt, mit Plan-Verweis |
+| Reviewer → Verifier | erneuter Review-Schluss | Findings (oder Negativbefund) zum Nachtrag-PR |
+| Verifier → Planner | Verifikationsbeleg | DoD jetzt vollständig gedeckt — oder erneuter Lücken-Befund |
+
+Der Test, ob die Modellierung trägt: An *keiner* Kante steht "kurz
+mündlich geklärt". Die zentrale Disziplin ist dieselbe wie im Worked
+Example — der Befund des Verifiers darf den Review-Schluss **nicht**
+überspringen (Implementer → Reviewer → Verifier, nicht Implementer →
+Verifier direkt), sonst entsteht genau der blinde Fleck, gegen den die
+Rollen-Trennung gebaut ist.
+
+Häufiger Fehler: die DoD-Lücke wird still im selben Lauf "nachgebessert",
+ohne Re-Open und ohne erneuten Review. Das ist Drift mit Kaffeepause —
+der Slice gilt als `done/`, obwohl seine Kette gerissen ist.
 
 ### Konfliktfall: Reviewer lehnt ab, Implementer widerspricht
 

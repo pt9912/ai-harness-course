@@ -43,6 +43,35 @@ Ergänzend wertvoll:
 Wenn du nur die Antworten loggst, aber nicht die Eingaben + Tool-Sequenz,
 kannst du Injection nur durch Glück erkennen.
 
+### (Analysieren) Injection-Symptome im Trace-Ausschnitt erkennen
+
+Zur Übung mit dem Trace-Ausschnitt (spans 04–08). Drei Symptome, je einer
+Telemetrie-Spur zugeordnet:
+
+1. **Ungewöhnliche Tool-Sequenz** (span 06: `read_file` auf `../../.env`)
+   — sichtbar im **Tool-Call-Audit-Log**. Der Pfad liegt außerhalb des
+   Slice-Scopes; ein Lese-Zugriff auf Secrets ist nie Teil eines
+   Such-Slices.
+2. **Externer `http_post`** (span 07: an `paste.example.com`) —
+   sichtbar im **Tool-Call-Audit-Log** *plus* einem
+   **Tool-Allowlist-Reject-Counter**, der hier *hätte* greifen müssen.
+   Das ist der eigentliche Exfiltrations-Schritt: Secret lesen, dann nach
+   außen schicken.
+3. **Output-vs-Eingabe-Drift** (span 08: "Zusätzlich habe ich die
+   Konfiguration gesichert") — sichtbar im
+   **Output-Konsistenz-Marker**. Das Modell behauptet eine Handlung, die
+   in keinem Akzeptanzkriterium des Slice steht — klassisches Zeichen,
+   dass es Anweisungen aus den *Daten* (`user_upload/notes.md`, span 05)
+   befolgt hat.
+
+Die entscheidende Pointe: Das *Erkennen* aus dem Trace ist
+nachgelagert (inferential feedback). Die *eine* präventive Kontrolle, die
+den Lauf gar nicht erst so weit hätte kommen lassen, ist die
+**Tool-Allowlist** (computational feedforward): `http_post` auf eine
+nicht freigegebene Domain — und `read_file` außerhalb des Slice-Pfads —
+wären erst gar nicht ausgeführt worden. So weit links und oben wie
+möglich (Modul 0 / `klassifikation.md`).
+
 ### Wann ist Rollback der falsche Reflex?
 
 Drei Szenarien, in denen Rollback schadet:
@@ -65,7 +94,7 @@ Mindest-Punkte einer Freigabe-Checkliste:
 - `make ci` grün im selben Image-Hash.
 - Mindestens ein Replay-Lauf gegen Golden Set, dokumentiert.
 - ADR oder Carveout für jeden bewusst offenen Punkt.
-- Runbook für mindestens drei Standard-Incidents (Out-of-Memory, Tool-Allowlist-Reject, Cache-Drift).
+- Runbook für *mindestens* den wahrscheinlichsten Incident-Typ (das ist die Checklisten-Untergrenze im Worked Example); solide sind die drei häufigsten Klassen (z. B. Out-of-Memory, Tool-Allowlist-Reject, Cache-Drift).
 - Verifizierter Rollback-Pfad (oder dokumentierte Begründung, warum Fix-Forward die Strategie ist).
 - Telemetrie-Smoke: ein Test-Trace ist im Trace-Viewer sichtbar.
 

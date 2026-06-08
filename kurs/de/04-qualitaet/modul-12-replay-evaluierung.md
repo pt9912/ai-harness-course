@@ -169,6 +169,16 @@ Drei mögliche Ergebnisse:
 * zwei rot → Modellwechsel nicht ohne Anpassung möglich; Carveout +
   Folge-Slice für Erwartungs-Update.
 
+*Quantifizieren statt nur einordnen.* Halte den Drift als **Zahl** fest,
+nicht nur als "ein paar rot": die **Drift-Rate** = rote Fälle ÷
+Gesamt-Fälle des Golden Sets (zwei von zwanzig → 10 %). Die Zahl macht
+zweierlei prüfbar, was die ordinale Einordnung verbirgt: (1) den *Trend*
+über mehrere Modellversionen (steigt die Rate von 5 % auf 15 %, ist der
+Modellpfad selbst der Verdächtige, nicht ein Einzelfall), und (2) eine
+*Schwelle* für den Steering Loop ("ab Drift-Rate > X Carveout-Pflicht").
+Eine reine "zwei rot"-Notiz lässt sich zwischen Läufen nicht vergleichen
+— ein Prozentwert schon.
+
 **Schritt 6 — Drift-Diagnose-Reihenfolge.** Wenn ein Lauf rot wird, ist
 die Reihenfolge der Verdächtigen *nicht beliebig*:
 
@@ -207,7 +217,7 @@ Example oben demonstriert dasselbe Schema für einen *LLM-Agentenlauf*
 ## Übungen
 
 * Reproduzierbare Testläufe gegen ein Golden Set
-* Erzeuge eine Regression durch Modellwechsel und miss den Drift
+* **(Analysieren — aktiviert LZ 3)** Erzeuge eine Regression durch Modellwechsel und *quantifiziere* den Drift: gib die Drift-Rate (rote ÷ gesamte Fälle) als Zahl an und ordne ihn dann der Diagnose-Reihenfolge aus Schritt 6 zu (Toolchain → Modell-Routing → Erwartung → echte Regression).
 
 ### Minimaler Übungspfad
 
@@ -244,7 +254,8 @@ Modul-spezifische Trigger:
 
 * **(Erinnern)** Welche drei Felder muss ein Replay-Manifest mindestens festhalten?
 * Was muss ein Replay festhalten, damit er deterministisch ist?
-* Wann wird ein Golden Set giftig (überfittet)?
+* **(Analysieren — aktiviert LZ 3)** Nach einem Modellwechsel sind 3 von 20 Golden-Fällen rot. Gib die Drift-Rate als Zahl an und sage, *was* die Zahl über mehrere Läufe sichtbar macht, das "drei rot" allein nicht zeigt.
+* **(Bewerten/Erkennen — aktiviert LZ 4 Bewerten-Hälfte)** Wann wird ein Golden Set giftig (überfittet)?
 * **(Erschaffen — aktiviert LZ 4 Erschaffens-Hälfte)** Gegeben ein überfittetes Golden Set (seit 14 Wochen 100 % grün im Replay, neue Eingabe-Klassen tauchen nur in Produktion auf): entwirf einen konkreten Rotations- und Sampling-Plan — welcher Anteil rotiert pro Welle, woher kommen die neuen Fälle, und welches Stopp-Kriterium verhindert Über-Rotation?
 * **(Anwenden)** In deinem eigenen Repo: welche zwei Drift-Quellen würdest du *zuerst* messen, wenn du nur eine Woche Zeit hast?
 * **(Erschaffens-Prozess)** Welcher Schritt beim Aufbau deines Replay-Manifests war der *unsicherste* — und warum? (Erfahrungsgemäß: Schritt 3 "Erwartungen als Verhalten, nicht als Wortlaut" oder Schritt 6 "Drift-Diagnose-Reihenfolge".)
@@ -255,6 +266,7 @@ Modul-spezifische Trigger:
 |---|---|---|---|
 | Drei Pflichtfelder eines Replay-Manifests? | "Modell." | Modellversion · Seed · Eingaben (Inputs als referenzierter Datensatz, nicht als Inline-Text). | + Pflichtfeld Nummer 4 in jedem ernsten Setup: Image-Hash (siehe Abschnitt oben) — sonst lässt sich Drift nicht von Toolchain-Drift trennen. Pflichtfeld Nummer 5: Zeitpunkt der Aufnahme (für Diff zu späteren Läufen). |
 | Was braucht ein deterministischer Replay? | "Seed." | Modellversion + Seed + Inputs *und* Tool-Versionen + Zeitstempel-Maskierung + Image-Hash (Docker-Harness, Modul 14). | + Hinweis: wer nur Seed pinnt, hat ~60 % Determinismus. Reale Drift-Quellen: Tool-Subversions, Lokale-Zeit, Netz-Latenz, Modell-Routing innerhalb derselben Version. |
+| Drift quantifizieren (3 von 20 rot)? | "Ein paar rot." — keine Zahl. | Drift-Rate = 3 ÷ 20 = 15 %. | + Was die Zahl sichtbar macht: den *Trend* über Modellversionen (steigt sie, ist der Modellpfad der Verdächtige, nicht der Einzelfall) und eine *Schwelle* für den Steering Loop ("ab > X % Carveout-Pflicht") — beides ist zwischen Läufen vergleichbar, "drei rot" nicht. |
 | Wann wird ein Golden Set giftig? | "Wenn es nicht passt." | Wenn Replay reproduzierbar grün ist, aber Realität rot — typisch durch jahrelang konstantes Set. Symptome: keine Failure-Klasse seit X Wochen, neue Eingabe-Klassen tauchen *nur* in Produktion auf. | + Gegenmaßnahmen: Rotation (alte Beispiele rausnehmen), Sampling aus Produktions-Traces, Adversarial-Beispiele aus Steering-Loop-Einträgen ([`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) ziehen. |
 | Rotations-/Sampling-Plan für überfittetes Golden Set? | "Neue Beispiele dazu." | Konkreter Plan: fester Rotations-Anteil pro Welle (z. B. 20 % der ältesten Fälle raus), neue Fälle aus Produktions-Traces + Steering-Loop-Adversarial-Einträgen gezogen, Replay nach Rotation re-baselined. | + Stopp-Kriterium gegen Über-Rotation: Set behält einen stabilen Regressions-Kern (nie rotierende Anker-Fälle), sonst verliert man die Regressions-Funktion. Vorhersage: nach Rotation steigt die Failure-Rate kurzfristig — das ist Erfolg, nicht Defekt. |
 | Zwei Drift-Quellen — welche zuerst? | "Modell ändert sich." | Zwei konkrete: (a) Modellversion-/Routing-Drift (gleicher Tag, anderes Subroute beim Provider) und (b) Toolchain-Drift (Tool-Subversion oder Image-Hash anders als geplant). Beide sind in der ersten Woche messbar, beide haben einen sofortigen Sensor (Replay-Manifest-Vergleich). | + Begründung: andere Quellen (Eingabe-Distribution, Tool-Allowlist-Drift, Cache-Verhalten) sind nachgelagert — wer sie misst, bevor Modell und Toolchain gepinnt sind, misst Rauschen. Reihenfolge ist nicht beliebig. |
