@@ -207,6 +207,7 @@ die Modellierung trägt: der nächste Konflikt durchläuft die Pfeile
 ## Übungen
 
 * Ordne 10 typische Tätigkeiten den Rollen zu
+* **(Erschaffen — aktiviert LZ 2)** Modelliere die Übergabe-Sequenz für einen *zweiten* Konflikttyp (z. B. der Verifier findet eine DoD-Lücke erst *nach* dem Review-Schluss) als gerichtete Sequenz und benenne an *jeder* Kante das Übergabe-Artefakt. Erwartung: keine Kante ohne Artefakt.
 * Spiele einen Konfliktfall durch: Reviewer lehnt ab, Implementer widerspricht — wer entscheidet?
 
 ## Reflexion
@@ -223,7 +224,7 @@ Modul-spezifische Trigger:
 ## Selbstcheck
 
 * **(Erinnern)** Nenne die sechs Rollen in der Reihenfolge, in der ein Slice sie typischerweise durchläuft.
-* **(Erinnern)** Welches *Übergabe-Artefakt* gehört zu jeder der sechs Übergaben in der Rollen-Sequenz (z. B. Planner → Architect)?
+* **(Erinnern)** Welches *Übergabe-Artefakt* gehört zu jeder der acht Übergaben in der Rollen-Sequenz (z. B. Planner → Architect)?
 * Warum braucht es Verification *und* Validation?
 * Welche Rolle besitzt ein ADR — wer darf es ändern?
 * **(Analysieren)** Welche Rolle bearbeitet (a) einen Folge-ADR-Vorschlag, (b) eine DoD-Verletzung, (c) ein Replay-Set-Update? Begründe je eine sinnvolle Mehrfachzuweisung — eine Tätigkeit, die *zwei* Rollen mit unterschiedlichem Kontext sehen müssen.
@@ -234,7 +235,7 @@ Modul-spezifische Trigger:
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Sechs Rollen in Reihenfolge? | Rollen genannt, aber Reihenfolge unklar | Planner → Architect → Implementation → Reviewer → Verifier → Validator. Übergaben jeweils mit Artefakt (Plan, ADR-Bezug, PR, Findings, Verifikationsbeleg, Validierungsbeleg). | + Hinweis: Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung. Eine Person kann mehrere Rollen spielen — aber nicht im selben Kontextfenster, sonst wiederholen sich blinde Flecken. |
-| Sechs Übergabe-Artefakte? | drei oder weniger genannt | Planner→Architect: Slice-Plan mit LH-Bezug · Architect→Planner: ADR-Bezug/Folge-ADR · Planner→Implementation: Slice in `in-progress/` · Implementation→Reviewer: PR mit Diff + Plan-Verweis · Reviewer→Implementation: Findings HIGH/MEDIUM/LOW/INFO · Implementation→Verifier: DoD-Bestätigung + Sensor-Belege · Verifier→Validator: Build-Artefakt + Slice-Resultat · Validator→Planner: Validierungsbeleg gegen realen Bedarf. | + Pointe: ohne *jedes* dieser Artefakte gibt es keinen Rollenwechsel — nur einen Kontext-Switch ohne Übergabe. Ein Rollen-Sprung ohne Artefakt ist der häufigste Pfad zu blinden Flecken. |
+| Acht Übergabe-Artefakte? | vier oder weniger genannt | Planner→Architect: Slice-Plan mit LH-Bezug · Architect→Planner: ADR-Bezug/Folge-ADR · Planner→Implementation: Slice in `in-progress/` · Implementation→Reviewer: PR mit Diff + Plan-Verweis · Reviewer→Implementation: Findings HIGH/MEDIUM/LOW/INFO · Implementation→Verifier: DoD-Bestätigung + Sensor-Belege · Verifier→Validator: Build-Artefakt + Slice-Resultat · Validator→Planner: Validierungsbeleg gegen realen Bedarf. | + Pointe: ohne *jedes* dieser Artefakte gibt es keinen Rollenwechsel — nur einen Kontext-Switch ohne Übergabe. Ein Rollen-Sprung ohne Artefakt ist der häufigste Pfad zu blinden Flecken. |
 | Warum Verification *und* Validation? | "Verschiedene Prüfungen." | Verification: "Bauen wir es richtig?" (gegen Plan/DoD); Validation: "Bauen wir das Richtige?" (gegen realen Bedarf). | + Gefährlichster Fall: Verifikation grün, Validation rot — Team baut *perfekt das Falsche*. Umgekehrter Fall (Verifikation rot, Validation grün) ist Prozess-Drift, auch wenn das Ergebnis zufällig passt. |
 | Wer darf ein ADR ändern? | "Der Architekt." | Architect schreibt; Reviewer prüft auf Konsistenz; Implementer liest als Constraint; Accepted-ADRs *niemand* überschreibt — Folge-ADR mit `supersedes`. | + Konfliktpfad: Implementer darf höchstens Folge-ADR vorschlagen, niemals stillschweigend einer ADR widersprechen. Das wäre Drift, kein "pragmatisches Implementieren". |
 | Drei Tätigkeiten → Rollen-Zuordnung + Mehrfachzuweisung? | eine Rolle pro Tätigkeit ohne Begründung | (a) Folge-ADR-Vorschlag: Implementer schlägt vor → Architect entscheidet → Reviewer prüft auf Konsistenz. (b) DoD-Verletzung: Verifier *erkennt*, Planner *entscheidet* (Plan-Update vs. Slice-Rückführung). (c) Replay-Set-Update: Validator pflegt, Verifier nutzt — Mehrfachzuweisung, weil beide unterschiedlichen Kontext brauchen (Validator: Realität; Verifier: DoD/Spec). | + Hinweis: Mehrfachzuweisung ist *nur dann* sauber, wenn jede beteiligte Rolle einen *anderen Eingabe-Kontext* hat. Sonst ist es keine Mehrfachzuweisung, sondern doppelte Arbeit (und blinde Flecken). |

@@ -26,7 +26,7 @@ mit überprüfbarem Ergebnis.
 - Hat mindestens eines deiner Akzeptanzkriterien einen Negativ-Pfad ("System darf nicht …")? Wenn nein: Spec-Lücke wahrscheinlich.
 - Steht in deinem `harness/README.md` nur, was es im Repo *tatsächlich* gibt? Wenn nein: Halluzinierter Sensor.
 
-Wer hier hängenbleibt, sollte Modul 3 und 3 erneut durchgehen, bevor er
+Wer hier hängenbleibt, sollte Modul 3 und 4 erneut durchgehen, bevor er
 in Phase 02 startet. Lösungs-Vergleichspunkt:
 [`/lab/example/spec/`](../../../lab/example/spec/) und
 [`/lab/example/docs/plan/adr/`](../../../lab/example/docs/plan/adr/).
@@ -67,7 +67,7 @@ ihn mit dem 8-Schritt-Workflow aus
 - Kannst du den Lauf reproduzieren? (Replay-Voraussetzung, Phase 04)
 - Liegt jede Hard Rule in *einem oder zwei* Quadranten der 2×2-Matrix (siehe [`klassifikation.md`](klassifikation.md))?
 
-Wer hier hängenbleibt, sollte Modul 8 und 8 erneut durchgehen.
+Wer hier hängenbleibt, sollte Modul 8 und 9 erneut durchgehen.
 
 ## Checkpoint D — nach Phase 04 (Qualität)
 
@@ -118,9 +118,9 @@ hat einen direkten Vorboten in einem Checkpoint.
 | Abschluss-Achse | Vorbereitender Checkpoint | Wenn dort nicht erreicht … |
 |---|---|---|
 | Vollständigkeit | A (Spec/ADR/Harness-Skizze vorhanden) | → später keine "solide" auf Vollständigkeit; Modul 1–4 vertiefen. |
-| Konsistenz | A (Source Precedence) + B (Carveout-Folge-Slice) | → Konsistenz bleibt auf "funktional"; Modul 1 §Source Precedence und Modul 7 vertiefen. |
+| Konsistenz | A (Source Precedence) + B (Carveout-Folge-Slice) | → Konsistenz bleibt auf "funktional"; Modul 1 §Source Precedence und Modul 7 vertiefen. *Exzellent* (Doku-Konsistenz-Drift-Sensor) setzt Modul 15 voraus. |
 | Reproduzierbarkeit | C (8-Schritt-Workflow reproduzierbar) + D (Gates auf frischem Klon) **+ Modul 14** (Image-Hash, Lock-Files) | → Reproduzierbarkeit bleibt ohne Modul 14 auf "funktional" gedeckelt; Modul 9, 12, 13 vertiefen. |
-| Auditierbarkeit | B (Slice-IDs) + C (Hard Rules mit ID) | → Auditierbarkeit bleibt auf "funktional"; ID-Schema und Traceability-Hook nachholen (Modul 3, 12). |
+| Auditierbarkeit | B (Slice-IDs) + C (Hard Rules mit ID) | → Auditierbarkeit bleibt auf "funktional"; ID-Schema und Traceability-Hook nachholen (Modul 3, 12). *Exzellent* (Tool-Call-Audit-Forensik bis zur Anforderungs-ID) setzt Modul 15 voraus. |
 | Steering-Loop-Reife | D (DoD-Verstoß provoziert + Reflexion) | → Steering-Loop bleibt auf "rudimentär"; Reflexionsvorlage und Modul 12 vertiefen. |
 
 **Diagnose-Regel:** Wer im Abschlussprojekt mehr als eine Achse auf

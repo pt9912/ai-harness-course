@@ -11,8 +11,10 @@ rot?* Antwort am Ende dieses Moduls — und sie liegt im Diagramm unten.
 
 ## Mini-Glossar für dieses Modul
 
-Modul 0 hat acht Grundbegriffe eingeführt; dieses Modul fügt acht weitere
-hinzu plus drei Harness-Bootstrap-Begriffe, die Schritt 0 voraussetzt.
+Modul 0 hat acht Grundbegriffe eingeführt; dieses Modul trägt **acht
+weitere**. Drei zusätzliche *Harness-Bootstrap-Begriffe* stehen als
+Vorgriff in einer eigenen Tabelle darunter — sie werden nur von Schritt 0
+gestreift und erst in Modul 2 voll entfaltet; jetzt genügt Überfliegen.
 Die vollständigen Definitionen stehen in
 [`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe)
 bzw. [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap);
@@ -28,13 +30,19 @@ für die ersten Seiten reichen die folgenden Ein-Satz-Anker:
 | **Fitness Function** | Maschinell prüfbare Architektur-Aussage (z. B. Modulgrenze, Latenzbudget). | ein Test, der nicht Code, sondern Architektur prüft. |
 | **Closure-Eintrag** | Notiz im Slice, die festhält, *was beim Abschluss gelernt wurde*. | das letzte Stück Beleg, das eine Welle wirklich schließt. |
 | **Steering Loop** | Wiederkehrendes Muster: Versagen beobachten → Guide/Sensor verbessern → Wiederholung reduzieren. | die Lernschleife, mit der der Harness mitwächst. |
+
+**Vorgriff auf Modul 2 — nur für Schritt 0, jetzt nur überfliegen (nicht vertiefen):**
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
 | **Harness-Bootstrap** | Einstiegsprozess in den Harness-Lebenszyklus — Trajektorie durch Dokument-Zustände, kein Ereignis. | "Hochziehen aus dem Nichts" — Repo lernt sich selbst, bis es laufen kann. |
 | **GF/BF-Modus** | Pro Sub-Area deklarierte Trigger-Richtung: Greenfield (Doc → Code) oder Brownfield (Code → Doc, Übergang mit Konvergenz-Auftrag zu GF). *Sub-Area* = Träger der Modus-Entscheidung; was als eine qualifiziert, definiert [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area). | wer wem folgt: Versprechen oder Inventur. |
-| **Phase-Reife** | Schreibreife eines Dokument-Abschnitts in fünf Stufen (Skelett → Outline → partiell → kohärent → stabil); pro Sektion unabhängig. | nicht "fertig oder nicht", sondern "in welcher Schicht". |
+| **Phase-Reife** | Schreibreife eines Dokument-Abschnitts in sechs Stufen (0 leer → 1 Skelett → 2 Outline → 3 partiell → 4 kohärent → 5 stabil); pro Sektion unabhängig. Phase 0 ("existiert nicht, sollte aber") ist eine legitime Reife — Details in Modul 2. | nicht "fertig oder nicht", sondern "in welcher Schicht". |
 
-Diese elf Begriffe trägt das Modul. Wenn beim ersten Lesen ein Begriff
-unklar bleibt, ist die einsatzklare Tiefe später in den Modulen 2–4 (Spec,
-ADR, Plan) verankert — nicht hier.
+**Acht** Begriffe trägt dieses Modul; die drei Bootstrap-Anker darunter
+streift nur Schritt 0 und werden in Modul 2 voll entfaltet. Wenn beim
+ersten Lesen ein Begriff unklar bleibt, ist die einsatzklare Tiefe später
+in den Modulen 2–4 (Spec, ADR, Plan) verankert — nicht hier.
 
 ## Lernziele
 

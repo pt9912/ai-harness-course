@@ -200,6 +200,7 @@ nach dem Roadmap-Bau. Modul-spezifische Trigger:
 * **(Erinnern)** Nenne drei Beispiele für *beobachtbare* Trigger aus diesem Modul — nicht erfundene, sondern aus den Engage-/Fehlvorstellungs-Blöcken.
 * Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
 * Was unterscheidet eine Welle von einem Meilenstein?
+* **(Analysieren — aktiviert LZ 4)** Welle 3 (`welle-3-skalierung`) kann erst starten, wenn Welle 2 (`welle-2-qualitaet`) fertig ist: Wie modellierst du diese Abhängigkeit *im Roadmap-Eintrag* von Welle 3 — und woran genau erkennst du, dass Welle 2 zum *Blocker* wird (nicht bloß Vorgängerin)?
 
 ### Selbstcheck-Rubrik
 
@@ -207,8 +208,9 @@ nach dem Roadmap-Bau. Modul-spezifische Trigger:
 |---|---|---|---|
 | Drei Bestandteile eines Welle-Eintrags? | "Slices und Datum." | Slice-IDs (Inhalt) · Trigger als beobachtbare Bedingung (kein Datum) · Closure-Kriterien (z. B. Replay grün, alle Slices in `done/`). | + Datum darf *erwähnt* werden (Prognose), darf aber nie Trigger sein — sonst kappt die Welle halbfertige Slices am Kalendertag und das Auditierbarkeits-Versprechen bricht. |
 | Drei beobachtbare Trigger-Beispiele? | "Wenn etwas fertig ist." | Drei aus dem Modul: "SL-024 liegt in `done/`" · "Replay-Lauf gegen Golden Set grün" · "Carveout `CO-007` aufgelöst". | + Pointe: ein Trigger ist beobachtbar dann, wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er eingetreten ist. "Sobald wir Zeit haben" scheitert daran; "SL-024 in `done/`" besteht. |
-| Welle 30 % über Schätzung — was tun? | "Mehr Zeit geben." | Diagnose vor Aktion: liegt es an Slice-Größe (→ neu schneiden), an Reihenfolge (→ neu planen), oder an unerwarteter Komplexität (→ Carveout)? | + Hinweis, dass 30 % früh ein Steering-Loop-Signal sein können (Slice-Sizing-Regel schärfen), 30 % spät (vor Welle-Closure) eher Carveout. |
+| Welle 30 % über Schätzung — was tun? | "Mehr Zeit geben." | Diagnose vor Aktion: liegt es an Slice-Größe (→ neu schneiden), an Reihenfolge (→ neu planen), oder an unerwarteter Komplexität (→ Carveout)? | + Hinweis, dass 30 % früh ein Steering-Loop-Signal sein können (Slice-Sizing-Regel schärfen), 30 % spät (vor Welle-Closure) eher Carveout. Metakognitiv: die *eigene* Schätzunsicherheit als Steering-Signal benennen — woran hätte man die Abweichung früher erkannt (welches Slice war schon beim Schätzen "weich", welche Annahme blieb ungeprüft)? — damit die nächste Schätzung kalibrierter ausfällt. |
 | Welle vs. Meilenstein? | "Größe." | Welle = Bündel paralleler/serialisierter Slices mit Closure-Kriterien. Meilenstein = extern beobachtbarer Zustand (Release, Audit-Punkt). | + Eine Welle endet *durch* Closure-Kriterien; ein Meilenstein endet durch *Datum oder externe Bestätigung* — und genau deshalb leitet sich der Meilenstein aus Wellen ab, nicht umgekehrt. |
+| Abhängigkeit Welle 3 → Welle 2 modelliert, Blocker erkannt? | "Welle 3 kommt nach Welle 2." — Reihenfolge genannt, keine Modellierung. | Abhängigkeit als expliziter Abhängigkeits-Trigger in der `Trigger`-Spalte von Welle 3 (z. B. „startet, wenn `welle-2-qualitaet` in Closure") + gerichtete Kante im Abhängigkeitsgraphen. | + Blocker-Kriterium benannt: Welle 2 ist Blocker, sobald Welle 3 *ohne* deren Closure nicht starten kann (Phantom-Welle) — und der Test dafür: würde Welle 3 jetzt starten, liefe ein Gate auf nicht-property-getesteter Basis. Reine Vorgängerin ohne harte Kante wäre kein Blocker. |
 
 ## Weiterlesen
 
