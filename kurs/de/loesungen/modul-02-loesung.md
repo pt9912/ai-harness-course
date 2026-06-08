@@ -138,10 +138,13 @@ Wohlfühl-Statement.
   der Vorab-Übung ungeprüft übernommen wurde.
 - Pro Sub-Area mindestens *eine* der drei Inklusions-Achsen
   (Konventions-Härte / Inventur-Linie / Pfad-Cluster) als
-  Granularitäts-Begründung notiert — spiegelt die Selbstcheck-Rubrik
-  und stellt sicher, dass die Sub-Area nicht zu grob gewählt ist
-  (Negativ-Fall *"Backend"* in §Häufige Fehler). *Exzellent:* alle
-  drei Achsen pro Sub-Area benennbar.
+  Granularitäts-Begründung notiert — spiegelt die Selbstcheck-Rubrik und
+  prüft *beide* Granularitäts-Pole: die Sub-Area ist weder zu grob
+  (Negativ-Fall *"Backend"*) noch zu fein (eine Struktur mit nur *einer*
+  erfüllbaren Achse als Sub-Area geführt statt als Aspirantin — Schwelle
+  ≥ 2) — beide Fälle in §Häufige Fehler. *Exzellent:* alle drei Achsen
+  pro Sub-Area benennbar, oder eine Aspirantin korrekt als
+  Nicht-Sub-Area erkannt.
 
 **Falle:** "Alle Sub-Areas sind BF" ist zwar empirisch häufig
 korrekt (siehe Fallstudien), aber pädagogisch verdächtig — selbst
@@ -211,7 +214,7 @@ aus Selbstbild.
 
 Diese Liste benennt Fehler in der *Ausführung* der Übungen; die
 zugrunde liegenden konzeptuellen Fehlvorstellungen stehen in
-Modul 2 §Typische Fehlvorstellungen (FV1–FV4) und werden hier nicht
+Modul 2 §Typische Fehlvorstellungen (FV1–FV5) und werden hier nicht
 wiederholt.
 
 - **Sub-Area zu grob gewählt** (Übung 1). "Backend" oder "Frontend"
@@ -226,6 +229,20 @@ wiederholt.
   [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)
   — die Achsen erlauben die Diagnose *ohne* Erinnerung an die
   Beispielliste, ergänzen sie also.
+- **Sub-Area zu fein gewählt** (Übung 1, Kehrseite). Ein substanzloses
+  Verzeichnis zur Sub-Area erheben — *"Struktur ohne Substanz"*: ein
+  Ordner existiert (Achse 3), trägt aber keine eigene Konvention (Achse 1)
+  und keine eigenständig abgleichbare Inventur-Linie (Achse 2), erfüllt
+  also nur *eine* der drei Achsen (unter der Schwelle von zwei). Das ist
+  noch keine Sub-Area, sondern eine *Sub-Area-Aspirantin* (siehe
+  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)).
+  Symptom: eine Modus-Zeile, die nie einen eigenen Trigger oder eine
+  eigene `MR-NNN` erzeugt — sie hängt immer an einer Nachbar-Sub-Area.
+  Korrekt: erst ab zwei erfüllten Achsen als Sub-Area führen, darunter
+  als Aspirantin notieren statt klassifizieren. Gemeinsame Wurzel mit
+  *"zu grob"* oben: beide überspringen die Achsen-Qualifikation
+  (Modul 2 §Typische Fehlvorstellungen FV5) — das eine Ende fasst zu viel
+  zusammen, das andere erhebt zu wenig.
 - **Hybrid als Notausgang** (Übung 1). Wer in jeder Zeile "Hybrid"
   schreibt, hat *nicht* differenziert, sondern die Entscheidung
   vermieden. Hybrid ist eine *Beobachtung* (Sub-Sub-Area-

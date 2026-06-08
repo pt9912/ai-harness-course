@@ -258,6 +258,23 @@ und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
   Wunschdenken. Die Frage ist nicht *ob* graduiert wird, sondern
   *wie weit* das Repo schon ist und *welche Sub-Area* als nächstes
   graduations-reif wird.
+* **FV5:** *"Jede Struktur (Verzeichnis/Sektion) ist automatisch eine
+  Sub-Area — eine Granularitäts-Prüfung erübrigt sich."* — Korrektur:
+  Eine Struktur qualifiziert erst über die drei Inklusions-Achsen
+  (Schwelle ≥ 2, siehe
+  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)).
+  Der übersprungene Qualifikations-Schritt erzeugt **beide**
+  Granularitäts-Fehler zugleich: *zu grob* — ein Aggregat wie *"Backend"*
+  wird als *eine* Sub-Area gelabelt, statt in mehrere aufgeteilt; *zu
+  fein* — ein substanzloses Verzeichnis (*"Struktur ohne Substanz"*, nur
+  eine Achse erfüllt) wird zur Sub-Area erhoben, obwohl es eine
+  Sub-Area-*Aspirantin* bleibt. Lernerursprung: dieselbe Wurzel wie die
+  Modul-5-Vorstellung *"wenn der Slice klein ist, ist die Sub-Area GF"*
+  ([`../grundlagen/lernervorstellungen.md` §Über Planung](../grundlagen/lernervorstellungen.md#über-planung-modul-57))
+  — Reife/Substanz wird aus einem Oberflächenmerkmal (Existenz, Größe)
+  *abgelesen* statt über die Achsen *geprüft*. (Die Modul-5-Vorstellung
+  bleibt eine *Modus*-FV; FV5 teilt nur die kognitive Wurzel, nicht die
+  Achse.)
 
 (Weitere Fehlvorstellungen ergänzen sich aus der
 Überzeugungs-Check-Ausbeute oben — wer mit "Bootstrap = Setup"
@@ -512,6 +529,9 @@ Vorlage:
 > Konventions-Härte · Inventur-Linie · Pfad-Cluster, Schwelle ≥ 2) zur
 > Prüfung deiner Sub-Area-Wahl. Wer *"Backend"* als Sub-Area nennt,
 > bündelt typischerweise drei verschiedene Sub-Areas — ausdifferenzieren.
+> Die Kehrseite — nie getrennt feuernde Strukturen *nicht* künstlich
+> trennen — heißt **Aggregation**
+> ([`konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)).
 
 | Sub-Area | Modus (GF/BF/Hybrid) | Beobachtungs-Indiz | Unsicherheit? |
 |---|---|---|---|
@@ -597,15 +617,15 @@ Verwende die vier Standardfragen aus
 (Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change)
 nach den Übungen.
 
-*Hinweis zur Vorlage:* Frage 2 ("Welche Harness-Lücke war Ursache?")
-und Frage 3 ("Welche Steering-Loop-Aktion folgt?") setzen einen
-produzierten Fehler voraus. Modul 2 hat Diagnose-Übungen, keine
-Fehler-Provokation — lies Frage 2 in diesem Modul als *"Welche
-Sub-Area-Annahme war ungeprüft?"* (z. B. *"ich habe Konventionen als
-GF angenommen, ohne den Adaptions-Block zu lesen"*) und Frage 3 als
-*"Welche Klassifikations-Verfeinerung folgt aus der Diagnose?"* (z. B.
-*"Sub-Area 'Test-Infrastruktur' weiter aufsplitten in 'Unit-Tests'
-und 'Property-Based-Sensors', weil sie unterschiedliche Modi tragen"*).
+*Hinweis zur Vorlage:* Modul 2 hat Diagnose-Übungen, keine
+Fehler-Provokation. Verwende für Frage 2 und 3 die **Diagnose-Variante**
+der Vorlage ([Frage 2](../grundlagen/reflexion-vorlage.md#2-welche-harness-lücke-war-ursache),
+[Frage 3](../grundlagen/reflexion-vorlage.md#3-welche-steering-loop-aktion-folgt)) —
+die allgemeine Umdeutung steht dort, nicht mehr hier. Modul-spezifisch
+heißt das: Frage 2 → *"Welche Sub-Area-Annahme war ungeprüft?"*, Frage 3
+→ *"Welche Klassifikations-Verfeinerung folgt aus der Diagnose?"* (z. B.
+*"Sub-Area 'Test-Infrastruktur' weiter aufsplitten in 'Unit-Tests' und
+'Property-Based-Sensors', weil sie unterschiedliche Modi tragen"*).
 
 Modul-spezifische Trigger:
 
@@ -623,8 +643,9 @@ Modul-spezifische Trigger:
 - **Conceptual Change:** Vergleiche deinen Überzeugungs-Check
   (§Vorab — was hältst du heute für wahr?) mit deiner heutigen
   Antwort. Welche Vorstellung hat sich verschoben? Primäre
-  Kandidaten: FV1–FV4 in §Typische Fehlvorstellungen weiter oben,
-  plus die *FV3-Variante* "Trigger-Klassen sind generell
+  Kandidaten: FV1–FV5 in §Typische Fehlvorstellungen weiter oben
+  (FV5 = die Granularitäts-Vorstellung, ein häufiger Conceptual-Change-
+  Anlass nach Übung 1), plus die *FV3-Variante* "Trigger-Klassen sind generell
   Bürokratie-Overhead" (häufig bei GF-erfahrenen Lernenden; zielt
   nicht auf "GF braucht keine Trigger", sondern auf "auch in GF nur
   Aufwand"). Erweiterte Sammlung in
@@ -678,7 +699,7 @@ die modulspezifischen Indikatoren sind:
 | Vier Trigger-Klassen, je ein Beispiel? | Drei Klassen genannt, ohne Worked-Example-Bezug. | Alle vier Klassen genannt + je ein Trigger aus WE1 oder WE2 als Beispiel. | + Begründung, warum die vier Klassen *erschöpfend* sind (was würde nicht in eine der vier passen?); Verweis auf `konventionen.md` §Vier Trigger-Klassen für die Definition. |
 | Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz". | T3 als **Sync-Trigger in BF-Diskrepanz-Auslöse-Variante** bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht (impliziter Pointer-Mismatch). | + Pointe: T3 ist *keine fünfte Klasse*, sondern eine BF-typische Auslöse-Variante von Sync (die vier Klassen aus konventionen.md bleiben erschöpfend). Plus: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt. |
 | Phase 4 kohärent in GF vs. BF? | "In GF steht der Vertrag, in BF die Inventur." | GF Phase 4: *Vertrag steht, Code wird daran gemessen* (z. B. CI-Gates greifen). BF Phase 4: *Inventur abgeglichen, Diskrepanz-Schock sichtbar* (z. B. CO-DS-* oder Reconc.-Slice-Backlog). | + Begründung, warum *Phase 4* die kritische Stufe in BF ist (vorher: Inventur arbeitet, nachher: Reconciliation läuft); Verweis auf Modul 7 §Carveouts für die `CO-DS-*`-Konvention. |
-| Überzeugungs-Check: welche Verschiebung? | Keine Verschiebung benannt oder pauschal "alles klarer". | Eine konkrete Antwort: welche §Vorab-Frage hat sich um welchen Halbsatz verschoben? Verweis auf eine Fehlvorstellung (FV1–FV4), die deine Spontanantwort getragen hat. | + Pointe: welche Vorstellung gleich geblieben ist und *warum sie hält* — Conceptual-Change-Reflexion verlangt, beides zu zeigen, nicht nur Verschiebung. |
+| Überzeugungs-Check: welche Verschiebung? | Keine Verschiebung benannt oder pauschal "alles klarer". | Eine konkrete Antwort: welche §Vorab-Frage hat sich um welchen Halbsatz verschoben? Verweis auf eine Fehlvorstellung (FV1–FV5), die deine Spontanantwort getragen hat. | + Pointe: welche Vorstellung gleich geblieben ist und *warum sie hält* — Conceptual-Change-Reflexion verlangt, beides zu zeigen, nicht nur Verschiebung. |
 
 ## Weiterlesen
 
