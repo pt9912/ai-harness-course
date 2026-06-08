@@ -208,7 +208,7 @@ die Modellierung trägt: der nächste Konflikt durchläuft die Pfeile
 
 * Ordne 10 typische Tätigkeiten den Rollen zu
 * **(Erschaffen — aktiviert LZ 2)** Modelliere die Übergabe-Sequenz für einen *zweiten* Konflikttyp (z. B. der Verifier findet eine DoD-Lücke erst *nach* dem Review-Schluss) als gerichtete Sequenz und benenne an *jeder* Kante das Übergabe-Artefakt. Erwartung: keine Kante ohne Artefakt.
-* Spiele einen Konfliktfall durch: Reviewer lehnt ab, Implementer widerspricht — wer entscheidet?
+* **(Bewerten — aktiviert LZ 3)** Spiele einen Konfliktfall durch: Reviewer lehnt ab, Implementer widerspricht — wer entscheidet, in welcher Reihenfolge, und mit welchem Übergabe-Artefakt? Löse ihn *strukturiert* auf (drei Verdikte: bestätigt · zurückgewiesen · eskaliert), nicht durch "der Strengere gewinnt".
 
 ## Reflexion
 
@@ -225,7 +225,7 @@ Modul-spezifische Trigger:
 
 * **(Erinnern)** Nenne die sechs Rollen in der Reihenfolge, in der ein Slice sie typischerweise durchläuft.
 * **(Erinnern)** Welches *Übergabe-Artefakt* gehört zu jeder der acht Übergaben in der Rollen-Sequenz (z. B. Planner → Architect)?
-* Warum braucht es Verification *und* Validation?
+* **(Analysieren — aktiviert LZ 4)** Warum braucht es Verification *und* Validation — erkläre den Unterschied (gegen Plan/DoD vs. gegen realen Bedarf) und nenne den *gefährlichsten* Fall, in dem Verification grün ist, Validation aber fehlschlägt.
 * Welche Rolle besitzt ein ADR — wer darf es ändern?
 * **(Analysieren)** Welche Rolle bearbeitet (a) einen Folge-ADR-Vorschlag, (b) eine DoD-Verletzung, (c) ein Replay-Set-Update? Begründe je eine sinnvolle Mehrfachzuweisung — eine Tätigkeit, die *zwei* Rollen mit unterschiedlichem Kontext sehen müssen.
 * **(Bewerten)** Konfliktfall: Reviewer lehnt mit HIGH (ADR-Verstoß), Implementer widerspricht mit Verweis auf einen vermeintlich veralteten ADR-Stand. Wer entscheidet, in welcher Reihenfolge — und was ist das *Übergabe-Artefakt* der Entscheidung?

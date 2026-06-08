@@ -202,6 +202,14 @@ Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
 
 * Review realer Änderungen im Begleit-Repo
 * Reviewe den fingierten kaputten Slice — finde die drei eingebauten Fehler
+* **(Analysieren — aktiviert LZ 3)** *Reviewer-Konflikt diagnostizieren.* Lass
+  den Reviewer-Lauf auf demselben Slice *zweimal* laufen (oder vergleiche zwei
+  vorhandene Läufe) und nimm einen Fall, in dem dasselbe Finding unterschiedlich
+  kategorisiert wird. Diagnostiziere die *Ursache* der Divergenz — Kategorie-Drift
+  (unscharfe HIGH/MEDIUM-Grenze), unterschiedlicher Eingangs-Kontext oder
+  nicht-deterministisches Modellverhalten — und benenne, welche der drei Ursachen
+  vorliegt und woran du sie erkennst. Erst die Diagnose, dann die Gegenmaßnahme
+  (Skill schärfen, Kontext fixieren, Seed pinnen).
 * **(Erschaffen — aktiviert LZ 4)** *Reviewer-Skill für ein konkretes Repo schreiben.* Wähle eines der vier Fallstudien-Repos (oder dein eigenes). Schreibe eine Skill-Datei nach dem Muster des Worked Example (sechs Schritte: Geltungsbereich · Eingangs-Kontext · HIGH-Liste · MEDIUM/LOW/INFO · Negativbefund-Pflicht · Beispiel-Findings). Pflicht: die HIGH-Liste muss mindestens *zwei* Repo-spezifische Regeln nennen, die ein generischer Skill nicht abdeckt (z. B. *"git mv + Inhalt = zwei Commits"* für `grid-gym`; *"Accepted-ADRs immutable"* für `bess-ems`). Lege die Datei unter `.harness/reviewer/<repo-name>.md` ab und führe einen Lauf auf einem realen Diff durch — kommt eines deiner zwei Repo-spezifischen HIGHs zur Anwendung? Wenn nein, ist der Skill noch nicht scharf genug.
 
 ## Reflexion
@@ -220,7 +228,7 @@ Schreibübung. Modul-spezifische Trigger:
 * **(Erinnern)** Welche vier Finding-Kategorien gibt es, und welche zwei davon blockieren typischerweise den Merge?
 * Wann wird aus einem LOW-Finding ein HIGH-Finding?
 * **(Bewerten — aktiviert LZ 1)** Zwei Findings auf demselben PR: (A) ein unbenutzter Import im Auth-Modul; (B) eine fehlende Auth-Prüfung an einem neuen, noch nicht produktiven Endpoint. Ordne jedes in HIGH/MEDIUM/LOW ein und begründe die Grenzfall-Entscheidung — was kippt B nach HIGH bzw. hält A bei LOW?
-* Was tust du, wenn der Reviewer-Agent dasselbe Finding zweimal mit unterschiedlicher Kategorie meldet?
+* **(Analysieren — aktiviert LZ 3)** Der Reviewer-Agent meldet dasselbe Finding zweimal mit unterschiedlicher Kategorie. Diagnostiziere zuerst die *Ursache* (Kategorie-Drift · Kontext-Unterschied · Nicht-Determinismus) — woran erkennst du, welche vorliegt? — und leite *dann* die passende Gegenmaßnahme ab. Warum ist "die mildere Kategorie nehmen" die falsche Antwort?
 * **(Anwenden)** Du erhältst 17 Findings auf einen PR. Beschreibe deine ersten drei Aktionen — in dieser Reihenfolge.
 
 ### Selbstcheck-Rubrik

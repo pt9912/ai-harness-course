@@ -2,6 +2,18 @@
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung.
 
+> **Segmenting-Empfehlung (Sweller).** Dieses Modul trägt sechs Lernziele
+> — das Maximum im Kurs — und zerfällt natürlich in zwei Hälften.
+> **Teil A (Telemetrie lesen & diagnostizieren, LZ 1–4):** Mini-Glossar ·
+> Engage · Lernziele · Themen · Kernidee · Typische Fehlvorstellungen ·
+> Worked Example (ein Span zurück bis zur Lastenheft-ID). **Teil B
+> (Sensoren & Schemata bauen, LZ 5–6):** Übungen · Reflexion · Selbstcheck.
+> Lies Teil A und arbeite das Worked Example *durch*, bevor du Teil B
+> öffnest — der Trenner steht sichtbar vor den Übungen
+> ([§Pause-Punkt](#pause-punkt-lesen-bauen)). Wer A und B in einer
+> Sitzung liest, hält am Ende sechs Konzepte gleichzeitig offen — genau
+> die Überlast, die das Modul vermeiden will.
+
 ## Mini-Glossar für dieses Modul
 
 Fünf neue Begriffe — Volldefinitionen in
@@ -182,6 +194,26 @@ Sechs Schritte, eine durchgängige Traceability. Vergleich im Lab:
 [`../../../lab/example/otel/sl-009-agent-run.trace.json`](../../../lab/example/otel/sl-009-agent-run.trace.json)
 (Span `impl-2` ist der `writer.write_index`-Call mit `requirement.id`
 und `adr.id`).
+
+## Pause-Punkt: lesen → bauen
+
+> *Hier endet Teil A.* Wenn du der Segmenting-Empfehlung folgst (Box am
+> Modul-Kopf), mach jetzt Pause und nimm Teil B (die Bau-Übungen) in einer
+> *zweiten* Sitzung. Begründung: Das *Lesen* eines Spans (Teil A) und das
+> *Entwerfen* eines Span-Schemas (Teil B) sind zwei verschiedene
+> Tätigkeiten — in derselben Sitzung verschwimmen sie, und das
+> Schema-Entwerfen gerät zur bloßen Nachahmung des gelesenen Beispiels
+> statt zur eigenen Konstruktion.
+>
+> **Selbsttest vor Pause (60 Sekunden, ohne Spickzettel):**
+>
+> 1. Welche drei Telemetrie-Typen unterscheidet der Kurs, und welche Frage beantwortet jeder?
+> 2. Welche drei Felder muss ein Tool-Call-Span mindestens tragen — und welches davon trägt die Token-Attribution?
+> 3. Nenne die Kette vom Span bis zur Lastenheft-ID. An welcher Stufe würde sie in deinem Repo am ehesten reißen?
+>
+> Wenn du eine der drei Fragen unsicher beantwortest, wiederhole kurz das
+> Worked Example — *nicht* in die Bau-Übungen weiterlesen. Sie setzen die
+> Lese-Kette voraus.
 
 ## Übungen
 

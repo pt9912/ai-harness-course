@@ -201,6 +201,24 @@ demselben Drei-Stage-Schnitt mit sprach-spezifischen Anpassungen.
 
 * Aufbau eines vollständigen Build-Harness
 * Mache ein Image nicht-reproduzierbar (z. B. unpinnierte Base) und beobachte den Drift
+* **Devcontainer-oder-Compose-Entscheidung** — aktiviert das Bewertungs-Lernziel
+  (LZ 4) zur Setup-Abwägung. Drei Teams, je eine Ausgangslage. Entscheide
+  pro Fall begründet, ob das Team (a) *nur* Compose, (b) Compose **plus**
+  Devcontainer oder (c) *zuerst* Devcontainer braucht — und nenne pro Fall
+  das ausschlaggebende Kriterium (Was ist CI-*Vertrag*, was ist
+  Entwickler-*Komfort*?):
+
+  | Fall | Ausgangslage | Entscheidung (a/b/c) + Kriterium |
+  |---|---|---|
+  | A | Solo-Repo, ein Entwickler, CI baut im Container, kein Onboarding absehbar. | … |
+  | B | Fünf Entwickler, drei verschiedene IDEs, wiederkehrende "läuft bei mir"-Tickets beim Setup. | … |
+  | C | Neues Team übernimmt ein Repo, das noch *keine* `docker-compose.yml` hat; niemand hat es je gebaut. | … |
+
+  Nenne zum Schluss das *eine* Kriterium, das in allen drei Fällen den
+  Ausschlag gibt, und grenze deine Entscheidung gegen das Anti-Muster aus
+  den Typischen Fehlvorstellungen ab ("Devcontainer ersetzt Compose").
+  Lösungshinweis: Compose ist der CI-Vertrag (Pflicht), Devcontainer ist
+  IDE-Komfort (additiv) — Fall C baut zuerst den Vertrag, nie umgekehrt.
 
 ### Minimaler Übungspfad
 

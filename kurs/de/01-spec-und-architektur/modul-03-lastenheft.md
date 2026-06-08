@@ -147,6 +147,20 @@ mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../../../lab/example/s
 
 * Erstellung eines vollständigen Lastenhefts für ein kleines Feature
 * Provoziere absichtlich einen Spec-Bug: lass den Agenten gegen eine unterspezifizierte Anforderung laufen und benenne, was schiefging
+* **Drei-Schichten-Übung** — aktiviert das Erschaffens-Lernziel (LZ 4) zur
+  Spec-Stratifizierung. Nimm dein Mini-Feature aus der ersten Übung und
+  verteile seinen Inhalt auf drei Dateien — `lastenheft.md` (vertragliches
+  *Was*), `spezifikation.md` (präzisiertes *Wie genau*), `architektur.md`
+  (strukturelles *Wodurch*). Pflicht pro Schicht: *ein* Inhalt, der dort
+  zwingend gehört, und *ein* Inhalt, der dort fehl am Platz wäre (z. B.
+  gehört "Antwort als gültiges JSON" ins Lastenheft, "Service-Layer ruft
+  nie direkt die DB" in die Architektur). Formuliere zum Schluss die
+  *Konfliktregel*: Was gilt, wenn dieselbe Aussage in zwei Schichten
+  auftaucht (Lastenheft sticht Spezifikation sticht Architektur — die
+  untere Schicht darf *präzisieren*, nie *erweitern*)? Vorbild:
+  Spec-Stratifizierung in `c-hsm-doc`
+  ([`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)).
+  Vorlagen: [`spec/`-Templates](../../../lab/templates/spec/).
 
 ### Minimaler Übungspfad
 

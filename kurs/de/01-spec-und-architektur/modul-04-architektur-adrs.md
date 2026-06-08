@@ -134,6 +134,9 @@ Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
 
 ## Übungen
 
+Die folgenden vier ADR-Übungen aktivieren LZ 1 (je ein ADR im MADR-Format
+*verfassen*); die fünfte aktiviert LZ 4 (Versionierung bei ADR-Verletzung).
+
 * ADR für Modellwahl
 * ADR für Tool Calling
 * ADR für Evaluierung

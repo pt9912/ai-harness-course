@@ -213,7 +213,7 @@ Erschaffens-Leistung dieses Moduls.
 
 * Automatische Verifikation eines Slices
 * Provoziere eine DoD-Verletzung und prüfe, ob sie erkannt wird
-* **Eigene ADR übersetzen** — wähle eine ADR aus deinem Repo, deren Aussage *kein* Standard-Tool 1:1 abbildet. Durchlaufe die sieben Schritte des Worked Example oben. Ergebnis: ein neues `verify-*`-Make-Target mit ID-Kommentar. Aktiviert das Erschaffens-Lernziel.
+* **Eigene ADR übersetzen** — wähle eine ADR aus deinem Repo, deren Aussage *kein* Standard-Tool 1:1 abbildet. Durchlaufe die sieben Schritte des Worked Example oben. Ergebnis: ein neues `verify-*`-Make-Target mit ID-Kommentar. Aktiviert LZ 3 (das Erschaffens-Lernziel: ADR-Konformität als Fitness Function *entwerfen*).
 * **(Bewerten — aktiviert LZ 4)** *Pre-completion Checklist eines fremden Agentenlaufs bewerten.* Nimm den Schritt-8-Bericht aus dem [Worked Example in Modul 9](../03-agenten/modul-09-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow) (Block "Sensors gelaufen / Restrisiken") und einen frei erfundenen, weichgespülten Vergleichs-Bericht (z. B. *"Tests grün, läuft. Restrisiken: minimal."*). Bewerte beide entlang vier Kriterien: (1) *Sensors konkret benannt* (welche Targets, welche Files)? (2) *Restrisiken handlungsorientiert* (Folge-Slice-Vorschlag oder Reflexionsanker)? (3) *Selbstabsolution-Indikatoren* ("läuft", "minimal", "n/a")? (4) *Verifier-Anschlussfähigkeit* (kann der Verifier den Bericht maschinell oder semantisch prüfen)? Ergebnis: zwei Bewertungs-Tabellen plus eine Liste von **drei konkreten Lücken**, die der schwächere Bericht aufweist und die ein Verifier-Skill (Modul 10/10-Anschluss) als HIGH/MEDIUM-Findings kategorisieren würde.
 
 ### Minimaler Übungspfad

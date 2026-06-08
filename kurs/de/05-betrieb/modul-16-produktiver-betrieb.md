@@ -169,6 +169,25 @@ Sechs Schritte, eine Freigabe mit Belegen pro Item. Vergleich:
 * Produktionsfreigabe eines Projekts (Checkliste aus dem Begleit-Repo) — **erweitere** die Repo-Checkliste um zwei eigene Items mit Beleg-Anforderung für ein Projekt deiner Wahl.
 * **(Erschaffen — voll aktiviert LZ 1)** *Freigabe-Checkliste aus dem leeren Skelett neu entwerfen.* Lege eine `release-checklist.md` für ein eigenes Projekt (oder eines der Fallstudien-Repos) **von Grund auf** an — nicht durch Ergänzung der Lab-Vorlage. Pflicht: fünf Phasen-Abschnitte (Vorbereitung · Reproduzierbarkeits-Anker · Replay-Beleg · Runtime-Validation · Anti-Items), je Phase mindestens zwei Items mit *Beleg* (Datei, Make-Target, Trace-ID), sowie eine *Incident-Klausel*, die regelt, wann die Freigabe automatisch entfällt. Vergleich am Ende mit dem Worked Example oben und der Lab-Vorlage `runbooks/release-checklist.md` — welche Items hast du *nicht* gehabt? Welche hast du, die das Worked Example *nicht* nennt?
 * Spiele ein Incident-Szenario durch: Agent löscht versehentlich produktive Daten — was tust du in den ersten 15 Minuten?
+* **(Bewerten — aktiviert LZ 4)** *Rollback-oder-Fix-Forward-Abwägung.* Diese
+  Übung trainiert die *Entscheidung*, die das Incident-Szenario oben nur
+  *auslöst*. Drei Incidents, je eine andere Ausgangslage. Wähle pro Fall
+  zwischen **Rollback**, **Fix-Forward** und **Datenkorrektur** und
+  begründe mit dem jeweiligen Vor-Trigger (Rückwärtskompatibilität ·
+  Test-Coverage des Fix · Existenz des Originaldatensatzes):
+
+  | Fall | Ausgangslage | Wahl + entscheidender Trigger |
+  |---|---|---|
+  | A | Deploy enthält eine **nicht-rückwärtskompatible** DB-Migration; der Bug ist kosmetisch. | … |
+  | B | Bug ist kritisch, aber der Fix ist klein und durch einen bestehenden Test gedeckt; keine Migration. | … |
+  | C | Agent hat bereits **fehlerhafte Daten an Kunden ausgeliefert**; das Original liegt im Backup. | … |
+
+  Schreibe danach die drei Fälle als *bedingte Regeln* in eine
+  Runbook-Tabelle um ("**wenn** Migration nicht rückwärtskompatibel →
+  **dann** kein Rollback") und **benenne explizit die drei
+  Anti-Rollback-Szenarien** (LZ 4 verlangt sie). Pointe: Wer die Regeln
+  *vor* dem Incident festlegt, entscheidet nicht unter Stress die teuerste
+  Option — siehe Selbstcheck "Wann ist Rollback der falsche Reflex?".
 
 ### Minimaler Übungspfad
 
