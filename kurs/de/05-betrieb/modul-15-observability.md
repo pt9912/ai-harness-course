@@ -2,6 +2,18 @@
 
 > **Aufwand:** ca. 75 Min Lesen · 90 Min Übung.
 
+> **Segmenting-Empfehlung (Sweller).** Dieses Modul trägt sechs Lernziele
+> — das Maximum im Kurs — und zerfällt natürlich in zwei Hälften.
+> **Teil A (Telemetrie lesen & diagnostizieren, LZ 1–4):** Mini-Glossar ·
+> Engage · Lernziele · Themen · Kernidee · Typische Fehlvorstellungen ·
+> Worked Example (ein Span zurück bis zur Lastenheft-ID). **Teil B
+> (Sensoren & Schemata bauen, LZ 5–6):** Übungen · Reflexion · Selbstcheck.
+> Lies Teil A und arbeite das Worked Example *durch*, bevor du Teil B
+> öffnest — der Trenner steht sichtbar vor den Übungen
+> ([§Pause-Punkt](#pause-punkt-lesen-bauen)). Wer A und B in einer
+> Sitzung liest, hält am Ende sechs Konzepte gleichzeitig offen — genau
+> die Überlast, die das Modul vermeiden will.
+
 ## Mini-Glossar für dieses Modul
 
 Fünf neue Begriffe — Volldefinitionen in
@@ -65,7 +77,7 @@ es passiert ist; du weißt nicht, *was* passiert ist.
 - **"Logs reichen."** — Logs sagen *was passierte*, nicht *wer wen wann rief*. Trace ist die Antwort darauf.
 - **"Metriken sind nur für Performance."** — Metriken sind auch für *Kosten* (Token, Cache-Hit-Rate) und *Drift* (AGENTS.md-Konsistenz-Score).
 - **"Prompt-Caching ist Modell-Sache."** — Nein. Cache-Hits zeigen sich erst in Metriken, wenn du sie misst. Wer Cache-Miss-Spikes nicht beobachtet, sieht Injection-Versuche und Drift-Symptome nicht.
-- **"Trace teurer Tool-Call ≠ unnötiger Tool-Call."** — Manche teuren Calls sind nötig. Frage: lässt er sich durch Caching, Vorab-Filter oder Kontext-Verdichtung billiger machen?
+- **"Trace teurer Tool-Call = unnötiger Tool-Call."** — Falsch. Manche teuren Calls sind nötig. Frage: lässt er sich durch Caching, Vorab-Filter oder Kontext-Verdichtung billiger machen?
 
 ## Worked Example: ein Span zurück bis zur Lastenheft-ID
 
@@ -183,6 +195,26 @@ Sechs Schritte, eine durchgängige Traceability. Vergleich im Lab:
 (Span `impl-2` ist der `writer.write_index`-Call mit `requirement.id`
 und `adr.id`).
 
+## Pause-Punkt: lesen → bauen
+
+> *Hier endet Teil A.* Wenn du der Segmenting-Empfehlung folgst (Box am
+> Modul-Kopf), mach jetzt Pause und nimm Teil B (die Bau-Übungen) in einer
+> *zweiten* Sitzung. Begründung: Das *Lesen* eines Spans (Teil A) und das
+> *Entwerfen* eines Span-Schemas (Teil B) sind zwei verschiedene
+> Tätigkeiten — in derselben Sitzung verschwimmen sie, und das
+> Schema-Entwerfen gerät zur bloßen Nachahmung des gelesenen Beispiels
+> statt zur eigenen Konstruktion.
+>
+> **Selbsttest vor Pause (60 Sekunden, ohne Spickzettel):**
+>
+> 1. Welche drei Telemetrie-Typen unterscheidet der Kurs, und welche Frage beantwortet jeder?
+> 2. Welche drei Felder muss ein Tool-Call-Span mindestens tragen — und welches davon trägt die Token-Attribution?
+> 3. Nenne die Kette vom Span bis zur Lastenheft-ID. An welcher Stufe würde sie in deinem Repo am ehesten reißen?
+>
+> Wenn du eine der drei Fragen unsicher beantwortest, wiederhole kurz das
+> Worked Example — *nicht* in die Bau-Übungen weiterlesen. Sie setzen die
+> Lese-Kette voraus.
+
 ## Übungen
 
 * Analyse eines KI-Agenten-Laufs im Trace-Viewer
@@ -288,6 +320,7 @@ Modul-spezifische Trigger:
 * **(Erinnern)** Welche drei Telemetrie-Typen unterscheidet der Kurs, und welche Frage beantwortet jeder?
 * Welche drei Felder muss ein Tool-Call-Span mindestens tragen?
 * Wo schlägt sich ein Prompt-Cache-Miss in den Metriken nieder?
+* **(Bewerten — aktiviert LZ 5)** Woran erkennst du in Trace oder Metrik, dass AGENTS.md vom Code abgedriftet ist — welches konkrete Signal liest der Doku-Konsistenz-Agent (z. B. AGENTS.md-Befehl ohne passendes Make-Target), und ab welcher Schwelle (Konsistenz-Score) bewertest du den Drift als gate-relevant statt als Rauschen?
 * **(Erschaffens-Prozess)** Welcher Schritt der End-to-End-Trace-Übung (Span → Slice → ADR → LH-ID) war bei dir der *unsicherste* — und woran lag es? (Erfahrungsgemäß: Frontmatter-Feldnamen oder die Make-Target-Kommentar-Konvention.)
 
 ### Selbstcheck-Rubrik
@@ -297,6 +330,7 @@ Modul-spezifische Trigger:
 | Drei Telemetrie-Typen + jeweilige Frage? | nur Logs genannt | Logs (*was passierte*) · Metriken (*wie oft, wie schnell, wie viel*) · Traces (*wer rief wen, in welcher Reihenfolge*). Drei verschiedene Fragen, drei verschiedene Werkzeuge. | + Operative Folge: Wer nur Logs hat, kann Cost-Attribution nicht durchführen (braucht Metriken) und Tool-Call-Ketten nicht rekonstruieren (braucht Traces). Ein Agent-System mit nur einem Typ ist forensisch nicht antwortfähig. |
 | Drei Mindestfelder eines Tool-Call-Spans? | "Name, Zeit, Ergebnis." | `tool.name`, `tool.arguments` (redacted), `tool.result.status` plus Korrelations-IDs zu Slice/PR/Agent-Rolle. | + Begründung: Ohne `slice.id` / `requirement.id` ist Token-Attribuierung pro Slice nicht möglich; ohne `agent.role` bricht die Rollen-Trennung in der Forensik. |
 | Prompt-Cache-Miss in den Metriken — wo? | "In den Kosten." | Anstieg der Token-Eingabe-Metrik *ohne* Anstieg der Cache-Hit-Rate-Metrik (`cache.hit_ratio` fällt). | + Zweck: Cache-Miss-Spikes sind oft Injection-Symptome (variable Eingaben umgehen Cache absichtlich) — Metrik dient also gleichzeitig Kosten- *und* Sicherheitsüberwachung. |
+| Doku-Konsistenz-Drift in Trace/Metrik erkennen — Signal + Schwelle? | "AGENTS.md ist alt." | Konkretes Signal: Doku-Konsistenz-Agent meldet AGENTS.md-Befehl ohne passendes Make-Target (z. B. `make fullbuild` behauptet, Makefile kennt nur `make build`); Konsistenz-Score als Metrik (`agents_md.consistency_ratio`) fällt unter einen Schwellwert. | + Schwelle begründet: jeder behauptete-aber-fehlende Befehl ist *sofort* gate-relevant (Hard Rule Modul 13, keine Befehle erfinden), nicht erst ab einem Prozentsatz — Score-Verfall ist nur das Aggregat-Signal. Gegenbeispiel-Rauschen: ein neu hinzugefügtes Target ohne AGENTS.md-Eintrag ist *Vorwärts*-Drift (Doku hinkt nach), andere Härte als behauptete Geister-Befehle. |
 | Unsicherster Schritt der E2E-Trace-Übung? | "Alles klar." (verdächtig) | Konkret benannter Schritt + Begründung (z. B. "Schritt 2 Slice-Datei finden, weil mein Repo kein einheitliches Frontmatter-Schema hat"). | + Pointe: der unsicherste Schritt *ist* der Bruchpunkt deiner Traceability-Kette. Wer ihn benennt, hat den ersten Steering-Loop-Eintrag schon halb formuliert. |
 
 ## Weiterlesen

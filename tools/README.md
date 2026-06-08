@@ -2,6 +2,64 @@
 
 Hilfsskripte rund um den Kurs. Nicht Teil des Kursmaterials.
 
+Beide Validatoren teilen sich einen **Multi-Stage-`Dockerfile`**: eine
+gemeinsame `base`-Stage validiert die Skripte zur Build-Zeit
+(`node --check`), zwei benannte Ziel-Stages liefern je ein
+zweckgebundenes Image. Gebaut wird per `--target`:
+
+```bash
+docker build -t docs-check       --target docs-check       tools/
+docker build -t alignment-check  --target alignment-check  tools/
+```
+
+## alignment-check
+
+`alignment-check.js` operationalisiert den Alignment-Prüfschritt aus
+[`kurs/de/grundlagen/README.md` §1](../kurs/de/grundlagen/README.md) auf
+Lernziel-Granularität: für jedes Modul prüft es, ob jedes Lernziel (LZ)
+im Übungs- *und* im Selbstcheck-Block aktiviert ist — entweder durch
+einen expliziten Marker `LZ <N>` oder durch den Wortstamm eines kursiven
+LZ-Verbs.
+
+### Bauen und Verwenden (Docker)
+
+```bash
+docker build -t alignment-check --target alignment-check tools/
+docker run --rm -v "$PWD":/work alignment-check            # Default: kurs/de
+docker run --rm -v "$PWD":/work alignment-check --verbose   # auch volle Abdeckung
+docker run --rm -v "$PWD":/work alignment-check --strict    # Exit 1 bei WARN
+```
+
+### Schweregrade
+
+**WARN** — ein Höher-Bloom-LZ (Analysieren/Bewerten/Erschaffen/Überwachen)
+trägt in *beiden* Blöcken keine Aktivierung. Das ist der heißeste Kandidat
+für eine echte Alignment-Lücke (Lernziel ohne trainierende Aktivität). Mit
+`--strict` Exit-Code 1.
+
+**INFO** — partieller Fall (nur Übung *oder* nur Selbstcheck fehlt) oder
+ein Erinnern/Verstehen-LZ. Exit-Code bleibt 0.
+
+### Heuristik, kein Gate
+
+Das Werkzeug ist ein **Frühwarner**, kein Beweis:
+
+- **Verbstamm-Matching** ist heuristisch. Deutscher Ablaut (entwerfen →
+  entwirf) und Synonyme (verfassen ↔ schreiben) erzeugen Falsch-Negative
+  — ein flagged LZ kann in Prosa längst geprobt sein. Darum vor jeder
+  Reaktion gegensteuern: das LZ im Modul nachlesen.
+- **Konzept-knappe Selbstchecks sind Absicht** (siehe
+  [`selbstcheck-rubrik.md`](../kurs/de/grundlagen/selbstcheck-rubrik.md)):
+  die kognitive Tiefe trägt die Drei-Stufen-Rubrik, nicht das Item-Verb.
+  Ein fehlender Selbstcheck-Marker ist darum nur INFO.
+- **0 WARN ist der Zielzustand** und aktuell erreicht. Wer ein WARN
+  erzeugt, hat entweder eine echte Lücke gebaut oder ein neues LZ-Verb
+  eingeführt, dessen Aktivierung das Werkzeug nicht erkennt — beides ist
+  einen Blick wert.
+
+Node 22+, keine externen Dependencies — eine einzelne Datei, gleiche
+Konvention wie `docs-check`.
+
 ## docs-check
 
 `Dockerfile` + `docs-check.js` liefern einen reproduzierbaren
@@ -23,7 +81,7 @@ der Kurs verwendet sie selten und sie zu prüfen wäre flaky.
 ### Bauen
 
 ```bash
-docker build -t docs-check tools/
+docker build -t docs-check --target docs-check tools/
 ```
 
 ### Verwenden

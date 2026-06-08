@@ -46,7 +46,10 @@ meldet "Akzeptanzkriterium LH-FA-3.b nicht erfüllt". Der Konflikt ist
 
 Vorgehen:
 
-1. **Verifier-Befund hat Vorrang**, weil er gegen die *vereinbarte
+1. **Der Architect entscheidet prozessual** — *nicht* "wir nehmen das
+   mildere Ergebnis" (vgl. [Modul 11 §Fehlvorstellungen](../04-qualitaet/modul-11-verification.md)).
+   Inhaltlich kommt er dabei typischerweise zum Schluss: der
+   **Verifier-Befund hat Vorrang**, weil er gegen die *vereinbarte
    Lieferung* misst. Reviewer-Grün bedeutet höchstens "der Code, der
    da ist, ist sauber" — nicht "der Code, der nötig ist, ist da".
 2. **Schließe die Lücke** entweder durch Implementierung (häufigster

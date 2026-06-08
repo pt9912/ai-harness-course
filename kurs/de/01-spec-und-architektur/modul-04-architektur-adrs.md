@@ -17,7 +17,7 @@ Nach diesem Modul kannst du:
 
 * einen ADR im MADR-Format mit Kontext, Optionen, Entscheidung und Konsequenzen *verfassen* (Erschaffen · prozedural),
 * die Trennung ADR ↔ Spec ↔ Plan *erklären* und Grenzfälle *einordnen* (Analysieren · konzeptuell),
-* eine ADR-Aussage in eine maschinell prüfbare Fitness Function *übersetzen* (Erschaffen · prozedural),
+* eine ADR-Aussage in eine maschinell prüfbare Fitness-Function-*Aussage* übersetzen (Anwenden · prozedural; das volle *Erschaffen* der lauffähigen Fitness Function folgt in [Modul 13](../04-qualitaet/modul-13-quality-gates.md#worked-example-vom-adr-satz-zur-fitness-function)),
 * zwischen `superseded` und `deprecated` ADRs *unterscheiden* und einen Folge-ADR *entwerfen* (Bewerten + Erschaffen · konzeptuell+prozedural).
 
 ## Lab-Bezug
@@ -133,6 +133,9 @@ Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
 [`/lab/example/docs/plan/adr/`](../../../lab/example/docs/plan/adr/).
 
 ## Übungen
+
+Die folgenden vier ADR-Übungen aktivieren LZ 1 (je ein ADR im MADR-Format
+*verfassen*); die fünfte aktiviert LZ 4 (Versionierung bei ADR-Verletzung).
 
 * ADR für Modellwahl
 * ADR für Tool Calling

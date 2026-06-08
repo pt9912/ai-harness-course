@@ -28,10 +28,10 @@ Lesart:
 
 | Frage | Primaere Artefakte | Typische Module |
 |---|---|---|
-| Was soll gelten? | Lastenheft, Spezifikation | 1, 2 |
-| Warum gilt diese Loesung? | ADR, Architektur | 3, 12 |
-| Wie klein ist die naechste Aenderung? | Slice, Roadmap, Carveout | 4, 5, 6 |
-| Woran erkenne ich, dass es stimmt? | Review, Verify, Replay, Gates, Trace | 9, 10, 11, 12, 14 |
+| Was soll gelten? | Lastenheft, Spezifikation | 3 |
+| Warum gilt diese Loesung? | ADR, Architektur | 4 |
+| Wie klein ist die naechste Aenderung? | Slice, Roadmap, Carveout | 5, 6, 7 |
+| Woran erkenne ich, dass es stimmt? | Review, Verify, Replay, Gates, Trace | 10, 11, 12, 13, 15 |
 
 ## 2x2-Schnellanker
 

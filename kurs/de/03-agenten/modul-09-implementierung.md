@@ -52,7 +52,7 @@ Nach diesem Modul kannst du:
 
 * einen Slice nach dem 8-Schritt-Workflow *umsetzen* und die Reihenfolge Plan → Diff → Code *einhalten* (Anwenden · prozedural),
 * drei Hard Rules für ein Beispiel-Repo *formulieren*, jeweils mit Falsch/Richtig-Beispiel und Begründung (Erschaffen · prozedural),
-* eine Hard Rule einem Quadranten der 2×2-Matrix *zuordnen* (Analysieren · konzeptuell),
+* eine Hard Rule einem oder zwei Quadranten der 2×2-Matrix *zuordnen* (Analysieren · konzeptuell),
 * die Wirkung von AGENTS.md auf einen Agentenlauf *messen*, indem du den Lauf mit und ohne AGENTS.md vergleichst (Bewerten · prozedural),
 * den schwächsten Schritt des Workflows in deinem eigenen Repo *einschätzen* und einen konkreten Beleg dafür *benennen* (Bewerten · metakognitiv).
 
@@ -301,7 +301,7 @@ Tool-Familie). AGENTS.md unverändert (keine neue Hard Rule).
 > Audit-Log braucht später eine Rotations-Regel. Vorschlag: Folge-Slice
 > SL-014b zuerst, Audit-Rotation als Hinweis in dessen DoD aufnehmen.
 
-Sieben Iterationen, ein nachvollziehbarer Slice. Beachte: **kein
+Acht Schritte mit zwei Rückkanten, ein nachvollziehbarer Slice. Beachte: **kein
 Rücksprung zu Schritt 1**, sondern nur 5→4 (Plan verfeinern) und 6→4
 (Plan korrigieren wegen Gate). Wer in Schritt 1 zurückspringt, hat einen
 Kontext-Defekt, keinen Plan-Defekt — das ist eine andere Ursache und
@@ -399,6 +399,7 @@ Hard Rules. Modul-spezifische Trigger:
 * Welche Eingaben braucht ein Implementation-Agent minimal, um nicht zu halluzinieren?
 * Wann ist ein Implementation-Agent fertig — wenn der Code kompiliert, oder wenn die DoD erfüllt ist?
 * Welche deiner Hard Rules wandert in welche Quadranten der 2×2-Matrix?
+* **(Bewerten — aktiviert LZ 4)** Wie misst du die Wirkung von AGENTS.md auf einen Agentenlauf — welche zwei Läufe vergleichst du, entlang welcher Achsen, und was hältst du dabei konstant?
 * **(Bewerten + Metakognition)** Welcher Schritt des 8-Schritt-Workflows ist in deinem eigenen Repo heute am schwächsten verankert — und woran erkennst du das?
 
 ### Selbstcheck-Rubrik
@@ -409,6 +410,7 @@ Hard Rules. Modul-spezifische Trigger:
 | Minimale Eingaben gegen Halluzination? | "Klare Anweisung." | `harness/README.md` + relevante kanonische Quelle + Requirement/ADR-IDs + AGENTS.md + Tool-Allowlist. | + Hinweis Lopopolo: "Was der Agent nicht im Kontext erreicht, existiert für ihn nicht." — fehlende Eingaben werden *durch Raten ersetzt*, nicht durch Schweigen. |
 | Fertig: Code kompiliert oder DoD erfüllt? | "DoD." | DoD-erfüllt + Schritt 8 ausgeführt (Bericht über Sensors + Restrisiken). Kompilierender Code ist notwendig, nicht hinreichend. | + Folge: ohne Schritt-8-Bericht wird jedes Risiko in die nächste Rolle (Reviewer/Verifier) verlagert — das bricht die Kontext-Trennung der Rollen. |
 | Hard Rules ↔ Quadranten der 2×2-Matrix? | "Inferentielle Feedforward." | Jede Hard Rule liegt in *zwei* Quadranten: inferential feedforward (steht in AGENTS.md) + computational feedback (Fitness Function/Linter-Gate). | + Hard Rule nur in einem Quadranten ist halb durchgesetzt; nur in AGENTS.md vergisst der Agent sie unter Druck, nur als Fitness Function ohne AGENTS.md-Eintrag versteht der Agent das *Warum* nicht. |
+| Wirkung von AGENTS.md messen? | "Lauf mit und ohne vergleichen." | Lauf A (mit AGENTS.md) vs. Lauf B (ohne), entlang vier Achsen (Hard-Rule-/Architektur-Konformität, Plan-, Bericht-Qualität); konstant gehalten: Slice, Spec-/ADR-Stand, Modell, Seed — nur AGENTS.md variiert. | + Befund einem Quadranten zugeordnet (AGENTS.md = inferential feedforward) plus Vorhersage *welche* Achse am stärksten reagiert; Sonderfall A≈B ist selbst ein Befund — Warnung für den nächsten Modellwechsel (Modul 12: Drift). |
 | Schwächster Schritt im eigenen Repo? | konkret benannt, aber ohne Beleg | Konkret benannter Schritt (z. B. Schritt 7: Doku-Update bleibt liegen) + Beleg (z. B. `harness/README.md` wurde seit 6 Wochen nicht angepasst, obwohl drei Gate-Targets sich änderten). | + Steering-Loop-Eintrag formuliert: was im Harness verändert wird, damit Schritt X beim nächsten Lauf nicht mehr schwächster Schritt ist (z. B. Doku-Konsistenz-Agent als Drift-Sensor, Modul 15). |
 
 ## Weiterlesen

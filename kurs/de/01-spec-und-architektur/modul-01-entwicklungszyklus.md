@@ -11,8 +11,10 @@ rot?* Antwort am Ende dieses Moduls — und sie liegt im Diagramm unten.
 
 ## Mini-Glossar für dieses Modul
 
-Modul 0 hat acht Grundbegriffe eingeführt; dieses Modul fügt acht weitere
-hinzu plus drei Harness-Bootstrap-Begriffe, die Schritt 0 voraussetzt.
+Modul 0 hat acht Grundbegriffe eingeführt; dieses Modul trägt **acht
+weitere**. Drei zusätzliche *Harness-Bootstrap-Begriffe* stehen als
+Vorgriff in einer eigenen Tabelle darunter — sie werden nur von Schritt 0
+gestreift und erst in Modul 2 voll entfaltet; jetzt genügt Überfliegen.
 Die vollständigen Definitionen stehen in
 [`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe)
 bzw. [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap);
@@ -28,13 +30,19 @@ für die ersten Seiten reichen die folgenden Ein-Satz-Anker:
 | **Fitness Function** | Maschinell prüfbare Architektur-Aussage (z. B. Modulgrenze, Latenzbudget). | ein Test, der nicht Code, sondern Architektur prüft. |
 | **Closure-Eintrag** | Notiz im Slice, die festhält, *was beim Abschluss gelernt wurde*. | das letzte Stück Beleg, das eine Welle wirklich schließt. |
 | **Steering Loop** | Wiederkehrendes Muster: Versagen beobachten → Guide/Sensor verbessern → Wiederholung reduzieren. | die Lernschleife, mit der der Harness mitwächst. |
+
+**Vorgriff auf Modul 2 — nur für Schritt 0, jetzt nur überfliegen (nicht vertiefen):**
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
 | **Harness-Bootstrap** | Einstiegsprozess in den Harness-Lebenszyklus — Trajektorie durch Dokument-Zustände, kein Ereignis. | "Hochziehen aus dem Nichts" — Repo lernt sich selbst, bis es laufen kann. |
 | **GF/BF-Modus** | Pro Sub-Area deklarierte Trigger-Richtung: Greenfield (Doc → Code) oder Brownfield (Code → Doc, Übergang mit Konvergenz-Auftrag zu GF). *Sub-Area* = Träger der Modus-Entscheidung; was als eine qualifiziert, definiert [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area). | wer wem folgt: Versprechen oder Inventur. |
-| **Phase-Reife** | Schreibreife eines Dokument-Abschnitts in fünf Stufen (Skelett → Outline → partiell → kohärent → stabil); pro Sektion unabhängig. | nicht "fertig oder nicht", sondern "in welcher Schicht". |
+| **Phase-Reife** | Schreibreife eines Dokument-Abschnitts in sechs Stufen (0 leer → 1 Skelett → 2 Outline → 3 partiell → 4 kohärent → 5 stabil); pro Sektion unabhängig. Phase 0 ("existiert nicht, sollte aber") ist eine legitime Reife — Details in Modul 2. | nicht "fertig oder nicht", sondern "in welcher Schicht". |
 
-Diese elf Begriffe trägt das Modul. Wenn beim ersten Lesen ein Begriff
-unklar bleibt, ist die einsatzklare Tiefe später in den Modulen 2–4 (Spec,
-ADR, Plan) verankert — nicht hier.
+**Acht** Begriffe trägt dieses Modul; die drei Bootstrap-Anker darunter
+streift nur Schritt 0 und werden in Modul 2 voll entfaltet. Wenn beim
+ersten Lesen ein Begriff unklar bleibt, ist die einsatzklare Tiefe später
+in den Modulen 2–4 (Spec, ADR, Plan) verankert — nicht hier.
 
 ## Lernziele
 
@@ -271,7 +279,7 @@ nächste Konflikt — nicht der nächste Lesedurchgang.
 ## Übungen
 
 * Zeichne den Zyklus für ein Mini-Feature auf einem Blatt
-* Identifiziere im Begleit-Repo einen Slice und folge der Kette Spec → ADR → Plan → PR
+* **(Analysieren — aktiviert LZ 3)** Identifiziere im Begleit-Repo einen Slice und folge der Kette Spec → ADR → Plan → PR — *prüfe*, ob jede Stufe per ID auf die vorige verweist, und benenne die erste Stelle, an der die Kette reißt
 * Schreibe einen Source-Precedence-Block für ein eigenes Repo als ersten Abschnitt einer neuen `harness/README.md` (Vorlage in [`/lab/templates/harness/README.template.md`](../../../lab/templates/harness/README.template.md))
 
 ## Reflexion
@@ -287,7 +295,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 
 ## Selbstcheck
 
-* **(Erinnern)** Nenne die sieben Stationen des Lebenszyklus in der Reihenfolge des Vorwärtspfads (Spec → … → Closure).
+* **(Anwenden — aktiviert LZ 1)** Zeichne den Lebenszyklus *aus dem Gedächtnis* als gerichteten Graphen — Vorwärtspfad (Spec → … → Closure) *und* die drei Rückwärtskanten — und vergleiche dann mit dem Diagramm im Modul: Welche Station oder Kante hast du vergessen? (Wer nur die sieben Stationen *aufzählen*, aber nicht als Graph *anordnen* kann, bleibt auf der Erinnern-Stufe.)
 * Welche Information darf nur in der Spec stehen, welche nur im ADR?
 * Was passiert, wenn ein Slice fertig ist, aber kein Closure-Eintrag existiert?
 * **(Erschaffen — aktiviert LZ 4)** Entwirf für *dein* Repo (oder eines der vier Fallstudien-Repos) einen Source-Precedence-Block, der die fünf relevanten Quellen in dieser Reihenfolge sortiert *und* einen Konfliktfall benennt (z. B. AGENTS.md sagt X, ADR sagt Y) inkl. Auflösungs-Regel.
@@ -296,7 +304,7 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
-| Sieben Stationen in Reihenfolge? | drei oder vier Stationen, ohne Reihenfolge | Spec → ADR → Plan → Code → Review → Verifikation → Closure. Vorwärtspfad sauber, Closure als eigene Station. | + Rückwärtspfade benannt: Closure → Spec/ADR (Lerneintrag), Verifikation → Spec (Spec-Lücke), Review → ADR (Folge-ADR). Wer die Rückwärtspfade nicht kennt, hat eine Liste, keine Kette. |
+| Lebenszyklus als Graph gezeichnet? | drei oder vier Stationen aufgezählt, ohne Reihenfolge, ohne Kanten | Vorwärtsgraph sauber gezeichnet: Spec → ADR → Plan → Code → Review → Verifikation → Closure, Closure als eigene Station. | + Rückwärtskanten eingezeichnet: Closure → Spec/ADR (Lerneintrag), Verifikation → Spec (Spec-Lücke), Review → ADR (Folge-ADR). Wer die Rückwärtspfade nicht zeichnet, hat eine Liste, keine Kette. |
 | Spec vs. ADR — wo welche Info? | "Spec = was, ADR = warum." | Spec = vertragliche Anforderung mit Akzeptanzkriterien; ADR = Lösungsbegründung; Bezug per ID. | + Spec-Stratifizierung (Lastenheft/Spezifikation/Architektur), inkl. Regel "ADR darf Spezifikation, nicht Lastenheft schärfen". |
 | Slice fertig, aber kein Closure-Eintrag? | "Ist nicht fertig." | Slice gilt nicht als `done/`, weil Lerneintrag fehlt; Welle kann nicht schließen. | + Folge für Steering Loop: ohne Closure-Eintrag wird das Versagensmuster nicht beobachtbar, also wird derselbe Fehler dreimal gemacht (Lücke wird unsichtbar). |
 | Source-Precedence-Block für eigenes Repo entworfen? | Eine Liste von Quellen ohne Reihenfolge, ohne Konfliktfall. | Fünf Quellen in Reihenfolge sortiert (Lastenheft/Spec über ADR über AGENTS.md über Modul-Doku über Beispiel-Repos); ein konkreter Konfliktfall mit Auflösungs-Regel benannt. | + zwei Konfliktfälle aus *verschiedenen* Quellpaaren (z. B. ADR↔AGENTS.md und Spec↔Beispiel-Repo); Verweis auf eine Hard Rule oder Fitness Function, die den Konflikt deterministisch verhindert. |

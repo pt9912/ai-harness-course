@@ -60,7 +60,7 @@ Reviews und Abschlussbericht. Das Repository muss:
 * `make gates` grün durchlaufen
 * einen Replay-Lauf gegen ein Golden Set reproduzieren
 * mindestens eine ADR, einen Carveout und einen geschlossenen Slice in `done/` enthalten
-* einen Trace eines kompletten Agenten-Durchlaufs (Plan → Implement → Review → Verify) im Anhang dokumentieren
+* einen Trace eines kompletten Agenten-Durchlaufs (Plan → Implement → Review → Verify → Validate) im Anhang dokumentieren — die Validation-Stufe (Modul 8) gegen den *realen Bedarf*, sofern ein solcher prüfbar ist; wo im Solo-Abschluss kein realer Bedarf vorliegt, die Validation-Kante mit ihrem erwarteten Übergabe-Artefakt skizzieren statt ausführen
 
 ## Bewertungsachsen
 
@@ -86,7 +86,7 @@ Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
 |---|---|
 | **rudimentär** | Spec und Code vorhanden; ADR und Plan nur skizziert; kein Replay-Lauf. |
 | **funktional** | Alle Artefakttypen vorhanden, aber nicht durchgängig verknüpft (Slice ohne ADR-Bezug, Replay ohne Golden Set). |
-| **solide** | Alle Artefakte vorhanden und verknüpft; je mindestens ein abgeschlossener Slice in `done/`, eine ADR mit `Accepted`-Status, ein Replay-Lauf, ein Carveout. |
+| **solide** | Alle Artefakte vorhanden und verknüpft; je mindestens ein abgeschlossener Slice in `done/`, eine ADR mit `Accepted`-Status, ein Replay-Lauf, ein Carveout, eine Roadmap als Wellen-Sequenz mit beobachtbaren Triggern (kein Kalenderdatum als Trigger, Modul 6). |
 | **exzellent** | Zusätzlich: mindestens ein *Failure → Steering-Loop-Eintrag* dokumentiert; mindestens eine ADR `supersedes` eine frühere; mindestens ein Reviewer-Skill liegt unter `.harness/`. |
 
 ### Achse: Konsistenz

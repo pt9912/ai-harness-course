@@ -245,7 +245,7 @@ wiederholt.
   mit Inventur-Auftrag ein gültiger Befund. Saubere Karten zeigen
   meist drei bis fünf der sechs Stufen *inklusive* Phase 0 als
   möglichen Wert.
-- **Konvictions-Check vergessen am Modul-Ende.** Wer §Vorab vor der
+- **Überzeugungs-Check vergessen am Modul-Ende.** Wer §Vorab vor der
   Lehre nicht notiert hat, kann am Modul-Ende keine Verschiebung
   benennen. Konsequenz: Selbstcheck-Frage 5 wird inhaltsleer.
 

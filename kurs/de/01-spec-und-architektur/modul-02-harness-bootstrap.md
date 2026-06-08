@@ -260,7 +260,7 @@ und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
   graduations-reif wird.
 
 (Weitere Fehlvorstellungen ergänzen sich aus der
-Konvictions-Check-Ausbeute oben — wer mit "Bootstrap = Setup"
+Überzeugungs-Check-Ausbeute oben — wer mit "Bootstrap = Setup"
 gestartet ist, trägt FV1 implizit.)
 
 ## Worked Example 1: Greenfield-Bootstrap (DocSearch-Walkthrough)
@@ -385,6 +385,15 @@ Eintrag bekommen. Wer den Eintrag vergisst, hat einen klassischen
 findet das später als Inkonsistenz.
 
 ## Worked Example 2: Brownfield-Bootstrap mit Discovery und Reconciliation
+
+> **Last-Reduktion für den ersten Durchgang:** Wer den Kurs mit
+> Greenfield-Fokus liest (neues Repo, kein Altbestand), kann Worked
+> Example 2 beim *ersten* Durchgang aufschieben und nach der
+> Phasen×Modus-Matrix (§unten) zurückkehren — der BF-Walkthrough trägt
+> die *Diskrepanz-Schock*- und *Reconciliation*-Mechanik, die erst greift,
+> sobald du ein bestehendes Repo bootstrappst. **Aufschub, keine
+> Auslassung:** Übung 2 (Trigger-Klassen) und der Selbstcheck setzen WE2
+> voraus — vor ihnen zurückkehren.
 
 **Story.** Ein bestehendes Repo `legacy-search` (Code, Makefile, CI,
 Tests) soll formellen Harness-Einstieg bekommen. Es gibt keine
@@ -611,7 +620,7 @@ Modul-spezifische Trigger:
   eine Modus-Aussage, die du beim nächsten Slice prüfen lässt?
   Welcher Sensor (Make-Target, Doc-Konsistenz-Agent, Closure-Note)
   würde das prüfen?
-- **Conceptual Change:** Vergleiche deinen Konvictions-Check
+- **Conceptual Change:** Vergleiche deinen Überzeugungs-Check
   (§Vorab — was hältst du heute für wahr?) mit deiner heutigen
   Antwort. Welche Vorstellung hat sich verschoben? Primäre
   Kandidaten: FV1–FV4 in §Typische Fehlvorstellungen weiter oben,
@@ -646,9 +655,10 @@ Conceptual-Change-Selbstvalidierung ab.
   gibt es laut
   [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)?
   Nenne pro Klasse ein Beispiel aus den beiden Worked Examples.
-* **(Analysieren, durch Übung 2)** Welcher Trigger in Worked
+* **(Analysieren, durch Worked Example 2)** Welcher Trigger in Worked
   Example 2 macht den BF-Modus-Übergang sichtbar — und warum gerade
-  dieser?
+  dieser? (T3 ist BF-spezifisch und erscheint nur in WE2, nicht in
+  Übung 2.)
 * **(Erschaffen, durch Übung 3)** Was bedeutet *Phase 4 kohärent* in
   GF gegenüber BF? Nenne pro Modus ein konkretes Indiz aus der
   Phase × Modus-Matrix.
@@ -668,7 +678,7 @@ die modulspezifischen Indikatoren sind:
 | Vier Trigger-Klassen, je ein Beispiel? | Drei Klassen genannt, ohne Worked-Example-Bezug. | Alle vier Klassen genannt + je ein Trigger aus WE1 oder WE2 als Beispiel. | + Begründung, warum die vier Klassen *erschöpfend* sind (was würde nicht in eine der vier passen?); Verweis auf `konventionen.md` §Vier Trigger-Klassen für die Definition. |
 | Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz". | T3 als **Sync-Trigger in BF-Diskrepanz-Auslöse-Variante** bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht (impliziter Pointer-Mismatch). | + Pointe: T3 ist *keine fünfte Klasse*, sondern eine BF-typische Auslöse-Variante von Sync (die vier Klassen aus konventionen.md bleiben erschöpfend). Plus: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt. |
 | Phase 4 kohärent in GF vs. BF? | "In GF steht der Vertrag, in BF die Inventur." | GF Phase 4: *Vertrag steht, Code wird daran gemessen* (z. B. CI-Gates greifen). BF Phase 4: *Inventur abgeglichen, Diskrepanz-Schock sichtbar* (z. B. CO-DS-* oder Reconc.-Slice-Backlog). | + Begründung, warum *Phase 4* die kritische Stufe in BF ist (vorher: Inventur arbeitet, nachher: Reconciliation läuft); Verweis auf Modul 7 §Carveouts für die `CO-DS-*`-Konvention. |
-| Konvictions-Check: welche Verschiebung? | Keine Verschiebung benannt oder pauschal "alles klarer". | Eine konkrete Antwort: welche §Vorab-Frage hat sich um welchen Halbsatz verschoben? Verweis auf eine Fehlvorstellung (FV1–FV4), die deine Spontanantwort getragen hat. | + Pointe: welche Vorstellung gleich geblieben ist und *warum sie hält* — Conceptual-Change-Reflexion verlangt, beides zu zeigen, nicht nur Verschiebung. |
+| Überzeugungs-Check: welche Verschiebung? | Keine Verschiebung benannt oder pauschal "alles klarer". | Eine konkrete Antwort: welche §Vorab-Frage hat sich um welchen Halbsatz verschoben? Verweis auf eine Fehlvorstellung (FV1–FV4), die deine Spontanantwort getragen hat. | + Pointe: welche Vorstellung gleich geblieben ist und *warum sie hält* — Conceptual-Change-Reflexion verlangt, beides zu zeigen, nicht nur Verschiebung. |
 
 ## Weiterlesen
 

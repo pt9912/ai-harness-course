@@ -147,6 +147,20 @@ mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../../../lab/example/s
 
 * Erstellung eines vollständigen Lastenhefts für ein kleines Feature
 * Provoziere absichtlich einen Spec-Bug: lass den Agenten gegen eine unterspezifizierte Anforderung laufen und benenne, was schiefging
+* **Drei-Schichten-Übung** — aktiviert das Erschaffens-Lernziel (LZ 4) zur
+  Spec-Stratifizierung. Nimm dein Mini-Feature aus der ersten Übung und
+  verteile seinen Inhalt auf drei Dateien — `lastenheft.md` (vertragliches
+  *Was*), `spezifikation.md` (präzisiertes *Wie genau*), `architektur.md`
+  (strukturelles *Wodurch*). Pflicht pro Schicht: *ein* Inhalt, der dort
+  zwingend gehört, und *ein* Inhalt, der dort fehl am Platz wäre (z. B.
+  gehört "Antwort als gültiges JSON" ins Lastenheft, "Service-Layer ruft
+  nie direkt die DB" in die Architektur). Formuliere zum Schluss die
+  *Konfliktregel*: Was gilt, wenn dieselbe Aussage in zwei Schichten
+  auftaucht (Lastenheft sticht Spezifikation sticht Architektur — die
+  untere Schicht darf *präzisieren*, nie *erweitern*)? Vorbild:
+  Spec-Stratifizierung in `c-hsm-doc`
+  ([`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)).
+  Vorlagen: [`spec/`-Templates](../../../lab/templates/spec/).
 
 ### Minimaler Übungspfad
 
@@ -184,6 +198,7 @@ Modul-spezifische Trigger:
 * Wo gehört "Performance < 200 ms" hin — funktional oder nichtfunktional?
 * **(Erschaffens-Prozess)** Welcher Schritt deines Lastenheft-Schreibens war der *unsicherste* — und warum? (Erfahrungsgemäß: Schritt 5 "Negative" oder Schritt 6 "Out-of-Scope".)
 * **(Erschaffen — aktiviert LZ 4)** Entwirf für dein Mini-Feature eine Drei-Schichten-Spec-Stratifizierung (`lastenheft.md` · `spezifikation.md` · `architektur.md`): nenne *je* einen Inhalt, der in dieser Schicht zwingend gehört, und einen Inhalt, der dort *fehl am Platz* wäre. Welche Regel löst den Konflikt, wenn dieselbe Aussage in zwei Schichten auftaucht?
+* **(Bewerten — aktiviert LZ 3)** Provoziere mit deinem Lastenheft einen Agentenlauf und benenne *eine* konkrete Lücke, die das beobachtete Verhalten offenlegt (z. B. Agent erfindet ein Default-Limit, weil kein Boundary-Kriterium existiert): Diagnostiziere, *welcher* fehlende Spec-Bestandteil die Fehlinterpretation zuließ. Und metakognitiv: welche *eigene* Annahme — die dir beim Schreiben selbstverständlich schien — hat genau diese Lücke verdeckt?
 
 ### Selbstcheck-Rubrik
 
@@ -193,6 +208,7 @@ Modul-spezifische Trigger:
 | Drei Tests, die ein Akzeptanzkriterium falsifizieren? | "Tests dagegen." | Happy Path · Boundary · Negative — drei verschiedene Test*arten*, nicht drei Test*fälle*. | + Hinweis, dass Boundary/Negative die stillen Annahmen des Happy Path widerlegen — *genau die*, die ein Agent als "selbstverständlich" behandelt. |
 | "Performance < 200 ms" — funktional oder nichtfunktional? | "Nichtfunktional." | Nichtfunktional, weil ohne Lasttest nicht prüfbar; gehört in QA-Block oder `spec/spezifikation.md`. | + Abgrenzung "*Antwort innerhalb von* 200 ms" ist Latenz-*Garantie* (nichtfunktional); "System antwortet mit gültigem JSON" wäre funktional. |
 | Unsicherster Schritt des Lastenheft-Schreibens? | Schritt vage benannt ohne Begründung ("Schritt 5 war schwer."). | Konkret benannter Schritt + Begründung (z. B. "Schritt 5 Negative, weil ich erst beim Hinschreiben gemerkt habe, *was* ausgeschlossen werden muss"). | + Pointe: wer keinen unsicheren Schritt findet, hat den Worked Example *gelesen* statt *nachgebaut*. Schritte 5 (Negative) und 6 (Out-of-Scope) sind die häufigsten unsicheren Stellen — und damit auch die häufigsten Spec-Lücken. |
+| Spec-Lücke aus provoziertem Lauf diagnostiziert? | Lücke pauschal benannt ("Spec war unklar.") ohne Bezug zum beobachteten Agentenverhalten. | Konkrete Lücke aus dem Lauf benannt + welcher Bestandteil fehlte (z. B. Boundary-Kriterium), der die Fehlinterpretation zuließ. | + metakognitive Hälfte: die *eigene* stille Annahme benannt, die die Lücke verdeckte ("ich hielt das Default-Limit für offensichtlich") — und der Schluss, dass genau die selbstverständlichen Annahmen die teuersten Lücken sind. |
 | Drei-Schichten-Spec-Stratifizierung entworfen? | Drei Schichten genannt, aber Inhalt aus zwei Schichten austauschbar formuliert. | Pro Schicht ein Pflicht-Inhalt und ein Anti-Inhalt; Konfliktregel formuliert (z. B. "Lastenheft sticht Spezifikation sticht Architektur — Spezifikation darf Lastenheft *präzisieren*, nie *erweitern*"). | + Zweite Konfliktregel für den Fall, dass die Architektur eine Spezifikations-Aussage *technisch unmöglich* macht: Pfad zurück über ADR-Supersedure und Spec-Update, nicht durch stille Anpassung. Verweis auf Spec-Stratifizierung in `c-hsm-doc` ([`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)). |
 
 ## Weiterlesen

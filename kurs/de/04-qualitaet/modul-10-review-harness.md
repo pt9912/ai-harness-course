@@ -202,6 +202,14 @@ Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
 
 * Review realer Änderungen im Begleit-Repo
 * Reviewe den fingierten kaputten Slice — finde die drei eingebauten Fehler
+* **(Analysieren — aktiviert LZ 3)** *Reviewer-Konflikt diagnostizieren.* Lass
+  den Reviewer-Lauf auf demselben Slice *zweimal* laufen (oder vergleiche zwei
+  vorhandene Läufe) und nimm einen Fall, in dem dasselbe Finding unterschiedlich
+  kategorisiert wird. Diagnostiziere die *Ursache* der Divergenz — Kategorie-Drift
+  (unscharfe HIGH/MEDIUM-Grenze), unterschiedlicher Eingangs-Kontext oder
+  nicht-deterministisches Modellverhalten — und benenne, welche der drei Ursachen
+  vorliegt und woran du sie erkennst. Erst die Diagnose, dann die Gegenmaßnahme
+  (Skill schärfen, Kontext fixieren, Seed pinnen).
 * **(Erschaffen — aktiviert LZ 4)** *Reviewer-Skill für ein konkretes Repo schreiben.* Wähle eines der vier Fallstudien-Repos (oder dein eigenes). Schreibe eine Skill-Datei nach dem Muster des Worked Example (sechs Schritte: Geltungsbereich · Eingangs-Kontext · HIGH-Liste · MEDIUM/LOW/INFO · Negativbefund-Pflicht · Beispiel-Findings). Pflicht: die HIGH-Liste muss mindestens *zwei* Repo-spezifische Regeln nennen, die ein generischer Skill nicht abdeckt (z. B. *"git mv + Inhalt = zwei Commits"* für `grid-gym`; *"Accepted-ADRs immutable"* für `bess-ems`). Lege die Datei unter `.harness/reviewer/<repo-name>.md` ab und führe einen Lauf auf einem realen Diff durch — kommt eines deiner zwei Repo-spezifischen HIGHs zur Anwendung? Wenn nein, ist der Skill noch nicht scharf genug.
 
 ## Reflexion
@@ -219,7 +227,8 @@ Schreibübung. Modul-spezifische Trigger:
 
 * **(Erinnern)** Welche vier Finding-Kategorien gibt es, und welche zwei davon blockieren typischerweise den Merge?
 * Wann wird aus einem LOW-Finding ein HIGH-Finding?
-* Was tust du, wenn der Reviewer-Agent dasselbe Finding zweimal mit unterschiedlicher Kategorie meldet?
+* **(Bewerten — aktiviert LZ 1)** Zwei Findings auf demselben PR: (A) ein unbenutzter Import im Auth-Modul; (B) eine fehlende Auth-Prüfung an einem neuen, noch nicht produktiven Endpoint. Ordne jedes in HIGH/MEDIUM/LOW ein und begründe die Grenzfall-Entscheidung — was kippt B nach HIGH bzw. hält A bei LOW?
+* **(Analysieren — aktiviert LZ 3)** Der Reviewer-Agent meldet dasselbe Finding zweimal mit unterschiedlicher Kategorie. Diagnostiziere zuerst die *Ursache* (Kategorie-Drift · Kontext-Unterschied · Nicht-Determinismus) — woran erkennst du, welche vorliegt? — und leite *dann* die passende Gegenmaßnahme ab. Warum ist "die mildere Kategorie nehmen" die falsche Antwort?
 * **(Anwenden)** Du erhältst 17 Findings auf einen PR. Beschreibe deine ersten drei Aktionen — in dieser Reihenfolge.
 
 ### Selbstcheck-Rubrik
@@ -228,6 +237,7 @@ Schreibübung. Modul-spezifische Trigger:
 |---|---|---|---|
 | Vier Finding-Kategorien + welche blockieren? | drei genannt, ohne Blocker-Trennung | HIGH (blockiert Merge: Sicherheit, Korrektheit, ADR-Verstoß) · MEDIUM (sollte vor Merge geklärt sein, blockiert formal nicht immer) · LOW (nice-to-fix) · INFO (Hinweis, keine Aktion). HIGH ist der harte Blocker; MEDIUM ist Soll-Blocker. | + Trennlinie LOW/MEDIUM ist im Reviewer-Skill *repo-spezifisch* zu fixieren; ohne wandert dieselbe Beobachtung zwischen Läufen — das ist der Hauptgrund, warum Reviewer-Konsistenz ohne Skill-Datei bricht. |
 | Wann LOW → HIGH? | "Wenn es wichtig wird." | Vier Trigger: Geltungsbereich erweitert (z. B. Sicherheits-Check-Pfad), Wiederholungs-Muster (3×), externe Wirkung (Compliance), Slice geht in Produktion. | + Hinweis: Wenn Reviewer/Implementer über die Kategorie streiten, ist die Klassifikations-Regel im Reviewer-Skill zu vage — das ist ein Steering-Loop-Signal, kein Reviewer-Fehler. |
+| Zwei konkurrierende Findings einordnen + Grenzfall begründen? | beide irgendwie kategorisiert, ohne Begründung | A (unbenutzter Import) = LOW: stilistisch, keine semantische Wirkung. B (fehlende Auth-Prüfung) = HIGH: Sicherheits-Anti-Pattern im kritischen Pfad — "noch nicht produktiv" mildert nicht, weil der Endpoint mit dem Merge erreichbar wird. | + Grenzfall sauber benannt: B kippt nicht durch "Wichtigkeit", sondern durch den Anker *Sicherheit/Korrektheit kritischer Pfad*; A bleibt LOW, würde aber nach MEDIUM wandern bei 3×-Wiederholung — die Trennlinie gehört repo-spezifisch in den Reviewer-Skill. |
 | Reviewer meldet dasselbe Finding zweimal anders kategorisiert? | "Die strengere nehmen." | Beide ernstnehmen → Differenz erklären (Kontext-Unterschied?) → Reviewer-Skill schärfen, nicht mildere/strengere Antwort auswählen. | + Anti-Antwort "Agent hat sich selbst korrigiert" — das belohnt Inkonsistenz; mildere Antwort als Wahrheit zu akzeptieren ist *Reward Hacking* der Klassifikations-Disziplin. |
 | 17 Findings — erste drei Aktionen? | sequentiell abarbeiten | (1) Nach Kategorie sortieren, HIGH zuerst lesen · (2) HIGH-Findings prüfen: ADR-Verstoß / Sicherheit / Korrektheit? gegen Plan oder gegen Spec? · (3) MEDIUM clustern, LOW/INFO erstmal überspringen — Reviewer-Skill anpassen, falls Cluster auf vage Regel hinweist. | + Falle: wer am ersten LOW-Finding hängenbleibt (typischer Fehler aus dem Engage), arbeitet HIGH-Findings nicht ab — und genau dadurch wird die Findings-Liste zur Mängelliste statt Entscheidungsvorlage. |
 

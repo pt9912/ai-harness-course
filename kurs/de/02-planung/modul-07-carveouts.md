@@ -18,13 +18,6 @@ dem diese Closure-Werkzeuge strukturell legitim werden — sie wirkt
 eine Ebene höher und ersetzt deren Closure-Funktion nicht
 (Disambiguierungs-Anker in
 [Modul 13 §Bootstrap-aware Gates](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)).
-Drei verwandte Begriffe erscheinen im Modul nebeneinander und meinen
-verschiedenes: *Disambiguierung* ist die kognitive Operation (Symptom
-auf Werkzeug abbilden), *Werkzeug-Wahl* ist deren Ergebnis (Carveout,
-BF-Markierung oder ADR), *Werkzeug-Klasse* ist die Achse, auf der sich
-die drei Werkzeuge unterscheiden (punktuell vs. Sub-Area-weit vs.
-Gate-Stufung).
-
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
 | **Carveout** | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel — mit Trigger oder explizit als permanent markiert. | ein Loch im Zaun, mit Notiz "wann wird zugemacht?". |
@@ -221,6 +214,14 @@ Diskrepanz erst entsteht.
 | **Carveout**               | Eine konkrete Gate-/Regelausnahme, klar abgrenzbar, mit Folge-Slice und ernst erreichbarem Auflösungs-Trigger.     | einzelne Diskrepanz               | `docs/plan/carveouts/CO-<NNN>-*.md` (Schritt 1–5)                                          |
 | **BF-Sub-Area-Markierung** | Diskrepanz-Cluster im selben Geltungsbereich, oder generelles *"Code-vor-Doku"*-Muster.                            | ganze Sub-Area                    | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
 | **ADR (permanent)**        | Trigger ist ehrlich nie zu erreichen — die Senkung ist Architekturentscheidung, nicht Übergang.                    | dauerhafte Architekturregel       | `docs/architecture/ADR-<NNNN>-*.md`; `Status: Permanent — übergeführt in ADR-<NNNN>`      |
+
+Drei verwandte Begriffe waren hier nebeneinander im Spiel und meinen
+Verschiedenes: *Disambiguierung* ist die kognitive Operation, die du in
+Frage 1–2 gerade ausgeführt hast (Symptom auf Werkzeug abbilden);
+*Werkzeug-Wahl* ist deren Ergebnis (Carveout, BF-Markierung oder ADR —
+die linke Tabellenspalte); *Werkzeug-Klasse* ist die Achse, auf der sich
+die drei unterscheiden (punktuell vs. Sub-Area-weit vs. dauerhaft — die
+Träger-Spalte).
 
 > **Hinweis zum Lab-Beispiel:** Das Lab unter
 > [`lab/example/docs/plan/carveouts/`](../../../lab/example/docs/plan/carveouts/)

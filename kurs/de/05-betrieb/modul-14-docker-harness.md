@@ -201,6 +201,24 @@ demselben Drei-Stage-Schnitt mit sprach-spezifischen Anpassungen.
 
 * Aufbau eines vollständigen Build-Harness
 * Mache ein Image nicht-reproduzierbar (z. B. unpinnierte Base) und beobachte den Drift
+* **Devcontainer-oder-Compose-Entscheidung** — aktiviert das Bewertungs-Lernziel
+  (LZ 4) zur Setup-Abwägung. Drei Teams, je eine Ausgangslage. Entscheide
+  pro Fall begründet, ob das Team (a) *nur* Compose, (b) Compose **plus**
+  Devcontainer oder (c) *zuerst* Devcontainer braucht — und nenne pro Fall
+  das ausschlaggebende Kriterium (Was ist CI-*Vertrag*, was ist
+  Entwickler-*Komfort*?):
+
+  | Fall | Ausgangslage | Entscheidung (a/b/c) + Kriterium |
+  |---|---|---|
+  | A | Solo-Repo, ein Entwickler, CI baut im Container, kein Onboarding absehbar. | … |
+  | B | Fünf Entwickler, drei verschiedene IDEs, wiederkehrende "läuft bei mir"-Tickets beim Setup. | … |
+  | C | Neues Team übernimmt ein Repo, das noch *keine* `docker-compose.yml` hat; niemand hat es je gebaut. | … |
+
+  Nenne zum Schluss das *eine* Kriterium, das in allen drei Fällen den
+  Ausschlag gibt, und grenze deine Entscheidung gegen das Anti-Muster aus
+  den Typischen Fehlvorstellungen ab ("Devcontainer ersetzt Compose").
+  Lösungshinweis: Compose ist der CI-Vertrag (Pflicht), Devcontainer ist
+  IDE-Komfort (additiv) — Fall C baut zuerst den Vertrag, nie umgekehrt.
 
 ### Minimaler Übungspfad
 
@@ -238,6 +256,7 @@ Modul-spezifische Trigger:
 * **(Erinnern)** Nenne für drei verschiedene Sprachen je ein typisches Lock-File.
 * **(Erinnern)** Welche zwei Artefakte sind die Mindestkombination für Reproduzierbarkeit eines Builds — und warum reicht keines davon allein?
 * Warum ist `make gates` im Host-OS keine valide Gate-Ausführung?
+* **(Analysieren — aktiviert LZ 3)** Gegeben ein einstufiges Dockerfile mit `FROM python:3` und `COPY . .` ganz oben: zerlege es in die drei Drift-Klassen (Toolchain, Dependency, Layer-Cache) — woran liegt welcher Drift — *und* benenne die drei Stage-Schnitte eines Multi-Stage-Builds (deps, build, runtime) mit Begründung, was jeder Schnitt gegen welche Drift-Klasse härtet.
 * Wann lohnt sich ein Devcontainer zusätzlich zum Compose-Setup?
 
 ### Selbstcheck-Rubrik
@@ -247,6 +266,7 @@ Modul-spezifische Trigger:
 | Drei Sprache↔Lock-File-Paare? | zwei genannt | Python: `poetry.lock` oder `uv.lock` · Node: `package-lock.json` oder `pnpm-lock.yaml` · Go: `go.sum` · .NET: `packages.lock.json` (mit Central Package Management, siehe `bess-ems`) · Rust: `Cargo.lock`. | + Pointe: Ein gepinnter Lock-File ist *nicht* ausreichend für Reproduzierbarkeit — er sichert Transitive-Versionen, aber nicht die Runtime-Version. Lock-File **plus** Image-Hash ist die Mindestkombination (siehe [Modul 12 §Image-Hash](../04-qualitaet/modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14)). |
 | Mindestkombination für Build-Reproduzierbarkeit? | "Docker." | Lock-File (sichert Abhängigkeits-Versionen) + Image-Hash (sichert Runtime-/Toolchain-Version). Ohne Lock-File driftet das Dependency-Tree, ohne Image-Hash driftet die Sprach-/Tool-Version. | + Folge: ein Replay-Manifest (Modul 12) referenziert *beide* — ohne Image-Hash lässt sich Modell-Drift nicht von Toolchain-Drift trennen; ohne Lock-File-Hash nicht von Dependency-Drift. Drei Drift-Quellen, drei Anker. |
 | Warum reicht `make gates` im Host-OS nicht? | "Andere Umgebung." | Host-Toolchain ist nicht versionsgleich mit CI; Gate-Ergebnisse divergieren; Debugging erfolgt am Unterschied, nicht am Bug. | + Konsequenz: ohne Image-Hash-Vertrag zwischen lokal und CI sind grüne lokale Gates *kein* Vertrag — sie sind eine private Information. |
+| Einstufiges Dockerfile in Drift-Klassen + Stage-Schnitte zerlegen? | "Stages aufteilen." | Drift benannt: `FROM python:3` ⇒ Toolchain-Drift (Tag floatet, kein Digest); fehlendes `--frozen`/Lock-File ⇒ Dependency-Drift; `COPY . .` vor `pyproject.toml` ⇒ Layer-Cache-Drift (Cache invalidiert bei jedem Code-Change). | + Drei Stage-Schnitte mit Härtung: **deps** (gepinnte Base + Lock-File-Install gegen Toolchain-/Dependency-Drift) · **build** (`FROM deps`, Code-Kompilierung getrennt vom Cache-sensiblen Layer) · **runtime** (Distroless/nonroot, nur Artefakte kopiert — kleinere Angriffsfläche, kein Build-Layer im Image). Image-Hash macht den Schnitt erst messbar. |
 | Devcontainer zusätzlich zu Compose? | "Wenn man möchte." | Devcontainer für IDE-Setup (Sprache-Server, Debugger-Anschluss). Compose für Lauf- und CI-Vertrag. Beides parallel, wenn das Team mehrere IDEs nutzt. | + Faustregel: Compose ist *Pflicht* (CI-Vertrag), Devcontainer ist *Komfort*. Wer mit Devcontainer beginnt, baut sich eine zweite Toolchain ohne die erste. |
 
 ## Weiterlesen
