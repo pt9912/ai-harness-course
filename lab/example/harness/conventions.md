@@ -75,9 +75,34 @@ Carveout · Schwelle · Reproduzierbarkeit) **eine** Zusatzklasse:
 
 ## Modus-Deklaration pro Sub-Area
 
-| Sub-Area | Modus | Begründung | Graduation-Bedingung / Folge-Slice |
+Der Modus gilt **pro Sub-Area**, nicht pro Repo
+([Modul 2 FV2](../../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#typische-fehlvorstellungen)).
+Dieses Lehr-Repo ist durchgängig **Greenfield** (Harness von Beginn an,
+Spec führt) — die Modus-Spalte ist daher homogen. Die Sub-Areas sind
+trotzdem einzeln deklariert, damit (a) die Granularitäts-Disziplin
+sichtbar ist und (b) eine künftig nach BF kippende Sub-Area einen Platz
+hat. Jede Zeile weist die erfüllten Inklusions-Achsen aus
+([`konventionen.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area),
+Schwelle ≥ 2 von 3: 1 Konventions-Härte · 2 Inventur-Linie · 3 Struktureller Cluster).
+
+| Sub-Area | Pfad-Cluster | Erfüllte Inklusions-Achsen | Modus |
 |---|---|---|---|
-| `*` (gesamtes Repo) | Greenfield | DocSearch ist als Lehr-Beispiel von Beginn an mit Harness konzipiert; Spec führt, Code folgt. | n/a (GF Steady-State) |
+| Spec-Schreibung | `spec/` | 1 (eigene `MR-001`-Schärfung der Spec-Ränge) · 2 (Spec↔Code abgleichbar) · 3 (`spec/`) → **3/3** | Greenfield |
+| Konventionen & Harness-Doku | `harness/` | 1 (Heimat der `MR-NNN`) · 2 (Doku-Konsistenz-Linie) · 3 (`harness/`) → **3/3** | Greenfield |
+| Planning-Lifecycle | `docs/plan/` | 1 (Slice-/ADR-/Carveout-Konvention) · 2 (`open`→`done`-Inventur) · 3 (`docs/plan/`) → **3/3** | Greenfield |
+| Implementierung | `<lang>/src/`, `<lang>/cmd/`, `internal/` | 1 (sprach-spezifische Stil-`MR`, je Skelett) · 2 (Code-Inventur) · 3 (`src/`-Cluster) → **3/3** | Greenfield |
+| Test-, Eval- & Verifikations-Infrastruktur | `<lang>/tests/`, `evals/`, `verification/` | 1 (Determinismus-/Golden-/Check-Konvention) · 2 (Coverage-/Sensor-Inventur) · 3 (`tests/`, `evals/`, `verification/`) → **3/3** | Greenfield |
+| Observability | `otel/` | 2 (Trace-Inventur) · 3 (`otel/`-Cluster); Achse 1 (Span-Schema-`MR`) noch schwach → **2/3** | Greenfield |
+
+**Keine Sub-Area — Aspirantinnen (< 2 Achsen, der „zu fein"-Pol aus
+[Modul 2 FV5](../../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#typische-fehlvorstellungen)):**
+
+- `docs/user/` — nur Achse 3 (`docs/user/`-Pfad); keine eigene Konvention
+  (Achse 1), keine eigenständige Inventur-Linie (Achse 2 — hängt an der
+  Spec). → **Sub-Area-Aspirantin**, bewusst *nicht* als Sub-Area geführt.
+  Erst mit eigenem Doku-Style-Standard *und* eigener Drift-Linie kippt sie.
+- `tools/` — ein Hilfsskript (`check_closure_notes.py`); Achse 3 erfüllt,
+  sonst unter Schwelle. Ebenfalls Aspirantin.
 
 ## Glossar (optional)
 

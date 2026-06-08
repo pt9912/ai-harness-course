@@ -258,6 +258,23 @@ und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
   Wunschdenken. Die Frage ist nicht *ob* graduiert wird, sondern
   *wie weit* das Repo schon ist und *welche Sub-Area* als nächstes
   graduations-reif wird.
+* **FV5:** *"Jede Struktur (Verzeichnis/Sektion) ist automatisch eine
+  Sub-Area — eine Granularitäts-Prüfung erübrigt sich."* — Korrektur:
+  Eine Struktur qualifiziert erst über die drei Inklusions-Achsen
+  (Schwelle ≥ 2, siehe
+  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)).
+  Der übersprungene Qualifikations-Schritt erzeugt **beide**
+  Granularitäts-Fehler zugleich: *zu grob* — ein Aggregat wie *"Backend"*
+  wird als *eine* Sub-Area gelabelt, statt in mehrere aufgeteilt; *zu
+  fein* — ein substanzloses Verzeichnis (*"Struktur ohne Substanz"*, nur
+  eine Achse erfüllt) wird zur Sub-Area erhoben, obwohl es eine
+  Sub-Area-*Aspirantin* bleibt. Lernerursprung: dieselbe Wurzel wie die
+  Modul-5-Vorstellung *"wenn der Slice klein ist, ist die Sub-Area GF"*
+  ([`../grundlagen/lernervorstellungen.md` §Über Planung](../grundlagen/lernervorstellungen.md#über-planung-modul-57))
+  — Reife/Substanz wird aus einem Oberflächenmerkmal (Existenz, Größe)
+  *abgelesen* statt über die Achsen *geprüft*. (Die Modul-5-Vorstellung
+  bleibt eine *Modus*-FV; FV5 teilt nur die kognitive Wurzel, nicht die
+  Achse.)
 
 (Weitere Fehlvorstellungen ergänzen sich aus der
 Überzeugungs-Check-Ausbeute oben — wer mit "Bootstrap = Setup"
@@ -512,6 +529,11 @@ Vorlage:
 > Konventions-Härte · Inventur-Linie · Pfad-Cluster, Schwelle ≥ 2) zur
 > Prüfung deiner Sub-Area-Wahl. Wer *"Backend"* als Sub-Area nennt,
 > bündelt typischerweise drei verschiedene Sub-Areas — ausdifferenzieren.
+> Die Kehrseite (zwei Strukturen, die nie *getrennt* feuern, als *eine*
+> Sub-Area führen) heißt **Aggregation** — dieselben Achsen rückwärts
+> gelesen, siehe
+> [`konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)
+> (Absatz *Aggregation*).
 
 | Sub-Area | Modus (GF/BF/Hybrid) | Beobachtungs-Indiz | Unsicherheit? |
 |---|---|---|---|
@@ -597,15 +619,15 @@ Verwende die vier Standardfragen aus
 (Beobachtung · 2×2-Quadrant · Steering-Loop · Conceptual Change)
 nach den Übungen.
 
-*Hinweis zur Vorlage:* Frage 2 ("Welche Harness-Lücke war Ursache?")
-und Frage 3 ("Welche Steering-Loop-Aktion folgt?") setzen einen
-produzierten Fehler voraus. Modul 2 hat Diagnose-Übungen, keine
-Fehler-Provokation — lies Frage 2 in diesem Modul als *"Welche
-Sub-Area-Annahme war ungeprüft?"* (z. B. *"ich habe Konventionen als
-GF angenommen, ohne den Adaptions-Block zu lesen"*) und Frage 3 als
-*"Welche Klassifikations-Verfeinerung folgt aus der Diagnose?"* (z. B.
-*"Sub-Area 'Test-Infrastruktur' weiter aufsplitten in 'Unit-Tests'
-und 'Property-Based-Sensors', weil sie unterschiedliche Modi tragen"*).
+*Hinweis zur Vorlage:* Modul 2 hat Diagnose-Übungen, keine
+Fehler-Provokation. Verwende für Frage 2 und 3 die **Diagnose-Variante**
+der Vorlage ([Frage 2](../grundlagen/reflexion-vorlage.md#2-welche-harness-lücke-war-ursache),
+[Frage 3](../grundlagen/reflexion-vorlage.md#3-welche-steering-loop-aktion-folgt)) —
+die allgemeine Umdeutung steht dort, nicht mehr hier. Modul-spezifisch
+heißt das: Frage 2 → *"Welche Sub-Area-Annahme war ungeprüft?"*, Frage 3
+→ *"Welche Klassifikations-Verfeinerung folgt aus der Diagnose?"* (z. B.
+*"Sub-Area 'Test-Infrastruktur' weiter aufsplitten in 'Unit-Tests' und
+'Property-Based-Sensors', weil sie unterschiedliche Modi tragen"*).
 
 Modul-spezifische Trigger:
 

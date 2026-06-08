@@ -211,7 +211,7 @@ aus Selbstbild.
 
 Diese Liste benennt Fehler in der *Ausführung* der Übungen; die
 zugrunde liegenden konzeptuellen Fehlvorstellungen stehen in
-Modul 2 §Typische Fehlvorstellungen (FV1–FV4) und werden hier nicht
+Modul 2 §Typische Fehlvorstellungen (FV1–FV5) und werden hier nicht
 wiederholt.
 
 - **Sub-Area zu grob gewählt** (Übung 1). "Backend" oder "Frontend"
@@ -226,6 +226,20 @@ wiederholt.
   [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)
   — die Achsen erlauben die Diagnose *ohne* Erinnerung an die
   Beispielliste, ergänzen sie also.
+- **Sub-Area zu fein gewählt** (Übung 1, Kehrseite). Ein substanzloses
+  Verzeichnis zur Sub-Area erheben — *"Struktur ohne Substanz"*: ein
+  Ordner existiert (Achse 3), trägt aber keine eigene Konvention (Achse 1)
+  und keine eigenständig abgleichbare Inventur-Linie (Achse 2), erfüllt
+  also nur *eine* der drei Achsen (unter der Schwelle von zwei). Das ist
+  noch keine Sub-Area, sondern eine *Sub-Area-Aspirantin* (siehe
+  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)).
+  Symptom: eine Modus-Zeile, die nie einen eigenen Trigger oder eine
+  eigene `MR-NNN` erzeugt — sie hängt immer an einer Nachbar-Sub-Area.
+  Korrekt: erst ab zwei erfüllten Achsen als Sub-Area führen, darunter
+  als Aspirantin notieren statt klassifizieren. Gemeinsame Wurzel mit
+  *"zu grob"* oben: beide überspringen die Achsen-Qualifikation
+  (Modul 2 §Typische Fehlvorstellungen FV5) — das eine Ende fasst zu viel
+  zusammen, das andere erhebt zu wenig.
 - **Hybrid als Notausgang** (Übung 1). Wer in jeder Zeile "Hybrid"
   schreibt, hat *nicht* differenziert, sondern die Entscheidung
   vermieden. Hybrid ist eine *Beobachtung* (Sub-Sub-Area-

@@ -52,6 +52,10 @@ Iteration.
 - "GF/BF ist eine Eigenschaft des Repos als Ganzes." — Modul 2 (FV2)
 - "Wer im Greenfield arbeitet, kann auf Trigger-Klassen verzichten." — Modul 2 (FV3)
 - "Brownfield ist eine Notlage, die man möglichst schnell überwindet." — Modul 2 (FV4)
+- "Jede Struktur ist automatisch eine Sub-Area." — Modul 2 (FV5;
+  Granularitäts-Wurzel — verwandt mit der Modul-5-Vorstellung "wenn der
+  Slice klein ist, ist die Sub-Area GF" im Cluster *Über Planung*:
+  Substanz/Reife aus einem Oberflächenmerkmal abgelesen statt geprüft).
 - "Trigger-Klassen sind Bürokratie-Overhead." — Modul 2 (FV3-Variante;
   zielt nicht auf "GF braucht keine Trigger", sondern auf "auch in GF
   nur Aufwand"). Modul 2 §Vorab-Frage 3 zielt explizit auf diese

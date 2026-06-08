@@ -48,6 +48,16 @@ Anti-Antwort: "Das Modell war zu dumm." Modelle werden besser oder
 schlechter, aber der Quadrant bleibt — die Frage ist, welche Kontrolle
 *du* aus dem Lauf lernen kannst.
 
+> **Diagnose-Variante** *(für Module mit Diagnose- statt
+> Fehler-Provokations-Übungen, z. B.
+> [Modul 2](../01-spec-und-architektur/modul-02-harness-bootstrap.md) —
+> überspringbar, wenn deine Übung einen Fehler produziert hat):* Ohne
+> produzierten Fehler lautet Frage 2 *"Welche Annahme war ungeprüft?"* —
+> z. B. *"ich habe die Konventionen als GF angenommen, ohne den
+> Adaptions-Block zu lesen."* Der Quadrant ist dann typischerweise
+> *inferential* (die fehlende Kontrolle ist eine ungelesene Quelle, kein
+> fehlendes Gate).
+
 ### 3. Welche Steering-Loop-Aktion folgt?
 
 Eine konkrete Änderung am Harness, nicht eine vage Absicht. Drei
@@ -60,6 +70,14 @@ Beispiele für gute Antworten:
 Schlechte Antworten: "Ich werde aufmerksamer", "Wir müssen besser
 testen", "Vielleicht ein anderes Modell". Diese sind nicht reproduzierbar
 und nicht prüfbar.
+
+> **Diagnose-Variante** *(siehe Frage 2 — überspringbar bei
+> Fehler-Provokation):* Ohne produzierten Fehler lautet Frage 3 *"Welche
+> Verfeinerung folgt aus der Diagnose?"* — eine konkrete Klassifikations-
+> oder Sensor-Schärfung (z. B. *"den §8-Begründungsblock pro berührter
+> Sub-Area zur Pflicht im Slice-Plan machen"*), nicht eine Reaktion auf
+> einen entstandenen Schaden. Auch hier gilt: konkret und prüfbar, keine
+> vage Absicht.
 
 ### 4. Welche eigene Vorstellung wurde durch den Vorfall unzufriedenstellend?
 

@@ -318,6 +318,25 @@ normal, mit wachsender Struktur wird daraus eine Sub-Area.
 > Risiko · Reconciliation-Aufwand). Erst Inklusion (hier), dann
 > Modus-Wahl (Modul 5).
 
+**Aggregation — die Kehrseite der Inklusion.** Wie die Schwelle ein
+*Zuviel an Struktur* abweist (die Aspirantin oben), weist dieselbe Logik
+rückwärts gelesen ein *Zuwenig an Trennung* ab: Zwei Sub-Areas, die
+**permanent dieselben Trigger** erzeugen *und* **dieselbe Modus-Aussage**
+tragen, sind in Wahrheit *eine* — sie getrennt zu führen erzeugt zwei
+Inventur-Linien ohne eigene Diskrepanz (Anti-Refactoring). Die
+Diagnose-Frage ist die Achsen-Frage rückwärts: *„Feuern die beiden je
+**unabhängig** — eigener Trigger, eigene `MR-NNN`?"* Über mehrere Wellen
+nein → zusammenführen; sobald eine Hälfte eine eigene Adaption oder
+Inventur-Linie bekommt (Achse 1/2 divergiert) → trennen. Aggregation ist
+damit keine Einmal-Entscheidung, sondern eine wiederkehrende
+Wartungs-Praxis. Faustregel: *zwei Aspirantinnen, die nie getrennt feuern,
+sind eine Sub-Area; eine Sub-Area, deren Hälften auseinanderdriften, sind
+zwei.* Beispiel aus dem Lab: `harness/conventions.md` führt `tests/`,
+`evals/` und `verification/` als *eine* Sub-Area, weil sie dieselbe
+Determinismus-/Golden-Konvention teilen und nie unabhängig feuern; bekäme
+`evals/` eine eigene Golden-Set-Rotations-`MR`, die `tests/` nicht teilt,
+wäre genau das der Trigger zur Trennung.
+
 ### Modus pro Sub-Area: Greenfield vs Brownfield
 
 Pro Sub-Area eines Repos (Modul, Verzeichnis, Komponente) wird ein
