@@ -1,14 +1,20 @@
-# Reflexionsvorlage für Fehler-Provokations-Übungen
+# Reflexionsvorlage für Fehler-Provokations- und Diagnose-Übungen
 
 Mehrere Module enthalten Übungen, in denen du *absichtlich* einen Fehler
 provozierst — eine Halluzination, eine Spec-Lücke, eine DoD-Verletzung,
-einen Coverage-Failure.
+einen Coverage-Failure. Andere Module (z. B.
+[Modul 2](../01-spec-und-architektur/modul-02-harness-bootstrap.md))
+arbeiten *diagnostisch* — ohne provozierten Fehler; für sie tragen
+Frage 2 und 3 eine **Diagnose-Variante** (jeweils als Aside unter der
+Frage). Beide Fälle nutzen dieselben vier Standardfragen.
 
 ## Was diese Methode ist (und was nicht)
 
-Das, was der Kurs durchgängig macht, ist **Error Provocation /
+Das, was der Kurs *überwiegend* macht, ist **Error Provocation /
 Misconception Confrontation**: erst Lehre (Konzept, Kernidee, Worked
-Example), dann gezielter Fehler, dann strukturierte Reflexion.
+Example), dann gezielter Fehler, dann strukturierte Reflexion. Einige
+Module arbeiten stattdessen *diagnostisch* (ohne provozierten Fehler) —
+für sie greift die Diagnose-Variante der Fragen 2/3.
 
 Das ist *nicht* dasselbe wie *Productive Failure* nach **Manu Kapur**
 (2008, 2014). Kapur-PF verlangt Exploration und Scheitern **vor** der
@@ -18,8 +24,8 @@ Form findet sich im Kurs nur punktuell als *optionaler* Einstiegspfad
 (z. B. in [Modul 0](../00-einfuehrung/modul-00-einfuehrung.md#optionale-explorations-vorab-übung-kapur-stil)
 und [Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md#optionale-explorations-vorab-übung-kapur-stil)).
 
-Die Reflexion unten macht beide Formen erst zu Lernen. Verwende sie nach
-jeder Fehler-Provokations- *und* nach jeder Exploration-Vorab-Übung.
+Die Reflexion unten macht alle drei Formen erst zu Lernen. Verwende sie
+nach jeder Fehler-Provokations-, *Diagnose-* und Exploration-Vorab-Übung.
 Schreibe die Antworten auf — nicht nur "im Kopf durchspielen".
 
 ## Die vier Standardfragen

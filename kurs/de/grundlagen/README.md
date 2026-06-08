@@ -14,7 +14,7 @@ ohne sie erneut zu erklären.
 | [`klassifikation.md`](klassifikation.md) | Böckelers 2×2 (Feedforward/Feedback × Computational/Inferential), drei Harness-Kategorien (Maintainability, Architecture Fitness, Behaviour), OpenAIs drei operative Säulen (Context Engineering, Architectural Constraints, Entropy Management), Steering Loop, Lifecycle-Verteilung |
 | [`fallstudien.md`](fallstudien.md) | Vier reale Open-Source-Repos als laufendes Beispiel: `pt9912/u-boot`, `pt9912/grid-gym`, `pt9912/c-hsm-doc`, `pt9912/bess-ems` |
 | [`lernpfade.md`](lernpfade.md) | Drei Schwerpunkt-Pfade (Architect/Tech Lead, DevOps/Plattform, Implementation) — Vertiefungen je nach Rolle |
-| [`reflexion-vorlage.md`](reflexion-vorlage.md) | Vier Standardfragen für jede Fehler-Provokations-Übung — productive failure systematisch in Lernen überführen |
+| [`reflexion-vorlage.md`](reflexion-vorlage.md) | Vier Standardfragen für Fehler-Provokations- *und* Diagnose-Übungen (Diagnose-Variante für Frage 2/3) — productive failure systematisch in Lernen überführen |
 | [`lernervorstellungen.md`](lernervorstellungen.md) | Offene Sammlung typischer Präkonzepte der Zielgruppe — als Anker für die "Typische Fehlvorstellungen"-Blöcke der Module |
 | [`kickoff-vorlauf.md`](kickoff-vorlauf.md) | Drei kalibrierte Vorlauffragen und YAML-Sammelplatz für die Präkonzept-Sammlung am Workshop-Anfang (Operationalisierung der zweiten Kattmann-Säule für die kollektive Kursnutzung) |
 | [`checkpoints.md`](checkpoints.md) | Mini-Integrations-Checkpoints zwischen den fünf Phasen — Selbstdiagnose vor dem Abschlussprojekt |
