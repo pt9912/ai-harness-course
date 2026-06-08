@@ -53,10 +53,9 @@ schlechter, aber der Quadrant bleibt — die Frage ist, welche Kontrolle
 > [Modul 2](../01-spec-und-architektur/modul-02-harness-bootstrap.md) —
 > überspringbar, wenn deine Übung einen Fehler produziert hat):* Ohne
 > produzierten Fehler lautet Frage 2 *"Welche Annahme war ungeprüft?"* —
-> z. B. *"ich habe die Konventionen als GF angenommen, ohne den
-> Adaptions-Block zu lesen."* Der Quadrant ist dann typischerweise
-> *inferential* (die fehlende Kontrolle ist eine ungelesene Quelle, kein
-> fehlendes Gate).
+> z. B. *"ich hielt eine Quelle für eindeutig und habe sie nicht
+> gegengelesen."* Der Quadrant ist dann typischerweise *inferential* (die
+> fehlende Kontrolle ist eine ungelesene Quelle, kein fehlendes Gate).
 
 ### 3. Welche Steering-Loop-Aktion folgt?
 

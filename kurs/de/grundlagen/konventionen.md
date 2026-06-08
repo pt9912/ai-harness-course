@@ -329,13 +329,20 @@ Diagnose-Frage ist die Achsen-Frage rückwärts: *„Feuern die beiden je
 nein → zusammenführen; sobald eine Hälfte eine eigene Adaption oder
 Inventur-Linie bekommt (Achse 1/2 divergiert) → trennen. Aggregation ist
 damit keine Einmal-Entscheidung, sondern eine wiederkehrende
-Wartungs-Praxis. Faustregel: *zwei Aspirantinnen, die nie getrennt feuern,
-sind eine Sub-Area; eine Sub-Area, deren Hälften auseinanderdriften, sind
-zwei.* Beispiel aus dem Lab: `harness/conventions.md` führt `tests/`,
-`evals/` und `verification/` als *eine* Sub-Area, weil sie dieselbe
-Determinismus-/Golden-Konvention teilen und nie unabhängig feuern; bekäme
-`evals/` eine eigene Golden-Set-Rotations-`MR`, die `tests/` nicht teilt,
-wäre genau das der Trigger zur Trennung.
+Wartungs-Praxis. Faustregel: *was nie getrennt feuert, ist
+eine Sub-Area; eine Sub-Area, deren Hälften auseinanderdriften, sind
+zwei.* Beispiel aus dem Lab: die fünf Sprach-Skelette (`go/`, `python/`,
+…) werden *nicht* als fünf `Implementierung`-Sub-Areas geführt, sondern
+als *eine* — sie teilen Spec und Modus (alle GF) und tragen nie eine
+*unabhängige* Modus- oder Trigger-Entscheidung; die per-Sprache-Stilunterschiede
+(`gofmt` vs. `black`) sind Sub-Sub-Area-Nuancen, keine eigenen
+Inventur-Linien. Split-Trigger: kippte ein Skelett nach BF (etwa ein
+Alt-Port mit Bestandscode), bekäme es eine eigene Modus-Aussage — und
+*dann* wäre es eine eigene Sub-Area. Die Gegenrichtung zeigt
+`harness/conventions.md`: `Test-Infrastruktur`, `Verifikation` und
+`Replay-/Eval-Infrastruktur` sehen ähnlich aus („Korrektheits-Sensoren"),
+sind aber *drei* Sub-Areas, weil Achse 1 divergiert — sie zu mergen wäre
+der „zu grob"-Fehler.
 
 ### Modus pro Sub-Area: Greenfield vs Brownfield
 

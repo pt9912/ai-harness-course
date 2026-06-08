@@ -138,10 +138,13 @@ Wohlfühl-Statement.
   der Vorab-Übung ungeprüft übernommen wurde.
 - Pro Sub-Area mindestens *eine* der drei Inklusions-Achsen
   (Konventions-Härte / Inventur-Linie / Pfad-Cluster) als
-  Granularitäts-Begründung notiert — spiegelt die Selbstcheck-Rubrik
-  und stellt sicher, dass die Sub-Area nicht zu grob gewählt ist
-  (Negativ-Fall *"Backend"* in §Häufige Fehler). *Exzellent:* alle
-  drei Achsen pro Sub-Area benennbar.
+  Granularitäts-Begründung notiert — spiegelt die Selbstcheck-Rubrik und
+  prüft *beide* Granularitäts-Pole: die Sub-Area ist weder zu grob
+  (Negativ-Fall *"Backend"*) noch zu fein (eine Struktur mit nur *einer*
+  erfüllbaren Achse als Sub-Area geführt statt als Aspirantin — Schwelle
+  ≥ 2) — beide Fälle in §Häufige Fehler. *Exzellent:* alle drei Achsen
+  pro Sub-Area benennbar, oder eine Aspirantin korrekt als
+  Nicht-Sub-Area erkannt.
 
 **Falle:** "Alle Sub-Areas sind BF" ist zwar empirisch häufig
 korrekt (siehe Fallstudien), aber pädagogisch verdächtig — selbst

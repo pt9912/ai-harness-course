@@ -87,12 +87,23 @@ Schwelle ≥ 2 von 3: 1 Konventions-Härte · 2 Inventur-Linie · 3 Strukturelle
 
 | Sub-Area | Pfad-Cluster | Erfüllte Inklusions-Achsen | Modus |
 |---|---|---|---|
-| Spec-Schreibung | `spec/` | 1 (eigene `MR-001`-Schärfung der Spec-Ränge) · 2 (Spec↔Code abgleichbar) · 3 (`spec/`) → **3/3** | Greenfield |
-| Konventionen & Harness-Doku | `harness/` | 1 (Heimat der `MR-NNN`) · 2 (Doku-Konsistenz-Linie) · 3 (`harness/`) → **3/3** | Greenfield |
+| Spec-Schreibung | `spec/` | 1 (eigene Spec-Stil-`MR` plausibel formulierbar, z. B. AK-Format-Standard) · 2 (Spec↔Code abgleichbar) · 3 (`spec/`) → **3/3** | Greenfield |
+| Konventionen & Harness-Doku | `harness/` | 1 (Heimat der `MR-NNN`, hier `MR-000`/`MR-001`) · 2 (Doku-Konsistenz-Linie) · 3 (`harness/`) → **3/3** | Greenfield |
 | Planning-Lifecycle | `docs/plan/` | 1 (Slice-/ADR-/Carveout-Konvention) · 2 (`open`→`done`-Inventur) · 3 (`docs/plan/`) → **3/3** | Greenfield |
-| Implementierung | `<lang>/src/`, `<lang>/cmd/`, `internal/` | 1 (sprach-spezifische Stil-`MR`, je Skelett) · 2 (Code-Inventur) · 3 (`src/`-Cluster) → **3/3** | Greenfield |
-| Test-, Eval- & Verifikations-Infrastruktur | `<lang>/tests/`, `evals/`, `verification/` | 1 (Determinismus-/Golden-/Check-Konvention) · 2 (Coverage-/Sensor-Inventur) · 3 (`tests/`, `evals/`, `verification/`) → **3/3** | Greenfield |
+| Implementierung | `<lang>/src/`, `<lang>/cmd/`, `internal/` | 1 (eigene Implementierungs-Stil-`MR` plausibel formulierbar) · 2 (Code-Inventur) · 3 (`src/`-Cluster) → **3/3** | Greenfield |
+| Test-Infrastruktur | `<lang>/tests/` | 1 (Test-/Determinismus-Konvention, z. B. `make test-determinism`) · 2 (Test-ohne-`LH`-ID als Diskrepanz) · 3 (`tests/`) → **3/3** | Greenfield |
+| Verifikation | `verification/` | 1 (Plan-vs-Code-Check-Konvention, Modul 11 — *kein* Golden Set) · 2 (Slice-Beleg-Inventur) · 3 (`verification/`) → **3/3** | Greenfield |
+| Replay-/Eval-Infrastruktur | `evals/` | 1 (Golden-Set-/Replay-Konvention, Modul 12) · 2 (Golden-Set-Drift-Inventur) · 3 (`evals/`) → **3/3** | Greenfield |
 | Observability | `otel/` | 2 (Trace-Inventur) · 3 (`otel/`-Cluster); Achse 1 (Span-Schema-`MR`) noch schwach → **2/3** | Greenfield |
+
+`Test-Infrastruktur`, `Verifikation` und `Replay-/Eval-Infrastruktur`
+sind *bewusst getrennt* geführt, obwohl sie alle „Korrektheits-Sensoren"
+sind: Achse 1 divergiert (Determinismus ≠ Plan-vs-Code-DoD ≠
+Golden-Set-Replay — je eigene Konvention, drei verschiedene Kursmodule
+11/12). Sie zu *einer* Sub-Area zusammenzufassen wäre der „zu grob"-Fehler
+aus [FV5](../../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#typische-fehlvorstellungen)
+— vgl. [`konventionen.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area)
+(Absatz *Aggregation*).
 
 **Keine Sub-Area — Aspirantinnen (< 2 Achsen, der „zu fein"-Pol aus
 [Modul 2 FV5](../../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#typische-fehlvorstellungen)):**
