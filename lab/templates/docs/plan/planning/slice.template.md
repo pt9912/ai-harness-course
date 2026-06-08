@@ -98,6 +98,12 @@ Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand)
 stehen in
 [`/kurs/de/02-planung/modul-05-planning-harness.md` §Worked Mini-Example](../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).
 
+**Vorgelagert — Sub-Area-Wahl prüfen:** Jede hier aufgeführte Sub-Area
+muss das Inklusionskriterium erfüllen (drei Achsen, Schwelle ≥ 2; siehe
+[`/kurs/de/grundlagen/konventionen.md` §Was ist eine Sub-Area?](../../../../../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area)).
+Zu grobe Sub-Areas (*"Backend"*) vorher ausdifferenzieren — sonst trägt
+der Begründungsblock mehrere Modi vermischt.
+
 <!-- Block für jede berührte Sub-Area duplizieren. Format identisch
 mit dem in Modul 5 §Worked Mini-Example abgedruckten Block. -->
 

@@ -252,6 +252,11 @@ Akzeptanzkriterien). ADR-0007 (Service-Adapter-Layer). *Nicht* gelesen:
 
 **Auch hier gelesen, falls vorhanden:** §8 *Sub-Area-Modus-Begründung*
 des Slice-Plans (siehe [Modul 5 §Worked Mini-Example](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)).
+Die in §8 benannten Sub-Areas tragen denselben Granularitäts-Maßstab wie
+in Modul 2: das Inklusionskriterium aus
+[`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)
+(drei Achsen, Schwelle ≥ 2) — eine zu grobe Sub-Area (*"Backend"*) in §8
+ist derselbe Fehler wie in der Modul-2-Diagnose.
 Die BF/Hybrid-Einträge dort steuern, welche Sub-Areas Inventur-Beweis
 in Schritt 5 brauchen (z. B. Audit-Logging als Hybrid →
 Format-Standard-Test gehört in die Sensor-Wahl, nicht in Out-of-Scope).

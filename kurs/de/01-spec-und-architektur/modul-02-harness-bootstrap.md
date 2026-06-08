@@ -19,7 +19,7 @@ bewusst nicht im Glossar.
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
-| **Sub-Area** | Doku-/Code-Sektion, die als Träger einer Modus-Entscheidung dient — mit eigener Konventions-Härte (eigene `MR-NNN` möglich), eigener Inventur-Linie und eigener Pfad-/Datei-Familie im Repo. | nicht das Repo, nicht der Slice — die Strecke, die *ein* `MR-NNN` normiert. |
+| **Sub-Area** | Doku-/Code-Sektion, die als Träger einer Modus-Entscheidung dient — mit eigener Konventions-Härte (eigene `MR-NNN` möglich), eigener Inventur-Linie und eigener Pfad-/Datei-Familie im Repo. Qualifikations-Maßstab (drei Inklusions-Achsen, Schwelle ≥ 2) und Beispiele: [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area), §Übung 1 und §Worked Example 1. | nicht das Repo, nicht der Slice — die Strecke, die *ein* `MR-NNN` normiert. |
 | **Adaptions-Block** *(Vorgriff auf konventionen.md)* | Sektion in `harness/conventions.md`, in der das Repo seine Baseline-Adaptionen als `MR-NNN`-Einträge deklariert. | das Notizbuch, in dem das Repo seine Abweichungen von der Baseline aufschreibt. |
 | **BF-Sub-Area-Markierung** *(Vorgriff auf Modul 7)* | Modus-Deklaration im Adaptions-Block, die eine ganze Sub-Area als BF mit Graduation-Plan markiert — Alternative zur Carveout-Kaskade. | ein "hier wächst Wiese"-Schild für ein ganzes Beet, mit Datum für die Rasen-Graduierung. |
 | **MR-NNN** *(Vorgriff auf konventionen.md)* | ID-Schema für *Module Rules* — die Konventions-Adaptionen im Adaptions-Block (Schwester zu `LH-FA-*` für Anforderungen). | Anker-Nummer einer einzelnen Konventions-Härtung. |
@@ -497,6 +497,13 @@ klassifiziert, hat die GF/BF/Hybrid-Unterscheidung verstanden.
 Klassifiziere dein eigenes Repo nach Modus pro Sub-Area. Tabellen-
 Vorlage:
 
+> **Granularität zuerst prüfen.** Nutze die drei Inklusions-Achsen aus
+> §Mini-Glossar ([`../grundlagen/konventionen.md` §Was ist eine
+> Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area):
+> Konventions-Härte · Inventur-Linie · Pfad-Cluster, Schwelle ≥ 2) zur
+> Prüfung deiner Sub-Area-Wahl. Wer *"Backend"* als Sub-Area nennt,
+> bündelt typischerweise drei verschiedene Sub-Areas — ausdifferenzieren.
+
 | Sub-Area | Modus (GF/BF/Hybrid) | Beobachtungs-Indiz | Unsicherheit? |
 |---|---|---|---|
 | Konventionen | … | … | … |
@@ -514,6 +521,10 @@ Vorlage:
    Doku-Pattern"* → BF in *Test-Infrastruktur*).
 3. **Unsicherheit** — was du nachschlagen musst, um die Wahl
    abschließend zu treffen.
+
+Notiere zusätzlich pro Zeile **welche der drei Inklusions-Achsen** die
+Sub-Area trägt — das prüft die Granularität deiner Wahl, bevor du den
+Modus bestimmst.
 
 *Erfolgskriterium:* mindestens *eine* Sub-Area, die du anders
 klassifizierst, als du vor dem Modul-Lesen vermutet hättest. Wenn
@@ -653,7 +664,7 @@ die modulspezifischen Indikatoren sind:
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
-| GF vs. BF, pro Sub-Area? | "GF = Doku führt, BF = Code führt." | Plus Sub-Area-Argument mit Beispiel ("ein Repo kann in *Konventionen* BF und in *Spec-Schreibung* GF sein"), Verweis auf `fallstudien.md` §Beobachtung. | + Hybrid-Fall benannt; Erklärung, warum die Repo-Ebene zu grob für die Modus-Entscheidung ist (Verweis auf die vier Trigger-Klassen als kontextuelle Differenzierung). |
+| GF vs. BF, pro Sub-Area? | "GF = Doku führt, BF = Code führt." | Plus Sub-Area-Argument mit Beispiel ("ein Repo kann in *Konventionen* BF und in *Spec-Schreibung* GF sein"), Verweis auf `fallstudien.md` §Beobachtung. Sub-Area-Wahl ist mit mindestens *einer* der drei Inklusions-Achsen begründet (Konventions-Härte / Inventur-Linie / Pfad-Cluster). | + Hybrid-Fall benannt; Erklärung, warum die Repo-Ebene zu grob für die Modus-Entscheidung ist (Verweis auf die vier Trigger-Klassen als kontextuelle Differenzierung). Alle drei Inklusions-Achsen sind pro Sub-Area benennbar. |
 | Vier Trigger-Klassen, je ein Beispiel? | Drei Klassen genannt, ohne Worked-Example-Bezug. | Alle vier Klassen genannt + je ein Trigger aus WE1 oder WE2 als Beispiel. | + Begründung, warum die vier Klassen *erschöpfend* sind (was würde nicht in eine der vier passen?); Verweis auf `konventionen.md` §Vier Trigger-Klassen für die Definition. |
 | Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz". | T3 als **Sync-Trigger in BF-Diskrepanz-Auslöse-Variante** bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht (impliziter Pointer-Mismatch). | + Pointe: T3 ist *keine fünfte Klasse*, sondern eine BF-typische Auslöse-Variante von Sync (die vier Klassen aus konventionen.md bleiben erschöpfend). Plus: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt. |
 | Phase 4 kohärent in GF vs. BF? | "In GF steht der Vertrag, in BF die Inventur." | GF Phase 4: *Vertrag steht, Code wird daran gemessen* (z. B. CI-Gates greifen). BF Phase 4: *Inventur abgeglichen, Diskrepanz-Schock sichtbar* (z. B. CO-DS-* oder Reconc.-Slice-Backlog). | + Begründung, warum *Phase 4* die kritische Stufe in BF ist (vorher: Inventur arbeitet, nachher: Reconciliation läuft); Verweis auf Modul 7 §Carveouts für die `CO-DS-*`-Konvention. |

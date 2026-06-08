@@ -136,6 +136,12 @@ Wohlfühl-Statement.
   Wenn beide Klassifikationen 1:1 übereinstimmen, hast du
   oberflächlich gearbeitet — oft, weil das Beobachtungs-Indiz aus
   der Vorab-Übung ungeprüft übernommen wurde.
+- Pro Sub-Area mindestens *eine* der drei Inklusions-Achsen
+  (Konventions-Härte / Inventur-Linie / Pfad-Cluster) als
+  Granularitäts-Begründung notiert — spiegelt die Selbstcheck-Rubrik
+  und stellt sicher, dass die Sub-Area nicht zu grob gewählt ist
+  (Negativ-Fall *"Backend"* in §Häufige Fehler). *Exzellent:* alle
+  drei Achsen pro Sub-Area benennbar.
 
 **Falle:** "Alle Sub-Areas sind BF" ist zwar empirisch häufig
 korrekt (siehe Fallstudien), aber pädagogisch verdächtig — selbst
@@ -214,6 +220,12 @@ wiederholt.
   Wirklichkeit mehrere kleinere mit unterschiedlichen Modi
   zusammenfasst. Korrekt: Sub-Areas auf Konventionen, Spec-Schreibung,
   Architektur, Test-Infrastruktur, Build/CI etc. ausdifferenzieren.
+  Der abstrakte Maßstab dahinter: Backend/Frontend verletzen Achse 1
+  (keine *einzelne* `MR-NNN`-Adaption denkbar) und Achse 3 (mehrere
+  Pfad-Familien) der drei Inklusions-Achsen aus
+  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)
+  — die Achsen erlauben die Diagnose *ohne* Erinnerung an die
+  Beispielliste, ergänzen sie also.
 - **Hybrid als Notausgang** (Übung 1). Wer in jeder Zeile "Hybrid"
   schreibt, hat *nicht* differenziert, sondern die Entscheidung
   vermieden. Hybrid ist eine *Beobachtung* (Sub-Sub-Area-

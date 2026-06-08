@@ -29,7 +29,7 @@ für die ersten Seiten reichen die folgenden Ein-Satz-Anker:
 | **Closure-Eintrag** | Notiz im Slice, die festhält, *was beim Abschluss gelernt wurde*. | das letzte Stück Beleg, das eine Welle wirklich schließt. |
 | **Steering Loop** | Wiederkehrendes Muster: Versagen beobachten → Guide/Sensor verbessern → Wiederholung reduzieren. | die Lernschleife, mit der der Harness mitwächst. |
 | **Harness-Bootstrap** | Einstiegsprozess in den Harness-Lebenszyklus — Trajektorie durch Dokument-Zustände, kein Ereignis. | "Hochziehen aus dem Nichts" — Repo lernt sich selbst, bis es laufen kann. |
-| **GF/BF-Modus** | Pro Sub-Area deklarierte Trigger-Richtung: Greenfield (Doc → Code) oder Brownfield (Code → Doc, Übergang mit Konvergenz-Auftrag zu GF). | wer wem folgt: Versprechen oder Inventur. |
+| **GF/BF-Modus** | Pro Sub-Area deklarierte Trigger-Richtung: Greenfield (Doc → Code) oder Brownfield (Code → Doc, Übergang mit Konvergenz-Auftrag zu GF). *Sub-Area* = Träger der Modus-Entscheidung; was als eine qualifiziert, definiert [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area). | wer wem folgt: Versprechen oder Inventur. |
 | **Phase-Reife** | Schreibreife eines Dokument-Abschnitts in fünf Stufen (Skelett → Outline → partiell → kohärent → stabil); pro Sektion unabhängig. | nicht "fertig oder nicht", sondern "in welcher Schicht". |
 
 Diese elf Begriffe trägt das Modul. Wenn beim ersten Lesen ein Begriff

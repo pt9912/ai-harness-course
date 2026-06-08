@@ -39,7 +39,8 @@ Aus den 17 Modulen muss das Repo am Ende belegbar enthalten:
 
 * Harness-Bootstrap-Klassifikation pro Sub-Area (GF/BF/Hybrid-Modus,
   Phasen-Reife, Trigger-Klassen) — entweder in `harness/conventions.md`
-  als Modus-Block oder als externes Reifegrad-Inventar
+  als Modus-Block oder als externes Reifegrad-Inventar. Sub-Areas in
+  passender Granularität wählen (Inklusionskriterium: [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area), drei Achsen, Schwelle ≥ 2 — *"Backend"* ist zu grob)
 * Spezifikation
 * ADRs
 * Planning Lifecycle

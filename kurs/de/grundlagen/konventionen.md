@@ -263,6 +263,61 @@ Schritten in [Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md
 > *Harness-Bootstrap* betrifft den **Repo-Lebenszyklus**,
 > *Bootstrap-aware Gate* die **Reifestufe eines Sensors**.
 
+### Was ist eine Sub-Area?
+
+Eine *Sub-Area* ist eine **Doku-/Code-Sektion, die als Träger einer
+Modus-Entscheidung dient** — mit eigener Konventions-Härte (eigene
+`MR-NNN` möglich), eigener Inventur-Linie und eigener Pfad-/Datei-Familie
+im Repo. Sie ist nicht das Repo (zu grob) und nicht der Slice (ein Slice
+*berührt* Sub-Areas, *trägt* aber keinen Modus).
+
+*Modul, Verzeichnis, Komponente* (siehe §Modus pro Sub-Area unten) sind
+die **typischen Träger** — sie nennen, *welche Strukturen* eine Sub-Area
+sein können. Ob eine konkrete Struktur als Sub-Area **qualifiziert**,
+entscheiden drei Inklusions-Achsen (bottom-up):
+
+| Achse | Test | erfüllt, wenn … |
+|---|---|---|
+| **1 — Konventions-Härte** | Ist eine eigene `MR-NNN`-Adaption plausibel formulierbar? | … die Sektion eine eigene Strukturregel tragen *könnte* (nicht: schon trägt). |
+| **2 — Inventur-Linie** | Ist eine eigene Diskrepanz-Bericht-Zeile sinnvoll? | … Code-Bestand und Doku-Aussage dieser Sektion als Paar abgleichbar sind, ohne dass eine Nachbar-Sub-Area mitgezogen werden muss. |
+| **3 — Struktureller Cluster** | Gibt es eine eigene Pfad-/Datei-Familie? | … ein eigenes Verzeichnis, Dateimuster oder Konventions-Präfix die Sektion trägt. |
+
+**Schwelle: mindestens zwei der drei Achsen.** Eine Achse allein ist zu
+schwach — der typische Fall ist *Struktur ohne Substanz*: ein Verzeichnis
+existiert (Achse 3), hat aber keine eigene Konvention (Achse 1) und keine
+eigenständig abgleichbare Inventur-Linie (Achse 2). Das ist noch keine
+Sub-Area, sondern eine **Sub-Area-Aspirantin** — in winzigen Repos
+normal, mit wachsender Struktur wird daraus eine Sub-Area.
+
+**Positiv-Beispiele:**
+
+- *Audit-Logging* — eigene MR-Adaption denkbar (Format-Standard für
+  Log-Einträge, Achse 1), eigene Inventur-Linie (entstehen alle
+  Audit-Events wie spezifiziert?, Achse 2), eigener `services/audit/`-
+  Pfad-Cluster (Achse 3). Alle drei → klar Sub-Area.
+- *Test-Infrastruktur* — eigenes Pfadnaming-Schema (Achse 3) und eine
+  eigene Inventur-Linie (Tests ohne `LH-*`-ID als Diskrepanz, Achse 2).
+  Zwei von drei → Sub-Area.
+
+**Negativ-Beispiele:**
+
+- *"Backend"* ist zu grob — verletzt Achse 1 (keine *einzelne*
+  `MR-NNN`-Adaption denkbar; API-Pattern, Persistence-Layout und
+  Hintergrund-Jobs bräuchten je eigene) und Achse 3 (mehrere
+  Pfad-Familien). *"Backend"* bündelt typischerweise *drei* Sub-Areas.
+- *"Frontend"* — analog: eigene Konventionen pro Schicht (Komponenten,
+  State, Styling), keine gemeinsame Inventur-Linie. Auch hier:
+  ausdifferenzieren, nicht als *eine* Sub-Area führen.
+
+> **Abgrenzung zu den vier Modus-Pflichtkriterien.** Die drei Achsen
+> hier beantworten *ob eine Struktur eine Sub-Area ist* (Granularitäts-
+> Gate). Sie sind **nicht** zu verwechseln mit den vier Pflichtkriterien,
+> mit denen [Modul 5](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
+> begründet, *welcher Modus* (GF/BF/Hybrid) für eine bereits erkannte
+> Sub-Area gilt (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-
+> Risiko · Reconciliation-Aufwand). Erst Inklusion (hier), dann
+> Modus-Wahl (Modul 5).
+
 ### Modus pro Sub-Area: Greenfield vs Brownfield
 
 Pro Sub-Area eines Repos (Modul, Verzeichnis, Komponente) wird ein
