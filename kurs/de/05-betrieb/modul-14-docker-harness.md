@@ -199,7 +199,7 @@ demselben Drei-Stage-Schnitt mit sprach-spezifischen Anpassungen.
 
 ## Übungen
 
-* Aufbau eines vollständigen Build-Harness
+* **(Erschaffen — aktiviert LZ 1)** *Multi-Stage-Dockerfile von Grund auf schreiben.* Nimm eine Toolchain deiner Wahl (oder eine der fünf Lab-Sprachen) und schreibe — aus dem leeren File, *nicht* durch Kopieren des Worked-Example-Dockerfiles — einen Multi-Stage-Dockerfile mit mindestens den drei Stages aus dem Worked Example (Builder · Test · Runtime), gepinnter Base-Image-Version (per Digest, nicht `:latest`) und Lock-File-Kopie vor dem Dependency-Install. Test: `docker build` läuft, und das Runtime-Image enthält *keine* Build-Tools mehr (`which gcc`/`go`/`mvn` schlägt fehl).
 * Mache ein Image nicht-reproduzierbar (z. B. unpinnierte Base) und beobachte den Drift
 * **Devcontainer-oder-Compose-Entscheidung** — aktiviert das Bewertungs-Lernziel
   (LZ 4) zur Setup-Abwägung. Drei Teams, je eine Ausgangslage. Entscheide
@@ -235,10 +235,12 @@ unpinnst und den Build später erneut ausführst. Dokumentiere nicht nur
 
 > *Lab-Grenze:* Das Target ruft ein *fertiges* Multi-Stage-Dockerfile
 > auf. Das LZ "Multi-Stage-Dockerfile *schreiben*" (LZ 1, Erschaffen)
-> und das LZ "Drift *messen*" (LZ 3, Analysieren) werden erst durch das
-> Worked Example oben (vom einstufigen zur Multi-Stage-Pipeline) und die
-> Unpin-Übung in einer Kopie abgerufen — der minimale Pfad ist Aufwärm-,
-> nicht Ziel-Niveau.
+> wird durch die erste Übung oben abgerufen (Dockerfile *von Grund auf*,
+> nicht durch Kopieren des Worked Example); das LZ "Drift *messen*" (LZ 3,
+> Analysieren) durch die Unpin-Übung in einer Kopie. Das Worked Example
+> *zeigt* den Drei-Stage-Schnitt — es nachzubauen ist Verstehen, ihn
+> selbst zu schreiben ist das Erschaffen-Ziel. Der minimale Pfad ist
+> Aufwärm-, nicht Ziel-Niveau.
 
 ## Reflexion
 

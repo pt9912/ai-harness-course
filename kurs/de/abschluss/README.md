@@ -4,7 +4,7 @@
 |---|---|
 | [`abschlussprojekt.md`](abschlussprojekt.md) | AI Harness Platform — Features, Abgabekriterien |
 | [`kalibrierungsbeispiele.md`](kalibrierungsbeispiele.md) | Beispielbewertungen für funktional, solide und exzellent |
-| [`quellen.md`](quellen.md) | Quellenangaben: Böckeler, Lopopolo, Ford/Parsons/Kua, Nygard, OpenTelemetry, HarnessPrompt, drei Fallstudien-Repos |
+| [`quellen.md`](quellen.md) | Fach-Quellen (Böckeler, Lopopolo, Ford/Parsons/Kua, Nygard, OpenTelemetry, HarnessPrompt, vier Fallstudien-Repos) **und** didaktische Quellen (Anderson/Krathwohl, Biggs/Tang, Kapur, Posner, Sweller, Kattmann) |
 
 ## Harte Wahrheit
 

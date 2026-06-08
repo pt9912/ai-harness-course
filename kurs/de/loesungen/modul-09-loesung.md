@@ -27,6 +27,24 @@ Häufiger Fehler: Schritt 7 und 8 werden unter Zeitdruck weggelassen.
 Damit wird das Modul-Versprechen "Plan → Diff → Code" zur "Diff →
 Code"-Schleife — und die Risiken werden in die nächste Rolle verlagert.
 
+### (Anwenden) Roter `arch-check` in Schritt 6 — welche Rücksprungkante?
+
+Rücksprung zu **Schritt 4 (Plan verfeinern)**, nicht zu Schritt 1. Der
+rote `arch-check` ist ein ADR-Verstoß durch einen direkten Import — der
+Agent *kannte* die ADR (sie war im Kontext), hat aber den Diff falsch
+geschnitten. Das ist ein **Plan-Defekt**, kein Kontext-Defekt. Konkrete
+Korrektur: den direkten Import durch einen **Adapter-Wrapper** ersetzen,
+sodass die Schichtung der ADR gewahrt bleibt — genau wie im Worked
+Example Schritt 6, wo der direkte `net/http`-Import in
+`service/auth/login.go` durch einen Adapter-Wrapper in
+`adapter/jwt/sign.go` ersetzt wird.
+
+Die Abgrenzung ist die eigentliche Diagnose: Nur wenn die ADR *gar nicht
+im Kontext* war (der Agent konnte sie nicht kennen), wäre Schritt 1/2 die
+richtige Kante — dann fehlt die kanonische Quelle, und die Aktion ist
+"AGENTS.md/Source Precedence schärfen", nicht "Plan verfeinern". Die Wahl
+der Kante *ist* die Ursachen-Diagnose.
+
 ### Welche Eingaben braucht ein Implementation-Agent minimal, um nicht zu halluzinieren?
 
 Mindestens diese sechs:

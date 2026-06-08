@@ -223,7 +223,16 @@ die linke Tabellenspalte); *Werkzeug-Klasse* ist die Achse, auf der sich
 die drei unterscheiden (punktuell vs. Sub-Area-weit vs. dauerhaft — die
 Träger-Spalte).
 
-> **Hinweis zum Lab-Beispiel:** Das Lab unter
+Damit ist die Werkzeug-Wahl von Schritt 6 vollständig. Die zwei folgenden
+Blöcke sind **optionale Vertiefung — beim ersten Durchgang
+überspringbar** (weiter bei [§Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)):
+das konkrete `MR`-Format der BF-Markierung im Lab und die Frage, was mit
+dem Schritt-1-Stub passiert, wenn der Trichter *nicht* auf Carveout
+führt. Beides ist Mechanik-Detail, das die Übung nicht voraussetzt; wer
+das Schema noch frisch im Kopf hält, spart sich hier Last
+(Expertise-Reversal).
+
+> **Vertiefung 1 — Hinweis zum Lab-Beispiel:** Das Lab unter
 > [`lab/example/docs/plan/carveouts/`](../../../lab/example/docs/plan/carveouts/)
 > trägt heute nur den einzelnen `CO-001-index-coverage.md` — Frage 1
 > führt dort folglich auf den Einzeldiskrepanz-Pfad und weiter zu
@@ -254,8 +263,8 @@ Träger-Spalte).
 > denselben Pfad) durch eine einzelne Sub-Area-weite Aussage mit
 > klarem Graduations-Pfad.
 
-**Was passiert mit dem Schritt-1–5-Entwurf, wenn der Trichter nicht
-auf Carveout führt?** Der Inhalt ist nicht verloren, nur verschoben.
+**Vertiefung 2 — Was passiert mit dem Schritt-1–5-Entwurf, wenn der
+Trichter nicht auf Carveout führt?** Der Inhalt ist nicht verloren, nur verschoben.
 Trigger-Formulierung (Schritt 3), Geltungsbereichs-Präzision
 (Schritt 2 Geltungsbereich-Feld), Verifikations-Checkliste (Schritt 5)
 wandern in das gewählte andere Werkzeug:
@@ -380,15 +389,17 @@ sonst ist er eine schöne Konvention, die niemand prüft.
 
 ## Übungen
 
-* **Carveout dokumentieren** (Lernziel 1 · Erschaffen·prozedural; folgt [Worked Example A](#worked-example-a-einen-carveout-dokumentieren)). Lege für eine fehlende Coverage-Schwelle eine `CO-<NNN>-*.md`-Datei mit den sechs Pflichtfeldern an (Status, Datum, betroffenes Gate, Geltungsbereich, Folge-Slice, Auflösungs-Trigger). Trage den `# CO-<NNN>`-Kommentar in die Gate-Konfiguration ein. Vergleich: [`../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md`](../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md).
+* **Carveout dokumentieren** (Lernziel 1 · Erschaffen·prozedural; folgt [Worked Example A](#worked-example-a-einen-carveout-dokumentieren)). Lege für eine fehlende Coverage-Schwelle eine `CO-<NNN>-*.md`-Datei mit den sechs Pflichtfeldern an (Status, Datum, betroffenes Gate, Geltungsbereich, Folge-Slice, Auflösungs-Trigger). Trage den `# CO-<NNN>`-Kommentar in die Gate-Konfiguration ein. **Begründe zum Schluss in *einem* Satz, warum dein Fall ein Carveout ist und nicht eine BF-Sub-Area-Markierung oder ein permanenter ADR** (das ist die produktive Mini-Anwendung von Lernziel 3 — die Werkzeug-Disambiguierung aus Worked Example A Schritt 6). Vergleich: [`../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md`](../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md).
 * **Folge-Slice verknüpfen** (Lernziel 1, fortgesetzt). Schreibe den Folge-Slice mit konkretem DoD und beobachtbarem Trigger so, dass die Auflösung des Carveouts maschinell erkennbar wird (Schritt 5 in Worked Example A).
-* **Carveout-Audit-Slice entwerfen** (Lernziel 4 · Erschaffen·prozedural; folgt [Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)). Schreibe für die *nächste* Welle deines Repos einen `SL-CO-AUDIT-<welle>`-Slice mit vier DoD-Punkten und Rollen-Zuweisung (Planner identifiziert · Architect entscheidet bei Permanenz · Implementer führt aus). Lege die Audit-Bericht-Tabelle (vorher/nachher/Aktion) als Closure-Notiz-Block bei. Provoziere als Fehlerfall: lass *eine* Welle ohne Audit schließen und beobachte, was nach zwei Wellen mit den unauditiierten Carveouts passiert.
+* **Carveout-Audit-Slice entwerfen** (Lernziel 4 · Erschaffen·prozedural; folgt [Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)). Schreibe für die *nächste* Welle deines Repos einen `SL-CO-AUDIT-<welle>`-Slice mit vier DoD-Punkten und Rollen-Zuweisung (Planner identifiziert · Architect entscheidet bei Permanenz · Implementer führt aus). Lege die Audit-Bericht-Tabelle (vorher/nachher/Aktion) als Closure-Notiz-Block bei. Provoziere als Fehlerfall: lass *eine* Welle ohne Audit schließen und beobachte, was nach zwei Wellen mit den unauditierten Carveouts passiert.
 
-*Lernziel 3 (einordnen) ist bewusst übungsfrei — die
-Disambiguierungsleistung wird durch das Frage-Schema in
+*Lernziel 3 (einordnen) bekommt keine eigene vierte Übung — eine solche
+hätte das Modul-Volumen ohne CA-Gewinn vergrößert. Stattdessen wird die
+Disambiguierungsleistung produktiv im Schluss-Satz der ersten Übung
+(Carveout vs. BF-Markierung vs. ADR begründen) abgerufen und zusätzlich
+durch das Frage-Schema in
 [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren)
-und die zugehörige Selbstcheck-Rubrik-Zeile geprüft. Eine vierte Übung
-hätte das Modul-Volumen ohne CA-Gewinn vergrößert.*
+und die zugehörige Selbstcheck-Rubrik-Zeile geprüft.*
 
 ## Reflexion
 

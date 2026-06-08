@@ -80,6 +80,15 @@ Diese Tabelle ist *probabilistisch*, kein Urteil. Sie sagt dir nur, *wo
 du beim ersten Durchlauf wahrscheinlich Zeit investieren musst* — nicht,
 was du erreichen kannst.
 
+Die Zuordnung von Item 5 (Linter/Typecheck/Integrationstest) zur
+*Steering-Loop-Reife* ist die am wenigsten offensichtliche: Wer einen
+neuen Sensor in den Steering Loop einziehen will, muss wissen, *welche
+Sensor-Klasse welche Fehlerklasse fängt* (Linter = lokale Muster,
+Typecheck = Typgrenzen, Integrationstest = Verhalten im Zusammenspiel).
+Ohne diese Trennschärfe reagiert man auf einen wiederkehrenden Fehler mit
+dem falschen Sensor — und der Steering Loop läuft leer. Genau diese
+Sensor-Literacy probt Checkpoint D (Modul 13 §Gate-Typ ↔ Fehlerbild).
+
 ## Lernfortschritt
 
 | Modul | Du solltest danach können ... |
@@ -106,7 +115,7 @@ was du erreichen kannst.
 
 | Bereich | Inhalt |
 |---|---|
-| [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, **Konzeptkarte**, 2×2-Klassifikation, drei Säulen, Steering Loop, vier Fallstudien, **Lernpfade**, **Reflexions­vorlage**, **Lernervorstellungen**, **Phasen-Checkpoints** — vor den Modulen zu lesen. |
+| [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, **Konzeptkarte**, 2×2-Klassifikation, drei Säulen, Steering Loop, vier Fallstudien, **Lernpfade**, **Reflexions­vorlage**, **Lernervorstellungen**, **Phasen-Checkpoints**. Pflicht-Vorablektüre nur Konzeptkarte + Klassifikation §2×2 (siehe [§Vorab-Lektüre](#vorab-lektüre-pflicht)); der Rest, v. a. `konventionen.md`, ist sektionsweises Nachschlagewerk. |
 | [`00-einfuehrung/`](00-einfuehrung/) | Modul 0: Worum geht es überhaupt? |
 | [`01-spec-und-architektur/`](01-spec-und-architektur/) | Module 1–4: Lebenszyklus, Harness-Bootstrap, Lastenheft, ADRs. |
 | [`02-planung/`](02-planung/) | Module 5–7: Planning-Lifecycle, Roadmap, Carveouts. |

@@ -106,12 +106,12 @@ Nach diesem Modul kannst du:
 * Vier Beispiel-Repos in BF-Modus klassifiziert:
   [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand).
 
-> **TODO-Anker:** Ein dediziertes Bootstrap-Lab folgt in einer
-> späteren Welle (geplanter Pfad: unter
-> [`../../../lab/example/exercises/`](../../../lab/example/exercises/);
-> exakter Dateiname noch offen). Bis dahin sind die Übungen am
-> eigenen Repo oder am vollausgefüllten Beispiel-Lab unter
-> [`../../../lab/example/`](../../../lab/example/) durchführbar.
+> **Hinweis Lab:** Ein dediziertes Bootstrap-Lab unter
+> [`../../../lab/example/exercises/`](../../../lab/example/exercises/) ist
+> Teil der Lab-Roadmap (Phase C) und heute noch nicht ausgeliefert. Die
+> Übungen dieses Moduls laufen unabhängig davon am eigenen Repo oder am
+> vollausgefüllten Beispiel-Lab unter
+> [`../../../lab/example/`](../../../lab/example/).
 
 ## Themen
 
@@ -569,13 +569,21 @@ den vier Trigger-Klassen aus
 [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)
 zu:
 
-| Trigger | Klasse | Begründung |
-|---|---|---|
-| T1 (Pointer in `harness/README.md` auf `conventions.md`) | Sync-Trigger | … |
-| T2 (Pointer in `AGENTS.md`) | … | … |
-| T4 (Promotion bei Code-Slice) | … | … |
-| T5 (erste ADR-Vorschläge aus Architektur-Outline) | … | … |
-| T6 oder T7 (Cross-Reference Spec↔ADR / ADR-Review) | … | … |
+| Trigger | Klasse | Phase-Reife des berührten Artefakts (0–5) | Begründung |
+|---|---|---|---|
+| T1 (Pointer in `harness/README.md` auf `conventions.md`) | Sync-Trigger | … | … |
+| T2 (Pointer in `AGENTS.md`) | … | … | … |
+| T4 (Promotion bei Code-Slice) | … | … | … |
+| T5 (erste ADR-Vorschläge aus Architektur-Outline) | … | … | … |
+| T6 oder T7 (Cross-Reference Spec↔ADR / ADR-Review) | … | … | … |
+
+Die dritte Spalte ist das *Spiegeln gegen die Phase-Reife* (zweite
+Hälfte des Lernziels): derselbe Trigger bedeutet etwas anderes, je
+nachdem, in welcher Phase das berührte Artefakt steht. Ein
+Cross-Reference-Trigger auf eine §Sektion in Phase 1 ("Template kopiert")
+ist verfrüht; derselbe Trigger auf eine Sektion in Phase 4 ("Vertrag
+steht") ist fällig. Begründe pro Zeile, ob der Trigger zur Phase *passt*
+oder ob er auf eine Modus-/Reife-Diskrepanz zeigt.
 
 *Optional, falls du schon einen Slice durchlaufen hast:* Nimm fünf
 Trigger aus deinem letzten Slice statt aus dem DocSearch-Beispiel.
@@ -609,6 +617,15 @@ in der Phase × Modus-Matrix weiter oben.
 *Erfolgskriterium:* mindestens eine Sektion in einer anderen Phase
 als die übrigen — sektionsweise Reife ist das Lehr-Ergebnis, und
 genau diese Heterogenität ist der Punkt der Übung.
+
+*Variante für BF-Repos (zweite Hälfte des Erschaffen-Lernziels):* Hast
+du in Übung 1 eine Sub-Area als BF klassifiziert und dort eine konkrete
+Doku↔Code-Diskrepanz beobachtet, entwirf statt (oder zusätzlich zu) der
+Phasen-Karte einen **Reconciliation-Plan**: ein bis drei Folge-Slices,
+die die Diskrepanz schließen (Code → Doc oder Doc → Code), jeder mit
+Trigger und Closure-Kriterium. Das ist die für Brownfield typische Hälfte
+des Lernziels — der Test ist derselbe: kein Slice ohne beobachtbaren
+Trigger.
 
 ## Reflexion
 
@@ -672,6 +689,9 @@ Conceptual-Change-Selbstvalidierung ab.
 
 * **(Verstehen, durch Übung 1)** Was unterscheidet GF-Modus von
   BF-Modus? Warum gilt der Modus *pro Sub-Area* und nicht pro Repo?
+  *Verorte* die dokumentierte Modus-Entscheidung dann gegen die vier
+  Harness-Linsen (Drift · Reproduzierbarkeit · Auditierbarkeit ·
+  Steering-Loop): welche Linse bedient sie *zuerst*?
 * **(Verstehen, Vorstufe für Übung 2)** Welche vier Trigger-Klassen
   gibt es laut
   [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)?
@@ -695,7 +715,7 @@ die modulspezifischen Indikatoren sind:
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
-| GF vs. BF, pro Sub-Area? | "GF = Doku führt, BF = Code führt." | Plus Sub-Area-Argument mit Beispiel ("ein Repo kann in *Konventionen* BF und in *Spec-Schreibung* GF sein"), Verweis auf `fallstudien.md` §Beobachtung. Sub-Area-Wahl ist mit mindestens *einer* der drei Inklusions-Achsen begründet (Konventions-Härte / Inventur-Linie / Pfad-Cluster). | + Hybrid-Fall benannt; Erklärung, warum die Repo-Ebene zu grob für die Modus-Entscheidung ist (Verweis auf die vier Trigger-Klassen als kontextuelle Differenzierung). Alle drei Inklusions-Achsen sind pro Sub-Area benennbar. |
+| GF vs. BF, pro Sub-Area? + Linsen-Verortung | "GF = Doku führt, BF = Code führt." | Plus Sub-Area-Argument mit Beispiel ("ein Repo kann in *Konventionen* BF und in *Spec-Schreibung* GF sein"), Verweis auf `fallstudien.md` §Beobachtung. Sub-Area-Wahl ist mit mindestens *einer* der drei Inklusions-Achsen begründet (Konventions-Härte / Inventur-Linie / Pfad-Cluster). Eine der vier Harness-Linsen ist genannt, die die Modus-Dokumentation zuerst bedient (typisch: *Drift* — Bootstrap ist der erste Drift-Sensor). | + Hybrid-Fall benannt; Erklärung, warum die Repo-Ebene zu grob für die Modus-Entscheidung ist (Verweis auf die vier Trigger-Klassen als kontextuelle Differenzierung). Alle drei Inklusions-Achsen sind pro Sub-Area benennbar; die Modus-Dokumentation gegen *mehr als eine* Linse verortet (z. B. Drift *und* Auditierbarkeit) mit Begründung der Reihenfolge. |
 | Vier Trigger-Klassen, je ein Beispiel? | Drei Klassen genannt, ohne Worked-Example-Bezug. | Alle vier Klassen genannt + je ein Trigger aus WE1 oder WE2 als Beispiel. | + Begründung, warum die vier Klassen *erschöpfend* sind (was würde nicht in eine der vier passen?); Verweis auf `konventionen.md` §Vier Trigger-Klassen für die Definition. |
 | Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz". | T3 als **Sync-Trigger in BF-Diskrepanz-Auslöse-Variante** bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht (impliziter Pointer-Mismatch). | + Pointe: T3 ist *keine fünfte Klasse*, sondern eine BF-typische Auslöse-Variante von Sync (die vier Klassen aus konventionen.md bleiben erschöpfend). Plus: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt. |
 | Phase 4 kohärent in GF vs. BF? | "In GF steht der Vertrag, in BF die Inventur." | GF Phase 4: *Vertrag steht, Code wird daran gemessen* (z. B. CI-Gates greifen). BF Phase 4: *Inventur abgeglichen, Diskrepanz-Schock sichtbar* (z. B. CO-DS-* oder Reconc.-Slice-Backlog). | + Begründung, warum *Phase 4* die kritische Stufe in BF ist (vorher: Inventur arbeitet, nachher: Reconciliation läuft); Verweis auf Modul 7 §Carveouts für die `CO-DS-*`-Konvention. |

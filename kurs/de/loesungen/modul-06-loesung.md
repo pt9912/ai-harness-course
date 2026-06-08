@@ -37,6 +37,51 @@ Anti-Antwort: "Wir biegen die Schätzung gerade." Das macht den Steering
 Loop unbrauchbar — wenn Schätzungen sich an Realität anpassen statt
 umgekehrt, lernst du nichts über deine Schätzungsqualität.
 
+### (Erschaffen) Ersten Wellen-Eintrag aus `SL-101`/`SL-102`/`SL-103` entwerfen
+
+```text
+## welle-1-api-mit-cache
+Slices:   SL-101 (Such-API), SL-102 (Query-Cache mit TTL, konsumiert SL-101)
+Trigger:  startet, sobald ADR-Cache-Strategie (Read-through vs. Look-aside)
+          akzeptiert ist  ← beobachtbarer Zustand, kein Datum
+Closure:  Replay gegen Golden Set grün UND SL-101+SL-102 in done/
+Nicht in dieser Welle: SL-103 (Dashboard)
+```
+
+Begründung der Bündelung: `SL-102` braucht die von `SL-101` gelieferte
+API — getrennt liefert keiner der beiden prüfbaren Wert, erst zusammen
+ist ein Replay-Closure-Kriterium überhaupt formulierbar. Sie teilen sich
+also *ein* Closure.
+
+Gegenprobe, warum `SL-103` *nicht* hineingehört: ein Dashboard über
+einer Suche ohne Cache zeigt keinen Mehrwert, den diese Welle belegen
+soll (Latenz-Gewinn durch Cache). `SL-103` zieht in die *nächste* Welle,
+sobald deren Trigger eintritt: "`welle-1-api-mit-cache` in Closure, Cache
+liefert messbare Trefferquote". Der Trigger ist so formuliert, dass ein
+Dritter ohne Rückfrage über "Welle fertig" entscheiden kann.
+
+### (Analysieren) Abhängigkeit Welle 3 → Welle 2 modellieren und Blocker erkennen
+
+Die Abhängigkeit gehört als *expliziter Abhängigkeits-Trigger* in die
+`Trigger`-Spalte von Welle 3 — nicht als bloße Reihenfolge-Notiz:
+
+```text
+## welle-3-skalierung
+Trigger:  startet, wenn welle-2-qualitaet in Closure
+          (Property-Tests grün, Coverage-Critical-Gate steht)
+```
+
+Plus eine gerichtete Kante `welle-2-qualitaet → welle-3-skalierung` im
+Abhängigkeitsgraphen.
+
+Wann wird Welle 2 zum *Blocker* (nicht bloß Vorgängerin)? Test: Würde
+Welle 3 *jetzt* starten, liefe ihr Skalierungs-Gate auf nicht-property-
+getesteter Basis — die Skalierung würde Last auf Code legen, dessen
+Korrektheit Welle 2 erst absichert. Genau dann ist Welle 2 eine *harte
+Kante*: ohne ihre Closure ist Welle 3 eine Phantom-Welle. Eine reine
+Vorgängerin *ohne* solche harte Kante (Welle 3 könnte technisch auch
+ohne sie laufen) wäre kein Blocker, nur eine Sortier-Präferenz.
+
 ## Übungshinweise
 
 ### Aufbau einer produktiven Roadmap für das Begleit-Lab

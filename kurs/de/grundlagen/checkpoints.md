@@ -123,6 +123,14 @@ hat einen direkten Vorboten in einem Checkpoint.
 | Auditierbarkeit | B (Slice-IDs) + C (Hard Rules mit ID) | → Auditierbarkeit bleibt auf "funktional"; ID-Schema und Traceability-Hook nachholen (Modul 3, 12). *Exzellent* (Tool-Call-Audit-Forensik bis zur Anforderungs-ID) setzt Modul 15 voraus. |
 | Steering-Loop-Reife | D (DoD-Verstoß provoziert + Reflexion) | → Steering-Loop bleibt auf "rudimentär"; Reflexionsvorlage und Modul 12 vertiefen. |
 
+*Hinweis zur Phase 05:* Die *Exzellent*-Stufen von Konsistenz und
+Auditierbarkeit setzen Modul 15 voraus (Doku-Drift-Sensor bzw.
+Tool-Call-Forensik). Phase 05 hat **keinen** eigenen Checkpoint — diese
+beiden Exzellenz-Pfade werden also erstmals im Abschluss geprüft, ohne
+Checkpoint-Vorlauf. Wer auf diesen Achsen exzellent abgeben will, plant
+Modul 15 bewusst vor der Abgabe ein; *solide* ist auch ohne Modul 15
+erreichbar.
+
 **Diagnose-Regel:** Wer im Abschlussprojekt mehr als eine Achse auf
 *rudimentär* hat, schließt typischerweise eine Phase-Lücke nicht — nicht
 eine Modul-Lücke. Die Tabelle oben sagt dir, *welche Phase*. Geh dort

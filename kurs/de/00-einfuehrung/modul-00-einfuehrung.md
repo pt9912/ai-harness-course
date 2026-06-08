@@ -63,7 +63,7 @@ Nach diesem Modul kannst du:
 * Agent, LLM und Tool-Call in eigenen Worten *erklären* und gegeneinander *abgrenzen* (Verstehen · faktisch+konzeptuell),
 * Chatbot von Engineering-System anhand mindestens dreier Kriterien *unterscheiden* (Analysieren · konzeptuell),
 * drei typische Scheitermuster von KI-Projekten *identifizieren* und mindestens eines davon einem Quadranten der 2×2-Matrix *zuordnen* (Analysieren · konzeptuell),
-* den Begriff *Harness* nach Böckeler *einordnen* und gegen "Prompt Engineering" *abgrenzen* (Analysieren · konzeptuell),
+* den Begriff *Harness* — im Rahmen von Böckeler eingeführt (siehe [`klassifikation.md`](../grundlagen/klassifikation.md)) — gegen "Prompt Engineering" *abgrenzen* (Analysieren · konzeptuell),
 * einen Mega-Prompt anhand der drei Reproduzierbarkeits-Kriterien des Moduls (jeder-Lauf-relevant, auditierbar, deterministisch) zeilenweise *kritisieren* (Bewerten · prozedural).
 
 ## Lab-Bezug
@@ -103,7 +103,7 @@ handelnden Agenten einen reproduzierbar handelnden Agenten macht.
 
 ## Typische Fehlvorstellungen
 
-- **"Wir brauchen erst ein besseres Modell."** — In den dokumentierten Scheitenfällen war meist nicht das Modell die Ursache, sondern eine Spec-Lücke oder ein fehlender Sensor. Das Modell rät, *weil nichts in der Eingabe widerspricht*. Lopopolo (OpenAI 2026) und die Fallstudien in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md) belegen das.
+- **"Wir brauchen erst ein besseres Modell."** — In den dokumentierten Scheiterfällen war meist nicht das Modell die Ursache, sondern eine Spec-Lücke oder ein fehlender Sensor. Das Modell rät, *weil nichts in der Eingabe widerspricht*. Lopopolo (OpenAI 2026) und die Fallstudien in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md) belegen das.
 - **"Wir bauen einen Mega-Prompt."** — Der Prompt wird zur Anti-Spec, die niemand pflegt. Was in *jedem* Lauf relevant ist, gehört in AGENTS.md oder eine Fitness Function, nicht in den Prompt.
 - **"Der Agent muss nur freier entscheiden dürfen."** — Genau das macht Auditierbarkeit unmöglich. Engineering-Systeme sind *reproduzierbar*, nicht kreativ.
 - **"Halluzination ist ein Bug des Modells."** — Falsche Attribution. Eine Halluzination ist ein *Output-Symptom*, dessen *Ursache fast immer im Kontext liegt*: fehlende Spec-Aussage, fehlende ADR, fehlende AGENTS.md-Regel, fehlende Tool-Allowlist. Die richtige Frage ist nicht "warum hat das Modell das erfunden", sondern "was *im Kontext* hätte das Erfinden verhindert" — und genau das ist eine Harness-Frage. Wer Halluzinationen als Modell-Bug klassifiziert, kann sie nur durch Modellwechsel adressieren; wer sie als Kontext-Bug klassifiziert, kann sie durch Spec/ADR/Sensor reduzieren. Empirie: dieselbe Klasse von Halluzinationen kommt nach Modellwechsel oft *wieder* — weil das Kontext-Loch nicht zugefüllt wurde.
@@ -147,7 +147,8 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 
 ## Selbstcheck
 
-* **(Erinnern)** Welche drei Bestandteile hat ein Tool-Call laut Mini-Glossar?
+* **(Erinnern + Verstehen — aktiviert LZ 1)** Welche drei Bestandteile hat ein Tool-Call laut Mini-Glossar? Grenze dann *Agent*, *LLM* und *Tool-Call* gegeneinander ab: Was kann das LLM allein *nicht*, wofür es den Agenten und den Tool-Call braucht?
+* **(Analysieren — aktiviert LZ 3)** Nimm eines der drei Scheitermuster aus deiner Postmortem-Übung und ordne es genau einem Quadranten der 2×2-Matrix zu (Computational/Inferential × Feedforward/Feedback). Begründe, *welche* Kontrolle gefehlt hat — nicht "das Modell war schlecht".
 * **(Analysieren — aktiviert LZ 2)** Unterscheide einen Chatbot von einem Engineering-System anhand von *drei* Kriterien (z. B. Reproduzierbarkeit, Auditierbarkeit, Fehler-Rückkopplung). Nimm dann ein Grenzbeispiel — ein Agent mit einem festen System-Prompt, aber ohne Gates — und ordne es begründet einer der beiden Seiten zu.
 * Wo verläuft die Grenze zwischen "guter Prompt" und "guter Harness"?
 * Welche Fehlermodi eines Agenten kann ein Linter *nicht* fangen?
@@ -159,7 +160,8 @@ Schema in [`../grundlagen/selbstcheck-rubrik.md`](../grundlagen/selbstcheck-rubr
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
-| Drei Bestandteile eines Tool-Calls? | "Name und Argumente." | `name`, `arguments`, `result` — strukturierter Aufruf einer Funktion durch das LLM. | + Anwendung: ohne `result`-Feld kann der Verifier den Lauf nicht reproduzieren; ohne `arguments` ist Token-Attribution unmöglich. Diese drei sind das Minimum, *bevor* Korrelations-IDs (Slice, Agent-Rolle) dazukommen — Modul 15 erweitert. |
+| Drei Bestandteile eines Tool-Calls + Abgrenzung Agent/LLM/Tool-Call? | "Name und Argumente." | `name`, `arguments`, `result`. Abgrenzung: das LLM erzeugt nur Text; der *Tool-Call* ist die strukturierte Handlung, die der *Agent* (die Schleife um das LLM) ausführt und deren `result` er zurück in den Kontext gibt. | + Anwendung: ohne `result`-Feld kann der Verifier den Lauf nicht reproduzieren; ohne `arguments` ist Token-Attribution unmöglich. Das LLM allein kann nicht handeln (keine Datei lesen, kein Gate aufrufen) — erst die Agent-Schleife macht aus Text eine auditierbare Handlung. |
+| Scheitermuster einem 2×2-Quadranten zugeordnet? | Muster genannt, aber kein Quadrant — oder "Modell war schlecht". | Genau ein Quadrant benannt (z. B. Spec-Lücke → *inferential feedforward*) mit Begründung, *welche* Kontrolle gefehlt hat. | + Gegenprobe: das Muster gegen einen *zweiten* Quadranten gehalten und begründet, warum es dort *nicht* primär liegt — und welche Kontrolle (Guide vs. Sensor) am billigsten gegriffen hätte. |
 | Chatbot ↔ Engineering-System an drei Kriterien? | ein Unterschied genannt ("eines ist ein Programm"). | Drei trennscharfe Kriterien — z. B. Reproduzierbarkeit (gleicher Input → prüfbar gleicher Prozess), Auditierbarkeit (jede Änderung über eine ID rückverfolgbar), Fehler-Rückkopplung (Versagen wird zu Guide/Sensor). | + Grenzbeispiel zugeordnet: ein Agent mit festem System-Prompt, aber ohne Gates, ist *noch* ein Chatbot — die Trennlinie ist nicht der Prompt, sondern der reproduzierbare, auditierbare Prozess drumherum. |
 | Grenze "guter Prompt" ↔ "guter Harness"? | "Harness ist umfangreicher." | Prompt verbessert *eine* Interaktion; Harness verbessert *jede zukünftige Interaktion derselben Klasse*. | + Test "wäre die Anweisung in *jedem* Lauf relevant?" und Verweis auf AGENTS.md/Fitness Function als Ablage. |
 | Fehlermodi, die ein Linter *nicht* fängt? | "Semantik." | Drei Klassen: semantische Halluzination, ADR-Verstoß, Spec-Lücken-Symptom. | + zwei weitere (implizite Annahmen, Sicherheits-Anti-Pattern im Fremdkontext) und Zuordnung zu Sensor-Typen (Compiler/ArchUnit/Verifier/Replay/Security-Gate). |

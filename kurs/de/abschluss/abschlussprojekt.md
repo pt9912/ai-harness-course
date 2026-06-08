@@ -129,11 +129,21 @@ Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
 
 ## Bestanden
 
-- Mindestens **solide** in *allen* fünf Achsen.
-- Höchstens *eine* Achse darf bei **funktional** liegen, wenn die anderen vier **solide** oder **exzellent** sind — und dann nur, wenn die Lücke dokumentiert und mit einem Folge-Slice verknüpft ist.
+Grundregel: mindestens **solide** in *allen* fünf Achsen. Genau *eine*
+Ausnahme ist erlaubt — *höchstens eine* Achse darf bei **funktional**
+liegen, wenn die anderen vier **solide** oder **exzellent** sind, und
+auch dann nur, wenn die Lücke dokumentiert und mit einem Folge-Slice
+verknüpft ist. (Die zweite Regel überschreibt die erste: eine
+dokumentierte funktional-Achse bricht das "alle solide" nicht.)
+
+Daraus folgt direkt **nicht bestanden**, sobald eines zutrifft:
+
+- *zwei oder mehr* Achsen auf **funktional** — auch wenn der Rest solide
+  ist (der häufigste Grenzfall der Zweitabgabe);
+- *irgendeine* Achse auf **rudimentär**.
 
 Wer dreimal **rudimentär** oder zweimal **rudimentär + zweimal funktional**
-abgibt, hat das Abschlussprojekt nicht bestanden — aber typischerweise
+abgibt, hat das Abschlussprojekt erst recht nicht bestanden — aber typischerweise
 auch nicht die Phasen-Checkpoints geschafft. In dem Fall:
 [`../grundlagen/checkpoints.md`](../grundlagen/checkpoints.md) als
 Diagnose-Werkzeug nutzen, eine Phase identifizieren, dort vertiefen.

@@ -19,14 +19,27 @@ gleichzeitig in `in-progress/` hat, hat kein Lifecycle, sondern ein
 Buffet — und keinen Punkt, an dem reproduzierbar geprüft wird, ob der
 8-Schritt-Workflow durchlaufen wurde.
 
-### Welcher Trigger bewegt einen Slice von `next/` nach `in-progress/`?
+### (Anwenden) Triggerbedingung für jeden Lifecycle-Übergang benennen
 
-Der erste Commit, der die Arbeit am Slice startet — *nicht* der Wunsch,
-ihn als nächstes machen zu wollen.
+Fünf Übergänge, jeder mit einem *beobachtbaren* Trigger:
 
-Konkret: Ein Slice wandert nach `in-progress/`, wenn ein Branch oder
-PR existiert, der ihn umsetzt. Vorher gehört er in `next/`, mit
-"als nächstes geplant" und idealerweise einem Verantwortlichen.
+- `open → next`: Slice wird priorisiert und eingeplant (kommt in die
+  Reihenfolge des nächsten Arbeitsfensters).
+- `next → in-progress`: der erste Commit, der die Arbeit am Slice
+  *startet* — Branch/PR existiert, Abhängigkeiten gelöst, WIP-Slot frei.
+  *Nicht* der bloße Wunsch, ihn als nächstes zu machen.
+- `in-progress → done`: alle Closure-Kriterien erfüllt (Gates grün oder
+  per Carveout gedeckt) *und* Lerneintrag geschrieben.
+- `in-progress → next`: der Slice erweist sich als zu groß — zurück zur
+  Zerlegung.
+- `in-progress → open`: ein Blocker tritt auf, die Priorität ist wieder
+  offen (typisch mit Carveout, Modul 7).
+
+Am leichtesten übersehen werden die zwei **Rückführungen**
+(`in-progress → next/open`): Sie sehen aus wie Scheitern und werden
+deshalb gern als stilles Weiterschieben kaschiert. Genau das bricht die
+Auditierbarkeit — ein zu großer Slice gehört *sichtbar* zurück, nicht
+heimlich im selben Verzeichnis weiterbearbeitet.
 
 Anti-Pattern: "Ich verschiebe ihn in `in-progress/`, damit ich nicht
 vergesse, dass ich ihn morgen anfange." Damit lügt das Lifecycle-System
@@ -44,7 +57,7 @@ Gate ist *im aktuellen Reifegrad nicht hart* — und das ist
 dokumentiert. Wenn weder Carveout noch Bootstrap, dann ist Closure
 falsch.
 
-### (Anwenden — Transfer aus Modul 2) Welche Sub-Areas berührt der nächste Slice — und welcher Modus passt für jede?
+### (Analysieren — Transfer aus Modul 2) Welche Sub-Areas berührt der nächste Slice — und welcher Modus passt für jede?
 
 Beispiel-Antwort für `SL-014a` (Authentifizierung implementieren). Vier
 berührte Sub-Areas, je gegen die vier Pflichtkriterien begründet —

@@ -1,9 +1,18 @@
 # Grundlagen
 
 Diese Sektion legt die Begriffe und das konzeptuelle Vokabular fest, das
-in allen Modulen vorausgesetzt wird. Lies sie *vor* den Modulen — die
-Modul-Texte verlinken zurück auf diese Definitionen (Standard-Markdown),
-ohne sie erneut zu erklären.
+in allen Modulen vorausgesetzt wird. Die Modul-Texte verlinken zurück auf
+diese Definitionen (Standard-Markdown), ohne sie erneut zu erklären.
+
+*Pflicht-Vorablektüre sind nur* [`konzeptkarte.md`](konzeptkarte.md) *und*
+[`klassifikation.md`](klassifikation.md) *§2×2-Matrix* (siehe
+[Haupt-README §Vorab-Lektüre](../README.md#vorab-lektüre-pflicht)). Die
+übrigen Dateien — besonders die 451-zeilige
+[`konventionen.md`](konventionen.md) mit der Sub-Area- und
+Trigger-Klassen-Tiefe — sind **Nachschlagewerke**: sektionsweise bei
+Bedarf lesen (die Glossar-Tabelle als Pre-Training, der Bootstrap-Teil
+erst zu Modul 2/5), nicht am Stück vorab. Wer sie als Block vor Modul 0
+liest, lädt sich Modul-2-Tiefe auf, bevor ein Kontext dafür existiert.
 
 ## Inhalt
 

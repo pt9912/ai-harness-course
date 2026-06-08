@@ -4,12 +4,29 @@ Zugehöriges Modul: [Modul 0 — Einführung](../00-einfuehrung/modul-00-einfueh
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Welche drei Bestandteile hat ein Tool-Call laut Mini-Glossar?
+### (Erinnern + Verstehen) Drei Bestandteile eines Tool-Calls + Abgrenzung Agent/LLM/Tool-Call
 
 `name`, `arguments`, `result`. Das ist der strukturierte Aufruf einer
 Funktion durch das LLM. Bildlich: das LLM zeigt mit dem Finger (`name`),
 übergibt eine Liste Parameter (`arguments`), und bekommt eine Antwort
 zurück (`result`).
+
+Abgrenzung der drei Begriffe:
+
+- **LLM** — erzeugt nur Text (auch der Tool-Call-Wunsch ist zunächst
+  Text). Es kann nichts *tun*: keine Datei lesen, kein Gate aufrufen,
+  nichts ins Repo schreiben.
+- **Tool-Call** — die strukturierte Handlung, die aus dem Text-Wunsch
+  des LLM wird, sobald sie ausgeführt und ihr `result` zurückgegeben
+  wird.
+- **Agent** — die Schleife *um* das LLM: sie nimmt den Tool-Call-Wunsch,
+  führt ihn aus, gibt das `result` zurück in den Kontext und lässt das
+  LLM weiterarbeiten. Erst der Agent macht aus Text eine auditierbare
+  Handlungskette.
+
+Kurz: Das LLM allein kann nicht handeln; der Tool-Call ist die Handlung;
+der Agent ist die Schleife, die beide zu einem reproduzierbaren Lauf
+verbindet.
 
 In ernsten Setups kommen Korrelationsfelder hinzu — `agent.role`,
 `slice.id`, `requirement.id` — aber das sind Erweiterungen, die in
@@ -18,6 +35,21 @@ sie ist es kein Tool-Call, sondern eine Texteingabe.
 
 Falle: "vier Bestandteile" (mit Zeitstempel oder Status) ist nicht
 *Definition*, sondern Telemetrie-Erweiterung. Das Minimum sind drei.
+
+### (Analysieren) Ein Scheitermuster einem 2×2-Quadranten zuordnen
+
+Beispiel: Der Agent hat eine nicht geforderte Cache-Variante gebaut,
+weil die Spec an der Stelle stumm war. Quadrant: *inferential
+feedforward* — gefehlt hat ein **Guide vor der Handlung** (Spec/ADR, die
+die Entscheidung vorweggenommen hätte), nicht ein Sensor danach.
+
+Disziplin der Antwort: genau *einen* Quadranten benennen und sagen,
+*welche* Kontrolle gefehlt hat. Anti-Antwort "das Modell war schlecht"
+ist kein Quadrant — Modelle werden besser oder schlechter, aber die
+fehlende Kontrolle bleibt dieselbe. Gegenprobe (exzellent): dasselbe
+Muster gegen *computational feedback* (ein Test/Gate) halten und
+begründen, warum hier der billigere Hebel der Guide *vor* der Handlung
+gewesen wäre — ein Gate hätte den Fehlbau erst nachträglich gefangen.
 
 ### Wo verläuft die Grenze zwischen "guter Prompt" und "guter Harness"?
 

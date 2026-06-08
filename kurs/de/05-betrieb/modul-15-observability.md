@@ -218,7 +218,7 @@ und `adr.id`).
 ## Übungen
 
 * Analyse eines KI-Agenten-Laufs im Trace-Viewer
-* Identifiziere den teuersten Tool-Call und begründe, ob er nötig war
+* **(Anwenden — aktiviert LZ 2)** *Token-Kosten attribuieren.* Identifiziere zunächst den teuersten Tool-Call und begründe, ob er nötig war. Dann *attribuiere* die Gesamt-Token des Laufs: summiere Input- und Output-Token pro `agent.role` (Planner · Architect · Implementer · Reviewer · Verifier) und gib an, welche Rolle den größten Anteil trägt — als Zahl *und* als Prozentsatz der Gesamtsumme. Wo ein Span keinen Rollen-Tag trägt (Sammelposten), entscheide begründet, wie du ihn aufteilst (anteilig nach Tool-Calls? dem auslösenden Slice zugeschlagen?) — genau das ist das Buchhaltungs-Splitting eines Sammelpostens auf Kostenstellen aus dem Mini-Glossar.
 * **Cache-Hit-Rate spezifizieren** — aktiviert das Erschaffens-Lernziel
   zur Cache-Beobachtbarkeit und vorbereitet die Abschluss-Achse
   *Reproduzierbarkeit/exzellent* (siehe

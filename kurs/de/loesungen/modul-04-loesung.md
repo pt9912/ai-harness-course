@@ -38,22 +38,34 @@ wieder beanstanden müsste, hast du eine Fitness Function vergessen.
 Wenn die Entscheidung nur "es soll sauber sein" ist, ist sie noch
 keine ADR-würdige Regel.
 
-### Was ist der Unterschied zwischen *superseded* und *deprecated* ADR?
+### (Bewerten) `deprecated` ohne Nachfolger — korrekt gewählt oder verdeckte `superseded`-Lücke?
 
-- **Deprecated**: Die Entscheidung gilt weiterhin für vorhandenen Code,
-  aber für *neuen* Code nicht mehr. Es gibt (noch) keinen Nachfolger.
-  Migration ist optional. Beispiel: "Wir nutzen JUnit 4. (Deprecated:
-  neue Tests in JUnit 5.)"
-- **Superseded by ADR-N**: Eine spätere ADR-N hat diese Entscheidung
-  abgelöst. Die Begründung der Ablösung steht in ADR-N. Bestehender
-  Code soll migriert werden, der Trigger steht in ADR-N. Beispiel:
-  "ADR-7 Modellwahl Claude 3.5 (Superseded by ADR-12 Modellwahl
-  Claude 4.5)."
+Das Urteil hängt an *einem* Kriterium: **Existiert der zugrunde liegende
+Bedarf weiter?**
 
-Praxis: *Deprecated* ohne Folge-Plan ist meistens *Superseded* ohne
-Nachfolger — also eine Lücke. Wenn du nur "deprecated" schreibst und
-keine Migrationstrigger benennst, gehört das in den Steering Loop:
-entweder ADR-Folge-Slice oder Carveout.
+- **`deprecated` ist legitim**, wenn die Regel *ersatzlos* entfällt — der
+  Bedarf ist weg. Beispiel: "Wir nutzten JUnit 4. (Deprecated: keine
+  neuen JUnit-4-Tests.)" — JUnit 5 ist über einen *eigenen* ADR geregelt,
+  der alte braucht keinen Nachfolger.
+- **`deprecated` ist ein falsch etikettiertes `superseded`**, wenn der
+  Bedarf *bleibt*, aber kein Nachfolger benannt ist. Dann ist
+  "deprecated" nur ein Etikett für eine *offene Entscheidung* — die Regel
+  ist weg, das Problem aber nicht. Genau das ist die verdeckte Lücke:
+  jemand muss die Folgefrage noch entscheiden, und niemand sieht, dass
+  sie offen ist.
+
+Zur Erinnerung die Definitionen, an denen das Urteil hängt:
+
+- **Superseded by ADR-N**: eine spätere ADR-N hat die Entscheidung
+  abgelöst; Begründung und Migrationstrigger stehen in ADR-N. Beispiel:
+  "ADR-7 Modellwahl Sonnet 4.5 (Superseded by ADR-12 Modellwahl
+  Opus 4.8)."
+- **Deprecated**: nicht mehr gültig, *kein* Ersatz benannt.
+
+Folge für den Steering Loop: Bei verdeckter Lücke fordert der Reviewer
+einen Folge-ADR (oder Carveout) und markiert HIGH. Tritt das Muster
+dreimal auf, ist die ADR-*Status-Vergabe* selbst die Lücke — Guide:
+Status-Definitionen mit dem Bedarf-Kriterium in die ADR-Vorlage ziehen.
 
 ### (Anwenden) Fitness-Function-Übersetzung in einem Satz
 

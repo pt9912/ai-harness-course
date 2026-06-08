@@ -43,6 +43,24 @@ Wenn ein Replay nicht deterministisch ist, ist meist eine externe
 Antwort *nicht* gemockt — der Agent ruft die Realität an, die sich
 geändert hat. Häufiger Übeltäter: Filesystem-Stand oder Datums-Funktion.
 
+### (Analysieren) Drift quantifizieren — 3 von 20 rot
+
+Die **Drift-Rate** = rote Fälle ÷ Gesamt-Fälle = 3 ÷ 20 = **15 %**.
+
+Was die Zahl sichtbar macht, das "drei rot" allein verbirgt:
+
+- **Trend über Modellversionen.** Steigt die Rate über mehrere Wechsel
+  (5 % → 10 % → 15 %), ist der *Modellpfad selbst* der Verdächtige, nicht
+  ein Einzelfall — eine ordinale Notiz lässt sich zwischen Läufen nicht
+  vergleichen, ein Prozentwert schon.
+- **Steering-Loop-Schwelle.** Eine Zahl erlaubt eine *Regel* ("ab
+  Drift-Rate > 10 % Carveout-Pflicht + Erwartungs-Update-Slice"). "Ein
+  paar rot" ist keine Schwelle, an der ein Sensor auslösen kann.
+
+Wichtig: Die Rate ersetzt nicht die Diagnose-Reihenfolge aus Schritt 6
+(Toolchain → Modell-Routing → Erwartung → echte Regression) — sie sagt,
+*wie viel* driftet, die Reihenfolge sagt, *was* driftet.
+
 ### Wann wird ein Golden Set giftig (überfittet)?
 
 Drei Symptome:

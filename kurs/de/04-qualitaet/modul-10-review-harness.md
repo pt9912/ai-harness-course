@@ -200,7 +200,7 @@ Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
 
 ## Übungen
 
-* Review realer Änderungen im Begleit-Repo
+* **(Anwenden — aktiviert LZ 2)** *Reviewer-Lauf reproduzierbar einrichten.* Lass den Reviewer-Agenten auf demselben realen Diff im Begleit-Repo *zweimal* laufen. Sind Anzahl und Kategorien der Findings ähnlich? Wenn nicht: benenne die fehlende Reproduzierbarkeits-Voraussetzung (keine Skill-Datei in `.harness/`, unfixierter Eingangs-Kontext, ungepinntes Modell/Seed), stelle *eine* davon her und lass erneut zweimal laufen. Erfolgskriterium: gleiche Eingabe → *ähnliche* Findings (nicht identische — der inferential-feedback-Quadrant ist nie deterministisch, aber die Kategorien-Verteilung muss stabil werden).
 * Reviewe den fingierten kaputten Slice — finde die drei eingebauten Fehler
 * **(Analysieren — aktiviert LZ 3)** *Reviewer-Konflikt diagnostizieren.* Lass
   den Reviewer-Lauf auf demselben Slice *zweimal* laufen (oder vergleiche zwei
@@ -210,7 +210,7 @@ Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
   nicht-deterministisches Modellverhalten — und benenne, welche der drei Ursachen
   vorliegt und woran du sie erkennst. Erst die Diagnose, dann die Gegenmaßnahme
   (Skill schärfen, Kontext fixieren, Seed pinnen).
-* **(Erschaffen — aktiviert LZ 4)** *Reviewer-Skill für ein konkretes Repo schreiben.* Wähle eines der vier Fallstudien-Repos (oder dein eigenes). Schreibe eine Skill-Datei nach dem Muster des Worked Example (sechs Schritte: Geltungsbereich · Eingangs-Kontext · HIGH-Liste · MEDIUM/LOW/INFO · Negativbefund-Pflicht · Beispiel-Findings). Pflicht: die HIGH-Liste muss mindestens *zwei* Repo-spezifische Regeln nennen, die ein generischer Skill nicht abdeckt (z. B. *"git mv + Inhalt = zwei Commits"* für `grid-gym`; *"Accepted-ADRs immutable"* für `bess-ems`). Lege die Datei unter `.harness/reviewer/<repo-name>.md` ab und führe einen Lauf auf einem realen Diff durch — kommt eines deiner zwei Repo-spezifischen HIGHs zur Anwendung? Wenn nein, ist der Skill noch nicht scharf genug.
+* **(Erschaffen — aktiviert LZ 4)** *Reviewer-Skill für ein konkretes Repo schreiben.* Wähle eines der vier Fallstudien-Repos (oder dein eigenes). Schreibe eine Skill-Datei nach dem Muster des Worked Example (die sechs Schritte oben: Pfad/Kopf · Eingangs-Kontext · Kategorien-Regeln · Anti-Pattern/"Was bist du nicht" · Output-Schema · Steering-Loop-Eintrag — die HIGH/MEDIUM/LOW/INFO-Liste und die Negativbefund-Pflicht sitzen in den Kategorien-Regeln bzw. im Output-Schema). Pflicht: die HIGH-Liste muss mindestens *zwei* Repo-spezifische Regeln nennen, die ein generischer Skill nicht abdeckt (z. B. *"git mv + Inhalt = zwei Commits"* für `grid-gym`; *"Accepted-ADRs immutable"* für `bess-ems`). Lege die Datei unter `.harness/reviewer/<repo-name>.md` ab und führe einen Lauf auf einem realen Diff durch — kommt eines deiner zwei Repo-spezifischen HIGHs zur Anwendung? Wenn nein, ist der Skill noch nicht scharf genug.
 
 ## Reflexion
 

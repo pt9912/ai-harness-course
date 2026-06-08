@@ -4,22 +4,25 @@ Zugehöriges Modul: [Modul 13 — Quality Gates](../04-qualitaet/modul-13-qualit
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Nenne fünf generische Gate-Familien
+### (Erinnern) Nenne sechs generische Gate-Familien
 
 1. **Linter** — Stil und lokale Mustererkennung.
 2. **Typecheck** — Statische Typen, Compiler-Schicht.
 3. **Architekturtest** — Schichtungs- und Import-Regeln (`arch-check`).
-4. **Coverage** — Test-Abdeckung (mit Critical-Variante).
-5. **Security-Gate** — Datenfluss- und Vulnerability-Analyse (Semgrep,
+4. **Coverage** — Test-Abdeckung (Gesamt-Durchschnitt).
+5. **Critical Coverage** — gezielte Abdeckung der Risiko-Pfade, mit
+   *eigener* (höherer) Schwelle und eigener ADR-Kette. Eigene Familie,
+   nicht bloß eine Coverage-Variante — siehe nächste Selbstcheck-Frage.
+6. **Security-Gate** — Datenfluss- und Vulnerability-Analyse (Semgrep,
    CodeQL, Bandit).
 
-Über die fünf hinaus wachsen *domänenspezifische* Gates aus dem
+Über die sechs hinaus wachsen *domänenspezifische* Gates aus dem
 Steering Loop heraus (siehe Modul 13 §"Reichhaltige Gate-Landschaft"):
 `test-determinism`, `test-replay`, `solid-suppression-gate`,
 `test-mpc-property`, `native-sanitizer`. Diese sind nicht Standard,
 sondern aus konkreten Vorfällen entstanden.
 
-Faustregel: Ein Repo mit nur den fünf generischen Gates hat noch keine
+Faustregel: Ein Repo mit nur den sechs generischen Gates hat noch keine
 Schmerzen verarbeitet. Es ist kein schlechtes Repo — aber es hat keine
 *spezifische* Steering-Loop-Historie.
 
