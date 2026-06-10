@@ -249,4 +249,8 @@ Modul-spezifische Trigger:
 
 ## Weiterlesen
 
+* Wie *erzwungen* wird, dass die Gates wirklich liefen — das Handoff-Gate
+  und der inhaltsbasierte Nachweis gegen die „ich hab die Gates laufen
+  lassen"-Harness-Lüge:
+  [`../grundlagen/durchsetzungsschicht.md`](../grundlagen/durchsetzungsschicht.md).
 * Nächstes Modul: [Modul 14 — Docker Harness](../05-betrieb/modul-14-docker-harness.md)

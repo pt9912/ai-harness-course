@@ -418,4 +418,8 @@ Hard Rules. Modul-spezifische Trigger:
 ## Weiterlesen
 
 * 2×2-Matrix für Quadranten-Zuordnung: [`../grundlagen/klassifikation.md`](../grundlagen/klassifikation.md)
+* Hard Rules und Workflow *ausführbar* gemacht — Tool-Call-Gate
+  (Befehls-Guard) und Workflow-Skelett (Slash-Command) als
+  Durchsetzungsschicht:
+  [`../grundlagen/durchsetzungsschicht.md`](../grundlagen/durchsetzungsschicht.md).
 * Nächstes Modul: [Modul 10 — Review Harness](../04-qualitaet/modul-10-review-harness.md)

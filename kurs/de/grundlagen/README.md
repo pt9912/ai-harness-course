@@ -21,6 +21,7 @@ liest, lädt sich Modul-2-Tiefe auf, bevor ein Kontext dafür existiert.
 | [`konventionen.md`](konventionen.md) | Glossar, Verzeichniskonvention, Trennschärfen, Source Precedence, Spec-Stratifizierung, ID-Schema, Traceability-Constraint, `harness/README.md`-Pattern |
 | [`konzeptkarte.md`](konzeptkarte.md) | Reduzierte Artefaktkette, vier Leitfragen, 2×2-Schnellanker gegen kognitive Überlast |
 | [`klassifikation.md`](klassifikation.md) | Böckelers 2×2 (Feedforward/Feedback × Computational/Inferential), drei Harness-Kategorien (Maintainability, Architecture Fitness, Behaviour), OpenAIs drei operative Säulen (Context Engineering, Architectural Constraints, Entropy Management), Steering Loop, Lifecycle-Verteilung |
+| [`durchsetzungsschicht.md`](durchsetzungsschicht.md) | Fail-closed Bindung von Konventionen an die Agent-Schleife: drei Bindepunkte (Tool-Call-/Handoff-Gate, Workflow-Skelett) auf der 2×2-Matrix, vier Design-Eigenschaften, ehrliche Grenzen, Referenz-Artefakte (Claude-Code-Hooks) |
 | [`fallstudien.md`](fallstudien.md) | Vier reale Open-Source-Repos als laufendes Beispiel: `pt9912/u-boot`, `pt9912/grid-gym`, `pt9912/c-hsm-doc`, `pt9912/bess-ems` |
 | [`lernpfade.md`](lernpfade.md) | Drei Schwerpunkt-Pfade (Architect/Tech Lead, DevOps/Plattform, Implementation) — Vertiefungen je nach Rolle |
 | [`reflexion-vorlage.md`](reflexion-vorlage.md) | Vier Standardfragen für Fehler-Provokations- *und* Diagnose-Übungen (Diagnose-Variante für Frage 2/3) — productive failure systematisch in Lernen überführen |
