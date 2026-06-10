@@ -50,9 +50,10 @@ Vier Klassen aus
 2. **Promotion-Trigger** — Eintrag wandert aus dem "Nicht
    behauptet"-Block in die Haupt-Tabelle. Beispiel: **T4**
    (Sensors-Roster bei erstem Code-Slice, GF-WE Schritt 6).
-3. **Cross-Reference-Trigger** — wechselseitige Verlinkung,
-   typisch Spec ↔ ADR. Beispiel: **T6** (Cross-Reference in
-   `spec/architecture.md` auf ADR-0001, GF-WE Schritt 8).
+3. **Cross-Reference-Trigger** — Verlinkung zwischen Dokumenten,
+   normativ nur *aufwärts* (volatil→stabil). Beispiel: **T6** (ADR-0001
+   verweist via `Schärft:` aufwärts auf `spec/architecture.md` — nicht
+   die Sicht auf die ADR; GF-WE Schritt 8).
 4. **Acceptance-Trigger** — Phase-Übergang via Sign-off.
    Beispiel: **T7** (ADR-Review-Auslöser für *Proposed* →
    *Accepted*, GF-WE Schritt 8).
@@ -175,9 +176,9 @@ sind BF — Hybrid in der Sub-Area *Konventionen*").
 
 - Fünf Trigger benannt, jeder einer der vier Klassen zugeordnet.
 - Pro Zeile eine kurze Begründung, die auf das *Trigger-Merkmal*
-  zeigt (z. B. "T6 = Cross-Reference, weil ADR und Spec sich
-  wechselseitig verlinken müssen — eine Richtung allein wäre ein
-  Sync-Trigger").
+  zeigt (z. B. "T6 = Cross-Reference, weil eine neue ADR normativ in
+  den Artefakt-Graphen eingehängt wird (ADR → Spec/LH, aufwärts) — ein
+  bloßer Pointer-Abgleich wäre ein Sync-Trigger").
 
 **Typische Fehler:**
 
@@ -264,7 +265,7 @@ wiederholt.
   Sync ohne Erklärung "warum nicht Cross-Reference" macht die
   Klassifikation unprüfbar. Maßstab für *solide*: pro Zeile ein
   Argument, das das Trigger-Merkmal benennt (Pointer vs. Promotion
-  vs. wechselseitige Verlinkung vs. Phase-Übergang).
+  vs. normative Aufwärts-Verlinkung (ADR→Spec) vs. Phase-Übergang).
 - **Phasen-Karte ohne Heterogenität** (Übung 3). Zwei Symptome:
   (a) alle Sektionen auf einer oder zwei Stufen (typisch: alle auf
   Phase 3 oder 4) — die Heterogenität verfehlt, die das Lehr-Ergebnis

@@ -55,11 +55,13 @@ Anforderung gewahrt bleibt.
 
 ## 3. Defaults und Konstanten
 
-<!-- Werte, die in Code fest sind. Ändern via ADR. -->
+<!-- Werte, die in Code fest sind. Die ADR, die einen Wert festlegt,
+deklariert das aufwärts in ihrem Schärft:-Feld (Kurs §Referenz-Richtung) —
+kein ADR-Rückzeiger hier. -->
 
-| Name | Wert | Begründung | ADR |
-|---|---|---|---|
-| `MAX_BATCH_SIZE` | 100 | <…> | <ADR-NN> |
+| Name | Wert | Begründung |
+|---|---|---|
+| `MAX_BATCH_SIZE` | 100 | <…> |
 
 ## 4. Fehler-Codes und Logging-Felder
 

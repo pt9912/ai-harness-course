@@ -274,4 +274,7 @@ Modul-spezifische Trigger:
 ## Weiterlesen
 
 * Docker-only als Hard Rule mit Falsch/Richtig-Beispiel: [Modul 9](../03-agenten/modul-09-implementierung.md)
+* Wie die make/Docker-only-Regel *technisch* erzwungen wird (Tool-Call-Gate,
+  Befehls-Guard):
+  [`../grundlagen/durchsetzungsschicht.md`](../grundlagen/durchsetzungsschicht.md).
 * Nächstes Modul: [Modul 15 — Observability](modul-15-observability.md)

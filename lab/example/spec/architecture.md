@@ -108,8 +108,3 @@ sequenceDiagram
 **Atomic-Replace:** Reindex schreibt in `data/index/index.bin.new` und
 ersetzt erst nach erfolgreichem Schreiben. Damit bleibt der alte Index
 bei jedem Fehler intakt.
-
-> Welche ADR welche Stelle dieses Dokuments verbindlich macht, deklarieren
-> die ADRs selbst aufwärts im `**Schärft:**`-Feld; der kanonische ADR-Index
-> ist `docs/plan/adr/README.md` (keine Sicht→ADR-Abwärtszeiger, Kurs
-> §Referenz-Richtung).
