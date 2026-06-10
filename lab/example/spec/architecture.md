@@ -30,14 +30,14 @@ flowchart TB
 
 ## 2. Schichten und Constraints
 
-| Schicht | Verantwortlichkeit | Darf importieren | Darf NICHT importieren | ADR |
-|---|---|---|---|---|
-| Types | Domain-Modell (Pure), keine I/O | — | alle anderen | ADR-0001 |
-| Index | Vektor-Storage, Cosinus-Berechnung | Types | Service, UI, Embedding | ADR-0001, ADR-0003 |
-| Embedding | LLM-Adapter, Caching | Types | Service, UI, Index | ADR-0001, ADR-0002 |
-| Audit | OTel-Spans, Log-Formatter | Types | Service, UI | ADR-0001 |
-| Service | Geschäftslogik (Reindex, Search) | Types, Index, Embedding, Audit | UI | ADR-0001 |
-| UI | HTTP-Handler, Input-Validierung | Service, Types | Index, Embedding, Audit direkt | ADR-0001 |
+| Schicht | Verantwortlichkeit | Darf importieren | Darf NICHT importieren |
+|---|---|---|---|
+| Types | Domain-Modell (Pure), keine I/O | — | alle anderen |
+| Index | Vektor-Storage, Cosinus-Berechnung | Types | Service, UI, Embedding |
+| Embedding | LLM-Adapter, Caching | Types | Service, UI, Index |
+| Audit | OTel-Spans, Log-Formatter | Types | Service, UI |
+| Service | Geschäftslogik (Reindex, Search) | Types, Index, Embedding, Audit | UI |
+| UI | HTTP-Handler, Input-Validierung | Service, Types | Index, Embedding, Audit direkt |
 
 **Konsequenz:** Service ist der einzige "Sammler". UI darf weder Index
 noch Embedding direkt aufrufen — alle Quereinstiege gehen über
@@ -45,10 +45,10 @@ Service.
 
 ## 3. Externe Abhängigkeiten
 
-| System | Rolle | ADR | Substituierbarkeit |
-|---|---|---|---|
-| Embedding-Modell | Embedding-Erzeugung | ADR-0002 | Adapter-Pattern: Modell-Wechsel ohne Service-Änderung |
-| Object Storage (optional) | Index-Persistenz | ADR-0003 | Lokales Filesystem vs. S3-API |
+| System | Rolle | Substituierbarkeit |
+|---|---|---|
+| Embedding-Modell | Embedding-Erzeugung | Adapter-Pattern: Modell-Wechsel ohne Service-Änderung |
+| Object Storage (optional) | Index-Persistenz | Lokales Filesystem vs. S3-API |
 
 ## 4. Sequenz-Diagramme
 
@@ -109,8 +109,7 @@ sequenceDiagram
 ersetzt erst nach erfolgreichem Schreiben. Damit bleibt der alte Index
 bei jedem Fehler intakt.
 
-## 6. ADR-Index
-
-- [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) — Hexagonale Architektur mit Layering
-- [ADR-0002](../docs/plan/adr/0002-modellwahl-embedding.md) — Modellwahl für Embedding (mit Adapter-Pattern)
-- [ADR-0003](../docs/plan/adr/0003-index-storage-format.md) — Index-Storage-Format (Custom Binary v1)
+> Welche ADR welche Stelle dieses Dokuments verbindlich macht, deklarieren
+> die ADRs selbst aufwärts im `**Schärft:**`-Feld; der kanonische ADR-Index
+> ist `docs/plan/adr/README.md` (keine Sicht→ADR-Abwärtszeiger, Kurs
+> §Referenz-Richtung).

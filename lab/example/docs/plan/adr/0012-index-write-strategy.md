@@ -6,8 +6,11 @@
 
 **Autor:** Kurs-Lab
 
-**Bezug:** LH-FA-IDX-003 (Index-Schreib-Idempotenz und Atomarität),
-ADR-0003 (Index-Storage-Format)
+**Bezug:** [LH-FA-IDX-003](../../../spec/lastenheft.md#lh-fa-idx-003--index-schreib-idempotenz-und-atomarität) (Index-Schreib-Idempotenz und Atomarität),
+[ADR-0003](0003-index-storage-format.md) (Index-Storage-Format)
+
+**Schärft:** [`spezifikation.md` §1](../../../spec/spezifikation.md#1-algorithmen-und-datenflüsse) (Atomic-Replace / Schreib-Semantik)
+und [`architecture.md` §5](../../../spec/architecture.md#5-fehlermodelle-und-resilienz) (Atomic-Replace).
 
 ---
 

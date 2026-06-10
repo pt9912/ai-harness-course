@@ -94,12 +94,10 @@ Index ist beobachtbar).
 - **Boundary:** Given ein Crash während `writer.write_index` (simuliert via `kill -9` zwischen Temp-File-Schreiben und Rename), when der Service neu startet, then der Index-Lese-Pfad lädt den letzten konsistenten Stand — kein halb geschriebener Block.
 - **Negative:** Given ein nicht beschreibbares Zielverzeichnis, when `writer.write_index` aufgerufen wird, then Statuscode `E099`, kein Teil-Schreib-Artefakt im Verzeichnis.
 
-**Bezug:** verschärft LH-FA-01 (Indexierung) um Schreib-Semantik;
-operationalisiert durch [ADR-0012](../docs/plan/adr/0012-index-write-strategy.md).
+**Bezug:** verschärft LH-FA-01 (Indexierung) um Schreib-Semantik.
 LH-QA-02 (Reproduzierbarkeit) ist eine *Konsequenz* dieser Anforderung
-— deterministischer Tie-Break (siehe `slice-009`) und idempotente
-Schreib-Operationen zusammen garantieren bit-identische Index-Files
-bei identischer Eingabe.
+— deterministischer Tie-Break und idempotente Schreib-Operationen
+zusammen garantieren bit-identische Index-Files bei identischer Eingabe.
 
 **Out-of-Scope:** Verteilter Index (Single-Writer-Annahme).
 

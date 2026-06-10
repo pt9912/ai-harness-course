@@ -6,7 +6,10 @@
 
 **Autor:** Kurs-Lab
 
-**Bezug:** LH-FA-01, LH-QA-01
+**Bezug:** [LH-FA-01](../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung), [LH-QA-01](../../../spec/lastenheft.md#lh-qa-01--performance)
+
+**Schärft:** [`spezifikation.md` §3](../../../spec/spezifikation.md#3-defaults-und-konstanten) (`EMBEDDING_DIM`, `SECTION_MAX_CHARS`);
+[`architecture.md` §3](../../../spec/architecture.md#3-externe-abhängigkeiten) (Embedding-Modell).
 
 ---
 
