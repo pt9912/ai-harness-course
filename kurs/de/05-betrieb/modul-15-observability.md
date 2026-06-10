@@ -10,7 +10,7 @@
 > (Sensoren & Schemata bauen, LZ 5–6):** Übungen · Reflexion · Selbstcheck.
 > Lies Teil A und arbeite das Worked Example *durch*, bevor du Teil B
 > öffnest — der Trenner steht sichtbar vor den Übungen
-> ([§Pause-Punkt](#pause-punkt-lesen-bauen)). Wer A und B in einer
+> ([§Pause-Punkt](#pause-punkt-lesen--bauen)). Wer A und B in einer
 > Sitzung liest, hält am Ende sechs Konzepte gleichzeitig offen — genau
 > die Überlast, die das Modul vermeiden will.
 
