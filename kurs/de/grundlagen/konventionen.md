@@ -272,9 +272,10 @@ designierten Überschrift (z. B. `## Geschichte` oder die Versions-Tabelle),
 die der Check von der Prüfung ausnimmt.
 
 *Aufwärts-Kanten als klickbare Links — und ihre Reifestufe.* Die erlaubten
-Aufwärts-Referenzen (ADR-`**Bezug:**` → `LH-*`, ADR-`**Schärft:**` → Spec-§)
-werden als **Markdown-Link** geschrieben, nicht als nackte ID — so kommt der
-Leser direkt zur Quelle (Anforderung bzw. geschärfte Spec-Stelle). Der
+Aufwärts-Referenzen — die ADR-Felder `**Bezug:**` und `**Schärft:**`
+([§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument)) — werden als
+**Markdown-Link** geschrieben, nicht als nackte ID, so kommt der Leser
+direkt zur Quelle. Der
 `check-references`-Gate hier prüft aber nur die *Token-Richtung* (kein
 `ADR-`/`slice-` abwärts im Spec-Körper), **nicht** die Link-/Anker-Auflösung:
 Wird eine Ziel-Überschrift umbenannt, rottet der Aufwärts-Link *still* — die
@@ -362,11 +363,10 @@ Hauptmatrix in drei Zeilen:
 | **Sicht** | Normativ: Use-Case ↔ Vertrags-ID | Normativ: visualisiert | intra (Peers) | ❌ ¹ |
 
 ¹ Spec → ADR existiert im bindenden Text nicht — auch nicht als Quellen-
-Spalte. Die Aufwärts-Kante trägt alles: **ADR → `LH-*`** (Anforderung — das
-Lastenheft wird *nie* geschärft) bzw. für Technik/Sicht **ADR → Spec-§** (die
-ADR deklariert, was sie schärft → **Änderungskopplung**: wer die ADR ändert,
-zieht von dort die betroffenen Spec-Stellen). Provenance lebt allein in der
-Historie-Tabelle (Regel 5); `check-references` erzwingt das über alle Straten.
+Spalte. Die aufwärts zeigende ADR trägt alles (ADR → `LH-*` bzw. ADR →
+Spec-§, *siehe oben*); das Lastenheft wird dabei *nie* geschärft. Provenance
+lebt allein in der Historie-Tabelle (Regel 5); `check-references` erzwingt
+das über alle Straten.
 
 Die Spalten **Slice/Carveout/Roadmap** sind für *alle* Spec-Straten ❌ —
 das Spec-Layer referenziert nie abwärts (wie die „Lastenheft"-Zeile der
