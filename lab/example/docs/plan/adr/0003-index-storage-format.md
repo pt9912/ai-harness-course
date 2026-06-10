@@ -6,7 +6,7 @@
 
 **Autor:** Kurs-Lab
 
-**Bezug:** [LH-QA-01](../../../spec/lastenheft.md#lh-qa-01-performance), [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02-reproduzierbarkeit)
+**Bezug:** [LH-QA-01](../../../spec/lastenheft.md#lh-qa-01--performance), [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit)
 
 **Schärft:** [`spezifikation.md` §3](../../../spec/spezifikation.md#3-defaults-und-konstanten) (`INDEX_STORAGE`) und [§6](../../../spec/spezifikation.md#6-externe-verträge)
 (Vektor-Storage-Format); [`architecture.md` §3](../../../spec/architecture.md#3-externe-abhängigkeiten) (Object Storage).

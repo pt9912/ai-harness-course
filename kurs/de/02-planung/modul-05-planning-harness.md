@@ -1,6 +1,6 @@
 # Modul 5 — Planning Harness
 
-> **Aufwand:** ca. 90 Min Lesen · 110 Min Übung. Anschluss: erster [Phasen-Checkpoint A](../grundlagen/checkpoints.md#checkpoint-a-nach-phase-01-spec-und-architektur) sollte vor diesem Modul liegen.
+> **Aufwand:** ca. 90 Min Lesen · 110 Min Übung. Anschluss: erster [Phasen-Checkpoint A](../grundlagen/checkpoints.md#checkpoint-a--nach-phase-01-spec-und-architektur) sollte vor diesem Modul liegen.
 
 ## Mini-Glossar für dieses Modul
 
@@ -154,7 +154,7 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
    durch `harness/conventions.md` (oder ein gleichwertiges Artefakt) als
    Strukturregel verankert?
 2. **Phase-Reife der berührten Artefakt-Sektionen** — Phase 0–5 aus der
-   Phase × Modus-Matrix in [Modul 2](../01-spec-und-architektur/modul-02-harness-bootstrap.md#phasen-modus-die-zweidimensionale-reife-matrix).
+   Phase × Modus-Matrix in [Modul 2](../01-spec-und-architektur/modul-02-harness-bootstrap.md#phasen--modus--die-zweidimensionale-reife-matrix).
 3. **Evidenz- und Diskrepanz-Risiko** — wie groß ist die Gefahr, dass
    Inventur den Code-Bestand und die Doku-Aussage als divergent
    ausweist? Bei GF meist niedrig (Doc führt — Inventur prüft nur

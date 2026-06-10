@@ -6,7 +6,7 @@
 
 **Autor:** Kurs-Lab
 
-**Bezug:** [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02-reproduzierbarkeit) (Reproduzierbarkeit/Auditierbarkeit), Modul 1 §Closure, Modul 11 Worked Example
+**Bezug:** [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit/Auditierbarkeit), Modul 1 §Closure, Modul 11 Worked Example
 
 **Schärft:** Planning-Closure-Konvention (`docs/plan/planning/`) + Gate
 `verify-closure-notes` — *kein* Spec-Stratum (Prozess-ADR).
