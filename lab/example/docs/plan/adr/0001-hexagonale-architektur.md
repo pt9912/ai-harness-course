@@ -6,7 +6,7 @@
 
 **Autor:** Kurs-Lab
 
-**Bezug:** [LH-FA-01](../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung), [LH-FA-02](../../../spec/lastenheft.md#lh-fa-02--semantische-suche), [LH-FA-03](../../../spec/lastenheft.md#lh-fa-03--audit-logging)
+**Bezug:** [LH-FA-01](../../../spec/lastenheft.md#lh-fa-01-dokument-indexierung), [LH-FA-02](../../../spec/lastenheft.md#lh-fa-02-semantische-suche), [LH-FA-03](../../../spec/lastenheft.md#lh-fa-03-audit-logging)
 
 **Schärft:** [`architecture.md` §2](../../../spec/architecture.md#2-schichten-und-constraints) (Schichten / Layering-Constraints).
 
