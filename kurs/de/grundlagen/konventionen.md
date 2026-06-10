@@ -260,7 +260,7 @@ anderes.
 entscheidbare* und *semantische* Kanten; ein einzelner grep deckt nur die
 erste Hälfte ab.
 
-*Maschineller Gate (`check-references`, fail-closed in `make gates`)* —
+*Maschineller Gate (`check-references`, fail-closed in `make verify`)* —
 eine *computational feedforward*-Kontrolle wie der
 [Traceability-Constraint](#traceability-constraint):
 
