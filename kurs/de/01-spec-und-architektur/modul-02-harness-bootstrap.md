@@ -327,7 +327,7 @@ die abstrakten Definitionen stehen dort, hier nur die Instanzen.
 *Hinweis zur T-Nummerierung:* Die Trigger sind durch das
 DocSearch-Beispiel nummeriert (T1 = Pointer in README,
 T2 = Pointer in AGENTS, T4 = Promotion, T5 = erste ADR-Vorschläge,
-T6 = Cross-Reference Spec ↔ ADR, T7 = ADR-Review-Auslöser).
+T6 = Cross-Reference ADR → Spec (aufwärts), T7 = ADR-Review-Auslöser).
 **T3 ist BF-spezifisch** und tritt im Greenfield-Walkthrough nicht
 auf — er erscheint in Worked Example 2 als Sync-Trigger in
 BF-Diskrepanz-Auslöse-Variante.
@@ -347,7 +347,7 @@ BF-Diskrepanz-Auslöse-Variante.
 | 5 | `docs/plan/planning/roadmap.md` mit Welle + Release-Mapping; `releasing.md` mit Release-Strategie | `roadmap.md` 1 → 2; `releasing.md` 1 → 2 | keine |
 | 6 | Sensors-Roster im "Nicht behauptet"-Block (Prosa-Pointer-Liste, kein Status) | `harness/README.md` §Sensors Sub-1 → Sub-2; `AGENTS.md` §4 Sub-1 → Sub-2 | **T4** (Promotion-Auslöser bei erstem Code-Slice) |
 | 7 | `spec/architecture.md` + `spec/spezifikation.md` Outline mit `ARC-*`/`SPEC-*` | beide 1 → 2 | **T5** (erste ADR-Vorschläge aus Architektur-Outline) |
-| 8 | `docs/plan/adr/0001-doc-source-of-truth.md` mit Status *Proposed* | `0001-…md` 0 → 2; ADR-Index 1 → 2 | **T6** (Cross-Reference Spec ↔ ADR), **T7** (ADR-Review-Auslöser) |
+| 8 | `docs/plan/adr/0001-doc-source-of-truth.md` mit Status *Proposed* | `0001-…md` 0 → 2; ADR-Index 1 → 2 | **T6** (Cross-Reference: ADR → Spec, aufwärts), **T7** (ADR-Review-Auslöser) |
 | Bootstrap-Ende | Bereit für ersten Code-Slice — Workflow-Übergang | — | — |
 
 **Anmerkung zur Tabellen-Splittung.** Die Setup-Phase (0–4) etabliert
@@ -575,7 +575,7 @@ zu:
 | T2 (Pointer in `AGENTS.md`) | … | … | … |
 | T4 (Promotion bei Code-Slice) | … | … | … |
 | T5 (erste ADR-Vorschläge aus Architektur-Outline) | … | … | … |
-| T6 oder T7 (Cross-Reference Spec↔ADR / ADR-Review) | … | … | … |
+| T6 oder T7 (Cross-Reference ADR→Spec / ADR-Review) | … | … | … |
 
 Die dritte Spalte ist das *Spiegeln gegen die Phase-Reife* (zweite
 Hälfte des Lernziels): derselbe Trigger bedeutet etwas anderes, je
@@ -603,7 +603,7 @@ für ein anderes Artefakt eigene Sektions-Namen einsetzen:
 
 | Sektion | Aktuelle Phase (0–5) | Begründung | Nächster Modus-/Trigger-Anker |
 |---|---|---|---|
-| §Kernidee | 4 | "Vertrag steht, Code wird daran gemessen" | bei Spec-Änderung → T6 Cross-Reference-Trigger zur ADR |
+| §Kernidee | 4 | "Vertrag steht, Code wird daran gemessen" | bei ADR, die diese § schärft → T6 Cross-Reference (ADR → Spec, aufwärts) |
 | §Sensors | … | … | … |
 | §Source Precedence | 2 | "Top-Level-Wunschbild, noch nicht durchverbunden" | … |
 | §Adaptions-Block | 1 | "Template kopiert, Versprechen zu füllen" | T1 Sync-Trigger setzen, sobald MR-001 ergänzt wird |
@@ -745,5 +745,9 @@ die modulspezifischen Indikatoren sind:
   [Modul 11 — Verification Harness](../04-qualitaet/modul-11-verification.md).
 * Lernervorstellungen-Sammlung für Conceptual-Change-Reflexion:
   [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md).
+* Die Durchsetzungsschicht als Bootstrap-Deliverable (Konventionen
+  fail-closed an die Agent-Schleife binden — aber erst, wenn Gates
+  existieren; bootstrap-aware):
+  [`../grundlagen/durchsetzungsschicht.md`](../grundlagen/durchsetzungsschicht.md).
 * Vorheriges Modul: [Modul 1 — Der Entwicklungszyklus](modul-01-entwicklungszyklus.md).
 * Nächstes Modul: [Modul 3 — Lastenheft und Spezifikation](modul-03-lastenheft.md).
