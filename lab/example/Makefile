@@ -5,7 +5,7 @@
 COURSE_LANG ?= go
 RUN ?= welle-1-baseline
 
-.PHONY: help gates ci fullbuild agent-implement agent-review verify verify-slice verify-closure-notes replay trace release
+.PHONY: help gates ci fullbuild agent-implement agent-review verify verify-slice verify-closure-notes check-references replay trace release
 
 help: ## Targets anzeigen
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -47,6 +47,9 @@ agent-review: ## Review-Fixture fuer Modul 9 anzeigen
 verify-closure-notes: ## ADR-0011 — Closure-Note-Pflicht fuer done/-Slices pruefen
 	@python3 tools/check_closure_notes.py
 
+check-references: ## Kurs §Referenz-Richtung — Spec-Straten ohne ADR/Slice-Abwaertszeiger, keine superseded-ADR-Referenzen
+	@python3 tools/check_references.py
+
 verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-009
 	@test -n "$(SLICE)" || (echo "Usage: make verify-slice SLICE=slice-009"; exit 2)
 	@slice_path=$$(find docs/plan/planning -name "$(SLICE)*.md" -print -quit); \
@@ -56,7 +59,7 @@ verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-009
 	grep -q "make gates" "$$slice_path" || (echo "Missing gates evidence in DoD: $$slice_path"; exit 1); \
 	echo "verify-slice ok: $$slice_path"
 
-verify: verify-closure-notes ## Verifikation: Closure-Pflicht immer, Slice-DoD wenn SLICE gesetzt
+verify: verify-closure-notes check-references ## Verifikation: Closure-Pflicht + Referenz-Richtung immer, Slice-DoD wenn SLICE gesetzt
 	@if [ -n "$(SLICE)" ]; then $(MAKE) verify-slice SLICE=$(SLICE); fi
 
 replay: ## Golden-Set-Replay-Verzeichnis validieren: make replay RUN=welle-1-baseline

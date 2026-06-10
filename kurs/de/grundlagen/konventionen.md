@@ -36,6 +36,7 @@ Entscheidungen. Diese Begriffe gelten durchgängig.
 | Hard Rule | Negativregel, die der Agent nie brechen darf (z. B. "Optimierer darf nie direkt aufs Gerät schreiben"). Repo-spezifisch. |
 | Repo-Klasse | Charakter eines Repos im Harness: *Referenz* · *Safety/Control* · *Policy/Compliance*. Bestimmt, wie scharf Hard Rules und Sensors gesetzt werden. |
 | ID-Schema | Stabile Präfix-Klammer (`LH-*`, `HSM-*`, `GG-*`), die Spec-Anforderungen, Make-Target-Kommentare, ADRs und Commits verbindet. |
+| Referenz-Richtung (SDP) | Normative Referenzen zeigen nur volatil→stabil (`lastenheft.md` › ADR › Slice); Abwärts-/Seitwärts-Verweise sind Kontext, keine Spezifikation. Siehe [§Referenz-Richtung](#referenz-richtung-sdp-wer-darf-wen-referenzieren). |
 | Spec-Stratifizierung | Aufteilung der Spec in *vertraglich* (Lastenheft) und *technisch* (Spezifikation) mit eigener Precedence-Regel. |
 | Bootstrap-aware Gate | Gate mit weicher Frühphase: kennt eine Reifestufe und greift erst ab Trigger hart. Dokumentiert, was die Stufe ist. |
 
@@ -164,6 +165,232 @@ Ein konsistentes Präfix (`LH-*`, `HSM-*`, `GG-*`) verbindet:
 * PR-Beschreibung
 
 Damit wird der Traceability-Constraint maschinell prüfbar.
+
+### Referenz-Richtung (SDP): wer darf wen referenzieren
+
+Das ID-Schema *verbindet* Artefakte — aber nicht jede Verbindung ist
+erlaubt. Welche Referenz *normativ* wirken darf, regelt eine einzige
+Asymmetrie, das **Stable Dependencies Principle**: Abhängigkeiten zeigen
+zum Stabileren. Die [§Spec-Stratifizierung](#spec-stratifizierung) oben
+ist der Spezialfall *innerhalb* von `spec/` ("ADR darf Spezifikation
+schärfen, nie das Lastenheft"); die folgende Matrix dehnt dieselbe Logik
+auf die ganze Artefakt-Kette aus.
+
+**Stabilitäts-Rang** (stabil → volatil): **Vertrag › ADR › Slice** — die
+Hauptmatrix zeigt die Primär-Typen; zwischen Vertrag und ADR liegen die
+weiteren Spec-Straten **Technik › Sicht** (`spezifikation.md`,
+`architecture.md`), entfaltet in [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument).
+`lastenheft.md` instanziiert das Vertrags-Stratum. Carveout liegt auf
+Slice-Ebene, Roadmap/Welle außerhalb. Wir kollabieren
+Martins kontinuierliche Instabilitäts-Metrik (`I = Ce/(Ca+Ce)`) bewusst
+auf einen **Typ-Rang** — die Artefakt-Taxonomie ist endlich und benannt,
+damit wird die Regel lehr- und prüfbar.
+
+> **Die Matrix-Zeilen sind Stratum-*Klassen*, nicht Dateinamen.** Die Zeile
+> „Lastenheft" steht für das **Vertrags-Stratum** (die Decke); ein Projekt
+> kann mehrere Vertrags-, Technik- und Sicht-Dokumente haben. Wie ein neues
+> Spec-Dokument einem Stratum zugeordnet wird — und warum die Decke nicht
+> fix `lastenheft.md` ist — regelt [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument)
+> unten.
+
+| Dokument ↓ referenziert → | Lastenheft | ADR | Slice | Carveout | Roadmap/Welle |
+|---|---|---|---|---|---|
+| **Lastenheft** | Normativ: nur intra-`LH-*` | ❌ | ❌ | ❌ | ❌ |
+| **ADR** | Normativ: `LH-*`-Grundlage | Normativ/Lineage: aktive ADRs als Grundlage; superseded nur ADR-interne Historie | Kontext: Status-Provenance, Verifikations-Zeiger — *keine* Entscheidungsgrundlage | ❌ | ❌ |
+| **Slice** | Normativ: `LH-*`-Scope | Normativ: nur aktive ADRs | Kontext: triggered-by, blocked-by, follow-up-of | Kontext: eigener/offener Carveout, Debt-/Closure-Rückverweis | Kontext: Einordnung in Welle/Roadmap |
+| **Carveout** | Normativ: betroffene `LH-*` | Normativ: betroffene aktive ADRs | Kontext/Traceability: owner/verursachender/schließender Slice | Kontext: ersetzt/zusammengeführt/abhängig | Kontext: Welle/Planungseinordnung |
+| **Roadmap/Welle** | Kontext: Zielbild/Scope | Kontext: Architekturhintergrund | Kontext: Orchestrierung/Sequenz | Kontext: Risiko-/Debt-Übersicht | Kontext: Hierarchie/Sequenz |
+
+```mermaid
+flowchart BT
+    S["Slice<br/>(volatil)"] -->|normativ| A["ADR"]
+    S -->|normativ| L["lastenheft.md<br/>(stabil — Decke)"]
+    A -->|normativ| L
+    A -->|Lineage: supersedes/depends-on| A
+    C["Carveout"] -->|normativ: betroffene LH/ADR| A
+    C -->|normativ| L
+    S -. Kontext .-> C
+    R["Roadmap/Welle"] -. nur Kontext .-> S
+    style L fill:#fff4d6,stroke:#d4a017
+    style A fill:#fff4d6,stroke:#d4a017
+```
+
+Solide Kanten = normativ (immer aufwärts + die eine ADR-interne Lineage-
+Schleife). Gestrichelt = Kontext. **Die normativen Kanten bilden einen
+strikt aufwärts gerichteten azyklischen Graphen (DAG) plus genau eine
+Selbstkante** — kein Baum, denn Slice, Carveout und ADR haben je *zwei*
+normative Eltern (Slice/Carveout → ADR *und* `LH-*`; ADR → `LH-*` *und*
+Spec-§). Das ist die ganze Theorie in einem Bild.
+
+**Tragende Regeln:**
+
+1. **Normativ nur volatil → stabil.** Alles Richtung Slice oder zwischen
+   Slices ist Planungskontext, keine Spezifikation.
+2. **Autorität schlägt Stabilität.** Eine superseded ADR ist historisch
+   stabil, aber nicht autoritativ — Slices referenzieren nur *aktive*
+   ADRs. Die Supersedes-Kette bleibt ADR-intern.
+3. **Carveout → Slice ist keine normative Abhängigkeit** — Schuld-,
+   Ablauf- und Traceability-Buchführung (owner, Ursache, Closure). Die
+   fachliche Begründung läuft nie über den Slice, sondern über `LH-*`
+   oder aktive ADR.
+4. **Roadmap/Welle steht außerhalb der normativen Klammer** — darf Slices
+   orchestrieren und gruppieren, erzeugt aber keine Spezifikation.
+5. **Provenance: Body vs. Changelog.** Ein Abwärts-Zeiger im
+   *Anforderungs-/Entscheidungs-Text* ist verboten. Provenance in einer
+   abgegrenzten *Versions-/Historie-Tabelle am Dokument-Rand* ist Kontext
+   und für alle Artefakte erlaubt (die Slice-ID bleibt ein stabiler
+   Token, auch nachdem die Datei nach `done/` wandert). Der Unterschied
+   ist nicht der Stabilitätsrang, sondern *ob die Referenz Teil der
+   Spezifikations-Logik ist*.
+
+**ADR-Lineage vs. Carveout-Lineage — gleiche Form, andere Normativität.**
+Die Diagonalzellen ADR→ADR und Carveout→Carveout sehen identisch aus
+(supersede / depends-on / merged), tragen aber entgegengesetzte Kraft:
+
+| | Form | Normativ? | Warum |
+|---|---|:---:|---|
+| ADR→ADR | Supersedes, Depends-on | **ja** (Lineage) | ADRs sind *Entscheidungen* → tragen Autorität |
+| Carveout→Carveout | ersetzt, zusammengeführt | **nein** (Kontext) | Carveouts sind *Schuld* → tragen nur Buchführung |
+
+Die Matrix entscheidet damit nicht über *Linktypen*, sondern über
+*Artefaktnatur* — derselbe Pfeil bedeutet je nach Quell-Artefakt etwas
+anderes.
+
+**Prüfung — zwei Ebenen.** Die Referenz-Regeln zerfallen in *mechanisch
+entscheidbare* und *semantische* Kanten; ein einzelner grep deckt nur die
+erste Hälfte ab.
+
+*Maschineller Gate (`check-references`, fail-closed in `make verify`)* —
+eine *computational feedforward*-Kontrolle wie der
+[Traceability-Constraint](#traceability-constraint):
+
+- ein Spec-Stratum (`lastenheft.md`, `spezifikation.md`, `architecture.md`) enthält `ADR-` oder `slice-` *außerhalb* der Historie-/Versions-Tabelle → fail
+- Slice referenziert eine ADR mit `Status: Superseded` → fail
+
+Damit Regel 5 mechanisch greift, lebt Provenance nur unterhalb einer
+designierten Überschrift (z. B. `## Geschichte` oder die Versions-Tabelle),
+die der Check von der Prüfung ausnimmt.
+
+*Aufwärts-Kanten als klickbare Links — und ihre Reifestufe.* Die erlaubten
+Aufwärts-Referenzen — die ADR-Felder `**Bezug:**` und `**Schärft:**`
+([§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument)) — werden als
+**Markdown-Link** geschrieben, nicht als nackte ID, so kommt der Leser
+direkt zur Quelle. Der
+`check-references`-Gate hier prüft aber nur die *Token-Richtung* (kein
+`ADR-`/`slice-` abwärts im Spec-Körper), **nicht** die Link-/Anker-Auflösung:
+Wird eine Ziel-Überschrift umbenannt, rottet der Aufwärts-Link *still* — die
+gleiche Rot-Klasse, die wir abwärts verboten haben, nur unbewacht. Die
+mechanisch erzwungene Reifestufe löst Links auf, prüft Anker-Existenz und
+erzwingt die volle Matrix am Zielknoten; Referenz-Implementierung ist
+`tools/check_refs.py` aus dem u-boot-Harness (gleiche Build-Familie). Das Lab
+bleibt bewusst bei der grep-Variante, um die mechanische Hälfte minimal und
+lesbar zu halten.
+
+*Agentischer Review-Sensor (nicht grep-bar).* Ob eine ADR→Slice-Referenz
+ein erlaubter *Verifikations-Zeiger/Provenance* oder eine verbotene
+*Entscheidungsgrundlage* ist, ist eine semantische Unterscheidung — sie
+gehört zum Reviewer-Agenten, nicht zum Linter. Ein grep, der jedes
+`slice-NNN` im ADR-Body fängt, würde legitime Verifikations-Zeiger (etwa
+„`make test-determinism` (slice-009) verifiziert auch LH-FA-IDX-003")
+falsch-positiv flaggen. Faustregel für den Reviewer: *referenziert die
+ADR den Slice, um eine Entscheidung zu **begründen** (verboten) oder um
+zu zeigen, wo sie **verifiziert/entstanden** ist (erlaubt)?*
+
+Bereits `Accepted`-ADRs sind immutable: vor Einführung dieser Konvention
+entstandene Grenzfälle werden **grandfathered**, nicht durch eine
+superseding ADR nachgezogen. Der Gate prüft nur ab Einführung neu.
+
+#### Spec-Straten: mehr als ein Spec-Dokument
+
+Reale Projekte haben mehr als drei Spec-Dateien — `api-spec.md`,
+`data-model.md`, `sla.md`, `compliance.md`. Die Matrix operiert deshalb
+auf **Stratum-Klassen** (Rolle), nicht auf Dateinamen. Jedes Spec-Dokument
+fällt über zwei Achsen — *normativer Gehalt* und *Änderungs-Prozess* — in
+genau ein Stratum:
+
+| Stratum | Normativer Gehalt | Änderungs-Prozess | Lab | typisch auch |
+|---|---|---|---|---|
+| **Vertrag** (Decke) | eigene Anforderungen, abnahmebindend | Change Request | `lastenheft.md` | `compliance.md`, `sla.md` |
+| **Technik** | eigene technische Festlegungen | fortschreibbar, ADR-Schärfung erlaubt | `spezifikation.md` | `api-spec.md`, `data-model.md` |
+| **Sicht** | *keine* eigenen Anforderungen, derivativ | Diagramm-/View-Update | `architecture.md` | `deployment.md`, Sequenz-Views |
+
+**Nur Vertrag und Sicht sind obligatorisch; das Technik-Stratum ist
+optional.** Repos, die ihre technischen Festlegungen direkt in Vertrag
+oder Sicht falten, enforcen real nur zwei Klassen — das u-boot-Harness
+etwa klassifiziert ausschließlich `contract_spec` (`lastenheft.md`) und
+`view_spec` (`architecture.md`), ohne separates Technik-Stratum. Die Rang-
+*Ordnung* bleibt dieselbe; ein nicht vorhandenes Stratum fällt einfach aus
+der Kette.
+
+Generalisierter Rang: **Vertrag › Technik › Sicht › ADR › Slice** —
+deckungsgleich mit „Lastenheft sticht Spezifikation sticht Architektur"
+([§Spec-Stratifizierung](#spec-stratifizierung), [§Source Precedence](#source-precedence))
+und der [Konzeptkarten-Artefaktkette](konzeptkarte.md#artefaktkette). (Die
+drei Ordnungen — Herleitung, Konflikt-Autorität, Referenz-Stabilität —
+fallen für diese Kette *zusammen*; sie divergieren nur an der
+superseded-ADR-Grenze, Regel 2.)
+
+Die ADR ist die *Begründungs*-Schicht **unter** den Spec-Straten — und
+**ihre Kanten zeigen aufwärts**:
+
+- **ADR → `LH-*`**: die ADR referenziert die Anforderung, die sie begründet
+  (wie in der Hauptmatrix).
+- **ADR → Spec-§**: die ADR *deklariert, was sie schärft* (Acceptance-
+  Trigger, [§Vier Trigger-Klassen](#vier-trigger-klassen)). **Hier wohnt
+  die Änderungskopplung**: wer die ADR ändert, liest aus ihr selbst, welche
+  Spec-Stellen nachzuziehen sind.
+
+Die Gegenrichtung **Spec → ADR existiert im bindenden Text nicht** — und
+auch nicht als geduldete Quellen-Spalte: der Wert steht für sich, das Warum
+findet man über die *aufwärts* zeigende ADR. Die einzige tolerierte
+Provenance ist die Historie-/Changelog-Tabelle am Dokument-Rand (Regel 5),
+sonst nichts — ein Abwärts-Zeiger im Spec-Körper rottet, sobald ADRs
+superseded werden, und die Discovery läuft ohnehin von der ADR-Seite. Damit
+zeigt **jede** Kante strikt aufwärts; null Abwärts-Kanten im bindenden Text,
+Provenance nur unter `## Historie`. Der `check-references`-Gate setzt diese
+Decken-Regel über *alle* Spec-Straten durch, nicht nur über das Lastenheft.
+**Innerhalb** eines Stratums sind Dokumente *Peers*: Intra-Referenzen
+erlaubt (wie intra-`LH-*`), keine normative Querabhängigkeit, die Zyklen
+baut.
+
+Reference-Regeln je Stratum — verfeinert die „Lastenheft"-Zeile der
+Hauptmatrix in drei Zeilen:
+
+| Doc ↓ ref → | Vertrag | Technik | Sicht | ADR |
+|---|---|---|---|---|
+| **Vertrag** | intra (Peers) | ❌ | ❌ | ❌ ¹ |
+| **Technik** | Normativ: präzisiert Vertrag, Vertrag gewinnt | intra (Peers) | ❌ | ❌ ¹ |
+| **Sicht** | Normativ: Use-Case ↔ Vertrags-ID | Normativ: visualisiert | intra (Peers) | ❌ ¹ |
+
+¹ Spec → ADR existiert im bindenden Text nicht — auch nicht als Quellen-
+Spalte. Die aufwärts zeigende ADR trägt alles (ADR → `LH-*` bzw. ADR →
+Spec-§, *siehe oben*); das Lastenheft wird dabei *nie* geschärft. Provenance
+lebt allein in der Historie-Tabelle (Regel 5); `check-references` erzwingt
+das über alle Straten.
+
+Die Spalten **Slice/Carveout/Roadmap** sind für *alle* Spec-Straten ❌ —
+das Spec-Layer referenziert nie abwärts (wie die „Lastenheft"-Zeile der
+Hauptmatrix); darum hier weggelassen.
+
+**Platzierung wird deklariert, nicht geraten** — über zwei bestehende
+Mechanismen:
+
+1. **ID-Präfix kodiert das Stratum.** Die Matrix operiert auf Präfixen:
+   `LH-*` → Vertrag, `SPEC-*` → Technik, `ARC-*` → Sicht (Bootstrap-Beleg
+   in `modul-02`). Eine Sicht-Datei trägt sehr wohl `ARC-*`-*Struktur*-IDs
+   (Komponenten, Schnittstellen), nur keine eigenen *Anforderungs*-IDs —
+   das macht sie derivativ. Siehe [§ID-Schema](#id-schema-als-klammer).
+2. **Deklaration in `harness/conventions.md`** (Adaptions-Block, wie die
+   Zusatzklassen für Sensors-Bindung). Ein Spec-Dokument ohne deklariertes
+   Stratum ist eine *stille Setzung* — dieselbe Harness-Lüge-Klasse wie ein
+   undeklariertes Gate — und **nicht normativ zitierbar**, bis es deklariert
+   ist (analog Phase 4 „freigegeben für Verweise von außen").
+
+**Die Decke ist nicht fix.** Ein Policy/Compliance-Repo rankt Regulatorik
+*über* das Lastenheft („wir müssen" begrenzt „wir versprechen", siehe
+[§Source Precedence](#source-precedence)). Die Stratum-*Klassen* sind
+universal; die konkrete Rangwahl innerhalb des Vertrags-Stratums ist
+projektspezifisch und gehört in `harness/conventions.md`.
 
 ## harness/README.md als Einstiegspunkt
 
@@ -401,7 +628,7 @@ in einem Dokument *Folgeaktionen* in anderen aus. Vier Klassen:
 |---|---|---|
 | **Sync-Trigger** | Pointer in einem Dokument muss in einem anderen ergänzt werden | Neuer Eintrag in `conventions.md` → Pointer in `harness/README.md` |
 | **Promotion-Trigger** | Eintrag wandert aus "Nicht behauptet"-Block in Haupt-Tabelle | Make-Target real im Makefile entstanden → Sensor-Zeile gepromoted |
-| **Cross-Reference-Trigger** | Wechselseitige Verlinkung zwischen Dokumenten | Neue ADR → Spec/Architektur verweisen darauf |
+| **Cross-Reference-Trigger** | Verlinkung zwischen Dokumenten, normativ **nur volatil→stabil** ([§Referenz-Richtung](#referenz-richtung-sdp-wer-darf-wen-referenzieren)) | Neue ADR *deklariert aufwärts, was sie schärft* (ADR → Spec-§) und referenziert die Anforderung; der Acceptance-Trigger zieht die Spec nach. Ein Spec→ADR-Rückzeiger im bindenden Text existiert nicht (auch nicht als Quellen-Spalte) — Provenance nur in der Historie-Tabelle (Regel 5); `check-references` erzwingt das über alle Straten |
 | **Acceptance-Trigger** | Phase-Übergang via Sign-off (z. B. ADR Proposed → Accepted) | ADR-Review-Runde abgeschlossen → bindend |
 
 Trigger werden zwischen Bootstrap-Schritten ausgewertet — sie sind die

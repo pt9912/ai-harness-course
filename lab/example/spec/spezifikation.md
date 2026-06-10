@@ -19,9 +19,9 @@ Bei Konflikt gewinnt das Lastenheft.
 
 1. Verzeichnis rekursiv scannen, alle `*.md`-Dateien lesen.
 2. Pro Datei: Text in Abschnitte zerlegen (Trennung an `##`-Heading-Zeilen, erste Section vor erstem `##` zählt als Intro).
-3. Pro Abschnitt: Embedding berechnen via Embedding-Adapter (siehe ADR-0002).
+3. Pro Abschnitt: Embedding berechnen via Embedding-Adapter (Defaults §3).
 4. Vektor + Metadaten (`doc_path`, `section_title`, `section_index`) als Tupel speichern.
-5. Index speichern (Format gemäß ADR-0003).
+5. Index speichern (Format §6).
 6. Antwort `{"indexed_docs": <count>, "indexed_sections": <count>}` zurückgeben.
 
 **Komplexität:** O(n) in Anzahl Abschnitte, dominiert durch
@@ -88,14 +88,14 @@ Approximate-NN (ANN) ist in Welle 3 geplant — aktuell linear.
 
 ## 3. Defaults und Konstanten
 
-| Name | Wert | Begründung | ADR |
-|---|---|---|---|
-| `EMBEDDING_DIM` | 1024 | Vorgegeben durch Modell aus ADR-0002. | ADR-0002 |
-| `MAX_TOPK` | 100 | Lasttest-Grenze, höher → p95 reißt LH-QA-01. | ADR-0001 |
-| `SECTION_MAX_CHARS` | 4000 | Embedding-Modell-Kontext-Fenster. | ADR-0002 |
-| `QUERY_MAX_CHARS` | 1000 | UX + Embedding-Grenzen. | — |
-| `USER_HASH_SALT` | aus `config/secrets.env`, niemals im Repo. | DSGVO + LH-QA-04. | ADR-0001 |
-| `INDEX_STORAGE` | `data/index/index.bin` | Format-Wahl in ADR-0003. | ADR-0003 |
+| Name | Wert | Begründung |
+|---|---|---|
+| `EMBEDDING_DIM` | 1024 | Vorgegeben durch das Embedding-Modell. |
+| `MAX_TOPK` | 100 | Lasttest-Grenze, höher → p95 reißt LH-QA-01. |
+| `SECTION_MAX_CHARS` | 4000 | Embedding-Modell-Kontext-Fenster. |
+| `QUERY_MAX_CHARS` | 1000 | UX + Embedding-Grenzen. |
+| `USER_HASH_SALT` | aus `config/secrets.env`, niemals im Repo. | DSGVO + LH-QA-04. |
+| `INDEX_STORAGE` | `data/index/index.bin` | Gewähltes Index-Storage-Format. |
 
 ## 4. Fehler-Codes und Logging-Felder
 
@@ -112,14 +112,14 @@ Approximate-NN (ANN) ist in Welle 3 geplant — aktuell linear.
 |---|---|---|
 | `docsearch.reindex` | `indexed_docs`, `indexed_sections`, `duration_ms`, `embedding_calls` | LH-FA-01 |
 | `docsearch.search` | `q_hash`, `k`, `k_clamped`, `result_count`, `duration_ms`, `top_score` | LH-FA-02 |
-| `docsearch.embedding` | `model`, `cache_hit`, `tokens`, `duration_ms`, `cost_usd_estimate` | ADR-0002 |
+| `docsearch.embedding` | `model`, `cache_hit`, `tokens`, `duration_ms`, `cost_usd_estimate` | LH-FA-01, LH-FA-02 |
 | `docsearch.audit` | `event`, `user_id_hash`, `q_hash`, `result_count`, `latency_ms` | LH-FA-03 |
 
 ## 6. Externe Verträge
 
 | System | Version | Vertrag-Datei |
 |---|---|---|
-| Embedding-Modell | siehe ADR-0002, gepinnt im Adapter | `internal/embedding/contract.md` (sprach-spezifisch) |
+| Embedding-Modell | gepinnt im Adapter | `internal/embedding/contract.md` (sprach-spezifisch) |
 | Vektor-Storage | Custom Binary v1 | `internal/index/format.md` |
 
 ## 7. Historie
