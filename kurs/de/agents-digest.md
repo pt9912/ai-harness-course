@@ -31,18 +31,28 @@ Verkörperte Form zum Kopieren: [`/lab/templates/`](../../lab/templates/)
   Prompts, sondern aus einem Geschirr aus Artefakten und Kontrollen um
   den Agenten herum. Doppelaufgabe: **constrain** (Grenzen: Architektur,
   Tools, Layer) und **inform** (Kontext: Spec, ADR, AGENTS.md, Skills).
-- **2×2-Klassifikation.** Jede Kontrolle liegt in genau einem
-  Quadranten: *Feedforward* (vor der Handlung: Guide) oder *Feedback*
-  (nach der Handlung: Sensor) × *computational* (maschinell prüfbar)
-  oder *inferential* (LLM-/menschliches Urteil). Beispiele:
+- **2×2-Klassifikation (Böckeler).** Jede Kontrolle liegt in genau
+  einem Quadranten: *Feedforward* (vor der Handlung: Guide) oder
+  *Feedback* (nach der Handlung: Sensor) × *computational* (maschinell
+  prüfbar) oder *inferential* (LLM-/menschliches Urteil). Beispiele:
   Tool-Constraint = computational feedforward; Spec/ADR/AGENTS.md =
   inferential feedforward; Gate = computational feedback;
   Reviewer-Agent = inferential feedback.
-- **Drei Harness-Kategorien:** Maintainability (lesbar, modular) ·
-  Architecture Fitness (Constraints eingehalten) · Behaviour (tut das
-  Richtige).
-- **Drei operative Säulen:** Context Engineering · Architectural
-  Constraints · Entropy Management.
+- **Faustregel: so weit „links und oben" wie möglich** — präventive,
+  deterministische Kontrollen sind die billigsten; inferential
+  feedback (Review, Verifikation) greift erst, was die anderen
+  Quadranten nicht abdecken können. Eine Regel, die der Typchecker
+  erzwingt, braucht keinen Reviewer-Agent.
+- **Lifecycle-Verteilung:** Kontrollen so früh wie möglich — Stufen
+  *Pre-commit/IDE → Pre-integration → Post-integration → Continuous*,
+  Kosten steigen pro Stufe. Eine Prüfung, die folgenlos früher laufen
+  könnte, soll früher laufen; eine Coverage-Prüfung erst im
+  Continuous-Lauf kommt zu spät, um auf den Slice zurückzuwirken.
+- **Drei Harness-Kategorien (Böckeler):** Maintainability (lesbar,
+  modular) · Architecture Fitness (Constraints eingehalten) ·
+  Behaviour (tut das Richtige).
+- **Drei operative Säulen (OpenAI):** Context Engineering ·
+  Architectural Constraints · Entropy Management.
 - **Steering Loop:** beobachtetes Agenten-Versagen → Guide/Sensor
   verbessern → Wiederholung reduzieren. Vor dem Einziehen eines neuen
   Sensors die passende Sensor-Klasse wählen
