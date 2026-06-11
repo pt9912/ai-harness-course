@@ -29,7 +29,7 @@ bekommt man das Drift-Symptom in den Griff?
 Nach diesem Modul kannst du:
 
 * einen Replay-Lauf *einrichten*, der unter Beibehaltung von Modellversion + Seed deterministisch wiederholbar ist (Anwenden · prozedural),
-* ein Golden Set *aufbauen* und Auswahlkriterien *begründen* (Erschaffen · prozedural),
+* ein Golden Set *aufbauen* und Auswahlkriterien *begründen* (Erschaffen + Bewerten · prozedural),
 * eine Regression durch Modellwechsel *messen* und einen Drift *quantifizieren* (Analysieren · prozedural),
 * Symptome von Golden-Set-Überfitting *erkennen* und Gegenmaßnahmen (Rotation, Sampling) *entwerfen* (Bewerten + Erschaffen · konzeptuell+prozedural).
 
@@ -74,7 +74,7 @@ wird er zur Messung.
 
 - **"Wenn der Replay grün ist, ist das Modell gut."** — Replay grün heißt: das Modell hat das wiederholt, was *im Golden Set steht*. Ob das Golden Set noch die Realität abbildet, ist eine andere Frage.
 - **"Golden Set ist statisch."** — Statische Golden Sets überfitten. Rotation und neues Sampling sind Pflicht, nicht Kür.
-- **"Determinismus = Reproduzierbarkeit."** — Determinismus erfordert: Modellversion + Seed + Inputs *und* Tool-Versionen, Wetter im Container, Zeitstempel-Maskierung. Wer nur Seed pinnt, hat 60 % Determinismus.
+- **"Determinismus = Reproduzierbarkeit."** — Determinismus erfordert: Modellversion + Seed + Inputs *und* Tool-Versionen, Wetter im Container, Zeitstempel-Maskierung. Wer nur den Seed pinnt, pinnt eine *einzige* von mehreren Drift-Quellen — Modellversion, Sampling-Parameter, Tool-Umgebung und Prompt-Kontext driften unabhängig davon weiter.
 
 ## Worked Example: ein Replay-Manifest aufbauen
 
@@ -217,6 +217,7 @@ Example oben demonstriert dasselbe Schema für einen *LLM-Agentenlauf*
 ## Übungen
 
 * Reproduzierbare Testläufe gegen ein Golden Set
+* **(Erschaffen + Bewerten — aktiviert LZ 2)** *Mini-Golden-Set entwerfen und Auswahl begründen.* Gegeben das Szenario: ein Agenten-Tool `summarize_doc`, das zu einer Markdown-Datei eine Drei-Satz-Zusammenfassung mit Quellen-Anker liefert. Entwirf ein Golden Set mit drei Fällen (Happy · Boundary · Negative — dieselbe Spec-Disziplin wie im Worked Example Schritt 1): pro Fall die Eingabe, die Erwartung *als Verhalten, nicht als Wortlaut* (Schritt 3: `must_include` / `must_not_include` / `tool_calls`-Grenzen statt Exact-Match auf Fließtext) und ein *Auswahlkriterium* in einem Satz — welche Fehlerklasse fängt genau dieser Fall, die die anderen zwei nicht fangen? Vergleiche die Struktur am Ende mit dem Lab-Set [`../../../lab/example/evals/golden/welle-1-baseline/`](../../../lab/example/evals/golden/welle-1-baseline/) (drei Cases Happy/Boundary/Negative je LH-FA-02). Anti-Antwort: drei Happy-Path-Varianten — das ist ein Demo-Set, kein Golden Set.
 * **(Analysieren — aktiviert LZ 3)** Erzeuge eine Regression durch Modellwechsel und *quantifiziere* den Drift: gib die Drift-Rate (rote ÷ gesamte Fälle) als Zahl an und ordne ihn dann der Diagnose-Reihenfolge aus Schritt 6 zu (Toolchain → Modell-Routing → Erwartung → echte Regression).
 
 ### Minimaler Übungspfad
@@ -233,10 +234,13 @@ einer Kopie die Modellversion oder eine Erwartung und notierst, ob der
 Replay-Lauf noch als derselbe Lauf interpretierbar ist.
 
 > *Lab-Grenze:* Das Target prüft ein *fertiges* Fixture (Retrieval-
-> Replay), nicht einen eigenen LLM-Agenten-Replay. Die LZ "Replay-Lauf
-> *einrichten*", "Golden Set *aufbauen*" und "Regression *quantifizieren*"
-> werden erst durch das Worked Example oben (Schritte 1–7) und die
-> Drift-Übung in einer Kopie abgerufen — der minimale Pfad ist Aufwärm-,
+> Replay), nicht einen eigenen LLM-Agenten-Replay. Das Worked Example
+> (Schritte 1–7) ist Vor-Lehre, keine Probung: das LZ "Golden Set
+> *aufbauen* und Auswahlkriterien *begründen*" (LZ 2) wird durch die
+> Mini-Golden-Set-Übung oben abgerufen, das LZ "Regression
+> *quantifizieren*" (LZ 3) durch die Drift-Übung in einer Kopie; das LZ
+> "Replay-Lauf *einrichten*" (LZ 1) probt erst der Nachbau des
+> Manifest-Schemas im eigenen Repo — der minimale Pfad ist Aufwärm-,
 > nicht Ziel-Niveau.
 
 ## Reflexion
@@ -265,7 +269,7 @@ Modul-spezifische Trigger:
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Drei Pflichtfelder eines Replay-Manifests? | "Modell." | Modellversion · Seed · Eingaben (Inputs als referenzierter Datensatz, nicht als Inline-Text). | + Pflichtfeld Nummer 4 in jedem ernsten Setup: Image-Hash (siehe Abschnitt oben) — sonst lässt sich Drift nicht von Toolchain-Drift trennen. Pflichtfeld Nummer 5: Zeitpunkt der Aufnahme (für Diff zu späteren Läufen). |
-| Was braucht ein deterministischer Replay? | "Seed." | Modellversion + Seed + Inputs *und* Tool-Versionen + Zeitstempel-Maskierung + Image-Hash (Docker-Harness, Modul 14). | + Hinweis: wer nur Seed pinnt, hat ~60 % Determinismus. Reale Drift-Quellen: Tool-Subversions, Lokale-Zeit, Netz-Latenz, Modell-Routing innerhalb derselben Version. |
+| Was braucht ein deterministischer Replay? | "Seed." | Modellversion + Seed + Inputs *und* Tool-Versionen + Zeitstempel-Maskierung + Image-Hash (Docker-Harness, Modul 14). | + Hinweis: der Seed pinnt nur *eine* von mehreren Drift-Quellen; die übrigen driften unabhängig weiter — Tool-Subversions, Lokale-Zeit, Netz-Latenz, Modell-Routing innerhalb derselben Version, Prompt-Kontext. Exzellent benennt mehrere dieser Quellen, statt Determinismus am Seed allein festzumachen. |
 | Drift quantifizieren (3 von 20 rot)? | "Ein paar rot." — keine Zahl. | Drift-Rate = 3 ÷ 20 = 15 %. | + Was die Zahl sichtbar macht: den *Trend* über Modellversionen (steigt sie, ist der Modellpfad der Verdächtige, nicht der Einzelfall) und eine *Schwelle* für den Steering Loop ("ab > X % Carveout-Pflicht") — beides ist zwischen Läufen vergleichbar, "drei rot" nicht. |
 | Wann wird ein Golden Set giftig? | "Wenn es nicht passt." | Wenn Replay reproduzierbar grün ist, aber Realität rot — typisch durch jahrelang konstantes Set. Symptome: keine Failure-Klasse seit X Wochen, neue Eingabe-Klassen tauchen *nur* in Produktion auf. | + Gegenmaßnahmen: Rotation (alte Beispiele rausnehmen), Sampling aus Produktions-Traces, Adversarial-Beispiele aus Steering-Loop-Einträgen ([`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) ziehen. |
 | Rotations-/Sampling-Plan für überfittetes Golden Set? | "Neue Beispiele dazu." | Konkreter Plan: fester Rotations-Anteil pro Welle (z. B. 20 % der ältesten Fälle raus), neue Fälle aus Produktions-Traces + Steering-Loop-Adversarial-Einträgen gezogen, Replay nach Rotation re-baselined. | + Stopp-Kriterium gegen Über-Rotation: Set behält einen stabilen Regressions-Kern (nie rotierende Anker-Fälle), sonst verliert man die Regressions-Funktion. Vorhersage: nach Rotation steigt die Failure-Rate kurzfristig — das ist Erfolg, nicht Defekt. |

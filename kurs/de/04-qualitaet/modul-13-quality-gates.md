@@ -75,6 +75,32 @@ Einsparung im gesamten System.
 Gates sind Aussagen, die *immer* gelten müssen. Wenn ein Gate "manchmal"
 rot sein darf, ist es kein Gate, sondern ein Vorschlag.
 
+## Gate-Typ ↔ Fehlerbild
+
+Wer einen neuen Sensor in den Steering Loop einzieht, muss wissen,
+*welche Sensor-Klasse welche Fehlerklasse fängt* — sonst reagiert er
+auf einen wiederkehrenden Fehler mit dem falschen Sensor, und der
+Steering Loop läuft leer. Die Zuordnung in Kurzform:
+
+| Gate-Typ | typisches Fehlerbild | was er NICHT fängt |
+|---|---|---|
+| Linter | lokale Muster: toter Import, verbotenes Idiom, Suppression-Marker | Datenfluss über Funktionsgrenzen, Struktur-Regeln |
+| Typecheck | Typgrenzen-Verstoß: falsche Signatur, `None` am falschen Ort | Vertrauensgrenzen — `str` bleibt `str`, ob nutzerkontrolliert oder nicht |
+| Architekturtest | Struktur-/Import-Regel: Layer-Bruch, Domäne importiert Infrastruktur | Verhalten zur Laufzeit, lokale Muster |
+| Security-Gate | Datenfluss-Befund: SQL-Injection, Secret-/Entropie-Treffer | Architektur-Schnitt, Coverage-Lücken |
+| Coverage / Critical Coverage | Coverage-Loch — gesamt bzw. auf dem kritischen Pfad | Qualität der Tests, Spec-Lücken ([Modul 11](modul-11-verification.md)) |
+| Replay-/Determinism-Gate | nicht-deterministischer Test oder Lauf | semantische Drift außerhalb des Golden Sets ([Modul 12](modul-12-replay-evaluierung.md)) |
+| Integrationstest | Verhalten im Zusammenspiel: Komponenten-Vertrag bricht erst in Kombination | lokale Muster und Typgrenzen — dafür zu teuer und zu spät |
+
+Trennlinie ist die *Regel-Klasse*, nicht das Tool: Linter machen lokale
+Mustererkennung, Security-Regeln verlangen Datenfluss-Analyse,
+Architekturtests prüfen Struktur, Integrationstests Verhalten im
+Zusammenspiel. Die Zuordnung selbst probst du im
+[Selbstcheck](#selbstcheck) (Item zu LZ 5 — vier Fehlerbilder mit
+Begründung des Unterscheidungs-Kriteriums); genau diese Sensor-Literacy
+ruft auch [Checkpoint D](../grundlagen/checkpoints.md#checkpoint-d--nach-phase-04-qualität)
+ab.
+
 ## Hard Rule (Doku-Disziplin)
 
 In `harness/README.md` und in jeder Doku, die Gates aufzählt: keine
@@ -233,6 +259,7 @@ Modul-spezifische Trigger:
 
 * **(Erinnern)** Nenne sechs generische Gate-Familien, die der Kurs als computational feedback einsetzt.
 * Warum braucht es Critical Coverage zusätzlich zur Gesamt-Coverage?
+* **(Bewerten — aktiviert LZ 2)** Dein Repo hat Critical Coverage 90 % und Gesamt-Coverage 70 %. Ein Teamkollege schlägt vor, beides anzuheben: Critical auf 100 %, Gesamt auf 85 %. Wäge beide Anhebungen einzeln gegen Risiko und Aufwand ab und begründe pro Schwelle, ob du sie übernimmst — und was die *Differenz* zwischen den beiden Schwellen überhaupt rechtfertigt.
 * Welcher Gate-Typ erkennt eine SQL-Injection — Linter, Typecheck oder Security Gate?
 * **(Analysieren — aktiviert LZ 5)** Ordne vier Fehlerbilder je einer Gate-Familie zu — Layer-Bruch (Domäne importiert Infrastruktur), Secret hartcodiert im Code, nicht-deterministischer Test, Coverage-Loch im Auth-Pfad — und begründe pro Zuordnung das *Unterscheidungs-Kriterium* (z. B. Datenfluss vs. lokale Mustererkennung vs. Struktur-Regel).
 * **(Anwenden)** Du sollst einen neuen Gate (z. B. `coverage-gate-critical`) in deinem Repo einführen. Welche drei Vorbedingungen klärst du, *bevor* du das Target schreibst?
@@ -243,6 +270,7 @@ Modul-spezifische Trigger:
 |---|---|---|---|
 | Sechs Gate-Familien? | vier oder weniger genannt | Linter · Typecheck · Architekturtest · Coverage · Critical Coverage · Security-Gate. Optional zusätzlich: Replay-/Determinism-Gates, Suppression-Gates, Dep-/Image-Audit. | + Hinweis: domänenspezifische Gates (z. B. `test-determinism`, `solid-suppression-gate`, `test-mpc-property`) entstehen aus dem Steering Loop, nicht aus einem Standard-Setup. Ein Repo mit nur den sechs generischen Gates hat noch keine Schmerzen verarbeitet. |
 | Warum Critical Coverage *zusätzlich*? | "Wichtige Dateien besonders." | Gesamt-Coverage glättet kritische Pfade unter unkritischen Massendateien weg. Critical Coverage misst gezielt Pfade mit Sicherheits-, Geld- oder Datenintegritäts-Risiko. | + Folge: Critical Coverage hat *eigene* (höhere) Schwelle und *eigene* ADR-Kette für Schwellen-Senkung. Carveout auf Critical Coverage ist immer ein HIGH-Finding im Review. |
+| Zwei Schwellen-Anhebungen abwägen (Critical 90→100, Gesamt 70→85)? | "Mehr Coverage ist immer besser" — beides übernommen, ohne Abwägung. | Pro Schwelle Risiko gegen Aufwand gestellt: Critical 90→100 ist begründbar, wenn der kritische Pfad klein und das Restrisiko (Sicherheit, Geld, Datenintegrität) hoch ist — die letzten 10 % sind dort Sensor, nicht Boilerplate. Gesamt 70→85 ist meist *nicht* begründbar: der Zugewinn liegt auf unkritischem Massencode (Verteilung vor Anzahl, siehe Fehlvorstellung "Mehr Tests sind immer besser"). Die Differenz rechtfertigt sich aus der Risiko-Klasse der Pfade, nicht aus Ehrgeiz. | + Konsequenz benannt: jede Schwellen-Änderung ist ADR-pflichtig ("Schwellen sind ADR-pflichtig"), und eine Anhebung ohne Hochschalt-Trigger ist dieselbe Disziplinlücke wie eine Senkung ohne Carveout. Grenzfall: 100 % Critical kann Tests erzwingen, die nur die Schwelle füttern — dann ist 90 % mit begründeter Lücken-Liste der ehrlichere Sensor. |
 | SQL-Injection: Linter / Typecheck / Security Gate? | "Security Gate." | Security Gate (Semgrep/Bandit/CodeQL). Linter sieht den String, nicht die Semantik; Typecheck sieht den Typ `str`, nicht die Vertrauensgrenze. | + Hinweis: Manche Linter haben *Semgrep-Regeln* integriert (z. B. `bandit` für Python) — Trennlinie ist nicht "Tool", sondern "Regel-Klasse". Security-Regeln verlangen *Datenfluss*-Analyse, klassische Linter machen nur lokale Mustererkennung. |
 | Vier Fehlerbilder den Gate-Familien zuordnen? | je Bild irgendein Gate genannt, ohne Kriterium | Layer-Bruch → Architekturtest (Struktur-/Import-Regel) · Secret im Code → Security-Gate (Muster-/Entropie-Scan) · nicht-deterministischer Test → Replay-/Determinism-Gate · Coverage-Loch im Auth-Pfad → Critical Coverage. | + Unterscheidungs-Kriterium pro Fall benannt: Security-Injection braucht *Datenfluss*-Analyse, Secret-Scan und Linter machen *lokale Mustererkennung*, Architekturtest prüft *Struktur*, Critical Coverage prüft *Pfad-Abdeckung* — Grenzfall: ein hartcodiertes Secret kann auch ein Linter-Regel-Treffer sein, Trennlinie ist Regel-Klasse, nicht Tool. |
 | Drei Vorbedingungen für ein neues Gate? | "Tool installieren." | (1) Anforderung mit ID (Spec oder ADR), die das Gate prüft — sonst ist es ein Vorschlag · (2) Schwelle ist begründet (ADR oder Carveout für Übergangsphase) · (3) Lokales und CI-Image laufen identisch (Modul 14); andernfalls debuggt das Team später den Image-Unterschied. | + Empfohlen: Gate-Target trägt ID-Kommentar (`coverage-gate-critical: ## LH-QA-CRIT-003`); ohne diesen Kommentar ist die Traceability-Kette gebrochen, und ein gerötetes Gate erzeugt keinen klaren Bezug zur verletzten Anforderung. |

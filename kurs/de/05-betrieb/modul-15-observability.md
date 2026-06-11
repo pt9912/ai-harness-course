@@ -7,7 +7,8 @@
 > **Teil A (Telemetrie lesen & diagnostizieren, LZ 1–4):** Mini-Glossar ·
 > Engage · Lernziele · Themen · Kernidee · Typische Fehlvorstellungen ·
 > Worked Example (ein Span zurück bis zur Lastenheft-ID). **Teil B
-> (Sensoren & Schemata bauen, LZ 5–6):** Übungen · Reflexion · Selbstcheck.
+> (Sensoren & Schemata bauen, LZ 5–6 plus die Spezifizieren-Hälfte von
+> LZ 4):** Übungen · Reflexion · Selbstcheck.
 > Lies Teil A und arbeite das Worked Example *durch*, bevor du Teil B
 > öffnest — der Trenner steht sichtbar vor den Übungen
 > ([§Pause-Punkt](#pause-punkt-lesen--bauen)). Wer A und B in einer
@@ -43,8 +44,8 @@ Nach diesem Modul kannst du:
 * OpenTelemetry-Traces eines Agentenlaufs *lesen* (Anwenden · prozedural),
 * Token-Kosten pro Slice *attribuieren* (Anwenden · prozedural),
 * Logs, Metriken und Traces *unterscheiden* und ein Telemetrie-Fehlszenario *zuordnen* (Analysieren · konzeptuell),
-* einen Prompt-Cache-Miss in den Metriken *erkennen* (Analysieren · prozedural),
-* Doku-Konsistenz-Drift mit einem Konsistenz-Agent *detektieren* (Bewerten · prozedural — Brücke zu *Entropy Management*),
+* einen Prompt-Cache-Miss in den Metriken *erkennen* und die Cache-Counter dafür *spezifizieren* (Analysieren + Erschaffen · prozedural),
+* Doku-Konsistenz-Drift mit einem Konsistenz-Agent *detektieren* und die Konsistenz-Regeln dafür *formulieren* (Bewerten + Erschaffen · prozedural — Brücke zu *Entropy Management*),
 * ein Tool-Call-Audit-Span-Schema *entwerfen*, das Slice-ID, Agent-Rolle und Cache-Status trägt, sodass Token-Kosten und Forensik bis zur Anforderungs-ID rückverfolgbar sind (Erschaffen · prozedural).
 
 ## Lab-Bezug
@@ -219,9 +220,10 @@ und `adr.id`).
 
 * Analyse eines KI-Agenten-Laufs im Trace-Viewer
 * **(Anwenden — aktiviert LZ 2)** *Token-Kosten attribuieren.* Identifiziere zunächst den teuersten Tool-Call und begründe, ob er nötig war. Dann *attribuiere* die Gesamt-Token des Laufs: summiere Input- und Output-Token pro `agent.role` (Planner · Architect · Implementer · Reviewer · Verifier) und gib an, welche Rolle den größten Anteil trägt — als Zahl *und* als Prozentsatz der Gesamtsumme. Wo ein Span keinen Rollen-Tag trägt (Sammelposten), entscheide begründet, wie du ihn aufteilst (anteilig nach Tool-Calls? dem auslösenden Slice zugeschlagen?) — genau das ist das Buchhaltungs-Splitting eines Sammelpostens auf Kostenstellen aus dem Mini-Glossar.
-* **Cache-Hit-Rate spezifizieren** — aktiviert das Erschaffens-Lernziel
-  zur Cache-Beobachtbarkeit und vorbereitet die Abschluss-Achse
-  *Reproduzierbarkeit/exzellent* (siehe
+* **(Erschaffen — aktiviert LZ 4 Spezifizieren-Hälfte)** *Cache-Hit-Rate
+  spezifizieren* — die Erkennen-Hälfte von LZ 4 probt das
+  Selbstcheck-Item zum Cache-Miss; die Übung vorbereitet zudem die
+  Abschluss-Achse *Reproduzierbarkeit/exzellent* (siehe
   [`../abschluss/abschlussprojekt.md`](../abschluss/abschlussprojekt.md#achse-reproduzierbarkeit)).
   Skizziere die *drei* OTel-Counter, die du brauchst, um Cache-Hit-Rate
   *und* Cache-Miss-Spikes zu unterscheiden — und nenne pro Counter:
@@ -238,9 +240,10 @@ und `adr.id`).
   Cache-Miss-Spikes (Sicherheits-Indikator!) nicht von
   Cache-Hit-Rückgängen (Kosten-Indikator) trennen.
 
-* **Doku-Konsistenz-Agent — Regeln formulieren** — aktiviert das
-  Erschaffens-Lernziel zur Drift-Detektion und vorbereitet die
-  Abschluss-Achse *Konsistenz/exzellent* (siehe
+* **(Erschaffen — aktiviert LZ 5 Formulieren-Hälfte)** *Doku-Konsistenz-Agent
+  — Regeln formulieren* — die Detektieren-Hälfte von LZ 5 probt das
+  Selbstcheck-Item zum Konsistenz-Score; die Übung vorbereitet zudem
+  die Abschluss-Achse *Konsistenz/exzellent* (siehe
   [`../abschluss/abschlussprojekt.md`](../abschluss/abschlussprojekt.md#achse-konsistenz)).
   Schreibe **drei konkrete Konsistenz-Regeln**, die ein
   Doku-Konsistenz-Agent zwischen AGENTS.md und realen Make-Targets /
@@ -257,6 +260,31 @@ und `adr.id`).
   Mindestens *eine* Regel muss die Hard Rule aus
   [Modul 13 §"Hard Rule (Doku-Disziplin)"](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)
   durchsetzen ("keine Befehle behaupten, die es nicht gibt").
+
+* **(Erschaffen — aktiviert LZ 6)** *Audit-Span-Schema für einen
+  Tool-Call entwerfen.* Gegeben der Tool-Call `write_file` mit den
+  Argumenten Pfad und Diff. Entwirf das Audit-Span-Schema, das dieser
+  Call in deinem Harness tragen müsste: liste jeden Attribut-Namen,
+  markiere ihn als *Pflicht* oder *Optional* und nenne pro Attribut die
+  *Incident-Frage*, die es beantwortet (z. B. `slice.id` → "auf wessen
+  Rechnung lief der Schreibzugriff?"; `tool.arguments.redacted` → "was
+  wurde wohin geschrieben — ohne Secrets im Log?"). Pflicht-Minimum aus
+  dem Worked Example: Slice-ID, Agent-Rolle, Cache-Status,
+  `requirement.id` — jede Abweichung davon begründest du. Ein Attribut
+  ohne Incident-Frage fliegt raus: Schema-Felder ohne Abnehmer sind
+  Telemetrie-Boilerplate, kein Audit.
+
+* **(Analysieren — aktiviert LZ 3)** *Fehlerfall: ein Span-Attribut
+  fehlt.* Kopiere das Trace-Fixture
+  [`../../../lab/example/otel/sl-009-agent-run.trace.json`](../../../lab/example/otel/sl-009-agent-run.trace.json)
+  (das Original bleibt unverändert — die Kopie ist der Fehlerfall) und
+  entferne in der Kopie das `tokens`-Feld des Spans `impl-2` *oder*
+  fälsche das `slice.id`-Feld im Trace-Kopf. Diagnostiziere dann:
+  Welche Audit-Frage ist mit der Kopie unbeantwortbar geworden
+  (Token-Attribuierung pro Slice? Kosten-Drill-down des teuersten
+  Calls? Zuordnung Kosten ↔ Anforderung)? Und welcher der drei
+  Telemetrie-Typen (Logs · Metriken · Traces) hätte den Verlust
+  kompensieren können — oder keiner, und warum?
 
 * **End-to-End-Trace bis LH-ID** — aktiviert die Abschluss-Achse
   *Auditierbarkeit/exzellent* (siehe
@@ -299,10 +327,11 @@ Slice? Danach erst lohnt ein voller Trace-Viewer.
 
 > *Lab-Grenze:* Das Target *liest* ein fertiges Trace-Fixture. Das LZ
 > "Tool-Call-Audit-Span-Schema *entwerfen*" (LZ 6, Erschaffen) wird
-> erst durch die E2E-Trace-Übung oben (Span → Slice → ADR → LH-ID)
-> abgerufen; das LZ "Doku-Konsistenz-Drift *detektieren*" (LZ 5) durch
-> den Konsistenz-Agent-Lauf — der minimale Pfad ist Aufwärm-, nicht
-> Ziel-Niveau.
+> durch die Schema-Entwurfs-Übung oben abgerufen — die E2E-Trace-Übung
+> *liest* die Kette nur (Analysieren, kein Schema-Entwurf); das LZ
+> "Doku-Konsistenz-Drift *detektieren* und Regeln *formulieren*" (LZ 5)
+> durch das Selbstcheck-Item zum Konsistenz-Score plus die
+> Regeln-Übung — der minimale Pfad ist Aufwärm-, nicht Ziel-Niveau.
 
 ## Reflexion
 
@@ -319,8 +348,8 @@ Modul-spezifische Trigger:
 
 * **(Erinnern)** Welche drei Telemetrie-Typen unterscheidet der Kurs, und welche Frage beantwortet jeder?
 * Welche drei Felder muss ein Tool-Call-Span mindestens tragen?
-* Wo schlägt sich ein Prompt-Cache-Miss in den Metriken nieder?
-* **(Bewerten — aktiviert LZ 5)** Woran erkennst du in Trace oder Metrik, dass AGENTS.md vom Code abgedriftet ist — welches konkrete Signal liest der Doku-Konsistenz-Agent (z. B. AGENTS.md-Befehl ohne passendes Make-Target), und ab welcher Schwelle (Konsistenz-Score) bewertest du den Drift als gate-relevant statt als Rauschen?
+* **(Analysieren — aktiviert LZ 4 Erkennen-Hälfte)** Wo schlägt sich ein Prompt-Cache-Miss in den Metriken nieder?
+* **(Bewerten — aktiviert LZ 5 Detektieren-Hälfte)** Woran erkennst du in Trace oder Metrik, dass AGENTS.md vom Code abgedriftet ist — welches konkrete Signal liest der Doku-Konsistenz-Agent (z. B. AGENTS.md-Befehl ohne passendes Make-Target), und ab welcher Schwelle (Konsistenz-Score) bewertest du den Drift als gate-relevant statt als Rauschen?
 * **(Erschaffens-Prozess)** Welcher Schritt der End-to-End-Trace-Übung (Span → Slice → ADR → LH-ID) war bei dir der *unsicherste* — und woran lag es? (Erfahrungsgemäß: Frontmatter-Feldnamen oder die Make-Target-Kommentar-Konvention.)
 
 ### Selbstcheck-Rubrik

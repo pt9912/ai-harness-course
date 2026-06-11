@@ -93,7 +93,7 @@ Nach diesem Modul kannst du:
   Reconciliation-Plan für eine konkret beobachtete BF-Diskrepanz
   *entwerfen* (Erschaffen · prozedural),
 * den eigenen Bootstrap-Modus pro Sub-Area aktiv *überwachen* und
-  Modus-Wechsel als Signal *lesen* (Überwachen · metakognitiv) —
+  Modus-Wechsel als Signal *lesen* (Bewerten · metakognitiv) —
   Bootstrap-Diagnose ist eine Selbstführungs-Praxis, kein
   einmaliges Audit.
 
@@ -139,8 +139,8 @@ gleiche Sensoren und Guides, andere Anwendungsphase. Die abstrakte
 Verbindung steht in
 [`../grundlagen/konventionen.md` §Verbindung zum Steering-Loop](../grundlagen/konventionen.md#verbindung-zum-steering-loop).
 
-[Modul 1 §Schritt 0](modul-01-entwicklungszyklus.md#kernidee) hat den
-Bootstrap-Modus als Kurz-Vorgriff eingeführt (Baseline und Modus als
+[Modul 1 §Worked Example, Schritt 0](modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren)
+hat den Bootstrap-Modus als Kurz-Vorgriff eingeführt (Baseline und Modus als
 Voraussetzung für den Lebenszyklus); dieses Modul ist die Vollform —
 die *Diagnose-Praxis*, die Schritt 0 zur Vorbedingung jeder
 modusabhängigen Aktion macht.
@@ -409,8 +409,9 @@ findet das später als Inkonsistenz.
 > Phasen×Modus-Matrix (§unten) zurückkehren — der BF-Walkthrough trägt
 > die *Diskrepanz-Schock*- und *Reconciliation*-Mechanik, die erst greift,
 > sobald du ein bestehendes Repo bootstrappst. **Aufschub, keine
-> Auslassung:** Übung 2 (Trigger-Klassen) und der Selbstcheck setzen WE2
-> voraus — vor ihnen zurückkehren.
+> Auslassung:** Übung 2 (Trigger-Klassen) kommt mit den WE1-Triggern
+> aus; WE2 brauchst du erst für Selbstcheck-Item 3 (T3, BF-Übergang) —
+> spätestens davor zurückkehren.
 
 **Story.** Ein bestehendes Repo `legacy-search` (Code, Makefile, CI,
 Tests) soll formellen Harness-Einstieg bekommen. Es gibt keine
@@ -668,8 +669,8 @@ Modul-spezifische Trigger:
   Aufwand"). Erweiterte Sammlung in
   [`../grundlagen/lernervorstellungen.md` §Über Harness-Bootstrap (Modul 2)](../grundlagen/lernervorstellungen.md#über-harness-bootstrap-modul-2).
 
-**Metakognitive Reflexionsfrage** (Träger für Lernziel
-*Überwachen · metakognitiv*):
+**Metakognitive Reflexionsfrage** (Reflexions-Anker für LZ 5,
+*Bewerten · metakognitiv* — die prüfende Probe steht im Selbstcheck):
 
 > In welcher Sub-Area deines Repos bist du dir *gerade jetzt*
 > unsicher, welcher Modus gilt — und was wäre dein nächster Schritt,
@@ -682,10 +683,10 @@ Betrieb still verfällt.
 
 ## Selbstcheck
 
-Die metakognitive Selbstüberwachung (Lernziel *Überwachen ·
-metakognitiv*) wird in §Reflexion geprüft, nicht im Selbstcheck.
-Der Selbstcheck deckt die übrigen vier Lernziele plus die
-Conceptual-Change-Selbstvalidierung ab.
+Die metakognitive Selbstüberwachung (LZ 5, *Bewerten · metakognitiv*)
+wird in §Reflexion am eigenen Repo geübt und unten in einem eigenen
+Item geprüft. Der Selbstcheck deckt damit alle fünf Lernziele plus
+die Conceptual-Change-Selbstvalidierung ab.
 
 * **(Verstehen, durch Übung 1)** Was unterscheidet GF-Modus von
   BF-Modus? Warum gilt der Modus *pro Sub-Area* und nicht pro Repo?
@@ -703,6 +704,14 @@ Conceptual-Change-Selbstvalidierung ab.
 * **(Erschaffen, durch Übung 3)** Was bedeutet *Phase 4 kohärent* in
   GF gegenüber BF? Nenne pro Modus ein konkretes Indiz aus der
   Phase × Modus-Matrix.
+* **(Bewerten — aktiviert LZ 5)** Gegeben dieser Verlauf: die Sub-Area
+  *Test-Infrastruktur* ist seit dem Bootstrap als GF deklariert; drei
+  Slices später tauchen wiederholt Edge-Case-Tests ohne `LH-*`-Anker
+  auf, und bei jeder Code-Änderung muss die Spec nachgezogen werden.
+  Was signalisiert dieser Verlauf (welches der drei Anzeichen aus
+  §Kernidee liegt vor), und welche Reaktion ist angemessen —
+  Modus-Deklaration anpassen, Reconciliation-Plan entwerfen oder
+  nichts tun?
 * **(Conceptual Change)** Vergleiche jetzt deine Spontanantworten
   zu den drei §Vorab-Fragen mit deiner heutigen Antwort. Welche hat
   sich verschoben? Welche ist gleich geblieben — und warum hält sie?
@@ -719,6 +728,7 @@ die modulspezifischen Indikatoren sind:
 | Vier Trigger-Klassen, je ein Beispiel? | Drei Klassen genannt, ohne Worked-Example-Bezug. | Alle vier Klassen genannt + je ein Trigger aus WE1 oder WE2 als Beispiel. | + Begründung, warum die vier Klassen *erschöpfend* sind (was würde nicht in eine der vier passen?); Verweis auf `konventionen.md` §Vier Trigger-Klassen für die Definition. |
 | Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz". | T3 als **Sync-Trigger in BF-Diskrepanz-Auslöse-Variante** bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht (impliziter Pointer-Mismatch). | + Pointe: T3 ist *keine fünfte Klasse*, sondern eine BF-typische Auslöse-Variante von Sync (die vier Klassen aus konventionen.md bleiben erschöpfend). Plus: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt. |
 | Phase 4 kohärent in GF vs. BF? | "In GF steht der Vertrag, in BF die Inventur." | GF Phase 4: *Vertrag steht, Code wird daran gemessen* (z. B. CI-Gates greifen). BF Phase 4: *Inventur abgeglichen, Diskrepanz-Schock sichtbar* (z. B. CO-DS-* oder Reconc.-Slice-Backlog). | + Begründung, warum *Phase 4* die kritische Stufe in BF ist (vorher: Inventur arbeitet, nachher: Reconciliation läuft); Verweis auf Modul 7 §Carveouts für die `CO-DS-*`-Konvention. |
+| Modus-Wechsel als Signal gelesen? | "Doku nachziehen." — Symptom behandelt, kein Modus-Urteil. | Anzeichen 2 erkannt (*Test-Bestand übertrifft Spec-Anker* → die Sub-Area ist de facto von GF nach BF gedriftet); Reaktion: Modus-Deklaration im Adaptions-Block auf BF stellen, mit Konvergenz-Auftrag — nicht stillschweigend weiter GF behaupten. | + Begründung, warum *nichts tun* die teuerste Option ist (undeklarierte Drift macht jede spätere Diskrepanz unmessbar — Linse *Drift*), und Pointe: der Wechsel ist kein Versagen, sondern ein funktionierender Sensor der Bootstrap-Diagnose; Anschluss an die metakognitive Reflexionsfrage in §Reflexion. |
 | Überzeugungs-Check: welche Verschiebung? | Keine Verschiebung benannt oder pauschal "alles klarer". | Eine konkrete Antwort: welche §Vorab-Frage hat sich um welchen Halbsatz verschoben? Verweis auf eine Fehlvorstellung (FV1–FV5), die deine Spontanantwort getragen hat. | + Pointe: welche Vorstellung gleich geblieben ist und *warum sie hält* — Conceptual-Change-Reflexion verlangt, beides zu zeigen, nicht nur Verschiebung. |
 
 ## Weiterlesen

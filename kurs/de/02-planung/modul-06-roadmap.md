@@ -181,6 +181,12 @@ Sieben Schritte, eine Welle, drei Trigger ohne Datum. Vergleich:
 
 ## Übungen
 
+> **Wenn du das Worked Example übersprungen hast:** hole
+> [Schritt 7 — Bewusstes Brechen](#worked-example-einen-datumswunsch-in-eine-trigger-welle-übersetzen)
+> als Fehlerfall nach, bevor du die Übungen startest — die einzige
+> Fehler-Provokation dieses Moduls (Datum als Trigger schreiben und
+> das Kippen beobachten) liegt dort.
+
 * Aufbau einer produktiven Roadmap für das Begleit-Lab
 * Modelliere eine Abhängigkeit, die eine spätere Welle blockiert
 * **(Bewerten — aktiviert LZ 3)** *Welle über Schätzung bewerten.* Eine
@@ -208,6 +214,17 @@ nach dem Roadmap-Bau. Modul-spezifische Trigger:
 * **(Erinnern)** Nenne drei Beispiele für *beobachtbare* Trigger aus diesem Modul — nicht erfundene, sondern aus den Engage-/Fehlvorstellungs-Blöcken.
 * Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
 * Was unterscheidet eine Welle von einem Meilenstein?
+* **(Analysieren — aktiviert LZ 2)** Drei Ereignisse aus dem
+  Fallstudien-Repo `pt9912/grid-gym`
+  ([`fallstudien.md`](../grundlagen/fallstudien.md)): (a) Der
+  Wave-Self-Close-Commit landet im Repo, nachdem alle Slices der
+  laufenden Welle in `done/` liegen und die 10 A-1-Pflicht-Gates in
+  `make gates` grün sind. (b) Der Repo-Zustand *"Simulator läuft
+  deterministisch reproduzierbar"* ist erstmals extern vorzeigbar —
+  die `determinism`/`replay`-Suiten laufen vollständig grün. (c) Ein
+  Versions-Tag wird gesetzt und das Paket wandert nach Staging. Ordne
+  jedes Ereignis genau einer Kategorie — Welle, Meilenstein, Release —
+  zu und benenne je den Trigger, der es auslöst.
 * **(Erschaffen — aktiviert LZ 1)** Gegeben drei Slices `SL-101` (API), `SL-102` (Cache, braucht die API), `SL-103` (Dashboard): entwirf den *ersten* Wellen-Eintrag als kompletten Mini-Block — Slice-IDs, *einen* beobachtbaren Trigger (kein Datum) und *ein* Closure-Kriterium. Begründe in einem Satz, warum genau diese Slices in *einer* Welle liegen und nicht über zwei verteilt sind.
 * **(Analysieren — aktiviert LZ 4)** Welle 3 (`welle-3-skalierung`) kann erst starten, wenn Welle 2 (`welle-2-qualitaet`) fertig ist: Wie modellierst du diese Abhängigkeit *im Roadmap-Eintrag* von Welle 3 — und woran genau erkennst du, dass Welle 2 zum *Blocker* wird (nicht bloß Vorgängerin)?
 
@@ -219,6 +236,7 @@ nach dem Roadmap-Bau. Modul-spezifische Trigger:
 | Drei beobachtbare Trigger-Beispiele? | "Wenn etwas fertig ist." | Drei aus dem Modul: "SL-024 liegt in `done/`" · "Replay-Lauf gegen Golden Set grün" · "Carveout `CO-007` aufgelöst". | + Pointe: ein Trigger ist beobachtbar dann, wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er eingetreten ist. "Sobald wir Zeit haben" scheitert daran; "SL-024 in `done/`" besteht. |
 | Welle 30 % über Schätzung — was tun? | "Mehr Zeit geben." | Diagnose vor Aktion: liegt es an Slice-Größe (→ neu schneiden), an Reihenfolge (→ neu planen), oder an unerwarteter Komplexität (→ Carveout)? | + Hinweis, dass 30 % früh ein Steering-Loop-Signal sein können (Slice-Sizing-Regel schärfen), 30 % spät (vor Welle-Closure) eher Carveout. Metakognitiv: die *eigene* Schätzunsicherheit als Steering-Signal benennen — woran hätte man die Abweichung früher erkannt (welches Slice war schon beim Schätzen "weich", welche Annahme blieb ungeprüft)? — damit die nächste Schätzung kalibrierter ausfällt. |
 | Welle vs. Meilenstein? | "Größe." | Welle = Bündel paralleler/serialisierter Slices mit Closure-Kriterien. Meilenstein = extern beobachtbarer Zustand (Release, Audit-Punkt). | + Eine Welle endet *durch* Closure-Kriterien; ein Meilenstein endet durch *Datum oder externe Bestätigung* — und genau deshalb leitet sich der Meilenstein aus Wellen ab, nicht umgekehrt. |
+| Drei `grid-gym`-Ereignisse Welle/Meilenstein/Release zugeordnet? | höchstens eine Zuordnung richtig, Trigger fehlen oder lauten "ist halt fertig". | (a) **Welle** — Trigger: Closure-Kriterien erfüllt (alle Slices in `done/`, Gates grün), beobachtbar am Wave-Self-Close-Commit. (b) **Meilenstein** — Trigger: extern beobachtbarer Repo-Zustand (Determinismus belegt), keine interne Closure nötig. (c) **Release** — Trigger: ein Artefakt verlässt das Repo in eine Umgebung (Tag + Staging). | + Begründung über die Orthogonalität: ein Release kann mehrere Wellen umfassen, der Meilenstein liegt *neben* der Welle (externe Bestätigung), die Welle endet *durch* Closure — deshalb kann (b) eintreten, ohne dass (a) oder (c) am selben Tag liegen. |
 | Ersten Wellen-Eintrag aus `SL-101/102/103` entworfen? | Slices aufgelistet, aber Trigger ist ein Datum oder fehlt; kein Closure-Kriterium. | Vollständiger Mini-Block: Slice-IDs · *ein* beobachtbarer Trigger (kein Datum) · *ein* Closure-Kriterium; Bündelung begründet (z. B. "`SL-102` braucht `SL-101`, beide liefern erst zusammen prüfbaren Wert"). | + Schnitt-Begründung mit Gegenprobe: warum `SL-103` (Dashboard) *nicht* in dieselbe Welle gehört, wenn es ohne Cache keinen Mehrwert zeigt — und welcher Trigger es in die *nächste* Welle zieht. Der Entwurf nennt den Trigger so, dass ein Dritter ohne Rückfrage über "Welle fertig" entscheiden kann. |
 | Abhängigkeit Welle 3 → Welle 2 modelliert, Blocker erkannt? | "Welle 3 kommt nach Welle 2." — Reihenfolge genannt, keine Modellierung. | Abhängigkeit als expliziter Abhängigkeits-Trigger in der `Trigger`-Spalte von Welle 3 (z. B. „startet, wenn `welle-2-qualitaet` in Closure") + gerichtete Kante im Abhängigkeitsgraphen. | + Blocker-Kriterium benannt: Welle 2 ist Blocker, sobald Welle 3 *ohne* deren Closure nicht starten kann (Phantom-Welle) — und der Test dafür: würde Welle 3 jetzt starten, liefe ein Gate auf nicht-property-getesteter Basis. Reine Vorgängerin ohne harte Kante wäre kein Blocker. |
 

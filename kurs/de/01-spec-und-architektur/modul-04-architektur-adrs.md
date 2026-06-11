@@ -2,14 +2,29 @@
 
 > **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: ID-Schema und Source Precedence (Module 1, 2) bekommen hier einen neuen Quadranten — ADRs sind *inferential feedforward* mit Brücke zu *computational feedback*.
 
+## Mini-Glossar für dieses Modul
+
+Fünf neue Begriffe — *ADR* und *Fitness Function* selbst kennst du aus
+dem [Modul 1 Mini-Glossar](modul-01-entwicklungszyklus.md#mini-glossar-für-dieses-modul);
+alle fünf werden in diesem Modul entfaltet. Für die ersten Seiten
+reichen die Ein-Satz-Anker:
+
+| Begriff | Ein-Satz-Definition | Bild im Kopf |
+|---|---|---|
+| **MADR** | Markdown-basiertes ADR-Format mit Kopf-Feldern (Status, Datum, Bezug, Supersedes) und Body-Blöcken (Kontext, Optionen mit Trade-offs, Entscheidung, Konsequenzen). | ein Formular, das die Entscheidung zwingt, ihre Belege mitzubringen. |
+| **Nygard-Format** | Das ursprüngliche, schlankere ADR-Format nach Michael Nygard: Kontext, Entscheidung, Konsequenzen. | der Urahn von MADR — gleiche Idee, weniger Felder. |
+| **superseded** | ADR-Status: Entscheidung ist durch eine *neue* ADR abgelöst — der Bedarf bleibt, die Antwort wechselt. | Schild "ersetzt durch Nr. N" am alten Protokoll. |
+| **deprecated** | ADR-Status: Entscheidung entfällt *ersatzlos* — der zugrunde liegende Bedarf existiert nicht mehr. | Akte geschlossen, kein Nachfolger nötig. |
+| **Fitness-Function-Werkzeuge** | ArchUnit (Java), dep-cruiser (JS/TS), import-linter (Python) — prüfen Architektur-Aussagen maschinell, z. B. Layer-Importregeln. | der Prüfstand, auf den die ADR-Aussage geschnallt wird. |
+
 ## Engage
 
 Du fragst deinen Implementation-Agent: *"Warum hast du den Layer
 Service direkt mit Runtime verbunden, ohne Adapter?"* — er antwortet:
 *"Schien die einfachste Lösung."* In einem Repo *mit* ADR hätte er
 antworten müssen: *"ADR-7 verbietet das. Adapter ist Pflicht."* Welcher
-Unterschied liegt zwischen den beiden Antworten? Genau die ADR. Ohne sie
-gewinnt "ist halt so" gegen "weil".
+Unterschied liegt zwischen den beiden Antworten — und welches Artefakt
+erzeugt ihn? Notiere deine Antwort; die Kernidee unten löst auf.
 
 ## Lernziele
 
@@ -135,7 +150,11 @@ Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
 ## Übungen
 
 Die folgenden vier ADR-Übungen aktivieren LZ 1 (je ein ADR im MADR-Format
-*verfassen*); die fünfte aktiviert LZ 4 (Versionierung bei ADR-Verletzung).
+*verfassen*); die fünfte aktiviert LZ 3: eine ADR-Verletzung wird nur
+erkannt, wenn die ADR-Aussage prüfbar formuliert ist — der Lauf testet
+die Vorstufe der Fitness-Function-Übersetzung. LZ 4
+(superseded/deprecated und Folge-ADR) proben die beiden
+Selbstcheck-Items am Modul-Ende.
 
 * ADR für Modellwahl
 * ADR für Tool Calling
@@ -174,6 +193,15 @@ Modul-spezifische Trigger:
 ## Selbstcheck
 
 * **(Erinnern)** Welche vier Pflichtabschnitte hat ein MADR-ADR (Kopf-Felder + Body-Blöcke)?
+* **(Analysieren — aktiviert LZ 2)** Ordne jede der drei Aussagen genau
+  einem Artefakt zu — ADR, Spec oder Plan — und begründe pro Aussage in
+  einem Halbsatz: (1) *"Wir nehmen PostgreSQL statt MongoDB."*
+  (2) *"Die Antwortzeit der Suche bleibt unter 200 ms."*
+  (3) *"Slice SL-014 implementiert den Trigram-Index."* Eine der drei
+  ist ein Grenzfall: Welche wandert in ein anderes Artefakt, sobald
+  sich der Kontext ändert — und an welchem Kriterium entscheidest du
+  das? (Das beantwortet zugleich Vorab-Frage 1: Was begründet eine
+  ADR — Anforderung oder Lösung?)
 * Wann wird aus einer ADR eine Architekturtest-Regel?
 * **(Bewerten — aktiviert LZ 4 Bewerten-Hälfte)** Gegeben: ADR-0003 steht auf `deprecated`, ein Nachfolger ist *nicht* benannt. Ist `deprecated` hier der *korrekt gewählte* Status — oder eine verdeckte `superseded`-Lücke (Regel entfällt, aber kein Ersatz, also faktisch eine offene Entscheidung)? Entscheide mit Begründung und nenne das Kriterium, das den Ausschlag gibt: wann ist `deprecated` legitim, wann ist es ein falsch etikettiertes `superseded`?
 * **(Anwenden)** Nimm eine ADR aus dem Lab oder einem eigenen Repo — formuliere in einem Satz, *was* eine Fitness Function maschinell prüfen würde, wenn du sie dazu schreiben müsstest.
@@ -185,6 +213,7 @@ Modul-spezifische Trigger:
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Vier MADR-Pflichtabschnitte? | "Titel, Text." | Kopf-Felder (Status, Datum, Bezug, ggf. Supersedes) + Body-Blöcke (Kontext, Optionen mit Trade-offs, Entscheidung, Konsequenzen). | + Eine fehlende *Optionen*-Sektion ist die häufigste Drift: dann ist die ADR ein Postulat, kein Entscheidungsprotokoll — und Reviewer kann sie nicht verteidigen. |
+| Drei Aussagen ADR/Spec/Plan zugeordnet, Grenzfall eingeordnet? | "1 ADR, 2 Spec, 3 Plan." — Zuordnung ohne Begründung, kein Grenzfall. | Zuordnung mit Kriterium: die ADR begründet die *Lösung* (PostgreSQL), die Spec die *Anforderung* (200 ms), der Plan das *Wann/Wie pro Slice* (SL-014, mit ID-Bezug auf beide). Antwort auf Vorab-Frage 1: eine ADR begründet eine Lösung, nie eine Anforderung. | + Grenzfall erkannt: *"Wir nehmen PostgreSQL"* wandert in die Spec, sobald der Kunde es vertraglich vorgibt — dann ist es Anforderung, und die ADR begründet nur noch das *Wie* darunter. Kriterium: Wer trägt den Bedarf — Auftraggeber (Spec) oder Lösungsraum (ADR)? Verknüpfung per ID-Bezug statt Wiederholung. |
 | Wann wird aus einer ADR eine Architekturtest-Regel? | "Wenn man sie prüfen will." | Wenn die ADR-Aussage maschinell formulierbar ist (Modul `X` darf `Y` nicht importieren; Layer `A` ruft `B` nicht direkt auf); Übersetzung in ArchUnit/dep-cruiser/import-linter. | + Hinweis, dass ohne Fitness Function die ADR Absichtserklärung bleibt; und dass *jede* ADR diese Frage beantworten muss — auch wenn die Antwort "lässt sich nicht maschinell prüfen" lautet. |
 | `deprecated` ohne Nachfolger — korrekt gewählt oder verdeckte `superseded`-Lücke? | "Deprecated heißt alt, passt schon." — kein Urteil, nur Etikett wiederholt. | Urteil mit Kriterium: `deprecated` ist legitim, wenn die Regel *ersatzlos* entfällt (der Bedarf existiert nicht mehr). Es ist ein falsch etikettiertes `superseded`, wenn der *Bedarf bleibt*, aber kein Nachfolger benannt ist — dann ist `deprecated` nur ein Etikett für eine offene Entscheidung. Kriterium: existiert der zugrunde liegende Bedarf weiter? | + Folge für Reviewer und Steering Loop: bei verdeckter Lücke fordert der Reviewer einen Folge-ADR und markiert HIGH; tritt das Muster dreimal auf, ist die ADR-Status-Vergabe selbst die Lücke (Guide: Status-Definition in die ADR-Vorlage). Superseded → Reviewer prüft gegen Nachfolger; echtes deprecated → Constraint-Scan entfernt den toten Codepfad. |
 | Fitness-Function-Übersetzung in einem Satz? | "Test schreiben." | Eine maschinell prüfbare Aussage in der Form "Komponente/Datei/Layer X darf (nicht) Y" — mit konkretem Werkzeug (ArchUnit/dep-cruiser/import-linter) und konkreter Gate-Verdrahtung (`make arch-check`). | + Wenn dir kein Satz einfällt: ADR-Aussage ist zu vage formuliert (nicht "lose koppeln", sondern "Service-Layer importiert nicht aus `runtime.*`"). Vage ADRs sind unprüfbare ADRs. |

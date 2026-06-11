@@ -1,6 +1,6 @@
 # Modul 10 — Review Harness
 
-> **Aufwand:** ca. 75 Min Lesen · 90 Min Übung.
+> **Aufwand:** ca. 75 Min Lesen · 90 Min Übung. Anschluss: [Phasen-Checkpoint C](../grundlagen/checkpoints.md#checkpoint-c--nach-phase-03-agenten) (erster nach Phase 03) sollte vor diesem Modul liegen.
 
 ## Mini-Glossar für dieses Modul
 
@@ -13,7 +13,7 @@ Sechs neue Begriffe — Volldefinitionen in
 | **Verifier** | Prüft, ob *Plan und DoD* eingehalten sind (Modul 11). Eingang Plan + Diff, nicht ADR-Tiefe. | Bauabnahme gegen Bauplan, nicht gegen Bauverordnung. |
 | **Validator** | Prüft, ob das *Ergebnis dem Nutzen* entspricht (semantische End-zu-End-Prüfung; selten im Code-Pfad). | Endkunde, der das Produkt einmal benutzt. |
 | **Finding** | Eine Reviewer-Beobachtung mit *Pflicht-Kategorie* (HIGH/MEDIUM/LOW/INFO) und Quellen-Anker. | Notizzettel mit Farbe — ohne Farbe kein gültiger Befund. |
-| **Skill-Datei** | Markdown unter `.harness/reviewer/<repo>.md`: HIGH-Liste, Negativbefund-Pflicht, Repo-Anker. | Werkstatt-Handbuch für genau dieses Modell. |
+| **Skill-Datei** | Markdown unter `.harness/skills/reviewer.md`: HIGH-Liste, Negativbefund-Pflicht, Repo-Anker. | Werkstatt-Handbuch für genau dieses Modell. |
 | **Negativbefund** | Bewusster Satz "*hier* habe ich gesucht und *nichts* gefunden" — Vertrauens-Signal. | TÜV-Stempel "Bremsanlage geprüft, ohne Befund". |
 
 ## Engage
@@ -29,7 +29,7 @@ Entscheidungsvorlage.
 
 Nach diesem Modul kannst du:
 
-* Findings nach HIGH/MEDIUM/LOW/INFO *klassifizieren*, Plan-/Design-/Code-Reviews voneinander *unterscheiden* und Grenzfälle (LOW↔HIGH-Wanderung) *bewerten* (Bewerten · konzeptuell),
+* Findings nach HIGH/MEDIUM/LOW/INFO *klassifizieren*, Plan-/Design-/Code-Reviews voneinander *unterscheiden* und Grenzfälle (LOW↔HIGH-Wanderung) *bewerten* (Analysieren + Bewerten · konzeptuell),
 * einen Reviewer-Lauf so *einrichten*, dass er reproduzierbar wird (gleiche Eingabe → ähnliche Findings) (Anwenden · prozedural),
 * einen Konflikt zwischen zwei Reviewer-Läufen (selbes Finding, unterschiedliche Kategorie) *diagnostizieren* (Analysieren · prozedural),
 * einen Reviewer-Skill für ein konkretes Repo *schreiben*, der die Klassifikation HIGH/MEDIUM/LOW/INFO mit repo-spezifischen Anker-Regeln durchsetzt (Erschaffen · prozedural).
@@ -46,6 +46,24 @@ Nach diesem Modul kannst du:
 * Design Reviews
 * Code Reviews
 * Findings und ihre Kategorien
+
+## Drei Review-Arten — wogegen wird geprüft
+
+Die drei Review-Arten unterscheiden sich nicht im *Wie* (alle liefern
+kategorisierte Findings), sondern im *Wogegen* und im *Wann*:
+
+* **Plan-Review** prüft den Plan eines Slices gegen Spec und
+  Accepted-ADRs — *bevor* implementiert wird. Es gibt noch keinen
+  Diff; Eingabe ist der Plan selbst (Modul 9, Schritt 2).
+* **Design-Review** prüft den Lösungs-Schnitt gegen die Architektur:
+  Layer-Grenzen, Schnittstellen, ADR-Verträglichkeit einer neuen
+  Komponente — bevor die Details festgezurrt sind.
+* **Code-Review** prüft den fertigen Diff gegen Plan und Konventionen
+  (AGENTS.md, Hard Rules) — die Findings-Kategorien dieses Moduls.
+
+Merkregel: je früher die Review-Art, desto billiger das Finding —
+ein Plan-Review-HIGH kostet eine Plan-Korrektur, dasselbe Finding im
+Code-Review kostet den ganzen Implementierungs-Lauf.
 
 ## Finding-Kategorien
 
@@ -210,7 +228,7 @@ Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
   nicht-deterministisches Modellverhalten — und benenne, welche der drei Ursachen
   vorliegt und woran du sie erkennst. Erst die Diagnose, dann die Gegenmaßnahme
   (Skill schärfen, Kontext fixieren, Seed pinnen).
-* **(Erschaffen — aktiviert LZ 4)** *Reviewer-Skill für ein konkretes Repo schreiben.* Wähle eines der vier Fallstudien-Repos (oder dein eigenes). Schreibe eine Skill-Datei nach dem Muster des Worked Example (die sechs Schritte oben: Pfad/Kopf · Eingangs-Kontext · Kategorien-Regeln · Anti-Pattern/"Was bist du nicht" · Output-Schema · Steering-Loop-Eintrag — die HIGH/MEDIUM/LOW/INFO-Liste und die Negativbefund-Pflicht sitzen in den Kategorien-Regeln bzw. im Output-Schema). Pflicht: die HIGH-Liste muss mindestens *zwei* Repo-spezifische Regeln nennen, die ein generischer Skill nicht abdeckt (z. B. *"git mv + Inhalt = zwei Commits"* für `grid-gym`; *"Accepted-ADRs immutable"* für `bess-ems`). Lege die Datei unter `.harness/reviewer/<repo-name>.md` ab und führe einen Lauf auf einem realen Diff durch — kommt eines deiner zwei Repo-spezifischen HIGHs zur Anwendung? Wenn nein, ist der Skill noch nicht scharf genug.
+* **(Erschaffen — aktiviert LZ 4)** *Reviewer-Skill für ein konkretes Repo schreiben.* Wähle eines der vier Fallstudien-Repos (oder dein eigenes). Schreibe eine Skill-Datei nach dem Muster des Worked Example (die sechs Schritte oben: Pfad/Kopf · Eingangs-Kontext · Kategorien-Regeln · Anti-Pattern/"Was bist du nicht" · Output-Schema · Steering-Loop-Eintrag — die HIGH/MEDIUM/LOW/INFO-Liste und die Negativbefund-Pflicht sitzen in den Kategorien-Regeln bzw. im Output-Schema). Pflicht: die HIGH-Liste muss mindestens *zwei* Repo-spezifische Regeln nennen, die ein generischer Skill nicht abdeckt (z. B. *"git mv + Inhalt = zwei Commits"* für `grid-gym`; *"Accepted-ADRs immutable"* für `bess-ems`). Lege die Datei unter `.harness/skills/reviewer.md` (im gewählten Repo) ab und führe einen Lauf auf einem realen Diff durch — kommt eines deiner zwei Repo-spezifischen HIGHs zur Anwendung? Wenn nein, ist der Skill noch nicht scharf genug.
 
 ## Reflexion
 
@@ -228,6 +246,7 @@ Schreibübung. Modul-spezifische Trigger:
 * **(Erinnern)** Welche vier Finding-Kategorien gibt es, und welche zwei davon blockieren typischerweise den Merge?
 * Wann wird aus einem LOW-Finding ein HIGH-Finding?
 * **(Bewerten — aktiviert LZ 1)** Zwei Findings auf demselben PR: (A) ein unbenutzter Import im Auth-Modul; (B) eine fehlende Auth-Prüfung an einem neuen, noch nicht produktiven Endpoint. Ordne jedes in HIGH/MEDIUM/LOW ein und begründe die Grenzfall-Entscheidung — was kippt B nach HIGH bzw. hält A bei LOW?
+* **(Analysieren — aktiviert LZ 1)** Drei Prüf-Situationen — ordne jede der richtigen Review-Art (Plan- · Design- · Code-Review) zu und nenne pro Fall, *wogegen* geprüft wird: (A) Ein Slice-Plan sieht vor, den Index synchron im Request-Pfad zu schreiben — ADR-0012 verlangt Temp-File + Atomic Rename. (B) Ein Diff führt in `service/` einen direkten `requests`-Import ein, obwohl der Plan den Adapter-Weg nennt. (C) Eine neue Komponente "Export-Worker" soll direkt auf den Index-Store zugreifen statt über die Adapter-Schicht — Code existiert noch nicht, der Schnitt steht zur Diskussion.
 * **(Analysieren — aktiviert LZ 3)** Der Reviewer-Agent meldet dasselbe Finding zweimal mit unterschiedlicher Kategorie. Diagnostiziere zuerst die *Ursache* (Kategorie-Drift · Kontext-Unterschied · Nicht-Determinismus) — woran erkennst du, welche vorliegt? — und leite *dann* die passende Gegenmaßnahme ab. Warum ist "die mildere Kategorie nehmen" die falsche Antwort?
 * **(Anwenden)** Du erhältst 17 Findings auf einen PR. Beschreibe deine ersten drei Aktionen — in dieser Reihenfolge.
 
@@ -237,6 +256,7 @@ Schreibübung. Modul-spezifische Trigger:
 |---|---|---|---|
 | Vier Finding-Kategorien + welche blockieren? | drei genannt, ohne Blocker-Trennung | HIGH (blockiert Merge: Sicherheit, Korrektheit, ADR-Verstoß) · MEDIUM (sollte vor Merge geklärt sein, blockiert formal nicht immer) · LOW (nice-to-fix) · INFO (Hinweis, keine Aktion). HIGH ist der harte Blocker; MEDIUM ist Soll-Blocker. | + Trennlinie LOW/MEDIUM ist im Reviewer-Skill *repo-spezifisch* zu fixieren; ohne wandert dieselbe Beobachtung zwischen Läufen — das ist der Hauptgrund, warum Reviewer-Konsistenz ohne Skill-Datei bricht. |
 | Wann LOW → HIGH? | "Wenn es wichtig wird." | Vier Trigger: Geltungsbereich erweitert (z. B. Sicherheits-Check-Pfad), Wiederholungs-Muster (3×), externe Wirkung (Compliance), Slice geht in Produktion. | + Hinweis: Wenn Reviewer/Implementer über die Kategorie streiten, ist die Klassifikations-Regel im Reviewer-Skill zu vage — das ist ein Steering-Loop-Signal, kein Reviewer-Fehler. |
+| Drei Prüf-Situationen der Review-Art zuordnen? | Zuordnung geraten, ohne "wogegen"-Begründung | A = Plan-Review (Plan gegen Spec/ADR, *vor* Implementierung — der ADR-Verstoß steht schon im Vorhaben) · B = Code-Review (Diff gegen Plan + Konventionen) · C = Design-Review (Komponenten-Schnitt gegen Architektur/Layer-Grenzen, bevor Code existiert). | + Pro Fall das Prüf-Artefakt benannt (A: Plan + ADR-0012; B: Diff + Plan + AGENTS.md; C: Schnitt + Layer-Regel) und die Kosten-Pointe: A im Code-Review erst zu fangen kostet den ganzen Implementierungs-Lauf — je früher die Review-Art, desto billiger das Finding. |
 | Zwei konkurrierende Findings einordnen + Grenzfall begründen? | beide irgendwie kategorisiert, ohne Begründung | A (unbenutzter Import) = LOW: stilistisch, keine semantische Wirkung. B (fehlende Auth-Prüfung) = HIGH: Sicherheits-Anti-Pattern im kritischen Pfad — "noch nicht produktiv" mildert nicht, weil der Endpoint mit dem Merge erreichbar wird. | + Grenzfall sauber benannt: B kippt nicht durch "Wichtigkeit", sondern durch den Anker *Sicherheit/Korrektheit kritischer Pfad*; A bleibt LOW, würde aber nach MEDIUM wandern bei 3×-Wiederholung — die Trennlinie gehört repo-spezifisch in den Reviewer-Skill. |
 | Reviewer meldet dasselbe Finding zweimal anders kategorisiert? | "Die strengere nehmen." | Beide ernstnehmen → Differenz erklären (Kontext-Unterschied?) → Reviewer-Skill schärfen, nicht mildere/strengere Antwort auswählen. | + Anti-Antwort "Agent hat sich selbst korrigiert" — das belohnt Inkonsistenz; mildere Antwort als Wahrheit zu akzeptieren ist *Reward Hacking* der Klassifikations-Disziplin. |
 | 17 Findings — erste drei Aktionen? | sequentiell abarbeiten | (1) Nach Kategorie sortieren, HIGH zuerst lesen · (2) HIGH-Findings prüfen: ADR-Verstoß / Sicherheit / Korrektheit? gegen Plan oder gegen Spec? · (3) MEDIUM clustern, LOW/INFO erstmal überspringen — Reviewer-Skill anpassen, falls Cluster auf vage Regel hinweist. | + Falle: wer am ersten LOW-Finding hängenbleibt (typischer Fehler aus dem Engage), arbeitet HIGH-Findings nicht ab — und genau dadurch wird die Findings-Liste zur Mängelliste statt Entscheidungsvorlage. |

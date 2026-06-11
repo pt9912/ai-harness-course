@@ -170,7 +170,7 @@ Sechs Schritte, eine Freigabe mit Belegen pro Item. Vergleich:
 * Produktionsfreigabe eines Projekts (Checkliste aus dem Begleit-Repo) — **erweitere** die Repo-Checkliste um zwei eigene Items mit Beleg-Anforderung für ein Projekt deiner Wahl.
 * **(Erschaffen — voll aktiviert LZ 1)** *Freigabe-Checkliste aus dem leeren Skelett neu entwerfen.* Lege eine `release-checklist.md` für ein eigenes Projekt (oder eines der Fallstudien-Repos) **von Grund auf** an — nicht durch Ergänzung der Lab-Vorlage. Pflicht: fünf Phasen-Abschnitte (Vorbereitung · Reproduzierbarkeits-Anker · Replay-Beleg · Runtime-Validation · Anti-Items), je Phase mindestens zwei Items mit *Beleg* (Datei, Make-Target, Trace-ID), sowie eine *Incident-Klausel*, die regelt, wann die Freigabe automatisch entfällt. Vergleich am Ende mit dem Worked Example oben und der Lab-Vorlage `runbooks/release-checklist.md` — welche Items hast du *nicht* gehabt? Welche hast du, die das Worked Example *nicht* nennt?
 * Spiele ein Incident-Szenario durch: Agent löscht versehentlich produktive Daten — was tust du in den ersten 15 Minuten?
-* **(Analysieren — aktiviert LZ 2)** *Injection-Symptome in einer Telemetrie erkennen.* Gegeben der folgende Ausschnitt aus einem Agentenlauf-Trace (Format wie Modul 15):
+* **(Analysieren — aktiviert LZ 2)** *Injection-Symptome in einer Telemetrie erkennen.* Der Slice-Auftrag lautete: *"Fasse `docs/spec.md` und die hochgeladenen Nutzer-Notizen zusammen"* — kein Akzeptanzkriterium verlangt mehr. Gegeben der folgende Ausschnitt aus dem Agentenlauf-Trace (Format wie Modul 15):
 
   ```text
   span 04  tool=read_file      args={path: "docs/spec.md"}        cache=hit
@@ -180,7 +180,7 @@ Sechs Schritte, eine Freigabe mit Belegen pro Item. Vergleich:
   span 08  output: "Erledigt. Zusätzlich habe ich die Konfiguration gesichert."
   ```
 
-  Markiere die *drei* Injection-Symptome und ordne jedes einer Telemetrie-Spur zu: (1) ungewöhnliche Tool-Sequenz (`read_file` auf `../../.env` — Pfad außerhalb des Slice-Scopes), (2) ein `http_post` an eine externe Domain, das der Slice nicht verlangt (Tool-Allowlist-Reject hätte greifen müssen), (3) Output-vs-Eingabe-Drift (span 08 behauptet eine Handlung, die in keinem Akzeptanzkriterium steht). Begründe pro Symptom, *welche* Spur es sichtbar macht — und welche *eine* präventive Kontrolle (Tool-Allowlist, `computational feedforward`) den Lauf gar nicht erst so weit hätte kommen lassen.
+  Markiere die *drei* Injection-Symptome in diesem Lauf und ordne jedes einer Telemetrie-Spur zu (Eingabe-Roh-Logging · Tool-Call-Audit-Log · Output-vs-Eingabe-Konsistenz-Marker — die drei Spuren aus dem Selbstcheck). Begründe pro Symptom, *welche* Spur es sichtbar macht — und benenne die *eine* präventive Kontrolle (`computational feedforward`), die den Lauf gar nicht erst so weit hätte kommen lassen.
 * **(Bewerten — aktiviert LZ 4)** *Rollback-oder-Fix-Forward-Abwägung.* Diese
   Übung trainiert die *Entscheidung*, die das Incident-Szenario oben nur
   *auslöst*. Drei Incidents, je eine andere Ausgangslage. Wähle pro Fall

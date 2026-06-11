@@ -148,8 +148,10 @@ ENTRYPOINT ["python", "-m", "docsearch"]
 ```
 
 Für Sprachen mit eigenständigem Binär-Output (Go, Rust, statisch
-gelinkte JVM-AOT) ist die noch härtere Variante `gcr.io/distroless/static-debian12:nonroot`
-ohne interpretierbares Runtime — siehe
+gelinkte JVM-AOT) ist die noch härtere Variante
+`gcr.io/distroless/static-debian12:nonroot@sha256:d093aa3e…` (auch
+Distroless-Tags floaten — deshalb per Digest gepinnt) ohne
+interpretierbares Runtime — siehe
 [`../../../lab/example/go/Dockerfile`](../../../lab/example/go/Dockerfile)
 als Vorbild.
 
@@ -199,7 +201,7 @@ demselben Drei-Stage-Schnitt mit sprach-spezifischen Anpassungen.
 
 ## Übungen
 
-* **(Erschaffen — aktiviert LZ 1)** *Multi-Stage-Dockerfile von Grund auf schreiben.* Nimm eine Toolchain deiner Wahl (oder eine der fünf Lab-Sprachen) und schreibe — aus dem leeren File, *nicht* durch Kopieren des Worked-Example-Dockerfiles — einen Multi-Stage-Dockerfile mit mindestens den drei Stages aus dem Worked Example (Builder · Test · Runtime), gepinnter Base-Image-Version (per Digest, nicht `:latest`) und Lock-File-Kopie vor dem Dependency-Install. Test: `docker build` läuft, und das Runtime-Image enthält *keine* Build-Tools mehr (`which gcc`/`go`/`mvn` schlägt fehl).
+* **(Erschaffen — aktiviert LZ 1)** *Multi-Stage-Dockerfile von Grund auf schreiben.* Nimm eine Toolchain deiner Wahl (oder eine der fünf Lab-Sprachen) und schreibe — aus dem leeren File, *nicht* durch Kopieren des Worked-Example-Dockerfiles — einen Multi-Stage-Dockerfile mit mindestens den drei Stages aus dem Worked Example (deps · build · runtime) — optional ergänzt um eine vierte test-Stage, die die Gates im Build-Kontext laufen lässt —, gepinnter Base-Image-Version (per Digest, nicht `:latest`) und Lock-File-Kopie vor dem Dependency-Install. Test: `docker build` läuft, und das Runtime-Image enthält *keine* Build-Tools mehr (`which gcc`/`go`/`mvn` schlägt fehl).
 * Mache ein Image nicht-reproduzierbar (z. B. unpinnierte Base) und beobachte den Drift
 * **Devcontainer-oder-Compose-Entscheidung** — aktiviert das Bewertungs-Lernziel
   (LZ 4) zur Setup-Abwägung. Drei Teams, je eine Ausgangslage. Entscheide

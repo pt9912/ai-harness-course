@@ -2,13 +2,6 @@
 
 > **Aufwand:** ca. 60 Min Lesen · 60 Min Übung.
 
-## Engage
-
-Drei Stunden Diskussion mit deinem Reviewer-Agent, am Ende setzt er den
-PR auf "approve". Eine Woche später läuft Verifikation rot, weil das
-Feature gegen ADR-3 verstößt. *Warum ist Review grün und Verifikation
-rot?* Antwort am Ende dieses Moduls — und sie liegt im Diagramm unten.
-
 ## Mini-Glossar für dieses Modul
 
 Modul 0 hat acht Grundbegriffe eingeführt; dieses Modul trägt **acht
@@ -43,6 +36,13 @@ für die ersten Seiten reichen die folgenden Ein-Satz-Anker:
 streift nur Schritt 0 und werden in Modul 2 voll entfaltet. Wenn beim
 ersten Lesen ein Begriff unklar bleibt, ist die einsatzklare Tiefe später
 in den Modulen 2–4 (Spec, ADR, Plan) verankert — nicht hier.
+
+## Engage
+
+Drei Stunden Diskussion mit deinem Reviewer-Agent, am Ende setzt er den
+PR auf "approve". Eine Woche später läuft Verifikation rot, weil das
+Feature gegen ADR-3 verstößt. *Warum ist Review grün und Verifikation
+rot?* Antwort am Ende dieses Moduls — und sie liegt im Diagramm unten.
 
 ## Lernziele
 
@@ -281,6 +281,7 @@ nächste Konflikt — nicht der nächste Lesedurchgang.
 * Zeichne den Zyklus für ein Mini-Feature auf einem Blatt
 * **(Analysieren — aktiviert LZ 3)** Identifiziere im Begleit-Repo einen Slice und folge der Kette Spec → ADR → Plan → PR — *prüfe*, ob jede Stufe per ID auf die vorige verweist, und benenne die erste Stelle, an der die Kette reißt
 * Schreibe einen Source-Precedence-Block für ein eigenes Repo als ersten Abschnitt einer neuen `harness/README.md` (Vorlage in [`/lab/templates/harness/README.template.md`](../../../lab/templates/harness/README.template.md))
+* Wer das [Worked Example](#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren) per Skip-Hinweis übersprungen hat, holt jetzt dessen Schritt 6 (*Bewusstes Brechen: einen Konflikt provozieren*) als Fehlerfall-Übung nach — die Fehler-Provokation ist die einzige des Moduls und kein optionaler Teil
 
 ## Reflexion
 

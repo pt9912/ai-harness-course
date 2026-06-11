@@ -3,13 +3,13 @@
 > **Aufwand:** ca. 120 Min Lesen · 120 Min Übung. Dieses Modul ist absichtlich tief — der 8-Schritt-Workflow und die Hard Rules sind die operative Brücke zwischen Theorie (Module 1–8) und Gates (Module 10–13).
 >
 > **Segmenting-Empfehlung (Sweller).** Das Modul zerfällt natürlich in
-> zwei Teile. **Teil A (8a — Workflow):** Engage · Lernziele ·
+> zwei Teile. **Teil A (9a — Workflow):** Engage · Lernziele ·
 > Mini-Vorgriff · Kernidee · 8-Schritt-Workflow. Lies A und mache
 > den [minimalen Übungspfad](#minimaler-übungspfad) — *bevor* du Teil B
-> öffnest. **Teil B (8b — Regeln, Kontext, Worked Example):** Hard
+> öffnest. **Teil B (9b — Regeln, Kontext, Worked Example):** Hard
 > Rules · Typische Fehlvorstellungen · Kontext-Verdichtung · Worked
 > Example · Übungen · Reflexion · Selbstcheck. Der Trenner steht
-> sichtbar nach dem Workflow-Diagramm ([§Pause-Punkt 8a → 8b](#pause-punkt-8a--8b)).
+> sichtbar nach dem Workflow-Diagramm ([§Pause-Punkt 9a → 9b](#pause-punkt-9a--9b)).
 > Wer A und B in einer Sitzung liest, wird die Hard Rules nicht mehr in
 > die richtige Stelle des Workflows einordnen — sie sind ein zweiter,
 > paralleler Mechanismus, kein nächster Schritt.
@@ -28,7 +28,7 @@ Image-Hash-Vorgriff in
   als Argument: wer Spec/ADR/AGENTS.md am Anfang des Kontexts hält,
   produziert hohe Cache-Hit-Raten; wer den Kontext zwischen Läufen
   durcheinanderwirbelt, produziert Cache-Misses. Volldefinition Modul
-  14.
+  15.
 * **Doku-Konsistenz-Agent** — automatisierter Drift-Detektor, der
   AGENTS.md, `harness/README.md` und realen Code-/Gate-Stand
   vergleicht und Widersprüche meldet. In diesem Modul nur als
@@ -116,10 +116,10 @@ Zwei Rücksprungkanten sind didaktisch wesentlich: 5→4 und 6→4. Nicht
 zurück zu Schritt 1 — der Plan wird *verfeinert*, nicht der Kontext neu
 gelesen.
 
-## Pause-Punkt 8a → 8b
+## Pause-Punkt 9a → 9b
 
-> *Hier endet Teil 8a.* Wenn du der Segmenting-Empfehlung folgst (siehe
-> Anlauf-Box am Modul-Kopf), mach jetzt Pause und nimm Teil 8b in einer
+> *Hier endet Teil 9a.* Wenn du der Segmenting-Empfehlung folgst (siehe
+> Anlauf-Box am Modul-Kopf), mach jetzt Pause und nimm Teil 9b in einer
 > *zweiten* Sitzung. Begründung: Hard Rules sind ein paralleler
 > Mechanismus, kein nächster Schritt im Workflow. In *derselben* Sitzung
 > gelesen, kleben sie an Schritt 6 oder 7 — und das ist die
@@ -133,8 +133,8 @@ gelesen.
 > 3. Was ist die Eingabe von Schritt 1, und was bestimmt sie?
 >
 > Wenn du eine der drei Fragen unsicher beantwortest, ist das ein
-> Signal, Teil 8a kurz zu wiederholen — nicht, in 8b weiterzulesen. Die
-> Hard Rules in 8b setzen den Workflow voraus.
+> Signal, Teil 9a kurz zu wiederholen — nicht, in 9b weiterzulesen. Die
+> Hard Rules in 9b setzen den Workflow voraus.
 >
 > Wer in *einer* Sitzung weiterliest: das ist okay, aber nimm das
 > Selbsttest-Trio als Anker — das Modul ist explizit auf zwei Sitzungen

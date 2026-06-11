@@ -18,6 +18,7 @@ dem diese Closure-Werkzeuge strukturell legitim werden — sie wirkt
 eine Ebene höher und ersetzt deren Closure-Funktion nicht
 (Disambiguierungs-Anker in
 [Modul 13 §Bootstrap-aware Gates](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)).
+
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
 | **Carveout** | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel — mit Trigger oder explizit als permanent markiert. | ein Loch im Zaun, mit Notiz "wann wird zugemacht?". |
@@ -39,7 +40,7 @@ Nach diesem Modul kannst du:
 * einen Carveout mit Trigger, Folge-Slice und Auflösungs-Kriterium *dokumentieren* (Erschaffen · prozedural),
 * zwischen temporärem und permanentem Carveout *unterscheiden* und einen falsch klassifizierten Carveout *erkennen* (Bewerten · konzeptuell),
 * den Unterschied Carveout ↔ BF-Sub-Area-Markierung ↔ bootstrap-aware Gate *einordnen* (Analysieren · konzeptuell),
-* ein Carveout-Audit als wiederkehrenden Slice *entwerfen* (Erschaffen · prozedural).
+* ein Carveout-Audit als wiederkehrenden Slice aus der Schablone *instanziieren* (Anwenden · prozedural).
 
 ## Lab-Bezug
 
@@ -391,7 +392,7 @@ sonst ist er eine schöne Konvention, die niemand prüft.
 
 * **Carveout dokumentieren** (Lernziel 1 · Erschaffen·prozedural; folgt [Worked Example A](#worked-example-a-einen-carveout-dokumentieren)). Lege für eine fehlende Coverage-Schwelle eine `CO-<NNN>-*.md`-Datei mit den sechs Pflichtfeldern an (Status, Datum, betroffenes Gate, Geltungsbereich, Folge-Slice, Auflösungs-Trigger). Trage den `# CO-<NNN>`-Kommentar in die Gate-Konfiguration ein. **Begründe zum Schluss in *einem* Satz, warum dein Fall ein Carveout ist und nicht eine BF-Sub-Area-Markierung oder ein permanenter ADR** (das ist die produktive Mini-Anwendung von Lernziel 3 — die Werkzeug-Disambiguierung aus Worked Example A Schritt 6). Vergleich: [`../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md`](../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md).
 * **Folge-Slice verknüpfen** (Lernziel 1, fortgesetzt). Schreibe den Folge-Slice mit konkretem DoD und beobachtbarem Trigger so, dass die Auflösung des Carveouts maschinell erkennbar wird (Schritt 5 in Worked Example A).
-* **Carveout-Audit-Slice entwerfen** (Lernziel 4 · Erschaffen·prozedural; folgt [Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)). Schreibe für die *nächste* Welle deines Repos einen `SL-CO-AUDIT-<welle>`-Slice mit vier DoD-Punkten und Rollen-Zuweisung (Planner identifiziert · Architect entscheidet bei Permanenz · Implementer führt aus). Lege die Audit-Bericht-Tabelle (vorher/nachher/Aktion) als Closure-Notiz-Block bei. Provoziere als Fehlerfall: lass *eine* Welle ohne Audit schließen und beobachte, was nach zwei Wellen mit den unauditierten Carveouts passiert.
+* **Carveout-Audit-Slice instanziieren** (Lernziel 4 · Anwenden·prozedural; folgt [Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)). Schreibe für die *nächste* Welle deines Repos einen `SL-CO-AUDIT-<welle>`-Slice mit vier DoD-Punkten und Rollen-Zuweisung (Planner identifiziert · Architect entscheidet bei Permanenz · Implementer führt aus). Lege die Audit-Bericht-Tabelle (vorher/nachher/Aktion) als Closure-Notiz-Block bei. Provoziere als Fehlerfall: lass *eine* Welle ohne Audit schließen und beobachte, was nach zwei Wellen mit den unauditierten Carveouts passiert.
 
 *Lernziel 3 (einordnen) bekommt keine eigene vierte Übung — eine solche
 hätte das Modul-Volumen ohne CA-Gewinn vergrößert. Stattdessen wird die
@@ -418,7 +419,7 @@ Modul-spezifische Trigger:
 * **(Erinnern)** Wo im Repo lebt ein Carveout — Verzeichnis und Datei-Konvention?
 * Wann darf ein Carveout das `make gates`-Ziel grün halten, und wann nicht?
 * Drei Werkzeuge für gelockerte Gate-Disziplin — wann welches? Unterscheide **Carveout**, **BF-Sub-Area-Markierung** (siehe [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)) und **Bootstrap-aware Gate** (siehe [Modul 13](../04-qualitaet/modul-13-quality-gates.md)).
-* **(Erschaffen)** Skizziere einen Carveout-Audit-Slice für die nächste Welle deines Repos: DoD, beteiligte Rollen, Belegartefakt. Welche drei Status-Übergänge muss er möglich machen — und welcher davon ist der unbequemste?
+* **(Anwenden — aktiviert LZ 4)** Skizziere einen Carveout-Audit-Slice für die nächste Welle deines Repos: DoD, beteiligte Rollen, Belegartefakt. Welche drei Status-Übergänge muss er möglich machen — und welcher davon ist der unbequemste?
 
 ### Selbstcheck-Rubrik
 

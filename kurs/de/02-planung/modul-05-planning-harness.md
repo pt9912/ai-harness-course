@@ -32,7 +32,7 @@ Nach diesem Modul kannst du:
 
 * Slices durch die Lifecycle-Verzeichnisse `open → next → in-progress → done` *bewegen* und Triggerbedingungen je Übergang *benennen* (Anwenden · prozedural),
 * einen Slice anhand zweier Größen-Kriterien *bewerten* (in einem Agenten-Lauf abschließbar, in einer Review-Sitzung prüfbar) (Bewerten · konzeptuell),
-* einen zu großen Slice schnittfrei in zwei umsetzbare *zerlegen* und die Schnittentscheidung *begründen* (Erschaffen · prozedural),
+* einen zu großen Slice schnittfrei in zwei umsetzbare *zerlegen* und die Schnittentscheidung *begründen* (Erschaffen + Bewerten · prozedural),
 * Closure-Kriterien mit Lerneintrag *formulieren* (Erschaffen · prozedural),
 * für die von einem Slice berührten Sub-Areas den Bootstrap-Modus gegen das Kriterien-Set *begründen* (Analysieren · konzeptuell — Transfer aus Modul 2; eine Begründung, die die vier Kriterien gegeneinander gewichtet, ist Analyse, nicht bloße Klassifikation).
 
@@ -281,7 +281,7 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 * Wann darf ein Slice in `done/` landen, obwohl ein Gate rot ist?
 * **(Erschaffen — aktiviert LZ 4)** Formuliere für einen Slice, den du nach `done/` bewegst, *zwei* beobachtbare Closure-Kriterien *und* einen Lerneintrag. Woran erkennst du, dass dein Lerneintrag mehr ist als "Tests grün" — welche der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke) trägt er?
 * **(Analysieren — Transfer aus Modul 2)** Welche Sub-Areas berührt der nächste anstehende Slice — und welcher Modus passt für jede dieser Sub-Areas? Begründe je gegen mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand) — eine Begründung wägt die Kriterien gegeneinander, eine reine "Modus, weil Doku fehlt"-Zuordnung ist Klassifikation, kein Bewerten.
-* **(Erschaffen/Bewerten — aktiviert LZ Slice-Schnitt)** Gegeben `SL-031 — Bestell-Checkout` mit DoD aus fünf Punkten (Warenkorb-API · Zahlungs-Integration · Bestätigungs-Mail · Lager-Abbuchung · Audit-Log): (a) Bewerte gegen die zwei Größen-Kriterien — *in einem Agenten-Lauf abschließbar* und *in einer Review-Sitzung prüfbar* — ob er zu groß ist. (b) Schlage *einen* konkreten Schnitt in zwei (oder mehr) lieferbare Slices vor und begründe den Schnitt-Typ (nach Schichten vs. nach Lieferwert).
+* **(Erschaffen + Bewerten — aktiviert LZ 3)** Gegeben `SL-031 — Bestell-Checkout` mit DoD aus fünf Punkten (Warenkorb-API · Zahlungs-Integration · Bestätigungs-Mail · Lager-Abbuchung · Audit-Log): (a) Bewerte gegen die zwei Größen-Kriterien — *in einem Agenten-Lauf abschließbar* und *in einer Review-Sitzung prüfbar* — ob er zu groß ist. (b) Schlage *einen* konkreten Schnitt in zwei (oder mehr) lieferbare Slices vor und begründe den Schnitt-Typ (nach Schichten vs. nach Lieferwert).
 
 ### Selbstcheck-Rubrik
 
