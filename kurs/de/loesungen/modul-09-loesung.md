@@ -27,7 +27,7 @@ Häufiger Fehler: Schritt 7 und 8 werden unter Zeitdruck weggelassen.
 Damit wird das Modul-Versprechen "Plan → Diff → Code" zur "Diff →
 Code"-Schleife — und die Risiken werden in die nächste Rolle verlagert.
 
-### (Anwenden) Roter `arch-check` in Schritt 6 — welche Rücksprungkante?
+### (Anwenden — aktiviert LZ 1) Roter `arch-check` in Schritt 6 — welche Rücksprungkante?
 
 Rücksprung zu **Schritt 4 (Plan verfeinern)**, nicht zu Schritt 1. Der
 rote `arch-check` ist ein ADR-Verstoß durch einen direkten Import — der
@@ -96,7 +96,35 @@ Die wertvollsten Hard Rules sind die, die *in mehrere Quadranten*
 fallen — sie sind redundant durchgesetzt und überleben einen
 einzelnen Tooling-Ausfall.
 
-### (Anwenden) Welcher Schritt deines Workflows ist heute am schwächsten verankert — woran erkennst du das?
+### (Bewerten — aktiviert LZ 4) Wie misst du die Wirkung von AGENTS.md auf einen Agentenlauf?
+
+Zwei Läufe, vier Achsen, alles andere konstant:
+
+- **Lauf A (mit AGENTS.md):** vollständiges Kontextpaket —
+  Spec-Auszug, betroffene ADRs, AGENTS.md, Tool-Allowlist.
+- **Lauf B (ohne AGENTS.md):** *exakt* derselbe Aufbau, nur AGENTS.md
+  aus dem Kontext entfernt.
+- **Konstant gehalten:** Slice (ideal `SL-014a`), Spec-/ADR-Stand,
+  Modellversion, Seed. Variiert wird *eine einzige* Variable — sonst
+  ist der Vergleich keine Messung, sondern ein Bauchgefühl.
+
+Gemessen wird entlang der vier Achsen aus dem Übungsskelett:
+
+| Achse | Messgröße |
+|---|---|
+| Hard-Rule-Konformität | Anzahl Verstöße in Lauf B (vom Reviewer-Agent benannt) |
+| Architektur-Konformität | `make arch-check` rot/grün |
+| Plan-Qualität | Schritt-4-Ausgabe Wort für Wort vergleichen (Out-of-Scope, Risiken, Folge-Slices benannt?) |
+| Bericht-Qualität | binär: Schritt 8 enthält Sensors + Restrisiken konkret / enthält nicht |
+
+Auf Exzellent-Niveau: Befund einem Quadranten zuordnen (AGENTS.md ist
+*inferential feedforward*) und vorhersagen, welche Achse am stärksten
+reagiert. Der Sonderfall "A ≈ B" ist selbst ein Befund — die Defaults
+des Modells decken die Regeln zufällig ab; beim nächsten Modellwechsel
+können die *unausgesprochenen* Defaults andere sein (Modul 12:
+Drift-Diagnose).
+
+### (Bewerten + Metakognition) Welcher Schritt deines Workflows ist heute am schwächsten verankert — woran erkennst du das?
 
 Eine ehrliche Antwort hat drei Bestandteile:
 
@@ -128,13 +156,28 @@ Maßstab:
 - Der erzeugte Diff lässt sich auf den Slice-Plan zurückführen — kein Code, der nicht durch DoD gefordert ist.
 - Der Agent berichtet am Ende *was er ausgeführt hat* (welche Sensors grün, welche rot, welche Doku aktualisiert).
 
-### Lass den Agenten ohne ADR-Kontext laufen und vergleiche
+### AGENTS.md-Wirkungsmessung (Übungsskelett)
 
-Erwartung: Ohne ADR baut der Agent etwas Plausibles, aber typischerweise
-falsch geschichtet (Service ruft direkt Repo auf, weil "kürzer" ist).
-*Mit* ADR baut er den Adapter dazwischen — auch wenn der zunächst dünn
-wirkt. Der Vergleich zeigt: ADR ist nicht Bürokratie, sondern
-Trampelpfad-Verhinderung.
+Folge dem sechsschrittigen Skelett aus dem Modul: Slice fixieren →
+Lauf A (mit AGENTS.md) → Lauf B (ohne, sonst identisch: gleiches
+Modell, gleicher Seed, gleicher Spec-/ADR-Stand) → Diff entlang der
+vier Achsen messen → Quadranten-Zuordnung → Reflexionseintrag.
+
+Maßstab (aus dem Modul):
+
+- *Solide:* vier Achsen befüllt, Quadrant benannt, mindestens eine
+  Differenz zwischen A und B mit Beleg im Diff.
+- *Exzellent:* zusätzlich Hypothese, *welche* einzelne Hard Rule den
+  größten Unterschied verursacht — und ein dritter Lauf, der diese
+  Hard Rule isoliert prüft.
+
+Typische Erwartung an Lauf B: Der Code bleibt plausibel, aber die
+Hard-Rule-Verstöße häufen sich genau dort, wo AGENTS.md *Negativregeln*
+trug (z. B. Inline-Suppressions, direkter Import statt Adapter) — der
+Agent ersetzt fehlende Regeln durch eigene Defaults, nicht durch
+Schweigen. Häufiger Übungsfehler: zwischen A und B "nebenbei" auch den
+Slice oder das Modell wechseln — dann misst du zwei Variablen und
+kannst keinen Befund AGENTS.md zuschreiben.
 
 ### Formuliere drei Hard Rules für ein Beispiel-Repo
 
@@ -143,6 +186,40 @@ Maßstab für gute Hard Rules:
 - Falsch/Richtig-Beispiel ist konkret und ausführbar.
 - *Technische* Begründung (nicht "wir mögen das nicht").
 - Mindestens *eine* der drei ist maschinell durchsetzbar — sonst ist die Liste reine Beschwörung.
+
+Beispiel-Konstruktion für ein fiktives Python-Service-Repo
+(`orders-api`), auf Übungs-Niveau ausgearbeitet:
+
+1. **Kein direkter DB-Zugriff aus `api/`-Handlern.**
+   *Falsch:* `from app.db import session` in `api/orders.py`.
+   *Richtig:* `api/orders.py` ruft `service/orders.py`, das über
+   `repository/orders.py` auf die DB geht.
+   *Begründung:* Hexagonale Schichtung (ADR-Bezug); sonst wachsen
+   Query-Logik und HTTP-Validierung zusammen und sind einzeln nicht
+   testbar. **Maschinell durchsetzbar:** Import-Linter-Regel
+   (`arch-check`-Gate: `api/* darf nicht repository/* importieren`).
+2. **`# noqa` / `# type: ignore` sind verboten.**
+   *Falsch:* `result = parse(data)  # type: ignore`.
+   *Richtig:* Ausnahme zentral in `pyproject.toml` mit Begründung.
+   *Begründung:* Inline-Suppressions sind unsichtbare Carveouts ohne
+   Trigger; zentral dokumentiert bleiben sie auditierbar.
+   **Maschinell durchsetzbar:** `noqa-gate` (grep-basiert) in
+   `make gates`.
+3. **Migrations-Dateien werden nie editiert, nur ergänzt.**
+   *Falsch:* bestehende `migrations/0042_*.py` umschreiben.
+   *Richtig:* neue Migration `0043_*` anlegen, die korrigiert.
+   *Begründung:* Bereits ausgerollte Migrationen sind auf fremden
+   Umgebungen gelaufen; ein Edit erzeugt divergente Schemata, die kein
+   Gate mehr einfängt. **Maschinell durchsetzbar:** CI-Check, der im
+   Diff `M`-Status auf `migrations/` verbietet.
+
+Damit ist nicht nur *eine*, sondern jede der drei maschinell
+durchsetzbar — das ist kein Zufall: Die Übung trainiert genau den
+Reflex, jede Hard Rule in *zwei* Quadranten zu legen (AGENTS.md-Eintrag
+= inferential feedforward, Gate = computational feedback). Eine Regel,
+für die dir partout keine Fitness Function einfällt (wie "git mv +
+Inhalt = zwei Commits"), bleibt zulässig — aber sie ist halb
+durchgesetzt, und das sollte die Begründung ehrlich sagen.
 
 ## Häufige Fehler
 

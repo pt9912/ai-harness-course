@@ -24,18 +24,103 @@ keinen Welle-Eintrag, sondern einen Sprint. Sprint ist legitim — aber
 dann gehört das in eine separate operationale Ebene, nicht in die
 Roadmap.
 
+### (Erinnern) Drei Beispiele für beobachtbare Trigger aus diesem Modul
+
+Aus den Engage-/Fehlvorstellungs-Blöcken des Moduls:
+
+1. *"SL-024 liegt in `done/`."*
+2. *"Replay-Lauf gegen Golden Set grün."*
+3. *"Carveout `CO-007` aufgelöst."*
+
+Was die drei gemeinsam haben — und was sie von "bis Ende Juli" oder
+"sobald wir Zeit haben" unterscheidet: Ein Trigger ist beobachtbar,
+wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er
+eingetreten ist. Alle drei sind Repo-Zustände (Verzeichnis, Gate,
+Carveout-Status), keine Prognosen. Ein Datum ist keine Beobachtung,
+sondern eine Hoffnung mit Ziffern.
+
 ### Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
 
-Es kommt darauf an, *warum* die Schätzung daneben lag. Drei Diagnosen,
-drei Antworten:
+Diagnose *vor* Aktion — es kommt darauf an, *warum* die Schätzung
+daneben lag. Drei Diagnosen, drei Antworten:
 
-1. **Scope ist gewachsen** (neue Anforderung im Lauf der Welle): → **Neu schneiden.** Der zusätzliche Scope wandert in eine eigene Welle oder einen eigenen Slice. Die aktuelle Welle wird auf den ursprünglichen Scope reduziert und kann normal schließen.
-2. **Annahme war falsch** (z. B. "Bibliothek X liefert das schon" stellte sich als falsch heraus): → **Neu planen.** Die Welle bekommt einen neuen Plan mit korrigierter Annahme, dokumentiert als ADR-Update oder Carveout. Schätzung wird neu vorgenommen.
-3. **Unvorhergesehene Komplexität in *einem* Slice der Welle** (Rest läuft): → **Carveout** für die problematische Stelle, Welle kann mit eingeschränktem Scope schließen, Carveout-Trigger im nächsten Sprint angesetzt.
+1. **Slice-Größe** (einzelne Slices waren zu groß geschnitten, "ein
+   Lauf, eine Review-Sitzung" nicht haltbar): → **Neu schneiden.**
+   Die übergroßen Slices gehen zurück zur Zerlegung
+   (`in-progress → next`), die Welle behält ihren Scope, aber in
+   kleineren Einheiten.
+2. **Reihenfolge/Abhängigkeit** (Slices blockieren sich, eine
+   Voraussetzung kam zu spät): → **Neu planen.** Die Welle bekommt
+   eine korrigierte Reihenfolge bzw. einen expliziten
+   Abhängigkeits-Trigger; ggf. wandert ein Slice in eine spätere
+   Welle.
+3. **Unerwartete Komplexität in einem Punkt** (Rest läuft): →
+   **Carveout** für die problematische Stelle mit Auflösungs-Trigger;
+   die Welle kann mit offen reduziertem Versprechen schließen.
+
+Verfeinerung (exzellent): 30 % *früh* in der Welle sind eher ein
+Steering-Loop-Signal an die Slice-Sizing-Regel (neu schneiden lohnt
+noch); 30 % *spät*, kurz vor Welle-Closure, sprechen eher für einen
+Carveout — neu schneiden würde nur noch Buchhaltung erzeugen.
+
+Metakognitiv gehört dazu, *eine* Annahme zu benennen, die beim
+Schätzen schon "weich" war (z. B. "Bibliothek X liefert das schon" —
+ungeprüft übernommen). Das ist das Steering-Signal für die nächste
+Schätzung: woran hätte man die Abweichung früher erkannt?
 
 Anti-Antwort: "Wir biegen die Schätzung gerade." Das macht den Steering
 Loop unbrauchbar — wenn Schätzungen sich an Realität anpassen statt
 umgekehrt, lernst du nichts über deine Schätzungsqualität.
+
+### Was unterscheidet eine Welle von einem Meilenstein?
+
+- **Welle** — ein Bündel paralleler/serialisierter Slices mit
+  Closure-Kriterien. Sie endet *durch* Closure (alle Slices in
+  `done/`, Replay grün, Closure-Einträge geschrieben) — eine interne,
+  im Repo vollständig beobachtbare Bedingung.
+- **Meilenstein** — ein *extern* beobachtbarer Zustand an einer
+  Außengrenze (Audit-Punkt, Release, Kundenabnahme). Er endet durch
+  Datum oder externe Bestätigung, nicht durch Repo-interne Closure.
+
+Die beiden verhalten sich orthogonal: Der Meilenstein liegt *neben*
+der Welle, nicht in ihr — der Audit-Termin ist Meilenstein M3, nicht
+Welle 3. Und genau deshalb leitet sich der Meilenstein aus Wellen ab,
+nie umgekehrt: Wenn das Meilenstein-Datum gehalten werden muss, die
+Closure-Trigger aber nicht erreichbar sind, ist die Antwort ein
+Carveout (Modul 7) — nicht ein halb fertiges `done/`.
+
+### (Analysieren) Drei grid-gym-Ereignisse Welle/Meilenstein/Release zuordnen
+
+Zuordnung mit Trigger und Begründung pro Ereignis:
+
+- **(a) Wave-Self-Close-Commit** → **Welle.** Trigger: die
+  Closure-Kriterien sind erfüllt — alle Slices der laufenden Welle in
+  `done/` *und* die 10 A-1-Pflicht-Gates in `make gates` grün.
+  Begründung: das Ereignis ist eine rein *interne* Closure, die
+  vollständig im Repo beobachtbar ist (der Self-Close-Commit ist ihr
+  Beleg); keine Außengrenze beteiligt.
+- **(b) "Simulator läuft deterministisch reproduzierbar" erstmals
+  extern vorzeigbar** → **Meilenstein.** Trigger: ein extern
+  beobachtbarer Repo-Zustand — die `determinism`/`replay`-Suiten
+  laufen vollständig grün und der Zustand kann an einer Außengrenze
+  gezeigt werden. Begründung: hier endet nichts durch interne
+  Closure; der Wert des Ereignisses liegt in der *externen
+  Bestätigbarkeit*, nicht im Schließen eines Slice-Bündels.
+- **(c) Versions-Tag + Paket nach Staging** → **Release.** Trigger:
+  ein Artefakt *verlässt das Repo* in eine Umgebung (Tag gesetzt,
+  Deployment nach Staging). Begründung: weder Closure-Kriterium noch
+  Außenbestätigung, sondern eine Auslieferung — die dritte,
+  eigenständige Kategorie.
+
+Pointe über die Orthogonalität (exzellent): Ein Release kann mehrere
+Wellen umfassen, der Meilenstein liegt *neben* der Welle, die Welle
+endet *durch* Closure — deshalb kann (b) eintreten, ohne dass (a)
+oder (c) am selben Tag liegen. Wer die drei in eine einzige
+"Fertig"-Leiter sortiert, hat die Kategorien auf eine Zeitachse
+plattgedrückt.
+
+Anti-Antwort: Trigger "ist halt fertig" — das benennt keinen
+beobachtbaren Auslöser und macht die Zuordnung beliebig.
 
 ### (Erschaffen) Ersten Wellen-Eintrag aus `SL-101`/`SL-102`/`SL-103` entwerfen
 
@@ -84,6 +169,21 @@ ohne sie laufen) wäre kein Blocker, nur eine Sortier-Präferenz.
 
 ## Übungshinweise
 
+### Nachgeholter Schritt 7: Bewusstes Brechen (Fehlerfall-Übung)
+
+Wer das Worked Example übersprungen hat, holt vor den Übungen dessen
+Schritt 7 nach — die einzige Fehler-Provokation des Moduls: einen
+Closure-Trigger absichtlich als Datum schreiben und am Stichtag (bei
+nicht-grünem `slice-019`) beobachten, was passiert. Erwartung: Eine
+der drei Diagnosen aus der Schritt-7-Tabelle tritt ein — Welle wird
+trotzdem geschlossen (Datum hat Closure überschrieben, Audit fällt
+durch), Welle bleibt offen und das Datum verschiebt sich (Disziplin
+wirkt, aber die Drift-Tabelle braucht den Eintrag) oder Carveout
+`CO-009` mit Folge-Slice (sauber: Versprechen offen reduziert). Nur
+die dritte Antwort hält Trigger-Disziplin *und* Termin-Realität
+zusammen. Für die Reflexion festhalten, welche Antwort dein erster
+Impuls war.
+
 ### Aufbau einer produktiven Roadmap für das Begleit-Lab
 
 Maßstab:
@@ -107,6 +207,26 @@ Modellierung:
 - Welle 2 deklariert in ihrem Plan: `Voraussetzung: Welle 1, Trace-Format-Vertrag (ADR-7)`.
 - ADR-7 dokumentiert den Vertrag und nennt Welle 2 als Konsument.
 - Wenn Welle 1 das Format ändern muss, ist das ein ADR-Update (ADR-7 superseded), und Welle 2 *muss* angepasst werden — als eigener Slice in Welle 2 oder als Carveout.
+
+### Welle über Schätzung bewerten (Bewerten — LZ 3)
+
+Maßstab für eine gute Bewertung:
+
+- Die **Diagnose steht vor der Aktion**: Slice-Größe (→ neu
+  schneiden), Reihenfolge/Abhängigkeit (→ neu planen) oder
+  unerwartete Komplexität (→ Carveout). Wer mit der Aktion beginnt
+  ("wir carven das aus"), hat bewertet, ohne zu diagnostizieren —
+  die volle Entscheidungs-Matrix steht oben in der
+  Selbstcheck-Antwort zur 30-%-Frage.
+- Die Entscheidung ist *begründet* gegen die Diagnose, nicht gegen
+  den Termindruck.
+- Der metakognitive Schluss ist Pflichtteil: *eine* Annahme benennen,
+  die beim Schätzen schon "weich" war. Das ist kein Schuldbekenntnis,
+  sondern das Steering-Signal, das die nächste Schätzung kalibriert.
+
+Anti-Antwort: "Mehr Zeit geben." — verschiebt die Abweichung, ohne
+ihre Ursache zu klassifizieren; beim nächsten Mal sind es wieder
+30 %.
 
 ## Häufige Fehler
 

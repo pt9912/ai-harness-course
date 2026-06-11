@@ -22,6 +22,21 @@ Permanente Carveouts brauchen *kein* Trigger-Feld und keinen Folge-Slice,
 aber eine technische Begründung — sonst sind sie versteckte
 Architekturentscheidungen.
 
+### (Erinnern) Wo im Repo lebt ein Carveout — Verzeichnis und Datei-Konvention?
+
+In `docs/plan/carveouts/`, als eigene Datei pro Carveout nach der
+Konvention `CO-<NNN>-<kurzname>.md` (z. B.
+`CO-001-index-coverage.md`). Damit kommt er beim Klonen mit und ist
+neben Spec, ADR und Plan auditierbar — *nicht* (nur) im
+Issue-Tracker.
+
+Warum das zählt: Ein Carveout, der nur im Tracker existiert, taucht
+im `make gates`-Kontext nicht auf — ein Implementation-Agent sieht
+dann nicht, dass die Schwelle *bewusst* gesenkt wurde, und behandelt
+die Ausnahme als Normalzustand oder "repariert" sie wild. Das ist
+eine versteckte Spec-Lücke: Lopopolos Maxime gilt auch hier — was der
+Agent nicht im Kontext erreicht, existiert für ihn nicht.
+
 ### Wann darf ein Carveout das `make gates`-Ziel grün halten, und wann nicht?
 
 Grün halten ist erlaubt, wenn:
@@ -81,6 +96,42 @@ Vertiefung: [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveo
 führt das Frage-Schema (Carveout? BF-Markierung? ADR?) als
 Entscheidungsbaum durch.
 
+### (Anwenden — LZ 4) Carveout-Audit-Slice für die nächste Welle skizzieren
+
+Skizze entlang der Schablone aus Worked Example B:
+
+- **DoD (vier Punkte — drei Status-Aktionen plus ein Belegartefakt):**
+  1. Jeder aktive Carveout in `docs/plan/carveouts/` trägt ein
+     aktuelles `Letzte Prüfung:`-Datum.
+  2. Jeder Carveout mit eingetretenem Trigger ist nach `done/`
+     verschoben (inkl. Entfernen der Gate-Ausnahme).
+  3. Jeder Carveout, der seit > 2 Wellen "aktiv" steht, ist explizit
+     als weiter-gültig bestätigt oder in eine ADR überführt.
+  4. Audit-Bericht (vorher/nachher/Aktion) als Closure-Notiz der
+     Welle.
+- **Beteiligte Rollen:** Planner identifiziert die fälligen Carveouts
+  vor Welle-Closure; Architect entscheidet bei Permanenz über die
+  ADR-Überführung; Implementer führt `git mv` und Config-Updates aus.
+- **Belegartefakt:** die Audit-Bericht-Tabelle in
+  `done/<welle>-results.md`.
+
+**Die drei Status-Übergänge**, die der Slice möglich machen muss:
+*aufgelöst* (Trigger eingetreten → `done/`), *permanent* (Trigger
+wird nie eintreten → ADR-Überführung), *weiterhin aktiv* (Trigger
+sinnvoll → Prüfdatum nachtragen).
+
+**Der unbequemste ist *permanent → ADR*:** Er gibt zu, dass ein
+angeblich temporäres Konstrukt in Wahrheit eine stille
+Architekturentscheidung war. Die anderen beiden Übergänge sind
+Buchhaltung; dieser ist ein Eingeständnis — und genau deshalb wird er
+am häufigsten vermieden. Wer ihn nie vollzieht, hat keinen
+Carveout-Mechanismus, sondern eine Sammlung gut formatierter Lügen.
+
+Steering-Loop-Aktion (exzellent): den Audit-Slice als Schablone unter
+`docs/plan/planning/templates/carveout-audit.md` festschreiben —
+ohne Vorlage wird er beim dritten Mal vergessen, und die Drift kehrt
+zurück.
+
 ## Übungshinweise
 
 ### Dokumentiere einen Carveout für eine fehlende Coverage-Schwelle
@@ -99,6 +150,15 @@ Vergleich-Möglichkeit:
 [`/lab/example/docs/plan/carveouts/`](../../../lab/example/docs/plan/carveouts/)
 (im Lab nach Phase B).
 
+Zum geforderten **Schluss-Satz** (Mini-Anwendung von Lernziel 3):
+Ein guter Satz benennt das *Symptom*, nicht das Werkzeug — z. B.
+"Carveout, weil es *eine* abgrenzbare Gate-Ausnahme mit beobachtbarem
+Trigger ist; keine BF-Markierung, weil keine Diskrepanz-Häufung im
+selben Geltungsbereich vorliegt; kein permanenter ADR, weil der
+Trigger erreichbar ist." Wer nur "ist halt temporär" schreibt, hat
+die Werkzeug-Disambiguierung (siehe Drei-Werkzeuge-Tabelle oben)
+nicht abgerufen.
+
 ### Verknüpfe ihn mit einem konkreten Folge-Slice
 
 Der Folge-Slice sollte:
@@ -106,6 +166,58 @@ Der Folge-Slice sollte:
 - Den Auflösungs-Trigger des Carveouts in seinen DoD übernehmen.
 - Eine Closure-Notiz vorsehen, die den Carveout *schließt* (Datei nach `docs/plan/carveouts/done/` oder Markierung "RESOLVED").
 - In der Roadmap im Block der Welle stehen, in der der Trigger erwartet wird.
+
+### Carveout-Audit-Slice instanziieren (Anwenden — LZ 4)
+
+Die Übung ist eine *Instanziierung* der Schablone aus Worked
+Example B — kein Neuentwurf: Schablone kopieren, eigenes Datum,
+eigene Carveouts, eigene Welle einsetzen. Beispiel-Instanz für eine
+Welle 3:
+
+```markdown
+# SL-CO-AUDIT-welle-3: Carveout-Audit vor Welle-3-Closure
+
+**DoD:**
+- Jeder aktive Carveout in `docs/plan/carveouts/` hat ein aktuelles
+  `Letzte Prüfung:`-Datum (≤ 2026-07-02).
+- Jeder Carveout, dessen Trigger eingetreten ist, ist nach `done/`
+  verschoben.
+- Jeder Carveout, der seit > 2 Wellen "aktiv" ist, wurde explizit
+  als weiter-gültig bestätigt oder in eine ADR überführt.
+- Audit-Bericht als Closure-Notiz in `done/welle-3-results.md`.
+
+**Rollen:** Planner identifiziert · Architect entscheidet bei
+Permanenz · Implementer führt `git mv`/Config-Updates aus.
+```
+
+Beiliegende Audit-Bericht-Tabelle (Closure-Notiz-Block, eigene
+Einträge statt der WE-B-Beispiele):
+
+```markdown
+## Carveout-Audit — Welle 3 (2026-07-02)
+
+| Carveout | Status vorher | Status nachher | Aktion |
+|---|---|---|---|
+| CO-005 (Lock-File-Pin) | aktiv, Trigger "Folge-Slice slice-018 done" | aufgelöst | git mv nach `done/`; Pin entfernt |
+| CO-009 (Latenz-Schwelle) | aktiv, Trigger "100k-Korpus verfügbar" | aktiv, geprüft | Datum 2026-07-02 nachgetragen |
+| CO-011 (Mock-Auth im Devmode) | aktiv seit Welle 1 | permanent | überführt in ADR-0016 |
+```
+
+**Zum absichtlichen Fehlerfall** (*eine* Welle ohne Audit schließen):
+Erwartete Beobachtung nach zwei Wellen — aktive Carveouts, deren
+Trigger längst eingetreten ist, liegen weiterhin in `carveouts/`;
+das Repo lügt unter `aktiv`, Gates bleiben grün auf Basis von
+Ausnahmen, die niemand mehr braucht. Das Re-Audit räumt auf
+(`git mv` nach `done/`, eine Permanenz-Drift wandert in eine ADR) —
+und liefert die zentrale Erkenntnis des Moduls: *Drift entsteht
+nicht durch falsches Tun, sondern durch nicht-getanes Auditieren.*
+Der Carveout-Mechanismus hält nur, wenn ihn ein zweiter Mechanismus
+auditiert.
+
+Hinweis zum Anspruchsniveau: Die Übung trägt das Label *Anwenden*
+(nicht Erschaffen) — die Konstruktionsleistung steckt schon in der
+Schablone aus Worked Example B; geprüft wird, ob du sie korrekt auf
+dein Repo instanziierst und den Fehlerfall beobachtest.
 
 ## Häufige Fehler
 

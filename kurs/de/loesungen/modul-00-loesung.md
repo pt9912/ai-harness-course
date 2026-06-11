@@ -51,6 +51,32 @@ Muster gegen *computational feedback* (ein Test/Gate) halten und
 begründen, warum hier der billigere Hebel der Guide *vor* der Handlung
 gewesen wäre — ein Gate hätte den Fehlbau erst nachträglich gefangen.
 
+### (Analysieren) Chatbot ↔ Engineering-System an drei Kriterien + Grenzbeispiel
+
+Drei trennscharfe Kriterien:
+
+- **Reproduzierbarkeit** — gleicher Input führt zu einem *prüfbar
+  gleichen Prozess*. Ein Chatbot darf jedes Mal anders antworten; ein
+  Engineering-System muss denselben Weg nachvollziehbar wieder gehen
+  können (Replay, fester Seed, Tool-Allowlist).
+- **Auditierbarkeit** — jede Änderung ist über eine ID rückverfolgbar
+  (Spec-Anker, ADR-Nummer, Slice-ID). Beim Chatbot verschwindet die
+  Begründung mit dem Chat-Verlauf.
+- **Fehler-Rückkopplung** — ein Versagen wird zu einer dauerhaften
+  Kontrolle (Guide oder Sensor), nicht zu einer einmaligen Korrektur
+  im Dialog. Der Chatbot vergisst den Fehler mit der nächsten Session.
+
+Grenzbeispiel — *Agent mit festem System-Prompt, aber ohne Gates*:
+Das ist noch die **Chatbot-Seite**. Der feste Prompt macht die Eingabe
+konstant, aber keinen Prozess reproduzierbar: nichts prüft den Output,
+nichts koppelt Fehler zurück, nichts ist über IDs auditierbar. Die
+Trennlinie ist nicht der Prompt, sondern der reproduzierbare,
+auditierbare Prozess *drumherum*.
+
+Anti-Antwort: "Eines ist ein Programm, das andere ein Chat." — das
+ist eine Oberflächen-Unterscheidung. Beide sind Programme; der
+Unterschied liegt in den drei Prozess-Eigenschaften oben.
+
 ### Wo verläuft die Grenze zwischen "guter Prompt" und "guter Harness"?
 
 Ein guter Prompt verbessert *eine* Interaktion. Ein guter Harness
@@ -72,6 +98,41 @@ typischerweise:
 - **Spec-Lücken-Symptome** — Agent implementiert eine plausible, aber nicht geforderte Variante. Verification-Agent gegen Akzeptanzkriterien fängt das.
 - **Implizite Annahmen** — Agent geht davon aus, dass Cache aktiv ist, obwohl Spec ihn ausschließt. Nur Review oder Replay mit kaltem Cache fängt das.
 - **Sicherheits-Anti-Pattern in fremdem Kontext** — z. B. SQL-Injection in einem Filter, den der Linter als regulären String sieht. Security-Gate (Semgrep) fängt das.
+
+### (Bewerten) Mega-Prompt: zwei Zuordnungs-Kriterien + strittiger Grenzfall
+
+Die zwei Reproduzierbarkeits-Kriterien, mit denen die Zuordnung
+*entschieden* wird:
+
+1. **Jeder-Lauf-relevant?** — Würde die Zeile in jedem (oder jedem
+   zweiten) Lauf vorkommen? Dann gehört sie nicht in den Prompt (c),
+   sondern in AGENTS.md (a) oder eine Fitness Function (b).
+2. **Deterministisch prüfbar?** — Lässt sich die Regel maschinell
+   und ohne Ermessen prüfen (Importregel, verbotene Funktion)? Dann
+   Fitness Function (b); wenn nicht prüfbar, aber dauerhaft relevant:
+   AGENTS.md (a).
+
+Beispiel für einen strittigen Grenzfall: *"Tests dürfen keine
+externen HTTP-Aufrufe machen."* Die Zeile ist jeder-Lauf-relevant
+(spricht für AGENTS.md) **und** deterministisch prüfbar (spricht für
+eine Fitness Function). Den Ausschlag gibt Kriterium 2: Was technisch
+erzwungen werden kann, soll erzwungen werden — eine AGENTS.md-Regel
+*erinnert* nur, ein Gate *verhindert*. Also (b), optional mit einem
+erklärenden Satz in AGENTS.md.
+
+Zweiter Grenzfall (exzellent), in dem die Kriterien *gegeneinander*
+entscheiden: *"Antworte auf Deutsch."* Jeder-Lauf-relevant: ja.
+Deterministisch prüfbar: praktisch nicht (Sprachidentifikation ist
+heuristisch, kein hartes Gate). Faustregel: Kriterium 1 entscheidet
+über *raus aus dem Prompt*, Kriterium 2 entscheidet über *(a) oder
+(b)* — hier also AGENTS.md. Das folgt Lopopolos Constrain-Prinzip:
+so viel wie möglich technisch einschränken, den Rest als dauerhaften
+Guide ablegen; im Prompt bleibt nur das Situative.
+
+Anti-Antwort: "Ich sortiere in drei Töpfe." — das ist die
+Sortier-Übung selbst (Analysieren), nicht ihre Bewertung. Das
+Bewerten-Item verlangt die *Kriterien*, mit denen man strittige
+Fälle entscheidet.
 
 ## Übungshinweise
 
@@ -97,6 +158,27 @@ Gute Trigger:
 
 Dokumentiere den Trigger so, dass er reproduzierbar ist — das ist die
 erste kleine Replay-Übung des Kurses.
+
+### Mega-Prompt sortieren (Analysieren — LZ 4)
+
+Maßstab für eine gute Sortierung:
+
+- *Jede* Zeile landet in genau einer Spalte — keine Zeile bleibt
+  "irgendwie beides". Wer eine Zeile nicht zuordnen kann, hat einen
+  Kandidaten für den Selbstcheck-Grenzfall (Bewerten, LZ 5) gefunden.
+- Pro (c)-Zeile steht ein Halbsatz, *warum* sie weder (a) noch (b)
+  ist — typischerweise: konkrete Eingabe oder konkretes Zielartefakt
+  dieses einen Laufs.
+- Plausibles Mengenverhältnis: In real gewachsenen Mega-Prompts
+  landen meist deutlich mehr Zeilen in (a) und (b) als in (c). Wer
+  (c) länger als (a) hat, baut sich eine Anti-Spec — entweder ist der
+  Prompt wirklich rein situativ (selten) oder die Sortierung war zu
+  großzügig.
+
+Die Übung aktiviert das **Analysieren**-Lernziel (LZ 4, Harness gegen
+Prompt Engineering abgrenzen): Hier wird *zerlegt und zugeordnet*.
+Die Entscheidungs-Kriterien für strittige Zeilen sind bewusst nicht
+Teil der Übung — sie sind das Bewerten-Item (LZ 5) im Selbstcheck.
 
 ## Beispiel-Antwort auf Reflexionsfrage 4 (Conceptual Change)
 

@@ -57,6 +57,40 @@ Gate ist *im aktuellen Reifegrad nicht hart* — und das ist
 dokumentiert. Wenn weder Carveout noch Bootstrap, dann ist Closure
 falsch.
 
+### (Erschaffen) Zwei beobachtbare Closure-Kriterien und ein Lerneintrag
+
+Ausgearbeitete Beispiel-Konstruktion für `SL-014a` (Login-Endpoint):
+
+**Closure-Kriterien (beobachtbar, kein "fühlt sich fertig an"):**
+
+1. Replay des Login-Flows gegen das Golden Set ist grün
+   (`make replay-auth` exit 0) — inklusive Boundary-Fall "leeres
+   Passwort" und Negative-Fall "unbekannter User".
+2. Jeder der drei DoD-Punkte ist auf einen konkreten Test verlinkt
+   (`test_login_returns_jwt`, `test_audit_event_on_login`,
+   `test_login_rejects_invalid`) — prüfbar per
+   `make verify-dod SLICE=SL-014a`.
+
+**Lerneintrag** (Form: *benannte Spec-Lücke*):
+
+> Gelernt: `LH-FA-AUTH-001` sagt nichts über Rate-Limiting bei
+> Fehlversuchen — der Implementer hat ein plausibles, ungefordertes
+> Limit (5/min) erfunden. Spec-Lücke als `LH-FA-AUTH-001`-Anmerkung
+> gemeldet; Folge-Slice für die Entscheidung angelegt. Verhindert:
+> dass der nächste Auth-Slice dieselbe stille Annahme anders füllt.
+
+Woran man erkennt, dass der Lerneintrag mehr ist als "Tests grün":
+Er lässt sich genau einer der drei Formen zuordnen — **geschärfte
+Regel** (eine Konvention/ADR wird präziser), **neuer Sensor** (ein
+Gate/Check entsteht), **benannte Spec-Lücke** (eine stille Annahme
+wird explizit). "Tests grün" gehört zu keiner der drei: es beschreibt
+den Zustand des Slices, nicht das, was der *Harness* gelernt hat.
+
+Pointe (exzellent): Der Eintrag benennt, *welche künftige
+Wiederholung* er verhindert — eine Vorhersage, nicht nur ein
+Protokoll. Ein `done/`-Slice ohne Lerneintrag macht das
+Versagensmuster unsichtbar, und derselbe Fehler wird dreimal gemacht.
+
 ### (Analysieren — Transfer aus Modul 2) Welche Sub-Areas berührt der nächste Slice — und welcher Modus passt für jede?
 
 Beispiel-Antwort für `SL-014a` (Authentifizierung implementieren). Vier
@@ -93,6 +127,45 @@ Aggregat-Slice kann zufällig dieselbe Modus-Mischung haben wie ein
 gut geschnittener. Der Modus-Begründungsblock prüft nicht den
 Schnitt, sondern die Bewertungsleistung.
 
+### (Erschaffen + Bewerten) `SL-031 — Bestell-Checkout` bewerten und schneiden
+
+**(a) Bewertung gegen die zwei Größen-Kriterien:** zu groß.
+
+- *In einem Agenten-Lauf abschließbar?* Nein — fünf DoD-Punkte
+  (Warenkorb-API · Zahlungs-Integration · Bestätigungs-Mail ·
+  Lager-Abbuchung · Audit-Log) überschreiten die
+  Drei-Punkte-Faustregel deutlich, und die Zahlungs-Integration
+  allein bringt eine externe Abhängigkeit mit eigenem Fehlerraum mit.
+- *In einer Review-Sitzung prüfbar?* Nein — der Diff berührt
+  mindestens vier Schichten (API, Payment-Adapter, Mail-Versand,
+  Lager-/DB-Schema) plus Audit-Logging quer dazu. Kein Reviewer prüft
+  das in einer Sitzung gegen Plan und ADR.
+
+**(b) Schnitt-Vorschlag — nach Lieferwert, in drei Slices:**
+
+| ID | DoD | Liefert |
+|---|---|---|
+| `SL-031a` | Warenkorb-API: Artikel hinzufügen/entfernen, Summe berechnen; Audit-Event pro Mutation. | Funktion (eigenständig nutzbarer Warenkorb) |
+| `SL-031b` | Zahlungs-Integration gegen den Warenkorb: Checkout erzeugt Zahlung, Fehlerpfade getestet; Audit-Event. | Umsatz (erster durchgehender Kaufpfad) |
+| `SL-031c` | Bestätigungs-Mail + Lager-Abbuchung nach erfolgreicher Zahlung, mit Idempotenz-Test. | Erfüllung (Fulfilment-Abschluss) |
+
+Das Audit-Log wird nicht als eigener Slice geschnitten, sondern
+wandert als DoD-Zeile in jeden Slice — es ist eine Quer-Anforderung,
+kein lieferbares Inkrement.
+
+**Begründung des Schnitt-Typs — Lieferwert statt Schichten:** Jeder
+der drei Slices liefert allein prüfbaren Wert und wartet nicht auf
+den nächsten (`SL-031a` ist ohne Zahlung demonstrierbar, `SL-031b`
+schließt den Kaufpfad). Ein Schichtschnitt (`SL-031-db`,
+`SL-031-service`, `SL-031-ui`) erzeugte Zombie-Slices: eine
+Lager-Abbuchung ohne Checkout liefert nichts Prüfbares — sie ist
+"fast fertig", bis der letzte Schicht-Slice kommt, und genau solche
+Slices bleiben in `in-progress/` hängen.
+
+Anti-Antwort: "Zu groß, irgendwie aufteilen." — ohne Bezug auf die
+zwei Größen-Kriterien ist die Bewertung ein Bauchgefühl, und ohne
+benannten Schnitt-Typ ist der Vorschlag nicht verteidigbar.
+
 ## Übungshinweise
 
 ### Planung eines Features über mehrere Wellen
@@ -116,6 +189,28 @@ Vier Commits ist die saubere Variante:
 Wichtig: Reine Move-Commits (Git-Rename-Detection braucht 50 %
 Similarity, siehe Hard Rule aus grid-gym in [Modul 9](../03-agenten/modul-09-implementierung.md)).
 Inhaltliche Edits dazwischen sind eigene Commits.
+
+### Closure-Kriterien mit Lerneintrag formulieren (Erschaffen — LZ 4)
+
+Vorlage: §Closure im
+[`slice.template.md`](../../../lab/templates/docs/plan/planning/slice.template.md).
+Maßstab für einen guten Closure-Block:
+
+- **(a)** Zwei bis drei Closure-Kriterien, jedes *beobachtbar* — d. h.
+  ein Dritter kann es ohne Rückfrage prüfen (ein grünes Make-Target,
+  ein verlinkter Test pro DoD-Punkt, ein Replay-Ergebnis). "Fühlt
+  sich fertig an", "Code ist sauber" disqualifizieren.
+- **(b)** Ein Lerneintrag, der benennt, was der *Harness* gelernt hat
+  — zuordenbar zu einer der drei Formen: geschärfte Regel, neuer
+  Sensor oder benannte Spec-Lücke. "Tests grün" ist keine der drei
+  Formen: das ist der Slice-Zustand, kein Lernen.
+
+Selbsttest für den Lerneintrag: Würde der Eintrag eine *künftige*
+Wiederholung verhindern, wenn ihn der nächste Planner liest? Wenn er
+nur protokolliert, was passiert ist, fehlt die Steering-Loop-Hälfte.
+Eine ausgearbeitete Beispiel-Konstruktion (Kriterien + Lerneintrag
+für `SL-014a`) steht oben in der Selbstcheck-Antwort zum
+Erschaffen-Item.
 
 ### Schneide einen zu großen Slice in zwei umsetzbare Slices
 

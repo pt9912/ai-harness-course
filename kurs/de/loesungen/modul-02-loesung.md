@@ -115,6 +115,44 @@ Diskrepanz-Schock vermieden und damit auch die Reconciliation-
 Pflicht — das Repo bleibt formal vollständig, ist aber inhaltlich
 nicht abgeglichen.
 
+### (Bewerten — aktiviert LZ 5) GF-deklarierte Test-Infrastruktur mit Edge-Case-Tests ohne `LH-*`-Anker — was signalisiert der Verlauf?
+
+**Was der Verlauf signalisiert:** Vorliegen von **Anzeichen 2** aus
+§Kernidee — *Test-Bestand übertrifft Spec-Anker*. Die Edge-Case-Tests
+prüfen strukturell mehr, als die Spec behauptet (`LH-*`-Anker fehlen),
+und das Symptom ist das Lehrbuch-Symptom: bei jeder Code-Änderung muss
+die *Spec nachgezogen* werden statt umgekehrt. Der Code "weiß" mehr
+als die Doku — die Sub-Area *Test-Infrastruktur* ist de facto **von GF
+nach BF gedriftet**, obwohl die Deklaration aus dem Bootstrap noch GF
+behauptet.
+
+**Angemessene Reaktion:** die **Modus-Deklaration anpassen** — im
+Adaptions-Block die Sub-Area auf BF stellen, *mit Konvergenz-Auftrag*
+(Inventur der anker-losen Tests, Reconciliation-Slices, die ihnen
+nachträglich `LH-*`-Anker geben oder sie als bewusst spec-freie
+Sensorik klassifizieren). Ein Reconciliation-Plan ist also Teil der
+Reaktion, aber erst *nach* der ehrlichen Umdeklaration — wer den Plan
+entwirft und weiter GF behauptet, dokumentiert gegen die eigene
+Beobachtung.
+
+**Warum *nichts tun* die teuerste Option ist:** Undeklarierte Drift
+macht jede spätere Diskrepanz unmessbar (Linse *Drift* — der
+deklarierte Modus ist der Maßstab, gegen den Abweichung überhaupt
+erst zählbar wird). Eine GF-Behauptung über eine BF-Realität
+produziert dauerhaft Findings ohne Modus-Bewusstsein: jeder neue
+Test ohne Anker sieht aus wie ein Einzelfehler statt wie ein Muster.
+
+**Pointe (exzellent):** Der Modus-Wechsel ist kein Versagen, sondern
+ein *funktionierender Sensor* der Bootstrap-Diagnose — genau dafür
+wurde der Modus pro Sub-Area dokumentiert. Das ist der Anschluss an
+die metakognitive Reflexionsfrage in §Reflexion: beobachten können,
+wo die eigene Deklaration nicht mehr stimmt, *bevor* die Drift den
+nächsten Slice verteuert.
+
+Anti-Antwort: "Doku nachziehen." — das behandelt das Symptom
+(einzelne Spec-Lücke) und unterschlägt das Modus-Urteil; drei Slices
+später steht dieselbe Frage wieder an.
+
 ### (Conceptual Change) Vergleiche deine Spontanantworten mit deiner heutigen Antwort.
 
 Diese Frage hat keine universelle Lösung — die Antwort hängt von
@@ -123,10 +161,12 @@ auszeichnet:
 
 - *Konkrete Benennung*: welche §Vorab-Frage hat sich verschoben?
   Welcher Halbsatz ist neu?
-- *Fehlvorstellungs-Bezug*: welche der vier dokumentierten FVs hat
+- *Fehlvorstellungs-Bezug*: welche der fünf dokumentierten FVs hat
   deine Spontanantwort getragen (FV1 "einmaliges Setup", FV2
   "Repo-Eigenschaft", FV3 "GF braucht keine Trigger", FV4 "BF als
-  Notlage")?
+  Notlage", FV5 "jede Struktur ist automatisch eine Sub-Area" — die
+  Granularitäts-Vorstellung, die das Modul selbst als Hauptkandidaten
+  nach Übung 1 nennt)?
 - *Was ist gleich geblieben*: welche Vorstellung hält weiterhin —
   und warum? Conceptual-Change-Reflexion ist nur dann sauber,
   wenn beides gezeigt wird (Verschiebung + Stabilität).
