@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:03 CEST
+**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:32 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -121,6 +121,11 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
   Repo**. BF ist kein Dauermodus: jede BF-Sub-Area trägt eine
   **Graduation-Bedingung** im Adaptions-Block; BF ohne Graduation-Plan
   ist eine permanente Ausnahme als temporär getarnt.
+- **Modus-Begründung im Slice-Plan** gegen vier Pflichtkriterien
+  (vier, nicht erweitern): Konventionen-Dichte · Phase-Reife der
+  berührten Artefakt-Sektionen · Evidenz-/Diskrepanz-Risiko (bei
+  BF/Hybrid das Hauptrisiko) · Reconciliation-Aufwand inklusive
+  Graduation-/Folge-Slice-Trigger.
 - **Drei Anzeichen für Modus-Wechsel im Betrieb:** (1) die
   Diskrepanz-Häufung ändert sich, (2) der Test-Bestand übertrifft die
   Spec-Anker (GF→BF-Drift), (3) eine Carveout-Auflösung schließt eine
