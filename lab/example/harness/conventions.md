@@ -25,6 +25,7 @@ Der Default-Ort für:
 ## Adoptierte Konventions-Quellen
 
 - **Extern (Lehrmaterial):** [`/kurs/de/grundlagen/konventionen.md`](../../../kurs/de/grundlagen/konventionen.md), [`/kurs/de/grundlagen/klassifikation.md`](../../../kurs/de/grundlagen/klassifikation.md)
+- **Extern (Agenten-Destillat):** [`/kurs/de/agents-digest.md`](../../../kurs/de/agents-digest.md) — was ein Code-Agent statt des vollen Lehrmaterials liest; derivativ, bei Konflikt gilt das Lehrmaterial. (Außerhalb dieses Repos als Raw-URL: `https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-digest.md`.)
 - **In-Repo (verkörperte Form):** Template-Set unter [`/lab/templates/`](../../../lab/templates/) als Form-Lookup-Quelle
 
 ## Adaptions-Block

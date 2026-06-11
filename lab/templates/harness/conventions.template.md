@@ -52,9 +52,15 @@ damit spätere Adaptionen einen Bezugspunkt haben.
 <!--
 Pointer auf die Quellen der Baseline. KEINE Wiederholung des Inhalts —
 nur Verweise.
+
+Das Agenten-Destillat ist die Quelle, die ein Code-Agent statt des
+vollen Lehrmaterials liest (operatives Regelwerk ohne Didaktik). Es
+ist derivativ — bei Konflikt gilt das Lehrmaterial.
 -->
 
 - **Extern (Lehrmaterial):** <Pfad oder URL>
+- **Extern (Agenten-Destillat):** <Raw-URL, bei Adoption des Kurses:
+  https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-digest.md>
 - **In-Repo (verkörperte Form):** <Pfade zu adoptierten Templates>
 
 ## Adaptions-Block
