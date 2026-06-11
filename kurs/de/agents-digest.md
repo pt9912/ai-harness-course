@@ -68,7 +68,19 @@ Verkörperte Form zum Kopieren: [`/lab/templates/`](../../lab/templates/)
   Mensch unersetzbar bleibt: er entscheidet, wo der Harness wächst.
 - **Harness-Lüge** (verboten): der Harness behauptet eine Kontrolle,
   die real nicht greift — halluziniertes Gate, stille Setzung, Pointer
-  auf nicht existierende Mechanik.
+  auf nicht existierende Mechanik. Auch ein Spec-Dokument ohne
+  deklariertes Stratum ist eine stille Setzung und **nicht normativ
+  zitierbar**, bis es deklariert ist.
+- **Halluzination ist ein Kontext-Bug, kein Modell-Bug.** Die richtige
+  Frage ist nicht „warum hat das Modell das erfunden", sondern „was im
+  Kontext hätte das Erfinden verhindert" — fehlende Spec-Aussage, ADR,
+  AGENTS.md-Regel oder Tool-Allowlist. Wer auf Modellwechsel setzt,
+  sieht dieselbe Halluzinations-Klasse wiederkommen, weil das
+  Kontext-Loch bleibt.
+- **Multi-Repo-Einführung:** immer beim Referenz-Repo beginnen und
+  erst nach erfolgreicher Steering-Loop-Iteration auf weitere Repos
+  portieren. Alle Repos parallel mit demselben Master-Prompt zu
+  treiben skaliert nicht — der Agent verteilt halbgare Standardtexte.
 
 ## 2. Artefaktkette und Verzeichnisse
 
@@ -89,6 +101,27 @@ harness/conventions.md        # repo-lokale Strukturregeln (Pflicht)
 .harness/                     # Skills pro Agenten-Rolle
 AGENTS.md                     # Briefing: Hard Rules + Pointer
 ```
+
+**Bootstrap und Modus** ([§Konventionen](grundlagen/konventionen.md#kernbegriffe)):
+
+- **Sub-Area-Qualifikation:** eine Struktur ist eine Sub-Area, wenn
+  sie **mindestens zwei von drei Achsen** erfüllt — eigene
+  Konventions-Härte (MR-Adaption formulierbar), eigene Inventur-Linie,
+  struktureller Cluster. Eine Achse allein ist Struktur ohne Substanz.
+- **Modus pro Sub-Area:** Greenfield (Doc führt, Code folgt) ·
+  Brownfield (Code führt, Doc folgt — **Übergangsmodus**) · Hybrid.
+  BF ist kein Dauermodus: jede BF-Sub-Area trägt eine
+  **Graduation-Bedingung** im Adaptions-Block; BF ohne Graduation-Plan
+  ist eine permanente Ausnahme als temporär getarnt.
+- **Drei Anzeichen für Modus-Wechsel im Betrieb:** (1) die
+  Diskrepanz-Häufung ändert sich, (2) der Test-Bestand übertrifft die
+  Spec-Anker (GF→BF-Drift), (3) eine Carveout-Auflösung schließt eine
+  BF-Sub-Area. Modus-Wechsel ist Signal, kein Versagen — deklarieren,
+  nicht verschweigen.
+- **Sektionsreife:** Harness-Dokumente reifen sektionsweise (Phasen
+  0–5); erst eine Phase-4-Sektion (kohärent) ist für Verweise von
+  außen freigegeben. Dokument-Übergänge folgen vier Trigger-Klassen
+  (Sync · Promotion · Cross-Reference · Acceptance).
 
 ## 3. Spec-Disziplin
 
@@ -115,6 +148,11 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
   keine.** PRs/Commits nennen die betroffenen IDs.
 - **Akzeptanzkriterien** im Given/When/Then-Stil, pro Anforderung
   mindestens Happy Path · Boundary · Negative.
+- **Lopopolos Maxime:** „Was der Agent nicht im Kontext erreicht,
+  existiert für ihn nicht." Ein Agent ist ein extrem
+  buchstabengetreuer Praktikant — deshalb gehören Negativbedingungen
+  und Out-of-Scope **explizit** in die Spec, nicht in stillschweigende
+  Annahmen.
 
 ## 4. ADRs
 
@@ -123,7 +161,8 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
   < 200 ms" = Spec; „Slice implementiert den Index" = Plan.
 - **`Accepted` = immutable.** Korrektur ist eine neue ADR mit
   `Supersedes ADR-NN`; `superseded`/`deprecated` sind Status, kein
-  Löschen.
+  Löschen. Alt-ADRs aus der Zeit vor dieser Konvention werden
+  **grandfathered**, nicht nachgezogen.
 - ADRs sind **Constraints für spätere Agentenläufe**, nicht
   Dokumentation: wo maschinell prüfbar, in eine **Fitness Function**
   übersetzen (ArchUnit, dep-cruiser, import-linter, Latenzbudget).
@@ -133,13 +172,19 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
 ## 5. Planung
 
 - **Slice:** kleinste lieferbare Einheit; eigener Plan, eigene DoD;
-  normativ gebunden an `LH-*`-Scope und aktive ADRs. Zu groß, wenn er
-  mehrere unabhängige Lieferwerte bündelt → schneiden, Schnitt
-  begründen.
+  normativ gebunden an `LH-*`-Scope und aktive ADRs. **Größenregel:
+  klein ist ein Slice, wenn ein Agent ihn in *einem* Lauf abschließen
+  kann und ein Reviewer den Diff *in einer Sitzung* prüfen kann —
+  größer ist falsch.** Geschnitten wird nach **Lieferwert, nicht nach
+  Schichten**: jeder Teil-Slice liefert allein prüfbaren Wert;
+  Schichten-Schnitte erzeugen Zombie-Slices, die „fast fertig"
+  aufeinander warten.
 - **Lifecycle:** Slices wandern `open → next → in-progress → done`;
-  jeder Übergang hat einen beobachtbaren **Trigger** (Bedingung, kein
-  Datumswunsch). **Closure** ist dokumentierter Abschluss mit
-  Lerneintrag in `done/` — nicht das Schließen eines Tickets.
+  jeder Übergang hat einen beobachtbaren **Trigger**. Ein Datum ist
+  kein Trigger, sondern eine Prognose — Termine sind Folge, nicht
+  Treiber. **Closure** ist dokumentierter Abschluss mit Lerneintrag in
+  `done/` (was hat der Harness aus diesem Slice gelernt?); ohne
+  Lerneintrag ist der Slice nur *abgelegt*, nicht geschlossen.
 - **Roadmap:** Wellen (Slice-Bündel) mit Triggern und
   Closure-Kriterien. Welle ≠ Meilenstein (externer Zustand) ≠ Release
   (Artefakt verlässt das Repo). Eine Roadmap ist nicht statisch — sie
@@ -149,6 +194,12 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
   oder *permanent* (begründet). Pro Welle ein Carveout-Audit; eine
   permanente Ausnahme, die als temporär getarnt ist, ist eine
   Harness-Lüge.
+- **Werkzeug-Wahl bei einer Ausnahme** (Carveout vs.
+  BF-Sub-Area-Markierung vs. ADR) über zwei sequenzielle Fragen —
+  **Granularität vor Temporalität**: (1) einzelne Diskrepanz oder
+  Cluster? Ein Cluster ist eine BF-Sub-Area, kein Stapel Carveouts.
+  (2) Ist der Auflösungs-Trigger realistisch erreichbar? Wenn nein,
+  ist es eine permanente Entscheidung → ADR.
 
 ## 6. Rollen und Übergaben
 
@@ -161,6 +212,16 @@ prüfbarem Artefakt** (Tabelle:
 Artefakt ist ein blinder Übergang. Verification prüft Plan-/
 DoD-Konformität (*richtig gebaut?*), Validation die fachliche Wirkung
 (*das Richtige gebaut?*).
+
+- **Konflikt-Regel:** Bei Reviewer↔Implementation-Konflikt entscheidet
+  nicht Seniorität, sondern die Kette: der Architect prüft die
+  ADR-Aktualität, der Planner den Plan-Status; das Verdikt ist eine
+  neue ADR oder eine Plan-Korrektur — nie ein informeller Zuruf.
+- **Kontext-Zuschnitt pro Rolle:** Verifier erhält DoD + Spec + Plan;
+  Reviewer erhält Plan + ADR + Diff — Schnittmenge ist nur der Plan,
+  und genau diese Trennung erzeugt nicht überlappende Findings. Wer
+  dem Verifier zusätzlich den ADR gibt, macht ihn zum zweiten Reviewer
+  und verliert die Kontext-Trennung.
 
 ## 7. Implementierungs-Workflow (pro Slice)
 
@@ -181,6 +242,22 @@ Architektur-Doku bleibt wellen-/slice-frei · ADR-Immutabilität ·
 Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
 **dupliziert keine kanonischen Inhalte**.
 
+- **Eine Hard Rule braucht beide Feedforward-Formen:** den
+  AGENTS.md-Eintrag (inferential — der Agent liest sie) **und** eine
+  Fitness Function oder ein Gate (computational — der Verstoß schlägt
+  an). Existiert nur eines von beiden, ist die Regel halb
+  durchgesetzt.
+- **Repo-Klasse bestimmt die Schärfe:** *Referenz* (Standard) ·
+  *Safety/Control* — Hard Rules nicht verhandelbar, Sensors
+  fail-closed · *Policy/Compliance* — jede Änderung trägt eine
+  fachliche ID; KI liefert Vorschläge, nie verbindliche
+  Entscheidungen.
+- **Kontext-Verdichtung — nicht in den Lauf-Kontext:**
+  `superseded`/`deprecated` ADRs ohne Folge-Bezug, Skills fremder
+  Rollen, Carveouts mit bereits eingetretenem Auflösungs-Trigger,
+  historische Spec-Notizen. Toter Kontext kostet Tokens, verschiebt
+  Relevantes in die Mitte des Fensters und füttert Halluzinationen.
+
 ## 8. Qualität
 
 - **Drei Review-Arten** — wogegen wird geprüft: *Plan-Review* gegen
@@ -188,25 +265,44 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
   *Code-Review* gegen Plan + Konventionen.
 - **Findings** kategorisiert **HIGH / MEDIUM / LOW / INFO**;
   Reviewer-Verhalten lebt als **Skill** in
-  `.harness/skills/reviewer.md`. Review-Läufe reproduzierbar machen
+  `.harness/skills/reviewer.md` — Pflichtstruktur: expliziter
+  Eingangs-Kontext (gegen welche Verträge wird geprüft),
+  repo-spezifische Anker pro Kategorie, Anti-Pattern-Block („was du
+  nicht bist"), Output-Schema, **Negativbefund-Zeile pro geprüftem
+  Bereich** („geprüft, ohne Befund"). Ohne Skill driftet die
+  Klassifikation zwischen Sessions. Review-Läufe reproduzierbar machen
   (fixierte Eingaben, deklarierter Skill); Erwartung ist *ähnlich,
   nicht identisch*.
 - **Verifikation:** Plan-gegen-Code-Diff. **DoD-Verletzung** = ein
   prüfbares Artefakt sagt nein (Gate rot, Endpoint weicht vom Plan ab);
   **Review-Finding** = begründetes Urteil ohne verletzten Vertrag.
+  Abgrenzungskriterium ist das **Prüf-Artefakt, nicht die Schwere**.
   Pre-completion-Checks des Agenten selbst ersetzen keine Verifikation
   (Selbstabsolution).
 - **Replay & Golden Sets:** kuratierte Eingabe/Erwartungs-Paare
   (Happy · Boundary · Negative, Auswahlkriterium pro Fall) in `evals/`;
-  Regressionen messen statt raten. **Der Seed pinnt nur eine von
-  mehreren Drift-Quellen** — Modellversion, Sampling-Parameter,
-  Tool-Umgebung und Prompt-Kontext driften unabhängig weiter; deshalb
-  Rotations-/Sampling-Plan statt Determinismus-Annahme.
+  Regressionen messen statt raten. **Replay-Manifest-Pflichtfelder:**
+  Modellversion + Seed + Eingaben + `runtime.image_hash` — identischer
+  Image-Hash schließt Toolchain-Drift als Ursache aus. **Der Seed
+  pinnt nur eine von mehreren Drift-Quellen** — Modellversion,
+  Sampling-Parameter, Tool-Umgebung und Prompt-Kontext driften
+  unabhängig weiter; deshalb Rotations-/Sampling-Plan statt
+  Determinismus-Annahme. **Drift-Diagnose-Reihenfolge bei rotem
+  Replay** (nicht beliebig): (1) Toolchain-Drift (Image-Hash
+  vergleichen) → (2) Modell-Routing (Version, Provider-Status) →
+  (3) Erwartungs-Drift (Eingaben vs. Spec) → (4) erst dann echte
+  Regression.
 - **Quality Gates:** als `make`-Ziele (computational feedback), im CI
   identisch zu lokal. Sensor-Klasse nach Fehlerbild wählen:
-  [Gate-Typ ↔ Fehlerbild](04-qualitaet/modul-13-quality-gates.md#gate-typ--fehlerbild).
-  **Bootstrap-aware Gates** kennen eine deklarierte Reifestufe und
-  greifen ab Trigger hart. Nur Gates behaupten, die als Target
+  [Gate-Typ ↔ Fehlerbild](04-qualitaet/modul-13-quality-gates.md#gate-typ--fehlerbild)
+  — Trennlinie ist die *Regel-Klasse*, nicht das Tool. Jede
+  Sensor-Zeile in `harness/README.md` trägt eine **Bindung**: ADR ·
+  Carveout · Schwellen-Kalibrierung · Reproduzierbarkeit;
+  Zusatzklassen vorher in `harness/conventions.md` deklarieren.
+  **Bootstrap-aware Gates** kennen eine deklarierte Reifestufe; der
+  Hochschalt-Trigger ist ein **Ereignis, kein Datum**, und steht im
+  Make-Target-Kommentar — ohne Trigger ist es keine Reifestufe,
+  sondern aufgeschobene Pragmatik. Nur Gates behaupten, die als Target
   existieren.
 
 ## 9. Betrieb
@@ -215,15 +311,32 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
   runtime`), Base-Images **per Digest gepinnt**
   (`image:tag@sha256:…`) — ein Tag allein baut jeden Monat einen
   anderen Container. Lock-File + Image-Hash sind die
-  Mindestkombination für Reproduzierbarkeit.
+  Mindestkombination für Reproduzierbarkeit. Dazu zwei
+  Layer-Disziplin-Regeln: **Lock-File-`COPY` vor Code-`COPY`** (sonst
+  rebuildet jede Code-Änderung die Dependency-Stage) und die
+  Installation muss das Lock-File **erzwingen** (`--frozen` o. Ä.) —
+  ein Lock-File, das der Build nicht erzwingt, pinnt nichts.
 - **Observability:** ein Span pro Tool-Call mit Audit-Attributen;
   Token-Kosten pro Rolle attribuierbar; die Kette **Span → Slice →
-  ADR → `LH-*`** muss nachvollziehbar dokumentiert sein. Cache-Hit-Rate
-  beobachtbar machen.
-- **Produktionsfreigabe:** Checkliste mit Belegen (kein Haken ohne
-  Artefakt), Incident-Runbooks mit **Rollback-vs-Fix-Forward**-Abwägung
-  (Rollback scheitert u. a. an nicht-rückrollbaren Migrationen und
-  bereits verarbeiteten Daten — Szenarien im Runbook benennen).
+  ADR → `LH-*`** muss nachvollziehbar dokumentiert sein. Cache als
+  **zwei Counter** (Hits *und* Misses), nicht als eine Ratio —
+  Miss-Spike ist ein Security-Signal (Injection-Indiz), Hit-Rückgang
+  ein Kosten-Signal. Doku-Drift hat zwei Härtegrade: ein
+  **behaupteter-aber-fehlender Befehl** in AGENTS.md ist *sofort*
+  gate-relevant (Geister-Befehl); ein neues Target ohne Doku-Eintrag
+  ist nur Vorwärts-Drift (Doku-Rückstand).
+- **Produktionsfreigabe:** Checkliste mit Belegen — **ein Item ohne
+  Beleg (Datei, Target-Output, Trace-ID, CI-Link) ist nicht abgehakt,
+  auch wenn es inhaltlich erfüllt wäre**; das ist die Grenzlinie
+  zwischen Audit und Bürokratie. Die
+  **Rollback-vs-Fix-Forward**-Entscheidungstabelle wird *vor* dem
+  Incident geschrieben, nicht unter Stress entschieden; die drei
+  Anti-Rollback-Szenarien stehen namentlich im Runbook:
+  nicht-rückwärtskompatible DB-Migration · bereits ausgelieferte
+  fehlerhafte Daten · ungetesteter Rollback-Pfad. **Postmortems sind
+  blameless**: sie fragen, welcher Sensor oder Guide gefehlt hat,
+  nicht wer schuld war — wer Schuld verteilt, bringt Beteiligte dazu,
+  Drift-Symptome zu verschweigen.
 - **Prompt-Injection-Symptome** in Telemetrie sichtbar machen:
   ungewöhnliche Tool-Sequenz außerhalb des Slice-Scopes · Egress an
   externe Ziele · Drift zwischen Auftrag und Output.
