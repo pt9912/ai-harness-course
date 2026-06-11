@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:32 CEST
+**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:42 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -109,7 +109,11 @@ harness/conventions.md        # repo-lokale Strukturregeln (Pflicht)
 AGENTS.md                     # Briefing: Hard Rules + Pointer
 ```
 
-**Bootstrap und Modus** ([§Konventionen](grundlagen/konventionen.md#kernbegriffe)):
+**Bootstrap und Modus** ([§Konventionen](grundlagen/konventionen.md#kernbegriffe);
+Tiefe: [Modul 2](01-spec-und-architektur/modul-02-harness-bootstrap.md)).
+**Bootstrap ist ein fortlaufender Modus, kein einmaliges Event** —
+die initiale Anwendung des Steering-Loops, gefahren, bis das Repo
+steady state erreicht:
 
 - **Sub-Area-Qualifikation:** eine Struktur ist eine Sub-Area, wenn
   sie **mindestens zwei von drei Achsen** erfüllt — eigene
@@ -126,6 +130,29 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
   berührten Artefakt-Sektionen · Evidenz-/Diskrepanz-Risiko (bei
   BF/Hybrid das Hauptrisiko) · Reconciliation-Aufwand inklusive
   Graduation-/Folge-Slice-Trigger.
+- **GF-Ablauf** (Doc führt; Skelett): Modus pro Sub-Area entscheiden →
+  Baseline, Repo-Klasse und ID-Schemata festlegen → Templates
+  kopieren → `harness/conventions.md` mit `MR-000`-Baseline-Aussage
+  anlegen (Sync-Pointer in `harness/README.md` und `AGENTS.md`
+  nachziehen; MR-Disziplin: chronologisch, akzeptierte Einträge nie
+  nachträglich ändern — Aufhebung nur via neuem MR) →
+  Lastenheft-Outline mit `LH-*`-IDs → Roadmap/Releasing → geplante
+  Sensors im **„Nicht behauptet"-Block** führen, nicht in der
+  Haupt-Tabelle (Promotion erst, wenn das Target real existiert) →
+  Architektur-/Spezifikations-Outline → erste ADR mit Status
+  *Proposed*.
+- **BF-Ablauf** (Code führt): Modus-Antizipation + Baseline →
+  **Code-Inventur (Discovery)**: Makefile, CI, Tests, README,
+  Commit-Messages → Templates → `conventions.md` mit BF-Deklaration
+  und Konvergenz-Auftrag pro Sub-Area → Sensors-Tabelle direkt aus
+  der Makefile-Realität (Targets existieren schon) → Lastenheft aus
+  Code/Tests/CI **rückbauen** → Architektur/Spezifikation rückbauen,
+  implizite Entscheidungen als **retroaktive ADRs** →
+  **Diskrepanz-Schock:** jede Diskrepanz klassifizieren als
+  (a) `CO-DS-*` — Code ohne Anforderung, (b) Reconciliation-Slice —
+  Anforderung ohne Code, (c) retro-ADR — implizite Entscheidung →
+  Roadmap als **Reconciliation-Plan**, letzte Welle = Graduation pro
+  Sub-Area (Plan ist Diskrepanz-Auflösungs-, keine Feature-Sequenz).
 - **Drei Anzeichen für Modus-Wechsel im Betrieb:** (1) die
   Diskrepanz-Häufung ändert sich, (2) der Test-Bestand übertrifft die
   Spec-Anker (GF→BF-Drift), (3) eine Carveout-Auflösung schließt eine
@@ -410,6 +437,16 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
   lügt mit der Zeit von selbst.
 
 ## 10. Wartung dieses Digests
+
+**Aufnahme-Kriterium:** Die Trennlinie ist *operativ vs. didaktisch*,
+nicht groß vs. klein. Rein gehört alles, was Agentenverhalten steuert
+— Entscheidungsregeln, Abläufe, Schemata, Verbote —, auch wenn das
+Digest dadurch wächst; Vollständigkeit der operativen Schicht ist das
+Ziel, Kürze nur Nebenprodukt des Didaktik-Verzichts. Draußen bleibt
+die Didaktik-Schicht (Engage, Übungen, Selbstchecks, Lösungen,
+Reflexionen, Lernziel-Apparat) und das *Erzähl-Drumherum* der Worked
+Examples — deren operatives Skelett (Schrittfolgen, Klassifikationen)
+gehört dagegen rein.
 
 Derivativ — bei jeder Kurs-Welle gegen die Quellen diffen (Abschnitt
 0) und die **Stand-Zeile** am Dokumentanfang aktualisieren (Format:
