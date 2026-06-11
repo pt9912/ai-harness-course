@@ -36,8 +36,8 @@ Nach dem Kurs kannst du:
   buchstabengetreu umsetzt — und nicht das Naheliegende halluziniert,
 - die sechs Agentenrollen (Planner, Architect, Implementation, Reviewer,
   Verification, Validation) sauber trennen und ihre Übergaben entwerfen,
-- Quality Gates als reproduzierbare `make`-Ziele aufsetzen und im CI
-  verankern,
+- Quality Gates als reproduzierbare `make`-Ziele aufsetzen, die lokal
+  und im CI identisch laufen,
 - Replay-Läufe mit Golden Sets fahren, Regressionen messen und Modell-Drift
   erkennen,
 - den Harness gegen Entropie aktiv pflegen (Doku-Drift, tote Constraints,
@@ -48,23 +48,28 @@ Nach dem Kurs kannst du:
 ## Kursinhalt
 
 Der eigentliche Kurs liegt unter [`kurs/de/`](kurs/de/README.md) und ist
-in 16 Module plus Grundlagen- und Abschluss-Sektionen unterteilt. Den
-vollständigen Inhaltsindex, den Voraussetzungscheck und die
-Lernfortschritts-Tabelle findest du in der
+in 17 Module (0–16) plus Grundlagen- und Abschluss-Sektionen
+unterteilt. Den vollständigen Inhaltsindex, den Voraussetzungscheck und
+die Lernfortschritts-Tabelle findest du in der
 [Kurs-Übersicht](kurs/de/README.md).
 
 Die Module sind nach Phasen gruppiert:
 
 | Phase | Module | Schwerpunkt |
 |---|---|---|
-| [Grundlagen](kurs/de/grundlagen/) | — | Begriffe, Klassifikation, drei reale Fallstudien |
+| [Grundlagen](kurs/de/grundlagen/) | — | Begriffe, Klassifikation, vier reale Fallstudien |
 | [00 Einführung](kurs/de/00-einfuehrung/) | 0 | Agent · LLM · Harness |
-| [01 Spec und Architektur](kurs/de/01-spec-und-architektur/) | 1–3 | Lebenszyklus · Lastenheft · ADRs |
-| [02 Planung](kurs/de/02-planung/) | 4–6 | Slice-Lifecycle · Roadmap · Carveouts |
-| [03 Agenten](kurs/de/03-agenten/) | 7–8 | Rollen · Implementation-Agent |
-| [04 Qualität](kurs/de/04-qualitaet/) | 9–12 | Review · Verifikation · Replay · Gates |
-| [05 Betrieb](kurs/de/05-betrieb/) | 13–15 | Docker · Observability · Produktion |
+| [01 Spec und Architektur](kurs/de/01-spec-und-architektur/) | 1–4 | Lebenszyklus · Harness-Bootstrap · Lastenheft · ADRs |
+| [02 Planung](kurs/de/02-planung/) | 5–7 | Slice-Lifecycle · Roadmap · Carveouts |
+| [03 Agenten](kurs/de/03-agenten/) | 8–9 | Rollen · Implementation-Agent |
+| [04 Qualität](kurs/de/04-qualitaet/) | 10–13 | Review · Verifikation · Replay · Gates |
+| [05 Betrieb](kurs/de/05-betrieb/) | 14–16 | Docker · Observability · Produktion |
 | [Abschluss](kurs/de/abschluss/) | — | Abschlussprojekt · Quellen |
+
+Für **Code-Agenten** gibt es den Kurs zusätzlich als destilliertes
+Betriebsregelwerk: [`kurs/de/agents-digest.md`](kurs/de/agents-digest.md)
+— Konventionen und Workflows ohne Didaktik-Schicht, derivativ (bei
+Konflikt gilt das Kursmaterial).
 
 > **Roadmap-Hinweis.** `kurs/en/` ist als Skelett angelegt, aber noch
 > nicht inhaltlich befüllt. Eine englische Übersetzung folgt demselben
