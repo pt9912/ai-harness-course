@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:43 CEST
+**Stand:** Kurs-Welle 8 · 2026-06-11 · 16:00 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -305,12 +305,14 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
   Klassifikation zwischen Sessions. Review-Läufe reproduzierbar machen
   (fixierte Eingaben, deklarierter Skill); Erwartung ist *ähnlich,
   nicht identisch*.
-- **Verifikation:** Plan-gegen-Code-Diff. **DoD-Verletzung** = ein
-  prüfbares Artefakt sagt nein (Gate rot, Endpoint weicht vom Plan ab);
-  **Review-Finding** = begründetes Urteil ohne verletzten Vertrag.
-  Abgrenzungskriterium ist das **Prüf-Artefakt, nicht die Schwere**.
-  Pre-completion-Checks des Agenten selbst ersetzen keine Verifikation
-  (Selbstabsolution).
+- **Verifikation:** Plan-gegen-Code-Diff. Abgrenzung zum Review läuft
+  über das **Prüf-Artefakt, nicht über die Schwere**:
+  **DoD-Verletzung** = Differenz zwischen DoD/Spec/Plan und dem
+  tatsächlichen Stand (Gate rot, Endpoint weicht vom Plan ab) — diese
+  Klasse fängt nur die Verifikation; **Review-Finding** = begründetes
+  Urteil gegen Plan/ADR/Konventionen (ADR-Verstoß,
+  Maintainability-Beobachtung). Pre-completion-Checks des Agenten
+  selbst ersetzen keine Verifikation (Selbstabsolution).
 - **Replay & Golden Sets:** kuratierte Eingabe/Erwartungs-Paare
   (Happy · Boundary · Negative, Auswahlkriterium pro Fall) in `evals/`;
   Regressionen messen statt raten. **Replay-Manifest-Pflichtfelder:**
