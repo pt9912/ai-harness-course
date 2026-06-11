@@ -61,6 +61,9 @@ ist derivativ — bei Konflikt gilt das Lehrmaterial.
 - **Extern (Lehrmaterial):** <Pfad oder URL>
 - **Extern (Agenten-Destillat):** <Raw-URL, bei Adoption des Kurses:
   https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-digest.md>
+  — adoptierten Stand notieren (Stand-Zeile am Digest-Anfang, z. B.
+  „Kurs-Welle 8 · 2026-06-11"); für harte Reproduzierbarkeit Raw-URL
+  auf Commit/Tag pinnen statt `main`.
 - **In-Repo (verkörperte Form):** <Pfade zu adoptierten Templates>
 
 ## Adaptions-Block

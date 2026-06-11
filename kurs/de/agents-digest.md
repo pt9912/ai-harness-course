@@ -1,5 +1,7 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
+**Stand:** Kurs-Welle 8 · 2026-06-11
+
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
 > die Didaktik-Schicht (Engage, Übungen, Selbstchecks, Lösungen,
@@ -213,6 +215,11 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
 ## 10. Wartung dieses Digests
 
 Derivativ — bei jeder Kurs-Welle gegen die Quellen diffen (Abschnitt
-0). Die Link-Anker prüft `node tools/docs-check.js kurs/de/`; eine
-Regel, die hier steht und in keiner Quelle, ist eine Harness-Lüge
-dieses Dokuments.
+0) und die **Stand-Zeile** am Dokumentanfang aktualisieren (Format:
+`Kurs-Welle <N> · <Datum>`); adoptierende Repos vergleichen ihren
+Baseline-`Stand:`-Eintrag gegen diese Zeile. Wer die harte Garantie
+braucht, pinnt die Raw-URL auf Commit oder Tag statt `main` — eine
+`main`-Raw-URL ohne Stand-Vergleich ist das Doku-Äquivalent eines
+ungepinnten Base-Image (§9). Die Link-Anker prüft
+`node tools/docs-check.js kurs/de/`; eine Regel, die hier steht und in
+keiner Quelle, ist eine Harness-Lüge dieses Dokuments.
