@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:47 CEST
+**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:50 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -140,8 +140,11 @@ steady state erreicht; jeder Trigger ist ein Bootstrap-Mikro-Event:
   Modus** — er berührt Sub-Areas, die je einen tragen.
 - **GF-Ablauf** (Doc führt; Skelett): Modus pro Sub-Area entscheiden →
   Baseline, Repo-Klasse und ID-Schemata festlegen → Templates
-  kopieren → `harness/conventions.md` mit `MR-000`-Baseline-Aussage
-  anlegen (Sync-Pointer in `harness/README.md` und `AGENTS.md`
+  **adoptieren** (kopieren *und* in `harness/conventions.md`
+  §Adoptierte Konventions-Quellen als verkörperte Form deklarieren —
+  mit Baseline-Name und Stand) → `harness/conventions.md` mit
+  `MR-000`-Baseline-Aussage anlegen (Sync-Pointer in
+  `harness/README.md` und `AGENTS.md`
   nachziehen; MR-Disziplin: chronologisch, akzeptierte Einträge nie
   nachträglich ändern — Aufhebung nur via neuem MR) →
   Lastenheft-Outline mit `LH-*`-IDs → Roadmap/Releasing → geplante
@@ -151,7 +154,8 @@ steady state erreicht; jeder Trigger ist ein Bootstrap-Mikro-Event:
   *Proposed*.
 - **BF-Ablauf** (Code führt): Modus-Antizipation + Baseline →
   **Code-Inventur (Discovery)**: Makefile, CI, Tests, README,
-  Commit-Messages → Templates → `conventions.md` mit BF-Deklaration
+  Commit-Messages → Templates adoptieren (wie GF) → `conventions.md`
+  mit BF-Deklaration
   und Konvergenz-Auftrag pro Sub-Area → Sensors-Tabelle direkt aus
   der Makefile-Realität (Targets existieren schon) → Lastenheft aus
   Code/Tests/CI **rückbauen** → Architektur/Spezifikation rückbauen,
