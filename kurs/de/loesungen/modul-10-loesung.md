@@ -94,8 +94,8 @@ Auswahl-Angebot.
 
 1. **Nach Kategorie sortieren, HIGH zuerst lesen.** Findings ohne
    Kategorie sind Mängelliste, nicht Entscheidungsvorlage — wenn der
-   Reviewer-Agent das nicht liefert, ist sein Skill zu schwach (Modul 10
-   §"Reviewer berichtet auch, was er nicht gefunden hat").
+   Reviewer-Agent das nicht liefert, ist sein Skill zu schwach (siehe
+   [Modul 10 §"Reviewer berichtet auch, was er nicht gefunden hat"](../04-qualitaet/modul-10-review-harness.md#reviewer-berichtet-auch-was-er-nicht-gefunden-hat)).
 2. **HIGH-Findings prüfen — gegen welche Quelle?** Jedes HIGH muss eine
    *Quelle* nennen (ADR-ID, Hard Rule, LH-ID). Wenn keine Quelle:
    Reviewer-Skill hat keine "Klassifikations-Anker" — Steering-Loop-Eintrag.
