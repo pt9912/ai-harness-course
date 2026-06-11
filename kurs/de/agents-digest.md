@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:37 CEST
+**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:38 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -252,6 +252,13 @@ DoD-Konformität (*richtig gebaut?*), Validation die fachliche Wirkung
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt.
 8. Ausgeführte Sensors und verbleibende Risiken berichten — **keine
    Erfolgsmeldung ohne Gate-Ausführung**.
+
+**Rücksprungkanten:** die zwei Standard-Kanten sind **5→4 und 6→4**
+(Plan *verfeinern* — ein roter Sensor/Gate ist meist ein
+Plan-Defekt). Ein Rücksprung zu Schritt 1 ist nur richtig, wenn die
+kanonische Quelle gar nicht im Kontext war (Kontext-Defekt) — eine
+andere Ursachen-Klasse. **Die Wahl der Kante ist die Diagnose der
+Ursache**; „nochmal von vorn" ist keine.
 
 Typische **Hard Rules** (repo-spezifisch in `AGENTS.md`): Docker-only
 (kein Host-Toolchain-Install) · Suppression-Verbot (Ausnahmen zentral
