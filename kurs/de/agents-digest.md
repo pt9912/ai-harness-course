@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 8 · 2026-06-11
+**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:29 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -348,7 +348,9 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
 
 Derivativ — bei jeder Kurs-Welle gegen die Quellen diffen (Abschnitt
 0) und die **Stand-Zeile** am Dokumentanfang aktualisieren (Format:
-`Kurs-Welle <N> · <Datum>`); adoptierende Repos vergleichen ihren
+`Kurs-Welle <N> · <Datum> · <Uhrzeit mit Zeitzone>` — die Uhrzeit
+unterscheidet mehrere Überarbeitungen am selben Tag innerhalb
+derselben Welle); adoptierende Repos vergleichen ihren
 Baseline-`Stand:`-Eintrag gegen diese Zeile. Wer die harte Garantie
 braucht, pinnt die Raw-URL auf Commit oder Tag statt `main` — eine
 `main`-Raw-URL ohne Stand-Vergleich ist das Doku-Äquivalent eines
