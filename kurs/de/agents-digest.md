@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:33 CEST
+**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:35 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -139,8 +139,10 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
   Vertrag und Sicht sind obligatorisch.
 - **Source Precedence** ([§](grundlagen/konventionen.md#source-precedence)):
   geordnete Liste der kanonischen Quellen, pro Repo deklariert in
-  `harness/README.md`. Bei Konflikt gewinnt die höherrangige Quelle —
-  nie still entscheiden, Konflikt benennen.
+  `harness/README.md` (die konkrete Datei-Reihenfolge ist Repo-Sache;
+  ein eigener Spezifikations-Rang ist eine deklarierte Adaption). Bei
+  Konflikt gewinnt die höherrangige Quelle, **und das unterlegene
+  Dokument wird angepasst** — nie umgekehrt, nie still.
 - **Referenz-Richtung (SDP)** ([§](grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)):
   normative Referenzen zeigen nur volatil→stabil (Slice → ADR → `LH-*`).
   Abwärts-/Seitwärts-Verweise sind Kontext, keine Spezifikation.
@@ -164,6 +166,9 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
 - Eine ADR begründet eine **Lösung** (*warum so*), die Spec trägt die
   **Anforderung** (*was*). „Wir nehmen PostgreSQL" = ADR; „Antwortzeit
   < 200 ms" = Spec; „Slice implementiert den Index" = Plan.
+- **ADRs dürfen die Spezifikation schärfen, nie das Lastenheft.**
+  Diese eine Regel kapselt die Trennung von Vertrag (nur per Change
+  Request änderbar) und Technik (fortschreibbar).
 - **`Accepted` = immutable.** Korrektur ist eine neue ADR mit
   `Supersedes ADR-NN`; `superseded`/`deprecated` sind Status, kein
   Löschen. Alt-ADRs aus der Zeit vor dieser Konvention werden
