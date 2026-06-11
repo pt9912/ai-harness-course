@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:01 CEST
+**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:03 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -294,8 +294,21 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
 - **Drei Review-Arten** — wogegen wird geprüft: *Plan-Review* gegen
   Spec/ADR (vor Implementierung) · *Design-Review* gegen Architektur ·
   *Code-Review* gegen Plan + Konventionen.
-- **Findings** kategorisiert **HIGH / MEDIUM / LOW / INFO**;
-  Reviewer-Verhalten lebt als **Skill** in
+- **Finding-Kategorien:** **HIGH** = blockiert Merge —
+  Sicherheits-, Korrektheits- oder ADR-Verstoß, auch Suppression
+  eines Gates ohne ADR · **MEDIUM** = vor Merge zu klären
+  (Soll-Blocker; z. B. fehlende Negativtests bei neuem öffentlichen
+  Vertrag) · **LOW** = nice-to-fix, blockiert nicht · **INFO** =
+  Hinweis ohne erwartete Aktion (Ergänzungs-, kein Hauptkanal). Die
+  Kategorie ist **kontextabhängig** — dieselbe Beobachtung wandert
+  nach oben mit dem Geltungsbereich (unbenutzte Variable im
+  Hilfsskript = LOW, im Sicherheits-Check-Pfad = HIGH), mit
+  Wiederholung (drittes Mal in derselben Sitzung = Symptom →
+  MEDIUM/HIGH), mit externer Wirkung und mit Produktionsnähe. Die
+  LOW/MEDIUM-Trennlinie ist repo-spezifisch und gehört in den Skill;
+  **Streit über eine Kategorisierung ist ein Steering-Loop-Signal**
+  (Spec- oder ADR-Schicht zu vage — Regel schärfen).
+- Reviewer-Verhalten lebt als **Skill** in
   `.harness/skills/reviewer.md` — Pflichtstruktur: expliziter
   Eingangs-Kontext (gegen welche Verträge wird geprüft),
   repo-spezifische Anker pro Kategorie, Anti-Pattern-Block („was du
