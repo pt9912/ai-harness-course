@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:35 CEST
+**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:37 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -185,16 +185,24 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
   normativ gebunden an `LH-*`-Scope und aktive ADRs. **Größenregel:
   klein ist ein Slice, wenn ein Agent ihn in *einem* Lauf abschließen
   kann und ein Reviewer den Diff *in einer Sitzung* prüfen kann —
-  größer ist falsch.** Geschnitten wird nach **Lieferwert, nicht nach
+  größer ist falsch; Faustregel: mehr als drei DoD-Punkte = zu
+  groß.** Geschnitten wird nach **Lieferwert, nicht nach
   Schichten**: jeder Teil-Slice liefert allein prüfbaren Wert;
   Schichten-Schnitte erzeugen Zombie-Slices, die „fast fertig"
   aufeinander warten.
 - **Lifecycle:** Slices wandern `open → next → in-progress → done`;
   jeder Übergang hat einen beobachtbaren **Trigger**. Ein Datum ist
   kein Trigger, sondern eine Prognose — Termine sind Folge, nicht
-  Treiber. **Closure** ist dokumentierter Abschluss mit Lerneintrag in
-  `done/` (was hat der Harness aus diesem Slice gelernt?); ohne
-  Lerneintrag ist der Slice nur *abgelegt*, nicht geschlossen.
+  Treiber. Dazu zwei **Rückführungen**, die Disziplin sind, kein
+  Scheitern: `in-progress → next` (zu groß — zurück zum Schneiden)
+  und `in-progress → open` (Blocker, Priorität offen); ein zu großer
+  Slice gehört sichtbar zurück, nicht still weitergeschoben.
+  **WIP-Limit pro Implementer: 1** — harte Größe, kein Vorschlag.
+  **Closure** ist dokumentierter Abschluss mit Lerneintrag in `done/`;
+  der Lerneintrag hat eine von drei Formen: **geschärfte Regel ·
+  neuer Sensor · benannte Spec-Lücke** — „Tests grün" ist keine.
+  Ohne Lerneintrag ist der Slice nur *abgelegt*, nicht geschlossen,
+  und das Versagensmuster wiederholt sich unsichtbar.
 - **Roadmap:** Wellen (Slice-Bündel) mit Triggern und
   Closure-Kriterien. Welle ≠ Meilenstein (externer Zustand) ≠ Release
   (Artefakt verlässt das Repo). Eine Roadmap ist nicht statisch — sie
