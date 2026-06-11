@@ -54,9 +54,18 @@ Verkörperte Form zum Kopieren: [`/lab/templates/`](../../lab/templates/)
 - **Drei operative Säulen (OpenAI):** Context Engineering ·
   Architectural Constraints · Entropy Management.
 - **Steering Loop:** beobachtetes Agenten-Versagen → Guide/Sensor
-  verbessern → Wiederholung reduzieren. Vor dem Einziehen eines neuen
+  verbessern → Wiederholung reduzieren. Eskalationsregel: **1× =
+  notieren, keine Aktion · 2× = Symptom, beobachten und kategorisieren
+  · 3× = Harness-Lücke, Guide oder Sensor nachziehen** — z. B.
+  wiederkehrender Spec-Bug → Spec-Template erweitern; ADR-Verstoß →
+  ArchUnit-Regel; Tool-Missbrauch → Tool-Allowlist verschärfen;
+  Halluzinations-Muster → Reviewer-Skill. Wer auf jeden Einzelfehler
+  ein Gate baut, erstickt den Harness; wer auf keinen wiederkehrenden
+  Fehler reagiert, macht ihn irrelevant. Vor dem Einziehen eines neuen
   Sensors die passende Sensor-Klasse wählen
   ([Gate-Typ ↔ Fehlerbild](04-qualitaet/modul-13-quality-gates.md#gate-typ--fehlerbild)).
+  Der Steering Loop ist die einzige Stelle im Prozess, an der der
+  Mensch unersetzbar bleibt: er entscheidet, wo der Harness wächst.
 - **Harness-Lüge** (verboten): der Harness behauptet eine Kontrolle,
   die real nicht greift — halluziniertes Gate, stille Setzung, Pointer
   auf nicht existierende Mechanik.
