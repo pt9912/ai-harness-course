@@ -5,7 +5,7 @@
 COURSE_LANG ?= go
 RUN ?= welle-1-baseline
 
-.PHONY: help gates ci fullbuild agent-implement agent-review verify verify-slice verify-closure-notes check-references replay trace release
+.PHONY: help gates ci fullbuild plan-status agent-implement agent-review verify verify-slice verify-closure-notes check-references replay trace release
 
 help: ## Targets anzeigen
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -23,6 +23,16 @@ fullbuild: ## Sprachskelett-Fullbuild ausführen
 	@test -d "$(COURSE_LANG)" || (echo "Unknown COURSE_LANG=$(COURSE_LANG)"; exit 2)
 	$(MAKE) -C "$(COURSE_LANG)" fullbuild
 
+plan-status: ## Slice-Verteilung ueber docs/plan/planning/{open,next,in-progress,done}/ anzeigen
+	@for dir in open next in-progress done; do \
+		base="docs/plan/planning/$$dir"; \
+		test -d "$$base" || { echo "Missing lifecycle directory: $$base"; exit 1; }; \
+		files=$$(find "$$base" -maxdepth 1 -name '*.md' | sort); \
+		if [ -n "$$files" ]; then count=$$(echo "$$files" | wc -l); else count=0; fi; \
+		echo "$$dir/ ($$count)"; \
+		for f in $$files; do echo "  - $$(basename "$$f")"; done; \
+	done
+
 agent-implement: ## Kontextpaket fuer einen Implementation-Agent zeigen: make agent-implement SLICE=slice-009
 	@test -n "$(SLICE)" || (echo "Usage: make agent-implement SLICE=slice-009"; exit 2)
 	@slice_path=$$(find docs/plan/planning -name "$(SLICE)*.md" -print -quit); \
@@ -34,7 +44,7 @@ agent-implement: ## Kontextpaket fuer einen Implementation-Agent zeigen: make ag
 	echo "4. referenced spec/ and docs/plan/adr/ files"; \
 	echo "5. run the narrowest useful sensor, then make gates COURSE_LANG=$(COURSE_LANG)"
 
-agent-review: ## Review-Fixture fuer Modul 9 anzeigen
+agent-review: ## Review-Fixture fuer Modul 10 anzeigen
 	@fixture="exercises/09-review-fixture/slice-X-broken-feature.md"; \
 	test -f "$$fixture" || (echo "Missing review fixture"; exit 1); \
 	echo "Review fixture: $$fixture"; \
