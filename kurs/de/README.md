@@ -119,6 +119,7 @@ mit einem eigenen Zuordnungs-Item — Abgleich gegen
 | Bereich | Inhalt |
 |---|---|
 | [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, **Konzeptkarte**, 2×2-Klassifikation, drei Säulen, Steering Loop, Durchsetzungsschicht, vier Fallstudien, **Lernpfade**, **Reflexions­vorlage**, **Lernervorstellungen**, **Kickoff-Vorlauf** (Workshop), **Phasen-Checkpoints**. Pflicht-Vorablektüre nur Konzeptkarte + Klassifikation §2×2 (siehe [§Vorab-Lektüre](#vorab-lektüre-pflicht)); der Rest, v. a. `konventionen.md`, ist sektionsweises Nachschlagewerk. |
+| [`agents-digest.md`](agents-digest.md) | Der Kurs als Betriebsregelwerk **für Code-Agenten**: destillierte Konventionen und Workflows ohne Didaktik-Schicht. Derivativ — bei Konflikt gilt die Quelle. Für Menschen kein Ersatz für die Module. |
 | [`00-einfuehrung/`](00-einfuehrung/) | Modul 0: Worum geht es überhaupt? |
 | [`01-spec-und-architektur/`](01-spec-und-architektur/) | Module 1–4: Lebenszyklus, Harness-Bootstrap, Lastenheft, ADRs. |
 | [`02-planung/`](02-planung/) | Module 5–7: Planning-Lifecycle, Roadmap, Carveouts. |
