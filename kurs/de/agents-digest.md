@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:41 CEST
+**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:43 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -68,9 +68,10 @@ Verkörperte Form zum Kopieren: [`/lab/templates/`](../../lab/templates/)
   Mensch unersetzbar bleibt: er entscheidet, wo der Harness wächst.
 - **Harness-Lüge** (verboten): der Harness behauptet eine Kontrolle,
   die real nicht greift — halluziniertes Gate, stille Setzung, Pointer
-  auf nicht existierende Mechanik. Auch ein Spec-Dokument ohne
-  deklariertes Stratum ist eine stille Setzung und **nicht normativ
-  zitierbar**, bis es deklariert ist.
+  auf nicht existierende Mechanik. **Häufigste Form: ein behauptetes
+  Gate ohne Make-Target — und der Implementation-Agent vertraut ihm.**
+  Auch ein Spec-Dokument ohne deklariertes Stratum ist eine stille
+  Setzung und **nicht normativ zitierbar**, bis es deklariert ist.
 - **Halluzination ist ein Kontext-Bug, kein Modell-Bug.** Die richtige
   Frage ist nicht „warum hat das Modell das erfunden", sondern „was im
   Kontext hätte das Erfinden verhindert" — fehlende Spec-Aussage, ADR,
@@ -153,7 +154,10 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
   `<PREFIX>-FA-<NN>.<Buchstabe>` in der Spezifikation, ADR-Nummern
   chronologisch über den Index. Deklaration des Schemas:
   `harness/conventions.md`. **Agenten referenzieren IDs, sie erfinden
-  keine.** PRs/Commits nennen die betroffenen IDs.
+  keine.** Das Präfix ist die **Klammer** über Anforderung,
+  Make-Target-Kommentar (`coverage-gate: ## LH-FA-BUILD-008`),
+  ADR-Body, Commit-Message und PR-Beschreibung — so wird der
+  Traceability-Constraint maschinell prüfbar.
 - **Akzeptanzkriterien** im Given/When/Then-Stil, pro Anforderung
   mindestens Happy Path · Boundary · Negative.
 - **Lopopolos Maxime:** „Was der Agent nicht im Kontext erreicht,
@@ -294,7 +298,9 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
   `.harness/skills/reviewer.md` — Pflichtstruktur: expliziter
   Eingangs-Kontext (gegen welche Verträge wird geprüft),
   repo-spezifische Anker pro Kategorie, Anti-Pattern-Block („was du
-  nicht bist"), Output-Schema, **Negativbefund-Zeile pro geprüftem
+  nicht bist"), Output-Schema (Kategorie · Quelle · Pfad · Befund ·
+  **verifizierbar** — gibt es einen Gate-Lauf, der den Befund
+  bestätigen würde?), **Negativbefund-Zeile pro geprüftem
   Bereich** („geprüft, ohne Befund"). Ohne Skill driftet die
   Klassifikation zwischen Sessions. Review-Läufe reproduzierbar machen
   (fixierte Eingaben, deklarierter Skill); Erwartung ist *ähnlich,
