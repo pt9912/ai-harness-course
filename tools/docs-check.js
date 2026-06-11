@@ -142,6 +142,39 @@ for (const t of startPaths) {
   for (const f of collectMarkdown(t)) mdFiles.add(resolve(f));
 }
 
+// ---- Modul-Nummern-Karte (Sensor gegen Off-by-one-Drift) ----
+// Kanonische Zuordnung Modul-Nummer → Dateinamens-Slug, aus den
+// gescannten Modul-Dateien abgeleitet (modul-NN-<slug>.md, ohne
+// Lösungs-Dateien). Grundlage für zwei Prüfungen:
+//   A (ERROR): Linktext "Modul N" / "[N]" vs. Nummer im Linkziel.
+//   B (WARN):  Prosa "Modul N (Titel)" vs. kanonischer Slug von N.
+const moduleSlugs = new Map(); // Nummer → Slug-Tokens
+for (const f of mdFiles) {
+  const m = basename(f).match(/^modul-(\d{2})-(.+)\.md$/);
+  if (!m || m[2] === "loesung") continue;
+  moduleSlugs.set(parseInt(m[1], 10), normTokens(m[2]));
+}
+
+function normTokens(s) {
+  return s
+    .toLowerCase()
+    .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
+    .split(/[^a-z0-9]+/)
+    .filter((t) => t.length >= 4);
+}
+
+// Prefix-Vergleich (5 Zeichen bzw. kürzeres Token) — fängt
+// Flexionsformen ("Produktion" ↔ "produktiver"), bleibt eng genug.
+function tokensOverlap(a, b) {
+  for (const t of a) {
+    for (const s of b) {
+      const n = Math.min(5, t.length, s.length);
+      if (t.slice(0, n) === s.slice(0, n)) return true;
+    }
+  }
+  return false;
+}
+
 if (mdFiles.size === 0) {
   process.stderr.write("docs-check: keine Markdown-Dateien gefunden.\n");
   process.exit(0);
@@ -427,10 +460,25 @@ for (const absMd of sorted) {
   const links = extractLinks(text);
   const inlineCodePaths = extractInlineCodePaths(text);
   const fileDir = dirname(absMd);
+  const rawLines = text.split("\n");
 
   for (const link of links) {
     const { target, line } = link;
     if (isExternal(target)) continue;
+
+    // Prüfung A: Modul-Nummer im Linktext vs. Nummer im Linkziel.
+    // Deterministisch (beide Nummern explizit) → ERROR. Opt-out pro
+    // Zeile via docs-check:ignore.
+    const tm = (target.split("#")[0].match(/(?:^|\/)modul-(\d{2})-[^/]*\.md$/) || [])[1];
+    if (tm !== undefined && !(rawLines[line - 1] || "").includes("docs-check:ignore")) {
+      const mention =
+        /\bModul (\d{1,2})\b/.exec(link.text) || /^\s*(\d{1,2})\s*$/.exec(link.text);
+      if (mention && parseInt(mention[1], 10) !== parseInt(tm, 10)) {
+        process.stderr.write(`ERROR ${rel}:${line}: Linktext nennt Modul ${mention[1]}, Ziel ist modul-${tm} ("${target}")\n`);
+        errors++;
+      }
+    }
+
     if (isAnchorOnly(target)) {
       const own = getHeadings(absMd);
       const anchor = target.slice(1);
@@ -455,6 +503,42 @@ for (const absMd of sorted) {
   for (const codePath of inlineCodePaths) {
     const rootRelative = /^(lab|kurs|tools)\//.test(codePath.target);
     checkLocalTarget({ rel, line: codePath.line, target: codePath.target, fileDir, rootRelative });
+  }
+
+  // Prüfung B: Prosa-Erwähnung "Modul N (Titel)" gegen den kanonischen
+  // Dateinamens-Slug von Modul N. Heuristisch → WARN. Warnt NUR, wenn
+  // die Klammer-Tokens auf ein *anderes* Modul passen (Off-by-one-
+  // Signatur); Nicht-Titel-Klammern ("Bericht A", "FV1") passen auf
+  // kein Modul und bleiben stumm.
+  if (moduleSlugs.size > 0 && !options.noWarn) {
+    let inFence = false;
+    let fenceMarker = "";
+    for (let i = 0; i < rawLines.length; i++) {
+      const indented = rawLines[i].replace(/^ {0,3}/, "");
+      const fm = indented.match(/^(```+|~~~+)/);
+      if (fm) {
+        if (!inFence) { inFence = true; fenceMarker = fm[1][0]; }
+        else if (indented.startsWith(fenceMarker)) { inFence = false; fenceMarker = ""; }
+        continue;
+      }
+      if (inFence) continue;
+      if (rawLines[i].includes("docs-check:ignore")) continue;
+      const lineText = stripInlineCode(rawLines[i]);
+      const re = /\bModul (\d{1,2}) \(([^()\n]{1,60})\)/g;
+      let m;
+      while ((m = re.exec(lineText)) !== null) {
+        const num = parseInt(m[1], 10);
+        const tokens = normTokens(m[2]);
+        if (tokens.length === 0) continue;
+        const matches = [];
+        for (const [n, slugTokens] of moduleSlugs) {
+          if (tokensOverlap(tokens, slugTokens)) matches.push(n);
+        }
+        if (matches.length === 0 || matches.includes(num)) continue;
+        process.stderr.write(`WARN  ${rel}:${i + 1}: "Modul ${m[1]} (${m[2]})" — Titel passt zu Modul ${matches.sort((a, b) => a - b).join("/")}, nicht zu ${m[1]} (Off-by-one?)\n`);
+        warnings++;
+      }
+    }
   }
 }
 

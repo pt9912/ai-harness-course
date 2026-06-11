@@ -74,6 +74,9 @@ Geprüft wird:
 3. **Code-/Config-Referenzen** `[text](pfad.go|.py|.kt|.java|.cs|.yaml|...)` — Datei vorhanden?
 4. **Explizite Inline-Code-Pfade** wie `` `../README.md` `` oder `` `lab/example/...` `` — Datei/Verzeichnis vorhanden?
 5. **Sicherheitsnetz**: Relative Pfade dürfen nicht aus dem Repo führen. Absolute Pfade werden explizit abgelehnt. Symlinks werden auf den realpath aufgelöst — ein Symlink im Repo, der nach `/etc` zeigt, wird erkannt.
+6. **Modul-Nummern-Sensor** (gegen Off-by-one-Drift nach Modul-Einfügungen — die Fehlerklasse trat in Welle 8 an vier Stellen auf):
+   - **A (ERROR, deterministisch):** Nennt ein Linktext `Modul N` (oder ist er eine reine Zahl `N`) und zeigt der Link auf `modul-MM-*.md` mit `N ≠ MM`, ist das ein Fehler. Opt-out pro Zeile: `<!-- docs-check:ignore -->`.
+   - **B (WARN, heuristisch):** Prosa-Erwähnungen `Modul N (Titel)` werden gegen den Dateinamens-Slug von Modul N geprüft (Prefix-Vergleich, Umlaut-normalisiert). Gewarnt wird **nur**, wenn der Titel auf ein *anderes* Modul passt — Nicht-Titel-Klammern („Bericht A", „FV3") passen auf kein Modul und bleiben stumm. Benötigt die Modul-Dateien im Scan-Umfang (bei Teilbaum-Läufen ohne `kurs/de/` bleibt B inaktiv).
 
 Externe Links (`http://`, `https://`, `mailto:`) werden ignoriert —
 der Kurs verwendet sie selten und sie zu prüfen wäre flaky.
