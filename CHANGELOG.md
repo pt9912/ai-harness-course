@@ -43,6 +43,12 @@ für dieses Register.)*
   Code-Agenten (derivatives Sicht-Artefakt mit Stand-Zeile), in den
   Session-Lesepfaden verdrahtet (AGENTS-/harness-README-Templates,
   Worked Example, `conventions`-Adoptionsquelle mit Raw-URL).
+  Im Lauf der Welle umbenannt (vormals `agents-digest.md`) und
+  methodisch neu aufgebaut: statt Hand-Verdichtung ein
+  **didaktik-freier Extrakt in Quellformulierung** (~4.000 Zeilen —
+  Grundlagen-Dossiers komplett, Module 0–16 als operative Extrakte
+  mit Quell-Verweis pro Abschnitt; weggelassen ist die
+  Didaktik-Schicht, nicht verdichtet der Inhalt).
 - Modul 13: Sektion „Gate-Typ ↔ Fehlerbild" (Zuordnungstabelle).
 - Templates: ID-Schema-Deklarations-Slot in
   `conventions.template.md`; AGENTS-Template §5 erklärt die
