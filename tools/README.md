@@ -5,7 +5,19 @@ Hilfsskripte rund um den Kurs. Nicht Teil des Kursmaterials.
 Beide Validatoren teilen sich einen **Multi-Stage-`Dockerfile`**: eine
 gemeinsame `base`-Stage validiert die Skripte zur Build-Zeit
 (`node --check`), zwei benannte Ziel-Stages liefern je ein
-zweckgebundenes Image. Gebaut wird per `--target`:
+zweckgebundenes Image.
+
+**Bequemster Einstieg** ist das Root-`Makefile` (baut das Image und
+führt es aus; `ARGS` reicht Flags und Pfade durch):
+
+```bash
+make docs-check                              # ganzes Repo
+make alignment-check ARGS="--strict"
+make docs-check ARGS="--verbose kurs/de/"
+make check                                   # beide nacheinander
+```
+
+Manuell gebaut wird per `--target`:
 
 ```bash
 docker build -t docs-check       --target docs-check       tools/
