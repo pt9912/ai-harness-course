@@ -13,13 +13,13 @@ jobs:
   docs-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Markdown-Links, Anker, Pfade, Modul-Nummern
         run: make docs-check
 
   alignment-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Lernziel-Alignment (strict, WARN = rot)
         run: make alignment-check ARGS="--strict"
