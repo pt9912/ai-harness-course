@@ -131,8 +131,8 @@ nicht-Permission-Gründen unermittelbar. Exit-Code bleibt 0.
 
 - **Nur Inline-Links** `[text](url)` werden geprüft. Reference-Style-Links `[text][ref]` und `[ref]: url` werden nicht geparst — der Kurs verwendet ausschließlich Inline-Links.
 - **Anker nur in `.md`-Zielen** geprüft. Ein Link wie `[Zeile 42](src/foo.go#L42)` wird stillschweigend akzeptiert (Konvention für Source-Line-Anker).
-- **Inline-Code-Pfadprüfung ist konservativ.** Geprüft werden nur explizite relative Pfade (`./`, `../`) und Repo-Root-Pfade (`lab/`, `kurs/`, `tools/`). Begriffe wie `LH-*`, `make gates`, `spec/`, `/etc/foo` oder `harness/README.md` ohne expliziten Kontext bleiben unberührt.
-- **Heading-IDs** folgen GitHubs Slug-Regel: lowercase, Whitespace → `-`, HTML-Tags und Markdown-Inline-Code entfernt, Interpunktion entfernt (Bindestriche und Unterstriche bleiben), Unicode-Buchstaben/Zahlen behalten. ATX-Closing-Sequenzen (`## Heading ##`) werden vor der Slug-Erzeugung entfernt. Duplikate bekommen `-1`, `-2`, … als Suffix.
+- **Inline-Code-Pfadprüfung ist konservativ.** Geprüft werden nur explizite relative Pfade (`./`, `../`) und Repo-Root-Pfade (`lab/`, `kurs/`, `tools/`). Begriffe wie `LH-*`, `make gates`, `spec/`, `/etc/foo` oder `harness/README.md` ohne expliziten Kontext bleiben unberührt. Opt-out pro Zeile mit einem HTML-Kommentar `<!-- docs-check:ignore -->` — gedacht für Beispiel-Pfade, die absichtlich nicht im Repo liegen (Referenzen auf fremde Repos, Angriffs-Beispiele in Übungen).
+- **Heading-IDs** folgen GitHubs Slug-Regel: lowercase, jedes Whitespace-Zeichen → `-` (**nicht kollabierend**: `A — B` → `a--b`, weil das `—` ersatzlos entfällt und beide Leerzeichen je einen Bindestrich liefern), HTML-Tags und Markdown-Inline-Code entfernt, Interpunktion entfernt (Bindestriche und Unterstriche bleiben), Unicode-Buchstaben/Zahlen behalten. ATX-Closing-Sequenzen (`## Heading ##`) werden vor der Slug-Erzeugung entfernt. Duplikate bekommen `-1`, `-2`, … als Suffix.
 
 ### Implementierungs-Hinweise
 

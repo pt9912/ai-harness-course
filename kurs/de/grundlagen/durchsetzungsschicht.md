@@ -92,7 +92,7 @@ Das vollständige Artefakt-Set einer Durchsetzungsschicht:
 - `.claude/hooks/*.sh` — Tool-Call-Gate (Befehls-Guard) und Handoff-Gate
   (Stop-/Gate-Nachweis)
 - `.claude/commands/*.md` — Workflow-Skelett als Slash-Command
-- `tools/harness/working-tree-hash.sh` + `record-gates.sh` — gemeinsame,
+- `tools/harness/working-tree-hash.sh` + `record-gates.sh` — gemeinsame, <!-- docs-check:ignore (Referenz-Artefakt im Fallstudien-Repo) -->
   inhaltsbasierte Nachweis-Quelle für Gate-Lauf *und* Handoff-Gate (eine
   Wahrheit, keine Logik-Dopplung)
 
