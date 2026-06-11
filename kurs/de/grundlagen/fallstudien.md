@@ -1,9 +1,13 @@
 # Fallstudien
 
 Der Kurs benutzt vier reale Open-Source-Repos in unterschiedlichen
-Reifegraden als laufendes Beispiel. Wenn ein Modul mit "Beispiel aus
-grid-gym" oder "wie in c-hsm-doc" argumentiert, ist genau einer dieser
-Stände gemeint.
+Reifegraden: `grid-gym`, `bess-ems` und `c-hsm-doc` tauchen als
+laufende Beispiele in mehreren Modulen auf; `u-boot` dient als
+ADR-Korpus-Anker in
+[Modul 4](../01-spec-und-architektur/modul-04-architektur-adrs.md)
+und als Reifegrad-Station in der Beobachtungs-Tabelle unten. Wenn ein
+Modul mit "Beispiel aus grid-gym" oder "wie in c-hsm-doc"
+argumentiert, ist genau einer dieser Stände gemeint.
 
 ## Übersicht
 
@@ -82,7 +86,7 @@ Sub-Area, Compliance-Bindung-Klassen).
 
 ## Branchen-Anwendungsanker
 
-Über die drei konkreten Repos hinaus, einige typische Branchen, in denen
+Über die vier konkreten Repos hinaus, einige typische Branchen, in denen
 die Konzepte des Kurses besonders tragen:
 
 - **Regulierte Branchen (Finanzen, Medizin, Behörden):** Auditierbarkeit, ADRs und Verification sind nicht nice-to-have, sondern Pflicht. Der Harness ist hier kein Tooling, sondern Compliance-Infrastruktur.

@@ -51,6 +51,13 @@ Aus den 17 Modulen muss das Repo am Ende belegbar enthalten:
 * Evaluierung
 * Quality Gates
 * Observability
+* Produktionsfreigabe (Modul 16) — eine Release-Checkliste, deren
+  Punkte mit Artefakten oder Gates belegt sind (keine bloßen
+  Checkboxen), ein Incident-Runbook mit mindestens einem konkreten
+  Failure-Pfad inklusive begründeter Rollback-vs-Fix-Forward-Abwägung
+  (Vorbild: [`/lab/example/runbooks/`](../../../lab/example/runbooks/)),
+  und Injection-Sichtbarkeit in der Telemetrie (Runtime-Validation:
+  woran erkennt der Betrieb einen Injection-Versuch im Trace?)
 
 ## Abgabe
 
@@ -124,8 +131,8 @@ Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
 |---|---|
 | **rudimentär** | Kein dokumentierter Failure → Aktion. |
 | **funktional** | Ein dokumentierter Failure mit *vorgeschlagener* Aktion, aber ohne umgesetzten Guide/Sensor. |
-| **solide** | Mindestens ein Failure → Guide/Sensor-Schritt vollständig: Beobachtung beschrieben, Quadrant der 2×2-Matrix benannt, Guide oder Sensor implementiert, Wiederholung gemessen seltener. |
-| **exzellent** | Zusätzlich: mindestens drei Steering-Loop-Iterationen über den Projektzeitraum; eine davon hat einen *bestehenden* Guide/Sensor verschärft, nicht nur einen neuen erzeugt; Reflexion nach [`grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md) für jeden Eintrag. |
+| **solide** | Mindestens ein Failure → Guide/Sensor-Schritt vollständig: Beobachtung beschrieben, Quadrant der 2×2-Matrix benannt, Guide oder Sensor implementiert, Wiederholung gemessen seltener; das Incident-Runbook (Pflicht-Feature *Produktionsfreigabe*) deckt mindestens einen Failure-Pfad mit begründeter Rollback-vs-Fix-Forward-Abwägung ab (Modul 16). |
+| **exzellent** | Zusätzlich: mindestens drei Steering-Loop-Iterationen über den Projektzeitraum; eine davon hat einen *bestehenden* Guide/Sensor verschärft, nicht nur einen neuen erzeugt; Reflexion nach [`grundlagen/reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md) für jeden Eintrag; mindestens ein (ggf. simulierter) Injection-Versuch ist in der Telemetrie sichtbar gemacht und mit einer Runtime-Validation-Gegenmaßnahme beantwortet (Modul 16). |
 
 ## Bestanden
 

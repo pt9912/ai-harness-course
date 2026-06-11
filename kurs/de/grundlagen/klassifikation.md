@@ -51,9 +51,10 @@ Die 2×2-Matrix ist sprach-neutral; die Sensoren in jedem Quadranten
 sind es nicht. Das Begleit-Lab wird das für fünf Sprachen
 (Go, Python, Kotlin, Java, C#/.NET) zeigen — jeweils mit eigener
 Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette. Die fünf
-Sprach-Skelette sind Phase C der Lab-Roadmap und heute noch nicht
-ausgeliefert; die Module 8, 12 und 13 verweisen bereits jetzt auf die
-geplanten Lab-Varianten.
+Sprach-Skelette sind als Phase C der Lab-Roadmap ausgeliefert und
+liegen unter [`/lab/example/`](../../../lab/example/) (`go/`,
+`python/`, `kotlin/`, `java/`, `csharp/`); die Module 2, 9, 13 und 14
+verweisen auf die Sprach-Varianten.
 
 ## Drei Harness-Kategorien (Böckeler)
 
@@ -61,9 +62,9 @@ Jede Kontrolle adressiert genau eine der drei Kategorien:
 
 | Kategorie | Frage | Typische Werkzeuge | Schwerpunkt-Module |
 |---|---|---|---|
-| **Maintainability Harness** | Ist der Code lesbar, modular, wartbar? | Linter, Komplexitätsmetriken, ArchUnit, Reviewer-Agent | 9, 12 |
-| **Architecture Fitness Harness** | Hält die Lösung Architektur-, Performance- und Observability-Constraints ein? | Fitness Functions, Latenz-Budgets, OTel-Assertions | 3, 10, 14 |
-| **Behaviour Harness** | Tut die Lösung das Richtige? | Tests, Replay, Golden Sets, Validation-Agent | 10, 11 |
+| **Maintainability Harness** | Ist der Code lesbar, modular, wartbar? | Linter, Komplexitätsmetriken, ArchUnit, Reviewer-Agent | 10, 13 |
+| **Architecture Fitness Harness** | Hält die Lösung Architektur-, Performance- und Observability-Constraints ein? | Fitness Functions, Latenz-Budgets, OTel-Assertions | 4, 11, 15 |
+| **Behaviour Harness** | Tut die Lösung das Richtige? | Tests, Replay, Golden Sets, Validation-Agent | 11, 12 |
 
 ```mermaid
 flowchart LR
@@ -99,9 +100,9 @@ orthogonal zu Böckelers Kategorien stehen:
 
 | Säule | Was sie tut | Werkzeuge | Schwerpunkt-Module |
 |---|---|---|---|
-| **Context Engineering** | dem Agenten das Richtige zur Verfügung stellen | Spec, ADR, AGENTS.md, Skills, dynamisches Verzeichnis-Mapping beim Start | 2, 3, 4 |
-| **Architectural Constraints** | dem Agenten das Falsche unmöglich machen | Layering-Regeln, Import-Allowlists, Tool-Allowlists, ArchUnit | 3, 12 |
-| **Entropy Management** | den Harness gegen Verfall pflegen | Doku-Konsistenz-Agent, Carveout-Audit, Golden-Set-Rotation | 6, 11, 14 |
+| **Context Engineering** | dem Agenten das Richtige zur Verfügung stellen | Spec, ADR, AGENTS.md, Skills, dynamisches Verzeichnis-Mapping beim Start | 3, 4, 5 |
+| **Architectural Constraints** | dem Agenten das Falsche unmöglich machen | Layering-Regeln, Import-Allowlists, Tool-Allowlists, ArchUnit | 4, 13 |
+| **Entropy Management** | den Harness gegen Verfall pflegen | Doku-Konsistenz-Agent, Carveout-Audit, Golden-Set-Rotation | 7, 12, 15 |
 
 ```mermaid
 flowchart TB

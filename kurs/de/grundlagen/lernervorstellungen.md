@@ -36,6 +36,10 @@ Iteration.
 - "Wir brauchen erst ein besseres Modell." — Modul 0
 - "Wir bauen einen Mega-Prompt." — Modul 0
 - "Der Agent muss nur freier entscheiden dürfen." — Modul 0
+- "Source Precedence kann man später festlegen." — Modul 1
+  (Fehlvorstellungs-Block; wer den ersten Konflikt zwischen AGENTS.md
+  und Spec erst beim Auftreten klärt, hat ihn bereits in den Code
+  laufen lassen).
 - "Ein Agent ist ein besserer/schnellerer Programmierer." — Modul 9
   (Fehlvorstellungs-Block; seit Welle 13 explizit benannt mit
   Geschwindigkeits-Argument und Lopopolo-Skalierungs-Beleg).
@@ -87,6 +91,9 @@ Iteration.
 ### Über Planung (Modul 5–7)
 
 - "Plan ist nur eine Liste von Tickets." — Modul 1
+- "Closure ist Schließen des Tickets." — Modul 1
+  (Fehlvorstellungs-Block; Closure verlangt einen Lerneintrag im
+  Slice — ohne ihn wird die Welle nicht "fertig", sondern nur "weg").
 - "Slice = Ticket = Feature." — Modul 5
 - "Erst plan ich alle Slices, dann fange ich an." — Modul 5
 - "Wenn ein Slice in `done/` ist, ist er fertig." — Modul 5
@@ -98,6 +105,9 @@ Iteration.
   (Fehlvorstellungs-Block; transitive Vereinfachung von Slice-Größe
   auf Sub-Area-Reife — zwei orthogonale Achsen).
 - "Roadmap ist eine Datumsleiste." — Modul 6
+- "Eine Roadmap ist statisch." — Modul 6 (Fehlvorstellungs-Block; eine
+  Roadmap, die nach drei Wellen nicht angepasst wurde, hat den
+  Steering Loop nicht durchlaufen).
 - "Burndown ist Fortschritt." — Modul 6
 - "Welle = Sprint." — Modul 6
 - "Trigger = Datum." — Modul 6
@@ -119,10 +129,17 @@ Iteration.
 ### Über Agentenrollen und Implementation (Modul 8–9)
 
 - "Eine Person spielt alle Rollen." — Modul 8
+- `*` "Ein Agent ist ein Chatbot mit Tools." — Modul 8 (implizit über
+  die Rollen-Trennung adressiert, aber ohne expliziten
+  Fehlvorstellungs-Block — offene Lücke, siehe §Offene `*`-Lücken).
 - "Reviewer macht das Verification gleich mit." — Modul 8
 - "Validation machen wir vor Release." — Modul 8
 - "Architect entscheidet, Implementation widerspricht nicht." — Modul 8
 - "Agent liefert schnell, also ist der Workflow Overhead." — Modul 9
+- "Mehr Kontext ist immer besser." — Modul 9 (Fehlvorstellungs-Block;
+  Lopopolos Maxime sagt nur, dass *fehlender* Kontext schadet — nicht,
+  dass *jeder zusätzliche* Kontext nützt; die Reflexion in Modul 9
+  zitiert diesen Eintrag als Conceptual-Change-Kandidaten).
 - "Hard Rules schreibe ich in AGENTS.md, und das reicht." — Modul 9
 - "Wenn die Tests grün sind, ist der Slice fertig." — Modul 9
 - "Die Pre-completion Checklist ist Bürokratie." — Modul 9
@@ -158,6 +175,9 @@ Iteration.
 - "Prompt-Caching ist Modell-Sache." — Modul 15
 - "Trace teurer Tool-Call = unnötiger Tool-Call." — Modul 15
 - "Rollback ist die Standardantwort." — Modul 16
+- "Deployt heißt produktiv." — Modul 16 (Fehlvorstellungs-Block;
+  Produktionsreife heißt *belegte Betriebsfähigkeit* — Runbook,
+  Replay-Beleg, Incident-Klausel —, nicht erfolgtes Deployment).
 - "Runbook beschreibt den Happy Path." — Modul 16
 - "Produktionsfreigabe ist eine formale Checkbox." — Modul 16
 - "Prompt-Injection ist eine Modell-Frage." — Modul 16
@@ -173,18 +193,22 @@ In den Modulen erscheint **eine Auswahl** dieser Vorstellungen als
 "Typische Fehlvorstellungen"-Block — mit Konfrontation und Begründung.
 Die mit `*` markierten Einträge sind dokumentierte Lücken; Mitwirkende
 sind eingeladen, sie in den jeweiligen Modulen zu adressieren oder hier
-als adressiert zu markieren, wenn sie ergänzt wurden. *Derzeit trägt die
-Sammlung oben **kein** `*`* — alle bis Welle 8 dokumentierten Lücken sind
-geschlossen (siehe nächster Abschnitt); die Suche nach einem offenen `*`
-oben ist also aktuell ergebnislos, das ist kein Fehler.
+als adressiert zu markieren, wenn sie ergänzt wurden. *Derzeit trägt
+die Sammlung oben **einen** offenen `*`-Eintrag* ("Ein Agent ist ein
+Chatbot mit Tools.", Modul 8); alle bis Welle 8 dokumentierten Lücken
+sind geschlossen (siehe nächster Abschnitt).
 
 ## Offene `*`-Lücken (nächste Schicht)
 
-Aktuell keine. Die vier in Welle 8 dokumentierten Lücken (*"Agent ist
+Die vier in Welle 8 dokumentierten Lücken (*"Agent ist
 schnellerer Programmierer"*, *"Prompts ersetzen Specs"*, *"ADRs sind
 Dokumentation, nicht Constraints"*, *"DevOps ist YAML schreiben"*) wurden
-in Welle 13 in Modul 9, 2, 3 und 13 als Fehlvorstellungs-Blöcke
-aufgeschlagen.
+in Welle 13 in Modul 9, 3, 4 und 14 als Fehlvorstellungs-Blöcke
+aufgeschlagen. Aktuell offen:
+
+| Präkonzept | Zielmodul | Warum heute offen | Vorschlag für die Konfrontation |
+|---|---|---|---|
+| "Ein Agent ist ein Chatbot mit Tools." | Modul 8 | implizit über die Rollen-Trennung adressiert, aber ohne expliziten Fehlvorstellungs-Block | Rollen-Argument: ein Chatbot führt *ein* Gespräch; ein Agentensystem trennt Planner/Architect/Implementation/Reviewer/Verifier/Validator mit eigenen Kontexten und Übergabe-Artefakten — die Differenz liegt in der Architektur, nicht im Tool-Zugriff. |
 
 Wenn dir neue Präkonzepte begegnen: trag sie in der passenden Sammlung
 oben mit `*` ein und beschreibe sie in einer neuen Tabellen-Zeile hier

@@ -89,7 +89,7 @@ vorlauf:
       ziel_modul: 0
     - wortlaut: "AGENTS.md, aber wir haben keine"
       vermutete_klasse: harness-bewusst-ohne-praxis
-      ziel_modul: 8
+      ziel_modul: 9
 
   frage_2_reviewer_drift:
     - wortlaut: "Halluziniert halt manchmal"
@@ -97,7 +97,7 @@ vorlauf:
       ziel_modul: 10
     - wortlaut: "Anderer Kontext, ich gebe dem mal mehr Beispiele"
       vermutete_klasse: harness-bewusst-ohne-rolle
-      ziel_modul: 7
+      ziel_modul: 10
 
   frage_3_replay_8_von_10:
     - wortlaut: "80 % ist gut, in der Praxis reicht das"

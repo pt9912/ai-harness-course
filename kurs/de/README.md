@@ -87,13 +87,16 @@ Sensor-Klasse welche Fehlerklasse fängt* (Linter = lokale Muster,
 Typecheck = Typgrenzen, Integrationstest = Verhalten im Zusammenspiel).
 Ohne diese Trennschärfe reagiert man auf einen wiederkehrenden Fehler mit
 dem falschen Sensor — und der Steering Loop läuft leer. Genau diese
-Sensor-Literacy probt Checkpoint D (Modul 13 §Gate-Typ ↔ Fehlerbild).
+Sensor-Literacy probt
+[Checkpoint D](grundlagen/checkpoints.md#checkpoint-d--nach-phase-04-qualität)
+mit einem eigenen Zuordnungs-Item — Abgleich gegen
+[Modul 13 §Gate-Typ ↔ Fehlerbild](04-qualitaet/modul-13-quality-gates.md#gate-typ--fehlerbild).
 
 ## Lernfortschritt
 
 | Modul | Du solltest danach können ... |
 |---|---|
-| [0](00-einfuehrung/modul-00-einfuehrung.md) | Agent, LLM, Tool-Call, Harness und Chatbot-vs-Engineering-System trennscharf benennen |
+| [0](00-einfuehrung/modul-00-einfuehrung.md) | Agent, LLM, Tool-Call, Harness und Chatbot-vs-Engineering-System trennscharf benennen — und einen Mega-Prompt anhand der drei Reproduzierbarkeits-Kriterien zeilenweise kritisieren |
 | [1](01-spec-und-architektur/modul-01-entwicklungszyklus.md) | den Lebenszyklus Spec → ADR → Plan → Code → Review → Verifikation als Artefaktkette nachzeichnen |
 | [2](01-spec-und-architektur/modul-02-harness-bootstrap.md) | den Harness-Bootstrap-Modus (Greenfield/Brownfield/Hybrid) pro Sub-Area diagnostizieren und gegen die vier Trigger-Klassen verorten |
 | [3](01-spec-und-architektur/modul-03-lastenheft.md) | ein Lastenheft mit Akzeptanzkriterien schreiben, das von einem Agenten umsetzbar ist |
@@ -106,7 +109,7 @@ Sensor-Literacy probt Checkpoint D (Modul 13 §Gate-Typ ↔ Fehlerbild).
 | [10](04-qualitaet/modul-10-review-harness.md) | Findings nach HIGH/MEDIUM/LOW/INFO klassifizieren und einen Review-Lauf reproduzierbar machen |
 | [11](04-qualitaet/modul-11-verification.md) | Plan-gegen-Code-Diffs automatisch verifizieren und DoD-Verletzungen erkennen |
 | [12](04-qualitaet/modul-12-replay-evaluierung.md) | Replay-Läufe mit Golden Sets fahren und Regressionen messen |
-| [13](04-qualitaet/modul-13-quality-gates.md) | Quality Gates als `make`-Ziele aufsetzen, im CI verankern, als computational feedback klassifizieren |
+| [13](04-qualitaet/modul-13-quality-gates.md) | Quality Gates als `make`-Ziele aufsetzen, als computational feedback klassifizieren und Gate-Typen Fehlerbildern zuordnen |
 | [14](05-betrieb/modul-14-docker-harness.md) | einen Docker-only Build-Harness aufbauen, der lokal und im CI identisch läuft |
 | [15](05-betrieb/modul-15-observability.md) | OpenTelemetry-Traces eines Agentenlaufs lesen und Token-Kosten attribuieren |
 | [16](05-betrieb/modul-16-produktiver-betrieb.md) | ein Projekt für den produktiven Betrieb freigeben (Runtime-Validation, Security, Incident Response) |
@@ -115,7 +118,7 @@ Sensor-Literacy probt Checkpoint D (Modul 13 §Gate-Typ ↔ Fehlerbild).
 
 | Bereich | Inhalt |
 |---|---|
-| [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, **Konzeptkarte**, 2×2-Klassifikation, drei Säulen, Steering Loop, Durchsetzungsschicht, vier Fallstudien, **Lernpfade**, **Reflexions­vorlage**, **Lernervorstellungen**, **Phasen-Checkpoints**. Pflicht-Vorablektüre nur Konzeptkarte + Klassifikation §2×2 (siehe [§Vorab-Lektüre](#vorab-lektüre-pflicht)); der Rest, v. a. `konventionen.md`, ist sektionsweises Nachschlagewerk. |
+| [`grundlagen/`](grundlagen/) | Begriffe, Source Precedence, **Konzeptkarte**, 2×2-Klassifikation, drei Säulen, Steering Loop, Durchsetzungsschicht, vier Fallstudien, **Lernpfade**, **Reflexions­vorlage**, **Lernervorstellungen**, **Kickoff-Vorlauf** (Workshop), **Phasen-Checkpoints**. Pflicht-Vorablektüre nur Konzeptkarte + Klassifikation §2×2 (siehe [§Vorab-Lektüre](#vorab-lektüre-pflicht)); der Rest, v. a. `konventionen.md`, ist sektionsweises Nachschlagewerk. |
 | [`00-einfuehrung/`](00-einfuehrung/) | Modul 0: Worum geht es überhaupt? |
 | [`01-spec-und-architektur/`](01-spec-und-architektur/) | Module 1–4: Lebenszyklus, Harness-Bootstrap, Lastenheft, ADRs. |
 | [`02-planung/`](02-planung/) | Module 5–7: Planning-Lifecycle, Roadmap, Carveouts. |
@@ -146,12 +149,18 @@ kleine, konkrete Aufgabe mit Selbsttest — gedacht als Stolperstein
 Jedes Modul folgt demselben Aufbau (Details in
 [`grundlagen/README.md`](grundlagen/README.md)):
 
+0. **Engage** — eine kurze Vignette, die einen konkreten Reibungsfall
+   schildert, *bevor* die Lernziele den Lernvertrag schließen.
 1. **Lernziele** — was kannst du danach.
 2. **Lab-Bezug** — welche Verzeichnisse, Make-Targets oder Artefakte gehören dazu.
 3. **Themen** — die Konzepte des Moduls.
 4. **Kernidee** — die eine Aussage, an der das Modul hängt.
 5. **Übungen** — Hands-on, mindestens eine mit absichtlichem Fehlerfall.
-6. **Selbstcheck** — Fragen, die du nach dem Modul beantworten können solltest.
+6. **Reflexion** — vier Standardfragen (Beobachtung · 2×2-Quadrant ·
+   Steering-Loop · Conceptual Change), Vollform in
+   [`grundlagen/reflexion-vorlage.md`](grundlagen/reflexion-vorlage.md) —
+   nach der Pass-Through-Logik die teuerste Stelle, die zu überspringen.
+7. **Selbstcheck** — Fragen, die du nach dem Modul beantworten können solltest.
 
 Für Selbststudium ist ein Modul auf ca. 90 Minuten Lesen plus 60 Minuten
 Übung ausgelegt.

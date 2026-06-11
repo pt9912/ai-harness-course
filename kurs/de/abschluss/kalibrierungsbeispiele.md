@@ -28,17 +28,23 @@ Das Projekt besteht so nicht, weil mehrere Achsen unter solide liegen.
 Ein Team gibt ein kleines, aber geschlossenes Repo ab: eine Spec, drei
 ADRs, drei Slices, davon einer in `done/`, ein dokumentierter Carveout,
 ein Replay mit mindestens drei Golden-Set-Fällen und ein Root-Target
-`make gates`, das im Container und in CI denselben Stand prüft.
+`make gates`, das im Container und in CI denselben Stand prüft. Die
+Roadmap ist eine Wellen-Sequenz mit beobachtbaren Triggern (kein
+Kalenderdatum als Trigger); der Carveout ist in der Bindung-Spalte der
+Sensors-Tabelle per `CO-001` verlinkt; `harness/conventions.md`
+existiert mit Baseline-Aussage (`MR-000`) und Modus-Deklaration pro
+Sub-Area; ein Incident-Runbook deckt einen Failure-Pfad mit
+begründeter Rollback-vs-Fix-Forward-Abwägung ab.
 
 Bewertung:
 
 | Achse | Stufe | Grund |
 |---|---|---|
-| Vollständigkeit | solide | Alle Artefakte vorhanden und verknüpft. |
-| Konsistenz | solide | Source Precedence ist sichtbar; AGENTS.md behauptet keine erfundenen Tools. |
+| Vollständigkeit | solide | Alle Artefakte vorhanden und verknüpft; Roadmap als Wellen-Sequenz mit beobachtbaren Triggern. |
+| Konsistenz | solide | Source Precedence ist sichtbar; AGENTS.md behauptet keine erfundenen Tools; Carveout per `CO-001` in der Sensors-Tabelle verlinkt; `harness/conventions.md` mit `MR-000` und Modus-Deklaration. |
 | Reproduzierbarkeit | solide | Gates laufen auf frischem Klon und in CI mit gepinntem Image. |
 | Auditierbarkeit | solide | `LH-*`, `ADR-*` und `SL-*` erscheinen in Artefakten und PR-Beschreibung. |
-| Steering-Loop-Reife | solide | Ein Failure führte zu einem implementierten Sensor; Wiederholung wurde geprüft. |
+| Steering-Loop-Reife | solide | Ein Failure führte zu einem implementierten Sensor; Wiederholung wurde geprüft; Incident-Runbook mit Rollback-vs-Fix-Forward-Abwägung vorhanden. |
 
 Das Projekt besteht. Es ist nicht breit, aber belegt die komplette
 Artefaktkette.

@@ -20,13 +20,19 @@ mit überprüfbarem Ergebnis.
    die mindestens eine deiner Anforderungen direkt betrifft.
 4. Eine `harness/README.md`-Skizze mit Source-Precedence-Block (Vorlage in
    [`/lab/templates/harness/README.template.md`](../../../lab/templates/harness/README.template.md)).
+5. Eine Bootstrap-Modus-Diagnose für zwei Sub-Areas deines
+   Mini-Features (z. B. `spec/` und das Index-Code-Verzeichnis):
+   Modus (GF/BF/Hybrid) deklarieren und je *einen* Trigger nennen,
+   der eine Modus-Umschaltung auslösen würde (mit Trigger-Klasse).
 
 **Selbsttest:**
 - Verweist dein ADR auf eine `LH-*`-ID? Wenn nein: Traceability-Constraint nicht erfüllt.
 - Hat mindestens eines deiner Akzeptanzkriterien einen Negativ-Pfad ("System darf nicht …")? Wenn nein: Spec-Lücke wahrscheinlich.
 - Steht in deinem `harness/README.md` nur, was es im Repo *tatsächlich* gibt? Wenn nein: Halluzinierter Sensor.
+- Ist der Bootstrap-Modus pro *Sub-Area* deklariert, nicht pauschal fürs Repo? Wenn nein: Modul-2-Kernidee (Sub-Area als Träger der Modus-Entscheidung) verfehlt.
 
-Wer hier hängenbleibt, sollte Modul 3 und 4 erneut durchgehen, bevor er
+Wer hier hängenbleibt, sollte Modul 3 und 4 erneut durchgehen — wer an
+Punkt 5 (Modus-Diagnose) scheitert, zusätzlich Modul 2 —, bevor er
 in Phase 02 startet. Lösungs-Vergleichspunkt:
 [`/lab/example/spec/`](../../../lab/example/spec/) und
 [`/lab/example/docs/plan/adr/`](../../../lab/example/docs/plan/adr/).
@@ -80,19 +86,35 @@ einen Replay-Lauf.
    und findet alle drei eingebauten Fehler in den *richtigen* Kategorien.
 3. Replay-Lauf gegen ein Golden Set (mindestens 3 Eingabe/Erwartungs-Paare).
 4. Provoziere einen DoD-Verstoß und prüfe, ob deine Verifikation ihn fängt.
+5. Ordne drei Fehlerbilder dem *engsten* Gate-Typ zu (z. B.
+   unbenutzter Import → Linter, falscher Rückgabetyp über eine
+   Modulgrenze → Typecheck, Index liefert, aber Suche findet nichts →
+   Integrationstest) und gleiche deine Zuordnung mit
+   [Modul 13 §Gate-Typ ↔ Fehlerbild](../04-qualitaet/modul-13-quality-gates.md#gate-typ--fehlerbild)
+   ab.
 
 **Selbsttest:**
 - Erzwingt dein `make gates` die Kategorisierung-Disziplin (Reviewer kategorisiert HIGH/MEDIUM/LOW/INFO)?
 - Hast du mindestens einen *bootstrap-aware* Gate (mit dokumentierter Hochschalt-Schwelle)?
 - Kannst du am Replay-Lauf erkennen, ob ein neues Modell schlechter geworden ist als das alte?
+- Kannst du für einen wiederkehrenden Fehler aus deinem Repo benennen, welche Sensor-Klasse (Linter · Typecheck · Integrationstest) ihn am *billigsten* fängt — und warum die anderen beiden nicht?
 
 Wer hier hängenbleibt, sollte Modul 10–13 erneut durchgehen.
 
 ## Checkpoint E — nach Phase 05 (Betrieb)
 
-Identisch mit dem [Abschlussprojekt](../abschluss/abschlussprojekt.md).
-Phase 05 ist die letzte fachliche Phase; ein eigener Mini-Checkpoint
-wäre redundant zum Abschluss.
+Kein separater Checkpoint. Phase 05 wird direkt im
+[Abschlussprojekt](../abschluss/abschlussprojekt.md) geprobt: das
+Pflicht-Feature **Produktionsfreigabe** (Release-Checkliste mit
+belegten Punkten, Incident-Runbook mit
+Rollback-vs-Fix-Forward-Abwägung, Injection-Sichtbarkeit in der
+Telemetrie) prüft die Modul-16-Lernziele; Modul 14 und 15 stecken
+bereits in den Achsen Reproduzierbarkeit, Konsistenz und
+Auditierbarkeit (siehe Pass-Through-Tabelle unten). Ein eigener
+Mini-Checkpoint würde dieselben Artefakte ein zweites Mal verlangen —
+wer vor der Abgabe üben will, nimmt
+[`/lab/example/runbooks/`](../../../lab/example/runbooks/) als
+Vorlage für einen Trockenlauf.
 
 ## Wann ist ein Checkpoint "bestanden"?
 
@@ -118,7 +140,7 @@ hat einen direkten Vorboten in einem Checkpoint.
 | Abschluss-Achse | Vorbereitender Checkpoint | Wenn dort nicht erreicht … |
 |---|---|---|
 | Vollständigkeit | A (Spec/ADR/Harness-Skizze vorhanden) | → später keine "solide" auf Vollständigkeit; Modul 1–4 vertiefen. |
-| Konsistenz | A (Source Precedence) + B (Carveout-Folge-Slice) | → Konsistenz bleibt auf "funktional"; Modul 1 §Source Precedence und Modul 7 vertiefen. *Exzellent* (Doku-Konsistenz-Drift-Sensor) setzt Modul 15 voraus. |
+| Konsistenz | A (Source Precedence + Bootstrap-Modus-Diagnose) + B (Carveout-Folge-Slice) | → Konsistenz bleibt auf "funktional"; Modul 1 §Source Precedence, Modul 2 und Modul 7 vertiefen. *Exzellent* (Doku-Konsistenz-Drift-Sensor) setzt Modul 15 voraus. |
 | Reproduzierbarkeit | C (8-Schritt-Workflow reproduzierbar) + D (Gates auf frischem Klon) **+ Modul 14** (Image-Hash, Lock-Files) | → Reproduzierbarkeit bleibt ohne Modul 14 auf "funktional" gedeckelt; Modul 9, 12, 13 vertiefen. |
 | Auditierbarkeit | B (Slice-IDs) + C (Hard Rules mit ID) | → Auditierbarkeit bleibt auf "funktional"; ID-Schema und Traceability-Hook nachholen (Modul 3, 12). *Exzellent* (Tool-Call-Audit-Forensik bis zur Anforderungs-ID) setzt Modul 15 voraus. |
 | Steering-Loop-Reife | D (DoD-Verstoß provoziert + Reflexion) | → Steering-Loop bleibt auf "rudimentär"; Reflexionsvorlage und Modul 12 vertiefen. |
