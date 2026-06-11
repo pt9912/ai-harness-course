@@ -40,6 +40,7 @@ Diese Datei dupliziert sie nicht.
 | [`../docs/plan/planning/`](../docs/plan/planning/) | aktuelle Slices, Roadmap |
 | [`../AGENTS.md`](../AGENTS.md) | Hard Rules, Workflow |
 | [`conventions.md`](conventions.md) | repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Modus-Deklarationen |
+| [Agents-Digest des Kurses](../../../kurs/de/agents-digest.md) | adoptiertes Betriebsregelwerk in Agenten-Kurzform; derivativ, Stand siehe [`conventions.md`](conventions.md) §Baseline |
 
 ## Sensors (Feedback-Gates)
 
