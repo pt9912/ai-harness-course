@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:42 CEST
+**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:47 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -113,23 +113,31 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
 Tiefe: [Modul 2](01-spec-und-architektur/modul-02-harness-bootstrap.md)).
 **Bootstrap ist ein fortlaufender Modus, kein einmaliges Event** —
 die initiale Anwendung des Steering-Loops, gefahren, bis das Repo
-steady state erreicht:
+steady state erreicht; jeder Trigger ist ein Bootstrap-Mikro-Event:
 
 - **Sub-Area-Qualifikation:** eine Struktur ist eine Sub-Area, wenn
   sie **mindestens zwei von drei Achsen** erfüllt — eigene
   Konventions-Härte (MR-Adaption formulierbar), eigene Inventur-Linie,
-  struktureller Cluster. Eine Achse allein ist Struktur ohne Substanz.
+  struktureller Cluster. Der übersprungene Qualifikations-Schritt
+  erzeugt **beide Granularitäts-Fehler zugleich**: *zu grob* (ein
+  Aggregat wie „Backend" als eine Sub-Area) und *zu fein* (Struktur
+  ohne Substanz — nur eine Achse erfüllt — bleibt
+  Sub-Area-*Aspirantin*).
 - **Modus pro Sub-Area:** Greenfield (Doc führt, Code folgt) ·
   Brownfield (Code führt, Doc folgt — **Übergangsmodus**) · Hybrid.
   Der Modus ist ein beobachtbarer Zustand **pro Sub-Area, nicht pro
-  Repo**. BF ist kein Dauermodus: jede BF-Sub-Area trägt eine
-  **Graduation-Bedingung** im Adaptions-Block; BF ohne Graduation-Plan
-  ist eine permanente Ausnahme als temporär getarnt.
+  Repo** — ein Repo kann in den *Konventionen* BF und in der
+  *Spec-Schreibung* GF sein. **BF ist der typische Ausgangspunkt
+  realer Repos, kein Makel** — aber kein Dauermodus: jede BF-Sub-Area
+  trägt eine **Graduation-Bedingung** im Adaptions-Block (ausgewiesene
+  Bedingung mit Konvergenz-Auftrag, kein Wunschdenken); BF ohne
+  Graduation-Plan ist eine permanente Ausnahme als temporär getarnt.
 - **Modus-Begründung im Slice-Plan** gegen vier Pflichtkriterien
   (vier, nicht erweitern): Konventionen-Dichte · Phase-Reife der
   berührten Artefakt-Sektionen · Evidenz-/Diskrepanz-Risiko (bei
   BF/Hybrid das Hauptrisiko) · Reconciliation-Aufwand inklusive
-  Graduation-/Folge-Slice-Trigger.
+  Graduation-/Folge-Slice-Trigger. **Der Slice selbst trägt keinen
+  Modus** — er berührt Sub-Areas, die je einen tragen.
 - **GF-Ablauf** (Doc führt; Skelett): Modus pro Sub-Area entscheiden →
   Baseline, Repo-Klasse und ID-Schemata festlegen → Templates
   kopieren → `harness/conventions.md` mit `MR-000`-Baseline-Aussage
@@ -154,14 +162,33 @@ steady state erreicht:
   Roadmap als **Reconciliation-Plan**, letzte Welle = Graduation pro
   Sub-Area (Plan ist Diskrepanz-Auflösungs-, keine Feature-Sequenz).
 - **Drei Anzeichen für Modus-Wechsel im Betrieb:** (1) die
-  Diskrepanz-Häufung ändert sich, (2) der Test-Bestand übertrifft die
-  Spec-Anker (GF→BF-Drift), (3) eine Carveout-Auflösung schließt eine
-  BF-Sub-Area. Modus-Wechsel ist Signal, kein Versagen — deklarieren,
-  nicht verschweigen.
-- **Sektionsreife:** Harness-Dokumente reifen sektionsweise (Phasen
-  0–5); erst eine Phase-4-Sektion (kohärent) ist für Verweise von
-  außen freigegeben. Dokument-Übergänge folgen vier Trigger-Klassen
-  (Sync · Promotion · Cross-Reference · Acceptance).
+  Diskrepanz-Häufung ändert sich (in beide Richtungen:
+  Backlog schrumpft = Graduation naht; neue Diskrepanzen in
+  GF-Sub-Area = Drift), (2) der Test-Bestand übertrifft die
+  Spec-Anker (GF→BF-Drift — Symptom: bei jeder Code-Änderung muss
+  die Spec nachgezogen werden statt umgekehrt), (3) eine
+  Carveout-Auflösung schließt eine BF-Sub-Area. Modus-Wechsel ist
+  Signal, kein Versagen — deklarieren, nicht verschweigen.
+- **Vier Trigger-Klassen** (erschöpfend, gelten in **jedem** Modus —
+  GF erzeugt sie aus der Konsistenzprüfung des neu Geschaffenen, BF
+  aus der Bestandsinventur; nur Frequenz und Auslöse-Quelle ändern
+  sich): **Sync** = Pointer in einem Dokument muss in einem anderen
+  ergänzt werden · **Promotion** = Eintrag wandert aus dem „Nicht
+  behauptet"-Block in die Haupt-Tabelle (z. B. Make-Target real
+  entstanden) · **Cross-Reference** = normative Referenz nur
+  volatil→stabil · **Acceptance** = Phase-Übergang per Sign-off. Das
+  BF-typische „T3" ist **keine fünfte Klasse**, sondern eine
+  Diskrepanz-Auslöse-Variante von Sync.
+- **Sektionsreife und Phasen×Modus-Lesart:** Harness-Dokumente reifen
+  sektionsweise (Phasen 0–5); erst eine Phase-4-Sektion (kohärent)
+  ist für Verweise von außen freigegeben. **Dieselbe Phase bedeutet
+  je Modus etwas anderes** — GF Phase 1 = Versprechen zu füllen, BF
+  Phase 1 = Inventur-Auftrag; GF Phase 4 = Vertrag steht, Code wird
+  daran gemessen, BF Phase 4 = Inventur abgeglichen,
+  **Diskrepanz-Schock sichtbar**. Diagnose-Dreischritt für jede
+  Bootstrap-Aktion: *welche Sub-Area* bewegt sich → *welche Phase*
+  erreicht sie → *in welchem Modus* — daraus folgt der nächste
+  Schritt fast deterministisch.
 
 ## 3. Spec-Disziplin
 
