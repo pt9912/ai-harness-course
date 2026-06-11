@@ -219,7 +219,7 @@ timeline
 ```
 
 Kosten steigen von links nach rechts. Faustregel: jede Kontrolle, die
-zwei Stufen nach rechts wandern könnte (ohne Schaden), sollte das tun.
+zwei Stufen nach links wandern könnte (ohne Schaden), sollte das tun.
 Eine Coverage-Prüfung, die erst im "Continuous"-Lauf greift, ist faktisch
 keine Coverage-Prüfung — die Information kommt zu spät, um auf den
 Slice zurückzuwirken.
