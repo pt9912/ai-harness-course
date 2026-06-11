@@ -123,7 +123,11 @@ Gates sind die häufigste Form von Harness-Lüge (siehe Modul 13).
 
 ## 5. Dokumentations-Regeln
 
-- Requirement- und Architektur-IDs müssen in PRs/Commits referenziert sein.
+- Requirement- und Architektur-IDs müssen in PRs/Commits referenziert
+  sein. Vergeben werden IDs beim Spec-/ADR-Schreiben nach dem in
+  `harness/conventions.md` deklarierten ID-Schema (Default:
+  `<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>` aus dem Lastenheft, ADR-Nummern
+  über den ADR-Index) — nie ad hoc im PR.
 - Neue ADRs müssen den ADR-Index aktualisieren.
 - Roadmap/Status-Geschichte lebt in `docs/plan/planning/`, nicht in `spec/architecture.md`.
 - Quality-Gate-Definitionen leben in <`docs/user/quality.md` oder Äquivalent>.

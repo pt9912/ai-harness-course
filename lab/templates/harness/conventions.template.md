@@ -23,6 +23,9 @@ gegenüber der adoptierten Harnesskonvention (Baseline). Sie ist der
 Default-Ort für:
 
 - **Adaptionen** ggü. der Baseline (mit Begründung und Auflösungs-Trigger).
+- **ID-Schema-Deklaration** — welches Präfix-Schema dieses Repo nutzt.
+  Der Baseline-Default wird als Teil der `MR-000`-Aussage festgehalten;
+  ein abweichendes Präfix oder Schema ist ein eigener `MR`-Eintrag.
 - **Zusatzklassen-Deklarationen** für repo-spezifische
   Bindung-Klassen in der Sensors-Tabelle, die über die vier kanonischen
   hinausgehen (ADR, Carveout, Schwelle, Reproduzierbarkeit).
@@ -64,6 +67,15 @@ Adaption, Begründung, Auflösungs-Trigger (oder "permanent").
 Disziplin: chronologisch nummeriert, keine nachträglichen
 inhaltlichen Änderungen an akzeptierten Einträgen — nur neue Einträge
 oder explizite Aufhebungen via neuen MR.
+
+Zum ID-Schema: Hier wird es nur DEKLARIERT — VERGEBEN werden IDs beim
+Schreiben der Artefakte: Anforderungs-IDs im Lastenheft
+(`<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>`, Schema-Definition in
+spec/lastenheft.template.md), Verfeinerungen in der Spezifikation
+(`<PREFIX>-FA-<NN>.<Buchstabe>`), ADR-Nummern chronologisch über den
+ADR-Index. Hintergrund: Kurs grundlagen/konventionen.md
+§ID-Schema als Klammer. Agenten referenzieren IDs nur, sie erfinden
+keine (AGENTS.md §5/§6).
 -->
 
 ### MR-000 — Baseline-Aussage
@@ -71,7 +83,9 @@ oder explizite Aufhebungen via neuen MR.
 - **Datum:** <Datum>
 - **Geltungsbereich:** gesamtes Repo
 - **Adaption:** *keine inhaltlichen Adaptionen ggü. Baseline-Default
-  für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin.*
+  für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
+  ID-Schema (`<PREFIX>-FA-*`, `<PREFIX>-QA-*`, `ADR-<NNN>`, `CO-<NNN>`,
+  `slice-<NNN>`, `MR-<NNN>` — Präfix repo-weit festlegen, z. B. `LH`).*
   (Source-Precedence-Adaptionen werden in separaten `MR-<NNN>`
   dokumentiert — siehe Beispiel `MR-001` unten, weil das mitkopierte
   README-Template eine 3-Schichten-Spec-Precedence zeigt.)
