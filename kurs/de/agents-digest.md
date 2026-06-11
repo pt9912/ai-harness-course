@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:29 CEST
+**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:33 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -84,9 +84,14 @@ Verkörperte Form zum Kopieren: [`/lab/templates/`](../../lab/templates/)
 
 ## 2. Artefaktkette und Verzeichnisse
 
-Lebenszyklus: **Spec → ADR → Plan (Slices) → Code → Review →
-Verifikation**, mit Rückkanten (Review-Finding → Plan; Spec-Lücke →
-Spec). Verzeichniskonvention:
+Lebenszyklus (sieben Stationen): **Spec → ADR → Plan (Slices) → Code →
+Review (gegen Plan/ADR) → Verifikation (gegen DoD/Spec) → Closure mit
+Lerneintrag**, mit Rückkanten (Review-Finding → Plan ·
+Closure-Lerneintrag → Spec und ADR). Review und Verifikation fangen
+unterschiedliche Fehlerklassen — getrennte Rollen mit getrenntem
+Eingabe-Kontext (§6). Jedes Artefakt verweist nach oben (Begründung)
+und nach unten (Konsequenz); eine Kette ohne Rückverweise ist nicht
+auditierbar. Verzeichniskonvention:
 
 ```
 spec/                         # Lastenheft, Spezifikation, Architektur
