@@ -66,11 +66,13 @@ Die Module sind nach Phasen gruppiert:
 | [05 Betrieb](kurs/de/05-betrieb/) | 14–16 | Docker · Observability · Produktion |
 | [Abschluss](kurs/de/abschluss/) | — | Abschlussprojekt · Quellen |
 
-Für **Code-Agenten** gibt es den Kurs zusätzlich als destilliertes
-Betriebsregelwerk: [`kurs/de/agents-digest.md`](kurs/de/agents-digest.md)
-— Konventionen und Workflows ohne Didaktik-Schicht, derivativ (bei
-Konflikt gilt das Kursmaterial). Die Überarbeitungs-Wellen des Kurses
-registriert das [`CHANGELOG.md`](CHANGELOG.md).
+Für **Code-Agenten** gibt es den Kurs zusätzlich als Betriebsregelwerk:
+[`kurs/de/agents-regelwerk.md`](kurs/de/agents-regelwerk.md) — der
+didaktik-freie Extrakt des Kurses (Konventionen, Regeln, Abläufe in
+Quellformulierung; weggelassen sind nur Engage, Übungen, Selbstchecks,
+Lösungen, Reflexionen), derivativ: bei Konflikt gilt das Kursmaterial.
+Die Überarbeitungs-Wellen des Kurses registriert das
+[`CHANGELOG.md`](CHANGELOG.md).
 
 > **Roadmap-Hinweis.** `kurs/en/` ist als Skelett angelegt, aber noch
 > nicht inhaltlich befüllt. Eine englische Übersetzung folgt demselben

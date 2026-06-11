@@ -26,9 +26,9 @@ Sensors-Bindung) leben in
 [`harness/conventions.md`](harness/conventions.md).
 
 Das **Betriebsregelwerk der adoptierten Baseline in Agenten-Kurzform**
-liegt unter <Pfad oder Raw-URL zum Agents-Digest, bei Adoption des
+liegt unter <Pfad oder Raw-URL zum Agents-Regelwerk, bei Adoption des
 Kurses:
-https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-digest.md>
+https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-regelwerk.md>
 — einmal pro Session lesen, bevor der Workflow (§6) startet.
 Derivativ: bei Konflikt gelten die kanonischen Quellen; adoptierter
 Stand steht in `harness/conventions.md` §Baseline.

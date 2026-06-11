@@ -1,7 +1,7 @@
 # Changelog
 
 Kanonisches Register der Überarbeitungs-Wellen dieses Kurses. Die
-Stand-Zeile von [`kurs/de/agents-digest.md`](kurs/de/agents-digest.md)
+Stand-Zeile von [`kurs/de/agents-regelwerk.md`](kurs/de/agents-regelwerk.md)
 referenziert diese Nummern; adoptierende Repos vergleichen ihren
 Baseline-`Stand:`-Eintrag gegen dieses Register.
 
@@ -11,7 +11,7 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
-## Welle 18 — 2026-06-11 · Konsistenz-Welle + Agents-Digest
+## Welle 18 — 2026-06-11 · Konsistenz-Welle + Agents-Regelwerk
 
 *(Commits dieser Welle tragen das historische Label „Welle 8
 (Konsistenz)" — die Kollision mit der älteren Welle 8 war der Anlass
@@ -39,7 +39,7 @@ für dieses Register.)*
 
 ### Neu
 
-- **`kurs/de/agents-digest.md`** — der Kurs als Betriebsregelwerk für
+- **`kurs/de/agents-regelwerk.md`** — der Kurs als Betriebsregelwerk für
   Code-Agenten (derivatives Sicht-Artefakt mit Stand-Zeile), in den
   Session-Lesepfaden verdrahtet (AGENTS-/harness-README-Templates,
   Worked Example, `conventions`-Adoptionsquelle mit Raw-URL).

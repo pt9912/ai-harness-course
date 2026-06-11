@@ -53,15 +53,15 @@ damit spätere Adaptionen einen Bezugspunkt haben.
 Pointer auf die Quellen der Baseline. KEINE Wiederholung des Inhalts —
 nur Verweise.
 
-Das Agenten-Destillat ist die Quelle, die ein Code-Agent statt des
+Das Agenten-Regelwerk ist die Quelle, die ein Code-Agent statt des
 vollen Lehrmaterials liest (operatives Regelwerk ohne Didaktik). Es
 ist derivativ — bei Konflikt gilt das Lehrmaterial.
 -->
 
 - **Extern (Lehrmaterial):** <Pfad oder URL>
-- **Extern (Agenten-Destillat):** <Raw-URL, bei Adoption des Kurses:
-  https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-digest.md>
-  — adoptierten Stand notieren (Stand-Zeile am Digest-Anfang, z. B.
+- **Extern (Agenten-Regelwerk):** <Raw-URL, bei Adoption des Kurses:
+  https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-regelwerk.md>
+  — adoptierten Stand notieren (Stand-Zeile am Regelwerk-Anfang, z. B.
   „Kurs-Welle 18 · 2026-06-11 · 19:49 CEST"; Wellen-Register:
   CHANGELOG.md im Kurs-Repo); für harte Reproduzierbarkeit Raw-URL
   auf Commit/Tag pinnen statt `main`.
