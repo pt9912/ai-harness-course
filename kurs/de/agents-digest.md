@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:38 CEST
+**Stand:** Kurs-Welle 8 · 2026-06-11 · 15:41 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -115,7 +115,8 @@ AGENTS.md                     # Briefing: Hard Rules + Pointer
   struktureller Cluster. Eine Achse allein ist Struktur ohne Substanz.
 - **Modus pro Sub-Area:** Greenfield (Doc führt, Code folgt) ·
   Brownfield (Code führt, Doc folgt — **Übergangsmodus**) · Hybrid.
-  BF ist kein Dauermodus: jede BF-Sub-Area trägt eine
+  Der Modus ist ein beobachtbarer Zustand **pro Sub-Area, nicht pro
+  Repo**. BF ist kein Dauermodus: jede BF-Sub-Area trägt eine
   **Graduation-Bedingung** im Adaptions-Block; BF ohne Graduation-Plan
   ist eine permanente Ausnahme als temporär getarnt.
 - **Drei Anzeichen für Modus-Wechsel im Betrieb:** (1) die
@@ -327,8 +328,13 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
   **Bootstrap-aware Gates** kennen eine deklarierte Reifestufe; der
   Hochschalt-Trigger ist ein **Ereignis, kein Datum**, und steht im
   Make-Target-Kommentar — ohne Trigger ist es keine Reifestufe,
-  sondern aufgeschobene Pragmatik. Nur Gates behaupten, die als Target
-  existieren.
+  sondern aufgeschobene Pragmatik. **Werkzeug-Triade bei gelockerter
+  Gate-Disziplin:** *Carveout* (punktuelle Ausnahme mit Folge-Slice) ·
+  *bootstrap-aware Gate* (terminiertes Reifestufen-Gate — eigene
+  Klasse, kein Carveout-Subtyp) · *BF-Sub-Area-Markierung* — wobei
+  Letztere kein Closure-Werkzeug ist, sondern der Sub-Area-Kontext,
+  in dem die beiden anderen als Closure-Antworten strukturell legitim
+  werden. Nur Gates behaupten, die als Target existieren.
 
 ## 9. Betrieb
 
