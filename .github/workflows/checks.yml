@@ -1,0 +1,25 @@
+# Durchsetzungsschicht für die Kurs-Validatoren: dieselben Targets wie
+# lokal (`make docs-check` / `make alignment-check`), Docker-basiert —
+# lokal und im CI identisch (Modul 14). Ein Gate, das nur lokal läuft,
+# ist ein Vorschlag (Modul 13).
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Markdown-Links, Anker, Pfade, Modul-Nummern
+        run: make docs-check
+
+  alignment-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lernziel-Alignment (strict, WARN = rot)
+        run: make alignment-check ARGS="--strict"

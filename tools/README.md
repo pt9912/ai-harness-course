@@ -17,6 +17,11 @@ make docs-check ARGS="--verbose kurs/de/"
 make check                                   # beide nacheinander
 ```
 
+**CI:** [`.github/workflows/checks.yml`](../.github/workflows/checks.yml)
+führt bei Push auf `main` und bei Pull Requests exakt dieselben
+Make-Targets aus (`alignment-check` mit `--strict`: WARN = rot) —
+lokal und im CI identisch, kein separater CI-Pfad, der driften könnte.
+
 Manuell gebaut wird per `--target`:
 
 ```bash

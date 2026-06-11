@@ -52,6 +52,9 @@ für dieses Register.)*
   Off-by-one-Drift (Linktext = ERROR, Prosa-Titel = WARN).
 - Root-`Makefile`: `make docs-check` · `make alignment-check` ·
   `make check` (Docker-basiert, `ARGS`-Durchreichung).
+- GitHub-Actions-Workflow `.github/workflows/checks.yml`: beide
+  Validatoren als CI-Gate bei Push/PR, über dieselben Make-Targets
+  wie lokal (`alignment-check --strict`).
 - Review-Report formalisiert: Vorlage
   `lab/templates/docs/reviews/review-report.template.md`, Ablageort
   `docs/reviews/` in der Verzeichniskonvention, Modul-10-Sektion
