@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 8 · 2026-06-11 · 16:00 CEST
+**Stand:** Kurs-Welle 18 · 2026-06-11 · 19:49 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -389,8 +389,10 @@ Derivativ — bei jeder Kurs-Welle gegen die Quellen diffen (Abschnitt
 0) und die **Stand-Zeile** am Dokumentanfang aktualisieren (Format:
 `Kurs-Welle <N> · <Datum> · <Uhrzeit mit Zeitzone>` — die Uhrzeit
 unterscheidet mehrere Überarbeitungen am selben Tag innerhalb
-derselben Welle); adoptierende Repos vergleichen ihren
-Baseline-`Stand:`-Eintrag gegen diese Zeile. Wer die harte Garantie
+derselben Welle). Die kanonische Wellen-Zählung führt das
+[`CHANGELOG.md`](../../CHANGELOG.md) im Repo-Root; adoptierende Repos
+vergleichen ihren Baseline-`Stand:`-Eintrag gegen diese Zeile und
+lesen die Differenz im Changelog nach. Wer die harte Garantie
 braucht, pinnt die Raw-URL auf Commit oder Tag statt `main` — eine
 `main`-Raw-URL ohne Stand-Vergleich ist das Doku-Äquivalent eines
 ungepinnten Base-Image (§9). Die Link-Anker prüft

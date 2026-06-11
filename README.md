@@ -69,7 +69,8 @@ Die Module sind nach Phasen gruppiert:
 Für **Code-Agenten** gibt es den Kurs zusätzlich als destilliertes
 Betriebsregelwerk: [`kurs/de/agents-digest.md`](kurs/de/agents-digest.md)
 — Konventionen und Workflows ohne Didaktik-Schicht, derivativ (bei
-Konflikt gilt das Kursmaterial).
+Konflikt gilt das Kursmaterial). Die Überarbeitungs-Wellen des Kurses
+registriert das [`CHANGELOG.md`](CHANGELOG.md).
 
 > **Roadmap-Hinweis.** `kurs/en/` ist als Skelett angelegt, aber noch
 > nicht inhaltlich befüllt. Eine englische Übersetzung folgt demselben
