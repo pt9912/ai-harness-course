@@ -1,6 +1,6 @@
 # Agents-Digest — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 18 · 2026-06-11 · 19:49 CEST
+**Stand:** Kurs-Welle 18 · 2026-06-11 · 20:01 CEST
 
 > **Was diese Datei ist.** Das destillierte, operative Wissen des
 > Kurses für **Code-Agenten**: Konventionen, Regeln, Workflows — ohne
@@ -102,6 +102,7 @@ docs/plan/planning/next/      # priorisiert für die nächste Welle
 docs/plan/planning/in-progress/
 docs/plan/planning/done/      # geschlossen, mit Lerneintrag
 docs/plan/carveouts/          # dokumentierte Ausnahmen (CO-<NNN>)
+docs/reviews/                 # Review-Reports, ein Report pro Lauf
 harness/README.md             # Harness-Einstieg (Pflicht)
 harness/conventions.md        # repo-lokale Strukturregeln (Pflicht)
 .harness/                     # Skills pro Agenten-Rolle
@@ -298,13 +299,20 @@ Gate-Lockerung nur per ADR. `AGENTS.md` trägt Hard Rules und Pointer,
   `.harness/skills/reviewer.md` — Pflichtstruktur: expliziter
   Eingangs-Kontext (gegen welche Verträge wird geprüft),
   repo-spezifische Anker pro Kategorie, Anti-Pattern-Block („was du
-  nicht bist"), Output-Schema (Kategorie · Quelle · Pfad · Befund ·
+  nicht bist"), Output-Schema (Kategorie · Quelle: ADR-ID, LH-ID,
+  Hard-Rule-Name oder „Maintainability" · Pfad `Datei:Zeile` ·
+  Befund: 1–2 Sätze, beobachtbar, **ohne Lösungsvorschlag** ·
   **verifizierbar** — gibt es einen Gate-Lauf, der den Befund
   bestätigen würde?), **Negativbefund-Zeile pro geprüftem
-  Bereich** („geprüft, ohne Befund"). Ohne Skill driftet die
-  Klassifikation zwischen Sessions. Review-Läufe reproduzierbar machen
-  (fixierte Eingaben, deklarierter Skill); Erwartung ist *ähnlich,
-  nicht identisch*.
+  Bereich** („geprüft, ohne Befund" — sonst ist „keine Findings"
+  nicht von „nicht geprüft" unterscheidbar). Ohne Skill driftet die
+  Klassifikation zwischen Sessions. Der ganze Lauf wird als
+  **Review-Report** unter `docs/reviews/` abgelegt — ein Report pro
+  Lauf (Kopf-Metadaten: Review-Art, Gegenstand, Skill-Version,
+  Modell, Eingangs-Kontext · Findings · Negativbefunde ·
+  Kategorie-Summary · Verdikt; Vorlage im Template-Set). Review-Läufe
+  reproduzierbar machen (fixierte Eingaben, deklarierter Skill);
+  Erwartung ist *ähnlich, nicht identisch*.
 - **Verifikation:** Plan-gegen-Code-Diff. Abgrenzung zum Review läuft
   über das **Prüf-Artefakt, nicht über die Schwere**:
   **DoD-Verletzung** = Differenz zwischen DoD/Spec/Plan und dem

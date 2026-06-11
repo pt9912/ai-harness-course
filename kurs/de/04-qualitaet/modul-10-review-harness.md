@@ -39,6 +39,9 @@ Nach diesem Modul kannst du:
 * [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make agent-review`
 * fingierter "kaputter" Slice in
   [`../../../lab/example/exercises/09-review-fixture/`](../../../lab/example/exercises/09-review-fixture/)
+* Report-Vorlage:
+  [`../../../lab/templates/docs/reviews/review-report.template.md`](../../../lab/templates/docs/reviews/review-report.template.md)
+  (Ablage: `docs/reviews/`, ein Report pro Lauf)
 
 ## Themen
 
@@ -208,6 +211,25 @@ Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
 Sechs Schritte, eine reproduzierbare Reviewer-Rolle. Vergleichbares
 Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
 [Modul 8 §"Konfliktfall"](../03-agenten/modul-08-agentenrollen.md).
+
+## Reviewer berichtet auch, was er nicht gefunden hat
+
+Ein Report, der nur Findings listet, ist nicht auditierbar: „keine
+Findings in `internal/auth/`" und „`internal/auth/` nicht angesehen"
+sehen identisch aus — eine leere Liste. Deshalb verlangt das
+Output-Schema pro betrachtetem Bereich eine **Negativbefund-Zeile**
+(„geprüft, ohne Befund"). Sie macht die Abdeckung des Laufs sichtbar,
+ist die Grundlage für Vertrauen in ein grünes Review — und sie ist
+der Teil des Reports, den ein Reviewer-Agent am ehesten weglässt,
+weil ihn niemand einfordert.
+
+Das Dokument-Gerüst für den **ganzen Report** — Kopf-Metadaten
+(Review-Art, Gegenstand, Skill-Version, Modell, Eingangs-Kontext),
+Findings nach Output-Schema, Negativbefunde, Kategorie-Summary,
+Verdikt — liefert
+[`review-report.template.md`](../../../lab/templates/docs/reviews/review-report.template.md);
+abgelegt wird ein Report pro Lauf unter `docs/reviews/`, Folgeläufe
+als neue Datei statt Überschreibung.
 
 ## Typische Fehlvorstellungen
 

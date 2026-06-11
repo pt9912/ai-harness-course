@@ -53,6 +53,7 @@ docs/plan/planning/in-progress/  # aktive Slices
 docs/plan/planning/done/    # abgeschlossene Slices
 docs/plan/planning/in-progress/roadmap.md   # Meilensteine, Wellen, aktive Welle
 docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
+docs/reviews/               # Review-Reports, ein Report pro Lauf (Modul 10)
 AGENTS.md                   # maschinell lesbare Projekt-Konventionen für Agenten
 harness/README.md           # Repo-Einstiegspunkt: Source Precedence, Guides, Sensors, Safety
 harness/conventions.md      # repo-lokale Strukturregeln und Adaptionen ggü. Baseline (MR-NNN, Modus pro Sub-Area)

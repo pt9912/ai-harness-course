@@ -52,6 +52,11 @@ für dieses Register.)*
   Off-by-one-Drift (Linktext = ERROR, Prosa-Titel = WARN).
 - Root-`Makefile`: `make docs-check` · `make alignment-check` ·
   `make check` (Docker-basiert, `ARGS`-Durchreichung).
+- Review-Report formalisiert: Vorlage
+  `lab/templates/docs/reviews/review-report.template.md`, Ablageort
+  `docs/reviews/` in der Verzeichniskonvention, Modul-10-Sektion
+  „Reviewer berichtet auch, was er nicht gefunden hat" (schließt die
+  bis dahin hängende §-Referenz im Reviewer-Skill).
 - Dieses CHANGELOG als kanonisches Wellen-Register.
 
 ## Welle 17 — 2026-06-08 · Didaktik-Review
