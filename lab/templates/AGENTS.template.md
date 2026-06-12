@@ -33,6 +33,16 @@ https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-r
 Derivativ: bei Konflikt gelten die kanonischen Quellen; adoptierter
 Stand steht in `harness/conventions.md` §Baseline.
 
+Die **Skelett-Vorlagen der adoptierten Baseline** (Lastenheft, Spec,
+Architektur, ADR, Slice, Carveout, Review-Report, …) liegen unter
+<Pfad oder URL zur Template-Quelle, bei Adoption des Kurses als ZIP
+zum Bootstrap:
+https://github.com/pt9912/ai-harness-course/releases/download/templates-v1/lab-templates.zip
+(Tag = adoptierter Stand), für Einzelabruf pro Datei:
+https://raw.githubusercontent.com/pt9912/ai-harness-course/main/lab/templates/>
+— beim Anlegen neuer Artefakte das passende Template kopieren statt
+frei zu formulieren.
+
 ## 2. Kanonische Quellen (Source Precedence)
 
 In dieser Reihenfolge:
