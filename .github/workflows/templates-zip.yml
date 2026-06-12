@@ -1,0 +1,25 @@
+# Stellt lab/templates als herunterladbares ZIP bereit (Actions-Artifact
+# `lab-templates`). Läuft bei jeder Änderung an den Templates auf main;
+# workflow_dispatch erlaubt das manuelle Neu-Erzeugen, da Artifacts nach
+# 90 Tagen verfallen.
+name: templates-zip
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "lab/templates/**"
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Templates als Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab-templates
+          path: lab/templates
+          if-no-files-found: error
+          retention-days: 90

@@ -20,6 +20,14 @@ unabhängig davon, ob dein Repo Go, Python, Kotlin, Java oder C# nutzt.
 | [`harness/README.template.md`](harness/README.template.md) | Repo-Einstiegspunkt mit Guides, Sensors, Safety | [Konventionen](../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt) |
 | [`harness/conventions.template.md`](harness/conventions.template.md) | Repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Zusatzklassen-Deklaration, Modus-Deklaration pro Sub-Area | [Konventionen](../../kurs/de/grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher) |
 
+## Download als ZIP
+
+Der Workflow `templates-zip` lädt diesen Ordner bei jeder Änderung als
+Actions-Artifact `lab-templates` hoch: auf GitHub unter **Actions →
+templates-zip → neuester Lauf → Artifacts**. Artifacts verfallen nach
+90 Tagen; über **Run workflow** (workflow_dispatch) lässt sich das ZIP
+jederzeit neu erzeugen.
+
 ## Verwendung
 
 1. **Modul lesen** im Kurs.
