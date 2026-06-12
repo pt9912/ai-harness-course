@@ -285,7 +285,7 @@ Wird eine Ziel-Überschrift umbenannt, rottet der Aufwärts-Link *still* — die
 gleiche Rot-Klasse, die wir abwärts verboten haben, nur unbewacht. Die
 mechanisch erzwungene Reifestufe löst Links auf, prüft Anker-Existenz und
 erzwingt die volle Matrix am Zielknoten; Referenz-Implementierung ist
-`tools/check_refs.py` aus dem u-boot-Harness (gleiche Build-Familie). <!-- docs-check:ignore (Datei liegt im u-boot-Repo) --> Das Lab
+`tools/check_refs.py` aus dem u-boot-Harness (gleiche Build-Familie). <!-- d-check:ignore (Datei liegt im u-boot-Repo) --> Das Lab
 bleibt bewusst bei der grep-Variante, um die mechanische Hälfte minimal und
 lesbar zu halten.
 

@@ -1,25 +1,20 @@
 #!/usr/bin/env node
-// docs-check — Markdown-Link-Validator für den ai-harness-course.
-// Prüft:
-//   1. Interne Markdown-Links [text](pfad.md#anker)
-//   2. Bild-Referenzen ![alt](pfad.png|jpg|svg|gif|webp)
-//   3. Code-/Config-Referenzen [text](pfad.go|.py|...)
-//   4. Explizite Inline-Code-Pfade `../foo.md`, `lab/example/...`
-// Exit-Code 1 bei Fehlern, 0 sonst.
+// docs-check — Rest-Sensor des ai-harness-course: Modul-Nummern-Checks.
 //
-// Bewusste Einschränkungen:
-//   - Reference-style Links [text][ref] und [ref]: url werden nicht
-//     geprüft. In diesem Lehr-Repo werden ausschließlich Inline-Links
-//     verwendet (dokumentiert in tools/README.md).
-//   - Anker werden nur in .md-Zielen geprüft. `code.go#L42` wird
-//     stillschweigend akzeptiert (Konvention für Source-Line-Anker).
-//   - Inline-Code-Pfadprüfung ist konservativ: nur explizite relative
-//     Pfade (./, ../) und Repo-Root-Pfade (lab/, kurs/, tools/).
-//   - Symlinks werden vor dem Sicherheits-Check auf ihren realpath
-//     aufgelöst — Symlinks aus dem Repo-Baum werden erkannt.
+// Seit der Pilot-Migration auf d-check (ghcr.io/pt9912/d-check,
+// konfiguriert in .d-check.yml) prüft dieses Tool NUR noch die
+// repo-spezifische Semantik, die ein generischer Referenz-Checker
+// nicht kennen kann:
+//   A (ERROR): Linktext "Modul N" / "[N]" vs. Nummer im Linkziel
+//              modul-MM-*.md (Off-by-one-Drift, deterministisch).
+//   B (WARN):  Prosa "Modul N (Titel)" vs. kanonischer Dateinamens-
+//              Slug von Modul N (heuristisch).
+// Links, Anker, Bild-Referenzen und explizite Inline-Code-Pfade
+// prüft d-check (`make docs-check` führt beide aus).
+// Exit-Code 1 bei Fehlern, 0 sonst.
 
-import { readFileSync, readdirSync, statSync, existsSync, realpathSync } from "node:fs";
-import { join, dirname, resolve, relative, basename, isAbsolute } from "node:path";
+import { readFileSync, readdirSync, statSync } from "node:fs";
+import { join, resolve, relative, basename } from "node:path";
 
 // ---- CLI-Parser ----
 const args = process.argv.slice(2);
@@ -62,7 +57,10 @@ if (options.ignore.length === 0) {
 }
 
 if (options.help) {
-  process.stdout.write(`docs-check — Markdown-Link-Validator
+  process.stdout.write(`docs-check — Modul-Nummern-Sensor (Rest-Sensor)
+
+Links, Anker und Inline-Code-Pfade prüft d-check (.d-check.yml);
+dieses Tool prüft nur die Modul-Nummern-Semantik des Kurses.
 
 USAGE:
   docs-check [OPTIONS] [TARGET ...]
@@ -74,19 +72,15 @@ OPTIONS:
                          Default: lab/templates
   -h, --help             Diese Hilfe
 
-EINSCHRÄNKUNGEN:
-  - Nur Inline-Links: [text](url). Reference-Style nicht geprüft.
-  - Anker nur in .md-Zielen geprüft. \`code.go#L42\` wird ignoriert.
-  - Symlinks aus dem Repo werden erkannt (realpath).
-  - Explizite Inline-Code-Pfade werden geprüft: \`../foo.md\`, \`lab/example/...\`.
+PRÜFUNGEN:
+  A (ERROR): Linktext "Modul N" vs. Nummer im Linkziel modul-MM-*.md.
+  B (WARN):  Prosa "Modul N (Titel)" vs. Dateinamens-Slug von Modul N.
+  Opt-out pro Zeile: <!-- docs-check:ignore -->
 `);
   process.exit(0);
 }
 
 const ROOT = process.cwd();
-const ROOT_REAL = (() => {
-  try { return realpathSync(ROOT); } catch { return ROOT; }
-})();
 const startPaths = targets.length > 0 ? targets : ["."];
 
 // ---- Markdown-Datei-Liste ermitteln ----
@@ -145,9 +139,7 @@ for (const t of startPaths) {
 // ---- Modul-Nummern-Karte (Sensor gegen Off-by-one-Drift) ----
 // Kanonische Zuordnung Modul-Nummer → Dateinamens-Slug, aus den
 // gescannten Modul-Dateien abgeleitet (modul-NN-<slug>.md, ohne
-// Lösungs-Dateien). Grundlage für zwei Prüfungen:
-//   A (ERROR): Linktext "Modul N" / "[N]" vs. Nummer im Linkziel.
-//   B (WARN):  Prosa "Modul N (Titel)" vs. kanonischer Slug von N.
+// Lösungs-Dateien).
 const moduleSlugs = new Map(); // Nummer → Slug-Tokens
 for (const f of mdFiles) {
   const m = basename(f).match(/^modul-(\d{2})-(.+)\.md$/);
@@ -180,67 +172,10 @@ if (mdFiles.size === 0) {
   process.exit(0);
 }
 
-// ---- Slugify (GitHub-Konvention, Unicode-aware) ----
-function slugify(text) {
-  return text
-    .replace(/\s+#+\s*$/, "")           // ATX-closing "## ## " entfernen
-    .toLowerCase()
-    .replace(/<[^>]+>/g, "")            // HTML-Tags weg
-    .replace(/`[^`]*`/g, "")            // Inline-Code weg
-    .replace(/[*_~]/g, "")              // Markdown-Inline-Marker weg
-    .replace(/[^\p{Letter}\p{Number}\p{Emoji_Presentation}\s-]/gu, "")
-    .trim()
-    // GitHub kollabiert NICHT: jedes Whitespace-Zeichen wird ein eigener
-    // Bindestrich ("A — B" → "a--b", weil das "—" ersatzlos entfällt).
-    .replace(/\s/g, "-");
-}
-
-const headingsCache = new Map(); // absPath → { slugs:Set<string> } | "ENOENT" | "EACCES" | ...
-function getHeadings(absPath) {
-  if (headingsCache.has(absPath)) return headingsCache.get(absPath);
-  let text;
-  try {
-    text = readFileSync(absPath, "utf8");
-  } catch (e) {
-    headingsCache.set(absPath, e.code || "EREAD");
-    return e.code || "EREAD";
-  }
-  const slugs = new Set();
-  const counter = new Map();
-  let inFence = false;
-  let fenceMarker = "";
-  for (const rawLine of text.split("\n")) {
-    // CommonMark: bis zu 3 führende Spaces erlaubt
-    const indented = rawLine.replace(/^ {0,3}/, "");
-    const fm = indented.match(/^(```+|~~~+)/);
-    if (fm) {
-      if (!inFence) { inFence = true; fenceMarker = fm[1][0]; }
-      else if (indented.startsWith(fenceMarker)) { inFence = false; fenceMarker = ""; }
-      continue;
-    }
-    if (inFence) continue;
-    const m = indented.match(/^(#{1,6})\s+(.+?)\s*$/);
-    if (m) {
-      let s = slugify(m[2]);
-      if (s === "") continue;
-      if (counter.has(s)) {
-        const n = counter.get(s) + 1;
-        counter.set(s, n);
-        s = `${s}-${n}`;
-      } else {
-        counter.set(s, 0);
-      }
-      slugs.add(s);
-    }
-  }
-  headingsCache.set(absPath, { slugs });
-  return { slugs };
-}
-
 // ---- Inline-Code-Spans entfernen (Multi-Backtick-aware) ----
 function stripInlineCode(line) {
-  // Multi-Backtick: ` `, `` ``, ``` ``` etc. Match das gleiche
-  // Backtick-Count am Anfang und am Ende. CommonMark-konform.
+  // Multi-Backtick: ` `, `` `` etc. Match das gleiche Backtick-Count
+  // am Anfang und am Ende. CommonMark-konform.
   return line.replace(/(`+)[^`]*?\1/g, "");
 }
 
@@ -266,10 +201,8 @@ function extractLinks(text) {
     // mit Klammer-Balancing in target.
     let idx = 0;
     while (idx < stripped.length) {
-      let isImage = false;
       let openBracket = stripped.indexOf("[", idx);
       if (openBracket === -1) break;
-      if (openBracket > 0 && stripped[openBracket - 1] === "!") isImage = true;
 
       // Bracket-Balance für link text
       let depth = 1;
@@ -313,7 +246,7 @@ function extractLinks(text) {
       }
       if (parenDepth === 0 || (parenDepth > 0 && stripped[p] === ")")) {
         if (target) {
-          links.push({ image: isImage, text: linkText, target, line: i + 1 });
+          links.push({ text: linkText, target, line: i + 1 });
         }
       }
       idx = p + 1;
@@ -322,122 +255,8 @@ function extractLinks(text) {
   return links;
 }
 
-function extractInlineCodePaths(text) {
-  const paths = [];
-  const lines = text.split("\n");
-  let inFence = false;
-  let fenceMarker = "";
-  for (let i = 0; i < lines.length; i++) {
-    const rawLine = lines[i];
-    const indented = rawLine.replace(/^ {0,3}/, "");
-    const fm = indented.match(/^(```+|~~~+)/);
-    if (fm) {
-      if (!inFence) { inFence = true; fenceMarker = fm[1][0]; }
-      else if (indented.startsWith(fenceMarker)) { inFence = false; fenceMarker = ""; }
-      continue;
-    }
-    if (inFence) continue;
-    // Opt-out für Beispiel-Pfade (fremde Repos, Angriffs-Beispiele):
-    // ein HTML-Kommentar `docs-check:ignore` auf derselben Zeile.
-    if (rawLine.includes("docs-check:ignore")) continue;
-
-    const re = /(`+)([^`]*?)\1/g;
-    let m;
-    while ((m = re.exec(rawLine)) !== null) {
-      if (rawLine[m.index - 1] === "[" && rawLine[re.lastIndex] === "]") {
-        continue;
-      }
-      const value = m[2].trim();
-      if (looksLikeExplicitPath(value)) {
-        paths.push({ target: normalizeInlinePath(value), line: i + 1 });
-      }
-    }
-  }
-  return paths;
-}
-
-function normalizeInlinePath(value) {
-  return value
-    .replace(/^["']|["']$/g, "")
-    .replace(/[.,;:]$/g, "");
-}
-
-function looksLikeExplicitPath(value) {
-  const v = normalizeInlinePath(value);
-  if (v === "" || /\s/.test(v)) return false;
-  if (v.startsWith("//")) return false;
-  if (/[{}<>|*?=]/.test(v)) return false;
-  if (v.includes("…") || v.includes("->") || v.includes("→")) return false;
-  if (isExternal(v) || v.startsWith("#")) return false;
-  return (
-    v.startsWith("./") ||
-    v.startsWith("../") ||
-    v.startsWith("lab/") ||
-    v.startsWith("kurs/") ||
-    v.startsWith("tools/")
-  );
-}
-
 function isExternal(target) {
   return /^[a-z][a-z0-9+.-]*:/i.test(target);
-}
-function isAnchorOnly(target) {
-  return target.startsWith("#");
-}
-
-function checkLocalTarget({ rel, line, target, fileDir, rootRelative }) {
-  const [pathPart, anchor] = target.split("#");
-
-  if (isAbsolute(pathPart)) {
-    process.stderr.write(`ERROR ${rel}:${line}: absoluter Pfad "${target}" nicht erlaubt\n`);
-    errors++;
-    return;
-  }
-
-  const targetAbs = rootRelative ? resolve(ROOT, pathPart) : resolve(fileDir, pathPart);
-
-  let realTarget = targetAbs;
-  try {
-    if (existsSync(targetAbs)) realTarget = realpathSync(targetAbs);
-  } catch { /* realpath kann scheitern, dann targetAbs nutzen */ }
-
-  const relFromRoot = relative(ROOT_REAL, realTarget);
-  if (relFromRoot.startsWith("..") || isAbsolute(relFromRoot)) {
-    process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" zeigt aus dem Repo heraus\n`);
-    errors++;
-    return;
-  }
-
-  if (!existsSync(targetAbs)) {
-    process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" existiert nicht (resolved: ${relative(ROOT, targetAbs)})\n`);
-    errors++;
-    return;
-  }
-
-  if (anchor && targetAbs.endsWith(".md")) {
-    const h = getHeadings(targetAbs);
-    if (typeof h === "string") {
-      if (h === "EACCES" || h === "EPERM") {
-        process.stderr.write(`ERROR ${rel}:${line}: Ziel "${target}" nicht lesbar (${h}) — Anker nicht prüfbar\n`);
-        errors++;
-      } else if (!options.noWarn) {
-        process.stderr.write(`WARN  ${rel}:${line}: Ziel "${target}" Heading-Index nicht ermittelbar (${h})\n`);
-        warnings++;
-      }
-    } else if (!h.slugs.has(anchor)) {
-      process.stderr.write(`ERROR ${rel}:${line}: Anker "#${anchor}" existiert nicht in ${relative(ROOT, targetAbs)}\n`);
-      errors++;
-    } else if (options.verbose) {
-      process.stdout.write(`OK    ${rel}:${line}: ${target}\n`);
-      okCount++;
-    }
-    return;
-  }
-
-  if (options.verbose) {
-    process.stdout.write(`OK    ${rel}:${line}: ${target}\n`);
-    okCount++;
-  }
 }
 
 // ---- Hauptlauf ----
@@ -458,17 +277,14 @@ for (const absMd of sorted) {
     continue;
   }
   const links = extractLinks(text);
-  const inlineCodePaths = extractInlineCodePaths(text);
-  const fileDir = dirname(absMd);
   const rawLines = text.split("\n");
 
+  // Prüfung A: Modul-Nummer im Linktext vs. Nummer im Linkziel.
+  // Deterministisch (beide Nummern explizit) → ERROR. Opt-out pro
+  // Zeile via docs-check:ignore.
   for (const link of links) {
     const { target, line } = link;
     if (isExternal(target)) continue;
-
-    // Prüfung A: Modul-Nummer im Linktext vs. Nummer im Linkziel.
-    // Deterministisch (beide Nummern explizit) → ERROR. Opt-out pro
-    // Zeile via docs-check:ignore.
     const tm = (target.split("#")[0].match(/(?:^|\/)modul-(\d{2})-[^/]*\.md$/) || [])[1];
     if (tm !== undefined && !(rawLines[line - 1] || "").includes("docs-check:ignore")) {
       const mention =
@@ -476,33 +292,11 @@ for (const absMd of sorted) {
       if (mention && parseInt(mention[1], 10) !== parseInt(tm, 10)) {
         process.stderr.write(`ERROR ${rel}:${line}: Linktext nennt Modul ${mention[1]}, Ziel ist modul-${tm} ("${target}")\n`);
         errors++;
-      }
-    }
-
-    if (isAnchorOnly(target)) {
-      const own = getHeadings(absMd);
-      const anchor = target.slice(1);
-      if (typeof own === "string") {
-        process.stderr.write(`WARN  ${rel}:${line}: eigener Heading-Index nicht ermittelbar (${own})\n`);
-        warnings++;
-        continue;
-      }
-      if (!own.slugs.has(anchor)) {
-        process.stderr.write(`ERROR ${rel}:${line}: Anker "#${anchor}" existiert nicht in dieser Datei\n`);
-        errors++;
-      } else if (options.verbose) {
-        process.stdout.write(`OK    ${rel}:${line}: in-file anchor #${anchor}\n`);
+      } else if (mention && options.verbose) {
+        process.stdout.write(`OK    ${rel}:${line}: Modul ${mention[1]} → ${target}\n`);
         okCount++;
       }
-      continue;
     }
-
-    checkLocalTarget({ rel, line, target, fileDir, rootRelative: false });
-  }
-
-  for (const codePath of inlineCodePaths) {
-    const rootRelative = /^(lab|kurs|tools)\//.test(codePath.target);
-    checkLocalTarget({ rel, line: codePath.line, target: codePath.target, fileDir, rootRelative });
   }
 
   // Prüfung B: Prosa-Erwähnung "Modul N (Titel)" gegen den kanonischen

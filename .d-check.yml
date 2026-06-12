@@ -1,0 +1,11 @@
+# Doku-Referenz-Checks via d-check (ghcr.io/pt9912/d-check) — ersetzt
+# die Link-/Anker-/Pfad-Prüfungen von tools/docs-check.js
+# (Pilot-Migration 2026-06-12, JS-Familie). docs-check.js bleibt als
+# Rest-Sensor für die semantischen Modul-Nummern-Checks (Prüfung A/B).
+# lab/templates ist by-design symbolisch (Pfade gelten im Ziel-Repo).
+scan:
+  roots: ["."]
+  ignore: ["lab/templates/**", ".tmp/**"]
+modules: [links, anchors, codepaths]
+codepaths:
+  roots: [lab, kurs, tools]

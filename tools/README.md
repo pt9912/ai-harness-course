@@ -79,24 +79,28 @@ Konvention wie `docs-check`.
 
 ## docs-check
 
-`Dockerfile` + `docs-check.js` liefern einen reproduzierbaren
-Markdown-Link-Validator für den Kurs. Vorbild:
-[`/Development/math/euler-fourier-hilbert/tools/`](https://github.com/pt9912/euler-fourier-hilbert)
-(ohne Math-Validierung, da der KI-Kurs keine Formeln nutzt).
+`Dockerfile` + `docs-check.js` liefern den **Rest-Sensor** des Kurses:
+die Modul-Nummern-Checks, deren Semantik ein generischer
+Referenz-Checker nicht kennen kann. Die generischen Prüfungen
+(Markdown-Links, Anker, Bild-/Code-Referenzen, explizite
+Inline-Code-Pfade, Repo-Escape-/Symlink-Sicherheitsnetz) übernimmt
+seit der Pilot-Migration 2026-06-12
+[d-check](https://github.com/pt9912/d-check) — digest-gepinntes
+Container-Image, konfiguriert in [`../.d-check.yml`](../.d-check.yml);
+Zeilen-Opt-out für bewusste Beispiel-Pfade: `<!-- d-check:ignore
+(Begründung) -->`. `make docs-check` führt beide aus.
 
-Geprüft wird:
+Geprüft wird (von diesem Tool):
 
-1. **Interne Markdown-Links** `[text](pfad.md#anker)` — Datei vorhanden? Bei Anker: gibt es die zugehörige Heading-ID?
-2. **Bild-Referenzen** `![alt](pfad.png|jpg|svg|gif|webp)` — Datei vorhanden?
-3. **Code-/Config-Referenzen** `[text](pfad.go|.py|.kt|.java|.cs|.yaml|...)` — Datei vorhanden?
-4. **Explizite Inline-Code-Pfade** wie `` `../README.md` `` oder `` `lab/example/...` `` — Datei/Verzeichnis vorhanden?
-5. **Sicherheitsnetz**: Relative Pfade dürfen nicht aus dem Repo führen. Absolute Pfade werden explizit abgelehnt. Symlinks werden auf den realpath aufgelöst — ein Symlink im Repo, der nach `/etc` zeigt, wird erkannt.
-6. **Modul-Nummern-Sensor** (gegen Off-by-one-Drift nach Modul-Einfügungen — die Fehlerklasse trat in Welle 8 an vier Stellen auf):
-   - **A (ERROR, deterministisch):** Nennt ein Linktext `Modul N` (oder ist er eine reine Zahl `N`) und zeigt der Link auf `modul-MM-*.md` mit `N ≠ MM`, ist das ein Fehler. Opt-out pro Zeile: `<!-- docs-check:ignore -->`.
-   - **B (WARN, heuristisch):** Prosa-Erwähnungen `Modul N (Titel)` werden gegen den Dateinamens-Slug von Modul N geprüft (Prefix-Vergleich, Umlaut-normalisiert). Gewarnt wird **nur**, wenn der Titel auf ein *anderes* Modul passt — Nicht-Titel-Klammern („Bericht A", „FV3") passen auf kein Modul und bleiben stumm. Benötigt die Modul-Dateien im Scan-Umfang (bei Teilbaum-Läufen ohne `kurs/de/` bleibt B inaktiv).
+**Modul-Nummern-Sensor** (gegen Off-by-one-Drift nach
+Modul-Einfügungen — die Fehlerklasse trat in Welle 8 an vier Stellen
+auf):
 
-Externe Links (`http://`, `https://`, `mailto:`) werden ignoriert —
-der Kurs verwendet sie selten und sie zu prüfen wäre flaky.
+- **A (ERROR, deterministisch):** Nennt ein Linktext `Modul N` (oder ist er eine reine Zahl `N`) und zeigt der Link auf `modul-MM-*.md` mit `N ≠ MM`, ist das ein Fehler. Opt-out pro Zeile: `<!-- docs-check:ignore -->`.
+- **B (WARN, heuristisch):** Prosa-Erwähnungen `Modul N (Titel)` werden gegen den Dateinamens-Slug von Modul N geprüft (Prefix-Vergleich, Umlaut-normalisiert). Gewarnt wird **nur**, wenn der Titel auf ein *anderes* Modul passt — Nicht-Titel-Klammern („Bericht A", „FV3") passen auf kein Modul und bleiben stumm. Benötigt die Modul-Dateien im Scan-Umfang (bei Teilbaum-Läufen ohne `kurs/de/` bleibt B inaktiv).
+
+Externe Links (`http://`, `https://`, `mailto:`) sind für die
+Nummern-Checks irrelevant und werden ignoriert.
 
 ### Bauen
 
@@ -140,19 +144,16 @@ docker run --rm -v "$PWD":/work docs-check --no-warn
 
 ### Schweregrade
 
-**ERROR** — Datei existiert nicht, Anker existiert nicht, Pfad zeigt
-aus dem Repo, absoluter Pfad, Permission-Denied auf Ziel-Markdown.
+**ERROR** — Modul-Nummern-Widerspruch (Prüfung A), Datei nicht lesbar.
 Exit-Code 1.
 
-**WARN** — Filesystem-Hickups beim Durchlauf, oder Heading-Index aus
-nicht-Permission-Gründen unermittelbar. Exit-Code bleibt 0.
+**WARN** — Off-by-one-Verdacht in Prosa (Prüfung B),
+Filesystem-Hickups beim Durchlauf. Exit-Code bleibt 0.
 
 ### Bewusste Einschränkungen
 
-- **Nur Inline-Links** `[text](url)` werden geprüft. Reference-Style-Links `[text][ref]` und `[ref]: url` werden nicht geparst — der Kurs verwendet ausschließlich Inline-Links.
-- **Anker nur in `.md`-Zielen** geprüft. Ein Link wie `[Zeile 42](src/foo.go#L42)` wird stillschweigend akzeptiert (Konvention für Source-Line-Anker).
-- **Inline-Code-Pfadprüfung ist konservativ.** Geprüft werden nur explizite relative Pfade (`./`, `../`) und Repo-Root-Pfade (`lab/`, `kurs/`, `tools/`). Begriffe wie `LH-*`, `make gates`, `spec/`, `/etc/foo` oder `harness/README.md` ohne expliziten Kontext bleiben unberührt. Opt-out pro Zeile mit einem HTML-Kommentar `<!-- docs-check:ignore -->` — gedacht für Beispiel-Pfade, die absichtlich nicht im Repo liegen (Referenzen auf fremde Repos, Angriffs-Beispiele in Übungen).
-- **Heading-IDs** folgen GitHubs Slug-Regel: lowercase, jedes Whitespace-Zeichen → `-` (**nicht kollabierend**: `A — B` → `a--b`, weil das `—` ersatzlos entfällt und beide Leerzeichen je einen Bindestrich liefern), HTML-Tags und Markdown-Inline-Code entfernt, Interpunktion entfernt (Bindestriche und Unterstriche bleiben), Unicode-Buchstaben/Zahlen behalten. ATX-Closing-Sequenzen (`## Heading ##`) werden vor der Slug-Erzeugung entfernt. Duplikate bekommen `-1`, `-2`, … als Suffix.
+- **Nur Inline-Links** `[text](url)` werden geparst (für Prüfung A). Reference-Style-Links `[text][ref]` und `[ref]: url` werden nicht geparst — der Kurs verwendet ausschließlich Inline-Links.
+- **Keine Existenz-/Anker-/Pfad-Prüfung mehr** — das ist seit der Migration Aufgabe von d-check (`../.d-check.yml`). Historische Fassung mit Vollausbau: Git-Historie dieses Repos bzw. konsolidiert in d-check.
 
 ### Implementierungs-Hinweise
 

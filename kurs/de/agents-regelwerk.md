@@ -316,7 +316,7 @@ Wird eine Ziel-Überschrift umbenannt, rottet der Aufwärts-Link *still* — die
 gleiche Rot-Klasse, die wir abwärts verboten haben, nur unbewacht. Die
 mechanisch erzwungene Reifestufe löst Links auf, prüft Anker-Existenz und
 erzwingt die volle Matrix am Zielknoten; Referenz-Implementierung ist
-`tools/check_refs.py` aus dem u-boot-Harness (gleiche Build-Familie). <!-- docs-check:ignore (Datei liegt im u-boot-Repo) --> Das Lab
+`tools/check_refs.py` aus dem u-boot-Harness (gleiche Build-Familie). <!-- d-check:ignore (Datei liegt im u-boot-Repo) --> Das Lab
 bleibt bewusst bei der grep-Variante, um die mechanische Hälfte minimal und
 lesbar zu halten.
 
@@ -1033,7 +1033,7 @@ Das vollständige Artefakt-Set einer Durchsetzungsschicht:
 - `.claude/hooks/*.sh` — Tool-Call-Gate (Befehls-Guard) und Handoff-Gate
   (Stop-/Gate-Nachweis)
 - `.claude/commands/*.md` — Workflow-Skelett als Slash-Command
-- `tools/harness/working-tree-hash.sh` + `record-gates.sh` — gemeinsame, <!-- docs-check:ignore (Referenz-Artefakt im Fallstudien-Repo) -->
+- `tools/harness/working-tree-hash.sh` + `record-gates.sh` — gemeinsame, <!-- d-check:ignore (Referenz-Artefakt im Fallstudien-Repo) -->
   inhaltsbasierte Nachweis-Quelle für Gate-Lauf *und* Handoff-Gate (eine
   Wahrheit, keine Logik-Dopplung)
 

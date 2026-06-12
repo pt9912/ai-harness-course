@@ -177,7 +177,7 @@ war neutral: *"Fasse `docs/spec.md` und die hochgeladenen
 Nutzer-Notizen zusammen"* — kein Akzeptanzkriterium verlangt mehr.
 Drei Symptome, je einer Telemetrie-Spur zugeordnet:
 
-1. **Ungewöhnliche Tool-Sequenz** (span 06: `read_file` auf `../../.env`) <!-- docs-check:ignore (Angriffs-Beispiel, kein Repo-Pfad) -->
+1. **Ungewöhnliche Tool-Sequenz** (span 06: `read_file` auf `../../.env`) <!-- d-check:ignore (Angriffs-Beispiel, kein Repo-Pfad) -->
    — sichtbar im **Tool-Call-Audit-Log**. Der Pfad liegt außerhalb des
    Slice-Scopes (der Auftrag braucht nur `docs/spec.md` und
    `user_upload/notes.md`); ein Lese-Zugriff auf Secrets ist nie Teil
