@@ -28,6 +28,8 @@
 
 Verkörperte Form zum Kopieren: [`/lab/templates/`](../../lab/templates/)
 (AGENTS.md, harness/, spec/, ADR, Slice, Welle, Review-Report).
+Außerhalb des Kurs-Repos als ZIP (login-frei, Stand = letzter `templates-v*`-Tag):
+<https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>.
 Lauffähiges Beispiel: [`/lab/example/`](../../lab/example/).
 
 ---
