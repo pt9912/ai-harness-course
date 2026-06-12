@@ -1,0 +1,32 @@
+# Stabiler, login-freier Download für lab/templates: bei einem Tag
+# `templates-v*` wird das ZIP gebaut und als Release-Asset angehängt.
+# Permanente URL: …/releases/latest/download/lab-templates.zip
+# (Ergänzung zum Actions-Artifact aus templates-zip.yml, das pro
+# Änderung auf main eine Vorschau liefert, aber Login erfordert und
+# nach 90 Tagen verfällt.)
+name: templates-release
+
+on:
+  push:
+    tags: ["templates-v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: ZIP bauen
+        run: |
+          cd lab/templates
+          zip -r "$GITHUB_WORKSPACE/lab-templates.zip" .
+      - name: Release anlegen, ZIP anhängen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" lab-templates.zip \
+            --verify-tag \
+            --title "Templates $GITHUB_REF_NAME" \
+            --notes "ZIP-Stand von \`lab/templates\` beim Tag \`$GITHUB_REF_NAME\`."
