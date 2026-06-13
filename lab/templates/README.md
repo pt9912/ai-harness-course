@@ -50,6 +50,41 @@ jederzeit neu erzeugen.
 6. **Mit dem entsprechenden Pfad in `lab/example/` vergleichen** —
    so siehst du, wie ein voll ausgefülltes Artefakt aussieht.
 
+## Ein- vs. wiederkehrende Templates
+
+Die Templates haben zwei Lebenszyklen:
+
+- **Singletons** — einmal beim Bootstrap zu `.md` füllen, dann das
+  `.template.md` verwerfen: `project-readme`, `spec/lastenheft`,
+  `spec/spezifikation`, `spec/architecture`, `AGENTS`, `harness/README`,
+  `harness/conventions`, `roadmap`.
+- **Wiederkehrend** — als `.template.md` **co-located** im Repo behalten;
+  jede neue Instanz wird daneben kopiert: `adr/NNNN-titel`, `slice`,
+  `welle`, `carveout`, `review-report`.
+
+Wiederkehrende Templates bleiben also dauerhaft im Repo (z. B.
+`docs/plan/adr/NNNN-titel.template.md` neben den echten ADRs). Damit ihre
+Platzhalter den Gate nicht rot färben, ignoriert die mitgelieferte
+`.d-check.yml` sie per Suffix (`**/*.template.md`). `/tmp` ist nur die
+kurzlebige Entpack-Station — der `harness/`-Ordner ist **kein**
+Template-Lager.
+
+## Gate-Baseline
+
+Drei mitgelieferte Dateien geben dir den Doku-Referenz-Gate
+out-of-the-box (ins Repo-Root kopieren):
+
+| Datei | Rolle |
+|---|---|
+| [`.d-check.yml`](.d-check.yml) | Modul-Auswahl + Suffix-Ignore; `ids`/`codepaths` wachsen mit den Artefakten |
+| [`harness.mk`](harness.mk) | `make docs-check` via d-check (Image per Digest gepinnt) |
+| [`Makefile`](Makefile) | bindet `harness.mk` ein; `gates: docs-check`, Code-Gates ergänzt der Adopter |
+
+Danach läuft `make docs-check` sofort (`links`/`anchors`). `ids` und
+`codepaths` im `.d-check.yml` einkommentieren, sobald die Ziele bzw.
+Verzeichnisse existieren — sonst behauptet der Gate eine Dimension, die er
+nicht durchsetzt (Modul 13). Startgerüst neu erzeugen: `d-check --print-config`.
+
 ## Pflichtgliederung vs. freie Form
 
 Die Templates geben **Pflichtgliederung** vor (Abschnitte, IDs,
