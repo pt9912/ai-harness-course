@@ -78,6 +78,26 @@ Die Überarbeitungs-Wellen des Kurses registriert das
 > nicht inhaltlich befüllt. Eine englische Übersetzung folgt demselben
 > Aufbau, ist aber derzeit *nicht* Bestandteil des Kurses.
 
+## Adoptieren: den Prozess in dein Repo bringen
+
+Der Kurs ist nicht nur Lernmaterial — sein Prozess lässt sich in ein
+beliebiges Repo adoptieren, ohne Installation:
+
+1. **Betriebsregelwerk** für Code-Agenten:
+   [`kurs/de/agents-regelwerk.md`](kurs/de/agents-regelwerk.md) (oben
+   beschrieben; für Reproduzierbarkeit die Raw-URL auf einen Commit/Tag pinnen).
+2. **Templates** (Skelette für Lastenheft, Spec, ADR, Slice, …) als
+   login-freies ZIP:
+   <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>
+   — der ausgelieferte Stand ist auf seinen Tag (`templates-v*`) gepinnt.
+3. **Schritte**: [`lab/templates/README.md`](lab/templates/README.md)
+   §Verwendung (kopieren, `<Platzhalter>` ersetzen, Hinweis-Block strippen,
+   d-check:ignore-Marker behalten).
+
+Danach ist **`AGENTS.md` deines Repos der selbstbeschreibende Einstieg** —
+es trägt die Pointer auf Regelwerk und Templates weiter, sodass jeder
+Code-Agent ohne Vorwissen über diesen Kurs bootstrappen kann.
+
 ## Lizenz
 
 Dual-lizenziert: Markdown-Inhalte, Bilder und Diagramme unter
