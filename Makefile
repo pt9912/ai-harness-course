@@ -15,10 +15,10 @@ help: ## Targets anzeigen
 check: docs-check alignment-check ## beide Validatoren nacheinander
 
 # Referenz-Checks (Links, Anker, Bilder, Inline-Code-Pfade) via d-check
-# (Digest-Pin auf v0.2.0 — braucht das Modul codepaths; Konfiguration
+# (Digest-Pin auf v0.8.0 — braucht das Modul codepaths; Konfiguration
 # in .d-check.yml). Der Node-Validator bleibt als Rest-Sensor für die
 # kurs-spezifischen Modul-Nummern-Checks.
-D_CHECK_IMAGE ?= ghcr.io/pt9912/d-check@sha256:f2e0ac7bd9650fe560058e530c8890a629e2df43b8b2e696e78488794d311846
+D_CHECK_IMAGE ?= ghcr.io/pt9912/d-check@sha256:871751f9ed13cec8fadb610c538d735ad6c77a838a0384f645da916e829e4550
 
 docs-check: ## Referenzen (d-check) + Modul-Nummern (Rest-Sensor) prüfen
 	docker run --rm -v "$(CURDIR)":/repo:ro $(D_CHECK_IMAGE)
