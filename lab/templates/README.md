@@ -69,6 +69,14 @@ Platzhalter den Gate nicht rot färben, ignoriert die mitgelieferte
 kurzlebige Entpack-Station — der `harness/`-Ordner ist **kein**
 Template-Lager.
 
+**Adoptions-Reihenfolge:** Singletons in Abhängigkeitsfolge füllen
+(Lastenheft → Architektur → harness → …). **Pointer-Artefakte**
+(`AGENTS.md`, `README.md`, `harness/README.md`) verweisen auf die anderen
+— sie **zuletzt** füllen bzw. re-syncen, sobald die Ziele stehen. Sonst
+veraltet ihr `(folgt)`/Link-Stand: Drift, die der Referenz-Gate nicht
+fängt (er prüft Existenz verlinkter Ziele, nicht ob Vorhandenes als
+vorhanden beschrieben wird) — Reviewer-Sache.
+
 ## Gate-Baseline
 
 Drei mitgelieferte Dateien geben dir den Doku-Referenz-Gate

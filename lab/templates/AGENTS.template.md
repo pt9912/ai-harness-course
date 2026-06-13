@@ -6,6 +6,9 @@
 > Hard Rules und Pointer auf kanonische Quellen*, sie *dupliziert deren
 > Inhalt nicht* — sonst entsteht Drift (siehe
 > [Kurs Modul 9](../../kurs/de/03-agenten/modul-09-implementierung.md)).
+> **Pointer-Artefakt:** verweist auf andere kanonische Quellen — zuletzt
+> füllen bzw. re-syncen, sobald die Ziele stehen; veraltete
+> `(folgt)`/Klartext-Verweise fängt kein Linter (Reviewer-Sache).
 
 ---
 

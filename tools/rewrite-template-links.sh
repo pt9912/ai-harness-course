@@ -29,4 +29,15 @@ find "$dir" -name '*.md' -print0 | while IFS= read -r -d '' f; do
   fi
 done
 
+# d-check-Digest aus dem Kurs-Makefile (Single Source of Truth) in das
+# ausgelieferte harness.mk injizieren. Sonst ist der Pin ein hartkodiertes
+# Duplikat, das beim nächsten d-check-Bump driftet (wie früher templates-v1).
+# Das Quell-harness.mk behält einen realen Wert (Repo-Direkt-Copy-Fallback);
+# der ZIP-Stand wird hier auf den Kurs-Pin gesetzt.
+pin=$(sed -nE 's/^D_CHECK_IMAGE[[:space:]]*\?=[[:space:]]*(.+)$/\1/p' Makefile 2>/dev/null | head -1)
+if [[ -n "${pin:-}" && -f "$dir/harness.mk" ]]; then
+  sed -E -i "s#^D_CHECK_IMAGE[[:space:]]*\\?=.*#D_CHECK_IMAGE ?= ${pin}#" "$dir/harness.mk"
+  echo "rewrite-template-links: harness.mk D_CHECK_IMAGE auf Kurs-Pin gesetzt ($pin)."
+fi
+
 echo "rewrite-template-links: Kurs-Verweise in $dir auf '$ref' gepinnt."
