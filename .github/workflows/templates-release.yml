@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Kurs-Verweise auf den Tag pinnen
+        run: bash tools/rewrite-template-links.sh lab/templates "$GITHUB_REF_NAME"
       - name: ZIP bauen
         run: |
           cd lab/templates

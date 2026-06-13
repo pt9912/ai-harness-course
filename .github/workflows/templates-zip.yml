@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Kurs-Verweise auf den Vorschau-Stand (main) pinnen
+        run: bash tools/rewrite-template-links.sh lab/templates main
       - name: Templates als Artifact hochladen
         uses: actions/upload-artifact@v4
         with:

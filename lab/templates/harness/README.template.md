@@ -26,14 +26,19 @@ Diese Datei dupliziert sie nicht.
 | Rang | Datei | Charakter |
 |---|---|---|
 | 1 | [`spec/lastenheft.md`](../spec/lastenheft.md) | vertraglich abnahmebindend |
-| 2 | [`spec/spezifikation.md`](../spec/spezifikation.md) | technisch fortschreibbar |
+| 2 | [`spec/spezifikation.md`](../spec/spezifikation.md) | technisch fortschreibbar *(opt. 3. Spec-Stratum)* |
 | 3 | [`spec/architecture.md`](../spec/architecture.md) | Komponenten/Sequenzen, meilensteinfrei |
 | 4 | [`docs/plan/adr/`](../docs/plan/adr/) | Architekturentscheidungen |
 | 5 | [`docs/plan/planning/in-progress/roadmap.md`](../docs/plan/planning/in-progress/roadmap.md) | aktuelle Welle |
-| 6 | [`docs/user/*`](../docs/user/) | Operations, Quality, Releasing |
+| 6 | `docs/user/*` *(falls vorhanden)* | Operations, Quality, Releasing | <!-- d-check:ignore (Verzeichnis optional; entlinkt, da im frischen Repo selten vorhanden) -->
 | 7 | [`README.md`](../README.md) | Projekt-Überblick |
 | 8 | [`AGENTS.md`](../AGENTS.md) | Agent-Briefing |
 | 9 | diese Datei | Harness-Einstieg |
+
+> Rang 2 (`spec/spezifikation.md`) ist das **optionale 3. Spec-Stratum**.
+> Repos mit zwei Straten (Lastenheft → Architektur) löschen die Zeile und
+> nummerieren die Ränge neu; die Adaption gehört als `MR-<NNN>` in
+> [`conventions.md`](conventions.md) (Beispiel `MR-001` dort).
 
 ## Guides (Feedforward-Quellen)
 
@@ -44,7 +49,7 @@ Was lenkt den Agenten *vor* der Handlung? Pointer, kein Inhalt.
 | Quelle | Inhalt |
 |---|---|
 | [`spec/lastenheft.md`](../spec/lastenheft.md) | Anforderungen, IDs, Akzeptanzkriterien |
-| [`spec/spezifikation.md`](../spec/spezifikation.md) | technische Details, Defaults |
+| [`spec/spezifikation.md`](../spec/spezifikation.md) | technische Details, Defaults *(opt. 3. Spec-Stratum)* |
 | [`spec/architecture.md`](../spec/architecture.md) | Komponenten, Schichten, Constraints |
 | [`docs/plan/adr/`](../docs/plan/adr/) | Architekturentscheidungen |
 | [`docs/plan/planning/`](../docs/plan/planning/) | Slice-Pläne und Roadmap |

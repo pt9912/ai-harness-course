@@ -37,8 +37,9 @@ Die **Skelett-Vorlagen der adoptierten Baseline** (Lastenheft, Spec,
 Architektur, ADR, Slice, Carveout, Review-Report, …) liegen unter
 <Pfad oder URL zur Template-Quelle, bei Adoption des Kurses als ZIP
 zum Bootstrap:
-https://github.com/pt9912/ai-harness-course/releases/download/templates-v1/lab-templates.zip
-(Tag = adoptierter Stand), für Einzelabruf pro Datei:
+https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip
+(Release-Asset; im ausgelieferten ZIP auf seinen Tag gepinnt = adoptierter
+Stand), für Einzelabruf pro Datei:
 https://raw.githubusercontent.com/pt9912/ai-harness-course/main/lab/templates/>
 — beim Anlegen neuer Artefakte das passende Template kopieren statt
 frei zu formulieren.
@@ -48,9 +49,9 @@ frei zu formulieren.
 In dieser Reihenfolge:
 
 1. [`spec/lastenheft.md`](spec/lastenheft.md) — vertraglich abnahmebindend.
-2. [`spec/spezifikation.md`](spec/spezifikation.md) — technisch verbindlich, fortschreibbar.
+2. [`spec/spezifikation.md`](spec/spezifikation.md) — technisch verbindlich, fortschreibbar. *(Optionales 3. Spec-Stratum — siehe Spec-Stratifizierung. Repos mit 2 Straten löschen diese Zeile und nummerieren die Ränge neu.)*
 3. [`spec/architecture.md`](spec/architecture.md) — Komponenten- und Sequenzsicht.
-4. [`docs/plan/adr/README.md`](docs/plan/adr/README.md) — ADR-Index.
+4. [`docs/plan/adr/`](docs/plan/adr/) — ADR-Verzeichnis und -Index.
 5. [`docs/plan/planning/in-progress/roadmap.md`](docs/plan/planning/in-progress/roadmap.md) — aktuelle Welle.
 6. [`README.md`](README.md) — Projekt-Überblick.
 7. **AGENTS.md (diese Datei).**

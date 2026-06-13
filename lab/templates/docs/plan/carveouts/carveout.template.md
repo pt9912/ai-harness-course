@@ -64,7 +64,7 @@ Welche Schritte schließen den Carveout?
 
 - [ ] Gate ist für den Geltungsbereich aktiviert (Gate-Konfiguration aktualisiert).
 - [ ] `make gates` grün ohne Ausnahme.
-- [ ] Datei wird nach `docs/plan/carveouts/done/` bewegt (reiner `git mv`).
+- [ ] Datei wird nach `docs/plan/carveouts/done/` bewegt (reiner `git mv`). <!-- d-check:ignore (done/ entsteht erst bei erster Carveout-Auflösung) -->
 - [ ] Folge-Slice geschlossen oder explizit dokumentiert.
 
 ## Geschichte

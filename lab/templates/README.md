@@ -43,7 +43,9 @@ jederzeit neu erzeugen.
    ```
 3. **`<Platzhalter>`-Stellen ersetzen.**
 4. **Template-Hinweis-Block oben entfernen** (er beginnt mit `> **Template-Hinweis.**`).
-5. **HTML-Kommentar-Hilfen entfernen** (`<!-- ... -->`).
+5. **HTML-Kommentar-Hilfen entfernen** (`<!-- ... -->`) — **außer**
+   `<!-- d-check:ignore … -->`-Marker: die unterdrücken Falsch-Positive
+   des Referenz-Gates für bewusst illustrative Pfade und müssen bleiben.
 6. **Mit dem entsprechenden Pfad in `lab/example/` vergleichen** —
    so siehst du, wie ein voll ausgefülltes Artefakt aussieht.
 

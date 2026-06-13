@@ -13,14 +13,14 @@ Code-Review gegen Plan + Konventionen (Modul 10 §Drei Review-Arten).
 
 **Gegenstand:** <Slice-ID / Diff-Range / Commit-Hash>
 
-**Skill:** `.harness/skills/reviewer.md` @ <Version/Commit> ·
+**Skill:** `.harness/skills/reviewer.md` @ <Version/Commit> · <!-- d-check:ignore (Adopter-spezifischer Skill-Pfad, existiert im Ziel-Repo ggf. nicht) -->
 **Modell:** <Modell-ID> · **Datum:** <YYYY-MM-DD>
 
 **Eingangs-Kontext** (die Verträge, gegen die geprüft wurde — ohne
 diese Liste ist der Lauf nicht reproduzierbar):
 
 - <Slice-Plan / Plan-Dokument>
-- <aktive ADRs, z. B. ADR-0001>
+- <aktive ADRs, z. B. ADR-<NNNN>>
 - <berührte `LH-*`-IDs>
 - `AGENTS.md` (Hard Rules)
 
@@ -28,10 +28,13 @@ diese Liste ist der Lauf nicht reproduzierbar):
 
 ## Findings
 
-<!--
-Je Finding das Output-Schema aus dem Reviewer-Skill (Modul 10):
-kein Fließtext, kein Lösungsvorschlag im Befund.
--->
+Jedes Finding folgt dem **§Output-Schema des Reviewer-Skills** — der
+verbindlichen Single Source of Truth. Die Felder unten sind nur
+**gespiegelt** (Bequemlichkeit beim Ausfüllen), nicht neu definiert; bei
+Abweichung gilt der Skill bzw. dessen Quelle
+[Kurs Modul 10 §Output-Schema](../../../../kurs/de/04-qualitaet/modul-10-review-harness.md#worked-example-eine-reviewer-skill-datei-schreiben).
+
+<!-- Kein Fließtext, kein Lösungsvorschlag im Befund. -->
 
 ### F-1 — <Kurztitel>
 
