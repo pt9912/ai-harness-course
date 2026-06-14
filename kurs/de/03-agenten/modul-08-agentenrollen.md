@@ -67,7 +67,7 @@ dieselbe Sicht denselben Fehler übersieht.
 ## Lab-Bezug
 
 * `AGENTS.md` an der Lab-Wurzel plus die `AGENTS.md`-Dateien der
-  Sprach-Skelette (`go/`, `python/`, `kotlin/`, `java/`, `csharp/`) —
+  Sprach-Skelette (`go/`, `python/`, `kotlin/`, `java/`, `csharp/`, `cpp/`) —
   der Eingabe-Kontext, den ein Implementation-Agent geladen bekommt
 * `make agent-implement SLICE=…` — Kontextpaket der Implementer-Rolle
 * `make agent-review` — Review-Fixture unter

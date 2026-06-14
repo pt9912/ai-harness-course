@@ -1,0 +1,4 @@
+# Build-Verzeichnisse bleiben außerhalb des Build-Kontexts (entstehen bei
+# den Bind-Mount-Gates auf dem Host; im Image wird frisch konfiguriert).
+build/
+build-cov/

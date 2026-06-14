@@ -14,7 +14,7 @@ Terminen. Daten sind Schätzungen, korrigierbar.
 **Geplantes Ende:** 2026-06-12 (Schätzung)
 
 **Closure-Trigger:**
-- slice-013 (Property-Tests) done in allen fünf Sprachen.
+- slice-013 (Property-Tests) done in allen sechs Sprachen.
 - `make fullbuild` grün.
 - Replay-Lauf gegen Golden Set grün.
 

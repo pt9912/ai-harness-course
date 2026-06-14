@@ -43,7 +43,7 @@ ausgefüllt — Pfad-Konvention bleibt analog.)
 
 ## Verifikation (nach Auflösung)
 
-- [ ] `internal/index/`-Coverage in allen fünf Sprach-Skeletten ≥ 90 %.
+- [ ] `internal/index/`-Coverage in allen sechs Sprach-Skeletten ≥ 90 %.
 - [ ] Carveout-Konfiguration aus Coverage-Config entfernt.
 - [ ] `make coverage-gate-critical` grün ohne Ausnahmen.
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).

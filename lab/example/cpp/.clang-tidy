@@ -1,0 +1,23 @@
+# clang-tidy-Konfiguration für make lint. Konservativer Check-Satz; jeder
+# aktivierte Befund ist ein Fehler (der lint-Gate ist rot/grün, kein
+# Vorschlag — Modul 13). Inline-Suppression ist verboten (AGENTS.md §2.2,
+# zusätzlich erzwungen durch cmake/suppression-gate.sh); echte Ausnahmen
+# werden hier zentral mit ADR-/Slice-Bezug eingetragen.
+Checks: >
+  -*,
+  bugprone-*,
+  clang-analyzer-*,
+  readability-function-cognitive-complexity,
+  -bugprone-easily-swappable-parameters
+# -bugprone-easily-swappable-parameters: zentral aus (Lab-Skelett). Flaggt
+# legitime Signaturen wie cosine(const Embedding&, const Embedding&); zu
+# verrauscht für den Mehrwert. Reaktivierung wäre ein eigener Slice.
+WarningsAsErrors: >
+  bugprone-*,
+  clang-analyzer-*,
+  readability-function-cognitive-complexity
+HeaderFilterRegex: '^src/'
+FormatStyle: none
+CheckOptions:
+  - key: readability-function-cognitive-complexity.Threshold
+    value: '20'

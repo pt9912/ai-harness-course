@@ -561,8 +561,8 @@ Inventur-Linie bekommt (Achse 1/2 divergiert) → trennen. Aggregation ist
 damit keine Einmal-Entscheidung, sondern eine wiederkehrende
 Wartungs-Praxis. Faustregel: *was nie getrennt feuert, ist
 eine Sub-Area; eine Sub-Area, deren Hälften auseinanderdriften, sind
-zwei.* Beispiel aus dem Lab: die fünf Sprach-Skelette (`go/`, `python/`,
-…) werden *nicht* als fünf `Implementierung`-Sub-Areas geführt, sondern
+zwei.* Beispiel aus dem Lab: die sechs Sprach-Skelette (`go/`, `python/`,
+…) werden *nicht* als sechs `Implementierung`-Sub-Areas geführt, sondern
 als *eine* — sie teilen Spec und Modus (alle GF) und tragen nie eine
 *unabhängige* Modus- oder Trigger-Entscheidung; die per-Sprache-Stilunterschiede
 (`gofmt` vs. `black`) sind Sub-Sub-Area-Nuancen, keine eigenen

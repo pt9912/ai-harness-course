@@ -52,6 +52,7 @@ Inline-Suppression bricht das `suppression-gate`. Pro Sprache:
 | C# | `#pragma warning disable`, `[SuppressMessage]` | `.editorconfig` + `Directory.Build.props` |
 | Kotlin | `@Suppress("...")` | `detekt.yml` (`baselines`) |
 | Java | `@SuppressWarnings("...")` | `checkstyle-suppressions.xml` |
+| C++ | `// NOLINT`, `#pragma GCC diagnostic` | `.clang-tidy` |
 
 Ausnahmen brauchen eine Begründung mit Verweis auf ADR oder Slice-ID.
 
@@ -104,7 +105,7 @@ Nur Befehle, die im Makefile existieren (Stand 2026-06-02):
 | `make fullbuild` | volle Closure inkl. Runtime-Image |
 
 (Diese Targets sind in den Sprach-Skeletten unter `go/`, `python/`,
-`kotlin/`, `java/`, `csharp/` real implementiert — kommen in Phase C.)
+`kotlin/`, `java/`, `csharp/`, `cpp/` real implementiert — kommen in Phase C.)
 
 ## 4. Dokumentations-Regeln
 

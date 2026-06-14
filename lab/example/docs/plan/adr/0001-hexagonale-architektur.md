@@ -60,6 +60,7 @@ aufwärts.
 | Python: `import-linter` | Contract `forbidden: ui -> {index, embedding, audit}` und `forbidden: service -> ui`. | `make arch-check` |
 | Java/Kotlin: ArchUnit | `noClasses().that().resideInAPackage("..service..").should().dependOnClassesThat().resideInAPackage("..ui..")` u.a. | `make arch-check` |
 | C#: NetArchTest | Analog für Namespaces `DocSearch.Service`, `DocSearch.UI` etc. | `make arch-check` |
+| C++: `cmake/arch-check.sh` | Kern `src/hexagon/` importiert nichts aus `src/adapters/`; Index-/Adapter-Schichtgrenzen (Include-Heuristik, da kein Modul-System). | `make arch-check` |
 
 ## Re-Evaluierungs-Trigger
 

@@ -30,7 +30,7 @@ auch bei > 100k Index-Einträgen zu halten.
 | `internal/index/searcher.go` (Go) | neu | Interface + Linear-Implementierung |
 | `internal/index/ann.go` (Go) | neu | ANN-Implementierung |
 | `internal/service/search.go` | update | Konstruktor wählt Searcher per Config |
-| Äquivalente Pfade in python/kotlin/java/csharp | neu | Pro Sprach-Skelett |
+| Äquivalente Pfade in python/kotlin/java/csharp/cpp | neu | Pro Sprach-Skelett |
 
 ## 4. Trigger
 

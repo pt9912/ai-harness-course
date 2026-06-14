@@ -104,7 +104,7 @@ Der Kurs liefert ein Beispiel-Repo unter [`/lab/example/`](../../../lab/example/
 mit:
 
 * lauffähigen Beispiel-Artefakten in `spec/`, `docs/plan/adr/`, `docs/plan/planning/`
-* fünf parallelen Sprach-Skeletten (Go, Python, Kotlin, Java, C#) mit eigener Toolchain in `go/`, `python/`, `kotlin/`, `java/`, `csharp/` — *Phase C der Lab-Roadmap, ausgeliefert*
+* sechs parallelen Sprach-Skeletten (Go, Python, Kotlin, Java, C#, C++) mit eigener Toolchain in `go/`, `python/`, `kotlin/`, `java/`, `csharp/`, `cpp/` — *Phase C der Lab-Roadmap, ausgeliefert*
 * Make-Targets für alle Gates (`make lint`, `make typecheck`, `make arch-check`, `make coverage-gate`, `make coverage-gate-critical`, `make gates`)
 * Root-Harness-Targets für die Kursmodule (`make agent-implement`, `make agent-review`, `make verify`, `make replay`, `make trace`, `make release`)
 * fingiertem "kaputten" Slice für die Review-Übung in [Modul 10](../04-qualitaet/modul-10-review-harness.md)

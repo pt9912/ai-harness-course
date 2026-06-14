@@ -38,7 +38,7 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 ## 5. Closure-Trigger
 
 - DoD vollständig.
-- `make gates` grün in allen fünf Sprachen.
+- `make gates` grün in allen sechs Sprachen.
 - Mindestens *ein* Property-Test pro Sprache läuft 100 Generationen ohne Fail in CI.
 
 ## 6. Risiken und offene Punkte

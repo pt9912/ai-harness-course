@@ -1,6 +1,6 @@
 # DocSearch example harness entrypoints.
 # Lightweight root targets for the course modules; language-specific gates
-# stay in go/, python/, kotlin/, java/, csharp/.
+# stay in go/, python/, kotlin/, java/, csharp/, cpp/.
 
 COURSE_LANG ?= go
 RUN ?= welle-1-baseline
@@ -11,7 +11,7 @@ help: ## Targets anzeigen
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-24s %s\n", $$1, $$2}'
 
-gates: ## Sprachskelett-Gates ausführen: make gates COURSE_LANG=go|python|kotlin|java|csharp
+gates: ## Sprachskelett-Gates ausführen: make gates COURSE_LANG=go|python|kotlin|java|csharp|cpp
 	@test -d "$(COURSE_LANG)" || (echo "Unknown COURSE_LANG=$(COURSE_LANG)"; exit 2)
 	$(MAKE) -C "$(COURSE_LANG)" gates
 

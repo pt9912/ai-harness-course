@@ -55,12 +55,12 @@ example/
 ├── evals/example-trace.json     Minimal-Trace für Modul 0
 ├── otel/                        Trace-Fixture für Modul 15
 ├── runbooks/                    Release/Incident-Fixtures für Modul 16
-└── (Sprach-Skelette in Phase C: go/, python/, kotlin/, java/, csharp/)
+└── (Sprach-Skelette in Phase C: go/, python/, kotlin/, java/, csharp/, cpp/)
 ```
 
 ## Sprach-Skelette
 
-Fünf parallele Implementierungen derselben Spec, jede mit eigener
+Sechs parallele Implementierungen derselben Spec, jede mit eigener
 Toolchain:
 
 | Sprache | Stack | Linter | Architekturtest | Vorbild |
@@ -70,6 +70,7 @@ Toolchain:
 | [Kotlin](kotlin/) | Kotlin/JVM 21 + Gradle KTS | `detekt` | **Konsist** | (neu) |
 | [Java](java/) | Java 21 + Maven | Checkstyle | **ArchUnit** | (neu) |
 | [C#](csharp/) | .NET 10 + CPM | `dotnet format` | **NetArchTest** | bess-ems |
+| [C++](cpp/) | C++20 + CMake | `clang-tidy` | `arch-check.sh` (+ CTest) | cmake-xray, b-cad |
 
 Jedes Skelett implementiert:
 
@@ -83,11 +84,11 @@ Jedes Skelett implementiert:
 
 | Konzept | Was unterscheidet sich? |
 |---|---|
-| Suppression-Verbot | `//nolint` vs. `# noqa` vs. `@Suppress` vs. `@SuppressWarnings` vs. `#pragma warning disable` — siehe [Modul 9](../../kurs/de/03-agenten/modul-09-implementierung.md) |
-| Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) |
-| Lockfile | `go.sum`, `uv.lock`, `gradle.lockfile`, Maven (transitive), CPM `packages.lock.json` |
-| Container | Distroless Static (Go), python-slim, Distroless Java, Distroless .NET |
-| Tie-Break | `sort.SliceStable` vs. `sorted(key=…)` vs. `compareBy(…).thenBy(…)` vs. `Comparator.thenComparing` vs. LINQ `OrderBy().ThenBy()` |
+| Suppression-Verbot | `//nolint` vs. `# noqa` vs. `@Suppress` vs. `@SuppressWarnings` vs. `#pragma warning disable` vs. C++ `// NOLINT` / `#pragma GCC diagnostic` — siehe [Modul 9](../../kurs/de/03-agenten/modul-09-implementierung.md) |
+| Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) vs. Skript (C++ `arch-check.sh`) |
+| Lockfile | `go.sum`, `uv.lock`, `gradle.lockfile`, Maven (transitive), CPM `packages.lock.json`, FetchContent-`GIT_TAG` (C++) |
+| Container | Distroless Static (Go), python-slim, Distroless Java, Distroless .NET, Distroless cc (C++) |
+| Tie-Break | `sort.SliceStable` vs. `sorted(key=…)` vs. `compareBy(…).thenBy(…)` vs. `Comparator.thenComparing` vs. LINQ `OrderBy().ThenBy()` vs. `std::stable_sort` (C++) |
 
 ## Lernweg
 

@@ -594,8 +594,8 @@ Inventur-Linie bekommt (Achse 1/2 divergiert) → trennen. Aggregation ist
 damit keine Einmal-Entscheidung, sondern eine wiederkehrende
 Wartungs-Praxis. Faustregel: *was nie getrennt feuert, ist
 eine Sub-Area; eine Sub-Area, deren Hälften auseinanderdriften, sind
-zwei.* Beispiel aus dem Lab: die fünf Sprach-Skelette (`go/`, `python/`,
-…) werden *nicht* als fünf `Implementierung`-Sub-Areas geführt, sondern
+zwei.* Beispiel aus dem Lab: die sechs Sprach-Skelette (`go/`, `python/`,
+…) werden *nicht* als sechs `Implementierung`-Sub-Areas geführt, sondern
 als *eine* — sie teilen Spec und Modus (alle GF) und tragen nie eine
 *unabhängige* Modus- oder Trigger-Entscheidung; die per-Sprache-Stilunterschiede
 (`gofmt` vs. `black`) sind Sub-Sub-Area-Nuancen, keine eigenen
@@ -764,12 +764,12 @@ nachgelagerte Review.
 ### Sprach-übergreifende Konkretion
 
 Die 2×2-Matrix ist sprach-neutral; die Sensoren in jedem Quadranten
-sind es nicht. Das Begleit-Lab wird das für fünf Sprachen
-(Go, Python, Kotlin, Java, C#/.NET) zeigen — jeweils mit eigener
-Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette. Die fünf
+sind es nicht. Das Begleit-Lab wird das für sechs Sprachen
+(Go, Python, Kotlin, Java, C#/.NET, C++) zeigen — jeweils mit eigener
+Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette. Die sechs
 Sprach-Skelette sind als Phase C der Lab-Roadmap ausgeliefert und
 liegen unter [`/lab/example/`](../../lab/example/) (`go/`,
-`python/`, `kotlin/`, `java/`, `csharp/`); die Module 2, 9, 13 und 14
+`python/`, `kotlin/`, `java/`, `csharp/`, `cpp/`); die Module 2, 9, 13 und 14
 verweisen auf die Sprach-Varianten.
 
 ### Drei Harness-Kategorien (Böckeler)

@@ -5,7 +5,7 @@ Dieses Verzeichnis ist das **Begleit-Lab** zum Kurs unter
 
 1. **Templates** (`templates/`): leere Skelett-Vorlagen mit Pflicht-Gliederung für alle Dokumenttypen des Kurses (Spec, ADR, Slice, Welle, Roadmap, Carveout, AGENTS.md, `harness/README.md`).
 2. **Beispiel** (`example/`): ein voll ausgefülltes Beispiel-Repo mit konsistenten IDs, mindestens einem geschlossenen Slice, geführten Übungsfixtures, einem fingierten kaputten Slice für [Modul 10](../kurs/de/04-qualitaet/modul-10-review-harness.md), einem Replay-Beispiel für [Modul 12](../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md), Trace- und Runbook-Fixtures für Phase 5.
-3. **Sprach-Skelette** (`example/{go,python,kotlin,java,csharp}/`, kommen in Phase C): fünf lauffähige Implementierungs-Skelette mit eigener Toolchain (Linter, Typecheck, Architekturtest, Coverage, Container) und einheitlichem `make gates`-Vertrag.
+3. **Sprach-Skelette** (`example/{go,python,kotlin,java,csharp,cpp}/`, kommen in Phase C): sechs lauffähige Implementierungs-Skelette mit eigener Toolchain (Linter, Typecheck, Architekturtest, Coverage, Container) und einheitlichem `make gates`-Vertrag.
 
 ## Lernweg
 
@@ -51,7 +51,7 @@ lab/
     ├── otel/                           (Trace-Fixture für Modul 15)
     ├── runbooks/                       (Release/Incident-Fixtures für Modul 16)
     │
-    └── {go,python,kotlin,java,csharp}/  (Phase C — fünf Sprach-Skelette)
+    └── {go,python,kotlin,java,csharp,cpp}/  (Phase C — sechs Sprach-Skelette)
         Makefile · Dockerfile · AGENTS.md · harness/README.md · …
 ```
 
@@ -76,7 +76,7 @@ Kursinhalt am konkreten Artefakt erlebbar zu machen.
 Jedes Sprach-Skelett ist **eigenständig lauffähig**:
 
 ```bash
-cd lab/example/go         # oder python, kotlin, java, csharp
+cd lab/example/go         # oder python, kotlin, java, csharp, cpp
 make build                # Docker-Image bauen
 make gates                # alle Quality Gates
 ```
@@ -94,7 +94,7 @@ make release
 ```
 
 Für die Root-Targets `gates`, `ci` und `fullbuild` kann das
-Sprachskelett mit `COURSE_LANG=go|python|kotlin|java|csharp` gewählt
+Sprachskelett mit `COURSE_LANG=go|python|kotlin|java|csharp|cpp` gewählt
 werden.
 
 Jedes Skelett implementiert dasselbe Lab-Beispiel (DocSearch) in der
