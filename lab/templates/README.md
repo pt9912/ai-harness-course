@@ -27,16 +27,18 @@ unabhängig davon, ob dein Repo Go, Python, Kotlin, Java oder C# nutzt.
 ## Download als ZIP
 
 **Stabiler Link (kein Login nötig):** der Workflow `templates-release`
-hängt bei jedem Tag `templates-v*` das ZIP als Release-Asset an —
+hängt bei jedem Tag `templates-v*` zwei Release-Assets an:
 
-> <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>
+> Templates-ZIP: <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>
+>
+> Regelwerk (self-contained, interne Verweise auf den Tag gepinnt): <https://github.com/pt9912/ai-harness-course/releases/latest/download/agents-regelwerk.md>
 
-Zusätzlich lädt der Workflow `templates-zip` diesen Ordner bei jeder
-Änderung als Actions-Artifact `lab-templates` hoch (Vorschau-Stand von
-`main`): auf GitHub unter **Actions → templates-zip → neuester Lauf →
-Artifacts**. Artifacts erfordern einen GitHub-Login und verfallen nach
-90 Tagen; über **Run workflow** (workflow_dispatch) lässt sich das ZIP
-jederzeit neu erzeugen.
+Zusätzlich lädt der Workflow `templates-zip` diesen Ordner (Artifact
+`lab-templates`) und das Regelwerk (Artifact `agents-regelwerk`) bei jeder
+Änderung als Vorschau-Stand von `main` hoch: auf GitHub unter **Actions →
+templates-zip → neuester Lauf → Artifacts**. Artifacts erfordern einen
+GitHub-Login und verfallen nach 90 Tagen; über **Run workflow**
+(workflow_dispatch) lässt sich alles jederzeit neu erzeugen.
 
 ## Verwendung
 

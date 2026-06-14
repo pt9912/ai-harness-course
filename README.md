@@ -83,9 +83,10 @@ Die Überarbeitungs-Wellen des Kurses registriert das
 Der Kurs ist nicht nur Lernmaterial — sein Prozess lässt sich in ein
 beliebiges Repo adoptieren, ohne Installation:
 
-1. **Betriebsregelwerk** für Code-Agenten:
-   [`kurs/de/agents-regelwerk.md`](kurs/de/agents-regelwerk.md) (oben
-   beschrieben; für Reproduzierbarkeit die Raw-URL auf einen Commit/Tag pinnen).
+1. **Betriebsregelwerk** für Code-Agenten als login-freies, self-contained
+   Release-Asset (interne Verweise auf den Tag `templates-v*` gepinnt):
+   <https://github.com/pt9912/ai-harness-course/releases/latest/download/agents-regelwerk.md>
+   — in-repo: [`kurs/de/agents-regelwerk.md`](kurs/de/agents-regelwerk.md) (oben beschrieben).
 2. **Templates** (Skelette für Lastenheft, Spec, ADR, Slice, …) als
    login-freies ZIP:
    <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>

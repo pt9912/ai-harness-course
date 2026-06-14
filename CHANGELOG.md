@@ -34,8 +34,9 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   beim Release auf absolute `blob/<tag>`-URLs um (fence- und
   existenz-gegated: illustrative Adopter-Pfade bleiben relativ). Das
   Regelwerk geht als eigenes Release-Asset neben `lab-templates.zip` raus
-  (`releases/latest/download/agents-regelwerk.md`); `AGENTS.template`
-  zeigt dorthin statt auf Raw-`main`. Quelle bleibt relativ (kein
+  (`releases/latest/download/agents-regelwerk.md`); `AGENTS.template`,
+  Root-README-Adoption und `lab/templates` §Download zeigen dorthin statt
+  auf Raw-`main`. Quelle bleibt relativ (kein
   Stand-Bump). Behebt tote Verweise beim Kopieren/Cachen in fremde Repos.
 
 ### Geändert
