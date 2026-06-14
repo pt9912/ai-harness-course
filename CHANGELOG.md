@@ -11,6 +11,33 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 19 — 2026-06-14 · C++/CMake-Skelett + Regelwerk-Drift-Sensor
+
+### Neu
+
+- **C++/CMake-Skelett** in [`lab/example/cpp/`](lab/example/cpp/) —
+  sechstes Sprach-Skelett (C++20, hexagonal: `src/hexagon` + `src/adapters`),
+  doctest via FetchContent (`GIT_TAG`-Pin), clang-tidy mit
+  `WarningsAsErrors`, textbasierter `arch-check.sh` (ADR-0001) als
+  CTest-Test, gcovr-Coverage. `make gates` grün im Docker (Coverage 94 %);
+  Runtime-Image Distroless `cc` mit statisch gelinktem libstdc++ und
+  glibc-Match (`debian:12` ↔ `distroless-debian12`, Base-Images per
+  `@sha256` gepinnt).
+- **Regelwerk-Drift-Sensor** — `make regelwerk-drift`
+  ([`lab/example/tools/check_regelwerk_drift.py`](lab/example/tools/check_regelwerk_drift.py)):
+  inhaltsbasierter sha256-Pin der adoptierten `agents-regelwerk.md` in
+  `conventions.md` §Baseline; erkennt Upstream-Drift unabhängig vom
+  `Stand:`-Marker (vgl. §„Nachweis über Inhalt, nicht Diff"). Kein
+  `gates`-Glied — CI/periodisch, braucht die externe Quelle.
+
+### Geändert
+
+- Sprach-Skelett-Zählung durchgängig fünf → sechs: Lab-Satelliten
+  ([`lab/README.md`](lab/README.md), `lab/example/` README/Makefile/AGENTS,
+  ADR-0001-Fitness-Table) und Kurs-Prosa (grundlagen, modul-08, modul-14,
+  `agents-regelwerk.md`, konventionen) sowie CO-001 / slice-013 /
+  slice-014 / roadmap.
+
 ## Welle 18 — 2026-06-11 · Konsistenz-Welle + Agents-Regelwerk
 
 *(Commits dieser Welle tragen das historische Label „Welle 8

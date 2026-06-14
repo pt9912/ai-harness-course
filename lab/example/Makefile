@@ -5,7 +5,7 @@
 COURSE_LANG ?= go
 RUN ?= welle-1-baseline
 
-.PHONY: help gates ci fullbuild plan-status agent-implement agent-review verify verify-slice verify-closure-notes check-references replay trace release
+.PHONY: help gates ci fullbuild plan-status agent-implement agent-review verify verify-slice verify-closure-notes check-references regelwerk-drift replay trace release
 
 help: ## Targets anzeigen
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -59,6 +59,9 @@ verify-closure-notes: ## ADR-0011 — Closure-Note-Pflicht fuer done/-Slices pru
 
 check-references: ## Kurs §Referenz-Richtung — Spec-Straten ohne ADR/Slice-Abwaertszeiger, keine superseded-ADR-Referenzen
 	@python3 tools/check_references.py
+
+regelwerk-drift: ## Upstream-Drift der adoptierten agents-regelwerk.md pruefen (inhaltsbasiert; KEIN gates-Glied, CI/periodisch)
+	@python3 tools/check_regelwerk_drift.py
 
 verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-009
 	@test -n "$(SLICE)" || (echo "Usage: make verify-slice SLICE=slice-009"; exit 2)

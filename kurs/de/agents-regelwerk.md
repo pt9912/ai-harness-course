@@ -1,6 +1,6 @@
 # Agents-Regelwerk — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 18 · 2026-06-11 · 21:08 CEST
+**Stand:** Kurs-Welle 19 · 2026-06-14 · 13:26 CEST
 
 > **Was diese Datei ist.** Der Kurs ohne Didaktik-Schicht: sein
 > operatives Regelwerk — Konventionen, Regeln, Abläufe, Schemata — in

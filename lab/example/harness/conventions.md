@@ -21,6 +21,7 @@ Der Default-Ort für:
 - **Konvention:** AI-Harness-Kurs (`/kurs/de/grundlagen/konventionen.md`)
 - **Stand:** Template-Set 2026-06
 - **Datum der Adoption:** 2026-06-01
+- **Regelwerk-Pin:** sha256:682aef782dd90d90668c1cad3f6390555ca828576908f86a2782c4fa5da6113e — inhaltsbasierter Pin der adoptierten `agents-regelwerk.md` (Kurs-Welle 19 · 2026-06-14). Upstream-Drift erkennt `make regelwerk-drift`; bei Drift: Regelwerk neu lesen, dann Stand + Pin hier aktualisieren.
 
 ## Adoptierte Konventions-Quellen
 
