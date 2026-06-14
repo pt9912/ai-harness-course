@@ -1,6 +1,8 @@
-# Stabiler, login-freier Download für lab/templates: bei einem Tag
-# `templates-v*` wird das ZIP gebaut und als Release-Asset angehängt.
-# Permanente URL: …/releases/latest/download/lab-templates.zip
+# Stabiler, login-freier Download für lab/templates und das Agents-Regelwerk:
+# bei einem Tag `templates-v*` werden das ZIP und eine self-contained
+# `agents-regelwerk.md` (interne Links auf den Tag gepinnt) als Release-Assets
+# angehängt. Permanente URLs: …/releases/latest/download/lab-templates.zip
+# bzw. …/releases/latest/download/agents-regelwerk.md
 # (Ergänzung zum Actions-Artifact aus templates-zip.yml, das pro
 # Änderung auf main eine Vorschau liefert, aber Login erfordert und
 # nach 90 Tagen verfällt.)
@@ -24,11 +26,15 @@ jobs:
         run: |
           cd lab/templates
           zip -r "$GITHUB_WORKSPACE/lab-templates.zip" .
-      - name: Release anlegen, ZIP anhängen
+      - name: Agents-Regelwerk als self-contained Asset rewriten (Links auf den Tag pinnen)
+        run: |
+          cp kurs/de/agents-regelwerk.md "$GITHUB_WORKSPACE/agents-regelwerk.md"
+          python3 tools/rewrite-doc-links.py "$GITHUB_WORKSPACE/agents-regelwerk.md" kurs/de "$GITHUB_REF_NAME" .
+      - name: Release anlegen, Assets anhängen
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" lab-templates.zip \
+          gh release create "$GITHUB_REF_NAME" lab-templates.zip agents-regelwerk.md \
             --verify-tag \
             --title "Templates $GITHUB_REF_NAME" \
-            --notes "ZIP-Stand von \`lab/templates\` beim Tag \`$GITHUB_REF_NAME\`."
+            --notes "ZIP-Stand von \`lab/templates\` plus self-contained \`agents-regelwerk.md\` (interne Verweise auf \`$GITHUB_REF_NAME\` gepinnt) beim Tag \`$GITHUB_REF_NAME\`."

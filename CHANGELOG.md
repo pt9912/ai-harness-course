@@ -29,6 +29,14 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   `conventions.md` §Baseline; erkennt Upstream-Drift unabhängig vom
   `Stand:`-Marker (vgl. §„Nachweis über Inhalt, nicht Diff"). Kein
   `gates`-Glied — CI/periodisch, braucht die externe Quelle.
+- **Regelwerk self-contained ausgeliefert** — `tools/rewrite-doc-links.py`
+  schreibt die repo-internen Links der adoptierten `agents-regelwerk.md`
+  beim Release auf absolute `blob/<tag>`-URLs um (fence- und
+  existenz-gegated: illustrative Adopter-Pfade bleiben relativ). Das
+  Regelwerk geht als eigenes Release-Asset neben `lab-templates.zip` raus
+  (`releases/latest/download/agents-regelwerk.md`); `AGENTS.template`
+  zeigt dorthin statt auf Raw-`main`. Quelle bleibt relativ (kein
+  Stand-Bump). Behebt tote Verweise beim Kopieren/Cachen in fremde Repos.
 
 ### Geändert
 
