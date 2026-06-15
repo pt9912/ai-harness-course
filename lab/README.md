@@ -6,6 +6,7 @@ Dieses Verzeichnis ist das **Begleit-Lab** zum Kurs unter
 1. **Templates** (`templates/`): leere Skelett-Vorlagen mit Pflicht-Gliederung für alle Dokumenttypen des Kurses (Spec, ADR, Slice, Welle, Roadmap, Carveout, AGENTS.md, `harness/README.md`).
 2. **Beispiel** (`example/`): ein voll ausgefülltes Beispiel-Repo mit konsistenten IDs, mindestens einem geschlossenen Slice, geführten Übungsfixtures, einem fingierten kaputten Slice für [Modul 10](../kurs/de/04-qualitaet/modul-10-review-harness.md), einem Replay-Beispiel für [Modul 12](../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md), Trace- und Runbook-Fixtures für Phase 5.
 3. **Sprach-Skelette** (`example/{go,python,kotlin,java,csharp,cpp}/`, kommen in Phase C): sechs lauffähige Implementierungs-Skelette mit eigener Toolchain (Linter, Typecheck, Architekturtest, Coverage, Container) und einheitlichem `make gates`-Vertrag.
+4. **Regelwerk** (`regelwerk/`): die 17 Module (0–16) des [Agents-Regelwerks](../kurs/de/agents-regelwerk.md) als einzelne Dateien — wortgleicher Modultext, damit ein Agent ein einzelnes Modul laden kann, ohne das ganze Regelwerk im Kontext zu halten. Derivative Sicht; maßgeblich bleibt die Quelle. Index: [`regelwerk/`](regelwerk/README.md).
 
 ## Lernweg
 
@@ -33,6 +34,10 @@ lab/
 │   │   └── carveouts/carveout.template.md
 │   ├── harness/README.template.md
 │   └── AGENTS.template.md
+│
+├── regelwerk/                 agents-regelwerk.md, nach Modulen aufgeteilt
+│   ├── README.md                  Index der 17 Module (0–16)
+│   └── modul-00…16-*.md           je ein Modul (0–16), wortgleich zur Quelle
 │
 └── example/                   voll ausgefülltes Beispiel-Repo
     ├── Makefile                  Root-Harness-Targets für Module 8, 10, 11, 14, 15

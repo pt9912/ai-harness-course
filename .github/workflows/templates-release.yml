@@ -1,5 +1,5 @@
 # Stabiler, login-freier Download für lab/templates und das Agents-Regelwerk:
-# bei einem Tag `templates-v*` werden das ZIP und eine self-contained
+# bei einem Release-Tag (`vX.Y.Z`, historisch `templates-v*`) werden das ZIP und eine self-contained
 # `agents-regelwerk.md` (interne Links auf den Tag gepinnt) als Release-Assets
 # angehängt. Permanente URLs: …/releases/latest/download/lab-templates.zip
 # bzw. …/releases/latest/download/agents-regelwerk.md
@@ -10,7 +10,7 @@ name: templates-release
 
 on:
   push:
-    tags: ["templates-v*"]
+    tags: ["v[0-9]*", "templates-v*"]
 
 permissions:
   contents: write
@@ -36,5 +36,5 @@ jobs:
         run: |
           gh release create "$GITHUB_REF_NAME" lab-templates.zip agents-regelwerk.md \
             --verify-tag \
-            --title "Templates $GITHUB_REF_NAME" \
+            --title "Release $GITHUB_REF_NAME" \
             --notes "ZIP-Stand von \`lab/templates\` plus self-contained \`agents-regelwerk.md\` (interne Verweise auf \`$GITHUB_REF_NAME\` gepinnt) beim Tag \`$GITHUB_REF_NAME\`."

@@ -11,6 +11,30 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 20 — 2026-06-15 · Regelwerk per Modul + SemVer-Release-Tags
+
+### Neu
+
+- **Regelwerk per Modul** in [`lab/regelwerk/`](lab/regelwerk/) — die 17
+  Module (0–16) aus [`agents-regelwerk.md`](kurs/de/agents-regelwerk.md) als
+  einzelne Dateien (Kurs-Slugs, wortgleicher Modultext, kein Zusatz-Kopf), plus
+  [`README.md`](lab/regelwerk/README.md) als nach Phasen gruppierter Index. Die
+  Quelle bleibt unberührt (kein Stand-Bump); ein Agent kann so ein einzelnes
+  Modul laden, ohne das ganze Regelwerk im Kontext zu halten. Interne Verweise
+  via `tools/rewrite-doc-links.py` absolut auf `blob/v1.0.0` gepinnt
+  (standalone-tauglich; zwei Cross-Modul-Anker auf die Schwester-Splits gebogen).
+
+### Geändert
+
+- **Release-Tags auf SemVer** — Schema von `templates-v*` auf `vX.Y.Z` (erstes
+  `v1.0.0`). Der `templates-release.yml`-Trigger akzeptiert beide
+  (`v[0-9]*` und `templates-v*`, abwärtskompatibel); die Release-Bedingung in
+  `rewrite-template-links.sh` ist jetzt prefix-agnostisch (`ref != main`) und
+  überlebt künftige Tag-Umbenennungen. Kopf-Kommentar in
+  `rewrite-doc-links.py` aufs neue Schema nachgezogen.
+- **[`lab/README.md`](lab/README.md)** — `regelwerk/` in Intro-Liste und
+  Aufbau-Baum ergänzt (Doku-Drift behoben).
+
 ## Welle 19 — 2026-06-14 · C++/CMake-Skelett + Regelwerk-Drift-Sensor
 
 ### Neu

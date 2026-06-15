@@ -6,7 +6,8 @@
 # sie das Kopieren ins Ziel-Repo überstehen (Defekt 1 des lab-templates-Reports).
 #
 # Aufruf: rewrite-template-links.sh <ziel-verzeichnis> <git-ref>
-#   <git-ref> = Tag (templates-v*) im Release-Workflow, sonst "main" (Vorschau).
+#   <git-ref> = Release-Tag (vX.Y.Z, hist. templates-v*) im Release-Workflow,
+#               sonst "main" (Vorschau).
 set -euo pipefail
 
 dir="${1:?Ziel-Verzeichnis fehlt}"
@@ -23,7 +24,7 @@ find "$dir" -name '*.md' -print0 | while IFS= read -r -d '' f; do
   # ausgelieferte Stand reproduzierbar ist. Nur in *.template.md — die README
   # behält bewusst den stabilen latest-Link ("Stabiler Link" in §Download).
   # Im Vorschau-Build (ref=main) bleibt alles.
-  if [[ "$ref" == templates-v* && "$f" == *.template.md ]]; then
+  if [[ "$ref" != main && "$f" == *.template.md ]]; then
     sed -E -i \
       "s#releases/latest/download/(lab-templates\\.zip|agents-regelwerk\\.md)#releases/download/${ref}/\\1#g" \
       "$f"

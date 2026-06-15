@@ -17,7 +17,7 @@
 #   <datei>             die (Staging-)Kopie, die in-place umgeschrieben wird
 #   <quell-verzeichnis> repo-relative Heimat der Datei (z. B. kurs/de) —
 #                       Basis fuer die Aufloesung relativer Links
-#   <ref>               Tag (templates-v*) im Release, sonst "main" (Vorschau)
+#   <ref>               Release-Tag (vX.Y.Z), sonst "main" (Vorschau)
 #   [repo-root]         Wurzel fuer die Existenzpruefung (Default: .)
 from __future__ import annotations
 
