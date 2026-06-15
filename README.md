@@ -84,13 +84,15 @@ Der Kurs ist nicht nur Lernmaterial — sein Prozess lässt sich in ein
 beliebiges Repo adoptieren, ohne Installation:
 
 1. **Betriebsregelwerk** für Code-Agenten als login-freies, self-contained
-   Release-Asset (interne Verweise auf den Tag `templates-v*` gepinnt):
+   Release-Asset (interne Verweise auf den Release-Tag gepinnt):
    <https://github.com/pt9912/ai-harness-course/releases/latest/download/agents-regelwerk.md>
    — in-repo: [`kurs/de/agents-regelwerk.md`](kurs/de/agents-regelwerk.md) (oben beschrieben).
+   Pro Modul aufgeteilt als self-navigierbares Bundle:
+   <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>.
 2. **Templates** (Skelette für Lastenheft, Spec, ADR, Slice, …) als
    login-freies ZIP:
    <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>
-   — der ausgelieferte Stand ist auf seinen Tag (`templates-v*`) gepinnt.
+   — der ausgelieferte Stand ist auf seinen Release-Tag gepinnt.
 3. **Schritte**: [`lab/templates/README.md`](lab/templates/README.md)
    §Verwendung (kopieren, `<Platzhalter>` ersetzen, Hinweis-Block strippen,
    d-check:ignore-Marker behalten).

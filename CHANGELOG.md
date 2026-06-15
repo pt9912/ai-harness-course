@@ -33,7 +33,9 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   (`v[0-9]*` und `templates-v*`, abwärtskompatibel); die Release-Bedingung in
   `rewrite-template-links.sh` ist jetzt prefix-agnostisch (`ref != main`) und
   überlebt künftige Tag-Umbenennungen. Kopf-Kommentar in
-  `rewrite-doc-links.py` aufs neue Schema nachgezogen.
+  `rewrite-doc-links.py` aufs neue Schema nachgezogen. Adopter-Doku
+  (Root-`README.md`, `lab/templates` §Download) auf das Schema und die drei
+  Release-Assets (inkl. `lab-regelwerk.zip`) aktualisiert.
 - **[`lab/README.md`](lab/README.md)** — `regelwerk/` in Intro-Liste und
   Aufbau-Baum ergänzt (Doku-Drift behoben).
 - **`templates-release.yml`** liefert zusätzlich `lab-regelwerk.zip` (17 Module

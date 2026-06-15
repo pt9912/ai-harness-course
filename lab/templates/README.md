@@ -27,11 +27,13 @@ unabhängig davon, ob dein Repo Go, Python, Kotlin, Java oder C# nutzt.
 ## Download als ZIP
 
 **Stabiler Link (kein Login nötig):** der Workflow `templates-release`
-hängt bei jedem Tag `templates-v*` zwei Release-Assets an:
+hängt bei jedem Release-Tag drei Release-Assets an:
 
 > Templates-ZIP: <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>
 >
 > Regelwerk (self-contained, interne Verweise auf den Tag gepinnt): <https://github.com/pt9912/ai-harness-course/releases/latest/download/agents-regelwerk.md>
+>
+> Regelwerk pro Modul (ZIP, self-navigierbares Bundle): <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
 
 Zusätzlich lädt der Workflow `templates-zip` diesen Ordner (Artifact
 `lab-templates`) und das Regelwerk (Artifact `agents-regelwerk`) bei jeder
