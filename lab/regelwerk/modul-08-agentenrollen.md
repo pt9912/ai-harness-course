@@ -1,6 +1,6 @@
 ## Modul 8 — Agentenrollen
 
-*Quelle: [03-agenten/modul-08-agentenrollen.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/03-agenten/modul-08-agentenrollen.md)*
+*Quelle: [03-agenten/modul-08-agentenrollen.md](../../kurs/de/03-agenten/modul-08-agentenrollen.md)*
 
 ### Kernidee (Modul 8)
 
@@ -179,8 +179,8 @@ LOW/INFO-Findings ist die Sequenz Overkill — Implementer akzeptiert
 oder begründet, Reviewer schließt das Finding. Die Sequenz greift ab
 *HIGH*-Findings mit Rollen-Widerspruch oder ab dem dritten Mal, dass
 derselbe Konflikttyp auftritt. Dreimal derselbe Konflikt ist ein
-Steering-Loop-Signal (siehe [`reflexion-vorlage.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/reflexion-vorlage.md#wann-darf-eine-reflexion-nicht-zu-einer-harness-änderung-führen)):
-die Sequenz wird *Pflicht* im 8-Schritt-Workflow ([Modul 9](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/regelwerk/modul-09-implementierung.md#minimal-agent-workflow-8-schritte)).
+Steering-Loop-Signal (siehe [`reflexion-vorlage.md`](../../kurs/de/grundlagen/reflexion-vorlage.md#wann-darf-eine-reflexion-nicht-zu-einer-harness-änderung-führen)):
+die Sequenz wird *Pflicht* im 8-Schritt-Workflow ([Modul 9](modul-09-implementierung.md#minimal-agent-workflow-8-schritte)).
 
 Sieben Schritte, eine Sequenz, sechs benannte Übergaben. Der Test, ob
 die Modellierung trägt: der nächste Konflikt durchläuft die Pfeile

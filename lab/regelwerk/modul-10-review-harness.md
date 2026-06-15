@@ -1,6 +1,6 @@
 ## Modul 10 — Review Harness
 
-*Quelle: [04-qualitaet/modul-10-review-harness.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-10-review-harness.md)*
+*Quelle: [04-qualitaet/modul-10-review-harness.md](../../kurs/de/04-qualitaet/modul-10-review-harness.md)*
 
 ### Drei Review-Arten — wogegen wird geprüft
 
@@ -32,7 +32,7 @@ Code-Review kostet den ganzen Implementierungs-Lauf.
 ### Harness-Einordnung (Modul 10)
 
 Review = *inferential feedback* (siehe
-[`grundlagen/klassifikation.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/klassifikation.md)).
+[`grundlagen/klassifikation.md`](../../kurs/de/grundlagen/klassifikation.md)).
 Teurer als ein Linter, billiger als Verifikation. Adressiert primär die
 Maintainability-Kategorie.
 
@@ -159,7 +159,7 @@ Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
 
 Sechs Schritte, eine reproduzierbare Reviewer-Rolle. Vergleichbares
 Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
-[Modul 8 §"Konfliktfall"](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/03-agenten/modul-08-agentenrollen.md).
+[Modul 8 §"Konfliktfall"](../../kurs/de/03-agenten/modul-08-agentenrollen.md).
 
 ### Reviewer berichtet auch, was er nicht gefunden hat
 
@@ -176,7 +176,7 @@ Das Dokument-Gerüst für den **ganzen Report** — Kopf-Metadaten
 (Review-Art, Gegenstand, Skill-Version, Modell, Eingangs-Kontext),
 Findings nach Output-Schema, Negativbefunde, Kategorie-Summary,
 Verdikt — liefert
-[`review-report.template.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/templates/docs/reviews/review-report.template.md);
+[`review-report.template.md`](../templates/docs/reviews/review-report.template.md);
 abgelegt wird ein Report pro Lauf unter `docs/reviews/`, Folgeläufe
 als neue Datei statt Überschreibung.
 

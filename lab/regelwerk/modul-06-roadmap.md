@@ -1,6 +1,6 @@
 ## Modul 6 — Roadmap Engineering
 
-*Quelle: [02-planung/modul-06-roadmap.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/02-planung/modul-06-roadmap.md)*
+*Quelle: [02-planung/modul-06-roadmap.md](../../kurs/de/02-planung/modul-06-roadmap.md)*
 
 ### Kernidee (Modul 6)
 
@@ -57,7 +57,7 @@ Roadmap-Tabelle ein expliziter Eintrag in der `Trigger`-Spalte.
 **Schritt 4 — Welle-Eintrag mit den drei Pflicht-Bestandteilen
 schreiben.** Closure-Kriterien · Slice-IDs · Abhängigkeits-Trigger.
 Vorbild aus dem Lab
-([`roadmap.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/docs/plan/planning/in-progress/roadmap.md)):
+([`roadmap.md`](../example/docs/plan/planning/in-progress/roadmap.md)):
 
 ```markdown
 ## Aktuelle Welle
@@ -131,7 +131,7 @@ slice-019 noch nicht grün. Drei mögliche Antworten:
 
 *Eine Roadmap ist nicht "wann?", sondern "in welcher Reihenfolge
 wovon?"*. Vergleich:
-[`roadmap.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/docs/plan/planning/in-progress/roadmap.md).
+[`roadmap.md`](../example/docs/plan/planning/in-progress/roadmap.md).
 
 ### Regeln gegen typische Fehlannahmen (Modul 6)
 

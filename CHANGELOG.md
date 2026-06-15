@@ -20,9 +20,11 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   einzelne Dateien (Kurs-Slugs, wortgleicher Modultext, kein Zusatz-Kopf), plus
   [`README.md`](lab/regelwerk/README.md) als nach Phasen gruppierter Index. Die
   Quelle bleibt unberührt (kein Stand-Bump); ein Agent kann so ein einzelnes
-  Modul laden, ohne das ganze Regelwerk im Kontext zu halten. Interne Verweise
-  via `tools/rewrite-doc-links.py` absolut auf `blob/v1.0.0` gepinnt
-  (standalone-tauglich; zwei Cross-Modul-Anker auf die Schwester-Splits gebogen).
+  Modul laden, ohne das ganze Regelwerk im Kontext zu halten. Verweise bleiben
+  in-repo relativ (gate-validiert, lokal navigierbar); beim Release pinnt
+  `tools/rewrite-doc-links.py --keep-within-src` fürs `lab-regelwerk.zip`-Asset
+  nur die Außen-Verweise (Kurs/Templates/Beispiel) auf den Tag — die
+  Modul-Querverweise bleiben relativ, das Bundle ist self-navigierbar.
 
 ### Geändert
 

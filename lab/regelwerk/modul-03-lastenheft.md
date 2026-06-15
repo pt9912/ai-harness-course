@@ -1,11 +1,11 @@
 ## Modul 3 — Lastenheft und Spezifikation
 
-*Quelle: [01-spec-und-architektur/modul-03-lastenheft.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-03-lastenheft.md)*
+*Quelle: [01-spec-und-architektur/modul-03-lastenheft.md](../../kurs/de/01-spec-und-architektur/modul-03-lastenheft.md)*
 
 ### Harness-Einordnung (Modul 3)
 
 Spec = *inferential feedforward* (siehe
-[`grundlagen/klassifikation.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/klassifikation.md)).
+[`grundlagen/klassifikation.md`](../../kurs/de/grundlagen/klassifikation.md)).
 Sie ist die billigste Kontrolle: Was die Spec sauber ausschließt, kommt
 im Review nicht mehr vor.
 
@@ -20,7 +20,7 @@ steht, wird auf die für dich ungünstigste Weise interpretiert.
 *Buchstabentreue*. Anders als ein echter Praktikant **vergisst** der
 Agent zwischen den Aufgaben — was nicht im Kontext steht, war für ihn
 nie da (siehe Glossar in
-[`grundlagen/konventionen.md#kernbegriffe`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#kernbegriffe):
+[`grundlagen/konventionen.md#kernbegriffe`](../../kurs/de/grundlagen/konventionen.md#kernbegriffe):
 LLM ist *stateless*). Wer die Metapher zu weit treibt, erwartet
 "Mitlernen" — und plant Reviews, als würden sie *einmal* erklärt
 ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
@@ -63,7 +63,7 @@ ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
 > Out-of-Scope (LH-FA-CFG-001): Schreiboperationen, Migration zwischen Versionen, Verschlüsselung.
 
 Sechs Schritte, ein vollständig prüfbares Akzeptanzkriterium. Vergleich
-mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/spec/lastenheft.md).
+mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../example/spec/lastenheft.md).
 
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 
@@ -78,6 +78,6 @@ nie direkt die DB" in die Architektur). Formuliere zum Schluss die
 auftaucht (Lastenheft sticht Spezifikation sticht Architektur — die
 untere Schicht darf *präzisieren*, nie *erweitern*)? Vorbild:
 Spec-Stratifizierung in `c-hsm-doc`
-([`grundlagen/fallstudien.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/fallstudien.md)).
-Vorlagen: [`spec/`-Templates](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/templates/spec/).
+([`grundlagen/fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md)).
+Vorlagen: [`spec/`-Templates](../templates/spec/).
 

@@ -1,11 +1,11 @@
 ## Modul 13 — Quality Gates
 
-*Quelle: [04-qualitaet/modul-13-quality-gates.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-13-quality-gates.md)*
+*Quelle: [04-qualitaet/modul-13-quality-gates.md](../../kurs/de/04-qualitaet/modul-13-quality-gates.md)*
 
 ### Harness-Einordnung (Modul 13)
 
 Gates = *computational feedback* (siehe
-[`grundlagen/klassifikation.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/klassifikation.md)).
+[`grundlagen/klassifikation.md`](../../kurs/de/grundlagen/klassifikation.md)).
 Schnellste und billigste Sensoren des Harness. Was hier prüfbar wird,
 muss nicht mehr im Review-Agent landen — das ist die wichtigste
 Einsparung im gesamten System.
@@ -28,8 +28,8 @@ Steering Loop läuft leer. Die Zuordnung in Kurzform:
 | Typecheck | Typgrenzen-Verstoß: falsche Signatur, `None` am falschen Ort | Vertrauensgrenzen — `str` bleibt `str`, ob nutzerkontrolliert oder nicht |
 | Architekturtest | Struktur-/Import-Regel: Layer-Bruch, Domäne importiert Infrastruktur | Verhalten zur Laufzeit, lokale Muster |
 | Security-Gate | Datenfluss-Befund: SQL-Injection, Secret-/Entropie-Treffer | Architektur-Schnitt, Coverage-Lücken |
-| Coverage / Critical Coverage | Coverage-Loch — gesamt bzw. auf dem kritischen Pfad | Qualität der Tests, Spec-Lücken ([Modul 11](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-11-verification.md)) |
-| Replay-/Determinism-Gate | nicht-deterministischer Test oder Lauf | semantische Drift außerhalb des Golden Sets ([Modul 12](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)) |
+| Coverage / Critical Coverage | Coverage-Loch — gesamt bzw. auf dem kritischen Pfad | Qualität der Tests, Spec-Lücken ([Modul 11](../../kurs/de/04-qualitaet/modul-11-verification.md)) |
+| Replay-/Determinism-Gate | nicht-deterministischer Test oder Lauf | semantische Drift außerhalb des Golden Sets ([Modul 12](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)) |
 | Integrationstest | Verhalten im Zusammenspiel: Komponenten-Vertrag bricht erst in Kombination | lokale Muster und Typgrenzen — dafür zu teuer und zu spät |
 
 Trennlinie ist die *Regel-Klasse*, nicht das Tool: Linter machen lokale
@@ -42,12 +42,12 @@ Zusammenspiel.
 In `harness/README.md` und in jeder Doku, die Gates aufzählt: keine
 Befehle behaupten, die es nicht gibt. Wenn `make fullbuild` strukturell
 rot ist, wird das als Carveout in `docs/plan/carveouts/CO-<NNN>-…`
-dokumentiert ([Modul 7](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/02-planung/modul-07-carveouts.md)) und in
+dokumentiert ([Modul 7](../../kurs/de/02-planung/modul-07-carveouts.md)) und in
 der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt — nicht
 ausgelassen, nicht geschönt, nicht in einer Status-Spalte versteckt
 (die Sensors-Tabelle trägt keinen Lauf-Status; Lauf-Wahrheit pro Commit
 liegt in CI, siehe
-[`grundlagen/konventionen.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt)).
+[`grundlagen/konventionen.md`](../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt)).
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
 Implementation-Agent vertraut ihnen.
 
@@ -73,16 +73,16 @@ drei legitimen Antworten auf gelockerte Gate-Disziplin neben
 *Carveout* (punktuelle Ausnahme mit Folge-Slice) und
 *BF-Sub-Area-Markierung* (Sub-Area-weiter Übergangs-Modus mit
 Graduation-Plan, Konzept in
-[Modul 2 §Kernidee](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)).
+[Modul 2 §Kernidee](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)).
 **Die BF-Sub-Area-Markierung ist nicht selbst ein Closure-Werkzeug**,
 sondern der Sub-Area-Kontext, in dem Carveout und Bootstrap-aware
 Gate als Closure-Antworten strukturell legitim werden —
 Disambiguierung in
-[Modul 7 §Worked Example A Schritt 6](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
+[Modul 7 §Worked Example A Schritt 6](../../kurs/de/02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
 
 **Begriffsklärung:** *Bootstrap-aware Gate* (oben) ist nicht zu
 verwechseln mit *Harness-Bootstrap* aus
-[`grundlagen/konventionen.md` §Harness-Bootstrap](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#harness-bootstrap).
+[`grundlagen/konventionen.md` §Harness-Bootstrap](../../kurs/de/grundlagen/konventionen.md#harness-bootstrap).
 Letzteres ist der **Repo-Einstiegsprozess** (Lebenszyklus eines Harness
 im Repo); ersteres ist die **Reifestufe eines einzelnen Sensors**.
 Beide Begriffe teilen das Wort, sind strukturell verschieden.
@@ -90,7 +90,7 @@ Beide Begriffe teilen das Wort, sind strukturell verschieden.
 ### Reichhaltige Gate-Landschaft als Inspiration
 
 Ein reifes Repo (Beispiel `pt9912/grid-gym`, siehe
-[`grundlagen/fallstudien.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/fallstudien.md)) hat
+[`grundlagen/fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md)) hat
 deutlich mehr als sechs Gates:
 
 ```
@@ -114,7 +114,7 @@ nicht hat — `solid-suppression-gate` (C#-Pendant zum noqa-gate),
 `test-mpc-property` (Property-Based-Sensor für Regelungstechnik),
 `native-sanitizer` (für C/C++-Interop-Anteile), `test-hil-*`
 (Hardware-in-the-Loop). Voll ausgeschrieben in
-[`grundlagen/fallstudien.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/fallstudien.md).
+[`grundlagen/fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md).
 
 Pro Sprache wachsen also unterschiedliche Gate-Familien.
 
@@ -124,11 +124,11 @@ Pro Sprache wachsen also unterschiedliche Gate-Familien.
 - Dann ist es kein Gate, sondern ein Vorschlag. Pragmatik gehört in Carveouts oder bootstrap-aware Gates — mit Trigger und Folge-Slice.
 - Es gibt keine universelle Schwelle. Critical Coverage (Security, Geld, Datenintegrität) ≠ Gesamt-Coverage. Schwellen sind ADR-pflichtig.
 - Nur wenn lokal und CI dasselbe Image benutzen (Modul 14). Sonst debuggst du den Unterschied.
-- Falsch in zwei Richtungen. Erstens: 80 % Gesamt-Coverage über *unkritischem* Code verbirgt 0 % Coverage auf dem Sicherheitspfad — Critical Coverage misst *gezielt*. Zweitens: Tests gegen Beispiele decken nur Realität ab, *wo das Golden Set repräsentativ ist* ([Modul 12](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)); Tests gegen die *Spec* erschließt Verifikation ([Modul 11](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-11-verification.md)). Wer Test-Anzahl als Qualitätsmaß nimmt, baut Coverage-Anstiege, deren Wert auf 0 fällt, sobald die Realität die Coverage-Annahme bricht. Faustregel: *Verteilung vor Anzahl*. Ein zusätzlicher Test gegen einen bereits gut abgedeckten Pfad ist Boilerplate; ein zusätzlicher Test gegen einen *bisher unabgedeckten kritischen* Pfad ist Sensor.
+- Falsch in zwei Richtungen. Erstens: 80 % Gesamt-Coverage über *unkritischem* Code verbirgt 0 % Coverage auf dem Sicherheitspfad — Critical Coverage misst *gezielt*. Zweitens: Tests gegen Beispiele decken nur Realität ab, *wo das Golden Set repräsentativ ist* ([Modul 12](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)); Tests gegen die *Spec* erschließt Verifikation ([Modul 11](../../kurs/de/04-qualitaet/modul-11-verification.md)). Wer Test-Anzahl als Qualitätsmaß nimmt, baut Coverage-Anstiege, deren Wert auf 0 fällt, sobald die Realität die Coverage-Annahme bricht. Faustregel: *Verteilung vor Anzahl*. Ein zusätzlicher Test gegen einen bereits gut abgedeckten Pfad ist Boilerplate; ein zusätzlicher Test gegen einen *bisher unabgedeckten kritischen* Pfad ist Sensor.
 
 ### Worked Example: vom ADR-Satz zur Fitness Function
 
-**Ausgangs-ADR:** ADR-0007 (siehe Worked Example in [Modul 4](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md#worked-example-vom-diskussionsfaden-zum-prüfbaren-adr)) sagt:
+**Ausgangs-ADR:** ADR-0007 (siehe Worked Example in [Modul 4](../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md#worked-example-vom-diskussionsfaden-zum-prüfbaren-adr)) sagt:
 
 > "Service-Layer importiert ausschließlich aus `adapter/`-Paket."
 

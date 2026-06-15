@@ -1,6 +1,6 @@
 ## Modul 9 — Implementierung durch KI-Agenten
 
-*Quelle: [03-agenten/modul-09-implementierung.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/03-agenten/modul-09-implementierung.md)*
+*Quelle: [03-agenten/modul-09-implementierung.md](../../kurs/de/03-agenten/modul-09-implementierung.md)*
 
 ### Kernidee (Modul 9)
 
@@ -68,7 +68,7 @@ gelesen.
 Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 *Falsch/Richtig*-Beispiele **und** eine *technische Begründung*.
 Beispiele aus realen Repos (siehe
-[`fallstudien.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/fallstudien.md)):
+[`fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md)):
 
 * **Docker-only** (grid-gym): kein lokales `.venv`, kein `pip install` außerhalb von Dockerfile-Stages.
   *Falsch:* `uv run python tools/foo.py`.
@@ -113,7 +113,7 @@ Reflex "mehr Kontext rein" gerne überliest:
 - **Token-Kosten.** Jedes Token im Eingangskontext wird abgerechnet —
   pro Lauf, pro Tool-Call, pro Replay. Ein 30-zeiliger irrelevanter
   Block, der in 1500 PRs mitläuft (siehe Lopopolos empirischer Beleg in
-  [`quellen.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/abschluss/quellen.md)), ist eine
+  [`quellen.md`](../../kurs/de/abschluss/quellen.md)), ist eine
   Rechnung mit vier Stellen vor dem Komma.
 
 Folge: Context Engineering ist *auch* eine Reduktions-Aufgabe.
@@ -134,7 +134,7 @@ Konkret gehört in den Lauf-Kontext:
 | Skills, die nicht zu dieser Rolle gehören |
 | ältere Carveouts, deren Auflösungs-Trigger bereits eingetreten ist |
 
-Die Verdichtungs-Sensoren dafür sind in [Modul 15](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/05-betrieb/modul-15-observability.md):
+Die Verdichtungs-Sensoren dafür sind in [Modul 15](../../kurs/de/05-betrieb/modul-15-observability.md):
 Token-Eingabe-Metrik pro Slice, Cache-Hit-Rate (siehe Mini-Glossar in
 Modul 15), und der **Doku-Konsistenz-Agent** als Drift-Detektor für tote
 Kontext-Stücke.

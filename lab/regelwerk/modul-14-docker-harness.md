@@ -1,6 +1,6 @@
 ## Modul 14 — Docker Harness
 
-*Quelle: [05-betrieb/modul-14-docker-harness.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/05-betrieb/modul-14-docker-harness.md)*
+*Quelle: [05-betrieb/modul-14-docker-harness.md](../../kurs/de/05-betrieb/modul-14-docker-harness.md)*
 
 ### Kernidee (Modul 14)
 
@@ -13,7 +13,7 @@ Unterschied, nicht den Bug.
 - **"Lock-Files sind nur für Python."** — Lock-Files gibt es für jede Sprache: `package-lock.json`, `go.sum`, `Cargo.lock`, `packages.lock.json` (mit Central Package Management, siehe `bess-ems`), `pnpm-lock.yaml`, `poetry.lock`. Wer ohne Lock-File baut, baut nicht reproduzierbar.
 - **"Docker-only ist Overkill für Tools."** — Tools driften am schnellsten. Genau dort lohnt Docker am meisten.
 - **"Devcontainer ersetzt Compose."** — Nein. Devcontainer ist für *Entwickler-IDE-Setup*, Compose für *Lauf- und CI-Vertrag*. Sie ergänzen sich.
-- **"DevOps ist YAML schreiben — Container = Deployment."** — Verbreitet, weil Container historisch über die Deployment-Seite eingeführt wurden. In diesem Kurs ist der primäre Zweck eines Containers ein anderer: er ist **Reproduzierbarkeits-Anker** — derselbe Image-Hash garantiert dieselbe Toolchain auf jeder Maschine, im CI und in sechs Monaten. Deployment ist *eine* Anwendung dieses Ankers, nicht sein Hauptzweck. Bei einem Replay-Lauf gegen ein altes Golden Set ([Modul 12](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)) brauchst du den *Image-Hash von damals*, nicht das aktuelle Deployment. Wer das Bild "Container = Auslieferung" pflegt, hat keinen Hebel für *time-travel reproducibility* — und damit kein belastbares Replay.
+- **"DevOps ist YAML schreiben — Container = Deployment."** — Verbreitet, weil Container historisch über die Deployment-Seite eingeführt wurden. In diesem Kurs ist der primäre Zweck eines Containers ein anderer: er ist **Reproduzierbarkeits-Anker** — derselbe Image-Hash garantiert dieselbe Toolchain auf jeder Maschine, im CI und in sechs Monaten. Deployment ist *eine* Anwendung dieses Ankers, nicht sein Hauptzweck. Bei einem Replay-Lauf gegen ein altes Golden Set ([Modul 12](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)) brauchst du den *Image-Hash von damals*, nicht das aktuelle Deployment. Wer das Bild "Container = Auslieferung" pflegt, hat keinen Hebel für *time-travel reproducibility* — und damit kein belastbares Replay.
 
 ### Worked Example: vom einstufigen Dockerfile zur reproduzierbaren Multi-Stage-Pipeline
 
@@ -101,7 +101,7 @@ gelinkte JVM-AOT) ist die noch härtere Variante
 `gcr.io/distroless/static-debian12:nonroot@sha256:d093aa3e…` (auch
 Distroless-Tags floaten — deshalb per Digest gepinnt) ohne
 interpretierbares Runtime — siehe
-[`../../lab/example/go/Dockerfile`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/go/Dockerfile)
+[`../../lab/example/go/Dockerfile`](../example/go/Dockerfile)
 als Vorbild.
 
 **Schritt 5 — Image-Hash im Build-Output festhalten.** Damit das Image
@@ -121,7 +121,7 @@ build:  ## LH-QA-03 — reproduzierbarer Build, Image-Hash erfasst
 `build-metadata.json` enthält den exakten Manifest-Digest. Die
 `harness/image-hash.txt` ist ein einzeiliges Beleg-Artefakt, das in
 `harness/README.md` referenziert wird (siehe Vorlage in
-[`/lab/templates/harness/README.template.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/templates/harness/README.template.md)).
+[`/lab/templates/harness/README.template.md`](../templates/harness/README.template.md)).
 Ohne diesen Schritt ist das Replay-Manifest in Modul 12 zur Hälfte
 blind — der `image_hash`-Slot bleibt unbelegt.
 
@@ -137,9 +137,9 @@ Wirkung:
 
 Sechs Schritte, ein Image, drei Drift-Anker (Digest · Lock-File ·
 Stage-Trennung). Vergleich:
-[`../../lab/example/python/Dockerfile`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/python/Dockerfile)
+[`../../lab/example/python/Dockerfile`](../example/python/Dockerfile)
 und
-[`../../lab/example/go/Dockerfile`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/go/Dockerfile)
+[`../../lab/example/go/Dockerfile`](../example/go/Dockerfile)
 — beide tragen den ID-Kommentar `LH-QA-03` im Header und folgen
 demselben Drei-Stage-Schnitt mit sprach-spezifischen Anpassungen.
 

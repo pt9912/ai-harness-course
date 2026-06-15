@@ -1,11 +1,11 @@
 ## Modul 7 — Carveout Management
 
-*Quelle: [02-planung/modul-07-carveouts.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/02-planung/modul-07-carveouts.md)*
+*Quelle: [02-planung/modul-07-carveouts.md](../../kurs/de/02-planung/modul-07-carveouts.md)*
 
 ### Harness-Einordnung (Modul 7)
 
 Carveout-Pflege ist ein Pfeiler von *Entropy Management* (siehe
-[`klassifikation.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/klassifikation.md)):
+[`klassifikation.md`](../../kurs/de/grundlagen/klassifikation.md)):
 ein Carveout-Audit pro Welle verhindert, dass temporäre Ausnahmen zu
 permanenten Lügen werden.
 
@@ -30,7 +30,7 @@ noch in der Spec auf. Der bessere Weg: ein Carveout.
 **Schritt 1 — Carveout-Datei anlegen.** Konvention:
 `docs/plan/carveouts/CO-<NNN>-<kurztitel>.md`. ID läuft in `CO-*`-Reihe
 (separat von `LH-`, `ADR-`, `SL-` — siehe
-[`konventionen.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#id-schema-als-klammer)).
+[`konventionen.md`](../../kurs/de/grundlagen/konventionen.md#id-schema-als-klammer)).
 Für unseren Fall: `CO-001-index-coverage.md`.
 
 **Schritt 2 — Pflichtfelder im Frontmatter / Header festlegen.** Ein
@@ -119,7 +119,7 @@ du den Reflex, jede entdeckte Diskrepanz als Carveout zu führen):
    - *Cluster oder Muster* → **BF-Sub-Area-Markierung mit
      Graduation-Plan** als Modus-Deklaration im Adaptions-Block von
      `harness/conventions.md` (Mechanik in
-     [`konventionen.md` §Modus pro Sub-Area](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)).
+     [`konventionen.md` §Modus pro Sub-Area](../../kurs/de/grundlagen/konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)).
      Frage 2 entfällt — eine Sub-Area-weite Markierung ist eine
      andere Werkzeug-Klasse als ein punktueller Carveout.
    - *Einzelne Diskrepanz* → weiter zu Frage 2.
@@ -163,7 +163,7 @@ die drei unterscheiden (punktuell vs. Sub-Area-weit vs. dauerhaft — die
 Träger-Spalte).
 
 > **Hinweis zum Lab-Beispiel:** Das Lab unter
-> [`lab/example/docs/plan/carveouts/`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/docs/plan/carveouts/)
+> [`lab/example/docs/plan/carveouts/`](../example/docs/plan/carveouts/)
 > trägt heute nur den einzelnen `CO-001-index-coverage.md` — Frage 1
 > führt dort folglich auf den Einzeldiskrepanz-Pfad und weiter zu
 > Frage 2 (Trigger erreichbar — ja: Welle-2-Property-Tests). Ein
@@ -171,7 +171,7 @@ Träger-Spalte).
 > Boundary-Tests und Type-Coverage auf demselben `internal/index/`-
 > Pfad lägen; dann sprängen Frage 1 und Werkzeug-Wahl auf
 > BF-Sub-Area-Markierung um. Die Markierungs-Mechanik selbst ist im
-> Lab strukturell bereits vorhanden: [`lab/example/harness/conventions.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/harness/conventions.md)
+> Lab strukturell bereits vorhanden: [`lab/example/harness/conventions.md`](../example/harness/conventions.md)
 > trägt einen `## Adaptions-Block` mit `MR-000` Baseline-Aussage und
 > `MR-001` Source Precedence — die BF-Sub-Area-Markierung wäre ein
 > neuer `MR-NNN`-Eintrag im selben Block. Konkret-Format:
@@ -221,7 +221,7 @@ Wenn die Wahl im Trichter auf "permanent" fällt, ist der
 ```
 
 Das ist nicht Aufgabe; das ist Ehrlichkeit. Vergleich:
-[`CO-001-index-coverage.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/docs/plan/carveouts/CO-001-index-coverage.md).
+[`CO-001-index-coverage.md`](../example/docs/plan/carveouts/CO-001-index-coverage.md).
 
 ### Drei Werkzeuge für gelockerte Gate-Disziplin (Modul 7)
 
@@ -229,7 +229,7 @@ Das ist nicht Aufgabe; das ist Ehrlichkeit. Vergleich:
 und Auflösungs-Trigger. **BF-Sub-Area-Markierung** = Sub-Area-weiter
 Übergangs-Modus mit Graduation-Plan im Adaptions-Block von
 `harness/conventions.md` — *Sub-Area-Kontext, kein Closure-Werkzeug*
-(siehe [Modul 13 §Bootstrap-aware Gates](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)).
+(siehe [Modul 13 §Bootstrap-aware Gates](../../kurs/de/04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)).
 **Bootstrap-aware Gate** = Stufung *des Gates selbst* (z. B. 40 % heute
 → 70 % bei M2).
 
@@ -253,7 +253,7 @@ verhindern sollte.
 **Schritt 1 — Audit-Slice als ID-Reihe einplanen.** Konvention: ein
 Slice `SL-CO-AUDIT-<welle>` pro Welle-Closure, *bevor* die Welle nach
 `done/` wandert. ID-Schema-Ergänzung in
-[`konventionen.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md): Audit-Slices haben
+[`konventionen.md`](../../kurs/de/grundlagen/konventionen.md): Audit-Slices haben
 ein Präfix, das sie vom regulären Implementierungs-Slice unterscheidet
 — sie liefern *keinen Code*, nur Doku-Updates.
 
@@ -330,6 +330,6 @@ sonst ist er eine schöne Konvention, die niemand prüft.
 - **Gegen "Carveout = Workaround":** Carveout = *dokumentierter* Workaround mit Trigger. Ohne Trigger ist es eine versteckte Annahme.
 - **Gegen "Carveouts gehören ins Issue-Tracker":** Sie gehören ins Repo, neben Spec und ADRs. Tracker können vergessen werden, Repo-Files kommen mit beim Klonen.
 - **Gegen "Wenn der Trigger eintritt, lösen wir den Carveout auf":** Realität: er bleibt liegen. Deshalb braucht jeder temporäre Carveout einen *Folge-Slice mit ID*, der das Auflösen plant. Slice schlägt Memo.
-- **Gegen "Jede entdeckte Diskrepanz ist ein eigener Carveout":** Carveouts sind für **punktuelle** Ausnahmen mit Folge-Slice. Eine Diskrepanz-**Häufung** in einer Sub-Area (Symptom: mehrere Carveouts mit demselben Geltungsbereich, oder die Diskrepanz folgt aus generellem *"Code existiert vor Doku"*-Muster) gehört nicht in eine Carveout-Kaskade, sondern in eine **BF-Sub-Area-Markierung mit Graduation-Plan** (siehe [Modul 2 §Kernidee](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Maßgeblich ist das **Symptom-Muster** (gemeinsamer Geltungsbereich), nicht die Carveout-Zahl; die Wahl, welches Werkzeug bei welchem Symptom greift, leistet [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
+- **Gegen "Jede entdeckte Diskrepanz ist ein eigener Carveout":** Carveouts sind für **punktuelle** Ausnahmen mit Folge-Slice. Eine Diskrepanz-**Häufung** in einer Sub-Area (Symptom: mehrere Carveouts mit demselben Geltungsbereich, oder die Diskrepanz folgt aus generellem *"Code existiert vor Doku"*-Muster) gehört nicht in eine Carveout-Kaskade, sondern in eine **BF-Sub-Area-Markierung mit Graduation-Plan** (siehe [Modul 2 §Kernidee](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Maßgeblich ist das **Symptom-Muster** (gemeinsamer Geltungsbereich), nicht die Carveout-Zahl; die Wahl, welches Werkzeug bei welchem Symptom greift, leistet [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
 - **Gegen "Wenn Diskrepanz-Häufung BF-Markierung verlangt, ist auch jede einzelne Diskrepanz eine BF-Markierung wert":** BF-Markierung lohnt sich erst beim **Cluster im selben Geltungsbereich** oder beim systemischen *"Code existiert vor Doku"*-Muster — eine einzelne, gut abgrenzbare Diskrepanz mit klarem Folge-Slice ist und bleibt ein Carveout. Das Frage-Schema in [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren) trennt diese Fälle: Frage 1 leitet einzelne Diskrepanzen explizit auf den Carveout-/ADR-Pfad, nicht auf BF-Markierung.
 

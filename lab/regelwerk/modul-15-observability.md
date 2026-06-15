@@ -1,11 +1,11 @@
 ## Modul 15 — Observability
 
-*Quelle: [05-betrieb/modul-15-observability.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/05-betrieb/modul-15-observability.md)*
+*Quelle: [05-betrieb/modul-15-observability.md](../../kurs/de/05-betrieb/modul-15-observability.md)*
 
 ### Harness-Einordnung
 
 Observability ist Eingangs- und Ausgangskanal für *Entropy Management*
-(siehe [`grundlagen/klassifikation.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/klassifikation.md)):
+(siehe [`grundlagen/klassifikation.md`](../../kurs/de/grundlagen/klassifikation.md)):
 ohne Telemetrie weißt du nicht, wo der Harness rostet.
 
 ### Kernidee (Modul 15)
@@ -48,7 +48,7 @@ zusätzlich an `requirement.id = LH-FA-IDX-003` — der direkte Anker
 zur konkreten Anforderung.
 
 **Schritt 2 — Slice-Datei finden.**
-[`docs/plan/planning/done/slice-009-tie-break-determinismus.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/docs/plan/planning/done/slice-009-tie-break-determinismus.md).
+[`docs/plan/planning/done/slice-009-tie-break-determinismus.md`](../example/docs/plan/planning/done/slice-009-tie-break-determinismus.md).
 Die Lab-Datei trägt keine YAML-Frontmatter, sondern eine Klartext-
 Bezug-Zeile:
 ```markdown
@@ -62,7 +62,7 @@ Das ist eine *alternative Operationalisierung* zum Frontmatter-Schema
 ADRs und Anforderungen.
 
 **Schritt 3 — ADR aufrufen.**
-[`docs/plan/adr/0012-index-write-strategy.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/docs/plan/adr/0012-index-write-strategy.md).
+[`docs/plan/adr/0012-index-write-strategy.md`](../example/docs/plan/adr/0012-index-write-strategy.md).
 Kopf:
 ```markdown
 **Status:** Accepted
@@ -74,7 +74,7 @@ Atomic Rename) und referenziert dieselbe LH-ID, die der Span trägt.
 Die Kette schließt sich.
 
 **Schritt 4 — Lastenheft prüfen.**
-[`spec/lastenheft.md` § `LH-FA-IDX-003`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/spec/lastenheft.md):
+[`spec/lastenheft.md` § `LH-FA-IDX-003`](../example/spec/lastenheft.md):
 ```markdown
 ### LH-FA-IDX-003 — Index-Schreib-Idempotenz und Atomarität
 Anforderung: Index-Schreiboperationen sind idempotent (gleicher
@@ -93,7 +93,7 @@ Writer-Code; Property-Test (slice-013) vergleicht zwei aufeinander
 folgende `writer.write_index`-Hashes. Damit ist die Kette **auch
 maschinell prüfbar**: ein Commit, der den `rename`-Aufruf entfernt,
 würde `make arch-check` rot machen
-([`konventionen.md` §Traceability-Constraint](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#traceability-constraint)).
+([`konventionen.md` §Traceability-Constraint](../../kurs/de/grundlagen/konventionen.md#traceability-constraint)).
 
 **Schritt 6 — Bruchpunkt benennen.**
 Vollständige Kette:
@@ -130,7 +130,7 @@ oder einen Doku-Konsistenz-Agenten die Bezug-Zeile prüfen lassen
 > Slice-Seite wählt, ist Repo-spezifisch.
 
 Sechs Schritte, eine durchgängige Traceability. Vergleich im Lab:
-[`../../lab/example/otel/sl-009-agent-run.trace.json`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/otel/sl-009-agent-run.trace.json)
+[`../../lab/example/otel/sl-009-agent-run.trace.json`](../example/otel/sl-009-agent-run.trace.json)
 (Span `impl-2` ist der `writer.write_index`-Call mit `requirement.id`
 und `adr.id`).
 
@@ -185,10 +185,10 @@ Regel:
 | **Quelle** | welche Datei wird gelesen (z. B. `AGENTS.md` §Tool-Regeln) |
 | **Vergleichs-Ziel** | welche Datei wird dagegen geprüft (z. B. `Makefile`-Target-Namen) |
 | **Drift-Symptom** | wie sieht ein Drift-Treffer konkret aus (z. B. *"AGENTS.md nennt `make fullbuild`, Makefile kennt nur `make build`"*) |
-| **Lebenszyklus** | ist das ein Pre-commit-Check, Pre-integration, oder Continuous (vgl. [`grundlagen/klassifikation.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/klassifikation.md))? |
+| **Lebenszyklus** | ist das ein Pre-commit-Check, Pre-integration, oder Continuous (vgl. [`grundlagen/klassifikation.md`](../../kurs/de/grundlagen/klassifikation.md))? |
 
 Mindestens *eine* Regel muss die Hard Rule aus
-[Modul 13 §"Hard Rule (Doku-Disziplin)"](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)
+[Modul 13 §"Hard Rule (Doku-Disziplin)"](../../kurs/de/04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)
 durchsetzen ("keine Befehle behaupten, die es nicht gibt").
 
 **Drift-Signal und Schwelle:** Konkretes Signal: Doku-Konsistenz-Agent

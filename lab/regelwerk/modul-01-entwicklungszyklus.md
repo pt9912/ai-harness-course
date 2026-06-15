@@ -1,6 +1,6 @@
 ## Modul 1 — Der Entwicklungszyklus
 
-*Quelle: [01-spec-und-architektur/modul-01-entwicklungszyklus.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md)*
+*Quelle: [01-spec-und-architektur/modul-01-entwicklungszyklus.md](../../kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md)*
 
 ### Lebenszyklus als Diagramm
 
@@ -27,7 +27,7 @@ Review prüft Code gegen *Plan und ADR*.
 Wenn der Plan die ADR-Verletzung nicht antizipiert hat, sieht Review
 sie nicht. Verifikation prüft Code gegen *DoD und Spec* (und dort
 referenzierte ADRs). Das ist genau der Grund, warum Review und
-Verifikation getrennte Rollen sind — siehe [Modul 8](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/03-agenten/modul-08-agentenrollen.md).
+Verifikation getrennte Rollen sind — siehe [Modul 8](../../kurs/de/03-agenten/modul-08-agentenrollen.md).
 
 ### Kernidee (Modul 1)
 
@@ -51,14 +51,14 @@ Code folgt; Brownfield: Code führt, Doku folgt — mit Konvergenz-Auftrag
 zu Greenfield). Diese drei Entscheidungen prägen jede Folge-Aktion: in
 Brownfield ist der nächste Schritt *Inventur des Bestands*, in Greenfield
 *Auflisten zu schaffender Quellen*. Volldefinitionen und Phasen-Modell
-in [`grundlagen/konventionen.md` §Harness-Bootstrap](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#harness-bootstrap)
+in [`grundlagen/konventionen.md` §Harness-Bootstrap](../../kurs/de/grundlagen/konventionen.md#harness-bootstrap)
 (Konzept-Anker) und im ausgearbeiteten
-[Modul 2 — Harness-Bootstrap](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md) (Lehrtext
+[Modul 2 — Harness-Bootstrap](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md) (Lehrtext
 mit GF/BF-Walkthroughs).
 Die folgenden sechs Schritte 1–6 beschreiben den Greenfield-Pfad; in
 Brownfield-Modus läuft jeder Schritt als Code → Doc-Inventur mit
 parallelem Diskrepanz-Backlog (siehe
-[`grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)).
+[`grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../../kurs/de/grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)).
 
 **Schritt 1 — Kanonische Quellen sammeln, Mehrfach-Quellen erkennen.**
 Liste alle Dokumente, die *normativ* etwas behaupten ("so soll es
@@ -117,14 +117,14 @@ Einstiegspunkt, keine neue Quelle.
 ```
 
 Vorlage:
-[`/lab/templates/harness/README.template.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/templates/harness/README.template.md).
+[`/lab/templates/harness/README.template.md`](../templates/harness/README.template.md).
 Neun Ränge sind ein Maximum — wer mehr braucht, hat
 Mehrfach-Repräsentationen, die in den Schichten 1–3 gebündelt werden
 sollten. Die konkrete Rangordnung selbst ist projektspezifisch
 (Safety/Control- und Policy/Compliance-Repos können abweichen); Wahl
 und Begründung gehören in den Adaptions-Block des repo-lokalen
 Konventionsdokuments (siehe
-[`grundlagen/konventionen.md#source-precedence`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#source-precedence)).
+[`grundlagen/konventionen.md#source-precedence`](../../kurs/de/grundlagen/konventionen.md#source-precedence)).
 
 **Schritt 4 — Konfliktauflösungs-Klausel daneben setzen.** Eine
 Tabelle allein wirkt nicht; sie braucht den Satz, der ihre Anwendung
@@ -155,7 +155,7 @@ will, ändert in Wahrheit die Spec — und das ist ein eigener Slice.
 ```
 
 Volldefinition siehe
-[`grundlagen/konventionen.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#source-precedence).
+[`grundlagen/konventionen.md`](../../kurs/de/grundlagen/konventionen.md#source-precedence).
 
 **Schritt 6 — Bewusstes Brechen: einen Konflikt provozieren.** Ändere
 in `AGENTS.md` eine Hard Rule, die einer ADR widerspricht (z. B.

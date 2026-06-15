@@ -32,10 +32,17 @@ jobs:
         run: |
           cp kurs/de/agents-regelwerk.md "$GITHUB_WORKSPACE/agents-regelwerk.md"
           python3 tools/rewrite-doc-links.py "$GITHUB_WORKSPACE/agents-regelwerk.md" kurs/de "$GITHUB_REF_NAME" .
-      - name: Regelwerk-ZIP bauen (17 Module + README; Links bereits in-repo auf den Tag gepinnt)
+      - name: Regelwerk-ZIP bauen (self-contained — Außen-Verweise auf den Tag pinnen)
         run: |
-          cd lab/regelwerk
-          zip -r "$GITHUB_WORKSPACE/lab-regelwerk.zip" .
+          tmp="$RUNNER_TEMP/regelwerk"
+          mkdir -p "$tmp"
+          cp lab/regelwerk/*.md "$tmp/"
+          # Modul-Querverweise bleiben relativ (--keep-within-src); nur Verweise
+          # nach außen (Kurs, Templates, Beispiel, LICENSE) werden gepinnt.
+          for f in "$tmp"/*.md; do
+            python3 tools/rewrite-doc-links.py "$f" lab/regelwerk "$GITHUB_REF_NAME" . --keep-within-src
+          done
+          ( cd "$tmp" && zip -r "$GITHUB_WORKSPACE/lab-regelwerk.zip" . )
       - name: Release anlegen, Assets anhängen
         env:
           GH_TOKEN: ${{ github.token }}

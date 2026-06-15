@@ -1,6 +1,6 @@
 ## Modul 12 — Replay und Evaluierung
 
-*Quelle: [04-qualitaet/modul-12-replay-evaluierung.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)*
+*Quelle: [04-qualitaet/modul-12-replay-evaluierung.md](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)*
 
 ### Kernidee (Modul 12)
 
@@ -36,7 +36,7 @@ evals/golden/welle-1-baseline/
 
 Drei Fälle ist das Minimum: Happy / Boundary / Negative — dieselbe
 Spec-Disziplin wie bei Akzeptanzkriterien
-([Modul 3](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-03-lastenheft.md)). Ein
+([Modul 3](../../kurs/de/01-spec-und-architektur/modul-03-lastenheft.md)). Ein
 Replay mit einem Fall ist eine Demo, kein Replay.
 
 **Schritt 2 — Pflichtfelder im Manifest fixieren.**
@@ -141,7 +141,7 @@ Replay-Sets verrotten. In
 ```
 
 Sieben Schritte, ein reproduzierbares Manifest. Vergleich im Lab:
-[`../../lab/example/evals/golden/welle-1-baseline/`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/evals/golden/welle-1-baseline/)
+[`../../lab/example/evals/golden/welle-1-baseline/`](../example/evals/golden/welle-1-baseline/)
 mit `manifest.yaml`, `inputs/case-{001,002,003}.json`,
 `expectations/case-{001,002,003}.json` und `CHANGELOG.md` in derselben
 Verzeichnis-Struktur. Das Lab zeigt ein *Retrieval*-Replay (Embedding-

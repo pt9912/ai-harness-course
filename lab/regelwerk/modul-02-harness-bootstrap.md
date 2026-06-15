@@ -1,26 +1,26 @@
 ## Modul 2 — Harness-Bootstrap
 
-*Quelle: [01-spec-und-architektur/modul-02-harness-bootstrap.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md)*
+*Quelle: [01-spec-und-architektur/modul-02-harness-bootstrap.md](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md)*
 
 ### Harness-Einordnung (Modul 2)
 
 Bootstrap ist die **initiale Anwendung des Steering-Loops**, laufend
 ausgeführt, bis das Repo *steady state* erreicht. Was
-[Modul 11 — Verification Harness](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-11-verification.md)
+[Modul 11 — Verification Harness](../../kurs/de/04-qualitaet/modul-11-verification.md)
 als laufende Praxis lehrt (Beobachtung → Guide/Sensor → Diff →
 Closure), lehrt dieses Modul als *initiale Aufsetzungs-Praxis*:
 gleiche Sensoren und Guides, andere Anwendungsphase. Die abstrakte
 Verbindung steht in
-[`grundlagen/konventionen.md` §Verbindung zum Steering-Loop](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#verbindung-zum-steering-loop).
+[`grundlagen/konventionen.md` §Verbindung zum Steering-Loop](../../kurs/de/grundlagen/konventionen.md#verbindung-zum-steering-loop).
 
-[Modul 1 §Worked Example, Schritt 0](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren)
+[Modul 1 §Worked Example, Schritt 0](../../kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren)
 hat den Bootstrap-Modus als Kurz-Vorgriff eingeführt (Baseline und Modus als
 Voraussetzung für den Lebenszyklus); dieses Modul ist die Vollform —
 die *Diagnose-Praxis*, die Schritt 0 zur Vorbedingung jeder
 modusabhängigen Aktion macht.
 
 Gegen die vier Harness-Linsen aus
-[`grundlagen/konzeptkarte.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konzeptkarte.md):
+[`grundlagen/konzeptkarte.md`](../../kurs/de/grundlagen/konzeptkarte.md):
 
 * **Drift** — Bootstrap ist der erste *Drift-Sensor*: ohne formellen
   Bootstrap bleibt jede spätere Drift unmessbar.
@@ -44,7 +44,7 @@ Lehr-Ergebnis dieses Moduls; die Modus-Wahl als Planungs-Entscheidung
 (also: *welcher Modus gilt für jede vom nächsten Slice berührte
 Sub-Area — und warum?* — der Slice selbst trägt keinen Modus, er
 berührt nur Sub-Areas, die je einen tragen) folgt später in
-[Modul 5 — Planning Harness](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/02-planung/modul-05-planning-harness.md).
+[Modul 5 — Planning Harness](../../kurs/de/02-planung/modul-05-planning-harness.md).
 
 #### Wann wechselt der Modus? Drei Anzeichen
 
@@ -78,7 +78,7 @@ beobachtbare Anzeichen, an denen sich ein Modus-Wechsel ankündigt:
    ein systemisches "Code existiert vor Doku"-Muster zeigt, ist die
    richtige Antwort eine BF-Sub-Area-Markierung mit Graduation-Plan,
    nicht eine Carveout-Kaskade — siehe
-   [Modul 7 §Worked Example A Schritt 6](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
+   [Modul 7 §Worked Example A Schritt 6](../../kurs/de/02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
    Die Carveout↔BF-Klammer trägt damit in beide Richtungen: Auflösung
    schließt eine BF-Sub-Area, Häufung eröffnet eine.
 
@@ -96,7 +96,7 @@ und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
 * Modus gilt **pro Sub-Area**. Ein Repo kann in den
   *Konventionen* BF und in der *Spec-Schreibung* GF sein. Die vier
   Beispiele in
-  [`grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)
+  [`grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../../kurs/de/grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)
   zeigen diese Sub-Area-Heterogenität explizit.
 * auch im GF-Modus entstehen Trigger
   (Diskrepanz, Promotion-Auslöser etc.), nur nicht aus
@@ -112,7 +112,7 @@ und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
   graduations-reif wird.
 * Eine Struktur qualifiziert erst über die drei Inklusions-Achsen
   (Schwelle ≥ 2, siehe
-  [`grundlagen/konventionen.md` §Was ist eine Sub-Area?](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area)).
+  [`grundlagen/konventionen.md` §Was ist eine Sub-Area?](../../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area)).
   Der übersprungene Qualifikations-Schritt erzeugt **beide**
   Granularitäts-Fehler zugleich: *zu grob* — ein Aggregat wie *"Backend"*
   wird als *eine* Sub-Area gelabelt, statt in mehrere aufgeteilt; *zu
@@ -120,7 +120,7 @@ und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
   eine Achse erfüllt) wird zur Sub-Area erhoben, obwohl es eine
   Sub-Area-*Aspirantin* bleibt. Lernerursprung: dieselbe Wurzel wie die
   Modul-5-Vorstellung *"wenn der Slice klein ist, ist die Sub-Area GF"*
-  ([`grundlagen/lernervorstellungen.md` §Über Planung](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/lernervorstellungen.md#über-planung-modul-57))
+  ([`grundlagen/lernervorstellungen.md` §Über Planung](../../kurs/de/grundlagen/lernervorstellungen.md#über-planung-modul-57))
   — Reife/Substanz wird aus einem Oberflächenmerkmal (Existenz, Größe)
   *abgelesen* statt über die Achsen *geprüft*. (Die Modul-5-Vorstellung
   bleibt eine *Modus*-FV; FV5 teilt nur die kognitive Wurzel, nicht die
@@ -160,7 +160,7 @@ Drei Phasen sind farbig sichtbar: *Orient* (gelb, Schritte 0–1),
 
 Trigger-Anker (T1, T2, T4, T5, T6, T7) sind Instanz-Beispiele der
 vier Trigger-Klassen aus
-[`grundlagen/konventionen.md` §Vier Trigger-Klassen](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#vier-trigger-klassen) —
+[`grundlagen/konventionen.md` §Vier Trigger-Klassen](../../kurs/de/grundlagen/konventionen.md#vier-trigger-klassen) —
 die abstrakten Definitionen stehen dort, hier nur die Instanzen.
 
 *Hinweis zur T-Nummerierung:* Die Trigger sind durch das
@@ -175,7 +175,7 @@ BF-Diskrepanz-Auslöse-Variante.
 |---|---|---|---|
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
 | 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schemata festlegen (`LH-*`, `ARC-*`, `SPEC-*`, `MR-*`) | keine | reift 2/3 |
-| 2 | Templates aus [`../../lab/templates/`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/templates/) kopieren | alle Skelette **0 → 1** | keine |
+| 2 | Templates aus [`../../lab/templates/`](../templates/) kopieren | alle Skelette **0 → 1** | keine |
 | 3 | `harness/conventions.md` mit MR-000 (Baseline) + MR-001 (`ARC-*`/`SPEC-*` als Adaption) | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
 | 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
 
@@ -231,7 +231,7 @@ konkret macht: sobald `conventions.md` existiert, müssen die zwei
 Dokumente, die *auf* `conventions.md` verweisen, einen entsprechenden
 Eintrag bekommen. Wer den Eintrag vergisst, hat einen klassischen
 **Sync-Drift** — der Doku-Konsistenz-Agent
-([Modul 15 §Observability](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/05-betrieb/modul-15-observability.md))
+([Modul 15 §Observability](../../kurs/de/05-betrieb/modul-15-observability.md))
 findet das später als Inkonsistenz.
 
 ### Worked Example 2: Brownfield-Bootstrap mit Discovery und Reconciliation
@@ -298,7 +298,7 @@ Nummerierung GF 0–8 vs. BF 1–9.
 
 Beide Walkthroughs bewegen Artefakte durch **Phase-Reife** (0–5)
 pro Sektion (sechs Stufen, siehe
-[`grundlagen/konventionen.md` §Sektionsweise Reife](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#sektionsweise-reife-phasen-pro-dokument)).
+[`grundlagen/konventionen.md` §Sektionsweise Reife](../../kurs/de/grundlagen/konventionen.md#sektionsweise-reife-phasen-pro-dokument)).
 Die folgende Matrix macht sichtbar, *was Phase-N in GF bedeutet
 versus was sie in BF bedeutet* — dieselbe Phase-Stufe,
 unterschiedliche Bewegungsrichtung:

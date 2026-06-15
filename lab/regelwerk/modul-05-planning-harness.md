@@ -1,6 +1,6 @@
 ## Modul 5 — Planning Harness
 
-*Quelle: [02-planung/modul-05-planning-harness.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/02-planung/modul-05-planning-harness.md)*
+*Quelle: [02-planung/modul-05-planning-harness.md](../../kurs/de/02-planung/modul-05-planning-harness.md)*
 
 ### Kernidee (Modul 5)
 
@@ -23,7 +23,7 @@ stateDiagram-v2
 
 Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
 Größen-Erkenntnis) und `in_progress → open` (Blocker — meist mit
-Carveout, siehe [Modul 7](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/02-planung/modul-07-carveouts.md)). Der einzige Übergang
+Carveout, siehe [Modul 7](../../kurs/de/02-planung/modul-07-carveouts.md)). Der einzige Übergang
 nach `done` verlangt *Lerneintrag*, nicht nur "Tests grün".
 
 ### Trigger je Lifecycle-Übergang und WIP-Limit (Modul 5)
@@ -59,7 +59,7 @@ sondern ein Buffet.
   bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). Die
   volle Werkzeug-Triade inkl. *BF-Sub-Area-Markierung* (Sub-Area-Kontext,
   kein Closure-Werkzeug) wird in
-  [Modul 7 §Worked Example A Schritt 6](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/regelwerk/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren)
+  [Modul 7 §Worked Example A Schritt 6](modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren)
   disambiguiert.
 
 ### Worked Example: einen zu großen Slice schneiden
@@ -95,7 +95,7 @@ landen mit hoher Wahrscheinlichkeit als Zombie in `in-progress/`.
 ### Worked Mini-Example: Bootstrap-Modus pro Sub-Area für einen Slice begründen
 
 **Beispiel-Slice:** `SL-014a` aus dem Worked Example oben. Spec-Anker
-und ADR werden in [Modul 9 §Worked Example](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/03-agenten/modul-09-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow)
+und ADR werden in [Modul 9 §Worked Example](../../kurs/de/03-agenten/modul-09-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow)
 mit `LH-FA-AUTH-001` und `ADR-0007` (Service-Adapter-Layer)
 konkretisiert; wir nutzen dieselben IDs hier konsistent.
 
@@ -112,7 +112,7 @@ Login-Tests → Test-Infrastruktur; Audit-Log-Eintrag → Audit-Logging;
    durch `harness/conventions.md` (oder ein gleichwertiges Artefakt) als
    Strukturregel verankert?
 2. **Phase-Reife der berührten Artefakt-Sektionen** — Phase 0–5 aus der
-   Phase × Modus-Matrix in [Modul 2](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#phasen--modus--die-zweidimensionale-reife-matrix).
+   Phase × Modus-Matrix in [Modul 2](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#phasen--modus--die-zweidimensionale-reife-matrix).
 3. **Evidenz- und Diskrepanz-Risiko** — wie groß ist die Gefahr, dass
    Inventur den Code-Bestand und die Doku-Aussage als divergent
    ausweist? Bei GF meist niedrig (Doc führt — Inventur prüft nur
@@ -121,7 +121,7 @@ Login-Tests → Test-Infrastruktur; Audit-Log-Eintrag → Audit-Logging;
 4. **Reconciliation-Aufwand inklusive Graduation-/Folge-Slice-Trigger** —
    wieviel Slice-Aufwand bringt BF/Hybrid mit sich, und welcher Trigger
    (eine der vier Klassen aus
-   [`konventionen.md` §Vier Trigger-Klassen](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#vier-trigger-klassen)
+   [`konventionen.md` §Vier Trigger-Klassen](../../kurs/de/grundlagen/konventionen.md#vier-trigger-klassen)
    — Sync, Promotion, Cross-Reference, Acceptance — oder eine
    Folge-Slice-ID) schaltet die Sub-Area Richtung GF?
 
@@ -187,7 +187,7 @@ sind Konventionen-Dichte hoch, Phase 4, Risiko niedrig, kein
 Reconciliation — **Modus: GF.**
 
 **Template für den Begründungsblock** — kanonisch in
-[§8 Sub-Area-Modus-Begründung](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/templates/docs/plan/planning/slice.template.md)
+[§8 Sub-Area-Modus-Begründung](../templates/docs/plan/planning/slice.template.md)
 des Slice-Plan-Templates; hier zum Lesen abgedruckt, **byte-identisch
 mit dem dortigen Format**, damit Kopieren von hier oder vom Template
 denselben Block ergibt:
@@ -214,6 +214,6 @@ Closure-Notiz prüfbar.
 - **Gegen "Slice = Ticket = Feature":** Drei verschiedene Granularitäten. Feature ist Spec-Ebene, Slice ist Implementations-Einheit, Ticket ist Projektmanagement. Slice ist die kleinste *agentisch abschließbare* Einheit.
 - **Gegen "Erst plan ich alle Slices, dann fange ich an":** Wer alle Slices vor der ersten Implementation plant, plant tote Slices. Plan und Implementation alternieren — Welle für Welle.
 - **Gegen "Wenn ein Slice in `done/` ist, ist er fertig":** Ohne Lerneintrag ist er nur *abgelegt*. Closure ist eine bewusste Reflexionsleistung: was hat funktioniert, was war Friktion, was geht in den Steering Loop?
-- **Gegen "Ein Slice hat einen Bootstrap-Modus":** Der Modus ist Eigenschaft *pro Sub-Area* ([Modul 2 §Kernidee](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Ein Slice berührt mehrere Sub-Areas und kann GF, BF und Hybrid gleichzeitig involvieren.
+- **Gegen "Ein Slice hat einen Bootstrap-Modus":** Der Modus ist Eigenschaft *pro Sub-Area* ([Modul 2 §Kernidee](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Ein Slice berührt mehrere Sub-Areas und kann GF, BF und Hybrid gleichzeitig involvieren.
 - **Gegen "Wenn der Slice klein ist, ist die berührte Sub-Area GF":** Transitive Vereinfachung. Slice-Größe und Sub-Area-Modus sind orthogonale Achsen: Slice-Größe misst, ob der Schnitt in einer Review-Sitzung prüfbar ist; Sub-Area-Modus misst den Reifegrad der berührten Doku-/Code-Sektion. Ein kleiner Slice kann eine BF-Sub-Area berühren (Beispiel: Login-Endpoint ist klein, aber das Test-Layout für die Auth-Schicht ist nicht in `harness/conventions.md` verankert).
 

@@ -1,6 +1,6 @@
 ## Modul 4 — Architektur und ADRs
 
-*Quelle: [01-spec-und-architektur/modul-04-architektur-adrs.md](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)*
+*Quelle: [01-spec-und-architektur/modul-04-architektur-adrs.md](../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)*
 
 ### Mini-Glossar für dieses Modul (Modul 4)
 
@@ -28,7 +28,7 @@ nicht verteidigen.
 ### Hard Rule (Beispiel aus c-hsm-doc, ADR 0001)
 
 Begriff *Hard Rule* siehe Glossar in
-[`grundlagen/konventionen.md`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md).
+[`grundlagen/konventionen.md`](../../kurs/de/grundlagen/konventionen.md).
 
 *"Eine ADR mit Status `Accepted` wird nicht inhaltlich überschrieben.
 Spätere Korrekturen oder Schärfungen entstehen als neue ADR mit
@@ -43,8 +43,8 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 - Hard Rule: Accepted-ADRs werden nicht überschrieben. Folge-ADR mit `supersedes ADR-N`. Sonst kann der Reviewer-Agent nicht auf ältere Entscheidungen vertrauen.
 - Eine ADR ohne Fitness Function ist eine Absichtserklärung. Wer architecture fitness im Kopf hat, schreibt parallel den ArchUnit-Test.
 - MADR ist ein Format unter mehreren (auch Nygard, Tyree/Akerman). Wichtig ist, dass dein Repo *eines* konsequent benutzt.
-- Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur in diesem Kurs heißt: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`grundlagen/konventionen.md#spec-stratifizierung`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/grundlagen/konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
-- Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementation-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Worked Example in [Modul 13 §Worked Example "ADR → import-linter"](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/kurs/de/04-qualitaet/modul-13-quality-gates.md#worked-example-vom-adr-satz-zur-fitness-function) zeigt, was die Übersetzung kostet (kleine Tabelle: ADR-Satz, Werkzeug, Make-Target, Failure-Beispiel). Wer das nicht macht, dokumentiert *Hoffnung*.
+- Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur in diesem Kurs heißt: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`grundlagen/konventionen.md#spec-stratifizierung`](../../kurs/de/grundlagen/konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
+- Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementation-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Worked Example in [Modul 13 §Worked Example "ADR → import-linter"](../../kurs/de/04-qualitaet/modul-13-quality-gates.md#worked-example-vom-adr-satz-zur-fitness-function) zeigt, was die Übersetzung kostet (kleine Tabelle: ADR-Satz, Werkzeug, Make-Target, Failure-Beispiel). Wer das nicht macht, dokumentiert *Hoffnung*.
 
 ### Worked Example: vom Diskussionsfaden zum prüfbaren ADR
 
@@ -88,4 +88,4 @@ der ADR-7 implementiert wird):
 > ArchUnit-Test → kein weiterer Vorfall in 6 Wochen.
 
 Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
-[`/lab/example/docs/plan/adr/`](https://github.com/pt9912/ai-harness-course/blob/v1.0.0/lab/example/docs/plan/adr/).
+[`/lab/example/docs/plan/adr/`](../example/docs/plan/adr/).
