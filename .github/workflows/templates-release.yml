@@ -1,7 +1,9 @@
 # Stabiler, login-freier Download für lab/templates und das Agents-Regelwerk:
-# bei einem Release-Tag (`vX.Y.Z`, historisch `templates-v*`) werden das ZIP und eine self-contained
-# `agents-regelwerk.md` (interne Links auf den Tag gepinnt) als Release-Assets
-# angehängt. Permanente URLs: …/releases/latest/download/lab-templates.zip
+# bei einem Release-Tag (`vX.Y.Z`, historisch `templates-v*`) werden das Templates-ZIP,
+# ein Regelwerk-pro-Modul-ZIP und eine self-contained `agents-regelwerk.md`
+# (interne Links auf den Tag gepinnt) als Release-Assets angehängt.
+# Permanente URLs: …/releases/latest/download/lab-templates.zip,
+# …/releases/latest/download/lab-regelwerk.zip
 # bzw. …/releases/latest/download/agents-regelwerk.md
 # (Ergänzung zum Actions-Artifact aus templates-zip.yml, das pro
 # Änderung auf main eine Vorschau liefert, aber Login erfordert und
@@ -30,11 +32,15 @@ jobs:
         run: |
           cp kurs/de/agents-regelwerk.md "$GITHUB_WORKSPACE/agents-regelwerk.md"
           python3 tools/rewrite-doc-links.py "$GITHUB_WORKSPACE/agents-regelwerk.md" kurs/de "$GITHUB_REF_NAME" .
+      - name: Regelwerk-ZIP bauen (17 Module + README; Links bereits in-repo auf den Tag gepinnt)
+        run: |
+          cd lab/regelwerk
+          zip -r "$GITHUB_WORKSPACE/lab-regelwerk.zip" .
       - name: Release anlegen, Assets anhängen
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" lab-templates.zip agents-regelwerk.md \
+          gh release create "$GITHUB_REF_NAME" lab-templates.zip lab-regelwerk.zip agents-regelwerk.md \
             --verify-tag \
             --title "Release $GITHUB_REF_NAME" \
-            --notes "ZIP-Stand von \`lab/templates\` plus self-contained \`agents-regelwerk.md\` (interne Verweise auf \`$GITHUB_REF_NAME\` gepinnt) beim Tag \`$GITHUB_REF_NAME\`."
+            --notes "ZIP-Stand von \`lab/templates\` und \`lab/regelwerk\` (17 Module + README) plus self-contained \`agents-regelwerk.md\` (interne Verweise auf \`$GITHUB_REF_NAME\` gepinnt) beim Tag \`$GITHUB_REF_NAME\`."

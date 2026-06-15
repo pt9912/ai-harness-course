@@ -34,6 +34,8 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   `rewrite-doc-links.py` aufs neue Schema nachgezogen.
 - **[`lab/README.md`](lab/README.md)** — `regelwerk/` in Intro-Liste und
   Aufbau-Baum ergänzt (Doku-Drift behoben).
+- **`templates-release.yml`** liefert zusätzlich `lab-regelwerk.zip` (17 Module
+  + README) als Release-Asset, parallel zu `lab-templates.zip`.
 
 ## Welle 19 — 2026-06-14 · C++/CMake-Skelett + Regelwerk-Drift-Sensor
 
