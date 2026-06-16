@@ -1,27 +1,31 @@
 # Agents-Regelwerk — nach Modulen aufgeteilt
 
-Die 17 Module (0–16) des
+Die 17 Module (0–16) **und die drei Grundlagen-Rahmen-Digeste** (Konventionen,
+Klassifikation, Durchsetzungsschicht) des
 [Agents-Regelwerks](../../kurs/de/agents-regelwerk.md)
-als einzelne Dateien. Inhaltlich **wortgleich** zur Quelle (reiner Modultext,
-kein zusätzlicher Kopf); aufgeteilt, damit ein Agent ein einzelnes Modul laden
+als einzelne Dateien. Inhaltlich **wortgleich** zur Quelle (reiner Abschnittstext,
+kein zusätzlicher Kopf); aufgeteilt, damit ein Agent einen einzelnen Abschnitt laden
 kann, ohne das gesamte Regelwerk im Kontext zu halten.
 
 > **Was dieses Verzeichnis ist.** Eine **derivative Sicht** auf
 > [`agents-regelwerk.md`](../../kurs/de/agents-regelwerk.md)
-> — pro Modul eine Datei, sonst nichts. Es trägt keine eigenen Regeln und keine
-> eigene Normativität.
+> — pro Modul- und Grundlagen-Abschnitt eine Datei, sonst nichts. Es trägt keine
+> eigenen Regeln und keine eigene Normativität.
 >
 > **Was dieses Verzeichnis NICHT ist.** Eine Quelle der Wahrheit. Bei Konflikt
 > gilt die Quelle; und die Quelle ist *ihrerseits* derivativ (sie steht unter
-> Konventionen, Klassifikation und den Modultexten der Phasen 01–05). Wer hier
+> Konventionen, Klassifikation, Durchsetzungsschicht und den Modultexten der
+> Phasen 01–05). Wer hier
 > eine Regel ändert, ohne die Quelle zu ändern, erzeugt genau die Drift, die das
 > Regelwerk selbst verbietet. Maßgeblich bleibt der Kurs unter
 > [`/kurs/de/`](../../kurs/de/README.md).
 
-**Nur die Modul-Sektionen.** Die Rahmen-Abschnitte des Regelwerks — Konventionen,
-Klassifikation und Steering Loop, Durchsetzungsschicht — sowie der Stand stehen
-nur in der
-[Quelldatei](../../kurs/de/agents-regelwerk.md).
+**Modul- und Grundlagen-Abschnitte.** Aufgeteilt sind die 17 Module sowie die drei
+Grundlagen-Rahmen-Digeste (Konventionen, Klassifikation und Steering Loop,
+Durchsetzungsschicht). Nur der reine Regelwerks-Rahmen — Quellen-Rang, Wartung und
+der Stand — bleibt der
+[Quelldatei](../../kurs/de/agents-regelwerk.md)
+vorbehalten.
 
 **Links.** Im Repo relativ (lokal navigierbar, vom Doku-Gate validiert). Die
 Modul-Querverweise *innerhalb* dieses Verzeichnisses bleiben auch im
@@ -30,7 +34,13 @@ nur die Verweise *nach außen* (Kurs, Templates, Beispiel) werden beim Release a
 absolute, auf den Tag gepinnte GitHub-URLs umgeschrieben (`tools/rewrite-doc-links.py
 --keep-within-src`).
 
-## Module
+## Abschnitte
+
+### Grundlagen (Rahmen-Digeste)
+
+- [Konventionen](grundlagen-konventionen.md)
+- [Klassifikation und Steering Loop](grundlagen-klassifikation.md)
+- [Durchsetzungsschicht](grundlagen-durchsetzungsschicht.md)
 
 ### Einführung
 

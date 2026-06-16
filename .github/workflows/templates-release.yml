@@ -50,4 +50,4 @@ jobs:
           gh release create "$GITHUB_REF_NAME" lab-templates.zip lab-regelwerk.zip agents-regelwerk.md \
             --verify-tag \
             --title "Release $GITHUB_REF_NAME" \
-            --notes "ZIP-Stand von \`lab/templates\` und \`lab/regelwerk\` (17 Module + README) plus self-contained \`agents-regelwerk.md\` (interne Verweise auf \`$GITHUB_REF_NAME\` gepinnt) beim Tag \`$GITHUB_REF_NAME\`."
+            --notes "ZIP-Stand von \`lab/templates\` und \`lab/regelwerk\` (17 Module + Grundlagen-Rahmen + README) plus self-contained \`agents-regelwerk.md\` (interne Verweise auf \`$GITHUB_REF_NAME\` gepinnt) beim Tag \`$GITHUB_REF_NAME\`."

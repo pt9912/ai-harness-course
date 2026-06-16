@@ -11,6 +11,34 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 21 — 2026-06-16 · Grundlagen-Rahmen im Regelwerk-Split + d-check v0.9.0
+
+### Neu
+
+- **Grundlagen-Rahmen-Digeste im Split** — [`lab/regelwerk/`](lab/regelwerk/)
+  trägt jetzt neben den 17 Modulen auch die drei Rahmen-Digeste der Quelle als
+  einzelne Dateien:
+  [`grundlagen-konventionen.md`](lab/regelwerk/grundlagen-konventionen.md) (inkl.
+  §Referenz-Richtung/SDP — wer darf wen referenzieren, also die ADR→Slice/Welle-
+  Regel), [`grundlagen-klassifikation.md`](lab/regelwerk/grundlagen-klassifikation.md)
+  und [`grundlagen-durchsetzungsschicht.md`](lab/regelwerk/grundlagen-durchsetzungsschicht.md).
+  Wortgleicher Abschnittstext, kein Zusatz-Kopf; ein Agent kann so einen einzelnen
+  Grundlagen-Abschnitt laden, ohne das ganze Regelwerk im Kontext zu halten. Die
+  Quelle bleibt unberührt (kein Stand-Bump). Cross-Section-Anker (z. B.
+  `#kernbegriffe`) zeigen auf die Geschwister-Datei, damit das
+  `lab-regelwerk.zip`-Bundle self-navigierbar bleibt; Pfad-Verweise gehen auf den
+  Kurs und werden beim Release auf den Tag gepinnt.
+
+### Geändert
+
+- **[`lab/regelwerk/README.md`](lab/regelwerk/README.md)** — Scope von „nur
+  Modul-Sektionen" auf „Module + Grundlagen-Rahmen" erweitert (neue
+  `### Grundlagen`-Liste); nur Quellen-Rang, Wartung und Stand bleiben der
+  Quelldatei vorbehalten. Provenienz-Aufzählung in der Blockquote um
+  Durchsetzungsschicht ergänzt (Doku-Drift behoben).
+- **d-check-Pin `v0.8.0` → `v0.9.0`** im [`Makefile`](Makefile) (Image-Digest neu
+  gepinnt); `make check` grün (140 Dateien, 0 Befunde, 0 ERROR/WARN).
+
 ## Welle 20 — 2026-06-15 · Regelwerk per Modul + SemVer-Release-Tags
 
 ### Neu
