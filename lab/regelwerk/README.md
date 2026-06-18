@@ -1,6 +1,6 @@
 # Agents-Regelwerk — nach Modulen aufgeteilt
 
-Die 17 Module (0–16) **und die drei Grundlagen-Rahmen-Digeste** (Konventionen,
+Die 17 Module (0–16) **und die drei Grundlagen-Abschnitte** (Konventionen,
 Klassifikation, Durchsetzungsschicht) des
 [Agents-Regelwerks](../../kurs/de/agents-regelwerk.md)
 als einzelne Dateien. Inhaltlich **wortgleich** zur Quelle (reiner Abschnittstext,
@@ -21,7 +21,7 @@ kann, ohne das gesamte Regelwerk im Kontext zu halten.
 > [`/kurs/de/`](../../kurs/de/README.md).
 
 **Modul- und Grundlagen-Abschnitte.** Aufgeteilt sind die 17 Module sowie die drei
-Grundlagen-Rahmen-Digeste (Konventionen, Klassifikation und Steering Loop,
+Grundlagen-Abschnitte (Konventionen, Klassifikation und Steering Loop,
 Durchsetzungsschicht). Nur der reine Regelwerks-Rahmen — Quellen-Rang, Wartung und
 der Stand — bleibt der
 [Quelldatei](../../kurs/de/agents-regelwerk.md)
@@ -36,7 +36,7 @@ absolute, auf den Tag gepinnte GitHub-URLs umgeschrieben (`tools/rewrite-doc-lin
 
 ## Abschnitte
 
-### Grundlagen (Rahmen-Digeste)
+### Grundlagen
 
 - [Konventionen](grundlagen-konventionen.md)
 - [Klassifikation und Steering Loop](grundlagen-klassifikation.md)

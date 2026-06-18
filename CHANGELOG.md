@@ -15,8 +15,8 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 
 ### Neu
 
-- **Grundlagen-Rahmen-Digeste im Split** — [`lab/regelwerk/`](lab/regelwerk/)
-  trägt jetzt neben den 17 Modulen auch die drei Rahmen-Digeste der Quelle als
+- **Grundlagen-Rahmen im Split** — [`lab/regelwerk/`](lab/regelwerk/)
+  trägt jetzt neben den 17 Modulen auch die drei Grundlagen-Abschnitte der Quelle als
   einzelne Dateien:
   [`grundlagen-konventionen.md`](lab/regelwerk/grundlagen-konventionen.md) (inkl.
   §Referenz-Richtung/SDP — wer darf wen referenzieren, also die ADR→Slice/Welle-
@@ -38,6 +38,15 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   Durchsetzungsschicht ergänzt (Doku-Drift behoben).
 - **d-check-Pin `v0.8.0` → `v0.9.0`** im [`Makefile`](Makefile) (Image-Digest neu
   gepinnt); `make check` grün (140 Dateien, 0 Befunde, 0 ERROR/WARN).
+
+### Korrektur · v1.2.1 — 2026-06-18
+
+- **„Digeste" → „Grundlagen-Abschnitte"** in
+  [`lab/regelwerk/README.md`](lab/regelwerk/README.md) (3×) und in der
+  Welle-21-Notiz oben. Das Wort suggerierte eine Verdichtung und widersprach
+  damit dem »wortgleichen« Charakter der Auszüge. Reine Terminologie — kein
+  Inhalts-, kein Stand-Bump; ausgeliefert als Patch-Release `v1.2.1`
+  (Assets tag-gepinnt neu gebaut).
 
 ## Welle 20 — 2026-06-15 · Regelwerk per Modul + SemVer-Release-Tags
 
