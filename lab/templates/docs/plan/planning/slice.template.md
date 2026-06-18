@@ -10,7 +10,7 @@ Verzeichnisse bewegt, siehe
 
 **Welle:** <welle-id> oder "ohne Welle" (Wartung/Spike).
 
-**Bezug:** `<LH-FA-NN>`, `<LH-QA-NN>`, ADR-<NN>.
+**Bezug:** `<LH-FA-NN>`, `<LH-QA-NN>`, ADR-<NNNN>.
 
 **Autor:** <Name>. **Datum:** YYYY-MM-DD.
 

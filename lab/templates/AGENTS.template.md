@@ -112,7 +112,7 @@ lebt in `docs/plan/planning/` und den späteren Closure-Notizen.
 ### 3.5 ADRs sind nach `Accepted` immutable
 
 Eine ADR mit Status `Accepted` wird nicht inhaltlich überschrieben.
-Korrekturen entstehen als neue ADR mit `Supersedes ADR-NN`.
+Korrekturen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 
 ### 3.6 Gates dürfen nicht ohne ADR gelockert werden
 

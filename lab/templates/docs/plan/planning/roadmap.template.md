@@ -27,7 +27,7 @@ gezeigt, nicht als Treiber.
 | Welle | Trigger | Wichtigste Slices | Geschätzter Aufwand |
 |---|---|---|---|
 | <welle-N+1> | Welle <N> done | <…> | S/M/L |
-| <welle-N+2> | Welle <N+1> done + ADR-<NN> accepted | <…> | S/M/L |
+| <welle-N+2> | Welle <N+1> done + ADR-<NNNN> accepted | <…> | S/M/L |
 
 ## Meilensteine
 

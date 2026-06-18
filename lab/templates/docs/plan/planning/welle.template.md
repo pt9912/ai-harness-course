@@ -32,7 +32,7 @@ oder externe Ereignisse.
 -->
 
 - <z.B. Welle <welle-vorher-id> done.>
-- <z.B. ADR-<NN> accepted.>
+- <z.B. ADR-<NNNN> accepted.>
 
 ## 3. Closure-Trigger (Welle schließt)
 

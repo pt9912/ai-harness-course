@@ -94,7 +94,7 @@ keine (AGENTS.md §5/§6).
 - **Geltungsbereich:** gesamtes Repo
 - **Adaption:** *keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
-  ID-Schema (`<PREFIX>-FA-*`, `<PREFIX>-QA-*`, `ADR-<NNN>`, `CO-<NNN>`,
+  ID-Schema (`<PREFIX>-FA-*`, `<PREFIX>-QA-*`, `ADR-<NNNN>`, `CO-<NNN>`,
   `slice-<NNN>`, `MR-<NNN>` — Präfix repo-weit festlegen, z. B. `LH`).*
   (Source-Precedence-Adaptionen werden in separaten `MR-<NNN>`
   dokumentiert — siehe Beispiel `MR-001` unten, weil das mitkopierte

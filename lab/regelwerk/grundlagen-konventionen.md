@@ -425,7 +425,7 @@ selbst grünfärben kann.
 
 Die Bindung-Spalte trägt vier **kanonische Klassen**:
 
-- **ADR-Bindung** (`ADR-<NNN>`) — Gate setzt eine Architektur-Entscheidung
+- **ADR-Bindung** (`ADR-<NNNN>`) — Gate setzt eine Architektur-Entscheidung
   durch.
 - **Carveout-Bindung** (`CO-<NNN>`) — Gate bewusst geschwächt, mit
   Auflösungs-Trigger und Folge-Slice (Modul 7).

@@ -295,7 +295,7 @@ und `adr.id`).
   ```
   span.attributes.slice.id  →  SL-<NNN>
                             →  Slice-Datei in docs/plan/planning/done/<NNN>.md
-                            →  zugehöriger ADR-<NNN>
+                            →  zugehöriger ADR-<NNNN>
                             →  Lastenheft-ID LH-FA-<KÜRZEL>-<NNN>
   ```
 

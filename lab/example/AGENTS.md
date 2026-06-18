@@ -68,7 +68,7 @@ Wellen, Slices, Commit-Hashes oder Closure-Daten.
 
 ### 2.5 ADRs sind nach `Accepted` immutable
 
-Korrekturen entstehen als neue ADR mit `Supersedes ADR-NN`.
+Korrekturen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 
 ### 2.6 Gates dürfen nicht ohne ADR gelockert werden
 

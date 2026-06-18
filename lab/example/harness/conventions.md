@@ -37,7 +37,7 @@ Der Default-Ort für:
 - **Geltungsbereich:** gesamtes Repo
 - **Adaption:** *Keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
-  ID-Schema (`LH-FA-*`, `LH-QA-*`, `ADR-<NNN>`, `CO-<NNN>`,
+  ID-Schema (`LH-FA-*`, `LH-QA-*`, `ADR-<NNNN>`, `CO-<NNN>`,
   `slice-<NNN>`, `MR-<NNN>`).*
 - **Begründung:** Initial-Setzung. Dieses Beispiel-Repo ist
   Lehr-Vehikel und folgt der Kurs-Konvention sturer als ein realer

@@ -1,6 +1,6 @@
 # Agents-Regelwerk — der Kurs als Betriebsregelwerk
 
-**Stand:** Kurs-Welle 19 · 2026-06-14 · 13:26 CEST
+**Stand:** Kurs-Welle 22 · 2026-06-18 · 16:15 CEST
 
 > **Was diese Datei ist.** Der Kurs ohne Didaktik-Schicht: sein
 > operatives Regelwerk — Konventionen, Regeln, Abläufe, Schemata — in
@@ -460,7 +460,7 @@ selbst grünfärben kann.
 
 Die Bindung-Spalte trägt vier **kanonische Klassen**:
 
-- **ADR-Bindung** (`ADR-<NNN>`) — Gate setzt eine Architektur-Entscheidung
+- **ADR-Bindung** (`ADR-<NNNN>`) — Gate setzt eine Architektur-Entscheidung
   durch.
 - **Carveout-Bindung** (`CO-<NNN>`) — Gate bewusst geschwächt, mit
   Auflösungs-Trigger und Folge-Slice (Modul 7).

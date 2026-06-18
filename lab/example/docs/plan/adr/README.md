@@ -11,7 +11,7 @@
 ## Konventionen
 
 - ADRs sind nach `Accepted` **immutable** (siehe [Kurs Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)).
-- Schärfungen entstehen als neue ADR mit `Supersedes ADR-NN`.
+- Schärfungen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 - Neue ADR im Status `Proposed` darf während des Slice-Reviews iteriert werden.
 - Bei `Accepted`: dieser Index aktualisieren (Status, Datum).
 - Jede ADR deklariert im `**Schärft:**`-Feld *aufwärts*, welche Spec-Stelle sie verbindlich macht — die Änderungskopplung (Kurs [§Referenz-Richtung](../../../../../kurs/de/grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)). Prozess-ADRs ohne Spec-Stratum tragen `—`.

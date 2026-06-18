@@ -6,13 +6,13 @@
 > Ausfüllen. Vergiss nicht, den ADR-Index in
 > `docs/plan/adr/README.md` zu aktualisieren.
 
-**Status:** Proposed | Accepted | Deprecated | Superseded by ADR-NN
+**Status:** Proposed | Accepted | Deprecated | Superseded by ADR-NNNN
 
 **Datum:** YYYY-MM-DD
 
 **Autor:** <Name>
 
-**Bezug:** [`<LH-FA-NN>`](../../../spec/lastenheft.md#<anker>), [`<LH-QA-NN>`](../../../spec/lastenheft.md#<anker>), [ADR-<NN>](<NNNN>-<titel>.md) (optional)
+**Bezug:** [`<LH-FA-NN>`](../../../spec/lastenheft.md#<anker>), [`<LH-QA-NN>`](../../../spec/lastenheft.md#<anker>), [ADR-<NNNN>](<NNNN>-<titel>.md) (optional)
 
 **Schärft:** [`<spezifikation.md §N>`](../../../spec/spezifikation.md#<anker>) / [`architecture.md §N`](../../../spec/architecture.md#<anker>) — welche
 Spec-Stelle diese ADR verbindlich macht. Aufwärts-Deklaration der
@@ -112,5 +112,5 @@ Wann sollte diese Entscheidung erneut geprüft werden?
 <!--
 Nach Accepted: NICHT mehr inhaltlich überschreiben (Hard Rule aus
 c-hsm-doc, siehe Kurs Modul 4). Spätere Schärfungen als neue ADR mit
-"Supersedes ADR-NN" anlegen.
+"Supersedes ADR-NNNN" anlegen.
 -->

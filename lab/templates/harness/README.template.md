@@ -85,7 +85,7 @@ Begründung lebt im Carveout, nicht hier.
 |---|---|---|
 | `make lint` | <was prüft es> | — |
 | `make test` | <…> | — |
-| `make arch-check` | <…> | ADR-<NNN> |
+| `make arch-check` | <…> | ADR-<NNNN> |
 | `make coverage-gate` | <…>, bootstrap-aware | Schwelle X %, M<n> → Y % |
 | `make coverage-gate-critical` | <…> | bootstrap via `CO-<NNN>` bis <Slice/Welle> |
 | `make gates` | alle inneren Gates | — |

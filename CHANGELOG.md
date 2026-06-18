@@ -11,6 +11,30 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 22 — 2026-06-18 · ADR-ID-Schreibweise vereinheitlicht (vierstellig)
+
+### Geändert
+
+- **ADR-ID-Platzhalter durchgängig vierstellig (`ADR-<NNNN>`)** — die
+  ADR-Kennung wurde zugleich zwei-, drei- und vierstellig geführt, während
+  die realen ADRs unter
+  [`lab/example/docs/plan/adr/`](lab/example/docs/plan/adr/), der ADR-Dateiname
+  (`<NNNN>-titel`) und das ADR-README-Template bereits vierstellig waren.
+  Vereinheitlicht auf vier Stellen: ADR-Bindung-Klasse der Konventionen-Seite
+  ([`grundlagen/konventionen.md`](kurs/de/grundlagen/konventionen.md), Quelle)
+  und ihre Derivate ([`agents-regelwerk.md`](kurs/de/agents-regelwerk.md) §463,
+  [`lab/regelwerk/grundlagen-konventionen.md`](lab/regelwerk/grundlagen-konventionen.md)),
+  die Observability-ID-Kette (Modul 15), das ADR-Datei-Template
+  (`Status:`/`Bezug:`), das ADR-README-, AGENTS-, `harness/README`-,
+  `harness/conventions`-, slice-, roadmap- und welle-Template sowie die
+  `lab/example`-Spiegel (`AGENTS.md`, `harness/conventions.md`, `adr/README.md`).
+  Reine Schreibweisen-Vereinheitlichung — **kein** Schema-Wechsel der
+  Nummernvergabe; reale/fiktive vierstellige Nummern und die einstellige
+  Prosa-Variable `ADR-N` (Fließtext „supersedes ADR-N") bleiben unverändert.
+  Schließt die Quell-Wurzel der nachgelagerten Adaption **d-check `MR-008`**
+  („Korrektur in der Kurs-Quelle steht aus"). `Stand:` von `agents-regelwerk.md`
+  auf Welle 22 gezogen.
+
 ## Welle 21 — 2026-06-16 · Grundlagen-Rahmen im Regelwerk-Split + d-check v0.9.0
 
 ### Neu
