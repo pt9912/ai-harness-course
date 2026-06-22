@@ -98,7 +98,12 @@ out-of-the-box (ins Repo-Root kopieren):
 Danach läuft `make docs-check` sofort (`links`/`anchors`). `ids` und
 `codepaths` im `.d-check.yml` einkommentieren, sobald die Ziele bzw.
 Verzeichnisse existieren — sonst behauptet der Gate eine Dimension, die er
-nicht durchsetzt (Modul 13). Startgerüst neu erzeugen: `d-check --print-config`.
+nicht durchsetzt (Modul 13). Gerüst neu erzeugen: `d-check --print-config`
+(leer) oder — für ein Repo nach diesem Kurs-Standard —
+`d-check --suggest-config ai-harness-init --id-prefix <PRÄFIX>`, das
+`ids`/`matrix`/`codepaths` mit den Kurs-Kennungen (`ADR-…`, `MR-…`,
+`slice-…`, `<PRÄFIX>-FA-…`/`-QA-…`) vorbelegt; ohne `--id-prefix` bleibt der
+Platzhalter `<PREFIX>` plus `# TODO` stehen.
 
 ## Pflichtgliederung vs. freie Form
 
