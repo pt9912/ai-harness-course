@@ -54,20 +54,11 @@ Mindestens drei Optionen mit Pro/Contra. Alternativ "nichts tun" ist
 auch eine Option.
 -->
 
-### Option A — <Bezeichnung>
-
-- Pro: <…>
-- Contra: <…>
-
-### Option B — <Bezeichnung>
-
-- Pro: <…>
-- Contra: <…>
-
-### Option C — <gewählt>
-
-- Pro: <…>
-- Contra: <…>
+| Option | Pro | Contra |
+|---|---|---|
+| A — <Bezeichnung> | <…> | <…> |
+| B — <Bezeichnung> | <…> | <…> |
+| **C — <gewählt>** | <…> | <…> |
 
 ## Konsequenzen
 
