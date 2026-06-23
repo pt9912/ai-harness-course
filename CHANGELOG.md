@@ -11,6 +11,36 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 23 — 2026-06-23 · Template-Feinschliff (ADR-Tabelle, Gate-Baseline) + d-check v0.23.0
+
+### Geändert
+
+- **ADR-Vorlage „Verglichene Alternativen" als Pro/Contra-Tabelle** — im
+  [ADR-Datei-Template](lab/templates/docs/plan/adr/NNNN-titel.template.md) die
+  drei `### Option A/B/C`-Blöcke (je eigene `- Pro:`/`- Contra:`-Liste) auf eine
+  Markdown-Tabelle (`| Option | Pro | Contra |`) umgestellt, gewählte Option
+  fett. Rein kosmetisch — kein Schema- oder Inhaltswechsel; die „mindestens drei
+  Optionen mit Pro/Contra"-Regel bleibt.
+- **d-check-Pin `v0.9.0` → `v0.23.0`** (Image-Digest neu gepinnt) im
+  [`Makefile`](Makefile) (Single Source of Truth) und im
+  [`lab/templates/harness.mk`](lab/templates/harness.mk); der Versions-Kommentar
+  in `harness.mk` trug noch `v0.8.0` und wurde mitgezogen. Laut d-check-CHANGELOG
+  keine Breaking-Config-Änderung v0.9.0→v0.23.0 — bestehende `.d-check.yml` bleibt
+  gültig, `make check` grün (docs-check 0 Befunde, alignment-check 0 WARN).
+- **Gate-Baseline um den Repo-Generator ergänzt** — der Regenerier-Hinweis in der
+  [`lab/templates/README.md`](lab/templates/README.md) nannte nur das leere
+  `d-check --print-config`-Gerüst; jetzt zusätzlich
+  `d-check --suggest-config ai-harness-init --id-prefix <PRÄFIX>` (neu seit
+  d-check v0.18.0/v0.22.0), das `ids`/`matrix`/`codepaths` mit den Kurs-Kennungen
+  (`ADR-…`, `MR-…`, `slice-…`, `<PRÄFIX>-FA-…`/`-QA-…`) vorbelegt. `--id-prefix`
+  als Begleitschalter dokumentiert: ohne ihn bleiben `<PREFIX>`-Platzhalter und
+  `# TODO` stehen.
+
+Alle drei Änderungen betreffen Templates bzw. Tooling — die Quelle
+[`agents-regelwerk.md`](kurs/de/agents-regelwerk.md) bleibt unberührt
+(**kein Stand-Bump**, vgl. Welle 20/21). Die Templates fließen mit dem
+nächsten Release-Tag ins `lab-templates.zip`-Asset.
+
 ## Welle 22 — 2026-06-18 · ADR-ID-Schreibweise vereinheitlicht (vierstellig)
 
 ### Geändert
