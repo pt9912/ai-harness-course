@@ -336,7 +336,7 @@ BF-Diskrepanz-Auslöse-Variante.
 |---|---|---|---|
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
 | 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schemata festlegen (`LH-*`, `ARC-*`, `SPEC-*`, `MR-*`) | keine | reift 2/3 |
-| 2 | Templates aus [`../../../lab/templates/`](../../../lab/templates/) kopieren | alle Skelette **0 → 1** | keine |
+| 2 | **Dokument-Skelette** aus [`../../../lab/templates/`](../../../lab/templates/) kopieren; **Tooling** (`Makefile`, `.d-check.yml`) als Startgerüst übernehmen; `harness.mk` nur, wenn das Repo d-check als Doku-Gate *konsumiert* (gegenstandslos im Self-Hosting-/Tool-Repo, das d-check direkt fährt) | Dokument-Skelette **0 → 1**; Tooling-Artefakte tragen keine Phase-Reife | keine |
 | 3 | `harness/conventions.md` mit MR-000 (Baseline) + MR-001 (`ARC-*`/`SPEC-*` als Adaption) | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
 | 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
 
