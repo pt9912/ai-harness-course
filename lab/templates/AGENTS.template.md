@@ -28,24 +28,24 @@ Baseline, Modus-Deklarationen pro Sub-Area, Zusatzklassen für
 Sensors-Bindung) leben in
 [`harness/conventions.md`](harness/conventions.md).
 
-Das **Betriebsregelwerk der adoptierten Baseline in Agenten-Kurzform**
-liegt unter <Pfad oder URL zum Agents-Regelwerk, bei Adoption des Kurses
-als Release-Asset (self-contained, interne Verweise auf den Tag gepinnt):
-https://github.com/pt9912/ai-harness-course/releases/latest/download/agents-regelwerk.md>
-— einmal pro Session lesen, bevor der Workflow (§6) startet.
-Derivativ: bei Konflikt gelten die kanonischen Quellen; adoptierter
-Stand steht in `harness/conventions.md` §Baseline.
+Das **Regelwerk der adoptierten Baseline** liegt als self-navigierbares
+**Modul-Bundle (ZIP)** unter
+<https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
+— zu lesen, **bevor du an der Harness-Schicht selbst arbeitest**: beim
+Bootstrap, bei Änderungen an
+[`harness/conventions.md`](harness/conventions.md) (Adaptionen `MR-<NNN>`,
+Source-Precedence, ID-Schema) oder bei einem Drift-Audit gegen die
+Baseline. Für reine Implementierungs-Slices genügt die im Repo
+verkörperte Form (dieses Briefing, die Templates, die Konventionen); die
+Baseline ist dort bereits eingearbeitet. Derivativ: bei Konflikt gelten
+die kanonischen Quellen; adoptierter Stand steht in
+[`harness/conventions.md`](harness/conventions.md) §Baseline.
 
-Die **Skelett-Vorlagen der adoptierten Baseline** (Lastenheft, Spec,
-Architektur, ADR, Slice, Carveout, Review-Report, …) liegen unter
-<Pfad oder URL zur Template-Quelle, bei Adoption des Kurses als ZIP
-zum Bootstrap:
-https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip
-(Release-Asset; im ausgelieferten ZIP auf seinen Tag gepinnt = adoptierter
-Stand), für Einzelabruf pro Datei:
-https://raw.githubusercontent.com/pt9912/ai-harness-course/main/lab/templates/>
-— beim Anlegen neuer Artefakte das passende Template kopieren statt
-frei zu formulieren.
+Die **Skelett-Vorlagen** der Baseline liegen als ZIP unter
+<https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>;
+die wiederkehrenden Varianten (ADR, Slice, Welle, Carveout, Review-Report)
+sind als `*.template.md` co-located im Repo. Beim Anlegen neuer Artefakte
+das passende Template kopieren statt frei zu formulieren.
 
 ## 2. Kanonische Quellen (Source Precedence)
 
