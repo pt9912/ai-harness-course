@@ -296,7 +296,7 @@ flowchart TD
     Start([leeres Repo]):::start
     S0["0. Modus = GF pro Sub-Area"]:::orient
     S1["1. Baseline + Repo-Klasse + ID-Schemata"]:::orient
-    S2["2. Templates adoptieren"]:::action
+    S2["2. Templates + Regelwerk adoptieren"]:::action
     S3["3. conventions.md (MR-000 + MR-001)"]:::action
     S4["4. lastenheft.md Outline"]:::content
     S5["5. Roadmap + Release-Plan Outline"]:::content
@@ -336,7 +336,7 @@ BF-Diskrepanz-Auslöse-Variante.
 |---|---|---|---|
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
 | 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schemata festlegen (`LH-*`, `ARC-*`, `SPEC-*`, `MR-*`) | keine | reift 2/3 |
-| 2 | **Dokument-Skelette** aus [`../../../lab/templates/`](../../../lab/templates/) kopieren; **Tooling** (`Makefile`, `.d-check.yml`) als Startgerüst übernehmen; `harness.mk` nur, wenn das Repo d-check als Doku-Gate *konsumiert* (gegenstandslos im Self-Hosting-/Tool-Repo, das d-check direkt fährt) | Dokument-Skelette **0 → 1**; Tooling-Artefakte tragen keine Phase-Reife | keine |
+| 2 | **Dokument-Skelette** aus [`../../../lab/templates/`](../../../lab/templates/) kopieren; **Tooling** (`Makefile`, `.d-check.yml`) als Startgerüst übernehmen (`harness.mk` nur, wenn das Repo d-check als Doku-Gate *konsumiert* — gegenstandslos im Self-Hosting-/Tool-Repo, das d-check direkt fährt); **Regelwerk der Baseline vendoren** nach `.harness/baseline/<tag>/regelwerk/` (+ `SHA256SUMS`, netzlos) als präsente nachschlagbare Vertiefung | Dokument-Skelette **0 → 1**; vendored Regelwerk + Tooling tragen keine Phase-Reife | keine |
 | 3 | `harness/conventions.md` mit MR-000 (Baseline) + MR-001 (`ARC-*`/`SPEC-*` als Adaption) | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
 | 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
 
@@ -356,6 +356,19 @@ Trigger entstehen ab Schritt 3 (Konventionen-Adoption); die Setup-Phase
 legt die *Quellen* an, die Inhalts-Phase erzeugt die *Folge-Bezüge*
 zwischen Dokumenten und ADRs. Die Tabellen-Trennung macht das
 kognitiv lesbar — die Phasen verschwimmen sonst.
+
+**Anmerkung zum vendored Regelwerk (Schritt 2).** Das Regelwerk der
+Baseline wird beim Bootstrap **committet vendored** (`.harness/baseline/<tag>/regelwerk/`
++ `SHA256SUMS`, netzlos materialisiert), nicht pro Lauf extern gefetcht — es
+ist die *präsente, nachschlagbare Vertiefung* zur verkörperten Form: pro
+Entscheidung, deren operative Detailtiefe Briefing und Konventionen nicht
+tragen (Trigger-Klassen, Sub-Area-Qualifikation, Carveout-vs-Reconciliation,
+Modus-Diagnose), wird der *relevante Abschnitt* nachgeschlagen (README =
+Index), ohne das ganze Regelwerk im Kontext zu halten. Das ist das
+Modul-0-Prinzip — *Per-Lauf-Relevantes gehört verkörpert, nicht extern
+nachgeladen* — angewandt auf das Regelwerk selbst; ein realer Konsument-Repo
+(d-check) führt es netzlos vendored und schlägt im Slice-Betrieb routinemäßig
+nach.
 
 ### Wie sehen T1 und T2 konkret aus?
 
@@ -429,7 +442,7 @@ flowchart TD
     Start([Repo mit Code/Makefile/CI<br/>ohne Harness]):::startBF
     S1["1. Modus = BF + Repo-Klasse + ID-Schemata"]:::orient
     S2["2. Code-Inventur (Discovery)"]:::discover
-    S3["3. Templates adoptieren"]:::action
+    S3["3. Templates + Regelwerk adoptieren"]:::action
     S4["4. conventions.md (Modus = BF, MR-000)"]:::action
     S5["5. Sensors-Haupt-Tabelle aus Makefile"]:::contentBF
     S6["6. Lastenheft Reverse-Engineering aus Tests/CI"]:::contentBF
@@ -466,7 +479,7 @@ Nummerierung GF 0–8 vs. BF 1–9.
 |---|---|---|
 | 1 | GF-Schritte 0 und 1 in einem Schritt zusammengefasst: Modus-Antizipation "BF pro Sub-Area" + Baseline-Auswahl + Repo-Klasse + ID-Schemata festlegen | + explizite Modus-Setzung mit Sub-Area-Aufzählung; Repo-Klassen-Wahl und Modus-Antizipation fallen zusammen |
 | 2 | **Code-Inventur (Discovery):** Makefile, CI, Tests, README, Commit-Messages inventarisieren als Lerner-Schritt | **neu in BF** — kein Repo-Artefakt entsteht, nur Lerner-Wissen |
-| 3 | Templates adoptieren | wie GF |
+| 3 | Templates adoptieren + **Regelwerk vendoren** (`.harness/baseline/<tag>/regelwerk/` + `SHA256SUMS`) | wie GF |
 | 4 | `harness/conventions.md` mit Modus = BF pro Sub-Area, MR-000-Aussage | Modus-Block anders strukturiert (BF-Deklarationen + Konvergenz-Auftrag pro Sub-Area) |
 
 ### Detail-Tabelle (Schritte 5–9: Reconciliation-Phase)

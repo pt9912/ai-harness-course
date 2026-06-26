@@ -28,18 +28,24 @@ Baseline, Modus-Deklarationen pro Sub-Area, Zusatzklassen für
 Sensors-Bindung) leben in
 [`harness/conventions.md`](harness/conventions.md).
 
-Das **Regelwerk der adoptierten Baseline** liegt als self-navigierbares
-**Modul-Bundle (ZIP)** unter
-<https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
-— zu lesen, **bevor du an der Harness-Schicht selbst arbeitest**: beim
-Bootstrap, bei Änderungen an
-[`harness/conventions.md`](harness/conventions.md) (Adaptionen `MR-<NNN>`,
-Source-Precedence, ID-Schema) oder bei einem Drift-Audit gegen die
-Baseline. Für reine Implementierungs-Slices genügt die im Repo
-verkörperte Form (dieses Briefing, die Templates, die Konventionen); die
-Baseline ist dort bereits eingearbeitet. Derivativ: bei Konflikt gelten
-die kanonischen Quellen; adoptierter Stand steht in
-[`harness/conventions.md`](harness/conventions.md) §Baseline.
+Das **Regelwerk der adoptierten Baseline** ist die **präsente,
+nachschlagbare Vertiefung** zu diesem Briefing: ein self-navigierbares
+**Modul-Bundle** (`README.md` = Index), beim Bootstrap aus dem Release-ZIP
+(<https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>)
+**committet vendored** unter `.harness/baseline/<tag>/regelwerk/` (netzlos
+materialisiert samt `SHA256SUMS` — Vorgehen siehe
+[Kurs Modul 2 §Bootstrap](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md);
+Quelle/Stand in [`harness/conventions.md`](harness/conventions.md) §Baseline).
+
+Die verkörperte Form (dieses Briefing, die Konventionen, die Templates)
+**führt**; das Regelwerk wird **pro Entscheidung nachgeschlagen, deren
+operative Detailtiefe das Briefing nicht trägt** — Trigger-Klassen,
+Sub-Area-Qualifikation, Carveout-vs-Reconciliation, Modus-Diagnose. Dabei
+**nur den benötigten Abschnitt** laden (README ist der Index), **nicht das
+ganze Regelwerk im Kontext halten**. Breiterer Pflicht-Blick bleibt bei:
+Bootstrap, Änderung an [`harness/conventions.md`](harness/conventions.md)
+(Adaptionen `MR-<NNN>`, Source-Precedence, ID-Schema), Drift-Audit gegen die
+Baseline. Derivativ: bei Konflikt gelten die kanonischen Quellen.
 
 Die **Skelett-Vorlagen** der Baseline liegen als ZIP unter
 <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>;

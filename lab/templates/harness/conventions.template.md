@@ -126,32 +126,29 @@ keine (AGENTS.md §5/§6).
   eigener Rang sichtbar sein.
 - **Auflösungs-Trigger:** permanent.
 
-### MR-003 — Lese-Disziplin für das externe Regelwerk
+### MR-003 — Regelwerk als vendored, nachschlagbare Referenz
 
-- **Datum:** 2026-06-24
-- **Geltungsbereich:** [`AGENTS.md`](../AGENTS.md) §1 (Regelwerk-Lesepflicht)
-- **Adaption:** Das externe Regelwerk-Bundle (ZIP) ist **nicht** pro Session
-  zu lesen, sondern nur bei **Schwellen-Ereignissen**, an denen die im Repo
-  verkörperte Form selbst berührt wird: (1) Harness-Bootstrap; (2) Änderung
-  an dieser Datei — Adaptionen (`MR-<NNN>`), Source-Precedence, ID-Schema;
-  (3) Drift-Audit der Verkörperung gegen die Baseline. Reine
-  Implementierungs-Slices arbeiten ausschließlich auf der verkörperten Form
-  (Briefing, Templates, Konventionen, Gate-Baseline) und lesen das Bundle
-  nicht.
-- **Begründung:** Die Baseline kennt keine Per-Session-Lesepflicht — ihr
-  8-Schritt-Workflow (Modul 9, gespiegelt in [`AGENTS.md`](../AGENTS.md) §6)
-  startet bei [`harness/README.md`](README.md) und der kanonischen Quelle,
-  nicht beim Regelwerk; das Bundle ist laut eigener README derivativ und
-  nicht-normativ (Quelle der Wahrheit ist der Kurs). Das Regelwerk ist damit
-  eine **Erkenntnis-**, keine **Laufzeit-Abhängigkeit**: das Derivat
-  (Briefing, diese Datei, Templates) lässt sich ohne die Quelle nicht auf
-  Treue auditieren, und genau dafür — Verifizieren oder Ändern der
-  Verkörperung — wird gelesen (Modul 0: Per-Lauf-Relevantes gehört
-  verkörpert, nicht extern nachgeladen). Die zuvor in §1 stehende „einmal pro
-  Session"-Pflicht war eine über-strenge Adopter-Setzung ohne Baseline-Deckung;
-  diese Adaption ersetzt sie durch die anlassbezogene Form und macht den
-  echten Lese-Anlass explizit und prüfbar.
-- **Auflösungs-Trigger:** permanent.
+- **Datum:** <Datum>
+- **Geltungsbereich:** [`AGENTS.md`](../AGENTS.md) §1, [§Baseline](#baseline)
+- **Adaption:** Provenienz/Konkretisierung (keine inhaltliche Abweichung vom
+  Baseline-Default): Das Regelwerk der Baseline wird **committet vendored**
+  unter `.harness/baseline/<tag>/regelwerk/` geführt — beim Bootstrap
+  materialisiert (Modul 2), netzlos auf jedem Checkout, Integrität über
+  `.harness/baseline/<tag>/SHA256SUMS`. Es ist die **präsente, nachschlagbare
+  Vertiefung** zur verkörperten Form: pro Entscheidung, deren operative
+  Detailtiefe Briefing und Konventionen nicht tragen (Trigger-Klassen,
+  Sub-Area-Qualifikation, Carveout-vs-Reconciliation, Modus-Diagnose), wird
+  der **relevante Abschnitt** referenziert (README = Index), ohne das ganze
+  Regelwerk im Kontext zu halten.
+- **Begründung:** Modul-0-Prinzip — *Per-Lauf-Relevantes gehört verkörpert,
+  nicht extern nachgeladen*: Da das Regelwerk im Slice-Betrieb routinemäßig
+  nachgeschlagen wird (Real-Beleg eines Konsument-Repos: d-check), wird es
+  vendored statt pro Lauf extern gefetcht — das macht den Nachschlag netzlos
+  und über den `<tag>` reproduzierbar. Der konkrete Tag und das
+  Integritätsmanifest stehen hier als Provenienz, damit Drift gegen die
+  adoptierte Baseline prüfbar bleibt. (Die *Kontext*-Hygiene bleibt: nur der
+  benötigte Abschnitt, nie das ganze Bundle im Kontext.)
+- **Auflösungs-Trigger:** permanent (Provenienz/Baseline-Konformität).
 
 <!-- Weitere konkrete Adaptionen wie folgt: -->
 

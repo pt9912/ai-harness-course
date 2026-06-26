@@ -58,7 +58,7 @@ Was lenkt den Agenten *vor* der Handlung? Pointer, kein Inhalt.
 | [`docs/plan/planning/`](../docs/plan/planning/) | Slice-Pläne und Roadmap |
 | [`AGENTS.md`](../AGENTS.md) | Hard Rules, Source Precedence, Workflow |
 | [`conventions.md`](conventions.md) | repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Modus-Deklarationen |
-| <Agents-Digest der Baseline (Pfad/Raw-URL)> | adoptiertes Betriebsregelwerk in Agenten-Kurzform; derivativ, Stand siehe [`conventions.md`](conventions.md) §Baseline |
+| `.harness/baseline/<tag>/regelwerk/` (vendored; `README.md` = Index) | adoptiertes Betriebsregelwerk in Agenten-Kurzform — **präsente nachschlagbare Vertiefung**, pro Entscheidung abschnittsweise (siehe [`AGENTS.md`](../AGENTS.md) §1); derivativ, Stand/Tag siehe [`conventions.md`](conventions.md) §Baseline |
 
 ## Sensors (Feedback-Gates)
 
