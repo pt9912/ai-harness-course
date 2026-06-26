@@ -62,8 +62,7 @@ ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
 **Schritt 6 — Out-of-Scope:**
 > Out-of-Scope (LH-FA-CFG-001): Schreiboperationen, Migration zwischen Versionen, Verschlüsselung.
 
-Sechs Schritte, ein vollständig prüfbares Akzeptanzkriterium. Vergleich
-mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../example/spec/lastenheft.md).
+Sechs Schritte, ein vollständig prüfbares Akzeptanzkriterium.
 
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 

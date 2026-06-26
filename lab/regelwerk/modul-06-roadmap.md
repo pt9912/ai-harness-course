@@ -130,8 +130,7 @@ slice-019 noch nicht grün. Drei mögliche Antworten:
 | Carveout `CO-009` für die fehlende Latenz, Welle schließt mit Carveout. | Sauber: das Versprechen wird offen reduziert, Folge-Slice ist verdrahtet, Audit weiß, was er ansieht. |
 
 *Eine Roadmap ist nicht "wann?", sondern "in welcher Reihenfolge
-wovon?"*. Vergleich:
-[`roadmap.md`](../example/docs/plan/planning/in-progress/roadmap.md).
+wovon?"*.
 
 ### Regeln gegen typische Fehlannahmen (Modul 6)
 

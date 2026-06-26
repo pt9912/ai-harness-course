@@ -100,9 +100,7 @@ Für Sprachen mit eigenständigem Binär-Output (Go, Rust, statisch
 gelinkte JVM-AOT) ist die noch härtere Variante
 `gcr.io/distroless/static-debian12:nonroot@sha256:d093aa3e…` (auch
 Distroless-Tags floaten — deshalb per Digest gepinnt) ohne
-interpretierbares Runtime — siehe
-[`../../lab/example/go/Dockerfile`](../example/go/Dockerfile)
-als Vorbild.
+interpretierbares Runtime.
 
 **Schritt 5 — Image-Hash im Build-Output festhalten.** Damit das Image
 in einem Replay-Manifest (Modul 12) referenzierbar wird:
@@ -136,12 +134,7 @@ Wirkung:
 | `COPY . .` *vor* `COPY pyproject.toml ./` ziehen | Dependency-Stage wird bei jedem Code-Change rebuilt; Build-Zeit explodiert, Cache wirkt nicht. |
 
 Sechs Schritte, ein Image, drei Drift-Anker (Digest · Lock-File ·
-Stage-Trennung). Vergleich:
-[`../../lab/example/python/Dockerfile`](../example/python/Dockerfile)
-und
-[`../../lab/example/go/Dockerfile`](../example/go/Dockerfile)
-— beide tragen den ID-Kommentar `LH-QA-03` im Header und folgen
-demselben Drei-Stage-Schnitt mit sprach-spezifischen Anpassungen.
+Stage-Trennung).
 
 ### Reproduzierbarkeits-Regeln: Drift-Klassen und Stage-Schnitte
 

@@ -87,5 +87,4 @@ der ADR-7 implementiert wird):
 > Steering-Loop-Beleg: drei Vorfälle in zwei Wochen → ADR-7 →
 > ArchUnit-Test → kein weiterer Vorfall in 6 Wochen.
 
-Sieben Schritte, eine geprüfte Entscheidung. Vergleich:
-[`/lab/example/docs/plan/adr/`](../example/docs/plan/adr/).
+Sieben Schritte, eine geprüfte Entscheidung.

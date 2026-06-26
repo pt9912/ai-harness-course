@@ -112,10 +112,7 @@ Steering-Loop-Eintrag (Modul 15 Doku-Konsistenz-Agent meldete vor
 Freigabe einen Drift in AGENTS.md — wurde behoben, vor Freigabe geprüft).
 ```
 
-Sechs Schritte, eine Freigabe mit Belegen pro Item. Vergleich:
-[`../../lab/example/runbooks/`](../example/runbooks/) und
-[`../../lab/example/Makefile`](../example/Makefile) Target
-`make release`.
+Sechs Schritte, eine Freigabe mit Belegen pro Item.
 
 ### Rollback-vs-Fix-Forward-Regeln
 

@@ -162,37 +162,6 @@ die linke Tabellenspalte); *Werkzeug-Klasse* ist die Achse, auf der sich
 die drei unterscheiden (punktuell vs. Sub-Area-weit vs. dauerhaft — die
 Träger-Spalte).
 
-> **Hinweis zum Lab-Beispiel:** Das Lab unter
-> [`lab/example/docs/plan/carveouts/`](../example/docs/plan/carveouts/)
-> trägt heute nur den einzelnen `CO-001-index-coverage.md` — Frage 1
-> führt dort folglich auf den Einzeldiskrepanz-Pfad und weiter zu
-> Frage 2 (Trigger erreichbar — ja: Welle-2-Property-Tests). Ein
-> echter Cluster entstünde, wenn zusätzlich `CO-002`/`CO-003` für
-> Boundary-Tests und Type-Coverage auf demselben `internal/index/`-
-> Pfad lägen; dann sprängen Frage 1 und Werkzeug-Wahl auf
-> BF-Sub-Area-Markierung um. Die Markierungs-Mechanik selbst ist im
-> Lab strukturell bereits vorhanden: [`lab/example/harness/conventions.md`](../example/harness/conventions.md)
-> trägt einen `## Adaptions-Block` mit `MR-000` Baseline-Aussage und
-> `MR-001` Source Precedence — die BF-Sub-Area-Markierung wäre ein
-> neuer `MR-NNN`-Eintrag im selben Block. Konkret-Format:
->
-> ```markdown
-> ### MR-002 — `internal/index/`-Sub-Area im Brownfield-Modus
->
-> **Modus:** Brownfield bis Welle-3-Graduation.
-> **Geltungsbereich:** `internal/index/` (Index-Layer, alle Sprach-Skelette).
-> **Graduation-Trigger:** Property-Test-Suite läuft + Coverage ≥ 90 %
-> über alle Pfade.
-> **Sync-Trigger:** nach Graduation einen Pointer-Eintrag in
-> `harness/README.md` §Sensors, der die Sub-Area als GF-bewertet
-> ausweist.
-> **Folge-Slice (für Reconciliation):** `slice-014-bf-index-reconciliation.md` (legt die Inventur und die ersten Reconciliation-Häppchen fest).
-> ```
->
-> Das ersetzt eine Carveout-Kaskade (`CO-001`/`CO-002`/`CO-003` auf
-> denselben Pfad) durch eine einzelne Sub-Area-weite Aussage mit
-> klarem Graduations-Pfad.
-
 **Was passiert mit dem Schritt-1–5-Entwurf, wenn der
 Trichter nicht auf Carveout führt?** Der Inhalt ist nicht verloren, nur verschoben.
 Trigger-Formulierung (Schritt 3), Geltungsbereichs-Präzision
@@ -220,8 +189,7 @@ Wenn die Wahl im Trichter auf "permanent" fällt, ist der
 **Status:** Permanent — übergeführt in ADR-0009.
 ```
 
-Das ist nicht Aufgabe; das ist Ehrlichkeit. Vergleich:
-[`CO-001-index-coverage.md`](../example/docs/plan/carveouts/CO-001-index-coverage.md).
+Das ist nicht Aufgabe; das ist Ehrlichkeit.
 
 ### Drei Werkzeuge für gelockerte Gate-Disziplin (Modul 7)
 

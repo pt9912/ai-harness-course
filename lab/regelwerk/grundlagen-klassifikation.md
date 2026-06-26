@@ -51,11 +51,7 @@ nachgelagerte Review.
 Die 2×2-Matrix ist sprach-neutral; die Sensoren in jedem Quadranten
 sind es nicht. Das Begleit-Lab wird das für sechs Sprachen
 (Go, Python, Kotlin, Java, C#/.NET, C++) zeigen — jeweils mit eigener
-Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette. Die sechs
-Sprach-Skelette sind als Phase C der Lab-Roadmap ausgeliefert und
-liegen unter [`/lab/example/`](../example/) (`go/`,
-`python/`, `kotlin/`, `java/`, `csharp/`, `cpp/`); die Module 2, 9, 13 und 14
-verweisen auf die Sprach-Varianten.
+Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette.
 
 ### Drei Harness-Kategorien (Böckeler)
 

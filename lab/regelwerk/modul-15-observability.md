@@ -129,10 +129,7 @@ oder einen Doku-Konsistenz-Agenten die Bezug-Zeile prüfen lassen
 > Moduls ist das Span-Schema mit IDs; *welche* Schreibvariante die
 > Slice-Seite wählt, ist Repo-spezifisch.
 
-Sechs Schritte, eine durchgängige Traceability. Vergleich im Lab:
-[`../../lab/example/otel/sl-009-agent-run.trace.json`](../example/otel/sl-009-agent-run.trace.json)
-(Span `impl-2` ist der `writer.write_index`-Call mit `requirement.id`
-und `adr.id`).
+Sechs Schritte, eine durchgängige Traceability.
 
 ### Span-/Audit-Attribut-Regeln
 

@@ -471,8 +471,6 @@ für Spec/ADR adressiert — hier in der Form-Ebene.
 
 Vorlage:
 [`/lab/templates/harness/conventions.template.md`](../templates/harness/conventions.template.md).
-Worked Example:
-[`/lab/example/harness/conventions.md`](../example/harness/conventions.md).
 
 ### Harness-Bootstrap
 
