@@ -31,9 +31,9 @@ arch-check: ## depguard-Regeln (ADR-0001 Layering)
 		golangci/golangci-lint:v1.62-alpine \
 		golangci-lint run --disable-all --enable=depguard ./...
 
-test: ## Unit-Tests
+test: ## Unit-Tests (Race-Detector braucht cgo: gcc/musl-dev im alpine-Image)
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GO_IMAGE) \
-		sh -c "go mod download && go test -race ./..."
+		sh -c "apk add --no-cache gcc musl-dev && go mod download && CGO_ENABLED=1 go test -race ./..."
 
 test-determinism: ## LH-QA-02: 100 Wiederholungen identischer Eingabe
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GO_IMAGE) \

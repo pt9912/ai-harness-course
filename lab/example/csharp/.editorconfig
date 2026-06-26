@@ -35,3 +35,8 @@ dotnet_analyzer_diagnostic.category-Usage.severity = warning
 
 [*.{json,yml,yaml,xml,csproj,sln,props,targets}]
 indent_size = 2
+
+# Test-Methoden nutzen bewusst Unterstriche (xUnit-Konvention
+# Method_Scenario_Expected); CA1707 ist für Testnamen gegenstandslos.
+[tests/**/*.cs]
+dotnet_diagnostic.CA1707.severity = none

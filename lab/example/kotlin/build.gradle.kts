@@ -18,7 +18,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.3")
     // Konsist: Kotlin-Architekturtests, ADR-0001 Layering
-    testImplementation("com.lemonappdev:konsist:0.16.1")
+    testImplementation("com.lemonappdev:konsist:0.17.3")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -44,6 +44,13 @@ detekt {
 
 kover {
     reports {
+        // Composition Root von der Coverage ausnehmen (analog cpp/java:
+        // main.cpp bzw. Main.class). Reines Wiring, kein Unit-Test-Gegenstand.
+        filters {
+            excludes {
+                classes("com.example.docsearch.MainKt")
+            }
+        }
         verify {
             rule {
                 bound {

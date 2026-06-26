@@ -1,6 +1,3 @@
-/**
- * Index — Vektor-Storage, Cosinus, Tie-Break (AGENTS.md §J-3, slice-009).
- */
 package com.example.docsearch.index;
 
 import com.example.docsearch.types.Types;
@@ -10,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Index — Vektor-Storage, Cosinus, Tie-Break (AGENTS.md §J-3, slice-009).
+ */
 public final class Index {
     private final List<IndexEntry> entries = new ArrayList<>();
 
@@ -25,10 +25,10 @@ public final class Index {
         if (k <= 0 || entries.isEmpty()) {
             return List.of();
         }
-        int effectiveK = Math.min(k, Types.MAX_TOPK);
+        final int effectiveK = Math.min(k, Types.MAX_TOPK);
 
         record Scored(IndexEntry e, float score) { }
-        List<Scored> scored = new ArrayList<>(entries.size());
+        final List<Scored> scored = new ArrayList<>(entries.size());
         for (IndexEntry e : entries) {
             scored.add(new Scored(e, cosine(query, e.embedding())));
         }
@@ -42,9 +42,9 @@ public final class Index {
                 .thenComparingInt(s -> s.e().sectionIndex())
         );
 
-        List<SearchResult> out = new ArrayList<>(effectiveK);
+        final List<SearchResult> out = new ArrayList<>(effectiveK);
         for (int i = 0; i < effectiveK && i < scored.size(); i++) {
-            Scored s = scored.get(i);
+            final Scored s = scored.get(i);
             out.add(new SearchResult(s.e().docPath(), s.e().sectionTitle(), s.score()));
         }
         return out;

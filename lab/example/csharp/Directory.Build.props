@@ -4,15 +4,22 @@
     <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <!-- Nötig, damit IDE0005 (unnötige usings) im Build greift, statt nur in
+         dotnet format — siehe https://github.com/dotnet/roslyn/issues/41640. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RestoreLockedMode>true</RestoreLockedMode>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
-  <!-- AGENTS.md §C-1: kein SuppressMessage-Override. -->
+  <!-- AGENTS.md §C-1: kein [SuppressMessage]/#pragma-Override echter Findings.
+       CS1591 (XML-Doc-Pflicht) wird projektweit NICHT erzwungen — reine Folge von
+       GenerateDocumentationFile=true (oben, für IDE0005), kein Unterdrücken eines
+       Code-Smells. -->
   <PropertyGroup>
-    <NoWarn></NoWarn>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
 </Project>

@@ -1,6 +1,3 @@
-/**
- * Service-Layer (LH-FA-02). ADR-0001: importiert types, index, embedding; KEIN ui.
- */
 package com.example.docsearch.service;
 
 import com.example.docsearch.embedding.Embedder;
@@ -10,6 +7,9 @@ import com.example.docsearch.types.Types.SearchRequest;
 import com.example.docsearch.types.Types.SearchResult;
 import java.util.List;
 
+/**
+ * Service-Layer (LH-FA-02). ADR-0001: importiert types, index, embedding; KEIN ui.
+ */
 public final class Searcher {
     private final Index idx;
     private final Embedder emb;
@@ -19,16 +19,19 @@ public final class Searcher {
         this.emb = emb;
     }
 
+    /** Wird geworfen bei leerer Query (E002). */
     public static final class EmptyQueryException extends RuntimeException {
         public EmptyQueryException() { super("E002: empty query"); }
     }
 
+    /** Wird geworfen, wenn der Embedder ausfällt (E003). */
     public static final class EmbeddingUnavailableException extends RuntimeException {
         public EmbeddingUnavailableException(Throwable cause) {
             super("E003: embedding unavailable", cause);
         }
     }
 
+    /** Antwort an die UI inkl. Clamping-Flag. */
     public record SearchResponse(List<SearchResult> results, boolean kClamped) { }
 
     public SearchResponse search(SearchRequest req) {

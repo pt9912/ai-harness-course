@@ -1,5 +1,5 @@
 # DocSearch Kotlin-Skelett — Makefile
-# Docker-only. Gradle im Container, Wrapper im Repo.
+# Docker-only. Gradle im Container.
 
 IMAGE := docsearch-kotlin
 DOCKER := docker
@@ -25,11 +25,12 @@ typecheck: ## Kotlin-Compiler
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) gradle compileKotlin compileTestKotlin
 
 arch-check: ## Konsist-Tests (ADR-0001 Layering)
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
-		gradle test --tests "com.example.docsearch.ArchitectureTest"
+	$(DOCKER) run --rm --tmpfs /src/.git -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
+		sh -c 'git init -q /src >/dev/null 2>&1; gradle test --tests "com.example.docsearch.ArchitectureTest"'
 
 test: ## JUnit-Tests
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) gradle test
+	$(DOCKER) run --rm --tmpfs /src/.git -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
+		sh -c 'git init -q /src >/dev/null 2>&1; gradle test'
 
 test-determinism: ## LH-QA-02 100 Iter
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
@@ -37,12 +38,13 @@ test-determinism: ## LH-QA-02 100 Iter
 		-Pdeterminism.iterations=100
 
 coverage-gate: ## kover, 70 %
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) gradle koverVerify
+	$(DOCKER) run --rm --tmpfs /src/.git -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
+		sh -c 'git init -q /src >/dev/null 2>&1; gradle koverVerify'
 
 coverage-gate-critical:
 	@echo "Critical coverage — CO-001 (index) ausgenommen"
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
-		gradle koverVerify -Pcritical=true
+	$(DOCKER) run --rm --tmpfs /src/.git -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
+		sh -c 'git init -q /src >/dev/null 2>&1; gradle koverVerify -Pcritical=true'
 
 gates: lint typecheck arch-check test coverage-gate
 	@echo "gates grün."

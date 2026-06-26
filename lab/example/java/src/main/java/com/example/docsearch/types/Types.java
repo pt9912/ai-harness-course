@@ -1,8 +1,8 @@
+package com.example.docsearch.types;
+
 /**
  * Domain-Modell, Pure. ADR-0001 Layer 1.
  */
-package com.example.docsearch.types;
-
 public final class Types {
     private Types() { }
 

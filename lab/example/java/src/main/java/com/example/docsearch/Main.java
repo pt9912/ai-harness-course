@@ -24,8 +24,8 @@ public final class Main {
             return;
         }
 
-        Index idx = new Index();
-        MockEmbedder emb = new MockEmbedder();
+        final Index idx = new Index();
+        final MockEmbedder emb = new MockEmbedder();
         new Searcher(idx, emb);
         System.out.println("DocSearch wired. HTTP-Start ist in Welle-4-Slice geplant.");
     }

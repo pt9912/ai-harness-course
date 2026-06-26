@@ -7,7 +7,7 @@ COPY src ./src
 COPY tests ./tests
 RUN dotnet restore DocSearch.sln && \
     dotnet publish src/DocSearch/DocSearch.csproj \
-        -c Release -r linux-x64 --self-contained false \
+        -c Release --no-restore \
         /p:UseAppHost=true -o /app
 
 FROM mcr.microsoft.com/dotnet/runtime:10.0-azurelinux3.0-distroless@sha256:30a8c40c480930bdb3e9f01870f5ab742679982134807c780b4671af5a5c4959

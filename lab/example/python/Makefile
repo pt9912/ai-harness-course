@@ -28,7 +28,7 @@ typecheck: ## mypy --strict
 
 arch-check: ## import-linter Contracts (ADR-0001)
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
-		sh -c "pip install -q import-linter==2.0 && lint-imports --config importlinter.cfg"
+		sh -c "pip install -q import-linter==2.0 && PYTHONPATH=src lint-imports --config importlinter.cfg"
 
 test: ## pytest
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \

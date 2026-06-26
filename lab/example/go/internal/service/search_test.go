@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"errors"
+	"math"
 	"testing"
 
 	"github.com/example/docsearch/internal/embedding"
@@ -105,6 +106,11 @@ func setup(t *testing.T, n int) *Searcher {
 	emb := embedding.MockEmbedder{}
 	for i := 0; i < n; i++ {
 		vec, _ := emb.Embed("seed-" + string(rune('a'+i%26)))
+		// Bounds-Check statt //nolint (Suppression-Verbot, AGENTS.md §G-1):
+		// macht die int->uint32-Konvertierung für gosec G115 nachweisbar sicher.
+		if i < 0 || i > math.MaxUint32 {
+			t.Fatalf("section index %d out of uint32 range", i)
+		}
 		idx.Add(types.IndexEntry{
 			DocPath:      "doc-" + string(rune('a'+i%26)) + ".md",
 			SectionTitle: "Section",

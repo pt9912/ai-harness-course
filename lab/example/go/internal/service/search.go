@@ -12,8 +12,8 @@ import (
 
 // Fehler aus spec/spezifikation.md §4.
 var (
-	ErrEmptyQuery     = errors.New("E002: empty query")
-	ErrEmbeddingDown  = errors.New("E003: embedding unavailable")
+	ErrEmptyQuery    = errors.New("E002: empty query")
+	ErrEmbeddingDown = errors.New("E003: embedding unavailable")
 )
 
 // Searcher — Service-Fassade.
@@ -29,8 +29,8 @@ func NewSearcher(idx *index.Index, emb embedding.Embedder) *Searcher {
 
 // SearchResponse — Antwort an UI inkl. Clamping-Flag.
 type SearchResponse struct {
-	Results    []types.SearchResult
-	KClamped   bool
+	Results  []types.SearchResult
+	KClamped bool
 }
 
 // Search — LH-FA-02.a: Embed → TopK → Antwort.

@@ -2,9 +2,13 @@
 using DocSearch.Service;
 using DocSearch.Types;
 
-namespace DocSearch.UI;
-
-public sealed class Handler(Searcher searcher)
+namespace DocSearch.UI
 {
-    public SearchResponse HandleSearch(SearchRequest req) => searcher.Search(req);
+    public sealed class Handler(Searcher searcher)
+    {
+        public SearchResponse HandleSearch(SearchRequest req)
+        {
+            return searcher.Search(req);
+        }
+    }
 }
