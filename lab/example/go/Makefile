@@ -39,22 +39,14 @@ test-determinism: ## LH-QA-02: 100 Wiederholungen identischer Eingabe
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GO_IMAGE) \
 		sh -c "go mod download && go test -run 'TestDeterminism' -count=100 ./..."
 
-coverage-gate: ## LH-QA-Coverage (bootstrap-aware, 70%)
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GO_IMAGE) \
-		sh -c "go mod download && \
-			go test -coverprofile=coverage.out ./... && \
-			cov=\$$(go tool cover -func=coverage.out | tail -1 | awk '{print \$$3}' | tr -d '%'); \
-			echo \"Coverage: \$$cov%\"; \
-			awk 'BEGIN{exit !('\$$cov' >= 70)}' || (echo 'FAIL: coverage <70%'; exit 1)"
+coverage-gate: ## LH-QA-Coverage (bootstrap-aware, 70%; hermetisch via coverage-Stage)
+	$(DOCKER) build --target coverage -t $(IMAGE)-coverage .
+	$(DOCKER) run --rm $(IMAGE)-coverage ./... 70
 
 coverage-gate-critical: ## Critical-Path-Coverage (CO-001 ausgenommen)
 	@echo "Critical coverage check — CO-001 (internal/index) ausgenommen bis Welle 2 done"
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GO_IMAGE) \
-		sh -c "go mod download && \
-			go test -coverprofile=coverage.out ./internal/service/... && \
-			cov=\$$(go tool cover -func=coverage.out | tail -1 | awk '{print \$$3}' | tr -d '%'); \
-			echo \"Service Coverage: \$$cov%\"; \
-			awk 'BEGIN{exit !('\$$cov' >= 80)}' || (echo 'FAIL: service coverage <80%'; exit 1)"
+	$(DOCKER) build --target coverage -t $(IMAGE)-coverage .
+	$(DOCKER) run --rm $(IMAGE)-coverage ./internal/service/... 80
 
 gates: lint typecheck arch-check test coverage-gate ## alle inneren Gates (mandatory)
 	@echo "gates grün."
@@ -67,4 +59,4 @@ fullbuild: ci build ## volle Closure
 
 clean: ## generierte Artefakte entfernen
 	rm -f coverage.out
-	-$(DOCKER) image rm $(IMAGE):latest
+	-$(DOCKER) image rm $(IMAGE):latest $(IMAGE)-coverage

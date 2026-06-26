@@ -14,6 +14,11 @@ RUN CGO_ENABLED=0 GOOS=linux go build \
     -trimpath -ldflags="-s -w" \
     -o /out/docsearch ./cmd/docsearch
 
+# ---- Stage: coverage (Gate, hermetisch — coverage.out bleibt im Container) ----
+FROM deps AS coverage
+COPY . .
+ENTRYPOINT ["sh", "scripts/coverage-gate.sh"]
+
 # ---- Stage 3: runtime (Distroless, nonroot) ----
 FROM gcr.io/distroless/static-debian12:nonroot@sha256:d093aa3e30dbadd3efe1310db061a14da60299baff8450a17fe0ccc514a16639
 COPY --from=build /out/docsearch /docsearch
