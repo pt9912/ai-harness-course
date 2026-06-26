@@ -82,6 +82,7 @@ Wird *nach* Abschluss ergänzt. Inhalt:
 - Was hat funktioniert?
 - Was ging anders als geplant?
 - Steering-Loop-Eintrag: welcher Guide/Sensor sollte verbessert werden?
+  (kanonische Definition: [`/kurs/de/grundlagen/klassifikation.md` §Steering Loop](../../../../../kurs/de/grundlagen/klassifikation.md#steering-loop))
 - Folge-Slices: welche neuen open/-Einträge?
 -->
 
