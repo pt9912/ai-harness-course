@@ -5,7 +5,7 @@
 # lab/templates ist by-design symbolisch (Pfade gelten im Ziel-Repo).
 scan:
   roots: ["."]
-  ignore: ["lab/templates/**", ".tmp/**"]
+  ignore: ["lab/templates/**", "lab/example/cpp/build-cov/**", ".tmp/**"]
 modules: [links, anchors, codepaths]
 codepaths:
   roots: [lab, kurs, tools]
