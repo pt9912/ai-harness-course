@@ -11,6 +11,8 @@ Lastenheft -> Spezifikation -> Architektur -> ADR -> Slice -> Code
       -> Review -> Verifikation -> Replay/Gates -> Betrieb
 ```
 
+Diese Kette ist der Lebenszyklus (engl. *SDLC*) dieses Kurses.
+
 Lesart:
 
 - **Lastenheft/Spezifikation** sagen, *was* gelten muss.
@@ -23,6 +25,16 @@ Lesart:
 - **Replay/Gates** machen Aussagen wiederholbar.
 - **Betrieb** verlangt Belege, damit ein anderer Mensch nachts handeln
   kann.
+
+Die 17 Module (0-16) sind entlang der Kette organisiert:
+
+| Lebenszyklus-Station | Modul-Block | Harness / Schwerpunkt |
+|---|---|---|
+| Spec -> ADR | `01-spec-und-architektur/` (Mod. 1-4) | Lastenheft-, Architektur-/ADR-Disziplin, Harness-Bootstrap |
+| Plan | `02-planung/` (Mod. 5-7) | Planning-Harness, Roadmap, Carveouts |
+| Code | `03-agenten/` (Mod. 8-9) | Rollen + 8-Schritt-Workflow |
+| Review -> Verifikation | `04-qualitaet/` (Mod. 10-13) | Review-, Verification-Harness, Replay, Quality Gates |
+| Closure -> Betrieb | `05-betrieb/` (Mod. 14-16) | Docker-Harness, Observability, Produktion |
 
 ## Vier wiederkehrende Fragen
 
