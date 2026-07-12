@@ -14,6 +14,7 @@ DocSearch-Beispiel.
 | Sensor | Feedback-Quelle nach der Handlung, z. B. Linter, Architekturtest oder Replay. |
 | Replay | Wiederholbarer Lauf gegen `evals/golden/` mit Modellversion, Seed und Erwartung. |
 | Trace | Zeitlich geordnete Belegspur eines Agentenlaufs mit Rolle, Tool-Call und Ergebnis. |
+| SDP (Stable Dependencies Principle) | Referenz-Richtung: normative Verweise zeigen nur zum Stabileren (`lastenheft.md`, dann ADR, dann Slice); Abwaerts- und Seitwaerts-Verweise sind Kontext, keine Spezifikation. |
 
 ## Mini-Check
 
