@@ -1,7 +1,7 @@
 # Changelog
 
 Kanonisches Register der Überarbeitungs-Wellen dieses Kurses. Die
-Stand-Zeile von [`kurs/de/agents-regelwerk.md`](kurs/de/agents-regelwerk.md)
+Stand-Zeile von [`lab/regelwerk/README.md`](lab/regelwerk/README.md)
 referenziert diese Nummern; adoptierende Repos vergleichen ihren
 Baseline-`Stand:`-Eintrag gegen dieses Register.
 
@@ -10,6 +10,52 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > Zählungen in Commit-Messages (generisch „Welle 1–16" und
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
+
+## Welle 24 — 2026-07-16 · Regelwerk konsumenten-sauber (A⁺), agents-regelwerk.md retired, d-check v0.43.1
+
+### Geändert
+
+- **Regelwerk-Splits von der Demo-App befreit (A⁺).** Das ausgelieferte
+  `lab-regelwerk.zip` enthält nur `lab/regelwerk/*.md`, kein `lab/example` —
+  DocSearch-/Lab-Referenzen im Split waren toter Ballast. modul-06 Worked
+  Example → generisches Roadmap-Skelett; acht weitere Splits genericisiert
+  (modul-02/07/10/12/14/16, grundlagen-konventionen/-klassifikation).
+- **Modul 6 (Roadmap):** die Template-Abschnitte *Nächste Wellen* und
+  *Abgeschlossene Wellen* in Quelle + Split verankert; normative
+  **Wellen-Closure-Prozedur** (5 Schritte) ergänzt, kurs-intern verankert
+  (kein externes Referenz-Repo als Autorität).
+- **17 Modul-Splits auditiert** und Defekte behoben (verpatzter
+  Fehlannahmen-Block modul-10, toter Selbstverweis modul-12, didaktische
+  Reste modul-02/03/16; modul-03 Spec-Stratifizierung auf Kurzform + Verweis
+  eingedampft).
+- **Split-Selbst-Enthaltung:** 72 Kurs-Cross-Links → Geschwister-Links, damit
+  sie im `lab-regelwerk.zip` mitreisen (`rewrite-doc-links.py --keep-within-src`).
+- **Provenance-Zeilen (20×)** in `lab/regelwerk/` → HTML-Kommentar-Metadaten
+  (nicht gerendert, aber weiter d-check-validiert).
+- **d-check-Pin `v0.23.0` → `v0.43.1`** (Image-Digest) im `Makefile`;
+  verhaltensgleich verifiziert.
+- **`lab/regelwerk` ist jetzt das kanonische Betriebsregelwerk-Artefakt.** Die
+  Adopter-Story (README, kurs/de/README, lab/README, Templates, lab/example)
+  verweist durchgängig auf das `lab-regelwerk.zip` / den Split; die Stand-Zeile
+  lebt jetzt in [`lab/regelwerk/README.md`](lab/regelwerk/README.md)
+  (**Kurs-Welle 24**).
+
+### Entfernt
+
+- **`kurs/de/agents-regelwerk.md`** (Zwischen-Digest). Ersatz ist das per-Modul-
+  Split `lab/regelwerk` bzw. das `lab-regelwerk.zip`. CI (`templates-release.yml`,
+  `templates-zip.yml`) baut/releast die Einzeldatei nicht mehr; das
+  `lab/example`-Drift-Tool zeigt aufs Split-Verzeichnis (inhaltsbasierte
+  Verzeichnis-Hash-Migration deferred).
+- **`lab/templates/harness.mk`** — der `docs-check`-Gate steht jetzt direkt im
+  Template-`Makefile` (Adopter erzeugen ihn alternativ per `d-check --print-mk`).
+- **`grundlagen-checkpoints.md` + `grundlagen-konzeptkarte.md`** aus dem
+  Regelwerk (rein didaktische Lern-Navigation, kein operativer Inhalt).
+
+**Bruch für Konsumenten:** Das Release-Asset `agents-regelwerk.md` und die
+mitgelieferte `harness.mk` entfallen; wer die Einzeldatei per URL zog, wechselt
+auf `lab-regelwerk.zip` (self-navigierbares Bundle). Der Kurs-*Inhalt* bleibt
+maßgeblich unter `/kurs/de/`.
 
 ## Welle 23 — 2026-06-23 · Template-Feinschliff (ADR-Tabelle, Gate-Baseline) + d-check v0.23.0
 
