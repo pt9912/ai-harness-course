@@ -1,6 +1,6 @@
 ## Modul 0 — Einführung
 
-*Quelle: [00-einfuehrung/modul-00-einfuehrung.md](../../kurs/de/00-einfuehrung/modul-00-einfuehrung.md)*
+<!-- Quelle: [00-einfuehrung/modul-00-einfuehrung.md](../../kurs/de/00-einfuehrung/modul-00-einfuehrung.md) -->
 
 ### Kernidee (Modul 0)
 

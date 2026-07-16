@@ -97,6 +97,23 @@ nicht-property-getesteten Basis laufen.
 Im Abhängigkeitsgraphen wird das eine gerichtete Kante; in der
 Roadmap-Tabelle ein expliziter Eintrag in der `Trigger`-Spalte.
 
+Diese Roadmap-Tabelle ist der Abschnitt **Nächste Wellen**; jede Zeile
+trägt vier Spalten — Welle, Trigger (Abhängigkeit als beobachtbare
+Bedingung), wichtigste Slices und geschätzter Aufwand (S/M/L, kein
+Termin):
+
+```markdown
+## Nächste Wellen
+
+| Welle | Trigger | Wichtigste Slices | Geschätzter Aufwand |
+|---|---|---|---|
+| welle-3-skalierung | welle-2 done + ADR-0004 (ANN-Bibliothek) accepted | slice-014 (ANN-Suche), slice-015 (Multi-Sprach-Adapter-Cleanup) | L |
+| welle-4-betrieb | welle-3 done | slice-016 (k8s-Helm-Chart), slice-017 (OTel-Collector) | M |
+```
+
+Der Aufwand bleibt Schätzung (S/M/L) — dieselbe Größe, die in der
+30-%-Bewertung wieder auftaucht; er triggert nichts.
+
 **Schritt 4 — Welle-Eintrag mit den drei Pflicht-Bestandteilen
 schreiben.** Closure-Kriterien · Slice-IDs · Abhängigkeits-Trigger.
 Vorbild aus dem Lab
@@ -145,9 +162,22 @@ gehalten werden *muss*, aber die Closure-Trigger nicht erreichbar sind,
 ist die richtige Antwort ein *Carveout* (Modul 7), nicht ein halb
 fertiges `done/`.
 
-**Schritt 6 — Drift-Tabelle als Pflicht-Anhang.** Eine Roadmap, die
-sich nie korrigiert, hat den Steering Loop nicht durchlaufen.
-Pflicht-Block am Ende:
+**Schritt 6 — Die zwei rückblickenden Anhänge: Closure-Log und
+Drift-Log.** Eine geschlossene Welle verschwindet nicht aus der Roadmap —
+sie wandert in den Abschnitt **Abgeschlossene Wellen**, den ruhenden
+Audit-Bestand: welche Welle wann geschlossen wurde, mit Zeiger auf ihre
+`done/welle-NN-results.md`.
+
+```markdown
+## Abgeschlossene Wellen
+
+| Welle | Abschluss | Closure-Notiz |
+|---|---|---|
+| welle-1-mvp | 2026-05-28 | `done/welle-1-results.md` |
+```
+
+Daneben steht der *Bewegungs*-Anhang: eine Roadmap, die sich nie
+korrigiert, hat den Steering Loop nicht durchlaufen. Pflicht-Block am Ende:
 
 ```markdown
 ## Historische Trigger-Verschiebungen
@@ -157,9 +187,10 @@ Pflicht-Block am Ende:
 | 2026-06-12 | slice-019 in welle-3 nachgenommen | Stakeholder ergänzte Audit-Anforderung; Trigger wäre sonst nicht beweisbar gewesen |
 ```
 
-Diese Tabelle ist nicht Hilfsmittel; sie ist das Audit-Signal. Wer sie
+Die Drift-Tabelle ist nicht Hilfsmittel; sie ist das Audit-Signal. Wer sie
 leer hat, hat eine starre Roadmap. Wer sie *jeden* Eintrag voll hat,
-hat eine treibende Roadmap.
+hat eine treibende Roadmap. Closure-Log (ruhender Bestand) und Drift-Log
+(Bewegung) zusammen machen die Vergangenheit der Roadmap auditierbar.
 
 **Schritt 7 — Bewusstes Brechen: Datum als Trigger schreiben.**
 Formuliere einen Closure-Trigger absichtlich als Datum (*"welle-3-
@@ -178,6 +209,39 @@ Roadmap ist nicht "wann?", sondern "in welcher Reihenfolge wovon?"*.
 
 Sieben Schritte, eine Welle, drei Trigger ohne Datum. Vergleich:
 [`../../../lab/example/docs/plan/planning/in-progress/roadmap.md`](../../../lab/example/docs/plan/planning/in-progress/roadmap.md).
+
+## Die Wellen-Closure-Prozedur
+
+Modul 5 gibt den *Slice*-Zyklus als Zustandsmaschine vor (`open/` →
+`next/` → `in-progress/` → `done/`). Die *Welle* liegt eine Ebene
+darüber: Sie schließt nicht durch einen einzelnen Slice-Übergang, sondern
+durch einen geordneten Ablauf, der alle ihre Slices bündelt. Fünf
+Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
+
+1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,
+   `make gates` und der Replay-Lauf sind grün. Das ist die *beobachtbare*
+   Closure-Bedingung aus der Welle-Definition — nicht der Kalendertag.
+2. **Carveout-Audit der Welle** ([Modul 7](modul-07-carveouts.md)). Jeder
+   offene Carveout wird geprüft: aufgelöst, verlängert (mit Folge-Slice)
+   oder als permanent akzeptiert. Eine Welle darf *mit* dokumentiertem
+   Carveout schließen — aber nie mit einem stillen roten Gate.
+3. **Closure-Notiz `done/welle-NN-results.md` schreiben.** Sie hält fest,
+   *was gelernt wurde*: geliefert · was funktionierte · was anders lief ·
+   **Steering-Loop-Einträge** (geschärfte Regel / neuer Sensor / benannte
+   Spec-Lücke) · Folge-Slices · Verifikation (die Belege aus Schritt 1).
+   Ohne Lerneintrag ist die Welle nicht „fertig", sondern nur „weg"
+   ([Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md)).
+4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
+   markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
+   Welle schloss, statt eines verstreuten Verschwindens.
+5. **Roadmap fortschreiben.** Die Welle wandert aus *Aktuelle Welle* in
+   die Tabelle *Abgeschlossene Wellen* (mit Zeiger auf ihre
+   Closure-Notiz); die erste Zeile aus *Nächste Wellen* wird zur neuen
+   *Aktuellen Welle*. Löste dabei ein Trigger eine Umplanung aus, bekommt
+   die *Historische Trigger-Verschiebungen*-Tabelle ihren Eintrag.
+
+Erst wenn alle fünf Belege vorliegen, ist die Welle *auditierbar*
+geschlossen.
 
 ## Übungen
 

@@ -1,5 +1,5 @@
 ## Konventionen
-*Quelle: [grundlagen/konventionen.md](../../kurs/de/grundlagen/konventionen.md)*
+<!-- Quelle: [grundlagen/konventionen.md](../../kurs/de/grundlagen/konventionen.md) -->
 
 ### Kernbegriffe
 
@@ -8,6 +8,7 @@
 | LLM | Modell, das Text → Text abbildet. Stateless. |
 | Agent | LLM + Tool-Schnittstelle + Schleife. Hält Zustand über mehrere Turns. |
 | Tool-Call | Strukturierter Aufruf einer Funktion durch das LLM (`name`, `arguments`, `result`). |
+| SDLC / Lebenszyklus | Software Development Lifecycle; im Kurs *Entwicklungszyklus* genannt (Modul 1). Artefaktkette Spec → ADR → Plan → Code → Review → Verifikation → Closure mit verpflichtenden Rückwärtskanten (Lerneintrag, Folge-ADR). |
 | Spec | Lastenheft-Artefakt unter `spec/`. Quelle der Wahrheit für *was*. |
 | ADR | Architecture Decision Record unter `docs/plan/adr/`. Quelle der Wahrheit für *warum so*. |
 | Slice | Kleinste lieferbare Einheit eines Features. Hat eigenen Plan, eigene DoD. |
@@ -292,7 +293,7 @@ ein erlaubter *Verifikations-Zeiger/Provenance* oder eine verbotene
 *Entscheidungsgrundlage* ist, ist eine semantische Unterscheidung — sie
 gehört zum Reviewer-Agenten, nicht zum Linter. Ein grep, der jedes
 `slice-NNN` im ADR-Body fängt, würde legitime Verifikations-Zeiger (etwa
-„`make test-determinism` (slice-009) verifiziert auch LH-FA-IDX-003")
+„`make test-determinism` (slice-NNN) verifiziert auch LH-FA-NNN")
 falsch-positiv flaggen. Faustregel für den Reviewer: *referenziert die
 ADR den Slice, um eine Entscheidung zu **begründen** (verboten) oder um
 zu zeigen, wo sie **verifiziert/entstanden** ist (erlaubt)?*
@@ -326,7 +327,7 @@ der Kette.
 Generalisierter Rang: **Vertrag › Technik › Sicht › ADR › Slice** —
 deckungsgleich mit „Lastenheft sticht Spezifikation sticht Architektur"
 ([§Spec-Stratifizierung](#spec-stratifizierung), [§Source Precedence](#source-precedence))
-und der [Konzeptkarten-Artefaktkette](../../kurs/de/grundlagen/konzeptkarte.md#artefaktkette). (Die
+und der [Artefaktkette](#kernbegriffe). (Die
 drei Ordnungen — Herleitung, Konflikt-Autorität, Referenz-Stabilität —
 fallen für diese Kette *zusammen*; sie divergieren nur an der
 superseded-ADR-Grenze, Regel 2.)
@@ -479,11 +480,11 @@ Harness-Lebenszyklus eines Repos — der Weg von "leeres Repo" oder
 "Repo ohne Harness" bis zur Stelle, an der inhaltliche Arbeit (Slices,
 Code) auf einem etablierten Harness aufsetzt. Es ist eine *Trajektorie
 durch Dokument-Zustände*, kein *Ereignis*. Konkreter Walkthrough mit
-Schritten in [Modul 1](../../kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren).
+Schritten in [Modul 1](modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren).
 
 > **Begriffsklärung:** "Harness-Bootstrap" meint hier den
 > Einstiegsprozess in den Harness. Nicht zu verwechseln mit
-> *Bootstrap-aware Gate* ([Modul 13](../../kurs/de/04-qualitaet/modul-13-quality-gates.md)) — das ist ein
+> *Bootstrap-aware Gate* ([Modul 13](modul-13-quality-gates.md)) — das ist ein
 > einzelnes Gate mit Reifestufe und Hochschalt-Trigger (Coverage 0 →
 > 70 %). Beide Begriffe teilen das Wort, sind strukturell verschieden:
 > *Harness-Bootstrap* betrifft den **Repo-Lebenszyklus**,
@@ -538,7 +539,7 @@ normal, mit wachsender Struktur wird daraus eine Sub-Area.
 > **Abgrenzung zu den vier Modus-Pflichtkriterien.** Die drei Achsen
 > hier beantworten *ob eine Struktur eine Sub-Area ist* (Granularitäts-
 > Gate). Sie sind **nicht** zu verwechseln mit den vier Pflichtkriterien,
-> mit denen [Modul 5](../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
+> mit denen [Modul 5](modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
 > begründet, *welcher Modus* (GF/BF/Hybrid) für eine bereits erkannte
 > Sub-Area gilt (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-
 > Risiko · Reconciliation-Aufwand). Erst Inklusion (hier), dann
@@ -557,7 +558,7 @@ Inventur-Linie bekommt (Achse 1/2 divergiert) → trennen. Aggregation ist
 damit keine Einmal-Entscheidung, sondern eine wiederkehrende
 Wartungs-Praxis. Faustregel: *was nie getrennt feuert, ist
 eine Sub-Area; eine Sub-Area, deren Hälften auseinanderdriften, sind
-zwei.* Beispiel aus dem Lab: die sechs Sprach-Skelette (`go/`, `python/`,
+zwei.* Beispiel: die sechs Sprach-Skelette (`go/`, `python/`,
 …) werden *nicht* als sechs `Implementierung`-Sub-Areas geführt, sondern
 als *eine* — sie teilen Spec und Modus (alle GF) und tragen nie eine
 *unabhängige* Modus- oder Trigger-Entscheidung; die per-Sprache-Stilunterschiede
@@ -590,7 +591,7 @@ Typisch: alle entdeckten Diskrepanzen aufgelöst (als Carveouts oder
 Reconciliation-Slices); Spec/ADR/Sensors decken Code-Stand ab;
 ID-Schema retrofitted. Eine BF-Sub-Area ohne Graduation-Plan ist eine
 *permanente Ausnahme als temporär getarnt* — analog zur
-Carveout-Disziplin in [Modul 7](../../kurs/de/02-planung/modul-07-carveouts.md).
+Carveout-Disziplin in [Modul 7](modul-07-carveouts.md).
 
 Permanente BF-Erklärung (für Code, der absehbar entfernt wird —
 Legacy, Drittsystem-Adapter) ist möglich, mit Begründung und
@@ -647,7 +648,7 @@ Modul 5–9). Bootstrap und Workflow sind getrennte Lebenszyklen — kein
 
 #### Verbindung zum Steering-Loop
 
-Harness-Bootstrap ist im Grunde der **Steering-Loop ([Modul 11](../../kurs/de/04-qualitaet/modul-11-verification.md)),
+Harness-Bootstrap ist im Grunde der **Steering-Loop ([Modul 11](modul-11-verification.md)),
 einmal in Folge angewendet, bis Graduation erreicht ist**. Das
 Werkzeug ist identisch (Beobachtung → Guide/Sensor); was sich
 unterscheidet, ist die Anwendungsphase: Bootstrap = initial bis
@@ -656,8 +657,8 @@ Steering-Loop versteht, versteht Bootstrap — und umgekehrt.
 
 #### Querverweise
 
-- **[Modul 2 — Harness-Bootstrap](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md)**: ausgearbeiteter Lehrtext mit GF/BF-Walkthroughs, Trigger-Klassen-Inline-Ankern und Phasen-Karten-Übung — Vollform des Bootstrap-Konzepts.
-- **Modul 1 §Schritt 0** ([§Source precedence](../../kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren)): kompakter Vorgriff auf das Modus-Konzept als Eingang in den Lebenszyklus (Baseline und Modus festlegen plus den sechs Folge-Schritten); Vollform in Modul 2.
+- **[Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)**: ausgearbeiteter Lehrtext mit GF/BF-Walkthroughs, Trigger-Klassen-Inline-Ankern und Phasen-Karten-Übung — Vollform des Bootstrap-Konzepts.
+- **Modul 1 §Schritt 0** ([§Source precedence](modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren)): kompakter Vorgriff auf das Modus-Konzept als Eingang in den Lebenszyklus (Baseline und Modus festlegen plus den sechs Folge-Schritten); Vollform in Modul 2.
 - **[`fallstudien.md` §Beobachtung aus dem Ist-Zustand](../../kurs/de/grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)**: die vier Beispiel-Repos in GF-/BF-Modus klassifiziert.
 - **§harness/conventions.md als Konventionsspeicher** (oben): Adaptions-Block trägt Modus-Deklaration pro Sub-Area; Graduation-Bedingung wird dort dokumentiert.
 

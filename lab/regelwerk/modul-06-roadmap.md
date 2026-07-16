@@ -1,11 +1,18 @@
 ## Modul 6 — Roadmap Engineering
 
-*Quelle: [02-planung/modul-06-roadmap.md](../../kurs/de/02-planung/modul-06-roadmap.md)*
+<!-- Quelle: [02-planung/modul-06-roadmap.md](../../kurs/de/02-planung/modul-06-roadmap.md) -->
 
 ### Kernidee (Modul 6)
 
 Eine Roadmap ist eine Reihenfolge von Wellen, keine Reihenfolge von
 Terminen. Termine sind eine Folge der Wellen, nicht ihr Treiber.
+
+Konkret ist eine Roadmap eine geordnete Folge von **Wellen**: jede Welle
+bündelt Slices, schließt durch einen *beobachtbaren Trigger* — nicht durch
+ein Datum — und hinterlässt eine Closure-Notiz. Ein Termin darf als
+Schätzung *erscheinen*, triggert aber nie; er ist Output der
+Wellen-Reihenfolge, nicht ihr Treiber. Die fünf Abschnitte unten sind die
+Form, die Regeln der Inhalt.
 
 ### Roadmap-Regeln (Modul 6)
 
@@ -19,118 +26,92 @@ Terminen. Termine sind eine Folge der Wellen, nicht ihr Treiber.
 - **Meilenstein** = extern beobachtbarer Zustand (Release, Audit-Punkt). Ein Meilenstein endet durch *Datum oder externe Bestätigung* — und genau deshalb leitet sich der Meilenstein aus Wellen ab, nicht umgekehrt.
 - **Release** — Trigger: ein Artefakt verlässt das Repo in eine Umgebung (Tag + Staging). Ein Release kann mehrere Wellen umfassen, der Meilenstein liegt *neben* der Welle (externe Bestätigung), die Welle endet *durch* Closure.
 
-### Worked Example: einen Datumswunsch in eine Trigger-Welle übersetzen
+### Roadmap-Struktur: fünf Abschnitte (Modul 6)
 
-**Schritt 1 — Wunsch in Inhalt zerlegen.** Frage zurück: *Was muss
-*beim Audit* gezeigt werden?* Die Antwort ist immer eine Liste von
-beobachtbaren Zuständen — und genau diese werden zu Closure-Triggern.
-Stakeholder antwortet konkret: "ANN-Suche funktioniert auf 100k
-Einträgen unter 1 s p95; Multi-Sprach-Adapter ist konsolidiert; OTel-
-Pipeline zeigt End-to-End-Traces."
-
-Drei Zustände, drei Trigger-Anker — und keiner davon enthält ein
-Datum.
-
-**Schritt 2 — Inhalt in Slices binden.** Jeder Closure-Trigger muss auf
-einen oder mehrere Slices mit eigenem DoD verweisen. Sonst ist der
-Trigger ein Wunsch, kein Beleg.
-
-| Trigger-Anker (Stakeholder) | Slice(s) (Implementer-Ebene) |
-|---|---|
-| ANN-Suche < 1 s p95 bei 100k | `slice-014` (ANN-Bibliothek-Integration) + `slice-019` (Latenz-Replay gegen 100k-Korpus) |
-| Multi-Sprach-Adapter konsolidiert | `slice-015` (Adapter-Cleanup) |
-| OTel-Pipeline E2E | `slice-017` (OTel-Collector) + `slice-018` (Trace-Schema-Pflicht) |
-
-Mehrfachbezüge sind erlaubt — *fehlende* Bezüge nicht. Wer einen
-Trigger ohne Slice formuliert, hat einen Wunsch ohne Plan.
-
-**Schritt 3 — Abhängigkeiten gegen vorhandene Wellen messen.** Eine
-Welle, die ohne fertige Vorgängerin nicht starten kann, ist eine
-Phantom-Welle. Lab-Beispiel: Welle 3 (`welle-3-skalierung`) hängt an
-Welle 2 (`welle-2-qualitaet`) — Property-Tests müssen *vor* der
-Skalierungs-Welle stehen, weil sonst die Skalierungs-Gates auf einer
-nicht-property-getesteten Basis laufen.
-
-Im Abhängigkeitsgraphen wird das eine gerichtete Kante; in der
-Roadmap-Tabelle ein expliziter Eintrag in der `Trigger`-Spalte.
-
-**Schritt 4 — Welle-Eintrag mit den drei Pflicht-Bestandteilen
-schreiben.** Closure-Kriterien · Slice-IDs · Abhängigkeits-Trigger.
-Vorbild aus dem Lab
-([`roadmap.md`](../example/docs/plan/planning/in-progress/roadmap.md)):
+Eine Roadmap trägt fünf Abschnitte — Skelett mit Platzhaltern:
 
 ```markdown
 ## Aktuelle Welle
-
-**Welle-ID:** welle-3-skalierung
-**Geplantes Ende:** 2026-07-24 (Schätzung)
-
+**Welle-ID:** welle-NN
+**Geplantes Ende:** YYYY-MM-DD (Schätzung)
 **Closure-Trigger:**
-- slice-014 (ANN-Bibliothek) done in allen Sprachen.
-- slice-015 (Multi-Sprach-Adapter-Cleanup) done.
-- slice-019 (Latenz-Replay) grün: p95 < 1 s bei 100k Korpus.
-- ADR-0004 (ANN-Bibliothek-Wahl) `Accepted`.
+- slice-NNN done.
+- Replay-Lauf grün: <messbare Schwelle>.
+- ADR-NNNN `Accepted`.
+**Vorgänger-Trigger:** welle-NN done.
 
-**Vorgänger-Trigger:** welle-2-qualitaet done.
-```
+## Nächste Wellen
+| Welle | Trigger | Wichtigste Slices | Geschätzter Aufwand |
+|---|---|---|---|
+| welle-NN | welle-NN done + ADR-NNNN accepted | slice-NNN, slice-NNN | S/M/L |
 
-Datum *erscheint* als "Geplantes Ende (Schätzung)" — es triggert
-nichts, es prognostiziert. Wenn die Schätzung kippt, kippt sie als
-Schätzung, nicht als Closure-Kriterium.
-
-**Schritt 5 — Meilenstein neben die Welle setzen, nicht in sie.** Der
-Audit-Termin ist *Meilenstein M3*, nicht *Welle 3*. Welle und
-Meilenstein verhalten sich orthogonal:
-
-| Welle | Meilenstein |
-|---|---|
-| endet durch Closure-Kriterien (intern) | endet durch externe Bestätigung (Audit, Release, Kunde) |
-| Inhalt vollständig im Repo | Inhalt zeigt sich an einer Außengrenze |
-| `welle-3-skalierung` | M3 — Skalierbar |
-
-Tabelle aus dem Lab:
-
-```markdown
+## Meilensteine
 | Meilenstein | Welle(n) | Trigger | Status |
 |---|---|---|---|
-| M3 — Skalierbar | welle-3-skalierung | p95 < 1 s auch bei 100k Einträgen | offen |
-```
+| M<n> | welle-NN | <extern beobachtbarer Zustand> | offen |
 
-Der Audit-Termin (`2026-07-31`) ist Anhang im Meilenstein-Eintrag, nicht
-Trigger der Welle. Das hat eine harte Konsequenz: wenn das Audit-Datum
-gehalten werden *muss*, aber die Closure-Trigger nicht erreichbar sind,
-ist die richtige Antwort ein *Carveout* (Modul 7), nicht ein halb
-fertiges `done/`.
+## Abgeschlossene Wellen
+| Welle | Abschluss | Closure-Notiz |
+|---|---|---|
+| welle-NN | YYYY-MM-DD | done/welle-NN-results.md |
 
-**Schritt 6 — Drift-Tabelle als Pflicht-Anhang.** Eine Roadmap, die
-sich nie korrigiert, hat den Steering Loop nicht durchlaufen.
-Pflicht-Block am Ende:
-
-```markdown
 ## Historische Trigger-Verschiebungen
-
 | Datum | Was wurde geändert? | Warum? |
 |---|---|---|
-| 2026-06-12 | slice-019 in welle-3 nachgenommen | Stakeholder ergänzte Audit-Anforderung; Trigger wäre sonst nicht beweisbar gewesen |
+| YYYY-MM-DD | slice-NNN in welle-NN nachgenommen | <Grund> |
 ```
 
-Diese Tabelle ist nicht Hilfsmittel; sie ist das Audit-Signal. Wer sie
-leer hat, hat eine starre Roadmap. Wer sie *jeden* Eintrag voll hat,
-hat eine treibende Roadmap.
+Lesart der fünf Abschnitte:
 
-**Schritt 7 — Datum als Trigger geschrieben: die drei möglichen
-Ausgänge.** Ein Closure-Trigger als Datum formuliert (*"welle-3-
-skalierung schließt am 2026-07-24"*) — am 24. Juli ist
-slice-019 noch nicht grün. Drei mögliche Antworten:
+- **Aktuelle Welle** — die laufende Welle mit den drei Pflicht-Bestandteilen (Slice-IDs · Trigger · Closure-Kriterien). Das *Geplante Ende* ist Schätzung, kein Closure-Kriterium: kippt sie, kippt sie als Schätzung.
+- **Nächste Wellen** — die geordnete Vorschau; jede Zeile trägt Welle, Trigger (die Abhängigkeit als beobachtbare Bedingung), wichtigste Slices und geschätzten Aufwand (S/M/L, kein Termin). Eine Welle, die ohne fertige Vorgängerin nicht starten kann, ist eine Phantom-Welle — die Abhängigkeit steht explizit in der `Trigger`-Spalte und als gerichtete Kante im Abhängigkeitsgraphen.
+- **Meilensteine** — extern beobachtbare Zustände, orthogonal zur Welle: die Welle endet *durch* Closure-Kriterien (intern), der Meilenstein durch externe Bestätigung (Audit, Release, Kunde). Der Meilenstein liegt *neben* der Welle, nicht in ihr; ein Audit-*Termin* ist Anhang im Meilenstein-Eintrag, nie Trigger der Welle. Ist das externe Datum unverrückbar, aber die Closure-Trigger unerreichbar, ist die richtige Antwort ein *Carveout* (Modul 7), kein halbfertiges `done/`.
+- **Abgeschlossene Wellen** — das Closure-Log (ruhender Audit-Bestand): welche Welle wann geschlossen wurde, mit Zeiger auf ihre `done/welle-NN-results.md`.
+- **Historische Trigger-Verschiebungen** — das Drift-Log (Bewegungs-Signal): jede Umplanung mit Datum, Änderung, Grund. Wer es leer hat, hat eine starre Roadmap; wer *jeden* Eintrag voll hat, eine treibende. Closure-Log und Drift-Log zusammen machen die Vergangenheit der Roadmap auditierbar.
 
-| Antwort | Diagnose |
-|---|---|
-| Welle wird trotzdem geschlossen, slice-019 wandert in welle-4. | Datum hat Closure überschrieben — der Audit fällt durch, weil slice-019 nicht belegt ist. Trigger-Disziplin ist Theorie geblieben. |
-| Welle bleibt offen, das Datum wird verschoben. | Trigger-Disziplin wirkt, aber die Roadmap-Drift-Tabelle muss den Eintrag bekommen — sonst ist die Verschiebung still. |
-| Carveout `CO-009` für die fehlende Latenz, Welle schließt mit Carveout. | Sauber: das Versprechen wird offen reduziert, Folge-Slice ist verdrahtet, Audit weiß, was er ansieht. |
+**Wird ein Closure-Trigger doch als Datum geschrieben** und der Kalendertag
+erreicht, bevor die Slices grün sind, gibt es drei Ausgänge: (a) Welle
+trotzdem schließen → der Audit fällt durch, weil Slices unbelegt sind
+(Trigger-Disziplin blieb Theorie); (b) Welle offen lassen, Datum
+verschieben → sauber, aber der Eintrag *muss* in die Drift-Tabelle, sonst
+ist die Verschiebung still; (c) Carveout für den fehlenden Beleg, Welle
+schließt mit Carveout → das Versprechen wird offen reduziert, Folge-Slice
+verdrahtet.
 
-*Eine Roadmap ist nicht "wann?", sondern "in welcher Reihenfolge
-wovon?"*.
+*Eine Roadmap ist nicht „wann?", sondern „in welcher Reihenfolge wovon?"*.
+
+### Wellen-Closure-Prozedur (Modul 6)
+
+Modul 5 gibt den *Slice*-Zyklus als Zustandsmaschine vor (`open/` →
+`next/` → `in-progress/` → `done/`). Die *Welle* liegt eine Ebene
+darüber: Sie schließt nicht durch einen einzelnen Slice-Übergang, sondern
+durch einen geordneten Ablauf, der alle ihre Slices bündelt. Fünf
+Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
+
+1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,
+   `make gates` und der Replay-Lauf sind grün. Das ist die *beobachtbare*
+   Closure-Bedingung aus der Welle-Definition — nicht der Kalendertag.
+2. **Carveout-Audit der Welle** (Modul 7). Jeder offene Carveout wird
+   geprüft: aufgelöst, verlängert (mit Folge-Slice) oder als permanent
+   akzeptiert. Eine Welle darf *mit* dokumentiertem Carveout schließen —
+   aber nie mit einem stillen roten Gate.
+3. **Closure-Notiz `done/welle-NN-results.md` schreiben.** Sie hält fest,
+   *was gelernt wurde*: geliefert · was funktionierte · was anders lief ·
+   **Steering-Loop-Einträge** (geschärfte Regel / neuer Sensor / benannte
+   Spec-Lücke) · Folge-Slices · Verifikation (die Belege aus Schritt 1).
+   Ohne Lerneintrag ist die Welle nicht „fertig", sondern nur „weg"
+   (Modul 1).
+4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
+   markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
+   Welle schloss, statt eines verstreuten Verschwindens.
+5. **Roadmap fortschreiben.** Die Welle wandert aus *Aktuelle Welle* in
+   die Tabelle *Abgeschlossene Wellen* (mit Zeiger auf ihre
+   Closure-Notiz); die erste Zeile aus *Nächste Wellen* wird zur neuen
+   *Aktuellen Welle*. Löste dabei ein Trigger eine Umplanung aus, bekommt
+   die *Historische Trigger-Verschiebungen*-Tabelle ihren Eintrag.
+
+Erst wenn alle fünf Belege vorliegen, ist die Welle *auditierbar*
+geschlossen.
 
 ### Regeln gegen typische Fehlannahmen (Modul 6)
 
@@ -139,4 +120,3 @@ wovon?"*.
 - **Gegen "Eine Roadmap ist statisch":** Eine Roadmap, die nach drei Wellen nicht angepasst wurde, hat den Steering Loop nicht durchlaufen.
 - **Gegen "Welle = Sprint":** Ein Sprint endet durch *Datum* (zwei Wochen sind um). Eine Welle endet durch *Closure-Kriterien* (alle ihre Slices in `done/`, Replay-Lauf grün, Closure-Einträge geschrieben). Wer Wellen wie Sprints schneidet, kappt halbfertige Slices am Datum — und produziert genau die Auditierbarkeits-Lücke, die der Harness verhindern soll.
 - **Gegen "Trigger = Datum":** Ein Trigger ist eine *beobachtbare Bedingung* ("SL-024 liegt in `done/`", "Replay-Lauf gegen Golden Set grün", "Carveout `CO-007` aufgelöst"). Ein Datum ist kein Trigger, sondern eine Prognose. Wenn das einzige Trigger-Kriterium ein Kalendertag ist, plant die Roadmap nicht — sie hofft.
-

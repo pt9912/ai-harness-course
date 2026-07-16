@@ -1,6 +1,6 @@
 ## Modul 10 — Review Harness
 
-*Quelle: [04-qualitaet/modul-10-review-harness.md](../../kurs/de/04-qualitaet/modul-10-review-harness.md)*
+<!-- Quelle: [04-qualitaet/modul-10-review-harness.md](../../kurs/de/04-qualitaet/modul-10-review-harness.md) -->
 
 ### Drei Review-Arten — wogegen wird geprüft
 
@@ -32,7 +32,7 @@ Code-Review kostet den ganzen Implementierungs-Lauf.
 ### Harness-Einordnung (Modul 10)
 
 Review = *inferential feedback* (siehe
-[`grundlagen/klassifikation.md`](../../kurs/de/grundlagen/klassifikation.md)).
+[`grundlagen/klassifikation.md`](grundlagen-klassifikation.md)).
 Teurer als ein Linter, billiger als Verifikation. Adressiert primär die
 Maintainability-Kategorie.
 
@@ -55,7 +55,7 @@ Skill-Dateien leben in `.harness/` und sind das Repo-spezifische
 ```
 
 ```markdown
-# Reviewer-Skill — DocSearch
+# Reviewer-Skill — <Repo>
 
 * Status: Accepted
 * Bezug: ADR-0007, AGENTS.md §"Review-Regeln"
@@ -159,7 +159,7 @@ Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
 
 Sechs Schritte, eine reproduzierbare Reviewer-Rolle. Vergleichbares
 Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
-[Modul 8 §"Konfliktfall"](../../kurs/de/03-agenten/modul-08-agentenrollen.md).
+[Modul 8 §"Konfliktfall"](modul-08-agentenrollen.md).
 
 ### Reviewer berichtet auch, was er nicht gefunden hat
 
@@ -182,8 +182,8 @@ als neue Datei statt Überschreibung.
 
 ### Regeln gegen typische Fehlannahmen (Modul 10)
 
-- Reviewer kategorisiert. Vorschläge "wie ich es geschrieben hätte" sind nett, aber kein Reviewer-Ergebnis.
-- Implementer arbeitet sequentiell ab und bleibt am LOW hängen. HIGH zuerst, immer.
-- Verhalten driftet zwischen Sessions. Jeder Reviewer-Agent braucht eine Skill-Datei in `.harness/` mit "worauf achtest du in diesem Repo".
-- Genau das belohnt Inkonsistenz. Stattdessen: Skill schärfen, bis die Klassifikation reproduzierbar ist.
+- **Gegen "Reviewer ist ein zweiter Implementer":** Reviewer kategorisiert. Vorschläge "wie ich es geschrieben hätte" sind nett, aber kein Reviewer-Ergebnis.
+- **Gegen "Findings ohne Prioritätssortierung":** Implementer arbeitet sequentiell ab und bleibt am LOW hängen. HIGH zuerst, immer.
+- **Gegen "Reviewer-Agent läuft ohne Skill-Datei":** Verhalten driftet zwischen Sessions. Jeder Reviewer-Agent braucht eine Skill-Datei in `.harness/` mit "worauf achtest du in diesem Repo".
+- **Gegen "Bei zwei verschiedenen Kategorisierungen nehmen wir die mildere":** Genau das belohnt Inkonsistenz. Stattdessen: Skill schärfen, bis die Klassifikation reproduzierbar ist.
 

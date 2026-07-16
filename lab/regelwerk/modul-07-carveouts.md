@@ -1,11 +1,11 @@
 ## Modul 7 — Carveout Management
 
-*Quelle: [02-planung/modul-07-carveouts.md](../../kurs/de/02-planung/modul-07-carveouts.md)*
+<!-- Quelle: [02-planung/modul-07-carveouts.md](../../kurs/de/02-planung/modul-07-carveouts.md) -->
 
 ### Harness-Einordnung (Modul 7)
 
 Carveout-Pflege ist ein Pfeiler von *Entropy Management* (siehe
-[`klassifikation.md`](../../kurs/de/grundlagen/klassifikation.md)):
+[`klassifikation.md`](grundlagen-klassifikation.md)):
 ein Carveout-Audit pro Welle verhindert, dass temporäre Ausnahmen zu
 permanenten Lügen werden.
 
@@ -17,11 +17,11 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 ### Worked Example A: einen Carveout dokumentieren
 
 **Ausgangssituation:** Das Coverage-Gate `coverage-gate-critical` ist
-rot. Der Index-Layer (`internal/index/`) hat 76 % statt der geforderten
+rot. Der Parser-Layer (`internal/parser/`) hat 76 % statt der geforderten
 90 %. Grund: Binär-Format-Parser mit Fehlerpfaden (`E099` bei korrupter
 Datei), die nur partiell durch Unit-Tests abgedeckt sind. Eine
 Property-Test-Suite wird die verbleibenden Pfade abdecken — ist aber
-erst in Welle 2 eingeplant.
+erst in Welle NN eingeplant.
 
 Die Versuchung: das Gate in der CI-Konfiguration herunterdrehen. Das
 ist eine *stille* Senkung — sie taucht weder in `harness/README.md`
@@ -30,21 +30,21 @@ noch in der Spec auf. Der bessere Weg: ein Carveout.
 **Schritt 1 — Carveout-Datei anlegen.** Konvention:
 `docs/plan/carveouts/CO-<NNN>-<kurztitel>.md`. ID läuft in `CO-*`-Reihe
 (separat von `LH-`, `ADR-`, `SL-` — siehe
-[`konventionen.md`](../../kurs/de/grundlagen/konventionen.md#id-schema-als-klammer)).
-Für unseren Fall: `CO-001-index-coverage.md`.
+[`konventionen.md`](grundlagen-konventionen.md#id-schema-als-klammer)).
+Für unseren Fall: `CO-001-parser-coverage.md`.
 
 **Schritt 2 — Pflichtfelder im Frontmatter / Header festlegen.** Ein
 temporärer Carveout, der nicht heimlich permanent werden soll, braucht
 sechs Felder:
 
 ```markdown
-# CO-001: Bootstrap-Coverage `internal/index/`
+# CO-001: Bootstrap-Coverage `internal/parser/`
 
 **Status:** Aktiv.
-**Datum angelegt:** 2026-05-20. **Letzte Prüfung:** 2026-06-01.
+**Datum angelegt:** YYYY-MM-DD. **Letzte Prüfung:** YYYY-MM-DD.
 **Betroffenes Gate:** `coverage-gate-critical`.
-**Geltungsbereich:** `internal/index/` (Index-Layer, alle Sprachen).
-**Folge-Slice:** [`slice-013-property-tests.md`](../planning/in-progress/slice-013-property-tests.md)
+**Geltungsbereich:** `internal/parser/` (Parser-Layer, alle Sprachen).
+**Folge-Slice:** slice-NNN-property-tests.md
 ```
 
 Wenn `Folge-Slice` fehlt oder leer ist, ist der Carveout *de facto*
@@ -59,10 +59,10 @@ nicht eingetreten beurteilen kann.
 ```markdown
 ## Auflösungs-Trigger
 
-Welle 2 (welle-2-qualitaet) done — Property-Test-Suite läuft 100
+Welle NN (welle-NN-qualitaet) done — Property-Test-Suite läuft 100
 Generationen und deckt die Fehlerpfade.
 
-Konkret: `internal/index/`-Coverage erreicht ≥ 90 %, geprüft in
+Konkret: `internal/parser/`-Coverage erreicht ≥ 90 %, geprüft in
 `make coverage-gate-critical` ohne Ausnahmen.
 ```
 
@@ -79,7 +79,7 @@ Gate-Konfiguration *zeigt* auf den Carveout, damit der Carveout im
   critical_paths:
 -   exceptions: []
 +   exceptions:
-+     - "internal/index/"  # CO-001 — bis Welle 2 done
++     - "internal/parser/"  # CO-001 — bis Welle NN done
 ```
 
 Der `# CO-001`-Kommentar ist nicht Kosmetik: er ist die Brücke zwischen
@@ -92,11 +92,11 @@ hinterlegen.** Damit nach Trigger-Eintritt klar ist, was zu tun ist:
 ```markdown
 ## Verifikation (nach Auflösung)
 
-- [ ] `internal/index/`-Coverage in allen Sprach-Skeletten ≥ 90 %.
+- [ ] `internal/parser/`-Coverage in allen Sprach-Skeletten ≥ 90 %.
 - [ ] Carveout-Konfiguration aus Coverage-Config entfernt.
 - [ ] `make coverage-gate-critical` grün ohne Ausnahmen.
-- [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
-- [ ] slice-013 Closure-Notiz schließt diese Auflösung mit ein.
+- [ ] Diese Datei nach `done/CO-001-parser-coverage.md` bewegt (reiner `git mv`).
+- [ ] slice-NNN Closure-Notiz schließt diese Auflösung mit ein.
 ```
 
 Vier Häkchen, eines davon ein `git mv`. Auflösung ohne Verschiebung in
@@ -119,7 +119,7 @@ du den Reflex, jede entdeckte Diskrepanz als Carveout zu führen):
    - *Cluster oder Muster* → **BF-Sub-Area-Markierung mit
      Graduation-Plan** als Modus-Deklaration im Adaptions-Block von
      `harness/conventions.md` (Mechanik in
-     [`konventionen.md` §Modus pro Sub-Area](../../kurs/de/grundlagen/konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)).
+     [`konventionen.md` §Modus pro Sub-Area](grundlagen-konventionen.md#modus-pro-sub-area-greenfield-vs-brownfield)).
      Frage 2 entfällt — eine Sub-Area-weite Markierung ist eine
      andere Werkzeug-Klasse als ein punktueller Carveout.
    - *Einzelne Diskrepanz* → weiter zu Frage 2.
@@ -197,7 +197,7 @@ Das ist nicht Aufgabe; das ist Ehrlichkeit.
 und Auflösungs-Trigger. **BF-Sub-Area-Markierung** = Sub-Area-weiter
 Übergangs-Modus mit Graduation-Plan im Adaptions-Block von
 `harness/conventions.md` — *Sub-Area-Kontext, kein Closure-Werkzeug*
-(siehe [Modul 13 §Bootstrap-aware Gates](../../kurs/de/04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)).
+(siehe [Modul 13 §Bootstrap-aware Gates](modul-13-quality-gates.md#bootstrap-aware-gates)).
 **Bootstrap-aware Gate** = Stufung *des Gates selbst* (z. B. 40 % heute
 → 70 % bei M2).
 
@@ -221,12 +221,12 @@ verhindern sollte.
 **Schritt 1 — Audit-Slice als ID-Reihe einplanen.** Konvention: ein
 Slice `SL-CO-AUDIT-<welle>` pro Welle-Closure, *bevor* die Welle nach
 `done/` wandert. ID-Schema-Ergänzung in
-[`konventionen.md`](../../kurs/de/grundlagen/konventionen.md): Audit-Slices haben
+[`konventionen.md`](grundlagen-konventionen.md): Audit-Slices haben
 ein Präfix, das sie vom regulären Implementierungs-Slice unterscheidet
 — sie liefern *keinen Code*, nur Doku-Updates.
 
 ```markdown
-# SL-CO-AUDIT-welle-2: Carveout-Audit vor Welle-2-Closure
+# SL-CO-AUDIT-welle-NN: Carveout-Audit vor Welle-NN-Closure
 
 **DoD:**
 - Jeder aktive Carveout in `docs/plan/carveouts/` hat ein aktuelles
@@ -235,7 +235,7 @@ ein Präfix, das sie vom regulären Implementierungs-Slice unterscheidet
   verschoben.
 - Jeder Carveout, der seit > 2 Wellen "aktiv" ist, wurde *explizit*
   entweder als weiter-gültig bestätigt oder in eine ADR überführt.
-- Audit-Bericht als Closure-Notiz in `done/welle-2-results.md`.
+- Audit-Bericht als Closure-Notiz in `done/welle-NN-results.md`.
 ```
 
 Vier DoD-Punkte: drei Status-Aktionen plus ein Belegartefakt. Mehr
@@ -246,13 +246,13 @@ nicht jedes Mal neu erfunden wird, eine Tabelle als
 Closure-Notiz-Block:
 
 ```markdown
-## Carveout-Audit — Welle 2 (2026-06-12)
+## Carveout-Audit — Welle NN (YYYY-MM-DD)
 
 | Carveout | Status vorher | Status nachher | Aktion |
 |---|---|---|---|
-| CO-001 (Index-Coverage) | aktiv, Trigger Welle 2 | aufgelöst | git mv nach `done/`; coverage.config-Ausnahme entfernt |
+| CO-001 (Parser-Coverage) | aktiv, Trigger Welle NN | aufgelöst | git mv nach `done/`; coverage.config-Ausnahme entfernt |
 | CO-004 (Compose-Devmode) | aktiv, Trigger "Compose v2.20" | permanent | überführt in ADR-0014 (Devmode als bewusste Architektur) |
-| CO-005 (Lock-File-Pin) | aktiv, Letzte Prüfung 2025-12 | aktiv, geprüft | Datum 2026-06-12 nachgetragen, Folge-Slice slice-018 angelegt |
+| CO-005 (Lock-File-Pin) | aktiv, Letzte Prüfung YYYY-MM | aktiv, geprüft | Datum YYYY-MM-DD nachgetragen, Folge-Slice slice-NNN angelegt |
 ```
 
 Drei Status-Übergänge sind möglich: *aufgelöst* (Trigger eingetreten),
@@ -298,6 +298,6 @@ sonst ist er eine schöne Konvention, die niemand prüft.
 - **Gegen "Carveout = Workaround":** Carveout = *dokumentierter* Workaround mit Trigger. Ohne Trigger ist es eine versteckte Annahme.
 - **Gegen "Carveouts gehören ins Issue-Tracker":** Sie gehören ins Repo, neben Spec und ADRs. Tracker können vergessen werden, Repo-Files kommen mit beim Klonen.
 - **Gegen "Wenn der Trigger eintritt, lösen wir den Carveout auf":** Realität: er bleibt liegen. Deshalb braucht jeder temporäre Carveout einen *Folge-Slice mit ID*, der das Auflösen plant. Slice schlägt Memo.
-- **Gegen "Jede entdeckte Diskrepanz ist ein eigener Carveout":** Carveouts sind für **punktuelle** Ausnahmen mit Folge-Slice. Eine Diskrepanz-**Häufung** in einer Sub-Area (Symptom: mehrere Carveouts mit demselben Geltungsbereich, oder die Diskrepanz folgt aus generellem *"Code existiert vor Doku"*-Muster) gehört nicht in eine Carveout-Kaskade, sondern in eine **BF-Sub-Area-Markierung mit Graduation-Plan** (siehe [Modul 2 §Kernidee](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Maßgeblich ist das **Symptom-Muster** (gemeinsamer Geltungsbereich), nicht die Carveout-Zahl; die Wahl, welches Werkzeug bei welchem Symptom greift, leistet [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
+- **Gegen "Jede entdeckte Diskrepanz ist ein eigener Carveout":** Carveouts sind für **punktuelle** Ausnahmen mit Folge-Slice. Eine Diskrepanz-**Häufung** in einer Sub-Area (Symptom: mehrere Carveouts mit demselben Geltungsbereich, oder die Diskrepanz folgt aus generellem *"Code existiert vor Doku"*-Muster) gehört nicht in eine Carveout-Kaskade, sondern in eine **BF-Sub-Area-Markierung mit Graduation-Plan** (siehe [Modul 2 §Kernidee](modul-02-harness-bootstrap.md#kernidee-modul-2)). Maßgeblich ist das **Symptom-Muster** (gemeinsamer Geltungsbereich), nicht die Carveout-Zahl; die Wahl, welches Werkzeug bei welchem Symptom greift, leistet [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren).
 - **Gegen "Wenn Diskrepanz-Häufung BF-Markierung verlangt, ist auch jede einzelne Diskrepanz eine BF-Markierung wert":** BF-Markierung lohnt sich erst beim **Cluster im selben Geltungsbereich** oder beim systemischen *"Code existiert vor Doku"*-Muster — eine einzelne, gut abgrenzbare Diskrepanz mit klarem Folge-Slice ist und bleibt ein Carveout. Das Frage-Schema in [§Worked Example A Schritt 6](#worked-example-a-einen-carveout-dokumentieren) trennt diese Fälle: Frage 1 leitet einzelne Diskrepanzen explizit auf den Carveout-/ADR-Pfad, nicht auf BF-Markierung.
 

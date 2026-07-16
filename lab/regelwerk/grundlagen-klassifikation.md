@@ -1,5 +1,5 @@
 ## Klassifikation und Steering Loop
-*Quelle: [grundlagen/klassifikation.md](../../kurs/de/grundlagen/klassifikation.md)*
+<!-- Quelle: [grundlagen/klassifikation.md](../../kurs/de/grundlagen/klassifikation.md) -->
 
 Wir klassifizieren jede Kontrolle, die der Harness bereitstellt, entlang
 mehrerer Achsen. Zwei Schulen prägen das Vokabular: **Böckeler/Thoughtworks**
@@ -7,7 +7,7 @@ liefert den konzeptuellen Rahmen, **Lopopolo/OpenAI** das empirische
 Playbook (siehe [`fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md) und
 [`../abschluss/quellen.md`](../../kurs/de/abschluss/quellen.md)).
 
-### Die 2×2-Matrix (Böckeler)
+### Die 2×2-Matrix (Böckeler) <a id="2x2-matrix"></a>
 
 |  | **Feedforward** (Guide, präventiv) | **Feedback** (Sensor, detektiv) |
 |---|---|---|
@@ -37,9 +37,9 @@ sollten erst greifen, was die linken Quadranten nicht abdecken können.
 #### Lesart
 
 * *Computational + Feedforward*: macht falsche Aktionen **technisch unmöglich**. Billigste Kontrolle.
-* *Computational + Feedback*: erkennt falsche Aktionen **schnell und deterministisch**. Das sind die Gates aus [Modul 13](../../kurs/de/04-qualitaet/modul-13-quality-gates.md).
-* *Inferential + Feedforward*: gibt dem Agenten Kontext, **bevor** er handelt. Das sind Spec, ADR, Carveouts — die Hebel aus [Modul 3](../../kurs/de/01-spec-und-architektur/modul-03-lastenheft.md), [Modul 4](../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md), [Modul 7](../../kurs/de/02-planung/modul-07-carveouts.md).
-* *Inferential + Feedback*: prüft semantisch nach. Das sind Review, Verifikation, Validation — die Hebel aus [Modul 10](../../kurs/de/04-qualitaet/modul-10-review-harness.md), [Modul 11](../../kurs/de/04-qualitaet/modul-11-verification.md), [Modul 8](../../kurs/de/03-agenten/modul-08-agentenrollen.md).
+* *Computational + Feedback*: erkennt falsche Aktionen **schnell und deterministisch**. Das sind die Gates aus [Modul 13](modul-13-quality-gates.md).
+* *Inferential + Feedforward*: gibt dem Agenten Kontext, **bevor** er handelt. Das sind Spec, ADR, Carveouts — die Hebel aus [Modul 3](modul-03-lastenheft.md), [Modul 4](modul-04-architektur-adrs.md), [Modul 7](modul-07-carveouts.md).
+* *Inferential + Feedback*: prüft semantisch nach. Das sind Review, Verifikation, Validation — die Hebel aus [Modul 10](modul-10-review-harness.md), [Modul 11](modul-11-verification.md), [Modul 8](modul-08-agentenrollen.md).
 
 Die Faustregel: **so weit links und oben wie möglich**. Eine Regel, die
 der Typchecker erzwingt, braucht keinen Reviewer-Agent. Ein ADR, das den
@@ -49,9 +49,9 @@ nachgelagerte Review.
 ### Sprach-übergreifende Konkretion
 
 Die 2×2-Matrix ist sprach-neutral; die Sensoren in jedem Quadranten
-sind es nicht. Das Begleit-Lab wird das für sechs Sprachen
-(Go, Python, Kotlin, Java, C#/.NET, C++) zeigen — jeweils mit eigener
-Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette.
+sind es nicht: jede Sprache bringt ihre eigene
+Linter/Typecheck/Architekturtest/Coverage-Werkzeugkette (Go, Python,
+Kotlin, Java, C#/.NET, C++ …).
 
 ### Drei Harness-Kategorien (Böckeler)
 
@@ -88,7 +88,7 @@ flowchart LR
 Die Behaviour-Kategorie (gelb) ist die schwierigste — Böckeler nennt sie
 offen die am wenigsten entwickelte. Sie ist der eigentliche Grund, warum
 Replay und Golden Sets im Kurs ein eigenes Modul bekommen
-([Modul 12](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)).
+([Modul 12](modul-12-replay-evaluierung.md)).
 
 ### Drei operative Säulen (OpenAI)
 
@@ -157,9 +157,9 @@ Code, den er schützen soll. Die typischen Verfallsformen:
 * **Golden-Set-Überfitting** — Replay grün, Realität rot. Lösung: Golden Sets rotieren, neue Beispiele ziehen.
 
 Entropy Management ist nicht ein eigenes Modul, sondern eine Pflicht, die
-durch [Modul 7 (Carveouts)](../../kurs/de/02-planung/modul-07-carveouts.md),
-[Modul 12 (Replay)](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)
-und [Modul 15 (Observability)](../../kurs/de/05-betrieb/modul-15-observability.md)
+durch [Modul 7 (Carveouts)](modul-07-carveouts.md),
+[Modul 12 (Replay)](modul-12-replay-evaluierung.md)
+und [Modul 15 (Observability)](modul-15-observability.md)
 verteilt ist.
 
 ### Steering Loop

@@ -1,6 +1,6 @@
 ## Modul 16 — Produktiver Betrieb
 
-*Quelle: [05-betrieb/modul-16-produktiver-betrieb.md](../../kurs/de/05-betrieb/modul-16-produktiver-betrieb.md)*
+<!-- Quelle: [05-betrieb/modul-16-produktiver-betrieb.md](../../kurs/de/05-betrieb/modul-16-produktiver-betrieb.md) -->
 
 ### Kernidee (Modul 16)
 
@@ -14,7 +14,7 @@ ohne den Autor zu kennen. Runbooks und Replay sind dafür da.
 - **"Produktionsfreigabe ist eine formale Checkbox."** — Eine Checkliste ohne *Belege* pro Item (Replay-Lauf-Link, ADR-ID, Trace-Hash) ist Bürokratie. Mit Belegen ist sie das einzige nicht-fragmentierte Audit-Artefakt.
 - **"Deployt heißt produktiv."** — Nein. Deployment ist *eine* Anwendung des Container-Ankers (Modul 14), nicht das Ziel. Produktionsreife heißt *belegte Betriebsfähigkeit*: kann ein anderer Mensch nachts handeln (Runbook), ist der Lauf reproduzierbar (Replay-Beleg), entfällt die Freigabe bei einem Incident automatisch (Incident-Klausel)? Ein Service kann längst deployt und trotzdem nicht produktionsreif sein — genau diese Lücke schließt die Freigabe-Checkliste.
 - **"Prompt-Injection ist eine Modell-Frage."** — Nein. Erkennung von Injection ist eine *Telemetrie-Frage*: Eingabe-Logging + Tool-Call-Audit + Output-Drift-Marker. Wer das nicht hat, erkennt Injection nur durch Glück.
-- **"Postmortem ist Schuldzuweisung — also macht man's leise."** — Genau das Gegenteil. Ein produktiver Postmortem ist *blameless* (vgl. Etsy/Google SRE-Tradition): er sucht den Pfad, auf dem ein vernünftiger Mensch unter Druck dieselbe Entscheidung getroffen hätte, und fragt, *welcher Sensor oder Guide gefehlt hat*. Closure-Einträge in `done/` ([Modul 5](../../kurs/de/02-planung/modul-05-planning-harness.md)) und Reflexions-Einträge ([`grundlagen/reflexion-vorlage.md`](../../kurs/de/grundlagen/reflexion-vorlage.md)) sind beide *strukturell* blameless: sie fragen "welche Harness-Lücke war Ursache", nicht "wer war es". Wer Postmortems als Schuldzuweisung erlebt hat, wird Drift-Symptome zukünftig verschweigen — und genau dadurch wachsen sie. Blameless ist keine moralische Wahl; es ist eine Sensor-Schutz-Maßnahme.
+- **"Postmortem ist Schuldzuweisung — also macht man's leise."** — Genau das Gegenteil. Ein produktiver Postmortem ist *blameless* (vgl. Etsy/Google SRE-Tradition): er sucht den Pfad, auf dem ein vernünftiger Mensch unter Druck dieselbe Entscheidung getroffen hätte, und fragt, *welcher Sensor oder Guide gefehlt hat*. Closure-Einträge in `done/` ([Modul 5](modul-05-planning-harness.md)) und Reflexions-Einträge ([`grundlagen/reflexion-vorlage.md`](../../kurs/de/grundlagen/reflexion-vorlage.md)) sind beide *strukturell* blameless: sie fragen "welche Harness-Lücke war Ursache", nicht "wer war es". Wer Postmortems als Schuldzuweisung erlebt hat, wird Drift-Symptome zukünftig verschweigen — und genau dadurch wachsen sie. Blameless ist keine moralische Wahl; es ist eine Sensor-Schutz-Maßnahme.
 
 ### Worked Example: eine Produktionsfreigabe-Checkliste schreiben
 
@@ -100,12 +100,12 @@ Beleg fehlt, ist das Item *nicht* abgehakt — auch wenn das Item
 inhaltlich erfüllt wäre. Eine Checkliste ohne Belege ist die
 Bürokratie-Form, gegen die der Kurs sich wendet.
 
-**Schritt 6 — Freigabe-Eintrag in `done/welle-1-closure.md`.**
+**Schritt 6 — Freigabe-Eintrag in `done/welle-NN-closure.md`.**
 ```markdown
-# Welle 1 — Closure-Eintrag
+# Welle NN — Closure-Eintrag
 Status: released
-Datum: 2026-06-30
-Checkliste: docs/release/welle-1-checkliste.md (alle Items mit Beleg)
+Datum: YYYY-MM-DD
+Checkliste: docs/release/welle-NN-checkliste.md (alle Items mit Beleg)
 Restrisiken: zwei (siehe §"Bewusst NICHT", plus Folge-Slice SL-027 für
              Coverage-Erhöhung auf Critical-Pfad).
 Steering-Loop-Eintrag (Modul 15 Doku-Konsistenz-Agent meldete vor
@@ -127,6 +127,4 @@ Eingabe-Roh-Logging (mit Redaction), Tool-Call-Audit-Log,
 Output-vs-Eingabe-Konsistenz-Marker. Ergänzende Indikatoren:
 Cache-Miss-Spike, Tool-Allowlist-Reject-Counter — ohne mindestens
 *eines* der drei Pflicht-Felder bleibt Erkennung Glücksache.
-
----
 

@@ -1,6 +1,6 @@
 ## Modul 5 — Planning Harness
 
-*Quelle: [02-planung/modul-05-planning-harness.md](../../kurs/de/02-planung/modul-05-planning-harness.md)*
+<!-- Quelle: [02-planung/modul-05-planning-harness.md](../../kurs/de/02-planung/modul-05-planning-harness.md) -->
 
 ### Kernidee (Modul 5)
 
@@ -23,7 +23,7 @@ stateDiagram-v2
 
 Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
 Größen-Erkenntnis) und `in_progress → open` (Blocker — meist mit
-Carveout, siehe [Modul 7](../../kurs/de/02-planung/modul-07-carveouts.md)). Der einzige Übergang
+Carveout, siehe [Modul 7](modul-07-carveouts.md)). Der einzige Übergang
 nach `done` verlangt *Lerneintrag*, nicht nur "Tests grün".
 
 ### Trigger je Lifecycle-Übergang und WIP-Limit (Modul 5)
@@ -112,7 +112,7 @@ Login-Tests → Test-Infrastruktur; Audit-Log-Eintrag → Audit-Logging;
    durch `harness/conventions.md` (oder ein gleichwertiges Artefakt) als
    Strukturregel verankert?
 2. **Phase-Reife der berührten Artefakt-Sektionen** — Phase 0–5 aus der
-   Phase × Modus-Matrix in [Modul 2](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#phasen--modus--die-zweidimensionale-reife-matrix).
+   Phase × Modus-Matrix in [Modul 2](modul-02-harness-bootstrap.md#phasen--modus--die-zweidimensionale-reife-matrix).
 3. **Evidenz- und Diskrepanz-Risiko** — wie groß ist die Gefahr, dass
    Inventur den Code-Bestand und die Doku-Aussage als divergent
    ausweist? Bei GF meist niedrig (Doc führt — Inventur prüft nur
@@ -121,7 +121,7 @@ Login-Tests → Test-Infrastruktur; Audit-Log-Eintrag → Audit-Logging;
 4. **Reconciliation-Aufwand inklusive Graduation-/Folge-Slice-Trigger** —
    wieviel Slice-Aufwand bringt BF/Hybrid mit sich, und welcher Trigger
    (eine der vier Klassen aus
-   [`konventionen.md` §Vier Trigger-Klassen](../../kurs/de/grundlagen/konventionen.md#vier-trigger-klassen)
+   [`konventionen.md` §Vier Trigger-Klassen](grundlagen-konventionen.md#vier-trigger-klassen)
    — Sync, Promotion, Cross-Reference, Acceptance — oder eine
    Folge-Slice-ID) schaltet die Sub-Area Richtung GF?
 
@@ -214,6 +214,6 @@ Closure-Notiz prüfbar.
 - **Gegen "Slice = Ticket = Feature":** Drei verschiedene Granularitäten. Feature ist Spec-Ebene, Slice ist Implementations-Einheit, Ticket ist Projektmanagement. Slice ist die kleinste *agentisch abschließbare* Einheit.
 - **Gegen "Erst plan ich alle Slices, dann fange ich an":** Wer alle Slices vor der ersten Implementation plant, plant tote Slices. Plan und Implementation alternieren — Welle für Welle.
 - **Gegen "Wenn ein Slice in `done/` ist, ist er fertig":** Ohne Lerneintrag ist er nur *abgelegt*. Closure ist eine bewusste Reflexionsleistung: was hat funktioniert, was war Friktion, was geht in den Steering Loop?
-- **Gegen "Ein Slice hat einen Bootstrap-Modus":** Der Modus ist Eigenschaft *pro Sub-Area* ([Modul 2 §Kernidee](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)). Ein Slice berührt mehrere Sub-Areas und kann GF, BF und Hybrid gleichzeitig involvieren.
+- **Gegen "Ein Slice hat einen Bootstrap-Modus":** Der Modus ist Eigenschaft *pro Sub-Area* ([Modul 2 §Kernidee](modul-02-harness-bootstrap.md#kernidee-modul-2)). Ein Slice berührt mehrere Sub-Areas und kann GF, BF und Hybrid gleichzeitig involvieren.
 - **Gegen "Wenn der Slice klein ist, ist die berührte Sub-Area GF":** Transitive Vereinfachung. Slice-Größe und Sub-Area-Modus sind orthogonale Achsen: Slice-Größe misst, ob der Schnitt in einer Review-Sitzung prüfbar ist; Sub-Area-Modus misst den Reifegrad der berührten Doku-/Code-Sektion. Ein kleiner Slice kann eine BF-Sub-Area berühren (Beispiel: Login-Endpoint ist klein, aber das Test-Layout für die Auth-Schicht ist nicht in `harness/conventions.md` verankert).
 

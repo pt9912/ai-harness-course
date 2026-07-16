@@ -1,6 +1,6 @@
 ## Modul 14 — Docker Harness
 
-*Quelle: [05-betrieb/modul-14-docker-harness.md](../../kurs/de/05-betrieb/modul-14-docker-harness.md)*
+<!-- Quelle: [05-betrieb/modul-14-docker-harness.md](../../kurs/de/05-betrieb/modul-14-docker-harness.md) -->
 
 ### Kernidee (Modul 14)
 
@@ -13,7 +13,7 @@ Unterschied, nicht den Bug.
 - **"Lock-Files sind nur für Python."** — Lock-Files gibt es für jede Sprache: `package-lock.json`, `go.sum`, `Cargo.lock`, `packages.lock.json` (mit Central Package Management, siehe `bess-ems`), `pnpm-lock.yaml`, `poetry.lock`. Wer ohne Lock-File baut, baut nicht reproduzierbar.
 - **"Docker-only ist Overkill für Tools."** — Tools driften am schnellsten. Genau dort lohnt Docker am meisten.
 - **"Devcontainer ersetzt Compose."** — Nein. Devcontainer ist für *Entwickler-IDE-Setup*, Compose für *Lauf- und CI-Vertrag*. Sie ergänzen sich.
-- **"DevOps ist YAML schreiben — Container = Deployment."** — Verbreitet, weil Container historisch über die Deployment-Seite eingeführt wurden. In diesem Kurs ist der primäre Zweck eines Containers ein anderer: er ist **Reproduzierbarkeits-Anker** — derselbe Image-Hash garantiert dieselbe Toolchain auf jeder Maschine, im CI und in sechs Monaten. Deployment ist *eine* Anwendung dieses Ankers, nicht sein Hauptzweck. Bei einem Replay-Lauf gegen ein altes Golden Set ([Modul 12](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)) brauchst du den *Image-Hash von damals*, nicht das aktuelle Deployment. Wer das Bild "Container = Auslieferung" pflegt, hat keinen Hebel für *time-travel reproducibility* — und damit kein belastbares Replay.
+- **"DevOps ist YAML schreiben — Container = Deployment."** — Verbreitet, weil Container historisch über die Deployment-Seite eingeführt wurden. In diesem Kurs ist der primäre Zweck eines Containers ein anderer: er ist **Reproduzierbarkeits-Anker** — derselbe Image-Hash garantiert dieselbe Toolchain auf jeder Maschine, im CI und in sechs Monaten. Deployment ist *eine* Anwendung dieses Ankers, nicht sein Hauptzweck. Bei einem Replay-Lauf gegen ein altes Golden Set ([Modul 12](modul-12-replay-evaluierung.md)) brauchst du den *Image-Hash von damals*, nicht das aktuelle Deployment. Wer das Bild "Container = Auslieferung" pflegt, hat keinen Hebel für *time-travel reproducibility* — und damit kein belastbares Replay.
 
 ### Worked Example: vom einstufigen Dockerfile zur reproduzierbaren Multi-Stage-Pipeline
 
@@ -24,7 +24,7 @@ FROM python:3
 COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
-CMD ["python", "-m", "docsearch"]
+CMD ["python", "-m", "app"]
 ```
 
 Vier Zeilen, vier Drift-Quellen: Tag `python:3` zeigt jeden Monat auf
@@ -89,11 +89,11 @@ Paketmanager, keine Build-Toolchain. Angriffsfläche minus ~90 %.
 ```dockerfile
 FROM python:3.12.4-slim@sha256:9c7f4a... AS runtime
 WORKDIR /app
-COPY --from=build /src/src/docsearch /app/docsearch
+COPY --from=build /src/src/app /app/app
 COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
 RUN useradd --uid 65532 --no-create-home nonroot
 USER nonroot
-ENTRYPOINT ["python", "-m", "docsearch"]
+ENTRYPOINT ["python", "-m", "app"]
 ```
 
 Für Sprachen mit eigenständigem Binär-Output (Go, Rust, statisch
@@ -109,7 +109,7 @@ in einem Replay-Manifest (Modul 12) referenzierbar wird:
 build:  ## LH-QA-03 — reproduzierbarer Build, Image-Hash erfasst
 	docker buildx build \
 		--platform linux/amd64 \
-		--tag docsearch:welle-2 \
+		--tag <image>:welle-NN \
 		--metadata-file build-metadata.json \
 		--load .
 	@jq -r '."containerimage.config.digest"' build-metadata.json > harness/image-hash.txt

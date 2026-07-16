@@ -23,7 +23,7 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   Optionen mit Pro/Contra"-Regel bleibt.
 - **d-check-Pin `v0.9.0` → `v0.23.0`** (Image-Digest neu gepinnt) im
   [`Makefile`](Makefile) (Single Source of Truth) und im
-  [`lab/templates/harness.mk`](lab/templates/harness.mk); der Versions-Kommentar
+  `harness.mk` (`lab/templates/`); der Versions-Kommentar
   in `harness.mk` trug noch `v0.8.0` und wurde mitgezogen. Laut d-check-CHANGELOG
   keine Breaking-Config-Änderung v0.9.0→v0.23.0 — bestehende `.d-check.yml` bleibt
   gültig, `make check` grün (docs-check 0 Befunde, alignment-check 0 WARN).

@@ -1,13 +1,13 @@
 ## Modul 11 — Verification Harness
 
-*Quelle: [04-qualitaet/modul-11-verification.md](../../kurs/de/04-qualitaet/modul-11-verification.md)*
+<!-- Quelle: [04-qualitaet/modul-11-verification.md](../../kurs/de/04-qualitaet/modul-11-verification.md) -->
 
 ### Begriffe: Pre-completion Checklist Middleware und DoD-Verletzung
 
 * **Pre-completion Checklist Middleware** — eine vom Implementation-Agent
   selbst durchlaufene Checkliste *vor* der "fertig"-Meldung. Sie ist
   Schritt 8 des 8-Schritt-Workflows (siehe
-  [Modul 9 §Minimal Agent Workflow](../../kurs/de/03-agenten/modul-09-implementierung.md#minimal-agent-workflow-8-schritte)).
+  [Modul 9 §Minimal Agent Workflow](modul-09-implementierung.md#minimal-agent-workflow-8-schritte)).
   In diesem Modul betrachten wir sie als *Eingabe* für die Verifikation:
   was die Checkliste *behauptet*, ist von der Verifikation maschinell
   oder semantisch zu *bestätigen*. Behauptung ohne Bestätigung ist die
@@ -24,7 +24,7 @@ Verifikation = primär *inferential feedback* in der Behaviour-Kategorie,
 unterstützt durch *computational feedback* (Fitness Functions für die
 Architecture-Fitness-Kategorie). Dies ist die anspruchsvollste Schicht
 — und laut Böckeler die am wenigsten ausgereifte. Siehe
-[`grundlagen/klassifikation.md`](../../kurs/de/grundlagen/klassifikation.md).
+[`grundlagen/klassifikation.md`](grundlagen-klassifikation.md).
 
 ### Kernidee (Modul 11)
 

@@ -1,6 +1,6 @@
 ## Modul 12 — Replay und Evaluierung
 
-*Quelle: [04-qualitaet/modul-12-replay-evaluierung.md](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)*
+<!-- Quelle: [04-qualitaet/modul-12-replay-evaluierung.md](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md) -->
 
 ### Kernidee (Modul 12)
 
@@ -23,7 +23,7 @@ wird.
 **Schritt 1 — Pfad und Skelett anlegen.**
 
 ```
-evals/golden/welle-1-baseline/
+evals/golden/welle-NN-baseline/
 ├── manifest.yaml
 ├── inputs/
 │   ├── case-001.json
@@ -36,13 +36,13 @@ evals/golden/welle-1-baseline/
 
 Drei Fälle ist das Minimum: Happy / Boundary / Negative — dieselbe
 Spec-Disziplin wie bei Akzeptanzkriterien
-([Modul 3](../../kurs/de/01-spec-und-architektur/modul-03-lastenheft.md)). Ein
+([Modul 3](modul-03-lastenheft.md)). Ein
 Replay mit einem Fall ist eine Demo, kein Replay.
 
 **Schritt 2 — Pflichtfelder im Manifest fixieren.**
 
 ```yaml
-# evals/golden/welle-1-baseline/manifest.yaml
+# evals/golden/welle-NN-baseline/manifest.yaml
 slice: SL-024
 recorded_at: 2026-06-15T10:31:00Z
 model:
@@ -50,7 +50,7 @@ model:
   version: "20260301"
   seed: 42
 runtime:
-  image_hash: sha256:9c7f4a...   # siehe Vorgriff-Block oben
+  image_hash: sha256:9c7f4a...
   toolchain:
     python: 3.12.4
     ruff: 0.4.10
@@ -64,16 +64,16 @@ Replay: `runtime.image_hash` (Toolchain-Drift abgrenzen) und
 `recorded_at` (späteren Diff datieren).
 
 **Schritt 3 — Erwartungen *als Verhalten*, nicht als Wortlaut.**
-Schlecht: *"Agent antwortet exakt 'index updated'"* — bricht bei
+Schlecht: *"Agent antwortet exakt '<fester Wortlaut>'"* — bricht bei
 Modellwechsel sofort. Gut:
 
 ```yaml
 # expectations/case-001.json
 {
-  "must_include": ["index", "updated"],
+  "must_include": ["<schlüsselbegriff-1>", "<schlüsselbegriff-2>"],
   "must_not_include": ["error", "traceback"],
   "tool_calls": {
-    "writer.write_index": {"min": 1, "max": 1}
+    "<tool.name>": {"min": 1, "max": 1}
   }
 }
 ```
@@ -85,7 +85,7 @@ Fließtext.
 **Schritt 4 — Erster Lauf, Baseline einfrieren.**
 
 ```bash
-make replay RUN=welle-1-baseline
+make replay RUN=welle-NN-baseline
 ```
 
 Erwartet: drei grüne Fälle. Wenn nicht: *erst* das Manifest schärfen
@@ -94,7 +94,7 @@ Erwartet: drei grüne Fälle. Wenn nicht: *erst* das Manifest schärfen
 **Schritt 5 — Modellwechsel-Drift messen.**
 
 ```bash
-make replay RUN=welle-1-baseline MODEL=claude-sonnet-4-6
+make replay RUN=welle-NN-baseline MODEL=claude-sonnet-4-6
 ```
 
 Drei mögliche Ergebnisse:
@@ -129,7 +129,7 @@ falschen Stelle ein.
 
 **Schritt 7 — Lerneintrag und Rotation.**
 Replay-Sets verrotten. In
-`evals/golden/welle-1-baseline/CHANGELOG.md`:
+`evals/golden/welle-NN-baseline/CHANGELOG.md`:
 
 ```markdown
 2026-06-15 — Baseline mit drei Fällen aufgesetzt.

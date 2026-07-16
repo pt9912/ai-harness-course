@@ -1,5 +1,5 @@
 ## Durchsetzungsschicht
-*Quelle: [grundlagen/durchsetzungsschicht.md](../../kurs/de/grundlagen/durchsetzungsschicht.md)*
+<!-- Quelle: [grundlagen/durchsetzungsschicht.md](../../kurs/de/grundlagen/durchsetzungsschicht.md) -->
 
 Konventionen, Hard Rules und Sensors sind *aspirativ*, bis etwas sie an
 die Agent-Schleife **bindet**. Diese Seite beschreibt die
@@ -13,7 +13,7 @@ Ein Guide, der „make/Docker-only" oder „Gates vor dem Handoff" sagt, ist
 *inferential feedforward* — er **informiert**. Ein driftender oder
 vergesslicher Agent kann ihn ignorieren, ohne dass etwas passiert. Die
 Durchsetzungsschicht verschiebt dieselbe Regel in die **computational**-
-Spalte der [2×2-Matrix](../../kurs/de/grundlagen/konzeptkarte.md#2x2-schnellanker): die falsche
+Spalte der [2×2-Matrix](grundlagen-klassifikation.md#2x2-matrix): die falsche
 Handlung wird *technisch erschwert* (feedforward) oder *deterministisch
 erkannt* (feedback) — nicht bloß abgeraten. Es ist dieselbe Bewegung wie
 beim `check-references`-Gate ([Traceability-Constraint](grundlagen-konventionen.md#traceability-constraint)):
@@ -82,7 +82,7 @@ wie alles andere. Ein Befehls-Guard etwa reift in Wellen: zuerst nur die
 Befehlsposition, dann Sub-Shell-Rekursion (`bash -c "…"`), dann
 kombinierte Flags (`-lc`, `-ec`). Genau diese Härtung *am Wächter selbst*
 ist der Steering-Loop, auf den Harness angewandt. Der ausführliche Worked
-Example dazu gehört nach [Modul 13](../../kurs/de/04-qualitaet/modul-13-quality-gates.md)
+Example dazu gehört nach [Modul 13](modul-13-quality-gates.md)
 (folgt).
 
 ### Referenz-Implementierung

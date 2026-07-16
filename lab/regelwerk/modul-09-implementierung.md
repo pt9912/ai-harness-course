@@ -1,6 +1,6 @@
 ## Modul 9 — Implementierung durch KI-Agenten
 
-*Quelle: [03-agenten/modul-09-implementierung.md](../../kurs/de/03-agenten/modul-09-implementierung.md)*
+<!-- Quelle: [03-agenten/modul-09-implementierung.md](../../kurs/de/03-agenten/modul-09-implementierung.md) -->
 
 ### Kernidee (Modul 9)
 
@@ -134,7 +134,7 @@ Konkret gehört in den Lauf-Kontext:
 | Skills, die nicht zu dieser Rolle gehören |
 | ältere Carveouts, deren Auflösungs-Trigger bereits eingetreten ist |
 
-Die Verdichtungs-Sensoren dafür sind in [Modul 15](../../kurs/de/05-betrieb/modul-15-observability.md):
+Die Verdichtungs-Sensoren dafür sind in [Modul 15](modul-15-observability.md):
 Token-Eingabe-Metrik pro Slice, Cache-Hit-Rate (siehe Mini-Glossar in
 Modul 15), und der **Doku-Konsistenz-Agent** als Drift-Detektor für tote
 Kontext-Stücke.

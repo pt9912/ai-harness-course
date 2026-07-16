@@ -6,10 +6,10 @@ unabhängig davon, ob dein Repo Go, Python, Kotlin, Java oder C# nutzt.
 ## Übersicht
 
 Diese Tabelle listet die **16 Dokument-Skelette** (Phase 0 → 1 beim
-Bootstrap — das Repo füllt sie). Die drei **Tooling-/Integrations-Dateien**
-(`Makefile`, `.d-check.yml`, `harness.mk`) sind **keine** Dokument-Skelette
+Bootstrap — das Repo füllt sie). Die zwei **Tooling-Dateien**
+(`Makefile`, `.d-check.yml`) sind **keine** Dokument-Skelette
 und stehen separat in [§Gate-Baseline](#gate-baseline) — also 16 Skelette
-+ 3 Tooling-Dateien, nicht 19 gleichartige Vorlagen.
++ 2 Tooling-Dateien, nicht 18 gleichartige Vorlagen.
 
 | Template | Wofür | Kurs-Verweis |
 |---|---|---|
@@ -92,17 +92,15 @@ vorhanden beschrieben wird) — Reviewer-Sache.
 
 ## Gate-Baseline
 
-Drei mitgelieferte Dateien geben dir den Doku-Referenz-Gate
+Zwei mitgelieferte Dateien geben dir den Doku-Referenz-Gate
 out-of-the-box (ins Repo-Root kopieren). Sie sind **Werkzeug-Startgerüste**,
-keine Phase-0→1-Dokument-Skelette: `Makefile` und `.d-check.yml` sind
-Startkonfiguration, `harness.mk` ist **Konsumenten-Integration** — sinnvoll
-nur, wenn dein Repo d-check als Doku-Gate *konsumiert*:
+keine Phase-0→1-Dokument-Skelette — das `Makefile` trägt den d-check-
+Doku-Gate direkt, `.d-check.yml` die Modul-Auswahl:
 
 | Datei | Rolle |
 |---|---|
 | [`.d-check.yml`](.d-check.yml) | Modul-Auswahl + Suffix-Ignore; `ids`/`codepaths` wachsen mit den Artefakten |
-| [`harness.mk`](harness.mk) | **bedingt (nur Konsumenten):** `make docs-check` via d-check (Image per Digest gepinnt); gegenstandslos, wenn das Repo d-check selbst ist oder direkt fährt |
-| [`Makefile`](Makefile) | bindet `harness.mk` ein (bzw. ruft d-check direkt); `gates: docs-check`, Code-Gates ergänzt der Adopter |
+| [`Makefile`](Makefile) | ruft d-check direkt (`docs-check`-Target, Image per Digest gepinnt); `gates: docs-check`, Code-Gates ergänzt der Adopter |
 
 Danach läuft `make docs-check` sofort (`links`/`anchors`). `ids` und
 `codepaths` im `.d-check.yml` einkommentieren, sobald die Ziele bzw.
@@ -114,15 +112,11 @@ nicht durchsetzt (Modul 13). Gerüst neu erzeugen: `d-check --print-config`
 `slice-…`, `<PRÄFIX>-FA-…`/`-QA-…`) vorbelegt; ohne `--id-prefix` bleibt der
 Platzhalter `<PREFIX>` plus `# TODO` stehen.
 
-**Self-Hosting- / Producer-Fall.** `harness.mk` ist *Konsumenten-Integration*
-und damit optional. Zwei Repo-Klassen brauchen es nicht: (a) das **Tool-Repo
-selbst** (d-check), das seinen Doku-Gate via `make doc-check` direkt
-dogfooded; (b) jedes Repo, das d-check zwar konsumiert, die Image-Zeile aber
-direkt ins eigene `Makefile` schreibt, statt `harness.mk` einzubinden. Dieser
-Kurs-Repo ist Fall (b): sein Root-`Makefile` ruft die gepinnte
-d-check-Image-Zeile direkt auf und führt **kein** `harness.mk` — adoptiert
-werden die Dokument-Skelette plus `Makefile` und `.d-check.yml`, nicht
-`harness.mk`.
+**Gate-Fragment neu erzeugen.** Das `docs-check`-Target steht direkt im
+`Makefile` (gepinnte d-check-Image-Zeile) — genauso dogfooded dieser
+Kurs-Repo seinen Doku-Gate. Wer das Fragment lieber frisch generiert (immer
+aktueller Pin, kein statisches Duplikat), nutzt `d-check --print-mk` statt
+es von Hand zu pflegen.
 
 ## Pflichtgliederung vs. freie Form
 
