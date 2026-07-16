@@ -28,40 +28,10 @@ Form, die Regeln der Inhalt.
 
 ### Roadmap-Struktur: fünf Abschnitte (Modul 6)
 
-Eine Roadmap trägt fünf Abschnitte — Skelett mit Platzhaltern:
-
-```markdown
-## Aktuelle Welle
-**Welle-ID:** welle-NN
-**Geplantes Ende:** YYYY-MM-DD (Schätzung)
-**Closure-Trigger:**
-- slice-NNN done.
-- Replay-Lauf grün: <messbare Schwelle>.
-- ADR-NNNN `Accepted`.
-**Vorgänger-Trigger:** welle-NN done.
-
-## Nächste Wellen
-| Welle | Trigger | Wichtigste Slices | Geschätzter Aufwand |
-|---|---|---|---|
-| welle-NN | welle-NN done + ADR-NNNN accepted | slice-NNN, slice-NNN | S/M/L |
-
-## Meilensteine
-| Meilenstein | Welle(n) | Trigger | Status |
-|---|---|---|---|
-| M<n> | welle-NN | <extern beobachtbarer Zustand> | offen |
-
-## Abgeschlossene Wellen
-| Welle | Abschluss | Closure-Notiz |
-|---|---|---|
-| welle-NN | YYYY-MM-DD | done/welle-NN-results.md |
-
-## Historische Trigger-Verschiebungen
-| Datum | Was wurde geändert? | Warum? |
-|---|---|---|
-| YYYY-MM-DD | slice-NNN in welle-NN nachgenommen | <Grund> |
-```
-
-Lesart der fünf Abschnitte:
+Die Form liefert die Vorlage
+[`docs/plan/planning/roadmap.template.md`](../templates/docs/plan/planning/roadmap.template.md)
+— fünf Abschnitte: *Aktuelle Welle · Nächste Wellen · Meilensteine ·
+Abgeschlossene Wellen · Historische Trigger-Verschiebungen*. Operative Lesart:
 
 - **Aktuelle Welle** — die laufende Welle mit den drei Pflicht-Bestandteilen (Slice-IDs · Trigger · Closure-Kriterien). Das *Geplante Ende* ist Schätzung, kein Closure-Kriterium: kippt sie, kippt sie als Schätzung.
 - **Nächste Wellen** — die geordnete Vorschau; jede Zeile trägt Welle, Trigger (die Abhängigkeit als beobachtbare Bedingung), wichtigste Slices und geschätzten Aufwand (S/M/L, kein Termin). Eine Welle, die ohne fertige Vorgängerin nicht starten kann, ist eine Phantom-Welle — die Abhängigkeit steht explizit in der `Trigger`-Spalte und als gerichtete Kante im Abhängigkeitsgraphen.

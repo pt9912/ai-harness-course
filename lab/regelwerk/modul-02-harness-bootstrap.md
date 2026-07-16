@@ -13,7 +13,7 @@ gleiche Sensoren und Guides, andere Anwendungsphase. Die abstrakte
 Verbindung steht in
 [`grundlagen/konventionen.md` §Verbindung zum Steering-Loop](grundlagen-konventionen.md#verbindung-zum-steering-loop).
 
-[Modul 1 §Worked Example, Schritt 0](modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren)
+[Modul 1 §Source-Precedence-Block, Schritt 0](modul-01-entwicklungszyklus.md#source-precedence-block)
 hat den Bootstrap-Modus als Kurz-Vorgriff eingeführt (Baseline und Modus als
 Voraussetzung für den Lebenszyklus); dieses Modul ist die Vollform —
 die *Diagnose-Praxis*, die Schritt 0 zur Vorbedingung jeder
@@ -77,7 +77,7 @@ beobachtbare Anzeichen, an denen sich ein Modus-Wechsel ankündigt:
    ein systemisches "Code existiert vor Doku"-Muster zeigt, ist die
    richtige Antwort eine BF-Sub-Area-Markierung mit Graduation-Plan,
    nicht eine Carveout-Kaskade — siehe
-   [Modul 7 §Worked Example A Schritt 6](modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
+   [Modul 7 §Werkzeug-Wahl bei Diskrepanz](modul-07-carveouts.md#werkzeug-wahl).
    Die Carveout↔BF-Klammer trägt damit in beide Richtungen: Auflösung
    schließt eine BF-Sub-Area, Häufung eröffnet eine.
 
@@ -124,35 +124,11 @@ Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose.
   bleibt eine *Modus*-FV; FV5 teilt nur die kognitive Wurzel, nicht die
   Achse.)
 
-### Worked Example 1: Greenfield-Bootstrap
+### Greenfield-Bootstrap: Schritt-Sequenz (Modul 2)
 
-#### Übersicht: GF-Walkthrough als Mermaid-Diagramm
-
-```mermaid
-flowchart TD
-    Start([leeres Repo]):::start
-    S0["0. Modus = GF pro Sub-Area"]:::orient
-    S1["1. Baseline + Repo-Klasse + ID-Schemata"]:::orient
-    S2["2. Templates + Regelwerk adoptieren"]:::action
-    S3["3. conventions.md (MR-000 + MR-001)"]:::action
-    S4["4. lastenheft.md Outline"]:::content
-    S5["5. Roadmap + Release-Plan Outline"]:::content
-    S6["6. Sensors-Roster im Nicht-behauptet-Block"]:::content
-    S7["7. Architektur + Spezifikation Outline"]:::content
-    S8["8. ADR-0001 (Proposed)"]:::content
-    End([bereit fuer erste Code-Slices]):::endNode
-
-    Start --> S0 --> S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> End
-
-    classDef start fill:#f5f5f5,stroke:#888
-    classDef orient fill:#fff4d6,stroke:#d4a017
-    classDef action fill:#dceaff,stroke:#3366cc
-    classDef content fill:#e0f0e0,stroke:#3a8a3a
-    classDef endNode fill:#f5f5f5,stroke:#888
-```
-
-Drei Phasen sind farbig sichtbar: *Orient* (gelb, Schritte 0–1),
-*Action* (blau, Schritte 2–3), *Content* (grün, Schritte 4–8).
+Neun Schritte (0–8) in drei Phasen: *Orient* (0–1, Modus + Baseline),
+*Action* (2–3, vendoren + Konventionen), *Content* (4–8, normativer
+Inhalt). Endpunkt: bereit für die ersten Code-Slices.
 
 #### Detail-Tabelle (Schritte 0–4: Setup-Phase)
 
@@ -166,14 +142,14 @@ Beispiel nummeriert (T1 = Pointer in README,
 T2 = Pointer in AGENTS, T4 = Promotion, T5 = erste ADR-Vorschläge,
 T6 = Cross-Reference ADR → Spec (aufwärts), T7 = ADR-Review-Auslöser).
 **T3 ist BF-spezifisch** und tritt im Greenfield-Walkthrough nicht
-auf — er erscheint in Worked Example 2 als Sync-Trigger in
+auf — er erscheint im Brownfield-Walkthrough als Sync-Trigger in
 BF-Diskrepanz-Auslöse-Variante.
 
 | # | Aktion | Berührte Dateien (Phasen-Übergang) | Trigger |
 |---|---|---|---|
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
 | 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schemata festlegen (`LH-*`, `ARC-*`, `SPEC-*`, `MR-*`) | keine | reift 2/3 |
-| 2 | **Dokument-Skelette** aus [`../../lab/templates/`](../templates/) kopieren; **Tooling** (`Makefile` mit d-check-Doku-Gate, `.d-check.yml`) als Startgerüst übernehmen; **Regelwerk der Baseline vendoren** nach `.harness/baseline/<tag>/regelwerk/` (+ `SHA256SUMS`, netzlos) als präsente nachschlagbare Vertiefung | Dokument-Skelette **0 → 1**; vendored Regelwerk + Tooling tragen keine Phase-Reife | keine |
+| 2 | **Baseline vendoren** — Regelwerk *und* Templates nach `.harness/baseline/<tag>/{regelwerk,templates}/` (+ `SHA256SUMS`, netzlos) als präsente, gepinnte Referenz; **Tooling** (`Makefile` mit d-check-Doku-Gate, `.d-check.yml`) als Startgerüst übernehmen; **Dokument-Skelette** aus der vendored Baseline (`…/templates/`) kopieren *und ausfüllen* | Dokument-Skelette **0 → 1**; vendored Baseline + Tooling tragen keine Phase-Reife | keine |
 | 3 | `harness/conventions.md` mit MR-000 (Baseline) + MR-001 (`ARC-*`/`SPEC-*` als Adaption) | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
 | 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
 
@@ -194,8 +170,8 @@ legt die *Quellen* an, die Inhalts-Phase erzeugt die *Folge-Bezüge*
 zwischen Dokumenten und ADRs. Die Tabellen-Trennung macht das
 kognitiv lesbar — die Phasen verschwimmen sonst.
 
-**Anmerkung zum vendored Regelwerk (Schritt 2).** Das Regelwerk der
-Baseline wird beim Bootstrap **committet vendored** (`.harness/baseline/<tag>/regelwerk/`
+**Anmerkung zur vendored Baseline (Schritt 2).** Regelwerk *und* Templates
+werden beim Bootstrap **committet vendored** (`.harness/baseline/<tag>/{regelwerk,templates}/`
 + `SHA256SUMS`, netzlos materialisiert), nicht pro Lauf extern gefetcht — es
 ist die *präsente, nachschlagbare Vertiefung* zur verkörperten Form: pro
 Entscheidung, deren operative Detailtiefe Briefing und Konventionen nicht
@@ -205,78 +181,23 @@ Index), ohne das ganze Regelwerk im Kontext zu halten. Das ist das
 Modul-0-Prinzip — *Per-Lauf-Relevantes gehört verkörpert, nicht extern
 nachgeladen* — angewandt auf das Regelwerk selbst; ein realer Konsument-Repo
 (d-check) führt es netzlos vendored und schlägt im Slice-Betrieb routinemäßig
-nach.
+nach. Die Templates tragen dabei zwei Rollen: **vendored** als Referenz-Form
+(worauf das Regelwerk als „Ziel-Form" verweist — `../templates/…` löst netzlos
+lokal auf) und **kopiert-und-ausgefüllt** als deine eigenen Artefakte.
 
-#### Wie sehen T1 und T2 konkret aus?
+**T1/T2 als Sync-Trigger konkret (Schritt 3).** Sobald
+`harness/conventions.md` existiert, müssen die auf sie verweisenden
+Dokumente einen Eintrag bekommen: ein Pointer in `harness/README.md`
+(T1) und in der Source-Precedence-Liste von `AGENTS.md` (T2). Wer den
+Eintrag vergisst, hat einen **Sync-Drift**, den der Doku-Konsistenz-Agent
+([Modul 15 §Observability](modul-15-observability.md)) später als
+Inkonsistenz findet.
 
-**Schritt 3 — neu angelegte `harness/conventions.md`** (Phase 0 → 1):
+### Brownfield-Bootstrap: Schritt-Sequenz (Modul 2)
 
-```markdown
-# Konventionen — <repo>
-
-## Adaptions-Block
-
-MR-000: Baseline = ai-harness-course/0.4
-MR-001: Spec-Stratifizierung mit ARC-*/SPEC-*/LH-* (Adaption)
-```
-
-**T1 — Pointer in `harness/README.md`** (existierende Sektion ergänzen):
-
-```markdown
-<!-- harness/README.md, Sektion "Konventionen" -->
-Strukturregeln und Adaptionen siehe [`conventions.md`](conventions.md).
-```
-
-**T2 — Pointer in `AGENTS.md`** (Source-Precedence-Liste ergänzen):
-
-```markdown
-<!-- AGENTS.md §Source Precedence -->
-1. spec/lastenheft.md
-2. harness/conventions.md      <!-- neu ergänzt, T2 -->
-3. docs/plan/adr/*.md
-...
-```
-
-Die zwei Pointer sind das, was die abstrakte Trigger-Klasse *Sync*
-konkret macht: sobald `conventions.md` existiert, müssen die zwei
-Dokumente, die *auf* `conventions.md` verweisen, einen entsprechenden
-Eintrag bekommen. Wer den Eintrag vergisst, hat einen klassischen
-**Sync-Drift** — der Doku-Konsistenz-Agent
-([Modul 15 §Observability](modul-15-observability.md))
-findet das später als Inkonsistenz.
-
-### Worked Example 2: Brownfield-Bootstrap mit Discovery und Reconciliation
-
-#### Übersicht: BF-Walkthrough als Mermaid-Diagramm
-
-```mermaid
-flowchart TD
-    Start([Repo mit Code/Makefile/CI<br/>ohne Harness]):::startBF
-    S1["1. Modus = BF + Repo-Klasse + ID-Schemata"]:::orient
-    S2["2. Code-Inventur (Discovery)"]:::discover
-    S3["3. Templates + Regelwerk adoptieren"]:::action
-    S4["4. conventions.md (Modus = BF, MR-000)"]:::action
-    S5["5. Sensors-Haupt-Tabelle aus Makefile"]:::contentBF
-    S6["6. Lastenheft Reverse-Engineering aus Tests/CI"]:::contentBF
-    S7["7. Architektur + Spec Reverse-Engineering"]:::contentBF
-    S8["8. Diskrepanz-Schock + CO-DS + Reconc.-Slices"]:::discrepancy
-    S9["9. Roadmap als Reconciliation-Plan"]:::contentBF
-    Graduation[/"Konvergenz-Ziel: Graduation BF -> GF"/]:::goal
-
-    Start --> S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S9 -.-> Graduation
-
-    classDef startBF fill:#fef0f0,stroke:#a14040
-    classDef orient fill:#fff4d6,stroke:#d4a017
-    classDef action fill:#dceaff,stroke:#3366cc
-    classDef discover fill:#f0e5ff,stroke:#7a3acc
-    classDef contentBF fill:#ffe9d6,stroke:#cc7733
-    classDef discrepancy fill:#ffd9d9,stroke:#cc3333
-    classDef goal fill:#dff5e8,stroke:#3a8a3a,stroke-dasharray: 6 4
-```
-
-Vier Phasen sind farbig sichtbar: *Orient* (gelb), *Discover* (lila,
-neu in BF), *Action* (blau), *Content-BF* (orange), *Diskrepanz-
-Schock* (rot, neu in BF), *Goal/Graduation* (grün gestrichelt).
+Neun Schritte (1–9); gegenüber GF neu sind die Phasen *Discover*
+(Code-Inventur) und *Diskrepanz-Schock* (Reconciliation) sowie das
+Konvergenz-Ziel *Graduation BF → GF* pro Sub-Area.
 
 #### Detail-Tabelle (Schritte 1–4: Inventur-Phase, was bei BF anders ist)
 
@@ -291,7 +212,7 @@ Nummerierung GF 0–8 vs. BF 1–9.
 |---|---|---|
 | 1 | GF-Schritte 0 und 1 in einem Schritt zusammengefasst: Modus-Antizipation "BF pro Sub-Area" + Baseline-Auswahl + Repo-Klasse + ID-Schemata festlegen | + explizite Modus-Setzung mit Sub-Area-Aufzählung; Repo-Klassen-Wahl und Modus-Antizipation fallen zusammen |
 | 2 | **Code-Inventur (Discovery):** Makefile, CI, Tests, README, Commit-Messages inventarisieren als Lerner-Schritt | **neu in BF** — kein Repo-Artefakt entsteht, nur Lerner-Wissen |
-| 3 | Templates adoptieren + **Regelwerk vendoren** (`.harness/baseline/<tag>/regelwerk/` + `SHA256SUMS`) | wie GF |
+| 3 | **Baseline vendoren** — Regelwerk + Templates (`.harness/baseline/<tag>/{regelwerk,templates}/` + `SHA256SUMS`) + Skelette kopieren-und-ausfüllen | wie GF |
 | 4 | `harness/conventions.md` mit Modus = BF pro Sub-Area, MR-000-Aussage | Modus-Block anders strukturiert (BF-Deklarationen + Konvergenz-Auftrag pro Sub-Area) |
 
 #### Detail-Tabelle (Schritte 5–9: Reconciliation-Phase)

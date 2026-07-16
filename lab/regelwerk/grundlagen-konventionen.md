@@ -480,7 +480,7 @@ Harness-Lebenszyklus eines Repos — der Weg von "leeres Repo" oder
 "Repo ohne Harness" bis zur Stelle, an der inhaltliche Arbeit (Slices,
 Code) auf einem etablierten Harness aufsetzt. Es ist eine *Trajektorie
 durch Dokument-Zustände*, kein *Ereignis*. Konkreter Walkthrough mit
-Schritten in [Modul 1](modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren).
+Schritten in [Modul 1](modul-01-entwicklungszyklus.md#source-precedence-block).
 
 > **Begriffsklärung:** "Harness-Bootstrap" meint hier den
 > Einstiegsprozess in den Harness. Nicht zu verwechseln mit
@@ -539,7 +539,7 @@ normal, mit wachsender Struktur wird daraus eine Sub-Area.
 > **Abgrenzung zu den vier Modus-Pflichtkriterien.** Die drei Achsen
 > hier beantworten *ob eine Struktur eine Sub-Area ist* (Granularitäts-
 > Gate). Sie sind **nicht** zu verwechseln mit den vier Pflichtkriterien,
-> mit denen [Modul 5](modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
+> mit denen [Modul 5](modul-05-planning-harness.md#ziel-form-sub-area-modus-begründung)
 > begründet, *welcher Modus* (GF/BF/Hybrid) für eine bereits erkannte
 > Sub-Area gilt (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-
 > Risiko · Reconciliation-Aufwand). Erst Inklusion (hier), dann
@@ -658,7 +658,7 @@ Steering-Loop versteht, versteht Bootstrap — und umgekehrt.
 #### Querverweise
 
 - **[Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)**: ausgearbeiteter Lehrtext mit GF/BF-Walkthroughs, Trigger-Klassen-Inline-Ankern und Phasen-Karten-Übung — Vollform des Bootstrap-Konzepts.
-- **Modul 1 §Schritt 0** ([§Source precedence](modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren)): kompakter Vorgriff auf das Modus-Konzept als Eingang in den Lebenszyklus (Baseline und Modus festlegen plus den sechs Folge-Schritten); Vollform in Modul 2.
+- **Modul 1 §Schritt 0** ([§Source-Precedence-Block](modul-01-entwicklungszyklus.md#source-precedence-block)): kompakter Vorgriff auf das Modus-Konzept als Eingang in den Lebenszyklus (Baseline und Modus festlegen plus den sechs Folge-Schritten); Vollform in Modul 2.
 - **[`fallstudien.md` §Beobachtung aus dem Ist-Zustand](../../kurs/de/grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)**: die vier Beispiel-Repos in GF-/BF-Modus klassifiziert.
 - **§harness/conventions.md als Konventionsspeicher** (oben): Adaptions-Block trägt Modus-Deklaration pro Sub-Area; Graduation-Bedingung wird dort dokumentiert.
 

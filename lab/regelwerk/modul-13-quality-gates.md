@@ -78,7 +78,7 @@ Graduation-Plan, Konzept in
 sondern der Sub-Area-Kontext, in dem Carveout und Bootstrap-aware
 Gate als Closure-Antworten strukturell legitim werden —
 Disambiguierung in
-[Modul 7 §Worked Example A Schritt 6](modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren).
+[Modul 7 §Werkzeug-Wahl bei Diskrepanz](modul-07-carveouts.md#werkzeug-wahl).
 
 **Begriffsklärung:** *Bootstrap-aware Gate* (oben) ist nicht zu
 verwechseln mit *Harness-Bootstrap* aus
@@ -126,50 +126,24 @@ Pro Sprache wachsen also unterschiedliche Gate-Familien.
 - Nur wenn lokal und CI dasselbe Image benutzen (Modul 14). Sonst debuggst du den Unterschied.
 - Falsch in zwei Richtungen. Erstens: 80 % Gesamt-Coverage über *unkritischem* Code verbirgt 0 % Coverage auf dem Sicherheitspfad — Critical Coverage misst *gezielt*. Zweitens: Tests gegen Beispiele decken nur Realität ab, *wo das Golden Set repräsentativ ist* ([Modul 12](modul-12-replay-evaluierung.md)); Tests gegen die *Spec* erschließt Verifikation ([Modul 11](modul-11-verification.md)). Wer Test-Anzahl als Qualitätsmaß nimmt, baut Coverage-Anstiege, deren Wert auf 0 fällt, sobald die Realität die Coverage-Annahme bricht. Faustregel: *Verteilung vor Anzahl*. Ein zusätzlicher Test gegen einen bereits gut abgedeckten Pfad ist Boilerplate; ein zusätzlicher Test gegen einen *bisher unabgedeckten kritischen* Pfad ist Sensor.
 
-### Worked Example: vom ADR-Satz zur Fitness Function
+<a id="adr-zur-fitness-function"></a>
 
-**Ausgangs-ADR:** ADR-0007 (siehe Worked Example in [Modul 4](modul-04-architektur-adrs.md#worked-example-vom-diskussionsfaden-zum-prüfbaren-adr)) sagt:
+### Fitness Function aus einem ADR-Satz (Modul 13)
 
-> "Service-Layer importiert ausschließlich aus `adapter/`-Paket."
+Eine ADR *mit* Fitness Function ist ein Constraint statt einer
+Absichtserklärung. Die Übersetzung in fünf Schritten: ADR-Aussage
+**maschinell formulieren** → **Werkzeug pro Sprache wählen** → als
+**Make-Gate mit ADR-ID-Kommentar** verdrahten → im **CI mit gepinnter
+Toolchain** laufen lassen (Modul 14) → **bewusstes Brechen** erzeugt
+einen roten Build (`ADR-<NNNN> violated`) — genau der Effekt, der eine
+ADR von einer Absichtserklärung trennt.
 
-**Schritt 1 — Aussage maschinell formulieren.** Aus *"importiert
-ausschließlich aus"* wird:
-> Keine Datei unter `src/service/**` darf einen Import enthalten, dessen
-> Modul nicht mit `adapter.` beginnt oder ein Standardbibliotheks-Modul ist.
+| ADR-Satz (Beispiel) | Werkzeug | Make-Target | Failure-Beispiel |
+|---|---|---|---|
+| „Service importiert nur aus `adapter/`" | `import-linter`/`grimp` (Py) · `ArchUnit` (Java) · `depguard` (Go) · `dep-cruiser` (Node) | `arch-check:` ## LH-QA-COUPLING-002 / ADR-0007 | `import requests` in `service/foo.py` → `make arch-check` rot mit `ADR-0007 violated` |
 
-**Schritt 2 — Werkzeug wählen.** Python → `import-linter` oder
-`grimp`. Java → `ArchUnit`. Go → `depguard`. Allgemein:
-`dep-cruiser` für Node, eigene AST-Scanner für Nischensprachen.
-
-**Schritt 3 — Implementierung (Python-Beispiel mit `import-linter`):**
-
-```ini
-# .importlinter
-[importlinter]
-root_packages = service
-
-[importlinter:contract:service-adapter-only]
-name = service imports only from adapter or stdlib
-type = forbidden
-source_modules =
-    service
-forbidden_modules =
-    requests
-    urllib3
-    httpx
-```
-
-**Schritt 4 — Als Gate verdrahten:**
-
-```makefile
-arch-check:  ## LH-QA-COUPLING-002 / ADR-0007 — Service-Adapter-Trennung
-	lint-imports
-```
-
-**Schritt 5 — `make gates` lokal grün — und im CI mit gepinnter
-Toolchain (Modul 14).**
-
-**Schritt 6 — Bewusstes Brechen:** Implementer fügt zu Debug-Zwecken
-`import requests` in `service/foo.py`. `make arch-check` läuft rot mit
-`ADR-0007 violated`. Genau der Effekt, der eine ADR von einer
-Absichtserklärung trennt.
+Die **maschinelle Formulierung** ist die eigentliche Arbeit: aus
+„importiert ausschließlich aus `adapter/`" wird „keine Datei unter
+`src/service/**` enthält einen Import, dessen Modul nicht mit `adapter.`
+beginnt oder Standardbibliothek ist" — erst diese Präzision ist als
+`forbidden`-Contract eines Import-Linters prüfbar.

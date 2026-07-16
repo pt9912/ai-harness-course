@@ -59,54 +59,32 @@ sondern ein Buffet.
   bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). Die
   volle Werkzeug-Triade inkl. *BF-Sub-Area-Markierung* (Sub-Area-Kontext,
   kein Closure-Werkzeug) wird in
-  [Modul 7 §Worked Example A Schritt 6](modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren)
+  [Modul 7 §Werkzeug-Wahl bei Diskrepanz](modul-07-carveouts.md#werkzeug-wahl)
   disambiguiert.
 
-### Worked Example: einen zu großen Slice schneiden
+### Ziel-Form: Slice
 
-**Ausgangs-Slice:** `SL-014 — Authentifizierung implementieren`. DoD:
-"Login funktioniert, JWT wird ausgegeben, Refresh-Token-Flow läuft,
-Token-Revocation per Admin-Endpoint, Audit-Log auf Login-Versuche."
+Ein Slice-Plan folgt der Vorlage
+[`docs/plan/planning/slice.template.md`](../templates/docs/plan/planning/slice.template.md).
+Größen- und Schnitt-Regeln:
 
-**Diagnose:** zu groß. Anzeichen:
-1. Mehr als drei DoD-Punkte (Faustregel).
-2. Mehrere Schichten betroffen (Adapter + Service + UI + DB-Schema).
-3. Kann nicht in einer Review-Sitzung geprüft werden.
+- **Zu groß**, wenn eines zutrifft: mehr als drei DoD-Punkte · mehrere
+  Schichten betroffen (Adapter + Service + UI + DB-Schema) · nicht in
+  *einer* Review-Sitzung prüfbar. Dann zurück zum Schneiden
+  (`in-progress→next`), nicht still weiterschieben.
+- **Schnitt nach Lieferwert, nicht nach Schichten.** Ein Schicht-Schnitt
+  (`…-db`, `…-service`, `…-ui`) erzeugt voneinander abhängige, einzeln
+  nutzlose Zombie-Slices, die in `in-progress/` festhängen.
+- Jeder Schnitt-Slice ist **einzeln lieferbar** (kein Slice wartet auf
+  den nächsten), hat **≤ 3 DoD-Punkte** und berührt **höchstens zwei
+  Schichten**.
 
-**Schnitt nach Schichten oder nach Lieferwert?** Lieferwert. Schnitte
-nach Schichten führen oft zu Zombie-Slices, die "fast fertig" sind.
+### Ziel-Form: Sub-Area-Modus-Begründung
 
-**Schnitt-Vorschlag (drei Slices):**
-
-| ID | DoD | Liefert |
-|---|---|---|
-| `SL-014a` | Login-Endpoint akzeptiert User/Passwort, gibt JWT zurück, Audit-Log-Eintrag entsteht. | Funktion |
-| `SL-014b` | Refresh-Token-Flow gegen JWT, mit Ablauf-Tests. | Sicherheit |
-| `SL-014c` | Admin-Endpoint zur Token-Revocation, mit Architekturtest gegen Direkt-DB-Zugriff. | Operativität |
-
-**Begründung:** Jeder Schnitt-Slice ist einzeln lieferbar (kein Slice
-wartet auf den nächsten). Jeder hat ≤3 DoD-Punkte. Jeder berührt
-höchstens zwei Schichten.
-
-**Was *nicht* geht:** "Schicht-Slice" wie `SL-014-db`, `SL-014-service`,
-`SL-014-ui` — diese sind voneinander abhängig und einzeln nutzlos. Sie
-landen mit hoher Wahrscheinlichkeit als Zombie in `in-progress/`.
-
-### Worked Mini-Example: Bootstrap-Modus pro Sub-Area für einen Slice begründen
-
-**Beispiel-Slice:** `SL-014a` aus dem Worked Example oben. Spec-Anker
-und ADR werden in [Modul 9 §Worked Example](../../kurs/de/03-agenten/modul-09-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow)
-mit `LH-FA-AUTH-001` und `ADR-0007` (Service-Adapter-Layer)
-konkretisiert; wir nutzen dieselben IDs hier konsistent.
-
-**Berührte Sub-Areas:** vier
-Sub-Areas — *Konventionen* (API-Pattern), *Test-Infrastruktur*,
-*Audit-Logging* und *Spec-Schreibung* (Authentifizierungs-Anforderung).
-Die DoD verlangt jede einzelne (Login-Endpoint → API-Pattern;
-Login-Tests → Test-Infrastruktur; Audit-Log-Eintrag → Audit-Logging;
-`LH-FA-AUTH-001`/`ADR-0007` → Spec-Schreibung).
-
-**Pflichtkriterien** (vier, nicht erweitern):
+Der Bootstrap-Modus ist Eigenschaft *pro Sub-Area*, nicht pro Slice; ein
+Slice berührt mehrere Sub-Areas und kann GF, BF und Hybrid gleichzeitig
+involvieren. Pro berührter Sub-Area vier Pflichtkriterien (vier, nicht
+erweitern):
 
 1. **Konventionen-Dichte** — wieviel der berührten Doku-/Code-Sektion ist
    durch `harness/conventions.md` (oder ein gleichwertiges Artefakt) als
@@ -116,8 +94,8 @@ Login-Tests → Test-Infrastruktur; Audit-Log-Eintrag → Audit-Logging;
 3. **Evidenz- und Diskrepanz-Risiko** — wie groß ist die Gefahr, dass
    Inventur den Code-Bestand und die Doku-Aussage als divergent
    ausweist? Bei GF meist niedrig (Doc führt — Inventur prüft nur
-   Code-Konformität); bei BF/Hybrid das Hauptrisiko und der Grund, warum
-   das Kriterium dort die Reconciliation-Schätzung trägt.
+   Code-Konformität); bei BF/Hybrid das Hauptrisiko, das die
+   Reconciliation-Schätzung trägt.
 4. **Reconciliation-Aufwand inklusive Graduation-/Folge-Slice-Trigger** —
    wieviel Slice-Aufwand bringt BF/Hybrid mit sich, und welcher Trigger
    (eine der vier Klassen aus
@@ -125,89 +103,12 @@ Login-Tests → Test-Infrastruktur; Audit-Log-Eintrag → Audit-Logging;
    — Sync, Promotion, Cross-Reference, Acceptance — oder eine
    Folge-Slice-ID) schaltet die Sub-Area Richtung GF?
 
-**Sub-Area 1 — Konventionen (GF):**
-
-- *Konventionen-Dichte:* hoch. `harness/conventions.md` führt `MR-014`
-  *REST-Endpunkt-Pattern* mit URL-Struktur, Status-Code-Regeln und einer
-  Negativ-Bedingung gegen Direkt-DB-Zugriffe aus dem Adapter.
-- *Phase-Reife:* Phase 4. Konvention steht, Code wird daran gemessen,
-  Reviews zitieren `MR-014`.
-- *Evidenz-/Diskrepanz-Risiko:* niedrig. Das `make lint-conventions`-
-  Target prüft die Pattern-Konformität automatisch und ist als Sensor
-  in `harness/README.md` §Sensors gelistet (Sensor-Zeile zitiert
-  `MR-014`).
-- *Reconciliation-Aufwand:* keiner. Kein Folge-Slice.
-- **Modus: GF.**
-
-**Sub-Area 2 — Test-Infrastruktur (BF):**
-
-- *Konventionen-Dichte:* niedrig. `tests/auth/` zeigt zwei abweichende
-  Pfadnaming-Schemata (`test_*.py` vs. `*_test.py`); keines steht in
-  `harness/conventions.md`.
-- *Phase-Reife:* Phase 1 BF — Skelett-Sektion *Test-Layout* in
-  `harness/conventions.md` ist mit Inventur-Auftrag kopiert (leere
-  Pflicht-Felder), der Code-Bestand in `tests/auth/` füllt sie noch
-  nicht (Matrix: *"Template kopiert, Inventur-Auftrag an Code"*).
-- *Evidenz-/Diskrepanz-Risiko:* mittel. Inventur kann sichtbar machen,
-  dass die bestehenden Tests an die Authentifizierungs-Schicht andere
-  Annahmen tragen als die noch zu schreibenden — z. B. ob Mocking auf
-  Adapter- oder Service-Ebene zulässig ist.
-- *Reconciliation-Aufwand:* 1 Slice (`SL-RC-014t` Inventur + `MR-002`
-  *Test-Layout pro Sub-Schicht* in `harness/conventions.md` ergänzen).
-  Graduation-Trigger: **Sync-Trigger** setzt `MR-002` in
-  `harness/README.md` und `AGENTS.md` als Quelle für künftige
-  Test-Konventionen.
-- **Modus: BF.**
-
-**Sub-Area 3 — Audit-Logging (Hybrid):**
-
-- *Konventionen-Dichte:* mittel. `harness/conventions.md` führt im
-  Adaptions-Block `MR-008` *Audit-Log-Pflicht für Auth-Endpunkte* als
-  abstrakte Pflicht-Adaption ("jeder Login-Versuch muss ein
-  Audit-Event erzeugen"), aber kein konkretes Event-Schema. Code in
-  `services/audit/` zeigt zwei unterschiedliche Event-Formate aus
-  früheren Slices.
-- *Phase-Reife:* Phase 3 (GF-Lesart aus der Matrix: *"Sektionen
-  versprochen, Code folgt"* — die Doku verspricht eine Audit-Pflicht,
-  der Code folgt erst teilweise). Die Hybrid-Diagnose entsteht **nicht
-  aus der Phase**, sondern beim Modus: die Doku führt für die
-  Pflicht-Aussage (GF-Richtung), aber für den Format-Standard zeigt
-  der Code-Bestand Divergenz ohne Doku-Korrespondenz (BF-Symptom).
-  Phase und Modus sind orthogonal — eine Sub-Area sitzt in genau
-  einer Phase-Zelle, der Modus ergibt sich aus der Trigger-Richtung
-  pro Kriterium.
-- **Modus: Hybrid (GF in der Pflicht-Adaption `MR-008`, BF im
-  fehlenden Format-Standard).**
-
-**Sub-Area 4 — Spec-Schreibung (GF):**
-`spec/lastenheft.md` §`LH-FA-AUTH-001` trägt drei Akzeptanzkriterien;
-`ADR-0007` *Service-Adapter-Layer* bindet die Architektur; in Modul 9
-§Worked Example werden Tests gegen `LH-FA-AUTH-001` annotiert. Damit
-sind Konventionen-Dichte hoch, Phase 4, Risiko niedrig, kein
-Reconciliation — **Modus: GF.**
-
-**Template für den Begründungsblock** — kanonisch in
-[§8 Sub-Area-Modus-Begründung](../templates/docs/plan/planning/slice.template.md)
-des Slice-Plan-Templates; hier zum Lesen abgedruckt, **byte-identisch
-mit dem dortigen Format**, damit Kopieren von hier oder vom Template
-denselben Block ergibt:
-
-```markdown
-### Sub-Area: <Name>
-
-- **Modus:** GF | BF | Hybrid
-- **Konventionen-Dichte:** <Beleg aus `harness/conventions.md`,
-  Adaptions-Block oder Code>
-- **Phase-Reife:** Phase 0–5 <Begründung gegen die Phase × Modus-Matrix>
-- **Evidenz-/Diskrepanz-Risiko:** <bei BF/Hybrid: was kann die
-  Inventur sichtbar machen? bei GF: meist niedrig>
-- **Reconciliation-Aufwand:** <Slice-Schätzung;
-  Graduation-/Folge-Slice-Trigger>
-```
-
-Pro berührter Sub-Area einen Block in §8 des Slice-Plans. So läuft die
-Modus-Entscheidung im Planning-Harness-Slice mit und wird in der
-Closure-Notiz prüfbar.
+Der Begründungsblock pro Sub-Area ist
+[**§8** des Slice-Plans](../templates/docs/plan/planning/slice.template.md):
+Modus (GF/BF/Hybrid) · Konventionen-Dichte · Phase-Reife · Evidenz-/
+Diskrepanz-Risiko · Reconciliation-Aufwand. Ein Block pro berührter
+Sub-Area — so läuft die Modus-Entscheidung im Planning-Harness-Slice mit
+und wird in der Closure-Notiz prüfbar.
 
 ### Regeln gegen typische Fehlannahmen (Modul 5)
 

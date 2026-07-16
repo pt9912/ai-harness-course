@@ -13,109 +13,31 @@ wird er zur Messung.
 - Statische Golden Sets überfitten. Rotation und neues Sampling sind Pflicht, nicht Kür.
 - Determinismus erfordert: Modellversion + Seed + Inputs *und* Tool-Versionen, Wetter im Container, Zeitstempel-Maskierung. Wer nur den Seed pinnt, pinnt eine *einzige* von mehreren Drift-Quellen — Modellversion, Sampling-Parameter, Tool-Umgebung und Prompt-Kontext driften unabhängig davon weiter.
 
-### Worked Example: ein Replay-Manifest aufbauen
+### Replay-Manifest (Modul 12)
 
-**Ausgangssituation:** Du hast einen Agentenlauf gemacht, der den Slice
-`SL-024` (kleiner Replay-Erweiterung) abgeschlossen hat. Du willst ihn
-als *Baseline-Replay* festhalten, gegen den Modellwechsel verglichen
-wird.
+Ein Baseline-Replay hält einen Agentenlauf als Messung fest, gegen die
+Modellwechsel verglichen werden. Layout `evals/golden/welle-NN-baseline/`
+mit `manifest.yaml`, `inputs/`, `expectations/`. Regeln:
 
-**Schritt 1 — Pfad und Skelett anlegen.**
-
-```
-evals/golden/welle-NN-baseline/
-├── manifest.yaml
-├── inputs/
-│   ├── case-001.json
-│   ├── case-002.json
-│   └── case-003.json
-└── expectations/
-    ├── case-001.json
-    └── ...
-```
-
-Drei Fälle ist das Minimum: Happy / Boundary / Negative — dieselbe
-Spec-Disziplin wie bei Akzeptanzkriterien
-([Modul 3](modul-03-lastenheft.md)). Ein
-Replay mit einem Fall ist eine Demo, kein Replay.
-
-**Schritt 2 — Pflichtfelder im Manifest fixieren.**
-
-```yaml
-# evals/golden/welle-NN-baseline/manifest.yaml
-slice: SL-024
-recorded_at: 2026-06-15T10:31:00Z
-model:
-  name: claude-opus-4-7
-  version: "20260301"
-  seed: 42
-runtime:
-  image_hash: sha256:9c7f4a...
-  toolchain:
-    python: 3.12.4
-    ruff: 0.4.10
-inputs_ref: inputs/
-expectations_ref: expectations/
-```
-
-Drei Felder sind im Selbstcheck Pflicht: `model.version`, `model.seed`,
-`inputs_ref`. Zwei weitere unterscheiden ernsthaftes von symbolischem
-Replay: `runtime.image_hash` (Toolchain-Drift abgrenzen) und
-`recorded_at` (späteren Diff datieren).
-
-**Schritt 3 — Erwartungen *als Verhalten*, nicht als Wortlaut.**
-Schlecht: *"Agent antwortet exakt '<fester Wortlaut>'"* — bricht bei
-Modellwechsel sofort. Gut:
-
-```yaml
-# expectations/case-001.json
-{
-  "must_include": ["<schlüsselbegriff-1>", "<schlüsselbegriff-2>"],
-  "must_not_include": ["error", "traceback"],
-  "tool_calls": {
-    "<tool.name>": {"min": 1, "max": 1}
-  }
-}
-```
-
-Drei semantische Aussagen statt eines wörtlichen Vergleichs. Exact-Match
-bewahre für strukturierte Schnittstellen (JSON-Felder), nie für
-Fließtext.
-
-**Schritt 4 — Erster Lauf, Baseline einfrieren.**
-
-```bash
-make replay RUN=welle-NN-baseline
-```
-
-Erwartet: drei grüne Fälle. Wenn nicht: *erst* das Manifest schärfen
-(meist Schritt 3 zu eng), nicht das Modell tauschen.
-
-**Schritt 5 — Modellwechsel-Drift messen.**
-
-```bash
-make replay RUN=welle-NN-baseline MODEL=claude-sonnet-4-6
-```
-
-Drei mögliche Ergebnisse:
-* alle grün → kein Drift in dieser Klasse.
-* einer rot → erste Drift-Diagnose: ist die Erwartung zu eng (Schritt 3 nachschärfen)
-  oder hat das neue Modell ein neues Verhalten?
-* zwei rot → Modellwechsel nicht ohne Anpassung möglich; Carveout +
-  Folge-Slice für Erwartungs-Update.
-
-*Quantifizieren statt nur einordnen.* Halte den Drift als **Zahl** fest,
-nicht nur als "ein paar rot": die **Drift-Rate** = rote Fälle ÷
-Gesamt-Fälle des Golden Sets (zwei von zwanzig → 10 %). Die Zahl macht
-zweierlei prüfbar, was die ordinale Einordnung verbirgt: (1) den *Trend*
-über mehrere Modellversionen (steigt die Rate von 5 % auf 15 %, ist der
-Modellpfad selbst der Verdächtige, nicht ein Einzelfall), und (2) eine
-*Schwelle* für den Steering Loop ("ab Drift-Rate > X Carveout-Pflicht").
-Eine reine "zwei rot"-Notiz lässt sich zwischen Läufen nicht vergleichen
-— ein Prozentwert schon.
-
-**Schritt 6 — Drift-Diagnose-Reihenfolge.** Wenn ein Lauf rot wird, ist
-die Reihenfolge der Verdächtigen *nicht beliebig*:
+- **Mindestens drei Fälle — Happy · Boundary · Negative** (dieselbe
+  Spec-Disziplin wie Akzeptanzkriterien, [Modul 3](modul-03-lastenheft.md)).
+  Ein Replay mit einem Fall ist eine Demo.
+- **Manifest-Pflichtfelder:** `model.version`, `model.seed`, `inputs_ref`
+  (Selbstcheck-Pflicht); dazu `runtime.image_hash` (Toolchain-Drift
+  abgrenzen) und `recorded_at` (späteren Diff datieren) — sie trennen
+  ernsthaftes von symbolischem Replay.
+- **Erwartungen als Verhalten, nicht als Wortlaut:** `must_include` ·
+  `must_not_include` · `tool_calls`-Zähler statt wörtlichem Vergleich
+  (der bricht bei Modellwechsel sofort). Exact-Match nur für
+  strukturierte Schnittstellen (JSON-Felder), nie für Fließtext.
+- **Baseline einfrieren:** wird der erste Lauf nicht grün, *erst* das
+  Manifest schärfen (meist Erwartung zu eng), nicht das Modell tauschen.
+- **Drift als Zahl:** **Drift-Rate** = rote Fälle ÷ Gesamt-Fälle. Die
+  Zahl macht *Trend* über Modellversionen und eine *Schwelle* für den
+  Steering Loop („ab Drift-Rate > X Carveout-Pflicht") prüfbar — eine
+  „zwei rot"-Notiz lässt sich zwischen Läufen nicht vergleichen.
+- **Drift-Diagnose in fester Reihenfolge** (wer zuerst „echte Regression"
+  tippt, baut den Carveout an der falschen Stelle ein):
 
 | Reihenfolge | Verdächtiger | Belegquelle |
 |---|---|---|
@@ -124,21 +46,7 @@ die Reihenfolge der Verdächtigen *nicht beliebig*:
 | 3 | Erwartungs-Drift | Eingaben vs. Spec (Modul 3) |
 | 4 | echte Regression | alles oben ausgeschlossen |
 
-Wer zuerst auf "echte Regression" tippt, baut den Carveout an der
-falschen Stelle ein.
-
-**Schritt 7 — Lerneintrag und Rotation.**
-Replay-Sets verrotten. In
-`evals/golden/welle-NN-baseline/CHANGELOG.md`:
-
-```markdown
-2026-06-15 — Baseline mit drei Fällen aufgesetzt.
-2026-08-02 — Fall hinzugefügt aus Steering-Loop-Eintrag #4
-             (vorher unerkanntes Negativ-Muster, siehe
-             reflexion-vorlage.md).
-2026-09-10 — Fall-001 entfernt — Realität hat
-             Schnittstelle geändert, Fall war giftig.
-```
-
-Sieben Schritte, ein reproduzierbares Manifest.
+- **Rotation:** Replay-Sets verrotten — Fälle aus Steering-Loop-Einträgen
+  ergänzen, giftig gewordene (Schnittstelle real geändert) entfernen,
+  datiert im Set-eigenen `CHANGELOG.md`.
 

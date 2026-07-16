@@ -16,103 +16,33 @@ ohne den Autor zu kennen. Runbooks und Replay sind dafür da.
 - **"Prompt-Injection ist eine Modell-Frage."** — Nein. Erkennung von Injection ist eine *Telemetrie-Frage*: Eingabe-Logging + Tool-Call-Audit + Output-Drift-Marker. Wer das nicht hat, erkennt Injection nur durch Glück.
 - **"Postmortem ist Schuldzuweisung — also macht man's leise."** — Genau das Gegenteil. Ein produktiver Postmortem ist *blameless* (vgl. Etsy/Google SRE-Tradition): er sucht den Pfad, auf dem ein vernünftiger Mensch unter Druck dieselbe Entscheidung getroffen hätte, und fragt, *welcher Sensor oder Guide gefehlt hat*. Closure-Einträge in `done/` ([Modul 5](modul-05-planning-harness.md)) und Reflexions-Einträge ([`grundlagen/reflexion-vorlage.md`](../../kurs/de/grundlagen/reflexion-vorlage.md)) sind beide *strukturell* blameless: sie fragen "welche Harness-Lücke war Ursache", nicht "wer war es". Wer Postmortems als Schuldzuweisung erlebt hat, wird Drift-Symptome zukünftig verschweigen — und genau dadurch wachsen sie. Blameless ist keine moralische Wahl; es ist eine Sensor-Schutz-Maßnahme.
 
-### Worked Example: eine Produktionsfreigabe-Checkliste schreiben
+### Produktionsfreigabe-Checkliste (Modul 16)
 
-**Ausgangs-Situation:** Du sollst die Freigabe-Checkliste für Welle 1
-deines Projekts schreiben. Das Repo hat: ein abgeschlossenes Slice in
-`done/`, eine ADR, einen Carveout, ein Replay-Set, ein Trace-Fixture.
+Produktionsreife heißt *belegte Betriebsfähigkeit*, nicht „deployt"; die
+Freigabe-Checkliste ist das Audit-Artefakt dafür. Regeln:
 
-**Schritt 1 — Item-Form festlegen: keine Häkchen ohne Beleg.**
-Schlechtes Format:
-```markdown
-- [ ] Tests grün.
-- [ ] Replay gelaufen.
-```
-Gutes Format — jedes Item trägt einen **Beleg-Slot**:
-```markdown
-- [ ] Tests grün. **Beleg:** Link zum CI-Run + Image-Hash.
-- [ ] Replay gelaufen. **Beleg:** Link zum Replay-Manifest (Modul 12).
-```
-Die Beleg-Pflicht ist der einzige Schutz gegen Bürokratie.
-
-**Schritt 2 — Pflicht-Items aus Phasen ableiten.**
-Eines pro Phase des Kurses:
-
-```markdown
-## Freigabe-Checkliste — Welle 1
-
-### Spec / Architektur (Phase 01)
-- [ ] Alle abgeschlossenen Slices haben `lastenheft_refs`.
-      **Beleg:** Frontmatter-Grep über `done/`.
-- [ ] Alle Accepted-ADRs sind referenziert oder superseded.
-      **Beleg:** `make adr-graph`.
-
-### Planung (Phase 02)
-- [ ] Carveouts sind alle entweder permanent gekennzeichnet
-      oder haben Folge-Slice + Trigger.
-      **Beleg:** `make carveout-audit`.
-
-### Agenten (Phase 03)
-- [ ] AGENTS.md beschreibt nur existierende Konventionen.
-      **Beleg:** Doku-Konsistenz-Agent-Lauf (Modul 15).
-
-### Qualität (Phase 04)
-- [ ] `make gates` grün auf frischem Klon + im CI mit
-      identischem Image-Hash.
-      **Beleg:** zwei Run-Links (Klon-Run + CI-Run).
-- [ ] Replay-Manifest (Modul 12) mit ≥3 Fällen, alle grün.
-      **Beleg:** Link zum manifest.yaml + Run-Output.
-
-### Betrieb (Phase 05)
-- [ ] Runbook für *mindestens* den wahrscheinlichsten
-      Incident-Typ existiert mit Entscheidungs-Triggern
-      (nicht "Service neu starten").
-      **Beleg:** Pfad zur Runbook-Datei.
-- [ ] Trace-Fixture pro Welle archiviert.
-      **Beleg:** OTel-Endpoint oder Pfad zur JSONL-Datei.
-```
-
-**Schritt 3 — Anti-Items hinzufügen (was *nicht* gefragt wird).**
-Eine Liste der bewusst weggelassenen Häkchen — sonst wandern sie
-schleichend in die Pflicht:
-
-```markdown
-### Bewusst NICHT in dieser Freigabe
-- Manuelle Smoke-Tests in Produktion (delegiert an Validator).
-- Aktualität von Stakeholder-Slides (delegiert an Produktmanagement).
-- 100 %-Coverage (siehe ADR-0019 zu Critical Coverage).
-```
-
-**Schritt 4 — Incident-Klausel verlinken.**
-```markdown
-### Incident-Bereitschaft
-- [ ] Bereitschafts-Dokument zeigt, wer in den ersten 15 Min
-      welche der drei Optionen wählt: Rollback · Fix-Forward
-      · Datenkorrektur.
-      **Beleg:** Link zum Bereitschafts-Dokument.
-```
-Die Drei-Optionen-Tabelle gehört *vor* den Incident geschrieben — nicht
-im Stress entschieden.
-
-**Schritt 5 — Item-für-Item belegen.**
-Jetzt durchgehen und *jeden* Beleg-Slot tatsächlich füllen. Wenn ein
-Beleg fehlt, ist das Item *nicht* abgehakt — auch wenn das Item
-inhaltlich erfüllt wäre. Eine Checkliste ohne Belege ist die
-Bürokratie-Form, gegen die der Kurs sich wendet.
-
-**Schritt 6 — Freigabe-Eintrag in `done/welle-NN-closure.md`.**
-```markdown
-# Welle NN — Closure-Eintrag
-Status: released
-Datum: YYYY-MM-DD
-Checkliste: docs/release/welle-NN-checkliste.md (alle Items mit Beleg)
-Restrisiken: zwei (siehe §"Bewusst NICHT", plus Folge-Slice SL-027 für
-             Coverage-Erhöhung auf Critical-Pfad).
-Steering-Loop-Eintrag (Modul 15 Doku-Konsistenz-Agent meldete vor
-Freigabe einen Drift in AGENTS.md — wurde behoben, vor Freigabe geprüft).
-```
-
-Sechs Schritte, eine Freigabe mit Belegen pro Item.
+- **Kein Häkchen ohne Beleg-Slot.** Jedes Item trägt einen konkreten
+  Beleg (CI-Run-Link + Image-Hash · Replay-Manifest-Link · ADR-ID ·
+  Trace-Hash · Frontmatter-Grep). Fehlt der Beleg, ist das Item *nicht*
+  abgehakt — auch wenn es inhaltlich erfüllt wäre. Die Beleg-Pflicht ist
+  der einzige Schutz gegen Bürokratie.
+- **Ein Pflicht-Item pro Kurs-Phase**, je mit Beleg: Spec/Architektur
+  (Slices tragen `lastenheft_refs`; Accepted-ADRs referenziert oder
+  superseded) · Planung (Carveouts permanent markiert oder mit
+  Folge-Slice + Trigger) · Agenten (`AGENTS.md` beschreibt nur
+  existierende Konventionen) · Qualität (`make gates` grün auf frischem
+  Klon *und* im CI mit identischem Image-Hash; Replay-Manifest ≥ 3 Fälle
+  grün) · Betrieb (Runbook mit Entscheidungs-Triggern statt „Service neu
+  starten"; Trace-Fixture pro Welle archiviert).
+- **Anti-Items explizit auflisten** (bewusst *nicht* Teil dieser Freigabe
+  — z. B. manuelle Smoke-Tests → Validator, 100 %-Coverage → ADR), sonst
+  wandern sie schleichend in die Pflicht.
+- **Incident-Klausel verlinken:** wer in den ersten 15 Minuten welche der
+  drei Optionen wählt (Rollback · Fix-Forward · Datenkorrektur), steht
+  *vor* dem Incident fest (siehe §Rollback-vs-Fix-Forward-Regeln unten).
+- **Freigabe-Eintrag** in `done/welle-NN-closure.md`: Status · Datum ·
+  Checklisten-Pfad (alle Items mit Beleg) · Restrisiken (Zeiger auf
+  Anti-Items + Folge-Slices) · Steering-Loop-Eintrag.
 
 ### Rollback-vs-Fix-Forward-Regeln
 

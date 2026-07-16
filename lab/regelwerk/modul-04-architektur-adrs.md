@@ -44,47 +44,18 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 - Eine ADR ohne Fitness Function ist eine Absichtserklärung. Wer architecture fitness im Kopf hat, schreibt parallel den ArchUnit-Test.
 - MADR ist ein Format unter mehreren (auch Nygard, Tyree/Akerman). Wichtig ist, dass dein Repo *eines* konsequent benutzt.
 - Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur in diesem Kurs heißt: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`grundlagen/konventionen.md#spec-stratifizierung`](grundlagen-konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
-- Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementation-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Worked Example in [Modul 13 §Worked Example "ADR → import-linter"](modul-13-quality-gates.md#worked-example-vom-adr-satz-zur-fitness-function) zeigt, was die Übersetzung kostet (kleine Tabelle: ADR-Satz, Werkzeug, Make-Target, Failure-Beispiel). Wer das nicht macht, dokumentiert *Hoffnung*.
+- Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementation-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Die Übersetzung (ADR-Satz → Werkzeug → Make-Target → Failure-Beispiel) steht kompakt in [Modul 13 §Fitness Function aus einem ADR-Satz](modul-13-quality-gates.md#adr-zur-fitness-function). Wer das nicht macht, dokumentiert *Hoffnung*.
 
-### Worked Example: vom Diskussionsfaden zum prüfbaren ADR
+### Ziel-Form: ADR (MADR)
 
-**Schritt 1 — Triggerschwelle erreichen.** Drei Vorfälle = Symptom →
-Lücke im Harness. Architect-Agent legt ADR-Entwurf an: `0007-service-adapter-layer.md`.
+Die Form liefert die Vorlage
+[`docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md):
+Kopf (Status · Datum · Bezug · Supersedes) plus Body (Kontext · Verglichene
+Alternativen · Entscheidung · Konsequenz mit Fitness Function). Operative
+Regeln zur Form:
 
-**Schritt 2 — MADR-Kopf:**
-```markdown
-# ADR-0007 — Service-Schicht spricht externe APIs nur über Adapter
-
-* Status: Accepted
-* Datum: 2026-06-15
-* Bezug: LH-QA-COUPLING-002
-* Supersedes: —
-```
-
-**Schritt 3 — Kontext (Spec-Verweis statt -Wiederholung):**
-> Wiederholter Wunsch, im `service/`-Layer direkt `http.Client` zu
-> instanziieren. LH-QA-COUPLING-002 verlangt, dass externe Abhängigkeiten
-> austauschbar bleiben (für Replay und für Provider-Wechsel).
-
-**Schritt 4 — Optionen mit Trade-offs:**
-> 1. **Direkt-Calls in Service-Schicht** — minimal Boilerplate; bricht LH-QA-COUPLING-002 (kein Replay ohne API-Mocks).
-> 2. **Adapter-Schicht mit Interface** — etwas Boilerplate; erfüllt LH-QA-COUPLING-002; Replay-fähig.
-> 3. **Service-Mesh / Sidecar** — verschiebt das Problem in Infrastruktur; überdimensioniert für aktuelle Repo-Größe.
-
-**Schritt 5 — Entscheidung:**
-> Option 2. Service-Layer importiert ausschließlich aus `adapter/`-Paket.
-> HTTP-Client lebt unter `adapter/http/`.
-
-**Schritt 6 — Konsequenz mit Fitness Function:**
-> ArchUnit-Test `arch_no_direct_http_in_service`:
-> Keine Klasse in `service.*` darf `java.net.http.*` oder `okhttp.*`
-> importieren.
-> Gate: `make arch-check` (vergleichbar mit dep-cruiser/dep-rule für
-> Python/Go).
-
-**Schritt 7 — Lerneintrag in `done/`** (nach Schließen der Welle, in
-der ADR-7 implementiert wird):
-> Steering-Loop-Beleg: drei Vorfälle in zwei Wochen → ADR-7 →
-> ArchUnit-Test → kein weiterer Vorfall in 6 Wochen.
-
-Sieben Schritte, eine geprüfte Entscheidung.
+- Der Kontext *referenziert* die Anforderung, wiederholt sie nicht.
+- Mindestens drei Verglichene Alternativen, jede mit Trade-off.
+- Jede Entscheidung mit Architektur-Wirkung bekommt eine Fitness Function —
+  sonst ist sie Absichtserklärung.
+- `Accepted` wird nie überschrieben — Korrektur = Folge-ADR mit `Supersedes`.

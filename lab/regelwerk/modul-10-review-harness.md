@@ -41,125 +41,39 @@ Maintainability-Kategorie.
 Ein Review ohne Kategorisierung ist eine Mängelliste. Ein Review mit
 Kategorisierung ist eine Entscheidungsvorlage.
 
-### Worked Example: eine Reviewer-Skill-Datei schreiben
+### Ziel-Form: Reviewer-Skill
 
-Ein Reviewer-Agent ohne Skill-Datei driftet zwischen Sessions. Dieselbe
-Eingabe → unterschiedliche Findings, unterschiedliche Kategorien.
-Skill-Dateien leben in `.harness/` und sind das Repo-spezifische
-"worauf achtest du" eines Agenten.
+Ein Reviewer-Agent ohne Skill-Datei driftet zwischen Sessions (gleiche
+Eingabe → andere Findings/Kategorien). Die Skill-Datei liegt in
+`.harness/skills/reviewer.md` und ist das repo-spezifische „worauf
+achtest du"; Vorlage
+[`.harness/skills/reviewer.template.md`](../templates/.harness/skills/reviewer.template.md)
+(für die engere Closure-Note-Prüfung der Schwester-Skill
+`closure-note-reviewer.md`, Modul 11). Operative Pflichtteile:
 
-**Schritt 1 — Pfad und Kopf:**
+- **Kontext-Eingang (Pflicht):** Diff · `spec/lastenheft.md` · ADRs, deren
+  ID im PR/Commit vorkommt · `AGENTS.md` §Hard Rules · vorherige Findings
+  am gleichen Modul. Ohne den Block sieht der Reviewer Code, aber nicht
+  die Verträge, gegen die er prüft.
+- **Klassifikation repo-konkret**, nicht generisch: HIGH/MEDIUM/LOW je
+  eine konkrete Liste, INFO kurz (Ergänzungs-Kanal, nicht Hauptkanal).
+  Die HIGH-Liste muss **mindestens zwei repo-spezifische Regeln** nennen,
+  die ein generischer Skill nicht abdeckt — sonst greift bei einem realen
+  Diff keines der Repo-HIGHs.
+- **„Was dieser Skill NICHT macht":** kein Lösungsvorschlag, kein
+  Refactoring über den Diff hinaus, keine Verifikation (Verifier, Modul
+  11), keine Validation (Validator) — sonst wird der Reviewer zum zweiten
+  Implementer. Auffälliges außerhalb → INFO-Finding mit Rollen-Verweis.
+- **Output-Schema strukturiert** (`kategorie · quelle · pfad · befund ·
+  verifizierbar`) plus je betrachtetem Bereich eine **Negativbefund-Zeile**
+  („geprüft, ohne Befund"; eigene Sektion unten).
+- **Pflege (Steering-Loop):** bei dreimaligem gleichem Finding
+  Klassifikation schärfen / Folge-ADR bzw. `AGENTS.md`-Update / Gate
+  (Modul 13). Die Skill-Datei wird **versioniert, nicht überschrieben**
+  (ADR-Hard-Rule, Modul 4).
 
-```
-.harness/skills/reviewer.md
-```
-
-```markdown
-# Reviewer-Skill — <Repo>
-
-* Status: Accepted
-* Bezug: ADR-0007, AGENTS.md §"Review-Regeln"
-* Gilt für: `agent-review`-Make-Target
-```
-
-**Schritt 2 — Eingangs-Kontext explizit machen.** Was der Reviewer
-*immer* mitbringt, bevor er den Diff liest:
-
-```markdown
-## Kontext-Eingang (Pflicht)
-
-- Diff des PR
-- `spec/lastenheft.md` (für referenzierte LH-IDs)
-- ADRs, deren ID im PR oder Commit-Message vorkommt
-- AGENTS.md §"Hard Rules"
-- vorherige Findings am gleichen Modul (letzte 5 PRs)
-```
-
-Ohne diesen Block sieht der Reviewer den Code, aber nicht *die Verträge,
-gegen die er prüft*.
-
-**Schritt 3 — Kategorien-Regeln *für dieses Repo*.** Nicht generisch,
-sondern konkret:
-
-```markdown
-## Klassifikation
-
-**HIGH** — eines der folgenden:
-- ADR-Verstoß (Layer, Tool, Hard Rule)
-- Sicherheits-Anti-Pattern (Injection, fehlende Auth-Prüfung)
-- Korrektheitsfehler im *kritischen* Pfad (Index-Schreiben, Auth)
-- Suppression eines Gates (#noqa, //nolint, [SuppressMessage]) ohne ADR
-
-**MEDIUM** — eines der folgenden:
-- unklare Fehlerbehandlung am Rand des Spec-Bereichs
-- fehlende Negativtests bei neuem öffentlichen Vertrag
-- Wiederholung eines Musters, das schon zweimal LOW war
-
-**LOW** — stilistisch unschön ohne semantische Auswirkung,
-einmalige Tippfehler, unbenutzte Imports.
-
-**INFO** — Hinweis ohne erwartete Aktion (z. B. "diese Stelle hat
-ein passendes ArchUnit-Pendant, das du nicht kennst").
-```
-
-Beachte: drei Kategorien-Anker (HIGH/MEDIUM/LOW) haben *jeweils* eine
-konkrete Liste. INFO ist bewusst kurz — INFO ist Ergänzungs-Kanal, nicht
-Hauptkanal.
-
-**Schritt 4 — Anti-Pattern und "Was bist du nicht".** Verhindert, dass
-der Reviewer zum zweiten Implementer wird:
-
-```markdown
-## Was dieser Skill NICHT macht
-
-- Keine Lösungsvorschläge ("schreib das so") — Reviewer kategorisiert,
-  Implementer entscheidet.
-- Kein Refactoring-Vorschlag, der über den Diff hinausgeht.
-- Keine Verifikation gegen DoD — das ist Verifier-Aufgabe (Modul 11).
-- Keine Validation gegen reale Bedürfnisse — das ist Validator-Aufgabe.
-
-Wenn etwas auffällt, das in diese Kategorien gehört, ein INFO-Finding
-mit Verweis auf die zuständige Rolle.
-```
-
-**Schritt 5 — Output-Schema fixieren.** Findings sind strukturiert, nicht
-Fließtext:
-
-```markdown
-## Output-Schema
-
-Jedes Finding:
-
-- `kategorie`: HIGH | MEDIUM | LOW | INFO
-- `quelle`: ADR-ID, LH-ID, Hard-Rule-Name oder "Maintainability"
-- `pfad`: Datei:Zeile
-- `befund`: 1–2 Sätze, beobachtbar, ohne Lösungsvorschlag
-- `verifizierbar`: ja/nein — gibt es einen Gate-Lauf, der es bestätigen würde?
-
-Zusätzlich am Ende: eine Zeile "geprüft, ohne Befund" pro betrachtetem
-Verzeichnis (Negativbefund-Zeile — siehe Modul 10 §"Reviewer berichtet
-auch, was er nicht gefunden hat").
-```
-
-**Schritt 6 — Steering-Loop-Eintrag.** Skills sind nicht statisch:
-
-```markdown
-## Pflege
-
-Bei dreimaligem Auftreten desselben Findings:
-- ist die Kategorie noch richtig? → Klassifikation schärfen
-- gibt es einen ADR/AGENTS.md-Eintrag, der das verhindert hätte?
-  → Folge-ADR oder AGENTS.md-Update
-- gibt es eine Fitness Function, die das prüfen würde?
-  → Modul 13, Gate hinzufügen
-
-Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
-(siehe ADR-Hard-Rule, Modul 4).
-```
-
-Sechs Schritte, eine reproduzierbare Reviewer-Rolle. Vergleichbares
-Skill-Pattern für *Verifier* und *Validator* in Modul 11 bzw. in
-[Modul 8 §"Konfliktfall"](modul-08-agentenrollen.md).
+Vergleichbares Skill-Pattern für *Verifier* und *Validator* in Modul 11
+bzw. [Modul 8 §"Konfliktfall"](modul-08-agentenrollen.md).
 
 ### Reviewer berichtet auch, was er nicht gefunden hat
 

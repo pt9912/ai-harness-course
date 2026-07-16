@@ -33,36 +33,15 @@ ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
 - Was nicht explizit ausgeschlossen ist, baut der Agent plausibel mit. Das ist die häufigste Quelle für "wir hatten das nie gefordert"-PRs.
 - Falsch. Lopopolos Maxime *"Was der Agent nicht im Kontext erreicht, existiert für ihn nicht"* ist ein Plädoyer *für* Kontext-Verfügbarkeit — und sagt damit, dass Spec und Prompt *unterschiedliche* Lebenszyklen haben: Spec wird *gepflegt* (Versions-Geschichte, Bezüge, Audit), Prompt wird *für einen Lauf zusammengestellt*. Was im Prompt steht, aber nicht in der Spec, gilt nur für *diesen* Lauf — der nächste Agent sieht es nicht. Das Muster (Spec sagte *speichert*, Agent baute PostgreSQL) wäre mit einem Mega-Prompt nicht besser geworden — der Prompt würde im nächsten Lauf vergessen.
 
-### Worked Example: vom vagen Satz zum prüfbaren Akzeptanzkriterium
+### Ziel-Form: Akzeptanzkriterium
 
-**Ausgangstext (vage):**
-> "Das System speichert die Konfiguration."
-
-**Schritt 1 — Mehrdeutigkeiten markieren:** *speichert* (DB? Datei? Cache?), *die* (welche?), *Konfiguration* (welche Felder?).
-
-**Schritt 2 — ID vergeben:** `LH-FA-CFG-001`.
-
-**Schritt 3 — Happy Path konkret:**
-> Given eine gültige Konfigurationsdatei `config.yaml` mit den Pflichtfeldern `name`, `version`,
-> When das System startet,
-> Then liest es die Datei *aus dem Arbeitsverzeichnis* und gibt `name@version` auf stdout aus.
-
-**Schritt 4 — Boundary:**
-> Given `config.yaml` ist leer,
-> When das System startet,
-> Then bricht es mit Exit-Code 2 ab und meldet `LH-FA-CFG-001: empty config`.
-
-**Schritt 5 — Negative (zwei Sätze):**
-> Given keine `config.yaml` existiert,
-> When das System startet,
-> Then bricht es mit Exit-Code 1 ab und schreibt keine Datei.
->
-> Das System *darf nicht* Konfiguration in Datenbanken, externen APIs oder versteckten Verzeichnissen ablegen.
-
-**Schritt 6 — Out-of-Scope:**
-> Out-of-Scope (LH-FA-CFG-001): Schreiboperationen, Migration zwischen Versionen, Verschlüsselung.
-
-Sechs Schritte, ein vollständig prüfbares Akzeptanzkriterium.
+Anforderungen leben im Lastenheft
+([`spec/lastenheft.template.md`](../templates/spec/lastenheft.template.md)).
+Ein funktionales Kriterium trägt eine `<PREFIX>-FA-NNN`-ID und dann drei Pfade
+im Given/When/Then-Stil — **Happy · Boundary · Negative** — plus einen
+**Out-of-Scope**-Block. Vagen Satz zuerst auf Mehrdeutigkeiten prüfen (*was
+genau · welche Felder · welcher Speicherort*), bevor die Pfade formuliert
+werden; das Negative (`darf nicht …`) spart die spätere Review.
 
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 

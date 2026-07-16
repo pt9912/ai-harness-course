@@ -38,128 +38,37 @@ nicht: "Ist es gut?"
 - Nein. Reviewer hat *Plan + ADR*. Verifier hat *DoD + Spec + Plan*. Andere Eingabe, andere Findings.
 - Falsch. Die wahrscheinlichere Erklärung: Reviewer hat gegen einen veralteten Plan geprüft, oder der Plan hat eine DoD-Lücke. Architect klärt — *nicht* "wir nehmen das mildere Ergebnis".
 
-### Worked Example: eine ADR-Aussage ohne fertiges Tool als Fitness Function bauen
+### Fitness Function ohne Standard-Tool (Modul 11)
 
-**Ausgangs-ADR:** ADR-0011 sagt:
-> "Der Implementation-Agent darf nur Slices in `done/` verschieben,
-> wenn das Slice-Frontmatter ein Feld `closure_note` mit mindestens
-> zwei Sätzen enthält (Lerneintrag-Pflicht; Modul 1 §Closure)."
+Wenn eine ADR-Aussage kein Standard-Tool zum Prüfen hat (Beispiel:
+„Closure-Note mit mindestens zwei Sätzen"), heißt Verifizieren: die
+Fitness Function selbst bauen. Der Ablauf:
 
-Es gibt kein "Closure-Note-Linter". Diese Regel zu verifizieren heißt:
-sie selbst bauen.
-
-**Schritt 1 — Aussage in eine prüfbare Operationalisierung übersetzen.**
-*"Mindestens zwei Sätze"* ist nicht selbsterklärend. Operationalisierung:
-
-> Für jede Datei in `docs/plan/planning/done/*.md` gilt:
-> - Frontmatter enthält Schlüssel `closure_note` (string).
-> - Der String enthält mindestens **zwei Satzendezeichen** (`.`, `!`, `?`),
->   außerhalb von Code-Blöcken und Inline-Code.
-> - Keiner der Sätze ist *leer* oder einer der bekannten Floskeln
->   ("see PR", "n/a", "siehe Ticket").
-
-Operationalisierung ist die Stelle, an der Erschaffen passiert: die ADR
-sagt *was*, die Operationalisierung sagt *prüfbar was*.
-
-**Schritt 2 — Sensor-Schicht wählen.** Optionen, mit Kosten:
+- **Operationalisieren** — die eigentliche Arbeit: aus der ADR-Aussage
+  (*was*) eine prüfbare Form (*prüfbar was*) machen. „Mindestens zwei
+  Sätze" wird z. B. zu „Frontmatter-Schlüssel `closure_note` vorhanden ·
+  ≥ 2 Satzendezeichen außerhalb von Code · keine der bekannten Floskeln".
+- **Sensor-Schicht nach Kosten wählen:**
 
 | Option | Kosten | Wann sinnvoll |
 |---|---|---|
-| Pre-commit-Hook auf der Autoren-Maschine | niedrig | wenn nur lokale Disziplin gefragt ist |
-| Make-Target im `make gates`-Block | mittel | wenn auch CI prüfen soll — Standardweg |
-| Doku-Konsistenz-Agent (Modul 15) | hoch | wenn semantische Prüfung nötig ist (z. B. "Floskel-Erkennung") |
+| Pre-commit-Hook (Autoren-Maschine) | niedrig | nur lokale Disziplin gefragt |
+| Make-Target im `make gates`/`verify`-Block | mittel | auch CI soll prüfen — Standardweg |
+| Doku-Konsistenz-Agent (Modul 15) | hoch | semantische Prüfung nötig (Floskel-Erkennung) |
 
-Der Worked Example wählt **Make-Target + optional Doku-Konsistenz-Agent**:
-deterministische Sätze deterministisch, semantische Floskel-Erkennung
-inferentiell.
-
-**Schritt 3 — Skript schreiben (Python-Beispiel, kein neues Framework).**
-
-```python
-# tools/check_closure_notes.py
-import re
-import sys
-import pathlib
-import yaml
-
-DONE = pathlib.Path("docs/plan/planning/done")
-FLOSKELN = {"see pr", "n/a", "siehe ticket", "wird nachgereicht"}
-
-def sentences(text: str) -> list[str]:
-    no_code = re.sub(r"`[^`]+`|```.*?```", "", text, flags=re.S)
-    parts = re.split(r"[.!?]+", no_code)
-    return [p.strip() for p in parts if p.strip()]
-
-def errors_for(path: pathlib.Path) -> list[str]:
-    front, _, _ = path.read_text().partition("---")[2].partition("---")
-    note = (yaml.safe_load(front) or {}).get("closure_note", "")
-    if not note:
-        return [f"{path}: closure_note fehlt"]
-    sents = sentences(note)
-    if len(sents) < 2:
-        return [f"{path}: closure_note hat nur {len(sents)} Satz"]
-    if any(s.lower() in FLOSKELN for s in sents):
-        return [f"{path}: closure_note enthält Floskel"]
-    return []
-
-errs = [e for p in DONE.glob("*.md") for e in errors_for(p)]
-for e in errs:
-    print(e)
-sys.exit(1 if errs else 0)
-```
-
-Sieben Funktionszeilen, drei Fehlertypen. Keine externe Abhängigkeit
-außer `pyyaml`.
-
-**Schritt 4 — Als Gate verdrahten:**
-
-```makefile
-verify-closure-notes:  ## ADR-0011 — Closure-Note-Pflicht
-	python tools/check_closure_notes.py
-
-verify: verify-closure-notes
-```
-
-ID-Kommentar zeigt die ADR. *Verify* hängt das Sub-Target ein —
-damit greift es genau dort, wo Verifikation läuft, nicht in `make gates`
-(weil es keine Code-Architektur-Frage ist, sondern eine DoD-/Closure-
-Frage).
-
-**Schritt 5 — Floskel-Erkennung mit inferentieller Schicht ergänzen.**
-Floskeln wie *"war ganz okay, läuft jetzt"* sind syntaktisch zwei Sätze
-und entgehen Schritt 3. Hier kommt der Doku-Konsistenz-Agent (Modul 15)
-ins Spiel:
-
-> Prompt-Anker (in `.harness/skills/closure-note-reviewer.md`):
-> "Lies die `closure_note` jedes Slice in `done/`. Markiere alle, die
-> *keinen* der folgenden Inhalte tragen: (a) ein konkretes Lernsignal
-> (z. B. "Test rot, weil X"), (b) ein konkretes Folge-Slice, (c) eine
-> konkrete Architektur-Beobachtung. Floskeln ohne Inhalt sind ein
-> HIGH-Finding."
-
-Inferentiell, weil "Inhalt vs. Floskel" semantisch ist; computational
-deckt nur die Struktur.
-
-**Schritt 6 — Bewusstes Brechen.** Ein Slice landet in `done/` mit
-`closure_note: "Fertig."`. `make verify-closure-notes` läuft rot mit
-`docs/plan/planning/done/SL-024.md: closure_note hat nur 1 Satz`. Der
-Verifier hat *genau das* erkannt, was Tests nicht erkannt hätten und
-Reviewer übersehen würde (Reviewer prüft Diff gegen Plan/ADR — der
-fehlende Closure-Eintrag ist *kein* Diff-Symptom).
-
-**Schritt 7 — Pre-completion Checklist-Bezug.** Der Implementation-Agent
-soll vor "fertig"-Meldung *selbst* `make verify-closure-notes` laufen
-lassen. AGENTS.md-Eintrag:
-
-```markdown
-## Closure (Modul 5, ADR-0011)
-- Vor `done/`-Verschiebung: `make verify-closure-notes` muss grün sein.
-- Floskeln vermeiden — der Doku-Konsistenz-Agent prüft Inhalte.
-```
-
-Damit liegt die Hard Rule in zwei Quadranten: *inferential feedforward*
-(AGENTS.md sagt es) + *computational feedback* (Make-Target prüft es).
-
-Sieben Schritte, eine Fitness Function für eine ADR-Aussage, die kein
-Standard-Tool prüft.
+- **Skript + Gate verdrahten:** ID-Kommentar zeigt die ADR; eine DoD-/
+  Closure-Frage hängt an `verify:` (nicht `make gates` — das ist für
+  Code-Architektur-Fragen).
+- **Inferentielle Schicht für Semantik:** deterministische Struktur
+  deterministisch prüfen, semantische „Inhalt vs. Floskel"-Erkennung
+  inferentiell — denn Floskeln wie „war ganz okay, läuft jetzt" sind
+  syntaktisch zwei Sätze. Prompt-Anker in
+  [`.harness/skills/closure-note-reviewer.md`](../templates/.harness/skills/closure-note-reviewer.template.md)
+  (Schwester-Skill zum Reviewer, Modul 10).
+- **Hard Rule in zwei Quadranten:** *inferential feedforward*
+  (`AGENTS.md` sagt es) + *computational feedback* (Make-Target prüft
+  es); der Implementation-Agent läuft `make verify-*` **selbst** vor der
+  „fertig"-Meldung (Pre-completion Checklist, Modul 9 Schritt 8). So
+  fängt der Verifier genau das, was Tests nicht prüfen und der Reviewer
+  übersieht — die fehlende Closure-Note ist kein Diff-Symptom.
 
