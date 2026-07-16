@@ -21,13 +21,13 @@ Der Default-Ort für:
 - **Konvention:** AI-Harness-Kurs (`/kurs/de/grundlagen/konventionen.md`)
 - **Stand:** Template-Set 2026-06
 - **Datum der Adoption:** 2026-06-01
-- **Regelwerk-Pin:** *ausstehend* — die adoptierte Baseline ist jetzt das Kurs-Regelwerk als Split (`lab/regelwerk/` bzw. `lab-regelwerk.zip`; `agents-regelwerk.md` ist retired). Die inhaltsbasierte Upstream-Drift-Prüfung (`make regelwerk-drift`) migriert mit dem vendored-Muster auf einen Verzeichnis-Hash (`SHA256SUMS`) und ist bis dahin übersprungen.
+- **Baseline-Pin (Regelwerk + Templates):** *ausstehend* — die adoptierte Baseline ist das Kurs-Regelwerk als Split *plus* die Templates, self-contained im `lab-regelwerk.zip` (`regelwerk/` + `templates/` parallel; `agents-regelwerk.md` ist retired). Die inhaltsbasierte Upstream-Drift-Prüfung (`make regelwerk-drift`) migriert mit dem vendored-Muster auf einen Verzeichnis-Hash (`SHA256SUMS`) und ist bis dahin übersprungen.
 
 ## Adoptierte Konventions-Quellen
 
 - **Extern (Lehrmaterial):** [`/kurs/de/grundlagen/konventionen.md`](../../../kurs/de/grundlagen/konventionen.md), [`/kurs/de/grundlagen/klassifikation.md`](../../../kurs/de/grundlagen/klassifikation.md)
-- **Extern (Kurs-Regelwerk):** [`/lab/regelwerk/`](../../regelwerk/README.md) — was ein Code-Agent statt des vollen Lehrmaterials liest (pro Abschnitt eine Datei); derivativ, bei Konflikt gilt das Lehrmaterial. (Außerhalb dieses Repos als Release-Asset: `https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip`.)
-- **In-Repo (verkörperte Form):** Template-Set unter [`/lab/templates/`](../../../lab/templates/) als Form-Lookup-Quelle
+- **Extern (Kurs-Regelwerk):** [`/lab/regelwerk/`](../../regelwerk/README.md) — was ein Code-Agent statt des vollen Lehrmaterials liest (pro Abschnitt eine Datei); derivativ, bei Konflikt gilt das Lehrmaterial. In einem adoptierenden Fremd-Repo werden Regelwerk *und* Templates aus dem self-contained Release-Asset (`https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip`) nach `.harness/baseline/<tag>/{regelwerk,templates}/` vendored; dieses Beispiel liegt im Kurs-Repo und referenziert beide direkt.
+- **In-Repo (verkörperte Form):** Template-Set unter [`/lab/templates/`](../../../lab/templates/) als Form-Lookup-Quelle — im Fremd-Repo die vendored `.harness/baseline/<tag>/templates/` (Referenz-Form der „Ziel-Form"-Verweise), daneben die daraus kopiert-und-ausgefüllten eigenen Artefakte.
 
 ## Adaptions-Block
 

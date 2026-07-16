@@ -19,14 +19,14 @@ find "$dir" -name '*.md' -print0 | while IFS= read -r -d '' f; do
   # → auf den ausgelieferten Stand gepinnte blob-URL.
   sed -E -i "s#(\\.\\./)+kurs/#${base}/blob/${ref}/kurs/#g" "$f"
 
-  # Release-Asset-Referenzen (ZIP + Agents-Regelwerk; Bootstrap-Pointer im
-  # AGENTS-Template) im Release-ZIP auf den Tag pinnen, damit der
+  # Baseline-Bundle-Referenz (lab-regelwerk.zip; Bootstrap-Pointer im
+  # AGENTS-Template) im ausgelieferten Template auf den Tag pinnen, damit der
   # ausgelieferte Stand reproduzierbar ist. Nur in *.template.md — die README
   # behält bewusst den stabilen latest-Link ("Stabiler Link" in §Download).
   # Im Vorschau-Build (ref=main) bleibt alles.
   if [[ "$ref" != main && "$f" == *.template.md ]]; then
     sed -E -i \
-      "s#releases/latest/download/(lab-templates\\.zip|lab-regelwerk\\.zip)#releases/download/${ref}/\\1#g" \
+      "s#releases/latest/download/lab-regelwerk\\.zip#releases/download/${ref}/lab-regelwerk.zip#g" \
       "$f"
   fi
 done

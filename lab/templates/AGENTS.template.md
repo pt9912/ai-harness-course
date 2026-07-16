@@ -30,15 +30,18 @@ Sensors-Bindung) leben in
 
 Das **Regelwerk der adoptierten Baseline** ist die **präsente,
 nachschlagbare Vertiefung** zu diesem Briefing: ein self-navigierbares
-**Modul-Bundle** (`README.md` = Index), beim Bootstrap aus dem Release-ZIP
+**Modul-Bundle** (`README.md` = Index). Beim Bootstrap wird das
+self-contained Release-ZIP
 (<https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>)
-**committet vendored** unter `.harness/baseline/<tag>/regelwerk/` (netzlos
-materialisiert samt `SHA256SUMS` — Vorgehen siehe
+**committet vendored** unter `.harness/baseline/<tag>/{regelwerk,templates}/`
+(Regelwerk *und* Templates parallel, netzlos materialisiert samt `SHA256SUMS`
+— Vorgehen siehe
 [Kurs Modul 2 §Bootstrap](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md);
 Quelle/Stand in [`harness/conventions.md`](harness/conventions.md) §Baseline).
 
-Die verkörperte Form (dieses Briefing, die Konventionen, die Templates)
-**führt**; das Regelwerk wird **pro Entscheidung nachgeschlagen, deren
+Die verkörperte Form (dieses Briefing, die Konventionen, deine
+ausgefüllten Artefakte) **führt**; das Regelwerk wird **pro Entscheidung
+nachgeschlagen, deren
 operative Detailtiefe das Briefing nicht trägt** — Trigger-Klassen,
 Sub-Area-Qualifikation, Carveout-vs-Reconciliation, Modus-Diagnose. Dabei
 **nur den benötigten Abschnitt** laden (README ist der Index), **nicht das
@@ -47,11 +50,13 @@ Bootstrap, Änderung an [`harness/conventions.md`](harness/conventions.md)
 (Adaptionen `MR-<NNN>`, Source-Precedence, ID-Schema), Drift-Audit gegen die
 Baseline. Derivativ: bei Konflikt gelten die kanonischen Quellen.
 
-Die **Skelett-Vorlagen** der Baseline liegen als ZIP unter
-<https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>;
-die wiederkehrenden Varianten (ADR, Slice, Welle, Carveout, Review-Report)
-sind als `*.template.md` co-located im Repo. Beim Anlegen neuer Artefakte
-das passende Template kopieren statt frei zu formulieren.
+Die **Skelett-Vorlagen** der Baseline liegen **vendored** unter
+`.harness/baseline/<tag>/templates/` (aus demselben Baseline-Bundle) und
+tragen zwei Rollen: als **Referenz-Form**, auf die das Regelwerk mit
+`../templates/…` als „Ziel-Form" verweist (netzlos, weil parallel zu
+`regelwerk/` vendored), und als Vorlage, die beim Anlegen neuer Artefakte
+(ADR, Slice, Welle, Carveout, Review-Report) **kopiert und ausgefüllt** wird
+statt frei zu formulieren.
 
 ## 2. Kanonische Quellen (Source Precedence)
 

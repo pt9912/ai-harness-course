@@ -82,16 +82,15 @@ des Kurses registriert das [`CHANGELOG.md`](CHANGELOG.md).
 Der Kurs ist nicht nur Lernmaterial — sein Prozess lässt sich in ein
 beliebiges Repo adoptieren, ohne Installation:
 
-1. **Betriebsregelwerk** für Code-Agenten als login-freies, self-navigierbares
-   Bundle — pro Modul und Grundlagen-Abschnitt aufgeteilt, interne Verweise auf
-   den Release-Tag gepinnt:
+1. **Baseline-Bundle** (Betriebsregelwerk + Templates) für Code-Agenten als
+   login-freies, self-navigierbares ZIP — `regelwerk/` (pro Modul und
+   Grundlagen-Abschnitt) und `templates/` (Skelette für Lastenheft, Spec, ADR,
+   Slice, …) parallel, interne Verweise auf den Release-Tag gepinnt:
    <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
-   — in-repo: [`lab/regelwerk/`](lab/regelwerk/README.md) (oben beschrieben).
-2. **Templates** (Skelette für Lastenheft, Spec, ADR, Slice, …) als
-   login-freies ZIP:
-   <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>
-   — der ausgelieferte Stand ist auf seinen Release-Tag gepinnt.
-3. **Schritte**: [`lab/templates/README.md`](lab/templates/README.md)
+   — nach `.harness/baseline/<tag>/` entpacken, dann lösen die Ziel-Form-
+   Verweise des Regelwerks auf die parallel vendored Templates netzlos auf;
+   in-repo: [`lab/regelwerk/`](lab/regelwerk/README.md) + [`lab/templates/`](lab/templates/README.md).
+2. **Schritte**: [`lab/templates/README.md`](lab/templates/README.md)
    §Verwendung (kopieren, `<Platzhalter>` ersetzen, Hinweis-Block strippen,
    d-check:ignore-Marker behalten).
 

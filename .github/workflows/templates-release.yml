@@ -1,12 +1,11 @@
-# Stabiler, login-freier Download für lab/templates und das Regelwerk:
-# bei einem Release-Tag (`vX.Y.Z`, historisch `templates-v*`) werden das Templates-ZIP
-# und ein Regelwerk-pro-Modul-ZIP (interne Links auf den Tag gepinnt) als
-# Release-Assets angehängt.
-# Permanente URLs: …/releases/latest/download/lab-templates.zip,
-# …/releases/latest/download/lab-regelwerk.zip
-# (Ergänzung zum Actions-Artifact aus templates-zip.yml, das pro
-# Änderung auf main eine Vorschau liefert, aber Login erfordert und
-# nach 90 Tagen verfällt.)
+# Stabiler, login-freier Download des Regelwerks als self-contained Baseline:
+# bei einem Release-Tag (`vX.Y.Z`, historisch `templates-v*`) wird EIN Baseline-ZIP
+# (`regelwerk/` + `templates/` parallel; Modul- und `../templates/`-Verweise reisen
+# relativ mit, nur Außen-Verweise auf den Tag gepinnt) als Release-Asset angehängt.
+# Wer nur die Skelette will, nimmt `templates/` aus dem Bundle.
+# Permanente URL: …/releases/latest/download/lab-regelwerk.zip
+# (Ergänzung zum Actions-Artifact aus templates-zip.yml, das pro Änderung auf main
+# eine Template-Vorschau liefert, aber Login erfordert und nach 90 Tagen verfällt.)
 name: templates-release
 
 on:
@@ -21,28 +20,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Kurs-Verweise auf den Tag pinnen
+      - name: Templates auf den Tag pinnen (Kurs-Verweise — fürs Baseline-Bundle)
         run: bash tools/rewrite-template-links.sh lab/templates "$GITHUB_REF_NAME"
-      - name: ZIP bauen
+      - name: Regelwerk-Baseline-ZIP bauen (self-contained — regelwerk/ + templates/)
         run: |
-          cd lab/templates
-          zip -r "$GITHUB_WORKSPACE/lab-templates.zip" .
-      - name: Regelwerk-ZIP bauen (self-contained — Außen-Verweise auf den Tag pinnen)
-        run: |
-          tmp="$RUNNER_TEMP/regelwerk"
-          mkdir -p "$tmp"
-          cp lab/regelwerk/*.md "$tmp/"
-          # Modul-Querverweise bleiben relativ (--keep-within-src); nur Verweise
-          # nach außen (Kurs, Templates, Beispiel, LICENSE) werden gepinnt.
-          for f in "$tmp"/*.md; do
-            python3 tools/rewrite-doc-links.py "$f" lab/regelwerk "$GITHUB_REF_NAME" . --keep-within-src
+          tmp="$RUNNER_TEMP/baseline"
+          mkdir -p "$tmp/regelwerk"
+          cp lab/regelwerk/*.md "$tmp/regelwerk/"
+          # Templates parallel ins Bundle (im Schritt "Kurs-Verweise … pinnen"
+          # bereits auf den Tag gepinnt), damit die `../templates/`-Ziel-Form-
+          # Verweise der Splits NETZLOS auflösen: regelwerk/ ↔ templates/ liegen
+          # parallel wie lab/regelwerk ↔ lab/templates im Kurs-Repo.
+          cp -r lab/templates "$tmp/templates"
+          # Splits: Modul-Querverweise (--keep-within-src) UND `../templates/`-
+          # Verweise (--keep-within=lab/templates) bleiben relativ; nur echte
+          # Außen-Verweise (Kurs, LICENSE) werden auf den Tag gepinnt.
+          for f in "$tmp/regelwerk"/*.md; do
+            python3 tools/rewrite-doc-links.py "$f" lab/regelwerk "$GITHUB_REF_NAME" . --keep-within-src --keep-within=lab/templates
           done
           ( cd "$tmp" && zip -r "$GITHUB_WORKSPACE/lab-regelwerk.zip" . )
       - name: Release anlegen, Assets anhängen
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" lab-templates.zip lab-regelwerk.zip \
+          gh release create "$GITHUB_REF_NAME" lab-regelwerk.zip \
             --verify-tag \
             --title "Release $GITHUB_REF_NAME" \
-            --notes "ZIP-Stand von \`lab/templates\` und \`lab/regelwerk\` (17 Module + Grundlagen-Rahmen + README) beim Tag \`$GITHUB_REF_NAME\`."
+            --notes "ZIP-Stand beim Tag \`$GITHUB_REF_NAME\`. \`lab-regelwerk.zip\` = self-contained Baseline (\`regelwerk/\` 17 Module + Grundlagen-Rahmen + README, \`templates/\` parallel) — nach \`.harness/baseline/$GITHUB_REF_NAME/\` entpacken, dann lösen die \`../templates/\`-Ziel-Form-Verweise netzlos auf. Wer nur die Skelette will, nimmt \`templates/\` aus dem Bundle."

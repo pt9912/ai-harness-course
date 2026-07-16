@@ -25,6 +25,13 @@
 #                       mitreisen; nur Verweise NACH AUSSEN werden gepinnt.
 #                       (Fuer Einzeldatei-Auslieferung wie agents-regelwerk.md
 #                       weglassen — dort muss alles absolut werden.)
+#   --keep-within=<dir> Zusaetzliche repo-relative Wurzel (wiederholbar), deren
+#                       Verweise ebenfalls relativ bleiben. Fuer self-contained
+#                       Baseline-Bundles, die MEHRERE Verzeichnisse parallel
+#                       tragen — z. B. `lab/regelwerk` (Quelle) + `lab/templates`
+#                       (als `regelwerk/` + `templates/` im ZIP), damit die
+#                       `../templates/…`-Ziel-Form-Verweise netzlos mitreisen
+#                       statt auf eine blob-URL gepinnt zu werden.
 from __future__ import annotations
 
 import os
@@ -40,13 +47,17 @@ SKIP_PREFIXES = ("#", "http://", "https://", "mailto:")
 
 def main() -> int:
     keep_within = "--keep-within-src" in sys.argv[1:]
-    argv = [a for a in sys.argv[1:] if a != "--keep-within-src"]
+    extra_within = [a.split("=", 1)[1].strip("/")
+                    for a in sys.argv[1:] if a.startswith("--keep-within=")]
+    argv = [a for a in sys.argv[1:]
+            if a != "--keep-within-src" and not a.startswith("--keep-within=")]
     if len(argv) < 3:
-        print("usage: rewrite-doc-links.py <datei> <quell-verzeichnis> <ref> [repo-root] [--keep-within-src]",
-              file=sys.stderr)
+        print("usage: rewrite-doc-links.py <datei> <quell-verzeichnis> <ref> [repo-root] "
+              "[--keep-within-src] [--keep-within=<dir> …]", file=sys.stderr)
         return 2
     path, src_dir, ref = argv[0], argv[1].strip("/"), argv[2]
     repo_root = argv[3] if len(argv) > 3 else "."
+    within_roots = ([src_dir] if keep_within else []) + extra_within
 
     rewritten = 0
 
@@ -62,10 +73,10 @@ def main() -> int:
         # Nur umschreiben, was real im Repo existiert (sonst illustrativ).
         if not os.path.exists(os.path.join(repo_root, resolved)):
             return match.group(0)
-        # Mit --keep-within-src: Verweise, die innerhalb des ausgelieferten
-        # Verzeichnisses bleiben, relativ lassen (sie reisen mit dem Bundle —
-        # z. B. Modul-Querverweise im lab/regelwerk-ZIP).
-        if keep_within and (resolved == src_dir or resolved.startswith(src_dir + "/")):
+        # Verweise, die innerhalb einer mitgelieferten Bundle-Wurzel bleiben,
+        # relativ lassen (sie reisen mit dem Bundle — Modul-Querverweise via
+        # --keep-within-src, ../templates/-Ziel-Form-Verweise via --keep-within).
+        if any(resolved == r or resolved.startswith(r + "/") for r in within_roots):
             return match.group(0)
         rewritten += 1
         return f"{match.group(1)}{BASE}/{ref}/{resolved}{trailing}{frag}{match.group(3)}"

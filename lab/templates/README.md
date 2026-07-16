@@ -33,11 +33,12 @@ und stehen separat in [§Gate-Baseline](#gate-baseline) — also 16 Skelette
 ## Download als ZIP
 
 **Stabiler Link (kein Login nötig):** der Workflow `templates-release`
-hängt bei jedem Release-Tag zwei Release-Assets an:
+hängt bei jedem Release-Tag *ein* self-contained Baseline-Asset an:
 
-> Templates-ZIP: <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>
->
-> Regelwerk (self-navigierbares Bundle pro Modul, interne Verweise auf den Tag gepinnt): <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
+> Baseline-Bundle: <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
+> — `regelwerk/` (self-navigierbares Modul-Bundle) + `templates/` parallel,
+> interne Verweise auf den Tag gepinnt. Nach `.harness/baseline/<tag>/`
+> entpacken; die Skelette liegen unter `templates/`.
 
 Zusätzlich lädt der Workflow `templates-zip` diesen Ordner (Artifact
 `lab-templates`) bei jeder Änderung als Vorschau-Stand von `main` hoch: auf

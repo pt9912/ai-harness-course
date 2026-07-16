@@ -11,6 +11,57 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 25 — 2026-07-16 · Regelwerk agenten-tauglich (Ziel-Form statt Worked Examples) + self-contained Baseline-Bundle
+
+### Geändert
+
+- **Didaktik-Compliance der Regelwerk-Splits.** Das Regelwerk ist für Code-
+  Agenten: **Regel + Ziel-Form** statt erzählter Worked-Example-Narrative. Über
+  17 Dateien die Schritt-für-Schritt-Beispiele entfernt (netto −1045 Zeilen).
+  Skelett, das ein `lab/templates`-Artefakt dupliziert → „Ziel-Form: X" = Verweis
+  auf `../templates/…` + operative Kurzregeln (modul-03/04/05/06/07/10); kein
+  Template (Code/Config/Prozess) → operative Regeln + Tabellen behalten
+  (modul-08/11/12/14/16). modul-02: Worked Example 1/2 → operative Bootstrap-
+  Schritt-Sequenzen (Mermaids + T1/T2-Markdown-Beispiele gestrippt; Detail-
+  Tabellen, vendored-Baseline-Doktrin, Phasen×Modus-Matrix behalten).
+- **Stabile HTML-Anker** (`<a id>`, von d-check erkannt) für viel-referenzierte
+  Stellen: modul-07 `#werkzeug-wahl` (5 Verweise), modul-13
+  `#adr-zur-fitness-function`, modul-01 `#source-precedence-block`; ~11
+  eingehende Verweise umgebogen. modul-07 review-verifiziert.
+- **Baseline vendored jetzt Regelwerk *und* Templates.** modul-02-Bootstrap
+  (Quelle + Split): `.harness/baseline/<tag>/{regelwerk,templates}/` — Templates
+  mit Doppelrolle (vendored Referenz-Form für die `../templates/`-Ziel-Form-
+  Verweise + kopiert-und-ausgefüllt als eigene Artefakte). Adopter-Story
+  (conventions.template `MR-003`, AGENTS.template, README.template, lab/example)
+  durchgängig nachgezogen.
+- **`lab-regelwerk.zip` ist ein self-contained Baseline-Bundle** (`regelwerk/` +
+  `templates/` parallel). `templates-release.yml` packt beide; die Splits lösen
+  `../templates/` netzlos gegen `templates/` auf.
+
+### Hinzugefügt
+
+- **`rewrite-doc-links.py --keep-within=<dir>`** — zusätzliche within-Bundle-
+  Wurzel neben `--keep-within-src`, damit `../templates/`-Verweise in
+  self-contained Bundles mit mehreren parallelen Verzeichnissen relativ mitreisen
+  (netzlos auflösbar) statt auf eine blob-URL gepinnt zu werden; nur echte
+  Außen-Verweise (Kurs, LICENSE) werden auf den Tag gepinnt.
+
+### Entfernt
+
+- **Release-Asset `lab-templates.zip`.** Die Templates liegen jetzt im
+  self-contained `lab-regelwerk.zip` unter `templates/`; ein separates
+  Template-ZIP wäre ein Duplikat. Wer nur die Skelette will, entpackt das Bundle
+  und nimmt `templates/`. `README`, `lab/templates/README`,
+  `rewrite-template-links.sh` und `templates-release.yml` entsprechend bereinigt.
+  (Das `templates-zip`-Vorschau-Artifact auf `main` bleibt für Template-Autoren.)
+
+**Bruch für Konsumenten:** (1) Das `lab-regelwerk.zip` wechselt vom flachen
+Layout (`*.md` im Root, v2.0.0) auf `regelwerk/` + `templates/` parallel — nach
+`.harness/baseline/<tag>/` entpacken (nicht mehr nach `…/regelwerk/`), dann lösen
+die `../templates/`-Ziel-Form-Verweise netzlos auf. (2) Das Release-Asset
+`lab-templates.zip` entfällt; Ersatz ist `templates/` im Baseline-Bundle. Der
+Kurs-*Inhalt* bleibt maßgeblich unter `/kurs/de/`.
+
 ## Welle 24 — 2026-07-16 · Regelwerk konsumenten-sauber (A⁺), agents-regelwerk.md retired, d-check v0.43.1
 
 ### Geändert

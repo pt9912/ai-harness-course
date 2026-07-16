@@ -59,12 +59,18 @@ ist derivativ — bei Konflikt gilt das Lehrmaterial.
 -->
 
 - **Extern (Lehrmaterial):** <Pfad oder URL>
-- **Extern (Kurs-Regelwerk):** <Release-Asset, bei Adoption des Kurses:
-  https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
-  — adoptierten Stand notieren (Stand-Zeile in `lab/regelwerk/README.md`, z. B.
-  „Kurs-Welle 24 · 2026-07-16"; Wellen-Register: CHANGELOG.md im Kurs-Repo);
-  für harte Reproduzierbarkeit das Asset eines Tags ziehen statt `latest`.
-- **In-Repo (verkörperte Form):** <Pfade zu adoptierten Templates>
+- **Vendored Baseline (Regelwerk + Templates):** aus dem self-contained
+  Release-Asset
+  https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip
+  nach `.harness/baseline/<tag>/{regelwerk,templates}/` entpackt (netzlos,
+  `SHA256SUMS`) — adoptierten Stand notieren (Stand-Zeile in
+  `regelwerk/README.md`, z. B. „Kurs-Welle 24 · 2026-07-16"; Wellen-Register:
+  CHANGELOG.md im Kurs-Repo); für harte Reproduzierbarkeit das Asset eines Tags
+  ziehen statt `latest`. Rollen und Netzlosigkeit: §MR-003.
+- **In-Repo (verkörperte Form):** <Pfade zu deinen kopiert-und-ausgefüllten
+  Artefakten> — die vendored `.harness/baseline/<tag>/templates/` sind die
+  Referenz-Form („Ziel-Form" des Regelwerks); deine eigenen Dateien sind daraus
+  kopiert und ausgefüllt.
 
 ## Adaptions-Block
 
@@ -125,26 +131,29 @@ keine (AGENTS.md §5/§6).
   eigener Rang sichtbar sein.
 - **Auflösungs-Trigger:** permanent.
 
-### MR-003 — Regelwerk als vendored, nachschlagbare Referenz
+### MR-003 — Regelwerk und Templates als vendored, nachschlagbare Baseline
 
 - **Datum:** <Datum>
 - **Geltungsbereich:** [`AGENTS.md`](../AGENTS.md) §1, [§Baseline](#baseline)
 - **Adaption:** Provenienz/Konkretisierung (keine inhaltliche Abweichung vom
-  Baseline-Default): Das Regelwerk der Baseline wird **committet vendored**
-  unter `.harness/baseline/<tag>/regelwerk/` geführt — beim Bootstrap
-  materialisiert (Modul 2), netzlos auf jedem Checkout, Integrität über
-  `.harness/baseline/<tag>/SHA256SUMS`. Es ist die **präsente, nachschlagbare
-  Vertiefung** zur verkörperten Form: pro Entscheidung, deren operative
-  Detailtiefe Briefing und Konventionen nicht tragen (Trigger-Klassen,
+  Baseline-Default): Regelwerk *und* Templates der Baseline werden **committet
+  vendored** unter `.harness/baseline/<tag>/{regelwerk,templates}/` geführt —
+  beim Bootstrap aus dem self-contained `lab-regelwerk.zip` materialisiert
+  (Modul 2), netzlos auf jedem Checkout, Integrität über
+  `.harness/baseline/<tag>/SHA256SUMS`. Das Regelwerk ist die **präsente,
+  nachschlagbare Vertiefung**: pro Entscheidung, deren operative Detailtiefe
+  Briefing und Konventionen nicht tragen (Trigger-Klassen,
   Sub-Area-Qualifikation, Carveout-vs-Reconciliation, Modus-Diagnose), wird
   der **relevante Abschnitt** referenziert (README = Index), ohne das ganze
-  Regelwerk im Kontext zu halten.
+  Regelwerk im Kontext zu halten. Weil `regelwerk/` und `templates/` **parallel**
+  vendored liegen, lösen die `../templates/`-Ziel-Form-Verweise des Regelwerks
+  **netzlos lokal** auf (Referenz-Form für „so sieht das Artefakt aus").
 - **Begründung:** Modul-0-Prinzip — *Per-Lauf-Relevantes gehört verkörpert,
-  nicht extern nachgeladen*: Da das Regelwerk im Slice-Betrieb routinemäßig
-  nachgeschlagen wird (Real-Beleg eines Konsument-Repos: d-check), wird es
-  vendored statt pro Lauf extern gefetcht — das macht den Nachschlag netzlos
-  und über den `<tag>` reproduzierbar. Der konkrete Tag und das
-  Integritätsmanifest stehen hier als Provenienz, damit Drift gegen die
+  nicht extern nachgeladen*: Da Regelwerk und Ziel-Formen im Slice-Betrieb
+  routinemäßig nachgeschlagen werden (Real-Beleg eines Konsument-Repos:
+  d-check), werden sie vendored statt pro Lauf extern gefetcht — das macht den
+  Nachschlag netzlos und über den `<tag>` reproduzierbar. Der konkrete Tag und
+  das Integritätsmanifest stehen hier als Provenienz, damit Drift gegen die
   adoptierte Baseline prüfbar bleibt. (Die *Kontext*-Hygiene bleibt: nur der
   benötigte Abschnitt, nie das ganze Bundle im Kontext.)
 - **Auflösungs-Trigger:** permanent (Provenienz/Baseline-Konformität).
