@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
-# regelwerk-drift — erkennt, ob sich die adoptierte agents-regelwerk.md
-# (externe Form-Quelle, Source Precedence) seit der Adoption geaendert hat.
+# regelwerk-drift — erkennt, ob sich das adoptierte Kurs-Regelwerk (externe
+# Form-Quelle, Source Precedence) seit der Adoption geaendert hat.
+#
+# DEFERRED: agents-regelwerk.md (Einzeldatei) ist retired; die adoptierte
+# Baseline ist jetzt das Split-Verzeichnis lab/regelwerk. Der inhaltsbasierte
+# Vergleich braucht dafuer einen deterministischen Verzeichnis-Hash
+# (vendored-Muster, SHA256SUMS) — Migration ausstehend; bei Verzeichnis-Quelle
+# ueberspringt der Sensor (statt fail-closed), da KEIN gates-Glied.
 #
 # INHALTSBASIERT, nicht Stand-Marker-basiert: vergleicht den sha256 der
 # Quelle gegen den in harness/conventions.md (§Baseline, "Regelwerk-Pin:")
@@ -29,7 +35,7 @@ import sys
 import urllib.request
 
 CONVENTIONS = pathlib.Path("harness/conventions.md")
-DEFAULT_SRC = "../../kurs/de/agents-regelwerk.md"
+DEFAULT_SRC = "../regelwerk"
 PIN_RE = re.compile(r"Regelwerk-Pin:\*\*\s*sha256:([0-9a-f]{64})")
 STAND_RE = re.compile(r"^\*\*Stand:\*\*\s*(.+)$", re.MULTILINE)
 
@@ -52,15 +58,23 @@ def load_source(src: str) -> bytes:
 
 
 def main() -> int:
+    src = os.environ.get("REGELWERK_SRC", DEFAULT_SRC)
+    if pathlib.Path(src).is_dir():
+        # DEFERRED: adoptiertes Regelwerk ist jetzt das Split-Verzeichnis;
+        # die inhaltsbasierte Drift-Pruefung (deterministischer Verzeichnis-
+        # Hash) migriert mit dem vendored-Muster (SHA256SUMS). Bis dahin
+        # ueberspringen statt fail-closed (KEIN gates-Glied).
+        print("regelwerk-drift: SKIP — Split-Verzeichnis-Quelle; Drift-Migration "
+              "(Verzeichnis-Hash) ausstehend.")
+        return 0
     if not CONVENTIONS.is_file():
         fail(f"{CONVENTIONS} fehlt (Pin-Quelle).")
     pin_match = PIN_RE.search(CONVENTIONS.read_text(encoding="utf-8"))
     if not pin_match:
         fail(f"Kein 'Regelwerk-Pin:' in {CONVENTIONS} §Baseline. "
-             "Erst pinnen (sha256 der adoptierten agents-regelwerk.md).")
+             "Erst pinnen (sha256 der adoptierten Regelwerk-Quelle).")
     pinned = pin_match.group(1)
 
-    src = os.environ.get("REGELWERK_SRC", DEFAULT_SRC)
     data = load_source(src)
     actual = hashlib.sha256(data).hexdigest()
 

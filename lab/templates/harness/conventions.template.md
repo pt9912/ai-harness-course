@@ -59,12 +59,11 @@ ist derivativ — bei Konflikt gilt das Lehrmaterial.
 -->
 
 - **Extern (Lehrmaterial):** <Pfad oder URL>
-- **Extern (Agenten-Regelwerk):** <Raw-URL, bei Adoption des Kurses:
-  https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-regelwerk.md>
-  — adoptierten Stand notieren (Stand-Zeile am Regelwerk-Anfang, z. B.
-  „Kurs-Welle 18 · 2026-06-11 · 19:49 CEST"; Wellen-Register:
-  CHANGELOG.md im Kurs-Repo); für harte Reproduzierbarkeit Raw-URL
-  auf Commit/Tag pinnen statt `main`.
+- **Extern (Kurs-Regelwerk):** <Release-Asset, bei Adoption des Kurses:
+  https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
+  — adoptierten Stand notieren (Stand-Zeile in `lab/regelwerk/README.md`, z. B.
+  „Kurs-Welle 24 · 2026-07-16"; Wellen-Register: CHANGELOG.md im Kurs-Repo);
+  für harte Reproduzierbarkeit das Asset eines Tags ziehen statt `latest`.
 - **In-Repo (verkörperte Form):** <Pfade zu adoptierten Templates>
 
 ## Adaptions-Block

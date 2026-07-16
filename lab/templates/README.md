@@ -33,17 +33,15 @@ und stehen separat in [§Gate-Baseline](#gate-baseline) — also 16 Skelette
 ## Download als ZIP
 
 **Stabiler Link (kein Login nötig):** der Workflow `templates-release`
-hängt bei jedem Release-Tag drei Release-Assets an:
+hängt bei jedem Release-Tag zwei Release-Assets an:
 
 > Templates-ZIP: <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>
 >
-> Regelwerk (self-contained, interne Verweise auf den Tag gepinnt): <https://github.com/pt9912/ai-harness-course/releases/latest/download/agents-regelwerk.md>
->
-> Regelwerk pro Modul (ZIP, self-navigierbares Bundle): <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
+> Regelwerk (self-navigierbares Bundle pro Modul, interne Verweise auf den Tag gepinnt): <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
 
 Zusätzlich lädt der Workflow `templates-zip` diesen Ordner (Artifact
-`lab-templates`) und das Regelwerk (Artifact `agents-regelwerk`) bei jeder
-Änderung als Vorschau-Stand von `main` hoch: auf GitHub unter **Actions →
+`lab-templates`) bei jeder Änderung als Vorschau-Stand von `main` hoch: auf
+GitHub unter **Actions →
 templates-zip → neuester Lauf → Artifacts**. Artifacts erfordern einen
 GitHub-Login und verfallen nach 90 Tagen; über **Run workflow**
 (workflow_dispatch) lässt sich alles jederzeit neu erzeugen.

@@ -21,12 +21,12 @@ Der Default-Ort für:
 - **Konvention:** AI-Harness-Kurs (`/kurs/de/grundlagen/konventionen.md`)
 - **Stand:** Template-Set 2026-06
 - **Datum der Adoption:** 2026-06-01
-- **Regelwerk-Pin:** sha256:682aef782dd90d90668c1cad3f6390555ca828576908f86a2782c4fa5da6113e — inhaltsbasierter Pin der adoptierten `agents-regelwerk.md` (Kurs-Welle 19 · 2026-06-14). Upstream-Drift erkennt `make regelwerk-drift`; bei Drift: Regelwerk neu lesen, dann Stand + Pin hier aktualisieren.
+- **Regelwerk-Pin:** *ausstehend* — die adoptierte Baseline ist jetzt das Kurs-Regelwerk als Split (`lab/regelwerk/` bzw. `lab-regelwerk.zip`; `agents-regelwerk.md` ist retired). Die inhaltsbasierte Upstream-Drift-Prüfung (`make regelwerk-drift`) migriert mit dem vendored-Muster auf einen Verzeichnis-Hash (`SHA256SUMS`) und ist bis dahin übersprungen.
 
 ## Adoptierte Konventions-Quellen
 
 - **Extern (Lehrmaterial):** [`/kurs/de/grundlagen/konventionen.md`](../../../kurs/de/grundlagen/konventionen.md), [`/kurs/de/grundlagen/klassifikation.md`](../../../kurs/de/grundlagen/klassifikation.md)
-- **Extern (Agenten-Regelwerk):** [`/kurs/de/agents-regelwerk.md`](../../../kurs/de/agents-regelwerk.md) — was ein Code-Agent statt des vollen Lehrmaterials liest; derivativ, bei Konflikt gilt das Lehrmaterial. (Außerhalb dieses Repos als Raw-URL: `https://raw.githubusercontent.com/pt9912/ai-harness-course/main/kurs/de/agents-regelwerk.md`.)
+- **Extern (Kurs-Regelwerk):** [`/lab/regelwerk/`](../../regelwerk/README.md) — was ein Code-Agent statt des vollen Lehrmaterials liest (pro Abschnitt eine Datei); derivativ, bei Konflikt gilt das Lehrmaterial. (Außerhalb dieses Repos als Release-Asset: `https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip`.)
 - **In-Repo (verkörperte Form):** Template-Set unter [`/lab/templates/`](../../../lab/templates/) als Form-Lookup-Quelle
 
 ## Adaptions-Block

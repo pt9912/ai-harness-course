@@ -5,7 +5,13 @@
 # lab/templates ist by-design symbolisch (Pfade gelten im Ziel-Repo).
 scan:
   roots: ["."]
-  ignore: ["lab/templates/**", "lab/example/cpp/build-cov/**", ".tmp/**"]
+  # CHANGELOG = historisches Register: Verweise sind zeitpunkt-korrekt (nennen
+  # Dateien, wie sie zur jeweiligen Welle existierten, z. B. retired
+  # agents-regelwerk.md) — nicht gegen den aktuellen Stand prüfen.
+  ignore: ["lab/templates/**", "lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md"]
 modules: [links, anchors, codepaths]
 codepaths:
   roots: [lab, kurs, tools]
+  # Tombstone: agents-regelwerk.md ist retired (Welle 24, Split kanonisch);
+  # historische CHANGELOG-Verweise dürfen dangeln, ohne die Historie zu editieren.
+  ignore-refs: ["kurs/de/agents-regelwerk.md"]

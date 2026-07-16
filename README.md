@@ -67,12 +67,11 @@ Die Module sind nach Phasen gruppiert:
 | [Abschluss](kurs/de/abschluss/) | — | Abschlussprojekt · Quellen |
 
 Für **Code-Agenten** gibt es den Kurs zusätzlich als Betriebsregelwerk:
-[`kurs/de/agents-regelwerk.md`](kurs/de/agents-regelwerk.md) — der
-didaktik-freie Extrakt des Kurses (Konventionen, Regeln, Abläufe in
-Quellformulierung; weggelassen sind nur Engage, Übungen, Selbstchecks,
-Lösungen, Reflexionen), derivativ: bei Konflikt gilt das Kursmaterial.
-Die Überarbeitungs-Wellen des Kurses registriert das
-[`CHANGELOG.md`](CHANGELOG.md).
+[`lab/regelwerk/`](lab/regelwerk/README.md) — der didaktik-freie Extrakt
+des Kurses (Konventionen, Regeln, Abläufe in Quellformulierung; weggelassen
+ist die Didaktik-Schicht), pro Modul und Grundlagen-Abschnitt eine Datei,
+derivativ: bei Konflikt gilt das Kursmaterial. Die Überarbeitungs-Wellen
+des Kurses registriert das [`CHANGELOG.md`](CHANGELOG.md).
 
 > **Roadmap-Hinweis.** `kurs/en/` ist als Skelett angelegt, aber noch
 > nicht inhaltlich befüllt. Eine englische Übersetzung folgt demselben
@@ -83,12 +82,11 @@ Die Überarbeitungs-Wellen des Kurses registriert das
 Der Kurs ist nicht nur Lernmaterial — sein Prozess lässt sich in ein
 beliebiges Repo adoptieren, ohne Installation:
 
-1. **Betriebsregelwerk** für Code-Agenten als login-freies, self-contained
-   Release-Asset (interne Verweise auf den Release-Tag gepinnt):
-   <https://github.com/pt9912/ai-harness-course/releases/latest/download/agents-regelwerk.md>
-   — in-repo: [`kurs/de/agents-regelwerk.md`](kurs/de/agents-regelwerk.md) (oben beschrieben).
-   Pro Modul aufgeteilt als self-navigierbares Bundle:
-   <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>.
+1. **Betriebsregelwerk** für Code-Agenten als login-freies, self-navigierbares
+   Bundle — pro Modul und Grundlagen-Abschnitt aufgeteilt, interne Verweise auf
+   den Release-Tag gepinnt:
+   <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>
+   — in-repo: [`lab/regelwerk/`](lab/regelwerk/README.md) (oben beschrieben).
 2. **Templates** (Skelette für Lastenheft, Spec, ADR, Slice, …) als
    login-freies ZIP:
    <https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-templates.zip>

@@ -1,31 +1,23 @@
-# Agents-Regelwerk — nach Modulen aufgeteilt
+# Regelwerk — der Kurs als Betriebsregelwerk, nach Modulen
+
+**Stand:** Kurs-Welle 24 · 2026-07-16.
 
 Die 17 Module (0–16) **und die drei Grundlagen-Abschnitte** (Konventionen,
-Klassifikation, Durchsetzungsschicht) des
-[Agents-Regelwerks](../../kurs/de/agents-regelwerk.md)
-als einzelne Dateien. Inhaltlich **wortgleich** zur Quelle (reiner Abschnittstext,
-kein zusätzlicher Kopf); aufgeteilt, damit ein Agent einen einzelnen Abschnitt laden
-kann, ohne das gesamte Regelwerk im Kontext zu halten.
+Klassifikation, Durchsetzungsschicht) des Kurses als **Betriebsregelwerk für
+Code-Agenten** — didaktik-freier Extrakt (Regeln, Konventionen, Abläufe in
+Quellformulierung; weggelassen ist die Didaktik-Schicht, nicht verdichtet der
+Inhalt). Pro Abschnitt eine Datei, damit ein Agent einen einzelnen Abschnitt
+laden kann, ohne das ganze Regelwerk im Kontext zu halten.
 
-> **Was dieses Verzeichnis ist.** Eine **derivative Sicht** auf
-> [`agents-regelwerk.md`](../../kurs/de/agents-regelwerk.md)
-> — pro Modul- und Grundlagen-Abschnitt eine Datei, sonst nichts. Es trägt keine
-> eigenen Regeln und keine eigene Normativität.
+> **Was dieses Verzeichnis ist.** Das **kanonische Regelwerk-Artefakt** (login-frei
+> ausgeliefert als `lab-regelwerk.zip`, self-navigierbar). Es trägt keine eigene
+> Normativität: maßgeblich für den *Inhalt* bleibt der Kurs unter
+> [`/kurs/de/`](../../kurs/de/README.md) — die Module der Phasen 01–05 plus
+> Konventionen, Klassifikation und Durchsetzungsschicht.
 >
-> **Was dieses Verzeichnis NICHT ist.** Eine Quelle der Wahrheit. Bei Konflikt
-> gilt die Quelle; und die Quelle ist *ihrerseits* derivativ (sie steht unter
-> Konventionen, Klassifikation, Durchsetzungsschicht und den Modultexten der
-> Phasen 01–05). Wer hier
-> eine Regel ändert, ohne die Quelle zu ändern, erzeugt genau die Drift, die das
-> Regelwerk selbst verbietet. Maßgeblich bleibt der Kurs unter
-> [`/kurs/de/`](../../kurs/de/README.md).
-
-**Modul- und Grundlagen-Abschnitte.** Aufgeteilt sind die 17 Module sowie die drei
-Grundlagen-Abschnitte (Konventionen, Klassifikation und Steering Loop,
-Durchsetzungsschicht). Nur der reine Regelwerks-Rahmen — Quellen-Rang, Wartung und
-der Stand — bleibt der
-[Quelldatei](../../kurs/de/agents-regelwerk.md)
-vorbehalten.
+> **Was dieses Verzeichnis NICHT ist.** Eine eigene Quelle der Wahrheit. Wer hier
+> eine Regel ändert, ohne die Kurs-Quelle zu ändern, erzeugt genau die Drift, die
+> das Regelwerk selbst verbietet.
 
 **Links.** Im Repo relativ (lokal navigierbar, vom Doku-Gate validiert). Die
 Modul-Querverweise *innerhalb* dieses Verzeichnisses bleiben auch im

@@ -14,10 +14,10 @@ Sensors-Bindung) leben in
 [`harness/conventions.md`](harness/conventions.md).
 
 Das **Betriebsregelwerk der adoptierten Baseline in Agenten-Kurzform**
-ist das [Agents-Regelwerk des Kurses](../../kurs/de/agents-regelwerk.md) —
-einmal pro Session lesen, bevor der Workflow (§5) startet. Derivativ:
-bei Konflikt gelten die kanonischen Quellen; adoptierter Stand steht
-in [`harness/conventions.md`](harness/conventions.md) §Baseline.
+ist das [Kurs-Regelwerk](../regelwerk/README.md) (pro Abschnitt eine Datei) —
+den relevanten Abschnitt pro Session nachschlagen, bevor der Workflow (§5)
+startet. Derivativ: bei Konflikt gelten die kanonischen Quellen; adoptierter
+Stand steht in [`harness/conventions.md`](harness/conventions.md) §Baseline.
 
 ## 1. Kanonische Quellen (Source Precedence)
 

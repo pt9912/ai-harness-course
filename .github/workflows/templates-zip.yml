@@ -1,8 +1,6 @@
-# Stellt lab/templates (Artifact `lab-templates`) und eine self-contained
-# `agents-regelwerk.md` (Artifact `agents-regelwerk`, interne Links auf main
-# gepinnt) als Vorschau-Artifacts bereit. Läuft bei Änderung an Templates,
-# Regelwerk oder Rewrite-Tool auf main; workflow_dispatch erlaubt manuelles
-# Neu-Erzeugen, da Artifacts nach 90 Tagen verfallen.
+# Stellt lab/templates (Artifact `lab-templates`) als Vorschau-Artifact bereit.
+# Läuft bei Änderung an Templates oder Rewrite-Tool auf main; workflow_dispatch
+# erlaubt manuelles Neu-Erzeugen, da Artifacts nach 90 Tagen verfallen.
 name: templates-zip
 
 on:
@@ -10,7 +8,6 @@ on:
     branches: [main]
     paths:
       - "lab/templates/**"
-      - "kurs/de/agents-regelwerk.md"
       - "tools/rewrite-doc-links.py"
   workflow_dispatch:
 
@@ -26,16 +23,5 @@ jobs:
         with:
           name: lab-templates
           path: lab/templates
-          if-no-files-found: error
-          retention-days: 90
-      - name: Agents-Regelwerk (Vorschau, main) als self-contained Kopie rewriten
-        run: |
-          cp kurs/de/agents-regelwerk.md "$RUNNER_TEMP/agents-regelwerk.md"
-          python3 tools/rewrite-doc-links.py "$RUNNER_TEMP/agents-regelwerk.md" kurs/de main .
-      - name: Regelwerk als Artifact hochladen
-        uses: actions/upload-artifact@v4
-        with:
-          name: agents-regelwerk
-          path: ${{ runner.temp }}/agents-regelwerk.md
           if-no-files-found: error
           retention-days: 90

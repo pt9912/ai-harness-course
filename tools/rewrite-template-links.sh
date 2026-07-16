@@ -26,7 +26,7 @@ find "$dir" -name '*.md' -print0 | while IFS= read -r -d '' f; do
   # Im Vorschau-Build (ref=main) bleibt alles.
   if [[ "$ref" != main && "$f" == *.template.md ]]; then
     sed -E -i \
-      "s#releases/latest/download/(lab-templates\\.zip|lab-regelwerk\\.zip|agents-regelwerk\\.md)#releases/download/${ref}/\\1#g" \
+      "s#releases/latest/download/(lab-templates\\.zip|lab-regelwerk\\.zip)#releases/download/${ref}/\\1#g" \
       "$f"
   fi
 done
