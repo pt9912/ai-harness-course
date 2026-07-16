@@ -1,7 +1,5 @@
 # Slice 014: Approximate-NN-Suche
 
-**Status:** open
-
 **Welle:** welle-3-skalierung
 
 **Bezug:** LH-QA-01 (Performance), implizit ADR-0003 (Index-Format)

@@ -50,7 +50,7 @@ Termin.
 
 | Slice | Titel | Status | Bezug |
 |---|---|---|---|
-| slice-<NN-A> | <…> | open/next/in-progress/done | LH-FA-<NN> |
+| slice-<NN-A> | <…> | <einer von: open, next, in-progress, done> | LH-FA-<NN> |
 | slice-<NN-B> | <…> | open | LH-FA-<NN> |
 
 ## 5. Abhängigkeiten

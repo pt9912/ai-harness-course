@@ -4,9 +4,10 @@
 > `docs/plan/planning/open/slice-<NNN>-<kurzer-titel>.md` und ersetze
 > Platzhalter. Lösche diesen Block.
 
-**Status:** open → next → in-progress → done (Datei wird durch die
-Verzeichnisse bewegt, siehe
-[Kurs Modul 5](../../../../../kurs/de/02-planung/modul-05-planning-harness.md)).
+**Lifecycle:** Der Zustand dieses Slice ist das Verzeichnis, in dem diese
+Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er
+wechselt nur durch `git mv`, siehe
+[`/kurs/de/02-planung/modul-05-planning-harness.md` §Lifecycle als State Machine](../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine).
 
 **Welle:** <welle-id> oder "ohne Welle" (Wartung/Spike).
 
@@ -52,8 +53,14 @@ Der Implementation-Agent erweitert diese Liste in seinem ersten Lauf.
 ## 4. Trigger
 
 <!--
-Wann beginnt dieser Slice? (next → in-progress)
+Wann beginnt dieser Slice? (`next` → `in-progress`: Implementer beginnt.)
 Beispiele: "Wenn Welle X done." / "Wenn Carveout CO-NN aufgelöst."
+
+Auch die zwei Rückführungen vorab benennen — unter welcher Bedingung
+geht dieser Slice zurück?
+- `in-progress` → `next`: zu groß, zurück zur Zerlegung.
+- `in-progress` → `open`: blockiert (Carveout? siehe Modul 7).
+(kanonische Definition: [`/kurs/de/02-planung/modul-05-planning-harness.md` §Lifecycle als State Machine](../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine))
 -->
 
 <…>
