@@ -11,6 +11,40 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 26 — 2026-07-17 · Slice-Zustand einwertig (Lifecycle-Verzeichnis), Baseline-Bundle von innen self-beschreibend
+
+### Geändert
+
+- **Slice-Status-Feld retired — das Lifecycle-Verzeichnis ist die Quelle.**
+  Modul 5 definiert den Slice-Zustand ausschließlich als Verzeichnis (eines von
+  `open/`, `next/`, `in-progress/`, `done/`); das `Status:`-Feld im
+  `slice.template.md` hatte keine Quell-Verankerung und war eine zweite Wahrheit,
+  die beim `git mv` driftet — ein Slice in `done/` mit `Status: open` ist genau
+  der Zombie, den Modul 5 beklagt. Feld → **`Lifecycle:`**-Hinweis (Zustand =
+  Verzeichnis, Wechsel nur per `git mv`); §4 Trigger benennt jetzt auch die zwei
+  Rückführungen (`in-progress`→`next` zu groß, `in-progress`→`open` blockiert),
+  verankert an §Lifecycle als State Machine. `welle.template.md`: Slice-Status-
+  Zelle als `<einer von: …>` statt Slash-Liste (die Pfeilkette las sich als
+  Ablauf statt als Auswahl); das *Welle*-Status-Feld bleibt — Wellen liegen flach
+  ohne Lifecycle-Verzeichnis, dort trägt das Feld die Wahrheit. `lab/example/slice-014`
+  nachgezogen. Fix-Richtung Quelle → Template → Beispiel; Modul 5 unberührt.
+- **Modul 07 §Übungen — Pflichtfeld-Liste an Schritt 2 und Template angeglichen.**
+  Die Übung nannte sechs Pflichtfelder inklusive `Auflösungs-Trigger` und ohne
+  `Letzte Prüfung`; kanonisch sind sechs Pflicht-*Header*-Felder (Status, Datum
+  angelegt, Letzte Prüfung, betroffenes Gate, Geltungsbereich, Folge-Slice) plus
+  der Auflösungs-Trigger als eigener beobachtbarer Bestandteil.
+- **`lab/regelwerk/README.md` beschreibt seinen Vendoring-Kontext selbst.** Wer
+  das Regelwerk aus dem entpackten Bundle liest statt über das Kurs-README, fand
+  keinen Hinweis darauf, worin die Datei liegt: neuer Absatz „Vendored gelesen?"
+  — `regelwerk/` + `templates/` parallel unter `.harness/baseline/<tag>/`, daher
+  netzlos auflösende `../templates/…`-Ziel-Form-Verweise; Einstieg ist `AGENTS.md`
+  des Adopter-Repos, hierher wird pro Entscheidung nur der benötigte Abschnitt
+  geladen. Damit ist der Bootstrap-Pfad auch von innen navigierbar, nicht nur vom
+  Kurs-README aus. Zugleich der „Links."-Absatz korrigiert: er nannte Templates
+  und Beispiel als beim Release gepinnt — seit Welle 25 hält
+  `--keep-within=lab/templates` die Templates-Verweise relativ, und `lab/example`
+  verlinkt das Regelwerk gar nicht (36× `../../kurs/`, 16× `../templates/`).
+
 ## Welle 25 — 2026-07-16 · Regelwerk agenten-tauglich (Ziel-Form statt Worked Examples) + self-contained Baseline-Bundle
 
 ### Geändert
