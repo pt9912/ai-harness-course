@@ -19,12 +19,26 @@ laden kann, ohne das ganze Regelwerk im Kontext zu halten.
 > eine Regel ändert, ohne die Kurs-Quelle zu ändern, erzeugt genau die Drift, die
 > das Regelwerk selbst verbietet.
 
-**Links.** Im Repo relativ (lokal navigierbar, vom Doku-Gate validiert). Die
-Modul-Querverweise *innerhalb* dieses Verzeichnisses bleiben auch im
-ausgelieferten `lab-regelwerk.zip` relativ (das Bundle ist self-navigierbar);
-nur die Verweise *nach außen* (Kurs, Templates, Beispiel) werden beim Release auf
-absolute, auf den Tag gepinnte GitHub-URLs umgeschrieben (`tools/rewrite-doc-links.py
---keep-within-src`).
+**Vendored gelesen?** Dann liegt dieses Verzeichnis als `regelwerk/` unter
+`.harness/baseline/<tag>/` eines Adopter-Repos — entpackt aus dem
+self-contained Baseline-Bundle
+(<https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip>),
+das `regelwerk/` und [`templates/`](../templates/README.md) **parallel** trägt.
+Deshalb lösen die `../templates/…`-Verweise der Abschnitte („Ziel-Form: X")
+netzlos auf. Der Einstieg ist dort nicht diese Datei, sondern **`AGENTS.md` des
+Adopter-Repos** ([Vorlage](../templates/AGENTS.template.md)): Es briefingt die
+verkörperte Form und verweist hierher als **nachschlagbare Vertiefung** — pro
+Entscheidung **nur den benötigten Abschnitt** laden (die Liste unten ist der
+Index), nicht das ganze Regelwerk im Kontext halten. Vorgehen beim Bootstrap:
+[Kurs Modul 2 §Bootstrap](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md).
+
+**Links.** Im Repo relativ (lokal navigierbar, vom Doku-Gate validiert). Relativ
+bleiben auch im ausgelieferten `lab-regelwerk.zip` die Modul-Querverweise
+*innerhalb* dieses Verzeichnisses (`--keep-within-src`) **und** die
+`../templates/…`-Verweise (`--keep-within=lab/templates`) — beide Verzeichnisse
+reisen im Bundle parallel mit, es ist self-navigierbar. Nur Verweise auf den
+Kurs, der *nicht* mitreist, werden beim Release auf absolute, auf den Tag
+gepinnte GitHub-URLs umgeschrieben (`tools/rewrite-doc-links.py`).
 
 ## Abschnitte
 
