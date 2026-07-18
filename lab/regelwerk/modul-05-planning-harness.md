@@ -65,7 +65,7 @@ sondern ein Buffet.
 ### Ziel-Form: Slice
 
 Ein Slice-Plan folgt der Vorlage
-[`docs/plan/planning/slice.template.md`](../templates/docs/plan/planning/slice.template.md).
+[`templates/docs/plan/planning/slice.template.md`](../templates/docs/plan/planning/slice.template.md).
 Größen- und Schnitt-Regeln:
 
 - **Zu groß**, wenn eines zutrifft: mehr als drei DoD-Punkte · mehrere

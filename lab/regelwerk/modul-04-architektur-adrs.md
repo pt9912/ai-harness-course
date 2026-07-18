@@ -49,7 +49,7 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 ### Ziel-Form: ADR (MADR)
 
 Die Form liefert die Vorlage
-[`docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md):
+[`templates/docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md):
 Kopf (Status · Datum · Bezug · Supersedes) plus Body (Kontext · Verglichene
 Alternativen · Entscheidung · Konsequenz mit Fitness Function). Operative
 Regeln zur Form:

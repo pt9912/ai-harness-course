@@ -29,7 +29,7 @@ Form, die Regeln der Inhalt.
 ### Roadmap-Struktur: fünf Abschnitte (Modul 6)
 
 Die Form liefert die Vorlage
-[`docs/plan/planning/roadmap.template.md`](../templates/docs/plan/planning/roadmap.template.md)
+[`templates/docs/plan/planning/roadmap.template.md`](../templates/docs/plan/planning/roadmap.template.md)
 — fünf Abschnitte: *Aktuelle Welle · Nächste Wellen · Meilensteine ·
 Abgeschlossene Wellen · Historische Trigger-Verschiebungen*. Operative Lesart:
 

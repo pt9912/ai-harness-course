@@ -39,7 +39,7 @@ der lokal und in CI denselben Image-Hash produziert, verlangt:
 - **Image-Hash im Build-Output festhalten** (`docker buildx build
   --metadata-file …` → einzeiliges Beleg-Artefakt `harness/image-hash.txt`,
   referenziert in `harness/README.md`, Vorlage
-  [`harness/README.template.md`](../templates/harness/README.template.md)).
+  [`templates/harness/README.template.md`](../templates/harness/README.template.md)).
   Ohne ihn bleibt der `image_hash`-Slot des Replay-Manifests
   ([Modul 12](modul-12-replay-evaluierung.md)) blind — Modell-Drift lässt
   sich dann nicht von Toolchain-Drift trennen.

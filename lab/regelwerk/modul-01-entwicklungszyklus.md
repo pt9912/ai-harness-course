@@ -58,7 +58,7 @@ Volldefinition + Phasen-Modell in
 und im ausgearbeiteten [Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md).
 
 Der Precedence-Block selbst lebt in `harness/README.md` (Vorlage
-[`harness/README.template.md`](../templates/harness/README.template.md)).
+[`templates/harness/README.template.md`](../templates/harness/README.template.md)).
 Operative Regeln für die sechs Folge-Schritte:
 
 - **Zwei Rang-Achsen, beide absteigend:** vertragliche Bindung

@@ -104,7 +104,7 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
 | Lockerung legitim, aber undokumentiert | A → P → I Sofort-PR zieht Lockerung als Folge-ADR nach; Slice nicht still abschließen | Folge-ADR + Erinnerungs-Slice in `next/` |
 
 - **Folge-ADR-Hülle vorab bereithalten** (Vorlage
-  [`docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md)),
+  [`templates/docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md)),
   damit Verdikt 2 nicht die aufwändigste — und deshalb ungewählte —
   Option ist.
 - **Wann *nicht* modellieren:** bei isolierten LOW/INFO-Findings ist die

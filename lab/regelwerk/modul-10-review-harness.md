@@ -47,7 +47,7 @@ Ein Reviewer-Agent ohne Skill-Datei driftet zwischen Sessions (gleiche
 Eingabe → andere Findings/Kategorien). Die Skill-Datei liegt in
 `.harness/skills/reviewer.md` und ist das repo-spezifische „worauf
 achtest du"; Vorlage
-[`.harness/skills/reviewer.template.md`](../templates/.harness/skills/reviewer.template.md)
+[`templates/.harness/skills/reviewer.template.md`](../templates/.harness/skills/reviewer.template.md)
 (für die engere Closure-Note-Prüfung der Schwester-Skill
 `closure-note-reviewer.md`, Modul 11). Operative Pflichtteile:
 

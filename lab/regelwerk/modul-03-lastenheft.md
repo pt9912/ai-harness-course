@@ -36,7 +36,7 @@ ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
 ### Ziel-Form: Akzeptanzkriterium
 
 Anforderungen leben im Lastenheft
-([`spec/lastenheft.template.md`](../templates/spec/lastenheft.template.md)).
+([`templates/spec/lastenheft.template.md`](../templates/spec/lastenheft.template.md)).
 Ein funktionales Kriterium trägt eine `<PREFIX>-FA-NNN`-ID und dann drei Pfade
 im Given/When/Then-Stil — **Happy · Boundary · Negative** — plus einen
 **Out-of-Scope**-Block. Vagen Satz zuerst auf Mehrdeutigkeiten prüfen (*was

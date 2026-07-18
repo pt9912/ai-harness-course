@@ -17,7 +17,7 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 ### Ziel-Form: Carveout
 
 Ein temporärer Carveout folgt der Vorlage
-[`docs/plan/carveouts/carveout.template.md`](../templates/docs/plan/carveouts/carveout.template.md)
+[`templates/docs/plan/carveouts/carveout.template.md`](../templates/docs/plan/carveouts/carveout.template.md)
 (Dateikonvention `docs/plan/carveouts/CO-<NNN>-<kurztitel>.md`; ID in
 eigener `CO-*`-Reihe, siehe
 [`konventionen.md`](grundlagen-konventionen.md#id-schema-als-klammer)).

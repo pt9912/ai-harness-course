@@ -471,7 +471,7 @@ Konvention sind dasselbe Drift-Risiko, das die Source-Precedence-Regel
 für Spec/ADR adressiert — hier in der Form-Ebene.
 
 Vorlage:
-[`/lab/templates/harness/conventions.template.md`](../templates/harness/conventions.template.md).
+[`templates/harness/conventions.template.md`](../templates/harness/conventions.template.md).
 
 ### Harness-Bootstrap
 
