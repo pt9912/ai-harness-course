@@ -11,6 +11,47 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 29 — 2026-07-18 · d-check-Gate-Fragment tool-generiert (include-Modell) + `--network none`
+
+### Geändert
+
+- **Doku-Gate-Fragment tool-generiert statt handgeschrieben.** Die Template-`Makefile`
+  empfahl bereits `d-check --print-mk`, lieferte aber die handgepflegte Recipe, die
+  das Tool längst überholt hatte (`--network none`, `DCHECK_DIGEST`-Override, neues
+  Target-Set) — aufgedeckt durch einen Adopter (`ai-harness-init` `MR-010`). Umgestellt
+  auf das **include-Modell**: das Fragment `d-check.mk` wird via `d-check --print-mk`
+  erzeugt und per `include`/`-include` eingebunden; die Recipe-Form lebt in d-check,
+  nichts driftet von Hand. Effekte: `--network none` auf jedem Run (LH-QA-01-Hermetik
+  auf Container-Ebene, die der Kurs lehrte, aber am eigenen Gate nicht erzwang),
+  `DCHECK_DIGEST`-Re-Pin (statt Digest-Chirurgie), volles Target-Set present-but-unclaimed.
+- **d-check-Pin v0.43.1 → v0.47.0** (via `DCHECK_DIGEST`). Trockenlauf vorab: 139
+  Dateien, 0 Befunde, verhaltensidentisch — der Kurs enthält keine der Muster, die
+  v0.47.0 neu sichtbar macht (keine `| - |`-Trennzellen, keine Fence-Infozeilen mit
+  Backtick).
+- **Modul 13 — „Vorhanden ≠ behauptet".** Schärft „keine halluzinierten Gates": ein
+  vorhandenes, nicht als Gate *behauptetes* Target (die advisory `doc-*`-Targets des
+  Fragments, wie `regelwerk-check`) ist keine Lüge; nur ein behauptetes, nicht
+  laufendes Gate ist eine.
+
+### Geändert — Auslieferung (Bootstrap)
+
+- **Das Gate-Fragment und der Pin sind tool-/versionsspezifisch → NICHT im Bundle.**
+  Der Adopter erzeugt `d-check.mk` beim Bootstrap aus *seiner* gepinnten d-check
+  (`d-check --print-mk`) und füllt den `DCHECK_DIGEST`-**Platzhalter** der Template-
+  `Makefile` (Modul 2, Kurs + Regelwerk-Split lehren das). Das Bundle trägt nur
+  versions-agnostischen Inhalt; keine Release-Ableitung, kein committetes Duplikat.
+
+### Behoben
+
+- Review-Pass (high effort) vor dem Commit: `d-check.mk`-Staging (harter `include`),
+  Prosa-Zeilenlänge (Regelwerk-Modul-2), `include`→`-include`-Präzisierung (Modul 13).
+
+**Hinweis für Konsumenten (kein Bruch nach Asset/Layout-Policy):** Die ausgelieferte
+Template-`Makefile` ist jetzt ein Skelett mit `DCHECK_DIGEST`-Platzhalter und
+`-include d-check.mk`; sie läuft nicht mehr out-of-box, sondern nach der
+Bootstrap-Erzeugung von `d-check.mk`. Bundle-Layout und Asset-Name unverändert;
+existierende Adopter-Repos bleiben unberührt.
+
 ## Welle 28 — 2026-07-18 · Instanziierungs-Zeitpunkt der Templates explizit (Modul 2)
 
 ### Hinzugefügt
