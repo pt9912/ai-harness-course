@@ -14,16 +14,20 @@ help: ## Targets anzeigen
 
 check: docs-check alignment-check ## beide Validatoren nacheinander
 
-# Referenz-Checks (Links, Anker, Bilder, Inline-Code-Pfade) via d-check
-# (Digest-Pin auf v0.43.1 — braucht das Modul codepaths; Konfiguration
-# in .d-check.yml). Der Node-Validator bleibt als Rest-Sensor für die
-# kurs-spezifischen Modul-Nummern-Checks.
-D_CHECK_IMAGE ?= ghcr.io/pt9912/d-check@sha256:718acb28b1992863b0a23b2e172144dccf3ada1c4552fcacc37478bc3e0fddd9
+# Referenz-Checks (Links, Anker, Bilder, Inline-Code-Pfade) via d-check:
+# das Gate-Fragment `d-check.mk` ist tool-generiert (`d-check --print-mk`,
+# v0.47.0) und wird included — kein handgepflegtes Recipe. Re-Pin über
+# DCHECK_DIGEST (sticht den Tag von DCHECK_IMAGE); Konfiguration in .d-check.yml.
+# Bei d-check-Release neu erzeugen: `d-check --print-mk > d-check.mk`, DCHECK_DIGEST
+# neu setzen. Der Node-Validator bleibt Rest-Sensor für die Modul-Nummern-Checks.
+DCHECK_DIGEST ?= sha256:ad42432df71ef747cc8cefc92591339afe78fe707149b674cf086be3ff423eed
+include d-check.mk
 
-docs-check: ## Referenzen (d-check) + Modul-Nummern (Rest-Sensor) prüfen
-	docker run --rm -v "$(CURDIR)":/repo:ro $(D_CHECK_IMAGE)
+# docs-check brückt das tool-generierte `doc-check` (reiner d-check) und hängt
+# den Node-Rest-Sensor an; beide Runs hermetisch (--network none).
+docs-check: doc-check ## Referenzen (d-check) + Modul-Nummern (Rest-Sensor) prüfen
 	docker build -q -t docs-check --target docs-check tools/
-	docker run --rm -v "$(CURDIR)":/work docs-check $(ARGS)
+	docker run --rm --network none -v "$(CURDIR)":/work docs-check $(ARGS)
 
 alignment-check: ## Lernziel-Alignment-Prüfschritt (Docker)
 	docker build -q -t alignment-check --target alignment-check tools/

@@ -31,15 +31,11 @@ find "$dir" -name '*.md' -print0 | while IFS= read -r -d '' f; do
   fi
 done
 
-# d-check-Digest aus dem Kurs-Makefile (Single Source of Truth) in das
-# ausgelieferte Template-Makefile injizieren. Sonst ist der Pin ein
-# hartkodiertes Duplikat, das beim nächsten d-check-Bump driftet (wie früher
-# templates-v1). Das Quell-Makefile behält einen realen Wert (Repo-Direkt-
-# Copy-Fallback); der ZIP-Stand wird hier auf den Kurs-Pin gesetzt.
-pin=$(sed -nE 's/^D_CHECK_IMAGE[[:space:]]*\?=[[:space:]]*(.+)$/\1/p' Makefile 2>/dev/null | head -1)
-if [[ -n "${pin:-}" && -f "$dir/Makefile" ]]; then
-  sed -E -i "s#^D_CHECK_IMAGE[[:space:]]*\\?=.*#D_CHECK_IMAGE ?= ${pin}#" "$dir/Makefile"
-  echo "rewrite-template-links: Template-Makefile D_CHECK_IMAGE auf Kurs-Pin gesetzt ($pin)."
-fi
+# Das d-check-Gate wird NICHT ins Template gespritzt: weder das tool-generierte
+# Fragment `d-check.mk` (Kopie eines Generats → Drift) noch der `DCHECK_DIGEST`-Pin.
+# Beides ist tool-/versionsspezifisch und wird vom Adopter beim Bootstrap gesetzt
+# (`d-check --print-mk` + eigenen Digest pinnen, Modul 2). Die Template-Makefile
+# führt `DCHECK_DIGEST` als auszufüllenden Platzhalter; das Bundle trägt nur
+# versions-agnostischen Inhalt.
 
 echo "rewrite-template-links: Kurs-Verweise in $dir auf '$ref' gepinnt."

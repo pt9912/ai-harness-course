@@ -51,6 +51,15 @@ liegt in CI, siehe
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
 Implementation-Agent vertraut ihnen.
 
+**Vorhanden ≠ behauptet.** Verboten ist ein *behauptetes* Gate ohne Deckung,
+nicht ein *vorhandenes* Target ohne Anspruch. Ein tool-generiertes Gate-Fragment
+(`d-check.mk` aus `d-check --print-mk`, per `-include` eingebunden statt
+handgeschrieben) bringt mehr Targets mit, als du als Gate führst: nur das genutzte
+(`docs-check`) steht in `harness/README.md`/`AGENTS.md` und `make gates`; die
+advisory-Targets (`doc-trace`, `doc-doctor`, …) sind **verfügbar, aber nicht als
+Gate behauptet** — wie ein Maintenance-Target (`regelwerk-check`), das nicht in
+`gates` läuft. Die Lüge wäre, ein Gate zu versprechen, das nicht läuft.
+
 ### Bootstrap-aware Gates
 
 In der Frühphase eines Projekts ist eine harte Coverage-Schwelle Unsinn.

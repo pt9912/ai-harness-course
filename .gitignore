@@ -2,3 +2,9 @@
 .claude/
 .codex/
 .tmp/
+
+# d-check.mk ist tool-generiert (`d-check --print-mk`) und tool-/versionsspezifisch.
+# Die kanonische Kopie an der Kurs-Wurzel ist committet (das Kurs-Gate braucht sie
+# auf jedem Checkout); die Template-Kopie wird NICHT mitgeliefert — der Adopter
+# erzeugt sie beim Bootstrap (Modul 2). Kein committetes Duplikat, keine Drift.
+/lab/templates/d-check.mk

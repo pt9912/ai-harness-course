@@ -419,6 +419,18 @@ Selbstführungs-Praxis, kein einmaliges Audit —, mit drei Eigenschaften:
 Ein neuer Tag löst einen **Review** aus — Re-Vendoring ist eine bewusste
 Entscheidung mit eigenem Diff —, keinen stillen Auto-Bump.
 
+**Anmerkung zum Gate-Fragment (Schritt 2).** Das d-check-Doku-Gate wird nicht
+handgeschrieben: sein Makefile-Fragment `d-check.mk` erzeugst du beim Bootstrap
+einmal aus deiner gepinnten d-check (`d-check --print-mk > d-check.mk`) und
+bindest es per `-include d-check.mk` ein. Die ausgelieferte `Makefile` führt
+`DCHECK_DIGEST` als **Platzhalter** — den füllst du beim Bootstrap mit dem Digest
+deiner gepinnten d-check (leer gelassen nutzt den Tag aus `d-check.mk`, weniger
+reproduzierbar). Das Fragment ist **nicht** in der Baseline mitgeliefert
+(tool-/versionsspezifisch); bei jedem d-check-Bump neu erzeugen. So pflegt das
+Tool die Recipe-Form (`--network none`, Target-Set), nichts driftet von Hand —
+die advisory-Targets, die es mitbringt, sind *verfügbar, nicht als Gate behauptet*
+(Modul 13).
+
 ### Wie sehen T1 und T2 konkret aus?
 
 Schritt 3 ist die erste Stelle, an der Trigger entstehen — Lerner
