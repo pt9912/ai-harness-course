@@ -11,6 +11,30 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 28 — 2026-07-18 · Instanziierungs-Zeitpunkt der Templates explizit (Modul 2)
+
+### Hinzugefügt
+
+- **Anmerkung zum Instanziierungs-Zeitpunkt an Modul-2-Schritt 2** (Kurs +
+  Regelwerk-Split). Der Kurs sagte den Zeitpunkt der Skelett-Instanziierung
+  bisher nur *strukturell* (Bootstrap-Tabelle listet Gründungs-Dokumente;
+  „Bootstrap-Ende = bereit für ersten Slice"), nicht *explizit am
+  Instruktions-Punkt*. Diese Lücke verleitete einen Adopter (`ai-harness-init`)
+  dazu, alle Templates beim Bootstrap als `docs/…/*.template.md`-Blanks zu
+  bevorraten — reine Wartungskosten, später per dessen `MR-008` wieder entfernt.
+  Neue Anmerkung trennt jetzt explizit: **Gründungs-Dokumente** (je ein
+  Singleton, beim Bootstrap instanziiert und gefüllt: Spec-Straten,
+  `conventions`, `harness/README`, `AGENTS`, `roadmap`, Gründungs-ADR `0001`)
+  gegen **wiederkehrende Artefakte** (`slice`, `welle`, weitere ADRs, `carveout`,
+  `review-report` — pro Instanz aus der vendored Baseline kopiert, wenn der
+  Workflow sie erreicht; keine Blank-Kopie vorhalten). Die ADR-Doppelnatur
+  (`0001` beim Bootstrap, weitere wiederkehrend) ist explizit gemacht.
+- **Review-verifiziert (high effort).** Vor dem Commit fing ein Diff-Review
+  einen Faktenfehler (Repo-`README` fälschlich als Bootstrap-Gründung gelistet,
+  obwohl in keinem Bootstrap-Schritt) plus drei Präzisierungen (ADR-Bereich
+  `Modul 4–10` statt `5–10`; Skelette in Schritt 2 kopiert, in 3–8 gefüllt;
+  Regelwerk-Split operativ an den Kurs angeglichen).
+
 ## Welle 27 — 2026-07-18 · Baseline-Freshness-Audit prozeduralisiert (Modul 2)
 
 ### Hinzugefügt
