@@ -11,6 +11,31 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 27 — 2026-07-18 · Baseline-Freshness-Audit prozeduralisiert (Modul 2)
+
+### Hinzugefügt
+
+- **Freshness-Audit als Erweiterung der Modul-2-Baseline-Anmerkung.** Vendoring
+  friert per Konstruktion eine Kopie ein, die still von Upstream driftet, sobald
+  ein neues Kurs-Release erscheint. Der Kurs benannte die Gegenmaßnahme bisher
+  nur als Listen-Phrase („Drift-Audit gegen die Baseline", `AGENTS.template.md`)
+  und prozeduralisierte sie nirgends — Modul 16 leer dazu, Modul 2 nur das Warum
+  des Vendorings. Neuer Absatz in `modul-02-harness-bootstrap.md` (Regelwerk-Split
+  operativ mitgezogen) mit drei Eigenschaften: **beobachtbarer Auslöser** (keine
+  Kalenderpflicht), **Netz-Operation außerhalb der Gates** (offline-grün bleibt
+  unverletzt) und der nicht-offensichtliche Kern — die Release-**Liste** auf einen
+  neueren Tag prüfen, **nicht** nur den Hash des gepinnten Assets (der fängt nur
+  ein nachträglich verändertes Release, keinen neuen Tag). Ein neuer Tag löst
+  einen Review mit eigenem Diff aus, keinen stillen Auto-Bump. An die kurs-eigene
+  „pinnen **und** überwachen"-Doktrin (Modul 12 `image_hash`, Modul 14
+  „unsichtbarste Drift") und an LZ 5 (aktives Überwachen) gekoppelt.
+- **Anlass:** Adopter-Beobachtung, gegen `v3.1.0` auditiert. Ein Adopter
+  (`ai-harness-init`, `MR-007`) dokumentiert die Lücke selbst als „offene Lücke,
+  kein gelöstes Problem" — sein Sensor meldete „kein Drift" auf einem alten Pin,
+  während zwei Major-Releases erschienen. Kurs-seitig verifiziert: Modul 16 ohne
+  Baseline-Wartung, Modul 2 ohne Release-Erkennung. Der Kurs schreibt das
+  Ergebnis (Prozedur) vor, keine Repo-Mechanik (kein Tool-/Target-Name).
+
 ## Welle 26 — 2026-07-17 · Slice-Zustand einwertig (Lifecycle-Verzeichnis), Baseline-Bundle von innen self-beschreibend
 
 ### Geändert
