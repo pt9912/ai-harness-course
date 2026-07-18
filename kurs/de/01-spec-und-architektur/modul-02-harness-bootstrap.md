@@ -357,6 +357,21 @@ legt die *Quellen* an, die Inhalts-Phase erzeugt die *Folge-Bezüge*
 zwischen Dokumenten und ADRs. Die Tabellen-Trennung macht das
 kognitiv lesbar — die Phasen verschwimmen sonst.
 
+**Anmerkung zum Instanziierungs-Zeitpunkt (Schritt 2).** „Skelette kopieren
+und ausfüllen" meint beim Bootstrap **nur die Gründungs-Dokumente** — je genau
+eines pro Repo, hier gefüllt und behalten: `spec/lastenheft.md`,
+`spec/spezifikation.md`, `spec/architecture.md`, `harness/conventions.md`,
+`harness/README.md`, `AGENTS.md`, `docs/plan/planning/roadmap.md` und der
+Gründungs-ADR `0001` (Skelette in Schritt 2, gefüllt in 3–8). Die
+**wiederkehrenden Artefakte** — `slice`, `welle`, weitere ADRs (`NNNN-*`),
+`carveout`, `review-report` — werden **nicht** beim Bootstrap vorab kopiert,
+sondern **pro Instanz** aus der vendored Baseline
+(`.harness/baseline/<tag>/templates/…`), wenn der Workflow sie erreicht
+(Modul 4–10; Bootstrap-Ende = *bereit für ersten Slice*). Nur der Gründungs-ADR
+`0001` entsteht schon hier; jeder weitere ADR ist ein wiederkehrendes Vorkommen.
+Die vendored Baseline ist deren **einzige Referenz-Form** — **keine Blank-Kopie
+im Repo vorhalten** (das wäre eine zweite, driftende Quelle).
+
 **Anmerkung zur vendored Baseline (Schritt 2).** Regelwerk *und* Templates
 werden beim Bootstrap **committet vendored** (`.harness/baseline/<tag>/{regelwerk,templates}/`
 + `SHA256SUMS`, netzlos materialisiert), nicht pro Lauf extern gefetcht — es
