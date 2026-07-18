@@ -11,6 +11,27 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 30 — 2026-07-18 · Wellen zweistufig (flach → `done/`), Status-Feld retired
+
+### Geändert
+
+- **Welle-Zustand = Verzeichnis-Position, kein `Status`-Feld** — analog zum Slice
+  (Welle 26). Die aktive Welle liegt flach unter `docs/plan/planning/`; bei
+  Closure `git mv` der Plan-Datei nach `done/` (neben ihre `-results.md`). Zwei
+  Zustände (flach = aktiv → `done/` = geschlossen) statt eines driftbaren Felds;
+  die Roadmap (`Aktuelle`/`Nächste`/`Abgeschlossene Wellen`) bleibt die
+  Sequenzierungs-Autorität — **kein** Vier-Zustands-Verzeichnis, das die
+  Roadmap-Reihenfolge dupliziert. Löst zwei Probleme: abgeschlossene Wellen
+  müllten den flachen `planning/`-Ordner zu, und das `Status`-Feld war dieselbe
+  zweite, driftbare Wahrheit, die beim Slice retired wurde.
+- `welle.template`: `**Status:**`-Feld → `**Lifecycle:**`-Hinweis; zusätzlich die
+  **Slice-Status-Spalte** aus der §4-Tabelle entfernt (gleiche Drift-Klasse — der
+  Slice-Zustand ist sein Lifecycle-Verzeichnis, nicht eine Tabellen-Zelle).
+- `modul-06` (Kurs-Anker + Regelwerk-Split): Closure-Schritt 3 → „**Welle nach
+  `done/` schließen**" (Ergebnis-Notiz **und** `git mv` der Plan-Datei); die Prosa
+  verankert das Zwei-Zustands-Modell und die Roadmap als Reihenfolge-Autorität.
+  Fünf-Schritte-Prozedur unverändert (git mv in Schritt 3 integriert).
+
 ## Welle 29 — 2026-07-18 · d-check-Gate-Fragment tool-generiert (include-Modell) + `--network none`
 
 ### Geändert
