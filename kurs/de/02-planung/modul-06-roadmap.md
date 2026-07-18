@@ -225,12 +225,19 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    offene Carveout wird geprüft: aufgelöst, verlängert (mit Folge-Slice)
    oder als permanent akzeptiert. Eine Welle darf *mit* dokumentiertem
    Carveout schließen — aber nie mit einem stillen roten Gate.
-3. **Closure-Notiz `done/welle-NN-results.md` schreiben.** Sie hält fest,
-   *was gelernt wurde*: geliefert · was funktionierte · was anders lief ·
-   **Steering-Loop-Einträge** (geschärfte Regel / neuer Sensor / benannte
-   Spec-Lücke) · Folge-Slices · Verifikation (die Belege aus Schritt 1).
-   Ohne Lerneintrag ist die Welle nicht „fertig", sondern nur „weg"
+3. **Welle nach `done/` schließen.** Die Closure-Notiz
+   `done/welle-NN-results.md` hält fest, *was gelernt wurde*: geliefert · was
+   funktionierte · was anders lief · **Steering-Loop-Einträge** (geschärfte
+   Regel / neuer Sensor / benannte Spec-Lücke) · Folge-Slices · Verifikation
+   (die Belege aus Schritt 1). Ohne Lerneintrag ist die Welle nicht „fertig",
+   sondern nur „weg"
    ([Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md)).
+   **Zugleich per `git mv` die Welle-Plan-Datei von flach nach `done/`** — neben
+   ihre Ergebnis-Notiz. Der Zustand ist die Verzeichnis-Position, kein
+   `Status`-Feld (wie beim Slice, [Modul 5](modul-05-planning-harness.md)): die
+   aktive Welle liegt flach unter `docs/plan/planning/`, geschlossenes
+   Planungs-Material in `done/`, und die Roadmap bleibt die
+   Sequenzierungs-Autorität — so füllt sich der Ordner nicht mit Abgeschlossenem.
 4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
    Welle schloss, statt eines verstreuten Verschwindens.

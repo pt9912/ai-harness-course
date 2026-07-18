@@ -7,7 +7,10 @@
 > Kopiere nach `docs/plan/planning/<welle-id>.md` und ersetze
 > Platzhalter. Lösche diesen Block.
 
-**Status:** open | in-progress | done
+**Lifecycle:** Die aktive Welle liegt flach unter `docs/plan/planning/`; bei
+Closure wandert diese Datei per `git mv` nach `done/` (neben ihre
+`welle-<NN>-results.md`). Der Zustand ist die Verzeichnis-Position — kein
+Status-Feld. Ob eine flache Welle *aktuell* oder *geplant* ist, sagt die Roadmap.
 
 **Zielmeilenstein:** M<NN> oder "kein Meilenstein-Bezug".
 
@@ -48,10 +51,14 @@ Termin.
 
 ## 4. Slices in dieser Welle
 
-| Slice | Titel | Status | Bezug |
-|---|---|---|---|
-| slice-<NN-A> | <…> | <einer von: open, next, in-progress, done> | LH-FA-<NN> |
-| slice-<NN-B> | <…> | open | LH-FA-<NN> |
+<!-- Zustand jedes Slice = sein Lifecycle-Verzeichnis (open/next/in-progress/
+done), hier NICHT gespiegelt — eine Status-Spalte driftete gegen die
+Verzeichnisse (dieselbe zweite Wahrheit, die beim Slice retired wurde). -->
+
+| Slice | Titel | Bezug |
+|---|---|---|
+| slice-<NN-A> | <…> | LH-FA-<NN> |
+| slice-<NN-B> | <…> | LH-FA-<NN> |
 
 ## 5. Abhängigkeiten
 
