@@ -185,6 +185,25 @@ nach. Die Templates tragen dabei zwei Rollen: **vendored** als Referenz-Form
 (worauf das Regelwerk als „Ziel-Form" verweist — `../templates/…` löst netzlos
 lokal auf) und **kopiert-und-ausgefüllt** als deine eigenen Artefakte.
 
+**Freshness-Audit der vendored Baseline (Schritt 2).** Eine vendored Kopie
+driftet still von der Quelle weg, sobald ein neues Kurs-Release erscheint;
+Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
+überwachen", Modul 12/14). Der Freshness-Audit hat drei Eigenschaften:
+
+* **Beobachtbarer Auslöser, keine Kalenderpflicht** — die Frage „ist mein
+  `<tag>` noch das aktuelle Kurs-Release?" an ein Ereignis (z. B.
+  Konventions-Änderung mit Baseline-Audit) oder periodisch gebunden.
+* **Netz-Operation, außerhalb der Gates** — fragt den Upstream, bleibt daher
+  aus den netzlosen Gates heraus (die Integritätsprüfung der Arbeitskopie
+  prüft nie den Upstream); Wartung, kein Feedback-Gate.
+* **Release-*Liste* prüfen, nicht das Asset** — der Hash des gepinnten Assets
+  fängt nur ein nachträglich verändertes Release, **nicht einen neuen Tag**;
+  ein Sensor auf den gepinnten Tag meldet „kein Drift", während upstream ein
+  neuer Tag steht. Auf einen neueren Tag in der Release-Liste prüfen.
+
+Ein neuer Tag löst einen **Review** aus (Re-Vendoring mit eigenem Diff),
+keinen stillen Auto-Bump.
+
 **T1/T2 als Sync-Trigger konkret (Schritt 3).** Sobald
 `harness/conventions.md` existiert, müssen die auf sie verweisenden
 Dokumente einen Eintrag bekommen: ein Pointer in `harness/README.md`

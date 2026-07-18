@@ -372,6 +372,38 @@ nach. Die Templates tragen dabei zwei Rollen: **vendored** als Referenz-Form
 (worauf das Regelwerk als „Ziel-Form" verweist — `../templates/…` löst netzlos
 lokal auf) und **kopiert-und-ausgefüllt** als deine eigenen Artefakte.
 
+**Freshness-Audit — die Kehrseite des Vendorings (Schritt 2).** Eine
+committet vendored Kopie ist per Konstruktion eingefroren und driftet still
+von der kanonischen Quelle weg, sobald ein neues Kurs-Release erscheint. Das
+ist derselbe Mechanismus, den Modul 14 am floatenden Base-Image *die
+unsichtbarste Drift* nennt, nur invers gepinnt: Der Pin ändert nichts, *außer*
+dass die Welt um ihn herum weiterzieht. Für Docker verlangt der Kurs „pinnen
+**und** überwachen" (`image_hash` im Replay-Manifest, Modul 12) — dieselbe
+Doktrin gilt für die Baseline, sonst ist der Pin nur die halbe Maßnahme. Der
+Gegenzug ist ein **Freshness-Audit**, den du *aktiv überwachst* — eine
+Selbstführungs-Praxis, kein einmaliges Audit —, mit drei Eigenschaften:
+
+* **Beobachtbarer Auslöser, keine Kalenderpflicht.** Die Frage *„ist mein
+  `<tag>` noch das aktuelle Kurs-Release?"* wird an ein Ereignis gebunden —
+  etwa jede Konventions-Änderung, bei der du ohnehin gegen die Baseline
+  auditierst — oder periodisch gestellt, wie die beobachtbaren
+  Closure-Kriterien einer Welle, nicht als Datum.
+* **Netz-Operation, außerhalb der Gates.** Der Audit fragt den Upstream, ist
+  also eine Netz-Operation und gehört deshalb **nicht** in die Gates: Die
+  bleiben netzlos und offline-grün — die netzlose Integritätsprüfung deiner
+  Arbeitskopie prüft nie den Upstream. Es ist Wartung, kein Feedback-Gate,
+  genau wie ein Registry-Tag-Check gegen ein gepinntes Image.
+* **Die Release-*Liste* prüfen, nicht das Asset.** Der nicht-offensichtliche
+  Punkt: Die naheliegende erste Implementierung — den Hash des gepinnten
+  Assets vergleichen — fängt nur ein *nachträglich verändertes* Release,
+  **nicht einen neuen Tag**. Ein Sensor auf den gepinnten Tag meldet weiter
+  „kein Drift", während upstream längst ein neuer Tag steht. Prüfe, ob die
+  Release-*Liste* einen neueren Tag trägt, nicht nur das Asset des Tags, auf
+  dem du sitzt.
+
+Ein neuer Tag löst einen **Review** aus — Re-Vendoring ist eine bewusste
+Entscheidung mit eigenem Diff —, keinen stillen Auto-Bump.
+
 ### Wie sehen T1 und T2 konkret aus?
 
 Schritt 3 ist die erste Stelle, an der Trigger entstehen — Lerner
