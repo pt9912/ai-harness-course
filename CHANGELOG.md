@@ -11,6 +11,30 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 32 — 2026-07-19 · regelwerk-drift-Sensor retired; d-check sources im Freshness-Audit eingeordnet
+
+### Entfernt
+
+- **`check_regelwerk_drift.py` + `make regelwerk-drift`** aus `lab/example`. Der
+  Sensor war ein Asset-/Content-Hash-Vergleich — genau die Methode, die Modul 2
+  §Freshness-Audit als unzureichend markiert („der Hash des gepinnten Assets fängt
+  nur ein nachträglich verändertes Release, nicht einen neuen Tag") — und seit dem
+  Split-Verzeichnis (Welle 24) ohnehin ein No-op. `conventions.md` §Baseline von
+  „ausstehend/übersprungen" auf einen ehrlichen Verweis umgeschrieben: das
+  In-Repo-Beispiel ist selbst am Kurs-Stand; die Upstream-Freshness-Frage
+  (Release-Listen-Prüfung) stellt sich erst im adoptierenden Fremd-Repo.
+
+### Geändert
+
+- **Modul 2 §Freshness-Audit: d-check `sources` (v0.51.0) eingeordnet.** Ein
+  präziser Satz: `sources` automatisiert die *Asset-/Integritäts*-Hälfte
+  (`source-pin`/`source-drift`), ersetzt aber die Release-Listen-Prüfung nicht —
+  klärt die Verwechslung „sources = Freshness-Audit". Regelwerk-Split `modul-02`
+  quelltreu mitgezogen.
+- **d-check-Pin v0.51.0 → v0.51.1** (Fragment regeneriert). PATCH: dpin-Befund
+  führt jetzt den vollen `sha256` (pins-Ergonomie); verhaltensneutral, `make check`
+  unverändert grün. Kurs-intern.
+
 ## Welle 31 — 2026-07-19 · lab/templates im Referenz-Gate (scoped ignore-refs) + d-check v0.51.0
 
 ### Geändert
