@@ -11,6 +11,32 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 31 — 2026-07-19 · lab/templates im Referenz-Gate (scoped ignore-refs) + d-check v0.51.0
+
+### Geändert
+
+- **`lab/templates` steht jetzt im Referenz-Gate.** Das Verzeichnis mischt
+  symbolische Ziel-Repo-Pfade (lösen erst nach dem Ausfüllen auf) mit prüfbaren
+  Verweisen — 39 Kurs-Links (inkl. Anker) und template-interne Navigation. Bisher
+  opferte `scan.ignore` die zweite Klasse komplett: die beim Release auf
+  `blob/<tag>/` eingefrorenen Kurs-Verweise waren ungeprüft (eine umbenannte
+  Kurs-Überschrift verschickte unbemerkt einen toten Anker). Ersetzt durch scoped
+  `ignore-refs` (top-level `in`/`refs`/`keep`, d-check v0.49.0+): die 42
+  symbolischen Refs (37 links, 5 codepaths) bleiben ignoriert, der Rest wird scharf
+  geprüft (`ignoriert ⇔ refs ∧ ¬keep`, `keep` reihenfolge-unabhängig). Damit ist
+  `lab/templates` dauerhaft Teil von `make check`.
+- **d-check-Pin v0.47.0 → v0.51.0** (Fragment via `--print-mk` regeneriert). Liefert
+  das `ignore-refs`-`in`/`keep`-Feature (v0.49.0, Grundlage der Adoption) sowie die
+  neuen opt-in-Module `citations`/`codepaths.check-lines` (v0.50.0) und `sources`
+  (v0.51.0, Content-Pin externer Quellen gegen Upstream-Drift) — verfügbar, aber
+  nicht aktiviert (`make check` verhaltensneutral grün). Kurs-intern: Fragment + Pin
+  reisen auf `main` mit, sind nicht im Bundle.
+- **Regelwerk-Anzeigetext auf `templates/`-Präfix vereinheitlicht.** Der sichtbare
+  Linktext der Ziel-Form-Verweise zeigte bare Spiegel-Pfade
+  (`docs/plan/planning/roadmap.template.md`) — das las sich wie eine Vorlage an
+  einem `docs/`-Pfad, wo weder Kurs noch Adopter eine hält. Anzeigetext auf
+  `templates/…` präfixiert (href unverändert), 10 Stellen; bundle-korrekt.
+
 ## Welle 30 — 2026-07-18 · Wellen zweistufig (flach → `done/`), Status-Feld retired
 
 ### Geändert
