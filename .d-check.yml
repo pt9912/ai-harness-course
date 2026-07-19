@@ -2,14 +2,35 @@
 # die Link-/Anker-/Pfad-Prüfungen von tools/docs-check.js
 # (Pilot-Migration 2026-06-12, JS-Familie). docs-check.js bleibt als
 # Rest-Sensor für die semantischen Modul-Nummern-Checks (Prüfung A/B).
-# lab/templates ist by-design symbolisch (Pfade gelten im Ziel-Repo).
 scan:
   roots: ["."]
   # CHANGELOG = historisches Register: Verweise sind zeitpunkt-korrekt (nennen
   # Dateien, wie sie zur jeweiligen Welle existierten, z. B. retired
   # agents-regelwerk.md) — nicht gegen den aktuellen Stand prüfen.
-  ignore: ["lab/templates/**", "lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md"]
+  ignore: ["lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md"]
 modules: [links, anchors, codepaths]
+
+# lab/templates mischt ZWEI Referenzklassen in denselben Dateien:
+#   (a) SYMBOLISCH — Ziel-Repo-Pfade, die erst nach dem Ausfüllen existieren
+#       (../spec/lastenheft.md, ../AGENTS.md, harness/conventions.md,
+#       CO-<NNN>-<titel>.md, tools/check_*.py …). Lösen im Kurs-Repo NICHT auf.
+#   (b) PRÜFBAR — Verweise in den Kurs (../…/kurs/…, mit Ankern) und
+#       template-interne Navigation (*.template.md, README.md, adr/, planning/).
+# Früher stand das ganze Verzeichnis in scan.ignore — das opferte Klasse (b).
+# Die Kurs-Verweise werden beim Release auf blob/<tag>/ gepinnt und eingefroren;
+# eine umbenannte Kurs-Überschrift verschickt sonst unbemerkt einen toten Anker.
+# scoped ignore-refs (in:/refs:/keep:) ignoriert nur (a), prüft (b) scharf.
+# ignoriert  <=>  refs ∧ ¬keep  (keep gewinnt, reihenfolge-unabhängig).
+ignore-refs:
+  - in:   "lab/templates/**"
+    refs: ["lab/templates/**", "tools/check_*.py"]
+    keep: ["lab/templates/**/*.template.md",
+           "lab/templates/README.md",
+           "lab/templates/docs/plan/adr",
+           "lab/templates/docs/plan/planning",
+           "lab/templates/.d-check.yml",
+           "lab/templates/Makefile"]
+
 codepaths:
   roots: [lab, kurs, tools]
   # Tombstone: agents-regelwerk.md ist retired (Welle 24, Split kanonisch);
