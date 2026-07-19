@@ -21,7 +21,7 @@ Der Default-Ort für:
 - **Konvention:** AI-Harness-Kurs (`/kurs/de/grundlagen/konventionen.md`)
 - **Stand:** Template-Set 2026-06
 - **Datum der Adoption:** 2026-06-01
-- **Baseline-Pin (Regelwerk + Templates):** *ausstehend* — die adoptierte Baseline ist das Kurs-Regelwerk als Split *plus* die Templates, self-contained im `lab-regelwerk.zip` (`regelwerk/` + `templates/` parallel; `agents-regelwerk.md` ist retired). Die inhaltsbasierte Upstream-Drift-Prüfung (`make regelwerk-drift`) migriert mit dem vendored-Muster auf einen Verzeichnis-Hash (`SHA256SUMS`) und ist bis dahin übersprungen.
+- **Baseline-Pin (Regelwerk + Templates):** die adoptierte Baseline ist das Kurs-Regelwerk als Split *plus* die Templates, self-contained im `lab-regelwerk.zip` (`regelwerk/` + `templates/` parallel; `agents-regelwerk.md` ist retired). Adoptierter Stand: die Stand-Zeile von [`regelwerk/README.md`](../../regelwerk/README.md) (Wellen-Register: `CHANGELOG.md`). Dieses Beispiel liegt *im* Kurs-Repo und ist damit selbst am aktuellen Stand — die Upstream-Freshness-Frage (*„ist mein `<tag>` noch das aktuelle Kurs-Release?"*) stellt sich erst im adoptierenden Fremd-Repo: eine Release-**Listen**-Prüfung (ein neuer Tag löst einen Review), Netz-Operation außerhalb der netzlosen Gates — nicht der Asset-Hash-Vergleich, der einen neuen Tag gar nicht fängt. Siehe [Kurs Modul 2](../../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md) §Freshness-Audit.
 
 ## Adoptierte Konventions-Quellen
 
