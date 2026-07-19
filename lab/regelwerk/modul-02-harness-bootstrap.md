@@ -212,7 +212,10 @@ Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
 * **Release-*Liste* prüfen, nicht das Asset** — der Hash des gepinnten Assets
   fängt nur ein nachträglich verändertes Release, **nicht einen neuen Tag**;
   ein Sensor auf den gepinnten Tag meldet „kein Drift", während upstream ein
-  neuer Tag steht. Auf einen neueren Tag in der Release-Liste prüfen.
+  neuer Tag steht. Auf einen neueren Tag in der Release-Liste prüfen. d-check
+  `sources` automatisiert die Asset-Prüfung (`source-pin` auf den `sha256` einer
+  http(s)-Quelle, `source-drift` bei Inhaltsabweichung); deckt die
+  *Integritäts*-Hälfte ab, ersetzt die Release-Listen-Prüfung nicht.
 
 Ein neuer Tag löst einen **Review** aus (Re-Vendoring mit eigenem Diff),
 keinen stillen Auto-Bump.

@@ -414,7 +414,11 @@ Selbstführungs-Praxis, kein einmaliges Audit —, mit drei Eigenschaften:
   **nicht einen neuen Tag**. Ein Sensor auf den gepinnten Tag meldet weiter
   „kein Drift", während upstream längst ein neuer Tag steht. Prüfe, ob die
   Release-*Liste* einen neueren Tag trägt, nicht nur das Asset des Tags, auf
-  dem du sitzt.
+  dem du sitzt. Ein Werkzeug wie d-check `sources` automatisiert genau die
+  Asset-Prüfung (`source-pin` auf den `sha256` einer http(s)-Quelle,
+  `source-drift` bei Inhaltsabweichung) — es deckt damit die
+  *Integritäts*-Hälfte ab, ersetzt die Release-Listen-Prüfung aber nicht: einen
+  neuen Tag mit unverändertem Asset fängt es nicht.
 
 Ein neuer Tag löst einen **Review** aus — Re-Vendoring ist eine bewusste
 Entscheidung mit eigenem Diff —, keinen stillen Auto-Bump.
