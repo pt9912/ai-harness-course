@@ -11,6 +11,26 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 33 — 2026-07-23 · README-Template: `done/` als Heimat abgeschlossener Nicht-Slice-Records ehrlich benennen
+
+### Geändert
+
+- **`planning/README.template.md`: „slice-reserviert"-Überbehauptung korrigiert.**
+  Der Block „Slices vs. Wellen" behauptete pauschal „die Lifecycle-Verzeichnisse
+  sind **slice-reserviert**" und legte zugleich `welle-<id>-results.md` (ein
+  Nicht-Slice-Record) in `done/` — ein Widerspruch im selben Absatz. Jetzt
+  getrennt: der aktive Durchlauf `open/` → `next/` → `in-progress/` nimmt
+  ausschließlich Slices auf; `done/` archiviert zusätzlich abgeschlossene
+  **Nicht-Slice-Records** (Welle-Closure `done/<welle-id>-results.md`; aufgelöste
+  Carveouts, Modul 7). **Template-Drift-Korrektur:** „slice-reserviert" stand nur
+  im Template, die Quelle (Modul 6 §Welle-Closure: aktive Welle flach, geschlossene
+  → `done/` per `git mv`) war korrekt — Fix-Richtung Template→Quelle, **kein**
+  `kurs/`-Eingriff, keine Lehre berührt. Auslöser: m-trace-Planning-Layout-Audit,
+  bei dem Nicht-Slice-Register mangels sanktioniertem flachem Ort in ein
+  Lifecycle-Verzeichnis gezwängt wurden. Die weitergehende Frage (eigener Kanal
+  für Discovery-/Kandidaten-Register) ist bewusst **vertagt**, bis ein zweites
+  Konsument-Repo denselben Druck unabhängig zeigt.
+
 ## Welle 32 — 2026-07-19 · regelwerk-drift-Sensor retired; d-check sources im Freshness-Audit eingeordnet
 
 ### Entfernt

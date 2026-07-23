@@ -26,9 +26,12 @@ Rule „git mv + Inhaltsänderung = zwei Commits" in
 - Eine **Welle** (Bündel von Slices) wird **in der Roadmap** geführt
   ([`in-progress/roadmap.md`](in-progress/roadmap.md): Meilensteine, Wellen,
   aktive Welle); ihr Status lebt im `Status:`-Feld, nicht im Verzeichnis. Ein
-  optionaler Welle-Plan liegt **flach** in `planning/` (`<welle-id>.md`) — die
-  Lifecycle-Verzeichnisse sind **slice-reserviert**. Welle-Closure: Lerneintrag
-  in `done/<welle-id>-results.md`.
+  optionaler Welle-Plan liegt **flach** in `planning/` (`<welle-id>.md`), nicht
+  in einem Lifecycle-Verzeichnis. Der aktive Durchlauf `open/` → `next/` →
+  `in-progress/` nimmt ausschließlich **Slices** auf; `done/` archiviert
+  **zusätzlich** abgeschlossene **Nicht-Slice-Records** — Welle-Closure
+  `done/<welle-id>-results.md`, und aufgelöste Carveouts wandern ebenfalls
+  dorthin ([Modul 7](../../../../../kurs/de/02-planung/modul-07-carveouts.md)).
 
 ## Aktueller Stand
 
