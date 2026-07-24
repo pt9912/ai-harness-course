@@ -11,6 +11,31 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 34 — 2026-07-24 · Change-Request-Landing-Disziplin: Fußabdruck statt Konstrukt
+
+### Geändert
+
+- **`konventionen.md` §Spec-Stratifizierung: „Change Request" als externer
+  Prozess eingeordnet, nicht als Konstrukt.** Der Kurs benannte CR bisher nur
+  als Änderungs-Prozess-Label des Vertrags-Stratums, ohne zu sagen, was er
+  *ist* und was er im Repo hinterlässt — jedes adoptierende Repo hätte das
+  anders gelöst (eigenes CR-Template? `spec/change-requests/`? Version-Bump
+  ja/nein?). Ein Absatz nach der Hard Rule stellt klar: CR ist **bewusst kein
+  Harness-Konstrukt** (kein `CR-*`-ID-Schema, keine Datei, kein Gate), sondern
+  der externe Vorgang der Vertragsänderung mit dem Auftraggeber. In-Repo-
+  Fußabdruck eines *angenommenen* CR = Version-Bump des Lastenhefts +
+  Historie-Zeile mit CR-Verweis + geänderte `LH-*`/`HSM-*`;
+  abgelehnte/schwebende CRs leben außerhalb. Die Hard Rule „ADR darf `LH-*` nie
+  schärfen" wird explizit auf Slice ausgedehnt (über den SDP-Stabilitäts-Rang
+  Vertrag › ADR › Slice bereits implizit). Verworfen: ein eigenes CR-Konstrukt
+  (wäre ein viertes Änderungsmuster neben MR/ADR/supersede und bräche mit „ADR
+  schärft das Lastenheft nicht") — die gewählte Option „Landing-Disziplin
+  schärfen" ehrt Quelle-ist-Anker. Regelwerk-Split `grundlagen-konventionen`
+  wortgleich mitgezogen; `lab/templates/spec/lastenheft.template.md` Historie-
+  Kommentar schärft den Fußabdruck. `make check` grün (docs 0/0, alignment
+  0 WARN). Auslöser: Adopter-Frage „brauchen wir ein CR-Template, sonst macht
+  es jedes Zielprojekt anders?".
+
 ## Welle 33 — 2026-07-23 · README-Template: `done/` als Heimat abgeschlossener Nicht-Slice-Records ehrlich benennen
 
 ### Geändert

@@ -1,6 +1,6 @@
 # Regelwerk — der Kurs als Betriebsregelwerk, nach Modulen
 
-**Stand:** Kurs-Welle 33 · 2026-07-23.
+**Stand:** Kurs-Welle 34 · 2026-07-24.
 
 Die 17 Module (0–16) **und die drei Grundlagen-Abschnitte** (Konventionen,
 Klassifikation, Durchsetzungsschicht) des Kurses als **Betriebsregelwerk für

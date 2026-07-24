@@ -156,6 +156,18 @@ Drei Schichten, drei Änderungs-Prozesse. Die kritische Hard Rule
 schärfen.** Diese eine Regel kapselt die gesamte Trennung von
 "wir liefern" und "wir versprechen".
 
+„Change Request" ist **bewusst kein Harness-Konstrukt** — kein
+`CR-*`-ID-Schema, keine eigene Datei, kein Gate — sondern der *externe*
+Vorgang, in dem eine Vertragsänderung mit dem Auftraggeber vereinbart
+wird. Im Repo hinterlässt ein *angenommener* Change Request nur einen
+**Fußabdruck**: ein Version-Bump des Lastenhefts, eine Zeile in dessen
+`## Historie` mit Verweis auf den externen CR (Ticket, Vertragsanhang),
+und die geänderten `LH-*`/`HSM-*` selbst. Abgelehnte oder schwebende
+CRs leben außerhalb des Repos. Weil nur dieser externe Prozess das
+Lastenheft ändern darf, gilt die Hard Rule für *jede* interne Quelle:
+**weder ADR noch Slice dürfen `LH-*` je ändern** — sie referenzieren
+nur.
+
 #### ID-Schema als Klammer
 
 Ein konsistentes Präfix (`LH-*`, `HSM-*`, `GG-*`) verbindet:

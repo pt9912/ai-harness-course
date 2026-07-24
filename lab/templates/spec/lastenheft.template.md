@@ -113,6 +113,12 @@ Ohne diesen Abschnitt baut der Agent gerne Plausibles.
 
 ## 7. Historie
 
+<!-- Jede Änderung an angenommenen Anforderungen ist eine Vertragsänderung:
+     Sie entsteht NUR aus einem externen Change Request, nie aus einem ADR
+     oder Slice. Fußabdruck pro angenommenem CR: Version-Bump oben + eine
+     Zeile hier, mit dem externen CR (Ticket/Vertragsanhang) in "Verweis".
+     Hintergrund: Kurs grundlagen/konventionen.md §Spec-Stratifizierung. -->
+
 | Version | Datum | Änderung | Verweis |
 |---|---|---|---|
 | 0.1.0 | YYYY-MM-DD | Initiale Fassung | — |
