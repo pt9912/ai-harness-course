@@ -24,12 +24,13 @@
 
 ## Steering-Loop-Einträge
 
-Jeder Eintrag nennt den **Zielort**; das Ziel trägt den Herkunfts-Anker
-`seit welle-1` (Paarung, wird beim Carveout-Audit mitgeprüft).
+Eine **geschärfte Regel** nennt ihren **Zielort**, und das Ziel trägt den
+Herkunfts-Anker `seit welle-1` — die Paarung wird beim Carveout-Audit
+mitgeprüft. Eine **benannte Spec-Lücke** trägt keinen Anker: sie landet in
+einer Lastenheft-Version und hat damit bereits eine `LH-*`-ID.
 
-- **Spec-Template** erweitert um Pflicht-Sektion "Boundary" je Akzeptanzkriterium — liegt in `spec/lastenheft.md` §3. Auslöser: slice-005, slice-007, slice-011 (3×).
-- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — liegt in `AGENTS.md` §3.4. Auslöser: slice-006, slice-009, slice-012 (3×).
-- **Reviewer-Skill** geschärft auf "Spec-Vollständigkeit" (Boundary + Negative) — liegt in `.harness/skills/reviewer.md` §HIGH. Auslöser: slice-004, slice-007, slice-010 (3×).
+- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — liegt in [`AGENTS.md`](../../../../AGENTS.md) §2.7 (trägt dort `seit welle-1`). Auslöser: slice-006, slice-009, slice-012 (3×).
+- **Spec-Lücke** benannt: Top-K-Boundary (`k > 100`) war nicht behandelt — aufgelöst über Lastenheft v0.2.0 (`LH-FA-02`), kein Herkunfts-Anker nötig.
 
 ## Beobachtungen unter Schwelle
 

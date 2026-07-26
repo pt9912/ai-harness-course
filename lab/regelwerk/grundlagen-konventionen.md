@@ -749,7 +749,10 @@ ereignis-getriggert, kein periodischer Sweep): Eine Regel mit
 Herkunfts-Anker wird **nicht entfernt oder gelockert**, ohne dass die
 Herkunft konsultiert und das Ergebnis dokumentiert wurde — *„Regel seit
 `welle-3` — ist die Beobachtung seither wieder aufgetreten?"*. Dieselbe
-Bauart wie „Gates dürfen nicht ohne ADR gelockert werden". Er ist der
+Bauart wie „Gates dürfen nicht ohne ADR gelockert werden", aber **kumulativ,
+nicht ersetzend**: ist das verankerte Artefakt selbst ein Gate, gilt die
+ADR-Pflicht unverändert weiter — der Retirement-Check beantwortet eine andere
+Frage („ist der Grund entfallen?", nicht „darf ich?"). Er ist der
 **Konsument** des Ankers; ohne ihn wäre der Anker eine zweite
 write-only-Ablage.
 

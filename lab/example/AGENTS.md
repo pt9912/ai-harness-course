@@ -74,11 +74,14 @@ Korrekturen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 
 Jede Schwellen-Senkung ist ein ADR plus Carveout, kein PR-Kommentar.
 
-### 2.7 Tie-Break in sortierenden Operationen ist explizit
+### 2.7 Tie-Break in sortierenden Operationen ist explizit   (seit welle-1)
 
-Eingeführt durch slice-009 (siehe Closure-Notiz). Jede `sort`-Operation
-muss bei gleichem Sortier-Schlüssel einen deterministischen Tie-Break
-benennen.
+Jede `sort`-Operation muss bei gleichem Sortier-Schlüssel einen
+deterministischen Tie-Break benennen. Der Herkunfts-Anker `seit welle-1`
+zeigt auf [`docs/plan/planning/done/welle-1-results.md`](docs/plan/planning/done/welle-1-results.md)
+§Steering-Loop-Einträge — dort stehen die drei auslösenden Slices. Ohne
+diesen Rückweg wäre beim nächsten Aufräumen nicht mehr erkennbar, welche
+Beobachtung die Regel erzwungen hat.
 
 ### 2.8 Welle-Self-Close-Commit-Konvention
 

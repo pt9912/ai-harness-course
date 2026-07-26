@@ -779,9 +779,13 @@ auftritt:
 > ohne dass die Herkunft konsultiert und das Ergebnis dokumentiert wurde:
 > *Regel seit `welle-3` — ist die Beobachtung seither wieder aufgetreten?*
 
-Dieselbe Bauart wie „Gates dürfen nicht ohne ADR gelockert werden", nur
-auf Steering-Loop-Regeln statt auf Schwellen. Er ist der **Konsument** des
-Ankers: ohne ihn wäre der Anker eine zweite write-only-Ablage — genau der
+Dieselbe Bauart wie „Gates dürfen nicht ohne ADR gelockert werden" —
+aber **kumulativ, nicht ersetzend**: Ist das verankerte Artefakt selbst ein
+Gate (`noqa-gate` im Beispiel oben ist beides zugleich), gilt die ADR-Pflicht
+aus [Modul 9](../03-agenten/modul-09-implementierung.md#hard-rules-repo-spezifisch)
+unverändert weiter; der Retirement-Check kommt hinzu und beantwortet eine
+*andere* Frage — nicht „darf ich?", sondern „ist der Grund entfallen?". Er ist
+der **Konsument** des Ankers: ohne ihn wäre der Anker eine zweite write-only-Ablage — genau der
 Fehler, den die Sektion *Beobachtungen unter Schwelle*
 ([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur))
 behebt.

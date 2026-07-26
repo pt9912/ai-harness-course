@@ -43,10 +43,6 @@ Kategorisierung ist eine Entscheidungsvorlage.
 
 ### Ziel-Form: Reviewer-Skill
 
-Ein HIGH-Eintrag, der aus dem Steering Loop kam, trägt den
-Herkunfts-Anker `(seit welle-<NN>)`
-([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
-
 Ein Reviewer-Agent ohne Skill-Datei driftet zwischen Sessions (gleiche
 Eingabe → andere Findings/Kategorien). Die Skill-Datei liegt in
 `.harness/skills/reviewer.md` und ist das repo-spezifische „worauf
@@ -74,7 +70,9 @@ achtest du"; Vorlage
 - **Pflege (Steering-Loop):** bei dreimaligem gleichem Finding
   Klassifikation schärfen / Folge-ADR bzw. `AGENTS.md`-Update / Gate
   (Modul 13). Die Skill-Datei wird **versioniert, nicht überschrieben**
-  (ADR-Hard-Rule, Modul 4).
+  (ADR-Hard-Rule, Modul 4). Ein so entstandener HIGH-Eintrag trägt den
+  Herkunfts-Anker `(seit welle-<NN>)`
+  ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
 
 Vergleichbares Skill-Pattern für *Verifier* und *Validator* in Modul 11
 bzw. [Modul 8 §"Konfliktfall"](modul-08-agentenrollen.md).
