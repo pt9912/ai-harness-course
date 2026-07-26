@@ -43,7 +43,7 @@ stateDiagram-v2
     [*] --> open: Slice angelegt
     open --> next: in Welle priorisiert
     next --> in_progress: Implementer beginnt
-    in_progress --> done: DoD erfüllt + Lerneintrag
+    in_progress --> done: DoD + Lerneintrag + Risiko-Ausgänge
     in_progress --> next: zu groß — zurück zur Zerlegung
     in_progress --> open: blockiert (Carveout?)
     done --> [*]
@@ -52,7 +52,9 @@ stateDiagram-v2
 Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
 Größen-Erkenntnis) und `in_progress → open` (Blocker — meist mit
 Carveout, siehe [Modul 7](modul-07-carveouts.md)). Der einzige Übergang
-nach `done` verlangt *Lerneintrag*, nicht nur "Tests grün".
+nach `done` verlangt *Lerneintrag* **und einen Ausgang für jedes offene
+Risiko** ([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)),
+nicht nur "Tests grün".
 
 ### Offene Risiken werden bei Closure aufgelöst
 
@@ -323,7 +325,7 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Vier Lifecycle-Verzeichnisse in Reihenfolge? | zwei oder drei genannt | `open/` → `next/` → `in-progress/` → `done/`. Plus Rückführungen: `in-progress/ → next/` (zu groß), `in-progress/ → open/` (Blocker). | + Hinweis: WIP-Limit pro Implementer auf 1 — wer mehrere Slices gleichzeitig in `in-progress/` hat, hat keine Lifecycle, sondern ein Buffet. |
-| Trigger je Lifecycle-Übergang benannt? | nur ein oder zwei Übergänge, Rest "wenn jemand anfängt". | Alle fünf benannt: `open→next` (priorisiert/eingeplant) · `next→in-progress` (Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei) · `in-progress→done` (Closure-Kriterien erfüllt) · `in-progress→next` (Slice zu groß, zurück zum Schneiden) · `in-progress→open` (Blocker, Priorität offen). | + Pointe: am leichtesten übersehen werden die *Rückführungen* — `in-progress→next` und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört sichtbar zurück, nicht still weitergeschoben. WIP-Limit pro Implementer = 1 ist eine harte Größe, kein Vorschlag. |
+| Trigger je Lifecycle-Übergang benannt? | nur ein oder zwei Übergänge, Rest "wenn jemand anfängt". | Alle fünf benannt: `open→next` (priorisiert/eingeplant) · `next→in-progress` (Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei) · `in-progress→done` (Closure-Kriterien erfüllt, Lerneintrag geschrieben, jedes Risiko mit Ausgang) · `in-progress→next` (Slice zu groß, zurück zum Schneiden) · `in-progress→open` (Blocker, Priorität offen). | + Pointe: am leichtesten übersehen werden die *Rückführungen* — `in-progress→next` und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört sichtbar zurück, nicht still weitergeschoben. WIP-Limit pro Implementer = 1 ist eine harte Größe, kein Vorschlag. |
 | Slice in `done/` bei rotem Gate — wann? | "Gar nicht." | Nur mit dokumentiertem Carveout (Modul 7), der den roten Gate-Status auf Trigger schaltet. | + Unterscheidung Carveout (Ausnahme, mit Folge-Slice) vs. bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). Die volle Werkzeug-Triade inkl. *BF-Sub-Area-Markierung* (Sub-Area-Kontext, kein Closure-Werkzeug) wird in [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren) disambiguiert. |
 | Closure-Kriterien + Lerneintrag formuliert? | "Tests grün, fertig." — kein beobachtbares Kriterium, kein Lerneintrag. | Zwei beobachtbare Closure-Kriterien (z. B. Replay grün, DoD-Punkte als Test verlinkt) *und* ein Lerneintrag in einer der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke). | + Pointe: der Lerneintrag schließt den Steering Loop — ohne ihn bleibt das Versagensmuster unsichtbar und wiederholt sich. Exzellent benennt, *welche* künftige Wiederholung der Eintrag verhindert (Vorhersage), nicht nur, was passiert ist. |
 | `SL-031` (5-Punkte-DoD) bewerten und schneiden? | "Zu groß, irgendwie aufteilen." — kein Kriterien-Bezug, kein benannter Schnitt-Typ. | Gegen beide Größen-Kriterien begründet zu groß (>3 DoD-Punkte, nicht in einem Lauf abschließbar/einer Sitzung prüfbar) + konkreter Schnitt in einzeln lieferbare Slices mit benanntem Schnitt-Typ (Lieferwert: z. B. „Warenkorb→Zahlung→Bestätigung“ je eigenständig). | + Begründung, *warum* Lieferwert statt Schichten: jeder Schnitt-Slice liefert allein Wert und wartet nicht auf den nächsten; Gegenbeispiel, wann ein Schichtschnitt Zombie-Slices erzeugt (Lager-Abbuchung ohne Checkout liefert nichts Prüfbares). |

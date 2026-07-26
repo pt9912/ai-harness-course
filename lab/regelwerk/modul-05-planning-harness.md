@@ -15,7 +15,7 @@ stateDiagram-v2
     [*] --> open: Slice angelegt
     open --> next: in Welle priorisiert
     next --> in_progress: Implementer beginnt
-    in_progress --> done: DoD erfüllt + Lerneintrag
+    in_progress --> done: DoD + Lerneintrag + Risiko-Ausgänge
     in_progress --> next: zu groß — zurück zur Zerlegung
     in_progress --> open: blockiert (Carveout?)
     done --> [*]
@@ -24,7 +24,8 @@ stateDiagram-v2
 Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
 Größen-Erkenntnis) und `in_progress → open` (Blocker — meist mit
 Carveout, siehe [Modul 7](modul-07-carveouts.md)). Der einzige Übergang
-nach `done` verlangt *Lerneintrag*, nicht nur "Tests grün".
+nach `done` verlangt *Lerneintrag* **und einen Ausgang für jedes offene
+Risiko**, nicht nur "Tests grün".
 
 ### Trigger je Lifecycle-Übergang und WIP-Limit (Modul 5)
 
@@ -32,7 +33,8 @@ Alle fünf Übergänge mit Triggerbedingung:
 
 - `open→next` — priorisiert/eingeplant.
 - `next→in-progress` — Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei.
-- `in-progress→done` — Closure-Kriterien erfüllt.
+- `in-progress→done` — Closure-Kriterien erfüllt, Lerneintrag geschrieben,
+  jedes Risiko aus dem Slice-Plan mit Ausgang.
 - `in-progress→next` — Slice zu groß, zurück zum Schneiden.
 - `in-progress→open` — Blocker, Priorität offen.
 

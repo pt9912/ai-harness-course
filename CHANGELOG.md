@@ -48,6 +48,15 @@ wurden. Ergebnis: eine ist harmlos, eine war der nächste write-only-Fall.
   konsumiert; die Liste zeigt nur darauf. Die Klasse existierte im Repo bereits
   (ADR-Index, Carveout-Index sind so gelabelt), nur die Kennzeichnung fehlte —
   ohne sie schlägt der Graph-Test hier falschen Alarm.
+- **Die Zustandsmaschine nachgezogen.** Der neue Ausgangs-Zwang sitzt am
+  Übergang `in-progress → done` — und **fünf** Beschreibungen dieses Übergangs
+  sagten weiter nur „DoD erfüllt + Lerneintrag": das Mermaid-Diagramm in Modul 5,
+  die Prosa darunter, die Selbstcheck-Rubrik, beide Stellen im Regelwerk-Split
+  und die DoD-Checkliste in `slice.template.md`. Das ist **Entgleisung #2 aus
+  Worked Example B** (*„der Hook wird geschärft, die Doku bleibt auf dem Stand
+  von vorher"*) — begangen zwei Wellen nach dem Aufschreiben, gefunden durch die
+  Rückfrage „ist das noch aktuell?". Alle fünf tragen jetzt
+  `DoD + Lerneintrag + Risiko-Ausgänge`.
 - **Satelliten:** Regelwerk-Splits `modul-05` (Risiko-Auflösung) und `modul-06`
   (zweite Paarung, Derivativ-Label); `lab/example` zeigt beide Formen real —
   `slice-009` §6 mit zwei Ausgängen (einer *entfallen* mit Messwert, einer

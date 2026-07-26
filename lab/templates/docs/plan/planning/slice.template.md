@@ -38,6 +38,7 @@ Liste mit jeweils prüfbarem Kriterium.
 - [ ] `make gates` grün.
 - [ ] Doku-Update für <Schnittstelle X> falls öffentlicher Vertrag berührt.
 - [ ] Closure-Notiz mit Steering-Loop-Lerneintrag.
+- [ ] Jedes Risiko aus §6 trägt einen Ausgang (eingetreten / entfallen / weiter offen).
 
 ## 3. Plan (vor Code)
 
