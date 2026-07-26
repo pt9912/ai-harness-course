@@ -705,3 +705,53 @@ Das ist eine *computational feedforward*-Kontrolle (siehe
 [`klassifikation.md`](grundlagen-klassifikation.md#klassifikation-und-steering-loop)): ein Commit-Hook prüft, dass
 die Nachricht mindestens eine ID enthält. Billig, deterministisch, und
 sie zwingt den Implementation-Agent in die Source-Precedence-Kette zurück.
+
+<a id="herkunfts-anker"></a>
+
+#### Herkunfts-Anker für Steering-Loop-Regeln
+
+Der Traceability-Constraint bindet **Änderungen** an eine ID. Der
+Herkunfts-Anker ist dieselbe Regel auf dem **Artefakt**: Eine Regel, die
+aus dem Steering Loop entstand, nennt die Welle, in der sie entstand.
+
+- **Geltungsbereich — eng.** Nur Regeln, die die 3×-Schwelle erreicht
+  haben. Was aus Lastenheft, Spezifikation oder ADR folgt, trägt bereits
+  eine ID und braucht keinen zweiten Anker.
+- **Form** — ein Feld, kein Konstrukt:
+  `noqa-gate:  ## LH-QA-SUP-002 · seit welle-3` (Make-Target) ·
+  `### 3.3 <Hard Rule>   (seit welle-3)` (AGENTS.md) ·
+  `- <HIGH-Regel>  (seit welle-3)` (Reviewer-Skill). Der Adaptions-Block
+  trägt das Muster bereits über sein Feld *Begründung*.
+- **Ziel ist die Welle, nicht der Slice.** `done/welle-<NN>-results.md`
+  §Steering-Loop-Einträge nennt beim Schwellen-Übertritt *Regel · stabile
+  Bezeichnung · Slice-Belege* — ein Anker löst damit in einem Hop auf und
+  bleibt grob genug, um nicht zu verrotten.
+- **Ab Einführung, kein Nachrüsten.** Altbestand bleibt ohne Anker;
+  `seit unbekannt` wäre eine Harness-Lüge, der leere Zustand ist die
+  ehrliche Information.
+
+**Sensor 1 — Anker-Paarung** (*computational feedback*). Die Prüfung läuft
+**von der Closure-Notiz nach außen**, nicht von der Regel nach innen: von
+der Regel aus ist nicht entscheidbar, ob sie einen Anker braucht. Pro
+Eintrag unter `## Steering-Loop-Einträge`: (1) der Eintrag nennt einen
+**Zielort**, (2) der Pfad existiert, (3) das Ziel trägt `seit welle-<NN>`.
+Rot bei: Regel nie geschrieben · still gelöscht · Anker vergessen —
+dieselbe Klasse wie ein halluziniertes Gate
+([Modul 13](modul-13-quality-gates.md)).
+
+> **Grenze:** Der Sensor erzwingt den Anker nur für **deklarierte**
+> Steering-Loop-Regeln. Wer die Closure-Notiz nicht schreibt, wird nicht
+> erwischt. Das ist die Grenze der Deklaration, nicht ein Fehler des
+> Sensors — und sie gehört benannt.
+
+**Sensor 2 — Retirement-Check** (*inferential feedback*,
+ereignis-getriggert, kein periodischer Sweep): Eine Regel mit
+Herkunfts-Anker wird **nicht entfernt oder gelockert**, ohne dass die
+Herkunft konsultiert und das Ergebnis dokumentiert wurde — *„Regel seit
+`welle-3` — ist die Beobachtung seither wieder aufgetreten?"*. Dieselbe
+Bauart wie „Gates dürfen nicht ohne ADR gelockert werden". Er ist der
+**Konsument** des Ankers; ohne ihn wäre der Anker eine zweite
+write-only-Ablage.
+
+Ziel-Form des Eintrags mit Pflichtfeld *Zielort*:
+[`../templates/docs/plan/planning/welle-results.template.md`](../templates/docs/plan/planning/welle-results.template.md).

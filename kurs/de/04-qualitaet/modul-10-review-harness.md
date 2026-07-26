@@ -205,7 +205,9 @@ Bei dreimaligem Auftreten desselben Findings:
   → Modul 13, Gate hinzufügen
 
 Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
-(siehe ADR-Hard-Rule, Modul 4).
+(siehe ADR-Hard-Rule, Modul 4). Ein HIGH-Eintrag, der aus dem Steering
+Loop kam, trägt den Herkunfts-Anker `(seit welle-<NN>)` — siehe
+[`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln).
 ```
 
 Sechs Schritte, eine reproduzierbare Reviewer-Rolle. Vergleichbares

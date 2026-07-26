@@ -257,6 +257,11 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    offene Carveout wird geprüft: aufgelöst, verlängert (mit Folge-Slice)
    oder als permanent akzeptiert. Eine Welle darf *mit* dokumentiertem
    Carveout schließen — aber nie mit einem stillen roten Gate.
+   **Anker-Paarung mitprüfen:** Jeder Steering-Loop-Eintrag dieser Welle
+   nennt einen Zielort, der Zielort existiert und trägt `seit welle-<NN>`
+   ([`konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
+   Rot heißt hier: eine Regel wurde versprochen und nicht geschrieben —
+   dieselbe Klasse wie ein halluziniertes Gate.
 3. **Welle nach `done/` schließen.** Die Closure-Notiz
    `done/welle-NN-results.md` hält fest, *was gelernt wurde*: geliefert · was
    funktionierte · was anders lief · **Steering-Loop-Einträge** (geschärfte

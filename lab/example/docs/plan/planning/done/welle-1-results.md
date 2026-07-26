@@ -24,9 +24,12 @@
 
 ## Steering-Loop-Einträge
 
-- **Spec-Template** erweitert um Pflicht-Sektion "Boundary" je Akzeptanzkriterium (siehe Lab-Template `lastenheft.template.md` §3).
-- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — heute Teil von slice-009-Closure.
-- **Reviewer-Skill** geschärft auf "Spec-Vollständigkeit" (Boundary + Negative).
+Jeder Eintrag nennt den **Zielort**; das Ziel trägt den Herkunfts-Anker
+`seit welle-1` (Paarung, wird beim Carveout-Audit mitgeprüft).
+
+- **Spec-Template** erweitert um Pflicht-Sektion "Boundary" je Akzeptanzkriterium — liegt in `spec/lastenheft.md` §3. Auslöser: slice-005, slice-007, slice-011 (3×).
+- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — liegt in `AGENTS.md` §3.4. Auslöser: slice-006, slice-009, slice-012 (3×).
+- **Reviewer-Skill** geschärft auf "Spec-Vollständigkeit" (Boundary + Negative) — liegt in `.harness/skills/reviewer.md` §HIGH. Auslöser: slice-004, slice-007, slice-010 (3×).
 
 ## Beobachtungen unter Schwelle
 

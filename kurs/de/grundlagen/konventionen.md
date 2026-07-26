@@ -710,3 +710,118 @@ Das ist eine *computational feedforward*-Kontrolle (siehe
 [`klassifikation.md`](klassifikation.md)): ein Commit-Hook prüft, dass
 die Nachricht mindestens eine ID enthält. Billig, deterministisch, und
 sie zwingt den Implementation-Agent in die Source-Precedence-Kette zurück.
+
+### Herkunfts-Anker für Steering-Loop-Regeln
+
+Der Traceability-Constraint bindet **Änderungen** an eine ID. Der
+Herkunfts-Anker ist dieselbe Regel, angewandt auf das **Artefakt**: Eine
+Regel, die aus dem Steering Loop entstand, nennt die Welle, in der sie
+entstand.
+
+**Warum.** Eine Regel aus Spec oder ADR trägt ihre Begründung im
+`LH-*`/`ADR-*`-Bezug. Eine Regel aus *Beobachtung* hat keine solche ID —
+ihre Begründung liegt in einer Closure-Notiz, die niemand von der Regel
+aus findet. Ohne Anker wirkt sie beim nächsten Aufräumen wie
+Overengineering und fliegt raus; die Failure-Klasse kommt zurück, und die
+Zählung beginnt von vorn.
+
+**Geltungsbereich — bewusst eng.** Nur Regeln, die aus dem Steering Loop
+entstanden (Schwelle 3× erreicht). Was aus Lastenheft, Spezifikation oder
+ADR folgt, trägt bereits eine ID und braucht keinen zweiten Anker.
+
+**Form** — ein Feld, kein Konstrukt:
+
+```makefile
+noqa-gate:  ## LH-QA-SUP-002 · seit welle-3        # Make-Target
+```
+```markdown
+### 3.3 git mv + Inhaltsänderung = zwei Commits   (seit welle-3)   <!-- AGENTS.md -->
+- Tie-Break in sortierenden Operationen dokumentiert  (seit welle-3)  <!-- Reviewer-Skill -->
+```
+
+Der Adaptions-Block trägt das Muster bereits über sein Feld *Begründung*
+(„Drei Vorfälle in Folge: `slice-041/044/047`") — der Anker
+verallgemeinert es auf Gates, Skills und Hard Rules.
+
+**Warum die Welle und nicht der Slice:** `done/welle-<NN>-results.md`
+§Steering-Loop-Einträge nennt beim Schwellen-Übertritt das Trio *Regel ·
+stabile Bezeichnung · Slice-Belege*. Ein Anker `seit welle-3` löst damit
+in **einem Hop** auf, und er bleibt grob genug, um nicht zu verrotten.
+
+**Ab Einführung, kein Nachrüsten.** Bestehende Regeln haben keinen
+rekonstruierbaren Ursprung mehr; `seit unbekannt` wäre eine
+[Harness-Lüge](#kernbegriffe). Der leere Zustand *ist* die ehrliche
+Information.
+
+#### Zwei Sensoren
+
+**Anker-Paarung** (*computational feedback*). Die Prüfung läuft **von der
+Closure-Notiz nach außen**, nicht von der Regel nach innen — denn von der
+Regel aus ist nicht entscheidbar, ob sie einen Anker braucht. Pro Eintrag
+unter `## Steering-Loop-Einträge`: (1) der Eintrag nennt einen
+**Zielort**, (2) der Pfad existiert, (3) das Ziel trägt
+`seit welle-<NN>`. Rot bei: Regel nie geschrieben · still gelöscht ·
+Anker vergessen. Das ist die Klasse *halluziniertes Gate*
+([Modul 13](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)),
+auf Regeln statt auf Make-Targets angewandt.
+
+> **Grenze — ehrlich benannt:** Der Sensor erzwingt den Anker nur für
+> **deklarierte** Steering-Loop-Regeln. Wer die Closure-Notiz nicht
+> schreibt, wird nicht erwischt. Das ist die Grenze der Deklaration, nicht
+> ein Fehler des Sensors — und sie gehört benannt, sonst ist der Sensor
+> selbst eine Harness-Lüge.
+
+**Retirement-Check** (*inferential feedback*, ereignis-getriggert). Kein
+periodischer Sweep — der Auslöser ist der Moment, in dem die Frage real
+auftritt:
+
+> Eine Regel mit Herkunfts-Anker wird **nicht entfernt oder gelockert**,
+> ohne dass die Herkunft konsultiert und das Ergebnis dokumentiert wurde:
+> *Regel seit `welle-3` — ist die Beobachtung seither wieder aufgetreten?*
+
+Dieselbe Bauart wie „Gates dürfen nicht ohne ADR gelockert werden", nur
+auf Steering-Loop-Regeln statt auf Schwellen. Er ist der **Konsument** des
+Ankers: ohne ihn wäre der Anker eine zweite write-only-Ablage — genau der
+Fehler, den die Sektion *Beobachtungen unter Schwelle*
+([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur))
+behebt.
+
+#### Der Fluss — jedes Artefakt hat einen Konsumenten
+
+```mermaid
+flowchart TB
+    A["Agentenlauf<br/>Failure beobachtet"] --> B["Slice-Closure §7<br/>Steering-Loop-Eintrag"]
+    B --> C{"Wie oft?"}
+    C -- "1x / 2x" --> D["Welle-Closure:<br/>Beobachtungen unter Schwelle<br/>(übernehmen + hochzählen)"]
+    C -- "3x" --> E["Welle-Closure:<br/>Steering-Loop-Eintrag<br/>+ Zielort"]
+
+    D --> F["Wellen-Eröffnung Schritt 2:<br/>offene Beobachtungen sichten"]
+    F --> G["Slice-Planung:<br/>Sub-Area-Modus-Begründung<br/>Kriterium 3"]
+    G --> A
+
+    E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-NN</b>"]
+    H --> I["jeder Agentenlauf<br/>liest die verkörperte Form"]
+    I --> A
+    E -. "Anker-Paarung prüft beide Enden" .-> H
+    H --> J{"Regel entfernen<br/>oder lockern?"}
+    J -- "ja" --> K["Retirement-Check:<br/>Herkunft konsultieren"]
+    K --> E
+
+    style D fill:#fff4d6,stroke:#d4a017
+    style E fill:#fff4d6,stroke:#d4a017
+    style F fill:#d6ecff,stroke:#2a6fb5
+    style G fill:#d6ecff,stroke:#2a6fb5
+    style I fill:#d6ecff,stroke:#2a6fb5
+    style K fill:#d6ecff,stroke:#2a6fb5
+```
+
+Gelb ist, was **geschrieben** wird, blau, was es **liest**. Die Probe für
+jede künftige Erweiterung des Harness: *hat das neue gelbe Kästchen ein
+blaues?* Hat es keines, ist es Ablage, keine Steuerung — und der
+Steering-Loop-Eintrag war vor der Sektion *Beobachtungen unter Schwelle*
+genau das.
+
+Die beiden Schleifen tragen unterschiedliche Mengen: Die linke hält die
+Beobachtungen **unter** der Schwelle am Leben (sonst zählt niemand hoch),
+die rechte hält die Begründung der **verkörperten** Regeln greifbar (sonst
+werden sie beim Aufräumen still entfernt). Keine ersetzt die andere.

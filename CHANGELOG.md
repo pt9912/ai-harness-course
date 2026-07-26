@@ -11,6 +11,69 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 39 — 2026-07-26 · Herkunfts-Anker: Regeln nennen die Welle, aus der sie stammen
+
+### Hinzugefügt
+
+- **`konventionen.md` §Herkunfts-Anker für Steering-Loop-Regeln.** Welle 38 hat
+  die Beobachtungen *unter* der Schwelle abfragbar gemacht; offen blieb die
+  andere Hälfte: Eine **verkörperte** Regel (AGENTS-Hard-Rule, Gate,
+  Skill-Eintrag) trägt ihre Begründung nicht bei sich. Von der Regel aus führte
+  kein Weg zur auslösenden Beobachtung — und Worked Example B (Welle 35) sagt,
+  was dann passiert: *„beim nächsten Aufräumen wirkt sie wie Overengineering und
+  fliegt raus."* Der Anker ist **kein neues Konstrukt**, sondern der
+  Traceability-Constraint angewandt auf das *Artefakt* statt auf den *Commit*:
+  ein Feld `seit welle-<NN>` im Make-Target-Kommentar, an der Hard-Rule-Zeile
+  bzw. am Skill-Eintrag. Der Adaptions-Block trug das Muster über sein Feld
+  *Begründung* bereits — der Anker verallgemeinert es.
+  **Geltungsbereich bewusst eng:** nur Regeln aus dem Steering Loop (3× erreicht);
+  was aus Lastenheft/Spec/ADR folgt, trägt schon eine ID.
+  **Ziel ist die Welle, nicht der Slice** — `done/welle-<NN>-results.md`
+  §Steering-Loop-Einträge nennt seit Welle 38 das Trio *Regel · stabile
+  Bezeichnung · Slice-Belege*, der Anker löst also in **einem Hop** auf und ist
+  grob genug, um nicht zu verrotten. **Ab Einführung, kein Nachrüsten:**
+  `seit unbekannt` wäre eine Harness-Lüge, der leere Zustand ist die ehrliche
+  Information.
+- **Zwei Sensoren.** *Anker-Paarung* (computational feedback): Die Prüfung läuft
+  **von der Closure-Notiz nach außen**, nicht von der Regel nach innen — von der
+  Regel aus ist nicht entscheidbar, ob sie einen Anker braucht, von der Closure
+  aus schon. Pro Steering-Loop-Eintrag: Zielort genannt · Pfad existiert · Ziel
+  trägt `seit welle-<NN>`. Rot bei: Regel nie geschrieben, still gelöscht, Anker
+  vergessen — dieselbe Klasse wie ein *halluziniertes Gate*, auf Regeln statt auf
+  Make-Targets angewandt; läuft im Carveout-Audit der Welle-Closure mit.
+  Grenze ehrlich benannt: erzwingt den Anker nur für **deklarierte** Regeln.
+  *Retirement-Check* (inferential, **ereignis**-getriggert, kein periodischer
+  Sweep — der Kurs verbietet Kalender-Trigger): Eine Regel mit Anker wird nicht
+  entfernt oder gelockert, ohne dass die Herkunft konsultiert wurde
+  (*„seit welle-3 — ist die Beobachtung wieder aufgetreten?"*). Gleiche Bauart
+  wie „Gates dürfen nicht ohne ADR gelockert werden". Er ist der **Konsument**
+  des Ankers; ohne ihn wäre der Anker eine zweite write-only-Ablage — genau der
+  Fehler, den Welle 38 behoben hat.
+- **Mermaid-Fluss „jedes Artefakt hat einen Konsumenten".** Beide Schleifen in
+  einem Bild: links der Zähler für Beobachtungen unter der Schwelle
+  (Welle-Closure → Wellen-Eröffnung → Slice-Planung), rechts die verkörperte
+  Regel mit Anker (Closure → Regel → Retirement-Check → Closure). Gelb = wird
+  geschrieben, blau = liest. Als Prüffrage für künftige Erweiterungen
+  formuliert: *hat das neue gelbe Kästchen ein blaues?* Hat es keines, ist es
+  Ablage, keine Steuerung.
+
+### Geändert
+
+- **`welle-results.template.md`: Zielort wird Pflichtfeld** im
+  Steering-Loop-Eintrag (bisher freie Prosa) — er ist die eine Hälfte der
+  maschinell prüfbaren Paarung. Abgewogen gegen Modul 16 (*„eine Checkliste ohne
+  Belege ist Bürokratie"*): gerechtfertigt, weil das Feld **der Beleg selbst**
+  ist und nicht ein Häkchen daneben.
+- **Anker-Form in den drei Regel-Klassen verankert** — Modul 13 (Gate-Target-
+  Kommentar), Modul 9 (Hard-Rule-Zeile), Modul 10 (Skill-Eintrag), je als
+  Ein-Satz-Verweis. Die Regel selbst steht **einmal** in `konventionen.md`, nicht
+  viermal — sonst hätte dieselbe Regel vier Orte und exakt das Drift-Problem,
+  das der Kurs bekämpft.
+- **Satelliten:** Regelwerk-Splits `grundlagen-konventionen` (Anker
+  `#herkunfts-anker`), `modul-06`, `modul-09`, `modul-10`, `modul-13`;
+  `lab/example/…/welle-1-results.md` zeigt die Paarung jetzt real (Zielort +
+  Slice-Belege je Eintrag) statt sie nur zu behaupten.
+
 ## Welle 38 — 2026-07-26 · Der Steering Loop bekommt seinen Zähler — und einen Konsumenten
 
 ### Hinzugefügt

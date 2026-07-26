@@ -85,7 +85,11 @@ dort automatisch (Modul-0-Prinzip).
 2. **Carveout-Audit der Welle** (Modul 7). Jeder offene Carveout wird
    geprüft: aufgelöst, verlängert (mit Folge-Slice) oder als permanent
    akzeptiert. Eine Welle darf *mit* dokumentiertem Carveout schließen —
-   aber nie mit einem stillen roten Gate.
+   aber nie mit einem stillen roten Gate. **Anker-Paarung mitprüfen:**
+   jeder Steering-Loop-Eintrag nennt einen Zielort, der Zielort existiert
+   und trägt `seit welle-<NN>`
+   ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
+   Rot heißt: eine Regel wurde versprochen und nicht geschrieben.
 3. **Welle nach `done/` schließen.** Closure-Notiz `done/welle-NN-results.md`
    schreiben (*was gelernt wurde*: geliefert · was funktionierte · was anders
    lief · **Steering-Loop-Einträge** · **Beobachtungen unter Schwelle** ·

@@ -44,12 +44,25 @@ jetzt VERKÖRPERT und wirken ab hier von selbst. Pro Eintrag: was wurde
 geschärft, und wo liegt es jetzt?
 Klassen: geschärfte Regel (AGENTS.md / MR-<NNN>) · neuer Sensor (Gate,
 Skill) · benannte Spec-Lücke (Lastenheft-Version, Folge-ADR).
+
+PFLICHTFELD "liegt in": der Zielort ist maschinell prüfbar und bildet
+mit dem Herkunfts-Anker am Ziel ein PAAR — das Ziel muss existieren und
+`seit welle-<NN>` tragen. Ohne das Feld ist der Eintrag eine Behauptung
+ohne Deckung (Klasse: halluziniertes Gate). Regel und Sensor:
+Baseline-Regelwerk `grundlagen-konventionen.md` §Herkunfts-Anker für
+Steering-Loop-Regeln.
 -->
 
 - **<Guide oder Sensor>** <geschärft/ergänzt>: <was genau> — liegt in
   `<AGENTS.md §X | Makefile-Target | .harness/skills/…>`.
   Auslöser: <slice-NNN, slice-MMM, slice-KKK> (3×).
 - <…>
+
+<!-- Gegenstück am Ziel, nicht vergessen — es ist die andere Hälfte des Paares:
+     noqa-gate:  ## LH-QA-SUP-002 · seit welle-<NN>
+     ### 3.3 <Hard Rule>   (seit welle-<NN>)
+     Entfernen oder Lockern dieser Regel setzt später den Retirement-Check
+     voraus: „seit welle-<NN> — ist die Beobachtung wieder aufgetreten?" -->
 
 ## Beobachtungen unter Schwelle
 

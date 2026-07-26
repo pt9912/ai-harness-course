@@ -43,6 +43,10 @@ Kategorisierung ist eine Entscheidungsvorlage.
 
 ### Ziel-Form: Reviewer-Skill
 
+Ein HIGH-Eintrag, der aus dem Steering Loop kam, trägt den
+Herkunfts-Anker `(seit welle-<NN>)`
+([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
+
 Ein Reviewer-Agent ohne Skill-Datei driftet zwischen Sessions (gleiche
 Eingabe → andere Findings/Kategorien). Die Skill-Datei liegt in
 `.harness/skills/reviewer.md` und ist das repo-spezifische „worauf

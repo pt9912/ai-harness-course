@@ -150,6 +150,9 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
   `harness/README.md` + relevante kanonische Quelle +
   Requirement/ADR-IDs + AGENTS.md + Tool-Allowlist. Fehlende Eingaben
   werden *durch Raten ersetzt*, nicht durch Schweigen.
+- Eine Hard Rule, die aus dem Steering Loop entstand (nicht aus einer
+  Anforderung), trägt den Herkunfts-Anker `(seit welle-<NN>)`
+  ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
 - Jede Hard Rule liegt in *zwei* Quadranten: inferential feedforward
   (steht in AGENTS.md) + computational feedback (Fitness
   Function/Linter-Gate). Hard Rule nur in einem Quadranten ist halb
