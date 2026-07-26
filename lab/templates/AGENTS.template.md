@@ -5,7 +5,7 @@
 > ersetze `<Platzhalter>` und lösche diesen Block. AGENTS.md *trägt
 > Hard Rules und Pointer auf kanonische Quellen*, sie *dupliziert deren
 > Inhalt nicht* — sonst entsteht Drift (siehe
-> [Kurs Modul 9](../../kurs/de/03-agenten/modul-09-implementierung.md)).
+> [Baseline-Regelwerk §AGENTS.md-Regeln](../regelwerk/modul-09-implementierung.md#agentsmd-regeln-modul-9)).
 > **Pointer-Artefakt:** verweist auf andere kanonische Quellen — zuletzt
 > füllen bzw. re-syncen, sobald die Ziele stehen; veraltete
 > `(folgt)`/Klartext-Verweise fängt kein Linter (Reviewer-Sache).
@@ -36,7 +36,7 @@ self-contained Release-ZIP
 **committet vendored** unter `.harness/baseline/<tag>/{regelwerk,templates}/`
 (Regelwerk *und* Templates parallel, netzlos materialisiert samt `SHA256SUMS`
 — Vorgehen siehe
-[Kurs Modul 2 §Bootstrap](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md);
+Baseline-Regelwerk `modul-02-harness-bootstrap.md`;
 Quelle/Stand in [`harness/conventions.md`](harness/conventions.md) §Baseline).
 
 Die verkörperte Form (dieses Briefing, die Konventionen, deine

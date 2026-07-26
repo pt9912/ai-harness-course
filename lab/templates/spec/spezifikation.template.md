@@ -3,7 +3,7 @@
 > **Template-Hinweis.** Diese Datei ist eine Vorlage. Sie ist
 > **technisch verbindlich, aber ohne Lastenheft-Änderung fortschreibbar**
 > (siehe Spec-Stratifizierung in
-> [`grundlagen/konventionen.md`](../../../kurs/de/grundlagen/konventionen.md#spec-stratifizierung)).
+> [Baseline-Regelwerk §Spec-Stratifizierung](../../regelwerk/grundlagen-konventionen.md#spec-stratifizierung)).
 > Kopiere sie nach `spec/spezifikation.md`, ersetze `<Platzhalter>` und
 > lösche diesen Block.
 
@@ -56,7 +56,7 @@ Anforderung gewahrt bleibt.
 ## 3. Defaults und Konstanten
 
 <!-- Werte, die in Code fest sind. Die ADR, die einen Wert festlegt,
-deklariert das aufwärts in ihrem Schärft:-Feld (Kurs §Referenz-Richtung) —
+deklariert das aufwärts in ihrem Schärft:-Feld (Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung) —
 kein ADR-Rückzeiger hier. -->
 
 | Name | Wert | Begründung |
@@ -74,7 +74,7 @@ kein ADR-Rückzeiger hier. -->
 ## 5. Metriken und Tracing-Felder
 
 <!--
-Verbindliche OTel-Felder pro Span (siehe Kurs Modul 15).
+Verbindliche OTel-Felder pro Span (siehe Baseline-Regelwerk `modul-15-observability.md`).
 -->
 
 | Span | Pflicht-Attribute | Quelle |

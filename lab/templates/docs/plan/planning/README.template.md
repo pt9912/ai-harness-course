@@ -31,7 +31,7 @@ Rule „git mv + Inhaltsänderung = zwei Commits" in
   `in-progress/` nimmt ausschließlich **Slices** auf; `done/` archiviert
   **zusätzlich** abgeschlossene **Nicht-Slice-Records** — Welle-Closure
   `done/<welle-id>-results.md`, und aufgelöste Carveouts wandern ebenfalls
-  dorthin ([Modul 7](../../../../../kurs/de/02-planung/modul-07-carveouts.md)).
+  dorthin (Baseline-Regelwerk `modul-07-carveouts.md`).
 
 ## Aktueller Stand
 

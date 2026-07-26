@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
-# Pinnt Kurs-Verweise in den ausgelieferten Templates auf absolute,
-# getaggte URLs. Quelle (lab/templates) behält relative ../../kurs/-Links
-# (klickbar beim Kurs-Browsen, vom Gate ohnehin via .d-check.yml ignoriert);
-# beim ZIP-Bau werden sie hier zu .../blob/<ref>/kurs/… umgeschrieben, damit
-# sie das Kopieren ins Ziel-Repo überstehen (Defekt 1 des lab-templates-Reports).
+# Pinnt verbliebene Kurs-Verweise in den ausgelieferten Templates auf
+# absolute, getaggte URLs.
+#
+# STAND seit Welle 37: die Templates verweisen NICHT mehr in den Kurs, sondern
+# auf das parallel vendorte Regelwerk (`../regelwerk/…` in löschbaren
+# Hinweisblöcken, Abschnitts-Zitate „Baseline-Regelwerk `datei.md` §Abschnitt"
+# in bleibendem Inhalt). Beides bleibt hier bewusst unangetastet: die
+# relativen `../regelwerk/`-Pfade lösen im Bundle netzlos auf (regelwerk/ und
+# templates/ liegen parallel), die Zitate tragen gar keinen Pfad — wo die
+# Baseline liegt, steht beim Adopter einmalig in MR-003.
+#
+# Die kurs-sed unten ist damit im Normalfall ein No-op und bleibt als
+# Sicherheitsnetz: wer künftig doch einen `../…/kurs/`-Link einbaut, bekommt
+# ihn wenigstens gepinnt statt gebrochen ins Ziel-Repo kopiert
+# (Defekt 1 des lab-templates-Reports).
 #
 # Aufruf: rewrite-template-links.sh <ziel-verzeichnis> <git-ref>
 #   <git-ref> = Release-Tag (vX.Y.Z, hist. templates-v*) im Release-Workflow,

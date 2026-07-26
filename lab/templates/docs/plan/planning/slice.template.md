@@ -7,7 +7,7 @@
 **Lifecycle:** Der Zustand dieses Slice ist das Verzeichnis, in dem diese
 Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er
 wechselt nur durch `git mv`, siehe
-[`/kurs/de/02-planung/modul-05-planning-harness.md` §Lifecycle als State Machine](../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine).
+Baseline-Regelwerk `modul-05-planning-harness.md` §Lifecycle als State Machine.
 
 **Welle:** <welle-id> oder "ohne Welle" (Wartung/Spike).
 
@@ -60,7 +60,7 @@ Auch die zwei Rückführungen vorab benennen — unter welcher Bedingung
 geht dieser Slice zurück?
 - `in-progress` → `next`: zu groß, zurück zur Zerlegung.
 - `in-progress` → `open`: blockiert (Carveout? siehe Modul 7).
-(kanonische Definition: [`/kurs/de/02-planung/modul-05-planning-harness.md` §Lifecycle als State Machine](../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine))
+(kanonische Definition: [Baseline-Regelwerk §Lifecycle als State Machine](../../../../regelwerk/modul-05-planning-harness.md#lifecycle-als-state-machine))
 -->
 
 <…>
@@ -89,7 +89,7 @@ Wird *nach* Abschluss ergänzt. Inhalt:
 - Was hat funktioniert?
 - Was ging anders als geplant?
 - Steering-Loop-Eintrag: welcher Guide/Sensor sollte verbessert werden?
-  (kanonische Definition: [`/kurs/de/grundlagen/klassifikation.md` §Steering Loop](../../../../../kurs/de/grundlagen/klassifikation.md#steering-loop))
+  (kanonische Definition: [Baseline-Regelwerk §Steering Loop](../../../../regelwerk/grundlagen-klassifikation.md#steering-loop))
 - Folge-Slices: welche neuen open/-Einträge?
 -->
 
@@ -99,21 +99,22 @@ Wird *nach* Abschluss ergänzt. Inhalt:
 
 **Status:** Pflicht-Sektion bei mindestens einer berührten Sub-Area
 in BF oder Hybrid. Bei reinem GF genügt der Hinweis
-*"alle berührten Sub-Areas GF (siehe Kurs Modul 5 §Worked
-Mini-Example)"*. Optional bei reinem Refactor ohne neue
+*"alle berührten Sub-Areas GF (siehe Baseline-Regelwerk
+`modul-05-planning-harness.md` §Ziel-Form: Sub-Area-Modus-Begründung)"*. Optional bei reinem Refactor ohne neue
 Sub-Area-Berührung. Die vier Pflichtkriterien (Konventionen-Dichte ·
 Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand)
 stehen in
-[`/kurs/de/02-planung/modul-05-planning-harness.md` §Worked Mini-Example](../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).
+Baseline-Regelwerk `modul-05-planning-harness.md` §Ziel-Form: Sub-Area-Modus-Begründung.
 
 **Vorgelagert — Sub-Area-Wahl prüfen:** Jede hier aufgeführte Sub-Area
 muss das Inklusionskriterium erfüllen (drei Achsen, Schwelle ≥ 2; siehe
-[`/kurs/de/grundlagen/konventionen.md` §Was ist eine Sub-Area?](../../../../../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area)).
+Baseline-Regelwerk `grundlagen-konventionen.md` §Was ist eine Sub-Area?).
 Zu grobe Sub-Areas (*"Backend"*) vorher ausdifferenzieren — sonst trägt
 der Begründungsblock mehrere Modi vermischt.
 
 <!-- Block für jede berührte Sub-Area duplizieren. Format identisch
-mit dem in Modul 5 §Worked Mini-Example abgedruckten Block. -->
+mit dem im Baseline-Regelwerk §Ziel-Form: Sub-Area-Modus-Begründung
+abgedruckten Block. -->
 
 ### Sub-Area: <Name>
 

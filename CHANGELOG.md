@@ -11,6 +11,49 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 37 — 2026-07-26 · Templates verweisen auf die vendorte Baseline statt in den Kurs
+
+### Geändert
+
+- **Alle 42 Kurs-Verweise in `lab/templates` aufgelöst — das Bundle ist jetzt
+  vollständig netzlos.** Nach Welle 35 (Regelwerk) blieb die zweite Hälfte:
+  Templates zeigten durchgängig in den Kurs, obwohl der Adopter das Regelwerk
+  **lokal** unter `.harness/baseline/<tag>/regelwerk/` vendored liegen hat. Das
+  widersprach der eigenen `MR-003`-Begründung (Modul-0-Prinzip:
+  *Per-Lauf-Relevantes gehört verkörpert, nicht extern nachgeladen*) — ein
+  Kurs-Verweis heißt Netz, und zwar auch dort, wo der Inhalt zwei Verzeichnisse
+  weiter liegt. Drei Klassen, drei Behandlungen:
+  - **Löschbare Blöcke (10)** — Kopf-Hinweise („lösche diesen Block") und
+    HTML-Kommentare. Sie werden nie mitkopiert, also greift die
+    Kopier-Einschränkung gar nicht: relativer Link auf `../regelwerk/…`, der im
+    Kurs-Repo (`lab/regelwerk`) *und* im Bundle (`regelwerk/` neben
+    `templates/`) auflöst — dieselbe Doppel-Auflösung wie die
+    `../templates/`-Ziel-Form-Verweise in der Gegenrichtung.
+  - **Bleibender Inhalt (13)** — landet dauerhaft im Adopter-Repo, wo weder
+    Pfadtiefe noch `<tag>` bekannt sind. Deshalb **Abschnitts-Zitat statt Link**:
+    „Baseline-Regelwerk `grundlagen-konventionen.md` §Source Precedence". Ohne
+    Pfad, ohne Tag; wo die Baseline liegt, steht beim Adopter genau einmal in
+    `MR-003`. Ein Baseline-Upgrade berührt damit **eine** Datei statt dreizehn.
+  - **`templates/README.md` (17)** — Index der Sammlung, wird nicht kopiert;
+    relative Links, Spaltenkopf „Kurs-Verweis" → „Regelwerk-Abschnitt".
+  Dazu eine **zweite Schicht von 13 Klartext-Nennungen ohne Link**
+  („siehe Kurs Modul 4", „Kurs §Referenz-Richtung", „Kurs-Glossar"), die keine
+  `kurs/de`-Suche findet — ebenfalls auf Regelwerk-Abschnitte umgestellt.
+  **Stehen bleibt „Kurs"** nur noch als Name der Baseline-Quelle (11 Stellen:
+  Baseline-Aufzählungen, „Kurs-Welle 24" als Stand-Beispiel, CHANGELOG im
+  Kurs-Repo, `lab/example` als Vorbild-Zeiger).
+  Empirisch gegengeprüft am simulierten Release-Bundle: **19 `regelwerk/`-Links
+  lösen auf, 0 kaputt, 0 verbliebene Kurs-URLs**; die übrigen offenen Ziele sind
+  die bekannte symbolische Klasse (`spec/lastenheft.md`, `CO-<NNN>-<titel>.md` …),
+  die erst beim Ausfüllen entsteht.
+- **`tools/rewrite-template-links.sh` und `.d-check.yml`: Kommentare ehrlich
+  gemacht.** Beide beschrieben den alten Zustand („Quelle behält relative
+  `../../kurs/`-Links", „Verweise in den Kurs … werden beim Release gepinnt").
+  Die kurs-`sed` ist jetzt im Normalfall ein No-op und bleibt als **Sicherheitsnetz**
+  deklariert; `ignore-refs` prüft ab jetzt `../regelwerk/`-Anker scharf — eine
+  umbenannte Regelwerk-Überschrift verschickt sonst unbemerkt einen toten Anker
+  ins Adopter-Repo.
+
 ## Welle 36 — 2026-07-26 · Artefaktklasse pro Rolle: sechs Rollen sind nicht sechs Skills
 
 ### Hinzugefügt

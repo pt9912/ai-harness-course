@@ -22,4 +22,4 @@ Aktive Carveouts mit Auflösungs-Trigger. Aufgelöste Carveouts wandern nach
 
 - Jeder aktive Carveout braucht: Trigger, Folge-Slice, letzten Prüf-Termin.
 - Bei Welle-Closure: Carveout-Audit zwingend — welche gültig, welche aufgelöst?
-- Siehe [Kurs Modul 7](../../../../../kurs/de/02-planung/modul-07-carveouts.md).
+- Siehe Baseline-Regelwerk `modul-07-carveouts.md`.

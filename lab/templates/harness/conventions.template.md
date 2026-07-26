@@ -4,7 +4,7 @@
 > `harness/conventions.md` deines Repos. Kopiere sie nach
 > `harness/conventions.md`, ersetze `<Platzhalter>` und lösche
 > diesen Block. Pflichtgliederung folgt
-> [Kurs Konventionen / harness/conventions.md als Konventionsspeicher](../../../kurs/de/grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher).
+> [Baseline-Regelwerk §harness/conventions.md als Konventionsspeicher](../../regelwerk/grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher).
 >
 > **Was diese Datei trägt:** repo-lokale Strukturregeln und Adaptionen
 > ggü. der adoptierten Harnesskonvention (Baseline). Sie ist
@@ -88,7 +88,7 @@ Schreiben der Artefakte: Anforderungs-IDs im Lastenheft
 (`<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>`, Schema-Definition in
 spec/lastenheft.template.md), Verfeinerungen in der Spezifikation
 (`<PREFIX>-FA-<NN>.<Buchstabe>`), ADR-Nummern chronologisch über den
-ADR-Index. Hintergrund: Kurs grundlagen/konventionen.md
+ADR-Index. Hintergrund: Baseline-Regelwerk `grundlagen-konventionen.md`
 §ID-Schema als Klammer. Agenten referenzieren IDs nur, sie erfinden
 keine (AGENTS.md §5/§6).
 -->
@@ -120,11 +120,11 @@ keine (AGENTS.md §5/§6).
 - **Adaption:** Source-Precedence-Tabelle führt `spec/spezifikation.md`
   als eigenen **Rang 2** zwischen Lastenheft (Rang 1) und Architektur
   (Rang 3). Der Kurs-Default
-  ([`konventionen.md` §Source Precedence](../../../kurs/de/grundlagen/konventionen.md#source-precedence))
+  (Baseline-Regelwerk `grundlagen-konventionen.md` §Source Precedence)
   setzt zwei Spec-Ränge (`lastenheft` → `architecture`); dieses Repo
   nutzt drei.
 - **Begründung:** Das Repo verwendet die Spec-Stratifizierung
-  ([`konventionen.md` §Spec-Stratifizierung](../../../kurs/de/grundlagen/konventionen.md#spec-stratifizierung))
+  (Baseline-Regelwerk `grundlagen-konventionen.md` §Spec-Stratifizierung)
   explizit mit drei Spec-Dateien. Damit die Source-Precedence-Tabelle
   die ADR-Schärfungs-Regel ("ADR darf Spezifikation schärfen, nicht
   Lastenheft") strukturell abbildet, muss die Spezifikation als
@@ -214,8 +214,8 @@ Eine Sub-Area in BF *ohne* Graduation-Plan ist eine Harness-Lüge:
 ## Glossar (optional)
 
 <!--
-Repo-spezifische Begriffe, die im Kurs-Glossar nicht stehen.
-Nur ergänzen, nicht Kurs-Glossar wiederholen.
+Repo-spezifische Begriffe, die in den Kernbegriffen des
+Baseline-Regelwerks nicht stehen. Nur ergänzen, nicht wiederholen.
 -->
 
 | Begriff | Bedeutung |

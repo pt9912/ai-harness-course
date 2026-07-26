@@ -2,8 +2,8 @@
 
 > **Template-Hinweis.** Vorlage für eine Welle (Bündel von Slices, das
 > gemeinsam geplant und abgeschlossen wird, siehe
-> [Kurs Modul 5](../../../../../kurs/de/02-planung/modul-05-planning-harness.md)
-> und [Modul 6](../../../../../kurs/de/02-planung/modul-06-roadmap.md)).
+> [Baseline-Regelwerk Modul 5](../../../../regelwerk/modul-05-planning-harness.md)
+> und [Modul 6](../../../../regelwerk/modul-06-roadmap.md)).
 > Kopiere nach `docs/plan/planning/<welle-id>.md` und ersetze
 > Platzhalter. Lösche diesen Block.
 

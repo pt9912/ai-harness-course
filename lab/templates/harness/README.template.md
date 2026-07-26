@@ -3,7 +3,7 @@
 > **Template-Hinweis.** Diese Datei ist eine Vorlage für `harness/README.md`
 > deines Repos. Kopiere sie nach `harness/README.md`, ersetze
 > `<Platzhalter>` und lösche diesen Block. Pflichtgliederung folgt
-> [Kurs Modul 9 / Konventionen](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt).
+> [Baseline-Regelwerk §harness/README.md als Einstiegspunkt](../../regelwerk/grundlagen-konventionen.md#harnessreadmemd-als-einstiegspunkt).
 > **Pointer-Artefakt:** verweist auf andere kanonische Quellen — zuletzt
 > füllen bzw. re-syncen, sobald die Ziele stehen; veraltete
 > `(folgt)`/Klartext-Verweise fängt kein Linter (Reviewer-Sache).

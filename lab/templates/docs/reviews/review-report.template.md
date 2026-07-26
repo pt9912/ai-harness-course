@@ -32,7 +32,7 @@ Jedes Finding folgt dem **§Output-Schema des Reviewer-Skills** — der
 verbindlichen Single Source of Truth. Die Felder unten sind nur
 **gespiegelt** (Bequemlichkeit beim Ausfüllen), nicht neu definiert; bei
 Abweichung gilt der Skill bzw. dessen Quelle
-[Kurs Modul 10 §Output-Schema](../../../../kurs/de/04-qualitaet/modul-10-review-harness.md#worked-example-eine-reviewer-skill-datei-schreiben).
+Baseline-Regelwerk `modul-10-review-harness.md` §Ziel-Form: Reviewer-Skill.
 
 <!-- Kein Fließtext, kein Lösungsvorschlag im Befund. -->
 

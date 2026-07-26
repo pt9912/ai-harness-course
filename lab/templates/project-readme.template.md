@@ -5,7 +5,7 @@
 > Block. Das README ist **Rang 7** der Source Precedence (Projekt-Überblick)
 > — es *verweist* auf die kanonischen Quellen, es *dupliziert* sie nicht.
 > Tipp: oft zuletzt in Phase 1 füllen, wenn die verlinkten Artefakte stehen.
-> Hintergrund: [Kurs Modul 2 / Harness-Bootstrap](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md).
+> Hintergrund: [Baseline-Regelwerk Modul 2 — Harness-Bootstrap](../regelwerk/modul-02-harness-bootstrap.md).
 
 ## Was ist <Projektname>?
 

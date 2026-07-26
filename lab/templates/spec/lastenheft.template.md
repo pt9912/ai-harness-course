@@ -6,7 +6,7 @@
 > nach dem Ausfüllen.
 
 **Version:** 0.1.0 (`Major.Minor.Patch` — erhöhen bei Änderungen, siehe
-[Kurs Modul 3](../../../kurs/de/01-spec-und-architektur/modul-03-lastenheft.md)).
+Baseline-Regelwerk `modul-03-lastenheft.md`).
 
 **Status:** Draft | In Review | Accepted (entwurfsstatus, der die
 Verbindlichkeit der IDs steuert).
@@ -47,7 +47,7 @@ Boundary, Negative).
 ID-Schema: <PREFIX>-FA-<NN>, z.B. LH-FA-01, GG-FA-03, HSM-FA-12.
 Das Präfix sollte im ganzen Repo gleich sein und in Make-Target-
 Kommentaren, ADRs und Commits wiederauftauchen
-(siehe Kurs grundlagen/konventionen.md#id-schema-als-klammer).
+(siehe Baseline-Regelwerk `grundlagen-konventionen.md` §ID-Schema als Klammer).
 -->
 
 ### LH-FA-01 — <Titel der Anforderung>
@@ -117,7 +117,7 @@ Ohne diesen Abschnitt baut der Agent gerne Plausibles.
      Sie entsteht NUR aus einem externen Change Request, nie aus einem ADR
      oder Slice. Fußabdruck pro angenommenem CR: Version-Bump oben + eine
      Zeile hier, mit dem externen CR (Ticket/Vertragsanhang) in "Verweis".
-     Hintergrund: Kurs grundlagen/konventionen.md §Spec-Stratifizierung. -->
+     Hintergrund: Baseline-Regelwerk `grundlagen-konventionen.md` §Spec-Stratifizierung. -->
 
 | Version | Datum | Änderung | Verweis |
 |---|---|---|---|

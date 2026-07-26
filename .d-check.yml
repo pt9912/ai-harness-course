@@ -14,11 +14,13 @@ modules: [links, anchors, codepaths]
 #   (a) SYMBOLISCH — Ziel-Repo-Pfade, die erst nach dem Ausfüllen existieren
 #       (../spec/lastenheft.md, ../AGENTS.md, harness/conventions.md,
 #       CO-<NNN>-<titel>.md, tools/check_*.py …). Lösen im Kurs-Repo NICHT auf.
-#   (b) PRÜFBAR — Verweise in den Kurs (../…/kurs/…, mit Ankern) und
+#   (b) PRÜFBAR — Verweise ins Regelwerk (../regelwerk/…, mit Ankern) und
 #       template-interne Navigation (*.template.md, README.md, adr/, planning/).
 # Früher stand das ganze Verzeichnis in scan.ignore — das opferte Klasse (b).
-# Die Kurs-Verweise werden beim Release auf blob/<tag>/ gepinnt und eingefroren;
-# eine umbenannte Kurs-Überschrift verschickt sonst unbemerkt einen toten Anker.
+# Seit Welle 37 zeigen die Verweise auf das parallel vendorte Regelwerk statt in
+# den Kurs (netzlos im Bundle); sie MÜSSEN geprüft bleiben — eine umbenannte
+# Regelwerk-Überschrift verschickt sonst unbemerkt einen toten Anker ins
+# Adopter-Repo.
 # scoped ignore-refs (in:/refs:/keep:) ignoriert nur (a), prüft (b) scharf.
 # ignoriert  <=>  refs ∧ ¬keep  (keep gewinnt, reihenfolge-unabhängig).
 ignore-refs:

@@ -2,7 +2,7 @@
 
 > **Template-Hinweis.** Diese Datei ist eine Vorlage. Sie ist
 > **sprach- und meilensteinfrei** (siehe Hard Rule aus grid-gym in
-> [Modul 9](../../../kurs/de/03-agenten/modul-09-implementierung.md)).
+> [Baseline-Regelwerk Modul 9](../../regelwerk/modul-09-implementierung.md)).
 > Kopiere sie nach `spec/architecture.md`, ersetze `<Platzhalter>` und
 > lösche diesen Block.
 
@@ -43,7 +43,7 @@ flowchart TB
 Pro Schicht: was sie tut, was sie *nicht* tut. Layering-Regeln, die
 durch ArchUnit / depguard / import-linter durchgesetzt werden. Welche
 ADR eine Regel verbindlich macht, deklariert die ADR aufwärts in ihrem
-Schärft:-Feld (Kurs §Referenz-Richtung) — kein ADR-Bezug in dieser Sicht.
+Schärft:-Feld (Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung) — kein ADR-Bezug in dieser Sicht.
 
 Beispiel-Schema (aus OpenAI-Layering, siehe Modul 4):
 Types → Config → Repo → Service → Runtime → UI
