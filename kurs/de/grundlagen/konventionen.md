@@ -821,13 +821,49 @@ flowchart TB
     style K fill:#d6ecff,stroke:#2a6fb5
 ```
 
-Gelb ist, was **geschrieben** wird, blau, was es **liest**. Die Probe für
-jede künftige Erweiterung des Harness: *hat das neue gelbe Kästchen ein
-blaues?* Hat es keines, ist es Ablage, keine Steuerung — und der
-Steering-Loop-Eintrag war vor der Sektion *Beobachtungen unter Schwelle*
-genau das.
+Gelb ist, was **geschrieben** wird, blau, was es **liest**. Das Bild ist
+zugleich die ausgearbeitete Illustration der Regel
+[§Jedes Artefakt hat einen Konsumenten](#jedes-artefakt-hat-einen-konsumenten)
+(unten).
 
 Die beiden Schleifen tragen unterschiedliche Mengen: Die linke hält die
 Beobachtungen **unter** der Schwelle am Leben (sonst zählt niemand hoch),
 die rechte hält die Begründung der **verkörperten** Regeln greifbar (sonst
 werden sie beim Aufräumen still entfernt). Keine ersetzt die andere.
+
+## Jedes Artefakt hat einen Konsumenten
+
+**Regel.** Wer dem Harness ein Artefakt hinzufügt — eine Sektion, eine Liste,
+eine Notiz —, benennt, **wer es liest und wann**. Findet sich kein Leser, ist
+es Ablage, keine Steuerung, und gehört nicht angelegt.
+
+Im Fluss-Diagramm oben ist das die Probe *hat das neue gelbe Kästchen ein
+blaues?* Der Steering-Loop-Eintrag war vor der Sektion *Beobachtungen unter
+Schwelle* genau das: sauber erhoben, nie gelesen.
+
+**Zwei Ausnahmen, die keine sind:**
+
+- **Derivative Artefakte** — Indizes und Listen, deren Inhalt anderswo als
+  Original liegt (ADR-Index, Carveout-Index, *Folge-Slices* in der
+  Closure-Notiz). Sie brauchen keinen eigenen Leser, wohl aber eine
+  **Deckung**: das Original muss existieren. Kennzeichne sie als *derivativ*,
+  sonst schlägt die Probe falschen Alarm.
+- **Lauf-Belege** — Artefakte, die belegen, *dass* etwas lief (Review-Report,
+  Verifikations-Belege). Ihr Konsument ist der Vorgang selbst und danach der
+  Audit; über Läufe hinweg werden sie nicht wieder gelesen, und sie müssen es
+  nicht ([Modul 10](../04-qualitaet/modul-10-review-harness.md)).
+
+**Einordnung — und ihre Grenze.** Die Regel ist *inferential feedforward* und
+greift zur **Entwurfszeit**: wenn jemand den Harness *erweitert*, nicht wenn er
+ihn *betreibt*. Sie ist ausdrücklich **kein Prüfpunkt der Closure-Prozedur** —
+dort spräche sie in den meisten Wellen auf nichts an, würde nach der dritten
+Welle übersprungen und wäre danach eine
+[Harness-Lüge](#kernbegriffe). Der häufige Fall ist ohnehin gedeckt: Erreicht
+eine Beobachtung die Schwelle und wird zur Regel, hat sie ihren Leser
+automatisch — die verkörperte Form wird in jedem Lauf gelesen, und die
+**Anker-Paarung** prüft deterministisch, dass sie wirklich landete.
+
+Was die Regel *nicht* leistet: Sie sagt nicht, ob ein genannter Konsument den
+Inhalt auch **nutzt**. „Wird beim Audit gelesen" ist eine gültige Antwort und
+zugleich die schwächste — wer sie gibt, sollte wissen, dass er ein Archiv
+anlegt.

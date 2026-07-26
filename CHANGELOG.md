@@ -11,6 +11,47 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 46 — 2026-07-26 · „Jedes Artefakt hat einen Konsumenten" wird auffindbar — und ehrlich eingeordnet
+
+Auslöser war die Rückfrage, wo dieser „Graph-Test" eigentlich steht. Antwort:
+**nirgends in der Lehre.** Der Begriff kam ausschließlich in
+CHANGELOG-Einträgen dieser Sitzung vor; im Kurs existierte **ein Satz** in
+einer Diagramm-Nachbesprechung (`konventionen.md`) — ohne Namen, ohne eigene
+Überschrift, ohne Anker, nicht im Regelwerk-Split. Damit war ausgerechnet die
+Regel, die verlangt, dass jedes geschriebene Artefakt einen Leser hat, selbst
+so abgelegt, dass der Adopter sie nicht liest.
+
+### Hinzugefügt
+
+- **`konventionen.md` §Jedes Artefakt hat einen Konsumenten** — eigener
+  Abschnitt mit Anker statt Satz im Fließtext. Regel: Wer dem Harness ein
+  Artefakt hinzufügt, benennt, *wer es liest und wann*; findet sich kein
+  Leser, ist es Ablage, keine Steuerung. Das Fluss-Diagramm bleibt, wo es ist,
+  und ist jetzt ausdrücklich die *Illustration* der Regel, nicht ihr Träger.
+- **Zwei Ausnahmen benannt**, die in den Wellen 40–43 empirisch aufgetreten
+  sind: **derivative Artefakte** (Index; braucht keinen Leser, aber eine
+  Deckung — sonst schlägt die Probe falschen Alarm) und **Lauf-Belege**
+  (Konsument ist der Vorgang und danach der Audit).
+- **In den Regelwerk-Split übernommen** (Anker
+  `#jedes-artefakt-hat-einen-konsumenten`) — die Regel ist operativ genug für
+  einen Adopter, der seinen Harness erweitert. Das Diagramm bleibt draußen:
+  Illustration ist Didaktik.
+
+### Geändert
+
+- **Ehrlich eingeordnet statt hochgestuft.** Die Regel ist *inferential
+  feedforward* und greift zur **Entwurfszeit** — beim Erweitern des Harness,
+  nicht in seinem Betrieb. Sie wird **ausdrücklich kein Prüfpunkt der
+  Closure-Prozedur**: dort spräche sie in den meisten Wellen auf nichts an,
+  würde nach der dritten Welle übersprungen und wäre danach eine Harness-Lüge
+  (Modul 13: *„wenn ein Gate manchmal rot sein darf, ist es kein Gate"*). Der
+  häufige Fall ist ohnehin gedeckt — eine Beobachtung, die die Schwelle
+  erreicht, hat ihren Leser automatisch, und die Anker-Paarung prüft
+  deterministisch, dass die Regel landete.
+  Dazu die Grenze: Die Regel sagt **nicht**, ob ein genannter Konsument den
+  Inhalt auch *nutzt*. *„Wird beim Audit gelesen"* ist eine gültige und
+  zugleich die schwächste Antwort.
+
 ## Welle 45 — 2026-07-26 · Das Kurs-Repo bekommt eine Roadmap (und deklariert seine Reduktion)
 
 ### Hinzugefügt

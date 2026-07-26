@@ -758,3 +758,29 @@ write-only-Ablage.
 
 Ziel-Form des Eintrags mit Pflichtfeld *Zielort*:
 [`../templates/docs/plan/planning/welle-results.template.md`](../templates/docs/plan/planning/welle-results.template.md).
+
+<a id="jedes-artefakt-hat-einen-konsumenten"></a>
+
+### Jedes Artefakt hat einen Konsumenten
+
+Wer dem Harness ein Artefakt hinzufügt — eine Sektion, eine Liste, eine Notiz
+—, benennt, **wer es liest und wann**. Findet sich kein Leser, ist es Ablage,
+keine Steuerung, und gehört nicht angelegt.
+
+- **Derivative Artefakte** (ADR-Index, Carveout-Index, *Folge-Slices* in der
+  Closure-Notiz) brauchen keinen eigenen Leser, wohl aber eine **Deckung**:
+  das Original muss existieren. Als *derivativ* kennzeichnen, sonst schlägt
+  die Probe falschen Alarm.
+- **Lauf-Belege** (Review-Report, Verifikations-Belege) haben ihren Konsumenten
+  im Vorgang selbst und danach im Audit; über Läufe hinweg werden sie nicht
+  wieder gelesen und müssen es nicht.
+
+**Einordnung und Grenze:** *inferential feedforward*, greift zur
+**Entwurfszeit** — beim Erweitern des Harness, nicht in seinem Betrieb.
+**Kein Prüfpunkt der Closure-Prozedur**: dort spräche die Regel in den meisten
+Wellen auf nichts an, würde übersprungen und wäre danach eine Harness-Lüge.
+Der häufige Fall ist gedeckt — eine Beobachtung, die die Schwelle erreicht und
+zur Regel wird, hat ihren Leser automatisch (die verkörperte Form wird in jedem
+Lauf gelesen), und die Anker-Paarung prüft deterministisch, dass sie landete.
+Die Regel sagt **nicht**, ob ein genannter Konsument den Inhalt auch nutzt;
+„wird beim Audit gelesen" ist gültig und zugleich die schwächste Antwort.
