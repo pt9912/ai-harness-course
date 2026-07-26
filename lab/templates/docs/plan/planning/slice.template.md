@@ -78,9 +78,16 @@ Wann ist der Slice done?
 
 <!--
 Was könnte schief gehen? Welche Carveouts entstehen ggf.?
+
+JEDES Risiko bekommt bei Closure genau EINEN Ausgang (Baseline-Regelwerk
+`modul-05-planning-harness.md` §Offene Risiken werden bei Closure aufgelöst):
+  eingetreten  -> Carveout CO-<NNN> oder Folge-Slice, ID hier eintragen
+  entfallen    -> gestrichen MIT Begründung (ohne sie ist es stilles Vergessen)
+  weiter offen -> wandert in „Beobachtungen unter Schwelle" der Welle-Closure
+Ein Slice geht nicht nach done/, während ein Risiko ohne Ausgang dasteht.
 -->
 
-- <…>
+- <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-NNN | entfallen: Grund | weiter offen: → Welle-Closure>
 
 ## 7. Closure-Notiz (nach `done/`)
 
@@ -90,7 +97,10 @@ Wird *nach* Abschluss ergänzt. Inhalt:
 - Was ging anders als geplant?
 - Steering-Loop-Eintrag: welcher Guide/Sensor sollte verbessert werden?
   (kanonische Definition: [Baseline-Regelwerk §Steering Loop](../../../../regelwerk/grundlagen-klassifikation.md#steering-loop))
-- Folge-Slices: welche neuen open/-Einträge?
+- Folge-Slices: welche neuen open/-Einträge? (*derivativ* — der Slice
+  selbst liegt in `open/`, diese Zeile zeigt nur darauf; genannt heißt
+  angelegt, sonst schlägt die Folge-Slice-Paarung der Welle-Closure an)
+- Risiken aus §6: hat jedes einen Ausgang?
 -->
 
 <!-- Erst nach Abschluss füllen. -->

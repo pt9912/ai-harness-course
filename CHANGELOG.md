@@ -11,6 +11,49 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 40 — 2026-07-26 · Graph-Test auf den Bestand angewandt: §6 Risiken war write-only
+
+Der Mermaid-Fluss aus Welle 39 stellt eine Prüffrage — *hat das gelbe Kästchen
+ein blaues?* Auf zwei bestehende Sektionen angewandt, die noch nie geprüft
+wurden. Ergebnis: eine ist harmlos, eine war der nächste write-only-Fall.
+
+### Hinzugefügt
+
+- **Modul 5 §Offene Risiken werden bei Closure aufgelöst.** `slice.template.md`
+  §6 *Risiken und offene Punkte* hatte **null Konsumenten** — `kurs/` und
+  `lab/regelwerk/` abgesucht, kein Schritt liest die Sektion. Nicht einmal der
+  naheliegende: §7 Closure fragt *„Was ging anders als geplant?"*, ohne §6 je zu
+  erwähnen. Und sie ist **nicht derivativ** — ein beim Schnitt notiertes Risiko
+  ist Originalinformation, die nirgendwo sonst steht. Damit dieselbe Klasse wie
+  der Steering-Loop-Eintrag vor Welle 38: sauber erhoben, nie gelesen.
+  Jetzt bekommt jedes Risiko beim Übergang nach `done/` genau **einen** Ausgang
+  — *eingetreten* → Carveout oder Folge-Slice mit ID · *entfallen* → gestrichen
+  **mit Begründung** (ohne sie ist es stilles Vergessen) · *weiter offen* →
+  wandert in *Beobachtungen unter Schwelle* der Welle-Closure. Der dritte
+  Ausgang ist der tragende: er hängt das Risiko an den **Zähler aus Welle 38**,
+  statt einen zweiten Mechanismus zu erfinden. Ein Risiko, das drei Slices lang
+  offen bleibt, erreicht damit die Schwelle — statt dreimal unabhängig notiert
+  und dreimal vergessen zu werden. Ein Slice geht nicht nach `done/`, während
+  ein Risiko ohne Ausgang dasteht.
+- **Folge-Slice-Paarung** als zweite deterministische Prüfung im Carveout-Audit
+  (Modul 6 Schritt 2), neben der Anker-Paarung aus Welle 39: jeder in einer
+  Closure-Notiz genannte Folge-Slice **existiert als Datei in `open/`**. Beide
+  folgen demselben Muster — *Nennung ohne Deckung ist eine Harness-Lüge*.
+
+### Geändert
+
+- **§Folge-Slices als *derivativ* gekennzeichnet** (`welle-results.template.md`,
+  `slice.template.md` §7, Modul 6). Sie ist **kein** write-only-Fall: der
+  Folge-Slice selbst ist eine Datei in `open/` und wird vom normalen Lifecycle
+  konsumiert; die Liste zeigt nur darauf. Die Klasse existierte im Repo bereits
+  (ADR-Index, Carveout-Index sind so gelabelt), nur die Kennzeichnung fehlte —
+  ohne sie schlägt der Graph-Test hier falschen Alarm.
+- **Satelliten:** Regelwerk-Splits `modul-05` (Risiko-Auflösung) und `modul-06`
+  (zweite Paarung, Derivativ-Label); `lab/example` zeigt beide Formen real —
+  `slice-009` §6 mit zwei Ausgängen (einer *entfallen* mit Messwert, einer
+  *weiter offen*), und der offene wandert nachvollziehbar in die
+  Beobachtungen-Tabelle von `welle-1-results.md`.
+
 ## Welle 39 — 2026-07-26 · Herkunfts-Anker: Regeln nennen die Welle, aus der sie stammen
 
 ### Hinzugefügt

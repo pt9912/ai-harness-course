@@ -47,6 +47,18 @@ sondern ein Buffet.
 
 ### Closure- und Lerneintrag-Regeln (Modul 5)
 
+- **Offene Risiken werden bei Closure aufgelöst.** Ein Risiko aus dem
+  Slice-Plan (*Risiken und offene Punkte*) ist Originalinformation und
+  steht nirgendwo sonst. Jedes bekommt beim Übergang nach `done/` genau
+  **einen** Ausgang: *eingetreten* → Carveout (Modul 7) oder Folge-Slice
+  mit ID · *entfallen* → gestrichen **mit Begründung** (ohne sie ist es
+  stilles Vergessen) · *weiter offen* → wandert in *Beobachtungen unter
+  Schwelle* der Welle-Closure ([Modul 6](modul-06-roadmap.md)). Der
+  dritte Ausgang hängt das Risiko an den Zähler, statt einen zweiten
+  Mechanismus zu erfinden: drei Slices lang offen heißt Schwelle
+  erreicht. Ein Slice geht nicht nach `done/`, während ein Risiko ohne
+  Ausgang dasteht.
+
 - Übergang nach `done/` verlangt zwei beobachtbare Closure-Kriterien
   (z. B. Replay grün, DoD-Punkte als Test verlinkt) *und* einen
   Lerneintrag in einer der drei Formen (geschärfte Regel · neuer Sensor ·

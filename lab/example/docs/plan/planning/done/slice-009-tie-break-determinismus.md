@@ -42,7 +42,14 @@ sortiert werden (siehe Lastenheft, Spezifikation §1).
 
 ## 6. Risiken und offene Punkte
 
-- Performance-Hit der Tie-Break-Vergleichsfunktion vernachlässigbar (< 1 %).
+Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
+§Offene Risiken werden bei Closure aufgelöst).
+
+- Performance-Hit der Tie-Break-Vergleichsfunktion — **Ausgang:** entfallen.
+  Gemessen < 1 % gegen den Benchmark aus `evals/`, damit kein Risiko mehr.
+- Golden-Set-Cases decken keine Gleichstands-Eingaben ab — **Ausgang:**
+  weiter offen → *Beobachtungen unter Schwelle* der Welle-1-Closure
+  (Sub-Area *Test-Infrastruktur*).
 
 ## 7. Closure-Notiz
 

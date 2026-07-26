@@ -86,13 +86,20 @@ Regeln:
 | Beobachtung (stabile Bezeichnung) | Betroffene Sub-Area | Zähler | Belege |
 |---|---|---|---|
 | <kurze, gleichbleibende Bezeichnung> | <Sub-Area> | 1× / 2× | <slice-NNN> |
+| <aus Slice-§6 übernommenes offenes Risiko> | <Sub-Area> | 1× | <slice-NNN> |
 
 <!-- Keine offenen Beobachtungen? Dann "— keine —" eintragen, nicht die
      Sektion löschen: die leere Liste ist die Aussage. -->
 
 ## Folge-Slices
 
-<!-- Was aus dieser Welle heraus entstanden ist, mit Ziel-Welle. -->
+<!--
+DERIVATIV: der Folge-Slice selbst ist eine Datei in `open/`; diese Liste
+zeigt nur darauf. Deshalb braucht sie keinen eigenen Konsumenten — wohl
+aber eine Deckung: jeder genannte Folge-Slice MUSS als Datei in `open/`
+existieren (Folge-Slice-Paarung, wird beim Carveout-Audit mitgeprüft).
+Genannt ohne angelegt ist dieselbe Klasse wie ein halluziniertes Gate.
+-->
 
 - <slice-NNN (<Titel>) — startet welle-<NN+1>.>
 

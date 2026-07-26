@@ -54,6 +54,33 @@ Größen-Erkenntnis) und `in_progress → open` (Blocker — meist mit
 Carveout, siehe [Modul 7](modul-07-carveouts.md)). Der einzige Übergang
 nach `done` verlangt *Lerneintrag*, nicht nur "Tests grün".
 
+### Offene Risiken werden bei Closure aufgelöst
+
+Ein Slice-Plan notiert unter *Risiken und offene Punkte*, was schiefgehen
+kann. Diese Notiz ist **Originalinformation** — sie steht nirgendwo
+sonst. Ohne einen Schritt, der sie wieder aufgreift, stirbt sie mit dem
+Slice: dreimal notiert, dreimal vergessen, nie als Muster erkannt.
+
+Deshalb hat der Übergang nach `done` eine zweite Pflicht neben dem
+Lerneintrag: **jedes notierte Risiko bekommt genau einen von drei
+Ausgängen.**
+
+| Ausgang | Wann | Wohin |
+|---|---|---|
+| **eingetreten** | das Risiko hat sich realisiert | Carveout ([Modul 7](modul-07-carveouts.md)) oder Folge-Slice — mit ID in der Closure-Notiz |
+| **entfallen** | kann nicht mehr eintreten | gestrichen, **mit Begründung** — ohne sie ist es stilles Vergessen |
+| **weiter offen** | weder eingetreten noch entfallen | wandert in *Beobachtungen unter Schwelle* der Welle-Closure ([Modul 6](modul-06-roadmap.md#die-wellen-closure-prozedur)) |
+
+Der dritte Ausgang ist der, der die Klasse rettet: Er hängt das Risiko an
+den **Zähler**, statt einen zweiten Mechanismus zu erfinden. Ein Risiko,
+das drei Slices lang offen bleibt, erreicht damit die Schwelle und wird
+zur Lücke — statt dreimal unabhängig notiert und dreimal vergessen zu
+werden.
+
+Ein Slice geht nicht nach `done`, während ein Risiko ohne Ausgang
+dasteht. Das ist dieselbe Disziplin wie beim Lerneintrag: *abgelegt* ist
+nicht *abgeschlossen*.
+
 ## Lab-Bezug
 
 * `docs/plan/planning/{open,next,in-progress,done}/`

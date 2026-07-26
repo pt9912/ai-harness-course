@@ -85,15 +85,19 @@ dort automatisch (Modul-0-Prinzip).
 2. **Carveout-Audit der Welle** (Modul 7). Jeder offene Carveout wird
    geprüft: aufgelöst, verlängert (mit Folge-Slice) oder als permanent
    akzeptiert. Eine Welle darf *mit* dokumentiertem Carveout schließen —
-   aber nie mit einem stillen roten Gate. **Anker-Paarung mitprüfen:**
-   jeder Steering-Loop-Eintrag nennt einen Zielort, der Zielort existiert
-   und trägt `seit welle-<NN>`
-   ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
-   Rot heißt: eine Regel wurde versprochen und nicht geschrieben.
+   aber nie mit einem stillen roten Gate. **Zwei Paarungen mitprüfen**,
+   beide nach dem Muster *Nennung ohne Deckung ist eine Harness-Lüge*:
+   (a) **Anker-Paarung** — jeder Steering-Loop-Eintrag nennt einen
+   Zielort, der Zielort existiert und trägt `seit welle-<NN>`
+   ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker));
+   (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als
+   Datei in `open/`. Rot heißt: etwas wurde versprochen und nicht
+   geschrieben.
 3. **Welle nach `done/` schließen.** Closure-Notiz `done/welle-NN-results.md`
    schreiben (*was gelernt wurde*: geliefert · was funktionierte · was anders
    lief · **Steering-Loop-Einträge** · **Beobachtungen unter Schwelle** ·
-   Folge-Slices · Verifikation aus
+   Folge-Slices (*derivativ* — der Slice selbst liegt in `open/`) ·
+   Verifikation aus
    Schritt 1). Ziel-Form:
    [`../templates/docs/plan/planning/welle-results.template.md`](../templates/docs/plan/planning/welle-results.template.md).
    Ohne Lerneintrag ist die Welle nicht „fertig", nur „weg"

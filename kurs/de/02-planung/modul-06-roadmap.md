@@ -257,16 +257,21 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    offene Carveout wird geprüft: aufgelöst, verlängert (mit Folge-Slice)
    oder als permanent akzeptiert. Eine Welle darf *mit* dokumentiertem
    Carveout schließen — aber nie mit einem stillen roten Gate.
-   **Anker-Paarung mitprüfen:** Jeder Steering-Loop-Eintrag dieser Welle
-   nennt einen Zielort, der Zielort existiert und trägt `seit welle-<NN>`
-   ([`konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
-   Rot heißt hier: eine Regel wurde versprochen und nicht geschrieben —
-   dieselbe Klasse wie ein halluziniertes Gate.
+   **Zwei Paarungen mitprüfen** — beide nach dem Muster *Nennung ohne
+   Deckung ist eine Harness-Lüge*: (a) **Anker-Paarung** — jeder
+   Steering-Loop-Eintrag nennt einen Zielort, der Zielort existiert und
+   trägt `seit welle-<NN>`
+   ([`konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln));
+   (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als
+   Datei in `open/`. Rot heißt hier: etwas wurde versprochen und nicht
+   geschrieben — dieselbe Klasse wie ein halluziniertes Gate.
 3. **Welle nach `done/` schließen.** Die Closure-Notiz
    `done/welle-NN-results.md` hält fest, *was gelernt wurde*: geliefert · was
    funktionierte · was anders lief · **Steering-Loop-Einträge** (geschärfte
    Regel / neuer Sensor / benannte Spec-Lücke) · **Beobachtungen unter
-   Schwelle** · Folge-Slices · Verifikation (die Belege aus Schritt 1). Ohne
+   Schwelle** · Folge-Slices (*derivativ* — der Slice selbst liegt in
+   `open/`, die Liste zeigt nur darauf) · Verifikation (die Belege aus
+   Schritt 1). Ohne
    Lerneintrag ist die Welle nicht „fertig", sondern nur „weg"
    ([Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md)).
    Ziel-Form: [`/lab/templates/docs/plan/planning/welle-results.template.md`](../../../lab/templates/docs/plan/planning/welle-results.template.md).
