@@ -6,10 +6,14 @@ unabhängig davon, ob dein Repo Go, Python, Kotlin, Java oder C# nutzt.
 ## Übersicht
 
 Diese Tabelle listet die **17 Dokument-Skelette** (Phase 0 → 1 beim
-Bootstrap — das Repo füllt sie). Die zwei **Tooling-Dateien**
-(`Makefile`, `.d-check.yml`) sind **keine** Dokument-Skelette
-und stehen separat in [§Gate-Baseline](#gate-baseline) — also 17 Skelette
-+ 2 Tooling-Dateien, nicht 18 gleichartige Vorlagen.
+Bootstrap — das Repo füllt sie). Das Verzeichnis trägt **21 Dateien in drei
+Klassen**, nicht 21 gleichartige Vorlagen:
+
+| Klasse | Anzahl | Wo |
+|---|---|---|
+| **Dokument-Skelette** — Artefakte, die das Repo kopiert und ausfüllt | 17 | Tabelle unten |
+| **Skill-Dateien** — Urteilsgrundlage eines Agenten, nicht Artefakt | 2 | [§Skill-Dateien](#skill-dateien) |
+| **Tooling-Dateien** (`Makefile`, `.d-check.yml`) | 2 | [§Gate-Baseline](#gate-baseline) |
 
 | Template | Wofür | Regelwerk-Abschnitt |
 |---|---|---|
@@ -89,6 +93,29 @@ Template-Lager.
 veraltet ihr `(folgt)`/Link-Stand: Drift, die der Referenz-Gate nicht
 fängt (er prüft Existenz verlinkter Ziele, nicht ob Vorhandenes als
 vorhanden beschrieben wird) — Reviewer-Sache.
+
+## Skill-Dateien
+
+Skill-Dateien sind **keine Dokument-Skelette**: Sie werden nicht zu einem
+Repo-Artefakt ausgefüllt, sondern tragen die **Urteilsgrundlage einer
+Agenten-Rolle** — das repo-spezifische „worauf achtest du hier". Zielort im
+Adopter-Repo ist `.harness/skills/`, nicht `docs/` oder `spec/`.
+
+| Skill-Template | Wofür | Regelwerk-Abschnitt |
+|---|---|---|
+| [`.harness/skills/reviewer.template.md`](.harness/skills/reviewer.template.md) | Reviewer-Skill: HIGH-Liste, Kategorien-Regeln, Negativbefund-Pflicht, Output-Schema | [Modul 10](../regelwerk/modul-10-review-harness.md#ziel-form-reviewer-skill) |
+| [`.harness/skills/closure-note-reviewer.template.md`](.harness/skills/closure-note-reviewer.template.md) | Spezialisierter Reviewer für Closure-Notizen | [Modul 11](../regelwerk/modul-11-verification.md) |
+
+**Warum nur zwei bei sechs Rollen?** Eine Rolle braucht genau dann eine
+Skill-Datei, wenn ihr Urteil *inferential* ist **und** auf repo-spezifischem
+Wissen beruht, das aus keinem Artefakt ableitbar ist — das trifft nur auf den
+Reviewer zu. Planner und Architect laufen über Templates, der Implementer über
+das Briefing (`AGENTS.md`), Verifier und Validator über die Prüfgrundlage im
+Slice. Die zweite Datei ist **keine siebte Rolle**, sondern derselbe Reviewer
+mit einem anderen *Urteilstyp*: **Skills wachsen pro Urteilstyp, nicht pro
+Rolle.** Zusätzliche Skill-Dateien für Template- oder Briefing-Rollen wären
+Attrappen ohne nicht-ableitbaren Inhalt. Kriterium und Zuordnungstabelle:
+[Modul 8 §Welche Rolle braucht welche Artefaktklasse](../regelwerk/modul-08-agentenrollen.md#artefaktklasse-pro-rolle).
 
 ## Gate-Baseline
 
