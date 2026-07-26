@@ -94,6 +94,13 @@ Ein Slice geht nicht nach `done`, während ein Risiko ohne Ausgang
 dasteht. Das ist dieselbe Disziplin wie beim Lerneintrag: *abgelegt* ist
 nicht *abgeschlossen*.
 
+Dieselbe Route nehmen die **Finding-Klassen aus dem Review** dieses
+Slice: Der Review-Report ist ein Lauf-Beleg, der über Läufe hinweg nicht
+gelesen wird ([Modul 10](../04-qualitaet/modul-10-review-harness.md)) —
+seine Klassen-Bezeichnungen wandern über §7 in denselben Zähler. Der
+Slice-Closure-Eintrag hat damit drei Quellen: eigene Beobachtung, offenes
+Risiko, wiederkehrende Finding-Klasse.
+
 **Wer liest das?** Lerneintrag und offene Risiken werden bei der
 Welle-Closure aus den `done/`-Slices **verdichtet**
 ([Modul 6 §Wellen-Closure-Prozedur](modul-06-roadmap.md#die-wellen-closure-prozedur),

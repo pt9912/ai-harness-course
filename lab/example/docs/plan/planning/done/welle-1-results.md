@@ -41,7 +41,7 @@ Eintrag nach oben in die Steering-Loop-Einträge.
 |---|---|---|---|
 | Golden-Set-Case ohne Boundary-Anteil aufgenommen | Test-Infrastruktur | 2× | slice-005, slice-011 |
 | Golden-Set deckt keine Gleichstands-Eingaben ab | Test-Infrastruktur | 1× | slice-009 (§6, Ausgang „weiter offen") |
-| ADR-Bezug im Commit vergessen, im Review nachgetragen | Spec-Schreibung | 1× | slice-008 |
+| ADR-Bezug im Commit vergessen, im Review nachgetragen | Spec-Schreibung | 2× | slice-008, slice-012 (Finding-Klasse aus Review) |
 
 ## Folge-Slices
 

@@ -43,6 +43,8 @@ Baseline-Regelwerk `modul-10-review-harness.md` §Ziel-Form: Reviewer-Skill.
 - `pfad`: <Datei:Zeile>
 - `befund`: <1–2 Sätze, beobachtbar, ohne Lösungsvorschlag>
 - `verifizierbar`: ja/nein — <welcher Gate-Lauf würde es bestätigen?>
+- `klasse`: <stabile Kurz-Bezeichnung des Fehlermusters, z. B.
+  „Tie-Break in sortierender Operation nicht dokumentiert">
 
 ## Negativbefunde
 
@@ -64,6 +66,20 @@ Findings" nicht von "nicht geprüft" unterscheidbar (Modul 10
 | LOW | <n> |
 | INFO | <n> |
 
+**Finding-Klassen dieses Laufs:** <klasse-1> · <klasse-2>
+
+<!--
+Die Klassen-Zeile ist der Übergabepunkt in den Steering-Loop-ZÄHLER. Sie
+wird bei der Slice-Closure (§7) als Beobachtung übernommen und bei der
+Welle-Closure verdichtet und gezählt; bei 3x wird der Reviewer-Skill
+geschärft (Modul 10 §Pflege).
+
+DESHALB MUSS DIE BEZEICHNUNG ÜBER LÄUFE HINWEG STABIL SEIN — zwei Namen
+für dasselbe Muster werden getrennt gezählt und erreichen die Schwelle
+nie. Niemand muss dafür alte Reports lesen: die Häufung entsteht bei der
+Verdichtung, nicht durch einen Archiv-Scan.
+-->
+
 ## Verdikt
 
 **Merge-blockierend:** ja | nein — HIGH und MEDIUM blockieren
@@ -71,6 +87,10 @@ typischerweise; eine Abweichung davon wird hier begründet, nicht
 still entschieden.
 
 **Übergabe:** Findings gehen an die Implementation (Rückkante
-Review → Plan bei Plan-Defekt). Der Report ersetzt keine
+Review → Plan bei Plan-Defekt); die **Finding-Klassen** gehen zusätzlich
+in die Slice-Closure §7 und von dort in den Zähler. Dieser Report selbst
+ist ein **Lauf-Beleg** (Audit: dieser Diff, dieser Skill, dieses Modell,
+dieses Verdikt) — er wird über Läufe hinweg nicht wieder gelesen, und
+muss es nicht. Der Report ersetzt keine
 Verifikation — DoD-/Spec-Konformität prüft der Verifier separat
 (Modul 11; anderes Prüf-Artefakt, anderer Eingabe-Kontext).

@@ -11,6 +11,41 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 43 — 2026-07-26 · Review-Findings finden ihren Zähler — ohne Archiv-Scan
+
+Letzte offene Stelle aus dem Konsumenten-Audit: Modul 10 §Pflege verlangt
+*„bei dreimaligem Auftreten desselben Findings"* zu schärfen — und dieser
+3×-Regel fehlte der Zähler, genau wie der Steering-Loop-Regel vor Welle 38.
+`docs/reviews/` wächst um eine Datei pro Lauf und wurde über Läufe hinweg von
+niemandem gelesen.
+
+### Geändert
+
+- **`docs/reviews/` umgedeutet: Lauf-Beleg statt Wissensspeicher.** Der Report
+  belegt *diesen Diff, mit diesem Skill, diesem Modell, diesem Verdikt*; sein
+  Konsument ist der Implementer im selben Zyklus (bereits deklariert) und
+  danach der Audit. **Er braucht keinen Leser über Läufe hinweg** — und einen
+  zu bauen wäre der falsche Reflex gewesen (Archiv-Scan = vierter Mechanismus).
+- **Das steuerungsrelevante Signal ist die Finding-Klasse, nicht der Report.**
+  Neues Feld `klasse` pro Finding plus Summary-Zeile *Finding-Klassen dieses
+  Laufs*; von dort über die Slice-Closure §7 in denselben Zähler, den Welle 38
+  gebaut hat. **Niemand muss wissen, ob eine Klasse „schon mal" auftrat** —
+  genau dafür ist der Zähler da: der Reviewer benennt einmal pro Lauf, die
+  Häufung entsteht bei der Verdichtung über die Slices einer Welle.
+- **Modul 10 Schritt 6 sagt jetzt, wer zählt.** Bisher stand dort „bei
+  dreimaligem Auftreten" in einem Skill-Block — der Skill kann das gar nicht
+  zählen, weil jeder Lauf für sich steht. Er formuliert nur noch, *was bei
+  Erreichen der Schwelle zu tun ist*.
+- **Damit hat der Closure-Eintrag drei deklarierte Quellen** (Modul 5): eigene
+  Beobachtung · offenes Risiko aus §6 (Welle 40) · wiederkehrende
+  Finding-Klasse (diese Welle). Alle drei nehmen dieselbe Route und brauchen
+  dieselbe **stabile Bezeichnung** — zwei Namen für dasselbe Muster werden
+  getrennt gezählt und erreichen die Schwelle nie.
+- Damit wird auch der Graph aus Welle 39/41 wahr: Er nennt *Review-Findings*
+  als Beobachtungs-Quelle, ohne dass es dafür bisher einen Weg gab.
+- **Satelliten:** Regelwerk-Splits `modul-05`/`modul-10`; `lab/example` zeigt
+  die dritte Quelle real (Finding-Klasse als 2×-Beobachtung).
+
 ## Welle 42 — 2026-07-26 · Validierung: Widerspruch aufgelöst, Abwesenheit begründet
 
 Auslöser war die Frage „Validierung kommt nicht vor — warum nicht?". Antwort:

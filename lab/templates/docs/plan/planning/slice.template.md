@@ -102,6 +102,10 @@ Wird *nach* Abschluss ergänzt. Inhalt:
   selbst liegt in `open/`, diese Zeile zeigt nur darauf; genannt heißt
   angelegt, sonst schlägt die Folge-Slice-Paarung der Welle-Closure an)
 - Risiken aus §6: hat jedes einen Ausgang?
+- Finding-Klassen aus dem Review dieses Slice (Summary-Zeile des
+  Review-Reports): welche gehen als Beobachtung weiter? Stabile
+  Bezeichnung übernehmen, nicht umformulieren — sonst zählt der
+  Welle-Zähler zwei Namen getrennt.
 -->
 
 <!-- Erst nach Abschluss füllen. -->
