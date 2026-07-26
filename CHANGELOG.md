@@ -11,6 +11,57 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 44 — 2026-07-26 · Graph-Test systematisch: ein Trigger ohne Wächter
+
+Der Konsumenten-Test aus Welle 39 wurde erstmals **über alle ~70
+Template-Sektionen** gezogen statt punktuell. Die meisten sind trivial
+konsumiert (Spec/ADR/AGENTS werden per Source Precedence in jedem Lauf
+gelesen). Drei Befunde blieben — und der erste ist generalisierbar.
+
+### Hinzugefügt
+
+- **Trigger-Audit statt Carveout-Audit (Modul 6 Schritt 2).** Der Harness kennt
+  **drei** Artefaktklassen mit einem Trigger; geprüft wurde bisher genau eine:
+
+  | Artefakt | Trigger | Wächter vorher |
+  |---|---|---|
+  | Carveout | Auflösungs-Trigger | Carveout-Audit pro Welle ✓ |
+  | Bootstrap-aware Gate | Hochschalt-Trigger | **keiner** |
+  | ADR | Re-Evaluierungs-Trigger | **keiner** |
+
+  Der Kurs benannte die Pathologie bereits — aber nur für Carveouts
+  (*Carveout-Wildwuchs: temporäre Ausnahmen, deren Trigger längst eingetreten
+  ist*). Dieselbe Verfallsform für Gates (ewig 40 %, obwohl M2 erreicht ist)
+  und ADRs (Entscheidung, deren Re-Evaluierungs-Bedingung vor einem Jahr
+  eintrat) hatte weder Namen noch Wächter. Schritt 2 prüft jetzt alle drei;
+  `klassifikation.md` §Entropy Management führt die zwei fehlenden
+  Verfallsformen (*Stehengebliebene Reifestufe*, *Abgelaufene Entscheidung*).
+  Leitsatz: **ein Trigger ohne Wächter ist eine Absichtserklärung mit
+  Verfallsdatum.**
+
+### Geändert
+
+- **`Re-Evaluierungs-Trigger` in Modul 4 verankert.** Er stand nur im
+  ADR-Template und in der *Lösung* — Modul 4 nannte als MADR-Pflichtabschnitte
+  nur Kontext · Optionen · Entscheidung · Konsequenzen. Template-Struktur ohne
+  Quell-Verankerung, dieselbe Klasse wie der Welle-33-Defekt. Jetzt in
+  §Kernidee erklärt, im Lernziel und in der Selbstcheck-Rubrik geführt.
+- **`Out-of-Scope` für die Welle verankert.** `welle.template.md` §6 trug
+  *„Out-of-Scope für diese Welle"* — der Kurs lehrt Out-of-Scope für das
+  Lastenheft (Modul 3) und den Slice-Plan (Modul 9), für die **Welle
+  nirgends**. Jetzt Teil von Schritt 1 der Wellen-Eröffnung, mit Begründung:
+  was nicht ausdrücklich ausgeschlossen ist, dehnt die Welle, bis der
+  Closure-Trigger unerreichbar wird.
+- **Satelliten:** Regelwerk-Splits `modul-04`, `modul-06`,
+  `grundlagen-klassifikation`.
+
+**Geprüft und in Ordnung** (Nicht-Befunde des Sweeps): `roadmap`
+§Historische Trigger-Verschiebungen ist als *Audit-Signal* deklariert —
+Lauf-Beleg-Klasse wie `docs/reviews/`. ADR §Geschichte, Carveout §Geschichte
+und die Spec-§Historie sind Audit- bzw. CR-Fußabdruck (Welle 34). Alle
+Spec-/AGENTS-/`harness/README`-Sektionen werden per Source Precedence in jedem
+Lauf gelesen. Skills §Pflege ist seit Welle 43 verdrahtet.
+
 ## Welle 43 — 2026-07-26 · Review-Findings finden ihren Zähler — ohne Archiv-Scan
 
 Letzte offene Stelle aus dem Konsumenten-Audit: Modul 10 §Pflege verlangt

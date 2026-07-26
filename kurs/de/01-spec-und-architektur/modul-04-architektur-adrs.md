@@ -30,7 +30,7 @@ erzeugt ihn? Notiere deine Antwort; die Kernidee unten löst auf.
 
 Nach diesem Modul kannst du:
 
-* einen ADR im MADR-Format mit Kontext, Optionen, Entscheidung und Konsequenzen *verfassen* (Erschaffen · prozedural),
+* einen ADR im MADR-Format mit Kontext, Optionen, Entscheidung, Konsequenzen und **Re-Evaluierungs-Trigger** *verfassen* (Erschaffen · prozedural),
 * die Trennung ADR ↔ Spec ↔ Plan *erklären* und Grenzfälle *einordnen* (Analysieren · konzeptuell),
 * eine ADR-Aussage in eine maschinell prüfbare Fitness-Function-*Aussage* übersetzen (Anwenden · prozedural; das volle *Erschaffen* der lauffähigen Fitness Function folgt in [Modul 13](../04-qualitaet/modul-13-quality-gates.md#worked-example-a-vom-adr-satz-zur-fitness-function)),
 * zwischen `superseded` und `deprecated` ADRs *unterscheiden* und einen Folge-ADR *entwerfen* (Bewerten + Erschaffen · konzeptuell+prozedural).
@@ -73,6 +73,19 @@ Fehlvorstellungen* zeigt, wo die häufigsten Reibungen liegen.
 Ein ADR ist die einzige Stelle, an der "weil" gegen "ist halt so" gewinnt.
 Wenn dein Reviewer-Agent den Grund nicht findet, kann er die Entscheidung
 nicht verteidigen.
+
+**Jede ADR trägt einen Re-Evaluierungs-Trigger** — eine beobachtbare
+Bedingung, unter der die Entscheidung erneut geprüft wird (*„wenn
+Bibliothek X v2 verfügbar ist", „wenn das Kostenbudget Y überschreitet",
+„bei Meilenstein M3"*), oder ausdrücklich *permanent*. Eine ADR ohne
+Trigger ist nicht falsch, aber unbefristet: Sie gilt weiter, auch wenn
+ihre Voraussetzung längst weg ist. Geprüft wird der Trigger im
+**Trigger-Audit** der Welle-Closure
+([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur),
+Schritt 2) — zusammen mit Carveout- und Gate-Triggern; ein Trigger ohne
+Wächter ist eine Absichtserklärung mit Verfallsdatum. Bei Eintreten:
+Entscheidung bestätigen oder Folge-ADR mit `supersedes` (Accepted-ADRs
+werden nie überschrieben).
 
 ## Hard Rule (Beispiel aus c-hsm-doc, ADR 0001)
 
@@ -212,7 +225,7 @@ Modul-spezifische Trigger:
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
-| Vier MADR-Pflichtabschnitte? | "Titel, Text." | Kopf-Felder (Status, Datum, Bezug, ggf. Supersedes) + Body-Blöcke (Kontext, Optionen mit Trade-offs, Entscheidung, Konsequenzen). | + Eine fehlende *Optionen*-Sektion ist die häufigste Drift: dann ist die ADR ein Postulat, kein Entscheidungsprotokoll — und Reviewer kann sie nicht verteidigen. |
+| MADR-Pflichtabschnitte (inkl. Re-Evaluierungs-Trigger)? | "Titel, Text." | Kopf-Felder (Status, Datum, Bezug, ggf. Supersedes) + Body-Blöcke (Kontext, Optionen mit Trade-offs, Entscheidung, Konsequenzen). | + Eine fehlende *Optionen*-Sektion ist die häufigste Drift: dann ist die ADR ein Postulat, kein Entscheidungsprotokoll — und Reviewer kann sie nicht verteidigen. |
 | Drei Aussagen ADR/Spec/Plan zugeordnet, Grenzfall eingeordnet? | "1 ADR, 2 Spec, 3 Plan." — Zuordnung ohne Begründung, kein Grenzfall. | Zuordnung mit Kriterium: die ADR begründet die *Lösung* (PostgreSQL), die Spec die *Anforderung* (200 ms), der Plan das *Wann/Wie pro Slice* (SL-014, mit ID-Bezug auf beide). Antwort auf Vorab-Frage 1: eine ADR begründet eine Lösung, nie eine Anforderung. | + Grenzfall erkannt: *"Wir nehmen PostgreSQL"* wandert in die Spec, sobald der Kunde es vertraglich vorgibt — dann ist es Anforderung, und die ADR begründet nur noch das *Wie* darunter. Kriterium: Wer trägt den Bedarf — Auftraggeber (Spec) oder Lösungsraum (ADR)? Verknüpfung per ID-Bezug statt Wiederholung. |
 | Wann wird aus einer ADR eine Architekturtest-Regel? | "Wenn man sie prüfen will." | Wenn die ADR-Aussage maschinell formulierbar ist (Modul `X` darf `Y` nicht importieren; Layer `A` ruft `B` nicht direkt auf); Übersetzung in ArchUnit/dep-cruiser/import-linter. | + Hinweis, dass ohne Fitness Function die ADR Absichtserklärung bleibt; und dass *jede* ADR diese Frage beantworten muss — auch wenn die Antwort "lässt sich nicht maschinell prüfen" lautet. |
 | `deprecated` ohne Nachfolger — korrekt gewählt oder verdeckte `superseded`-Lücke? | "Deprecated heißt alt, passt schon." — kein Urteil, nur Etikett wiederholt. | Urteil mit Kriterium: `deprecated` ist legitim, wenn die Regel *ersatzlos* entfällt (der Bedarf existiert nicht mehr). Es ist ein falsch etikettiertes `superseded`, wenn der *Bedarf bleibt*, aber kein Nachfolger benannt ist — dann ist `deprecated` nur ein Etikett für eine offene Entscheidung. Kriterium: existiert der zugrunde liegende Bedarf weiter? | + Folge für Reviewer und Steering Loop: bei verdeckter Lücke fordert der Reviewer einen Folge-ADR und markiert HIGH; tritt das Muster dreimal auf, ist die ADR-Status-Vergabe selbst die Lücke (Guide: Status-Definition in die ADR-Vorlage). Superseded → Reviewer prüft gegen Nachfolger; echtes deprecated → Constraint-Scan entfernt den toten Codepfad. |

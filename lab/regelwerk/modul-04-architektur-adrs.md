@@ -25,6 +25,13 @@ Ein ADR ist die einzige Stelle, an der "weil" gegen "ist halt so" gewinnt.
 Wenn dein Reviewer-Agent den Grund nicht findet, kann er die Entscheidung
 nicht verteidigen.
 
+- **Jede ADR trägt einen Re-Evaluierungs-Trigger** — beobachtbare Bedingung,
+  unter der die Entscheidung erneut geprüft wird, oder ausdrücklich
+  *permanent*. Eine ADR ohne Trigger gilt unbefristet weiter, auch wenn ihre
+  Voraussetzung weg ist. Geprüft im **Trigger-Audit** der Welle-Closure
+  ([Modul 6](modul-06-roadmap.md)); bei Eintreten: bestätigen oder Folge-ADR
+  mit `supersedes` (Accepted-ADRs werden nie überschrieben).
+
 ### Hard Rule (Beispiel aus c-hsm-doc, ADR 0001)
 
 Begriff *Hard Rule* siehe Glossar in

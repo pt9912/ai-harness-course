@@ -216,9 +216,14 @@ Die Closure-Seite ist unten in fünf Schritten ausbuchstabiert — die
 Eröffnung braucht drei, und der mittlere ist der, den Teams zuerst
 weglassen:
 
-1. **Welle-Ziel und Closure-Trigger festlegen.** Beobachtbare Bedingung,
-   kein Datum (§Aktuelle Welle). Erst danach werden Slices zugeordnet —
-   sonst schneidet die Slice-Liste das Ziel statt umgekehrt.
+1. **Welle-Ziel, Out-of-Scope und Closure-Trigger festlegen.**
+   Beobachtbare Bedingung, kein Datum (§Aktuelle Welle). Erst danach
+   werden Slices zugeordnet — sonst schneidet die Slice-Liste das Ziel
+   statt umgekehrt. **Out-of-Scope gehört dazu**: dieselbe Disziplin wie
+   im Lastenheft ([Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md))
+   und im Slice-Plan ([Modul 9](../03-agenten/modul-09-implementierung.md))
+   — was nicht ausdrücklich ausgeschlossen ist, wandert im Zweifel in die
+   Welle und dehnt sie, bis der Closure-Trigger unerreichbar wird.
 2. **Offene Beobachtungen der letzten Closure sichten.** Die Sektion
    *Beobachtungen unter Schwelle* aus `done/welle-<NN-1>-results.md` wird
    durchgegangen: Betrifft eine davon die Sub-Areas, die diese Welle
@@ -253,10 +258,23 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,
    `make gates` und der Replay-Lauf sind grün. Das ist die *beobachtbare*
    Closure-Bedingung aus der Welle-Definition — nicht der Kalendertag.
-2. **Carveout-Audit der Welle** ([Modul 7](modul-07-carveouts.md)). Jeder
-   offene Carveout wird geprüft: aufgelöst, verlängert (mit Folge-Slice)
-   oder als permanent akzeptiert. Eine Welle darf *mit* dokumentiertem
-   Carveout schließen — aber nie mit einem stillen roten Gate.
+2. **Trigger-Audit der Welle.** Der Harness kennt **drei** Artefaktklassen,
+   die einen Trigger tragen — eine Bedingung, deren Eintreten eine Handlung
+   auslösen soll. Alle drei werden hier geprüft, nicht nur die erste:
+
+   | Artefakt | Trigger | Bei Eintreten |
+   |---|---|---|
+   | **Carveout** ([Modul 7](modul-07-carveouts.md)) | Auflösungs-Trigger | aufgelöst · verlängert (mit Folge-Slice) · permanent akzeptiert |
+   | **Bootstrap-aware Gate** ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)) | Hochschalt-Trigger | Stufe hochschalten — oder Carveout eröffnen, wenn die neue Schwelle rot ist |
+   | **ADR** ([Modul 4](../01-spec-und-architektur/modul-04-architektur-adrs.md)) | Re-Evaluierungs-Trigger | Entscheidung neu bewerten → bestätigt oder Folge-ADR mit `supersedes` |
+
+   Eine Welle darf *mit* dokumentiertem Carveout schließen — aber nie mit
+   einem stillen roten Gate, einer stehengebliebenen Reifestufe oder einer
+   Entscheidung, deren Re-Evaluierungs-Bedingung vor drei Wellen eintrat.
+   Der Kurs benannte diese Pathologie bisher nur für Carveouts
+   (*Carveout-Wildwuchs*, [`klassifikation.md`](../grundlagen/klassifikation.md#entropy-management));
+   sie gilt für alle drei Klassen — **ein Trigger ohne Wächter ist eine
+   Absichtserklärung mit Verfallsdatum.**
    **Zwei Paarungen mitprüfen** — beide nach dem Muster *Nennung ohne
    Deckung ist eine Harness-Lüge*: (a) **Anker-Paarung** — jeder
    Steering-Loop-Eintrag nennt einen Zielort, der Zielort existiert und

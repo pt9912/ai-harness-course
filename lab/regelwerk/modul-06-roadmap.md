@@ -58,9 +58,12 @@ darüber: Sie schließt nicht durch einen einzelnen Slice-Übergang, sondern
 durch einen geordneten Ablauf, der alle ihre Slices bündelt. Fünf
 Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 
-**Eröffnung — drei Schritte.** (1) Welle-Ziel und Closure-Trigger
-festlegen: beobachtbare Bedingung, kein Datum; erst danach Slices
-zuordnen. (2) **Offene Beobachtungen der letzten Closure sichten** —
+**Eröffnung — drei Schritte.** (1) Welle-Ziel, **Out-of-Scope** und
+Closure-Trigger festlegen: beobachtbare Bedingung, kein Datum; erst danach
+Slices zuordnen. Out-of-Scope gehört dazu — dieselbe Disziplin wie im
+Lastenheft (Modul 3) und im Slice-Plan (Modul 9); was nicht ausdrücklich
+ausgeschlossen ist, dehnt die Welle, bis der Closure-Trigger unerreichbar
+wird. (2) **Offene Beobachtungen der letzten Closure sichten** —
 Sektion *Beobachtungen unter Schwelle* aus
 `done/welle-<NN-1>-results.md` durchgehen: Betrifft eine davon die
 Sub-Areas dieser Welle, gehört sie in die Slice-Planung (Risiko im
@@ -82,10 +85,16 @@ dort automatisch (Modul-0-Prinzip).
 1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,
    `make gates` und der Replay-Lauf sind grün. Das ist die *beobachtbare*
    Closure-Bedingung aus der Welle-Definition — nicht der Kalendertag.
-2. **Carveout-Audit der Welle** (Modul 7). Jeder offene Carveout wird
-   geprüft: aufgelöst, verlängert (mit Folge-Slice) oder als permanent
-   akzeptiert. Eine Welle darf *mit* dokumentiertem Carveout schließen —
-   aber nie mit einem stillen roten Gate. **Zwei Paarungen mitprüfen**,
+2. **Trigger-Audit der Welle.** Drei Artefaktklassen tragen einen Trigger,
+   alle drei werden geprüft: **Carveout** (Auflösungs-Trigger → aufgelöst ·
+   verlängert mit Folge-Slice · permanent, Modul 7) · **bootstrap-aware Gate**
+   (Hochschalt-Trigger → Stufe hochschalten, oder Carveout eröffnen wenn die
+   neue Schwelle rot ist, Modul 13) · **ADR** (Re-Evaluierungs-Trigger →
+   bestätigen oder Folge-ADR mit `supersedes`, Modul 4). Eine Welle darf *mit*
+   dokumentiertem Carveout schließen — aber nie mit einem stillen roten Gate,
+   einer stehengebliebenen Reifestufe oder einer Entscheidung, deren
+   Re-Evaluierungs-Bedingung vor drei Wellen eintrat. **Ein Trigger ohne
+   Wächter ist eine Absichtserklärung mit Verfallsdatum.** **Zwei Paarungen mitprüfen**,
    beide nach dem Muster *Nennung ohne Deckung ist eine Harness-Lüge*:
    (a) **Anker-Paarung** — jeder Steering-Loop-Eintrag nennt einen
    Zielort, der Zielort existiert und trägt `seit welle-<NN>`
