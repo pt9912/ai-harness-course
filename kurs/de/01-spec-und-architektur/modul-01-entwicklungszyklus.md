@@ -76,8 +76,10 @@ flowchart LR
     Code --> Review["Review<br/>(gegen Plan/ADR)"]
     Review --> Verify["Verifikation<br/>(gegen DoD/Spec)"]
     Verify --> Closure["Closure<br/>(done/)"]
-    Closure -. Lerneintrag .-> Spec
-    Closure -. Lerneintrag .-> ADR
+    Harness["AGENTS.md · Gate · Skill · ADR<br/>(verkörperte Regel)"]
+    Closure -. "Lerneintrag:<br/>geschärfte Regel / neuer Sensor" .-> Harness
+    Closure -. "Lerneintrag:<br/>benannte Spec-Lücke" .-> Spec
+    Harness -. "wirkt auf jeden Lauf" .-> Code
     Review -. Folge-ADR .-> ADR
     Verify -. Spec-Lücke .-> Spec
 ```
@@ -86,6 +88,17 @@ Die durchgezogenen Pfeile sind der *Vorwärtspfad* (was wird gebaut), die
 gestrichelten der *Rückwärtspfad* (was lernt der Harness daraus). Beide
 Richtungen sind Pflicht — eine Kette ohne Rückverweise ist nicht
 auditierbar.
+
+Der Lerneintrag hat **drei Formen**, und nur eine davon landet in der
+Spec: *geschärfte Regel* und *neuer Sensor* gehen in die **verkörperte
+Form** — `AGENTS.md`, ein Gate, eine Skill-Datei —, *benannte Spec-Lücke*
+in die Spec. Die verkörperte Form ist der Grund, warum der Lerneintrag
+überhaupt wirkt: sie liegt in jedem Lauf-Kontext und beeinflusst den
+nächsten Code, ohne dass jemand ein Archiv lesen muss. Wie daraus über
+mehrere Slices ein Zähler wird und wie eine so entstandene Regel ihre
+Herkunft behält, steht in
+[Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)
+und [`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln).
 
 **Auflösung des Engage-Falls:** Review prüft Code gegen *Plan und ADR*.
 Wenn der Plan die ADR-Verletzung nicht antizipiert hat, sieht Review

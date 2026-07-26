@@ -46,6 +46,29 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   Slice-Lifecycle ist an beiden Enden an den Wellen-Zyklus gekoppelt — vorher
   sah er aus wie ein geschlossener Kreis für sich.
 
+### Geändert
+
+- **Modul 1 §Lebenszyklus als Diagramm: der Lerneintrag zeigte an den falschen
+  Zielen.** Die Rückwärtskanten gingen nur nach `Spec` und `ADR` — der Kurs
+  definiert aber **drei Formen** (*geschärfte Regel · neuer Sensor · benannte
+  Spec-Lücke*), und nur die dritte landet in der Spec. Die beiden häufigeren
+  gehen in die **verkörperte Form** (`AGENTS.md`, Gate, Skill) — genau die
+  Artefakte, auf denen Welle 39 den Herkunfts-Anker aufgebaut hat. Das
+  Einstiegs-Diagramm des Kurses ließ sie weg und damit auch die Rückkante, die
+  erklärt, *warum* ein Lerneintrag wirkt: die verkörperte Form liegt in jedem
+  Lauf-Kontext und beeinflusst den nächsten Code, ohne dass jemand ein Archiv
+  liest. Neuer Knoten plus Kante `wirkt auf jeden Lauf` → `Code`; die Prosa
+  benennt die drei Formen und verweist für Zähler und Herkunft auf Modul 6 und
+  `konventionen.md`.
+- **Graph in `konventionen.md` nachgeschärft:** der Verdichtungs-Schritt war nur
+  ein *Kantenlabel* — in einem Graphen, dessen Prüffrage auf Knoten-Farben
+  beruht (gelb = geschrieben, blau = liest), entzieht sich ein Lese-Schritt als
+  Kante genau dieser Prüfung. Jetzt eigener blauer Knoten. Und der Startknoten
+  hieß „Agentenlauf", obwohl auch **Review-Findings, Verifikation und
+  Validierung** den Loop speisen (Modul 10 §Pflege: *„bei dreimaligem gleichem
+  Finding Klassifikation schärfen"*) — heißt jetzt *Beobachtungs-Quellen* und
+  nennt alle vier.
+
 ## Welle 40 — 2026-07-26 · Graph-Test auf den Bestand angewandt: §6 Risiken war write-only
 
 Der Mermaid-Fluss aus Welle 39 stellt eine Prüffrage — *hat das gelbe Kästchen
