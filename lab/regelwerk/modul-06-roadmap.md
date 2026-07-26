@@ -93,7 +93,14 @@ dort automatisch (Modul-0-Prinzip).
    (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als
    Datei in `open/`. Rot heißt: etwas wurde versprochen und nicht
    geschrieben.
-3. **Welle nach `done/` schließen.** Closure-Notiz `done/welle-NN-results.md`
+3. **Welle nach `done/` schließen.** Grundlage sind die **Closure-Notizen der
+   Slices dieser Welle** (§7 jeder Datei in `done/`): durchgehen und
+   **verdichten**, nicht aus dem Gedächtnis zusammentragen — gleiche
+   Beobachtungen zusammenfassen und zählen, 3× → *Steering-Loop-Einträge*,
+   darunter → *Beobachtungen unter Schwelle*, Risiken mit Ausgang „weiter
+   offen" (Modul 5) ebenfalls dorthin. Ohne diesen Lese-Schritt ist der
+   Slice-Lerneintrag write-only und die Zählung nicht durchführbar.
+   Closure-Notiz `done/welle-NN-results.md`
    schreiben (*was gelernt wurde*: geliefert · was funktionierte · was anders
    lief · **Steering-Loop-Einträge** · **Beobachtungen unter Schwelle** ·
    Folge-Slices (*derivativ* — der Slice selbst liegt in `open/`) ·

@@ -795,7 +795,7 @@ behebt.
 ```mermaid
 flowchart TB
     A["Agentenlauf<br/>Failure beobachtet"] --> B["Slice-Closure §7<br/>Steering-Loop-Eintrag"]
-    B --> C{"Wie oft?"}
+    B -- "Welle-Closure Schritt 3:<br/>Slice-Closures verdichten" --> C{"Wie oft?"}
     C -- "1x / 2x" --> D["Welle-Closure:<br/>Beobachtungen unter Schwelle<br/>(übernehmen + hochzählen)"]
     C -- "3x" --> E["Welle-Closure:<br/>Steering-Loop-Eintrag<br/>+ Zielort"]
 

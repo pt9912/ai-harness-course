@@ -265,7 +265,18 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als
    Datei in `open/`. Rot heißt hier: etwas wurde versprochen und nicht
    geschrieben — dieselbe Klasse wie ein halluziniertes Gate.
-3. **Welle nach `done/` schließen.** Die Closure-Notiz
+3. **Welle nach `done/` schließen.** *Grundlage sind die Closure-Notizen
+   der Slices dieser Welle* — §7 jeder Datei in `done/`. Sie werden
+   durchgegangen und **verdichtet**, nicht aus dem Gedächtnis
+   zusammengetragen: gleiche Beobachtungen zusammenfassen und zählen ·
+   was 3× erreicht → *Steering-Loop-Einträge* · was darunter bleibt →
+   *Beobachtungen unter Schwelle* · Risiken mit Ausgang „weiter offen"
+   ([Modul 5](modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst))
+   ebenfalls dorthin. **Ohne diesen Lese-Schritt ist der Slice-Lerneintrag
+   selbst write-only** — und die Zählung gar nicht durchführbar, denn ob
+   eine Beobachtung ein- oder dreimal auftrat, steht nur in den
+   Slice-Closures.
+   Die Closure-Notiz
    `done/welle-NN-results.md` hält fest, *was gelernt wurde*: geliefert · was
    funktionierte · was anders lief · **Steering-Loop-Einträge** (geschärfte
    Regel / neuer Sensor / benannte Spec-Lücke) · **Beobachtungen unter

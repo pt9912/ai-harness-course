@@ -19,6 +19,10 @@ stateDiagram-v2
     in_progress --> next: zu groß — zurück zur Zerlegung
     in_progress --> open: blockiert (Carveout?)
     done --> [*]
+    note right of done
+        §7 wird bei der Welle-Closure
+        verdichtet (Modul 6, Schritt 3)
+    end note
 ```
 
 Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei

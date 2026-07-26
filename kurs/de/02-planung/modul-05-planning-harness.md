@@ -47,6 +47,10 @@ stateDiagram-v2
     in_progress --> next: zu groß — zurück zur Zerlegung
     in_progress --> open: blockiert (Carveout?)
     done --> [*]
+    note right of done
+        §7 wird bei der Welle-Closure
+        verdichtet (Modul 6, Schritt 3)
+    end note
 ```
 
 Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
@@ -55,6 +59,13 @@ Carveout, siehe [Modul 7](modul-07-carveouts.md)). Der einzige Übergang
 nach `done` verlangt *Lerneintrag* **und einen Ausgang für jedes offene
 Risiko** ([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)),
 nicht nur "Tests grün".
+
+`done` ist dabei **kein Endzustand der Information**: Die Closure-Notiz
+wird bei der Welle-Closure verdichtet (Notiz im Diagramm). Und am anderen
+Ende speist sich `Slice angelegt` aus derselben Quelle — §8 des
+Slice-Plans sichtet die offenen Beobachtungen der letzten Welle-Closure,
+sofern eine berührte Sub-Area in BF oder Hybrid steht. Der Lifecycle ist
+damit an beiden Enden an den Wellen-Zyklus gekoppelt.
 
 ### Offene Risiken werden bei Closure aufgelöst
 
@@ -82,6 +93,14 @@ werden.
 Ein Slice geht nicht nach `done`, während ein Risiko ohne Ausgang
 dasteht. Das ist dieselbe Disziplin wie beim Lerneintrag: *abgelegt* ist
 nicht *abgeschlossen*.
+
+**Wer liest das?** Lerneintrag und offene Risiken werden bei der
+Welle-Closure aus den `done/`-Slices **verdichtet**
+([Modul 6 §Wellen-Closure-Prozedur](modul-06-roadmap.md#die-wellen-closure-prozedur),
+Schritt 3) — dort entsteht aus ihnen der Zähler. Deshalb lohnt eine
+*gleichbleibende Bezeichnung* für wiederkehrende Beobachtungen: zwei
+Namen für dieselbe Sache werden getrennt gezählt und erreichen die
+Schwelle nie.
 
 ## Lab-Bezug
 

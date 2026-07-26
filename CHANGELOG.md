@@ -11,6 +11,41 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 41 — 2026-07-26 · Der fehlende Lese-Schritt: Slice-Closures werden verdichtet
+
+### Hinzugefügt
+
+- **Modul 6 Schritt 3 liest jetzt, bevor er schreibt.** Der Graph aus Welle 39
+  zeichnet eine Kante *Slice-Closure §7 → „Wie oft?"* — für die es **keinen
+  Schritt gab**. Verifiziert: null Treffer für eine Anweisung, die Closure-Notizen
+  der Slices einer Welle zu lesen. Die Welle-Closure *schrieb*
+  §Steering-Loop-Einträge und §Beobachtungen unter Schwelle; woher deren Inhalt
+  kommt, sagte niemand. Folgen: (a) der **Slice**-Lerneintrag war selbst
+  write-only — dasselbe Problem eine Ebene tiefer als Welle 38; (b) die
+  3×-Zählung war gar **nicht durchführbar**, denn ob eine Beobachtung ein- oder
+  dreimal auftrat, steht ausschließlich in den Slice-Closures. Welle 38 hat den
+  Zähler gebaut und stillschweigend angenommen, die Einträge erschienen von
+  selbst. Jetzt ist *Grundlage sind die Closure-Notizen der Slices dieser Welle*
+  expliziter Vorlauf von Schritt 3: durchgehen und **verdichten** statt aus dem
+  Gedächtnis zusammentragen — gleiche Beobachtungen zusammenfassen und zählen,
+  3× → Steering-Loop-Einträge, darunter → Beobachtungen unter Schwelle, Risiken
+  mit Ausgang „weiter offen" ebenfalls dorthin.
+- **Gegenzeiger von der Schreibseite** (Modul 5): ein Absatz *„Wer liest das?"*
+  benennt die Verdichtung und begründet daraus die Pflicht zur *gleichbleibenden
+  Bezeichnung* — zwei Namen für dieselbe Sache werden getrennt gezählt und
+  erreichen die Schwelle nie.
+- **Der Graph trägt die Kante jetzt beschriftet** (`Welle-Closure Schritt 3:
+  Slice-Closures verdichten`) statt sie unbenannt zu zeichnen. Eine unbeschriftete
+  Kante war genau die Stelle, an der der fehlende Schritt unsichtbar blieb.
+- **Zustandsmaschine: `done` ist kein Endzustand der Information.**
+  `done --> [*]` behauptete, die Geschichte des Slice ende dort — seit dem
+  Lese-Schritt ist `done/` ein *deklarierter Eingang* der Welle-Closure. Das
+  Diagramm trägt jetzt eine Notiz am Zustand `done`, die Prosa benennt beide
+  Enden: `Slice angelegt` speist sich über §8 aus den offenen Beobachtungen der
+  letzten Welle-Closure (bei BF/Hybrid), `done` liefert sie zurück. Der
+  Slice-Lifecycle ist an beiden Enden an den Wellen-Zyklus gekoppelt — vorher
+  sah er aus wie ein geschlossener Kreis für sich.
+
 ## Welle 40 — 2026-07-26 · Graph-Test auf den Bestand angewandt: §6 Risiken war write-only
 
 Der Mermaid-Fluss aus Welle 39 stellt eine Prüffrage — *hat das gelbe Kästchen
