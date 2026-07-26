@@ -30,7 +30,7 @@ Rule „git mv + Inhaltsänderung = zwei Commits" in
   in einem Lifecycle-Verzeichnis. Der aktive Durchlauf `open/` → `next/` →
   `in-progress/` nimmt ausschließlich **Slices** auf; `done/` archiviert
   **zusätzlich** abgeschlossene **Nicht-Slice-Records** — Welle-Closure
-  `done/<welle-id>-results.md`, und aufgelöste Carveouts wandern ebenfalls
+  `done/welle-<NN>-results.md`, und aufgelöste Carveouts wandern ebenfalls
   dorthin (Baseline-Regelwerk `modul-07-carveouts.md`).
 
 ## Aktueller Stand

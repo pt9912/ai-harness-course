@@ -95,7 +95,13 @@ erweitern):
    Inventur den Code-Bestand und die Doku-Aussage als divergent
    ausweist? Bei GF meist niedrig (Doc führt — Inventur prüft nur
    Code-Konformität); bei BF/Hybrid das Hauptrisiko, das die
-   Reconciliation-Schätzung trägt.
+   Reconciliation-Schätzung trägt. **Beleg-Quelle sind auch die offenen
+   Beobachtungen** zu dieser Sub-Area (Sektion *Beobachtungen unter
+   Schwelle* der letzten Welle-Closure, [Modul 6](modul-06-roadmap.md)):
+   ein Eintrag, der die Sub-Area schon zweimal getroffen hat, ist genau
+   dieses Risiko — und wird er durch diesen Slice zum dritten Mal
+   berührt, ist er eine Lücke und braucht einen Folge-Slice. Keine
+   Treffer sind ebenfalls eine Antwort und werden notiert.
 4. **Reconciliation-Aufwand inklusive Graduation-/Folge-Slice-Trigger** —
    wieviel Slice-Aufwand bringt BF/Hybrid mit sich, und welcher Trigger
    (eine der vier Klassen aus

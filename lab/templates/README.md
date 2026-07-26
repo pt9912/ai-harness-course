@@ -5,10 +5,10 @@ unabhängig davon, ob dein Repo Go, Python, Kotlin, Java oder C# nutzt.
 
 ## Übersicht
 
-Diese Tabelle listet die **16 Dokument-Skelette** (Phase 0 → 1 beim
+Diese Tabelle listet die **17 Dokument-Skelette** (Phase 0 → 1 beim
 Bootstrap — das Repo füllt sie). Die zwei **Tooling-Dateien**
 (`Makefile`, `.d-check.yml`) sind **keine** Dokument-Skelette
-und stehen separat in [§Gate-Baseline](#gate-baseline) — also 16 Skelette
+und stehen separat in [§Gate-Baseline](#gate-baseline) — also 17 Skelette
 + 2 Tooling-Dateien, nicht 18 gleichartige Vorlagen.
 
 | Template | Wofür | Regelwerk-Abschnitt |
@@ -20,6 +20,7 @@ und stehen separat in [§Gate-Baseline](#gate-baseline) — also 16 Skelette
 | [`docs/plan/adr/README.template.md`](docs/plan/adr/README.template.md) | ADR-Index (derivativ; Liste aller ADRs mit Status) | [Modul 4](../regelwerk/modul-04-architektur-adrs.md) |
 | [`docs/plan/planning/slice.template.md`](docs/plan/planning/slice.template.md) | Slice-Plan mit DoD, Trigger, Closure | [Modul 5](../regelwerk/modul-05-planning-harness.md) |
 | [`docs/plan/planning/welle.template.md`](docs/plan/planning/welle.template.md) | Welle als Bündel von Slices | [Modul 5](../regelwerk/modul-05-planning-harness.md) + [Modul 6](../regelwerk/modul-06-roadmap.md) |
+| [`docs/plan/planning/welle-results.template.md`](docs/plan/planning/welle-results.template.md) | Welle-Closure-Notiz: Ergebnis, Steering-Loop-Einträge, Beobachtungen unter Schwelle | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/roadmap.template.md`](docs/plan/planning/roadmap.template.md) | Roadmap als Reihenfolge von Wellen, nicht Termine | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/README.template.md`](docs/plan/planning/README.template.md) | Planning-Index: Slice-Lifecycle + Slice-vs-Welle-Konvention | [Modul 5](../regelwerk/modul-05-planning-harness.md) |
 | [`docs/plan/carveouts/carveout.template.md`](docs/plan/carveouts/carveout.template.md) | Dokumentierte Ausnahme mit Auflösungs-Trigger | [Modul 7](../regelwerk/modul-07-carveouts.md) |

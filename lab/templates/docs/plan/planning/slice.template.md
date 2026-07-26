@@ -112,6 +112,15 @@ Baseline-Regelwerk `grundlagen-konventionen.md` §Was ist eine Sub-Area?).
 Zu grobe Sub-Areas (*"Backend"*) vorher ausdifferenzieren — sonst trägt
 der Begründungsblock mehrere Modi vermischt.
 
+**Vorgelagert — offene Beobachtungen sichten:** Die Sektion
+*Beobachtungen unter Schwelle* der letzten Welle-Closure
+(`../done/welle-<NN>-results.md`) durchgehen: Steht eine der hier
+berührten Sub-Areas dort? Dann gehört der Zähler-Stand unten ins
+*Evidenz-/Diskrepanz-Risiko* — und erreicht der Eintrag mit diesem Slice
+3×, ist er keine Notiz mehr, sondern eine Lücke und braucht einen eigenen
+Folge-Slice. Keine Treffer sind ebenfalls eine Antwort und werden
+notiert.
+
 <!-- Block für jede berührte Sub-Area duplizieren. Format identisch
 mit dem im Baseline-Regelwerk §Ziel-Form: Sub-Area-Modus-Begründung
 abgedruckten Block. -->

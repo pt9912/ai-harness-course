@@ -28,6 +28,16 @@
 - **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — heute Teil von slice-009-Closure.
 - **Reviewer-Skill** geschärft auf "Spec-Vollständigkeit" (Boundary + Negative).
 
+## Beobachtungen unter Schwelle
+
+Übernahme in die nächste Closure, dort hochzählen. Bei 3× wandert der
+Eintrag nach oben in die Steering-Loop-Einträge.
+
+| Beobachtung (stabile Bezeichnung) | Betroffene Sub-Area | Zähler | Belege |
+|---|---|---|---|
+| Golden-Set-Case ohne Boundary-Anteil aufgenommen | Test-Infrastruktur | 2× | slice-005, slice-011 |
+| ADR-Bezug im Commit vergessen, im Review nachgetragen | Spec-Schreibung | 1× | slice-008 |
+
 ## Folge-Slices
 
 - slice-013 (Property-Tests) — startet welle-2.

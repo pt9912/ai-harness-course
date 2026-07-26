@@ -113,7 +113,7 @@ Skizze entlang der Schablone aus Worked Example B:
   vor Welle-Closure; Architect entscheidet bei Permanenz über die
   ADR-Überführung; Implementer führt `git mv` und Config-Updates aus.
 - **Belegartefakt:** die Audit-Bericht-Tabelle in
-  `done/<welle>-results.md`.
+  `done/welle-<NN>-results.md`.
 
 **Die drei Status-Übergänge**, die der Slice möglich machen muss:
 *aufgelöst* (Trigger eingetreten → `done/`), *permanent* (Trigger

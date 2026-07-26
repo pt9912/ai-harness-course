@@ -160,6 +160,14 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
    ausweist? Bei GF meist niedrig (Doc führt — Inventur prüft nur
    Code-Konformität); bei BF/Hybrid das Hauptrisiko und der Grund, warum
    das Kriterium dort die Reconciliation-Schätzung trägt.
+   **Beleg-Quelle sind auch die *offenen Beobachtungen* zu dieser
+   Sub-Area** — die Sektion *Beobachtungen unter Schwelle* der letzten
+   Welle-Closure ([Modul 6 §Wellen-Eröffnungs-Prozedur](modul-06-roadmap.md#die-wellen-eröffnungs-prozedur)).
+   Ein Eintrag, der diese Sub-Area schon zweimal getroffen hat, ist genau
+   das Diskrepanz-Risiko, nach dem dieses Kriterium fragt — und wird
+   durch diesen Slice zum dritten Mal berührt, ist er keine Notiz mehr,
+   sondern eine Lücke. Steht die Sub-Area in keiner offenen Beobachtung,
+   ist *das* die Antwort und gehört genauso hin.
 4. **Reconciliation-Aufwand inklusive Graduation-/Folge-Slice-Trigger** —
    wieviel Slice-Aufwand bringt BF/Hybrid mit sich, und welcher Trigger
    (eine der vier Klassen aus

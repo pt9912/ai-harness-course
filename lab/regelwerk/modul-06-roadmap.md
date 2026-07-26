@@ -58,6 +58,27 @@ darüber: Sie schließt nicht durch einen einzelnen Slice-Übergang, sondern
 durch einen geordneten Ablauf, der alle ihre Slices bündelt. Fünf
 Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 
+**Eröffnung — drei Schritte.** (1) Welle-Ziel und Closure-Trigger
+festlegen: beobachtbare Bedingung, kein Datum; erst danach Slices
+zuordnen. (2) **Offene Beobachtungen der letzten Closure sichten** —
+Sektion *Beobachtungen unter Schwelle* aus
+`done/welle-<NN-1>-results.md` durchgehen: Betrifft eine davon die
+Sub-Areas dieser Welle, gehört sie in die Slice-Planung (Risiko im
+betroffenen Slice) oder, bei Erreichen von 3×, als eigener Slice, der die
+Lücke schließt. Das ist der einzige Schritt, der Closure-Wissen wieder
+als Eingabe nutzt; ohne ihn ist die Closure-Notiz write-only und die
+Zählregel des Steering Loops hat keinen Zähler. (3) Welle-Datei flach
+anlegen (`docs/plan/planning/<welle-id>.md`, Ziel-Form
+[`../templates/docs/plan/planning/welle.template.md`](../templates/docs/plan/planning/welle.template.md))
+und in der Roadmap als *Aktuelle Welle* eintragen.
+
+**Nicht** in den Lauf-Kontext: `done/` wird dem Implementation-Agenten
+nicht geladen. Schritt 2 ist Planungs-Leistung — was die Schwelle
+erreicht hat, ist in AGENTS.md, Gates und Skills verkörpert und wirkt
+dort automatisch (Modul-0-Prinzip).
+
+**Closure — fünf Schritte.**
+
 1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,
    `make gates` und der Replay-Lauf sind grün. Das ist die *beobachtbare*
    Closure-Bedingung aus der Welle-Definition — nicht der Kalendertag.
@@ -67,8 +88,11 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    aber nie mit einem stillen roten Gate.
 3. **Welle nach `done/` schließen.** Closure-Notiz `done/welle-NN-results.md`
    schreiben (*was gelernt wurde*: geliefert · was funktionierte · was anders
-   lief · **Steering-Loop-Einträge** · Folge-Slices · Verifikation aus
-   Schritt 1). Ohne Lerneintrag ist die Welle nicht „fertig", nur „weg"
+   lief · **Steering-Loop-Einträge** · **Beobachtungen unter Schwelle** ·
+   Folge-Slices · Verifikation aus
+   Schritt 1). Ziel-Form:
+   [`../templates/docs/plan/planning/welle-results.template.md`](../templates/docs/plan/planning/welle-results.template.md).
+   Ohne Lerneintrag ist die Welle nicht „fertig", nur „weg"
    (Modul 1). **Zugleich per `git mv` die Welle-Plan-Datei von flach nach
    `done/`** — neben ihre Ergebnis-Notiz; der Zustand ist die
    Verzeichnis-Position, kein `Status`-Feld (wie beim Slice). Aktive Welle

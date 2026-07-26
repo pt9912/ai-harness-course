@@ -11,6 +11,67 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 38 — 2026-07-26 · Der Steering Loop bekommt seinen Zähler — und einen Konsumenten
+
+### Hinzugefügt
+
+- **Sektion „Beobachtungen unter Schwelle" in der Welle-Closure (Modul 6
+  Schritt 3).** Befund: Der Steering Loop schreibt seine eigene Zählregel vor
+  (*1× notieren · 2× Symptom · 3× Lücke*) und lieferte **keinen Zähler**.
+  Verifiziert: **kein einziger Workflow-Schritt liest `done/`** — Modul 9
+  (8-Schritt-Workflow), Modul 2 (Bootstrap) und Modul 5 (Planung) auf
+  Lese-Zugriffe abgesucht, null Treffer; einziger „Konsument" war die
+  Roadmap-Tabelle, und die nimmt nur den Zeiger. Das Steering-Loop-Wissen war
+  damit **write-only**. Die Trennlinie, die den Fix zuschneidet: Beobachtungen
+  **≥ 3×** sind bereits *verkörpert* (AGENTS-Regel, Gate, Skill) und wirken von
+  selbst — die **< 3×** sind nirgends verkörpert und versickerten in der
+  Closure-Prosa, sodass der Zähler mit jeder Welle bei null anfing. Ein Fehler
+  einmal pro Welle wäre nach fünf Wellen eine 5×-Lücke, die niemand je als
+  Lücke sieht. Die neue Sektion wird bei der nächsten Closure **übernommen und
+  hochgezählt**, nicht neu geschrieben; bei 3× wandert der Eintrag in die
+  Steering-Loop-Einträge und verlässt die Liste. Pflicht: **stabile
+  Bezeichnung** über Wellen hinweg (sonst zählt man zwei Namen für dieselbe
+  Sache getrennt) und **kein stilles Streichen** (wer streicht, begründet,
+  warum die Beobachtung nicht mehr auftreten kann).
+- **`welle-results.template.md` — die fehlende Ziel-Form.** `welle-NN-results.md`
+  war der **einzige normierte Artefakttyp ohne Template**: Modul 6 normierte
+  seinen Inhalt im Fließtext, das Beispiel setzte ihn um, ein Adopter musste
+  die Struktur aus einem Prosa-Absatz rekonstruieren. Genau dort driftete auch
+  der Dateiname (siehe unten) — wo keine Ziel-Form die Form hält, driftet sie
+  zuerst. Trägt die sechs Pflichtteile plus die neue Sektion; `welle.template.md`
+  §7 verweist darauf statt nur auf den Dateinamen. `templates/README.md`:
+  16 → **17 Skelette**.
+- **Wellen-Eröffnungs-Prozedur (Modul 6).** Tieferer Befund hinter dem
+  write-only-Problem: **Closure war prozedural ausbuchstabiert (fünf Schritte),
+  Eröffnung überhaupt nicht** — weder Modul 5 noch Modul 6 hatten eine
+  Anlege-Schrittfolge. Deshalb hatte der Konsum-Schritt keinen Ort zum
+  Andocken. Jetzt drei Schritte, deren mittlerer der ist, den Teams zuerst
+  weglassen: *offene Beobachtungen der letzten Closure sichten*. Explizit
+  abgegrenzt: `done/` kommt **nicht** in den Lauf-Kontext des
+  Implementation-Agenten — das ist Planungs-Leistung, und was die Schwelle
+  erreicht hat, wirkt ohnehin über die verkörperte Form (Modul-0-Prinzip).
+
+### Geändert
+
+- **Slice-Eröffnung konsumiert die Beobachtungen (Modul 5 + `slice.template.md`).**
+  Der Konsum sitzt in Kriterium 3 der Sub-Area-Modus-Begründung
+  (*Evidenz- und Diskrepanz-Risiko*) — **kein fünftes Kriterium**, weil die
+  Quelle „vier Pflichtkriterien (vier, nicht erweitern)" sagt. Ein Eintrag, der
+  eine Sub-Area schon zweimal getroffen hat, *ist* das Diskrepanz-Risiko, nach
+  dem das Kriterium fragt. Im Template zusätzlich eine zweite
+  „Vorgelagert"-Zeile parallel zur bestehenden Sub-Area-Wahl-Prüfung.
+  Keine Treffer sind ebenfalls eine Antwort und werden notiert.
+- **Dateiname vereinheitlicht: `welle-<NN>-results.md`.** Zwei Ausreißer gegen
+  neun konsistente Stellen plus das reale Beispiel: `planning/README.template.md`
+  sagte `done/<welle-id>-results.md` (ergäbe `welle-1-mvp-results.md`, weil die
+  Welle-ID einen Slug trägt), `loesungen/modul-07` sagte `done/<welle>-results.md`.
+  Die `<welle-id>`-Form stammt aus Welle 33 — dem Commit, der `done/` als Heimat
+  für Nicht-Slice-Records benannte.
+- **Satelliten mitgezogen:** Regelwerk-Splits `modul-05` (Beleg-Quelle in
+  Kriterium 3) und `modul-06` (Eröffnungs-Prozedur, neue Sektion,
+  Ziel-Form-Verweis); `lab/example/…/welle-1-results.md` trägt die neue Sektion
+  mit zwei Beispiel-Einträgen, sonst widerspräche das Beispiel Modul 6.
+
 ## Welle 37 — 2026-07-26 · Templates verweisen auf die vendorte Baseline statt in den Kurs
 
 ### Geändert

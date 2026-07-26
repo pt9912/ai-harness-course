@@ -210,6 +210,38 @@ Roadmap ist nicht "wann?", sondern "in welcher Reihenfolge wovon?"*.
 Sieben Schritte, eine Welle, drei Trigger ohne Datum. Vergleich:
 [`../../../lab/example/docs/plan/planning/in-progress/roadmap.md`](../../../lab/example/docs/plan/planning/in-progress/roadmap.md).
 
+## Die Wellen-Eröffnungs-Prozedur
+
+Die Closure-Seite ist unten in fünf Schritten ausbuchstabiert — die
+Eröffnung braucht drei, und der mittlere ist der, den Teams zuerst
+weglassen:
+
+1. **Welle-Ziel und Closure-Trigger festlegen.** Beobachtbare Bedingung,
+   kein Datum (§Aktuelle Welle). Erst danach werden Slices zugeordnet —
+   sonst schneidet die Slice-Liste das Ziel statt umgekehrt.
+2. **Offene Beobachtungen der letzten Closure sichten.** Die Sektion
+   *Beobachtungen unter Schwelle* aus `done/welle-<NN-1>-results.md` wird
+   durchgegangen: Betrifft eine davon die Sub-Areas, die diese Welle
+   berührt? Dann gehört sie in die Slice-Planung — entweder als Risiko im
+   betroffenen Slice ([Modul 5 §Sub-Area-Modus-Begründung](modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen))
+   oder, wenn sie mit dieser Welle 3× erreicht, als eigener Slice, der die
+   Lücke schließt. **Das ist der einzige Schritt im ganzen Zyklus, der
+   Closure-Wissen wieder als Eingabe nutzt** — ohne ihn ist die
+   Closure-Notiz write-only, und die Zählregel des Steering Loops hat
+   keinen Zähler.
+3. **Welle-Datei flach anlegen** (`docs/plan/planning/<welle-id>.md`,
+   Ziel-Form [`welle.template.md`](../../../lab/templates/docs/plan/planning/welle.template.md))
+   **und in die Roadmap als *Aktuelle Welle* eintragen.** Der Zustand ist
+   die Verzeichnis-Position, nicht ein Status-Feld.
+
+**Was hier bewusst *nicht* passiert:** Der Implementation-Agent bekommt
+`done/` nicht in seinen Lauf-Kontext. Schritt 2 ist eine
+*Planungs*-Leistung — was die Schwelle erreicht hat, ist ohnehin in
+AGENTS.md, Gates und Skills verkörpert und wirkt dort automatisch
+(Modul-0-Prinzip: *Per-Lauf-Relevantes gehört verkörpert, nicht extern
+nachgeladen*). Ein Archiv pro Lauf zu laden wäre Kontext-Verschwendung
+für Wissen, das schon wirkt.
+
 ## Die Wellen-Closure-Prozedur
 
 Modul 5 gibt den *Slice*-Zyklus als Zustandsmaschine vor (`open/` →
@@ -228,10 +260,24 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 3. **Welle nach `done/` schließen.** Die Closure-Notiz
    `done/welle-NN-results.md` hält fest, *was gelernt wurde*: geliefert · was
    funktionierte · was anders lief · **Steering-Loop-Einträge** (geschärfte
-   Regel / neuer Sensor / benannte Spec-Lücke) · Folge-Slices · Verifikation
-   (die Belege aus Schritt 1). Ohne Lerneintrag ist die Welle nicht „fertig",
-   sondern nur „weg"
+   Regel / neuer Sensor / benannte Spec-Lücke) · **Beobachtungen unter
+   Schwelle** · Folge-Slices · Verifikation (die Belege aus Schritt 1). Ohne
+   Lerneintrag ist die Welle nicht „fertig", sondern nur „weg"
    ([Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md)).
+   Ziel-Form: [`/lab/templates/docs/plan/planning/welle-results.template.md`](../../../lab/templates/docs/plan/planning/welle-results.template.md).
+
+   **Warum „Beobachtungen unter Schwelle" ein eigener Pflichtteil ist.** Der
+   Steering Loop zählt *1× notieren · 2× Symptom · 3× Lücke*
+   ([`klassifikation.md`](../grundlagen/klassifikation.md#steering-loop)) —
+   das setzt ein Gedächtnis über Läufe hinweg voraus. Was die Schwelle
+   erreicht hat, ist bereits **verkörpert** (AGENTS-Regel, Gate, Skill) und
+   wirkt von selbst weiter. Was *darunter* liegt, ist nirgends verkörpert:
+   ohne eigene Sektion versickert es in der Closure-Prosa, und der Zähler
+   fängt mit jeder Welle bei null an. Ein Fehler, der einmal pro Welle
+   auftritt, wäre nach fünf Wellen eine 5×-Lücke, die niemand je als Lücke
+   sieht. Die Sektion wird deshalb bei der nächsten Closure **übernommen und
+   hochgezählt**, nicht neu geschrieben; erreicht ein Eintrag 3×, wandert er
+   in die Steering-Loop-Einträge und verlässt die Liste.
    **Zugleich per `git mv` die Welle-Plan-Datei von flach nach `done/`** — neben
    ihre Ergebnis-Notiz. Der Zustand ist die Verzeichnis-Position, kein
    `Status`-Feld (wie beim Slice, [Modul 5](modul-05-planning-harness.md)): die
