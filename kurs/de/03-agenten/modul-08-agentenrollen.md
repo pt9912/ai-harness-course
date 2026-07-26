@@ -64,6 +64,37 @@ Wesentlich: keine Rolle springt rückwärts in eine vorhergehende, ohne
 Eingabe-Kontext jeder Rolle ist eingeschränkt — das verhindert, dass
 dieselbe Sicht denselben Fehler übersieht.
 
+## Welche Rolle braucht welche Artefaktklasse
+
+Sechs Rollen heißt **nicht** sechs Skill-Dateien. Eine Rolle wird über
+genau die Artefaktklasse geführt, die ihr Urteil trägt — und das ist
+meistens kein Skill:
+
+| Artefaktklasse | Wann | Rollen |
+|---|---|---|
+| **Template** (Slice, Roadmap, ADR) | Das Urteil ist an einem Artefakt verankert: *was* zu tun ist, steht in der Vorlage und im Vorgänger-Artefakt. | Planner · Architect |
+| **Briefing** (`AGENTS.md` + Workflow) | Das Urteil folgt einem festen Ablauf mit repo-weiten Regeln. | Implementation |
+| **Skill-Datei** (`.harness/skills/*.md`) | Das Urteil ist *inferential* **und** beruht auf repo-spezifischem Wissen, das **aus keinem Artefakt ableitbar** ist. | Reviewer |
+| **keins** | Die Prüfgrundlage steht bereits im Slice (DoD, ADR-Bezüge) — oder liegt außerhalb des Repos. | Verifier · Validator |
+
+**Das Kriterium für eine Skill-Datei** ist die dritte Zeile, und es ist
+schärfer, als es aussieht: nicht „die Rolle ist wichtig", sondern *„ohne
+fixierte Urteilsgrundlage driftet dasselbe Verhalten zwischen Läufen"*.
+Beim Reviewer trifft beides zu — seine HIGH-Liste steht in keiner Spec
+(*„git mv + Inhalt = zwei Commits"*, *„Accepted-ADRs immutable"*), und
+`inferential feedback` ist nie deterministisch
+([Modul 10](../04-qualitaet/modul-10-review-harness.md#worked-example-eine-reviewer-skill-datei-schreiben)).
+Beim **Verifier** trifft es nicht zu: er prüft Plan/DoD-Konformität,
+und die Prüfgrundlage reist mit dem Slice mit. Beim **Validator** erst
+recht nicht — er prüft gegen den realen Bedarf, und der ist nicht
+repo-stabil kodierbar.
+
+**Skills wachsen pro Urteilstyp, nicht pro Rolle.** Deshalb gibt es
+neben `reviewer.md` einen zweiten Reviewer-Skill
+`closure-note-reviewer.md` ([Modul 11](../04-qualitaet/modul-11-verification.md))
+— dieselbe Rolle, ein anderer Urteilstyp mit eigener, nicht ableitbarer
+Grundlage. Eine siebte *Rolle* ist das nicht.
+
 ## Lab-Bezug
 
 * `AGENTS.md` an der Lab-Wurzel plus die `AGENTS.md`-Dateien der
@@ -73,11 +104,18 @@ dieselbe Sicht denselben Fehler übersieht.
 * `make agent-review` — Review-Fixture unter
   `exercises/09-review-fixture/` (Reviewer-Rolle; Übung in Modul 10)
 
-> *Lab-Grenze:* Das Lab enthält *keine* Skill-Dateien pro Rolle
-> (`agents/planner.md` etc.) und *kein* Replay eines kompletten
-> Rollendurchlaufs — von den sechs Rollen werden nur Implementer
-> (Kontextpaket) und Reviewer (Fixture) an Lab-Artefakten konkret.
-> Die Übergabe-Sequenz selbst modellierst du in den Übungen als
+> *Lab-Grenze:* Das Lab **braucht** keine Skill-Dateien pro Rolle
+> (`agents/planner.md` etc.) — nach [§Welche Rolle braucht welche
+> Artefaktklasse](#welche-rolle-braucht-welche-artefaktklasse) trägt nur
+> der Reviewer einen Skill; Planner und Architect laufen über Templates,
+> der Implementer über das Briefing. Das ist eine Entscheidung, kein
+> Rückstand: vier zusätzliche Skill-Dateien wären Attrappen ohne
+> nicht-ableitbaren Inhalt.
+>
+> Eine *echte* Grenze bleibt: das Lab hat **kein Replay eines kompletten
+> Rollendurchlaufs**, und von den sechs Rollen werden nur Implementer
+> (Kontextpaket) und Reviewer (Fixture) an Lab-Artefakten konkret. Die
+> Übergabe-Sequenz selbst modellierst du in den Übungen als
 > Mermaid-Diagramm, nicht gegen ein Lab-Artefakt.
 
 ## Themen
@@ -99,7 +137,7 @@ macht. Wer geplant hat, prüft nicht; wer geschrieben hat, reviewt nicht.
 
 ## Typische Fehlvorstellungen
 
-- **"Eine Person spielt alle Rollen."** — Geht — *aber mit unterschiedlichem Eingabe-Kontext und unterschiedlichen Skill-Dateien*. Sonst wiederholen sich die blinden Flecken. Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung.
+- **"Eine Person spielt alle Rollen."** — Geht — *aber mit unterschiedlichem Eingabe-Kontext und der je passenden Artefaktklasse* ([§Welche Rolle braucht welche Artefaktklasse](#welche-rolle-braucht-welche-artefaktklasse)). Sonst wiederholen sich die blinden Flecken. Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung.
 - **"Reviewer macht das Verification gleich mit."** — Nein. Reviewer prüft gegen Plan/ADR (Maintainability). Verification prüft gegen DoD/Spec (Behaviour/Architecture Fitness). Zwei Fragen, zwei Antworten.
 - **"Validation machen wir vor Release."** — Zu spät. Validation gehört *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
 - **"Architect entscheidet, Implementation widerspricht nicht."** — Implementation darf Folge-ADRs vorschlagen. Was sie *nicht* darf: stillschweigend einer ADR widersprechen.
@@ -242,7 +280,7 @@ Modul-spezifische Trigger:
 
 - **Beobachtung:** Hast du eine Tätigkeit nur einer Rolle zugeordnet, obwohl Mehrfachzuweisung sinnvoll war? Wer hat im Konfliktfall *zuerst* entschieden — und was war das Übergabe-Artefakt?
 - **2×2-Quadrant:** Rollen-Trennung ist Kontext-Trennung, primär *inferential feedforward*.
-- **Steering-Loop:** Skill-Datei pro Rolle? Tool-Allowlist pro Rolle? Übergabe-Artefakt-Pflicht im 8-Schritt-Workflow?
+- **Steering-Loop:** Ist ein *neuer Urteilstyp* entstanden, der driftet und keine fixierte Grundlage hat (dann: Skill-Datei — nicht „eine pro Rolle", siehe [§Welche Rolle braucht welche Artefaktklasse](#welche-rolle-braucht-welche-artefaktklasse))? Tool-Allowlist pro Rolle? Übergabe-Artefakt-Pflicht im 8-Schritt-Workflow?
 - **Conceptual Change:** Kandidaten in [`lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Eine Person spielt alle Rollen", "Reviewer macht das Verification gleich mit").
 
 ## Selbstcheck

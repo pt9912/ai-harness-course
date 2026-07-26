@@ -77,6 +77,37 @@ häufigste Pfad zu blinden Flecken.
   hat. Sonst ist es keine Mehrfachzuweisung, sondern doppelte Arbeit
   (und blinde Flecken).
 
+<a id="artefaktklasse-pro-rolle"></a>
+
+### Welche Rolle braucht welche Artefaktklasse (Modul 8)
+
+Sechs Rollen heißt **nicht** sechs Skill-Dateien. Jede Rolle wird über
+die Artefaktklasse geführt, die ihr Urteil trägt:
+
+| Artefaktklasse | Wann | Rollen |
+|---|---|---|
+| **Template** (Slice, Roadmap, ADR) | Das Urteil ist an einem Artefakt verankert. | Planner · Architect |
+| **Briefing** (`AGENTS.md` + 8-Schritt-Workflow) | Das Urteil folgt einem festen Ablauf mit repo-weiten Regeln. | Implementation |
+| **Skill-Datei** (`.harness/skills/*.md`) | Das Urteil ist *inferential* **und** beruht auf repo-spezifischem Wissen, das aus keinem Artefakt ableitbar ist. | Reviewer |
+| **keins** | Die Prüfgrundlage steht im Slice (DoD, ADR-Bezüge) oder liegt außerhalb des Repos. | Verifier · Validator |
+
+- **Kriterium für eine Skill-Datei:** nicht „die Rolle ist wichtig",
+  sondern *ohne fixierte Urteilsgrundlage driftet dasselbe Verhalten
+  zwischen Läufen*. Beim Reviewer trifft beides zu (HIGH-Liste steht in
+  keiner Spec; `inferential feedback` ist nie deterministisch). Beim
+  Verifier nicht — die Prüfgrundlage reist mit dem Slice. Beim Validator
+  nicht — der reale Bedarf ist nicht repo-stabil kodierbar.
+- **Skills wachsen pro Urteilstyp, nicht pro Rolle.** Neben
+  `reviewer.md` steht `closure-note-reviewer.md` (Modul 11): dieselbe
+  Rolle, anderer Urteilstyp mit eigener nicht-ableitbarer Grundlage.
+  Keine siebte Rolle.
+- Zusätzliche Skill-Dateien für Rollen, die über Template oder Briefing
+  laufen, sind **Attrappen** — sie tragen keinen nicht-ableitbaren
+  Inhalt und erzeugen nur eine weitere Datei, die driften kann.
+
+Ziel-Form:
+[`../templates/.harness/skills/reviewer.template.md`](../templates/.harness/skills/reviewer.template.md).
+
 ### Konflikt-Pfad als Rollen-Sequenz (Modul 8)
 
 Ein Rollen-Konflikt (Beispiel: Reviewer-HIGH „Verstoß gegen ADR-0001",
@@ -117,7 +148,7 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
 
 ### Regeln gegen typische Fehlannahmen (Modul 8)
 
-- **Gegen "Eine Person spielt alle Rollen":** Geht — *aber mit unterschiedlichem Eingabe-Kontext und unterschiedlichen Skill-Dateien*. Sonst wiederholen sich die blinden Flecken. Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung.
+- **Gegen "Eine Person spielt alle Rollen":** Geht — *aber mit unterschiedlichem Eingabe-Kontext und der je passenden Artefaktklasse* (siehe [§Welche Rolle braucht welche Artefaktklasse](#artefaktklasse-pro-rolle)). Sonst wiederholen sich die blinden Flecken. Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung.
 - **Gegen "Reviewer macht das Verification gleich mit":** Reviewer prüft gegen Plan/ADR (Maintainability). Verification prüft gegen DoD/Spec (Behaviour/Architecture Fitness). Zwei Fragen, zwei Antworten.
 - **Gegen "Validation machen wir vor Release":** Zu spät. Validation gehört *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
 - **Gegen "Architect entscheidet, Implementation widerspricht nicht":** Implementation darf Folge-ADRs vorschlagen. Was sie *nicht* darf: stillschweigend einer ADR widersprechen.

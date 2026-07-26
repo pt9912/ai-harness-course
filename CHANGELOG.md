@@ -11,6 +11,42 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 36 — 2026-07-26 · Artefaktklasse pro Rolle: sechs Rollen sind nicht sechs Skills
+
+### Hinzugefügt
+
+- **Modul 8 §Welche Rolle braucht welche Artefaktklasse.** `lab/templates/.harness/skills`
+  enthält zwei Skill-Templates, der Kurs nennt sechs Rollen — die Asymmetrie war
+  **deklariert, aber unbegründet**, und las sich dadurch als Rückstand. Modul 8
+  §Lab-Bezug sagte *„Das Lab enthält **keine** Skill-Dateien pro Rolle"*, und der
+  Reflexions-Trigger schlug ausgerechnet *„Skill-Datei pro Rolle?"* vor — ein
+  Adopter baut daraufhin vier Attrappen. Jetzt steht das Kriterium explizit, und
+  es ist aus Modul 10 abgeleitet, nicht neu erfunden: **eine Rolle braucht genau
+  dann eine Skill-Datei, wenn ihr Urteil *inferential* ist UND auf
+  repo-spezifischem Wissen beruht, das aus keinem Artefakt ableitbar ist.**
+  Zuordnung: Planner/Architect → **Template** (Slice, Roadmap, ADR);
+  Implementation → **Briefing** (`AGENTS.md` + 8-Schritt-Workflow); Reviewer →
+  **Skill-Datei** (HIGH-Liste steht in keiner Spec, `inferential feedback` driftet);
+  Verifier/Validator → **keins** (Prüfgrundlage reist im Slice mit bzw. liegt
+  außerhalb des Repos). Zusatz: **Skills wachsen pro Urteilstyp, nicht pro Rolle**
+  — `closure-note-reviewer.md` (Modul 11) ist dieselbe Rolle mit anderem
+  Urteilstyp, keine siebte Rolle. **Kein neues Template**: vier weitere
+  Skill-Dateien trügen keinen nicht-ableitbaren Inhalt.
+
+### Geändert
+
+- **Drei Stellen, die „eine Skill-Datei pro Rolle" nahelegten, geschärft.**
+  Modul 8 §Lab-Grenze von *„enthält keine"* auf *„braucht keine, weil…"*
+  umformuliert (die *echte* Grenze — kein Replay eines kompletten
+  Rollendurchlaufs — bleibt separat stehen); Reflexions-Trigger von
+  *„Skill-Datei pro Rolle?"* auf *„ist ein neuer Urteilstyp entstanden, der
+  driftet?"*; Fehlvorstellung „Eine Person spielt alle Rollen" von
+  *„unterschiedlichen Skill-Dateien"* auf *„der je passenden Artefaktklasse"*
+  (auch in `loesungen/modul-08` und im Regelwerk-Split). Regelwerk-Split
+  `modul-08` trägt die operative Fassung mit stabilem Anker
+  `#artefaktklasse-pro-rolle` und Ziel-Form-Verweis auf
+  `../templates/.harness/skills/reviewer.template.md`.
+
 ## Welle 35 — 2026-07-26 · Guard-Härtung als Worked Example; Regelwerk-Deixis umgehängt
 
 ### Hinzugefügt

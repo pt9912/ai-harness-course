@@ -203,7 +203,7 @@ sondern Drift mit Kaffeepause.
 ## Häufige Fehler
 
 - **Eine Person spielt mehrere Rollen ohne Trennung.** Klassisch: Implementer reviewt sich selbst, weil "ich kenne den Code". Das ist genau die Klasse von Fehlern, gegen die der Harness gebaut ist.
-- **Rollen werden technisch identisch gestartet** (gleicher Prompt, gleicher Kontext). → Sie wiederholen denselben Fehler. Rollen-Trennung heißt auch: *unterschiedlicher Eingabe-Kontext, unterschiedliche Skills*.
+- **Rollen werden technisch identisch gestartet** (gleicher Prompt, gleicher Kontext). → Sie wiederholen denselben Fehler. Rollen-Trennung heißt auch: *unterschiedlicher Eingabe-Kontext und die je passende Artefaktklasse* — Template, Briefing oder Skill-Datei, je nachdem, worauf das Urteil der Rolle beruht (Modul 8 §Welche Rolle braucht welche Artefaktklasse). Nicht: eine Skill-Datei pro Rolle.
 - **Validation wird "wir machen vor Release".** → Zu spät. Validation gehört zumindest *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
 
 ## Verweise
