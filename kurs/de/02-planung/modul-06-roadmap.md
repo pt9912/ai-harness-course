@@ -233,7 +233,9 @@ weglassen:
    Lücke schließt. **Das ist der einzige Schritt im ganzen Zyklus, der
    Closure-Wissen wieder als Eingabe nutzt** — ohne ihn ist die
    Closure-Notiz write-only, und die Zählregel des Steering Loops hat
-   keinen Zähler.
+   keinen Zähler. **Bei der ersten Welle entfällt dieser Schritt** — es
+   gibt keine Vorgängerin; die Sektion entsteht dann erstmals bei deren
+   Closure aus den eigenen Slice-Closures.
 3. **Welle-Datei flach anlegen** (`docs/plan/planning/<welle-id>.md`,
    Ziel-Form [`welle.template.md`](../../../lab/templates/docs/plan/planning/welle.template.md))
    **und in die Roadmap als *Aktuelle Welle* eintragen.** Der Zustand ist
@@ -275,14 +277,7 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    (*Carveout-Wildwuchs*, [`klassifikation.md`](../grundlagen/klassifikation.md#entropy-management));
    sie gilt für alle drei Klassen — **ein Trigger ohne Wächter ist eine
    Absichtserklärung mit Verfallsdatum.**
-   **Zwei Paarungen mitprüfen** — beide nach dem Muster *Nennung ohne
-   Deckung ist eine Harness-Lüge*: (a) **Anker-Paarung** — jeder
-   Steering-Loop-Eintrag nennt einen Zielort, der Zielort existiert und
-   trägt `seit welle-<NN>`
-   ([`konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln));
-   (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als
-   Datei in `open/`. Rot heißt hier: etwas wurde versprochen und nicht
-   geschrieben — dieselbe Klasse wie ein halluziniertes Gate.
+
 3. **Welle nach `done/` schließen.** *Grundlage sind die Closure-Notizen
    der Slices dieser Welle* — §7 jeder Datei in `done/`. Sie werden
    durchgegangen und **verdichtet**, nicht aus dem Gedächtnis
@@ -323,6 +318,20 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    aktive Welle liegt flach unter `docs/plan/planning/`, geschlossenes
    Planungs-Material in `done/`, und die Roadmap bleibt die
    Sequenzierungs-Autorität — so füllt sich der Ordner nicht mit Abgeschlossenem.
+
+   **Zum Schluss beide Paarungen prüfen** — erst *jetzt*, weil sie die
+   Einträge prüfen, die in diesem Schritt gerade entstanden sind; in
+   Schritt 2 gäbe es sie noch nicht. Beide folgen dem Muster *Nennung
+   ohne Deckung ist eine Harness-Lüge*: (a) **Anker-Paarung** — jeder
+   Steering-Loop-Eintrag nennt einen Zielort, der Zielort existiert und
+   trägt `seit welle-<NN>`
+   ([`konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln));
+   (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als
+   Datei **im Planning-Lifecycle** (`open/`, `next/`, `in-progress/`,
+   `done/`) — nicht nur in `open/`: bis zur Prüfung kann er bereits
+   weitergewandert sein, der Zustand ist die Verzeichnis-Position.
+   Rot heißt: etwas wurde versprochen und nicht angelegt — dieselbe
+   Klasse wie ein halluziniertes Gate.
 4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
    Welle schloss, statt eines verstreuten Verschwindens.

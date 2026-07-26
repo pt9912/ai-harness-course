@@ -12,7 +12,7 @@ flowchart LR
     Code --> Review["Review<br/>(gegen Plan/ADR)"]
     Review --> Verify["Verifikation<br/>(gegen DoD/Spec)"]
     Verify --> Closure["Closure<br/>(done/)"]
-    Harness["AGENTS.md · Gate · Skill · ADR<br/>(verkörperte Regel)"]
+    Harness["AGENTS.md · Gate · Skill · MR<br/>(verkörperte Regel)"]
     Closure -. "Lerneintrag:<br/>geschärfte Regel / neuer Sensor" .-> Harness
     Closure -. "Lerneintrag:<br/>benannte Spec-Lücke" .-> Spec
     Harness -. "wirkt auf jeden Lauf" .-> Code

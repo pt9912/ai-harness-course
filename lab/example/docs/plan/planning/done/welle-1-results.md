@@ -25,7 +25,7 @@
 ## Steering-Loop-Einträge
 
 Eine **geschärfte Regel** nennt ihren **Zielort**, und das Ziel trägt den
-Herkunfts-Anker `seit welle-1` — die Paarung wird beim Carveout-Audit
+Herkunfts-Anker `seit welle-1` — die Paarung wird im Trigger-Audit
 mitgeprüft. Eine **benannte Spec-Lücke** trägt keinen Anker: sie landet in
 einer Lastenheft-Version und hat damit bereits eine `LH-*`-ID.
 

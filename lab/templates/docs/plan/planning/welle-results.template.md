@@ -69,7 +69,12 @@ Steering-Loop-Regeln.
 <!--
 Der Zähler des Steering Loops (1x notieren · 2x Symptom · 3x Lücke).
 Diese Sektion wird aus der VORHERIGEN Closure-Notiz ÜBERNOMMEN und
-hochgezählt — nicht neu geschrieben. Ohne sie fängt der Zähler mit jeder
+hochgezählt — nicht neu geschrieben.
+
+ERSTE WELLE: es gibt keine Vorgängerin. Dann wird die Sektion frisch aus den
+Slice-Closures DIESER Welle befüllt (Schritt 3: „Grundlage sind die
+Closure-Notizen der Slices dieser Welle"). Ab der zweiten Welle gilt die
+Übernahme-Regel. Ohne sie fängt der Zähler mit jeder
 Welle bei null an, und ein Fehler, der einmal pro Welle auftritt, wird
 nie als Lücke sichtbar.
 
@@ -96,8 +101,10 @@ Regeln:
 <!--
 DERIVATIV: der Folge-Slice selbst ist eine Datei in `open/`; diese Liste
 zeigt nur darauf. Deshalb braucht sie keinen eigenen Konsumenten — wohl
-aber eine Deckung: jeder genannte Folge-Slice MUSS als Datei in `open/`
-existieren (Folge-Slice-Paarung, wird beim Carveout-Audit mitgeprüft).
+aber eine Deckung: jeder genannte Folge-Slice MUSS als Datei im
+Planning-Lifecycle existieren (`open/`, `next/`, `in-progress/`, `done/` —
+nicht nur `open/`, er kann bis zur Prüfung weitergewandert sein).
+Folge-Slice-Paarung, geprüft am Ende von Schritt 3 der Closure-Prozedur.
 Genannt ohne angelegt ist dieselbe Klasse wie ein halluziniertes Gate.
 -->
 

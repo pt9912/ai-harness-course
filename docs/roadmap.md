@@ -17,9 +17,12 @@ wieder gelesen.
 > ([`konventionen.md` §Verzeichniskonvention](../kurs/de/grundlagen/konventionen.md#verzeichniskonvention)).
 > Dieses Repo führt die Roadmap **flach** unter `docs/roadmap.md`, weil der
 > gelehrte Pfad die vier Lifecycle-Verzeichnisse voraussetzt — und die ohne
-> Slice-Betrieb anzulegen wäre *„Struktur ohne Substanz"*, genau wovor
+> Slice-Betrieb anzulegen wäre leere Form: Verzeichnisse, die keinen Betrieb
+> tragen, behaupten Reife, die es nicht gibt. Das ist *analog* zur Warnung vor
+> „Struktur ohne Substanz" in
 > [`konventionen.md` §Was ist eine Sub-Area?](../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area)
-> warnt. Die Abweichung ist eine Entscheidung, kein Versehen.
+> — der dortige Drei-Achsen-Test wird hier **nicht** angewandt, er beantwortet
+> eine andere Frage. Die Abweichung ist eine Entscheidung, kein Versehen.
 
 ## Offene Fäden
 
@@ -32,14 +35,14 @@ Wunsch, kein Plan — deshalb steht bei den betroffenen Zeilen ausdrücklich
 |---|---|---|
 | **Discovery-/Kandidaten-Register** — eigener Kanal für Nicht-Slice-Register im Planning-Layout | **ein zweites Konsument-Repo zeigt denselben Druck unabhängig** (heute nur `d-check`) | bewusst vertagt seit Welle 33; eine Verallgemeinerung auf Basis *eines* Datenpunkts wäre verfrüht |
 | **Lab Phase C** — Begleit-Lab deckt fünf Sprachen parallel ab | *nicht gesetzt* | in [Modul 2](../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md) und [Modul 13](../kurs/de/04-qualitaet/modul-13-quality-gates.md) als „heute noch nicht ausgeliefert" benannt; Umfang ist ein eigenes Projekt, keine Welle |
-| **`kurs/en`** — englische Fassung | *nicht gesetzt* | Skelett vorhanden (`kurs/en/README.md`), inhaltlich leer; im [README](../README.md) als „derzeit *nicht* Bestandteil des Kurses" deklariert |
+| **`kurs/en`** — englische Fassung | *nicht gesetzt* | Skelett vorhanden — `kurs/en/README.md` trägt nur einen Platzhalter-Text, keinen Kursinhalt; im [README](../README.md) als „derzeit *nicht* Bestandteil des Kurses" deklariert |
 | **Repo-eigener Harness ausbauen** — `harness/conventions.md` mit `MR-000` (Baseline) und einem `MR` für die Pfad-Abweichung oben | **die Roadmap braucht eine zweite Adaption gegenüber dem gelehrten Aufbau** — dann trägt die Prosa oben zu viel und gehört in einen Adaptions-Block | bewusst zurückgestellt: heute genügt der Kommentar in dieser Datei |
 
 ## Meilensteine
 
 | Meilenstein | Bedingung | Stand |
 |---|---|---|
-| **v3.7.0** | Wellen 39–44 getaggt, Bundle-Asset gebaut, `latest` umgehängt | ausstehend |
+| **v3.7.0** | **alle seit v3.6.0 im [CHANGELOG](../CHANGELOG.md) registrierten Wellen** getaggt, Bundle-Asset gebaut, `latest` umgehängt | ausstehend |
 
 ## Abgeschlossene Wellen
 

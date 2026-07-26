@@ -94,14 +94,7 @@ dort automatisch (Modul-0-Prinzip).
    dokumentiertem Carveout schließen — aber nie mit einem stillen roten Gate,
    einer stehengebliebenen Reifestufe oder einer Entscheidung, deren
    Re-Evaluierungs-Bedingung vor drei Wellen eintrat. **Ein Trigger ohne
-   Wächter ist eine Absichtserklärung mit Verfallsdatum.** **Zwei Paarungen mitprüfen**,
-   beide nach dem Muster *Nennung ohne Deckung ist eine Harness-Lüge*:
-   (a) **Anker-Paarung** — jeder Steering-Loop-Eintrag nennt einen
-   Zielort, der Zielort existiert und trägt `seit welle-<NN>`
-   ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker));
-   (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als
-   Datei in `open/`. Rot heißt: etwas wurde versprochen und nicht
-   geschrieben.
+   Wächter ist eine Absichtserklärung mit Verfallsdatum.**
 3. **Welle nach `done/` schließen.** Grundlage sind die **Closure-Notizen der
    Slices dieser Welle** (§7 jeder Datei in `done/`): durchgehen und
    **verdichten**, nicht aus dem Gedächtnis zusammentragen — gleiche
@@ -121,6 +114,15 @@ dort automatisch (Modul-0-Prinzip).
    `done/`** — neben ihre Ergebnis-Notiz; der Zustand ist die
    Verzeichnis-Position, kein `Status`-Feld (wie beim Slice). Aktive Welle
    flach, geschlossene in `done/`, die Roadmap bleibt Sequenzierungs-Autorität.
+   **Zum Schluss beide Paarungen prüfen** — erst jetzt, weil sie die gerade
+   entstandenen Einträge prüfen; in Schritt 2 gäbe es sie noch nicht.
+   (a) **Anker-Paarung** — jeder Steering-Loop-Eintrag nennt einen Zielort, der
+   existiert und `seit welle-<NN>` trägt
+   ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker));
+   (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als Datei
+   **im Planning-Lifecycle** (`open/`, `next/`, `in-progress/`, `done/`), nicht
+   nur in `open/`: bis zur Prüfung kann er weitergewandert sein. Rot heißt:
+   etwas wurde versprochen und nicht angelegt.
 4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
    Welle schloss, statt eines verstreuten Verschwindens.

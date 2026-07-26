@@ -53,18 +53,6 @@ sondern ein Buffet.
 
 ### Closure- und Lerneintrag-Regeln (Modul 5)
 
-- **Offene Risiken werden bei Closure aufgelöst.** Ein Risiko aus dem
-  Slice-Plan (*Risiken und offene Punkte*) ist Originalinformation und
-  steht nirgendwo sonst. Jedes bekommt beim Übergang nach `done/` genau
-  **einen** Ausgang: *eingetreten* → Carveout (Modul 7) oder Folge-Slice
-  mit ID · *entfallen* → gestrichen **mit Begründung** (ohne sie ist es
-  stilles Vergessen) · *weiter offen* → wandert in *Beobachtungen unter
-  Schwelle* der Welle-Closure ([Modul 6](modul-06-roadmap.md)). Der
-  dritte Ausgang hängt das Risiko an den Zähler, statt einen zweiten
-  Mechanismus zu erfinden: drei Slices lang offen heißt Schwelle
-  erreicht. Ein Slice geht nicht nach `done/`, während ein Risiko ohne
-  Ausgang dasteht.
-
 - **Drei Quellen speisen den Closure-Eintrag:** eigene Beobachtung ·
   offenes Risiko aus dem Slice-Plan · **wiederkehrende Finding-Klasse aus
   dem Review** dieses Slice (Summary-Zeile des Review-Reports; der Report
@@ -85,6 +73,18 @@ sondern ein Buffet.
   kein Closure-Werkzeug) wird in
   [Modul 7 §Werkzeug-Wahl bei Diskrepanz](modul-07-carveouts.md#werkzeug-wahl)
   disambiguiert.
+
+#### Offene Risiken werden bei Closure aufgelöst
+
+Ein Risiko aus dem Slice-Plan (*Risiken und offene Punkte*) ist
+Originalinformation und steht nirgendwo sonst. Jedes bekommt beim Übergang
+nach `done/` genau **einen** Ausgang: *eingetreten* → Carveout (Modul 7)
+oder Folge-Slice mit ID · *entfallen* → gestrichen **mit Begründung** (ohne
+sie ist es stilles Vergessen) · *weiter offen* → wandert in *Beobachtungen
+unter Schwelle* der Welle-Closure ([Modul 6](modul-06-roadmap.md)). Der
+dritte Ausgang hängt das Risiko an den Zähler, statt einen zweiten
+Mechanismus zu erfinden: drei Slices lang offen heißt Schwelle erreicht.
+Ein Slice geht nicht nach `done/`, während ein Risiko ohne Ausgang dasteht.
 
 ### Ziel-Form: Slice
 
