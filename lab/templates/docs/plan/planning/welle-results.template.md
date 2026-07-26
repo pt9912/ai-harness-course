@@ -6,7 +6,7 @@
 > `welle-1-results.md`). Ersetze Platzhalter und lösche diesen Block.
 > Zugleich wandert die Welle-*Plan*-Datei per `git mv` nach `done/`, neben
 > diese Notiz. Pflichtteile und Ablauf: Baseline-Regelwerk
-> `modul-06-roadmap.md` §Die Wellen-Closure-Prozedur, Schritt 3.
+> `modul-06-roadmap.md` §Wellen-Closure-Prozedur (Modul 6), Schritt 3.
 
 **Welle:** <welle-id, z. B. welle-1-mvp>
 **Abschluss:** YYYY-MM-DD

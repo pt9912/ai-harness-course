@@ -100,7 +100,7 @@ erweitern):
    Schwelle* der letzten Welle-Closure, [Modul 6](modul-06-roadmap.md)):
    ein Eintrag, der die Sub-Area schon zweimal getroffen hat, ist genau
    dieses Risiko — und wird er durch diesen Slice zum dritten Mal
-   berührt, ist er eine Lücke und braucht einen Folge-Slice. Keine
+   berührt, ist er keine Notiz mehr, sondern eine Lücke. Keine
    Treffer sind ebenfalls eine Antwort und werden notiert.
 4. **Reconciliation-Aufwand inklusive Graduation-/Folge-Slice-Trigger** —
    wieviel Slice-Aufwand bringt BF/Hybrid mit sich, und welcher Trigger

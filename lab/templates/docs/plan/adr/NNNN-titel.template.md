@@ -19,7 +19,7 @@ Spec-Stelle diese ADR verbindlich macht. Aufwärts-Deklaration der
 Änderungskopplung: wer diese ADR ändert, zieht von hier die betroffenen
 Spec-Stellen nach. `—` eintragen, wenn Prozess-ADR ohne Spec-Stratum.
 
-> **IDs als Markdown-Link** (klickbar zur Quelle, Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung).
+> **IDs als Markdown-Link** (klickbar zur Quelle, Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
 > Der `<anker>` ist der GitHub-Heading-Slug der Ziel-Überschrift. Der
 > `check-references`-Gate prüft heute nur Token-Richtung, **nicht** die
 > Anker-Auflösung — ein umbenannter Abschnitt rottet den Link still; die
