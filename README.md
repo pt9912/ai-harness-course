@@ -97,6 +97,16 @@ beliebiges Repo adoptieren, ohne Installation:
    §Verwendung (kopieren, `<Platzhalter>` ersetzen, Hinweis-Block strippen,
    d-check:ignore-Marker behalten).
 
+> **Automatisiert statt von Hand.** Dieselben Schritte führt das CLI
+> [`ai-harness-init`](https://github.com/pt9912/ai-harness-init) aus: es legt
+> Skelette, Gate-Baseline und das vendored Regelwerk unter
+> `.harness/baseline/` an und arbeitet idempotent. Es ist ein **eigenes
+> Projekt** (MIT, Stand v0.x) und nicht Bestandteil des Kurses — es braucht
+> Docker, Git und GNU `make`, der Weg oben kommt dagegen ohne Installation
+> aus. Wer verstehen will, *was* dabei entsteht, liest
+> [Modul 2 §Bootstrap](kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md);
+> das Werkzeug nimmt die Handgriffe ab, nicht die Entscheidungen.
+
 Danach ist **`AGENTS.md` deines Repos der selbstbeschreibende Einstieg** —
 es trägt die Pointer auf Regelwerk und Templates weiter, sodass jeder
 Code-Agent ohne Vorwissen über diesen Kurs bootstrappen kann.

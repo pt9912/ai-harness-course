@@ -11,6 +11,36 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 47 — 2026-07-26 · Bootstrap-Werkzeug verlinkt; Adopter-Zählung korrigiert
+
+### Hinzugefügt
+
+- **README §Adoptieren verweist auf [`ai-harness-init`](https://github.com/pt9912/ai-harness-init)** —
+  das CLI führt dieselben Schritte aus, die der Abschnitt von Hand beschreibt
+  (Skelette, Gate-Baseline, vendored Regelwerk unter `.harness/baseline/`,
+  idempotent). Bewusst als **eigenes Projekt** ausgewiesen (MIT, Stand v0.x,
+  nicht Bestandteil des Kurses) und mit der ehrlichen Gegenrechnung: es braucht
+  Docker, Git und `make`, der manuelle Weg kommt ohne Installation aus. Dazu
+  der Satz, der die Rollen trennt: *das Werkzeug nimmt die Handgriffe ab, nicht
+  die Entscheidungen* — wer wissen will, was entsteht, liest Modul 2.
+
+### Geändert
+
+- **Faktenfehler in `docs/roadmap.md` korrigiert (aus Welle 45).** Der Faden
+  *Discovery-Register* trug die Klammer „(heute nur `d-check`)" — falsch, und
+  schon beim Schreiben falsch: Das CHANGELOG weist `ai-harness-init` **dreimal**
+  als Adopter mit eigenen `MR-007`, `MR-008` und `MR-010` aus, der drei
+  Kurs-Lücken aufdeckte (d-check.mk-Drift, Instanziierungs-Zeitpunkt,
+  Baseline-Freshness). Es gibt also **zwei** Konsument-Repos, nicht eines.
+  Der Faktencheck des Reviews hatte den Satzteil nicht erfasst, weil er die
+  Welle-33-Formulierung verglich, nicht die Klammer.
+  **Der Faden bleibt trotzdem vertagt** — und die Roadmap sagt jetzt genauer,
+  warum: Der Trigger hat zwei Hälften. *Zweites Konsument-Repo* ist erfüllt;
+  *derselbe Druck* ist es nicht — für einen Bedarf an einem
+  Discovery-/Kandidaten-Register in `ai-harness-init` gibt es keinen Beleg. Die
+  Verallgemeinerung braucht die wiederholte **Beobachtung**, nicht nur einen
+  zweiten Adopter.
+
 ## Welle 46 — 2026-07-26 · „Jedes Artefakt hat einen Konsumenten" wird auffindbar — und ehrlich eingeordnet
 
 Auslöser war die Rückfrage, wo dieser „Graph-Test" eigentlich steht. Antwort:
