@@ -112,8 +112,8 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
   **HIGH mit Rollen-Widerspruch** oder ab dem **dritten** gleichen
   Konflikttyp — dann wird sie Pflicht im 8-Schritt-Workflow
   ([Modul 9](modul-09-implementierung.md#minimal-agent-workflow-8-schritte)),
-  ein Steering-Loop-Signal (siehe
-  [`reflexion-vorlage.md`](../../kurs/de/grundlagen/reflexion-vorlage.md#wann-darf-eine-reflexion-nicht-zu-einer-harness-änderung-führen)).
+  ein Steering-Loop-Signal (1× notieren · 2× Symptom · 3× Lücke, siehe
+  [`grundlagen/klassifikation.md` §Steering Loop](grundlagen-klassifikation.md#steering-loop)).
 
 ### Regeln gegen typische Fehlannahmen (Modul 8)
 

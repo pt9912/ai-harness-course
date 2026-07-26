@@ -81,9 +81,10 @@ demselben [Steering-Loop](grundlagen-konventionen.md#verbindung-zum-steering-loo
 wie alles andere. Ein Befehls-Guard etwa reift in Wellen: zuerst nur die
 Befehlsposition, dann Sub-Shell-Rekursion (`bash -c "…"`), dann
 kombinierte Flags (`-lc`, `-ec`). Genau diese Härtung *am Wächter selbst*
-ist der Steering-Loop, auf den Harness angewandt. Die ausführliche
-Behandlung dazu gehört nach [Modul 13](modul-13-quality-gates.md)
-(folgt).
+ist der Steering-Loop, auf den Harness angewandt. Die operativen Regeln
+dieser Härtung — Auslöser, Landung als `MR-<NNN>`, Mitziehen der
+Grenz-Zeile — stehen in
+[Modul 13 §Guard-Härtung](modul-13-quality-gates.md#guard-haertung).
 
 ### Referenz-Implementierung
 
@@ -97,8 +98,8 @@ Das vollständige Artefakt-Set einer Durchsetzungsschicht:
   inhaltsbasierte Nachweis-Quelle für Gate-Lauf *und* Handoff-Gate (eine
   Wahrheit, keine Logik-Dopplung)
 
-Die Gate- und Traceability-Mechanik, an die das andockt, läuft in den
-Fallstudien-Repos ([`fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md)) bereits real; die
+Die Gate- und Traceability-Mechanik, an die das andockt, läuft in realen
+Repos bereits produktiv; die
 Skripte werden hier **referenziert, nicht inline ausgerollt** — die
 mechanische Hälfte bleibt klein und lesbar, die Details holt man aus der
 Referenz.

@@ -39,9 +39,10 @@ wiederkehrende Charaktere:
 
 **Beginne immer beim Referenz-Repo**, portiere erst nach erfolgreicher
 Steering-Loop-Iteration (siehe [`klassifikation.md`](klassifikation.md))
-auf die Flagships. Alle Repos parallel mit demselben Master-Prompt zu
-treiben skaliert nicht — der Agent verteilt dann halbgare Standardtexte
-über alle.
+auf die Flagships — die Regel mit Begründung steht in
+[`konventionen.md` §Einführungs-Reihenfolge über mehrere Repos](konventionen.md#einführungs-reihenfolge-über-mehrere-repos).
+Auf dieser Seite steht sie im Kontext der vier konkreten Repos; normativ
+ist der Konventions-Text.
 
 ## Beobachtung aus dem Ist-Zustand
 

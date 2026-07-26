@@ -662,6 +662,24 @@ Konvergenzpfad zu GF ist sichtbar (mit ersten Reconciliation-Slices in
 Modul 5–9). Bootstrap und Workflow sind getrennte Lebenszyklen — kein
 Übergang ohne Sichtbarkeit.
 
+### Einführungs-Reihenfolge über mehrere Repos
+
+Bootstrap gilt pro Repo — in einer Mehrfach-Repo-Landschaft stellt sich
+zusätzlich die Frage, *welches Repo zuerst*. Die Antwort folgt der
+Repo-Klasse (§Kernbegriffe):
+
+**Beginne immer beim Referenz-Repo**, portiere erst nach erfolgreicher
+Steering-Loop-Iteration auf die Flagships (Safety/Control,
+Policy/Compliance). Alle Repos parallel mit demselben Master-Prompt zu
+treiben skaliert nicht — der Agent verteilt dann halbgare
+Standardtexte über alle.
+
+Begründung: das Referenz-Repo ist der *Demonstrator*, in dem
+experimentiert werden darf; ein Flagship trägt nicht verhandelbare Hard
+Rules und ist der falsche Ort, um eine Konvention zum ersten Mal
+auszuprobieren. Was sich im Referenz-Repo über eine Steering-Loop-Runde
+bewährt hat, wandert in die Flagships — nicht umgekehrt.
+
 ### Verbindung zum Steering-Loop
 
 Harness-Bootstrap ist im Grunde der **Steering-Loop ([Modul 11](../04-qualitaet/modul-11-verification.md)),

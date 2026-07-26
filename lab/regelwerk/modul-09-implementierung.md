@@ -67,8 +67,7 @@ gelesen.
 
 Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 *Falsch/Richtig*-Beispiele **und** eine *technische Begründung*.
-Beispiele aus realen Repos (siehe
-[`fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md)):
+Beispiele aus realen Repos:
 
 * **Docker-only** (grid-gym): kein lokales `.venv`, kein `pip install` außerhalb von Dockerfile-Stages.
   *Falsch:* `uv run python tools/foo.py`.
@@ -112,9 +111,8 @@ Reflex "mehr Kontext rein" gerne überliest:
   praktisch nicht.
 - **Token-Kosten.** Jedes Token im Eingangskontext wird abgerechnet —
   pro Lauf, pro Tool-Call, pro Replay. Ein 30-zeiliger irrelevanter
-  Block, der in 1500 PRs mitläuft (siehe Lopopolos empirischer Beleg in
-  [`quellen.md`](../../kurs/de/abschluss/quellen.md)), ist eine
-  Rechnung mit vier Stellen vor dem Komma.
+  Block, der in 1500 PRs mitläuft (empirischer Beleg: Lopopolo,
+  OpenAI 2026), ist eine Rechnung mit vier Stellen vor dem Komma.
 
 Folge: Context Engineering ist *auch* eine Reduktions-Aufgabe.
 Konkret gehört in den Lauf-Kontext:

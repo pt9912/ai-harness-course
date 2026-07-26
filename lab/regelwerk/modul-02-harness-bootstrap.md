@@ -92,10 +92,9 @@ Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose.
   passieren, und produziert daher dauerhaft Findings ohne
   Modus-Bewusstsein.
 * Modus gilt **pro Sub-Area**. Ein Repo kann in den
-  *Konventionen* BF und in der *Spec-Schreibung* GF sein. Die vier
-  Beispiele in
-  [`grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../../kurs/de/grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)
-  zeigen diese Sub-Area-Heterogenität explizit.
+  *Konventionen* BF und in der *Spec-Schreibung* GF sein.
+  Sub-Area-Heterogenität ist der Normalfall, nicht die Ausnahme — ein
+  einzelnes Modus-Etikett auf dem Repo ist deshalb immer zu grob.
 * auch im GF-Modus entstehen Trigger
   (Diskrepanz, Promotion-Auslöser etc.), nur nicht aus
   *Bestandsinventur*, sondern aus *Konsistenzprüfung des neu
@@ -116,13 +115,9 @@ Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose.
   wird als *eine* Sub-Area gelabelt, statt in mehrere aufgeteilt; *zu
   fein* — ein substanzloses Verzeichnis (*"Struktur ohne Substanz"*, nur
   eine Achse erfüllt) wird zur Sub-Area erhoben, obwohl es eine
-  Sub-Area-*Aspirantin* bleibt. Lernerursprung: dieselbe Wurzel wie die
-  Modul-5-Vorstellung *"wenn der Slice klein ist, ist die Sub-Area GF"*
-  ([`grundlagen/lernervorstellungen.md` §Über Planung](../../kurs/de/grundlagen/lernervorstellungen.md#über-planung-modul-57))
-  — Reife/Substanz wird aus einem Oberflächenmerkmal (Existenz, Größe)
-  *abgelesen* statt über die Achsen *geprüft*. (Die Modul-5-Vorstellung
-  bleibt eine *Modus*-FV; FV5 teilt nur die kognitive Wurzel, nicht die
-  Achse.)
+  Sub-Area-*Aspirantin* bleibt. Gemeinsame Wurzel beider Fehler:
+  Reife/Substanz wird aus einem Oberflächenmerkmal (Existenz, Größe)
+  *abgelesen* statt über die Achsen *geprüft*.
 
 ### Greenfield-Bootstrap: Schritt-Sequenz (Modul 2)
 

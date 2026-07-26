@@ -11,6 +11,90 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 35 — 2026-07-26 · Guard-Härtung als Worked Example; Regelwerk-Deixis umgehängt
+
+### Hinzugefügt
+
+- **Modul 13 §Worked Example B — „Guard-Härtung als Steering-Loop am Wächter".**
+  Schließt den seit Einführung der Durchsetzungsschicht offenen „(folgt)"-Verweis
+  (`grundlagen/durchsetzungsschicht.md` §Die Schicht wird selbst gesteuert). Zwei
+  Wellen an einem Befehls-Guard: Welle 1 (`MR-004`, Befehlspositions-Denylist nach
+  3× direktem `pytest`-Aufruf), Welle 2 (`MR-005`, rekursives Auspacken der
+  `-c`-Payloads inkl. `-lc`/`-ec`, fail-closed über Tiefenlimit) — je mit
+  Beobachtungs-Beleg aus Lerneinträgen, *verworfener* Alternative (`bash` auf die
+  Denylist: ein abgeschalteter Wächter ist schlechter als ein löchriger) und
+  Landung als **neuer** `MR`, nie als Edit am akzeptierten Eintrag. Wellen-Tabelle
+  mit bewusst leerer Zeile 3 („die nächste Welle wird beobachtet, nicht geplant"),
+  drei Entgleisungen, und die Abgrenzung Gate (prüft ein *Ergebnis*, computational
+  feedback) vs. Wächter (verhindert eine *Handlung*, computational feedforward) —
+  deshalb steht der Guard bewusst **nicht** in §Gate-Typ ↔ Fehlerbild. Das
+  bestehende Worked Example heißt jetzt **A** (Anker `worked-example-a-…`,
+  3 Verweise in Modul 4 nachgezogen). Neue Analysieren-Übung (Welle 3 schreiben:
+  Beleg → Abwägung → neue Grenz-Zeile) + Lösungshinweis, Reflexions-Trigger
+  ergänzt. Die `Grenze:`-Zeile im `MR`-Block ist explizit als **repo-lokales
+  Zusatzfeld** ausgewiesen — die Pflichtfelder des Adaptions-Blocks bleiben
+  unangetastet, kein Template-Eingriff. Regelwerk-Split `modul-13` trägt die
+  operative Fassung (`§Guard-Härtung`, stabiler Anker `#guard-haertung`), beide
+  „(folgt)"-Enden geschlossen.
+
+### Geändert
+
+- **`lab/regelwerk`: Selbstverweise auf „Kurs" auf das Regelwerk umgehängt.** Sieben
+  Stellen sagten im vendorten Betriebsregelwerk „in diesem Kurs" / „Bedeutung im
+  Kurs" / „Kurs-Glossar" / „pro Kurs-Phase" — ein Referent, der im Adopter-Repo
+  ins Leere zeigt (`grundlagen-konventionen` ×3, `grundlagen-klassifikation`,
+  `modul-04`, `modul-14`, `modul-16`). Das ist **keine** Verletzung der
+  Quelltreue-Regel, sondern dieselbe Operation, die beim Split ohnehin passiert:
+  relative Links werden umgehängt, Deixis genauso — der Satz behält seine Aussage,
+  nur sein Referent wandert mit dem Text. **Stehen bleibt „Kurs", wo es die
+  Baseline-*Quelle* benennt** (Baseline-Aufzählungen in `modul-01`/`konventionen`,
+  „neues Kurs-Release" als Drift-Trigger in `modul-02`, Baseline-Auswahl
+  `modul-02` §Schritt 1, sowie das gesamte README: Framing, Stand-Zeile,
+  Normativitäts-Klausel, Lizenz). Zusätzlich ein Didaktik-Rest entfernt
+  (`grundlagen-klassifikation`: „…warum Replay und Golden Sets im Kurs ein eigenes
+  Modul bekommen" — eine Aussage über den *Kursaufbau*, die nach der Weglass-Regel
+  nicht ins Regelwerk gehört). Die Transformationsregel steht als eine Klausel im
+  README-Extrakt-Satz, nicht als eigener Absatz: sie ist eine Maintainer-Regel für
+  die *Herstellung* des Splits, und das README reist im Bundle zum Adopter mit.
+  **Keine `kurs/`-Änderung** — die Quelle ist ein Kurs und sagt zu Recht „in diesem
+  Kurs". `make check` grün (d-check 0 Befunde, docs 0/0, alignment 0 WARN).
+- **`lab/regelwerk` verweist nicht mehr auf Kurs-Material — 14 Auswärts-Links
+  aufgelöst.** Zweite Leck-Klasse an derselben Wurzel: Verweise aus dem netzlos
+  ausgelieferten Bundle auf Dateien, die *nicht* mitreisen (`fallstudien.md`,
+  `quellen.md`, `reflexion-vorlage.md`, `lernervorstellungen.md` liegen nicht in
+  `lab/templates/`). Die betroffenen Ziele tragen **keine Regel**: Fallstudien
+  sind vier konkrete Repos mit Stand-Momentaufnahme („Stand 2026-06") und einer
+  Spalte *„Was der Kurs daraus zieht"*, `quellen.md` ist ein Literaturverzeichnis
+  mit eigenem Abschnitt *„Didaktische Quellen"*, `reflexion-vorlage.md` eine
+  Vorlage für Kurs-*Übungen*. Alle 14 Verweise standen in Beleg-Klammern; die
+  tragenden Sätze bleiben wortgleich stehen (Beispiel: „Ein reifes Repo (Beispiel
+  `pt9912/grid-gym`, siehe fallstudien.md) hat…" → „Ein reifes Repo (Beispiel
+  `pt9912/grid-gym`) hat…"). Betroffen: 8× `fallstudien.md`, 2× `quellen.md`,
+  1× `reflexion-vorlage.md`, 1× `lernervorstellungen.md`; dazu `modul-08`, dessen
+  Steering-Loop-Verweis auf die **in-Bundle** stehende 1×/2×/3×-Regel in
+  `grundlagen-klassifikation.md` §Steering Loop umgehängt wurde. Dazu die README
+  selbst: ihr Absatz „Vendored gelesen?" — die Anrede an den Adopter, der das
+  Bundle netzlos liest — schickte für *„Vorgehen beim Bootstrap"* nach draußen in
+  den Kurs, obwohl `modul-02-harness-bootstrap.md` im Bundle liegt; auf den Split
+  umgehängt. **Genau ein** Auswärts-Link bleibt: die Normativitäts-Klausel
+  („maßgeblich für den Inhalt bleibt der Kurs unter `/kurs/de/`") — dort *ist* der
+  Sprung nach draußen der Zweck. Alles andere im Regelwerk ist netzlos.
+- **`konventionen.md`: neue `### Einführungs-Reihenfolge über mehrere Repos`.**
+  Beim Entfernen der Fallstudien-Verweise fiel auf, dass `fallstudien.md`
+  **gemischt** ist: neben Fallbeispielen trug sie eine echte Betriebsregel
+  („Beginne immer beim Referenz-Repo, portiere erst nach erfolgreicher
+  Steering-Loop-Iteration auf die Flagships; alle Repos parallel mit demselben
+  Master-Prompt zu treiben skaliert nicht"), die **nirgends sonst stand** —
+  verifiziert gegen Regelwerk *und* `konventionen.md`. Eine allgemeine Regel auf
+  einer Fallbeispiel-Seite ist eine Quell-Fehlablage, deshalb Fix-Richtung
+  **Quelle**: die Regel wandert wortgleich (plus Begründung aus §Konsequenzen pro
+  Klasse) nach `konventionen.md` §Harness-Bootstrap; `fallstudien.md` behält den
+  Absatz als Kontext-Hinweis mit Pointer, normativ ist ab jetzt der
+  Konventions-Text. Damit trägt der Split `grundlagen-konventionen` die Regel
+  quell-verankert — sie verschwindet nicht mit den Fallstudien-Verweisen. Die
+  §Repo-Klassen-Hälfte brauchte keinen Umzug: sie steht als Kernbegriff und in
+  den Source-Precedence-Konsequenzen bereits im Regelwerk.
+
 ## Welle 34 — 2026-07-24 · Change-Request-Landing-Disziplin: Fußabdruck statt Konstrukt
 
 ### Geändert

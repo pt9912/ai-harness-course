@@ -200,7 +200,7 @@ Sprachen parallel abdecken (heute noch nicht ausgeliefert).
 
 Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
 
-## Worked Example: vom ADR-Satz zur Fitness Function
+## Worked Example A: vom ADR-Satz zur Fitness Function
 
 > **Wenn du ArchUnit / import-linter / dep-cruiser bereits routiniert einsetzt, springe zu [§Übungen](#übungen).** Das Worked Example zeigt die Übersetzungsschablone für den ersten oder zweiten Fall — wer sie kann, gewinnt durch Wiederholung wenig (Expertise-Reversal). Übung 1 setzt das Schema sofort produktiv.
 
@@ -250,11 +250,175 @@ Toolchain (Modul 14).**
 `ADR-0007 violated`. Genau der Effekt, der eine ADR von einer
 Absichtserklärung trennt.
 
+## Worked Example B: Guard-Härtung als Steering-Loop am Wächter
+
+> **Voraussetzung:** [`../grundlagen/durchsetzungsschicht.md`](../grundlagen/durchsetzungsschicht.md) (drei Bindepunkte, vier Design-Eigenschaften). Dieses Beispiel zeigt nicht, *wie* man einen Wächter baut, sondern wie er **über Wellen reift** — und wo diese Reifung dokumentarisch landet.
+
+Worked Example A baut einen Sensor: einmal geschrieben, dann grün. Der
+zweite Fall ist der unbequemere — der **Sensor selbst** wird zum
+Gegenstand des Steering-Loops. Gehärtet wird hier ein **Befehls-Guard**:
+ein Tool-Call-Gate (`PreToolUse`-Hook), das die Regel „Toolchain nur
+über `make`" durchsetzt (Bindepunkt-Tabelle in
+[`../grundlagen/durchsetzungsschicht.md`](../grundlagen/durchsetzungsschicht.md#drei-bindepunkte)).
+
+**Ausgangsregel**, bisher nur in `AGENTS.md` — also *inferential
+feedforward*: „Rufe Test-, Lint- und Typecheck-Werkzeuge nie direkt auf;
+benutze das `make`-Target. `make` läuft im gepinnten Image (Modul 14)."
+
+### Welle 1 — die Regel bekommt einen Wächter (`MR-004`)
+
+**Beobachtung.** Drei Slices hintereinander, je im Lerneintrag notiert:
+der Implementation-Agent ruft `pytest -q` direkt auf. Lokal grün, im CI
+rot — Python 3.12 gegen 3.11, exakt das Bild aus [§Engage](#engage).
+Einmal ist ein Vorfall, zweimal ein Symptom, dreimal eine **Lücke**
+([Steering Loop](../grundlagen/klassifikation.md#steering-loop)).
+
+**Sensor-Wahl.** Wiederkehrender Tool-Missbrauch verlangt *computational
+feedforward* — nicht noch einen `make`-Gate. Ein Gate liefe **nach** dem
+falschen Aufruf und stellte nur fest, dass die Toolchain-Version nicht
+passte; der Bindepunkt, der den Aufruf gar nicht erst zulässt, ist der
+Tool-Call-Gate.
+
+**Realisierung.** Der Hook liest die Kommandozeile und prüft die
+**Befehlspositionen** — das erste Wort, plus jedes Wort nach `&&`, `||`,
+`;`, `|` — gegen eine Denylist (`pytest`, `ruff`, `mypy`, `pip`,
+`docker`). Treffer → der Tool-Call wird blockiert, die Meldung nennt das
+Ersatz-Target (`pytest` → `make test-unit`).
+
+**Landung in `harness/conventions.md`:**
+
+```
+### MR-004 — Toolchain-Aufrufe nur über make (Tool-Call-Gate)
+
+- **Datum:** 2026-03-04
+- **Geltungsbereich:** `.claude/settings.json`, `.claude/hooks/guard-bash.sh`;
+  Regel-Text in `AGENTS.md` §Safety and scope boundaries
+- **Adaption:** Die Baseline-Regel „make/Docker-only" wird von *inferential*
+  auf *computational feedforward* gehoben: ein `PreToolUse`-Hook blockiert
+  Tool-Calls, deren Befehlsposition auf der Denylist steht.
+- **Begründung:** Drei Vorfälle in Folge (Lerneinträge slice-041/044/047):
+  direkter `pytest`-Aufruf, lokal grün / CI rot durch ungepinnte
+  Interpreter-Version.
+- **Grenze:** Stolperdraht, keine Sandbox — geprüft wird die Befehlsposition,
+  nicht der Effekt. Interpreter-Umwege (`python -c "…"`) bleiben möglich;
+  Netz dafür ist CI.
+- **Auflösungs-Trigger:** permanent.
+```
+
+Die `Grenze:`-Zeile ist hier ein **repo-lokales Zusatzfeld** — die
+Pflichtfelder des Adaptions-Blocks (Datum, Geltungsbereich, Adaption,
+Begründung, Auflösungs-Trigger) sind damit nicht angetastet. Wo die
+Grenz-Aussage steht, ist Wahl; *dass* sie dasteht, ist Pflicht: ein
+Wächter, der so gelesen werden kann, als decke er mehr ab als er tut,
+ist selbst eine
+[Harness-Lüge](../grundlagen/konventionen.md#kernbegriffe) — dieselbe
+Klasse wie das halluzinierte Gate aus
+[§Hard Rule](#hard-rule-doku-disziplin).
+
+### Welle 2 — der Wächter wird umgangen (`MR-005`)
+
+**Beobachtung.** Zwei Wochen später, wieder dreimal:
+`bash -c "pytest -q --lf"`. Die Befehlsposition ist `bash`, steht nicht
+auf der Denylist, der Wächter winkt durch — CI wieder rot. Der Agent ist
+dabei nicht böswillig; er hat die Blockade gelesen und einen Weg
+gefunden, der formal nicht dagegen verstößt. Genau dafür ist die
+Beobachtungs-Häufung da: der Umweg ist erst *nach* der Blockade
+entstanden und war vorher nicht vorhersagbar.
+
+**Die naheliegende falsche Reaktion.** `bash` auf die Denylist setzen.
+Das blockiert jeden legitimen Shell-Aufruf — inklusive `make` selbst,
+sobald es über eine Shell läuft. Der Stolperdraht wird zur Mauer, der
+Agent kommt gar nicht mehr durch, und der Wächter wird nach dem dritten
+Fehlalarm abgeschaltet. Ein **abgeschalteter Wächter ist schlechter als
+ein löchriger**, weil die Doku ihn weiterhin behauptet.
+
+**Die Härtung.** Der Guard packt Sub-Shells **rekursiv aus**: erkennt er
+`bash`/`sh`/`zsh` mit einem `-c`-Flag — auch in kombinierter Form
+(`-lc`, `-ec`, `-lec`) —, unterwirft er den String-Payload derselben
+Befehlspositions-Prüfung. Mit **Tiefenlimit**; oberhalb des Limits wird
+**blockiert, nicht durchgewunken** (Design-Eigenschaft *fail-closed*).
+Die Denylist bleibt unverändert — geschärft wird die *Zerlegung*, nicht
+die Liste.
+
+**Landung: ein neuer Eintrag, keine Korrektur.**
+
+```
+### MR-005 — Befehls-Guard: Sub-Shell-Rekursion (schärft MR-004)
+
+- **Datum:** 2026-03-19
+- **Geltungsbereich:** `.claude/hooks/guard-bash.sh` (Guard aus MR-004)
+- **Adaption:** Befehlspositionen werden zusätzlich *innerhalb* der
+  `-c`-Payloads von `bash`/`sh`/`zsh` geprüft, inkl. kombinierter Flags
+  (`-lc`, `-ec`, `-lec`); Rekursionstiefe 3, darüber fail-closed blockiert.
+- **Begründung:** Drei Umgehungen in Folge (Lerneinträge slice-052/053/056)
+  über `bash -c "pytest …"`. Die Denylist um `bash` zu erweitern wurde
+  verworfen: sie blockiert legitime Shell-Arbeit inklusive `make`-Aufrufen.
+- **Grenze:** unverändert Stolperdraht — `python -c "…"`, `env`-Umwege und
+  selbstgeschriebene Wrapper-Skripte bleiben offen. Netz bleibt CI.
+- **Auflösungs-Trigger:** permanent.
+```
+
+Warum nicht einfach `MR-004` nachbessern? Der Adaptions-Block ist
+ADR-artig geführt: chronologisch nummeriert, **keine nachträglichen
+inhaltlichen Änderungen an akzeptierten Einträgen**, nur neue Einträge
+oder explizite Aufhebungen
+([§harness/conventions.md als Konventionsspeicher](../grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher)).
+Ein überschriebenes `MR-004` löscht die Information, *welche* Umgehung
+den Wächter gehärtet hat — und damit die Begründung für die Rekursion.
+Beim nächsten Aufräumen wirkt sie wie Overengineering und fliegt raus,
+der Umweg kommt zurück, und die Beobachtungs-Zählung beginnt von vorn.
+
+### Die Wellen in einer Tabelle
+
+| Welle | Beobachtung (3×) | Reaktion *am Wächter* | Klasse | Landung |
+|---|---|---|---|---|
+| 1 | direkter `pytest`-Aufruf, CI rot | Befehlspositions-Denylist im `PreToolUse`-Hook | inferential → computational feedforward | `MR-004` + Grenz-Zeile |
+| 2 | `bash -c "pytest …"` umgeht Welle 1 | rekursives Auspacken der `-c`-Payloads, fail-closed über Tiefenlimit | computational feedforward (geschärft) | `MR-005` (schärft `MR-004`) |
+| 3 | *(noch nicht beobachtet)* | — | — | — |
+
+Zeile 3 leer zu lassen ist die Pointe, nicht eine Lücke: die nächste
+Welle wird **beobachtet, nicht geplant**. Wer heute schon `python -c`
+mitprüft, ohne dass es je vorkam, baut gegen ein Phantom — eine Regel
+ohne Sensor-Evidenz, die in sechs Monaten niemand mehr begründen kann
+und die genau deshalb beim ersten Fehlalarm gestrichen wird.
+
+### Drei Entgleisungen
+
+1. **Welle 1 „gleich richtig" bauen wollen.** Statt der beobachteten
+   Lücke wird ein Bedrohungsmodell abgearbeitet. Ergebnis: ein Wächter,
+   der legitime Arbeit blockiert, bevor je eine Umgehung vorkam —
+   Aufwand ohne Evidenz, und die Fehlalarm-Quote kostet den Wächter am
+   Ende die Existenz.
+2. **Die Härtung ohne `MR` landen.** Der Hook wird geschärft,
+   `harness/conventions.md` bleibt auf dem Stand von Welle 1. Ab da
+   beschreibt die Doku einen anderen Wächter als den, der läuft — Drift
+   in genau der Richtung, die ein Doku-Konsistenz-Befund
+   ([Modul 15](../05-betrieb/modul-15-observability.md)) später
+   einsammeln muss.
+3. **Die Grenz-Zeile nicht mitziehen.** Nach jeder Härtung verschiebt
+   sich, was der Wächter *nicht* kann. Bleibt die alte Grenz-Zeile
+   stehen, verspricht die Doku entweder zu wenig (dann wird der Wächter
+   unterschätzt und dupliziert) oder zu viel (dann ist sie eine
+   Harness-Lüge, siehe
+   [`../grundlagen/durchsetzungsschicht.md` §Grenzen](../grundlagen/durchsetzungsschicht.md#grenzen--ehrlich-benannt)).
+
+### Warum das in dieses Modul gehört
+
+Ein Gate prüft ein **Ergebnis**, ein Wächter verhindert eine
+**Handlung** — deshalb steht der Befehls-Guard bewusst nicht in
+[§Gate-Typ ↔ Fehlerbild](#gate-typ--fehlerbild): er fängt kein
+Fehlerbild, er nimmt einen Weg weg. Gemeinsam ist beiden der
+Reifungs-Mechanismus: Beobachtung → Häufung → Sensor, und die
+Härtung landet nachvollziehbar in einer ID. Wer nur Gates härtet und
+den Wächter für fertig hält, hat den Steering-Loop halb verstanden —
+**jede Komponente des Harness ist selbst Gegenstand des Harness.**
+
 ## Übungen
 
 * Schreibe einen Architekturtest, der ADR-3 als Regel umsetzt
 * Provoziere absichtlich einen Coverage-Gate-Failure auf einer kritischen Datei
 * **(Erschaffen — aktiviert LZ "bootstrap-aware Gate entwerfen")** *Entwirf ein bootstrap-aware Gate von Grund auf.* Wähle eine Gate-Klasse, die in einem frühphasigen Repo zwingend rot wäre (Coverage, Mutation-Score, Lighthouse-Score, `noqa`-Count, Doku-Konsistenz). Liefere drei Artefakte: (a) Ein-Zeilen-Make-Target-Kommentar im Stil `gate-x: ## ... (bootstrap-aware, LH-FA-...).`, (b) eine **Hochschalt-Tabelle** mit mindestens drei Stufen (heute / Meilenstein M1 / Meilenstein M2) inkl. konkreter Schwellen und Hochschalt-*Trigger* (Trigger ist ein Ereignis im Repo, kein Datum), (c) eine Hard Rule, was geschieht, wenn der Trigger eintritt, aber die Schwelle nicht eingehalten wird (z. B. *"automatische Carveout-Eröffnung mit Folge-Slice"*). Anti-Antwort: *"40 % heute, 80 % später"* ohne Trigger — das ist nicht bootstrap-aware, sondern aufgeschoben.
+* **(Analysieren)** *Schreibe Welle 3 des Befehls-Guards.* Nimm die offene Zeile aus [Worked Example B](#worked-example-b-guard-härtung-als-steering-loop-am-wächter) und **erfinde die Beobachtung nicht** — beschreibe stattdessen, welchen *Beleg* du bräuchtest, bevor du härtest (welche Notiz, wo, wie oft), und welche zwei Reaktionen du dann gegeneinander abwägen würdest. Nenne für die von dir gewählte Reaktion die neue Grenz-Zeile. Anti-Antwort: eine Härtung gegen `python -c` ohne Beleg — das ist Bedrohungsmodell, nicht Steering-Loop.
 
 ## Reflexion
 
@@ -264,7 +428,7 @@ Modul-spezifische Trigger:
 
 - **Beobachtung:** Welche ADR-Aussage hattest du schwer in eine Fitness Function übersetzt? Welcher Coverage-Lauf war auf welchem kritischen Pfad rot?
 - **2×2-Quadrant:** Gates sind *computational feedback*; bootstrap-aware Gates kombinieren mit Trigger-Disziplin (*inferential feedforward*).
-- **Steering-Loop:** bootstrap-aware Gate dokumentieren? ID-Kommentar im Make-Target nachziehen? domänenspezifisches Gate (`test-determinism`, `noqa-gate`) einführen?
+- **Steering-Loop:** bootstrap-aware Gate dokumentieren? ID-Kommentar im Make-Target nachziehen? domänenspezifisches Gate (`test-determinism`, `noqa-gate`) einführen? Und die Rückfrage aus Worked Example B: hat einer deiner *Wächter* (Hook, Guard, Allowlist) in letzter Zeit eine Umgehung gesehen, die noch in keinem `MR-<NNN>` steht?
 - **Conceptual Change:** Kandidaten in [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md) (z. B. "Gate = Lint", "Coverage 80 % ist die richtige Schwelle", "Mehr Tests sind immer besser").
 
 ## Selbstcheck

@@ -216,9 +216,64 @@ Anti-Antwort: *"Existenz-Checks heute, Voll-Konsistenz später"* ohne
 Trigger — das ist nicht bootstrap-aware, sondern aufgeschoben; es
 fehlt genau das Element, das die Reifestufe terminiert.
 
+### (Analysieren — Worked Example B) Welle 3 des Befehls-Guards schreiben
+
+Die Aufgabe ist eine Falle mit Ansage: Wer hier eine Härtung gegen
+`python -c "…"` hinschreibt, hat sie nicht gelöst, sondern das
+Bedrohungsmodell abgearbeitet, das Worked Example B ausdrücklich
+verwirft. Verlangt sind drei Dinge — Beleg, Abwägung, neue Grenze.
+
+**(1) Welchen Beleg du brauchst.** Kein Gedankenexperiment, sondern
+Sensor-Evidenz mit Ort und Zählung:
+
+- **Wo:** Lerneintrag der Slice-Closure — dieselbe Rückwärtskante, aus
+  der `MR-004` und `MR-005` gespeist wurden. Nicht: Erinnerung, nicht
+  Chatverlauf.
+- **Was:** der *konkrete* Aufruf, der durchkam, plus die Folge
+  (CI rot, falsche Toolchain-Version, verletzte Regel).
+- **Wie oft:** dreimal. Einmal ist ein Vorfall, zweimal ein Symptom —
+  beide werden notiert und *nicht* gehärtet. Erst der dritte Beleg ist
+  die Lücke.
+
+Der häufigste Selbstbetrug: zwei Beobachtungen liegen vor, die dritte
+wird „aus Erfahrung" ergänzt. Damit ist die Zählung wertlos, denn sie
+war genau dafür da, Bauchgefühl von Evidenz zu trennen.
+
+**(2) Zwei Reaktionen gegeneinander abwägen.** Beispiel für einen
+belegten Umweg über ein Wrapper-Skript (`./scripts/t.sh`, das intern <!-- d-check:ignore (illustrativer Pfad im Beispiel-Repo) -->
+`pytest` startet):
+
+| Reaktion | Wirkung | Kosten / Risiko |
+|---|---|---|
+| **Allowlist statt Denylist** — nur noch `make`, `git`, `ls`, … erlaubt | schließt alle Wrapper-Umwege auf einmal | jeder neue legitime Befehl braucht eine Guard-Änderung; hohe Fehlalarm-Rate, und der Wächter wird abgeschaltet |
+| **Skript-Inhalte auf Denylist-Treffer prüfen** (ein Sprung tief) | trifft genau den belegten Fall | prüft nur die erste Ebene; ein Wrapper, der einen Wrapper ruft, kommt durch — dafür bleiben Fehlalarme nahe null |
+
+Die Abwägung ist dieselbe wie in Welle 2: der Wächter ist ein
+Stolperdraht gegen *versehentliche* Drift. Eine Reaktion, die legitime
+Arbeit blockiert, tauscht ein löchriges Gate gegen ein abgeschaltetes —
+und das ist die schlechtere Bilanz. Deshalb hier: die zweite Variante.
+
+**(3) Die neue Grenz-Zeile.** Sie muss die Lücke der *gewählten*
+Reaktion benennen, nicht die alte fortschreiben:
+
+> **Grenze:** Stolperdraht, keine Sandbox — geprüft werden
+> Befehlspositionen, `-c`-Payloads (Tiefe 3) und der Inhalt direkt
+> aufgerufener Skripte aus dem Repo (eine Ebene). Offen bleiben:
+> Wrapper-Ketten über mehr als eine Ebene, `python -c "…"`,
+> `env`-Umwege, Skripte außerhalb des Repos. Netz dafür ist CI.
+
+Landung: als **neuer** `MR-006` mit dem Zusatz *(schärft MR-005)* —
+nicht als Edit an `MR-005`. Wer die Grenz-Zeile nur in `MR-006` ändert
+und `MR-005` stehen lässt, macht alles richtig: die alte Zeile ist die
+*historisch korrekte* Aussage über den damaligen Wächter, die neue gilt
+ab jetzt.
+
+### Wiederkehrende Fallen
+
 - **Gate-Existenz wird mit Gate-Wirkung verwechselt.** `make coverage-gate` *gibt* es, aber prüft 0 %. → Halluzinations-Gate, siehe Disziplinregel aus Modul 13.
 - **Schwelle in der Pipeline-YAML statt im Makefile.** → Lokales `make` und CI driften. Schwelle gehört dorthin, wo sie reproduzierbar gilt.
 - **Bootstrap-aware-Marker fehlt.** → Wenn das Gate "aktuell 40 %" prüft, ohne den Trigger für "morgen 70 %" zu nennen, wird der Bootstrap zur permanenten Lüge.
+- **Härtung ohne Beleg.** → Eine Wächter-Regel gegen einen nie beobachteten Umweg ist Bedrohungsmodell, nicht Steering-Loop; sie fällt beim ersten Fehlalarm und nimmt die Glaubwürdigkeit des Wächters mit.
 
 ## Verweise
 

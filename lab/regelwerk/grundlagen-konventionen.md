@@ -3,12 +3,12 @@
 
 ### Kernbegriffe
 
-| Begriff | Bedeutung im Kurs |
+| Begriff | Bedeutung im Regelwerk |
 |---|---|
 | LLM | Modell, das Text → Text abbildet. Stateless. |
 | Agent | LLM + Tool-Schnittstelle + Schleife. Hält Zustand über mehrere Turns. |
 | Tool-Call | Strukturierter Aufruf einer Funktion durch das LLM (`name`, `arguments`, `result`). |
-| SDLC / Lebenszyklus | Software Development Lifecycle; im Kurs *Entwicklungszyklus* genannt (Modul 1). Artefaktkette Spec → ADR → Plan → Code → Review → Verifikation → Closure mit verpflichtenden Rückwärtskanten (Lerneintrag, Folge-ADR). |
+| SDLC / Lebenszyklus | Software Development Lifecycle; in diesem Regelwerk *Entwicklungszyklus* genannt (Modul 1). Artefaktkette Spec → ADR → Plan → Code → Review → Verifikation → Closure mit verpflichtenden Rückwärtskanten (Lerneintrag, Folge-ADR). |
 | Spec | Lastenheft-Artefakt unter `spec/`. Quelle der Wahrheit für *was*. |
 | ADR | Architecture Decision Record unter `docs/plan/adr/`. Quelle der Wahrheit für *warum so*. |
 | Slice | Kleinste lieferbare Einheit eines Features. Hat eigenen Plan, eigene DoD. |
@@ -151,7 +151,7 @@ flowchart TD
 ```
 
 Drei Schichten, drei Änderungs-Prozesse. Die kritische Hard Rule
-(Beispiel `c-hsm-doc`, siehe [`fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md)):
+(Beispiel `c-hsm-doc`):
 **ADRs DÜRFEN die Spezifikation schärfen, DÜRFEN NICHT das Lastenheft
 schärfen.** Diese eine Regel kapselt die gesamte Trennung von
 "wir liefern" und "wir versprechen".
@@ -474,7 +474,7 @@ Pflichtgliederung (Default-Form als Einzeldatei):
 | Adaptions-Block | ADR-artige Liste der Abweichungen ggü. Baseline (`MR-<NNN>` mit Datum, Geltungsbereich, Begründung, Auflösungs-Trigger oder "permanent") |
 | Zusatzklassen-Deklaration für Sensors-Bindung | repo-spezifische Bindung-Klassen jenseits der vier kanonischen (`LH-…`, Compliance, Modell-Version) |
 | Modus-Deklaration pro Sub-Area | Greenfield · Brownfield (mit Konvergenz-Auftrag) · Hybrid |
-| Glossar (optional) | repo-spezifische Begriffe, die nicht im Kurs-Glossar stehen |
+| Glossar (optional) | repo-spezifische Begriffe, die nicht im Regelwerk-Glossar stehen |
 
 Wichtig: `harness/conventions.md` dupliziert keinen Baseline-Text — sie
 verweist und ergänzt. Eine Kopie ginge gegen die Baseline in Drift,
@@ -658,6 +658,24 @@ Konvergenzpfad zu GF ist sichtbar (mit ersten Reconciliation-Slices in
 Modul 5–9). Bootstrap und Workflow sind getrennte Lebenszyklen — kein
 Übergang ohne Sichtbarkeit.
 
+#### Einführungs-Reihenfolge über mehrere Repos
+
+Bootstrap gilt pro Repo — in einer Mehrfach-Repo-Landschaft stellt sich
+zusätzlich die Frage, *welches Repo zuerst*. Die Antwort folgt der
+Repo-Klasse (§Kernbegriffe):
+
+**Beginne immer beim Referenz-Repo**, portiere erst nach erfolgreicher
+Steering-Loop-Iteration auf die Flagships (Safety/Control,
+Policy/Compliance). Alle Repos parallel mit demselben Master-Prompt zu
+treiben skaliert nicht — der Agent verteilt dann halbgare
+Standardtexte über alle.
+
+Begründung: das Referenz-Repo ist der *Demonstrator*, in dem
+experimentiert werden darf; ein Flagship trägt nicht verhandelbare Hard
+Rules und ist der falsche Ort, um eine Konvention zum ersten Mal
+auszuprobieren. Was sich im Referenz-Repo über eine Steering-Loop-Runde
+bewährt hat, wandert in die Flagships — nicht umgekehrt.
+
 #### Verbindung zum Steering-Loop
 
 Harness-Bootstrap ist im Grunde der **Steering-Loop ([Modul 11](modul-11-verification.md)),
@@ -671,7 +689,6 @@ Steering-Loop versteht, versteht Bootstrap — und umgekehrt.
 
 - **[Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)**: ausgearbeiteter Lehrtext mit GF/BF-Walkthroughs, Trigger-Klassen-Inline-Ankern und Phasen-Karten-Übung — Vollform des Bootstrap-Konzepts.
 - **Modul 1 §Schritt 0** ([§Source-Precedence-Block](modul-01-entwicklungszyklus.md#source-precedence-block)): kompakter Vorgriff auf das Modus-Konzept als Eingang in den Lebenszyklus (Baseline und Modus festlegen plus den sechs Folge-Schritten); Vollform in Modul 2.
-- **[`fallstudien.md` §Beobachtung aus dem Ist-Zustand](../../kurs/de/grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)**: die vier Beispiel-Repos in GF-/BF-Modus klassifiziert.
 - **§harness/conventions.md als Konventionsspeicher** (oben): Adaptions-Block trägt Modus-Deklaration pro Sub-Area; Graduation-Bedingung wird dort dokumentiert.
 
 ### Traceability-Constraint

@@ -4,8 +4,7 @@
 Wir klassifizieren jede Kontrolle, die der Harness bereitstellt, entlang
 mehrerer Achsen. Zwei Schulen prägen das Vokabular: **Böckeler/Thoughtworks**
 liefert den konzeptuellen Rahmen, **Lopopolo/OpenAI** das empirische
-Playbook (siehe [`fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md) und
-[`../abschluss/quellen.md`](../../kurs/de/abschluss/quellen.md)).
+Playbook.
 
 ### Die 2×2-Matrix (Böckeler) <a id="2x2-matrix"></a>
 
@@ -86,9 +85,8 @@ flowchart LR
 ```
 
 Die Behaviour-Kategorie (gelb) ist die schwierigste — Böckeler nennt sie
-offen die am wenigsten entwickelte. Sie ist der eigentliche Grund, warum
-Replay und Golden Sets im Kurs ein eigenes Modul bekommen
-([Modul 12](modul-12-replay-evaluierung.md)).
+offen die am wenigsten entwickelte. Sie ist der eigentliche Grund für
+Replay und Golden Sets ([Modul 12](modul-12-replay-evaluierung.md)).
 
 ### Drei operative Säulen (OpenAI)
 
@@ -187,8 +185,8 @@ Mal ist es eine Lücke im Harness. Konkret heißt das:
 * Wiederkehrender Tool-Missbrauch → Tool-Allowlist verschärfen (Feedforward, computational)
 * Wiederkehrendes Halluzinations-Muster → Reviewer-Skill schreiben (Feedback, inferential)
 
-Der Steering Loop ist die einzige Stelle im Kurs, an der **der Mensch
-unersetzbar bleibt**: er entscheidet, wo der Harness wächst.
+Der Steering Loop ist die einzige Stelle in diesem Regelwerk, an der
+**der Mensch unersetzbar bleibt**: er entscheidet, wo der Harness wächst.
 
 ### Lifecycle-Verteilung
 

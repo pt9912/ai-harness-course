@@ -1,12 +1,14 @@
 # Regelwerk — der Kurs als Betriebsregelwerk, nach Modulen
 
-**Stand:** Kurs-Welle 34 · 2026-07-24.
+**Stand:** Kurs-Welle 35 · 2026-07-26.
 
 Die 17 Module (0–16) **und die drei Grundlagen-Abschnitte** (Konventionen,
 Klassifikation, Durchsetzungsschicht) des Kurses als **Betriebsregelwerk für
 Code-Agenten** — didaktik-freier Extrakt (Regeln, Konventionen, Abläufe in
 Quellformulierung; weggelassen ist die Didaktik-Schicht, nicht verdichtet der
-Inhalt). Pro Abschnitt eine Datei, damit ein Agent einen einzelnen Abschnitt
+Inhalt — umgehängt werden beim Split nur relative Links und Selbstverweise:
+„in diesem Kurs" wird „in diesem Regelwerk", „Kurs" als Name der *Quelle*
+bleibt). Pro Abschnitt eine Datei, damit ein Agent einen einzelnen Abschnitt
 laden kann, ohne das ganze Regelwerk im Kontext zu halten.
 
 > **Was dieses Verzeichnis ist.** Das **kanonische Regelwerk-Artefakt** (login-frei
@@ -30,7 +32,8 @@ Adopter-Repos** ([Vorlage](../templates/AGENTS.template.md)): Es briefingt die
 verkörperte Form und verweist hierher als **nachschlagbare Vertiefung** — pro
 Entscheidung **nur den benötigten Abschnitt** laden (die Liste unten ist der
 Index), nicht das ganze Regelwerk im Kontext halten. Vorgehen beim Bootstrap:
-[Kurs Modul 2 §Bootstrap](../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md).
+[Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md) (liegt hier im
+Bundle, netzlos).
 
 **Links.** Im Repo relativ (lokal navigierbar, vom Doku-Gate validiert). Relativ
 bleiben auch im ausgelieferten `lab-regelwerk.zip` die Modul-Querverweise

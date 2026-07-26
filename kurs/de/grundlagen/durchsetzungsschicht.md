@@ -80,9 +80,10 @@ demselben [Steering-Loop](konventionen.md#verbindung-zum-steering-loop)
 wie alles andere. Ein Befehls-Guard etwa reift in Wellen: zuerst nur die
 Befehlsposition, dann Sub-Shell-Rekursion (`bash -c "…"`), dann
 kombinierte Flags (`-lc`, `-ec`). Genau diese Härtung *am Wächter selbst*
-ist der Steering-Loop, auf den Harness angewandt. Der ausführliche Worked
-Example dazu gehört nach [Modul 13](../04-qualitaet/modul-13-quality-gates.md)
-(folgt).
+ist der Steering-Loop, auf den Harness angewandt. Ausgeschrieben — zwei
+Wellen, je mit Beobachtung, verworfener Alternative und Landung als
+`MR-<NNN>` im Adaptions-Block — in
+[Modul 13 §Worked Example B](../04-qualitaet/modul-13-quality-gates.md#worked-example-b-guard-härtung-als-steering-loop-am-wächter).
 
 ## Referenz-Implementierung
 

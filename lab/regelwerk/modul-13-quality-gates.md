@@ -98,8 +98,7 @@ Beide Begriffe teilen das Wort, sind strukturell verschieden.
 
 ### Reichhaltige Gate-Landschaft als Inspiration
 
-Ein reifes Repo (Beispiel `pt9912/grid-gym`, siehe
-[`grundlagen/fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md)) hat
+Ein reifes Repo (Beispiel `pt9912/grid-gym`) hat
 deutlich mehr als sechs Gates:
 
 ```
@@ -122,8 +121,7 @@ Ein zweites Beispiel in einer anderen Sprach-Welt: `pt9912/bess-ems`
 nicht hat — `solid-suppression-gate` (C#-Pendant zum noqa-gate),
 `test-mpc-property` (Property-Based-Sensor für Regelungstechnik),
 `native-sanitizer` (für C/C++-Interop-Anteile), `test-hil-*`
-(Hardware-in-the-Loop). Voll ausgeschrieben in
-[`grundlagen/fallstudien.md`](../../kurs/de/grundlagen/fallstudien.md).
+(Hardware-in-the-Loop).
 
 Pro Sprache wachsen also unterschiedliche Gate-Familien.
 
@@ -156,3 +154,44 @@ Die **maschinelle Formulierung** ist die eigentliche Arbeit: aus
 `src/service/**` enthält einen Import, dessen Modul nicht mit `adapter.`
 beginnt oder Standardbibliothek ist" — erst diese Präzision ist als
 `forbidden`-Contract eines Import-Linters prüfbar.
+
+<a id="guard-haertung"></a>
+
+### Guard-Härtung: Wächter reifen in Wellen (Modul 13)
+
+Ein Wächter der [Durchsetzungsschicht](grundlagen-durchsetzungsschicht.md)
+(Tool-Call-Gate, Handoff-Gate) ist Code *im* Harness und unterliegt
+demselben Steering-Loop. Regeln für seine Härtung:
+
+- **Auslöser ist Beobachtung, nicht Bedrohungsmodell.** Gehärtet wird
+  gegen eine **dreimal beobachtete** Umgehung (Vorfall → Symptom →
+  Lücke), belegt über Lerneinträge. Eine Wächter-Regel ohne
+  Sensor-Evidenz ist Aufwand ohne Begründung und fällt beim ersten
+  Fehlalarm.
+- **Gehärtet wird die Zerlegung, nicht die Denylist.** Umgeht ein Aufruf
+  den Guard über eine Sub-Shell (`bash -c "…"`, kombinierte Flags `-lc`,
+  `-ec`), wird der Payload **rekursiv** derselben Prüfung unterworfen —
+  mit Tiefenlimit, darüber fail-closed blockiert. Die Denylist um den
+  Interpreter zu erweitern ist die falsche Reaktion: sie blockiert
+  legitime Shell-Arbeit inklusive `make`. Ein **abgeschalteter Wächter
+  ist schlechter als ein löchriger**, weil die Doku ihn weiter behauptet.
+- **Jede Härtung landet als neuer `MR-<NNN>`**, der den vorherigen
+  *schärft* — nie als inhaltliche Änderung eines akzeptierten Eintrags
+  (Adaptions-Block-Disziplin,
+  [`grundlagen/konventionen.md`](grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher)).
+  Ein überschriebener Eintrag löscht, *welche* Umgehung die Härtung
+  ausgelöst hat; die Regel wirkt später wie Overengineering.
+- **Die Grenz-Zeile wird mitgezogen.** Jeder Wächter-`MR` trägt, was der
+  Wächter *nicht* kann (`python -c "…"`, `env`-Umwege, Wrapper-Skripte —
+  Netz dafür ist CI). Bleibt sie nach einer Härtung stehen, verspricht
+  die Doku zu wenig oder zu viel; letzteres ist eine Harness-Lüge.
+- **Wächter gehören nicht in die Gate-Typ-↔-Fehlerbild-Tabelle.** Ein
+  Gate prüft ein *Ergebnis* (computational feedback), ein Wächter
+  verhindert eine *Handlung* (computational feedforward). Er fängt kein
+  Fehlerbild, er nimmt einen Weg weg.
+
+Ziel-Form des Eintrags: `MR-<NNN>`-Schema in
+[`../templates/harness/conventions.template.md`](../templates/harness/conventions.template.md)
+§Adaptions-Block. Wo die Grenz-Aussage steht — als eigene `Grenze:`-Zeile
+oder innerhalb von *Adaption* — ist Wahl; *dass* sie dasteht und bei jeder
+Härtung mitwandert, ist Pflicht.
