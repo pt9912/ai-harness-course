@@ -11,6 +11,34 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 45 — 2026-07-26 · Das Kurs-Repo bekommt eine Roadmap (und deklariert seine Reduktion)
+
+### Hinzugefügt
+
+- **`docs/roadmap.md`.** Befund beim Nachsehen: Das Repo hatte **keine Roadmap
+  und überhaupt keine eigenen Harness-Artefakte** (kein `AGENTS.md`, kein
+  `harness/`, kein `spec/`). Faktisch läuft hier aber ein *reduzierter* Harness
+  — `CHANGELOG.md` als Wellen-Register, `make check` als Gates, d-check per
+  Digest gepinnt. Der Harness war also nicht abwesend, sondern **unvollständig
+  und undeklariert** — dieselbe Klasse wie eine unbegründete Grenze: liest sich
+  als Rückstand statt als Entscheidung.
+  Die Roadmap ist das **Gegenstück zum CHANGELOG**: dort steht, was geschlossen
+  wurde, hier, was offen ist und *woran man erkennt, dass es dran ist*. Vorher
+  lagen die offenen Fäden als Fließtext in alten Wellen-Einträgen —
+  write-only, dieselbe Klasse, die die Wellen 38–44 fünfmal behoben haben.
+  Geführt werden vier Fäden mit Trigger-Spalte; wo kein beobachtbarer Trigger
+  existiert, steht ausdrücklich **„nicht gesetzt"** statt eines erfundenen
+  Termins — ein Faden ohne Trigger ist ein Wunsch, kein Plan (Modul 6).
+- **Die Pfad-Abweichung ist deklariert.** Der Kurs lehrt
+  `docs/plan/planning/in-progress/roadmap.md`; dieses Repo führt die Roadmap
+  **flach**, weil der gelehrte Pfad die vier Lifecycle-Verzeichnisse
+  voraussetzt — die ohne Slice-Betrieb anzulegen wäre *„Struktur ohne
+  Substanz"*, genau wovor die Sub-Area-Qualifikation warnt. Der Ausbau zu einem
+  `harness/conventions.md` (Variante B der Diskussion) steht als eigener Faden
+  in der Roadmap, **mit beobachtbarem Trigger**: *sobald die Roadmap eine
+  zweite Adaption gegenüber dem gelehrten Aufbau braucht*.
+- **Im README verdrahtet** — sonst wäre die Roadmap selbst write-only gewesen.
+
 ## Welle 44 — 2026-07-26 · Graph-Test systematisch: ein Trigger ohne Wächter
 
 Der Konsumenten-Test aus Welle 39 wurde erstmals **über alle ~70

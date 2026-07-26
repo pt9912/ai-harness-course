@@ -71,11 +71,14 @@ Für **Code-Agenten** gibt es den Kurs zusätzlich als Betriebsregelwerk:
 des Kurses (Konventionen, Regeln, Abläufe in Quellformulierung; weggelassen
 ist die Didaktik-Schicht), pro Modul und Grundlagen-Abschnitt eine Datei,
 derivativ: bei Konflikt gilt das Kursmaterial. Die Überarbeitungs-Wellen
-des Kurses registriert das [`CHANGELOG.md`](CHANGELOG.md).
+des Kurses registriert das [`CHANGELOG.md`](CHANGELOG.md); was **offen** ist
+und woran man erkennt, dass es dran ist, steht in
+[`docs/roadmap.md`](docs/roadmap.md).
 
 > **Roadmap-Hinweis.** `kurs/en/` ist als Skelett angelegt, aber noch
 > nicht inhaltlich befüllt. Eine englische Übersetzung folgt demselben
-> Aufbau, ist aber derzeit *nicht* Bestandteil des Kurses.
+> Aufbau, ist aber derzeit *nicht* Bestandteil des Kurses — mit den
+> übrigen offenen Fäden in [`docs/roadmap.md`](docs/roadmap.md) geführt.
 
 ## Adoptieren: den Prozess in dein Repo bringen
 
