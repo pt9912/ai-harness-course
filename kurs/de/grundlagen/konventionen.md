@@ -10,7 +10,7 @@ Entscheidungen. Diese Begriffe gelten durchgängig.
 | LLM | Modell, das Text → Text abbildet. Stateless. |
 | Agent | LLM + Tool-Schnittstelle + Schleife. Hält Zustand über mehrere Turns. |
 | Tool-Call | Strukturierter Aufruf einer Funktion durch das LLM (`name`, `arguments`, `result`). |
-| SDLC / Lebenszyklus | Software Development Lifecycle; im Kurs *Entwicklungszyklus* genannt (Modul 1). Artefaktkette Spec → ADR → Plan → Code → Review → Verifikation → Closure mit verpflichtenden Rückwärtskanten (Lerneintrag, Folge-ADR). |
+| SDLC / Lebenszyklus | Software Development Lifecycle; im Kurs *Entwicklungszyklus* genannt (Modul 1). Artefaktkette Spec → ADR → Plan → Code → Review → Verifikation → Closure mit verpflichtenden Rückwärtskanten (Lerneintrag, Folge-ADR). *Validierung* fehlt hier bewusst: sie prüft gegen den realen Bedarf außerhalb des Repos und hinterlässt kein Repo-Artefakt — ihr Ort ist die Rollen-Sequenz (Modul 8). |
 | Spec | Lastenheft-Artefakt unter `spec/`. Quelle der Wahrheit für *was*. |
 | ADR | Architecture Decision Record unter `docs/plan/adr/`. Quelle der Wahrheit für *warum so*. |
 | Slice | Kleinste lieferbare Einheit eines Features. Hat eigenen Plan, eigene DoD. |

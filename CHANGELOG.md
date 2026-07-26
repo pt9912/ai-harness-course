@@ -11,6 +11,47 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 42 — 2026-07-26 · Validierung: Widerspruch aufgelöst, Abwesenheit begründet
+
+Auslöser war die Frage „Validierung kommt nicht vor — warum nicht?". Antwort:
+Es war **keine Entscheidung, sondern ein unabgeglichener Widerspruch** — drei
+Aussagen, zwei davon im selben Modul, 35 Zeilen auseinander.
+
+| Wo | Aussage |
+|---|---|
+| Modul 8 §Rollen-Sequenz | Validator sitzt **in jeder Slice-Sequenz** |
+| Modul 8 §Fehlvorstellungen | Validierung gehört **vor** größere Wellen und **nach jedem MVP-Slice** — also nicht pro Slice |
+| Modul 1 + `konventionen.md` | Validierung kommt in der Artefaktkette **gar nicht vor** |
+
+Die Auflösung lag bereits im Repo, nur unausgesprochen: Die
+Artefaktklassen-Tabelle (Welle 36) ordnet den Validator unter **„keins"** ein,
+*weil die Prüfgrundlage außerhalb des Repos liegt*. Damit ist die Abwesenheit
+aus der Artefaktkette sachlich richtig — die Kette ist eine Kette von
+**Repo-Artefakten**, und Validierung hinterlässt keines.
+
+### Geändert
+
+- **Kadenz ehrlich gemacht:** Die beiden Validator-Kanten stehen im
+  Sequenzdiagramm jetzt in einem `opt`-Block *„nur bei MVP-Slice — nicht in
+  jeder Sequenz"*. Vorher zeigte das Diagramm den Validator in jedem Slice,
+  während der Fließtext desselben Moduls das Gegenteil sagte. Begründung
+  ergänzt: Validierung an jeden Slice zu hängen wäre so teuer, dass sie in der
+  Praxis ganz entfiele. Selbstcheck-Rubrik („neun Übergabe-Artefakte") um die
+  Bedingung ergänzt.
+- **Abwesenheit begründet statt stumm gelassen** — Modul 1 §Lebenszyklus und
+  `konventionen.md` §Kernbegriffe (SDLC-Zeile) sagen jetzt, *warum* Validierung
+  keine Station hat, und verweisen auf die Rollen-Sequenz als ihren Ort. Eine
+  unbegründete Abwesenheit ist dieselbe Klasse wie eine unbegründete Grenze:
+  sie liest sich als Rückstand statt als Entscheidung.
+- **Validierungsbeleg als repo-extern deklariert.** Er hat keine Ziel-Form und
+  keinen Ort — **weil er keinen haben kann**, nicht weil eine Lücke besteht.
+  Damit ist auch der Audit-Befund von vorhin aufgelöst. Was aus einer
+  Validierung *ins Repo* zurückwirkt, ist eine **Spec-Änderung** (externer
+  CR-Prozess, Welle 34) oder ein **Lerneintrag** in der Closure-Notiz; der
+  Beleg selbst bleibt draußen.
+- **Satelliten:** Regelwerk-Splits `modul-08` (Sequenz, Kadenz, repo-extern) und
+  `grundlagen-konventionen` (SDLC-Zeile).
+
 ## Welle 41 — 2026-07-26 · Der fehlende Lese-Schritt: Slice-Closures werden verdichtet
 
 ### Hinzugefügt

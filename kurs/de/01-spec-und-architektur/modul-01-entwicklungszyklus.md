@@ -89,6 +89,15 @@ gestrichelten der *Rückwärtspfad* (was lernt der Harness daraus). Beide
 Richtungen sind Pflicht — eine Kette ohne Rückverweise ist nicht
 auditierbar.
 
+**Validierung hat hier bewusst keine Station.** Die Kette ist eine Kette
+von *Repo-Artefakten*; Validierung prüft gegen den realen Bedarf
+**außerhalb** des Repos und hinterlässt deshalb keines. Ihr Ort ist die
+Rollen-Sequenz ([Modul 8](../03-agenten/modul-08-agentenrollen.md)), nicht
+die Artefaktkette — und sie läuft in anderer Kadenz: nach einem
+MVP-Slice und vor größeren Wellen, nicht nach jedem Slice. Was aus einer
+Validierung *ins Repo* zurückwirkt, ist eine Spec-Änderung oder ein
+Lerneintrag; der Beleg selbst bleibt draußen.
+
 Der Lerneintrag hat **drei Formen**, und nur eine davon landet in der
 Spec: *geschärfte Regel* und *neuer Sensor* gehen in die **verkörperte
 Form** — `AGENTS.md`, ein Gate, eine Skill-Datei —, *benannte Spec-Lücke*

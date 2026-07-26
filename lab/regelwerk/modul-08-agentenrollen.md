@@ -27,8 +27,10 @@ sequenceDiagram
     R-->>I: Findings HIGH/MEDIUM/LOW/INFO
     I->>Vf: nach Review-Schluss
     Vf-->>P: DoD-/ADR-Konformität, Plan-vs-Code-Diff
-    Vf->>Vl: Build-Artefakt + Slice-Resultat
-    Vl-->>P: Validation gegen realen Bedarf
+    opt nur bei MVP-Slice — nicht in jeder Sequenz
+        Vf->>Vl: Build-Artefakt + Slice-Resultat
+        Vl-->>P: Validierungsbeleg (repo-extern)
+    end
     P->>P: Closure in done/ + Lerneintrag
 ```
 
@@ -52,6 +54,14 @@ durchläuft: Planner → Architect → Implementation → Reviewer → Verifier
 - Verifier→Planner: DoD-/ADR-Konformitätsbericht + Plan-vs-Code-Diff
 - Verifier→Validator: Build-Artefakt + Slice-Resultat
 - Validator→Planner: Validierungsbeleg gegen realen Bedarf
+
+Die beiden **Validator-Kanten laufen nicht in jeder Sequenz**: Validierung
+greift *nach einem MVP-Slice* und *vor* der Implementation größerer Wellen
+(Spec-Validierung), nicht nach jedem Slice. Ihr Beleg ist **repo-extern** —
+Validierung prüft gegen den realen Bedarf außerhalb des Repos (Artefaktklasse
+*keins*, siehe unten). Was ins Repo zurückwirkt, ist eine Spec-Änderung oder
+ein Lerneintrag; der Beleg selbst bleibt draußen. Aus demselben Grund hat
+Validierung keine Station in der Artefaktkette (Modul 1).
 
 Ohne *jedes* dieser Artefakte gibt es keinen Rollenwechsel — nur einen
 Kontext-Switch ohne Übergabe. Ein Rollen-Sprung ohne Artefakt ist der

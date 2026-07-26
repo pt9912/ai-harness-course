@@ -54,8 +54,10 @@ sequenceDiagram
     R-->>I: Findings HIGH/MEDIUM/LOW/INFO
     I->>Vf: nach Review-Schluss
     Vf-->>P: DoD-/ADR-Konformität, Plan-vs-Code-Diff
-    Vf->>Vl: Build-Artefakt + Slice-Resultat
-    Vl-->>P: Validation gegen realen Bedarf
+    opt nur bei MVP-Slice — nicht in jeder Sequenz
+        Vf->>Vl: Build-Artefakt + Slice-Resultat
+        Vl-->>P: Validierungsbeleg (repo-extern)
+    end
     P->>P: Closure in done/ + Lerneintrag
 ```
 
@@ -63,6 +65,23 @@ Wesentlich: keine Rolle springt rückwärts in eine vorhergehende, ohne
 *Übergabe-Artefakt* (Findings, Folge-ADR-Vorschlag, Carveout). Der
 Eingabe-Kontext jeder Rolle ist eingeschränkt — das verhindert, dass
 dieselbe Sicht denselben Fehler übersieht.
+
+**Der Validator läuft nicht in jeder Sequenz** — deshalb steht er im
+`opt`-Block. Validierung greift *nach einem MVP-Slice* und *vor* der
+Implementation größerer Wellen (Spec-Validierung beim Kunden), nicht nach
+jedem beliebigen Slice; sie an jeden Slice zu hängen wäre so teuer, dass
+sie in der Praxis ganz entfiele.
+
+**Und ihr Beleg ist repo-extern.** Der *Validierungsbeleg* ist bewusst
+kein Repo-Artefakt: Validierung prüft gegen den realen Bedarf, der
+außerhalb des Repos liegt — genau deshalb steht der Validator in
+[§Welche Rolle braucht welche Artefaktklasse](#welche-rolle-braucht-welche-artefaktklasse)
+unter *keins*. Was aus einer Validierung **ins Repo zurückwirkt**, ist
+entweder eine **Spec-Änderung** (externer Change-Request-Prozess, siehe
+[`../grundlagen/konventionen.md` §Spec-Stratifizierung](../grundlagen/konventionen.md#spec-stratifizierung))
+oder ein **Lerneintrag** in der Closure-Notiz. Der Beleg selbst bleibt
+draußen — und aus demselben Grund hat Validierung keine Station in der
+Artefaktkette (Modul 1).
 
 ## Welche Rolle braucht welche Artefaktklasse
 
@@ -297,7 +316,7 @@ Modul-spezifische Trigger:
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Sechs Rollen in Reihenfolge? | Rollen genannt, aber Reihenfolge unklar | Planner → Architect → Implementation → Reviewer → Verifier → Validator. Übergaben jeweils mit Artefakt (Plan, ADR-Bezug, PR, Findings, Verifikationsbeleg, Validierungsbeleg). | + Hinweis: Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung. Eine Person kann mehrere Rollen spielen — aber nicht im selben Kontextfenster, sonst wiederholen sich blinde Flecken. |
-| Neun Übergabe-Artefakte? | vier oder weniger genannt | Planner→Architect: Slice-Plan mit LH-Bezug · Architect→Planner: ADR-Bezug/Folge-ADR · Planner→Implementation: Slice in `in-progress/` · Implementation→Reviewer: PR mit Diff + Plan-Verweis · Reviewer→Implementation: Findings HIGH/MEDIUM/LOW/INFO · Implementation→Verifier: DoD-Bestätigung + Sensor-Belege · Verifier→Planner: DoD-/ADR-Konformitätsbericht + Plan-vs-Code-Diff · Verifier→Validator: Build-Artefakt + Slice-Resultat · Validator→Planner: Validierungsbeleg gegen realen Bedarf. | + Pointe: ohne *jedes* dieser Artefakte gibt es keinen Rollenwechsel — nur einen Kontext-Switch ohne Übergabe. Ein Rollen-Sprung ohne Artefakt ist der häufigste Pfad zu blinden Flecken. |
+| Neun Übergabe-Artefakte? (die beiden Validator-Kanten nur bei MVP-Slices) | vier oder weniger genannt | Planner→Architect: Slice-Plan mit LH-Bezug · Architect→Planner: ADR-Bezug/Folge-ADR · Planner→Implementation: Slice in `in-progress/` · Implementation→Reviewer: PR mit Diff + Plan-Verweis · Reviewer→Implementation: Findings HIGH/MEDIUM/LOW/INFO · Implementation→Verifier: DoD-Bestätigung + Sensor-Belege · Verifier→Planner: DoD-/ADR-Konformitätsbericht + Plan-vs-Code-Diff · Verifier→Validator: Build-Artefakt + Slice-Resultat · Validator→Planner: Validierungsbeleg gegen realen Bedarf. | + Pointe: ohne *jedes* dieser Artefakte gibt es keinen Rollenwechsel — nur einen Kontext-Switch ohne Übergabe. Ein Rollen-Sprung ohne Artefakt ist der häufigste Pfad zu blinden Flecken. |
 | Warum Verification *und* Validation? | "Verschiedene Prüfungen." | Verification: "Bauen wir es richtig?" (gegen Plan/DoD); Validation: "Bauen wir das Richtige?" (gegen realen Bedarf). | + Gefährlichster Fall: Verifikation grün, Validation rot — Team baut *perfekt das Falsche*. Umgekehrter Fall (Verifikation rot, Validation grün) ist Prozess-Drift, auch wenn das Ergebnis zufällig passt. |
 | Wer darf ein ADR ändern? | "Der Architekt." | Architect schreibt; Reviewer prüft auf Konsistenz; Implementer liest als Constraint; Accepted-ADRs *niemand* überschreibt — Folge-ADR mit `supersedes`. | + Konfliktpfad: Implementer darf höchstens Folge-ADR vorschlagen, niemals stillschweigend einer ADR widersprechen. Das wäre Drift, kein "pragmatisches Implementieren". |
 | Drei Tätigkeiten → Rollen-Zuordnung + Mehrfachzuweisung? | eine Rolle pro Tätigkeit ohne Begründung | (a) Folge-ADR-Vorschlag: Implementer schlägt vor → Architect entscheidet → Reviewer prüft auf Konsistenz. (b) DoD-Verletzung: Verifier *erkennt*, Planner *entscheidet* (Plan-Update vs. Slice-Rückführung). (c) Replay-Set-Update: Validator pflegt, Verifier nutzt — Mehrfachzuweisung, weil beide unterschiedlichen Kontext brauchen (Validator: Realität; Verifier: DoD/Spec). | + Hinweis: Mehrfachzuweisung ist *nur dann* sauber, wenn jede beteiligte Rolle einen *anderen Eingabe-Kontext* hat. Sonst ist es keine Mehrfachzuweisung, sondern doppelte Arbeit (und blinde Flecken). |
