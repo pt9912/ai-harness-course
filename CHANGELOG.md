@@ -11,6 +11,44 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 53 — 2026-07-27 · Das ausgelieferte Bundle bekommt einen Wächter
+
+### Hinzugefügt
+
+- **`make bundle-check` und ein Prüfschritt im Release-Workflow.** `make check`
+  prüft `lab/regelwerk/` im **Repo-Stand** — der Release-Workflow schreibt die
+  Links danach mit `rewrite-doc-links.py` um, zippt und lädt hoch. Zwischen
+  Rewrite und Upload prüfte **nichts**. Ein Rewrite-Fehler oder ein Link, der
+  erst durch das Umschreiben bricht, ging unbemerkt an jeden Adopter. Der neue
+  Schritt läuft **vor** dem Zippen: Geprüft werden die Bytes, die im ZIP landen.
+- **[`tools/build-bundle.sh`](tools/build-bundle.sh)** — die Assemblierung stand
+  bisher inline im Workflow. Damit war ein lokaler Check bestenfalls eine
+  *Nachbildung*, und eine Nachbildung prüft nicht das, was ausgeliefert wird.
+  Jetzt bauen Workflow und `make bundle-check` über dasselbe Skript. Nebeneffekt:
+  Das Pinnen der Template-Links läuft auf der Kopie statt auf `lab/templates` im
+  Arbeitsbaum — ein lokaler Lauf hinterlässt keine gepinnten Links mehr im Repo.
+- **[`tools/bundle-d-check.yml`](tools/bundle-d-check.yml)** — Prüf-Konfiguration
+  für den Bundle-Stand (Pfade eine Ebene flacher als im Repo). `regelwerk/` wird
+  scharf geprüft; `templates/` mischt symbolische Ziel-Repo-Pfade mit prüfbaren
+  Verweisen, deshalb dieselbe `in`/`refs`/`keep`-Trennung wie im Repo-Config.
+  Der Kern ist `keep: ["regelwerk/**"]`: Eine umbenannte Regelwerk-Überschrift
+  verschickt sonst unbemerkt einen toten Anker ins Adopter-Repo.
+
+### Belege
+
+- Grüner Fall: `make bundle-check` → 41 Dateien, 0 Befunde; ZIP 55 Dateien wie
+  im Release, und die Prüf-Config landet **nicht** darin.
+- Break-Test: ein toter Anker in `lab/regelwerk/modul-06-roadmap.md` → der Gate
+  meldet `anchor-missing` und bricht mit Exit ≠ 0. Ein Gate, das nicht rot
+  werden kann, ist keins (Modul 13).
+
+### Nicht gemacht
+
+Der zwischenzeitliche Vorschlag, die vendored Baseline aus dem **Adopter**-
+Prüfumfang zu nehmen, ist verworfen: Er hätte fremde Defekte stillgelegt statt
+behoben — Gate-Absenkung zur Befund-Vermeidung. Defekte im Kurs gehören vor der
+Auslieferung gefangen, und genau dort sitzt der neue Wächter.
+
 ## Welle 52 — 2026-07-27 · Drei Fäden geschlossen — keiner durch Abarbeiten
 
 Alle drei fielen, weil ihre **Prämisse** nicht hielt. Das ist der eigentliche

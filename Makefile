@@ -32,3 +32,27 @@ docs-check: doc-check ## Referenzen (d-check) + Modul-Nummern (Rest-Sensor) prü
 alignment-check: ## Lernziel-Alignment-Prüfschritt (Docker)
 	docker build -q -t alignment-check --target alignment-check tools/
 	docker run --rm -v "$(CURDIR)":/work alignment-check $(ARGS)
+
+# Prüft das AUSGELIEFERTE Artefakt, nicht den Repo-Stand: `make check` sieht die
+# Links VOR dem Release-Rewrite, der Workflow zippte danach ungeprüft. Ein
+# Rewrite-Fehler oder ein Link, der erst durch das Umschreiben bricht, ginge
+# unbemerkt an jeden Adopter. REF=main baut die Vorschau; der Release-Workflow
+# ruft dieselben zwei Schritte mit dem Tag auf.
+REF ?= main
+bundle-build: ## Bundle nach DEST bauen (DEST=<dir> REF=<tag|main>)
+	@test -n "$(DEST)" || { echo "DEST fehlt"; exit 2; }
+	@mkdir -p "$(DEST)" && chmod 755 "$(DEST)"
+	@bash tools/build-bundle.sh "$(DEST)" "$(REF)" >/dev/null
+
+# Prüft ein GEBAUTES Bundle. Die Konfiguration wandert nur für den Lauf hinein
+# und wieder heraus — sie gehört nicht ins ausgelieferte ZIP.
+bundle-verify: ## Referenzen eines gebauten Bundles prüfen (DEST=<dir>)
+	@test -d "$(DEST)" || { echo "DEST=$(DEST) existiert nicht"; exit 2; }
+	@cp tools/bundle-d-check.yml "$(DEST)/.d-check.yml"
+	@docker run --rm --network none -v "$(abspath $(DEST)):/repo:ro" $(DCHECK_REF); \
+	rc=$$?; rm -f "$(DEST)/.d-check.yml"; exit $$rc
+
+bundle-check: ## Bundle bauen und prüfen, in einem Wegwerf-Verzeichnis (REF=<tag|main>)
+	@set -e; tmp=$$(mktemp -d); trap 'rm -rf "$$tmp"' EXIT; \
+	$(MAKE) -s bundle-build DEST="$$tmp" REF="$(REF)"; \
+	$(MAKE) -s bundle-verify DEST="$$tmp"

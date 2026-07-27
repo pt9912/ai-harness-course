@@ -20,25 +20,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Templates auf den Tag pinnen (Kurs-Verweise — fürs Baseline-Bundle)
-        run: bash tools/rewrite-template-links.sh lab/templates "$GITHUB_REF_NAME"
-      - name: Regelwerk-Baseline-ZIP bauen (self-contained — regelwerk/ + templates/)
-        run: |
-          tmp="$RUNNER_TEMP/baseline"
-          mkdir -p "$tmp/regelwerk"
-          cp lab/regelwerk/*.md "$tmp/regelwerk/"
-          # Templates parallel ins Bundle (im Schritt "Kurs-Verweise … pinnen"
-          # bereits auf den Tag gepinnt), damit die `../templates/`-Ziel-Form-
-          # Verweise der Splits NETZLOS auflösen: regelwerk/ ↔ templates/ liegen
-          # parallel wie lab/regelwerk ↔ lab/templates im Kurs-Repo.
-          cp -r lab/templates "$tmp/templates"
-          # Splits: Modul-Querverweise (--keep-within-src) UND `../templates/`-
-          # Verweise (--keep-within=lab/templates) bleiben relativ; nur echte
-          # Außen-Verweise (Kurs, LICENSE) werden auf den Tag gepinnt.
-          for f in "$tmp/regelwerk"/*.md; do
-            python3 tools/rewrite-doc-links.py "$f" lab/regelwerk "$GITHUB_REF_NAME" . --keep-within-src --keep-within=lab/templates
-          done
-          ( cd "$tmp" && zip -r "$GITHUB_WORKSPACE/lab-regelwerk.zip" . )
+      # Assemblierung liegt in tools/build-bundle.sh, damit `make bundle-check`
+      # lokal BYTEGLEICH dasselbe Artefakt erzeugt — eine Nachbildung prüft
+      # nicht das, was ausgeliefert wird.
+      - name: Baseline-Bundle bauen (self-contained — regelwerk/ + templates/)
+        run: make bundle-build DEST="$RUNNER_TEMP/baseline" REF="$GITHUB_REF_NAME"
+      # Der Wächter, der bis Welle 53 fehlte: `make check` sieht die Links VOR
+      # dem Release-Rewrite, gezippt wurde danach ungeprüft. Ein Rewrite-Fehler
+      # oder ein Link, der erst durch das Umschreiben bricht, ging unbemerkt an
+      # jeden Adopter. Läuft VOR dem Zippen — geprüft werden die Bytes, die
+      # gleich im ZIP landen.
+      - name: Bundle-Referenzen prüfen (Links + Anker im ausgelieferten Stand)
+        run: make bundle-verify DEST="$RUNNER_TEMP/baseline"
+      - name: ZIP packen
+        run: ( cd "$RUNNER_TEMP/baseline" && zip -r "$GITHUB_WORKSPACE/lab-regelwerk.zip" . )
       - name: Release anlegen, Assets anhängen
         env:
           GH_TOKEN: ${{ github.token }}

@@ -1,0 +1,29 @@
+# d-check-Konfiguration für das GEBAUTE Baseline-Bundle (regelwerk/ + templates/).
+#
+# Warum eine eigene Datei statt `.d-check.yml` des Repos: Im Bundle liegen die
+# Pfade eine Ebene flacher (`regelwerk/` statt `lab/regelwerk/`), und die Links
+# sind vom Release-Rewrite bereits umgeschrieben. Genau dieser Zustand wird
+# ausgeliefert — und genau er wurde bis Welle 53 nie geprüft: `make check` sieht
+# den Stand VOR dem Rewrite, der Workflow zippte danach ungeprüft.
+#
+# Die Regelwerk-Hälfte wird SCHARF geprüft. `templates/` mischt zwei
+# Referenzklassen (wie im Repo-`.d-check.yml` beschrieben):
+#   (a) SYMBOLISCH — Ziel-Repo-Pfade, die erst nach dem Ausfüllen existieren
+#       (`../spec/lastenheft.md`, `../AGENTS.md`, `CO-<NNN>-<titel>.md` …).
+#   (b) PRÜFBAR — Verweise ins parallel vendorte `regelwerk/` (mit Ankern) und
+#       template-interne Navigation.
+# `keep: ["regelwerk/**"]` ist der Kern: Eine umbenannte Regelwerk-Überschrift
+# verschickt sonst unbemerkt einen toten Anker ins Adopter-Repo.
+scan:
+  roots: ["."]
+modules: [links, anchors]
+ignore-refs:
+  - in:   "templates/**"
+    refs: ["templates/**", "tools/check_*.py", "**/*.md"]
+    keep: ["templates/**/*.template.md",
+           "templates/README.md",
+           "templates/docs/plan/adr",
+           "templates/docs/plan/planning",
+           "templates/.d-check.yml",
+           "templates/Makefile",
+           "regelwerk/**"]
