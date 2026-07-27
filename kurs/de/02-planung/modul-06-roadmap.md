@@ -257,6 +257,19 @@ danach einen Slice als laufend, der längst in `done/` liegt. Die Belege
 eines geschlossenen wellenlosen Slice stehen in seiner Datei und in git;
 das Closure-Log der Roadmap ist für Wellen.
 
+**Und was kommt als Nächstes?** Diese Frage beantwortet `next/` — das
+Lifecycle-Verzeichnis heißt *priorisiert/eingeplant*
+([Modul 5](modul-05-planning-harness.md#lifecycle-als-state-machine)), und
+der Übergang `open→next` ist die Priorisierungs-Entscheidung. Wellenlose
+Arbeit steht hier **nicht schlechter da als wellengebundene**: Eine
+Reihenfolge *einzelner Slices* kennt der Harness überhaupt nicht. Die
+Roadmap ordnet **Wellen**; die Spalte *Wichtigste Slices* in §Nächste
+Wellen nennt Inhalt, keinen Rang, und innerhalb einer Welle sind die
+Slices ein Bündel, das gemeinsam schließt — eine interne Ordnung wäre
+gegenstandslos. Wer für wellenlose Arbeit eine Rangliste neben der
+Roadmap anlegt, führt eine Sortierung ein, die es für Slices nie gab, und
+schafft sich die zweite Quelle, die der Absatz oben gerade vermeidet.
+
 **Wellenlos heißt nicht wächterlos.** Der Slice schreibt seine
 Closure-Notiz §7 wie jeder andere, und die Wellen-Closure verdichtet
 unten in Schritt 3 *alle* Slice-Closures seit der letzten Welle-Closure —
