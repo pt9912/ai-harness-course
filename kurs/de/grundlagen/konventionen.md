@@ -153,7 +153,9 @@ Daraus folgt die Grenze — sie liegt in der *Wirkung*, nicht im Feld
 welche Baseline-Regel betroffen ist, steht in `Adaption`): Eine `MR-<NNN>`, die
 die Baseline **pauschal für nicht anwendbar erklärt**, statt eine benannte Regel
 zu ersetzen, ist kein Adaptions-Eintrag mehr, sondern ein **Fork** — sie nimmt
-der Baseline die Eigenschaft, gegen die man auditieren kann. Eine repo-weite
+der Baseline die Eigenschaft, gegen die man auditieren kann. *Gelesen wird die Grenze beim **Schreiben** eines Eintrags* — der Adaptions-Block der
+`conventions`-Vorlage schickt den Autor hierher; sie ist Entwurfszeit-Regel,
+kein Prüfpunkt der Closure. Eine repo-weite
 `MR-<NNN>`, die *eine benannte Regel* ersetzt, ist dagegen eine normale
 Adaption, und ein Eintrag, der *keine* Abweichung deklariert — die
 Baseline-Aussage `MR-000` —, ist weder Fork noch Adaption, sondern die

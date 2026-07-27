@@ -11,6 +11,25 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 55 — 2026-07-27 · Die Fork-Grenze bekommt einen Eingang statt einer Streichung
+
+### Behoben
+
+- **Faden *Fork-Grenze ohne Konsument* geschlossen — sein Kriterium war zu
+  scharf.** Er verlangte „Feld, Gate, Übung oder Rubrik-Zeile", sonst sei die
+  Dreier-Taxonomie Kandidat zum Kürzen. Gegengeprüft: Die Regel, auf die er sich
+  beruft — [§Jedes Artefakt hat einen Konsumenten](kurs/de/grundlagen/konventionen.md) —
+  speist selbst **0** Übungen, **0** Rubrik-Zeilen, **0** Gates und bestünde ihre
+  eigene Probe nicht. Sie greift ausdrücklich *zur Entwurfszeit*; ein Mensch ist
+  ein zulässiger Konsument.
+- **Der reale Unterschied war enger — und er ist behoben.** Auf die
+  Konsumenten-Regel verweisen zwei Templates, jemand wird also dorthin geschickt.
+  Auf die Fork-Grenze verwies **nichts**: keine Zeremonie, aber kein Eingang.
+  Der Adaptions-Block von `conventions.template.md` trägt jetzt die Grenze als
+  Schreib-Zeit-Probe — dort sitzt der Autor eines `MR`-Eintrags —, und die Grenze
+  selbst benennt ihren Leser, wie die Konsumenten-Regel es verlangt
+  („benennt, **wer es liest und wann**").
+
 ## Welle 54 — 2026-07-27 · Ein Faden, der nicht baubar ist — gemessen statt vermutet
 
 ### Geändert

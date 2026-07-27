@@ -79,6 +79,12 @@ ADR-artige Liste der Abweichungen ggü. Baseline.
 Jeder Eintrag mit Pflichtfeldern: ID (MR-<NNN>), Datum, Geltungsbereich,
 Adaption, Begründung, Auflösungs-Trigger (oder "permanent"); bei Ablösung zusätzlich Löst auf und Ausgelöst durch Baseline-Stand.
 
+Grenze zum Fork: Ein Eintrag, der die Baseline PAUSCHAL für nicht
+anwendbar erklärt, statt eine benannte Regel zu ersetzen, ist keine
+Adaption mehr — er nimmt der Baseline die Eigenschaft, gegen die man
+auditieren kann. Prüfe das beim Schreiben, nicht beim Audit:
+Baseline-Regelwerk `grundlagen-konventionen.md` §Source Precedence.
+
 Disziplin: chronologisch nummeriert, keine nachträglichen
 inhaltlichen Änderungen an akzeptierten Einträgen — nur neue Einträge
 oder explizite Aufhebungen via neuen MR.
