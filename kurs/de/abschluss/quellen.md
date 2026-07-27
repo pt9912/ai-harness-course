@@ -1,6 +1,6 @@
 # Quellen
 
-* **Birgitta Böckeler:** *Harness Engineering for Coding Agents*, martinfowler.com. — Quelle der Begriffe *Guide*, *Sensor*, *Steering Loop*, der 2×2-Matrix Feedforward/Feedback × Computational/Inferential und der drei Harness-Kategorien (Maintainability, Architecture Fitness, Behaviour).
+* **Birgitta Böckeler:** *Harness engineering for coding agent users*, martinfowler.com (April 2026). — Quelle der Begriffe *Guide*, *Sensor*, *Steering Loop*, der 2×2-Matrix Feedforward/Feedback × Computational/Inferential und der drei Harness-Kategorien (Maintainability, Architecture Fitness, Behaviour).
 * **Ryan Lopopolo:** *Harness Engineering: Leveraging Codex in an Agent-First World*, openai.com (Feb 2026). — Quelle des *constrain + inform*-Framings, der drei operativen Säulen (Context Engineering, Architectural Constraints, Entropy Management), des Layering-Musters `Types → Config → Repo → Service → Runtime → UI`, der Rolle von AGENTS.md und der Pre-completion Checklist Middleware. Empirischer Beleg: ~1 Mio. Zeilen Code in ~1500 PRs, drei Engineers, fünf Monate, null hand-geschriebener Code.
 * **Neal Ford, Rebecca Parsons, Patrick Kua:** *Building Evolutionary Architectures*. — Quelle des Begriffs *Fitness Function*.
 * **Michael Nygard:** *Documenting Architecture Decisions*. — Quelle des ADR-Formats.

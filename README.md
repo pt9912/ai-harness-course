@@ -184,7 +184,7 @@ Dadurch kann sich ein Agent bootstrappen, ohne diesen Kurs zu kennen.
 
 Der Kurs verbindet mehrere veröffentlichte Ansätze zu einem konsistenten Entwicklungsprozess:
 
-* **Birgitta Böckeler** beschreibt in [*Harness Engineering for Coding Agents*](https://martinfowler.com/articles/harness-engineering.html) Harness Engineering sowie die Klassifikation von Guides und Sensors anhand der 2×2-Matrix (Feedforward/Feedback × Computational/Inferential).
+* **Birgitta Böckeler** beschreibt in [*Harness engineering for coding agent users*](https://martinfowler.com/articles/harness-engineering.html) Harness Engineering sowie die Klassifikation von Guides und Sensors anhand der 2×2-Matrix (Feedforward/Feedback × Computational/Inferential).
 * **Ryan Lopopolo** beschreibt im OpenAI-Beitrag [*Harness Engineering: Leveraging Codex in an Agent-First World*](https://openai.com/index/harness-engineering/) Context Engineering, Architectural Constraints und Entropy Management als operative Arbeitsschwerpunkte.
 * Die konkrete Struktur des Kurses — insbesondere die Verbindung dieser Konzepte mit den sechs Agentenrollen und der Source Precedence — ist eine eigenständige didaktische und organisatorische Ausarbeitung.
 
