@@ -835,7 +835,10 @@ Betrieb still verfällt.
 Die metakognitive Selbstüberwachung (LZ 5, *Bewerten · metakognitiv*)
 wird in §Reflexion am eigenen Repo geübt und unten in einem eigenen
 Item geprüft. Der Selbstcheck deckt damit alle fünf Lernziele plus
-die Conceptual-Change-Selbstvalidierung ab.
+die Conceptual-Change-Selbstvalidierung ab — und **ein Item darüber
+hinaus**: Der §Freshness-Audit trägt Regeln, die
+an keinem Lernziel hängen, weil sie nach dem Bootstrap greifen. Das Item
+prüft sie trotzdem; eine Regel ohne Prüfung wäre halbgesetzt.
 
 * **(Verstehen, durch Übung 1)** Was unterscheidet GF-Modus von
   BF-Modus? Warum gilt der Modus *pro Sub-Area* und nicht pro Repo?

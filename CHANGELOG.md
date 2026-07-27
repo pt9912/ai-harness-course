@@ -11,6 +11,34 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 51 — 2026-07-27 · Zwei Restbefunde aus der Review-Serie zu Welle 50
+
+### Behoben
+
+- **Die Selbstcheck-Präambel von [Modul 2](kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md)
+  stimmte nach Welle 50 nicht mehr.** Sie behauptet, der Selbstcheck decke „alle
+  fünf Lernziele plus die Conceptual-Change-Selbstvalidierung" ab — Welle 50 hat
+  aber ein siebtes Item ergänzt, das an keinem Lernziel hängt. Statt es einem
+  Lernziel anzuhängen, das es nicht trägt, sagt die Präambel jetzt, was der Fall
+  ist: Der §Freshness-Audit trägt Regeln, die *nach* dem Bootstrap greifen und
+  deshalb außerhalb der Lernziele liegen; geprüft werden sie trotzdem, weil eine
+  Regel ohne Prüfung halbgesetzt wäre.
+- **Rangzahlen in Prosa entfernt**
+  ([Modul 1](kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md)):
+  aus „ADRs sind Rang 4, AGENTS.md Rang 8" wurde „Die ADR rangiert höher als
+  `AGENTS.md`". Dieselbe Kur wie in Welle 50 für `konventionen.md` — eine
+  Rangzahl in Prosa gilt immer nur für *eine* Strata-Variante und altert mit
+  jeder anderen. Der Regelwerk-Spiegel trägt die Zeile nicht.
+
+### Nicht behoben — bewusst als Fäden geführt
+
+Die übrigen Befunde der fünf Review-Runden stehen in
+[`docs/roadmap.md`](docs/roadmap.md), weil sie eine **Entscheidung oder einen
+Beleg** brauchen, keine Redaktion: die widersprüchliche Spec-Strata-
+Adaptionsrichtung (welche Richtung gilt, ist eine Setzung), der Formcheck, der
+erst ins Gate kann, wenn ein Adopter die vendored Baseline in seinen Prüfumfang
+nimmt, und die Fork-Grenze, deren Konsument sich erst zeigen muss.
+
 ## Welle 50 — 2026-07-27 · Was mit `MR-*`-Adaptionen passiert, wenn die Baseline weiterzieht
 
 ### Hinzugefügt

@@ -288,7 +288,7 @@ festschreibt). Beobachte:
 |---|---|
 | Implementer fragt nicht nach, schreibt Code gegen AGENTS.md | Source Precedence ist nicht *durchgesetzt* — Konfliktauflösungs-Klausel fehlt im AGENTS.md-Header. |
 | Implementer stoppt, weist auf Konflikt hin | Source Precedence wirkt — der Konflikt wird sichtbar, bevor er Code wird. |
-| Implementer ändert die ADR | Falsche Auflösungsrichtung: ADRs sind Rang 4, AGENTS.md Rang 8 — die niedrigere Quelle muss angepasst werden. |
+| Implementer ändert die ADR | Falsche Auflösungsrichtung: Die ADR rangiert höher als `AGENTS.md` — die niedriger rangierte Quelle muss angepasst werden, nie die höhere. |
 
 Erwartete Reflexion: *Welche der drei Beobachtungen war deine?* Genau
 diese verrät, wo die Source Precedence im Repo heute *gelebt* wird —
