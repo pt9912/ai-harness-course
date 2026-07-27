@@ -47,7 +47,7 @@ Der Default-Ort für:
 ### MR-001 — Source Precedence mit eigener Spezifikations-Schicht
 
 - **Datum:** 2026-06-01
-- **Geltungsbereich:** [`harness/README.md` §Source precedence](README.md#source-precedence)
+- **Geltungsbereich:** [`harness/README.md` §Source precedence](README.md#source-precedence) und `AGENTS.md` §Kanonische Quellen
 - **Adaption:** Die Source-Precedence-Tabelle führt
   [`spec/spezifikation.md`](../spec/spezifikation.md) als eigenen
   **Rang 2** zwischen Lastenheft (Rang 1) und Architektur (Rang 3).

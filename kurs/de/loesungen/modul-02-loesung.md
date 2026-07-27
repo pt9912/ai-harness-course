@@ -153,6 +153,61 @@ Anti-Antwort: "Doku nachziehen." — das behandelt das Symptom
 (einzelne Spec-Lücke) und unterschlägt das Modus-Urteil; drei Slices
 später steht dieselbe Frage wieder an.
 
+### (Analysieren, durch §Freshness-Audit) Ein neues Kurs-Release erscheint — was prüfst du außer dem Diff?
+
+**Den Diff der Baseline zu lesen ist die halbe Arbeit.** Die andere Hälfte
+ist der Durchgang durch die eigene Adaptions-Liste in
+`harness/conventions.md`: Jede `MR-<NNN>` wurde für einen Zustand
+angelegt, den die neue Fassung geregelt haben kann.
+
+Zuerst ein **Formcheck**: Lösen Geltungsbereich und Begründungs-Verweise
+in der neuen Fassung noch auf? Ein toter Anker ist kein Ausgang, sondern
+ein Formfehler — zuerst reparieren, dann urteilen.
+
+Dann die Frage pro Eintrag — *Regelt die neue Fassung das, wofür diese
+Adaption angelegt wurde?* — mit fünf Ausgängen:
+
+Die Ausgänge beziehen sich auf das **Delta** der neuen Fassung, nicht auf
+den Zustand der Baseline — sonst fällt der Normalfall durch: Eine Adaption
+weicht ja *definitionsgemäß* von einer Baseline-Regel ab.
+
+| Ausgang | Bedeutung (bezogen auf das Delta) | Aktion |
+|---|---|---|
+| gegenstandslos | die neue Fassung regelt das **jetzt neu** selbst | Rückbau |
+| bleibt gültig | die neue Fassung ändert daran nichts — **der Normalfall** | stehen lassen |
+| teilweise überholt | die neue Fassung regelt **jetzt neu** einen Teil der abgewichenen Regel | ablösen, engere Nachfolgerin |
+| Bezug ist entfallen | die Baseline regelt das Thema gar nicht mehr | Nachfolge-Eintrag löst auf und hält fest, dass die Baseline dazu seit `<tag>` schweigt |
+| widerspricht | die neue Fassung regelt das Thema neu und **anders**, als die Adaption es setzt | gilt im Geltungsbereich weiter, Widerspruch benennen |
+
+**Woran du „gegenstandslos" erkennst:** nicht daran, dass der
+Auflösungs-Trigger formal feuert, sondern daran, dass die Bedingung, für
+die er formuliert wurde, jetzt in der Baseline steht. Deshalb werden
+**`permanent`-Einträge mitgeprüft** — *permanent* heißt „kein
+automatischer Auflösungs-Trigger", nicht „unauflösbar". Wer nur die
+getriggerten Einträge durchgeht, prüft in der Praxis oft keinen einzigen:
+Die mitgelieferten Beispiel-Adaptionen sind sämtlich `permanent`.
+
+**Rückbau ist ein neuer Eintrag, kein Edit** — mit `Löst auf` und
+`Ausgelöst durch Baseline-Stand`. Die alte Zeile ist die historisch
+korrekte Aussage über den damaligen Zustand.
+
+**War die Adaption eine Lockerung** und die neue Baseline verschärft, ist
+ein **Carveout** mit Auflösungs-Trigger die richtige Antwort (Modul 7) —
+keine stille Dauer-`MR`, die eine Schwächung unbefristet festschreibt.
+
+**Und die Form:** Ein neuer Stand kann die *Struktur* der Artefakte
+ändern, nicht nur die Regeln über sie — dafür gibt es kein Trigger-Feld.
+Vergleichsgrundlage ist die vendored Referenz-Form unter
+`.harness/baseline/<tag>/templates/`. Bei **Singletons**
+(`harness/conventions.md`, `AGENTS.md`, …) verlangen neue *Pflicht*-Felder
+Nacharbeit, neue optionale nicht; bei **wiederkehrenden** Templates gilt
+Append-only — neue Instanzen folgen der neuen Form, bestehende werden
+nicht umgeschrieben.
+
+Anti-Antwort: „Ich ziehe die Baseline und schaue, ob die Gates grün
+bleiben." Die Gates sind netzlos und kennen die Baseline-Regeln nicht;
+grün heißt hier nur, dass nichts *syntaktisch* gebrochen ist.
+
 ### (Conceptual Change) Vergleiche deine Spontanantworten mit deiner heutigen Antwort.
 
 Diese Frage hat keine universelle Lösung — die Antwort hängt von

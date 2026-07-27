@@ -74,7 +74,10 @@ Die Templates haben zwei Lebenszyklen:
 - **Singletons** — einmal beim Bootstrap zu `.md` füllen, dann das
   `.template.md` verwerfen: `project-readme`, `spec/lastenheft`,
   `spec/spezifikation`, `spec/architecture`, `AGENTS`, `harness/README`,
-  `harness/conventions`, `roadmap`.
+  `harness/conventions`, `roadmap`. *Verwerfen* meint die Kopie im
+  Arbeitsbaum — die **vendored** Referenz-Form unter
+  `.harness/baseline/<tag>/templates/` bleibt und ist beim Baseline-Update
+  die Vergleichsgrundlage für die Form deiner gefüllten Artefakte.
 - **Wiederkehrend** — als `.template.md` **co-located** im Repo behalten;
   jede neue Instanz wird daneben kopiert: `adr/NNNN-titel`, `slice`,
   `welle`, `carveout`, `review-report`.

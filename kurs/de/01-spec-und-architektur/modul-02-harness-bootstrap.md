@@ -127,6 +127,9 @@ Nach diesem Modul kannst du:
 * BF-Walkthrough: Inventur, Diskrepanz-Schock, Reconciliation-Plan,
   Graduation-Trigger.
 * Drei Anzeichen für einen Modus-Wechsel im laufenden Betrieb.
+* Freshness-Audit der vendored Baseline: Release-*Liste* statt Asset-Hash,
+  Durchgang durch die Adaptions-Liste, Form-Vergleich gegen die vendored
+  Referenz-Form, Rückbau als neuer Eintrag.
 
 ## Harness-Einordnung
 
@@ -373,7 +376,8 @@ Die vendored Baseline ist deren **einzige Referenz-Form** — **keine Blank-Kopi
 im Repo vorhalten** (das wäre eine zweite, driftende Quelle).
 
 **Anmerkung zur vendored Baseline (Schritt 2).** Regelwerk *und* Templates
-werden beim Bootstrap **committet vendored** (`.harness/baseline/<tag>/{regelwerk,templates}/`
+werden beim Bootstrap **committet vendored**
+(`.harness/baseline/<tag>/{regelwerk,templates}/`
 + `SHA256SUMS`, netzlos materialisiert), nicht pro Lauf extern gefetcht — es
 ist die *präsente, nachschlagbare Vertiefung* zur verkörperten Form: pro
 Entscheidung, deren operative Detailtiefe Briefing und Konventionen nicht
@@ -396,7 +400,7 @@ dass die Welt um ihn herum weiterzieht. Für Docker verlangt der Kurs „pinnen
 **und** überwachen" (`image_hash` im Replay-Manifest, Modul 12) — dieselbe
 Doktrin gilt für die Baseline, sonst ist der Pin nur die halbe Maßnahme. Der
 Gegenzug ist ein **Freshness-Audit**, den du *aktiv überwachst* — eine
-Selbstführungs-Praxis, kein einmaliges Audit —, mit drei Eigenschaften:
+Selbstführungs-Praxis, kein einmaliges Audit —, mit sechs Eigenschaften:
 
 * **Beobachtbarer Auslöser, keine Kalenderpflicht.** Die Frage *„ist mein
   `<tag>` noch das aktuelle Kurs-Release?"* wird an ein Ereignis gebunden —
@@ -419,6 +423,73 @@ Selbstführungs-Praxis, kein einmaliges Audit —, mit drei Eigenschaften:
   `source-drift` bei Inhaltsabweichung) — es deckt damit die
   *Integritäts*-Hälfte ab, ersetzt die Release-Listen-Prüfung aber nicht: einen
   neuen Tag mit unverändertem Asset fängt es nicht.
+* **Der Review geht durch die Adaptions-Liste, nicht nur durch den Diff.**
+  Der teuerste Fehler ist, nur zu prüfen, *was sich in der Baseline geändert
+  hat*, und nicht, *was das für die eigenen Abweichungen bedeutet*. Die Frage
+  pro Eintrag in
+  [`harness/conventions.md`](../grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher)
+  lautet: *Regelt die neue Fassung das, wofür diese Adaption angelegt wurde?*
+  Davor steht ein Formcheck: Lösen Geltungsbereich und Begründungs-Verweise in
+  der neuen Fassung überhaupt noch auf? Ein toter Anker ist kein Ausgang,
+  sondern ein Formfehler und wird zuerst repariert. Dann **fünf Ausgänge** — sie
+  beziehen sich auf das *Delta* der neuen Fassung, nicht auf den Zustand der
+  Baseline: Die Adaption wird **gegenstandslos** (die neue Fassung regelt das
+  **jetzt neu** selbst → Rückbau), sie **bleibt gültig**
+  (die neue Fassung ändert daran nichts → stehen lassen; das ist der
+  Normalfall, auch wenn die Baseline das Thema regelt — eine Adaption weicht ja
+  gerade von ihr ab), sie ist **teilweise überholt** (die neue Fassung regelt
+  **jetzt neu**
+  einen Teil der abgewichenen Regel → ablösen, engere Nachfolgerin; zur
+  Abgrenzung gegen die *Schärfung* siehe
+  [§Konventionsspeicher](../grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher)),
+  ihr **Bezug ist entfallen** (die Baseline regelt das Thema gar nicht mehr —
+  dann ist der Eintrag keine Adaption mehr; ein Nachfolge-Eintrag löst ihn auf
+  und hält fest, dass die Baseline dazu seit `<tag>` schweigt — wo die Setzung
+  selbst künftig lebt, entscheidet das Repo), oder sie **widerspricht** der
+  neuen Fassung — die regelt das
+  Thema **neu und anders**, als die Adaption es setzt; dann gilt sie in ihrem
+  Geltungsbereich
+  weiter, aber der Widerspruch gehört benannt — sonst adoptiert das Repo eine
+  Regel, die es nicht befolgt. **Auch `permanent`-Einträge werden mitgeprüft:**
+  *permanent* heißt „kein automatischer Auflösungs-Trigger", nicht
+  „unauflösbar" — eine dauerhafte Adaption kann durch eine neue Baseline
+  genauso gegenstandslos werden wie eine getriggerte. War die Adaption eine
+  *Lockerung* und die neue Baseline verschärft, ist die richtige Antwort ein
+  **Carveout** mit Auflösungs-Trigger ([Modul 7](../02-planung/modul-07-carveouts.md)),
+  keine stille Dauer-`MR`. Ohne diesen Durchgang bleibt eine präzise
+  formulierte Auflösungs-Bedingung jahrelang stehen, obwohl sie längst erfüllt
+  ist: Ein Trigger, den niemand abfragt, ist kein Wächter.
+* **Der Review vergleicht auch die Form, nicht nur die Regeln.** Ein neuer
+  Stand kann die *Struktur* der Artefakte ändern, nicht nur die Regeln über
+  sie — und dafür gibt es kein Trigger-Feld, das sich melden könnte. Nach dem
+  Re-Vendoring steht die neue Referenz-Form unter
+  `.harness/baseline/<tag>/templates/`; sie ist die Vergleichsgrundlage. Weil der
+  Vendoring-Pfad `<tag>`-gescopt ist, liegen alte und neue Form nebeneinander:
+  `diff -r .harness/baseline/<alt>/templates .harness/baseline/<neu>/templates`
+  zeigt umbenannte Sektionen und neue Felder direkt. Das alte Verzeichnis fällt
+  erst, wenn der Review durch ist. Ob ein Feld **Pflicht** ist, entscheidet
+  nicht die Feldzahl im
+  Template, sondern die Pflichtgliederung im vendored Regelwerk — für
+  `harness/conventions.md` in
+  [§Konventionsspeicher](../grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher),
+  für `harness/README.md` in
+  [§Einstiegspunkt](../grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt).
+  Für `AGENTS.md` und das Lastenheft gibt es **keine** Pflichtgliederung — dort
+  entscheidet die Referenz-Form selbst, was ein neues Feld ist. Für
+  **Singletons** (`harness/conventions.md`, `AGENTS.md`, `harness/README.md`,
+  Lastenheft, …) gilt: neue *optionale* Felder verlangen keine Nacharbeit am
+  gefüllten Artefakt, neue **Pflicht**-Felder und umbenannte Sektionen schon —
+  sonst behauptet das Repo
+  eine Baseline-Konformität, die seine Artefakte nicht tragen. Für
+  **wiederkehrende** Templates (ADR, Slice, Welle, Carveout, Review-Report)
+  gilt dieselbe Append-only-Logik wie bei den Adaptionen: Neue Instanzen
+  folgen der neuen Form, bestehende werden nicht rückwirkend umgeschrieben.
+* **Rückbau ist ein neuer Eintrag, kein Edit.** Eine aufgelöste `MR-<NNN>`
+  wird nicht überschrieben; sie bekommt einen Nachfolger, der sie auflöst und
+  den Baseline-Stand nennt, der den Trigger gefeuert hat. Die alte Zeile ist
+  die historisch korrekte Aussage über den damaligen Zustand — dieselbe
+  Append-only-Disziplin wie bei ADRs
+  ([Modul 4](modul-04-architektur-adrs.md)).
 
 Ein neuer Tag löst einen **Review** aus — Re-Vendoring ist eine bewusste
 Entscheidung mit eigenem Diff —, keinen stillen Auto-Bump.
@@ -790,6 +861,11 @@ die Conceptual-Change-Selbstvalidierung ab.
   §Kernidee liegt vor), und welche Reaktion ist angemessen —
   Modus-Deklaration anpassen, Reconciliation-Plan entwerfen oder
   nichts tun?
+* **(Analysieren, durch §Freshness-Audit)** Ein neues Kurs-Release erscheint.
+Was prüfst du beim
+  Baseline-Update außer dem Diff — und woran erkennst du, dass eine
+  bestehende `MR-<NNN>` gegenstandslos geworden ist? Sag auch, was mit
+  Einträgen passiert, die als *permanent* markiert sind.
 * **(Conceptual Change)** Vergleiche jetzt deine Spontanantworten
   zu den drei §Vorab-Fragen mit deiner heutigen Antwort. Welche hat
   sich verschoben? Welche ist gleich geblieben — und warum hält sie?
@@ -807,6 +883,7 @@ die modulspezifischen Indikatoren sind:
 | Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz". | T3 als **Sync-Trigger in BF-Diskrepanz-Auslöse-Variante** bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht (impliziter Pointer-Mismatch). | + Pointe: T3 ist *keine fünfte Klasse*, sondern eine BF-typische Auslöse-Variante von Sync (die vier Klassen aus konventionen.md bleiben erschöpfend). Plus: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt. |
 | Phase 4 kohärent in GF vs. BF? | "In GF steht der Vertrag, in BF die Inventur." | GF Phase 4: *Vertrag steht, Code wird daran gemessen* (z. B. CI-Gates greifen). BF Phase 4: *Inventur abgeglichen, Diskrepanz-Schock sichtbar* (z. B. CO-DS-* oder Reconc.-Slice-Backlog). | + Begründung, warum *Phase 4* die kritische Stufe in BF ist (vorher: Inventur arbeitet, nachher: Reconciliation läuft); Verweis auf Modul 7 §Carveouts für die `CO-DS-*`-Konvention. |
 | Modus-Wechsel als Signal gelesen? | "Doku nachziehen." — Symptom behandelt, kein Modus-Urteil. | Anzeichen 2 erkannt (*Test-Bestand übertrifft Spec-Anker* → die Sub-Area ist de facto von GF nach BF gedriftet); Reaktion: Modus-Deklaration im Adaptions-Block auf BF stellen, mit Konvergenz-Auftrag — nicht stillschweigend weiter GF behaupten. | + Begründung, warum *nichts tun* die teuerste Option ist (undeklarierte Drift macht jede spätere Diskrepanz unmessbar — Linse *Drift*), und Pointe: der Wechsel ist kein Versagen, sondern ein funktionierender Sensor der Bootstrap-Diagnose; Anschluss an die metakognitive Reflexionsfrage in §Reflexion. |
+| Was prüfst du beim Baseline-Update außer dem Diff? | "den Diff durchsehen" — die eigenen Adaptionen kommen nicht vor. | Durchgang durch die Adaptions-Liste in `harness/conventions.md`, Frage pro Eintrag: *Regelt die neue Fassung das, wofür diese Adaption angelegt wurde?* Die fünf Ausgänge benannt (gegenstandslos · bleibt gültig · teilweise überholt · Bezug ist entfallen · widerspricht), jeweils gegen das *Delta* der neuen Fassung; *gegenstandslos* nicht daran erkannt, dass ein Trigger formal feuert, sondern daran, dass die Bedingung jetzt in der Baseline steht. | + `permanent`-Einträge werden mitgeprüft (*permanent* = kein automatischer Trigger, nicht unauflösbar), Rückbau als **neuer** Eintrag mit *Löst auf* und auslösendem Baseline-Stand statt als Edit, und für eine Lockerung gegen eine verschärfte Baseline ein Carveout statt einer stillen Dauer-`MR`; nennt die vendored Referenz-Form als Vergleichsgrundlage für die *Form* und unterscheidet Singleton (Nacharbeit nötig) von wiederkehrendem Template (Append-only). |
 | Überzeugungs-Check: welche Verschiebung? | Keine Verschiebung benannt oder pauschal "alles klarer". | Eine konkrete Antwort: welche §Vorab-Frage hat sich um welchen Halbsatz verschoben? Verweis auf eine Fehlvorstellung (FV1–FV5), die deine Spontanantwort getragen hat. | + Pointe: welche Vorstellung gleich geblieben ist und *warum sie hält* — Conceptual-Change-Reflexion verlangt, beides zu zeigen, nicht nur Verschiebung. |
 
 ## Weiterlesen

@@ -54,16 +54,22 @@ docs/plan/planning/in-progress/roadmap.md   # Meilensteine, Wellen, aktive Welle
 docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
 docs/reviews/               # Review-Reports, ein Report pro Lauf (Modul 10)
 AGENTS.md                   # maschinell lesbare Projekt-Konventionen für Agenten
-harness/README.md           # Repo-Einstiegspunkt: Source Precedence, Guides, Sensors, Safety
-harness/conventions.md      # repo-lokale Strukturregeln und Adaptionen ggü. Baseline (MR-NNN, Modus pro Sub-Area)
+harness/README.md           # Repo-Einstiegspunkt: Source Precedence, Guides,
+Sensors, Safety
+harness/conventions.md      # repo-lokale Strukturregeln und Adaptionen ggü.
+Baseline (MR-NNN, Modus pro Sub-Area)
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
 
 ### Trennschärfen
 
-- *Spec* beschreibt **was**, *ADR* begründet **warum so**, *Plan* legt **wann und wie** fest.
-- *Review* prüft, ob Code gegen Plan und ADR konform ist; *Verifikation* prüft, ob das Ergebnis die DoD und die Spec erfüllt; *Validation* prüft, ob das Ergebnis den realen Bedarf trifft.
-- *Linter*-Findings sind keine *Review*-Findings. Gates sind maschinell; Reviews sind agentisch.
+- *Spec* beschreibt **was**, *ADR* begründet **warum so**, *Plan* legt **wann
+und wie** fest.
+- *Review* prüft, ob Code gegen Plan und ADR konform ist; *Verifikation*
+prüft, ob das Ergebnis die DoD und die Spec erfüllt; *Validation* prüft, ob
+das Ergebnis den realen Bedarf trifft.
+- *Linter*-Findings sind keine *Review*-Findings. Gates sind maschinell;
+Reviews sind agentisch.
 
 ### Source Precedence
 
@@ -75,7 +81,8 @@ für ein typisches Repo:
 2. `spec/architecture.md`
 3. `docs/plan/adr/README.md` und die darin referenzierten ADRs
 4. `docs/plan/planning/in-progress/roadmap.md`
-5. `docs/user/*.md` (Betriebs-/Operations-Docs — Quality-Definitionen, Releasing, Runbooks)
+5. `docs/user/*.md` (Betriebs-/Operations-Docs — Quality-Definitionen,
+Releasing, Runbooks)
 6. `README.md`
 7. `AGENTS.md`
 8. `harness/README.md`
@@ -89,22 +96,74 @@ flowchart TD
     U --> RM["6. README.md"]
     RM --> AG["7. AGENTS.md"]
     AG --> H["8. harness/README.md"]
+    H -. "delegiert Form-/Strukturfragen" .->
+    C["harness/conventions.md<br/>(Konventionsspeicher —<br/>außerhalb der
+    Rang-Zählung)"]
+    C -. "MR-NNN gilt nur im<br/>Geltungsbereich davor" .-> B["vendored
+    Baseline<br/>.harness/baseline/&lt;tag&gt;/"]
     style L fill:#fff4d6,stroke:#d4a017
     style S fill:#fff4d6,stroke:#d4a017
     style A fill:#fff4d6,stroke:#d4a017
     style AG fill:#dceaff,stroke:#3366cc
     style H fill:#dceaff,stroke:#3366cc
+    style C fill:#dceaff,stroke:#3366cc
+    style B fill:#eeeeee,stroke:#999999
 
-    Conflict[/"Konflikt zwischen<br/>AGENTS.md und Spec?"/] -. "AGENTS.md anpassen,<br/>nie die Spec" .-> AG
+    Conflict[/"Konflikt zwischen<br/>AGENTS.md und Spec?"/] -. "AGENTS.md
+    anpassen,<br/>nie die Spec" .-> AG
 ```
 
 Gelb: kanonische Quellen — Spec, Architektur, ADRs. Blau: Harness-Index
 und Agenten-Konventionen — sie *beschreiben* die kanonischen Quellen,
-sie *ersetzen* sie nicht.
+sie *ersetzen* sie nicht — `harness/conventions.md` beschreibt sie nicht,
+sondern setzt repo-lokale Struktur. Grau: adoptierte Baseline, kein
+Repo-Dokument. Durchgezogene Kanten sind die Rangfolge, gestrichelte sind
+Zuständigkeits- und Auflösungsbeziehungen.
 
-Regel: Widerspricht `AGENTS.md` oder `harness/README.md` einer kanonischen
-Quelle, wird `AGENTS.md`/`harness/README.md` angepasst — nie die kanonische
-Quelle. Der Harness folgt der Spec, nicht umgekehrt.
+Regel: Widerspricht `AGENTS.md`, `harness/README.md` oder
+`harness/conventions.md` einer kanonischen Quelle, wird die niedriger
+rangierte Datei angepasst — nie die kanonische Quelle. Der Harness folgt
+der Spec, nicht umgekehrt.
+
+**Die Harness-Schicht darunter: `conventions.md` und die Baseline.**
+Zwei Dinge stehen bewusst **nicht** in der Rangliste. `harness/conventions.md`
+ist kein weiterer Rang, sondern der **Konventionsspeicher**, an den die
+rangierten Dokumente Form- und Strukturfragen *abtreten*: ID-Schemata,
+Verzeichniskonvention, Zusatzklassen, Modus-Deklarationen, Adaptionen
+([§harness/conventions.md als Konventionsspeicher](#harnessconventionsmd-als-konventionsspeicher)).
+Wo `AGENTS.md` oder `harness/README.md` zu einer solchen Frage nichts sagen,
+entsteht deshalb **kein Konflikt, sondern eine Zuständigkeit** — die Rangliste
+entscheidet über *Inhalt*, der Konventionsspeicher über *Form*. In der
+3-Strata-Form, die die
+Templates ausliefern, wäre der Platz ohnehin aufgebraucht — neun Ränge, das
+Maximum aus [Modul 1](modul-01-entwicklungszyklus.md).
+
+Das vendored Regelwerk unter `.harness/baseline/<tag>/` steht noch darunter —
+übernommenes Fremdmaterial, keine Aussage dieses Repos. Der Anschluss läuft
+über den Konventionsspeicher: **Eine `MR-<NNN>` gilt innerhalb ihres
+deklarierten Geltungsbereichs vor der Baseline; außerhalb davon gilt die
+Baseline unverändert.** Das ist keine zusätzliche Regel, sondern die
+Definition einer Adaption — sie steht hier, weil ein Agent, der nur die
+Rangliste liest, die Antwort sonst nicht findet.
+
+Daraus folgt die Grenze — sie liegt in der *Wirkung*, nicht im Feld
+`Geltungsbereich` (das nennt den Repo-Ausschnitt, nicht den Baseline-Ausschnitt;
+welche Baseline-Regel betroffen ist, steht in `Adaption`): Eine `MR-<NNN>`, die
+die Baseline **pauschal für nicht anwendbar erklärt**, statt eine benannte Regel
+zu ersetzen, ist kein Adaptions-Eintrag mehr, sondern ein **Fork** — sie nimmt
+der Baseline die Eigenschaft, gegen die man auditieren kann. Eine repo-weite
+`MR-<NNN>`, die *eine benannte Regel* ersetzt, ist dagegen eine normale
+Adaption, und ein Eintrag, der *keine* Abweichung deklariert — die
+Baseline-Aussage `MR-000` —, ist weder Fork noch Adaption, sondern die
+Adoptions-Erklärung selbst. (Eine *fehlende* Geltungsbereichs-Angabe ist kein
+eigener Fall,
+sondern ein Formfehler: Das Feld ist Pflicht.) Wird eine `MR-<NNN>`
+durch ein Baseline-Update **gegenstandslos**, wird sie nicht überschrieben:
+Sie bekommt einen Nachfolger, der sie auflöst und den Baseline-Stand nennt,
+der die Ablösung ausgelöst hat — dieselbe Append-only-Disziplin
+wie bei ADRs. Widerspricht sie der neuen Fassung, gilt sie in ihrem
+Geltungsbereich weiter; der Widerspruch gehört aber benannt
+([Modul 2 §Freshness-Audit](modul-02-harness-bootstrap.md)).
 
 **Universal vs projektabhängig.** *Dass* eine Source Precedence existiert
 und dass bei Konflikt die niedriger rangierte Quelle angepasst wird, ist
@@ -278,7 +337,8 @@ erste Hälfte ab.
 eine *computational feedforward*-Kontrolle wie der
 [Traceability-Constraint](#traceability-constraint):
 
-- ein Spec-Stratum (`lastenheft.md`, `spezifikation.md`, `architecture.md`) enthält `ADR-` oder `slice-` *außerhalb* der Historie-/Versions-Tabelle → fail
+- ein Spec-Stratum (`lastenheft.md`, `spezifikation.md`, `architecture.md`)
+enthält `ADR-` oder `slice-` *außerhalb* der Historie-/Versions-Tabelle → fail
 - Slice referenziert eine ADR mit `Status: Superseded` → fail
 
 Damit Regel 5 mechanisch greift, lebt Provenance nur unterhalb einer
@@ -428,7 +488,7 @@ nicht gibt. Halluzinierte Gates sind die häufigste Form von Harness-Lüge.
 
 Die Sensors-Tabelle trägt **keinen Lauf-Status** ("grün"/"rot"):
 Lauf-Wahrheit pro Commit lebt in CI (Badges/Dashboard), also in höher
-rangierten Quellen, nicht in `harness/README.md` (Rang 9). Strukturell
+rangierten Quellen, nicht in `harness/README.md` (unterster Rang). Strukturell
 rote Gates werden als Carveout in `docs/plan/carveouts/` dokumentiert
 (Modul 7); die Bindung-Spalte der Tabelle (`Target | Vertrag | Bindung`)
 verweist auf die `CO-<NNN>`-ID, die Begründung lebt im Carveout, nicht
@@ -471,7 +531,7 @@ Pflichtgliederung (Default-Form als Einzeldatei):
 | Purpose | was die Datei trägt, was nicht |
 | Baseline | welche Konvention adoptiert, mit Stand/Version |
 | Adoptierte Konventions-Quellen | Pointer extern (Kurs/Standard) und in-Repo (Templates) |
-| Adaptions-Block | ADR-artige Liste der Abweichungen ggü. Baseline (`MR-<NNN>` mit Datum, Geltungsbereich, Begründung, Auflösungs-Trigger oder "permanent") |
+| Adaptions-Block | ADR-artige Liste der Abweichungen ggü. Baseline (`MR-<NNN>` mit Datum, Geltungsbereich, Adaption, Begründung, Auflösungs-Trigger oder "permanent"). Löst ein Eintrag einen früheren **ab**, nennt er zusätzlich *Löst auf* und *Ausgelöst durch Baseline-Stand*; *schärft* er ihn nur (der alte gilt weiter, die Regel wird **strenger**), steht das im Titel — `(schärft MR-<NNN>)`. Verliert ein Eintrag durch die Baseline dagegen einen *Teil seines Geltungsbereichs*, ist das eine **Ablösung** mit engerem Nachfolger, keine Schärfung. Einträge werden nie überschrieben. |
 | Zusatzklassen-Deklaration für Sensors-Bindung | repo-spezifische Bindung-Klassen jenseits der vier kanonischen (`LH-…`, Compliance, Modell-Version) |
 | Modus-Deklaration pro Sub-Area | Greenfield · Brownfield (mit Konvergenz-Auftrag) · Hybrid |
 | Glossar (optional) | repo-spezifische Begriffe, die nicht im Regelwerk-Glossar stehen |
@@ -689,7 +749,9 @@ Steering-Loop versteht, versteht Bootstrap — und umgekehrt.
 
 - **[Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)**: ausgearbeiteter Lehrtext mit GF/BF-Walkthroughs, Trigger-Klassen-Inline-Ankern und Phasen-Karten-Übung — Vollform des Bootstrap-Konzepts.
 - **Modul 1 §Schritt 0** ([§Source-Precedence-Block](modul-01-entwicklungszyklus.md#source-precedence-block)): kompakter Vorgriff auf das Modus-Konzept als Eingang in den Lebenszyklus (Baseline und Modus festlegen plus den sechs Folge-Schritten); Vollform in Modul 2.
-- **§harness/conventions.md als Konventionsspeicher** (oben): Adaptions-Block trägt Modus-Deklaration pro Sub-Area; Graduation-Bedingung wird dort dokumentiert.
+- **§harness/conventions.md als Konventionsspeicher** (oben): Adaptions-Block
+trägt Modus-Deklaration pro Sub-Area; Graduation-Bedingung wird dort
+dokumentiert.
 
 ### Traceability-Constraint
 

@@ -26,9 +26,10 @@ Stand steht in [`harness/conventions.md`](harness/conventions.md) §Baseline.
 3. [`spec/architecture.md`](spec/architecture.md)
 4. [`docs/plan/adr/README.md`](docs/plan/adr/README.md)
 5. [`docs/plan/planning/in-progress/roadmap.md`](docs/plan/planning/in-progress/roadmap.md)
-6. [`README.md`](README.md)
-7. AGENTS.md (diese Datei)
-8. [`harness/README.md`](harness/README.md)
+6. [`docs/user/`](docs/user/)
+7. [`README.md`](README.md)
+8. AGENTS.md (diese Datei)
+9. [`harness/README.md`](harness/README.md)
 
 ## 2. Harte Regeln
 

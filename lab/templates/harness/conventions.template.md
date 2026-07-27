@@ -77,7 +77,7 @@ ist derivativ — bei Konflikt gilt das Lehrmaterial.
 <!--
 ADR-artige Liste der Abweichungen ggü. Baseline.
 Jeder Eintrag mit Pflichtfeldern: ID (MR-<NNN>), Datum, Geltungsbereich,
-Adaption, Begründung, Auflösungs-Trigger (oder "permanent").
+Adaption, Begründung, Auflösungs-Trigger (oder "permanent"); bei Ablösung zusätzlich Löst auf und Ausgelöst durch Baseline-Stand.
 
 Disziplin: chronologisch nummeriert, keine nachträglichen
 inhaltlichen Änderungen an akzeptierten Einträgen — nur neue Einträge
@@ -116,7 +116,7 @@ keine (AGENTS.md §5/§6).
 ### MR-001 — Source Precedence mit eigener Spezifikations-Schicht
 
 - **Datum:** <Datum>
-- **Geltungsbereich:** `harness/README.md` §Source precedence
+- **Geltungsbereich:** `harness/README.md` §Source precedence und `AGENTS.md` §Kanonische Quellen
 - **Adaption:** Source-Precedence-Tabelle führt `spec/spezifikation.md`
   als eigenen **Rang 2** zwischen Lastenheft (Rang 1) und Architektur
   (Rang 3). Der Kurs-Default
@@ -167,6 +167,8 @@ keine (AGENTS.md §5/§6).
 - **Adaption:** <was weicht inhaltlich ab>
 - **Begründung:** <warum, idealerweise mit Praxis-Bezug>
 - **Auflösungs-Trigger:** <Trigger oder "permanent">
+- **Löst auf:** <MR-NNN> *(Pflicht, wenn dieser Eintrag einen früheren ablöst — sonst Zeile weglassen)*
+- **Ausgelöst durch Baseline-Stand:** <tag> *(Pflicht zusammen mit „Löst auf" — welcher Baseline-Stand die Ablösung ausgelöst hat)*
 
 ## Zusatzklassen-Deklaration für Sensors-Bindung
 

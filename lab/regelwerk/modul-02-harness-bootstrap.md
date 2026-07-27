@@ -179,7 +179,8 @@ ADR ist ein wiederkehrendes Vorkommen. Die vendored Baseline ist deren
 **einzige Referenz-Form** — **keine Blank-Kopie im Repo vorhalten.**
 
 **Anmerkung zur vendored Baseline (Schritt 2).** Regelwerk *und* Templates
-werden beim Bootstrap **committet vendored** (`.harness/baseline/<tag>/{regelwerk,templates}/`
+werden beim Bootstrap **committet vendored**
+(`.harness/baseline/<tag>/{regelwerk,templates}/`
 + `SHA256SUMS`, netzlos materialisiert), nicht pro Lauf extern gefetcht — es
 ist die *präsente, nachschlagbare Vertiefung* zur verkörperten Form: pro
 Entscheidung, deren operative Detailtiefe Briefing und Konventionen nicht
@@ -196,7 +197,7 @@ lokal auf) und **kopiert-und-ausgefüllt** als deine eigenen Artefakte.
 **Freshness-Audit der vendored Baseline (Schritt 2).** Eine vendored Kopie
 driftet still von der Quelle weg, sobald ein neues Kurs-Release erscheint;
 Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
-überwachen", Modul 12/14). Der Freshness-Audit hat drei Eigenschaften:
+überwachen", Modul 12/14). Der Freshness-Audit hat sechs Eigenschaften:
 
 * **Beobachtbarer Auslöser, keine Kalenderpflicht** — die Frage „ist mein
   `<tag>` noch das aktuelle Kurs-Release?" an ein Ereignis (z. B.
@@ -211,6 +212,67 @@ Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
   `sources` automatisiert die Asset-Prüfung (`source-pin` auf den `sha256` einer
   http(s)-Quelle, `source-drift` bei Inhaltsabweichung); deckt die
   *Integritäts*-Hälfte ab, ersetzt die Release-Listen-Prüfung nicht.
+* **Der Review geht durch die Adaptions-Liste, nicht nur durch den Diff** —
+  Frage pro Eintrag in
+  [`harness/conventions.md`](grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher):
+  *Regelt die neue Fassung das, wofür diese Adaption angelegt wurde?* Davor steht
+  ein Formcheck: Lösen Geltungsbereich und Begründungs-Verweise in der neuen
+  Fassung noch auf? Ein toter Anker ist kein Ausgang, sondern ein Formfehler und
+  wird zuerst repariert. Dann **fünf Ausgänge** — sie beziehen sich auf
+  das *Delta* der neuen Fassung, nicht auf den Zustand der Baseline: Die
+  Adaption wird **gegenstandslos** (die neue Fassung regelt das **jetzt neu**
+  selbst → Rückbau), sie **bleibt gültig** (die neue Fassung
+  ändert daran nichts → stehen lassen; Normalfall, auch wenn die Baseline das
+  Thema regelt — eine Adaption weicht ja gerade von ihr ab), sie ist **teilweise
+  überholt** (die neue Fassung regelt **jetzt neu** einen Teil der
+  abgewichenen Regel → ablösen,
+  engere Nachfolgerin; Abgrenzung gegen die *Schärfung* in
+  [§Konventionsspeicher](grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher)),
+  ihr **Bezug ist entfallen** (die Baseline regelt das Thema gar nicht mehr —
+  dann ist der Eintrag keine Adaption mehr; ein Nachfolge-Eintrag löst ihn auf
+  und hält fest, dass die Baseline dazu seit `<tag>` schweigt — wo die Setzung
+  selbst künftig lebt, entscheidet das Repo), oder sie **widerspricht** der
+  neuen Fassung — die regelt das
+  Thema **neu und anders**, als die Adaption es setzt; dann gilt sie in ihrem
+  Geltungsbereich
+  weiter, aber der Widerspruch gehört benannt — sonst adoptiert das Repo eine
+  Regel, die es nicht befolgt. **Auch `permanent`-Einträge werden mitgeprüft:**
+  *permanent* heißt „kein automatischer Auflösungs-Trigger", nicht
+  „unauflösbar". War die Adaption eine *Lockerung* und die neue Baseline
+  verschärft, ist die richtige Antwort ein **Carveout** mit Auflösungs-Trigger
+  ([Modul 7](modul-07-carveouts.md)), keine stille Dauer-`MR`. Ohne diesen
+  Durchgang bleibt eine präzise formulierte Auflösungs-Bedingung jahrelang
+  stehen, obwohl sie längst erfüllt ist: Ein Trigger, den niemand abfragt, ist
+  kein Wächter.
+* **Der Review vergleicht auch die Form, nicht nur die Regeln** — ein neuer
+  Stand kann die *Struktur* der Artefakte ändern, nicht nur die Regeln über sie;
+  dafür gibt es kein Trigger-Feld, das sich melden könnte. Nach dem
+  Re-Vendoring steht die neue Referenz-Form unter
+  `.harness/baseline/<tag>/templates/` und ist die Vergleichsgrundlage. Weil der
+  Vendoring-Pfad `<tag>`-gescopt ist, liegen alte und neue Form nebeneinander:
+  `diff -r .harness/baseline/<alt>/templates .harness/baseline/<neu>/templates`
+  zeigt umbenannte Sektionen und neue Felder direkt. Das alte Verzeichnis fällt
+  erst, wenn der Review durch ist.
+  Ob ein Feld **Pflicht** ist, entscheidet nicht die Feldzahl im Template, sondern
+  die Pflichtgliederung im vendored Regelwerk — für `harness/conventions.md` in
+  [§Konventionsspeicher](grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher),
+  für `harness/README.md` in
+  [§Einstiegspunkt](grundlagen-konventionen.md#harnessreadmemd-als-einstiegspunkt).
+  Für `AGENTS.md` und das Lastenheft gibt es **keine** Pflichtgliederung — dort
+  entscheidet die Referenz-Form selbst, was ein neues Feld ist. Für
+  **Singletons** (`harness/conventions.md`, `AGENTS.md`, `harness/README.md`,
+  Lastenheft, …): neue *optionale* Felder verlangen keine Nacharbeit am gefüllten
+  Artefakt, neue **Pflicht**-Felder und umbenannte Sektionen schon — sonst
+  behauptet das Repo
+  eine Baseline-Konformität, die seine Artefakte nicht tragen. Für
+  **wiederkehrende** Templates (ADR, Slice, Welle, Carveout, Review-Report)
+  gilt die Append-only-Logik: Neue Instanzen folgen der neuen Form, bestehende
+  werden nicht rückwirkend umgeschrieben.
+* **Rückbau ist ein neuer Eintrag, kein Edit** — eine aufgelöste `MR-<NNN>`
+  wird nicht überschrieben, sondern bekommt einen Nachfolger, der sie auflöst
+  und den Baseline-Stand nennt, der den Trigger gefeuert hat. Die alte Zeile
+  ist die historisch korrekte Aussage über den damaligen Zustand
+  (Append-only-Disziplin wie bei ADRs, [Modul 4](modul-04-architektur-adrs.md)).
 
 Ein neuer Tag löst einen **Review** aus (Re-Vendoring mit eigenem Diff),
 keinen stillen Auto-Bump.

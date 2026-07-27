@@ -11,6 +11,94 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 50 — 2026-07-27 · Was mit `MR-*`-Adaptionen passiert, wenn die Baseline weiterzieht
+
+### Hinzugefügt
+
+- **[Modul 2](kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md)
+  §Freshness-Audit: der Review geht durch die Adaptions-Liste, nicht nur durch
+  den Diff.** Bisher stand dort nur „ein neuer Tag löst einen Review aus" — was
+  dieser Review umfasst, war nirgends gesagt, und `MR` kam im ganzen Abschnitt
+  nicht vor. Ein Adopter bekam also die Aufforderung zu reviewen, aber nicht den
+  Hinweis, seine eigenen Abweichungen gegen die neue Fassung zu halten. Jede
+  `MR-<NNN>` trägt ein Pflichtfeld *Auflösungs-Trigger oder „permanent"*, und ein
+  neuer Baseline-Stand ist genau das Ereignis, das solche Trigger feuert — ein
+  Trigger, den niemand abfragt, ist kein Wächter. Fünf Ausgänge pro Eintrag —
+  gegenstandslos · bleibt gültig · teilweise überholt · Bezug ist entfallen ·
+  widerspricht —, jeweils bezogen auf das **Delta** der neuen Fassung, nicht auf
+  den Zustand der Baseline: Eine Adaption weicht definitionsgemäß von einer
+  Baseline-Regel ab, eine Zustands-Frage hätte den Normalfall durchfallen lassen.
+  Davor ein Formcheck: Ein toter Anker im Geltungsbereich ist
+  kein Ausgang, sondern ein Formfehler.
+  `permanent`-Einträge werden ausdrücklich mitgeprüft (*permanent* heißt „kein
+  automatischer Trigger", nicht „unauflösbar"); war die Adaption eine *Lockerung*
+  und die Baseline verschärft, ist ein **Carveout** die richtige Antwort, keine
+  stille Dauer-`MR`.
+- **Der Review vergleicht auch die Form, nicht nur die Regeln.** Regel-Drift hat
+  seit jeher ein Signal (den `Auflösungs-Trigger` einer `MR-<NNN>`), Form-Drift
+  hatte keines: Ändert ein neuer Stand die *Struktur* der Artefakte, meldet sich
+  nichts. Der Fall ist nicht theoretisch — diese Welle selbst ergänzt zwei Felder
+  in `conventions.template.md`, und `harness/conventions.md` ist ein **Singleton**
+  (`lab/templates/README.md`: einmal füllen, Template verwerfen). Neu: Nach dem
+  Re-Vendoring ist die vendored Referenz-Form unter
+  `.harness/baseline/<tag>/templates/` die Vergleichsgrundlage — neue *optionale*
+  Felder brauchen keinen Rückbau, neue **Pflicht**-Felder und umbenannte
+  Sektionen schon; für wiederkehrende Templates gilt Append-only (neue Instanzen
+  folgen der neuen Form, bestehende werden nicht umgeschrieben). Dazu präzisiert
+  `lab/templates/README.md`, dass „`.template.md` verwerfen" die Kopie im
+  Arbeitsbaum meint, nicht die vendored Referenz-Form.
+- **Rückbau ist ein neuer Eintrag, kein Edit** — mit Slot im ausgelieferten
+  Artefakt: `conventions.template.md` trägt jetzt die Felder *Löst auf* und
+  *Ausgelöst durch Baseline-Stand*. Vorher hätte die Regel in ein Skelett
+  geschrieben werden müssen, das dafür kein Feld hat.
+- **Selbstcheck, Rubrik-Zeile, Themen-Bullet und die zugehörige Antwort in
+  [`loesungen/modul-02-loesung.md`](kurs/de/loesungen/modul-02-loesung.md)** in Modul 2 — der ganze
+  §Freshness-Audit war didaktisch ungedeckt (kein Thema, kein Item, keine
+  Rubrik), und diese Welle hängt zwei weitere normative Regeln daran.
+
+### Geändert
+
+- **[`konventionen.md`](kurs/de/grundlagen/konventionen.md) §Source Precedence
+  ordnet `harness/conventions.md` und die vendored Baseline ein** — beide
+  bewusst **außerhalb** der Rangliste. Der Konventionsspeicher ist kein weiterer
+  Rang, sondern die Stelle, an die die rangierten Dokumente Form- und
+  Strukturfragen *abtreten*: Wo `AGENTS.md` oder `harness/README.md` dazu nichts
+  sagen, entsteht kein Konflikt, sondern eine Zuständigkeit — die Rangliste
+  entscheidet über *Inhalt*, der Konventionsspeicher über *Form*. Ein zehnter
+  Rang wäre zudem praktisch falsch: Modul 1 nennt neun Ränge als Maximum, und
+  die ausgelieferte Template-Form ist mit drei Spec-Straten bereits dort.
+- **Die Anschlussregel steht jetzt da, wo sie gesucht wird:** Eine `MR-<NNN>`
+  gilt innerhalb ihres deklarierten Geltungsbereichs vor der Baseline, außerhalb
+  gilt die Baseline unverändert. Daraus die Grenze — eine `MR-<NNN>`, deren
+  Geltungsbereich die *gesamte* Baseline umfasst, ist kein Adaptions-Eintrag
+  mehr, sondern ein **Fork**; eine *fehlende* Angabe ist kein eigener Fall,
+  sondern ein Formfehler (Pflichtfeld).
+- **Pflichtfeld-Liste des Adaptions-Blocks vervollständigt** — das Feld
+  *Adaption* fehlte, obwohl das Template es seit jeher führt.
+- **Rangzahl-Kollision bereinigt:** `konventionen.md` bezeichnete an anderer
+  Stelle `harness/README.md` als „Rang 9" — eine Zahl aus der Template-Form, die
+  gegen die Default-Liste mit acht Rängen stand. Jetzt rangagnostisch („unterster
+  Rang"). Dazu ergänzt `AGENTS.template.md` die fehlende `docs/user/*`-Zeile:
+  Die ausgelieferten Träger einer Precedence-Tabelle — die drei Singleton-Templates
+  **und** `lab/example/AGENTS.md` — trugen bis dahin zwei verschiedene
+  Rangordnungen (8 vs. 9 Ränge, README einmal auf 6, einmal auf 7); im
+  Begleit-Lab existiert `docs/user/` sogar, fehlte in `AGENTS.md` aber.
+- **Ablösung und Schärfung getrennt:** `Löst auf` gilt für die Ablösung; eine
+  bloße *Schärfung* (der alte Eintrag gilt weiter, enger) steht wie bisher im
+  Titel — `(schärft MR-<NNN>)`, wie in Modul 13 §Worked Example B.
+- **Regelwerk-Splits `grundlagen-konventionen` und `modul-02` mitgezogen**,
+  Stand-Zeile auf Welle 50.
+- **Vier offene Punkte als Fäden in [`docs/roadmap.md`](docs/roadmap.md)** statt
+  in dieser Welle miterledigt: mechanische Wächter gegen Doku-Drift, die
+  widersprüchliche Spec-Strata-Adaptionsrichtung in den Templates (vorbestehend),
+  die Fork-Grenze ohne Konsument und der Formcheck, der ins Gate gehört. Fünf
+  Review-Runden über diese Welle fanden dreimal dieselben Fehlerklassen — Echo
+  nicht mitgezogen, Pointer ohne Ziel, Ausgang nicht ausführbar —, und mindestens
+  vier Befunde wären maschinell gefallen. Das ist der Grund für den ersten Faden.
+- **Diagramm und Konfliktregel nachgezogen:** Der Precedence-Graph zeigt die
+  Harness-Schicht und die Baseline als eigene Ebene, die Legende kennt die neue
+  graue Farbe, und die Konfliktregel nennt `harness/conventions.md` mit.
+
 ## Welle 49 — 2026-07-27 · Zwei Korrekturen nach v3.8.0: Quellen-Titel und ein Faden, der keiner war
 
 ### Behoben
