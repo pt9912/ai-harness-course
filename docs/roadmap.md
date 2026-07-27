@@ -40,9 +40,27 @@ ein beobachtbares Ereignis, kein Datum.** Ein Faden ohne Trigger ist ein
 Wunsch, kein Plan — deshalb steht bei den betroffenen Zeilen ausdrücklich
 *nicht gesetzt* statt eines erfundenen Termins.
 
+**Zweite Disziplin, aus Welle 55 gelernt: Ein Faden trägt zwei Dinge — eine
+*Behauptung über den Ist-Zustand* und eine *vorgeschlagene Handlung*. Wer nur
+die Behauptung prüft, hat den Faden nicht geprüft.** Am 2026-07-27 wurden alle
+sechs offenen Fäden auditiert; das Audit prüfte ausschließlich die
+Behauptungen. Ergebnis damals: „fünf von sechs halten". Beim späteren Anfassen
+fielen zwei davon trotzdem — bei beiden war die Behauptung *wahr* und die
+Folgerung falsch:
+
+- *Mechanische Wächter*: „`d-check` prüft keine Prosa-Behauptungen" — wahr.
+  „Also lässt sich das prüfen" — falsch, die Fehlerklassen sind semantisch.
+- *Fork-Grenze*: „speist kein Feld, kein Gate, keine Übung" — wahr. „Also ist
+  es Zeremonie" — falsch, das Kriterium hätte die Regel erschlagen, auf die es
+  sich beruft.
+
+Die Behauptung prüft ein `grep` in Sekunden. Die Folgerung braucht einen
+Prototyp oder die Gegenprobe am eigenen Maßstab. Beides gehört zum Audit,
+sonst bestätigt es nur, dass der Faden ordentlich *formuliert* ist.
+
 | Faden | Trigger | Stand |
 |---|---|---|
-| **Discovery-/Kandidaten-Register** — eigener Kanal für Nicht-Slice-Register im Planning-Layout | **ein zweites Konsument-Repo zeigt denselben Druck unabhängig** — *Teilbedingung erfüllt*: es gibt zwei Adopter (`d-check`; `ai-harness-init` mit eigenen `MR-007/008/010`, die drei Kurs-Lücken aufdeckten). Offen bleibt der **zweite Halbsatz**: kein Beleg, dass dort *derselbe* Druck auftrat | bewusst vertagt seit Welle 33; die Verallgemeinerung braucht die wiederholte *Beobachtung*, nicht nur einen zweiten Adopter |
+| **Discovery-/Kandidaten-Register** — eigener Kanal für Nicht-Slice-Register im Planning-Layout | **ein zweites Konsument-Repo zeigt denselben Druck unabhängig** | bewusst vertagt seit Welle 33. **Am 2026-07-27 erstmals gemessen statt vermutet** (Welle 56): Der zweite Adopter (`ai-harness-init`, 17 eigene `MR-*`) zeigt den Druck **nicht** — `docs/plan/planning/` trägt dort ausschließlich Slices und die Roadmap, kein Nicht-Slice-Kanal, und ein Review hält als Repo-Praxis fest: *„`done/` archiviert Nicht-Slice-Records + aufgelöste Carveouts"*, also genau der Weg, den der Kurs seit Welle 33 vorsieht. Das ist ein **negativer Beleg**, kein fehlender: Die bestehende Lösung reicht dem zweiten Repo. Die früher hier zitierten `MR-007/008/010` belegen Adopter-Schaft, nicht diesen Druck — sie behandeln Vendoring, Template-Referenzierung und Gate-Fragmente |
 | **Bootstrap-Übung im Lab fehlt** — `lab/example/exercises/` trägt Übungen zu anderen Modulen, aber keine zum Bootstrap ([Modul 2](../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md) verweist darauf) | **ein Leser meldet, dass die Modul-2-Übungen ohne dediziertes Lab nicht ausführbar sind** | offen seit Welle 52; vorher fälschlich unter *Lab Phase C* geführt, die inzwischen geliefert ist |
 | **`kurs/en`** — englische Fassung | *nicht gesetzt* | Skelett vorhanden — `kurs/en/README.md` trägt nur einen Platzhalter-Text, keinen Kursinhalt; im [README](../README.md) als „derzeit *nicht* Bestandteil des Kurses" deklariert |
 | **Link-Trümmer-Prüfung bei `d-check` anregen** — `](ziel)rest)` entsteht bei verunglückten Text-Ersetzungen; der Link löst auf, der Müll dahinter steht sichtbar im Fließtext. Generisch, gehört **nicht** in den Rest-Sensor `docs-check.js` (der prüft nur repo-spezifische Semantik) | **ein zweiter Trümmer-Fund in diesem Repo** oder ein `d-check`-Release, der Change Requests annimmt | offen seit Welle 54; CR formuliert und an das d-check-Projekt gegeben. Grenze gemessen: Die naive Regex kann nicht auslösen (reale Trümmer beginnen mit `../`, `.` war ausgeschlossen), die korrigierte meldet `[X](y.md)-Suffix)` falsch — die Prüfung braucht Markdown-Kontext, keine Zeilen-Regex |

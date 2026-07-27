@@ -11,6 +11,31 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 56 — 2026-07-27 · Wie ein Faden zu prüfen ist — und der erste, der es bekommt
+
+### Hinzugefügt
+
+- **Zweite Form-Disziplin in [`docs/roadmap.md`](docs/roadmap.md) §Offene Fäden.**
+  Ein Faden trägt zwei Dinge: eine *Behauptung über den Ist-Zustand* und eine
+  *vorgeschlagene Handlung*. Wer nur die Behauptung prüft, hat den Faden nicht
+  geprüft. Das Audit vom selben Tag prüfte ausschließlich Behauptungen und
+  meldete „fünf von sechs halten" — zwei fielen beim Anfassen trotzdem, bei
+  beiden war die Behauptung **wahr** und die Folgerung falsch (*Mechanische
+  Wächter*: „lässt sich prüfen" — nein, die Fehlerklassen sind semantisch;
+  *Fork-Grenze*: „also Zeremonie" — nein, das Kriterium hätte die Regel
+  erschlagen, auf die es sich beruft).
+
+### Geändert
+
+- **Faden *Discovery-/Kandidaten-Register* erstmals gemessen.** Er stand seit
+  Welle 33 mit „kein Beleg, dass dort *derselbe* Druck auftrat" — was klang wie
+  *nicht nachgesehen*, und das war es auch. Jetzt nachgesehen: Der zweite
+  Adopter zeigt den Druck **nicht**. Sein `docs/plan/planning/` trägt nur Slices
+  und die Roadmap, und ein Review hält als Repo-Praxis fest, dass `done/` die
+  Nicht-Slice-Records archiviert — genau der Weg, den der Kurs seit Welle 33
+  vorsieht. Das ist ein **negativer Beleg**, kein fehlender. Die früher zitierten
+  `MR-007/008/010` belegen Adopter-Schaft, nicht diesen Druck.
+
 ## Welle 55 — 2026-07-27 · Die Fork-Grenze bekommt einen Eingang statt einer Streichung
 
 ### Behoben
