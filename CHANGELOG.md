@@ -11,6 +11,34 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 54 — 2026-07-27 · Ein Faden, der nicht baubar ist — gemessen statt vermutet
+
+### Geändert
+
+- **Faden *Mechanische Wächter gegen Doku-Drift* geschlossen.** Er versprach zwei
+  Prüfungen, die `make check` „heute nicht hat" — als wären sie nur zu bauen.
+  Gegen das reale Repo geprüft, ist keine davon umsetzbar: §-Prosa-Zeiger melden
+  18 von 31 (deutsche §-Verweise sind Kurzformen der Überschrift), die
+  Aufzählungs-Gleichheit scheitert am Zahlwort als Attribut („Regeln für die
+  *sechs* Schritte:" gefolgt von vier Regeln), und die naheliegende dritte Idee —
+  gleiches Substantiv, andere Zahl — meldet 16 legitime Fälle. Die drei belegten
+  Fehlerklassen sind **semantisch**, nicht syntaktisch.
+- **Ersetzt durch einen engeren Faden:** die Link-Trümmer-Prüfung bei `d-check`
+  anregen. Sie ist generisch und gehört nicht in `docs-check.js` — der Rest-Sensor
+  prüft ausdrücklich nur repo-spezifische Semantik, die ein generischer
+  Referenz-Checker nicht kennen kann. Ein Einbau dort hätte die Pilot-Migration
+  rückabgewickelt.
+
+### Nicht gebaut — und warum das der Ertrag ist
+
+Beim Prototyp der Link-Trümmer-Prüfung fiel im **Break-Test** auf, dass die Regex
+gar nicht auslösen konnte: Sie schloss `.` aus, um Satzpunkte zu vermeiden, die
+realen Trümmer beginnen aber mit `../`. Die Meldung „0 Befunde auf grünem Repo"
+war damit wertlos. Ohne den erzwungenen Fehlerfall wäre ein Halluzinations-Gate
+eingebaut und als Erfolg gemeldet worden — genau das, was
+[Modul 13](kurs/de/04-qualitaet/modul-13-quality-gates.md) als Disziplinregel
+benennt: Ein Gate, das nicht rot werden kann, ist keins.
+
 ## Welle 53 — 2026-07-27 · Das ausgelieferte Bundle bekommt einen Wächter
 
 ### Hinzugefügt
