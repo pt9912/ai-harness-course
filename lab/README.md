@@ -5,7 +5,7 @@ Dieses Verzeichnis ist das **Begleit-Lab** zum Kurs unter
 
 1. **Templates** (`templates/`): leere Skelett-Vorlagen mit Pflicht-Gliederung für alle Dokumenttypen des Kurses (Spec, ADR, Slice, Welle, Roadmap, Carveout, AGENTS.md, `harness/README.md`).
 2. **Beispiel** (`example/`): ein voll ausgefülltes Beispiel-Repo mit konsistenten IDs, mindestens einem geschlossenen Slice, geführten Übungsfixtures, einem fingierten kaputten Slice für [Modul 10](../kurs/de/04-qualitaet/modul-10-review-harness.md), einem Replay-Beispiel für [Modul 12](../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md), Trace- und Runbook-Fixtures für Phase 5.
-3. **Sprach-Skelette** (`example/{go,python,kotlin,java,csharp,cpp}/`, kommen in Phase C): sechs lauffähige Implementierungs-Skelette mit eigener Toolchain (Linter, Typecheck, Architekturtest, Coverage, Container) und einheitlichem `make gates`-Vertrag.
+3. **Sprach-Skelette** (`example/{go,python,kotlin,java,csharp,cpp}/`): sechs lauffähige Implementierungs-Skelette mit eigener Toolchain (Linter, Typecheck, Architekturtest, Coverage, Container) und einheitlichem `make gates`-Vertrag.
 4. **Regelwerk** (`regelwerk/`): das **Betriebsregelwerk** des Kurses — die 17 Module (0–16) plus drei Grundlagen-Abschnitte als einzelne Dateien (didaktik-freier Extrakt), damit ein Agent einen einzelnen Abschnitt laden kann, ohne das ganze Regelwerk im Kontext zu halten. Derivativ; maßgeblich für den Inhalt bleibt der Kurs unter [`/kurs/de/`](../kurs/de/README.md). Index: [`regelwerk/`](regelwerk/README.md).
 
 ## Lernweg
@@ -56,7 +56,7 @@ lab/
     ├── otel/                           (Trace-Fixture für Modul 15)
     ├── runbooks/                       (Release/Incident-Fixtures für Modul 16)
     │
-    └── {go,python,kotlin,java,csharp,cpp}/  (Phase C — sechs Sprach-Skelette)
+    └── {go,python,kotlin,java,csharp,cpp}/  (sechs Sprach-Skelette)
         Makefile · Dockerfile · AGENTS.md · harness/README.md · …
 ```
 
@@ -76,7 +76,7 @@ abfragbar macht. Genug Komplexität für:
 Der Sinn ist nicht, ein produktives DocSearch zu bauen, sondern den
 Kursinhalt am konkreten Artefakt erlebbar zu machen.
 
-## Verwendung der Sprach-Skelette (ab Phase C)
+## Verwendung der Sprach-Skelette
 
 Jedes Sprach-Skelett ist **eigenständig lauffähig**:
 

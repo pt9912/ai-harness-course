@@ -108,7 +108,8 @@ Nach diesem Modul kannst du:
 
 > **Hinweis Lab:** Ein dediziertes Bootstrap-Lab unter
 > [`../../../lab/example/exercises/`](../../../lab/example/exercises/) ist
-> Teil der Lab-Roadmap (Phase C) und heute noch nicht ausgeliefert. Die
+> heute noch nicht ausgeliefert — `exercises/` trägt Übungen zu anderen
+> Modulen, aber keine zum Bootstrap. Die
 > Übungen dieses Moduls laufen unabhängig davon am eigenen Repo oder am
 > vollausgefüllten Beispiel-Lab unter
 > [`../../../lab/example/`](../../../lab/example/).
@@ -429,9 +430,12 @@ Selbstführungs-Praxis, kein einmaliges Audit —, mit sechs Eigenschaften:
   pro Eintrag in
   [`harness/conventions.md`](../grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher)
   lautet: *Regelt die neue Fassung das, wofür diese Adaption angelegt wurde?*
-  Davor steht ein Formcheck: Lösen Geltungsbereich und Begründungs-Verweise in
-  der neuen Fassung überhaupt noch auf? Ein toter Anker ist kein Ausgang,
-  sondern ein Formfehler und wird zuerst repariert. Dann **fünf Ausgänge** — sie
+  Davor steht ein Formcheck — **den erledigt dein Doku-Gate**: Die vendored
+  Baseline liegt im Repo, ihre Dateien sind damit gültige Link-Ziele, und ein
+  `Geltungsbereich`, der nach dem Update ins Leere zeigt, meldet sich als
+  `anchor-missing`. Ein toter Anker ist kein Ausgang, sondern ein Formfehler und
+  wird zuerst repariert. Prüfe einmal, dass `.harness/baseline/` wirklich im
+  Prüfumfang liegt; danach ist der Schritt automatisch. Dann **fünf Ausgänge** — sie
   beziehen sich auf das *Delta* der neuen Fassung, nicht auf den Zustand der
   Baseline: Die Adaption wird **gegenstandslos** (die neue Fassung regelt das
   **jetzt neu** selbst → Rückbau), sie **bleibt gültig**

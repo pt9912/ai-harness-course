@@ -11,6 +11,48 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 52 — 2026-07-27 · Drei Fäden geschlossen — keiner durch Abarbeiten
+
+Alle drei fielen, weil ihre **Prämisse** nicht hielt. Das ist der eigentliche
+Ertrag dieser Welle: Ein Faden, dessen Trigger nie geprüft wird, altert genauso
+still wie die Doku, die er beschreibt.
+
+### Behoben
+
+- **Phase C ist geliefert — sechs Stellen behaupteten das Gegenteil.**
+  `make gates` über alle sechs Sprachskelette: **6/6 grün**, mit echten
+  Toolchains und Coverage-Schwellen (Go 77,8 % · Python 76,99 % bei Schwelle
+  70 % · Kotlin `koverVerify` · Java `mvn verify` · C# `dotnet test` · C++ 1/1).
+  `kurs/de/grundlagen/README.md` nannte Phase C längst „ausgeliefert", während
+  [Modul 13](kurs/de/04-qualitaet/modul-13-quality-gates.md), `lab/README.md`
+  (3×), `lab/example/README.md`, `lab/example/AGENTS.md` und `CO-001` weiter
+  „kommen in Phase C" sagten — Modul 13 zusätzlich mit falscher Zahl („fünf"
+  statt sechs). Alle korrigiert. Dieselbe Klasse wie der Meilenstein `v3.7.0`,
+  der auf „ausstehend" stand, obwohl er zweimal getaggt war.
+- **Spec-Strata-Adaptionsrichtung: ein Zeiger widersprach seinem Ziel.**
+  `harness/README.template.md` schickte Zwei-Straten-Repos zu `MR-001` als
+  Beispiel — und `MR-001` dokumentiert den *Drei*-Straten-Fall.
+  [`konventionen.md` §Spec-Straten](kurs/de/grundlagen/konventionen.md) entscheidet
+  die Richtung längst („nur Vertrag und Sicht sind obligatorisch; das
+  Technik-Stratum ist optional"), also **Baseline = zwei Straten, die
+  Drei-Straten-Form ist die Adaption**. Der Hinweisblock sagt das jetzt und
+  benennt, dass die Vorlage bereits die adaptierte Form zeigt.
+- **Der Formcheck des Adaptions-Durchgangs war nie Prosa-Arbeit.**
+  [Modul 2 §Freshness-Audit](kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md)
+  verlangte von Hand zu prüfen, ob `Geltungsbereich`-Verweise nach dem Update
+  noch auflösen. Messung an einer Fixture: Der ausgelieferte
+  `lab/templates/.d-check.yml` hat `roots: ["."]`, ignoriert `.harness/` nicht,
+  und d-check scannt Punktverzeichnisse — ein toter Anker meldet sich als
+  `anchor-missing`. Der Text verweist jetzt aufs Gate; übrig bleibt die einmalige
+  Prüfung, dass `.harness/baseline/` im Prüfumfang liegt.
+
+### Geändert
+
+- **Neuer Faden, eng geschnitten:** *Bootstrap-Übung im Lab fehlt.*
+  `lab/example/exercises/` trägt Übungen zu anderen Modulen, aber keine zum
+  Bootstrap — das ist wahr geblieben, hatte mit Sprach-Skeletten aber nie etwas
+  zu tun und war nur mitgeschleppt unter *Lab Phase C*.
+
 ## Welle 51 — 2026-07-27 · Zwei Restbefunde aus der Review-Serie zu Welle 50
 
 ### Behoben

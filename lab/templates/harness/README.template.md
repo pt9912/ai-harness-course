@@ -39,9 +39,15 @@ Diese Datei dupliziert sie nicht.
 | 9 | diese Datei | Harness-Einstieg |
 
 > Rang 2 (`spec/spezifikation.md`) ist das **optionale 3. Spec-Stratum**.
-> Repos mit zwei Straten (Lastenheft → Architektur) löschen die Zeile und
-> nummerieren die Ränge neu; die Adaption gehört als `MR-<NNN>` in
-> [`conventions.md`](conventions.md) (Beispiel `MR-001` dort).
+> Die Baseline führt **zwei** Straten — nur *Vertrag* (`lastenheft.md`) und
+> *Sicht* (`architecture.md`) sind obligatorisch, das Technik-Stratum ist
+> optional (Baseline-Regelwerk `grundlagen-konventionen.md` §Spec-Straten).
+> Diese Vorlage zeigt bereits die **adaptierte** Drei-Straten-Form; wer bei
+> der Baseline bleibt, löscht Rang 2 und nummeriert neu (dann acht Ränge).
+> **Adaption ist die Drei-Straten-Form, nicht die Zwei-Straten-Form** — wer
+> Rang 2 behält, deklariert das als `MR-<NNN>` in
+> [`conventions.md`](conventions.md); `MR-001` dort ist genau dieser Fall
+> und kann gelöscht werden, wenn du bei zwei Straten bleibst.
 
 ## Guides (Feedforward-Quellen)
 

@@ -193,8 +193,9 @@ nicht hat — `solid-suppression-gate` (C#-Pendant zum noqa-gate),
 
 Pro Sprache wachsen also unterschiedliche Gate-Familien. Der Harness
 ist sprach-unabhängig im Konzept, aber sprach-abhängig in der
-Konkretion — genau deshalb wird das Begleit-Lab in Phase C fünf
-Sprachen parallel abdecken (heute noch nicht ausgeliefert).
+Konkretion — genau deshalb deckt das Begleit-Lab **sechs** Sprachen
+parallel ab (Go, Python, Kotlin, Java, C#, C++), jede mit eigener
+Gate-Familie hinter demselben `make gates`-Vertrag.
 
 ## Typische Fehlvorstellungen
 

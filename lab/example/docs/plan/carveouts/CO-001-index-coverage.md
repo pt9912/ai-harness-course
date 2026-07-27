@@ -38,7 +38,7 @@ Konkret: `internal/index/`-Coverage erreicht ≥ 90 %, geprüft in
 |---|---|---|
 | `<sprache>/coverage.config` | `critical_paths.exceptions` | `internal/index/` mit Kommentar `# CO-001` |
 
-(Die konkrete Datei pro Sprache wird in Phase C des Lab-Aufbaus
+(Die konkrete Datei pro Sprache wird beim Auflösen des Carveouts
 ausgefüllt — Pfad-Konvention bleibt analog.)
 
 ## Verifikation (nach Auflösung)

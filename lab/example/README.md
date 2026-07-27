@@ -55,7 +55,7 @@ example/
 ├── evals/example-trace.json     Minimal-Trace für Modul 0
 ├── otel/                        Trace-Fixture für Modul 15
 ├── runbooks/                    Release/Incident-Fixtures für Modul 16
-└── (Sprach-Skelette in Phase C: go/, python/, kotlin/, java/, csharp/, cpp/)
+└── go/, python/, kotlin/, java/, csharp/, cpp/   (sechs Sprach-Skelette)
 ```
 
 ## Sprach-Skelette

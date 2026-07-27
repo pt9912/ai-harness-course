@@ -216,9 +216,11 @@ Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
   Frage pro Eintrag in
   [`harness/conventions.md`](grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher):
   *Regelt die neue Fassung das, wofür diese Adaption angelegt wurde?* Davor steht
-  ein Formcheck: Lösen Geltungsbereich und Begründungs-Verweise in der neuen
-  Fassung noch auf? Ein toter Anker ist kein Ausgang, sondern ein Formfehler und
-  wird zuerst repariert. Dann **fünf Ausgänge** — sie beziehen sich auf
+  ein Formcheck — **den erledigt das Doku-Gate**: Die vendored Baseline liegt im
+  Repo, ihre Dateien sind gültige Link-Ziele, und ein `Geltungsbereich`, der nach
+  dem Update ins Leere zeigt, meldet sich als `anchor-missing`. Ein toter Anker
+  ist kein Ausgang, sondern ein Formfehler und wird zuerst repariert. Einmal
+  prüfen, dass `.harness/baseline/` im Prüfumfang liegt; danach automatisch. Dann **fünf Ausgänge** — sie beziehen sich auf
   das *Delta* der neuen Fassung, nicht auf den Zustand der Baseline: Die
   Adaption wird **gegenstandslos** (die neue Fassung regelt das **jetzt neu**
   selbst → Rückbau), sie **bleibt gültig** (die neue Fassung
