@@ -11,6 +11,32 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 58 — 2026-07-27 · Discovery-Register geschlossen: eine Beobachtung unter Schwelle, kein Plan
+
+### Geändert
+
+- **Faden *Discovery-/Kandidaten-Register* geschlossen**, 25 Wellen nach seiner
+  Vertagung. Nach dem Trigger-Neuschnitt (Welle 57) ist die Beleglage: **0**
+  Beobachtungen des Drucks nach dem Welle-33-Fix, **1** Messung mit negativem
+  Ergebnis. Die Ursprungs-Beobachtung entstand *vor* dem Fix und belegt nicht,
+  dass er nicht reicht.
+- **Der Grund ist die Zählregel des Kurses selbst.** Eine 1×-Beobachtung ist eine
+  *Beobachtung unter Schwelle*, kein Steering-Loop-Eintrag — die Schwelle liegt
+  bei 3×. Sie gehört damit nicht in eine Liste, die **Handlungen** verspricht.
+  Dass sie 25 Wellen dort stand, liegt daran, dass dieses Repo mangels
+  Wellen-Betrieb keinen Kanal für Beobachtungen unter Schwelle hat — die Roadmap
+  war der einzige Ort, und dort las sie sich wie ausstehende Arbeit.
+- **Wiedereintritt bleibt möglich und ist benannt:** Zeigt ein Repo den Druck
+  *nach* Welle 33 — Nicht-Slice-Register werden mangels Ort in ein
+  Lifecycle-Verzeichnis gezwängt, obwohl `done/` sanktioniert ist —, wird der
+  Faden als **frische** Beobachtung neu eröffnet, nicht als Fortsetzung dieser.
+
+### Nicht gemessen, und das steht so da
+
+Ob der Welle-33-Fix bei `m-trace` gereicht hat, ist von hier nicht messbar (Repo
+nicht greifbar). Die Schließung stützt sich deshalb ausdrücklich **nicht** auf
+„vermutlich erledigt", sondern auf die fehlende Nach-Fix-Beobachtung.
+
 ## Welle 57 — 2026-07-27 · Ein Trigger, der seine eigene Korrektur nicht kannte
 
 ### Geändert
