@@ -11,6 +11,40 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 49 — 2026-07-27 · Zwei Korrekturen nach v3.8.0: Quellen-Titel und ein Faden, der keiner war
+
+### Behoben
+
+- **Böckeler-Artikeltitel am Original geprüft.** Er lautet
+  *„Harness engineering for coding agent users"* — klein geschrieben und mit
+  „users". `quellen.md` trug seit jeher *„Harness Engineering for Coding Agents"*,
+  und in Welle 48 wurde der README-Text nach dieser Abschrift „korrigiert" — eine
+  richtige Fassung durch eine falsche ersetzt. Der Fehler ist methodisch: Für
+  einen externen Titel ist eine repo-interne Datei kein Beleg. Beide Stellen
+  stehen jetzt auf dem am Original geprüften Wortlaut, `quellen.md` zusätzlich mit
+  Erscheinungsdatum. Die verlinkte URL war bereits die kanonische
+  (`articles/harness-engineering.html` liefert HTTP 200; der
+  `exploring-gen-ai/`-Pfad antwortet mit 301 auf ebendiese).
+
+### Geändert
+
+- **[Modul 6](kurs/de/02-planung/modul-06-roadmap.md) beantwortet den
+  Vorwärts-Blick für wellenlose Arbeit.** Der nach Welle 48 offene Faden
+  behauptete, wellenlose Arbeit habe kein „Soll" — nur ein „Ist" über
+  `ls in-progress/`. Gegen Modul 5 gehalten hält das nicht: `next/` heißt
+  *priorisiert/eingeplant*, und `open→next` **ist** die Priorisierungs-
+  Entscheidung — seit Welle 48 wellenneutral formuliert. Der tragende Punkt liegt
+  tiefer: Eine Reihenfolge *einzelner* Slices kennt der Harness überhaupt nicht,
+  auch nicht für wellengebundene Arbeit. Die Roadmap ordnet **Wellen**, die Spalte
+  *Wichtigste Slices* nennt Inhalt statt Rang, und `slice.template.md` hat kein
+  Prioritätsfeld. Der Faden behauptete also einen Nachteil, den es nicht gibt; er
+  ist **aufgelöst, nicht gelöst**. Modul 6 warnt an derselben Stelle davor, für
+  wellenlose Arbeit eine Rangliste neben der Roadmap anzulegen — das wäre eine
+  Sortierung, die es für Slices nie gab, und die zweite Quelle, die die Regel
+  darüber gerade vermeidet. Regelwerk-Split mitgezogen.
+- **`docs/roadmap.md`**: Faden entfernt, Drift-Tabelle trägt die Begründung
+  (inklusive des Fehlers im Fadentext selbst, der `open/` statt `next/` nannte).
+
 ## Welle 48 — 2026-07-27 · Wellenlose Arbeit bekommt eine Regel; README neu gefasst
 
 ### Hinzugefügt
