@@ -23,6 +23,15 @@ wieder gelesen.
 > [`konventionen.md` §Was ist eine Sub-Area?](../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area)
 > — der dortige Drei-Achsen-Test wird hier **nicht** angewandt, er beantwortet
 > eine andere Frage. Die Abweichung ist eine Entscheidung, kein Versehen.
+>
+> **Zweite Abweichung: Release wird unter *Meilensteine* geführt.** Modul 6
+> trennt beides — ein *Meilenstein* ist ein extern beobachtbarer Zustand, ein
+> *Release* ein Artefakt, das das Repo in eine Umgebung verlässt. Ein Tag mit
+> gebautem Bundle ist danach ein Release. Dieses Repo führt dafür **keinen
+> eigenen Abschnitt**: Es liefert genau eine Artefaktklasse (das
+> Baseline-Bundle), und ein Abschnitt mit einer Zeile pro Tag wäre die
+> Zeremonie, vor der die Roadmap-Lehre selbst warnt. Releases stehen deshalb
+> unter *Meilensteine*. Auch das ist eine Entscheidung, kein Versehen.
 
 ## Offene Fäden
 
@@ -41,9 +50,8 @@ Wunsch, kein Plan — deshalb steht bei den betroffenen Zeilen ausdrücklich
 
 ## Meilensteine
 
-| Meilenstein | Bedingung | Stand |
-|---|---|---|
-| **v3.8.0** | **Welle 48 im [CHANGELOG](../CHANGELOG.md) registriert und committet**, Tag gesetzt, Bundle-Asset gebaut, `latest` umgehängt | ausstehend — MINOR, weil Welle 48 eine neue normative Regel und einen neuen Regelwerks-Abschnitt hinzufügt, nicht nur korrigiert |
+*Keiner offen.* Der letzte war `v3.8.0` (erreicht 2026-07-27) — Beleg in der
+Drift-Tabelle unten, Inhalt im [`CHANGELOG.md`](../CHANGELOG.md).
 
 ## Abgeschlossene Wellen
 
@@ -58,4 +66,5 @@ Zeile mit Datum, Änderung und Grund — sonst ist die Verschiebung still.
 
 | Datum | Faden | Änderung | Grund |
 |---|---|---|---|
+| 2026-07-27 | Meilenstein **v3.8.0** | erreicht und aus der Tabelle entfernt | Alle vier Teilbedingungen belegt: Welle 48 registriert und committet (`921e84f`), Tag `v3.8.0` gesetzt, Workflow `templates-release` grün, Asset `lab-regelwerk.zip` (137.532 Bytes, 55 Dateien) gebaut, `releases/latest` zeigt auf `v3.8.0`; Stichprobe im veröffentlichten Bundle: `regelwerk/modul-06-roadmap.md` trägt §Wann Arbeit eine Welle braucht. **MINOR** gewählt, weil Welle 48 eine normative Regel und einen Regelwerks-Abschnitt *hinzufügt*, ohne etwas zu entfernen oder ein Layout zu brechen — die MAJOR-Politik des Repos reserviert MAJOR für Asset-Entfernung und Layout-Bruch |
 | 2026-07-27 | Meilenstein **v3.7.0** | erreicht und aus der Tabelle entfernt, ersetzt durch **v3.8.0** | `v3.7.0` wurde am 2026-07-26 getaggt (Wellen 39–45 plus Review-Befunde), `v3.7.1` am selben Tag (Wellen 46–47) — die Zeile stand danach noch auf „ausstehend" und war damit zweimal überholt. Erreichte Meilensteine wandern nicht in ein Log hier: Diese Datei trägt nur den Vorwärts-Blick, die Historie steht in `CHANGELOG.md` und in den Tags |
