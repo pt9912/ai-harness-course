@@ -9,7 +9,10 @@ Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er
 wechselt nur durch `git mv`, siehe
 Baseline-Regelwerk `modul-05-planning-harness.md` §Lifecycle als State Machine.
 
-**Welle:** <welle-id> oder "ohne Welle" (Wartung/Spike).
+**Welle:** <welle-id> oder "ohne Welle" — ohne Welle immer dann, wenn es
+keine Closure-Bedingung gibt, die von der DoD dieses Slice verschieden
+ist, siehe Baseline-Regelwerk `modul-06-roadmap.md`
+§Wann Arbeit eine Welle braucht (Modul 6).
 
 **Bezug:** `<LH-FA-NN>`, `<LH-QA-NN>`, ADR-<NNNN>.
 

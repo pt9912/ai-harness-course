@@ -49,7 +49,7 @@ Entscheidungen. Diese Begriffe gelten durchgängig.
 spec/                       # Lastenhefte
 docs/plan/adr/              # Architecture Decision Records
 docs/plan/planning/open/    # geplante, noch nicht gestartete Slices
-docs/plan/planning/next/    # priorisiert für die nächste Welle
+docs/plan/planning/next/    # priorisiert/eingeplant
 docs/plan/planning/in-progress/  # aktive Slices
 docs/plan/planning/done/    # abgeschlossene Slices
 docs/plan/planning/in-progress/roadmap.md   # Meilensteine, Wellen, aktive Welle
@@ -795,7 +795,7 @@ behebt.
 ```mermaid
 flowchart TB
     A["Beobachtungs-Quellen<br/>Agentenlauf · Review-Findings<br/>Verifikation · Validierung"] --> B["Slice-Closure §7<br/>Steering-Loop-Eintrag<br/>+ Risiko-Ausgänge"]
-    B --> V["Welle-Closure Schritt 3:<br/>Slice-Closures verdichten<br/>(gleiche Beobachtungen zählen)"]
+    B --> V["Welle-Closure Schritt 3:<br/>ALLE Slice-Closures seit der<br/>letzten Welle-Closure verdichten<br/>(auch wellenlose; gleiche zählen)"]
     V --> C{"Wie oft?"}
     C -- "1x / 2x" --> D["Welle-Closure:<br/>Beobachtungen unter Schwelle<br/>(übernehmen + hochzählen)"]
     C -- "3x" --> E["Welle-Closure:<br/>Steering-Loop-Eintrag<br/>+ Zielort"]

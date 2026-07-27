@@ -11,6 +11,77 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 48 — 2026-07-27 · Wellenlose Arbeit bekommt eine Regel; README neu gefasst
+
+### Hinzugefügt
+
+- **[Modul 6](kurs/de/02-planung/modul-06-roadmap.md) §Wann Arbeit eine Welle
+  braucht — und wann nicht.** Das Roadmap-Format ist wellen-zentriert (fünf
+  Abschnitte, alle über Wellen), und `slice.template.md` bot seit jeher den Wert
+  `ohne Welle` an — ohne dass die Quelle den Begriff kannte. Für einen einzelnen
+  Slice gab es damit keinen Ort, und der Fehlgebrauch ist beobachtet: Die Arbeit
+  landet unter *Aktuelle Welle*, bis der Abschnitt seitenlang ist und zugleich
+  meldet, dass keine Welle läuft. Die Regel ist aus dem Kernbegriff hergeleitet
+  („Bündel von Slices, das gemeinsam **abgeschlossen** wird"): **Eine Welle liegt
+  vor, wenn es eine beobachtbare Closure-Bedingung gibt, die mehr beobachtet, als
+  die DoDs ihrer Slices schon belegen.** Kein Größen-Kriterium — ein
+  Ein-Slice-Bündel bleibt eine Welle, wenn sein Trigger repo-weite Belege fordert.
+- **Wellenlose Arbeit erscheint nicht in der Roadmap.** Ihr Zustand ist die
+  Verzeichnis-Position ([Modul 5](kurs/de/02-planung/modul-05-planning-harness.md));
+  ein Eintrag daneben wäre eine zweite Quelle für denselben Zustand. Einzige
+  Berührung: liefert sie den letzten Beleg eines Meilensteins, bleibt die Spalte
+  `Welle(n)` leer und der Beleg steht als Slice-ID daneben.
+- **Übung, Selbstcheck und Lösung** zur neuen Regel (beide auf LZ 2, das dafür um
+  *„erkennen, wann Arbeit ganz ohne Welle läuft"* erweitert wurde) — mit dem
+  Gegenfall, an dem sich zeigt, ob jemand das Kriterium oder bloß die Slice-Zahl
+  anwendet.
+- **`lab/example/…/done/slice-020-referenz-richtung-repariert.md`** — erster
+  wellenloser Slice im Begleit-Lab; der Template-Wert `ohne Welle` hatte bis dahin
+  kein Vorbild. Reaktiv ausgelöst durch `make check-references`, mit einem Risiko
+  im Ausgang *weiter offen*, das in die nächste Welle-Closure abliefert.
+
+### Geändert
+
+- **Welle-Closure Schritt 3 verdichtet jetzt *alle* Slice-Closures seit der letzten
+  Welle-Closure**, die wellenlosen eingeschlossen — vorher nur „die Slices dieser
+  Welle". Ohne diese Korrektur hätte die neue Regel drei Wächter still abgeschaltet:
+  Der Steering-Loop-Zähler (1×/2×/3×) entsteht ausschließlich in diesem Schritt, der
+  Risiko-Ausgang *weiter offen* hat dort sein einziges Ziel, und die Carveout-Frist
+  („seit > 2 Wellen aktiv", [Modul 7](kurs/de/02-planung/modul-07-carveouts.md))
+  misst in Wellen. Ein Modus ohne Wächter wäre genau die Pathologie, die Welle 44
+  als *„ein Trigger ohne Wächter ist eine Absichtserklärung mit Verfallsdatum"*
+  benannt hat.
+- **Zwei Mermaid-Diagramme kodierten die Kopplung mit** und wurden nachgezogen: der
+  Steering-Loop-Graph in
+  [`konventionen.md`](kurs/de/grundlagen/konventionen.md) (Knoten „Welle-Closure
+  Schritt 3") und das Lifecycle-Zustandsdiagramm in Modul 5 (`open --> next: in
+  Welle priorisiert` → `priorisiert/eingeplant`; Note „bei der **nächsten**
+  Welle-Closure"). Die Abhängigkeitsgraphen in `roadmap.template.md` und im Lab
+  bleiben unberührt — sie zeigen Wellen-Reihenfolgen, kein Slice-Routing.
+- **Verzeichniskonvention entkoppelt.** Der Kommentar zu `docs/plan/planning/next/`
+  lautete `# priorisiert für die nächste Welle` und band das Verzeichnis an einen
+  Wellen-Betrieb, den es nicht voraussetzt — jetzt `# priorisiert/eingeplant`, in
+  [`konventionen.md`](kurs/de/grundlagen/konventionen.md) und im Regelwerks-Spiegel.
+  Normativ gewichtiger als die Diagramm-Labels darüber: Adopter kopieren diesen
+  Block.
+- **`welle-results.template.md`** zitierte die ersetzte Schritt-3-Formulierung
+  wörtlich („Grundlage sind die Closure-Notizen der Slices dieser Welle") und
+  kodierte damit den Ausschluss wellenloser Slices in genau dem Artefakt, das
+  Adopter kopieren. `lab/templates/` ist gate-ignoriert — `make check` sieht das nie.
+- **`slice.template.md`** trägt statt der unverankerten Klammer `(Wartung/Spike)`
+  jetzt den Trigger-Grund und verweist auf den Regelwerks-Abschnitt. Die Klammer
+  engte falsch ein: entscheidend ist die fehlende eigenständige Closure-Bedingung,
+  nicht die Art der Arbeit.
+- **README neu gefasst** (Commit `85d46f1`): Schnellstart-Block, eigener Abschnitt
+  *Einordnung der Quellen* mit den Belegen zu Böckeler und Lopopolo, Adoptions-
+  schritte inline. **Korrigiert dabei eine Falschaussage aus Welle 47**: dort stand,
+  `ai-harness-init` führe „dieselben Schritte" aus wie der manuelle Weg. Das
+  stimmt nicht — das CLI richtet ein Repo samt lauffähiger Gates ein, kennt
+  `add-lang` für Mono-Repos und `--arch` für die Bauform, während das Baseline
+  Bundle Regelwerk und Templates liefert. Eine Vergleichstabelle sagt das jetzt.
+  Versionsgebundene Angaben (Versionsstand, Plattform-Zahl, Sprachliste) sind
+  entfernt, damit der Text nicht bei jedem CLI-Release nachzieht.
+
 ## Welle 47 — 2026-07-26 · Bootstrap-Werkzeug verlinkt; Adopter-Zählung korrigiert
 
 ### Hinzugefügt

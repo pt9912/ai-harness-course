@@ -13,15 +13,16 @@ falsch.
 ```mermaid
 stateDiagram-v2
     [*] --> open: Slice angelegt
-    open --> next: in Welle priorisiert
+    open --> next: priorisiert/eingeplant
     next --> in_progress: Implementer beginnt
     in_progress --> done: DoD + Lerneintrag + Risiko-Ausgänge
     in_progress --> next: zu groß — zurück zur Zerlegung
     in_progress --> open: blockiert (Carveout?)
     done --> [*]
     note right of done
-        §7 wird bei der Welle-Closure
-        verdichtet (Modul 6, Schritt 3)
+        §7 wird bei der nächsten
+        Welle-Closure verdichtet
+        (Modul 6, Schritt 3)
     end note
 ```
 

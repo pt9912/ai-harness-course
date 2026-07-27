@@ -47,7 +47,7 @@
 spec/                       # Lastenhefte
 docs/plan/adr/              # Architecture Decision Records
 docs/plan/planning/open/    # geplante, noch nicht gestartete Slices
-docs/plan/planning/next/    # priorisiert für die nächste Welle
+docs/plan/planning/next/    # priorisiert/eingeplant
 docs/plan/planning/in-progress/  # aktive Slices
 docs/plan/planning/done/    # abgeschlossene Slices
 docs/plan/planning/in-progress/roadmap.md   # Meilensteine, Wellen, aktive Welle

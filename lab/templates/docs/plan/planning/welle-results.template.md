@@ -71,9 +71,11 @@ Der Zähler des Steering Loops (1x notieren · 2x Symptom · 3x Lücke).
 Diese Sektion wird aus der VORHERIGEN Closure-Notiz ÜBERNOMMEN und
 hochgezählt — nicht neu geschrieben.
 
-ERSTE WELLE: es gibt keine Vorgängerin. Dann wird die Sektion frisch aus den
-Slice-Closures DIESER Welle befüllt (Schritt 3: „Grundlage sind die
-Closure-Notizen der Slices dieser Welle"). Ab der zweiten Welle gilt die
+ERSTE WELLE: es gibt keine Vorgängerin. Dann wird die Sektion frisch aus ALLEN
+bis dahin geschlossenen Slice-Closures befüllt — auch den wellenlosen (Schritt 3:
+„Grundlage sind die Closure-Notizen aller Slices, die seit der letzten
+Welle-Closure nach done/ gewandert sind"; bei der ersten Welle heißt das
+„seit Repo-Beginn"). Ab der zweiten Welle gilt die
 Übernahme-Regel. Ohne sie fängt der Zähler mit jeder
 Welle bei null an, und ein Fehler, der einmal pro Welle auftritt, wird
 nie als Lücke sichtbar.

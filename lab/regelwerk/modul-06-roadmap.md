@@ -26,6 +26,17 @@ Form, die Regeln der Inhalt.
 - **Meilenstein** = extern beobachtbarer Zustand (Release, Audit-Punkt). Ein Meilenstein endet durch *Datum oder externe Bestätigung* — und genau deshalb leitet sich der Meilenstein aus Wellen ab, nicht umgekehrt.
 - **Release** — Trigger: ein Artefakt verlässt das Repo in eine Umgebung (Tag + Staging). Ein Release kann mehrere Wellen umfassen, der Meilenstein liegt *neben* der Welle (externe Bestätigung), die Welle endet *durch* Closure.
 
+### Wann Arbeit eine Welle braucht (Modul 6)
+
+- **Eine Welle liegt vor, wenn es eine beobachtbare Closure-Bedingung gibt, die mehr beobachtet, als die DoDs ihrer Slices schon belegen.** Das Kriterium liegt nicht in der Größe der Arbeit. Ein Trigger, der nichts beobachtet, was die Slices nicht ohnehin belegen, ist Zeremonie.
+- Die kanonische Form dieses *Mehr*: alle Slices in `done/` **und** `make gates` grün **und** der Replay-Lauf grün — die beiden Gate-Bedingungen sind repo-weit und stehen in keiner einzelnen DoD.
+- Fehlt dieses Mehr, gibt es keine Welle. Bei einem einzelnen Slice ist das der Regelfall: Sein Closure-Trigger würde die eigene DoD abschreiben. Solche Arbeit läuft **ohne Welle** — typisch für Reaktives (Sensor hat gefeuert, Pin ist veraltet, Meldung liegt vor), aber nicht darauf beschränkt: auch eine neue Fähigkeit kann ein einzelner Slice sein. Umgekehrt bleibt ein Ein-Slice-Bündel eine Welle, wenn sein Trigger repo-weite Belege fordert, die der Slice allein nicht liefert.
+- **Wellenlose Arbeit erscheint nicht in der Roadmap** — weder beim Start noch beim Abschluss. Ihr Zustand ist die Verzeichnis-Position (Modul 5); `ls docs/plan/planning/in-progress/` beantwortet "was läuft gerade" autoritativ und ohne Pflegeaufwand. Ein Eintrag daneben wäre eine zweite Quelle für denselben Zustand, und die altert.
+- Die Belege eines geschlossenen wellenlosen Slice stehen in seiner Datei und in git; das Closure-Log der Roadmap ist für Wellen.
+- **Wellenlos heißt nicht wächterlos.** Der Slice schreibt seine Closure-Notiz §7 wie jeder andere; die Wellen-Closure verdichtet in Schritt 3 *alle* Slice-Closures seit der letzten Welle-Closure — die wellenlosen eingeschlossen. Damit zählt der Steering Loop weiter vollständig und offene Risiken finden ihren Ausgang.
+- **Was die Regel nicht repariert:** Der Trigger-Audit (Closure-Schritt 2) und die Carveout-Frist („seit > 2 Wellen aktiv", Modul 7) hängen weiter an der Welle-Closure, und die Frist *misst in Wellen*. Wer lange wellenlos arbeitet, dehnt sie — ein Carveout steht dann bei „0 Wellen aktiv", obwohl Monate vergangen sind. **Ein Repo, das nur wellenlos arbeitet, hat keinen Zähler und keine laufende Frist** — wer über Monate keine Welle eröffnet, verliert den Steering Loop, nicht weil die Slices wellenlos waren, sondern weil nie verdichtet wurde. Wer so arbeitet, muss den Trigger-Audit eigenständig auslösen.
+- **Einzige Berührung mit der Roadmap:** Liefert wellenlose Arbeit den letzten Beleg eines Meilensteins, bleibt die Spalte `Welle(n)` leer (`—`) und der Beleg steht als Slice-ID daneben — Beleg für eine externe Bedingung, nicht Zustand.
+
 ### Roadmap-Struktur: fünf Abschnitte (Modul 6)
 
 Die Form liefert die Vorlage
@@ -68,7 +79,11 @@ Sektion *Beobachtungen unter Schwelle* aus
 `done/welle-<NN-1>-results.md` durchgehen: Betrifft eine davon die
 Sub-Areas dieser Welle, gehört sie in die Slice-Planung (Risiko im
 betroffenen Slice) oder, bei Erreichen von 3×, als eigener Slice, der die
-Lücke schließt. Das ist der einzige Schritt, der Closure-Wissen wieder
+Lücke schließt. **Bei der ersten Welle entfällt dieser Schritt** — es gibt
+keine Vorgängerin; die Sektion entsteht dann erstmals bei deren Closure aus
+**allen bis dahin geschlossenen** Slice-Closures, auch den wellenlosen („seit
+der letzten Welle-Closure" heißt bei der ersten Welle „seit Repo-Beginn").
+Das ist der einzige Schritt, der Closure-Wissen wieder
 als Eingabe nutzt; ohne ihn ist die Closure-Notiz write-only und die
 Zählregel des Steering Loops hat keinen Zähler. (3) Welle-Datei flach
 anlegen (`docs/plan/planning/<welle-id>.md`, Ziel-Form
@@ -95,9 +110,13 @@ dort automatisch (Modul-0-Prinzip).
    einer stehengebliebenen Reifestufe oder einer Entscheidung, deren
    Re-Evaluierungs-Bedingung vor drei Wellen eintrat. **Ein Trigger ohne
    Wächter ist eine Absichtserklärung mit Verfallsdatum.**
-3. **Welle nach `done/` schließen.** Grundlage sind die **Closure-Notizen der
-   Slices dieser Welle** (§7 jeder Datei in `done/`): durchgehen und
-   **verdichten**, nicht aus dem Gedächtnis zusammentragen — gleiche
+3. **Welle nach `done/` schließen.** Grundlage sind die **Closure-Notizen aller
+   Slices, die seit der letzten Welle-Closure nach `done/` gewandert sind** —
+   die dieser Welle und die wellenlos gelaufenen (§Wann Arbeit eine Welle
+   braucht). Der Zähler unterscheidet nicht nach Welle-Zugehörigkeit, sonst
+   zählte er an wellenloser Arbeit vorbei und eine Beobachtung, die überwiegend
+   dort auftritt, erreichte die Schwelle nie. Grundlage ist §7 jeder dieser
+   Dateien: durchgehen und **verdichten**, nicht aus dem Gedächtnis zusammentragen — gleiche
    Beobachtungen zusammenfassen und zählen, 3× → *Steering-Loop-Einträge*,
    darunter → *Beobachtungen unter Schwelle*, Risiken mit Ausgang „weiter
    offen" (Modul 5) ebenfalls dorthin. Ohne diesen Lese-Schritt ist der

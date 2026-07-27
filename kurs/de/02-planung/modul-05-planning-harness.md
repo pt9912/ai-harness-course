@@ -41,15 +41,16 @@ Nach diesem Modul kannst du:
 ```mermaid
 stateDiagram-v2
     [*] --> open: Slice angelegt
-    open --> next: in Welle priorisiert
+    open --> next: priorisiert/eingeplant
     next --> in_progress: Implementer beginnt
     in_progress --> done: DoD + Lerneintrag + Risiko-Ausgänge
     in_progress --> next: zu groß — zurück zur Zerlegung
     in_progress --> open: blockiert (Carveout?)
     done --> [*]
     note right of done
-        §7 wird bei der Welle-Closure
-        verdichtet (Modul 6, Schritt 3)
+        §7 wird bei der nächsten
+        Welle-Closure verdichtet
+        (Modul 6, Schritt 3)
     end note
 ```
 
@@ -82,7 +83,7 @@ Ausgängen.**
 |---|---|---|
 | **eingetreten** | das Risiko hat sich realisiert | Carveout ([Modul 7](modul-07-carveouts.md)) oder Folge-Slice — mit ID in der Closure-Notiz |
 | **entfallen** | kann nicht mehr eintreten | gestrichen, **mit Begründung** — ohne sie ist es stilles Vergessen |
-| **weiter offen** | weder eingetreten noch entfallen | wandert in *Beobachtungen unter Schwelle* der Welle-Closure ([Modul 6](modul-06-roadmap.md#die-wellen-closure-prozedur)) |
+| **weiter offen** | weder eingetreten noch entfallen | wandert in *Beobachtungen unter Schwelle* der nächsten Welle-Closure ([Modul 6](modul-06-roadmap.md#die-wellen-closure-prozedur)) |
 
 Der dritte Ausgang ist der, der die Klasse rettet: Er hängt das Risiko an
 den **Zähler**, statt einen zweiten Mechanismus zu erfinden. Ein Risiko,

@@ -27,7 +27,7 @@ oder Status.
 Nach diesem Modul kannst du:
 
 * eine Roadmap als Reihenfolge von Wellen mit Triggern *aufbauen* (Erschaffen · prozedural),
-* Welle ↔ Meilenstein ↔ Release sauber *unterscheiden* und für ein Beispiel-Repo den jeweiligen Trigger *zuordnen* (Analysieren · konzeptuell),
+* Welle ↔ Meilenstein ↔ Release sauber *unterscheiden*, *erkennen*, wann Arbeit ganz ohne Welle läuft, und für ein Beispiel-Repo den jeweiligen Trigger *zuordnen* (Analysieren · konzeptuell),
 * eine Welle, die 30 % über Schätzung liegt, *bewerten* (neu schneiden / neu planen / Carveout) (Bewerten · prozedural+metakognitiv),
 * Welle-Abhängigkeiten *modellieren* und Blocker *identifizieren* (Analysieren · konzeptuell).
 
@@ -41,6 +41,7 @@ Nach diesem Modul kannst du:
 * Releases
 * Fortschrittskontrolle
 * Abhängigkeiten zwischen Wellen
+* Wann Arbeit eine Welle braucht — und wann nicht
 
 ## Kernidee
 
@@ -156,6 +157,12 @@ Tabelle aus dem Lab:
 | M3 — Skalierbar | welle-3-skalierung | p95 < 1 s auch bei 100k Einträgen | offen |
 ```
 
+Liefert **wellenlose Arbeit** den letzten Beleg eines Meilensteins, bleibt
+die Spalte `Welle(n)` leer (`—`) und der Beleg steht als Slice-ID daneben.
+Das ist der einzige Ort, an dem wellenlose Arbeit die Roadmap überhaupt
+berührt — und auch hier nicht als Zustand, sondern als Beleg für eine
+*externe* Bedingung, die ohnehin außerhalb der Welle liegt.
+
 Der Audit-Termin (`2026-07-31`) ist Anhang im Meilenstein-Eintrag, nicht
 Trigger der Welle. Das hat eine harte Konsequenz: wenn das Audit-Datum
 gehalten werden *muss*, aber die Closure-Trigger nicht erreichbar sind,
@@ -210,6 +217,68 @@ Roadmap ist nicht "wann?", sondern "in welcher Reihenfolge wovon?"*.
 Sieben Schritte, eine Welle, drei Trigger ohne Datum. Vergleich:
 [`../../../lab/example/docs/plan/planning/in-progress/roadmap.md`](../../../lab/example/docs/plan/planning/in-progress/roadmap.md).
 
+## Wann Arbeit eine Welle braucht — und wann nicht
+
+Bevor eine Welle eröffnet wird, steht eine Vorfrage, die das
+wellen-zentrierte Roadmap-Format nicht stellt: *Braucht diese Arbeit
+überhaupt eine Welle?*
+
+Der Kernbegriff antwortet bereits: Eine Welle ist ein *"Bündel von
+Slices, das gemeinsam geplant und **abgeschlossen** wird"*
+([`grundlagen/konventionen.md` §Kernbegriffe](../grundlagen/konventionen.md#kernbegriffe)).
+Das gemeinsame Abschließen trägt das Kriterium — nicht die Größe der
+Arbeit:
+
+> **Eine Welle liegt vor, wenn es eine beobachtbare Closure-Bedingung
+> gibt, die mehr beobachtet, als die DoDs ihrer Slices schon belegen.**
+
+Ein Trigger, der nichts beobachtet, was die Slices nicht ohnehin belegen,
+ist Zeremonie. Die kanonische Form dieses *Mehr* steht unten in
+[§Die Wellen-Closure-Prozedur](#die-wellen-closure-prozedur), Schritt 1:
+alle Slices in `done/` **und** `make gates` grün **und** der Replay-Lauf
+grün — die beiden Gate-Bedingungen sind repo-weit und stehen in keiner
+einzelnen DoD.
+
+Fehlt dieses Mehr, gibt es keine Welle. Bei einem einzelnen Slice ist das
+der Regelfall: Sein Closure-Trigger würde die eigene DoD abschreiben.
+Solche Arbeit läuft **ohne Welle** — typisch für Reaktives (ein Sensor
+hat gefeuert, ein Pin ist veraltet, ein Nutzer hat etwas gemeldet), aber
+nicht darauf beschränkt: auch eine neue Fähigkeit kann ein einzelner
+Slice sein. Umgekehrt bleibt ein Ein-Slice-Bündel eine Welle, wenn sein
+Trigger repo-weite Belege fordert, die der Slice allein nicht liefert.
+
+**Wellenlose Arbeit erscheint nicht in der Roadmap** — weder beim Start
+noch beim Abschluss. Ihr Zustand ist die Verzeichnis-Position
+([Modul 5](modul-05-planning-harness.md)); `ls docs/plan/planning/in-progress/`
+beantwortet "was läuft gerade" autoritativ und ohne Pflegeaufwand. Ein
+Eintrag daneben wäre eine zweite Quelle für denselben Zustand, und die
+altert: Sie wird nachgezogen, solange jemand daran denkt, und meldet
+danach einen Slice als laufend, der längst in `done/` liegt. Die Belege
+eines geschlossenen wellenlosen Slice stehen in seiner Datei und in git;
+das Closure-Log der Roadmap ist für Wellen.
+
+**Wellenlos heißt nicht wächterlos.** Der Slice schreibt seine
+Closure-Notiz §7 wie jeder andere, und die Wellen-Closure verdichtet
+unten in Schritt 3 *alle* Slice-Closures seit der letzten Welle-Closure —
+die wellenlosen eingeschlossen. Damit zählt der Steering Loop weiter
+vollständig und offene Risiken finden ihren Ausgang.
+
+**Was die Regel dagegen nicht repariert, und das ehrlich:** Der
+Trigger-Audit (Schritt 2 unten) und die Carveout-Frist („seit > 2 Wellen
+aktiv", [Modul 7](modul-07-carveouts.md)) hängen weiter an der
+Welle-Closure, und die Frist *misst in Wellen*. Wer lange wellenlos
+arbeitet, dehnt sie damit — ein Carveout steht dann bei „0 Wellen aktiv",
+obwohl Monate vergangen sind. **Ein Repo, das nur wellenlos arbeitet, hat
+keinen Zähler und keine laufende Frist** — wer über Monate keine Welle
+eröffnet, verliert den Steering Loop, nicht weil die Slices wellenlos
+waren, sondern weil nie verdichtet wurde. Wer so arbeitet, muss den
+Trigger-Audit eigenständig auslösen.
+
+Der Fehlgebrauch, den diese Regel verhindert, ist beobachtet: Wer das
+Format für vollständig hält, presst den einzelnen Slice in eine
+Pseudo-Welle oder trägt ihn unter *Aktuelle Welle* ein — bis der
+Abschnitt seitenlang ist und gleichzeitig meldet, dass keine Welle läuft.
+
 ## Die Wellen-Eröffnungs-Prozedur
 
 Die Closure-Seite ist unten in fünf Schritten ausbuchstabiert — die
@@ -235,7 +304,10 @@ weglassen:
    Closure-Notiz write-only, und die Zählregel des Steering Loops hat
    keinen Zähler. **Bei der ersten Welle entfällt dieser Schritt** — es
    gibt keine Vorgängerin; die Sektion entsteht dann erstmals bei deren
-   Closure aus den eigenen Slice-Closures.
+   Closure aus **allen bis dahin geschlossenen** Slice-Closures, auch den
+   wellenlosen. Genau dafür ist das Fenster in Schritt 3 offen: „seit der
+   letzten Welle-Closure" heißt bei der ersten Welle „seit Repo-Beginn" —
+   sonst fiele reaktive Frühphasen-Arbeit aus der Zählung heraus.
 3. **Welle-Datei flach anlegen** (`docs/plan/planning/<welle-id>.md`,
    Ziel-Form [`welle.template.md`](../../../lab/templates/docs/plan/planning/welle.template.md))
    **und in die Roadmap als *Aktuelle Welle* eintragen.** Der Zustand ist
@@ -279,7 +351,12 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    Absichtserklärung mit Verfallsdatum.**
 
 3. **Welle nach `done/` schließen.** *Grundlage sind die Closure-Notizen
-   der Slices dieser Welle* — §7 jeder Datei in `done/`. Sie werden
+   aller Slices, die seit der letzten Welle-Closure nach `done/`
+   gewandert sind* — die dieser Welle **und** die wellenlos gelaufenen
+   (§Wann Arbeit eine Welle braucht). Der Zähler unterscheidet nicht nach
+   Welle-Zugehörigkeit, sonst zählte er an wellenloser Arbeit vorbei und
+   eine Beobachtung, die überwiegend dort auftritt, erreichte die Schwelle
+   nie. Grundlage ist §7 jeder dieser Dateien. Sie werden
    durchgegangen und **verdichtet**, nicht aus dem Gedächtnis
    zusammengetragen: gleiche Beobachtungen zusammenfassen und zählen ·
    was 3× erreicht → *Steering-Loop-Einträge* · was darunter bleibt →
@@ -354,6 +431,17 @@ geschlossen.
 
 * Aufbau einer produktiven Roadmap für das Begleit-Lab
 * Modelliere eine Abhängigkeit, die eine spätere Welle blockiert
+* **(Analysieren — aktiviert LZ 2)** *Welle oder keine Welle.* Vier
+  Vorhaben in deinem Repo: (a) ein veralteter Tool-Pin soll nachgezogen
+  werden; (b) eine zweite Zielsprache soll unterstützt werden, was drei
+  Slices braucht, die zusammen erst Sinn ergeben; (c) ein Review-Finding
+  verlangt genau eine Korrektur; (d) ein Slice, dessen Abschluss zusätzlich
+  einen grünen Replay-Lauf gegen das Golden Set verlangt. Entscheide für
+  jedes: Welle oder ohne Welle? Wende dabei ausschließlich das Kriterium
+  aus [§Wann Arbeit eine Welle braucht](#wann-arbeit-eine-welle-braucht--und-wann-nicht)
+  an — und benenne bei jeder Entscheidung *die Bedingung*, die über die
+  DoDs der Slices hinausgeht, oder eben fehlt. Fall (d) ist der, an dem
+  sich zeigt, ob du das Kriterium oder bloß die Slice-Zahl anwendest.
 * **(Bewerten — aktiviert LZ 3)** *Welle über Schätzung bewerten.* Eine
   Welle deiner Roadmap liegt 30 % über der Schätzung. Bewerte begründet,
   ob du sie **neu schneidest**, **neu planst** oder einen **Carveout**
@@ -379,6 +467,10 @@ nach dem Roadmap-Bau. Modul-spezifische Trigger:
 * **(Erinnern)** Nenne drei Beispiele für *beobachtbare* Trigger aus diesem Modul — nicht erfundene, sondern aus den Engage-/Fehlvorstellungs-Blöcken.
 * Was tust du, wenn eine Welle 30 % über der Schätzung liegt — neu schneiden, neu planen oder Carveout?
 * Was unterscheidet eine Welle von einem Meilenstein?
+* **(Analysieren — aktiviert LZ 2)** Ein einzelner Slice zieht einen
+  veralteten Tool-Pin nach. Braucht er eine Welle? Begründe über die
+  Closure-Bedingung, nicht über den Umfang — und sag, wo sein
+  Steering-Loop-Eintrag verdichtet wird, wenn er zu keiner Welle gehört.
 * **(Analysieren — aktiviert LZ 2)** Drei Ereignisse aus dem
   Fallstudien-Repo `pt9912/grid-gym`
   ([`fallstudien.md`](../grundlagen/fallstudien.md)): (a) Der
@@ -401,6 +493,7 @@ nach dem Roadmap-Bau. Modul-spezifische Trigger:
 | Drei beobachtbare Trigger-Beispiele? | "Wenn etwas fertig ist." | Drei aus dem Modul: "SL-024 liegt in `done/`" · "Replay-Lauf gegen Golden Set grün" · "Carveout `CO-007` aufgelöst". | + Pointe: ein Trigger ist beobachtbar dann, wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er eingetreten ist. "Sobald wir Zeit haben" scheitert daran; "SL-024 in `done/`" besteht. |
 | Welle 30 % über Schätzung — was tun? | "Mehr Zeit geben." | Diagnose vor Aktion: liegt es an Slice-Größe (→ neu schneiden), an Reihenfolge (→ neu planen), oder an unerwarteter Komplexität (→ Carveout)? | + Hinweis, dass 30 % früh ein Steering-Loop-Signal sein können (Slice-Sizing-Regel schärfen), 30 % spät (vor Welle-Closure) eher Carveout. Metakognitiv: die *eigene* Schätzunsicherheit als Steering-Signal benennen — woran hätte man die Abweichung früher erkannt (welches Slice war schon beim Schätzen "weich", welche Annahme blieb ungeprüft)? — damit die nächste Schätzung kalibrierter ausfällt. |
 | Welle vs. Meilenstein? | "Größe." | Welle = Bündel paralleler/serialisierter Slices mit Closure-Kriterien. Meilenstein = extern beobachtbarer Zustand (Release, Audit-Punkt). | + Eine Welle endet *durch* Closure-Kriterien; ein Meilenstein endet durch *Datum oder externe Bestätigung* — und genau deshalb leitet sich der Meilenstein aus Wellen ab, nicht umgekehrt. |
+| Braucht ein Tool-Pin-Slice eine Welle? | "Ein Slice ist zu klein für eine Welle." — Größen-Argument, zufällig richtig. | Nein, begründet über die **Closure-Bedingung**: Der Trigger könnte nur die DoD des Slice abschreiben, es fehlt das *Mehr*. Der Slice läuft ohne Welle und erscheint nicht in der Roadmap; sein Steering-Loop-Eintrag wird in der **nächsten** Welle-Closure verdichtet (Schritt 3 nimmt alle Slice-Closures seit der letzten Welle-Closure). | + Gegenprobe am Größen-Argument: Ein *einzelner* Slice, dessen Abschluss zusätzlich einen grünen Replay-Lauf gegen das Golden Set verlangt, **ist** eine Welle — die Bedingung ist repo-weit und steht in keiner DoD. Wer „zu klein" antwortet, liegt hier falsch. |
 | Drei `grid-gym`-Ereignisse Welle/Meilenstein/Release zugeordnet? | höchstens eine Zuordnung richtig, Trigger fehlen oder lauten "ist halt fertig". | (a) **Welle** — Trigger: Closure-Kriterien erfüllt (alle Slices in `done/`, Gates grün), beobachtbar am Wave-Self-Close-Commit. (b) **Meilenstein** — Trigger: extern beobachtbarer Repo-Zustand (Determinismus belegt), keine interne Closure nötig. (c) **Release** — Trigger: ein Artefakt verlässt das Repo in eine Umgebung (Tag + Staging). | + Begründung über die Orthogonalität: ein Release kann mehrere Wellen umfassen, der Meilenstein liegt *neben* der Welle (externe Bestätigung), die Welle endet *durch* Closure — deshalb kann (b) eintreten, ohne dass (a) oder (c) am selben Tag liegen. |
 | Ersten Wellen-Eintrag aus `SL-101/102/103` entworfen? | Slices aufgelistet, aber Trigger ist ein Datum oder fehlt; kein Closure-Kriterium. | Vollständiger Mini-Block: Slice-IDs · *ein* beobachtbarer Trigger (kein Datum) · *ein* Closure-Kriterium; Bündelung begründet (z. B. "`SL-102` braucht `SL-101`, beide liefern erst zusammen prüfbaren Wert"). | + Schnitt-Begründung mit Gegenprobe: warum `SL-103` (Dashboard) *nicht* in dieselbe Welle gehört, wenn es ohne Cache keinen Mehrwert zeigt — und welcher Trigger es in die *nächste* Welle zieht. Der Entwurf nennt den Trigger so, dass ein Dritter ohne Rückfrage über "Welle fertig" entscheiden kann. |
 | Abhängigkeit Welle 3 → Welle 2 modelliert, Blocker erkannt? | "Welle 3 kommt nach Welle 2." — Reihenfolge genannt, keine Modellierung. | Abhängigkeit als expliziter Abhängigkeits-Trigger in der `Trigger`-Spalte von Welle 3 (z. B. „startet, wenn `welle-2-qualitaet` in Closure") + gerichtete Kante im Abhängigkeitsgraphen. | + Blocker-Kriterium benannt: Welle 2 ist Blocker, sobald Welle 3 *ohne* deren Closure nicht starten kann (Phantom-Welle) — und der Test dafür: würde Welle 3 jetzt starten, liefe ein Gate auf nicht-property-getesteter Basis. Reine Vorgängerin ohne harte Kante wäre kein Blocker. |

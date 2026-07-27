@@ -89,6 +89,34 @@ nie umgekehrt: Wenn das Meilenstein-Datum gehalten werden muss, die
 Closure-Trigger aber nicht erreichbar sind, ist die Antwort ein
 Carveout (Modul 7) — nicht ein halb fertiges `done/`.
 
+### (Analysieren) Braucht ein Slice, der einen Tool-Pin nachzieht, eine Welle?
+
+**Nein.** Die Begründung läuft über die Closure-Bedingung, nicht über
+den Umfang: Der Trigger einer Welle um diesen Slice könnte nur „Pin
+aktualisiert, Gates grün" lauten — und genau das steht bereits in der
+DoD des Slice. Ein Trigger, der nichts beobachtet, was der Slice nicht
+ohnehin belegt, ist Zeremonie. Es fehlt das *Mehr*, also liegt keine
+Welle vor.
+
+Der Slice läuft **ohne Welle**. In der Roadmap erscheint er nicht —
+weder beim Start noch beim Abschluss; sein Zustand ist die
+Verzeichnis-Position (Modul 5), und `ls in-progress/` beantwortet
+autoritativ, was gerade läuft.
+
+**Wo der Steering-Loop-Eintrag landet:** in der *nächsten*
+Welle-Closure. Deren Schritt 3 verdichtet alle Slice-Closures seit der
+letzten Welle-Closure — die wellenlosen eingeschlossen. Der Zähler
+unterscheidet nicht nach Welle-Zugehörigkeit, sonst zählte er an
+wellenloser Arbeit vorbei, und eine Beobachtung, die überwiegend dort
+auftritt, erreichte die Schwelle nie. Wer die Antwort „gar nicht" gibt, hat den zweiten Teil der
+Regel übersehen: wellenlos heißt nicht wächterlos.
+
+**Typischer Fehlschluss:** „Ein Slice ist zu klein für eine Welle."
+Das ist ein Größen-Argument und trifft zufällig richtig. Es versagt
+beim Gegenfall — ein einzelner Slice, dessen Abschluss zusätzlich einen
+grünen Replay-Lauf gegen das Golden Set verlangt, *ist* eine Welle,
+weil diese Bedingung repo-weit ist und in keiner DoD steht.
+
 ### (Analysieren) Drei grid-gym-Ereignisse Welle/Meilenstein/Release zuordnen
 
 Zuordnung mit Trigger und Begründung pro Ereignis:
@@ -207,6 +235,23 @@ Modellierung:
 - Welle 2 deklariert in ihrem Plan: `Voraussetzung: Welle 1, Trace-Format-Vertrag (ADR-7)`.
 - ADR-7 dokumentiert den Vertrag und nennt Welle 2 als Konsument.
 - Wenn Welle 1 das Format ändern muss, ist das ein ADR-Update (ADR-7 superseded), und Welle 2 *muss* angepasst werden — als eigener Slice in Welle 2 oder als Carveout.
+
+### Welle oder keine Welle — vier Vorhaben (Analysieren — LZ 2)
+
+| Vorhaben | Entscheidung | Die Bedingung über den DoDs |
+|---|---|---|
+| (a) veralteter Tool-Pin nachziehen | **ohne Welle** | keine — der Trigger schriebe die DoD des Slice ab |
+| (b) zweite Zielsprache, drei Slices, die zusammen erst Sinn ergeben | **Welle** | der **Cross-Language-Konformitätslauf** — er vergleicht die neue Sprache gegen die bestehenden und steht in keiner der drei Sprach-DoDs. „Alle drei in `done/`" allein wäre *nicht* das Mehr: das ist bloß die Konjunktion der DoDs |
+| (c) Review-Finding, genau eine Korrektur | **ohne Welle** | keine — reaktiv, ein Slice, Trigger wäre Abschrift |
+| (d) ein Slice + grüner Replay-Lauf gegen das Golden Set | **Welle** | der Replay-Lauf ist repo-weit und steht in keiner DoD |
+
+Maßstab: Die Begründung nennt in jedem Fall *die Bedingung* — oder
+ihr Fehlen. Der häufigste Fehler bei (b) ist, „drei Slices" als Bedingung
+auszugeben: Die Konjunktion der DoDs liegt bei *jedem* Mehr-Slice-Bündel
+automatisch vor und ist deshalb nie das *Mehr*. Wer bei (b) „drei Slices, also Welle" schreibt und bei (d)
+„nur ein Slice, also keine Welle", hat die Slice-Zahl angewandt, nicht
+das Kriterium — und liegt bei (d) falsch. Fall (d) ist die Probe: Größe
+entscheidet nicht, der Trigger entscheidet.
 
 ### Welle über Schätzung bewerten (Bewerten — LZ 3)
 
