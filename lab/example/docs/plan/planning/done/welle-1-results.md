@@ -34,14 +34,9 @@ einer Lastenheft-Version und hat damit bereits eine `LH-*`-ID.
 
 ## Beobachtungen unter Schwelle
 
-Übernahme in die nächste Closure, dort hochzählen. Bei 3× wandert der
-Eintrag nach oben in die Steering-Loop-Einträge.
-
-| Beobachtung (stabile Bezeichnung) | Betroffene Sub-Area | Zähler | Belege |
-|---|---|---|---|
-| Golden-Set-Case ohne Boundary-Anteil aufgenommen | Test-Infrastruktur | 2× | slice-005, slice-011 |
-| Golden-Set deckt keine Gleichstands-Eingaben ab | Test-Infrastruktur | 1× | slice-009 (§6, Ausgang „weiter offen") |
-| ADR-Bezug im Commit vergessen, im Review nachgetragen | Spec-Schreibung | 2× | slice-008, slice-012 (Finding-Klasse aus Review) |
+Der Zähler steht seit Kurs-Welle 59 als stehende Datei in
+[`../observations.md`](../observations.md) — nicht mehr hier. Was in dieser
+Welle 3× erreicht hat, steht oben unter *Steering-Loop-Einträge*.
 
 ## Folge-Slices
 

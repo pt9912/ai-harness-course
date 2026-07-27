@@ -52,6 +52,8 @@ docs/plan/planning/open/    # geplante, noch nicht gestartete Slices
 docs/plan/planning/next/    # priorisiert/eingeplant
 docs/plan/planning/in-progress/  # aktive Slices
 docs/plan/planning/done/    # abgeschlossene Slices
+docs/plan/planning/<welle-id>.md            # offene Wellen, flach (Modul 6)
+docs/plan/planning/observations.md          # Beobachtungs-Register: der Steering-Loop-Zähler
 docs/plan/planning/in-progress/roadmap.md   # Meilensteine, Wellen, aktive Welle
 docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
 docs/reviews/               # Review-Reports, ein Report pro Lauf (Modul 10)
@@ -867,8 +869,7 @@ flowchart TB
     der<br/>letzten Welle-Closure verdichten<br/>(auch wellenlose; gleiche
     zählen)"]
     V --> C{"Wie oft?"}
-    C -- "1x / 2x" --> D["Welle-Closure:<br/>Beobachtungen unter
-    Schwelle<br/>(übernehmen + hochzählen)"]
+    C -- "1x / 2x" --> D["Beobachtungs-Register<br/>observations.md<br/>(hochzählen)"]
     C -- "3x" --> E["Welle-Closure:<br/>Steering-Loop-Eintrag<br/>+ Zielort"]
 
     D --> F["Wellen-Eröffnung Schritt 2:<br/>offene Beobachtungen sichten"]

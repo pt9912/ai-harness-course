@@ -292,6 +292,66 @@ Format für vollständig hält, presst den einzelnen Slice in eine
 Pseudo-Welle oder trägt ihn unter *Aktuelle Welle* ein — bis der
 Abschnitt seitenlang ist und gleichzeitig meldet, dass keine Welle läuft.
 
+## Das Beobachtungs-Register
+
+Der Zähler des Steering Loops braucht einen Ort, der **zwischen** den Wellen
+überlebt. Er liegt als stehende Datei flach im Planning-Layout, neben den
+offenen Wellen:
+
+```text
+docs/plan/planning/observations.md
+```
+
+**Warum stehend und nicht in der Welle-Closure.** Eine Sektion, die von
+Closure zu Closure weitergereicht wird, hängt an einer ungebrochenen Kette:
+Wer die Übernahme vergisst, setzt den Zähler auf null; die erste Welle braucht
+eine Sonderregel; und wer über längere Zeit keine Welle eröffnet, hat gar
+keinen Träger. Ein fester Ort streicht alle drei Fälle — die Datei existiert ab
+Repo-Beginn, unabhängig davon, ob je eine Welle geschnitten wurde.
+
+**Form.** Fünf Spalten; die Kennung ist die erste:
+
+```markdown
+| Kennung | Beobachtung | Sub-Area | Zähler | Belege |
+|---|---|---|---|---|
+| BEO-001 | Golden-Set-Case ohne Boundary-Anteil aufgenommen | Test-Infrastruktur | 2× | slice-005, slice-011 |
+| BEO-002 | ADR-Bezug im Commit vergessen, im Review nachgetragen | Spec-Schreibung | 2× | slice-008, slice-012 |
+```
+
+**`BEO-<NNN>` ersetzt die Namens-Disziplin.** Ohne Kennung muss die
+*Bezeichnung* über Wellen hinweg wortgleich bleiben, sonst zählt man zwei
+Namen für dieselbe Sache getrennt und keiner erreicht je 3×. Mit Kennung wird
+beim Erstauftreten einmal benannt und eine ID vergeben; jedes Wiederauftreten
+zitiert die ID. Umformulierungen ändern dann nur noch das Label, nicht die
+Zählung. Das Register ist zugleich die Vergabestelle — ein Henne-Ei-Problem
+entsteht nicht.
+
+**Was Maschine kann und was nicht.** Die Steering-Loop-Einträge aus den
+`done/`-Closures lassen sich mechanisch **einsammeln** — sie tragen ein
+festes Label und ihre Herkunft ist der Dateiname. Was keine Maschine leisten
+kann, ist die Entscheidung, ob zwei Einträge *dieselbe* Beobachtung meinen;
+genau dort sitzt das Urteil, das den Zähler zählbar macht. Daraus folgt ein
+Arbeitsteilung in drei Schritten:
+
+1. **Generieren** — ein Werkzeug sammelt die Einträge aus `done/` und schlägt
+   Kandidaten samt Belegen vor.
+2. **Committen** — das Register liegt im Repo und ist lesbar, ohne es zu bauen.
+3. **Prüfen** — ein Gate vergleicht Generat gegen Committetes und schlägt bei
+   Abweichung an; ein Eintrag, der in `done/` steht und im Register fehlt,
+   fällt damit auf.
+
+*Welches* Werkzeug das ist, legt der Kurs nicht fest — das ist eine
+Repo-Entscheidung wie die Wahl des Doku-Gates. Das Muster „tool-generiert,
+committet, per Gate gegen Drift gesichert" ist dasselbe, das ein gepinntes
+Gate-Fragment im Repo hält.
+
+**Bei 3×** verlässt der Eintrag das Register nicht still: Er wandert in die
+Steering-Loop-Einträge der laufenden Welle-Closure und wird dort zur
+verkörperten Regel — mit Herkunfts-Anker
+([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
+Im Register bleibt die Zeile mit dem Vermerk stehen, wohin sie ging; gestrichen
+wird nur mit Begründung, warum die Beobachtung nicht mehr auftreten kann.
+
 ## Die Wellen-Eröffnungs-Prozedur
 
 Die Closure-Seite ist unten in fünf Schritten ausbuchstabiert — die
@@ -306,8 +366,8 @@ weglassen:
    und im Slice-Plan ([Modul 9](../03-agenten/modul-09-implementierung.md))
    — was nicht ausdrücklich ausgeschlossen ist, wandert im Zweifel in die
    Welle und dehnt sie, bis der Closure-Trigger unerreichbar wird.
-2. **Offene Beobachtungen der letzten Closure sichten.** Die Sektion
-   *Beobachtungen unter Schwelle* aus `done/welle-<NN-1>-results.md` wird
+2. **Offene Beobachtungen sichten.** Das Register
+   [`docs/plan/planning/observations.md`](#das-beobachtungs-register) wird
    durchgegangen: Betrifft eine davon die Sub-Areas, die diese Welle
    berührt? Dann gehört sie in die Slice-Planung — entweder als Risiko im
    betroffenen Slice ([Modul 5 §Sub-Area-Modus-Begründung](modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen))
@@ -373,7 +433,8 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    durchgegangen und **verdichtet**, nicht aus dem Gedächtnis
    zusammengetragen: gleiche Beobachtungen zusammenfassen und zählen ·
    was 3× erreicht → *Steering-Loop-Einträge* · was darunter bleibt →
-   *Beobachtungen unter Schwelle* · Risiken mit Ausgang „weiter offen"
+   bleibt im **Beobachtungs-Register** stehen und wird dort hochgezählt
+   (§Das Beobachtungs-Register) · Risiken mit Ausgang „weiter offen"
    ([Modul 5](modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst))
    ebenfalls dorthin. **Ohne diesen Lese-Schritt ist der Slice-Lerneintrag
    selbst write-only** — und die Zählung gar nicht durchführbar, denn ob
@@ -390,13 +451,13 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    ([Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md)).
    Ziel-Form: [`/lab/templates/docs/plan/planning/welle-results.template.md`](../../../lab/templates/docs/plan/planning/welle-results.template.md).
 
-   **Warum „Beobachtungen unter Schwelle" ein eigener Pflichtteil ist.** Der
+   **Warum der Zähler ein eigenes Artefakt ist.** Der
    Steering Loop zählt *1× notieren · 2× Symptom · 3× Lücke*
    ([`klassifikation.md`](../grundlagen/klassifikation.md#steering-loop)) —
    das setzt ein Gedächtnis über Läufe hinweg voraus. Was die Schwelle
    erreicht hat, ist bereits **verkörpert** (AGENTS-Regel, Gate, Skill) und
    wirkt von selbst weiter. Was *darunter* liegt, ist nirgends verkörpert:
-   ohne eigene Sektion versickert es in der Closure-Prosa, und der Zähler
+   ohne eigenes Register versickert es in der Closure-Prosa, und der Zähler
    fängt mit jeder Welle bei null an. Ein Fehler, der einmal pro Welle
    auftritt, wäre nach fünf Wellen eine 5×-Lücke, die niemand je als Lücke
    sieht. Die Sektion wird deshalb bei der nächsten Closure **übernommen und

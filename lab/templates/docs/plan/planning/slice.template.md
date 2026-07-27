@@ -87,11 +87,11 @@ JEDES Risiko bekommt bei Closure genau EINEN Ausgang (Baseline-Regelwerk
 `modul-05-planning-harness.md` §Offene Risiken werden bei Closure aufgelöst):
   eingetreten  -> Carveout CO-<NNN> oder Folge-Slice, ID hier eintragen
   entfallen    -> gestrichen MIT Begründung (ohne sie ist es stilles Vergessen)
-  weiter offen -> wandert in „Beobachtungen unter Schwelle" der Welle-Closure
+  weiter offen -> wandert ins Beobachtungs-Register (`../observations.md`)
 Ein Slice geht nicht nach done/, während ein Risiko ohne Ausgang dasteht.
 -->
 
-- <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-NNN | entfallen: Grund | weiter offen: → Welle-Closure>
+- <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-NNN | entfallen: Grund | weiter offen: → BEO-NNN im Register>
 
 ## 7. Closure-Notiz (nach `done/`)
 
@@ -107,8 +107,8 @@ Wird *nach* Abschluss ergänzt. Inhalt:
 - Risiken aus §6: hat jedes einen Ausgang?
 - Finding-Klassen aus dem Review dieses Slice (Summary-Zeile des
   Review-Reports): welche gehen als Beobachtung weiter? Stabile
-  Bezeichnung übernehmen, nicht umformulieren — sonst zählt der
-  Welle-Zähler zwei Namen getrennt.
+  Bezeichnung übernehmen bzw. die vorhandene `BEO-<NNN>` zitieren —
+  sonst zählt das Register zwei Namen getrennt.
 -->
 
 <!-- Erst nach Abschluss füllen. -->
@@ -130,9 +130,8 @@ Baseline-Regelwerk `grundlagen-konventionen.md` §Was ist eine Sub-Area?).
 Zu grobe Sub-Areas (*"Backend"*) vorher ausdifferenzieren — sonst trägt
 der Begründungsblock mehrere Modi vermischt.
 
-**Vorgelagert — offene Beobachtungen sichten:** Die Sektion
-*Beobachtungen unter Schwelle* der letzten Welle-Closure
-(`../done/welle-<NN>-results.md`) durchgehen: Steht eine der hier
+**Vorgelagert — offene Beobachtungen sichten:** Das Beobachtungs-Register
+(`../observations.md`) durchgehen: Steht eine der hier
 berührten Sub-Areas dort? Dann gehört der Zähler-Stand unten ins
 *Evidenz-/Diskrepanz-Risiko* — und erreicht der Eintrag mit diesem Slice
 3×, ist er keine Notiz mehr, sondern eine Lücke und braucht einen eigenen

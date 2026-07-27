@@ -48,7 +48,7 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
 - Performance-Hit der Tie-Break-Vergleichsfunktion — **Ausgang:** entfallen.
   Gemessen < 1 % gegen den Benchmark aus `evals/`, damit kein Risiko mehr.
 - Golden-Set-Cases decken keine Gleichstands-Eingaben ab — **Ausgang:**
-  weiter offen → *Beobachtungen unter Schwelle* der Welle-1-Closure
+  weiter offen → Beobachtungs-Register `BEO-002`
   (Sub-Area *Test-Infrastruktur*).
 
 ## 7. Closure-Notiz

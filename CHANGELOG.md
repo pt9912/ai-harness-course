@@ -11,6 +11,48 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 59 — 2026-07-27 · Der Steering-Loop-Zähler bekommt einen Ort, der Wellen überlebt
+
+### Hinzugefügt
+
+- **[Modul 6](kurs/de/02-planung/modul-06-roadmap.md) §Das Beobachtungs-Register.**
+  Der Zähler (*1× notieren · 2× Symptom · 3× Lücke*) liegt jetzt als stehende
+  Datei `docs/plan/planning/observations.md` — flach neben den offenen Wellen,
+  nicht mehr als Sektion in `welle-NN-results.md`.
+- **[`observations.template.md`](lab/templates/docs/plan/planning/observations.template.md)**
+  mit fünf Spalten und einer eigenen Sektion für gestrichene Einträge.
+- **`BEO-<NNN>` als Kennung.** Bisher musste die *Bezeichnung* über Wellen
+  hinweg wortgleich bleiben — das Template mahnte es in Großbuchstaben, weil es
+  bricht. Jetzt wird beim Erstauftreten einmal benannt und eine ID vergeben;
+  Wiederauftreten zitiert sie. Umformulierungen ändern nur noch das Label, nicht
+  die Zählung. Damit ist die Beobachtung die letzte zählbare Klasse im Harness,
+  die eine ID bekommt (neben `LH-*`, `ADR-*`, `MR-*`, `CO-*`, `CR-*`).
+
+### Geändert
+
+- **Warum stehend statt in der Welle-Closure.** Die bisherige Sektion wurde von
+  Closure zu Closure **übernommen** und hochgezählt. Das hängt an einer
+  ungebrochenen Kette mit drei Bruchstellen: vergessene Übernahme setzt den
+  Zähler auf null, die erste Welle braucht eine Sonderregel, und ohne Welle gibt
+  es gar keinen Träger. Der feste Ort streicht alle drei — die Datei existiert ab
+  Repo-Beginn.
+- **Arbeitsteilung benannt, Werkzeug offen gelassen:** Die Einträge aus
+  `done/`-Closures lassen sich **einsammeln** (festes Label, Herkunft = Dateiname);
+  ob zwei Einträge *dieselbe* Beobachtung meinen, entscheidet kein Werkzeug.
+  Empfohlenes Muster: generieren → committen → Gate vergleicht Generat gegen
+  Committetes. *Welches* Werkzeug, legt der Kurs nicht fest.
+- **Verzeichniskonvention:** Die flache Ebene unter `planning/` ist jetzt
+  deklariert — offene Wellen (`<welle-id>.md`) und das Register. Sie wurde
+  bislang benutzt (Modul 6, Template), stand aber in keiner Konvention.
+- **Zehn Verweise nachgezogen** — Risiko-Ausgänge in Modul 5 und
+  `slice.template.md`, der Steering-Loop-Graph in `konventionen.md`, der
+  Template-Index, beide Regelwerk-Spiegel. `welle-results.template.md` behält die
+  Sektion als **Zeiger** ohne Daten, damit ein Leser der Closure-Notiz den Zähler
+  findet.
+- **Lab:** Die drei realen Zeilen aus `welle-1-results.md` sind nach
+  `observations.md` umgezogen und haben Kennungen bekommen; `slice-009` und
+  `slice-020` verweisen auf `BEO-002` bzw. das Register.
+
 ## Welle 58 — 2026-07-27 · Discovery-Register geschlossen: eine Beobachtung unter Schwelle, kein Plan
 
 ### Geändert

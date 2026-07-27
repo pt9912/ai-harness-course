@@ -83,7 +83,7 @@ Ausgängen.**
 |---|---|---|
 | **eingetreten** | das Risiko hat sich realisiert | Carveout ([Modul 7](modul-07-carveouts.md)) oder Folge-Slice — mit ID in der Closure-Notiz |
 | **entfallen** | kann nicht mehr eintreten | gestrichen, **mit Begründung** — ohne sie ist es stilles Vergessen |
-| **weiter offen** | weder eingetreten noch entfallen | wandert in *Beobachtungen unter Schwelle* der nächsten Welle-Closure ([Modul 6](modul-06-roadmap.md#die-wellen-closure-prozedur)) |
+| **weiter offen** | weder eingetreten noch entfallen | wandert ins **Beobachtungs-Register** ([Modul 6](modul-06-roadmap.md#das-beobachtungs-register)) |
 
 Der dritte Ausgang ist der, der die Klasse rettet: Er hängt das Risiko an
 den **Zähler**, statt einen zweiten Mechanismus zu erfinden. Ein Risiko,
@@ -217,7 +217,7 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
    Code-Konformität); bei BF/Hybrid das Hauptrisiko und der Grund, warum
    das Kriterium dort die Reconciliation-Schätzung trägt.
    **Beleg-Quelle sind auch die *offenen Beobachtungen* zu dieser
-   Sub-Area** — die Sektion *Beobachtungen unter Schwelle* der letzten
+   Sub-Area** — die Sektion das Beobachtungs-Register der letzten
    Welle-Closure ([Modul 6 §Wellen-Eröffnungs-Prozedur](modul-06-roadmap.md#die-wellen-eröffnungs-prozedur)).
    Ein Eintrag, der diese Sub-Area schon zweimal getroffen hat, ist genau
    das Diskrepanz-Risiko, nach dem dieses Kriterium fragt — und wird

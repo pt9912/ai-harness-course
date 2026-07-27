@@ -62,6 +62,31 @@ verdrahtet.
 
 *Eine Roadmap ist nicht „wann?", sondern „in welcher Reihenfolge wovon?"*.
 
+### Das Beobachtungs-Register (Modul 6)
+
+Der Zähler des Steering Loops liegt als **stehende Datei** flach im
+Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
+(Ziel-Form [`../templates/docs/plan/planning/observations.template.md`](../templates/docs/plan/planning/observations.template.md)).
+
+- **Warum stehend:** Eine von Closure zu Closure übernommene Sektion hängt an
+  einer ungebrochenen Kette — vergessene Übernahme setzt den Zähler auf null,
+  die erste Welle braucht eine Sonderregel, ohne Welle gibt es keinen Träger.
+  Der feste Ort streicht alle drei Fälle.
+- **Form:** `| Kennung | Beobachtung | Sub-Area | Zähler | Belege |`.
+- **`BEO-<NNN>` ersetzt die Namens-Disziplin.** Erstauftreten benennt und
+  vergibt die Kennung; Wiederauftreten zitiert sie und erhöht den Zähler. Ohne
+  Kennung zählt eine Umformulierung als zweite Beobachtung, und keine erreicht
+  je 3×. Das Register ist zugleich die Vergabestelle.
+- **Maschine sammelt, Mensch benennt.** Die Steering-Loop-Einträge aus
+  `done/`-Closures tragen ein festes Label und lassen sich einsammeln; ob zwei
+  Einträge *dieselbe* Beobachtung meinen, entscheidet kein Werkzeug. Muster:
+  generieren → committen → Gate vergleicht Generat gegen Committetes. Welches
+  Werkzeug, ist Repo-Entscheidung.
+- **Bei 3×** wandert der Eintrag in die Steering-Loop-Einträge der laufenden
+  Welle-Closure und wird zur verkörperten Regel (mit Herkunfts-Anker). Die
+  Zeile bleibt im Register mit Vermerk stehen; gestrichen wird nur mit
+  Begründung, warum die Beobachtung nicht mehr auftreten kann.
+
 ### Wellen-Closure-Prozedur (Modul 6)
 
 Modul 5 gibt den *Slice*-Zyklus als Zustandsmaschine vor (`open/` →
@@ -76,8 +101,7 @@ Slices zuordnen. Out-of-Scope gehört dazu — dieselbe Disziplin wie im
 Lastenheft (Modul 3) und im Slice-Plan (Modul 9); was nicht ausdrücklich
 ausgeschlossen ist, dehnt die Welle, bis der Closure-Trigger unerreichbar
 wird. (2) **Offene Beobachtungen der letzten Closure sichten** —
-Sektion *Beobachtungen unter Schwelle* aus
-`done/welle-<NN-1>-results.md` durchgehen: Betrifft eine davon die
+Das Register `docs/plan/planning/observations.md` durchgehen: Betrifft eine davon die
 Sub-Areas dieser Welle, gehört sie in die Slice-Planung (Risiko im
 betroffenen Slice) oder, bei Erreichen von 3×, als eigener Slice, der die
 Lücke schließt. **Bei der ersten Welle entfällt dieser Schritt** — es gibt
@@ -119,12 +143,12 @@ dort automatisch (Modul-0-Prinzip).
    dort auftritt, erreichte die Schwelle nie. Grundlage ist §7 jeder dieser
    Dateien: durchgehen und **verdichten**, nicht aus dem Gedächtnis zusammentragen — gleiche
    Beobachtungen zusammenfassen und zählen, 3× → *Steering-Loop-Einträge*,
-   darunter → *Beobachtungen unter Schwelle*, Risiken mit Ausgang „weiter
+   darunter → bleibt im Beobachtungs-Register stehen und wird dort hochgezählt, Risiken mit Ausgang „weiter
    offen" (Modul 5) ebenfalls dorthin. Ohne diesen Lese-Schritt ist der
    Slice-Lerneintrag write-only und die Zählung nicht durchführbar.
    Closure-Notiz `done/welle-NN-results.md`
    schreiben (*was gelernt wurde*: geliefert · was funktionierte · was anders
-   lief · **Steering-Loop-Einträge** · **Beobachtungen unter Schwelle** ·
+   lief · **Steering-Loop-Einträge** · Zeiger aufs **Beobachtungs-Register** ·
    Folge-Slices (*derivativ* — der Slice selbst liegt in `open/`) ·
    Verifikation aus
    Schritt 1). Ziel-Form:

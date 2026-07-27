@@ -55,7 +55,7 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
   trägt die Aussage selbst.
 - `check-references` prüft nur `spec/`, nicht `docs/plan/adr/` — dort
   könnten dieselben Zeiger unbemerkt stehen — **Ausgang:** weiter offen →
-  *Beobachtungen unter Schwelle* der **nächsten** Welle-Closure
+  das **Beobachtungs-Register** (`../observations.md`)
   (Sub-Area *Spec-Schreibung*). Auch ein wellenloser Slice liefert
   dorthin ab: Die Welle-Closure verdichtet alle Slice-Closures seit der
   letzten Welle-Closure, nicht nur die der Welle.

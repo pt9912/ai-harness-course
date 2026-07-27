@@ -50,6 +50,8 @@ docs/plan/planning/open/    # geplante, noch nicht gestartete Slices
 docs/plan/planning/next/    # priorisiert/eingeplant
 docs/plan/planning/in-progress/  # aktive Slices
 docs/plan/planning/done/    # abgeschlossene Slices
+docs/plan/planning/<welle-id>.md            # offene Wellen, flach (Modul 6)
+docs/plan/planning/observations.md          # Beobachtungs-Register: der Steering-Loop-Zähler
 docs/plan/planning/in-progress/roadmap.md   # Meilensteine, Wellen, aktive Welle
 docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
 docs/reviews/               # Review-Reports, ein Report pro Lauf (Modul 10)

@@ -67,36 +67,23 @@ Steering-Loop-Regeln.
 ## Beobachtungen unter Schwelle
 
 <!--
-Der Zähler des Steering Loops (1x notieren · 2x Symptom · 3x Lücke).
-Diese Sektion wird aus der VORHERIGEN Closure-Notiz ÜBERNOMMEN und
-hochgezählt — nicht neu geschrieben.
+NICHT MEHR HIER PFLEGEN. Der Zaehler lebt seit Kurs-Welle 59 als stehende
+Datei: `docs/plan/planning/observations.md` (Ziel-Form
+[`observations.template.md`](observations.template.md), Regeln im
+Baseline-Regelwerk `modul-06-roadmap.md` §Das Beobachtungs-Register).
 
-ERSTE WELLE: es gibt keine Vorgängerin. Dann wird die Sektion frisch aus ALLEN
-bis dahin geschlossenen Slice-Closures befüllt — auch den wellenlosen (Schritt 3:
-„Grundlage sind die Closure-Notizen aller Slices, die seit der letzten
-Welle-Closure nach done/ gewandert sind"; bei der ersten Welle heißt das
-„seit Repo-Beginn"). Ab der zweiten Welle gilt die
-Übernahme-Regel. Ohne sie fängt der Zähler mit jeder
-Welle bei null an, und ein Fehler, der einmal pro Welle auftritt, wird
-nie als Lücke sichtbar.
+Grund: Eine hier gepflegte Sektion muss von Closure zu Closure UEBERNOMMEN
+werden. Wer das vergisst, setzt den Zaehler auf null; die erste Welle braucht
+eine Sonderregel; und ohne Welle gibt es gar keinen Traeger. Der stehende Ort
+streicht alle drei Faelle.
 
-Regeln:
-- Erreicht ein Eintrag 3x, wandert er nach oben in die
-  Steering-Loop-Einträge und verlässt diese Liste.
-- Eintraege verfallen nicht von selbst. Wer einen streicht, schreibt
-  dazu, warum er nicht mehr auftreten kann (Ursache beseitigt, Sub-Area
-  entfallen) — sonst ist es stilles Vergessen.
-- Die Bezeichnung muss über Wellen hinweg STABIL sein, sonst zaehlt man
-  zwei Namen fuer dieselbe Sache getrennt und keiner erreicht je 3x.
+Diese Sektion bleibt als ZEIGER, damit ein Leser der Closure-Notiz den Zaehler
+findet — sie traegt keine Daten mehr.
 -->
 
-| Beobachtung (stabile Bezeichnung) | Betroffene Sub-Area | Zähler | Belege |
-|---|---|---|---|
-| <kurze, gleichbleibende Bezeichnung> | <Sub-Area> | 1× / 2× | <slice-NNN> |
-| <aus Slice-§6 übernommenes offenes Risiko> | <Sub-Area> | 1× | <slice-NNN> |
-
-<!-- Keine offenen Beobachtungen? Dann "— keine —" eintragen, nicht die
-     Sektion löschen: die leere Liste ist die Aussage. -->
+Der Zähler steht in [`../observations.md`](../observations.md).
+Was in dieser Welle **3×** erreicht hat, steht oben unter
+*Steering-Loop-Einträge*.
 
 ## Folge-Slices
 
