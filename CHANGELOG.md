@@ -11,6 +11,30 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 57 — 2026-07-27 · Ein Trigger, der seine eigene Korrektur nicht kannte
+
+### Geändert
+
+- **Faden *Discovery-/Kandidaten-Register*: Trigger neu geschnitten.** Er lautete
+  „ein **zweites** Konsument-Repo zeigt denselben Druck unabhängig" — und zählte
+  damit die Ursprungs-Beobachtung als erste von zwei. Die stammt laut Welle 33 aus
+  einem `m-trace`-Planning-Layout-Audit und entstand **vor** der Korrektur, die
+  genau darauf hin gemacht wurde (`done/` als sanktionierte Heimat abgeschlossener
+  Nicht-Slice-Records). Eine Beobachtung von vor dem Fix belegt nicht mehr, dass
+  der Fix nicht reicht. Der Trigger fragt jetzt danach: *zeigt ein Repo den Druck
+  **nach** Welle 33?*
+- **Beleglage ausgeschrieben statt angedeutet:** eine Vor-Fix-Beobachtung
+  (`m-trace`, von hier nicht nachmessbar), eine Nach-Fix-Messung mit negativem
+  Ergebnis (Welle 56). `d-check` stand als Beleg im Faden, war aber nie die
+  Druckquelle — die Zeile las sich, als stützten zwei Repos die Verallgemeinerung.
+
+### Warum nicht geschlossen
+
+Der naheliegende Schluss wäre „ein Vor-Fix-Fall plus ein negativer Nach-Fix-Fall
+= erledigt". Er trägt nicht: Ob der Welle-33-Fix bei `m-trace` gereicht hat, ist
+von hier **nicht messbar**, und ein unbelegtes „vermutlich erledigt" wäre genau
+die Vermutung, die diese Wellen-Serie aus der Roadmap entfernt hat.
+
 ## Welle 56 — 2026-07-27 · Wie ein Faden zu prüfen ist — und der erste, der es bekommt
 
 ### Hinzugefügt
