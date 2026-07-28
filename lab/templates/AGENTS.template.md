@@ -107,10 +107,14 @@ Inline-Suppression bricht das `<suppression>-gate`. Ausnahmen leben in
 
 ### 3.3 git mv + Inhaltsänderung = zwei Commits
 
-Wenn eine Datei verschoben **und** der Inhalt umgeschrieben wird:
+Wenn eine Datei verschoben **und** der Inhalt umgeschrieben wird, sind das
+zwei Commits — der Move-Commit bleibt rein (Git erkennt R-Rename). Welcher
+zuerst kommt, sagt der Vorgang:
 
-1. `git mv source target` → eigener Commit (reiner Move, Git erkennt R-Rename).
-2. Inhalt umschreiben → zweiter Commit.
+1. Regelfall: `git mv source target` → eigener Commit, dann Inhalt umschreiben.
+2. Lifecycle-Übergang nach `done/`: erst der Inhalt (DoD-Häkchen,
+   Closure-Notiz), dann der reine `git mv` — die Notiz ist die Bedingung für
+   `done/`, nicht ihre Folge.
 
 **Begründung:** Sonst fällt die Rename-Detection unter die 50%-
 Similarity-Schwelle und `git log --follow` wird unzuverlässig.

@@ -1,6 +1,9 @@
 # Slice 020: Abwärtszeiger im Spec-Stratum entfernen
 
-**Status:** done
+**Lifecycle:** Der Zustand dieses Slice ist das Verzeichnis, in dem diese
+Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er wechselt
+nur durch `git mv` (Kurs
+[Modul 5 §Lifecycle als State Machine](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
 
 **Welle:** ohne Welle
 

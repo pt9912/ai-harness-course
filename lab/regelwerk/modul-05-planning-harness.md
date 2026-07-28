@@ -25,6 +25,14 @@ stateDiagram-v2
     end note
 ```
 
+**Der Zustand ist das Verzeichnis, nicht ein Kopffeld.** Ein `Status:`-Feld im
+Slice-Plan wäre eine zweite Quelle für denselben Zustand und driftet gegen die
+Ablage. Ein Übergang ist deshalb ein **reiner `git mv`** — Inhaltsänderungen
+stehen in einem eigenen Commit
+([Modul 9 §Hard Rules](modul-09-implementierung.md#hard-rules-repo-spezifisch)),
+bei der Closure nach `done/` in dem *davor*: DoD-Häkchen und Closure-Notiz
+sind die Bedingung dafür, dass die Datei überhaupt nach `done/` darf.
+
 **Drei Übergänge tragen eine Pflicht**, die über „Arbeit erledigt" hinausgeht.
 `in_progress → done` ist der einzige Weg nach `done` und verlangt
 *Lerneintrag* **und einen Ausgang für jedes offene Risiko**, nicht nur

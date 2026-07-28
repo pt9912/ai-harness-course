@@ -179,16 +179,19 @@ Maßstab:
 
 ### Bewege einen Slice durch alle vier Verzeichnisse
 
-Vier Commits ist die saubere Variante:
+Fünf Commits sind die saubere Variante:
 
 1. Erstelle Slice in `open/`.
 2. `git mv open/X.md next/X.md` (Prioritäts-Trigger erfüllt).
 3. `git mv next/X.md in-progress/X.md` (Start-Commit, oder Branch-Commit).
-4. `git mv in-progress/X.md done/X.md` + Closure-Notiz.
+4. DoD abhaken und Closure-Notiz schreiben — noch in `in-progress/`.
+5. `git mv in-progress/X.md done/X.md` (reiner Move).
 
 Wichtig: Reine Move-Commits (Git-Rename-Detection braucht 50 %
 Similarity, siehe Hard Rule aus grid-gym in [Modul 9](../03-agenten/modul-09-implementierung.md)).
-Inhaltliche Edits dazwischen sind eigene Commits.
+Inhaltliche Edits dazwischen sind eigene Commits — deshalb steht die
+Closure-Notiz in Schritt 4 und nicht im Move-Commit: `done/` heißt
+„Notiz vorhanden", die Notiz ist also die Bedingung des Übergangs.
 
 ### Closure-Kriterien mit Lerneintrag formulieren (Erschaffen — LZ 4)
 

@@ -162,7 +162,7 @@ Beispiele aus realen Repos (siehe
   * Kotlin: `@Suppress("...")`
   * Java: `@SuppressWarnings("...")`
   In jeder Sprache gilt: Inline-Suppression bricht das Suppression-Gate; Ausnahmen wandern in eine zentrale Konfigurations-Datei mit Begründung.
-* **git mv + Inhaltsänderung = zwei Commits** (grid-gym): erst reiner `git mv` (Git erkennt R-Rename), dann Inhalt umschreiben.
+* **git mv + Inhaltsänderung = zwei Commits** (grid-gym): Move und Inhalt nie im selben Commit — der Move-Commit bleibt rein (Git erkennt R-Rename). Welcher der beiden zuerst kommt, sagt der Vorgang: im Regelfall der Move, dann der Inhalt; beim Lifecycle-Übergang nach `done/` umgekehrt, weil `done/` „Closure-Notiz vorhanden" bedeutet und die Notiz deshalb im Commit davor steht ([Modul 5 §Lifecycle als State Machine](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
   *Begründung:* Sonst fällt die Rename-Detection unter die 50 %-Similarity-Schwelle und `git log --follow` wird unzuverlässig.
 * **Architektur ist sprach- und meilensteinfrei** (grid-gym, c-hsm-doc): `spec/architecture.md` referenziert ADRs und Modul-Pfade, aber keine Wellen, Slices oder Closure-Daten. Die zeitliche Schicht lebt in `docs/plan/planning/`.
 * **Optimierer darf nie direkt aufs Gerät schreiben** (bess-ems-Klasse): Output fließt durch Statemachine, Constraint-Limiter, Ramp-Limiter.

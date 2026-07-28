@@ -3,8 +3,6 @@
 > **Hinweis:** Dieser Slice-Plan ist **absichtlich fehlerhaft** für die
 > Übung in Modul 10. Drei Fehler sind eingebaut.
 
-**Status:** in-progress
-
 **Welle:** welle-2-qualitaet
 
 **Bezug:** LH-QA-01 (Performance)

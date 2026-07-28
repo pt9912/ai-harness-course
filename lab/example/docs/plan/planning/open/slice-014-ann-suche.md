@@ -1,5 +1,10 @@
 # Slice 014: Approximate-NN-Suche
 
+**Lifecycle:** Der Zustand dieses Slice ist das Verzeichnis, in dem diese
+Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er wechselt
+nur durch `git mv` (Kurs
+[Modul 5 §Lifecycle als State Machine](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
+
 **Welle:** welle-3-skalierung
 
 **Bezug:** LH-QA-01 (Performance), implizit ADR-0003 (Index-Format)

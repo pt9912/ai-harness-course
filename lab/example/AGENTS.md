@@ -59,8 +59,10 @@ Ausnahmen brauchen eine Begründung mit Verweis auf ADR oder Slice-ID.
 
 ### 2.3 git mv + Inhaltsänderung = zwei Commits
 
-Reine Move-Commits zuerst, dann inhaltliche Änderungen. Sonst fällt
-Git-Rename-Detection unter 50 %-Schwelle.
+Move und Inhaltsänderung nie im selben Commit — sonst fällt die
+Git-Rename-Detection unter die 50 %-Schwelle. Welcher der beiden zuerst kommt,
+sagt der jeweilige Vorgang: bei der Slice-Closure geht der Inhalt voraus (§2.8),
+sonst der Move.
 
 ### 2.4 Architektur ist sprach- und meilensteinfrei
 
@@ -84,12 +86,20 @@ zeigt auf [`docs/plan/planning/done/welle-1-results.md`](docs/plan/planning/done
 diesen Rückweg wäre beim nächsten Aufräumen nicht mehr erkennbar, welche
 Beobachtung die Regel erzwungen hat.
 
-### 2.8 Welle-Self-Close-Commit-Konvention
+### 2.8 Slice-Closure-Commit-Konvention
 
-Sobald ein Slice-Plan den Status `Done` erreicht, schließt er seine
-eigene Commit-Sequenz mit einem reinen `git mv` nach `done/`. Inhaltliche
-Folge-Edits (relative Link-Anpassung, Closure-Notiz schreiben) landen
-im **unmittelbar nachfolgenden** Commit.
+Der Zustandswechsel eines Slice **ist** der `git mv`. Ein Kopf-Feld, das den
+Lifecycle-Zustand nennt (`Status: done`), gibt es deshalb nicht — es wäre eine
+zweite Quelle für denselben Zustand. (Das `**Status:**` in §8 des Slice-Plans
+ist etwas anderes: es nennt den Sub-Area-*Modus*, nicht den Lifecycle.) Drei
+Commits, in dieser Reihenfolge:
+
+1. **Inhalt:** DoD abhaken und Closure-Notiz (§7 des Slice-Plans) schreiben — beides *vor*
+   dem Move, weil `done/` als „DoD erfüllt, gemerged, Closure-Notiz
+   vorhanden" definiert ist.
+2. **Reiner `git mv`** nach `done/`, ohne Inhaltsänderung (§2.3).
+3. **Folge-Edits** im unmittelbar nachfolgenden Commit: relative Links, die
+   sich durch die neue Verzeichnistiefe verschoben haben.
 
 ## 3. Quality Gates
 
