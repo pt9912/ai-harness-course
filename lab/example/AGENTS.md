@@ -93,25 +93,43 @@ im **unmittelbar nachfolgenden** Commit.
 
 ## 3. Quality Gates
 
-Nur Befehle, die im Makefile existieren (Stand 2026-06-02):
+Nur Befehle, die im Makefile existieren — halluzinierte Gates sind die
+häufigste Form von Harness-Lüge. Autoritativ ist `make help` (im Root und je
+Sprach-Skelett); die beiden Tabellen unten sind der Auszug, den ein Agent kennen
+muss, kein Snapshot des Makefiles. Die *Bindung* jedes Targets steht in
+[`harness/README.md` §Sensors](harness/README.md#sensors-feedback-gates), nicht hier.
+
+**Sprach-Skelett-Gates** — im jeweiligen Skelett aufzurufen; `gates`, `ci` und
+`fullbuild` reicht das Root-`Makefile` zusätzlich per `COURSE_LANG=<sprache>`
+durch, die übrigen nicht:
 
 | Target | Zweck |
 |---|---|
 | `make lint` | Linter + Suppression-Gate |
 | `make typecheck` | Statische Typprüfung |
-| `make arch-check` | Layering-Constraints aus ADR-0001 |
+| `make arch-check` | Layering-Constraints |
 | `make test` | Unit-Tests |
-| `make test-determinism` | LH-QA-02: 100 identische Läufe |
+| `make test-determinism` | 100 identische Läufe, Hash-Vergleich |
 | `make coverage-gate` | Gesamt-Coverage (bootstrap-aware) |
-| `make coverage-gate-critical` | Critical-Path-Coverage (siehe CO-001) |
+| `make coverage-gate-critical` | Critical-Path-Coverage |
 | `make gates` | alle inneren Gates (mandatory vor PR) |
 | `make ci` | gates + `test-determinism` + `coverage-gate-critical` |
 | `make fullbuild` | volle Closure inkl. Runtime-Image |
 
-(Diese Targets sind in den Sprach-Skeletten unter `go/`, `python/`,
-`kotlin/`, `java/`, `csharp/`, `cpp/` real implementiert. Das Root-`Makefile`
-reicht davon nur `gates`, `ci` und `fullbuild` per `COURSE_LANG` durch; die
-übrigen ruft man im jeweiligen Sprach-Verzeichnis auf.)
+(Alle zehn sind in den sechs Sprach-Skeletten real implementiert.)
+
+**Repo-weite Verifikation** (nur im Root, sprachunabhängig):
+
+| Target | Zweck |
+|---|---|
+| `make verify` | Closure-Pflicht + Referenz-Richtung; mit `SLICE=` zusätzlich die Slice-DoD |
+| `make verify-closure-notes` | jede Datei in `done/` trägt eine Closure-Notiz |
+| `make check-references` | Referenz-Richtung: keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise |
+| `make verify-slice SLICE=<id>` | DoD eines Slice plausibilisieren |
+| `make plan-status` | Slice-Verteilung über die Lifecycle-Verzeichnisse |
+| `make replay RUN=<set-name>` | Golden-Set-Fixture validieren — **kein Lauf**, siehe den Absatz am Ende dieses Abschnitts |
+| `make trace RUN=<name>` | Agentenlauf-Trace-Fixture ausgeben |
+| `make release` | Release-Checkliste und Runbook-Fixtures prüfen |
 
 Weder **Golden-Set-Replay** noch **Image-Scan** hängen an `ci`. Einen
 Image-Scan gibt es im Repo überhaupt nicht. Für das Golden Set existiert das
@@ -146,6 +164,7 @@ Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 
 3. Betroffene IDs identifizieren.
 4. Kleinste Änderung planen.
 5. Engsten nützlichen Sensor laufen lassen.
-6. Repo-weiten Gate-Lauf vor Handoff (`make gates`).
+6. Repo-weiten Gate-Lauf vor Handoff: `make gates` (Sprach-Skelett) **und**
+   `make verify` (Closure-Pflicht + Referenz-Richtung).
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt.
 8. Ausgeführte Sensors und verbleibende Risiken berichten.

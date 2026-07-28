@@ -66,14 +66,32 @@ Der Default-Ort für:
   "wir liefern wie".
 - **Auflösungs-Trigger:** permanent.
 
+### MR-002 — Konventions-Bindung als Sensors-Klasse
+
+**Adaption:** Die Bindung-Spalte in [`README.md` §Sensors](README.md#sensors-feedback-gates)
+darf neben den vier kanonischen Klassen und der LH-Bindung auch eine
+**Kurs-Konvention** nennen.
+
+**Begründung:** Drei Gates dieses Repos setzen Regeln durch, die weder eine
+Anforderung noch eine ADR sind, sondern Konventionen des Baseline-Regelwerks:
+`make check-references` (Referenz-Richtung), `make replay`
+(Golden-Set-Form, Modul 12) und `make release` (Release-Disziplin, Modul 16).
+Ohne eigene Klasse trügen sie entweder `—` — dann behauptet die Tabelle, sie
+setzten nichts durch — oder eine erfundene ID.
+
+**Geltungsbereich:** nur die Bindung-Spalte in `harness/README.md` §Sensors.
+
+**Datum der Adoption:** 2026-06-02.
+
 ## Zusatzklassen-Deklaration für Sensors-Bindung
 
 DocSearch nutzt neben den vier kanonischen Bindung-Klassen (ADR ·
-Carveout · Schwelle · Reproduzierbarkeit) **eine** Zusatzklasse:
+Carveout · Schwelle · Reproduzierbarkeit) **zwei** Zusatzklassen:
 
 | Klasse | Form | Bedeutung | Beispiel im Repo |
 |---|---|---|---|
 | LH-Bindung | `LH-FA-<NNN>` · `LH-QA-<NNN>` | Gate prüft direkt eine Anforderung aus `spec/lastenheft.md` | `LH-QA-02` als Bindung von `make test-determinism` (siehe [`README.md` §Sensors](README.md#sensors-feedback-gates)) |
+| Konventions-Bindung (`MR-002`) | `Kurs §<Abschnitt>` · `Modul <N> §<Abschnitt>` | Gate setzt eine Regel des Baseline-Regelwerks durch, die weder Anforderung noch ADR ist | `Kurs §Referenz-Richtung` als Bindung von `make check-references` |
 
 ## Modus-Deklaration pro Sub-Area
 
