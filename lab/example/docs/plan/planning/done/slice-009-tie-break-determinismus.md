@@ -16,7 +16,7 @@ sortiert werden (siehe Lastenheft, Spezifikation §1).
 
 ## 2. Definition of Done
 
-- [x] `internal/index/searcher.go`: Tie-Break implementiert.
+- [x] `internal/index/index.go`: Tie-Break implementiert (`sort.SliceStable` + lexikographischer Zweitschlüssel).
 - [x] `make test-determinism` läuft 100 Iterationen identische Eingabe, vergleicht Hashes.
 - [x] Doku-Update in `spec/spezifikation.md` §1 LH-FA-02.a.
 - [x] `make gates` grün.
@@ -26,9 +26,10 @@ sortiert werden (siehe Lastenheft, Spezifikation §1).
 
 | Datei / Komponente | Änderungs-Art | Begründung |
 |---|---|---|
-| `internal/index/searcher.go` | update | Sort-Closure ergänzt Tie-Break |
-| `internal/index/searcher_test.go` | update | Test mit zwei identischen Scores |
-| `Makefile` | update | `test-determinism` als eigenes Target |
+| `internal/index/index.go` | update | Sort-Closure ergänzt Tie-Break |
+| `internal/index/index_test.go` | update | Test mit zwei identischen Scores |
+| `internal/service/search_test.go` | update | Tie-Break-Reihenfolge auf Service-Ebene abgesichert |
+| `<sprache>/Makefile` | update | `test-determinism` als eigenes Target |
 | `spec/spezifikation.md` | update | §1 LH-FA-02.a Schritt 5 präzisiert |
 
 ## 4. Trigger
