@@ -78,8 +78,7 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 > **Wenn du temporäre Carveouts routiniert mit Trigger und Folge-Slice anlegst und sie bei jeder Welle-Closure auditierst, springe zu [§Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen).** Worked Example A führt die Mindestform vor (Expertise-Reversal-Schutz: das ist *nicht* der vertiefte Audit-Loop).
 
 **Ausgangssituation:** Das Coverage-Gate `coverage-gate-critical` ist
-rot. Der Index-Layer (`internal/index/`) hat 76 % statt der geforderten
-90 %. Grund: Binär-Format-Parser mit Fehlerpfaden (`E099` bei korrupter
+rot. Der Index-Layer hat 76 % statt der geforderten 80 %. Grund: Binär-Format-Parser mit Fehlerpfaden (`E099` bei korrupter
 Datei), die nur partiell durch Unit-Tests abgedeckt sind. Eine
 Property-Test-Suite wird die verbleibenden Pfade abdecken — ist aber
 erst in Welle 2 eingeplant.
@@ -99,12 +98,12 @@ temporärer Carveout, der nicht heimlich permanent werden soll, braucht
 sechs Felder:
 
 ```markdown
-# CO-001: Bootstrap-Coverage `internal/index/`
+# CO-001: Bootstrap-Coverage Index-Layer
 
 **Status:** Aktiv.
 **Datum angelegt:** 2026-05-20. **Letzte Prüfung:** 2026-06-01.
 **Betroffenes Gate:** `coverage-gate-critical`.
-**Geltungsbereich:** `internal/index/` (Index-Layer, alle Sprachen).
+**Geltungsbereich:** der Index-Layer in allen sechs Sprach-Skeletten.
 **Folge-Slice:** [`slice-013-property-tests.md`](../planning/in-progress/slice-013-property-tests.md)
 ```
 
@@ -123,7 +122,8 @@ nicht eingetreten beurteilen kann.
 Welle 2 (welle-2-qualitaet) done — Property-Test-Suite läuft 100
 Generationen und deckt die Fehlerpfade.
 
-Konkret: `internal/index/`-Coverage erreicht ≥ 90 %, geprüft in
+Konkret: die Index-Layer-Coverage erreicht ≥ 80 % — dieselbe Schwelle, die
+das Gate für kritische Layer setzt —, geprüft in
 `make coverage-gate-critical` ohne Ausnahmen.
 ```
 
@@ -133,19 +133,25 @@ ist es, was die CI prüft.
 
 **Schritt 4 — Geltungs-Konfiguration mit ID-Kommentar verdrahten.** Die
 Gate-Konfiguration *zeigt* auf den Carveout, damit der Carveout im
-`make gates`-Output nicht versteckt ist:
+Gate-Output nicht versteckt ist (`coverage-gate-critical` hängt an `make ci`):
 
 ```diff
-  # <sprache>/coverage.config
-  critical_paths:
--   exceptions: []
-+   exceptions:
-+     - "internal/index/"  # CO-001 — bis Welle 2 done
+  # <sprache>-Makefile, Target coverage-gate-critical
+- 	@echo "Critical coverage"
+- 	... --fail-under-line 80 <ganzes src>
++ 	@echo "Critical coverage — CO-001 (Index) ausgenommen bis Welle 2 done"
++ 	... --fail-under-line 80 <nur service>
 ```
 
-Der `# CO-001`-Kommentar ist nicht Kosmetik: er ist die Brücke zwischen
-Gate-Konfiguration und Carveout-Datei. Ohne ihn weiß niemand, *warum*
-diese Pfad-Ausnahme existiert.
+Die Ausnahme ist hier keine Ausschluss-Liste, sondern eine **Verengung der
+Messung** auf den nicht ausgenommenen kritischen Layer — der Mechanismus
+unterscheidet sich je Werkzeug (Paket-Auswahl, `--cov`, JaCoCo-`includes`,
+Kover-`filters`, `gcovr --filter`). Entscheidend ist nicht die Form, sondern
+dass der ID-Kommentar im Gate-Output steht.
+
+Die ID im Gate-Output ist nicht Kosmetik: Sie ist die Brücke zwischen
+Gate-Konfiguration und Carveout-Datei. Ohne sie weiß niemand, *warum* die
+Messung verengt ist.
 
 **Schritt 5 — Verifikations-Checkliste für den Auflösungs-Zeitpunkt
 hinterlegen.** Damit nach Trigger-Eintritt klar ist, was zu tun ist:
@@ -153,14 +159,16 @@ hinterlegen.** Damit nach Trigger-Eintritt klar ist, was zu tun ist:
 ```markdown
 ## Verifikation (nach Auflösung)
 
-- [ ] `internal/index/`-Coverage in allen Sprach-Skeletten ≥ 90 %.
-- [ ] Carveout-Konfiguration aus Coverage-Config entfernt.
+- [ ] Index-Layer-Coverage in allen sechs Sprach-Skeletten ≥ 80 %.
+- [ ] Die Mess-Verengung in allen Skeletten von `service` auf `service` **und**
+      Index erweitert — nicht ganz entfernt, sonst misst
+      `coverage-gate-critical` dasselbe wie `coverage-gate`.
 - [ ] `make coverage-gate-critical` grün ohne Ausnahmen.
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
 - [ ] slice-013 Closure-Notiz schließt diese Auflösung mit ein.
 ```
 
-Vier Häkchen, eines davon ein `git mv`. Auflösung ohne Verschiebung in
+Fünf Häkchen, eines davon ein `git mv`. Auflösung ohne Verschiebung in
 `done/` ist eine zweite Lüge — der Carveout wirkt "aufgelöst", liegt
 aber weiter im aktiven Verzeichnis.
 
@@ -239,8 +247,7 @@ das Schema noch frisch im Kopf hält, spart sich hier Last
 > führt dort folglich auf den Einzeldiskrepanz-Pfad und weiter zu
 > Frage 2 (Trigger erreichbar — ja: Welle-2-Property-Tests). Ein
 > echter Cluster entstünde, wenn zusätzlich `CO-002`/`CO-003` für
-> Boundary-Tests und Type-Coverage auf demselben `internal/index/`-
-> Pfad lägen; dann sprängen Frage 1 und Werkzeug-Wahl auf
+> Boundary-Tests und Type-Coverage auf demselben Index-Layer lägen; dann sprängen Frage 1 und Werkzeug-Wahl auf
 > BF-Sub-Area-Markierung um. Die Markierungs-Mechanik selbst ist im
 > Lab strukturell bereits vorhanden: [`lab/example/harness/conventions.md`](../../../lab/example/harness/conventions.md)
 > trägt einen `## Adaptions-Block` mit `MR-000` Baseline-Aussage und
@@ -248,11 +255,11 @@ das Schema noch frisch im Kopf hält, spart sich hier Last
 > neuer `MR-NNN`-Eintrag im selben Block. Konkret-Format:
 >
 > ```markdown
-> ### MR-002 — `internal/index/`-Sub-Area im Brownfield-Modus
+> ### MR-002 — Index-Layer-Sub-Area im Brownfield-Modus
 >
 > **Modus:** Brownfield bis Welle-3-Graduation.
-> **Geltungsbereich:** `internal/index/` (Index-Layer, alle Sprach-Skelette).
-> **Graduation-Trigger:** Property-Test-Suite läuft + Coverage ≥ 90 %
+> **Geltungsbereich:** der Index-Layer in allen Sprach-Skeletten.
+> **Graduation-Trigger:** Property-Test-Suite läuft + Coverage ≥ 80 %
 > über alle Pfade.
 > **Sync-Trigger:** nach Graduation einen Pointer-Eintrag in
 > `harness/README.md` §Sensors, der die Sub-Area als GF-bewertet
@@ -336,7 +343,7 @@ Closure-Notiz-Block:
 
 | Carveout | Status vorher | Status nachher | Aktion |
 |---|---|---|---|
-| CO-001 (Index-Coverage) | aktiv, Trigger Welle 2 | aufgelöst | git mv nach `done/`; coverage.config-Ausnahme entfernt |
+| CO-001 (Index-Coverage) | aktiv, Trigger Welle 2 | aufgelöst | git mv nach `done/`; Mess-Verengung im Gate auf Index erweitert |
 | CO-004 (Compose-Devmode) | aktiv, Trigger "Compose v2.20" | permanent | überführt in ADR-0014 (Devmode als bewusste Architektur) |
 | CO-005 (Lock-File-Pin) | aktiv, Letzte Prüfung 2025-12 | aktiv, geprüft | Datum 2026-06-12 nachgetragen, Folge-Slice slice-018 angelegt |
 ```

@@ -7,6 +7,7 @@
 | `make arch-check` | **ArchUnit** in JUnit |
 | `make test` | JUnit 5 |
 | `make coverage-gate` | JaCoCo mit Schwelle |
+| `make coverage-gate-critical` | JaCoCo, nur `docsearch/service/` (Profil `critical-coverage`, CO-001) |
 | `make build` | Maven + Distroless |
 
 Übergeordnet: [`../../harness/README.md`](../../harness/README.md).

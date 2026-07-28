@@ -99,4 +99,52 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- CO-001: `coverage-gate-critical` misst NUR den kritischen Layer
+         (service) gegen 80 %; der Index-Layer ist bis Welle 2 ausgenommen.
+         Analog go (./internal/service/... 80), python (src/docsearch/service
+         80) und cpp (gcovr auf src/hexagon/service/). Ohne dieses Profil
+         liefe `mvn -Pcritical-coverage` denselben 70-%-BUNDLE-Check wie
+         `coverage-gate` — ein Gate, das seine eigene Zusage nicht prüft. -->
+    <profiles>
+        <profile>
+            <id>critical-coverage</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>com/example/docsearch/service/**</include>
+                            </includes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>check</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <rule>
+                                            <element>BUNDLE</element>
+                                            <limits>
+                                                <limit>
+                                                    <counter>LINE</counter>
+                                                    <value>COVEREDRATIO</value>
+                                                    <minimum>0.80</minimum>
+                                                </limit>
+                                            </limits>
+                                        </rule>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

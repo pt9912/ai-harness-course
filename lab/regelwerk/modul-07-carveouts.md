@@ -30,14 +30,15 @@ Operative Regeln, die das Template nicht selbst erzwingt:
 - **Auflösungs-Trigger als beobachtbare, messbare Bedingung** — nicht
   „sobald wir Zeit haben", sondern eine Schwelle, die ein anderer Mensch
   ohne Rückfrage als erreicht beurteilen kann (z. B. „`internal/parser/`-
-  Coverage ≥ 90 %, geprüft in `make coverage-gate-critical` ohne
+  Coverage ≥ 80 %, geprüft in `make coverage-gate-critical` ohne
   Ausnahmen"). Der Welle-Bezug ist der Roadmap-Anker, die messbare
   Schwelle das, was die CI prüft.
-- **Gate-Konfiguration zeigt per `# CO-<NNN>`-Kommentar auf den Carveout**
-  — sonst ist die Pfad-Ausnahme im `make gates`-Output eine stille
-  Senkung ohne Begründung.
+- **Die Gate-Konfiguration nennt die `CO-<NNN>` im Gate-Output** — sonst ist
+  die Ausnahme eine stille Senkung ohne Begründung. Ob sie als
+  Ausschluss-Liste oder als Verengung der Messung umgesetzt ist, hängt am
+  Werkzeug; sichtbar sein muss sie in jedem Fall.
 - **Auflösung ist ein `git mv` nach `done/`** (plus Gate-Ausnahme
-  entfernen, `make gates` grün ohne Ausnahmen). Auflösen ohne
+  zurücknehmen, Gate grün ohne Ausnahmen). Auflösen ohne
   Verschiebung ist eine zweite Lüge: der Carveout wirkt „aufgelöst",
   liegt aber weiter im aktiven Verzeichnis.
 

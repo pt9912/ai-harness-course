@@ -13,6 +13,7 @@ Sprach-spezifischer Einstieg. Übergeordnete Quelle:
 | `make test` | `pytest` | Unit + Tie-Break |
 | `make test-determinism` | `pytest -k determinism --count=100` (pytest-repeat) | LH-QA-02 |
 | `make coverage-gate` | `pytest --cov` mit Schwelle | bootstrap-aware (70 %) |
+| `make coverage-gate-critical` | wie oben, nur `docsearch/service` | mit CO-001 (Index-Layer), 80 % |
 | `make build` | Multi-Stage Dockerfile | python-slim, nonroot |
 | `make gates` | alle obigen | mandatory vor PR |
 

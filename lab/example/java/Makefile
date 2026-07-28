@@ -41,7 +41,7 @@ coverage-gate: ## JaCoCo 70 %
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
 		mvn -q verify
 
-coverage-gate-critical:
+coverage-gate-critical: ## Critical Coverage 80 % (CO-001: index ausgenommen)
 	@echo "Critical coverage — CO-001 (index) ausgenommen"
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
 		mvn -q verify -Pcritical-coverage

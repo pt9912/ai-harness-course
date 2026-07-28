@@ -41,7 +41,7 @@ coverage-gate: ## kover, 70 %
 	$(DOCKER) run --rm --tmpfs /src/.git -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
 		sh -c 'git init -q /src >/dev/null 2>&1; gradle koverVerify'
 
-coverage-gate-critical:
+coverage-gate-critical: ## Critical Coverage 80 % (CO-001: index ausgenommen)
 	@echo "Critical coverage — CO-001 (index) ausgenommen"
 	$(DOCKER) run --rm --tmpfs /src/.git -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
 		sh -c 'git init -q /src >/dev/null 2>&1; gradle koverVerify -Pcritical=true'

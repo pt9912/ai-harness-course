@@ -7,7 +7,7 @@ nach `done/` (reiner `git mv`).
 
 | ID | Titel | Gate | Trigger | Folge-Slice |
 |---|---|---|---|---|
-| [CO-001](CO-001-index-coverage.md) | Bootstrap-Coverage `internal/index/` | `coverage-gate-critical` | Welle 2 done | slice-013 |
+| [CO-001](CO-001-index-coverage.md) | Bootstrap-Coverage Index-Layer | `coverage-gate-critical` | Welle 2 done | slice-013 |
 
 ## Aufgelöste Carveouts
 
