@@ -821,7 +821,10 @@ genug, um nicht zu verrotten. Wurde die Regel **ohne Welle** verkörpert
 ([Modul 6 §Das Beobachtungs-Register](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)),
 gibt es diese Datei nicht — dann ist der Slice die einzige auflösbare
 Herkunft, und der Anker lautet `seit slice-<NNN>`. Er löst über
-`done/slice-<NNN>.md` §7 auf, ebenfalls in einem Hop.
+`done/slice-<NNN>-<kurzer-titel>.md` §7 auf, ebenfalls in einem Hop: Die
+Nummer ist eindeutig, der Titelrest gehört zum Dateinamen
+([`slice.template.md`](../../../lab/templates/docs/plan/planning/slice.template.md)),
+und wer den Anker maschinell auflöst, sucht auf `done/slice-<NNN>-*.md`.
 
 **Ab Einführung, kein Nachrüsten.** Bestehende Regeln haben keinen
 rekonstruierbaren Ursprung mehr; `seit unbekannt` wäre eine
@@ -835,15 +838,39 @@ Closure-Notiz nach außen**, nicht von der Regel nach innen — denn von der
 Regel aus ist nicht entscheidbar, ob sie einen Anker braucht.
 
 **Ausgelöst wird durch ein Feld, nicht durch eine Sektion und nicht durch
-Prosa:** durch das Pflichtfeld **`liegt in <Pfad>`**. Es steht in
+Prosa:** durch das Pflichtfeld **`liegt in <Zielort>`**. Es steht in
 `## Steering-Loop-Einträge` jeder `welle-<NN>-results.md` und — für wellenlos
-verkörperte Regeln — in §7 jeder `done/slice-<NNN>.md`; die kanonischen Formen
-liefern `welle-results.template.md` bzw. `slice.template.md` §7. Eine bloße
-**Erwähnung** eines Pfades im Fließtext ist *kein* Zielort und löst nichts aus.
+verkörperte Regeln — in §7 jeder `done/slice-<NNN>-<kurzer-titel>.md`; die
+kanonischen Formen liefern `welle-results.template.md` bzw.
+`slice.template.md` §7.
+
+**Der Geltungsbereich ist die Sektion, nicht die Datei.** Nur innerhalb dieser
+beiden Sektionen ist `liegt in` das Feld; überall sonst sind dieselben zwei
+Wörter gewöhnliche Sprache und lösen nichts aus — die Trigger-Formulierung
+„`SL-024` liegt in `done/`" ([Modul 6](../02-planung/modul-06-roadmap.md))
+ebenso wenig wie eine bloße **Erwähnung** eines Pfades im Fließtext. Ohne
+diesen Scope wäre der Auslöser nicht disambiguierbar.
+
+**Was in den Backticks steht, ist ein Zielort, nicht immer eine Datei** — drei
+kanonische Füllungen: `AGENTS.md §<N>` (Datei + Abschnitt) ·
+`Makefile:<target>` (Datei + Make-Target) · `.harness/skills/<name>.md`
+(Datei allein). Geprüft wird dann: (1) **der Pfad existiert** — dafür trennt
+der Sensor ein Suffix ab ` §` oder ab `:` ab und prüft den Rest als Pfad;
+(2) **das Ziel trägt** `seit welle-<NN>` bzw. `seit slice-<NNN>` — bei einem
+Make-Target auf dessen Target-Zeile, bei einem Abschnitt in dessen Überschrift,
+bei einer Datei ohne Suffix irgendwo in ihr. Ohne die Abtrenn-Regel liefe die
+Make-Target-Variante rot, obwohl sie die Form erfüllt — der Sensor widerlegte
+sich selbst.
+
 Fehlt das Feld, ist der Eintrag *gezählt, nicht verkörpert* und kein Gegenstand
 der Paarung — sonst liefe der Sensor auf jeder gewöhnlichen Slice-Closure rot
-und wäre selbst das, wogegen er gebaut ist. Geprüft wird dann: (1) der Pfad
-existiert, (2) das Ziel trägt `seit welle-<NN>` bzw. `seit slice-<NNN>`. Rot bei: Regel nie geschrieben · still gelöscht ·
+und wäre selbst das, wogegen er gebaut ist. **Eine Ausnahme, die keine
+Gegenausnahme ist:** Eine *benannte Spec-Lücke* trägt kein `liegt in`, ist aber
+sehr wohl verkörpert — nur in einer versionierten Spec statt an einem Pfad. Ihr
+Gegenstück ist die `LH-*`-ID, nicht der Herkunfts-Anker; sie ist damit kein
+Gegenstand dieser Paarung, wohl aber der Register-Paarung
+([Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)) wie
+jeder andere Eintrag. Rot bei: Regel nie geschrieben · still gelöscht ·
 Anker vergessen. Das ist die Klasse *halluziniertes Gate*
 ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)),
 auf Regeln statt auf Make-Targets angewandt.
@@ -883,7 +910,7 @@ flowchart TB
     Risiko-Ausgänge"]
     B --> V["Beobachtungs-Register<br/>observations.md<br/>(neu oder Zähler +1)"]
     V --> C{"Wie oft?"}
-    C -- "3x" --> E["Verkörperung<br/>(Lese-Schritt löst aus: Welle-Closure,<br/>ohne Welle eigenständig)<br/>Steering-Loop-Eintrag + Zielort"]
+    C -- "3x" --> E["Verkörperung<br/>(Lese-Schritt löst aus: Welle-Closure,<br/>ohne Welle eigenständig)<br/>Steering-Loop-Eintrag + Pflichtfeld<br/>liegt in &lt;Zielort&gt;"]
 
     C -- "1x / 2x: bleibt offen" --> F["Wellen-Eröffnung Schritt 2:<br/>offene Beobachtungen sichten"]
     F --> G["Slice-Planung:<br/>Sub-Area-Modus-Begründung<br/>Kriterium 3"]
@@ -895,6 +922,7 @@ flowchart TB
     E -. "Anker-Paarung prüft beide Enden" .-> H
     H --> J{"Regel entfernen<br/>oder lockern?"}
     J -- "ja" --> K["Retirement-Check:<br/>Herkunft konsultieren"]
+    J -- "nein" --> I
     K --> E
 
     style V fill:#fff4d6,stroke:#d4a017

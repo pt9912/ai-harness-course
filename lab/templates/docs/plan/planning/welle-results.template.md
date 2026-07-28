@@ -39,28 +39,39 @@ Konsequenz, die daraus schon gezogen wurde (Folge-Slice, Spec-Version).
 ## Steering-Loop-Einträge
 
 <!--
-Nur Beobachtungen, die die Schwelle von 3× erreicht haben — sie sind
-jetzt VERKÖRPERT und wirken ab hier von selbst. Pro Eintrag: was wurde
-geschärft, und wo liegt es jetzt?
-Klassen: geschärfte Regel (AGENTS.md / MR-<NNN>) · neuer Sensor (Gate,
-Skill) · benannte Spec-Lücke (Lastenheft-Version, Folge-ADR).
+BEGRUENDUNG — die verbindliche FORM steht im Rumpf darunter, nicht hier.
+Dieser Kommentar wird beim Kopieren entfernt (README.md §Verwendung,
+Schritt 5).
 
-PFLICHTFELD "liegt in" fuer geschaerfte Regel und neuen Sensor: der Zielort
-ist maschinell pruefbar und bildet mit dem Herkunfts-Anker am Ziel ein PAAR —
-das Ziel muss existieren und `seit welle-<NN>` tragen. NUR dieses Feld loest
-die Anker-Paarung aus; eine benannte Spec-Luecke traegt stattdessen ihre
-`LH-*`-ID und ist kein Gegenstand der Paarung. Regel und Sensor:
-Baseline-Regelwerk `grundlagen-konventionen.md` §Herkunfts-Anker für
-Steering-Loop-Regeln.
-
-REGISTER-PAARUNG: jede genannte `BEO-<NNN>` MUSS eine Zeile in
-`../observations.md` haben — geprueft am Ende von Schritt 3.
+- Warum ein Feld und keine Prosa: Der Zielort ist maschinell pruefbar und
+  bildet mit dem Herkunfts-Anker am Ziel ein PAAR. Das Feld loest die
+  Anker-Paarung nur INNERHALB dieser Sektion aus; eine blosse Erwaehnung
+  eines Pfades im Fliesstext loest nichts aus.
+- Feld und Pfad stehen auf EINER Zeile — ein zeilenweiser Sensor greift sonst
+  nicht; die Sektionsangabe steht INNERHALB der Backticks.
+- Warum die Spec-Luecke kein `liegt in` traegt: Sie ist verkoerpert wie die
+  anderen zwei Klassen, nur nicht an einem Pfad, sondern in einer
+  versionierten Spec. Ihr Gegenstueck ist die `LH-*`-ID, nicht der
+  Herkunfts-Anker — deshalb ist sie kein Gegenstand der ANKER-Paarung. An der
+  REGISTER-Paarung nimmt sie teil wie jeder andere Eintrag.
+- Regel und Sensor: Baseline-Regelwerk `grundlagen-konventionen.md`
+  §Herkunfts-Anker für Steering-Loop-Regeln.
 -->
 
+**Regeln dieser Sektion:** Nur Beobachtungen, die im Beobachtungs-Register
+(`../observations.md`) die Schwelle **3×** erreicht haben — jeder Eintrag
+nennt seine `BEO-<NNN>`. Alle drei Klassen kommen von dort: geschärfte Regel
+(`AGENTS.md` / `MR-<NNN>`) · neuer Sensor (Gate, Skill) · benannte Spec-Lücke
+(Lastenheft-Version, Folge-ADR). Die ersten beiden tragen das Pflichtfeld
+`liegt in <Zielort>`, und das Ziel trägt `seit welle-<NN>`; die Spec-Lücke trägt
+stattdessen ihre `LH-*`-ID. Beides wird am Ende von Schritt 3 geprüft — die
+Anker-Paarung und die Register-Paarung (jede genannte `BEO-<NNN>` hat eine
+Zeile im Register).
+
 - **<Guide oder Sensor>** <geschärft/ergänzt>: <was genau>
-  — liegt in `<AGENTS.md §X | Makefile-Target | .harness/skills/…>`.
-  (Feld und Pfad stehen auf EINER Zeile — ein zeilenweiser Sensor greift sonst
-  nicht; die Sektionsangabe steht INNERHALB der Backticks.)
+  — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.
+  Auslöser: `BEO-<NNN>` (<slice-NNN>, <slice-MMM>, <slice-KKK> — 3×).
+- **Spec-Lücke** benannt: <was fehlte> — aufgelöst über <Lastenheft v<X.Y.Z> (`LH-FA-NN`) | ADR-<NNNN>>.
   Auslöser: `BEO-<NNN>` (<slice-NNN>, <slice-MMM>, <slice-KKK> — 3×).
 - <…>
 

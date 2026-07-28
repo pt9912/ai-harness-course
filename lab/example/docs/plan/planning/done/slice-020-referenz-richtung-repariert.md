@@ -28,6 +28,9 @@ Slice-Plan statt umgekehrt.
 - [x] `make check-references` grün.
 - [x] `make verify` grün.
 - [x] Closure-Notiz (siehe §7).
+- [x] Beobachtungs-Register (`../observations.md`) fortgeschrieben — `BEO-004` neu (1×), `BEO-006` neu (1×, aus dem Risiko-Ausgang §6).
+- [x] Jedes Risiko aus §6 trägt einen Ausgang.
+- [x] Ohne laufende Welle: die drei Paarungen geprüft — **nach** dem `git mv` nach `done/` (siehe §7).
 
 ## 3. Plan (vor Code)
 
@@ -67,11 +70,22 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
 entstanden — die Spec wurde „zur Nachvollziehbarkeit" um den Slice-Bezug
 ergänzt. Genau diese Bewegung kehrt die Referenz-Richtung um.
 
-**Steering-Loop-Eintrag:** noch keiner. Die Beobachtung *„Spec-Text wird
-zur Nachvollziehbarkeit um Slice-Bezüge ergänzt"* ist als `BEO-004` im Register
-eingetragen und steht bei 1×. Bei 3× wird daraus eine Regel.
+**Steering-Loop-Eintrag:** noch keiner — also **kein** Feld `liegt in`. Die
+Beobachtung *„Spec-Text wird zur Nachvollziehbarkeit um Slice-Bezüge
+ergänzt"* ist als `BEO-004` im Register eingetragen und steht bei 1×. Bei 3×
+wird daraus eine Regel; bis dahin ist der Eintrag *gezählt, nicht verkörpert*
+und kein Gegenstand der Anker-Paarung.
+
+**Beobachtungs-Register (`../observations.md`):** `BEO-004` neu angelegt
+(Sub-Area *Spec-Schreibung*, 1×, Beleg `slice-020`); `BEO-006` neu angelegt
+(1×, Beleg `slice-020`, aus dem Risiko-Ausgang §6).
 
 **Folge-Slice:** keiner.
+
+**Drei Paarungen** (ohne laufende Welle; geprüft nach dem `git mv` nach
+`done/`): (a) Anker — kein `liegt in`-Feld in dieser Sektion, also
+gegenstandslos; (b) Folge-Slice — keiner genannt; (c) Register — `BEO-004`
+und `BEO-006` haben je eine Zeile mit Beleg. Alle grün.
 
 ## 8. Sub-Area-Modus-Begründung
 

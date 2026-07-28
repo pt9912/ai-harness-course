@@ -48,7 +48,9 @@ auch bei > 100k Index-Einträgen zu halten.
 
 ## 7. Closure-Notiz
 
-<!-- Erst nach Abschluss füllen. -->
+<!-- Bei der Closure füllen — vor dem `git mv` nach `done/`, nicht danach.
+Ausnahme: die drei Paarungen werden erst danach geprüft (§2, letztes
+DoD-Item). -->
 
 ## 8. Sub-Area-Modus-Begründung
 

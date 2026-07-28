@@ -53,22 +53,26 @@ stateDiagram-v2
     end note
 ```
 
-Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
-Größen-Erkenntnis), `in_progress → open` (Blocker — meist mit
-Carveout, siehe [Modul 7](modul-07-carveouts.md)) und `in_progress → done`.
-Der einzige Übergang
-nach `done` verlangt *Lerneintrag* **und einen Ausgang für jedes offene
-Risiko** ([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)),
-nicht nur "Tests grün".
+**Drei Übergänge tragen eine Pflicht**, die über „Arbeit erledigt" hinausgeht.
+`in_progress → done` ist der einzige Weg nach `done` und verlangt
+*Lerneintrag* **und einen Ausgang für jedes offene Risiko**
+([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)), nicht nur
+"Tests grün". Die beiden **Rückführungen** `in_progress → next` (zu groß —
+zurück zur Zerlegung) und `in_progress → open` (Blocker — meist mit Carveout,
+siehe [Modul 7](modul-07-carveouts.md)) verlangen die Angabe des Grundes: Sie
+sehen wie Scheitern aus und tragen in Wahrheit die Lifecycle-Disziplin — wer
+sie nicht benutzt, schiebt still weiter.
 
 `done` ist dabei **kein Endzustand der Information**: Die Beobachtungen aus
 §7 sind bei der Slice-Closure bereits ins Beobachtungs-Register eingetragen
-(Notiz im Diagramm) und werden von dort weitergelesen — vom Lese-Schritt der
-Welle-Closure, und für wellenlos verkörperte Regeln zeigt der Herkunfts-Anker
-`seit slice-<NNN>` auf genau dieses §7 in `done/` zurück. Und am anderen
+(Notiz im Diagramm) und werden **von dort** weitergelesen — vom Lese-Schritt
+(Welle-Closure; ohne Welle löst ihn die Slice-Closure selbst aus) und vom
+Sichtungs-Schritt der Slice-Planung. Auch die Datei in `done/` bleibt Quelle:
+Für wellenlos verkörperte Regeln zeigt der Herkunfts-Anker `seit slice-<NNN>`
+auf genau dieses §7 zurück. Und am anderen
 Ende speist sich `Slice angelegt` aus derselben Quelle — §8 des
-Slice-Plans sichtet die offenen Beobachtungen im Register,
-sofern eine berührte Sub-Area in BF oder Hybrid steht. Der Lifecycle ist
+Slice-Plans sichtet die offenen Beobachtungen im Register, unabhängig vom
+Sub-Area-Modus. Der Lifecycle ist
 damit an beiden Enden an das Beobachtungs-Register gekoppelt.
 
 ### Offene Risiken werden bei Closure aufgelöst

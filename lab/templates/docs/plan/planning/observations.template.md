@@ -21,12 +21,22 @@ WER SCHREIBT: die Slice-Closure (§7), vor dem `git mv` nach done/.
 WER LIEST:    die Welle-Closure (was hat 3x erreicht -> verkoerpern) und die
               Wellen-Eroeffnung Schritt 2 (betrifft eine Beobachtung die
               Sub-Areas dieser Welle?).
-OHNE WELLE:   den Lese-Schritt loest aus, wer wellenlos arbeitet.
+OHNE WELLE:   BEIDE Leser haengen dann an der Slice-Arbeit — den Lese-Schritt
+              loest die Slice-Closure aus (was hat mit ihr 3x erreicht?), den
+              Sichtungs-Schritt die Slice-PLANUNG (`slice.template.md` §8,
+              Block "Vorgelagert — offene Beobachtungen sichten"; er haengt
+              nicht am Sub-Area-Modus und gilt auch bei reinem GF). Faellt der
+              zweite weg, hat alles unter der Schwelle keinen Leser.
 
 REGELN
 - Erstauftreten: benennen, KENNUNG vergeben (BEO-<NNN>, fortlaufend), Beleg
   eintragen. Wiederauftreten: Zaehler erhoehen, Beleg ergaenzen — die
   Bezeichnung NICHT neu formulieren, sie ist nur noch Label.
+- Ein BELEG ist eine Slice-Kennung `slice-<NNN>`, die als Datei im
+  Planning-Lifecycle aufloest (open/, next/, in-progress/, done/) —
+  nicht Freitext. Sonst ist die Belegspalte frei erfindbar und der Zaehler
+  behauptet eine Haeufigkeit, die niemand nachpruefen kann. Die Anzahl der
+  Belege MUSS dem Zaehler entsprechen.
 - Erreicht ein Eintrag 3x, wandert er in die Steering-Loop-Eintraege der
   laufenden Welle-Closure und wird dort zur verkoerperten Regel (mit
   Herkunfts-Anker seit welle-<NN>). Ohne Welle: beim eigenstaendig
@@ -42,7 +52,10 @@ MECHANISIERUNG (Repo-Entscheidung, nicht vom Kurs vorgegeben)
 Das BENENNEN und ZAEHLEN bleibt Handarbeit — ob zwei Eintraege dieselbe
 Beobachtung meinen, entscheidet kein Werkzeug. Maschinell pruefbar ist nur
 die DECKUNG: eine in done/ zitierte BEO-<NNN> hat eine Zeile hier, und jede
-Zeile hier hat einen Beleg. Muster: schreiben -> committen -> Gate prueft.
+Zeile hier hat mindestens einen Beleg. Muster: schreiben -> committen ->
+Gate prueft.
+NICHT "und umgekehrt": eine Zeile MUSS nicht in done/ zitiert sein — die
+allermeisten stehen unter der Schwelle und sind nirgends zitiert.
 -->
 
 | Kennung | Beobachtung | Sub-Area | Zähler | Belege | Stand |

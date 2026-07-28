@@ -28,7 +28,9 @@ Rule „git mv + Inhaltsänderung = zwei Commits" in
   Verzeichnis-Position, kein `Status:`-Feld. Der Welle-Plan (`<welle-id>.md`)
   liegt **flach** in `planning/`, solange die Welle läuft, und wandert bei
   Closure per `git mv` nach `done/` — neben seine
-  `welle-<NN>-results.md`. Die Lifecycle-Verzeichnisse durchläuft er nicht.
+  `welle-<NN>-results.md`. Den aktiven Durchlauf `open/` → `next/` →
+  `in-progress/` durchläuft er nicht; `done/` ist sein einziges
+  Lifecycle-Verzeichnis.
   Sequenzierungs-Autorität bleibt die Roadmap
   ([`in-progress/roadmap.md`](in-progress/roadmap.md): Meilensteine, Wellen,
   aktive Welle).

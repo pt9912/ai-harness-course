@@ -61,7 +61,12 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 - **Arbeitsteilung benannt, Werkzeug offen gelassen:** Das Urteil — *ist das
   dieselbe Beobachtung?* — fällt beim Schreiben, durch den Menschen, der die
   Kennung vergibt oder zitiert. Maschinell entscheidbar ist nur die **Deckung**:
-  eine in `done/` zitierte `BEO-<NNN>` hat eine Registerzeile und umgekehrt.
+  eine in `done/` zitierte `BEO-<NNN>` hat eine Registerzeile, und jede
+  Registerzeile trägt mindestens einen Beleg — *nicht* die Umkehrung „jede Zeile
+  ist irgendwo zitiert", denn die allermeisten stehen unter der Schwelle.
+  Der Beleg ist dabei formgebunden (`slice-<NNN>`, löst als Datei im
+  Planning-Lifecycle auf, so viele wie der Zähler behauptet) — sonst wäre die
+  Belegspalte frei erfindbar.
   Muster: schreiben → committen → Gate prüft Deckung. *Welches* Werkzeug, legt
   der Kurs nicht fest.
 - **Verzeichniskonvention:** Die flache Ebene unter `planning/` ist jetzt
@@ -84,12 +89,58 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 - **Lab:** Die drei realen Zeilen aus `welle-1-results.md` sind nach
   `observations.md` umgezogen und haben Kennungen bekommen (`BEO-001` bis
   `BEO-003`); dazu neu `BEO-004` (Lerneintrag aus `slice-020` §7), `BEO-005`
-  (der einzige reale 3×-Fall, verkörpert in `AGENTS.md` §2.7) und `BEO-006`
-  (offenes Risiko aus `slice-020` §6) — sechs Zeilen insgesamt.
+  (der einzige reale 3×-Fall, verkörpert in `AGENTS.md` §2.7), `BEO-006`
+  (offenes Risiko aus `slice-020` §6) und `BEO-007` (der Auslöser der benannten
+  Spec-Lücke) — sieben Zeilen insgesamt.
   Das Register erklärt die retrospektive
   Kennungs-Vergabe. `slice-009` und `slice-020` zitieren ihre Kennungen,
-  `welle-1-results.md` nennt `BEO-005` beim Auslöser — die Register-Paarung hält
-  damit im Vorbild.
+  `welle-1-results.md` nennt `BEO-005` und `BEO-007` beim Auslöser — die
+  Register-Paarung hält damit im Vorbild.
+- **Der Welle-Plan ist im Vorbild jetzt vertreten:** `done/welle-1-mvp.md`
+  (geschlossen, neben seiner Ergebnis-Notiz) und `welle-2-qualitaet.md` (flach,
+  aktive Welle). Ohne sie behauptete die Regel eine Pflicht, die das eigene
+  Vorbild nicht erfüllte. Der Planning-Index im Lab trägt die
+  Slice-vs-Welle-Konvention dazu.
+
+### Nachgezogen (Review-Runden 7 und 8)
+
+- **Zustands-Regel für Wellen vereinheitlicht:** `README.template.md` — der
+  Welle-Zustand ist die Verzeichnis-Position, kein `Status:`-Feld, und der
+  Welle-Plan ist nicht optional. Er durchläuft den aktiven Durchlauf
+  `open/` → `next/` → `in-progress/` **nicht**; `done/` ist sein einziges
+  Lifecycle-Verzeichnis.
+- **„Drei Übergänge" nennt drei** (Modul 5 + Spiegel): `in_progress → done`
+  ist als einziger Weg nach `done` benannt, die beiden **Rückführungen**
+  stehen daneben und behalten ihren Ausnahmecharakter.
+- **Der Auslöser der Anker-Paarung ist disambiguiert.** Das Feld `liegt in`
+  löst **nur innerhalb** von `## Steering-Loop-Einträge` bzw. Slice-§7 aus —
+  der Trigger-Sprachgebrauch „`SL-024` liegt in `done/`" aus demselben Modul
+  also nicht. In den Backticks steht ein **Zielort**, nicht immer eine Datei:
+  `AGENTS.md §<N>` · `Makefile:<target>` · `.harness/skills/<name>.md`; der
+  Sensor trennt ein Suffix ab ` §` oder `:` ab, bevor er den Pfad prüft.
+- **Die benannte Spec-Lücke ist entschieden:** Sie durchläuft das Register wie
+  die anderen zwei Lerneintrags-Klassen und trägt eine `BEO-<NNN>`. Sie ist
+  *verkörpert* — nur in einer versionierten Spec statt an einem Zielort, mit
+  der `LH-*`-ID als Gegenstück. Damit ist sie kein Gegenstand der
+  **Anker**-Paarung, sehr wohl aber der **Register**-Paarung. Die frühere
+  Zuordnung *gezählt, nicht verkörpert* traf sie fälschlich und hätte
+  verhindert, dass sie die Schwelle je erreicht.
+- **Der wellenlose Betrieb hat für jeden Vorgang einen Träger und einen
+  Moment** (Modul 6 + Spiegel, jetzt als Tabelle): Zähler und Lese-Schritt bei
+  der Slice-Closure, **Sichtungs-Schritt bei der Slice-Planung** (§8,
+  unabhängig vom Sub-Area-Modus — ohne ihn hätte alles unter der Schwelle
+  keinen Leser), Trigger-Audit bei jeder Closure, und **alle drei Paarungen
+  nach dem `git mv`**, weil sie in `done/` suchen.
+- **Der Anker `seit slice-<NNN>` löst auf `done/slice-<NNN>-<kurzer-titel>.md`
+  auf** — die reale Namensform aus `slice.template.md`, maschinell
+  `done/slice-<NNN>-*.md`. Die verkürzte Angabe traf keine einzige Datei.
+- **Die Normlast der Templates steht im Rumpf, nicht im Kommentar.**
+  `slice.template.md` §7 und `welle-results.template.md`
+  §Steering-Loop-Einträge tragen Form und Regel jetzt als Body-Zeilen; die
+  Kommentare halten nur noch die Begründung. Schritt 5 der *Verwendung*
+  entfernt alle Kommentare — was dort stand, war beim Adopter weg. Dazu ein
+  DoD-Item für die drei Paarungen und ein Ruheort-Carveout in
+  `welle.template.md`.
 
 ## Welle 58 — 2026-07-27 · Discovery-Register geschlossen: eine Beobachtung unter Schwelle, kein Plan
 

@@ -17,6 +17,7 @@ Regeln: Kurs-Regelwerk `modul-06-roadmap.md` §Das Beobachtungs-Register.
 | BEO-004 | Spec-Text wird zur Nachvollziehbarkeit um Slice-Bezüge ergänzt | Spec-Schreibung | 1× | slice-020 | offen |
 | BEO-005 | Tie-Break in sortierender Operation nicht explizit dokumentiert | Sortier-Semantik | 3× | slice-006, slice-009, slice-012 | verkörpert in `AGENTS.md` §2.7 (`seit welle-1`) |
 | BEO-006 | `check-references` prüft nur `spec/`, nicht `docs/plan/adr/` | Spec-Schreibung | 1× | slice-020 (§6, Ausgang „weiter offen") | offen |
+| BEO-007 | Grenzwert der Suche im Lastenheft nicht behandelt | Spec-Schreibung | 3× | slice-003, slice-005, slice-007 | verkörpert als benannte Spec-Lücke in Lastenheft v0.2.0 (`LH-FA-02`, `welle-1-results.md`) |
 
 ## Gestrichene Einträge
 

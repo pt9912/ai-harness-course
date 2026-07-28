@@ -25,12 +25,19 @@ stateDiagram-v2
     end note
 ```
 
-Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
-Größen-Erkenntnis), `in_progress → open` (Blocker — meist mit
-Carveout, siehe [Modul 7](modul-07-carveouts.md)) und `in_progress → done`.
-Der einzige Übergang
-nach `done` verlangt *Lerneintrag* **und einen Ausgang für jedes offene
-Risiko**, nicht nur "Tests grün".
+**Drei Übergänge tragen eine Pflicht**, die über „Arbeit erledigt" hinausgeht.
+`in_progress → done` ist der einzige Weg nach `done` und verlangt
+*Lerneintrag* **und einen Ausgang für jedes offene Risiko**, nicht nur
+"Tests grün". Die beiden **Rückführungen** `in_progress → next` (zu groß —
+zurück zur Zerlegung) und `in_progress → open` (Blocker — meist mit Carveout,
+siehe [Modul 7](modul-07-carveouts.md)) verlangen die Angabe des Grundes.
+
+`done` ist **kein Endzustand der Information**: Die Beobachtungen aus §7 sind
+bei der Slice-Closure ins Beobachtungs-Register eingetragen und werden **von
+dort** weitergelesen — vom Lese-Schritt (Welle-Closure; ohne Welle löst ihn die
+Slice-Closure selbst aus) und vom Sichtungs-Schritt der Slice-Planung (§8,
+unabhängig vom Sub-Area-Modus). Für wellenlos verkörperte Regeln zeigt der
+Herkunfts-Anker `seit slice-<NNN>` auf genau dieses §7 in `done/` zurück.
 
 ### Trigger je Lifecycle-Übergang und WIP-Limit (Modul 5)
 

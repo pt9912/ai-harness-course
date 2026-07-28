@@ -277,21 +277,33 @@ Closure-Notiz §7 wie jeder andere **und trägt seine Beobachtungen ins
 unterscheidet nicht nach Welle-Zugehörigkeit. Damit zählt
 der Steering Loop weiter vollständig und offene Risiken finden ihren Ausgang.
 
-**Was der wellenlose Betrieb selbst auslöst — und was offen bleibt.** Offen
-bleibt die **Carveout-Frist**: Sie misst in Wellen („seit > 2 Wellen aktiv",
+**Was offen bleibt.** Das ist genau eine Sache: die
+**Carveout-Frist**. Sie misst in Wellen („seit > 2 Wellen aktiv",
 [Modul 7](modul-07-carveouts.md)). Wer lange wellenlos arbeitet, dehnt sie
 damit — ein Carveout steht dann bei „0 Wellen aktiv", obwohl Monate vergangen
-sind. **Zähler und Lese-Schritt sind davon ausgenommen**: Der Zähler läuft im
-Beobachtungs-Register mit jeder Slice-Closure weiter (§Das Beobachtungs-Register),
-unabhängig davon, ob je eine Welle geschnitten wurde. Und ein Repo, in dem keine
-Welle läuft, löst den **Lese-Schritt** eigenständig aus: Erreicht ein Eintrag
-3×, wird er verkörpert wie sonst auch — der Herkunfts-Anker lautet dann
-`seit slice-<NNN>` statt `seit welle-<NN>`. Ebenso eigenständig ausgelöst
-werden der **Trigger-Audit** und **alle drei Paarungen** (a/b/c aus
-Closure-Schritt 3) — die Paarungen unmittelbar nach der Slice-Closure, die die
-zu prüfenden Einträge geschrieben hat. Ohne das bliebe ausgerechnet der einzige
-Fall ungeprüft, in dem `seit slice-<NNN>` überhaupt entsteht, und eine
-`BEO-<NNN>` ohne Registerzeile fiele nie auf.
+sind. Für sie gibt es keinen wellenlosen Ersatz-Träger; das bleibt eine
+benannte Lücke.
+
+**Was der wellenlose Betrieb selbst auslöst.** Alles, was am Slice hängt — und
+der Slice bleibt, auch wenn keine Welle läuft. Fünf Vorgänge, jeder mit dem
+Moment, der ihn auslöst:
+
+| Vorgang | Träger ohne Welle | Wann |
+|---|---|---|
+| **Zähler** | Slice-Closure §7 | vor dem `git mv` nach `done/` |
+| **Lese-Schritt** (was hat 3× erreicht → verkörpern) | Slice-Closure §7 | vor dem `git mv`; der Herkunfts-Anker lautet dann `seit slice-<NNN>` statt `seit welle-<NN>` |
+| **Sichtungs-Schritt** (offene Beobachtungen unter der Schwelle) | Slice-**Planung**, §8 *Vorgelagert — offene Beobachtungen sichten* | beim Anlegen jedes Slice, unabhängig vom Sub-Area-Modus |
+| **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
+| **Alle drei Paarungen** (a/b/c aus Closure-Schritt 3) | Slice-Closure | **nach** dem `git mv` — die Paarungen suchen in `done/`, vorher liegt die Datei dort nicht |
+
+Ohne den Lese-Schritt bliebe ausgerechnet der einzige Fall ungeprüft, in dem
+`seit slice-<NNN>` überhaupt entsteht, und eine `BEO-<NNN>` ohne Registerzeile
+fiele nie auf. Ohne den **Sichtungs-Schritt** hätte alles *unter* der Schwelle
+gar keinen Leser mehr: In einem Repo mit Wellen trägt ihn die Wellen-Eröffnung
+Schritt 2 (§Die Wellen-Eröffnungs-Prozedur) — ohne Welle findet die nicht
+statt, und das Register wäre unterhalb von 3× write-only. Und der
+**Trigger-Audit** braucht seinen Moment genauso wie die Paarungen: „eigenständig
+ausgelöst" ohne benannten Zeitpunkt ist selbst ein Trigger ohne Wächter.
 
 Der Fehlgebrauch, den diese Regel verhindert, ist beobachtet: Wer das
 Format für vollständig hält, presst den einzelnen Slice in eine
@@ -362,7 +374,12 @@ Daraus folgt eine Arbeitsteilung:
 2. **Committen** — das Register liegt im Repo und ist lesbar, ohne es zu bauen.
 3. **Prüfen** — ein Gate meldet, wenn eine in `done/` zitierte `BEO-<NNN>`
    keine Registerzeile hat oder eine Registerzeile keinen Beleg. Das ist die
-   maschinelle Hälfte der Register-Paarung (c) aus der Welle-Closure.
+   maschinelle Hälfte der Register-Paarung (c) aus der Welle-Closure. Damit die
+   zweite Hälfte mehr ist als eine Nicht-leer-Prüfung, ist der **Beleg
+   formgebunden**: eine Slice-Kennung `slice-<NNN>`, die als Datei im
+   Planning-Lifecycle auflöst, und so viele, wie der Zähler behauptet. Freitext
+   in der Belegspalte macht die Häufigkeit unüberprüfbar — der Zähler wäre dann
+   selbst eine Behauptung ohne Deckung.
 
 *Welches* Werkzeug das ist, legt der Kurs nicht fest — das ist eine
 Repo-Entscheidung wie die Wahl des Doku-Gates. Das Muster — von Hand
@@ -373,8 +390,9 @@ einen Carveout-Index oder einen ADR-Index ehrlich hält.
 Steering-Loop-Einträge der laufenden Welle-Closure und wird dort zur
 verkörperten Regel — mit Herkunfts-Anker
 ([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
-Ohne laufende Welle geschieht dasselbe beim eigenständig ausgelösten
-Lese-Schritt; der Anker lautet dann `seit slice-<NNN>`.
+Ohne laufende Welle geschieht dasselbe beim Lese-Schritt, den dann die
+Slice-Closure selbst auslöst (§Wann Arbeit eine Welle braucht); der Anker
+lautet dann `seit slice-<NNN>`.
 Im Register bleibt die Zeile mit dem Vermerk stehen, wohin sie ging; gestrichen
 wird nur mit Begründung, warum die Beobachtung nicht mehr auftreten kann.
 
@@ -400,7 +418,11 @@ weglassen:
    oder, wenn sie mit dieser Welle 3× erreicht, als eigener Slice, der die
    Lücke schließt. **Das ist der Schritt, der das Register auf der
    Planungsseite konsumiert** — ohne ihn bleibt es dort ohne Leser, und was
-   gezählt wurde, erreicht nie die Slice-Planung. **Bei der ersten Welle entfällt dieser Schritt nicht** —
+   gezählt wurde, erreicht nie die Slice-Planung. **Ohne Wellen-Betrieb trägt
+   ihn die Slice-Planung selbst** (§8 des Slice-Plans, Block *Vorgelagert —
+   offene Beobachtungen sichten*, unabhängig vom Sub-Area-Modus) — sonst hätte
+   in einem wellenlosen Repo alles unter der Schwelle keinen Leser.
+   **Bei der ersten Welle entfällt dieser Schritt nicht** —
    das Register existiert ab Repo-Beginn und ist durch die bis dahin
    geschlossenen Slices bereits gefüllt, auch die wellenlosen. Ist es leer,
    ist *das* die Antwort und wird notiert.
@@ -466,6 +488,13 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    ([Modul 1](../01-spec-und-architektur/modul-01-entwicklungszyklus.md)).
    Ziel-Form: [`/lab/templates/docs/plan/planning/welle-results.template.md`](../../../lab/templates/docs/plan/planning/welle-results.template.md).
 
+   **Und die Welle-Plan-Datei wandert per `git mv` von flach nach `done/`** —
+   neben ihre Ergebnis-Notiz. Der Zustand ist die Verzeichnis-Position, kein
+   `Status`-Feld (wie beim Slice, [Modul 5](modul-05-planning-harness.md)): die
+   aktive Welle liegt flach unter `docs/plan/planning/`, geschlossenes
+   Planungs-Material in `done/`, und die Roadmap bleibt die
+   Sequenzierungs-Autorität — so füllt sich der Ordner nicht mit Abgeschlossenem.
+
    **Warum der Zähler ein eigenes Artefakt ist.** Der
    Steering Loop zählt *1× notieren · 2× Symptom · 3× Lücke*
    ([`klassifikation.md`](../grundlagen/klassifikation.md#steering-loop)) —
@@ -478,30 +507,31 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    sieht. Deshalb steht der Zähler außerhalb der Closure, im
    Beobachtungs-Register (§Das Beobachtungs-Register): Er wird bei jeder
    Slice-Closure fortgeschrieben, nicht von Closure zu Closure kopiert.
-   **Zugleich per `git mv` die Welle-Plan-Datei von flach nach `done/`** — neben
-   ihre Ergebnis-Notiz. Der Zustand ist die Verzeichnis-Position, kein
-   `Status`-Feld (wie beim Slice, [Modul 5](modul-05-planning-harness.md)): die
-   aktive Welle liegt flach unter `docs/plan/planning/`, geschlossenes
-   Planungs-Material in `done/`, und die Roadmap bleibt die
-   Sequenzierungs-Autorität — so füllt sich der Ordner nicht mit Abgeschlossenem.
 
    **Zum Schluss alle drei Paarungen prüfen** — erst *jetzt*, weil sie die
    Einträge prüfen, die in diesem Schritt gerade entstanden sind; in
-   Schritt 2 gäbe es sie noch nicht. Alle drei folgen dem Muster *Nennung
+   Schritt 2 gäbe es sie noch nicht, und vor dem `git mv` lägen sie nicht in
+   `done/`, wo die Paarungen suchen. Alle drei folgen dem Muster *Nennung
    ohne Deckung ist eine Harness-Lüge*: (a) **Anker-Paarung** — ausgelöst
-   durch das Pflichtfeld `liegt in <Pfad>`, nicht durch die Semantik des
-   Eintrags: Wo das Feld steht, existiert der Pfad und trägt
+   durch das Pflichtfeld `liegt in <Zielort>`, nicht durch die Semantik des
+   Eintrags: Wo das Feld steht, existiert der Zielort und trägt
    `seit welle-<NN>` bzw. `seit slice-<NNN>`. Ein Eintrag **ohne** dieses
-   Feld — etwa eine benannte Spec-Lücke, die stattdessen ihre `LH-*`-ID
-   trägt — ist *gezählt, nicht verkörpert* und kein Gegenstand der Paarung
+   Feld ist *gezählt, nicht verkörpert* und kein Gegenstand der Paarung.
+   Die **benannte Spec-Lücke** ist der eine Fall, der ohne Feld trotzdem
+   verkörpert ist — nur in einer versionierten Spec statt an einem Zielort;
+   ihr Gegenstück ist die `LH-*`-ID
    ([`konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln));
    (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als
    Datei **im Planning-Lifecycle** (`open/`, `next/`, `in-progress/`,
    `done/`) — nicht nur in `open/`: bis zur Prüfung kann er bereits
    weitergewandert sein, der Zustand ist die Verzeichnis-Position.
-   (c) **Register-Paarung** — jede in einer Closure-Notiz oder in einem
-   Risiko-Ausgang genannte `BEO-<NNN>` existiert als Zeile im
-   Beobachtungs-Register. Rot heißt in allen drei Fällen: etwas wurde
+   (c) **Register-Paarung** — zwei Hälften: jede in einer Closure-Notiz oder
+   in einem Risiko-Ausgang genannte `BEO-<NNN>` existiert als Zeile im
+   Beobachtungs-Register, **und** jede Registerzeile trägt mindestens einen
+   Beleg. *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo
+   zitiert" — die allermeisten stehen unter der Schwelle und sind nirgends
+   zitiert; ein Sensor, der das verlangte, liefe auf jedem gesunden Register
+   rot. Rot heißt in allen drei Fällen: etwas wurde
    versprochen und nicht angelegt — dieselbe Klasse wie ein halluziniertes
    Gate.
 4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit

@@ -798,7 +798,8 @@ wenn sie ohne Welle verkörpert wurde, den Slice: `seit welle-<NN>` bzw.
   löst damit in einem Hop auf und bleibt grob genug, um nicht zu verrotten.
   Wurde die Regel **ohne Welle** verkörpert, gibt es diese Datei nicht; dann
   ist der Slice die einzige auflösbare Herkunft (`seit slice-<NNN>`, löst über
-  `done/slice-<NNN>.md` §7 auf).
+  `done/slice-<NNN>-<kurzer-titel>.md` §7 auf — die Nummer ist eindeutig, der
+  Titelrest gehört zum Dateinamen; maschinell also `done/slice-<NNN>-*.md`).
 - **Ab Einführung, kein Nachrüsten.** Altbestand bleibt ohne Anker;
   `seit unbekannt` wäre eine Harness-Lüge, der leere Zustand ist die
   ehrliche Information.
@@ -807,15 +808,31 @@ wenn sie ohne Welle verkörpert wurde, den Slice: `seit welle-<NN>` bzw.
 **von der Closure-Notiz nach außen**, nicht von der Regel nach innen: von
 der Regel aus ist nicht entscheidbar, ob sie einen Anker braucht.
 **Ausgelöst wird durch ein Feld, nicht durch eine Sektion und nicht durch
-Prosa:** durch das Pflichtfeld **`liegt in <Pfad>`** — in
+Prosa:** durch das Pflichtfeld **`liegt in <Zielort>`** — in
 `## Steering-Loop-Einträge` jeder `welle-<NN>-results.md` und, für wellenlos
-verkörperte Regeln, in §7 jeder `done/slice-<NNN>.md`; die kanonischen Formen
-liefern `welle-results.template.md` bzw. `slice.template.md` §7 (siehe
-Ziel-Form unten). Eine bloße Erwähnung
-eines Pfades im Fließtext ist kein Zielort. Fehlt das Feld, ist der Eintrag
-*gezählt, nicht verkörpert* und kein Gegenstand der Paarung. Geprüft wird:
-(1) der Pfad existiert, (2) das Ziel trägt `seit welle-<NN>` bzw.
-`seit slice-<NNN>`.
+verkörperte Regeln, in §7 jeder `done/slice-<NNN>-<kurzer-titel>.md`; die
+kanonischen Formen liefern `welle-results.template.md` bzw.
+`slice.template.md` §7 (siehe Ziel-Form unten).
+
+- **Geltungsbereich ist die Sektion, nicht die Datei.** Nur dort ist
+  `liegt in` das Feld; überall sonst sind es gewöhnliche Wörter und lösen
+  nichts aus — der Trigger-Sprachgebrauch „`SL-024` liegt in `done/`"
+  (Modul 6) ebenso wenig wie eine bloße Erwähnung eines Pfades im Fließtext.
+- **In den Backticks steht ein Zielort, nicht immer eine Datei** — drei
+  kanonische Füllungen: `AGENTS.md §<N>` · `Makefile:<target>` ·
+  `.harness/skills/<name>.md`.
+- **Geprüft wird:** (1) der Pfad existiert — dafür wird ein Suffix ab ` §`
+  oder ab `:` abgetrennt und der Rest als Pfad geprüft; (2) das Ziel trägt
+  `seit welle-<NN>` bzw. `seit slice-<NNN>` — beim Make-Target auf dessen
+  Target-Zeile, beim Abschnitt in dessen Überschrift, bei einer Datei ohne
+  Suffix irgendwo in ihr.
+- **Fehlt das Feld**, ist der Eintrag *gezählt, nicht verkörpert* und kein
+  Gegenstand der Paarung. Ausnahme ohne Gegenausnahme: Eine **benannte
+  Spec-Lücke** trägt kein `liegt in` und ist trotzdem verkörpert — in einer
+  versionierten Spec statt an einem Zielort. Ihr Gegenstück ist die
+  `LH-*`-ID; an der Register-Paarung (Modul 6) nimmt sie teil wie jeder
+  andere Eintrag.
+
 Rot bei: Regel nie geschrieben · still gelöscht · Anker vergessen —
 dieselbe Klasse wie ein halluziniertes Gate
 ([Modul 13](modul-13-quality-gates.md)).
@@ -837,7 +854,7 @@ Frage („ist der Grund entfallen?", nicht „darf ich?"). Er ist der
 **Konsument** des Ankers; ohne ihn wäre der Anker eine zweite
 write-only-Ablage.
 
-Ziel-Form des Eintrags mit dem Pflichtfeld `liegt in <Pfad>` — zwei Orte, zwei
+Ziel-Form des Eintrags mit dem Pflichtfeld `liegt in <Zielort>` — zwei Orte, zwei
 Vorlagen: für die Welle-Closure
 [`../templates/docs/plan/planning/welle-results.template.md`](../templates/docs/plan/planning/welle-results.template.md),
 für wellenlos verkörperte Regeln

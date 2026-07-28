@@ -105,7 +105,12 @@ autoritativ, was gerade läuft.
 
 **Wo der Steering-Loop-Eintrag landet:** im **Beobachtungs-Register**
 (`docs/plan/planning/observations.md`) — eingetragen bei der
-Slice-Closure, unabhängig von jeder Welle. Der Zähler
+Slice-Closure, unabhängig von jeder Welle. **Gelesen** wird er bei der
+nächsten Welle-Closure (was hat 3× erreicht → verkörpern); läuft gar keine
+Welle, löst die Slice-Closure den Lese-Schritt selbst aus und der
+Herkunfts-Anker lautet `seit slice-<NNN>`. Beide Hälften gehören zur
+Antwort — eintragen ohne benannten Leser wäre genau die Ablage, gegen die
+das Register gebaut ist. Der Zähler
 unterscheidet nicht nach Welle-Zugehörigkeit, sonst zählte er an
 wellenloser Arbeit vorbei, und eine Beobachtung, die überwiegend dort
 auftritt, erreichte die Schwelle nie. Wer die Antwort „gar nicht" gibt, hat den zweiten Teil der
@@ -293,11 +298,18 @@ getrennt.
 **(b) Nein.** Die Slice-Closure trägt ein, unabhängig von jeder Welle. Genau
 dafür steht das Register außerhalb der Welle-Closure.
 
-**(c)** Bis zur nächsten Welle-Closure steht der Eintrag bei 3× und ist
-**gezählt, aber nicht verkörpert**. Erst der Lese-Schritt der Closure macht
-daraus eine Regel in `AGENTS.md`, einem Gate, einem Skill oder einer `MR-*`,
-mit Herkunfts-Anker `seit welle-<NN>`. Wer beides gleichsetzt, hält eine Notiz
-für einen Wächter.
+**(c)** Bis zum nächsten **Lese-Schritt** steht der Eintrag bei 3× und ist
+**gezählt, aber nicht verkörpert**. Erst er macht daraus eine Regel in
+`AGENTS.md`, einem Gate, einem Skill oder einer `MR-*`. Wer beides
+gleichsetzt, hält eine Notiz für einen Wächter.
+
+Wo der Lese-Schritt liegt, hängt an (b): Gehört der Slice zu einer Welle,
+liest deren Closure, und der Herkunfts-Anker lautet `seit welle-<NN>`.
+Gehört er — wie hier — zu **keiner**, gibt es keine Welle-Closure, auf die
+zu warten wäre; die Slice-Closure löst den Lese-Schritt selbst aus, und der
+Anker lautet `seit slice-<NNN>`. Wer hier ausnahmslos „bis zur nächsten
+Welle-Closure" antwortet, hat den wellenlosen Zweig übersehen, den (b)
+gerade eröffnet hat.
 
 Maßstab: Die Antwort trennt *eintragen* (Slice-Closure) von *lesen*
 (Welle-Closure) und benennt, dass die Verkörperung am **Lese-Schritt** hängt, nicht am Zähler.

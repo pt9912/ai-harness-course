@@ -35,7 +35,18 @@ Form, die Regeln der Inhalt.
 - Die Belege eines geschlossenen wellenlosen Slice stehen in seiner Datei und in git; das Closure-Log der Roadmap ist für Wellen.
 - **Vorwärts-Blick:** „was kommt als Nächstes" beantwortet `next/` (*priorisiert/eingeplant*, Modul 5); der Übergang `open→next` ist die Priorisierungs-Entscheidung. Wellenlose Arbeit steht dabei nicht schlechter da als wellengebundene: Eine Reihenfolge *einzelner Slices* kennt der Harness nicht. Die Roadmap ordnet **Wellen**; die Spalte *Wichtigste Slices* nennt Inhalt, keinen Rang, und innerhalb einer Welle sind die Slices ein Bündel, das gemeinsam schließt. Eine Rangliste neben der Roadmap wäre eine Sortierung, die es für Slices nie gab — und die zweite Quelle, die die Regel oben vermeidet.
 - **Wellenlos heißt nicht wächterlos.** Der Slice schreibt seine Closure-Notiz §7 wie jeder andere und trägt seine Beobachtungen ins **Beobachtungs-Register** ein — der Zähler unterscheidet nicht nach Welle-Zugehörigkeit. Damit zählt der Steering Loop weiter vollständig und offene Risiken finden ihren Ausgang.
-- **Was offen bleibt:** Die **Carveout-Frist** misst in Wellen („seit > 2 Wellen aktiv", Modul 7). Wer lange wellenlos arbeitet, dehnt sie — ein Carveout steht dann bei „0 Wellen aktiv", obwohl Monate vergangen sind. Zähler und Lese-Schritt sind davon ausgenommen. Wer nur wellenlos arbeitet, löst den Trigger-Audit **und alle drei Paarungen** (a/b/c aus Closure-Schritt 3) eigenständig aus — die Paarungen unmittelbar nach der Slice-Closure, die die zu prüfenden Einträge geschrieben hat. Sonst bliebe ausgerechnet der einzige Fall ungeprüft, in dem `seit slice-<NNN>` überhaupt entsteht.
+- **Was offen bleibt:** Die **Carveout-Frist** misst in Wellen („seit > 2 Wellen aktiv", Modul 7). Wer lange wellenlos arbeitet, dehnt sie — ein Carveout steht dann bei „0 Wellen aktiv", obwohl Monate vergangen sind. Einen wellenlosen Ersatz-Träger gibt es dafür nicht.
+- **Was der wellenlose Betrieb selbst auslöst:** alles, was am Slice hängt — mit benanntem Moment, sonst ist es ein Trigger ohne Wächter.
+
+  | Vorgang | Träger ohne Welle | Wann |
+  |---|---|---|
+  | **Zähler** | Slice-Closure §7 | vor dem `git mv` nach `done/` |
+  | **Lese-Schritt** (was hat 3× erreicht → verkörpern) | Slice-Closure §7 | vor dem `git mv`; Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
+  | **Sichtungs-Schritt** (offene Beobachtungen unter der Schwelle) | Slice-**Planung**, §8 *Vorgelagert — offene Beobachtungen sichten* | beim Anlegen jedes Slice, unabhängig vom Sub-Area-Modus |
+  | **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
+  | **Alle drei Paarungen** (a/b/c aus Closure-Schritt 3) | Slice-Closure | **nach** dem `git mv` — sie suchen in `done/` |
+
+  Ohne den Lese-Schritt bliebe der einzige Fall ungeprüft, in dem `seit slice-<NNN>` entsteht. Ohne den Sichtungs-Schritt hätte alles *unter* der Schwelle keinen Leser: In einem Repo mit Wellen trägt ihn die Wellen-Eröffnung Schritt 2 — ohne Welle findet die nicht statt.
 - **Einzige Berührung mit der Roadmap:** Liefert wellenlose Arbeit den letzten Beleg eines Meilensteins, bleibt die Spalte `Welle(n)` leer (`—`) und der Beleg steht als Slice-ID daneben — Beleg für eine externe Bedingung, nicht Zustand.
 
 ### Roadmap-Struktur: fünf Abschnitte (Modul 6)
@@ -78,10 +89,11 @@ Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
   Kennung zählt eine Umformulierung als zweite Beobachtung, und keine erreicht
   je 3×. Das Register ist zugleich die Vergabestelle.
 - **Wer schreibt, wer liest:** Eingetragen wird bei der **Slice-Closure** — neuer Eintrag mit neuer `BEO-<NNN>` oder Zähler erhöhen und Beleg ergänzen. Das macht den Zähler von der Welle unabhängig: Er läuft mit jedem geschlossenen Slice. Die Welle-Closure *liest* nur noch, was 3× erreicht hat.
-- **Mensch urteilt, Maschine prüft Deckung.** Das Urteil *ist das dieselbe Beobachtung?* fällt beim Schreiben (Kennung vergeben oder zitieren). Maschinell entscheidbar ist nur die Deckung: ob eine in `done/` zitierte `BEO-<NNN>` eine Registerzeile hat und umgekehrt — die maschinelle Hälfte der Register-Paarung (c). Muster: schreiben → committen → Gate prüft. Welches Werkzeug, ist Repo-Entscheidung.
+- **Mensch urteilt, Maschine prüft Deckung.** Das Urteil *ist das dieselbe Beobachtung?* fällt beim Schreiben (Kennung vergeben oder zitieren). Maschinell entscheidbar ist nur die Deckung: ob eine in `done/` zitierte `BEO-<NNN>` eine Registerzeile hat **und ob jede Registerzeile mindestens einen Beleg trägt** — die maschinelle Hälfte der Register-Paarung (c). *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo zitiert": Die allermeisten stehen unter der Schwelle und sind nirgends zitiert. Muster: schreiben → committen → Gate prüft. Welches Werkzeug, ist Repo-Entscheidung.
+- **Der Beleg ist formgebunden:** eine Slice-Kennung `slice-<NNN>`, die als Datei im Planning-Lifecycle auflöst — und so viele, wie der Zähler behauptet. Freitext macht die Häufigkeit unüberprüfbar; der Zähler wäre dann selbst eine Behauptung ohne Deckung.
 - **Bei 3×** wandert der Eintrag in die Steering-Loop-Einträge der laufenden
   Welle-Closure und wird zur verkörperten Regel (mit Herkunfts-Anker) — ohne
-  Welle beim eigenständig ausgelösten Lese-Schritt, Anker `seit slice-<NNN>`. Die
+  Welle beim Lese-Schritt, den dann die Slice-Closure selbst auslöst, Anker `seit slice-<NNN>`. Die
   Zeile bleibt im Register mit Vermerk stehen; gestrichen wird nur mit
   Begründung, warum die Beobachtung nicht mehr auftreten kann.
 
@@ -106,7 +118,9 @@ Lücke schließt. **Bei der ersten Welle entfällt dieser Schritt nicht** — da
 ab Repo-Beginn und ist durch die bis dahin geschlossenen Slices bereits gefüllt,
 auch die wellenlosen. Ist es leer, ist das die Antwort und wird notiert. Das
 ist der Schritt, der das Register auf der Planungsseite konsumiert; ohne ihn
-bleibt es dort ohne Leser. (3) Welle-Datei flach
+bleibt es dort ohne Leser. **Ohne Wellen-Betrieb trägt ihn die Slice-Planung
+selbst** (§8 des Slice-Plans, Block *Vorgelagert — offene Beobachtungen
+sichten*, unabhängig vom Sub-Area-Modus). (3) Welle-Datei flach
 anlegen (`docs/plan/planning/<welle-id>.md`, Ziel-Form
 [`../templates/docs/plan/planning/welle.template.md`](../templates/docs/plan/planning/welle.template.md))
 und in der Roadmap als *Aktuelle Welle* eintragen.
@@ -147,24 +161,29 @@ dort automatisch (Modul-0-Prinzip).
    Schritt 1). Ziel-Form:
    [`../templates/docs/plan/planning/welle-results.template.md`](../templates/docs/plan/planning/welle-results.template.md).
    Ohne Lerneintrag ist die Welle nicht „fertig", nur „weg"
-   (Modul 1). **Zugleich per `git mv` die Welle-Plan-Datei von flach nach
+   (Modul 1). **Und die Welle-Plan-Datei wandert per `git mv` von flach nach
    `done/`** — neben ihre Ergebnis-Notiz; der Zustand ist die
    Verzeichnis-Position, kein `Status`-Feld (wie beim Slice). Aktive Welle
    flach, geschlossene in `done/`, die Roadmap bleibt Sequenzierungs-Autorität.
    **Zum Schluss alle drei Paarungen prüfen** — erst jetzt, weil sie die gerade
-   entstandenen Einträge prüfen; in Schritt 2 gäbe es sie noch nicht.
-   (a) **Anker-Paarung** — ausgelöst durch das Pflichtfeld `liegt in <Pfad>`,
-   nicht durch die Semantik des Eintrags: Wo das Feld steht, existiert der Pfad
-   und trägt `seit welle-<NN>` bzw. `seit slice-<NNN>`. Ein Eintrag **ohne**
-   dieses Feld — etwa eine benannte Spec-Lücke, die stattdessen ihre `LH-*`-ID
-   trägt — ist *gezählt, nicht verkörpert* und kein Gegenstand der Paarung
+   entstandenen Einträge prüfen; in Schritt 2 gäbe es sie noch nicht, und vor
+   dem `git mv` lägen sie nicht in `done/`, wo die Paarungen suchen.
+   (a) **Anker-Paarung** — ausgelöst durch das Pflichtfeld `liegt in <Zielort>`,
+   nicht durch die Semantik des Eintrags: Wo das Feld steht, existiert der
+   Zielort und trägt `seit welle-<NN>` bzw. `seit slice-<NNN>`. Ein Eintrag
+   **ohne** dieses Feld ist *gezählt, nicht verkörpert* und kein Gegenstand der
+   Paarung. Die **benannte Spec-Lücke** ist der eine Fall, der ohne Feld
+   trotzdem verkörpert ist — in einer versionierten Spec statt an einem
+   Zielort; ihr Gegenstück ist die `LH-*`-ID
    ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker));
    (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als Datei
    **im Planning-Lifecycle** (`open/`, `next/`, `in-progress/`, `done/`), nicht
    nur in `open/`: bis zur Prüfung kann er weitergewandert sein.
-   (c) **Register-Paarung** — jede in einer Closure-Notiz oder einem
-   Risiko-Ausgang genannte `BEO-<NNN>` existiert als Zeile im
-   Beobachtungs-Register. Rot heißt in allen drei Fällen: etwas wurde
+   (c) **Register-Paarung** — zwei Hälften: jede in einer Closure-Notiz oder
+   einem Risiko-Ausgang genannte `BEO-<NNN>` existiert als Zeile im
+   Beobachtungs-Register, **und** jede Registerzeile trägt mindestens einen
+   Beleg. *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo zitiert".
+   Rot heißt in allen drei Fällen: etwas wurde
    versprochen und nicht angelegt.
 4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
