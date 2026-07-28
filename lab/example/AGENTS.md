@@ -105,11 +105,20 @@ Nur Befehle, die im Makefile existieren (Stand 2026-06-02):
 | `make coverage-gate` | Gesamt-Coverage (bootstrap-aware) |
 | `make coverage-gate-critical` | Critical-Path-Coverage (siehe CO-001) |
 | `make gates` | alle inneren Gates (mandatory vor PR) |
-| `make ci` | gates + Replay-Lauf + Image-Scan |
+| `make ci` | gates + `test-determinism` + `coverage-gate-critical` |
 | `make fullbuild` | volle Closure inkl. Runtime-Image |
 
 (Diese Targets sind in den Sprach-Skeletten unter `go/`, `python/`,
-`kotlin/`, `java/`, `csharp/`, `cpp/` real implementiert.)
+`kotlin/`, `java/`, `csharp/`, `cpp/` real implementiert. Das Root-`Makefile`
+reicht davon nur `gates`, `ci` und `fullbuild` per `COURSE_LANG` durch; die
+übrigen ruft man im jeweiligen Sprach-Verzeichnis auf.)
+
+Weder **Golden-Set-Replay** noch **Image-Scan** hängen an `ci`. Einen
+Image-Scan gibt es im Repo überhaupt nicht. Für das Golden Set existiert das
+Root-Target `make replay RUN=<set-name>` (der Name unterhalb
+`evals/golden/`, z. B. `welle-1-baseline`); es prüft, ob das Golden-Set-Verzeichnis vollständig ist (Manifest mit
+`model:`- und `runtime:`-Block, `inputs/`, `expectations/`, mindestens drei
+Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 12).
 
 ## 4. Dokumentations-Regeln
 

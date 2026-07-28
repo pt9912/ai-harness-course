@@ -16,7 +16,12 @@ Terminen. Daten sind Schätzungen, korrigierbar.
 **Closure-Trigger:**
 - slice-013 (Property-Tests) done in allen sechs Sprachen.
 - `make fullbuild` grün.
-- Replay-Lauf gegen Golden Set grün.
+- Replay gegen Golden Set grün.
+
+> *Lab-Grenze:* Das Kurs-Skelett kann den Replay nicht ausführen; es liefert
+> nur die Fixture-Prüfung `make replay`. Der Trigger oben ist die Bedingung
+> des *Projekts*, nicht die des Skeletts — siehe
+> [`evals/golden/README.md`](../../../../evals/golden/README.md), Absatz *Lab-Grenze*.
 
 ## Nächste Wellen
 

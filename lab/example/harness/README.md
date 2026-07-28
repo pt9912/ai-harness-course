@@ -54,12 +54,17 @@ Diese Datei dupliziert sie nicht.
 | `make coverage-gate` | Gesamt-Coverage, bootstrap-aware | Schwelle 70 %, M2 → 80 % |
 | `make coverage-gate-critical` | Critical-Path-Coverage | bootstrap via [`CO-001`](../docs/plan/carveouts/CO-001-index-coverage.md) bis Welle 2 done |
 | `make gates` | alle inneren Gates | — |
-| `make ci` | gates + Replay + Image-Scan | — |
+| `make ci` | gates + `test-determinism` + `coverage-gate-critical` | — |
 | `make fullbuild` | volle Closure | Image-Hash `sha256:abc123…` (Modul 14) |
 
 **Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates` (keine Status-Spalte hier, siehe [Konventionen §`harness/README.md` als Einstiegspunkt](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt)).
 **Rote Gates:** Begründung im verlinkten `CO-<NNN>` (Bindung-Spalte), Modul 7.
 **Nicht behauptet** (geplant, nicht in Makefile): `make test-property` (Property-Based-Suite, slice-013, in-progress), `make sbom`, `make security-scan` (welle-4-betrieb).
+**Weder vorhanden noch in der Roadmap:** ein Image-Scan — anders als `make sbom` und `make security-scan`, die für `welle-4-betrieb` vorgemerkt sind.
+
+**Nicht Teil von `ci`:** das Golden Set. `make replay RUN=<set-name>` ist ein Root-Target (`<set-name>` ist der Name unterhalb `evals/golden/`, z. B. `welle-1-baseline`); es prüft, ob das Golden-Set-Verzeichnis vollständig ist (Manifest mit
+`model:`- und `runtime:`-Block, `inputs/`, `expectations/`, mindestens drei
+Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 12).
 
 ## Traceability rules
 

@@ -147,10 +147,13 @@ Drei semantische Aussagen statt eines wörtlichen Vergleichs. Exact-Match
 bewahre für strukturierte Schnittstellen (JSON-Felder), nie für
 Fließtext.
 
-**Schritt 4 — Erster Lauf, Baseline einfrieren.**
+**Schritt 4 — Erster Lauf, Baseline einfrieren.** Die Kommandozeilen in
+Schritt 4 und 5 zeigen die *Form*, die ein Replay-Harness anbieten sollte. Das
+Kurs-Lab bringt keinen solchen Harness mit — es prüft nur die Fixture-Form
+(§Minimaler Übungspfad, *Lab-Grenze*):
 
 ```bash
-make replay RUN=welle-1-baseline
+<dein-replay-harness> run --set welle-1-baseline
 ```
 
 Erwartet: drei grüne Fälle. Wenn nicht: *erst* das Manifest schärfen
@@ -159,7 +162,7 @@ Erwartet: drei grüne Fälle. Wenn nicht: *erst* das Manifest schärfen
 **Schritt 5 — Modellwechsel-Drift messen.**
 
 ```bash
-make replay RUN=welle-1-baseline MODEL=claude-sonnet-4-6
+<dein-replay-harness> run --set welle-1-baseline --model <neue-version>
 ```
 
 Drei mögliche Ergebnisse:

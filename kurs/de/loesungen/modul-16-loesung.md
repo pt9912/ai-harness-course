@@ -122,7 +122,7 @@ Phasen-Abschnitte, je zwei Items mit Beleg, plus Incident-Klausel:
 
 ## Replay-Beleg
 - [ ] Golden-Set-Replay ≥ 3 Fälle, alle grün, Manifest aktuell.
-      **Beleg:** evals/golden/welle-1-baseline/manifest.yaml + Run-Output.
+      **Beleg:** <golden-set>/manifest.yaml + Run-Output des Replay-Harness.
 - [ ] Drift-Rate gegen Vorwelle dokumentiert (Zahl, nicht "ok").
       **Beleg:** CHANGELOG-Eintrag im Golden-Set-Verzeichnis.
 

@@ -101,7 +101,7 @@ Eintrainierten-Set geworden. Ein konkreter Plan:
    - **Adversarial-Beispiele aus Steering-Loop-Einträgen:** Muster aus
      der Reflexionsvorlage ("dieselbe Halluzination dreimal") werden
      als Negative-Fälle eingespeist.
-3. **Re-Baseline nach jeder Rotation:** `make replay` gegen das
+3. **Re-Baseline nach jeder Rotation:** Replay-Lauf gegen das
    rotierte Set, neues Manifest-Datum, CHANGELOG-Eintrag (Worked
    Example Schritt 7) — sonst ist nicht unterscheidbar, ob spätere
    Rötung von der Rotation oder vom Modell kommt.

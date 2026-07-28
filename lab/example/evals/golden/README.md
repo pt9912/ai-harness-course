@@ -21,10 +21,21 @@ jedem Case-Edit anwächst. Migration siehe `welle-1-baseline/CHANGELOG.md`.
 
 Jeder Replay-Lauf muss:
 
-1. **Modellversion** aus dem Set übernehmen (`model_version`), nicht dynamisch wählen.
+1. **Modellversion** aus dem Set übernehmen (`model.version` im Manifest), nicht dynamisch wählen.
 2. **Tie-Break-Strategie** aus dem Set respektieren — `sort_stable_then_doc_path_then_section_index` (siehe AGENTS.md §2.7).
 3. **Externe Antworten** mocken (Embedding-Antworten werden aus Recordings ausgespielt; bei diesem Set kommt der Mock aus der dokumentierten Modell-Version).
 4. Pro Case ein **Ergebnis-Hash** erzeugen und in CI veröffentlichen — bei zwei aufeinanderfolgenden Läufen identischer Eingabe müssen die Hashes übereinstimmen.
+
+## Lab-Grenze
+
+Dieser Vertrag beschreibt, was ein *Replay-Lauf* leisten muss.
+Das Skelett liefert ihn nicht: `make replay RUN=<set-name>` validiert die
+**Form** des Sets (Manifest mit `model:`/`runtime:`, `inputs/`,
+`expectations/`, mindestens drei Cases, gleiche Anzahl beider Seiten) und
+führt keinen Lauf aus. Wo ein Beleg „Replay grün" verlangt wird, ist im Lab
+also die Fixture-Prüfung gemeint; der Lauf selbst gehört in das Repo, das den
+Kurs adoptiert (Kurs [Modul 12](../../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md),
+Abschnitt *Minimaler Übungspfad*).
 
 ## Erwartungs-Felder
 

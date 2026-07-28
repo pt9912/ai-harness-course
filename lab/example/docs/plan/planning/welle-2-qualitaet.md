@@ -27,8 +27,13 @@ Bootstrap-Stufe höher.
 
 - slice-013 (Property-Tests) in `done/`, in allen sechs Sprachen.
 - `make fullbuild` grün.
-- Replay-Lauf gegen das Golden Set grün.
+- Replay gegen das Golden Set grün.
 - Closure-Notiz in `welle-2-results.md`.
+
+> *Lab-Grenze:* Das Kurs-Skelett kann den Replay nicht ausführen; es liefert
+> nur die Fixture-Prüfung `make replay`. Der Trigger oben ist die Bedingung
+> des *Projekts*, nicht die des Skeletts — siehe
+> [`evals/golden/README.md`](../../../evals/golden/README.md), Absatz *Lab-Grenze*.
 
 ## 4. Slices in dieser Welle
 
@@ -40,7 +45,7 @@ Der Zustand jedes Slice ist sein Lifecycle-Verzeichnis und wird hier **nicht**
 gespiegelt.
 
 **Ein-Slice-Bündel und trotzdem eine Welle:** Der Closure-Trigger fordert
-`make fullbuild` und den Replay-Lauf — repo-weite Belege, die in keiner
+`make fullbuild` und den Replay-Beleg — repo-weite Belege, die in keiner
 Slice-DoD stehen. Genau dieses *Mehr* macht die Welle, nicht die Anzahl der
 Slices (Kurs [Modul 6 §Wann Arbeit eine Welle braucht](../../../../../kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
 

@@ -15,7 +15,7 @@ Status-Feld.
 
 Ein lauffähiger DocSearch-Stack in Go als Referenz-Sprache: Indexierung und
 Suche erfüllen ihre Akzeptanzkriterien, `make gates` läuft repo-weit grün, und
-ein erster Replay-Lauf gegen ein Golden Set existiert.
+ein erstes Golden Set für den Replay existiert.
 
 ## 2. Trigger (Welle startet)
 
@@ -26,10 +26,15 @@ ein erster Replay-Lauf gegen ein Golden Set existiert.
 
 - Alle Slices dieser Welle in `done/`.
 - `make fullbuild` grün.
-- Replay-Lauf gegen das Golden Set `evals/golden/welle-1-baseline/` durchläuft.
+- Replay gegen das Golden Set `evals/golden/welle-1-baseline/` grün.
 - Closure-Notiz in `welle-1-results.md`.
 
-Das *Mehr* gegenüber den einzelnen DoDs: `make fullbuild` und der Replay-Lauf
+> *Lab-Grenze:* Das Kurs-Skelett kann den Replay nicht ausführen; es liefert
+> nur die Fixture-Prüfung `make replay`. Der Trigger oben ist die Bedingung
+> des *Projekts*, nicht die des Skeletts — siehe
+> [`evals/golden/README.md`](../../../../evals/golden/README.md), Absatz *Lab-Grenze*.
+
+Das *Mehr* gegenüber den einzelnen DoDs: `make fullbuild` und der Replay-Beleg
 sind repo-weite Bedingungen und stehen in keiner einzelnen Slice-DoD — deshalb
 liegt hier eine Welle vor und nicht wellenlose Arbeit
 (Kurs [Modul 6 §Wann Arbeit eine Welle braucht](../../../../../../kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).

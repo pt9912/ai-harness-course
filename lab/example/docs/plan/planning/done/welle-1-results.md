@@ -52,5 +52,8 @@ Welle 3× erreicht hat, steht oben unter *Steering-Loop-Einträge*.
 ## Verifikation
 
 - `make fullbuild` grün (Build-Hash `sha256:abc123…`).
-- Replay-Lauf gegen Golden Set: 12/12 Cases grün.
+- Replay-Lauf gegen das Golden Set `welle-1-baseline`: 3/3 Cases grün.
+  *Lab-Grenze:* Im Kurs-Skelett belegbar ist davon nur die Fixture-Form
+  (`make replay RUN=welle-1-baseline`) — siehe
+  [`evals/golden/README.md`](../../../../evals/golden/README.md), Absatz *Lab-Grenze*.
 - Coverage gesamt: 78 %, kritisch: 92 % (siehe Carveout CO-001 für Index-Layer).
