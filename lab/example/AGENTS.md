@@ -125,7 +125,19 @@ Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 
 - Requirement- und Architektur-IDs müssen in PRs/Commits referenziert sein.
 - Neue ADRs müssen `docs/plan/adr/README.md` aktualisieren.
 - Roadmap/Status-Geschichte lebt in `docs/plan/planning/`, nicht in `spec/architecture.md`.
-- Quality-Gate-Definitionen leben in `docs/user/quality.md` (sprach-übergreifend) bzw. sprach-spezifisch in `<sprache>/README.md`.
+- **Ein Gate ist dort definiert, wo seine Bindung steht** — nicht an einem
+  zentralen Ort. Welche Bindung ein Target hat, sagt die Spalte *Bindung* in
+  [`harness/README.md` §Sensors](harness/README.md#sensors-feedback-gates);
+  von dort führt der Weg weiter, z. B. `lint` → LH-QA-04, `arch-check` →
+  ADR-0001, `test-determinism` → LH-QA-02, `coverage-gate` und
+  `coverage-gate-critical` → ADR-0013 — und für die Ausnahme des kritischen
+  Gates weiter zu
+  [CO-001 §Geltungs-Konfiguration](docs/plan/carveouts/CO-001-index-coverage.md#geltungs-konfiguration).
+  §3 dieser Datei listet die Targets nur auf; definiert wird dort nichts.
+  Sprach-spezifische Ergänzungen stehen in `<sprache>/harness/README.md` —
+  unvollständig, nicht jedes Skelett führt jedes Target.
+- `docs/user/` ist **Platzhalter** (siehe [`docs/user/README.md`](docs/user/README.md)).
+  Eine ops-gerichtete `docs/user/quality.md` entsteht mit `slice-013`.
 
 ## 5. Minimal Agent Workflow
 

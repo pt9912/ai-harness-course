@@ -24,7 +24,7 @@ Diese Datei dupliziert sie nicht.
 | 3 | [`../spec/architecture.md`](../spec/architecture.md) | Komponenten/Sequenzen, meilensteinfrei |
 | 4 | [`../docs/plan/adr/`](../docs/plan/adr/) | Architekturentscheidungen |
 | 5 | [`../docs/plan/planning/in-progress/roadmap.md`](../docs/plan/planning/in-progress/roadmap.md) | aktuelle Welle |
-| 6 | [`../docs/user/`](../docs/user/) | Operations, Quality, Releasing |
+| 6 | [`../docs/user/`](../docs/user/) | Operations, Quality, Releasing — *derzeit Platzhalter, Inhalte siehe `../runbooks/` und `AGENTS.md` §4* |
 | 7 | [`../README.md`](../README.md) | Projekt-Überblick |
 | 8 | [`../AGENTS.md`](../AGENTS.md) | Agent-Briefing |
 | 9 | diese Datei | Harness-Einstieg |
@@ -46,7 +46,7 @@ Diese Datei dupliziert sie nicht.
 
 | Target | Vertrag | Bindung |
 |---|---|---|
-| `make lint` | Linter + Suppression-Gate | — |
+| `make lint` | Linter + Suppression-Gate | LH-QA-04 (Regel `no-userid-in-log`) |
 | `make typecheck` | Statische Typprüfung | — |
 | `make arch-check` | Layering | [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) |
 | `make test` | Unit-Tests | — |
