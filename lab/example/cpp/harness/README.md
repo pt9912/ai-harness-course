@@ -30,15 +30,17 @@ um C++-spezifische Pfade:
 | `make arch-check` | `cmake/arch-check.sh` (Include-Heuristik) | ADR-0001 Layering |
 | `make test` | doctest via `ctest -R unit` | Unit + Tie-Break |
 | `make test-determinism` | `ctest -R determinism` (100 Iterationen) | LH-QA-02 |
-| `make coverage-gate` | `gcovr --fail-under-line` | bootstrap-aware (70 %) |
-| `make coverage-gate-critical` | wie oben, nur `hexagon/service/` | mit CO-001 (Index-Layer) |
+| `make coverage-gate` | `gcovr --fail-under-line` | ADR-0013: 70 %, ab M2 80 % |
+| `make coverage-gate-critical` | wie oben, nur `hexagon/service/` | ADR-0013: 90 %, Index-Layer via CO-001 ausgenommen |
 | `make build` | Multi-Stage Dockerfile | Distroless cc, nonroot |
 | `make gates` | alle obigen | mandatory vor PR |
 
 ## Traceability
 
 - Test-Namen tragen LH-/slice-IDs: `LH-FA-02 Boundary …`, `slice-009 TieBreak`.
-- Make-Target-Kommentare nennen LH-IDs: `coverage-gate: ## LH-QA-Coverage`.
+- Make-Target-Kommentare nennen LH-IDs, **wo eine LH-Bindung besteht**:
+  `test-determinism: configure ## LH-QA-02`. `coverage-gate` gehört zu keiner Lastenheft-Anforderung und zitiert
+  deshalb die ADR, die seine Schwelle setzt (`ADR-0013`) — siehe [`../../harness/README.md` §Sensors](../../harness/README.md#sensors-feedback-gates).
 - ADR-Verweise in Code-Kommentaren bei nicht-trivialen Entscheidungen.
 
 ## Safety boundaries (C++-spezifisch)

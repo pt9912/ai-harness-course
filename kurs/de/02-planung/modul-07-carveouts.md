@@ -78,7 +78,7 @@ Auflösungs-Trigger ist ein permanenter Carveout, der lügt.
 > **Wenn du temporäre Carveouts routiniert mit Trigger und Folge-Slice anlegst und sie bei jeder Welle-Closure auditierst, springe zu [§Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen).** Worked Example A führt die Mindestform vor (Expertise-Reversal-Schutz: das ist *nicht* der vertiefte Audit-Loop).
 
 **Ausgangssituation:** Das Coverage-Gate `coverage-gate-critical` ist
-rot. Der Index-Layer hat 76 % statt der geforderten 80 %. Grund: Binär-Format-Parser mit Fehlerpfaden (`E099` bei korrupter
+rot. Der Index-Layer hat 76 % statt der geforderten 90 %. Grund: Binär-Format-Parser mit Fehlerpfaden (`E099` bei korrupter
 Datei), die nur partiell durch Unit-Tests abgedeckt sind. Eine
 Property-Test-Suite wird die verbleibenden Pfade abdecken — ist aber
 erst in Welle 2 eingeplant.
@@ -122,7 +122,7 @@ nicht eingetreten beurteilen kann.
 Welle 2 (welle-2-qualitaet) done — Property-Test-Suite läuft 100
 Generationen und deckt die Fehlerpfade.
 
-Konkret: die Index-Layer-Coverage erreicht ≥ 80 % — dieselbe Schwelle, die
+Konkret: die Index-Layer-Coverage erreicht ≥ 90 % — dieselbe Schwelle, die
 das Gate für kritische Layer setzt —, geprüft in
 `make coverage-gate-critical` ohne Ausnahmen.
 ```
@@ -133,14 +133,15 @@ ist es, was die CI prüft.
 
 **Schritt 4 — Geltungs-Konfiguration mit ID-Kommentar verdrahten.** Die
 Gate-Konfiguration *zeigt* auf den Carveout, damit der Carveout im
-Gate-Output nicht versteckt ist (`coverage-gate-critical` hängt an `make ci`):
+Gate-Output nicht versteckt ist — in welchem Aggregat-Target das Gate hängt,
+entscheidet das Repo:
 
 ```diff
   # <sprache>-Makefile, Target coverage-gate-critical
 - 	@echo "Critical coverage"
-- 	... --fail-under-line 80 <ganzes src>
+- 	... --fail-under-line 90 <ganzes src>
 + 	@echo "Critical coverage — CO-001 (Index) ausgenommen bis Welle 2 done"
-+ 	... --fail-under-line 80 <nur service>
++ 	... --fail-under-line 90 <nur service>
 ```
 
 Die Ausnahme ist hier keine Ausschluss-Liste, sondern eine **Verengung der
@@ -159,7 +160,7 @@ hinterlegen.** Damit nach Trigger-Eintritt klar ist, was zu tun ist:
 ```markdown
 ## Verifikation (nach Auflösung)
 
-- [ ] Index-Layer-Coverage in allen sechs Sprach-Skeletten ≥ 80 %.
+- [ ] Index-Layer-Coverage in allen sechs Sprach-Skeletten ≥ 90 %.
 - [ ] Die Mess-Verengung in allen Skeletten von `service` auf `service` **und**
       Index erweitert — nicht ganz entfernt, sonst misst
       `coverage-gate-critical` dasselbe wie `coverage-gate`.
@@ -259,7 +260,7 @@ das Schema noch frisch im Kopf hält, spart sich hier Last
 >
 > **Modus:** Brownfield bis Welle-3-Graduation.
 > **Geltungsbereich:** der Index-Layer in allen Sprach-Skeletten.
-> **Graduation-Trigger:** Property-Test-Suite läuft + Coverage ≥ 80 %
+> **Graduation-Trigger:** Property-Test-Suite läuft + Coverage ≥ 90 %
 > über alle Pfade.
 > **Sync-Trigger:** nach Graduation einen Pointer-Eintrag in
 > `harness/README.md` §Sensors, der die Sub-Area als GF-bewertet

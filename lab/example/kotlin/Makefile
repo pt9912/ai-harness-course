@@ -37,11 +37,11 @@ test-determinism: ## LH-QA-02 100 Iter
 		gradle test --tests "com.example.docsearch.DeterminismTest" \
 		-Pdeterminism.iterations=100
 
-coverage-gate: ## kover, 70 %
+coverage-gate: ## Gesamt-Coverage via kover (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
 	$(DOCKER) run --rm --tmpfs /src/.git -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
 		sh -c 'git init -q /src >/dev/null 2>&1; gradle koverVerify'
 
-coverage-gate-critical: ## Critical Coverage 80 % (CO-001: index ausgenommen)
+coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)
 	@echo "Critical coverage — CO-001 (index) ausgenommen"
 	$(DOCKER) run --rm --tmpfs /src/.git -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) \
 		sh -c 'git init -q /src >/dev/null 2>&1; gradle koverVerify -Pcritical=true'

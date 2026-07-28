@@ -35,7 +35,7 @@ Terminen. Daten sind Schätzungen, korrigierbar.
 | Meilenstein | Welle(n) | Trigger | Status |
 |---|---|---|---|
 | M1 — Lauffähiger Stack | welle-1-mvp | DoD `make gates` grün, ein Lab-Beispiel pro Sprache | erreicht 2026-05-28 |
-| M2 — Qualitätsschwelle | welle-2-qualitaet | Property-Tests + Coverage-Gate hochgeschaltet | offen |
+| M2 — Qualitätsschwelle | welle-2-qualitaet | welle-2-qualitaet geschlossen (slice-013 in `done/`, Property-Suite läuft 100 Generationen) | offen |
 | M3 — Skalierbar | welle-3-skalierung | p95 < 1 s auch bei 100k Einträgen | offen |
 | M4 — Produktionsreif | welle-4-betrieb | Releases, Runbook, OTel-Pipeline | offen |
 

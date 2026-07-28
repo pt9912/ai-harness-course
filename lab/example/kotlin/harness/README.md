@@ -7,7 +7,7 @@
 | `make arch-check` | **Konsist** (in JUnit-Tests integriert) |
 | `make test` | JUnit 5 |
 | `make coverage-gate` | `kover` mit Schwelle |
-| `make coverage-gate-critical` | `kover`, nur `docsearch.service` (`-Pcritical`, CO-001) |
+| `make coverage-gate-critical` | `kover`, nur `docsearch.service` (`-Pcritical`; ADR-0013: 90 %, Index via CO-001 ausgenommen) |
 | `make build` | Gradle Build + Distroless |
 
 Übergeordnete Quelle: [`../../harness/README.md`](../../harness/README.md).

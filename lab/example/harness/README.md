@@ -51,8 +51,8 @@ Diese Datei dupliziert sie nicht.
 | `make arch-check` | Layering | [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) |
 | `make test` | Unit-Tests | — |
 | `make test-determinism` | 100 Wiederholungen identischer Eingabe | LH-QA-02 |
-| `make coverage-gate` | Gesamt-Coverage, bootstrap-aware | Schwelle 70 %, M2 → 80 % |
-| `make coverage-gate-critical` | Critical-Path-Coverage | bootstrap via [`CO-001`](../docs/plan/carveouts/CO-001-index-coverage.md) bis Welle 2 done |
+| `make coverage-gate` | Gesamt-Coverage, bootstrap-aware | [ADR-0013](../docs/plan/adr/0013-coverage-schwellen.md): 70 %, ab M2 80 % (via Nachfolge-ADR) |
+| `make coverage-gate-critical` | Critical-Path-Coverage | [ADR-0013](../docs/plan/adr/0013-coverage-schwellen.md): 90 %, Index-Layer via [`CO-001`](../docs/plan/carveouts/CO-001-index-coverage.md) bis Welle 2 ausgenommen |
 | `make gates` | alle inneren Gates | — |
 | `make ci` | gates + `test-determinism` + `coverage-gate-critical` | — |
 | `make fullbuild` | volle Closure | Image-Hash `sha256:abc123…` (Modul 14) |

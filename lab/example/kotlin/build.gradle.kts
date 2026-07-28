@@ -43,9 +43,9 @@ detekt {
 }
 
 // CO-001: `make coverage-gate-critical` reicht `-Pcritical=true` durch und
-// misst dann NUR den kritischen Layer (service) gegen 80 %; index ist bis
-// Welle 2 ausgenommen. Analog go (./internal/service/... 80), python
-// (src/docsearch/service 80) und cpp (gcovr auf src/hexagon/service/).
+// misst dann NUR den kritischen Layer (service) gegen 90 %; index ist bis
+// Welle 2 ausgenommen. Analog go (./internal/service/... 90), python
+// (src/docsearch/service 90) und cpp (gcovr auf src/hexagon/service/).
 // Ohne diese Auswertung verpuffte das Flag, und das Gate fuhr denselben
 // 70-%-Check wie `coverage-gate` — ein Gate, das seine Zusage nicht prüft.
 val criticalOnly = project.hasProperty("critical")
@@ -68,8 +68,9 @@ kover {
         verify {
             rule {
                 bound {
-                    // LH-QA-Coverage 70 % bootstrap-aware; 80 % auf dem kritischen Layer
-                    minValue = if (criticalOnly) 80 else 70
+                    // Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR);
+                    // 90 % auf dem kritischen Layer
+                    minValue = if (criticalOnly) 90 else 70
                 }
             }
         }

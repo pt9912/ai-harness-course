@@ -37,11 +37,11 @@ test-determinism: ## LH-QA-02: @RepeatedTest(100) in DeterminismTest
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
 		mvn -q test -Dtest=DeterminismTest
 
-coverage-gate: ## JaCoCo 70 %
+coverage-gate: ## Gesamt-Coverage via JaCoCo (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
 		mvn -q verify
 
-coverage-gate-critical: ## Critical Coverage 80 % (CO-001: index ausgenommen)
+coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)
 	@echo "Critical coverage — CO-001 (index) ausgenommen"
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
 		mvn -q verify -Pcritical-coverage

@@ -29,15 +29,17 @@ um Go-spezifische Pfade:
 | `make arch-check` | depguard (Teil von `golangci-lint`) | ADR-0001 Layering |
 | `make test` | `go test ./...` | Unit + Tie-Break |
 | `make test-determinism` | `go test -run TestDeterminism -count=100` | LH-QA-02 |
-| `make coverage-gate` | `go test -coverprofile` + Schwelle-Check | bootstrap-aware (70 %) |
-| `make coverage-gate-critical` | wie oben, nur Critical-Paths | mit CO-001 (Index-Layer) |
+| `make coverage-gate` | `go test -coverprofile` + Schwelle-Check | ADR-0013: 70 %, M2 → 80 % |
+| `make coverage-gate-critical` | wie oben, nur Critical-Paths | ADR-0013: 90 %, Index-Layer via CO-001 ausgenommen |
 | `make build` | Multi-Stage Dockerfile | Distroless, nonroot |
 | `make gates` | alle obigen | mandatory vor PR |
 
 ## Traceability
 
 - Test-Namen tragen LH-IDs: `TestSearch_LHFA02_Boundary_KClamped`.
-- Make-Target-Kommentare nennen LH-IDs: `coverage-gate: ## LH-QA-Coverage`.
+- Make-Target-Kommentare nennen LH-IDs, **wo eine LH-Bindung besteht**:
+  `test-determinism: ## LH-QA-02`. `coverage-gate` gehört zu keiner Lastenheft-Anforderung und zitiert
+  deshalb die ADR, die seine Schwelle setzt (`ADR-0013`) — siehe [`../../harness/README.md` §Sensors](../../harness/README.md#sensors-feedback-gates).
 - ADR-Verweise in Code-Kommentaren bei nicht-trivialen Entscheidungen.
 
 ## Safety boundaries (Go-spezifisch)

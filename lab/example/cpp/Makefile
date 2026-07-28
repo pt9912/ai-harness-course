@@ -10,7 +10,7 @@ DOCKER := docker
 BUILD_DIR := build
 COV_DIR := build-cov
 COVERAGE_THRESHOLD ?= 70
-CRITICAL_THRESHOLD ?= 80
+CRITICAL_THRESHOLD ?= 90
 
 # Toolchain-Container: Repo unter /src, build/ persistiert via Bind-Mount.
 WORK := $(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(TOOLCHAIN)
@@ -46,13 +46,13 @@ test-determinism: configure ## LH-QA-02: Determinismus-Case (100 Iterationen)
 	$(WORK) sh -c 'cmake --build $(BUILD_DIR) -j && \
 		ctest --test-dir $(BUILD_DIR) -R determinism --output-on-failure'
 
-coverage-gate: toolchain ## LH-QA-Coverage (bootstrap-aware, $(COVERAGE_THRESHOLD)%; Composition Root ausgenommen)
+coverage-gate: toolchain ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR; Composition Root ausgenommen)
 	$(WORK) sh -c 'cmake -S . -B $(COV_DIR) -DDOCSEARCH_COVERAGE=ON && \
 		cmake --build $(COV_DIR) -j && \
 		ctest --test-dir $(COV_DIR) -R unit --output-on-failure && \
 		gcovr --root . --filter "src/" --exclude ".*/main\.cpp" --fail-under-line $(COVERAGE_THRESHOLD) $(COV_DIR)'
 
-coverage-gate-critical: toolchain ## Critical-Path-Coverage (CO-001: index ausgenommen)
+coverage-gate-critical: toolchain ## Critical-Path-Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)
 	@echo "Critical coverage — CO-001 (src/hexagon/index) ausgenommen bis Welle 2 done"
 	$(WORK) sh -c 'cmake -S . -B $(COV_DIR) -DDOCSEARCH_COVERAGE=ON && \
 		cmake --build $(COV_DIR) -j && \

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Coverlet-Konfiguration für `make coverage-gate`. LH-QA-Coverage 70 %
-  (bootstrap-aware). Schwelle gilt für Line-Coverage gesamt.
+  Coverlet-Konfiguration für `make coverage-gate`. Gesamt-Coverage,
+  ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR; gilt für
+  Line-Coverage gesamt.
 -->
 <RunSettings>
   <DataCollectionRunSettings>

@@ -37,13 +37,13 @@ test-determinism:
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet test DocSearch.sln --filter "FullyQualifiedName~DeterminismTests"
 
-coverage-gate: ## coverlet, 70 % (Schwelle via msbuild-Properties)
+coverage-gate: ## Gesamt-Coverage via coverlet (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet test DocSearch.sln --settings coverlet.runsettings \
 		/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura \
 		/p:Threshold=70 /p:ThresholdType=line /p:ThresholdStat=total
 
-coverage-gate-critical:
+coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen) — Gate wirkungslos, siehe CO-001
 	@echo "Critical coverage — CO-001 (Index) ausgenommen"
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet test DocSearch.sln --filter "FullyQualifiedName~Service"

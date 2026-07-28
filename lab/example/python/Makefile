@@ -38,16 +38,16 @@ test-determinism: ## LH-QA-02: 100 Iter
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
 		sh -c "pip install -q pytest pytest-repeat && pytest -k determinism --count=100"
 
-coverage-gate: ## LH-QA-Coverage 70 %
+coverage-gate: ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
 		sh -c "pip install -q pytest pytest-cov && \
 			pytest --cov=src/docsearch --cov-report=term --cov-fail-under=70"
 
-coverage-gate-critical: ## Critical Coverage 80 % (CO-001 ausgenommen)
+coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)
 	@echo "Critical coverage — CO-001 (index-Layer) ausgenommen"
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
 		sh -c "pip install -q pytest pytest-cov && \
-			pytest --cov=src/docsearch/service --cov-fail-under=80 tests/test_service.py"
+			pytest --cov=src/docsearch/service --cov-fail-under=90 tests/test_service.py"
 
 gates: lint typecheck arch-check test coverage-gate ## mandatory
 	@echo "gates grün."

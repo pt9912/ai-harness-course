@@ -55,7 +55,7 @@
                     <failOnViolation>true</failOnViolation>
                 </configuration>
             </plugin>
-            <!-- JaCoCo: LH-QA-Coverage 70 % (bootstrap-aware) -->
+            <!-- JaCoCo: Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR) -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -101,9 +101,9 @@
     </build>
 
     <!-- CO-001: `coverage-gate-critical` misst NUR den kritischen Layer
-         (service) gegen 80 %; der Index-Layer ist bis Welle 2 ausgenommen.
-         Analog go (./internal/service/... 80), python (src/docsearch/service
-         80) und cpp (gcovr auf src/hexagon/service/). Ohne dieses Profil
+         (service) gegen 90 %; der Index-Layer ist bis Welle 2 ausgenommen.
+         Analog go (./internal/service/... 90), python (src/docsearch/service
+         90) und cpp (gcovr auf src/hexagon/service/). Ohne dieses Profil
          liefe `mvn -Pcritical-coverage` denselben 70-%-BUNDLE-Check wie
          `coverage-gate` — ein Gate, das seine eigene Zusage nicht prüft. -->
     <profiles>
@@ -134,7 +134,7 @@
                                                 <limit>
                                                     <counter>LINE</counter>
                                                     <value>COVEREDRATIO</value>
-                                                    <minimum>0.80</minimum>
+                                                    <minimum>0.90</minimum>
                                                 </limit>
                                             </limits>
                                         </rule>

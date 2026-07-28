@@ -39,14 +39,14 @@ test-determinism: ## LH-QA-02: 100 Wiederholungen identischer Eingabe
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GO_IMAGE) \
 		sh -c "go mod download && go test -run 'TestDeterminism' -count=100 ./..."
 
-coverage-gate: ## LH-QA-Coverage (bootstrap-aware, 70%; hermetisch via coverage-Stage)
+coverage-gate: ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR; hermetisch via coverage-Stage)
 	$(DOCKER) build --target coverage -t $(IMAGE)-coverage .
 	$(DOCKER) run --rm $(IMAGE)-coverage ./... 70
 
-coverage-gate-critical: ## Critical-Path-Coverage (CO-001 ausgenommen)
+coverage-gate-critical: ## Critical-Path-Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)
 	@echo "Critical coverage check — CO-001 (internal/index) ausgenommen bis Welle 2 done"
 	$(DOCKER) build --target coverage -t $(IMAGE)-coverage .
-	$(DOCKER) run --rm $(IMAGE)-coverage ./internal/service/... 80
+	$(DOCKER) run --rm $(IMAGE)-coverage ./internal/service/... 90
 
 gates: lint typecheck arch-check test coverage-gate ## alle inneren Gates (mandatory)
 	@echo "gates grün."

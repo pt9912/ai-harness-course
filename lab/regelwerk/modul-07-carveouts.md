@@ -30,7 +30,7 @@ Operative Regeln, die das Template nicht selbst erzwingt:
 - **Auflösungs-Trigger als beobachtbare, messbare Bedingung** — nicht
   „sobald wir Zeit haben", sondern eine Schwelle, die ein anderer Mensch
   ohne Rückfrage als erreicht beurteilen kann (z. B. „`internal/parser/`-
-  Coverage ≥ 80 %, geprüft in `make coverage-gate-critical` ohne
+  Coverage ≥ 90 %, geprüft in `make coverage-gate-critical` ohne
   Ausnahmen"). Der Welle-Bezug ist der Roadmap-Anker, die messbare
   Schwelle das, was die CI prüft.
 - **Die Gate-Konfiguration nennt die `CO-<NNN>` im Gate-Output** — sonst ist
