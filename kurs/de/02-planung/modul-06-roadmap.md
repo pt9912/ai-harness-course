@@ -346,7 +346,7 @@ Verbleib:
 | Kennung | Beobachtung | Sub-Area | Zähler | Belege | Stand |
 |---|---|---|---|---|---|
 | BEO-001 | Golden-Set-Case ohne Boundary-Anteil aufgenommen | Test-Infrastruktur | 2× | slice-005, slice-011 | offen |
-| BEO-005 | Tie-Break in sortierender Operation nicht explizit dokumentiert | Sortier-Semantik | 3× | slice-006, slice-009, slice-012 | verkörpert in `AGENTS.md` §2.7 (`seit welle-1`) |
+| BEO-005 | Tie-Break in sortierender Operation nicht explizit dokumentiert | Implementierung | 3× | slice-006, slice-009, slice-012 | verkörpert in `AGENTS.md` §2.7 (`seit welle-1`) |
 ```
 
 Eine zweite Sektion **Gestrichene Einträge** nimmt auf, was nicht mehr auftreten

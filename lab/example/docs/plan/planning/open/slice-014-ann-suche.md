@@ -54,13 +54,34 @@ auch bei > 100k Index-Einträgen zu halten.
 
 **Status:** alle berührten Sub-Areas GF (siehe
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
-für das DocSearch-Lab als Ganzes). Spec-Schreibung (LH-FA-12) und
-Architektur (ADR-0004 in Outline) führen, Code folgt — kein
-Reconciliation, keine BF/Hybrid-Begründung nötig.
+für das DocSearch-Lab als Ganzes). Spec-Anker LH-QA-01 führt
+(Performance-Anforderung), flankiert von ADR-0004 (in Outline), Code folgt —
+kein Reconciliation, keine BF/Hybrid-Begründung nötig.
 
 **Vorgelagert — offene Beobachtungen gesichtet:** Register
-(`../observations.md`) durchgegangen. `BEO-002` (*Test-Infrastruktur*, 1×) berührt die Determinismus-Frage dieses
-Slice und steht unten im *Evidenz-/Diskrepanz-Risiko*. Sonst keine Treffer.
+(`../observations.md`) durchgegangen. Berührt sind vier Sub-Areas aus der
+Modus-Tabelle (`harness/conventions.md`): *Planning-Lifecycle* (ADR-0004, §3),
+*Implementierung* (`internal/index/`, `internal/service/`, §3),
+*Test-Infrastruktur* (`make test-determinism` muss auch unter ANN halten,
+DoD und §6) und *Replay-/Eval-Infrastruktur* (Replay gegen das Golden Set,
+recall@5, DoD).
+
+**Zwei offene Treffer**, beide auf *Test-Infrastruktur*: `BEO-001` (2×) und
+`BEO-002` (1×) — ihr Zähler-Stand steht unten im *Evidenz-/Diskrepanz-Risiko*.
+Dazu eine **verkörperte** Zeile auf *Implementierung*, `BEO-005`: Sie steht mit
+Zähler und Belegen im Register, trägt aber den Vermerk, wohin sie ging, und
+wirkt über `AGENTS.md` §2.7 von selbst — der Tie-Break dieses Slice fällt
+darunter. Auf *Planning-Lifecycle* und *Replay-/Eval-Infrastruktur* steht keine
+Zeile.
+
+Keiner der beiden offenen erreicht **mit diesem Slice** 3×. `BEO-002` steht bei
+1× und kann die Schwelle mit einem einzelnen Slice ohnehin nicht erreichen —
+inhaltlich einschlägig ist es sehr wohl, die Gleichstands-Eingaben sind genau
+die Tie-Break-Frage aus §6; der Zähler geht also auf 2×, wenn der Fall hier
+wieder auftritt. `BEO-001` stünde bei 3×, wenn dieser Slice einen Golden-Set-Case ohne
+Boundary-Anteil aufnähme; seine DoD sieht das nicht vor — sie *misst* gegen den
+bestehenden Satz. Kein Folge-Slice also; die Frage ist bei der Closure erneut zu
+stellen, weil der Zähler bis dahin weitergelaufen sein kann.
 
 Voraussetzung-Wissen für den Block-Aufbau: Kurs
 [Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).

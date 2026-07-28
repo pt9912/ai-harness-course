@@ -94,9 +94,20 @@ für das DocSearch-Lab als Ganzes). Reine Spec-Korrektur ohne
 Konventions-Adaption — keine BF/Hybrid-Begründung nötig.
 
 **Vorgelagert — offene Beobachtungen gesichtet:** Register
-(`../observations.md`) durchgegangen. Keine der berührten Sub-Areas (*Spec-Schreibung*) stand beim Anlegen dieses
-Slice bereits im Register — es entstand erst mit dieser Closure. Keine Treffer
-ist ebenfalls eine Antwort.
+(`../observations.md`) durchgegangen. Berührt sind zwei Sub-Areas aus der
+Modus-Tabelle (`harness/conventions.md`), abgelesen an §3: *Spec-Schreibung*
+(`spec/spezifikation.md`) und *Planning-Lifecycle* (dieser Slice-Plan selbst).
+
+**Ein offener Treffer:** `BEO-003` (*Spec-Schreibung*, 2×). Dazu eine bereits
+**verkörperte** Zeile auf derselben Sub-Area, `BEO-007`: Sie steht mit Zähler
+und Belegen im Register, trägt aber den Vermerk, wohin sie ging, und wirkt über
+Lastenheft v0.2.0 von selbst. Auf *Planning-Lifecycle* steht keine Zeile.
+
+`BEO-003` erreicht **mit diesem Slice** nicht 3×: Es meint den vergessenen
+ADR-Bezug im Commit, und der ist hier nicht aufgetreten. Kein Folge-Slice. Was
+diesem Slice auffällt, sind zwei *neue* Beobachtungen — `BEO-004` aus der
+Closure-Beobachtung und `BEO-006` aus dem Risiko-Ausgang §6; beide legt §7 an,
+beide auf *Spec-Schreibung*.
 
 Voraussetzung-Wissen für den Block-Aufbau: Kurs
 [Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).
