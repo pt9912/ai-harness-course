@@ -66,6 +66,60 @@ Baseline (MR-NNN, Modus pro Sub-Area)
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
 
+## Template-Schichtung — was der Rumpf trägt und was der Kommentar
+
+Ein Template wird beim Adoptieren **abgebaut**: Platzhalter werden ersetzt, der
+Hinweis-Block entfernt, **alle HTML-Kommentare gelöscht**
+([`/lab/templates/README.md`](../../../lab/templates/README.md) §Verwendung).
+Was danach noch dasteht, ist alles, was der Adopter Wochen später hat. Deshalb
+ist die Frage *„Rumpf oder Kommentar?"* keine Stilfrage, sondern eine
+Haltbarkeitsfrage — und sie hat vier Antworten, nicht zwei:
+
+| Schicht | Inhalt | Überlebt das Adoptieren? |
+|---|---|---|
+| **Regelwerk** | Der Normtext. **Einzige** Quelle. | — es ist vendored (`.harness/baseline/<tag>/regelwerk/`) und lebt außerhalb des Artefakts |
+| **Rumpf** | Nur, was das *fertige Artefakt* trägt: Feldnamen, Feldreihenfolge, `<Platzhalter>` — plus **genau ein** Regelwerk-Zeiger pro Pflicht-Sektion | ja |
+| **DoD / Checkliste** | Jede Pflicht, die der Ausfüllende **abhaken** muss. Das ist die Prozedur | ja |
+| **Kommentar** | Begründung und Bedienhinweis — *warum* die Form so ist, *in welcher Reihenfolge* zu arbeiten ist | nein |
+
+**Der Test für den Rumpf:** *Liest sich das im veröffentlichten Artefakt als
+Inhalt — oder als Anleitung an jemanden?* Anleitung gehört nie in den Rumpf.
+Eine Closure-Notiz, die dem Leser erklärt, wie ein Sensor gebaut ist, hat ihre
+Rolle verlassen. Und Normtext im Rumpf hat einen zweiten Defekt: Schritt 3
+ersetzt die `<Platzhalter>` *darin* — aus der allgemeinen Regel wird eine
+falsche Einzelaussage.
+
+**Hard Rule.** *Kein Kommentar ist die einzige Fundstelle einer Norm.* Wer eine
+Regel in einen Template-Kommentar schreibt, schreibt sie in den Papierkorb des
+Adopters. Sie gehört ins Regelwerk; im Template steht der **Zeiger** darauf, im
+Rumpf, bei der Sektion, für die sie gilt.
+
+**Warum das die Duplikat-Frage mitbeantwortet:** Der Zeiger ist kein Zitat. Ein
+Template, das den Normtext ausschreibt, führt ihn ein zweites Mal — und zwei
+Fassungen driften, das ist die Klasse, gegen die die ganze Spiegel-Disziplin
+gebaut ist ([§Source Precedence](#source-precedence)). Der Zeiger ist einlösbar,
+weil das Bundle `regelwerk/` und `templates/` parallel ausliefert.
+
+**Feedback-Hälfte — und warum sie *inferential* ist.** Die naheliegende
+Mechanisierung wäre: *Trägt der Kommentar einer Sektion einen Regelwerk-Zeiger,
+muss der Rumpf auch einen tragen.* Sie trägt nicht. Erstens ist „ist dieser
+Satz eine Norm?" ein Urteil, kein Match — dieselbe Klasse wie *„ist das
+dieselbe Beobachtung?"* beim Beobachtungs-Register
+([Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)).
+Zweitens sind Template-Verzeichnisse für Referenz-Gates **bewusst
+ausgenommen** — ihre Pfade sind symbolisch, sie zeigen ins Ziel-Repo. Ein Gate,
+das dort trotzdem prüft, prüft entweder nichts oder das Falsche.
+
+Die Feedback-Hälfte ist deshalb der **Reviewer**: *Norm nur im
+Template-Kommentar* steht als HIGH-Regel im Reviewer-Skill
+([Ziel-Form](../../../lab/templates/.harness/skills/reviewer.template.md)).
+
+> **Grenze — ehrlich benannt:** Damit hängt diese Regel an einem Review, nicht
+> an einem Lauf. Wer ohne Review committet, wird nicht erwischt. Ein *Sensor*
+> hier zu behaupten, wo keiner steht, wäre genau die Klasse *halluziniertes
+> Gate* ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin))
+> — auf die eigene Konvention angewandt.
+
 ## Trennschärfen
 
 - *Spec* beschreibt **was**, *ADR* begründet **warum so**, *Plan* legt **wann
@@ -837,30 +891,40 @@ Information.
 Closure-Notiz nach außen**, nicht von der Regel nach innen — denn von der
 Regel aus ist nicht entscheidbar, ob sie einen Anker braucht.
 
-**Ausgelöst wird durch ein Feld, nicht durch eine Sektion und nicht durch
-Prosa:** durch das Pflichtfeld **`liegt in <Zielort>`**. Es steht in
+**Ausgelöst wird durch ein Feld, nicht durch die Semantik des Eintrags und
+nicht durch Prosa:** durch das Pflichtfeld **`liegt in <Zielort>`**. Es steht in
 `## Steering-Loop-Einträge` jeder `welle-<NN>-results.md` und — für wellenlos
 verkörperte Regeln — in §7 jeder `done/slice-<NNN>-<kurzer-titel>.md`; die
 kanonischen Formen liefern `welle-results.template.md` bzw.
 `slice.template.md` §7.
 
-**Der Geltungsbereich ist die Sektion, nicht die Datei.** Nur innerhalb dieser
-beiden Sektionen ist `liegt in` das Feld; überall sonst sind dieselben zwei
-Wörter gewöhnliche Sprache und lösen nichts aus — die Trigger-Formulierung
+**Das Feld gilt nur in diesen beiden Sektionen.** Überall sonst sind dieselben
+zwei Wörter gewöhnliche Sprache und lösen nichts aus — die Trigger-Formulierung
 „`SL-024` liegt in `done/`" ([Modul 6](../02-planung/modul-06-roadmap.md))
-ebenso wenig wie eine bloße **Erwähnung** eines Pfades im Fließtext. Ohne
-diesen Scope wäre der Auslöser nicht disambiguierbar.
+ebenso wenig wie eine bloße **Erwähnung** eines Pfades im Fließtext. Der
+Sektions-Scope ist es, der den Auslöser disambiguierbar macht; er widerspricht
+dem Satz oben nicht, sondern grenzt ihn ein: *innerhalb* der Sektion entscheidet
+das Feld, nicht die Sektion.
 
 **Was in den Backticks steht, ist ein Zielort, nicht immer eine Datei** — drei
 kanonische Füllungen: `AGENTS.md §<N>` (Datei + Abschnitt) ·
 `Makefile:<target>` (Datei + Make-Target) · `.harness/skills/<name>.md`
-(Datei allein). Geprüft wird dann: (1) **der Pfad existiert** — dafür trennt
-der Sensor ein Suffix ab ` §` oder ab `:` ab und prüft den Rest als Pfad;
-(2) **das Ziel trägt** `seit welle-<NN>` bzw. `seit slice-<NNN>` — bei einem
-Make-Target auf dessen Target-Zeile, bei einem Abschnitt in dessen Überschrift,
-bei einer Datei ohne Suffix irgendwo in ihr. Ohne die Abtrenn-Regel liefe die
-Make-Target-Variante rot, obwohl sie die Form erfüllt — der Sensor widerlegte
-sich selbst.
+(Datei allein). Geprüft wird dann:
+
+1. **Der Pfad existiert** — **ab Repo-Wurzel**, nicht relativ zur
+   Closure-Notiz. Der Zielort ist ein Ort im Repo, kein Nachbar der Notiz; eine
+   Regel wandert nicht mit, wenn die Notiz nach `done/` wandert. Dafür trennt
+   der Sensor ein Suffix ab ` §` oder ab `:` ab und prüft den Rest als Pfad.
+   *(Nicht zu verwechseln mit den Pfaden, die eine Closure-Notiz auf ihre
+   Nachbar-Artefakte setzt — der Zeiger aufs Beobachtungs-Register etwa ist
+   datei-relativ und folgt der Ruheort-Regel. Der Zielort ist die Ausnahme, und er ist es, weil
+   er aus dem Planungs-Baum hinauszeigt.)*
+2. **Das Ziel trägt** `seit welle-<NN>` bzw. `seit slice-<NNN>` — bei einem
+   Make-Target auf dessen Target-Zeile, bei einem Abschnitt in dessen
+   Überschrift, bei einer Datei ohne Suffix irgendwo in ihr.
+
+Ohne die Abtrenn-Regel liefe die Make-Target-Variante rot, obwohl sie die Form
+erfüllt — der Sensor widerlegte sich selbst.
 
 Fehlt das Feld, ist der Eintrag *gezählt, nicht verkörpert* und kein Gegenstand
 der Paarung — sonst liefe der Sensor auf jeder gewöhnlichen Slice-Closure rot
@@ -910,10 +974,12 @@ flowchart TB
     Risiko-Ausgänge"]
     B --> V["Beobachtungs-Register<br/>observations.md<br/>(neu oder Zähler +1)"]
     V --> C{"Wie oft?"}
-    C -- "3x" --> E["Verkörperung<br/>(Lese-Schritt löst aus: Welle-Closure,<br/>ohne Welle eigenständig)<br/>Steering-Loop-Eintrag + Pflichtfeld<br/>liegt in &lt;Zielort&gt;"]
+    C -- "3x" --> E["Verkörperung<br/>Lese-Schritt: Welle-Closure —<br/>Repo ohne Wellen: die Slice-Closure<br/>Steering-Loop-Eintrag + Zielort<br/>(Regel/Sensor: liegt in; Spec-Lücke: LH-*)"]
 
     C -- "1x / 2x: bleibt offen" --> F["Wellen-Eröffnung Schritt 2:<br/>offene Beobachtungen sichten"]
+    C -- "1x / 2x: bleibt offen" --> F2["Repo ohne Wellen:<br/>Slice-Planung sichtet<br/>(§8, Vorgelagert)"]
     F --> G["Slice-Planung:<br/>Sub-Area-Modus-Begründung<br/>Kriterium 3"]
+    F2 --> G
     G --> A
 
     E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-NN</b><br/>(wellenlos: seit slice-NNN)"]
@@ -928,6 +994,7 @@ flowchart TB
     style V fill:#fff4d6,stroke:#d4a017
     style E fill:#fff4d6,stroke:#d4a017
     style F fill:#d6ecff,stroke:#2a6fb5
+    style F2 fill:#d6ecff,stroke:#2a6fb5
     style G fill:#d6ecff,stroke:#2a6fb5
     style I fill:#d6ecff,stroke:#2a6fb5
     style K fill:#d6ecff,stroke:#2a6fb5

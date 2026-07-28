@@ -34,9 +34,6 @@ machen aufräumen".
 <!--
 Was muss erfüllt sein, damit der Slice in done/ wandert?
 Liste mit jeweils prüfbarem Kriterium.
-
-Das letzte Item liegt bewusst HINTER dem `git mv` — es prueft, was erst in
-`done/` sichtbar ist. Alle uebrigen sind vorher zu erfuellen.
 -->
 
 - [ ] LH-FA-<NN> erfüllt, Test referenziert.
@@ -46,7 +43,7 @@ Das letzte Item liegt bewusst HINTER dem `git mv` — es prueft, was erst in
 - [ ] Closure-Notiz mit Steering-Loop-Lerneintrag.
 - [ ] Beobachtungs-Register (`../observations.md`) fortgeschrieben — neue `BEO-<NNN>` oder Zähler +1 mit Beleg; keine Beobachtung angefallen ist ebenfalls eine Antwort und wird in §7 notiert.
 - [ ] Jedes Risiko aus §6 trägt einen Ausgang (eingetreten / entfallen / weiter offen).
-- [ ] Ohne laufende Welle: die drei Paarungen (Anker · Folge-Slice · Register) geprüft — **nach** dem `git mv` nach `done/`, weil sie dort suchen. Gehört der Slice zu einer Welle, prüft sie deren Closure.
+- [ ] **Nur in einem Repo ohne Wellen-Betrieb:** die drei Paarungen (Anker · Folge-Slice · Register) geprüft. Dieses Item liegt als einziges **hinter** dem `git mv` — die Paarungen suchen in `done/`. Schneidet dein Repo Wellen, prüft sie die nächste Welle-Closure, auch für Slices ohne Wellen-Zugehörigkeit.
 
 ## 3. Plan (vor Code)
 
@@ -99,65 +96,50 @@ Ein Slice geht nicht nach done/, während ein Risiko ohne Ausgang dasteht.
 
 - <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-NNN | entfallen: Grund | weiter offen: → BEO-NNN im Register>
 
-## 7. Closure-Notiz (bei Closure zu füllen)
+## 7. Closure-Notiz
 
 <!--
-BEGRUENDUNG — die verbindliche FORM steht im Rumpf darunter, nicht hier.
-Dieser Kommentar wird beim Kopieren entfernt (README.md §Verwendung,
-Schritt 5); alles, was den Adopter ueberleben muss, gehoert deshalb in die
-Zeilen unter diesem Block oder ins Baseline-Regelwerk.
+BEDIENHINWEIS — keine Norm. Die Norm steht im Baseline-Regelwerk, der Zeiger
+darauf im Rumpf darunter; dieser Kommentar wird beim Kopieren entfernt
+(README.md §Verwendung, Schritt 5) und darf deshalb nichts Tragendes halten.
 
-- Das Pflichtfeld `liegt in` ist der EINZIGE Ausloeser der Anker-Paarung, und
-  es loest nur INNERHALB dieser Sektion aus. Eine blosse Erwaehnung eines
-  Pfades im Fliesstext loest nichts aus — und der Trigger-Sprachgebrauch
-  "SL-024 liegt in `done/`" (Modul 6) ebenfalls nicht, er steht nicht hier.
-  Deshalb traegt die Folge-Slice-Zeile bewusst NICHT `liegt in`.
-- Warum "keine Beobachtung" eine Antwort ist: Eine erfundene BEO-<NNN>
-  verduennt den Zaehler mit Rauschen und kann nie ein zweites Mal auftreten.
-  Eine benannte Spec-Luecke ist KEINE Ausnahme davon — sie durchlaeuft das
-  Register wie die anderen zwei Lerneintrags-Klassen und traegt eine
-  BEO-<NNN>; sie unterscheidet sich nur darin, WO sie verkoerpert wird
-  (Lastenheft-Version / Folge-ADR statt Pfad), und traegt deshalb kein
-  `liegt in`.
-- Warum die drei Paarungen NACH dem `git mv` geprueft werden: Sie suchen in
-  `done/`. Wer sie beim Schreiben dieser Sektion prueft, prueft eine Datei,
-  die noch in `in-progress/` liegt — der Sensor laeuft dann gruen, weil er
-  nichts sieht.
-- Finding-Klassen aus dem Review dieses Slice (Summary-Zeile des
-  Review-Reports): welche gehen als Beobachtung weiter? Vorhandene BEO-<NNN>
-  ZITIEREN statt neu formulieren — sonst zaehlt das Register zwei Namen
-  getrennt.
-- Steering Loop, kanonische Definition: [Baseline-Regelwerk §Steering Loop](../../../../regelwerk/grundlagen-klassifikation.md#steering-loop)
+- REIHENFOLGE: Diese Sektion vor dem `git mv` nach done/ fuellen. Einzige
+  Ausnahme ist das letzte DoD-Item in §2 — die drei Paarungen suchen in
+  `done/` und werden danach geprueft.
+- Die Feld-Zeile `liegt in` nur setzen, wenn mit diesem Slice wirklich etwas
+  verkoerpert wurde; sonst die Zeile streichen. Feld und Zielort stehen auf
+  EINER Zeile, die Sektionsangabe INNERHALB der Backticks — ein zeilenweiser
+  Sensor greift sonst nicht.
+- Beim Beobachtungs-Register vorhandene BEO-<NNN> ZITIEREN statt neu
+  formulieren — sonst zaehlt das Register zwei Namen getrennt. Das gilt auch
+  fuer Finding-Klassen aus dem Review dieses Slice (Summary-Zeile des
+  Review-Reports).
 -->
 
-**Regeln dieser Sektion:** Baseline-Regelwerk `modul-06-roadmap.md`
-§Das Beobachtungs-Register (Modul 6) · `grundlagen-konventionen.md`
-§Herkunfts-Anker für Steering-Loop-Regeln. Das Feld `liegt in` steht nur,
-wenn die Regel **mit diesem Slice** verkörpert wurde (wellenlos, 3× erreicht);
-sonst entfällt es und der Eintrag ist *gezählt, nicht verkörpert*. Das
-Beobachtungs-Register wird bei **jeder** Closure fortgeschrieben — auch mit
-der Antwort *keine Beobachtung*.
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Das Beobachtungs-Register · `grundlagen-konventionen.md`
+§Herkunfts-Anker für Steering-Loop-Regeln.
 
 - **Was hat funktioniert:** <…>
 - **Was ging anders als geplant:** <…>
 - **Steering-Loop-Eintrag:** <Guide oder Sensor> <geschärft/ergänzt>: <was genau>
   — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.
   Auslöser: `BEO-<NNN>` (<slice-NNN>, <slice-MMM>, <slice-KKK> — 3×).
-  <!-- Das Ziel traegt dann `(seit slice-<NNN>)`. Feld und Pfad stehen auf
-       EINER Zeile, die Sektionsangabe INNERHALB der Backticks — ein
-       zeilenweiser Sensor greift sonst nicht. -->
 - **Beobachtungs-Register (`../observations.md`):** <neue `BEO-<NNN>` angelegt (Sub-Area, 1×, Beleg slice-NNN) | `BEO-<NNN>` auf <N>× erhöht, Beleg slice-NNN ergänzt | keine Beobachtung angefallen>
-- **Folge-Slices:** <slice-NNN (<Titel>) — ist eine Datei in `open/`; genannt heißt angelegt>
+- **Folge-Slices:** <slice-NNN (<Titel>) — ist eine Datei in `open/`>
 - **Risiken aus §6:** <jedes mit genau einem Ausgang — siehe §6>
-- **Drei Paarungen** (nur ohne laufende Welle; nach dem `git mv` nach `done/`): <Anker · Folge-Slice · Register — Ergebnis>
+- **Drei Paarungen:** <nur im Repo ohne Wellen-Betrieb — Anker · Folge-Slice · Register, Ergebnis>
 
 ## 8. Sub-Area-Modus-Begründung
 
-**Status:** Pflicht-Sektion bei mindestens einer berührten Sub-Area
-in BF oder Hybrid. Bei reinem GF genügt der Hinweis
-*"alle berührten Sub-Areas GF (siehe Baseline-Regelwerk
-`modul-05-planning-harness.md` §Ziel-Form: Sub-Area-Modus-Begründung)"*. Optional bei reinem Refactor ohne neue
-Sub-Area-Berührung. Die vier Pflichtkriterien (Konventionen-Dichte ·
+**Status:** Diese Sektion steht in **jedem** Slice-Plan — was variiert, ist
+ihr Umfang. Die beiden *Vorgelagert*-Blöcke unten sind immer auszufüllen, auch
+bei reinem Refactor; der **Modus-Begründungsblock** danach ist Pflicht bei
+mindestens einer berührten Sub-Area in BF oder Hybrid. Bei reinem GF genügt
+dafür der Hinweis *"alle berührten Sub-Areas GF (siehe Baseline-Regelwerk
+`modul-05-planning-harness.md` §Ziel-Form: Sub-Area-Modus-Begründung)"*; bei
+reinem Refactor ohne neue Sub-Area-Berührung entfällt er ganz.
+Die vier Pflichtkriterien (Konventionen-Dichte ·
 Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand)
 stehen in
 Baseline-Regelwerk `modul-05-planning-harness.md` §Ziel-Form: Sub-Area-Modus-Begründung.
@@ -176,13 +158,10 @@ berührten Sub-Areas dort? Dann gehört der Zähler-Stand unten ins
 Folge-Slice. Keine Treffer sind ebenfalls eine Antwort und werden
 notiert.
 
-**Beide *Vorgelagert*-Blöcke hängen nicht am Modus** — sie gelten auch bei
-reinem GF, wo diese Sektion sonst nur aus dem Hinweis oben besteht. Der
-Sichtungs-Block ist in einem Repo **ohne Wellen-Betrieb** der einzige Leser
-für alles, was unter der Schwelle steht: Die Wellen-Eröffnung Schritt 2, die
-ihn sonst trägt, findet dann nicht statt. Fällt er weg, ist das Register
-unterhalb von 3× write-only — genau der Zustand, gegen den es gebaut wurde
-(Baseline-Regelwerk `modul-06-roadmap.md` §Das Beobachtungs-Register).
+Beide *Vorgelagert*-Blöcke hängen weder am Modus noch am Slice-Typ: In einem
+Repo **ohne Wellen-Betrieb** ist der Sichtungs-Block der einzige Leser für
+alles, was unter der Schwelle steht (Baseline-Regelwerk `modul-06-roadmap.md`
+§Das Beobachtungs-Register).
 
 <!-- Block für jede berührte Sub-Area duplizieren. Format identisch
 mit dem im Baseline-Regelwerk §Ziel-Form: Sub-Area-Modus-Begründung

@@ -59,14 +59,14 @@ stateDiagram-v2
 ([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)), nicht nur
 "Tests grün". Die beiden **Rückführungen** `in_progress → next` (zu groß —
 zurück zur Zerlegung) und `in_progress → open` (Blocker — meist mit Carveout,
-siehe [Modul 7](modul-07-carveouts.md)) verlangen die Angabe des Grundes: Sie
-sehen wie Scheitern aus und tragen in Wahrheit die Lifecycle-Disziplin — wer
-sie nicht benutzt, schiebt still weiter.
+siehe [Modul 7](modul-07-carveouts.md)) verlangen den Grund im Slice-Plan §4,
+wo die Rückführungs-Bedingungen vorab benannt sind.
 
 `done` ist dabei **kein Endzustand der Information**: Die Beobachtungen aus
 §7 sind bei der Slice-Closure bereits ins Beobachtungs-Register eingetragen
 (Notiz im Diagramm) und werden **von dort** weitergelesen — vom Lese-Schritt
-(Welle-Closure; ohne Welle löst ihn die Slice-Closure selbst aus) und vom
+(Welle-Closure; in einem Repo ohne Wellen-Betrieb löst ihn die Slice-Closure
+selbst aus) und vom
 Sichtungs-Schritt der Slice-Planung. Auch die Datei in `done/` bleibt Quelle:
 Für wellenlos verkörperte Regeln zeigt der Herkunfts-Anker `seit slice-<NNN>`
 auf genau dieses §7 zurück. Und am anderen

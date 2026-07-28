@@ -36,6 +36,10 @@ bewusst kurz (Ergänzungs-Kanal, nicht Hauptkanal).
 - Sicherheits-Anti-Pattern (Injection, fehlende Auth-Prüfung)
 - Korrektheitsfehler im *kritischen* Pfad (<z. B. Index-Schreiben, Auth>)
 - Suppression eines Gates (`#noqa`, `//nolint`, `[SuppressMessage]`) ohne ADR
+- **Norm nur im Template-Kommentar** — eine Regel steht im `<!-- -->`-Block
+  eines `.template.md` und nirgends sonst. Sie ist beim Adopter weg, sobald er
+  die Kommentare entfernt. Kein Gate fängt das (siehe Baseline-Regelwerk
+  `grundlagen-konventionen.md` §Template-Schichtung)
 - <**repo-spezifisch #1** — eine Regel, die ein generischer Skill nicht abdeckt,
   z. B. „git mv + Inhalt = zwei Commits" oder „Accepted-ADRs immutable">
 - <**repo-spezifisch #2** — eine zweite solche Regel>

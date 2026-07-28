@@ -17,19 +17,18 @@ Hard Rule "git mv + Inhaltsänderung = zwei Commits" in
 
 ## Aktueller Stand
 
-| Verzeichnis | Anzahl Slices |
-|---|---|
-| `open/` | 1 (slice-014-ann-suche) |
-| `next/` | 0 |
-| `in-progress/` | 1 (slice-013-property-tests) |
-| `done/` | 13 (slice-001 bis slice-012, slice-020) |
+Nicht als Snapshot hier eintragen — der Stand ergibt sich aus den
+Verzeichnissen: `make plan-status`. Eine Tabelle daneben wäre eine zweite
+Quelle für denselben Zustand und driftet, sobald ein `git mv` sie nicht
+mitnimmt.
 
 Die `done/`-Slices sind im Beispiel nur exemplarisch vertreten — siehe
 `done/`-Verzeichnis für die drei Vorbild-Closures (`slice-009`, `slice-020`,
 `welle-1-results.md`; `welle-1-mvp.md` daneben ist der geschlossene
 Welle-*Plan*, keine Closure-Notiz). `slice-020` ist das
 Vorbild für einen **wellenlosen** Slice (Kurs Modul 6 §Wann Arbeit eine
-Welle braucht).
+Welle braucht) — genauer: für einen Slice **ohne Wellen-Zugehörigkeit** in
+einem Repo, das Wellen schneidet.
 
 ## Slices vs. Wellen — zwei Ablagen, dieselbe Regel
 

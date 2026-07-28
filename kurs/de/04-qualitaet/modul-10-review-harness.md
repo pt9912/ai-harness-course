@@ -211,7 +211,7 @@ Bei dreimaligem Auftreten desselben Findings:
 
 Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
 (siehe ADR-Hard-Rule, Modul 4). Ein HIGH-Eintrag, der aus dem Steering
-Loop kam, trägt den Herkunfts-Anker `(seit welle-<NN>)` bzw. `(seit slice-<NNN>)` — siehe
+Loop kam, trägt den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)` — siehe
 [`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln).
 ```
 

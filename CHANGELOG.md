@@ -64,9 +64,11 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   eine in `done/` zitierte `BEO-<NNN>` hat eine Registerzeile, und jede
   Registerzeile trägt mindestens einen Beleg — *nicht* die Umkehrung „jede Zeile
   ist irgendwo zitiert", denn die allermeisten stehen unter der Schwelle.
-  Der Beleg ist dabei formgebunden (`slice-<NNN>`, löst als Datei im
-  Planning-Lifecycle auf, so viele wie der Zähler behauptet) — sonst wäre die
-  Belegspalte frei erfindbar.
+  Der Beleg ist dabei formgebunden — **Form** (`slice-<NNN>`, kein Freitext) ·
+  **Anzahl** (so viele wie der Zähler) · **Lage** (führt das Repo die
+  Slice-Datei, liegt sie in `done/`). Die *Existenz* wird bewusst nicht
+  verlangt, und diese Grenze steht benannt: Ein Repo darf Slices führen, die es
+  nicht als Plan-Datei ablegt.
   Muster: schreiben → committen → Gate prüft Deckung. *Welches* Werkzeug, legt
   der Kurs nicht fest.
 - **Verzeichniskonvention:** Die flache Ebene unter `planning/` ist jetzt
@@ -94,13 +96,44 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   Spec-Lücke) — sieben Zeilen insgesamt.
   Das Register erklärt die retrospektive
   Kennungs-Vergabe. `slice-009` und `slice-020` zitieren ihre Kennungen,
-  `welle-1-results.md` nennt `BEO-005` und `BEO-007` beim Auslöser — die
-  Register-Paarung hält damit im Vorbild.
+  `welle-1-results.md` nennt `BEO-005` und `BEO-007` beim Auslöser — beide
+  Hälften der Register-Paarung halten damit im Vorbild, Form und Anzahl der
+  Belege eingeschlossen.
 - **Der Welle-Plan ist im Vorbild jetzt vertreten:** `done/welle-1-mvp.md`
   (geschlossen, neben seiner Ergebnis-Notiz) und `welle-2-qualitaet.md` (flach,
   aktive Welle). Ohne sie behauptete die Regel eine Pflicht, die das eigene
   Vorbild nicht erfüllte. Der Planning-Index im Lab trägt die
   Slice-vs-Welle-Konvention dazu.
+
+### Nachgezogen (Review-Runden 7 bis 9)
+
+- **Neue Konvention: [§Template-Schichtung](kurs/de/grundlagen/konventionen.md)**
+  samt Spiegel. Ein Template wird beim Adoptieren abgebaut — alle Kommentare
+  fallen weg. Vier Schichten statt zwei: **Regelwerk** trägt den Normtext als
+  einzige Quelle, der **Rumpf** nur Form plus einen Regelwerk-Zeiger pro
+  Pflicht-Sektion, die **DoD** die abhakbare Prozedur, der **Kommentar** die
+  Begründung. Hard Rule: *Kein Kommentar ist die einzige Fundstelle einer
+  Norm.* Das war die gemeinsame Ursache von sieben Befunden der Runde 9 — die
+  Runde 8 hatte Normlast verschoben, ohne einen Maßstab dafür zu haben.
+  Die Feedback-Hälfte ist **inferential** (HIGH-Regel im Reviewer-Skill), nicht
+  computational: „Ist dieser Satz eine Norm?" ist ein Urteil, und
+  Template-Verzeichnisse sind für Referenz-Gates bewusst ausgenommen. Ein
+  Sensor wäre hier ein halluziniertes Gate; die Grenze steht benannt.
+- **„Ohne Welle" ist der Repo-Modus, nicht die Slice-Zugehörigkeit.** Ein Repo
+  arbeitet mit Wellen und Slices oder nur mit Slices; daran hängt, wer
+  Lese-Schritt, Sichtungs-Schritt, Trigger-Audit und die drei Paarungen trägt.
+  Das Kopf-Feld `**Welle:**` eines Slice sagt nur, ob er in ein Bündel gehört —
+  ein Repo mit Wellen prüft **auch Slices ohne Wellen-Zugehörigkeit** bei
+  seiner nächsten Welle-Closure. Runde 8 hatte die beiden Achsen
+  zusammengezogen; Template, Vorbild `slice-020` und der Lösungsblock (c) sind
+  zurückgenommen.
+- **Der Fluss-Graph** in `konventionen.md` zeigt jetzt beide Leser für
+  Einträge unter der Schwelle — bisher führte die `1×/2×`-Kante allein zur
+  Wellen-Eröffnung, die es im wellenlosen Repo nicht gibt.
+- **Der Closure-Note-Gate im Lab misst §7 statt §5.** `find_closure_section`
+  nahm die erste Überschrift mit „Closure" im Titel — das war
+  *Closure-Trigger*, geschrieben bei der Planung. Ein Slice mit vollständig
+  leerer Closure-Notiz lief grün; mit dem Fix läuft er rot (Break-Test).
 
 ### Nachgezogen (Review-Runden 7 und 8)
 

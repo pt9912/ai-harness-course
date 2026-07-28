@@ -48,9 +48,7 @@ auch bei > 100k Index-Einträgen zu halten.
 
 ## 7. Closure-Notiz
 
-<!-- Bei der Closure füllen — vor dem `git mv` nach `done/`, nicht danach.
-Ausnahme: die drei Paarungen werden erst danach geprüft (§2, letztes
-DoD-Item). -->
+<!-- Bei der Closure füllen — vor dem `git mv` nach `done/`, nicht danach. -->
 
 ## 8. Sub-Area-Modus-Begründung
 
@@ -59,6 +57,10 @@ DoD-Item). -->
 für das DocSearch-Lab als Ganzes). Spec-Schreibung (LH-FA-12) und
 Architektur (ADR-0004 in Outline) führen, Code folgt — kein
 Reconciliation, keine BF/Hybrid-Begründung nötig.
+
+**Vorgelagert — offene Beobachtungen gesichtet:** Register
+(`../observations.md`) durchgegangen. `BEO-002` (*Test-Infrastruktur*, 1×) berührt die Determinismus-Frage dieses
+Slice und steht unten im *Evidenz-/Diskrepanz-Risiko*. Sonst keine Treffer.
 
 Voraussetzung-Wissen für den Block-Aufbau: Kurs
 [Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).

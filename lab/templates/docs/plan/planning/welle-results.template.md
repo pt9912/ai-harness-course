@@ -43,30 +43,19 @@ BEGRUENDUNG — die verbindliche FORM steht im Rumpf darunter, nicht hier.
 Dieser Kommentar wird beim Kopieren entfernt (README.md §Verwendung,
 Schritt 5).
 
-- Warum ein Feld und keine Prosa: Der Zielort ist maschinell pruefbar und
-  bildet mit dem Herkunfts-Anker am Ziel ein PAAR. Das Feld loest die
-  Anker-Paarung nur INNERHALB dieser Sektion aus; eine blosse Erwaehnung
-  eines Pfades im Fliesstext loest nichts aus.
-- Feld und Pfad stehen auf EINER Zeile — ein zeilenweiser Sensor greift sonst
-  nicht; die Sektionsangabe steht INNERHALB der Backticks.
-- Warum die Spec-Luecke kein `liegt in` traegt: Sie ist verkoerpert wie die
-  anderen zwei Klassen, nur nicht an einem Pfad, sondern in einer
-  versionierten Spec. Ihr Gegenstueck ist die `LH-*`-ID, nicht der
-  Herkunfts-Anker — deshalb ist sie kein Gegenstand der ANKER-Paarung. An der
-  REGISTER-Paarung nimmt sie teil wie jeder andere Eintrag.
-- Regel und Sensor: Baseline-Regelwerk `grundlagen-konventionen.md`
-  §Herkunfts-Anker für Steering-Loop-Regeln.
+- Hier stehen nur Beobachtungen, die im Register 3x erreicht haben — jeder
+  Eintrag nennt seine BEO-<NNN>. Alle drei Klassen kommen von dort:
+  geschaerfte Regel · neuer Sensor · benannte Spec-Luecke.
+- Feld und Zielort stehen auf EINER Zeile — ein zeilenweiser Sensor greift
+  sonst nicht; die Sektionsangabe steht INNERHALB der Backticks.
+- Die Spec-Luecke traegt statt `liegt in` ihre LH-*-ID. Warum, steht im
+  Regelwerk — hier nur: die Zeile sieht deshalb anders aus, das ist kein
+  Versehen.
 -->
 
-**Regeln dieser Sektion:** Nur Beobachtungen, die im Beobachtungs-Register
-(`../observations.md`) die Schwelle **3×** erreicht haben — jeder Eintrag
-nennt seine `BEO-<NNN>`. Alle drei Klassen kommen von dort: geschärfte Regel
-(`AGENTS.md` / `MR-<NNN>`) · neuer Sensor (Gate, Skill) · benannte Spec-Lücke
-(Lastenheft-Version, Folge-ADR). Die ersten beiden tragen das Pflichtfeld
-`liegt in <Zielort>`, und das Ziel trägt `seit welle-<NN>`; die Spec-Lücke trägt
-stattdessen ihre `LH-*`-ID. Beides wird am Ende von Schritt 3 geprüft — die
-Anker-Paarung und die Register-Paarung (jede genannte `BEO-<NNN>` hat eine
-Zeile im Register).
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wellen-Closure-Prozedur, Schritt 3 · `grundlagen-konventionen.md`
+§Herkunfts-Anker für Steering-Loop-Regeln.
 
 - **<Guide oder Sensor>** <geschärft/ergänzt>: <was genau>
   — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.

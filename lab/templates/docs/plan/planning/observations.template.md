@@ -6,6 +6,10 @@
 
 **Status:** Aktiv. **Letzte Änderung:** YYYY-MM-DD.
 
+Regeln dieses Registers: Baseline-Regelwerk `modul-06-roadmap.md`
+§Das Beobachtungs-Register — wer schreibt, wer liest, wann gestrichen wird und
+welche Form ein Beleg hat.
+
 <!--
 Der Zähler des Steering Loops (1x notieren · 2x Symptom · 3x Lücke).
 Ziel-Form und Regeln: Baseline-Regelwerk `modul-06-roadmap.md`
@@ -21,27 +25,27 @@ WER SCHREIBT: die Slice-Closure (§7), vor dem `git mv` nach done/.
 WER LIEST:    die Welle-Closure (was hat 3x erreicht -> verkoerpern) und die
               Wellen-Eroeffnung Schritt 2 (betrifft eine Beobachtung die
               Sub-Areas dieser Welle?).
-OHNE WELLE:   BEIDE Leser haengen dann an der Slice-Arbeit — den Lese-Schritt
+REPO OHNE WELLEN-BETRIEB:
+              BEIDE Leser haengen dann an der Slice-Arbeit — den Lese-Schritt
               loest die Slice-Closure aus (was hat mit ihr 3x erreicht?), den
               Sichtungs-Schritt die Slice-PLANUNG (`slice.template.md` §8,
-              Block "Vorgelagert — offene Beobachtungen sichten"; er haengt
-              nicht am Sub-Area-Modus und gilt auch bei reinem GF). Faellt der
+              Block "Vorgelagert — offene Beobachtungen sichten"). Faellt der
               zweite weg, hat alles unter der Schwelle keinen Leser.
+              Ein Slice OHNE Wellen-Zugehoerigkeit in einem Repo MIT Wellen
+              aendert daran nichts — dort liest die naechste Welle-Closure.
 
 REGELN
 - Erstauftreten: benennen, KENNUNG vergeben (BEO-<NNN>, fortlaufend), Beleg
   eintragen. Wiederauftreten: Zaehler erhoehen, Beleg ergaenzen — die
   Bezeichnung NICHT neu formulieren, sie ist nur noch Label.
-- Ein BELEG ist eine Slice-Kennung `slice-<NNN>`, die als Datei im
-  Planning-Lifecycle aufloest (open/, next/, in-progress/, done/) —
-  nicht Freitext. Sonst ist die Belegspalte frei erfindbar und der Zaehler
-  behauptet eine Haeufigkeit, die niemand nachpruefen kann. Die Anzahl der
-  Belege MUSS dem Zaehler entsprechen.
+- Ein BELEG ist eine Slice-Kennung `slice-<NNN>`, kein Freitext; die Anzahl
+  entspricht dem Zaehler. Fuehrt das Repo die Slice-Datei, liegt sie in
+  `done/` — Belege entstehen bei der Closure.
 - Erreicht ein Eintrag 3x, wandert er in die Steering-Loop-Eintraege der
   laufenden Welle-Closure und wird dort zur verkoerperten Regel (mit
-  Herkunfts-Anker seit welle-<NN>). Ohne Welle: beim eigenstaendig
-  ausgeloesten Lese-Schritt, Anker seit slice-<NNN>. Die Zeile bleibt hier
-  stehen, mit Vermerk wohin.
+  Herkunfts-Anker seit welle-<NN>). In einem Repo ohne Wellen-Betrieb loest
+  die Slice-Closure den Lese-Schritt aus, Anker seit slice-<NNN>. Die Zeile
+  bleibt hier stehen, mit Vermerk wohin.
 - Eintraege verfallen nicht von selbst. Wer einen streicht, schreibt dazu,
   warum er nicht mehr auftreten kann (Ursache beseitigt, Sub-Area entfallen)
   — sonst ist es stilles Vergessen.
@@ -62,7 +66,7 @@ allermeisten stehen unter der Schwelle und sind nirgends zitiert.
 |---|---|---|---|---|---|
 | BEO-001 | <kurze, gleichbleibende Bezeichnung> | <Sub-Area> | 1× | <slice-NNN> | offen |
 | BEO-002 | <aus Slice-§6 übernommenes offenes Risiko> | <Sub-Area> | 2× | <slice-NNN>, <slice-NNN> | offen |
-| BEO-003 | <Beispiel: Schwelle erreicht> | <Sub-Area> | 3× | <slice-NNN>, … | verkörpert in `AGENTS.md` §<N> (`seit welle-<NN>`) |
+| BEO-003 | <Beispiel: Schwelle erreicht> | <Sub-Area> | 3× | <slice-NNN>, <slice-NNN>, <slice-NNN> | verkörpert in `AGENTS.md` §<N> (`seit welle-<NN>`) |
 
 ## Gestrichene Einträge
 

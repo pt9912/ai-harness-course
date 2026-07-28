@@ -22,11 +22,18 @@ INLINE_CODE_RE = re.compile(r"`[^`]+`")
 
 
 def find_closure_section(text: str) -> str | None:
-    """Return the body of the first heading whose title contains 'closure',
-    up to the next heading of equal or higher level (or EOF)."""
+    """Return the body of the CLOSURE-NOTE heading, up to the next heading of
+    equal or higher level (or EOF).
+
+    Gesucht ist die Notiz, nicht der Trigger: "5. Closure-Trigger" wird bei der
+    PLANUNG geschrieben und stand vorher als erster Treffer im Weg — der Gate
+    war damit gruen, auch wenn die Closure-Notiz leer blieb. Ein Welle-PLAN in
+    done/ (welle-<NN>-<titel>.md) hat aus demselben Grund einen
+    "3. Closure-Trigger", der hier nicht gemeint ist."""
     headings = [(m.start(), m.end(), len(m.group(1)), m.group(2)) for m in HEADING_RE.finditer(text)]
     for i, (start, end, level, title) in enumerate(headings):
-        if "closure" not in title.lower():
+        low = title.lower()
+        if "closure" not in low or "trigger" in low:
             continue
         body_start = end
         body_end = len(text)

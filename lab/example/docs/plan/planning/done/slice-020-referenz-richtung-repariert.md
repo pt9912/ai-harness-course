@@ -30,7 +30,6 @@ Slice-Plan statt umgekehrt.
 - [x] Closure-Notiz (siehe §7).
 - [x] Beobachtungs-Register (`../observations.md`) fortgeschrieben — `BEO-004` neu (1×), `BEO-006` neu (1×, aus dem Risiko-Ausgang §6).
 - [x] Jedes Risiko aus §6 trägt einen Ausgang.
-- [x] Ohne laufende Welle: die drei Paarungen geprüft — **nach** dem `git mv` nach `done/` (siehe §7).
 
 ## 3. Plan (vor Code)
 
@@ -82,10 +81,10 @@ und kein Gegenstand der Anker-Paarung.
 
 **Folge-Slice:** keiner.
 
-**Drei Paarungen** (ohne laufende Welle; geprüft nach dem `git mv` nach
-`done/`): (a) Anker — kein `liegt in`-Feld in dieser Sektion, also
-gegenstandslos; (b) Folge-Slice — keiner genannt; (c) Register — `BEO-004`
-und `BEO-006` haben je eine Zeile mit Beleg. Alle grün.
+**Drei Paarungen:** hier nicht — dieses Repo schneidet Wellen. Dass *dieser
+Slice* zu keiner gehört, ändert daran nichts: Die nächste Welle-Closure
+(`welle-2-qualitaet`) prüft alles, was seit `welle-1` in `done/` gelandet ist,
+also auch `BEO-004` und `BEO-006` aus dieser Notiz.
 
 ## 8. Sub-Area-Modus-Begründung
 
@@ -93,6 +92,11 @@ und `BEO-006` haben je eine Zeile mit Beleg. Alle grün.
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
 für das DocSearch-Lab als Ganzes). Reine Spec-Korrektur ohne
 Konventions-Adaption — keine BF/Hybrid-Begründung nötig.
+
+**Vorgelagert — offene Beobachtungen gesichtet:** Register
+(`../observations.md`) durchgegangen. Keine der berührten Sub-Areas (*Spec-Schreibung*) stand beim Anlegen dieses
+Slice bereits im Register — es entstand erst mit dieser Closure. Keine Treffer
+ist ebenfalls eine Antwort.
 
 Voraussetzung-Wissen für den Block-Aufbau: Kurs
 [Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).

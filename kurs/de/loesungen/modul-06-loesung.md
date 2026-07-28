@@ -106,9 +106,10 @@ autoritativ, was gerade läuft.
 **Wo der Steering-Loop-Eintrag landet:** im **Beobachtungs-Register**
 (`docs/plan/planning/observations.md`) — eingetragen bei der
 Slice-Closure, unabhängig von jeder Welle. **Gelesen** wird er bei der
-nächsten Welle-Closure (was hat 3× erreicht → verkörpern); läuft gar keine
-Welle, löst die Slice-Closure den Lese-Schritt selbst aus und der
-Herkunfts-Anker lautet `seit slice-<NNN>`. Beide Hälften gehören zur
+nächsten Welle-Closure (was hat 3× erreicht → verkörpern) — auch für diesen
+Slice, obwohl er zu keiner Welle gehört. Erst in einem Repo, das **gar keine**
+Wellen schneidet, löst die Slice-Closure den Lese-Schritt selbst aus, und der
+Anker lautet `seit slice-<NNN>`. Beide Hälften gehören zur
 Antwort — eintragen ohne benannten Leser wäre genau die Ablage, gegen die
 das Register gebaut ist. Der Zähler
 unterscheidet nicht nach Welle-Zugehörigkeit, sonst zählte er an
@@ -191,15 +192,21 @@ drei — sie existiert ab Repo-Beginn.
 
 | Wer | Wann | Was |
 |---|---|---|
-| **Slice-Closure** | bei jeder Closure, *vor* dem `git mv` nach `done/` | neuer Eintrag mit `BEO-<NNN>` oder Zähler +1 und Beleg |
+| **Slice-Closure** | bei jeder Closure, *vor* dem `git mv` nach `done/` | schreibt: neuer Eintrag mit `BEO-<NNN>` oder Zähler +1 und Beleg |
 | **Welle-Closure** | bei jeder Closure | liest: was hat 3× erreicht → verkörpern |
+| **Wellen-Eröffnung, Schritt 2** | bei jeder Eröffnung | liest: was steht *unter* der Schwelle und betrifft die Sub-Areas dieser Welle? |
+
+Zwei Leser, nicht einer — der zweite hält die Einträge unterhalb von 3× am
+Leben. In einem Repo ohne Wellen-Betrieb übernimmt beide die Slice-Arbeit:
+den Lese-Schritt die Closure, den Sichtungs-Schritt die Planung (§8).
 
 Das ist der Punkt, an dem der Zähler **von der Welle unabhängig** wird: Er
 läuft mit jedem geschlossenen Slice, auch mit wellenlosen.
 
-**Der Unterschied *gezählt* vs. *verkörpert*** (exzellent): Ohne Welle
-zählt das Register weiter; den Lese-Schritt löst aus, wer wellenlos
-arbeitet, und der Herkunfts-Anker lautet dann `seit slice-<NNN>`. Ein Eintrag kann
+**Der Unterschied *gezählt* vs. *verkörpert*** (exzellent): In einem Repo
+**ohne Wellen-Betrieb** zählt das Register weiter; den Lese-Schritt löst dann
+die Slice-Closure selbst aus, und der Herkunfts-Anker lautet
+`seit slice-<NNN>`. Ein Eintrag kann
 also bei 3× stehen und trotzdem noch keine Regel sein. Was dann fehlt, ist
 nicht der Zähler, sondern der Lese-Schritt. Und die `BEO-<NNN>` macht die
 Zählung **unabhängig vom Wortlaut der Bezeichnung**: Ohne Kennung zählt eine
@@ -298,18 +305,21 @@ getrennt.
 **(b) Nein.** Die Slice-Closure trägt ein, unabhängig von jeder Welle. Genau
 dafür steht das Register außerhalb der Welle-Closure.
 
-**(c)** Bis zum nächsten **Lese-Schritt** steht der Eintrag bei 3× und ist
-**gezählt, aber nicht verkörpert**. Erst er macht daraus eine Regel in
-`AGENTS.md`, einem Gate, einem Skill oder einer `MR-*`. Wer beides
-gleichsetzt, hält eine Notiz für einen Wächter.
+**(c)** Bis zur nächsten **Welle-Closure** steht der Eintrag bei 3× und ist
+**gezählt, aber nicht verkörpert**. Erst ihr Lese-Schritt macht daraus eine
+Regel in `AGENTS.md`, einem Gate, einem Skill oder einer `MR-*`, mit
+Herkunfts-Anker `seit welle-<NN>`. Wer beides gleichsetzt, hält eine Notiz für
+einen Wächter.
 
-Wo der Lese-Schritt liegt, hängt an (b): Gehört der Slice zu einer Welle,
-liest deren Closure, und der Herkunfts-Anker lautet `seit welle-<NN>`.
-Gehört er — wie hier — zu **keiner**, gibt es keine Welle-Closure, auf die
-zu warten wäre; die Slice-Closure löst den Lese-Schritt selbst aus, und der
-Anker lautet `seit slice-<NNN>`. Wer hier ausnahmslos „bis zur nächsten
-Welle-Closure" antwortet, hat den wellenlosen Zweig übersehen, den (b)
-gerade eröffnet hat.
+**Nicht zu verwechseln — die Achse aus (b) ist eine andere:** Dass *dieser
+Slice* zu keiner Welle gehört, heißt nicht, dass das Repo keine Wellen
+schneidet. Das `grid-gym`-Repo tut es; seine nächste Welle-Closure liest das
+Register und findet den Eintrag, egal aus welchem Slice er stammt. Der Anker
+`seit slice-<NNN>` und die Slice-Closure als Lese-Schritt gehören zum
+**wellenlosen Repo** — dem Fall, in dem es gar keine Welle-Closure gibt
+([Modul 6 §Wann Arbeit eine Welle braucht](../02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
+Wer beides gleichsetzt, verlegt den Lese-Schritt an einen Ort, an dem ihn
+niemand ausführt.
 
 Maßstab: Die Antwort trennt *eintragen* (Slice-Closure) von *lesen*
 (Welle-Closure) und benennt, dass die Verkörperung am **Lese-Schritt** hängt, nicht am Zähler.

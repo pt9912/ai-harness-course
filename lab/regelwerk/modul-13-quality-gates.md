@@ -72,7 +72,7 @@ coverage-gate: ## Coverage threshold gate (bootstrap-aware, LH-FA-BUILD-008).
 ```
 
 Kam das Gate aus dem Steering Loop statt aus einer Anforderung, trägt der
-Kommentar zusätzlich den Herkunfts-Anker `· seit welle-<NN>` bzw. `· seit slice-<NNN>`
+Kommentar zusätzlich den Herkunfts-Anker `· seit welle-<NN>` — ohne Welle `· seit slice-<NNN>`
 ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
 
 Das Gate prüft heute z. B. 40 %, schaltet bei Meilenstein M2 auf 70 %

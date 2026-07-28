@@ -57,5 +57,7 @@ Slices (Kurs [Modul 6 §Wann Arbeit eine Welle braucht](../../../../../kurs/de/0
 
 ## 7. Closure-Notiz
 
-<!-- Erst nach Welle-Abschluss füllen: Zeiger auf `welle-2-results.md` und aufs
-Beobachtungs-Register — mit Pfaden vom Ruheort `done/` aus. -->
+<!-- Erst bei der Closure füllen — mit Pfaden vom Ruheort `done/` aus. -->
+
+Ergebnis: <Zeiger auf `welle-2-results.md`, Geschwister im Ruheort `done/`>
+Zähler: <Zeiger aufs Beobachtungs-Register, eine Ebene über dem Ruheort>

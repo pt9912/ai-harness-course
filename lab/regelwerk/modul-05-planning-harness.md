@@ -30,14 +30,15 @@ stateDiagram-v2
 *Lerneintrag* **und einen Ausgang für jedes offene Risiko**, nicht nur
 "Tests grün". Die beiden **Rückführungen** `in_progress → next` (zu groß —
 zurück zur Zerlegung) und `in_progress → open` (Blocker — meist mit Carveout,
-siehe [Modul 7](modul-07-carveouts.md)) verlangen die Angabe des Grundes.
+siehe [Modul 7](modul-07-carveouts.md)) verlangen den Grund im Slice-Plan §4,
+wo die Rückführungs-Bedingungen vorab benannt sind.
 
 `done` ist **kein Endzustand der Information**: Die Beobachtungen aus §7 sind
 bei der Slice-Closure ins Beobachtungs-Register eingetragen und werden **von
-dort** weitergelesen — vom Lese-Schritt (Welle-Closure; ohne Welle löst ihn die
-Slice-Closure selbst aus) und vom Sichtungs-Schritt der Slice-Planung (§8,
-unabhängig vom Sub-Area-Modus). Für wellenlos verkörperte Regeln zeigt der
-Herkunfts-Anker `seit slice-<NNN>` auf genau dieses §7 in `done/` zurück.
+dort** weitergelesen — vom Lese-Schritt (Welle-Closure; in einem Repo ohne
+Wellen-Betrieb löst ihn die Slice-Closure selbst aus) und vom Sichtungs-Schritt
+der Slice-Planung (§8 des Slice-Plans). Für wellenlos verkörperte Regeln zeigt
+der Herkunfts-Anker `seit slice-<NNN>` auf genau dieses §7 in `done/` zurück.
 
 ### Trigger je Lifecycle-Übergang und WIP-Limit (Modul 5)
 

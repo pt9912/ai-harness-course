@@ -64,6 +64,40 @@ Baseline (MR-NNN, Modus pro Sub-Area)
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
 
+### Template-Schichtung — was der Rumpf trägt und was der Kommentar
+
+Ein Template wird beim Adoptieren **abgebaut**: Platzhalter ersetzt,
+Hinweis-Block entfernt, **alle HTML-Kommentare gelöscht**
+([`../templates/README.md`](../templates/README.md) §Verwendung). Was danach
+dasteht, ist alles, was der Adopter Wochen später hat. Vier Schichten:
+
+| Schicht | Inhalt | Überlebt das Adoptieren? |
+|---|---|---|
+| **Regelwerk** | Der Normtext. **Einzige** Quelle. | — vendored unter `.harness/baseline/<tag>/regelwerk/`, lebt außerhalb des Artefakts |
+| **Rumpf** | Nur, was das *fertige Artefakt* trägt: Feldnamen, Feldreihenfolge, `<Platzhalter>` — plus **genau ein** Regelwerk-Zeiger pro Pflicht-Sektion | ja |
+| **DoD / Checkliste** | Jede Pflicht, die der Ausfüllende **abhaken** muss. Das ist die Prozedur | ja |
+| **Kommentar** | Begründung und Bedienhinweis | nein |
+
+- **Test für den Rumpf:** Liest sich das im veröffentlichten Artefakt als
+  *Inhalt* — oder als *Anleitung an jemanden*? Anleitung gehört nie in den
+  Rumpf. Dazu kommt: Normtext im Rumpf wird vom Platzhalter-Ersetzen
+  zerschossen — aus der allgemeinen Regel wird eine falsche Einzelaussage.
+- **Hard Rule:** *Kein Kommentar ist die einzige Fundstelle einer Norm.* Wer
+  eine Regel in einen Template-Kommentar schreibt, schreibt sie in den
+  Papierkorb des Adopters. Sie gehört ins Regelwerk; im Template steht der
+  **Zeiger** darauf, im Rumpf, bei der Sektion, für die sie gilt.
+- **Der Zeiger ist kein Zitat.** Ein Template, das den Normtext ausschreibt,
+  führt ihn ein zweites Mal — und zwei Fassungen driften.
+- **Feedback-Hälfte ist *inferential*, nicht computational:** „Ist dieser Satz
+  eine Norm?" ist ein Urteil, kein Match — und Template-Verzeichnisse sind für
+  Referenz-Gates bewusst ausgenommen (symbolische Pfade). Die Regel steht
+  deshalb als HIGH-Eintrag *Norm nur im Template-Kommentar* im Reviewer-Skill
+  (Ziel-Form `../templates/.harness/skills/reviewer.template.md`).
+- **Grenze:** Sie hängt damit an einem Review, nicht an einem Lauf. Wer ohne
+  Review committet, wird nicht erwischt. Einen *Sensor* zu behaupten, wo keiner
+  steht, wäre die Klasse *halluziniertes Gate* (Modul 13) — auf die eigene
+  Konvention angewandt.
+
 ### Trennschärfen
 
 - *Spec* beschreibt **was**, *ADR* begründet **warum so**, *Plan* legt **wann
@@ -814,18 +848,22 @@ verkörperte Regeln, in §7 jeder `done/slice-<NNN>-<kurzer-titel>.md`; die
 kanonischen Formen liefern `welle-results.template.md` bzw.
 `slice.template.md` §7 (siehe Ziel-Form unten).
 
-- **Geltungsbereich ist die Sektion, nicht die Datei.** Nur dort ist
-  `liegt in` das Feld; überall sonst sind es gewöhnliche Wörter und lösen
-  nichts aus — der Trigger-Sprachgebrauch „`SL-024` liegt in `done/`"
-  (Modul 6) ebenso wenig wie eine bloße Erwähnung eines Pfades im Fließtext.
+- **Das Feld gilt nur in diesen beiden Sektionen.** Überall sonst sind es
+  gewöhnliche Wörter und lösen nichts aus — der Trigger-Sprachgebrauch
+  „`SL-024` liegt in `done/`" (Modul 6) ebenso wenig wie eine bloße Erwähnung
+  eines Pfades im Fließtext. Der Scope widerspricht dem Satz oben nicht:
+  *innerhalb* der Sektion entscheidet das Feld, nicht die Sektion.
 - **In den Backticks steht ein Zielort, nicht immer eine Datei** — drei
   kanonische Füllungen: `AGENTS.md §<N>` · `Makefile:<target>` ·
   `.harness/skills/<name>.md`.
-- **Geprüft wird:** (1) der Pfad existiert — dafür wird ein Suffix ab ` §`
-  oder ab `:` abgetrennt und der Rest als Pfad geprüft; (2) das Ziel trägt
-  `seit welle-<NN>` bzw. `seit slice-<NNN>` — beim Make-Target auf dessen
-  Target-Zeile, beim Abschnitt in dessen Überschrift, bei einer Datei ohne
-  Suffix irgendwo in ihr.
+- **Geprüft wird:** (1) der Pfad existiert, **ab Repo-Wurzel** — nicht relativ
+  zur Closure-Notiz: Der Zielort zeigt aus dem Planungs-Baum hinaus und wandert
+  nicht mit, wenn die Notiz nach `done/` wandert. Dafür wird ein Suffix ab
+  ` §` oder ab `:` abgetrennt und der Rest als Pfad geprüft. (Die Pfade auf
+  Nachbar-Artefakte — der Zeiger aufs Beobachtungs-Register — bleiben
+  datei-relativ und folgen der Ruheort-Regel.) (2) Das Ziel trägt `seit welle-<NN>` bzw.
+  `seit slice-<NNN>` — beim Make-Target auf dessen Target-Zeile, beim
+  Abschnitt in dessen Überschrift, bei einer Datei ohne Suffix irgendwo in ihr.
 - **Fehlt das Feld**, ist der Eintrag *gezählt, nicht verkörpert* und kein
   Gegenstand der Paarung. Ausnahme ohne Gegenausnahme: Eine **benannte
   Spec-Lücke** trägt kein `liegt in` und ist trotzdem verkörpert — in einer

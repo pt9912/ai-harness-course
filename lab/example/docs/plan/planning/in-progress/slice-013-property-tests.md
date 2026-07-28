@@ -48,9 +48,7 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 
 ## 7. Closure-Notiz
 
-<!-- Bei der Closure füllen — vor dem `git mv` nach `done/`, nicht danach.
-Ausnahme: die drei Paarungen werden erst danach geprüft (§2, letztes
-DoD-Item). -->
+<!-- Bei der Closure füllen — vor dem `git mv` nach `done/`, nicht danach. -->
 
 ## 8. Sub-Area-Modus-Begründung
 
@@ -60,6 +58,11 @@ für das DocSearch-Lab als Ganzes). Spec-Anker LH-QA-02 führt
 (Determinismus-Anforderung), Code folgt — Test-Infrastruktur (`FsCheck`-
 Adaption) hat zwar Adaptions-Aufwand, aber keinen Inventur-Auftrag
 (es wird neu gebaut, nichts retrofittet).
+
+**Vorgelagert — offene Beobachtungen gesichtet:** Register
+(`../observations.md`) durchgegangen. `BEO-002` (*Test-Infrastruktur*, 1×) betrifft die hier berührte Sub-Area und
+steht damit unten im *Evidenz-/Diskrepanz-Risiko*. `BEO-001` (2×) ebenfalls —
+erreicht sie mit diesem Slice 3×, braucht sie einen eigenen Folge-Slice.
 
 Voraussetzung-Wissen für den Block-Aufbau: Kurs
 [Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).

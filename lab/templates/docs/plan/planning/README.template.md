@@ -30,15 +30,16 @@ Rule „git mv + Inhaltsänderung = zwei Commits" in
   Closure per `git mv` nach `done/` — neben seine
   `welle-<NN>-results.md`. Den aktiven Durchlauf `open/` → `next/` →
   `in-progress/` durchläuft er nicht; `done/` ist sein einziges
-  Lifecycle-Verzeichnis.
-  Sequenzierungs-Autorität bleibt die Roadmap
+  Lifecycle-Verzeichnis. **Geplante** Wellen haben noch keine Datei — sie
+  stehen in der Roadmap, die auch Sequenzierungs-Autorität bleibt
   ([`in-progress/roadmap.md`](in-progress/roadmap.md): Meilensteine, Wellen,
   aktive Welle).
 - Der aktive Durchlauf `open/` → `next/` → `in-progress/` nimmt ausschließlich
   **Slices** auf; `done/` archiviert **zusätzlich** abgeschlossene
   **Nicht-Slice-Records** — Welle-Plan und Welle-Closure
-  `done/welle-<NN>-results.md`, und aufgelöste Carveouts wandern ebenfalls
-  dorthin (Baseline-Regelwerk `modul-07-carveouts.md`).
+  `done/welle-<NN>-results.md`. Aufgelöste Carveouts wandern **nicht** hierher,
+  sondern in ihr eigenes `docs/plan/carveouts/done/` (Baseline-Regelwerk
+  `modul-07-carveouts.md`).
 
 Neben den Lifecycle-Verzeichnissen liegt **flach** in `planning/` das
 **Beobachtungs-Register** (`observations.md`): Es trägt den

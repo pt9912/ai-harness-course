@@ -491,7 +491,7 @@ Planning-Lifecycle auflöst, und so viele, wie der Zähler behauptet.
 
 | Befund | Was geändert wurde |
 |---|---|
-| R8-01 | Die Normlast steht im **Rumpf**, nicht im Kommentar. `slice.template.md` §7 hat jetzt einen Body: eine Regel-Zeile (Pflichtfeld-Bedingung, Register-Pflicht, Zeiger ins Baseline-Regelwerk) plus sechs Form-Zeilen mit `<Platzhalter>`. Dieselbe Behandlung für `welle-results.template.md` §Steering-Loop-Einträge und `welle.template.md` §7 (die bisher komplett leer blieb). Die Kommentare halten nur noch die Begründung — sie dürfen mit Schritt 5 verschwinden. |
+| R8-01 | Die Normlast steht im **Rumpf**, nicht im Kommentar. `slice.template.md` §7 hat jetzt einen Body: eine Regel-Zeile (Pflichtfeld-Bedingung, Register-Pflicht, Zeiger ins Baseline-Regelwerk) plus sieben Form-Zeilen mit `<Platzhalter>`. Dieselbe Behandlung für `welle-results.template.md` §Steering-Loop-Einträge und `welle.template.md` §7 (die bisher komplett leer blieb). Die Kommentare halten nur noch die Begründung — sie dürfen mit Schritt 5 verschwinden. |
 | R8-02 | Der Anker löst über `done/slice-<NNN>-<kurzer-titel>.md` auf, maschinell `done/slice-<NNN>-*.md` — die reale Namensform aus `slice.template.md` :4. Quelle und Spiegel, beide Fundstellen (Herkunfts-Absatz und Anker-Paarung). |
 | R8-03 | „Den aktiven Durchlauf `open/` → `next/` → `in-progress/` durchläuft er nicht; `done/` ist sein einziges Lifecycle-Verzeichnis." |
 | R8-04 | Siehe oben. |

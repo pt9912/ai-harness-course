@@ -73,7 +73,7 @@ achtest du"; Vorlage
   Klassifikation schärfen / Folge-ADR bzw. `AGENTS.md`-Update / Gate
   (Modul 13). Die Skill-Datei wird **versioniert, nicht überschrieben**
   (ADR-Hard-Rule, Modul 4). Ein so entstandener HIGH-Eintrag trägt den
-  Herkunfts-Anker `(seit welle-<NN>)` bzw. `(seit slice-<NNN>)`
+  Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)`
   ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
 
 Vergleichbares Skill-Pattern für *Verifier* und *Validator* in Modul 11
