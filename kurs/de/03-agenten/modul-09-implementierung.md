@@ -145,7 +145,7 @@ gelesen.
 Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 *Falsch/Richtig*-Beispiele **und** eine *technische Begründung*.
 Entstand sie aus dem Steering Loop und nicht aus einer Anforderung, trägt
-sie zusätzlich den Herkunfts-Anker `(seit welle-<NN>)`
+sie zusätzlich den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)`
 ([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
 Beispiele aus realen Repos (siehe
 [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)):

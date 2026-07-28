@@ -29,6 +29,11 @@ Die `done/`-Slices sind im Beispiel nur exemplarisch vertreten — siehe
 Vorbild für einen **wellenlosen** Slice (Kurs Modul 6 §Wann Arbeit eine
 Welle braucht).
 
+Neben den Lifecycle-Verzeichnissen liegt **flach** in `planning/` das
+[Beobachtungs-Register](observations.md): Es trägt den Steering-Loop-Zähler,
+wird bei jeder Slice-Closure fortgeschrieben und überlebt jede Welle
+(Kurs Modul 6 §Das Beobachtungs-Register).
+
 ## Roadmap
 
 Siehe [`in-progress/roadmap.md`](in-progress/roadmap.md).

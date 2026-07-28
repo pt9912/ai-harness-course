@@ -55,10 +55,9 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
   trägt die Aussage selbst.
 - `check-references` prüft nur `spec/`, nicht `docs/plan/adr/` — dort
   könnten dieselben Zeiger unbemerkt stehen — **Ausgang:** weiter offen →
-  das **Beobachtungs-Register** (`../observations.md`)
-  (Sub-Area *Spec-Schreibung*). Auch ein wellenloser Slice liefert
-  dorthin ab: Die Welle-Closure verdichtet alle Slice-Closures seit der
-  letzten Welle-Closure, nicht nur die der Welle.
+  `BEO-006` im **Beobachtungs-Register** (`../observations.md`)
+  (Sub-Area *Spec-Schreibung*). Auch ein wellenloser Slice trägt selbst
+  ein — der Zähler hängt an der Slice-Closure, nicht an der Welle.
 
 ## 7. Closure-Notiz
 
@@ -69,10 +68,8 @@ entstanden — die Spec wurde „zur Nachvollziehbarkeit" um den Slice-Bezug
 ergänzt. Genau diese Bewegung kehrt die Referenz-Richtung um.
 
 **Steering-Loop-Eintrag:** noch keiner. Die Beobachtung *„Spec-Text wird
-zur Nachvollziehbarkeit um Slice-Bezüge ergänzt"* steht damit bei 2×
-(`welle-1-results.md` führt sie als Finding-Klasse *ADR-Bezug im Commit
-vergessen* separat) und geht als *Beobachtung unter Schwelle* in die
-nächste Welle-Closure. Bei 3× wird daraus eine Regel.
+zur Nachvollziehbarkeit um Slice-Bezüge ergänzt"* ist als `BEO-004` im Register
+eingetragen und steht bei 1×. Bei 3× wird daraus eine Regel.
 
 **Folge-Slice:** keiner.
 

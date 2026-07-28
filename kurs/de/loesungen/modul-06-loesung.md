@@ -103,9 +103,9 @@ weder beim Start noch beim Abschluss; sein Zustand ist die
 Verzeichnis-Position (Modul 5), und `ls in-progress/` beantwortet
 autoritativ, was gerade läuft.
 
-**Wo der Steering-Loop-Eintrag landet:** in der *nächsten*
-Welle-Closure. Deren Schritt 3 verdichtet alle Slice-Closures seit der
-letzten Welle-Closure — die wellenlosen eingeschlossen. Der Zähler
+**Wo der Steering-Loop-Eintrag landet:** im **Beobachtungs-Register**
+(`docs/plan/planning/observations.md`) — eingetragen bei der
+Slice-Closure, unabhängig von jeder Welle. Der Zähler
 unterscheidet nicht nach Welle-Zugehörigkeit, sonst zählte er an
 wellenloser Arbeit vorbei, und eine Beobachtung, die überwiegend dort
 auftritt, erreichte die Schwelle nie. Wer die Antwort „gar nicht" gibt, hat den zweiten Teil der
@@ -172,6 +172,36 @@ soll (Latenz-Gewinn durch Cache). `SL-103` zieht in die *nächste* Welle,
 sobald deren Trigger eintritt: "`welle-1-api-mit-cache` in Closure, Cache
 liefert messbare Trefferquote". Der Trigger ist so formuliert, dass ein
 Dritter ohne Rückfrage über "Welle fertig" entscheiden kann.
+
+### (Analysieren) Warum steht der Zähler in einer eigenen Datei?
+
+**Weil die Übernahme-Kette bricht.** Die Sektion lag früher *in*
+`welle-NN-results.md` und wurde von Closure zu Closure kopiert und
+hochgezählt. Drei Bruchstellen: Wer die Übernahme vergisst, setzt den
+Zähler auf null; die erste Welle braucht eine Sonderregel; und wer keine
+Welle eröffnet, hat gar keinen Träger. Eine stehende Datei streicht alle
+drei — sie existiert ab Repo-Beginn.
+
+**Wer einträgt, wer liest:**
+
+| Wer | Wann | Was |
+|---|---|---|
+| **Slice-Closure** | bei jeder Closure, *vor* dem `git mv` nach `done/` | neuer Eintrag mit `BEO-<NNN>` oder Zähler +1 und Beleg |
+| **Welle-Closure** | bei jeder Closure | liest: was hat 3× erreicht → verkörpern |
+
+Das ist der Punkt, an dem der Zähler **von der Welle unabhängig** wird: Er
+läuft mit jedem geschlossenen Slice, auch mit wellenlosen.
+
+**Der Unterschied *gezählt* vs. *verkörpert*** (exzellent): Ohne Welle
+zählt das Register weiter; den Lese-Schritt löst aus, wer wellenlos
+arbeitet, und der Herkunfts-Anker lautet dann `seit slice-<NNN>`. Ein Eintrag kann
+also bei 3× stehen und trotzdem noch keine Regel sein. Was dann fehlt, ist
+nicht der Zähler, sondern der Lese-Schritt. Und die `BEO-<NNN>` macht die
+Zählung **unabhängig vom Wortlaut der Bezeichnung**: Ohne Kennung zählt eine
+Umformulierung als zweite Beobachtung, und keine der beiden erreicht je 3×.
+
+**Anti-Antwort:** „Ist übersichtlicher." Das ist ein Ordnungsargument. Die
+Frage ist mechanisch: Was passiert, wenn niemand die Sektion überträgt?
 
 ### (Analysieren) Abhängigkeit Welle 3 → Welle 2 modellieren und Blocker erkennen
 
@@ -252,6 +282,25 @@ automatisch vor und ist deshalb nie das *Mehr*. Wer bei (b) „drei Slices, also
 „nur ein Slice, also keine Welle", hat die Slice-Zahl angewandt, nicht
 das Kriterium — und liegt bei (d) falsch. Fall (d) ist die Probe: Größe
 entscheidet nicht, der Trigger entscheidet.
+
+### Wo landet die Beobachtung? (Analysieren — LZ 2)
+
+**(a)** In `observations.md` bei `BEO-001` den Zähler auf **3×** setzen und
+`slice-NNN` in die Belege aufnehmen. In §7 des Slice wird die `BEO-001`
+**zitiert**, nicht neu formuliert — sonst zählt das Register zwei Namen
+getrennt.
+
+**(b) Nein.** Die Slice-Closure trägt ein, unabhängig von jeder Welle. Genau
+dafür steht das Register außerhalb der Welle-Closure.
+
+**(c)** Bis zur nächsten Welle-Closure steht der Eintrag bei 3× und ist
+**gezählt, aber nicht verkörpert**. Erst der Lese-Schritt der Closure macht
+daraus eine Regel in `AGENTS.md`, einem Gate, einem Skill oder einer `MR-*`,
+mit Herkunfts-Anker `seit welle-<NN>`. Wer beides gleichsetzt, hält eine Notiz
+für einen Wächter.
+
+Maßstab: Die Antwort trennt *eintragen* (Slice-Closure) von *lesen*
+(Welle-Closure) und benennt, dass die Verkörperung am **Lese-Schritt** hängt, nicht am Zähler.
 
 ### Welle über Schätzung bewerten (Bewerten — LZ 3)
 

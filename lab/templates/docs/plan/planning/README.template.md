@@ -20,18 +20,29 @@ Rule „git mv + Inhaltsänderung = zwei Commits" in
 | `in-progress/` | Branch / PR existiert. |
 | `done/` | DoD erfüllt, gemerged, Closure-Notiz vorhanden. |
 
-## Slices vs. Wellen — zwei Status-Mechanismen
+## Slices vs. Wellen — zwei Ablagen, dieselbe Regel
 
-- **Slices** tragen ihren Status über das **Verzeichnis** (open → … → done).
-- Eine **Welle** (Bündel von Slices) wird **in der Roadmap** geführt
+- **Slices** tragen ihren Zustand über das **Verzeichnis**
+  (`open/` → `next/` → `in-progress/` → `done/`).
+- Eine **Welle** (Bündel von Slices) ebenso: Der Zustand ist die
+  Verzeichnis-Position, kein `Status:`-Feld. Der Welle-Plan (`<welle-id>.md`)
+  liegt **flach** in `planning/`, solange die Welle läuft, und wandert bei
+  Closure per `git mv` nach `done/` — neben seine
+  `welle-<NN>-results.md`. Die Lifecycle-Verzeichnisse durchläuft er nicht.
+  Sequenzierungs-Autorität bleibt die Roadmap
   ([`in-progress/roadmap.md`](in-progress/roadmap.md): Meilensteine, Wellen,
-  aktive Welle); ihr Status lebt im `Status:`-Feld, nicht im Verzeichnis. Ein
-  optionaler Welle-Plan liegt **flach** in `planning/` (`<welle-id>.md`), nicht
-  in einem Lifecycle-Verzeichnis. Der aktive Durchlauf `open/` → `next/` →
-  `in-progress/` nimmt ausschließlich **Slices** auf; `done/` archiviert
-  **zusätzlich** abgeschlossene **Nicht-Slice-Records** — Welle-Closure
+  aktive Welle).
+- Der aktive Durchlauf `open/` → `next/` → `in-progress/` nimmt ausschließlich
+  **Slices** auf; `done/` archiviert **zusätzlich** abgeschlossene
+  **Nicht-Slice-Records** — Welle-Plan und Welle-Closure
   `done/welle-<NN>-results.md`, und aufgelöste Carveouts wandern ebenfalls
   dorthin (Baseline-Regelwerk `modul-07-carveouts.md`).
+
+Neben den Lifecycle-Verzeichnissen liegt **flach** in `planning/` das
+**Beobachtungs-Register** (`observations.md`): Es trägt den
+Steering-Loop-Zähler, wird bei jeder Slice-Closure fortgeschrieben und
+überlebt jede Welle (Baseline-Regelwerk `modul-06-roadmap.md`
+§Das Beobachtungs-Register).
 
 ## Aktueller Stand
 

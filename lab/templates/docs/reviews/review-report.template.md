@@ -70,14 +70,15 @@ Findings" nicht von "nicht geprüft" unterscheidbar (Modul 10
 
 <!--
 Die Klassen-Zeile ist der Übergabepunkt in den Steering-Loop-ZÄHLER. Sie
-wird bei der Slice-Closure (§7) als Beobachtung übernommen und bei der
-Welle-Closure verdichtet und gezählt; bei 3x wird der Reviewer-Skill
-geschärft (Modul 10 §Pflege).
+wird bei der Slice-Closure (§7) ins Beobachtungs-Register eingetragen und
+dort gezählt; bei 3x wird der Reviewer-Skill geschärft (Modul 10 §Pflege).
 
-DESHALB MUSS DIE BEZEICHNUNG ÜBER LÄUFE HINWEG STABIL SEIN — zwei Namen
-für dasselbe Muster werden getrennt gezählt und erreichen die Schwelle
-nie. Niemand muss dafür alte Reports lesen: die Häufung entsteht bei der
-Verdichtung, nicht durch einen Archiv-Scan.
+DIE KLASSEN-BEZEICHNUNG MUSS ÜBER LÄUFE HINWEG STABIL SEIN. Dieser Report
+kennt das Register NICHT (er ist Lauf-Beleg) — die Zuordnung zur BEO-<NNN>
+passiert erst bei der Slice-Closure und braucht den wiedererkennbaren Namen.
+Ab dann zitiert die Closure die Kennung; dort ist die Bezeichnung nur noch
+Label. Niemand muss alte Reports lesen: die Häufung steht im Register, nicht
+in einem Archiv-Scan.
 -->
 
 ## Verdikt

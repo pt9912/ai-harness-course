@@ -24,15 +24,17 @@
 
 ## Steering-Loop-Einträge
 
-Eine **geschärfte Regel** nennt ihren **Zielort**, und das Ziel trägt den
-Herkunfts-Anker `seit welle-1` — die Paarung wird im Trigger-Audit
-mitgeprüft. Eine **benannte Spec-Lücke** trägt keinen Anker: sie landet in
-einer Lastenheft-Version und hat damit bereits eine `LH-*`-ID.
+Eine **geschärfte Regel** trägt das Pflichtfeld `liegt in <Pfad>`, und das Ziel
+trägt den Herkunfts-Anker `seit welle-1` — geprüft wird die Paarung **am Ende
+von Closure-Schritt 3**, nicht schon im Trigger-Audit (Schritt 2): dort gäbe es
+diese Einträge noch nicht. Eine **benannte Spec-Lücke** trägt das Feld nicht:
+sie landet in einer Lastenheft-Version und hat damit bereits eine `LH-*`-ID —
+gezählt, nicht verkörpert, und kein Gegenstand der Paarung.
 
-- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — liegt in [`AGENTS.md`](../../../../AGENTS.md) §2.7 (trägt dort `seit welle-1`). Auslöser: slice-006, slice-009, slice-012 (3×).
+- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — liegt in `AGENTS.md §2.7` (trägt dort `seit welle-1`). Auslöser: `BEO-005` (slice-006, slice-009, slice-012 — 3×).
 - **Spec-Lücke** benannt: Top-K-Boundary (`k > 100`) war nicht behandelt — aufgelöst über Lastenheft v0.2.0 (`LH-FA-02`), kein Herkunfts-Anker nötig.
 
-## Beobachtungen unter Schwelle
+## Beobachtungs-Register (Zeiger)
 
 Der Zähler steht seit Kurs-Welle 59 als stehende Datei in
 [`../observations.md`](../observations.md) — nicht mehr hier. Was in dieser

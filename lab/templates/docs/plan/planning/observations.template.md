@@ -17,13 +17,21 @@ Kette — wer die Uebernahme vergisst, setzt den Zaehler auf null, und wer
 laengere Zeit keine Welle eroeffnet, hat gar keinen Traeger. Diese Datei
 existiert ab Repo-Beginn.
 
+WER SCHREIBT: die Slice-Closure (§7), vor dem `git mv` nach done/.
+WER LIEST:    die Welle-Closure (was hat 3x erreicht -> verkoerpern) und die
+              Wellen-Eroeffnung Schritt 2 (betrifft eine Beobachtung die
+              Sub-Areas dieser Welle?).
+OHNE WELLE:   den Lese-Schritt loest aus, wer wellenlos arbeitet.
+
 REGELN
 - Erstauftreten: benennen, KENNUNG vergeben (BEO-<NNN>, fortlaufend), Beleg
   eintragen. Wiederauftreten: Zaehler erhoehen, Beleg ergaenzen — die
   Bezeichnung NICHT neu formulieren, sie ist nur noch Label.
 - Erreicht ein Eintrag 3x, wandert er in die Steering-Loop-Eintraege der
   laufenden Welle-Closure und wird dort zur verkoerperten Regel (mit
-  Herkunfts-Anker). Die Zeile bleibt hier stehen, mit Vermerk wohin.
+  Herkunfts-Anker seit welle-<NN>). Ohne Welle: beim eigenstaendig
+  ausgeloesten Lese-Schritt, Anker seit slice-<NNN>. Die Zeile bleibt hier
+  stehen, mit Vermerk wohin.
 - Eintraege verfallen nicht von selbst. Wer einen streicht, schreibt dazu,
   warum er nicht mehr auftreten kann (Ursache beseitigt, Sub-Area entfallen)
   — sonst ist es stilles Vergessen.
@@ -31,17 +39,17 @@ REGELN
   loeschen: die leere Liste ist die Aussage.
 
 MECHANISIERUNG (Repo-Entscheidung, nicht vom Kurs vorgegeben)
-Die Eintraege aus den done/-Closures lassen sich einsammeln; das BENENNEN
-bleibt Handarbeit. Empfohlenes Muster: generieren -> committen -> ein Gate
-vergleicht Generat gegen Committetes, damit ein Eintrag aus done/, der hier
-fehlt, auffaellt.
+Das BENENNEN und ZAEHLEN bleibt Handarbeit — ob zwei Eintraege dieselbe
+Beobachtung meinen, entscheidet kein Werkzeug. Maschinell pruefbar ist nur
+die DECKUNG: eine in done/ zitierte BEO-<NNN> hat eine Zeile hier, und jede
+Zeile hier hat einen Beleg. Muster: schreiben -> committen -> Gate prueft.
 -->
 
 | Kennung | Beobachtung | Sub-Area | Zähler | Belege | Stand |
 |---|---|---|---|---|---|
 | BEO-001 | <kurze, gleichbleibende Bezeichnung> | <Sub-Area> | 1× | <slice-NNN> | offen |
 | BEO-002 | <aus Slice-§6 übernommenes offenes Risiko> | <Sub-Area> | 2× | <slice-NNN>, <slice-NNN> | offen |
-| BEO-003 | <Beispiel: Schwelle erreicht> | <Sub-Area> | 3× | <slice-NNN>, … | verkörpert in `AGENTS.md` §<N> (welle-<NN>) |
+| BEO-003 | <Beispiel: Schwelle erreicht> | <Sub-Area> | 3× | <slice-NNN>, … | verkörpert in `AGENTS.md` §<N> (`seit welle-<NN>`) |
 
 ## Gestrichene Einträge
 

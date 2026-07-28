@@ -151,7 +151,7 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
   Requirement/ADR-IDs + AGENTS.md + Tool-Allowlist. Fehlende Eingaben
   werden *durch Raten ersetzt*, nicht durch Schweigen.
 - Eine Hard Rule, die aus dem Steering Loop entstand (nicht aus einer
-  Anforderung), trägt den Herkunfts-Anker `(seit welle-<NN>)`
+  Anforderung), trägt den Herkunfts-Anker `(seit welle-<NN>)` bzw. `(seit slice-<NNN>)`
   ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
 - Jede Hard Rule liegt in *zwei* Quadranten: inferential feedforward
   (steht in AGENTS.md) + computational feedback (Fitness

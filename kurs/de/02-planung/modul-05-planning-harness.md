@@ -48,25 +48,28 @@ stateDiagram-v2
     in_progress --> open: blockiert (Carveout?)
     done --> [*]
     note right of done
-        §7 wird bei der nächsten
-        Welle-Closure verdichtet
-        (Modul 6, Schritt 3)
+        §7 → Beobachtungs-Register
+        (Modul 6)
     end note
 ```
 
 Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
-Größen-Erkenntnis) und `in_progress → open` (Blocker — meist mit
-Carveout, siehe [Modul 7](modul-07-carveouts.md)). Der einzige Übergang
+Größen-Erkenntnis), `in_progress → open` (Blocker — meist mit
+Carveout, siehe [Modul 7](modul-07-carveouts.md)) und `in_progress → done`.
+Der einzige Übergang
 nach `done` verlangt *Lerneintrag* **und einen Ausgang für jedes offene
 Risiko** ([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)),
 nicht nur "Tests grün".
 
-`done` ist dabei **kein Endzustand der Information**: Die Closure-Notiz
-wird bei der Welle-Closure verdichtet (Notiz im Diagramm). Und am anderen
+`done` ist dabei **kein Endzustand der Information**: Die Beobachtungen aus
+§7 sind bei der Slice-Closure bereits ins Beobachtungs-Register eingetragen
+(Notiz im Diagramm) und werden von dort weitergelesen — vom Lese-Schritt der
+Welle-Closure, und für wellenlos verkörperte Regeln zeigt der Herkunfts-Anker
+`seit slice-<NNN>` auf genau dieses §7 in `done/` zurück. Und am anderen
 Ende speist sich `Slice angelegt` aus derselben Quelle — §8 des
-Slice-Plans sichtet die offenen Beobachtungen der letzten Welle-Closure,
+Slice-Plans sichtet die offenen Beobachtungen im Register,
 sofern eine berührte Sub-Area in BF oder Hybrid steht. Der Lifecycle ist
-damit an beiden Enden an den Wellen-Zyklus gekoppelt.
+damit an beiden Enden an das Beobachtungs-Register gekoppelt.
 
 ### Offene Risiken werden bei Closure aufgelöst
 
@@ -102,13 +105,14 @@ seine Klassen-Bezeichnungen wandern über §7 in denselben Zähler. Der
 Slice-Closure-Eintrag hat damit drei Quellen: eigene Beobachtung, offenes
 Risiko, wiederkehrende Finding-Klasse.
 
-**Wer liest das?** Lerneintrag und offene Risiken werden bei der
-Welle-Closure aus den `done/`-Slices **verdichtet**
-([Modul 6 §Wellen-Closure-Prozedur](modul-06-roadmap.md#die-wellen-closure-prozedur),
-Schritt 3) — dort entsteht aus ihnen der Zähler. Deshalb lohnt eine
-*gleichbleibende Bezeichnung* für wiederkehrende Beobachtungen: zwei
-Namen für dieselbe Sache werden getrennt gezählt und erreichen die
-Schwelle nie.
+**Wer schreibt, wer liest?** Lerneintrag und offene Risiken werden **bei der
+Slice-Closure ins Beobachtungs-Register eingetragen**
+([Modul 6 §Das Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register))
+— dort steht der Zähler, unabhängig von jeder Welle; die Welle-Closure
+liest ihn nur noch. Jede Beobachtung trägt dort eine `BEO-<NNN>`. Die
+Bezeichnung ist trotzdem stabil zu halten — die Zuordnung zur Kennung
+passiert beim Schreiben, und wer den Namen umformuliert, findet die Zeile
+nicht wieder.
 
 ## Lab-Bezug
 
@@ -217,8 +221,7 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
    Code-Konformität); bei BF/Hybrid das Hauptrisiko und der Grund, warum
    das Kriterium dort die Reconciliation-Schätzung trägt.
    **Beleg-Quelle sind auch die *offenen Beobachtungen* zu dieser
-   Sub-Area** — die Sektion das Beobachtungs-Register der letzten
-   Welle-Closure ([Modul 6 §Wellen-Eröffnungs-Prozedur](modul-06-roadmap.md#die-wellen-eröffnungs-prozedur)).
+   Sub-Area** — das [Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register).
    Ein Eintrag, der diese Sub-Area schon zweimal getroffen hat, ist genau
    das Diskrepanz-Risiko, nach dem dieses Kriterium fragt — und wird
    durch diesen Slice zum dritten Mal berührt, ist er keine Notiz mehr,

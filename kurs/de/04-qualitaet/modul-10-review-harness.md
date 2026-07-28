@@ -195,8 +195,8 @@ auch, was er nicht gefunden hat").
 **Schritt 6 — Steering-Loop-Eintrag.** Skills sind nicht statisch. Das
 „dreimal" unten **zählt der Skill nicht selbst** — er kann es nicht, weil
 jeder Lauf für sich steht. Gezählt wird über die Finding-Klassen in der
-Report-Summary, die Slice-Closure §7 und die Verdichtung bei der
-Welle-Closure. Der Skill formuliert nur, *was bei Erreichen der Schwelle
+Report-Summary und den Eintrag ins Beobachtungs-Register bei der
+Slice-Closure §7. Der Skill formuliert nur, *was bei Erreichen der Schwelle
 zu tun ist*:
 
 ```markdown
@@ -211,7 +211,7 @@ Bei dreimaligem Auftreten desselben Findings:
 
 Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
 (siehe ADR-Hard-Rule, Modul 4). Ein HIGH-Eintrag, der aus dem Steering
-Loop kam, trägt den Herkunfts-Anker `(seit welle-<NN>)` — siehe
+Loop kam, trägt den Herkunfts-Anker `(seit welle-<NN>)` bzw. `(seit slice-<NNN>)` — siehe
 [`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln).
 ```
 
@@ -244,15 +244,17 @@ Konsument ist der Implementer im selben Zyklus (Rückkante Review →
 Implementation) und später der Audit. Über Läufe hinweg wird er **nicht
 wieder gelesen**, und er muss es nicht: Das steuerungsrelevante Signal
 ist nicht der Report, sondern die **Finding-Klasse**. Sie wird in der
-Summary-Zeile benannt, bei der Slice-Closure (§7) als Beobachtung
-übernommen und bei der Welle-Closure verdichtet und gezählt
-([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)).
+Summary-Zeile benannt und bei der Slice-Closure (§7) ins
+Beobachtungs-Register eingetragen und dort gezählt
+([Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)).
 
 Daraus folgt eine harte Bedingung: **die Klassen-Bezeichnung muss über
 Läufe hinweg stabil sein.** Zwei Namen für dasselbe Muster werden
 getrennt gezählt und erreichen die Schwelle nie. Niemand muss dafür alte
-Reports durchsuchen — die Häufung entsteht bei der Verdichtung, nicht
-durch einen Archiv-Scan.
+Reports durchsuchen — die Häufung steht im Register, nicht in einem
+Archiv-Scan. Der Report selbst kennt das Register nicht (er ist Lauf-Beleg);
+die Zuordnung zur `BEO-<NNN>` passiert erst bei der Slice-Closure — genau
+dafür braucht sie den wiedererkennbaren Namen.
 
 ## Typische Fehlvorstellungen
 

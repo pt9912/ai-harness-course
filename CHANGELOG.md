@@ -20,13 +20,35 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   Datei `docs/plan/planning/observations.md` — flach neben den offenen Wellen,
   nicht mehr als Sektion in `welle-NN-results.md`.
 - **[`observations.template.md`](lab/templates/docs/plan/planning/observations.template.md)**
-  mit fünf Spalten und einer eigenen Sektion für gestrichene Einträge.
+  mit sechs Spalten und einer eigenen Sektion für gestrichene Einträge.
+- **Wer schreibt, wer liest.** Eingetragen wird bei der **Slice-Closure** —
+  neuer Eintrag mit `BEO-<NNN>` oder Zähler +1 und Beleg. Die **Welle-Closure
+  liest** nur noch: Was hat 3× erreicht → verkörpern. *Das* ist der Punkt, an dem
+  der Zähler von der Welle unabhängig wird; ein Repo ohne Wellen-Betrieb zählt
+  weiter. Der Pflichtschritt steht in
+  `slice.template.md` §6/§7 — dort, wo er ausgeführt wird, nicht nur in der Lehre.
+- **Dritte Paarung in der Welle-Closure (Schritt 3):** Jede genannte `BEO-<NNN>` existiert als
+  Zeile im Register. *Nennung ohne Deckung ist eine Harness-Lüge* gilt jetzt auch
+  hier.
+- **Der wellenlose Fall gilt auch für den Lese-Schritt** — und dafür musste das
+  **Herkunfts-Anker-Subsystem** mit: Ein Repo ohne laufende Welle löst den
+  Lese-Schritt eigenständig aus; erreicht ein Eintrag 3×, wird er verkörpert, und
+  der Anker lautet `seit slice-<NNN>` statt `seit welle-<NN>`. Nachgezogen wurden
+  **alle** Normstellen dieses Subsystems, nicht nur die Einführung:
+  §Herkunfts-Anker (der Absatz argumentierte bis dahin *gegen* den Slice), das
+  Form-Beispiel, die **Anker-Paarung** (sie verlangte die Wellenform) und ihr
+  **Einstiegspunkt** — der Sensor lief über die Welle-Closure-Notiz, die es ohne
+  Welle nicht gibt; er kennt jetzt §7 der Slice-Closure als zweite Quelle. Dazu
+  Modul 9, 10 und 13 mit ihren Formangaben, `welle-results.template.md` und der
+  Fluss-Graph. Ohne diesen Durchgang hätte eine wellenlos verkörperte Regel den
+  Paarungs-Sensor garantiert rot laufen lassen — oder er hätte sie gar nicht
+  gesehen.
 - **`BEO-<NNN>` als Kennung.** Bisher musste die *Bezeichnung* über Wellen
   hinweg wortgleich bleiben — das Template mahnte es in Großbuchstaben, weil es
   bricht. Jetzt wird beim Erstauftreten einmal benannt und eine ID vergeben;
   Wiederauftreten zitiert sie. Umformulierungen ändern nur noch das Label, nicht
   die Zählung. Damit ist die Beobachtung die letzte zählbare Klasse im Harness,
-  die eine ID bekommt (neben `LH-*`, `ADR-*`, `MR-*`, `CO-*`, `CR-*`).
+  die eine ID bekommt (neben `LH-*`, `ADR-*`, `MR-*`, `CO-*`).
 
 ### Geändert
 
@@ -36,22 +58,38 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   Zähler auf null, die erste Welle braucht eine Sonderregel, und ohne Welle gibt
   es gar keinen Träger. Der feste Ort streicht alle drei — die Datei existiert ab
   Repo-Beginn.
-- **Arbeitsteilung benannt, Werkzeug offen gelassen:** Die Einträge aus
-  `done/`-Closures lassen sich **einsammeln** (festes Label, Herkunft = Dateiname);
-  ob zwei Einträge *dieselbe* Beobachtung meinen, entscheidet kein Werkzeug.
-  Empfohlenes Muster: generieren → committen → Gate vergleicht Generat gegen
-  Committetes. *Welches* Werkzeug, legt der Kurs nicht fest.
+- **Arbeitsteilung benannt, Werkzeug offen gelassen:** Das Urteil — *ist das
+  dieselbe Beobachtung?* — fällt beim Schreiben, durch den Menschen, der die
+  Kennung vergibt oder zitiert. Maschinell entscheidbar ist nur die **Deckung**:
+  eine in `done/` zitierte `BEO-<NNN>` hat eine Registerzeile und umgekehrt.
+  Muster: schreiben → committen → Gate prüft Deckung. *Welches* Werkzeug, legt
+  der Kurs nicht fest.
 - **Verzeichniskonvention:** Die flache Ebene unter `planning/` ist jetzt
   deklariert — offene Wellen (`<welle-id>.md`) und das Register. Sie wurde
   bislang benutzt (Modul 6, Template), stand aber in keiner Konvention.
-- **Zehn Verweise nachgezogen** — Risiko-Ausgänge in Modul 5 und
+- **Die Verweise nachgezogen** — Risiko-Ausgänge in Modul 5 und
   `slice.template.md`, der Steering-Loop-Graph in `konventionen.md`, der
-  Template-Index, beide Regelwerk-Spiegel. `welle-results.template.md` behält die
-  Sektion als **Zeiger** ohne Daten, damit ein Leser der Closure-Notiz den Zähler
-  findet.
+  Template-Index, der Planning-Index in Template und Lab, die
+  Regelwerk-Spiegel von Modul 5, 6, 10 und den Konventionen. Auch die
+  **Modul-10-Strecke** (Quelle, Spiegel, `review-report.template.md`) trug die
+  alte Mechanik und ist mitgezogen — die Finding-Klasse wandert jetzt bei der
+  Slice-Closure ins Register, nicht in eine Verdichtung.
+  `welle-results.template.md` behält die Sektion als **Zeiger** ohne Daten,
+  damit ein Leser der Closure-Notiz den Zähler findet.
+- **Didaktik:** Themen-Bullet, Übung und Selbstcheck-Item (beide LZ 2, das dafür
+  um *„einordnen, wo der Steering-Loop-Zähler geführt wird und wer ihn schreibt
+  bzw. liest"* erweitert wurde), Rubrik-Zeile und zwei Lösungsblöcke. Dazu eine
+  neue Kernbegriffs-Zeile `BEO-<NNN>` in Quelle und Spiegel und der Nachzug in
+  `welle.template.md`.
 - **Lab:** Die drei realen Zeilen aus `welle-1-results.md` sind nach
-  `observations.md` umgezogen und haben Kennungen bekommen; `slice-009` und
-  `slice-020` verweisen auf `BEO-002` bzw. das Register.
+  `observations.md` umgezogen und haben Kennungen bekommen (`BEO-001` bis
+  `BEO-003`); dazu neu `BEO-004` (Lerneintrag aus `slice-020` §7), `BEO-005`
+  (der einzige reale 3×-Fall, verkörpert in `AGENTS.md` §2.7) und `BEO-006`
+  (offenes Risiko aus `slice-020` §6) — sechs Zeilen insgesamt.
+  Das Register erklärt die retrospektive
+  Kennungs-Vergabe. `slice-009` und `slice-020` zitieren ihre Kennungen,
+  `welle-1-results.md` nennt `BEO-005` beim Auslöser — die Register-Paarung hält
+  damit im Vorbild.
 
 ## Welle 58 — 2026-07-27 · Discovery-Register geschlossen: eine Beobachtung unter Schwelle, kein Plan
 

@@ -38,6 +38,7 @@ Entscheidungen. Diese Begriffe gelten durchgängig.
 | Hard Rule | Negativregel, die der Agent nie brechen darf (z. B. "Optimierer darf nie direkt aufs Gerät schreiben"). Repo-spezifisch. |
 | Repo-Klasse | Charakter eines Repos im Harness: *Referenz* · *Safety/Control* · *Policy/Compliance*. Bestimmt, wie scharf Hard Rules und Sensors gesetzt werden. |
 | ID-Schema | Stabile Präfix-Klammer (`LH-*`, `HSM-*`, `GG-*`), die Spec-Anforderungen, Make-Target-Kommentare, ADRs und Commits verbindet. |
+| `BEO-<NNN>` | Kennung einer Beobachtung im Beobachtungs-Register ([Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)). Vergabestelle ist das Register selbst; sie macht den Zähler unabhängig vom Wortlaut der Bezeichnung. |
 | Referenz-Richtung (SDP) | Normative Referenzen zeigen nur volatil→stabil (`lastenheft.md` › ADR › Slice); Abwärts-/Seitwärts-Verweise sind Kontext, keine Spezifikation. Siehe [§Referenz-Richtung](#referenz-richtung-sdp-wer-darf-wen-referenzieren). |
 | Spec-Stratifizierung | Aufteilung der Spec in *vertraglich* (Lastenheft) und *technisch* (Spezifikation) mit eigener Precedence-Regel. |
 | Stratum | Rollen-Klasse eines Spec-Dokuments — *Vertrag* (Decke) · *Technik* · *Sicht* —, bestimmt über normativen Gehalt und Änderungs-Prozess, nicht über den Dateinamen. Rang: Vertrag › Technik › Sicht; nur Vertrag und Sicht sind obligatorisch. Siehe [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument). |
@@ -782,7 +783,8 @@ sie zwingt den Implementation-Agent in die Source-Precedence-Kette zurück.
 Der Traceability-Constraint bindet **Änderungen** an eine ID. Der
 Herkunfts-Anker ist dieselbe Regel, angewandt auf das **Artefakt**: Eine
 Regel, die aus dem Steering Loop entstand, nennt die Welle, in der sie
-entstand.
+entstand — oder, wenn sie ohne Welle verkörpert wurde, den Slice:
+`seit welle-<NN>` bzw. `seit slice-<NNN>`.
 
 **Warum.** Eine Regel aus Spec oder ADR trägt ihre Begründung im
 `LH-*`/`ADR-*`-Bezug. Eine Regel aus *Beobachtung* hat keine solche ID —
@@ -798,7 +800,8 @@ ADR folgt, trägt bereits eine ID und braucht keinen zweiten Anker.
 **Form** — ein Feld, kein Konstrukt:
 
 ```makefile
-noqa-gate:  ## LH-QA-SUP-002 · seit welle-3        # Make-Target
+noqa-gate:  ## LH-QA-SUP-002 · seit welle-3        # Make-Target, Welle
+coverage-floor: ## LH-QA-SUP-004 · seit slice-047 # Make-Target, wellenlos
 ```
 ```markdown
 ### 3.3 git mv + Inhaltsänderung = zwei Commits   (seit welle-3)   <!-- AGENTS.md -->
@@ -810,10 +813,15 @@ Der Adaptions-Block trägt das Muster bereits über sein Feld *Begründung*
 („Drei Vorfälle in Folge: `slice-041/044/047`") — der Anker
 verallgemeinert es auf Gates, Skills und Hard Rules.
 
-**Warum die Welle und nicht der Slice:** `done/welle-<NN>-results.md`
-§Steering-Loop-Einträge nennt beim Schwellen-Übertritt das Trio *Regel ·
-stabile Bezeichnung · Slice-Belege*. Ein Anker `seit welle-3` löst damit
-in **einem Hop** auf, und er bleibt grob genug, um nicht zu verrotten.
+**Warum die Welle der Regelfall ist — und wann der Slice an ihre Stelle tritt.**
+`done/welle-<NN>-results.md` §Steering-Loop-Einträge nennt beim
+Schwellen-Übertritt das Trio *Regel · stabile Bezeichnung · Slice-Belege*.
+Ein Anker `seit welle-3` löst damit in **einem Hop** auf und bleibt grob
+genug, um nicht zu verrotten. Wurde die Regel **ohne Welle** verkörpert
+([Modul 6 §Das Beobachtungs-Register](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)),
+gibt es diese Datei nicht — dann ist der Slice die einzige auflösbare
+Herkunft, und der Anker lautet `seit slice-<NNN>`. Er löst über
+`done/slice-<NNN>.md` §7 auf, ebenfalls in einem Hop.
 
 **Ab Einführung, kein Nachrüsten.** Bestehende Regeln haben keinen
 rekonstruierbaren Ursprung mehr; `seit unbekannt` wäre eine
@@ -824,10 +832,18 @@ Information.
 
 **Anker-Paarung** (*computational feedback*). Die Prüfung läuft **von der
 Closure-Notiz nach außen**, nicht von der Regel nach innen — denn von der
-Regel aus ist nicht entscheidbar, ob sie einen Anker braucht. Pro Eintrag
-unter `## Steering-Loop-Einträge`: (1) der Eintrag nennt einen
-**Zielort**, (2) der Pfad existiert, (3) das Ziel trägt
-`seit welle-<NN>`. Rot bei: Regel nie geschrieben · still gelöscht ·
+Regel aus ist nicht entscheidbar, ob sie einen Anker braucht.
+
+**Ausgelöst wird durch ein Feld, nicht durch eine Sektion und nicht durch
+Prosa:** durch das Pflichtfeld **`liegt in <Pfad>`**. Es steht in
+`## Steering-Loop-Einträge` jeder `welle-<NN>-results.md` und — für wellenlos
+verkörperte Regeln — in §7 jeder `done/slice-<NNN>.md`; die kanonischen Formen
+liefern `welle-results.template.md` bzw. `slice.template.md` §7. Eine bloße
+**Erwähnung** eines Pfades im Fließtext ist *kein* Zielort und löst nichts aus.
+Fehlt das Feld, ist der Eintrag *gezählt, nicht verkörpert* und kein Gegenstand
+der Paarung — sonst liefe der Sensor auf jeder gewöhnlichen Slice-Closure rot
+und wäre selbst das, wogegen er gebaut ist. Geprüft wird dann: (1) der Pfad
+existiert, (2) das Ziel trägt `seit welle-<NN>` bzw. `seit slice-<NNN>`. Rot bei: Regel nie geschrieben · still gelöscht ·
 Anker vergessen. Das ist die Klasse *halluziniertes Gate*
 ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)),
 auf Regeln statt auf Make-Targets angewandt.
@@ -854,8 +870,8 @@ unverändert weiter; der Retirement-Check kommt hinzu und beantwortet eine
 *andere* Frage — nicht „darf ich?", sondern „ist der Grund entfallen?". Er ist
 der **Konsument** des Ankers: ohne ihn wäre der Anker eine zweite
 write-only-Ablage — genau der
-Fehler, den die Sektion *Beobachtungen unter Schwelle*
-([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur))
+Fehler, den das *Beobachtungs-Register*
+([Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register))
 behebt.
 
 #### Der Fluss — jedes Artefakt hat einen Konsumenten
@@ -865,18 +881,15 @@ flowchart TB
     A["Beobachtungs-Quellen<br/>Agentenlauf · Review-Findings<br/>Verifikation
     · Validierung"] --> B["Slice-Closure §7<br/>Steering-Loop-Eintrag<br/>+
     Risiko-Ausgänge"]
-    B --> V["Welle-Closure Schritt 3:<br/>ALLE Slice-Closures seit
-    der<br/>letzten Welle-Closure verdichten<br/>(auch wellenlose; gleiche
-    zählen)"]
+    B --> V["Beobachtungs-Register<br/>observations.md<br/>(neu oder Zähler +1)"]
     V --> C{"Wie oft?"}
-    C -- "1x / 2x" --> D["Beobachtungs-Register<br/>observations.md<br/>(hochzählen)"]
-    C -- "3x" --> E["Welle-Closure:<br/>Steering-Loop-Eintrag<br/>+ Zielort"]
+    C -- "3x" --> E["Verkörperung<br/>(Lese-Schritt löst aus: Welle-Closure,<br/>ohne Welle eigenständig)<br/>Steering-Loop-Eintrag + Zielort"]
 
-    D --> F["Wellen-Eröffnung Schritt 2:<br/>offene Beobachtungen sichten"]
+    C -- "1x / 2x: bleibt offen" --> F["Wellen-Eröffnung Schritt 2:<br/>offene Beobachtungen sichten"]
     F --> G["Slice-Planung:<br/>Sub-Area-Modus-Begründung<br/>Kriterium 3"]
     G --> A
 
-    E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-NN</b>"]
+    E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-NN</b><br/>(wellenlos: seit slice-NNN)"]
     H --> I["jeder Agentenlauf<br/>liest die verkörperte Form"]
     I --> A
     E -. "Anker-Paarung prüft beide Enden" .-> H
@@ -884,8 +897,7 @@ flowchart TB
     J -- "ja" --> K["Retirement-Check:<br/>Herkunft konsultieren"]
     K --> E
 
-    style V fill:#d6ecff,stroke:#2a6fb5
-    style D fill:#fff4d6,stroke:#d4a017
+    style V fill:#fff4d6,stroke:#d4a017
     style E fill:#fff4d6,stroke:#d4a017
     style F fill:#d6ecff,stroke:#2a6fb5
     style G fill:#d6ecff,stroke:#2a6fb5
@@ -910,8 +922,7 @@ eine Notiz —, benennt, **wer es liest und wann**. Findet sich kein Leser, ist
 es Ablage, keine Steuerung, und gehört nicht angelegt.
 
 Im Fluss-Diagramm oben ist das die Probe *hat das neue gelbe Kästchen ein
-blaues?* Der Steering-Loop-Eintrag war vor der Sektion *Beobachtungen unter
-Schwelle* genau das: sauber erhoben, nie gelesen.
+blaues?* Der Steering-Loop-Eintrag war vor dem *Beobachtungs-Register* genau das: sauber erhoben, nie gelesen.
 
 **Zwei Ausnahmen, die keine sind:**
 

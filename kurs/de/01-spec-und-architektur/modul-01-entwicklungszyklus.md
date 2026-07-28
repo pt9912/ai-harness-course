@@ -106,7 +106,7 @@ in die Spec. Die verkörperte Form ist der Grund, warum der Lerneintrag
 nächsten Code, ohne dass jemand ein Archiv lesen muss. Wie daraus über
 mehrere Slices ein Zähler wird und wie eine so entstandene Regel ihre
 Herkunft behält, steht in
-[Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)
+[Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)
 und [`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln).
 
 **Auflösung des Engage-Falls:** Review prüft Code gegen *Plan und ADR*.

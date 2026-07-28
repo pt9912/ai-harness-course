@@ -45,17 +45,23 @@ geschärft, und wo liegt es jetzt?
 Klassen: geschärfte Regel (AGENTS.md / MR-<NNN>) · neuer Sensor (Gate,
 Skill) · benannte Spec-Lücke (Lastenheft-Version, Folge-ADR).
 
-PFLICHTFELD "liegt in": der Zielort ist maschinell prüfbar und bildet
-mit dem Herkunfts-Anker am Ziel ein PAAR — das Ziel muss existieren und
-`seit welle-<NN>` tragen. Ohne das Feld ist der Eintrag eine Behauptung
-ohne Deckung (Klasse: halluziniertes Gate). Regel und Sensor:
+PFLICHTFELD "liegt in" fuer geschaerfte Regel und neuen Sensor: der Zielort
+ist maschinell pruefbar und bildet mit dem Herkunfts-Anker am Ziel ein PAAR —
+das Ziel muss existieren und `seit welle-<NN>` tragen. NUR dieses Feld loest
+die Anker-Paarung aus; eine benannte Spec-Luecke traegt stattdessen ihre
+`LH-*`-ID und ist kein Gegenstand der Paarung. Regel und Sensor:
 Baseline-Regelwerk `grundlagen-konventionen.md` §Herkunfts-Anker für
 Steering-Loop-Regeln.
+
+REGISTER-PAARUNG: jede genannte `BEO-<NNN>` MUSS eine Zeile in
+`../observations.md` haben — geprueft am Ende von Schritt 3.
 -->
 
-- **<Guide oder Sensor>** <geschärft/ergänzt>: <was genau> — liegt in
-  `<AGENTS.md §X | Makefile-Target | .harness/skills/…>`.
-  Auslöser: <slice-NNN, slice-MMM, slice-KKK> (3×).
+- **<Guide oder Sensor>** <geschärft/ergänzt>: <was genau>
+  — liegt in `<AGENTS.md §X | Makefile-Target | .harness/skills/…>`.
+  (Feld und Pfad stehen auf EINER Zeile — ein zeilenweiser Sensor greift sonst
+  nicht; die Sektionsangabe steht INNERHALB der Backticks.)
+  Auslöser: `BEO-<NNN>` (<slice-NNN>, <slice-MMM>, <slice-KKK> — 3×).
 - <…>
 
 <!-- Gegenstück am Ziel, nicht vergessen — es ist die andere Hälfte des Paares:
@@ -64,7 +70,7 @@ Steering-Loop-Regeln.
      Entfernen oder Lockern dieser Regel setzt später den Retirement-Check
      voraus: „seit welle-<NN> — ist die Beobachtung wieder aufgetreten?" -->
 
-## Beobachtungen unter Schwelle
+## Beobachtungs-Register (Zeiger)
 
 <!--
 NICHT MEHR HIER PFLEGEN. Der Zaehler lebt seit Kurs-Welle 59 als stehende

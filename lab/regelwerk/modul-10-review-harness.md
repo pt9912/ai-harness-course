@@ -69,11 +69,11 @@ achtest du"; Vorlage
   („geprüft, ohne Befund"; eigene Sektion unten).
 - **Pflege (Steering-Loop):** Das „dreimal" zählt der Skill nicht selbst —
   jeder Lauf steht für sich; gezählt wird über Finding-Klasse →
-  Slice-Closure §7 → Verdichtung bei der Welle-Closure. Bei dreimaligem gleichem Finding
+  Slice-Closure §7 → Eintrag ins Beobachtungs-Register. Bei dreimaligem gleichem Finding
   Klassifikation schärfen / Folge-ADR bzw. `AGENTS.md`-Update / Gate
   (Modul 13). Die Skill-Datei wird **versioniert, nicht überschrieben**
   (ADR-Hard-Rule, Modul 4). Ein so entstandener HIGH-Eintrag trägt den
-  Herkunfts-Anker `(seit welle-<NN>)`
+  Herkunfts-Anker `(seit welle-<NN>)` bzw. `(seit slice-<NNN>)`
   ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
 
 Vergleichbares Skill-Pattern für *Verifier* und *Validator* in Modul 11
@@ -98,11 +98,13 @@ Verdikt — liefert
 **Der Report ist ein Lauf-Beleg, kein Wissensspeicher**: Konsument ist der
 Implementer im selben Zyklus, danach der Audit. Über Läufe hinweg wird er
 nicht wieder gelesen — das steuerungsrelevante Signal ist die
-**Finding-Klasse** (Summary-Zeile), die über die Slice-Closure §7 in den
-Zähler der Welle-Closure wandert ([Modul 6](modul-06-roadmap.md)). Bedingung:
-die Klassen-Bezeichnung ist über Läufe hinweg **stabil**, sonst zählt der
-Zähler zwei Namen für dasselbe Muster getrennt. Ein Archiv-Scan ist dafür
-nicht nötig — die Häufung entsteht bei der Verdichtung.
+**Finding-Klasse** (Summary-Zeile), die über die Slice-Closure §7 ins
+**Beobachtungs-Register** wandert
+([Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)). Bedingung: die
+Klassen-Bezeichnung ist über Läufe hinweg **stabil** — der Report kennt das
+Register nicht, die Zuordnung zur `BEO-<NNN>` passiert erst bei der
+Slice-Closure und braucht den wiedererkennbaren Namen. Ein Archiv-Scan ist
+nicht nötig — die Häufung steht im Register.
 
 Abgelegt wird ein Report pro Lauf unter `docs/reviews/`, Folgeläufe
 als neue Datei statt Überschreibung.

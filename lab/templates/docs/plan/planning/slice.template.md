@@ -41,6 +41,7 @@ Liste mit jeweils prüfbarem Kriterium.
 - [ ] `make gates` grün.
 - [ ] Doku-Update für <Schnittstelle X> falls öffentlicher Vertrag berührt.
 - [ ] Closure-Notiz mit Steering-Loop-Lerneintrag.
+- [ ] Beobachtungs-Register (`../observations.md`) fortgeschrieben — neue `BEO-<NNN>` oder Zähler +1 mit Beleg; keine Beobachtung angefallen ist ebenfalls eine Antwort und wird in §7 notiert.
 - [ ] Jedes Risiko aus §6 trägt einen Ausgang (eingetreten / entfallen / weiter offen).
 
 ## 3. Plan (vor Code)
@@ -87,23 +88,53 @@ JEDES Risiko bekommt bei Closure genau EINEN Ausgang (Baseline-Regelwerk
 `modul-05-planning-harness.md` §Offene Risiken werden bei Closure aufgelöst):
   eingetreten  -> Carveout CO-<NNN> oder Folge-Slice, ID hier eintragen
   entfallen    -> gestrichen MIT Begründung (ohne sie ist es stilles Vergessen)
-  weiter offen -> wandert ins Beobachtungs-Register (`../observations.md`)
+  weiter offen -> Zeile im Beobachtungs-Register (`../observations.md`) anlegen
+                  oder hochzählen; die BEO-<NNN> hier eintragen
 Ein Slice geht nicht nach done/, während ein Risiko ohne Ausgang dasteht.
 -->
 
 - <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-NNN | entfallen: Grund | weiter offen: → BEO-NNN im Register>
 
-## 7. Closure-Notiz (nach `done/`)
+## 7. Closure-Notiz (bei Closure zu füllen)
 
 <!--
-Wird *nach* Abschluss ergänzt. Inhalt:
+Wird bei der Closure gefüllt, vor dem `git mv` nach `done/`. Inhalt:
 - Was hat funktioniert?
 - Was ging anders als geplant?
 - Steering-Loop-Eintrag: welcher Guide/Sensor sollte verbessert werden?
   (kanonische Definition: [Baseline-Regelwerk §Steering Loop](../../../../regelwerk/grundlagen-klassifikation.md#steering-loop))
-- Folge-Slices: welche neuen open/-Einträge? (*derivativ* — der Slice
-  selbst liegt in `open/`, diese Zeile zeigt nur darauf; genannt heißt
-  angelegt, sonst schlägt die Folge-Slice-Paarung der Welle-Closure an)
+  Wurde die Regel HIER verkoerpert (wellenlos, Schwelle 3x erreicht, keine
+  laufende Welle)? Dann das PFLICHTFELD setzen — dieselbe Form wie in der
+  Welle-Closure, und NUR dieses Feld loest die Anker-Paarung aus:
+
+      liegt in `<AGENTS.md §X | Makefile-Target | .harness/skills/…>`
+
+  Das Ziel traegt dann `(seit slice-<NNN>)`. Ohne dieses Feld ist der Eintrag
+  gezaehlt, nicht verkoerpert — eine blosse Erwaehnung eines Pfades im
+  Fliesstext ist KEIN Zielort und loest nichts aus.
+  OHNE LAUFENDE WELLE gibt es keine Welle-Closure, die anschliessend prueft:
+  Dann die drei Paarungen (Anker · Folge-Slice · Register) direkt hier nach
+  der Closure pruefen — sonst prueft sie niemand.
+- PFLICHTSCHRITT — Beobachtungs-Register (`../observations.md`) fortschreiben,
+  vor dem `git mv` nach done/:
+    keine Beobachtung angefallen -> NICHTS eintragen; hier "keine Beobachtung"
+                                    notieren. Das ist ebenfalls eine Antwort —
+                                    eine erfundene BEO-<NNN> verduennt den
+                                    Zaehler mit Rauschen. Ebenso zaehlt eine
+                                    benannte Spec-Luecke NICHT: sie traegt
+                                    ihre LH-*-ID;
+    Beobachtung schon im Register -> Zähler +1, Beleg `slice-NNN`
+                                     ergänzen, hier die BEO-<NNN>
+                                     ZITIEREN statt neu formulieren;
+    sonst                         -> neue BEO-<NNN> vergeben, Zeile
+                                     anlegen (Sub-Area, 1x, Beleg).
+  Das ist der Punkt, an dem der Zähler unabhängig von jeder Welle läuft: Die
+  Welle-Closure LIEST das Register nur noch (was hat 3x erreicht).
+- Folge-Slices: welche neuen open/-Einträge? (*derivativ* — der Folge-Slice
+  selbst ist eine Datei in `open/`, diese Zeile zeigt nur darauf; genannt
+  heißt angelegt, sonst schlägt die Folge-Slice-Paarung der Welle-Closure an.
+  Bewusst NICHT „liegt in" — diese Form ist dem Pflichtfeld oben vorbehalten
+  und wuerde hier die Anker-Paarung ausloesen)
 - Risiken aus §6: hat jedes einen Ausgang?
 - Finding-Klassen aus dem Review dieses Slice (Summary-Zeile des
   Review-Reports): welche gehen als Beobachtung weiter? Stabile
@@ -111,7 +142,8 @@ Wird *nach* Abschluss ergänzt. Inhalt:
   sonst zählt das Register zwei Namen getrennt.
 -->
 
-<!-- Erst nach Abschluss füllen. -->
+<!-- Bei der Closure füllen — vor dem `git mv` nach `done/` (siehe Kommentar
+oben), nicht danach. -->
 
 ## 8. Sub-Area-Modus-Begründung
 

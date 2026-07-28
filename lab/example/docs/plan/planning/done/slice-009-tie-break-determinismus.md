@@ -59,9 +59,12 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
 nicht stable ist. Wechsel zu `sort.SliceStable` plus expliziter
 Tie-Break-Closure macht die Reihenfolge deterministisch.
 
-**Steering-Loop-Eintrag:** AGENTS.md wurde erweitert um eine
-Hard-Rule "Tie-Break in jeder sortierenden Operation muss explizit
-dokumentiert sein" (jetzt auch in `harness/README.md` als Safety-Boundary).
+**Steering-Loop-Eintrag:** Beobachtung im Register auf **2×** erhöht
+(`BEO-005`, Beleg `slice-009` ergänzt). Die Schwelle fällt erst mit
+`slice-012`. Die Verkörperung —
+AGENTS.md-Hard-Rule "Tie-Break in jeder sortierenden Operation muss explizit
+dokumentiert sein" — erfolgt beim Lese-Schritt der Welle-1-Closure, nicht
+hier: *gezählt* ist nicht *verkörpert*.
 
 **Folge-Slice:** keiner notwendig — Eigenschaft ist abgesichert in
 allen vier weiteren Sprachen, wenn diese Welle 1 portieren (Welle 1
@@ -71,9 +74,9 @@ sortiert nach Sprach-Skelett-Roundtrip ab; siehe Roadmap M1).
 
 **Status:** alle berührten Sub-Areas GF (siehe
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
-für das DocSearch-Lab als Ganzes). Der Slice hat die `AGENTS.md`-Hard-
-Rule "Tie-Break explizit dokumentiert" als Konventions-Adaption
-gesetzt; das ist eine GF-Bewegung (Doku führt, Code wird gemessen) —
+für das DocSearch-Lab als Ganzes). Der Slice setzt **keine** Konventions-Adaption; die
+`AGENTS.md`-Hard-Rule "Tie-Break explizit dokumentiert" entstand erst beim
+Lese-Schritt der Welle-1-Closure aus `BEO-005`. Reine GF-Bewegung —
 keine BF/Hybrid-Begründung nötig.
 
 Voraussetzung-Wissen für den Block-Aufbau: Kurs

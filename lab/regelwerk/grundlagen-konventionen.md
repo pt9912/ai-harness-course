@@ -36,6 +36,7 @@
 | Hard Rule | Negativregel, die der Agent nie brechen darf (z. B. "Optimierer darf nie direkt aufs Gerät schreiben"). Repo-spezifisch. |
 | Repo-Klasse | Charakter eines Repos im Harness: *Referenz* · *Safety/Control* · *Policy/Compliance*. Bestimmt, wie scharf Hard Rules und Sensors gesetzt werden. |
 | ID-Schema | Stabile Präfix-Klammer (`LH-*`, `HSM-*`, `GG-*`), die Spec-Anforderungen, Make-Target-Kommentare, ADRs und Commits verbindet. |
+| `BEO-<NNN>` | Kennung einer Beobachtung im Beobachtungs-Register ([Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)). Vergabestelle ist das Register selbst; sie macht den Zähler unabhängig vom Wortlaut der Bezeichnung. |
 | Referenz-Richtung (SDP) | Normative Referenzen zeigen nur volatil→stabil (`lastenheft.md` › ADR › Slice); Abwärts-/Seitwärts-Verweise sind Kontext, keine Spezifikation. Siehe [§Referenz-Richtung](#referenz-richtung-sdp-wer-darf-wen-referenzieren). |
 | Spec-Stratifizierung | Aufteilung der Spec in *vertraglich* (Lastenheft) und *technisch* (Spezifikation) mit eigener Precedence-Regel. |
 | Stratum | Rollen-Klasse eines Spec-Dokuments — *Vertrag* (Decke) · *Technik* · *Sicht* —, bestimmt über normativen Gehalt und Änderungs-Prozess, nicht über den Dateinamen. Rang: Vertrag › Technik › Sicht; nur Vertrag und Sicht sind obligatorisch. Siehe [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument). |
@@ -778,29 +779,43 @@ sie zwingt den Implementation-Agent in die Source-Precedence-Kette zurück.
 
 Der Traceability-Constraint bindet **Änderungen** an eine ID. Der
 Herkunfts-Anker ist dieselbe Regel auf dem **Artefakt**: Eine Regel, die
-aus dem Steering Loop entstand, nennt die Welle, in der sie entstand.
+aus dem Steering Loop entstand, nennt die Welle, in der sie entstand — oder,
+wenn sie ohne Welle verkörpert wurde, den Slice: `seit welle-<NN>` bzw.
+`seit slice-<NNN>`.
 
 - **Geltungsbereich — eng.** Nur Regeln, die die 3×-Schwelle erreicht
   haben. Was aus Lastenheft, Spezifikation oder ADR folgt, trägt bereits
   eine ID und braucht keinen zweiten Anker.
 - **Form** — ein Feld, kein Konstrukt:
   `noqa-gate:  ## LH-QA-SUP-002 · seit welle-3` (Make-Target) ·
+  `coverage-floor: ## LH-QA-SUP-004 · seit slice-047` (wellenlos) ·
   `### 3.3 <Hard Rule>   (seit welle-3)` (AGENTS.md) ·
   `- <HIGH-Regel>  (seit welle-3)` (Reviewer-Skill). Der Adaptions-Block
   trägt das Muster bereits über sein Feld *Begründung*.
-- **Ziel ist die Welle, nicht der Slice.** `done/welle-<NN>-results.md`
-  §Steering-Loop-Einträge nennt beim Schwellen-Übertritt *Regel · stabile
-  Bezeichnung · Slice-Belege* — ein Anker löst damit in einem Hop auf und
-  bleibt grob genug, um nicht zu verrotten.
+- **Die Welle ist der Regelfall, der Slice die Ausnahme.**
+  `done/welle-<NN>-results.md` §Steering-Loop-Einträge nennt beim
+  Schwellen-Übertritt *Regel · stabile Bezeichnung · Slice-Belege* — ein Anker
+  löst damit in einem Hop auf und bleibt grob genug, um nicht zu verrotten.
+  Wurde die Regel **ohne Welle** verkörpert, gibt es diese Datei nicht; dann
+  ist der Slice die einzige auflösbare Herkunft (`seit slice-<NNN>`, löst über
+  `done/slice-<NNN>.md` §7 auf).
 - **Ab Einführung, kein Nachrüsten.** Altbestand bleibt ohne Anker;
   `seit unbekannt` wäre eine Harness-Lüge, der leere Zustand ist die
   ehrliche Information.
 
 **Sensor 1 — Anker-Paarung** (*computational feedback*). Die Prüfung läuft
 **von der Closure-Notiz nach außen**, nicht von der Regel nach innen: von
-der Regel aus ist nicht entscheidbar, ob sie einen Anker braucht. Pro
-Eintrag unter `## Steering-Loop-Einträge`: (1) der Eintrag nennt einen
-**Zielort**, (2) der Pfad existiert, (3) das Ziel trägt `seit welle-<NN>`.
+der Regel aus ist nicht entscheidbar, ob sie einen Anker braucht.
+**Ausgelöst wird durch ein Feld, nicht durch eine Sektion und nicht durch
+Prosa:** durch das Pflichtfeld **`liegt in <Pfad>`** — in
+`## Steering-Loop-Einträge` jeder `welle-<NN>-results.md` und, für wellenlos
+verkörperte Regeln, in §7 jeder `done/slice-<NNN>.md`; die kanonischen Formen
+liefern `welle-results.template.md` bzw. `slice.template.md` §7 (siehe
+Ziel-Form unten). Eine bloße Erwähnung
+eines Pfades im Fließtext ist kein Zielort. Fehlt das Feld, ist der Eintrag
+*gezählt, nicht verkörpert* und kein Gegenstand der Paarung. Geprüft wird:
+(1) der Pfad existiert, (2) das Ziel trägt `seit welle-<NN>` bzw.
+`seit slice-<NNN>`.
 Rot bei: Regel nie geschrieben · still gelöscht · Anker vergessen —
 dieselbe Klasse wie ein halluziniertes Gate
 ([Modul 13](modul-13-quality-gates.md)).
@@ -822,8 +837,12 @@ Frage („ist der Grund entfallen?", nicht „darf ich?"). Er ist der
 **Konsument** des Ankers; ohne ihn wäre der Anker eine zweite
 write-only-Ablage.
 
-Ziel-Form des Eintrags mit Pflichtfeld *Zielort*:
-[`../templates/docs/plan/planning/welle-results.template.md`](../templates/docs/plan/planning/welle-results.template.md).
+Ziel-Form des Eintrags mit dem Pflichtfeld `liegt in <Pfad>` — zwei Orte, zwei
+Vorlagen: für die Welle-Closure
+[`../templates/docs/plan/planning/welle-results.template.md`](../templates/docs/plan/planning/welle-results.template.md),
+für wellenlos verkörperte Regeln
+[`../templates/docs/plan/planning/slice.template.md`](../templates/docs/plan/planning/slice.template.md)
+§7.
 
 <a id="jedes-artefakt-hat-einen-konsumenten"></a>
 

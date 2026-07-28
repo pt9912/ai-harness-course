@@ -20,15 +20,15 @@ stateDiagram-v2
     in_progress --> open: blockiert (Carveout?)
     done --> [*]
     note right of done
-        §7 wird bei der nächsten
-        Welle-Closure verdichtet
-        (Modul 6, Schritt 3)
+        §7 → Beobachtungs-Register
+        (Modul 6)
     end note
 ```
 
 Drei Übergänge sind nichttrivial: `in_progress → next` (Rückführung bei
-Größen-Erkenntnis) und `in_progress → open` (Blocker — meist mit
-Carveout, siehe [Modul 7](modul-07-carveouts.md)). Der einzige Übergang
+Größen-Erkenntnis), `in_progress → open` (Blocker — meist mit
+Carveout, siehe [Modul 7](modul-07-carveouts.md)) und `in_progress → done`.
+Der einzige Übergang
 nach `done` verlangt *Lerneintrag* **und einen Ausgang für jedes offene
 Risiko**, nicht nur "Tests grün".
 
@@ -59,7 +59,8 @@ sondern ein Buffet.
   dem Review** dieses Slice (Summary-Zeile des Review-Reports; der Report
   selbst ist Lauf-Beleg und wird über Läufe hinweg nicht gelesen,
   [Modul 10](modul-10-review-harness.md)). Alle drei nehmen dieselbe
-  Route in den Zähler und brauchen deshalb eine **stabile Bezeichnung**.
+  Route in den Zähler; die Kennung `BEO-<NNN>` hält sie zusammen, die
+  Bezeichnung ist stabil zu halten, damit die Zuordnung gelingt.
 - Übergang nach `done/` verlangt zwei beobachtbare Closure-Kriterien
   (z. B. Replay grün, DoD-Punkte als Test verlinkt) *und* einen
   Lerneintrag in einer der drei Formen (geschärfte Regel · neuer Sensor ·
@@ -82,7 +83,7 @@ Originalinformation und steht nirgendwo sonst. Jedes bekommt beim Übergang
 nach `done/` genau **einen** Ausgang: *eingetreten* → Carveout (Modul 7)
 oder Folge-Slice mit ID · *entfallen* → gestrichen **mit Begründung** (ohne
 sie ist es stilles Vergessen) · *weiter offen* → wandert ins
-**Beobachtungs-Register** ([Modul 6](modul-06-roadmap.md)). Der
+**Beobachtungs-Register** ([Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)). Der
 dritte Ausgang hängt das Risiko an den Zähler, statt einen zweiten
 Mechanismus zu erfinden: drei Slices lang offen heißt Schwelle erreicht.
 Ein Slice geht nicht nach `done/`, während ein Risiko ohne Ausgang dasteht.
@@ -121,8 +122,8 @@ erweitern):
    ausweist? Bei GF meist niedrig (Doc führt — Inventur prüft nur
    Code-Konformität); bei BF/Hybrid das Hauptrisiko, das die
    Reconciliation-Schätzung trägt. **Beleg-Quelle sind auch die offenen
-   Beobachtungen** zu dieser Sub-Area (Sektion *Beobachtungen unter
-   Schwelle* der letzten Welle-Closure, [Modul 6](modul-06-roadmap.md)):
+   Beobachtungen** zu dieser Sub-Area (**Beobachtungs-Register**,
+   [Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)):
    ein Eintrag, der die Sub-Area schon zweimal getroffen hat, ist genau
    dieses Risiko — und wird er durch diesen Slice zum dritten Mal
    berührt, ist er keine Notiz mehr, sondern eine Lücke. Keine

@@ -81,7 +81,14 @@ Explizite Nicht-Inhalte. Schützt vor Scope-Creep.
 ## 7. Closure-Notiz
 
 <!-- Erst nach Welle-Abschluss füllen: Zeiger auf die Ergebnis-Notiz
-`../done/welle-<NN>-results.md` (nur die Nummer, nicht die volle
-Welle-ID). Ziel-Form: [`welle-results.template.md`](welle-results.template.md)
-— sie trägt die Pflichtteile inklusive der Sektion „Beobachtungen unter
-Schwelle", die bei der nächsten Closure übernommen und hochgezählt wird. -->
+`welle-<NN>-results.md` (nur die Nummer, nicht die volle Welle-ID).
+
+Pfade so schreiben, wie sie vom RUHEORT dieser Datei aus auflösen: Sie wandert
+bei Closure per `git mv` nach `done/` — die Ergebnis-Notiz liegt dort als
+Geschwister (also ohne Präfix), das Beobachtungs-Register eine Ebene höher
+(`../observations.md`). Ein im Schreibmoment richtiges `done/…` bricht für
+jeden Leser danach.
+
+Ziel-Form: [`welle-results.template.md`](welle-results.template.md) — sie trägt
+die Pflichtteile inklusive des Zeigers aufs Beobachtungs-Register, das bei
+jeder Slice-Closure fortgeschrieben wird. -->
