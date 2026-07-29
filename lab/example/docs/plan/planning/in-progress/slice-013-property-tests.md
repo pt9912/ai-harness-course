@@ -67,9 +67,18 @@ Adaption) hat zwar Adaptions-Aufwand, aber keinen Inventur-Auftrag
 (es wird neu gebaut, nichts retrofittet).
 
 **Vorgelagert — offene Beobachtungen gesichtet:** Register
-(`../observations.md`) durchgegangen. `BEO-002` (*Test-Infrastruktur*, 1×) betrifft die hier berührte Sub-Area und
-steht damit unten im *Evidenz-/Diskrepanz-Risiko*. `BEO-001` (2×) ebenfalls —
-erreicht sie mit diesem Slice 3×, braucht sie einen eigenen Folge-Slice.
+(`../observations.md`) durchgegangen. Berührt sind drei Sub-Areas (§3):
+*Test-Infrastruktur* (`<sprache>/tests/property/` — die `FsCheck`-Adaption ist
+eine neue Konvention, keine additive Arbeit unter der alten),
+*Sensor-Werkzeuge* (`test-property` in der `gates`-Liste) und
+*Konventionen & Harness-Doku* (`AGENTS.md` §4, `harness/README.md`).
+`docs/user/` ist Aspirantin und trägt keine Modus-Aussage.
+
+**Keine Treffer auf den berührten Sub-Areas** — und das ist die Antwort, nicht
+ihr Fehlen. Die beiden offenen Zeilen `BEO-001` (2×) und `BEO-002` (1×) liegen
+auf *Replay-/Eval-Infrastruktur*: Sie betreffen den Zuschnitt des Golden Sets,
+den dieser Slice nicht anfasst — er *misst* gegen den bestehenden Satz. Ihr
+Zähler geht durch diesen Slice also nicht hoch.
 
 Voraussetzung-Wissen für den Block-Aufbau: Kurs
 [Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).

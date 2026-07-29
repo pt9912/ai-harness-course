@@ -656,6 +656,30 @@ normal, mit wachsender Struktur wird daraus eine Sub-Area.
 > Risiko · Reconciliation-Aufwand). Erst Inklusion (hier), dann
 > Modus-Wahl (Modul 5).
 
+**Was heißt „berührt"?** Ein Slice *berührt* eine Sub-Area, wenn er ihren
+**Doku-/Code-Abgleich bewegt** — wenn er also ihre Konventions-Härte oder ihre
+Inventur-Linie verändert. Das ist die Bedingung, die entscheidet, für welche
+Sub-Areas ein Slice einen Begründungsblock schreibt ([Modul 5 §8](modul-05-planning-harness.md#ziel-form-sub-area-modus-begründung)) und unter welche
+Sub-Area eine Beobachtung ins Register geht ([Modul 6 §Das Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register-modul-6)). Zwei Wege führen dorthin,
+und nur einer steht im Diff:
+
+- **Pfad-Berührung** — der Slice ändert eine Datei aus dem Pfad-Cluster der
+  Sub-Area. Mechanisch ablesbar, aber **nicht hinreichend**: Additive Arbeit
+  *innerhalb* einer bereits deklarierten Konvention bewegt den Abgleich nicht.
+  Ein Slice, der eine Testdatei nach dem geltenden Schema ergänzt, berührt
+  *Test-Infrastruktur* nicht — sonst trüge jeder Slice diesen Block, und der
+  Block verlöre genau die Aussage, für die es ihn gibt.
+- **Aussagen-Berührung** — der Slice ändert eine Aussage, gegen die der Cluster
+  abgeglichen wird, ohne eine seiner Dateien anzufassen. Eine ADR, die die
+  Schreib-Semantik des Index festlegt, berührt die Implementierungs-Sub-Area
+  auch dann, wenn in dieser Welle noch kein Index-Code entsteht.
+
+> **Grenze — ehrlich benannt:** Keine der beiden Hälften ist maschinell
+> entscheidbar. Was der Diff liefert, ist eine **Kandidatenliste**: Ein Gate
+> kann verlangen, dass jeder Pfad-Kandidat in §8 entweder einen Block oder eine
+> Abweisung mit Grund bekommt. Ob die Abweisung trägt — und ob ein Kandidat
+> fehlt, den nur die Aussagen-Berührung findet —, bleibt Urteil.
+
 **Aggregation — die Kehrseite der Inklusion.** Wie die Schwelle ein
 *Zuviel an Struktur* abweist (die Aspirantin oben), weist dieselbe Logik
 rückwärts gelesen ein *Zuwenig an Trennung* ab: Zwei Sub-Areas, die

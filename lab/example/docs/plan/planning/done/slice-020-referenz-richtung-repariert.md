@@ -61,7 +61,9 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
 - `check-references` prüft nur `spec/`, nicht `docs/plan/adr/` — dort
   könnten dieselben Zeiger unbemerkt stehen — **Ausgang:** weiter offen →
   `BEO-006` im **Beobachtungs-Register** (`../observations.md`)
-  (Sub-Area *Spec-Schreibung*). Auch ein wellenloser Slice trägt selbst
+  (Sub-Area *Planning-Lifecycle*: ungedeckt ist die Inventur-Linie der
+  ADR-Ablage — ob ADRs aufwärts deklarieren, prüft niemand).
+  Auch ein wellenloser Slice trägt selbst
   ein — der Zähler hängt an der Slice-Closure, nicht an der Welle.
 
 ## 7. Closure-Notiz
@@ -101,16 +103,19 @@ Konventions-Adaption — keine BF/Hybrid-Begründung nötig.
 Modus-Tabelle (`harness/conventions.md`), abgelesen an §3: *Spec-Schreibung*
 (`spec/spezifikation.md`) und *Planning-Lifecycle* (dieser Slice-Plan selbst).
 
-**Ein offener Treffer:** `BEO-003` (*Spec-Schreibung*, 2×). Dazu eine bereits
-**verkörperte** Zeile auf derselben Sub-Area, `BEO-007`: Sie steht mit Zähler
+**Ein offener Treffer:** `BEO-003` (*Planning-Lifecycle*, 2×) — der vergessene
+ADR-Bezug betrifft die ADR-Konvention, nicht das Spec-Stratum. Dazu eine bereits
+**verkörperte** Zeile auf *Spec-Schreibung*, `BEO-007`: Sie steht mit Zähler
 und Belegen im Register, trägt aber den Vermerk, wohin sie ging, und wirkt über
-Lastenheft v0.2.0 von selbst. Auf *Planning-Lifecycle* steht keine Zeile.
+Lastenheft v0.2.0 von selbst.
 
 `BEO-003` erreicht **mit diesem Slice** nicht 3×: Es meint den vergessenen
 ADR-Bezug im Commit, und der ist hier nicht aufgetreten. Kein Folge-Slice. Was
-diesem Slice auffällt, sind zwei *neue* Beobachtungen — `BEO-004` aus der
-Closure-Beobachtung und `BEO-006` aus dem Risiko-Ausgang §6; beide legt §7 an,
-beide auf *Spec-Schreibung*.
+diesem Slice auffällt, sind zwei *neue* Beobachtungen, beide von §7 angelegt:
+`BEO-004` aus der Closure-Beobachtung auf *Spec-Schreibung* — verletzt ist eine
+Spec-Stil-Regel (ein Spec-Stratum nennt keine Slices), also Achse 1 dieser
+Sub-Area. `BEO-006` aus dem Risiko-Ausgang §6 auf *Planning-Lifecycle* —
+ungedeckt ist deren Inventur-Linie, nicht die der Spec.
 
 Voraussetzung-Wissen für den Block-Aufbau: Kurs
 [Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).

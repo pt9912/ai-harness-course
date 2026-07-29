@@ -64,20 +64,23 @@ für das DocSearch-Lab als Ganzes). Spec-Anker LH-QA-01 führt
 kein Reconciliation, keine BF/Hybrid-Begründung nötig.
 
 **Vorgelagert — offene Beobachtungen gesichtet:** Register
-(`../observations.md`) durchgegangen. Berührt sind vier Sub-Areas aus der
+(`../observations.md`) durchgegangen. Berührt sind drei Sub-Areas aus der
 Modus-Tabelle (`harness/conventions.md`): *Planning-Lifecycle* (ADR-0004, §3),
-*Implementierung* (`internal/index/`, `internal/service/`, §3),
-*Test-Infrastruktur* (`make test-determinism` muss auch unter ANN halten,
-DoD und §6) und *Replay-/Eval-Infrastruktur* (Replay gegen das Golden Set,
-recall@5, DoD).
+*Implementierung* (`internal/index/`, `internal/service/`, §3) und
+*Replay-/Eval-Infrastruktur* (Replay gegen das Golden Set, recall@5, DoD).
 
-**Zwei offene Treffer**, beide auf *Test-Infrastruktur*: `BEO-001` (2×) und
-`BEO-002` (1×) — ihr Zähler-Stand steht unten im *Evidenz-/Diskrepanz-Risiko*.
+*Test-Infrastruktur* ist **nicht** berührt, obwohl `make test-determinism` auch
+unter ANN grün bleiben muss: Der Slice *hält* die Determinismus-Konvention ein,
+er bewegt sie nicht — genau der Fall, den
+[`konventionen.md` §Was ist eine Sub-Area?](../../../../../../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area)
+von der Berührung ausnimmt.
+
+**Zwei offene Treffer**, beide auf *Replay-/Eval-Infrastruktur*: `BEO-001` (2×)
+und `BEO-002` (1×) — ihr Zähler-Stand steht unten im *Evidenz-/Diskrepanz-Risiko*.
 Dazu eine **verkörperte** Zeile auf *Implementierung*, `BEO-005`: Sie steht mit
 Zähler und Belegen im Register, trägt aber den Vermerk, wohin sie ging, und
 wirkt über `AGENTS.md` §2.7 von selbst — der Tie-Break dieses Slice fällt
-darunter. Auf *Planning-Lifecycle* und *Replay-/Eval-Infrastruktur* steht keine
-Zeile.
+darunter. Auf *Planning-Lifecycle* steht keine Zeile.
 
 Keiner der beiden offenen erreicht **mit diesem Slice** 3×. `BEO-002` steht bei
 1× und kann die Schwelle mit einem einzelnen Slice ohnehin nicht erreichen —

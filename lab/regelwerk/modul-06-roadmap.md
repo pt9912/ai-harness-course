@@ -84,6 +84,13 @@ Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
   die erste Welle braucht eine Sonderregel, ohne Welle gibt es keinen Träger.
   Der feste Ort streicht alle drei Fälle.
 - **Form:** `| Kennung | Beobachtung | Sub-Area | Zähler | Belege | Stand |`; zweite Sektion *Gestrichene Einträge* für das, was nicht mehr auftreten kann — mit Begründung.
+- **Die Sub-Area-Spalte** trägt die Sub-Area, deren Konventions-Härte oder
+  Inventur-Linie die Beobachtung betrifft — **nicht** die, in deren Verzeichnis
+  sie aufgefallen ist. Dieselbe Berührungs-Frage wie beim §8-Block des
+  Slice-Plans ([`grundlagen-konventionen.md` §Was ist eine Sub-Area?](grundlagen-konventionen.md#was-ist-eine-sub-area)),
+  rückwärts gestellt. Steht in der Spalte ein Name, den die Modus-Deklaration
+  in `harness/conventions.md` nicht führt, ist entweder die Zuordnung falsch
+  oder die Deklaration unvollständig.
 - **`BEO-<NNN>` ersetzt die Namens-Disziplin.** Erstauftreten benennt und
   vergibt die Kennung; Wiederauftreten zitiert sie und erhöht den Zähler. Ohne
   Kennung zählt eine Umformulierung als zweite Beobachtung, und keine erreicht

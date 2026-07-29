@@ -345,9 +345,23 @@ Verbleib:
 <!-- Auszug: BEO-002 bis BEO-004, BEO-006 und BEO-007 hier weggelassen -->
 | Kennung | Beobachtung | Sub-Area | Zähler | Belege | Stand |
 |---|---|---|---|---|---|
-| BEO-001 | Golden-Set-Case ohne Boundary-Anteil aufgenommen | Test-Infrastruktur | 2× | slice-005, slice-011 | offen |
+| BEO-001 | Golden-Set-Case ohne Boundary-Anteil aufgenommen | Replay-/Eval-Infrastruktur | 2× | slice-005, slice-011 | offen |
 | BEO-005 | Tie-Break in sortierender Operation nicht explizit dokumentiert | Implementierung | 3× | slice-006, slice-009, slice-012 | verkörpert in `AGENTS.md` §2.7 (`seit welle-1`) |
 ```
+
+**Die Sub-Area-Spalte** trägt die Sub-Area, deren Konventions-Härte oder
+Inventur-Linie die Beobachtung betrifft — **nicht** die, in deren Verzeichnis
+sie aufgefallen ist. Das ist dieselbe Berührungs-Frage wie beim §8-Block des
+Slice-Plans ([`konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)),
+nur rückwärts gestellt. Eine Lücke im Golden Set, die beim Schreiben eines
+Tests auffällt, gehört zur *Replay-/Eval-Infrastruktur*, nicht zur
+*Test-Infrastruktur*: dort steht die Konvention, die sie verletzt.
+
+Die Spalte ist damit kein Ablage-Ort, sondern eine Aussage — und eine, die
+sich prüfen lässt, sobald das Repo seine Sub-Areas deklariert hat
+(`harness/conventions.md`). Steht in der Spalte ein Name, den die
+Modus-Deklaration nicht führt, ist entweder die Zuordnung falsch oder die
+Deklaration unvollständig; beides gehört gesehen.
 
 Eine zweite Sektion **Gestrichene Einträge** nimmt auf, was nicht mehr auftreten
 kann — mit Begründung. Wer eine Zeile still löscht, macht sie ununterscheidbar

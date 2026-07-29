@@ -60,7 +60,8 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
   Gemessen < 1 % gegen den Benchmark aus `evals/`, damit kein Risiko mehr.
 - Golden-Set-Cases decken keine Gleichstands-Eingaben ab — **Ausgang:**
   weiter offen → Beobachtungs-Register `BEO-002`
-  (Sub-Area *Test-Infrastruktur*).
+  (Sub-Area *Replay-/Eval-Infrastruktur*: verletzt ist die Golden-Set-Konvention,
+  nicht die Test-Konvention).
 
 ## 7. Closure-Notiz
 
