@@ -11,6 +11,92 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 60 — 2026-07-29 · E-2 vollzogen, „berührt" definiert, die Zeitachse des Vorbilds geradegezogen
+
+Review-Runde 10 abgearbeitet ([`docs/reviews/review-runde-10.md`](docs/reviews/review-runde-10.md)),
+dazu drei Klassen von Befunden am Vorbild-Repo, die dieselbe Runde zutage
+gefördert hat. Kein Befund dieser Runde war maschinell sichtbar — `make check`
+und `make verify` waren die ganze Zeit grün.
+
+### Entschieden
+
+- **Was „berührt" heißt.** Der Begriff steht an rund fünfzehn Stellen im Kurs,
+  löst jeden §8-Block aus und war nirgends definiert. Jetzt in
+  [`konventionen.md` §Was ist eine Sub-Area?](kurs/de/grundlagen/konventionen.md):
+  Ein Slice *berührt* eine Sub-Area, wenn er ihren **Doku-/Code-Abgleich
+  bewegt**. Zwei Wege dorthin, nur einer steht im Diff — **Pfad-Berührung**
+  (mechanisch ablesbar, aber *nicht hinreichend*: additive Arbeit innerhalb
+  einer schon deklarierten Konvention zählt nicht) und **Aussagen-Berührung**.
+  Grenze benannt: Der Diff liefert eine Kandidatenliste, kein Urteil.
+- **Die Sub-Area-Spalte des Registers bekommt eine Befüllungs-Regel**
+  ([Modul 6](kurs/de/02-planung/modul-06-roadmap.md)): Sie trägt die Sub-Area,
+  deren Konventions-Härte oder Inventur-Linie die Beobachtung betrifft — nicht
+  die, in deren Verzeichnis sie auffiel. Dieselbe Berührungs-Frage, rückwärts.
+- **E-2 wird ausgeführt, nicht zurückgenommen.** Runde 10 hatte drei Optionen
+  gestellt (zurücknehmen · Durchsetzung schaffen · Geltungsbereich
+  verkleinern). Keine davon: Die Regel war nie falsch, sie war nur nie
+  vollzogen.
+
+### Hinzugefügt
+
+- **Die Ruheort-Regel ist jetzt definiert**
+  ([`konventionen.md` §Herkunfts-Anker](kurs/de/grundlagen/konventionen.md)).
+  Quelle und Spiegel beriefen sich namentlich auf sie; `grep -rn "Ruheort"`
+  lieferte zwei Zitate und keine Definition. Sie stand in einem
+  Template-Kommentar, den Adoptions-Schritt 5 löscht.
+- **Die zwei vorgelagerten Schritte der §8-Begründung** stehen in
+  [Modul 5](kurs/de/02-planung/modul-05-planning-harness.md) — Sub-Area-Wahl
+  prüfen · offene Beobachtungen sichten. Sie waren als Pflicht in *jedem*
+  Slice-Plan verlangt und existierten ausschließlich im Template.
+- **„Die leere Liste ist die Aussage"** (Modul 6): Ein Register ohne offene
+  Beobachtungen trägt `— keine —` und bleibt stehen. Das adoptierte
+  `observations.template.md` startet seither in genau diesem Zustand — vorher
+  mit drei erfundenen Beobachtungen, weil Schritt 3 unbedingt befiehlt,
+  Platzhalter zu ersetzen.
+
+### Geändert
+
+- **Alle sechs Planning-Templates tragen einen Regelwerk-Zeiger pro Sektion.**
+  Gemessen nach Adoptions-Schritt 4 (Hinweis-Block weg) und 5 (Kommentare weg)
+  standen `README.template.md`, `roadmap.template.md` und
+  `welle.template.md` bei **null**, `slice.template.md` und
+  `welle-results.template.md` bei eins. Ein Adopter verliert beim Kopieren
+  keine Norm mehr.
+- **Die *Lage*-Prüfung des Belegs läuft nach dem `git mv`**, zusammen mit der
+  Register-Paarung (c). Vorher lief sie per Konstruktion bei jeder korrekt
+  ausgeführten Closure rot: Der Beleg wird vor dem `mv` geschrieben, und der
+  `mv` ist ein eigener Commit.
+- **Zwei Leser statt einer.** Modul 6, Spiegel und Selbstcheck-Rubrik nannten
+  nur den Lese-Schritt (Welle-Closure); der Sichtungs-Schritt (Slice-Planung
+  §8) hält alles unter der Schwelle am Leben und fehlte.
+- **Achse E-1 vereinheitlicht.** „Ohne laufende Welle" ist die falsche Achse —
+  ein Repo mit Wellen hat regelmäßig keine laufende Welle und trotzdem eine
+  nächste Welle-Closure. Korrigiert in Modul 6, im Spiegel und im laufenden
+  CHANGELOG-Block; historische Einträge bewusst unangetastet.
+- **Die Grenze der E-2-Feedback-Hälfte sagt jetzt das Entscheidende:** Der
+  Reviewer-Skill ist eine *Ziel-Form für das adoptierende Repo*. Wo der
+  Adopter kein Review einrichtet, hat die Hard Rule keinen Träger — das ist
+  der Auslieferungszustand, kein Sonderfall.
+
+### Lab
+
+- **Der Closure-Note-Gate war grün auf dem blanken Template-Rumpf.** Break-Test
+  reproduziert (exit 0), bestehender Checker um eine Platzhalter-Prüfung
+  gehärtet — kein neues Skript. ADR-0011 führt das als geschärfte Fitness
+  Function, nicht als neue Pflicht.
+- **Die Zeitachse des Vorbild-Repos stand an 23 Stellen gegen sich selbst:**
+  Slices zitierten ADRs aus ihrer Zukunft, ADRs schrieben ihre Urheberschaft
+  Slices mit fremdem Titel zu, der Index-Pfad lautete je nach Datei anders, der
+  Jetzt-Punkt lag mal im Juni, mal im Juli. Nachträge stehen jetzt sichtbar da
+  statt als stille Rückdatierung.
+- **Die Sub-Area-Tabelle deckt jeden Pfad-Cluster ab** — 186 von 186 verfolgten
+  Dateien, entweder als Sub-Area oder in §Nicht als Sub-Area geführt mit Grund.
+  Vorher hatten `tools/`, `runbooks/`, die Container-/Build-Dateien und jedes
+  `<lang>/Makefile` keine Sub-Area, der ein Slice seinen §8-Block hätte
+  zuordnen können.
+- Alle vier Vorbild-Slices tragen beide *Vorgelagert*-Blöcke; der Blockname
+  lautet überall wie in der Norm (*sichten*, nicht *gesichtet*).
+
 ## Welle 59 — 2026-07-27 · Der Steering-Loop-Zähler bekommt einen Ort, der Wellen überlebt
 
 ### Hinzugefügt

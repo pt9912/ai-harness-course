@@ -1,6 +1,8 @@
 # Review-Runde 10 — die Reparaturen der Runde 9
 
-**Stand:** 2026-07-28. **Status:** offen, nichts davon behoben.
+**Stand:** 2026-07-28. **Status:** vollständig behoben — siehe
+[§Inventur](#inventur--wie-die-30-befunde-abgearbeitet-wurden) und
+[§Behebung](#behebung) am Ende.
 
 **Gegenstand:** der Diff `b23706d..0b83624` — die Nacharbeit zu
 [Runde 9](review-runde-9.md).
@@ -421,24 +423,112 @@ benannt ist, dass es das Review-Instrument hier gar nicht gibt.
 
 ---
 
-## Nächster Schritt
+## Inventur — wie die 30 Befunde abgearbeitet wurden
 
-Nichts davon ist behoben.
+Vor der Reparatur wurden die 30 Befunde plus der vorbestehende **nach Artefakt**
+neu gruppiert, nicht nach Befund-Nummer. Grund: Ein Befund am Vorbild-Repo und
+einer am Kursmodul verlangen verschiedene Fix-Richtungen, und mehrere Befunde
+teilten sich einen Träger. Die Klassen 1–3 betreffen `lab/example`, die Gruppen
+A–F das Kursmaterial.
 
-**Die Frage vor allen Reparaturen ist diesmal nicht inhaltlich, sondern
-strukturell:** Runde 9 hat die Ursache encodiert und die Regel in derselben
-Bewegung gebrochen — an vier von vier Templates. Drei Runden nacheinander haben
-gezeigt, dass eine Norm ohne durchsetzende Instanz in diesem Repo nicht hält.
-Die Optionen sind:
+| Klasse / Gruppe | Inhalt | Commits |
+|---|---|---|
+| **Klasse 1** — Einzelbefunde am Vorbild | `make ci`-Überversprechen · Phantom-Dateien in slice-009 · `LH-QA-Coverage` war keine ID (→ ADR-0013) · behauptete `docs/user/quality.md` · verschwiegene Verifikations-Schicht in AGENTS.md · `Status:`-Feld · ADR-0011-Fehlzählung · CO-001 ohne wirksame Schwelle in Java/Kotlin | `f251992`–`a17ba14` |
+| **Klasse 2** — Zeitachse | 23 harte Widersprüche in sechs gekoppelten Gruppen; Jetzt-Punkt, Urheber-Zuordnungen, Index-Pfad, Nachträge, Historie-Tabellen | `a336280` |
+| **Klasse 3** — Sub-Area-Zuordnung | Fehlzuordnungen im Register, fehlende Befüllungs-Regel, undefiniertes „berührt", nicht deklarierte Pfad-Cluster | `3ac682f` |
+| **Gruppe A** — E-2, Norm im Kommentar | R10-02 · 03 · 05 · 12 · 13 · 15 · 16 · 17 · 18 · 30 | `0b609dc` |
+| **Gruppe C** — Spiegel/Quelle-Lücken | R10-04 · 14 · 19 · 23 | `0ec2a00` |
+| **Gruppe B** — E-1-Achse | R10-06 · 25 · 28 | `0ec2a00` |
+| **Gruppe F** — Einzeln | R10-09 · 26 · 27 | `0ec2a00` |
+| **Gruppe D** — Vorbild-Repo | R10-07 · 08 · 11 · 24 · 29 | `ead2546` |
+| **Gruppe E** — Mechanik | R10-10 · 20 · 21 (R10-22 fiel mit Gruppe A) | `ead2546` |
 
-1. **E-2 zurücknehmen** und akzeptieren, dass Templates Normtext duplizieren.
-2. **E-2 behalten und die Durchsetzung schaffen** — nicht als neues Skript
-   (siehe Runde 9), sondern indem der Kurs-Repo selbst ein `.harness/skills/`
-   bekommt und das Review vor dem Commit tatsächlich läuft.
-3. **Den Geltungsbereich verkleinern:** die Schichtung nur für die Sektionen
-   verlangen, die eine Norm tragen — und die Liste dieser Sektionen explizit
-   führen, statt „jede Pflicht-Sektion" zu behaupten.
+R10-01 fiel bei Klasse 3 mit weg: Die Sichtungs-Blöcke von `slice-020` und
+`slice-014` wurden dort neu geschrieben und nennen seither echte Treffer mit
+Begründung.
 
-Danach erst die Einzelbefunde. R10-01 und R10-08 sind unabhängig davon sofort
-zu korrigieren: Das Vorbild führt einen Pflichtschritt falsch vor, und das ist
-die Klasse, die am direktesten beim Adopter ankommt.
+**Zur Strukturfrage aus dem ursprünglichen §Nächster Schritt.** Sie lautete:
+E-2 zurücknehmen · Durchsetzung schaffen · Geltungsbereich verkleinern.
+Entschieden wurde **keine** der drei, sondern *E-2 sauber ausführen* (E-6
+unten) — die Regel war nie falsch, sie war nur nie vollzogen worden.
+
+## Entschieden — bei der Ausführung
+
+### E-4 — Was „berührt" heißt
+
+Der Begriff steht an rund fünfzehn Stellen im Kurs, löst jeden §8-Block aus und
+war nirgends definiert. Jetzt: Ein Slice *berührt* eine Sub-Area, wenn er ihren
+**Doku-/Code-Abgleich bewegt**. Zwei Wege dorthin, und nur einer steht im Diff —
+**Pfad-Berührung** (mechanisch ablesbar, aber *nicht hinreichend*: additive
+Arbeit innerhalb einer schon deklarierten Konvention zählt nicht) und
+**Aussagen-Berührung** (ändert eine Aussage, ohne eine Datei anzufassen).
+Dieselbe Frage befüllt die Sub-Area-Spalte des Registers, nur rückwärts
+gestellt. Grenze benannt: Der Diff liefert eine Kandidatenliste, kein Urteil.
+
+### E-5 — Die Sub-Area-Tabelle deckt jeden Pfad-Cluster ab
+
+Nicht: „jede Datei ist eine Sub-Area". Sondern: Jeder Pfad-Cluster steht
+entweder in der Modus-Tabelle oder in §Nicht als Sub-Area geführt, mit Grund.
+Ohne das ist nicht unterscheidbar, ob ein Pfad geprüft und abgewiesen oder
+schlicht vergessen wurde — und ein Slice auf `tools/` oder `<lang>/Makefile`
+hatte keinen Träger für seinen §8-Block. Nachgerechnet: 186 von 186 verfolgten
+Dateien zugeordnet.
+
+### E-6 — E-2 wird ausgeführt, nicht zurückgenommen
+
+Jede Norm, die nur in einem Template-Kommentar stand, wandert in die Quelle
+(bzw. ins Regelwerk, wo die Quelle sie schon trug); der Kommentar wird zum
+Zeiger. Die Alternative — den Geltungsbereich auf „Sektionen, die eine Norm
+tragen" zu verkleinern — hätte eine Liste erzeugt, die selbst driftet:
+dieselbe Fehlerklasse, nur verschoben.
+
+## Behebung
+
+**2026-07-29.** Gates nach jedem Commit: `make check` grün (d-check 0 Befunde,
+`docs-check` 0 ERROR / 0 WARN, `alignment-check` 0 WARN), `lab/example`
+`make verify` grün. Nach jeder Klasse bzw. Gruppe lief ein Mini-Review mit
+frischem Kontext; die dort gefundenen Folgefehler sind in denselben Commits
+mitbehoben.
+
+| Befund | Was geändert wurde |
+|---|---|
+| R10-01 | Mit Klasse 3 weggefallen — die Sichtungs-Blöcke von `slice-020`/`slice-014` nennen echte Treffer und begründen, warum die Schwelle nicht fällt. |
+| R10-02 | Alle **sechs** Planning-Templates auf 1:1 Sektion-zu-Zeiger gebracht (gemessen nach Adoptions-Schritt 4+5). Der Befund zählte vier Dateien; `roadmap.template.md` und `README.template.md` standen ebenfalls bei null. |
+| R10-03 | **Ruheort-Regel** in `konventionen.md` §Herkunfts-Anker definiert — dort, wo der Zielort als ihre Ausnahme erklärt wird. Vorher: zwei namentliche Zitate, keine Definition. |
+| R10-04 | Größer als gemeldet: `grep -c "Vorgelagert"` war **auch in der Quelle 0**. Modul 5 trägt die zwei Schritte jetzt als §Zwei Schritte vor der Modus-Begründung; Spiegel quelltreu, Template auf Form plus Zeiger zurückgebaut. |
+| R10-05 · R10-12 | Bedingtheit von `liegt in` als Form in den Rumpf, Norm in den Zeiger; §7-Bedienhinweis entkernt. |
+| R10-06 · R10-25 · R10-28 | Achse E-1 vereinheitlicht: „ohne laufende Welle" raus aus Modul 6, Spiegel und laufendem CHANGELOG-Block; `slice-020` heißt jetzt *Slice ohne Wellen-Zugehörigkeit*. Historische CHANGELOG-Einträge bewusst unangetastet. |
+| R10-07 | `slice-014` verwies „unten" auf ein Feld, das ein reiner GF-Slice nicht trägt. |
+| R10-08 | Alle vier Vorbild-Slices tragen jetzt **beide** *Vorgelagert*-Blöcke; `slice-009` hatte keinen. |
+| R10-09 | Der Welle-59-Eintrag trug zwei gegensätzliche Template-Regeln, 57 Zeilen auseinander. Zusammengeführt. |
+| R10-10 | Die *Lage*-Prüfung lief per Konstruktion bei jeder korrekten Closure rot. Sie gehört zur Register-Paarung (c) und läuft mit ihr nach dem `git mv`; Form und Anzahl sind davon unabhängig. Quelle und Spiegel. |
+| R10-11 | Vorbild-Index trägt die Zwei-Positionen-Regel statt der Drei-Positionen-Formel. |
+| R10-13 · R10-15 | `welle-results.template.md` beschrieb im Kopfsatz den Zustand vor der Reparatur; `observations.template.md` führte den Zeiger doppelt und schrieb den Normtext daneben aus. Beide entkernt. |
+| R10-14 | „Kriterium 3" hatte repo-weit einen Treffer — den Graph-Knoten, der ihn erfand. Sichtungs-Schritt heißt überall gleich, Doppelknoten `F2` entfernt. |
+| R10-16 | „Die leere Liste ist die Aussage" steht jetzt in Modul 6 und im Spiegel. |
+| R10-17 | Modul 5 setzte *Bedingung vorab* und *Grund im Nachhinein* gleich — jetzt zwei Pflichten an zwei Zeitpunkten; die zwei Rückführungen stehen im Template-Rumpf. |
+| R10-18 | Strohmann-Entwarnung entfernt; der Spiegel stand zusätzlich auf der alten Fassung. |
+| R10-19 | §Template-Schichtung zitierte die eigene Prozedur falsch — `d-check:ignore`-Marker bleiben. |
+| R10-20 | Das DoD-Item war im Wellen-Repo nie abhakbar. Die Streich-Anweisung steht jetzt im Item selbst; dass die wellenlose Closure drei Commits braucht, ist benannt. |
+| R10-21 | Break-Test bestätigt: Gate war grün auf dem blanken Template-Rumpf (exit 0). Bestehender Checker um eine Platzhalter-Prüfung gehärtet — kein neues Skript. ADR-0011 führt das als geschärfte Fitness Function, nicht als neue Pflicht. |
+| R10-22 | Das adoptierte Register startet mit `— keine —` statt mit drei erfundenen Beobachtungen. |
+| R10-23 | Modul 6, Spiegel und Selbstcheck-Rubrik nennen jetzt **zwei** Leser: Lese-Schritt und Sichtungs-Schritt. |
+| R10-24 | Blockname in allen drei Instanzen auf die Normform *sichten* gebracht. |
+| R10-26 · R10-27 | Doppelte Wendung mit verschiedenen Bezügen entzerrt; §8 sagt die Regel einmal. |
+| R10-29 | Der Register-Zeiger zeigt, statt zu zitieren, und nennt alle drei Prüfungen. |
+| R10-30 | Die Grenze sagt jetzt das Entscheidende: Der Reviewer-Skill ist eine Ziel-Form für das adoptierende Repo. Wo der Adopter kein Review einrichtet, hat die Hard Rule keinen Träger — das ist der Auslieferungszustand, kein Sonderfall. |
+| Vorbestehend | Die Register-DoD-Items der Vorbild-Slices sind mit R10-08 mitgezogen. |
+
+### Was bei der Reparatur selbst schiefging
+
+Drei Fälle, festgehalten, weil sie dieselbe Klasse sind wie die Befunde:
+
+- **Die erste Fassung von E-4 widersprach sich selbst.** „Pfad-Berührung ist
+  die *untere Schranke*" macht sie hinreichend; zwei Absätze später wurde das
+  zurückgenommen. Der Mini-Review hat es gefangen.
+- **Ein Aspirantinnen-Abschnitt wurde neu geschrieben, den es schon gab** —
+  `harness/conventions.md` führte `tools/` danach gleichzeitig als Sub-Area
+  (2/3) und als Nicht-Sub-Area (1/3).
+- **Die E-2-Reparatur machte R10-21 schlimmer**, bevor sie es behob: Jede neue
+  „Regeln dieser Sektion:"-Zeile war ein zusätzlicher Satz, den der
+  Closure-Note-Gate mitzählte.
