@@ -83,7 +83,11 @@ Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
   einer ungebrochenen Kette — vergessene Übernahme setzt den Zähler auf null,
   die erste Welle braucht eine Sonderregel, ohne Welle gibt es keinen Träger.
   Der feste Ort streicht alle drei Fälle.
-- **Form:** `| Kennung | Beobachtung | Sub-Area | Zähler | Belege | Stand |`; zweite Sektion *Gestrichene Einträge* für das, was nicht mehr auftreten kann — mit Begründung.
+- **Form:** `| Kennung | Beobachtung | Sub-Area | Zähler | Belege | Stand |`; zweite Sektion *Gestrichene Einträge* für das, was nicht mehr auftreten kann — mit Begründung. Wer eine Zeile still löscht, macht sie ununterscheidbar von einer, die es nie gab.
+- **Ist nichts offen**, trägt die Tabelle `— keine —` und bleibt stehen. Die
+  Tabelle zu löschen macht *nichts beobachtet* ununterscheidbar von *nie
+  geführt*. Die leere Liste **ist** die Aussage — und sie ist die, mit der
+  jedes Repo anfängt.
 - **Die Sub-Area-Spalte** trägt die Sub-Area, deren Konventions-Härte oder
   Inventur-Linie die Beobachtung betrifft — **nicht** die, in deren Verzeichnis
   sie aufgefallen ist. Dieselbe Berührungs-Frage wie beim §8-Block des

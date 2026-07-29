@@ -22,19 +22,21 @@ ist, siehe Baseline-Regelwerk `modul-06-roadmap.md`
 
 ## 1. Ziel
 
-<!--
-Was liefert dieser Slice in einem Satz? Liefer-Fokus, kein "wir
-machen aufräumen".
--->
+<!-- BEDIENHINWEIS: ein Satz, Liefer-Fokus, kein "wir machen aufraeumen". -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Ziel-Form: Slice — Schnitt nach Lieferwert, nicht nach Schichten; jeder Slice
+ist einzeln lieferbar.
 
 <…>
 
 ## 2. Definition of Done
 
-<!--
-Was muss erfüllt sein, damit der Slice in done/ wandert?
-Liste mit jeweils prüfbarem Kriterium.
--->
+<!-- BEDIENHINWEIS: je Zeile ein pruefbares Kriterium. -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Ziel-Form: Slice — **≤ 3 DoD-Punkte**; mehr heißt: der Slice ist zu groß und
+gehört zurück zur Zerlegung.
 
 - [ ] LH-FA-<NN> erfüllt, Test referenziert.
 - [ ] LH-QA-<NN> erfüllt, Messung dokumentiert.
@@ -47,10 +49,12 @@ Liste mit jeweils prüfbarem Kriterium.
 
 ## 3. Plan (vor Code)
 
-<!--
-Welche Änderungen sind geplant? Datei- oder Komponenten-Ebene reicht.
-Der Implementation-Agent erweitert diese Liste in seinem ersten Lauf.
--->
+<!-- BEDIENHINWEIS: Datei- oder Komponenten-Ebene reicht; der
+Implementation-Agent erweitert die Liste in seinem ersten Lauf. -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-konventionen.md`
+§Was ist eine Sub-Area? — diese Liste ist die Pfad-Kandidatenliste für §8:
+welche Sub-Areas der Slice **berührt**, liest sich hier ab.
 
 | Datei / Komponente | Änderungs-Art | Begründung |
 |---|---|---|
@@ -58,73 +62,65 @@ Der Implementation-Agent erweitert diese Liste in seinem ersten Lauf.
 
 ## 4. Trigger
 
-<!--
-Wann beginnt dieser Slice? (`next` → `in-progress`: Implementer beginnt.)
-Beispiele: "Wenn Welle X done." / "Wenn Carveout CO-NN aufgelöst."
+<!-- BEDIENHINWEIS: Beispiele — "Wenn Welle X done." / "Wenn Carveout CO-NN
+aufgeloest." -->
 
-Auch die zwei Rückführungen vorab benennen — unter welcher Bedingung
-geht dieser Slice zurück?
-- `in-progress` → `next`: zu groß, zurück zur Zerlegung.
-- `in-progress` → `open`: blockiert (Carveout? siehe Modul 7).
-(kanonische Definition: [Baseline-Regelwerk §Lifecycle als State Machine](../../../../regelwerk/modul-05-planning-harness.md#lifecycle-als-state-machine))
--->
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Trigger je Lifecycle-Übergang und WIP-Limit.
 
-<…>
+**Start** (`next` → `in-progress`): <…>
+
+**Rückführungen — vorab benennen, nicht erst im Nachhinein begründen:**
+
+- `in-progress` → `next` (zu groß, zurück zur Zerlegung): <Bedingung>
+- `in-progress` → `open` (blockiert — Carveout?): <Bedingung>
 
 ## 5. Closure-Trigger
 
-<!--
-Wann ist der Slice done?
-"DoD vollständig + PR gemerged + Closure-Notiz geschrieben."
--->
+<!-- BEDIENHINWEIS: z.B. "DoD vollstaendig + PR gemerged + Closure-Notiz
+geschrieben." -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Closure- und Lerneintrag-Regeln — zwei beobachtbare Kriterien **und** ein
+Lerneintrag; ohne ihn ist der Slice nur abgelegt.
 
 <…>
 
 ## 6. Risiken und offene Punkte
 
-<!--
-Was könnte schief gehen? Welche Carveouts entstehen ggf.?
+<!-- BEDIENHINWEIS: Was koennte schief gehen? Welche Carveouts entstehen
+ggf.? Die drei Ausgaenge stehen als Form in der Zeile darunter. -->
 
-JEDES Risiko bekommt bei Closure genau EINEN Ausgang (Baseline-Regelwerk
-`modul-05-planning-harness.md` §Offene Risiken werden bei Closure aufgelöst):
-  eingetreten  -> Carveout CO-<NNN> oder Folge-Slice, ID hier eintragen
-  entfallen    -> gestrichen MIT Begründung (ohne sie ist es stilles Vergessen)
-  weiter offen -> Zeile im Beobachtungs-Register (`../observations.md`) anlegen
-                  oder hochzählen; die BEO-<NNN> hier eintragen
-Ein Slice geht nicht nach done/, während ein Risiko ohne Ausgang dasteht.
--->
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Offene Risiken werden bei Closure aufgelöst — **jedes** Risiko bekommt genau
+**einen** Ausgang, und kein Slice geht nach `done/`, während eines ohne Ausgang
+dasteht.
 
 - <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-NNN | entfallen: Grund | weiter offen: → BEO-NNN im Register>
 
 ## 7. Closure-Notiz
 
-<!--
-BEDIENHINWEIS — keine Norm. Die Norm steht im Baseline-Regelwerk, der Zeiger
-darauf im Rumpf darunter; dieser Kommentar wird beim Kopieren entfernt
-(README.md §Verwendung, Schritt 5) und darf deshalb nichts Tragendes halten.
-
-- REIHENFOLGE: Diese Sektion vor dem `git mv` nach done/ fuellen. Einzige
-  Ausnahme ist das letzte DoD-Item in §2 — die drei Paarungen suchen in
-  `done/` und werden danach geprueft.
-- Die Feld-Zeile `liegt in` nur setzen, wenn mit diesem Slice wirklich etwas
-  verkoerpert wurde; sonst die Zeile streichen. Feld und Zielort stehen auf
-  EINER Zeile, die Sektionsangabe INNERHALB der Backticks — ein zeilenweiser
-  Sensor greift sonst nicht.
-- Beim Beobachtungs-Register vorhandene BEO-<NNN> ZITIEREN statt neu
-  formulieren — sonst zaehlt das Register zwei Namen getrennt. Das gilt auch
-  fuer Finding-Klassen aus dem Review dieses Slice (Summary-Zeile des
-  Review-Reports).
--->
+<!-- BEDIENHINWEIS — keine Norm; faellt beim Kopieren weg (README.md
+§Verwendung, Schritt 5) und darf deshalb nichts Tragendes halten. Reihenfolge:
+diese Sektion vor dem `git mv` nach done/ fuellen — einzige Ausnahme ist das
+letzte DoD-Item in §2. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Das Beobachtungs-Register · `grundlagen-konventionen.md`
-§Herkunfts-Anker für Steering-Loop-Regeln.
+§Das Beobachtungs-Register (vorhandene `BEO-<NNN>` **zitieren** statt neu
+formulieren — sonst zählt das Register zwei Namen getrennt) ·
+`grundlagen-konventionen.md` §Herkunfts-Anker für Steering-Loop-Regeln (das
+Feld `liegt in` steht **nur**, wenn mit diesem Slice wirklich etwas verkörpert
+wurde; Feld und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der
+Backticks).
 
 - **Was hat funktioniert:** <…>
 - **Was ging anders als geplant:** <…>
 - **Steering-Loop-Eintrag:** <Guide oder Sensor> <geschärft/ergänzt>: <was genau>
   — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.
   Auslöser: `BEO-<NNN>` (<slice-NNN>, <slice-MMM>, <slice-KKK> — 3×).
+  *(Wurde mit diesem Slice nichts verkörpert — der Normalfall —, entfällt die
+  Teil-Zeile `— liegt in …` ersatzlos. Der Eintrag ist dann gezählt, nicht
+  verkörpert.)*
 - **Beobachtungs-Register (`../observations.md`):** <neue `BEO-<NNN>` angelegt (Sub-Area, 1×, Beleg slice-NNN) | `BEO-<NNN>` auf <N>× erhöht, Beleg slice-NNN ergänzt | keine Beobachtung angefallen>
 - **Folge-Slices:** <slice-NNN (<Titel>) — ist eine Datei in `open/`>
 - **Risiken aus §6:** <jedes mit genau einem Ausgang — siehe §6>
@@ -139,10 +135,10 @@ mindestens einer berührten Sub-Area in BF oder Hybrid. Bei reinem GF genügt
 dafür der Hinweis *"alle berührten Sub-Areas GF (siehe Baseline-Regelwerk
 `modul-05-planning-harness.md` §Ziel-Form: Sub-Area-Modus-Begründung)"*; bei
 reinem Refactor ohne neue Sub-Area-Berührung entfällt er ganz.
-Die vier Pflichtkriterien (Konventionen-Dichte ·
-Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand)
-stehen in
-Baseline-Regelwerk `modul-05-planning-harness.md` §Ziel-Form: Sub-Area-Modus-Begründung.
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Ziel-Form: Sub-Area-Modus-Begründung — dort die vier Pflichtkriterien
+(Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko ·
+Reconciliation-Aufwand), vier und nicht mehr.
 
 **Vorgelagert — Sub-Area-Wahl prüfen:** Jede hier aufgeführte Sub-Area
 muss das Inklusionskriterium erfüllen (drei Achsen, Schwelle ≥ 2; siehe

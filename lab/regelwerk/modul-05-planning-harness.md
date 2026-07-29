@@ -38,8 +38,11 @@ sind die Bedingung dafür, dass die Datei überhaupt nach `done/` darf.
 *Lerneintrag* **und einen Ausgang für jedes offene Risiko**, nicht nur
 "Tests grün". Die beiden **Rückführungen** `in_progress → next` (zu groß —
 zurück zur Zerlegung) und `in_progress → open` (Blocker — meist mit Carveout,
-siehe [Modul 7](modul-07-carveouts.md)) verlangen den Grund im Slice-Plan §4,
-wo die Rückführungs-Bedingungen vorab benannt sind.
+siehe [Modul 7](modul-07-carveouts.md)) tragen **zwei** Pflichten an zwei
+Zeitpunkten, die nicht zusammenfallen: **Vorab** benennt §4 des Slice-Plans die
+*Bedingung* — unter welcher Beobachtung dieser Slice zurückgeht. **Im
+Nachhinein**, beim Übergang selbst, wird der *Grund* nachgetragen: was
+tatsächlich eintrat.
 
 `done` ist **kein Endzustand der Information**: Die Beobachtungen aus §7 sind
 bei der Slice-Closure ins Beobachtungs-Register eingetragen und werden **von

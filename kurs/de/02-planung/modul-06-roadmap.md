@@ -367,6 +367,12 @@ Eine zweite Sektion **Gestrichene Einträge** nimmt auf, was nicht mehr auftrete
 kann — mit Begründung. Wer eine Zeile still löscht, macht sie ununterscheidbar
 von einer, die es nie gab.
 
+**Und wenn nichts offen ist?** Dann trägt die Tabelle `— keine —` und bleibt
+stehen. Die Tabelle zu löschen wäre dieselbe Auslöschung eine Ebene höher:
+*nichts beobachtet* ist danach nicht mehr von *nie geführt* unterscheidbar.
+Die leere Liste **ist** die Aussage — und sie ist die, mit der jedes Repo
+anfängt.
+
 **`BEO-<NNN>` ersetzt die Namens-Disziplin.** Ohne Kennung muss die
 *Bezeichnung* über Wellen hinweg wortgleich bleiben, sonst zählt man zwei
 Namen für dieselbe Sache getrennt und keiner erreicht je 3×. Mit Kennung wird

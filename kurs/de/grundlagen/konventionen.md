@@ -115,7 +115,11 @@ Template-Kommentar* steht als HIGH-Regel im Reviewer-Skill
 ([Ziel-Form](../../../lab/templates/.harness/skills/reviewer.template.md)).
 
 > **Grenze — ehrlich benannt:** Damit hängt diese Regel an einem Review, nicht
-> an einem Lauf. Wer ohne Review committet, wird nicht erwischt. Ein *Sensor*
+> an einem Lauf. Wer ohne Review committet, wird nicht erwischt. Und der Skill
+> oben ist eine **Ziel-Form für das adoptierende Repo** — ob dort ein Review
+> mit dieser HIGH-Regel tatsächlich läuft, entscheidet der Adopter, nicht
+> diese Konvention. Wo er es nicht einrichtet, hat die Hard Rule keinen
+> Träger, und das ist kein Sonderfall: Es ist der Auslieferungszustand. Ein *Sensor*
 > hier zu behaupten, wo keiner steht, wäre genau die Klasse *halluziniertes
 > Gate* ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin))
 > — auf die eigene Konvention angewandt.
@@ -926,9 +930,17 @@ kanonischen Formen liefern `welle-results.template.md` bzw.
 zwei Wörter gewöhnliche Sprache und lösen nichts aus — die Trigger-Formulierung
 „`SL-024` liegt in `done/`" ([Modul 6](../02-planung/modul-06-roadmap.md))
 ebenso wenig wie eine bloße **Erwähnung** eines Pfades im Fließtext. Der
-Sektions-Scope ist es, der den Auslöser disambiguierbar macht; er widerspricht
-dem Satz oben nicht, sondern grenzt ihn ein: *innerhalb* der Sektion entscheidet
-das Feld, nicht die Sektion.
+Sektions-Scope grenzt den Auslöser ein, ersetzt ihn aber nicht: *innerhalb* der
+Sektion entscheidet das Feld.
+
+**Die Ruheort-Regel — für jede Datei, die per `git mv` wandert.** Ein
+Slice-Plan und ein Welle-Plan werden an einem Ort geschrieben und an einem
+anderen gelesen: Bei der Closure wandern sie nach `done/`. Jeder relative Pfad
+darin ist deshalb so zu schreiben, wie er **vom Ruheort** auflöst, nicht vom
+Schreibort — die Ergebnis-Notiz liegt in `done/` als Geschwister (ohne Präfix),
+das Beobachtungs-Register eine Ebene höher (Eltern-Verzeichnis, also mit `..`-Präfix). Ein im
+Schreibmoment richtiges `done/…` bricht für jeden Leser danach, und zwar
+still: Der Pfad bleibt syntaktisch intakt und zeigt ins Leere.
 
 **Was in den Backticks steht, ist ein Zielort, nicht immer eine Datei** — drei
 kanonische Füllungen: `AGENTS.md §<N>` (Datei + Abschnitt) ·

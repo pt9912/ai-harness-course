@@ -22,29 +22,32 @@ zwei Positionen, nicht drei.
 
 ## 1. Welle-Ziel
 
-<!--
-Was liefert die Welle? Eine Aussage, die sich an einem Lasttest oder
-Akzeptanzkriterium spiegelt.
--->
+<!-- BEDIENHINWEIS: Eine Aussage, die sich an einem Lasttest oder
+Akzeptanzkriterium spiegelt. -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wann Arbeit eine Welle braucht.
 
 <…>
 
 ## 2. Trigger (Welle startet)
 
-<!--
-Was muss vorher passiert sein? Verweise auf vorangegangene Wellen
-oder externe Ereignisse.
--->
+<!-- BEDIENHINWEIS: Was muss vorher passiert sein? -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wann Arbeit eine Welle braucht — ein Trigger ist eine **beobachtbare
+Vorbedingung**, kein Ergebnis dieser Welle.
 
 - <z.B. Welle <welle-vorher-id> done.>
 - <z.B. ADR-<NNNN> accepted.>
 
 ## 3. Closure-Trigger (Welle schließt)
 
-<!--
-Was muss erreicht sein, damit die Welle done ist? Aktion, nicht
-Termin.
--->
+<!-- BEDIENHINWEIS: Aktion, nicht Termin. -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wann Arbeit eine Welle braucht — der Trigger muss das *Mehr* gegenüber den
+einzelnen Slice-DoDs benennen; kann er das nicht, liegt keine Welle vor.
 
 - <z.B. Alle Slices done.>
 - <z.B. `make fullbuild` grün.>
@@ -53,9 +56,11 @@ Termin.
 
 ## 4. Slices in dieser Welle
 
-<!-- Zustand jedes Slice = sein Lifecycle-Verzeichnis (open/next/in-progress/
-done), hier NICHT gespiegelt — eine Status-Spalte driftete gegen die
-Verzeichnisse (dieselbe zweite Wahrheit, die beim Slice retired wurde). -->
+<!-- BEDIENHINWEIS: keine Status-Spalte ergaenzen. -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Lifecycle als State Machine — der Zustand eines Slice ist sein
+Lifecycle-Verzeichnis und wird hier **nicht** gespiegelt.
 
 | Slice | Titel | Bezug |
 |---|---|---|
@@ -64,41 +69,39 @@ Verzeichnisse (dieselbe zweite Wahrheit, die beim Slice retired wurde). -->
 
 ## 5. Abhängigkeiten
 
-<!--
-Welche Wellen kommen *nach* dieser? Falls jemand sie ändert, was
-bricht?
--->
+<!-- BEDIENHINWEIS: Falls jemand diese Welle aendert — was bricht? -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Roadmap-Struktur: fünf Abschnitte.
 
 - Blockiert: Welle <welle-id> (wegen <Vertragspunkt>).
 - Wird blockiert von: Welle <welle-id>.
 
 ## 6. Out-of-Scope für diese Welle
 
-<!--
-Explizite Nicht-Inhalte. Schützt vor Scope-Creep.
--->
+<!-- BEDIENHINWEIS: explizite Nicht-Inhalte, schuetzt vor Scope-Creep. -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Roadmap-Regeln.
 
 - <…>
 
 ## 7. Closure-Notiz
 
-<!-- Erst nach Welle-Abschluss füllen: Zeiger auf die Ergebnis-Notiz
-`welle-<NN>-results.md` (nur die Nummer, nicht die volle Welle-ID).
+<!--
+BEDIENHINWEIS — keine Norm; faellt beim Kopieren weg (README.md §Verwendung,
+Schritt 5) und darf deshalb nichts Tragendes halten.
 
-Pfade so schreiben, wie sie vom RUHEORT dieser Datei aus auflösen: Sie wandert
-bei Closure per `git mv` nach `done/` — die Ergebnis-Notiz liegt dort als
-Geschwister (also ohne Präfix), das Beobachtungs-Register eine Ebene höher
-(`../observations.md`). Ein im Schreibmoment richtiges `done/…` bricht für
-jeden Leser danach.
+- Erst nach Welle-Abschluss fuellen; nur die Nummer, nicht die volle Welle-ID.
+- Ziel-Form der Ergebnis-Notiz: `welle-results.template.md` — Schwester-Vorlage
+  im Template-Verzeichnis, kein Artefakt deines Repos. Sie ist von der
+  Ruheort-Regel ausgenommen und faellt mit diesem Kommentar ohnehin weg.
+-->
 
-Die Ruheort-Regel gilt fuer die Pfade, die DU hier eintraegst. Der
-Ziel-Form-Zeiger direkt darunter ist davon ausgenommen: Er zeigt auf eine
-Schwester-Vorlage im Template-Verzeichnis, nicht auf ein Artefakt deines
-Repos, und faellt mit diesem Kommentar ohnehin weg.
-
-Ziel-Form: [`welle-results.template.md`](welle-results.template.md) — sie trägt
-die Pflichtteile inklusive des Zeigers aufs Beobachtungs-Register, das bei
-jeder Slice-Closure fortgeschrieben wird. -->
+Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-konventionen.md`
+§Herkunfts-Anker für Steering-Loop-Regeln — dort die **Ruheort-Regel**: Die
+beiden Zeiger unten sind so zu schreiben, wie sie vom Ruheort `done/` auflösen,
+nicht vom Schreibort.
 
 Ergebnis: <Zeiger auf `welle-<NN>-results.md`, Geschwister im Ruheort `done/`>
 Zähler: <Zeiger aufs Beobachtungs-Register, eine Ebene über dem Ruheort>

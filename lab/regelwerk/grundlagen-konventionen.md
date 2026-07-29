@@ -94,9 +94,13 @@ dasteht, ist alles, was der Adopter Wochen später hat. Vier Schichten:
   deshalb als HIGH-Eintrag *Norm nur im Template-Kommentar* im Reviewer-Skill
   (Ziel-Form `../templates/.harness/skills/reviewer.template.md`).
 - **Grenze:** Sie hängt damit an einem Review, nicht an einem Lauf. Wer ohne
-  Review committet, wird nicht erwischt. Einen *Sensor* zu behaupten, wo keiner
-  steht, wäre die Klasse *halluziniertes Gate* (Modul 13) — auf die eigene
-  Konvention angewandt.
+  Review committet, wird nicht erwischt. Und der Skill oben ist eine
+  **Ziel-Form für das adoptierende Repo** — ob dort ein Review mit dieser
+  HIGH-Regel tatsächlich läuft, entscheidet der Adopter, nicht diese
+  Konvention. Wo er es nicht einrichtet, hat die Hard Rule keinen Träger, und
+  das ist der Auslieferungszustand, kein Sonderfall. Einen *Sensor* zu
+  behaupten, wo keiner steht, wäre die Klasse *halluziniertes Gate* (Modul 13)
+  — auf die eigene Konvention angewandt.
 
 ### Trennschärfen
 
@@ -865,8 +869,8 @@ wenn sie ohne Welle verkörpert wurde, den Slice: `seit welle-<NN>` bzw.
 **Sensor 1 — Anker-Paarung** (*computational feedback*). Die Prüfung läuft
 **von der Closure-Notiz nach außen**, nicht von der Regel nach innen: von
 der Regel aus ist nicht entscheidbar, ob sie einen Anker braucht.
-**Ausgelöst wird durch ein Feld, nicht durch eine Sektion und nicht durch
-Prosa:** durch das Pflichtfeld **`liegt in <Zielort>`** — in
+**Ausgelöst wird durch ein Feld, nicht durch die Semantik des Eintrags und
+nicht durch Prosa:** durch das Pflichtfeld **`liegt in <Zielort>`** — in
 `## Steering-Loop-Einträge` jeder `welle-<NN>-results.md` und, für wellenlos
 verkörperte Regeln, in §7 jeder `done/slice-<NNN>-<kurzer-titel>.md`; die
 kanonischen Formen liefern `welle-results.template.md` bzw.
@@ -875,8 +879,16 @@ kanonischen Formen liefern `welle-results.template.md` bzw.
 - **Das Feld gilt nur in diesen beiden Sektionen.** Überall sonst sind es
   gewöhnliche Wörter und lösen nichts aus — der Trigger-Sprachgebrauch
   „`SL-024` liegt in `done/`" (Modul 6) ebenso wenig wie eine bloße Erwähnung
-  eines Pfades im Fließtext. Der Scope widerspricht dem Satz oben nicht:
-  *innerhalb* der Sektion entscheidet das Feld, nicht die Sektion.
+  eines Pfades im Fließtext. Der Sektions-Scope grenzt den Auslöser ein,
+  ersetzt ihn aber nicht: *innerhalb* der Sektion entscheidet das Feld.
+- **Die Ruheort-Regel — für jede Datei, die per `git mv` wandert.** Ein
+  Slice-Plan und ein Welle-Plan werden an einem Ort geschrieben und an einem
+  anderen gelesen: Bei der Closure wandern sie nach `done/`. Jeder relative
+  Pfad darin ist deshalb so zu schreiben, wie er **vom Ruheort** auflöst, nicht
+  vom Schreibort — die Ergebnis-Notiz liegt in `done/` als Geschwister (ohne
+  Präfix), das Beobachtungs-Register eine Ebene höher (Eltern-Verzeichnis, also mit `..`-Präfix).
+  Ein im Schreibmoment richtiges `done/…` bricht für jeden Leser danach, und
+  zwar still: Der Pfad bleibt syntaktisch intakt und zeigt ins Leere.
 - **In den Backticks steht ein Zielort, nicht immer eine Datei** — drei
   kanonische Füllungen: `AGENTS.md §<N>` · `Makefile:<target>` ·
   `.harness/skills/<name>.md`.

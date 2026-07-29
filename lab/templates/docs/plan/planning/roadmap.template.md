@@ -16,6 +16,9 @@ gezeigt, nicht als Treiber.
 
 ## Aktuelle Welle
 
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Roadmap-Struktur: fünf Abschnitte — genau **eine** aktuelle Welle.
+
 **Welle-ID:** <welle-NN-titel>
 **Start:** YYYY-MM-DD
 **Geplantes Ende:** YYYY-MM-DD (Schätzung, korrigierbar)
@@ -24,12 +27,18 @@ gezeigt, nicht als Treiber.
 
 ## Nächste Wellen
 
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Roadmap-Struktur: fünf Abschnitte — geplante Wellen stehen hier und bekommen **keine** eigene Datei.
+
 | Welle | Trigger | Wichtigste Slices | Geschätzter Aufwand |
 |---|---|---|---|
 | <welle-N+1> | Welle <N> done | <…> | S/M/L |
 | <welle-N+2> | Welle <N+1> done + ADR-<NNNN> accepted | <…> | S/M/L |
 
 ## Meilensteine
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Welle ≠ Meilenstein ≠ Release.
 
 <!--
 Externe Versprechen oder interne Trigger-Punkte.
@@ -41,6 +50,9 @@ Externe Versprechen oder interne Trigger-Punkte.
 | M1 | <welle-NN> | <…> | erreicht / offen |
 
 ## Abhängigkeitsgraph
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Roadmap-Regeln — Reihenfolge von Wellen, keine Reihenfolge von Terminen.
 
 ```mermaid
 flowchart LR
@@ -57,11 +69,17 @@ flowchart LR
 
 ## Abgeschlossene Wellen
 
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Roadmap-Struktur: fünf Abschnitte.
+
 | Welle | Abschluss | Closure-Notiz |
 |---|---|---|
 | <welle-NN> | YYYY-MM-DD | [`welle-NN-results.md`](../done/welle-NN-results.md) |
 
 ## Historische Trigger-Verschiebungen
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Roadmap-Regeln — Schätzungen sind korrigierbar; die Korrektur wird sichtbar geführt, nicht überschrieben.
 
 <!--
 Wenn Wellen umgeplant wurden: Datum, Grund, neue Reihenfolge.

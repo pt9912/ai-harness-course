@@ -14,48 +14,44 @@
 
 ## Was wurde geliefert?
 
-<!--
-Ergebnis, nicht Tätigkeit. Mit ID-Bezug, wo es einen gibt.
--->
+<!-- BEDIENHINWEIS: Ergebnis, nicht Taetigkeit. -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wellen-Closure-Prozedur, Schritt 1 — mit ID-Bezug, wo es einen gibt.
 
 - <LH-FA-NN erfüllt, Akzeptanzkriterium grün.>
 - <…>
 
 ## Was hat funktioniert?
 
-<!-- Was du im nächsten Zyklus bewusst wieder so machen würdest. -->
+<!-- BEDIENHINWEIS: was du im naechsten Zyklus bewusst wieder so machen wuerdest. -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Closure- und Lerneintrag-Regeln.
 
 - <…>
 
 ## Was ging anders als geplant?
 
-<!--
-Beobachtungen, keine Schuldzuweisung. Jede Zeile möglichst mit der
-Konsequenz, die daraus schon gezogen wurde (Folge-Slice, Spec-Version).
--->
+<!-- BEDIENHINWEIS: Beobachtungen, keine Schuldzuweisung. -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Closure- und Lerneintrag-Regeln — jede Zeile moeglichst mit der Konsequenz,
+die daraus schon gezogen wurde (Folge-Slice, Spec-Version).
 
 - <…>
 
 ## Steering-Loop-Einträge
 
-<!--
-BEGRUENDUNG — die verbindliche FORM steht im Rumpf darunter, nicht hier.
-Dieser Kommentar wird beim Kopieren entfernt (README.md §Verwendung,
-Schritt 5).
-
-- Hier stehen nur Beobachtungen, die im Register 3x erreicht haben — jeder
-  Eintrag nennt seine BEO-<NNN>. Alle drei Klassen kommen von dort:
-  geschaerfte Regel · neuer Sensor · benannte Spec-Luecke.
-- Feld und Zielort stehen auf EINER Zeile — ein zeilenweiser Sensor greift
-  sonst nicht; die Sektionsangabe steht INNERHALB der Backticks.
-- Die Spec-Luecke traegt statt `liegt in` ihre LH-*-ID. Warum, steht im
-  Regelwerk — hier nur: die Zeile sieht deshalb anders aus, das ist kein
-  Versehen.
--->
+<!-- BEDIENHINWEIS — keine Norm; faellt beim Kopieren weg (README.md
+§Verwendung, Schritt 5) und darf deshalb nichts Tragendes halten. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Wellen-Closure-Prozedur, Schritt 3 · `grundlagen-konventionen.md`
-§Herkunfts-Anker für Steering-Loop-Regeln.
+§Wellen-Closure-Prozedur, Schritt 3 (hier stehen **nur** Beobachtungen, die im
+Register 3× erreicht haben; jeder Eintrag nennt seine `BEO-<NNN>`) ·
+`grundlagen-konventionen.md` §Herkunfts-Anker für Steering-Loop-Regeln (Feld
+und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der Backticks; die
+**Spec-Lücke** trägt statt `liegt in` ihre `LH-*`-ID — das ist kein Versehen).
 
 - **<Guide oder Sensor>** <geschärft/ergänzt>: <was genau>
   — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.
@@ -87,6 +83,10 @@ Diese Sektion bleibt als ZEIGER, damit ein Leser der Closure-Notiz den Zaehler
 findet — sie traegt keine Daten mehr.
 -->
 
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Das Beobachtungs-Register — der Zähler wird **nicht** hier gepflegt; diese
+Sektion ist ein Zeiger und trägt keine Daten.
+
 Der Zähler steht in [`../observations.md`](../observations.md).
 Was in dieser Welle **3×** erreicht hat, steht oben unter
 *Steering-Loop-Einträge*.
@@ -103,6 +103,12 @@ Folge-Slice-Paarung, geprüft am Ende von Schritt 3 der Closure-Prozedur.
 Genannt ohne angelegt ist dieselbe Klasse wie ein halluziniertes Gate.
 -->
 
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wellen-Closure-Prozedur, Schritt 3 — **derivativ**: Diese Liste zeigt nur,
+das Original ist die Slice-Datei. Jeder genannte Folge-Slice muss als Datei im
+Planning-Lifecycle existieren; genannt ohne angelegt ist dieselbe Klasse wie
+ein halluziniertes Gate.
+
 - <slice-NNN (<Titel>) — startet welle-<NN+1>.>
 
 ## Verifikation
@@ -111,6 +117,10 @@ Genannt ohne angelegt ist dieselbe Klasse wie ein halluziniertes Gate.
 Die Belege aus Schritt 1 der Closure-Prozedur. Keine Behauptung ohne
 nachprüfbaren Anker (Hash, Lauf, Zahl).
 -->
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wellen-Closure-Prozedur, Schritt 1 — keine Behauptung ohne nachprüfbaren
+Anker (Hash, Lauf, Zahl).
 
 - `make fullbuild` grün (Build-Hash `<sha256:…>`).
 - Replay-Lauf gegen Golden Set: <N>/<N> Cases grün.

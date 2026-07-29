@@ -13,6 +13,9 @@ Rule „git mv + Inhaltsänderung = zwei Commits" in
 
 ## Lifecycle-Bedeutungen
 
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Lifecycle als State Machine — der Zustand ist das Verzeichnis, kein Status-Feld.
+
 | Verzeichnis | Bedeutung |
 |---|---|
 | `open/` | Geplant, noch nicht priorisiert. Keine Garantie auf Umsetzung. |
@@ -21,6 +24,9 @@ Rule „git mv + Inhaltsänderung = zwei Commits" in
 | `done/` | DoD erfüllt, gemerged, Closure-Notiz vorhanden. |
 
 ## Slices vs. Wellen — zwei Ablagen, dieselbe Regel
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wann Arbeit eine Welle braucht.
 
 - **Slices** tragen ihren Zustand über das **Verzeichnis**
   (`open/` → `next/` → `in-progress/` → `done/`).
@@ -49,10 +55,17 @@ Steering-Loop-Zähler, wird bei jeder Slice-Closure fortgeschrieben und
 
 ## Aktueller Stand
 
+Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
+§Lifecycle als State Machine — kein Snapshot; der Stand ergibt sich aus den
+Verzeichnissen.
+
 Nicht als Snapshot hier eintragen — der Stand ergibt sich aus den
 `open/`/`next/`/`in-progress/`/`done/`-Verzeichnissen (optional ein
 `plan-status`-Target wie im Kurs-`lab/example`), sonst driftet die Tabelle.
 
 ## Roadmap
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Roadmap-Struktur: fünf Abschnitte.
 
 Siehe [`in-progress/roadmap.md`](in-progress/roadmap.md).
