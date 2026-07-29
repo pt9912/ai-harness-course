@@ -113,3 +113,4 @@ Frage ist, keine Code-Architektur-Frage.
 |---|---|---|
 | 2026-06-02 | Proposed | Modul 11 Worked Example, Welle-9-Lab-Ausbau |
 | 2026-06-02 | Accepted | bestehende done-Dateien geprüft, beide bestehen |
+| 2026-06-10 | Korrektur | „zwei done-Dateien" (Option A · Geschichte *Accepted*) war falsch: drei, mit `welle-1-mvp.md`. Tatsachenangabe, Text oben unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)) |

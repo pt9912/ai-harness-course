@@ -22,10 +22,10 @@ Verzeichnissen: `make plan-status`. Eine Tabelle daneben wäre eine zweite
 Quelle für denselben Zustand und driftet, sobald ein `git mv` sie nicht
 mitnimmt.
 
-Die `done/`-Slices sind im Beispiel nur exemplarisch vertreten — siehe
-`done/`-Verzeichnis für die drei Vorbild-Closures (`slice-009`, `slice-020`,
-`welle-1-results.md`; `welle-1-mvp.md` daneben ist der geschlossene
-Welle-*Plan*, keine Closure-Notiz). `slice-020` ist das
+Die `done/`-Slices sind im Beispiel nur exemplarisch vertreten; welche, sagt
+`make plan-status`. Jede Datei dort trägt eine Closure-Sektion — Slice-Plan wie
+Welle-Plan wie Closure-Notiz —, das verlangt ADR-0011, und
+`make verify-closure-notes` prüft es. `slice-020` ist das
 Vorbild für einen **wellenlosen** Slice (Kurs Modul 6 §Wann Arbeit eine
 Welle braucht) — genauer: für einen Slice **ohne Wellen-Zugehörigkeit** in
 einem Repo, das Wellen schneidet.
