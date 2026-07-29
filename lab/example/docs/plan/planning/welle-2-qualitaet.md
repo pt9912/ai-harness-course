@@ -8,19 +8,21 @@ Status-Feld. Dass sie die *aktuelle* Welle ist, sagt die Roadmap
 
 **Zielmeilenstein:** M2 — Qualitätsschwelle.
 
-**Verantwortlich:** Kurs-Lab. **Datum:** 2026-05-29.
+**Verantwortlich:** Kurs-Lab. **Datum:** 2026-06-03.
 
 ---
 
 ## 1. Welle-Ziel
 
 Der Determinismus-Anspruch aus `LH-QA-02` ist nicht mehr nur behauptet, sondern
-property-getestet — in allen sechs Sprachen —, und das Coverage-Gate steht eine
-Bootstrap-Stufe höher.
+property-getestet — in allen sechs Sprachen —, und der Testbestand trägt die
+nächste Coverage-Stufe. Die Schwelle selbst hebt diese Welle **nicht** an: das
+tut die Nachfolge-ADR zu [ADR-0013](../adr/0013-coverage-schwellen.md), deren
+Trigger die Closure dieser Welle ist.
 
 ## 2. Trigger (Welle startet)
 
-- `welle-1-mvp` geschlossen (2026-05-28).
+- `welle-1-mvp` geschlossen (2026-06-02).
 - Golden Set `evals/golden/welle-1-baseline/` existiert.
 
 ## 3. Closure-Trigger (Welle schließt)

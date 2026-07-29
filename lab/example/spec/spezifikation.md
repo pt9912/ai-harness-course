@@ -1,6 +1,6 @@
 # Spezifikation — DocSearch
 
-**Status:** Aktiv. **Letzte Änderung:** 2026-06-02.
+**Status:** Aktiv. **Letzte Änderung:** 2026-06-03.
 
 **Bezug zum Lastenheft:** Diese Spezifikation präzisiert die in
 [`lastenheft.md`](lastenheft.md) formulierten Anforderungen (`LH-*`-IDs).
@@ -117,15 +117,20 @@ Approximate-NN (ANN) ist in Welle 3 geplant — aktuell linear.
 
 ## 6. Externe Verträge
 
-| System | Version | Vertrag-Datei |
+| System | Version | Vertrag |
 |---|---|---|
-| Embedding-Modell | gepinnt im Adapter | `internal/embedding/contract.md` (sprach-spezifisch) |
-| Vektor-Storage | Custom Binary v1 | `internal/index/format.md` |
+| Embedding-Modell | `local-embed-v3@2026-05-22`, gepinnt im Adapter | Adapter-Signatur im `embedding`-Paket je Sprache |
+| Vektor-Storage | Custom Binary v1 | Serialisierungs-Format im `index`-Paket je Sprache |
 
 ## 7. Historie
 
-| Datum | Änderung | ADR |
+| Datum | Änderung | Verweis |
 |---|---|---|
 | 2026-05-15 | Initial | — |
-| 2026-05-22 | `MAX_TOPK = 100` ergänzt | ADR-0001 |
-| 2026-06-01 | `docsearch.audit`-Span ergänzt | LH-FA-03 |
+| 2026-05-22 | `MAX_TOPK = 100` ergänzt | LH-FA-02 (Lastenheft v0.2.0) |
+| 2026-05-22 | §3 `EMBEDDING_DIM`, `SECTION_MAX_CHARS` festgeschrieben | ADR-0002 |
+| 2026-05-25 | §3 `INDEX_STORAGE`, §6 Vektor-Storage-Format festgeschrieben | ADR-0003 |
+| 2026-05-26 | §1 LH-FA-02.a Schritt 5: Tie-Break präzisiert | LH-QA-02 |
+| 2026-06-02 | `docsearch.audit`-Span ergänzt | LH-FA-03 |
+| 2026-06-02 | §1 Schreib-Semantik: Atomic-Replace präzisiert | ADR-0012 |
+| 2026-06-03 | Abwärtszeiger auf einen Slice-Plan entfernt (Referenz-Richtung) | LH-QA-02 |

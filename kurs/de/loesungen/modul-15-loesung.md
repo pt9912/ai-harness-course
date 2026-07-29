@@ -160,8 +160,8 @@ vorherigen Span nicht im Kontext gehalten.
 | **Gesamt** | | **8650** | **1147** | **9797** | 100 % |
 
 Größter Anteil: **Implementation** mit 3737 Token (~38 %). Hinweis
-zum Rollen-Raster: Das Fixture kennt keinen Architect-Span und
-etikettiert die Verifier-Rolle als `Verification` — die Attribution
+zum Rollen-Raster: Das Fixture kennt weder einen Architect- noch einen
+Validator-Span und etikettiert die Verifier-Rolle als `Verification` — die Attribution
 folgt den *vorhandenen* Tags, fehlende Rollen erscheinen als 0, nicht
 als geratene Aufteilung.
 

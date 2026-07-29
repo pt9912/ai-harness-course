@@ -1,6 +1,6 @@
 # Architektur — DocSearch
 
-**Status:** Aktiv. **Letzte Änderung:** 2026-06-02.
+**Status:** Aktiv. **Letzte Änderung:** 2026-06-03.
 
 **Hard Rule:** Diese Datei enthält *keine* Wellen, Slices, Commit-Hashes
 oder Closure-Daten. Die zeitliche Schicht lebt in
@@ -105,6 +105,7 @@ sequenceDiagram
 | Embedding-Adapter Timeout | Service → 503 E003 (Index unverändert) | `event=embedding_unavailable` |
 | Index-Read-Fehler | Service → 500 E099 | `event=internal_error` |
 
-**Atomic-Replace:** Reindex schreibt in `data/index/index.bin.new` und
-ersetzt erst nach erfolgreichem Schreiben. Damit bleibt der alte Index
+**Atomic-Replace:** Reindex schreibt in eine Temp-Datei im selben
+Verzeichnis und ersetzt `data/index/index.bin` erst nach erfolgreichem
+Schreiben. Damit bleibt der alte Index
 bei jedem Fehler intakt.

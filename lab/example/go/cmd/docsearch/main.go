@@ -34,5 +34,5 @@ func main() {
 	_ = service.NewSearcher(idx, emb)
 	// HTTP-Layer-Start wäre hier; im Lab-Skelett zeigen wir nur das Wiring.
 
-	fmt.Println("DocSearch wired. HTTP-Start ist in Welle-4-Slice geplant.")
+	fmt.Println("DocSearch wired. HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).")
 }

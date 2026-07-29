@@ -1,16 +1,19 @@
 # Welle 1 — MVP — Closure-Notiz
 
 **Welle:** welle-1-mvp
-**Abschluss:** 2026-05-28
+**Abschluss:** 2026-06-02
 **Verantwortlich:** Kurs-Lab
 
 ## Was wurde geliefert?
 
-- Lauffähiger DocSearch-Stack in Go als Referenz-Sprache (Folge-Wellen portieren zu Python/Kotlin/Java/C#).
+- Lauffähiger DocSearch-Stack in allen sechs Sprach-Skeletten; Go führt als Referenz-Sprache, die übrigen fünf ziehen nach (Meilenstein M1).
 - Indexierung (LH-FA-01) und Suche (LH-FA-02) mit Akzeptanzkriterien grün.
-- Drei ADRs Accepted (siehe [`../../adr/README.md`](../../adr/README.md)).
+- ADR-0001, ADR-0002 und ADR-0003 Accepted (siehe [`../../adr/README.md`](../../adr/README.md)).
 - `make gates` mit Linter, Typecheck, Architekturtest, Coverage (bootstrap-aware), Tests.
-- Erstes Replay-Beispiel in `evals/golden/welle-1-baseline/` (siehe `manifest.yaml` + drei Cases unter `inputs/` und `expectations/`).
+- Erstes Golden Set `evals/golden/welle-1-baseline/` mit drei Cases.
+  *(Die Verzeichnisform — `manifest.yaml` + `inputs/` + `expectations/` — kam mit
+  dem Lab-Ausbau (Kurs-Welle 9) am 2026-06-02; bis dahin lag das Set als eine JSON-Datei,
+  siehe [`evals/golden/welle-1-baseline/CHANGELOG.md`](../../../../evals/golden/welle-1-baseline/CHANGELOG.md).)
 
 ## Was hat funktioniert?
 

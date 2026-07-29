@@ -2,7 +2,7 @@
 
 **Status:** Accepted
 
-**Datum:** 2026-05-29
+**Datum:** 2026-05-25
 
 **Autor:** Kurs-Lab
 
@@ -91,5 +91,5 @@ nächsten Start verworfen.
 
 | Datum | Ereignis | Verweis |
 |---|---|---|
-| 2026-05-29 | Proposed | slice-010 |
-| 2026-05-29 | Accepted | PR slice-010 |
+| 2026-05-25 | Proposed | slice-006 |
+| 2026-05-25 | Accepted | PR slice-006 |

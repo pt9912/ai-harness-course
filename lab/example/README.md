@@ -40,7 +40,7 @@ example/
 │   ├── spezifikation.md         Algorithmen, Defaults, Codes
 │   └── architecture.md          Schichten, Sequenzen
 ├── docs/plan/
-│   ├── adr/                     ADR-Index + 5 ADRs
+│   ├── adr/                     ADR-Index + ADRs
 │   ├── planning/                Slices in allen Lifecycle-Stadien
 │   ├── carveouts/               1 aktiver Carveout
 │   └── planning/in-progress/roadmap.md

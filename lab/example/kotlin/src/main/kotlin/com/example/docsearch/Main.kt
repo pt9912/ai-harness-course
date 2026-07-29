@@ -22,6 +22,6 @@ fun main(args: Array<String>) {
     val service = Searcher(idx, emb)
     println(
         "DocSearch wired. service=$service, index-size=${idx.size()}. " +
-            "HTTP-Start ist in Welle-4-Slice geplant.",
+            "HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).",
     )
 }

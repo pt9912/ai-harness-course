@@ -219,7 +219,7 @@ und `adr.id`).
 ## Übungen
 
 * Analyse eines KI-Agenten-Laufs im Trace-Viewer
-* **(Anwenden — aktiviert LZ 2)** *Token-Kosten attribuieren.* Identifiziere zunächst den teuersten Tool-Call und begründe, ob er nötig war. Dann *attribuiere* die Gesamt-Token des Laufs: summiere Input- und Output-Token pro `agent.role` (Planner · Architect · Implementer · Reviewer · Verifier) und gib an, welche Rolle den größten Anteil trägt — als Zahl *und* als Prozentsatz der Gesamtsumme. Wo ein Span keinen Rollen-Tag trägt (Sammelposten), entscheide begründet, wie du ihn aufteilst (anteilig nach Tool-Calls? dem auslösenden Slice zugeschlagen?) — genau das ist das Buchhaltungs-Splitting eines Sammelpostens auf Kostenstellen aus dem Mini-Glossar.
+* **(Anwenden — aktiviert LZ 2)** *Token-Kosten attribuieren.* Identifiziere zunächst den teuersten Tool-Call und begründe, ob er nötig war. Dann *attribuiere* die Gesamt-Token des Laufs: summiere Input- und Output-Token pro `agent.role` — die Rollen sind die aus [Modul 8](../03-agenten/modul-08-agentenrollen.md), im Fixture tritt nicht jede auf — und gib an, welche Rolle den größten Anteil trägt — als Zahl *und* als Prozentsatz der Gesamtsumme. Wo ein Span keinen Rollen-Tag trägt (Sammelposten), entscheide begründet, wie du ihn aufteilst (anteilig nach Tool-Calls? dem auslösenden Slice zugeschlagen?) — genau das ist das Buchhaltungs-Splitting eines Sammelpostens auf Kostenstellen aus dem Mini-Glossar.
 * **(Erschaffen — aktiviert LZ 4 Spezifizieren-Hälfte)** *Cache-Hit-Rate
   spezifizieren* — die Erkennen-Hälfte von LZ 4 probt das
   Selbstcheck-Item zum Cache-Miss; die Übung vorbereitet zudem die

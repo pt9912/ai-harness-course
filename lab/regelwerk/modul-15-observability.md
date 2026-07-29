@@ -35,8 +35,9 @@ jeder Cache einen Counter — die Regeln unten.
 
 ### Token-Attributions-Regeln
 
-Summiere Input- und Output-Token pro `agent.role` (Planner · Architect ·
-Implementer · Reviewer · Verifier) und gib an, welche Rolle den größten
+Summiere Input- und Output-Token pro `agent.role` — die Rollen sind die aus
+[Modul 8](modul-08-agentenrollen.md), im Fixture tritt nicht jede auf — und
+gib an, welche Rolle den größten
 Anteil trägt — als Zahl *und* als Prozentsatz der Gesamtsumme. Wo ein
 Span keinen Rollen-Tag trägt (Sammelposten), entscheide begründet, wie
 du ihn aufteilst (anteilig nach Tool-Calls? dem auslösenden Slice

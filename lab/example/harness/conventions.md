@@ -19,8 +19,7 @@ Der Default-Ort für:
 ## Baseline
 
 - **Konvention:** AI-Harness-Kurs (`/kurs/de/grundlagen/konventionen.md`)
-- **Stand:** Template-Set 2026-06
-- **Datum der Adoption:** 2026-06-01
+- **Datum der Adoption:** 2026-05-15 (Repo-Bootstrap, slice-001)
 - **Baseline-Pin (Regelwerk + Templates):** die adoptierte Baseline ist das Kurs-Regelwerk als Split *plus* die Templates, self-contained im `lab-regelwerk.zip` (`regelwerk/` + `templates/` parallel; `agents-regelwerk.md` ist retired). Adoptierter Stand: die Stand-Zeile von [`regelwerk/README.md`](../../regelwerk/README.md) (Wellen-Register: `CHANGELOG.md`). Dieses Beispiel liegt *im* Kurs-Repo und ist damit selbst am aktuellen Stand — die Upstream-Freshness-Frage (*„ist mein `<tag>` noch das aktuelle Kurs-Release?"*) stellt sich erst im adoptierenden Fremd-Repo: eine Release-**Listen**-Prüfung (ein neuer Tag löst einen Review), Netz-Operation außerhalb der netzlosen Gates — nicht der Asset-Hash-Vergleich, der einen neuen Tag gar nicht fängt. Siehe [Kurs Modul 2](../../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md) §Freshness-Audit.
 
 ## Adoptierte Konventions-Quellen
@@ -33,7 +32,7 @@ Der Default-Ort für:
 
 ### MR-000 — Baseline-Aussage
 
-- **Datum:** 2026-06-01
+- **Datum:** 2026-05-15
 - **Geltungsbereich:** gesamtes Repo
 - **Adaption:** *Keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
@@ -46,7 +45,7 @@ Der Default-Ort für:
 
 ### MR-001 — Source Precedence mit eigener Spezifikations-Schicht
 
-- **Datum:** 2026-06-01
+- **Datum:** 2026-05-15
 - **Geltungsbereich:** [`harness/README.md` §Source precedence](README.md#source-precedence) und `AGENTS.md` §Kanonische Quellen
 - **Adaption:** Die Source-Precedence-Tabelle führt
   [`spec/spezifikation.md`](../spec/spezifikation.md) als eigenen
@@ -108,7 +107,7 @@ Schwelle ≥ 2 von 3: 1 Konventions-Härte · 2 Inventur-Linie · 3 Strukturelle
 | Sub-Area | Pfad-Cluster | Erfüllte Inklusions-Achsen | Modus |
 |---|---|---|---|
 | Spec-Schreibung | `spec/` | 1 (eigene Spec-Stil-`MR` plausibel formulierbar, z. B. AK-Format-Standard) · 2 (Spec↔Code abgleichbar) · 3 (`spec/`) → **3/3** | Greenfield |
-| Konventionen & Harness-Doku | `harness/` | 1 (Heimat der `MR-NNN`, hier `MR-000`/`MR-001`) · 2 (Doku-Konsistenz-Linie) · 3 (`harness/`) → **3/3** | Greenfield |
+| Konventionen & Harness-Doku | `harness/` | 1 (Heimat der `MR-NNN`, hier `MR-000` bis `MR-002`) · 2 (Doku-Konsistenz-Linie) · 3 (`harness/`) → **3/3** | Greenfield |
 | Planning-Lifecycle | `docs/plan/` | 1 (Slice-/ADR-/Carveout-Konvention) · 2 (`open`→`done`-Inventur) · 3 (`docs/plan/`) → **3/3** | Greenfield |
 | Implementierung | `<lang>/src/`, `<lang>/cmd/`, `internal/` | 1 (eigene Implementierungs-Stil-`MR` plausibel formulierbar) · 2 (Code-Inventur) · 3 (`src/`-Cluster) → **3/3** | Greenfield |
 | Test-Infrastruktur | `<lang>/tests/` | 1 (Test-/Determinismus-Konvention, z. B. `make test-determinism`) · 2 (Test-ohne-`LH`-ID als Diskrepanz) · 3 (`tests/`) → **3/3** | Greenfield |

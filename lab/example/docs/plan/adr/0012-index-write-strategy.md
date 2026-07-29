@@ -19,7 +19,7 @@ und [`architecture.md` §5](../../../spec/architecture.md#5-fehlermodelle-und-re
 LH-FA-IDX-003 verlangt **Idempotenz** (gleiche Eingabe → gleicher
 Index-Hash) und **Atomarität** (kein halb geschriebener Index ist
 beobachtbar). Das Index-Storage-Format aus ADR-0003 (Custom Binary v1)
-ist eine einzige Datei `internal/index/store.bin`. Naive Schreib-
+ist eine einzige Datei `data/index/index.bin`. Naive Schreib-
 Strategie (Datei öffnen, im Loop schreiben, schließen) verletzt beides:
 ein Crash mitten im Schreiben hinterlässt eine Datei mit Header der
 neuen Generation, aber Body der alten — der Service startet mit
@@ -29,9 +29,12 @@ inkonsistentem Index.
 
 Index-Schreiben läuft über **Temp-File + Atomic Rename**:
 
-1. Schreibe vollständigen Index nach `internal/index/.store.tmp.<PID>.<UUID>`.
+1. Schreibe vollständigen Index nach `data/index/index.bin.new.<PID>.<UUID>`
+   — dasselbe Verzeichnis wie das Ziel (sonst wäre `rename(2)` kein
+   Dateisystem-interner Vorgang mehr), und dieselbe Namens-Familie wie die
+   Skizze in ADR-0003 (`index.bin.new`), nur um PID/UUID ergänzt.
 2. `fsync(2)` auf das Temp-File.
-3. `rename(2)` von Temp-Pfad nach `internal/index/store.bin`.
+3. `rename(2)` von Temp-Pfad nach `data/index/index.bin`.
 4. `fsync(2)` auf das Verzeichnis (POSIX: persistiert den Verzeichnis-
    Eintrag, sonst kann der Rename nach Crash verloren gehen).
 
@@ -43,7 +46,7 @@ Serialisierungs-Format (ADR-0003) plus deterministischem Tie-Break
 
 ## Verglichene Alternativen
 
-### Option A — Direkt-Schreiben in `store.bin`
+### Option A — Direkt-Schreiben in `index.bin`
 
 - Pro: Eine Datei-Operation weniger.
 - Contra: Verletzt Atomarität bei Crash. Verletzt Idempotenz, wenn der
@@ -61,7 +64,9 @@ Serialisierungs-Format (ADR-0003) plus deterministischem Tie-Break
   `fsync(2)`-Zeile pro Schreibvorgang.
 - Pro: Idempotenz testbar via Hash-Vergleich zweier aufeinander folgender Läufe.
 - Contra: Temp-Files können nach Crash zurückbleiben — Aufräum-Routine
-  beim Service-Start nötig (löscht alle `.store.tmp.*`).
+  beim Service-Start nötig (löscht `index.bin.new*` — mit und ohne
+  PID/UUID-Suffix, damit auch Reste aus der Skizzen-Form von ADR-0003
+  aufgeräumt werden).
 
 ## Konsequenzen
 
@@ -77,7 +82,7 @@ Serialisierungs-Format (ADR-0003) plus deterministischem Tie-Break
 
 | Tooling | Regel | Make-Target |
 |---|---|---|
-| Architekturtest pro Sprache | `writer.write_index` ruft `rename`/`Files.move(REPLACE_EXISTING)`/`File.Move` *nach* `fsync` auf; *kein* direkter Write auf `store.bin`. | `make arch-check` |
+| Architekturtest pro Sprache | `writer.write_index` ruft `rename`/`Files.move(REPLACE_EXISTING)`/`File.Move` *nach* `fsync` auf; *kein* direkter Write auf `index.bin`. | `make arch-check` |
 | Property-Test (slice-013) | Zwei aufeinander folgende `writer.write_index`-Aufrufe mit gleicher Eingabe produzieren identischen SHA-256-Hash. | `make test` |
 
 ## Re-Evaluierungs-Trigger
@@ -93,5 +98,6 @@ Serialisierungs-Format (ADR-0003) plus deterministischem Tie-Break
 
 | Datum | Ereignis | Verweis |
 |---|---|---|
-| 2026-06-02 | Proposed | Modul 15 Worked Example, Welle-9-Lab-Ausbau |
+| 2026-06-02 | Proposed | Modul 15 Worked Example, Lab-Ausbau (Kurs-Welle 9) |
 | 2026-06-02 | Accepted | LH-FA-IDX-003 ergänzt, Trace-Fixture um writer.write_index Span erweitert |
+| 2026-06-03 | Korrektur | Index-Pfad stand als `internal/index/store.bin` gegen ADR-0003 (`data/index/index.bin`) — Tatsachenangabe berichtigt, Entscheidung unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)) |

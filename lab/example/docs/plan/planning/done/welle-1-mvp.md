@@ -13,14 +13,23 @@ Status-Feld.
 
 ## 1. Welle-Ziel
 
-Ein lauffähiger DocSearch-Stack in Go als Referenz-Sprache: Indexierung und
-Suche erfüllen ihre Akzeptanzkriterien, `make gates` läuft repo-weit grün, und
-ein erstes Golden Set für den Replay existiert.
+Ein lauffähiger DocSearch-Stack: Indexierung und Suche erfüllen ihre
+Akzeptanzkriterien, `make gates` läuft in allen sechs Sprach-Skeletten grün, und
+ein erstes Golden Set für den Replay existiert. Go führt als Referenz-Sprache —
+die übrigen fünf Skelette ziehen dieselbe Logik nach; das ist Teil dieser Welle
+(Meilenstein M1: ein Lab-Beispiel pro Sprache).
 
 ## 2. Trigger (Welle startet)
 
-- Lastenheft v0.1.0 abgenommen (`LH-FA-01`, `LH-FA-02`, `LH-QA-02`).
-- ADR-0001 (Adapter-Pattern) und ADR-0002 (Embedding-Modellwahl) accepted.
+- Meilenstein M1 in der [Roadmap](../in-progress/roadmap.md) benannt und
+  einer Welle zugeordnet.
+- Kein Vorgänger — dies ist die erste Welle.
+
+Bewusst *nicht* als Trigger geführt: Repo-Bootstrap und Gate-Baseline
+(slice-001), Lastenheft v0.1.0 (slice-001) und die ADRs 0001/0002
+(slice-001, slice-003). Sie entstehen *in* dieser Welle und wären damit
+Ergebnisse, keine beobachtbaren Vorbedingungen — auch dann nicht, wenn sie
+zeitlich am Anfang stehen.
 
 ## 3. Closure-Trigger (Welle schließt)
 
@@ -68,7 +77,6 @@ gespiegelt — eine Status-Spalte driftete gegen die Verzeichnisse.
 
 - ANN-Suche (→ `welle-3-skalierung`).
 - Betrieb, Helm-Chart, OTel-Pipeline (→ `welle-4-betrieb`).
-- Portierung auf Python/Kotlin/Java/C# (Folge-Wellen).
 
 ## 7. Closure-Notiz
 

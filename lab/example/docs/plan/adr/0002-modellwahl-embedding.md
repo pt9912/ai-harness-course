@@ -74,5 +74,5 @@ Schärfung, kein Service-Eingriff.
 
 | Datum | Ereignis | Verweis |
 |---|---|---|
-| 2026-05-22 | Proposed | slice-007 |
-| 2026-05-22 | Accepted | PR slice-007 |
+| 2026-05-22 | Proposed | slice-003 |
+| 2026-05-22 | Accepted | PR slice-003 |

@@ -114,5 +114,5 @@ Drei Zahlen, drei Begründungen:
 
 | Datum | Ereignis | Verweis |
 |---|---|---|
-| 2026-06-02 | Proposed | Welle-9-Lab-Ausbau; Schwellen unbegründet, kritische Schwelle gegen CO-001 gedriftet |
+| 2026-06-02 | Proposed | Lab-Ausbau (Kurs-Welle 9); Schwellen unbegründet, kritische Schwelle gegen CO-001 gedriftet |
 | 2026-06-02 | Accepted | neun Build-/Konfigurationsdateien zitieren ADR-0013; kritische Schwelle von 80 auf die von CO-001 geforderten 90 korrigiert |

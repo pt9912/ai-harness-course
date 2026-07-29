@@ -2,7 +2,7 @@
 
 **Status:** Aktiv.
 
-**Datum angelegt:** 2026-05-20. **Letzte Prüfung:** 2026-06-02.
+**Datum angelegt:** 2026-05-25. **Letzte Prüfung:** 2026-06-03.
 
 **Betroffenes Gate:** `coverage-gate-critical` (Schwelle aus [ADR-0013](../adr/0013-coverage-schwellen.md)).
 
@@ -83,5 +83,6 @@ Verifikations-Checkliste führt das als eigenen Punkt.
 
 | Datum | Ereignis | Verweis |
 |---|---|---|
-| 2026-05-20 | Angelegt | slice-005 (Index-Format) |
-| 2026-06-01 | Geprüft, weiterhin gültig — Welle 2 läuft | slice-013 |
+| 2026-05-25 | Angelegt | slice-006 (Index-Storage) |
+| 2026-06-02 | Schwelle an ADR-0013 gebunden statt selbst behauptet (Nachtrag, keine Entscheidungs-Änderung) | ADR-0013 |
+| 2026-06-03 | Geprüft, weiterhin gültig — Welle 2 läuft | slice-013 |

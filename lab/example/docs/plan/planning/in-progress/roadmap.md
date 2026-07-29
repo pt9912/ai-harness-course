@@ -1,6 +1,6 @@
 # Roadmap — DocSearch
 
-**Status:** Aktiv. **Letzte Änderung:** 2026-06-02.
+**Status:** Aktiv. **Letzte Änderung:** 2026-06-03.
 
 **Format-Regel:** Reihenfolge von **Wellen**, keine Reihenfolge von
 Terminen. Daten sind Schätzungen, korrigierbar.
@@ -10,8 +10,8 @@ Terminen. Daten sind Schätzungen, korrigierbar.
 ## Aktuelle Welle
 
 **Welle-ID:** welle-2-qualitaet
-**Start:** 2026-05-29
-**Geplantes Ende:** 2026-06-12 (Schätzung)
+**Start:** 2026-06-03
+**Geplantes Ende:** 2026-06-17 (Schätzung)
 
 **Closure-Trigger:**
 - slice-013 (Property-Tests) done in allen sechs Sprachen.
@@ -27,14 +27,14 @@ Terminen. Daten sind Schätzungen, korrigierbar.
 
 | Welle | Trigger | Wichtigste Slices | Geschätzter Aufwand |
 |---|---|---|---|
-| welle-3-skalierung | welle-2 done + ADR-0004 (ANN-Bibliothek) accepted | slice-014 (ANN-Suche), slice-015 (Multi-Sprach-Adapter-Cleanup) | L |
+| welle-3-skalierung | welle-2 done | slice-014 (ANN-Suche, bringt ADR-0004), slice-015 (Multi-Sprach-Adapter-Cleanup) | L |
 | welle-4-betrieb | welle-3 done | slice-016 (k8s-Helm-Chart), slice-017 (OTel-Collector) | M |
 
 ## Meilensteine
 
 | Meilenstein | Welle(n) | Trigger | Status |
 |---|---|---|---|
-| M1 — Lauffähiger Stack | welle-1-mvp | DoD `make gates` grün, ein Lab-Beispiel pro Sprache | erreicht 2026-05-28 |
+| M1 — Lauffähiger Stack | welle-1-mvp | DoD `make gates` grün, ein Lab-Beispiel pro Sprache | erreicht 2026-06-02 |
 | M2 — Qualitätsschwelle | welle-2-qualitaet | welle-2-qualitaet geschlossen (slice-013 in `done/`, Property-Suite läuft 100 Generationen) | offen |
 | M3 — Skalierbar | welle-3-skalierung | p95 < 1 s auch bei 100k Einträgen | offen |
 | M4 — Produktionsreif | welle-4-betrieb | Releases, Runbook, OTel-Pipeline | offen |
@@ -57,10 +57,10 @@ flowchart LR
 
 | Welle | Abschluss | Closure-Notiz |
 |---|---|---|
-| welle-1-mvp | 2026-05-28 | [`../done/welle-1-results.md`](../done/welle-1-results.md) |
+| welle-1-mvp | 2026-06-02 | [`../done/welle-1-results.md`](../done/welle-1-results.md) |
 
 ## Historische Trigger-Verschiebungen
 
 | Datum | Was wurde geändert? | Warum? |
 |---|---|---|
-| 2026-05-25 | Welle-1-Schließung um 3 Tage verschoben | slice-007 (Top-K-Boundary) erforderte LH-Update — Spec-Lücke aus Steering Loop |
+| 2026-05-22 | Welle-1-Schließung verschoben | slice-007 (Top-K-Boundary) erforderte LH-Update (v0.2.0) — Spec-Lücke aus Steering Loop |

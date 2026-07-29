@@ -36,7 +36,7 @@ Diese Datei dupliziert sie nicht.
 | [`../spec/lastenheft.md`](../spec/lastenheft.md) | LH-FA-* und LH-QA-* mit Akzeptanzkriterien |
 | [`../spec/spezifikation.md`](../spec/spezifikation.md) | Algorithmen, Defaults (`MAX_TOPK`, `EMBEDDING_DIM`), Fehler-Codes |
 | [`../spec/architecture.md`](../spec/architecture.md) | Schichten, Constraints, Sequenzen |
-| [`../docs/plan/adr/`](../docs/plan/adr/) | 3 ADRs: Layering, Modellwahl, Index-Format |
+| [`../docs/plan/adr/`](../docs/plan/adr/) | Architektur- und Prozess-Entscheidungen; Index: [`README.md`](../docs/plan/adr/README.md) |
 | [`../docs/plan/planning/`](../docs/plan/planning/) | aktuelle Slices, Roadmap |
 | [`../AGENTS.md`](../AGENTS.md) | Hard Rules, Workflow |
 | [`conventions.md`](conventions.md) | repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Modus-Deklarationen |

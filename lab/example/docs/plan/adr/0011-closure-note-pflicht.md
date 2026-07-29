@@ -100,9 +100,9 @@ Frage ist, keine Code-Architektur-Frage.
 
 ## Re-Evaluierungs-Trigger
 
-- Wenn das Lab auf strukturierte Trace-Pipeline (siehe ADR-0012)
-  umstellt und Closure-Notizen als Telemetrie eingespeist werden sollen
-  — dann Wechsel auf Frontmatter-Schema sinnvoll prüfen.
+- Wenn das Lab auf eine strukturierte Trace-Pipeline umstellt und
+  Closure-Notizen als Telemetrie eingespeist werden sollen — dann
+  Wechsel auf Frontmatter-Schema sinnvoll prüfen.
 - Wenn die Floskel-Liste regelmäßig erweitert werden muss: Wechsel auf
   einen Doku-Konsistenz-Agenten (inferentielle Schicht) anstelle des
   syntaktischen Checks.
@@ -111,6 +111,6 @@ Frage ist, keine Code-Architektur-Frage.
 
 | Datum | Ereignis | Verweis |
 |---|---|---|
-| 2026-06-02 | Proposed | Modul 11 Worked Example, Welle-9-Lab-Ausbau |
+| 2026-06-02 | Proposed | Modul 11 Worked Example, Lab-Ausbau (Kurs-Welle 9) |
 | 2026-06-02 | Accepted | bestehende done-Dateien geprüft, beide bestehen |
-| 2026-06-10 | Korrektur | „zwei done-Dateien" (Option A · Geschichte *Accepted*) war falsch: drei, mit `welle-1-mvp.md`. Tatsachenangabe, Text oben unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)) |
+| 2026-06-03 | Korrektur | „zwei done-Dateien" (Option A · Geschichte *Accepted*) war falsch: drei, mit `welle-1-mvp.md`. Tatsachenangabe, Text oben unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)) |

@@ -9,7 +9,7 @@ nur durch `git mv` (Kurs
 
 **Bezug:** LH-QA-01 (Performance), implizit ADR-0003 (Index-Format)
 
-**Autor:** Kurs-Lab. **Datum:** 2026-05-30.
+**Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 
 ## 1. Ziel
 

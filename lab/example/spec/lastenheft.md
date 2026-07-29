@@ -1,8 +1,8 @@
 # Lastenheft — DocSearch
 
-**Version:** 0.4.0
+**Version:** 0.4.1
 **Status:** Accepted
-**Autor:** Kurs-Lab, **Datum:** 2026-06-02
+**Autor:** Kurs-Lab, **Datum:** 2026-06-03
 
 ## 1. Zweck und Geltungsbereich
 
@@ -74,7 +74,7 @@ Anzahl Ergebnisse, Latenz, anonymisierte User-ID.
 
 ### LH-FA-IDX-003 — Index-Schreib-Idempotenz und Atomarität
 
-> **Schema-Konvention.** Ab Welle 2 vergeben wir neue funktionale
+> **Schema-Konvention.** Ab Lastenheft v0.4.0 vergeben wir neue funktionale
 > Anforderungen mit *Bereichskürzel* (`LH-FA-<BEREICH>-<NNN>`). Das
 > entspricht der Stratifizierung in
 > [Kurs Modul 1](../../../kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren).
@@ -90,7 +90,7 @@ Index ist beobachtbar).
 
 **Akzeptanzkriterien:**
 
-- **Happy Path:** Given identische Dokumentliste, when `writer.write_index` zweimal in Folge ausgeführt wird, then identischer Datei-Hash des Index-Outputs (`internal/index/store.bin`).
+- **Happy Path:** Given identische Dokumentliste, when `writer.write_index` zweimal in Folge ausgeführt wird, then identischer Datei-Hash des Index-Outputs (`data/index/index.bin`).
 - **Boundary:** Given ein Crash während `writer.write_index` (simuliert via `kill -9` zwischen Temp-File-Schreiben und Rename), when der Service neu startet, then der Index-Lese-Pfad lädt den letzten konsistenten Stand — kein halb geschriebener Block.
 - **Negative:** Given ein nicht beschreibbares Zielverzeichnis, when `writer.write_index` aufgerufen wird, then Statuscode `E099`, kein Teil-Schreib-Artefakt im Verzeichnis.
 
@@ -147,5 +147,6 @@ zusammen garantieren bit-identische Index-Files bei identischer Eingabe.
 |---|---|---|---|
 | 0.1.0 | 2026-05-15 | Initiale Fassung | slice-001 |
 | 0.2.0 | 2026-05-22 | Boundary-Kriterium für `k > 100` ergänzt | slice-007 |
-| 0.3.0 | 2026-06-01 | LH-QA-04 Audit-Datenschutz ergänzt | slice-012 |
-| 0.4.0 | 2026-06-02 | LH-FA-IDX-003 Index-Schreib-Idempotenz; Schema-Konvention "Bereichskürzel ab Welle 2" dokumentiert | Welle-9-Lab-Ausbau, Modul 15 |
+| 0.3.0 | 2026-06-02 | LH-QA-04 Audit-Datenschutz ergänzt (zu LH-FA-03) | Lab-Ausbau (Kurs-Welle 9), Modul 15 |
+| 0.4.0 | 2026-06-02 | LH-FA-IDX-003 Index-Schreib-Idempotenz; Schema-Konvention "Bereichskürzel ab v0.4.0" dokumentiert | Lab-Ausbau (Kurs-Welle 9), Modul 15 |
+| 0.4.1 | 2026-06-03 | LH-FA-IDX-003 Happy-Path: Index-Pfad auf `data/index/index.bin` berichtigt (stand gegen ADR-0003) | ADR-0003 |

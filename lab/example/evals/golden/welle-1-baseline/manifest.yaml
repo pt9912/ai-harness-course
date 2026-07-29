@@ -7,19 +7,23 @@ description: >
   Baseline-Replays für DocSearch nach Welle-1-Abschluss.
   Drei Cases decken Happy Path, Boundary und Negative je LH-FA-02 ab.
 
-recorded_at: 2026-05-28T16:42:00Z
+recorded_at: 2026-06-02T16:42:00Z
 
 model:
   name: local-embed-v3
-  version: "2026-05-15"
+  version: "2026-05-22"
   seed: 42
 
 runtime:
+  # Aufgezeichnet gegen die Referenz-Sprache der Welle 1 (Go); die fünf
+  # übrigen Skelette replayen dasselbe Set, ihre Toolchains stehen in
+  # ihren eigenen Manifesten.
+  implementation: go
   image_hash: sha256:abc123def4567890abc123def4567890abc123def4567890abc123def4567890
   toolchain:
-    go: "1.23"
-    python: "3.12.4"
-    node: "20.11"
+    go: "1.23"        # Implementierung
+    python: "3.12.4"  # Replay-Runner (tools/)
+    node: "20.11"     # Trace-Fixture-Prüfung (make replay)
 
 # Pfade relativ zu diesem Manifest.
 inputs_ref: inputs/

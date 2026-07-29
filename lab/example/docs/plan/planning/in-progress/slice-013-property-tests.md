@@ -9,7 +9,7 @@ nur durch `git mv` (Kurs
 
 **Bezug:** LH-QA-02 (Reproduzierbarkeit), LH-FA-02 (Suche)
 
-**Autor:** Kurs-Lab. **Datum:** 2026-06-01.
+**Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 
 ## 1. Ziel
 
@@ -20,7 +20,7 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 
 ## 2. Definition of Done
 
-- [ ] Pro Sprache ein Property-Test (z.B. `gopter` für Go, `hypothesis` für Python, `Kotest` für Kotlin, `jqwik` für Java, `FsCheck` für C#).
+- [ ] Pro Sprache ein Property-Test (z.B. `gopter` für Go, `hypothesis` für Python, `Kotest` für Kotlin, `jqwik` für Java, `FsCheck` für C#, `rapidcheck` für C++).
 - [ ] Eigenschaft: Für beliebige Index-Inhalte und Anfragen ist die Reihenfolge bei gleichem Score reproduzierbar.
 - [ ] Neues Make-Target `test-property` läuft in `make gates`.
 - [ ] `test-property` läuft 100 Generationen, fail-closed.
@@ -40,7 +40,7 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 
 ## 4. Trigger
 
-- Welle 2 startet, slice-012 (Audit-Logging) ist done.
+- Welle 2 gestartet (2026-06-03); slice-012 liegt seit der Welle-1-Closure in `done/`.
 
 ## 5. Closure-Trigger
 

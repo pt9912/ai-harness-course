@@ -21,7 +21,7 @@ def main() -> int:
     idx = Index()
     emb = MockEmbedder()
     _ = Searcher(idx, emb)
-    print("DocSearch wired. HTTP-Start ist in Welle-4-Slice geplant.")
+    print("DocSearch wired. HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).")
     return 0
 
 

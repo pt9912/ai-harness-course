@@ -27,7 +27,7 @@ public final class Main {
         final Index idx = new Index();
         final MockEmbedder emb = new MockEmbedder();
         new Searcher(idx, emb);
-        System.out.println("DocSearch wired. HTTP-Start ist in Welle-4-Slice geplant.");
+        System.out.println("DocSearch wired. HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).");
     }
 
     private static boolean hasHelp(String[] args) {

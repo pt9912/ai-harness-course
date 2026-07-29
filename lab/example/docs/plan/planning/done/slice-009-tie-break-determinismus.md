@@ -7,7 +7,14 @@ nur durch `git mv` (Kurs
 
 **Welle:** welle-1-mvp
 
-**Bezug:** LH-QA-02 (Reproduzierbarkeit, primär), LH-FA-IDX-003 (Index-Schreib-Idempotenz, sekundär — deterministischer Tie-Break ist Voraussetzung für bit-identische Schreib-Ergebnisse), ADR-0003 (Index-Format), ADR-0012 (Index-Write-Strategie, sekundär)
+**Bezug:** LH-QA-02 (Reproduzierbarkeit, primär), ADR-0003 (Index-Format).
+
+**Nachtrag 2026-06-02** (Lab-Ausbau (Kurs-Welle 9); Traceability-Metadata, keine
+Änderung am Slice): Der hier gebaute Tie-Break belegt zusätzlich
+`LH-FA-IDX-003` (Index-Schreib-Idempotenz — Determinismus ist Voraussetzung für
+bit-identische Schreib-Ergebnisse) und wird von `ADR-0012` als Verifikation
+herangezogen. Beide entstanden nach diesem Slice; die Verweise sind rückwirkend
+eingetragen.
 
 **Autor:** Kurs-Lab. **Datum:** 2026-05-26.
 
@@ -71,7 +78,7 @@ dokumentiert sein" — erfolgt beim Lese-Schritt der Welle-1-Closure, nicht
 hier: *gezählt* ist nicht *verkörpert*.
 
 **Folge-Slice:** keiner notwendig — Eigenschaft ist abgesichert in
-allen vier weiteren Sprachen, wenn diese Welle 1 portieren (Welle 1
+allen fünf weiteren Sprachen, wenn diese Welle 1 portieren (Welle 1
 sortiert nach Sprach-Skelett-Roundtrip ab; siehe Roadmap M1).
 
 ## 8. Sub-Area-Modus-Begründung

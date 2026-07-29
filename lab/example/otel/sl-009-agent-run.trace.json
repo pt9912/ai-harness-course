@@ -28,7 +28,7 @@
       "agent.role": "Implementation",
       "name": "tool_call:writer.write_index",
       "tool.name": "writer.write_index",
-      "tool.arguments.redacted": {"docs": 100, "target": "internal/index/store.bin"},
+      "tool.arguments.redacted": {"docs": 100, "target": "data/index/index.bin"},
       "tool.result.status": "ok",
       "requirement.id": "LH-FA-IDX-003",
       "adr.id": "ADR-0012",

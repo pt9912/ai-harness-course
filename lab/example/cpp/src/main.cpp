@@ -30,8 +30,8 @@ int main(int argc, char** argv) {
     docsearch::MockEmbedder emb;
     docsearch::Searcher searcher(idx, emb);
     docsearch::SearchHandler handler(searcher);
-    (void)handler;  // HTTP-Server-Start ist in einem Welle-4-Slice geplant.
+    (void)handler;  // HTTP-Layer-Start wäre hier; im Lab-Skelett zeigen wir nur das Wiring.
 
-    std::cout << "DocSearch wired. HTTP-Start ist in Welle-4-Slice geplant.\n";
+    std::cout << "DocSearch wired. HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).\n";
     return 0;
 }
