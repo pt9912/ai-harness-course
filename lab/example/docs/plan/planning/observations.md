@@ -3,10 +3,11 @@
 **Status:** Aktiv. **Letzte Änderung:** 2026-06-03.
 
 Der Zähler des Steering Loops (1× notieren · 2× Symptom · 3× Lücke).
-Regeln: Kurs-Regelwerk `modul-06-roadmap.md` §Das Beobachtungs-Register —
-wer schreibt, wer liest, und welche Form ein Beleg hat (`slice-<NNN>`, Anzahl
-= Zähler). Wo im Slice die Beobachtung herkommt, steht in dessen §6/§7,
-nicht in der Belegspalte.
+
+Regeln dieses Registers: Kurs-Regelwerk `modul-06-roadmap.md`
+§Das Beobachtungs-Register — wer schreibt, wer liest, wann gestrichen wird,
+welche Form ein Beleg hat (Form · Anzahl · Lage) und dass eine leere Tabelle
+`— keine —` trägt statt zu verschwinden.
 
 > Die Kennungen wurden bei der Einführung des Registers **retrospektiv**
 > vergeben (Kurs-Welle 59) und folgen deshalb nicht der Reihenfolge des

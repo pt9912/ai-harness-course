@@ -98,7 +98,12 @@ also auch `BEO-004` und `BEO-006` aus dieser Notiz.
 für das DocSearch-Lab als Ganzes). Reine Spec-Korrektur ohne
 Konventions-Adaption — keine BF/Hybrid-Begründung nötig.
 
-**Vorgelagert — offene Beobachtungen gesichtet:** Register
+**Vorgelagert — Sub-Area-Wahl prüfen:** Zwei berührte Sub-Areas, beide über
+der Schwelle: *Spec-Schreibung* (`spec/spezifikation.md`) und
+*Planning-Lifecycle* (dieser Slice-Plan selbst). Keine ist zu grob geschnitten,
+keine musste ausdifferenziert werden.
+
+**Vorgelagert — offene Beobachtungen sichten:** Register
 (`../observations.md`) durchgegangen. Berührt sind zwei Sub-Areas aus der
 Modus-Tabelle (`harness/conventions.md`), abgelesen an §3: *Spec-Schreibung*
 (`spec/spezifikation.md`) und *Planning-Lifecycle* (dieser Slice-Plan selbst).

@@ -41,8 +41,10 @@ dieses Repo nicht — das wäre der Repo-Modus, und der lautet hier: mit Wellen.
   [`done/welle-1-mvp.md`](done/welle-1-mvp.md) neben
   [`done/welle-1-results.md`](done/welle-1-results.md). Den aktiven Durchlauf
   `open/` → `next/` → `in-progress/` durchläuft er nicht; `done/` ist sein
-  einziges Lifecycle-Verzeichnis. Ob eine flache Welle *aktuell* oder
-  *geplant* ist, sagt die Roadmap.
+  einziges Lifecycle-Verzeichnis. **Geplante Wellen bekommen noch keine
+  Datei** — sie stehen in der Roadmap unter *Nächste Wellen* und nirgends
+  sonst. Eine flache Datei bedeutet damit immer *läuft*: zwei Positionen,
+  nicht drei.
 - Der aktive Durchlauf nimmt ausschließlich **Slices** auf; `done/` archiviert
   **zusätzlich** abgeschlossene **Nicht-Slice-Records** — Welle-Plan und
   Welle-Closure.

@@ -62,7 +62,7 @@ Repo-weit, sprachunabhängig (nur im Root-`Makefile`):
 | Target | Vertrag | Bindung |
 |---|---|---|
 | `make verify` | Closure-Pflicht + Referenz-Richtung; mit `SLICE=` zusätzlich die Slice-DoD | — (Aggregat) |
-| `make verify-closure-notes` | jede Datei in `done/` trägt eine Closure-Notiz | [ADR-0011](../docs/plan/adr/0011-closure-note-pflicht.md) |
+| `make verify-closure-notes` | jede Datei in `done/` trägt eine ausgefüllte Closure-Notiz (≥2 Sätze, keine Floskel, keine `<…>`-Platzhalter) | [ADR-0011](../docs/plan/adr/0011-closure-note-pflicht.md) |
 | `make check-references` | keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise | [Kurs §Referenz-Richtung](../../../kurs/de/grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) (`MR-002`) |
 | `make verify-slice SLICE=<id>` | DoD eines Slice plausibilisieren | — |
 | `make plan-status` | Slice-Verteilung über die Lifecycle-Verzeichnisse; rot, wenn ein Lifecycle-Verzeichnis fehlt | — |

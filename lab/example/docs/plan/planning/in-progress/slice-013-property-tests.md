@@ -66,7 +66,12 @@ für das DocSearch-Lab als Ganzes). Spec-Anker LH-QA-02 führt
 Adaption) hat zwar Adaptions-Aufwand, aber keinen Inventur-Auftrag
 (es wird neu gebaut, nichts retrofittet).
 
-**Vorgelagert — offene Beobachtungen gesichtet:** Register
+**Vorgelagert — Sub-Area-Wahl prüfen:** Drei berührte Sub-Areas, alle über der
+Schwelle: *Test-Infrastruktur*, *Sensor-Werkzeuge* und *Konventionen &
+Harness-Doku*. `docs/user/` ist ebenfalls berührt, aber **Aspirantin** und
+trägt keine Modus-Aussage — deshalb steht sie hier und bekommt keinen Block.
+
+**Vorgelagert — offene Beobachtungen sichten:** Register
 (`../observations.md`) durchgegangen. Berührt sind drei Sub-Areas (§3):
 *Test-Infrastruktur* (`<sprache>/tests/property/` — die `FsCheck`-Adaption ist
 eine neue Konvention, keine additive Arbeit unter der alten),

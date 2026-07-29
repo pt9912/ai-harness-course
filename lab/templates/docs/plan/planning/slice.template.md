@@ -45,7 +45,7 @@ gehört zurück zur Zerlegung.
 - [ ] Closure-Notiz mit Steering-Loop-Lerneintrag.
 - [ ] Beobachtungs-Register (`../observations.md`) fortgeschrieben — neue `BEO-<NNN>` oder Zähler +1 mit Beleg; keine Beobachtung angefallen ist ebenfalls eine Antwort und wird in §7 notiert.
 - [ ] Jedes Risiko aus §6 trägt einen Ausgang (eingetreten / entfallen / weiter offen).
-- [ ] **Nur in einem Repo ohne Wellen-Betrieb:** die drei Paarungen (Anker · Folge-Slice · Register) geprüft. Dieses Item liegt als einziges **hinter** dem `git mv` — die Paarungen suchen in `done/`. Schneidet dein Repo Wellen, prüft sie die nächste Welle-Closure, auch für Slices ohne Wellen-Zugehörigkeit.
+- [ ] Die drei Paarungen (Anker · Folge-Slice · Register) geprüft — **nur im Repo ohne Wellen-Betrieb**. Schneidet dein Repo Wellen, **streiche diese Zeile beim Kopieren**: Dort trägt die nächste Welle-Closure die Prüfung, auch für Slices ohne Wellen-Zugehörigkeit — und ein Item, das niemand abhaken kann, macht den Closure-Trigger „DoD vollständig" unerfüllbar. Im Repo ohne Wellen-Betrieb liegt es als einziges Item **hinter** dem `git mv` (die Paarungen suchen in `done/`); die Closure braucht dann drei Commits — Inhalt, `git mv`, Häkchen. Das widerspricht der Hard Rule nicht, es folgt aus ihr.
 
 ## 3. Plan (vor Code)
 

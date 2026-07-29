@@ -2,7 +2,8 @@
 # ADR-0011 — Closure-Note-Pflicht für done/-Slices.
 # Prueft jede Datei in docs/plan/planning/done/*.md auf eine Sektion,
 # deren Ueberschrift "Closure" enthaelt, und auf >=2 Saetze Substanz
-# ausserhalb von Code-Bloecken. Floskeln ohne Inhalt schlagen fehl.
+# ausserhalb von Code-Bloecken. Floskeln ohne Inhalt schlagen fehl,
+# unausgefuellte Template-Platzhalter (<...>) ebenfalls.
 
 from __future__ import annotations
 
@@ -19,6 +20,11 @@ FLOSKELN = {
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
 CODEBLOCK_RE = re.compile(r"```.*?```", re.DOTALL)
 INLINE_CODE_RE = re.compile(r"`[^`]+`")
+# Template-Platzhalter: spitze Klammern ausserhalb von Code. Eine ausgefuellte
+# Closure-Notiz hat keine — der Gate war sonst gruen auf dem blanken
+# Template-Rumpf, und die Satz-Schwelle allein faengt das nicht: Der Rumpf
+# bringt genug Saetze mit.
+PLACEHOLDER_RE = re.compile(r"<[^<>\n]+>")
 
 
 def find_closure_section(text: str) -> str | None:
@@ -58,6 +64,11 @@ def floskel_hits(body: str) -> list[str]:
     return sorted({f for f in FLOSKELN if re.search(rf"(?<!\w){re.escape(f)}(?!\w)", cleaned)})
 
 
+def placeholder_hits(body: str) -> list[str]:
+    cleaned = INLINE_CODE_RE.sub("", CODEBLOCK_RE.sub("", body))
+    return sorted(set(PLACEHOLDER_RE.findall(cleaned)))[:3]
+
+
 def errors_for(path: pathlib.Path) -> list[str]:
     text = path.read_text(encoding="utf-8")
     body = find_closure_section(text)
@@ -69,6 +80,9 @@ def errors_for(path: pathlib.Path) -> list[str]:
     hits = floskel_hits(body)
     if hits:
         return [f"{path}: Closure-Sektion enthaelt Floskel(n): {', '.join(hits)}"]
+    stubs = placeholder_hits(body)
+    if stubs:
+        return [f"{path}: Closure-Sektion enthaelt unausgefuellte Platzhalter: {', '.join(stubs)}"]
     return []
 
 

@@ -41,6 +41,8 @@ Inhaltliche Mindestform — drei Pflichten:
 
 1. **Substanz:** Mindestens zwei Sätze (gemessen an Satzendezeichen
    außerhalb von Code-Blöcken), die *was* gelernt wurde benennen.
+   Unausgefüllte Template-Platzhalter (`<…>`) zählen nicht — der blanke
+   Template-Rumpf brächte die Satz-Schwelle sonst allein mit.
 2. **Konkretheit:** Keine der bekannten Floskeln (`see PR`, `n/a`,
    `siehe Ticket`, `wird nachgereicht`, `fertig`, `ok`, `läuft jetzt`).
 3. **Steering-Loop-Bezug:** Wo die Closure einen Steering-Loop-Eintrag
@@ -92,7 +94,7 @@ Modul 10), nicht des Gates.
 
 | Tooling | Regel | Make-Target |
 |---|---|---|
-| [`tools/check_closure_notes.py`](../../../tools/check_closure_notes.py) | Heading mit "Closure" + ≥2 Sätze außerhalb Code-Blöcken + keine Floskel | `make verify-closure-notes` |
+| [`tools/check_closure_notes.py`](../../../tools/check_closure_notes.py) | Heading mit "Closure" + ≥2 Sätze außerhalb Code-Blöcken + keine Floskel + keine unausgefüllten `<…>`-Platzhalter | `make verify-closure-notes` |
 
 `verify-closure-notes` ist in das aggregierte `verify`-Target
 eingehängt. Es läuft *nicht* in `make gates`, weil es eine DoD-/Closure-
@@ -113,4 +115,5 @@ Frage ist, keine Code-Architektur-Frage.
 |---|---|---|
 | 2026-06-02 | Proposed | Modul 11 Worked Example, Lab-Ausbau (Kurs-Welle 9) |
 | 2026-06-02 | Accepted | bestehende done-Dateien geprüft, beide bestehen |
+| 2026-06-03 | Fitness Function geschärft | Platzhalter-Prüfung ergänzt: Der Gate war grün auf dem unausgefüllten Template-Rumpf. Entscheidung unverändert — Pflicht 1 wurde nicht erweitert, sondern erst vollständig durchgesetzt |
 | 2026-06-03 | Korrektur | „zwei done-Dateien" (Option A · Geschichte *Accepted*) war falsch: drei, mit `welle-1-mvp.md`. Tatsachenangabe, Text oben unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)) |

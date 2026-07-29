@@ -415,8 +415,17 @@ Daraus folgt eine Arbeitsteilung:
    formgebunden** — drei Prüfungen, die ohne Urteil auskommen:
    **Form** (eine Slice-Kennung `slice-<NNN>`, kein Freitext) ·
    **Anzahl** (so viele Belege, wie der Zähler behauptet) ·
-   **Lage** (führt das Repo die Slice-Datei, liegt sie in `done/` — Belege
-   entstehen bei der Closure).
+   **Lage** (führt das Repo die Slice-Datei, liegt sie in `done/`).
+
+   > **Wann die Lage-Prüfung läuft — und warum das nicht beliebig ist.** Der
+   > Beleg wird **vor** dem `git mv` geschrieben, und die Hard Rule *git mv +
+   > Inhaltsänderung = zwei Commits* erzwingt, dass der `mv` ein eigener Commit
+   > ist. Auf dem Schreib-Commit liegt die frisch belegte Slice-Datei also noch
+   > nicht in `done/` — ein Sensor, der dort prüfte, meldete bei **jeder**
+   > korrekt ausgeführten Closure rot. Die Lage-Prüfung gehört deshalb zur
+   > Register-Paarung (c) und läuft mit ihr **nach** dem `git mv`, wie die
+   > beiden anderen Paarungen auch. Form und Anzahl sind davon unabhängig; sie
+   > prüfen den Registereintrag, nicht die Ablage.
 
    > **Grenze — ehrlich benannt:** Die *Existenz* der Datei wird **nicht**
    > verlangt. Ein Repo darf Slices führen, die es nicht als Plan-Datei ablegt

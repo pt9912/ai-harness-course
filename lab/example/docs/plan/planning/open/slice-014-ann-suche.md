@@ -63,7 +63,14 @@ für das DocSearch-Lab als Ganzes). Spec-Anker LH-QA-01 führt
 (Performance-Anforderung), flankiert von ADR-0004 (in Outline), Code folgt —
 kein Reconciliation, keine BF/Hybrid-Begründung nötig.
 
-**Vorgelagert — offene Beobachtungen gesichtet:** Register
+**Vorgelagert — Sub-Area-Wahl prüfen:** Drei berührte Sub-Areas, alle über der
+Schwelle: *Planning-Lifecycle*, *Implementierung* und
+*Replay-/Eval-Infrastruktur*. Keine ist zu grob; insbesondere wurde
+*Implementierung* **nicht** zu „Backend" zusammengezogen — Index- und
+Service-Schicht teilen hier dieselbe Konvention und dieselbe Inventur-Linie
+(`harness/conventions.md`), sind also eine Sub-Area, nicht zwei.
+
+**Vorgelagert — offene Beobachtungen sichten:** Register
 (`../observations.md`) durchgegangen. Berührt sind drei Sub-Areas aus der
 Modus-Tabelle (`harness/conventions.md`): *Planning-Lifecycle* (ADR-0004, §3),
 *Implementierung* (`internal/index/`, `internal/service/`, §3) und
@@ -76,7 +83,9 @@ er bewegt sie nicht — genau der Fall, den
 von der Berührung ausnimmt.
 
 **Zwei offene Treffer**, beide auf *Replay-/Eval-Infrastruktur*: `BEO-001` (2×)
-und `BEO-002` (1×) — ihr Zähler-Stand steht unten im *Evidenz-/Diskrepanz-Risiko*.
+und `BEO-002` (1×) — der Zähler-Stand steht hier, weil dieser Slice keinen
+Modus-Begründungsblock trägt: Alle berührten Sub-Areas sind GF, das Feld
+*Evidenz-/Diskrepanz-Risiko* existiert in dieser Datei also gar nicht.
 Dazu eine **verkörperte** Zeile auf *Implementierung*, `BEO-005`: Sie steht mit
 Zähler und Belegen im Register, trägt aber den Vermerk, wohin sie ging, und
 wirkt über `AGENTS.md` §2.7 von selbst — der Tie-Break dieses Slice fällt

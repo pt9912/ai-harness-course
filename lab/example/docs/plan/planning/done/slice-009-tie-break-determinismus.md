@@ -91,5 +91,20 @@ für das DocSearch-Lab als Ganzes). Der Slice setzt **keine** Konventions-Adapti
 Lese-Schritt der Welle-1-Closure aus `BEO-005`. Reine GF-Bewegung —
 keine BF/Hybrid-Begründung nötig.
 
+**Vorgelagert — Sub-Area-Wahl prüfen:** Drei berührte Sub-Areas, alle über der
+Schwelle (`harness/conventions.md` §Modus-Deklaration): *Implementierung*
+(`internal/index/`, `internal/service/`), *Test-Infrastruktur*
+(`test-determinism` als neues Target — eine neue Konvention, keine additive
+Arbeit unter der alten) und *Spec-Schreibung* (`spec/spezifikation.md` §1).
+Keine davon ist zu grob geschnitten; *Sensor-Werkzeuge* ist mitberührt, aber
+nur als Ablageort des Targets, nicht in seiner Konventions-Härte.
+
+**Vorgelagert — offene Beobachtungen sichten:** Register
+(`../observations.md`) durchgegangen. `BEO-005` (*Implementierung*) steht bei
+1× aus `slice-006` und trifft mit diesem Slice zum **zweiten** Mal dieselbe
+Sub-Area — Zähler auf 2×, Beleg ergänzt. Die Schwelle fällt erst mit
+`slice-012`; verkörpert wird beim Lese-Schritt der Welle-1-Closure, nicht
+hier. Auf *Test-Infrastruktur* und *Spec-Schreibung* steht keine Zeile.
+
 Voraussetzung-Wissen für den Block-Aufbau: Kurs
 [Modul 5 §Worked Mini-Example](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen).
