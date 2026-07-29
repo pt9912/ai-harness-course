@@ -154,6 +154,31 @@ erweitern):
    — Sync, Promotion, Cross-Reference, Acceptance — oder eine
    Folge-Slice-ID) schaltet die Sub-Area Richtung GF?
 
+#### Zwei Schritte vor der Modus-Begründung
+
+Bevor der erste Block geschrieben wird, laufen zwei Prüfungen. Sie hängen
+weder am Modus noch am Slice-Typ und stehen deshalb in **jedem** Slice-Plan —
+auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht:
+
+1. **Sub-Area-Wahl prüfen.** Jede Sub-Area, die der Slice als berührt führt,
+   muss das Inklusionskriterium erfüllen — drei Achsen, Schwelle ≥ 2
+   ([`grundlagen-konventionen.md` §Was ist eine Sub-Area?](grundlagen-konventionen.md#was-ist-eine-sub-area)).
+   Zu grobe Sub-Areas (*„Backend"*) werden **vorher** ausdifferenziert, sonst
+   trägt der Begründungsblock mehrere Modi vermischt und keiner davon ist
+   prüfbar.
+2. **Offene Beobachtungen sichten.** Das
+   [Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register-modul-6)
+   durchgehen: Steht eine der berührten Sub-Areas dort? Dann gehört der
+   Zähler-Stand ins Kriterium *Evidenz-/Diskrepanz-Risiko* — und erreicht der
+   Eintrag mit diesem Slice 3×, ist er keine Notiz mehr, sondern eine Lücke und
+   braucht einen eigenen Folge-Slice. **Keine Treffer sind ebenfalls eine
+   Antwort** und werden notiert.
+
+In einem Repo **ohne Wellen-Betrieb** ist der zweite Schritt der *einzige*
+Leser für alles, was unter der Schwelle steht — dort gibt es keine
+Wellen-Eröffnung, die sichtet. Fällt er weg, zählt das Register weiter und
+niemand schaut hin.
+
 Der Begründungsblock pro Sub-Area ist
 [**§8** des Slice-Plans](../templates/docs/plan/planning/slice.template.md):
 Modus (GF/BF/Hybrid) · Konventionen-Dichte · Phase-Reife · Evidenz-/

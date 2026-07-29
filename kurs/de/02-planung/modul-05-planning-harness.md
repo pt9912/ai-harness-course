@@ -250,6 +250,33 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
    — Sync, Promotion, Cross-Reference, Acceptance — oder eine
    Folge-Slice-ID) schaltet die Sub-Area Richtung GF?
 
+### Zwei Schritte vor der Modus-Begründung
+
+Bevor der erste Block geschrieben wird, laufen zwei Prüfungen. Sie hängen
+weder am Modus noch am Slice-Typ und stehen deshalb in **jedem** Slice-Plan —
+auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht:
+
+1. **Sub-Area-Wahl prüfen.** Jede Sub-Area, die der Slice als berührt führt,
+   muss das Inklusionskriterium erfüllen — drei Achsen, Schwelle ≥ 2
+   ([`konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)).
+   Zu grobe Sub-Areas (*„Backend"*) werden **vorher** ausdifferenziert, sonst
+   trägt der Begründungsblock mehrere Modi vermischt und keiner davon ist
+   prüfbar.
+2. **Offene Beobachtungen sichten.** Das
+   [Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register)
+   durchgehen: Steht eine der berührten Sub-Areas dort? Dann gehört der
+   Zähler-Stand ins Kriterium *Evidenz-/Diskrepanz-Risiko* — und erreicht der
+   Eintrag mit diesem Slice 3×, ist er keine Notiz mehr, sondern eine Lücke und
+   braucht einen eigenen Folge-Slice. **Keine Treffer sind ebenfalls eine
+   Antwort** und werden notiert; sonst ist ein ungeprüfter Slice nicht von
+   einem geprüften ohne Fund zu unterscheiden.
+
+Der zweite Schritt ist nicht nur Zuarbeit fürs dritte Kriterium. In einem Repo
+**ohne Wellen-Betrieb** ist er der *einzige* Leser für alles, was unter der
+Schwelle steht — dort gibt es keine Wellen-Eröffnung, die sichtet
+([Modul 6 §Das Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register)).
+Fällt er weg, zählt das Register weiter und niemand schaut hin.
+
 **Sub-Area 1 — Konventionen (vollständig ausformuliert, GF):**
 
 - *Konventionen-Dichte:* hoch. `harness/conventions.md` führt `MR-014`

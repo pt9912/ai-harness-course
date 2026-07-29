@@ -69,8 +69,10 @@ Baseline (MR-NNN, Modus pro Sub-Area)
 ## Template-Schichtung — was der Rumpf trägt und was der Kommentar
 
 Ein Template wird beim Adoptieren **abgebaut**: Platzhalter werden ersetzt, der
-Hinweis-Block entfernt, **alle HTML-Kommentare gelöscht**
-([`/lab/templates/README.md`](../../../lab/templates/README.md) §Verwendung).
+Hinweis-Block entfernt, **alle HTML-Kommentare gelöscht** — bis auf die
+`d-check:ignore`-Marker, die Falsch-Positive unterdrücken und bleiben müssen
+([`/lab/templates/README.md`](../../../lab/templates/README.md) §Verwendung,
+Schritt 5).
 Was danach noch dasteht, ist alles, was der Adopter Wochen später hat. Deshalb
 ist die Frage *„Rumpf oder Kommentar?"* keine Stilfrage, sondern eine
 Haltbarkeitsfrage — und sie hat vier Antworten, nicht zwei:
@@ -1012,10 +1014,9 @@ flowchart TB
     V --> C{"Wie oft?"}
     C -- "3x" --> E["Verkörperung<br/>Lese-Schritt: Welle-Closure —<br/>Repo ohne Wellen: die Slice-Closure<br/>Steering-Loop-Eintrag + Zielort<br/>(Regel/Sensor: liegt in; Spec-Lücke: LH-*)"]
 
-    C -- "1x / 2x: bleibt offen" --> F["Wellen-Eröffnung Schritt 2:<br/>offene Beobachtungen sichten"]
-    C -- "1x / 2x: bleibt offen" --> F2["Repo ohne Wellen:<br/>Slice-Planung sichtet<br/>(§8, Vorgelagert)"]
-    F --> G["Slice-Planung:<br/>Sub-Area-Modus-Begründung<br/>Kriterium 3"]
-    F2 --> G
+    C -- "1x / 2x: bleibt offen" --> F["Repo mit Wellen:<br/>Wellen-Eröffnung Schritt 2<br/>sichtet"]
+    C -- "1x / 2x: bleibt offen (Repo ohne Wellen)" --> G
+    F --> G["Slice-Planung §8:<br/>Vorgelagert — offene<br/>Beobachtungen sichten<br/>→ Evidenz-/Diskrepanz-Risiko"]
     G --> A
 
     E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-NN</b><br/>(wellenlos: seit slice-NNN)"]
@@ -1030,7 +1031,6 @@ flowchart TB
     style V fill:#fff4d6,stroke:#d4a017
     style E fill:#fff4d6,stroke:#d4a017
     style F fill:#d6ecff,stroke:#2a6fb5
-    style F2 fill:#d6ecff,stroke:#2a6fb5
     style G fill:#d6ecff,stroke:#2a6fb5
     style I fill:#d6ecff,stroke:#2a6fb5
     style K fill:#d6ecff,stroke:#2a6fb5

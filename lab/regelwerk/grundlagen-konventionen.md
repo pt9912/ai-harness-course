@@ -67,8 +67,9 @@ Baseline (MR-NNN, Modus pro Sub-Area)
 ### Template-Schichtung — was der Rumpf trägt und was der Kommentar
 
 Ein Template wird beim Adoptieren **abgebaut**: Platzhalter ersetzt,
-Hinweis-Block entfernt, **alle HTML-Kommentare gelöscht**
-([`../templates/README.md`](../templates/README.md) §Verwendung). Was danach
+Hinweis-Block entfernt, **alle HTML-Kommentare gelöscht** — bis auf die
+`d-check:ignore`-Marker, die Falsch-Positive unterdrücken und bleiben müssen
+([`../templates/README.md`](../templates/README.md) §Verwendung, Schritt 5). Was danach
 dasteht, ist alles, was der Adopter Wochen später hat. Vier Schichten:
 
 | Schicht | Inhalt | Überlebt das Adoptieren? |

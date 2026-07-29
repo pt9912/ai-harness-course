@@ -128,36 +128,24 @@ Backticks).
 
 ## 8. Sub-Area-Modus-Begründung
 
-**Status:** Diese Sektion steht in **jedem** Slice-Plan — was variiert, ist
-ihr Umfang. Die beiden *Vorgelagert*-Blöcke unten sind immer auszufüllen, auch
-bei reinem Refactor; der **Modus-Begründungsblock** danach ist Pflicht bei
-mindestens einer berührten Sub-Area in BF oder Hybrid. Bei reinem GF genügt
-dafür der Hinweis *"alle berührten Sub-Areas GF (siehe Baseline-Regelwerk
-`modul-05-planning-harness.md` §Ziel-Form: Sub-Area-Modus-Begründung)"*; bei
-reinem Refactor ohne neue Sub-Area-Berührung entfällt er ganz.
 Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
-§Ziel-Form: Sub-Area-Modus-Begründung — dort die vier Pflichtkriterien
-(Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko ·
-Reconciliation-Aufwand), vier und nicht mehr.
+§Ziel-Form: Sub-Area-Modus-Begründung — dort die **zwei vorgelagerten
+Schritte** (sie stehen in jedem Slice-Plan, unabhängig von Modus und
+Slice-Typ) und die **vier Pflichtkriterien** (Konventionen-Dichte ·
+Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand), vier und
+nicht mehr.
 
-**Vorgelagert — Sub-Area-Wahl prüfen:** Jede hier aufgeführte Sub-Area
-muss das Inklusionskriterium erfüllen (drei Achsen, Schwelle ≥ 2; siehe
-Baseline-Regelwerk `grundlagen-konventionen.md` §Was ist eine Sub-Area?).
-Zu grobe Sub-Areas (*"Backend"*) vorher ausdifferenzieren — sonst trägt
-der Begründungsblock mehrere Modi vermischt.
+**Umfang.** Der **Modus-Begründungsblock** unten ist Pflicht, sobald
+mindestens eine berührte Sub-Area BF oder Hybrid ist — einer pro Sub-Area. Bei
+reinem GF genügt der Hinweis *"alle berührten Sub-Areas GF"*; bei reinem
+Refactor ohne neue Sub-Area-Berührung entfällt er ganz. Die beiden
+*Vorgelagert*-Blöcke entfallen nie.
 
-**Vorgelagert — offene Beobachtungen sichten:** Das Beobachtungs-Register
-(`../observations.md`) durchgehen: Steht eine der hier
-berührten Sub-Areas dort? Dann gehört der Zähler-Stand unten ins
-*Evidenz-/Diskrepanz-Risiko* — und erreicht der Eintrag mit diesem Slice
-3×, ist er keine Notiz mehr, sondern eine Lücke und braucht einen eigenen
-Folge-Slice. Keine Treffer sind ebenfalls eine Antwort und werden
-notiert.
+**Vorgelagert — Sub-Area-Wahl prüfen:** <je berührter Sub-Area: erfüllt sie
+die Schwelle ≥ 2 von 3 Achsen? zu grobe vorher ausdifferenzieren>
 
-Beide *Vorgelagert*-Blöcke hängen weder am Modus noch am Slice-Typ: In einem
-Repo **ohne Wellen-Betrieb** ist der Sichtungs-Block der einzige Leser für
-alles, was unter der Schwelle steht (Baseline-Regelwerk `modul-06-roadmap.md`
-§Das Beobachtungs-Register).
+**Vorgelagert — offene Beobachtungen sichten:** <Register durchgegangen;
+je berührter Sub-Area der Treffer mit Zähler-Stand — oder "keine Treffer">
 
 <!-- Block für jede berührte Sub-Area duplizieren. Format identisch
 mit dem im Baseline-Regelwerk §Ziel-Form: Sub-Area-Modus-Begründung

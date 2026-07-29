@@ -63,7 +63,7 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
   `BEO-006` im **Beobachtungs-Register** (`../observations.md`)
   (Sub-Area *Planning-Lifecycle*: ungedeckt ist die Inventur-Linie der
   ADR-Ablage — ob ADRs aufwärts deklarieren, prüft niemand).
-  Auch ein wellenloser Slice trägt selbst
+  Auch ein Slice ohne Wellen-Zugehörigkeit trägt selbst
   ein — der Zähler hängt an der Slice-Closure, nicht an der Welle.
 
 ## 7. Closure-Notiz

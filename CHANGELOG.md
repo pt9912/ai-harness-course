@@ -31,7 +31,7 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
   Zeile im Register. *Nennung ohne Deckung ist eine Harness-Lüge* gilt jetzt auch
   hier.
 - **Der wellenlose Fall gilt auch für den Lese-Schritt** — und dafür musste das
-  **Herkunfts-Anker-Subsystem** mit: Ein Repo ohne laufende Welle löst den
+  **Herkunfts-Anker-Subsystem** mit: Ein Repo ohne Wellen-Betrieb löst den
   Lese-Schritt eigenständig aus; erreicht ein Eintrag 3×, wird er verkörpert, und
   der Anker lautet `seit slice-<NNN>` statt `seit welle-<NN>`. Nachgezogen wurden
   **alle** Normstellen dieses Subsystems, nicht nur die Einführung:
@@ -55,8 +55,8 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 - **Warum stehend statt in der Welle-Closure.** Die bisherige Sektion wurde von
   Closure zu Closure **übernommen** und hochgezählt. Das hängt an einer
   ungebrochenen Kette mit drei Bruchstellen: vergessene Übernahme setzt den
-  Zähler auf null, die erste Welle braucht eine Sonderregel, und ohne Welle gibt
-  es gar keinen Träger. Der feste Ort streicht alle drei — die Datei existiert ab
+  Zähler auf null, die erste Welle braucht eine Sonderregel, und ohne
+  Wellen-Betrieb gibt es gar keinen Träger. Der feste Ort streicht alle drei — die Datei existiert ab
   Repo-Beginn.
 - **Arbeitsteilung benannt, Werkzeug offen gelassen:** Das Urteil — *ist das
   dieselbe Beobachtung?* — fällt beim Schreiben, durch den Menschen, der die
@@ -167,12 +167,14 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 - **Der Anker `seit slice-<NNN>` löst auf `done/slice-<NNN>-<kurzer-titel>.md`
   auf** — die reale Namensform aus `slice.template.md`, maschinell
   `done/slice-<NNN>-*.md`. Die verkürzte Angabe traf keine einzige Datei.
-- **Die Normlast der Templates steht im Rumpf, nicht im Kommentar.**
+- **Die Normlast der Templates verlässt den Kommentar.** Schritt 5 der
+  *Verwendung* entfernt alle Kommentare — was dort stand, war beim Adopter weg.
   `slice.template.md` §7 und `welle-results.template.md`
-  §Steering-Loop-Einträge tragen Form und Regel jetzt als Body-Zeilen; die
-  Kommentare halten nur noch die Begründung. Schritt 5 der *Verwendung*
-  entfernt alle Kommentare — was dort stand, war beim Adopter weg. Dazu ein
-  DoD-Item für die drei Paarungen und ein Ruheort-Carveout in
+  §Steering-Loop-Einträge tragen seither **Form** als Body-Zeilen und einen
+  **Regelwerk-Zeiger** auf den Normtext; der Kommentar hält nur noch die
+  Begründung. Das ist dieselbe Setzung wie §Template-Schichtung oben, nicht
+  ihre Gegenrede: Der Normtext selbst steht im Regelwerk, nicht im Rumpf.
+  Dazu ein DoD-Item für die drei Paarungen und ein Ruheort-Carveout in
   `welle.template.md`.
 
 ## Welle 58 — 2026-07-27 · Discovery-Register geschlossen: eine Beobachtung unter Schwelle, kein Plan

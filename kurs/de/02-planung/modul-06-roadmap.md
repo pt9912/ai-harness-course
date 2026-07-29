@@ -386,7 +386,15 @@ dem, der die Beobachtung gerade notiert hat und im Register nachsehen kann, ob
 es sie schon gibt: neuer Eintrag mit neuer `BEO-<NNN>`, oder Zähler erhöhen und
 Beleg ergänzen. **Das ist der Punkt, an dem der Zähler von der Welle unabhängig
 wird** — er läuft mit jedem geschlossenen Slice, ob dieser zu einer Welle gehört
-oder nicht. Die Welle-Closure *liest* dann nur noch: Was hat 3× erreicht?
+oder nicht.
+
+**Gelesen wird an zwei Stellen, nicht an einer.** Die **Welle-Closure** liest,
+was 3× erreicht hat — das ist der *Lese-Schritt*, und er verkörpert. Die
+**Slice-Planung** liest, was darunter steht — das ist der *Sichtungs-Schritt*
+(§8 des Slice-Plans, [Modul 5](modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)),
+und er hält die Einträge unter der Schwelle am Leben. Wer nur den ersten
+kennt, hat ein Register, in dem alles unter 3× nie wieder angesehen wird —
+und damit einen Zähler, der zählt, aber nichts steuert.
 
 **Was Maschine kann und was nicht.** Das Urteil — *ist das dieselbe
 Beobachtung wie beim letzten Mal?* — fällt beim Schreiben, durch den
@@ -428,7 +436,7 @@ einen Carveout-Index oder einen ADR-Index ehrlich hält.
 Steering-Loop-Einträge der laufenden Welle-Closure und wird dort zur
 verkörperten Regel — mit Herkunfts-Anker
 ([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
-Ohne laufende Welle geschieht dasselbe beim Lese-Schritt, den dann die
+Ohne Wellen-Betrieb geschieht dasselbe beim Lese-Schritt, den dann die
 Slice-Closure selbst auslöst (§Wann Arbeit eine Welle braucht); der Anker
 lautet dann `seit slice-<NNN>`.
 Im Register bleibt die Zeile mit dem Vermerk stehen, wohin sie ging; gestrichen
@@ -673,7 +681,7 @@ nach dem Roadmap-Bau. Modul-spezifische Trigger:
 | Braucht ein Tool-Pin-Slice eine Welle? | "Ein Slice ist zu klein für eine Welle." — Größen-Argument, zufällig richtig. | Nein, begründet über die **Closure-Bedingung**: Der Trigger könnte nur die DoD des Slice abschreiben, es fehlt das *Mehr*. Der Slice läuft ohne Welle und erscheint nicht in der Roadmap; sein Steering-Loop-Eintrag wird bei der **Slice-Closure** ins Beobachtungs-Register eingetragen, gelesen wird es bei der nächsten Welle-Closure. | + Gegenprobe am Größen-Argument: Ein *einzelner* Slice, dessen Abschluss zusätzlich einen grünen Replay-Lauf gegen das Golden Set verlangt, **ist** eine Welle — die Bedingung ist repo-weit und steht in keiner DoD. Wer „zu klein" antwortet, liegt hier falsch. |
 | Drei `grid-gym`-Ereignisse Welle/Meilenstein/Release zugeordnet? | höchstens eine Zuordnung richtig, Trigger fehlen oder lauten "ist halt fertig". | (a) **Welle** — Trigger: Closure-Kriterien erfüllt (alle Slices in `done/`, Gates grün), beobachtbar am Wave-Self-Close-Commit. (b) **Meilenstein** — Trigger: extern beobachtbarer Repo-Zustand (Determinismus belegt), keine interne Closure nötig. (c) **Release** — Trigger: ein Artefakt verlässt das Repo in eine Umgebung (Tag + Staging). | + Begründung über die Orthogonalität: ein Release kann mehrere Wellen umfassen, der Meilenstein liegt *neben* der Welle (externe Bestätigung), die Welle endet *durch* Closure — deshalb kann (b) eintreten, ohne dass (a) oder (c) am selben Tag liegen. |
 | Ersten Wellen-Eintrag aus `SL-101/102/103` entworfen? | Slices aufgelistet, aber Trigger ist ein Datum oder fehlt; kein Closure-Kriterium. | Vollständiger Mini-Block: Slice-IDs · *ein* beobachtbarer Trigger (kein Datum) · *ein* Closure-Kriterium; Bündelung begründet (z. B. "`SL-102` braucht `SL-101`, beide liefern erst zusammen prüfbaren Wert"). | + Schnitt-Begründung mit Gegenprobe: warum `SL-103` (Dashboard) *nicht* in dieselbe Welle gehört, wenn es ohne Cache keinen Mehrwert zeigt — und welcher Trigger es in die *nächste* Welle zieht. Der Entwurf nennt den Trigger so, dass ein Dritter ohne Rückfrage über "Welle fertig" entscheiden kann. |
-| Warum steht der Zähler in einer eigenen Datei? | "Ist übersichtlicher." — Ordnungsargument, keine Mechanik. | Die Übernahme-Kette bricht an drei Stellen: vergessene Übernahme setzt den Zähler auf null, die erste Welle braucht eine Sonderregel, und ohne Welle gibt es gar keinen Träger. Eingetragen wird bei der **Slice-Closure**, gelesen bei der Welle-Closure (was hat 3× erreicht). | + Der Unterschied *gezählt* vs. *verkörpert*: Ohne Welle läuft der Zähler weiter; in einem Repo **ohne Wellen-Betrieb** löst die Slice-Closure den Lese-Schritt selbst aus, und der Anker lautet `seit slice-<NNN>` — und die `BEO-<NNN>` macht die Zählung unabhängig vom Wortlaut der Bezeichnung. |
+| Warum steht der Zähler in einer eigenen Datei? | "Ist übersichtlicher." — Ordnungsargument, keine Mechanik. | Die Übernahme-Kette bricht an drei Stellen: vergessene Übernahme setzt den Zähler auf null, die erste Welle braucht eine Sonderregel, und ohne Welle gibt es gar keinen Träger. Eingetragen wird bei der **Slice-Closure**; gelesen an **zwei** Stellen — Welle-Closure (was hat 3× erreicht: *Lese-Schritt*) und Slice-Planung §8 (was steht darunter: *Sichtungs-Schritt*). | + Der Unterschied *gezählt* vs. *verkörpert*: Ohne Welle läuft der Zähler weiter; in einem Repo **ohne Wellen-Betrieb** löst die Slice-Closure den Lese-Schritt selbst aus, und der Anker lautet `seit slice-<NNN>` — und die `BEO-<NNN>` macht die Zählung unabhängig vom Wortlaut der Bezeichnung. |
 | Abhängigkeit Welle 3 → Welle 2 modelliert, Blocker erkannt? | "Welle 3 kommt nach Welle 2." — Reihenfolge genannt, keine Modellierung. | Abhängigkeit als expliziter Abhängigkeits-Trigger in der `Trigger`-Spalte von Welle 3 (z. B. „startet, wenn `welle-2-qualitaet` in Closure") + gerichtete Kante im Abhängigkeitsgraphen. | + Blocker-Kriterium benannt: Welle 2 ist Blocker, sobald Welle 3 *ohne* deren Closure nicht starten kann (Phantom-Welle) — und der Test dafür: würde Welle 3 jetzt starten, liefe ein Gate auf nicht-property-getesteter Basis. Reine Vorgängerin ohne harte Kante wäre kein Blocker. |
 
 ## Weiterlesen

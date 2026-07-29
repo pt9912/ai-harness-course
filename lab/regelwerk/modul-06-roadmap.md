@@ -46,7 +46,7 @@ Form, die Regeln der Inhalt.
   | **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
   | **Alle drei Paarungen** (a/b/c aus Closure-Schritt 3) | Slice-Closure | **nach** dem `git mv` — sie suchen in `done/` |
 
-  Ohne den Lese-Schritt bliebe der einzige Fall ungeprüft, in dem `seit slice-<NNN>` entsteht. Ohne den Sichtungs-Schritt hätte alles *unter* der Schwelle keinen Leser: In einem Repo mit Wellen trägt ihn die Wellen-Eröffnung Schritt 2 — ohne Welle findet die nicht statt.
+  Ohne den Lese-Schritt bliebe der einzige Fall ungeprüft, in dem `seit slice-<NNN>` entsteht. Ohne den Sichtungs-Schritt hätte alles *unter* der Schwelle keinen Leser: In einem Repo mit Wellen trägt ihn die Wellen-Eröffnung Schritt 2 — ohne Wellen-Betrieb findet die nicht statt.
 - **Einzige Berührung mit der Roadmap:** Liefert wellenlose Arbeit den letzten Beleg eines Meilensteins, bleibt die Spalte `Welle(n)` leer (`—`) und der Beleg steht als Slice-ID daneben — Beleg für eine externe Bedingung, nicht Zustand.
 
 ### Roadmap-Struktur: fünf Abschnitte (Modul 6)
@@ -99,7 +99,7 @@ Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
   vergibt die Kennung; Wiederauftreten zitiert sie und erhöht den Zähler. Ohne
   Kennung zählt eine Umformulierung als zweite Beobachtung, und keine erreicht
   je 3×. Das Register ist zugleich die Vergabestelle.
-- **Wer schreibt, wer liest:** Eingetragen wird bei der **Slice-Closure** — neuer Eintrag mit neuer `BEO-<NNN>` oder Zähler erhöhen und Beleg ergänzen. Das macht den Zähler von der Welle unabhängig: Er läuft mit jedem geschlossenen Slice. Die Welle-Closure *liest* nur noch, was 3× erreicht hat.
+- **Wer schreibt, wer liest:** Eingetragen wird bei der **Slice-Closure** — neuer Eintrag mit neuer `BEO-<NNN>` oder Zähler erhöhen und Beleg ergänzen. Das macht den Zähler von der Welle unabhängig: Er läuft mit jedem geschlossenen Slice. **Gelesen wird an zwei Stellen:** die **Welle-Closure** liest, was 3× erreicht hat (*Lese-Schritt*, verkörpert); die **Slice-Planung** liest, was darunter steht (*Sichtungs-Schritt*, §8 des Slice-Plans — [Modul 5](modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)). Wer nur den ersten kennt, sieht alles unter 3× nie wieder an.
 - **Mensch urteilt, Maschine prüft Deckung.** Das Urteil *ist das dieselbe Beobachtung?* fällt beim Schreiben (Kennung vergeben oder zitieren). Maschinell entscheidbar ist nur die Deckung: ob eine in `done/` zitierte `BEO-<NNN>` eine Registerzeile hat **und ob jede Registerzeile mindestens einen Beleg trägt** — die maschinelle Hälfte der Register-Paarung (c). *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo zitiert": Die allermeisten stehen unter der Schwelle und sind nirgends zitiert. Muster: schreiben → committen → Gate prüft. Welches Werkzeug, ist Repo-Entscheidung.
 - **Der Beleg ist formgebunden** — drei Prüfungen ohne Urteil: **Form** (Slice-Kennung `slice-<NNN>`, kein Freitext) · **Anzahl** (so viele wie der Zähler) · **Lage** (führt das Repo die Slice-Datei, liegt sie in `done/`). **Grenze:** Die *Existenz* der Datei wird nicht verlangt — ein Repo darf Slices führen, die es nicht als Plan-Datei ablegt; ein Sensor, der sie einforderte, liefe auf jedem gewachsenen Repo rot. Ein erfundenes `slice-999` bleibt damit unentdeckt; das ist die Grenze der Deklaration und gehört benannt.
 - **Bei 3×** wandert der Eintrag in die Steering-Loop-Einträge der laufenden

@@ -318,8 +318,8 @@ Register und findet den Eintrag, egal aus welchem Slice er stammt. Der Anker
 `seit slice-<NNN>` und die Slice-Closure als Lese-Schritt gehören zum
 **wellenlosen Repo** — dem Fall, in dem es gar keine Welle-Closure gibt
 ([Modul 6 §Wann Arbeit eine Welle braucht](../02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
-Wer beides gleichsetzt, verlegt den Lese-Schritt an einen Ort, an dem ihn
-niemand ausführt.
+Wer die Slice-Zugehörigkeit mit dem Repo-Modus verwechselt, verlegt den
+Lese-Schritt an einen Ort, an dem ihn niemand ausführt.
 
 Maßstab: Die Antwort trennt *eintragen* (Slice-Closure) von *lesen*
 (Welle-Closure) und benennt, dass die Verkörperung am **Lese-Schritt** hängt, nicht am Zähler.

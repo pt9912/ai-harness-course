@@ -25,10 +25,10 @@ mitnimmt.
 Die `done/`-Slices sind im Beispiel nur exemplarisch vertreten; welche, sagt
 `make plan-status`. Jede Datei dort trägt eine Closure-Sektion — Slice-Plan wie
 Welle-Plan wie Closure-Notiz —, das verlangt ADR-0011, und
-`make verify-closure-notes` prüft es. `slice-020` ist das
-Vorbild für einen **wellenlosen** Slice (Kurs Modul 6 §Wann Arbeit eine
-Welle braucht) — genauer: für einen Slice **ohne Wellen-Zugehörigkeit** in
-einem Repo, das Wellen schneidet.
+`make verify-closure-notes` prüft es. `slice-020` ist das Vorbild
+für einen Slice **ohne Wellen-Zugehörigkeit** in einem Repo, das Wellen
+schneidet (Kurs Modul 6 §Wann Arbeit eine Welle braucht). *Wellenlos* ist
+dieses Repo nicht — das wäre der Repo-Modus, und der lautet hier: mit Wellen.
 
 ## Slices vs. Wellen — zwei Ablagen, dieselbe Regel
 
