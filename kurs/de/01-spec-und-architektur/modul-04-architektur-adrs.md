@@ -19,7 +19,7 @@ reichen die Ein-Satz-Anker:
 
 ## Engage
 
-Du fragst deinen Implementation-Agent: *"Warum hast du den Layer
+Du fragst deinen Implementer-Agent: *"Warum hast du den Layer
 Service direkt mit Runtime verbunden, ohne Adapter?"* — er antwortet:
 *"Schien die einfachste Lösung."* In einem Repo *mit* ADR hätte er
 antworten müssen: *"ADR-7 verbietet das. Adapter ist Pflicht."* Welcher
@@ -50,7 +50,7 @@ Nach diesem Modul kannst du:
 
 ## Harness-Einordnung
 
-ADR = *inferential feedforward* (für den Implementation-Agent) und
+ADR = *inferential feedforward* (für den Implementer-Agent) und
 gleichzeitig Quelle für *computational feedback* (ArchUnit/Fitness
 Functions, wenn die Entscheidung maschinell prüfbar ist). Eine ADR ohne
 Fitness Function ist eine Absichtserklärung.
@@ -106,7 +106,7 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 - **"Eine ADR ohne Fitness Function ist eine ADR."** — Eine ADR ohne Fitness Function ist eine Absichtserklärung. Wer architecture fitness im Kopf hat, schreibt parallel den ArchUnit-Test.
 - **"MADR ist Pflicht."** — MADR ist ein Format unter mehreren (auch Nygard, Tyree/Akerman). Wichtig ist, dass dein Repo *eines* konsequent benutzt.
 - **"Architektur ist Bilder zeichnen."** — Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur in diesem Kurs heißt: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
-- **"ADRs sind Dokumentation, nicht Constraints."** — Klingt harmlos, ist die folgenreichste Fehlvorstellung in diesem Modul. Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementation-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Worked Example in [Modul 13 §Worked Example "ADR → import-linter"](../04-qualitaet/modul-13-quality-gates.md#worked-example-a-vom-adr-satz-zur-fitness-function) zeigt, was die Übersetzung kostet (kleine Tabelle: ADR-Satz, Werkzeug, Make-Target, Failure-Beispiel). Wer das nicht macht, dokumentiert *Hoffnung*.
+- **"ADRs sind Dokumentation, nicht Constraints."** — Klingt harmlos, ist die folgenreichste Fehlvorstellung in diesem Modul. Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementer-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Worked Example in [Modul 13 §Worked Example "ADR → import-linter"](../04-qualitaet/modul-13-quality-gates.md#worked-example-a-vom-adr-satz-zur-fitness-function) zeigt, was die Übersetzung kostet (kleine Tabelle: ADR-Satz, Werkzeug, Make-Target, Failure-Beispiel). Wer das nicht macht, dokumentiert *Hoffnung*.
 
 Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
 

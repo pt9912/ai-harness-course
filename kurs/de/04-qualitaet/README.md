@@ -1,6 +1,6 @@
 # Phase 4 — Qualität
 
-Vier Module, die das Ergebnis eines Implementation-Agenten so prüfen,
+Vier Module, die das Ergebnis eines Implementer-Agenten so prüfen,
 dass man ihm nicht blind vertrauen muss.
 
 | Modul | Inhalt |

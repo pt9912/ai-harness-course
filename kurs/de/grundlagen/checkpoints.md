@@ -51,7 +51,7 @@ Slices und bewege sie durch die Lifecycle-Verzeichnisse.
    mit Auflösungs-Trigger oder begründeter Permanenz.
 
 **Selbsttest:**
-- Kann ein Implementation-Agent jeden Slice in *einem* Lauf abschließen, ein Reviewer den Diff *in einer Sitzung* prüfen? Wenn nein: zu groß.
+- Kann ein Implementer-Agent jeden Slice in *einem* Lauf abschließen, ein Reviewer den Diff *in einer Sitzung* prüfen? Wenn nein: zu groß.
 - Hat dein temporärer Carveout einen *Folge-Slice* mit ID? Wenn nein: er ist faktisch permanent.
 - Ist deine Roadmap eine Reihenfolge von Wellen, *nicht* von Terminen?
 
@@ -64,12 +64,12 @@ Wer hier hängenbleibt, sollte Modul 5–7 erneut durchgehen. Lösungs-Vergleich
 ihn mit dem 8-Schritt-Workflow aus
 [Modul 9](../03-agenten/modul-09-implementierung.md#minimal-agent-workflow-8-schritte).
 
-1. Implementation-Agent läuft mit AGENTS.md *und* ohne — vergleiche die Diffs.
+1. Implementer-Agent läuft mit AGENTS.md *und* ohne — vergleiche die Diffs.
 2. Dokumentiere zwei Hard Rules für dein Repo (jeweils mit Falsch/Richtig-Beispiel und Begründung).
 3. Mindestens *eine* Hard Rule muss durch eine Fitness Function (Linter, ArchUnit, dep-cruiser) maschinell durchgesetzt sein.
 
 **Selbsttest:**
-- Hat dein Implementation-Agent vor der Codegenerierung einen Plan ausgegeben?
+- Hat dein Implementer-Agent vor der Codegenerierung einen Plan ausgegeben?
 - Kannst du den Lauf reproduzieren? (Replay-Voraussetzung, Phase 04)
 - Liegt jede Hard Rule in *einem oder zwei* Quadranten der 2×2-Matrix (siehe [`klassifikation.md`](klassifikation.md))?
 

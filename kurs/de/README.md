@@ -104,8 +104,8 @@ mit einem eigenen Zuordnungs-Item — Abgleich gegen
 | [5](02-planung/modul-05-planning-harness.md) | Slices über die Lifecycle-Verzeichnisse `open → next → in-progress → done` bewegen |
 | [6](02-planung/modul-06-roadmap.md) | eine Roadmap mit Wellen, Triggern und Closure-Kriterien aufbauen |
 | [7](02-planung/modul-07-carveouts.md) | Carveouts (temporär/permanent) sauber dokumentieren und mit Folge-Slices verknüpfen |
-| [8](03-agenten/modul-08-agentenrollen.md) | Aufgaben zwischen Planner-, Architect-, Implementation-, Reviewer-, Verification- und Validation-Agent zuordnen |
-| [9](03-agenten/modul-09-implementierung.md) | einen Slice mit einem Implementation-Agent umsetzen und die Architekturkonformität wahren |
+| [8](03-agenten/modul-08-agentenrollen.md) | Aufgaben zwischen Planner-, Architect-, Implementer-, Reviewer-, Verifier- und Validator-Agent zuordnen |
+| [9](03-agenten/modul-09-implementierung.md) | einen Slice mit einem Implementer-Agent umsetzen und die Architekturkonformität wahren |
 | [10](04-qualitaet/modul-10-review-harness.md) | Findings nach HIGH/MEDIUM/LOW/INFO klassifizieren und einen Review-Lauf reproduzierbar machen |
 | [11](04-qualitaet/modul-11-verification.md) | Plan-gegen-Code-Diffs automatisch verifizieren und DoD-Verletzungen erkennen |
 | [12](04-qualitaet/modul-12-replay-evaluierung.md) | Replay-Läufe mit Golden Sets fahren und Regressionen messen |

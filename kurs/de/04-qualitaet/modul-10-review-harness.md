@@ -241,7 +241,7 @@ als neue Datei statt Überschreibung.
 **Der Report ist ein Lauf-Beleg, kein Wissensspeicher.** Er belegt
 *diesen Diff, mit diesem Skill, diesem Modell, diesem Verdikt* — sein
 Konsument ist der Implementer im selben Zyklus (Rückkante Review →
-Implementation) und später der Audit. Über Läufe hinweg wird er **nicht
+Implementer) und später der Audit. Über Läufe hinweg wird er **nicht
 wieder gelesen**, und er muss es nicht: Das steuerungsrelevante Signal
 ist nicht der Report, sondern die **Finding-Klasse**. Sie wird in der
 Summary-Zeile benannt und bei der Slice-Closure (§7) ins

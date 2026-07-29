@@ -38,7 +38,7 @@ Image-Hash-Vorgriff in
 
 ## Engage
 
-Du gibst deinem Implementation-Agent einen Slice. Er liefert in vier
+Du gibst deinem Implementer-Agent einen Slice. Er liefert in vier
 Minuten 800 Zeilen Diff. Du prüfst — und findest, dass er die Hälfte aus
 einem ähnlichen Repo erfunden hat, weil deine AGENTS.md schwieg. Hätte
 er stattdessen erst einen *Plan* ausgegeben, hätte er nach 30 Sekunden
@@ -78,7 +78,7 @@ Ein Agent ohne Plan schreibt Code. Ein Agent mit Plan schreibt das
 
 ## Minimal Agent Workflow (8 Schritte)
 
-Der Pfad, den jeder Implementation-Agent pro Slice durchläuft — und der
+Der Pfad, den jeder Implementer-Agent pro Slice durchläuft — und der
 in `harness/README.md` als Vertrag dokumentiert wird. Strukturfragen
 (Bindung-Klassen für die Sensors-Tabelle, Source-Precedence-Begründung,
 Modus pro Sub-Area, Adaptionen ggü. der adoptierten Baseline) leben
@@ -329,7 +329,7 @@ make agent-implement SLICE=slice-009
 ```
 
 Erwartete Beobachtung: Das Target erzeugt keinen Code. Es zeigt das
-Kontextpaket, das ein Implementation-Agent vor dem Plan lesen muss. Erst
+Kontextpaket, das ein Implementer-Agent vor dem Plan lesen muss. Erst
 wenn du dieses Paket benennen kannst, ist der freie Agentenlauf sinnvoll.
 
 > *Lab-Grenze:* Das Target zeigt nur das *Kontextpaket* (Schritte 1–3
@@ -349,7 +349,7 @@ Folge diesem Skelett:
 1. **Slice fixieren.** Wähle einen kleinen, gut abgegrenzten Slice —
    ideal `SL-014a` aus dem Worked Example oben. Friere Spec-/ADR-Stand
    und Modellversion ein.
-2. **Lauf A (mit AGENTS.md).** Starte den Implementation-Agenten mit
+2. **Lauf A (mit AGENTS.md).** Starte den Implementer-Agenten mit
    dem vollständigen Kontextpaket: Spec-Auszug, betroffene ADRs,
    AGENTS.md, Tool-Allowlist. Speichere Diff, Plan-Ausgabe und
    Schritt-8-Bericht in `runs/sl-014a-with-agents.md`.
@@ -399,9 +399,9 @@ Hard Rules. Modul-spezifische Trigger:
 ## Selbstcheck
 
 * **(Erinnern)** Nenne die acht Schritte des Minimal Agent Workflow in Reihenfolge.
-* **(Anwenden — aktiviert LZ 1)** Dein Implementation-Agent durchläuft den 8-Schritt-Workflow und stößt in Schritt 6 (`make gates`) auf einen roten `arch-check` (ADR-Verstoß durch einen direkten Import). Welche *Rücksprungkante* nimmst du — zurück zu Schritt 1 (Kontext neu lesen) oder Schritt 4 (Plan verfeinern)? Begründe die Wahl und nenne die konkrete Plan-Korrektur, die den Verstoß behebt.
-* Welche Eingaben braucht ein Implementation-Agent minimal, um nicht zu halluzinieren?
-* Wann ist ein Implementation-Agent fertig — wenn der Code kompiliert, oder wenn die DoD erfüllt ist?
+* **(Anwenden — aktiviert LZ 1)** Dein Implementer-Agent durchläuft den 8-Schritt-Workflow und stößt in Schritt 6 (`make gates`) auf einen roten `arch-check` (ADR-Verstoß durch einen direkten Import). Welche *Rücksprungkante* nimmst du — zurück zu Schritt 1 (Kontext neu lesen) oder Schritt 4 (Plan verfeinern)? Begründe die Wahl und nenne die konkrete Plan-Korrektur, die den Verstoß behebt.
+* Welche Eingaben braucht ein Implementer-Agent minimal, um nicht zu halluzinieren?
+* Wann ist ein Implementer-Agent fertig — wenn der Code kompiliert, oder wenn die DoD erfüllt ist?
 * Welche deiner Hard Rules wandert in welche Quadranten der 2×2-Matrix?
 * **(Bewerten — aktiviert LZ 4)** Wie misst du die Wirkung von AGENTS.md auf einen Agentenlauf — welche zwei Läufe vergleichst du, entlang welcher Achsen, und was hältst du dabei konstant?
 * **(Bewerten + Metakognition)** Welcher Schritt des 8-Schritt-Workflows ist in deinem eigenen Repo heute am schwächsten verankert — und woran erkennst du das?

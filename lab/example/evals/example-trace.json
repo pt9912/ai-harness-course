@@ -6,7 +6,7 @@
     {
       "span_id": "s1",
       "kind": "input",
-      "agent_role": "Implementation",
+      "agent_role": "Implementer",
       "summary": "Slice-Plan und Source-Precedence werden gelesen.",
       "artifacts": [
         "harness/README.md",

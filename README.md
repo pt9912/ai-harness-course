@@ -66,7 +66,7 @@ Die Module sind in Entwicklungsphasen gegliedert:
 | [00 Einführung](kurs/de/00-einfuehrung/) | 0 | Agent · LLM · Harness |
 | [01 Spezifikation und Architektur](kurs/de/01-spec-und-architektur/) | 1–4 | Lebenszyklus · Harness-Bootstrap · Lastenheft · ADRs |
 | [02 Planung](kurs/de/02-planung/) | 5–7 | Slice-Lifecycle · Roadmap · Carveouts |
-| [03 Agenten](kurs/de/03-agenten/) | 8–9 | Rollen · Implementation-Agent |
+| [03 Agenten](kurs/de/03-agenten/) | 8–9 | Rollen · Implementer-Agent |
 | [04 Qualität](kurs/de/04-qualitaet/) | 10–13 | Review · Verification · Replay · Quality Gates |
 | [05 Betrieb](kurs/de/05-betrieb/) | 14–16 | Docker · Observability · Produktion |
 | [Abschluss](kurs/de/abschluss/) | — | Abschlussprojekt · Quellen |

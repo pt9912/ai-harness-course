@@ -16,7 +16,7 @@
 
 Onboarding-Briefing für jede AI-Session, die in diesem Repo Code oder
 Dokumentation ändert. Sie verweist auf die kanonischen Quellen und
-formuliert die Hard Rules, die der Implementation-Agent immer
+formuliert die Hard Rules, die der Implementer-Agent immer
 einhalten muss.
 
 **Bei Konflikt zwischen dieser Datei und einer kanonischen Quelle gilt

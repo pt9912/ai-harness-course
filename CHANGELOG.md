@@ -78,6 +78,21 @@ und `make verify` waren die ganze Zeit grün.
   Adopter kein Review einrichtet, hat die Hard Rule keinen Träger — das ist
   der Auslieferungszustand, kein Sonderfall.
 
+### Nachgezogen
+
+- **Eine Bezeichnung pro Agentenrolle.** Die kanonische Sechserliste stand im
+  Repo in **vier** Fassungen; zwei Rollen hatten Doppelnamen
+  (`Implementation`/`Implementer`, `Verification`/`Verifier`). Kanon ist jetzt
+  durchgehend das Akteursnomen — **Planner · Architect · Implementer ·
+  Reviewer · Verifier · Validator** —, denn fünf der sechs waren es schon; nur
+  eines war ein Vorgangsnomen. Mitgezogen: 57 Komposita
+  (`Implementation-Agent` → `Implementer-Agent`), die Mermaid-Teilnehmer, die
+  Übergabe-Ketten, die Selbstcheck-Rubrik, die `agent.role`-Werte im
+  Trace-Fixture und die Attributions-Tabelle in `modul-15-loesung.md`.
+  *Implementation* und *Verification* bleiben, wo sie die **Tätigkeit** meinen
+  (Modul 11 heißt weiter *Verification Harness*, das Begriffspaar
+  Verification/Validation bleibt unangetastet).
+
 ### Lab
 
 - **Der Closure-Note-Gate war grün auf dem blanken Template-Rumpf.** Break-Test
@@ -1122,7 +1137,7 @@ wurden. Ergebnis: eine ist harmlos, eine war der nächste write-only-Fall.
   Andocken. Jetzt drei Schritte, deren mittlerer der ist, den Teams zuerst
   weglassen: *offene Beobachtungen der letzten Closure sichten*. Explizit
   abgegrenzt: `done/` kommt **nicht** in den Lauf-Kontext des
-  Implementation-Agenten — das ist Planungs-Leistung, und was die Schwelle
+  Implementer-Agenten — das ist Planungs-Leistung, und was die Schwelle
   erreicht hat, wirkt ohnehin über die verkörperte Form (Modul-0-Prinzip).
 
 ### Geändert

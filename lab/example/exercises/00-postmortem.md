@@ -2,7 +2,7 @@
 
 ## Ausgangslage
 
-Ein Implementation-Agent sollte `slice-009` umsetzen. Er hat direkt Code
+Ein Implementer-Agent sollte `slice-009` umsetzen. Er hat direkt Code
 geschrieben, ohne `harness/README.md` zu lesen. Die Tests waren lokal
 gruen, aber die Reihenfolge gleicher Scores war im CI nicht
 deterministisch.

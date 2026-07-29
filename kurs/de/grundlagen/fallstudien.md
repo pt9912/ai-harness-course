@@ -94,4 +94,4 @@ die Konzepte des Kurses besonders tragen:
 - **Interne Developer-Tools:** Replay und Golden Sets verhindern, dass eine Modellaktualisierung über Nacht das Team ausbremst.
 - **Embedded LLM-Anwendungen:** Quality Gates müssen Latenz- und Kostenbudgets als harte Constraints prüfen, nicht nur Korrektheit.
 - **Plattform-Teams:** Carveout-Management und Roadmap-Engineering skalieren über mehrere Teams hinweg — der Harness wird zum Verträge-Mechanismus.
-- **Migration bestehender Codebasen:** Slice-Planung und Implementation-Agent sind das Werkzeug, mit dem große Refactorings auditierbar werden.
+- **Migration bestehender Codebasen:** Slice-Planung und Implementer-Agent sind das Werkzeug, mit dem große Refactorings auditierbar werden.

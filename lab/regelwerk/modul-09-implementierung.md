@@ -9,7 +9,7 @@ Ein Agent ohne Plan schreibt Code. Ein Agent mit Plan schreibt das
 
 ### Minimal Agent Workflow (8 Schritte)
 
-Der Pfad, den jeder Implementation-Agent pro Slice durchläuft — und der
+Der Pfad, den jeder Implementer-Agent pro Slice durchläuft — und der
 in `harness/README.md` als Vertrag dokumentiert wird. Strukturfragen
 (Bindung-Klassen für die Sensors-Tabelle, Source-Precedence-Begründung,
 Modus pro Sub-Area, Adaptionen ggü. der adoptierten Baseline) leben
@@ -146,7 +146,7 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
 
 - AGENTS.md ist die zentrale, maschinell lesbare Konventionsdatei
   (Hard Rules + Konventionen) und gehört in jeden Lauf-Kontext.
-- Minimale Eingaben eines Implementation-Agenten gegen Halluzination:
+- Minimale Eingaben eines Implementer-Agenten gegen Halluzination:
   `harness/README.md` + relevante kanonische Quelle +
   Requirement/ADR-IDs + AGENTS.md + Tool-Allowlist. Fehlende Eingaben
   werden *durch Raten ersetzt*, nicht durch Schweigen.
@@ -159,7 +159,7 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
   durchgesetzt; nur in AGENTS.md vergisst der Agent sie unter Druck,
   nur als Fitness Function ohne AGENTS.md-Eintrag versteht der Agent
   das *Warum* nicht.
-- Fertig ist ein Implementation-Agent bei DoD-erfüllt + Schritt 8
+- Fertig ist ein Implementer-Agent bei DoD-erfüllt + Schritt 8
   ausgeführt (Bericht über Sensors + Restrisiken). Kompilierender Code
   ist notwendig, nicht hinreichend. Ohne Schritt-8-Bericht wird jedes
   Risiko in die nächste Rolle (Reviewer/Verifier) verlagert — das

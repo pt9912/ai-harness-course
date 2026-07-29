@@ -5,12 +5,12 @@
 ## Vorgriff: 8-Schritt-Workflow
 
 Die Rollen-Sequenz und der Konfliktfall verweisen mehrfach auf den
-*Minimal Agent Workflow* (acht Schritte), den der Implementation-Agent
+*Minimal Agent Workflow* (acht Schritte), den der Implementer-Agent
 durchläuft. **Für Modul 8 reichen drei Anker:**
 
 | Anker | Was dahintersteht | Vollform |
 |---|---|---|
-| **Plan vor Code** | Implementation-Agent gibt vor dem ersten Diff einen Plan mit Akzeptanzkriterien aus. | [Modul 9 §Minimal Agent Workflow](modul-09-implementierung.md#minimal-agent-workflow-8-schritte) |
+| **Plan vor Code** | Implementer-Agent gibt vor dem ersten Diff einen Plan mit Akzeptanzkriterien aus. | [Modul 9 §Minimal Agent Workflow](modul-09-implementierung.md#minimal-agent-workflow-8-schritte) |
 | **Pre-completion Checklist** | Selbstprüfung des Agenten *vor* der Übergabe an Reviewer — Schritt 7/8 des Workflows. | [Modul 9 §Minimal Agent Workflow](modul-09-implementierung.md#minimal-agent-workflow-8-schritte), Schritte 7–8 |
 | **Steering-Loop-Eintrag** | Jeder Lauf endet mit einem expliziten Notiz-Block, der das nächste Sensor-/Guide-Wachstum vorbereitet. | [Modul 9 §Worked Example](modul-09-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow) (Schluss-Block) und [Reflexionsvorlage](../grundlagen/reflexion-vorlage.md) |
 
@@ -41,7 +41,7 @@ sequenceDiagram
     autonumber
     participant P as Planner
     participant A as Architect
-    participant I as Implementation
+    participant I as Implementer
     participant R as Reviewer
     participant Vf as Verifier
     participant Vl as Validator
@@ -92,7 +92,7 @@ meistens kein Skill:
 | Artefaktklasse | Wann | Rollen |
 |---|---|---|
 | **Template** (Slice, Roadmap, ADR) | Das Urteil ist an einem Artefakt verankert: *was* zu tun ist, steht in der Vorlage und im Vorgänger-Artefakt. | Planner · Architect |
-| **Briefing** (`AGENTS.md` + Workflow) | Das Urteil folgt einem festen Ablauf mit repo-weiten Regeln. | Implementation |
+| **Briefing** (`AGENTS.md` + Workflow) | Das Urteil folgt einem festen Ablauf mit repo-weiten Regeln. | Implementer |
 | **Skill-Datei** (`.harness/skills/*.md`) | Das Urteil ist *inferential* **und** beruht auf repo-spezifischem Wissen, das **aus keinem Artefakt ableitbar** ist. | Reviewer |
 | **keins** | Die Prüfgrundlage steht bereits im Slice (DoD, ADR-Bezüge) — oder liegt außerhalb des Repos. | Verifier · Validator |
 
@@ -118,7 +118,7 @@ Grundlage. Eine siebte *Rolle* ist das nicht.
 
 * `AGENTS.md` an der Lab-Wurzel plus die `AGENTS.md`-Dateien der
   Sprach-Skelette (`go/`, `python/`, `kotlin/`, `java/`, `csharp/`, `cpp/`) —
-  der Eingabe-Kontext, den ein Implementation-Agent geladen bekommt
+  der Eingabe-Kontext, den ein Implementer-Agent geladen bekommt
 * `make agent-implement SLICE=…` — Kontextpaket der Implementer-Rolle
 * `make agent-review` — Review-Fixture unter
   `exercises/09-review-fixture/` (Reviewer-Rolle; Übung in Modul 10)
@@ -141,7 +141,7 @@ Grundlage. Eine siebte *Rolle* ist das nicht.
 
 * Planner Agent
 * Architect Agent
-* Implementation Agent
+* Implementer Agent
 * Reviewer Agent
 * Verifier Agent (Verification)
 * Validator Agent (Validation)
@@ -159,7 +159,7 @@ macht. Wer geplant hat, prüft nicht; wer geschrieben hat, reviewt nicht.
 - **"Eine Person spielt alle Rollen."** — Geht — *aber mit unterschiedlichem Eingabe-Kontext und der je passenden Artefaktklasse* ([§Welche Rolle braucht welche Artefaktklasse](#welche-rolle-braucht-welche-artefaktklasse)). Sonst wiederholen sich die blinden Flecken. Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung.
 - **"Reviewer macht das Verification gleich mit."** — Nein. Reviewer prüft gegen Plan/ADR (Maintainability). Verification prüft gegen DoD/Spec (Behaviour/Architecture Fitness). Zwei Fragen, zwei Antworten.
 - **"Validation machen wir vor Release."** — Zu spät. Validation gehört *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
-- **"Architect entscheidet, Implementation widerspricht nicht."** — Implementation darf Folge-ADRs vorschlagen. Was sie *nicht* darf: stillschweigend einer ADR widersprechen.
+- **"Architect entscheidet, Implementer widerspricht nicht."** — Der Implementer darf Folge-ADRs vorschlagen. Was er *nicht* darf: stillschweigend einer ADR widersprechen.
 
 ## Worked Example: einen Konflikt-Pfad als Rollen-Sequenz mit Übergabe-Artefakten modellieren
 
@@ -315,8 +315,8 @@ Modul-spezifische Trigger:
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
-| Sechs Rollen in Reihenfolge? | Rollen genannt, aber Reihenfolge unklar | Planner → Architect → Implementation → Reviewer → Verifier → Validator. Übergaben jeweils mit Artefakt (Plan, ADR-Bezug, PR, Findings, Verifikationsbeleg, Validierungsbeleg). | + Hinweis: Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung. Eine Person kann mehrere Rollen spielen — aber nicht im selben Kontextfenster, sonst wiederholen sich blinde Flecken. |
-| Neun Übergabe-Artefakte? (die beiden Validator-Kanten nur bei MVP-Slices) | vier oder weniger genannt | Planner→Architect: Slice-Plan mit LH-Bezug · Architect→Planner: ADR-Bezug/Folge-ADR · Planner→Implementation: Slice in `in-progress/` · Implementation→Reviewer: PR mit Diff + Plan-Verweis · Reviewer→Implementation: Findings HIGH/MEDIUM/LOW/INFO · Implementation→Verifier: DoD-Bestätigung + Sensor-Belege · Verifier→Planner: DoD-/ADR-Konformitätsbericht + Plan-vs-Code-Diff · Verifier→Validator: Build-Artefakt + Slice-Resultat · Validator→Planner: Validierungsbeleg gegen realen Bedarf. | + Pointe: ohne *jedes* dieser Artefakte gibt es keinen Rollenwechsel — nur einen Kontext-Switch ohne Übergabe. Ein Rollen-Sprung ohne Artefakt ist der häufigste Pfad zu blinden Flecken. |
+| Sechs Rollen in Reihenfolge? | Rollen genannt, aber Reihenfolge unklar | Planner → Architect → Implementer → Reviewer → Verifier → Validator. Übergaben jeweils mit Artefakt (Plan, ADR-Bezug, PR, Findings, Verifikationsbeleg, Validierungsbeleg). | + Hinweis: Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung. Eine Person kann mehrere Rollen spielen — aber nicht im selben Kontextfenster, sonst wiederholen sich blinde Flecken. |
+| Neun Übergabe-Artefakte? (die beiden Validator-Kanten nur bei MVP-Slices) | vier oder weniger genannt | Planner→Architect: Slice-Plan mit LH-Bezug · Architect→Planner: ADR-Bezug/Folge-ADR · Planner→Implementer: Slice in `in-progress/` · Implementer→Reviewer: PR mit Diff + Plan-Verweis · Reviewer→Implementer: Findings HIGH/MEDIUM/LOW/INFO · Implementer→Verifier: DoD-Bestätigung + Sensor-Belege · Verifier→Planner: DoD-/ADR-Konformitätsbericht + Plan-vs-Code-Diff · Verifier→Validator: Build-Artefakt + Slice-Resultat · Validator→Planner: Validierungsbeleg gegen realen Bedarf. | + Pointe: ohne *jedes* dieser Artefakte gibt es keinen Rollenwechsel — nur einen Kontext-Switch ohne Übergabe. Ein Rollen-Sprung ohne Artefakt ist der häufigste Pfad zu blinden Flecken. |
 | Warum Verification *und* Validation? | "Verschiedene Prüfungen." | Verification: "Bauen wir es richtig?" (gegen Plan/DoD); Validation: "Bauen wir das Richtige?" (gegen realen Bedarf). | + Gefährlichster Fall: Verifikation grün, Validation rot — Team baut *perfekt das Falsche*. Umgekehrter Fall (Verifikation rot, Validation grün) ist Prozess-Drift, auch wenn das Ergebnis zufällig passt. |
 | Wer darf ein ADR ändern? | "Der Architekt." | Architect schreibt; Reviewer prüft auf Konsistenz; Implementer liest als Constraint; Accepted-ADRs *niemand* überschreibt — Folge-ADR mit `supersedes`. | + Konfliktpfad: Implementer darf höchstens Folge-ADR vorschlagen, niemals stillschweigend einer ADR widersprechen. Das wäre Drift, kein "pragmatisches Implementieren". |
 | Drei Tätigkeiten → Rollen-Zuordnung + Mehrfachzuweisung? | eine Rolle pro Tätigkeit ohne Begründung | (a) Folge-ADR-Vorschlag: Implementer schlägt vor → Architect entscheidet → Reviewer prüft auf Konsistenz. (b) DoD-Verletzung: Verifier *erkennt*, Planner *entscheidet* (Plan-Update vs. Slice-Rückführung). (c) Replay-Set-Update: Validator pflegt, Verifier nutzt — Mehrfachzuweisung, weil beide unterschiedlichen Kontext brauchen (Validator: Realität; Verifier: DoD/Spec). | + Hinweis: Mehrfachzuweisung ist *nur dann* sauber, wenn jede beteiligte Rolle einen *anderen Eingabe-Kontext* hat. Sonst ist es keine Mehrfachzuweisung, sondern doppelte Arbeit (und blinde Flecken). |

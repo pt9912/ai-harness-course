@@ -4,7 +4,7 @@
 
 ### Begriffe: Pre-completion Checklist Middleware und DoD-Verletzung
 
-* **Pre-completion Checklist Middleware** — eine vom Implementation-Agent
+* **Pre-completion Checklist Middleware** — eine vom Implementer-Agent
   selbst durchlaufene Checkliste *vor* der "fertig"-Meldung. Sie ist
   Schritt 8 des 8-Schritt-Workflows (siehe
   [Modul 9 §Minimal Agent Workflow](modul-09-implementierung.md#minimal-agent-workflow-8-schritte)).
@@ -67,7 +67,7 @@ Fitness Function selbst bauen. Der Ablauf:
   (Schwester-Skill zum Reviewer, Modul 10).
 - **Hard Rule in zwei Quadranten:** *inferential feedforward*
   (`AGENTS.md` sagt es) + *computational feedback* (Make-Target prüft
-  es); der Implementation-Agent läuft `make verify-*` **selbst** vor der
+  es); der Implementer-Agent läuft `make verify-*` **selbst** vor der
   „fertig"-Meldung (Pre-completion Checklist, Modul 9 Schritt 8). So
   fängt der Verifier genau das, was Tests nicht prüfen und der Reviewer
   übersieht — die fehlende Closure-Note ist kein Diff-Symptom.

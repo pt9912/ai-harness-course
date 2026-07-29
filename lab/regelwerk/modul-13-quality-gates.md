@@ -49,7 +49,7 @@ ausgelassen, nicht geschönt, nicht in einer Status-Spalte versteckt
 liegt in CI, siehe
 [`grundlagen/konventionen.md`](grundlagen-konventionen.md#harnessreadmemd-als-einstiegspunkt)).
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
-Implementation-Agent vertraut ihnen.
+Implementer-Agent vertraut ihnen.
 
 **Vorhanden ≠ behauptet.** Verboten ist ein *behauptetes* Gate ohne Deckung,
 nicht ein *vorhandenes* Target ohne Anspruch. Ein tool-generiertes Gate-Fragment

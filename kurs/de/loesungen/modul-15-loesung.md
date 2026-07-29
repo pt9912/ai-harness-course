@@ -85,7 +85,7 @@ Aggregat-Signal über Zeit.
 - **Behauptete-aber-fehlende Befehle** (Geister-Befehle) sind *sofort*
   gate-relevant — Schwelle 1, nicht X % — denn das ist die Hard Rule
   aus Modul 13 §Doku-Disziplin ("keine Befehle behaupten, die es nicht
-  gibt"), und der Implementation-Agent vertraut ihnen.
+  gibt"), und der Implementer-Agent vertraut ihnen.
 - **Vorwärts-Drift** (neues Target ohne AGENTS.md-Eintrag — die Doku
   hinkt nach) ist Rauschen bzw. MEDIUM-Pflegebedarf: niemand wird in
   die Irre geführt, es fehlt nur Abdeckung.
@@ -154,16 +154,15 @@ vorherigen Span nicht im Kontext gehalten.
 | Rolle | Spans | Input | Output | Summe | Anteil |
 |---|---|---|---|---|---|
 | Planner | `plan-1` | 1800 | 240 | 2040 | ~21 % |
-| Implementation | `impl-1`, `impl-2` | 3430 | 307 | 3737 | **~38 %** |
+| Implementer | `impl-1`, `impl-2` | 3430 | 307 | 3737 | **~38 %** |
 | Reviewer | `review-1` | 2600 | 510 | 3110 | ~32 % |
-| Verification | `verify-1` | 820 | 90 | 910 | ~9 % |
+| Verifier | `verify-1` | 820 | 90 | 910 | ~9 % |
 | **Gesamt** | | **8650** | **1147** | **9797** | 100 % |
 
-Größter Anteil: **Implementation** mit 3737 Token (~38 %). Hinweis
-zum Rollen-Raster: Das Fixture kennt weder einen Architect- noch einen
-Validator-Span und etikettiert die Verifier-Rolle als `Verification` — die Attribution
-folgt den *vorhandenen* Tags, fehlende Rollen erscheinen als 0, nicht
-als geratene Aufteilung.
+Größter Anteil: **Implementer** mit 3737 Token (~38 %). Hinweis zum
+Rollen-Raster: Das Fixture kennt weder einen Architect- noch einen
+Validator-Span; die Attribution folgt den *vorhandenen* Tags, fehlende Rollen
+erscheinen als 0, nicht als geratene Aufteilung.
 
 **Teil 3 — Sammelposten.** Im Fixture trägt jeder Span einen
 Rollen-Tag, ein Sammelposten kommt nicht vor. In realen Traces gilt:
@@ -257,7 +256,7 @@ Original bleibt unverändert):
 
 **Variante 1 — `tokens`-Feld von `impl-2` entfernt.** Unbeantwortbar
 wird der **Kosten-Drill-down des teuersten Calls** und damit die
-vollständige Token-Attribuierung pro Slice: Die Implementation-Rolle
+vollständige Token-Attribuierung pro Slice: Die Implementer-Rolle
 schrumpft scheinbar von 3737 auf 1070 Token, der Lauf von 9797 auf
 7130 — die Buchhaltungs-Frage aus dem Engage ("Was hat SL-024 / hier
 slice-009 gekostet?") bekommt eine *falsche*, keine fehlende Antwort.

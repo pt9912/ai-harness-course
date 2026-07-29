@@ -113,7 +113,7 @@ ausgelassen, nicht geschönt, nicht in einer Status-Spalte versteckt
 liegt in CI, siehe
 [`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt)).
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
-Implementation-Agent vertraut ihnen.
+Implementer-Agent vertraut ihnen.
 
 **Vorhanden ≠ behauptet.** Die Regel verbietet ein *behauptetes* Gate ohne
 Deckung — nicht ein *vorhandenes* Target ohne Anspruch. Ein tool-generiertes
@@ -275,7 +275,7 @@ benutze das `make`-Target. `make` läuft im gepinnten Image (Modul 14)."
 ### Welle 1 — die Regel bekommt einen Wächter (`MR-004`)
 
 **Beobachtung.** Drei Slices hintereinander, je im Lerneintrag notiert:
-der Implementation-Agent ruft `pytest -q` direkt auf. Lokal grün, im CI
+der Implementer-Agent ruft `pytest -q` direkt auf. Lokal grün, im CI
 rot — Python 3.12 gegen 3.11, exakt das Bild aus [§Engage](#engage).
 Einmal ist ein Vorfall, zweimal ein Symptom, dreimal eine **Lücke**
 ([Steering Loop](../grundlagen/klassifikation.md#steering-loop)).

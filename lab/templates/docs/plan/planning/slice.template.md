@@ -50,7 +50,7 @@ gehört zurück zur Zerlegung.
 ## 3. Plan (vor Code)
 
 <!-- BEDIENHINWEIS: Datei- oder Komponenten-Ebene reicht; der
-Implementation-Agent erweitert die Liste in seinem ersten Lauf. -->
+Implementer-Agent erweitert die Liste in seinem ersten Lauf. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-konventionen.md`
 §Was ist eine Sub-Area? — diese Liste ist die Pfad-Kandidatenliste für §8:

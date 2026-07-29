@@ -136,7 +136,7 @@ anlegen (`docs/plan/planning/<welle-id>.md`, Ziel-Form
 [`../templates/docs/plan/planning/welle.template.md`](../templates/docs/plan/planning/welle.template.md))
 und in der Roadmap als *Aktuelle Welle* eintragen.
 
-**Nicht** in den Lauf-Kontext: `done/` wird dem Implementation-Agenten
+**Nicht** in den Lauf-Kontext: `done/` wird dem Implementer-Agenten
 nicht geladen. Schritt 2 ist Planungs-Leistung — was die Schwelle
 erreicht hat, ist in AGENTS.md, Gates und Skills verkörpert und wirkt
 dort automatisch (Modul-0-Prinzip).

@@ -486,7 +486,7 @@ weglassen:
    **und in die Roadmap als *Aktuelle Welle* eintragen.** Der Zustand ist
    die Verzeichnis-Position, nicht ein Status-Feld.
 
-**Was hier bewusst *nicht* passiert:** Der Implementation-Agent bekommt
+**Was hier bewusst *nicht* passiert:** Der Implementer-Agent bekommt
 `done/` nicht in seinen Lauf-Kontext. Schritt 2 ist eine
 *Planungs*-Leistung — was die Schwelle erreicht hat, ist ohnehin in
 AGENTS.md, Gates und Skills verkörpert und wirkt dort automatisch

@@ -134,7 +134,7 @@ Iteration.
   Fehlvorstellungs-Block — offene Lücke, siehe §Offene `*`-Lücken).
 - "Reviewer macht das Verification gleich mit." — Modul 8
 - "Validation machen wir vor Release." — Modul 8
-- "Architect entscheidet, Implementation widerspricht nicht." — Modul 8
+- "Architect entscheidet, Implementer widerspricht nicht." — Modul 8
 - "Agent liefert schnell, also ist der Workflow Overhead." — Modul 9
 - "Mehr Kontext ist immer besser." — Modul 9 (Fehlvorstellungs-Block;
   Lopopolos Maxime sagt nur, dass *fehlender* Kontext schadet — nicht,
@@ -208,7 +208,7 @@ aufgeschlagen. Aktuell offen:
 
 | Präkonzept | Zielmodul | Warum heute offen | Vorschlag für die Konfrontation |
 |---|---|---|---|
-| "Ein Agent ist ein Chatbot mit Tools." | Modul 8 | implizit über die Rollen-Trennung adressiert, aber ohne expliziten Fehlvorstellungs-Block | Rollen-Argument: ein Chatbot führt *ein* Gespräch; ein Agentensystem trennt Planner/Architect/Implementation/Reviewer/Verifier/Validator mit eigenen Kontexten und Übergabe-Artefakten — die Differenz liegt in der Architektur, nicht im Tool-Zugriff. |
+| "Ein Agent ist ein Chatbot mit Tools." | Modul 8 | implizit über die Rollen-Trennung adressiert, aber ohne expliziten Fehlvorstellungs-Block | Rollen-Argument: ein Chatbot führt *ein* Gespräch; ein Agentensystem trennt Planner/Architect/Implementer/Reviewer/Verifier/Validator mit eigenen Kontexten und Übergabe-Artefakten — die Differenz liegt in der Architektur, nicht im Tool-Zugriff. |
 
 Wenn dir neue Präkonzepte begegnen: trag sie in der passenden Sammlung
 oben mit `*` ein und beschreibe sie in einer neuen Tabellen-Zeile hier

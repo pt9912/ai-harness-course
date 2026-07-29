@@ -6,7 +6,7 @@ Zugehöriges Modul: [Modul 8 — Agentenrollen](../03-agenten/modul-08-agentenro
 
 ### (Erinnern) Nenne die sechs Rollen in Reihenfolge
 
-Planner → Architect → Implementation → Reviewer → Verifier → Validator.
+Planner → Architect → Implementer → Reviewer → Verifier → Validator.
 
 Wichtig: Rollen-Trennung ist *Kontext-Trennung*, nicht Personen-Trennung.
 Eine Person kann mehrere Rollen spielen — aber nicht im selben
@@ -22,10 +22,10 @@ Sequenzdiagramm in
 
 1. **Planner → Architect:** Slice-Plan mit `LH-*`-Bezug
 2. **Architect → Planner:** ADR-Bezug bestätigt oder Folge-ADR
-3. **Planner → Implementation:** Slice in `in-progress/`
-4. **Implementation → Reviewer:** PR mit Diff + Plan-Verweis
-5. **Reviewer → Implementation:** Findings HIGH/MEDIUM/LOW/INFO
-6. **Implementation → Verifier:** DoD-Bestätigung + Sensor-Belege
+3. **Planner → Implementer:** Slice in `in-progress/`
+4. **Implementer → Reviewer:** PR mit Diff + Plan-Verweis
+5. **Reviewer → Implementer:** Findings HIGH/MEDIUM/LOW/INFO
+6. **Implementer → Verifier:** DoD-Bestätigung + Sensor-Belege
    (Übergabe erst *nach* Review-Schluss — so beschriftet das
    Sequenzdiagramm diesen Pfeil)
 7. **Verifier → Planner:** DoD-/ADR-Konformitätsbericht +
@@ -63,7 +63,7 @@ Korrekturen entstehen als neue ADR mit `supersedes ADR-N` (siehe
 [Hard Rule aus c-hsm-doc](../grundlagen/fallstudien.md) und
 [Lösung Modul 4](modul-04-loesung.md)).
 
-Der Implementation-Agent *liest* ADRs als Constraint und darf sie
+Der Implementer-Agent *liest* ADRs als Constraint und darf sie
 nicht ignorieren — er darf höchstens eine Folge-ADR vorschlagen, wenn
 er die Entscheidung im Implementierungs-Detail nicht halten kann.
 
@@ -127,10 +127,10 @@ Beispielsortierung (Nummerierung wie im Modul):
 | 2 | "Schneide das Feature in drei Slices" | Planner |
 | 3 | "Aktualisiere AGENTS.md mit einer neuen Hard Rule" | Architect (ADR-Folge) + Planner (Slice) |
 | 4 | "Prüfe, ob alle Akzeptanzkriterien aus LH-FA-3 erfüllt sind" | Verifier |
-| 5 | "Schreibe den Adapter für PostgreSQL" | Implementation |
+| 5 | "Schreibe den Adapter für PostgreSQL" | Implementer |
 | 6 | "Entscheide, ob `coverage-gate` 70 % oder 80 % verlangt" | Architect (ADR) + Planner (Slice für Schwelle) |
 | 7 | "Prüfe, ob das Feature das Benutzerbedürfnis trifft" | Validator |
-| 8 | "Schreibe einen Replay-Test gegen das Golden Set" | Implementation, im Auftrag des Verifiers |
+| 8 | "Schreibe einen Replay-Test gegen das Golden Set" | Implementer, im Auftrag des Verifiers |
 | 9 | "Wähle zwischen REST und gRPC" | Architect |
 | 10 | "Identifiziere, dass dieselbe Halluzination dreimal aufgetreten ist" | Planner (Steering-Loop-Eintrag) |
 
@@ -143,7 +143,7 @@ zwei *verschiedene* Eingabe-Kontexte):
   Kapazität). Entscheidung und Einplanung sind zwei Sichten — wer
   beides in einem Kontext macht, plant Schwellen ohne ADR-Bezug oder
   beschließt ADRs ohne Umsetzungspfad.
-- **#8 (Implementation + Verifier):** Der Implementer *schreibt* den
+- **#8 (Implementer + Verifier):** Der Implementer *schreibt* den
   Replay-Test (Kontext: Code), aber der Auftrag und das Golden Set
   kommen aus dem Verifier-Kontext (DoD/Spec). Würde der Implementer
   die Fälle selbst auswählen, prüfte er gegen seine eigene

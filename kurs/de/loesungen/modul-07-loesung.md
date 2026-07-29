@@ -31,7 +31,7 @@ neben Spec, ADR und Plan auditierbar — *nicht* (nur) im
 Issue-Tracker.
 
 Warum das zählt: Ein Carveout, der nur im Tracker existiert, taucht
-im `make gates`-Kontext nicht auf — ein Implementation-Agent sieht
+im `make gates`-Kontext nicht auf — ein Implementer-Agent sieht
 dann nicht, dass die Schwelle *bewusst* gesenkt wurde, und behandelt
 die Ausnahme als Normalzustand oder "repariert" sie wild. Das ist
 eine versteckte Spec-Lücke: Lopopolos Maxime gilt auch hier — was der

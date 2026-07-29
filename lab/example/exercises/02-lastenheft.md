@@ -22,6 +22,6 @@ Dateisystem, Datenbank, Cache oder externe API bedeutet.
 
 ## Selbsttest
 
-Dein Ergebnis ist brauchbar, wenn ein Implementation-Agent nicht mehr
+Dein Ergebnis ist brauchbar, wenn ein Implementer-Agent nicht mehr
 erraten muss, wo Daten gespeichert werden, welche Grenze fuer `k` gilt
 und was bei leerer Suchanfrage passieren soll.

@@ -834,7 +834,7 @@ Keine relevante Änderung ohne Bezug zu mindestens einem der folgenden Punkte:
 Das ist eine *computational feedforward*-Kontrolle (siehe
 [`klassifikation.md`](grundlagen-klassifikation.md#klassifikation-und-steering-loop)): ein Commit-Hook prüft, dass
 die Nachricht mindestens eine ID enthält. Billig, deterministisch, und
-sie zwingt den Implementation-Agent in die Source-Precedence-Kette zurück.
+sie zwingt den Implementer-Agent in die Source-Precedence-Kette zurück.
 
 <a id="herkunfts-anker"></a>
 

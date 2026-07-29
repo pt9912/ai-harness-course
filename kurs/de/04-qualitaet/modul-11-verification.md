@@ -17,7 +17,7 @@ Nach diesem Modul kannst du:
 * einen Plan-gegen-Code-Diff automatisch *prüfen* und das Ergebnis gegen Plan/DoD *interpretieren* (Bewerten · prozedural),
 * eine DoD-Verletzung *erkennen* und gegen ein Review-Finding *abgrenzen* (Analysieren · konzeptuell),
 * ADR-Konformität als Fitness Function *entwerfen* (auch dort, wo kein vorhandenes Werkzeug die ADR-Aussage 1:1 abbildet) (Erschaffen · prozedural),
-* die Pre-completion Checklist eines Implementation-Agenten *bewerten* und Lücken *identifizieren* (Bewerten · prozedural).
+* die Pre-completion Checklist eines Implementer-Agenten *bewerten* und Lücken *identifizieren* (Bewerten · prozedural).
 
 ## Lab-Bezug
 
@@ -39,7 +39,7 @@ Modul 11 liegt — hier reichen Kurzdefinitionen, damit der Lesefluss
 nicht abbricht (Isolated-Elements-Strategie, vgl. Image-Hash-Vorgriff in
 [Modul 12](modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14)):
 
-* **Pre-completion Checklist Middleware** — eine vom Implementation-Agent
+* **Pre-completion Checklist Middleware** — eine vom Implementer-Agent
   selbst durchlaufene Checkliste *vor* der "fertig"-Meldung. Sie ist
   Schritt 8 des 8-Schritt-Workflows (siehe
   [Modul 9 §Minimal Agent Workflow](../03-agenten/modul-09-implementierung.md#minimal-agent-workflow-8-schritte)).
@@ -78,7 +78,7 @@ nicht: "Ist es gut?"
 > **Wenn du ADR-Aussagen routiniert in maschinelle Prüfungen übersetzt — auch dann, wenn kein Standard-Tool den Fall 1:1 abbildet — springe zu [§Übungen](#übungen).** Modul 13 hat ein Worked Example für den Standardfall (ADR-0007 → import-linter). Dieses Worked Example zeigt den *Nicht-Standard*-Fall: eine ADR, deren Aussage kein bestehendes Werkzeug fertig prüft. Das ist der typische Fall in der Verifikations-Schicht, weil sie genau dort greift, wo Gates nicht reichen.
 
 **Ausgangs-ADR:** ADR-0011 sagt:
-> "Der Implementation-Agent darf nur Slices in `done/` verschieben,
+> "Der Implementer-Agent darf nur Slices in `done/` verschieben,
 > wenn das Slice-Frontmatter ein Feld `closure_note` mit mindestens
 > zwei Sätzen enthält (Lerneintrag-Pflicht; Modul 1 §Closure)."
 
@@ -184,7 +184,7 @@ Verifier hat *genau das* erkannt, was Tests nicht erkannt hätten und
 Reviewer übersehen würde (Reviewer prüft Diff gegen Plan/ADR — der
 fehlende Closure-Eintrag ist *kein* Diff-Symptom).
 
-**Schritt 7 — Pre-completion Checklist-Bezug.** Der Implementation-Agent
+**Schritt 7 — Pre-completion Checklist-Bezug.** Der Implementer-Agent
 soll vor "fertig"-Meldung *selbst* `make verify-closure-notes` laufen
 lassen. AGENTS.md-Eintrag:
 
@@ -247,7 +247,7 @@ Modul-spezifische Trigger:
 * **(Erinnern)** Welche drei Fragen-Klassen unterscheidet der Kurs: Review, Verifikation, Validation — in einem Halbsatz pro Klasse.
 * Warum reicht ein grünes Testsuite-Ergebnis nicht als Verifikation?
 * **(Analysieren — aktiviert LZ 2)** Drei Fundstücke aus demselben Agenten-Lauf: (A) das Coverage-Gate auf dem kritischen Pfad ist rot, obwohl die DoD "Gates grün" verlangt; (B) eine neue Funktion liest *und* schreibt den Index in einem Schritt — unschön, aber kein DoD-Punkt nennt es; (C) der Plan nennt den Endpoint `/export`, der Code liefert `/download`. Klassifiziere jedes als *DoD-Verletzung* oder *Review-Finding* und begründe die Abgrenzung: gegen welches Artefakt prüft die Rolle, die es fängt?
-* **(Bewerten — aktiviert LZ 4)** Ein Implementation-Agent meldet "fertig" mit dem Pre-completion-Bericht: *"Tests grün, Feature läuft. Restrisiken: minimal."* Plan und DoD verlangen zusätzlich einen Negativtest für den neuen öffentlichen Vertrag und einen Closure-Note-Eintrag. Bewerte den Bericht gegen Plan/DoD und benenne mindestens eine konkrete DoD-Lücke.
+* **(Bewerten — aktiviert LZ 4)** Ein Implementer-Agent meldet "fertig" mit dem Pre-completion-Bericht: *"Tests grün, Feature läuft. Restrisiken: minimal."* Plan und DoD verlangen zusätzlich einen Negativtest für den neuen öffentlichen Vertrag und einen Closure-Note-Eintrag. Bewerte den Bericht gegen Plan/DoD und benenne mindestens eine konkrete DoD-Lücke.
 * Wer löst den Konflikt, wenn Verification rot, Review grün ist?
 
 ### Selbstcheck-Rubrik

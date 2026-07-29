@@ -1,8 +1,8 @@
-# Uebung 08 — Implementation-Agent gefuehrt laufen lassen
+# Uebung 08 — Implementer-Agent gefuehrt laufen lassen
 
 ## Ziel
 
-Du laesst einen Implementation-Agent nicht frei codieren, sondern durch
+Du laesst einen Implementer-Agent nicht frei codieren, sondern durch
 den 8-Schritt-Workflow laufen.
 
 ## Startzustand

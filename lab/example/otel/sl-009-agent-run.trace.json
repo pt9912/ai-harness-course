@@ -14,7 +14,7 @@
     },
     {
       "span_id": "impl-1",
-      "agent.role": "Implementation",
+      "agent.role": "Implementer",
       "name": "tool_call",
       "tool.name": "make verify",
       "tool.arguments.redacted": {"SLICE": "slice-009"},
@@ -25,7 +25,7 @@
     },
     {
       "span_id": "impl-2",
-      "agent.role": "Implementation",
+      "agent.role": "Implementer",
       "name": "tool_call:writer.write_index",
       "tool.name": "writer.write_index",
       "tool.arguments.redacted": {"docs": 100, "target": "data/index/index.bin"},
@@ -47,7 +47,7 @@
     },
     {
       "span_id": "verify-1",
-      "agent.role": "Verification",
+      "agent.role": "Verifier",
       "name": "dod_check",
       "tool.name": "make verify",
       "tool.arguments.redacted": {"SLICE": "slice-009"},

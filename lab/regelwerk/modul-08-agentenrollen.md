@@ -14,7 +14,7 @@ sequenceDiagram
     autonumber
     participant P as Planner
     participant A as Architect
-    participant I as Implementation
+    participant I as Implementer
     participant R as Reviewer
     participant Vf as Verifier
     participant Vl as Validator
@@ -42,15 +42,15 @@ dieselbe Sicht denselben Fehler übersieht.
 ### Die neun Übergaben und ihre Artefakte (Modul 8)
 
 Sechs Rollen in der Reihenfolge, in der ein Slice sie typischerweise
-durchläuft: Planner → Architect → Implementation → Reviewer → Verifier
+durchläuft: Planner → Architect → Implementer → Reviewer → Verifier
 → Validator.
 
 - Planner→Architect: Slice-Plan mit LH-Bezug
 - Architect→Planner: ADR-Bezug/Folge-ADR
-- Planner→Implementation: Slice in `in-progress/`
-- Implementation→Reviewer: PR mit Diff + Plan-Verweis
-- Reviewer→Implementation: Findings HIGH/MEDIUM/LOW/INFO
-- Implementation→Verifier: DoD-Bestätigung + Sensor-Belege
+- Planner→Implementer: Slice in `in-progress/`
+- Implementer→Reviewer: PR mit Diff + Plan-Verweis
+- Reviewer→Implementer: Findings HIGH/MEDIUM/LOW/INFO
+- Implementer→Verifier: DoD-Bestätigung + Sensor-Belege
 - Verifier→Planner: DoD-/ADR-Konformitätsbericht + Plan-vs-Code-Diff
 - Verifier→Validator: Build-Artefakt + Slice-Resultat
 - Validator→Planner: Validierungsbeleg gegen realen Bedarf
@@ -97,7 +97,7 @@ die Artefaktklasse geführt, die ihr Urteil trägt:
 | Artefaktklasse | Wann | Rollen |
 |---|---|---|
 | **Template** (Slice, Roadmap, ADR) | Das Urteil ist an einem Artefakt verankert. | Planner · Architect |
-| **Briefing** (`AGENTS.md` + 8-Schritt-Workflow) | Das Urteil folgt einem festen Ablauf mit repo-weiten Regeln. | Implementation |
+| **Briefing** (`AGENTS.md` + 8-Schritt-Workflow) | Das Urteil folgt einem festen Ablauf mit repo-weiten Regeln. | Implementer |
 | **Skill-Datei** (`.harness/skills/*.md`) | Das Urteil ist *inferential* **und** beruht auf repo-spezifischem Wissen, das aus keinem Artefakt ableitbar ist. | Reviewer |
 | **keins** | Die Prüfgrundlage steht im Slice (DoD, ADR-Bezüge) oder liegt außerhalb des Repos. | Verifier · Validator |
 
@@ -161,5 +161,5 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
 - **Gegen "Eine Person spielt alle Rollen":** Geht — *aber mit unterschiedlichem Eingabe-Kontext und der je passenden Artefaktklasse* (siehe [§Welche Rolle braucht welche Artefaktklasse](#artefaktklasse-pro-rolle)). Sonst wiederholen sich die blinden Flecken. Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung.
 - **Gegen "Reviewer macht das Verification gleich mit":** Reviewer prüft gegen Plan/ADR (Maintainability). Verification prüft gegen DoD/Spec (Behaviour/Architecture Fitness). Zwei Fragen, zwei Antworten.
 - **Gegen "Validation machen wir vor Release":** Zu spät. Validation gehört *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
-- **Gegen "Architect entscheidet, Implementation widerspricht nicht":** Implementation darf Folge-ADRs vorschlagen. Was sie *nicht* darf: stillschweigend einer ADR widersprechen.
+- **Gegen "Architect entscheidet, Implementer widerspricht nicht":** Der Implementer darf Folge-ADRs vorschlagen. Was sie *nicht* darf: stillschweigend einer ADR widersprechen.
 

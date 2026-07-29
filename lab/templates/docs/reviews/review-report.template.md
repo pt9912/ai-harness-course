@@ -1,7 +1,7 @@
 # Review-Report: <slice-NN | PR-Ref> — <YYYY-MM-DD>
 
 > **Template-Hinweis.** Vorlage für einen Review-Report (das
-> Übergabe-Artefakt Reviewer → Implementation, Modul 8/10). Kopiere
+> Übergabe-Artefakt Reviewer → Implementer, Modul 8/10). Kopiere
 > nach `docs/reviews/<YYYY-MM-DD>-<slice-oder-diff-ref>.md`, ersetze
 > `<Platzhalter>` und lösche diesen Block. Ein Report pro Lauf —
 > Folgeläufe bekommen eine neue Datei, keine Überschreibung
@@ -87,7 +87,7 @@ in einem Archiv-Scan.
 typischerweise; eine Abweichung davon wird hier begründet, nicht
 still entschieden.
 
-**Übergabe:** Findings gehen an die Implementation (Rückkante
+**Übergabe:** Findings gehen an den Implementer (Rückkante
 Review → Plan bei Plan-Defekt); die **Finding-Klassen** gehen zusätzlich
 in die Slice-Closure §7 und von dort in den Zähler. Dieser Report selbst
 ist ein **Lauf-Beleg** (Audit: dieser Diff, dieser Skill, dieses Modell,

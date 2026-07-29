@@ -136,7 +136,7 @@ Bewusst weggelassen:
 
 - Spec-Stratifizierung (kommt in Modul 3),
 - ADRs (kommt in Modul 4),
-- Reviewer-/Implementation-Agent (kommt in Modul 8–10),
+- Reviewer-/Implementer-Agent (kommt in Modul 8–10),
 - Replay (kommt in Modul 12),
 - Docker-Harness (kommt in Modul 14).
 

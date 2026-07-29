@@ -70,7 +70,7 @@ Beispiele für gute Antworten:
 
 - "Ich ergänze in AGENTS.md den Satz: 'Optimierer darf nie direkt aufs Gerät schreiben — Output fließt durch Statemachine.' (Inferential Feedforward)"
 - "Ich schreibe einen ArchUnit-Test, der `optimizer.*` → `device.*`-Imports verbietet. (Computational Feedback)"
-- "Ich erweitere die Tool-Allowlist des Implementation-Agenten um `--no-direct-device-write`. (Computational Feedforward)"
+- "Ich erweitere die Tool-Allowlist des Implementer-Agenten um `--no-direct-device-write`. (Computational Feedforward)"
 
 Schlechte Antworten: "Ich werde aufmerksamer", "Wir müssen besser
 testen", "Vielleicht ein anderes Modell". Diese sind nicht reproduzierbar

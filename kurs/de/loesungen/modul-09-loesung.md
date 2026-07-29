@@ -45,7 +45,7 @@ richtige Kante — dann fehlt die kanonische Quelle, und die Aktion ist
 "AGENTS.md/Source Precedence schärfen", nicht "Plan verfeinern". Die Wahl
 der Kante *ist* die Ursachen-Diagnose.
 
-### Welche Eingaben braucht ein Implementation-Agent minimal, um nicht zu halluzinieren?
+### Welche Eingaben braucht ein Implementer-Agent minimal, um nicht zu halluzinieren?
 
 Mindestens diese sechs:
 
@@ -65,7 +65,7 @@ Was *fehlt* und trotzdem oft erwartet wird:
 Wenn eine dieser Eingaben fehlt, ist Halluzinationswahrscheinlichkeit
 nicht null, sondern systematisch erhöht in genau diesem Bereich.
 
-### Wann ist ein Implementation-Agent fertig — wenn der Code kompiliert, oder wenn die DoD erfüllt ist?
+### Wann ist ein Implementer-Agent fertig — wenn der Code kompiliert, oder wenn die DoD erfüllt ist?
 
 DoD erfüllt. Kompilieren ist ein *einzelner* Sensor unter vielen
 (Computational + Feedback). Der Agent darf "fertig" erst melden, wenn:
