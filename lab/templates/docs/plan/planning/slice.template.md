@@ -45,7 +45,7 @@ gehört zurück zur Zerlegung.
 - [ ] Closure-Notiz mit Steering-Loop-Lerneintrag.
 - [ ] Beobachtungs-Register (`../observations.md`) fortgeschrieben — neue `BEO-<NNN>` oder Zähler +1 mit Beleg; keine Beobachtung angefallen ist ebenfalls eine Antwort und wird in §7 notiert.
 - [ ] Jedes Risiko aus §6 trägt einen Ausgang (eingetreten / entfallen / weiter offen).
-- [ ] Die drei Paarungen (Anker · Folge-Slice · Register) geprüft — **nur im Repo ohne Wellen-Betrieb**. Schneidet dein Repo Wellen, **streiche diese Zeile beim Kopieren**: Dort trägt die nächste Welle-Closure die Prüfung, auch für Slices ohne Wellen-Zugehörigkeit — und ein Item, das niemand abhaken kann, macht den Closure-Trigger „DoD vollständig" unerfüllbar. Im Repo ohne Wellen-Betrieb liegt es als einziges Item **hinter** dem `git mv` (die Paarungen suchen in `done/`); die Closure braucht dann drei Commits — Inhalt, `git mv`, Häkchen. Das widerspricht der Hard Rule nicht, es folgt aus ihr.
+- [ ] Die drei Paarungen (Anker · Folge-Slice · Register) sind getragen — im Repo **ohne** Wellen-Betrieb hier geprüft, im Repo **mit** Wellen von der nächsten Welle-Closure (auch für Slices ohne Wellen-Zugehörigkeit).
 
 ## 3. Plan (vor Code)
 
@@ -53,8 +53,9 @@ gehört zurück zur Zerlegung.
 Implementer-Agent erweitert die Liste in seinem ersten Lauf. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-konventionen.md`
-§Was ist eine Sub-Area? — diese Liste ist die Pfad-Kandidatenliste für §8:
-welche Sub-Areas der Slice **berührt**, liest sich hier ab.
+§Was ist eine Sub-Area? — diese Liste liefert die **Pfad-Kandidaten** für §8,
+nicht die Antwort: Pfad-Berührung ist nicht hinreichend, und eine
+Aussagen-Berührung steht hier gar nicht.
 
 | Datei / Komponente | Änderungs-Art | Begründung |
 |---|---|---|
@@ -103,7 +104,9 @@ dasteht.
 <!-- BEDIENHINWEIS — keine Norm; faellt beim Kopieren weg (README.md
 §Verwendung, Schritt 5) und darf deshalb nichts Tragendes halten. Reihenfolge:
 diese Sektion vor dem `git mv` nach done/ fuellen — einzige Ausnahme ist das
-letzte DoD-Item in §2. -->
+letzte DoD-Item in §2 (die Paarungen suchen in `done/`, also nach dem `git mv`).
+Im Repo ohne Wellen-Betrieb braucht die Closure dadurch drei Commits: Inhalt,
+`git mv`, Haekchen — das folgt aus der Hard Rule, es widerspricht ihr nicht. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 §Das Beobachtungs-Register (vorhandene `BEO-<NNN>` **zitieren** statt neu

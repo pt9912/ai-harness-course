@@ -34,11 +34,13 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 §Das Beobachtungs-Register — wer eine Zeile still löscht, macht sie
 ununterscheidbar von einer, die es nie gab.
 
-<!--
-Nicht loeschen, sondern hierher verschieben — mit Begruendung. Ein still
-entfernter Eintrag ist nicht von einem nie aufgetretenen zu unterscheiden.
+<!-- BEDIENHINWEIS: Nicht loeschen, sondern hierher verschieben — mit
+Begruendung. Ein still entfernter Eintrag ist nicht von einem nie aufgetretenen
+zu unterscheiden. Auch diese Tabelle startet leer; Form einer gefuellten Zeile:
+
+| BEO-004 | <kurze Bezeichnung> | 2026-03-14 | Ursache beseitigt: Sub-Area entfallen |
 -->
 
 | Kennung | Beobachtung | Gestrichen am | Warum sie nicht mehr auftreten kann |
 |---|---|---|---|
-| <BEO-NNN> | <Bezeichnung> | YYYY-MM-DD | <Ursache beseitigt / Sub-Area entfallen> |
+| — keine — | | | |

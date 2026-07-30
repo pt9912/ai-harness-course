@@ -333,7 +333,7 @@ Template), oder ist es eine Folgerung aus der Beobachtbarkeit, die niemand
 aufschreiben muss? Nicht entschieden, weil eine Norm-Erweiterung nicht in eine
 Zeiger-Reparatur gehört.
 
-### D — Template-Schichtung verletzt (3)
+### D — Template-Schichtung verletzt (3) ✅
 
 **D-1 · `slice.template.md:57`** — „diese Liste ist die
 **Pfad-Kandidatenliste** … welche Sub-Areas der Slice berührt, **liest sich hier
@@ -349,6 +349,39 @@ gehört nie in den Rumpf."*
 Adoption mit `| <BEO-NNN> | <Bezeichnung> | YYYY-MM-DD | … |`. Dieselbe Klasse
 wie die drei erfundenen Beobachtungen, deren Entfernung Welle 60 als Behebung
 führt — eine Tabelle tiefer.
+
+**Behoben** (`Gruppe D`): `D-1` — der zweite Halbsatz ist weg; die §3-Liste
+liefert jetzt „die **Pfad-Kandidaten**, nicht die Antwort: Pfad-Berührung ist
+nicht hinreichend, und eine Aussagen-Berührung steht hier gar nicht." `D-2` —
+nicht die Anweisung verschoben, sondern das Item **in beiden Modi abhakbar**
+gemacht (*„sind getragen — ohne Wellen-Betrieb hier geprüft, mit Wellen von der
+nächsten Welle-Closure"*); damit ist nichts zu streichen, und die Begründung
+samt Drei-Commit-Folge steht im Kommentar, wo Bedienhinweise hingehören. `D-3` —
+die zweite Register-Tabelle startet mit `— keine —`, die Form einer gefüllten
+Zeile steht im Kommentar. Adoptions-Simulation für beide Dateien nachgestellt.
+
+**D-4 · „≤ 3 DoD-Punkte" über acht Items** (neu, aus der D-Behebung)
+
+Die Adoptions-Simulation zeigt den §2-Zeiger von `slice.template.md` direkt über
+der Checkliste:
+
+```
+§Ziel-Form: Slice — **≤ 3 DoD-Punkte**; mehr heißt: der Slice ist zu groß …
+- [ ] LH-FA-<NN> erfüllt, Test referenziert.
+… acht Items insgesamt, davon vier Prozess-Items
+```
+
+Modul 5 nennt „mehr als drei DoD-Punkte" als **Faustregel für die
+Slice-Größe** (`:180`, `:196`) und unterscheidet nicht zwischen liefernden und
+prozessualen Punkten. Das Template führt vier liefernde (`LH-FA`, `LH-QA`,
+`make gates`, Doku-Update) und vier prozessuale (Closure-Notiz, Register,
+Risiko-Ausgänge, Paarungen). Nach dem Wortlaut wäre jeder Slice, der die Vorlage
+ausfüllt, „zu groß".
+
+**Zuerst zu entscheiden:** Zählt die Faustregel nur die **liefernden** Punkte —
+dann gehört das in Modul 5, und der Zeiger muss es sagen? Oder ist die Zahl
+falsch gewählt? Nicht entschieden; der Zeiger ist von mir (Gruppe A) und hat den
+Widerspruch erst sichtbar gemacht — vorher trug §2 keinen.
 
 ### E — Quelle/Spiegel und Verweise (4)
 
