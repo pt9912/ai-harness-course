@@ -240,7 +240,7 @@ Der Vergleichsoperator-Fall ist der gefährlichste: Er trifft das Format, in dem
 eine Closure-Notiz eine QA-Erfüllung berichtet. Ein Gate mit Falsch-Positiven
 auf dem eigenen Ziel-Inhalt erzieht zum Umgehen.
 
-**Behoben** (`d1e0f9c`): Regex eng gefasst — kein Treffer mitten in einem
+**Behoben** (`f0b4e7c`): Regex eng gefasst — kein Treffer mitten in einem
 Identifier, keine führenden/schließenden Leerzeichen (Vergleichsoperatoren),
 Autolinks und HTML-Tags per Nachfilter. Verifiziert in beide Richtungen: acht
 Gegenbeispiele still, vier Platzhalter-Formen weiter getroffen, echtes Repo
