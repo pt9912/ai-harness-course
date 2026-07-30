@@ -22,13 +22,13 @@ jeder Cache einen Counter — die Regeln unten.
 
 ### Trace-Ebenen-Regeln (Modul 15)
 
-- **Drei Ebenen:** Trace = der Slice (`slice.id`, `requirement.id`, `adr.id`) ·
-  **Lauf** = das Kontextfenster und damit die Rolle (`run.id`, `agent.role`) ·
-  Span = ein Schritt, der die Rolle *erbt*, nicht setzt.
+- **Drei Ebenen:** Slice = die Korrelations-Einheit, als **Attribut** jedes
+  Laufs (`slice.id`, `requirement.id`, `adr.id`) · **Lauf** = das
+  Kontextfenster und damit die Rolle (`run.id`, `agent.role`) · Span = ein
+  Schritt, der die Rolle *erbt*, nicht setzt.
 - **Die Rolle sitzt auf der Resource des Laufs, gesetzt vom Starter**
   (`OTEL_RESOURCE_ATTRIBUTES`; die Resource steht einmal je Export-Block, nicht
-  je Span). Der Lauf hängt über W3C-Trace-Context am Slice-Trace — als
-  Umgebungsvariable `TRACEPARENT` ist das Konvention, nicht Spezifikation.
+  je Span).
 - **Die Zuordnungs-Einheit der Token-Bilanz ist der Lauf** — die „Kostenstelle"
   ist ein Kontext, kein Mensch ([Modul 8](modul-08-agentenrollen.md)).
 - **Der Emissions-Pfad ist Repo-Entscheidung** (Exporter, Collector, Sampling,

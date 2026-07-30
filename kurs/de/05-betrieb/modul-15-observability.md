@@ -70,7 +70,7 @@ und nicht den Lauf.
 
 | Ebene | Was sie ist | Trägt |
 |---|---|---|
-| Trace | der Slice — die Korrelations-Einheit | `slice.id`, `requirement.id`, `adr.id` |
+| Slice | die Korrelations-Einheit — als **Attribut** jedes Laufs, nicht zwingend ein gemeinsamer Trace | `slice.id`, `requirement.id`, `adr.id` |
 | **Lauf** | **das Kontextfenster, und damit die Rolle** | `run.id` · `agent.role` |
 | Span | ein Schritt im Lauf | erbt die Rolle, setzt sie nicht |
 
@@ -78,9 +78,17 @@ Die Rolle sitzt dort auf der **Resource** des Laufs, nicht am Span: Ein Prozess,
 eine Resource, eine Rolle. Gesetzt wird sie von dem, der den Lauf startet —
 `OTEL_RESOURCE_ATTRIBUTES="agent.role=…,run.id=…,slice.id=…"` ist dafür
 spezifiziert, und im Protokoll steht die Resource einmal je Export-Block, nicht
-je Span. Angehängt wird der Lauf an den Slice-Trace über das
-W3C-Trace-Context-Format; **als Umgebungsvariable `TRACEPARENT` ist das
-Konvention, nicht Spezifikation** — die Spec definiert HTTP-Header.
+je Span.
+
+**Ob die Läufe eines Slice *einen* Trace teilen, ist Modellwahl, kein
+Standard** — das Fixture tut es, verpflichtend ist es nicht. Die Korrelation
+trägt ohnehin `slice.id`, auf jedem Lauf Pflicht; der Regelfall sind Läufe als
+je eigene Traces, denn ein Slice läuft Tage, und Tracing-Backends (Sampling an
+der Wurzel, Trace-Zusammenbau, Wasserfall-Sicht) sind für begrenzte
+Operationen gebaut. Wer Läufe dennoch in einen gemeinsamen Slice-Trace hängt,
+propagiert dessen Kontext im W3C-Trace-Context-Format an den Lauf — **als
+Umgebungsvariable `TRACEPARENT` ist das Konvention, nicht Spezifikation** (die
+Spec definiert HTTP-Header).
 
 **Warum die Ebene fehlt und was daran hängt.** Mit `agent.role` am Span ist „ein
 Implementer-Lauf mit zwei Tool-Calls" nicht von „zwei Implementer-Läufen mit je
