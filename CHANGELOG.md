@@ -11,6 +11,86 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 61 — 2026-07-30 · Runde 11: die Wellen-Rollen-Sequenz, und zwei Gates, die nicht prüften
+
+Review-Runde 11 ([`docs/reviews/review-runde-11.md`](docs/reviews/review-runde-11.md)):
+drei Reviewer mit getrennten Linsen und getrenntem Kontext, einer in einem
+eigenen Worktree für Break-Tests. Dazu zwei Befunde, die aus Nutzer-Fragen
+entstanden, nicht aus einem Review-Lauf.
+
+### Hinzugefügt
+
+- **[Modul 8 §Rollen-Sequenz für eine Welle](kurs/de/03-agenten/modul-08-agentenrollen.md).**
+  Der Slice-Zyklus hatte eine Rollen-Sequenz mit neun Übergaben, der
+  Wellen-Zyklus keine — acht Prozedur-Schritte ohne benannten Träger, obwohl sie
+  vier Kontexte berühren. Neu: Träger und Übergabe-Artefakt pro Schritt, fünf
+  Übergaben in drei Zügen. **Die Eröffnung ist Planner-Arbeit ohne Übergabe** —
+  eine Aussage, keine Leerstelle. Zu erfinden war nichts: Die Tätigkeits-Tabelle
+  in [Lösung Modul 8](kurs/de/loesungen/modul-08-loesung.md) ordnete die
+  schwersten Schritte längst zu (*Hard Rule in AGENTS.md → Architect + Planner*).
+- **Beide Sequenzen sind nötig, weil ein Repo auch ohne Wellen arbeitet.** Ohne
+  Wellen-Betrieb bleiben vier der fünf Übergaben; die **Verifier→Planner-Kante
+  entfällt** — und dass gerade sie entfällt, ist die Definition: Ein repo-weiter
+  Beleg über die Slice-DoDs hinaus *ist* das *Mehr*, an dem eine Welle hängt.
+  Rollen-Sequenz und Wellen-Kriterium sind dieselbe Aussage aus zwei Richtungen.
+- **[Modul 15 §Lab-Grenze](kurs/de/05-betrieb/modul-15-observability.md).** Das
+  Modul lehrte ein Span-Schema ohne Emissions-Pfad, und die Grenze war — anders
+  als beim Replay und beim Coverage-Gate — nicht benannt. Jetzt steht dort, was
+  das Fixture ist (handgeschrieben, ein *Slice*-Trace), wie die Rolle in einer
+  instrumentierten Umgebung zustande kommt (**Angabe des Starters** durch das
+  gestartete Rollen-Artefakt; `OTEL_RESOURCE_ATTRIBUTES` nur, wenn der Lauf
+  selbst OTel emittiert — sonst das Lauf-Buch des Starters), und dass Exporter,
+  Collector und Sampling Repo-Entscheidungen sind: *Mitzunehmen ist das Schema,
+  nicht das Setup.*
+
+### Geändert
+
+- **Die Zuordnungs-Einheit der Token-Bilanz ist der Lauf.** Modul 15 nannte das
+  Ziel der Attribuierung „Kostenstellen" — Organisations-Vokabular, während
+  Modul 8 Rollen-Trennung als *Kontext*-Trennung definiert. Mini-Glossar und
+  Übungsauftrag sagen jetzt: ein **Kontext**, kein Mensch.
+- **Eine Bezeichnung pro Agentenrolle, nachgezogen.** Die Sechserliste stand
+  noch in `README.md` §Lernziele in den zurückgezogenen Namen — an der
+  sichtbarsten Stelle des Repos, während Welle 60 „durchgehend" behauptete.
+- **Die Wellen-Closure-Schritte tragen die Nummern von Modul 6**, alle fünf.
+  Die erste Fassung der Träger-Tabelle vergab 4 und 5 an Teile von Schritt 3 und
+  ließ die echten Schritte 4 und 5 ohne Träger.
+
+### Lab
+
+- **`make verify-slice` konnte nicht rot werden.** Nicht eine Prüfung war
+  wirkungslos, sondern alle vier: `exit 1` in einer Subshell, Zeilen mit `;`
+  verkettet — make sah nur den Status von `echo … ok`.
+  `verify-slice SLICE=slice-999` lief grün durch. Jetzt `set -e` plus
+  geschweifte Klammern, mit Kommentar an der Stelle, weil sie Lehrmaterial ist.
+  Der wirksame Gate fand sofort einen echten Mangel: `slice-020` nannte
+  `make gates` nicht, obwohl `AGENTS.md` es als *mandatory vor PR* führt.
+- **Der Closure-Note-Gate meldete QA-Messungen als Platzhalter.** Die
+  Platzhalter-Regex aus Welle 60 traf `p95 < 1 s und Recall > 0,9`, Autolinks,
+  HTML-Tags und C++-Templates — Falsch-Positive auf genau dem Format, in dem
+  eine Closure-Notiz eine QA-Erfüllung berichtet. Eng gefasst und in beide
+  Richtungen verifiziert: acht Gegenbeispiele still, vier Platzhalter-Formen
+  weiter getroffen, blanker Template-Rumpf weiter rot.
+- **ADR-0011 trägt vier Pflichten statt drei.** *Ausgefülltheit* war als
+  Zähl-Ausnahme zu Pflicht 1 formuliert, während der Code Platzhalter
+  unabhängig von der Satzzahl abweist — die Historie-Zeile behauptete dazu
+  „Pflicht 1 wurde nicht erweitert". Beides berichtigt; „deckt Pflicht 1 und 2
+  vollständig ab" ist gefallen, weil die Maschine Satzendezeichen zählt und
+  nicht Substanz.
+
+### Regelwerk
+
+- **Der Modul-15-Split trug Kurs-Didaktik.** Er übernahm die §Lab-Grenze samt
+  Rahmen („Das Kurs-Fixture ist …") — Aussagen über Material, das im netzlosen
+  Bundle nicht existiert. Über vier Korrekturen auf null reduziert: Was
+  operativ blieb, sind zwei Sätze in Sektionen, die es schon gab. Wenn eine
+  Sektion unter Nachfragen nur schrumpft und nie präziser wird, war sie keine
+  Regel, sondern Erklärung am falschen Ort.
+- **„Der Lauf hängt am Slice-Trace" war eine Modellwahl, als Regel verkauft.**
+  Die Korrelation trägt `slice.id` — Pflichtfeld jedes Spans; Läufe als je
+  eigene Traces leisten dasselbe, und ein Slice läuft Tage. In der Quelle als
+  Modellwahl benannt, im Split gestrichen.
+
 ## Welle 60 — 2026-07-29 · E-2 vollzogen, „berührt" definiert, die Zeitachse des Vorbilds geradegezogen
 
 Review-Runde 10 abgearbeitet ([`docs/reviews/review-runde-10.md`](docs/reviews/review-runde-10.md)),
@@ -59,9 +139,12 @@ und `make verify` waren die ganze Zeit grün.
 - **Alle sechs Planning-Templates tragen einen Regelwerk-Zeiger pro Sektion.**
   Gemessen nach Adoptions-Schritt 4 (Hinweis-Block weg) und 5 (Kommentare weg)
   standen `README.template.md`, `roadmap.template.md` und
-  `welle.template.md` bei **null**, `slice.template.md` und
-  `welle-results.template.md` bei eins. Ein Adopter verliert beim Kopieren
-  keine Norm mehr.
+  `welle.template.md` bei **null** Zeigern der Form *„Regeln dieser Sektion:"*,
+  `slice.template.md` und `welle-results.template.md` bei **einem**. (Zählt man
+  jede Regelwerk-*Nennung*, waren es 7 bzw. 2 — so steht es in
+  `docs/reviews/review-runde-10.md` unter R10-02; die meisten davon lagen im
+  Hinweis-Block oder in einer einzigen Sektion.) Ein Adopter verliert beim
+  Kopieren keine Norm mehr.
 - **Die *Lage*-Prüfung des Belegs läuft nach dem `git mv`**, zusammen mit der
   Register-Paarung (c). Vorher lief sie per Konstruktion bei jeder korrekt
   ausgeführten Closure rot: Der Beleg wird vor dem `mv` geschrieben, und der
@@ -95,6 +178,15 @@ und `make verify` waren die ganze Zeit grün.
 
 ### Lab
 
+- **Acht Einzelbefunde am Vorbild-Repo** (Klasse 1 der Inventur): `make ci`
+  versprach Replay-Lauf und Image-Scan und tat beides nicht · `slice-009` hakte
+  Datei-Änderungen ab, die es nie gab · **`LH-QA-Coverage` war keine ID** — die
+  Coverage-Schwellen bekommen **[ADR-0013](lab/example/docs/plan/adr/0013-coverage-schwellen.md)**
+  (bootstrap-aware 70 %, kritisch 90 %) · `docs/user/quality.md` wurde als
+  existierend behauptet · `AGENTS.md` verschwieg die repo-weite
+  Verifikations-Schicht · das `Status:`-Feld im Slice-Kopf stand gegen die eigene
+  Regel · ADR-0011 zählte zwei `done/`-Dateien, es waren drei · `CO-001`
+  prüfte in Java und Kotlin keine Schwelle.
 - **Der Closure-Note-Gate war grün auf dem blanken Template-Rumpf.** Break-Test
   reproduziert (exit 0), bestehender Checker um eine Platzhalter-Prüfung
   gehärtet — kein neues Skript. ADR-0011 führt das als geschärfte Fitness

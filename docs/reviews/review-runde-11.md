@@ -247,7 +247,7 @@ Gegenbeispiele still, vier Platzhalter-Formen weiter getroffen, echtes Repo
 grün, blanker Template-Rumpf rot (Break-Test im eigenen Worktree), und eine
 echte Notiz mit `p95 < 1 s` plus Autolink bleibt grün.
 
-### B — CHANGELOG: das Register stimmt nicht (4)
+### B — CHANGELOG: das Register stimmt nicht (4) ✅
 
 **B-1 · `CHANGELOG.md:14`** — Welle 60 ist auf `2026-07-29` datiert; zwei ihrer
 Commits (`4276fa4`, `132eebb`) tragen `2026-07-30`.
@@ -265,6 +265,16 @@ Regelwerk trägt Normtext, den keine Wellennummer deckt, und
 `welle-results.template.md` **bei eins**" gegen `review-runde-10.md:98-103`
 (R10-02), das für dieselbe Messung **7** und **2** nennt. Der Ziel-Zustand
 trägt; nur die Vorzustands-Zahl reproduziert nicht.
+
+**Behoben** (`Welle 61`). `B-1` und `B-3` hatten eine gemeinsame Ursache: Die
+Arbeit vom 2026-07-30 ist keine Nachlese von Welle 60, sondern eine eigene
+Welle. **Welle 61** eingetragen — damit stimmt auch das Datum von Welle 60
+wieder, und die 17 Commits des Tages haben einen Block (gegengeprüft: jeder ist
+darin wiederfindbar). Regelwerk-`Stand:` auf Kurs-Welle 61 gezogen. `B-2`: Der
+Welle-60-Block trägt jetzt Klasse 1 mit allen acht Inhalten, ADR-0013
+verlinkt. `B-4`: Beide Zahlen sind richtig, die Zählbasis war es nicht — der
+Satz nennt sie jetzt (Zeiger der Form *„Regeln dieser Sektion:"* gegen jede
+Regelwerk-*Nennung*) und verweist auf R10-02.
 
 ### C — Template-Zeiger auf Abschnitte, die die Regel nicht tragen (6)
 
