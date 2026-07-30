@@ -594,11 +594,21 @@ Verifikations-Checkliste nennen ihn. Folge: `make ci` ist für C# rot,
 eigener Carveout für die Lücke? Nicht entschieden; beides ist ein Slice, keine
 Gate-Reparatur.
 
-### Ü-04 — `AGENTS.template.md` lehrt einen zentralen Ort für Qualitätsdefinitionen ohne Quell-Verankerung
+### Ü-04 — `AGENTS.template.md` lehrt einen zentralen Ort für Qualitätsdefinitionen ohne Quell-Verankerung ✅
 
 `lab/templates/AGENTS.template.md:171`: *„Quality-Gate-Definitionen leben in
 `<docs/user/quality.md` oder Äquivalent>."* Modul 13 sagt das so nicht.
 Fix-Richtung wäre Quelle → Template, wie bei R10-04.
+
+**Behoben** (`0365273`) — und der Befund war zu schwach formuliert: nicht nur
+unverankert, sondern eine **Rang-Inversion**. `docs/user/*` ist Rang 5; was
+eine Qualitätsaussage normativ macht, liegt darüber (Anforderung `LH-QA-*`
+Rang 1, Schwelle ADR Rang 3, Bindung in der Sensors-Tabelle). Zeile ersatzlos
+gefallen. §4 sagt jetzt im **Rumpf**, dass die Target-Tabelle auflistet und
+nicht definiert, und wohin die Bindung führt. Vorher hatte die Quelle
+geschärft werden müssen (`ddd3ecb`: Rang 5 trägt *Sichten*, keine
+Definitionen) — erst danach war die Template-Zeile nachweislich falsch statt
+nur unbelegt.
 
 ### Ü-05 — Die Drift-Übung in Modul 12 ist nicht ausführbar
 
