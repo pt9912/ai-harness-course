@@ -428,11 +428,15 @@ benannt ist, dass es das Review-Instrument hier gar nicht gibt.
 Vor der Reparatur wurden die 30 Befunde plus der vorbestehende **nach Artefakt**
 neu gruppiert, nicht nach Befund-Nummer. Grund: Ein Befund am Vorbild-Repo und
 einer am Kursmodul verlangen verschiedene Fix-Richtungen, und mehrere Befunde
-teilten sich einen Träger. Die Klassen 1–3 betreffen `lab/example`, die Gruppen
-A–F das Kursmaterial.
+teilten sich einen Träger. Die Klassen benennen, **wo der Defekt sichtbar war**
+— bei 1–3 im Vorbild-Repo, bei A–F im Kursmaterial. Nicht, wo der Fix landete:
+Klasse 3 hat vier Kurs- und Spiegel-Dateien geändert, weil die Fehlzuordnung im
+Register auf einer fehlenden Norm stand (`E-4`, `E-5`) — Fix-Richtung Quelle,
+wie die Rangfolge sie verlangt.
 
 | Klasse / Gruppe | Inhalt | Commits |
 |---|---|---|
+| **vorab** — R10-01 | Der Sichtungs-Block meldete „keine Treffer" gegen ein nicht leeres Register; behoben im selben Commit, der diese Runden-Datei anlegte | `5e061dc` |
 | **Klasse 1** — Einzelbefunde am Vorbild | `make ci`-Überversprechen · Phantom-Dateien in slice-009 · `LH-QA-Coverage` war keine ID (→ ADR-0013) · behauptete `docs/user/quality.md` · verschwiegene Verifikations-Schicht in AGENTS.md · `Status:`-Feld · ADR-0011-Fehlzählung · CO-001 ohne wirksame Schwelle in Java/Kotlin | `f251992`–`a17ba14` |
 | **Klasse 2** — Zeitachse | 23 harte Widersprüche in sechs gekoppelten Gruppen; Jetzt-Punkt, Urheber-Zuordnungen, Index-Pfad, Nachträge, Historie-Tabellen | `a336280` |
 | **Klasse 3** — Sub-Area-Zuordnung | Fehlzuordnungen im Register, fehlende Befüllungs-Regel, undefiniertes „berührt", nicht deklarierte Pfad-Cluster | `3ac682f` |
@@ -443,9 +447,10 @@ A–F das Kursmaterial.
 | **Gruppe D** — Vorbild-Repo | R10-07 · 08 · 11 · 24 · 29 | `ead2546` |
 | **Gruppe E** — Mechanik | R10-10 · 20 · 21 (R10-22 fiel mit Gruppe A) | `ead2546` |
 
-R10-01 fiel bei Klasse 3 mit weg: Die Sichtungs-Blöcke von `slice-020` und
-`slice-014` wurden dort neu geschrieben und nennen seither echte Treffer mit
-Begründung.
+R10-01 wurde **vorab** behoben — in `5e061dc`, dem Commit, der diese Datei
+anlegte, also noch vor Klasse 1. Klasse 3 hat die Sichtungs-Blöcke von
+`slice-020` und `slice-014` später erneut umgeschrieben, weil die Umsortierung
+der Sub-Areas sie eingeholt hatte.
 
 **Zur Strukturfrage aus dem ursprünglichen §Nächster Schritt.** Sie lautete:
 E-2 zurücknehmen · Durchsetzung schaffen · Geltungsbereich verkleinern.
@@ -492,7 +497,7 @@ mitbehoben.
 
 | Befund | Was geändert wurde |
 |---|---|
-| R10-01 | Mit Klasse 3 weggefallen — die Sichtungs-Blöcke von `slice-020`/`slice-014` nennen echte Treffer und begründen, warum die Schwelle nicht fällt. |
+| R10-01 | Vorab behoben (`5e061dc`) — die Sichtungs-Blöcke von `slice-020`/`slice-014` nennen echte Treffer und begründen, warum die Schwelle nicht fällt; Klasse 3 hat sie danach an die neuen Sub-Area-Namen angepasst. |
 | R10-02 | Alle **sechs** Planning-Templates auf 1:1 Sektion-zu-Zeiger gebracht (gemessen nach Adoptions-Schritt 4+5). Der Befund zählte vier Dateien; `roadmap.template.md` und `README.template.md` standen ebenfalls bei null. |
 | R10-03 | **Ruheort-Regel** in `konventionen.md` §Herkunfts-Anker definiert — dort, wo der Zielort als ihre Ausnahme erklärt wird. Vorher: zwei namentliche Zitate, keine Definition. |
 | R10-04 | Größer als gemeldet: `grep -c "Vorgelagert"` war **auch in der Quelle 0**. Modul 5 trägt die zwei Schritte jetzt als §Zwei Schritte vor der Modus-Begründung; Spiegel quelltreu, Template auf Form plus Zeiger zurückgebaut. |
