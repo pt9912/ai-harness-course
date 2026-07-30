@@ -75,3 +75,20 @@ class SearchTest {
         assertEquals("b.md", resp.results[2].doc)
     }
 }
+
+
+/** Port-Double, das den Embedding-Ausfall simuliert (E003-Pfad). */
+private class DownEmbedder : com.example.docsearch.embedding.Embedder {
+    override fun embed(text: String): FloatArray = throw IllegalStateException("model down")
+}
+
+class EmbeddingFailureTest {
+    @Test
+    fun `LH-FA-02 Negative - Embedding-Ausfall liefert E003`() {
+        val searcher = Searcher(Index(), DownEmbedder())
+        val ex = assertThrows(
+            com.example.docsearch.service.EmbeddingUnavailableException::class.java,
+        ) { searcher.search(SearchRequest(q = "frage", k = 1)) }
+        assertTrue(ex.message!!.contains("E003"))
+    }
+}

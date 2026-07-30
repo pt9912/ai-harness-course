@@ -69,13 +69,13 @@ coverage is below the specified 80`, Exit 1; vorher lief derselbe Aufruf grün
 durch.
 
 `coverage-gate-critical` verengt die Messung jetzt auf `DocSearch.Service.*`
-statt Tests nach Namen zu wählen — und ist damit **rot**: Der Service-Layer
-liegt bei **82,6 %** Line-Coverage gegen die 90 % aus ADR-0013. Das ist kein
-Carveout-Fall dieses Dokuments: CO-001 nimmt den **Index**-Layer aus, nicht den
-Service-Layer. Ein messendes rotes Gate ist der ehrlichere Zustand als ein
-grünes, das nichts prüft — aber es ist ein offener Punkt und braucht entweder
-Tests für den Service-Layer oder einen eigenen Carveout. Solange er offen ist,
-nennt die Target-Beschreibung in `csharp/Makefile` den Stand.
+statt Tests nach Namen zu wählen. Es war damit zunächst **rot** (82,6 %) — und
+die Ursache lag nicht im Layer-Umfang: Der ungetestete `E003`-Pfad
+(Embedding-Ausfall) fehlte in **fünf von sechs** Skeletten; nur C++ hatte ihn.
+Go (90,9 %) und Python (93,1 %) bestanden die Schwelle **mit derselben Lücke**,
+weil ihr Service-Layer genug andere Zeilen hat. Java und Kotlin (84,2 %) waren
+ebenfalls rot. Mit dem nachgezogenen `LH-FA-02`-Negative-Test sind alle sechs
+grün; C# steht bei 100 %.
 
 ## Verifikation (nach Auflösung)
 
@@ -85,7 +85,7 @@ nennt die Target-Beschreibung in `csharp/Makefile` den Stand.
       entfernt, sonst misst `coverage-gate-critical` dasselbe wie
       `coverage-gate`.
 - [x] C#: wirksames Coverage-Gate vorhanden (`coverlet.msbuild`, gemessen 2026-07-30).
-- [ ] C#: Service-Layer erreicht die 90 % aus ADR-0013 (steht bei 82,6 %) — oder ein eigener Carveout deckt die Lücke.
+- [x] C#: Service-Layer erreicht die 90 % aus ADR-0013 (gemessen 2026-07-30) — die Lücke war der ungetestete E003-Pfad, nicht der Layer-Umfang.
 - [ ] `make coverage-gate-critical` grün ohne Ausnahmen.
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
 - [ ] slice-013 Closure-Notiz schließt diese Auflösung mit ein.

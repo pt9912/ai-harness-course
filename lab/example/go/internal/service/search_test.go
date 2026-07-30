@@ -130,3 +130,19 @@ func hash(t *testing.T, v interface{}) string {
 	h := sha256.Sum256(b)
 	return string(h[:])
 }
+
+// downEmbedder — Port-Double, das den Embedding-Ausfall simuliert (E003-Pfad).
+type downEmbedder struct{}
+
+func (downEmbedder) Embed(string) ([types.EmbeddingDim]float32, error) {
+	return [types.EmbeddingDim]float32{}, errors.New("model down")
+}
+
+// TestSearch_LHFA02_Negative_EmbeddingDown — LH-FA-02 Negative: E003.
+func TestSearch_LHFA02_Negative_EmbeddingDown(t *testing.T) {
+	s := NewSearcher(index.New(), downEmbedder{})
+	_, err := s.Search(types.SearchRequest{Q: "frage", K: 1})
+	if !errors.Is(err, ErrEmbeddingDown) {
+		t.Fatalf("expected ErrEmbeddingDown (E003), got %v", err)
+	}
+}

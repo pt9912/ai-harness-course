@@ -71,3 +71,27 @@ namespace DocSearch.Tests
         }
     }
 }
+
+namespace DocSearch.Tests
+{
+    /// <summary>Port-Double, das den Embedding-Ausfall simuliert (E003-Pfad).</summary>
+    internal sealed class DownEmbedder : IEmbedder
+    {
+        public float[] Embed(string text)
+        {
+            throw new InvalidOperationException("model down");
+        }
+    }
+
+    public class EmbeddingFailureTests
+    {
+        [Fact]
+        public void LhFa02_Negative_EmbeddingDown_YieldsE003()
+        {
+            Searcher searcher = new(new VectorIndex(), new DownEmbedder());
+            EmbeddingUnavailableException ex = Assert.Throws<EmbeddingUnavailableException>(
+                () => searcher.Search(new SearchRequest(Q: "frage", K: 1)));
+            Assert.Contains("E003", ex.Message);
+        }
+    }
+}

@@ -47,7 +47,7 @@ coverage-gate: ## Gesamt-Coverage via coverlet (ADR-0013, bootstrap-aware: 70 %,
 		'/p:Exclude="[xunit.*]*,[*.Tests]*"' \
 		/p:Threshold=70 /p:ThresholdType=line /p:ThresholdStat=total
 
-coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen) — derzeit ROT bei 82,6 %, siehe CO-001
+coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)
 	@echo "Critical coverage — Messung auf DocSearch.Service verengt (CO-001: Index ausgenommen)"
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet test DocSearch.sln \

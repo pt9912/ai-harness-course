@@ -11,6 +11,7 @@ import pytest
 from docsearch.embedding.embedder import MockEmbedder
 from docsearch.index.index import Index
 from docsearch.service.search import (
+    EmbeddingUnavailableError,
     EmptyQueryError,
     Searcher,
     SearchResponse,
@@ -82,3 +83,18 @@ def test_search_tie_break() -> None:
     assert resp.results[0].doc == "a.md" and resp.results[0].section == "A0"
     assert resp.results[1].doc == "a.md" and resp.results[1].section == "A1"
     assert resp.results[2].doc == "b.md"
+
+
+class _DownEmbedder:
+    """Port-Double, das den Embedding-Ausfall simuliert (E003-Pfad)."""
+
+    def embed(self, text: str) -> tuple[float, ...]:
+        raise RuntimeError("model down")
+
+
+def test_lh_fa_02_negative_embedding_down() -> None:
+    """LH-FA-02 Negative: Embedding-Ausfall liefert E003."""
+    searcher = Searcher(Index(), _DownEmbedder())
+    with pytest.raises(EmbeddingUnavailableError) as exc:
+        searcher.search(SearchRequest(q="frage", k=1))
+    assert "E003" in str(exc.value)
