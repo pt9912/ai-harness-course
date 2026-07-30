@@ -216,6 +216,21 @@ ist das Schema, nicht das Setup. Für (a) tragen Mini-Glossar und Übungsauftrag
 jetzt „die Kostenstelle ist ein **Kontext**, kein Mensch"; Spiegel quelltreu,
 Fixture-README sagt, was das Fixture ist.
 
+**Nachgebessert — vier Folge-Commits, alle vom Nutzer angestoßen.** „Spiegel
+quelltreu" oben war **falsch**, als es geschrieben wurde: Der Split trug die
+komplette §Lab-Grenze samt Kurs-Rahmen („Das Kurs-Fixture ist handgeschriebenes
+JSON …") — Didaktik über Material, das im netzlosen Bundle nicht existiert
+(`492dffd`). Danach: Begründungs-Bullets aus dem Split entfernt, 27 → 14 Zeilen
+(`907a287`) · „ein Mensch spielt mehrere Rollen" durch die Lauf-Formulierung
+ersetzt — der Mensch kommt in der Bilanz nicht vor, eine Rolle wird von einem
+Lauf getragen (`bea7c1d`) · „der Lauf hängt am Slice-Trace" als **Modellwahl**
+benannt statt als Regel — die Korrelation trägt `slice.id` (Pflichtfeld jedes
+Spans), die oberste Ebene heißt seither *Slice, als Attribut jedes Laufs*;
+damit ist auch der Mechanismus-Bullet oben („hängt den Lauf als Kind an den
+Slice-Trace") überholt (`29b4c16`). Der Split trägt seither vier Regel-Bullets
+ohne Kurs-Bezug; `grep` auf Kurs-Fixture / `lab/example` über `lab/regelwerk/`
+ist leer.
+
 ---
 
 ## Übernommen aus der Stand-Sichtung — bekannt, nicht behoben
