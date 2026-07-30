@@ -200,36 +200,13 @@ Schema und keinen Weg, es zu befüllen. Drei Wege:
 3. **Nur (a) beheben** — den Satz zur Zuordnungs-Einheit nachtragen und (b)
    offen lassen. Löst die Begriffsfrage, nicht die Umsetzungsfrage.
 
-**Behoben — (a) plus (b) als deklarierte Grenze; die Wahl war ableitbar, nicht
-zu treffen.** Maßstab sind die Lernziele von Modul 15: *lesen · attribuieren ·
-unterscheiden · erkennen · spezifizieren · entwerfen* — keines sagt
-*instrumentieren*. Ein gelehrter Emissions-Pfad (Weg 1) hätte den Modul-Scope
-erweitert, um einen Befund zu schließen; das wäre Fix-Richtung Befund → Lehre.
-
-Encodiert als **Modul 15 §Lab-Grenze** (nach §Lab-Bezug, dem Muster von
-`evals/golden/README.md` folgend): Das Fixture ist ein **Slice**-Trace mit der
-Rolle am Span; in einer instrumentierten Umgebung sind es drei Ebenen, die Rolle
-sitzt auf der **Resource** des Laufs und wird vom Starter gesetzt
-(`OTEL_RESOURCE_ATTRIBUTES` spezifiziert, `TRACEPARENT` als Env-Var ausdrücklich
-Konvention). Der Emissions-Pfad ist als Nicht-Lehrinhalt benannt: mitzunehmen
-ist das Schema, nicht das Setup. Für (a) tragen Mini-Glossar und Übungsauftrag
-jetzt „die Kostenstelle ist ein **Kontext**, kein Mensch"; Spiegel quelltreu,
-Fixture-README sagt, was das Fixture ist.
-
-**Nachgebessert — vier Folge-Commits, alle vom Nutzer angestoßen.** „Spiegel
-quelltreu" oben war **falsch**, als es geschrieben wurde: Der Split trug die
-komplette §Lab-Grenze samt Kurs-Rahmen („Das Kurs-Fixture ist handgeschriebenes
-JSON …") — Didaktik über Material, das im netzlosen Bundle nicht existiert
-(`492dffd`). Danach: Begründungs-Bullets aus dem Split entfernt, 27 → 14 Zeilen
-(`907a287`) · „ein Mensch spielt mehrere Rollen" durch die Lauf-Formulierung
-ersetzt — der Mensch kommt in der Bilanz nicht vor, eine Rolle wird von einem
-Lauf getragen (`bea7c1d`) · „der Lauf hängt am Slice-Trace" als **Modellwahl**
-benannt statt als Regel — die Korrelation trägt `slice.id` (Pflichtfeld jedes
-Spans), die oberste Ebene heißt seither *Slice, als Attribut jedes Laufs*;
-damit ist auch der Mechanismus-Bullet oben („hängt den Lauf als Kind an den
-Slice-Trace") überholt (`29b4c16`). Der Split trägt seither vier Regel-Bullets
-ohne Kurs-Bezug; `grep` auf Kurs-Fixture / `lab/example` über `lab/regelwerk/`
-ist leer.
+**Behoben** (`a70ceb6`, nachgebessert in `492dffd` · `907a287` · `bea7c1d` ·
+`29b4c16`; Details in den Commit-Messages): (a) Mini-Glossar und Übung benennen
+die Kostenstelle als **Kontext**, kein Mensch. (b) Modul 15 §Lab-Grenze
+deklariert Fixture und Emissions-Pfad als Nicht-Lehrinhalt; „ein Trace pro
+Slice" ist als **Modellwahl** benannt, die Korrelation trägt `slice.id`. Der
+Regelwerk-Split führt vier Regel-Bullets ohne Kurs-Bezug — der
+Mechanismus-Vorschlag oben ist damit teilweise überholt.
 
 ---
 
