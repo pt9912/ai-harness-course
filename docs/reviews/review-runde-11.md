@@ -1,8 +1,8 @@
 # Review-Runde 11 — offen
 
 **Stand:** 2026-07-29. **Status:** noch kein Review-Lauf. Diese Datei sammelt,
-was **vor** der Runde aufgefallen ist. `V11-01` ist behoben, die Ü-Posten sind
-offen.
+was **vor** der Runde aufgefallen ist. `V11-01` ist behoben, `V11-02` und die
+Ü-Posten sind offen.
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -85,6 +85,120 @@ und Slice-Planung), und die **Verifier→Planner-Kante entfällt** — der repo-
 Beleg über die Slice-DoDs hinaus *ist* das *Mehr*, an dem sich entscheidet, ob
 eine Welle vorliegt. Rollen-Sequenz und Wellen-Kriterium sind damit dieselbe
 Aussage aus zwei Richtungen.
+
+---
+
+### V11-02 — Die Zuordnungs-Einheit der Token-Attribuierung ist nicht benannt, und es gibt keinen Emissions-Pfad
+
+*(Aus einer Nutzer-Frage, in zwei Schritten geschärft. Zwei Hälften mit
+derselben Wurzel: Modul 15 sagt nicht, **worauf** attribuiert wird — und das
+Repo zeigt nicht, **wie** die Angabe dorthin kommt.)*
+
+#### (a) „Kostenstelle" holt das Personen-Framing zurück, das Modul 8 verwirft
+
+`kurs/de/03-agenten/modul-08-agentenrollen.md:403` (und `:244`, Spiegel `:128`):
+
+> „Rollen-Trennung ist **Kontext**-Trennung, nicht **Personen**-Trennung. Eine
+> Person kann mehrere Rollen spielen — aber nicht im selben Kontextfenster."
+
+`kurs/de/05-betrieb/modul-15-observability.md:29` (Mini-Glossar) und `:222`
+(Übungsauftrag), Spiegel `:45`:
+
+> „Token-Attribuierung … Buchhaltungs-Splitting eines Sammelpostens auf
+> **Kostenstellen**."
+
+**Logisch tragen beide.** Ist eine Rolle ein Kontext, dann etikettiert
+`agent.role` das Kontextfenster, und die Bilanz pro Rolle ist eine Bilanz pro
+Kontext — wohldefiniert auch dann, wenn ein Mensch alle sechs Rollen nacheinander
+spielt. **Kein Widerspruch, aber ein Leck:** *Kostenstelle* ist
+Organisations-Vokabular (Team, Abteilung, Person). Modul 15 benennt nirgends,
+dass die Zuordnungs-Einheit ein **Kontext** ist und kein Mensch. Verschärft
+wurde das in Welle 60: Der Übungsauftrag zeigt seither auf „die Rollen sind die
+aus Modul 8" — die Kopplung ist enger, Modul 8s Kontext-statt-Person-Klarstellung
+reist aber nicht mit.
+
+#### (b) Das Schema hat keine Lauf-Ebene, und niemand sendet es
+
+`lab/example/otel/sl-009-agent-run.trace.json` trägt `agent.role` **pro Span**:
+
+```
+trace_id: trace-sl-009-agent-run     ← Trace-Ebene, trägt slice.id
+  plan-1    agent.role: Planner
+  impl-1    agent.role: Implementer
+  impl-2    agent.role: Implementer
+  review-1  agent.role: Reviewer
+  verify-1  agent.role: Verifier
+```
+
+Ein Trace, der sich „agent-run" nennt, enthält damit **vier** Rollen. Als „ein
+Lauf, vier Rollen" gelesen ist das genau die Modul-8-Verletzung; als „ein Slice,
+mehrere Läufe" gelesen ist es richtig — dann fehlt aber die Ebene dazwischen.
+Mit `agent.role` am Span und nichts zwischen Span und Trace ist „ein
+Implementer-Lauf mit zwei Tool-Calls" nicht von „zwei Implementer-Läufen mit je
+einem" zu unterscheiden; `impl-1` und `impl-2` stehen genau so nebeneinander.
+
+**Die Struktur, die fehlt** — drei Ebenen:
+
+| Ebene | Was sie ist | Trägt |
+|---|---|---|
+| Trace | der Slice — Korrelations-Einheit | `slice.id`, `requirement.refs`, `adr.refs` |
+| **Run** | **das Kontextfenster = die Rolle** | `run.id` + `agent.role` |
+| Span | ein Schritt im Lauf | *erbt* die Rolle, setzt sie nicht |
+
+**Und niemand sendet etwas.** Gemessen:
+
+```
+$ grep -rn "OTEL_\|traceparent\|resourceSpans" kurs/ lab/
+(null Treffer)
+```
+
+`lab/example/Makefile:36` (`agent-implement`) gibt fünf Dateinamen per `echo`
+aus — es startet keinen Agenten und setzt keine Umgebung. Das Fixture ist
+handgeschriebenes JSON in einer Form, die **kein OTLP** ist. Modul 15 lehrt
+Span-Schema, Cache-Counter und Token-Attribution und sagt nichts darüber, wie
+die Daten entstehen oder transportiert werden.
+
+**Der Mechanismus, falls die Entscheidung „lehren" lautet** — zwei
+Umgebungsvariablen, gesetzt vom Starter, gelesen vom SDK des Agenten-Prozesses:
+
+- `OTEL_RESOURCE_ATTRIBUTES="agent.role=Implementer,run.id=…,slice.id=…"` —
+  **spezifiziert** (General SDK Configuration). Das SDK hängt die Werte an die
+  `Resource`; im OTLP-Protokoll steht sie **einmal pro `ResourceSpans`-Block**,
+  nicht pro Span. Sie wird also übertragen, ohne jeden Span zu belasten.
+- `TRACEPARENT="00-<trace>-<parent-span>-01"` — hängt den Lauf als Kind an den
+  Slice-Trace. **Grenze: als Env-Var ist das Konvention, nicht Spec** — die
+  W3C-Trace-Context-Spec definiert HTTP-Header. `otel-cli`, das Jenkins-OTel-Plugin
+  und CI-Integrationen benutzen es so; der Kurs müsste es als Konvention
+  deklarieren.
+
+Der tragende Punkt: **Der Agent setzt seine Rolle nicht selbst.** Er erbt sie aus
+der Umgebung, in die er gestartet wurde. Ein Agent, der `agent.role` pro Span
+schreibt, ist die einzige Instanz, die dabei auch driften kann; ein Env-Var vom
+Starter hat dieselbe Autorität, die den Kontext erzeugt hat.
+
+**Grenze auch dieser Lösung, ehrlich:** Das Resource-Attribut macht das Label
+vertrauenswürdig und Rollen-Mischung *innerhalb eines Laufs* strukturell
+unmöglich (ein Prozess, eine Resource). Ob ein Lauf seine deklarierte Rolle
+**einhält** — ob der als Implementer gestartete Lauf nicht doch reviewt —, sagt
+das Label nicht. Das wäre eine andere Prüfung (Tool-Nutzung gegen deklarierte
+Rolle) und ist hier nicht versprochen.
+
+#### Zuerst zu entscheiden, nicht zu reparieren
+
+Die Lab-Grenze ist bei Modul 15 **nicht benannt** — anders als beim Replay
+(`lab/example/evals/golden/README.md:29` §Lab-Grenze) oder beim Coverage-Gate
+(`CO-001` §Offen). Ein Adopter, der Modul 15 durcharbeitet, hat am Ende ein
+Schema und keinen Weg, es zu befüllen. Drei Wege:
+
+1. **Emissions-Pfad lehren** — Modul 15 bekommt die Drei-Ebenen-Struktur und die
+   zwei Env-Vars, das Fixture eine Lauf-Ebene, `TRACEPARENT` seine
+   Konventions-Grenze. Teuerster Weg, aber der einzige, nach dem ein Adopter das
+   Schema befüllen kann.
+2. **Lab-Grenze deklarieren** — Modul 15 sagt ausdrücklich: das Fixture ist
+   handgeschrieben, der Emissions-Pfad ist Repo-Entscheidung und nicht Teil des
+   Kurses. Billig und ehrlich; die Lücke bleibt.
+3. **Nur (a) beheben** — den Satz zur Zuordnungs-Einheit nachtragen und (b)
+   offen lassen. Löst die Begriffsfrage, nicht die Umsetzungsfrage.
 
 ---
 
