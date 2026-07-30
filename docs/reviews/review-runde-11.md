@@ -391,16 +391,39 @@ Meine erste Formulierung („liefernd vs prozessual") war noch zu grob; die Mess
 am Vorbild ergab 4–5 und widerlegte sie — `make gates grün` ist nichts, was ein
 Slice *liefert*.
 
-**D-5 · Zwei Vorbild-Slices liegen über der geschärften Schwelle** (neu, aus der
-D-4-Behebung)
+**D-5 ✅ · Zwei Vorbild-Slices scheinen über der Schwelle zu liegen** (neu, aus
+der D-4-Behebung)
 
-Mit der scharfen Zählung: `slice-009` 3 ✓ · `slice-020` 1 ✓ · `slice-013` **4** ·
-`slice-014` **4**. Bei `slice-013` sind zwei der vier Punkte dasselbe Target
-(`test-property` als Make-Ziel und seine 100-Generationen-Bedingung), bei
-`slice-014` ähnlich. Ob die beiden Slices wirklich zu groß sind oder nur
-ausführlich geschrieben, ist eine Aussage über das Vorbild — und sie
-umzuformulieren, damit die Zahl passt, wäre genau das Gate-grün-Schreiben, gegen
-das der Kurs argumentiert. Nicht entschieden.
+Meine Schlüsselwort-Zählung ergab `slice-013` **4** und `slice-014` **4** — über
+der Schwelle. **Der Befund war falsch, und zwar mein Messfehler, nicht das
+Vorbild.** Von Hand gegen die Regel gezählt:
+
+| `slice-013` | zählt? | Grund |
+|---|---|---|
+| Property-Test pro Sprache | **ja** | das gelieferte Artefakt |
+| „Eigenschaft: Reihenfolge bei gleichem Score reproduzierbar" | nein | die Eigenschaft, die Punkt 1 prüft — abgehakt wird sie *mit* ihm |
+| Make-Target `test-property`, in `make gates` eingehängt | **ja** | eigenes Artefakt |
+| „läuft 100 Generationen, fail-closed" | nein | Konfiguration von Punkt 3 |
+| Closure-Notiz | nein | prozessual |
+| `docs/user/quality.md` + drei Platzhalter-Vermerke | **ja** | eigenes Artefakt |
+
+| `slice-014` | zählt? | Grund |
+|---|---|---|
+| ADR-0004 Accepted | **ja** | eine Entscheidung ist ein Artefakt |
+| Adapter `IndexSearcher` (Linear + ANN) | **ja** | das gelieferte Artefakt |
+| „`make test-determinism` weiterhin grün" | nein | Nicht-Regression: hält eine *bestehende* Konvention ein, wächst nicht mit dem Umfang — konsistent mit §8 desselben Slice, der *Test-Infrastruktur* deshalb als **nicht berührt** führt |
+| „recall@5 verschlechtert sich um maximal 5 %" | **ja** | Akzeptanzkriterium, das dieser Slice herstellt |
+| `make gates` grün | nein | Gate-Lauf |
+| Closure-Notiz | nein | prozessual |
+
+**Beide liegen bei 3.** Alle vier Vorbild-Slices halten die Regel: 3 · 1 · 3 · 3.
+
+Zwei Fehler in meinem Skript: Es schloss „Neues Make-Target `test-property` läuft
+in `make gates`" aus, weil die Zeile `make gates` enthält — dabei ist das Target
+der Liefer-Punkt; und es zählte `slice-014`s Nicht-Regression mit. Die Lehre ist
+kein neuer Normtext: Modul 5 nennt die Schwelle eine **Faustregel**, und
+Liefer-Punkte lassen sich nicht per `grep` zählen. Genau deshalb steht sie nicht
+als Gate im Repo.
 
 ### E — Quelle/Spiegel und Verweise (4) ✅
 
