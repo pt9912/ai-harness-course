@@ -39,6 +39,53 @@ Wesentlich: keine Rolle springt rückwärts in eine vorhergehende, ohne
 Eingabe-Kontext jeder Rolle ist eingeschränkt — das verhindert, dass
 dieselbe Sicht denselben Fehler übersieht.
 
+### Rollen-Sequenz für eine Welle
+
+Die Sequenz oben ist **slice-skopiert**. Die Welle hat ihre eigene Prozedur —
+drei Eröffnungs- und fünf Closure-Schritte
+([Modul 6](modul-06-roadmap.md#wellen-closure-prozedur-modul-6)). Es gilt
+dieselbe Regel: **kein Rollenwechsel ohne Artefakt.** Nur sind es drei
+Übergaben, nicht neun.
+
+**Die Eröffnung ist Planner-Arbeit** — alle drei Schritte laufen in *einem*
+Kontext. Es gibt keine Eröffnungs-Sequenz, weil es keine Übergabe gibt; wer
+hier eine zeichnet, erfindet einen Rollenwechsel.
+
+| Closure-Schritt | Träger | Übergabe-Artefakt |
+|---|---|---|
+| 1 — Trigger prüfen | **Verifier** → Planner | repo-weiter Verifikations-Beleg (`fullbuild`-Hash, Replay-Ergebnis); er geht über die Slice-DoDs hinaus und steht in keiner von ihnen |
+| 2 — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage (fällige Trigger) → Verdikt (bestätigt / Folge-ADR mit `supersedes` / neue Stufe) |
+| 3 — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
+| 3 — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel (Hard Rule · Gate · Skill · `MR`) oder Folge-Slice |
+| 4 — Closure-Notiz | **Planner** | `welle-<NN>-results.md` |
+| 5 — Drei Paarungen | maschinelle Deckungsprüfung, gelesen vom **Planner** | Gate-Ausgabe; das Urteil fiel beim Schreiben (§Das Beobachtungs-Register) |
+
+**Warum Architect und nicht Planner allein:** Regel-Verkörperung und
+Reifestufen-Hochschaltung sind **Entscheidungen**, keine Planung. Wer beide in
+einem Kontext erledigt, setzt Schwellen ohne ADR-Bezug oder beschließt ADRs ohne
+Umsetzungspfad.
+
+**Im Repo ohne Wellen-Betrieb** läuft diese Prozedur nicht; die Vorgänge laufen
+trotzdem, getragen von Slice-Closure und Slice-Planung
+([Modul 6](modul-06-roadmap.md#wann-arbeit-eine-welle-braucht-modul-6), Tabelle
+*Träger im Repo ohne Wellen*). Für die Rollen: **zwei der drei Übergaben
+bleiben, eine entfällt.**
+
+| Übergabe | ohne Wellen-Betrieb |
+|---|---|
+| Planner → Architect → Planner (Trigger-Audit) | **bleibt** — bei jeder Slice-Closure statt einmal pro Welle |
+| Planner → Architect → Planner (Verkörperung) | **bleibt** — Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
+| Verifier → Planner (repo-weiter Verifikations-Beleg) | **entfällt** |
+
+Dass gerade diese entfällt, ist die Definition und kein Verlust: Ein repo-weiter
+Beleg über die Slice-DoDs hinaus **ist** das *Mehr*, an dem sich entscheidet, ob
+eine Welle vorliegt. Gibt es die Übergabe, hast du eine Welle; gibt es sie nicht,
+keine.
+
+**Der Validator gehört nicht in diese Prozedur.** Seine zwei Kanten hängen an
+einem Wellen-*Ereignis* (nach MVP-Slice, vor größeren Wellen), aber am Slice —
+nicht an der Closure.
+
 ### Die neun Übergaben und ihre Artefakte (Modul 8)
 
 Sechs Rollen in der Reihenfolge, in der ein Slice sie typischerweise

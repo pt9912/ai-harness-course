@@ -83,6 +83,79 @@ oder ein **Lerneintrag** in der Closure-Notiz. Der Beleg selbst bleibt
 draußen — und aus demselben Grund hat Validierung keine Station in der
 Artefaktkette (Modul 1).
 
+## Rollen-Sequenz für eine Welle
+
+Die Sequenz oben ist **slice-skopiert**. Eine Welle liegt eine Ebene darüber
+und hat ihre eigene Prozedur — drei Eröffnungs- und fünf Closure-Schritte
+([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) §Die Wellen-Eröffnungs-Prozedur und [§Die Wellen-Closure-Prozedur](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)).
+Auch dort gilt die Regel von oben: **kein Rollenwechsel ohne Artefakt.** Nur
+sind es drei Übergaben, nicht neun.
+
+**Die Eröffnung ist Planner-Arbeit — und das ist eine Aussage, keine
+Leerstelle.** Alle drei Schritte (Ziel und Out-of-Scope festlegen · offene
+Beobachtungen sichten · Welle-Datei anlegen und in die Roadmap eintragen)
+laufen in *einem* Kontext. Es gibt keine Eröffnungs-Sequenz, weil es keine
+Übergabe gibt — wer hier eine zeichnet, erfindet einen Rollenwechsel.
+
+**Die Closure hat drei:**
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Vf as Verifier
+    participant P as Planner
+    participant A as Architect
+
+    Vf->>P: repo-weiter Verifikations-Beleg (fullbuild-Hash, Replay-Ergebnis)
+    P->>A: Trigger-Audit — welche ADRs und Reifestufen sind fällig?
+    A-->>P: Verdikt (bestätigt / Folge-ADR mit supersedes / neue Stufe)
+    P->>A: Steering-Loop-Eintrag: was 3× erreicht hat, plus Zielort
+    A-->>P: Regel verkörpert (Hard Rule · Gate · Skill · MR) oder Slice nötig
+```
+
+| Closure-Schritt | Träger | Übergabe-Artefakt |
+|---|---|---|
+| 1 — Trigger prüfen | **Verifier** → Planner | repo-weiter Verifikations-Beleg; er geht über die Slice-DoDs hinaus und steht in keiner von ihnen |
+| 2 — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage → Verdikt |
+| 3 — Lese-Schritt | **Planner** erkennt den 3×-Übertritt … | … Zähler-Stand aus dem Beobachtungs-Register |
+| 3 — Verkörperung | … **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel oder Folge-Slice |
+| 4 — Closure-Notiz | **Planner** | `welle-<NN>-results.md` |
+| 5 — Drei Paarungen | maschinelle Deckungsprüfung, gelesen vom **Planner** | Gate-Ausgabe (das Urteil fiel beim Schreiben, [Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)) |
+
+**Warum Architect und nicht Planner allein.** Die Verkörperung einer Regel und
+das Hochschalten einer Reifestufe sind **Entscheidungen**, keine Planung — der
+Kurs ordnet sie an anderer Stelle schon so zu (*„Aktualisiere AGENTS.md mit
+einer neuen Hard Rule" → Architect (ADR-Folge) + Planner (Slice)*;
+*„Entscheide, ob `coverage-gate` 70 % oder 80 % verlangt" → Architect (ADR) +
+Planner (Slice)*, [Lösung Modul 8](../loesungen/modul-08-loesung.md)). Wer beide
+in einem Kontext erledigt, setzt Schwellen ohne ADR-Bezug oder beschließt ADRs
+ohne Umsetzungspfad — dieselbe Begründung wie bei der Mehrfachzuweisung dort.
+
+**Und im Repo ohne Wellen-Betrieb?** Dort läuft diese Prozedur nicht — die
+Vorgänge laufen trotzdem, getragen von der Slice-Closure und der Slice-Planung
+([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur), Tabelle
+*Träger im Repo ohne Wellen*). Für die Rollen heißt das: **zwei der drei
+Übergaben bleiben, eine verschwindet.**
+
+| Übergabe | ohne Wellen-Betrieb |
+|---|---|
+| Planner → Architect → Planner (Trigger-Audit) | **bleibt** — bei jeder Slice-Closure statt einmal pro Welle |
+| Planner → Architect → Planner (Verkörperung) | **bleibt** — Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
+| Verifier → Planner (repo-weiter Verifikations-Beleg) | **entfällt** |
+
+Dass gerade diese entfällt, ist kein Verlust, sondern die Definition: Ein
+repo-weiter Beleg, der über die Slice-DoDs hinausgeht, **ist** das *Mehr*, an dem
+sich entscheidet, ob eine Welle vorliegt
+([Modul 6 §Wann Arbeit eine Welle braucht](../02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
+Gibt es diese Übergabe, hast du eine Welle; gibt es sie nicht, keine. Die
+Rollen-Sequenz und das Wellen-Kriterium sind dieselbe Aussage aus zwei
+Richtungen.
+
+**Wo der Validator bleibt.** Seine zwei Kanten hängen an einem Wellen-*Ereignis*
+— Validierung greift nach einem MVP-Slice und vor der Implementation größerer
+Wellen —, gehören aber **nicht** in diese Prozedur: Sie hängen am Slice, nicht
+an der Closure. Deshalb stehen sie oben bei der Slice-Sequenz.
+
 ## Welche Rolle braucht welche Artefaktklasse
 
 Sechs Rollen heißt **nicht** sechs Skill-Dateien. Eine Rolle wird über

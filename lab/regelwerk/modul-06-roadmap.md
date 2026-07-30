@@ -141,6 +141,10 @@ nicht geladen. Schritt 2 ist Planungs-Leistung — was die Schwelle
 erreicht hat, ist in AGENTS.md, Gates und Skills verkörpert und wirkt
 dort automatisch (Modul-0-Prinzip).
 
+**Wer führt die Schritte aus?** Die Eröffnung ist Planner-Arbeit, die Closure
+hat drei Übergaben — Träger und Übergabe-Artefakt pro Schritt in
+[Modul 8 §Rollen-Sequenz für eine Welle](modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle).
+
 **Closure — fünf Schritte.**
 
 1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,

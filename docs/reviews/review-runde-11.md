@@ -1,7 +1,8 @@
 # Review-Runde 11 — offen
 
 **Stand:** 2026-07-29. **Status:** noch kein Review-Lauf. Diese Datei sammelt,
-was **vor** der Runde aufgefallen ist.
+was **vor** der Runde aufgefallen ist. `V11-01` ist behoben, die Ü-Posten sind
+offen.
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -15,7 +16,7 @@ die Verschmutzung als Befund gemeldet.
 
 ## Vorab-Befund — aus einer Nutzer-Frage, nicht aus einem Review-Lauf
 
-### V11-01 — Der Slice-Zyklus hat eine Rollen-Sequenz, der Wellen-Zyklus keine
+### V11-01 — Der Slice-Zyklus hat eine Rollen-Sequenz, der Wellen-Zyklus keine ✅
 
 Modul 8 trägt `## Rollen-Sequenz für einen Slice` (Quelle `:37`, Spiegel `:10`)
 mit einem `sequenceDiagram` über sechs Teilnehmer und einer eigenen Sektion
@@ -57,12 +58,32 @@ verstecken es zusätzlich: Modul 6 kommt *vor* Modul 8 und kann die Rollen noch
 nicht zuweisen; und Modul 8 legt seinen Scope im Titel offen („für einen
 Slice"), wodurch die Lücke wie Absicht aussieht.
 
-**Zuerst zu entscheiden, nicht zu reparieren:** Soll die Wellen-Prozedur
-überhaupt Rollen tragen — oder ist sie bewusst rollen-agnostisch, weil eine
-Welle ein Planungs-Konstrukt ist? Die drei erwogenen Optionen: Sequenz +
-Übergabe-Tabelle in Modul 8 (symmetrisch zur Slice-Ebene) · nur eine
-Träger-Tabelle an der Closure-Prozedur in Modul 6 · rollen-agnostisch lassen und
-das ausdrücklich begründen.
+**Behoben — die Vorfrage war zu messen, nicht zu entscheiden.** Sie lautete:
+Soll die Wellen-Prozedur überhaupt Rollen tragen? Antwort: Sie tut es schon, nur
+unvollständig und an der falschen Stelle. Zwei Belege:
+
+1. Die **Validator-Kanten sind bereits wellen-skopiert** — *„Validierung greift
+   nach einem MVP-Slice und vor der Implementation größerer Wellen"* steht mitten
+   in einer Sektion, die „für einen Slice" heißt.
+2. **Jeder Closure-Schritt hat einen aus dem Kurs ableitbaren Träger.** Die
+   Tätigkeits-Tabelle in [Lösung Modul 8](../../kurs/de/loesungen/modul-08-loesung.md)
+   ordnet die beiden schwersten schon zu: *„Aktualisiere AGENTS.md mit einer
+   neuen Hard Rule" → Architect (ADR-Folge) + Planner (Slice)* und *„Entscheide,
+   ob `coverage-gate` 70 % oder 80 % verlangt" → Architect (ADR) + Planner*. Es
+   war keine neue Norm zu erfinden, sondern eine unausgesprochene Folge
+   aufzuschreiben — derselbe Fall wie R10-04.
+
+Encodiert als [Modul 8 §Rollen-Sequenz für eine Welle](../../kurs/de/03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle),
+Spiegel nachgezogen, Vorwärts-Verweis an beiden Prozedur-Überschriften in
+Modul 6. Die Eröffnung ist Planner-Arbeit **ohne Übergabe** — eine Aussage, keine
+Leerstelle. Die Closure hat **drei** Übergaben gegen neun auf Slice-Ebene.
+
+**Beide Sequenzen sind nötig, weil ein Repo auch ohne Wellen arbeiten kann.**
+Ohne Wellen-Betrieb bleiben zwei der drei Übergaben (getragen von Slice-Closure
+und Slice-Planung), und die **Verifier→Planner-Kante entfällt** — der repo-weite
+Beleg über die Slice-DoDs hinaus *ist* das *Mehr*, an dem sich entscheidet, ob
+eine Welle vorliegt. Rollen-Sequenz und Wellen-Kriterium sind damit dieselbe
+Aussage aus zwei Richtungen.
 
 ---
 
