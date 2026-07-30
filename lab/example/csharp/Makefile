@@ -38,15 +38,22 @@ test-determinism:
 		dotnet test DocSearch.sln --filter "FullyQualifiedName~DeterminismTests"
 
 coverage-gate: ## Gesamt-Coverage via coverlet (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
+# `--settings coverlet.runsettings` waere die COLLECTOR-Integration; /p:Threshold
+# wertet nur die MSBUILD-Integration aus. Beides zugleich hiess: gemessen wurde,
+# die Schwelle blieb unbeachtet, exit 0. Eine Integration, nicht zwei.
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
-		dotnet test DocSearch.sln --settings coverlet.runsettings \
+		dotnet test DocSearch.sln \
 		/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura \
+		'/p:Exclude="[xunit.*]*,[*.Tests]*"' \
 		/p:Threshold=70 /p:ThresholdType=line /p:ThresholdStat=total
 
-coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen) — Gate wirkungslos, siehe CO-001
-	@echo "Critical coverage — CO-001 (Index) ausgenommen"
+coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen) — derzeit ROT bei 82,6 %, siehe CO-001
+	@echo "Critical coverage — Messung auf DocSearch.Service verengt (CO-001: Index ausgenommen)"
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
-		dotnet test DocSearch.sln --filter "FullyQualifiedName~Service"
+		dotnet test DocSearch.sln \
+		/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura \
+		'/p:Include="[DocSearch]DocSearch.Service.*"' \
+		/p:Threshold=90 /p:ThresholdType=line /p:ThresholdStat=total
 
 gates: lint typecheck arch-check test coverage-gate
 	@echo "gates grün."

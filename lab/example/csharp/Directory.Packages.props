@@ -12,5 +12,7 @@
     <PackageVersion Include="NetArchTest.Rules" Version="1.3.2" />
     <!-- Coverage -->
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+    <!-- msbuild-Integration: nur SIE wertet /p:Threshold aus (der collector misst nur) -->
+    <PackageVersion Include="coverlet.msbuild" Version="6.0.2" />
   </ItemGroup>
 </Project>

@@ -51,7 +51,7 @@ Die Ausnahme ist nicht als Ausschluss-Liste konfiguriert, sondern als
 | `python/Makefile` | `coverage-gate-critical` | `--cov=src/docsearch/service --cov-fail-under=90` |
 | `java/pom.xml` | Profil `critical-coverage` | JaCoCo-`includes` auf `com/example/docsearch/service/**`, `minimum` 0.90 |
 | `kotlin/build.gradle.kts` | `kover`, Schalter `-Pcritical` | `filters.includes` auf `com.example.docsearch.service.*`, `minValue` 90 |
-| `csharp/Makefile` | `coverage-gate-critical` | Test-Auswahl `FullyQualifiedName~Service` — **wirkungslos, siehe unten** |
+| `csharp/Makefile` | `coverage-gate-critical` | `/p:Include="[DocSearch]DocSearch.Service.*"`, Schwelle 90 — **derzeit rot, siehe unten** |
 | `cpp/Makefile` | `coverage-gate-critical` | `gcovr` mit Filter auf `src/hexagon/service/`, Schwelle 90 |
 
 Der ID-Kommentar `CO-001` steht in jedem Skelett im `@echo` des Targets
@@ -60,12 +60,22 @@ Verengung selbst in `pom.xml` bzw. `build.gradle.kts` konfiguriert ist. Damit
 ist der Carveout im Lauf sichtbar; ausgeführt wird das Target über `make ci`,
 nicht über `make gates`.
 
-**Offen für C#:** Das Skelett hat kein wirksames Coverage-Gate. `coverage-gate`
-setzt `/p:Threshold=70`, was `coverlet.msbuild` voraussetzt — referenziert ist
-nur `coverlet.collector`, der misst, aber keine Schwelle auswertet.
-`coverage-gate-critical` misst gar nicht: Es wählt nur Tests nach Namen aus.
-Der Carveout greift dort also ins Leere, bis das Gate real ist; die
-Verifikations-Checkliste führt das als eigenen Punkt.
+**Stand für C# (gemessen 2026-07-30):** Beide Gates sind real. `coverage-gate`
+wertet die Schwelle jetzt aus — `coverlet.msbuild` ist referenziert, und die
+COLLECTOR-Integration (`--settings coverlet.runsettings`) ist aus dem Aufruf
+raus: Beides zugleich hieß, dass gemessen wurde und die Schwelle unbeachtet
+blieb. Gegenprobe: Schwelle 80 bei 74 % Line-Coverage → `error: The total line
+coverage is below the specified 80`, Exit 1; vorher lief derselbe Aufruf grün
+durch.
+
+`coverage-gate-critical` verengt die Messung jetzt auf `DocSearch.Service.*`
+statt Tests nach Namen zu wählen — und ist damit **rot**: Der Service-Layer
+liegt bei **82,6 %** Line-Coverage gegen die 90 % aus ADR-0013. Das ist kein
+Carveout-Fall dieses Dokuments: CO-001 nimmt den **Index**-Layer aus, nicht den
+Service-Layer. Ein messendes rotes Gate ist der ehrlichere Zustand als ein
+grünes, das nichts prüft — aber es ist ein offener Punkt und braucht entweder
+Tests für den Service-Layer oder einen eigenen Carveout. Solange er offen ist,
+nennt die Target-Beschreibung in `csharp/Makefile` den Stand.
 
 ## Verifikation (nach Auflösung)
 
@@ -74,7 +84,8 @@ Verifikations-Checkliste führt das als eigenen Punkt.
       Index erweitert (Orte siehe §Geltungs-Konfiguration) — nicht ganz
       entfernt, sonst misst `coverage-gate-critical` dasselbe wie
       `coverage-gate`.
-- [ ] C#: wirksames Coverage-Gate vorhanden (`coverlet.msbuild`).
+- [x] C#: wirksames Coverage-Gate vorhanden (`coverlet.msbuild`, gemessen 2026-07-30).
+- [ ] C#: Service-Layer erreicht die 90 % aus ADR-0013 (steht bei 82,6 %) — oder ein eigener Carveout deckt die Lücke.
 - [ ] `make coverage-gate-critical` grün ohne Ausnahmen.
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
 - [ ] slice-013 Closure-Notiz schließt diese Auflösung mit ein.

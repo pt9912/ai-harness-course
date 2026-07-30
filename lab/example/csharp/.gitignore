@@ -1,3 +1,5 @@
 bin/
 obj/
 TestResults/
+# coverlet.msbuild schreibt den Report neben das Testprojekt
+coverage.cobertura.xml
