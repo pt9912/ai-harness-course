@@ -99,7 +99,7 @@ dasteht, ist alles, was der Adopter Wochen später hat. Vier Schichten:
   **Ziel-Form für das adoptierende Repo** — ob dort ein Review mit dieser
   HIGH-Regel tatsächlich läuft, entscheidet der Adopter, nicht diese
   Konvention. Wo er es nicht einrichtet, hat die Hard Rule keinen Träger, und
-  das ist der Auslieferungszustand, kein Sonderfall. Einen *Sensor* zu
+  das ist kein Sonderfall: Es ist der Auslieferungszustand. Einen *Sensor* zu
   behaupten, wo keiner steht, wäre die Klasse *halluziniertes Gate* (Modul 13)
   — auf die eigene Konvention angewandt.
 

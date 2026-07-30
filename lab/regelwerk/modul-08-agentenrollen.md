@@ -44,9 +44,9 @@ dieselbe Sicht denselben Fehler übersieht.
 Die Sequenz oben ist **slice-skopiert**. Die Welle hat ihre eigene Prozedur —
 drei Eröffnungs- und fünf Closure-Schritte
 ([Modul 6](modul-06-roadmap.md#wellen-closure-prozedur-modul-6)). Es gilt
-dieselbe Regel: **kein Rollenwechsel ohne Artefakt.** Nur sind es **fünf**
-Übergaben, nicht neun — gezählt wie oben, ein Pfeil je Übergabe; sie bilden
-drei Züge.
+dieselbe Regel: **kein Rollenwechsel ohne Artefakt.** Nur sind es **sechs**
+Übergaben, nicht neun — gezählt wie oben, ein Pfeil je Übergabe; sie bilden drei
+**Züge** aus je einer Anfrage und einer Antwort.
 
 **Die Eröffnung ist Planner-Arbeit** — alle drei Schritte laufen in *einem*
 Kontext. Es gibt keine Eröffnungs-Sequenz, weil es keine Übergabe gibt; wer
@@ -77,14 +77,14 @@ Umsetzungspfad.
 **Im Repo ohne Wellen-Betrieb** läuft diese Prozedur nicht; die Vorgänge laufen
 trotzdem, getragen von Slice-Closure und Slice-Planung
 ([Modul 6](modul-06-roadmap.md#wann-arbeit-eine-welle-braucht-modul-6), Tabelle
-*Träger im Repo ohne Wellen*). Für die Rollen: **vier der fünf Übergaben
-bleiben, eine entfällt.**
+*Träger im Repo ohne Wellen*). Für die Rollen: **zwei der drei Züge
+bleiben, einer entfällt ganz.**
 
 | Übergabe | ohne Wellen-Betrieb |
 |---|---|
 | Planner → Architect → Planner (Trigger-Audit) | **bleibt** — bei jeder Slice-Closure statt einmal pro Welle |
 | Planner → Architect → Planner (Verkörperung) | **bleibt** — Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
-| Verifier → Planner (repo-weiter Verifikations-Beleg) | **entfällt** |
+| Planner → Verifier → Planner (repo-weiter Verifikations-Beleg) | **entfällt** |
 
 Dass gerade diese entfällt, ist die Definition und kein Verlust: Ein repo-weiter
 Beleg über die Slice-DoDs hinaus **ist** das *Mehr*, an dem sich entscheidet, ob

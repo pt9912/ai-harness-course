@@ -89,8 +89,10 @@ Die Sequenz oben ist **slice-skopiert**. Eine Welle liegt eine Ebene darüber
 und hat ihre eigene Prozedur — drei Eröffnungs- und fünf Closure-Schritte
 ([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) §Die Wellen-Eröffnungs-Prozedur und [§Die Wellen-Closure-Prozedur](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)).
 Auch dort gilt die Regel von oben: **kein Rollenwechsel ohne Artefakt.** Nur
-sind es **fünf** Übergaben, nicht neun — gezählt wie oben, ein Pfeil je
-Übergabe. Sie bilden drei Züge: eine Zulieferung und zwei Frage-Antwort-Runden.
+sind es **sechs** Übergaben, nicht neun — gezählt wie oben, ein Pfeil je
+Übergabe. Sie bilden drei **Züge** aus je einer Anfrage und einer Antwort;
+deshalb trägt die Antwort-Kante durchgehend den gestrichelten Pfeil, wie im
+Diagramm oben.
 
 **Die Eröffnung ist Planner-Arbeit — und das ist eine Aussage, keine
 Leerstelle.** Alle drei Schritte (Ziel und Out-of-Scope festlegen · offene
@@ -98,7 +100,7 @@ Beobachtungen sichten · Welle-Datei anlegen und in die Roadmap eintragen)
 laufen in *einem* Kontext. Es gibt keine Eröffnungs-Sequenz, weil es keine
 Übergabe gibt — wer hier eine zeichnet, erfindet einen Rollenwechsel.
 
-**Die Closure hat fünf** (in drei Zügen):
+**Die Closure hat sechs** (drei Züge aus Anfrage und Antwort):
 
 ```mermaid
 sequenceDiagram
@@ -107,7 +109,8 @@ sequenceDiagram
     participant P as Planner
     participant A as Architect
 
-    Vf->>P: repo-weiter Verifikations-Beleg (fullbuild-Hash, Replay-Ergebnis)
+    P->>Vf: Closure-Trigger prüfen — alle Slices in done/, gates, Replay
+    Vf-->>P: repo-weiter Verifikations-Beleg (fullbuild-Hash, Replay-Ergebnis)
     P->>A: Trigger-Audit — welche ADRs und Reifestufen sind fällig?
     A-->>P: Verdikt (bestätigt / Folge-ADR mit supersedes / neue Stufe)
     P->>A: Steering-Loop-Eintrag: was 3× erreicht hat, plus Zielort
@@ -128,8 +131,8 @@ alle fünf, damit der Verweis dort einlösbar ist. Schritt 3 hat drei Teile.
 | **4** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit — der Audit sieht einen Punkt, kein verstreutes Verschwinden |
 | **5** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, nächste Zeile wird *Aktuelle Welle*, ggf. Eintrag in *Historische Trigger-Verschiebungen* |
 
-Nur Schritt 1, 2 und 3b tragen einen Rollenwechsel; 3a, 3c, 4 und 5 laufen im
-Planner-Kontext. Die drei Paarungen in 3c sind eine **Deckungs**-Prüfung, deren
+Nur Schritt 1, 2 und 3b tragen einen Rollenwechsel — je einen Zug aus Anfrage
+und Antwort; 3a, 3c, 4 und 5 laufen im Planner-Kontext. Die drei Paarungen in 3c sind eine **Deckungs**-Prüfung, deren
 Werkzeug der Kurs offen lässt
 ([Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register): *„Welches
 Werkzeug, ist Repo-Entscheidung"*) — das Urteil fiel schon beim Schreiben.
@@ -145,15 +148,15 @@ ohne Umsetzungspfad — dieselbe Begründung wie bei der Mehrfachzuweisung dort.
 
 **Und im Repo ohne Wellen-Betrieb?** Dort läuft diese Prozedur nicht — die
 Vorgänge laufen trotzdem, getragen von der Slice-Closure und der Slice-Planung
-([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur), Tabelle
-*Träger im Repo ohne Wellen*). Für die Rollen heißt das: **vier der fünf
-Übergaben bleiben, eine verschwindet.**
+([Modul 6 §Wann Arbeit eine Welle braucht](../02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht),
+Tabelle *Träger im Repo ohne Wellen*). Für die Rollen heißt das: **zwei der drei
+Züge bleiben, einer verschwindet ganz.**
 
 | Übergabe | ohne Wellen-Betrieb |
 |---|---|
 | Planner → Architect → Planner (Trigger-Audit) | **bleibt** — bei jeder Slice-Closure statt einmal pro Welle |
 | Planner → Architect → Planner (Verkörperung) | **bleibt** — Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
-| Verifier → Planner (repo-weiter Verifikations-Beleg) | **entfällt** |
+| Planner → Verifier → Planner (repo-weiter Verifikations-Beleg) | **entfällt** |
 
 Dass gerade diese entfällt, ist kein Verlust, sondern die Definition: Ein
 repo-weiter Beleg, der über die Slice-DoDs hinausgeht, **ist** das *Mehr*, an dem

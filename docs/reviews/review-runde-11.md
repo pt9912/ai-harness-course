@@ -383,7 +383,7 @@ dann gehört das in Modul 5, und der Zeiger muss es sagen? Oder ist die Zahl
 falsch gewählt? Nicht entschieden; der Zeiger ist von mir (Gruppe A) und hat den
 Widerspruch erst sichtbar gemacht — vorher trug §2 keinen.
 
-### E — Quelle/Spiegel und Verweise (4)
+### E — Quelle/Spiegel und Verweise (4) ✅
 
 **E-1 · `kurs/de/03-agenten/modul-08-agentenrollen.md:148`** — verweist für die
 Tabelle *Träger im Repo ohne Wellen* auf `#die-wellen-closure-prozedur`; sie
@@ -403,6 +403,29 @@ lab/example/tools/` → leer).
 **`modul-06-roadmap.md:87`** — zwei operative Passagen sind gegenüber der Quelle
 **paraphrasiert** statt weggelassen. Die Digest-Regel erlaubt Weglassen, nicht
 Umformulieren.
+
+**Behoben** (`Gruppe E`). `E-3` war schon mit `b4f5b1e` weggefallen: Der
+Tabellen-Umbau hat „Gate-Ausgabe" durch „eine **Deckungs**-Prüfung, deren
+Werkzeug der Kurs offen lässt" ersetzt. `E-1` — Verweis auf
+`#wann-arbeit-eine-welle-braucht--und-wann-nicht` umgehängt, wo die Tabelle
+tatsächlich liegt (`:299`). `E-4` — eine Passage wortgleich gemacht, die andere
+**weggelassen**: Die Konsequenz-Erklärung („dieselbe Auslöschung eine Ebene
+höher") ist Didaktik, die operative Regel („trägt `— keine —` und bleibt
+stehen") stand schon da.
+
+`E-2` war nicht die Pfeilart, sondern eine **fehlende Kante.** Der
+Verifikations-Beleg war als erste Nachricht des Diagramms gezeichnet, also
+initiativ — deshalb durchgezogen, während dieselbe Kante im Slice-Diagramm
+gestrichelt ist. Beides ließ sich nur auflösen, indem die Anfrage sichtbar wird:
+Die Wellen-Closure ist Planner-getrieben, der Verifier liefert **auf
+Anfrage**. Jetzt `P->>Vf` und `Vf-->>P`, und die Notation stimmt wieder —
+durchgezogen heißt Anfrage, gestrichelt heißt Antwort, in beiden Diagrammen.
+
+Damit wird die Zählung erst richtig: **sechs Übergaben in drei Zügen** aus je
+Anfrage und Antwort (statt fünf). Ohne Wellen-Betrieb entfällt ein ganzer Zug —
+**zwei der drei bleiben**, nicht „vier der fünf". Nachgeprüft: Slice-Diagramm 11
+Pfeile mit durchgezogen/gestrichelt konsistent, Wellen-Diagramm 6, dreimal das
+Paar.
 
 ### F — Rollen-Rename: sechs Reste (1)
 
