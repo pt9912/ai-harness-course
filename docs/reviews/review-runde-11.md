@@ -225,7 +225,7 @@ Spiegel-Pronomen · ADR-0011 Norm-gegen-Code · `verify-slice` (= `Ü-02`).
 Die folgenden **21 stehen offen.** Gates sind grün — keiner ist maschinell
 sichtbar.
 
-### A — Gate mit Falsch-Positiven (1)
+### A — Gate mit Falsch-Positiven (1) ✅
 
 **A-1 · `lab/example/tools/check_closure_notes.py:27`** — `PLACEHOLDER_RE =
 r"<[^<>\n]+>"` trifft belegte Schreibweisen außerhalb von Code:
@@ -239,6 +239,13 @@ r"<[^<>\n]+>"` trifft belegte Schreibweisen außerhalb von Code:
 Der Vergleichsoperator-Fall ist der gefährlichste: Er trifft das Format, in dem
 eine Closure-Notiz eine QA-Erfüllung berichtet. Ein Gate mit Falsch-Positiven
 auf dem eigenen Ziel-Inhalt erzieht zum Umgehen.
+
+**Behoben** (`d1e0f9c`): Regex eng gefasst — kein Treffer mitten in einem
+Identifier, keine führenden/schließenden Leerzeichen (Vergleichsoperatoren),
+Autolinks und HTML-Tags per Nachfilter. Verifiziert in beide Richtungen: acht
+Gegenbeispiele still, vier Platzhalter-Formen weiter getroffen, echtes Repo
+grün, blanker Template-Rumpf rot (Break-Test im eigenen Worktree), und eine
+echte Notiz mit `p95 < 1 s` plus Autolink bleibt grün.
 
 ### B — CHANGELOG: das Register stimmt nicht (4)
 

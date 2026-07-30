@@ -24,7 +24,19 @@ INLINE_CODE_RE = re.compile(r"`[^`]+`")
 # Closure-Notiz hat keine — der Gate war sonst gruen auf dem blanken
 # Template-Rumpf, und die Satz-Schwelle allein faengt das nicht: Der Rumpf
 # bringt genug Saetze mit.
-PLACEHOLDER_RE = re.compile(r"<[^<>\n]+>")
+#
+# Eng gefasst, weil die naive Form `<[^<>\n]+>` Inhalt trifft, den eine
+# Closure-Notiz legitim enthaelt — vor allem QA-Messungen wie
+# "p95 < 1 s, Recall > 0,9". Drei Ausschluesse:
+#   (?<![\w/])  kein Treffer mitten in einem Identifier (vector<float>, Zeile<br>)
+#   (?![\s!/])  kein Vergleichsoperator ("< 1 s"), kein HTML-Kommentar, kein Closing-Tag
+#   [^\s<>]>    kein Vergleichsoperator am Ende (" > 0,9")
+# Autolinks und HTML-Tags filtert placeholder_hits() nach.
+PLACEHOLDER_RE = re.compile(r"(?<![\w/])<(?![\s!/])[^<>\n]*[^\s<>]>")
+HTML_TAGS = {
+    "br", "p", "hr", "b", "i", "em", "strong", "code", "kbd",
+    "sup", "sub", "div", "span", "td", "tr", "th", "ul", "li",
+}
 
 
 def find_closure_section(text: str) -> str | None:
@@ -66,7 +78,15 @@ def floskel_hits(body: str) -> list[str]:
 
 def placeholder_hits(body: str) -> list[str]:
     cleaned = INLINE_CODE_RE.sub("", CODEBLOCK_RE.sub("", body))
-    return sorted(set(PLACEHOLDER_RE.findall(cleaned)))[:3]
+    hits = set()
+    for match in PLACEHOLDER_RE.findall(cleaned):
+        inner = match[1:-1]
+        if "://" in inner or "@" in inner:
+            continue  # Autolink: <https://…>, <alice@example.org>
+        if inner.lower().rstrip("/") in HTML_TAGS:
+            continue  # HTML-Tag: <br>, <br/>
+        hits.add(match)
+    return sorted(hits)[:3]
 
 
 def errors_for(path: pathlib.Path) -> list[str]:

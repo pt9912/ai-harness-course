@@ -102,7 +102,7 @@ des Gates.
 
 | Tooling | Regel | Make-Target |
 |---|---|---|
-| [`tools/check_closure_notes.py`](../../../tools/check_closure_notes.py) | Heading mit "Closure" + ≥2 Sätze außerhalb Code-Blöcken + keine Floskel + keine unausgefüllten `<…>`-Platzhalter | `make verify-closure-notes` |
+| [`tools/check_closure_notes.py`](../../../tools/check_closure_notes.py) | Heading mit "Closure" + ≥2 Sätze außerhalb Code-Blöcken + keine Floskel + keine unausgefüllten `<…>`-Platzhalter (Vergleichsoperatoren, Autolinks und HTML-Tags ausgenommen) | `make verify-closure-notes` |
 
 `verify-closure-notes` ist in das aggregierte `verify`-Target
 eingehängt. Es läuft *nicht* in `make gates`, weil es eine DoD-/Closure-
