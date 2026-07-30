@@ -22,30 +22,17 @@ jeder Cache einen Counter — die Regeln unten.
 
 ### Trace-Ebenen-Regeln (Modul 15)
 
-- **Drei Ebenen:** Trace = der Slice, die Korrelations-Einheit (`slice.id`,
-  `requirement.id`, `adr.id`) · **Lauf = das Kontextfenster und damit die
-  Rolle** (`run.id`, `agent.role`) · Span = ein Schritt, der die Rolle *erbt*,
-  nicht setzt.
-- **Die Rolle sitzt auf der Resource des Laufs, nicht am Span:** ein Prozess,
-  eine Resource, eine Rolle. Gesetzt von dem, der den Lauf startet
-  (`OTEL_RESOURCE_ATTRIBUTES` ist dafür spezifiziert; die Resource steht einmal
-  je Export-Block, nicht je Span). Der Lauf hängt über das
-  W3C-Trace-Context-Format am Slice-Trace — **als Umgebungsvariable
-  `TRACEPARENT` ist das Konvention, nicht Spezifikation.**
-- **Warum:** Mit der Rolle am Span ist „ein Lauf mit zwei Tool-Calls" nicht von
-  „zwei Läufen mit je einem" zu unterscheiden, und die Rolle ist eine Angabe
-  des Agenten über sich selbst statt eine des Starters.
-- **Der Mensch kommt in dieser Bilanz nicht vor:** Eine Rolle wird von einem
-  **Lauf** getragen, nicht von der Person, die ihn startet
-  ([Modul 8](modul-08-agentenrollen.md): Rollen-Trennung ist Kontext-Trennung,
-  keine Personen-Trennung). Startet dieselbe Person nacheinander einen
-  Planner-, einen Implementer- und einen Reviewer-Lauf, entstehen drei
-  Kontexte mit je eindeutiger Rolle — die Bilanz pro Rolle bleibt eindeutig,
-  und niemand muss Token auf Menschen verteilen. Deshalb ist die
-  „Kostenstelle" ein Kontext und kein Mensch.
-- **Der Emissions-Pfad ist Repo-Entscheidung:** Exporter, Collector, Sampling
-  und Aufbewahrung stehen nicht in diesem Regelwerk. Mitzunehmen ist das
-  **Schema**, nicht das Setup.
+- **Drei Ebenen:** Trace = der Slice (`slice.id`, `requirement.id`, `adr.id`) ·
+  **Lauf** = das Kontextfenster und damit die Rolle (`run.id`, `agent.role`) ·
+  Span = ein Schritt, der die Rolle *erbt*, nicht setzt.
+- **Die Rolle sitzt auf der Resource des Laufs, gesetzt vom Starter**
+  (`OTEL_RESOURCE_ATTRIBUTES`; die Resource steht einmal je Export-Block, nicht
+  je Span). Der Lauf hängt über W3C-Trace-Context am Slice-Trace — als
+  Umgebungsvariable `TRACEPARENT` ist das Konvention, nicht Spezifikation.
+- **Die Zuordnungs-Einheit der Token-Bilanz ist der Lauf** — die „Kostenstelle"
+  ist ein Kontext, kein Mensch ([Modul 8](modul-08-agentenrollen.md)).
+- **Der Emissions-Pfad ist Repo-Entscheidung** (Exporter, Collector, Sampling,
+  Aufbewahrung): Mitzunehmen ist das **Schema**, nicht das Setup.
 
 ### Regeln gegen typische Fehlannahmen (Modul 15)
 
