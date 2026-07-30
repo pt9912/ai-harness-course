@@ -276,7 +276,7 @@ verlinkt. `B-4`: Beide Zahlen sind richtig, die Zählbasis war es nicht — der
 Satz nennt sie jetzt (Zeiger der Form *„Regeln dieser Sektion:"* gegen jede
 Regelwerk-*Nennung*) und verweist auf R10-02.
 
-### C — Template-Zeiger auf Abschnitte, die die Regel nicht tragen (6)
+### C — Template-Zeiger auf Abschnitte, die die Regel nicht tragen (6) ✅
 
 **C-1 · `roadmap.template.md:20`** — „§Roadmap-Struktur — genau **eine**
 aktuelle Welle." *„Genau eine"* existiert weder im Kurs noch im Regelwerk.
@@ -300,6 +300,38 @@ Out-of-Scope-Disziplin steht in Eröffnung Schritt 1.
 Vorbedingung**, kein Ergebnis dieser Welle." Beide Formulierungen existieren im
 Repo nur hier; die Beobachtbarkeits-Regel steht in §Roadmap-Regeln, und
 §Wann Arbeit eine Welle braucht handelt vom *Closure*-Trigger.
+
+**Behoben** (`Gruppe C`): Alle neun Zeiger zeigen jetzt auf den Abschnitt, der
+die Regel wirklich trägt, und zitieren dessen Wortlaut statt einer eigenen
+Fassung. Maschinell nachgeprüft: **38 Zeiger, 0 ohne Ziel**. Zwei Klauseln, die
+das Regelwerk nirgends trug, sind ersatzlos gefallen — „genau **eine** aktuelle
+Welle" (der Abschnitt sagt „**die laufende**") und „geplante Wellen bekommen
+keine eigene Datei" (steht in Eröffnung Schritt 3 und gehört zu
+`welle.template.md`, nicht in die Roadmap-Vorlage). Aus `C-4` wurden drei
+Stellen: `welle-results.template.md` hängte auch §Was hat funktioniert? und
+§Was ging anders? an Modul 5 §Closure-Regeln (Slice-Ebene), obwohl beide
+wörtlich in Modul 6 Schritt 3 stehen.
+
+Die dritte fallengelassene Klausel ist ein eigener Befund geworden: siehe
+`C-7`.
+
+**C-7 · „Ein Trigger ist kein Ergebnis dieser Welle" — Regel ohne Quelle** (neu,
+aus der C-Behebung)
+
+Die Klausel stand in `welle.template.md:39` und ist mit `C-6` gefallen, weil das
+Regelwerk sie nicht trägt. Sie beschreibt aber einen realen Defekt: Ein Trigger,
+der ein Ergebnis seiner eigenen Welle ist, macht die Welle selbstreferenziell.
+Das Repo hat dafür Vorfälle — der zirkuläre M2-Trigger („Coverage-Gate
+hochgeschaltet" als Trigger der Welle, die hochschaltet) wurde in Klasse 2 an
+sechs Stellen behoben, und `welle-1-mvp.md` führt den Fall ausdrücklich vor
+(*„Sie entstehen in dieser Welle und wären damit Ergebnisse, keine beobachtbaren
+Vorbedingungen"*) — nur steht das im **Beispiel**, nicht in der Norm.
+
+**Zuerst zu entscheiden:** Gehört *„ein Start-Trigger ist kein Ergebnis dieser
+Welle"* als Regel nach Modul 6 §Roadmap-Regeln (dann Fix-Richtung Quelle →
+Template), oder ist es eine Folgerung aus der Beobachtbarkeit, die niemand
+aufschreiben muss? Nicht entschieden, weil eine Norm-Erweiterung nicht in eine
+Zeiger-Reparatur gehört.
 
 ### D — Template-Schichtung verletzt (3)
 

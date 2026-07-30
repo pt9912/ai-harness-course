@@ -17,7 +17,8 @@
 <!-- BEDIENHINWEIS: Ergebnis, nicht Taetigkeit. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Wellen-Closure-Prozedur, Schritt 1 — mit ID-Bezug, wo es einen gibt.
+§Wellen-Closure-Prozedur, Schritt 3 — *was gelernt wurde*: geliefert · was
+funktionierte · was anders lief. Mit ID-Bezug, wo es einen gibt.
 
 - <LH-FA-NN erfüllt, Akzeptanzkriterium grün.>
 - <…>
@@ -26,8 +27,8 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 
 <!-- BEDIENHINWEIS: was du im naechsten Zyklus bewusst wieder so machen wuerdest. -->
 
-Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
-§Closure- und Lerneintrag-Regeln.
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wellen-Closure-Prozedur, Schritt 3.
 
 - <…>
 
@@ -35,8 +36,8 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
 
 <!-- BEDIENHINWEIS: Beobachtungen, keine Schuldzuweisung. -->
 
-Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
-§Closure- und Lerneintrag-Regeln — jede Zeile moeglichst mit der Konsequenz,
+Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
+§Wellen-Closure-Prozedur, Schritt 3 — jede Zeile moeglichst mit der Konsequenz,
 die daraus schon gezogen wurde (Folge-Slice, Spec-Version).
 
 - <…>

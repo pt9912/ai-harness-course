@@ -35,8 +35,9 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 <!-- BEDIENHINWEIS: Was muss vorher passiert sein? -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Wann Arbeit eine Welle braucht — ein Trigger ist eine **beobachtbare
-Vorbedingung**, kein Ergebnis dieser Welle.
+§Roadmap-Regeln — ein Trigger ist **beobachtbar** dann, wenn ein *anderer*
+Mensch ohne Rückfrage sagen kann, ob er eingetreten ist; ein Datum darf erwähnt
+werden, aber nie Trigger sein.
 
 - <z.B. Welle <welle-vorher-id> done.>
 - <z.B. ADR-<NNNN> accepted.>
@@ -82,7 +83,9 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 <!-- BEDIENHINWEIS: explizite Nicht-Inhalte, schuetzt vor Scope-Creep. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Roadmap-Regeln.
+§Wellen-Closure-Prozedur, Eröffnung Schritt 1 — Out-of-Scope gehört zur
+Zielsetzung: Was nicht ausdrücklich ausgeschlossen ist, dehnt die Welle, bis
+der Closure-Trigger unerreichbar wird.
 
 - <…>
 

@@ -17,7 +17,9 @@ gezeigt, nicht als Treiber.
 ## Aktuelle Welle
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Roadmap-Struktur: fünf Abschnitte — genau **eine** aktuelle Welle.
+§Roadmap-Struktur: fünf Abschnitte — *Aktuelle Welle* ist **die laufende**, mit
+den drei Pflicht-Bestandteilen (Slice-IDs · Trigger · Closure-Kriterien); das
+*Geplante Ende* ist Schätzung, kein Closure-Kriterium.
 
 **Welle-ID:** <welle-NN-titel>
 **Start:** YYYY-MM-DD
@@ -28,7 +30,9 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 ## Nächste Wellen
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Roadmap-Struktur: fünf Abschnitte — geplante Wellen stehen hier und bekommen **keine** eigene Datei.
+§Roadmap-Struktur: fünf Abschnitte, Bullet *Nächste Wellen* — die geordnete
+Vorschau: je Zeile Welle, Trigger als beobachtbare Bedingung, wichtigste Slices
+und geschätzter Aufwand (S/M/L, kein Termin).
 
 | Welle | Trigger | Wichtigste Slices | Geschätzter Aufwand |
 |---|---|---|---|
@@ -52,7 +56,10 @@ Externe Versprechen oder interne Trigger-Punkte.
 ## Abhängigkeitsgraph
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Roadmap-Regeln — Reihenfolge von Wellen, keine Reihenfolge von Terminen.
+§Roadmap-Struktur: fünf Abschnitte, Bullet *Nächste Wellen* — die Abhängigkeit
+steht als beobachtbare Bedingung in der `Trigger`-Spalte **und** als gerichtete
+Kante hier; eine Welle, die ohne fertige Vorgängerin nicht starten kann, ist
+eine Phantom-Welle.
 
 ```mermaid
 flowchart LR
@@ -79,7 +86,9 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 ## Historische Trigger-Verschiebungen
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Roadmap-Regeln — Schätzungen sind korrigierbar; die Korrektur wird sichtbar geführt, nicht überschrieben.
+§Roadmap-Struktur: fünf Abschnitte, Bullet *Historische Trigger-Verschiebungen*
+— das Drift-Log: jede Umplanung mit Datum, Änderung, Grund. Leer heißt starre
+Roadmap, jede Zeile voll heißt treibende.
 
 <!--
 Wenn Wellen umgeplant wurden: Datum, Grund, neue Reihenfolge.
