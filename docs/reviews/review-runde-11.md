@@ -440,7 +440,7 @@ gebracht; `make help` zeigt „Implementer-Agent". Vollprobe über alle verfolgt
 Markdown-, JSON- und Makefile-Dateien nach Vorgangsnomen in Rollen-Position:
 keine Treffer.
 
-### G — Buchführungs-Dokumente (2)
+### G — Buchführungs-Dokumente (2) ✅
 
 **G-1 · `review-runde-10.md:446` und `:495`** — „R10-01 fiel bei **Klasse 3**
 mit weg". Behoben wurde es in `5e061dc`, zwei Commits **vor** Klasse 1; dieser
@@ -449,6 +449,14 @@ Commit fehlt in der Inventur-Tabelle ganz.
 **G-2 · `review-runde-10.md:431`** — „Die Klassen 1–3 betreffen `lab/example`".
 Klasse 3 (`3ac682f`) hat vier Kurs- und Spiegel-Dateien geändert — es sind die
 Stellen, die §Entschieden als `E-4` führt.
+
+**Behoben** (`ac35c58`): `G-1` — `5e061dc` als Zeile *vorab* in die
+Inventur-Tabelle aufgenommen; R10-01 ist dort als vorab behoben geführt, mit
+dem Zusatz, dass Klasse 3 die Blöcke später an die neuen Sub-Area-Namen
+angepasst hat. `G-2` — die Aussage verwechselte zwei Achsen: Die Klassen
+benennen, **wo der Defekt sichtbar war**, nicht wo der Fix landete. Bei
+Klasse 3 stand die Fehlzuordnung im Register auf einer fehlenden Norm, also
+ging der Fix an die Quelle.
 
 ### Nicht übernommen
 
