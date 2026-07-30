@@ -20,23 +20,6 @@ zur Anforderung zurück und prüfst, ob die Kette **maschinell** hält.
 Dafür braucht jeder Span ein Audit-Schema, jede Rolle eine Token-Bilanz,
 jeder Cache einen Counter — die Regeln unten.
 
-### Trace-Ebenen-Regeln (Modul 15)
-
-- **Drei Ebenen:** Slice = die Korrelations-Einheit, als **Attribut** jedes
-  Laufs (`slice.id`, `requirement.id`, `adr.id`) · **Lauf** = das
-  Kontextfenster und damit die Rolle (`run.id`, `agent.role`) · Span = ein
-  Schritt, der die Rolle *erbt*, nicht setzt.
-- **Die Rolle ist eine Angabe des Starters, nicht des Agenten:** Sie steht
-  fest durch das Rollen-Artefakt, das er startet
-  ([Modul 8](modul-08-agentenrollen.md)). Emittiert der Lauf selbst OTel,
-  stempelt der Starter sie per `OTEL_RESOURCE_ATTRIBUTES` auf die Resource
-  (einmal je Export-Block); sonst führt der Starter das Lauf-Buch
-  `run.id → Rolle → slice.id`, Zuordnung von außen.
-- **Die Zuordnungs-Einheit der Token-Bilanz ist der Lauf** — die „Kostenstelle"
-  ist ein Kontext, kein Mensch ([Modul 8](modul-08-agentenrollen.md)).
-- **Der Emissions-Pfad ist Repo-Entscheidung** (Exporter, Collector, Sampling,
-  Aufbewahrung): Mitzunehmen ist das **Schema**, nicht das Setup.
-
 ### Regeln gegen typische Fehlannahmen (Modul 15)
 
 - **"Logs reichen."** — Logs sagen *was passierte*, nicht *wer wen wann rief*. Trace ist die Antwort darauf.
@@ -50,11 +33,15 @@ jeder Cache einen Counter — die Regeln unten.
 - **Mindestfelder eines Tool-Call-Spans:** `tool.name`, `tool.arguments` (redacted), `tool.result.status` plus Korrelations-IDs zu Slice/PR/Agent-Rolle. Begründung: Ohne `slice.id` / `requirement.id` ist Token-Attribuierung pro Slice nicht möglich; ohne `agent.role` bricht die Rollen-Trennung in der Forensik.
 - **Audit-Span-Schema:** liste jeden Attribut-Namen, markiere ihn als *Pflicht* oder *Optional* und nenne pro Attribut die *Incident-Frage*, die es beantwortet (z. B. `slice.id` → "auf wessen Rechnung lief der Schreibzugriff?"; `tool.arguments.redacted` → "was wurde wohin geschrieben — ohne Secrets im Log?"). Pflicht-Minimum: Slice-ID, Agent-Rolle, Cache-Status, `requirement.id` — jede Abweichung davon begründest du. Ein Attribut ohne Incident-Frage fliegt raus: Schema-Felder ohne Abnehmer sind Telemetrie-Boilerplate, kein Audit.
 
+- **Der Emissions-Pfad ist Repo-Entscheidung** (Exporter, Collector, Sampling,
+  Aufbewahrung): Mitzunehmen ist das **Schema**, nicht das Setup.
+
 ### Token-Attributions-Regeln
 
 Summiere Input- und Output-Token pro `agent.role` — attribuiert wird damit auf
-**Kontexte**, nicht auf Personen (§Trace-Ebenen-Regeln); die Rollen sind die
-aus [Modul 8](modul-08-agentenrollen.md) — und gib an, welche Rolle den größten
+**Kontexte**, nicht auf Personen; die Rollen sind die aus
+[Modul 8](modul-08-agentenrollen.md), festgelegt durch das gestartete
+Rollen-Artefakt — und gib an, welche Rolle den größten
 Anteil trägt — als Zahl *und* als Prozentsatz der Gesamtsumme. Wo ein
 Span keinen Rollen-Tag trägt (Sammelposten), entscheide begründet, wie
 du ihn aufteilst (anteilig nach Tool-Calls? dem auslösenden Slice

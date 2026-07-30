@@ -204,9 +204,11 @@ Schema und keinen Weg, es zu befüllen. Drei Wege:
 `29b4c16`; Details in den Commit-Messages): (a) Mini-Glossar und Übung benennen
 die Kostenstelle als **Kontext**, kein Mensch. (b) Modul 15 §Lab-Grenze
 deklariert Fixture und Emissions-Pfad als Nicht-Lehrinhalt; „ein Trace pro
-Slice" ist als **Modellwahl** benannt, die Korrelation trägt `slice.id`. Der
-Regelwerk-Split führt vier Regel-Bullets ohne Kurs-Bezug — der
-Mechanismus-Vorschlag oben ist damit teilweise überholt.
+Slice" ist als **Modellwahl** benannt, die Korrelation trägt `slice.id`, die Rolle
+eines Laufs steht durch das gestartete Rollen-Artefakt fest. Der
+Regelwerk-Split trägt davon nur die zwei operativen Sätze in den bestehenden
+Regel-Sektionen — die Ebenen-Mechanik ist Grenz-Didaktik und blieb in der
+Quelle. Der Mechanismus-Vorschlag oben ist teilweise überholt.
 
 ---
 
