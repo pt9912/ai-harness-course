@@ -26,7 +26,7 @@ Fünf neue Begriffe — Volldefinitionen in
 | **Span** | Ein einzelner Schritt im Trace mit Anfang, Ende und Attributen. | eine Zeile im Protokoll, mit Anhang. |
 | **Korrelations-ID** | Schlüssel (z. B. `slice.id`), der Spans über Komponenten hinweg verbindet. | das Etikett am Paket, das es durch die Sortieranlage führt. |
 | **Cache-Hit-Rate** | Anteil der Token-Eingaben, die aus dem Prompt-Cache bedient wurden — Kosten- *und* Sicherheits-Metrik. | Trefferquote eines Wörterbuchs vor dem Übersetzen. |
-| **Token-Attribuierung** | Zuordnung der Token-Kosten eines Modelllaufs zu Slice, Rolle, Tool-Call. | Buchhaltungs-Splitting eines Sammelpostens auf Kostenstellen. |
+| **Token-Attribuierung** | Zuordnung der Token-Kosten eines Modelllaufs zu Slice, Rolle, Tool-Call. | Buchhaltungs-Splitting eines Sammelpostens auf Kostenstellen — wobei die Kostenstelle hier ein **Kontext** ist, kein Mensch (siehe §Lab-Grenze). |
 
 ## Engage
 
@@ -52,6 +52,53 @@ Nach diesem Modul kannst du:
 
 * [`../../../lab/example/otel/`](../../../lab/example/otel/) — reduziertes Trace-Fixture
 * [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make trace RUN=sl-009-agent-run`
+
+## Lab-Grenze
+
+Das Fixture unter [`../../../lab/example/otel/`](../../../lab/example/otel/) ist
+**handgeschriebenes JSON**, kein OTLP. Es reicht für alles, was dieses Modul
+verlangt — einen Trace *lesen*, Token *attribuieren*, ein Span-Schema
+*entwerfen* —, und es fehlt ihm die Ebene, die ein echter Emissions-Pfad
+mitbringt. Beides gehört benannt.
+
+**Was das Fixture ist:** ein **Slice**-Trace. Ein Trace über `slice-009`, dessen
+Spans je ein `agent.role` tragen. Deshalb enthält *ein* Trace vier Rollen — nicht
+weil ein Kontext vier Rollen spielte, sondern weil der Trace den Slice umspannt
+und nicht den Lauf.
+
+**Wie es in einer instrumentierten Umgebung aussähe** — drei Ebenen statt zwei:
+
+| Ebene | Was sie ist | Trägt |
+|---|---|---|
+| Trace | der Slice — die Korrelations-Einheit | `slice.id`, `requirement.id`, `adr.id` |
+| **Lauf** | **das Kontextfenster, und damit die Rolle** | `run.id` · `agent.role` |
+| Span | ein Schritt im Lauf | erbt die Rolle, setzt sie nicht |
+
+Die Rolle sitzt dort auf der **Resource** des Laufs, nicht am Span: Ein Prozess,
+eine Resource, eine Rolle. Gesetzt wird sie von dem, der den Lauf startet —
+`OTEL_RESOURCE_ATTRIBUTES="agent.role=…,run.id=…,slice.id=…"` ist dafür
+spezifiziert, und im Protokoll steht die Resource einmal je Export-Block, nicht
+je Span. Angehängt wird der Lauf an den Slice-Trace über das
+W3C-Trace-Context-Format; **als Umgebungsvariable `TRACEPARENT` ist das
+Konvention, nicht Spezifikation** — die Spec definiert HTTP-Header.
+
+**Warum die Ebene fehlt und was daran hängt.** Mit `agent.role` am Span ist „ein
+Implementer-Lauf mit zwei Tool-Calls" nicht von „zwei Implementer-Läufen mit je
+einem" zu unterscheiden; im Fixture stehen `impl-1` und `impl-2` genau so
+nebeneinander. Und die Rolle ist dann eine Angabe des Agenten über sich selbst —
+auf der Resource ist sie eine Angabe dessen, der ihn gestartet hat, also
+derselben Instanz, die den Kontext erzeugt. Das ist der Grund, warum
+Rollen-Trennung *Kontext*-Trennung ist und keine Personen-Trennung
+([Modul 8 §Rollen-Regeln](../03-agenten/modul-08-agentenrollen.md)): Die
+Zuordnungs-Einheit der Token-Bilanz ist der Lauf. Deshalb bleibt die Bilanz
+sauber, wenn ein Mensch mehrere Rollen nacheinander spielt — und deshalb ist
+„Kostenstelle" im Mini-Glossar ein Kontext und kein Mensch.
+
+**Was dieses Modul nicht lehrt:** den Emissions-Pfad. Die Lernziele sagen
+*lesen*, *attribuieren*, *unterscheiden*, *erkennen*, *spezifizieren*,
+*entwerfen* — keines sagt *instrumentieren*. Exporter, Collector, Sampling und
+Aufbewahrung sind Repo-Entscheidungen und stehen bewusst nicht hier. Wer
+instrumentiert, nimmt aus diesem Modul das **Schema** mit, nicht das Setup.
 
 ## Themen
 
@@ -219,7 +266,7 @@ und `adr.id`).
 ## Übungen
 
 * Analyse eines KI-Agenten-Laufs im Trace-Viewer
-* **(Anwenden — aktiviert LZ 2)** *Token-Kosten attribuieren.* Identifiziere zunächst den teuersten Tool-Call und begründe, ob er nötig war. Dann *attribuiere* die Gesamt-Token des Laufs: summiere Input- und Output-Token pro `agent.role` — die Rollen sind die aus [Modul 8](../03-agenten/modul-08-agentenrollen.md), im Fixture tritt nicht jede auf — und gib an, welche Rolle den größten Anteil trägt — als Zahl *und* als Prozentsatz der Gesamtsumme. Wo ein Span keinen Rollen-Tag trägt (Sammelposten), entscheide begründet, wie du ihn aufteilst (anteilig nach Tool-Calls? dem auslösenden Slice zugeschlagen?) — genau das ist das Buchhaltungs-Splitting eines Sammelpostens auf Kostenstellen aus dem Mini-Glossar.
+* **(Anwenden — aktiviert LZ 2)** *Token-Kosten attribuieren.* Identifiziere zunächst den teuersten Tool-Call und begründe, ob er nötig war. Dann *attribuiere* die Gesamt-Token des Laufs: summiere Input- und Output-Token pro `agent.role` — die Rollen sind die aus [Modul 8](../03-agenten/modul-08-agentenrollen.md), im Fixture tritt nicht jede auf; du attribuierst damit auf **Kontexte**, nicht auf Personen (§Lab-Grenze) — und gib an, welche Rolle den größten Anteil trägt — als Zahl *und* als Prozentsatz der Gesamtsumme. Wo ein Span keinen Rollen-Tag trägt (Sammelposten), entscheide begründet, wie du ihn aufteilst (anteilig nach Tool-Calls? dem auslösenden Slice zugeschlagen?) — genau das ist das Buchhaltungs-Splitting eines Sammelpostens auf Kostenstellen aus dem Mini-Glossar.
 * **(Erschaffen — aktiviert LZ 4 Spezifizieren-Hälfte)** *Cache-Hit-Rate
   spezifizieren* — die Erkennen-Hälfte von LZ 4 probt das
   Selbstcheck-Item zum Cache-Miss; die Übung vorbereitet zudem die

@@ -1,8 +1,8 @@
 # Review-Runde 11 — offen
 
 **Stand:** 2026-07-29. **Status:** noch kein Review-Lauf. Diese Datei sammelt,
-was **vor** der Runde aufgefallen ist. `V11-01` ist behoben, `V11-02` und die
-Ü-Posten sind offen.
+was **vor** der Runde aufgefallen ist. `V11-01`, `V11-02` und `Ü-02` sind
+behoben, die übrigen Ü-Posten offen.
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -88,7 +88,7 @@ Aussage aus zwei Richtungen.
 
 ---
 
-### V11-02 — Die Zuordnungs-Einheit der Token-Attribuierung ist nicht benannt, und es gibt keinen Emissions-Pfad
+### V11-02 — Die Zuordnungs-Einheit der Token-Attribuierung ist nicht benannt, und es gibt keinen Emissions-Pfad ✅
 
 *(Aus einer Nutzer-Frage, in zwei Schritten geschärft. Zwei Hälften mit
 derselben Wurzel: Modul 15 sagt nicht, **worauf** attribuiert wird — und das
@@ -199,6 +199,22 @@ Schema und keinen Weg, es zu befüllen. Drei Wege:
    Kurses. Billig und ehrlich; die Lücke bleibt.
 3. **Nur (a) beheben** — den Satz zur Zuordnungs-Einheit nachtragen und (b)
    offen lassen. Löst die Begriffsfrage, nicht die Umsetzungsfrage.
+
+**Behoben — (a) plus (b) als deklarierte Grenze; die Wahl war ableitbar, nicht
+zu treffen.** Maßstab sind die Lernziele von Modul 15: *lesen · attribuieren ·
+unterscheiden · erkennen · spezifizieren · entwerfen* — keines sagt
+*instrumentieren*. Ein gelehrter Emissions-Pfad (Weg 1) hätte den Modul-Scope
+erweitert, um einen Befund zu schließen; das wäre Fix-Richtung Befund → Lehre.
+
+Encodiert als **Modul 15 §Lab-Grenze** (nach §Lab-Bezug, dem Muster von
+`evals/golden/README.md` folgend): Das Fixture ist ein **Slice**-Trace mit der
+Rolle am Span; in einer instrumentierten Umgebung sind es drei Ebenen, die Rolle
+sitzt auf der **Resource** des Laufs und wird vom Starter gesetzt
+(`OTEL_RESOURCE_ATTRIBUTES` spezifiziert, `TRACEPARENT` als Env-Var ausdrücklich
+Konvention). Der Emissions-Pfad ist als Nicht-Lehrinhalt benannt: mitzunehmen
+ist das Schema, nicht das Setup. Für (a) tragen Mini-Glossar und Übungsauftrag
+jetzt „die Kostenstelle ist ein **Kontext**, kein Mensch"; Spiegel quelltreu,
+Fixture-README sagt, was das Fixture ist.
 
 ---
 

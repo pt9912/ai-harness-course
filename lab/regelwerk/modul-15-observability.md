@@ -20,6 +20,31 @@ zur Anforderung zurück und prüfst, ob die Kette **maschinell** hält.
 Dafür braucht jeder Span ein Audit-Schema, jede Rolle eine Token-Bilanz,
 jeder Cache einen Counter — die Regeln unten.
 
+### Lab-Grenze (Modul 15)
+
+- **Das Kurs-Fixture ist handgeschriebenes JSON, kein OTLP** — es trägt einen
+  **Slice**-Trace, dessen Spans je ein `agent.role` haben. Ein Trace enthält
+  deshalb mehrere Rollen: Er umspannt den Slice, nicht den Lauf.
+- **In einer instrumentierten Umgebung sind es drei Ebenen:** Trace = der Slice
+  (`slice.id`, `requirement.id`, `adr.id`) · **Lauf = das Kontextfenster und
+  damit die Rolle** (`run.id`, `agent.role`) · Span = ein Schritt, der die Rolle
+  *erbt*. Die Rolle sitzt auf der **Resource** des Laufs, nicht am Span: ein
+  Prozess, eine Resource, eine Rolle. Gesetzt von dem, der den Lauf startet
+  (`OTEL_RESOURCE_ATTRIBUTES` ist dafür spezifiziert; die Resource steht einmal
+  je Export-Block, nicht je Span). Der Lauf hängt über das
+  W3C-Trace-Context-Format am Slice-Trace — **als Umgebungsvariable
+  `TRACEPARENT` ist das Konvention, nicht Spezifikation.**
+- **Was daran hängt:** Mit der Rolle am Span ist „ein Lauf mit zwei Tool-Calls"
+  nicht von „zwei Läufen mit je einem" zu unterscheiden, und die Rolle ist eine
+  Angabe des Agenten über sich selbst statt eine des Starters. Die
+  Zuordnungs-Einheit der Token-Bilanz ist der **Lauf** — deshalb ist die
+  „Kostenstelle" ein Kontext und kein Mensch, und deshalb bleibt die Bilanz
+  sauber, wenn ein Mensch mehrere Rollen nacheinander spielt
+  ([Modul 8](modul-08-agentenrollen.md)).
+- **Nicht Teil des Kurses:** der Emissions-Pfad. Exporter, Collector, Sampling
+  und Aufbewahrung sind Repo-Entscheidungen. Mitzunehmen ist das **Schema**,
+  nicht das Setup.
+
 ### Regeln gegen typische Fehlannahmen (Modul 15)
 
 - **"Logs reichen."** — Logs sagen *was passierte*, nicht *wer wen wann rief*. Trace ist die Antwort darauf.
@@ -35,7 +60,8 @@ jeder Cache einen Counter — die Regeln unten.
 
 ### Token-Attributions-Regeln
 
-Summiere Input- und Output-Token pro `agent.role` — die Rollen sind die aus
+Summiere Input- und Output-Token pro `agent.role` — attribuiert wird damit auf
+**Kontexte**, nicht auf Personen (§Lab-Grenze); die Rollen sind die aus
 [Modul 8](modul-08-agentenrollen.md), im Fixture tritt nicht jede auf — und
 gib an, welche Rolle den größten
 Anteil trägt — als Zahl *und* als Prozentsatz der Gesamtsumme. Wo ein
