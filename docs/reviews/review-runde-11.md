@@ -554,13 +554,45 @@ obwohl `AGENTS.md` §4 es als *mandatory vor PR* führt. Der Lauf ist trivial gr
 (kein Sprach-Skelett berührt), die fehlende Zeile trotzdem ein Mangel —
 nachgetragen mit Vermerk. Die übrigen drei Vorbild-Slices sind grün.
 
-### Ü-03 — C# hat kein wirksames Coverage-Gate
+### Ü-03 — C# hat kein wirksames Coverage-Gate ✅
 
 `csharp/Makefile:44` setzt `/p:Threshold=70`, was `coverlet.msbuild` voraussetzt;
 `csharp/Directory.Packages.props:14` referenziert nur `coverlet.collector` — der
 misst, wertet aber keine Schwelle aus. In
 [`CO-001`](../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md)
 §Offen ehrlich benannt. Braucht ein lauffähiges `dotnet restore` zum Verifizieren.
+
+**Behoben und verifiziert** (`e187cc9`). Der Docker-Weg des Targets machte es
+möglich: `dotnet` fehlt lokal, das SDK-Image lag da.
+
+Die Ursache war schärfer als notiert — der Aufruf mischte **zwei**
+coverlet-Integrationen. `--settings coverlet.runsettings` ist die
+Collector-Integration, `/p:Threshold=70` wertet nur die MSBuild-Integration aus,
+und `coverlet.msbuild` fehlte. Gemessen wurde, die Schwelle blieb unbeachtet:
+
+```
+vorher,  Schwelle 80 bei 74 % Line-Coverage:  Passed! … EXIT=0
+nachher, dieselbe Schwelle:  error : The total line coverage
+                             is below the specified 80     EXIT=1
+```
+
+Das Lock-File erzwingt `RestoreLockedMode`, wurde also mit `--force-evaluate`
+neu bewertet und mitgezogen.
+
+**Ü-07 · `coverage-gate-critical` ist jetzt rot** (neu, aus der Ü-03-Behebung)
+
+Das Target wählte nur Tests nach Namen aus und misst jetzt wirklich
+(`/p:Include="[DocSearch]DocSearch.Service.*"`, Schwelle 90) — damit ist es
+**rot**: Der Service-Layer liegt bei **82,6 %**. Das ist kein CO-001-Fall, denn
+CO-001 nimmt den **Index**-Layer aus, nicht den Service-Layer. Ein messendes
+rotes Gate ist der ehrlichere Zustand als ein grünes, das nichts prüft, und es
+ist nicht still: Target-Beschreibung, CO-001 §Stand für C# und die
+Verifikations-Checkliste nennen ihn. Folge: `make ci` ist für C# rot,
+`make gates` bleibt grün.
+
+**Zuerst zu entscheiden:** Tests für den Service-Layer bis 90 % — oder ein
+eigener Carveout für die Lücke? Nicht entschieden; beides ist ein Slice, keine
+Gate-Reparatur.
 
 ### Ü-04 — `AGENTS.template.md` lehrt einen zentralen Ort für Qualitätsdefinitionen ohne Quell-Verankerung
 
