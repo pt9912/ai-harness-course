@@ -123,8 +123,8 @@ für ein typisches Repo:
 2. `spec/architecture.md`
 3. `docs/plan/adr/README.md` und die darin referenzierten ADRs
 4. `docs/plan/planning/in-progress/roadmap.md`
-5. `docs/user/*.md` (Betriebs-/Operations-Docs — Quality-Definitionen,
-Releasing, Runbooks)
+5. `docs/user/*.md` (Betriebs-/Operations-Docs — Quality-, Releasing- und
+Runbook-*Sichten*)
 6. `README.md`
 7. `AGENTS.md`
 8. `harness/README.md`
