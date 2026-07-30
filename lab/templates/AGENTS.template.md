@@ -159,6 +159,11 @@ Gates sind die häufigste Form von Harness-Lüge (siehe Modul 13).
 | `make ci` | CI-äquivalent (gates + zusätzliche) |
 | `make fullbuild` | volle Closure (vor Welle-Merge) |
 
+Diese Tabelle **listet auf**; definiert wird hier nichts. Die *Bindung* eines
+Targets — welche Anforderung oder Entscheidung es durchsetzt — steht in
+`harness/README.md` §Sensors; von dort führt der Weg zur `LH-*`-ID, zur ADR
+oder zum Carveout.
+
 ## 5. Dokumentations-Regeln
 
 - Requirement- und Architektur-IDs müssen in PRs/Commits referenziert
@@ -168,7 +173,6 @@ Gates sind die häufigste Form von Harness-Lüge (siehe Modul 13).
   über den ADR-Index) — nie ad hoc im PR.
 - Neue ADRs müssen den ADR-Index aktualisieren.
 - Roadmap/Status-Geschichte lebt in `docs/plan/planning/`, nicht in `spec/architecture.md`.
-- Quality-Gate-Definitionen leben in <`docs/user/quality.md` oder Äquivalent>.
 
 ## 6. Minimal Agent Workflow
 
