@@ -95,7 +95,7 @@ typischerweise:
 
 - **Semantische Halluzinationen** — Agent erfindet eine API-Funktion, die nicht existiert. Compile-Schritt findet das, kein Linter.
 - **ADR-Verstöße** — Agent baut Layer X mit direkter Abhängigkeit zu Y, obwohl ADR-3 sagt: nur über Adapter Z. Architekturtest fängt das, kein Linter.
-- **Spec-Lücken-Symptome** — Agent implementiert eine plausible, aber nicht geforderte Variante. Verification-Agent gegen Akzeptanzkriterien fängt das.
+- **Spec-Lücken-Symptome** — Agent implementiert eine plausible, aber nicht geforderte Variante. Ein Verifier-Lauf gegen die Akzeptanzkriterien fängt das.
 - **Implizite Annahmen** — Agent geht davon aus, dass Cache aktiv ist, obwohl Spec ihn ausschließt. Nur Review oder Replay mit kaltem Cache fängt das.
 - **Sicherheits-Anti-Pattern in fremdem Kontext** — z. B. SQL-Injection in einem Filter, den der Linter als regulären String sieht. Security-Gate (Semgrep) fängt das.
 

@@ -60,7 +60,7 @@ Jede Kontrolle adressiert genau eine der drei Kategorien:
 |---|---|---|---|
 | **Maintainability Harness** | Ist der Code lesbar, modular, wartbar? | Linter, Komplexitätsmetriken, ArchUnit, Reviewer-Agent | 10, 13 |
 | **Architecture Fitness Harness** | Hält die Lösung Architektur-, Performance- und Observability-Constraints ein? | Fitness Functions, Latenz-Budgets, OTel-Assertions | 4, 11, 15 |
-| **Behaviour Harness** | Tut die Lösung das Richtige? | Tests, Replay, Golden Sets, Validation-Agent | 11, 12 |
+| **Behaviour Harness** | Tut die Lösung das Richtige? | Tests, Replay, Golden Sets, Validator | 11, 12 |
 
 ```mermaid
 flowchart LR
@@ -79,7 +79,7 @@ flowchart LR
         B1[Tests]
         B2[Replay]
         B3[Golden Sets]
-        B4[Validation-Agent]
+        B4[Validator]
     end
     style B fill:#fff4d6,stroke:#d4a017
 ```

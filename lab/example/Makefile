@@ -33,7 +33,7 @@ plan-status: ## Slice-Verteilung ueber docs/plan/planning/{open,next,in-progress
 		for f in $$files; do echo "  - $$(basename "$$f")"; done; \
 	done
 
-agent-implement: ## Kontextpaket fuer einen Implementation-Agent zeigen: make agent-implement SLICE=slice-009
+agent-implement: ## Kontextpaket fuer einen Implementer-Agent zeigen: make agent-implement SLICE=slice-009
 	@test -n "$(SLICE)" || (echo "Usage: make agent-implement SLICE=slice-009"; exit 2)
 	@slice_path=$$(find docs/plan/planning -name "$(SLICE)*.md" -print -quit); \
 	test -n "$$slice_path" || (echo "Slice not found: $(SLICE)"; exit 1); \
