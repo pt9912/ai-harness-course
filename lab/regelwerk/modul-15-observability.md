@@ -26,9 +26,12 @@ jeder Cache einen Counter — die Regeln unten.
   Laufs (`slice.id`, `requirement.id`, `adr.id`) · **Lauf** = das
   Kontextfenster und damit die Rolle (`run.id`, `agent.role`) · Span = ein
   Schritt, der die Rolle *erbt*, nicht setzt.
-- **Die Rolle sitzt auf der Resource des Laufs, gesetzt vom Starter**
-  (`OTEL_RESOURCE_ATTRIBUTES`; die Resource steht einmal je Export-Block, nicht
-  je Span).
+- **Die Rolle ist eine Angabe des Starters, nicht des Agenten:** Sie steht
+  fest durch das Rollen-Artefakt, das er startet
+  ([Modul 8](modul-08-agentenrollen.md)). Emittiert der Lauf selbst OTel,
+  stempelt der Starter sie per `OTEL_RESOURCE_ATTRIBUTES` auf die Resource
+  (einmal je Export-Block); sonst führt der Starter das Lauf-Buch
+  `run.id → Rolle → slice.id`, Zuordnung von außen.
 - **Die Zuordnungs-Einheit der Token-Bilanz ist der Lauf** — die „Kostenstelle"
   ist ein Kontext, kein Mensch ([Modul 8](modul-08-agentenrollen.md)).
 - **Der Emissions-Pfad ist Repo-Entscheidung** (Exporter, Collector, Sampling,

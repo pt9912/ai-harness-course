@@ -74,11 +74,16 @@ und nicht den Lauf.
 | **Lauf** | **das Kontextfenster, und damit die Rolle** | `run.id` · `agent.role` |
 | Span | ein Schritt im Lauf | erbt die Rolle, setzt sie nicht |
 
-Die Rolle sitzt dort auf der **Resource** des Laufs, nicht am Span: Ein Prozess,
-eine Resource, eine Rolle. Gesetzt wird sie von dem, der den Lauf startet —
-`OTEL_RESOURCE_ATTRIBUTES="agent.role=…,run.id=…,slice.id=…"` ist dafür
-spezifiziert, und im Protokoll steht die Resource einmal je Export-Block, nicht
-je Span.
+Die Rolle ist eine Angabe des **Starters**, nicht des Agenten — und sie steht
+fest, bevor Telemetrie ins Spiel kommt: durch das **Rollen-Artefakt**, das der
+Starter aufruft ([Modul 8 §Welche Rolle braucht welche Artefaktklasse](../03-agenten/modul-08-agentenrollen.md#welche-rolle-braucht-welche-artefaktklasse)
+— in konkreten Harnessen eine Agenten-Definition mit eigenem Kontextfenster).
+Der Agent muss dafür nichts verstehen. Emittiert der Lauf selbst OTel, stempelt
+der Starter die Rolle per `OTEL_RESOURCE_ATTRIBUTES="agent.role=…,run.id=…"`
+auf die **Resource** (spezifiziert; einmal je Export-Block, nicht je Span).
+Tut er es nicht — der Regelfall bei fremden Agenten-CLIs —, führt der Starter
+das Lauf-Buch `run.id → Rolle → slice.id` und liest Token-Verbrauch aus dem,
+was der Agent ohnehin ausgibt; die Zuordnung geschieht außerhalb.
 
 **Ob die Läufe eines Slice *einen* Trace teilen, ist Modellwahl, kein
 Standard** — das Fixture tut es, verpflichtend ist es nicht. Die Korrelation
