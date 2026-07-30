@@ -427,13 +427,18 @@ Anfrage und Antwort (statt fünf). Ohne Wellen-Betrieb entfällt ein ganzer Zug 
 Pfeile mit durchgezogen/gestrichelt konsistent, Wellen-Diagramm 6, dreimal das
 Paar.
 
-### F — Rollen-Rename: sechs Reste (1)
+### F — Rollen-Rename: sechs Reste (1) ✅
 
 **F-1** — `lab/example/Makefile:36` (`Implementation-Agent`, sichtbar in
 `make help`) · `kurs/de/loesungen/modul-00-loesung.md:98`
 (`Verification-Agent`) · `kurs/de/grundlagen/klassifikation.md:67` und `:86`
 (`Validation-Agent`) samt Spiegel `grundlagen-klassifikation.md:63`, `:82`.
 Alle in Rollen-Position, also nicht von der Tätigkeits-Ausnahme gedeckt.
+
+**Behoben** (`6223ba3`): Alle sechs auf das Akteursnomen
+gebracht; `make help` zeigt „Implementer-Agent". Vollprobe über alle verfolgten
+Markdown-, JSON- und Makefile-Dateien nach Vorgangsnomen in Rollen-Position:
+keine Treffer.
 
 ### G — Buchführungs-Dokumente (2)
 
