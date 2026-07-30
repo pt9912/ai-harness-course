@@ -76,10 +76,11 @@ unvollständig und an der falschen Stelle. Zwei Belege:
 Encodiert als [Modul 8 §Rollen-Sequenz für eine Welle](../../kurs/de/03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle),
 Spiegel nachgezogen, Vorwärts-Verweis an beiden Prozedur-Überschriften in
 Modul 6. Die Eröffnung ist Planner-Arbeit **ohne Übergabe** — eine Aussage, keine
-Leerstelle. Die Closure hat **drei** Übergaben gegen neun auf Slice-Ebene.
+Leerstelle. Die Closure hat **fünf** Übergaben in drei Zügen, gegen neun auf
+Slice-Ebene; die Schritt-Nummern sind die von Modul 6, alle fünf.
 
 **Beide Sequenzen sind nötig, weil ein Repo auch ohne Wellen arbeiten kann.**
-Ohne Wellen-Betrieb bleiben zwei der drei Übergaben (getragen von Slice-Closure
+Ohne Wellen-Betrieb bleiben vier der fünf Übergaben (getragen von Slice-Closure
 und Slice-Planung), und die **Verifier→Planner-Kante entfällt** — der repo-weite
 Beleg über die Slice-DoDs hinaus *ist* das *Mehr*, an dem sich entscheidet, ob
 eine Welle vorliegt. Rollen-Sequenz und Wellen-Kriterium sind damit dieselbe

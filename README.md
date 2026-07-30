@@ -45,7 +45,7 @@ Begriffe wie **Fitness Function**, **ADR**, **AGENTS.md**, **Replay** oder **Gol
 Nach Abschluss des Kurses kannst du
 
 * Spezifikationen, ADRs und Slice-Pläne so formulieren, dass ein KI-Agent sie buchstabengetreu umsetzt, anstatt das Naheliegende zu halluzinieren,
-* die sechs im Kurs verwendeten Agentenrollen (Planner, Architect, Implementation, Reviewer, Verification und Validation) klar voneinander trennen und ihre Übergaben definieren,
+* die sechs im Kurs verwendeten Agentenrollen (Planner, Architect, Implementer, Reviewer, Verifier und Validator) klar voneinander trennen und ihre Übergaben definieren,
 * reproduzierbare Quality Gates als `make`-Ziele entwickeln, die lokal und im CI identisch ausgeführt werden,
 * Replay-Läufe mit Golden Sets durchführen, Regressionen messen und Modell-Drift erkennen,
 * den Harness gegen Entropie pflegen, etwa durch das Entfernen veralteter Dokumentation, toter Constraints und wuchernder Carveouts,

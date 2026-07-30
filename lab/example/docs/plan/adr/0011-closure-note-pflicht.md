@@ -37,21 +37,29 @@ ist definiert als Markdown-Sektion, deren Überschrift das Wort
 *Closure* enthält (Schreibvarianten erlaubt: `# Welle-N — Closure-Notiz`,
 `## Closure`, `## 7. Closure-Notiz`).
 
-Inhaltliche Mindestform — drei Pflichten:
+Inhaltliche Mindestform — vier Pflichten:
 
 1. **Substanz:** Mindestens zwei Sätze (gemessen an Satzendezeichen
    außerhalb von Code-Blöcken), die *was* gelernt wurde benennen.
-   Unausgefüllte Template-Platzhalter (`<…>`) zählen nicht — der blanke
-   Template-Rumpf brächte die Satz-Schwelle sonst allein mit.
-2. **Konkretheit:** Keine der bekannten Floskeln (`see PR`, `n/a`,
+2. **Ausgefülltheit:** **Kein** unausgefüllter Template-Platzhalter (`<…>`).
+   Nicht als Zähl-Ausnahme zu Pflicht 1, sondern als eigenes Verbot — sonst
+   wäre eine Notiz mit fünf echten Sätzen und einem Restplatzhalter regelkonform,
+   und der Gate meldete sie trotzdem. Grund für das Verbot: Der blanke
+   Template-Rumpf bringt die Satz-Schwelle allein mit (zehn Sätze), der Gate war
+   auf ihm grün.
+3. **Konkretheit:** Keine der bekannten Floskeln (`see PR`, `n/a`,
    `siehe Ticket`, `wird nachgereicht`, `fertig`, `ok`, `läuft jetzt`).
-3. **Steering-Loop-Bezug:** Wo die Closure einen Steering-Loop-Eintrag
+4. **Steering-Loop-Bezug:** Wo die Closure einen Steering-Loop-Eintrag
    nach sich zieht (neue Hard Rule, Skill-Schärfung, Sensor, Folge-Slice),
    wird dieser im Lerneintrag oder in einer eigenen Sektion benannt.
 
-Die maschinelle Prüfung deckt Pflicht 1 und 2 vollständig ab; Pflicht 3
-bleibt inferentiell und ist Gegenstand des Reviewer-Skills (siehe
-Modul 10), nicht des Gates.
+Die maschinelle Prüfung deckt Pflicht 1 bis 3 ab; Pflicht 4 bleibt
+inferentiell und ist Gegenstand des Reviewer-Skills (siehe Modul 10), nicht
+des Gates.
+
+> **Grenze — ehrlich benannt:** „vollständig" wäre zu viel für Pflicht 1. Die
+> Maschine zählt Satzendezeichen; ob die Sätze *benennen, was gelernt wurde*,
+> ist ein Urteil. Pflicht 2 und 3 sind dagegen vollständig maschinell.
 
 ## Verglichene Alternativen
 
@@ -115,5 +123,5 @@ Frage ist, keine Code-Architektur-Frage.
 |---|---|---|
 | 2026-06-02 | Proposed | Modul 11 Worked Example, Lab-Ausbau (Kurs-Welle 9) |
 | 2026-06-02 | Accepted | bestehende done-Dateien geprüft, beide bestehen |
-| 2026-06-03 | Fitness Function geschärft | Platzhalter-Prüfung ergänzt: Der Gate war grün auf dem unausgefüllten Template-Rumpf. Entscheidung unverändert — Pflicht 1 wurde nicht erweitert, sondern erst vollständig durchgesetzt |
+| 2026-06-03 | Vierte Pflicht ergänzt | *Ausgefülltheit*: kein unausgefüllter `<…>`-Platzhalter. Der Gate war grün auf dem blanken Template-Rumpf, weil dieser die Satz-Schwelle allein mitbringt. Zuerst als Zähl-Ausnahme zu Pflicht 1 formuliert — das war falsch: Der Code verbietet Platzhalter unabhängig von der Satzzahl, also ist es ein eigenes Verbot und eine echte Erweiterung der Entscheidung |
 | 2026-06-03 | Korrektur | „zwei done-Dateien" (Option A · Geschichte *Accepted*) war falsch: drei, mit `welle-1-mvp.md`. Tatsachenangabe, Text oben unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)) |

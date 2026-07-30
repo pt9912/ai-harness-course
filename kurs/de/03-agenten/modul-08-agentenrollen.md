@@ -89,7 +89,8 @@ Die Sequenz oben ist **slice-skopiert**. Eine Welle liegt eine Ebene darüber
 und hat ihre eigene Prozedur — drei Eröffnungs- und fünf Closure-Schritte
 ([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) §Die Wellen-Eröffnungs-Prozedur und [§Die Wellen-Closure-Prozedur](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)).
 Auch dort gilt die Regel von oben: **kein Rollenwechsel ohne Artefakt.** Nur
-sind es drei Übergaben, nicht neun.
+sind es **fünf** Übergaben, nicht neun — gezählt wie oben, ein Pfeil je
+Übergabe. Sie bilden drei Züge: eine Zulieferung und zwei Frage-Antwort-Runden.
 
 **Die Eröffnung ist Planner-Arbeit — und das ist eine Aussage, keine
 Leerstelle.** Alle drei Schritte (Ziel und Out-of-Scope festlegen · offene
@@ -97,7 +98,7 @@ Beobachtungen sichten · Welle-Datei anlegen und in die Roadmap eintragen)
 laufen in *einem* Kontext. Es gibt keine Eröffnungs-Sequenz, weil es keine
 Übergabe gibt — wer hier eine zeichnet, erfindet einen Rollenwechsel.
 
-**Die Closure hat drei:**
+**Die Closure hat fünf** (in drei Zügen):
 
 ```mermaid
 sequenceDiagram
@@ -113,14 +114,25 @@ sequenceDiagram
     A-->>P: Regel verkörpert (Hard Rule · Gate · Skill · MR) oder Slice nötig
 ```
 
+Die Schritt-Nummern sind die von
+[Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur) —
+alle fünf, damit der Verweis dort einlösbar ist. Schritt 3 hat drei Teile.
+
 | Closure-Schritt | Träger | Übergabe-Artefakt |
 |---|---|---|
-| 1 — Trigger prüfen | **Verifier** → Planner | repo-weiter Verifikations-Beleg; er geht über die Slice-DoDs hinaus und steht in keiner von ihnen |
-| 2 — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage → Verdikt |
-| 3 — Lese-Schritt | **Planner** erkennt den 3×-Übertritt … | … Zähler-Stand aus dem Beobachtungs-Register |
-| 3 — Verkörperung | … **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel oder Folge-Slice |
-| 4 — Closure-Notiz | **Planner** | `welle-<NN>-results.md` |
-| 5 — Drei Paarungen | maschinelle Deckungsprüfung, gelesen vom **Planner** | Gate-Ausgabe (das Urteil fiel beim Schreiben, [Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)) |
+| **1** — Trigger prüfen | **Verifier** → Planner | repo-weiter Verifikations-Beleg; er geht über die Slice-DoDs hinaus und steht in keiner von ihnen |
+| **2** — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage → Verdikt |
+| **3a** — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
+| **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel oder Folge-Slice |
+| **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<NN>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
+| **4** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit — der Audit sieht einen Punkt, kein verstreutes Verschwinden |
+| **5** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, nächste Zeile wird *Aktuelle Welle*, ggf. Eintrag in *Historische Trigger-Verschiebungen* |
+
+Nur Schritt 1, 2 und 3b tragen einen Rollenwechsel; 3a, 3c, 4 und 5 laufen im
+Planner-Kontext. Die drei Paarungen in 3c sind eine **Deckungs**-Prüfung, deren
+Werkzeug der Kurs offen lässt
+([Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register): *„Welches
+Werkzeug, ist Repo-Entscheidung"*) — das Urteil fiel schon beim Schreiben.
 
 **Warum Architect und nicht Planner allein.** Die Verkörperung einer Regel und
 das Hochschalten einer Reifestufe sind **Entscheidungen**, keine Planung — der
@@ -134,7 +146,7 @@ ohne Umsetzungspfad — dieselbe Begründung wie bei der Mehrfachzuweisung dort.
 **Und im Repo ohne Wellen-Betrieb?** Dort läuft diese Prozedur nicht — die
 Vorgänge laufen trotzdem, getragen von der Slice-Closure und der Slice-Planung
 ([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur), Tabelle
-*Träger im Repo ohne Wellen*). Für die Rollen heißt das: **zwei der drei
+*Träger im Repo ohne Wellen*). Für die Rollen heißt das: **vier der fünf
 Übergaben bleiben, eine verschwindet.**
 
 | Übergabe | ohne Wellen-Betrieb |

@@ -497,7 +497,8 @@ für Wissen, das schon wirkt.
 ## Die Wellen-Closure-Prozedur
 
 > **Wer führt die Schritte aus?** Die Eröffnung ist Planner-Arbeit, die Closure
-> hat drei Übergaben — Träger und Übergabe-Artefakt pro Schritt stehen in
+> hat fünf Übergaben in drei Zügen — Träger und Übergabe-Artefakt für **jeden**
+> der fünf Schritte stehen in
 > [Modul 8 §Rollen-Sequenz für eine Welle](../03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle).
 > Dort und nicht hier, weil die sechs Rollen erst in Modul 8 eingeführt werden.
 

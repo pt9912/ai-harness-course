@@ -44,21 +44,30 @@ dieselbe Sicht denselben Fehler übersieht.
 Die Sequenz oben ist **slice-skopiert**. Die Welle hat ihre eigene Prozedur —
 drei Eröffnungs- und fünf Closure-Schritte
 ([Modul 6](modul-06-roadmap.md#wellen-closure-prozedur-modul-6)). Es gilt
-dieselbe Regel: **kein Rollenwechsel ohne Artefakt.** Nur sind es drei
-Übergaben, nicht neun.
+dieselbe Regel: **kein Rollenwechsel ohne Artefakt.** Nur sind es **fünf**
+Übergaben, nicht neun — gezählt wie oben, ein Pfeil je Übergabe; sie bilden
+drei Züge.
 
 **Die Eröffnung ist Planner-Arbeit** — alle drei Schritte laufen in *einem*
 Kontext. Es gibt keine Eröffnungs-Sequenz, weil es keine Übergabe gibt; wer
 hier eine zeichnet, erfindet einen Rollenwechsel.
 
+Die Schritt-Nummern sind die der Closure-Prozedur, alle fünf; Schritt 3 hat
+drei Teile.
+
 | Closure-Schritt | Träger | Übergabe-Artefakt |
 |---|---|---|
-| 1 — Trigger prüfen | **Verifier** → Planner | repo-weiter Verifikations-Beleg (`fullbuild`-Hash, Replay-Ergebnis); er geht über die Slice-DoDs hinaus und steht in keiner von ihnen |
-| 2 — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage (fällige Trigger) → Verdikt (bestätigt / Folge-ADR mit `supersedes` / neue Stufe) |
-| 3 — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
-| 3 — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel (Hard Rule · Gate · Skill · `MR`) oder Folge-Slice |
-| 4 — Closure-Notiz | **Planner** | `welle-<NN>-results.md` |
-| 5 — Drei Paarungen | maschinelle Deckungsprüfung, gelesen vom **Planner** | Gate-Ausgabe; das Urteil fiel beim Schreiben (§Das Beobachtungs-Register) |
+| **1** — Trigger prüfen | **Verifier** → Planner | repo-weiter Verifikations-Beleg (`fullbuild`-Hash, Replay-Ergebnis); er geht über die Slice-DoDs hinaus und steht in keiner von ihnen |
+| **2** — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage (fällige Trigger) → Verdikt (bestätigt / Folge-ADR mit `supersedes` / neue Stufe) |
+| **3a** — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
+| **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel (Hard Rule · Gate · Skill · `MR`) oder Folge-Slice |
+| **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<NN>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
+| **4** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit statt eines verstreuten Verschwindens |
+| **5** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, nächste Zeile wird *Aktuelle Welle*, ggf. Drift-Eintrag |
+
+Nur 1, 2 und 3b tragen einen Rollenwechsel; 3a, 3c, 4 und 5 laufen im
+Planner-Kontext. Die drei Paarungen sind eine **Deckungs**-Prüfung, deren
+Werkzeug Repo-Entscheidung ist (§Das Beobachtungs-Register).
 
 **Warum Architect und nicht Planner allein:** Regel-Verkörperung und
 Reifestufen-Hochschaltung sind **Entscheidungen**, keine Planung. Wer beide in
@@ -68,7 +77,7 @@ Umsetzungspfad.
 **Im Repo ohne Wellen-Betrieb** läuft diese Prozedur nicht; die Vorgänge laufen
 trotzdem, getragen von Slice-Closure und Slice-Planung
 ([Modul 6](modul-06-roadmap.md#wann-arbeit-eine-welle-braucht-modul-6), Tabelle
-*Träger im Repo ohne Wellen*). Für die Rollen: **zwei der drei Übergaben
+*Träger im Repo ohne Wellen*). Für die Rollen: **vier der fünf Übergaben
 bleiben, eine entfällt.**
 
 | Übergabe | ohne Wellen-Betrieb |
@@ -208,5 +217,5 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
 - **Gegen "Eine Person spielt alle Rollen":** Geht — *aber mit unterschiedlichem Eingabe-Kontext und der je passenden Artefaktklasse* (siehe [§Welche Rolle braucht welche Artefaktklasse](#artefaktklasse-pro-rolle)). Sonst wiederholen sich die blinden Flecken. Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung.
 - **Gegen "Reviewer macht das Verification gleich mit":** Reviewer prüft gegen Plan/ADR (Maintainability). Verification prüft gegen DoD/Spec (Behaviour/Architecture Fitness). Zwei Fragen, zwei Antworten.
 - **Gegen "Validation machen wir vor Release":** Zu spät. Validation gehört *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
-- **Gegen "Architect entscheidet, Implementer widerspricht nicht":** Der Implementer darf Folge-ADRs vorschlagen. Was sie *nicht* darf: stillschweigend einer ADR widersprechen.
+- **Gegen "Architect entscheidet, Implementer widerspricht nicht":** Der Implementer darf Folge-ADRs vorschlagen. Was er *nicht* darf: stillschweigend einer ADR widersprechen.
 

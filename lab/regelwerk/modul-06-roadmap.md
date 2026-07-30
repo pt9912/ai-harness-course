@@ -142,7 +142,8 @@ erreicht hat, ist in AGENTS.md, Gates und Skills verkörpert und wirkt
 dort automatisch (Modul-0-Prinzip).
 
 **Wer führt die Schritte aus?** Die Eröffnung ist Planner-Arbeit, die Closure
-hat drei Übergaben — Träger und Übergabe-Artefakt pro Schritt in
+hat fünf Übergaben in drei Zügen — Träger und Übergabe-Artefakt für **jeden** der
+fünf Schritte in
 [Modul 8 §Rollen-Sequenz für eine Welle](modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle).
 
 **Closure — fünf Schritte.**
