@@ -315,7 +315,7 @@ wörtlich in Modul 6 Schritt 3 stehen.
 Die dritte fallengelassene Klausel ist ein eigener Befund geworden: siehe
 `C-7`.
 
-**C-7 · „Ein Trigger ist kein Ergebnis dieser Welle" — Regel ohne Quelle** (neu,
+**C-7 ✅ · „Ein Trigger ist kein Ergebnis dieser Welle" — Regel ohne Quelle** (neu,
 aus der C-Behebung)
 
 Die Klausel stand in `welle.template.md:39` und ist mit `C-6` gefallen, weil das
@@ -327,11 +327,13 @@ sechs Stellen behoben, und `welle-1-mvp.md` führt den Fall ausdrücklich vor
 (*„Sie entstehen in dieser Welle und wären damit Ergebnisse, keine beobachtbaren
 Vorbedingungen"*) — nur steht das im **Beispiel**, nicht in der Norm.
 
-**Zuerst zu entscheiden:** Gehört *„ein Start-Trigger ist kein Ergebnis dieser
-Welle"* als Regel nach Modul 6 §Roadmap-Regeln (dann Fix-Richtung Quelle →
-Template), oder ist es eine Folgerung aus der Beobachtbarkeit, die niemand
-aufschreiben muss? Nicht entschieden, weil eine Norm-Erweiterung nicht in eine
-Zeiger-Reparatur gehört.
+**Behoben** (`557296d`) — die Vorfrage war zu messen: Folgt die Regel aus der
+Beobachtbarkeit? **Nein.** „Alle Slices dieser Welle in `done/`" ist beobachtbar
+*und* ein Ergebnis — als Closure-Trigger richtig, als Start-Trigger zirkulär.
+Zwei Prüfungen, nicht eine. Encodiert in Modul 6 §Typische Fehlvorstellungen
+(*„Beobachtbar reicht."*) mit praktischem Test: Steht der Trigger in der
+Slice-Liste dieser Welle, ist er falsch platziert. Spiegel in §Roadmap-Regeln,
+Klausel im Template zurück — jetzt verankert.
 
 ### D — Template-Schichtung verletzt (3) ✅
 
@@ -360,7 +362,7 @@ samt Drei-Commit-Folge steht im Kommentar, wo Bedienhinweise hingehören. `D-3` 
 die zweite Register-Tabelle startet mit `— keine —`, die Form einer gefüllten
 Zeile steht im Kommentar. Adoptions-Simulation für beide Dateien nachgestellt.
 
-**D-4 · „≤ 3 DoD-Punkte" über acht Items** (neu, aus der D-Behebung)
+**D-4 ✅ · „≤ 3 DoD-Punkte" über acht Items** (neu, aus der D-Behebung)
 
 Die Adoptions-Simulation zeigt den §2-Zeiger von `slice.template.md` direkt über
 der Checkliste:
@@ -378,10 +380,27 @@ prozessualen Punkten. Das Template führt vier liefernde (`LH-FA`, `LH-QA`,
 Risiko-Ausgänge, Paarungen). Nach dem Wortlaut wäre jeder Slice, der die Vorlage
 ausfüllt, „zu groß".
 
-**Zuerst zu entscheiden:** Zählt die Faustregel nur die **liefernden** Punkte —
-dann gehört das in Modul 5, und der Zeiger muss es sagen? Oder ist die Zahl
-falsch gewählt? Nicht entschieden; der Zeiger ist von mir (Gruppe A) und hat den
-Widerspruch erst sichtbar gemacht — vorher trug §2 keinen.
+**Behoben** (`557296d`) — ableitbar aus dem Zweck: Die Regel ist eine
+**Größen**-Faustregel, also zählt sie nur, was mit dem Umfang *wächst*.
+Gate-Läufe und Closure-Pflichten sind pro Slice konstant. Bestätigt durch die
+eigene Übung — *„SL-031 (5-Punkte-DoD) bewerten und schneiden"* wäre sinnlos,
+wenn die Vorlage jeden Slice schon auf vier brächte. Jetzt **Liefer-Punkte** mit
+Nicht-Zähl-Liste in Modul 5, Spiegel und Template.
+
+Meine erste Formulierung („liefernd vs prozessual") war noch zu grob; die Messung
+am Vorbild ergab 4–5 und widerlegte sie — `make gates grün` ist nichts, was ein
+Slice *liefert*.
+
+**D-5 · Zwei Vorbild-Slices liegen über der geschärften Schwelle** (neu, aus der
+D-4-Behebung)
+
+Mit der scharfen Zählung: `slice-009` 3 ✓ · `slice-020` 1 ✓ · `slice-013` **4** ·
+`slice-014` **4**. Bei `slice-013` sind zwei der vier Punkte dasselbe Target
+(`test-property` als Make-Ziel und seine 100-Generationen-Bedingung), bei
+`slice-014` ähnlich. Ob die beiden Slices wirklich zu groß sind oder nur
+ausführlich geschrieben, ist eine Aussage über das Vorbild — und sie
+umzuformulieren, damit die Zahl passt, wäre genau das Gate-grün-Schreiben, gegen
+das der Kurs argumentiert. Nicht entschieden.
 
 ### E — Quelle/Spiegel und Verweise (4) ✅
 
