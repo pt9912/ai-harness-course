@@ -1,8 +1,9 @@
 # Review-Runde 11 — offen
 
 **Stand:** 2026-07-29. **Status:** noch kein Review-Lauf. Diese Datei sammelt,
-was **vor** der Runde aufgefallen ist. `V11-01`, `V11-02` und `Ü-02` sind
-behoben, die übrigen Ü-Posten offen.
+Sie sammelt drei Dinge: was **vor** der Runde auffiel (`V11-01`, `V11-02` —
+beide behoben), die **Befunde des Drei-Linsen-Reviews** (21 offen, 6 behoben)
+und die übernommenen Ü-Posten (`Ü-02` behoben).
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -209,6 +210,145 @@ eines Laufs steht durch das gestartete Rollen-Artefakt fest. Der
 Regelwerk-Split trägt davon nur die zwei operativen Sätze in den bestehenden
 Regel-Sektionen — die Ebenen-Mechanik ist Grenz-Didaktik und blieb in der
 Quelle. Der Mechanismus-Vorschlag oben ist teilweise überholt.
+
+---
+
+## Review-Befunde — drei Linsen auf `3ac682f..HEAD`
+
+**Verfahren:** Drei Reviewer, getrennte Linsen, getrennter Kontext, read-only;
+Linse 3 in einem eigenen Worktree für Break-Tests. 26 Rohbefunde,
+zusammengeführt. Sechs davon waren von mehreren Linsen unabhängig bestätigt und
+sind **behoben** (`b4f5b1e`, `e8fa2ab`): Schritt-Numerierung gegen Modul 6 ·
+`README.md` mit der alten Sechserliste · „drei statt fünf Übergaben" ·
+Spiegel-Pronomen · ADR-0011 Norm-gegen-Code · `verify-slice` (= `Ü-02`).
+
+Die folgenden **21 stehen offen.** Gates sind grün — keiner ist maschinell
+sichtbar.
+
+### A — Gate mit Falsch-Positiven (1)
+
+**A-1 · `lab/example/tools/check_closure_notes.py:27`** — `PLACEHOLDER_RE =
+r"<[^<>\n]+>"` trifft belegte Schreibweisen außerhalb von Code:
+
+```
+'p95 < 1 s und Recall > 0,9'  ->  ['< 1 s und Recall >']   ← eine QA-Messung
+'<https://example.org/x>'     ->  ['<https://example.org/x>']
+'<br>'  ·  'vector<float>'  ·  '<!-- … -->'  ·  '<alice@example.org>'
+```
+
+Der Vergleichsoperator-Fall ist der gefährlichste: Er trifft das Format, in dem
+eine Closure-Notiz eine QA-Erfüllung berichtet. Ein Gate mit Falsch-Positiven
+auf dem eigenen Ziel-Inhalt erzieht zum Umgehen.
+
+### B — CHANGELOG: das Register stimmt nicht (4)
+
+**B-1 · `CHANGELOG.md:14`** — Welle 60 ist auf `2026-07-29` datiert; zwei ihrer
+Commits (`4276fa4`, `132eebb`) tragen `2026-07-30`.
+
+**B-2 · `CHANGELOG.md:14-110`** — **Klasse 1 fehlt vollständig.** Acht Commits
+(`f251992`–`a17ba14`), darunter die neue **ADR-0013**. `grep` auf
+`ADR-0013|make ci|quality.md` im Block → **0**. Ein Adopter sieht eine neu
+hinzugekommene ADR im Vorbild nirgends verzeichnet.
+
+**B-3** — Die **14 Commits von heute** stehen in keinem Wellen-Block; das
+Regelwerk trägt Normtext, den keine Wellennummer deckt, und
+`lab/regelwerk/README.md:3` steht auf Welle 60.
+
+**B-4 · `CHANGELOG.md:59-63`** — „`slice.template.md` und
+`welle-results.template.md` **bei eins**" gegen `review-runde-10.md:98-103`
+(R10-02), das für dieselbe Messung **7** und **2** nennt. Der Ziel-Zustand
+trägt; nur die Vorzustands-Zahl reproduziert nicht.
+
+### C — Template-Zeiger auf Abschnitte, die die Regel nicht tragen (6)
+
+**C-1 · `roadmap.template.md:20`** — „§Roadmap-Struktur — genau **eine**
+aktuelle Welle." *„Genau eine"* existiert weder im Kurs noch im Regelwerk.
+
+**C-2 · `roadmap.template.md:55`** und **`:82`** — beide nennen
+§Roadmap-Regeln; die zitierten Sätze stehen in §Kernidee (`:7`) bzw.
+§Roadmap-Struktur (Drift-Log, `:65`).
+
+**C-3 · `roadmap.template.md:31`** — „geplante Wellen bekommen **keine** eigene
+Datei" ist nur aus Eröffnung Schritt 3 ableitbar, nicht aus dem genannten
+Bullet.
+
+**C-4 · `welle-results.template.md:20`** — §Was wurde geliefert? zitiert
+**Schritt 1**; „geliefert · was funktionierte · was anders lief" steht in
+**Schritt 3**. Dieselbe Datei zitiert Schritt 1 an `:122` korrekt.
+
+**C-5 · `welle.template.md:85`** — §Out-of-Scope zeigt auf §Roadmap-Regeln; die
+Out-of-Scope-Disziplin steht in Eröffnung Schritt 1.
+
+**C-6 · `welle.template.md:39`** — „ein Trigger ist eine **beobachtbare
+Vorbedingung**, kein Ergebnis dieser Welle." Beide Formulierungen existieren im
+Repo nur hier; die Beobachtbarkeits-Regel steht in §Roadmap-Regeln, und
+§Wann Arbeit eine Welle braucht handelt vom *Closure*-Trigger.
+
+### D — Template-Schichtung verletzt (3)
+
+**D-1 · `slice.template.md:57`** — „diese Liste ist die
+**Pfad-Kandidatenliste** … welche Sub-Areas der Slice berührt, **liest sich hier
+ab**." Der zweite Halbsatz macht die Pfad-Berührung hinreichend und schließt die
+Aussagen-Berührung aus — dasselbe Muster wie die behobene „untere Schranke".
+
+**D-2 · `slice.template.md:48`** — „**streiche diese Zeile beim Kopieren**"
+steht in der **DoD**-Schicht, die das Adoptieren überlebt. Nach
+`konventionen.md` §Template-Schichtung ist das Kommentar-Inhalt: *„Anleitung
+gehört nie in den Rumpf."*
+
+**D-3 · `observations.template.md:44`** — die zweite Tabelle startet nach
+Adoption mit `| <BEO-NNN> | <Bezeichnung> | YYYY-MM-DD | … |`. Dieselbe Klasse
+wie die drei erfundenen Beobachtungen, deren Entfernung Welle 60 als Behebung
+führt — eine Tabelle tiefer.
+
+### E — Quelle/Spiegel und Verweise (4)
+
+**E-1 · `kurs/de/03-agenten/modul-08-agentenrollen.md:148`** — verweist für die
+Tabelle *Träger im Repo ohne Wellen* auf `#die-wellen-closure-prozedur`; sie
+liegt in §Wann Arbeit eine Welle braucht. Der Spiegel (`:71`) zeigt richtig.
+
+**E-2 · `modul-08-agentenrollen.md:56` gegen `:110`** — dieselbe Kante
+`Verifier → Planner` ist einmal `-->>` (gestrichelt = Rückgabe) und einmal
+`->>`. Das Modul lehrt, dass die Pfeilart Bedeutung trägt.
+
+**E-3 · `modul-08-agentenrollen.md:118`** — Träger von Schritt 5 ist eine
+„maschinelle Deckungsprüfung" mit „Gate-Ausgabe"; Modul 6 lässt das Werkzeug
+ausdrücklich offen (*„Welches Werkzeug, ist Repo-Entscheidung"*), und im Vorbild
+existiert kein `BEO`-Prüfer (`grep -rn "BEO-" lab/example/Makefile
+lab/example/tools/` → leer).
+
+**E-4 · `lab/regelwerk/grundlagen-konventionen.md:102`** und
+**`modul-06-roadmap.md:87`** — zwei operative Passagen sind gegenüber der Quelle
+**paraphrasiert** statt weggelassen. Die Digest-Regel erlaubt Weglassen, nicht
+Umformulieren.
+
+### F — Rollen-Rename: sechs Reste (1)
+
+**F-1** — `lab/example/Makefile:36` (`Implementation-Agent`, sichtbar in
+`make help`) · `kurs/de/loesungen/modul-00-loesung.md:98`
+(`Verification-Agent`) · `kurs/de/grundlagen/klassifikation.md:67` und `:86`
+(`Validation-Agent`) samt Spiegel `grundlagen-klassifikation.md:63`, `:82`.
+Alle in Rollen-Position, also nicht von der Tätigkeits-Ausnahme gedeckt.
+
+### G — Buchführungs-Dokumente (2)
+
+**G-1 · `review-runde-10.md:446` und `:495`** — „R10-01 fiel bei **Klasse 3**
+mit weg". Behoben wurde es in `5e061dc`, zwei Commits **vor** Klasse 1; dieser
+Commit fehlt in der Inventur-Tabelle ganz.
+
+**G-2 · `review-runde-10.md:431`** — „Die Klassen 1–3 betreffen `lab/example`".
+Klasse 3 (`3ac682f`) hat vier Kurs- und Spiegel-Dateien geändert — es sind die
+Stellen, die §Entschieden als `E-4` führt.
+
+### Nicht übernommen
+
+**Modul 5 §Rückführungen** (Linse 1): Der Ort *ist* genannt
+(`modul-05-planning-harness.md:71`, „**Vorab** benennt §4 des Slice-Plans die
+*Bedingung*"). Offen bleibt nur, dass `slice.template.md:75-76` zwei Slots für
+die Bedingung führt und keinen für den Grund — als Teil von **D** zu behandeln.
+
+**Der fehlende `sequenceDiagram` im Modul-8-Split** (Linse 3, „unsicher"):
+korrekt weggelassen — die Übergaben stehen dort als Tabelle vollständig.
 
 ---
 
