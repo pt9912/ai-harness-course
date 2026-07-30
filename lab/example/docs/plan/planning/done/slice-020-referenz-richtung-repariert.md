@@ -30,9 +30,20 @@ Slice-Plan statt umgekehrt.
 - [x] `spec/spezifikation.md`: Abwärtszeiger auf `slice-008` entfernt, Aussage ohne Slice-Bezug formuliert.
 - [x] `make check-references` grün.
 - [x] `make verify` grün.
+- [x] `make gates` grün — **Nachtrag 2026-06-03**, siehe unten.
 - [x] Closure-Notiz (siehe §7).
 - [x] Beobachtungs-Register (`../observations.md`) fortgeschrieben — `BEO-004` neu (1×), `BEO-006` neu (1×, aus dem Risiko-Ausgang §6).
 - [x] Jedes Risiko aus §6 trägt einen Ausgang.
+
+**Nachtrag 2026-06-03:** Die DoD nannte `make gates` nicht, obwohl
+[`AGENTS.md`](../../../../AGENTS.md) §4 es als *mandatory vor PR* führt und §5
+Schritt 6 den repo-weiten Gate-Lauf vor dem Handoff verlangt. Der Lauf ist
+trivial grün — dieser Slice berührt keine Datei eines Sprach-Skeletts —, aber
+das entschuldigt die fehlende Zeile nicht: Ein Gate, das trivial grün ist, ist
+immer noch zu nennen, sonst ist nicht unterscheidbar, ob es lief oder vergessen
+wurde. Gefunden hat die Lücke `make verify-slice`, nachdem dessen vier
+Prüfungen wirksam gemacht wurden — vorher meldete es den Mangel und beendete
+sich mit `exit 0`.
 
 ## 3. Plan (vor Code)
 

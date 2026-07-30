@@ -219,7 +219,7 @@ Adoptierende Repos vergleichen ihren Baseline-`Stand:` gegen das Register
 ([`CHANGELOG.md`](../../CHANGELOG.md)) — sie sehen Welle 60 im Repo und
 bekommen per Release-Asset Welle 48.
 
-### Ü-02 — `verify-slice` meldet einen Mangel und sagt trotzdem `ok`
+### Ü-02 — `verify-slice` meldet einen Mangel und sagt trotzdem `ok` ✅
 
 ```
 $ make -C lab/example verify SLICE=slice-020
@@ -231,6 +231,18 @@ exit=0
 Dieselbe Klasse wie R10-21 (Gate grün auf unausgefülltem Rumpf), eine Ebene
 weiter: Ein Prüfer, der einen Mangel benennt und `ok` sagt, ist schlimmer als
 einer, der schweigt — er erzeugt Vertrauen und Ausgabe zugleich.
+
+**Behoben — und der Befund war zu klein beschrieben.** Nicht eine Prüfung war
+wirkungslos, sondern **alle vier**: `exit 1` stand in runden Klammern (Subshell)
+und die Zeilen waren mit `;` verkettet, sodass make nur den Status von
+`echo … ok` sah. `make verify-slice SLICE=slice-999` lief grün durch, mit vier
+`grep: Datei nicht gefunden` davor. Jetzt `set -e` plus geschweifte Klammern,
+mit Kommentar im Makefile, warum die Klammerform hier den Unterschied macht.
+
+**Was der wirksame Gate sofort fand:** `slice-020` nennt `make gates` nicht,
+obwohl `AGENTS.md` §4 es als *mandatory vor PR* führt. Der Lauf ist trivial grün
+(kein Sprach-Skelett berührt), die fehlende Zeile trotzdem ein Mangel —
+nachgetragen mit Vermerk. Die übrigen drei Vorbild-Slices sind grün.
 
 ### Ü-03 — C# hat kein wirksames Coverage-Gate
 

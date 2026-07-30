@@ -61,12 +61,16 @@ check-references: ## Kurs §Referenz-Richtung — Spec-Straten ohne ADR/Slice-Ab
 	@python3 tools/check_references.py
 
 verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-009
-	@test -n "$(SLICE)" || (echo "Usage: make verify-slice SLICE=slice-009"; exit 2)
-	@slice_path=$$(find docs/plan/planning -name "$(SLICE)*.md" -print -quit); \
-	test -n "$$slice_path" || (echo "Slice not found: $(SLICE)"; exit 1); \
-	grep -q "Definition of Done" "$$slice_path" || (echo "Missing Definition of Done: $$slice_path"; exit 1); \
-	grep -Eq "LH-|ADR-" "$$slice_path" || (echo "Missing traceability ID: $$slice_path"; exit 1); \
-	grep -q "make gates" "$$slice_path" || (echo "Missing gates evidence in DoD: $$slice_path"; exit 1); \
+# Geschweifte Klammern, nicht runde: `( ... exit 1 )` beendet nur die Subshell,
+# und mit `;` verketteten Zeilen sieht make nur den Status des LETZTEN Kommandos
+# — hier `echo ... ok`. Alle vier Pruefungen waren damit wirkungslos.
+	@test -n "$(SLICE)" || { echo "Usage: make verify-slice SLICE=slice-009"; exit 2; }
+	@set -e; \
+	slice_path=$$(find docs/plan/planning -name "$(SLICE)*.md" -print -quit); \
+	test -n "$$slice_path" || { echo "Slice not found: $(SLICE)"; exit 1; }; \
+	grep -q "Definition of Done" "$$slice_path" || { echo "Missing Definition of Done: $$slice_path"; exit 1; }; \
+	grep -Eq "LH-|ADR-" "$$slice_path" || { echo "Missing traceability ID: $$slice_path"; exit 1; }; \
+	grep -q "make gates" "$$slice_path" || { echo "Missing gates evidence in DoD: $$slice_path"; exit 1; }; \
 	echo "verify-slice ok: $$slice_path"
 
 verify: verify-closure-notes check-references ## Verifikation: Closure-Pflicht + Referenz-Richtung immer, Slice-DoD wenn SLICE gesetzt
