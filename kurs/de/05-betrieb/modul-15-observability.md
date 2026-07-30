@@ -87,12 +87,17 @@ Implementer-Lauf mit zwei Tool-Calls" nicht von „zwei Implementer-Läufen mit 
 einem" zu unterscheiden; im Fixture stehen `impl-1` und `impl-2` genau so
 nebeneinander. Und die Rolle ist dann eine Angabe des Agenten über sich selbst —
 auf der Resource ist sie eine Angabe dessen, der ihn gestartet hat, also
-derselben Instanz, die den Kontext erzeugt. Das ist der Grund, warum
-Rollen-Trennung *Kontext*-Trennung ist und keine Personen-Trennung
-([Modul 8 §Rollen-Regeln](../03-agenten/modul-08-agentenrollen.md)): Die
-Zuordnungs-Einheit der Token-Bilanz ist der Lauf. Deshalb bleibt die Bilanz
-sauber, wenn ein Mensch mehrere Rollen nacheinander spielt — und deshalb ist
-„Kostenstelle" im Mini-Glossar ein Kontext und kein Mensch.
+derselben Instanz, die den Kontext erzeugt.
+
+**Der Mensch kommt in dieser Bilanz nicht vor** — das ist Modul 8s Regel
+(*Rollen-Trennung ist Kontext-Trennung, keine Personen-Trennung*,
+[§Rollen-Regeln](../03-agenten/modul-08-agentenrollen.md)), auf Telemetrie
+angewandt: Eine Rolle wird von einem **Lauf** getragen, nicht von der Person,
+die ihn startet. Startet dieselbe Person nacheinander einen Planner-, einen
+Implementer- und einen Reviewer-Lauf, entstehen drei Kontexte mit je
+eindeutiger Rolle — die Bilanz pro Rolle bleibt eindeutig, und niemand muss
+Token auf Menschen verteilen. Deshalb ist „Kostenstelle" im Mini-Glossar ein
+Kontext und kein Mensch.
 
 **Was dieses Modul nicht lehrt:** den Emissions-Pfad. Die Lernziele sagen
 *lesen*, *attribuieren*, *unterscheiden*, *erkennen*, *spezifizieren*,

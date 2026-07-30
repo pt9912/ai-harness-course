@@ -34,11 +34,15 @@ jeder Cache einen Counter — die Regeln unten.
   `TRACEPARENT` ist das Konvention, nicht Spezifikation.**
 - **Warum:** Mit der Rolle am Span ist „ein Lauf mit zwei Tool-Calls" nicht von
   „zwei Läufen mit je einem" zu unterscheiden, und die Rolle ist eine Angabe
-  des Agenten über sich selbst statt eine des Starters. Die Zuordnungs-Einheit
-  der Token-Bilanz ist der **Lauf** — deshalb ist die „Kostenstelle" ein
-  Kontext und kein Mensch, und deshalb bleibt die Bilanz sauber, wenn ein
-  Mensch mehrere Rollen nacheinander spielt
-  ([Modul 8](modul-08-agentenrollen.md)).
+  des Agenten über sich selbst statt eine des Starters.
+- **Der Mensch kommt in dieser Bilanz nicht vor:** Eine Rolle wird von einem
+  **Lauf** getragen, nicht von der Person, die ihn startet
+  ([Modul 8](modul-08-agentenrollen.md): Rollen-Trennung ist Kontext-Trennung,
+  keine Personen-Trennung). Startet dieselbe Person nacheinander einen
+  Planner-, einen Implementer- und einen Reviewer-Lauf, entstehen drei
+  Kontexte mit je eindeutiger Rolle — die Bilanz pro Rolle bleibt eindeutig,
+  und niemand muss Token auf Menschen verteilen. Deshalb ist die
+  „Kostenstelle" ein Kontext und kein Mensch.
 - **Der Emissions-Pfad ist Repo-Entscheidung:** Exporter, Collector, Sampling
   und Aufbewahrung stehen nicht in diesem Regelwerk. Mitzunehmen ist das
   **Schema**, nicht das Setup.
