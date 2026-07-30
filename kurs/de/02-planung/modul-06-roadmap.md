@@ -56,6 +56,7 @@ Terminen. Termine sind eine Folge der Wellen, nicht ihr Treiber.
 - **"Eine Roadmap ist statisch."** — Eine Roadmap, die nach drei Wellen nicht angepasst wurde, hat den Steering Loop nicht durchlaufen.
 - **"Welle = Sprint."** — Ein Sprint endet durch *Datum* (zwei Wochen sind um). Eine Welle endet durch *Closure-Kriterien* (alle ihre Slices in `done/`, Replay-Lauf grün, Closure-Einträge geschrieben). Wer Wellen wie Sprints schneidet, kappt halbfertige Slices am Datum — und produziert genau die Auditierbarkeits-Lücke, die der Harness verhindern soll.
 - **"Trigger = Datum."** — Ein Trigger ist eine *beobachtbare Bedingung* ("SL-024 liegt in `done/`", "Replay-Lauf gegen Golden Set grün", "Carveout `CO-007` aufgelöst"). Ein Datum ist kein Trigger, sondern eine Prognose. Wenn das einzige Trigger-Kriterium ein Kalendertag ist, plant die Roadmap nicht — sie hofft.
+- **"Beobachtbar reicht."** — Für den **Start**-Trigger nicht: Er darf **kein Ergebnis dieser Welle** sein. „Alle Slices in `done/`" ist beobachtbar *und* ein Ergebnis — als Closure-Trigger richtig, als Start-Trigger zirkulär: Die Welle könnte erst beginnen, wenn sie fertig ist. Beobachtbarkeit und Vorbedingung sind zwei Prüfungen, nicht eine. Praktischer Test: Steht der Trigger in der Slice-Liste *dieser* Welle, ist er falsch platziert.
 
 ## Worked Example: einen Datumswunsch in eine Trigger-Welle übersetzen
 

@@ -113,7 +113,11 @@ Ein Slice-Plan folgt der Vorlage
 [`templates/docs/plan/planning/slice.template.md`](../templates/docs/plan/planning/slice.template.md).
 Größen- und Schnitt-Regeln:
 
-- **Zu groß**, wenn eines zutrifft: mehr als drei DoD-Punkte · mehrere
+- **Zu groß**, wenn eines zutrifft: mehr als drei **Liefer-Punkte** — gezählt
+  wird nur, was mit dem Umfang wächst (die Artefakte und Akzeptanzkriterien
+  dieses Slice). Nicht gezählt: Gate-Läufe, Closure-Notiz, Register,
+  Risiko-Ausgänge, die drei Paarungen; sie sind pro Slice konstant und sagen
+  über die Größe nichts · mehrere
   Schichten betroffen (Adapter + Service + UI + DB-Schema) · nicht in
   *einer* Review-Sitzung prüfbar. Dann zurück zum Schneiden
   (`in-progress→next`), nicht still weiterschieben.
@@ -121,7 +125,7 @@ Größen- und Schnitt-Regeln:
   (`…-db`, `…-service`, `…-ui`) erzeugt voneinander abhängige, einzeln
   nutzlose Zombie-Slices, die in `in-progress/` festhängen.
 - Jeder Schnitt-Slice ist **einzeln lieferbar** (kein Slice wartet auf
-  den nächsten), hat **≤ 3 DoD-Punkte** und berührt **höchstens zwei
+  den nächsten), hat **≤ 3 Liefer-Punkte** und berührt **höchstens zwei
   Schichten**.
 
 ### Ziel-Form: Sub-Area-Modus-Begründung

@@ -177,7 +177,13 @@ Token-Revocation per Admin-Endpoint, Audit-Log auf Login-Versuche."
 > ist Zufall der Beispielwahl, kein gemeinsamer Slice.
 
 **Diagnose:** zu groß. Anzeichen:
-1. Mehr als drei DoD-Punkte (Faustregel).
+1. Mehr als drei **Liefer-Punkte** (Faustregel). Gezählt wird nur, was mit dem
+   Umfang *wächst*: die Artefakte und Akzeptanzkriterien, die dieser Slice
+   herstellt. **Nicht** gezählt werden die Punkte, die jede Closure gleich oft
+   trägt — Gate-Läufe (`make gates` grün), Closure-Notiz,
+   Beobachtungs-Register, Risiko-Ausgänge, die drei Paarungen. Sie sind pro
+   Slice konstant und sagen über die Größe nichts; wer sie mitzählt, hält jeden
+   Slice für zu groß und die Faustregel für unbrauchbar.
 2. Mehrere Schichten betroffen (Adapter + Service + UI + DB-Schema).
 3. Kann nicht in einer Review-Sitzung geprüft werden.
 
@@ -193,7 +199,7 @@ nach Schichten führen oft zu Zombie-Slices, die "fast fertig" sind.
 | `SL-014c` | Admin-Endpoint zur Token-Revocation, mit Architekturtest gegen Direkt-DB-Zugriff. | Operativität |
 
 **Begründung:** Jeder Schnitt-Slice ist einzeln lieferbar (kein Slice
-wartet auf den nächsten). Jeder hat ≤3 DoD-Punkte. Jeder berührt
+wartet auf den nächsten). Jeder hat ≤3 *Liefer-Punkte*. Jeder berührt
 höchstens zwei Schichten.
 
 **Was *nicht* geht:** "Schicht-Slice" wie `SL-014-db`, `SL-014-service`,

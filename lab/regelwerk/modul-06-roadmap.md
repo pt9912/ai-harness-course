@@ -18,6 +18,7 @@ Form, die Regeln der Inhalt.
 
 - Ein Welle-Eintrag braucht minimal drei Bestandteile: Slice-IDs (Inhalt) · Trigger als beobachtbare Bedingung (kein Datum) · Closure-Kriterien (z. B. Replay grün, alle Slices in `done/`). Datum darf *erwähnt* werden (Prognose), darf aber nie Trigger sein — sonst kappt die Welle halbfertige Slices am Kalendertag und das Auditierbarkeits-Versprechen bricht.
 - Ein Trigger ist beobachtbar dann, wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er eingetreten ist. "Sobald wir Zeit haben" scheitert daran; "SL-024 in `done/`" besteht. Beispiele für beobachtbare Trigger: "SL-024 liegt in `done/`" · "Replay-Lauf gegen Golden Set grün" · "Carveout `CO-007` aufgelöst".
+- **Der Start-Trigger darf kein Ergebnis dieser Welle sein** — Beobachtbarkeit allein genügt nicht. "Alle Slices in `done/`" ist beobachtbar *und* ein Ergebnis: als Closure-Trigger richtig, als Start-Trigger zirkulär. Zwei Prüfungen, nicht eine. Test: Steht der Trigger in der Slice-Liste *dieser* Welle, ist er falsch platziert.
 - Welle 30 % über Schätzung — Diagnose vor Aktion: liegt es an Slice-Größe (→ neu schneiden), an Reihenfolge (→ neu planen), oder an unerwarteter Komplexität (→ Carveout)? 30 % früh können ein Steering-Loop-Signal sein (Slice-Sizing-Regel schärfen), 30 % spät (vor Welle-Closure) eher Carveout.
 
 ### Welle ≠ Meilenstein ≠ Release (Modul 6)

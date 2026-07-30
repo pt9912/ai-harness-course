@@ -37,7 +37,8 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 §Roadmap-Regeln — ein Trigger ist **beobachtbar** dann, wenn ein *anderer*
 Mensch ohne Rückfrage sagen kann, ob er eingetreten ist; ein Datum darf erwähnt
-werden, aber nie Trigger sein.
+werden, aber nie Trigger sein. Und der **Start**-Trigger ist **kein Ergebnis
+dieser Welle**: Steht er in der Slice-Liste unten, ist er falsch platziert.
 
 - <z.B. Welle <welle-vorher-id> done.>
 - <z.B. ADR-<NNNN> accepted.>

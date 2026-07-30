@@ -35,8 +35,9 @@ ist einzeln lieferbar.
 <!-- BEDIENHINWEIS: je Zeile ein pruefbares Kriterium. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
-§Ziel-Form: Slice — **≤ 3 DoD-Punkte**; mehr heißt: der Slice ist zu groß und
-gehört zurück zur Zerlegung.
+§Ziel-Form: Slice — **≤ 3 Liefer-Punkte**; mehr heißt: der Slice ist zu groß und
+gehört zurück zur Zerlegung. Gezählt wird nur, was mit dem Umfang wächst — die
+Gate-Läufe und die vier Closure-Pflichten darunter zählen nicht mit.
 
 - [ ] LH-FA-<NN> erfüllt, Test referenziert.
 - [ ] LH-QA-<NN> erfüllt, Messung dokumentiert.
