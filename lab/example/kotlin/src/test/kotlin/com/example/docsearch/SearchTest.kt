@@ -79,7 +79,7 @@ class SearchTest {
 
 /** Port-Double, das den Embedding-Ausfall simuliert (E003-Pfad). */
 private class DownEmbedder : com.example.docsearch.embedding.Embedder {
-    override fun embed(text: String): FloatArray = throw IllegalStateException("model down")
+    override fun embed(text: String): FloatArray = error("model down")
 }
 
 class EmbeddingFailureTest {

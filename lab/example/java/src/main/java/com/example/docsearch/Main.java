@@ -2,6 +2,7 @@ package com.example.docsearch;
 
 import com.example.docsearch.embedding.MockEmbedder;
 import com.example.docsearch.index.Index;
+import com.example.docsearch.service.Indexer;
 import com.example.docsearch.service.Searcher;
 
 /**
@@ -27,6 +28,7 @@ public final class Main {
         final Index idx = new Index();
         final MockEmbedder emb = new MockEmbedder();
         new Searcher(idx, emb);
+        new Indexer(idx, emb);
         System.out.println("DocSearch wired. HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).");
     }
 

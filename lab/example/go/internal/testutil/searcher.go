@@ -21,3 +21,11 @@ func SeededSearcher(n int) *service.Searcher {
 	}
 	return service.NewSearcher(idx, emb)
 }
+
+// SeededHandlerParts baut Searcher und Indexer auf demselben Index — für
+// UI-Tests, die beide Wege brauchen.
+func SeededHandlerParts() (*service.Searcher, *service.Indexer) {
+	idx := index.New()
+	emb := embedding.MockEmbedder{}
+	return service.NewSearcher(idx, emb), service.NewIndexer(idx, emb)
+}

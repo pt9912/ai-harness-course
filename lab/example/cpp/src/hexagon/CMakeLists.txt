@@ -2,6 +2,7 @@
 # Bibliothek und an keinem Adapter — durchgesetzt von cmake/arch-check.sh.
 add_library(docsearch_hexagon
     index/index.cpp
+    service/indexer.cpp
     service/searcher.cpp
 )
 target_include_directories(docsearch_hexagon PUBLIC ${CMAKE_SOURCE_DIR}/src)

@@ -77,6 +77,16 @@ weil ihr Service-Layer genug andere Zeilen hat. Java und Kotlin (84,2 %) waren
 ebenfalls rot. Mit dem nachgezogenen `LH-FA-02`-Negative-Test sind alle sechs
 grün; C# steht bei 100 %.
 
+**Nachtrag `E001`/`E099` (2026-07-30):** Dieselbe Messung zeigte eine zweite
+Lücke — `E001` war in **keiner** Sprache getestet, `E099` nur in Go. Ursache
+war nicht die Testauswahl, sondern der fehlende Produktionscode: `POST
+/reindex` (`LH-FA-01`) existierte in keinem Skelett, und ohne den Aufrufpfad
+gab es für `E001` nichts zu prüfen. Nachgezogen sind jetzt in allen sechs
+Sprachen der `Indexer`-Service, der `/reindex`-Einstieg im UI-Adapter, die
+`LH-FA-01`-Akzeptanzkriterien (Happy/Boundary/Negative) und **eine** Stelle,
+die alle vier Codes aus spec §4 auf HTTP-Status abbildet. Damit ist jeder Code
+in jeder Sprache durch einen Test belegt.
+
 ## Verifikation (nach Auflösung)
 
 - [ ] Index-Layer-Coverage in allen sechs Sprach-Skeletten ≥ 90 %.
@@ -86,6 +96,7 @@ grün; C# steht bei 100 %.
       `coverage-gate`.
 - [x] C#: wirksames Coverage-Gate vorhanden (`coverlet.msbuild`, gemessen 2026-07-30).
 - [x] C#: Service-Layer erreicht die 90 % aus ADR-0013 (gemessen 2026-07-30) — die Lücke war der ungetestete E003-Pfad, nicht der Layer-Umfang.
+- [x] Jeder Fehler-Code aus spec §4 (E001, E002, E003, E099) ist in allen sechs Skeletten durch einen Test belegt (2026-07-30).
 - [ ] `make coverage-gate-critical` grün ohne Ausnahmen.
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
 - [ ] slice-013 Closure-Notiz schließt diese Auflösung mit ein.

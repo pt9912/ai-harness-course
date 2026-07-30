@@ -2,6 +2,7 @@
 
 #include <sstream>
 
+#include "hexagon/service/indexer.h"
 #include "hexagon/service/searcher.h"
 
 namespace docsearch {
@@ -30,18 +31,45 @@ std::string render_results(const SearchResponse& resp) {
 
 SearchHandler::SearchHandler(const Searcher& searcher) : searcher_(searcher) {}
 
+SearchHandler::SearchHandler(const Searcher& searcher, const Indexer& indexer)
+    : searcher_(searcher), indexer_(&indexer) {}
+
+// status_for — die Zuordnung aus spec/spezifikation.md §4 an EINER Stelle.
+int SearchHandler::status_for(const std::string& code) {
+    if (code == "E001") {
+        return 400;  // Verzeichnis fehlt
+    }
+    if (code == "E002") {
+        return 400;  // leere Anfrage
+    }
+    if (code == "E003") {
+        return 503;  // Embedding nicht verfügbar
+    }
+    return 500;  // E099 unklassifiziert
+}
+
 SearchHandler::HttpResult SearchHandler::handle(const SearchRequest& req) const {
     try {
         const SearchResponse resp = searcher_.search(req);
         return HttpResult{200, render_results(resp), resp.k_clamped};
     } catch (const SearchError& err) {
-        int status = 500;
-        if (err.code() == "E002") {
-            status = 400;  // leere Anfrage
-        } else if (err.code() == "E003") {
-            status = 503;  // Embedding nicht verfügbar
-        }
-        return HttpResult{status, R"({"error":")" + err.code() + R"("})", false};
+        return HttpResult{status_for(err.code()), R"({"error":")" + err.code() + R"("})", false};
+    } catch (const std::exception&) {
+        return HttpResult{status_for("E099"), R"({"error":"E099"})", false};
+    }
+}
+
+SearchHandler::HttpResult SearchHandler::handle_reindex(const std::string& dir) const {
+    if (indexer_ == nullptr) {
+        return HttpResult{status_for("E099"), R"({"error":"E099"})", false};
+    }
+    try {
+        const int indexed = indexer_->reindex(dir);
+        return HttpResult{200, R"({"indexed_docs":)" + std::to_string(indexed) + "}", false};
+    } catch (const SearchError& err) {
+        return HttpResult{status_for(err.code()), R"({"error":")" + err.code() + R"("})", false};
+    } catch (const std::exception&) {
+        return HttpResult{status_for("E099"), R"({"error":"E099"})", false};
     }
 }
 

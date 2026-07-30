@@ -47,7 +47,7 @@ coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Laye
 	@echo "Critical coverage — CO-001 (index-Layer) ausgenommen"
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
 		sh -c "pip install -q pytest pytest-cov && \
-			pytest --cov=src/docsearch/service --cov-fail-under=90 tests/test_service.py"
+			pytest --cov=src/docsearch/service --cov-fail-under=90 tests/"
 
 gates: lint typecheck arch-check test coverage-gate ## mandatory
 	@echo "gates grün."

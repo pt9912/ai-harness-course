@@ -3,6 +3,7 @@ package com.example.docsearch
 
 import com.example.docsearch.embedding.MockEmbedder
 import com.example.docsearch.index.Index
+import com.example.docsearch.service.Indexer
 import com.example.docsearch.service.Searcher
 
 const val VERSION: String = "0.3.0"
@@ -20,8 +21,10 @@ fun main(args: Array<String>) {
     val idx = Index()
     val emb = MockEmbedder()
     val service = Searcher(idx, emb)
+    val indexer = Indexer(idx, emb)
     println(
-        "DocSearch wired. service=$service, index-size=${idx.size()}. " +
+        "DocSearch wired. service=$service, indexer=$indexer, " +
+            "index-size=${idx.size()}. " +
             "HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).",
     )
 }

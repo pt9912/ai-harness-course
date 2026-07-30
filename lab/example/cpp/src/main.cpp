@@ -6,6 +6,7 @@
 #include "adapters/embedding/mock_embedder.h"
 #include "adapters/ui/search_handler.h"
 #include "hexagon/index/index.h"
+#include "hexagon/service/indexer.h"
 #include "hexagon/service/searcher.h"
 
 namespace {
@@ -29,7 +30,8 @@ int main(int argc, char** argv) {
     docsearch::Index idx;
     docsearch::MockEmbedder emb;
     docsearch::Searcher searcher(idx, emb);
-    docsearch::SearchHandler handler(searcher);
+    const docsearch::Indexer indexer(idx, emb);
+    docsearch::SearchHandler handler(searcher, indexer);
     (void)handler;  // HTTP-Layer-Start wäre hier; im Lab-Skelett zeigen wir nur das Wiring.
 
     std::cout << "DocSearch wired. HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).\n";

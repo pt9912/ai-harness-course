@@ -3,7 +3,8 @@
 **Stand:** 2026-07-29. **Status:** noch kein Review-Lauf. Diese Datei sammelt,
 Sie sammelt drei Dinge: was **vor** der Runde auffiel (`V11-01`, `V11-02` —
 beide behoben), die **Befunde des Drei-Linsen-Reviews** (21 offen, 6 behoben)
-und die übernommenen Ü-Posten (`Ü-02` behoben).
+und die übernommenen Ü-Posten (`Ü-02`, `Ü-03`, `Ü-04`, `Ü-07`, `Ü-08` behoben;
+offen: `Ü-01`, `Ü-05`, `Ü-06`).
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -579,7 +580,7 @@ nachher, dieselbe Schwelle:  error : The total line coverage
 Das Lock-File erzwingt `RestoreLockedMode`, wurde also mit `--force-evaluate`
 neu bewertet und mitgezogen.
 
-**Ü-07 · `coverage-gate-critical` ist jetzt rot** (neu, aus der Ü-03-Behebung)
+**Ü-07 · `coverage-gate-critical` ist jetzt rot** ✅ (neu, aus der Ü-03-Behebung)
 
 Das Target wählte nur Tests nach Namen aus und misst jetzt wirklich
 (`/p:Include="[DocSearch]DocSearch.Service.*"`, Schwelle 90) — damit ist es
@@ -590,9 +591,40 @@ ist nicht still: Target-Beschreibung, CO-001 §Stand für C# und die
 Verifikations-Checkliste nennen ihn. Folge: `make ci` ist für C# rot,
 `make gates` bleibt grün.
 
-**Zuerst zu entscheiden:** Tests für den Service-Layer bis 90 % — oder ein
-eigener Carveout für die Lücke? Nicht entschieden; beides ist ein Slice, keine
-Gate-Reparatur.
+**Entschieden und behoben:** Tests, kein zweiter Carveout. Der `E003`-Pfad war
+in fünf von sechs Skeletten ungetestet; nachgezogen erreicht C# 100 %, alle
+sechs `coverage-gate-critical` sind grün.
+
+**Ü-08 · `E001` ist in keiner Sprache getestet, `E099` nur in Go** ✅
+(neu, aus derselben Messung)
+
+Die Ursache lag nicht bei den Tests. `POST /reindex` (`LH-FA-01`) existierte in
+**keinem** Skelett — ohne Aufrufpfad gibt es für `E001` nichts zu prüfen, und
+`E099` hatte nur Go überhaupt erzeugt. Die Spec verlangt beides seit jeher:
+[`spec/lastenheft.md` LH-FA-01](../../lab/example/spec/lastenheft.md#lh-fa-01--dokument-indexierung)
+nennt Happy/Boundary/Negative wörtlich, `spec/spezifikation.md §4` ordnet allen
+vier Codes Status zu. Die Skelette folgten der Spec nicht — Fix-Richtung also
+Spec → Code, nicht umgekehrt.
+
+Nachgezogen in allen sechs Sprachen: `Indexer`-Service, `/reindex` im
+UI-Adapter, die drei `LH-FA-01`-Akzeptanzkriterien, ein `LH-QA-02`-Determinismus-Fall
+und **eine** Zuordnungsstelle (`statusFor` / `status_for` / `StatusFor`) für alle
+vier Codes. `lab/example/README.md` §Sprach-Skelette nennt jetzt LH-FA-01 im
+Umfang und die zwei bewusst offenen Spec-Teile (Index-Persistenz nach ADR-0003/0012,
+Abschnitts-Zerlegung samt `indexed_sections`).
+
+Drei Befunde fielen unterwegs mit an, alle vorbestehend:
+
+| Fund | Stelle | Behebung |
+|---|---|---|
+| `E099` mit Status **400** | `go/internal/ui/handler.go` Decode-Pfad | über `statusFor` geführt → 500, wie spec §4 sagt; der Test, der die 400 festhielt, war mit-korrigiert |
+| `detekt` rot auf `main` | `kotlin/…/SearchTest.kt:82` `UseCheckOrError` | `error("model down")` statt `throw IllegalStateException(…)`; kein Baseline-Eintrag |
+| Python maß nur eine Testdatei | `python/Makefile:50` | `tests/` statt `tests/test_service.py` |
+
+**Offen, zur Entscheidung:** Die Spec kennt keinen Code für syntaktisch
+kaputte Eingabe. Bis dahin fällt sie unter `E099` → 500, was für einen
+Client-Fehler unschön ist. Das ist eine Spec-Lücke, keine Handler-Frage — und
+damit ein CR, kein Slice.
 
 ### Ü-04 — `AGENTS.template.md` lehrt einen zentralen Ort für Qualitätsdefinitionen ohne Quell-Verankerung ✅
 

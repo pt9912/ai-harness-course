@@ -3,6 +3,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
+#include <filesystem>
+#include <fstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -12,11 +14,13 @@
 #include "hexagon/index/index.h"
 #include "hexagon/model/types.h"
 #include "hexagon/ports/embedder_port.h"
+#include "hexagon/service/indexer.h"
 #include "hexagon/service/searcher.h"
 
 namespace {
 
 using docsearch::Index;
+using docsearch::Indexer;
 using docsearch::IndexEntry;
 using docsearch::MockEmbedder;
 using docsearch::SearchError;
@@ -31,6 +35,35 @@ class ThrowingEmbedder : public docsearch::EmbedderPort {
     [[nodiscard]] docsearch::Embedding embed(const std::string& /*text*/) const override {
         throw std::runtime_error("model down");
     }
+};
+
+// TempDir — legt ein eindeutiges Verzeichnis an und räumt es wieder ab.
+// Ohne Zufall: der Testname liefert den eindeutigen Namen (LH-QA-02).
+class TempDir {
+  public:
+    explicit TempDir(const std::string& name)
+        : path_(std::filesystem::temp_directory_path() / ("docsearch-" + name)) {
+        std::filesystem::remove_all(path_);
+        std::filesystem::create_directories(path_);
+    }
+    TempDir(const TempDir&) = delete;
+    TempDir& operator=(const TempDir&) = delete;
+    TempDir(TempDir&&) = delete;
+    TempDir& operator=(TempDir&&) = delete;
+    ~TempDir() {
+        std::error_code ec;
+        std::filesystem::remove_all(path_, ec);
+    }
+
+    [[nodiscard]] std::string str() const { return path_.string(); }
+
+    void write(const std::string& name) const {
+        std::ofstream out(path_ / name);
+        out << "# " << name << "\n";
+    }
+
+  private:
+    std::filesystem::path path_;
 };
 
 // Baut einen Index mit n Mock-Einträgen.
@@ -195,4 +228,107 @@ TEST_CASE("UI-Handler — Embedding-Ausfall: Status 503, E003") {
 
     CHECK(res.status == 503);
     CHECK(res.body == R"({"error":"E003"})");
+}
+
+TEST_CASE("LH-FA-01 Happy Path — Reindex zählt indexierte Dokumente") {
+    const TempDir dir("reindex-happy");
+    dir.write("a.md");
+    dir.write("b.md");
+    const MockEmbedder emb;
+    Index idx;
+    const Indexer indexer(idx, emb);
+    const Searcher searcher(idx, emb);
+    const SearchHandler handler(searcher, indexer);
+
+    const SearchHandler::HttpResult res = handler.handle_reindex(dir.str());
+
+    CHECK(res.status == 200);
+    CHECK(res.body == R"({"indexed_docs":2})");
+    CHECK(idx.size() == 2);
+}
+
+TEST_CASE("LH-FA-01 Boundary — leeres Verzeichnis ist kein Fehler") {
+    const TempDir dir("reindex-empty");
+    const MockEmbedder emb;
+    Index idx;
+    const Indexer indexer(idx, emb);
+    const Searcher searcher(idx, emb);
+    const SearchHandler handler(searcher, indexer);
+
+    const SearchHandler::HttpResult res = handler.handle_reindex(dir.str());
+
+    CHECK(res.status == 200);
+    CHECK(res.body == R"({"indexed_docs":0})");
+}
+
+TEST_CASE("LH-FA-01 Negative — fehlendes Verzeichnis liefert E001") {
+    const TempDir dir("reindex-missing");
+    const MockEmbedder emb;
+    Index idx;
+    const Indexer indexer(idx, emb);
+    const Searcher searcher(idx, emb);
+    const SearchHandler handler(searcher, indexer);
+
+    const SearchHandler::HttpResult res = handler.handle_reindex(dir.str() + "/weg");
+
+    CHECK(res.status == 400);
+    CHECK(res.body == R"({"error":"E001"})");
+}
+
+TEST_CASE("LH-QA-02 Determinism — Reindex liefert dieselbe Trefferfolge") {
+    const TempDir dir("reindex-determinism");
+    dir.write("b.md");
+    dir.write("a.md");
+    const MockEmbedder emb;
+    Index first;
+    Index second;
+    CHECK(Indexer(first, emb).reindex(dir.str()) == 2);
+    CHECK(Indexer(second, emb).reindex(dir.str()) == 2);
+
+    const SearchResponse a = Searcher(first, emb).search(SearchRequest{"frage", 2});
+    const SearchResponse b = Searcher(second, emb).search(SearchRequest{"frage", 2});
+    REQUIRE(a.results.size() == b.results.size());
+    for (std::size_t i = 0; i < a.results.size(); ++i) {
+        CHECK(a.results[i].doc == b.results[i].doc);
+        CHECK(a.results[i].section == b.results[i].section);
+    }
+}
+
+TEST_CASE("Reindex — Embedding-Ausfall liefert E003") {
+    const TempDir dir("reindex-e003");
+    dir.write("a.md");
+    const ThrowingEmbedder emb;
+    Index idx;
+    const Indexer indexer(idx, emb);
+    const Searcher searcher(idx, emb);
+    const SearchHandler handler(searcher, indexer);
+
+    const SearchHandler::HttpResult res = handler.handle_reindex(dir.str());
+
+    CHECK(res.status == 503);
+    CHECK(res.body == R"({"error":"E003"})");
+}
+
+TEST_CASE("UI-Handler — unklassifizierter Code ist E099 (Status 500)") {
+    CHECK(SearchHandler::status_for("E099") == 500);
+    CHECK(SearchHandler::status_for("was-auch-immer") == 500);
+}
+
+TEST_CASE("UI-Handler — status_for deckt alle Codes aus spec §4 ab") {
+    CHECK(SearchHandler::status_for("E001") == 400);
+    CHECK(SearchHandler::status_for("E002") == 400);
+    CHECK(SearchHandler::status_for("E003") == 503);
+    CHECK(SearchHandler::status_for("E099") == 500);
+}
+
+TEST_CASE("UI-Handler ohne Indexer liefert E099") {
+    const MockEmbedder emb;
+    const Index idx = make_index(emb, 1);
+    const Searcher searcher(idx, emb);
+    const SearchHandler handler(searcher);  // kein Indexer verdrahtet
+
+    const SearchHandler::HttpResult res = handler.handle_reindex("/beliebig");
+
+    CHECK(res.status == 500);
+    CHECK(res.body == R"({"error":"E099"})");
 }

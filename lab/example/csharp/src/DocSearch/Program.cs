@@ -19,5 +19,6 @@ if (args.Length == 0 || args.Contains("--help"))
 VectorIndex idx = new();
 MockEmbedder emb = new();
 _ = new Searcher(idx, emb);
+_ = new Indexer(idx, emb);
 Console.WriteLine("DocSearch wired. HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).");
 return 0;

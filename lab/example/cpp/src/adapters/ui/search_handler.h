@@ -5,6 +5,7 @@
 #include <string>
 
 #include "hexagon/model/types.h"
+#include "hexagon/service/indexer.h"
 #include "hexagon/service/searcher.h"
 
 namespace docsearch {
@@ -21,12 +22,21 @@ class SearchHandler {
     };
 
     explicit SearchHandler(const Searcher& searcher);
+    SearchHandler(const Searcher& searcher, const Indexer& indexer);
 
     // handle — POST /search.
     [[nodiscard]] HttpResult handle(const SearchRequest& req) const;
 
+    // handle_reindex — POST /reindex (LH-FA-01).
+    [[nodiscard]] HttpResult handle_reindex(const std::string& dir) const;
+
+    // status_for — Fehler-Code aus spec/spezifikation.md §4 auf HTTP-Status.
+    // Unbekannte Codes sind E099 (500).
+    [[nodiscard]] static int status_for(const std::string& code);
+
   private:
     const Searcher& searcher_;
+    const Indexer* indexer_ = nullptr;
 };
 
 }  // namespace docsearch

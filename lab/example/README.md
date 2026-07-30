@@ -76,9 +76,18 @@ Jedes Skelett implementiert:
 
 - Hexagonales Layering (ADR-0001) — UI → Service → {Index, Embedding} → Types.
 - Tie-Break-Logik aus slice-009 (deterministische Sortierung bei gleichem Score).
-- LH-FA-02 Akzeptanzkriterien (Happy/Boundary/Negative) als Tests.
+- LH-FA-01 und LH-FA-02 Akzeptanzkriterien (Happy/Boundary/Negative) als Tests.
+- Die vier Fehler-Codes aus [spec §4](spec/spezifikation.md#4-fehler-codes-und-logging-felder)
+  (E001, E002, E003, E099) mit HTTP-Status an einer Stelle abgebildet.
 - LH-QA-02 Determinismus-Test (gleiche Eingabe → gleiches Ergebnis).
 - `make gates` als einheitlicher Vertrag.
+
+Nicht im Skelett: die Index-Persistenz aus
+[spec §1 LH-FA-01.a](spec/spezifikation.md#lh-fa-01a--indexierung) Schritt 5
+(ADR-0003, ADR-0012) und die Abschnitts-Zerlegung an `##`-Headings. Der Index
+lebt im Speicher, `reindex` zählt Dateien statt Abschnitte und antwortet
+deshalb nur mit `indexed_docs`, nicht mit `indexed_sections`. Die Skelette
+zeigen Schichtung, Gates und Traceability — nicht das fertige Produkt.
 
 ## Lerneffekt aus Sprach-Vergleich
 

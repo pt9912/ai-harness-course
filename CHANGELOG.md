@@ -71,6 +71,31 @@ entstanden, nicht aus einem Review-Lauf.
   eine Closure-Notiz eine QA-Erfüllung berichtet. Eng gefasst und in beide
   Richtungen verifiziert: acht Gegenbeispiele still, vier Platzhalter-Formen
   weiter getroffen, blanker Template-Rumpf weiter rot.
+- **`POST /reindex` (LH-FA-01) existierte in keinem der sechs Skelette.** Die
+  Coverage-Messung aus `Ü-03` legte offen, dass `E001` in **keiner** Sprache
+  getestet war und `E099` nur in Go — Ursache war nicht die Testauswahl,
+  sondern fehlender Produktionscode: Ohne Aufrufpfad gibt es für `E001` nichts
+  zu prüfen. Die Spec verlangte beides seit jeher (`lastenheft.md` LH-FA-01
+  nennt Happy/Boundary/Negative wörtlich). Nachgezogen in allen sechs Sprachen:
+  `Indexer`-Service, `/reindex` im UI-Adapter, die drei Akzeptanzkriterien, ein
+  `LH-QA-02`-Determinismus-Fall und **eine** Zuordnungsstelle für alle vier
+  Codes aus spec §4. `lab/example/README.md` nennt jetzt den Umfang und die
+  zwei bewusst offenen Spec-Teile (Index-Persistenz nach ADR-0003/0012,
+  Abschnitts-Zerlegung samt `indexed_sections`).
+- **`E099` kam in Go mit Status 400.** Der Decode-Pfad in
+  `go/internal/ui/handler.go` schrieb den Status neben die Zuordnungstabelle,
+  und ein Test hielt die 400 fest — spec §4 ordnet `E099` den Status 500 zu.
+  Beide Pfade laufen jetzt über `statusFor`. Was dabei sichtbar wurde und
+  offen bleibt: Die Spec kennt **keinen** Code für syntaktisch kaputte
+  Eingabe. Das ist eine Spec-Lücke, kein Handler-Fehler.
+- **Kotlins `make lint` war auf `main` rot.** `detekt` meldete
+  `UseCheckOrError` in `SearchTest.kt`; der Befund lag vor dieser Welle und
+  hing an keinem Baseline-Eintrag. Behoben mit `error(…)` statt
+  `throw IllegalStateException(…)` — kein Suppression-Eintrag.
+- **Pythons `coverage-gate-critical` maß nur eine Testdatei.** `--cov` zeigte
+  auf den ganzen Service-Layer, `pytest` lief auf `tests/test_service.py`.
+  Solange dort alles lag, fiel es nicht auf; mit `reindex.py` sackte die
+  Messung auf 50 %. Jetzt `tests/`.
 - **ADR-0011 trägt vier Pflichten statt drei.** *Ausgefülltheit* war als
   Zähl-Ausnahme zu Pflicht 1 formuliert, während der Code Platzhalter
   unabhängig von der Satzzahl abweist — die Historie-Zeile behauptete dazu

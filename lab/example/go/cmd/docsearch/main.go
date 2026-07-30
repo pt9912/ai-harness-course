@@ -32,6 +32,7 @@ func main() {
 	idx := index.New()
 	emb := embedding.MockEmbedder{}
 	_ = service.NewSearcher(idx, emb)
+	_ = service.NewIndexer(idx, emb)
 	// HTTP-Layer-Start wäre hier; im Lab-Skelett zeigen wir nur das Wiring.
 
 	fmt.Println("DocSearch wired. HTTP-Start bleibt ausserhalb des Lab-Skeletts (Lab-Grenze).")

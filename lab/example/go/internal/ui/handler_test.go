@@ -27,10 +27,14 @@ func TestSearchHTTP_Happy(t *testing.T) {
 	}
 }
 
+// TestSearchHTTP_BadJSON — kaputter Body ist unklassifiziert. spec §4 ordnet
+// E099 den Status 500 zu; die frühere 400 hier widersprach der eigenen
+// Tabelle. Dass die Spec keinen Code für fehlerhafte Eingabe-Syntax kennt,
+// ist eine Lücke der Spec, nicht des Handlers.
 func TestSearchHTTP_BadJSON(t *testing.T) {
 	rec := post(t, 1, `not-json`)
-	if rec.Code != http.StatusBadRequest {
-		t.Errorf("Status = %d, want 400 (E099)", rec.Code)
+	if rec.Code != http.StatusInternalServerError {
+		t.Errorf("Status = %d, want 500 (E099)", rec.Code)
 	}
 }
 
