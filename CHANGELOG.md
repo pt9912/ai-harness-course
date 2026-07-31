@@ -50,6 +50,15 @@ entstanden, nicht aus einem Review-Lauf.
   zwei Regeln, die anderswo festgelegt sind und hier zusammenlaufen (derivativ
   · sprach- und meilensteinfrei), plus Ziel-Form im Spiegel. Erfunden wurde
   nichts; die Normen standen in Konventionen und Modul 9.
+- **Die Drift-Übung in Modul 12 konnte keine Beobachtung erzeugen** (`Ü-05`).
+  `make replay` ist ein Struktur-Validator, kein Runner — Break-Test: Modell
+  gewechselt und Erwartung verfälscht, dreimal grün. Der Lab-Grenze-Block
+  erklärte die Fixture-Grenze und behauptete zugleich, LZ 3 werde „durch die
+  Drift-Übung in einer Kopie" abgerufen. Jetzt Zuordnung je Lernziel, und die
+  Blindheit ist die Übung: dreimal grün beobachten und benennen, welche Felder
+  ein Runner vergleichen müsste. Lösung mitgezogen. Neu offen als `Ü-11`: Das
+  Manifest deklariert `per_case_hash` und `determinism_check` als „in CI
+  verpflichtend" — kein Target löst das ein.
 - **Vier Templates verloren beim Adoptieren jeden Regelwerk-Anker.** Schritt 4
   entfernt den Hinweis-Block, Schritt 5 die Kommentare — bei `carveout`,
   `architecture`, dem ADR-Template und `spezifikation` stand danach kein

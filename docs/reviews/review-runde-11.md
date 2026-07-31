@@ -4,7 +4,7 @@
 Sie sammelt drei Dinge: was **vor** der Runde auffiel (`V11-01`, `V11-02` —
 beide behoben), die **Befunde des Drei-Linsen-Reviews** (21 offen, 6 behoben)
 und die übernommenen Ü-Posten (`Ü-02`, `Ü-03`, `Ü-04`, `Ü-07`, `Ü-08` behoben;
-offen: `Ü-01`, `Ü-05`, `Ü-06`, `Ü-09`; `Ü-10` behoben).
+offen: `Ü-01`, `Ü-06`, `Ü-09`, `Ü-11`; `Ü-05` und `Ü-10` behoben).
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -642,12 +642,62 @@ geschärft werden müssen (`ddd3ecb`: Rang 5 trägt *Sichten*, keine
 Definitionen) — erst danach war die Template-Zeile nachweislich falsch statt
 nur unbelegt.
 
-### Ü-05 — Die Drift-Übung in Modul 12 ist nicht ausführbar
+### Ü-05 — Die Drift-Übung in Modul 12 ist nicht ausführbar ✅
 
 `kurs/de/04-qualitaet/modul-12-replay-evaluierung.md:235` schickt in eine Kopie,
 um einen Modellwechsel-Drift zu messen. Das Skelett kann den Replay nicht
 ausführen (Lab-Grenze). Entweder als Lab-Grenze deklarieren oder die Übung auf
 das Machbare zuschneiden.
+
+**Gemessen, Break-Test im isolierten Worktree:**
+
+```
+(1) unveraendert                                   -> replay set ok (3 cases)
+(2) model.name v3->v9, model.version neues Datum   -> replay set ok (3 cases)
+(3) zusaetzlich top_doc_path + top_score_min falsch -> replay set ok (3 cases)
+```
+
+`make replay` ist ein **Struktur-Validator, kein Runner**: Manifest da,
+`model:`/`runtime:`-Block da, ≥3 Cases, `inputs`/`expectations` gleich lang.
+Es liest keinen Wert *innerhalb* der Blöcke. Die Übung konnte also nicht nur
+schwer, sondern **gar keine** Beobachtung erzeugen.
+
+**Der vorhandene Lab-Grenze-Block sagte die Unwahrheit.** Er erklärte die
+Fixture-Grenze und behauptete dann, LZ 3 werde *„durch die Drift-Übung in
+einer Kopie"* abgerufen — genau die ist nicht ausführbar. Dieselbe Klasse wie
+`Ü-02` und `Ü-03`: eine Zusage ohne Deckung.
+
+**Behoben, beide Wege statt einem.** Die Grenze ist jetzt korrekt deklariert
+(Zuordnung je Lernziel: LZ 2 ohne Lauf abrufbar · LZ 3 **nicht am Lab
+messbar**, sondern an gegebenen Zahlen oder im eigenen Repo · LZ 1 am Lab
+teilweise). Und die Blindheit selbst ist die neue Übung: Kopie anlegen,
+Modell wechseln, Erwartung verfälschen, `make replay` laufen lassen — dreimal
+grün — und benennen, welche Felder ein Runner vergleichen müsste. Lösung
+mitgezogen.
+
+### Ü-11 — Das Replay-Manifest deklariert einen Vertrag, den kein Target einlöst
+
+`lab/example/evals/golden/welle-1-baseline/manifest.yaml`:
+
+```yaml
+verification:
+  per_case_hash: sha256
+  determinism_check: two_runs_same_hash
+```
+
+und im Kommentar darüber: *„Hash-Vergleich pro Case in CI verpflichtend."*
+Kein Target vergleicht Hashes; `make replay` prüft nur die Struktur, und
+`runtime.image_hash` wird ebenfalls von niemandem gegen einen Vorlauf
+gehalten.
+
+Dass das Lab keinen Runner hat, ist eine legitime Lab-Grenze. Dass das
+Fixture eine CI-Pflicht **behauptet**, die es nicht gibt, ist es nicht — ein
+Adoptierender kopiert das Manifest als Vorbild samt der Zusage.
+
+**Nicht hier behoben:** Die saubere Auflösung ist ein Replay-Runner, also ein
+Slice, keine Textkorrektur. Bis dahin ist der Widerspruch in Modul 12 sichtbar
+gemacht (die Blindheits-Übung zeigt genau diese drei Felder als *deklariert,
+nicht eingelöst*).
 
 ### Ü-10 — Vier Templates verloren beim Adoptieren jeden Regelwerk-Anker ✅
 

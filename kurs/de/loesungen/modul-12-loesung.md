@@ -250,7 +250,12 @@ englische Datei) — das ist ein Demo-Set, kein Golden Set: alle drei
 fangen dieselbe Fehlerklasse, und Halluzinations- wie Fehlerpfad
 bleiben unbeobachtet.
 
-### (Analysieren — aktiviert LZ 3) Erzeuge eine Regression durch Modellwechsel und quantifiziere den Drift
+### (Analysieren — aktiviert LZ 3) Drift quantifizieren
+
+**Wo das läuft:** im eigenen Repo mit echtem Replay-Runner. Das Lab-Target
+`make replay` validiert nur die Struktur des Fixtures und führt keinen Lauf
+aus — es kann keinen roten Fall erzeugen. Ohne eigenen Runner: an der
+Selbstcheck-Vorgabe (3 von 20 rot) rechnen.
 
 Vorgehen:
 
@@ -274,6 +279,45 @@ Produktion bedeutet ein Modell-Update genau diesen Lauf — vorher.
 Häufiger Fehler: bei der ersten Rötung direkt "echte Regression"
 rufen und einen Carveout an der falschen Stelle einbauen — die
 Diagnose-Reihenfolge existiert genau dagegen.
+
+### (Analysieren + Anwenden — aktiviert LZ 1) Zeige, dass der Lab-Sensor den Modellwechsel nicht sieht
+
+Erwartetes Ergebnis — **dreimal grün**:
+
+```
+cp -r evals/golden/welle-1-baseline evals/golden/drift-test
+make replay RUN=drift-test                     -> replay set ok (3 cases)
+# model.name + model.version im Manifest aendern
+make replay RUN=drift-test                     -> replay set ok (3 cases)
+# zusaetzlich top_doc_path + top_score_min verfaelschen
+make replay RUN=drift-test                     -> replay set ok (3 cases)
+```
+
+Wer hier eine Rötung erwartet hat, hat die Zusage des Targets mit seiner
+Prüfung verwechselt. Das Target prüft *Existenz und Form*: Manifest da,
+`model:`- und `runtime:`-Block da, mindestens drei Fälle, `inputs` und
+`expectations` gleich lang. Es liest keinen Wert *innerhalb* der Blöcke.
+
+**Was ein Runner vergleichen müsste** — alle drei Felder stehen bereits im
+Manifest, keines wird eingelöst:
+
+| Feld | wogegen | fängt |
+|---|---|---|
+| `runtime.image_hash` | Hash des Vorlaufs | Toolchain-Drift |
+| `model.name` + `model.version` | Manifest des Vorlaufs | Modell-Wechsel |
+| `verification.per_case_hash` | Hash je Case über zwei Läufe | Nicht-Determinismus |
+
+Die Reihenfolge ist die Diagnose-Reihenfolge aus Schritt 6 — kein Zufall:
+Ein Runner, der `image_hash` nicht vergleicht, kann Toolchain-Drift nie
+ausschließen und meldet ihn als Modell-Regression.
+
+**Die eigentliche Pointe** ist keine Replay-Pointe, sondern eine
+Gate-Pointe: Das Manifest sagt *„Hash-Vergleich pro Case in CI
+verpflichtend"*, und kein Target löst das ein. Eine Zusage ohne Deckung ist
+kein Gate, sondern ein Vorschlag — dieselbe Fehlvorstellung, die
+[Modul 13](../04-qualitaet/modul-13-quality-gates.md#typische-fehlvorstellungen)
+unter *„Wenn ein Gate manchmal rot sein darf, ist das pragmatisch"* führt.
+Im Lab ist das eine deklarierte Grenze; in deinem Repo wäre es ein Befund.
 
 ## Häufige Fehler
 

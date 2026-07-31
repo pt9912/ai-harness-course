@@ -221,7 +221,8 @@ Example oben demonstriert dasselbe Schema für einen *LLM-Agentenlauf*
 
 * Reproduzierbare Testläufe gegen ein Golden Set
 * **(Erschaffen + Bewerten — aktiviert LZ 2)** *Mini-Golden-Set entwerfen und Auswahl begründen.* Gegeben das Szenario: ein Agenten-Tool `summarize_doc`, das zu einer Markdown-Datei eine Drei-Satz-Zusammenfassung mit Quellen-Anker liefert. Entwirf ein Golden Set mit drei Fällen (Happy · Boundary · Negative — dieselbe Spec-Disziplin wie im Worked Example Schritt 1): pro Fall die Eingabe, die Erwartung *als Verhalten, nicht als Wortlaut* (Schritt 3: `must_include` / `must_not_include` / `tool_calls`-Grenzen statt Exact-Match auf Fließtext) und ein *Auswahlkriterium* in einem Satz — welche Fehlerklasse fängt genau dieser Fall, die die anderen zwei nicht fangen? Vergleiche die Struktur am Ende mit dem Lab-Set [`../../../lab/example/evals/golden/welle-1-baseline/`](../../../lab/example/evals/golden/welle-1-baseline/) (drei Cases Happy/Boundary/Negative je LH-FA-02). Anti-Antwort: drei Happy-Path-Varianten — das ist ein Demo-Set, kein Golden Set.
-* **(Analysieren — aktiviert LZ 3)** Erzeuge eine Regression durch Modellwechsel und *quantifiziere* den Drift: gib die Drift-Rate (rote ÷ gesamte Fälle) als Zahl an und ordne ihn dann der Diagnose-Reihenfolge aus Schritt 6 zu (Toolchain → Modell-Routing → Erwartung → echte Regression).
+* **(Analysieren — aktiviert LZ 3)** *Drift quantifizieren.* Erzeuge eine Regression durch Modellwechsel und gib die Drift-Rate (rote ÷ gesamte Fälle) als Zahl an; ordne den Befund dann der Diagnose-Reihenfolge aus Schritt 6 zu (Toolchain → Modell-Routing → Erwartung → echte Regression). **Wo:** im eigenen Repo mit echten Zahlen — das Lab-Target führt keinen Lauf aus und kann darum keine roten Fälle erzeugen (siehe Lab-Grenze unten). Ohne eigenen Replay-Lauf: an der Vorgabe aus dem Selbstcheck (3 von 20 rot).
+* **(Analysieren + Anwenden — aktiviert LZ 1)** *Zeige, dass der Lab-Sensor den Modellwechsel nicht sehen kann.* Kopiere `evals/golden/welle-1-baseline/` nach `evals/golden/drift-test/`, ändere in `manifest.yaml` `model.name` **und** `model.version`, verfälsche zusätzlich eine Erwartung (`top_doc_path`, `top_score_min`) und lasse `make replay RUN=drift-test` laufen. Beobachtung: dreimal grün. Benenne dann, welche Felder ein *Runner* vergleichen müsste, damit der Wechsel rot wird — das Manifest deklariert sie bereits (`verification.per_case_hash`, `determinism_check: two_runs_same_hash`, `runtime.image_hash`), nur löst sie kein Target ein. Pointe: Ein Sensor, der die Sache nicht sehen kann, über die er eine Zusage macht, ist ein Vorschlag, kein Gate ([Modul 13 §Typische Fehlvorstellungen](modul-13-quality-gates.md#typische-fehlvorstellungen)).
 
 ### Minimaler Übungspfad
 
@@ -230,21 +231,29 @@ cd lab/example
 make replay RUN=welle-1-baseline
 ```
 
-Erwartete Beobachtung: Das Target validiert nur das Golden-Set-Fixture.
-Der didaktische Punkt ist die Belegstruktur: Modellversion, mindestens
-drei Fälle und explizite Erwartungen. Für die Drift-Übung änderst du in
-einer Kopie die Modellversion oder eine Erwartung und notierst, ob der
-Replay-Lauf noch als derselbe Lauf interpretierbar ist.
+Erwartete Beobachtung: Das Target validiert nur die *Struktur* des
+Golden-Set-Fixtures — Manifest vorhanden, `model:`- und `runtime:`-Block
+vorhanden, mindestens drei Fälle, `inputs`/`expectations` gleich lang. Der
+didaktische Punkt ist die Belegstruktur, nicht das Ergebnis.
 
-> *Lab-Grenze:* Das Target prüft ein *fertiges* Fixture (Retrieval-
-> Replay), nicht einen eigenen LLM-Agenten-Replay. Das Worked Example
-> (Schritte 1–7) ist Vor-Lehre, keine Probung: das LZ "Golden Set
-> *aufbauen* und Auswahlkriterien *begründen*" (LZ 2) wird durch die
-> Mini-Golden-Set-Übung oben abgerufen, das LZ "Regression
-> *quantifizieren*" (LZ 3) durch die Drift-Übung in einer Kopie; das LZ
-> "Replay-Lauf *einrichten*" (LZ 1) probt erst der Nachbau des
-> Manifest-Schemas im eigenen Repo — der minimale Pfad ist Aufwärm-,
-> nicht Ziel-Niveau.
+Es liest keinen einzigen Wert *innerhalb* dieser Blöcke: Eine geänderte
+Modellversion und eine verfälschte Erwartung lassen es unverändert grün.
+Genau das ist die zweite Übung oben — der Befund ist der Lerngegenstand.
+
+> *Lab-Grenze:* `make replay` ist ein **Struktur-Validator, kein
+> Replay-Runner**. Es prüft die Form des Fixtures und führt keinen Lauf
+> aus; es vergleicht nichts und kann darum keinen roten Fall erzeugen. Das
+> Worked Example (Schritte 1–7) ist Vor-Lehre, keine Probung. Folgen für
+> die Lernziele:
+>
+> * **LZ 2** (Golden Set *aufbauen*, Auswahl *begründen*) — durch die
+>   Mini-Golden-Set-Übung oben abgerufen, ohne Lauf.
+> * **LZ 3** (Regression *quantifizieren*) — **nicht am Lab messbar.**
+>   Abgerufen an gegebenen Zahlen (Selbstcheck) oder im eigenen Repo mit
+>   echtem Runner.
+> * **LZ 1** (Replay-Lauf *einrichten*) — die Blindheits-Übung oben zeigt
+>   am Lab, *welche* Felder ein Runner vergleichen müsste; eingerichtet
+>   wird er erst im eigenen Repo.
 
 ## Reflexion
 
