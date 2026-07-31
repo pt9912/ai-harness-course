@@ -4,7 +4,7 @@
 Sie sammelt drei Dinge: was **vor** der Runde auffiel (`V11-01`, `V11-02` —
 beide behoben), die **Befunde des Drei-Linsen-Reviews** (21 offen, 6 behoben)
 und die übernommenen Ü-Posten (`Ü-02`, `Ü-03`, `Ü-04`, `Ü-07`, `Ü-08` behoben;
-offen: `Ü-01`, `Ü-05`, `Ü-06`).
+offen: `Ü-01`, `Ü-05`, `Ü-06`, `Ü-09`).
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -648,6 +648,23 @@ nur unbelegt.
 um einen Modellwechsel-Drift zu messen. Das Skelett kann den Replay nicht
 ausführen (Lab-Grenze). Entweder als Lab-Grenze deklarieren oder die Übung auf
 das Machbare zuschneiden.
+
+### Ü-09 — `modul-03-lastenheft.md` heißt nach einer Hälfte seines Titels
+
+Das Modul heißt *„Lastenheft und Spezifikation"*, die Datei nur nach der
+ersten Hälfte — in Kurs und Regelwerk. Unter allen 17 Modulen ist es der
+einzige Fall, in dem der Dateiname den Titel nicht deckt
+(`modul-04-architektur-adrs`, `modul-12-replay-evaluierung` tragen beide
+Hälften).
+
+**Bewusst nicht jetzt behoben.** 21 eingehende Verweise (13 Kurs, 5 Regelwerk,
+3 Templates), und der Regelwerk-Dateiname ist Teil des vendored
+Bundle-Layouts — Adoptierende haben ihn unter
+`.harness/baseline/<tag>/regelwerk/` liegen. Umbenennen ist ein Layout-Bruch
+und damit **MAJOR**. Vorgemerkt für das nächste ohnehin brechende Release.
+
+Der inhaltliche Teil des Befunds ist behoben: Die Spezifikation hat jetzt eine
+Ziel-Form in Modul 3, wie Lastenheft und Architektur-Sicht.
 
 ### Ü-06 — Geparkt, bewusst
 

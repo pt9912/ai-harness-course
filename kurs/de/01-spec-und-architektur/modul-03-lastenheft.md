@@ -50,7 +50,7 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `spec/`
+* `spec/lastenheft.md`, `spec/spezifikation.md`
 * [`../../../lab/example/exercises/02-lastenheft.md`](../../../lab/example/exercises/02-lastenheft.md)
 
 ## Themen
@@ -98,6 +98,30 @@ nie da (siehe Glossar in
 LLM ist *stateless*). Wer die Metapher zu weit treibt, erwartet
 "Mitlernen" — und plant Reviews, als würden sie *einmal* erklärt
 ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
+
+## Die Spezifikation (`spec/spezifikation.md`)
+
+Das Lastenheft sagt, *was* geliefert wird; die Spezifikation sagt, *wie genau*.
+Sie trägt **eigene technische Festlegungen** — Algorithmen und Datenflüsse,
+Datenstrukturen, Defaults und Konstanten, Fehler-Codes, Metrik- und
+Tracing-Felder, externe Verträge — und ist damit normativ, nicht bloß
+beschreibend.
+
+Drei Regeln, alle aus der Straten-Ordnung
+([§Spec-Straten](../grundlagen/konventionen.md#spec-straten-mehr-als-ein-spec-dokument)):
+
+* **Fortschreibbar.** Änderungen brauchen keinen Change Request, anders als
+  beim Lastenheft — eine ADR darf die Spezifikation *schärfen*, das Lastenheft
+  nicht.
+* **Präzisieren, nie erweitern.** Konfliktregel *Lastenheft › Spezifikation ›
+  Architektur*: Was das Lastenheft nicht verspricht, kann die Spezifikation
+  nicht nachträglich zusagen.
+* **Optional.** Nur Vertrag und Sicht sind obligatorisch. Repos, die ihre
+  technischen Festlegungen direkt ins Lastenheft falten, haben kein
+  Technik-Stratum — die Rangordnung bleibt dieselbe, das Stratum fällt aus der
+  Kette.
+
+Vorlage: [`spec/spezifikation.template.md`](../../../lab/templates/spec/spezifikation.template.md).
 
 ## Typische Fehlvorstellungen
 

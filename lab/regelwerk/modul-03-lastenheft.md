@@ -43,6 +43,22 @@ im Given/When/Then-Stil — **Happy · Boundary · Negative** — plus einen
 genau · welche Felder · welcher Speicherort*), bevor die Pfade formuliert
 werden; das Negative (`darf nicht …`) spart die spätere Review.
 
+### Ziel-Form: Spezifikation
+
+Technische Festlegungen leben in der Spezifikation
+([`templates/spec/spezifikation.template.md`](../templates/spec/spezifikation.template.md)):
+Algorithmen und Datenflüsse · Datenstrukturen und Schemas · Defaults und
+Konstanten · Fehler-Codes und Logging-Felder · Metriken und Tracing-Felder ·
+externe Verträge · Historie. Operative Regeln:
+
+* **Fortschreibbar** — kein Change Request nötig; eine ADR darf die
+  Spezifikation schärfen, das Lastenheft nicht
+  ([`konventionen.md` §Spec-Stratifizierung](grundlagen-konventionen.md#spec-stratifizierung)).
+* **Präzisieren, nie erweitern** — Konfliktregel *Lastenheft › Spezifikation ›
+  Architektur*.
+* **Optional** — nur Vertrag und Sicht sind obligatorisch. Ohne Technik-Stratum
+  fällt es aus der Kette; die Rang-Ordnung bleibt dieselbe.
+
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 
 Reifere Specs zerfallen in drei Schichten mit eigener Precedence:

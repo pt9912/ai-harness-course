@@ -50,6 +50,14 @@ entstanden, nicht aus einem Review-Lauf.
   zwei Regeln, die anderswo festgelegt sind und hier zusammenlaufen (derivativ
   · sprach- und meilensteinfrei), plus Ziel-Form im Spiegel. Erfunden wurde
   nichts; die Normen standen in Konventionen und Modul 9.
+- **Auch das mittlere Spec-Stratum hat jetzt eine Ziel-Form.** Modul 3 heißt
+  „Lastenheft und Spezifikation"; das Lastenheft hatte eine Ziel-Form, die
+  Spezifikation stand mit einem Halbsatz und einer Zeile in der
+  Stratifizierung da. Neu: §Die Spezifikation in der Quelle,
+  §Ziel-Form: Spezifikation im Spiegel — fortschreibbar · präzisiert nie
+  erweitert · optional, alles aus `konventionen.md` §Spec-Straten. Dass die
+  Datei weiter `modul-03-lastenheft.md` heißt, bleibt offen (`Ü-09`):
+  umbenennen bricht das vendored Layout und ist MAJOR.
 - **Zwei weitere Templates hatten keinen Verweis aus irgendeinem Modul** —
   `AGENTS.template.md` (Index: Modul 9) und `project-readme.template.md`
   (Index: Modul 2). Beide Artefakte werden in ihrem Modul ausgiebig behandelt,
