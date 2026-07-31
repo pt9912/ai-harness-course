@@ -169,6 +169,16 @@ entstanden, nicht aus einem Review-Lauf.
   Die Korrelation trägt `slice.id` — Pflichtfeld jedes Spans; Läufe als je
   eigene Traces leisten dasselbe, und ein Slice läuft Tage. In der Quelle als
   Modellwahl benannt, im Split gestrichen.
+- **Die ADR-Spalte der Spezifikations-Historie steht auf zwei Gründen, nicht
+  auf einem.** Zwischenzeitlich war sie mit „die ADR ist der legitime Urheber"
+  begründet — ein Kausal-Argument, wo ein Referenz-Argument hingehört, und
+  damit sah die Erlaubnis wie ein Widerspruch zur Decken-Regel aus. Tragend
+  ist die Glossar-Zeile: *Abwärts-Verweise sind Kontext, keine Spezifikation*
+  — erlaubt, ohne Normkraft; die `Schärft:`-Deklaration bleibt die einzige
+  normative Kante. Der Änderungs-Prozess erklärt zusätzlich, warum die
+  Provenance dort aussagekräftig ist. Beim Lastenheft trägt beides nicht, und
+  das steht jetzt dabei: Seine Matrix-Zeile ist die einzige mit ❌ **ohne**
+  Kontext-Zelle.
 - **Warum die Architektur-Sicht keine Historie hat, steht jetzt da.** Template,
   Beispiel-Repo und ein reales Adopter-Repo führen alle drei nur
   `**Letzte Änderung:**` — übereinstimmend, aber unbegründet. Der Grund folgt

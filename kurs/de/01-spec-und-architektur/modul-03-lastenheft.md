@@ -135,11 +135,18 @@ Drei Regeln, alle aus der Straten-Ordnung
   und normativ zeigen Referenzen nur aufwärts
   ([§Referenz-Richtung (SDP)](../grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
   Welche ADR einen Wert festlegt, deklariert **die ADR** in ihrem
-  `Schärft:`-Feld. Die ADR-Spalte der Historie ist davon unberührt — aber
-  nicht, weil Provenance harmlos wäre: Die ADR-Schärfung **ist** der
-  Änderungs-Prozess dieses Stratums, die ADR also der legitime Urheber. Wo
-  ein Stratum keinen Urheber im Repo hat — das Lastenheft, dessen Prozess der
-  externe Change Request ist —, darf auch keiner in seiner Historie stehen.
+  `Schärft:`-Feld. **Die ADR-Spalte der Historie ist davon unberührt**, und
+  zwar aus zwei Gründen zusammen: Erstens sind Abwärts-Verweise nicht
+  verboten, sondern *Kontext ohne Normkraft* — die `Schärft:`-Deklaration
+  bleibt die einzige normative Kante. Zweitens ist die ADR-Schärfung der
+  Änderungs-Prozess dieses Stratums, die Provenance also überhaupt
+  aussagekräftig.
+
+  **Beim Lastenheft trägt beides nicht.** Seine Matrix-Zeile führt als
+  einzige in jeder fremden Spalte ein ❌ **ohne** Kontext-Zelle, und sein
+  Änderungs-Prozess liegt außerhalb des Repos — es gäbe dort nichts
+  Aussagekräftiges einzutragen. Der Unterschied ist also nicht Willkür,
+  sondern steht in der Matrix.
 
 Vorlage: [`spec/spezifikation.template.md`](../../../lab/templates/spec/spezifikation.template.md).
 

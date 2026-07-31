@@ -81,11 +81,13 @@ externe Verträge · Historie. Operative Regeln:
   normativ zeigen Referenzen nur aufwärts
   ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
   Welche ADR einen Wert festlegt, deklariert **die ADR** in ihrem
-  `Schärft:`-Feld. Die ADR-Spalte der Historie bleibt erlaubt — nicht weil
-  Provenance harmlos wäre, sondern weil die ADR-Schärfung **der**
-  Änderungs-Prozess dieses Stratums ist und die ADR damit der legitime
-  Urheber. Ein Stratum ohne Urheber im Repo — das Lastenheft, dessen Prozess
-  der externe Change Request ist — trägt auch keinen in seiner Historie.
+  `Schärft:`-Feld. **Die ADR-Spalte der Historie bleibt erlaubt**, aus zwei
+  Gründen zusammen: Abwärts-Verweise sind *Kontext ohne Normkraft* (die
+  `Schärft:`-Deklaration bleibt die einzige normative Kante), und die
+  ADR-Schärfung ist der Änderungs-Prozess dieses Stratums — die Provenance
+  ist dort also aussagekräftig. Beim Lastenheft trägt beides nicht: Seine
+  Matrix-Zeile führt als einzige in jeder fremden Spalte ein ❌ **ohne**
+  Kontext-Zelle, und sein Änderungs-Prozess liegt außerhalb des Repos.
 
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 
