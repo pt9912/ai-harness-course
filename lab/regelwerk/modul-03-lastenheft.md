@@ -69,8 +69,11 @@ externe Verträge · Historie. Operative Regeln:
   normativ zeigen Referenzen nur aufwärts
   ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
   Welche ADR einen Wert festlegt, deklariert **die ADR** in ihrem
-  `Schärft:`-Feld. Die ADR-Spalte der Historie bleibt erlaubt: Provenance ist
-  *Kontext*, keine Begründung.
+  `Schärft:`-Feld. Die ADR-Spalte der Historie bleibt erlaubt — nicht weil
+  Provenance harmlos wäre, sondern weil die ADR-Schärfung **der**
+  Änderungs-Prozess dieses Stratums ist und die ADR damit der legitime
+  Urheber. Ein Stratum ohne Urheber im Repo — das Lastenheft, dessen Prozess
+  der externe Change Request ist — trägt auch keinen in seiner Historie.
 
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 
