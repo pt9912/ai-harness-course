@@ -7,6 +7,10 @@
 > Tipp: oft zuletzt in Phase 1 füllen, wenn die verlinkten Artefakte stehen.
 > Hintergrund: [Baseline-Regelwerk Modul 2 — Harness-Bootstrap](../regelwerk/modul-02-harness-bootstrap.md).
 
+**Rolle:** Rang 6 der Source Precedence — verweist auf die kanonischen
+Quellen, dupliziert sie nicht. Regeln: Baseline-Regelwerk
+`modul-02-harness-bootstrap.md` §Ziel-Form: Projekt-README.
+
 ## Was ist <Projektname>?
 
 <!-- 2–3 Sätze: was leistet es, für wen, gegen welche Annahme. Überblick,
@@ -16,9 +20,10 @@ nicht Implementierung (die lebt in spec/). -->
 
 ## Was kann ich heute tun?
 
-<!-- Ehrlicher Ist-Stand — was JETZT läuft, nicht was geplant ist. Konkrete
-Befehle/Fähigkeiten. Phase-bewusst: keine Erfolgsmeldung ohne lauffähigen
-Beleg. -->
+Regeln dieser Sektion: ehrlicher Ist-Stand — was **jetzt** läuft, nicht was
+geplant ist. Keine Erfolgsmeldung ohne lauffähigen Beleg.
+
+<!-- Konkrete Befehle/Fähigkeiten. -->
 
 - <z. B. `make gates` läuft grün>
 - <z. B. Befehl X liefert Y>
@@ -44,5 +49,7 @@ auf die kanonischen Quellen — Inhalt nicht wiederholen. -->
 
 - **Prozess:** [`AGENTS.md`](AGENTS.md) (Hard Rules), [`harness/README.md`](harness/README.md) (Source Precedence, Gates).
 - **Verträge:** [`spec/lastenheft.md`](spec/lastenheft.md) (`LH-*`-IDs mit Akzeptanzkriterien).
-- **Gates:** <welche Sensors laufen — nur existierende nennen (keine halluzinierten Gates, Modul 13)>.
+- **Gates:** <welche Sensors laufen — nur existierende nennen; halluzinierte
+  Gates sind die häufigste Form von Harness-Lüge, Baseline-Regelwerk
+  `modul-13-quality-gates.md`>.
 - **Auditierbarkeit:** Entscheidungen in `docs/plan/adr/`, Planung in `docs/plan/planning/`.

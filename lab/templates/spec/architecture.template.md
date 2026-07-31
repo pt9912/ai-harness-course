@@ -8,9 +8,13 @@
 
 **Status:** Aktiv. **Letzte Änderung:** YYYY-MM-DD.
 
+**Rolle:** Sicht-Stratum — *keine* eigenen Anforderungen, derivativ. Regeln:
+Baseline-Regelwerk `modul-04-architektur-adrs.md` §Ziel-Form: Architektur-Sicht.
+
 **Hard Rule:** Diese Datei enthält *keine* Wellen, Slices, Commit-Hashes
 oder Closure-Daten. Die zeitliche Schicht lebt in
 `docs/plan/planning/in-progress/roadmap.md` und den späteren Closure-Notizen.
+Baseline-Regelwerk `modul-09-implementierung.md` §Hard Rules (repo-spezifisch).
 
 ---
 
@@ -38,6 +42,10 @@ flowchart TB
 ```
 
 ## 2. Schichten und Constraints
+
+Regeln dieser Sektion: Welche ADR eine Layering-Regel verbindlich macht,
+deklariert die ADR aufwärts in ihrem `Schärft:`-Feld — kein ADR-Bezug in dieser
+Sicht (Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
 
 <!--
 Pro Schicht: was sie tut, was sie *nicht* tut. Layering-Regeln, die

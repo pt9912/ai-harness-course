@@ -50,6 +50,16 @@ entstanden, nicht aus einem Review-Lauf.
   zwei Regeln, die anderswo festgelegt sind und hier zusammenlaufen (derivativ
   · sprach- und meilensteinfrei), plus Ziel-Form im Spiegel. Erfunden wurde
   nichts; die Normen standen in Konventionen und Modul 9.
+- **Vier Templates verloren beim Adoptieren jeden Regelwerk-Anker.** Schritt 4
+  entfernt den Hinweis-Block, Schritt 5 die Kommentare — bei `carveout`,
+  `architecture`, dem ADR-Template und `spezifikation` stand danach kein
+  Zeiger mehr im Rumpf; `carveout.template.md` hatte in keiner Schicht einen.
+  Zwei encodierte Entscheidungen hingen daran: die Accepted-Immutabilität und
+  die CR-Landing-Disziplin aus Welle 34. Sieben Vorlagen nachgezogen, je ein
+  Kopf-Zeiger plus jede sonst sterbende Norm im Rumpf, in der Klartext-Form
+  von `slice.template.md`. **Unbewacht:** Die Unterscheidung Rumpf /
+  Kommentar / Hinweis-Block prüft kein Gate — einmal aufgeräumt, nicht
+  strukturell erledigt (`Ü-10`).
 - **Auch das mittlere Spec-Stratum hat jetzt eine Ziel-Form.** Modul 3 heißt
   „Lastenheft und Spezifikation"; das Lastenheft hatte eine Ziel-Form, die
   Spezifikation stand mit einem Halbsatz und einer Zeile in der

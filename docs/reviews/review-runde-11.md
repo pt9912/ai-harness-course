@@ -4,7 +4,7 @@
 Sie sammelt drei Dinge: was **vor** der Runde auffiel (`V11-01`, `V11-02` —
 beide behoben), die **Befunde des Drei-Linsen-Reviews** (21 offen, 6 behoben)
 und die übernommenen Ü-Posten (`Ü-02`, `Ü-03`, `Ü-04`, `Ü-07`, `Ü-08` behoben;
-offen: `Ü-01`, `Ü-05`, `Ü-06`, `Ü-09`).
+offen: `Ü-01`, `Ü-05`, `Ü-06`, `Ü-09`; `Ü-10` behoben).
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -648,6 +648,49 @@ nur unbelegt.
 um einen Modellwechsel-Drift zu messen. Das Skelett kann den Replay nicht
 ausführen (Lab-Grenze). Entweder als Lab-Grenze deklarieren oder die Übung auf
 das Machbare zuschneiden.
+
+### Ü-10 — Vier Templates verloren beim Adoptieren jeden Regelwerk-Anker ✅
+
+Adoptions-Schritt 4 entfernt den Hinweis-Block, Schritt 5 die Kommentare.
+Was danach übrig bleibt, ist der **Rumpf** — und dort stand bei vier
+Vorlagen kein einziger Zeiger:
+
+```
+Template                                Sekt  Rumpf  Hinweis  Komm.
+carveout.template.md                       5      0        0      0
+spec/architecture.template.md              6      0        1      2
+docs/plan/adr/NNNN-titel.template.md       7      0        1      1
+spec/spezifikation.template.md             9      0        1      2
+```
+
+`carveout.template.md` war der härteste Fall: **null Zeiger in jeder
+Schicht**. Seine Normen (*„technische Begründung, keine ‚noch nicht
+geschafft'-Aussagen"*, *„Falsch: ‚wenn Zeit ist'"*) lebten vollständig in
+Kommentaren. Nach der Adoption blieb eine Datei mit fünf leeren
+Überschriften. Das ist die E-2-Hard-Rule von Welle 60, wörtlich: *Kein
+Kommentar ist die einzige Fundstelle einer Norm.*
+
+Zwei Normen wogen besonders: die **Accepted-Immutabilität** im
+ADR-Template und die **CR-Landing-Disziplin** aus Welle 34 im Lastenheft —
+beide encodierte Entscheidungen, beide nur im Kommentar.
+
+**Behoben.** Sieben Templates, je ein Kopf-Zeiger plus jede Norm, die sonst
+gestorben wäre, im Rumpf — in der Klartext-Form von `slice.template.md`
+(`Baseline-Regelwerk `<datei>.md` §<Sektion>`, unverlinkt, weil nach dem
+Kopieren kein relativer Pfad mehr auflöst). Kein Template steht mehr ohne
+überlebenden Anker.
+
+**Bleibt unbewacht — und das ist keine Formalie.** Die Unterscheidung
+Rumpf / Kommentar / Hinweis-Block ist nichts, was `d-check` prüft, und ein
+neues Prüf-Skript scheidet aus. Der Befund kann also wiederkommen; er ist
+durch diese Behebung nicht strukturell erledigt, sondern nur einmal
+aufgeräumt. Zwei Vorlagen tragen weiterhin Normen in Kommentaren
+(`harness/conventions.template.md` 5, `docs/reviews/review-report.template.md`
+2) — dort ist der Rumpf nicht leer, die Kommentare wären aber zu prüfen.
+
+**Nebenbefund an mir selbst:** Meine erste Messung zählte Zeiger *innerhalb*
+mehrzeiliger `<!-- … -->`-Blöcke als Rumpf und meldete darum zwei betroffene
+Dateien statt vier. Blockweise nachgemessen.
 
 ### Ü-09 — `modul-03-lastenheft.md` heißt nach einer Hälfte seines Titels
 

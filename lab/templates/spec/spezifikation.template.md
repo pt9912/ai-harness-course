@@ -11,11 +11,20 @@
 
 **Bezug zum Lastenheft:** Diese Spezifikation präzisiert die in
 `spec/lastenheft.md` formulierten Anforderungen (`LH-*`-IDs). Bei
-Konflikt gewinnt das Lastenheft.
+Konflikt gewinnt das Lastenheft — präzisieren ja, erweitern nie.
+
+**Rolle:** Technik-Stratum — fortschreibbar ohne Change Request; eine ADR darf
+sie schärfen, das Lastenheft nicht. Regeln: Baseline-Regelwerk
+`modul-03-lastenheft.md` §Ziel-Form: Spezifikation.
 
 ---
 
 ## 1. Algorithmen und Datenflüsse
+
+Regeln dieser Sektion: Tatsächlicher Code gehört in `src/`, nicht hierher.
+ID-Schema `<PREFIX>-FA-<NN>.<Buchstabe>` für Verfeinerungen einzelner
+Lastenheft-IDs (Baseline-Regelwerk `grundlagen-konventionen.md`
+§ID-Schema als Klammer).
 
 <!--
 Wie wird die funktionale Anforderung *technisch* erfüllt? Pseudocode
@@ -55,9 +64,11 @@ Anforderung gewahrt bleibt.
 
 ## 3. Defaults und Konstanten
 
-<!-- Werte, die in Code fest sind. Die ADR, die einen Wert festlegt,
-deklariert das aufwärts in ihrem Schärft:-Feld (Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)) —
-kein ADR-Rückzeiger hier. -->
+Regeln dieser Sektion: Die ADR, die einen Wert festlegt, deklariert das
+aufwärts in ihrem `Schärft:`-Feld — kein ADR-Rückzeiger hier
+(Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
+
+<!-- Werte, die in Code fest sind. -->
 
 | Name | Wert | Begründung |
 |---|---|---|
@@ -73,9 +84,8 @@ kein ADR-Rückzeiger hier. -->
 
 ## 5. Metriken und Tracing-Felder
 
-<!--
-Verbindliche OTel-Felder pro Span (siehe Baseline-Regelwerk `modul-15-observability.md`).
--->
+Regeln dieser Sektion: verbindliche OTel-Felder pro Span
+(Baseline-Regelwerk `modul-15-observability.md`).
 
 | Span | Pflicht-Attribute | Quelle |
 |---|---|---|

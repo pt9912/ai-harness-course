@@ -16,9 +16,16 @@
 
 **Folge-Slice:** [`slice-<NN>-...md`](../planning/<state>/slice-NN-...md)
 
+Regeln: Baseline-Regelwerk `modul-07-carveouts.md` §Ziel-Form: Carveout — ein
+Carveout braucht immer einen Auflösungs-Trigger **und** einen Folge-Slice.
+
 ---
 
 ## Begründung
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-07-carveouts.md`
+§Ziel-Form: Carveout — technische Begründung, keine
+„noch nicht geschafft"-Aussagen.
 
 <!--
 Warum kann das Gate hier (jetzt) nicht hart sein? Technische
@@ -33,6 +40,9 @@ Erlaubte Begründungen:
 <…>
 
 ## Auflösungs-Trigger
+
+Regeln dieser Sektion: Baseline-Regelwerk `modul-07-carveouts.md`
+§Ziel-Form: Carveout — konkret und prüfbar. „Wenn Zeit ist" ist kein Trigger.
 
 <!--
 Wann verschwindet der Carveout? Konkret, prüfbar.

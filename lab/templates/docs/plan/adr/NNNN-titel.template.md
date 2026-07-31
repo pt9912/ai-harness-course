@@ -19,6 +19,9 @@ Spec-Stelle diese ADR verbindlich macht. Aufwärts-Deklaration der
 Änderungskopplung: wer diese ADR ändert, zieht von hier die betroffenen
 Spec-Stellen nach. `—` eintragen, wenn Prozess-ADR ohne Spec-Stratum.
 
+**Regeln:** Baseline-Regelwerk `modul-04-architektur-adrs.md`
+§Ziel-Form: ADR (MADR).
+
 > **IDs als Markdown-Link** (klickbar zur Quelle, Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
 > Der `<anker>` ist der GitHub-Heading-Slug der Ziel-Überschrift. Der
 > `check-references`-Gate prüft heute nur Token-Richtung, **nicht** die
@@ -48,6 +51,11 @@ Die Wahl, in einem Satz oder einem kurzen Absatz. Eindeutig, ohne
 Wir wählen **<Variante X>**.
 
 ## Verglichene Alternativen
+
+Regeln dieser Sektion: **mindestens drei Optionen mit Pro/Contra** — „nichts
+tun" ist eine davon. Eine ADR ohne Alternativen ist ein Postulat, kein
+Entscheidungsprotokoll, und im Review nicht verteidigbar (Baseline-Regelwerk
+`modul-04-architektur-adrs.md` §Ziel-Form: ADR (MADR)).
 
 <!--
 Mindestens drei Optionen mit Pro/Contra. Alternativ "nichts tun" ist
@@ -85,6 +93,11 @@ niederschlägt: hier die konkrete Regel benennen. Beispiel:
 
 ## Re-Evaluierungs-Trigger
 
+Regeln dieser Sektion: **jede ADR trägt einen Trigger** — eine beobachtbare
+Bedingung — oder ausdrücklich *permanent*. Ohne Trigger gilt die Entscheidung
+unbefristet weiter, auch wenn ihre Voraussetzung weg ist (Baseline-Regelwerk
+`modul-04-architektur-adrs.md` §Kernidee (Modul 4)).
+
 <!--
 Wann sollte diese Entscheidung erneut geprüft werden?
 "Wenn Bibliothek X v2 verfügbar ist." "Wenn Kostenbudget Y überschritten."
@@ -100,8 +113,7 @@ Wann sollte diese Entscheidung erneut geprüft werden?
 | YYYY-MM-DD | Proposed | <Slice-Datei> |
 | YYYY-MM-DD | Accepted | <PR-Link> |
 
-<!--
-Nach Accepted: NICHT mehr inhaltlich überschreiben (Hard Rule, siehe
-Baseline-Regelwerk `modul-04-architektur-adrs.md`). Spätere Schärfungen als neue ADR mit
-"Supersedes ADR-NNNN" anlegen.
--->
+Nach `Accepted` wird diese Datei **nicht mehr inhaltlich überschrieben**.
+Spätere Korrekturen oder Schärfungen entstehen als neue ADR mit
+`Supersedes ADR-NNNN` (Baseline-Regelwerk `modul-04-architektur-adrs.md`
+§Hard Rule für Accepted-ADRs).

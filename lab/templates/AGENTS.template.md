@@ -19,6 +19,10 @@ Dokumentation ändert. Sie verweist auf die kanonischen Quellen und
 formuliert die Hard Rules, die der Implementer-Agent immer
 einhalten muss.
 
+Regeln dieser Datei: Baseline-Regelwerk `modul-09-implementierung.md`
+§Ziel-Form: AGENTS.md — sie trägt Hard Rules und Pointer auf kanonische
+Quellen, sie dupliziert deren Inhalt nicht; sonst entsteht Drift.
+
 **Bei Konflikt zwischen dieser Datei und einer kanonischen Quelle gilt
 die kanonische Quelle** (Source Precedence — siehe
 `harness/README.md`).
@@ -144,10 +148,9 @@ Repo-spezifische Hard Rules ergänzen, z.B. für Safety/Control:
 
 ## 4. Quality Gates
 
-<!--
-Nur Befehle aufzählen, die im Makefile *existieren*. Halluzinierte
-Gates sind die häufigste Form von Harness-Lüge (siehe Modul 13).
--->
+Regeln dieser Sektion: Nur Targets aufzählen, die im Makefile **existieren**.
+Halluzinierte Gates sind die häufigste Form von Harness-Lüge
+(Baseline-Regelwerk `modul-13-quality-gates.md`).
 
 | Target | Zweck |
 |---|---|

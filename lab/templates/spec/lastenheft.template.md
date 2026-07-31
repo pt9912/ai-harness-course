@@ -40,15 +40,14 @@ in einem Satz.
 
 ## 3. Funktionale Anforderungen
 
-<!--
-Format: ID — Titel — Beschreibung — Akzeptanzkriterien (Given/When/Then,
-Boundary, Negative).
+Regeln dieser Sektion: ID-Schema `<PREFIX>-FA-<NN>`. Das Präfix ist im ganzen
+Repo dasselbe und taucht in Make-Target-Kommentaren, ADRs und Commits wieder auf
+(Baseline-Regelwerk `grundlagen-konventionen.md` §ID-Schema als Klammer). Jede
+Anforderung trägt drei Pfade — Happy · Boundary · Negative — plus Out-of-Scope
+(Baseline-Regelwerk `modul-03-lastenheft.md` §Ziel-Form: Akzeptanzkriterium).
 
-ID-Schema: <PREFIX>-FA-<NN>, z.B. LH-FA-01, GG-FA-03, HSM-FA-12.
-Das Präfix sollte im ganzen Repo gleich sein und in Make-Target-
-Kommentaren, ADRs und Commits wiederauftauchen
-(siehe Baseline-Regelwerk `grundlagen-konventionen.md` §ID-Schema als Klammer).
--->
+<!-- Format: ID — Titel — Beschreibung — Akzeptanzkriterien
+     (Given/When/Then, Boundary, Negative). -->
 
 ### LH-FA-01 — <Titel der Anforderung>
 
@@ -113,11 +112,12 @@ Ohne diesen Abschnitt baut der Agent gerne Plausibles.
 
 ## 7. Historie
 
-<!-- Jede Änderung an angenommenen Anforderungen ist eine Vertragsänderung:
-     Sie entsteht NUR aus einem externen Change Request, nie aus einem ADR
-     oder Slice. Fußabdruck pro angenommenem CR: Version-Bump oben + eine
-     Zeile hier, mit dem externen CR (Ticket/Vertragsanhang) in "Verweis".
-     Hintergrund: Baseline-Regelwerk `grundlagen-konventionen.md` §Spec-Stratifizierung. -->
+Regeln dieser Sektion: Jede Änderung an *angenommenen* Anforderungen ist eine
+Vertragsänderung. Sie entsteht **nur** aus einem externen Change Request, nie
+aus einem ADR oder Slice. Fußabdruck pro angenommenem CR: Version-Bump oben
+plus eine Zeile hier, mit dem externen CR (Ticket/Vertragsanhang) unter
+„Verweis" (Baseline-Regelwerk `grundlagen-konventionen.md`
+§Spec-Stratifizierung).
 
 | Version | Datum | Änderung | Verweis |
 |---|---|---|---|
