@@ -103,6 +103,8 @@ Nach diesem Modul kannst du:
   Lab unter
   [`../../../lab/example/harness/`](../../../lab/example/harness/) —
   Bootstrap-Quelle für Modus-Deklaration pro Sub-Area).
+* Projekt-Root-`README.md` — Vorlage:
+  [`project-readme.template.md`](../../../lab/templates/project-readme.template.md)
 * Vier Beispiel-Repos in BF-Modus klassifiziert:
   [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand).
 

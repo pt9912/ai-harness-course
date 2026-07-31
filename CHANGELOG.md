@@ -43,8 +43,24 @@ entstanden, nicht aus einem Review-Lauf.
   Collector und Sampling Repo-Entscheidungen sind: *Mitzunehmen ist das Schema,
   nicht das Setup.*
 
+- **Modul 4 lehrt jetzt beide Hälften seines Titels.** Die Architektur-*Sicht*
+  (`spec/architecture.md`) hatte ein Template und einen Index-Anspruch auf
+  Modul 4, aber keinen Ort, der sie behandelt — sie kam dort genau einmal vor,
+  in den Fehlvorstellungen, als Abgrenzung. Neu: §Die Architektur-Sicht mit den
+  zwei Regeln, die anderswo festgelegt sind und hier zusammenlaufen (derivativ
+  · sprach- und meilensteinfrei), plus Ziel-Form im Spiegel. Erfunden wurde
+  nichts; die Normen standen in Konventionen und Modul 9.
+- **Zwei weitere Templates hatten keinen Verweis aus irgendeinem Modul** —
+  `AGENTS.template.md` (Index: Modul 9) und `project-readme.template.md`
+  (Index: Modul 2). Beide Artefakte werden in ihrem Modul ausgiebig behandelt,
+  nur die Ziel-Form fehlte. Nachgezogen; kein Template steht mehr ohne
+  Verweis.
+
 ### Geändert
 
+- **Die Projekt-README ist Rang 6, nicht Rang 7.** Zwei Stellen in
+  `lab/templates/` lehrten den falschen Rang — Rang 7 ist `AGENTS.md`. Die
+  Zahl stand nur in der Vorlage, nie in der Quelle.
 - **Die Zuordnungs-Einheit der Token-Bilanz ist der Lauf.** Modul 15 nannte das
   Ziel der Attribuierung „Kostenstellen" — Organisations-Vokabular, während
   Modul 8 Rollen-Trennung als *Kontext*-Trennung definiert. Mini-Glossar und

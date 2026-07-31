@@ -351,3 +351,11 @@ identifizieren, *welche Sub-Area* sich bewegt; dann *welche Phase*
 sie erreicht; dann *in welchem Modus* — daraus folgt der nächste
 Schritt fast deterministisch.
 
+### Ziel-Form: Projekt-README
+
+Die Root-`README.md` des Adopter-Repos folgt der Vorlage
+[`templates/project-readme.template.md`](../templates/project-readme.template.md):
+Überblick, Ist-Stand, Vertrauens-Signale. Sie ist **Rang 6** der Source
+Precedence ([`konventionen.md` §Source Precedence](grundlagen-konventionen.md#source-precedence))
+— beschreibend, keine kanonische Quelle. Entsteht in Schritt 2 der
+Bootstrap-Sequenz aus der vendored Baseline.

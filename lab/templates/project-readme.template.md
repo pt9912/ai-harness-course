@@ -2,7 +2,7 @@
 
 > **Template-Hinweis.** Vorlage für das Projekt-Root-`README.md`. Kopiere
 > nach `README.md` deines Repos, ersetze `<Platzhalter>` und lösche diesen
-> Block. Das README ist **Rang 7** der Source Precedence (Projekt-Überblick)
+> Block. Das README ist **Rang 6** der Source Precedence (Projekt-Überblick)
 > — es *verweist* auf die kanonischen Quellen, es *dupliziert* sie nicht.
 > Tipp: oft zuletzt in Phase 1 füllen, wenn die verlinkten Artefakte stehen.
 > Hintergrund: [Baseline-Regelwerk Modul 2 — Harness-Bootstrap](../regelwerk/modul-02-harness-bootstrap.md).

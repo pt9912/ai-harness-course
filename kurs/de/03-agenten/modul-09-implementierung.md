@@ -60,6 +60,8 @@ Nach diesem Modul kannst du:
 
 * [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make agent-implement SLICE=slice-009`
 * [`../../../lab/example/exercises/08-implementation.md`](../../../lab/example/exercises/08-implementation.md)
+* `AGENTS.md` — Vorlage:
+  [`AGENTS.template.md`](../../../lab/templates/AGENTS.template.md)
 
 ## Themen
 
