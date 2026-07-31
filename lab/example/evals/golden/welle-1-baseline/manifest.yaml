@@ -22,8 +22,7 @@ runtime:
   image_hash: sha256:abc123def4567890abc123def4567890abc123def4567890abc123def4567890
   toolchain:
     go: "1.23"        # Implementierung
-    python: "3.12.4"  # Replay-Runner (tools/)
-    node: "20.11"     # Trace-Fixture-Prüfung (make replay)
+    python: "3.12.4"  # vorgesehen für den Replay-Runner (CO-002, slice-015)
 
 # Pfade relativ zu diesem Manifest.
 inputs_ref: inputs/
@@ -37,7 +36,13 @@ determinism:
 
 # Verifikations-Erwartung: zwei Läufe identischer Eingabe müssen
 # byte-identische `actual.results`-Listen erzeugen (Reihenfolge auch
-# bei gleichen Scores). Hash-Vergleich pro Case in CI verpflichtend.
+# bei gleichen Scores).
+#
+# CO-002 — DEKLARIERT, NICHT DURCHGESETZT. Im Lab führt `make replay` keinen
+# Lauf aus; es validiert nur die Struktur dieses Verzeichnisses. Kein Target
+# vergleicht Hashes, und `runtime.image_hash` wird gegen nichts gehalten.
+# Der Block steht als Ziel-Form hier, weil Modul 12 ihn als Pflichtinhalt
+# eines Replay-Manifests lehrt. Auflösung: slice-015-replay-runner.
 verification:
   per_case_hash: sha256
   determinism_check: two_runs_same_hash

@@ -59,6 +59,17 @@ entstanden, nicht aus einem Review-Lauf.
   ein Runner vergleichen müsste. Lösung mitgezogen. Neu offen als `Ü-11`: Das
   Manifest deklariert `per_case_hash` und `determinism_check` als „in CI
   verpflichtend" — kein Target löst das ein.
+- **Das Replay-Manifest trug drei unwahre Angaben** (`Ü-11`). Neben dem
+  Verifikations-Vertrag nannte der `toolchain`-Block `python` als
+  „Replay-Runner (tools/)" — dort liegen nur Doku-Gates — und `node` als
+  Prüfer von `make replay`, das reines Shell ist. Kein Runner gebaut: Die
+  Erwartungen referenzieren ein Korpus (`docs/init.md`), das nicht existiert;
+  ohne Korpus kein Lauf und keine Kalibrierung. Stattdessen mit den eigenen
+  Konstrukten aufgelöst — Manifest und Target-Ausgabe sagen jetzt die Grenze,
+  **CO-002** trägt Trigger und Folge-Slice, **slice-015** trägt Korpus,
+  Runner und zwei Break-Tests in der DoD. Der `verification`-Block bleibt:
+  Modul 12 lehrt ihn als Pflichtinhalt; falsch war die Behauptung, er werde
+  durchgesetzt.
 - **Vier Templates verloren beim Adoptieren jeden Regelwerk-Anker.** Schritt 4
   entfernt den Hinweis-Block, Schritt 5 die Kommentare — bei `carveout`,
   `architecture`, dem ADR-Template und `spezifikation` stand danach kein

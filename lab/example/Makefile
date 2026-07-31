@@ -76,7 +76,7 @@ verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-009
 verify: verify-closure-notes check-references ## Verifikation: Closure-Pflicht + Referenz-Richtung immer, Slice-DoD wenn SLICE gesetzt
 	@if [ -n "$(SLICE)" ]; then $(MAKE) verify-slice SLICE=$(SLICE); fi
 
-replay: ## Golden-Set-Replay-Verzeichnis validieren: make replay RUN=welle-1-baseline
+replay: ## Golden-Set-Struktur validieren (KEIN Lauf, siehe CO-002): make replay RUN=welle-1-baseline
 	@set -e; \
 	base="evals/golden/$(RUN)"; \
 	if [ ! -f "$$base/manifest.yaml" ]; then echo "Manifest fehlt: $$base/manifest.yaml"; exit 1; fi; \
@@ -88,7 +88,7 @@ replay: ## Golden-Set-Replay-Verzeichnis validieren: make replay RUN=welle-1-bas
 	exp_count=$$(find "$$base/expectations" -maxdepth 1 -name 'case-*.json' | wc -l); \
 	if [ "$$in_count" -lt 3 ]; then echo "Replay braucht mindestens 3 inputs (Happy/Boundary/Negative), gefunden: $$in_count"; exit 1; fi; \
 	if [ "$$in_count" != "$$exp_count" ]; then echo "inputs/expectations-Mismatch: $$in_count vs $$exp_count"; exit 1; fi; \
-	echo "replay set ok: $$base ($$in_count cases)"
+	echo "replay set ok: $$base ($$in_count cases) — Struktur geprueft, kein Lauf ausgefuehrt (CO-002)"
 
 trace: ## Agentenlauf-Trace-Fixture ausgeben: make trace RUN=sl-009-agent-run
 	@test -f "otel/$(RUN).trace.json" || (echo "Trace fixture not found: otel/$(RUN).trace.json"; exit 1)

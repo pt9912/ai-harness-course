@@ -8,6 +8,7 @@ nach `done/` (reiner `git mv`).
 | ID | Titel | Gate | Trigger | Folge-Slice |
 |---|---|---|---|---|
 | [CO-001](CO-001-index-coverage.md) | Bootstrap-Coverage Index-Layer | `coverage-gate-critical` | Welle 2 done | slice-013 |
+| [CO-002](CO-002-replay-verifikation.md) | Replay-Verifikation deklariert, nicht durchgesetzt | `make replay` | slice-015 done | slice-015 |
 
 ## Aufgelöste Carveouts
 

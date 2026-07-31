@@ -4,7 +4,7 @@
 Sie sammelt drei Dinge: was **vor** der Runde auffiel (`V11-01`, `V11-02` —
 beide behoben), die **Befunde des Drei-Linsen-Reviews** (21 offen, 6 behoben)
 und die übernommenen Ü-Posten (`Ü-02`, `Ü-03`, `Ü-04`, `Ü-07`, `Ü-08` behoben;
-offen: `Ü-01`, `Ü-06`, `Ü-09`, `Ü-11`; `Ü-05` und `Ü-10` behoben).
+offen: `Ü-01`, `Ü-06`, `Ü-09`; `Ü-05`, `Ü-10`, `Ü-11` behoben).
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -675,7 +675,7 @@ Modell wechseln, Erwartung verfälschen, `make replay` laufen lassen — dreimal
 grün — und benennen, welche Felder ein Runner vergleichen müsste. Lösung
 mitgezogen.
 
-### Ü-11 — Das Replay-Manifest deklariert einen Vertrag, den kein Target einlöst
+### Ü-11 — Das Replay-Manifest deklariert einen Vertrag, den kein Target einlöst ✅
 
 `lab/example/evals/golden/welle-1-baseline/manifest.yaml`:
 
@@ -694,10 +694,35 @@ Dass das Lab keinen Runner hat, ist eine legitime Lab-Grenze. Dass das
 Fixture eine CI-Pflicht **behauptet**, die es nicht gibt, ist es nicht — ein
 Adoptierender kopiert das Manifest als Vorbild samt der Zusage.
 
-**Nicht hier behoben:** Die saubere Auflösung ist ein Replay-Runner, also ein
-Slice, keine Textkorrektur. Bis dahin ist der Widerspruch in Modul 12 sichtbar
-gemacht (die Blindheits-Übung zeigt genau diese drei Felder als *deklariert,
-nicht eingelöst*).
+**Beim Beheben wuchs der Befund auf drei unwahre Angaben.** Der
+`toolchain`-Block nannte zwei Werkzeuge falsch: `python` als *„Replay-Runner
+(tools/)"* — `tools/` enthält nur `check_closure_notes.py` und
+`check_references.py`, beides Doku-Gates — und `node` als
+*„Trace-Fixture-Prüfung (make replay)"*, obwohl `make replay` reines Shell ist
+und Node in `make trace` läuft.
+
+**Warum kein Runner gebaut wurde.** Er ist nicht nur Arbeit, ihm fehlt die
+Grundlage: Die Erwartungen referenzieren `top_doc_path: docs/init.md` — ein
+Korpus, das im Repo **nicht existiert**. Ohne Korpus kein Lauf, und
+`top_score_min` wäre gegen die tatsächliche `MockEmbedder`-Ausgabe zu
+kalibrieren statt zu raten. Das ist ein Slice.
+
+**Behoben mit den repo-eigenen Konstrukten**, nicht mit einer Textglättung:
+
+| Artefakt | Inhalt |
+|---|---|
+| Manifest | drei Angaben berichtigt; `verification` mit `# CO-002` als *deklariert, nicht durchgesetzt* markiert |
+| `Makefile` | Target-Beschreibung und Ausgabe nennen die Grenze: *„Struktur geprüft, kein Lauf ausgeführt (CO-002)"* |
+| [`CO-002`](../../lab/example/docs/plan/carveouts/CO-002-replay-verifikation.md) | Carveout mit Auflösungs-Trigger und Folge-Slice |
+| [`slice-015`](../../lab/example/docs/plan/planning/open/slice-015-replay-runner.md) | Korpus · Runner · Kalibrierung · zwei Break-Tests in der DoD |
+
+Der `verification`-Block bleibt stehen: Modul 12 lehrt ihn als Pflichtinhalt
+eines Replay-Manifests. Falsch war nie der Block, sondern die Behauptung, er
+werde durchgesetzt.
+
+**Nebenbefund:** d-check meldete `tools/replay.py` <!-- d-check:ignore (geplante Datei, entsteht in slice-015) --> als `codepath-missing` —
+korrekt, die Datei entsteht erst im Slice. Mit `d-check:ignore` und Begründung
+markiert, wie im Carveout-Template für `done/` präzedent.
 
 ### Ü-10 — Vier Templates verloren beim Adoptieren jeden Regelwerk-Anker ✅
 
