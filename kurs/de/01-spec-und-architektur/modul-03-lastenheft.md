@@ -120,6 +120,17 @@ Drei Regeln, alle aus der Straten-Ordnung
   technischen Festlegungen direkt ins Lastenheft falten, haben kein
   Technik-Stratum — die Rangordnung bleibt dieselbe, das Stratum fällt aus der
   Kette.
+* **Das Lastenheft darüber ist die Decke.** Es referenziert normativ nur
+  innerhalb der eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts oder
+  Wellen. Wer eine Anforderung mit einer ADR begründet, hat die Entscheidung
+  zur Anforderung gemacht.
+* **Kein ADR-Rückzeiger als Begründung.** Die Spezifikation steht im
+  Stabilitäts-Rang über der ADR (*Vertrag › Technik › Sicht › ADR › Slice*),
+  und normativ zeigen Referenzen nur aufwärts
+  ([§Referenz-Richtung (SDP)](../grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+  Welche ADR einen Wert festlegt, deklariert **die ADR** in ihrem
+  `Schärft:`-Feld. Die ADR-Spalte der Historie ist davon unberührt: Sie ist
+  Provenance, also *Kontext* — und genau dafür ist sie da.
 
 Vorlage: [`spec/spezifikation.template.md`](../../../lab/templates/spec/spezifikation.template.md).
 

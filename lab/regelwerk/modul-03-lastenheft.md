@@ -43,6 +43,12 @@ im Given/When/Then-Stil — **Happy · Boundary · Negative** — plus einen
 genau · welche Felder · welcher Speicherort*), bevor die Pfade formuliert
 werden; das Negative (`darf nicht …`) spart die spätere Review.
 
+Das Lastenheft ist die **Decke** der Straten-Ordnung: Normativ referenziert es
+nur innerhalb der eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts oder
+Wellen ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+Wer eine Anforderung mit einer ADR begründet, hat die Entscheidung zur
+Anforderung gemacht.
+
 ### Ziel-Form: Spezifikation
 
 Technische Festlegungen leben in der Spezifikation
@@ -58,6 +64,13 @@ externe Verträge · Historie. Operative Regeln:
   Architektur*.
 * **Optional** — nur Vertrag und Sicht sind obligatorisch. Ohne Technik-Stratum
   fällt es aus der Kette; die Rang-Ordnung bleibt dieselbe.
+* **Kein ADR-Rückzeiger als Begründung** — die Spezifikation steht im
+  Stabilitäts-Rang über der ADR (*Vertrag › Technik › Sicht › ADR › Slice*),
+  normativ zeigen Referenzen nur aufwärts
+  ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+  Welche ADR einen Wert festlegt, deklariert **die ADR** in ihrem
+  `Schärft:`-Feld. Die ADR-Spalte der Historie bleibt erlaubt: Provenance ist
+  *Kontext*, keine Begründung.
 
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 

@@ -169,6 +169,14 @@ entstanden, nicht aus einem Review-Lauf.
   Die Korrelation trägt `slice.id` — Pflichtfeld jedes Spans; Läufe als je
   eigene Traces leisten dasselbe, und ein Slice läuft Tage. In der Quelle als
   Modellwahl benannt, im Split gestrichen.
+- **Alle drei Spec-Straten nennen jetzt ihre Referenz-Richtung.** Nach der
+  Sicht (`V11-03`) fehlte sie auch bei Technik und Vertrag: Die Spezifikation
+  trägt keinen ADR-Rückzeiger als Begründung — die ADR deklariert aufwärts in
+  `Schärft:`, und die ADR-Spalte der Historie bleibt erlaubt, weil Provenance
+  *Kontext* ist. Das Lastenheft ist die Decke und referenziert normativ nur
+  innerhalb der eigenen `LH-*`-Reihe. Neu offen als `Ü-12`: Die
+  Lastenheft-Historie des Beispiel-Repos nennt Slices und eine ADR als
+  Änderungsgrund — genau das, was die CR-Regel aus Welle 34 ausschließt.
 - **Modul 9 erlaubte, was die Referenz-Richtung verbietet** (`V11-03`). Die
   Hard Rule sagte *„`spec/architecture.md` referenziert ADRs und
   Modul-Pfade"*; `konventionen.md` §Referenz-Richtung und

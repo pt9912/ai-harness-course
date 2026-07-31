@@ -4,7 +4,7 @@
 Sie sammelt drei Dinge: was **vor** der Runde auffiel (`V11-01`, `V11-02` —
 beide behoben), die **Befunde des Drei-Linsen-Reviews** (21 offen, 6 behoben)
 und die übernommenen Ü-Posten (`Ü-02`, `Ü-03`, `Ü-04`, `Ü-07`, `Ü-08` behoben;
-offen: `Ü-01`, `Ü-06`, `Ü-09`; `Ü-05`, `Ü-10`, `Ü-11` behoben).
+offen: `Ü-01`, `Ü-06`, `Ü-09`, `Ü-12`; `Ü-05`, `Ü-10`, `Ü-11` behoben).
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -806,6 +806,41 @@ aufgeräumt. Zwei Vorlagen tragen weiterhin Normen in Kommentaren
 **Nebenbefund an mir selbst:** Meine erste Messung zählte Zeiger *innerhalb*
 mehrzeiliger `<!-- … -->`-Blöcke als Rumpf und meldete darum zwei betroffene
 Dateien statt vier. Blockweise nachgemessen.
+
+### Ü-12 — Die Lastenheft-Historie des Beispiels nennt Slices und eine ADR als Änderungsgrund
+
+Die encodierte CR-Regel aus Welle 34 (`lastenheft.template.md` §7, seit heute
+im Rumpf):
+
+> Jede Änderung an *angenommenen* Anforderungen ist eine Vertragsänderung. Sie
+> entsteht **nur** aus einem externen Change Request, **nie aus einem ADR oder
+> Slice** … mit dem externen CR (Ticket/Vertragsanhang) unter „Verweis".
+
+`lab/example/spec/lastenheft.md` §7 hält es anders — keine der fünf Zeilen
+trägt einen externen CR:
+
+```
+0.1.0  Initiale Fassung                          | slice-001
+0.2.0  Boundary-Kriterium für k > 100 ergänzt     | slice-007
+0.3.0  LH-QA-04 Audit-Datenschutz ergänzt         | Lab-Ausbau (Kurs-Welle 9), Modul 15
+0.4.0  LH-FA-IDX-003 Index-Schreib-Idempotenz     | Lab-Ausbau (Kurs-Welle 9), Modul 15
+0.4.1  … berichtigt (stand gegen ADR-0003)        | ADR-0003
+```
+
+Nicht alle fünf wiegen gleich. `0.1.0` ist die Erstfassung, also keine
+Änderung an *angenommenen* Anforderungen. `0.3.0`/`0.4.0` nennen ehrlich den
+Kurs-Ausbau — das Beispiel-Repo ist Lehrmaterial, sein „Auftraggeber" ist der
+Kurs; das ist kein ADR und kein Slice. **Zwei Zeilen widersprechen direkt:**
+`0.2.0` lässt einen Slice eine Anforderung *ergänzen*, `0.4.1` lässt eine ADR
+das Lastenheft *berichtigen* — und ADRs dürfen die Spezifikation schärfen, nie
+das Lastenheft.
+
+**Nicht angefasst.** Die Historie eines Artefakts nachträglich umzuschreiben
+ist etwas anderes als eine Regel zu schärfen, und die Fix-Richtung ist hier
+nicht offensichtlich: Entweder die zwei Zeilen benennen einen CR (den es nie
+gab), oder sie werden als *Korrektur* statt *Vertragsänderung* ausgewiesen,
+oder das Beispiel führt sie bewusst als Negativfall. Das ist eine
+Entscheidung, keine Nacharbeit.
 
 ### Ü-09 — `modul-03-lastenheft.md` heißt nach einer Hälfte seines Titels
 
