@@ -64,6 +64,11 @@ Operative Regeln, die die Vorlage nicht selbst erzwingt:
   untere Schicht präzisiert, erweitert nie.
 * Sprach- und meilensteinfrei — referenziert Modul-Pfade, aber keine Wellen,
   Slices, Commit-Hashes oder Closure-Daten.
+* Keine Historie, nur `**Letzte Änderung:**` im Kopf — ein Frische-Marker,
+  kein Protokoll. Vertrag und Technik führen eine, weil ihr Änderungs-Prozess
+  einen benennbaren Urheber hat (externer Change Request bzw. schärfende ADR);
+  die Sicht hat keinen, jede ihrer Änderungen folgt aus einer Änderung
+  darüber. Eine Verweis-Spalte trüge hier nichts Zulässiges.
 * Kein ADR-Bezug: Die Sicht steht im Stabilitäts-Rang **über** der ADR
   (*Vertrag › Technik › Sicht › ADR › Slice*), normative Referenzen zeigen nur
   aufwärts ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).

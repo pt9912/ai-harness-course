@@ -117,6 +117,13 @@ Zwei Regeln, die anderswo festgelegt sind und hier zusammenlaufen:
 * **Sprach- und meilensteinfrei.** Die Sicht referenziert Modul-Pfade, aber
   keine Wellen, Slices, Commit-Hashes oder Closure-Daten. Die zeitliche
   Schicht lebt in `docs/plan/planning/`.
+* **Keine Historie, nur ein Frische-Datum.** Vertrag und Technik führen eine,
+  weil ihr Änderungs-Prozess einen benennbaren Urheber hat — der externe
+  Change Request bzw. die schärfende ADR. Die Sicht hat keinen: Jede Änderung
+  an ihr folgt aus einer Änderung darüber. Eine Verweis-Spalte hätte hier
+  nichts Zulässiges zu tragen, denn die ADR darf sie nicht nennen (nächster
+  Punkt) und eigene Anforderungen hat sie nicht. `**Letzte Änderung:**` im
+  Kopf ist ein Frische-Marker, kein Änderungs-Protokoll.
 * **Kein ADR-Bezug.** Die Sicht steht im Stabilitäts-Rang **über** der ADR
   (*Vertrag › Technik › Sicht › ADR › Slice*), und normative Referenzen
   zeigen nur aufwärts

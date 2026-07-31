@@ -12,8 +12,9 @@
 Baseline-Regelwerk `modul-04-architektur-adrs.md` §Ziel-Form: Architektur-Sicht.
 
 **Hard Rule:** Diese Datei enthält *keine* Wellen, Slices, Commit-Hashes
-oder Closure-Daten und **keine ADR-Bezüge** — die Sicht steht im
-Stabilitäts-Rang über der ADR. Die zeitliche Schicht lebt in
+oder Closure-Daten, **keine ADR-Bezüge** — die Sicht steht im
+Stabilitäts-Rang über der ADR — und **keine Historie**: `Letzte Änderung`
+oben ist ein Frische-Marker, kein Protokoll. Die zeitliche Schicht lebt in
 `docs/plan/planning/in-progress/roadmap.md` und den späteren Closure-Notizen.
 Baseline-Regelwerk `modul-04-architektur-adrs.md` §Ziel-Form: Architektur-Sicht.
 

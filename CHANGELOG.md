@@ -169,6 +169,15 @@ entstanden, nicht aus einem Review-Lauf.
   Die Korrelation trägt `slice.id` — Pflichtfeld jedes Spans; Läufe als je
   eigene Traces leisten dasselbe, und ein Slice läuft Tage. In der Quelle als
   Modellwahl benannt, im Split gestrichen.
+- **Warum die Architektur-Sicht keine Historie hat, steht jetzt da.** Template,
+  Beispiel-Repo und ein reales Adopter-Repo führen alle drei nur
+  `**Letzte Änderung:**` — übereinstimmend, aber unbegründet. Der Grund folgt
+  aus dem Änderungs-Prozess: Vertrag und Technik haben einen benennbaren
+  Urheber (externer CR bzw. schärfende ADR), die Sicht hat keinen; jede ihrer
+  Änderungen folgt aus einer Änderung darüber. Eine Verweis-Spalte trüge dort
+  nichts Zulässiges — die ADR darf sie nicht nennen, eigene Anforderungen hat
+  sie nicht. Die fehlende Historie ist damit eine **Folge, keine Lücke**, und
+  `Letzte Änderung` ist ein Frische-Marker, kein Protokoll.
 - **Die Decken-Regel gilt jetzt ohne Schlupfloch.** Erst stand dort „normativ
   referenziert es nur intra-`LH-*`" — das ließ die Historie offen, und genau
   dorthin wandern in der Praxis Slice-, ADR- und Wellen-Verweise. Die
