@@ -62,20 +62,20 @@ Operative Regeln, die die Vorlage nicht selbst erzwingt:
 
 * Derivativ — Konfliktregel *Lastenheft › Spezifikation › Architektur*; die
   untere Schicht präzisiert, erweitert nie.
-* Sprach- und meilensteinfrei
-  ([Modul 9](modul-09-implementierung.md#hard-rules-repo-spezifisch)):
+* Sprach- und meilensteinfrei ([Modul 9](modul-09-implementierung.md#hard-rules-repo-spezifisch)):
   referenziert ADRs und Modul-Pfade, aber keine Wellen, Slices oder
   Closure-Daten.
 
 ### Ziel-Form: ADR (MADR)
 
-Die Form liefert die Vorlage
-[`templates/docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md):
+Die Form liefert die Vorlage [`templates/docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md):
 Kopf (Status · Datum · Bezug · Supersedes) plus Body (Kontext · Verglichene
 Alternativen · Entscheidung · Konsequenz mit Fitness Function). Operative
 Regeln zur Form:
 
-- Der Kontext *referenziert* die Anforderung, wiederholt sie nicht.
+- Der Kontext *referenziert* die Anforderung, wiederholt sie nicht — und zwar
+  **aufwärts** auf die stabilere Quelle, nie abwärts auf einen Slice
+  ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
 - Mindestens drei Verglichene Alternativen, jede mit Trade-off.
 - Jede Entscheidung mit Architektur-Wirkung bekommt eine Fitness Function —
   sonst ist sie Absichtserklärung.

@@ -158,6 +158,11 @@ Lücke im Harness. Architect-Agent legt ADR-Entwurf an: `0007-service-adapter-la
 > instanziieren. LH-QA-COUPLING-002 verlangt, dass externe Abhängigkeiten
 > austauschbar bleiben (für Replay und für Provider-Wechsel).
 
+Die Richtung ist nicht beliebig: Der Kontext verweist **aufwärts** auf die
+stabilere Quelle (Lastenheft, Spezifikation), nie abwärts auf einen Slice —
+ein Slice ist volatiler als die ADR und kann sie nicht begründen
+([§Referenz-Richtung (SDP)](../grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+
 **Schritt 4 — Optionen mit Trade-offs:**
 > 1. **Direkt-Calls in Service-Schicht** — minimal Boilerplate; bricht LH-QA-COUPLING-002 (kein Replay ohne API-Mocks).
 > 2. **Adapter-Schicht mit Interface** — etwas Boilerplate; erfüllt LH-QA-COUPLING-002; Replay-fähig.

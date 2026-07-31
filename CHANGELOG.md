@@ -169,6 +169,16 @@ entstanden, nicht aus einem Review-Lauf.
   Die Korrelation trägt `slice.id` — Pflichtfeld jedes Spans; Läufe als je
   eigene Traces leisten dasselbe, und ein Slice läuft Tage. In der Quelle als
   Modellwahl benannt, im Split gestrichen.
+- **Modul 4 nannte die Referenz-Richtung nicht.** Die ADR ist der Ort, an dem
+  die SDP-Asymmetrie praktisch wird — der Kontext verweist aufwärts auf die
+  stabilere Quelle, nie abwärts auf einen Slice. Weder Quelle noch Spiegel
+  sagten das; Worked-Example-Schritt 3 heißt „Spec-Verweis statt
+  -Wiederholung" und ließ die Richtung offen. Beide nachgezogen mit Zeiger auf
+  `konventionen.md` §Referenz-Richtung (SDP).
+- **Zwei Glossar-Zeilen des Spiegels trugen `[#NAME?]` als Link-Text** —
+  ein Tabellenkalkulations-Artefakt aus dem Split. Die Quelle sagt
+  `[§Referenz-Richtung]` und `[§Spec-Straten]`. Kein Gate fing es: Die Links
+  lösen auf, nur der Text war Müll.
 - **Fremdprojekt-Namen im Bundle waren tote Zeiger.** Welle 35 hatte die
   Links auf `fallstudien.md` entfernt und die Namen stehen lassen — ein
   Adoptierender las *„Hard Rule (Beispiel aus c-hsm-doc, ADR 0001)"* und
