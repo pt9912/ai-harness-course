@@ -169,6 +169,18 @@ entstanden, nicht aus einem Review-Lauf.
   Die Korrelation trägt `slice.id` — Pflichtfeld jedes Spans; Läufe als je
   eigene Traces leisten dasselbe, und ein Slice läuft Tage. In der Quelle als
   Modellwahl benannt, im Split gestrichen.
+- **Modul 9 erlaubte, was die Referenz-Richtung verbietet** (`V11-03`). Die
+  Hard Rule sagte *„`spec/architecture.md` referenziert ADRs und
+  Modul-Pfade"*; `konventionen.md` §Referenz-Richtung und
+  `architecture.template.md` sagen das Gegenteil. Der Rang entscheidet:
+  **Vertrag › Technik › Sicht › ADR › Slice** — die Sicht steht *über* der
+  ADR, normative Referenzen zeigen nur aufwärts. Ursache war eine
+  Fehlklassifikation: Die Regel stand unter „Hard Rules (**repo-spezifisch**)",
+  ist aber keine Repo-Entscheidung, sondern folgt aus dem Sicht-Stratum — und
+  musste dort nie gegen die allgemeine Norm geprüft werden. Modul 4 ist jetzt
+  Definitionsort; Modul 9 benennt stattdessen die fehlende Unterscheidung:
+  *Ein Repo verkörpert eine universelle Regel in `AGENTS.md`, es entscheidet
+  sie nicht.* Vier abhängige Stellen nachgezogen.
 - **Modul 4 nannte die Referenz-Richtung nicht.** Die ADR ist der Ort, an dem
   die SDP-Asymmetrie praktisch wird — der Kontext verweist aufwärts auf die
   stabilere Quelle, nie abwärts auf einen Slice. Weder Quelle noch Spiegel

@@ -90,6 +90,46 @@ Aussage aus zwei Richtungen.
 
 ---
 
+### V11-03 — Modul 9 erlaubte, was die Referenz-Richtung verbietet ✅
+
+*(Aus einer Nutzer-Frage: „Gilt das nicht auch für §Ziel-Form:
+Architektur-Sicht?" — und der Anschlussfrage, ob die Regel überhaupt an der
+richtigen Stelle steht. Sie stand nicht.)*
+
+Zwei Quell-Dokumente sagten Gegenteiliges über dieselbe Datei:
+
+| Ort | Aussage |
+|---|---|
+| `konventionen.md` §Referenz-Richtung (SDP) + `architecture.template.md` | kein ADR-Bezug in der Sicht; die ADR deklariert aufwärts in `Schärft:` |
+| Modul 9, Hard Rule | *„`spec/architecture.md` **referenziert ADRs** und Modul-Pfade"* |
+
+Die Auflösung liegt im Rang: **Vertrag › Technik › Sicht › ADR › Slice**
+(`konventionen.md:466`). Die Sicht steht **über** der ADR, normative
+Referenzen zeigen nur aufwärts — ein ADR-Bezug in der Sicht zeigt abwärts.
+Modul 9 erlaubte also, was die allgemeine Regel ausschließt.
+
+**Die Ursache war eine Fehlklassifikation.** Die Regel stand in Modul 9 unter
+*„Hard Rules (**repo-spezifisch**)"*. Sie ist aber keine Repo-Entscheidung:
+Sie **folgt** aus dem Sicht-Stratum. In einer Beispielliste für repo-eigene
+Regeln musste sie nie gegen die allgemeine Norm geprüft werden — so kam
+*„referenziert ADRs"* hinein und überlebte.
+
+**Behoben.** Modul 4 ist jetzt der Definitionsort (Quelle §Die
+Architektur-Sicht, Spiegel §Ziel-Form) und trägt beide Hälften: sprach- und
+meilensteinfrei **und** kein ADR-Bezug, mit SDP-Begründung. Modul 9 führt die
+Regel nicht mehr in seiner repo-spezifischen Liste, sondern benennt die
+Unterscheidung, die vorher fehlte: *Ein Repo **verkörpert** eine universelle
+Regel in `AGENTS.md`, es **entscheidet** sie nicht.* Nachgezogen:
+`architecture.template.md` (Zeiger auf Modul 4 statt Modul 9, ADR-Verbot im
+Rumpf), `AGENTS.template.md` §3.4, `lab/example/AGENTS.md` §2.4.
+
+**Selbstkorrektur:** Meine §Die Architektur-Sicht von heute Vormittag hatte
+den Satz aus Modul 9 übernommen — samt Fehler. Das Beispiel-Repo dagegen war
+bereits regelkonform: `lab/example/spec/architecture.md` trägt keinen einzigen
+ADR-Bezug.
+
+---
+
 ### V11-02 — Die Zuordnungs-Einheit der Token-Attribuierung ist nicht benannt, und es gibt keinen Emissions-Pfad ✅
 
 *(Aus einer Nutzer-Frage, in zwei Schritten geschärft. Zwei Hälften mit

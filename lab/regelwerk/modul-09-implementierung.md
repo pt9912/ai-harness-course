@@ -67,6 +67,12 @@ gelesen.
 
 Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 *Falsch/Richtig*-Beispiele **und** eine *technische Begründung*.
+Nicht jede Hard Rule in `AGENTS.md` ist repo-spezifisch: *„Architektur ist
+sprach- und meilensteinfrei"* folgt aus dem Sicht-Stratum und der
+Referenz-Richtung ([Modul 4 §Ziel-Form: Architektur-Sicht](modul-04-architektur-adrs.md#ziel-form-architektur-sicht))
+— ein Repo verkörpert sie in `AGENTS.md`, es entscheidet sie nicht. Solche
+Regeln gehören in die Datei, aber nicht in diese Liste.
+
 Bewährte Muster:
 
 * **Docker-only**: kein lokales `.venv`, kein `pip install` außerhalb von Dockerfile-Stages.
@@ -84,7 +90,6 @@ Bewährte Muster:
   In jeder Sprache gilt: Inline-Suppression bricht das Suppression-Gate; Ausnahmen wandern in eine zentrale Konfigurations-Datei mit Begründung.
 * **git mv + Inhaltsänderung = zwei Commits**: Move und Inhalt nie im selben Commit — der Move-Commit bleibt rein (Git erkennt R-Rename). Welcher der beiden zuerst kommt, sagt der Vorgang: im Regelfall der Move, dann der Inhalt; beim Lifecycle-Übergang nach `done/` umgekehrt, weil `done/` „Closure-Notiz vorhanden" bedeutet und die Notiz deshalb im Commit davor steht ([Modul 5 §Lifecycle als State Machine](modul-05-planning-harness.md#lifecycle-als-state-machine)).
   *Begründung:* Sonst fällt die Rename-Detection unter die 50 %-Similarity-Schwelle und `git log --follow` wird unzuverlässig.
-* **Architektur ist sprach- und meilensteinfrei**: `spec/architecture.md` referenziert ADRs und Modul-Pfade, aber keine Wellen, Slices oder Closure-Daten. Die zeitliche Schicht lebt in `docs/plan/planning/`.
 * **Domänen-Beispiel (Regelungstechnik): Optimierer darf nie direkt aufs
   Gerät schreiben** — Output fließt durch Statemachine, Constraint-Limiter,
   Ramp-Limiter. Steht hier als Muster: Die härtesten Hard Rules einer Domäne

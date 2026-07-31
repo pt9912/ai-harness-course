@@ -62,9 +62,13 @@ Operative Regeln, die die Vorlage nicht selbst erzwingt:
 
 * Derivativ — Konfliktregel *Lastenheft › Spezifikation › Architektur*; die
   untere Schicht präzisiert, erweitert nie.
-* Sprach- und meilensteinfrei ([Modul 9](modul-09-implementierung.md#hard-rules-repo-spezifisch)):
-  referenziert ADRs und Modul-Pfade, aber keine Wellen, Slices oder
-  Closure-Daten.
+* Sprach- und meilensteinfrei — referenziert Modul-Pfade, aber keine Wellen,
+  Slices, Commit-Hashes oder Closure-Daten.
+* Kein ADR-Bezug: Die Sicht steht im Stabilitäts-Rang **über** der ADR
+  (*Vertrag › Technik › Sicht › ADR › Slice*), normative Referenzen zeigen nur
+  aufwärts ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+  Welche ADR eine Aussage der Sicht verbindlich macht, deklariert **die ADR**
+  aufwärts in ihrem `Schärft:`-Feld.
 
 ### Ziel-Form: ADR (MADR)
 

@@ -66,8 +66,10 @@ sonst der Move.
 
 ### 2.4 Architektur ist sprach- und meilensteinfrei
 
-`spec/architecture.md` referenziert ADRs und Modul-Pfade, aber **keine**
-Wellen, Slices, Commit-Hashes oder Closure-Daten.
+`spec/architecture.md` referenziert Modul-Pfade, aber **keine** Wellen,
+Slices, Commit-Hashes oder Closure-Daten — und **keine ADR-Bezüge**: Welche
+ADR eine Aussage der Sicht verbindlich macht, deklariert die ADR in ihrem
+`Schärft:`-Feld.
 
 ### 2.5 ADRs sind nach `Accepted` immutable
 

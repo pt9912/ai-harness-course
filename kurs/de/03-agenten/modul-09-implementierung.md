@@ -149,6 +149,12 @@ Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 Entstand sie aus dem Steering Loop und nicht aus einer Anforderung, trägt
 sie zusätzlich den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)`
 ([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
+Nicht jede Hard Rule in `AGENTS.md` ist repo-spezifisch: *„Architektur ist
+sprach- und meilensteinfrei"* etwa **folgt** aus dem Sicht-Stratum und der
+Referenz-Richtung ([Modul 4 §Die Architektur-Sicht](../01-spec-und-architektur/modul-04-architektur-adrs.md#die-architektur-sicht-specarchitecturemd)) —
+ein Repo *verkörpert* sie in `AGENTS.md`, es entscheidet sie nicht. Solche
+Regeln gehören in die Datei, aber nicht in diese Liste.
+
 Beispiele aus realen Repos (siehe
 [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)):
 
@@ -166,7 +172,6 @@ Beispiele aus realen Repos (siehe
   In jeder Sprache gilt: Inline-Suppression bricht das Suppression-Gate; Ausnahmen wandern in eine zentrale Konfigurations-Datei mit Begründung.
 * **git mv + Inhaltsänderung = zwei Commits** (grid-gym): Move und Inhalt nie im selben Commit — der Move-Commit bleibt rein (Git erkennt R-Rename). Welcher der beiden zuerst kommt, sagt der Vorgang: im Regelfall der Move, dann der Inhalt; beim Lifecycle-Übergang nach `done/` umgekehrt, weil `done/` „Closure-Notiz vorhanden" bedeutet und die Notiz deshalb im Commit davor steht ([Modul 5 §Lifecycle als State Machine](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
   *Begründung:* Sonst fällt die Rename-Detection unter die 50 %-Similarity-Schwelle und `git log --follow` wird unzuverlässig.
-* **Architektur ist sprach- und meilensteinfrei** (grid-gym, c-hsm-doc): `spec/architecture.md` referenziert ADRs und Modul-Pfade, aber keine Wellen, Slices oder Closure-Daten. Die zeitliche Schicht lebt in `docs/plan/planning/`.
 * **Optimierer darf nie direkt aufs Gerät schreiben** (bess-ems-Klasse): Output fließt durch Statemachine, Constraint-Limiter, Ramp-Limiter.
 * **Gates dürfen nicht ohne ADR gelockert werden**: jede Schwellen-Senkung ist ein ADR, kein PR-Kommentar.
 

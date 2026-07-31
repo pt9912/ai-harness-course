@@ -105,7 +105,7 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 
 ADRs sind die eine Hälfte dieses Moduls, die Sicht ist die andere. Sie zeigt
 Komponenten und Sequenzen und trägt **keine eigenen Anforderungen**: Was sie
-zeigt, stammt aus Lastenheft, Spezifikation oder einer ADR
+zeigt, ist anderswo festgelegt
 ([§Spec-Stratifizierung](../grundlagen/konventionen.md#spec-stratifizierung),
 Sicht-Stratum). Ein Diagramm, das etwas Neues behauptet, ist eine Anforderung
 am falschen Ort.
@@ -114,10 +114,15 @@ Zwei Regeln, die anderswo festgelegt sind und hier zusammenlaufen:
 
 * **Derivativ.** Konfliktregel *Lastenheft › Spezifikation › Architektur* —
   die untere Schicht darf *präzisieren*, nie *erweitern*.
-* **Sprach- und meilensteinfrei**
-  ([Modul 9](../03-agenten/modul-09-implementierung.md#hard-rules-repo-spezifisch)):
-  Die Sicht referenziert ADRs und Modul-Pfade, aber keine Wellen, Slices oder
-  Closure-Daten. Die zeitliche Schicht lebt in `docs/plan/planning/`.
+* **Sprach- und meilensteinfrei.** Die Sicht referenziert Modul-Pfade, aber
+  keine Wellen, Slices, Commit-Hashes oder Closure-Daten. Die zeitliche
+  Schicht lebt in `docs/plan/planning/`.
+* **Kein ADR-Bezug.** Die Sicht steht im Stabilitäts-Rang **über** der ADR
+  (*Vertrag › Technik › Sicht › ADR › Slice*), und normative Referenzen
+  zeigen nur aufwärts
+  ([§Referenz-Richtung (SDP)](../grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)). Welche ADR eine
+  Aussage der Sicht verbindlich macht, deklariert **die ADR** aufwärts in
+  ihrem `Schärft:`-Feld — nicht die Sicht abwärts.
 
 Vorlage: [`spec/architecture.template.md`](../../../lab/templates/spec/architecture.template.md).
 

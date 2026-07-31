@@ -1,8 +1,8 @@
 # Architektur — <Projektname>
 
 > **Template-Hinweis.** Diese Datei ist eine Vorlage. Sie ist
-> **sprach- und meilensteinfrei** (siehe Hard Rule in
-> [Baseline-Regelwerk Modul 9](../../regelwerk/modul-09-implementierung.md)).
+> **sprach- und meilensteinfrei** (siehe
+> [Baseline-Regelwerk Modul 4](../../regelwerk/modul-04-architektur-adrs.md)).
 > Kopiere sie nach `spec/architecture.md`, ersetze `<Platzhalter>` und
 > lösche diesen Block.
 
@@ -12,9 +12,10 @@
 Baseline-Regelwerk `modul-04-architektur-adrs.md` §Ziel-Form: Architektur-Sicht.
 
 **Hard Rule:** Diese Datei enthält *keine* Wellen, Slices, Commit-Hashes
-oder Closure-Daten. Die zeitliche Schicht lebt in
+oder Closure-Daten und **keine ADR-Bezüge** — die Sicht steht im
+Stabilitäts-Rang über der ADR. Die zeitliche Schicht lebt in
 `docs/plan/planning/in-progress/roadmap.md` und den späteren Closure-Notizen.
-Baseline-Regelwerk `modul-09-implementierung.md` §Hard Rules (repo-spezifisch).
+Baseline-Regelwerk `modul-04-architektur-adrs.md` §Ziel-Form: Architektur-Sicht.
 
 ---
 
