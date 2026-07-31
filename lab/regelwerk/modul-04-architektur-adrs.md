@@ -4,13 +4,13 @@
 
 ### Mini-Glossar für dieses Modul (Modul 4)
 
-| Begriff | Ein-Satz-Definition | Bild im Kopf |
-|---|---|---|
-| **MADR** | Markdown-basiertes ADR-Format mit Kopf-Feldern (Status, Datum, Bezug, Supersedes) und Body-Blöcken (Kontext, Optionen mit Trade-offs, Entscheidung, Konsequenzen). | ein Formular, das die Entscheidung zwingt, ihre Belege mitzubringen. |
-| **Nygard-Format** | Das ursprüngliche, schlankere ADR-Format nach Michael Nygard: Kontext, Entscheidung, Konsequenzen. | der Urahn von MADR — gleiche Idee, weniger Felder. |
-| **superseded** | ADR-Status: Entscheidung ist durch eine *neue* ADR abgelöst — der Bedarf bleibt, die Antwort wechselt. | Schild "ersetzt durch Nr. N" am alten Protokoll. |
-| **deprecated** | ADR-Status: Entscheidung entfällt *ersatzlos* — der zugrunde liegende Bedarf existiert nicht mehr. | Akte geschlossen, kein Nachfolger nötig. |
-| **Fitness-Function-Werkzeuge** | ArchUnit (Java), dep-cruiser (JS/TS), import-linter (Python) — prüfen Architektur-Aussagen maschinell, z. B. Layer-Importregeln. | der Prüfstand, auf den die ADR-Aussage geschnallt wird. |
+| Begriff                        | Ein-Satz-Definition                                                                                                                                                            | Bild im Kopf                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| **MADR**                       | Markdown-basiertes ADR-Format mit Kopf-Feldern (Status, Datum, Bezug, Supersedes) und Body-Blöcken (Kontext, Optionen mit Trade-offs, Entscheidung, Konsequenzen).             | ein Formular, das die Entscheidung zwingt, ihre Belege mitzubringen. |
+| **Nygard-Format**              | Das ursprüngliche, schlankere ADR-Format nach Michael Nygard: Kontext, Entscheidung, Konsequenzen.                                                                             | der Urahn von MADR — gleiche Idee, weniger Felder.                   |
+| **superseded**                 | ADR-Status: Entscheidung ist durch eine *neue* ADR abgelöst — der Bedarf bleibt, die Antwort wechselt.                                                                         | Schild "ersetzt durch Nr. N" am alten Protokoll.                     |
+| **deprecated**                 | ADR-Status: Entscheidung entfällt *ersatzlos* — der zugrunde liegende Bedarf existiert nicht mehr.                                                                             | Akte geschlossen, kein Nachfolger nötig.                             |
+| **Fitness-Function-Werkzeuge** | [a-check](https://github.com/pt9912/a-check), ArchUnit (Java), dep-cruiser (JS/TS), import-linter (Python) — prüfen Architektur-Aussagen maschinell, z. B. Layer-Importregeln. | der Prüfstand, auf den die ADR-Aussage geschnallt wird.              |
 
 ### Harness-Einordnung (Modul 4)
 
@@ -32,14 +32,13 @@ nicht verteidigen.
   ([Modul 6](modul-06-roadmap.md)); bei Eintreten: bestätigen oder Folge-ADR
   mit `supersedes` (Accepted-ADRs werden nie überschrieben).
 
-### Hard Rule (Beispiel aus c-hsm-doc, ADR 0001)
+### Hard Rule für Accepted-ADRs
 
-Begriff *Hard Rule* siehe Glossar in
-[`grundlagen/konventionen.md`](grundlagen-konventionen.md).
+Begriff *Hard Rule* siehe Glossar in [`grundlagen/konventionen.md`](grundlagen-konventionen.md#kernbegriffe).
 
-*"Eine ADR mit Status `Accepted` wird nicht inhaltlich überschrieben.
+**Eine ADR mit Status `Accepted` wird nicht inhaltlich überschrieben.**
 Spätere Korrekturen oder Schärfungen entstehen als neue ADR mit
-explizitem Verweis auf die abgelöste oder geschärfte Vorgängerin."*
+explizitem Verweis auf die abgelöste oder geschärfte Vorgängerin.
 
 Wirkung: ADRs sind Geschichtsdokumente, kein Wiki. Reviewer-Agent kann
 auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.

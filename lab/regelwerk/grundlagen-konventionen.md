@@ -3,44 +3,44 @@
 
 ### Kernbegriffe
 
-| Begriff | Bedeutung im Regelwerk |
-|---|---|
-| LLM | Modell, das Text → Text abbildet. Stateless. |
-| Agent | LLM + Tool-Schnittstelle + Schleife. Hält Zustand über mehrere Turns. |
-| Tool-Call | Strukturierter Aufruf einer Funktion durch das LLM (`name`, `arguments`, `result`). |
-| SDLC / Lebenszyklus | Software Development Lifecycle; in diesem Regelwerk *Entwicklungszyklus* genannt (Modul 1). Artefaktkette Spec → ADR → Plan → Code → Review → Verifikation → Closure mit verpflichtenden Rückwärtskanten (Lerneintrag, Folge-ADR). *Validierung* fehlt hier bewusst: sie prüft gegen den realen Bedarf außerhalb des Repos und hinterlässt kein Repo-Artefakt — ihr Ort ist die Rollen-Sequenz (Modul 8). |
-| Spec | Lastenheft-Artefakt unter `spec/`. Quelle der Wahrheit für *was*. |
-| ADR | Architecture Decision Record unter `docs/plan/adr/`. Quelle der Wahrheit für *warum so*. |
-| Slice | Kleinste lieferbare Einheit eines Features. Hat eigenen Plan, eigene DoD. |
-| Welle | Bündel von Slices, das gemeinsam geplant und abgeschlossen wird. |
-| Trigger | Beobachtbare Bedingung, bei der ein Slice/Welle/Carveout in den nächsten Status wandert. |
-| Closure | Abschluss eines Slice oder einer Welle, dokumentiert mit Lerneintrag in `done/`. |
-| Gate | Automatisch prüfbares Qualitätskriterium (Linter, Typecheck, Architekturtest, Coverage). |
-| Carveout | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel. |
-| Skill | Repo-spezifisches Markdown/JSON-Artefakt, das einer Agenten-Rolle Checkliste oder Verhalten beibringt. Lebt typischerweise in `.harness/`. |
-| Replay | Deterministisch wiederholbarer Agentenlauf gegen fixierte Inputs. |
-| Golden Set | Kuratiertes Eingabe/Erwartungs-Paar für Regressionstests. |
-| Finding | Einzelne Beobachtung eines Reviewers, kategorisiert HIGH/MEDIUM/LOW/INFO. |
-| DoD | Definition of Done. Liste der Bedingungen, die ein Slice erfüllen muss. |
-| Guide | Feedforward-Kontrolle: lenkt den Agenten *vor* der Handlung (Spec, ADR, AGENTS.md, Skill, Tool-Constraint). |
-| Sensor | Feedback-Kontrolle: prüft *nach* der Handlung (Linter, Test, ArchUnit, Reviewer-Agent). |
-| Fitness Function | Maschinell prüfbare Architektur-Aussage (z. B. Modulgrenze, Latenzbudget). |
-| Steering Loop | Wiederkehrendes Muster: beobachtetes Agenten-Versagen → Guide/Sensor verbessern → Wiederholung reduzieren. |
-| AGENTS.md | Maschinell lesbare Projekt-Konventionen für Agenten (Codestil, Tool-Regeln, Layering, Verbote). Quasi-Standard nach OpenAI/Codex. |
-| Constrain / Inform | OpenAI-Doppelaufgabe des Harness: *constrain* = Grenzen ziehen (Architektur, Tools, Layer), *inform* = Kontext liefern (Spec, ADR, AGENTS.md, Skills). |
-| Entropy Management | Aktive Pflege des Harness gegen Doku-Drift, tote Constraints und veraltete Konventionen. |
-| Harness-Lüge | Der Harness behauptet eine Kontrolle, die real nicht (mehr) greift — halluziniertes oder undeklariertes Gate, stille Setzung, Pointer auf nicht existierende Mechanik. Häufigste Form: behauptete Gates ohne Make-Target. |
-| Source Precedence | Geordnete Liste der kanonischen Quellen. Bei Konflikt gewinnt die höher rangierende. |
-| `harness/README.md` | Pro-Repo-Einstiegspunkt: bündelt Source Precedence, Guides, Sensors, Traceability- und Safety-Regeln. Dupliziert keine Spec-Inhalte. |
-| `harness/conventions.md` | Repo-lokaler Konventionsspeicher: trägt Strukturregeln und Adaptionen ggü. der adoptierten Baseline (`MR-<NNN>`-Liste, Zusatzklassen für Sensors-Bindung, Modus-Deklaration pro Sub-Area). Pflicht; Form (Einzeldatei/Verzeichnis) ist Wahl. |
-| Hard Rule | Negativregel, die der Agent nie brechen darf (z. B. "Optimierer darf nie direkt aufs Gerät schreiben"). Repo-spezifisch. |
-| Repo-Klasse | Charakter eines Repos im Harness: *Referenz* · *Safety/Control* · *Policy/Compliance*. Bestimmt, wie scharf Hard Rules und Sensors gesetzt werden. |
-| ID-Schema | Stabile Präfix-Klammer (`LH-*`, `HSM-*`, `GG-*`), die Spec-Anforderungen, Make-Target-Kommentare, ADRs und Commits verbindet. |
-| `BEO-<NNN>` | Kennung einer Beobachtung im Beobachtungs-Register ([Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)). Vergabestelle ist das Register selbst; sie macht den Zähler unabhängig vom Wortlaut der Bezeichnung. |
-| Referenz-Richtung (SDP) | Normative Referenzen zeigen nur volatil→stabil (`lastenheft.md` › ADR › Slice); Abwärts-/Seitwärts-Verweise sind Kontext, keine Spezifikation. Siehe [§Referenz-Richtung](#referenz-richtung-sdp-wer-darf-wen-referenzieren). |
-| Spec-Stratifizierung | Aufteilung der Spec in *vertraglich* (Lastenheft) und *technisch* (Spezifikation) mit eigener Precedence-Regel. |
-| Stratum | Rollen-Klasse eines Spec-Dokuments — *Vertrag* (Decke) · *Technik* · *Sicht* —, bestimmt über normativen Gehalt und Änderungs-Prozess, nicht über den Dateinamen. Rang: Vertrag › Technik › Sicht; nur Vertrag und Sicht sind obligatorisch. Siehe [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument). |
-| Bootstrap-aware Gate | Gate mit weicher Frühphase: kennt eine Reifestufe und greift erst ab Trigger hart. Dokumentiert, was die Stufe ist. |
+| Begriff                  | Bedeutung im Regelwerk                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| LLM                      | Modell, das Text → Text abbildet. Stateless.                                                                                                                                                                                                                                                                                                                                                              |
+| Agent                    | LLM + Tool-Schnittstelle + Schleife. Hält Zustand über mehrere Turns.                                                                                                                                                                                                                                                                                                                                     |
+| Tool-Call                | Strukturierter Aufruf einer Funktion durch das LLM (`name`, `arguments`, `result`).                                                                                                                                                                                                                                                                                                                       |
+| SDLC / Lebenszyklus      | Software Development Lifecycle; in diesem Regelwerk *Entwicklungszyklus* genannt (Modul 1). Artefaktkette Spec → ADR → Plan → Code → Review → Verifikation → Closure mit verpflichtenden Rückwärtskanten (Lerneintrag, Folge-ADR). *Validierung* fehlt hier bewusst: sie prüft gegen den realen Bedarf außerhalb des Repos und hinterlässt kein Repo-Artefakt — ihr Ort ist die Rollen-Sequenz (Modul 8). |
+| Spec                     | Lastenheft-Artefakt unter `spec/`. Quelle der Wahrheit für *was*.                                                                                                                                                                                                                                                                                                                                         |
+| ADR                      | Architecture Decision Record unter `docs/plan/adr/`. Quelle der Wahrheit für *warum so*.                                                                                                                                                                                                                                                                                                                  |
+| Slice                    | Kleinste lieferbare Einheit eines Features. Hat eigenen Plan, eigene DoD.                                                                                                                                                                                                                                                                                                                                 |
+| Welle                    | Bündel von Slices, das gemeinsam geplant und abgeschlossen wird.                                                                                                                                                                                                                                                                                                                                          |
+| Trigger                  | Beobachtbare Bedingung, bei der ein Slice/Welle/Carveout in den nächsten Status wandert.                                                                                                                                                                                                                                                                                                                  |
+| Closure                  | Abschluss eines Slice oder einer Welle, dokumentiert mit Lerneintrag in `done/`.                                                                                                                                                                                                                                                                                                                          |
+| Gate                     | Automatisch prüfbares Qualitätskriterium (Linter, Typecheck, Architekturtest, Coverage).                                                                                                                                                                                                                                                                                                                  |
+| Carveout                 | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel.                                                                                                                                                                                                                                                                                                                                        |
+| Skill                    | Repo-spezifisches Markdown/JSON-Artefakt, das einer Agenten-Rolle Checkliste oder Verhalten beibringt. Lebt typischerweise in `.harness/`.                                                                                                                                                                                                                                                                |
+| Replay                   | Deterministisch wiederholbarer Agentenlauf gegen fixierte Inputs.                                                                                                                                                                                                                                                                                                                                         |
+| Golden Set               | Kuratiertes Eingabe/Erwartungs-Paar für Regressionstests.                                                                                                                                                                                                                                                                                                                                                 |
+| Finding                  | Einzelne Beobachtung eines Reviewers, kategorisiert HIGH/MEDIUM/LOW/INFO.                                                                                                                                                                                                                                                                                                                                 |
+| DoD                      | Definition of Done. Liste der Bedingungen, die ein Slice erfüllen muss.                                                                                                                                                                                                                                                                                                                                   |
+| Guide                    | Feedforward-Kontrolle: lenkt den Agenten *vor* der Handlung (Spec, ADR, AGENTS.md, Skill, Tool-Constraint).                                                                                                                                                                                                                                                                                               |
+| Sensor                   | Feedback-Kontrolle: prüft *nach* der Handlung (Linter, Test, ArchUnit, Reviewer-Agent).                                                                                                                                                                                                                                                                                                                   |
+| Fitness Function         | Maschinell prüfbare Architektur-Aussage (z. B. Modulgrenze, Latenzbudget).                                                                                                                                                                                                                                                                                                                                |
+| Steering Loop            | Wiederkehrendes Muster: beobachtetes Agenten-Versagen → Guide/Sensor verbessern → Wiederholung reduzieren.                                                                                                                                                                                                                                                                                                |
+| AGENTS.md                | Maschinell lesbare Projekt-Konventionen für Agenten (Codestil, Tool-Regeln, Layering, Verbote). Quasi-Standard nach OpenAI/Codex.                                                                                                                                                                                                                                                                         |
+| Constrain / Inform       | OpenAI-Doppelaufgabe des Harness: *constrain* = Grenzen ziehen (Architektur, Tools, Layer), *inform* = Kontext liefern (Spec, ADR, AGENTS.md, Skills).                                                                                                                                                                                                                                                    |
+| Entropy Management       | Aktive Pflege des Harness gegen Doku-Drift, tote Constraints und veraltete Konventionen.                                                                                                                                                                                                                                                                                                                  |
+| Harness-Lüge             | Der Harness behauptet eine Kontrolle, die real nicht (mehr) greift — halluziniertes oder undeklariertes Gate, stille Setzung, Pointer auf nicht existierende Mechanik. Häufigste Form: behauptete Gates ohne Make-Target.                                                                                                                                                                                 |
+| Source Precedence        | Geordnete Liste der kanonischen Quellen. Bei Konflikt gewinnt die höher rangierende.                                                                                                                                                                                                                                                                                                                      |
+| `harness/README.md`      | Pro-Repo-Einstiegspunkt: bündelt Source Precedence, Guides, Sensors, Traceability- und Safety-Regeln. Dupliziert keine Spec-Inhalte.                                                                                                                                                                                                                                                                      |
+| `harness/conventions.md` | Repo-lokaler Konventionsspeicher: trägt Strukturregeln und Adaptionen ggü. der adoptierten Baseline (`MR-<NNN>`-Liste, Zusatzklassen für Sensors-Bindung, Modus-Deklaration pro Sub-Area). Pflicht; Form (Einzeldatei/Verzeichnis) ist Wahl.                                                                                                                                                              |
+| Hard Rule                | Negativregel, die der Agent nie brechen darf (z. B. "Optimierer darf nie direkt aufs Gerät schreiben"). Repo-spezifisch.                                                                                                                                                                                                                                                                                  |
+| Repo-Klasse              | Charakter eines Repos im Harness: *Referenz* · *Safety/Control* · *Policy/Compliance*. Bestimmt, wie scharf Hard Rules und Sensors gesetzt werden.                                                                                                                                                                                                                                                        |
+| ID-Schema                | Stabile Präfix-Klammer (`LH-*`, `HSM-*`, `GG-*`), die Spec-Anforderungen, Make-Target-Kommentare, ADRs und Commits verbindet.                                                                                                                                                                                                                                                                             |
+| `BEO-<NNN>`              | Kennung einer Beobachtung im Beobachtungs-Register ([Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)). Vergabestelle ist das Register selbst; sie macht den Zähler unabhängig vom Wortlaut der Bezeichnung.                                                                                                                                                                               |
+| Referenz-Richtung (SDP)  | Normative Referenzen zeigen nur volatil→stabil (`lastenheft.md` › ADR › Slice); Abwärts-/Seitwärts-Verweise sind Kontext, keine Spezifikation. Siehe [#NAME?](#referenz-richtung-sdp-wer-darf-wen-referenzieren).                                                                                                                                                                                         |
+| Spec-Stratifizierung     | Aufteilung der Spec in *vertraglich* (Lastenheft) und *technisch* (Spezifikation) mit eigener Precedence-Regel.                                                                                                                                                                                                                                                                                           |
+| Stratum                  | Rollen-Klasse eines Spec-Dokuments — *Vertrag* (Decke) · *Technik* · *Sicht* —, bestimmt über normativen Gehalt und Änderungs-Prozess, nicht über den Dateinamen. Rang: Vertrag › Technik › Sicht; nur Vertrag und Sicht sind obligatorisch. Siehe [#NAME?](#spec-straten-mehr-als-ein-spec-dokument).                                                                                                    |
+| Bootstrap-aware Gate     | Gate mit weicher Frühphase: kennt eine Reifestufe und greift erst ab Trigger hart. Dokumentiert, was die Stufe ist.                                                                                                                                                                                                                                                                                       |
 
 ### Verzeichniskonvention
 
@@ -72,12 +72,12 @@ Hinweis-Block entfernt, **alle HTML-Kommentare gelöscht** — bis auf die
 ([`../templates/README.md`](../templates/README.md) §Verwendung, Schritt 5). Was danach
 dasteht, ist alles, was der Adopter Wochen später hat. Vier Schichten:
 
-| Schicht | Inhalt | Überlebt das Adoptieren? |
-|---|---|---|
-| **Regelwerk** | Der Normtext. **Einzige** Quelle. | — vendored unter `.harness/baseline/<tag>/regelwerk/`, lebt außerhalb des Artefakts |
-| **Rumpf** | Nur, was das *fertige Artefakt* trägt: Feldnamen, Feldreihenfolge, `<Platzhalter>` — plus **genau ein** Regelwerk-Zeiger pro Pflicht-Sektion | ja |
-| **DoD / Checkliste** | Jede Pflicht, die der Ausfüllende **abhaken** muss. Das ist die Prozedur | ja |
-| **Kommentar** | Begründung und Bedienhinweis | nein |
+| Schicht              | Inhalt                                                                                                                                       | Überlebt das Adoptieren?                                                            |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Regelwerk**        | Der Normtext. **Einzige** Quelle.                                                                                                            | — vendored unter `.harness/baseline/<tag>/regelwerk/`, lebt außerhalb des Artefakts |
+| **Rumpf**            | Nur, was das *fertige Artefakt* trägt: Feldnamen, Feldreihenfolge, `<Platzhalter>` — plus **genau ein** Regelwerk-Zeiger pro Pflicht-Sektion | ja                                                                                  |
+| **DoD / Checkliste** | Jede Pflicht, die der Ausfüllende **abhaken** muss. Das ist die Prozedur                                                                     | ja                                                                                  |
+| **Kommentar**        | Begründung und Bedienhinweis                                                                                                                 | nein                                                                                |
 
 - **Test für den Rumpf:** Liest sich das im veröffentlichten Artefakt als
   *Inhalt* — oder als *Anleitung an jemanden*? Anleitung gehört nie in den
@@ -227,11 +227,11 @@ den Adaptions-Block des repo-lokalen Konventionsdokuments (Default-Pfad
 In reiferen Repos zerfällt `spec/` selbst in mehrere Tiefen mit eigener
 Precedence:
 
-| Datei | Charakter | Änderungs-Prozess |
-|---|---|---|
-| `spec/lastenheft.md` | **vertraglich abnahmebindend** (`LH-*` / `HSM-*`-IDs) | Change Request |
+| Datei                   | Charakter                                                                     | Änderungs-Prozess     |
+| ----------------------- | ----------------------------------------------------------------------------- | --------------------- |
+| `spec/lastenheft.md`    | **vertraglich abnahmebindend** (`LH-*` / `HSM-*`-IDs)                         | Change Request        |
 | `spec/spezifikation.md` | **technisch verbindlich, fortschreibbar** (Algorithmen, Defaults, Protokolle) | ADR-Schärfung erlaubt |
-| `spec/architecture.md` | Diagramme, Komponentensicht, **keine eigenen Anforderungen** | Diagramm-Update |
+| `spec/architecture.md`  | Diagramme, Komponentensicht, **keine eigenen Anforderungen**                  | Diagramm-Update       |
 
 ```mermaid
 flowchart TD
@@ -253,8 +253,7 @@ flowchart TD
     style AR fill:#dceaff,stroke:#3366cc
 ```
 
-Drei Schichten, drei Änderungs-Prozesse. Die kritische Hard Rule
-(Beispiel `c-hsm-doc`):
+Drei Schichten, drei Änderungs-Prozesse. Die kritische Hard Rule:
 **ADRs DÜRFEN die Spezifikation schärfen, DÜRFEN NICHT das Lastenheft
 schärfen.** Diese eine Regel kapselt die gesamte Trennung von
 "wir liefern" und "wir versprechen".
@@ -310,13 +309,13 @@ damit wird die Regel lehr- und prüfbar.
 > fix `lastenheft.md` ist — regelt [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument)
 > unten.
 
-| Dokument ↓ referenziert → | Lastenheft | ADR | Slice | Carveout | Roadmap/Welle |
-|---|---|---|---|---|---|
-| **Lastenheft** | Normativ: nur intra-`LH-*` | ❌ | ❌ | ❌ | ❌ |
-| **ADR** | Normativ: `LH-*`-Grundlage | Normativ/Lineage: aktive ADRs als Grundlage; superseded nur ADR-interne Historie | Kontext: Status-Provenance, Verifikations-Zeiger — *keine* Entscheidungsgrundlage | ❌ | ❌ |
-| **Slice** | Normativ: `LH-*`-Scope | Normativ: nur aktive ADRs | Kontext: triggered-by, blocked-by, follow-up-of | Kontext: eigener/offener Carveout, Debt-/Closure-Rückverweis | Kontext: Einordnung in Welle/Roadmap |
-| **Carveout** | Normativ: betroffene `LH-*` | Normativ: betroffene aktive ADRs | Kontext/Traceability: owner/verursachender/schließender Slice | Kontext: ersetzt/zusammengeführt/abhängig | Kontext: Welle/Planungseinordnung |
-| **Roadmap/Welle** | Kontext: Zielbild/Scope | Kontext: Architekturhintergrund | Kontext: Orchestrierung/Sequenz | Kontext: Risiko-/Debt-Übersicht | Kontext: Hierarchie/Sequenz |
+| Dokument ↓ referenziert → | Lastenheft                  | ADR                                                                              | Slice                                                                             | Carveout                                                     | Roadmap/Welle                        |
+| ------------------------- | --------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------ |
+| **Lastenheft**            | Normativ: nur intra-`LH-*`  | ❌                                                                                | ❌                                                                                 | ❌                                                            | ❌                                    |
+| **ADR**                   | Normativ: `LH-*`-Grundlage  | Normativ/Lineage: aktive ADRs als Grundlage; superseded nur ADR-interne Historie | Kontext: Status-Provenance, Verifikations-Zeiger — *keine* Entscheidungsgrundlage | ❌                                                            | ❌                                    |
+| **Slice**                 | Normativ: `LH-*`-Scope      | Normativ: nur aktive ADRs                                                        | Kontext: triggered-by, blocked-by, follow-up-of                                   | Kontext: eigener/offener Carveout, Debt-/Closure-Rückverweis | Kontext: Einordnung in Welle/Roadmap |
+| **Carveout**              | Normativ: betroffene `LH-*` | Normativ: betroffene aktive ADRs                                                 | Kontext/Traceability: owner/verursachender/schließender Slice                     | Kontext: ersetzt/zusammengeführt/abhängig                    | Kontext: Welle/Planungseinordnung    |
+| **Roadmap/Welle**         | Kontext: Zielbild/Scope     | Kontext: Architekturhintergrund                                                  | Kontext: Orchestrierung/Sequenz                                                   | Kontext: Risiko-/Debt-Übersicht                              | Kontext: Hierarchie/Sequenz          |
 
 ```mermaid
 flowchart BT
@@ -364,9 +363,9 @@ Spec-§). Das ist die ganze Theorie in einem Bild.
 Die Diagonalzellen ADR→ADR und Carveout→Carveout sehen identisch aus
 (supersede / depends-on / merged), tragen aber entgegengesetzte Kraft:
 
-| | Form | Normativ? | Warum |
-|---|---|:---:|---|
-| ADR→ADR | Supersedes, Depends-on | **ja** (Lineage) | ADRs sind *Entscheidungen* → tragen Autorität |
+|                   | Form                     |     Normativ?      | Warum                                            |
+| ----------------- | ------------------------ | :----------------: | ------------------------------------------------ |
+| ADR→ADR           | Supersedes, Depends-on   |  **ja** (Lineage)  | ADRs sind *Entscheidungen* → tragen Autorität    |
 | Carveout→Carveout | ersetzt, zusammengeführt | **nein** (Kontext) | Carveouts sind *Schuld* → tragen nur Buchführung |
 
 Die Matrix entscheidet damit nicht über *Linktypen*, sondern über
@@ -399,10 +398,8 @@ direkt zur Quelle. Der
 Wird eine Ziel-Überschrift umbenannt, rottet der Aufwärts-Link *still* — die
 gleiche Rot-Klasse, die wir abwärts verboten haben, nur unbewacht. Die
 mechanisch erzwungene Reifestufe löst Links auf, prüft Anker-Existenz und
-erzwingt die volle Matrix am Zielknoten; Referenz-Implementierung ist
-`tools/check_refs.py` aus dem u-boot-Harness (gleiche Build-Familie). <!-- d-check:ignore (Datei liegt im u-boot-Repo) --> Das Lab
-bleibt bewusst bei der grep-Variante, um die mechanische Hälfte minimal und
-lesbar zu halten.
+erzwingt die volle Matrix am Zielknoten. Das Lab bleibt bewusst bei der
+grep-Variante, um die mechanische Hälfte minimal und lesbar zu halten.
 
 *Agentischer Review-Sensor (nicht grep-bar).* Ob eine ADR→Slice-Referenz
 ein erlaubter *Verifikations-Zeiger/Provenance* oder eine verbotene
@@ -426,19 +423,18 @@ auf **Stratum-Klassen** (Rolle), nicht auf Dateinamen. Jedes Spec-Dokument
 fällt über zwei Achsen — *normativer Gehalt* und *Änderungs-Prozess* — in
 genau ein Stratum:
 
-| Stratum | Normativer Gehalt | Änderungs-Prozess | Lab | typisch auch |
-|---|---|---|---|---|
-| **Vertrag** (Decke) | eigene Anforderungen, abnahmebindend | Change Request | `lastenheft.md` | `compliance.md`, `sla.md` |
-| **Technik** | eigene technische Festlegungen | fortschreibbar, ADR-Schärfung erlaubt | `spezifikation.md` | `api-spec.md`, `data-model.md` |
-| **Sicht** | *keine* eigenen Anforderungen, derivativ | Diagramm-/View-Update | `architecture.md` | `deployment.md`, Sequenz-Views |
+| Stratum             | Normativer Gehalt                        | Änderungs-Prozess                     | Lab                | typisch auch                   |
+| ------------------- | ---------------------------------------- | ------------------------------------- | ------------------ | ------------------------------ |
+| **Vertrag** (Decke) | eigene Anforderungen, abnahmebindend     | Change Request                        | `lastenheft.md`    | `compliance.md`, `sla.md`      |
+| **Technik**         | eigene technische Festlegungen           | fortschreibbar, ADR-Schärfung erlaubt | `spezifikation.md` | `api-spec.md`, `data-model.md` |
+| **Sicht**           | *keine* eigenen Anforderungen, derivativ | Diagramm-/View-Update                 | `architecture.md`  | `deployment.md`, Sequenz-Views |
 
 **Nur Vertrag und Sicht sind obligatorisch; das Technik-Stratum ist
 optional.** Repos, die ihre technischen Festlegungen direkt in Vertrag
-oder Sicht falten, enforcen real nur zwei Klassen — das u-boot-Harness
-etwa klassifiziert ausschließlich `contract_spec` (`lastenheft.md`) und
-`view_spec` (`architecture.md`), ohne separates Technik-Stratum. Die Rang-
-*Ordnung* bleibt dieselbe; ein nicht vorhandenes Stratum fällt einfach aus
-der Kette.
+oder Sicht falten, enforcen real nur zwei Klassen — etwa ausschließlich
+`contract_spec` (`lastenheft.md`) und `view_spec` (`architecture.md`), ohne
+separates Technik-Stratum. Die Rang-*Ordnung* bleibt dieselbe; ein nicht
+vorhandenes Stratum fällt einfach aus der Kette.
 
 Generalisierter Rang: **Vertrag › Technik › Sicht › ADR › Slice** —
 deckungsgleich mit „Lastenheft sticht Spezifikation sticht Architektur"
@@ -474,11 +470,11 @@ baut.
 Reference-Regeln je Stratum — verfeinert die „Lastenheft"-Zeile der
 Hauptmatrix in drei Zeilen:
 
-| Doc ↓ ref → | Vertrag | Technik | Sicht | ADR |
-|---|---|---|---|---|
-| **Vertrag** | intra (Peers) | ❌ | ❌ | ❌ ¹ |
-| **Technik** | Normativ: präzisiert Vertrag, Vertrag gewinnt | intra (Peers) | ❌ | ❌ ¹ |
-| **Sicht** | Normativ: Use-Case ↔ Vertrags-ID | Normativ: visualisiert | intra (Peers) | ❌ ¹ |
+| Doc ↓ ref → | Vertrag                                       | Technik                | Sicht         | ADR |
+| ----------- | --------------------------------------------- | ---------------------- | ------------- | --- |
+| **Vertrag** | intra (Peers)                                 | ❌                      | ❌             | ❌ ¹ |
+| **Technik** | Normativ: präzisiert Vertrag, Vertrag gewinnt | intra (Peers)          | ❌             | ❌ ¹ |
+| **Sicht**   | Normativ: Use-Case ↔ Vertrags-ID              | Normativ: visualisiert | intra (Peers) | ❌ ¹ |
 
 ¹ Spec → ADR existiert im bindenden Text nicht — auch nicht als Quellen-
 Spalte. Die aufwärts zeigende ADR trägt alles (ADR → `LH-*` bzw. ADR →
@@ -570,15 +566,15 @@ nach Projektgröße, Adaptions-Frequenz, Audit-Tiefe.
 
 Pflichtgliederung (Default-Form als Einzeldatei):
 
-| Abschnitt | Inhalt |
-|---|---|
-| Purpose | was die Datei trägt, was nicht |
-| Baseline | welche Konvention adoptiert, mit Stand/Version |
-| Adoptierte Konventions-Quellen | Pointer extern (Kurs/Standard) und in-Repo (Templates) |
-| Adaptions-Block | ADR-artige Liste der Abweichungen ggü. Baseline (`MR-<NNN>` mit Datum, Geltungsbereich, Adaption, Begründung, Auflösungs-Trigger oder "permanent"). Löst ein Eintrag einen früheren **ab**, nennt er zusätzlich *Löst auf* und *Ausgelöst durch Baseline-Stand*; *schärft* er ihn nur (der alte gilt weiter, die Regel wird **strenger**), steht das im Titel — `(schärft MR-<NNN>)`. Verliert ein Eintrag durch die Baseline dagegen einen *Teil seines Geltungsbereichs*, ist das eine **Ablösung** mit engerem Nachfolger, keine Schärfung. Einträge werden nie überschrieben. |
-| Zusatzklassen-Deklaration für Sensors-Bindung | repo-spezifische Bindung-Klassen jenseits der vier kanonischen (`LH-…`, Compliance, Modell-Version) |
-| Modus-Deklaration pro Sub-Area | Greenfield · Brownfield (mit Konvergenz-Auftrag) · Hybrid |
-| Glossar (optional) | repo-spezifische Begriffe, die nicht im Regelwerk-Glossar stehen |
+| Abschnitt                                     | Inhalt                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Purpose                                       | was die Datei trägt, was nicht                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Baseline                                      | welche Konvention adoptiert, mit Stand/Version                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Adoptierte Konventions-Quellen                | Pointer extern (Kurs/Standard) und in-Repo (Templates)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Adaptions-Block                               | ADR-artige Liste der Abweichungen ggü. Baseline (`MR-<NNN>` mit Datum, Geltungsbereich, Adaption, Begründung, Auflösungs-Trigger oder "permanent"). Löst ein Eintrag einen früheren **ab**, nennt er zusätzlich *Löst auf* und *Ausgelöst durch Baseline-Stand*; *schärft* er ihn nur (der alte gilt weiter, die Regel wird **strenger**), steht das im Titel — `(schärft MR-<NNN>)`. Verliert ein Eintrag durch die Baseline dagegen einen *Teil seines Geltungsbereichs*, ist das eine **Ablösung** mit engerem Nachfolger, keine Schärfung. Einträge werden nie überschrieben. |
+| Zusatzklassen-Deklaration für Sensors-Bindung | repo-spezifische Bindung-Klassen jenseits der vier kanonischen (`LH-…`, Compliance, Modell-Version)                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Modus-Deklaration pro Sub-Area                | Greenfield · Brownfield (mit Konvergenz-Auftrag) · Hybrid                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Glossar (optional)                            | repo-spezifische Begriffe, die nicht im Regelwerk-Glossar stehen                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 Wichtig: `harness/conventions.md` dupliziert keinen Baseline-Text — sie
 verweist und ergänzt. Eine Kopie ginge gegen die Baseline in Drift,
@@ -619,11 +615,11 @@ die **typischen Träger** — sie nennen, *welche Strukturen* eine Sub-Area
 sein können. Ob eine konkrete Struktur als Sub-Area **qualifiziert**,
 entscheiden drei Inklusions-Achsen (bottom-up):
 
-| Achse | Test | erfüllt, wenn … |
-|---|---|---|
-| **1 — Konventions-Härte** | Ist eine eigene `MR-NNN`-Adaption plausibel formulierbar? | … die Sektion eine eigene Strukturregel tragen *könnte* (nicht: schon trägt). |
-| **2 — Inventur-Linie** | Ist eine eigene Diskrepanz-Bericht-Zeile sinnvoll? | … Code-Bestand und Doku-Aussage dieser Sektion als Paar abgleichbar sind, ohne dass eine Nachbar-Sub-Area mitgezogen werden muss. |
-| **3 — Struktureller Cluster** | Gibt es eine eigene Pfad-/Datei-Familie? | … ein eigenes Verzeichnis, Dateimuster oder Konventions-Präfix die Sektion trägt. |
+| Achse                         | Test                                                      | erfüllt, wenn …                                                                                                                   |
+| ----------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **1 — Konventions-Härte**     | Ist eine eigene `MR-NNN`-Adaption plausibel formulierbar? | … die Sektion eine eigene Strukturregel tragen *könnte* (nicht: schon trägt).                                                     |
+| **2 — Inventur-Linie**        | Ist eine eigene Diskrepanz-Bericht-Zeile sinnvoll?        | … Code-Bestand und Doku-Aussage dieser Sektion als Paar abgleichbar sind, ohne dass eine Nachbar-Sub-Area mitgezogen werden muss. |
+| **3 — Struktureller Cluster** | Gibt es eine eigene Pfad-/Datei-Familie?                  | … ein eigenes Verzeichnis, Dateimuster oder Konventions-Präfix die Sektion trägt.                                                 |
 
 **Schwelle: mindestens zwei der drei Achsen.** Eine Achse allein ist zu
 schwach — der typische Fall ist *Struktur ohne Substanz*: ein Verzeichnis
@@ -718,11 +714,11 @@ Pro Sub-Area eines Repos (Modul, Verzeichnis, Komponente) wird ein
 `harness/conventions.md`). Die Modus-Wahl bestimmt die
 *Trigger-Richtung* — wer wem folgt:
 
-| Modus | Trigger-Richtung | Bild im Kopf |
-|---|---|---|
-| **Greenfield** (GF) | Doc → Code | Spec führt, Code folgt. "Wir versprechen X, dann liefern wir X." Steady-State. |
-| **Brownfield** (BF) | Code → Doc | Code existiert, Doku folgt. Inventur des Bestands. **Übergangs-Modus mit Konvergenz-Auftrag** zu GF. |
-| **Hybrid** | gemischt pro Sub-Sub-Area | Realistisch: alte Komponenten BF, neue GF. |
+| Modus               | Trigger-Richtung          | Bild im Kopf                                                                                         |
+| ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Greenfield** (GF) | Doc → Code                | Spec führt, Code folgt. "Wir versprechen X, dann liefern wir X." Steady-State.                       |
+| **Brownfield** (BF) | Code → Doc                | Code existiert, Doku folgt. Inventur des Bestands. **Übergangs-Modus mit Konvergenz-Auftrag** zu GF. |
+| **Hybrid**          | gemischt pro Sub-Sub-Area | Realistisch: alte Komponenten BF, neue GF.                                                           |
 
 **Konvergenz-Auftrag.** BF ist *keine Daueroption*. Jede BF-Sub-Area
 trägt eine **Graduation-Bedingung** (im Adaptions-Block dokumentiert):
@@ -743,14 +739,14 @@ Ein Harness-Dokument ist während Bootstrap nicht "entweder leer oder
 fertig". Sektionen reifen mit unterschiedlichem Tempo durch fünf
 Phasen:
 
-| Phase | Beschreibung |
-|---|---|
-| 0 — leer | Datei existiert nicht |
-| 1 — Skelett | Template kopiert, Pflichtgliederung mit Platzhaltern |
-| 2 — Outline | Top-Level ausformuliert, Details `<…>` |
-| 3 — partiell | einige Sektionen voll, andere noch `<…>` |
+| Phase        | Beschreibung                                                                     |
+| ------------ | -------------------------------------------------------------------------------- |
+| 0 — leer     | Datei existiert nicht                                                            |
+| 1 — Skelett  | Template kopiert, Pflichtgliederung mit Platzhaltern                             |
+| 2 — Outline  | Top-Level ausformuliert, Details `<…>`                                           |
+| 3 — partiell | einige Sektionen voll, andere noch `<…>`                                         |
 | 4 — kohärent | alle Sektionen gefüllt, intern konsistent — *freigegeben* für Verweise von außen |
-| 5 — stabil | Änderungen nur über Change-Process |
+| 5 — stabil   | Änderungen nur über Change-Process                                               |
 
 *Sektionen* eines Dokuments können in unterschiedlichen Phasen sein.
 Beispiel: §Source precedence von `harness/README.md` kann durch
@@ -764,12 +760,12 @@ dateiweise.
 Während Bootstrap (und auch danach im Steering-Loop) lösen Änderungen
 in einem Dokument *Folgeaktionen* in anderen aus. Vier Klassen:
 
-| Klasse | Wirkung | Beispiel |
-|---|---|---|
-| **Sync-Trigger** | Pointer in einem Dokument muss in einem anderen ergänzt werden | Neuer Eintrag in `conventions.md` → Pointer in `harness/README.md` |
-| **Promotion-Trigger** | Eintrag wandert aus "Nicht behauptet"-Block in Haupt-Tabelle | Make-Target real im Makefile entstanden → Sensor-Zeile gepromoted |
-| **Cross-Reference-Trigger** | Verlinkung zwischen Dokumenten, normativ **nur volatil→stabil** ([§Referenz-Richtung](#referenz-richtung-sdp-wer-darf-wen-referenzieren)) | Neue ADR *deklariert aufwärts, was sie schärft* (ADR → Spec-§) und referenziert die Anforderung; der Acceptance-Trigger zieht die Spec nach. Ein Spec→ADR-Rückzeiger im bindenden Text existiert nicht (auch nicht als Quellen-Spalte) — Provenance nur in der Historie-Tabelle (Regel 5); `check-references` erzwingt das über alle Straten |
-| **Acceptance-Trigger** | Phase-Übergang via Sign-off (z. B. ADR Proposed → Accepted) | ADR-Review-Runde abgeschlossen → bindend |
+| Klasse                      | Wirkung                                                                                                                        | Beispiel                                                                                                                                                                                                                                                                                                                                     |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Sync-Trigger**            | Pointer in einem Dokument muss in einem anderen ergänzt werden                                                                 | Neuer Eintrag in `conventions.md` → Pointer in `harness/README.md`                                                                                                                                                                                                                                                                           |
+| **Promotion-Trigger**       | Eintrag wandert aus "Nicht behauptet"-Block in Haupt-Tabelle                                                                   | Make-Target real im Makefile entstanden → Sensor-Zeile gepromoted                                                                                                                                                                                                                                                                            |
+| **Cross-Reference-Trigger** | Verlinkung zwischen Dokumenten, normativ **nur volatil→stabil** ([#ERROR!](#referenz-richtung-sdp-wer-darf-wen-referenzieren)) | Neue ADR *deklariert aufwärts, was sie schärft* (ADR → Spec-§) und referenziert die Anforderung; der Acceptance-Trigger zieht die Spec nach. Ein Spec→ADR-Rückzeiger im bindenden Text existiert nicht (auch nicht als Quellen-Spalte) — Provenance nur in der Historie-Tabelle (Regel 5); `check-references` erzwingt das über alle Straten |
+| **Acceptance-Trigger**      | Phase-Übergang via Sign-off (z. B. ADR Proposed → Accepted)                                                                    | ADR-Review-Runde abgeschlossen → bindend                                                                                                                                                                                                                                                                                                     |
 
 Trigger werden zwischen Bootstrap-Schritten ausgewertet — sie sind die
 "Inbox" der nicht-Vorderscene-Arbeit. Eine zwischen Schritten

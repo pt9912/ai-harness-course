@@ -67,24 +67,28 @@ gelesen.
 
 Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 *Falsch/Richtig*-Beispiele **und** eine *technische Begründung*.
-Beispiele aus realen Repos:
+Bewährte Muster:
 
-* **Docker-only** (grid-gym): kein lokales `.venv`, kein `pip install` außerhalb von Dockerfile-Stages.
+* **Docker-only**: kein lokales `.venv`, kein `pip install` außerhalb von Dockerfile-Stages.
   *Falsch:* `uv run python tools/foo.py`.
   *Richtig:* `docker compose run --rm test-runner uv run python tools/foo.py`.
   *Begründung:* Toolchain-Reproduzierbarkeit + Supply-Chain-Defense.
-* **`# noqa` ist verboten** (grid-gym): bricht das `noqa-gate` in `make gates`. Ausnahmen werden in `pyproject.toml` mit Begründung dokumentiert.
+* **`# noqa` ist verboten**: bricht das `noqa-gate` in `make gates`. Ausnahmen werden in `pyproject.toml` mit Begründung dokumentiert.
 * **Suppression-Verbot pro Sprache** — derselbe Mechanismus, andere Syntax:
-  * Python: `# noqa` (grid-gym `noqa-gate`)
+  * Python: `# noqa`
   * Go: `//nolint`
-  * C#: `#pragma warning disable`, `[SuppressMessage]` (bess-ems `solid-suppression-gate`)
+  * C#: `#pragma warning disable`, `[SuppressMessage]` — ein
+    Suppression-Gate der C#-Welt muss beide Formen erfassen
   * Kotlin: `@Suppress("...")`
   * Java: `@SuppressWarnings("...")`
   In jeder Sprache gilt: Inline-Suppression bricht das Suppression-Gate; Ausnahmen wandern in eine zentrale Konfigurations-Datei mit Begründung.
-* **git mv + Inhaltsänderung = zwei Commits** (grid-gym): Move und Inhalt nie im selben Commit — der Move-Commit bleibt rein (Git erkennt R-Rename). Welcher der beiden zuerst kommt, sagt der Vorgang: im Regelfall der Move, dann der Inhalt; beim Lifecycle-Übergang nach `done/` umgekehrt, weil `done/` „Closure-Notiz vorhanden" bedeutet und die Notiz deshalb im Commit davor steht ([Modul 5 §Lifecycle als State Machine](modul-05-planning-harness.md#lifecycle-als-state-machine)).
+* **git mv + Inhaltsänderung = zwei Commits**: Move und Inhalt nie im selben Commit — der Move-Commit bleibt rein (Git erkennt R-Rename). Welcher der beiden zuerst kommt, sagt der Vorgang: im Regelfall der Move, dann der Inhalt; beim Lifecycle-Übergang nach `done/` umgekehrt, weil `done/` „Closure-Notiz vorhanden" bedeutet und die Notiz deshalb im Commit davor steht ([Modul 5 §Lifecycle als State Machine](modul-05-planning-harness.md#lifecycle-als-state-machine)).
   *Begründung:* Sonst fällt die Rename-Detection unter die 50 %-Similarity-Schwelle und `git log --follow` wird unzuverlässig.
-* **Architektur ist sprach- und meilensteinfrei** (grid-gym, c-hsm-doc): `spec/architecture.md` referenziert ADRs und Modul-Pfade, aber keine Wellen, Slices oder Closure-Daten. Die zeitliche Schicht lebt in `docs/plan/planning/`.
-* **Optimierer darf nie direkt aufs Gerät schreiben** (bess-ems-Klasse): Output fließt durch Statemachine, Constraint-Limiter, Ramp-Limiter.
+* **Architektur ist sprach- und meilensteinfrei**: `spec/architecture.md` referenziert ADRs und Modul-Pfade, aber keine Wellen, Slices oder Closure-Daten. Die zeitliche Schicht lebt in `docs/plan/planning/`.
+* **Domänen-Beispiel (Regelungstechnik): Optimierer darf nie direkt aufs
+  Gerät schreiben** — Output fließt durch Statemachine, Constraint-Limiter,
+  Ramp-Limiter. Steht hier als Muster: Die härtesten Hard Rules einer Domäne
+  kommen aus ihrer Fehlerkultur, nicht aus einem Standard-Satz.
 * **Gates dürfen nicht ohne ADR gelockert werden**: jede Schwellen-Senkung ist ein ADR, kein PR-Kommentar.
 
 Hard Rules sind *computational + inferential feedforward* zugleich: sie

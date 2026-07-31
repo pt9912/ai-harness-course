@@ -1,7 +1,7 @@
 # Architektur — <Projektname>
 
 > **Template-Hinweis.** Diese Datei ist eine Vorlage. Sie ist
-> **sprach- und meilensteinfrei** (siehe Hard Rule aus grid-gym in
+> **sprach- und meilensteinfrei** (siehe Hard Rule in
 > [Baseline-Regelwerk Modul 9](../../regelwerk/modul-09-implementierung.md)).
 > Kopiere sie nach `spec/architecture.md`, ersetze `<Platzhalter>` und
 > lösche diesen Block.

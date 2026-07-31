@@ -102,8 +102,8 @@ Beide Begriffe teilen das Wort, sind strukturell verschieden.
 
 ### Reichhaltige Gate-Landschaft als Inspiration
 
-Ein reifes Repo (Beispiel `pt9912/grid-gym`) hat
-deutlich mehr als sechs Gates:
+Ein reifes Repo hat deutlich mehr als sechs Gates. Eine real gewachsene
+Landschaft (Python/Docker, Simulations-Domäne) sieht etwa so aus:
 
 ```
 lint · format-check · typecheck
@@ -120,9 +120,10 @@ Pointe: Domänenspezifische Gates (`test-determinism`, `test-replay`,
 Standard-Setup. Wenn dein Repo nur die generischen sechs hat, weißt du
 nur, dass du noch keine Schmerzen hattest.
 
-Ein zweites Beispiel in einer anderen Sprach-Welt: `pt9912/bess-ems`
-(C#/.NET, Safety/Control) bringt Gate-Familien mit, die `grid-gym`
-nicht hat — `solid-suppression-gate` (C#-Pendant zum noqa-gate),
+In einer anderen Sprach-Welt wächst eine andere Landschaft: Ein Repo aus
+C#/.NET mit Safety-/Control-Anteil bringt Gate-Familien mit, die im
+Python-Beispiel oben gar nicht vorkommen — `solid-suppression-gate`
+(C#-Pendant zum noqa-gate),
 `test-mpc-property` (Property-Based-Sensor für Regelungstechnik),
 `native-sanitizer` (für C/C++-Interop-Anteile), `test-hil-*`
 (Hardware-in-the-Loop).

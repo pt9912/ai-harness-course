@@ -115,6 +115,17 @@ entstanden, nicht aus einem Review-Lauf.
   Die Korrelation trägt `slice.id` — Pflichtfeld jedes Spans; Läufe als je
   eigene Traces leisten dasselbe, und ein Slice läuft Tage. In der Quelle als
   Modellwahl benannt, im Split gestrichen.
+- **Fremdprojekt-Namen im Bundle waren tote Zeiger.** Welle 35 hatte die
+  Links auf `fallstudien.md` entfernt und die Namen stehen lassen — ein
+  Adoptierender las *„Hard Rule (Beispiel aus c-hsm-doc, ADR 0001)"* und
+  konnte es nicht auflösen. 16 Stellen in `regelwerk/` und `templates/`
+  bereinigt; die Regeln tragen sich jetzt selbst. Zwei brauchten mehr als das
+  Streichen der Klammer: `grundlagen-konventionen.md` verwies auf eine Datei
+  **im fremden Repo** und schaltete dafür das eigene Gate stumm
+  (`d-check:ignore`) — Verweis und Suppression sind weg; und die
+  Optimierer-Regel aus Modul 9 ist als **Domänen-Beispiel** ausgewiesen, weil
+  sie ohne den Marker wie eine universelle Regel las. Die Quelle behält ihre
+  Fallstudien: dort reist `fallstudien.md` mit.
 
 ## Welle 60 — 2026-07-29 · E-2 vollzogen, „berührt" definiert, die Zeitachse des Vorbilds geradegezogen
 

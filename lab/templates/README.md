@@ -156,7 +156,8 @@ Verlinkung). Innerhalb der Abschnitte hast du Freiraum — was am
 besten zu deinem Projekt passt. Pflicht-Strukturen sind:
 
 - ID-Schema (z.B. `LH-*`) konsistent durchziehen.
-- ADRs nach Accepted nicht überschreiben (Hard Rule aus c-hsm-doc).
+- ADRs nach Accepted nicht überschreiben; Schärfung als Folge-ADR mit
+  `Supersedes` (Hard Rule, Baseline-Regelwerk `modul-04-architektur-adrs.md`).
 - Carveouts brauchen immer Trigger + Folge-Slice.
 - Slices brauchen DoD mit prüfbaren Kriterien.
 - §8 in `slice.template.md` steht in **jedem** Slice-Plan: Die beiden

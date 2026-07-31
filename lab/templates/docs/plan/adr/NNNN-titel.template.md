@@ -22,9 +22,9 @@ Spec-Stellen nach. `—` eintragen, wenn Prozess-ADR ohne Spec-Stratum.
 > **IDs als Markdown-Link** (klickbar zur Quelle, Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
 > Der `<anker>` ist der GitHub-Heading-Slug der Ziel-Überschrift. Der
 > `check-references`-Gate prüft heute nur Token-Richtung, **nicht** die
-> Anker-Auflösung — ein umbenannter Abschnitt rottet den Link still; die
-> Anker-validierende Reifestufe ist `tools/check_refs.py` aus dem
-> u-boot-Harness.
+> Anker-Auflösung — ein umbenannter Abschnitt rottet den Link still. Die
+> anker-validierende Reifestufe löst Links auf und prüft die Anker-Existenz
+> am Zielknoten.
 
 ---
 
@@ -101,7 +101,7 @@ Wann sollte diese Entscheidung erneut geprüft werden?
 | YYYY-MM-DD | Accepted | <PR-Link> |
 
 <!--
-Nach Accepted: NICHT mehr inhaltlich überschreiben (Hard Rule aus
-c-hsm-doc, siehe Baseline-Regelwerk `modul-04-architektur-adrs.md`). Spätere Schärfungen als neue ADR mit
+Nach Accepted: NICHT mehr inhaltlich überschreiben (Hard Rule, siehe
+Baseline-Regelwerk `modul-04-architektur-adrs.md`). Spätere Schärfungen als neue ADR mit
 "Supersedes ADR-NNNN" anlegen.
 -->
