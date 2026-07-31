@@ -169,6 +169,16 @@ entstanden, nicht aus einem Review-Lauf.
   Die Korrelation trägt `slice.id` — Pflichtfeld jedes Spans; Läufe als je
   eigene Traces leisten dasselbe, und ein Slice läuft Tage. In der Quelle als
   Modellwahl benannt, im Split gestrichen.
+- **Die Ein-Satz-Definition der Referenz-Richtung ließ zwei Straten aus.** Die
+  Kette stand im selben Dokument dreimal verschieden: Glossar
+  `` `lastenheft.md` › ADR › Slice `` · §Referenz-Richtung
+  `Vertrag › ADR › Slice` mit Nachsatz · §Spec-Straten
+  `Vertrag › Technik › Sicht › ADR › Slice`. Die meistgelesene war die
+  schwächste — und sie nannte einen **Dateinamen**, obwohl dasselbe Dokument
+  zwei Seiten später schreibt: *„Die Matrix-Zeilen sind Stratum-Klassen, nicht
+  Dateinamen."* Wer nur dort nachschlug, für den kamen `spezifikation.md` und
+  `architecture.md` im Rang gar nicht vor. Glossar trägt jetzt die volle Kette
+  als Klassen.
 - **Die ADR-Spalte der Spezifikations-Historie steht auf zwei Gründen, nicht
   auf einem.** Zwischenzeitlich war sie mit „die ADR ist der legitime Urheber"
   begründet — ein Kausal-Argument, wo ein Referenz-Argument hingehört, und
