@@ -120,10 +120,16 @@ Drei Regeln, alle aus der Straten-Ordnung
   technischen Festlegungen direkt ins Lastenheft falten, haben kein
   Technik-Stratum — die Rangordnung bleibt dieselbe, das Stratum fällt aus der
   Kette.
-* **Das Lastenheft darüber ist die Decke.** Es referenziert normativ nur
-  innerhalb der eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts oder
-  Wellen. Wer eine Anforderung mit einer ADR begründet, hat die Entscheidung
-  zur Anforderung gemacht.
+* **Das Lastenheft darüber ist die Decke.** Es referenziert nur innerhalb der
+  eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts, Wellen, und auch nicht
+  `spezifikation.md` oder `architecture.md`. **In jedem Abschnitt, auch in der
+  Historie:** Für die übrigen Straten ist die Provenance-Sektion ausgenommen,
+  weil ihr Änderungs-Prozess einen Urheber im Repo hat — der Vertrag hat
+  keinen. Wer eine Anforderung mit einer ADR begründet, hat die Entscheidung
+  zur Anforderung gemacht; wer den auslösenden Slice in der Historie nennt,
+  tut dasselbe eine Zeile später. Der Anlass liegt am anderen Ende: Die ADR
+  deklariert ihre Wirkung aufwärts in `Schärft:`, der Slice in seiner
+  Closure-Notiz.
 * **Kein ADR-Rückzeiger als Begründung.** Die Spezifikation steht im
   Stabilitäts-Rang über der ADR (*Vertrag › Technik › Sicht › ADR › Slice*),
   und normativ zeigen Referenzen nur aufwärts

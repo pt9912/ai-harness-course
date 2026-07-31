@@ -169,6 +169,16 @@ entstanden, nicht aus einem Review-Lauf.
   Die Korrelation trägt `slice.id` — Pflichtfeld jedes Spans; Läufe als je
   eigene Traces leisten dasselbe, und ein Slice läuft Tage. In der Quelle als
   Modellwahl benannt, im Split gestrichen.
+- **Die Decken-Regel gilt jetzt ohne Schlupfloch.** Erst stand dort „normativ
+  referenziert es nur intra-`LH-*`" — das ließ die Historie offen, und genau
+  dorthin wandern in der Praxis Slice-, ADR- und Wellen-Verweise. Die
+  Vertrags-Zeile der Matrix trägt in jeder fremden Spalte ein ❌ **ohne**
+  Kontext-Ausnahme, anders als jede andere Zeile. Jetzt ausgeschrieben: Das
+  Lastenheft nennt kein anderes Artefakt, **in keinem Abschnitt, auch nicht in
+  der Historie**. Für die übrigen Straten bleibt die Provenance-Ausnahme, weil
+  ihr Änderungs-Prozess einen Urheber im Repo hat — der Vertrag hat keinen.
+  Der Anlass geht nicht verloren, er liegt am anderen Ende: `Schärft:` der ADR,
+  Closure-Notiz des Slice. Quelle, Spiegel und `lastenheft.template.md` §7.
 - **Alle drei Spec-Straten nennen jetzt ihre Referenz-Richtung.** Nach der
   Sicht (`V11-03`) fehlte sie auch bei Technik und Vertrag: Die Spezifikation
   trägt keinen ADR-Rückzeiger als Begründung — die ADR deklariert aufwärts in

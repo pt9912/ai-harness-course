@@ -43,11 +43,23 @@ im Given/When/Then-Stil — **Happy · Boundary · Negative** — plus einen
 genau · welche Felder · welcher Speicherort*), bevor die Pfade formuliert
 werden; das Negative (`darf nicht …`) spart die spätere Review.
 
-Das Lastenheft ist die **Decke** der Straten-Ordnung: Normativ referenziert es
-nur innerhalb der eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts oder
-Wellen ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
-Wer eine Anforderung mit einer ADR begründet, hat die Entscheidung zur
-Anforderung gemacht.
+Das Lastenheft ist die **Decke** der Straten-Ordnung: Es referenziert nur
+innerhalb der eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts, Wellen,
+und auch nicht `spezifikation.md` oder `architecture.md`
+([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren);
+die Vertrags-Zeile der Matrix trägt in jeder fremden Spalte ein ❌ **ohne**
+Kontext-Ausnahme, anders als jede andere Zeile).
+
+**Das gilt in jedem Abschnitt, auch in der Historie.** Für die übrigen Straten
+ist die Provenance-Sektion ausgenommen, weil ihr Änderungs-Prozess einen
+Urheber im Repo hat; der Vertrag hat keinen. Wer eine Anforderung mit einer
+ADR begründet, hat die Entscheidung zur Anforderung gemacht — und wer den
+auslösenden Slice in der Historie nennt, tut dasselbe eine Zeile später.
+
+Der Anlass geht damit nicht verloren, er liegt nur am richtigen Ende: Die ADR
+deklariert ihre Wirkung aufwärts in `Schärft:`, der Slice hält sie in seiner
+Closure-Notiz. Das Lastenheft sagt, **was** zugesagt ist — nicht, wer es
+bemerkt hat.
 
 ### Ziel-Form: Spezifikation
 

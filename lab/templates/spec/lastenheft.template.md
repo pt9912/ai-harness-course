@@ -119,6 +119,15 @@ plus eine Zeile hier, mit dem externen CR (Ticket/Vertragsanhang) unter
 „Verweis" (Baseline-Regelwerk `grundlagen-konventionen.md`
 §Spec-Stratifizierung).
 
+**Auch hier gilt die Decken-Regel:** keine ADR, kein Slice, kein Carveout,
+keine Welle, kein Verweis auf `spezifikation.md` oder `architecture.md` — in
+keiner Spalte. Anders als bei den übrigen Straten ist die Historie des
+Vertrags **nicht** von der Referenz-Richtung ausgenommen, weil sein
+Änderungs-Prozess außerhalb des Repos liegt. Was eine Änderung *auslöste*,
+steht am anderen Ende: in `Schärft:` der ADR oder in der Closure-Notiz des
+Slice (Baseline-Regelwerk `modul-03-lastenheft.md`
+§Ziel-Form: Akzeptanzkriterium).
+
 | Version | Datum | Änderung | Verweis |
 |---|---|---|---|
 | 0.1.0 | YYYY-MM-DD | Initiale Fassung | — |
