@@ -118,10 +118,26 @@ Beleg die Regel trug, der sie nicht tragen durfte.
 - **Provenance-Faden geschlossen bis auf die Norm-Ebene** — der
   [Roadmap-Eintrag](docs/roadmap.md) ist von „Entscheidung ausstehend" auf den
   Umsetzungsstand umgeschrieben.
-- **Das nächste Release ist MAJOR.** Zwei Layout-Brüche im vendored Bundle: die
-  Umbenennung von `modul-03-lastenheft.md`/`modul-04-architektur-adrs.md` und
-  das neue Verzeichnis `harness/conventions/`. Adoptierende finden beides unter
-  `.harness/baseline/<tag>/`.
+- **Das ausliefernde Release ist MAJOR** (`v4.0.0`) — Assets werden umbenannt,
+  siehe den Bruch-Block unten.
+
+**Bruch für Konsumenten:** (1) Die Regelwerk-Dateien `modul-03-lastenheft.md`
+und `modul-04-architektur-adrs.md` heißen jetzt `modul-03-spec.md` und
+`modul-04-adrs.md`. Die Vorlagen tragen ihre Namen als **Klartext**-Zeiger im
+Rumpf (*„Baseline-Regelwerk `modul-03-lastenheft.md` §Ziel-Form:
+Akzeptanzkriterium"*) — und der Rumpf überlebt das Adoptieren. Der Zeiger steht
+also in den *ausgefüllten* Artefakten und zeigt nach dem Upgrade ins Leere;
+**kein Gate fängt das**, weil es kein Link ist. Nacharbeit:
+`grep -rl 'modul-03-lastenheft\|modul-04-architektur-adrs'` über das eigene Repo,
+dann ersetzen. (2) `Ersetzt-Baseline-Regel` ist ein **neues Pflichtfeld** der
+`MR-<NNN>`-Einträge — nach [Modul 2](kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md)
+verlangen neue Pflichtfelder Nacharbeit am gefüllten Artefakt: je Eintrag die
+Baseline-Regel nachtragen, an deren Stelle er tritt (oder `—`; dann ist er keine
+Adaption, und der Eintrag gehört überprüft).
+
+**Kein Bruch** ist die neue Verzeichnis-Form des Adaptions-Blocks. Die Form
+bleibt **Wahl** — gekippt ist nur der Default der Vorlage; bestehende
+`conventions.md` mit inline geführten Einträgen bleiben gültig.
 
 ## Welle 61 — 2026-07-30 · Runde 11: die Wellen-Rollen-Sequenz, und zwei Gates, die nicht prüften
 
