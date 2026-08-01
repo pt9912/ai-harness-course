@@ -11,6 +11,118 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 62 — 2026-08-01 · Drei Straten sind Pflicht, die Matrix wird 8×8, und der Adaptions-Block verlässt den Lesepfad
+
+Eine Welle aus Nutzer-Fragen, nicht aus einem Review-Lauf. Jede Frage traf eine
+Stelle, an der eine Regel formuliert war, aber ihr Träger fehlte — oder wo ein
+Beleg die Regel trug, der sie nicht tragen durfte.
+
+### Entschieden
+
+- **Alle drei Spec-Straten sind obligatorisch.** Der Satz *„nur Vertrag und
+  Sicht sind obligatorisch"* begründete die Optionalität des Technik-Stratums
+  damit, dass Repos ihre technischen Festlegungen „in Vertrag oder Sicht
+  falten". Das verschiebt aber nicht Inhalt, sondern dessen
+  **Änderungs-Prozess**: Im Vertrag wären die Festlegungen abnahmebindend und
+  nur per Change Request änderbar, und keine ADR dürfte sie je schärfen. Ein
+  Repo *kann* mit zwei Straten fahren — dann ist das eine deklarierte
+  `MR-<NNN>`, nicht ein Weglassen. Der Bruch war ohnehin schon da: Modul 2
+  führte alle drei längst als Gründungs-Dokumente, Modul 1 zählte ein fehlendes
+  `spezifikation.md` als Lücke, die Templates lieferten neun Ränge — die
+  Konventionen-Liste war der Ausreißer.
+- **Fremd-Repos begründen keine Kursregel.** Der einzige Beleg für die
+  Optionalität war der Stand eines anderen Repos — und zwar ein *älterer*. Ein
+  Konsument, der hinterherhängt, ist ein Migrationsfall, kein Beleg. Der Grund
+  ist **Drift**: Fremd-Repos entwickeln sich weiter, jeder Verweis ist ein
+  Stand, keine laufende Quelle. Steht jetzt im Kopf von
+  [`fallstudien.md`](kurs/de/grundlagen/fallstudien.md), damit nicht jeder der
+  rund zwanzig Verweise einzeln qualifiziert werden muss.
+- **Die Decken-Regel gilt auch in der Historie — für alle drei Straten gleich.**
+  Zwei Fassungen standen im selben Dokument: Regel 5 nahm die Historie-Tabelle
+  aus, Modul 3 nahm sie nicht aus, und die zwei Spec-Templates hatten sich je
+  eine Seite ausgesucht. Entschieden wurde für die strenge Fassung, mit einer
+  Begründung, die vorher keine Seite führte: **Unreparierbarkeit.** Eine
+  Historie-Zeile ist ein Protokoll und wird nicht rückwirkend geändert — wird
+  die dort genannte ADR superseded, zeigt die Zeile dauerhaft auf eine
+  Entscheidung, die nicht mehr gilt, und kein Gate meldet es, solange die
+  Sektion ausgenommen ist. Im Körper ist derselbe Zeiger reparierbar. Für
+  rottende Verweise ist die Historie die *schlechteste* Stelle, nicht die
+  harmloseste. Regel 5 behält ihren Sinn für die Planungs-Ebene, wo die
+  Slice-ID ein stabiler Token bleibt.
+- **Eine Verweis-Spalte trägt nur, was sonst nirgends im Repo steht.** Damit
+  ist erklärt, warum der Vertrag eine hat (der externe CR hat kein anderes
+  Zuhause) und Technik und Sicht keine — ohne auf „der Vertrag ist besonders"
+  zurückzufallen. Beleg war das Beispiel-Repo: Für `MAX_TOPK` nannte die
+  Historie `LH-FA-02`, der Körper `LH-QA-01` — dieselbe Kopplung zweimal,
+  bereits auseinandergelaufen.
+- **Der Adaptions-Block verlässt den Pflicht-Lesepfad.** `harness/conventions.md`
+  liest jeder Agentenlauf. Im Beispiel-Repo waren das bei vier `MR` schon 82 von
+  178 Zeilen, davon 28 für eine Adaption, die *aufgelöst* ist — nicht nur
+  Kontext-Kosten, sondern ein Korrektheits-Risiko, weil ein aufgelöster Eintrag
+  sich wie ein geltender liest. Neu: Index in `conventions.md`, ein Eintrag je
+  Datei unter `harness/conventions/`, aufgelöste unter `conventions/done/`. Der
+  Zustand ist die Verzeichnis-Position, kein Status-Feld.
+
+### Geändert
+
+- **Referenz-Matrix von 7×7 auf 8×8** ([§Referenz-Richtung](kurs/de/grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+  Roadmap und Welle sind getrennt; die Reihenfolge folgt der Zeigerichtung
+  **Slice → Welle → Roadmap**. Getrennt wird sagbar, was zusammengefasst
+  unsichtbar blieb: Ein Slice nennt nie die Roadmap, und was von außen doch auf
+  sie zeigt, zeigt auf einen **Meilenstein**, nie auf die Planung selbst. Die
+  Zellen sind aus den Vorlagen belegt (`welle.template.md` führt Zielmeilenstein
+  und Slice-Liste, `slice.template.md` das `Welle:`-Feld). Die drei Diagramme
+  zeigen keine Selbstbezüge mehr — die Diagonale steht in der Matrix.
+- **Source Precedence auf neun Ränge**, `spec/spezifikation.md` als Rang 2.
+- **Modul 3 und 4 neu geschnitten** — `modul-03-spec.md` („Die Spec: Lastenheft,
+  Spezifikation, Architektur") und `modul-04-adrs.md`; die Architektur-Sicht
+  wandert von 4 nach 3. Damit ist **`Ü-09` erledigt**, der Befund aus Runde 11,
+  der wegen des vendored Bundle-Layouts auf das nächste brechende Release
+  vertagt war. Aufwandsangaben nachgezogen (105/75 statt 90/90 Min Lesen; die
+  Blocksumme bleibt bei 360 — verschoben, nicht gewachsen).
+- **`spec/` wird nicht mehr auf ein Stratum verkürzt.** Der Glossar-Eintrag
+  „Spec" definierte es als *Lastenheft-Artefakt*, die Verzeichniskonvention
+  nannte nur „Lastenhefte", die Konzeptkarte stellte die Architektur auf die
+  ADR-Seite, und das Lebenszyklus-Bild reduzierte `spec/` auf *(was?)*.
+- **`MR` benennt die Baseline-Regel, die sie ersetzt.** Die Fork-Grenze der Norm
+  hängt daran, dass eine Adaption *eine benannte Regel ersetzt* — ein Feld dafür
+  gab es nicht, die Norm musste auf das Freitextfeld `Adaption` verweisen.
+  Folge: uneinheitlich angewandt, ein Eintrag im Beispiel nannte gar keine.
+  Neu: Pflichtfeld `Ersetzt-Baseline-Regel`, als Link mit Abschnitts-Anker in
+  die vendored Fassung; ein Datei-Link benennt keine Regel.
+- **Der Adaptions-Block des Templates lieferte vier `MR` mit vier Rollen aus**,
+  markiert nur im HTML-Kommentar — den Schritt 5 des Adoptierens löscht.
+  `MR-001` war ein *Beispiel* (halb fertige Behauptung, halb Platzhalter),
+  `MR-003` gar keine Adaption („keine inhaltliche Abweichung vom
+  Baseline-Default") und inhaltlich doppelt. Übrig bleiben zwei Rollen ohne
+  Nummernlücke; der Beispieltext steckt jetzt *in* den Platzhaltern, wo er
+  Schritt 3 nicht überleben kann.
+
+### Lab
+
+- **Beispiel-Repo:** sechs verbotene Verweise aus den Spec-Historien entfernt
+  (`slice-001`, `slice-007`, dreimal `ADR-*`), die vier `LH-*`-Aufwärtsbezüge
+  blieben; `spezifikation.md` verliert die Verweis-Spalte. Die Adaptionen liegen
+  jetzt einzeln, `MR-001` unter `done/`.
+- **`check_references.py` prüft das ganze Dokument.** `strip_provenance_section()`
+  ist entfernt — die Funktion schnitt genau die Sektion heraus, in der die
+  Verweise landen. Break-Test: ADR-Verweis in eine Historie-Zeile gesetzt →
+  1 Befund, Exit 1; zurückgesetzt → ok. Vorher lief derselbe Fall grün durch.
+- **Templates:** `.d-check.yml` trägt den auskommentierten `vcs`-Opt-in für die
+  Append-only-Disziplin der `MR`-Dateien — dasselbe Modul, mit dem der Kurs ADRs
+  schützt. Es funktioniert nur in der Einzeldatei-Form: Eine wachsende
+  Sammeldatei ist per Konstruktion Core-Drift.
+
+### Offen
+
+- **Provenance-Faden geschlossen bis auf die Norm-Ebene** — der
+  [Roadmap-Eintrag](docs/roadmap.md) ist von „Entscheidung ausstehend" auf den
+  Umsetzungsstand umgeschrieben.
+- **Das nächste Release ist MAJOR.** Zwei Layout-Brüche im vendored Bundle: die
+  Umbenennung von `modul-03-lastenheft.md`/`modul-04-architektur-adrs.md` und
+  das neue Verzeichnis `harness/conventions/`. Adoptierende finden beides unter
+  `.harness/baseline/<tag>/`.
+
 ## Welle 61 — 2026-07-30 · Runde 11: die Wellen-Rollen-Sequenz, und zwei Gates, die nicht prüften
 
 Review-Runde 11 ([`docs/reviews/review-runde-11.md`](docs/reviews/review-runde-11.md)):

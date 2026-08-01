@@ -4,7 +4,7 @@
 Sie sammelt drei Dinge: was **vor** der Runde auffiel (`V11-01`, `V11-02` —
 beide behoben), die **Befunde des Drei-Linsen-Reviews** (21 offen, 6 behoben)
 und die übernommenen Ü-Posten (`Ü-02`, `Ü-03`, `Ü-04`, `Ü-07`, `Ü-08` behoben;
-offen: `Ü-01`, `Ü-06`, `Ü-09`, `Ü-12`; `Ü-05`, `Ü-10`, `Ü-11` behoben).
+offen: `Ü-01`, `Ü-06`, `Ü-12`; `Ü-05`, `Ü-09`, `Ü-10`, `Ü-11` behoben).
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -842,7 +842,7 @@ gab), oder sie werden als *Korrektur* statt *Vertragsänderung* ausgewiesen,
 oder das Beispiel führt sie bewusst als Negativfall. Das ist eine
 Entscheidung, keine Nacharbeit.
 
-### Ü-09 — `modul-03-lastenheft.md` heißt nach einer Hälfte seines Titels
+### Ü-09 — `modul-03-lastenheft.md` heißt nach einer Hälfte seines Titels ✅
 
 Das Modul heißt *„Lastenheft und Spezifikation"*, die Datei nur nach der
 ersten Hälfte — in Kurs und Regelwerk. Unter allen 17 Modulen ist es der
@@ -858,6 +858,11 @@ und damit **MAJOR**. Vorgemerkt für das nächste ohnehin brechende Release.
 
 Der inhaltliche Teil des Befunds ist behoben: Die Spezifikation hat jetzt eine
 Ziel-Form in Modul 3, wie Lastenheft und Architektur-Sicht.
+
+**Behoben in Welle 62** (2026-08-01): `modul-03-spec.md` und `modul-04-adrs.md`,
+in Kurs und Regelwerk; die Architektur-Sicht ist dabei von Modul 4 nach Modul 3
+gewandert, womit Modul 3 alle drei Spec-Straten trägt und beide Dateinamen ihre
+Titel decken. Das Release, das es ausliefert, ist wie vorgemerkt **MAJOR**.
 
 ### Ü-06 — Geparkt, bewusst
 
