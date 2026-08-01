@@ -11,6 +11,78 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 63 — 2026-08-01 · Die Konventionen verlassen die eine große Datei
+
+Direkte Folge von Welle 62, am selben Tag: Dort hat der Adaptions-Block den
+Pflicht-Lesepfad verlassen, hier tut es das Konventionen-Regelwerk selbst.
+Derselbe Befund eine Ebene höher — und derselbe Schnitt.
+
+### Geändert
+
+- **`grundlagen-konventionen.md` (1099 Zeilen) liegt auf sechs Seiten.** Die
+  Datei war **29 %** des ganzen Regelwerks, in einem Bundle, dessen Index
+  verspricht: *„Pro Abschnitt eine Datei, damit ein Agent einen einzelnen
+  Abschnitt laden kann, ohne das ganze Regelwerk im Kontext zu halten."* Für
+  19 der 20 Dateien stimmte das, für diese nicht. Der Schnitt folgt dem
+  **Gegenstand**:
+
+  | Seite | Zeilen | Inhalt |
+  |---|---:|---|
+  | [Referenz-Richtung (SDP)](kurs/de/grundlagen/referenz-richtung.md) | 341 | inkl. Spec-Straten |
+  | [Harness-Bootstrap](kurs/de/grundlagen/bootstrap.md) | 234 | Sub-Area, Modus, Trigger-Klassen |
+  | [Die Harness-Dateien und ihre Form](kurs/de/grundlagen/harness-dateien.md) | 193 | Verzeichniskonvention, Template-Schichtung, `harness/README.md`, Konventionsspeicher |
+  | [Source Precedence](kurs/de/grundlagen/source-precedence.md) | 169 | + Spec-Stratifizierung, ID-Schema |
+  | [Traceability-Constraint](kurs/de/grundlagen/traceability.md) | 119 | |
+  | [Kernbegriffe und Trennschärfen](kurs/de/grundlagen/begriffe.md) | 53 | |
+
+  Die größte Konventionen-Seite liegt damit **unter** `modul-02` (362) — die
+  Familie ist im Band des übrigen Regelwerks angekommen. Geschnitten wurde in
+  der **Quelle**; das Regelwerk spiegelt, sonst trüge es Struktur ohne
+  Quell-Verankerung.
+- **Vier Überschriften eine Ebene hoch.** `Referenz-Richtung (SDP)` (339
+  Zeilen), `Spec-Stratifizierung` und `ID-Schema als Klammer` hingen als
+  Unterpunkte an `Source Precedence` — einem Abschnitt von 107 Zeilen. Vier
+  gleichrangige Themen als Kinder eines von ihnen. **Kein Link brach dabei**:
+  GitHub-Slugs entstehen aus dem Überschriften-*Text*, die Ebene geht nicht ein.
+- **Abschnitts-Index im Regelwerk-README**, damit das Versprechen „nur den
+  benötigten Abschnitt laden" auch ohne Datei-Scan einlösbar ist.
+
+### Entschieden
+
+- **Additiv, kein Bruch — und das Kriterium dahinter ist ein anderes als
+  gedacht.** `konventionen.md` bleibt unter seinem Namen und wird **Wegweiser**:
+  eine Tabelle, die je Seite die Anker nennt, die dorthin gewandert sind. Jeder
+  Klartext-Zeiger (*„`konventionen.md` §Source Precedence"*) in einem
+  ausgefüllten Adopter-Artefakt landet weiter — und zwar besser als vorher:
+  eine Zeile statt 1099.
+
+  Die MAJOR-Politik nennt *„Asset-Entfernung / Layout-Bruch"*. Beim Nachlesen
+  der drei Präzedenzfälle ist das ein **Proxy**: `v2.0.0` beendete einen
+  *Bezugsweg* (Einzeldatei per URL), `v3.0.0` änderte die *Entpack-Mechanik*,
+  `v4.0.0` ließ *Zeiger ins Leere* laufen. Das gemeinsame Merkmal ist nicht,
+  dass eine Datei fehlt, sondern **dass ein bestehender Zeiger nirgendwo mehr
+  hinführt**. Ein Split mit Wegweiser tut das nicht — daher `v4.1.0`, nicht
+  `v5.0.0`.
+
+### Review
+
+- **Vier Deixis-Verweise, die kein Gate sieht.** Nach dem Schnitt zeigten
+  *„die §Spec-Stratifizierung **oben**"*, *„Im Fluss-Diagramm **oben**"*,
+  *„…Konsumenten (**unten**)"* und *„§Konventionsspeicher (**oben**)"* über
+  eine Dateigrenze. Es ist **Prosa, kein Link** — `d-check` lief die ganze Zeit
+  auf 0. Sechs weitere `oben`/`unten` einzeln geprüft und stehengelassen: Sie
+  zeigen weiter innerhalb ihrer Datei. Deixis gehört beim Split umgehängt wie
+  ein relativer Link, nur fängt sie kein Sensor.
+- **Fünf ankerlose Verweise geschärft** — sie landeten auf dem Wegweiser und
+  funktionierten, meinten aber je einen bestimmten Abschnitt (Modul 1 die
+  Verzeichniskonvention, Modul 4 das Glossar).
+- **Kein Inhaltsverlust**: Wortbestand der sechs Seiten gegen den alten Stand
+  verglichen — verloren ist nur die Präambel, die der Wegweiser ersetzt.
+
+### Zahlen
+
+`d-check` 189 statt 177 Dateien · `bundle-check` 49 statt 43 · beide 0 Befunde.
+
 ## Welle 62 — 2026-08-01 · Drei Straten sind Pflicht, die Matrix wird 8×8, und der Adaptions-Block verlässt den Lesepfad
 
 Eine Welle aus Nutzer-Fragen, nicht aus einem Review-Lauf. Jede Frage traf eine
