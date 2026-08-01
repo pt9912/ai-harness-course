@@ -462,7 +462,7 @@ weglassen:
    Beobachtbare Bedingung, kein Datum (§Aktuelle Welle). Erst danach
    werden Slices zugeordnet — sonst schneidet die Slice-Liste das Ziel
    statt umgekehrt. **Out-of-Scope gehört dazu**: dieselbe Disziplin wie
-   im Lastenheft ([Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md))
+   im Lastenheft ([Modul 3](../01-spec-und-architektur/modul-03-spec.md))
    und im Slice-Plan ([Modul 9](../03-agenten/modul-09-implementierung.md))
    — was nicht ausdrücklich ausgeschlossen ist, wandert im Zweifel in die
    Welle und dehnt sie, bis der Closure-Trigger unerreichbar wird.
@@ -520,7 +520,7 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    |---|---|---|
    | **Carveout** ([Modul 7](modul-07-carveouts.md)) | Auflösungs-Trigger | aufgelöst · verlängert (mit Folge-Slice) · permanent akzeptiert |
    | **Bootstrap-aware Gate** ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)) | Hochschalt-Trigger | Stufe hochschalten — oder Carveout eröffnen, wenn die neue Schwelle rot ist |
-   | **ADR** ([Modul 4](../01-spec-und-architektur/modul-04-architektur-adrs.md)) | Re-Evaluierungs-Trigger | Entscheidung neu bewerten → bestätigt oder Folge-ADR mit `supersedes` |
+   | **ADR** ([Modul 4](../01-spec-und-architektur/modul-04-adrs.md)) | Re-Evaluierungs-Trigger | Entscheidung neu bewerten → bestätigt oder Folge-ADR mit `supersedes` |
 
    Eine Welle darf *mit* dokumentiertem Carveout schließen — aber nie mit
    einem stillen roten Gate, einer stehengebliebenen Reifestufe oder einer

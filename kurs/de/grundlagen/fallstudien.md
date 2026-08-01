@@ -4,14 +4,22 @@ Der Kurs benutzt vier reale Open-Source-Repos in unterschiedlichen
 Reifegraden: `grid-gym`, `bess-ems` und `c-hsm-doc` tauchen als
 laufende Beispiele in mehreren Modulen auf; `u-boot` dient als
 ADR-Korpus-Anker in
-[Modul 4](../01-spec-und-architektur/modul-04-architektur-adrs.md)
+[Modul 4](../01-spec-und-architektur/modul-04-adrs.md)
 und als Reifegrad-Station in der Beobachtungs-Tabelle unten. Wenn ein
 Modul mit "Beispiel aus grid-gym" oder "wie in c-hsm-doc"
 argumentiert, ist genau einer dieser Stände gemeint.
 
+**Fallstudien illustrieren, sie begründen nicht.** Keine Kursregel wird aus
+einem dieser Repos abgeleitet — sie zeigen, wie eine im Kurs *begründete*
+Regel in einem realen Repo aussieht. Der Grund ist **Drift**: Diese Repos
+entwickeln sich weiter, jeder Verweis hier ist ein **Stand**, keine laufende
+Quelle. Widerspricht ein Repo einem Modul, ist der Verweis veraltet — nicht
+die Regel. Wer eine Modul-Aussage ändern will, braucht eine Begründung *im
+Modul selbst*, nie ein „das Repo macht es anders".
+
 ## Übersicht
 
-| Repo | Klasse | Anmerkung | Stack | Was der Kurs daraus zieht |
+| Repo | Klasse | Anmerkung | Stack | Wofür es im Kurs als Beispiel steht |
 |---|---|---|---|---|
 | **`pt9912/u-boot`** | Referenz | Tooling | Go-CLI für reproduzierbare Docker-Setups | LH-ID-Schema in Make-Target-Kommentaren, `verify-depguard` als Architekturtest, bootstrap-aware Coverage. `AGENTS.md` und `harness/README.md` seit 2026-06 — typischer "Tooling-Repo im Harness-Aufbau"-Zustand. |
 | **`pt9912/grid-gym`** | Referenz | Domäne | Python-EMS-Simulator, hexagonale Architektur | Reichste AGENTS.md (Docker-only, noqa-Verbot, Wave-Self-Close-Commit-Konvention), 10 A-1-Pflicht-Gates in `make gates`, Test-Diversität (`determinism`/`replay`/`fault`). |

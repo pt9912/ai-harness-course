@@ -101,7 +101,7 @@ evals/golden/welle-1-baseline/
 
 Drei Fälle ist das Minimum: Happy / Boundary / Negative — dieselbe
 Spec-Disziplin wie bei Akzeptanzkriterien
-([Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md)). Ein
+([Modul 3](../01-spec-und-architektur/modul-03-spec.md)). Ein
 Replay mit einem Fall ist eine Demo, kein Replay.
 
 **Schritt 2 — Pflichtfelder im Manifest fixieren.**

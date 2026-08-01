@@ -1,6 +1,6 @@
-# Lösung — Modul 3: Lastenheft und Spezifikation
+# Lösung — Modul 3: Die Spec: Lastenheft, Spezifikation, Architektur
 
-Zugehöriges Modul: [Modul 3 — Lastenheft und Spezifikation](../01-spec-und-architektur/modul-03-lastenheft.md).
+Zugehöriges Modul: [Modul 3 — Die Spec: Lastenheft, Spezifikation, Architektur](../01-spec-und-architektur/modul-03-spec.md).
 
 ## Selbstcheck-Antworten
 

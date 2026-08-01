@@ -70,7 +70,7 @@ Vorab-Notiz, *was* sich verschoben hat.
 
 ```mermaid
 flowchart LR
-    Spec["spec/<br/>(was?)"] --> ADR["ADR<br/>(warum so?)"]
+    Spec["spec/<br/>(was? · wie genau? · wodurch?)"] --> ADR["ADR<br/>(warum so?)"]
     ADR --> Plan["Slice-Plan<br/>(wann/wie?)"]
     Plan --> Code["Code"]
     Code --> Review["Review<br/>(gegen Plan/ADR)"]

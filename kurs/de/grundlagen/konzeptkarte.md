@@ -15,8 +15,9 @@ Diese Kette ist der Lebenszyklus (engl. *SDLC*) dieses Kurses.
 
 Lesart:
 
-- **Lastenheft/Spezifikation** sagen, *was* gelten muss.
-- **Architektur/ADR** sagen, *warum* eine Loesung so gebaut wird.
+- **Lastenheft/Spezifikation/Architektur** sind die drei Spec-Straten und
+  sagen, *was* gelten muss — vertraglich, technisch, strukturell.
+- **ADR** sagt, *warum* eine Loesung so gebaut wird.
 - **Slice** sagt, *welcher kleine Teil* jetzt umgesetzt wird.
 - **Code** ist nur ein Artefakt in der Kette, nicht der Startpunkt.
 - **Review/Verifikation** pruefen unterschiedliche Fragen:
@@ -30,7 +31,7 @@ Die 17 Module (0-16) sind entlang der Kette organisiert:
 
 | Lebenszyklus-Station | Modul-Block | Harness / Schwerpunkt |
 |---|---|---|
-| Spec -> ADR | `01-spec-und-architektur/` (Mod. 1-4) | Lastenheft-, Architektur-/ADR-Disziplin, Harness-Bootstrap |
+| Spec -> ADR | `01-spec-und-architektur/` (Mod. 1-4) | Spec-Straten- und ADR-Disziplin, Harness-Bootstrap |
 | Plan | `02-planung/` (Mod. 5-7) | Planning-Harness, Roadmap, Carveouts |
 | Code | `03-agenten/` (Mod. 8-9) | Rollen + 8-Schritt-Workflow |
 | Review -> Verifikation | `04-qualitaet/` (Mod. 10-13) | Review-, Verification-Harness, Replay, Quality Gates |
@@ -40,8 +41,8 @@ Die 17 Module (0-16) sind entlang der Kette organisiert:
 
 | Frage | Primaere Artefakte | Typische Module |
 |---|---|---|
-| Was soll gelten? | Lastenheft, Spezifikation | 3 |
-| Warum gilt diese Loesung? | ADR, Architektur | 4 |
+| Was soll gelten? | Lastenheft, Spezifikation, Architektur | 3, 4 |
+| Warum gilt diese Loesung? | ADR | 4 |
 | Wie klein ist die naechste Aenderung? | Slice, Roadmap, Carveout | 5, 6, 7 |
 | Woran erkenne ich, dass es stimmt? | Review, Verify, Replay, Gates, Trace | 10, 11, 12, 13, 15 |
 

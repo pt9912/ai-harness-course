@@ -100,4 +100,4 @@ Serialisierungs-Format (ADR-0003) plus deterministischem Tie-Break
 |---|---|---|
 | 2026-06-02 | Proposed | Modul 15 Worked Example, Lab-Ausbau (Kurs-Welle 9) |
 | 2026-06-02 | Accepted | LH-FA-IDX-003 ergänzt, Trace-Fixture um writer.write_index Span erweitert |
-| 2026-06-03 | Korrektur | Index-Pfad stand als `internal/index/store.bin` gegen ADR-0003 (`data/index/index.bin`) — Tatsachenangabe berichtigt, Entscheidung unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)) |
+| 2026-06-03 | Korrektur | Index-Pfad stand als `internal/index/store.bin` gegen ADR-0003 (`data/index/index.bin`) — Tatsachenangabe berichtigt, Entscheidung unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-adrs.md)) |

@@ -99,8 +99,8 @@ mit einem eigenen Zuordnungs-Item — Abgleich gegen
 | [0](00-einfuehrung/modul-00-einfuehrung.md) | Agent, LLM, Tool-Call, Harness und Chatbot-vs-Engineering-System trennscharf benennen — und einen Mega-Prompt anhand der drei Reproduzierbarkeits-Kriterien zeilenweise kritisieren |
 | [1](01-spec-und-architektur/modul-01-entwicklungszyklus.md) | den Lebenszyklus Spec → ADR → Plan → Code → Review → Verifikation als Artefaktkette nachzeichnen |
 | [2](01-spec-und-architektur/modul-02-harness-bootstrap.md) | den Harness-Bootstrap-Modus (Greenfield/Brownfield/Hybrid) pro Sub-Area diagnostizieren und gegen die vier Trigger-Klassen verorten |
-| [3](01-spec-und-architektur/modul-03-lastenheft.md) | ein Lastenheft mit Akzeptanzkriterien schreiben, das von einem Agenten umsetzbar ist |
-| [4](01-spec-und-architektur/modul-04-architektur-adrs.md) | Architekturentscheidungen so dokumentieren, dass spätere Agentenläufe sie als Constraint nutzen |
+| [3](01-spec-und-architektur/modul-03-spec.md) | ein Lastenheft mit Akzeptanzkriterien schreiben, das von einem Agenten umsetzbar ist |
+| [4](01-spec-und-architektur/modul-04-adrs.md) | Architekturentscheidungen so dokumentieren, dass spätere Agentenläufe sie als Constraint nutzen |
 | [5](02-planung/modul-05-planning-harness.md) | Slices über die Lifecycle-Verzeichnisse `open → next → in-progress → done` bewegen |
 | [6](02-planung/modul-06-roadmap.md) | eine Roadmap mit Wellen, Triggern und Closure-Kriterien aufbauen |
 | [7](02-planung/modul-07-carveouts.md) | Carveouts (temporär/permanent) sauber dokumentieren und mit Folge-Slices verknüpfen |

@@ -59,8 +59,8 @@ gepinnte GitHub-URLs umgeschrieben (`tools/rewrite-doc-links.py`).
 
 - [Modul 1 — Der Entwicklungszyklus](modul-01-entwicklungszyklus.md)
 - [Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)
-- [Modul 3 — Lastenheft und Spezifikation](modul-03-lastenheft.md)
-- [Modul 4 — Architektur und ADRs](modul-04-architektur-adrs.md)
+- [Modul 3 — Die Spec: Lastenheft, Spezifikation, Architektur](modul-03-spec.md)
+- [Modul 4 — ADRs](modul-04-adrs.md)
 
 ### Phase 02 — Planung
 

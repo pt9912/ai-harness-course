@@ -40,8 +40,8 @@ Architecture-Fitness.
 
 | Modul | Vertiefung |
 |---|---|
-| [3 — Lastenheft](../01-spec-und-architektur/modul-03-lastenheft.md) | Spec-Stratifizierung, Akzeptanzkriterien Boundary/Negative |
-| [4 — ADRs](../01-spec-und-architektur/modul-04-architektur-adrs.md) | ADR ↔ Fitness Function, Hard Rule "Accepted-ADRs immutable" |
+| [3 — Spec](../01-spec-und-architektur/modul-03-spec.md) | Spec-Stratifizierung, Akzeptanzkriterien Boundary/Negative |
+| [4 — ADRs](../01-spec-und-architektur/modul-04-adrs.md) | ADR ↔ Fitness Function, Hard Rule "Accepted-ADRs immutable" |
 | [7 — Carveouts](../02-planung/modul-07-carveouts.md) | Kopplung Carveout ↔ Folge-Slice, Auflösungs-Trigger |
 | [8 — Agentenrollen](../03-agenten/modul-08-agentenrollen.md) | Rollen-Übergaben, Konfliktauflösung |
 | [11 — Verifikation](../04-qualitaet/modul-11-verification.md) | Plan-gegen-Code, DoD-Erkennung |

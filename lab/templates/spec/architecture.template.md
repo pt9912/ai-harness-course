@@ -2,21 +2,21 @@
 
 > **Template-Hinweis.** Diese Datei ist eine Vorlage. Sie ist
 > **sprach- und meilensteinfrei** (siehe
-> [Baseline-Regelwerk Modul 4](../../regelwerk/modul-04-architektur-adrs.md)).
+> [Baseline-Regelwerk Modul 4](../../regelwerk/modul-04-adrs.md)).
 > Kopiere sie nach `spec/architecture.md`, ersetze `<Platzhalter>` und
 > lösche diesen Block.
 
 **Status:** Aktiv. **Letzte Änderung:** YYYY-MM-DD.
 
 **Rolle:** Sicht-Stratum — *keine* eigenen Anforderungen, derivativ. Regeln:
-Baseline-Regelwerk `modul-04-architektur-adrs.md` §Ziel-Form: Architektur-Sicht.
+Baseline-Regelwerk `modul-04-adrs.md` §Ziel-Form: Architektur-Sicht.
 
 **Hard Rule:** Diese Datei enthält *keine* Wellen, Slices, Commit-Hashes
 oder Closure-Daten, **keine ADR-Bezüge** — die Sicht steht im
 Stabilitäts-Rang über der ADR — und **keine Historie**: `Letzte Änderung`
 oben ist ein Frische-Marker, kein Protokoll. Die zeitliche Schicht lebt in
 `docs/plan/planning/in-progress/roadmap.md` und den späteren Closure-Notizen.
-Baseline-Regelwerk `modul-04-architektur-adrs.md` §Ziel-Form: Architektur-Sicht.
+Baseline-Regelwerk `modul-04-adrs.md` §Ziel-Form: Architektur-Sicht.
 
 ---
 

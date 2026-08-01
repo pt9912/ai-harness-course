@@ -45,6 +45,11 @@ Der Default-Ort für:
 
 ### MR-001 — Source Precedence mit eigener Spezifikations-Schicht
 
+> **Aufgelöst durch [`MR-003`](#mr-003--mr-001-gegenstandslos-durch-baseline-update)
+> (2026-08-01).** Der Eintrag bleibt unverändert stehen — Adaptionen werden
+> nicht überschrieben, sondern von einem Nachfolger abgelöst
+> ([`konventionen.md` §Source Precedence](../../../kurs/de/grundlagen/konventionen.md#source-precedence)).
+
 - **Datum:** 2026-05-15
 - **Geltungsbereich:** [`harness/README.md` §Source precedence](README.md#source-precedence) und `AGENTS.md` §Kanonische Quellen
 - **Adaption:** Die Source-Precedence-Tabelle führt
@@ -81,6 +86,22 @@ setzten nichts durch — oder eine erfundene ID.
 **Geltungsbereich:** nur die Bindung-Spalte in `harness/README.md` §Sensors.
 
 **Datum der Adoption:** 2026-06-02.
+
+### MR-003 — MR-001 gegenstandslos durch Baseline-Update
+
+- **Datum:** 2026-08-01
+- **Geltungsbereich:** [`MR-001`](#mr-001--source-precedence-mit-eigener-spezifikations-schicht)
+- **Adaption:** *keine* — dieser Eintrag löst `MR-001` auf. Die Baseline führt
+  seither **alle drei Spec-Straten als obligatorisch**
+  ([`konventionen.md` §Spec-Straten](../../../kurs/de/grundlagen/konventionen.md#spec-straten-mehr-als-ein-spec-dokument));
+  die Source-Precedence-Tabelle mit `spec/spezifikation.md` auf Rang 2 ist
+  damit der Default und keine Abweichung mehr.
+- **Begründung:** Eine Adaption, die durch ein Baseline-Update
+  gegenstandslos wird, wird nicht gelöscht und nicht überschrieben, sondern
+  bekommt einen Nachfolger, der sie auflöst und den auslösenden
+  Baseline-Stand nennt — dieselbe Append-only-Disziplin wie bei ADRs
+  ([`konventionen.md` §Source Precedence](../../../kurs/de/grundlagen/konventionen.md#source-precedence)).
+- **Auflösungs-Trigger:** permanent.
 
 ## Zusatzklassen-Deklaration für Sensors-Bindung
 

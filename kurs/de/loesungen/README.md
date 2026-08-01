@@ -9,8 +9,8 @@ Hier findest du die Lösungen zu den Selbstchecks und Hinweise zu den
 | [Modul 0](modul-00-loesung.md) | [Einführung](../00-einfuehrung/modul-00-einfuehrung.md) |
 | [Modul 1](modul-01-loesung.md) | [Der Entwicklungszyklus](../01-spec-und-architektur/modul-01-entwicklungszyklus.md) |
 | [Modul 2](modul-02-loesung.md) | [Harness-Bootstrap](../01-spec-und-architektur/modul-02-harness-bootstrap.md) |
-| [Modul 3](modul-03-loesung.md) | [Lastenheft und Spezifikation](../01-spec-und-architektur/modul-03-lastenheft.md) |
-| [Modul 4](modul-04-loesung.md) | [Architektur und ADRs](../01-spec-und-architektur/modul-04-architektur-adrs.md) |
+| [Modul 3](modul-03-loesung.md) | [Die Spec: Lastenheft, Spezifikation, Architektur](../01-spec-und-architektur/modul-03-spec.md) |
+| [Modul 4](modul-04-loesung.md) | [ADRs](../01-spec-und-architektur/modul-04-adrs.md) |
 | [Modul 5](modul-05-loesung.md) | [Planning Harness](../02-planung/modul-05-planning-harness.md) |
 | [Modul 6](modul-06-loesung.md) | [Roadmap Engineering](../02-planung/modul-06-roadmap.md) |
 | [Modul 7](modul-07-loesung.md) | [Carveout Management](../02-planung/modul-07-carveouts.md) |

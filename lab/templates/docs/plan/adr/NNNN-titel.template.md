@@ -19,7 +19,7 @@ Spec-Stelle diese ADR verbindlich macht. Aufwärts-Deklaration der
 Änderungskopplung: wer diese ADR ändert, zieht von hier die betroffenen
 Spec-Stellen nach. `—` eintragen, wenn Prozess-ADR ohne Spec-Stratum.
 
-**Regeln:** Baseline-Regelwerk `modul-04-architektur-adrs.md`
+**Regeln:** Baseline-Regelwerk `modul-04-adrs.md`
 §Ziel-Form: ADR (MADR).
 
 > **IDs als Markdown-Link** (klickbar zur Quelle, Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
@@ -55,7 +55,7 @@ Wir wählen **<Variante X>**.
 Regeln dieser Sektion: **mindestens drei Optionen mit Pro/Contra** — „nichts
 tun" ist eine davon. Eine ADR ohne Alternativen ist ein Postulat, kein
 Entscheidungsprotokoll, und im Review nicht verteidigbar (Baseline-Regelwerk
-`modul-04-architektur-adrs.md` §Ziel-Form: ADR (MADR)).
+`modul-04-adrs.md` §Ziel-Form: ADR (MADR)).
 
 <!--
 Mindestens drei Optionen mit Pro/Contra. Alternativ "nichts tun" ist
@@ -96,7 +96,7 @@ niederschlägt: hier die konkrete Regel benennen. Beispiel:
 Regeln dieser Sektion: **jede ADR trägt einen Trigger** — eine beobachtbare
 Bedingung — oder ausdrücklich *permanent*. Ohne Trigger gilt die Entscheidung
 unbefristet weiter, auch wenn ihre Voraussetzung weg ist (Baseline-Regelwerk
-`modul-04-architektur-adrs.md` §Kernidee (Modul 4)).
+`modul-04-adrs.md` §Kernidee (Modul 4)).
 
 <!--
 Wann sollte diese Entscheidung erneut geprüft werden?
@@ -115,5 +115,5 @@ Wann sollte diese Entscheidung erneut geprüft werden?
 
 Nach `Accepted` wird diese Datei **nicht mehr inhaltlich überschrieben**.
 Spätere Korrekturen oder Schärfungen entstehen als neue ADR mit
-`Supersedes ADR-NNNN` (Baseline-Regelwerk `modul-04-architektur-adrs.md`
+`Supersedes ADR-NNNN` (Baseline-Regelwerk `modul-04-adrs.md`
 §Hard Rule für Accepted-ADRs).

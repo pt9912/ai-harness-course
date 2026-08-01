@@ -73,4 +73,4 @@ aufwärts.
 |---|---|---|
 | 2026-05-15 | Proposed | slice-001 |
 | 2026-05-15 | Accepted | PR initial commit |
-| 2026-06-03 | Nachtrag | Querverweise auf ADR-0002/ADR-0003 eingetragen; zum Accepted-Zeitpunkt standen dort nur „Modell" und „Storage" ohne ID. Traceability-Metadata, keine Entscheidungs-Änderung ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)) |
+| 2026-06-03 | Nachtrag | Querverweise auf ADR-0002/ADR-0003 eingetragen; zum Accepted-Zeitpunkt standen dort nur „Modell" und „Storage" ohne ID. Traceability-Metadata, keine Entscheidungs-Änderung ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-adrs.md)) |

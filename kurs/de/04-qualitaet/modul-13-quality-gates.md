@@ -1,6 +1,6 @@
 # Modul 13 — Quality Gates
 
-> **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: das ID-Schema aus [Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md) bekommt hier seine maschinelle Verankerung — Make-Target-Kommentare zitieren die Anforderungs-ID.
+> **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: das ID-Schema aus [Modul 3](../01-spec-und-architektur/modul-03-spec.md) bekommt hier seine maschinelle Verankerung — Make-Target-Kommentare zitieren die Anforderungs-ID.
 
 ## Mini-Glossar für dieses Modul
 
@@ -38,7 +38,7 @@ Nach diesem Modul kannst du:
 
 * Gates als `make`-Targets mit ID-Kommentar *aufsetzen* (Anwenden · prozedural),
 * Critical Coverage von Gesamt-Coverage *unterscheiden* und ihre Schwellen *begründen* (Bewerten · konzeptuell),
-* einen ADR-Satz in eine Fitness Function *übersetzen* (Erschaffen · prozedural — Brücke zu [Modul 4](../01-spec-und-architektur/modul-04-architektur-adrs.md)),
+* einen ADR-Satz in eine Fitness Function *übersetzen* (Erschaffen · prozedural — Brücke zu [Modul 4](../01-spec-und-architektur/modul-04-adrs.md)),
 * einen bootstrap-aware Gate mit Hochschalt-Trigger *entwerfen* (Erschaffen · prozedural),
 * einen Gate-Typ einem Fehlerbild *zuordnen* (SQL-Injection → Security-Gate, Layer-Bruch → Architekturtest) (Analysieren · konzeptuell).
 
@@ -211,7 +211,7 @@ Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervor
 
 > **Wenn du ArchUnit / import-linter / dep-cruiser bereits routiniert einsetzt, springe zu [§Übungen](#übungen).** Das Worked Example zeigt die Übersetzungsschablone für den ersten oder zweiten Fall — wer sie kann, gewinnt durch Wiederholung wenig (Expertise-Reversal). Übung 1 setzt das Schema sofort produktiv.
 
-**Ausgangs-ADR:** ADR-0007 (siehe Worked Example in [Modul 4](../01-spec-und-architektur/modul-04-architektur-adrs.md#worked-example-vom-diskussionsfaden-zum-prüfbaren-adr)) sagt:
+**Ausgangs-ADR:** ADR-0007 (siehe Worked Example in [Modul 4](../01-spec-und-architektur/modul-04-adrs.md#worked-example-vom-diskussionsfaden-zum-prüfbaren-adr)) sagt:
 
 > "Service-Layer importiert ausschließlich aus `adapter/`-Paket."
 

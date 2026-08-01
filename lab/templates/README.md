@@ -17,11 +17,11 @@ Klassen**, nicht 22 gleichartige Vorlagen:
 
 | Template | Wofür | Regelwerk-Abschnitt |
 |---|---|---|
-| [`spec/lastenheft.template.md`](spec/lastenheft.template.md) | Vertraglich abnahmebindende Anforderungen (`LH-*`-IDs) | [Modul 3](../regelwerk/modul-03-lastenheft.md) |
-| [`spec/spezifikation.template.md`](spec/spezifikation.template.md) | Technisch verbindlich, fortschreibbar — Algorithmen, Defaults, Codes | [Modul 3](../regelwerk/modul-03-lastenheft.md) (Spec-Stratifizierung) |
-| [`spec/architecture.template.md`](spec/architecture.template.md) | Komponenten- und Sequenzsicht, sprach- und meilensteinfrei | [Modul 4](../regelwerk/modul-04-architektur-adrs.md) |
-| [`docs/plan/adr/NNNN-titel.template.md`](docs/plan/adr/NNNN-titel.template.md) | Architecture Decision Record im MADR/Nygard-Stil | [Modul 4](../regelwerk/modul-04-architektur-adrs.md) |
-| [`docs/plan/adr/README.template.md`](docs/plan/adr/README.template.md) | ADR-Index (derivativ; Liste aller ADRs mit Status) | [Modul 4](../regelwerk/modul-04-architektur-adrs.md) |
+| [`spec/lastenheft.template.md`](spec/lastenheft.template.md) | Vertraglich abnahmebindende Anforderungen (`LH-*`-IDs) | [Modul 3](../regelwerk/modul-03-spec.md) |
+| [`spec/spezifikation.template.md`](spec/spezifikation.template.md) | Technisch verbindlich, fortschreibbar — Algorithmen, Defaults, Codes | [Modul 3](../regelwerk/modul-03-spec.md) (Spec-Stratifizierung) |
+| [`spec/architecture.template.md`](spec/architecture.template.md) | Komponenten- und Sequenzsicht, sprach- und meilensteinfrei | [Modul 3](../regelwerk/modul-03-spec.md) |
+| [`docs/plan/adr/NNNN-titel.template.md`](docs/plan/adr/NNNN-titel.template.md) | Architecture Decision Record im MADR/Nygard-Stil | [Modul 4](../regelwerk/modul-04-adrs.md) |
+| [`docs/plan/adr/README.template.md`](docs/plan/adr/README.template.md) | ADR-Index (derivativ; Liste aller ADRs mit Status) | [Modul 4](../regelwerk/modul-04-adrs.md) |
 | [`docs/plan/planning/slice.template.md`](docs/plan/planning/slice.template.md) | Slice-Plan mit DoD, Trigger, Closure | [Modul 5](../regelwerk/modul-05-planning-harness.md) |
 | [`docs/plan/planning/welle.template.md`](docs/plan/planning/welle.template.md) | Welle als Bündel von Slices | [Modul 5](../regelwerk/modul-05-planning-harness.md) + [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/welle-results.template.md`](docs/plan/planning/welle-results.template.md) | Welle-Closure-Notiz: Ergebnis, Steering-Loop-Einträge, Zeiger aufs Beobachtungs-Register | [Modul 6](../regelwerk/modul-06-roadmap.md) |
@@ -157,7 +157,7 @@ besten zu deinem Projekt passt. Pflicht-Strukturen sind:
 
 - ID-Schema (z.B. `LH-*`) konsistent durchziehen.
 - ADRs nach Accepted nicht überschreiben; Schärfung als Folge-ADR mit
-  `Supersedes` (Hard Rule, Baseline-Regelwerk `modul-04-architektur-adrs.md`).
+  `Supersedes` (Hard Rule, Baseline-Regelwerk `modul-04-adrs.md`).
 - Carveouts brauchen immer Trigger + Folge-Slice.
 - Slices brauchen DoD mit prüfbaren Kriterien.
 - §8 in `slice.template.md` steht in **jedem** Slice-Plan: Die beiden

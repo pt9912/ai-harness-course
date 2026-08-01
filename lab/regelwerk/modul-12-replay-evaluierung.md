@@ -20,7 +20,7 @@ Modellwechsel verglichen werden. Layout `evals/golden/welle-NN-baseline/`
 mit `manifest.yaml`, `inputs/`, `expectations/`. Regeln:
 
 - **Mindestens drei Fälle — Happy · Boundary · Negative** (dieselbe
-  Spec-Disziplin wie Akzeptanzkriterien, [Modul 3](modul-03-lastenheft.md)).
+  Spec-Disziplin wie Akzeptanzkriterien, [Modul 3](modul-03-spec.md)).
   Ein Replay mit einem Fall ist eine Demo.
 - **Manifest-Pflichtfelder:** `model.version`, `model.seed`, `inputs_ref`
   (Selbstcheck-Pflicht); dazu `runtime.image_hash` (Toolchain-Drift

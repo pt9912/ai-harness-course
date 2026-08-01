@@ -151,7 +151,7 @@ sie zusätzlich den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit sl
 ([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
 Nicht jede Hard Rule in `AGENTS.md` ist repo-spezifisch: *„Architektur ist
 sprach- und meilensteinfrei"* etwa **folgt** aus dem Sicht-Stratum und der
-Referenz-Richtung ([Modul 4 §Die Architektur-Sicht](../01-spec-und-architektur/modul-04-architektur-adrs.md#die-architektur-sicht-specarchitecturemd)) —
+Referenz-Richtung ([Modul 3 §Die Architektur-Sicht](../01-spec-und-architektur/modul-03-spec.md#die-architektur-sicht-specarchitecturemd)) —
 ein Repo *verkörpert* sie in `AGENTS.md`, es entscheidet sie nicht. Solche
 Regeln gehören in die Datei, aber nicht in diese Liste.
 

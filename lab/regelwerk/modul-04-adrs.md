@@ -1,6 +1,6 @@
-## Modul 4 — Architektur und ADRs
+## Modul 4 — ADRs
 
-<!-- Quelle: [01-spec-und-architektur/modul-04-architektur-adrs.md](../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md) -->
+<!-- Quelle: [01-spec-und-architektur/modul-04-adrs.md](../../kurs/de/01-spec-und-architektur/modul-04-adrs.md) -->
 
 ### Mini-Glossar für dieses Modul (Modul 4)
 
@@ -51,29 +51,6 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 - MADR ist ein Format unter mehreren (auch Nygard, Tyree/Akerman). Wichtig ist, dass dein Repo *eines* konsequent benutzt.
 - Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur heißt in diesem Regelwerk: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`grundlagen/konventionen.md`](grundlagen-konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
 - Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementer-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Die Übersetzung (ADR-Satz → Werkzeug → Make-Target → Failure-Beispiel) steht kompakt in [Modul 13 §Fitness Function aus einem ADR-Satz](modul-13-quality-gates.md#adr-zur-fitness-function). Wer das nicht macht, dokumentiert *Hoffnung*.
-
-### Ziel-Form: Architektur-Sicht
-
-Die Sicht folgt der Vorlage
-[`templates/spec/architecture.template.md`](../templates/spec/architecture.template.md):
-Komponenten- und Sequenzsicht ohne **eigene Anforderungen** (Sicht-Stratum,
-[`konventionen.md` §Spec-Stratifizierung](grundlagen-konventionen.md#spec-stratifizierung)).
-Operative Regeln, die die Vorlage nicht selbst erzwingt:
-
-* Derivativ — Konfliktregel *Lastenheft › Spezifikation › Architektur*; die
-  untere Schicht präzisiert, erweitert nie.
-* Sprach- und meilensteinfrei — referenziert Modul-Pfade, aber keine Wellen,
-  Slices, Commit-Hashes oder Closure-Daten.
-* Keine Historie, nur `**Letzte Änderung:**` im Kopf — ein Frische-Marker,
-  kein Protokoll. Vertrag und Technik führen eine, weil ihr Änderungs-Prozess
-  einen benennbaren Urheber hat (externer Change Request bzw. schärfende ADR);
-  die Sicht hat keinen, jede ihrer Änderungen folgt aus einer Änderung
-  darüber. Eine Verweis-Spalte trüge hier nichts Zulässiges.
-* Kein ADR-Bezug: Die Sicht steht im Stabilitäts-Rang **über** der ADR
-  (*Vertrag › Technik › Sicht › ADR › Slice*), normative Referenzen zeigen nur
-  aufwärts ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
-  Welche ADR eine Aussage der Sicht verbindlich macht, deklariert **die ADR**
-  aufwärts in ihrem `Schärft:`-Feld.
 
 ### Ziel-Form: ADR (MADR)
 

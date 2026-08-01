@@ -108,34 +108,33 @@ keine (AGENTS.md §5/§6).
   ID-Schema (`<PREFIX>-FA-*`, `<PREFIX>-QA-*`, `ADR-<NNNN>`, `CO-<NNN>`,
   `slice-<NNN>`, `MR-<NNN>` — Präfix repo-weit festlegen, z. B. `LH`).*
   (Source-Precedence-Adaptionen werden in separaten `MR-<NNN>`
-  dokumentiert — siehe Beispiel `MR-001` unten, weil das mitkopierte
-  README-Template eine 3-Schichten-Spec-Precedence zeigt.)
+  dokumentiert — siehe Beispiel `MR-001` unten.)
 - **Begründung:** Initial-Setzung. Spätere Adaptionen werden als
   `MR-<NNN>` nachgetragen.
 - **Auflösungs-Trigger:** permanent.
 
-<!-- Beispiel-Eintrag für eine konkrete Adaption — passt zum 3-Schichten-
-     Spec-Default des README-Templates. Anpassen, wenn dein Repo das
-     anders handhabt, oder entfernen, wenn du eine 2-Schichten-Spec-
-     Precedence wählst. -->
+<!-- Beispiel-Eintrag für eine konkrete Adaption — zeigt den Abweichungs-
+     Fall zum 3-Straten-Default des README-Templates. Entfernen, wenn dein
+     Repo bei den drei Straten der Baseline bleibt. -->
 
-### MR-001 — Source Precedence mit eigener Spezifikations-Schicht
+### MR-001 — Source Precedence ohne eigene Spezifikations-Schicht
 
 - **Datum:** <Datum>
 - **Geltungsbereich:** `harness/README.md` §Source precedence und `AGENTS.md` §Kanonische Quellen
-- **Adaption:** Source-Precedence-Tabelle führt `spec/spezifikation.md`
-  als eigenen **Rang 2** zwischen Lastenheft (Rang 1) und Architektur
-  (Rang 3). Der Kurs-Default
-  (Baseline-Regelwerk `grundlagen-konventionen.md` §Source Precedence)
-  setzt zwei Spec-Ränge (`lastenheft` → `architecture`); dieses Repo
-  nutzt drei.
-- **Begründung:** Das Repo verwendet die Spec-Stratifizierung
-  (Baseline-Regelwerk `grundlagen-konventionen.md` §Spec-Stratifizierung)
-  explizit mit drei Spec-Dateien. Damit die Source-Precedence-Tabelle
-  die ADR-Schärfungs-Regel ("ADR darf Spezifikation schärfen, nicht
-  Lastenheft") strukturell abbildet, muss die Spezifikation als
-  eigener Rang sichtbar sein.
-- **Auflösungs-Trigger:** permanent.
+- **Adaption:** Source-Precedence-Tabelle führt **keinen** eigenen Rang für
+  `spec/spezifikation.md`; sie geht von Lastenheft (Rang 1) direkt auf
+  Architektur (Rang 2), danach acht statt neun Ränge. Der Baseline-Default
+  (Baseline-Regelwerk `grundlagen-konventionen.md` §Spec-Straten) setzt drei
+  Spec-Straten, alle obligatorisch; dieses Repo führt zwei.
+- **Begründung:** <Warum trifft dieses Repo keine eigenen technischen
+  Festlegungen? Tragfähig ist das nur, wenn hier nichts gebaut wird, was
+  welche erzeugte — etwa ein reines Policy-/Dokumentations-Repo. Wo Code
+  entsteht, entstehen Defaults, Konstanten und Fehler-Codes; die gehören
+  dann in das Technik-Stratum und nicht ins Lastenheft, wo sie
+  abnahmebindend und Change-Request-pflichtig würden.>
+- **Auflösungs-Trigger:** Sobald das Repo eigene technische Festlegungen
+  trägt — dann wird `spec/spezifikation.md` angelegt und diese `MR-001`
+  durch einen Nachfolger aufgelöst.
 
 ### MR-003 — Regelwerk und Templates als vendored, nachschlagbare Baseline
 

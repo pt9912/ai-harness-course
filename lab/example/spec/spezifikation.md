@@ -124,13 +124,13 @@ Approximate-NN (ANN) ist in Welle 3 geplant — aktuell linear.
 
 ## 7. Historie
 
-| Datum | Änderung | Verweis |
-|---|---|---|
-| 2026-05-15 | Initial | — |
-| 2026-05-22 | `MAX_TOPK = 100` ergänzt | LH-FA-02 (Lastenheft v0.2.0) |
-| 2026-05-22 | §3 `EMBEDDING_DIM`, `SECTION_MAX_CHARS` festgeschrieben | ADR-0002 |
-| 2026-05-25 | §3 `INDEX_STORAGE`, §6 Vektor-Storage-Format festgeschrieben | ADR-0003 |
-| 2026-05-26 | §1 LH-FA-02.a Schritt 5: Tie-Break präzisiert | LH-QA-02 |
-| 2026-06-02 | `docsearch.audit`-Span ergänzt | LH-FA-03 |
-| 2026-06-02 | §1 Schreib-Semantik: Atomic-Replace präzisiert | ADR-0012 |
-| 2026-06-03 | Abwärtszeiger auf einen Slice-Plan entfernt (Referenz-Richtung) | LH-QA-02 |
+| Datum | Änderung |
+|---|---|
+| 2026-05-15 | Initial |
+| 2026-05-22 | `MAX_TOPK = 100` ergänzt |
+| 2026-05-22 | §3 `EMBEDDING_DIM`, `SECTION_MAX_CHARS` festgeschrieben |
+| 2026-05-25 | §3 `INDEX_STORAGE`, §6 Vektor-Storage-Format festgeschrieben |
+| 2026-05-26 | §1 LH-FA-02.a Schritt 5: Tie-Break präzisiert |
+| 2026-06-02 | `docsearch.audit`-Span ergänzt |
+| 2026-06-02 | §1 Schreib-Semantik: Atomic-Replace präzisiert |
+| 2026-06-03 | Abwärtszeiger auf einen Slice-Plan entfernt (Referenz-Richtung) |

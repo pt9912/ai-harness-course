@@ -15,7 +15,7 @@ Konflikt gewinnt das Lastenheft — präzisieren ja, erweitern nie.
 
 **Rolle:** Technik-Stratum — fortschreibbar ohne Change Request; eine ADR darf
 sie schärfen, das Lastenheft nicht. Regeln: Baseline-Regelwerk
-`modul-03-lastenheft.md` §Ziel-Form: Spezifikation.
+`modul-03-spec.md` §Ziel-Form: Spezifikation.
 
 ---
 
@@ -101,6 +101,11 @@ Regeln dieser Sektion: verbindliche OTel-Felder pro Span
 
 ## 7. Historie
 
-| Datum | Änderung | ADR |
+Regeln dieser Sektion: **kein ADR- und kein Slice-Verweis.** Die Decken-Regel
+gilt für alle drei Spec-Straten, auch hier — welche ADR eine Festlegung
+schärft, deklariert die ADR aufwärts in ihrem `Schärft:`-Feld
+(Baseline-Regelwerk `modul-03-spec.md` §Ziel-Form: Spezifikation).
+
+| Version | Datum | Änderung |
 |---|---|---|
-| YYYY-MM-DD | Initial | — |
+| 0.1.0 | YYYY-MM-DD | Initial |

@@ -145,8 +145,8 @@ zusammen garantieren bit-identische Index-Files bei identischer Eingabe.
 
 | Version | Datum | Änderung | Verweis |
 |---|---|---|---|
-| 0.1.0 | 2026-05-15 | Initiale Fassung | slice-001 |
-| 0.2.0 | 2026-05-22 | Boundary-Kriterium für `k > 100` ergänzt | slice-007 |
+| 0.1.0 | 2026-05-15 | Initiale Fassung | — |
+| 0.2.0 | 2026-05-22 | Boundary-Kriterium für `k > 100` ergänzt | — |
 | 0.3.0 | 2026-06-02 | LH-QA-04 Audit-Datenschutz ergänzt (zu LH-FA-03) | Lab-Ausbau (Kurs-Welle 9), Modul 15 |
 | 0.4.0 | 2026-06-02 | LH-FA-IDX-003 Index-Schreib-Idempotenz; Schema-Konvention "Bereichskürzel ab v0.4.0" dokumentiert | Lab-Ausbau (Kurs-Welle 9), Modul 15 |
-| 0.4.1 | 2026-06-03 | LH-FA-IDX-003 Happy-Path: Index-Pfad auf `data/index/index.bin` berichtigt (stand gegen ADR-0003) | ADR-0003 |
+| 0.4.1 | 2026-06-03 | LH-FA-IDX-003 Happy-Path: Index-Pfad auf `data/index/index.bin` berichtigt — Tatsachenberichtigung, keine Vertragsänderung | — |

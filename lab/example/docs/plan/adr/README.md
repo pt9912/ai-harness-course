@@ -11,7 +11,7 @@
 
 ## Konventionen
 
-- ADRs sind nach `Accepted` **immutable** (siehe [Kurs Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)).
+- ADRs sind nach `Accepted` **immutable** (siehe [Kurs Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-adrs.md)).
 - Schärfungen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 - Neue ADR im Status `Proposed` darf während des Slice-Reviews iteriert werden.
 - Bei `Accepted`: dieser Index aktualisieren (Status, Datum).

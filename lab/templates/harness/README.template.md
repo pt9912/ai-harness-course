@@ -29,7 +29,7 @@ Diese Datei dupliziert sie nicht.
 | Rang | Datei | Charakter |
 |---|---|---|
 | 1 | [`spec/lastenheft.md`](../spec/lastenheft.md) | vertraglich abnahmebindend |
-| 2 | [`spec/spezifikation.md`](../spec/spezifikation.md) | technisch fortschreibbar *(opt. 3. Spec-Stratum)* |
+| 2 | [`spec/spezifikation.md`](../spec/spezifikation.md) | technisch fortschreibbar |
 | 3 | [`spec/architecture.md`](../spec/architecture.md) | Komponenten/Sequenzen, meilensteinfrei |
 | 4 | [`docs/plan/adr/`](../docs/plan/adr/) | Architekturentscheidungen |
 | 5 | [`docs/plan/planning/in-progress/roadmap.md`](../docs/plan/planning/in-progress/roadmap.md) | aktuelle Welle |
@@ -38,16 +38,13 @@ Diese Datei dupliziert sie nicht.
 | 8 | [`AGENTS.md`](../AGENTS.md) | Agent-Briefing |
 | 9 | diese Datei | Harness-Einstieg |
 
-> Rang 2 (`spec/spezifikation.md`) ist das **optionale 3. Spec-Stratum**.
-> Die Baseline führt **zwei** Straten — nur *Vertrag* (`lastenheft.md`) und
-> *Sicht* (`architecture.md`) sind obligatorisch, das Technik-Stratum ist
-> optional (Baseline-Regelwerk `grundlagen-konventionen.md` §Spec-Straten).
-> Diese Vorlage zeigt bereits die **adaptierte** Drei-Straten-Form; wer bei
-> der Baseline bleibt, löscht Rang 2 und nummeriert neu (dann acht Ränge).
-> **Adaption ist die Drei-Straten-Form, nicht die Zwei-Straten-Form** — wer
-> Rang 2 behält, deklariert das als `MR-<NNN>` in
-> [`conventions.md`](conventions.md); `MR-001` dort ist genau dieser Fall
-> und kann gelöscht werden, wenn du bei zwei Straten bleibst.
+> Die Ränge 1–3 sind die **drei Spec-Straten** — Vertrag, Technik, Sicht —,
+> und alle drei sind obligatorisch (Baseline-Regelwerk
+> `grundlagen-konventionen.md` §Spec-Straten). **Adaption ist die
+> Zwei-Straten-Form, nicht die Drei-Straten-Form**: Wer Rang 2 streicht,
+> deklariert das als `MR-<NNN>` in [`conventions.md`](conventions.md) und
+> nummeriert neu (dann acht Ränge); `MR-001` dort ist genau dieser Fall und
+> kann gelöscht werden, wenn du bei drei Straten bleibst.
 
 ## Guides (Feedforward-Quellen)
 
@@ -58,7 +55,7 @@ Was lenkt den Agenten *vor* der Handlung? Pointer, kein Inhalt.
 | Quelle | Inhalt |
 |---|---|
 | [`spec/lastenheft.md`](../spec/lastenheft.md) | Anforderungen, IDs, Akzeptanzkriterien |
-| [`spec/spezifikation.md`](../spec/spezifikation.md) | technische Details, Defaults *(opt. 3. Spec-Stratum)* |
+| [`spec/spezifikation.md`](../spec/spezifikation.md) | technische Details, Defaults |
 | [`spec/architecture.md`](../spec/architecture.md) | Komponenten, Schichten, Constraints |
 | [`docs/plan/adr/`](../docs/plan/adr/) | Architekturentscheidungen |
 | [`docs/plan/planning/`](../docs/plan/planning/) | Slice-Pläne und Roadmap |

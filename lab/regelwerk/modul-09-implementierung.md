@@ -69,7 +69,7 @@ Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 *Falsch/Richtig*-Beispiele **und** eine *technische Begründung*.
 Nicht jede Hard Rule in `AGENTS.md` ist repo-spezifisch: *„Architektur ist
 sprach- und meilensteinfrei"* folgt aus dem Sicht-Stratum und der
-Referenz-Richtung ([Modul 4 §Ziel-Form: Architektur-Sicht](modul-04-architektur-adrs.md#ziel-form-architektur-sicht))
+Referenz-Richtung ([Modul 3 §Ziel-Form: Architektur-Sicht](modul-03-spec.md#ziel-form-architektur-sicht))
 — ein Repo verkörpert sie in `AGENTS.md`, es entscheidet sie nicht. Solche
 Regeln gehören in die Datei, aber nicht in diese Liste.
 

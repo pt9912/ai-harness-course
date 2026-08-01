@@ -37,7 +37,7 @@ sollten erst greifen, was die linken Quadranten nicht abdecken können.
 
 * *Computational + Feedforward*: macht falsche Aktionen **technisch unmöglich**. Billigste Kontrolle.
 * *Computational + Feedback*: erkennt falsche Aktionen **schnell und deterministisch**. Das sind die Gates aus [Modul 13](modul-13-quality-gates.md).
-* *Inferential + Feedforward*: gibt dem Agenten Kontext, **bevor** er handelt. Das sind Spec, ADR, Carveouts — die Hebel aus [Modul 3](modul-03-lastenheft.md), [Modul 4](modul-04-architektur-adrs.md), [Modul 7](modul-07-carveouts.md).
+* *Inferential + Feedforward*: gibt dem Agenten Kontext, **bevor** er handelt. Das sind Spec, ADR, Carveouts — die Hebel aus [Modul 3](modul-03-spec.md), [Modul 4](modul-04-adrs.md), [Modul 7](modul-07-carveouts.md).
 * *Inferential + Feedback*: prüft semantisch nach. Das sind Review, Verifikation, Validation — die Hebel aus [Modul 10](modul-10-review-harness.md), [Modul 11](modul-11-verification.md), [Modul 8](modul-08-agentenrollen.md).
 
 Die Faustregel: **so weit links und oben wie möglich**. Eine Regel, die

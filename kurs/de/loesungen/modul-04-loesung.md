@@ -1,6 +1,6 @@
-# Lösung — Modul 4: Architektur und ADRs
+# Lösung — Modul 4: ADRs
 
-Zugehöriges Modul: [Modul 4 — Architektur und ADRs](../01-spec-und-architektur/modul-04-architektur-adrs.md).
+Zugehöriges Modul: [Modul 4 — ADRs](../01-spec-und-architektur/modul-04-adrs.md).
 
 ## Selbstcheck-Antworten
 

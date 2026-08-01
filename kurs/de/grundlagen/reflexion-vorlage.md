@@ -22,7 +22,7 @@ Instruktion — Lernende ringen mit einem komplexen Problem ohne
 Lösungsstrategie und werden erst danach unterrichtet. Diese stärkere
 Form findet sich im Kurs nur punktuell als *optionaler* Einstiegspfad
 (z. B. in [Modul 0](../00-einfuehrung/modul-00-einfuehrung.md#optionale-explorations-vorab-übung-kapur-stil)
-und [Modul 3](../01-spec-und-architektur/modul-03-lastenheft.md#optionale-explorations-vorab-übung-kapur-stil)).
+und [Modul 3](../01-spec-und-architektur/modul-03-spec.md#optionale-explorations-vorab-übung-kapur-stil)).
 
 Die Reflexion unten macht alle drei Formen erst zu Lernen. Verwende sie
 nach jeder Fehler-Provokations-, *Diagnose-* und Exploration-Vorab-Übung.

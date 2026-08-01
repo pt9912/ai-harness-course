@@ -124,4 +124,4 @@ Frage ist, keine Code-Architektur-Frage.
 | 2026-06-02 | Proposed | Modul 11 Worked Example, Lab-Ausbau (Kurs-Welle 9) |
 | 2026-06-02 | Accepted | bestehende done-Dateien geprüft, beide bestehen |
 | 2026-06-03 | Vierte Pflicht ergänzt | *Ausgefülltheit*: kein unausgefüllter `<…>`-Platzhalter. Der Gate war grün auf dem blanken Template-Rumpf, weil dieser die Satz-Schwelle allein mitbringt. Zuerst als Zähl-Ausnahme zu Pflicht 1 formuliert — das war falsch: Der Code verbietet Platzhalter unabhängig von der Satzzahl, also ist es ein eigenes Verbot und eine echte Erweiterung der Entscheidung |
-| 2026-06-03 | Korrektur | „zwei done-Dateien" (Option A · Geschichte *Accepted*) war falsch: drei, mit `welle-1-mvp.md`. Tatsachenangabe, Text oben unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-architektur-adrs.md)) |
+| 2026-06-03 | Korrektur | „zwei done-Dateien" (Option A · Geschichte *Accepted*) war falsch: drei, mit `welle-1-mvp.md`. Tatsachenangabe, Text oben unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-adrs.md)) |

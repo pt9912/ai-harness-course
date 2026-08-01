@@ -274,7 +274,7 @@ Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
   wird nicht überschrieben, sondern bekommt einen Nachfolger, der sie auflöst
   und den Baseline-Stand nennt, der den Trigger gefeuert hat. Die alte Zeile
   ist die historisch korrekte Aussage über den damaligen Zustand
-  (Append-only-Disziplin wie bei ADRs, [Modul 4](modul-04-architektur-adrs.md)).
+  (Append-only-Disziplin wie bei ADRs, [Modul 4](modul-04-adrs.md)).
 
 Ein neuer Tag löst einen **Review** aus (Re-Vendoring mit eigenem Diff),
 keinen stillen Auto-Bump.

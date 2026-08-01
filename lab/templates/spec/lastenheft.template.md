@@ -6,7 +6,7 @@
 > nach dem Ausfüllen.
 
 **Version:** 0.1.0 (`Major.Minor.Patch` — erhöhen bei Änderungen, siehe
-Baseline-Regelwerk `modul-03-lastenheft.md`).
+Baseline-Regelwerk `modul-03-spec.md`).
 
 **Status:** Draft | In Review | Accepted (entwurfsstatus, der die
 Verbindlichkeit der IDs steuert).
@@ -44,7 +44,7 @@ Regeln dieser Sektion: ID-Schema `<PREFIX>-FA-<NN>`. Das Präfix ist im ganzen
 Repo dasselbe und taucht in Make-Target-Kommentaren, ADRs und Commits wieder auf
 (Baseline-Regelwerk `grundlagen-konventionen.md` §ID-Schema als Klammer). Jede
 Anforderung trägt drei Pfade — Happy · Boundary · Negative — plus Out-of-Scope
-(Baseline-Regelwerk `modul-03-lastenheft.md` §Ziel-Form: Akzeptanzkriterium).
+(Baseline-Regelwerk `modul-03-spec.md` §Ziel-Form: Akzeptanzkriterium).
 
 <!-- Format: ID — Titel — Beschreibung — Akzeptanzkriterien
      (Given/When/Then, Boundary, Negative). -->
@@ -121,11 +121,11 @@ plus eine Zeile hier, mit dem externen CR (Ticket/Vertragsanhang) unter
 
 **Auch hier gilt die Decken-Regel:** keine ADR, kein Slice, kein Carveout,
 keine Welle, kein Verweis auf `spezifikation.md` oder `architecture.md` — in
-keiner Spalte. Anders als bei den übrigen Straten ist die Historie des
-Vertrags **nicht** von der Referenz-Richtung ausgenommen, weil sein
-Änderungs-Prozess außerhalb des Repos liegt. Was eine Änderung *auslöste*,
-steht am anderen Ende: in `Schärft:` der ADR oder in der Closure-Notiz des
-Slice (Baseline-Regelwerk `modul-03-lastenheft.md`
+keiner Spalte. Kein Spec-Stratum nimmt seine Historie davon aus. Die Spalte
+„Verweis" trägt den **externen** CR; der steht außerhalb des Repos und damit
+außerhalb der Referenz-Richtung. Wer im Repo bemerkt hat, dass eine Änderung
+nötig wird, hält das auf seiner Seite fest — etwa in der Closure-Notiz des
+Slice (Baseline-Regelwerk `modul-03-spec.md`
 §Ziel-Form: Akzeptanzkriterium).
 
 | Version | Datum | Änderung | Verweis |

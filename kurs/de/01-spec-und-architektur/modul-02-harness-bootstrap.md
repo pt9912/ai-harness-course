@@ -495,7 +495,7 @@ Selbstführungs-Praxis, kein einmaliges Audit —, mit sechs Eigenschaften:
   den Baseline-Stand nennt, der den Trigger gefeuert hat. Die alte Zeile ist
   die historisch korrekte Aussage über den damaligen Zustand — dieselbe
   Append-only-Disziplin wie bei ADRs
-  ([Modul 4](modul-04-architektur-adrs.md)).
+  ([Modul 4](modul-04-adrs.md)).
 
 Ein neuer Tag löst einen **Review** aus — Re-Vendoring ist eine bewusste
 Entscheidung mit eigenem Diff —, keinen stillen Auto-Bump.
@@ -924,4 +924,4 @@ die modulspezifischen Indikatoren sind:
   existieren; bootstrap-aware):
   [`../grundlagen/durchsetzungsschicht.md`](../grundlagen/durchsetzungsschicht.md).
 * Vorheriges Modul: [Modul 1 — Der Entwicklungszyklus](modul-01-entwicklungszyklus.md).
-* Nächstes Modul: [Modul 3 — Lastenheft und Spezifikation](modul-03-lastenheft.md).
+* Nächstes Modul: [Modul 3 — Die Spec: Lastenheft, Spezifikation, Architektur](modul-03-spec.md).

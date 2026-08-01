@@ -75,7 +75,7 @@ Iteration.
 - "Prompts ersetzen Specs." — Modul 3 (Fehlvorstellungs-Block; seit
   Welle 13 explizit benannt mit Lebenszyklus-Argument Spec vs. Prompt).
 
-### Über Architektur und ADRs (Modul 4)
+### Über ADRs (Modul 4)
 
 - "Eine ADR begründet eine Anforderung." — Modul 4
 - "Wenn ich die Entscheidung ändere, schreibe ich die ADR um." — Modul 4

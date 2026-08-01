@@ -1,6 +1,6 @@
-## Modul 3 — Lastenheft und Spezifikation
+## Modul 3 — Die Spec: Lastenheft, Spezifikation, Architektur
 
-<!-- Quelle: [01-spec-und-architektur/modul-03-lastenheft.md](../../kurs/de/01-spec-und-architektur/modul-03-lastenheft.md) -->
+<!-- Quelle: [01-spec-und-architektur/modul-03-spec.md](../../kurs/de/01-spec-und-architektur/modul-03-spec.md) -->
 
 ### Harness-Einordnung (Modul 3)
 
@@ -47,19 +47,23 @@ Das Lastenheft ist die **Decke** der Straten-Ordnung: Es referenziert nur
 innerhalb der eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts, Wellen,
 und auch nicht `spezifikation.md` oder `architecture.md`
 ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren);
-die Vertrags-Zeile der Matrix trägt in jeder fremden Spalte ein ❌ **ohne**
-Kontext-Ausnahme, anders als jede andere Zeile).
+die drei Spec-Zeilen der Matrix tragen in jeder fremden Spalte ein ❌ **ohne**
+Kontext-Ausnahme).
 
-**Das gilt in jedem Abschnitt, auch in der Historie.** Für die übrigen Straten
-ist die Provenance-Sektion ausgenommen, weil ihr Änderungs-Prozess einen
-Urheber im Repo hat; der Vertrag hat keinen. Wer eine Anforderung mit einer
-ADR begründet, hat die Entscheidung zur Anforderung gemacht — und wer den
+**Das gilt in jedem Abschnitt, auch in der Historie — und für alle drei
+Straten gleich, kein Stratum nimmt seine Provenance-Sektion aus.** Eine
+Historie-Zeile ist ein Protokoll und wird nicht rückwirkend geändert; ein
+dort genannter ADR-Verweis zeigt nach einer Supersedure dauerhaft auf eine
+Entscheidung, die nicht mehr gilt. Wer eine Anforderung mit einer ADR
+begründet, hat die Entscheidung zur Anforderung gemacht — und wer den
 auslösenden Slice in der Historie nennt, tut dasselbe eine Zeile später.
 
-Der Anlass geht damit nicht verloren, er liegt nur am richtigen Ende: Die ADR
-deklariert ihre Wirkung aufwärts in `Schärft:`, der Slice hält sie in seiner
-Closure-Notiz. Das Lastenheft sagt, **was** zugesagt ist — nicht, wer es
-bemerkt hat.
+Der Anlass geht damit nicht verloren, er liegt nur am richtigen Ende. Beim
+Lastenheft ist es der **externe CR** in der Verweis-Spalte; wer im Repo
+bemerkt hat, dass er nötig wird, hält es auf seiner Seite fest (Closure-Notiz
+des Slice). Bei Technik und Sicht deklariert die ADR ihre Wirkung aufwärts in
+`Schärft:`. Das Lastenheft sagt, **was** zugesagt ist — nicht, wer es bemerkt
+hat.
 
 ### Ziel-Form: Spezifikation
 
@@ -74,24 +78,47 @@ externe Verträge · Historie. Operative Regeln:
   ([`konventionen.md` §Spec-Stratifizierung](grundlagen-konventionen.md#spec-stratifizierung)).
 * **Präzisieren, nie erweitern** — Konfliktregel *Lastenheft › Spezifikation ›
   Architektur*.
-* **Optional** — nur Vertrag und Sicht sind obligatorisch. Ohne Technik-Stratum
-  fällt es aus der Kette; die Rang-Ordnung bleibt dieselbe.
-* **Kein ADR-Rückzeiger als Begründung** — die Spezifikation steht im
-  Stabilitäts-Rang über der ADR (*Vertrag › Technik › Sicht › ADR › Slice*),
-  normativ zeigen Referenzen nur aufwärts
+* **Obligatorisch** — alle drei Straten sind Pflicht. Wer technische
+  Festlegungen ins Lastenheft faltet, verschiebt nicht Inhalt, sondern deren
+  Änderungs-Prozess: Sie wären dort abnahmebindend und nur per Change Request
+  änderbar, und keine ADR dürfte sie je schärfen. Die Spezifikation existiert
+  deshalb auch dünn; ein Repo mit zwei Straten deklariert das als `MR-<NNN>`.
+* **Kein ADR-Verweis, auch nicht in der Historie** — die Spezifikation steht
+  im Stabilitäts-Rang über der ADR (*Vertrag › Technik › Sicht › ADR ›
+  Slice*), Referenzen zeigen nur aufwärts
   ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
-  Welche ADR einen Wert festlegt, deklariert **die ADR** in ihrem
-  `Schärft:`-Feld. **Die ADR-Spalte der Historie bleibt erlaubt**, aus zwei
-  Gründen zusammen: Abwärts-Verweise sind *Kontext ohne Normkraft* (die
-  `Schärft:`-Deklaration bleibt die einzige normative Kante), und die
-  ADR-Schärfung ist der Änderungs-Prozess dieses Stratums — die Provenance
-  ist dort also aussagekräftig. Beim Lastenheft trägt beides nicht: Seine
-  Matrix-Zeile führt als einzige in jeder fremden Spalte ein ❌ **ohne**
-  Kontext-Zelle, und sein Änderungs-Prozess liegt außerhalb des Repos.
+  Die **Decken-Regel gilt für alle drei Spec-Straten**: Kein Spec-Dokument
+  nennt eine ADR oder einen Slice. Welche ADR eine Festlegung schärft,
+  deklariert **die ADR** in ihrem `Schärft:`-Feld — die einzige Kante, und
+  sie zeigt aufwärts. Wer wissen will, welche ADR eine Spec-Stelle bewegt
+  hat, sucht in den `Schärft:`-Feldern.
+
+### Ziel-Form: Architektur-Sicht
+
+Die Sicht folgt der Vorlage
+[`templates/spec/architecture.template.md`](../templates/spec/architecture.template.md):
+Komponenten- und Sequenzsicht ohne **eigene Anforderungen** (Sicht-Stratum,
+[`konventionen.md` §Spec-Stratifizierung](grundlagen-konventionen.md#spec-stratifizierung)).
+Operative Regeln, die die Vorlage nicht selbst erzwingt:
+
+* Derivativ — Konfliktregel *Lastenheft › Spezifikation › Architektur*; die
+  untere Schicht präzisiert, erweitert nie.
+* Sprach- und meilensteinfrei — referenziert Modul-Pfade, aber keine Wellen,
+  Slices, Commit-Hashes oder Closure-Daten.
+* Keine Historie, nur `**Letzte Änderung:**` im Kopf — ein Frische-Marker,
+  kein Protokoll. Vertrag und Technik führen eine, weil ihr Änderungs-Prozess
+  einen benennbaren Urheber hat (externer Change Request bzw. schärfende ADR);
+  die Sicht hat keinen, jede ihrer Änderungen folgt aus einer Änderung
+  darüber. Eine Verweis-Spalte trüge hier nichts Zulässiges.
+* Kein ADR-Bezug: Die Sicht steht im Stabilitäts-Rang **über** der ADR
+  (*Vertrag › Technik › Sicht › ADR › Slice*), normative Referenzen zeigen nur
+  aufwärts ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+  Welche ADR eine Aussage der Sicht verbindlich macht, deklariert **die ADR**
+  aufwärts in ihrem `Schärft:`-Feld.
 
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 
-Reifere Specs zerfallen in drei Schichten mit eigener Precedence:
+Jede Spec zerfällt in drei obligatorische Schichten mit eigener Precedence:
 `lastenheft.md` (vertragliches *Was*) › `spezifikation.md` (präzisiertes
 *Wie genau*) › `architektur.md` (strukturelles *Wodurch*). Konfliktregel:
 **Lastenheft sticht Spezifikation sticht Architektur** — die untere

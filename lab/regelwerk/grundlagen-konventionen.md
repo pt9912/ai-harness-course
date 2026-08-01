@@ -9,7 +9,7 @@
 | Agent                    | LLM + Tool-Schnittstelle + Schleife. Hält Zustand über mehrere Turns.                                                                                                                                                                                                                                                                                                                                     |
 | Tool-Call                | Strukturierter Aufruf einer Funktion durch das LLM (`name`, `arguments`, `result`).                                                                                                                                                                                                                                                                                                                       |
 | SDLC / Lebenszyklus      | Software Development Lifecycle; in diesem Regelwerk *Entwicklungszyklus* genannt (Modul 1). Artefaktkette Spec → ADR → Plan → Code → Review → Verifikation → Closure mit verpflichtenden Rückwärtskanten (Lerneintrag, Folge-ADR). *Validierung* fehlt hier bewusst: sie prüft gegen den realen Bedarf außerhalb des Repos und hinterlässt kein Repo-Artefakt — ihr Ort ist die Rollen-Sequenz (Modul 8). |
-| Spec                     | Lastenheft-Artefakt unter `spec/`. Quelle der Wahrheit für *was*.                                                                                                                                                                                                                                                                                                                                         |
+| Spec                     | Die Artefakte unter `spec/` — die drei Straten *Vertrag* · *Technik* · *Sicht*. Quelle der Wahrheit für *was gilt*; das *warum* trägt die ADR.                                                                                                                                                                                                                                                                                                                                         |
 | ADR                      | Architecture Decision Record unter `docs/plan/adr/`. Quelle der Wahrheit für *warum so*.                                                                                                                                                                                                                                                                                                                  |
 | Slice                    | Kleinste lieferbare Einheit eines Features. Hat eigenen Plan, eigene DoD.                                                                                                                                                                                                                                                                                                                                 |
 | Welle                    | Bündel von Slices, das gemeinsam geplant und abgeschlossen wird.                                                                                                                                                                                                                                                                                                                                          |
@@ -37,15 +37,15 @@
 | Repo-Klasse              | Charakter eines Repos im Harness: *Referenz* · *Safety/Control* · *Policy/Compliance*. Bestimmt, wie scharf Hard Rules und Sensors gesetzt werden.                                                                                                                                                                                                                                                        |
 | ID-Schema                | Stabile Präfix-Klammer (`LH-*`, `HSM-*`, `GG-*`), die Spec-Anforderungen, Make-Target-Kommentare, ADRs und Commits verbindet.                                                                                                                                                                                                                                                                             |
 | `BEO-<NNN>`              | Kennung einer Beobachtung im Beobachtungs-Register ([Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)). Vergabestelle ist das Register selbst; sie macht den Zähler unabhängig vom Wortlaut der Bezeichnung.                                                                                                                                                                               |
-| Referenz-Richtung (SDP)  | Normative Referenzen zeigen nur volatil→stabil — **Vertrag › Technik › Sicht › ADR › Slice** (Stratum-Klassen, nicht Dateinamen); Abwärts-/Seitwärts-Verweise sind Kontext, keine Spezifikation. Siehe [§Referenz-Richtung](#referenz-richtung-sdp-wer-darf-wen-referenzieren).                                                                                                                                                                                         |
-| Spec-Stratifizierung     | Aufteilung der Spec in *vertraglich* (Lastenheft) und *technisch* (Spezifikation) mit eigener Precedence-Regel.                                                                                                                                                                                                                                                                                           |
-| Stratum                  | Rollen-Klasse eines Spec-Dokuments — *Vertrag* (Decke) · *Technik* · *Sicht* —, bestimmt über normativen Gehalt und Änderungs-Prozess, nicht über den Dateinamen. Rang: Vertrag › Technik › Sicht; nur Vertrag und Sicht sind obligatorisch. Siehe [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument).                                                                                                    |
+| Referenz-Richtung (SDP)  | Normative Referenzen zeigen nur volatil→stabil — **Vertrag › Technik › Sicht › ADR › Slice** (Stratum-Klassen, nicht Dateinamen). Wo die Matrix eine Zelle als *Kontext* ausweist, ist der Verweis erlaubt, trägt aber keine Normkraft; ein ❌ erlaubt auch keinen Kontext. Siehe [§Referenz-Richtung](#referenz-richtung-sdp-wer-darf-wen-referenzieren).                                                                                                                                                                                         |
+| Spec-Stratifizierung     | Aufteilung der Spec in drei obligatorische Straten — *vertraglich* (Lastenheft) · *technisch* (Spezifikation) · *Sicht* (Architektur) — mit eigener Precedence-Regel.                                                                                                                                                                                                                                                                                           |
+| Stratum                  | Rollen-Klasse eines Spec-Dokuments — *Vertrag* (Decke) · *Technik* · *Sicht* —, bestimmt über normativen Gehalt und Änderungs-Prozess, nicht über den Dateinamen. Rang: Vertrag › Technik › Sicht; alle drei sind obligatorisch, eine Abweichung wird als `MR-<NNN>` deklariert. Siehe [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument).                                                                                                    |
 | Bootstrap-aware Gate     | Gate mit weicher Frühphase: kennt eine Reifestufe und greift erst ab Trigger hart. Dokumentiert, was die Stufe ist.                                                                                                                                                                                                                                                                                       |
 
 ### Verzeichniskonvention
 
 ```
-spec/                       # Lastenhefte
+spec/                       # Spec-Straten: Vertrag · Technik · Sicht
 docs/plan/adr/              # Architecture Decision Records
 docs/plan/planning/open/    # geplante, noch nicht gestartete Slices
 docs/plan/planning/next/    # priorisiert/eingeplant
@@ -57,10 +57,8 @@ docs/plan/planning/in-progress/roadmap.md   # Meilensteine, Wellen, aktive Welle
 docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
 docs/reviews/               # Review-Reports, ein Report pro Lauf (Modul 10)
 AGENTS.md                   # maschinell lesbare Projekt-Konventionen für Agenten
-harness/README.md           # Repo-Einstiegspunkt: Source Precedence, Guides,
-Sensors, Safety
-harness/conventions.md      # repo-lokale Strukturregeln und Adaptionen ggü.
-Baseline (MR-NNN, Modus pro Sub-Area)
+harness/README.md           # Einstiegspunkt: Precedence, Guides, Sensors, Safety
+harness/conventions.md      # repo-lokale Regeln, Adaptionen (MR-NNN), Modus pro Sub-Area
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
 
@@ -120,30 +118,33 @@ muss vorher festlegen, wer gewinnt. Eine pragmatische Default-Reihenfolge
 für ein typisches Repo:
 
 1. `spec/lastenheft.md`
-2. `spec/architecture.md`
-3. `docs/plan/adr/README.md` und die darin referenzierten ADRs
-4. `docs/plan/planning/in-progress/roadmap.md`
-5. `docs/user/*.md` (Betriebs-/Operations-Docs — Quality-, Releasing- und
+2. `spec/spezifikation.md`
+3. `spec/architecture.md`
+4. `docs/plan/adr/README.md` und die darin referenzierten ADRs
+5. `docs/plan/planning/in-progress/roadmap.md`
+6. `docs/user/*.md` (Betriebs-/Operations-Docs — Quality-, Releasing- und
 Runbook-*Sichten*)
-6. `README.md`
-7. `AGENTS.md`
-8. `harness/README.md`
+7. `README.md`
+8. `AGENTS.md`
+9. `harness/README.md`
 
 ```mermaid
 flowchart TD
-    L["1. spec/lastenheft.md<br/>(vertraglich)"] --> S["2. spec/architecture.md"]
-    S --> A["3. docs/plan/adr/<br/>(ADRs)"]
-    A --> R["4. roadmap.md"]
-    R --> U["5. docs/user/*.md"]
-    U --> RM["6. README.md"]
-    RM --> AG["7. AGENTS.md"]
-    AG --> H["8. harness/README.md"]
+    L["1. spec/lastenheft.md<br/>(vertraglich)"] --> T["2. spec/spezifikation.md<br/>(technisch)"]
+    T --> S["3. spec/architecture.md"]
+    S --> A["4. docs/plan/adr/<br/>(ADRs)"]
+    A --> R["5. roadmap.md"]
+    R --> U["6. docs/user/*.md"]
+    U --> RM["7. README.md"]
+    RM --> AG["8. AGENTS.md"]
+    AG --> H["9. harness/README.md"]
     H -. "delegiert Form-/Strukturfragen" .->
     C["harness/conventions.md<br/>(Konventionsspeicher —<br/>außerhalb der
     Rang-Zählung)"]
     C -. "MR-NNN gilt nur im<br/>Geltungsbereich davor" .-> B["vendored
     Baseline<br/>.harness/baseline/&lt;tag&gt;/"]
     style L fill:#fff4d6,stroke:#d4a017
+    style T fill:#fff4d6,stroke:#d4a017
     style S fill:#fff4d6,stroke:#d4a017
     style A fill:#fff4d6,stroke:#d4a017
     style AG fill:#dceaff,stroke:#3366cc
@@ -175,9 +176,8 @@ Verzeichniskonvention, Zusatzklassen, Modus-Deklarationen, Adaptionen
 ([§harness/conventions.md als Konventionsspeicher](#harnessconventionsmd-als-konventionsspeicher)).
 Wo `AGENTS.md` oder `harness/README.md` zu einer solchen Frage nichts sagen,
 entsteht deshalb **kein Konflikt, sondern eine Zuständigkeit** — die Rangliste
-entscheidet über *Inhalt*, der Konventionsspeicher über *Form*. In der
-3-Strata-Form, die die
-Templates ausliefern, wäre der Platz ohnehin aufgebraucht — neun Ränge, das
+entscheidet über *Inhalt*, der Konventionsspeicher über *Form*. Der Platz
+wäre ohnehin aufgebraucht — neun Ränge, das
 Maximum aus [Modul 1](modul-01-entwicklungszyklus.md).
 
 Das vendored Regelwerk unter `.harness/baseline/<tag>/` steht noch darunter —
@@ -224,8 +224,8 @@ den Adaptions-Block des repo-lokalen Konventionsdokuments (Default-Pfad
 
 #### Spec-Stratifizierung
 
-In reiferen Repos zerfällt `spec/` selbst in mehrere Tiefen mit eigener
-Precedence:
+`spec/` zerfällt selbst in drei Straten mit eigener Precedence — alle drei
+obligatorisch ([§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument)):
 
 | Datei                   | Charakter                                                                     | Änderungs-Prozess     |
 | ----------------------- | ----------------------------------------------------------------------------- | --------------------- |
@@ -292,51 +292,137 @@ ist der Spezialfall *innerhalb* von `spec/` ("ADR darf Spezifikation
 schärfen, nie das Lastenheft"); die folgende Matrix dehnt dieselbe Logik
 auf die ganze Artefakt-Kette aus.
 
-**Stabilitäts-Rang** (stabil → volatil): **Vertrag › ADR › Slice** — die
-Hauptmatrix zeigt die Primär-Typen; zwischen Vertrag und ADR liegen die
-weiteren Spec-Straten **Technik › Sicht** (`spezifikation.md`,
-`architecture.md`), entfaltet in [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument).
-`lastenheft.md` instanziiert das Vertrags-Stratum. Carveout liegt auf
-Slice-Ebene, Roadmap/Welle außerhalb. Wir kollabieren
+**Stabilitäts-Rang** (stabil → volatil):
+**Vertrag › Technik › Sicht › ADR › Slice**. `lastenheft.md` instanziiert das
+Vertrags-Stratum, `spezifikation.md` das Technik-, `architecture.md` das
+Sicht-Stratum; welches Dokument in welches Stratum fällt, regelt
+[§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument). Carveout liegt auf
+Slice-Ebene, Welle und Roadmap außerhalb. Wir kollabieren
 Martins kontinuierliche Instabilitäts-Metrik (`I = Ce/(Ca+Ce)`) bewusst
 auf einen **Typ-Rang** — die Artefakt-Taxonomie ist endlich und benannt,
 damit wird die Regel lehr- und prüfbar.
 
-> **Die Matrix-Zeilen sind Stratum-*Klassen*, nicht Dateinamen.** Die Zeile
-> „Lastenheft" steht für das **Vertrags-Stratum** (die Decke); ein Projekt
-> kann mehrere Vertrags-, Technik- und Sicht-Dokumente haben. Wie ein neues
-> Spec-Dokument einem Stratum zugeordnet wird — und warum die Decke nicht
-> fix `lastenheft.md` ist — regelt [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument)
-> unten.
+> **Die Matrix-Zeilen sind Stratum-*Klassen*, nicht Dateinamen.** Die
+> Dateinamen in der Kopfzeile sind die üblichen Instanzen; ein Projekt kann
+> mehrere Vertrags-, Technik- und Sicht-Dokumente haben. Wie ein neues
+> Spec-Dokument einem Stratum
+> zugeordnet wird — und warum die Decke nicht fix `lastenheft.md` ist —
+> regelt [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument) unten.
 
-| Dokument ↓ referenziert → | Lastenheft                  | ADR                                                                              | Slice                                                                             | Carveout                                                     | Roadmap/Welle                        |
-| ------------------------- | --------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------ |
-| **Lastenheft**            | Normativ: nur intra-`LH-*`  | ❌                                                                                | ❌                                                                                 | ❌                                                            | ❌                                    |
-| **ADR**                   | Normativ: `LH-*`-Grundlage  | Normativ/Lineage: aktive ADRs als Grundlage; superseded nur ADR-interne Historie | Kontext: Status-Provenance, Verifikations-Zeiger — *keine* Entscheidungsgrundlage | ❌                                                            | ❌                                    |
-| **Slice**                 | Normativ: `LH-*`-Scope      | Normativ: nur aktive ADRs                                                        | Kontext: triggered-by, blocked-by, follow-up-of                                   | Kontext: eigener/offener Carveout, Debt-/Closure-Rückverweis | Kontext: Einordnung in Welle/Roadmap |
-| **Carveout**              | Normativ: betroffene `LH-*` | Normativ: betroffene aktive ADRs                                                 | Kontext/Traceability: owner/verursachender/schließender Slice                     | Kontext: ersetzt/zusammengeführt/abhängig                    | Kontext: Welle/Planungseinordnung    |
-| **Roadmap/Welle**         | Kontext: Zielbild/Scope     | Kontext: Architekturhintergrund                                                  | Kontext: Orchestrierung/Sequenz                                                   | Kontext: Risiko-/Debt-Übersicht                              | Kontext: Hierarchie/Sequenz          |
+| Dokument ↓ referenziert → | Vertrag `lastenheft.md` | Technik `spezifikation.md` | Sicht `architecture.md` | ADR | Slice | Carveout | Welle | Roadmap |
+|---|---|---|---|---|---|---|---|---|
+| **Vertrag** (Decke) | intra (Peers) — nur `LH-*` untereinander | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Technik** | Normativ: präzisiert Vertrag, Vertrag gewinnt | intra (Peers) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Sicht** | Normativ: Use-Case ↔ Vertrags-ID | Normativ: visualisiert | intra (Peers) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **ADR** | Normativ: `LH-*`-Grundlage | Normativ: **`Schärft:`** | Normativ: **`Schärft:`** | Normativ/Lineage: aktive ADRs als Grundlage; superseded nur ADR-interne Historie | Kontext: **wo** verifiziert/entstanden, nie **warum** entschieden — der zulässige Zeiger wird in seiner Zeile markiert | ❌ | ❌ | ❌ |
+| **Slice** | Normativ: `LH-*`-Scope | Normativ: betroffene Spec-§ | Normativ: betroffene Spec-§ | Normativ: nur aktive ADRs | Kontext: triggered-by, blocked-by, follow-up-of | Kontext: eigener/offener Carveout, Debt-/Closure-Rückverweis | Kontext: `Welle:`-Feld, auch „ohne Welle“ | ❌ |
+| **Carveout** | Normativ: betroffene `LH-*` | Normativ: betroffene Spec-§ | Normativ: betroffene Spec-§ | Normativ: betroffene aktive ADRs | Kontext/Traceability: owner/verursachender/schließender Slice | Kontext: ersetzt/zusammengeführt/abhängig | Kontext: Planungseinordnung | Kontext: Meilenstein als Auflösungs-Trigger |
+| **Welle** | Kontext: `LH-*`-Bezug der Slice-Liste | Kontext: technischer Rahmen | Kontext: Architekturbild | Kontext: Trigger (`ADR-<NNNN>` accepted) | Kontext: Bündelung — die Slice-Liste | Kontext: Risiko-/Debt-Übersicht | Kontext: Vorgänger-Welle als Trigger | Kontext: Zielmeilenstein `M<NN>` |
+| **Roadmap** | Kontext: Zielbild/Scope | Kontext: technischer Rahmen | Kontext: Architekturbild | Kontext: Architekturhintergrund | Kontext: Orchestrierung/Sequenz | Kontext: Risiko-/Debt-Übersicht | Kontext: Hierarchie — aktuelle und nächste Wellen | intra: Meilenstein ↔ Welle |
+
+Die drei Spec-Zeilen sind **identisch bis auf die Diagonale**: links davon nur
+*Normativ aufwärts*, rechts davon nur ❌. Das ist die **Decken-Regel** — sie
+gilt für alle drei Straten, nicht nur für den Vertrag.
+
+**Welle und Roadmap sind zwei Zeilen, nicht eine.** Die Welle trägt das
+*Bündel* (Ziel, Trigger, Slice-Liste), die Roadmap die *Reihenfolge* (aktuelle
+Welle, nächste Wellen, Meilensteine). Ihre Reihenfolge in der Matrix folgt der
+Zeigerichtung — **Slice → Welle → Roadmap**: Der Slice nennt seine Welle, die
+Welle ihren Zielmeilenstein. Getrennt wird sichtbar, was zusammengefasst
+unsichtbar blieb: Ein Slice nennt **nie** die Roadmap — und was von außen doch
+auf sie zeigt (Carveout, Welle), zeigt auf einen **Meilenstein**, nie auf die
+Planung selbst.
 
 ```mermaid
 flowchart BT
-    S["Slice<br/>(volatil)"] -->|normativ| A["ADR"]
-    S -->|normativ| L["lastenheft.md<br/>(stabil — Decke)"]
-    A -->|normativ| L
-    A -->|Lineage: supersedes/depends-on| A
-    C["Carveout"] -->|normativ: betroffene LH/ADR| A
-    C -->|normativ| L
-    S -. Kontext .-> C
-    R["Roadmap/Welle"] -. nur Kontext .-> S
+    subgraph SPEC["Spec-Straten — hinein ja, hinaus nie"]
+        direction BT
+        V["Sicht<br/>architecture.md"] -->|visualisiert| T["Technik<br/>spezifikation.md"]
+        V -->|"Use-Case ↔ Vertrags-ID"| L["Vertrag<br/>lastenheft.md<br/>(Decke)"]
+        T -->|präzisiert| L
+    end
+    A["ADR"] -->|"LH-*-Grundlage"| L
+    A -->|"Schärft:"| T
+    A -->|"Schärft:"| V
+    S["Slice<br/>(volatil)"] -->|"LH-*-Scope"| L
+    S -->|"betroffene Spec-§"| T
+    S -->|"betroffene Spec-§"| V
+    S -->|"nur aktive ADRs"| A
+    C["Carveout"] -->|"betroffene LH-*"| L
+    C -->|"betroffene Spec-§"| T
+    C -->|"betroffene Spec-§"| V
+    C -->|"betroffene aktive ADRs"| A
     style L fill:#fff4d6,stroke:#d4a017
+    style T fill:#fff4d6,stroke:#d4a017
+    style V fill:#fff4d6,stroke:#d4a017
     style A fill:#fff4d6,stroke:#d4a017
 ```
 
-Solide Kanten = normativ (immer aufwärts + die eine ADR-interne Lineage-
-Schleife). Gestrichelt = Kontext. **Die normativen Kanten bilden einen
-strikt aufwärts gerichteten azyklischen Graphen (DAG) plus genau eine
-Selbstkante** — kein Baum, denn Slice, Carveout und ADR haben je *zwei*
-normative Eltern (Slice/Carveout → ADR *und* `LH-*`; ADR → `LH-*` *und*
-Spec-§). Das ist die ganze Theorie in einem Bild.
+**Das Bild zeigt die normativen Kanten.** Sie bilden einen strikt aufwärts
+gerichteten azyklischen Graphen; kein Baum, denn Slice, Carveout und ADR haben
+je *zwei* normative Eltern (Slice/Carveout → ADR *und* `LH-*`; ADR → `LH-*`
+*und* Spec-§).
+
+**Die Diagonale steht nur in der Matrix.** Intra-Peers, ADR-Lineage und die
+Selbstbezüge von Slice, Carveout, Welle und Roadmap sind Kanten eines Knotens
+auf sich selbst; die Bilder lassen sie weg, weil sie die Richtung überlagern,
+um die es geht. Zusammen zeigen die drei Bilder deshalb jede Zelle
+**außerhalb der Diagonale**, die kein ❌ trägt; die Kantentexte sind die
+Zelltexte.
+
+**Die Planungs-Ebene zeigt in den kanonischen Block, nie umgekehrt.** Welle
+und Roadmap berufen sich auf Vertrag, Technik, Sicht und ADR — umgekehrt
+beruft sich dort niemand auf sie. Genau das macht sie zur Planungs-, nicht zur
+Spezifikations-Ebene.
+
+```mermaid
+flowchart LR
+    W["Welle"] -. "LH-*-Bezug der Slice-Liste" .-> L["Vertrag<br/>lastenheft.md"]
+    W -. "technischer Rahmen" .-> T["Technik<br/>spezifikation.md"]
+    W -. "Architekturbild" .-> V["Sicht<br/>architecture.md"]
+    W -. "Trigger: ADR accepted" .-> A["ADR"]
+    R["Roadmap"] -. "Zielbild/Scope" .-> L
+    R -. "technischer Rahmen" .-> T
+    R -. "Architekturbild" .-> V
+    R -. "Architekturhintergrund" .-> A
+    style L fill:#fff4d6,stroke:#d4a017
+    style T fill:#fff4d6,stroke:#d4a017
+    style V fill:#fff4d6,stroke:#d4a017
+    style A fill:#fff4d6,stroke:#d4a017
+```
+
+**Die Planungs-Ebene führt Buch.** Slice, Carveout, Welle und Roadmap zeigen
+wechselseitig aufeinander — wer verursacht, wer schließt, was blockiert, was
+zusammen läuft. Dazu die einzige Kontext-Kante, die den kanonischen Block
+**verlässt**: `ADR → Slice`. Sie ist deshalb die einzige, die eine Markierung
+in ihrer Zeile verlangt; alle anderen bleiben in der Planungs-Ebene, wo
+Abwärts-Verweise ohnehin erwartbar sind.
+
+```mermaid
+flowchart LR
+    A["ADR"] -. "wo verifiziert/entstanden — Zeile markiert" .-> S["Slice"]
+    S -. "eigener/offener Carveout, Debt-/Closure-Rückverweis" .-> C["Carveout"]
+    S -. "Welle:-Feld, auch ohne Welle" .-> W["Welle"]
+    C -. "owner/verursachender/schließender Slice" .-> S
+    C -. "Planungseinordnung" .-> W
+    C -. "Meilenstein als Auflösungs-Trigger" .-> R["Roadmap"]
+    W -. "Bündelung: die Slice-Liste" .-> S
+    W -. "Risiko-/Debt-Übersicht" .-> C
+    W -. "Zielmeilenstein M-NN" .-> R
+    R -. "Orchestrierung/Sequenz" .-> S
+    R -. "Risiko-/Debt-Übersicht" .-> C
+    R -. "Hierarchie: aktuelle/nächste Wellen" .-> W
+    style A fill:#fff4d6,stroke:#d4a017
+```
+
+**Was von außen auf die Roadmap zeigt, zeigt auf einen Meilenstein** — der
+Carveout als Auflösungs-Trigger, die Welle als Zielmeilenstein. Auf die
+*Planung* selbst — welche Welle als nächstes läuft — beruft sich nichts: Sie
+ist zu volatil, um Bezugspunkt zu sein. Deshalb trägt der Slice ein
+`Welle:`-Feld und keinen Roadmap-Verweis.
+
+**Kontext trägt keine Normkraft** — gestrichelt heißt: darf stehen, begründet
+aber nichts.
 
 **Tragende Regeln:**
 
@@ -349,15 +435,33 @@ Spec-§). Das ist die ganze Theorie in einem Bild.
    Ablauf- und Traceability-Buchführung (owner, Ursache, Closure). Die
    fachliche Begründung läuft nie über den Slice, sondern über `LH-*`
    oder aktive ADR.
-4. **Roadmap/Welle steht außerhalb der normativen Klammer** — darf Slices
-   orchestrieren und gruppieren, erzeugt aber keine Spezifikation.
-5. **Provenance: Body vs. Changelog.** Ein Abwärts-Zeiger im
-   *Anforderungs-/Entscheidungs-Text* ist verboten. Provenance in einer
-   abgegrenzten *Versions-/Historie-Tabelle am Dokument-Rand* ist Kontext
-   und für alle Artefakte erlaubt (die Slice-ID bleibt ein stabiler
-   Token, auch nachdem die Datei nach `done/` wandert). Der Unterschied
-   ist nicht der Stabilitätsrang, sondern *ob die Referenz Teil der
-   Spezifikations-Logik ist*.
+4. **Welle und Roadmap stehen außerhalb der normativen Klammer** — die Welle
+   bündelt (Ziel, Trigger, Slice-Liste), die Roadmap ordnet (Reihenfolge,
+   Meilensteine); beide erzeugen keine Spezifikation.
+5. **Provenance nur auf der Planungs-Ebene.** In einer abgegrenzten
+   *Versions-/Historie-Tabelle am Dokument-Rand* ist ein Abwärts-Verweis
+   Kontext — für ADR, Slice, Carveout und die Planungs-Ebene (die
+   Slice-ID bleibt ein stabiler Token, auch nachdem die Datei nach
+   `done/` wandert). **Für die Spec-Straten gilt das nicht:** Kein
+   Spec-Dokument nennt eine ADR oder einen Slice, in keinem Abschnitt,
+   auch nicht in seiner Historie.
+
+   Der Grund ist nicht der Rang, sondern die **Unreparierbarkeit**. Eine
+   Historie-Zeile ist ein Protokoll; sie wird nicht rückwirkend geändert.
+   Wird die dort genannte ADR superseded, zeigt die Zeile dauerhaft auf
+   eine Entscheidung, die nicht mehr gilt — und kein Gate meldet es, wenn
+   die Sektion von der Prüfung ausgenommen ist. Im Körper ist derselbe
+   Zeiger reparierbar, am Dokument-Rand ist er es nicht: Für rottende
+   Verweise ist die Historie die *schlechteste* Stelle, nicht die
+   harmloseste. Was eine Änderung auslöste, steht aufwärts — `Schärft:`
+   in der ADR, Closure-Notiz im Slice.
+
+   **Eine Verweis-Spalte trägt nur, was sonst nirgends im Repo steht.**
+   Beim Vertrag ist das der externe CR — er hat kein anderes Zuhause.
+   Technik und Sicht verankern ihre Aufwärts-Bezüge bereits im Körper
+   (`LH-*` in Abschnitts-Überschriften und Begründungs-Spalten); dieselbe
+   Kopplung ein zweites Mal in der Historie zu führen, erzeugt keine
+   Information, sondern eine zweite Fassung, die driftet.
 
 **ADR-Lineage vs. Carveout-Lineage — gleiche Form, andere Normativität.**
 Die Diagonalzellen ADR→ADR und Carveout→Carveout sehen identisch aus
@@ -381,12 +485,14 @@ eine *computational feedforward*-Kontrolle wie der
 [Traceability-Constraint](#traceability-constraint):
 
 - ein Spec-Stratum (`lastenheft.md`, `spezifikation.md`, `architecture.md`)
-enthält `ADR-` oder `slice-` *außerhalb* der Historie-/Versions-Tabelle → fail
+enthält `ADR-` oder `slice-` → fail, **ohne ausgenommene Sektion**
 - Slice referenziert eine ADR mit `Status: Superseded` → fail
 
-Damit Regel 5 mechanisch greift, lebt Provenance nur unterhalb einer
-designierten Überschrift (z. B. `## Geschichte` oder die Versions-Tabelle),
-die der Check von der Prüfung ausnimmt.
+Die ausgenommene Überschrift (z. B. `## Geschichte` oder die
+Versions-Tabelle), unter der Provenance nach Regel 5 leben darf, gibt es
+nur auf der **Planungs-Ebene**. Über den Spec-Straten läuft der Check über
+das ganze Dokument — gäbe es dort eine ausgenommene Sektion, wäre sie genau
+die Stelle, an der die Verweise erfahrungsgemäß landen.
 
 *Aufwärts-Kanten als klickbare Links — und ihre Reifestufe.* Die erlaubten
 Aufwärts-Referenzen — die ADR-Felder `**Bezug:**` und `**Schärft:**`
@@ -401,15 +507,24 @@ mechanisch erzwungene Reifestufe löst Links auf, prüft Anker-Existenz und
 erzwingt die volle Matrix am Zielknoten. Das Lab bleibt bewusst bei der
 grep-Variante, um die mechanische Hälfte minimal und lesbar zu halten.
 
-*Agentischer Review-Sensor (nicht grep-bar).* Ob eine ADR→Slice-Referenz
+*Mechanisierbar — über den umgekehrten Default.* Ob eine ADR→Slice-Referenz
 ein erlaubter *Verifikations-Zeiger/Provenance* oder eine verbotene
-*Entscheidungsgrundlage* ist, ist eine semantische Unterscheidung — sie
-gehört zum Reviewer-Agenten, nicht zum Linter. Ein grep, der jedes
-`slice-NNN` im ADR-Body fängt, würde legitime Verifikations-Zeiger (etwa
-„`make test-determinism` (slice-NNN) verifiziert auch LH-FA-NNN")
-falsch-positiv flaggen. Faustregel für den Reviewer: *referenziert die
-ADR den Slice, um eine Entscheidung zu **begründen** (verboten) oder um
-zu zeigen, wo sie **verifiziert/entstanden** ist (erlaubt)?*
+*Entscheidungsgrundlage* ist, ist eine semantische Unterscheidung. Sie ist
+darum aber **nicht unprüfbar**: Ein naiver grep über den ADR-Body flaggte
+legitime Zeiger falsch-positiv (etwa „`make test-determinism` (slice-NNN)
+verifiziert auch LH-FA-NNN") — die Bauform, die trägt, ist eine andere.
+**Die Kante gilt als verboten, und die Ausnahme wird am Ort deklariert.**
+Der Autor markiert den zulässigen Zeiger in seiner Zeile, der Sensor
+erzwingt alles Übrige; dieselbe Form wie bei jeder deklarierten Ausnahme
+(Carveout mit Trigger, `ignore`-Eintrag mit Begründung). Auch die Rangfolge
+*innerhalb* der Spec-Klasse — Vertrag ↛ Technik ↛ Sicht — ist so erzwingbar,
+nicht nur Spec ↛ ADR/Slice.
+
+Was dem Reviewer bleibt, ist das, was kein Sensor prüfen kann: ob die
+Markierung **ehrlich** gesetzt ist. Faustregel: *referenziert die ADR den
+Slice, um eine Entscheidung zu **begründen** (verboten) oder um zu zeigen,
+wo sie **verifiziert/entstanden** ist (erlaubt)?* Wer den Marker setzt, um
+einen Befund loszuwerden, hat die Regel nicht erfüllt, sondern umgangen.
 
 Bereits `Accepted`-ADRs sind immutable: vor Einführung dieser Konvention
 entstandene Grenzfälle werden **grandfathered**, nicht durch eine
@@ -429,12 +544,21 @@ genau ein Stratum:
 | **Technik**         | eigene technische Festlegungen           | fortschreibbar, ADR-Schärfung erlaubt | `spezifikation.md` | `api-spec.md`, `data-model.md` |
 | **Sicht**           | *keine* eigenen Anforderungen, derivativ | Diagramm-/View-Update                 | `architecture.md`  | `deployment.md`, Sequenz-Views |
 
-**Nur Vertrag und Sicht sind obligatorisch; das Technik-Stratum ist
-optional.** Repos, die ihre technischen Festlegungen direkt in Vertrag
-oder Sicht falten, enforcen real nur zwei Klassen — etwa ausschließlich
-`contract_spec` (`lastenheft.md`) und `view_spec` (`architecture.md`), ohne
-separates Technik-Stratum. Die Rang-*Ordnung* bleibt dieselbe; ein nicht
-vorhandenes Stratum fällt einfach aus der Kette.
+**Alle drei Straten sind obligatorisch.** Ein Repo, das etwas baut, trifft
+technische Festlegungen — und für die gibt es keinen anderen zulässigen Ort.
+Im Vertrag wären sie abnahmebindend und nur per Change Request änderbar; in
+der Sicht widersprächen sie deren Derivativität. „Falten" verschiebt deshalb
+nicht Inhalt zwischen Dateien, es ändert seinen **Änderungs-Prozess** — und
+genau der definiert das Stratum mit. Das Technik-Stratum existiert darum auch
+dann, wenn es dünn ist: Es ist der einzige Ort für eine Festlegung, die wir
+selbst gesetzt haben und selbst fortschreiben dürfen, und es ist das Ziel der
+`Schärft:`-Kante — ohne es hätte die einzige normative ADR→Spec-Kante nur noch
+die Sicht.
+
+Ein Repo *kann* mit zwei Straten fahren. Dann ist das eine **Abweichung von
+der Baseline und wird als `MR-<NNN>` deklariert**, nicht durch Weglassen
+erledigt — ein Stratum, das niemand deklariert hat, ist eine stille Setzung
+(dieselbe Klasse wie ein undeklariertes Gate).
 
 Generalisierter Rang: **Vertrag › Technik › Sicht › ADR › Slice** —
 deckungsgleich mit „Lastenheft sticht Spezifikation sticht Architektur"
@@ -467,24 +591,15 @@ Decken-Regel über *alle* Spec-Straten durch, nicht nur über das Lastenheft.
 erlaubt (wie intra-`LH-*`), keine normative Querabhängigkeit, die Zyklen
 baut.
 
-Reference-Regeln je Stratum — verfeinert die „Lastenheft"-Zeile der
-Hauptmatrix in drei Zeilen:
+Die Reference-Regeln je Stratum stehen in der Matrix oben — die drei
+Spec-Zeilen ([§Referenz-Richtung (SDP)](#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+Sie standen hier einmal ein zweites Mal; zwei Fassungen derselben Regel
+driften.
 
-| Doc ↓ ref → | Vertrag                                       | Technik                | Sicht         | ADR |
-| ----------- | --------------------------------------------- | ---------------------- | ------------- | --- |
-| **Vertrag** | intra (Peers)                                 | ❌                      | ❌             | ❌ ¹ |
-| **Technik** | Normativ: präzisiert Vertrag, Vertrag gewinnt | intra (Peers)          | ❌             | ❌ ¹ |
-| **Sicht**   | Normativ: Use-Case ↔ Vertrags-ID              | Normativ: visualisiert | intra (Peers) | ❌ ¹ |
-
-¹ Spec → ADR existiert im bindenden Text nicht — auch nicht als Quellen-
-Spalte. Die aufwärts zeigende ADR trägt alles (ADR → `LH-*` bzw. ADR →
-Spec-§, *siehe oben*); das Lastenheft wird dabei *nie* geschärft. Provenance
-lebt allein in der Historie-Tabelle (Regel 5); `check-references` erzwingt
-das über alle Straten.
-
-Die Spalten **Slice/Carveout/Roadmap** sind für *alle* Spec-Straten ❌ —
-das Spec-Layer referenziert nie abwärts (wie die „Lastenheft"-Zeile der
-Hauptmatrix); darum hier weggelassen.
+Was dort nur als ❌ erscheint, hat einen Grund, der hierher gehört:
+**Spec → ADR existiert im bindenden Text nicht — auch nicht als
+Quellen-Spalte.** Die aufwärts zeigende ADR trägt alles (ADR → `LH-*` bzw.
+ADR → Spec-§); das Lastenheft wird dabei *nie* geschärft.
 
 **Platzierung wird deklariert, nicht geraten** — über zwei bestehende
 Mechanismen:

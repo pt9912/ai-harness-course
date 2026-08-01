@@ -67,7 +67,7 @@ statt frei zu formulieren.
 In dieser Reihenfolge:
 
 1. [`spec/lastenheft.md`](spec/lastenheft.md) — vertraglich abnahmebindend.
-2. [`spec/spezifikation.md`](spec/spezifikation.md) — technisch verbindlich, fortschreibbar. *(Optionales 3. Spec-Stratum — siehe Spec-Stratifizierung. Repos mit 2 Straten löschen diese Zeile und nummerieren die Ränge neu.)*
+2. [`spec/spezifikation.md`](spec/spezifikation.md) — technisch verbindlich, fortschreibbar.
 3. [`spec/architecture.md`](spec/architecture.md) — Komponenten- und Sequenzsicht.
 4. [`docs/plan/adr/`](docs/plan/adr/) — ADR-Verzeichnis und -Index.
 5. [`docs/plan/planning/in-progress/roadmap.md`](docs/plan/planning/in-progress/roadmap.md) — aktuelle Welle.
@@ -132,7 +132,7 @@ ADR-Bezüge**: Die Sicht steht im Stabilitäts-Rang über der ADR; welche ADR
 eine Aussage verbindlich macht, deklariert die ADR in ihrem `Schärft:`-Feld.
 
 Diese Regel ist *verkörpert*, nicht hier entschieden — sie folgt aus dem
-Sicht-Stratum (Baseline-Regelwerk `modul-04-architektur-adrs.md`
+Sicht-Stratum (Baseline-Regelwerk `modul-04-adrs.md`
 §Ziel-Form: Architektur-Sicht).
 
 ### 3.5 ADRs sind nach `Accepted` immutable

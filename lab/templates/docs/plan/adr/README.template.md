@@ -11,7 +11,7 @@
 
 ## Konventionen
 
-- ADRs sind nach `Accepted` **immutable** (siehe Baseline-Regelwerk `modul-04-architektur-adrs.md`).
+- ADRs sind nach `Accepted` **immutable** (siehe Baseline-Regelwerk `modul-04-adrs.md`).
 - Schärfungen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 - Bei `Accepted`: diesen Index aktualisieren (Status, Datum).
 - Jede ADR deklariert im `**Schärft:**`-Feld *aufwärts*, welche Spec-Stelle
