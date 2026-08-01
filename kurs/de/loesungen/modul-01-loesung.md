@@ -212,6 +212,6 @@ durchgesetzt ist oder nur Papier.
 
 ## Verweise
 
-- Source Precedence im Detail: [`../grundlagen/konventionen.md#source-precedence`](../grundlagen/konventionen.md#source-precedence)
+- Source Precedence im Detail: [`../grundlagen/konventionen.md#source-precedence`](../grundlagen/source-precedence.md#source-precedence)
 - Vorherige Lösung: [Modul 0](modul-00-loesung.md)
 - Nächste Lösung: [Modul 2](modul-02-loesung.md)

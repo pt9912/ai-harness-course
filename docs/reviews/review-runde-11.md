@@ -49,7 +49,7 @@ Planner-allein.
 
 Vier Kontexte, kein benannter. Nach dem eigenen Maßstab des Kurses ist das
 dieselbe Klasse wie ein Artefakt ohne Konsumenten
-([`konventionen.md` §Jedes Artefakt hat einen Konsumenten](../../kurs/de/grundlagen/konventionen.md#jedes-artefakt-hat-einen-konsumenten)):
+([`konventionen.md` §Jedes Artefakt hat einen Konsumenten](../../kurs/de/grundlagen/harness-dateien.md#jedes-artefakt-hat-einen-konsumenten)):
 **ein Schritt ohne Träger.** Und Modul 8 argumentiert ausdrücklich, dass
 Rollen-Trennung Kontext-Trennung ist — eine Prozedur, die vier Kontexte berührt
 und keinen benennt, lädt zum Ein-Kontext-Durchlauf ein.

@@ -47,7 +47,7 @@ der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt — nicht
 ausgelassen, nicht geschönt, nicht in einer Status-Spalte versteckt
 (die Sensors-Tabelle trägt keinen Lauf-Status; Lauf-Wahrheit pro Commit
 liegt in CI, siehe
-[`grundlagen/konventionen.md`](grundlagen-konventionen.md#harnessreadmemd-als-einstiegspunkt)).
+[`grundlagen/konventionen.md`](grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
 Implementer-Agent vertraut ihnen.
 
@@ -73,7 +73,7 @@ coverage-gate: ## Coverage threshold gate (bootstrap-aware, LH-FA-BUILD-008).
 
 Kam das Gate aus dem Steering Loop statt aus einer Anforderung, trägt der
 Kommentar zusätzlich den Herkunfts-Anker `· seit welle-<NN>` — ohne Welle `· seit slice-<NNN>`
-([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
+([`konventionen.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker)).
 
 Das Gate prüft heute z. B. 40 %, schaltet bei Meilenstein M2 auf 70 %
 hoch. Das macht "bootstrap-aware" nicht zum Schlupfloch, sondern zum
@@ -95,7 +95,7 @@ Disambiguierung in
 
 **Begriffsklärung:** *Bootstrap-aware Gate* (oben) ist nicht zu
 verwechseln mit *Harness-Bootstrap* aus
-[`grundlagen/konventionen.md` §Harness-Bootstrap](grundlagen-konventionen.md#harness-bootstrap).
+[`grundlagen/konventionen.md` §Harness-Bootstrap](grundlagen-bootstrap.md#harness-bootstrap).
 Letzteres ist der **Repo-Einstiegsprozess** (Lebenszyklus eines Harness
 im Repo); ersteres ist die **Reifestufe eines einzelnen Sensors**.
 Beide Begriffe teilen das Wort, sind strukturell verschieden.
@@ -183,7 +183,7 @@ demselben Steering-Loop. Regeln für seine Härtung:
 - **Jede Härtung landet als neuer `MR-<NNN>`**, der den vorherigen
   *schärft* — nie als inhaltliche Änderung eines akzeptierten Eintrags
   (Adaptions-Block-Disziplin,
-  [`grundlagen/konventionen.md`](grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher)).
+  [`grundlagen/konventionen.md`](grundlagen-harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
   Ein überschriebener Eintrag löscht, *welche* Umgehung die Härtung
   ausgelöst hat; die Regel wirkt später wie Overengineering.
 - **Die Grenz-Zeile wird mitgezogen.** Jeder Wächter-`MR` trägt, was der

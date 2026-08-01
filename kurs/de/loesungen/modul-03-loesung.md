@@ -44,7 +44,7 @@ Praktischer Test: Wenn ein Akzeptanzkriterium ohne Messung im
 Lasttest nicht prüfbar ist, ist es nichtfunktional. "Performance
 < 200 ms p95 bei 100 RPS" gehört in den nichtfunktionalen Block der
 Spec — oder in `spec/spezifikation.md`, wenn dein Repo
-[stratifiziert](../grundlagen/konventionen.md#spec-stratifizierung).
+[stratifiziert](../grundlagen/source-precedence.md#spec-stratifizierung).
 
 Falle: "Antwort innerhalb von 200 ms" klingt funktional, ist aber eine
 Latenz-Garantie. Funktional wäre "System antwortet mit gültigem JSON";
@@ -133,7 +133,7 @@ es keine Bewertung, sondern ein Schulterzucken.
 
 Maßstab für ein gutes Lastenheft:
 
-- Jede Anforderung hat eine ID (`LH-FA-*` für funktional, `LH-QA-*` für nichtfunktional, oder eigene Schema). Die IDs erscheinen später in Make-Target-Kommentaren, ADRs und Commits — sie sind die Klammer ([siehe ID-Schema](../grundlagen/konventionen.md#id-schema-als-klammer)).
+- Jede Anforderung hat eine ID (`LH-FA-*` für funktional, `LH-QA-*` für nichtfunktional, oder eigene Schema). Die IDs erscheinen später in Make-Target-Kommentaren, ADRs und Commits — sie sind die Klammer ([siehe ID-Schema](../grundlagen/source-precedence.md#id-schema-als-klammer)).
 - Akzeptanzkriterien sind im Given/When/Then-Stil und enthalten Boundary + Negative.
 - Out-of-Scope ist *explizit* benannt — nicht weggelassen.
 - Mindestens *eine* Negativbedingung pro Feature ("dieses System *darf nicht*…"). Negativ ist genauso präzise wie positiv.
@@ -185,7 +185,7 @@ oben in der Selbstcheck-Antwort zum Erschaffen-Item (LZ 4).
 
 ## Verweise
 
-- Spec-Stratifizierung: [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)
+- Spec-Stratifizierung: [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/source-precedence.md#spec-stratifizierung)
 - Reales Beispiel mit Lastenheft/Spezifikation-Trennung: `pt9912/c-hsm-doc` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
 - Vorherige Lösung: [Modul 2](modul-02-loesung.md)
 - Nächste Lösung: [Modul 4](modul-04-loesung.md)

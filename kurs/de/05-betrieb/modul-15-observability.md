@@ -18,7 +18,7 @@
 ## Mini-Glossar für dieses Modul
 
 Fünf neue Begriffe — Volldefinitionen in
-[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe).
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
@@ -220,7 +220,7 @@ Writer-Code; Property-Test (slice-013) vergleicht zwei aufeinander
 folgende `writer.write_index`-Hashes. Damit ist die Kette **auch
 maschinell prüfbar**: ein Commit, der den `rename`-Aufruf entfernt,
 würde `make arch-check` rot machen
-([`konventionen.md` §Traceability-Constraint](../grundlagen/konventionen.md#traceability-constraint)).
+([`konventionen.md` §Traceability-Constraint](../grundlagen/traceability.md#traceability-constraint)).
 
 **Schritt 6 — Bruchpunkt benennen.**
 Vollständige Kette:

@@ -3,7 +3,7 @@
 > **Template-Hinweis.** Diese Datei ist eine Vorlage. Sie ist
 > **technisch verbindlich, aber ohne Lastenheft-Änderung fortschreibbar**
 > (siehe Spec-Stratifizierung in
-> [Baseline-Regelwerk §Spec-Stratifizierung](../../regelwerk/grundlagen-konventionen.md#spec-stratifizierung)).
+> [Baseline-Regelwerk §Spec-Stratifizierung](../../regelwerk/grundlagen-source-precedence.md#spec-stratifizierung)).
 > Kopiere sie nach `spec/spezifikation.md`, ersetze `<Platzhalter>` und
 > lösche diesen Block.
 

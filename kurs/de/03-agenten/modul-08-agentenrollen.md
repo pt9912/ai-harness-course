@@ -78,7 +78,7 @@ außerhalb des Repos liegt — genau deshalb steht der Validator in
 [§Welche Rolle braucht welche Artefaktklasse](#welche-rolle-braucht-welche-artefaktklasse)
 unter *keins*. Was aus einer Validierung **ins Repo zurückwirkt**, ist
 entweder eine **Spec-Änderung** (externer Change-Request-Prozess, siehe
-[`../grundlagen/konventionen.md` §Spec-Stratifizierung](../grundlagen/konventionen.md#spec-stratifizierung))
+[`../grundlagen/konventionen.md` §Spec-Stratifizierung](../grundlagen/source-precedence.md#spec-stratifizierung))
 oder ein **Lerneintrag** in der Closure-Notiz. Der Beleg selbst bleibt
 draußen — und aus demselben Grund hat Validierung keine Station in der
 Artefaktkette (Modul 1).

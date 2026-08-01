@@ -7,7 +7,7 @@
 Fünf Begriffe — vier neu, einer als Vorwissens-Anker aus
 [Modul 2 — Harness-Bootstrap](../01-spec-und-architektur/modul-02-harness-bootstrap.md).
 Volldefinitionen der vier neuen Begriffe in
-[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe);
+[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe);
 für die ersten Seiten reichen die Ein-Satz-Anker:
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
@@ -252,7 +252,7 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
 4. **Reconciliation-Aufwand inklusive Graduation-/Folge-Slice-Trigger** —
    wieviel Slice-Aufwand bringt BF/Hybrid mit sich, und welcher Trigger
    (eine der vier Klassen aus
-   [`konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen)
+   [`konventionen.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen)
    — Sync, Promotion, Cross-Reference, Acceptance — oder eine
    Folge-Slice-ID) schaltet die Sub-Area Richtung GF?
 
@@ -264,7 +264,7 @@ auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht:
 
 1. **Sub-Area-Wahl prüfen.** Jede Sub-Area, die der Slice als berührt führt,
    muss das Inklusionskriterium erfüllen — drei Achsen, Schwelle ≥ 2
-   ([`konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)).
+   ([`konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area)).
    Zu grobe Sub-Areas (*„Backend"*) werden **vorher** ausdifferenziert, sonst
    trägt der Begründungsblock mehrere Modi vermischt und keiner davon ist
    prüfbar.
@@ -408,7 +408,7 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 | Slice in `done/` bei rotem Gate — wann? | "Gar nicht." | Nur mit dokumentiertem Carveout (Modul 7), der den roten Gate-Status auf Trigger schaltet. | + Unterscheidung Carveout (Ausnahme, mit Folge-Slice) vs. bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). Die volle Werkzeug-Triade inkl. *BF-Sub-Area-Markierung* (Sub-Area-Kontext, kein Closure-Werkzeug) wird in [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren) disambiguiert. |
 | Closure-Kriterien + Lerneintrag formuliert? | "Tests grün, fertig." — kein beobachtbares Kriterium, kein Lerneintrag. | Zwei beobachtbare Closure-Kriterien (z. B. Replay grün, DoD-Punkte als Test verlinkt) *und* ein Lerneintrag in einer der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke). | + Pointe: der Lerneintrag schließt den Steering Loop — ohne ihn bleibt das Versagensmuster unsichtbar und wiederholt sich. Exzellent benennt, *welche* künftige Wiederholung der Eintrag verhindert (Vorhersage), nicht nur, was passiert ist. |
 | `SL-031` (5-Punkte-DoD) bewerten und schneiden? | "Zu groß, irgendwie aufteilen." — kein Kriterien-Bezug, kein benannter Schnitt-Typ. | Gegen beide Größen-Kriterien begründet zu groß (>3 DoD-Punkte, nicht in einem Lauf abschließbar/einer Sitzung prüfbar) + konkreter Schnitt in einzeln lieferbare Slices mit benanntem Schnitt-Typ (Lieferwert: z. B. „Warenkorb→Zahlung→Bestätigung“ je eigenständig). | + Begründung, *warum* Lieferwert statt Schichten: jeder Schnitt-Slice liefert allein Wert und wartet nicht auf den nächsten; Gegenbeispiel, wann ein Schichtschnitt Zombie-Slices erzeugt (Lager-Abbuchung ohne Checkout liefert nichts Prüfbares). |
-| Modus pro Sub-Area für den nächsten Slice? | berührte Sub-Areas nur teilweise identifiziert; Modus genannt ohne Kriterien-Bezug ("BF, weil Doku fehlt"). | berührte Sub-Areas vollständig identifiziert *und in passender Granularität* (Sub-Area-Wahl gegen die drei Inklusions-Achsen aus [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area) prüfbar — vorgelagertes Granularitäts-Gate, *nicht* zu verwechseln mit den vier Modus-Kriterien); Modus je Sub-Area bestimmt; Begründung nutzt mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte, Phase-Reife, Evidenz-/Diskrepanz-Risiko, Reconciliation-Aufwand). | + Begründung nutzt *alle vier* Pflichtkriterien · BF/Hybrid benennt expliziten Reconciliation- oder Graduation-Trigger (Trigger-Klasse nach [`konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen) — Sync/Promotion/Cross-Reference/Acceptance — oder Folge-Slice-ID) · Evidenz aus Code, Doku oder `harness/conventions.md` namentlich genannt. |
+| Modus pro Sub-Area für den nächsten Slice? | berührte Sub-Areas nur teilweise identifiziert; Modus genannt ohne Kriterien-Bezug ("BF, weil Doku fehlt"). | berührte Sub-Areas vollständig identifiziert *und in passender Granularität* (Sub-Area-Wahl gegen die drei Inklusions-Achsen aus [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area) prüfbar — vorgelagertes Granularitäts-Gate, *nicht* zu verwechseln mit den vier Modus-Kriterien); Modus je Sub-Area bestimmt; Begründung nutzt mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte, Phase-Reife, Evidenz-/Diskrepanz-Risiko, Reconciliation-Aufwand). | + Begründung nutzt *alle vier* Pflichtkriterien · BF/Hybrid benennt expliziten Reconciliation- oder Graduation-Trigger (Trigger-Klasse nach [`konventionen.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen) — Sync/Promotion/Cross-Reference/Acceptance — oder Folge-Slice-ID) · Evidenz aus Code, Doku oder `harness/conventions.md` namentlich genannt. |
 
 ## Weiterlesen
 

@@ -148,7 +148,7 @@ Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 *Falsch/Richtig*-Beispiele **und** eine *technische Begründung*.
 Entstand sie aus dem Steering Loop und nicht aus einer Anforderung, trägt
 sie zusätzlich den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)`
-([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
+([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln)).
 Nicht jede Hard Rule in `AGENTS.md` ist repo-spezifisch: *„Architektur ist
 sprach- und meilensteinfrei"* etwa **folgt** aus dem Sicht-Stratum und der
 Referenz-Richtung ([Modul 3 §Die Architektur-Sicht](../01-spec-und-architektur/modul-03-spec.md#die-architektur-sicht-specarchitecturemd)) —
@@ -264,7 +264,7 @@ Akzeptanzkriterien). ADR-0007 (Service-Adapter-Layer). *Nicht* gelesen:
 des Slice-Plans (siehe [Modul 5 §Worked Mini-Example](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)).
 Die in §8 benannten Sub-Areas tragen denselben Granularitäts-Maßstab wie
 in Modul 2: das Inklusionskriterium aus
-[`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)
+[`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area)
 (drei Achsen, Schwelle ≥ 2) — eine zu grobe Sub-Area (*"Backend"*) in §8
 ist derselbe Fehler wie in der Modul-2-Diagnose.
 Die BF/Hybrid-Einträge dort steuern, welche Sub-Areas Inventur-Beweis

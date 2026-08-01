@@ -154,7 +154,7 @@ erweitern):
 4. **Reconciliation-Aufwand inklusive Graduation-/Folge-Slice-Trigger** —
    wieviel Slice-Aufwand bringt BF/Hybrid mit sich, und welcher Trigger
    (eine der vier Klassen aus
-   [`konventionen.md` §Vier Trigger-Klassen](grundlagen-konventionen.md#vier-trigger-klassen)
+   [`konventionen.md` §Vier Trigger-Klassen](grundlagen-bootstrap.md#vier-trigger-klassen)
    — Sync, Promotion, Cross-Reference, Acceptance — oder eine
    Folge-Slice-ID) schaltet die Sub-Area Richtung GF?
 
@@ -166,7 +166,7 @@ auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht:
 
 1. **Sub-Area-Wahl prüfen.** Jede Sub-Area, die der Slice als berührt führt,
    muss das Inklusionskriterium erfüllen — drei Achsen, Schwelle ≥ 2
-   ([`grundlagen-konventionen.md` §Was ist eine Sub-Area?](grundlagen-konventionen.md#was-ist-eine-sub-area)).
+   ([`grundlagen-konventionen.md` §Was ist eine Sub-Area?](grundlagen-bootstrap.md#was-ist-eine-sub-area)).
    Zu grobe Sub-Areas (*„Backend"*) werden **vorher** ausdifferenziert, sonst
    trägt der Begründungsblock mehrere Modi vermischt und keiner davon ist
    prüfbar.

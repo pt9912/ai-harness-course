@@ -33,8 +33,8 @@ Klassen**, nicht 22 gleichartige Vorlagen:
 | [`docs/reviews/review-report.template.md`](docs/reviews/review-report.template.md) | Review-Report: Kopf-Metadaten, Findings nach Output-Schema, Negativbefunde, Verdikt | [Modul 10](../regelwerk/modul-10-review-harness.md) |
 | [`project-readme.template.md`](project-readme.template.md) | Projekt-Root-`README.md`: Überblick, Ist-Stand, Vertrauens-Signale (Rang 6) | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
 | [`AGENTS.template.md`](AGENTS.template.md) | Repo-weite Hard Rules und Source Precedence | [Modul 9](../regelwerk/modul-09-implementierung.md) |
-| [`harness/README.template.md`](harness/README.template.md) | Repo-Einstiegspunkt mit Guides, Sensors, Safety | [Konventionen](../regelwerk/grundlagen-konventionen.md#harnessreadmemd-als-einstiegspunkt) |
-| [`harness/conventions.template.md`](harness/conventions.template.md) | Repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Zusatzklassen-Deklaration, Modus-Deklaration pro Sub-Area | [Konventionen](../regelwerk/grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher) |
+| [`harness/README.template.md`](harness/README.template.md) | Repo-Einstiegspunkt mit Guides, Sensors, Safety | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
+| [`harness/conventions.template.md`](harness/conventions.template.md) | Repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Zusatzklassen-Deklaration, Modus-Deklaration pro Sub-Area | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessconventionsmd-als-konventionsspeicher) |
 | [`harness/conventions/MR-NNN-titel.template.md`](harness/conventions/MR-NNN-titel.template.md) | Ein Adaptions-Eintrag (`MR-<NNN>`); Index in `conventions.md` | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
 
 ## Download als ZIP

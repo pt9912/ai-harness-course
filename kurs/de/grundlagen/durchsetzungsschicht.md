@@ -15,7 +15,7 @@ Durchsetzungsschicht verschiebt dieselbe Regel in die **computational**-
 Spalte der [2×2-Matrix](konzeptkarte.md#2x2-schnellanker): die falsche
 Handlung wird *technisch erschwert* (feedforward) oder *deterministisch
 erkannt* (feedback) — nicht bloß abgeraten. Es ist dieselbe Bewegung wie
-beim `check-references`-Gate ([Traceability-Constraint](konventionen.md#traceability-constraint)):
+beim `check-references`-Gate ([Traceability-Constraint](traceability.md#traceability-constraint)):
 eine Doku-Regel bekommt einen mechanischen Wächter.
 
 ## Drei Bindepunkte
@@ -50,15 +50,15 @@ Jobs). Der Bindepunkt ist das Konzept, der Hook nur eine Form.
    belegt „die Gates liefen auf *genau diesem* Stand". Inhaltsbasiert (statt
    diff-/status-basiert) hält der Nachweis über Commits hinweg — und ein
    Commit *ohne* vorherigen Gate-Lauf bleibt trotzdem erkennbar. Das ist
-   die Mechanik gegen die [Harness-Lüge](konventionen.md#kernbegriffe)
+   die Mechanik gegen die [Harness-Lüge](begriffe.md#kernbegriffe)
    „ich hab die Gates laufen lassen".
 3. **Loop-Guard.** Ein Handoff-Gate muss erkennen, ob es sich in derselben
    Runde schon einmal blockiert hat — sonst Endlosschleife bei dauerhaft
    rotem Gate. Der Hook gibt sich beim zweiten Anlauf frei.
 4. **bootstrap-aware.** Der Gate erzwingt nur die Gates, die *schon
-   existieren*. Ein [Bootstrap-aware Gate](konventionen.md#kernbegriffe)
+   existieren*. Ein [Bootstrap-aware Gate](begriffe.md#kernbegriffe)
    wächst mit der Reife; ein harter Handoff-Gate ab Schritt 0 bekämpft die
-   weiche Frühphase des [Harness-Bootstraps](konventionen.md#harness-bootstrap).
+   weiche Frühphase des [Harness-Bootstraps](bootstrap.md#harness-bootstrap).
    Erst binden, wenn es etwas zu binden gibt.
 
 ## Grenzen — ehrlich benannt
@@ -70,13 +70,13 @@ Jobs). Der Bindepunkt ist das Konzept, der Hook nur eine Form.
 - Der Inhalts-Nachweis hat eine Lücke bei frischem Klon bzw. gelöschtem
   State mit cleanem Tree (kein Nachweis prüfbar) — dort ist **CI das Netz**.
 - Diese Grenzen zu *benennen* ist Pflicht. Ein Gate, das so tut, als decke
-  es mehr ab, als es tut, ist selbst eine [Harness-Lüge](konventionen.md#kernbegriffe)
+  es mehr ab, als es tut, ist selbst eine [Harness-Lüge](begriffe.md#kernbegriffe)
   — dieselbe Klasse wie ein undeklariertes Gate.
 
 ## Die Schicht wird selbst gesteuert
 
 Die Durchsetzungsschicht ist Code *im* Harness — also unterliegt sie
-demselben [Steering-Loop](konventionen.md#verbindung-zum-steering-loop)
+demselben [Steering-Loop](bootstrap.md#verbindung-zum-steering-loop)
 wie alles andere. Ein Befehls-Guard etwa reift in Wellen: zuerst nur die
 Befehlsposition, dann Sub-Shell-Rekursion (`bash -c "…"`), dann
 kombinierte Flags (`-lc`, `-ec`). Genau diese Härtung *am Wächter selbst*

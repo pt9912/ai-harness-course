@@ -95,7 +95,7 @@ steht, wird auf die für dich ungünstigste Weise interpretiert.
 *Buchstabentreue*. Anders als ein echter Praktikant **vergisst** der
 Agent zwischen den Aufgaben — was nicht im Kontext steht, war für ihn
 nie da (siehe Glossar in
-[`../grundlagen/konventionen.md#kernbegriffe`](../grundlagen/konventionen.md#kernbegriffe):
+[`../grundlagen/konventionen.md#kernbegriffe`](../grundlagen/begriffe.md#kernbegriffe):
 LLM ist *stateless*). Wer die Metapher zu weit treibt, erwartet
 "Mitlernen" — und plant Reviews, als würden sie *einmal* erklärt
 ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
@@ -109,7 +109,7 @@ Tracing-Felder, externe Verträge — und ist damit normativ, nicht bloß
 beschreibend.
 
 Fünf Regeln, alle aus der Straten-Ordnung
-([§Spec-Straten](../grundlagen/konventionen.md#spec-straten-mehr-als-ein-spec-dokument)):
+([§Spec-Straten](../grundlagen/referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)):
 
 * **Fortschreibbar.** Änderungen brauchen keinen Change Request, anders als
   beim Lastenheft — eine ADR darf die Spezifikation *schärfen*, das Lastenheft
@@ -135,7 +135,7 @@ Fünf Regeln, alle aus der Straten-Ordnung
 * **Kein ADR-Verweis, auch nicht in der Historie.** Die Spezifikation steht
   im Stabilitäts-Rang über der ADR (*Vertrag › Technik › Sicht › ADR ›
   Slice*); Referenzen zeigen nur aufwärts
-  ([§Referenz-Richtung (SDP)](../grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+  ([§Referenz-Richtung (SDP)](../grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
   Die **Decken-Regel gilt für alle drei Spec-Straten**, nicht nur für den
   Vertrag — die drei Spec-Zeilen der Matrix sind identisch bis auf die
   Diagonale: Kein Spec-Dokument nennt eine ADR oder einen Slice.
@@ -152,7 +152,7 @@ Vorlage: [`spec/spezifikation.template.md`](../../../lab/templates/spec/spezifik
 
 Das dritte Stratum. Sie zeigt Komponenten und Sequenzen und trägt **keine
 eigenen Anforderungen**: Was sie zeigt, ist anderswo festgelegt
-([§Spec-Stratifizierung](../grundlagen/konventionen.md#spec-stratifizierung),
+([§Spec-Stratifizierung](../grundlagen/source-precedence.md#spec-stratifizierung),
 Sicht-Stratum). Ein Diagramm, das etwas Neues behauptet, ist eine Anforderung
 am falschen Ort.
 
@@ -173,7 +173,7 @@ Vier Regeln, die anderswo festgelegt sind und hier zusammenlaufen:
 * **Kein ADR-Bezug.** Die Sicht steht im Stabilitäts-Rang **über** der ADR
   (*Vertrag › Technik › Sicht › ADR › Slice*), und normative Referenzen
   zeigen nur aufwärts
-  ([§Referenz-Richtung (SDP)](../grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)). Welche ADR eine
+  ([§Referenz-Richtung (SDP)](../grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)). Welche ADR eine
   Aussage der Sicht verbindlich macht, deklariert **die ADR** aufwärts in
   ihrem `Schärft:`-Feld — nicht die Sicht abwärts. Warum eine Entscheidung so
   fiel, steht in der ADR selbst ([Modul 4](modul-04-adrs.md)).
@@ -294,7 +294,7 @@ Modul-spezifische Trigger:
 
 ## Weiterlesen
 
-* Spec-Stratifizierung im Detail: [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)
+* Spec-Stratifizierung im Detail: [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/source-precedence.md#spec-stratifizierung)
 * Reales Beispiel mit Lastenheft/Spezifikation-Trennung: `pt9912/c-hsm-doc` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
 * Vorheriges Modul: [Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)
 * Nächstes Modul: [Modul 4 — ADRs](modul-04-adrs.md)

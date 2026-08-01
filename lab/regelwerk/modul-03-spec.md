@@ -20,7 +20,7 @@ steht, wird auf die für dich ungünstigste Weise interpretiert.
 *Buchstabentreue*. Anders als ein echter Praktikant **vergisst** der
 Agent zwischen den Aufgaben — was nicht im Kontext steht, war für ihn
 nie da (siehe Glossar in
-[`grundlagen/konventionen.md#kernbegriffe`](grundlagen-konventionen.md#kernbegriffe):
+[`grundlagen/konventionen.md#kernbegriffe`](grundlagen-begriffe.md#kernbegriffe):
 LLM ist *stateless*). Wer die Metapher zu weit treibt, erwartet
 "Mitlernen" — und plant Reviews, als würden sie *einmal* erklärt
 ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
@@ -46,7 +46,7 @@ werden; das Negative (`darf nicht …`) spart die spätere Review.
 Das Lastenheft ist die **Decke** der Straten-Ordnung: Es referenziert nur
 innerhalb der eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts, Wellen,
 und auch nicht `spezifikation.md` oder `architecture.md`
-([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren);
+([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren);
 die drei Spec-Zeilen der Matrix tragen in jeder fremden Spalte ein ❌ **ohne**
 Kontext-Ausnahme).
 
@@ -75,7 +75,7 @@ externe Verträge · Historie. Operative Regeln:
 
 * **Fortschreibbar** — kein Change Request nötig; eine ADR darf die
   Spezifikation schärfen, das Lastenheft nicht
-  ([`konventionen.md` §Spec-Stratifizierung](grundlagen-konventionen.md#spec-stratifizierung)).
+  ([`konventionen.md` §Spec-Stratifizierung](grundlagen-source-precedence.md#spec-stratifizierung)).
 * **Präzisieren, nie erweitern** — Konfliktregel *Lastenheft › Spezifikation ›
   Architektur*.
 * **Obligatorisch** — alle drei Straten sind Pflicht. Wer technische
@@ -86,7 +86,7 @@ externe Verträge · Historie. Operative Regeln:
 * **Kein ADR-Verweis, auch nicht in der Historie** — die Spezifikation steht
   im Stabilitäts-Rang über der ADR (*Vertrag › Technik › Sicht › ADR ›
   Slice*), Referenzen zeigen nur aufwärts
-  ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+  ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
   Die **Decken-Regel gilt für alle drei Spec-Straten**: Kein Spec-Dokument
   nennt eine ADR oder einen Slice. Welche ADR eine Festlegung schärft,
   deklariert **die ADR** in ihrem `Schärft:`-Feld — die einzige Kante, und
@@ -98,7 +98,7 @@ externe Verträge · Historie. Operative Regeln:
 Die Sicht folgt der Vorlage
 [`templates/spec/architecture.template.md`](../templates/spec/architecture.template.md):
 Komponenten- und Sequenzsicht ohne **eigene Anforderungen** (Sicht-Stratum,
-[`konventionen.md` §Spec-Stratifizierung](grundlagen-konventionen.md#spec-stratifizierung)).
+[`konventionen.md` §Spec-Stratifizierung](grundlagen-source-precedence.md#spec-stratifizierung)).
 Operative Regeln, die die Vorlage nicht selbst erzwingt:
 
 * Derivativ — Konfliktregel *Lastenheft › Spezifikation › Architektur*; die
@@ -112,7 +112,7 @@ Operative Regeln, die die Vorlage nicht selbst erzwingt:
   darüber. Eine Verweis-Spalte trüge hier nichts Zulässiges.
 * Kein ADR-Bezug: Die Sicht steht im Stabilitäts-Rang **über** der ADR
   (*Vertrag › Technik › Sicht › ADR › Slice*), normative Referenzen zeigen nur
-  aufwärts ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+  aufwärts ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
   Welche ADR eine Aussage der Sicht verbindlich macht, deklariert **die ADR**
   aufwärts in ihrem `Schärft:`-Feld.
 
@@ -124,6 +124,6 @@ Jede Spec zerfällt in drei obligatorische Schichten mit eigener Precedence:
 **Lastenheft sticht Spezifikation sticht Architektur** — die untere
 Schicht darf *präzisieren*, nie *erweitern*. Vollform (Straten-Klassen,
 Referenz-Richtung, `check-references`-Gate) in
-[`konventionen.md` §Spec-Stratifizierung](grundlagen-konventionen.md#spec-stratifizierung).
+[`konventionen.md` §Spec-Stratifizierung](grundlagen-source-precedence.md#spec-stratifizierung).
 Vorlagen: [`spec/`-Templates](../templates/spec/).
 

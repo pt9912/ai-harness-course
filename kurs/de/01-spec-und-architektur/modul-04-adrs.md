@@ -90,7 +90,7 @@ werden nie überschrieben).
 ## Hard Rule (Beispiel aus c-hsm-doc, ADR 0001)
 
 Begriff *Hard Rule* siehe Glossar in
-[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md).
+[`../grundlagen/begriffe.md`](../grundlagen/begriffe.md#kernbegriffe).
 
 *"Eine ADR mit Status `Accepted` wird nicht inhaltlich überschrieben.
 Spätere Korrekturen oder Schärfungen entstehen als neue ADR mit
@@ -105,7 +105,7 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 - **"Wenn ich die Entscheidung ändere, schreibe ich die ADR um."** — Hard Rule: Accepted-ADRs werden nicht überschrieben. Folge-ADR mit `supersedes ADR-N`. Sonst kann der Reviewer-Agent nicht auf ältere Entscheidungen vertrauen.
 - **"Eine ADR ohne Fitness Function ist eine ADR."** — Eine ADR ohne Fitness Function ist eine Absichtserklärung. Wer architecture fitness im Kopf hat, schreibt parallel den ArchUnit-Test.
 - **"MADR ist Pflicht."** — MADR ist ein Format unter mehreren (auch Nygard, Tyree/Akerman). Wichtig ist, dass dein Repo *eines* konsequent benutzt.
-- **"Architektur ist Bilder zeichnen."** — Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur in diesem Kurs heißt: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
+- **"Architektur ist Bilder zeichnen."** — Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur in diesem Kurs heißt: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/source-precedence.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
 - **"ADRs sind Dokumentation, nicht Constraints."** — Klingt harmlos, ist die folgenreichste Fehlvorstellung in diesem Modul. Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementer-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Worked Example in [Modul 13 §Worked Example "ADR → import-linter"](../04-qualitaet/modul-13-quality-gates.md#worked-example-a-vom-adr-satz-zur-fitness-function) zeigt, was die Übersetzung kostet (kleine Tabelle: ADR-Satz, Werkzeug, Make-Target, Failure-Beispiel). Wer das nicht macht, dokumentiert *Hoffnung*.
 
 Weitere Präkonzepte, die diesem Kurs zugrunde liegen: [`../grundlagen/lernervorstellungen.md`](../grundlagen/lernervorstellungen.md). Ergänze deine eigenen.
@@ -139,7 +139,7 @@ Lücke im Harness. Architect-Agent legt ADR-Entwurf an: `0007-service-adapter-la
 Die Richtung ist nicht beliebig: Der Kontext verweist **aufwärts** auf die
 stabilere Quelle (Lastenheft, Spezifikation), nie abwärts auf einen Slice —
 ein Slice ist volatiler als die ADR und kann sie nicht begründen
-([§Referenz-Richtung (SDP)](../grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+([§Referenz-Richtung (SDP)](../grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
 
 **Schritt 4 — Optionen mit Trade-offs:**
 > 1. **Direkt-Calls in Service-Schicht** — minimal Boilerplate; bricht LH-QA-COUPLING-002 (kein Replay ohne API-Mocks).

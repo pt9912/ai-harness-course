@@ -33,7 +33,7 @@ Der Default-Ort für:
 Diese Datei trägt den **Index**; die Einträge liegen einzeln unter
 `harness/conventions/`, aufgelöste unter `conventions/done/`. Der Zustand ist
 die Verzeichnis-Position, kein Status-Feld
-([`konventionen.md` §Konventionsspeicher](../../../kurs/de/grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher)).
+([`konventionen.md` §Konventionsspeicher](../../../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
 
 ### MR-000 — Baseline-Aussage
 
@@ -54,7 +54,7 @@ die Verzeichnis-Position, kein Status-Feld
 
 | MR | Titel | Geltungsbereich | Ersetzt-Baseline-Regel |
 |---|---|---|---|
-| [002](conventions/MR-002-konventions-bindung-als-sensors-klasse.md) | Konventions-Bindung als Sensors-Klasse | Bindung-Spalte in `harness/README.md` §Sensors | [`konventionen.md` §Sensors-Bindung](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt) |
+| [002](conventions/MR-002-konventions-bindung-als-sensors-klasse.md) | Konventions-Bindung als Sensors-Klasse | Bindung-Spalte in `harness/README.md` §Sensors | [`konventionen.md` §Sensors-Bindung](../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
 | [003](conventions/MR-003-mr-001-gegenstandslos.md) | MR-001 gegenstandslos durch Baseline-Update | `MR-001` | — |
 
 ### Aufgelöste Adaptionen
@@ -82,7 +82,7 @@ Spec führt) — die Modus-Spalte ist daher homogen. Die Sub-Areas sind
 trotzdem einzeln deklariert, damit (a) die Granularitäts-Disziplin
 sichtbar ist und (b) eine künftig nach BF kippende Sub-Area einen Platz
 hat. Jede Zeile weist die erfüllten Inklusions-Achsen aus
-([`konventionen.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area),
+([`konventionen.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area),
 Schwelle ≥ 2 von 3: 1 Konventions-Härte · 2 Inventur-Linie · 3 Struktureller Cluster).
 
 | Sub-Area | Pfad-Cluster | Erfüllte Inklusions-Achsen | Modus |
@@ -107,7 +107,7 @@ sind: Achse 1 divergiert (Determinismus ≠ Plan-vs-Code-DoD ≠
 Golden-Set-Replay — je eigene Konvention, drei verschiedene Kursmodule
 11/12). Sie zu *einer* Sub-Area zusammenzufassen wäre der „zu grob"-Fehler
 aus [FV5](../../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#typische-fehlvorstellungen)
-— vgl. [`konventionen.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/konventionen.md#was-ist-eine-sub-area)
+— vgl. [`konventionen.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area)
 (Absatz *Aggregation*).
 
 ### Nicht als Sub-Area geführt

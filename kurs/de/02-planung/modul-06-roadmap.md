@@ -5,7 +5,7 @@
 ## Mini-Glossar für dieses Modul
 
 Vier neue Begriffe — Volldefinitionen in
-[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe).
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
@@ -227,7 +227,7 @@ wellen-zentrierte Roadmap-Format nicht stellt: *Braucht diese Arbeit
 
 Der Kernbegriff antwortet bereits: Eine Welle ist ein *"Bündel von
 Slices, das gemeinsam geplant und **abgeschlossen** wird"*
-([`grundlagen/konventionen.md` §Kernbegriffe](../grundlagen/konventionen.md#kernbegriffe)).
+([`grundlagen/konventionen.md` §Kernbegriffe](../grundlagen/begriffe.md#kernbegriffe)).
 Das gemeinsame Abschließen trägt das Kriterium — nicht die Größe der
 Arbeit:
 
@@ -353,7 +353,7 @@ Verbleib:
 **Die Sub-Area-Spalte** trägt die Sub-Area, deren Konventions-Härte oder
 Inventur-Linie die Beobachtung betrifft — **nicht** die, in deren Verzeichnis
 sie aufgefallen ist. Das ist dieselbe Berührungs-Frage wie beim §8-Block des
-Slice-Plans ([`konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)),
+Slice-Plans ([`konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area)),
 nur rückwärts gestellt. Eine Lücke im Golden Set, die beim Schreiben eines
 Tests auffällt, gehört zur *Replay-/Eval-Infrastruktur*, nicht zur
 *Test-Infrastruktur*: dort steht die Konvention, die sie verletzt.
@@ -434,7 +434,7 @@ Daraus folgt eine Arbeitsteilung:
    > liefe auf jedem gewachsenen Repo rot und wäre selbst das, wogegen er
    > gebaut ist. Damit bleibt ein erfundenes `slice-999` unentdeckt — das ist
    > die Grenze der Deklaration, dieselbe wie beim Anker-Sensor
-   > ([`konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)),
+   > ([`konventionen.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln)),
    > und sie gehört benannt statt überspielt.
 
 *Welches* Werkzeug das ist, legt der Kurs nicht fest — das ist eine
@@ -445,7 +445,7 @@ einen Carveout-Index oder einen ADR-Index ehrlich hält.
 **Bei 3×** verlässt der Eintrag das Register nicht still: Er wandert in die
 Steering-Loop-Einträge der laufenden Welle-Closure und wird dort zur
 verkörperten Regel — mit Herkunfts-Anker
-([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln)).
+([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln)).
 Ohne Wellen-Betrieb geschieht dasselbe beim Lese-Schritt, den dann die
 Slice-Closure selbst auslöst (§Wann Arbeit eine Welle braucht); der Anker
 lautet dann `seit slice-<NNN>`.
@@ -586,7 +586,7 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    Die **benannte Spec-Lücke** ist der eine Fall, der ohne Feld trotzdem
    verkörpert ist — nur in einer versionierten Spec statt an einem Zielort;
    ihr Gegenstück ist die `LH-*`-ID
-   ([`konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln));
+   ([`konventionen.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln));
    (b) **Folge-Slice-Paarung** — jeder genannte Folge-Slice existiert als
    Datei **im Planning-Lifecycle** (`open/`, `next/`, `in-progress/`,
    `done/`) — nicht nur in `open/`: bis zur Prüfung kann er bereits

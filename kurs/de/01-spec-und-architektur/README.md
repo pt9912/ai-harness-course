@@ -13,7 +13,7 @@ gearbeitet wird* (Harness-Bootstrap), *was* gebaut wird (Spec) und
 | [Modul 4](modul-04-adrs.md) | Architekturentscheidungen mit ADRs; Übersetzung in Fitness Functions |
 
 Voraussetzung: [`grundlagen/`](../grundlagen/) gelesen, insbesondere
-[`konventionen.md`](../grundlagen/konventionen.md) (Source Precedence,
+[`source-precedence.md`](../grundlagen/source-precedence.md) (Source Precedence,
 Spec-Stratifizierung).
 
 Nach dieser Phase: [Phase 2 — Planung](../02-planung/).

@@ -260,7 +260,7 @@ Maßstab:
 
 - Mindestens drei Wellen, davon mindestens eine mit klar nachgelagerter Abhängigkeit ("Welle 2 startet erst, wenn Welle 1 done").
 - Jede Welle hat einen *Trigger* (was muss vorher passiert sein) und einen *Closure*-Trigger (was muss erreicht sein, damit sie als done gilt).
-- Jeder Slice in jeder Welle hat eine LH-/HSM-/GG-ID-Referenz (siehe [ID-Schema](../grundlagen/konventionen.md#id-schema-als-klammer)).
+- Jeder Slice in jeder Welle hat eine LH-/HSM-/GG-ID-Referenz (siehe [ID-Schema](../grundlagen/source-precedence.md#id-schema-als-klammer)).
 - Mindestens ein expliziter "Wir-tun-X-nicht-in-dieser-Welle"-Eintrag pro Welle. Negativ-Scope ist Roadmap-Disziplin.
 
 Vergleich-Möglichkeit: [`/lab/example/docs/plan/planning/in-progress/roadmap.md`](../../../lab/example/docs/plan/planning/in-progress/roadmap.md)

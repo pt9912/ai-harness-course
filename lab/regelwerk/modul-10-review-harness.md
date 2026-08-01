@@ -74,7 +74,7 @@ achtest du"; Vorlage
   (Modul 13). Die Skill-Datei wird **versioniert, nicht überschrieben**
   (ADR-Hard-Rule, Modul 4). Ein so entstandener HIGH-Eintrag trägt den
   Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)`
-  ([`konventionen.md` §Herkunfts-Anker](grundlagen-konventionen.md#herkunfts-anker)).
+  ([`konventionen.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker)).
 
 Vergleichbares Skill-Pattern für *Verifier* und *Validator* in Modul 11
 bzw. [Modul 8 §"Konfliktfall"](modul-08-agentenrollen.md).

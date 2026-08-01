@@ -63,14 +63,14 @@ Repo-weit, sprachunabhängig (nur im Root-`Makefile`):
 |---|---|---|
 | `make verify` | Closure-Pflicht + Referenz-Richtung; mit `SLICE=` zusätzlich die Slice-DoD | — (Aggregat) |
 | `make verify-closure-notes` | jede Datei in `done/` trägt eine ausgefüllte Closure-Notiz (≥2 Sätze, keine Floskel, keine `<…>`-Platzhalter) | [ADR-0011](../docs/plan/adr/0011-closure-note-pflicht.md) |
-| `make check-references` | keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise | [Kurs §Referenz-Richtung](../../../kurs/de/grundlagen/konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) (`MR-002`) |
+| `make check-references` | keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise | [Kurs §Referenz-Richtung](../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) (`MR-002`) |
 | `make verify-slice SLICE=<id>` | DoD eines Slice plausibilisieren | — |
 | `make plan-status` | Slice-Verteilung über die Lifecycle-Verzeichnisse; rot, wenn ein Lifecycle-Verzeichnis fehlt | — |
 | `make replay RUN=<set-name>` | Golden-Set-Fixture validieren, **kein Lauf** | [Modul 12 §Golden-Set-Form](../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md) (`MR-002`); Grenze in [`../evals/golden/README.md`](../evals/golden/README.md) |
 | `make trace RUN=<name>` | Trace-Fixture ausgeben; rot, wenn sie fehlt oder keine Spans trägt | — |
 | `make release` | Release-Checkliste und Runbook-Fixtures prüfen | [Modul 16 §Release-Disziplin](../../../kurs/de/05-betrieb/modul-16-produktiver-betrieb.md) (`MR-002`); Fixture: [`../runbooks/release-checklist.md`](../runbooks/release-checklist.md) |
 
-**Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates` (keine Status-Spalte hier, siehe [Konventionen §`harness/README.md` als Einstiegspunkt](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt)).
+**Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates` (keine Status-Spalte hier, siehe [Konventionen §`harness/README.md` als Einstiegspunkt](../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
 **Rote Gates:** Begründung im verlinkten `CO-<NNN>` (Bindung-Spalte), Modul 7.
 **Nicht behauptet** (geplant, nicht in Makefile): `make test-property` (Property-Based-Suite, slice-013, in-progress), `make sbom`, `make security-scan` (welle-4-betrieb).
 **Weder vorhanden noch in der Roadmap:** ein Image-Scan — anders als `make sbom` und `make security-scan`, die für `welle-4-betrieb` vorgemerkt sind.

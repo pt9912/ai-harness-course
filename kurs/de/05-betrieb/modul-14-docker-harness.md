@@ -5,7 +5,7 @@
 ## Mini-Glossar für dieses Modul
 
 Fünf neue Begriffe — Volldefinitionen in
-[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe).
+[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe).
 Der Image-Hash wird hier in *Vollform* eingeführt (Vorgriff-Block in
 [Modul 12](../04-qualitaet/modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14) löst sich hier auf).
 

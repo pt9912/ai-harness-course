@@ -242,7 +242,7 @@ Rollback der falsche Reflex?").
 
 ## Verweise
 
-- Spec/Plan/ADR als Kontext für Runbooks: [`../grundlagen/konventionen.md`](../grundlagen/konventionen.md)
+- Spec/Plan/ADR als Kontext für Runbooks: [`../grundlagen/source-precedence.md`](../grundlagen/source-precedence.md#source-precedence)
 - Replay als Forensik-Werkzeug: [Modul 12](../04-qualitaet/modul-12-replay-evaluierung.md)
 - Vorherige Lösung: [Modul 15](modul-15-loesung.md)
 - Zurück zur Übersicht: [README](README.md)

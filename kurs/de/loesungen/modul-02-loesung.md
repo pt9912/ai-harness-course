@@ -42,7 +42,7 @@ Reihenfolge begründet — Drift vor Auditierbarkeit, weil ein Sensor erst
 ### (Verstehen, Vorstufe für Übung 2) Welche vier Trigger-Klassen gibt es? Nenne pro Klasse ein Beispiel aus den Worked Examples.
 
 Vier Klassen aus
-[`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen):
+[`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen):
 
 1. **Sync-Trigger** — Pointer-Update zwischen Dokumenten.
    Beispiel: **T1** (Pointer in `harness/README.md` auf
@@ -333,7 +333,7 @@ wiederholt.
   Der abstrakte Maßstab dahinter: Backend/Frontend verletzen Achse 1
   (keine *einzelne* `MR-NNN`-Adaption denkbar) und Achse 3 (mehrere
   Pfad-Familien) der drei Inklusions-Achsen aus
-  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)
+  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area)
   — die Achsen erlauben die Diagnose *ohne* Erinnerung an die
   Beispielliste, ergänzen sie also.
 - **Sub-Area zu fein gewählt** (Übung 1, Kehrseite). Ein substanzloses
@@ -342,7 +342,7 @@ wiederholt.
   und keine eigenständig abgleichbare Inventur-Linie (Achse 2), erfüllt
   also nur *eine* der drei Achsen (unter der Schwelle von zwei). Das ist
   noch keine Sub-Area, sondern eine *Sub-Area-Aspirantin* (siehe
-  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area)).
+  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area)).
   Symptom: eine Modus-Zeile, die nie einen eigenen Trigger oder eine
   eigene `MR-NNN` erzeugt — sie hängt immer an einer Nachbar-Sub-Area.
   Korrekt: erst ab zwei erfüllten Achsen als Sub-Area führen, darunter
@@ -376,9 +376,9 @@ wiederholt.
 ## Weiterführende Verweise
 
 - Konzept-Anker und Definitionen:
-  [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap).
+  [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-bootstrap).
 - Vier Trigger-Klassen mit abstrakten Definitionen:
-  [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/konventionen.md#vier-trigger-klassen).
+  [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen).
 - Fallstudien in GF/BF-Klassifikation:
   [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand).
 - Lernervorstellungen für Conceptual-Change-Reflexion:

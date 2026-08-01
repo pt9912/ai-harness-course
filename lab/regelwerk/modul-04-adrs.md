@@ -34,7 +34,7 @@ nicht verteidigen.
 
 ### Hard Rule für Accepted-ADRs
 
-Begriff *Hard Rule* siehe Glossar in [`grundlagen/konventionen.md`](grundlagen-konventionen.md#kernbegriffe).
+Begriff *Hard Rule* siehe Glossar in [`grundlagen/konventionen.md`](grundlagen-begriffe.md#kernbegriffe).
 
 **Eine ADR mit Status `Accepted` wird nicht inhaltlich überschrieben.**
 Spätere Korrekturen oder Schärfungen entstehen als neue ADR mit
@@ -49,7 +49,7 @@ auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
 - Hard Rule: Accepted-ADRs werden nicht überschrieben. Folge-ADR mit `supersedes ADR-N`. Sonst kann der Reviewer-Agent nicht auf ältere Entscheidungen vertrauen.
 - Eine ADR ohne Fitness Function ist eine Absichtserklärung. Wer architecture fitness im Kopf hat, schreibt parallel den ArchUnit-Test.
 - MADR ist ein Format unter mehreren (auch Nygard, Tyree/Akerman). Wichtig ist, dass dein Repo *eines* konsequent benutzt.
-- Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur heißt in diesem Regelwerk: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`grundlagen/konventionen.md`](grundlagen-konventionen.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
+- Diagramme sind *eine* Output-Form, nicht die Sache selbst. Architektur heißt in diesem Regelwerk: *Entscheidungen mit Begründung (ADR), prüfbar gemacht (Fitness Function), versioniert (Accepted-Hard-Rule)*. Ein Diagramm ohne ADRs hinter sich ist Wandtapete; eine ADR ohne Fitness Function ist Absichtserklärung. `spec/architecture.md` ist explizit *diagrammatisch und enthält keine eigenen Anforderungen* (siehe Spec-Stratifizierung in [`grundlagen/konventionen.md`](grundlagen-source-precedence.md#spec-stratifizierung)) — genau weil sonst Bilder anfangen würden, die ADR-Schicht zu ersetzen.
 - Eine ADR ohne maschinelle Durchsetzung ist eine *Absichtserklärung*, die der Implementer-Agent freundlich liest und dann ignoriert, wenn ein anderer Pfad "einfacher" wirkt. Eine ADR *mit* Fitness Function ist ein Constraint — die Layering-Regel, die ArchUnit dem Agenten als roten Build entgegenhält. Die Übersetzung (ADR-Satz → Werkzeug → Make-Target → Failure-Beispiel) steht kompakt in [Modul 13 §Fitness Function aus einem ADR-Satz](modul-13-quality-gates.md#adr-zur-fitness-function). Wer das nicht macht, dokumentiert *Hoffnung*.
 
 ### Ziel-Form: ADR (MADR)
@@ -61,7 +61,7 @@ Regeln zur Form:
 
 - Der Kontext *referenziert* die Anforderung, wiederholt sie nicht — und zwar
   **aufwärts** auf die stabilere Quelle, nie abwärts auf einen Slice
-  ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-konventionen.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+  ([`konventionen.md` §Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
 - Mindestens drei Verglichene Alternativen, jede mit Trade-off.
 - Jede Entscheidung mit Architektur-Wirkung bekommt eine Fitness Function —
   sonst ist sie Absichtserklärung.

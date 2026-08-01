@@ -208,6 +208,6 @@ sondern Drift mit Kaffeepause.
 
 ## Verweise
 
-- Spec/ADR/Plan-Trennung: [`../grundlagen/konventionen.md#trennschärfen`](../grundlagen/konventionen.md#trennschärfen)
+- Spec/ADR/Plan-Trennung: [`../grundlagen/konventionen.md#trennschärfen`](../grundlagen/begriffe.md#trennschärfen)
 - Vorherige Lösung: [Modul 7](modul-07-loesung.md)
 - Nächste Lösung: [Modul 9](modul-09-loesung.md)

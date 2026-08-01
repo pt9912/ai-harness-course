@@ -4,7 +4,7 @@
 > `harness/conventions.md` deines Repos. Kopiere sie nach
 > `harness/conventions.md`, ersetze `<Platzhalter>` und lösche
 > diesen Block. Pflichtgliederung folgt
-> [Baseline-Regelwerk §harness/conventions.md als Konventionsspeicher](../../regelwerk/grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher).
+> [Baseline-Regelwerk §harness/conventions.md als Konventionsspeicher](../../regelwerk/grundlagen-harness-dateien.md#harnessconventionsmd-als-konventionsspeicher).
 >
 > **Was diese Datei trägt:** repo-lokale Strukturregeln und Adaptionen
 > ggü. der adoptierten Harnesskonvention (Baseline). Sie ist

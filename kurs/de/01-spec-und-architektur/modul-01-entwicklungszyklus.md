@@ -9,8 +9,8 @@ weitere**. Drei zusätzliche *Harness-Bootstrap-Begriffe* stehen als
 Vorgriff in einer eigenen Tabelle darunter — sie werden nur von Schritt 0
 gestreift und erst in Modul 2 voll entfaltet; jetzt genügt Überfliegen.
 Die vollständigen Definitionen stehen in
-[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#kernbegriffe)
-bzw. [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap);
+[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe)
+bzw. [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-bootstrap);
 für die ersten Seiten reichen die folgenden Ein-Satz-Anker:
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
@@ -29,7 +29,7 @@ für die ersten Seiten reichen die folgenden Ein-Satz-Anker:
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
 | **Harness-Bootstrap** | Einstiegsprozess in den Harness-Lebenszyklus — Trajektorie durch Dokument-Zustände, kein Ereignis. | "Hochziehen aus dem Nichts" — Repo lernt sich selbst, bis es laufen kann. |
-| **GF/BF-Modus** | Pro Sub-Area deklarierte Trigger-Richtung: Greenfield (Doc → Code) oder Brownfield (Code → Doc, Übergang mit Konvergenz-Auftrag zu GF). *Sub-Area* = Träger der Modus-Entscheidung; was als eine qualifiziert, definiert [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area). | wer wem folgt: Versprechen oder Inventur. |
+| **GF/BF-Modus** | Pro Sub-Area deklarierte Trigger-Richtung: Greenfield (Doc → Code) oder Brownfield (Code → Doc, Übergang mit Konvergenz-Auftrag zu GF). *Sub-Area* = Träger der Modus-Entscheidung; was als eine qualifiziert, definiert [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area). | wer wem folgt: Versprechen oder Inventur. |
 | **Phase-Reife** | Schreibreife eines Dokument-Abschnitts in sechs Stufen (0 leer → 1 Skelett → 2 Outline → 3 partiell → 4 kohärent → 5 stabil); pro Sektion unabhängig. Phase 0 ("existiert nicht, sollte aber") ist eine legitime Reife — Details in Modul 2. | nicht "fertig oder nicht", sondern "in welcher Schicht". |
 
 **Acht** Begriffe trägt dieses Modul; die drei Bootstrap-Anker darunter
@@ -107,7 +107,7 @@ nächsten Code, ohne dass jemand ein Archiv lesen muss. Wie daraus über
 mehrere Slices ein Zähler wird und wie eine so entstandene Regel ihre
 Herkunft behält, steht in
 [Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)
-und [`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/konventionen.md#herkunfts-anker-für-steering-loop-regeln).
+und [`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln).
 
 **Auflösung des Engage-Falls:** Review prüft Code gegen *Plan und ADR*.
 Wenn der Plan die ADR-Verletzung nicht antizipiert hat, sieht Review
@@ -118,7 +118,7 @@ Verifikation getrennte Rollen sind — siehe [Modul 8](../03-agenten/modul-08-ag
 ## Lab-Bezug
 
 * `docs/plan/planning/in-progress/roadmap.md`
-* Verzeichnisstruktur des Begleit-Repos (siehe [`../grundlagen/konventionen.md`](../grundlagen/konventionen.md))
+* Verzeichnisstruktur des Begleit-Repos (siehe [`../grundlagen/harness-dateien.md` §Verzeichniskonvention](../grundlagen/harness-dateien.md#verzeichniskonvention))
 
 ## Themen
 
@@ -173,7 +173,7 @@ Code folgt; Brownfield: Code führt, Doku folgt — mit Konvergenz-Auftrag
 zu Greenfield). Diese drei Entscheidungen prägen jede Folge-Aktion: in
 Brownfield ist der nächste Schritt *Inventur des Bestands*, in Greenfield
 *Auflisten zu schaffender Quellen*. Volldefinitionen und Phasen-Modell
-in [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/konventionen.md#harness-bootstrap)
+in [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-bootstrap)
 (Konzept-Anker) und im ausgearbeiteten
 [Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md) (Lehrtext
 mit GF/BF-Walkthroughs).
@@ -246,7 +246,7 @@ sollten. Die konkrete Rangordnung selbst ist projektspezifisch
 (Safety/Control- und Policy/Compliance-Repos können abweichen); Wahl
 und Begründung gehören in den Adaptions-Block des repo-lokalen
 Konventionsdokuments (siehe
-[`../grundlagen/konventionen.md#source-precedence`](../grundlagen/konventionen.md#source-precedence)).
+[`../grundlagen/konventionen.md#source-precedence`](../grundlagen/source-precedence.md#source-precedence)).
 
 **Schritt 4 — Konfliktauflösungs-Klausel daneben setzen.** Eine
 Tabelle allein wirkt nicht; sie braucht den Satz, der ihre Anwendung
@@ -277,7 +277,7 @@ will, ändert in Wahrheit die Spec — und das ist ein eigener Slice.
 ```
 
 Volldefinition siehe
-[`../grundlagen/konventionen.md`](../grundlagen/konventionen.md#source-precedence).
+[`../grundlagen/konventionen.md`](../grundlagen/source-precedence.md#source-precedence).
 
 **Schritt 6 — Bewusstes Brechen: einen Konflikt provozieren.** Ändere
 in `AGENTS.md` eine Hard Rule, die einer ADR widerspricht (z. B.
@@ -336,5 +336,5 @@ Eintragsformat, "Wann *nicht* reagieren" und Anti-Antworten: [`reflexion-vorlage
 
 ## Weiterlesen
 
-* Source Precedence im Detail: [`../grundlagen/konventionen.md#source-precedence`](../grundlagen/konventionen.md#source-precedence)
+* Source Precedence im Detail: [`../grundlagen/konventionen.md#source-precedence`](../grundlagen/source-precedence.md#source-precedence)
 * Nächstes Modul: [Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)

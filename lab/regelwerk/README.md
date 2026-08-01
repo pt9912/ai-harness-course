@@ -47,7 +47,14 @@ gepinnte GitHub-URLs umgeschrieben (`tools/rewrite-doc-links.py`).
 
 ### Grundlagen
 
-- [Konventionen](grundlagen-konventionen.md)
+- [Konventionen — Wegweiser](grundlagen-konventionen.md) — Index auf die sechs
+  Konventionen-Seiten:
+  - [Kernbegriffe und Trennschärfen](grundlagen-begriffe.md)
+  - [Source Precedence und Spec-Stratifizierung](grundlagen-source-precedence.md)
+  - [Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md)
+  - [Die Harness-Dateien und ihre Form](grundlagen-harness-dateien.md)
+  - [Harness-Bootstrap](grundlagen-bootstrap.md)
+  - [Traceability-Constraint](grundlagen-traceability.md)
 - [Klassifikation und Steering Loop](grundlagen-klassifikation.md)
 - [Durchsetzungsschicht](grundlagen-durchsetzungsschicht.md)
 
