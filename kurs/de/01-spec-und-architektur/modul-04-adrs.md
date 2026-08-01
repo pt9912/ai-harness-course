@@ -1,6 +1,6 @@
 # Modul 4 — ADRs
 
-> **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: ID-Schema und Source Precedence (Module 1, 2) bekommen hier einen neuen Quadranten — ADRs sind *inferential feedforward* mit Brücke zu *computational feedback*.
+> **Aufwand:** ca. 75 Min Lesen · 90 Min Übung. Spiralcurriculum: ID-Schema und Source Precedence (Module 1, 2) bekommen hier einen neuen Quadranten — ADRs sind *inferential feedforward* mit Brücke zu *computational feedback*.
 
 ## Mini-Glossar für dieses Modul
 

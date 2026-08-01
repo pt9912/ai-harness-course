@@ -1,6 +1,6 @@
 # Modul 3 — Die Spec: Lastenheft, Spezifikation, Architektur
 
-> **Aufwand:** ca. 90 Min Lesen · 90 Min Übung. Spiralcurriculum: ID-Schema und Source Precedence kennst du aus [Modul 1](modul-01-entwicklungszyklus.md) — hier werden sie zum Arbeitswerkzeug.
+> **Aufwand:** ca. 105 Min Lesen · 90 Min Übung. Spiralcurriculum: ID-Schema und Source Precedence kennst du aus [Modul 1](modul-01-entwicklungszyklus.md) — hier werden sie zum Arbeitswerkzeug.
 
 ## Optionale Explorations-Vorab-Übung (Kapur-Stil)
 
