@@ -66,7 +66,7 @@ ist derivativ — bei Konflikt gilt das Lehrmaterial.
   `SHA256SUMS`) — adoptierten Stand notieren (Stand-Zeile in
   `regelwerk/README.md`, z. B. „Kurs-Welle 24 · 2026-07-16"; Wellen-Register:
   CHANGELOG.md im Kurs-Repo); für harte Reproduzierbarkeit das Asset eines Tags
-  ziehen statt `latest`. Rollen und Netzlosigkeit: §MR-003.
+  ziehen statt `latest`.
 - **In-Repo (verkörperte Form):** <Pfade zu deinen kopiert-und-ausgefüllten
   Artefakten> — die vendored `.harness/baseline/<tag>/templates/` sind die
   Referenz-Form („Ziel-Form" des Regelwerks); deine eigenen Dateien sind daraus
@@ -74,106 +74,51 @@ ist derivativ — bei Konflikt gilt das Lehrmaterial.
 
 ## Adaptions-Block
 
-<!--
-ADR-artige Liste der Abweichungen ggü. Baseline.
-Jeder Eintrag mit Pflichtfeldern: ID (MR-<NNN>), Datum, Geltungsbereich,
-Adaption, Begründung, Auflösungs-Trigger (oder "permanent"); bei Ablösung zusätzlich Löst auf und Ausgelöst durch Baseline-Stand.
-
-Grenze zum Fork: Ein Eintrag, der die Baseline PAUSCHAL für nicht
-anwendbar erklärt, statt eine benannte Regel zu ersetzen, ist keine
-Adaption mehr — er nimmt der Baseline die Eigenschaft, gegen die man
-auditieren kann. Prüfe das beim Schreiben, nicht beim Audit:
-Baseline-Regelwerk `grundlagen-konventionen.md` §Source Precedence.
-
-Disziplin: chronologisch nummeriert, keine nachträglichen
-inhaltlichen Änderungen an akzeptierten Einträgen — nur neue Einträge
-oder explizite Aufhebungen via neuen MR.
-
-Zum ID-Schema: Hier wird es nur DEKLARIERT — VERGEBEN werden IDs beim
-Schreiben der Artefakte: Anforderungs-IDs im Lastenheft
-(`<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>`, Schema-Definition in
-spec/lastenheft.template.md), Verfeinerungen in der Spezifikation
-(`<PREFIX>-FA-<NN>.<Buchstabe>`), ADR-Nummern chronologisch über den
-ADR-Index. Hintergrund: Baseline-Regelwerk `grundlagen-konventionen.md`
-§ID-Schema als Klammer. Agenten referenzieren IDs nur, sie erfinden
-keine (AGENTS.md §5/§6).
--->
+Regeln dieser Sektion: Diese Datei trägt den **Index**, nicht die Einträge.
+Jede Adaption ist eine eigene Datei unter `harness/conventions/`, kopiert aus
+`harness/conventions/MR-NNN-titel.template.md` der vendored Baseline;
+ist ihr Auflösungs-Trigger eingetreten, wandert sie per `git mv` nach
+`conventions/done/`. Der Zustand ist die Verzeichnis-Position, kein
+Status-Feld. Der Grund für den Schnitt: Was hier steht, liest **jeder**
+Agentenlauf — aufgelöste Adaptionen gehören nicht in diesen Pfad
+(Baseline-Regelwerk `grundlagen-konventionen.md`
+§harness/conventions.md als Konventionsspeicher).
 
 ### MR-000 — Baseline-Aussage
 
+Bleibt hier: Sie ist keine Adaption, sondern die Adoptions-Erklärung, und
+sie gilt für jeden Lauf.
+
 - **Datum:** <Datum>
 - **Geltungsbereich:** gesamtes Repo
+- **Ersetzt-Baseline-Regel:** — *(keine; dieser Eintrag ist die
+  Adoptions-Erklärung, keine Adaption)*
 - **Adaption:** *keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
   ID-Schema (`<PREFIX>-FA-*`, `<PREFIX>-QA-*`, `ADR-<NNNN>`, `CO-<NNN>`,
   `slice-<NNN>`, `MR-<NNN>` — Präfix repo-weit festlegen, z. B. `LH`).*
-  (Source-Precedence-Adaptionen werden in separaten `MR-<NNN>`
-  dokumentiert — siehe Beispiel `MR-001` unten.)
 - **Begründung:** Initial-Setzung. Spätere Adaptionen werden als
   `MR-<NNN>` nachgetragen.
 - **Auflösungs-Trigger:** permanent.
 
-<!-- Beispiel-Eintrag für eine konkrete Adaption — zeigt den Abweichungs-
-     Fall zum 3-Straten-Default des README-Templates. Entfernen, wenn dein
-     Repo bei den drei Straten der Baseline bleibt. -->
+### Aktive Adaptionen
 
-### MR-001 — Source Precedence ohne eigene Spezifikations-Schicht
+<!-- Eine Zeile je Datei in harness/conventions/. Geltungsbereich und
+     Ersetzt-Baseline-Regel stehen hier, damit ein Agent ohne Öffnen
+     entscheiden kann, ob der Eintrag ihn betrifft. -->
 
-- **Datum:** <Datum>
-- **Geltungsbereich:** `harness/README.md` §Source precedence und `AGENTS.md` §Kanonische Quellen
-- **Adaption:** Source-Precedence-Tabelle führt **keinen** eigenen Rang für
-  `spec/spezifikation.md`; sie geht von Lastenheft (Rang 1) direkt auf
-  Architektur (Rang 2), danach acht statt neun Ränge. Der Baseline-Default
-  (Baseline-Regelwerk `grundlagen-konventionen.md` §Spec-Straten) setzt drei
-  Spec-Straten, alle obligatorisch; dieses Repo führt zwei.
-- **Begründung:** <Warum trifft dieses Repo keine eigenen technischen
-  Festlegungen? Tragfähig ist das nur, wenn hier nichts gebaut wird, was
-  welche erzeugte — etwa ein reines Policy-/Dokumentations-Repo. Wo Code
-  entsteht, entstehen Defaults, Konstanten und Fehler-Codes; die gehören
-  dann in das Technik-Stratum und nicht ins Lastenheft, wo sie
-  abnahmebindend und Change-Request-pflichtig würden.>
-- **Auflösungs-Trigger:** Sobald das Repo eigene technische Festlegungen
-  trägt — dann wird `spec/spezifikation.md` angelegt und diese `MR-001`
-  durch einen Nachfolger aufgelöst.
+| MR | Titel | Geltungsbereich | Ersetzt-Baseline-Regel |
+|---|---|---|---|
+| [\<NNN\>](conventions/MR-<NNN>-<titel>.md) | <Titel> | <Dateien / Sub-Areas> | <§Abschnitt der Baseline> |
 
-### MR-003 — Regelwerk und Templates als vendored, nachschlagbare Baseline
+### Aufgelöste Adaptionen
 
-- **Datum:** <Datum>
-- **Geltungsbereich:** [`AGENTS.md`](../AGENTS.md) §1, [§Baseline](#baseline)
-- **Adaption:** Provenienz/Konkretisierung (keine inhaltliche Abweichung vom
-  Baseline-Default): Regelwerk *und* Templates der Baseline werden **committet
-  vendored** unter `.harness/baseline/<tag>/{regelwerk,templates}/` geführt —
-  beim Bootstrap aus dem self-contained `lab-regelwerk.zip` materialisiert
-  (Modul 2), netzlos auf jedem Checkout, Integrität über
-  `.harness/baseline/<tag>/SHA256SUMS`. Das Regelwerk ist die **präsente,
-  nachschlagbare Vertiefung**: pro Entscheidung, deren operative Detailtiefe
-  Briefing und Konventionen nicht tragen (Trigger-Klassen,
-  Sub-Area-Qualifikation, Carveout-vs-Reconciliation, Modus-Diagnose), wird
-  der **relevante Abschnitt** referenziert (README = Index), ohne das ganze
-  Regelwerk im Kontext zu halten. Weil `regelwerk/` und `templates/` **parallel**
-  vendored liegen, lösen die `../templates/`-Ziel-Form-Verweise des Regelwerks
-  **netzlos lokal** auf (Referenz-Form für „so sieht das Artefakt aus").
-- **Begründung:** Modul-0-Prinzip — *Per-Lauf-Relevantes gehört verkörpert,
-  nicht extern nachgeladen*: Da Regelwerk und Ziel-Formen im Slice-Betrieb
-  routinemäßig nachgeschlagen werden (Real-Beleg eines Konsument-Repos:
-  d-check), werden sie vendored statt pro Lauf extern gefetcht — das macht den
-  Nachschlag netzlos und über den `<tag>` reproduzierbar. Der konkrete Tag und
-  das Integritätsmanifest stehen hier als Provenienz, damit Drift gegen die
-  adoptierte Baseline prüfbar bleibt. (Die *Kontext*-Hygiene bleibt: nur der
-  benötigte Abschnitt, nie das ganze Bundle im Kontext.)
-- **Auflösungs-Trigger:** permanent (Provenienz/Baseline-Konformität).
+<!-- Eine Zeile je Datei in harness/conventions/done/ — nur ID und
+     Nachfolger, damit die Kette auffindbar bleibt, ohne gelesen zu werden. -->
 
-<!-- Weitere konkrete Adaptionen wie folgt: -->
-
-### MR-NNN — <Titel der Adaption>
-
-- **Datum:** <Datum>
-- **Geltungsbereich:** <Dateien / Module / Sub-Areas>
-- **Adaption:** <was weicht inhaltlich ab>
-- **Begründung:** <warum, idealerweise mit Praxis-Bezug>
-- **Auflösungs-Trigger:** <Trigger oder "permanent">
-- **Löst auf:** <MR-NNN> *(Pflicht, wenn dieser Eintrag einen früheren ablöst — sonst Zeile weglassen)*
-- **Ausgelöst durch Baseline-Stand:** <tag> *(Pflicht zusammen mit „Löst auf" — welcher Baseline-Stand die Ablösung ausgelöst hat)*
+| MR | aufgelöst durch |
+|---|---|
+| [\<NNN\>](conventions/done/MR-<NNN>-<titel>.md) | [MR-\<NNN\>](conventions/MR-<NNN>-<titel>.md) |
 
 ## Zusatzklassen-Deklaration für Sensors-Bindung
 

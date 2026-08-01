@@ -30,10 +30,17 @@ Der Default-Ort für:
 
 ## Adaptions-Block
 
+Diese Datei trägt den **Index**; die Einträge liegen einzeln unter
+`harness/conventions/`, aufgelöste unter `conventions/done/`. Der Zustand ist
+die Verzeichnis-Position, kein Status-Feld
+([`konventionen.md` §Konventionsspeicher](../../../kurs/de/grundlagen/konventionen.md#harnessconventionsmd-als-konventionsspeicher)).
+
 ### MR-000 — Baseline-Aussage
 
 - **Datum:** 2026-05-15
 - **Geltungsbereich:** gesamtes Repo
+- **Ersetzt-Baseline-Regel:** — *(keine; dieser Eintrag ist die
+  Adoptions-Erklärung, keine Adaption)*
 - **Adaption:** *Keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
   ID-Schema (`LH-FA-*`, `LH-QA-*`, `ADR-<NNNN>`, `CO-<NNN>`,
@@ -43,65 +50,18 @@ Der Default-Ort für:
   Bedarfsfall, damit die Konvention als solche sichtbar bleibt.
 - **Auflösungs-Trigger:** permanent.
 
-### MR-001 — Source Precedence mit eigener Spezifikations-Schicht
+### Aktive Adaptionen
 
-> **Aufgelöst durch [`MR-003`](#mr-003--mr-001-gegenstandslos-durch-baseline-update)
-> (2026-08-01).** Der Eintrag bleibt unverändert stehen — Adaptionen werden
-> nicht überschrieben, sondern von einem Nachfolger abgelöst
-> ([`konventionen.md` §Source Precedence](../../../kurs/de/grundlagen/konventionen.md#source-precedence)).
+| MR | Titel | Geltungsbereich | Ersetzt-Baseline-Regel |
+|---|---|---|---|
+| [002](conventions/MR-002-konventions-bindung-als-sensors-klasse.md) | Konventions-Bindung als Sensors-Klasse | Bindung-Spalte in `harness/README.md` §Sensors | [`konventionen.md` §Sensors-Bindung](../../../kurs/de/grundlagen/konventionen.md#harnessreadmemd-als-einstiegspunkt) |
+| [003](conventions/MR-003-mr-001-gegenstandslos.md) | MR-001 gegenstandslos durch Baseline-Update | `MR-001` | — |
 
-- **Datum:** 2026-05-15
-- **Geltungsbereich:** [`harness/README.md` §Source precedence](README.md#source-precedence) und `AGENTS.md` §Kanonische Quellen
-- **Adaption:** Die Source-Precedence-Tabelle führt
-  [`spec/spezifikation.md`](../spec/spezifikation.md) als eigenen
-  **Rang 2** zwischen Lastenheft (Rang 1) und Architektur (Rang 3).
-  Der Kurs-Default
-  ([`konventionen.md` §Source Precedence](../../../kurs/de/grundlagen/konventionen.md#source-precedence))
-  setzt nur zwei Spec-Ränge (`lastenheft` → `architecture`); dieses
-  Repo nutzt drei.
-- **Begründung:** Das Repo verwendet die Spec-Stratifizierung
-  ([`konventionen.md` §Spec-Stratifizierung](../../../kurs/de/grundlagen/konventionen.md#spec-stratifizierung))
-  explizit mit drei Spec-Dateien — Lastenheft (vertraglich),
-  Spezifikation (technisch fortschreibbar), Architektur (diagrammatisch).
-  Damit die Source-Precedence-Tabelle die ADR-Schärfungs-Regel
-  ("ADR darf Spezifikation schärfen, nicht Lastenheft") strukturell
-  abbildet, muss die Spezifikation als eigener Rang sichtbar sein —
-  sonst kollabiert die Trennschärfe zwischen "wir versprechen" und
-  "wir liefern wie".
-- **Auflösungs-Trigger:** permanent.
+### Aufgelöste Adaptionen
 
-### MR-002 — Konventions-Bindung als Sensors-Klasse
-
-**Adaption:** Die Bindung-Spalte in [`README.md` §Sensors](README.md#sensors-feedback-gates)
-darf neben den vier kanonischen Klassen und der LH-Bindung auch eine
-**Kurs-Konvention** nennen.
-
-**Begründung:** Drei Gates dieses Repos setzen Regeln durch, die weder eine
-Anforderung noch eine ADR sind, sondern Konventionen des Baseline-Regelwerks:
-`make check-references` (Referenz-Richtung), `make replay`
-(Golden-Set-Form, Modul 12) und `make release` (Release-Disziplin, Modul 16).
-Ohne eigene Klasse trügen sie entweder `—` — dann behauptet die Tabelle, sie
-setzten nichts durch — oder eine erfundene ID.
-
-**Geltungsbereich:** nur die Bindung-Spalte in `harness/README.md` §Sensors.
-
-**Datum der Adoption:** 2026-06-02.
-
-### MR-003 — MR-001 gegenstandslos durch Baseline-Update
-
-- **Datum:** 2026-08-01
-- **Geltungsbereich:** [`MR-001`](#mr-001--source-precedence-mit-eigener-spezifikations-schicht)
-- **Adaption:** *keine* — dieser Eintrag löst `MR-001` auf. Die Baseline führt
-  seither **alle drei Spec-Straten als obligatorisch**
-  ([`konventionen.md` §Spec-Straten](../../../kurs/de/grundlagen/konventionen.md#spec-straten-mehr-als-ein-spec-dokument));
-  die Source-Precedence-Tabelle mit `spec/spezifikation.md` auf Rang 2 ist
-  damit der Default und keine Abweichung mehr.
-- **Begründung:** Eine Adaption, die durch ein Baseline-Update
-  gegenstandslos wird, wird nicht gelöscht und nicht überschrieben, sondern
-  bekommt einen Nachfolger, der sie auflöst und den auslösenden
-  Baseline-Stand nennt — dieselbe Append-only-Disziplin wie bei ADRs
-  ([`konventionen.md` §Source Precedence](../../../kurs/de/grundlagen/konventionen.md#source-precedence)).
-- **Auflösungs-Trigger:** permanent.
+| MR | aufgelöst durch |
+|---|---|
+| [001](conventions/done/MR-001-source-precedence-mit-spezifikations-schicht.md) | [MR-003](conventions/MR-003-mr-001-gegenstandslos.md) |
 
 ## Zusatzklassen-Deklaration für Sensors-Bindung
 

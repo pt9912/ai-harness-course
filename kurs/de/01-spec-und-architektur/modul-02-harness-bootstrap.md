@@ -20,7 +20,7 @@ bewusst nicht im Glossar.
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
 | **Sub-Area** | Doku-/Code-Sektion, die als Träger einer Modus-Entscheidung dient — mit eigener Konventions-Härte (eigene `MR-NNN` möglich), eigener Inventur-Linie und eigener Pfad-/Datei-Familie im Repo. Qualifikations-Maßstab (drei Inklusions-Achsen, Schwelle ≥ 2) und Beispiele: [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/konventionen.md#was-ist-eine-sub-area), §Übung 1 und §Worked Example 1. | nicht das Repo, nicht der Slice — die Strecke, die *ein* `MR-NNN` normiert. |
-| **Adaptions-Block** *(Vorgriff auf konventionen.md)* | Sektion in `harness/conventions.md`, in der das Repo seine Baseline-Adaptionen als `MR-NNN`-Einträge deklariert. | das Notizbuch, in dem das Repo seine Abweichungen von der Baseline aufschreibt. |
+| **Adaptions-Block** *(Vorgriff auf konventionen.md)* | Sektion in `harness/conventions.md`, die die Baseline-Adaptionen des Repos **indiziert**; jeder `MR-NNN`-Eintrag ist eine eigene Datei unter `harness/conventions/`. | das Notizbuch, in dem das Repo seine Abweichungen von der Baseline aufschreibt. |
 | **BF-Sub-Area-Markierung** *(Vorgriff auf Modul 7)* | Modus-Deklaration im Adaptions-Block, die eine ganze Sub-Area als BF mit Graduation-Plan markiert — Alternative zur Carveout-Kaskade. | ein "hier wächst Wiese"-Schild für ein ganzes Beet, mit Datum für die Rasen-Graduierung. |
 | **MR-NNN** *(Vorgriff auf konventionen.md)* | ID-Schema für *Module Rules* — die Konventions-Adaptionen im Adaptions-Block (Schwester zu `LH-FA-*` für Anforderungen). | Anker-Nummer einer einzelnen Konventions-Härtung. |
 
@@ -303,7 +303,7 @@ flowchart TD
     S0["0. Modus = GF pro Sub-Area"]:::orient
     S1["1. Baseline + Repo-Klasse + ID-Schemata"]:::orient
     S2["2. Templates + Regelwerk adoptieren"]:::action
-    S3["3. conventions.md (MR-000 + MR-001)"]:::action
+    S3["3. conventions.md (MR-000 + Index)<br/>+ conventions/MR-001-*.md"]:::action
     S4["4. lastenheft.md Outline"]:::content
     S5["5. Roadmap + Release-Plan Outline"]:::content
     S6["6. Sensors-Roster im Nicht-behauptet-Block"]:::content
@@ -343,7 +343,7 @@ BF-Diskrepanz-Auslöse-Variante.
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
 | 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schemata festlegen (`LH-*`, `ARC-*`, `SPEC-*`, `MR-*`) | keine | reift 2/3 |
 | 2 | **Baseline vendoren** — Regelwerk *und* Templates nach `.harness/baseline/<tag>/{regelwerk,templates}/` (+ `SHA256SUMS`, netzlos) als präsente, gepinnte Referenz; **Tooling** (`Makefile` mit d-check-Doku-Gate, `.d-check.yml`) als Startgerüst übernehmen; **Dokument-Skelette** aus der vendored Baseline (`…/templates/`) kopieren *und ausfüllen* | Dokument-Skelette **0 → 1**; vendored Baseline + Tooling tragen keine Phase-Reife | keine |
-| 3 | `harness/conventions.md` mit MR-000 (Baseline) + MR-001 (`ARC-*`/`SPEC-*` als Adaption) | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
+| 3 | `harness/conventions.md` mit MR-000 (Baseline) + Index-Tabelle; die Adaption `ARC-*`/`SPEC-*` als eigene Datei `harness/conventions/MR-001-*.md` | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
 | 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
 
 ### Detail-Tabelle (Schritte 5–8: Inhalts-Phase)
@@ -366,7 +366,8 @@ kognitiv lesbar — die Phasen verschwimmen sonst.
 **Anmerkung zum Instanziierungs-Zeitpunkt (Schritt 2).** „Skelette kopieren
 und ausfüllen" meint beim Bootstrap **nur die Gründungs-Dokumente** — je genau
 eines pro Repo, hier gefüllt und behalten: `spec/lastenheft.md`,
-`spec/spezifikation.md`, `spec/architecture.md`, `harness/conventions.md`,
+`spec/spezifikation.md`, `spec/architecture.md`, `harness/conventions.md`
+(Index; einzelne `MR-<NNN>` entstehen pro Adaption, nicht beim Bootstrap),
 `harness/README.md`, `AGENTS.md`, `docs/plan/planning/roadmap.md` und der
 Gründungs-ADR `0001` (Skelette in Schritt 2, gefüllt in 3–8). Die
 **wiederkehrenden Artefakte** — `slice`, `welle`, weitere ADRs (`NNNN-*`),

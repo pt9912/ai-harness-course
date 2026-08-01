@@ -37,3 +37,14 @@ modules: [links, anchors]
 # Ohne `exclude-sections`. Welche Abschnitte ausgenommen werden — und ob
 # ueberhaupt —, regelt das Baseline-Regelwerk `grundlagen-konventionen.md`
 # §Referenz-Richtung (SDP); diese Datei bildet die dortige Setzung nur ab.
+#
+# Append-only der Adaptions-Eintraege — aktivieren, sobald harness/conventions/
+# existiert. Braucht git und eine Commit-Range (Target `doc-immutable` aus
+# `d-check --print-mk`); prueft, dass der Core einer akzeptierten MR-Datei
+# ueber die Range unveraendert bleibt. Welche Eintraege unveraenderlich sind
+# und ab wann, regelt das Baseline-Regelwerk `grundlagen-konventionen.md`
+# §harness/conventions.md als Konventionsspeicher.
+# vcs:
+#   paths: ["harness/conventions/**/MR-[0-9]*.md"]
+#   immutable-when: '^\*\*Status:\*\* Accepted'
+#   status-line: '^\*\*Status:\*\*'

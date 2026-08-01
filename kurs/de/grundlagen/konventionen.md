@@ -60,7 +60,8 @@ docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
 docs/reviews/               # Review-Reports, ein Report pro Lauf (Modul 10)
 AGENTS.md                   # maschinell lesbare Projekt-Konventionen für Agenten
 harness/README.md           # Einstiegspunkt: Precedence, Guides, Sensors, Safety
-harness/conventions.md      # repo-lokale Regeln, Adaptionen (MR-NNN), Modus pro Sub-Area
+harness/conventions.md      # Index: repo-lokale Regeln, Adaptionen, Modus pro Sub-Area
+harness/conventions/        # ein MR je Datei; done/ = aufgelöst
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
 
@@ -161,11 +162,8 @@ flowchart TD
     U --> RM["7. README.md"]
     RM --> AG["8. AGENTS.md"]
     AG --> H["9. harness/README.md"]
-    H -. "delegiert Form-/Strukturfragen" .->
-    C["harness/conventions.md<br/>(Konventionsspeicher —<br/>außerhalb der
-    Rang-Zählung)"]
-    C -. "MR-NNN gilt nur im<br/>Geltungsbereich davor" .-> B["vendored
-    Baseline<br/>.harness/baseline/&lt;tag&gt;/"]
+    H -. "delegiert Form-/Strukturfragen" .-> C["harness/conventions.md<br/>(Konventionsspeicher —<br/>außerhalb der Rang-Zählung)"]
+    C -. "ersetzt eine benannte Regel,<br/>gilt in ihrem Geltungsbereich" .-> B["vendored Baseline<br/>.harness/baseline/&lt;tag&gt;/"]
     style L fill:#fff4d6,stroke:#d4a017
     style T fill:#fff4d6,stroke:#d4a017
     style S fill:#fff4d6,stroke:#d4a017
@@ -175,8 +173,7 @@ flowchart TD
     style C fill:#dceaff,stroke:#3366cc
     style B fill:#eeeeee,stroke:#999999
 
-    Conflict[/"Konflikt zwischen<br/>AGENTS.md und Spec?"/] -. "AGENTS.md
-    anpassen,<br/>nie die Spec" .-> AG
+    Conflict[/"Konflikt zwischen<br/>AGENTS.md und Spec?"/] -. "AGENTS.md anpassen,<br/>nie die Spec" .-> AG
 ```
 
 Gelb: kanonische Quellen — Spec, Architektur, ADRs. Blau: Harness-Index
@@ -212,8 +209,8 @@ Definition einer Adaption — sie steht hier, weil ein Agent, der nur die
 Rangliste liest, die Antwort sonst nicht findet.
 
 Daraus folgt die Grenze — sie liegt in der *Wirkung*, nicht im Feld
-`Geltungsbereich` (das nennt den Repo-Ausschnitt, nicht den Baseline-Ausschnitt;
-welche Baseline-Regel betroffen ist, steht in `Adaption`): Eine `MR-<NNN>`, die
+`Geltungsbereich` (das nennt den Repo-Ausschnitt; den Baseline-Ausschnitt nennt
+das eigene Feld `Ersetzt-Baseline-Regel`): Eine `MR-<NNN>`, die
 die Baseline **pauschal für nicht anwendbar erklärt**, statt eine benannte Regel
 zu ersetzen, ist kein Adaptions-Eintrag mehr, sondern ein **Fork** — sie nimmt
 der Baseline die Eigenschaft, gegen die man auditieren kann. *Gelesen wird die Grenze beim **Schreiben** eines Eintrags* — der Adaptions-Block der
@@ -715,10 +712,37 @@ Pflichtgliederung (Default-Form als Einzeldatei):
 | Purpose | was die Datei trägt, was nicht |
 | Baseline | welche Konvention adoptiert, mit Stand/Version |
 | Adoptierte Konventions-Quellen | Pointer extern (Kurs/Standard) und in-Repo (Templates) |
-| Adaptions-Block | ADR-artige Liste der Abweichungen ggü. Baseline (`MR-<NNN>` mit Datum, Geltungsbereich, Adaption, Begründung, Auflösungs-Trigger oder "permanent"). Löst ein Eintrag einen früheren **ab**, nennt er zusätzlich *Löst auf* und *Ausgelöst durch Baseline-Stand*; *schärft* er ihn nur (der alte gilt weiter, die Regel wird **strenger**), steht das im Titel — `(schärft MR-<NNN>)`. Verliert ein Eintrag durch die Baseline dagegen einen *Teil seines Geltungsbereichs*, ist das eine **Ablösung** mit engerem Nachfolger, keine Schärfung. Einträge werden nie überschrieben. |
+| Adaptions-Block | **Index** der Abweichungen ggü. Baseline, nicht die Einträge selbst: `MR-000` (Adoptions-Erklärung) plus je eine Tabellenzeile pro Adaption. Pflichtfelder eines Eintrags: Datum, Geltungsbereich, `Ersetzt-Baseline-Regel`, Adaption, Begründung, Auflösungs-Trigger oder "permanent". Löst ein Eintrag einen früheren **ab**, nennt er zusätzlich *Löst auf* und *Ausgelöst durch Baseline-Stand*; *schärft* er ihn nur (der alte gilt weiter, die Regel wird **strenger**), steht das im Titel — `(schärft MR-<NNN>)`. Verliert ein Eintrag durch die Baseline dagegen einen *Teil seines Geltungsbereichs*, ist das eine **Ablösung** mit engerem Nachfolger, keine Schärfung. Einträge werden nie überschrieben. |
 | Zusatzklassen-Deklaration für Sensors-Bindung | repo-spezifische Bindung-Klassen jenseits der vier kanonischen (`LH-…`, Compliance, Modell-Version) |
 | Modus-Deklaration pro Sub-Area | Greenfield · Brownfield (mit Konvergenz-Auftrag) · Hybrid |
 | Glossar (optional) | repo-spezifische Begriffe, die nicht im Kurs-Glossar stehen |
+
+**Ein Eintrag je Datei — und der Grund ist der Kontext des Agenten.**
+Die Einträge selbst leben unter `harness/conventions/MR-<NNN>-<titel>.md`;
+ist der Auflösungs-Trigger eingetreten, wandert die Datei nach
+`conventions/done/`. Der Zustand ist die **Verzeichnis-Position**, kein
+Status-Feld — dieselbe Lifecycle-Form wie bei Slices
+([Modul 5](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
+
+Der Schnitt folgt nicht der Ästhetik, sondern dem Lesepfad: `conventions.md`
+liest **jeder** Agentenlauf. Steht der volle Text aller Adaptionen darin,
+wächst der Pflichtanteil des Kontexts mit jeder Adaption — und trägt bald
+mehrheitlich Einträge, die *aufgelöst* sind und trotzdem gelesen werden. Das
+ist nicht nur Kontext-Kosten, sondern ein Korrektheits-Risiko: Ein
+aufgelöster Eintrag liest sich wie ein geltender. Mit Index plus Dateien
+zahlt jeder Lauf **eine Zeile pro aktiver Adaption**; geöffnet wird nur, was
+den eigenen Geltungsbereich trifft. Es ist dieselbe Disziplin, die das
+Regelwerk für sich selbst verlangt — *nur den benötigten Abschnitt laden,
+nicht das Ganze im Kontext halten*.
+
+Die Form bleibt Wahl: Ein Repo mit zwei permanenten Adaptionen darf sie
+inline führen. Der **Default** ist die Verzeichnis-Form, weil sie mit der
+Adaptions-Zahl nicht mitwächst.
+
+Nebeneffekt, kein Selbstzweck: Ein Eintrag je Datei ist auch die einzige
+Form, in der die Append-only-Disziplin *prüfbar* wird — eine wachsende
+Sammeldatei lässt sich nicht gegen Core-Drift pinnen, eine akzeptierte
+Einzeldatei schon.
 
 Wichtig: `harness/conventions.md` dupliziert keinen Baseline-Text — sie
 verweist und ergänzt. Eine Kopie ginge gegen die Baseline in Drift,
@@ -726,8 +750,11 @@ sobald letztere sich weiterentwickelt. Zwei Quellen derselben
 Konvention sind dasselbe Drift-Risiko, das die Source-Precedence-Regel
 für Spec/ADR adressiert — hier in der Form-Ebene.
 
-Vorlage:
-[`/lab/templates/harness/conventions.template.md`](../../../lab/templates/harness/conventions.template.md).
+Vorlagen:
+[`/lab/templates/harness/conventions.template.md`](../../../lab/templates/harness/conventions.template.md)
+(Index) und
+[`/lab/templates/harness/conventions/MR-NNN-titel.template.md`](../../../lab/templates/harness/conventions/MR-NNN-titel.template.md)
+(ein Eintrag).
 Worked Example:
 [`/lab/example/harness/conventions.md`](../../../lab/example/harness/conventions.md).
 
@@ -1124,9 +1151,7 @@ behebt.
 
 ```mermaid
 flowchart TB
-    A["Beobachtungs-Quellen<br/>Agentenlauf · Review-Findings<br/>Verifikation
-    · Validierung"] --> B["Slice-Closure §7<br/>Steering-Loop-Eintrag<br/>+
-    Risiko-Ausgänge"]
+    A["Beobachtungs-Quellen<br/>Agentenlauf · Review-Findings<br/>Verifikation · Validierung"] --> B["Slice-Closure §7<br/>Steering-Loop-Eintrag<br/>+ Risiko-Ausgänge"]
     B --> V["Beobachtungs-Register<br/>observations.md<br/>(neu oder Zähler +1)"]
     V --> C{"Wie oft?"}
     C -- "3x" --> E["Verkörperung<br/>Lese-Schritt: Welle-Closure —<br/>Repo ohne Wellen: die Slice-Closure<br/>Steering-Loop-Eintrag + Zielort<br/>(Regel/Sensor: liegt in; Spec-Lücke: LH-*)"]

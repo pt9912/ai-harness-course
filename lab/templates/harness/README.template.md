@@ -43,8 +43,7 @@ Diese Datei dupliziert sie nicht.
 > `grundlagen-konventionen.md` §Spec-Straten). **Adaption ist die
 > Zwei-Straten-Form, nicht die Drei-Straten-Form**: Wer Rang 2 streicht,
 > deklariert das als `MR-<NNN>` in [`conventions.md`](conventions.md) und
-> nummeriert neu (dann acht Ränge); `MR-001` dort ist genau dieser Fall und
-> kann gelöscht werden, wenn du bei drei Straten bleibst.
+> nummeriert neu (dann acht Ränge).
 
 ## Guides (Feedforward-Quellen)
 

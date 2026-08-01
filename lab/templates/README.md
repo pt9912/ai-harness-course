@@ -35,6 +35,7 @@ Klassen**, nicht 22 gleichartige Vorlagen:
 | [`AGENTS.template.md`](AGENTS.template.md) | Repo-weite Hard Rules und Source Precedence | [Modul 9](../regelwerk/modul-09-implementierung.md) |
 | [`harness/README.template.md`](harness/README.template.md) | Repo-Einstiegspunkt mit Guides, Sensors, Safety | [Konventionen](../regelwerk/grundlagen-konventionen.md#harnessreadmemd-als-einstiegspunkt) |
 | [`harness/conventions.template.md`](harness/conventions.template.md) | Repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Zusatzklassen-Deklaration, Modus-Deklaration pro Sub-Area | [Konventionen](../regelwerk/grundlagen-konventionen.md#harnessconventionsmd-als-konventionsspeicher) |
+| [`harness/conventions/MR-NNN-titel.template.md`](harness/conventions/MR-NNN-titel.template.md) | Ein Adaptions-Eintrag (`MR-<NNN>`); Index in `conventions.md` | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
 
 ## Download als ZIP
 

@@ -145,7 +145,7 @@ BF-Diskrepanz-Auslöse-Variante.
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
 | 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schemata festlegen (`LH-*`, `ARC-*`, `SPEC-*`, `MR-*`) | keine | reift 2/3 |
 | 2 | **Baseline vendoren** — Regelwerk *und* Templates nach `.harness/baseline/<tag>/{regelwerk,templates}/` (+ `SHA256SUMS`, netzlos) als präsente, gepinnte Referenz; **Tooling** (`Makefile` mit d-check-Doku-Gate, `.d-check.yml`) als Startgerüst übernehmen; **Dokument-Skelette** aus der vendored Baseline (`…/templates/`) kopieren *und ausfüllen* | Dokument-Skelette **0 → 1**; vendored Baseline + Tooling tragen keine Phase-Reife | keine |
-| 3 | `harness/conventions.md` mit MR-000 (Baseline) + MR-001 (`ARC-*`/`SPEC-*` als Adaption) | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
+| 3 | `harness/conventions.md` mit MR-000 (Baseline) + Index-Tabelle; die Adaption `ARC-*`/`SPEC-*` als eigene Datei `harness/conventions/MR-001-*.md` | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
 | 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
 
 #### Detail-Tabelle (Schritte 5–8: Inhalts-Phase)
@@ -168,7 +168,8 @@ kognitiv lesbar — die Phasen verschwimmen sonst.
 **Anmerkung zum Instanziierungs-Zeitpunkt (Schritt 2).** Beim Bootstrap
 entstehen **nur die Gründungs-Dokumente** — je genau eines pro Repo, gefüllt und
 behalten: `spec/lastenheft.md`, `spec/spezifikation.md`, `spec/architecture.md`,
-`harness/conventions.md`, `harness/README.md`, `AGENTS.md`,
+`harness/conventions.md` (Index; einzelne `MR-<NNN>` entstehen pro
+Adaption, nicht beim Bootstrap), `harness/README.md`, `AGENTS.md`,
 `docs/plan/planning/roadmap.md` und der Gründungs-ADR `0001` (Skelette in
 Schritt 2, gefüllt in 3–8). Die **wiederkehrenden Artefakte** — `slice`,
 `welle`, weitere ADRs (`NNNN-*`), `carveout`, `review-report` — werden **nicht**
