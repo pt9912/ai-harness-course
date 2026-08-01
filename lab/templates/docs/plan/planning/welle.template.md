@@ -102,7 +102,7 @@ Schritt 5) und darf deshalb nichts Tragendes halten.
   Ruheort-Regel ausgenommen und faellt mit diesem Kommentar ohnehin weg.
 -->
 
-Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-konventionen.md`
+Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-traceability.md`
 §Herkunfts-Anker für Steering-Loop-Regeln — dort die **Ruheort-Regel**: Die
 beiden Zeiger unten sind so zu schreiben, wie sie vom Ruheort `done/` auflösen,
 nicht vom Schreibort.

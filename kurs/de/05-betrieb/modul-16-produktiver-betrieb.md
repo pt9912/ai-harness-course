@@ -5,7 +5,7 @@
 ## Mini-Glossar für dieses Modul
 
 Sieben neue Begriffe — Volldefinitionen in
-[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe).
+[`begriffe.md`](../grundlagen/begriffe.md#kernbegriffe).
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|

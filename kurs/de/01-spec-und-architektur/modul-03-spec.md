@@ -95,7 +95,7 @@ steht, wird auf die für dich ungünstigste Weise interpretiert.
 *Buchstabentreue*. Anders als ein echter Praktikant **vergisst** der
 Agent zwischen den Aufgaben — was nicht im Kontext steht, war für ihn
 nie da (siehe Glossar in
-[`../grundlagen/konventionen.md#kernbegriffe`](../grundlagen/begriffe.md#kernbegriffe):
+[`begriffe.md#kernbegriffe`](../grundlagen/begriffe.md#kernbegriffe):
 LLM ist *stateless*). Wer die Metapher zu weit treibt, erwartet
 "Mitlernen" — und plant Reviews, als würden sie *einmal* erklärt
 ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
@@ -294,7 +294,7 @@ Modul-spezifische Trigger:
 
 ## Weiterlesen
 
-* Spec-Stratifizierung im Detail: [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/source-precedence.md#spec-stratifizierung)
+* Spec-Stratifizierung im Detail: [`source-precedence.md#spec-stratifizierung`](../grundlagen/source-precedence.md#spec-stratifizierung)
 * Reales Beispiel mit Lastenheft/Spezifikation-Trennung: `pt9912/c-hsm-doc` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
 * Vorheriges Modul: [Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)
 * Nächstes Modul: [Modul 4 — ADRs](modul-04-adrs.md)

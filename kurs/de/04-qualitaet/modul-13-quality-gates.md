@@ -5,7 +5,7 @@
 ## Mini-Glossar für dieses Modul
 
 Sechs neue Begriffe — Volldefinitionen in
-[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe).
+[`begriffe.md`](../grundlagen/begriffe.md#kernbegriffe).
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
@@ -18,7 +18,7 @@ Sechs neue Begriffe — Volldefinitionen in
 
 **Begriffsklärung:** *Bootstrap-aware Gate* (oben) ist nicht zu
 verwechseln mit *Harness-Bootstrap* aus
-[`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-bootstrap).
+[`bootstrap.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-bootstrap).
 Letzteres ist der **Repo-Einstiegsprozess** (Lebenszyklus eines Harness
 im Repo); ersteres ist die **Reifestufe eines einzelnen Sensors**.
 Beide Begriffe teilen das Wort, sind strukturell verschieden.
@@ -111,7 +111,7 @@ der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt — nicht
 ausgelassen, nicht geschönt, nicht in einer Status-Spalte versteckt
 (die Sensors-Tabelle trägt keinen Lauf-Status; Lauf-Wahrheit pro Commit
 liegt in CI, siehe
-[`../grundlagen/konventionen.md`](../grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
+[`harness-dateien.md`](../grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
 Implementer-Agent vertraut ihnen.
 
@@ -140,7 +140,7 @@ coverage-gate: ## Coverage threshold gate (bootstrap-aware, LH-FA-BUILD-008).
 
 **Kam das Gate aus dem Steering Loop statt aus einer Anforderung**, trägt
 der Kommentar zusätzlich den Herkunfts-Anker `· seit welle-<NN>` — ohne Welle `· seit slice-<NNN>`
-([`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln))
+([`traceability.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln))
 — sonst ist beim nächsten Aufräumen nicht mehr rekonstruierbar, welche
 Beobachtung es erzwungen hat.
 

@@ -81,7 +81,7 @@ ist ihr Auflösungs-Trigger eingetreten, wandert sie per `git mv` nach
 `conventions/done/`. Der Zustand ist die Verzeichnis-Position, kein
 Status-Feld. Der Grund für den Schnitt: Was hier steht, liest **jeder**
 Agentenlauf — aufgelöste Adaptionen gehören nicht in diesen Pfad
-(Baseline-Regelwerk `grundlagen-konventionen.md`
+(Baseline-Regelwerk `grundlagen-harness-dateien.md`
 §harness/conventions.md als Konventionsspeicher).
 
 ### MR-000 — Baseline-Aussage

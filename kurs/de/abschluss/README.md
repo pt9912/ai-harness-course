@@ -30,4 +30,4 @@ Harness-Projekts ist deshalb fast immer: *die schon vorhandene Struktur
 sichtbar machen*, nicht neue Struktur erzeugen. Das ist der
 Brownfield-Modus (Trigger-Richtung Code → Doc, mit Konvergenz-Auftrag
 zu Greenfield); systematische Sicht in
-[`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-bootstrap).
+[`bootstrap.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-bootstrap).

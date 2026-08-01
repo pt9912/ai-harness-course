@@ -15,7 +15,7 @@ modules: [links, anchors]
 #
 # Referenz-Richtung (SDP) mechanisch — aktivieren, sobald spec/ und docs/plan/
 # existieren. Bildet die Referenzmatrix des Regelwerks ab
-# (`grundlagen-konventionen.md` §Referenz-Richtung (SDP)); ohne sie lebt die
+# (`grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)); ohne sie lebt die
 # Regel nur im Briefing, nicht im Gate.
 # matrix:
 #   classes:
@@ -35,14 +35,14 @@ modules: [links, anchors]
 #     - {from: adr, to: slice, allow: false}                            # Ausnahme je Zeile: <!-- d-check:status-provenance -->
 #   status: {forbidden: [superseded, deprecated]}                       # nur aktive ADRs referenzieren
 # Ohne `exclude-sections`. Welche Abschnitte ausgenommen werden — und ob
-# ueberhaupt —, regelt das Baseline-Regelwerk `grundlagen-konventionen.md`
+# ueberhaupt —, regelt das Baseline-Regelwerk `grundlagen-referenz-richtung.md`
 # §Referenz-Richtung (SDP); diese Datei bildet die dortige Setzung nur ab.
 #
 # Append-only der Adaptions-Eintraege — aktivieren, sobald harness/conventions/
 # existiert. Braucht git und eine Commit-Range (Target `doc-immutable` aus
 # `d-check --print-mk`); prueft, dass der Core einer akzeptierten MR-Datei
 # ueber die Range unveraendert bleibt. Welche Eintraege unveraenderlich sind
-# und ab wann, regelt das Baseline-Regelwerk `grundlagen-konventionen.md`
+# und ab wann, regelt das Baseline-Regelwerk `grundlagen-harness-dateien.md`
 # §harness/conventions.md als Konventionsspeicher.
 # vcs:
 #   paths: ["harness/conventions/**/MR-[0-9]*.md"]

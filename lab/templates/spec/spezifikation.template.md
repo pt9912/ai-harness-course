@@ -23,7 +23,7 @@ sie schärfen, das Lastenheft nicht. Regeln: Baseline-Regelwerk
 
 Regeln dieser Sektion: Tatsächlicher Code gehört in `src/`, nicht hierher.
 ID-Schema `<PREFIX>-FA-<NN>.<Buchstabe>` für Verfeinerungen einzelner
-Lastenheft-IDs (Baseline-Regelwerk `grundlagen-konventionen.md`
+Lastenheft-IDs (Baseline-Regelwerk `grundlagen-source-precedence.md`
 §ID-Schema als Klammer).
 
 <!--
@@ -66,7 +66,7 @@ Anforderung gewahrt bleibt.
 
 Regeln dieser Sektion: Die ADR, die einen Wert festlegt, deklariert das
 aufwärts in ihrem `Schärft:`-Feld — kein ADR-Rückzeiger hier
-(Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
+(Baseline-Regelwerk `grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)).
 
 <!-- Werte, die in Code fest sind. -->
 

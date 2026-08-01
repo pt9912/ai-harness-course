@@ -1,6 +1,6 @@
 # Regelwerk — der Kurs als Betriebsregelwerk, nach Modulen
 
-**Stand:** Kurs-Welle 63 · 2026-08-01.
+**Stand:** Kurs-Welle 64 · 2026-08-01.
 
 Die 17 Module (0–16) **und die drei Grundlagen-Abschnitte** (Konventionen,
 Klassifikation, Durchsetzungsschicht) des Kurses als **Betriebsregelwerk für
@@ -47,14 +47,12 @@ gepinnte GitHub-URLs umgeschrieben (`tools/rewrite-doc-links.py`).
 
 ### Grundlagen
 
-- [Konventionen — Wegweiser](grundlagen-konventionen.md) — Index auf die sechs
-  Konventionen-Seiten:
-  - [Kernbegriffe und Trennschärfen](grundlagen-begriffe.md)
-  - [Source Precedence und Spec-Stratifizierung](grundlagen-source-precedence.md)
-  - [Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md)
-  - [Die Harness-Dateien und ihre Form](grundlagen-harness-dateien.md)
-  - [Harness-Bootstrap](grundlagen-bootstrap.md)
-  - [Traceability-Constraint](grundlagen-traceability.md)
+- [Kernbegriffe und Trennschärfen](grundlagen-begriffe.md)
+- [Source Precedence und Spec-Stratifizierung](grundlagen-source-precedence.md)
+- [Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md)
+- [Die Harness-Dateien und ihre Form](grundlagen-harness-dateien.md)
+- [Harness-Bootstrap](grundlagen-bootstrap.md)
+- [Traceability-Constraint](grundlagen-traceability.md)
 - [Klassifikation und Steering Loop](grundlagen-klassifikation.md)
 - [Durchsetzungsschicht](grundlagen-durchsetzungsschicht.md)
 

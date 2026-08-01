@@ -15,5 +15,5 @@
 - Schärfungen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 - Bei `Accepted`: diesen Index aktualisieren (Status, Datum).
 - Jede ADR deklariert im `**Schärft:**`-Feld *aufwärts*, welche Spec-Stelle
-  sie verbindlich macht (Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
+  sie verbindlich macht (Baseline-Regelwerk `grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)).
   Prozess-ADRs ohne Spec-Stratum tragen `—`.

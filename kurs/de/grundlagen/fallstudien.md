@@ -48,7 +48,7 @@ wiederkehrende Charaktere:
 **Beginne immer beim Referenz-Repo**, portiere erst nach erfolgreicher
 Steering-Loop-Iteration (siehe [`klassifikation.md`](klassifikation.md))
 auf die Flagships — die Regel mit Begründung steht in
-[`konventionen.md` §Einführungs-Reihenfolge über mehrere Repos](bootstrap.md#einführungs-reihenfolge-über-mehrere-repos).
+[`bootstrap.md` §Einführungs-Reihenfolge über mehrere Repos](bootstrap.md#einführungs-reihenfolge-über-mehrere-repos).
 Auf dieser Seite steht sie im Kontext der vier konkreten Repos; normativ
 ist der Konventions-Text.
 
@@ -67,7 +67,7 @@ Reifegrad-Gradienten:
 Alle vier Repos haben *die kanonischen Quellen* (Spec, ADR, Planning,
 Makefile-Gates) — der Harness existiert in jedem von ihnen, nur in
 unterschiedlich formalisiertem Zustand. **Alle vier sind im
-Brownfield-Modus** (Konzept-Anker: [`konventionen.md` §Harness-Bootstrap](bootstrap.md#harness-bootstrap); ausgearbeiteter Lehrtext mit GF/BF-Walkthroughs: [Modul 2 — Harness-Bootstrap](../01-spec-und-architektur/modul-02-harness-bootstrap.md)):
+Brownfield-Modus** (Konzept-Anker: [`bootstrap.md` §Harness-Bootstrap](bootstrap.md#harness-bootstrap); ausgearbeiteter Lehrtext mit GF/BF-Walkthroughs: [Modul 2 — Harness-Bootstrap](../01-spec-und-architektur/modul-02-harness-bootstrap.md)):
 Code und kanonische Quellen sind da, die Harness-Hülle entsteht als
 *Inventur des Bestands* (Trigger-Richtung Code → Doc). Damit bestätigen
 die vier Repos den allgemeinen Befund: *typischer Ausgangspunkt ist
@@ -83,7 +83,7 @@ systematisch der Graduation nähern, ein Artefakt pro Welle.
 Keines der vier Repos führt bisher `harness/conventions.md` (neu im
 Kurs; Default-Ort für repo-lokale Strukturregeln, Adaptionen ggü.
 Baseline und Modus-Deklaration pro Sub-Area — siehe
-[`konventionen.md`](harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
+[`harness-dateien.md`](harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
 Damit auch keinen formalen Modus-Block, in dem GF/BF-Klassifikation
 pro Sub-Area dokumentiert wäre — derzeit ist die BF-Einstufung in der
 Tabelle oben eine *externe Beobachtung*, kein Repo-eigener Eintrag.

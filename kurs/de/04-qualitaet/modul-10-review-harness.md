@@ -5,7 +5,7 @@
 ## Mini-Glossar für dieses Modul
 
 Sechs neue Begriffe — Volldefinitionen in
-[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe).
+[`begriffe.md`](../grundlagen/begriffe.md#kernbegriffe).
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
@@ -212,7 +212,7 @@ Bei dreimaligem Auftreten desselben Findings:
 Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
 (siehe ADR-Hard-Rule, Modul 4). Ein HIGH-Eintrag, der aus dem Steering
 Loop kam, trägt den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)` — siehe
-[`../grundlagen/konventionen.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln).
+[`traceability.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln).
 ```
 
 Sechs Schritte, eine reproduzierbare Reviewer-Rolle. Vergleichbares

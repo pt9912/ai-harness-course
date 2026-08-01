@@ -15,6 +15,6 @@ setzten nichts durch — oder eine erfundene ID.
 
 **Geltungsbereich:** nur die Bindung-Spalte in `harness/README.md` §Sensors.
 
-**Ersetzt-Baseline-Regel:** [`konventionen.md` §Sensors — die vier kanonischen Bindung-Klassen als abschließende Liste](../../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)
+**Ersetzt-Baseline-Regel:** [`harness-dateien.md` §Sensors — die vier kanonischen Bindung-Klassen als abschließende Liste](../../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)
 
 **Datum der Adoption:** 2026-06-02.

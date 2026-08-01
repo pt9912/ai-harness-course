@@ -42,7 +42,7 @@ in einem Satz.
 
 Regeln dieser Sektion: ID-Schema `<PREFIX>-FA-<NN>`. Das Präfix ist im ganzen
 Repo dasselbe und taucht in Make-Target-Kommentaren, ADRs und Commits wieder auf
-(Baseline-Regelwerk `grundlagen-konventionen.md` §ID-Schema als Klammer). Jede
+(Baseline-Regelwerk `grundlagen-source-precedence.md` §ID-Schema als Klammer). Jede
 Anforderung trägt drei Pfade — Happy · Boundary · Negative — plus Out-of-Scope
 (Baseline-Regelwerk `modul-03-spec.md` §Ziel-Form: Akzeptanzkriterium).
 
@@ -113,11 +113,15 @@ Ohne diesen Abschnitt baut der Agent gerne Plausibles.
 ## 7. Historie
 
 Regeln dieser Sektion: Jede Änderung an *angenommenen* Anforderungen ist eine
-Vertragsänderung. Sie entsteht **nur** aus einem externen Change Request, nie
-aus einem ADR oder Slice. Fußabdruck pro angenommenem CR: Version-Bump oben
-plus eine Zeile hier, mit dem externen CR (Ticket/Vertragsanhang) unter
-„Verweis" (Baseline-Regelwerk `grundlagen-konventionen.md`
-§Spec-Stratifizierung).
+Vertragsänderung. Sie entsteht **nur** aus einem Change Request, nie aus einem
+ADR oder Slice. Fußabdruck pro angenommenem CR: Version-Bump oben plus eine
+Zeile hier, mit dem CR unter „Verweis" (Baseline-Regelwerk
+`grundlagen-source-precedence.md` §Spec-Stratifizierung).
+
+Sind Auftraggeber und Entwickler **dieselbe Person**, fehlt nur die
+Ticket-Form, nicht der Vorgang. Dann trägt der **Commit** die Trennung: Die
+Änderung an dieser Datei liegt in einem eigenen Commit, **vor** dem Slice, der
+sie umsetzt — und „Verweis" nennt diesen Vorgang statt eines Tickets.
 
 **Auch hier gilt die Decken-Regel:** keine ADR, kein Slice, kein Carveout,
 keine Welle, kein Verweis auf `spezifikation.md` oder `architecture.md` — in

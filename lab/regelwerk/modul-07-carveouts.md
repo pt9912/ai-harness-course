@@ -20,7 +20,7 @@ Ein temporärer Carveout folgt der Vorlage
 [`templates/docs/plan/carveouts/carveout.template.md`](../templates/docs/plan/carveouts/carveout.template.md)
 (Dateikonvention `docs/plan/carveouts/CO-<NNN>-<kurztitel>.md`; ID in
 eigener `CO-*`-Reihe, siehe
-[`konventionen.md`](grundlagen-source-precedence.md#id-schema-als-klammer)).
+[`grundlagen-source-precedence.md`](grundlagen-source-precedence.md#id-schema-als-klammer)).
 Operative Regeln, die das Template nicht selbst erzwingt:
 
 - **Sechs Pflicht-Header-Felder:** Status · Datum angelegt · Letzte
@@ -57,7 +57,7 @@ führen):
    Sub-Area) oder systemisches *„Code existiert vor Doku"*-Muster →
    **BF-Sub-Area-Markierung mit Graduation-Plan** als Modus-Deklaration
    im Adaptions-Block von `harness/conventions.md` (Mechanik in
-   [`konventionen.md` §Modus pro Sub-Area](grundlagen-bootstrap.md#modus-pro-sub-area-greenfield-vs-brownfield));
+   [`grundlagen-bootstrap.md` §Modus pro Sub-Area](grundlagen-bootstrap.md#modus-pro-sub-area-greenfield-vs-brownfield));
    Frage 2 entfällt. *Einzelne Diskrepanz* → Frage 2. **Kein harter
    Schwellwert** für „Cluster" — Faustregel (gemeinsamer Geltungsbereich),
    keine Carveout-Zahl.

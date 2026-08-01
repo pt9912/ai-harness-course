@@ -22,7 +22,7 @@ Spec-Stellen nach. `—` eintragen, wenn Prozess-ADR ohne Spec-Stratum.
 **Regeln:** Baseline-Regelwerk `modul-04-adrs.md`
 §Ziel-Form: ADR (MADR).
 
-> **IDs als Markdown-Link** (klickbar zur Quelle, Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
+> **IDs als Markdown-Link** (klickbar zur Quelle, Baseline-Regelwerk `grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)).
 > Der `<anker>` ist der GitHub-Heading-Slug der Ziel-Überschrift. Der
 > `check-references`-Gate prüft heute nur Token-Richtung, **nicht** die
 > Anker-Auflösung — ein umbenannter Abschnitt rottet den Link still. Die

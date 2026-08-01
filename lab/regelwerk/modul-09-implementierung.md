@@ -161,7 +161,7 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
   werden *durch Raten ersetzt*, nicht durch Schweigen.
 - Eine Hard Rule, die aus dem Steering Loop entstand (nicht aus einer
   Anforderung), trägt den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)`
-  ([`konventionen.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker)).
+  ([`grundlagen-traceability.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker)).
 - Jede Hard Rule liegt in *zwei* Quadranten: inferential feedforward
   (steht in AGENTS.md) + computational feedback (Fitness
   Function/Linter-Gate). Hard Rule nur in einem Quadranten ist halb

@@ -37,4 +37,9 @@ codepaths:
   roots: [lab, kurs, tools]
   # Tombstone: agents-regelwerk.md ist retired (Welle 24, Split kanonisch);
   # historische CHANGELOG-Verweise dürfen dangeln, ohne die Historie zu editieren.
-  ignore-refs: ["kurs/de/agents-regelwerk.md"]
+  # Tombstone: konventionen.md ist auf sechs Seiten geschnitten (Welle 63/64);
+  # Review-Reports zitieren sie mit Zeilennummern als historischen Beleg und
+  # werden dafür nicht editiert.
+  ignore-refs: ["kurs/de/agents-regelwerk.md",
+                "kurs/de/grundlagen/konventionen.md",
+                "lab/regelwerk/grundlagen-konventionen.md"]

@@ -18,13 +18,13 @@ Der Default-Ort für:
 
 ## Baseline
 
-- **Konvention:** AI-Harness-Kurs (`/kurs/de/grundlagen/konventionen.md`)
+- **Konvention:** AI-Harness-Kurs (`/kurs/de/grundlagen/`)
 - **Datum der Adoption:** 2026-05-15 (Repo-Bootstrap, slice-001)
 - **Baseline-Pin (Regelwerk + Templates):** die adoptierte Baseline ist das Kurs-Regelwerk als Split *plus* die Templates, self-contained im `lab-regelwerk.zip` (`regelwerk/` + `templates/` parallel; `agents-regelwerk.md` ist retired). Adoptierter Stand: die Stand-Zeile von [`regelwerk/README.md`](../../regelwerk/README.md) (Wellen-Register: `CHANGELOG.md`). Dieses Beispiel liegt *im* Kurs-Repo und ist damit selbst am aktuellen Stand — die Upstream-Freshness-Frage (*„ist mein `<tag>` noch das aktuelle Kurs-Release?"*) stellt sich erst im adoptierenden Fremd-Repo: eine Release-**Listen**-Prüfung (ein neuer Tag löst einen Review), Netz-Operation außerhalb der netzlosen Gates — nicht der Asset-Hash-Vergleich, der einen neuen Tag gar nicht fängt. Siehe [Kurs Modul 2](../../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md) §Freshness-Audit.
 
 ## Adoptierte Konventions-Quellen
 
-- **Extern (Lehrmaterial):** [`/kurs/de/grundlagen/konventionen.md`](../../../kurs/de/grundlagen/konventionen.md), [`/kurs/de/grundlagen/klassifikation.md`](../../../kurs/de/grundlagen/klassifikation.md)
+- **Extern (Lehrmaterial):** [`/kurs/de/grundlagen/`](../../../kurs/de/grundlagen/README.md), [`/kurs/de/grundlagen/klassifikation.md`](../../../kurs/de/grundlagen/klassifikation.md)
 - **Extern (Kurs-Regelwerk):** [`/lab/regelwerk/`](../../regelwerk/README.md) — was ein Code-Agent statt des vollen Lehrmaterials liest (pro Abschnitt eine Datei); derivativ, bei Konflikt gilt das Lehrmaterial. In einem adoptierenden Fremd-Repo werden Regelwerk *und* Templates aus dem self-contained Release-Asset (`https://github.com/pt9912/ai-harness-course/releases/latest/download/lab-regelwerk.zip`) nach `.harness/baseline/<tag>/{regelwerk,templates}/` vendored; dieses Beispiel liegt im Kurs-Repo und referenziert beide direkt.
 - **In-Repo (verkörperte Form):** Template-Set unter [`/lab/templates/`](../../../lab/templates/) als Form-Lookup-Quelle — im Fremd-Repo die vendored `.harness/baseline/<tag>/templates/` (Referenz-Form der „Ziel-Form"-Verweise), daneben die daraus kopiert-und-ausgefüllten eigenen Artefakte.
 
@@ -33,7 +33,7 @@ Der Default-Ort für:
 Diese Datei trägt den **Index**; die Einträge liegen einzeln unter
 `harness/conventions/`, aufgelöste unter `conventions/done/`. Der Zustand ist
 die Verzeichnis-Position, kein Status-Feld
-([`konventionen.md` §Konventionsspeicher](../../../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
+([`harness-dateien.md` §Konventionsspeicher](../../../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
 
 ### MR-000 — Baseline-Aussage
 
@@ -54,7 +54,7 @@ die Verzeichnis-Position, kein Status-Feld
 
 | MR | Titel | Geltungsbereich | Ersetzt-Baseline-Regel |
 |---|---|---|---|
-| [002](conventions/MR-002-konventions-bindung-als-sensors-klasse.md) | Konventions-Bindung als Sensors-Klasse | Bindung-Spalte in `harness/README.md` §Sensors | [`konventionen.md` §Sensors-Bindung](../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
+| [002](conventions/MR-002-konventions-bindung-als-sensors-klasse.md) | Konventions-Bindung als Sensors-Klasse | Bindung-Spalte in `harness/README.md` §Sensors | [`harness-dateien.md` §Sensors-Bindung](../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
 | [003](conventions/MR-003-mr-001-gegenstandslos.md) | MR-001 gegenstandslos durch Baseline-Update | `MR-001` | — |
 
 ### Aufgelöste Adaptionen
@@ -82,7 +82,7 @@ Spec führt) — die Modus-Spalte ist daher homogen. Die Sub-Areas sind
 trotzdem einzeln deklariert, damit (a) die Granularitäts-Disziplin
 sichtbar ist und (b) eine künftig nach BF kippende Sub-Area einen Platz
 hat. Jede Zeile weist die erfüllten Inklusions-Achsen aus
-([`konventionen.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area),
+([`bootstrap.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area),
 Schwelle ≥ 2 von 3: 1 Konventions-Härte · 2 Inventur-Linie · 3 Struktureller Cluster).
 
 | Sub-Area | Pfad-Cluster | Erfüllte Inklusions-Achsen | Modus |
@@ -107,7 +107,7 @@ sind: Achse 1 divergiert (Determinismus ≠ Plan-vs-Code-DoD ≠
 Golden-Set-Replay — je eigene Konvention, drei verschiedene Kursmodule
 11/12). Sie zu *einer* Sub-Area zusammenzufassen wäre der „zu grob"-Fehler
 aus [FV5](../../../kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md#typische-fehlvorstellungen)
-— vgl. [`konventionen.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area)
+— vgl. [`bootstrap.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area)
 (Absatz *Aggregation*).
 
 ### Nicht als Sub-Area geführt

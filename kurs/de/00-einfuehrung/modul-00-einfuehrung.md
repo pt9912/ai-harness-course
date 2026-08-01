@@ -37,7 +37,7 @@ Engineering-Systemen, und sie ist der Grund, warum dieser Kurs existiert.
 ## Mini-Glossar für diesen Einstieg
 
 Das vollständige Glossar steht in
-[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe).
+[`begriffe.md`](../grundlagen/begriffe.md#kernbegriffe).
 Für die ersten Seiten reichen die folgenden acht Begriffe — jeweils ein
 Satz, ein Bild im Kopf:
 

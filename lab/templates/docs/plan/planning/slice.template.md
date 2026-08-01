@@ -53,7 +53,7 @@ Gate-Läufe und die vier Closure-Pflichten darunter zählen nicht mit.
 <!-- BEDIENHINWEIS: Datei- oder Komponenten-Ebene reicht; der
 Implementer-Agent erweitert die Liste in seinem ersten Lauf. -->
 
-Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-konventionen.md`
+Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-bootstrap.md`
 §Was ist eine Sub-Area? — diese Liste liefert die **Pfad-Kandidaten** für §8,
 nicht die Antwort: Pfad-Berührung ist nicht hinreichend, und eine
 Aussagen-Berührung steht hier gar nicht.
@@ -112,7 +112,7 @@ Im Repo ohne Wellen-Betrieb braucht die Closure dadurch drei Commits: Inhalt,
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 §Das Beobachtungs-Register (vorhandene `BEO-<NNN>` **zitieren** statt neu
 formulieren — sonst zählt das Register zwei Namen getrennt) ·
-`grundlagen-konventionen.md` §Herkunfts-Anker für Steering-Loop-Regeln (das
+`grundlagen-traceability.md` §Herkunfts-Anker für Steering-Loop-Regeln (das
 Feld `liegt in` steht **nur**, wenn mit diesem Slice wirklich etwas verkörpert
 wurde; Feld und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der
 Backticks).

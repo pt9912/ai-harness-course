@@ -5,7 +5,7 @@
 > **Aufgelöst durch [`MR-003`](../MR-003-mr-001-gegenstandslos.md)
 > (2026-08-01).** Der Eintrag bleibt unverändert stehen — Adaptionen werden
 > nicht überschrieben, sondern von einem Nachfolger abgelöst
-> ([`konventionen.md` §Source Precedence](../../../../../kurs/de/grundlagen/source-precedence.md#source-precedence)).
+> ([`source-precedence.md` §Source Precedence](../../../../../kurs/de/grundlagen/source-precedence.md#source-precedence)).
 
 - **Datum:** 2026-05-15
 - **Geltungsbereich:** [`harness/README.md` §Source precedence](../../README.md#source-precedence) und `AGENTS.md` §Kanonische Quellen
@@ -13,11 +13,11 @@
   [`spec/spezifikation.md`](../../../spec/spezifikation.md) als eigenen
   **Rang 2** zwischen Lastenheft (Rang 1) und Architektur (Rang 3).
   Der Kurs-Default
-  ([`konventionen.md` §Source Precedence](../../../../../kurs/de/grundlagen/source-precedence.md#source-precedence))
+  ([`source-precedence.md` §Source Precedence](../../../../../kurs/de/grundlagen/source-precedence.md#source-precedence))
   setzt nur zwei Spec-Ränge (`lastenheft` → `architecture`); dieses
   Repo nutzt drei.
 - **Begründung:** Das Repo verwendet die Spec-Stratifizierung
-  ([`konventionen.md` §Spec-Stratifizierung](../../../../../kurs/de/grundlagen/source-precedence.md#spec-stratifizierung))
+  ([`source-precedence.md` §Spec-Stratifizierung](../../../../../kurs/de/grundlagen/source-precedence.md#spec-stratifizierung))
   explizit mit drei Spec-Dateien — Lastenheft (vertraglich),
   Spezifikation (technisch fortschreibbar), Architektur (diagrammatisch).
   Damit die Source-Precedence-Tabelle die ADR-Schärfungs-Regel

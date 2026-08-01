@@ -79,7 +79,7 @@ Modus-Tabelle (`harness/conventions.md`): *Planning-Lifecycle* (ADR-0004, §3),
 *Test-Infrastruktur* ist **nicht** berührt, obwohl `make test-determinism` auch
 unter ANN grün bleiben muss: Der Slice *hält* die Determinismus-Konvention ein,
 er bewegt sie nicht — genau der Fall, den
-[`konventionen.md` §Was ist eine Sub-Area?](../../../../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area)
+[`bootstrap.md` §Was ist eine Sub-Area?](../../../../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area)
 von der Berührung ausnimmt.
 
 **Zwei offene Treffer**, beide auf *Replay-/Eval-Infrastruktur*: `BEO-001` (2×)

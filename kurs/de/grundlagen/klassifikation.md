@@ -147,7 +147,7 @@ Säulen liest: *Context Engineering* ist primär **inform** (Agent weiß
 mehr), *Architectural Constraints* ist primär **constrain** (Agent kann
 weniger Falsches), *Entropy Management* sorgt, dass beide auch
 übermorgen noch stimmen. Glossar-Eintrag in
-[`konventionen.md`](konventionen.md).
+[`begriffe.md`](begriffe.md#kernbegriffe).
 
 ## Entropy Management
 

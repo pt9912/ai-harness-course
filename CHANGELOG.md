@@ -11,6 +11,62 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 64 — 2026-08-01 · Der Wegweiser fällt, und das Lastenheft bekommt den Fall, den es nicht kannte
+
+Zwei Fäden, die aus Welle 63 herausfielen — der eine schließt sie ab, der
+andere kam aus einem Adopter-Repo.
+
+### Entfernt
+
+- **Die Weiterleitung `konventionen.md` entfällt** (Quelle und Spiegel). In
+  Welle 63 blieb sie stehen, damit der Split additiv ist; danach zeigte im
+  ganzen Repo nur noch **eine** Zeile auf sie — der README-Index. Sie war
+  damit kein Verzeichnis mehr, sondern ein zweites neben dem README, und die
+  READMEs beider Seiten führen die sechs Seiten ohnehin. Zwei Verzeichnisse
+  derselben Dateien sind die Drift-Klasse, gegen die dieses Repo gebaut ist.
+
+### Hinzugefügt
+
+- **Personalunion von Auftraggeber und Entwickler**
+  ([§Spec-Stratifizierung](kurs/de/grundlagen/source-precedence.md)). Der Kurs
+  kannte nur den *externen* Change Request — in einem Repo, das sein eigener
+  Auftraggeber ist, verlangt die Regel damit etwas, das es nicht geben kann.
+  Der Beleg liegt im eigenen Haus: `lab/example/spec/lastenheft.md` steht auf
+  `Accepted` und trägt vier Versions-Bumps ohne einen einzigen CR.
+
+  Neu: *Was die Regel trägt, ist nicht die **Externalität**, sondern die
+  **Trennung von Entscheidung und Umsetzung**.* Fallen die Rollen zusammen,
+  fehlt nur die Ticket-Form; der Träger ist dann der **Commit** — ein
+  angenommener CR ändert in einem eigenen Commit ausschließlich das Lastenheft
+  und liegt **vor** dem Slice, der ihn umsetzt. Ablesbar an
+  `git log -- spec/lastenheft.md`. Mit der Grenze dazu: Die Hard Rule bleibt,
+  dass keine interne Quelle `LH-*` ändert — und **kein Sensor prüft die
+  Commit-Form**, das bleibt ein Review-Griff.
+
+### Geändert
+
+- **112 Link-Texte in 43 Dateien.** Der Split hatte die Link-*Ziele*
+  umgehängt, die *Beschriftungen* nicht: `[konventionen.md](begriffe.md#…)` —
+  der Leser sieht eine Datei, landet in einer anderen. Kein Gate meldet das,
+  der Link löst ja auf.
+- **18 Klartext-Zeiger** in Templates und Regelwerk-Splits (*„Baseline-Regelwerk
+  `grundlagen-konventionen.md` §Referenz-Richtung"*) auf ihre Zielseite gesetzt.
+  Sie stehen im **Rumpf** und wandern damit in jedes Adopter-Artefakt.
+- **Tombstones** für die zwei entfernten Dateien in `.d-check.yml`: Die
+  Review-Reports zitieren sie mit Zeilennummern als historischen Beleg und
+  werden dafür nicht editiert — dieselbe Mechanik wie für `agents-regelwerk.md`
+  seit Welle 24.
+
+**Bruch für Konsumenten:** Die Dateien `kurs/de/grundlagen/konventionen.md` und
+`regelwerk/grundlagen-konventionen.md` **entfallen ersatzlos**. Wer einen
+Klartext-Zeiger der Form *„`grundlagen-konventionen.md` §Source Precedence"* in
+einem ausgefüllten Artefakt stehen hat, findet die Datei nicht mehr — er zeigt
+ins Leere, und **kein Gate fängt das**. Nacharbeit: `grep -rl
+'grundlagen-konventionen'` über das eigene Repo, dann auf die Zielseite setzen —
+`begriffe` · `source-precedence` · `referenz-richtung` · `harness-dateien` ·
+`bootstrap` · `traceability`. Das Verzeichnis aller sechs steht in
+`regelwerk/README.md`.
+
 ## Welle 63 — 2026-08-01 · Die Konventionen verlassen die eine große Datei
 
 Direkte Folge von Welle 62, am selben Tag: Dort hat der Adaptions-Block den

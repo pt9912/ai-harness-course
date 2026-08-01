@@ -185,7 +185,7 @@ oben in der Selbstcheck-Antwort zum Erschaffen-Item (LZ 4).
 
 ## Verweise
 
-- Spec-Stratifizierung: [`../grundlagen/konventionen.md#spec-stratifizierung`](../grundlagen/source-precedence.md#spec-stratifizierung)
+- Spec-Stratifizierung: [`source-precedence.md#spec-stratifizierung`](../grundlagen/source-precedence.md#spec-stratifizierung)
 - Reales Beispiel mit Lastenheft/Spezifikation-Trennung: `pt9912/c-hsm-doc` in [`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)
 - Vorherige Lösung: [Modul 2](modul-02-loesung.md)
 - Nächste Lösung: [Modul 4](modul-04-loesung.md)

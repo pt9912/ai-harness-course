@@ -50,7 +50,7 @@ die daraus schon gezogen wurde (Folge-Slice, Spec-Version).
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 §Wellen-Closure-Prozedur, Schritt 3 (hier stehen **nur** Beobachtungen, die im
 Register 3× erreicht haben; jeder Eintrag nennt seine `BEO-<NNN>`) ·
-`grundlagen-konventionen.md` §Herkunfts-Anker für Steering-Loop-Regeln (Feld
+`grundlagen-traceability.md` §Herkunfts-Anker für Steering-Loop-Regeln (Feld
 und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der Backticks; die
 **Spec-Lücke** trägt statt `liegt in` ihre `LH-*`-ID — das ist kein Versehen).
 

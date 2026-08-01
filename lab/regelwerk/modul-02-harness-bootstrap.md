@@ -11,7 +11,7 @@ als laufende Praxis lehrt (Beobachtung → Guide/Sensor → Diff →
 Closure), lehrt dieses Modul als *initiale Aufsetzungs-Praxis*:
 gleiche Sensoren und Guides, andere Anwendungsphase. Die abstrakte
 Verbindung steht in
-[`grundlagen/konventionen.md` §Verbindung zum Steering-Loop](grundlagen-bootstrap.md#verbindung-zum-steering-loop).
+[`grundlagen-bootstrap.md` §Verbindung zum Steering-Loop](grundlagen-bootstrap.md#verbindung-zum-steering-loop).
 
 [Modul 1 §Source-Precedence-Block, Schritt 0](modul-01-entwicklungszyklus.md#source-precedence-block)
 hat den Bootstrap-Modus als Kurz-Vorgriff eingeführt (Baseline und Modus als
@@ -109,7 +109,7 @@ Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose.
   graduations-reif wird.
 * Eine Struktur qualifiziert erst über die drei Inklusions-Achsen
   (Schwelle ≥ 2, siehe
-  [`grundlagen/konventionen.md` §Was ist eine Sub-Area?](grundlagen-bootstrap.md#was-ist-eine-sub-area)).
+  [`grundlagen-bootstrap.md` §Was ist eine Sub-Area?](grundlagen-bootstrap.md#was-ist-eine-sub-area)).
   Der übersprungene Qualifikations-Schritt erzeugt **beide**
   Granularitäts-Fehler zugleich: *zu grob* — ein Aggregat wie *"Backend"*
   wird als *eine* Sub-Area gelabelt, statt in mehrere aufgeteilt; *zu
@@ -129,7 +129,7 @@ Inhalt). Endpunkt: bereit für die ersten Code-Slices.
 
 Trigger-Anker (T1, T2, T4, T5, T6, T7) sind Instanz-Beispiele der
 vier Trigger-Klassen aus
-[`grundlagen/konventionen.md` §Vier Trigger-Klassen](grundlagen-bootstrap.md#vier-trigger-klassen) —
+[`grundlagen-bootstrap.md` §Vier Trigger-Klassen](grundlagen-bootstrap.md#vier-trigger-klassen) —
 die abstrakten Definitionen stehen dort, hier nur die Instanzen.
 
 *Hinweis zur T-Nummerierung:* Die Trigger sind durch das
@@ -333,7 +333,7 @@ Nummerierung GF 0–8 vs. BF 1–9.
 
 Beide Walkthroughs bewegen Artefakte durch **Phase-Reife** (0–5)
 pro Sektion (sechs Stufen, siehe
-[`grundlagen/konventionen.md` §Sektionsweise Reife](grundlagen-bootstrap.md#sektionsweise-reife-phasen-pro-dokument)).
+[`grundlagen-bootstrap.md` §Sektionsweise Reife](grundlagen-bootstrap.md#sektionsweise-reife-phasen-pro-dokument)).
 Die folgende Matrix macht sichtbar, *was Phase-N in GF bedeutet
 versus was sie in BF bedeutet* — dieselbe Phase-Stufe,
 unterschiedliche Bewegungsrichtung:
@@ -357,6 +357,6 @@ Schritt fast deterministisch.
 Die Root-`README.md` des Adopter-Repos folgt der Vorlage
 [`templates/project-readme.template.md`](../templates/project-readme.template.md):
 Überblick, Ist-Stand, Vertrauens-Signale. Sie ist **Rang 6** der Source
-Precedence ([`konventionen.md` §Source Precedence](grundlagen-source-precedence.md#source-precedence))
+Precedence ([`grundlagen-source-precedence.md` §Source Precedence](grundlagen-source-precedence.md#source-precedence))
 — beschreibend, keine kanonische Quelle. Entsteht in Schritt 2 der
 Bootstrap-Sequenz aus der vendored Baseline.

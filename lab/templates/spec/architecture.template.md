@@ -47,13 +47,13 @@ flowchart TB
 
 Regeln dieser Sektion: Welche ADR eine Layering-Regel verbindlich macht,
 deklariert die ADR aufwärts in ihrem `Schärft:`-Feld — kein ADR-Bezug in dieser
-Sicht (Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)).
+Sicht (Baseline-Regelwerk `grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)).
 
 <!--
 Pro Schicht: was sie tut, was sie *nicht* tut. Layering-Regeln, die
 durch ArchUnit / depguard / import-linter durchgesetzt werden. Welche
 ADR eine Regel verbindlich macht, deklariert die ADR aufwärts in ihrem
-Schärft:-Feld (Baseline-Regelwerk `grundlagen-konventionen.md` §Referenz-Richtung (SDP)) — kein ADR-Bezug in dieser Sicht.
+Schärft:-Feld (Baseline-Regelwerk `grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)) — kein ADR-Bezug in dieser Sicht.
 
 Beispiel-Schema (aus OpenAI-Layering, siehe Modul 4):
 Types → Config → Repo → Service → Runtime → UI

@@ -40,7 +40,7 @@ Diese Datei dupliziert sie nicht.
 
 > Die Ränge 1–3 sind die **drei Spec-Straten** — Vertrag, Technik, Sicht —,
 > und alle drei sind obligatorisch (Baseline-Regelwerk
-> `grundlagen-konventionen.md` §Spec-Straten). **Adaption ist die
+> `grundlagen-referenz-richtung.md` §Spec-Straten). **Adaption ist die
 > Zwei-Straten-Form, nicht die Drei-Straten-Form**: Wer Rang 2 streicht,
 > deklariert das als `MR-<NNN>` in [`conventions.md`](conventions.md) und
 > nummeriert neu (dann acht Ränge).

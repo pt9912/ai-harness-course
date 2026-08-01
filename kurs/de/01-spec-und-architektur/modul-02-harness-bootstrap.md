@@ -9,7 +9,7 @@
 
 Vier Begriffe — *Sub-Area* ist modul-eigen, die anderen drei sind
 Vorgriffe auf später vertiefte Konzepte (Volldefinitionen in
-[`../grundlagen/konventionen.md` §Kernbegriffe](../grundlagen/begriffe.md#kernbegriffe);
+[`begriffe.md` §Kernbegriffe](../grundlagen/begriffe.md#kernbegriffe);
 *BF-Sub-Area-Markierung* in
 [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren)).
 Der zentrale Begriff *Bootstrap-Modus (GF/BF/Hybrid)* wird im
@@ -19,7 +19,7 @@ bewusst nicht im Glossar.
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
 |---|---|---|
-| **Sub-Area** | Doku-/Code-Sektion, die als Träger einer Modus-Entscheidung dient — mit eigener Konventions-Härte (eigene `MR-NNN` möglich), eigener Inventur-Linie und eigener Pfad-/Datei-Familie im Repo. Qualifikations-Maßstab (drei Inklusions-Achsen, Schwelle ≥ 2) und Beispiele: [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area), §Übung 1 und §Worked Example 1. | nicht das Repo, nicht der Slice — die Strecke, die *ein* `MR-NNN` normiert. |
+| **Sub-Area** | Doku-/Code-Sektion, die als Träger einer Modus-Entscheidung dient — mit eigener Konventions-Härte (eigene `MR-NNN` möglich), eigener Inventur-Linie und eigener Pfad-/Datei-Familie im Repo. Qualifikations-Maßstab (drei Inklusions-Achsen, Schwelle ≥ 2) und Beispiele: [`bootstrap.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area), §Übung 1 und §Worked Example 1. | nicht das Repo, nicht der Slice — die Strecke, die *ein* `MR-NNN` normiert. |
 | **Adaptions-Block** *(Vorgriff auf konventionen.md)* | Sektion in `harness/conventions.md`, die die Baseline-Adaptionen des Repos **indiziert**; jeder `MR-NNN`-Eintrag ist eine eigene Datei unter `harness/conventions/`. | das Notizbuch, in dem das Repo seine Abweichungen von der Baseline aufschreibt. |
 | **BF-Sub-Area-Markierung** *(Vorgriff auf Modul 7)* | Modus-Deklaration im Adaptions-Block, die eine ganze Sub-Area als BF mit Graduation-Plan markiert — Alternative zur Carveout-Kaskade. | ein "hier wächst Wiese"-Schild für ein ganzes Beet, mit Datum für die Rasen-Graduierung. |
 | **MR-NNN** *(Vorgriff auf konventionen.md)* | ID-Schema für *Module Rules* — die Konventions-Adaptionen im Adaptions-Block (Schwester zu `LH-FA-*` für Anforderungen). | Anker-Nummer einer einzelnen Konventions-Härtung. |
@@ -121,7 +121,7 @@ Nach diesem Modul kannst du:
 * GF/BF/Hybrid-Modus pro Sub-Area: Definition, Abgrenzung gegen
   Repo-Klasse und Phase-Reife.
 * Die vier Trigger-Klassen (siehe
-  [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen)):
+  [`bootstrap.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen)):
   Sync, Promotion, Cross-Reference, Acceptance.
 * Phasen-Karte als didaktisches Instrument: sektionsweise
   Reife-Visualisierung eines Artefakts.
@@ -143,7 +143,7 @@ als laufende Praxis lehrt (Beobachtung → Guide/Sensor → Diff →
 Closure), lehrt dieses Modul als *initiale Aufsetzungs-Praxis*:
 gleiche Sensoren und Guides, andere Anwendungsphase. Die abstrakte
 Verbindung steht in
-[`../grundlagen/konventionen.md` §Verbindung zum Steering-Loop](../grundlagen/bootstrap.md#verbindung-zum-steering-loop).
+[`bootstrap.md` §Verbindung zum Steering-Loop](../grundlagen/bootstrap.md#verbindung-zum-steering-loop).
 
 [Modul 1 §Worked Example, Schritt 0](modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren)
 hat den Bootstrap-Modus als Kurz-Vorgriff eingeführt (Baseline und Modus als
@@ -268,7 +268,7 @@ und das Werkzeug für die metakognitive Reflexionsfrage am Modul-Ende.
   Sub-Area — eine Granularitäts-Prüfung erübrigt sich."* — Korrektur:
   Eine Struktur qualifiziert erst über die drei Inklusions-Achsen
   (Schwelle ≥ 2, siehe
-  [`../grundlagen/konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area)).
+  [`bootstrap.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area)).
   Der übersprungene Qualifikations-Schritt erzeugt **beide**
   Granularitäts-Fehler zugleich: *zu grob* — ein Aggregat wie *"Backend"*
   wird als *eine* Sub-Area gelabelt, statt in mehrere aufgeteilt; *zu
@@ -327,7 +327,7 @@ Drei Phasen sind farbig sichtbar: *Orient* (gelb, Schritte 0–1),
 
 Trigger-Anker (T1, T2, T4, T5, T6, T7) sind Instanz-Beispiele der
 vier Trigger-Klassen aus
-[`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen) —
+[`bootstrap.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen) —
 die abstrakten Definitionen stehen dort, hier nur die Instanzen.
 
 *Hinweis zur T-Nummerierung:* Die Trigger sind durch das
@@ -648,7 +648,7 @@ Pannenerscheinung.
 
 Beide Walkthroughs bewegen Artefakte durch **Phase-Reife** (0–5)
 pro Sektion (sechs Stufen, siehe
-[`../grundlagen/konventionen.md` §Sektionsweise Reife](../grundlagen/bootstrap.md#sektionsweise-reife-phasen-pro-dokument)).
+[`bootstrap.md` §Sektionsweise Reife](../grundlagen/bootstrap.md#sektionsweise-reife-phasen-pro-dokument)).
 Die folgende Matrix macht sichtbar, *was Phase-N in GF bedeutet
 versus was sie in BF bedeutet* — dieselbe Phase-Stufe,
 unterschiedliche Bewegungsrichtung:
@@ -681,14 +681,14 @@ Klassifiziere dein eigenes Repo nach Modus pro Sub-Area. Tabellen-
 Vorlage:
 
 > **Granularität zuerst prüfen.** Nutze die drei Inklusions-Achsen aus
-> §Mini-Glossar ([`../grundlagen/konventionen.md` §Was ist eine
+> §Mini-Glossar ([`bootstrap.md` §Was ist eine
 > Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area):
 > Konventions-Härte · Inventur-Linie · Pfad-Cluster, Schwelle ≥ 2) zur
 > Prüfung deiner Sub-Area-Wahl. Wer *"Backend"* als Sub-Area nennt,
 > bündelt typischerweise drei verschiedene Sub-Areas — ausdifferenzieren.
 > Die Kehrseite — nie getrennt feuernde Strukturen *nicht* künstlich
 > trennen — heißt **Aggregation**
-> ([`konventionen.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area)).
+> ([`bootstrap.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area)).
 
 | Sub-Area | Modus (GF/BF/Hybrid) | Beobachtungs-Indiz | Unsicherheit? |
 |---|---|---|---|
@@ -723,7 +723,7 @@ hast du wahrscheinlich oberflächlich klassifiziert.
 dem ersten Slice liegt):** Identifiziere fünf Trigger aus der
 DocSearch-Beispiel-Trigger-Liste in §Worked Example 1 und ordne sie
 den vier Trigger-Klassen aus
-[`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen)
+[`bootstrap.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen)
 zu:
 
 | Trigger | Klasse | Phase-Reife des berührten Artefakts (0–5) | Begründung |
@@ -854,7 +854,7 @@ prüft sie trotzdem; eine Regel ohne Prüfung wäre halbgesetzt.
   Steering-Loop): welche Linse bedient sie *zuerst*?
 * **(Verstehen, Vorstufe für Übung 2)** Welche vier Trigger-Klassen
   gibt es laut
-  [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen)?
+  [`bootstrap.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen)?
   Nenne pro Klasse ein Beispiel aus den beiden Worked Examples.
 * **(Analysieren, durch Worked Example 2)** Welcher Trigger in Worked
   Example 2 macht den BF-Modus-Übergang sichtbar — und warum gerade
@@ -900,10 +900,10 @@ die modulspezifischen Indikatoren sind:
 
 * Konzept-Anker für alle Bootstrap-Begriffe und die vier
   Trigger-Klassen:
-  [`../grundlagen/konventionen.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-bootstrap).
+  [`bootstrap.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-bootstrap).
 * Verbindung zum Steering-Loop (Bootstrap = initiale
   Steering-Loop-Anwendung):
-  [`../grundlagen/konventionen.md` §Verbindung zum Steering-Loop](../grundlagen/bootstrap.md#verbindung-zum-steering-loop).
+  [`bootstrap.md` §Verbindung zum Steering-Loop](../grundlagen/bootstrap.md#verbindung-zum-steering-loop).
 * Die vier Beispiel-Repos in GF/BF-Klassifikation:
   [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand).
 * Modus-*Wahl* als Planungs-Entscheidung (Diagnose aus diesem Modul

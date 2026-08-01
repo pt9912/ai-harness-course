@@ -6,7 +6,7 @@
 
 Vier Begriffe — zwei modul-eigene, zwei Vorgriffe auf später vertiefte
 Begriffe. Volldefinitionen der modul-eigenen Begriffe in
-[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe).
+[`begriffe.md`](../grundlagen/begriffe.md#kernbegriffe).
 Die Mini-Glossar-Einträge **listen** die drei legitimen Alternativen für
 gelockerte Gate-Disziplin (Carveout · BF-Sub-Area-Markierung ·
 Bootstrap-aware Gate); die Disambiguierung — *wann welches?* — leistet
@@ -23,7 +23,7 @@ eine Ebene höher und ersetzt deren Closure-Funktion nicht
 |---|---|---|
 | **Carveout** | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel — mit Trigger oder explizit als permanent markiert. | ein Loch im Zaun, mit Notiz "wann wird zugemacht?". |
 | **Auflösungs-Trigger** | Beobachtbare Bedingung, mit der ein temporärer Carveout endet (nicht "wenn wir Zeit haben"). | die Kerze, die *anzeigt*, dass es jetzt soweit ist. |
-| **BF-Sub-Area-Markierung** *(Vorgriff)* | Sub-Area-weiter Übergangs-Modus mit Graduation-Plan: die Modus-Deklaration im Adaptions-Block von `harness/conventions.md` markiert eine ganze Sub-Area als BF, statt jede Einzel-Diskrepanz als Carveout zu führen. **Vollform in [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)** (zugrundeliegende konventionen.md-Begriffe: *BF-Sub-Area* · *Modus-Deklaration* · *Adaptions-Block* in [`../grundlagen/konventionen.md` §Modus pro Sub-Area](../grundlagen/bootstrap.md#modus-pro-sub-area-greenfield-vs-brownfield)). | das ganze Beet ist Wiese, mit Notiz "wann wird Rasen draus" — statt ein Dutzend einzelner Schilder *"hier wächst noch nichts"*. |
+| **BF-Sub-Area-Markierung** *(Vorgriff)* | Sub-Area-weiter Übergangs-Modus mit Graduation-Plan: die Modus-Deklaration im Adaptions-Block von `harness/conventions.md` markiert eine ganze Sub-Area als BF, statt jede Einzel-Diskrepanz als Carveout zu führen. **Vollform in [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee)** (zugrundeliegende konventionen.md-Begriffe: *BF-Sub-Area* · *Modus-Deklaration* · *Adaptions-Block* in [`bootstrap.md` §Modus pro Sub-Area](../grundlagen/bootstrap.md#modus-pro-sub-area-greenfield-vs-brownfield)). | das ganze Beet ist Wiese, mit Notiz "wann wird Rasen draus" — statt ein Dutzend einzelner Schilder *"hier wächst noch nichts"*. |
 | **Bootstrap-aware Gate** *(Vorgriff)* | Gate mit dokumentierter Reifestufe: weich in der Frühphase, hart ab Trigger. **Vollform in [Modul 13](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)**. | Tempolimit, das in der Bauzone gilt, später verschwindet. |
 
 ## Engage
@@ -90,7 +90,7 @@ noch in der Spec auf. Der bessere Weg: ein Carveout.
 **Schritt 1 — Carveout-Datei anlegen.** Konvention:
 `docs/plan/carveouts/CO-<NNN>-<kurztitel>.md`. ID läuft in `CO-*`-Reihe
 (separat von `LH-`, `ADR-`, `SL-` — siehe
-[`../grundlagen/konventionen.md`](../grundlagen/source-precedence.md#id-schema-als-klammer)).
+[`source-precedence.md`](../grundlagen/source-precedence.md#id-schema-als-klammer)).
 Für unseren Fall: `CO-001-index-coverage.md`.
 
 **Schritt 2 — Pflichtfelder im Frontmatter / Header festlegen.** Ein
@@ -190,7 +190,7 @@ Carveouts gerade in Schritt 1–5 trainiert wurden):
    - *Cluster oder Muster* → **BF-Sub-Area-Markierung mit
      Graduation-Plan** als Modus-Deklaration im Adaptions-Block von
      `harness/conventions.md` (Mechanik in
-     [`../grundlagen/konventionen.md` §Modus pro Sub-Area](../grundlagen/bootstrap.md#modus-pro-sub-area-greenfield-vs-brownfield)).
+     [`bootstrap.md` §Modus pro Sub-Area](../grundlagen/bootstrap.md#modus-pro-sub-area-greenfield-vs-brownfield)).
      Frage 2 entfällt — eine Sub-Area-weite Markierung ist eine
      andere Werkzeug-Klasse als ein punktueller Carveout.
    - *Einzelne Diskrepanz* → weiter zu Frage 2.

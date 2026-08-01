@@ -56,7 +56,7 @@ Konvergenz-Auftrag zu Greenfield). Die drei Entscheidungen prägen jede
 Folge-Aktion: in Brownfield ist der nächste Schritt *Inventur des
 Bestands*, in Greenfield *Auflisten zu schaffender Quellen*.
 Volldefinition + Phasen-Modell in
-[`grundlagen/konventionen.md` §Harness-Bootstrap](grundlagen-bootstrap.md#harness-bootstrap)
+[`grundlagen-bootstrap.md` §Harness-Bootstrap](grundlagen-bootstrap.md#harness-bootstrap)
 und im ausgearbeiteten [Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md).
 
 Der Precedence-Block selbst lebt in `harness/README.md` (Vorlage
@@ -79,7 +79,7 @@ Operative Regeln für die sechs Folge-Schritte:
 - **Spec-Stratifizierung** als Kurzhinweis im Block: innerhalb der Spec
   gilt Lastenheft (1) → Spezifikation (2) → Architektur (3); eine ADR
   darf die Spezifikation schärfen, nie das Lastenheft (Volldefinition in
-  [`grundlagen/konventionen.md`](grundlagen-source-precedence.md#source-precedence)).
+  [`grundlagen-source-precedence.md`](grundlagen-source-precedence.md#source-precedence)).
 - Die konkrete Rangordnung ist **projektspezifisch** (Safety/Control-,
   Policy/Compliance-Repos können abweichen); Wahl und Begründung gehören
   in den Adaptions-Block des repo-lokalen Konventionsdokuments.

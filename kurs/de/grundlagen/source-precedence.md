@@ -158,6 +158,22 @@ Lastenheft ändern darf, gilt die Hard Rule für *jede* interne Quelle:
 **weder ADR noch Slice dürfen `LH-*` je ändern** — sie referenzieren
 nur.
 
+**Fallen Auftraggeber- und Entwickler-Rolle zusammen**, fehlt nicht der
+Vorgang, sondern nur seine Ticket-Form: Die Rolle ist besetzt, und der
+annehmende Akt ist die Entscheidung, die *vor* der Umsetzung fällt. Was die
+Regel trägt, ist nicht die **Externalität**, sondern die **Trennung von
+Entscheidung und Umsetzung** — und die ist auch ohne Ticket herstellbar. Der
+Träger ist dann der **Commit**: Ein angenommener Change Request ändert in
+einem eigenen Commit **ausschließlich** das Lastenheft und liegt **vor** dem
+Slice, der ihn umsetzt; die Verweis-Spalte nennt diesen Vorgang statt eines
+Tickets. Nachträglich ablesbar an `git log -- spec/lastenheft.md`.
+
+Das ist keine Lockerung: Die Hard Rule bleibt, dass **keine interne Quelle**
+`LH-*` ändert. Ein Slice, der das Lastenheft im selben Commit mitzieht, hat
+die Trennung verloren — gleich, ob ein Ticket existiert oder nicht. Ein Sensor
+dafür existiert nicht (kein d-check-Modul prüft, welche Dateien ein Commit
+zusammen anfasst); es bleibt ein Review-Griff.
+
 ## ID-Schema als Klammer
 
 Ein konsistentes Präfix (`LH-*`, `HSM-*`, `GG-*`) verbindet:

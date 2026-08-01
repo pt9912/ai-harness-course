@@ -94,7 +94,7 @@ gates: lint test  ## alle Gates
 ```
 
 Achte auf die Make-Target-Kommentare: `## LH-FA-001 — ...`. Genau das ist
-das ID-Schema aus [`../grundlagen/konventionen.md`](../grundlagen/source-precedence.md#id-schema-als-klammer).
+das ID-Schema aus [`source-precedence.md`](../grundlagen/source-precedence.md#id-schema-als-klammer).
 Wer das hier macht, kann es später in jedem Repo machen.
 
 ### 5. Erster Lauf (5 Minuten)

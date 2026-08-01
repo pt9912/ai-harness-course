@@ -6,7 +6,7 @@
 > [`../conventions.md`](../conventions.md) bekommt eine Zeile dazu.
 > Ist der Auflösungs-Trigger eingetreten, wandert die Datei per `git mv` nach
 > `done/`; der Zustand ist die Verzeichnis-Position, kein Status-Feld
-> (Baseline-Regelwerk `grundlagen-konventionen.md`
+> (Baseline-Regelwerk `grundlagen-harness-dateien.md`
 > §harness/conventions.md als Konventionsspeicher).
 
 Regeln dieser Datei: Pflichtfelder sind Datum, Geltungsbereich,
@@ -21,7 +21,7 @@ keine benannte Regel ersetzt, ist ein **Fork**, keine Adaption.
 - **Status:** Accepted
 - **Datum:** <Datum>
 - **Geltungsbereich:** <Dateien / Module / Sub-Areas in DIESEM Repo — z. B. „`harness/README.md` §Source precedence und `AGENTS.md` §Kanonische Quellen">
-- **Ersetzt-Baseline-Regel:** <genau eine Regel der Baseline, als Link mit Anker — z. B. [`grundlagen-konventionen.md` §Spec-Straten](../../.harness/baseline/<tag>/regelwerk/grundlagen-referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)>
+- **Ersetzt-Baseline-Regel:** <genau eine Regel der Baseline, als Link mit Anker — z. B. [`grundlagen-referenz-richtung.md` §Spec-Straten](../../.harness/baseline/<tag>/regelwerk/grundlagen-referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)>
 - **Adaption:** <was stattdessen gilt — z. B. „Source-Precedence-Tabelle führt keinen eigenen Rang für `spec/spezifikation.md`: acht statt neun Ränge">
 - **Begründung:** <warum, idealerweise mit Praxis-Bezug — z. B. „reines Policy-Repo, in dem keine eigenen technischen Festlegungen entstehen">
 - **Auflösungs-Trigger:** <Trigger oder "permanent" — z. B. „sobald das Repo eigene technische Festlegungen trägt">

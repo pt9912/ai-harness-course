@@ -268,7 +268,7 @@ Lerner zu ergänzenden Kriterien:**
 2. *Bei BF und Hybrid* muss der Reconciliation-Aufwand mit einem
    konkreten Trigger geschlossen werden — entweder eine der vier
    Trigger-Klassen aus
-   [`../grundlagen/konventionen.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen)
+   [`bootstrap.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen)
    (Sync, Promotion, Cross-Reference, Acceptance) oder eine
    explizite Folge-Slice-ID. "Werden wir später dokumentieren" ist
    kein Trigger. Die T1–T7-Notation in Modul 2 §Worked Example 1 ist

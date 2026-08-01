@@ -8,7 +8,7 @@ diese Definitionen (Standard-Markdown), ohne sie erneut zu erklären.
 [`klassifikation.md`](klassifikation.md) *§2×2-Matrix* (siehe
 [Haupt-README §Vorab-Lektüre](../README.md#vorab-lektüre-pflicht)). Die
 übrigen Dateien — besonders die 679-zeilige
-[`konventionen.md`](konventionen.md) mit der Sub-Area- und
+[`bootstrap.md`](bootstrap.md) mit der Sub-Area- und
 Trigger-Klassen-Tiefe — sind **Nachschlagewerke**: sektionsweise bei
 Bedarf lesen (die Glossar-Tabelle als Pre-Training, der Bootstrap-Teil
 erst zu Modul 2/5), nicht am Stück vorab. Wer sie als Block vor Modul 0
@@ -18,7 +18,12 @@ liest, lädt sich Modul-2-Tiefe auf, bevor ein Kontext dafür existiert.
 
 | Datei | Inhalt |
 |---|---|
-| [`konventionen.md`](konventionen.md) | Glossar, Verzeichniskonvention, Trennschärfen, Source Precedence, Spec-Stratifizierung, ID-Schema, Traceability-Constraint, `harness/README.md`-Pattern |
+| [`begriffe.md`](begriffe.md) | Glossar der Kernbegriffe, Trennschärfen |
+| [`source-precedence.md`](source-precedence.md) | Source Precedence, Spec-Stratifizierung, ID-Schema als Klammer |
+| [`referenz-richtung.md`](referenz-richtung.md) | Referenz-Richtung (SDP), Referenzmatrix, Spec-Straten |
+| [`harness-dateien.md`](harness-dateien.md) | Verzeichniskonvention, Template-Schichtung, `harness/README.md`- und `conventions.md`-Pattern |
+| [`bootstrap.md`](bootstrap.md) | Harness-Bootstrap, Sub-Area, Modus pro Sub-Area, Trigger-Klassen |
+| [`traceability.md`](traceability.md) | Traceability-Constraint, Herkunfts-Anker für Steering-Loop-Regeln |
 | [`konzeptkarte.md`](konzeptkarte.md) | Reduzierte Artefaktkette, vier Leitfragen, 2×2-Schnellanker gegen kognitive Überlast |
 | [`klassifikation.md`](klassifikation.md) | Böckelers 2×2 (Feedforward/Feedback × Computational/Inferential), drei Harness-Kategorien (Maintainability, Architecture Fitness, Behaviour), OpenAIs drei operative Säulen (Context Engineering, Architectural Constraints, Entropy Management), Steering Loop, Lifecycle-Verteilung |
 | [`durchsetzungsschicht.md`](durchsetzungsschicht.md) | Fail-closed Bindung von Konventionen an die Agent-Schleife: drei Bindepunkte (Tool-Call-/Handoff-Gate, Workflow-Skelett) auf der 2×2-Matrix, vier Design-Eigenschaften, ehrliche Grenzen, Referenz-Artefakte (Claude-Code-Hooks) |

@@ -5,7 +5,7 @@
 ## Mini-Glossar für dieses Modul
 
 Vier neue Begriffe — Volldefinitionen in
-[`../grundlagen/konventionen.md`](../grundlagen/begriffe.md#kernbegriffe).
+[`begriffe.md`](../grundlagen/begriffe.md#kernbegriffe).
 Den Image-Hash erklärt der Vorgriff-Block weiter unten.
 
 | Begriff | Ein-Satz-Definition | Bild im Kopf |
