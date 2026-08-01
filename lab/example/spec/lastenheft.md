@@ -143,6 +143,18 @@ zusammen garantieren bit-identische Index-Files bei identischer Eingabe.
 
 ## 7. Historie
 
+Regeln dieser Sektion: Jede Änderung an angenommenen Anforderungen ist eine
+Vertragsänderung und entsteht nur aus einem Change Request. DocSearch ist sein
+eigener Auftraggeber — die Rolle ist besetzt, nur die Ticket-Form fehlt. **Für
+künftige Einträge** trägt deshalb der **Commit** die Trennung: Die Änderung an
+dieser Datei liegt in einem eigenen Commit, **vor** dem Slice, der sie umsetzt,
+und „Verweis" nennt diesen Vorgang statt eines Tickets
+([Kurs §Spec-Stratifizierung](../../../kurs/de/grundlagen/source-precedence.md#spec-stratifizierung)).
+
+Die Zeilen bis `0.4.1` sind **älter als diese Regel** und werden nicht
+nachträglich umgeschrieben — eine Historie ist ein Protokoll. Sie tragen `—`,
+wo es keinen benennbaren Vorgang gab.
+
 | Version | Datum | Änderung | Verweis |
 |---|---|---|---|
 | 0.1.0 | 2026-05-15 | Initiale Fassung | — |
