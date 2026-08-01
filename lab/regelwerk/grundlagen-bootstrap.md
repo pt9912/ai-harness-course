@@ -1,7 +1,7 @@
 ## Harness-Bootstrap
 <!-- Quelle: [grundlagen/bootstrap.md](../../kurs/de/grundlagen/bootstrap.md) -->
 
-## Harness-Bootstrap
+### Harness-Bootstrap
 
 *Harness-Bootstrap* bezeichnet den **Einstiegsprozess** in den
 Harness-Lebenszyklus eines Repos — der Weg von "leeres Repo" oder
@@ -18,7 +18,7 @@ Schritten in [Modul 1](modul-01-entwicklungszyklus.md#source-precedence-block).
 > *Harness-Bootstrap* betrifft den **Repo-Lebenszyklus**,
 > *Bootstrap-aware Gate* die **Reifestufe eines Sensors**.
 
-### Was ist eine Sub-Area?
+#### Was ist eine Sub-Area?
 
 Eine *Sub-Area* ist eine **Doku-/Code-Sektion, die als Träger einer
 Modus-Entscheidung dient** — mit eigener Konventions-Härte (eigene
@@ -123,7 +123,7 @@ Alt-Port mit Bestandscode), bekäme es eine eigene Modus-Aussage — und
 sind aber *drei* Sub-Areas, weil Achse 1 divergiert — sie zu mergen wäre
 der „zu grob"-Fehler.
 
-### Modus pro Sub-Area: Greenfield vs Brownfield
+#### Modus pro Sub-Area: Greenfield vs Brownfield
 
 Pro Sub-Area eines Repos (Modul, Verzeichnis, Komponente) wird ein
 **Modus** deklariert (im Adaptions-Block von
@@ -149,7 +149,7 @@ Permanente BF-Erklärung (für Code, der absehbar entfernt wird —
 Legacy, Drittsystem-Adapter) ist möglich, mit Begründung und
 Folge-Slice.
 
-### Sektionsweise Reife: Phasen pro Dokument
+#### Sektionsweise Reife: Phasen pro Dokument
 
 Ein Harness-Dokument ist während Bootstrap nicht "entweder leer oder
 fertig". Sektionen reifen mit unterschiedlichem Tempo durch fünf
@@ -171,7 +171,7 @@ verharrt, bis das Makefile existiert. **Sektionsweise Reife ist Regel,
 nicht Ausnahme** — Schreibreife wird sektionsweise beurteilt, nicht
 dateiweise.
 
-### Vier Trigger-Klassen
+#### Vier Trigger-Klassen
 
 Während Bootstrap (und auch danach im Steering-Loop) lösen Änderungen
 in einem Dokument *Folgeaktionen* in anderen aus. Vier Klassen:
@@ -187,7 +187,7 @@ Trigger werden zwischen Bootstrap-Schritten ausgewertet — sie sind die
 "Inbox" der nicht-Vorderscene-Arbeit. Eine zwischen Schritten
 übersehene Trigger-Pflicht ist ein häufiges Drift-Symptom.
 
-### Harness-Bootstrap-Ende vs Workflow-Beginn
+#### Harness-Bootstrap-Ende vs Workflow-Beginn
 
 Harness-Bootstrap ist *abgeschlossen*, wenn der Repo bereit ist für
 inhaltliche Slices. In **Greenfield**: erster ADR akzeptiert,
@@ -198,7 +198,7 @@ Konvergenzpfad zu GF ist sichtbar (mit ersten Reconciliation-Slices in
 Modul 5–9). Bootstrap und Workflow sind getrennte Lebenszyklen — kein
 Übergang ohne Sichtbarkeit.
 
-### Einführungs-Reihenfolge über mehrere Repos
+#### Einführungs-Reihenfolge über mehrere Repos
 
 Bootstrap gilt pro Repo — in einer Mehrfach-Repo-Landschaft stellt sich
 zusätzlich die Frage, *welches Repo zuerst*. Die Antwort folgt der
@@ -216,7 +216,7 @@ Rules und ist der falsche Ort, um eine Konvention zum ersten Mal
 auszuprobieren. Was sich im Referenz-Repo über eine Steering-Loop-Runde
 bewährt hat, wandert in die Flagships — nicht umgekehrt.
 
-### Verbindung zum Steering-Loop
+#### Verbindung zum Steering-Loop
 
 Harness-Bootstrap ist im Grunde der **Steering-Loop ([Modul 11](modul-11-verification.md)),
 einmal in Folge angewendet, bis Graduation erreicht ist**. Das
@@ -225,7 +225,7 @@ unterscheidet, ist die Anwendungsphase: Bootstrap = initial bis
 Steady-State; Steering-Loop = laufend im Steady-State. Wer den
 Steering-Loop versteht, versteht Bootstrap — und umgekehrt.
 
-### Querverweise
+#### Querverweise
 
 - **[Modul 2 — Harness-Bootstrap](modul-02-harness-bootstrap.md)**: ausgearbeiteter Lehrtext mit GF/BF-Walkthroughs, Trigger-Klassen-Inline-Ankern und Phasen-Karten-Übung — Vollform des Bootstrap-Konzepts.
 - **Modul 1 §Schritt 0** ([§Source-Precedence-Block](modul-01-entwicklungszyklus.md#source-precedence-block)): kompakter Vorgriff auf das Modus-Konzept als Eingang in den Lebenszyklus (Baseline und Modus festlegen plus den sechs Folge-Schritten); Vollform in Modul 2.

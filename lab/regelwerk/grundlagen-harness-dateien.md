@@ -1,7 +1,7 @@
 ## Die Harness-Dateien und ihre Form
 <!-- Quelle: [grundlagen/harness-dateien.md](../../kurs/de/grundlagen/harness-dateien.md) -->
 
-## Verzeichniskonvention
+### Verzeichniskonvention
 
 ```
 spec/                       # Spec-Straten: Vertrag · Technik · Sicht
@@ -22,7 +22,7 @@ harness/conventions/        # ein MR je Datei; done/ = aufgelöst
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
 
-## Template-Schichtung — was der Rumpf trägt und was der Kommentar
+### Template-Schichtung — was der Rumpf trägt und was der Kommentar
 
 Ein Template wird beim Adoptieren **abgebaut**: Platzhalter ersetzt,
 Hinweis-Block entfernt, **alle HTML-Kommentare gelöscht** — bis auf die
@@ -61,7 +61,7 @@ dasteht, ist alles, was der Adopter Wochen später hat. Vier Schichten:
   behaupten, wo keiner steht, wäre die Klasse *halluziniertes Gate* (Modul 13)
   — auf die eigene Konvention angewandt.
 
-## harness/README.md als Einstiegspunkt
+### harness/README.md als Einstiegspunkt
 
 Pro Repo bündelt eine einzige Datei alles, was ein Agent oder ein neuer
 Mensch zuerst lesen muss. Pflichtgliederung:
@@ -111,7 +111,7 @@ nicht als Tippfehler abtut. Eine Bindung ohne Deklaration ist eine
 stille Setzung — und damit eine Harness-Lüge in derselben Klasse wie
 ein halluziniertes Gate.
 
-## harness/conventions.md als Konventionsspeicher
+### harness/conventions.md als Konventionsspeicher
 
 `harness/conventions.md` trägt die **repo-lokalen Strukturregeln** und
 Adaptionen ggü. der adoptierten Baseline (Kurs, interner Standard,
@@ -168,7 +168,7 @@ Vorlagen:
 [`templates/harness/conventions/MR-NNN-titel.template.md`](../templates/harness/conventions/MR-NNN-titel.template.md)
 (ein Eintrag).
 
-## Jedes Artefakt hat einen Konsumenten
+### Jedes Artefakt hat einen Konsumenten
 
 Wer dem Harness ein Artefakt hinzufügt — eine Sektion, eine Liste, eine Notiz
 —, benennt, **wer es liest und wann**. Findet sich kein Leser, ist es Ablage,

@@ -75,8 +75,9 @@ Anzahl Ergebnisse, Latenz, anonymisierte User-ID.
 ### LH-FA-IDX-003 — Index-Schreib-Idempotenz und Atomarität
 
 > **Schema-Konvention.** Ab Lastenheft v0.4.0 vergeben wir neue funktionale
-> Anforderungen mit *Bereichskürzel* (`LH-FA-<BEREICH>-<NNN>`). Das
-> entspricht der Stratifizierung in
+> Anforderungen mit *Bereichskürzel* (`LH-FA-<BEREICH>-<NNN>`) — die Form, die
+> [Kurs §Vergabe](../../../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+> für den Zählraum je Sub-Area vorsieht. Sie entspricht der Stratifizierung in
 > [Kurs Modul 1](../../../kurs/de/01-spec-und-architektur/modul-01-entwicklungszyklus.md#worked-example-einen-source-precedence-block-aus-einem-konfliktbehafteten-repo-destillieren).
 > Bestehende Anforderungen (`LH-FA-01..03`, `LH-QA-01..04`) behalten ihr
 > zweistelliges Welle-1-Schema; Migration ist *nicht* vorgesehen

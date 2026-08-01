@@ -40,7 +40,9 @@ in einem Satz.
 
 ## 3. Funktionale Anforderungen
 
-Regeln dieser Sektion: ID-Schema `<PREFIX>-FA-<NN>`. Das Präfix ist im ganzen
+Regeln dieser Sektion: ID-Schema `<PREFIX>-FA-<NN>` — mit Bereichssegment
+`<PREFIX>-FA-<BEREICH>-<NNN>`, wenn dein Repo den Zählraum je Sub-Area führt
+(Baseline-Regelwerk `grundlagen-source-precedence.md` §Vergabe). Das Präfix ist im ganzen
 Repo dasselbe und taucht in Make-Target-Kommentaren, ADRs und Commits wieder auf
 (Baseline-Regelwerk `grundlagen-source-precedence.md` §ID-Schema als Klammer). Jede
 Anforderung trägt drei Pfade — Happy · Boundary · Negative — plus Out-of-Scope

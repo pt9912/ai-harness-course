@@ -96,7 +96,10 @@ sie gilt für jeden Lauf.
 - **Adaption:** *keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
   ID-Schema (`<PREFIX>-FA-*`, `<PREFIX>-QA-*`, `ADR-<NNNN>`, `CO-<NNN>`,
-  `slice-<NNN>`, `MR-<NNN>` — Präfix repo-weit festlegen, z. B. `LH`).*
+  `slice-<NNN>`, `MR-<NNN>` — Präfix repo-weit festlegen, z. B. `LH`;
+  bei mehreren gleichzeitig schreibenden Entwicklern zusätzlich das
+  Bereichssegment und damit den Zählraum je Sub-Area festlegen, siehe
+  Baseline-Regelwerk `grundlagen-source-precedence.md` §Vergabe).*
 - **Begründung:** Initial-Setzung. Spätere Adaptionen werden als
   `MR-<NNN>` nachgetragen.
 - **Auflösungs-Trigger:** permanent.

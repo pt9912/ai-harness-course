@@ -2,6 +2,8 @@
 
 > **Template-Hinweis.** Diese Datei ist eine Vorlage im MADR-/Nygard-
 > Stil. Kopiere sie nach `docs/plan/adr/<NNNN>-<kurzer-titel-kebab>.md`
+> — bzw. `<BEREICH>-<NNNN>-…`, wenn dein Repo den Zählraum je Sub-Area
+> führt (Deklaration in `harness/conventions.md`) —
 > und ersetze alle `<Platzhalter>`. Lösche diesen Block nach dem
 > Ausfüllen. Vergiss nicht, den ADR-Index in
 > `docs/plan/adr/README.md` zu aktualisieren.

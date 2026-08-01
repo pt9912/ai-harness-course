@@ -1,7 +1,9 @@
 # Slice <slice-id>: <Titel>
 
 > **Template-Hinweis.** Vorlage für einen Slice-Plan. Kopiere nach
-> `docs/plan/planning/open/slice-<NNN>-<kurzer-titel>.md` und ersetze
+> `docs/plan/planning/open/slice-<NNN>-<kurzer-titel>.md` — bzw.
+> `slice-<BEREICH>-<NNN>-…`, wenn dein Repo den Zählraum je Sub-Area führt
+> (Deklaration in `harness/conventions.md`) — und ersetze
 > Platzhalter. Lösche diesen Block.
 
 **Lifecycle:** Der Zustand dieses Slice ist das Verzeichnis, in dem diese

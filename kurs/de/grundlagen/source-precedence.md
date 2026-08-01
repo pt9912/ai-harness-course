@@ -185,3 +185,66 @@ Ein konsistentes Präfix (`LH-*`, `HSM-*`, `GG-*`) verbindet:
 * PR-Beschreibung
 
 Damit wird der Traceability-Constraint maschinell prüfbar.
+
+### Vergabe: woher die nächste Nummer kommt
+
+Das Präfix sagt, *wozu* eine Kennung gehört. Offen bleibt, **wer die Nummer
+vergibt** — und diese Frage hat nur solange keine Antwort nötig, wie genau ein
+Mensch am Repo schreibt.
+
+**Die Kollisionsfläche ist nicht die Nummer, sondern die Ablage.** `LH-*` lebt
+in *einer* Datei: Zwei gleichzeitige Anforderungen erzeugen einen
+Git-Konflikt — laut, sofort, unübersehbar. ADR, Slice, Welle und Carveout sind
+**je eine eigene Datei**: Zwei Entwickler, die unabhängig `0012` ziehen,
+erzeugen `0012-cache.md` und `0012-index.md`. Git meldet nichts, der Merge
+gelingt, und im Repo stehen zwei Artefakte unter derselben Kennung — die
+Klammer zwischen Spec, Commit und Gate ist zerrissen, ohne dass ein Sensor
+angeschlagen hätte.
+
+**Der Zählraum ist die Sub-Area.** Die Kennung trägt ein Bereichssegment, und
+gezählt wird *innerhalb* dieses Bereichs:
+
+```
+ADR-IDX-0004      ADR-AUTH-0001      slice-IDX-007      CO-AUTH-002
+```
+
+Die Bereiche sind nicht neu zu erfinden — es sind die **Sub-Areas**, die
+`harness/conventions.md` ohnehin einzeln deklariert
+([§Was ist eine Sub-Area?](bootstrap.md#was-ist-eine-sub-area)). Damit ist die
+nächste Nummer **lokal ableitbar**: Wer in `IDX` arbeitet, sieht im eigenen
+Checkout, welche `IDX`-Kennungen vergeben sind, und braucht dafür weder eine
+Absprache noch einen Schreibzugriff auf den Hauptzweig. Das ist die
+Bedingung, die aus dem [Traceability-Constraint](traceability.md#traceability-constraint)
+folgt: Die Kennung steht in Commits, **sobald die Arbeit läuft** — wer sie erst
+beim Landen bekommt, hat sie im entscheidenden Moment nicht.
+
+**Was das leistet, und was nicht.** Zwei Entwickler in *verschiedenen*
+Sub-Areas können nicht kollidieren. Zwei in *derselben* schon — und das ist
+Absicht: Sie entscheiden gleichzeitig über denselben Bereich und sollten
+voneinander wissen. Das Schema verwandelt einen stillen Merge-Unfall in ein
+inhaltliches Signal; es beseitigt ihn nicht. Ein Personen- oder Branch-Segment
+gäbe die Garantie, altert aber mit der Person und sagt dem Reviewer nichts.
+
+**Das Segment ist Herkunft, nicht Zugehörigkeit.** Es hält fest, in welchem
+Bereich das Artefakt *entstand*. Wird eine Sub-Area später geteilt oder
+umbenannt, ändern sich **keine** bestehenden Kennungen — dieselbe Stabilität
+wie bei der Slice-ID, die nach dem Wandern in `done/` ein stabiler Token
+bleibt.
+
+**Mischung ist billiger als Migration.** Ein Repo, das das Segment später
+einführt, behält die alten Kennungen und vergibt nur neue mit Bereich. Zwei
+Formen nebeneinander sind unschön, aber harmlos; ein Umbenennen aller
+bestehenden Kennungen bräche jede Commit-Message, die sie zitiert.
+
+**Welche Form gilt, deklariert das Repo.** Ein Repo mit einem schreibenden
+Menschen braucht kein Segment — dichte Nummern sind dort billiger und
+lesbarer. Die Wahl gehört in die ID-Schema-Deklaration in
+`harness/conventions.md`, wo `<PREFIX>-FA-*`, `ADR-<NNNN>` und `CO-<NNN>`
+ohnehin festgelegt werden — nicht in eine stille Gewohnheit. Wer später von
+dicht auf Bereich wechselt, notiert den Wechselpunkt; bestehende Kennungen
+bleiben, wie sie sind.
+
+**Kein Sensor.** Die Doppelvergabe innerhalb eines Bereichs wäre erkennbar —
+zwei Dateien mit demselben Bereich-Nummer-Paar in einem Verzeichnis —, aber
+kein Modul des Doku-Gates prüft Eindeutigkeit heute. Bis dahin ist es ein
+Review-Griff, und das gehört gesagt, statt einen Gate zu behaupten.

@@ -1,7 +1,7 @@
 ## Kernbegriffe und Trennschärfen
 <!-- Quelle: [grundlagen/begriffe.md](../../kurs/de/grundlagen/begriffe.md) -->
 
-## Kernbegriffe
+### Kernbegriffe
 
 | Begriff                  | Bedeutung im Regelwerk                                                                                                                                                                                                                                                                                                                                                                                    |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -42,7 +42,7 @@
 | Stratum                  | Rollen-Klasse eines Spec-Dokuments — *Vertrag* (Decke) · *Technik* · *Sicht* —, bestimmt über normativen Gehalt und Änderungs-Prozess, nicht über den Dateinamen. Rang: Vertrag › Technik › Sicht; alle drei sind obligatorisch, eine Abweichung wird als `MR-<NNN>` deklariert. Siehe [§Spec-Straten](grundlagen-referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument).                                                                                                    |
 | Bootstrap-aware Gate     | Gate mit weicher Frühphase: kennt eine Reifestufe und greift erst ab Trigger hart. Dokumentiert, was die Stufe ist.                                                                                                                                                                                                                                                                                       |
 
-## Trennschärfen
+### Trennschärfen
 
 - *Spec* beschreibt **was**, *ADR* begründet **warum so**, *Plan* legt **wann
 und wie** fest.

@@ -1,7 +1,7 @@
 ## Traceability-Constraint
 <!-- Quelle: [grundlagen/traceability.md](../../kurs/de/grundlagen/traceability.md) -->
 
-## Traceability-Constraint
+### Traceability-Constraint
 
 Keine relevante Änderung ohne Bezug zu mindestens einem der folgenden Punkte:
 
@@ -18,7 +18,7 @@ sie zwingt den Implementer-Agent in die Source-Precedence-Kette zurück.
 
 <a id="herkunfts-anker"></a>
 
-### Herkunfts-Anker für Steering-Loop-Regeln
+#### Herkunfts-Anker für Steering-Loop-Regeln
 
 Der Traceability-Constraint bindet **Änderungen** an eine ID. Der
 Herkunfts-Anker ist dieselbe Regel auf dem **Artefakt**: Eine Regel, die

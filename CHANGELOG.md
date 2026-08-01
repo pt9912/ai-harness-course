@@ -11,6 +11,61 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 65 — 2026-08-01 · Wer vergibt die nächste Nummer?
+
+Aus einer Nutzer-Frage: Fortlaufende Kennungen funktionieren, solange **ein**
+Mensch am Repo schreibt. Was passiert bei mehreren gleichzeitig?
+
+### Hinzugefügt
+
+- **[§Vergabe: woher die nächste Nummer kommt](kurs/de/grundlagen/source-precedence.md)**
+  unter §ID-Schema als Klammer. Der Abschnitt beginnt mit der Diagnose, nicht
+  mit der Regel: **Die Kollisionsfläche ist nicht die Nummer, sondern die
+  Ablage.** `LH-*` lebt in *einer* Datei — zwei gleichzeitige Anforderungen
+  erzeugen einen Git-Konflikt, laut und sofort. ADR, Slice, Welle und Carveout
+  sind je eine eigene Datei: Zwei Entwickler, die unabhängig `0012` ziehen,
+  erzeugen `0012-cache.md` und `0012-index.md`, Git meldet nichts, und im Repo
+  stehen zwei Artefakte unter derselben Kennung.
+- **Der Zählraum ist die Sub-Area** — `ADR-IDX-0004`, `slice-AUTH-007`. Keine
+  neue Taxonomie: Es sind die Sub-Areas, die `harness/conventions.md` ohnehin
+  deklariert. Die tragende Eigenschaft ist **lokale Ableitbarkeit** — wer in
+  `IDX` arbeitet, sieht im eigenen Checkout, was vergeben ist, ohne Absprache
+  und ohne Schreibzugriff auf den Hauptzweig. Das folgt aus dem
+  Traceability-Constraint (*„ein Commit-Hook prüft, dass die Nachricht
+  mindestens eine ID enthält"*): Wer die Kennung erst beim Landen bekommt, hat
+  sie im entscheidenden Moment nicht.
+- **Die Grenze steht dabei**, statt weggelassen zu werden: Zwei Entwickler in
+  *derselben* Sub-Area kollidieren weiterhin — und das ist Absicht, sie
+  entscheiden gleichzeitig über denselben Bereich. Das Schema verwandelt einen
+  stillen Merge-Unfall in ein inhaltliches Signal; es beseitigt ihn nicht. Ein
+  Personen- oder Branch-Segment gäbe die Garantie, altert aber mit der Person
+  und sagt dem Reviewer nichts.
+- **Kein Sensor.** Eindeutigkeit prüft heute kein Modul des Doku-Gates. Das
+  steht so da, statt einen Gate zu behaupten.
+
+### Geändert
+
+- **Das Segment ist kein Default, sondern eine Deklaration.** Ein Repo mit
+  einem schreibenden Menschen fährt mit dichten Nummern besser; die Wahl gehört
+  in die ID-Schema-Deklaration in `harness/conventions.md`, wo `<PREFIX>-FA-*`,
+  `ADR-<NNNN>` und `CO-<NNN>` ohnehin festgelegt werden. Damit bleibt die Regel
+  **additiv** — keine umbenannte Datei, kein Layout-Bruch.
+- **Vier Vorlagen** tragen die Wahl: `conventions.template.md` (`MR-000`
+  deklariert bei mehreren Schreibenden auch den Zählraum), `lastenheft`,
+  ADR und Slice (Dateiname-Hinweis auf die Bereichsform).
+- **Das Beispiel-Repo beruft sich auf die Norm, statt sie zu erfinden.**
+  `lab/example/spec/lastenheft.md` hatte das Bereichskürzel seit `v0.4.0`
+  **selbst deklariert**, als wäre es eine Repo-Eigenheit — der Kurs benutzte es
+  in Lösungen und Modul 15, ohne es je zu definieren. Die Drift lief in der
+  verbotenen Richtung (Beispiel → Lehre) und ist damit zu.
+
+### Korrigiert
+
+- **Die sechs Split-Dateien aus Welle 63 waren eine Ebene zu flach.** Das
+  Regelwerk führt `##` Titel / `###` Abschnitt / `####` Unterabschnitt; die
+  neuen Dateien hatten Titel *und* Abschnitte auf `##`. Kein Link brach dabei —
+  Slugs entstehen aus dem Text, nicht aus der Ebene.
+
 ## Welle 64 — 2026-08-01 · Der Wegweiser fällt, und das Lastenheft bekommt den Fall, den es nicht kannte
 
 Zwei Fäden, die aus Welle 63 herausfielen — der eine schließt sie ab, der

@@ -1,7 +1,7 @@
 ## Referenz-Richtung (SDP)
 <!-- Quelle: [grundlagen/referenz-richtung.md](../../kurs/de/grundlagen/referenz-richtung.md) -->
 
-## Referenz-Richtung (SDP): wer darf wen referenzieren
+### Referenz-Richtung (SDP): wer darf wen referenzieren
 
 Das ID-Schema *verbindet* Artefakte — aber nicht jede Verbindung ist
 erlaubt. Welche Referenz *normativ* wirken darf, regelt eine einzige
@@ -249,7 +249,7 @@ Bereits `Accepted`-ADRs sind immutable: vor Einführung dieser Konvention
 entstandene Grenzfälle werden **grandfathered**, nicht durch eine
 superseding ADR nachgezogen. Der Gate prüft nur ab Einführung neu.
 
-### Spec-Straten: mehr als ein Spec-Dokument
+#### Spec-Straten: mehr als ein Spec-Dokument
 
 Reale Projekte haben mehr als drei Spec-Dateien — `api-spec.md`,
 `data-model.md`, `sla.md`, `compliance.md`. Die Matrix operiert deshalb
