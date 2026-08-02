@@ -28,6 +28,12 @@ runtime:
   toolchain:
     go: "1.23"        # Implementierung
     python: "3.12.4"  # vorgesehen für den Replay-Runner (CO-002, slice-015)
+  env:                # was der Image-Hash nicht pinnt
+    tz: UTC
+    locale: C.UTF-8
+    network: none
+    cpu_count: 4
+  timestamp_masking: fixed
 
 # Pfade relativ zu diesem Manifest.
 inputs_ref: inputs/
@@ -35,6 +41,7 @@ expectations_ref: expectations/
 
 # Determinismus-Anker, gelten für alle Cases dieses Sets.
 determinism:
+  seed_derivation: substream_je_fall                                # der Seed allein reicht nicht
   tie_break_strategy: sort_stable_then_doc_path_then_section_index  # siehe ADR-0003 + slice-009
   max_topk: 100                                                     # siehe LH-FA-02 Boundary
   embedding_dim: 1024

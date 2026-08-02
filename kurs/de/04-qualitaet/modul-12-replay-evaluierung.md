@@ -118,6 +118,23 @@ Spec-Disziplin wie bei Akzeptanzkriterien
 einem Fall ist eine Demo, kein Replay. Case-002 ist hier der wichtigste:
 Er ist der einzige, der die Tie-Break-Regel überhaupt auslöst.
 
+Jede Fall-Datei trägt über die Nutzlast hinaus drei Dinge: eine `id`, die
+Fehlerklasse (`kind`) und den `bezug` auf das Akzeptanzkriterium, das
+dieser Fall bewacht. Der `bezug` ist die Traceability-Zeile des Sets —
+ohne ihn weißt du nach drei Wellen nicht mehr, welche Zusage hier hängt:
+
+```json
+{
+  "id": "case-002-boundary-score-tie",
+  "kind": "boundary",
+  "bezug": "LH-FA-07 Boundary",
+  "input": { "q": "index initialisieren", "k": 5 }
+}
+```
+
+Die gleichnamige Datei in `expectations/` wiederholt `id` und `bezug`
+und trägt daneben die Zusagen — Schritt 3.
+
 **Schritt 2 — Pflichtfelder im Manifest fixieren.**
 
 ```yaml
@@ -129,11 +146,18 @@ model:                     # die gemessene Stufe
   version: "2.1.0"
   seed: 42
 determinism:               # Regeln ohne eigenes Versionsfeld
+  seed_derivation: substream_je_fall
   tie_break_strategy: sort_stable_then_doc_path_then_section_index
   score_threshold: 0.30
   max_topk: 100
 runtime:
   image_hash: sha256:9c7f4a...   # siehe Vorgriff-Block oben
+  env:                           # was der Hash nicht pinnt
+    tz: UTC
+    locale: C.UTF-8
+    network: none
+    cpu_count: 4
+  timestamp_masking: fixed
 inputs_ref: inputs/
 expectations_ref: expectations/
 ```
@@ -143,6 +167,21 @@ sie das ist, worüber dieser Replay eine Zusage macht. Daneben trägt
 `determinism:` die Regeln, die ihr Ergebnis mitbestimmen, ohne selbst
 eine Version zu haben. Genau die driften still: Niemand bemerkt einen
 Tie-Break-Wechsel an einer Versionsnummer.
+
+**Der Seed allein reicht nicht.** Wie aus ihm die Werte je Fall
+entstehen — ein eigener Substream pro Fall, ein fortlaufender Strom über
+alle Fälle, eine Neuinitialisierung vor jedem —, ist selbst eine Regel
+ohne Versionsfeld. Zwei Läufe mit `seed: 42` und verschiedener Ableitung
+sind verschiedene Läufe. Darum steht `seed_derivation` in `determinism:`
+und nicht als Kommentar neben dem Seed.
+
+**Der Image-Hash pinnt die Toolchain, nicht den Laufzeit-Zustand.** Zeit,
+Locale, Netz und sichtbare CPU-Zahl entstehen erst, wenn der Container
+startet; zwei Läufe aus demselben Image können sich darin unterscheiden
+— eine parallelisierte Reduktion etwa liefert je nach `cpu_count` eine
+andere Rundung. Was der Hash nicht abdeckt, bekommt eigene Felder unter
+`runtime.env`. Die Zeitstempel-Maskierung steht daneben, weil ein Lauf
+sonst schon an seinem eigenen Datum rot wird.
 
 Was *vorgelagert* ist, fehlt hier bewusst. Die Vektoren, mit denen die
 Stufe rechnet, liegen fertig in `inputs/`; ein eingefrorener Vorlauf ist
@@ -233,7 +272,7 @@ die Reihenfolge der Verdächtigen *nicht beliebig*:
 | Reihenfolge | Verdächtiger | Belegquelle |
 |---|---|---|
 | 1 | Toolchain-Drift | `runtime.image_hash` verglichen |
-| 2 | Modell-Drift | `model.version` · `model.seed` · `determinism:` verglichen |
+| 2 | Modell-Drift | `model.version` · `model.seed` · `determinism:` bzw. `prompt_context:` verglichen |
 | 3 | Erwartungs-Drift | Eingaben vs. Spec (Modul 3) |
 | 4 | echte Regression | alles oben ausgeschlossen |
 

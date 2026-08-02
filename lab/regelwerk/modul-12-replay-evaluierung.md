@@ -31,9 +31,9 @@ Hand, vom Agenten oder aus einer Abhängigkeit kommen.
 
 #### Ziel-Form: Golden Set
 
-**Ein Verzeichnis je Set**, unter `evals/golden/`. Der Set-Name ist frei
-— er darf an der Closure hängen, die das Set erzeugt hat, oder an dem,
-was es misst.
+**Ein Verzeichnis je Set**, üblicherweise unter `evals/golden/`. Der
+Set-Name ist frei — er darf an der Closure hängen, die das Set erzeugt
+hat, oder an dem, was es misst.
 
 ```
 evals/golden/<set-name>/
@@ -51,8 +51,22 @@ evals/golden/<set-name>/
 
 `inputs/<fall>` trägt die Eingabe des Laufs, `expectations/<fall>` die
 Zusagen dazu (Form: siehe *Erwartungen als Verhalten* unten). Die
-Zuordnung läuft über den gleichen Dateinamen, nicht über eine Liste im
-Manifest — `inputs/` und `expectations/` sind darum immer gleich lang.
+Zuordnung läuft über den gleichen Dateinamen.
+
+Beide Seiten tragen über die Nutzlast hinaus drei Felder: eine `id`, die
+Fehlerklasse (`kind`: happy · boundary · negative) und den `bezug` auf
+das Akzeptanzkriterium, das dieser Fall bewacht. Der `bezug` ist die
+Traceability-Zeile des Sets — ohne ihn ist nach ein paar Closures nicht
+mehr erkennbar, welche Zusage an einem Fall hängt.
+
+```json
+{
+  "id": "<fall-kennung>",
+  "kind": "<happy | boundary | negative>",
+  "bezug": "<Akzeptanzkriterium>",
+  "input": { }
+}
+```
 
 **Mindestens drei Fälle — Happy · Boundary · Negative** (dieselbe
 Spec-Disziplin wie Akzeptanzkriterien, [Modul 3](modul-03-spec.md)).
@@ -64,7 +78,8 @@ Fall, die die anderen nicht fangen?* Drei Varianten desselben Happy Path
 sind ein Demo-Set, kein Golden Set — sie fangen alle dieselbe Klasse.
 Der Boundary-Fall ist dabei meist der wichtigste, weil er oft der
 einzige ist, der die Entscheidungsregeln aus `determinism:` überhaupt
-auslöst. Fehlt er, ist der Replay grün und die Realität rot.
+auslöst. Fehlt er, ist der Replay grün und die Realität rot. Der Ort für
+das Kriterium ist der `CHANGELOG.md`-Eintrag, der den Fall anlegt.
 
 #### Ziel-Form: manifest.yaml
 
@@ -77,67 +92,88 @@ entscheidet die Quellen-Frage, nicht das Etikett.
 Domänen-Modell (Simulation, Optimierer, Ranking, Scoring):
 
 ```yaml
-slice: <auslösende Closure>    # Traceability zurück auf den Plan
-recorded_at: <ISO-Zeitstempel der Aufnahme>
+slice: <erzeugende Closure>    # Traceability zurück auf den Plan
+recorded_at: <ISO-8601-Zeitstempel mit Zeitzone>
 model:                         # die gemessene Stufe
   name: <Bezeichnung der Stufe>
   version: <Kennung der Stufe>
   seed: <Startwert der Zufallsquelle>
 determinism:                   # Regeln ohne eigenes Versionsfeld
-  <regel>: <wert>
+  seed_derivation: <wie aus dem Seed die Werte je Fall entstehen>
+  <regel>: <gewählte Strategie>   # ein Schlüssel je weiterer Regel
 runtime:
   image_hash: <sha256:...>
-inputs_ref: <Pfad auf das Eingabe-Verzeichnis>
-expectations_ref: <Pfad auf das Erwartungs-Verzeichnis>
+  env:                         # was der Image-Hash nicht pinnt
+    tz: <Zeitzone>
+    locale: <Locale>
+    network: <none | erlaubte Ziele>
+    cpu_count: <sichtbare CPU-Zahl>
+  timestamp_masking: <Strategie>
+inputs_ref: <Pfad relativ zu diesem Manifest>
+expectations_ref: <Pfad relativ zu diesem Manifest>
 ```
 
-Inferenz-Modell (Embedding-Modell, LLM): `seed:` entfällt, und
-`prompt_context:` tritt an die Stelle von `determinism:` — die übrigen
-Felder stehen wie oben.
+Inferenz-Modell (Embedding-Modell, LLM): `seed:` entfällt, wenn die
+Inferenz-API keinen anbietet, und `prompt_context:` kommt hinzu. Die
+übrigen Felder stehen wie oben.
 
 ```yaml
 slice: <auslösende Closure>
-recorded_at: <ISO-Zeitstempel der Aufnahme>
+recorded_at: <ISO-8601-Zeitstempel mit Zeitzone>
 model:
   name: <Modell-Kennung>       # ohne gleitenden Alias
   version: <Release-Snapshot>
-prompt_context:                # tritt an die Stelle von determinism:
+prompt_context:                # die Regeln dieses Laufs
   system_prompt_hash: <sha256:...>
   tool_definitions_hash: <sha256:...>
   tool_order: [<werkzeug>, ...]
 runtime:
   image_hash: <sha256:...>
-inputs_ref: <Pfad auf das Eingabe-Verzeichnis>
-expectations_ref: <Pfad auf das Erwartungs-Verzeichnis>
+  env: { tz: ..., locale: ..., network: ..., cpu_count: ... }
+  timestamp_masking: <Strategie>
+inputs_ref: <Pfad relativ zu diesem Manifest>
+expectations_ref: <Pfad relativ zu diesem Manifest>
 ```
+
+Im **reinen** Inferenz-Lauf steht `prompt_context:` an Stelle von
+`determinism:` — dort gibt es keine Entscheidungsregeln ohne
+Versionsfeld. Hat der Lauf beides, ein Modell *und* eine nachgelagerte
+Regel-Stufe, stehen **beide Blöcke**: der Prompt-Kontext für das Modell,
+`determinism:` für die Regeln der Stufe.
 
 Was die einzelnen Felder festhalten:
 
 | Feld | Was hineingehört | Wozu |
 |---|---|---|
-| `slice` | die Closure, die das Set erzeugt oder zuletzt geändert hat | Traceability zurück auf den Plan |
+| `slice` | die Closure, die das Set **erzeugt** hat — spätere Änderungen stehen im `CHANGELOG.md`, nicht hier | Traceability zurück auf den Plan; wer das Feld fortschreibt, überschreibt den Anker bei jeder Rotation |
 | `recorded_at` | Zeitpunkt der Aufnahme | damit spätere Läufe ihren Diff datieren können |
 | `model.name` | Bezeichnung des Messgegenstands; beim Inferenz-Modell die Modell-Kennung **ohne gleitenden Alias** | ein Alias zeigt morgen auf etwas anderes |
 | `model.version` | die konkrete Kennung, nicht die Familie. Beim Inferenz-Modell trägt sie die Hauptlast — aus demselben Grund, aus dem ein Image-Hash kein Tag ist | grenzt Modell-Drift ab (Rang 2 der Diagnose unten) |
-| `model.seed` | Startwert der Zufallsquelle samt Ableitungsregel | pinnt den stochastischen Anteil des Laufs |
-| `determinism:` | Entscheidungsregeln ohne eigenes Versionsfeld — Tie-Break, Sortierstabilität, Grenzwerte | pinnt, was sonst still driftet: Niemand bemerkt einen Tie-Break-Wechsel an einer Versionsnummer |
+| `model.seed` | Startwert der Zufallsquelle | pinnt den stochastischen Anteil des Laufs |
+| `determinism:` | Entscheidungsregeln ohne eigenes Versionsfeld — Tie-Break, Sortierstabilität, Grenzwerte, dazu `seed_derivation` | pinnt, was sonst still driftet: Niemand bemerkt einen Tie-Break-Wechsel an einer Versionsnummer |
+| `determinism.seed_derivation` | wie aus dem Seed die Werte je Fall entstehen — Substream je Fall, fortlaufender Strom, Neuinitialisierung | der Seed allein reicht nicht: zwei Läufe mit gleichem Seed und anderer Ableitung sind verschiedene Läufe |
 | `prompt_context:` | System-Prompt und Werkzeug-Definitionen **als Hash**, dazu deren Reihenfolge | dasselbe beim Inferenz-Modell — als Hash fällt jede Änderung auf, ohne dass du den ganzen Prompt einfrieren musst |
 | `runtime.image_hash` | byte-genaue Adresse des Container-Images, kein Tag | grenzt Toolchain-Drift ab (Rang 1) |
-| `inputs_ref` | Verweis auf das Eingabe-Verzeichnis — referenziert, nicht als Inline-Text ins Manifest kopiert | die Eingaben bleiben ein fixierter Datensatz statt eines Textblocks im Manifest |
+| `runtime.env` | Zeitzone, Locale, Netz-Zugang, sichtbare CPU-Zahl | der Image-Hash pinnt die Toolchain, nicht den Laufzeit-Zustand — der entsteht erst beim Start des Containers |
+| `runtime.timestamp_masking` | wie Zeitstempel in der Ausgabe ersetzt werden | ohne sie wird ein Lauf schon an seinem eigenen Datum rot |
+| `inputs_ref` | Verweis auf das Eingabe-Verzeichnis — referenziert, nicht als Inline-Text ins Manifest kopiert | sagt dem Replay, gegen welchen Datensatz er läuft |
 | `expectations_ref` | Verweis auf das Erwartungs-Verzeichnis, ein Gegenstück je Eingabe-Fall | ohne Gegenstück gibt es nichts zu vergleichen |
 
-**Pflicht sind drei Positionen** — zwei feste Felder und eine Familie:
+**Drei Positionen** sind die Merkformel dafür, was den *Lauf*
+rekonstruierbar macht — zwei feste Felder und eine Familie:
 `inputs_ref`, `recorded_at` und **je ein Feld pro Zufallsquelle des
-Laufs**. Wie viele Felder die dritte Position umfasst, entscheidet der
-Lauf: beim Domänen-Modell `model.seed` *und* `determinism:`, beim
-Inferenz-Modell `model.version` *und* `prompt_context:`. Beim
-Inferenz-Modell **entfällt** `model.seed`, wenn die Inferenz-API keinen
-Seed-Parameter anbietet — ein Feld, dessen Wert auf nichts zeigt, ist
-keine Pflicht, sondern Dekoration.
+Laufs**. Wie viele Felder die dritte umfasst, entscheidet der Lauf: beim
+Domänen-Modell `model.seed` *und* `determinism:`, beim Inferenz-Modell
+`model.version` *und* `prompt_context:`. `model.seed` **entfällt**, wenn
+die Inferenz-API keinen Seed-Parameter anbietet — ein Feld, dessen Wert
+auf nichts zeigt, ist keine Pflicht, sondern Dekoration.
 
-`runtime.image_hash` und `model.version` stehen beim Domänen-Modell
-nicht in dieser Pflicht-Liste, unterscheiden aber ernsthaftes von
-symbolischem Replay.
+Die Merkformel zählt nicht die ganze Datei. `expectations_ref` gehört
+ebenso hinein, steht aber auf der Vergleichs- statt auf der
+Rekonstruktions-Seite; `slice` und `model.name` benennen Set und
+Messgegenstand. `runtime.image_hash` und `model.version` liegen beim
+Domänen-Modell außerhalb der Merkformel, unterscheiden aber ernsthaftes
+von symbolischem Replay.
 
 **Ins Manifest gehört nur, was der Lauf selbst noch tut.** Was
 vorgelagert und eingefroren ist — Daten, die fertig in `inputs/` liegen
@@ -181,7 +217,7 @@ eine Abhängigkeit, die im Replay gar nicht mehr wirkt.
 | Reihenfolge | Verdächtiger | Belegquelle |
 |---|---|---|
 | 1 | Toolchain-Drift | `runtime.image_hash` verglichen |
-| 2 | Modell-Drift | `model.version` · `model.seed` · `determinism:` verglichen |
+| 2 | Modell-Drift | `model.version` · `model.seed` · `determinism:` bzw. `prompt_context:` verglichen |
 | 3 | Erwartungs-Drift | Eingaben vs. Spec (Modul 3) |
 | 4 | echte Regression | alles oben ausgeschlossen |
 
@@ -192,6 +228,5 @@ gleiche Version, anderes Subroute ist eine reale Drift-Quelle.
   ergänzen, giftig gewordene (Schnittstelle real geändert) entfernen,
   datiert im Set-eigenen `CHANGELOG.md`. Je Eintrag: Datum, was sich am
   Set geändert hat, welche Closure es ausgelöst hat und **warum** ein
-  Fall ergänzt oder entfernt wurde. Umnummerierungen gehören dazu, sonst
-  zeigen ältere Befunde auf den falschen Fall.
+  Fall ergänzt oder entfernt wurde.
 

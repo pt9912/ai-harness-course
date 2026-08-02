@@ -101,6 +101,22 @@ vollständig erfüllen.
   lassen; sie tragen den Punkt, altern aber ohne Sensor.
 - **`begriffe.md`:** *Drift* und *Determinismus* ergänzt. Das Mini-Glossar
   verwies für vier Begriffe auf „Volldefinitionen" dort; zwei davon fehlten.
+- **Vier Quell-Defekte behoben, die der Split nur geerbt hatte** — gefunden von
+  der Bauprobe, die sie korrekt *nicht* dem Split angelastet hat. (1) Die
+  Determinismus-Regel fordert „Seed **und** ihre Ableitungsregel", das
+  Worked-Example-Manifest zeigte `seed: 42` und kein Feld dafür;
+  `seed_derivation` steht jetzt in `determinism:`, wo es hingehört — wie aus
+  dem Seed die Werte je Fall entstehen, ist selbst eine Regel ohne
+  Versionsfeld. (2) Dieselbe Regel verlangt Zeit, Locale, Netz und sichtbare
+  CPU-Zahl; auch dafür gab es kein Feld. Neu `runtime.env` und
+  `runtime.timestamp_masking`, mit der Begründung, die vorher nirgends stand:
+  Der Image-Hash pinnt die Toolchain, nicht den Laufzeit-Zustand — der
+  entsteht erst beim Start des Containers. (3) Die Fall-Dateien hatten keine
+  gelehrte Form; `id` · `kind` · `bezug` sind jetzt gesetzt, wobei `bezug` die
+  Traceability auf das Akzeptanzkriterium trägt. Das Lab-Fixture führte diese
+  Felder längst — gelehrt wurden sie nie. (4) Die Drift-Diagnose-Tabelle nennt
+  auf Rang 2 zusätzlich `prompt_context:`; beim Inferenz-Modell ist es die
+  Hauptdriftquelle und fehlte in der Belegquelle.
 
 ### Lab
 
@@ -108,11 +124,14 @@ vollständig erfüllen.
   Renummerierung von Welle 8 war dort nie angekommen) und der Fall benannt —
   gemischt, weil das Embedding im Replay mitläuft.
 - README-Anker auf Worked Example A nachgezogen.
+- `welle-1-baseline/manifest.yaml` um `determinism.seed_derivation`,
+  `runtime.env` und `runtime.timestamp_masking` ergänzt — die Felder, die
+  Modul 12 jetzt lehrt. `make replay` prüft weiter nur die Struktur.
 
 ### Review
 
-Fünf Review-Durchgänge über die eigene Arbeit, je mit Befunden — die letzte
-als externe Bauprobe:
+Sechs Review-Durchgänge über die eigene Arbeit, je mit Befunden — die letzten zwei
+als externe Reviews samt Bauprobe:
 
 - **Runde 1** — Widerspruch im selben Abschnitt (der Springer-Satz nannte noch
   „Modellversion + Seed"), und der Split paraphrasierte, statt operativ
@@ -152,6 +171,31 @@ als externe Bauprobe:
   bleibt", „trägt die Hauptlast" zu „ist die Zufallsquelle" (eine Version ist
   keine Zufallsquelle), „viele *Inferenz*-APIs" zu „die API". Die Bauprobe fiel
   durch — siehe Regelwerk-Block oben.
+
+- **Runde 6** — Gegenprobe: dieselben zwei Reviewer noch einmal gegen die
+  Runde-5-Korrekturen, die Bauprobe mit demselben Szenario. Ergebnis: Die neun
+  gemeldeten Befunde sind sachlich zu, **aber die Korrektur von Befund 3 hat
+  einen neuen Defekt erzeugt.** „`prompt_context:` tritt an die Stelle von
+  `determinism:`" ist quelltreu zu WE B Punkt 3 — und bricht den Mischfall, den
+  der Split zwei Absätze davor selbst einführt. Die Quelle sagt an beiden
+  Stellen Unterschiedliches: `:303` „statt `determinism:`", `:327` „stehen in
+  `determinism:`, nicht in `prompt_context:`" — bei einem Inferenz-Modell. Der
+  Split deckt jetzt beide Fälle ab (rein → an Stelle von; gemischt → beide
+  Blöcke). Dazu vier Regel-Anteile zurückgenommen, die die Quelle nicht setzt:
+  `slice` „oder zuletzt geändert" (das Worked Example lässt den Anker stehen und
+  führt Änderungen im `CHANGELOG.md`), „nicht über eine Liste im Manifest",
+  „immer gleich lang" (das ist eine Eigenschaft, die das *Lab-Target* prüft,
+  keine Manifest-Regel) und die Umnummerierungs-Regel — die stand nur im
+  Lab-Fixture, und aus dem Beispiel zieht der Split keine Regeln.
+  `evals/golden/` ist von Vorschrift zu „üblicherweise" abgeschwächt, weil die
+  Quelle den Pfad zeigt, aber nicht setzt.
+
+**Konsequenz aus Runde 6:** Zwei Reviewer mit verschiedenen Fragen können
+einander widersprechen, und beide recht haben — der Quelltreue-Prüfer bestätigte
+genau die Formulierung, die der Bauprobe-Prüfer als Defekt fand. Das ist kein
+Widerspruch im Urteil, sondern einer *in der Quelle*, den erst die zweite Frage
+sichtbar macht. Wo das passiert, ist der Fix eine Formulierung, die beide
+Quell-Stellen abdeckt — nicht die Wahl einer der beiden.
 
 **Konsequenz aus Runde 5:** Eine *Korrektur*-Runde am selben Abschnitt braucht
 denselben Gesamt-Durchgang wie eine Neufassung. Wer nur die korrigierte Stelle
