@@ -4,13 +4,18 @@ Zugehöriges Modul: [Modul 12 — Replay und Evaluierung](../04-qualitaet/modul-
 
 ## Selbstcheck-Antworten
 
-### (Erinnern) Welche drei Felder muss ein Replay-Manifest mindestens festhalten?
+### (Erinnern) Welche drei Positionen muss ein Replay-Manifest mindestens festhalten — und welche davon ist keine einzelne Zeile?
 
 1. **Eingaben** als referenzierter Datensatz (Hash + Pfad), nicht inline-Text.
 2. **Aufnahme-Zeitpunkt** — damit spätere Läufe ihren Diff datieren können.
 3. **Je ein Feld pro Zufallsquelle des Laufs** — beim Domänen-Modell der
    Seed samt Ableitungsregel, dazu die Entscheidungsregeln (Tie-Break,
    Sortierstabilität, Grenzwerte) in einem `determinism:`-Block.
+
+Die dritte ist die gesuchte: eine *Familie*, keine Zeile. Wie viele Felder
+sie umfasst, entscheidet der Lauf, nicht die Vorlage — hat er zwei
+Zufallsquellen, sind es zwei Einträge. Genau daran scheitert das Auswendiglernen
+einer festen Feldliste.
 
 Zwei weitere trennen ernsthaftes von symbolischem Replay, wie im Modul-Abschnitt
 [Begriff: Image-Hash](../04-qualitaet/modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14)

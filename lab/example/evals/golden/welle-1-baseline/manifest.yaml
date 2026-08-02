@@ -1,8 +1,10 @@
 # Replay-Manifest für welle-1-baseline.
-# Layout entspricht Kurs Modul 12, Worked Example A; die Gewichtung der Felder
-# entspricht Worked Example B. Gemischter Fall: Die `inputs/` sind Such-Anfragen,
-# das Embedding-Modell laeuft im Replay mit und steht darum in `model:`. Der
-# `determinism:`-Block darunter traegt die Regeln der nachgelagerten Ranking-Stufe.
+# Layout und Feldgewichtung entsprechen Kurs Modul 12, Worked Example A; der
+# Messgegenstand ist ein Inferenz-Modell wie in Worked Example B. Gemischter
+# Fall: Die `inputs/` sind Such-Anfragen, das Embedding-Modell laeuft im Replay
+# mit und steht darum in `model:`. Weil der Lauf einen Seed hat, traegt
+# `model.seed` — und die Regeln der nachgelagerten Ranking-Stufe stehen im
+# `determinism:`-Block darunter, nicht in einem `prompt_context:`.
 
 set_name: welle-1-baseline
 slice: welle-1-mvp

@@ -27,31 +27,88 @@ getrennt.
 
 Ein Baseline-Replay hält das Verhalten eines Laufs als Messung fest,
 gegen die spätere Änderungen verglichen werden — gleich ob sie von
-Hand, vom Agenten oder aus einer Abhängigkeit kommen. Layout: **ein
-Verzeichnis je Set** mit `manifest.yaml`, `inputs/`, `expectations/` und
-`CHANGELOG.md`. Der Verzeichnisname ist frei — er darf an der Closure
-hängen, die das Set erzeugt hat, oder an dem, was es misst. Regeln:
+Hand, vom Agenten oder aus einer Abhängigkeit kommen.
 
-- **Mindestens drei Fälle — Happy · Boundary · Negative** (dieselbe
-  Spec-Disziplin wie Akzeptanzkriterien, [Modul 3](modul-03-spec.md)).
-  Ein Replay mit einem Fall ist eine Demo.
-- **Manifest-Pflichtfelder:** `inputs_ref`, `recorded_at` und **je ein
-  Feld pro Zufallsquelle des Laufs** — `model.seed` für den
-  stochastischen Anteil und ein `determinism:`-Block für die
-  Entscheidungsregeln, die sonst still driften. Zwei weitere
-  unterscheiden ernsthaftes von symbolischem Replay:
-  `runtime.image_hash` (Toolchain-Drift abgrenzen) und `model.version`.
-- **Variante Inferenz-Modell:** Steht statt eines Domänen-Modells ein
-  Embedding-Modell oder ein LLM im Lauf, verschiebt sich das Gewicht:
-  `model.version` wird zum wichtigsten Feld — die Kennung ohne
-  gleitenden Alias, aus demselben Grund, aus dem ein Image-Hash kein Tag
-  ist. Und `model.seed` **entfällt**, wenn die API keinen Seed-Parameter
-  anbietet. An die Stelle des Seeds tritt dann der **Prompt-Kontext**:
-  System-Prompt, Werkzeug-Definitionen und deren Reihenfolge gehören ins
-  Manifest. In der Drift-Diagnose kommt auf Rang 2 der Provider-Status
-  hinzu — gleiche Version, anderes Subroute ist eine reale Drift-Quelle.
-  Ein Feld, dessen Wert auf nichts zeigt, ist keine Pflicht, sondern
-  Dekoration.
+#### Ziel-Form: Golden Set
+
+**Ein Verzeichnis je Set.** Der Verzeichnisname ist frei — er darf an
+der Closure hängen, die das Set erzeugt hat, oder an dem, was es misst.
+
+```
+<set-name>/
+├── manifest.yaml     # womit gelaufen wurde — Felder unten
+├── inputs/           # mindestens drei Fälle: Happy · Boundary · Negative
+├── expectations/     # je ein Gegenstück pro Eingabe-Fall
+└── CHANGELOG.md      # datierte Veränderung des Sets
+```
+
+**Mindestens drei Fälle — Happy · Boundary · Negative** (dieselbe
+Spec-Disziplin wie Akzeptanzkriterien, [Modul 3](modul-03-spec.md)).
+Ein Replay mit einem Fall ist eine Demo.
+
+#### Ziel-Form: manifest.yaml
+
+Welche Felder ein Manifest braucht, entscheidet **nicht die Art des
+Kerns, sondern welche Quellen im Lauf noch zufällig sind.** Daher zwei
+Formen mit derselben Regel dahinter.
+
+Domänen-Modell (Simulation, Optimierer, Ranking, Scoring):
+
+```yaml
+recorded_at: <ISO-Zeitstempel der Aufnahme>
+model:                         # die gemessene Stufe
+  name: <Bezeichnung>
+  version: <Kennung ohne gleitenden Alias>
+  seed: <Startwert der Zufallsquelle>
+determinism:                 # Regeln ohne eigenes Versionsfeld
+  <regel>: <wert>
+runtime:
+  image_hash: <sha256:...>
+inputs_ref: <Pfad auf das Eingabe-Verzeichnis>
+expectations_ref: <Pfad auf das Erwartungs-Verzeichnis>
+```
+
+Inferenz-Modell (Embedding-Modell, LLM) — `seed:` entfällt, an seine
+Stelle tritt der Prompt-Kontext, der Rest bleibt:
+
+```yaml
+model:
+  name: <Modell-Kennung>     # ohne gleitenden Alias
+  version: <Release-Snapshot>
+prompt_context:
+  system_prompt_hash: <sha256:...>
+  tool_definitions_hash: <sha256:...>
+  tool_order: [<werkzeug>, ...]
+```
+
+Was die einzelnen Felder festhalten:
+
+| Feld | Was hineingehört | Wozu |
+|---|---|---|
+| `inputs_ref` | Pfad auf den Eingabe-Datensatz — referenziert, nicht als Inline-Text kopiert | damit der Lauf gegen fixierte Eingaben läuft und nicht gegen eine Kopie, die still mitwandert |
+| `expectations_ref` | Pfad auf das Erwartungs-Verzeichnis, ein Gegenstück je Eingabe-Fall | ohne Gegenstück gibt es nichts zu vergleichen |
+| `recorded_at` | Zeitpunkt der Aufnahme | damit spätere Läufe ihren Diff datieren können |
+| `model.seed` | Startwert der Zufallsquelle samt Ableitungsregel | pinnt den stochastischen Anteil des Laufs |
+| `determinism:` | Entscheidungsregeln ohne eigenes Versionsfeld — Tie-Break, Sortierstabilität, Grenzwerte | pinnt, was sonst still driftet: Niemand bemerkt einen Tie-Break-Wechsel an einer Versionsnummer |
+| `prompt_context:` | System-Prompt und Werkzeug-Definitionen **als Hash**, dazu deren Reihenfolge | dasselbe beim Inferenz-Modell — als Hash fällt jede Änderung auf, ohne dass du den ganzen Prompt einfrieren musst |
+| `runtime.image_hash` | byte-genaue Adresse des Container-Images, kein Tag | grenzt Toolchain-Drift ab (Rang 1 der Diagnose unten) |
+| `model.version` | die konkrete Kennung, nicht die Familie | grenzt Modell-Drift ab (Rang 2) |
+
+**Pflicht sind drei Positionen** — zwei feste Felder und eine Familie:
+`inputs_ref`, `recorded_at` und **je ein Feld pro Zufallsquelle des
+Laufs**. Wie viele Felder die dritte Position umfasst, entscheidet der
+Lauf: beim Domänen-Modell `model.seed` *und* `determinism:`, beim
+Inferenz-Modell `model.version` *und* `prompt_context:`. `model.seed`
+**entfällt**, wenn die API keinen Seed-Parameter anbietet — ein Feld,
+dessen Wert auf nichts zeigt, ist keine Pflicht, sondern Dekoration.
+
+`runtime.image_hash` und `model.version` sind beim Domänen-Modell keine
+Pflicht, unterscheiden aber ernsthaftes von symbolischem Replay. Beim
+Inferenz-Modell rückt `model.version` in die Pflicht — dort ist es die
+Zufallsquelle.
+
+#### Regeln
+
 - **Erwartungen als Verhalten, nicht als Wortlaut:** semantische Anker
   statt wörtlichem Vergleich. Bei einem Domänen-Modell etwa der erwartete
   Spitzenwert, eine Score-Untergrenze und die Stabilität der Reihenfolge
@@ -66,7 +123,12 @@ hängen, die das Set erzeugt hat, oder an dem, was es misst. Regeln:
 - **Drift als Zahl:** **Drift-Rate** = rote Fälle ÷ Gesamt-Fälle. Die
   Zahl macht *Trend* über mehrere Änderungen und eine *Schwelle* für den
   Steering Loop („ab Drift-Rate > X Carveout-Pflicht") prüfbar — eine
-  „zwei rot"-Notiz lässt sich zwischen Läufen nicht vergleichen.
+  ordinale „einer rot"-Notiz lässt sich zwischen Läufen nicht
+  vergleichen. **Als Schwelle trägt die Rate aber erst, wenn das Set
+  über Rotation gewachsen ist:** Bei den drei Pflicht-Fällen springt
+  jeder einzelne rote Fall um 33 Punkte, und eine Schwelle wie „ab 10 %
+  Carveout-Pflicht" löst dann bei jedem Rot aus. Bis dahin ist sie eine
+  Notiz, keine Schwelle.
 - **Drift-Diagnose in fester Reihenfolge** (wer zuerst „echte Regression"
   tippt, baut den Carveout an der falschen Stelle ein):
 
@@ -76,6 +138,9 @@ hängen, die das Set erzeugt hat, oder an dem, was es misst. Regeln:
 | 2 | Modell-Drift | `model.version` · `model.seed` · `determinism:` verglichen |
 | 3 | Erwartungs-Drift | Eingaben vs. Spec (Modul 3) |
 | 4 | echte Regression | alles oben ausgeschlossen |
+
+Beim Inferenz-Modell kommt auf Rang 2 der **Provider-Status** hinzu:
+gleiche Version, anderes Subroute ist eine reale Drift-Quelle.
 
 - **Rotation:** Replay-Sets verrotten — Fälle aus Steering-Loop-Einträgen
   ergänzen, giftig gewordene (Schnittstelle real geändert) entfernen,

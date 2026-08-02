@@ -52,6 +52,21 @@ vollständig erfüllen.
   `must_include`/`tool_calls`. Vorher stand dort nur die Inferenz-Form.
 - **Drift-Diagnose Rang 2** belegt zusätzlich `determinism:`; ohne das findet
   die Reihenfolge den Fall nicht, den das Modul an ihr vorführt.
+- **Der Manifest-Abschnitt zeigt die Form, statt sie zu beschreiben.** Er
+  beschrieb ein YAML-Dokument in Prosa — zehn Feldnamen, keine sichtbare
+  Struktur, dazu wechselnde Notation (`model.seed` als Punkt-Pfad neben
+  `determinism:` als Block). Neu: zwei `#### Ziel-Form`-Abschnitte mit
+  Verzeichnis- und Feld-Skelett (Platzhalter, keine Beispieldaten — „Form ja,
+  Auszug nein") und eine Tabelle *Feld · Was hineingehört · Wozu*. `inputs_ref`
+  und `recorded_at` standen vorher als Pflichtfelder da, ohne dass irgendwo
+  stand, was hineingehört.
+- **Die Fallunterscheidung Domänen-/Inferenz-Modell steht vor den Regeln.** Sie
+  stand als Bullet `**Variante Inferenz-Modell:**` mitten in der Regel-Liste und
+  machte dort einen zweiten kompletten Bauplan auf — eine Liste von Einzelregeln,
+  in der ein Element plötzlich das ganze Konstrukt neu aufsetzt. Beide Formen
+  stehen jetzt oben nebeneinander, die Regeln darunter gelten für beide. Der
+  Provider-Status-Zusatz ist dabei zur Drift-Diagnose-Tabelle gewandert, wo er
+  hingehört; er hing im Inferenz-Bullet, vier Bullets vor der Tabelle.
 
 ### Geändert
 
@@ -84,7 +99,7 @@ vollständig erfüllen.
 
 ### Review
 
-Drei Review-Durchgänge über die eigene Arbeit, je mit Befunden:
+Vier Review-Durchgänge über die eigene Arbeit, je mit Befunden:
 
 - **Runde 1** — Widerspruch im selben Abschnitt (der Springer-Satz nannte noch
   „Modellversion + Seed"), und der Split paraphrasierte, statt operativ
@@ -95,8 +110,23 @@ Drei Review-Durchgänge über die eigene Arbeit, je mit Befunden:
   Musterlösung zu Übung 1 beantwortete weiter die alte Aufgabe
   (`summarize_doc`), die zu Übung 2 fuhr das Drehbuch „Modell A → Modell B".
   Wer die neue Aufgabe löste und abglich, fand ein anderes Szenario.
+- **Runde 4** — Review auf Anforderung, gegen den fertigen Stand. Sieben
+  Befunde, drei davon adopter-relevant: Der Verweis „Layout von A, Gewichtung
+  von B" auf das Lab-Set **stimmte nicht** — das Fixture trägt `model.seed` und
+  `determinism:`, also zwei von drei B-Markern in ihrer A-Ausprägung; B-artig
+  ist nur der Messgegenstand. Im Regelwerk stand die Drift-Rate ohne die
+  Einschränkung aus der Quelle als schwellenfähig da, zwei Bullets unter der
+  Pflicht zu drei Fällen — ein Adopter, der nur den Split liest, baut genau die
+  Kombination, die das Modul ausschließt. Und `prompt_context:` war das einzige
+  Feld, das der Split nicht namentlich nannte; die Pointe *als Hash* fehlte, wer
+  ihm folgte, fror den ganzen Prompt ein. Die übrigen vier: `CHANGELOG.md`
+  fehlte im Skelett von Schritt 1, obwohl der Split sie zum Layout zählt;
+  „Beobachtung: dreimal grün" passte nicht zum Ablauf der Übung (die
+  Musterlösung läuft nach *jeder* Verfälschung, die Aufgabe sammelte sie);
+  „drei Felder" zählte vier auf, weil die dritte Position eine Familie ist; und
+  der Split zitierte „zwei rot", wo die Quelle „einer rot" argumentiert.
 
-**Konsequenz für den Steering Loop:** Bei einem *Szenario-Wechsel* reicht es
+**Konsequenz aus Runde 3 für den Steering Loop:** Bei einem *Szenario-Wechsel* reicht es
 nicht, in der Lösung die geänderten Stellen zu suchen — sie ist ganz zu lesen.
 Die Regel „Satelliten mitziehen" hat nicht gefehlt, sie wurde unvollständig
 angewendet.
@@ -107,6 +137,36 @@ dieselbe Aufgabe beantwortet, die die Übung stellt. Ein Bezeichner-Abgleich
 Modul↔Lösung wurde über alle 17 Paare probiert und verworfen: überwiegend
 Fehlalarme, weil eine Musterlösung konkreter werden *soll* als die Aufgabe. Die
 Prüfung bleibt das Lesen beim Wellen-Abschluss.
+
+**Der Split war nicht lesbar — und keine der vier Runden hat es gemerkt.** Der
+Befund kam beim Gegenlesen von außen: „das ist nicht zu verstehen", präzisiert
+zu zwei Stellen — `**Variante Inferenz-Modell:**` mitten in der Regel-Liste und
+Pflichtfelder, die nirgends erklärt werden. Beides stand seit Welle 67 so da und
+hat vier Review-Durchgänge überlebt, weil jede Runde *Aussagen* geprüft hat
+(stimmt die Regel? deckt sie sich mit der Quelle?), keine die *Form* (kann ein
+Adopter danach ein Manifest bauen, ohne den Kurs zu lesen?). Die Runden 1–4
+haben denselben Abschnitt viermal gelesen und dreimal geändert.
+
+**Konsequenz:** Beim Split ist die Prüffrage nicht „ist das richtig?", sondern
+**„reicht das zum Bauen?"** — der Kurs erklärt Felder im Fließtext eines Worked
+Example, der Split hat diesen Kontext nicht und muss die Form darum *zeigen*.
+Der Regelwerk-Split ist der einzige Ort, an dem ein strukturiertes Konstrukt
+ohne Template auskommen musste; alle anderen (Slice, ADR, Carveout, Lastenheft)
+zeigen mit `### Ziel-Form:` auf `../templates/`. Ein
+`templates/evals/golden/manifest.template.yaml` bleibt die offene Option — sie
+würde das Skelett aus dem Split herausziehen, kostet aber Bundle-Fläche und ist
+eine eigene Entscheidung.
+
+**Ein Falsch-Positiv im `alignment-check`, notiert statt gefixt.** Runde 4 fand,
+dass LZ 4 (Überfitting *erkennen*, Rotation *entwerfen*) keine Übung hat — der
+Check meldet es trotzdem nicht, weil `verbStem("entwerfen")` = `entwer` im
+Übungen-Block auf den Titel von Übung 1 trifft („Mini-Golden-Set *entwerfen*"),
+die ausdrücklich LZ 2 aktiviert. Das Skript kommentiert nur das umgekehrte
+Risiko (Ablaut-Falsch-*Negative*). Die Lage selbst ist vertretbar — LZ 4 zeigt
+sich über Wochen an einem benutzten Set, nicht an einem Lab-Lauf; der
+Lab-Grenze-Block sagt das jetzt hin, statt zu schweigen. Ein schärferer
+Verbstamm-Abgleich (Marker schlägt Stamm) bleibt eine Option, kein Slice: Er
+würde in allen 17 Modulen neu triagiert werden müssen.
 
 ### Zahlen
 

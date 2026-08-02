@@ -106,9 +106,10 @@ evals/golden/ranking-baseline/
 │   ├── case-001.json     # Happy: ein eindeutig bester Treffer
 │   ├── case-002.json     # Boundary: zwei Dokumente, identischer Score
 │   └── case-003.json     # Negative: nichts über der Schwelle
-└── expectations/
-    ├── case-001.json
-    └── ...
+├── expectations/
+│   ├── case-001.json
+│   └── ...
+└── CHANGELOG.md          # ab Schritt 7 — das Set verändert sich
 ```
 
 Drei Fälle ist das Minimum: Happy / Boundary / Negative — dieselbe
@@ -149,10 +150,11 @@ keine Drift-Quelle mehr. Ins Manifest gehört nur, was der Lauf selbst
 noch tut — sonst behauptest du eine Abhängigkeit, die im Replay gar
 nicht mehr wirkt.
 
-Drei Felder sind im Selbstcheck Pflicht: `inputs_ref`, `recorded_at` und
-**je ein Feld pro Zufallsquelle des Laufs** — hier `model.seed` für die
-stochastische Auswahl und der `determinism:`-Block für die
-Entscheidungsregeln. Zwei weitere unterscheiden ernsthaftes von
+Drei *Positionen* sind im Selbstcheck Pflicht — zwei feste Felder und
+eine Familie: `inputs_ref`, `recorded_at` und **je ein Feld pro
+Zufallsquelle des Laufs**. Die dritte ist schon hier zwei Zeilen lang:
+`model.seed` für die stochastische Auswahl und der `determinism:`-Block
+für die Entscheidungsregeln. Zwei weitere unterscheiden ernsthaftes von
 symbolischem Replay: `runtime.image_hash` (Toolchain-Drift abgrenzen)
 und `model.version`.
 
@@ -319,15 +321,20 @@ trägt `manifest.yaml`, `inputs/case-{001,002,003}.json`,
 `expectations/case-{001,002,003}.json` und `CHANGELOG.md` — die
 Verzeichnis-Struktur aus A. Inhaltlich ist es ein *gemischter* Fall:
 Seine `inputs/` sind Such-Anfragen, das Embedding-Modell läuft im Replay
-also mit und steht darum in seinem `model:`-Block. Layout von A,
-Gewichtung von B — so sehen reale Sets meistens aus.
+also mit und steht darum in seinem `model:`-Block. Ein Inferenz-Modell
+als Messgegenstand (B) — die Felder aber die aus A: Der Lauf hat einen
+Seed, also trägt `model.seed`, und die Regeln der nachgelagerten
+Ranking-Stufe stehen in `determinism:`, nicht in `prompt_context:`. So
+sehen reale Sets meistens aus. Und daran siehst du, was die Feldwahl
+wirklich steuert: nicht die *Art* des Kerns, sondern welche Quellen im
+Lauf noch zufällig sind.
 
 ## Übungen
 
 * Reproduzierbare Testläufe gegen ein Golden Set
 * **(Erschaffen + Bewerten — aktiviert LZ 2)** *Mini-Golden-Set entwerfen und Auswahl begründen.* Gegeben die Ranking-Stufe aus Worked Example A: Zu einer Anfrage liefert die Suche die besten Treffer, bei Punktgleichstand entscheidet die Tie-Break-Regel. Entwirf ein Golden Set mit drei Fällen (Happy · Boundary · Negative — dieselbe Spec-Disziplin wie in Worked Example A Schritt 1): pro Fall die Eingabe, die Erwartung *als Verhalten, nicht als Wortlaut* (Schritt 3 — semantische Anker wie "dieses Dokument steht oben", "Mindest-Score wird erreicht", "die Reihenfolge bei Gleichstand ist stabil" statt eines wörtlich kopierten Ergebnis-Arrays) und ein *Auswahlkriterium* in einem Satz — welche Fehlerklasse fängt genau dieser Fall, die die anderen zwei nicht fangen? **Mindestens einer der drei Fälle muss den Gleichstand treffen** — das ist die Fehlerklasse aus der Engage-Situation, und kein Happy-Path-Fall sieht sie. Vergleiche die Struktur am Ende mit dem Lab-Set [`../../../lab/example/evals/golden/welle-1-baseline/`](../../../lab/example/evals/golden/welle-1-baseline/) (drei Cases Happy/Boundary/Negative je LH-FA-02). Anti-Antwort: drei Happy-Path-Varianten — das ist ein Demo-Set, kein Golden Set.
 * **(Analysieren — aktiviert LZ 3)** *Drift quantifizieren.* Erzeuge eine Regression an deinem nicht-deterministischen Kern — getauschte Tie-Break-Regel, geänderte Seed-Ableitung oder neue Modellversion — und gib die Drift-Rate (rote ÷ gesamte Fälle) als Zahl an; ordne den Befund dann der Diagnose-Reihenfolge aus Schritt 6 zu (Toolchain → Modell-Drift → Erwartung → echte Regression). **Wo:** im eigenen Repo mit echten Zahlen — das Lab-Target führt keinen Lauf aus und kann darum keine roten Fälle erzeugen (siehe Lab-Grenze unten). Ohne eigenen Replay-Lauf: an der Vorgabe aus dem Selbstcheck (3 von 20 rot).
-* **(Analysieren + Anwenden — aktiviert LZ 1)** *Zeige, dass der Lab-Sensor den Modellwechsel nicht sehen kann.* Kopiere `evals/golden/welle-1-baseline/` nach `evals/golden/drift-test/`, ändere in `manifest.yaml` `model.name` **und** `model.version`, verfälsche zusätzlich eine Erwartung (`top_doc_path`, `top_score_min`) und lasse `make replay RUN=drift-test` laufen. Beobachtung: dreimal grün. Benenne dann, welche Felder ein *Runner* vergleichen müsste, damit der Wechsel rot wird — das Manifest deklariert sie bereits (`verification.per_case_hash`, `determinism_check: two_runs_same_hash`, `runtime.image_hash`), nur löst sie kein Target ein. Pointe: Ein Sensor, der die Sache nicht sehen kann, über die er eine Zusage macht, ist ein Vorschlag, kein Gate ([Modul 13 §Typische Fehlvorstellungen](modul-13-quality-gates.md#typische-fehlvorstellungen)).
+* **(Analysieren + Anwenden — aktiviert LZ 1)** *Zeige, dass der Lab-Sensor den Modellwechsel nicht sehen kann.* Kopiere `evals/golden/welle-1-baseline/` nach `evals/golden/drift-test/`, ändere in `manifest.yaml` `model.name` **und** `model.version`, verfälsche zusätzlich eine Erwartung (`top_doc_path`, `top_score_min` — beide in `expectations/case-001.json`) und lasse `make replay RUN=drift-test` **nach jeder der drei Änderungen** laufen. Beobachtung: dreimal grün. Benenne dann, welche Felder ein *Runner* vergleichen müsste, damit der Wechsel rot wird — das Manifest deklariert sie bereits (`verification.per_case_hash`, `determinism_check: two_runs_same_hash`, `runtime.image_hash`), nur löst sie kein Target ein. Pointe: Ein Sensor, der die Sache nicht sehen kann, über die er eine Zusage macht, ist ein Vorschlag, kein Gate ([Modul 13 §Typische Fehlvorstellungen](modul-13-quality-gates.md#typische-fehlvorstellungen)).
 
 ### Minimaler Übungspfad
 
@@ -359,6 +366,9 @@ Genau das ist die zweite Übung oben — der Befund ist der Lerngegenstand.
 > * **LZ 1** (Replay-Lauf *einrichten*) — die Blindheits-Übung oben zeigt
 >   am Lab, *welche* Felder ein Runner vergleichen müsste; eingerichtet
 >   wird er erst im eigenen Repo.
+> * **LZ 4** (Überfitting *erkennen*, Rotation *entwerfen*) — berührt das
+>   Lab gar nicht: Überfitting zeigt sich über Wochen an einem Set, das
+>   in Benutzung ist. Abgerufen im Selbstcheck und seiner Rubrik.
 
 ## Reflexion
 
@@ -373,7 +383,7 @@ Modul-spezifische Trigger:
 
 ## Selbstcheck
 
-* **(Erinnern)** Welche drei Felder muss ein Replay-Manifest mindestens festhalten?
+* **(Erinnern)** Welche drei Positionen muss ein Replay-Manifest mindestens festhalten — und welche davon ist keine einzelne Zeile?
 * Was muss ein Replay festhalten, damit er deterministisch ist?
 * **(Analysieren — aktiviert LZ 3)** Nach einem Modellwechsel sind 3 von 20 Golden-Fällen rot. Gib die Drift-Rate als Zahl an und sage, *was* die Zahl über mehrere Läufe sichtbar macht, das "drei rot" allein nicht zeigt.
 * **(Bewerten/Erkennen — aktiviert LZ 4 Bewerten-Hälfte)** Wann wird ein Golden Set giftig (überfittet)?
@@ -385,7 +395,7 @@ Modul-spezifische Trigger:
 
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
-| Drei Pflichtfelder eines Replay-Manifests? | "Modell." | Eingaben (als referenzierter Datensatz, nicht als Inline-Text) · Aufnahme-Zeitpunkt · je ein Feld pro Zufallsquelle des Laufs (Seed samt Ableitungsregel, dazu die Entscheidungsregeln). | + Image-Hash (siehe Abschnitt oben) — sonst lässt sich Drift nicht von Toolchain-Drift trennen. Exzellent benennt außerdem, dass die Feldliste von der *Art* des Kerns abhängt: beim Domänen-Modell trägt der Seed, beim Inferenz-Modell die Modellversion und der Prompt-Kontext — dort gibt es oft gar keinen Seed-Parameter. |
+| Drei Pflicht-Positionen eines Replay-Manifests? | "Modell." | Eingaben (als referenzierter Datensatz, nicht als Inline-Text) · Aufnahme-Zeitpunkt · je ein Feld pro Zufallsquelle des Laufs — die dritte Position ist eine *Familie*, keine einzelne Zeile (Seed samt Ableitungsregel, dazu die Entscheidungsregeln). | + Image-Hash (siehe Abschnitt oben) — sonst lässt sich Drift nicht von Toolchain-Drift trennen. Exzellent benennt außerdem, dass die Feldliste von der *Art* des Kerns abhängt: beim Domänen-Modell trägt der Seed, beim Inferenz-Modell die Modellversion und der Prompt-Kontext — dort gibt es oft gar keinen Seed-Parameter. |
 | Was braucht ein deterministischer Replay? | "Seed." | Inputs + Zufallsquelle (Seed und Ableitungsregel) + Modellversion + Tool-Versionen + Zeitstempel-Maskierung + Image-Hash (Docker-Harness, Modul 14). | + Hinweis: der Seed pinnt nur *eine* von mehreren Drift-Quellen; die übrigen driften unabhängig weiter — Tool-Subversions, lokale Zeit, Locale und Sortierreihenfolge, sichtbare CPU-Zahl, Netz-Latenz; bei Inferenz-Modellen zusätzlich Modell-Routing innerhalb derselben Version und der Prompt-Kontext. Exzellent benennt mehrere dieser Quellen, statt Determinismus am Seed allein festzumachen. |
 | Drift quantifizieren (3 von 20 rot)? | "Ein paar rot." — keine Zahl. | Drift-Rate = 3 ÷ 20 = 15 %. | + Was die Zahl sichtbar macht: den *Trend* über mehrere Änderungen am Kern (steigt sie, ist der Kern selbst der Verdächtige, nicht der Einzelfall) und eine *Schwelle* für den Steering Loop ("ab > X % Carveout-Pflicht") — beides ist zwischen Läufen vergleichbar, "drei rot" nicht. |
 | Wann wird ein Golden Set giftig? | "Wenn es nicht passt." | Wenn Replay reproduzierbar grün ist, aber Realität rot — typisch durch jahrelang konstantes Set. Symptome: keine Failure-Klasse seit X Wochen, neue Eingabe-Klassen tauchen *nur* in Produktion auf. | + Gegenmaßnahmen: Rotation (alte Beispiele rausnehmen), Sampling aus Produktions-Traces, Adversarial-Beispiele aus Steering-Loop-Einträgen ([`reflexion-vorlage.md`](../grundlagen/reflexion-vorlage.md)) ziehen. |
