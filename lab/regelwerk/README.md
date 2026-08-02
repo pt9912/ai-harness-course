@@ -1,10 +1,9 @@
 # Regelwerk — der Kurs als Betriebsregelwerk, nach Modulen
 
-**Stand:** Kurs-Welle 65 · 2026-08-01.
+**Stand:** Kurs-Welle 66 · 2026-08-02.
 
-Die 17 Module (0–16) **und die drei Grundlagen-Abschnitte** (Konventionen,
-Klassifikation, Durchsetzungsschicht) des Kurses als **Betriebsregelwerk für
-Code-Agenten** — didaktik-freier Extrakt (Regeln, Konventionen, Abläufe in
+Die 17 Module (0–16) **und die Grundlagen-Abschnitte** des Kurses als
+**Betriebsregelwerk für Code-Agenten** — didaktik-freier Extrakt (Regeln, Konventionen, Abläufe in
 Quellformulierung; weggelassen ist die Didaktik-Schicht, nicht verdichtet der
 Inhalt — umgehängt werden beim Split nur relative Links und Selbstverweise:
 „in diesem Kurs" wird „in diesem Regelwerk", „Kurs" als Name der *Quelle*
@@ -14,8 +13,8 @@ laden kann, ohne das ganze Regelwerk im Kontext zu halten.
 > **Was dieses Verzeichnis ist.** Das **kanonische Regelwerk-Artefakt** (login-frei
 > ausgeliefert als `lab-regelwerk.zip`, self-navigierbar). Es trägt keine eigene
 > Normativität: maßgeblich für den *Inhalt* bleibt der Kurs unter
-> [`/kurs/de/`](../../kurs/de/README.md) — die Module der Phasen 01–05 plus
-> Konventionen, Klassifikation und Durchsetzungsschicht.
+> [`/kurs/de/`](../../kurs/de/README.md) — die Module der Phasen 01–05 plus die
+> normativen Grundlagen-Abschnitte.
 >
 > **Was dieses Verzeichnis NICHT ist.** Eine eigene Quelle der Wahrheit. Wer hier
 > eine Regel ändert, ohne die Kurs-Quelle zu ändern, erzeugt genau die Drift, die

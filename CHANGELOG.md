@@ -11,6 +11,33 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 66 — 2026-08-02 · Drei, wo acht stehen
+
+Aus einer Nutzer-Frage an [`lab/regelwerk/README.md`](lab/regelwerk/README.md).
+Welle 63 teilte `konventionen.md` auf sechs Seiten, Welle 64 entfernte die
+Weiterleitung — der **Index** beider READMEs zog jedes Mal mit. Die
+**Fließtext-Zählung** darüber nicht.
+
+### Korrigiert
+
+- **„die drei Grundlagen-Abschnitte (Konventionen, Klassifikation,
+  Durchsetzungsschicht)"** in [`lab/regelwerk/README.md`](lab/regelwerk/README.md)
+  (Kopfabsatz und Blockquote) und [`lab/README.md`](lab/README.md). Das
+  Verzeichnis liefert **acht** Splits, und die Index-Liste zwölf Zeilen weiter
+  unten in derselben Datei zählt sie auch alle auf — die Datei widersprach sich
+  selbst. „Konventionen" benannte dabei einen Abschnitt, den es seit Welle 64
+  nicht mehr gibt.
+- **Die Zahl fällt weg, statt korrigiert zu werden** (*„und die
+  Grundlagen-Abschnitte"*). Eine zweite Zählung im Fließtext neben der
+  maßgeblichen Index-Liste ist dieselbe Drift-Klasse wie die zwei Verzeichnisse
+  aus Welle 64: Sie altert bei jedem Split mit, und niemand merkt es. Der
+  Zeiger bleibt, der Bestand steht nur noch an einer Stelle.
+- **Kein Sensor.** Das Doku-Gate prüft Link-*Ziele*, keine Mengenangaben in
+  Prosa. Wie bei den Link-Texten aus Welle 64 fällt das nur beim Lesen auf.
+
+Kein Bruch für Konsumenten: reine Prosa-Korrektur, kein Pfad, kein Anker, keine
+Regel betroffen.
+
 ## Welle 65 — 2026-08-01 · Wer vergibt die nächste Nummer?
 
 Aus einer Nutzer-Frage: Fortlaufende Kennungen funktionieren, solange **ein**
