@@ -67,6 +67,18 @@ vollständig erfüllen.
   stehen jetzt oben nebeneinander, die Regeln darunter gelten für beide. Der
   Provider-Status-Zusatz ist dabei zur Drift-Diagnose-Tabelle gewandert, wo er
   hingehört; er hing im Inferenz-Bullet, vier Bullets vor der Tabelle.
+- **Vier operative Regeln aus der Quelle nachgezogen, die beim Auszug gefehlt
+  hatten.** Gefunden von einer Bauprobe (Adopter baut ein Golden Set allein aus
+  dem Split, ohne Kurszugriff): die **Fallauswahl-Regel** — jeder Fall fängt
+  eine andere Fehlerklasse, drei Varianten desselben Happy Path sind ein
+  Demo-Set, und der Boundary-Fall ist meist der einzige, der `determinism:`
+  überhaupt auslöst. Ohne sie war ein blinder Sensor split-konform. Dazu die
+  **Kopplung `inputs/`↔`expectations/` über den Dateinamen** (die Regel „je ein
+  Gegenstück" war ohne sie mechanisch nicht einlösbar), **„Ins Manifest gehört
+  nur, was der Lauf selbst noch tut"** und die Eskalation **zwei rot → Carveout
+  plus Folge-Slice**, mit der der Anschluss an Modul 7 zurückkommt. Ergänzt
+  außerdem `slice:` als Traceability-Anker, `evals/golden/` als Ort und die
+  Inhalts-Regel für das Set-eigene `CHANGELOG.md`.
 
 ### Geändert
 
@@ -99,7 +111,8 @@ vollständig erfüllen.
 
 ### Review
 
-Vier Review-Durchgänge über die eigene Arbeit, je mit Befunden:
+Fünf Review-Durchgänge über die eigene Arbeit, je mit Befunden — die letzte
+als externe Bauprobe:
 
 - **Runde 1** — Widerspruch im selben Abschnitt (der Springer-Satz nannte noch
   „Modellversion + Seed"), und der Split paraphrasierte, statt operativ
@@ -125,6 +138,27 @@ Vier Review-Durchgänge über die eigene Arbeit, je mit Befunden:
   Musterlösung läuft nach *jeder* Verfälschung, die Aufgabe sammelte sie);
   „drei Felder" zählte vier auf, weil die dritte Position eine Familie ist; und
   der Split zitierte „zwei rot", wo die Quelle „einer rot" argumentiert.
+
+- **Runde 5** — zwei unabhängige Reviews gegen den Commit aus Runde 4: einer auf
+  Normkonformität und Quelltreue, einer als **Bauprobe** (ein Adopter baut ein
+  Golden Set für einen Routenplaner, nur aus dem Split, ohne Kurszugriff, und
+  protokolliert jede Stelle, an der er raten musste). **Der Runde-4-Commit hatte
+  selbst fünf Fehler eingeführt:** Ein neuer Merksatz („nicht die *Art* des
+  Kerns") negierte wortgleich die Rubrik-Zelle 70 Zeilen weiter — die derselbe
+  Commit angefasst hatte. Die Übungs-Korrektur („nach jeder der drei
+  Änderungen") passte nicht zur Musterlösung, die drei Läufe bei *zwei*
+  Änderungen plus einem Baseline-Lauf fährt. Und drei Quell-Aussagen waren beim
+  Umbau paraphrasiert: „`prompt_context:` *statt* `determinism:`" zu „der Rest
+  bleibt", „trägt die Hauptlast" zu „ist die Zufallsquelle" (eine Version ist
+  keine Zufallsquelle), „viele *Inferenz*-APIs" zu „die API". Die Bauprobe fiel
+  durch — siehe Regelwerk-Block oben.
+
+**Konsequenz aus Runde 5:** Eine *Korrektur*-Runde am selben Abschnitt braucht
+denselben Gesamt-Durchgang wie eine Neufassung. Wer nur die korrigierte Stelle
+liest, sieht den neuen Widerspruch zur unveränderten Stelle nicht — hier zur
+Rubrik, die im selben Commit angefasst wurde. Und: Die Bauprobe hat in einem
+Durchgang gefunden, was vier Lese-Runden nicht gefunden haben. Der Unterschied
+ist die Frage — Lesen prüft „stimmt das?", Bauen prüft „reicht das?".
 
 **Konsequenz aus Runde 3 für den Steering Loop:** Bei einem *Szenario-Wechsel* reicht es
 nicht, in der Lösung die geänderten Stellen zu suchen — sie ist ganz zu lesen.

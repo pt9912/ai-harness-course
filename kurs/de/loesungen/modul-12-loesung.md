@@ -25,7 +25,9 @@ erklärt:
    von Toolchain-Drift trennen.
 5. **Modellversion** — die konkrete Kennung, nicht die Familie.
 
-Welches Feld *trägt*, hängt von der Art des Kerns ab: beim
+Welches Feld *trägt*, hängt im Regelfall von der Art des Kerns ab — die
+Art ist aber nur der Indikator, entschieden wird an den Quellen, die in
+*diesem* Lauf noch zufällig sind. Beim
 Domänen-Modell ist der Seed der Hauptanker und die Version nachgeordnet;
 beim Inferenz-Modell ist es umgekehrt — dort entfällt der Seed oft ganz
 (die Anthropic Messages API bietet Stand 2026-08 keinen Seed-Parameter),
