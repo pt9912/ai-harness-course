@@ -11,6 +11,114 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 67 — 2026-08-02 · Ein Pflichtfeld, das der Adopter nicht füllen kann
+
+Aus einer Nutzer-Frage nach der Metapher „Wetter im Container" in
+[Modul 12](kurs/de/04-qualitaet/modul-12-replay-evaluierung.md). Die Metapher war
+das kleinere Problem. Dahinter lag, dass das Modul durchgehend ein
+**Inferenz-Modell** voraussetzte — Modellversion, Provider-Status,
+Sampling-Parameter —, während ein adoptierendes Repo oft gar kein LLM hat,
+sondern ein **Domänen-Modell**. `grid-gym` als Referenz-Konsument ist genau
+dieser Fall: reale Seeds über `RandomPort`, kein Provider, keine Modellversion.
+
+Die Probe darauf: `model.seed` stand als Selbstcheck-Pflichtfeld neben dem
+Beispiel-Modell `claude-opus-4-7` — und die Anthropic Messages API kennt keinen
+Seed-Parameter. Das Modul machte ein Feld zur Pflicht, dessen Wert für sein
+eigenes Beispiel auf nichts zeigt. Umgekehrt trägt beim Domänen-Modell der Seed
+und die Modellversion fehlt. Beide Adopter-Formen konnten die Regel nie
+vollständig erfüllen.
+
+### Entschieden
+
+- **Domänen-Modell im Vordergrund, Inferenz-Modell als zweites Beispiel.**
+  „Modell" heißt im Modul jetzt einmal generisch der *nicht-deterministische
+  Kern* des Produkts; alles Weitere hängt an dieser einen Definition.
+- **Modul 12 baut das Set, Modul 13 setzt es durch.** Die Aufzählung der
+  Domänen-Gates (`test-determinism`, `test-replay`, `test-fault`) stand in
+  beiden Modulen; sie gehört zu Modul 13, das sie definiert und an Adopter
+  ausliefert. Modul 12 trägt nur noch den Zeiger, Modul 13 einen Gegenzeiger
+  für die Wort-Kollision (`test-replay` ist dort das Gate, hier die Praxis).
+
+### Regelwerk
+
+- **`model.seed` und `model.version` sind nicht mehr beide unbedingt Pflicht.**
+  Pflicht ist *je ein Feld pro Zufallsquelle des Laufs*: beim Domänen-Modell der
+  Seed samt Ableitungsregel plus ein `determinism:`-Block, beim Inferenz-Modell
+  die Version und der Prompt-Kontext.
+- **Das Layout schreibt kein Namensmuster mehr vor.** `evals/golden/welle-NN-baseline/`
+  war für ein Repo, das Slices ohne Wellen führt, nicht erfüllbar. Pflicht ist
+  ein Verzeichnis je Set.
+- **Die Erwartungs-Regel nennt beide Formen** — Schwellen und Invarianten neben
+  `must_include`/`tool_calls`. Vorher stand dort nur die Inferenz-Form.
+- **Drift-Diagnose Rang 2** belegt zusätzlich `determinism:`; ohne das findet
+  die Reihenfolge den Fall nicht, den das Modul an ihr vorführt.
+
+### Geändert
+
+- **Zwei Worked Examples statt eines geflickten.** A baut ein Manifest für die
+  Ranking-Stufe, B dasselbe für ein Inferenz-Modell (ohne `seed:`, mit
+  `prompt_context:`-Hashes). A ist neu geschrieben, nicht umetikettiert: Der
+  Tie-Break trägt von der Engage über `case-002` und das konkrete Rot in
+  Schritt 5 bis zum Lerneintrag in Schritt 7, und die Diagnose-Tabelle wird
+  angewendet statt nur aufgestellt.
+- **Die Drift-Rate rechnet am eigenen Fall** (1 ÷ 3) und benennt die Grenze des
+  Minimal-Sets: Drei Fälle sichern die Abdeckung, taugen aber nicht als Nenner.
+- **„Wetter im Container" ersetzt** durch die Aufzählung, die man abarbeiten
+  kann — Zeit, Locale, Env-Variablen, Netz, sichtbare CPU-Zahl. Die Metapher war
+  nirgends aufgelöst, auch nicht in `begriffe.md`, und stand ausgerechnet in der
+  Glossar-Tabelle.
+- **„pro Welle" als Rotations-Kadenz** durch die Closure ersetzt (Slice oder
+  Welle) — an fünf Stellen in Modul und Lösung. Ein Slice kann ohne Welle
+  bestehen.
+- **Anbieter-Aussagen datiert** (`Stand 2026-08`) statt undatiert stehen zu
+  lassen; sie tragen den Punkt, altern aber ohne Sensor.
+- **`begriffe.md`:** *Drift* und *Determinismus* ergänzt. Das Mini-Glossar
+  verwies für vier Begriffe auf „Volldefinitionen" dort; zwei davon fehlten.
+
+### Lab
+
+- Manifest-Kopf von `welle-1-baseline`: Verweis auf „Modul 11" korrigiert (die
+  Renummerierung von Welle 8 war dort nie angekommen) und der Fall benannt —
+  gemischt, weil das Embedding im Replay mitläuft.
+- README-Anker auf Worked Example A nachgezogen.
+
+### Review
+
+Drei Review-Durchgänge über die eigene Arbeit, je mit Befunden:
+
+- **Runde 1** — Widerspruch im selben Abschnitt (der Springer-Satz nannte noch
+  „Modellversion + Seed"), und der Split paraphrasierte, statt operativ
+  quelltreu zu übernehmen.
+- **Runde 2** — die konkret gewordene Schritt-5-Rechnung widersprach dem
+  Drift-Raten-Beispiel drei Absätze weiter; `SL-031` war doppelt belegt.
+- **Runde 3** — **die Lösungsschicht wurde nur teilweise nachgezogen.** Die
+  Musterlösung zu Übung 1 beantwortete weiter die alte Aufgabe
+  (`summarize_doc`), die zu Übung 2 fuhr das Drehbuch „Modell A → Modell B".
+  Wer die neue Aufgabe löste und abglich, fand ein anderes Szenario.
+
+**Konsequenz für den Steering Loop:** Bei einem *Szenario-Wechsel* reicht es
+nicht, in der Lösung die geänderten Stellen zu suchen — sie ist ganz zu lesen.
+Die Regel „Satelliten mitziehen" hat nicht gefehlt, sie wurde unvollständig
+angewendet.
+
+**Kein Sensor.** `docs-check` prüft Links und Form, `alignment-check` prüft
+Bloom-Marker und Aktivierungs-Verbstämme — keines prüft, ob eine Musterlösung
+dieselbe Aufgabe beantwortet, die die Übung stellt. Ein Bezeichner-Abgleich
+Modul↔Lösung wurde über alle 17 Paare probiert und verworfen: überwiegend
+Fehlalarme, weil eine Musterlösung konkreter werden *soll* als die Aufgabe. Die
+Prüfung bleibt das Lesen beim Wellen-Abschluss.
+
+### Zahlen
+
+`d-check` 187 Dateien · `docs-check` 189 · `alignment-check` 0 WARN — alle drei
+0 Befunde.
+
+**Bruch für Konsumenten:** Ein vendortes Regelwerk, das `model.seed` und
+`model.version` als unbedingte Manifest-Pflichtfelder übernommen hat, erfüllt
+die Regel nicht mehr wörtlich — sie verlangt jetzt je ein Feld pro
+Zufallsquelle. Ebenso entfällt das Namensmuster `evals/golden/welle-NN-baseline/`;
+bestehende Verzeichnisnamen bleiben gültig, sie sind nur nicht mehr vorgeschrieben.
+
 ## Welle 66 — 2026-08-02 · Drei, wo acht stehen
 
 Aus einer Nutzer-Frage an [`lab/regelwerk/README.md`](lab/regelwerk/README.md).
