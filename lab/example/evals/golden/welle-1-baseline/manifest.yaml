@@ -1,5 +1,8 @@
 # Replay-Manifest für welle-1-baseline.
-# Schema entspricht Kurs Modul 11 §"Worked Example: ein Replay-Manifest aufbauen".
+# Layout entspricht Kurs Modul 12, Worked Example A; die Gewichtung der Felder
+# entspricht Worked Example B. Gemischter Fall: Die `inputs/` sind Such-Anfragen,
+# das Embedding-Modell laeuft im Replay mit und steht darum in `model:`. Der
+# `determinism:`-Block darunter traegt die Regeln der nachgelagerten Ranking-Stufe.
 
 set_name: welle-1-baseline
 slice: welle-1-mvp

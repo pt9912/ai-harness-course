@@ -6,34 +6,49 @@ Zugehöriges Modul: [Modul 12 — Replay und Evaluierung](../04-qualitaet/modul-
 
 ### (Erinnern) Welche drei Felder muss ein Replay-Manifest mindestens festhalten?
 
-1. **Modellversion** (konkrete API-Version oder Snapshot, nicht nur Familie).
-2. **Seed** (falls der Provider Seed-Parameter unterstützt).
-3. **Eingaben** als referenzierter Datensatz (Hash + Pfad), nicht inline-Text.
+1. **Eingaben** als referenzierter Datensatz (Hash + Pfad), nicht inline-Text.
+2. **Aufnahme-Zeitpunkt** — damit spätere Läufe ihren Diff datieren können.
+3. **Je ein Feld pro Zufallsquelle des Laufs** — beim Domänen-Modell der
+   Seed samt Ableitungsregel, dazu die Entscheidungsregeln (Tie-Break,
+   Sortierstabilität, Grenzwerte) in einem `determinism:`-Block.
 
-Pflichtfelder #4 und #5 in jedem ernsten Setup, wie im Modul-Abschnitt
+Zwei weitere trennen ernsthaftes von symbolischem Replay, wie im Modul-Abschnitt
 [Begriff: Image-Hash](../04-qualitaet/modul-12-replay-evaluierung.md#begriff-image-hash-vorgriff-aus-modul-14)
 erklärt:
 
 4. **Image-Hash** der Toolchain — sonst lässt sich Modell-Drift nicht
    von Toolchain-Drift trennen.
-5. **Aufnahme-Zeitpunkt** — damit spätere Läufe ihren Diff datieren
-   können.
+5. **Modellversion** — die konkrete Kennung, nicht die Familie.
 
-Wer nur Modell + Seed pinnt, pinnt eine *einzige* von mehreren
-Drift-Quellen (siehe Modul 12 §"Typische Fehlvorstellungen"):
-Modellversion, Sampling-Parameter, Tool-Umgebung und Prompt-Kontext
-driften unabhängig davon weiter — und erscheinen dann als diffuse
+Welches Feld *trägt*, hängt von der Art des Kerns ab: beim
+Domänen-Modell ist der Seed der Hauptanker und die Version nachgeordnet;
+beim Inferenz-Modell ist es umgekehrt — dort entfällt der Seed oft ganz
+(die Anthropic Messages API bietet Stand 2026-08 keinen Seed-Parameter),
+und an seine
+Stelle tritt der Prompt-Kontext.
+
+Wer nur eine Quelle pinnt, pinnt eine *einzige* von mehreren
+Drift-Quellen (siehe Modul 12 §"Typische Fehlvorstellungen"): die
+übrigen driften unabhängig weiter — und erscheinen dann als diffuse
 Drift, die niemand klar zuordnen kann.
 
 ### Was muss ein Replay festhalten, damit er deterministisch ist?
 
-Mindestens diese Inputs eines Agentenlaufs:
+**Fall Domänen-Modell** (der Regelfall) — mindestens:
 
-- **Modell-ID und Version** (`claude-opus-4-7@2026-06-01` reicht nicht — auch der Release-Snapshot oder die API-Version).
+- **Zufallsquelle:** Seed *und* die Regel, wie daraus Sub-Ströme abgeleitet werden. Ein Seed ohne Ableitungsregel ist nur reproduzierbar, solange niemand die Aufrufreihenfolge ändert.
+- **Entscheidungsregeln bei Gleichstand:** Tie-Break, Sortierstabilität, Grenzwerte. Die häufigste stille Drift-Quelle, weil sie kein Versionsfeld haben.
+- **Version der Komponente**, die den Kern implementiert.
+- **Umgebungszustand:** Zeit, Locale (bestimmt die Sortierreihenfolge!), sichtbare CPU-Zahl bei Thread-Pools.
+- **Externe Antworten**, die der Lauf erhielt: Tool-Results, HTTP-Antworten, Dateiinhalte. Diese werden für den Replay *gemockt*, nicht neu abgerufen — sonst ist der Replay kein Replay.
+
+**Fall Inferenz-Modell** (Variante) — an die Stelle des Seeds tritt:
+
+- **Modell-ID und Version** — die konkrete Kennung ohne gleitenden Alias.
 - **Eingabe-Prompt** wörtlich, inklusive System-Prompt und aller injizierten Kontext-Stücke (AGENTS.md, ADRs, Spec).
-- **Tool-Definitionen** wörtlich (Name, Schema, Allowlist-Stand).
-- **Temperature, Top-P, Seed**, falls API das unterstützt.
-- **Externe Antworten**, die der Agent während des Laufs erhielt: Tool-Results, HTTP-Antworten, Dateiinhalte. Diese werden für den Replay *gemockt*, nicht neu abgerufen — sonst ist der Replay kein Replay.
+- **Tool-Definitionen** wörtlich (Name, Schema, Reihenfolge, Allowlist-Stand).
+- **Sampling-Parameter**, *falls* die API sie anbietet — auf den aktuellen Anthropic-Modellen sind `temperature`/`top_p`/`top_k` entfernt, und einen Seed-Parameter gibt es nicht (Stand 2026-08; datierte Beobachtung, keine Konstante). Dann ist der Prompt-Kontext der einzige verbleibende Anker.
+- **Externe Antworten** wie oben, gemockt.
 
 Was *nicht* in den Replay gehört, sondern aufgezeichnet wird:
 
@@ -47,9 +62,11 @@ geändert hat. Häufiger Übeltäter: Filesystem-Stand oder Datums-Funktion.
 
 Merksatz aus der Fehlvorstellung "Determinismus = Reproduzierbarkeit":
 der Seed pinnt nur *eine* von mehreren Drift-Quellen. Tool-Subversions,
-lokale Zeit, Netz-Latenz, Modell-Routing innerhalb derselben Version
-und der Prompt-Kontext driften unabhängig weiter — Determinismus
-entsteht erst, wenn *alle* Quellen gepinnt oder gemockt sind.
+lokale Zeit, Locale und Sortierreihenfolge, sichtbare CPU-Zahl,
+Netz-Latenz — bei Inferenz-Modellen zusätzlich Modell-Routing innerhalb
+derselben Version und der Prompt-Kontext — driften unabhängig weiter.
+Determinismus entsteht erst, wenn *alle* Quellen gepinnt oder gemockt
+sind.
 
 ### (Analysieren — aktiviert LZ 3) Drift quantifizieren — 3 von 20 rot
 
@@ -80,8 +97,8 @@ Drei Symptome:
 Gegenmittel:
 
 - Rotieren: alte Golden-Items, deren Klasse durch andere abgedeckt ist, retiren.
-- Mischformen: semantische Bewertungsmetrik *zusätzlich* zur Exact-Match. Modelle ändern Formulierung, ohne Inhalt zu ändern.
-- Mindestens eine Welle pro Quartal: "Golden-Set-Audit", wer hat zuletzt was eingespeist, was wurde nie getriggert?
+- Mischformen: semantische Bewertungsmetrik *zusätzlich* zur Exact-Match. Inferenz-Modelle ändern Formulierung, ohne Inhalt zu ändern.
+- Mindestens einmal pro Quartal ein "Golden-Set-Audit" als eigener Slice: wer hat zuletzt was eingespeist, was wurde nie getriggert?
 
 ### (Erschaffen — aktiviert LZ 4, Erschaffens-Hälfte) Rotations- und Sampling-Plan für ein überfittetes Golden Set
 
@@ -89,8 +106,9 @@ Ausgangslage laut Frage: seit 14 Wochen 100 % grün im Replay, neue
 Eingabe-Klassen tauchen nur in Produktion auf — das Set ist zum
 Eintrainierten-Set geworden. Ein konkreter Plan:
 
-1. **Rotations-Anteil pro Welle:** 20 % der *ältesten* Fälle pro Welle
-   raus (bei 20 Fällen: 4). Kriterium fürs Retiren: die Fehlerklasse
+1. **Rotations-Anteil pro Closure:** 20 % der *ältesten* Fälle je
+   Closure raus — Slice oder Welle, je nachdem, was dein Repo führt (bei
+   20 Fällen: 4). Kriterium fürs Retiren: die Fehlerklasse
    des Falls ist durch einen anderen Fall abgedeckt *oder* der Fall hat
    seit drei Rotationen nie ein Rot erzeugt (er misst nichts mehr).
 2. **Quellen der neuen Fälle** — zwei, in dieser Priorität:
@@ -183,7 +201,7 @@ Maßstab:
 Szenario: ein Agenten-Tool, das zu einer Markdown-Datei eine
 Drei-Satz-Zusammenfassung mit Quellen-Anker liefert. Beispiel-Set mit
 drei Fällen — Erwartungen *als Verhalten, nicht als Wortlaut*
-(Worked Example Schritt 3):
+(Worked Example A Schritt 3):
 
 **Fall 1 — Happy:** normale Doku-Datei (~3 Seiten, klare Abschnitte).
 
@@ -322,7 +340,7 @@ Im Lab ist das eine deklarierte Grenze; in deinem Repo wäre es ein Befund.
 ## Häufige Fehler
 
 - **Replay-Tests laufen mit echtem Netz**. → Kein Replay, sondern Live-Test mit alten Erwartungen. Wird flaky.
-- **Exact-Match als einziges Erfolgskriterium.** → Modelle sind variabel; minimaler Format-Drift erzeugt False-Positive-Failures. Mindestens *eine* semantische Metrik dazu.
+- **Exact-Match als einziges Erfolgskriterium — dort, wo die Ausgabe variabel ist.** → Erzeugt ein Inferenz-Modell Fließtext, produziert schon minimaler Format-Drift False-Positive-Failures; dort gehört mindestens *eine* semantische Metrik dazu. Bei einem deterministischen Domänen-Modell ist Exact-Match dagegen genau richtig — die Falle ist dort die umgekehrte: eine zu weiche Metrik, die echte Abweichungen durchwinkt.
 - **Golden Set wird in einem CSV gepflegt**, das niemand reviewt. → Wenn Golden-Set-Änderungen nicht durch denselben Slice-Lifecycle laufen wie Code, driften sie.
 
 ## Verweise

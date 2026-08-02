@@ -10,7 +10,7 @@ Replay-Eingaben mit Erwartungen für [Modul 12](../../../../kurs/de/04-qualitaet
 
 **Verzeichnisform.** Bis Kurs-Welle 9 lag jedes Set als einzelne JSON-Datei.
 Seit dem Lab-Ausbau (Kurs-Welle 9) folgen die Sets dem Schema aus
-[Kurs Modul 12 §Worked Example](../../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md#worked-example-ein-replay-manifest-aufbauen):
+[Kurs Modul 12 §Worked Example A](../../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md#worked-example-a-ein-replay-manifest-für-ein-domänen-modell):
 `manifest.yaml` (Top-Level-Konfiguration, Modell, Runtime, Determinismus-
 Anker) + `inputs/` (eine JSON-Datei pro Case) + `expectations/`
 (parallel benannt) + `CHANGELOG.md`. Vorteil: Modell-/Tool-Call-

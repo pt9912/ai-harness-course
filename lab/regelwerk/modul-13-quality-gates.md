@@ -120,6 +120,10 @@ Pointe: Domänenspezifische Gates (`test-determinism`, `test-replay`,
 Standard-Setup. Wenn dein Repo nur die generischen sechs hat, weißt du
 nur, dass du noch keine Schmerzen hattest.
 
+`test-replay` ist dabei das **Gate**, nicht die Praxis: Das Replay-Set
+selbst baut [Modul 12](modul-12-replay-evaluierung.md), dieses Target
+setzt es durch. Gleiches Wort, zwei Ebenen.
+
 In einer anderen Sprach-Welt wächst eine andere Landschaft: Ein Repo aus
 C#/.NET mit Safety-/Control-Anteil bringt Gate-Familien mit, die im
 Python-Beispiel oben gar nicht vorkommen — `solid-suppression-gate`

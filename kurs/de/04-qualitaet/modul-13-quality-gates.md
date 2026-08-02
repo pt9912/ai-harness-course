@@ -183,6 +183,10 @@ Pointe: Domänenspezifische Gates (`test-determinism`, `test-replay`,
 Standard-Setup. Wenn dein Repo nur die generischen sechs hat, weißt du
 nur, dass du noch keine Schmerzen hattest.
 
+`test-replay` ist dabei das **Gate**, nicht die Praxis: Das Replay-Set
+selbst baut [Modul 12](modul-12-replay-evaluierung.md), dieses Target
+setzt es durch. Gleiches Wort, zwei Ebenen.
+
 Ein zweites Beispiel in einer anderen Sprach-Welt: `pt9912/bess-ems`
 (C#/.NET, Safety/Control) bringt Gate-Familien mit, die `grid-gym`
 nicht hat — `solid-suppression-gate` (C#-Pendant zum noqa-gate),

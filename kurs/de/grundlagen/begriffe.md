@@ -17,8 +17,10 @@
 | Gate | Automatisch prüfbares Qualitätskriterium (Linter, Typecheck, Architekturtest, Coverage). |
 | Carveout | Dokumentierte Ausnahme von einem Gate oder einer Architekturregel. |
 | Skill | Repo-spezifisches Markdown/JSON-Artefakt, das einer Agenten-Rolle Checkliste oder Verhalten beibringt. Lebt typischerweise in `.harness/`. |
-| Replay | Deterministisch wiederholbarer Agentenlauf gegen fixierte Inputs. |
+| Replay | Deterministisch wiederholbarer Lauf gegen fixierte Inputs. |
 | Golden Set | Kuratiertes Eingabe/Erwartungs-Paar für Regressionstests. |
+| Drift | Abweichung des Verhaltens zwischen zwei Läufen, deren Manifeste eigentlich übereinstimmen sollten. |
+| Determinismus | Gleiche Eingabe → gleiche Ausgabe. Setzt voraus, dass *jede* Zufalls- und Umgebungsquelle des Laufs gepinnt ist: Seed samt Ableitungsregel, Modellversion, Toolchain, Umgebungszustand des Containers. |
 | Finding | Einzelne Beobachtung eines Reviewers, kategorisiert HIGH/MEDIUM/LOW/INFO. |
 | DoD | Definition of Done. Liste der Bedingungen, die ein Slice erfüllen muss. |
 | Guide | Feedforward-Kontrolle: lenkt den Agenten *vor* der Handlung (Spec, ADR, AGENTS.md, Skill, Tool-Constraint). |
