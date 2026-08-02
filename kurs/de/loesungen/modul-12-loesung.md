@@ -83,7 +83,7 @@ Was die Zahl sichtbar macht, das "drei rot" allein verbirgt:
   paar rot" ist keine Schwelle, an der ein Sensor auslösen kann.
 
 Wichtig: Die Rate ersetzt nicht die Diagnose-Reihenfolge aus Schritt 6
-(Toolchain → Modell-Routing → Erwartung → echte Regression) — sie sagt,
+(Toolchain → Modell-Drift → Erwartung → echte Regression) — sie sagt,
 *wie viel* driftet, die Reihenfolge sagt, *was* driftet.
 
 ### (Bewerten — aktiviert LZ 4, Bewerten-Hälfte) Wann wird ein Golden Set giftig (überfittet)?
@@ -183,7 +183,7 @@ war schwer". Zwei erfahrungsgemäß häufige Kandidaten:
 Anti-Antwort: "Keiner war unsicher, hat alles geklappt." Wenn beim
 ersten Manifest-Aufbau kein Schritt Unsicherheit erzeugt hat, wurden
 die Erwartungen vermutlich nie bewusst gebrochen (Schritt 4: erst
-Manifest schärfen, nicht Modell tauschen) — die Unsicherheit kommt
+Manifest schärfen, nicht die Implementierung anfassen) — die Unsicherheit kommt
 dann später, in Produktion.
 
 ## Übungshinweise
@@ -193,80 +193,79 @@ dann später, in Produktion.
 Maßstab:
 
 - Pro Run wird ein Run-Manifest erzeugt: Modell, Seed, alle Input-Hashes, alle gemockten Antworten, Output-Hashes.
-- Zwei aufeinanderfolgende Runs derselben Eingabe erzeugen identische Manifest-Hashes (im Output) — *oder* ein semantischer Vergleicher meldet "Outputs sind äquivalent" (mit Begründung).
+- Zwei aufeinanderfolgende Runs derselben Eingabe erzeugen identische Manifest-Hashes (im Output). Nur wo Fließtext im Spiel ist, tritt an die Stelle des Hash-Vergleichs ein semantischer Vergleicher, der "Outputs sind äquivalent" mit Begründung meldet.
 - Replay-Lauf hat keinen Netzzugriff — alles aus Mock-Files.
 
-### (Erschaffen + Bewerten — aktiviert LZ 2) Mini-Golden-Set für `summarize_doc` entwerfen
+### (Erschaffen + Bewerten — aktiviert LZ 2) Mini-Golden-Set für die Ranking-Stufe entwerfen
 
-Szenario: ein Agenten-Tool, das zu einer Markdown-Datei eine
-Drei-Satz-Zusammenfassung mit Quellen-Anker liefert. Beispiel-Set mit
-drei Fällen — Erwartungen *als Verhalten, nicht als Wortlaut*
+Szenario: Zu einer Anfrage liefert die Suche die besten Treffer; bei
+Punktgleichstand entscheidet die Tie-Break-Regel. Beispiel-Set mit drei
+Fällen — Erwartungen *als Verhalten, nicht als Wortlaut*
 (Worked Example A Schritt 3):
 
-**Fall 1 — Happy:** normale Doku-Datei (~3 Seiten, klare Abschnitte).
+**Fall 1 — Happy:** Anfrage mit einem eindeutig besten Treffer.
 
-```yaml
-# expectations/case-001.json
+```json
 {
-  "must_include_count": {"satzendezeichen": 3},
-  "must_include": ["#"],            # mindestens ein Quellen-Anker
-  "must_not_include": ["error", "traceback"],
-  "tool_calls": {"read_file": {"min": 1, "max": 1}}
+  "top_doc_path": "docs/handbuch/kapitel-03.md",
+  "top_score_min": 0.72,
+  "result_count_min": 1
 }
 ```
 
-*Auswahlkriterium:* fängt die Grundfunktions-Regression — liefert das
-Tool überhaupt drei Sätze plus Anker für den Normalfall, ohne die
-Datei mehrfach zu lesen?
+*Auswahlkriterium:* fängt die Grundfunktions-Regression — findet die
+Stufe den offensichtlichen Treffer überhaupt noch, und hält sein Score
+die Untergrenze?
 
-**Fall 2 — Boundary:** Datei mit *genau einem* Satz Inhalt (weniger
-Stoff, als die Zusammenfassung verlangt).
+**Fall 2 — Boundary:** Anfrage, bei der zwei Dokumente denselben Score
+erreichen.
 
-```yaml
-# expectations/case-002.json
+```json
 {
-  "must_include": ["#"],
-  "must_not_include": ["Lorem", "erfunden"],   # kein aufgefüllter Inhalt
-  "max_sentences": 3,
-  "source_anchors_subset_of_input": true
+  "top_doc_path": "docs/handbuch/kapitel-03.md",
+  "tied_with": ["docs/anhang/kapitel-03.md"],
+  "tie_break_stable": true
 }
 ```
 
-*Auswahlkriterium:* fängt die Auffüll-Halluzination — bei zu wenig
-Stoff darf das Tool kürzen, aber nicht erfinden; jeder Anker muss auf
-eine existierende Stelle zeigen. Fall 1 fängt das nicht, weil dort
-genug Stoff da ist.
+*Auswahlkriterium:* fängt den Tie-Break — die Fehlerklasse aus der
+Engage-Situation und die einzige, die kein anderer Fall sieht. Fall 1
+kann sie nicht fangen, weil dort gar kein Gleichstand entsteht. Dass
+hier die *Reihenfolge* zugesichert wird, ist kein Rückfall in den
+Wortlaut: Bei Gleichstand **ist** die Reihenfolge die Zusage.
 
-**Fall 3 — Negative:** Eingabe ist keine Markdown-Datei (Binärdatei
-oder nicht existierender Pfad).
+**Fall 3 — Negative:** Anfrage, zu der nichts über der Score-Schwelle
+liegt.
 
-```yaml
-# expectations/case-003.json
+```json
 {
-  "must_include": ["nicht lesbar"],            # erwartete Ablehnung
-  "must_not_include": ["Zusammenfassung:"],
-  "tool_calls": {"read_file": {"min": 1, "max": 2}}
+  "result_count": 0,
+  "max_score_below": 0.30,
+  "fallback_used": false
 }
 ```
 
-*Auswahlkriterium:* fängt das Fail-open-Verhalten — das Tool muss den
-Fehlerfall *benennen* statt eine Zusammenfassung von Nichts zu
-liefern oder endlos zu retryen. Die beiden anderen Fälle erreichen
-diesen Pfad nie.
+*Auswahlkriterium:* fängt das Fail-open-Verhalten — die Stufe muss die
+leere Menge zurückgeben, statt die Schwelle still zu senken oder auf
+einen Fallback auszuweichen. Die beiden anderen Fälle erreichen diesen
+Pfad nie.
 
-Begründung der Konstruktion: Jeder Fall fängt eine eigene
-Fehlerklasse (Grundfunktion · Halluzination bei dünnem Input ·
-Fehlerpfad), und keine Erwartung hängt am Wortlaut — `must_include` /
-`must_not_include` / `tool_calls`-Grenzen überleben einen
-Modellwechsel, Exact-Match auf Fließtext nicht. Struktur-Vergleich:
-das Lab-Set `lab/example/evals/golden/welle-1-baseline/` (drei Cases
-Happy/Boundary/Negative je LH-FA-02) nutzt dasselbe Schema für ein
-Retrieval-Replay.
+Begründung der Konstruktion: Jeder Fall fängt eine eigene Fehlerklasse
+(Grundfunktion · Gleichstand · Fail-open), und keine Erwartung hängt an
+einer kopierten Trefferliste — Schwellen und Invarianten überleben eine
+Score-Verschiebung in der vierten Nachkommastelle, ein wörtlich
+übernommenes Ergebnis-Array nicht. Exact-Match auf den *Feldern* ist
+hier dagegen richtig: Die Stufe ist deterministisch, die Falle ist die
+umgekehrte — eine zu weiche Erwartung, die eine echte Abweichung
+durchwinkt. Struktur-Vergleich: das Lab-Set
+`lab/example/evals/golden/welle-1-baseline/` (drei Cases
+Happy/Boundary/Negative je LH-FA-02) nutzt dasselbe Schema für einen
+gemischten Fall, in dem zusätzlich ein Embedding-Modell mitläuft.
 
-Anti-Antwort: drei Happy-Path-Varianten (kurze Datei, lange Datei,
-englische Datei) — das ist ein Demo-Set, kein Golden Set: alle drei
-fangen dieselbe Fehlerklasse, und Halluzinations- wie Fehlerpfad
-bleiben unbeobachtet.
+Anti-Antwort: drei Anfragen mit jeweils eindeutigem Treffer (kurze
+Anfrage, lange Anfrage, englische Anfrage) — das ist ein Demo-Set, kein
+Golden Set: alle drei fangen dieselbe Fehlerklasse, Gleichstand und
+Fehlerpfad bleiben unbeobachtet.
 
 ### (Analysieren — aktiviert LZ 3) Drift quantifizieren
 
@@ -277,23 +276,26 @@ Selbstcheck-Vorgabe (3 von 20 rot) rechnen.
 
 Vorgehen:
 
-1. Replay-Lauf mit Modell A → grün (Baseline).
-2. Wechsel auf Modell B → was wird rot?
+1. Baseline-Lauf gegen den eingefrorenen Stand → grün.
+2. *Eine* Quelle ändern — Tie-Break-Regel, Seed-Ableitung oder
+   Modellversion — und erneut laufen: was wird rot?
 3. **Quantifizieren:** Drift-Rate = rote ÷ gesamte Fälle als Zahl
    festhalten (z. B. 3/20 = 15 %), nicht "ein paar rot" — nur die Zahl
    ist zwischen Läufen vergleichbar und kann eine
    Steering-Loop-Schwelle treiben.
 4. **Der Diagnose-Reihenfolge aus Schritt 6 zuordnen** — in dieser
    Reihenfolge, nicht nach Bauchgefühl: Toolchain (Image-Hash
-   identisch?) → Modell-Routing (`model.version` + Provider-Status) →
-   Erwartungs-Drift (Erwartung zu eng formuliert?) → echte Regression
-   (alles oben ausgeschlossen).
+   identisch?) → Modell-Drift (`model.version` · `model.seed` ·
+   `determinism:` verglichen; bei Inferenz-Modellen zusätzlich der
+   Provider-Status) → Erwartungs-Drift (Erwartung zu eng formuliert?) →
+   echte Regression (alles oben ausgeschlossen).
 5. Klassifiziere die verbleibenden echten roten Fälle: Format-Drift
-   (Reihenfolge, Tokens), semantische Verschiebung, neue Fehler —
+   (Reihenfolge, Rundung), inhaltliche Verschiebung, neue Fehler —
    welche Klasse ist akzeptabel, welche ist Show-Stopper?
 
-Diese Übung ist gleichzeitig eine Modell-Migrations-Probe. In
-Produktion bedeutet ein Modell-Update genau diesen Lauf — vorher.
+Diese Übung ist gleichzeitig die Probe für jede Änderung am Kern: In
+Produktion bedeutet ein Austausch der Tie-Break-Regel, der Zufallsquelle
+oder der Modellversion genau diesen Lauf — vorher.
 Häufiger Fehler: bei der ersten Rötung direkt "echte Regression"
 rufen und einen Carveout an der falschen Stelle einbauen — die
 Diagnose-Reihenfolge existiert genau dagegen.
