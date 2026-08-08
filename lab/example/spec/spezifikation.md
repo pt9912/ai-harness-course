@@ -56,18 +56,22 @@ Approximate-NN (ANN) ist in Welle 3 geplant — aktuell linear.
 
 **Schritte:**
 
-1. Serialisieren nach `<INDEX_STORAGE>.new.<PID>.<UUID>` — dasselbe
+1. Einträge sortieren nach `(doc_path, section_index)` — die Schreib-Reihenfolge
+   ist festgelegt, nicht die Reihenfolge, in der der Verzeichnis-Scan sie
+   geliefert hat.
+2. Serialisieren nach `<INDEX_STORAGE>.new.<PID>.<UUID>` — dasselbe
    Verzeichnis wie das Ziel, sonst ist der Rename kein
    dateisystem-interner Vorgang mehr.
-2. `fsync` auf die Temp-Datei.
-3. `rename` von Temp-Pfad auf `INDEX_STORAGE`.
-4. `fsync` auf das Verzeichnis — ohne diesen Schritt kann der
+3. `fsync` auf die Temp-Datei.
+4. `rename` von Temp-Pfad auf `INDEX_STORAGE`.
+5. `fsync` auf das Verzeichnis — ohne diesen Schritt kann der
    Verzeichnis-Eintrag nach einem Crash verloren gehen.
 
 **Beobachtbarkeit:** Ein Leser sieht entweder den alten oder den neuen Index,
 nie einen gemischten Zustand. **Idempotenz:** Zwei Läufe mit gleicher Eingabe
-erzeugen bit-identische Dateien; das folgt aus dem deterministischen
-Serialisierungs-Format und dem Tie-Break aus `LH-FA-02.a` Schritt 5.
+erzeugen bit-identische Dateien; das folgt aus Schritt 1 zusammen mit dem
+deterministischen Serialisierungs-Format (`SPEC-019`). Ohne Schritt 1 hinge das
+Ergebnis an der Reihenfolge, in der das Dateisystem den Scan beantwortet.
 
 **Aufräumen:** Beim Service-Start werden Reste `<INDEX_STORAGE>.new*` gelöscht
 — mit und ohne PID/UUID-Suffix.

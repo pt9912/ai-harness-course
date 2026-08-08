@@ -46,7 +46,7 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 
 <!--
 Externe Versprechen oder interne Trigger-Punkte.
-"M2: erstes lauffähiges Lab" ist ein Meilenstein.
+"M2: erste lauffähige Fassung" ist ein Meilenstein.
 -->
 
 | Meilenstein | Welle(n) | Trigger | Status |

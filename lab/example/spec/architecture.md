@@ -11,7 +11,7 @@ oder Closure-Daten. Die zeitliche Schicht lebt in
 ## 1. Komponenten-Übersicht
 
 Hier werden die `ARC-*` für Komponenten vergeben — eine Adresse je Komponente,
-damit Slice und Carveout auf sie zeigen können, keine Anforderung.
+damit ein Slice auf sie zeigen kann, keine Anforderung.
 
 ```mermaid
 flowchart TB

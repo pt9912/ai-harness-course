@@ -5,7 +5,8 @@
 Keine relevante Änderung ohne Bezug zu mindestens einem der folgenden Punkte:
 
 * Requirement-ID
-* Architektur-ID oder Architekturprinzip
+* Architekturprinzip (die `ARC-*` der Sicht zählt nicht — Struktur-IDs
+  adressieren innerhalb der Spec, siehe [§ID-Schema](source-precedence.md#id-schema-als-klammer))
 * ADR-ID
 * Test, Gate oder Demo-Artefakt
 * Dokumentations-Update, falls ein öffentlicher Vertrag betroffen ist

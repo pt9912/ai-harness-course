@@ -206,6 +206,15 @@ höchstens zwei Schichten.
 `SL-014-ui` — diese sind voneinander abhängig und einzeln nutzlos. Sie
 landen mit hoher Wahrscheinlichkeit als Zombie in `in-progress/`.
 
+**Der Kopf nennt die berührten Spec-Stellen.** Die Matrix weist dem Slice eine
+normative Kante nach Technik und Sicht zu
+([§Referenz-Richtung (SDP)](../grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren));
+damit sie auffindbar ist, statt im Fließtext zu verschwinden, trägt der Kopf
+ein Feld dafür — die Kennung, wo das Zielelement eine trägt, sonst der
+`§`-Anker, und `—`, wenn der Slice keine Spec-Stelle berührt. Das ist die
+Gegenprobe zum Schnitt: Ein Slice, der drei Spec-Stellen aus zwei Straten
+nennt, ist meist zu groß geschnitten.
+
 ## Worked Mini-Example: Bootstrap-Modus pro Sub-Area für einen Slice begründen
 
 > **Wenn du Bootstrap-Modi schon routinemäßig pro Sub-Area gegen Kriterien wählst, springe zu [§Übungen](#übungen).** (Expertise-Reversal-Schutz analog zum Slice-Schnitt-Beispiel oben — wer das Modus-Konzept aus [Modul 2](../01-spec-und-architektur/modul-02-harness-bootstrap.md) bereits in der Slice-Planung einsetzt, zahlt sonst extraneous Load fürs Nochmal-Durchgehen.)

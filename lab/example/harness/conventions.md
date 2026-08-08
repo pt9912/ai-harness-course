@@ -49,9 +49,13 @@ die Verzeichnis-Position, kein Status-Feld
   dicht gezählt (`LH-FA-01..03`, `LH-QA-01..04`); **ab v0.4.0 tragen neue
   funktionale Anforderungen ein Bereichskürzel** (`LH-FA-<BEREICH>-<NNN>`,
   erstes Exemplar `LH-FA-IDX-003`). Bestehende IDs werden *nicht* migriert —
-  Doku-Drift teurer als Schema-Mischung. `SPEC-*` und `ARC-*` zählen
-  fortlaufend je Datei, ohne Bereichssegment: Beide leben in *einer* Datei,
-  eine Doppelvergabe erzeugt dort einen Git-Konflikt.
+  Doku-Drift teurer als Schema-Mischung (Baseline-Regelwerk
+  `grundlagen-source-precedence.md` §Vergabe, „Mischung ist billiger als
+  Migration"). Das Segment dient hier der *Auffindbarkeit* je Bereich; als
+  Kollisionsschutz bräuchte `LH-*` keines, weil alle Anforderungen in einer
+  Datei liegen und dort laut kollidieren. `SPEC-*` und `ARC-*` zählen
+  fortlaufend je Datei, ohne Bereichssegment — die Baseline-Form für
+  Struktur-IDs.
 - **Begründung:** Initial-Setzung. Dieses Beispiel-Repo ist
   Lehr-Vehikel und folgt der Kurs-Konvention sturer als ein realer
   Bedarfsfall, damit die Konvention als solche sichtbar bleibt.
@@ -95,7 +99,7 @@ Schwelle ≥ 2 von 3: 1 Konventions-Härte · 2 Inventur-Linie · 3 Strukturelle
 | Sub-Area | Pfad-Cluster | Erfüllte Inklusions-Achsen | Modus |
 |---|---|---|---|
 | Spec-Schreibung | `spec/` | 1 (eigene Spec-Stil-`MR` plausibel formulierbar, z. B. AK-Format-Standard) · 2 (Spec↔Code abgleichbar) · 3 (`spec/`) → **3/3** | Greenfield |
-| Konventionen & Harness-Doku | `harness/`, `<lang>/harness/`, `AGENTS.md` + `<lang>/AGENTS.md`, `README.md` + `<lang>/README.md`, `docs/glossar.md` | 1 (Heimat der `MR-NNN`, hier `MR-000` bis `MR-002`) · 2 (Doku-Konsistenz-Linie) · 3 (`harness/`-Cluster plus die Agenten-/Einstiegs-Dateien, die dieselbe Konvention tragen) → **3/3** | Greenfield |
+| Konventionen & Harness-Doku | `harness/`, `<lang>/harness/`, `AGENTS.md` + `<lang>/AGENTS.md`, `README.md` + `<lang>/README.md`, `docs/glossar.md` | 1 (Heimat der `MR-NNN`, hier `MR-000` bis `MR-003`) · 2 (Doku-Konsistenz-Linie) · 3 (`harness/`-Cluster plus die Agenten-/Einstiegs-Dateien, die dieselbe Konvention tragen) → **3/3** | Greenfield |
 | Planning-Lifecycle | `docs/plan/` | 1 (Slice-/ADR-/Carveout-Konvention) · 2 (`open`→`done`-Inventur) · 3 (`docs/plan/`) → **3/3** | Greenfield |
 | Implementierung | `<lang>/src/`, `<lang>/cmd/`, `<lang>/internal/`, `<lang>/.editorconfig` | 1 (eigene Implementierungs-Stil-`MR` plausibel formulierbar) · 2 (Code-Inventur) · 3 (`src/`-Cluster) → **3/3** | Greenfield |
 | Test-Infrastruktur | `<lang>/tests/` | 1 (Test-/Determinismus-Konvention, z. B. `make test-determinism`) · 2 (Test-ohne-`LH`-ID als Diskrepanz) · 3 (`tests/`) → **3/3** | Greenfield |

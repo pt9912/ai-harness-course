@@ -127,6 +127,12 @@ Größen- und Schnitt-Regeln:
 - Jeder Schnitt-Slice ist **einzeln lieferbar** (kein Slice wartet auf
   den nächsten), hat **≤ 3 Liefer-Punkte** und berührt **höchstens zwei
   Schichten**.
+- **Der Kopf nennt die berührten Spec-Stellen.** Die Matrix weist dem Slice
+  eine normative Kante nach Technik und Sicht zu
+  ([`grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren));
+  damit sie auffindbar ist statt im Fließtext zu verschwinden, trägt der Kopf
+  ein Feld dafür — Kennung, wo das Zielelement eine trägt, sonst der
+  `§`-Anker, und `—`, wenn der Slice keine Spec-Stelle berührt.
 
 ### Ziel-Form: Sub-Area-Modus-Begründung
 

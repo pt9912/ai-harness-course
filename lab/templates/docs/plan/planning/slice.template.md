@@ -16,7 +16,14 @@ keine Closure-Bedingung gibt, die von der DoD dieses Slice verschieden
 ist, siehe Baseline-Regelwerk `modul-06-roadmap.md`
 §Wann Arbeit eine Welle braucht (Modul 6).
 
-**Bezug:** `<LH-FA-NN>`, `<LH-QA-NN>`, ADR-<NNNN>.
+**Bezug:** `<LH-FA-NN>`, `<LH-QA-NN>` (Scope), ADR-<NNNN> (nur *aktive* ADRs).
+
+**Berührte Spec-Stellen:** `<SPEC-NNN>` · `<ARC-NNN>` — die Kennung nennen, wo
+das Zielelement eine trägt, sonst den Abschnitt (`spezifikation.md §N`,
+`architecture.md §N`). `—`, wenn der Slice keine Spec-Stelle berührt.
+Der Verweis zeigt **aufwärts**: Die Spec nennt diesen Slice nie
+(Baseline-Regelwerk `grundlagen-referenz-richtung.md`
+§Referenz-Richtung (SDP), `grundlagen-source-precedence.md` §ID-Schema als Klammer).
 
 **Autor:** <Name>. **Datum:** YYYY-MM-DD.
 

@@ -9,6 +9,8 @@ nur durch `git mv` (Kurs
 
 **Bezug:** LH-QA-02 (Reproduzierbarkeit), LH-FA-02 (Suche)
 
+**Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
+
 **Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 
 ## 1. Ziel

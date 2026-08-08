@@ -35,7 +35,7 @@ damit wird die Regel lehr- und prüfbar.
 | **Sicht** | Normativ: Use-Case ↔ Vertrags-ID | Normativ: visualisiert | intra (Peers) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **ADR** | Normativ: `LH-*`-Grundlage | Normativ: **`Schärft:`** | Normativ: **`Schärft:`** | Normativ/Lineage: aktive ADRs als Grundlage; superseded nur ADR-interne Historie | Kontext: **wo** verifiziert/entstanden, nie **warum** entschieden — der zulässige Zeiger wird in seiner Zeile markiert | ❌ | ❌ | ❌ |
 | **Slice** | Normativ: `LH-*`-Scope | Normativ: betroffene Technik-ID, ersatzweise Spec-§ | Normativ: betroffene Sicht-ID, ersatzweise Spec-§ | Normativ: nur aktive ADRs | Kontext: triggered-by, blocked-by, follow-up-of | Kontext: eigener/offener Carveout, Debt-/Closure-Rückverweis | Kontext: `Welle:`-Feld, auch „ohne Welle“ | ❌ |
-| **Carveout** | Normativ: betroffene `LH-*` | Normativ: betroffene Technik-ID, ersatzweise Spec-§ | Normativ: betroffene Sicht-ID, ersatzweise Spec-§ | Normativ: betroffene aktive ADRs | Kontext/Traceability: owner/verursachender/schließender Slice | Kontext: ersetzt/zusammengeführt/abhängig | Kontext: Planungseinordnung | Kontext: Meilenstein als Auflösungs-Trigger |
+| **Carveout** | Normativ: betroffene `LH-*` | Normativ: betroffene Spec-§ | Normativ: betroffene Spec-§ | Normativ: betroffene aktive ADRs | Kontext/Traceability: owner/verursachender/schließender Slice | Kontext: ersetzt/zusammengeführt/abhängig | Kontext: Planungseinordnung | Kontext: Meilenstein als Auflösungs-Trigger |
 | **Welle** | Kontext: `LH-*`-Bezug der Slice-Liste | Kontext: technischer Rahmen | Kontext: Architekturbild | Kontext: Trigger (`ADR-<NNNN>` accepted) | Kontext: Bündelung — die Slice-Liste | Kontext: Risiko-/Debt-Übersicht | Kontext: Vorgänger-Welle als Trigger | Kontext: Zielmeilenstein `M<NN>` |
 | **Roadmap** | Kontext: Zielbild/Scope | Kontext: technischer Rahmen | Kontext: Architekturbild | Kontext: Architekturhintergrund | Kontext: Orchestrierung/Sequenz | Kontext: Risiko-/Debt-Übersicht | Kontext: Hierarchie — aktuelle und nächste Wellen | intra: Meilenstein ↔ Welle |
 
@@ -47,6 +47,13 @@ gilt für alle drei Straten, nicht nur für den Vertrag.
 **Sicht-ID** meint `ARC-*`; welche Kennung wo entsteht, steht in
 [`grundlagen-source-precedence.md` §ID-Schema](grundlagen-source-precedence.md#id-schema-als-klammer).
 Trägt das Zielelement keine, bleibt der `§`-Anker zulässig.
+
+**Warum die Carveout-Zeile beim Abschnitt bleibt.** Was ein Carveout
+ausklammert, ist ein *Stück Geltung* — ein Gate, das für einen Pfad-Cluster
+ausgesetzt ist —, und das sitzt selten auf genau einer Kennung. Sein Kopf führt
+dafür auch kein Feld: Die sechs Pflichtfelder
+([`modul-07-carveouts.md`](modul-07-carveouts.md)) benennen Gate und
+Geltungsbereich, nicht eine Spec-Stelle.
 
 **Welle und Roadmap sind zwei Zeilen, nicht eine.** Die Welle trägt das
 *Bündel* (Ziel, Trigger, Slice-Liste), die Roadmap die *Reihenfolge* (aktuelle
@@ -73,8 +80,8 @@ flowchart BT
     S -->|"betroffene Sicht-ID / §"| V
     S -->|"nur aktive ADRs"| A
     C["Carveout"] -->|"betroffene LH-*"| L
-    C -->|"betroffene Technik-ID / §"| T
-    C -->|"betroffene Sicht-ID / §"| V
+    C -->|"betroffene Spec-§"| T
+    C -->|"betroffene architecture.md §"| V
     C -->|"betroffene aktive ADRs"| A
     style L fill:#fff4d6,stroke:#d4a017
     style T fill:#fff4d6,stroke:#d4a017
@@ -228,8 +235,9 @@ direkt zur Quelle. Der
 Wird eine Ziel-Überschrift umbenannt, rottet der Aufwärts-Link *still* — die
 gleiche Rot-Klasse, die wir abwärts verboten haben, nur unbewacht. Die
 mechanisch erzwungene Reifestufe löst Links auf, prüft Anker-Existenz und
-erzwingt die volle Matrix am Zielknoten. Das Lab bleibt bewusst bei der
-grep-Variante, um die mechanische Hälfte minimal und lesbar zu halten.
+erzwingt die volle Matrix am Zielknoten. Die Baseline liefert bewusst nur die
+grep-Variante aus — sie hält die mechanische Hälfte minimal und lesbar; die
+anker-validierende Stufe ist eine Reifestufe darüber, kein Startwert.
 
 *Mechanisierbar — über den umgekehrten Default.* Ob eine ADR→Slice-Referenz
 ein erlaubter *Verifikations-Zeiger/Provenance* oder eine verbotene
@@ -262,7 +270,7 @@ auf **Stratum-Klassen** (Rolle), nicht auf Dateinamen. Jedes Spec-Dokument
 fällt über zwei Achsen — *normativer Gehalt* und *Änderungs-Prozess* — in
 genau ein Stratum:
 
-| Stratum             | Normativer Gehalt                        | Änderungs-Prozess                     | Lab                | typisch auch                   |
+| Stratum             | Normativer Gehalt                        | Änderungs-Prozess                     | Default-Datei      | typisch auch                   |
 | ------------------- | ---------------------------------------- | ------------------------------------- | ------------------ | ------------------------------ |
 | **Vertrag** (Decke) | eigene Anforderungen, abnahmebindend     | Change Request                        | `lastenheft.md`    | `compliance.md`, `sla.md`      |
 | **Technik**         | eigene technische Festlegungen           | fortschreibbar, ADR-Schärfung erlaubt | `spezifikation.md` | `api-spec.md`, `data-model.md` |

@@ -196,12 +196,9 @@ die Zugehörigkeit selbst:
 | `SPEC-<NNN>` | Technik (`spec/spezifikation.md`) | **Struktur-ID** für eine technische Festlegung ohne eigene Anforderung |
 | `ARC-<NNN>` | Sicht (`spec/architecture.md`) | **Struktur-ID** für Komponente oder Schnittstelle |
 
-Die Zählteile stehen hier ohne Bereichssegment. Beide Formen sind wohlgeformt —
-`LH-FA-03` und `LH-FA-IDX-003` —, und *für welche* Kennungen ein Segment nötig
-wird, leitet [§Vergabe](#vergabe-woher-die-nächste-nummer-kommt) unten aus der
-**Ablage** her, nicht aus der Nummer: Was in einer Datei lebt, kollidiert laut;
-was je eine eigene Datei bekommt, still. Die getroffene Wahl gehört in die
-ID-Schema-Deklaration.
+Die Zählteile stehen hier ohne Bereichssegment; `LH-FA-03` und `LH-FA-IDX-003`
+sind beide wohlgeformt. Welche Kennung eines braucht, entscheidet
+[§Vergabe](#vergabe-woher-die-nächste-nummer-kommt) unten.
 
 `SPEC-*` und `ARC-*` sind **keine** Anforderungs-IDs. Sie machen adressierbar,
 was in ihrem Stratum ohnehin steht — ein Datenschema, ein Default, ein
@@ -223,11 +220,19 @@ zwei verschiedene Fragen: `<PREFIX>-FA-03.a` sagt *"so erfüllen wir FA-03"*,
 Abschnitt, der eine einzelne Anforderung verfeinert, trägt die Verfeinerung;
 alles Übrige trägt `SPEC-*`.
 
-**Referenziert wird die ID, ersatzweise der Abschnitt.** Wer aus ADR, Slice
-oder Carveout auf Technik oder Sicht zeigt, nennt die Kennung, wenn das
-Zielelement eine trägt, und sonst den `§`-Anker. Der Abschnitts-Anker bleibt
-zulässig — nicht jeder Absatz braucht eine Kennung, und eine erzwungene ID
-über Fließtext benennt nichts, sie nummeriert nur.
+**Die Klammer trägt die Anforderungs-ID, nicht jede Kennung.** Was aus dem Repo
+*heraus* zeigt — Commit-Message, PR-Beschreibung, Make-Target-Kommentar —,
+nennt die Anforderung und die ADR-Nummer: Beide beantworten die Frage, welche
+Zusage oder Entscheidung berührt ist. Eine Struktur-ID beantwortet sie nicht;
+`SPEC-014` in einer Commit-Message sagt einem Reviewer nichts, was er nicht
+ohnehin im Diff sieht.
+
+**Nach innen wird die ID referenziert, ersatzweise der Abschnitt.** Wer aus ADR
+oder Slice auf Technik oder Sicht zeigt, nennt die Kennung, wenn das
+Zielelement eine trägt, und sonst den `§`-Anker — nicht jeder Absatz braucht
+eine Kennung, und eine erzwungene ID über Fließtext benennt nichts, sie
+nummeriert nur. Der Carveout bleibt grundsätzlich beim Abschnitt
+(Begründung in [§Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
 
 **Der Link trägt den Abschnitt, der Text die Kennung.** Kennungen in
 Tabellenzellen haben keinen eigenen HTML-Anker; ein Verweis auf `SPEC-015`
@@ -251,8 +256,19 @@ gelingt, und im Repo stehen zwei Artefakte unter derselben Kennung — die
 Klammer zwischen Spec, Commit und Gate ist zerrissen, ohne dass ein Sensor
 angeschlagen hätte.
 
-**Der Zählraum ist die Sub-Area.** Die Kennung trägt ein Bereichssegment, und
-gezählt wird *innerhalb* dieses Bereichs:
+**Struktur-IDs stehen auf der lauten Seite.** `SPEC-*` und `ARC-*` leben zu
+vielen in *einer* Datei und teilen damit die Eigenschaft von `LH-*`: Zwei
+gleichzeitig vergebene Nummern stehen hinterher sichtbar untereinander, im
+selben Diff, im selben Merge-Konflikt. Sie brauchen deshalb **kein
+Bereichssegment**. Gezählt wird **fortlaufend je Datei** — die nächste freie
+Nummer ist die höchste vergebene plus eins, gleich in welchem Abschnitt sie
+steht; Lücken werden nicht nachbelegt, weil eine wiederverwendete Kennung
+ältere Verweise stillschweigend umlenkt. Ein Segment sicherte hier nichts, was
+der Diff nicht ohnehin zeigt, und bände den Zählraum an eine Sub-Area, die für
+ein Spec-Dokument gar nicht definiert ist.
+
+**Für die Artefakte mit je eigener Datei ist der Zählraum die Sub-Area.** Die
+Kennung trägt ein Bereichssegment, und gezählt wird *innerhalb* dieses Bereichs:
 
 ```
 ADR-IDX-0004      ADR-AUTH-0001      slice-IDX-007      CO-AUTH-002
@@ -294,7 +310,8 @@ ohnehin festgelegt werden — nicht in eine stille Gewohnheit. Wer später von
 dicht auf Bereich wechselt, notiert den Wechselpunkt; bestehende Kennungen
 bleiben, wie sie sind.
 
-**Kein Sensor.** Die Doppelvergabe innerhalb eines Bereichs wäre erkennbar —
-zwei Dateien mit demselben Bereich-Nummer-Paar in einem Verzeichnis —, aber
+**Kein Sensor.** Die Doppelvergabe wäre in beiden Formen erkennbar — zwei
+Dateien mit demselben Bereich-Nummer-Paar in einem Verzeichnis, oder zwei
+gleiche `SPEC-*` in einer Datei —, aber
 kein Modul des Doku-Gates prüft Eindeutigkeit heute. Bis dahin ist es ein
 Review-Griff, und das gehört gesagt, statt einen Gate zu behaupten.

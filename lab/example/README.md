@@ -83,7 +83,7 @@ Jedes Skelett implementiert:
 - `make gates` als einheitlicher Vertrag.
 
 Nicht im Skelett: die Index-Persistenz aus
-[spec §1 LH-FA-01.a](spec/spezifikation.md#lh-fa-01a--indexierung) Schritt 5
+[spec §1 LH-FA-IDX-003.a](spec/spezifikation.md#lh-fa-idx-003a--index-schreiben)
 (ADR-0003, ADR-0012) und die Abschnitts-Zerlegung an `##`-Headings. Der Index
 lebt im Speicher, `reindex` zählt Dateien statt Abschnitte und antwortet
 deshalb nur mit `indexed_docs`, nicht mit `indexed_sections`. Die Skelette

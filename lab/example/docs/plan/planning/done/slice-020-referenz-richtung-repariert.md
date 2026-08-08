@@ -9,6 +9,8 @@ nur durch `git mv` (Kurs
 
 **Bezug:** LH-QA-02 (Reproduzierbarkeit, primär — eine Spec, die auf Slices zeigt, ist nicht reproduzierbar lesbar), ADR-0011 (Closure-Note-Pflicht, sekundär)
 
+**Berührte Spec-Stellen:** [`spezifikation.md` §7](../../../../spec/spezifikation.md#7-historie) (Historie — die Sektion vergibt keine Kennungen)
+
 **Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 
 ## 1. Ziel

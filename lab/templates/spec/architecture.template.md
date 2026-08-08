@@ -9,14 +9,14 @@
 **Status:** Aktiv. **Letzte Änderung:** YYYY-MM-DD.
 
 **Rolle:** Sicht-Stratum — *keine* eigenen Anforderungen, derivativ. Regeln:
-Baseline-Regelwerk `modul-04-adrs.md` §Ziel-Form: Architektur-Sicht.
+Baseline-Regelwerk `modul-03-spec.md` §Ziel-Form: Architektur-Sicht.
 
 **Hard Rule:** Diese Datei enthält *keine* Wellen, Slices, Commit-Hashes
 oder Closure-Daten, **keine ADR-Bezüge** — die Sicht steht im
 Stabilitäts-Rang über der ADR — und **keine Historie**: `Letzte Änderung`
 oben ist ein Frische-Marker, kein Protokoll. Die zeitliche Schicht lebt in
 `docs/plan/planning/in-progress/roadmap.md` und den späteren Closure-Notizen.
-Baseline-Regelwerk `modul-04-adrs.md` §Ziel-Form: Architektur-Sicht.
+Baseline-Regelwerk `modul-03-spec.md` §Ziel-Form: Architektur-Sicht.
 
 ---
 
@@ -24,16 +24,17 @@ Baseline-Regelwerk `modul-04-adrs.md` §Ziel-Form: Architektur-Sicht.
 
 Regeln dieser Sektion: **Hier werden die `ARC-*` für Komponenten vergeben** —
 eine Zeile je Kasten des Diagramms, damit es *eine* Stelle gibt. Die Kennung
-ist eine Adresse, damit Slice und Carveout sagen können, welche Komponente sie
-berühren; sie ist **keine** Anforderung (Baseline-Regelwerk
-`grundlagen-source-precedence.md` §ID-Schema als Klammer).
+ist eine Adresse, damit ein Slice sagen kann, welche Komponente er
+berührt; sie ist **keine** Anforderung. Gezählt wird fortlaufend je Datei —
+§3 setzt die Reihe fort, statt neu zu beginnen (Baseline-Regelwerk
+`grundlagen-source-precedence.md` §ID-Schema als Klammer, §Vergabe).
 
 <!--
 Ein Diagramm (Mermaid oder ASCII) der Top-Level-Komponenten.
 Jeder Kasten benennt die Schicht/Rolle, nicht die Technologie.
 
-Mermaid-Beispiel siehe unten — durch das Begleit-Lab dokumentiert,
-aber zwingend ist nur die Klarheit, nicht das Format.
+Mermaid-Beispiel siehe unten — zwingend ist nur die Klarheit,
+nicht das Format.
 -->
 
 ```mermaid
@@ -94,8 +95,9 @@ umfasst sie mehrere, bleibt die Spalte leer und die Constraint gilt für alle.
 
 ## 3. Externe Abhängigkeiten
 
-Regeln dieser Sektion: Auch Schnittstellen tragen `ARC-*` — eine ADR, die eine
-Abhängigkeit festklopft, braucht ein benennbares Ziel.
+Regeln dieser Sektion: Auch die Schnittstelle zu einem externen System trägt
+eine `ARC-*` — die Kennung benennt den *Berührungspunkt*, nicht das fremde
+System (Baseline-Regelwerk `grundlagen-source-precedence.md` §ID-Schema als Klammer).
 
 <!--
 Welche externen Systeme/Bibliotheken sind Teil der Architektur. Die

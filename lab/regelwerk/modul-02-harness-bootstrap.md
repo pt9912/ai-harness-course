@@ -313,7 +313,7 @@ Nummerierung GF 0–8 vs. BF 1–9.
 
 | # | Aktion | BF-Besonderheit gegenüber GF |
 |---|---|---|
-| 1 | GF-Schritte 0 und 1 in einem Schritt zusammengefasst: Modus-Antizipation "BF pro Sub-Area" + Baseline-Auswahl + Repo-Klasse + ID-Schemata festlegen | + explizite Modus-Setzung mit Sub-Area-Aufzählung; Repo-Klassen-Wahl und Modus-Antizipation fallen zusammen |
+| 1 | GF-Schritte 0 und 1 in einem Schritt zusammengefasst: Modus-Antizipation "BF pro Sub-Area" + Baseline-Auswahl + Repo-Klasse + ID-Schema festlegen (Vertrags-Präfix wählen, `SPEC-*`/`ARC-*`/`MR-*` aus der Baseline) | + explizite Modus-Setzung mit Sub-Area-Aufzählung; Repo-Klassen-Wahl und Modus-Antizipation fallen zusammen |
 | 2 | **Code-Inventur (Discovery):** Makefile, CI, Tests, README, Commit-Messages inventarisieren als Lerner-Schritt | **neu in BF** — kein Repo-Artefakt entsteht, nur Lerner-Wissen |
 | 3 | **Baseline vendoren** — Regelwerk + Templates (`.harness/baseline/<tag>/{regelwerk,templates}/` + `SHA256SUMS`) + Skelette kopieren-und-ausfüllen | wie GF |
 | 4 | `harness/conventions.md` mit Modus = BF pro Sub-Area, MR-000-Aussage | Modus-Block anders strukturiert (BF-Deklarationen + Konvergenz-Auftrag pro Sub-Area) |

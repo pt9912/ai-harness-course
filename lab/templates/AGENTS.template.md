@@ -132,7 +132,7 @@ ADR-Bezüge**: Die Sicht steht im Stabilitäts-Rang über der ADR; welche ADR
 eine Aussage verbindlich macht, deklariert die ADR in ihrem `Schärft:`-Feld.
 
 Diese Regel ist *verkörpert*, nicht hier entschieden — sie folgt aus dem
-Sicht-Stratum (Baseline-Regelwerk `modul-04-adrs.md`
+Sicht-Stratum (Baseline-Regelwerk `modul-03-spec.md`
 §Ziel-Form: Architektur-Sicht).
 
 ### 3.5 ADRs sind nach `Accepted` immutable
@@ -175,10 +175,14 @@ oder zum Carveout.
 
 ## 5. Dokumentations-Regeln
 
-- Requirement- und Architektur-IDs müssen in PRs/Commits referenziert
-  sein. Vergeben werden IDs beim Spec-/ADR-Schreiben nach dem in
+- **Anforderungs-IDs und ADR-Nummern** müssen in PRs/Commits referenziert
+  sein — sie sagen, welche Zusage oder Entscheidung berührt ist. Struktur-IDs
+  (`SPEC-<NNN>`, `ARC-<NNN>`) adressieren *innerhalb* der Spec und gehören
+  nicht in die Commit-Message.
+- Vergeben werden IDs beim Spec-/ADR-Schreiben nach dem in
   `harness/conventions.md` deklarierten ID-Schema (Default:
-  `<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>` aus dem Lastenheft, ADR-Nummern
+  `<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>` aus dem Lastenheft,
+  `SPEC-<NNN>` in der Spezifikation, `ARC-<NNN>` in der Sicht, ADR-Nummern
   über den ADR-Index) — nie ad hoc im PR.
 - Neue ADRs müssen den ADR-Index aktualisieren.
 - Roadmap/Status-Geschichte lebt in `docs/plan/planning/`, nicht in `spec/architecture.md`.

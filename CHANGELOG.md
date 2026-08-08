@@ -49,9 +49,11 @@ benannte Baseline-Regel ersetzt, ist laut Vorlage aber ein **Fork**.
 - **`<PREFIX>-FA-<NN>.<Buchstabe>` ist erstmals in der Quelle verankert.** Das
   Schema stand bis hierher nur in `spezifikation.template.md` und berief sich
   auf einen Abschnitt, der es nicht kannte — Template-Drift ohne Quell-Anker.
-- **Die Referenz-Matrix adressiert Technik und Sicht über Kennungen**
-  (`betroffene SPEC-*` / `betroffene ARC-*`, ersatzweise Spec-§) statt
-  ausschließlich über `Spec-§`.
+- **Die Referenz-Matrix adressiert Technik und Sicht über Kennungen** —
+  *Technik-ID* (`SPEC-*` oder `<PREFIX>-FA-*.<Buchstabe>`) und *Sicht-ID*
+  (`ARC-*`), ersatzweise der `§`-Anker. Das gilt für ADR und Slice; der
+  **Carveout bleibt beim Abschnitt**, weil er ein Stück Geltung ausklammert,
+  das selten auf genau einer Kennung sitzt.
 - **Modul-2-Schritt 3 legt keine `MR-001` mehr an.** Das Bootstrap-Repo weicht
   nirgends ab; die ID-Schema-Deklaration ist Teil der `MR-000`-Aussage, die
   Index-Tabelle bleibt leer.
@@ -69,7 +71,7 @@ benannte Baseline-Regel ersetzt, ist laut Vorlage aber ein **Fork**.
   eine Schicht ist eine Gruppierung über Komponenten, keine eigene Sache, und
   ein Repo mit zwei Komponenten in einer Schicht hätte sonst Komponenten ohne
   Kennung.
-- `lab/example` zieht nach: Kennungen in beiden Spec-Dateien, und vier ADRs
+- `lab/example` zieht nach: Kennungen in beiden Spec-Dateien, und drei ADRs
   nennen im `Schärft:`-Feld jetzt die Kennung statt des Abschnitts. Sektionen,
   die keine Kennungen vergeben, behalten den `§`-Anker — der Rückfallweg im
   Betrieb, nicht ein Rückstand.
@@ -92,7 +94,9 @@ sind lehrreich:
 - **Nummernblöcke waren eine unbelegte Konvention.** Templates und Beispiel
   hatten Blöcke je Sektion encodiert (§3 → `SPEC-010`, §5 → `020`), die keine
   Quelle lehrt — und nach dem Nachtragen von §4 nicht einmal monoton waren.
-  Jetzt wird **fortlaufend je Datei** gezählt, was §Vergabe ohnehin sagt.
+  Jetzt wird **fortlaufend je Datei** gezählt, und §Vergabe trägt die Regel:
+  Struktur-IDs sind dort als dritte Klasse geführt (*viele pro Datei*, kein
+  Bereichssegment), neben „eine Datei" und „je eine eigene Datei".
 - **Das ADR-Template zog nicht mit.** Sein `Schärft:`-Feld zeigte weiter nur
   die `§`-Form, während die Beispiel-ADRs migriert waren — genau die
   Drift-Richtung, die die Normhierarchie verbietet.

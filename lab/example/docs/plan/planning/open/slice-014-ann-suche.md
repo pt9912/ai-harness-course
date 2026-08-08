@@ -9,6 +9,8 @@ nur durch `git mv` (Kurs
 
 **Bezug:** LH-QA-01 (Performance), implizit ADR-0003 (Index-Format)
 
+**Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Komplexität), [`ARC-002`](../../../../spec/architecture.md#1-komponenten-übersicht) (Index-Layer)
+
 **Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 
 ## 1. Ziel

@@ -152,7 +152,9 @@ Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 
 
 ## 4. Dokumentations-Regeln
 
-- Requirement- und Architektur-IDs müssen in PRs/Commits referenziert sein.
+- Anforderungs-IDs (`LH-*`) und ADR-Nummern müssen in PRs/Commits referenziert
+  sein; Struktur-IDs (`SPEC-*`, `ARC-*`) adressieren innerhalb der Spec und
+  gehören nicht in die Commit-Message.
 - Neue ADRs müssen `docs/plan/adr/README.md` aktualisieren.
 - Roadmap/Status-Geschichte lebt in `docs/plan/planning/`, nicht in `spec/architecture.md`.
 - **Ein Gate ist dort definiert, wo seine Bindung steht** — nicht an einem

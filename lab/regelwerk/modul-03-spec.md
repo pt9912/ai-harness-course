@@ -125,7 +125,7 @@ Operative Regeln, die die Vorlage nicht selbst erzwingt:
   Welche ADR eine Aussage der Sicht verbindlich macht, deklariert **die ADR**
   aufwärts in ihrem `Schärft:`-Feld.
 * `ARC-*` widerspricht dem nicht: Komponenten und Schnittstellen tragen
-  Kennungen, damit ein Slice oder Carveout sagen kann, *welche* Komponente er
+  Kennungen, damit ein Slice sagen kann, *welche* Komponente er
   berührt. Das ist eine Adresse, keine Zusage — die Sicht bleibt derivativ,
   weil eine Kennung nichts verspricht. Wer unter einer `ARC-<NNN>` eine
   Anforderung formuliert, hat nicht die Kennung falsch benutzt, sondern eine

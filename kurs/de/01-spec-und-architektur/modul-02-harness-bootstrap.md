@@ -301,7 +301,7 @@ führen vom leeren Repo zum ersten Code-Slice.
 flowchart TD
     Start([leeres Repo]):::start
     S0["0. Modus = GF pro Sub-Area"]:::orient
-    S1["1. Baseline + Repo-Klasse + ID-Schemata"]:::orient
+    S1["1. Baseline + Repo-Klasse + Vertrags-Praefix"]:::orient
     S2["2. Templates + Regelwerk adoptieren"]:::action
     S3["3. conventions.md (MR-000 + Index)"]:::action
     S4["4. lastenheft.md Outline"]:::content
@@ -595,7 +595,7 @@ Backlog mit sichtbarem Konvergenzpfad zu GF.
 ```mermaid
 flowchart TD
     Start([Repo mit Code/Makefile/CI<br/>ohne Harness]):::startBF
-    S1["1. Modus = BF + Repo-Klasse + ID-Schemata"]:::orient
+    S1["1. Modus = BF + Repo-Klasse + Vertrags-Praefix"]:::orient
     S2["2. Code-Inventur (Discovery)"]:::discover
     S3["3. Templates + Regelwerk adoptieren"]:::action
     S4["4. conventions.md (Modus = BF, MR-000)"]:::action
@@ -632,7 +632,7 @@ Nummerierung GF 0–8 vs. BF 1–9.
 
 | # | Aktion | BF-Besonderheit gegenüber GF |
 |---|---|---|
-| 1 | GF-Schritte 0 und 1 in einem Schritt zusammengefasst: Modus-Antizipation "BF pro Sub-Area" + Baseline-Auswahl + Repo-Klasse + ID-Schemata festlegen | + explizite Modus-Setzung mit Sub-Area-Aufzählung; Repo-Klassen-Wahl und Modus-Antizipation fallen zusammen |
+| 1 | GF-Schritte 0 und 1 in einem Schritt zusammengefasst: Modus-Antizipation "BF pro Sub-Area" + Baseline-Auswahl + Repo-Klasse + ID-Schema festlegen (Vertrags-Präfix wählen, `SPEC-*`/`ARC-*`/`MR-*` aus der Baseline) | + explizite Modus-Setzung mit Sub-Area-Aufzählung; Repo-Klassen-Wahl und Modus-Antizipation fallen zusammen |
 | 2 | **Code-Inventur (Discovery):** Makefile, CI, Tests, README, Commit-Messages inventarisieren als Lerner-Schritt | **neu in BF** — kein Repo-Artefakt entsteht, nur Lerner-Wissen |
 | 3 | **Baseline vendoren** — Regelwerk + Templates (`.harness/baseline/<tag>/{regelwerk,templates}/` + `SHA256SUMS`) + Skelette kopieren-und-ausfüllen | wie GF |
 | 4 | `harness/conventions.md` mit Modus = BF pro Sub-Area, MR-000-Aussage | Modus-Block anders strukturiert (BF-Deklarationen + Konvergenz-Auftrag pro Sub-Area) |

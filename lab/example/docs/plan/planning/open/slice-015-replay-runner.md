@@ -10,6 +10,8 @@ gibt keine darüber hinausgehende repo-weite Zusage.
 
 **Bezug:** LH-QA-02 (Determinismus), [CO-002](../../carveouts/CO-002-replay-verifikation.md)
 
+**Berührte Spec-Stellen:** —
+
 **Autor:** Kurs-Lab. **Datum:** 2026-07-31.
 
 ## 1. Ziel

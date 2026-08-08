@@ -16,11 +16,13 @@
 
 **Bezug:** [`<LH-FA-NN>`](../../../spec/lastenheft.md#<anker>), [`<LH-QA-NN>`](../../../spec/lastenheft.md#<anker>), [ADR-<NNNN>](<NNNN>-<titel>.md) (optional)
 
-**Schärft:** [`<SPEC-NNN>`](../../../spec/spezifikation.md#<anker>) / [`<ARC-NNN>`](../../../spec/architecture.md#<anker>) — welche
+**Schärft:** [`<SPEC-NNN>`](../../../spec/spezifikation.md#<anker>) / [`<PREFIX>-FA-<NN>.<Buchstabe>`](../../../spec/spezifikation.md#<anker>) / [`<ARC-NNN>`](../../../spec/architecture.md#<anker>) — welche
 Spec-Stelle diese ADR verbindlich macht. **Die Kennung nennen, wo das
-Zielelement eine trägt**; erst wo eine Sektion keine vergibt, den Abschnitt
-selbst (`<architecture.md §N>`). Der Link zeigt in beiden Fällen auf die
-Sektion — Kennungen in Tabellenzellen haben keinen eigenen Anker
+Zielelement eine trägt** — `SPEC-*`, die Verfeinerung `<PREFIX>-FA-<NN>.<Buchstabe>`
+oder `ARC-*`; erst wo eine Sektion keine vergibt, den Abschnitt
+selbst (`<architecture.md §N>`). Steht die Kennung in einer **Überschrift**,
+zeigt der Link auf sie; steht sie in einer **Tabellenzelle**, auf die Sektion —
+dort hat sie keinen eigenen Anker
 (Baseline-Regelwerk `grundlagen-source-precedence.md` §ID-Schema als Klammer).
 Aufwärts-Deklaration der
 Änderungskopplung: wer diese ADR ändert, zieht von hier die betroffenen

@@ -9,6 +9,8 @@ nur durch `git mv` (Kurs
 
 **Bezug:** LH-QA-02 (Reproduzierbarkeit, primär), ADR-0003 (Index-Format).
 
+**Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
+
 **Nachtrag 2026-06-02** (Lab-Ausbau (Kurs-Welle 9); Traceability-Metadata, keine
 Änderung am Slice): Der hier gebaute Tie-Break belegt zusätzlich
 `LH-FA-IDX-003` (Index-Schreib-Idempotenz — Determinismus ist Voraussetzung für

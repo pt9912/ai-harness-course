@@ -51,9 +51,8 @@ Lastenheft-IDs, z.B. LH-FA-03.a für eine konkrete Algorithmus-Variante.
 
 Regeln dieser Sektion: Jede Struktur trägt eine `SPEC-<NNN>` — eine Adresse,
 keine Anforderung (Baseline-Regelwerk `grundlagen-source-precedence.md`
-§ID-Schema als Klammer). Gezählt wird **fortlaufend über die ganze Datei**,
-nicht je Sektion: Die nächste freie Nummer ist die höchste vergebene plus eins,
-gleich in welchem Abschnitt sie steht.
+§ID-Schema als Klammer). Gezählt wird fortlaufend je Datei, nicht je Sektion
+(Baseline-Regelwerk `grundlagen-source-precedence.md` §Vergabe).
 
 <!--
 Konkrete JSON-Schemas, OpenAPI-Snippets, Protokoll-Definitionen.

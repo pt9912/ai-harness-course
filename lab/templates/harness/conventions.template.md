@@ -100,9 +100,11 @@ sie gilt für jeden Lauf.
   Vertrags-Präfix wird repo-weit festgelegt, z. B. `LH`; `SPEC-*` und
   `ARC-*` kodieren das Stratum und sind fest, siehe Baseline-Regelwerk
   `grundlagen-source-precedence.md` §ID-Schema als Klammer;
-  bei mehreren gleichzeitig schreibenden Entwicklern zusätzlich das
-  Bereichssegment und damit den Zählraum je Sub-Area festlegen, siehe
-  Baseline-Regelwerk `grundlagen-source-precedence.md` §Vergabe).*
+  bei mehreren gleichzeitig schreibenden Entwicklern für die Artefakte mit
+  je eigener Datei (`ADR-*`, `CO-*`, `slice-*`, `welle-*`) zusätzlich das
+  Bereichssegment und damit den Zählraum je Sub-Area festlegen —
+  `SPEC-*`/`ARC-*` bleiben davon ausgenommen und zählen fortlaufend je
+  Datei, siehe Baseline-Regelwerk `grundlagen-source-precedence.md` §Vergabe).*
 - **Begründung:** Initial-Setzung. Spätere Adaptionen werden als
   `MR-<NNN>` nachgetragen.
 - **Auflösungs-Trigger:** permanent.
