@@ -209,6 +209,17 @@ Konvergenzpfad zu GF ist sichtbar (mit ersten Reconciliation-Slices in
 Modul 5–9). Bootstrap und Workflow sind getrennte Lebenszyklen — kein
 Übergang ohne Sichtbarkeit.
 
+**Der Reconciliation-Backlog ist eine Sicht, keine Datei.** Er ist die Summe
+der offenen `CO-DS-*` in `docs/plan/carveouts/` und der Reconciliation-Slices
+in `docs/plan/planning/open/` — deshalb gibt es dafür kein Template und keinen
+eigenen Pfad; ihn zu materialisieren hieße, dieselbe Information ein zweites
+Mal zu führen. Und *„er steht"* heißt nicht „er ist leer", sondern: **jede in
+der Inventur gefundene Diskrepanz ist in genau eine der drei Klassen
+einsortiert** — `CO-DS-*` (Code ohne Anforderung), Reconciliation-Slice
+(Anforderung ohne Code) oder retroaktive ADR (implizite Entscheidung). Erst
+damit ist das Kriterium beobachtbar: Ein Dritter kann ohne Rückfrage
+entscheiden, ob noch unklassifizierte Funde offen sind.
+
 ### Einführungs-Reihenfolge über mehrere Repos
 
 Bootstrap gilt pro Repo — in einer Mehrfach-Repo-Landschaft stellt sich

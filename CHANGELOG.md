@@ -11,6 +11,62 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 70 — 2026-08-08 · Ein Closure-Kriterium ohne Gegenstand
+
+Aus einer Leserfrage: *Was meint man mit Reconciliation-Backlog? „Backlog" wird
+sonst nicht erwähnt, und es gibt auch kein Template dafür.*
+
+Beides stimmte. Der Begriff kam achtmal vor, durchweg wie ein zählbares
+Register behandelt — er *„steht"*, er *„sinkt um genau einen Eintrag"* — und er
+ist das **Closure-Kriterium des Brownfield-Bootstraps**. Definiert war er
+nirgends: kein Glossareintrag, kein Template, kein Pfad. Dazu trug er drei
+Namen (`Diskrepanz-Backlog` in Modul 1, `Reconciliation-Backlog` in Modul 2 und
+`bootstrap.md`, `CO-DS-*-Backlog` in der Musterlösung).
+
+### Entschieden
+
+- **Er bleibt eine Sicht, er wird keine Datei.** Er ist die Summe der offenen
+  `CO-DS-*` in `docs/plan/carveouts/` und der Reconciliation-Slices in
+  `docs/plan/planning/open/`. Ihn zu materialisieren hieße, dieselbe Information
+  ein zweites Mal zu führen — genau die Kopplung, vor der die Referenz-Richtung
+  warnt. Das fehlende Template war also kein Versäumnis, sondern richtig; was
+  fehlte, war der Satz, der das sagt.
+- **„Steht" heißt nicht „ist leer".** Es heißt: jede in der Inventur gefundene
+  Diskrepanz ist in genau eine der drei Klassen aus Schritt 8 einsortiert
+  (`CO-DS-*` · Reconciliation-Slice · retro-ADR). Erst damit ist das Kriterium
+  beobachtbar im Sinne von Modul 6 — ein Dritter kann ohne Rückfrage
+  entscheiden, ob noch unklassifizierte Funde offen sind.
+- **Ein Name statt drei.** Modul 1 und die Modul-2-Lösung sind angeglichen.
+
+### Aus dem Review: die Präfix-Regel war falsch formuliert
+
+Der Review dieser Welle traf die Kernregel von Welle 68. *„Das Präfix kodiert
+das Stratum"* stimmt für `SPEC-*` und `ARC-*`, nicht aber für die Verfeinerung:
+`LH-FA-IDX-003` (Vertrag) und `LH-FA-IDX-003.a` (Technik) teilen dasselbe
+Präfix — dort trägt der **Suffix** das Stratum. Schlimmer war die Dispatch-Form
+in §Referenz-Richtung: *„`LH-*` → Vertrag, `SPEC-*` und
+`<PREFIX>-FA-*.<Buchstabe>` → Technik"* — überlappende Muster, bei denen
+First-Match-Wins die Verfeinerung als Vertrag einordnet. Betroffen wären genau
+die Kennungen, die Welle 68 gerade erst gesetzt hat (`ADR-0012`, drei
+Beispiel-Slices).
+
+Beide Stellen heißen jetzt **Kennungs-Form** statt Präfix, und die Muster sind
+ausdrücklich disjunkt gelesen: `<PREFIX>-FA-<NN>` *ohne* Suffix → Vertrag,
+derselbe Name *mit* `.<Buchstabe>` sowie `SPEC-*` → Technik, `ARC-*` → Sicht.
+
+Dazu vier kleinere Nachzüge: Die neue Überschrift des Freshness-Audits hatte
+zwei fremde Blöcke unter sich gezogen (sie haben jetzt eigene); der
+Regelwerk-Split trug einen Satz, den die Quelle nicht hatte (Quelle nachgezogen);
+die Selbstcheck-Rubrik führte mit *„Reconc.-Slice-Backlog"* eine vierte
+Schreibweise; und der `MR-004`-Beispielblock in Modul 7 nannte einen
+Folge-Slice `slice-014`, der im selben Beispiel-Repo schon vergeben ist.
+
+Der Vergleichsfall stand daneben und hat den Mangel sichtbar gemacht: Das
+**Beobachtungs-Register** ist dieselbe Art Sammlung — wächst und schrumpft über
+Slices hinweg — und hat Namen, Template, festen Pfad, Zählregel und Schwelle.
+Der Reconciliation-Backlog hatte nichts davon, obwohl er in einem
+Closure-Kriterium steht.
+
 ## Welle 69 — 2026-08-08 · Eine Regel, die nie jemand übernommen hat
 
 Adopter-Beobachtung aus `ai-harness-init` — derselben Quelle wie Welle 27, und

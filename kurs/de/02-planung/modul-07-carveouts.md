@@ -279,7 +279,7 @@ das Schema noch frisch im Kopf hält, spart sich hier Last
 > **Sync-Trigger:** nach Graduation einen Pointer-Eintrag in
 > `harness/README.md` §Sensors, der die Sub-Area als GF-bewertet
 > ausweist.
-> **Folge-Slice (für Reconciliation):** `slice-014-bf-index-reconciliation.md` (legt die Inventur und die ersten Reconciliation-Häppchen fest).
+> **Folge-Slice (für Reconciliation):** `slice-021-bf-index-reconciliation.md` (legt die Inventur und die ersten Reconciliation-Häppchen fest).
 > ```
 >
 > Das ersetzt eine Carveout-Kaskade (`CO-001`/`CO-002`/`CO-003` auf

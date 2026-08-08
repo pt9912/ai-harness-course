@@ -308,7 +308,9 @@ Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
 Ein neuer Tag löst einen **Review** aus (Re-Vendoring mit eigenem Diff),
 keinen stillen Auto-Bump.
 
-**Gate-Fragment `d-check.mk` (Schritt 2).** Das d-check-Doku-Gate wird nicht
+#### Gate-Fragment `d-check.mk` (Schritt 2)
+
+Das d-check-Doku-Gate wird nicht
 handgeschrieben: `d-check.mk` beim Bootstrap aus der gepinnten d-check erzeugen
 (`d-check --print-mk > d-check.mk`), per `-include` einbinden; den
 `DCHECK_DIGEST`-Platzhalter der `Makefile` mit dem eigenen Digest füllen. Nicht
@@ -316,7 +318,9 @@ mitgeliefert (tool-/versionsspezifisch); bei jedem d-check-Bump neu erzeugen.
 Das Tool pflegt die Recipe-Form (`--network none`, Target-Set); die
 advisory-Targets sind verfügbar, nicht als Gate behauptet (Modul 13).
 
-**T1/T2 als Sync-Trigger konkret (Schritt 3).** Sobald
+#### T1/T2 als Sync-Trigger konkret (Schritt 3)
+
+Sobald
 `harness/conventions.md` existiert, müssen die auf sie verweisenden
 Dokumente einen Eintrag bekommen: ein Pointer in `harness/README.md`
 (T1) und in der Source-Precedence-Liste von `AGENTS.md` (T2). Wer den

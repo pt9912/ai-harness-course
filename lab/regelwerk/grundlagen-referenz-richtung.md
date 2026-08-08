@@ -81,7 +81,7 @@ flowchart BT
     S -->|"nur aktive ADRs"| A
     C["Carveout"] -->|"betroffene LH-*"| L
     C -->|"betroffene Spec-§"| T
-    C -->|"betroffene architecture.md §"| V
+    C -->|"betroffene Spec-§"| V
     C -->|"betroffene aktive ADRs"| A
     style L fill:#fff4d6,stroke:#d4a017
     style T fill:#fff4d6,stroke:#d4a017
@@ -336,8 +336,9 @@ ADR → Spec-§); das Lastenheft wird dabei *nie* geschärft.
 **Platzierung wird deklariert, nicht geraten** — über zwei bestehende
 Mechanismen:
 
-1. **ID-Präfix kodiert das Stratum.** `LH-*` → Vertrag, `SPEC-*` und
-   `<PREFIX>-FA-*.<Buchstabe>` → Technik, `ARC-*` → Sicht; die Matrix
+1. **Die Kennungs-Form kodiert das Stratum** — und die Muster sind disjunkt zu
+   lesen: `<PREFIX>-FA-<NN>` **ohne** Suffix → Vertrag; derselbe Name **mit**
+   `.<Buchstabe>` sowie `SPEC-*` → Technik; `ARC-*` → Sicht; die Matrix
    adressiert Technik und Sicht darüber, mit dem `§`-Anker als Rückfallweg,
    wo ein Element keine Kennung trägt. Eine
    Sicht-Datei trägt sehr wohl `ARC-*`-*Struktur*-IDs

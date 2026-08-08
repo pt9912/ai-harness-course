@@ -184,10 +184,13 @@ Ein konsistentes Präfix (`LH-*`, `HSM-*`, `GG-*`) verbindet:
 
 Damit wird der Traceability-Constraint maschinell prüfbar.
 
-**Das Präfix kodiert das Stratum.** Das Vertrags-Präfix ist frei wählbar —
+**Die Kennungs-Form sagt das Stratum.** Das Vertrags-Präfix ist frei wählbar —
 `LH`, `HSM`, `GG` sind Projektvokabular. Die beiden anderen Straten tragen
 feste Präfixe, weil sie nichts Projektspezifisches transportieren, sondern
-die Zugehörigkeit selbst:
+die Zugehörigkeit selbst. Beim Vertrags-Präfix entscheidet dagegen der
+**Suffix**: `LH-FA-03` ist Vertrag, `LH-FA-03.a` ist dessen Verfeinerung im
+Technik-Stratum. Wer nur aufs Präfix schaut, ordnet die Verfeinerung eine
+Schicht zu hoch ein.
 
 | Kennung | Stratum | Art |
 |---|---|---|

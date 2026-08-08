@@ -179,7 +179,9 @@ in [`bootstrap.md` §Harness-Bootstrap](../grundlagen/bootstrap.md#harness-boots
 mit GF/BF-Walkthroughs).
 Die folgenden sechs Schritte 1–6 beschreiben den Greenfield-Pfad; in
 Brownfield-Modus läuft jeder Schritt als Code → Doc-Inventur mit
-parallelem Diskrepanz-Backlog (siehe
+parallelem Reconciliation-Backlog (was der ist und wann er *steht*:
+[`../grundlagen/bootstrap.md` §Harness-Bootstrap-Ende](../grundlagen/bootstrap.md#harness-bootstrap-ende-vs-workflow-beginn);
+Beispiele aus realen Repos in
 [`../grundlagen/fallstudien.md` §Beobachtung aus dem Ist-Zustand](../grundlagen/fallstudien.md#beobachtung-aus-dem-ist-zustand)).
 
 **Schritt 1 — Kanonische Quellen sammeln, Mehrfach-Quellen erkennen.**

@@ -81,7 +81,7 @@ flowchart BT
     S -->|"nur aktive ADRs"| A
     C["Carveout"] -->|"betroffene LH-*"| L
     C -->|"betroffene Spec-§"| T
-    C -->|"betroffene architecture.md §"| V
+    C -->|"betroffene Spec-§"| V
     C -->|"betroffene aktive ADRs"| A
     style L fill:#fff4d6,stroke:#d4a017
     style T fill:#fff4d6,stroke:#d4a017
@@ -236,9 +236,10 @@ Wird eine Ziel-Überschrift umbenannt, rottet der Aufwärts-Link *still* — die
 gleiche Rot-Klasse, die wir abwärts verboten haben, nur unbewacht. Die
 mechanisch erzwungene Reifestufe löst Links auf, prüft Anker-Existenz und
 erzwingt die volle Matrix am Zielknoten; Referenz-Implementierung ist
-`tools/check_refs.py` aus dem u-boot-Harness (gleiche Build-Familie). <!-- d-check:ignore (Datei liegt im u-boot-Repo) --> Das Lab
-bleibt bewusst bei der grep-Variante, um die mechanische Hälfte minimal und
-lesbar zu halten.
+`tools/check_refs.py` aus dem u-boot-Harness (gleiche Build-Familie). <!-- d-check:ignore (Datei liegt im u-boot-Repo) --> Die Baseline
+liefert bewusst nur die grep-Variante aus — sie hält die mechanische Hälfte
+minimal und lesbar; die anker-validierende Stufe ist eine Reifestufe darüber,
+kein Startwert.
 
 *Mechanisierbar — über den umgekehrten Default.* Ob eine ADR→Slice-Referenz
 ein erlaubter *Verifikations-Zeiger/Provenance* oder eine verbotene
@@ -337,8 +338,9 @@ ADR → Spec-§); das Lastenheft wird dabei *nie* geschärft.
 **Platzierung wird deklariert, nicht geraten** — über zwei bestehende
 Mechanismen:
 
-1. **ID-Präfix kodiert das Stratum.** `LH-*` → Vertrag, `SPEC-*` und
-   `<PREFIX>-FA-*.<Buchstabe>` → Technik, `ARC-*` → Sicht; die Matrix
+1. **Die Kennungs-Form kodiert das Stratum** — und die Muster sind disjunkt zu
+   lesen: `<PREFIX>-FA-<NN>` **ohne** Suffix → Vertrag; derselbe Name **mit**
+   `.<Buchstabe>` sowie `SPEC-*` → Technik; `ARC-*` → Sicht; die Matrix
    adressiert Technik und Sicht darüber, mit dem `§`-Anker als Rückfallweg,
    wo ein Element keine Kennung trägt. Eine
    Sicht-Datei trägt sehr wohl `ARC-*`-*Struktur*-IDs
