@@ -25,17 +25,30 @@ Namen (`Diskrepanz-Backlog` in Modul 1, `Reconciliation-Backlog` in Modul 2 und
 
 ### Entschieden
 
-- **Er bleibt eine Sicht, er wird keine Datei.** Er ist die Summe der offenen
-  `CO-DS-*` in `docs/plan/carveouts/` und der Reconciliation-Slices in
-  `docs/plan/planning/open/`. Ihn zu materialisieren hieße, dieselbe Information
-  ein zweites Mal zu führen — genau die Kopplung, vor der die Referenz-Richtung
-  warnt. Das fehlende Template war also kein Versäumnis, sondern richtig; was
-  fehlte, war der Satz, der das sagt.
-- **„Steht" heißt nicht „ist leer".** Es heißt: jede in der Inventur gefundene
-  Diskrepanz ist in genau eine der drei Klassen aus Schritt 8 einsortiert
-  (`CO-DS-*` · Reconciliation-Slice · retro-ADR). Erst damit ist das Kriterium
-  beobachtbar im Sinne von Modul 6 — ein Dritter kann ohne Rückfrage
-  entscheiden, ob noch unklassifizierte Funde offen sind.
+- **Er bekommt einen Ort:** `docs/plan/planning/reconciliation.md`, flach neben
+  dem Beobachtungs-Register, mit Vorlage. Eine Zeile je Fund des Rückbaus —
+  Kennung `RC-<NNN>`, Fund, Sub-Area, Klasse, Auflösung, Stand —, plus eine
+  Append-only-Tabelle für aufgelöste Zeilen.
+
+  Zwei Zwischenfassungen sind vorher gescheitert, und beide am selben Punkt.
+  Die erste definierte den Backlog als „die offenen `CO-DS-*`" — eine Notation,
+  die §Vergabe nicht deckt, weil dort der Slot die Sub-Area trägt. Die zweite
+  wich auf „ablesbar an der Roadmap" aus und verschob das Problem nur: An der
+  Roadmap steht nirgends, welche Slices aus der Inventur stammen. **Nichts
+  markiert die Zugehörigkeit** — weder eine Kennung noch eines der sechs
+  Carveout-Kopffelder —, also ist die Menge ohne Register nicht bestimmbar, und
+  ein Closure-Kriterium über eine unbestimmbare Menge ist keines.
+
+  Das Gegenargument („ein drittes Register wäre eine Kopie, die driftet") hält
+  nicht: `observations.md` hat dieselbe Form — Beobachtungen entstehen in
+  Slices, die Beleg-Spalte zeigt darauf — und der Kurs hat sich dort längst für
+  eine eigene stehende Datei entschieden.
+- **„Steht" heißt nicht „ist leer", sondern *jede Zeile trägt ihre Auflösung*.**
+  Beim Bootstrap-Ende ist das Register voll; leer wird es je Sub-Area erst bei
+  der Graduation, und das ist dort die Graduation-Bedingung.
+- **`CO-DS-*` entfällt.** Die Klasse steht in der Register-Zeile, nicht in der
+  Kennung — damit braucht der Carveout keinen Typ-Marker mehr, der mit dem
+  Bereichssegment aus §Vergabe kollidierte. Carveouts heißen wieder `CO-<NNN>`.
 - **Ein Name statt drei.** Modul 1 und die Modul-2-Lösung sind angeglichen.
 
 ### Aus dem Review: die Präfix-Regel war falsch formuliert

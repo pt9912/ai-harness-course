@@ -102,7 +102,7 @@ Aus der Phase × Modus-Matrix:
   `make verify-lh-coverage` zählt LH-IDs gegen Tests und failt bei
   unter-deckten Anforderungen).
 - **BF Phase 4:** *"Inventur abgeglichen, Diskrepanz-Schock
-  sichtbar."* Konkretes Indiz: der Reconciliation-Backlog ist gefüllt (offene `CO-DS-*`)
+  sichtbar."* Konkretes Indiz: `reconciliation.md` trägt offene Zeilen
   (orphan code als dokumentierte Carveouts) und Reconciliation-
   Slices stehen in `docs/plan/planning/open/`. Der "Schock" ist
   paradoxerweise positiv: er bedeutet, dass die Inventur fertig

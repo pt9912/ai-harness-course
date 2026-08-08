@@ -5,13 +5,13 @@ unabhängig davon, ob dein Repo Go, Python, Kotlin, Java oder C# nutzt.
 
 ## Übersicht
 
-Diese Tabelle listet die **18 Dokument-Skelette** (Phase 0 → 1 beim
-Bootstrap — das Repo füllt sie). Das Verzeichnis trägt **22 Dateien in drei
-Klassen**, nicht 22 gleichartige Vorlagen:
+Diese Tabelle listet die **20 Dokument-Skelette** (Phase 0 → 1 beim
+Bootstrap — das Repo füllt sie). Das Verzeichnis trägt **24 Dateien in drei
+Klassen**, nicht 24 gleichartige Vorlagen:
 
 | Klasse | Anzahl | Wo |
 |---|---|---|
-| **Dokument-Skelette** — Artefakte, die das Repo kopiert und ausfüllt | 18 | Tabelle unten |
+| **Dokument-Skelette** — Artefakte, die das Repo kopiert und ausfüllt | 20 | Tabelle unten |
 | **Skill-Dateien** — Urteilsgrundlage eines Agenten, nicht Artefakt | 2 | [§Skill-Dateien](#skill-dateien) |
 | **Tooling-Dateien** (`Makefile`, `.d-check.yml`) | 2 | [§Gate-Baseline](#gate-baseline) |
 
@@ -27,6 +27,7 @@ Klassen**, nicht 22 gleichartige Vorlagen:
 | [`docs/plan/planning/welle-results.template.md`](docs/plan/planning/welle-results.template.md) | Welle-Closure-Notiz: Ergebnis, Steering-Loop-Einträge, Zeiger aufs Beobachtungs-Register | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/roadmap.template.md`](docs/plan/planning/roadmap.template.md) | Roadmap als Reihenfolge von Wellen, nicht Termine | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/observations.template.md`](docs/plan/planning/observations.template.md) | Beobachtungs-Register: der Steering-Loop-Zähler, stehend statt in der Welle-Closure | [Modul 6](../regelwerk/modul-06-roadmap.md#das-beobachtungs-register-modul-6) |
+| [`docs/plan/planning/reconciliation.template.md`](docs/plan/planning/reconciliation.template.md) | Reconciliation-Register: die offenen Funde der Brownfield-Inventur; nur für Repos im BF-Bootstrap | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
 | [`docs/plan/planning/README.template.md`](docs/plan/planning/README.template.md) | Planning-Index: Slice-Lifecycle + Slice-vs-Welle-Konvention | [Modul 5](../regelwerk/modul-05-planning-harness.md) |
 | [`docs/plan/carveouts/carveout.template.md`](docs/plan/carveouts/carveout.template.md) | Dokumentierte Ausnahme mit Auflösungs-Trigger | [Modul 7](../regelwerk/modul-07-carveouts.md) |
 | [`docs/plan/carveouts/README.template.md`](docs/plan/carveouts/README.template.md) | Carveout-Index (derivativ; aktive/aufgelöste Carveouts) | [Modul 7](../regelwerk/modul-07-carveouts.md) |
@@ -76,7 +77,7 @@ Die Templates haben zwei Lebenszyklen:
 - **Singletons** — einmal beim Bootstrap zu `.md` füllen, dann das
   `.template.md` verwerfen: `project-readme`, `spec/lastenheft`,
   `spec/spezifikation`, `spec/architecture`, `AGENTS`, `harness/README`,
-  `harness/conventions`, `roadmap`, `observations`. *Verwerfen* meint die Kopie im
+  `harness/conventions`, `roadmap`, `observations`, `reconciliation`. *Verwerfen* meint die Kopie im
   Arbeitsbaum — die **vendored** Referenz-Form unter
   `.harness/baseline/<tag>/templates/` bleibt und ist beim Baseline-Update
   die Vergleichsgrundlage für die Form deiner gefüllten Artefakte.

@@ -53,6 +53,12 @@ Steering-Loop-Zähler, wird bei jeder Slice-Closure fortgeschrieben und
 überlebt jede Welle (Baseline-Regelwerk `modul-06-roadmap.md`
 §Das Beobachtungs-Register).
 
+Ein Repo, das aus einem **Brownfield-Bootstrap** kommt, trägt hier flach ein
+zweites Register: `reconciliation.md` mit den offenen Funden des Rückbaus. Es
+wird beim Auflösen fortgeschrieben und ist leer, sobald alle Sub-Areas
+graduiert sind (Baseline-Regelwerk `modul-02-harness-bootstrap.md`
+§Das Reconciliation-Register). Greenfield-Repos haben die Datei nicht.
+
 ## Aktueller Stand
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`

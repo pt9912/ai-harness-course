@@ -63,12 +63,12 @@ beobachtbare Anzeichen, an denen sich ein Modus-Wechsel ankündigt:
    jeder Code-Änderung muss die Spec nachgezogen werden, statt
    umgekehrt.
 3. **Carveout-Auflösung schließt eine BF-Sub-Area.** Wenn ein
-   `CO-DS-*`-Carveout durch einen Reconciliation-Slice geschlossen
+   Inventur-Carveout durch einen Reconciliation-Slice geschlossen
    wird (orphan code bekommt nachträglich seinen Anforderungs-Anker
    in der Spec oder als retroaktiver ADR), nähert sich die zugehörige
    Sub-Area der **Graduation zu GF**. Symptom: der
    Reconciliation-Backlog sinkt um genau einen Eintrag, der
-   schließende Slice trägt einen "CO-DS-NNN aufgelöst durch
+   schließende Slice trägt einen "CO-NNN aufgelöst durch
    LH-FA-MMM"-Hinweis im Closure-Block, und die nächste Inventur
    meldet die Sub-Area mit einer Diskrepanz weniger.
 
@@ -357,9 +357,51 @@ Nummerierung GF 0–8 vs. BF 1–9.
 | 5 | Sensors-Haupt-Tabelle direkt aus Makefile-Kommentaren entstehen lassen | **gegenteilig zu GF** — Targets existieren, keine "Nicht behauptet"-Promotion nötig; **T3** (Sync-Trigger in BF-Diskrepanz-Auslöse-Variante: Sensor-Lücke = impliziter Pointer-Mismatch zwischen Makefile-Realität und Sensor-Tabelle) wird sichtbar |
 | 6 | Lastenheft aus Code/Tests/CI rückbauen | Inventur-Umkehr; Diskrepanz-Material entsteht (Code ohne Anforderung, Test ohne LH-Bezug) |
 | 7 | Architektur + Spezifikation aus `src/` rückbauen; **retroaktive ADRs** für implizite Entscheidungen | ADRs teils retroaktiv mit Status *Accepted* (oder *Superseded*, falls Entscheidung schon revidiert) |
-| 8 | **Diskrepanz-Schock:** Diskrepanzen klassifizieren als (a) `CO-DS-*` (orphan code ohne Anforderung), (b) Reconc.-Slice (orphan requirement ohne Code), (c) retro-ADR (implicit decision) | **BF-spezifischer Schritt** — die Reconciliation-Pflicht macht hier den Modus-Übergang sichtbar; **T3** (Sync-Trigger zwischen Code-Realität und Anforderungs-Anker, in BF-typischer Diskrepanz-Auslöse-Variante) als typische Trigger-Quelle |
+| 8 | **Diskrepanz-Schock:** `docs/plan/planning/reconciliation.md` anlegen (Ziel-Form [`reconciliation.template.md`](../templates/docs/plan/planning/reconciliation.template.md)) und jeden Fund als Zeile klassifizieren: (a) Code ohne Anforderung → Carveout, (b) Anforderung ohne Code → Reconciliation-Slice, (c) Entscheidung ohne Beleg → retroaktive ADR | **BF-spezifischer Schritt** — die Reconciliation-Pflicht macht hier den Modus-Übergang sichtbar; **T3** (Sync-Trigger zwischen Code-Realität und Anforderungs-Anker, in BF-typischer Diskrepanz-Auslöse-Variante) als typische Trigger-Quelle |
 | 9 | Roadmap als Reconciliation-Plan; letzte Welle = Graduation pro Sub-Area | Inhalt anders als GF-Roadmap — Plan ist Diskrepanz-Auflösungs-Sequenz, nicht Feature-Sequenz |
-| Bootstrap-Ende | Reconciliation-Backlog steht, Konvergenzpfad zu GF pro Sub-Area sichtbar | — |
+| Bootstrap-Ende | Reconciliation-Backlog steht — jede Zeile in `reconciliation.md` trägt ihre Auflösung, je Sub-Area ist die Graduation-Welle benannt | — |
+
+#### Das Reconciliation-Register
+
+Der Rückbau (Schritte 6–7) erzeugt Funde, die niemand sonst festhält: Weder die
+Kennung eines Carveouts noch seine sechs Kopffelder sagen, dass er aus der
+Inventur stammt, und einem Slice in `open/` sieht man nicht an, ob er eine
+Zusage einlöst oder eine Lücke schließt. Ohne eigenen Ort ist die Menge der
+offenen Funde deshalb **nicht bestimmbar** — und ein Closure-Kriterium über eine
+unbestimmbare Menge ist keines. Der Ort ist
+`docs/plan/planning/reconciliation.md`, flach neben dem Beobachtungs-Register,
+das dieselbe Form hat: eine stehende Datei mit einer Zeile je Fund
+(Ziel-Form: [`templates/docs/plan/planning/reconciliation.template.md`](../templates/docs/plan/planning/reconciliation.template.md)).
+
+**Kennungen sind `RC-<NNN>`**, fortlaufend je Datei, ohne Bereichssegment — die
+Sub-Area steht als eigene Spalte, und alle Zeilen liegen in *einer* Datei
+([`grundlagen-source-precedence.md` §Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+
+**Drei Klassen, aus Schritt 8 — sie bestimmen, was in der Spalte *Auflösung* steht:**
+
+| Klasse | Was gefunden wurde | Auflösung |
+|---|---|---|
+| Code ohne Anforderung | Code, den keine Anforderung deckt | `CO-<NNN>` samt dessen Folge-Slice |
+| Anforderung ohne Code | zugesagt, aber nicht geliefert | der Reconciliation-Slice |
+| Entscheidung ohne Beleg | im Code getroffen, nirgends begründet | die retroaktive `ADR-<NNNN>` |
+
+Die dritte Klasse ist mit dem Eintrag erledigt: Eine retroaktive ADR entsteht in
+Schritt 7 mit Status *Accepted* (oder *Superseded*) und wartet auf nichts; ihre
+Zeile geht sofort nach *Aufgelöste Einträge*.
+
+**Fortgeschrieben wird beim Auflösen, nicht beim Bootstrap-Ende.** Schließt ein
+Slice einen Fund, wandert dessen Zeile mit Datum und auflösendem Artefakt in die
+zweite Tabelle — dieselbe Append-only-Disziplin wie beim Beobachtungs-Register:
+Wer eine Zeile still löscht, macht sie ununterscheidbar von einer, die es nie
+gab. Der Slice-Plan trägt das als Closure-Pflicht.
+
+**Der Backlog *steht***, wenn jede Zeile ihre Auflösung trägt — nicht, wenn das
+Register leer ist; beim Bootstrap-Ende ist es im Gegenteil voll. **Leer wird es
+je Sub-Area bei der Graduation**, und genau das ist dort die
+Graduation-Bedingung: keine offene Zeile mehr für diese Sub-Area. Wo der Modus
+einer Sub-Area steht und wie ihre Graduation-Bedingung lautet, bleibt
+`harness/conventions.md` §Modus-Deklaration — das Register liefert nur den
+Zählstand, es führt keine zweite Modus-Tabelle.
 
 ### Phasen × Modus — die zweidimensionale Reife-Matrix
 

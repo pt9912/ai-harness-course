@@ -210,16 +210,24 @@ Konvergenzpfad zu GF ist sichtbar (mit ersten Reconciliation-Slices in
 Modul 5–9). Bootstrap und Workflow sind getrennte Lebenszyklen — kein
 Übergang ohne Sichtbarkeit.
 
-**Der Reconciliation-Backlog ist eine Sicht, keine Datei.** Er ist die Summe
-der offenen `CO-DS-*` in `docs/plan/carveouts/` und der Reconciliation-Slices
-in `docs/plan/planning/open/` — deshalb gibt es dafür kein Template und keinen
-eigenen Pfad; ihn zu materialisieren hieße, dieselbe Information ein zweites
-Mal zu führen. Und *„er steht"* heißt nicht „er ist leer", sondern: **jede in
-der Inventur gefundene Diskrepanz ist in genau eine der drei Klassen
-einsortiert** — `CO-DS-*` (Code ohne Anforderung), Reconciliation-Slice
-(Anforderung ohne Code) oder retroaktive ADR (implizite Entscheidung). Erst
-damit ist das Kriterium beobachtbar: Ein Dritter kann ohne Rückfrage
-entscheiden, ob noch unklassifizierte Funde offen sind.
+**Der Reconciliation-Backlog hat einen Ort:** `docs/plan/planning/reconciliation.md`,
+flach neben dem Beobachtungs-Register. Eine Zeile je Fund des Rückbaus — Fund,
+Sub-Area, Klasse, auflösendes Artefakt, Stand. Ohne diese Datei wäre die Menge
+nicht bestimmbar: Weder die Kennung eines Carveouts noch seine sechs Kopffelder
+sagen, dass er aus der Inventur stammt, und in `open/` sieht man einem Slice
+nicht an, ob er eine Zusage einlöst oder eine Lücke schließt.
+
+Damit ist das Bootstrap-Ende-Kriterium nachzählbar: *„Der Backlog steht"* heißt
+**jeder Fund hat eine Zeile, und jede Zeile trägt ihre Auflösung** — ein
+Carveout mit Folge-Slice, einen Reconciliation-Slice oder eine retroaktive ADR.
+Nicht „das Register ist leer": Beim Bootstrap-Ende ist es im Gegenteil voll.
+Leer wird es erst bei der Graduation, und zwar je Sub-Area — deshalb führt es
+die offenen Zeilen pro Sub-Area, statt sie über Carveout- und
+Slice-Verzeichnisse verstreut zu lassen.
+
+Die dritte Klasse ist mit dem Eintrag erledigt: Eine retroaktive ADR entsteht in
+Schritt 7 mit Status *Accepted* (oder *Superseded*) und wartet auf nichts; ihre Zeile geht sofort
+nach *aufgelöst*.
 
 #### Einführungs-Reihenfolge über mehrere Repos
 
