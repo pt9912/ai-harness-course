@@ -3,6 +3,14 @@
 .codex/
 .tmp/
 
+# Ausnahme: Agenten-Skills sind Repo-Werkzeug, keine Maschinen-Konfiguration —
+# sie gehören zum Arbeiten an diesem Korpus und reisen deshalb mit. Der Rest von
+# .claude/ (Sitzungs-, Rechte- und lokale Einstellungen) bleibt ignoriert.
+!.claude/
+.claude/*
+!.claude/skills/
+!.claude/skills/**
+
 __pycache__/
 
 # d-check.mk ist tool-generiert (`d-check --print-mk`) und tool-/versionsspezifisch.
