@@ -244,7 +244,7 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
 
 > **Wenn du den 8-Schritt-Workflow in deinem eigenen Repo bereits routiniert läufst (Plan-vor-Code als Reflex, Sensor-Verfeinerung statt Kontext-Neulesen), springe zu [§Übungen](#übungen).** Das Worked Example unten ist die Schablone für den ersten oder zweiten Durchgang — wer den Workflow verinnerlicht hat, gewinnt durch erneutes Mitlesen wenig (Expertise-Reversal).
 
-**Ausgangs-Slice:** `SL-014a` aus dem Worked Example in
+**Ausgangs-Slice:** `slice-014a` aus dem Worked Example in
 [Modul 5](../02-planung/modul-05-planning-harness.md#worked-example-einen-zu-großen-slice-schneiden) —
 *"Login-Endpoint akzeptiert User/Passwort, gibt JWT zurück,
 Audit-Log-Eintrag entsteht. Bezug: LH-FA-AUTH-001 + ADR-0007
@@ -278,14 +278,14 @@ eingewoben.
 
 **Schritt 4 — Kleinste Änderung planen.** Agent gibt **Plan vor Code**
 aus:
-> **Plan SL-014a:**
+> **Plan slice-014a:**
 > 1. `service/auth/login.go` — Funktion `Login(creds)` mit
 >    JWT-Erzeugung. Import nur aus `adapter/jwt/` (ADR-0007).
 > 2. `adapter/audit/file.go` — `WriteLoginAttempt(ev)`.
 > 3. Tests: `service/auth/login_test.go` (Happy/Boundary/Negative
 >    nach LH-FA-AUTH-001).
-> *Out-of-Scope dieses Slice:* Refresh-Token (SL-014b), Revocation
-> (SL-014c).
+> *Out-of-Scope dieses Slice:* Refresh-Token (slice-014b), Revocation
+> (slice-014c).
 
 **Schritt 5 — Engsten Sensor laufen (eine Testdatei).**
 `make test FILE=service/auth/login_test.go`. Erste Iteration rot
@@ -306,10 +306,10 @@ Tool-Familie). AGENTS.md unverändert (keine neue Hard Rule).
 **Schritt 8 — Bericht: Sensors + Restrisiken.**
 > **Sensors gelaufen:** `make test` (3 neue Tests, alle grün), `make
 > gates` (alle grün, inkl. arch-check). **Restrisiken:**
-> Refresh-Token-Flow (SL-014b) noch nicht implementiert — JWT läuft
+> Refresh-Token-Flow (slice-014b) noch nicht implementiert — JWT läuft
 > ohne Erneuerungspfad ab; das ist im Plan dokumentiert, *aber* das
 > Audit-Log braucht später eine Rotations-Regel. Vorschlag: Folge-Slice
-> SL-014b zuerst, Audit-Rotation als Hinweis in dessen DoD aufnehmen.
+> slice-014b zuerst, Audit-Rotation als Hinweis in dessen DoD aufnehmen.
 
 Acht Schritte mit zwei Rückkanten, ein nachvollziehbarer Slice. Beachte: **kein
 Rücksprung zu Schritt 1**, sondern nur 5→4 (Plan verfeinern) und 6→4
@@ -354,7 +354,7 @@ ein definiertes Setup, sonst zerfällt es zu einem Bauchgefühl-Vergleich.
 Folge diesem Skelett:
 
 1. **Slice fixieren.** Wähle einen kleinen, gut abgegrenzten Slice —
-   ideal `SL-014a` aus dem Worked Example oben. Friere Spec-/ADR-Stand
+   ideal `slice-014a` aus dem Worked Example oben. Friere Spec-/ADR-Stand
    und Modellversion ein.
 2. **Lauf A (mit AGENTS.md).** Starte den Implementer-Agenten mit
    dem vollständigen Kontextpaket: Spec-Auszug, betroffene ADRs,

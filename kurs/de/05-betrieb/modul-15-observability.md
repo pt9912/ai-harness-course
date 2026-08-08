@@ -30,7 +30,7 @@ Fünf neue Begriffe — Volldefinitionen in
 
 ## Engage
 
-Buchhaltung fragt: *"Was hat der KI-Slice SL-024 gekostet?"* Du weißt:
+Buchhaltung fragt: *"Was hat der Slice slice-024 gekostet?"* Du weißt:
 es waren Modell-X-Tokens, aber wie viele und in welcher Verteilung über
 die acht Tool-Calls? Wenn du nicht antworten kannst, bist du in einer
 Klasse von KI-Projekten, die spätestens beim zweiten Kostenreport gestoppt
@@ -244,7 +244,7 @@ oder einen Doku-Konsistenz-Agenten die Bezug-Zeile prüfen lassen
 > Lesepfad über YAML-Frontmatter abbilden:
 > ```yaml
 > ---
-> id: SL-009
+> id: slice-009
 > adr_refs: [ADR-0012]
 > lastenheft_refs: [LH-FA-IDX-003]
 > ---
@@ -358,7 +358,7 @@ und `adr.id`).
   **schriftlich** die vollständige Kette:
 
   ```
-  span.attributes.slice.id  →  SL-<NNN>
+  span.attributes.slice.id  →  slice-<NNN>
                             →  Slice-Datei in docs/plan/planning/done/<NNN>.md
                             →  zugehöriger ADR-<NNNN>
                             →  Lastenheft-ID LH-FA-<KÜRZEL>-<NNN>

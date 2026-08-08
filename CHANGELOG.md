@@ -11,6 +11,90 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 69 — 2026-08-08 · Eine Regel, die nie jemand übernommen hat
+
+Adopter-Beobachtung aus `ai-harness-init` — derselben Quelle wie Welle 27, und
+genau an der Stelle, die Welle 27 offen gelassen hat. Der §Freshness-Audit war
+mit sechs Eigenschaften deutlich stärker als vermutet: Er geht durch die
+Adaptions-Liste statt nur durch den Diff und vergleicht auch die Form. Aber
+**alle sechs hängen an einer Änderung**. Eigenschaft 4 sagt es wörtlich — die
+Ausgänge „beziehen sich auf das *Delta* der neuen Fassung, nicht auf den
+Zustand der Baseline".
+
+Damit findet keine von ihnen eine Regel, die nie ins ausgefüllte Artefakt
+übernommen wurde und sich seither nie geändert hat: Sie erzeugt keinen
+Template-Diff und hat keinen `MR`-Eintrag, den der Adaptions-Durchgang
+abschreiten könnte. Sie ist unsichtbar, *weil* sie alt und stabil ist.
+
+Zwei gemessene Belege, keine Konstruktion. Der `## 3.`-Block der
+`AGENTS.template.md` ist von `v4.0.0` bis `v5.1.0` **bytegleich** — vier
+Releases, ein Major-Sprung, Delta durchgehend null; zwei seiner sechs Regeln
+fehlen in der `AGENTS.md` des Adopters, und die Re-Vendor-Reviews dieser
+Spanne konnten das nicht finden. (Bei `v4.0.0` wurden 3.3 und 3.4 zuletzt
+umgeschrieben — ein Delta-Review dort *hätte* den Block betreten. Die
+Unsichtbarkeit beginnt erst danach, und das genügt: Sie hält seit vier
+Releases an und endet aus eigener Kraft nie.) Und ein ganzes Modul lag beim
+Adopter vom ersten Tag an vollständig im Repo, ohne je ein Delta gewesen zu
+sein.
+
+### Entschieden
+
+- **Siebte Eigenschaft: eine Stichprobe gegen den Bestand.** Sie läuft
+  unabhängig vom Ergebnis der Tag-Frage — damit ist der Audit in einer stabilen
+  Phase erstmals kein No-op mehr: Ist der Pin aktuell, haben die sechs anderen
+  nichts zu tun, und genau dann wächst der Befund, um den es geht.
+  Auswahlkriterium
+  fällt mit der Ursache zusammen — gezogen wird aus den Abschnitten **ohne
+  Delta seit Adoption**, der Komplementärmenge zu
+  `git diff <alt> <neu> -- .harness/baseline/`. Umfang: ein Abschnitt pro
+  Audit, rotierend. **Keine Vollinventur** — die zöge das Closure-Kriterium ins
+  Unabsehbare und nähme der Welle, was sie von sich selbst verlangt.
+- **Ausgang getrennt nach Einzelfall und Muster.** Ein Fund geht den Weg jeder
+  Diskrepanz (Übernahme oder Carveout). *Mehrere* Funde treffen nicht die
+  einzelne Regel, sondern die `MR-000`-Aussage „keine inhaltlichen Adaptionen
+  ggü. Baseline-Default" — sie ist dann nachweislich falsch und wird korrigiert.
+- **Keine fünfte Trigger-Klasse.** Die vier bestehenden sind
+  änderungsgetriebene Repo-interne Auslöser; dieser Fund entsteht gerade *ohne*
+  Bewegung, und sein Auslöser ist der Audit selbst (Eigenschaft 1). Gefehlt hat
+  kein Trigger, sondern ein Ort für den Fund.
+
+### Die Achse, die beide Modi nicht abdecken
+
+Ein erfahrener Leser hielt eine Regelwerks-Migration für einen
+Brownfield-Fall — plausibel, weil BF als „Code existiert, Doku folgt — Inventur
+des Bestands" definiert ist. Der Schluss ist falsch, und die Modus-Tabelle
+*lädt dazu ein*: Ihre Spalte **Trigger-Richtung** führt `Doc → Code` und
+`Code → Doc`; beide Modi regeln dieselbe Achse. Eine Migration hat Harness,
+ausgefüllte Artefakte und erklärte Adoption bereits — sie ist eine dritte
+Beziehung, **adoptierte Norm ↔ ausgefülltes Artefakt**, und für die ist der
+Freshness-Audit zuständig. §Modus pro Sub-Area benennt das jetzt.
+
+Daraus folgt auch die Korrektur an einer naheliegenden Antwort: Bei einer
+Häufung ist die **BF-Markierung nicht** das richtige Werkzeug — sie setzt
+*Code führt, Doku folgt* und trifft die Achse nicht. Modul 7 sagt das jetzt an
+der Stelle, an der der Werkzeug-Trichter endet.
+
+### Zwei Nachzüge aus dem Review
+
+- **`§Freshness-Audit` ist jetzt eine echte Überschrift** — vorher fetter
+  Fließtext, auf den sechs Verweise zeigten, ohne ihn anspringen zu können.
+  Alle sechs tragen jetzt einen Anker; die Phrase in `AGENTS.template.md`
+  nennt die Sektion beim vollen Namen.
+- **`SL-*` ist korpusweit zu `slice-<NNN>` geworden** — 90 Vorkommen in 20
+  Dateien. Welle 68 hatte nur Modul 12 gezogen, weil dort eine Kurzform in ein
+  Manifest-Feld geraten war; die Messung dahinter war zu eng und hinterließ
+  zwei Schreibweisen für dieselbe Artefakt-Klasse. Der Baseline-Token heißt
+  `slice-<NNN>`, wie `lab/example` ihn führt. Zwei Nachläufer waren nötig: die
+  Dopplungs-Heuristik griff in Komposita (`Folge-Slice slice-027` →
+  `Folge-slice-027`), und die Typ-Präfixe `SL-CO-AUDIT-*` / `SL-RC-*` fielen
+  durch ein Muster, das Ziffern direkt hinter `SL-` erwartete.
+
+### Kleinigkeit mit Vorgeschichte
+
+Das CHANGELOG zu Welle 27 hielt fest, die Gegenmaßnahme sei bisher „nur als
+Listen-Phrase" benannt gewesen. Die Prozedur kam damals — die Phrase in
+`AGENTS.template.md` zeigte seither weiter auf nichts. Sie hat jetzt ihr Ziel.
+
 ## Welle 68 — 2026-08-08 · Präfixe, die niemand referenzieren konnte
 
 Aus einer Nutzer-Frage, ob `spec/spezifikation.md` eigene IDs trägt. Die

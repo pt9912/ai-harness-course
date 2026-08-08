@@ -60,7 +60,7 @@ kanonischen Formen liefern `welle-results.template.md` bzw.
 
 - **Das Feld gilt nur in diesen beiden Sektionen.** Überall sonst sind es
   gewöhnliche Wörter und lösen nichts aus — der Trigger-Sprachgebrauch
-  „`SL-024` liegt in `done/`" (Modul 6) ebenso wenig wie eine bloße Erwähnung
+  „`slice-024` liegt in `done/`" (Modul 6) ebenso wenig wie eine bloße Erwähnung
   eines Pfades im Fließtext. Der Sektions-Scope grenzt den Auslöser ein,
   ersetzt ihn aber nicht: *innerhalb* der Sektion entscheidet das Feld.
 - **Die Ruheort-Regel — für jede Datei, die per `git mv` wandert.** Ein

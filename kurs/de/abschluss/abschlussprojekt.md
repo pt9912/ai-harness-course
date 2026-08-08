@@ -121,7 +121,7 @@ Zur Kalibrierung vor der Abgabe: drei kurze Beispielbewertungen stehen in
 | Stufe | Indikatoren |
 |---|---|
 | **rudimentär** | Commits ohne Bezugs-IDs; ADRs ohne Verweis auf Lastenheft. |
-| **funktional** | Konsistentes ID-Schema (`LH-*`, `ADR-*`, `SL-*`); IDs erscheinen in Commits *oder* in Make-Targets, aber nicht durchgängig. |
+| **funktional** | Konsistentes ID-Schema (`LH-*`, `ADR-*`, `slice-*`); IDs erscheinen in Commits *oder* in Make-Targets, aber nicht durchgängig. |
 | **solide** | ID-Schema in allen Artefakten konsequent: Lastenheft, Spec, ADRs, Make-Target-Kommentare, Commit-Messages, PR-Beschreibungen; Traceability-Hook prüft Commits maschinell. |
 | **exzellent** | Zusätzlich: mindestens *ein dokumentierter Fall*, in dem das Tool-Call-Audit-Log einen Pre-completion-Verstoß *retrospektiv* aufgedeckt hat — Eintrag enthält Trace-ID, betroffene Anforderungs-ID, die *aus dem Audit* gewonnene Erkenntnis und den daraus abgeleiteten Steering-Loop-Schritt. Tool-Call-Audit existiert nicht als Sammlung, sondern als forensischer Hebel mit Beleg. |
 

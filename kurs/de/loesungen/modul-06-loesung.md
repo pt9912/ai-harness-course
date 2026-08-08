@@ -28,7 +28,7 @@ Roadmap.
 
 Aus den Engage-/Fehlvorstellungs-Blöcken des Moduls:
 
-1. *"SL-024 liegt in `done/`."*
+1. *"slice-024 liegt in `done/`."*
 2. *"Replay-Lauf gegen Golden Set grün."*
 3. *"Carveout `CO-007` aufgelöst."*
 
@@ -156,25 +156,25 @@ plattgedrückt.
 Anti-Antwort: Trigger "ist halt fertig" — das benennt keinen
 beobachtbaren Auslöser und macht die Zuordnung beliebig.
 
-### (Erschaffen) Ersten Wellen-Eintrag aus `SL-101`/`SL-102`/`SL-103` entwerfen
+### (Erschaffen) Ersten Wellen-Eintrag aus `slice-101`/`slice-102`/`slice-103` entwerfen
 
 ```text
 ## welle-1-api-mit-cache
-Slices:   SL-101 (Such-API), SL-102 (Query-Cache mit TTL, konsumiert SL-101)
+Slices:   slice-101 (Such-API), slice-102 (Query-Cache mit TTL, konsumiert slice-101)
 Trigger:  startet, sobald ADR-Cache-Strategie (Read-through vs. Look-aside)
           akzeptiert ist  ← beobachtbarer Zustand, kein Datum
-Closure:  Replay gegen Golden Set grün UND SL-101+SL-102 in done/
-Nicht in dieser Welle: SL-103 (Dashboard)
+Closure:  Replay gegen Golden Set grün UND slice-101+slice-102 in done/
+Nicht in dieser Welle: slice-103 (Dashboard)
 ```
 
-Begründung der Bündelung: `SL-102` braucht die von `SL-101` gelieferte
+Begründung der Bündelung: `slice-102` braucht die von `slice-101` gelieferte
 API — getrennt liefert keiner der beiden prüfbaren Wert, erst zusammen
 ist ein Replay-Closure-Kriterium überhaupt formulierbar. Sie teilen sich
 also *ein* Closure.
 
-Gegenprobe, warum `SL-103` *nicht* hineingehört: ein Dashboard über
+Gegenprobe, warum `slice-103` *nicht* hineingehört: ein Dashboard über
 einer Suche ohne Cache zeigt keinen Mehrwert, den diese Welle belegen
-soll (Latenz-Gewinn durch Cache). `SL-103` zieht in die *nächste* Welle,
+soll (Latenz-Gewinn durch Cache). `slice-103` zieht in die *nächste* Welle,
 sobald deren Trigger eintritt: "`welle-1-api-mit-cache` in Closure, Cache
 liefert messbare Trefferquote". Der Trigger ist so formuliert, dass ein
 Dritter ohne Rückfrage über "Welle fertig" entscheiden kann.

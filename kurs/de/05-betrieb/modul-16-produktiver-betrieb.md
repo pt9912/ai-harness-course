@@ -154,7 +154,7 @@ Bürokratie-Form, gegen die der Kurs sich wendet.
 Status: released
 Datum: 2026-06-30
 Checkliste: docs/release/welle-1-checkliste.md (alle Items mit Beleg)
-Restrisiken: zwei (siehe §"Bewusst NICHT", plus Folge-Slice SL-027 für
+Restrisiken: zwei (siehe §"Bewusst NICHT", plus Folge-Slice slice-027 für
              Coverage-Erhöhung auf Critical-Pfad).
 Steering-Loop-Eintrag (Modul 15 Doku-Konsistenz-Agent meldete vor
 Freigabe einen Drift in AGENTS.md — wurde behoben, vor Freigabe geprüft).

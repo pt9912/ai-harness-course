@@ -208,6 +208,19 @@ Anti-Antwort: „Ich ziehe die Baseline und schaue, ob die Gates grün
 bleiben." Die Gates sind netzlos und kennen die Baseline-Regeln nicht;
 grün heißt hier nur, dass nichts *syntaktisch* gebrochen ist.
 
+**Und eine Stichprobe gegen den Bestand.** Alles bisher Genannte hängt am
+Delta — es findet, was die neue Fassung *anders* sagt. Eine Baseline-Regel, die
+nie ins ausgefüllte Artefakt übernommen wurde und sich seither nie geändert
+hat, taucht in keinem Diff und in keiner `MR` auf. Deshalb wird pro Audit **ein
+Abschnitt** geprüft, der seit dem adoptierten `<tag>` *kein* Delta hatte —
+genau die, die kein Delta-Review je berührt hat. Ein Fund geht als Übernahme in
+den nächsten Slice oder als Carveout; mehrere Funde treffen die
+`MR-000`-Aussage „keine inhaltlichen Adaptionen" selbst.
+
+Zweite Anti-Antwort: „Ich mache eine Vollinventur über das ganze Regelwerk."
+Damit verliert die Welle ihr Closure-Kriterium — die Stichprobe ist bewusst
+klein und rotiert.
+
 ### (Conceptual Change) Vergleiche deine Spontanantworten mit deiner heutigen Antwort.
 
 Diese Frage hat keine universelle Lösung — die Antwort hängt von

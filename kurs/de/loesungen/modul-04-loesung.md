@@ -32,7 +32,7 @@ Zuordnung mit Begründung je Halbsatz:
 2. *"Die Antwortzeit der Suche bleibt unter 200 ms."* → **Spec**
    (nichtfunktionale Anforderung) — eine messbare Eigenschaft des
    Lieferversprechens, keine Lösungswahl.
-3. *"Slice SL-014 implementiert den Trigram-Index."* → **Plan** —
+3. *"Slice slice-014 implementiert den Trigram-Index."* → **Plan** —
    das *Wann/Wie* eines konkreten Arbeitspakets, das per ID-Bezug
    auf Spec (200-ms-NFA) und ADR (PostgreSQL/Trigram) verweist.
 

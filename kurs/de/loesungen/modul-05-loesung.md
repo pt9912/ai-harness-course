@@ -59,7 +59,7 @@ falsch.
 
 ### (Erschaffen) Zwei beobachtbare Closure-Kriterien und ein Lerneintrag
 
-Ausgearbeitete Beispiel-Konstruktion für `SL-014a` (Login-Endpoint):
+Ausgearbeitete Beispiel-Konstruktion für `slice-014a` (Login-Endpoint):
 
 **Closure-Kriterien (beobachtbar, kein "fühlt sich fertig an"):**
 
@@ -69,7 +69,7 @@ Ausgearbeitete Beispiel-Konstruktion für `SL-014a` (Login-Endpoint):
 2. Jeder der drei DoD-Punkte ist auf einen konkreten Test verlinkt
    (`test_login_returns_jwt`, `test_audit_event_on_login`,
    `test_login_rejects_invalid`) — prüfbar per
-   `make verify-dod SLICE=SL-014a`.
+   `make verify-dod SLICE=slice-014a`.
 
 **Lerneintrag** (Form: *benannte Spec-Lücke*):
 
@@ -93,7 +93,7 @@ Versagensmuster unsichtbar, und derselbe Fehler wird dreimal gemacht.
 
 ### (Analysieren — Transfer aus Modul 2) Welche Sub-Areas berührt der nächste Slice — und welcher Modus passt für jede?
 
-Beispiel-Antwort für `SL-014a` (Authentifizierung implementieren). Vier
+Beispiel-Antwort für `slice-014a` (Authentifizierung implementieren). Vier
 berührte Sub-Areas, je gegen die vier Pflichtkriterien begründet —
 hier kompakt als Sammel-Antwort, der volle Block-pro-Sub-Area-Stand
 steht im Worked Mini-Example in Modul 5:
@@ -103,7 +103,7 @@ steht im Worked Mini-Example in Modul 5:
   Sensor; kein Reconciliation.
 - *Test-Infrastruktur:* **BF.** Keine Sektion in
   `harness/conventions.md` (Skelett mit Inventur-Auftrag); Phase 1 BF;
-  Reconciliation 1 Slice (`SL-RC-014t` + `MR-002`); Graduation-Trigger:
+  Reconciliation 1 Slice (`slice-RC-014t` + `MR-002`); Graduation-Trigger:
   Sync-Trigger setzt `MR-002` in `harness/README.md` und `AGENTS.md`.
 - *Audit-Logging:* **Hybrid.** Konventionen-Dichte mittel (Pflicht-
   Adaption `MR-008` steht, Format-Standard fehlt im Code); Phase 3
@@ -127,7 +127,7 @@ Aggregat-Slice kann zufällig dieselbe Modus-Mischung haben wie ein
 gut geschnittener. Der Modus-Begründungsblock prüft nicht den
 Schnitt, sondern die Bewertungsleistung.
 
-### (Erschaffen + Bewerten) `SL-031 — Bestell-Checkout` bewerten und schneiden
+### (Erschaffen + Bewerten) `slice-031 — Bestell-Checkout` bewerten und schneiden
 
 **(a) Bewertung gegen die zwei Größen-Kriterien:** zu groß.
 
@@ -145,9 +145,9 @@ Schnitt, sondern die Bewertungsleistung.
 
 | ID | DoD | Liefert |
 |---|---|---|
-| `SL-031a` | Warenkorb-API: Artikel hinzufügen/entfernen, Summe berechnen; Audit-Event pro Mutation. | Funktion (eigenständig nutzbarer Warenkorb) |
-| `SL-031b` | Zahlungs-Integration gegen den Warenkorb: Checkout erzeugt Zahlung, Fehlerpfade getestet; Audit-Event. | Umsatz (erster durchgehender Kaufpfad) |
-| `SL-031c` | Bestätigungs-Mail + Lager-Abbuchung nach erfolgreicher Zahlung, mit Idempotenz-Test. | Erfüllung (Fulfilment-Abschluss) |
+| `slice-031a` | Warenkorb-API: Artikel hinzufügen/entfernen, Summe berechnen; Audit-Event pro Mutation. | Funktion (eigenständig nutzbarer Warenkorb) |
+| `slice-031b` | Zahlungs-Integration gegen den Warenkorb: Checkout erzeugt Zahlung, Fehlerpfade getestet; Audit-Event. | Umsatz (erster durchgehender Kaufpfad) |
+| `slice-031c` | Bestätigungs-Mail + Lager-Abbuchung nach erfolgreicher Zahlung, mit Idempotenz-Test. | Erfüllung (Fulfilment-Abschluss) |
 
 Das Audit-Log wird nicht als eigener Slice geschnitten, sondern
 wandert als DoD-Zeile in jeden Slice — es ist eine Quer-Anforderung,
@@ -155,9 +155,9 @@ kein lieferbares Inkrement.
 
 **Begründung des Schnitt-Typs — Lieferwert statt Schichten:** Jeder
 der drei Slices liefert allein prüfbaren Wert und wartet nicht auf
-den nächsten (`SL-031a` ist ohne Zahlung demonstrierbar, `SL-031b`
-schließt den Kaufpfad). Ein Schichtschnitt (`SL-031-db`,
-`SL-031-service`, `SL-031-ui`) erzeugte Zombie-Slices: eine
+den nächsten (`slice-031a` ist ohne Zahlung demonstrierbar, `slice-031b`
+schließt den Kaufpfad). Ein Schichtschnitt (`slice-031-db`,
+`slice-031-service`, `slice-031-ui`) erzeugte Zombie-Slices: eine
 Lager-Abbuchung ohne Checkout liefert nichts Prüfbares — sie ist
 "fast fertig", bis der letzte Schicht-Slice kommt, und genau solche
 Slices bleiben in `in-progress/` hängen.
@@ -212,7 +212,7 @@ Selbsttest für den Lerneintrag: Würde der Eintrag eine *künftige*
 Wiederholung verhindern, wenn ihn der nächste Planner liest? Wenn er
 nur protokolliert, was passiert ist, fehlt die Steering-Loop-Hälfte.
 Eine ausgearbeitete Beispiel-Konstruktion (Kriterien + Lerneintrag
-für `SL-014a`) steht oben in der Selbstcheck-Antwort zum
+für `slice-014a`) steht oben in der Selbstcheck-Antwort zum
 Erschaffen-Item.
 
 ### Schneide einen zu großen Slice in zwei umsetzbare Slices
@@ -234,7 +234,7 @@ Schnitt-Strategien:
 Bezug: Worked Mini-Example *Bootstrap-Modus pro Sub-Area für einen
 Slice begründen* im
 [Modul 5](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)
-mit Beispiel-Slice `SL-014a`.
+mit Beispiel-Slice `slice-014a`.
 
 **Hybrid-Sub-Area `Audit-Logging` — Mustertext für die zwei vom
 Lerner zu ergänzenden Kriterien:**
@@ -280,7 +280,7 @@ Lerner zu ergänzenden Kriterien:**
    teil der Übungs­leistung.
 
 **Distractor-Klärung "Wenn der Slice klein ist, ist die berührte
-Sub-Area GF.":** Der Beispiel-Slice `SL-014a` ist klein (≤ 3
+Sub-Area GF.":** Der Beispiel-Slice `slice-014a` ist klein (≤ 3
 DoD-Punkte), trotzdem ist die Test-Infrastruktur klar BF und das
 Audit-Logging Hybrid. Slice-Größe und Sub-Area-Modus sind orthogonale
 Achsen — Slice-Größe ist eine Eigenschaft des Schnitts (kann ein

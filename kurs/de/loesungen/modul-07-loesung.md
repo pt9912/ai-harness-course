@@ -175,7 +175,7 @@ eigene Carveouts, eigene Welle einsetzen. Beispiel-Instanz für eine
 Welle 3:
 
 ```markdown
-# SL-CO-AUDIT-welle-3: Carveout-Audit vor Welle-3-Closure
+# slice-CO-AUDIT-welle-3: Carveout-Audit vor Welle-3-Closure
 
 **DoD:**
 - Jeder aktive Carveout in `docs/plan/carveouts/` hat ein aktuelles

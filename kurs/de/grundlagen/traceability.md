@@ -84,7 +84,7 @@ kanonischen Formen liefern `welle-results.template.md` bzw.
 
 **Das Feld gilt nur in diesen beiden Sektionen.** Überall sonst sind dieselben
 zwei Wörter gewöhnliche Sprache und lösen nichts aus — die Trigger-Formulierung
-„`SL-024` liegt in `done/`" ([Modul 6](../02-planung/modul-06-roadmap.md))
+„`slice-024` liegt in `done/`" ([Modul 6](../02-planung/modul-06-roadmap.md))
 ebenso wenig wie eine bloße **Erwähnung** eines Pfades im Fließtext. Der
 Sektions-Scope grenzt den Auslöser ein, ersetzt ihn aber nicht: *innerhalb* der
 Sektion entscheidet das Feld.

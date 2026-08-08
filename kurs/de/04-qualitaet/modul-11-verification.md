@@ -179,7 +179,7 @@ deckt nur die Struktur.
 
 **Schritt 6 — Bewusstes Brechen.** Ein Slice landet in `done/` mit
 `closure_note: "Fertig."`. `make verify-closure-notes` läuft rot mit
-`docs/plan/planning/done/SL-024.md: closure_note hat nur 1 Satz`. Der
+`docs/plan/planning/done/slice-024.md: closure_note hat nur 1 Satz`. Der
 Verifier hat *genau das* erkannt, was Tests nicht erkannt hätten und
 Reviewer übersehen würde (Reviewer prüft Diff gegen Plan/ADR — der
 fehlende Closure-Eintrag ist *kein* Diff-Symptom).

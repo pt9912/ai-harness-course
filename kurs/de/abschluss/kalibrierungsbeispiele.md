@@ -43,7 +43,7 @@ Bewertung:
 | Vollständigkeit | solide | Alle Artefakte vorhanden und verknüpft; Roadmap als Wellen-Sequenz mit beobachtbaren Triggern. |
 | Konsistenz | solide | Source Precedence ist sichtbar; AGENTS.md behauptet keine erfundenen Tools; Carveout per `CO-001` in der Sensors-Tabelle verlinkt; `harness/conventions.md` mit `MR-000` und Modus-Deklaration. |
 | Reproduzierbarkeit | solide | Gates laufen auf frischem Klon und in CI mit gepinntem Image. |
-| Auditierbarkeit | solide | `LH-*`, `ADR-*` und `SL-*` erscheinen in Artefakten und PR-Beschreibung. |
+| Auditierbarkeit | solide | `LH-*`, `ADR-*` und `slice-*` erscheinen in Artefakten und PR-Beschreibung. |
 | Steering-Loop-Reife | solide | Ein Failure führte zu einem implementierten Sensor; Wiederholung wurde geprüft; Incident-Runbook mit Rollback-vs-Fix-Forward-Abwägung vorhanden. |
 
 Das Projekt besteht. Es ist nicht breit, aber belegt die komplette
@@ -64,13 +64,13 @@ Bewertung:
 | Vollständigkeit | solide | Alle Artefakte vorhanden und verknüpft. |
 | Konsistenz | solide | Source Precedence sichtbar; AGENTS.md ohne Drift. |
 | Reproduzierbarkeit | solide | Gates auf frischem Klon und in CI mit gepinntem Image. |
-| Auditierbarkeit | solide | `LH-*`, `ADR-*` und `SL-*` durchgängig in Artefakten und PR-Beschreibung. |
+| Auditierbarkeit | solide | `LH-*`, `ADR-*` und `slice-*` durchgängig in Artefakten und PR-Beschreibung. |
 | Steering-Loop-Reife | funktional | Failure beobachtet und Sensor-Vorschlag notiert; Sensor selbst nicht implementiert, Wiederholungs-Messung fehlt. |
 
 Das Projekt **besteht** — gerade noch. Die Bestehens-Regel
 ([`abschlussprojekt.md`](abschlussprojekt.md#bestanden)) erlaubt *eine*
 funktional-Achse, wenn die Lücke dokumentiert und mit einem Folge-Slice
-verknüpft ist. Das Begleitprotokoll referenziert `SL-018`
+verknüpft ist. Das Begleitprotokoll referenziert `slice-018`
 ("Sensor *suppression-counter* implementieren") in `next/` — damit ist
 die Auflage erfüllt.
 

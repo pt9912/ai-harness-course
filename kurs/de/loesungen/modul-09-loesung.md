@@ -104,7 +104,7 @@ Zwei Läufe, vier Achsen, alles andere konstant:
   Spec-Auszug, betroffene ADRs, AGENTS.md, Tool-Allowlist.
 - **Lauf B (ohne AGENTS.md):** *exakt* derselbe Aufbau, nur AGENTS.md
   aus dem Kontext entfernt.
-- **Konstant gehalten:** Slice (ideal `SL-014a`), Spec-/ADR-Stand,
+- **Konstant gehalten:** Slice (ideal `slice-014a`), Spec-/ADR-Stand,
   Modellversion, Seed. Variiert wird *eine einzige* Variable — sonst
   ist der Vergleich keine Messung, sondern ein Bauchgefühl.
 

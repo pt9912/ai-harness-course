@@ -132,7 +132,7 @@ Nach diesem Modul kannst du:
 * Drei Anzeichen für einen Modus-Wechsel im laufenden Betrieb.
 * Freshness-Audit der vendored Baseline: Release-*Liste* statt Asset-Hash,
   Durchgang durch die Adaptions-Liste, Form-Vergleich gegen die vendored
-  Referenz-Form, Rückbau als neuer Eintrag.
+  Referenz-Form, Rückbau als neuer Eintrag, Stichprobe gegen den Bestand.
 
 ## Harness-Einordnung
 
@@ -395,7 +395,9 @@ nach. Die Templates tragen dabei zwei Rollen: **vendored** als Referenz-Form
 (worauf das Regelwerk als „Ziel-Form" verweist — `../templates/…` löst netzlos
 lokal auf) und **kopiert-und-ausgefüllt** als deine eigenen Artefakte.
 
-**Freshness-Audit — die Kehrseite des Vendorings (Schritt 2).** Eine
+### Freshness-Audit — die Kehrseite des Vendorings (Schritt 2)
+
+Eine
 committet vendored Kopie ist per Konstruktion eingefroren und driftet still
 von der kanonischen Quelle weg, sobald ein neues Kurs-Release erscheint. Das
 ist derselbe Mechanismus, den Modul 14 am floatenden Base-Image *die
@@ -404,7 +406,7 @@ dass die Welt um ihn herum weiterzieht. Für Docker verlangt der Kurs „pinnen
 **und** überwachen" (`image_hash` im Replay-Manifest, Modul 12) — dieselbe
 Doktrin gilt für die Baseline, sonst ist der Pin nur die halbe Maßnahme. Der
 Gegenzug ist ein **Freshness-Audit**, den du *aktiv überwachst* — eine
-Selbstführungs-Praxis, kein einmaliges Audit —, mit sechs Eigenschaften:
+Selbstführungs-Praxis, kein einmaliges Audit —, mit sieben Eigenschaften:
 
 * **Beobachtbarer Auslöser, keine Kalenderpflicht.** Die Frage *„ist mein
   `<tag>` noch das aktuelle Kurs-Release?"* wird an ein Ereignis gebunden —
@@ -497,6 +499,42 @@ Selbstführungs-Praxis, kein einmaliges Audit —, mit sechs Eigenschaften:
   die historisch korrekte Aussage über den damaligen Zustand — dieselbe
   Append-only-Disziplin wie bei ADRs
   ([Modul 4](modul-04-adrs.md)).
+* **Eine Stichprobe gegen den Bestand, nicht gegen das Delta.** Sie läuft
+  unabhängig vom Ergebnis der Tag-Frage — auch wenn der Pin aktuell ist. Die
+  sechs Eigenschaften darüber haben dann nichts zu tun, denn ihr Gegenstand ist
+  die *Änderung*; der Gegenstand dieser hier ist der *Bestand*, und den gibt es
+  immer. Eine Baseline-Regel, die **nie** ins ausgefüllte
+  Artefakt übernommen wurde und sich seither **nie** geändert hat, erzeugt
+  keinen Template-Diff und hat keinen `MR`-Eintrag, den der Adaptions-Durchgang
+  abschreiten könnte — sie ist unsichtbar, *weil* sie alt und stabil ist. Genau
+  über sie behauptet aber die `MR-000`-Aussage *„keine inhaltlichen Adaptionen
+  ggü. Baseline-Default"* etwas, und nichts prüft es. Das ist eine Zusage ohne
+  Sensor: Wer den Audit vollständig fährt, darf sich danach konform glauben und
+  kann es nicht wissen.
+
+  **Das Auswahlkriterium fällt mit der Ursache zusammen.** Gezogen wird aus den
+  Baseline-Abschnitten, die seit dem adoptierten `<tag>` **kein Delta** hatten —
+  die Komplementärmenge zu `git diff <alt> <neu> -- .harness/baseline/`. Nicht
+  weil sie wichtiger wären, sondern weil kein Delta-Review sie je berührt hat.
+  Umfang: **ein Abschnitt pro Audit**, rotierend. Über mehrere Audits wächst die
+  Abdeckung, und das Closure-Kriterium der Welle bleibt absehbar — eine
+  unbegrenzte Bestandsaufnahme zöge es ins Unabsehbare und nähme der Welle
+  genau das, was sie von sich selbst verlangt. Die Frage pro Regel ist eine
+  einzige: *Steht sie in meinem ausgefüllten Artefakt — oder als deklarierte
+  Abweichung?* Zweimal nein heißt: nie übernommen.
+
+  **Ein Fund und ein Muster sind verschiedene Fälle.** Eine einzelne nie
+  übernommene Regel geht den Weg jeder Diskrepanz
+  ([Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren)):
+  Übernahme im nächsten Slice, oder Carveout mit Auflösungs-Trigger, wenn sie
+  nicht sofort geht. Zeigt die Stichprobe **mehrere** Funde, ist nicht die
+  einzelne Regel das Problem, sondern die `MR-000`-Aussage: Sie ist dann
+  nachweislich falsch und wird korrigiert — entweder durch Übernahme oder durch
+  `MR`-Einträge, die die Abweichungen deklarieren. Eine BF-Markierung ist hier
+  **nicht** die Antwort; sie regelt Doc ↔ Code und trifft die Achse nicht
+  ([§Modus pro Sub-Area](../grundlagen/bootstrap.md#modus-pro-sub-area-greenfield-vs-brownfield)).
+  Ob es dafür einen Sensor braucht, ist ein eigener Kandidat und nicht Teil
+  desselben Durchgangs.
 
 Ein neuer Tag löst einen **Review** aus — Re-Vendoring ist eine bewusste
 Entscheidung mit eigenem Diff —, keinen stillen Auto-Bump.
@@ -905,7 +943,7 @@ die modulspezifischen Indikatoren sind:
 | Trigger in WE2, der BF-Übergang sichtbar macht? | "T3" oder "Diskrepanz". | T3 als **Sync-Trigger in BF-Diskrepanz-Auslöse-Variante** bei Schritt 5 oder 8 — Begründung: weil dort die Inventur-Umkehr (Code → Doc) auf Bestand trifft, der keinem Anforderungs-Anker entspricht (impliziter Pointer-Mismatch). | + Pointe: T3 ist *keine fünfte Klasse*, sondern eine BF-typische Auslöse-Variante von Sync (die vier Klassen aus konventionen.md bleiben erschöpfend). Plus: Diskrepanz-Schock ist der pädagogisch wertvolle Moment, an dem die Inventur-Arbeit der vorigen Schritte einen sichtbaren Sinn bekommt. |
 | Phase 4 kohärent in GF vs. BF? | "In GF steht der Vertrag, in BF die Inventur." | GF Phase 4: *Vertrag steht, Code wird daran gemessen* (z. B. CI-Gates greifen). BF Phase 4: *Inventur abgeglichen, Diskrepanz-Schock sichtbar* (z. B. CO-DS-* oder Reconc.-Slice-Backlog). | + Begründung, warum *Phase 4* die kritische Stufe in BF ist (vorher: Inventur arbeitet, nachher: Reconciliation läuft); Verweis auf Modul 7 §Carveouts für die `CO-DS-*`-Konvention. |
 | Modus-Wechsel als Signal gelesen? | "Doku nachziehen." — Symptom behandelt, kein Modus-Urteil. | Anzeichen 2 erkannt (*Test-Bestand übertrifft Spec-Anker* → die Sub-Area ist de facto von GF nach BF gedriftet); Reaktion: Modus-Deklaration im Adaptions-Block auf BF stellen, mit Konvergenz-Auftrag — nicht stillschweigend weiter GF behaupten. | + Begründung, warum *nichts tun* die teuerste Option ist (undeklarierte Drift macht jede spätere Diskrepanz unmessbar — Linse *Drift*), und Pointe: der Wechsel ist kein Versagen, sondern ein funktionierender Sensor der Bootstrap-Diagnose; Anschluss an die metakognitive Reflexionsfrage in §Reflexion. |
-| Was prüfst du beim Baseline-Update außer dem Diff? | "den Diff durchsehen" — die eigenen Adaptionen kommen nicht vor. | Durchgang durch die Adaptions-Liste in `harness/conventions.md`, Frage pro Eintrag: *Regelt die neue Fassung das, wofür diese Adaption angelegt wurde?* Die fünf Ausgänge benannt (gegenstandslos · bleibt gültig · teilweise überholt · Bezug ist entfallen · widerspricht), jeweils gegen das *Delta* der neuen Fassung; *gegenstandslos* nicht daran erkannt, dass ein Trigger formal feuert, sondern daran, dass die Bedingung jetzt in der Baseline steht. | + `permanent`-Einträge werden mitgeprüft (*permanent* = kein automatischer Trigger, nicht unauflösbar), Rückbau als **neuer** Eintrag mit *Löst auf* und auslösendem Baseline-Stand statt als Edit, und für eine Lockerung gegen eine verschärfte Baseline ein Carveout statt einer stillen Dauer-`MR`; nennt die vendored Referenz-Form als Vergleichsgrundlage für die *Form* und unterscheidet Singleton (Nacharbeit nötig) von wiederkehrendem Template (Append-only). |
+| Was prüfst du beim Baseline-Update außer dem Diff? | "den Diff durchsehen" — die eigenen Adaptionen kommen nicht vor. | Durchgang durch die Adaptions-Liste in `harness/conventions.md`, Frage pro Eintrag: *Regelt die neue Fassung das, wofür diese Adaption angelegt wurde?* Die fünf Ausgänge benannt (gegenstandslos · bleibt gültig · teilweise überholt · Bezug ist entfallen · widerspricht), jeweils gegen das *Delta* der neuen Fassung; *gegenstandslos* nicht daran erkannt, dass ein Trigger formal feuert, sondern daran, dass die Bedingung jetzt in der Baseline steht. | + `permanent`-Einträge werden mitgeprüft (*permanent* = kein automatischer Trigger, nicht unauflösbar), Rückbau als **neuer** Eintrag mit *Löst auf* und auslösendem Baseline-Stand statt als Edit, und für eine Lockerung gegen eine verschärfte Baseline ein Carveout statt einer stillen Dauer-`MR`; nennt die vendored Referenz-Form als Vergleichsgrundlage für die *Form* und unterscheidet Singleton (Nacharbeit nötig) von wiederkehrendem Template (Append-only); nennt die **Stichprobe gegen den Bestand** — ein Abschnitt *ohne* Delta seit Adoption pro Audit, rotierend, unabhängig davon, ob der Pin noch aktuell ist — und trennt den Einzelfund (Übernahme oder Carveout) vom Muster (die `MR-000`-Aussage ist falsch, keine BF-Markierung). |
 | Überzeugungs-Check: welche Verschiebung? | Keine Verschiebung benannt oder pauschal "alles klarer". | Eine konkrete Antwort: welche §Vorab-Frage hat sich um welchen Halbsatz verschoben? Verweis auf eine Fehlvorstellung (FV1–FV5), die deine Spontanantwort getragen hat. | + Pointe: welche Vorstellung gleich geblieben ist und *warum sie hält* — Conceptual-Change-Reflexion verlangt, beides zu zeigen, nicht nur Verschiebung. |
 
 ## Weiterlesen

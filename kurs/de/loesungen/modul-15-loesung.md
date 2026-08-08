@@ -258,7 +258,7 @@ Original bleibt unverändert):
 wird der **Kosten-Drill-down des teuersten Calls** und damit die
 vollständige Token-Attribuierung pro Slice: Die Implementer-Rolle
 schrumpft scheinbar von 3737 auf 1070 Token, der Lauf von 9797 auf
-7130 — die Buchhaltungs-Frage aus dem Engage ("Was hat SL-024 / hier
+7130 — die Buchhaltungs-Frage aus dem Engage ("Was hat slice-024 / hier
 slice-009 gekostet?") bekommt eine *falsche*, keine fehlende Antwort.
 Das ist die gefährlichere Form: nichts sieht kaputt aus.
 Kompensation: **Metriken** könnten den Verlust auffangen — wenn ein

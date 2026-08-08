@@ -209,7 +209,7 @@ vier Kriterien der Übung:
 | Kriterium | Bericht A (Modul 9) | Bericht B (weichgespült) |
 |---|---|---|
 | Sensors konkret benannt | ja — `make test` (3 neue Tests), `make gates` inkl. `arch-check` | nein — "Tests grün" ohne Target, ohne Files |
-| Restrisiken handlungsorientiert | ja — Refresh-Token-Flow offen, Folge-Slice SL-014b vorgeschlagen, Audit-Rotation als DoD-Hinweis | nein — "minimal" ist ein Urteil ohne Gegenstand |
+| Restrisiken handlungsorientiert | ja — Refresh-Token-Flow offen, Folge-Slice slice-014b vorgeschlagen, Audit-Rotation als DoD-Hinweis | nein — "minimal" ist ein Urteil ohne Gegenstand |
 | Selbstabsolution-Indikatoren | keine | drei: "grün" (unbelegt), "läuft", "minimal" |
 | Verifier-Anschlussfähigkeit | ja — jede Behauptung ist maschinell (`make gates` re-run) oder semantisch (Folge-Slice existiert?) prüfbar | nein — keine Behauptung ist nachprüfbar formuliert |
 

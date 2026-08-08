@@ -43,7 +43,7 @@ in Phase 02 startet. Lösungs-Vergleichspunkt:
 Slices und bewege sie durch die Lifecycle-Verzeichnisse.
 
 1. Lege `open/`, `next/`, `in-progress/`, `done/` an.
-2. Schreibe drei Slice-Dateien (`SL-001` … `SL-003`), jede mit DoD und
+2. Schreibe drei Slice-Dateien (`slice-001` … `slice-003`), jede mit DoD und
    Trigger für den Übergang in `done/`.
 3. Mindestens *ein* Slice muss zu groß sein — schneide ihn ohne Verlust
    in zwei und dokumentiere die Schnittentscheidung.

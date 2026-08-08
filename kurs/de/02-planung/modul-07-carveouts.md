@@ -89,7 +89,7 @@ noch in der Spec auf. Der bessere Weg: ein Carveout.
 
 **Schritt 1 — Carveout-Datei anlegen.** Konvention:
 `docs/plan/carveouts/CO-<NNN>-<kurztitel>.md`. ID läuft in `CO-*`-Reihe
-(separat von `LH-`, `ADR-`, `SL-` — siehe
+(separat von `LH-`, `ADR-`, `slice-` — siehe
 [`source-precedence.md`](../grundlagen/source-precedence.md#id-schema-als-klammer)).
 Für unseren Fall: `CO-001-index-coverage.md`.
 
@@ -233,7 +233,21 @@ die linke Tabellenspalte); *Werkzeug-Klasse* ist die Achse, auf der sich
 die drei unterscheiden (punktuell vs. Sub-Area-weit vs. dauerhaft — die
 Träger-Spalte).
 
-Damit ist die Werkzeug-Wahl von Schritt 6 vollständig. Die zwei folgenden
+Damit ist die Werkzeug-Wahl von Schritt 6 vollständig.
+
+**Eine Diskrepanz-Klasse liegt außerhalb dieses Trichters.** Alle drei
+Werkzeuge hier antworten auf ein Missverhältnis zwischen *Code und Doku*. Ein
+Fund aus der Stichprobe des Freshness-Audits — eine Baseline-Regel, die nie ins
+ausgefüllte Artefakt übernommen wurde — liegt dagegen zwischen *adoptierter
+Norm und Artefakt*. Punktuell behandelt der Trichter ihn trotzdem richtig:
+Übernahme im nächsten Slice, oder Carveout mit Auflösungs-Trigger, wenn sie
+nicht sofort geht. Bei einer **Häufung** greift die Sub-Area-Antwort jedoch
+nicht — eine BF-Markierung setzte *Code führt, Doku folgt*, und darum geht es
+nicht. Mehrere Funde treffen die `MR-000`-Aussage selbst; sie wird korrigiert,
+nicht die Sub-Area umgestuft
+([Modul 2 §Freshness-Audit](../01-spec-und-architektur/modul-02-harness-bootstrap.md#freshness-audit--die-kehrseite-des-vendorings-schritt-2)).
+
+Die zwei folgenden
 Blöcke sind **optionale Vertiefung — beim ersten Durchgang
 überspringbar** (weiter bei [§Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)):
 das konkrete `MR`-Format der BF-Markierung im Lab und die Frage, was mit
@@ -313,14 +327,14 @@ ist die genaue Doku-Drift, die der Carveout-Mechanismus eigentlich
 verhindern sollte.
 
 **Schritt 1 — Audit-Slice als ID-Reihe einplanen.** Konvention: ein
-Slice `SL-CO-AUDIT-<welle>` pro Welle-Closure, *bevor* die Welle nach
+Slice `slice-CO-AUDIT-<welle>` pro Welle-Closure, *bevor* die Welle nach
 `done/` wandert. ID-Schema-Ergänzung in
 [`source-precedence.md` §ID-Schema](../grundlagen/source-precedence.md#id-schema-als-klammer): Audit-Slices haben
 ein Präfix, das sie vom regulären Implementierungs-Slice unterscheidet
 — sie liefern *keinen Code*, nur Doku-Updates.
 
 ```markdown
-# SL-CO-AUDIT-welle-2: Carveout-Audit vor Welle-2-Closure
+# slice-CO-AUDIT-welle-2: Carveout-Audit vor Welle-2-Closure
 
 **DoD:**
 - Jeder aktive Carveout in `docs/plan/carveouts/` hat ein aktuelles
@@ -400,7 +414,7 @@ sonst ist er eine schöne Konvention, die niemand prüft.
 
 * **Carveout dokumentieren** (Lernziel 1 · Erschaffen·prozedural; folgt [Worked Example A](#worked-example-a-einen-carveout-dokumentieren)). Lege für eine fehlende Coverage-Schwelle eine `CO-<NNN>-*.md`-Datei mit den sechs Pflicht-Header-Feldern (Status, Datum angelegt, Letzte Prüfung, betroffenes Gate, Geltungsbereich, Folge-Slice) und einem beobachtbaren Auflösungs-Trigger an. Trage den `# CO-<NNN>`-Kommentar in die Gate-Konfiguration ein. **Begründe zum Schluss in *einem* Satz, warum dein Fall ein Carveout ist und nicht eine BF-Sub-Area-Markierung oder ein permanenter ADR** (das ist die produktive Mini-Anwendung von Lernziel 3 — die Werkzeug-Disambiguierung aus Worked Example A Schritt 6). Vergleich: [`../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md`](../../../lab/example/docs/plan/carveouts/CO-001-index-coverage.md).
 * **Folge-Slice verknüpfen** (Lernziel 1, fortgesetzt). Schreibe den Folge-Slice mit konkretem DoD und beobachtbarem Trigger so, dass die Auflösung des Carveouts maschinell erkennbar wird (Schritt 5 in Worked Example A).
-* **Carveout-Audit-Slice instanziieren** (Lernziel 4 · Anwenden·prozedural; folgt [Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)). Schreibe für die *nächste* Welle deines Repos einen `SL-CO-AUDIT-<welle>`-Slice mit vier DoD-Punkten und Rollen-Zuweisung (Planner identifiziert · Architect entscheidet bei Permanenz · Implementer führt aus). Lege die Audit-Bericht-Tabelle (vorher/nachher/Aktion) als Closure-Notiz-Block bei. Provoziere als Fehlerfall: lass *eine* Welle ohne Audit schließen und beobachte, was nach zwei Wellen mit den unauditierten Carveouts passiert.
+* **Carveout-Audit-Slice instanziieren** (Lernziel 4 · Anwenden·prozedural; folgt [Worked Example B](#worked-example-b-ein-carveout-audit-als-wiederkehrenden-slice-entwerfen)). Schreibe für die *nächste* Welle deines Repos einen `slice-CO-AUDIT-<welle>`-Slice mit vier DoD-Punkten und Rollen-Zuweisung (Planner identifiziert · Architect entscheidet bei Permanenz · Implementer führt aus). Lege die Audit-Bericht-Tabelle (vorher/nachher/Aktion) als Closure-Notiz-Block bei. Provoziere als Fehlerfall: lass *eine* Welle ohne Audit schließen und beobachte, was nach zwei Wellen mit den unauditierten Carveouts passiert.
 
 *Lernziel 3 (einordnen) bekommt keine eigene vierte Übung — eine solche
 hätte das Modul-Volumen ohne CA-Gewinn vergrößert. Stattdessen wird die

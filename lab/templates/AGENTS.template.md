@@ -52,7 +52,9 @@ Sub-Area-Qualifikation, Carveout-vs-Reconciliation, Modus-Diagnose. Dabei
 ganze Regelwerk im Kontext halten**. Breiterer Pflicht-Blick bleibt bei:
 Bootstrap, Änderung an [`harness/conventions.md`](harness/conventions.md)
 (Adaptionen `MR-<NNN>`, Source-Precedence, ID-Schema), Drift-Audit gegen die
-Baseline. Derivativ: bei Konflikt gelten die kanonischen Quellen.
+Baseline (Baseline-Regelwerk `modul-02-harness-bootstrap.md`
+§Freshness-Audit der vendored Baseline — darunter die Stichprobe gegen
+den Bestand, die auch bei aktuellem Pin läuft). Derivativ: bei Konflikt gelten die kanonischen Quellen.
 
 Die **Skelett-Vorlagen** der Baseline liegen **vendored** unter
 `.harness/baseline/<tag>/templates/` (aus demselben Baseline-Bundle) und

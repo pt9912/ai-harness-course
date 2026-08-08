@@ -148,6 +148,18 @@ Permanente BF-Erklärung (für Code, der absehbar entfernt wird —
 Legacy, Drittsystem-Adapter) ist möglich, mit Begründung und
 Folge-Slice.
 
+**Beide Modi regeln dieselbe Achse: Doc ↔ Code.** Die Spalte
+*Trigger-Richtung* sagt es wörtlich — GF ist `Doc → Code`, BF ist `Code → Doc`.
+Eine dritte Beziehung fällt deshalb durch beide hindurch: **adoptierte Norm ↔
+ausgefülltes Artefakt**. Wer eine Regelwerks-Migration für einen
+Brownfield-Fall hält, weil dort *„Inventur des Bestands"* steht, greift zum
+falschen Werkzeug: BF regelt, ob **Code oder Doku führt** — bei einer Migration
+sind beide längst da und stimmen miteinander überein; abweichen kann das
+Artefakt von der *adoptierten Norm*. Für diese Achse ist der Freshness-Audit
+zuständig
+([Modul 2 §Freshness-Audit](../01-spec-und-architektur/modul-02-harness-bootstrap.md#freshness-audit--die-kehrseite-des-vendorings-schritt-2)),
+nicht die Modus-Wahl.
+
 ### Sektionsweise Reife: Phasen pro Dokument
 
 Ein Harness-Dokument ist während Bootstrap nicht "entweder leer oder

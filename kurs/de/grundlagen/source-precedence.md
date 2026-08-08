@@ -92,7 +92,7 @@ Sie bekommt einen Nachfolger, der sie auflöst und den Baseline-Stand nennt,
 der die Ablösung ausgelöst hat — dieselbe Append-only-Disziplin
 wie bei ADRs. Widerspricht sie der neuen Fassung, gilt sie in ihrem
 Geltungsbereich weiter; der Widerspruch gehört aber benannt
-([Modul 2 §Freshness-Audit](../01-spec-und-architektur/modul-02-harness-bootstrap.md)).
+([Modul 2 §Freshness-Audit](../01-spec-und-architektur/modul-02-harness-bootstrap.md#freshness-audit--die-kehrseite-des-vendorings-schritt-2)).
 
 **Universal vs projektabhängig.** *Dass* eine Source Precedence existiert
 und dass bei Konflikt die niedriger rangierte Quelle angepasst wird, ist

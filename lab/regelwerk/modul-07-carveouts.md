@@ -93,12 +93,23 @@ Checkliste reduziert auf die Architektur-Folgen). Der leere
 Werkzeug-Wahl-Spur im Repo lesbar bleibt. Das ist nicht Aufgabe, das ist
 Ehrlichkeit.
 
+**Eine Diskrepanz-Klasse liegt außerhalb dieses Trichters.** Alle drei
+Werkzeuge antworten auf ein Missverhältnis zwischen *Code und Doku*. Ein Fund
+aus der Stichprobe des Freshness-Audits — eine Baseline-Regel, die nie ins
+ausgefüllte Artefakt übernommen wurde — liegt zwischen *adoptierter Norm und
+Artefakt*. Punktuell behandelt der Trichter ihn richtig: Übernahme im nächsten
+Slice, oder Carveout mit Auflösungs-Trigger. Bei einer **Häufung** greift die
+Sub-Area-Antwort dagegen nicht — eine BF-Markierung setzte *Code führt, Doku
+folgt*, und darum geht es nicht. Mehrere Funde treffen die `MR-000`-Aussage
+selbst; sie wird korrigiert, nicht die Sub-Area umgestuft
+([`modul-02-harness-bootstrap.md` §Freshness-Audit](modul-02-harness-bootstrap.md#freshness-audit-der-vendored-baseline-schritt-2)).
+
 ### Carveout-Audit-Slice (Modul 7)
 
 Der Carveout-Mechanismus hält nur, wenn ein *zweiter* Mechanismus ihn
 auditiert — sonst driften „aktive" Carveouts still in De-facto-Permanenz
 (genau die Doku-Drift, die Carveouts verhindern sollen). Pro
-Welle-Closure ein Audit-Slice `SL-CO-AUDIT-<welle>`, *bevor* die Welle
+Welle-Closure ein Audit-Slice `slice-CO-AUDIT-<welle>`, *bevor* die Welle
 nach `done/` wandert (eigenes Präfix laut
 [`grundlagen-source-precedence.md` §ID-Schema](grundlagen-source-precedence.md#id-schema-als-klammer) — liefert keinen Code,
 nur Doku-Updates). Regeln:

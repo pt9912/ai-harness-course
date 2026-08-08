@@ -17,7 +17,7 @@ Form, die Regeln der Inhalt.
 ### Roadmap-Regeln (Modul 6)
 
 - Ein Welle-Eintrag braucht minimal drei Bestandteile: Slice-IDs (Inhalt) · Trigger als beobachtbare Bedingung (kein Datum) · Closure-Kriterien (z. B. Replay grün, alle Slices in `done/`). Datum darf *erwähnt* werden (Prognose), darf aber nie Trigger sein — sonst kappt die Welle halbfertige Slices am Kalendertag und das Auditierbarkeits-Versprechen bricht.
-- Ein Trigger ist beobachtbar dann, wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er eingetreten ist. "Sobald wir Zeit haben" scheitert daran; "SL-024 in `done/`" besteht. Beispiele für beobachtbare Trigger: "SL-024 liegt in `done/`" · "Replay-Lauf gegen Golden Set grün" · "Carveout `CO-007` aufgelöst".
+- Ein Trigger ist beobachtbar dann, wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er eingetreten ist. "Sobald wir Zeit haben" scheitert daran; "slice-024 in `done/`" besteht. Beispiele für beobachtbare Trigger: "slice-024 liegt in `done/`" · "Replay-Lauf gegen Golden Set grün" · "Carveout `CO-007` aufgelöst".
 - **Der Start-Trigger darf kein Ergebnis dieser Welle sein** — Beobachtbarkeit allein genügt nicht. "Alle Slices in `done/`" ist beobachtbar *und* ein Ergebnis: als Closure-Trigger richtig, als Start-Trigger zirkulär. Zwei Prüfungen, nicht eine. Test: Steht der Trigger in der Slice-Liste *dieser* Welle, ist er falsch platziert.
 - Welle 30 % über Schätzung — Diagnose vor Aktion: liegt es an Slice-Größe (→ neu schneiden), an Reihenfolge (→ neu planen), oder an unerwarteter Komplexität (→ Carveout)? 30 % früh können ein Steering-Loop-Signal sein (Slice-Sizing-Regel schärfen), 30 % spät (vor Welle-Closure) eher Carveout.
 
@@ -187,7 +187,7 @@ fünf Schritte in
    betrifft die Welle-*Plan*-Datei, die keine Paarung trägt.)
    (a) **Anker-Paarung** — ausgelöst durch das Pflichtfeld `liegt in <Zielort>`,
    **innerhalb dieser Sektion** und nicht durch die Semantik des Eintrags
-   (der Trigger-Sprachgebrauch „`SL-024` liegt in `done/`“ aus
+   (der Trigger-Sprachgebrauch „`slice-024` liegt in `done/`“ aus
    §Roadmap-Regeln löst also nichts aus): Wo das Feld steht, existiert der
    Zielort und trägt `seit welle-<NN>` bzw. `seit slice-<NNN>`. Ein Eintrag
    **ohne** dieses Feld ist *gezählt, nicht verkörpert* und kein Gegenstand der
@@ -222,4 +222,4 @@ geschlossen.
 - **Gegen "Burndown ist Fortschritt":** Burndown ist *Tempo*. Fortschritt ist, ob die Welle das verspricht, was sie sollte.
 - **Gegen "Eine Roadmap ist statisch":** Eine Roadmap, die nach drei Wellen nicht angepasst wurde, hat den Steering Loop nicht durchlaufen.
 - **Gegen "Welle = Sprint":** Ein Sprint endet durch *Datum* (zwei Wochen sind um). Eine Welle endet durch *Closure-Kriterien* (alle ihre Slices in `done/`, Replay-Lauf grün, Closure-Einträge geschrieben). Wer Wellen wie Sprints schneidet, kappt halbfertige Slices am Datum — und produziert genau die Auditierbarkeits-Lücke, die der Harness verhindern soll.
-- **Gegen "Trigger = Datum":** Ein Trigger ist eine *beobachtbare Bedingung* ("SL-024 liegt in `done/`", "Replay-Lauf gegen Golden Set grün", "Carveout `CO-007` aufgelöst"). Ein Datum ist kein Trigger, sondern eine Prognose. Wenn das einzige Trigger-Kriterium ein Kalendertag ist, plant die Roadmap nicht — sie hofft.
+- **Gegen "Trigger = Datum":** Ein Trigger ist eine *beobachtbare Bedingung* ("slice-024 liegt in `done/`", "Replay-Lauf gegen Golden Set grün", "Carveout `CO-007` aufgelöst"). Ein Datum ist kein Trigger, sondern eine Prognose. Wenn das einzige Trigger-Kriterium ein Kalendertag ist, plant die Roadmap nicht — sie hofft.

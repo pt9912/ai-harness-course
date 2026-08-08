@@ -195,10 +195,12 @@ nach. Die Templates tragen dabei zwei Rollen: **vendored** als Referenz-Form
 (worauf das Regelwerk als „Ziel-Form" verweist — `../templates/…` löst netzlos
 lokal auf) und **kopiert-und-ausgefüllt** als deine eigenen Artefakte.
 
-**Freshness-Audit der vendored Baseline (Schritt 2).** Eine vendored Kopie
+#### Freshness-Audit der vendored Baseline (Schritt 2)
+
+Eine vendored Kopie
 driftet still von der Quelle weg, sobald ein neues Kurs-Release erscheint;
 Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
-überwachen", Modul 12/14). Der Freshness-Audit hat sechs Eigenschaften:
+überwachen", Modul 12/14). Der Freshness-Audit hat sieben Eigenschaften:
 
 * **Beobachtbarer Auslöser, keine Kalenderpflicht** — die Frage „ist mein
   `<tag>` noch das aktuelle Kurs-Release?" an ein Ereignis (z. B.
@@ -276,6 +278,32 @@ Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
   und den Baseline-Stand nennt, der den Trigger gefeuert hat. Die alte Zeile
   ist die historisch korrekte Aussage über den damaligen Zustand
   (Append-only-Disziplin wie bei ADRs, [Modul 4](modul-04-adrs.md)).
+* **Eine Stichprobe gegen den Bestand, nicht gegen das Delta** — sie läuft
+  unabhängig vom Ergebnis der Tag-Frage, auch wenn der Pin aktuell ist. Die
+  sechs Eigenschaften darüber haben dann nichts zu tun, denn ihr Gegenstand ist
+  die *Änderung*; der Gegenstand dieser hier ist der *Bestand*, und den gibt es
+  immer. Eine Baseline-Regel,
+  die **nie** ins ausgefüllte Artefakt übernommen wurde und sich seither
+  **nie** geändert hat, erzeugt keinen Template-Diff und hat keinen
+  `MR`-Eintrag, den der Adaptions-Durchgang abschreiten könnte — sie ist
+  unsichtbar, *weil* sie alt und stabil ist. Genau über sie behauptet die
+  `MR-000`-Aussage „keine inhaltlichen Adaptionen ggü. Baseline-Default" etwas,
+  und nichts prüft es.
+  **Auswahlkriterium:** aus den Baseline-Abschnitten ziehen, die seit dem
+  adoptierten `<tag>` **kein Delta** hatten — die Komplementärmenge zu
+  `git diff <alt> <neu> -- .harness/baseline/`; kein Delta-Review hat sie je
+  berührt. **Umfang: ein Abschnitt pro Audit**, rotierend — keine
+  Vollinventur, sonst verliert die Welle ihr Closure-Kriterium. Die Frage pro
+  Regel: *Steht sie im ausgefüllten Artefakt — oder als deklarierte
+  Abweichung?* Zweimal nein heißt: nie übernommen.
+  **Ausgang:** ein einzelner Fund geht den Weg jeder Diskrepanz
+  ([Modul 7 §Werkzeug-Wahl](modul-07-carveouts.md#werkzeug-wahl)) — Übernahme
+  im nächsten Slice oder Carveout mit Auflösungs-Trigger. **Mehrere** Funde
+  treffen nicht die einzelne Regel, sondern die `MR-000`-Aussage: Sie ist dann
+  falsch und wird korrigiert — durch Übernahme oder durch `MR`-Einträge, die
+  die Abweichungen deklarieren. Eine BF-Markierung ist hier **nicht** die
+  Antwort; sie regelt Doc ↔ Code und trifft die Achse nicht
+  ([`grundlagen-bootstrap.md` §Modus pro Sub-Area](grundlagen-bootstrap.md#modus-pro-sub-area-greenfield-vs-brownfield)).
 
 Ein neuer Tag löst einen **Review** aus (Re-Vendoring mit eigenem Diff),
 keinen stillen Auto-Bump.

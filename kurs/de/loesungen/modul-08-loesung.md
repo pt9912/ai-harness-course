@@ -194,7 +194,7 @@ Auflösung, nicht "der Strengere gewinnt"):
 |---|---|---|
 | **bestätigt** | ADR gilt unverändert, der Code verstößt wirklich | bestätigter HIGH mit Begründungs-Verweis; Implementer korrigiert |
 | **zurückgewiesen** | Reviewer hat gegen veralteten ADR-Stand geprüft | Folge-ADR mit `supersedes` (bzw. Verweis auf die dokumentierte Lockerung) + Skill-Patch für den Reviewer |
-| **eskaliert** | weder ADR-Stand noch Lockerung sind belegbar (z. B. SL-024 behauptet etwas, das nirgends dokumentiert ist) | ADR-Aktualitäts-Anfrage an den Planner: Slice-Plan-Auszug vorlegen; danach fällt der Fall in eines der ersten beiden Verdikte |
+| **eskaliert** | weder ADR-Stand noch Lockerung sind belegbar (z. B. slice-024 behauptet etwas, das nirgends dokumentiert ist) | ADR-Aktualitäts-Anfrage an den Planner: Slice-Plan-Auszug vorlegen; danach fällt der Fall in eines der ersten beiden Verdikte |
 
 Jedes Verdikt endet mit einem Artefakt, das der Reviewer in seine
 Skill-Datei übernehmen kann — "mündliche Klärung" ist keine Übergabe,
