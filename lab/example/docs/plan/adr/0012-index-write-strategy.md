@@ -9,8 +9,8 @@
 **Bezug:** [LH-FA-IDX-003](../../../spec/lastenheft.md#lh-fa-idx-003--index-schreib-idempotenz-und-atomarität) (Index-Schreib-Idempotenz und Atomarität),
 [ADR-0003](0003-index-storage-format.md) (Index-Storage-Format)
 
-**Schärft:** [`spezifikation.md` §1](../../../spec/spezifikation.md#1-algorithmen-und-datenflüsse) (Atomic-Replace / Schreib-Semantik)
-und [`architecture.md` §5](../../../spec/architecture.md#5-fehlermodelle-und-resilienz) (Atomic-Replace).
+**Schärft:** [`LH-FA-IDX-003.a`](../../../spec/spezifikation.md#lh-fa-idx-003a--index-schreiben) (Atomic-Replace / Schreib-Semantik)
+und [`architecture.md` §5](../../../spec/architecture.md#5-fehlermodelle-und-resilienz) (Atomic-Replace — die Sektion vergibt keine Kennungen).
 
 ---
 

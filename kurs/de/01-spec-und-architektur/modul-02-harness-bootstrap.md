@@ -303,7 +303,7 @@ flowchart TD
     S0["0. Modus = GF pro Sub-Area"]:::orient
     S1["1. Baseline + Repo-Klasse + ID-Schemata"]:::orient
     S2["2. Templates + Regelwerk adoptieren"]:::action
-    S3["3. conventions.md (MR-000 + Index)<br/>+ conventions/MR-001-*.md"]:::action
+    S3["3. conventions.md (MR-000 + Index)"]:::action
     S4["4. lastenheft.md Outline"]:::content
     S5["5. Roadmap + Release-Plan Outline"]:::content
     S6["6. Sensors-Roster im Nicht-behauptet-Block"]:::content
@@ -341,9 +341,9 @@ BF-Diskrepanz-Auslöse-Variante.
 | # | Aktion | Berührte Dateien (Phasen-Übergang) | Trigger |
 |---|---|---|---|
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
-| 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schemata festlegen (`LH-*`, `ARC-*`, `SPEC-*`, `MR-*`) | keine | reift 2/3 |
+| 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schema festlegen: Vertrags-Präfix wählen (`LH-*`), `SPEC-*`/`ARC-*`/`MR-*` aus der Baseline übernehmen | keine | reift 2/3 |
 | 2 | **Baseline vendoren** — Regelwerk *und* Templates nach `.harness/baseline/<tag>/{regelwerk,templates}/` (+ `SHA256SUMS`, netzlos) als präsente, gepinnte Referenz; **Tooling** (`Makefile` mit d-check-Doku-Gate, `.d-check.yml`) als Startgerüst übernehmen; **Dokument-Skelette** aus der vendored Baseline (`…/templates/`) kopieren *und ausfüllen* | Dokument-Skelette **0 → 1**; vendored Baseline + Tooling tragen keine Phase-Reife | keine |
-| 3 | `harness/conventions.md` mit MR-000 (Baseline) + Index-Tabelle; die Adaption `ARC-*`/`SPEC-*` als eigene Datei `harness/conventions/MR-001-*.md` | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
+| 3 | `harness/conventions.md` mit MR-000 (Baseline-Aussage inkl. ID-Schema) + leerer Index-Tabelle — dieses Repo weicht nirgends ab, also entsteht **keine** `MR-<NNN>`-Datei | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
 | 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
 
 ### Detail-Tabelle (Schritte 5–8: Inhalts-Phase)
@@ -528,8 +528,20 @@ das konkret:
 
 ## Adaptions-Block
 
-MR-000: Baseline = ai-harness-course/0.4
-MR-001: Spec-Stratifizierung mit ARC-*/SPEC-*/LH-* (Adaption)
+### MR-000 — Baseline-Aussage
+
+- **Datum:** 2026-05-15
+- **Geltungsbereich:** gesamtes Repo
+- **Ersetzt-Baseline-Regel:** — (Adoptions-Erklärung, keine Adaption)
+- **Adaption:** keine — ID-Schema = Baseline-Default
+  (`LH-FA-*`, `LH-QA-*`, `SPEC-<NNN>`, `ARC-<NNN>`, `MR-<NNN>`)
+- **Begründung:** Initial-Setzung.
+- **Auflösungs-Trigger:** permanent.
+
+### Aktive Adaptionen
+
+| MR | Titel | Geltungsbereich | Ersetzt-Baseline-Regel |
+|---|---|---|---|
 ```
 
 **T1 — Pointer in `harness/README.md`** (existierende Sektion ergänzen):
@@ -763,7 +775,7 @@ für ein anderes Artefakt eigene Sektions-Namen einsetzen:
 | §Kernidee | 4 | "Vertrag steht, Code wird daran gemessen" | bei ADR, die diese § schärft → T6 Cross-Reference (ADR → Spec, aufwärts) |
 | §Sensors | … | … | … |
 | §Source Precedence | 2 | "Top-Level-Wunschbild, noch nicht durchverbunden" | … |
-| §Adaptions-Block | 1 | "Template kopiert, Versprechen zu füllen" | T1 Sync-Trigger setzen, sobald MR-001 ergänzt wird |
+| §Adaptions-Block | 1 | "Template kopiert, Versprechen zu füllen" | T1 Sync-Trigger setzen, sobald eine `MR-<NNN>` ergänzt wird |
 | §Closure-Regel | 0 | "Datei führt die Sektion noch nicht — Pflicht zur Anlage aus Konvention" | bei Anlage → T1 + T2 Sync-Trigger zu README und AGENTS.md |
 
 *Mindestens drei Zeilen vollständig ausfüllen* (auch die noch nicht

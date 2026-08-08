@@ -1,6 +1,6 @@
 # Architektur — DocSearch
 
-**Status:** Aktiv. **Letzte Änderung:** 2026-06-03.
+**Status:** Aktiv. **Letzte Änderung:** 2026-08-08.
 
 **Hard Rule:** Diese Datei enthält *keine* Wellen, Slices, Commit-Hashes
 oder Closure-Daten. Die zeitliche Schicht lebt in
@@ -9,6 +9,9 @@ oder Closure-Daten. Die zeitliche Schicht lebt in
 ---
 
 ## 1. Komponenten-Übersicht
+
+Hier werden die `ARC-*` für Komponenten vergeben — eine Adresse je Komponente,
+damit Slice und Carveout auf sie zeigen können, keine Anforderung.
 
 ```mermaid
 flowchart TB
@@ -28,16 +31,28 @@ flowchart TB
     Service --> Types
 ```
 
+| ID | Komponente | Rolle |
+|---|---|---|
+| `ARC-001` | Types | Domain-Modell, keine I/O |
+| `ARC-002` | Index-Layer | Vektor-Storage, Cosinus-Berechnung |
+| `ARC-003` | Embedding-Adapter | LLM-Client, Caching |
+| `ARC-004` | Audit-Layer | OTel-Spans, Log-Formatter |
+| `ARC-005` | Service-Layer | Reindex und Search |
+| `ARC-006` | UI / HTTP-API | HTTP-Handler, Input-Validierung |
+
 ## 2. Schichten und Constraints
 
-| Schicht | Verantwortlichkeit | Darf importieren | Darf NICHT importieren |
-|---|---|---|---|
-| Types | Domain-Modell (Pure), keine I/O | — | alle anderen |
-| Index | Vektor-Storage, Cosinus-Berechnung | Types | Service, UI, Embedding |
-| Embedding | LLM-Adapter, Caching | Types | Service, UI, Index |
-| Audit | OTel-Spans, Log-Formatter | Types | Service, UI |
-| Service | Geschäftslogik (Reindex, Search) | Types, Index, Embedding, Audit | UI |
-| UI | HTTP-Handler, Input-Validierung | Service, Types | Index, Embedding, Audit direkt |
+Die Constraints verweisen auf die Komponenten aus §1; eigene Kennungen vergibt
+diese Sektion nicht.
+
+| Komponente | Schicht | Verantwortlichkeit | Darf importieren | Darf NICHT importieren |
+|---|---|---|---|---|
+| `ARC-001` | Types | Domain-Modell (Pure), keine I/O | — | alle anderen |
+| `ARC-002` | Index | Vektor-Storage, Cosinus-Berechnung | Types | Service, UI, Embedding |
+| `ARC-003` | Embedding | LLM-Adapter, Caching | Types | Service, UI, Index |
+| `ARC-004` | Audit | OTel-Spans, Log-Formatter | Types | Service, UI |
+| `ARC-005` | Service | Geschäftslogik (Reindex, Search) | Types, Index, Embedding, Audit | UI |
+| `ARC-006` | UI | HTTP-Handler, Input-Validierung | Service, Types | Index, Embedding, Audit direkt |
 
 **Konsequenz:** Service ist der einzige "Sammler". UI darf weder Index
 noch Embedding direkt aufrufen — alle Quereinstiege gehen über
@@ -45,10 +60,10 @@ Service.
 
 ## 3. Externe Abhängigkeiten
 
-| System | Rolle | Substituierbarkeit |
-|---|---|---|
-| Embedding-Modell | Embedding-Erzeugung | Adapter-Pattern: Modell-Wechsel ohne Service-Änderung |
-| Object Storage (optional) | Index-Persistenz | Lokales Filesystem vs. S3-API |
+| ID | System | Rolle | Substituierbarkeit |
+|---|---|---|---|
+| `ARC-007` | Embedding-Modell | Embedding-Erzeugung | Adapter-Pattern: Modell-Wechsel ohne Service-Änderung |
+| `ARC-008` | Object Storage (optional) | Index-Persistenz | Lokales Filesystem vs. S3-API |
 
 ## 4. Sequenz-Diagramme
 

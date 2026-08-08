@@ -95,8 +95,11 @@ sie gilt für jeden Lauf.
   Adoptions-Erklärung, keine Adaption)*
 - **Adaption:** *keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
-  ID-Schema (`<PREFIX>-FA-*`, `<PREFIX>-QA-*`, `ADR-<NNNN>`, `CO-<NNN>`,
-  `slice-<NNN>`, `MR-<NNN>` — Präfix repo-weit festlegen, z. B. `LH`;
+  ID-Schema (`<PREFIX>-FA-*`, `<PREFIX>-QA-*`, `SPEC-<NNN>`, `ARC-<NNN>`,
+  `ADR-<NNNN>`, `CO-<NNN>`, `slice-<NNN>`, `MR-<NNN>` — nur das
+  Vertrags-Präfix wird repo-weit festgelegt, z. B. `LH`; `SPEC-*` und
+  `ARC-*` kodieren das Stratum und sind fest, siehe Baseline-Regelwerk
+  `grundlagen-source-precedence.md` §ID-Schema als Klammer;
   bei mehreren gleichzeitig schreibenden Entwicklern zusätzlich das
   Bereichssegment und damit den Zählraum je Sub-Area festlegen, siehe
   Baseline-Regelwerk `grundlagen-source-precedence.md` §Vergabe).*

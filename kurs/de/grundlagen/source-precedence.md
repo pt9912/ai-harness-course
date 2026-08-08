@@ -186,6 +186,58 @@ Ein konsistentes Präfix (`LH-*`, `HSM-*`, `GG-*`) verbindet:
 
 Damit wird der Traceability-Constraint maschinell prüfbar.
 
+**Das Präfix kodiert das Stratum.** Das Vertrags-Präfix ist frei wählbar —
+`LH`, `HSM`, `GG` sind Projektvokabular. Die beiden anderen Straten tragen
+feste Präfixe, weil sie nichts Projektspezifisches transportieren, sondern
+die Zugehörigkeit selbst:
+
+| Kennung | Stratum | Art |
+|---|---|---|
+| `<PREFIX>-FA-<NN>`, `<PREFIX>-QA-<NN>` | Vertrag (`spec/lastenheft.md`) | **Anforderungs-ID** — das Einzige, was abgenommen wird |
+| `<PREFIX>-FA-<NN>.<Buchstabe>` | Technik (`spec/spezifikation.md`) | **Verfeinerung** genau einer Anforderungs-ID |
+| `SPEC-<NNN>` | Technik (`spec/spezifikation.md`) | **Struktur-ID** für eine technische Festlegung ohne eigene Anforderung |
+| `ARC-<NNN>` | Sicht (`spec/architecture.md`) | **Struktur-ID** für Komponente oder Schnittstelle |
+
+Die Zählteile stehen hier ohne Bereichssegment. Beide Formen sind wohlgeformt —
+`LH-FA-03` und `LH-FA-IDX-003` —, und *für welche* Kennungen ein Segment nötig
+wird, leitet [§Vergabe](#vergabe-woher-die-nächste-nummer-kommt) unten aus der
+**Ablage** her, nicht aus der Nummer: Was in einer Datei lebt, kollidiert laut;
+was je eine eigene Datei bekommt, still. Die getroffene Wahl gehört in die
+ID-Schema-Deklaration.
+
+`SPEC-*` und `ARC-*` sind **keine** Anforderungs-IDs. Sie machen adressierbar,
+was in ihrem Stratum ohnehin steht — ein Datenschema, ein Default, ein
+Fehler-Code, eine Komponente —, und verpflichten zu nichts. Das ist der
+Unterschied, an dem die Straten-Ordnung hängt: Eine Sicht mit `ARC-*` bleibt
+derivativ, weil eine Kennung keine Zusage ist. Wer unter einer `SPEC-*` etwas
+verspricht, was das Lastenheft nicht verspricht, hat nicht die ID missbraucht,
+sondern die Regel *präzisieren, nie erweitern* gebrochen.
+
+Eine Struktur-ID tritt **neben** einen fachlichen Schlüssel, sie ersetzt ihn
+nicht. Ein Fehler-Code `E001` ist ein Laufzeit-Symbol; die `SPEC-*` daneben
+benennt die *Festlegung* „`E001` bedeutet dies und löst jenes aus". Deshalb
+bekommt auch eine Sektion mit eigener Schlüsselspalte Kennungen — sonst hätte
+eine ADR, die die Fehlerbehandlung schärft, kein Ziel.
+
+Zwei Kennungen im selben Stratum sind kein Widerspruch, sondern die Antwort auf
+zwei verschiedene Fragen: `<PREFIX>-FA-03.a` sagt *"so erfüllen wir FA-03"*,
+`SPEC-014` sagt *"das gilt hier, ohne dass es jemand versprochen hat"*. Ein
+Abschnitt, der eine einzelne Anforderung verfeinert, trägt die Verfeinerung;
+alles Übrige trägt `SPEC-*`.
+
+**Referenziert wird die ID, ersatzweise der Abschnitt.** Wer aus ADR, Slice
+oder Carveout auf Technik oder Sicht zeigt, nennt die Kennung, wenn das
+Zielelement eine trägt, und sonst den `§`-Anker. Der Abschnitts-Anker bleibt
+zulässig — nicht jeder Absatz braucht eine Kennung, und eine erzwungene ID
+über Fließtext benennt nichts, sie nummeriert nur.
+
+**Der Link trägt den Abschnitt, der Text die Kennung.** Kennungen in
+Tabellenzellen haben keinen eigenen HTML-Anker; ein Verweis auf `SPEC-015`
+zeigt technisch auf die Sektion, in der die Zeile steht. Ein Doku-Sensor prüft
+darum den Anker, nie die Kennung: Wird eine `SPEC-*` umbenannt oder gestrichen,
+bleiben verweisende ADRs still veraltet. Das ist ein Review-Griff, kein Gate —
+wer eine Kennung anfasst, sucht ihre Nennungen selbst.
+
 ### Vergabe: woher die nächste Nummer kommt
 
 Das Präfix sagt, *wozu* eine Kennung gehört. Offen bleibt, **wer die Nummer

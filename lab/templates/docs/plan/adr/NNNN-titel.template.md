@@ -16,8 +16,13 @@
 
 **Bezug:** [`<LH-FA-NN>`](../../../spec/lastenheft.md#<anker>), [`<LH-QA-NN>`](../../../spec/lastenheft.md#<anker>), [ADR-<NNNN>](<NNNN>-<titel>.md) (optional)
 
-**Schärft:** [`<spezifikation.md §N>`](../../../spec/spezifikation.md#<anker>) / [`architecture.md §N`](../../../spec/architecture.md#<anker>) — welche
-Spec-Stelle diese ADR verbindlich macht. Aufwärts-Deklaration der
+**Schärft:** [`<SPEC-NNN>`](../../../spec/spezifikation.md#<anker>) / [`<ARC-NNN>`](../../../spec/architecture.md#<anker>) — welche
+Spec-Stelle diese ADR verbindlich macht. **Die Kennung nennen, wo das
+Zielelement eine trägt**; erst wo eine Sektion keine vergibt, den Abschnitt
+selbst (`<architecture.md §N>`). Der Link zeigt in beiden Fällen auf die
+Sektion — Kennungen in Tabellenzellen haben keinen eigenen Anker
+(Baseline-Regelwerk `grundlagen-source-precedence.md` §ID-Schema als Klammer).
+Aufwärts-Deklaration der
 Änderungskopplung: wer diese ADR ändert, zieht von hier die betroffenen
 Spec-Stellen nach. `—` eintragen, wenn Prozess-ADR ohne Spec-Stratum.
 

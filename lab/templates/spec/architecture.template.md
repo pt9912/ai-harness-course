@@ -22,6 +22,12 @@ Baseline-Regelwerk `modul-04-adrs.md` §Ziel-Form: Architektur-Sicht.
 
 ## 1. Komponenten-Übersicht
 
+Regeln dieser Sektion: **Hier werden die `ARC-*` für Komponenten vergeben** —
+eine Zeile je Kasten des Diagramms, damit es *eine* Stelle gibt. Die Kennung
+ist eine Adresse, damit Slice und Carveout sagen können, welche Komponente sie
+berühren; sie ist **keine** Anforderung (Baseline-Regelwerk
+`grundlagen-source-precedence.md` §ID-Schema als Klammer).
+
 <!--
 Ein Diagramm (Mermaid oder ASCII) der Top-Level-Komponenten.
 Jeder Kasten benennt die Schicht/Rolle, nicht die Technologie.
@@ -33,15 +39,29 @@ aber zwingend ist nur die Klarheit, nicht das Format.
 ```mermaid
 flowchart TB
     UI[UI / API-Layer]
+    Runtime[Runtime / Bootstrap]
     Service[Service-Layer]
     Repo[Repository-Layer]
+    Config[Config-Layer]
     Types[Types / Domain]
-    
+
     UI --> Service
+    Runtime --> Service
     Service --> Repo
     Service --> Types
+    Repo --> Config
     Repo --> Types
+    Config --> Types
 ```
+
+| ID | Komponente | Rolle |
+|---|---|---|
+| `ARC-001` | Types / Domain | <…> |
+| `ARC-002` | Config-Layer | <…> |
+| `ARC-003` | Repository-Layer | <…> |
+| `ARC-004` | Service-Layer | <…> |
+| `ARC-005` | Runtime / Bootstrap | <…> |
+| `ARC-006` | UI / API-Layer | <…> |
 
 ## 2. Schichten und Constraints
 
@@ -59,16 +79,23 @@ Beispiel-Schema (aus OpenAI-Layering, siehe Modul 4):
 Types → Config → Repo → Service → Runtime → UI
 -->
 
-| Schicht | Verantwortlichkeit | Darf importieren | Darf NICHT importieren |
-|---|---|---|---|
-| Types | Domain-Modell, Pure | — | alles andere |
-| Config | Konfiguration laden/validieren | Types | Service, Runtime, UI |
-| Repo | Datenzugriff | Types, Config | Service, Runtime, UI |
-| Service | Geschäftslogik | Types, Config, Repo | Runtime, UI |
-| Runtime | Bootstrap, DI | alles oben | — |
-| UI | API / CLI / GUI | alles oben außer Repo | Repo direkt |
+Eine Schicht ist eine *Gruppierung* über Komponenten, keine eigene Sache:
+Fällt sie mit einer Komponente zusammen, nennt die Zeile deren `ARC-*` aus §1;
+umfasst sie mehrere, bleibt die Spalte leer und die Constraint gilt für alle.
+
+| Komponente(n) | Schicht | Verantwortlichkeit | Darf importieren | Darf NICHT importieren |
+|---|---|---|---|---|
+| `ARC-001` | Types | Domain-Modell, Pure | — | alles andere |
+| `ARC-002` | Config | Konfiguration laden/validieren | Types | Service, Runtime, UI |
+| `ARC-003` | Repo | Datenzugriff | Types, Config | Service, Runtime, UI |
+| `ARC-004` | Service | Geschäftslogik | Types, Config, Repo | Runtime, UI |
+| `ARC-005` | Runtime | Bootstrap, DI | alles oben | — |
+| `ARC-006` | UI | API / CLI / GUI | alles oben außer Repo | Repo direkt |
 
 ## 3. Externe Abhängigkeiten
+
+Regeln dieser Sektion: Auch Schnittstellen tragen `ARC-*` — eine ADR, die eine
+Abhängigkeit festklopft, braucht ein benennbares Ziel.
 
 <!--
 Welche externen Systeme/Bibliotheken sind Teil der Architektur. Die
@@ -76,9 +103,9 @@ Wahl-Begründung steht in der ADR (die ihre Schärft auf diese Sicht
 deklariert), nicht hier.
 -->
 
-| System | Rolle | Substituierbarkeit |
-|---|---|---|
-| <…> | <…> | <…> |
+| ID | System | Rolle | Substituierbarkeit |
+|---|---|---|---|
+| `ARC-007` | <…> | <…> | <…> |
 
 ## 4. Sequenz-Diagramme
 

@@ -251,12 +251,12 @@ das Schema noch frisch im Kopf hält, spart sich hier Last
 > Boundary-Tests und Type-Coverage auf demselben Index-Layer lägen; dann sprängen Frage 1 und Werkzeug-Wahl auf
 > BF-Sub-Area-Markierung um. Die Markierungs-Mechanik selbst ist im
 > Lab strukturell bereits vorhanden: [`lab/example/harness/conventions.md`](../../../lab/example/harness/conventions.md)
-> trägt einen `## Adaptions-Block` mit `MR-000` Baseline-Aussage und
-> `MR-001` Source Precedence — die BF-Sub-Area-Markierung wäre ein
+> trägt einen `## Adaptions-Block` mit `MR-000` Baseline-Aussage und den
+> aktiven Einträgen `MR-002`/`MR-003` — die BF-Sub-Area-Markierung wäre ein
 > neuer `MR-NNN`-Eintrag im selben Block. Konkret-Format:
 >
 > ```markdown
-> ### MR-002 — Index-Layer-Sub-Area im Brownfield-Modus
+> ### MR-004 — Index-Layer-Sub-Area im Brownfield-Modus
 >
 > **Modus:** Brownfield bis Welle-3-Graduation.
 > **Geltungsbereich:** der Index-Layer in allen Sprach-Skeletten.

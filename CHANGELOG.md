@@ -11,6 +11,100 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 68 — 2026-08-08 · Präfixe, die niemand referenzieren konnte
+
+Aus einer Nutzer-Frage, ob `spec/spezifikation.md` eigene IDs trägt. Die
+Antwort war im Korpus dreimal verschieden gegeben:
+[`referenz-richtung.md`](kurs/de/grundlagen/referenz-richtung.md) führte
+`SPEC-*`/`ARC-*` als Baseline-Mechanismus, [Modul
+2](kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md) als deklarationspflichtige
+Adaption in einer `MR-001`, und die `MR-000`-Default-Liste in
+[`conventions.template.md`](lab/templates/harness/conventions.template.md) kannte
+beide Präfixe gar nicht.
+
+Der Beleg, auf den sich die Baseline-Behauptung berief, belegte ihr Gegenteil:
+`referenz-richtung.md` schickte zum „Bootstrap-Beleg in `modul-02`" — und dort
+stand „die Adaption". Wer die Modul-2-Sequenz wörtlich abarbeitete, legte
+zudem eine `MR-001` ohne Abweichung an; ein Adaptions-Eintrag, der keine
+benannte Baseline-Regel ersetzt, ist laut Vorlage aber ein **Fork**.
+
+### Entschieden
+
+- **`SPEC-*` und `ARC-*` sind Baseline**, keine Adaption. Das Präfix kodiert
+  das Stratum; nur das Vertrags-Präfix (`LH`, `HSM`, `GG`) wird pro Repo
+  gewählt.
+- **Beides sind Struktur-IDs, keine Anforderungs-IDs.** Sie machen
+  adressierbar, was im Stratum ohnehin steht, und verpflichten zu nichts —
+  daran hängt, dass die Sicht derivativ bleibt und die Spezifikation nicht
+  anfängt zu versprechen.
+- **Referenziert wird die ID, ersatzweise der Abschnitt.** Der `§`-Anker
+  bleibt der vorgesehene Rückfallweg; eine erzwungene ID über Fließtext
+  benennt nichts, sie nummeriert nur.
+
+### Regelwerk
+
+- **§ID-Schema als Klammer trägt das Straten-Modell** — vier Kennungs-Arten mit
+  Stratum und Charakter. Vorher stand dort nur die Vertrags-Reihe, weshalb der
+  Zeiger aus §Referenz-Richtung (SDP) ins Leere lief.
+- **`<PREFIX>-FA-<NN>.<Buchstabe>` ist erstmals in der Quelle verankert.** Das
+  Schema stand bis hierher nur in `spezifikation.template.md` und berief sich
+  auf einen Abschnitt, der es nicht kannte — Template-Drift ohne Quell-Anker.
+- **Die Referenz-Matrix adressiert Technik und Sicht über Kennungen**
+  (`betroffene SPEC-*` / `betroffene ARC-*`, ersatzweise Spec-§) statt
+  ausschließlich über `Spec-§`.
+- **Modul-2-Schritt 3 legt keine `MR-001` mehr an.** Das Bootstrap-Repo weicht
+  nirgends ab; die ID-Schema-Deklaration ist Teil der `MR-000`-Aussage, die
+  Index-Tabelle bleibt leer.
+
+### Templates und Beispiel
+
+- `conventions.template.md` führt `SPEC-<NNN>`/`ARC-<NNN>` in der
+  `MR-000`-Default-Liste und trennt das frei wählbare Vertrags-Präfix von den
+  festen Stratum-Präfixen.
+- `spezifikation.template.md` vergibt `SPEC-*` in §2 bis §6 — auch in §4, wo
+  der Fehler-Code das Laufzeit-Symbol bleibt und die Kennung die *Festlegung*
+  darüber benennt; sonst hätte eine ADR zur Fehlerbehandlung kein Ziel.
+- `architecture.template.md` vergibt die Komponenten-`ARC-*` in §1 und die
+  Schnittstellen-`ARC-*` in §3. Die Schichten-Tabelle in §2 verweist nur —
+  eine Schicht ist eine Gruppierung über Komponenten, keine eigene Sache, und
+  ein Repo mit zwei Komponenten in einer Schicht hätte sonst Komponenten ohne
+  Kennung.
+- `lab/example` zieht nach: Kennungen in beiden Spec-Dateien, und vier ADRs
+  nennen im `Schärft:`-Feld jetzt die Kennung statt des Abschnitts. Sektionen,
+  die keine Kennungen vergeben, behalten den `§`-Anker — der Rückfallweg im
+  Betrieb, nicht ein Rückstand.
+
+### Nachgezogen im Review
+
+Ein Review des ersten Wurfs fand neun Widersprüche, die kein Gate sehen kann.
+Die tragenden drei: Die Quelle zählte Fehler-Codes unter das, was eine `SPEC-*`
+trägt, während die Vorlage für dieselbe Sektion das Gegenteil vorschrieb; die
+`ARC-*`-Vergabe hing an der Schichten-Tabelle und war nur erfüllbar, solange
+Komponente und Schicht 1:1 fallen; und `ARC-*` war als „Komponente **oder
+Schnittstelle**" definiert, ohne dass je eine Sektion einer Schnittstelle eine
+Kennung gab. Dazu: Die Matrix nannte für das Technik-Stratum nur `SPEC-*` und
+übersah die Verfeinerungs-IDs — sie sagt jetzt *Technik-ID* und *Sicht-ID* und
+löst die Begriffe unter der Matrix auf.
+
+Eine zweite Runde fand, was die Fixes selbst angerichtet hatten. Drei davon
+sind lehrreich:
+
+- **Nummernblöcke waren eine unbelegte Konvention.** Templates und Beispiel
+  hatten Blöcke je Sektion encodiert (§3 → `SPEC-010`, §5 → `020`), die keine
+  Quelle lehrt — und nach dem Nachtragen von §4 nicht einmal monoton waren.
+  Jetzt wird **fortlaufend je Datei** gezählt, was §Vergabe ohnehin sagt.
+- **Das ADR-Template zog nicht mit.** Sein `Schärft:`-Feld zeigte weiter nur
+  die `§`-Form, während die Beispiel-ADRs migriert waren — genau die
+  Drift-Richtung, die die Normhierarchie verbietet.
+- **Der Bereichssegment-Satz erklärte zur Pflicht, was §Vergabe ausnimmt.**
+  §Vergabe leitet den Zählraum aus der *Ablage* her: `LH-*` lebt in einer
+  Datei und kollidiert laut. Der neue Text nennt jetzt diese Herleitung,
+  statt eine Pflicht zu behaupten.
+
+Dazu: `LH-FA-IDX-003` hatte keinen Verfeinerungs-Abschnitt, worauf `ADR-0012`
+zeigen konnte — das Beispiel hat ihn bekommen, statt den Zeiger auf die
+Verfeinerung einer *anderen* Anforderung stehen zu lassen.
+
 ## Welle 67 — 2026-08-02 · Ein Pflichtfeld, das der Adopter nicht füllen kann
 
 Aus einer Nutzer-Frage nach der Metapher „Wetter im Container" in

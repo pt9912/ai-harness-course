@@ -43,8 +43,15 @@ die Verzeichnis-Position, kein Status-Feld
   Adoptions-Erklärung, keine Adaption)*
 - **Adaption:** *Keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
-  ID-Schema (`LH-FA-*`, `LH-QA-*`, `ADR-<NNNN>`, `CO-<NNN>`,
-  `slice-<NNN>`, `MR-<NNN>`).*
+  ID-Schema (`LH-FA-*`, `LH-QA-*`, `SPEC-<NNN>`, `ARC-<NNN>`,
+  `ADR-<NNNN>`, `CO-<NNN>`, `slice-<NNN>`, `MR-<NNN>`).*
+- **ID-Schema-Deklaration:** `LH-*` läuft zweiformig. Bis Lastenheft v0.3.x
+  dicht gezählt (`LH-FA-01..03`, `LH-QA-01..04`); **ab v0.4.0 tragen neue
+  funktionale Anforderungen ein Bereichskürzel** (`LH-FA-<BEREICH>-<NNN>`,
+  erstes Exemplar `LH-FA-IDX-003`). Bestehende IDs werden *nicht* migriert —
+  Doku-Drift teurer als Schema-Mischung. `SPEC-*` und `ARC-*` zählen
+  fortlaufend je Datei, ohne Bereichssegment: Beide leben in *einer* Datei,
+  eine Doppelvergabe erzeugt dort einen Git-Konflikt.
 - **Begründung:** Initial-Setzung. Dieses Beispiel-Repo ist
   Lehr-Vehikel und folgt der Kurs-Konvention sturer als ein realer
   Bedarfsfall, damit die Konvention als solche sichtbar bleibt.

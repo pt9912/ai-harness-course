@@ -34,14 +34,19 @@ damit wird die Regel lehr- und prüfbar.
 | **Technik** | Normativ: präzisiert Vertrag, Vertrag gewinnt | intra (Peers) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Sicht** | Normativ: Use-Case ↔ Vertrags-ID | Normativ: visualisiert | intra (Peers) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **ADR** | Normativ: `LH-*`-Grundlage | Normativ: **`Schärft:`** | Normativ: **`Schärft:`** | Normativ/Lineage: aktive ADRs als Grundlage; superseded nur ADR-interne Historie | Kontext: **wo** verifiziert/entstanden, nie **warum** entschieden — der zulässige Zeiger wird in seiner Zeile markiert | ❌ | ❌ | ❌ |
-| **Slice** | Normativ: `LH-*`-Scope | Normativ: betroffene Spec-§ | Normativ: betroffene Spec-§ | Normativ: nur aktive ADRs | Kontext: triggered-by, blocked-by, follow-up-of | Kontext: eigener/offener Carveout, Debt-/Closure-Rückverweis | Kontext: `Welle:`-Feld, auch „ohne Welle“ | ❌ |
-| **Carveout** | Normativ: betroffene `LH-*` | Normativ: betroffene Spec-§ | Normativ: betroffene Spec-§ | Normativ: betroffene aktive ADRs | Kontext/Traceability: owner/verursachender/schließender Slice | Kontext: ersetzt/zusammengeführt/abhängig | Kontext: Planungseinordnung | Kontext: Meilenstein als Auflösungs-Trigger |
+| **Slice** | Normativ: `LH-*`-Scope | Normativ: betroffene Technik-ID, ersatzweise Spec-§ | Normativ: betroffene Sicht-ID, ersatzweise Spec-§ | Normativ: nur aktive ADRs | Kontext: triggered-by, blocked-by, follow-up-of | Kontext: eigener/offener Carveout, Debt-/Closure-Rückverweis | Kontext: `Welle:`-Feld, auch „ohne Welle“ | ❌ |
+| **Carveout** | Normativ: betroffene `LH-*` | Normativ: betroffene Technik-ID, ersatzweise Spec-§ | Normativ: betroffene Sicht-ID, ersatzweise Spec-§ | Normativ: betroffene aktive ADRs | Kontext/Traceability: owner/verursachender/schließender Slice | Kontext: ersetzt/zusammengeführt/abhängig | Kontext: Planungseinordnung | Kontext: Meilenstein als Auflösungs-Trigger |
 | **Welle** | Kontext: `LH-*`-Bezug der Slice-Liste | Kontext: technischer Rahmen | Kontext: Architekturbild | Kontext: Trigger (`ADR-<NNNN>` accepted) | Kontext: Bündelung — die Slice-Liste | Kontext: Risiko-/Debt-Übersicht | Kontext: Vorgänger-Welle als Trigger | Kontext: Zielmeilenstein `M<NN>` |
 | **Roadmap** | Kontext: Zielbild/Scope | Kontext: technischer Rahmen | Kontext: Architekturbild | Kontext: Architekturhintergrund | Kontext: Orchestrierung/Sequenz | Kontext: Risiko-/Debt-Übersicht | Kontext: Hierarchie — aktuelle und nächste Wellen | intra: Meilenstein ↔ Welle |
 
 Die drei Spec-Zeilen sind **identisch bis auf die Diagonale**: links davon nur
 *Normativ aufwärts*, rechts davon nur ❌. Das ist die **Decken-Regel** — sie
 gilt für alle drei Straten, nicht nur für den Vertrag.
+
+**Technik-ID** meint `SPEC-*` oder eine Verfeinerung `<PREFIX>-FA-<NN>.<Buchstabe>`,
+**Sicht-ID** meint `ARC-*`; welche Kennung wo entsteht, steht in
+[`grundlagen-source-precedence.md` §ID-Schema](grundlagen-source-precedence.md#id-schema-als-klammer).
+Trägt das Zielelement keine, bleibt der `§`-Anker zulässig.
 
 **Welle und Roadmap sind zwei Zeilen, nicht eine.** Die Welle trägt das
 *Bündel* (Ziel, Trigger, Slice-Liste), die Roadmap die *Reihenfolge* (aktuelle
@@ -64,12 +69,12 @@ flowchart BT
     A -->|"Schärft:"| T
     A -->|"Schärft:"| V
     S["Slice<br/>(volatil)"] -->|"LH-*-Scope"| L
-    S -->|"betroffene Spec-§"| T
-    S -->|"betroffene Spec-§"| V
+    S -->|"betroffene Technik-ID / §"| T
+    S -->|"betroffene Sicht-ID / §"| V
     S -->|"nur aktive ADRs"| A
     C["Carveout"] -->|"betroffene LH-*"| L
-    C -->|"betroffene Spec-§"| T
-    C -->|"betroffene Spec-§"| V
+    C -->|"betroffene Technik-ID / §"| T
+    C -->|"betroffene Sicht-ID / §"| V
     C -->|"betroffene aktive ADRs"| A
     style L fill:#fff4d6,stroke:#d4a017
     style T fill:#fff4d6,stroke:#d4a017
@@ -323,9 +328,11 @@ ADR → Spec-§); das Lastenheft wird dabei *nie* geschärft.
 **Platzierung wird deklariert, nicht geraten** — über zwei bestehende
 Mechanismen:
 
-1. **ID-Präfix kodiert das Stratum.** Die Matrix operiert auf Präfixen:
-   `LH-*` → Vertrag, `SPEC-*` → Technik, `ARC-*` → Sicht (Bootstrap-Beleg
-   in `modul-02`). Eine Sicht-Datei trägt sehr wohl `ARC-*`-*Struktur*-IDs
+1. **ID-Präfix kodiert das Stratum.** `LH-*` → Vertrag, `SPEC-*` und
+   `<PREFIX>-FA-*.<Buchstabe>` → Technik, `ARC-*` → Sicht; die Matrix
+   adressiert Technik und Sicht darüber, mit dem `§`-Anker als Rückfallweg,
+   wo ein Element keine Kennung trägt. Eine
+   Sicht-Datei trägt sehr wohl `ARC-*`-*Struktur*-IDs
    (Komponenten, Schnittstellen), nur keine eigenen *Anforderungs*-IDs —
    das macht sie derivativ. Siehe [§ID-Schema](grundlagen-source-precedence.md#id-schema-als-klammer).
 2. **Deklaration in `harness/conventions.md`** (Adaptions-Block, wie die

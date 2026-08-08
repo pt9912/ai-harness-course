@@ -92,6 +92,15 @@ externe Verträge · Historie. Operative Regeln:
   deklariert **die ADR** in ihrem `Schärft:`-Feld — die einzige Kante, und
   sie zeigt aufwärts. Wer wissen will, welche ADR eine Spec-Stelle bewegt
   hat, sucht in den `Schärft:`-Feldern.
+* **Zwei Kennungs-Arten** — ein Abschnitt, der eine einzelne Anforderung
+  technisch ausführt, trägt deren Verfeinerung (`LH-FA-03.a` zu `LH-FA-03`).
+  Alles Übrige — Datenschemas, Defaults, Fehler-Codes, Metrik-Felder, externe
+  Verträge — trägt eine `SPEC-<NNN>`, weil es keine einzelne Anforderung
+  verfeinert, aber referenzierbar sein muss: Ohne Kennung kann eine ADR im
+  `Schärft:`-Feld nur auf den Abschnitt zeigen, und zwei Defaults im selben
+  Abschnitt werden ununterscheidbar. Eine `SPEC-*` ist **keine**
+  Anforderungs-ID; sie benennt, was gilt, und verspricht nichts
+  ([`grundlagen-source-precedence.md` §ID-Schema](grundlagen-source-precedence.md#id-schema-als-klammer)).
 
 ### Ziel-Form: Architektur-Sicht
 
@@ -115,6 +124,13 @@ Operative Regeln, die die Vorlage nicht selbst erzwingt:
   aufwärts ([`grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
   Welche ADR eine Aussage der Sicht verbindlich macht, deklariert **die ADR**
   aufwärts in ihrem `Schärft:`-Feld.
+* `ARC-*` widerspricht dem nicht: Komponenten und Schnittstellen tragen
+  Kennungen, damit ein Slice oder Carveout sagen kann, *welche* Komponente er
+  berührt. Das ist eine Adresse, keine Zusage — die Sicht bleibt derivativ,
+  weil eine Kennung nichts verspricht. Wer unter einer `ARC-<NNN>` eine
+  Anforderung formuliert, hat nicht die Kennung falsch benutzt, sondern eine
+  Anforderung am falschen Ort abgelegt
+  ([`grundlagen-source-precedence.md` §ID-Schema](grundlagen-source-precedence.md#id-schema-als-klammer)).
 
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 
