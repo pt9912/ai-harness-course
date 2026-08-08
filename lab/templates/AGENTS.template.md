@@ -147,6 +147,33 @@ Korrekturen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 Jede Schwellen-Senkung (Coverage, Linter-Strenge, Architekturregel)
 ist ein ADR, kein PR-Kommentar.
 
+### 3.7 Ein Kommentar beschreibt, was da ist
+
+Gilt für Code, Konfiguration und Skripte. Ein Kommentar trägt eine dieser
+Klassen — **Zusage · Kopplung · Abgrenzung · Rang-Zeiger · Grenze** —
+und schreibt an den, der die Stelle *ändert*, nicht an den, der die
+Entscheidung *trifft*. Regeln dieser Sektion: Baseline-Regelwerk
+`grundlagen-harness-dateien.md` §Was ein Kommentar trägt.
+
+**Falsch:** <z.B. „Ohne dieses Feld behauptete die Ausgabe eine Verteilung,
+die nicht stattgefunden hat"> — Konjunktiv über die verworfene Alternative.
+**Richtig:** <z.B. „Verteilt ist wahr, wenn die Splitting-Regel angewendet
+werden konnte"> — Indikativ über den Zustand.
+
+**Falsch:** <z.B. „die frühere Fassung prüfte nur die Länge"> — beschreibt
+abwesenden Text.
+**Richtig:** die geltende Zusage nennen; die vorige hält `git`.
+
+**Begründung:** Die Abwägung gehört in die ADR, die Historie in `git`, die
+Herkunft in **ein** auflösbares Feld (`LH-*`, `ADR-*`, `· seit welle-<NN>`).
+Was daneben steht, liest jeder Lauf mit und bezahlt es mit Kontext.
+
+<!--
+In emittierten Artefakten (ein Werkzeug erzeugt Repos) entfällt der
+Herkunfts-Anker: Die Slice-Nummer des Erzeugers existiert im erzeugten Repo
+nicht und löst ins Leere auf.
+-->
+
 <!--
 Repo-spezifische Hard Rules ergänzen, z.B. für Safety/Control:
 - "Optimierer darf nie direkt aufs Gerät schreiben."

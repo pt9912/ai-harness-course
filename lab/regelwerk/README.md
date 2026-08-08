@@ -1,6 +1,6 @@
 # Regelwerk — der Kurs als Betriebsregelwerk, nach Modulen
 
-**Stand:** Kurs-Welle 70 · 2026-08-08.
+**Stand:** Kurs-Welle 71 · 2026-08-08.
 
 Die 17 Module (0–16) **und die Grundlagen-Abschnitte** des Kurses als
 **Betriebsregelwerk für Code-Agenten** — didaktik-freier Extrakt (Regeln, Konventionen, Abläufe in

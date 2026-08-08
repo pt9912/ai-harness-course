@@ -62,6 +62,70 @@ dasteht, ist alles, was der Adopter Wochen später hat. Vier Schichten:
   behaupten, wo keiner steht, wäre die Klasse *halluziniertes Gate* (Modul 13)
   — auf die eigene Konvention angewandt.
 
+### Was ein Kommentar trägt — Code, Konfiguration, Skripte
+
+Der Abschnitt oben regelt Kommentare in **Templates**; die werden beim
+Adoptieren gelöscht. Ein Kommentar in Code, Konfiguration oder Skript bleibt,
+solange die Zeile lebt. Seine Bestimmung ist **positiv**: nicht, was verboten
+ist, sondern was er zu tragen hat.
+
+- **Leser-Modell:** Ein Kommentar schreibt an jemanden, der den Code **gleich
+  ändert** — nicht an jemanden, der die Entscheidung noch einmal treffen will.
+  Der zweite Leser hat die ADR. Der erste beginnt bei Null
+  ([`modul-03-spec.md` §Kernidee](modul-03-spec.md#kernidee-modul-3)): Was nicht
+  im Kontext steht, war für ihn nie da — und was daneben steht, liest er
+  trotzdem mit und bezahlt es mit Kontext.
+- **Fünf Klassen.** Ein Kommentar beantwortet, was der Code nicht beantworten
+  kann:
+
+| Klasse | Die Frage, die der Code offen lässt |
+|---|---|
+| **Zusage** | Was garantiert diese Stelle — und was müsste passieren, damit sie bricht? Mit dem Sensor, der es sähe. |
+| **Kopplung** | Was muss ich mitändern, wenn ich das hier ändere? |
+| **Abgrenzung** | Welche Nachbargröße verwechsle ich hiermit, und warum ist sie es nicht? Sprach- und Plattform-Fallstricke gehören hierher. |
+| **Rang-Zeiger** | Wo wohnt die Norm, deren *Umsetzung* das hier ist? |
+| **Grenze** | Was leistet diese Stelle ausdrücklich **nicht**? |
+
+- **Die Liste ist abschließend gemeint, nicht abschließend bewiesen.** Wer eine
+  sechste Klasse findet, die keine der fünf trägt, erweitert sie; das ist der
+  reguläre Weg, nicht die Ausnahme.
+- **Adressaten-Test:** Richtet sich der Satz an den, der *ändert*, oder an den,
+  der *entscheidet*? Der Entscheider hat ADR und Slice.
+- **Zeitform-Test:** Steht der Satz im Indikativ über das, was ist? Konjunktiv
+  ist zulässig über den **Bruch** (*„was müsste passieren, damit die Zusage
+  fällt"*) und über **künftige Arbeit** (*„das wäre ein eigener Slice"* — die
+  Grenze-Klasse). Unzulässig ist er über die **verworfene Alternative**: Die
+  ist entschieden, und die Entscheidung steht in der ADR. Die Probe dafür ist
+  die Zeitrichtung — zeigt der Konjunktiv nach vorn oder zurück?
+- **Hard Rule:** *Ein Kommentar beschreibt, was da ist.* Wer Herkunft nennt,
+  nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit welle-<NN>`
+  ([`grundlagen-traceability.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker))
+  — und nie als Absatz.
+- **Emittierte Artefakte tragen keinen Anker.** Erzeugt ein Werkzeug Code,
+  Konfiguration oder Skripte *in ein anderes Repo*, reist der Erzeuger-Kontext
+  nicht mit: Eine Slice- oder Befund-Nummer des Erzeugers löst dort in **null**
+  Hops auf und ist dann kein Anker, sondern ein toter Verweis. Dieselbe Regel
+  hängt beim Regelwerk-Split die Deixis um — *keine Verweise auf Material, das
+  nicht mitreist*.
+- **Drei Klassen fallen heraus, weil sie keine der fünf tragen:**
+  **Deliberation** (der Konjunktiv über die verworfene Alternative — *„Ohne
+  dieses Feld behauptete die Ausgabe …"*; ihr Ort ist die ADR oder §3/§6 des
+  Slice), **Herkunfts-Prosa** (beschreibt abwesenden Text oder Code — *„die
+  frühere Zusage wurde ersetzt"*; ihr Ort ist `git`) und
+  **Ersetzungs-Trümmer** (eine Teilersetzung lässt den Rest des alten Satzes
+  stehen, der Kommentar bricht mitten im Satz ab; sie gehört nirgendwohin).
+- **Feedback-Hälfte:** Von den dreien ist genau eine ein Match —
+  **Ersetzungs-Trümmer** ist syntaktisch erkennbar; gebaut ist der Sensor dafür
+  nicht. **Deliberation** und **Herkunfts-Prosa** sind Urteile. Träger aller
+  drei ist das Briefing (Ziel-Form
+  `../templates/AGENTS.template.md` §3) plus der HIGH-Eintrag
+  *Kommentar trägt keine der fünf Klassen* im Reviewer-Skill (Ziel-Form
+  `../templates/.harness/skills/reviewer.template.md`).
+- **Grenze:** Einen *Sensor* zu behaupten, wo keiner steht, wäre die Klasse
+  *halluziniertes Gate* (Modul 13). Gemessen: Auf ausdrückliche Anweisung
+  korrigierte ein Agent sieben Kommentare — fünf sauber, einen reproduzierte er
+  im selben Diff, einen ließ er als Trümmer stehen.
+
 ### harness/README.md als Einstiegspunkt
 
 Pro Repo bündelt eine einzige Datei alles, was ein Agent oder ein neuer

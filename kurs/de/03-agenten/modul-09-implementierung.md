@@ -7,8 +7,9 @@
 > Mini-Vorgriff · Kernidee · 8-Schritt-Workflow. Lies A und mache
 > den [minimalen Übungspfad](#minimaler-übungspfad) — *bevor* du Teil B
 > öffnest. **Teil B (9b — Regeln, Kontext, Worked Example):** Hard
-> Rules · Typische Fehlvorstellungen · Kontext-Verdichtung · Worked
-> Example · Übungen · Reflexion · Selbstcheck. Der Trenner steht
+> Rules · Kommentar-Bestimmung · Typische Fehlvorstellungen ·
+> Kontext-Verdichtung · Worked Example · Übungen · Reflexion ·
+> Selbstcheck. Der Trenner steht
 > sichtbar nach dem Workflow-Diagramm ([§Pause-Punkt 9a → 9b](#pause-punkt-9a--9b)).
 > Wer A und B in einer Sitzung liest, wird die Hard Rules nicht mehr in
 > die richtige Stelle des Workflows einordnen — sie sind ein zweiter,
@@ -71,6 +72,7 @@ Nach diesem Modul kannst du:
 * Architekturkonformität
 * Werkzeugbindung (welche Tools darf der Agent benutzen)
 * AGENTS.md als zentrale, maschinell lesbare Konventionsdatei
+* Was der Agent in den Kommentar schreibt (und was nicht)
 * Pre-completion Checklist Middleware (Self-Check vor PR-Open)
 
 ## Kernidee
@@ -179,6 +181,44 @@ Hard Rules sind *computational + inferential feedforward* zugleich: sie
 stehen in AGENTS.md (Agent liest sie) **und** werden idealerweise durch
 eine Fitness Function geprüft (Linter schlägt an). Wenn nur eines von
 beiden existiert, ist die Regel nur halb durchgesetzt.
+
+## Was der Agent in den Kommentar schreibt
+
+Zwischen Schritt 4 (Plan) und Schritt 5 (engster Sensor) entsteht der Code —
+und mit ihm seine Kommentare. Das ist der Moment, in dem die Bestimmung greift:
+[`harness-dateien.md` §Was ein Kommentar trägt](../grundlagen/harness-dateien.md#was-ein-kommentar-trägt--code-konfiguration-skripte)
+(fünf Klassen, Adressaten- und Zeitform-Test). Hier steht nur, was sie für den
+schreibenden Agenten bedeutet.
+
+Der Agent hat gerade abgewogen. Genau diese Abwägung drängt in den Kommentar —
+und gehört nicht dorthin, sondern in die ADR oder in §3/§6 des Slice. Die
+Falsch/Richtig-Paare stammen aus einem realen Diff:
+
+> **Falsch:** *„Ohne dieses Feld behauptete die Ausgabe eine Verteilung, die
+> nicht stattgefunden hat, und die Token verschwänden lautlos."*
+> **Richtig:** *„Verteilt ist wahr, wenn die Splitting-Regel angewendet werden
+> konnte. Ist es falsch, liegt Sammelposten in keiner Rollen-Zeile."*
+>
+> **Falsch:** *„raten wäre schlechter als eine sichtbare Null."*
+> **Richtig:** *„der zweite Rückgabewert sagt, welcher der beiden Fälle
+> vorliegt."*
+
+Beide Male verschwindet nichts Prüfbares — es verschwindet der **Konjunktiv über
+die verworfene Alternative**. Was der Ändernde braucht, bleibt: der Zustand, die
+Fallunterscheidung, der Sensor.
+
+**Der zweite Fall betrifft Werkzeuge, die Repos erzeugen.** Emittierte Skripte,
+Makefiles und Konfigurationen tragen oft die Slice- oder Befund-Nummer ihres
+*Erzeuger*-Repos. Im erzeugten Repo existiert diese Nummer nicht — der Anker
+löst ins Leere auf. Beim Emittieren fällt er deshalb weg; die Begründung bleibt
+im Erzeuger-Repo, wo sie auflöst.
+
+**Und die Rate, ehrlich:** Ein Briefing greift am Vorsatz, nicht am Ergebnis.
+Gemessen an einem realen Lauf, auf ausdrückliche Anweisung: sieben Kommentare
+angefasst, fünf sauber umgeschrieben, einer reproduzierte das Muster im selben
+Diff, einer blieb als Trümmer stehen (eine Teilersetzung ließ den Rest des alten
+Satzes stehen). Wer die Regel nur ins Briefing schreibt, bekommt diese Rate —
+die Review-Hälfte ist keine Kür.
 
 ## Typische Fehlvorstellungen
 

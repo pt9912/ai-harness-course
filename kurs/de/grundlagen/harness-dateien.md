@@ -82,6 +82,80 @@ Template-Kommentar* steht als HIGH-Regel im Reviewer-Skill
 > Gate* ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin))
 > — auf die eigene Konvention angewandt.
 
+## Was ein Kommentar trägt — Code, Konfiguration, Skripte
+
+Der Abschnitt oben regelt Kommentare in **Templates**; die werden beim
+Adoptieren gelöscht. Ein Kommentar in Code, Konfiguration oder Skript wird
+nicht gelöscht — er bleibt, solange die Zeile lebt, und wird bei jeder
+Änderung mitgelesen. Er braucht deshalb eine eigene Bestimmung, und sie ist
+**positiv**: nicht, was verboten ist, sondern was er zu tragen hat.
+
+**Leser-Modell.** Ein Kommentar schreibt an jemanden, der den Code **gleich
+ändert** — nicht an jemanden, der die Entscheidung noch einmal treffen will.
+Der zweite Leser hat die ADR. Der erste beginnt bei Null
+([Modul 3 §Kernidee](../01-spec-und-architektur/modul-03-spec.md#kernidee)):
+Was nicht im Kontext steht, war für ihn nie da — und was daneben steht, liest
+er trotzdem mit und bezahlt es mit Kontext.
+
+**Fünf Klassen. Ein Kommentar beantwortet, was der Code nicht beantworten kann:**
+
+| Klasse | Die Frage, die der Code offen lässt |
+|---|---|
+| **Zusage** | Was garantiert diese Stelle — und was müsste passieren, damit sie bricht? Mit dem Sensor, der es sähe. |
+| **Kopplung** | Was muss ich mitändern, wenn ich das hier ändere? |
+| **Abgrenzung** | Welche Nachbargröße verwechsle ich hiermit, und warum ist sie es nicht? Sprach- und Plattform-Fallstricke gehören hierher. |
+| **Rang-Zeiger** | Wo wohnt die Norm, deren *Umsetzung* das hier ist? |
+| **Grenze** | Was leistet diese Stelle ausdrücklich **nicht**? |
+
+Die Liste ist **abschließend gemeint, nicht abschließend bewiesen** — sie ist
+aus dem Bestand eines Konsumenten-Repos gewonnen. Wer eine sechste Klasse
+findet, die keine der fünf trägt, erweitert sie; das ist der reguläre Weg,
+nicht die Ausnahme.
+
+**Zwei Tests, beide ohne Kontextwissen anwendbar:**
+
+1. **Adressaten-Test.** Richtet sich der Satz an den, der *ändert*, oder an
+   den, der *entscheidet*? Der Entscheider hat ADR und Slice.
+2. **Zeitform-Test.** Steht der Satz im Indikativ über das, was ist?
+   Konjunktiv ist zulässig über den **Bruch** (*„was müsste passieren, damit
+   die Zusage fällt"*) und über **künftige Arbeit** (*„das wäre ein eigener
+   Slice"* — die Grenze-Klasse). Unzulässig ist er über die **verworfene
+   Alternative**: Die ist entschieden, und die Entscheidung steht in der ADR.
+   Die Probe dafür ist die Zeitrichtung — zeigt der Konjunktiv nach vorn oder
+   zurück?
+
+**Was dadurch herausfällt, ohne je eigens verboten zu werden:**
+
+| Klasse | Beispiel | Wo es hingehört |
+|---|---|---|
+| **Deliberation** | *„Ohne dieses Feld behauptete die Ausgabe eine Verteilung, die nicht stattgefunden hat"* | ADR oder §3/§6 des Slice — Adressat ist der Entscheider |
+| **Herkunfts-Prosa** | *„Die früher hier stehende Zusage wurde ersetzt"* · *„der frühere Guard war unerreichbar und ist entfallen"* | `git` — beschreibt abwesenden Text oder Code |
+| **Ersetzungs-Trümmer** | *„… und nicht in eine Fussnote: ein"*, gefolgt von einem neuen Satz | nirgends — eine Teilersetzung hat den Rest des alten Satzes stehen lassen |
+
+**Hard Rule.** *Ein Kommentar beschreibt, was da ist.* Wer Herkunft nennt,
+nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit welle-<NN>`
+([`traceability.md` §Herkunfts-Anker](traceability.md#herkunfts-anker-für-steering-loop-regeln)) —
+und nie als Absatz.
+
+**Emittierte Artefakte tragen keinen Anker.** Erzeugt ein Werkzeug Code,
+Konfiguration oder Skripte *in ein anderes Repo*, reist der Erzeuger-Kontext
+nicht mit: Eine Slice- oder Befund-Nummer des Erzeugers löst dort in **null**
+Hops auf. Sie ist dann kein Anker, sondern ein toter Verweis. Das ist dieselbe
+Regel, die beim Regelwerk-Split die Deixis umhängt — *keine Verweise auf
+Material, das nicht mitreist*.
+
+> **Grenze — ehrlich benannt:** Von den drei Klassen der Tabelle oben ist genau
+> eine ein Match: **Ersetzungs-Trümmer** ist syntaktisch erkennbar — gebaut ist
+> der Sensor dafür nicht, und bis dahin trägt sie denselben Weg wie die
+> anderen. **Deliberation** und **Herkunfts-Prosa** sind Urteile, dieselbe
+> Klasse wie *„ist dieser Satz eine Norm?"* im Abschnitt oben. Träger aller
+> drei ist deshalb das Briefing plus der Reviewer-Skill, nicht ein Gate. Und
+> was ein Briefing allein erreicht, ist gemessen: Auf ausdrückliche Anweisung
+> korrigierte ein Agent sieben Kommentare — fünf sauber, einen reproduzierte er
+> im selben Diff, einen ließ er als Trümmer stehen. Wer hier ein Gate
+> behauptet, wo keines steht, betreibt *halluziniertes Gate*
+> ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)).
+
 ## harness/README.md als Einstiegspunkt
 
 Pro Repo bündelt eine einzige Datei alles, was ein Agent oder ein neuer

@@ -11,6 +11,74 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 71 — 2026-08-08 · Was ein Kommentar trägt
+
+Wiederkehrende Beobachtung: In Code-, Config- und Skript-Dateien beschreiben
+Kommentare nicht nur, sie betreiben Forensik — *„die frühere Zusage wurde
+ersetzt"*, *„der Guard war unerreichbar und ist entfallen"*. Dieselbe Klasse
+zeigte sich in Wellen, Slices und der Roadmap, dort aber im **Rumpf** statt im
+Kommentar. Damit war die Frage nicht Kommentar-Hygiene, sondern **Zeitform im
+Zustands-Artefakt**.
+
+Auditiert wurde gegen `ai-harness-init` — ein realer Konsument mit vollem
+Slice-Lifecycle, sechs Sprachen ausgeschlossen, Go/Shell/Make als Bestand.
+Gemessen: 21 Treffer in 21 nicht-Test-Go-Dateien; `harness/tools/mutate.sh`
+trägt einen 64-Zeilen-Kopf mit zwölf Befund-Nummern; emittierte Artefakte
+(`enforce.mk`, `d-check.yml`) nennen Slice-Nummern des **Erzeuger**-Repos, die
+im erzeugten Repo in *null* Hops auflösen.
+
+Der tragende Befund ist ein Durchsetzungs-Befund. Dort formuliert `ADR-0014`
+die Regel längst richtig und allgemein — *„im Artefakt bleibt, was `git` nicht
+halten kann"* —, aber der Code-Agent liest sie nie: ADRs kommen nur über
+Slice-Referenzen in seinen Lesepfad, und ein Code-Slice referenziert keine ADR
+über den Konventions-Block. Auf ausdrückliche Anweisung korrigierte der Agent
+dann sieben Kommentare — **fünf sauber, einen reproduzierte er im selben Diff,
+einen ließ er als Trümmer stehen**. Eine Regel, die nur am Vorsatz angreift,
+erreicht genau diese Rate.
+
+### Entschieden
+
+- **Positive Bestimmung statt Verbotsliste.** `grundlagen/harness-dateien.md`
+  bekommt §*Was ein Kommentar trägt* mit fünf Klassen — **Zusage · Kopplung ·
+  Abgrenzung · Rang-Zeiger · Grenze** — und einem Leser-Modell: Ein Kommentar
+  schreibt an den, der *ändert*, nicht an den, der *entscheidet*. Der Abschnitt
+  steht neben §Template-Schichtung, die nur MD-Templates regelt, weil deren
+  Kommentare beim Adoptieren gelöscht werden; Code-Kommentare bleiben.
+- **Zwei Tests:** Adressaten-Test (ändert er oder entscheidet er?) und
+  Zeitform-Test (Indikativ über das, was ist?).
+- **Drei Klassen fallen dadurch heraus, ohne eigenes Verbot:** *Deliberation*
+  (Konjunktiv über die verworfene Alternative → ADR), *Herkunfts-Prosa*
+  (abwesender Text oder Code → `git`) und *Ersetzungs-Trümmer* (eine
+  Teilersetzung ließ den Rest des alten Satzes stehen).
+- **Emittierte Artefakte tragen keinen Herkunfts-Anker.** Verlässt ein Artefakt
+  sein Erzeuger-Repo, reist der Kontext nicht mit — dieselbe Regel, die beim
+  Regelwerk-Split die Deixis umhängt.
+- **Träger, nicht Gate.** Modul 9 bekommt den Generierungs-Moment, die
+  `AGENTS.template.md` eine Hard Rule `3.7`, der Reviewer-Skill einen
+  HIGH-Eintrag. Ein Sensor wird **nicht** behauptet: Nur die Trümmer-Klasse
+  wäre ein Match, und gebaut ist sie nicht.
+
+### Aus dem Beispiel-Zug: der Zeitform-Test war zu scharf
+
+`lab/example` gegen die Regel gezogen: drei Verstöße behoben (eine
+Herkunfts-Prosa in einem Go-Test, eine Deliberation im C#-Makefile, ein
+Vorfalls-Bericht in `check_closure_notes.py`). Dabei fielen **vier korrekte
+Kommentare** durch den Test — *„das wäre ein eigener Slice"*, die
+Grenze-Klasse. Der Konjunktiv zeigt dort nach vorn, nicht zurück. Der Test
+unterscheidet jetzt die Zeitrichtung; Fix-Richtung Quelle, nicht Beispiel.
+
+### Aus dem Review
+
+Der neue Abschnitt behauptete, Schritt 5 und 6 des Minimal Agent Workflow
+erzeugten Code — die eigene Liste hat dort *Sensor-Lauf* und *Gate-Lauf*; der
+Code entsteht zwischen 4 und 5. Der Grenze-Block nannte drei Fehlerklassen, die
+Fallout-Tabelle drei andere, und der eine als „Match" deklarierten Klasse war
+kein Träger zugeordnet. In derselben Beispiel-Datei stand 23 Zeilen tiefer eine
+zweite Herkunfts-Prosa, die der erste Durchgang übersehen hatte. Dazu die
+Navigations-Nachzüge (Segmenting-Empfehlung, §Themen, Grundlagen-Index) und die
+harte Zahl *„fünf"* im Template, die eine sechste Klasse falsifiziert hätte —
+sie trägt jetzt nichts mehr.
+
 ## Welle 70 — 2026-08-08 · Ein Closure-Kriterium ohne Gegenstand
 
 Aus einer Leserfrage: *Was meint man mit Reconciliation-Backlog? „Backlog" wird

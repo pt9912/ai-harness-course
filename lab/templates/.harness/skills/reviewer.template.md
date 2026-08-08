@@ -40,6 +40,11 @@ bewusst kurz (Ergänzungs-Kanal, nicht Hauptkanal).
   eines `.template.md` und nirgends sonst. Sie ist beim Adopter weg, sobald er
   die Kommentare entfernt. Kein Gate fängt das (siehe Baseline-Regelwerk
   `grundlagen-harness-dateien.md` §Template-Schichtung)
+- **Kommentar trägt keine der Kommentar-Klassen** — ein Kommentar in Code, Config
+  oder Skript beschreibt die verworfene Alternative („Ohne X wäre …"), einen
+  abwesenden Text („früher stand hier …") oder bricht mitten im Satz ab, weil
+  eine Teilersetzung den Rest stehen ließ. Kein Gate fängt das (siehe
+  Baseline-Regelwerk `grundlagen-harness-dateien.md` §Was ein Kommentar trägt)
 - <**repo-spezifisch #1** — eine Regel, die ein generischer Skill nicht abdeckt,
   z. B. „git mv + Inhalt = zwei Commits" oder „Accepted-ADRs immutable">
 - <**repo-spezifisch #2** — eine zweite solche Regel>

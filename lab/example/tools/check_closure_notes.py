@@ -21,7 +21,7 @@ HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
 CODEBLOCK_RE = re.compile(r"```.*?```", re.DOTALL)
 INLINE_CODE_RE = re.compile(r"`[^`]+`")
 # Template-Platzhalter: spitze Klammern ausserhalb von Code. Eine ausgefuellte
-# Closure-Notiz hat keine — der Gate war sonst gruen auf dem blanken
+# Closure-Notiz hat keine — der Gate ist sonst gruen auf dem blanken
 # Template-Rumpf, und die Satz-Schwelle allein faengt das nicht: Der Rumpf
 # bringt genug Saetze mit.
 #
@@ -44,8 +44,9 @@ def find_closure_section(text: str) -> str | None:
     equal or higher level (or EOF).
 
     Gesucht ist die Notiz, nicht der Trigger: "5. Closure-Trigger" wird bei der
-    PLANUNG geschrieben und stand vorher als erster Treffer im Weg — der Gate
-    war damit gruen, auch wenn die Closure-Notiz leer blieb. Ein Welle-PLAN in
+    PLANUNG geschrieben und steht als erster Treffer im Weg — ohne diese
+    Unterscheidung ist der Gate gruen, auch wenn die Closure-Notiz leer
+    bleibt. Ein Welle-PLAN in
     done/ (welle-<NN>-<titel>.md) hat aus demselben Grund einen
     "3. Closure-Trigger", der hier nicht gemeint ist."""
     headings = [(m.start(), m.end(), len(m.group(1)), m.group(2)) for m in HEADING_RE.finditer(text)]

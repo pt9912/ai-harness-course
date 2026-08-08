@@ -38,9 +38,10 @@ test-determinism:
 		dotnet test DocSearch.sln --filter "FullyQualifiedName~DeterminismTests"
 
 coverage-gate: ## Gesamt-Coverage via coverlet (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
-# `--settings coverlet.runsettings` waere die COLLECTOR-Integration; /p:Threshold
-# wertet nur die MSBUILD-Integration aus. Beides zugleich hiess: gemessen wurde,
-# die Schwelle blieb unbeachtet, exit 0. Eine Integration, nicht zwei.
+# Zwei Integrationen, die sich ausschliessen: `--settings coverlet.runsettings`
+# ist die COLLECTOR-, `/p:Threshold` die MSBUILD-Integration — die Schwelle
+# wertet nur die MSBUILD-Seite aus. Beide zugleich gesetzt: es wird gemessen,
+# die Schwelle bleibt unbeachtet, exit 0. Deshalb eine Integration, nicht zwei.
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet test DocSearch.sln \
 		/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura \

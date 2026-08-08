@@ -174,6 +174,28 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
   Risiko in die nächste Rolle (Reviewer/Verifier) verlagert — das
   bricht die Kontext-Trennung der Rollen.
 
+### Was der Agent in den Kommentar schreibt (Modul 9)
+
+- Zwischen Schritt 4 (Plan) und Schritt 5 (engster Sensor) entsteht der Code —
+  und mit ihm seine Kommentare. Es gilt die Bestimmung aus
+  [`grundlagen-harness-dateien.md` §Was ein Kommentar trägt](grundlagen-harness-dateien.md#was-ein-kommentar-trägt--code-konfiguration-skripte):
+  fünf Klassen, Adressaten- und Zeitform-Test.
+- **Der Agent hat gerade abgewogen; genau diese Abwägung drängt in den
+  Kommentar.** Sie gehört in die ADR oder in §3/§6 des Slice, nicht dorthin.
+  Falsch: *„Ohne dieses Feld behauptete die Ausgabe eine Verteilung, die nicht
+  stattgefunden hat."* Richtig: *„Verteilt ist wahr, wenn die Splitting-Regel
+  angewendet werden konnte. Ist es falsch, liegt Sammelposten in keiner
+  Rollen-Zeile."* Es verschwindet nichts Prüfbares — es verschwindet der
+  Konjunktiv über die verworfene Alternative.
+- **Werkzeuge, die Repos erzeugen:** Emittierte Skripte, Makefiles und
+  Konfigurationen tragen keine Slice- oder Befund-Nummer des Erzeuger-Repos —
+  dort existiert sie nicht, der Anker löst ins Leere auf. Beim Emittieren
+  fällt er weg; die Begründung bleibt im Erzeuger-Repo, wo sie auflöst.
+- **Rate, gemessen:** Ein Briefing greift am Vorsatz, nicht am Ergebnis. Auf
+  ausdrückliche Anweisung wurden sieben Kommentare angefasst — fünf sauber
+  umgeschrieben, einer reproduzierte das Muster im selben Diff, einer blieb als
+  Trümmer stehen. Die Review-Hälfte ist keine Kür.
+
 ### Regeln gegen typische Fehlannahmen (Modul 9)
 
 - **Gegen "Agent liefert schnell, also ist der Workflow Overhead":** Geschwindigkeit ohne Plan produziert Diffs, die später als Review-Last anfallen. Plan + Diff + Code kostet 20 % länger und spart 50 % Review.
