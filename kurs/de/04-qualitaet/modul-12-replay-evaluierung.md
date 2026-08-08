@@ -92,7 +92,7 @@ gemachte Änderung das *Verhalten* gedreht hat, nicht nur die Signatur.
 
 > **Wenn du Replay-Manifeste mit gepinnten Zufallsquellen, Image-Hash und Golden Set bereits pflegst, springe zu [§Übungen](#übungen).** Worked Examples helfen beim Aufbau des Schemas; ist es da, kostet das Mitlesen Last (Expertise-Reversal).
 
-**Ausgangssituation:** Slice `SL-024` hat die Ranking-Stufe deiner Suche
+**Ausgangssituation:** `slice-024` hat die Ranking-Stufe deiner Suche
 geliefert. Sie wählt aus den Kandidaten stochastisch aus und entscheidet
 bei Punktgleichstand über eine feste Tie-Break-Regel. Beides willst du
 festhalten, bevor der nächste Slice sie anfasst.
@@ -139,7 +139,7 @@ und trägt daneben die Zusagen — Schritt 3.
 
 ```yaml
 # evals/golden/ranking-baseline/manifest.yaml
-slice: SL-024
+slice: slice-024
 recorded_at: 2026-06-15T10:31:00Z
 model:                     # die gemessene Stufe
   name: ranking
@@ -289,7 +289,7 @@ Replay-Sets verrotten (siehe Mini-Glossar oben, *Drift*). In
 
 ```markdown
 2026-06-15 — Baseline mit drei Fällen aufgesetzt.
-2026-08-02 — Tie-Break-Wechsel in SL-029 hat case-002 rot gemacht;
+2026-08-02 — Tie-Break-Wechsel in slice-029 hat case-002 rot gemacht;
              Erwartung bestätigt, kein Carveout. Zweiten
              Gleichstands-Fall ergänzt (drei Dokumente),
              weil case-002 nur den Zweier-Gleichstand deckt.
@@ -313,7 +313,7 @@ Seeds tritt:
 
 ```yaml
 # evals/golden/summary-baseline/manifest.yaml
-slice: SL-031
+slice: slice-031
 recorded_at: 2026-07-04T09:12:00Z
 model:
   name: <modell-kennung>          # ohne gleitenden Alias
