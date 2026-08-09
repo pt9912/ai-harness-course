@@ -1,0 +1,63 @@
+# .a-check.yml — Layering des Python-Skeletts als deklarierte Architektur
+# (ADR-0001, Gate-Bindung ADR-0015). Zweites Gate neben den
+# import-linter-Contracts in importlinter.cfg: dasselbe Layering, andere
+# Ausdrucksform — Allow-Liste statt aufgezaehlter Contracts.
+#
+# Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Audit ->
+# Service -> UI. Audit ist dort deklariert, aber in keinem Skelett gebaut und
+# hat deshalb hier keine Schicht.
+#
+# GRENZE, hier groesser als in den anderen Skeletten: a-check liest Importe
+# text-heuristisch und sieht nur die ABSOLUTE Schreibweise. Blind ist es fuer
+# `from ..ui import x` (relativ), `from docsearch import ui` (Subpaket-Form,
+# liefert nur `docsearch`) und ab dem zweiten Modul einer Komma-Liste. Alle
+# drei faengt import-linter, das den AST aufloest — deshalb ist hier der
+# Bestandssensor der schaerfere von beiden. Gemessen, nicht angenommen.
+version: 1
+languages:
+  python: ["**/*.py"]
+
+# Keine Rollen: Das Python-Skelett ist geschichtet, nicht ports-und-adapters —
+# der Service spricht Index und Embedding direkt an. `role: app` wuerde genau
+# das als app-impurity melden und eine Architektur behaupten, die hier nicht
+# gebaut ist. Geprueft wird die Kanten-Richtung.
+layers:
+  types:     ["src/docsearch/types/**"]
+  index:     ["src/docsearch/index/**"]
+  embedding: ["src/docsearch/embedding/**"]
+  service:   ["src/docsearch/service/**"]
+  ui:        ["src/docsearch/ui/**"]
+
+# Allow-Liste: Was nicht steht, ist verboten. Der Beitrag gegenueber
+# import-linter liegt genau hier — ein neues Modul, das in keinem Contract
+# aufgezaehlt ist, bleibt dort ungeprueft und wird hier gemeldet.
+edges:
+  - {from: ui,        to: service}
+  - {from: ui,        to: types}
+  - {from: service,   to: index}
+  - {from: service,   to: embedding}
+  - {from: service,   to: types}
+  - {from: index,     to: types}
+  - {from: embedding, to: types}
+
+# __main__.py verdrahtet Index, Embedding und Service; __init__.py ist das
+# Paket-Dach. Beide tragen keine Schicht.
+composition_root:
+  - "src/docsearch/__main__.py"
+  - "src/docsearch/__init__.py"
+
+# `from docsearch.service.search import Searcher` ist ein gepunkteter
+# Modulpfad; ohne diese Zuordnung auf den Verzeichnisbaum loest kein Import
+# auf eine Schicht auf und das Gate waere still gruen.
+resolution:
+  python: {mode: fixed-root, roots: ["src/docsearch"], package_base: "docsearch"}
+
+# tests/ prueft absichtlich quer durch die Schichten; die Cache-Verzeichnisse
+# sind gitignoriert, liegen lokal aber im Baum.
+exclude:
+  - "tests/**"
+  - "**/.venv/**"
+  - "**/.ruff_cache/**"
+  - "**/.mypy_cache/**"
+  - "**/.pytest_cache/**"
+  - "**/.import_linter_cache/**"

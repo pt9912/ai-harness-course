@@ -73,7 +73,7 @@ kein Altlast-Zustand.
    | C++ | `cmake/arch-check.sh` | verdrahtet |
    | C# | NetArchTest | verdrahtet |
    | Go | depguard | verdrahtet |
-   | Python | import-linter | offen |
+   | Python | import-linter | verdrahtet |
    | Java | ArchUnit | offen |
    | Kotlin | Konsist | offen |
 
@@ -121,6 +121,12 @@ kein Altlast-Zustand.
   Skelette treffen.
 - Negativ: Zwei Sensoren für eine Aussage können divergieren. Bei Widerspruch
   gilt ADR-0001, nicht der strengere Lauf — beide sind Sensoren, keine Quelle.
+- Grenze: In **Python** ist a-check der schwächere der beiden Sensoren: Es sieht
+  nur die absolute Import-Schreibweise, nicht `from ..ui import x`, nicht
+  `from docsearch import ui` und nicht das zweite Modul einer Komma-Liste. Alle
+  drei fängt `import-linter` über den AST. Der Beitrag von a-check liegt dort
+  allein in der Allow-Liste — beim Modul, das kein Contract aufzählt. Gemessen,
+  nicht angenommen.
 - Grenze: a-check ist **text-heuristisch**. In C++ liest es `#include`, in C#
   `using`-Direktiven. Ein voll qualifizierter Typzugriff **ohne** `using`
   (`DocSearch.Index.VectorIndex x`) ist für a-check unsichtbar — NetArchTest

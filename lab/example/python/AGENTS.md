@@ -12,10 +12,23 @@ oder `[tool.mypy.overrides]` mit Begründung und Slice-ID.
 
 (Nach grid-gym-Vorbild.)
 
-### P-2 — Layering via import-linter
+### P-2 — Layering via import-linter und a-check
 
-Architektur-Constraints aus ADR-0001 werden durch `import-linter` mit
-`importlinter.cfg` durchgesetzt. Verstöße brechen `make arch-check`.
+Architektur-Constraints aus ADR-0001 werden von **zwei** Sensoren durchgesetzt,
+beide hinter `make arch-check`
+([ADR-0015](../docs/plan/adr/0015-a-check-rollout-sprachskelette.md)):
+`import-linter` mit `importlinter.cfg` und die Deklaration in `.a-check.yml`.
+Verstöße brechen `make arch-check`.
+
+Sie sehen Verschiedenes, und hier deutlicher als in den anderen Skeletten.
+`import-linter` löst den AST auf und sieht **jede** Import-Schreibweise;
+a-check liest Text und sieht nur die **absolute** — blind ist es für
+`from ..ui import x`, für `from docsearch import ui` (liefert nur `docsearch`)
+und ab dem zweiten Modul einer Komma-Liste. Umgekehrt ist `.a-check.yml` eine
+**Allow-Liste**: Ein neues Modul, das in keinem Contract aufgezählt ist, bleibt
+bei `import-linter` ungeprüft und wird von a-check gemeldet.
+
+Schreiben Sie kanten-relevante Importe deshalb absolut und einzeln.
 
 ### P-3 — Kein `.venv` im Repo, kein `pip install`
 

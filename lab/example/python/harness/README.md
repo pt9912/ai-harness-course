@@ -9,7 +9,10 @@ Sprach-spezifischer Einstieg. Übergeordnete Quelle:
 |---|---|---|
 | `make lint` | `ruff check` (inkl. noqa-Gate) | Stil + Suppression-Verbot |
 | `make typecheck` | `mypy --strict src/` | Statisch |
-| `make arch-check` | `lint-imports` (import-linter) | ADR-0001 Layering |
+| `make arch-check` | beide Sensoren unten | ADR-0001 Layering |
+| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | ADR-0001 Layering, deklariert — Werkzeugwahl [ADR-0015](../../docs/plan/adr/0015-a-check-rollout-sprachskelette.md) |
+| `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
+| (in `arch-check`) | `lint-imports` (import-linter) | ADR-0001 Layering, aufgezählte Contracts; sieht jede Import-Schreibweise |
 | `make test` | `pytest` | Unit + Tie-Break |
 | `make test-determinism` | `pytest -k determinism --count=100` (pytest-repeat) | LH-QA-02 |
 | `make coverage-gate` | `pytest --cov` mit Schwelle | ADR-0013: 70 %, M2 → 80 % |
