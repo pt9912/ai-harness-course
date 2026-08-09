@@ -1,6 +1,6 @@
 # ADR-0014: a-check als zweites Layering-Gate im C++-Skelett
 
-**Status:** Accepted
+**Status:** Superseded by [ADR-0015](0015-a-check-rollout-sprachskelette.md)
 
 **Datum:** 2026-08-09
 
@@ -137,3 +137,4 @@ a-check läuft im C++-Skelett **zusätzlich** zum Skript, nicht an seiner Stelle
 | 2026-08-09 | Proposed | Lücke in `arch-check.sh` Regel C/D (dritter Adapter ungeprüft); a-check gegen alle sechs Skelette erprobt, Break-Test je Skelett rot |
 | 2026-08-09 | Accepted | C++-Pilot verdrahtet: `.a-check.yml`, `a-check.mk` (tool-generiert), `arch-check` ruft beide Sensoren |
 | 2026-08-09 | Nachtrag | Review-Befunde vor dem Merge: Adapter je Schicht getrennt (gemeinsame `adapters`-Schicht war schwächer als Regel D), `include` hinter `help` (Default-Goal), `$(DOCKER)`-Grenze aufgenommen |
+| 2026-08-09 | Superseded | [ADR-0015](0015-a-check-rollout-sprachskelette.md) weitet den Geltungsbereich vom C++-Pilot auf alle Sprach-Skelette |

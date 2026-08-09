@@ -24,7 +24,7 @@ help: ## Targets anzeigen
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-28s %s\n", $$1, $$2}'
 
-# Zweites Layering-Gate (ADR-0014). `a-check.mk` ist tool-generiert
+# Zweites Layering-Gate (ADR-0015). `a-check.mk` ist tool-generiert
 # (`a-check --print-mk`), die Regeln stehen in `.a-check.yml` — beide nicht
 # im Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment;
 # gepinnt ist v0.15.0, der geprüfte Stand. Anheben ist ein eigener Commit.

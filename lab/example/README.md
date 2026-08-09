@@ -69,7 +69,7 @@ Toolchain:
 | [Python](python/) | Python 3.12 + uv | `ruff` (noqa-Gate) | `import-linter` | grid-gym |
 | [Kotlin](kotlin/) | Kotlin/JVM 21 + Gradle KTS | `detekt` | **Konsist** | (neu) |
 | [Java](java/) | Java 21 + Maven | Checkstyle | **ArchUnit** | (neu) |
-| [C#](csharp/) | .NET 10 + CPM | `dotnet format` | **NetArchTest** | bess-ems |
+| [C#](csharp/) | .NET 10 + CPM | `dotnet format` | **NetArchTest** + a-check | bess-ems |
 | [C++](cpp/) | C++20 + CMake | `clang-tidy` | `arch-check.sh` **+ a-check** (+ CTest) | cmake-xray, b-cad |
 
 Jedes Skelett implementiert:
@@ -94,7 +94,7 @@ zeigen Schichtung, Gates und Traceability — nicht das fertige Produkt.
 | Konzept | Was unterscheidet sich? |
 |---|---|
 | Suppression-Verbot | `//nolint` vs. `# noqa` vs. `@Suppress` vs. `@SuppressWarnings` vs. `#pragma warning disable` vs. C++ `// NOLINT` / `#pragma GCC diagnostic` — siehe [Modul 9](../../kurs/de/03-agenten/modul-09-implementierung.md) |
-| Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) vs. Skript (C++ `arch-check.sh`) — und im C++-Skelett beide Klassen an derselben Aussage: das Skript neben dem deklarativen a-check ([ADR-0014](docs/plan/adr/0014-a-check-zweites-layering-gate.md)) |
+| Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) vs. Skript (C++ `arch-check.sh`) — und im C++-Skelett beide Klassen an derselben Aussage: das Skript neben dem deklarativen a-check ([ADR-0015](docs/plan/adr/0015-a-check-rollout-sprachskelette.md)) |
 | Lockfile | `go.sum`, `uv.lock`, `gradle.lockfile`, Maven (transitive), CPM `packages.lock.json`, FetchContent-`GIT_TAG` (C++) |
 | Container | Distroless Static (Go), python-slim, Distroless Java, Distroless .NET, Distroless cc (C++) |
 | Tie-Break | `sort.SliceStable` vs. `sorted(key=…)` vs. `compareBy(…).thenBy(…)` vs. `Comparator.thenComparing` vs. LINQ `OrderBy().ThenBy()` vs. `std::stable_sort` (C++) |

@@ -7,9 +7,20 @@ DOTNET_SDK := mcr.microsoft.com/dotnet/sdk:10.0
 .PHONY: help build run lint typecheck arch-check test test-determinism \
         coverage-gate coverage-gate-critical gates ci fullbuild clean
 
-help:
-	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
+# `-h`: MAKEFILE_LIST trägt mehrere Dateien, und grep stellt dann jeder
+# Zeile den Dateinamen voran — er verdrängt den Target-Namen.
+help: ## Targets anzeigen
+	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-28s %s\n", $$1, $$2}'
+
+# Zweites Layering-Gate (ADR-0015). `a-check.mk` ist tool-generiert
+# (`a-check --print-mk`), die Regeln stehen in `.a-check.yml` — beide nicht
+# im Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment;
+# gepinnt ist v0.15.0, der geprüfte Stand. Anheben ist ein eigener Commit.
+# Der `include` steht hinter `help`, weil das erste gelesene Target das
+# Default-Goal ist — davor gelesen, startet ein blankes `make` das Gate.
+A_CHECK_IMAGE := ghcr.io/pt9912/a-check@sha256:6425c93a9a4359ef28c4da231a2d1db6f421fdaa8f96877ac89d201827c42d09
+include a-check.mk
 
 build:
 	$(DOCKER) build -t $(IMAGE):latest .
@@ -25,7 +36,7 @@ typecheck: ## dotnet build -warnaserror, Lock-Mode aktiv
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet build DocSearch.sln -warnaserror /p:RestoreLockedMode=true
 
-arch-check: ## NetArchTest in xUnit (ADR-0001)
+arch-check: a-check ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + NetArchTest (Test-Framework)
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet test DocSearch.sln --filter "FullyQualifiedName~ArchitectureTests"
 

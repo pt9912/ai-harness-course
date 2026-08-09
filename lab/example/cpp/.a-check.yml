@@ -1,5 +1,5 @@
 # .a-check.yml — Layering des C++-Skeletts als deklarierte Architektur
-# (ADR-0001, Gate-Bindung ADR-0014). Zweites Gate neben
+# (ADR-0001, Gate-Bindung ADR-0015). Zweites Gate neben
 # `cmake/arch-check.sh`: dasselbe Layering, andere Ausdrucksform —
 # Konfiguration statt Skript.
 #
