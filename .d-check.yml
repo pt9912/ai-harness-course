@@ -42,7 +42,17 @@ ignore-refs:
 # d-check als Modul `matrix`.
 matrix:
   classes:
-    - {name: adr, paths: ["lab/example/docs/plan/adr/[0-9]*.md"]}
+    # Die drei Spec-Straten (Vertrag, Technik, Sicht). Sie duerfen ADR und
+    # Slice in KEINEM Abschnitt nennen — auch nicht in ihrer Historie; deshalb
+    # steht `Historie` bewusst nicht in `exclude-sections` unten.
+    - name: spec
+      paths:
+        - "lab/example/spec/lastenheft.md"
+        - "lab/example/spec/spezifikation.md"
+        - "lab/example/spec/architecture.md"
+    - name: adr
+      paths: ["lab/example/docs/plan/adr/[0-9]*.md"]
+      token: 'ADR-\d{4}'
     # `token` faengt die Kennung auch als blossen Text im Fliesstext — eine
     # Referenz muss kein Link sein.
     - name: slice
@@ -51,7 +61,10 @@ matrix:
   rules:
     # Kontext-Zeiger sind erlaubt und werden am Ort markiert
     # (<!-- d-check:status-provenance -->); alles Uebrige faellt.
-    - {from: adr, to: slice, allow: false}
+    - {from: adr,  to: slice, allow: false}
+    # Decken-Regel der Spec-Straten (Kurs §Referenz-Richtung, Regel 5).
+    - {from: spec, to: adr,   allow: false}
+    - {from: spec, to: slice, allow: false}
   status:
     forbidden: [superseded, deprecated]
     # Die Ablloesung steht in diesem Korpus in der Status-Zeile
@@ -68,8 +81,13 @@ matrix:
     - "lab/example/docs/plan/adr/0011-*.md"
     - "lab/example/docs/plan/adr/0012-*.md"
     - "lab/example/docs/plan/adr/0013-*.md"
-  # Provenance in der Historie ist Kontext (Kurs §Referenz-Richtung, Regel 5).
-  exclude-sections: [Geschichte, Historie]
+  # Provenance in der ADR-Historie ist Kontext (Kurs §Referenz-Richtung,
+  # Regel 5) — die Sektion heisst hier `Geschichte`. `Historie` gehoert NICHT
+  # dazu: So heisst im Beispiel nur die Sektion der Spec-Straten, und fuer die
+  # gilt die Ausnahme ausdruecklich nicht. Nachgestellt: Mit `Historie` in
+  # dieser Liste blieb ein ADR-Verweis im unnummerierten `## Historie` des
+  # Lastenhefts unentdeckt.
+  exclude-sections: [Geschichte]
 
 codepaths:
   roots: [lab, kurs, tools]
