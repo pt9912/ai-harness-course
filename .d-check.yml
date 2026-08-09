@@ -8,7 +8,7 @@ scan:
   # Dateien, wie sie zur jeweiligen Welle existierten, z. B. retired
   # agents-regelwerk.md) — nicht gegen den aktuellen Stand prüfen.
   ignore: ["lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md"]
-modules: [links, anchors, codepaths]
+modules: [links, anchors, codepaths, matrix]
 
 # lab/templates mischt ZWEI Referenzklassen in denselben Dateien:
 #   (a) SYMBOLISCH — Ziel-Repo-Pfade, die erst nach dem Ausfüllen existieren
@@ -32,6 +32,44 @@ ignore-refs:
            "lab/templates/docs/plan/planning",
            "lab/templates/.d-check.yml",
            "lab/templates/Makefile"]
+
+
+# Referenz-Richtung (Kurs §Referenz-Richtung) fuer das Beispiel-Repo, soweit
+# maschinell entscheidbar. Bisher trug `lab/example/tools/check_references.py`
+# zwei Zellen der Matrix und erklaerte die dritte — ADR -> Slice — fuer nicht
+# grep-bar. Der Kurs loest das ueber den umgekehrten Default: Die Kante gilt als
+# verboten, die Ausnahme wird am Ort deklariert. Genau diese Bauform hat
+# d-check als Modul `matrix`.
+matrix:
+  classes:
+    - {name: adr, paths: ["lab/example/docs/plan/adr/[0-9]*.md"]}
+    # `token` faengt die Kennung auch als blossen Text im Fliesstext — eine
+    # Referenz muss kein Link sein.
+    - name: slice
+      paths: ["lab/example/docs/plan/planning/**/slice-*.md"]
+      token: 'slice-\d{3}'
+  rules:
+    # Kontext-Zeiger sind erlaubt und werden am Ort markiert
+    # (<!-- d-check:status-provenance -->); alles Uebrige faellt.
+    - {from: adr, to: slice, allow: false}
+  status:
+    forbidden: [superseded, deprecated]
+    # Die Ablloesung steht in diesem Korpus in der Status-Zeile
+    # ("Superseded by ADR-NNNN"), nicht nur in einem Supersedes-Feld. Ohne
+    # beide Feldnamen meldete jede korrekt abgeloeste ADR-Kette einen
+    # Dauerbefund auf ihrer eigenen Lineage.
+    allow-supersede-lineage: true
+    supersede-fields: [Supersedes, Status]
+  # Vor Einfuehrung dieser Konvention entstandene ADRs werden grandfathered,
+  # nicht nachgezogen (Kurs §Referenz-Richtung, Absatz Mechanisierbar).
+  # Bewusst einzeln statt als Bereichs-Glob: Ein Treffer in einer anderen
+  # Alt-ADR soll auffallen, nicht still mitgedeckt sein.
+  exempt-paths:
+    - "lab/example/docs/plan/adr/0011-*.md"
+    - "lab/example/docs/plan/adr/0012-*.md"
+    - "lab/example/docs/plan/adr/0013-*.md"
+  # Provenance in der Historie ist Kontext (Kurs §Referenz-Richtung, Regel 5).
+  exclude-sections: [Geschichte, Historie]
 
 codepaths:
   roots: [lab, kurs, tools]
