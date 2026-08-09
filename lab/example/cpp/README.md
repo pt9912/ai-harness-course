@@ -8,7 +8,7 @@ Konkretion des Harness für C++/CMake:
 |---|---|
 | Linter | `clang-tidy` (bugprone, clang-analyzer) + Suppression-Gate |
 | Typecheck | Compiler-Build (`-Wall -Wextra -Werror`) |
-| Architekturtest | `cmake/arch-check.sh` (textbasiert, als CTest registriert) |
+| Architekturtest | `.a-check.yml` (a-check, deklarativ) + `cmake/arch-check.sh` (textbasiert, als CTest registriert) |
 | Coverage | `gcov` + `gcovr` (`--fail-under-line`) |
 | Build | CMake + Multi-Stage Docker (Distroless `cc`) |
 | Lockfile | FetchContent-`GIT_TAG`-Pins (`cmake/Dependencies.cmake`) |
@@ -30,12 +30,14 @@ cpp/
 ├── AGENTS.md                  C++-spezifische Ergänzung zu ../AGENTS.md
 ├── harness/README.md          C++-spezifische Sensors-Tabelle
 ├── Makefile                   gates · lint · typecheck · arch-check · test · coverage-gate · build
+├── .a-check.yml               ADR-0001 Layering, deklariert (a-check)
+├── a-check.mk                 Gate-Fragment, tool-generiert (`a-check --print-mk`)
 ├── Dockerfile                 Multi-Stage, Distroless cc, nonroot
 ├── .clang-tidy                Linter-Checks (WarningsAsErrors)
 ├── CMakeLists.txt             C++20, CTest, Coverage-Option
 ├── cmake/
 │   ├── Dependencies.cmake     doctest via FetchContent (GIT_TAG-Pin)
-│   ├── arch-check.sh          ADR-0001 Layering (Include-Heuristik)
+│   ├── arch-check.sh          ADR-0001 Layering (Include-Heuristik, zweiter Sensor)
 │   └── suppression-gate.sh    Inline-Suppression-Verbot
 ├── src/
 │   ├── main.cpp               Composition Root (Wiring, ADR-0001)
@@ -54,5 +56,6 @@ Bezug zur Spec: alle `LH-*`-IDs aus
 [`../spec/lastenheft.md`](../spec/lastenheft.md) sind in den
 Make-Target-Kommentaren und Test-Namen referenziert. Das Layering folgt
 [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md): Adapter zeigen
-nach innen auf den Kern, nie umgekehrt — durchgesetzt von
-`cmake/arch-check.sh`.
+nach innen auf den Kern, nie umgekehrt — durchgesetzt von zwei Sensoren hinter
+`make arch-check`: `.a-check.yml` und `cmake/arch-check.sh`
+([ADR-0015](../docs/plan/adr/0015-a-check-rollout-sprachskelette.md)).

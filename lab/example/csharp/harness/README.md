@@ -1,5 +1,7 @@
 # Harness — DocSearch C#-Skelett
 
+## Sensors (C#-spezifisch)
+
 | Target | Werkzeug | Bindung |
 |---|---|---|
 | `make lint` | `dotnet format` + `solid-suppression-gate` (Custom) | — |

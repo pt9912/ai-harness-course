@@ -16,16 +16,16 @@ help: ## Targets anzeigen
 # Zweites Layering-Gate (ADR-0015). `a-check.mk` ist tool-generiert
 # (`a-check --print-mk`), die Regeln stehen in `.a-check.yml` — beide nicht
 # im Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment;
-# gepinnt ist v0.15.0, der geprüfte Stand. Anheben ist ein eigener Commit.
+# gepinnt ist v0.16.0, der geprüfte Stand. Anheben ist ein eigener Commit.
 # Der `include` steht hinter `help`, weil das erste gelesene Target das
 # Default-Goal ist — davor gelesen, startet ein blankes `make` das Gate.
-A_CHECK_IMAGE := ghcr.io/pt9912/a-check@sha256:6425c93a9a4359ef28c4da231a2d1db6f421fdaa8f96877ac89d201827c42d09
+A_CHECK_IMAGE := ghcr.io/pt9912/a-check@sha256:aef28cfe25bb054b1b0eb28420222a45b9f6ce9425b7ffd0f55e6ae56f295b56
 include a-check.mk
 
-build:
+build: ## Runtime-Image bauen (Multi-Stage, Distroless)
 	$(DOCKER) build -t $(IMAGE):latest .
 
-run: build
+run: build ## Smoke: --help
 	$(DOCKER) run --rm $(IMAGE):latest --help
 
 lint: ## dotnet format inkl. Suppression-Verbot (AGENTS.md §C-1)
@@ -36,15 +36,20 @@ typecheck: ## dotnet build -warnaserror, Lock-Mode aktiv
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet build DocSearch.sln -warnaserror /p:RestoreLockedMode=true
 
-arch-check: a-check ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + NetArchTest (Test-Framework)
+# Beide Sensoren laufen, auch wenn der erste rot ist: ADR-0015 laesst die
+# beiden Befund-Mengen vergleichen, und ein Abbruch nach dem ersten zeigt
+# immer nur eine.
+arch-check: ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + NetArchTest (Test-Framework)
+	@rc=0; $(MAKE) --no-print-directory a-check || rc=1; \
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
-		dotnet test DocSearch.sln --filter "FullyQualifiedName~ArchitectureTests"
+		dotnet test DocSearch.sln --filter "FullyQualifiedName~ArchitectureTests" || rc=1; \
+	exit $$rc
 
-test:
+test: ## xUnit-Tests
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet test DocSearch.sln
 
-test-determinism:
+test-determinism: ## LH-QA-02: Determinismus-Case
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet test DocSearch.sln --filter "FullyQualifiedName~DeterminismTests"
 
@@ -67,15 +72,15 @@ coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Laye
 		'/p:Include="[DocSearch]DocSearch.Service.*"' \
 		/p:Threshold=90 /p:ThresholdType=line /p:ThresholdStat=total
 
-gates: lint typecheck arch-check test coverage-gate
+gates: lint typecheck arch-check test coverage-gate ## alle inneren Gates (mandatory)
 	@echo "gates grün."
 
-ci: gates test-determinism coverage-gate-critical
+ci: gates test-determinism coverage-gate-critical ## gates + test-determinism + coverage-gate-critical
 	@echo "ci grün."
 
-fullbuild: ci build
+fullbuild: ci build ## volle Closure inkl. Runtime-Image
 	@echo "fullbuild grün."
 
-clean:
+clean: ## generierte Artefakte entfernen
 	-rm -rf bin obj **/bin **/obj TestResults
 	-$(DOCKER) image rm $(IMAGE):latest

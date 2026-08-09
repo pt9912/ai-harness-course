@@ -3,7 +3,9 @@
 # `cmake/arch-check.sh`: dasselbe Layering, andere Ausdrucksform —
 # Konfiguration statt Skript.
 #
-# Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Service -> UI.
+# Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Audit ->
+# Service -> UI. Audit ist dort deklariert, aber in keinem Skelett gebaut und
+# hat deshalb hier keine Schicht.
 # Im C++-Baum heißen sie: hexagon/model (Types), hexagon/index,
 # hexagon/ports, hexagon/service, adapters/{embedding,ui}.
 version: 1
@@ -54,3 +56,12 @@ exclude:
   - "tests/**"
   - "build/**"
   - "build-cov/**"
+
+# Die Aufloesung oben setzt wurzel-verankerte Includes voraus. Ein
+# elternrelativer Include ("../../adapters/ui/x.h") loest auf nichts auf und
+# faellt auch durch die Greps von cmake/arch-check.sh — beide Sensoren waeren
+# still gruen. Die Regel erzwingt die Voraussetzung, auf der beide stehen.
+# Die Zone ist Pflicht im Schema; tests/ ist die einzige Stelle, an der ein
+# relativer Include vertretbar waere, und liegt ohnehin ausserhalb des Scans.
+constructs:
+  - {pattern: '#include\s*"\.\.', match: regex, adapter: "tests"}

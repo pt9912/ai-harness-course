@@ -27,10 +27,10 @@ help: ## Targets anzeigen
 # Zweites Layering-Gate (ADR-0015). `a-check.mk` ist tool-generiert
 # (`a-check --print-mk`), die Regeln stehen in `.a-check.yml` — beide nicht
 # im Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment;
-# gepinnt ist v0.15.0, der geprüfte Stand. Anheben ist ein eigener Commit.
+# gepinnt ist v0.16.0, der geprüfte Stand. Anheben ist ein eigener Commit.
 # Der `include` steht hinter `help`, weil das erste gelesene Target das
 # Default-Goal ist — davor gelesen, startet ein blankes `make` das Gate.
-A_CHECK_IMAGE := ghcr.io/pt9912/a-check@sha256:6425c93a9a4359ef28c4da231a2d1db6f421fdaa8f96877ac89d201827c42d09
+A_CHECK_IMAGE := ghcr.io/pt9912/a-check@sha256:aef28cfe25bb054b1b0eb28420222a45b9f6ce9425b7ffd0f55e6ae56f295b56
 include a-check.mk
 
 toolchain: ## Builder-Image mit gepinnter Toolchain bauen (deps-Stage)
@@ -46,8 +46,13 @@ lint: configure ## clang-tidy + Suppression-Gate (AGENTS.md §2.2)
 	$(WORK) bash cmake/suppression-gate.sh
 	$(WORK) sh -c 'clang-tidy -p $(BUILD_DIR) $$(find src -name "*.cpp")'
 
-arch-check: a-check ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + Skript (Include-Heuristik)
-	$(WORK) bash cmake/arch-check.sh
+# Beide Sensoren laufen, auch wenn der erste rot ist: ADR-0015 laesst die
+# beiden Befund-Mengen vergleichen, und ein Abbruch nach dem ersten zeigt
+# immer nur eine.
+arch-check: ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + Skript (Include-Heuristik)
+	@rc=0; $(MAKE) --no-print-directory a-check || rc=1; \
+	$(WORK) bash cmake/arch-check.sh || rc=1; \
+	exit $$rc
 
 test: configure ## doctest via ctest (Unit + Tie-Break)
 	$(WORK) sh -c 'cmake --build $(BUILD_DIR) -j && \

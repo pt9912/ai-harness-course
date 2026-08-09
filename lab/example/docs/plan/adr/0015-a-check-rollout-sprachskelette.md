@@ -55,9 +55,18 @@ kein Altlast-Zustand.
    C#-Skelett ist geschichtet ohne Ports. Eine Rolle zu setzen, die der Code
    nicht einlöst, meldete Architektur-Verstöße gegen eine Architektur, die hier
    niemand gebaut hat.
-3. **Ein Gate, zwei Sensoren.** `make arch-check` ruft beide; das Ziel-Set von
+3. **Ein Gate, zwei Sensoren.** `make arch-check` ruft beide — und zwar beide
+   vollständig, auch wenn der erste rot ist: Der Vergleich der Befund-Mengen
+   (siehe Re-Evaluierungs-Trigger) braucht sie nebeneinander. Das Ziel-Set von
    `make gates` bleibt unverändert.
-4. **Umsetzung skelettweise**, nicht in einem Zug. Stand:
+4. **Die Auflösungs-Voraussetzung wird selbst geprüft.** Die Symbol-Auflösung
+   setzt je Sprache eine Schreibweise voraus. In C++ ist das der gegen `src/`
+   gewurzelte Include; ein elternrelativer (`"../../adapters/ui/x.h"` <!-- d-check:ignore (illustrative Schreibweise, keine Datei) -->) löst auf
+   nichts auf **und** entgeht den Greps des Skripts — beide Sensoren blieben
+   grün, obwohl der Verstoß compiliert. Eine `constructs`-Regel verbietet die
+   Schreibweise und macht damit beide Sensoren erst belastbar. C# hat kein
+   Gegenstück: `using` ist immer voll qualifiziert.
+5. **Umsetzung skelettweise**, nicht in einem Zug. Stand:
 
    | Skelett | Bestandssensor | a-check |
    |---|---|---|
@@ -103,6 +112,10 @@ kein Altlast-Zustand.
 - Positiv: `make a-check-graph` erzeugt das Schichtbild aus derselben
   Deklaration, die das Gate prüft — Diagramm und Gate können nicht
   auseinanderlaufen.
+- Grenze: Ein Sensor prüft nur, was seine Auflösung sieht. Bevor eine Schicht
+  deklariert wird, gehört die Frage gestellt, welche Schreibweise die Auflösung
+  voraussetzt — und ob etwas sie erzwingt. Ohne diesen Schritt ist eine grüne
+  Deklaration kein Beleg.
 - Negativ: Ein Image-Pin je Skelett, der altert. Er hängt an keinem
   Freshness-Sensor; das Anheben ist Handarbeit und muss dann alle verdrahteten
   Skelette treffen.
@@ -147,3 +160,4 @@ kein Altlast-Zustand.
 | 2026-08-09 | Proposed | C++-Pilot (ADR-0014) ausgewertet; C#-Bestandssensor prüft die `Types`-Schicht nicht |
 | 2026-08-09 | Accepted | C# verdrahtet (`.a-check.yml`, `a-check.mk`, `arch-check` ruft beide Sensoren); Verweise aus dem C++-Skelett auf diese ADR umgehängt |
 | 2026-08-09 | Beleg | Die Asymmetrie der beiden Sensoren in beide Richtungen gemessen: `typeof(DocSearch.UI.Handler)` ohne `using` — a-check 0 Befunde, NetArchTest `Service_Should_Not_Depend_On_UI` rot; `Types → Service` — a-check rot, NetArchTest ohne Regel |
+| 2026-08-09 | Nachtrag | Review-Befunde: elternrelativer Include passierte beide C++-Sensoren (`constructs`-Regel ergänzt); Pin auf v0.16.0 korrigiert — der `--print-mk`-Versatz hatte auf den Vorgänger gezeigt; `make arch-check` führt beide Sensoren vollständig aus; AGENTS.md und README beider Skelette nachgezogen |

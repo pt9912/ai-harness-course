@@ -7,7 +7,7 @@ NetArchTest).
 |---|---|
 | Linter | `dotnet format`, Roslyn Analyzers, StyleCop |
 | Typecheck | `dotnet build` |
-| Architekturtest | **NetArchTest** |
+| Architekturtest | **NetArchTest** + `.a-check.yml` (a-check, deklarativ) |
 | Coverage | `coverlet` + `reportgenerator` |
 | Build | `dotnet build` / `dotnet publish` |
 | Lockfile | `Directory.Packages.props` (Central Package Management) + `packages.lock.json` |
@@ -30,5 +30,7 @@ csharp/
 ├── Directory.Packages.props     Central Package Management
 ├── global.json                  SDK-Pin
 ├── .editorconfig                StyleCop-Regeln + Suppression-Verbot
+├── .a-check.yml                 ADR-0001 Layering, deklariert (a-check)
+├── a-check.mk                   Gate-Fragment, tool-generiert (`a-check --print-mk`)
 └── src/DocSearch/, tests/DocSearch.Tests/
 ```

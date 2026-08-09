@@ -3,7 +3,9 @@
 # in tests/DocSearch.Tests/ArchitectureTests.cs: dasselbe Layering, andere
 # Ausdrucksform — Konfiguration statt Test-Framework.
 #
-# Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Service -> UI.
+# Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Audit ->
+# Service -> UI. Audit ist dort deklariert, aber in keinem Skelett gebaut und
+# hat deshalb hier keine Schicht.
 # Namespace und Ordner decken sich (.NET-Konvention), deshalb traegt jede
 # Schicht genau ein Verzeichnis.
 version: 1

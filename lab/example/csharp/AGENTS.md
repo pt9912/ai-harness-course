@@ -11,10 +11,18 @@ Inline-Suppression bricht das `solid-suppression-gate`. Ausnahmen leben
 in `.editorconfig` bzw. `Directory.Build.props` mit Begründung und
 Slice-ID. Nach Vorbild bess-ems.
 
-### C-2 — Layering via NetArchTest
+### C-2 — Layering via NetArchTest und a-check
 
-ADR-0001 wird durch NetArchTest-Tests in `tests/DocSearch.Tests/ArchitectureTests.cs`
-durchgesetzt.
+ADR-0001 wird von **zwei** Sensoren durchgesetzt, beide hinter
+`make arch-check` ([ADR-0015](../docs/plan/adr/0015-a-check-rollout-sprachskelette.md)):
+die NetArchTest-Fakten in `tests/DocSearch.Tests/ArchitectureTests.cs` und die
+Deklaration in `.a-check.yml`.
+
+Sie sehen Verschiedenes. NetArchTest prüft vier Namespace-Paare an der
+kompilierten Assembly — auch einen voll qualifizierten Typzugriff ohne `using`.
+`.a-check.yml` liest `using`-Direktiven, ist dafür eine **Allow-Liste**: Erlaubt
+ist, was als Kante deklariert ist. Die `Types`-Schicht etwa hat in NetArchTest
+gar keine Regel und wird nur von a-check geprüft.
 
 ### C-3 — Central Package Management ist Pflicht
 

@@ -15,16 +15,29 @@ ADR-/Slice-ID zentral in `.clang-tidy` dokumentiert.
 
 ### C-2 — Layering via arch-check
 
-Die Architektur-Constraints aus ADR-0001 werden durch
-`cmake/arch-check.sh` (Include-Heuristik) durchgesetzt. Verstöße brechen
-`make arch-check`.
+Die Architektur-Constraints aus ADR-0001 werden von **zwei** Sensoren
+durchgesetzt, beide hinter `make arch-check`
+([ADR-0015](../docs/plan/adr/0015-a-check-rollout-sprachskelette.md)):
+`.a-check.yml` (Deklaration) und `cmake/arch-check.sh` (Include-Heuristik).
+Verstöße brechen `make arch-check`.
 
-| Schicht | Darf NICHT importieren |
+Das Skript prüft die vier benannten Verzeichnispaare unten. `.a-check.yml` ist
+eine **Allow-Liste**: Erlaubt ist, was als Kante deklariert ist — alles andere
+ist ein Befund. Ein neuer Adapter unter `src/adapters/` steht deshalb in keiner
+der beiden Listen, wird aber von a-check gemeldet, bis er eine Schicht und
+seine Kanten bekommt. Wer eine Schicht hinzufügt, ändert `.a-check.yml`, nicht
+diese Tabelle.
+
+| Schicht | Darf NICHT importieren (Skript-Sensor) |
 |---|---|
 | `src/hexagon/**` | irgendetwas aus `adapters/` (Kern-Reinheit) |
 | `src/hexagon/index/` | `hexagon/service/`, `hexagon/ports/` |
 | `src/adapters/ui/` | `hexagon/index/`, `adapters/embedding/` |
 | `src/adapters/embedding/` | `hexagon/index/`, `hexagon/service/`, `adapters/ui/` |
+
+Includes sind gegen `src/` zu wurzeln (`"hexagon/service/x.h"`). Ein
+elternrelativer Include (`"../../adapters/…"`) bricht die Auflösung beider
+Sensoren und ist deshalb per `constructs`-Regel verboten.
 
 ### C-3 — Stable-Sort plus Tie-Break
 
