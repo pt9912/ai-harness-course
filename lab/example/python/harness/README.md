@@ -10,7 +10,7 @@ Sprach-spezifischer Einstieg. Übergeordnete Quelle:
 | `make lint` | `ruff check` (inkl. noqa-Gate) | Stil + Suppression-Verbot |
 | `make typecheck` | `mypy --strict src/` | Statisch |
 | `make arch-check` | beide Sensoren unten | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering |
-| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, deklariert — Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md) |
+| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, deklariert — Werkzeugwahl [ADR-0017](../../docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md) |
 | `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
 | (in `arch-check`) | `lint-imports` (import-linter) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, aufgezählte Contracts; sieht jede Import-Schreibweise |
 | `make test` | `pytest` | Unit + Tie-Break |

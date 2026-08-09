@@ -60,7 +60,7 @@ hat `matrix`.
 
 ## 4. Trigger
 
-- Auslöser ist der Befund aus der Arbeit an [ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md): Ein Pfad-Link von einer
+- Auslöser ist der Befund aus der Arbeit an [ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md): Ein Pfad-Link von einer
   ADR auf einen Slice blieb unbemerkt, weil kein Sensor die Zelle trug.
 
 ## 5. Risiken
@@ -104,7 +104,7 @@ Kurs-Wurzel, die den ganzen Baum sieht.
 | Lastenheft, `## 7. Historie`: `ADR-0001` | rot | rot |
 | Spezifikation, Körper: `slice-009` | rot | rot |
 | Slice → superseded `ADR-0015` | rot | rot |
-| `ADR-0016` → `slice-021` | rot | **grün** |
+| `ADR-0017` → `slice-021` | rot | **grün** |
 
 Die letzte Zeile ist der Grund für den Tausch: Das Skript erklärte diese Zelle
 im eigenen Kopf für nicht grep-bar und überließ sie dem Review-Agenten. Der

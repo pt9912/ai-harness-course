@@ -15,7 +15,7 @@ Ausnahmen werden mit Begründung und ADR-/Slice-ID dort dokumentiert.
 
 Die Architektur-Constraints aus [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) werden von **zwei** Sensoren
 durchgesetzt, beide hinter `make arch-check`
-([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)):
+([ADR-0017](../docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)):
 `depguard` in `.golangci.yml` und die Deklaration in `.a-check.yml`.
 Verstöße brechen `make arch-check`.
 

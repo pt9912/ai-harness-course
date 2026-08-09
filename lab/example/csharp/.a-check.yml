@@ -1,5 +1,5 @@
 # .a-check.yml — Layering des C#-Skeletts als deklarierte Architektur
-# (ADR-0001, Gate-Bindung ADR-0016). Zweites Gate neben den NetArchTest-Fakten
+# (ADR-0001, Gate-Bindung ADR-0017). Zweites Gate neben den NetArchTest-Fakten
 # in tests/DocSearch.Tests/ArchitectureTests.cs: dasselbe Layering, andere
 # Ausdrucksform — Konfiguration statt Test-Framework.
 #

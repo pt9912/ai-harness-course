@@ -13,7 +13,7 @@ Ergänzt [`../AGENTS.md`](../AGENTS.md). Bei Konflikt gilt `../AGENTS.md`.
 
 [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) Layering wird von **zwei** Sensoren durchgesetzt, beide hinter
 `make arch-check`
-([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)): die
+([ADR-0017](../docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)): die
 Konsist-Tests in `src/test/kotlin/com/example/docsearch/ArchitectureTest.kt`
 und die Deklaration in `.a-check.yml`. Verstöße brechen `make arch-check`.
 
@@ -21,13 +21,13 @@ und die Deklaration in `.a-check.yml`. Verstöße brechen `make arch-check`.
 ist — auch die Kanten, für die es keinen Konsist-Test gibt (`types` hat
 keinen).
 
-**Gemeinsame Grenze, hier wichtig.** Die Konsist-Regeln prüfen `file.imports`,
-a-check liest Import-Zeilen. Eine **voll qualifizierte Nutzung ohne Import**
-(`com.example.docsearch.ui.Handler` mitten im Code) sehen deshalb **beide
-nicht** — gemessen: compiliert, a-check 0 Befunde, Konsist grün. Die
-`constructs`-Regel in `.a-check.yml` schließt davon die Richtung auf `ui`; für
-die übrigen Kanten bleibt die Lücke. Schreiben Sie schicht-übergreifende
-Bezüge deshalb als Import.
+**Was die beiden sehen.** a-check liest Import-Zeilen; eine **voll
+qualifizierte Nutzung ohne Import** (`com.example.docsearch.ui.Handler` mitten
+im Code) sieht es nicht. Die Konsist-Regeln prüfen dafür den Quelltext, nicht
+nur `file.imports` — sie fangen beide Formen. Konsist ist quell-basiert (PSI),
+nicht Bytecode-basiert wie ArchUnit im Java-Skelett: Eine echte Typ-Auflösung
+gibt es hier nicht, geprüft wird der Text ohne Kommentare und ohne die eigene
+`package`-Zeile.
 
 ### K-3 — Stable-Sort plus Tie-Break
 

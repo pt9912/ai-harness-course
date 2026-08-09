@@ -1,6 +1,6 @@
 # ADR-0016: a-check ist das zweite Layering-Gate in allen Sprach-Skeletten
 
-**Status:** Accepted
+**Status:** Superseded by [ADR-0017](0017-kotlin-luecke-am-bestandssensor-geschlossen.md)
 
 **Datum:** 2026-08-09
 
@@ -141,3 +141,4 @@ liegen damit auf derselben Ebene wie a-check. Das tragende Merkmal ist die
 |---|---|---|
 | 2026-08-09 | Proposed | Rollout abgeschlossen; Stand-Tabelle in ADR-0015 §Entscheidung 5 gegenstandslos, deren Re-Evaluierungs-Trigger eingetreten |
 | 2026-08-09 | Accepted | 46 Verweise in 29 Dateien auf diese ADR umgehängt; Grenzen je Skelett aus dem Rollout hier zusammengeführt |
+| 2026-08-09 | Superseded | [ADR-0017](0017-kotlin-luecke-am-bestandssensor-geschlossen.md) — Konsists Regeln auf Quelltext gehoben, die Kotlin-Zeile der Grenzen-Tabelle und die `constructs`-Regel damit ueberholt |

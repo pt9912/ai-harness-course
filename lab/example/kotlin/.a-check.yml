@@ -1,5 +1,5 @@
 # .a-check.yml — Layering des Kotlin-Skeletts als deklarierte Architektur
-# (ADR-0001, Gate-Bindung ADR-0016). Zweites Gate neben den Konsist-Tests in
+# (ADR-0001, Gate-Bindung ADR-0017). Zweites Gate neben den Konsist-Tests in
 # src/test/kotlin/com/example/docsearch/ArchitectureTest.kt: dasselbe
 # Layering, andere Ausdrucksform — Allow-Liste statt aufgezaehlter Tests.
 #
@@ -7,14 +7,12 @@
 # Service -> UI. Audit ist dort deklariert, aber in keinem Skelett gebaut und
 # hat deshalb hier keine Schicht.
 #
-# GRENZE, geteilt mit dem Bestandssensor: Konsists Regeln pruefen
-# `file.imports`, a-check liest Import-Zeilen — beide sehen eine
-# voll qualifizierte Nutzung OHNE Import nicht
-# (`com.example.docsearch.ui.Handler` mitten im Code). Gemessen: compiliert,
-# a-check 0 Befunde, Konsist BUILD SUCCESSFUL. Die `constructs`-Regel unten
-# schliesst davon die Richtung auf die aeusserste Schicht; fuer die uebrigen
-# Kanten bleibt die Luecke offen und gehoert in die Konsist-Regeln, die den
-# AST ohnehin lesen koennten (Folge-Arbeit, slice-021 §7).
+# GRENZE: a-check liest Import-Zeilen und sieht eine voll qualifizierte
+# Nutzung OHNE Import nicht (`com.example.docsearch.ui.Handler` mitten im
+# Code). Das deckt der Bestandssensor: Die Konsist-Regeln pruefen seit
+# slice-024 den Quelltext, nicht nur `file.imports`. Damit verhaelt sich
+# dieses Skelett wie Java und C# — a-check ist die Allow-Liste ueber Importe,
+# der Bestandssensor sieht tiefer.
 version: 1
 languages:
   kotlin: ["**/*.kt"]
@@ -56,14 +54,12 @@ resolution:
     roots: ["src/main/kotlin/com/example/docsearch"]
     package_base: "com.example.docsearch"
 
-# Erzwingt einen Teil der Voraussetzung, auf der beide Sensoren stehen: Wer
-# die aeusserste Schicht nennt, muss sie importieren — dann greift die
-# Kanten-Regel. Nur `ui`, weil nur sie ausserhalb der Composition Root von
-# niemandem genannt werden darf; fuer die inneren Schichten braeuchte die Zone
-# eine Liste der erlaubten Importeure und waere damit eine zweite Fassung des
-# Kanten-Graphen, die driftet.
-constructs:
-  - {pattern: 'com\.example\.docsearch\.ui\.', match: regex, adapter: "docsearch/ui"}
+# Keine `constructs`-Regel mehr. Sie schloss die Richtung auf die aeusserste
+# Schicht, solange BEIDE Sensoren blind fuer den voll qualifizierten Zugriff
+# ohne Import waren. Die Konsist-Regeln pruefen inzwischen den Quelltext statt
+# nur `file.imports` und decken alle Richtungen — gemessen: `index -> service`
+# voll qualifiziert, a-check 0 Befunde, Konsist rot. Eine Regel, deren
+# Begruendung entfallen ist, bleibt nicht stehen, weil sie billig ist.
 
 # Tests pruefen absichtlich quer durch die Schichten; build/ und .gradle/ sind
 # gitignoriert, liegen lokal aber im Baum.

@@ -1,5 +1,5 @@
 # .a-check.yml — Layering des Go-Skeletts als deklarierte Architektur
-# (ADR-0001, Gate-Bindung ADR-0016). Zweites Gate neben den depguard-Regeln
+# (ADR-0001, Gate-Bindung ADR-0017). Zweites Gate neben den depguard-Regeln
 # in .golangci.yml: dasselbe Layering, andere Ausdrucksform — Allow-Liste
 # statt Deny-Listen.
 #

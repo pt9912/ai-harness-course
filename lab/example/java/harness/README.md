@@ -5,7 +5,7 @@
 | `make lint` | Checkstyle + Suppression-Verbot |
 | `make typecheck` | `javac` |
 | `make arch-check` | beide Sensoren unten |
-| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) — Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md) |
+| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) — Werkzeugwahl [ADR-0017](../../docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md) |
 | `make a-check-graph` | a-check `--print-graph`, Schichtbild aus derselben Deklaration |
 | (in `arch-check`) | **ArchUnit** in JUnit, importiert Bytecode |
 | `make test` | JUnit 5 |
