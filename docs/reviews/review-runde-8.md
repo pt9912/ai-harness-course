@@ -295,7 +295,7 @@ Schwelle write-only, der Zustand, gegen den es gebaut wurde.
 
 *(Linse 3; teilweise vorbestehend)*
 
-Kanonische Form: `liegt in \`<AGENTS.md §X | Makefile-Target | .harness/skills/…>\``.
+Kanonische Form: ``liegt in `<AGENTS.md §X | Makefile-Target | .harness/skills/…>` ``.
 Prüfvorschrift `konventionen.md` :845–846: „(1) **der Pfad existiert**".
 
 Ein Eintrag „liegt in `coverage-floor`" ist formal korrekt und läuft rot —

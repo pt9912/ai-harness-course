@@ -9,7 +9,7 @@
 # in den Kurs; ein `links`-Lauf in diesem Scope meldete 63 Repo-Escapes.
 scan:
   roots: ["spec", "docs/plan"]
-modules: [matrix, targets]
+modules: [matrix, targets, planning]
 
 matrix:
   classes:
@@ -101,3 +101,11 @@ targets:
     - doc-tracked
     - doc-targets
     - doc-help
+
+# Planning-Lifecycle-Invariante: Der Ruhe-Marker steht im Block
+# `## Aktuelle Welle` genau dann, wenn kein Slice im Roadmap-Verzeichnis
+# liegt. Haelt zusammen, was sonst beim `git mv` auseinanderlaeuft — der
+# Zustand ergibt sich aus dem Verzeichnis, die Roadmap darf ihm nicht
+# widersprechen.
+planning:
+  roadmap: docs/plan/planning/in-progress/roadmap.md

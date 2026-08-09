@@ -8,7 +8,7 @@ scan:
   # Dateien, wie sie zur jeweiligen Welle existierten, z. B. retired
   # agents-regelwerk.md) — nicht gegen den aktuellen Stand prüfen.
   ignore: ["lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md"]
-modules: [links, anchors, codepaths, matrix]
+modules: [links, anchors, codepaths, matrix, hostpaths, spans, tracked]
 
 # lab/templates mischt ZWEI Referenzklassen in denselben Dateien:
 #   (a) SYMBOLISCH — Ziel-Repo-Pfade, die erst nach dem Ausfüllen existieren
@@ -60,6 +60,14 @@ vcs:
   head-allow: '^\*\*Status:\*\* (Accepted|Superseded by \[?ADR-[0-9]{4})'
   # Geschichte-Zeilen sind Protokoll und zaehlen nicht zum Kern.
   exclude-sections: [Geschichte]
+
+# Drei hermetische Prueflinien ohne eigene Konfiguration, alle drei beim
+# Aktivieren gegen den Bestand gemessen:
+#   hostpaths  host-lokale absolute Pfade in der Doku (Maschinen-Layout-Leak) — 0
+#   spans      ungeschlossene Code-Spans, verschachtelte Links — 1 Befund, behoben
+#   tracked    Link-Ziele sind im git-Index (kein Verweis auf Ignoriertes) — 0
+# `tracked` liest `.git` read-only und laeuft deshalb nur hier, nicht im
+# Beispiel — das ist ein Teilbaum ohne eigenes Repository.
 
 matrix:
   classes:
