@@ -11,6 +11,101 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 72 — 2026-08-09 · Zwei Sensoren an derselben Aussage
+
+ADR-0001 des Beispiel-Repos verlangt „pro Sprach-Skelett ein Architekturtest",
+und sechs Skelette lösen das mit sechs Mechanismen: `depguard`,
+`import-linter`, Konsist, ArchUnit, NetArchTest, ein `arch-check.sh`. Alle
+sechs sind **Verbotslisten** — sie wachsen dort, wo jemand an einen Fall
+gedacht hat. Das C++-Skript nennt zwei Adapter beim Namen; ein dritter wäre
+ungeprüft. Die C#-Tests prüfen vier Namespace-Paare; für die `Types`-Schicht
+gibt es gar keine Regel.
+
+[a-check](https://github.com/pt9912/a-check) dreht die Richtung um: `edges`
+sagt, was **erlaubt** ist, alles andere ist ein Befund. Das Beispiel bekommt
+den Prüfer deshalb **additiv** — der jeweilige Bestandssensor bleibt, denn die
+Mechanismus-Vielfalt ist Lehrinhalt, kein Altlast-Zustand.
+
+### Entschieden
+
+- **Ein Gate, zwei Sensoren, in allen sechs Skeletten.** `make arch-check` ruft
+  beide, und zwar beide vollständig — ein Abbruch nach dem ersten roten zeigt
+  immer nur eine Befund-Menge. Das Ziel-Set von `make gates` bleibt unverändert.
+- **Eine Config pro Skelett, Scan-Wurzel ist das Sprachverzeichnis.** Ein
+  gemeinsamer Scan über `lab/example/` wurde geprüft und verworfen: Go-Importe
+  tragen den Modulpfad und lösen gegen sprach-präfixierte Schicht-Globs nicht
+  auf — ein eingebauter Verstoß blieb unentdeckt, das Gate wäre **still grün**.
+- **Modelliert wird, was gebaut ist.** Rollen (`role: app`) nur dort, wo die
+  Schicht sie einlöst; fünf der sechs Skelette sind geschichtet ohne Ports und
+  tragen reine Kanten. Eine Rolle zu setzen, die der Code nicht einlöst, meldete
+  Verstöße gegen eine Architektur, die niemand gebaut hat.
+- **Kein Skript-Zuwachs.** `a-check.mk` ist tool-generiert und wird included;
+  die Regeln stehen in `.a-check.yml`.
+
+### Der Befund, der die Welle trägt: die Bauform der Regel
+
+a-check liest die Import-Anweisung. Blind ist es für die Schreibweise, die
+**daran vorbei** koppelt — ein elternrelativer `#include`, ein voll
+qualifizierter Typ ohne `import`, ein relativer Python-Import. Ob daraus eine
+Gate-Lücke wird, entscheidet der Bestandssensor.
+
+Die erste Vermutung war: AST- oder Bytecode-basierte Werkzeuge decken es ab,
+textbasierte nicht. Java hat sie bestätigt, **Kotlin sie widerlegt**. Konsist
+*könnte* den AST lesen; seine Regeln im Skelett sind gegen `file.imports`
+geschrieben und liegen damit auf derselben Ebene wie a-check. Gemessen:
+`com.example.docsearch.ui.Handler` ohne Import — compiliert, a-check 0 Befunde,
+Konsist `BUILD SUCCESSFUL`. Ein echter Verstoß passiert beide.
+
+| Skelett | Umgehende Schreibweise | Bestandssensor sieht sie? |
+|---|---|---|
+| C++ | elternrelativer `#include` | **nein** — per `constructs`-Regel verboten |
+| Kotlin | voll qualifizierter Typ ohne `import` | **nein** — `constructs` deckt nur die Richtung auf `ui` |
+| C# | dito | ja — Assembly |
+| Java | dito | ja — Bytecode |
+| Python | relativ, Subpaket-Form, Komma-Liste | ja — AST; a-check ist dort der *schwächere* Sensor |
+| Go | keine — der Compiler weist relative Importe ab | entfällt |
+
+Das tragende Merkmal ist also nicht die Werkzeugklasse, sondern **wie die Regel
+geschrieben ist** — und das steht in keinem Datenblatt, nur im Regel-Quelltext
+des jeweiligen Skeletts. Der Slice zieht daraus die Konsequenz: Die Frage
+„welche Schreibweise setzt die Auflösung voraus, und erzwingt sie etwas?" steht
+als **Schritt 0 vor der Config**, mit Beleg-Pflicht am Skelett. Sie stand
+zunächst nur als Grenze in einer ADR — also an der Stelle, von der Welle 71
+schon gemessen hat, dass sie den nicht erreicht, der die Arbeit macht.
+
+### Was die Gates dabei über sich selbst verrieten
+
+Vier Sensoren behaupteten mehr, als sie prüften; alle vier fielen beim
+Verdrahten auf, nicht im Betrieb:
+
+- **`make help`** listete an der Kurs-Wurzel „Makefile" und „d-check.mk" statt
+  der Target-Namen — seit dem `d-check.mk`-Include, weil `grep` bei mehreren
+  Dateien den Dateinamen voranstellt. `make help` ist laut AGENTS.md die
+  autoritative Target-Liste.
+- **`check_closure_notes`** band an die erste Überschrift mit „closure" ohne
+  „trigger" — in einem Slice war das „Offene Risiken zur Welle-Closure", nicht
+  die Notiz. Hätte jene Sektion zwei Sätze, wäre das Gate **grün** gewesen,
+  auch bei leerer Closure-Notiz. Falsch-grün, nicht nur falsch-rot.
+- **`go/AGENTS.md` §G-2** verbot `internal/ui` den Import von `internal/audit`
+  — dafür führt `depguard` keine Regel, und das Paket existiert nicht.
+- **Die Pre-completion-Checklisten** in python, java und kotlin nannten das
+  Bestandswerkzeug direkt (`lint-imports`, `mvn test`, `./gradlew test`). Seit
+  a-check als zweiter Sensor hängt, deckt das den Gate nicht mehr ab; alle sechs
+  nennen jetzt das Target, nicht das Werkzeug.
+
+### Was diese Welle nicht ändert
+
+Nur `lab/example` und das Root-`Makefile`. **Kurs, Regelwerk und Templates sind
+unberührt** — die Stand-Zeile von [`lab/regelwerk/README.md`](lab/regelwerk/README.md)
+bleibt deshalb auf Welle 71. Ein Bump signalisierte adoptierenden Repos eine
+Baseline-Änderung, die es nicht gibt.
+
+Offen und als eigene Fäden notiert: Konsists Regeln auf Typ-Referenzen statt
+`file.imports` heben, und vier Befunde an a-check selbst — allen voran eine
+Laufzeit-Diagnose der eigenen Heuristik-Grenze („welche Import-Schreibweisen
+dieses Repos extrahiert dieses Backend nicht?"). Sie würde Schritt 0 vom
+Handgriff zur Werkzeug-Eigenschaft machen.
+
 ## Welle 71 — 2026-08-08 · Was ein Kommentar trägt
 
 Wiederkehrende Beobachtung: In Code-, Config- und Skript-Dateien beschreiben
