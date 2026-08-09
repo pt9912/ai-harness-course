@@ -65,7 +65,7 @@ Toolchain:
 
 | Sprache | Stack | Linter | Architekturtest | Vorbild |
 |---|---|---|---|---|
-| [Go](go/) | Go 1.23 | `golangci-lint` | `depguard` | u-boot, c-hsm-doc |
+| [Go](go/) | Go 1.23 | `golangci-lint` | `depguard` + a-check | u-boot, c-hsm-doc |
 | [Python](python/) | Python 3.12 + uv | `ruff` (noqa-Gate) | `import-linter` | grid-gym |
 | [Kotlin](kotlin/) | Kotlin/JVM 21 + Gradle KTS | `detekt` | **Konsist** | (neu) |
 | [Java](java/) | Java 21 + Maven | Checkstyle | **ArchUnit** | (neu) |

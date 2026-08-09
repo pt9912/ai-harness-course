@@ -72,7 +72,7 @@ kein Altlast-Zustand.
    |---|---|---|
    | C++ | `cmake/arch-check.sh` | verdrahtet |
    | C# | NetArchTest | verdrahtet |
-   | Go | depguard | offen |
+   | Go | depguard | verdrahtet |
    | Python | import-linter | offen |
    | Java | ArchUnit | offen |
    | Kotlin | Konsist | offen |

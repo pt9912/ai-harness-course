@@ -1,0 +1,48 @@
+# .a-check.yml — Layering des Go-Skeletts als deklarierte Architektur
+# (ADR-0001, Gate-Bindung ADR-0015). Zweites Gate neben den depguard-Regeln
+# in .golangci.yml: dasselbe Layering, andere Ausdrucksform — Allow-Liste
+# statt Deny-Listen.
+#
+# Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Audit ->
+# Service -> UI. Audit ist dort deklariert, aber in keinem Skelett gebaut und
+# hat deshalb hier keine Schicht.
+version: 1
+languages:
+  go: ["**/*.go"]
+
+# Keine Rollen: Das Go-Skelett ist geschichtet, nicht ports-und-adapters — der
+# Service spricht Index und Embedding direkt an. `role: app` wuerde genau das
+# als app-impurity melden und eine Architektur behaupten, die hier nicht
+# gebaut ist. Geprueft wird die Kanten-Richtung.
+layers:
+  types:     ["internal/types/**"]
+  index:     ["internal/index/**"]
+  embedding: ["internal/embedding/**"]
+  service:   ["internal/service/**"]
+  ui:        ["internal/ui/**"]
+
+# Allow-Liste: Was nicht steht, ist verboten. Damit sind die vier
+# depguard-Regelbloecke gedeckt und zusaetzlich die Kanten, fuer die depguard
+# keine Deny-Liste fuehrt — `types` hat dort gar keinen Eintrag.
+edges:
+  - {from: ui,        to: service}
+  - {from: ui,        to: types}
+  - {from: service,   to: index}
+  - {from: service,   to: embedding}
+  - {from: service,   to: types}
+  - {from: index,     to: types}
+  - {from: embedding, to: types}
+
+# cmd/docsearch verdrahtet Index, Embedding, Service und UI — Composition Root.
+composition_root: ["cmd/**"]
+
+# Keine `resolution`: Go-Importe tragen den Modulpfad und loesen ueber den
+# modul-praefix-toleranten Segment-Vergleich direkt auf die Schicht-Globs auf.
+# Die dafuer vorausgesetzte Schreibweise erzwingt der Compiler — ein relativer
+# Import ("../ui") uebersetzt in Modul-Modus nicht.
+
+# Tests pruefen absichtlich quer durch die Schichten; internal/testutil ist
+# Test-Geruest und liegt auch bei depguard ausserhalb jeder `files`-Liste.
+exclude:
+  - "**/*_test.go"
+  - "internal/testutil/**"
