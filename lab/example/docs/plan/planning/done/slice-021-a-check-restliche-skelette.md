@@ -43,7 +43,8 @@ verdrahtet):
 - [x] `<sprache>/AGENTS.md` §C-2 nennt beide Sensoren.
 - [x] Break-Test je Regel rot mit Exit 1, sauberer Baum grün.
 - [x] `make gates` grün.
-- [x] Stand-Tabelle in ADR-0016 §Entscheidung 5 nachgezogen.
+- [x] Stand der Umsetzung je Skelett in der Rollout-ADR nachgezogen (die
+      Tabelle ist mit ADR-0016 entfallen, weil der Rollout abgeschlossen ist).
 
 Am Ende aller vier:
 
@@ -75,7 +76,7 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 
 | Datei / Komponente | Änderungs-Art | Begründung |
 |---|---|---|
-| `go/`, `python/`, `java/`, `kotlin/` je `.a-check.yml` | neu | Deklaration je Skelett; eine Scan-Wurzel pro Sprachverzeichnis (ADR-0016 §1) |
+| `go/`, `python/`, `java/`, `kotlin/` je `.a-check.yml` | neu | Deklaration je Skelett; eine Scan-Wurzel pro Sprachverzeichnis (ADR-0016 §Entscheidung 2) |
 | dieselben vier je `a-check.mk` | neu | tool-generiert, keine Skript-Kopie |
 | dieselben vier `Makefile` | update | Pin, `include`, `arch-check` mit beiden Sensoren |
 | dieselben vier `harness/README.md`, `AGENTS.md` | update | Bindung und Sensor-Nennung |
@@ -87,7 +88,7 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 - Auslöser ist ADR-0016; C++ und C# sind verdrahtet, die Entscheidung gilt für
   alle sechs.
 - Reihenfolge-Vorschlag: Go zuerst — dort hängt die Mono-Scan-Grenze aus
-  ADR-0016 §1, und die Auflösung läuft ohne `resolution`-Block.
+  ADR-0016 §Entscheidung 2, und die Auflösung läuft ohne `resolution`-Block.
 
 ## 5. Risiken
 
@@ -95,7 +96,7 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 |---|---|---|
 | Die Deklaration wird gröber als ADR-0001 und ist damit schwächer als der Bestandssensor | mittel | Die Regeln des Bestandssensors vor der Config auflisten und jede gegen eine Kante halten (der Befund aus dem C++-Pilot) |
 | Vier Pins altern unabhängig voneinander | mittel | Anheben trifft alle verdrahteten Skelette in einem Commit; kein Freshness-Sensor deckt das ab (ADR-0016 §Konsequenzen) |
-| Rollen werden gesetzt, wo der Code sie nicht einlöst | mittel | ADR-0016 §Entscheidung 2 — nur modellieren, was gebaut ist; im Zweifel reine Kanten |
+| Rollen werden gesetzt, wo der Code sie nicht einlöst | mittel | ADR-0016 §Entscheidung 3 — nur modellieren, was gebaut ist; im Zweifel reine Kanten |
 
 ## 6. Offene Risiken zur Welle-Closure
 
