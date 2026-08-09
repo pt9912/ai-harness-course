@@ -147,7 +147,8 @@ Pro Sprache wachsen also unterschiedliche Gate-Familien.
 ### Fitness Function aus einem ADR-Satz (Modul 13)
 
 Eine ADR *mit* Fitness Function ist ein Constraint statt einer
-Absichtserklärung. Die Übersetzung in fünf Schritten: ADR-Aussage
+Absichtserklärung. Die Übersetzung, Schritt für Schritt (die sprachkonkrete Implementierung
+zwischen Werkzeugwahl und Verdrahtung ist Illustration und entfällt hier): ADR-Aussage
 **maschinell formulieren** → **Werkzeug pro Sprache wählen** → als
 **Make-Gate mit ADR-ID-Kommentar** verdrahten → im **CI mit gepinnter
 Toolchain** laufen lassen (Modul 14) → **bewusstes Brechen** erzeugt

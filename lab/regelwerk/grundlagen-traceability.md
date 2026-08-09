@@ -58,10 +58,10 @@ verkörperte Regeln, in §7 jeder `done/slice-<NNN>-<kurzer-titel>.md`; die
 kanonischen Formen liefern `welle-results.template.md` bzw.
 `slice.template.md` §7 (siehe Ziel-Form unten).
 
-- **Das Feld gilt nur in diesen beiden Sektionen.** Überall sonst sind es
-  gewöhnliche Wörter und lösen nichts aus — der Trigger-Sprachgebrauch
-  „`slice-024` liegt in `done/`" (Modul 6) ebenso wenig wie eine bloße Erwähnung
-  eines Pfades im Fließtext. Der Sektions-Scope grenzt den Auslöser ein,
+- **Das Feld gilt nur in diesen beiden Sektionen.** Überall sonst sind
+  dieselben zwei Wörter gewöhnliche Sprache und lösen nichts aus — die
+  Trigger-Formulierung „`slice-024` liegt in `done/`" (Modul 6) ebenso wenig
+  wie eine bloße **Erwähnung** eines Pfades im Fließtext. Der Sektions-Scope grenzt den Auslöser ein,
   ersetzt ihn aber nicht: *innerhalb* der Sektion entscheidet das Feld.
 - **Die Ruheort-Regel — für jede Datei, die per `git mv` wandert.** Ein
   Slice-Plan und ein Welle-Plan werden an einem Ort geschrieben und an einem

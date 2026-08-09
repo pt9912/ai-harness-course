@@ -167,11 +167,12 @@ fünf Schritte in
    Lese-Schritt: Welche Einträge haben **3×** erreicht? Die werden zu
    *Steering-Loop-Einträgen* und verkörpert; im Register bleibt die Zeile mit
    dem Vermerk stehen, wohin sie ging. Was darunter liegt, bleibt offen und
-   wartet. Ohne diesen Lese-Schritt ist das Register write-only — gezählt würde
+   wartet. **Ohne diesen Lese-Schritt ist das Register write-only** — gezählt würde
    weiter, aber nichts würde je zur Regel.
    Closure-Notiz `done/welle-NN-results.md`
    schreiben (*was gelernt wurde*: geliefert · was funktionierte · was anders
-   lief · **Steering-Loop-Einträge** · Zeiger aufs **Beobachtungs-Register** ·
+   lief · **Steering-Loop-Einträge** (geschärfte Regel / neuer Sensor /
+   benannte Spec-Lücke) · Zeiger aufs **Beobachtungs-Register** ·
    Folge-Slices (*derivativ* — der Folge-Slice selbst ist eine Datei in `open/`) ·
    Verifikation aus
    Schritt 1). Ziel-Form:
