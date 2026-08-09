@@ -101,6 +101,15 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 
 ## 7. Steering-Loop-Beobachtungen
 
+- **Kotlin: zweites geteiltes Loch.** Konsists Regeln sind gegen `file.imports`
+  geschrieben und liegen damit auf derselben Ebene wie a-check; eine voll
+  qualifizierte Nutzung ohne Import passiert beide. Das ist dieselbe
+  Konstellation wie in C++ (zwei textnahe Sensoren) — die Vermutung aus §3, nur
+  AST-basierte Bestandssensoren deckten die Umgehung ab, trägt für Konsist
+  **nicht**: Das Werkzeug könnte den AST lesen, seine Regeln tun es hier nicht.
+  Folge-Arbeit: Konsist-Regeln auf Typ-Referenzen statt Import-Liste heben —
+  eigener Slice, nicht Teil dieses.
+
 - Aus dem C++-Pilot: Die Frage aus Schritt 0 kam dort **nach** dem Review, nicht
   vor der Config. Der blinde Fleck war deshalb schon verdrahtet und als „Gate"
   beschrieben, bevor er auffiel. Schritt 0 steht in dieser DoD, weil eine Regel

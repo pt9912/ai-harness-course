@@ -67,7 +67,7 @@ Toolchain:
 |---|---|---|---|---|
 | [Go](go/) | Go 1.23 | `golangci-lint` | `depguard` + a-check | u-boot, c-hsm-doc |
 | [Python](python/) | Python 3.12 + uv | `ruff` (noqa-Gate) | `import-linter` + a-check | grid-gym |
-| [Kotlin](kotlin/) | Kotlin/JVM 21 + Gradle KTS | `detekt` | **Konsist** | (neu) |
+| [Kotlin](kotlin/) | Kotlin/JVM 21 + Gradle KTS | `detekt` | **Konsist** + a-check | (neu) |
 | [Java](java/) | Java 21 + Maven | Checkstyle | **ArchUnit** | (neu) |
 | [C#](csharp/) | .NET 10 + CPM | `dotnet format` | **NetArchTest** + a-check | bess-ems |
 | [C++](cpp/) | C++20 + CMake | `clang-tidy` | `arch-check.sh` **+ a-check** (+ CTest) | cmake-xray, b-cad |

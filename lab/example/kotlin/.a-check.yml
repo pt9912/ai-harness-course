@@ -1,0 +1,71 @@
+# .a-check.yml — Layering des Kotlin-Skeletts als deklarierte Architektur
+# (ADR-0001, Gate-Bindung ADR-0015). Zweites Gate neben den Konsist-Tests in
+# src/test/kotlin/com/example/docsearch/ArchitectureTest.kt: dasselbe
+# Layering, andere Ausdrucksform — Allow-Liste statt aufgezaehlter Tests.
+#
+# Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Audit ->
+# Service -> UI. Audit ist dort deklariert, aber in keinem Skelett gebaut und
+# hat deshalb hier keine Schicht.
+#
+# GRENZE, geteilt mit dem Bestandssensor: Konsists Regeln pruefen
+# `file.imports`, a-check liest Import-Zeilen — beide sehen eine
+# voll qualifizierte Nutzung OHNE Import nicht
+# (`com.example.docsearch.ui.Handler` mitten im Code). Gemessen: compiliert,
+# a-check 0 Befunde, Konsist BUILD SUCCESSFUL. Die `constructs`-Regel unten
+# schliesst davon die Richtung auf die aeusserste Schicht; fuer die uebrigen
+# Kanten bleibt die Luecke offen und gehoert in die Konsist-Regeln, die den
+# AST ohnehin lesen koennten (Folge-Arbeit, slice-021 §7).
+version: 1
+languages:
+  kotlin: ["**/*.kt"]
+
+# Keine Rollen: Das Kotlin-Skelett ist geschichtet, nicht ports-und-adapters —
+# der Service spricht Index und Embedding direkt an. `role: app` wuerde genau
+# das als app-impurity melden und eine Architektur behaupten, die hier nicht
+# gebaut ist. Geprueft wird die Kanten-Richtung.
+layers:
+  types:     ["src/main/kotlin/com/example/docsearch/types/**"]
+  index:     ["src/main/kotlin/com/example/docsearch/index/**"]
+  embedding: ["src/main/kotlin/com/example/docsearch/embedding/**"]
+  service:   ["src/main/kotlin/com/example/docsearch/service/**"]
+  ui:        ["src/main/kotlin/com/example/docsearch/ui/**"]
+
+# Allow-Liste: Was nicht steht, ist verboten. Damit sind die fuenf
+# Konsist-Tests gedeckt und zusaetzlich die Kanten, fuer die es keinen Test
+# gibt — `types` hat dort keinen.
+edges:
+  - {from: ui,        to: service}
+  - {from: ui,        to: types}
+  - {from: service,   to: index}
+  - {from: service,   to: embedding}
+  - {from: service,   to: types}
+  - {from: index,     to: types}
+  - {from: embedding, to: types}
+
+# Main.kt verdrahtet Index, Embedding, Service und UI — Composition Root.
+composition_root: ["src/main/kotlin/com/example/docsearch/Main.kt"]
+
+# `import com.example.docsearch.service.Searcher` ist ein gepunkteter
+# Paketpfad; ohne diese Zuordnung auf den Verzeichnisbaum loest kein Import
+# auf eine Schicht auf und das Gate waere still gruen.
+resolution:
+  kotlin:
+    mode: fixed-root
+    roots: ["src/main/kotlin/com/example/docsearch"]
+    package_base: "com.example.docsearch"
+
+# Erzwingt einen Teil der Voraussetzung, auf der beide Sensoren stehen: Wer
+# die aeusserste Schicht nennt, muss sie importieren — dann greift die
+# Kanten-Regel. Nur `ui`, weil nur sie ausserhalb der Composition Root von
+# niemandem genannt werden darf; fuer die inneren Schichten braeuchte die Zone
+# eine Liste der erlaubten Importeure und waere damit eine zweite Fassung des
+# Kanten-Graphen, die driftet.
+constructs:
+  - {pattern: 'com\.example\.docsearch\.ui\.', match: regex, adapter: "docsearch/ui"}
+
+# Tests pruefen absichtlich quer durch die Schichten; build/ und .gradle/ sind
+# gitignoriert, liegen lokal aber im Baum.
+exclude:
+  - "src/test/**"
+  - "build/**"
+  - ".gradle/**"

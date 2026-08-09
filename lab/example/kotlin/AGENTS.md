@@ -9,10 +9,25 @@ Ergänzt [`../AGENTS.md`](../AGENTS.md). Bei Konflikt gilt `../AGENTS.md`.
 `@Suppress("...")` bricht das `suppression-gate`. Ausnahmen leben in
 `config/detekt-baseline.xml` mit Begründung und Slice-ID.
 
-### K-2 — Layering via Konsist
+### K-2 — Layering via Konsist und a-check
 
-ADR-0001 Layering wird durch Konsist-Tests in `src/test/kotlin/com/example/docsearch/ArchitectureTest.kt`
-durchgesetzt. Verstöße brechen `make arch-check`.
+ADR-0001 Layering wird von **zwei** Sensoren durchgesetzt, beide hinter
+`make arch-check`
+([ADR-0015](../docs/plan/adr/0015-a-check-rollout-sprachskelette.md)): die
+Konsist-Tests in `src/test/kotlin/com/example/docsearch/ArchitectureTest.kt`
+und die Deklaration in `.a-check.yml`. Verstöße brechen `make arch-check`.
+
+`.a-check.yml` ist eine **Allow-Liste**: Erlaubt ist, was als Kante deklariert
+ist — auch die Kanten, für die es keinen Konsist-Test gibt (`types` hat
+keinen).
+
+**Gemeinsame Grenze, hier wichtig.** Die Konsist-Regeln prüfen `file.imports`,
+a-check liest Import-Zeilen. Eine **voll qualifizierte Nutzung ohne Import**
+(`com.example.docsearch.ui.Handler` mitten im Code) sehen deshalb **beide
+nicht** — gemessen: compiliert, a-check 0 Befunde, Konsist grün. Die
+`constructs`-Regel in `.a-check.yml` schließt davon die Richtung auf `ui`; für
+die übrigen Kanten bleibt die Lücke. Schreiben Sie schicht-übergreifende
+Bezüge deshalb als Import.
 
 ### K-3 — Stable-Sort plus Tie-Break
 

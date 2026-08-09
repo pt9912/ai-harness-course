@@ -75,7 +75,7 @@ kein Altlast-Zustand.
    | Go | depguard | verdrahtet |
    | Python | import-linter | verdrahtet |
    | Java | ArchUnit | offen |
-   | Kotlin | Konsist | offen |
+   | Kotlin | Konsist | verdrahtet |
 
    Diese Tabelle ist der Stand der **Umsetzung**, nicht der Entscheidung. Ein
    „offen"-Skelett hat kein `make a-check` — `make help` des Skeletts bleibt
@@ -121,6 +121,13 @@ kein Altlast-Zustand.
   Skelette treffen.
 - Negativ: Zwei Sensoren für eine Aussage können divergieren. Bei Widerspruch
   gilt ADR-0001, nicht der strengere Lauf — beide sind Sensoren, keine Quelle.
+- Grenze: In **Kotlin** teilen sich beide Sensoren eine Lücke — Konsists Regeln
+  prüfen `file.imports`, a-check liest Import-Zeilen; eine voll qualifizierte
+  Nutzung ohne Import sehen beide nicht. Gemessen: compiliert, a-check 0
+  Befunde, Konsist grün. Eine `constructs`-Regel schließt die Richtung auf die
+  äußerste Schicht; die übrigen Kanten so abzudecken hieße, den Kanten-Graphen
+  ein zweites Mal als Zonen-Listen zu führen — zwei Fassungen einer Wahrheit.
+  Der tragfähige Fix liegt im Bestandssensor: Konsist liest den AST ohnehin.
 - Grenze: In **Python** ist a-check der schwächere der beiden Sensoren: Es sieht
   nur die absolute Import-Schreibweise, nicht `from ..ui import x`, nicht
   `from docsearch import ui` und nicht das zweite Modul einer Komma-Liste. Alle

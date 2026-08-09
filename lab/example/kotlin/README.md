@@ -6,7 +6,7 @@ Kotlin/JVM-Implementierung.
 |---|---|
 | Linter | `detekt` |
 | Typecheck | Kotlin-Compiler |
-| Architekturtest | **Konsist** (Kotlin-natives ArchUnit-Pendant) |
+| Architekturtest | **Konsist** (Kotlin-natives ArchUnit-Pendant) + `.a-check.yml` (a-check, deklarativ) |
 | Coverage | `kover` |
 | Build | Gradle (KTS) |
 | Lockfile | `gradle.lockfile` |
