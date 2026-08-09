@@ -1,0 +1,55 @@
+# Referenz-Richtung (Kurs §Referenz-Richtung) als Deklaration, geprueft vom
+# d-check-Modul `matrix`. Ersetzt tools/check_references.py (slice-022): Das
+# Skript trug zwei Zellen der Matrix und erklaerte die dritte — ADR -> Slice —
+# fuer nicht grep-bar. Der Kurs loest sie ueber den umgekehrten Default: Die
+# Kante gilt als verboten, die Ausnahme wird am Ort deklariert.
+#
+# NUR `matrix`. Link- und Anker-Pruefung laeuft an der Kurs-Wurzel, die den
+# ganzen Baum sieht: Dieses Verzeichnis ist ein Teilbaum und verlinkt bewusst
+# in den Kurs; ein `links`-Lauf in diesem Scope meldete 63 Repo-Escapes.
+scan:
+  roots: ["spec", "docs/plan"]
+modules: [matrix]
+
+matrix:
+  classes:
+    # Die drei Spec-Straten. Sie duerfen ADR und Slice in KEINEM Abschnitt
+    # nennen — auch nicht in ihrer Historie; deshalb steht `Historie` unten
+    # nicht in `exclude-sections`.
+    - name: spec
+      paths: ["spec/lastenheft.md", "spec/spezifikation.md", "spec/architecture.md"]
+    - name: adr
+      paths: ["docs/plan/adr/[0-9]*.md"]
+      token: 'ADR-\d{4}'
+    # `token` faengt die Kennung auch als blossen Text — eine Referenz muss
+    # kein Link sein.
+    - name: slice
+      paths: ["docs/plan/planning/**/slice-*.md"]
+      token: 'slice-\d{3}'
+  rules:
+    # Kontext-Zeiger sind erlaubt und werden am Ort markiert
+    # (<!-- d-check:status-provenance -->); alles Uebrige faellt.
+    - {from: adr,  to: slice, allow: false}
+    # Decken-Regel der Spec-Straten (Kurs §Referenz-Richtung, Regel 5).
+    - {from: spec, to: adr,   allow: false}
+    - {from: spec, to: slice, allow: false}
+  status:
+    forbidden: [superseded, deprecated]
+    # Die Abloesung steht in diesem Korpus in der Status-Zeile ("Superseded by
+    # ADR-NNNN"), nicht in einem Supersedes-Feld. Ohne beide Feldnamen meldete
+    # jede korrekt abgeloeste ADR-Kette einen Dauerbefund auf ihrer eigenen
+    # Lineage.
+    allow-supersede-lineage: true
+    supersede-fields: [Supersedes, Status]
+  # Vor Einfuehrung dieser Konvention entstandene ADRs werden grandfathered,
+  # nicht nachgezogen (Kurs §Referenz-Richtung, Absatz Mechanisierbar).
+  # Einzeln statt als Bereichs-Glob: Ein Treffer in einer anderen Alt-ADR soll
+  # auffallen, nicht still mitgedeckt sein.
+  exempt-paths:
+    - "docs/plan/adr/0011-*.md"
+    - "docs/plan/adr/0012-*.md"
+    - "docs/plan/adr/0013-*.md"
+  # Provenance in der ADR-Historie ist Kontext (Regel 5) — die Sektion heisst
+  # hier `Geschichte`. `Historie` gehoert NICHT dazu: So heisst nur die Sektion
+  # der Spec-Straten, und fuer die gilt die Ausnahme ausdruecklich nicht.
+  exclude-sections: [Geschichte]

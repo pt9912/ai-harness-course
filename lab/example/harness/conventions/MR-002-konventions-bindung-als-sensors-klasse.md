@@ -8,7 +8,7 @@ darf neben den vier kanonischen Klassen und der LH-Bindung auch eine
 
 **Begründung:** Drei Gates dieses Repos setzen Regeln durch, die weder eine
 Anforderung noch eine ADR sind, sondern Konventionen des Baseline-Regelwerks:
-`make check-references` (Referenz-Richtung), `make replay`
+`make doc-check` (Referenz-Richtung), `make replay`
 (Golden-Set-Form, Modul 12) und `make release` (Release-Disziplin, Modul 16).
 Ohne eigene Klasse trügen sie entweder `—` — dann behauptet die Tabelle, sie
 setzten nichts durch — oder eine erfundene ID.

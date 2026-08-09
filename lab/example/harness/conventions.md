@@ -82,7 +82,7 @@ Carveout · Schwelle · Reproduzierbarkeit) **zwei** Zusatzklassen:
 | Klasse | Form | Bedeutung | Beispiel im Repo |
 |---|---|---|---|
 | LH-Bindung | `LH-FA-<NNN>` · `LH-QA-<NNN>` | Gate prüft direkt eine Anforderung aus `spec/lastenheft.md` | `LH-QA-02` als Bindung von `make test-determinism` (siehe [`README.md` §Sensors](README.md#sensors-feedback-gates)) |
-| Konventions-Bindung (`MR-002`) | `Kurs §<Abschnitt>` · `Modul <N> §<Abschnitt>` | Gate setzt eine Regel des Baseline-Regelwerks durch, die weder Anforderung noch ADR ist | `Kurs §Referenz-Richtung` als Bindung von `make check-references` |
+| Konventions-Bindung (`MR-002`) | `Kurs §<Abschnitt>` · `Modul <N> §<Abschnitt>` | Gate setzt eine Regel des Baseline-Regelwerks durch, die weder Anforderung noch ADR ist | `Kurs §Referenz-Richtung` als Bindung von `make doc-check` |
 
 ## Modus-Deklaration pro Sub-Area
 

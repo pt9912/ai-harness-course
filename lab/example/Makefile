@@ -5,11 +5,21 @@
 COURSE_LANG ?= go
 RUN ?= welle-1-baseline
 
-.PHONY: help gates ci fullbuild plan-status agent-implement agent-review verify verify-slice verify-closure-notes check-references replay trace release
+.PHONY: help gates ci fullbuild plan-status agent-implement agent-review verify verify-slice verify-closure-notes replay trace release
 
+# `-h`: MAKEFILE_LIST trägt mehrere Dateien, und grep stellt dann jeder
+# Zeile den Dateinamen voran — er verdrängt den Target-Namen.
 help: ## Targets anzeigen
-	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
+	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-24s %s\n", $$1, $$2}'
+
+# Referenz-Richtung via d-check (slice-022). `d-check.mk` ist tool-generiert
+# (`d-check --print-mk`), die Regeln stehen in `.d-check.yml` — beide nicht im
+# Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment.
+# Der `include` steht hinter `help`, weil das erste gelesene Target das
+# Default-Goal ist.
+DCHECK_DIGEST := sha256:fede3d027b2ebc1dd8534460853e57b67cc7a9a182cad2e2138c8eebf7a2d03c
+include d-check.mk
 
 gates: ## Sprachskelett-Gates ausführen: make gates COURSE_LANG=go|python|kotlin|java|csharp|cpp
 	@test -d "$(COURSE_LANG)" || (echo "Unknown COURSE_LANG=$(COURSE_LANG)"; exit 2)
@@ -57,9 +67,6 @@ agent-review: ## Review-Fixture fuer Modul 10 anzeigen
 verify-closure-notes: ## ADR-0011 — Closure-Note-Pflicht fuer done/-Slices pruefen
 	@python3 tools/check_closure_notes.py
 
-check-references: ## Kurs §Referenz-Richtung — Spec-Straten ohne ADR/Slice-Abwaertszeiger, keine superseded-ADR-Referenzen
-	@python3 tools/check_references.py
-
 verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-009
 # Geschweifte Klammern, nicht runde: `( ... exit 1 )` beendet nur die Subshell,
 # und mit `;` verketteten Zeilen sieht make nur den Status des LETZTEN Kommandos
@@ -73,7 +80,7 @@ verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-009
 	grep -q "make gates" "$$slice_path" || { echo "Missing gates evidence in DoD: $$slice_path"; exit 1; }; \
 	echo "verify-slice ok: $$slice_path"
 
-verify: verify-closure-notes check-references ## Verifikation: Closure-Pflicht + Referenz-Richtung immer, Slice-DoD wenn SLICE gesetzt
+verify: verify-closure-notes doc-check ## Verifikation: Closure-Pflicht + Referenz-Richtung immer, Slice-DoD wenn SLICE gesetzt
 	@if [ -n "$(SLICE)" ]; then $(MAKE) verify-slice SLICE=$(SLICE); fi
 
 replay: ## Golden-Set-Struktur validieren (KEIN Lauf, siehe CO-002): make replay RUN=welle-1-baseline
