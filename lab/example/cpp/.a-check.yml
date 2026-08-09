@@ -1,0 +1,56 @@
+# .a-check.yml — Layering des C++-Skeletts als deklarierte Architektur
+# (ADR-0001, Gate-Bindung ADR-0014). Zweites Gate neben
+# `cmake/arch-check.sh`: dasselbe Layering, andere Ausdrucksform —
+# Konfiguration statt Skript.
+#
+# Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Service -> UI.
+# Im C++-Baum heißen sie: hexagon/model (Types), hexagon/index,
+# hexagon/ports, hexagon/service, adapters/{embedding,ui}.
+version: 1
+languages:
+  cpp: ["**/*.h", "**/*.cpp"]
+
+# Der Name `service` leitet keine Rolle ab, und ohne Rolle greift nur die
+# Kanten-Regel. `role: app` schaltet zusätzlich `app-impurity` scharf — den
+# direkten Adapter-Zugriff, den ADR-0001 verbietet.
+#
+# Jeder Adapter ist eine eigene Schicht: ADR-0001 gibt ihnen verschiedene
+# Reichweiten (UI spricht Service und Modell, Embedding nur Port und Modell).
+# Eine gemeinsame `adapters`-Schicht trüge die Vereinigung beider Kanten und
+# liesse dem Embedding-Adapter den Service-Zugriff offen.
+layers:
+  core:              ["src/hexagon/model/**"]
+  ports:             ["src/hexagon/ports/**"]
+  index:             ["src/hexagon/index/**"]
+  service:           {globs: ["src/hexagon/service/**"], role: app}
+  adapter-ui:        {globs: ["src/adapters/ui/**"], role: adapter}
+  adapter-embedding: {globs: ["src/adapters/embedding/**"], role: adapter}
+
+edges:
+  - {from: adapter-ui,        to: service}
+  - {from: adapter-ui,        to: core}
+  - {from: adapter-embedding, to: ports}
+  - {from: adapter-embedding, to: core}
+  - {from: service,           to: ports}
+  - {from: service,           to: index}
+  - {from: service,           to: core}
+  - {from: index,             to: core}
+  - {from: ports,             to: core}
+
+# main.cpp verdrahtet Adapter und Service — das ist die Composition Root
+# und als einzige Stelle von den Schicht-Regeln ausgenommen.
+composition_root: ["src/main.cpp"]
+
+# C++-Includes sind gegen src/ gewurzelt ("hexagon/service/searcher.h"),
+# nicht datei-relativ. Ohne diese Zeile löst kein Include auf eine Schicht
+# auf und das Gate wäre still grün.
+resolution:
+  cpp: {mode: fixed-root, roots: ["src"]}
+
+# tests/ prüft absichtlich quer durch die Schichten. build/ und build-cov/
+# sind gitignoriert, liegen lokal aber im Baum (samt FetchContent-Quellen) —
+# ohne Ausschluss sähe der lokale Lauf mehr als ein frischer Checkout.
+exclude:
+  - "tests/**"
+  - "build/**"
+  - "build-cov/**"

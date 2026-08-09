@@ -10,7 +10,8 @@ Wie in [`../../harness/README.md`](../../harness/README.md), erweitert
 um C++-spezifische Pfade:
 
 - `cpp/.clang-tidy` — Linter-Checks (WarningsAsErrors, Modul 13).
-- `cpp/cmake/arch-check.sh` — Layering-Gate (ADR-0001).
+- `cpp/cmake/arch-check.sh` — Layering-Gate, Skript-Sensor (ADR-0001).
+- `cpp/.a-check.yml` — Layering-Gate, deklarativer Sensor (ADR-0001, Werkzeugwahl [ADR-0014](../../docs/plan/adr/0014-a-check-zweites-layering-gate.md)).
 - `cpp/cmake/Dependencies.cmake` — Toolchain-Pin (doctest per `GIT_TAG`).
 
 ## Guides (C++-spezifisch)
@@ -27,7 +28,10 @@ um C++-spezifische Pfade:
 |---|---|---|
 | `make lint` | `clang-tidy` + `suppression-gate.sh` | Stil + Suppression-Gate |
 | `make typecheck` | Compiler-Build `-Werror` | Statisch |
-| `make arch-check` | `cmake/arch-check.sh` (Include-Heuristik) | ADR-0001 Layering |
+| `make arch-check` | beide Sensoren unten | ADR-0001 Layering |
+| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | ADR-0001 Layering, deklariert — Werkzeugwahl [ADR-0014](../../docs/plan/adr/0014-a-check-zweites-layering-gate.md) |
+| `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
+| (in `arch-check`) | `cmake/arch-check.sh` (Include-Heuristik) | ADR-0001 Layering, vier benannte Verzeichnispaare |
 | `make test` | doctest via `ctest -R unit` | Unit + Tie-Break |
 | `make test-determinism` | `ctest -R determinism` (100 Iterationen) | LH-QA-02 |
 | `make coverage-gate` | `gcovr --fail-under-line` | ADR-0013: 70 %, ab M2 80 % |

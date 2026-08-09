@@ -18,9 +18,20 @@ WORK := $(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(TOOLCHAIN)
 .PHONY: help toolchain configure lint typecheck arch-check test test-determinism \
         coverage-gate coverage-gate-critical gates ci fullbuild build run clean
 
+# `-h`: MAKEFILE_LIST trägt mehrere Dateien, und grep stellt dann jeder
+# Zeile den Dateinamen voran — er verdrängt den Target-Namen.
 help: ## Targets anzeigen
-	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
+	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-28s %s\n", $$1, $$2}'
+
+# Zweites Layering-Gate (ADR-0014). `a-check.mk` ist tool-generiert
+# (`a-check --print-mk`), die Regeln stehen in `.a-check.yml` — beide nicht
+# im Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment;
+# gepinnt ist v0.15.0, der geprüfte Stand. Anheben ist ein eigener Commit.
+# Der `include` steht hinter `help`, weil das erste gelesene Target das
+# Default-Goal ist — davor gelesen, startet ein blankes `make` das Gate.
+A_CHECK_IMAGE := ghcr.io/pt9912/a-check@sha256:6425c93a9a4359ef28c4da231a2d1db6f421fdaa8f96877ac89d201827c42d09
+include a-check.mk
 
 toolchain: ## Builder-Image mit gepinnter Toolchain bauen (deps-Stage)
 	$(DOCKER) build --target toolchain -t $(TOOLCHAIN) .
@@ -35,7 +46,7 @@ lint: configure ## clang-tidy + Suppression-Gate (AGENTS.md §2.2)
 	$(WORK) bash cmake/suppression-gate.sh
 	$(WORK) sh -c 'clang-tidy -p $(BUILD_DIR) $$(find src -name "*.cpp")'
 
-arch-check: ## ADR-0001 Layering (textbasiert, ohne Toolchain)
+arch-check: a-check ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + Skript (Include-Heuristik)
 	$(WORK) bash cmake/arch-check.sh
 
 test: configure ## doctest via ctest (Unit + Tie-Break)

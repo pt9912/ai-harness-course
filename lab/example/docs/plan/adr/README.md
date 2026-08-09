@@ -8,6 +8,7 @@
 | [0011](0011-closure-note-pflicht.md) | Closure-Note-Pflicht für `done/`-Slices | Accepted (2026-06-02) | LH-QA-02, Modul 1 §Closure, Modul 11 |
 | [0012](0012-index-write-strategy.md) | Index-Write-Strategie (Temp-File + Atomic Rename) | Accepted (2026-06-02) | LH-FA-IDX-003, ADR-0003, Modul 15 |
 | [0013](0013-coverage-schwellen.md) | Coverage-Schwellen — bootstrap-aware 70 %, kritisch 90 % | Accepted (2026-06-02) | CO-001, LH-QA-02, Modul 13 |
+| [0014](0014-a-check-zweites-layering-gate.md) | a-check als zweites Layering-Gate im C++-Skelett | Accepted (2026-08-09) | ADR-0001, Modul 4 |
 
 ## Konventionen
 
