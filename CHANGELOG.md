@@ -93,15 +93,51 @@ Verdrahten auf, nicht im Betrieb:
   a-check als zweiter Sensor hängt, deckt das den Gate nicht mehr ab; alle sechs
   nennen jetzt das Target, nicht das Werkzeug.
 
-### Was diese Welle nicht ändert
+### Die Gates, die dabei entstanden sind
 
-Nur `lab/example` und das Root-`Makefile`. **Kurs, Regelwerk und Templates sind
-unberührt** — die Stand-Zeile von [`lab/regelwerk/README.md`](lab/regelwerk/README.md)
-bleibt deshalb auf Welle 71. Ein Bump signalisierte adoptierenden Repos eine
-Baseline-Änderung, die es nicht gibt.
+Dieselbe Welle hat den Befund-Weg zu Ende gegangen: Was hier von Hand auffiel,
+prüft jetzt ein Sensor. `d-check` bringt die Module mit, es kam kein Skript dazu
+— eines ging sogar.
+
+- **`matrix`** trägt die Referenz-Richtung (Kurs §Referenz-Richtung). Damit ist
+  `lab/example/tools/check_references.py` **retired**: Es trug zwei Zellen der
+  Matrix und erklärte die dritte — ADR → Slice — im eigenen Kopf für nicht
+  grep-bar. Der Kurs löst sie längst über den umgekehrten Default (Kante
+  verboten, Ausnahme am Ort deklariert). Kongruenz vor dem Löschen belegt, je
+  Verstoß beide Sensoren nebeneinander.
+- **`ids`** macht ADR-Kennungen linkpflichtig — keine Kosmetik: `matrix` prüft
+  den Status eines Ziels **nur an Links**, eine nackte Kennung ist für die
+  Richtungs-Prüfung unsichtbar. 62 Links in 27 Dateien.
+- **`targets`** hält Doku-Tabellen und Make-Regeln zusammen — gegen
+  „halluzinierte Gates", die AGENTS.md die häufigste Form der Harness-Lüge
+  nennt. Alle drei Befunde beim Verdrahten wurden durch *Dokumentieren* gelöst,
+  nicht durch Ausnehmen.
+- **`vcs`** setzt ADR-Immutabilität durch und belegte sich sofort an einem
+  eigenen Verstoß: ADR-0015 war `Accepted` und wurde danach im Kern
+  nachgebessert. Zurückgesetzt statt nachgebessert — die Korrektur lebt im
+  Nachfolger.
+- **`planning`**, **`hostpaths`**, **`spans`**, **`tracked`** dazu; `spans` fand
+  eine unschließbare Code-Span in einem Review-Dokument.
+
+**Nicht verdrahtet, mit Grund:** `commits` — die Regel dafür steht in der
+AGENTS.md des *Beispiels*, und das ist ein Teilbaum ohne eigenes `.git`; für das
+Kurs-Repo selbst gibt es sie nicht. Ein Gate zu stellen hieße, eine Konvention
+zu erfinden oder dauerhaft rot zu sein.
+
+### Was diese Welle ändert — und was das für Adopter heißt
+
+Der Schwerpunkt liegt in `lab/example`, aber **nicht nur dort**: Kurs,
+Regelwerk-Spiegel und ein Template nannten weiter ein Gate namens
+`check-references`, das es nach dem Retiren nirgends mehr gibt. Der Name ist
+aus der Norm-Schicht entfernt, ohne sie werkzeug-spezifisch zu machen — sie
+beschreibt jetzt den *Gate*, nicht sein Target. Die Stand-Zeile von
+[`lab/regelwerk/README.md`](lab/regelwerk/README.md) zieht deshalb auf Welle 72
+nach.
 
 Offen und als eigene Fäden notiert: Konsists Regeln auf Typ-Referenzen statt
-`file.imports` heben, und vier Befunde an a-check selbst — allen voran eine
+`file.imports` heben; die 48 nackten ADR-Kennungen in `docs/plan/adr/` selbst,
+die `ids` konstruktionsbedingt nicht sieht (das Modul nimmt sein
+Ziel-Verzeichnis aus); und vier Befunde an a-check selbst — allen voran eine
 Laufzeit-Diagnose der eigenen Heuristik-Grenze („welche Import-Schreibweisen
 dieses Repos extrahiert dieses Backend nicht?"). Sie würde Schritt 0 vom
 Handgriff zur Werkzeug-Eigenschaft machen.

@@ -34,6 +34,12 @@ ignore-refs:
            "lab/templates/Makefile"]
 
 
+# GRENZE: Dieser matrix-Block und der in lab/example/.d-check.yml sind zwei
+# Fassungen derselben Regel, von Hand gehalten — nichts prueft ihre Gleichheit.
+# Die Trennung ist gewollt (nur diese Datei laeuft in CI; das Beispiel traegt
+# seine eigene, damit es fuer sich lesbar bleibt), der Preis ist Drift-Risiko
+# beim Ergaenzen einer Klasse oder eines exempt-paths-Eintrags.
+#
 # Referenz-Richtung (Kurs §Referenz-Richtung) fuer das Beispiel-Repo, soweit
 # maschinell entscheidbar. Bisher trug `lab/example/tools/check_references.py`
 # zwei Zellen der Matrix und erklaerte die dritte — ADR -> Slice — fuer nicht

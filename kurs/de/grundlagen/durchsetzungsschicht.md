@@ -15,7 +15,7 @@ Durchsetzungsschicht verschiebt dieselbe Regel in die **computational**-
 Spalte der [2×2-Matrix](konzeptkarte.md#2x2-schnellanker): die falsche
 Handlung wird *technisch erschwert* (feedforward) oder *deterministisch
 erkannt* (feedback) — nicht bloß abgeraten. Es ist dieselbe Bewegung wie
-beim `check-references`-Gate ([Traceability-Constraint](traceability.md#traceability-constraint)):
+beim Referenz-Richtungs-Gate ([Traceability-Constraint](traceability.md#traceability-constraint)):
 eine Doku-Regel bekommt einen mechanischen Wächter.
 
 ## Drei Bindepunkte

@@ -25,16 +25,38 @@ jobs:
         run: make alignment-check ARGS="--strict"
 
   # ADR-Immutabilitaet braucht eine Commit-Range, deshalb ein eigener Job und
-  # nicht `make check`. Nur am Pull Request: Dort liefert `base.sha` einen
-  # verlaesslichen Bezugspunkt, waehrend `github.event.before` beim ersten Push
-  # eines Branches Nullen ist. Pushes nach main kommen aus gemergten PRs und
-  # sind dort bereits geprueft.
+  # nicht `make check`.
+  #
+  # Laeuft auf BEIDE Ereignisse. Nur am Pull Request waere der Job in diesem
+  # Repo wirkungslos: Die Historie kennt keinen gemergten PR, hier wird direkt
+  # nach main gepusht — und ein Gate, das nie feuert, ist ein Vorschlag
+  # (Kommentar oben).
   adr-immutability:
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - name: Range bestimmen
+        id: range
+        run: |
+          set -eu
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            # merge-base statt base.sha: `base.sha` ist der Basis-Stand vom
+            # letzten PR-Ereignis. Waechst main zwischenzeitlich, lagen fremde
+            # Commits in der Range und eine dort geaenderte ADR wuerde diesem
+            # PR angelastet.
+            BASE=$(git merge-base "${{ github.event.pull_request.base.sha }}" HEAD)
+          else
+            BASE="${{ github.event.before }}"
+            # Beim ersten Push eines Branches ist `before` lauter Nullen, nach
+            # einem Force-Push kann der Commit fehlen. Dann nur den letzten
+            # Commit pruefen statt fail-closed abzubrechen.
+            if [ -z "$BASE" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+              BASE=$(git rev-parse HEAD~1)
+            fi
+          fi
+          echo "value=$BASE..${{ github.sha }}" >> "$GITHUB_OUTPUT"
+          echo "Range: $BASE..${{ github.sha }}"
       - name: ADRs sind nach Accepted immutable (AGENTS.md §2.5)
-        run: make doc-immutable RANGE=${{ github.event.pull_request.base.sha }}..${{ github.sha }}
+        run: make doc-immutable RANGE=${{ steps.range.outputs.value }}

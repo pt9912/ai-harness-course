@@ -136,7 +136,7 @@ durch, die übrigen nicht:
 |---|---|
 | `make verify` | Closure-Pflicht + Referenz-Richtung; mit `SLICE=` zusätzlich die Slice-DoD |
 | `make verify-closure-notes` | jede Datei in `done/` trägt eine Closure-Notiz |
-| `make doc-check` | Referenz-Richtung via d-check (Modul `matrix`): keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise, keine ADR→Slice-Kante ohne Provenance-Marker |
+| `make doc-check` | Vier d-check-Module: `matrix` (Referenz-Richtung — keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise, keine ADR→Slice-Kante ohne Provenance-Marker), `ids` (ADR-Kennungen sind Links), `targets` (kein behauptetes Gate ohne Regel, keine Regel ohne Doku), `planning` (Roadmap-Ruhemarker ↔ `in-progress/`) |
 | `make verify-slice` | DoD eines Slice plausibilisieren; Aufruf mit `SLICE=<id>` |
 | `make plan-status` | Slice-Verteilung über die Lifecycle-Verzeichnisse |
 | `make agent-implement` | Kontextpaket für einen Implementer-Agenten zeigen; Aufruf mit `SLICE=<id>` |

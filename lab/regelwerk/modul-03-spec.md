@@ -139,7 +139,7 @@ Jede Spec zerfällt in drei obligatorische Schichten mit eigener Precedence:
 *Wie genau*) › `architektur.md` (strukturelles *Wodurch*). Konfliktregel:
 **Lastenheft sticht Spezifikation sticht Architektur** — die untere
 Schicht darf *präzisieren*, nie *erweitern*. Vollform (Straten-Klassen,
-Referenz-Richtung, `check-references`-Gate) in
+Referenz-Richtung, Gate) in
 [`grundlagen-source-precedence.md` §Spec-Stratifizierung](grundlagen-source-precedence.md#spec-stratifizierung).
 Vorlagen: [`spec/`-Templates](../templates/spec/).
 

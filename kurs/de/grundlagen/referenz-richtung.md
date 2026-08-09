@@ -211,7 +211,7 @@ anderes.
 entscheidbare* und *semantische* Kanten; ein einzelner grep deckt nur die
 erste Hälfte ab.
 
-*Maschineller Gate (`check-references`, fail-closed in `make verify`)* —
+*Maschineller Gate (fail-closed im repo-weiten Verifikations-Target)* —
 eine *computational feedforward*-Kontrolle wie der
 [Traceability-Constraint](traceability.md#traceability-constraint):
 
@@ -230,7 +230,7 @@ Aufwärts-Referenzen — die ADR-Felder `**Bezug:**` und `**Schärft:**`
 ([§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument)) — werden als
 **Markdown-Link** geschrieben, nicht als nackte ID, so kommt der Leser
 direkt zur Quelle. Der
-`check-references`-Gate hier prüft aber nur die *Token-Richtung* (kein
+Das Gate hier prüft aber nur die *Token-Richtung* (kein
 `ADR-`/`slice-` abwärts im Spec-Körper), **nicht** die Link-/Anker-Auflösung:
 Wird eine Ziel-Überschrift umbenannt, rottet der Aufwärts-Link *still* — die
 gleiche Rot-Klasse, die wir abwärts verboten haben, nur unbewacht. Die
@@ -319,7 +319,7 @@ Provenance ist die Historie-/Changelog-Tabelle am Dokument-Rand (Regel 5),
 sonst nichts — ein Abwärts-Zeiger im Spec-Körper rottet, sobald ADRs
 superseded werden, und die Discovery läuft ohnehin von der ADR-Seite. Damit
 zeigt **jede** Kante strikt aufwärts; null Abwärts-Kanten im bindenden Text,
-Provenance nur unter `## Historie`. Der `check-references`-Gate setzt diese
+Provenance nur unter `## Historie`. Der Referenz-Richtungs-Gate setzt diese
 Decken-Regel über *alle* Spec-Straten durch, nicht nur über das Lastenheft.
 **Innerhalb** eines Stratums sind Dokumente *Peers*: Intra-Referenzen
 erlaubt (wie intra-`LH-*`), keine normative Querabhängigkeit, die Zyklen

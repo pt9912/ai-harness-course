@@ -27,7 +27,10 @@ beurteilt ihn.
 
 ## 2. Definition of Done
 
-- [x] Alle nackten `ADR-NNNN` im Beispiel sind Links.
+- [x] Alle nackten `ADR-NNNN` im Beispiel sind Links — **außer in
+      `docs/plan/adr/` selbst**: Dort nimmt `ids` sein eigenes Ziel-Verzeichnis
+      aus (sonst wäre die Definitionsstelle linkpflichtig). 48 Nennungen
+      bleiben dort unpoliziert, siehe §7.
 - [x] Zwei Ausnahme-Klassen tragen einen Zeilen-Marker statt eines Links,
       **mit Begründung im Marker**: geplante Vorwärts-Verweise und
       Protokollzeilen in Geschichte-Sektionen.
@@ -74,6 +77,14 @@ Nennung real rottet, weil eine ADR superseded werden kann.
 
 ## 7. Steering-Loop-Beobachtungen
 
+- **`ids` policiert sein eigenes Ziel-Verzeichnis nicht.** Eine nackte Kennung
+  in `docs/plan/adr/` meldet das Modul nicht — nachgestellt: dieselbe Zeile in
+  einer ADR 0 Befunde, in einem Slice `id-unlinked`. Das ist Werkzeug-Design,
+  die Definitionsstelle soll nicht linkpflichtig sein. Es heißt aber: 48 nackte
+  Nennungen bleiben dort, und weil `matrix` den Status nur an Links prüft, sind
+  auch sie für die Richtungs-Prüfung unsichtbar. Die DoD behauptete zunächst
+  *alle*; gefunden hat es der Review, nicht mein Break-Test — der probierte nur
+  zwei Dateien außerhalb des Verzeichnisses. Eigener Faden.
 - **Der Break-Test hat ein zu enges Gate aufgedeckt, nicht das Konfigurieren.**
   Nach dem Verdrahten war `make doc-check` grün — aber eine neu eingefügte
   nackte Kennung in `AGENTS.md` blieb es auch. Die `scan.roots` standen auf
@@ -90,8 +101,8 @@ bevor die Regel greift.
 ## 9. Closure-Notiz
 
 **Ergebnis.** 62 Links in 27 Dateien, 5 Zeilen-Marker, keine übersprungene
-Fundstelle. `ids` ist für die ADR-Klasse aktiv; `make doc-check` prüft jetzt
-69 statt 29 Dateien.
+Fundstelle *von denen, die das Modul meldet*. `ids` ist für die ADR-Klasse
+aktiv; `make doc-check` prüft jetzt 70 statt 29 Dateien.
 
 **Die zwei Ausnahme-Klassen**, beide als Marker im Text statt als Pfad-Liste in
 der Config — die Begründung steht dann dort, wo jemand sie liest:

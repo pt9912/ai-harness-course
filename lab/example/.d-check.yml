@@ -78,6 +78,11 @@ targets:
     - java/Makefile
     - kotlin/Makefile
     - python/Makefile
+  # GRENZE: nur die oberste AGENTS.md. Die sechs <sprache>/AGENTS.md und die
+  # sechs <sprache>/harness/README.md tragen ebenfalls Sensors-Tabellen —
+  # laut AGENTS.md §4 sogar die Stelle, an der ein Gate DEFINIERT ist —, und
+  # ein Phantom-Target dort bleibt unentdeckt. Nachgestellt. Die andere
+  # Richtung (gate-undocumented) greift ueber alle Makefiles.
   doc-tables: [AGENTS.md]
   authority: AGENTS.md
   # Utility ohne Doku-Pflicht: Sie tragen kein Gate, und AGENTS.md §3 listet
