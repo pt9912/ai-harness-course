@@ -64,10 +64,8 @@ kein Altlast-Zustand.
    gewurzelte Include; ein elternrelativer (`"../../adapters/ui/x.h"` <!-- d-check:ignore (illustrative Schreibweise, keine Datei) -->) löst auf
    nichts auf **und** entgeht den Greps des Skripts — beide Sensoren blieben
    grün, obwohl der Verstoß compiliert. Eine `constructs`-Regel verbietet die
-   Schreibweise und macht damit beide Sensoren erst belastbar. Eine umgehende
-   Schreibweise gibt es in **jeder** Sprache; entscheidend ist, ob der
-   Bestandssensor sie sieht — in C++ und Kotlin nicht, sonst überall doch
-   (siehe die Grenzen unten).
+   Schreibweise und macht damit beide Sensoren erst belastbar. C# hat kein
+   Gegenstück: `using` ist immer voll qualifiziert.
 5. **Umsetzung skelettweise**, nicht in einem Zug. Stand:
 
    | Skelett | Bestandssensor | a-check |
@@ -164,10 +162,9 @@ kein Altlast-Zustand.
   Skelett neu zu bewerten — nicht die Liste.
 - **Die beiden Sensoren widersprechen sich**: kein stilles Abschalten eines
   Laufs, sondern Befund gegen ADR-0001 prüfen und die Ursache benennen.
-- **Alle sechs verdrahtet** — **eingetreten am 2026-08-09**: Die Stand-Tabelle
-  ist gegenstandslos; eine Nachfolge-ADR ersetzt sie durch die schlichte
-  Aussage, dass a-check überall läuft. Bis diese ADR steht, bleibt die Tabelle
-  als Beleg des erreichten Standes.
+- **Alle sechs verdrahtet**: Die Stand-Tabelle wird gegenstandslos; eine
+  Nachfolge-ADR ersetzt sie durch die schlichte Aussage, dass a-check überall
+  läuft.
 
 ## Geschichte
 
