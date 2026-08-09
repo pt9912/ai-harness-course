@@ -22,28 +22,30 @@ ADR-0015 es entschieden hat. C++ und C# sind verdrahtet und dienen als Vorlage.
 
 ## 2. Definition of Done
 
-Je Skelett, in dieser Reihenfolge:
+Je Skelett, in dieser Reihenfolge — **abgehakt heißt: für alle vier erledigt**
+(Go, Python, Kotlin, Java; C++ und C# waren beim Anlegen dieses Slice schon
+verdrahtet):
 
-- [ ] **Schritt 0 — Schreibweisen-Frage beantwortet, bevor die Config
+- [x] **Schritt 0 — Schreibweisen-Frage beantwortet, bevor die Config
       entsteht.** Welche Schreibweise setzt die Symbol-Auflösung voraus, welche
       Schreibweise umgeht sie, und erzwingt irgendetwas die vorausgesetzte? Die
       Antwort steht in §3 als Ausgangslage; sie ist am Skelett zu **belegen**,
       nicht zu übernehmen: Verstoß in der umgehenden Schreibweise einbauen,
       beide Sensoren laufen lassen, Ausgabe notieren.
-- [ ] `<sprache>/.a-check.yml` — Schichten und Kanten aus ADR-0001, Rollen nur
+- [x] `<sprache>/.a-check.yml` — Schichten und Kanten aus ADR-0001, Rollen nur
       wo der Code sie einlöst.
-- [ ] `<sprache>/a-check.mk` per `a-check --print-mk`; Pin im `Makefile`
+- [x] `<sprache>/a-check.mk` per `a-check --print-mk`; Pin im `Makefile`
       (`A_CHECK_IMAGE :=`), nicht im Fragment.
-- [ ] `include` **hinter** `help` — sonst wird `a-check` das Default-Goal.
-- [ ] `arch-check` führt **beide** Sensoren vollständig aus, nicht als
+- [x] `include` **hinter** `help` — sonst wird `a-check` das Default-Goal.
+- [x] `arch-check` führt **beide** Sensoren vollständig aus, nicht als
       Prerequisite.
-- [ ] Bindung in `<sprache>/harness/README.md` §Sensors.
-- [ ] `<sprache>/AGENTS.md` §C-2 nennt beide Sensoren.
-- [ ] Break-Test je Regel rot mit Exit 1, sauberer Baum grün.
-- [ ] `make gates` grün.
-- [ ] Stand-Tabelle in ADR-0015 §Entscheidung 5 nachgezogen.
+- [x] Bindung in `<sprache>/harness/README.md` §Sensors.
+- [x] `<sprache>/AGENTS.md` §C-2 nennt beide Sensoren.
+- [x] Break-Test je Regel rot mit Exit 1, sauberer Baum grün.
+- [x] `make gates` grün.
+- [x] Stand-Tabelle in ADR-0015 §Entscheidung 5 nachgezogen.
 
-Am Ende aller vier:
+Am Ende aller vier — **noch offen**:
 
 - [ ] Nachfolge-ADR, die die Stand-Tabelle durch die schlichte Aussage ersetzt
       (Re-Evaluierungs-Trigger von ADR-0015).

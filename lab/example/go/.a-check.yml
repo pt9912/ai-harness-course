@@ -33,7 +33,8 @@ edges:
   - {from: index,     to: types}
   - {from: embedding, to: types}
 
-# cmd/docsearch verdrahtet Index, Embedding, Service und UI — Composition Root.
+# cmd/docsearch verdrahtet Index, Embedding und Service — Composition Root.
+# (Den UI-Layer importiert es nicht; er wird im Skelett nicht angeschlossen.)
 composition_root: ["cmd/**"]
 
 # Keine `resolution`: Go-Importe tragen den Modulpfad und loesen ueber den

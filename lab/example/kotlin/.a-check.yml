@@ -42,7 +42,9 @@ edges:
   - {from: index,     to: types}
   - {from: embedding, to: types}
 
-# Main.kt verdrahtet Index, Embedding, Service und UI — Composition Root.
+# Main.kt verdrahtet Index, Embedding und Service — Composition Root.
+# (Den ui-Layer importiert es nicht; genau deshalb kann die constructs-Regel
+# unten `docsearch.ui.` ausserhalb von ui ausnahmslos verbieten.)
 composition_root: ["src/main/kotlin/com/example/docsearch/Main.kt"]
 
 # `import com.example.docsearch.service.Searcher` ist ein gepunkteter

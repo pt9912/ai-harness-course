@@ -16,8 +16,10 @@ Dokument-Abschnitte. Die Embedding-Erzeugung läuft über ein LLM.
   für Layering-ADRs und Architekturtests.
 - **Realistische ADRs**: Modellwahl für Embeddings, Vektor-Datenbank,
   hexagonale Architektur.
-- **Slices in jedem Lifecycle-Status**: zwei in `open/`, einer in `next/`,
-  einer in `in-progress/`, mehrere in `done/`.
+- **Slices in jedem Lifecycle-Status** — welche gerade wo liegen, sagt
+  `make plan-status`, nicht diese Datei
+  ([`docs/plan/planning/README.md` §Aktueller Stand](docs/plan/planning/README.md#aktueller-stand):
+  eine Tabelle daneben driftet, sobald ein `git mv` sie nicht mitnimmt).
 - **Ein Carveout** für eine Bootstrap-Coverage.
 - **Ein Replay-Beispiel** in `evals/golden/` für [Modul 12](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md).
 - **Ein fingiertes Review-Fixture** in `exercises/09-review-fixture/`
@@ -94,7 +96,7 @@ zeigen Schichtung, Gates und Traceability — nicht das fertige Produkt.
 | Konzept | Was unterscheidet sich? |
 |---|---|
 | Suppression-Verbot | `//nolint` vs. `# noqa` vs. `@Suppress` vs. `@SuppressWarnings` vs. `#pragma warning disable` vs. C++ `// NOLINT` / `#pragma GCC diagnostic` — siehe [Modul 9](../../kurs/de/03-agenten/modul-09-implementierung.md) |
-| Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) vs. Skript (C++ `arch-check.sh`) — und im C++-Skelett beide Klassen an derselben Aussage: das Skript neben dem deklarativen a-check ([ADR-0015](docs/plan/adr/0015-a-check-rollout-sprachskelette.md)) |
+| Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) vs. Skript (C++ `arch-check.sh`) — und in **jedem** Skelett derselbe deklarative Zweitsensor daneben ([ADR-0015](docs/plan/adr/0015-a-check-rollout-sprachskelette.md)). Der Vergleich zeigt damit auch, was die Bauform einer Regel ausmacht: Konsist prüft `file.imports`, ArchUnit den Bytecode — dieselbe Umgehung, verschiedene Sichtbarkeit |
 | Lockfile | `go.sum`, `uv.lock`, `gradle.lockfile`, Maven (transitive), CPM `packages.lock.json`, FetchContent-`GIT_TAG` (C++) |
 | Container | Distroless Static (Go), python-slim, Distroless Java, Distroless .NET, Distroless cc (C++) |
 | Tie-Break | `sort.SliceStable` vs. `sorted(key=…)` vs. `compareBy(…).thenBy(…)` vs. `Comparator.thenComparing` vs. LINQ `OrderBy().ThenBy()` vs. `std::stable_sort` (C++) |

@@ -8,7 +8,7 @@ Konkretion des Harness für Go:
 |---|---|
 | Linter | `golangci-lint` |
 | Typecheck | Go-Compiler (`go vet`) |
-| Architekturtest | `depguard` (in `.golangci.yml`) |
+| Architekturtest | `depguard` (in `.golangci.yml`) + a-check (`.a-check.yml`, deklarativ) |
 | Coverage | `go test -cover` |
 | Build | `go build` in Multi-Stage Docker |
 | Lockfile | `go.sum` |
@@ -30,9 +30,11 @@ go/
 ├── harness/README.md          Go-spezifische Sensors-Tabelle
 ├── Makefile                   gates · lint · typecheck · arch-check · test · coverage-gate · build
 ├── Dockerfile                 Multi-Stage, Distroless
-├── .golangci.yml              Linter + depguard (Architekturtest)
+├── .golangci.yml              Linter + depguard (Layering-Gate, Deny-Listen)
+├── .a-check.yml               ADR-0001 Layering, deklariert (a-check)
+├── a-check.mk                 Gate-Fragment, tool-generiert (`a-check --print-mk`)
 ├── go.mod
-├── cmd/docsearch/main.go      Entry-Point (UI-Layer)
+├── cmd/docsearch/main.go      Composition Root (verdrahtet index, embedding, service)
 └── internal/
     ├── types/                 Domain-Modell, Pure
     ├── service/               Geschäftslogik

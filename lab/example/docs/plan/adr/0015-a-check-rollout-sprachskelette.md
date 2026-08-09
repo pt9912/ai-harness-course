@@ -64,8 +64,10 @@ kein Altlast-Zustand.
    gewurzelte Include; ein elternrelativer (`"../../adapters/ui/x.h"` <!-- d-check:ignore (illustrative Schreibweise, keine Datei) -->) löst auf
    nichts auf **und** entgeht den Greps des Skripts — beide Sensoren blieben
    grün, obwohl der Verstoß compiliert. Eine `constructs`-Regel verbietet die
-   Schreibweise und macht damit beide Sensoren erst belastbar. C# hat kein
-   Gegenstück: `using` ist immer voll qualifiziert.
+   Schreibweise und macht damit beide Sensoren erst belastbar. Eine umgehende
+   Schreibweise gibt es in **jeder** Sprache; entscheidend ist, ob der
+   Bestandssensor sie sieht — in C++ und Kotlin nicht, sonst überall doch
+   (siehe die Grenzen unten).
 5. **Umsetzung skelettweise**, nicht in einem Zug. Stand:
 
    | Skelett | Bestandssensor | a-check |
@@ -162,9 +164,10 @@ kein Altlast-Zustand.
   Skelett neu zu bewerten — nicht die Liste.
 - **Die beiden Sensoren widersprechen sich**: kein stilles Abschalten eines
   Laufs, sondern Befund gegen ADR-0001 prüfen und die Ursache benennen.
-- **Alle sechs verdrahtet**: Die Stand-Tabelle wird gegenstandslos; eine
-  Nachfolge-ADR ersetzt sie durch die schlichte Aussage, dass a-check überall
-  läuft.
+- **Alle sechs verdrahtet** — **eingetreten am 2026-08-09**: Die Stand-Tabelle
+  ist gegenstandslos; eine Nachfolge-ADR ersetzt sie durch die schlichte
+  Aussage, dass a-check überall läuft. Bis diese ADR steht, bleibt die Tabelle
+  als Beleg des erreichten Standes.
 
 ## Geschichte
 
@@ -174,3 +177,4 @@ kein Altlast-Zustand.
 | 2026-08-09 | Accepted | C# verdrahtet (`.a-check.yml`, `a-check.mk`, `arch-check` ruft beide Sensoren); Verweise aus dem C++-Skelett auf diese ADR umgehängt |
 | 2026-08-09 | Beleg | Die Asymmetrie der beiden Sensoren in beide Richtungen gemessen: `typeof(DocSearch.UI.Handler)` ohne `using` — a-check 0 Befunde, NetArchTest `Service_Should_Not_Depend_On_UI` rot; `Types → Service` — a-check rot, NetArchTest ohne Regel |
 | 2026-08-09 | Nachtrag | Review-Befunde: elternrelativer Include passierte beide C++-Sensoren (`constructs`-Regel ergänzt); Pin auf v0.16.0 korrigiert — der `--print-mk`-Versatz hatte auf den Vorgänger gezeigt; `make arch-check` führt beide Sensoren vollständig aus; AGENTS.md und README beider Skelette nachgezogen |
+| 2026-08-09 | Rollout | Go, Python, Kotlin und Java verdrahtet; Stand-Tabelle vollständig, Re-Evaluierungs-Trigger „Alle sechs verdrahtet" damit eingetreten. Zwei Grenzen kamen dabei dazu: Python (a-check ist dort der schwächere Sensor) und Kotlin (geteilter blinder Fleck, weil Konsists Regeln gegen `file.imports` geschrieben sind) |

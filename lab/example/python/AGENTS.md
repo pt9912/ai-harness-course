@@ -48,6 +48,6 @@ In jeder Modul-Datei, um konsistente Typen ohne TYPE_CHECKING-Branches.
 
 - [ ] `ruff check .` grün.
 - [ ] `mypy --strict src/` grün.
-- [ ] `lint-imports` (import-linter) grün.
+- [ ] `make arch-check` grün (import-linter **und** a-check).
 - [ ] `make coverage-gate` grün.
 - [ ] Test-Namen tragen LH-Bezug: `test_search_lhfa02_happy_path`.

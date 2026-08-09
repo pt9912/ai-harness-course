@@ -40,6 +40,7 @@ Körpern.
 ## Pre-completion Checklist (Java)
 
 - [ ] `mvn checkstyle:check` grün.
-- [ ] `mvn test` grün, inkl. ArchUnit-Tests.
+- [ ] `make arch-check` grün (ArchUnit **und** a-check).
+- [ ] `mvn test` grün.
 - [ ] `mvn jacoco:check` grün.
 - [ ] Test-Namen mit LH-Bezug: `searchHappyPath_LHFA02()`.

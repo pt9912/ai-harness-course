@@ -49,6 +49,7 @@ Klassen, die nur innerhalb einer Schicht genutzt werden, sind
 ## Pre-completion Checklist (Kotlin)
 
 - [ ] `./gradlew detekt` grün.
-- [ ] `./gradlew test` grün, inkl. Konsist-Tests.
+- [ ] `make arch-check` grün (Konsist **und** a-check).
+- [ ] `./gradlew test` grün.
 - [ ] `./gradlew koverVerify` grün.
 - [ ] Test-Namen mit LH-Bezug: `searchHappyPath_LHFA02`.
