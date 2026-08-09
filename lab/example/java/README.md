@@ -4,7 +4,7 @@
 |---|---|
 | Linter | Checkstyle |
 | Typecheck | `javac` |
-| Architekturtest | **ArchUnit** |
+| Architekturtest | **ArchUnit** + `.a-check.yml` (a-check, deklarativ) |
 | Coverage | JaCoCo |
 | Build | Maven |
 | Lockfile | (transitive lock via `mvn dependency:tree`) |

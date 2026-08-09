@@ -109,6 +109,14 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
   **nicht**: Das Werkzeug könnte den AST lesen, seine Regeln tun es hier nicht.
   Folge-Arbeit: Konsist-Regeln auf Typ-Referenzen statt Import-Liste heben —
   eigener Slice, nicht Teil dieses.
+- **Das Kriterium der Ausgangs-Tabelle war falsch.** §3 sortierte nach Werkzeug
+  („AST-/IL-basiert sieht die Umgehung“). Java hat das bestätigt (ArchUnit
+  importiert Bytecode, fängt den FQN-Fall), Kotlin es widerlegt: Konsist
+  *könnte* den AST lesen, seine Regeln hier tun es nicht. Das tragende Merkmal
+  ist die **Bauform der Regel**, nicht die Klasse des Werkzeugs — und die steht
+  in keiner Werkzeug-Dokumentation, sondern nur im Regel-Quelltext des
+  jeweiligen Skeletts. Ein Rollout auf ein siebtes Skelett liest deshalb zuerst
+  die Regeln des Bestandssensors, nicht sein Datenblatt.
 
 - Aus dem C++-Pilot: Die Frage aus Schritt 0 kam dort **nach** dem Review, nicht
   vor der Config. Der blinde Fleck war deshalb schon verdrahtet und als „Gate"

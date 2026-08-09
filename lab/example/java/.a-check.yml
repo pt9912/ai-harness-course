@@ -1,0 +1,59 @@
+# .a-check.yml — Layering des Java-Skeletts als deklarierte Architektur
+# (ADR-0001, Gate-Bindung ADR-0015). Zweites Gate neben den ArchUnit-Tests in
+# src/test/java/com/example/docsearch/ArchitectureTest.java: dasselbe
+# Layering, andere Ausdrucksform — Allow-Liste statt aufgezaehlter Regeln.
+#
+# Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Audit ->
+# Service -> UI. Audit ist dort deklariert, aber in keinem Skelett gebaut und
+# hat deshalb hier keine Schicht.
+#
+# GRENZE, hier vom Bestandssensor gedeckt: a-check liest Import-Zeilen und
+# sieht eine voll qualifizierte Nutzung ohne Import nicht. ArchUnit sieht sie,
+# weil es Bytecode importiert (ClassFileImporter) — gemessen: a-check 0
+# Befunde, `serviceDoesNotDependOnUi` rot. Deshalb braucht dieses Skelett
+# keine `constructs`-Regel; im Kotlin-Skelett liegt derselbe Fall anders, weil
+# dessen Konsist-Regeln gegen `file.imports` geschrieben sind.
+version: 1
+languages:
+  java: ["**/*.java"]
+
+# Keine Rollen: Das Java-Skelett ist geschichtet, nicht ports-und-adapters —
+# der Service spricht Index und Embedding direkt an. `role: app` wuerde genau
+# das als app-impurity melden und eine Architektur behaupten, die hier nicht
+# gebaut ist. Geprueft wird die Kanten-Richtung.
+layers:
+  types:     ["src/main/java/com/example/docsearch/types/**"]
+  index:     ["src/main/java/com/example/docsearch/index/**"]
+  embedding: ["src/main/java/com/example/docsearch/embedding/**"]
+  service:   ["src/main/java/com/example/docsearch/service/**"]
+  ui:        ["src/main/java/com/example/docsearch/ui/**"]
+
+# Allow-Liste: Was nicht steht, ist verboten. Damit sind die vier
+# ArchUnit-Regeln gedeckt und zusaetzlich die Kanten, fuer die es keine gibt —
+# `types` hat keine.
+edges:
+  - {from: ui,        to: service}
+  - {from: ui,        to: types}
+  - {from: service,   to: index}
+  - {from: service,   to: embedding}
+  - {from: service,   to: types}
+  - {from: index,     to: types}
+  - {from: embedding, to: types}
+
+# Main.java verdrahtet Index, Embedding und Service — Composition Root.
+composition_root: ["src/main/java/com/example/docsearch/Main.java"]
+
+# `import com.example.docsearch.service.Searcher;` ist ein gepunkteter
+# Paketpfad; ohne diese Zuordnung auf den Verzeichnisbaum loest kein Import
+# auf eine Schicht auf und das Gate waere still gruen.
+resolution:
+  java:
+    mode: fixed-root
+    roots: ["src/main/java/com/example/docsearch"]
+    package_base: "com.example.docsearch"
+
+# Tests pruefen absichtlich quer durch die Schichten; target/ ist gitignoriert,
+# liegt lokal aber im Baum.
+exclude:
+  - "src/test/**"
+  - "target/**"

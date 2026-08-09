@@ -74,7 +74,7 @@ kein Altlast-Zustand.
    | C# | NetArchTest | verdrahtet |
    | Go | depguard | verdrahtet |
    | Python | import-linter | verdrahtet |
-   | Java | ArchUnit | offen |
+   | Java | ArchUnit | verdrahtet |
    | Kotlin | Konsist | verdrahtet |
 
    Diese Tabelle ist der Stand der **Umsetzung**, nicht der Entscheidung. Ein
