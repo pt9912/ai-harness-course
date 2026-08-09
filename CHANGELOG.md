@@ -124,6 +124,47 @@ AGENTS.md des *Beispiels*, und das ist ein Teilbaum ohne eigenes `.git`; für da
 Kurs-Repo selbst gibt es sie nicht. Ein Gate zu stellen hieße, eine Konvention
 zu erfinden oder dauerhaft rot zu sein.
 
+### Die Kotlin-Lücke, geschlossen wo sie entsteht
+
+Der eine Fall, in dem **beide** Sensoren blind waren, ist zu — und zwar am
+Bestandssensor, nicht per Zusatzregel. Konsists Regeln waren gegen
+`file.imports` geschrieben und lagen damit auf derselben Ebene wie a-check; sie
+prüfen jetzt den Quelltext und fangen auch die voll qualifizierte Nennung.
+Gemessen: `service → ui` vorher grün, jetzt rot.
+
+Die `constructs`-Regel, die im C++-Muster für Kotlin nachgebaut worden war,
+**entfällt** damit — nachgewiesen, dass sie nichts mehr trägt: Sie kannte nur
+die Richtung auf `ui`, und `index → service` liegt außerhalb ihrer Zone.
+Kotlin verhält sich jetzt wie Java und C#. C++ bleibt das einzige Skelett mit
+zwei textnahen Sensoren; dort trägt die Regel weiter.
+
+Die ADR-Kette dieser Welle ist damit vierstellig — `0014 → 0015 → 0016 → 0017`,
+jede Ablösung von einer Messung ausgelöst. Zweimal ist dabei derselbe Fehler
+passiert und beim zweiten Mal an der Wurzel behoben: Eine Nachfolge-ADR, die
+weniger trägt als ihre Vorgängerin, macht jeden Abschnitts-Zeiger auf sie
+falsch. `0017` übernimmt Entscheidung **und** Nummerierung der Vorgängerin.
+
+### Was die Aufräumarbeit über ihre eigenen Grenzen ergab
+
+Die Linkpflicht (`ids`) traf drei Kennungs-Klassen mit drei verschiedenen
+Antworten — die Messung hat entschieden, nicht die Symmetrie:
+
+- **`ADR-*` und `LH-*` außerhalb der ADRs:** verlinkt, zusammen 120 Stellen.
+- **Alles in `docs/plan/adr/`:** *unzulässig* zu beheben. Jede ADR ist
+  `Accepted` oder `Superseded`; einen Link im Körper zu ergänzen ist eine
+  Kern-Änderung — nachgestellt, `core-drift-vcs`. Das Ziel-Verzeichnis, das
+  `ids` konstruktionsbedingt ausnimmt, ist genau das, in dem eine Korrektur
+  verboten wäre.
+- **`slice-*`:** bewusst **keine** Linkpflicht. Der Kurs nennt die Slice-ID
+  einen „stabilen Token, auch nachdem die Datei nach `done/` wandert" — ein
+  Pfad-Link macht sie instabil, jeder `git mv` bräche ihn repo-weit.
+
+Der d-check-Pin steht auf v0.52.0. Dessen neue Closure-Notiz-Prüfung wäre der
+naheliegende Anlass gewesen, auch das letzte handgeschriebene Prüfskript des
+Beispiels zu retiren — die Messung sagte nein: Zwei Klassen (unausgefüllte
+Template-Platzhalter, Nicht-`slice-*`-Dateien in `done/`) fängt nur das Skript.
+Als Faden mit zwei CR-Kandidaten in der Roadmap.
+
 ### Was diese Welle ändert — und was das für Adopter heißt
 
 Der Schwerpunkt liegt in `lab/example`, aber **nicht nur dort**: Kurs,
