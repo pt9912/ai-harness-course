@@ -76,7 +76,7 @@ Toolchain:
 
 Jedes Skelett implementiert:
 
-- Hexagonales Layering (ADR-0001) — UI → Service → {Index, Embedding} → Types.
+- Hexagonales Layering ([ADR-0001](docs/plan/adr/0001-hexagonale-architektur.md)) — UI → Service → {Index, Embedding} → Types.
 - Tie-Break-Logik aus slice-009 (deterministische Sortierung bei gleichem Score).
 - LH-FA-01 und LH-FA-02 Akzeptanzkriterien (Happy/Boundary/Negative) als Tests.
 - Die vier Fehler-Codes aus [spec §4](spec/spezifikation.md#4-fehler-codes-und-logging-felder)
@@ -86,7 +86,7 @@ Jedes Skelett implementiert:
 
 Nicht im Skelett: die Index-Persistenz aus
 [spec §1 LH-FA-IDX-003.a](spec/spezifikation.md#lh-fa-idx-003a--index-schreiben)
-(ADR-0003, ADR-0012) und die Abschnitts-Zerlegung an `##`-Headings. Der Index
+([ADR-0003](docs/plan/adr/0003-index-storage-format.md), [ADR-0012](docs/plan/adr/0012-index-write-strategy.md)) und die Abschnitts-Zerlegung an `##`-Headings. Der Index
 lebt im Speicher, `reindex` zählt Dateien statt Abschnitte und antwortet
 deshalb nur mit `indexed_docs`, nicht mit `indexed_sections`. Die Skelette
 zeigen Schichtung, Gates und Traceability — nicht das fertige Produkt.

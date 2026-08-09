@@ -11,7 +11,7 @@ Slice-ID.
 
 ### J-2 — Layering via ArchUnit und a-check
 
-ADR-0001 wird von **zwei** Sensoren durchgesetzt, beide hinter
+[ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) wird von **zwei** Sensoren durchgesetzt, beide hinter
 `make arch-check`
 ([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)): die
 ArchUnit-Tests in `src/test/java/com/example/docsearch/ArchitectureTest.java`

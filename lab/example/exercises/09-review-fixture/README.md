@@ -25,7 +25,7 @@ Ein vollständiger Review-Lauf identifiziert:
 
 | Kategorie | Hinweis ohne Auflösung |
 |---|---|
-| HIGH | Berührt ADR-0001 (Hexagonale Architektur) — eine DoD-Aussage widerspricht dem Layering. |
+| HIGH | Berührt [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) (Hexagonale Architektur) — eine DoD-Aussage widerspricht dem Layering. |
 | MEDIUM | Eine Risiko-Begründung absolviert sich selbst, ohne gegen eine `LH-QA-*`-Anforderung evaluiert zu sein. |
 | LOW | Ein Pflichtfeld ist syntaktisch gefüllt, aber semantisch tautologisch. |
 

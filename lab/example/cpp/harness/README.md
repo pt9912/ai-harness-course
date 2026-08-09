@@ -10,8 +10,8 @@ Wie in [`../../harness/README.md`](../../harness/README.md), erweitert
 um C++-spezifische Pfade:
 
 - `cpp/.clang-tidy` — Linter-Checks (WarningsAsErrors, Modul 13).
-- `cpp/cmake/arch-check.sh` — Layering-Gate, Skript-Sensor (ADR-0001).
-- `cpp/.a-check.yml` — Layering-Gate, deklarativer Sensor (ADR-0001, Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md)).
+- `cpp/cmake/arch-check.sh` — Layering-Gate, Skript-Sensor ([ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md)).
+- `cpp/.a-check.yml` — Layering-Gate, deklarativer Sensor ([ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md), Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md)).
 - `cpp/cmake/Dependencies.cmake` — Toolchain-Pin (doctest per `GIT_TAG`).
 
 ## Guides (C++-spezifisch)
@@ -20,7 +20,7 @@ um C++-spezifische Pfade:
 |---|---|
 | [`../AGENTS.md`](../AGENTS.md) | C++-Hard-Rules (C-1 bis C-4) |
 | `.clang-tidy` | Linter-Konfiguration, zentrale Ausnahmen |
-| `src/hexagon/ports/embedder_port.h` | Adapter-Vertrag (ADR-0002) |
+| `src/hexagon/ports/embedder_port.h` | Adapter-Vertrag ([ADR-0002](../../docs/plan/adr/0002-modellwahl-embedding.md)) |
 
 ## Sensors (C++-spezifisch)
 
@@ -28,14 +28,14 @@ um C++-spezifische Pfade:
 |---|---|---|
 | `make lint` | `clang-tidy` + `suppression-gate.sh` | Stil + Suppression-Gate |
 | `make typecheck` | Compiler-Build `-Werror` | Statisch |
-| `make arch-check` | beide Sensoren unten | ADR-0001 Layering |
-| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | ADR-0001 Layering, deklariert — Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md) |
+| `make arch-check` | beide Sensoren unten | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering |
+| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, deklariert — Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md) |
 | `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
-| (in `arch-check`) | `cmake/arch-check.sh` (Include-Heuristik) | ADR-0001 Layering, vier benannte Verzeichnispaare |
+| (in `arch-check`) | `cmake/arch-check.sh` (Include-Heuristik) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, vier benannte Verzeichnispaare |
 | `make test` | doctest via `ctest -R unit` | Unit + Tie-Break |
 | `make test-determinism` | `ctest -R determinism` (100 Iterationen) | LH-QA-02 |
-| `make coverage-gate` | `gcovr --fail-under-line` | ADR-0013: 70 %, ab M2 80 % |
-| `make coverage-gate-critical` | wie oben, nur `hexagon/service/` | ADR-0013: 90 %, Index-Layer via CO-001 ausgenommen |
+| `make coverage-gate` | `gcovr --fail-under-line` | [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 70 %, ab M2 80 % |
+| `make coverage-gate-critical` | wie oben, nur `hexagon/service/` | [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 90 %, Index-Layer via CO-001 ausgenommen |
 | `make build` | Multi-Stage Dockerfile | Distroless cc, nonroot |
 | `make gates` | alle obigen | mandatory vor PR |
 

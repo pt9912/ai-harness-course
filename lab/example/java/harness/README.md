@@ -10,7 +10,7 @@
 | (in `arch-check`) | **ArchUnit** in JUnit, importiert Bytecode |
 | `make test` | JUnit 5 |
 | `make coverage-gate` | JaCoCo mit Schwelle |
-| `make coverage-gate-critical` | JaCoCo, nur `docsearch/service/` (Profil `critical-coverage`; ADR-0013: 90 %, Index via CO-001 ausgenommen) |
+| `make coverage-gate-critical` | JaCoCo, nur `docsearch/service/` (Profil `critical-coverage`; [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 90 %, Index via CO-001 ausgenommen) |
 | `make build` | Maven + Distroless |
 
 Übergeordnet: [`../../harness/README.md`](../../harness/README.md).

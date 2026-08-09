@@ -14,7 +14,7 @@ oder `[tool.mypy.overrides]` mit Begründung und Slice-ID.
 
 ### P-2 — Layering via import-linter und a-check
 
-Architektur-Constraints aus ADR-0001 werden von **zwei** Sensoren durchgesetzt,
+Architektur-Constraints aus [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) werden von **zwei** Sensoren durchgesetzt,
 beide hinter `make arch-check`
 ([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)):
 `import-linter` mit `importlinter.cfg` und die Deklaration in `.a-check.yml`.

@@ -8,8 +8,13 @@
 # ganzen Baum sieht: Dieses Verzeichnis ist ein Teilbaum und verlinkt bewusst
 # in den Kurs; ein `links`-Lauf in diesem Scope meldete 63 Repo-Escapes.
 scan:
-  roots: ["spec", "docs/plan"]
-modules: [matrix, targets, planning]
+  # Ganzes Beispiel, nicht nur spec/ und docs/plan/: Die ADR-Kennungen stehen
+  # auch in AGENTS.md, den sechs harness/README.md und den Skelett-AGENTS.md.
+  # Mit engeren Wurzeln waere die Linkpflicht dort unbemerkt verletzbar — im
+  # Break-Test aufgefallen, nicht beim Konfigurieren.
+  roots: ["."]
+  ignore: ["**/build/**", "**/build-cov/**", "**/target/**", "**/.gradle/**"]
+modules: [matrix, targets, planning, ids]
 
 matrix:
   classes:
@@ -109,3 +114,22 @@ targets:
 # widersprechen.
 planning:
   roadmap: docs/plan/planning/in-progress/roadmap.md
+
+# Linkpflicht fuer ADR-Kennungen. Nicht Kosmetik: `matrix` prueft den STATUS
+# eines Ziels nur an Links — eine nackte Kennung im Fliesstext ist fuer das
+# Gate unsichtbar. Gemessen: `ADR-0015` (superseded) nackt in einem Slice
+# -> 0 Befunde, derselbe Verweis als Link -> matrix-inactive. `ids` erzwingt
+# den Link, `matrix` beurteilt ihn.
+#
+# Nur die ADR-Klasse. LH-*/slice-* sind ebenfalls linkpflichtig-wuerdig
+# (89 weitere Stellen), aber das ist eigene Aufraeum-Arbeit — ein Modul wird
+# hier erst scharf, wenn seine Klasse sauber ist.
+#
+# Zwei Ausnahmen stehen als Zeilen-Marker im Text, nicht als Pfad-Liste:
+# geplante Vorwaerts-Verweise (ADR-0004, die slice-014 erst bringt) und
+# Protokollzeilen in Geschichte-Sektionen, in denen ein Link rotten wuerde
+# (Kurs §Referenz-Richtung, Regel 5).
+ids:
+  patterns:
+    - regex: 'ADR-\d{4}'
+      target: docs/plan/adr/

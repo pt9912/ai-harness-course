@@ -10,7 +10,7 @@
 | (in `arch-check`) | **Konsist** (in JUnit-Tests integriert), prüft `file.imports` |
 | `make test` | JUnit 5 |
 | `make coverage-gate` | `kover` mit Schwelle |
-| `make coverage-gate-critical` | `kover`, nur `docsearch.service` (`-Pcritical`; ADR-0013: 90 %, Index via CO-001 ausgenommen) |
+| `make coverage-gate-critical` | `kover`, nur `docsearch.service` (`-Pcritical`; [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 90 %, Index via CO-001 ausgenommen) |
 | `make build` | Gradle Build + Distroless |
 
 Übergeordnete Quelle: [`../../harness/README.md`](../../harness/README.md).

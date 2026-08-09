@@ -11,7 +11,7 @@ Ergänzt [`../AGENTS.md`](../AGENTS.md). Bei Konflikt gilt `../AGENTS.md`.
 
 ### K-2 — Layering via Konsist und a-check
 
-ADR-0001 Layering wird von **zwei** Sensoren durchgesetzt, beide hinter
+[ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) Layering wird von **zwei** Sensoren durchgesetzt, beide hinter
 `make arch-check`
 ([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)): die
 Konsist-Tests in `src/test/kotlin/com/example/docsearch/ArchitectureTest.kt`

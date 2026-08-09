@@ -8,7 +8,7 @@
 
 - Lauffähiger DocSearch-Stack in allen sechs Sprach-Skeletten; Go führt als Referenz-Sprache, die übrigen fünf ziehen nach (Meilenstein M1).
 - Indexierung (LH-FA-01) und Suche (LH-FA-02) mit Akzeptanzkriterien grün.
-- ADR-0001, ADR-0002 und ADR-0003 Accepted (siehe [`../../adr/README.md`](../../adr/README.md)).
+- [ADR-0001](../../adr/0001-hexagonale-architektur.md), [ADR-0002](../../adr/0002-modellwahl-embedding.md) und [ADR-0003](../../adr/0003-index-storage-format.md) Accepted (siehe [`../../adr/README.md`](../../adr/README.md)).
 - `make gates` mit Linter, Typecheck, Architekturtest, Coverage (bootstrap-aware), Tests.
 - Erstes Golden Set `evals/golden/welle-1-baseline/` mit drei Cases.
   *(Die Verzeichnisform — `manifest.yaml` + `inputs/` + `expectations/` — kam mit
@@ -17,7 +17,7 @@
 
 ## Was hat funktioniert?
 
-- Adapter-Pattern aus ADR-0001/0002 erlaubte Embedding-Modell-Wechsel binnen 30 min ohne Service-Eingriff.
+- Adapter-Pattern aus [ADR-0001](../../adr/0001-hexagonale-architektur.md)/0002 erlaubte Embedding-Modell-Wechsel binnen 30 min ohne Service-Eingriff.
 - ID-Schema `LH-*` in Make-Target-Kommentaren wurde von zwei Reviewer-Agenten unabhängig korrekt zugeordnet.
 
 ## Was ging anders als geplant?

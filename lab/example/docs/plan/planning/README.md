@@ -24,7 +24,7 @@ mitnimmt.
 
 Die `done/`-Slices sind im Beispiel nur exemplarisch vertreten; welche, sagt
 `make plan-status`. Jede Datei dort trägt eine Closure-Sektion — Slice-Plan wie
-Welle-Plan wie Closure-Notiz —, das verlangt ADR-0011, und
+Welle-Plan wie Closure-Notiz —, das verlangt [ADR-0011](../adr/0011-closure-note-pflicht.md), und
 `make verify-closure-notes` prüft es. `slice-020` ist das Vorbild
 für einen Slice **ohne Wellen-Zugehörigkeit** in einem Repo, das Wellen
 schneidet (Kurs Modul 6 §Wann Arbeit eine Welle braucht). *Wellenlos* ist

@@ -7,7 +7,7 @@ nur durch `git mv` (Kurs
 
 **Welle:** welle-3-skalierung
 
-**Bezug:** LH-QA-01 (Performance), implizit ADR-0003 (Index-Format)
+**Bezug:** LH-QA-01 (Performance), implizit [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format)
 
 **Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Komplexität), [`ARC-002`](../../../../spec/architecture.md#1-komponenten-übersicht) (Index-Layer)
 
@@ -20,7 +20,7 @@ auch bei > 100k Index-Einträgen zu halten.
 
 ## 2. Definition of Done
 
-- [ ] ADR-0004 "ANN-Bibliothek-Wahl" Accepted.
+- [ ] ADR-0004 "ANN-Bibliothek-Wahl" Accepted. <!-- d-check:ignore (ADR entsteht erst in slice-014) -->
 - [ ] Adapter `IndexSearcher` mit Implementierungen `Linear` (Default) und `ANN` (neue).
 - [ ] `make test-determinism` weiterhin grün (deterministischer Tie-Break auch bei ANN).
 - [ ] Replay gegen Golden Set: recall@5 verschlechtert sich um maximal 5 %.
@@ -62,7 +62,7 @@ auch bei > 100k Index-Einträgen zu halten.
 **Status:** alle berührten Sub-Areas GF (siehe
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
 für das DocSearch-Lab als Ganzes). Spec-Anker LH-QA-01 führt
-(Performance-Anforderung), flankiert von ADR-0004 (in Outline), Code folgt —
+(Performance-Anforderung), flankiert von ADR-0004 (in Outline), Code folgt — <!-- d-check:ignore (ADR entsteht erst in slice-014) -->
 kein Reconciliation, keine BF/Hybrid-Begründung nötig.
 
 **Vorgelagert — Sub-Area-Wahl prüfen:** Drei berührte Sub-Areas, alle über der
@@ -74,7 +74,7 @@ Service-Schicht teilen hier dieselbe Konvention und dieselbe Inventur-Linie
 
 **Vorgelagert — offene Beobachtungen sichten:** Register
 (`../observations.md`) durchgegangen. Berührt sind drei Sub-Areas aus der
-Modus-Tabelle (`harness/conventions.md`): *Planning-Lifecycle* (ADR-0004, §3),
+Modus-Tabelle (`harness/conventions.md`): *Planning-Lifecycle* (ADR-0004, §3), <!-- d-check:ignore (ADR entsteht erst in slice-014) -->
 *Implementierung* (`internal/index/`, `internal/service/`, §3) und
 *Replay-/Eval-Infrastruktur* (Replay gegen das Golden Set, recall@5, DoD).
 

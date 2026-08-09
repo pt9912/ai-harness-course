@@ -95,7 +95,7 @@ in jeder Sprache durch einen Test belegt.
       entfernt, sonst misst `coverage-gate-critical` dasselbe wie
       `coverage-gate`.
 - [x] C#: wirksames Coverage-Gate vorhanden (`coverlet.msbuild`, gemessen 2026-07-30).
-- [x] C#: Service-Layer erreicht die 90 % aus ADR-0013 (gemessen 2026-07-30) — die Lücke war der ungetestete E003-Pfad, nicht der Layer-Umfang.
+- [x] C#: Service-Layer erreicht die 90 % aus [ADR-0013](../adr/0013-coverage-schwellen.md) (gemessen 2026-07-30) — die Lücke war der ungetestete E003-Pfad, nicht der Layer-Umfang.
 - [x] Jeder Fehler-Code aus spec §4 (E001, E002, E003, E099) ist in allen sechs Skeletten durch einen Test belegt (2026-07-30).
 - [ ] `make coverage-gate-critical` grün ohne Ausnahmen.
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
@@ -106,5 +106,5 @@ in jeder Sprache durch einen Test belegt.
 | Datum | Ereignis | Verweis |
 |---|---|---|
 | 2026-05-25 | Angelegt | slice-006 (Index-Storage) |
-| 2026-06-02 | Schwelle an ADR-0013 gebunden statt selbst behauptet (Nachtrag, keine Entscheidungs-Änderung) | ADR-0013 |
+| 2026-06-02 | Schwelle an ADR-0013 gebunden statt selbst behauptet (Nachtrag, keine Entscheidungs-Änderung) | ADR-0013 | <!-- d-check:ignore (Protokollzeile: ein Link hier rottet, Kurs §Referenz-Richtung Regel 5) -->
 | 2026-06-03 | Geprüft, weiterhin gültig — Welle 2 läuft | slice-013 |

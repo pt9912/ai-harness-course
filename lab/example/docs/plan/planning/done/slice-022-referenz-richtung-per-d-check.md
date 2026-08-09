@@ -40,6 +40,11 @@ hat `matrix`.
       `harness/conventions.md` (Beispiel der `MR-002`-Klasse), `MR-002`.
 - [x] `BEO-006` geschlossen — `matrix` prüft ADRs als Quellklasse mit.
 - [x] `make verify` grün.
+- [x] `make gates` grün — trivial, der Slice berührt keine Datei eines
+      Sprach-Skeletts außer deren Doku; belegt an `COURSE_LANG=go`. Genannt
+      wird er trotzdem: Ein Gate, das trivial grün ist, ist nicht davon zu
+      unterscheiden, ob es lief oder vergessen wurde (Nachtrag-Argument aus
+      `slice-020`).
 - [x] Closure-Notiz mit den Kongruenz-Ausgaben.
 
 ## 3. Plan (vor Code)
@@ -55,7 +60,7 @@ hat `matrix`.
 
 ## 4. Trigger
 
-- Auslöser ist der Befund aus der Arbeit an ADR-0016: Ein Pfad-Link von einer
+- Auslöser ist der Befund aus der Arbeit an [ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md): Ein Pfad-Link von einer
   ADR auf einen Slice blieb unbemerkt, weil kein Sensor die Zelle trug.
 
 ## 5. Risiken

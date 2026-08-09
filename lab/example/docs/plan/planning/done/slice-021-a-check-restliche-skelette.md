@@ -18,7 +18,7 @@ nur durch `git mv` (Kurs
 ## 1. Ziel
 
 Go, Python, Java und Kotlin bekommen a-check als zweiten Layering-Sensor, wie
-ADR-0016 es entschieden hat. C++ und C# sind verdrahtet und dienen als Vorlage.
+[ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md) es entschieden hat. C++ und C# sind verdrahtet und dienen als Vorlage.
 
 ## 2. Definition of Done
 
@@ -32,7 +32,7 @@ verdrahtet):
       Antwort steht in §3 als Ausgangslage; sie ist am Skelett zu **belegen**,
       nicht zu übernehmen: Verstoß in der umgehenden Schreibweise einbauen,
       beide Sensoren laufen lassen, Ausgabe notieren.
-- [x] `<sprache>/.a-check.yml` — Schichten und Kanten aus ADR-0001, Rollen nur
+- [x] `<sprache>/.a-check.yml` — Schichten und Kanten aus [ADR-0001](../../adr/0001-hexagonale-architektur.md), Rollen nur
       wo der Code sie einlöst.
 - [x] `<sprache>/a-check.mk` per `a-check --print-mk`; Pin im `Makefile`
       (`A_CHECK_IMAGE :=`), nicht im Fragment.
@@ -44,7 +44,7 @@ verdrahtet):
 - [x] Break-Test je Regel rot mit Exit 1, sauberer Baum grün.
 - [x] `make gates` grün.
 - [x] Stand der Umsetzung je Skelett in der Rollout-ADR nachgezogen (die
-      Tabelle ist mit ADR-0016 entfallen, weil der Rollout abgeschlossen ist).
+      Tabelle ist mit [ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md) entfallen, weil der Rollout abgeschlossen ist).
 
 Am Ende aller vier:
 
@@ -76,7 +76,7 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 
 | Datei / Komponente | Änderungs-Art | Begründung |
 |---|---|---|
-| `go/`, `python/`, `java/`, `kotlin/` je `.a-check.yml` | neu | Deklaration je Skelett; eine Scan-Wurzel pro Sprachverzeichnis (ADR-0016 §Entscheidung 2) |
+| `go/`, `python/`, `java/`, `kotlin/` je `.a-check.yml` | neu | Deklaration je Skelett; eine Scan-Wurzel pro Sprachverzeichnis ([ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md) §Entscheidung 2) |
 | dieselben vier je `a-check.mk` | neu | tool-generiert, keine Skript-Kopie |
 | dieselben vier `Makefile` | update | Pin, `include`, `arch-check` mit beiden Sensoren |
 | dieselben vier `harness/README.md`, `AGENTS.md` | update | Bindung und Sensor-Nennung |
@@ -85,18 +85,18 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 
 ## 4. Trigger
 
-- Auslöser ist ADR-0016; C++ und C# sind verdrahtet, die Entscheidung gilt für
+- Auslöser ist [ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md); C++ und C# sind verdrahtet, die Entscheidung gilt für
   alle sechs.
 - Reihenfolge-Vorschlag: Go zuerst — dort hängt die Mono-Scan-Grenze aus
-  ADR-0016 §Entscheidung 2, und die Auflösung läuft ohne `resolution`-Block.
+  [ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md) §Entscheidung 2, und die Auflösung läuft ohne `resolution`-Block.
 
 ## 5. Risiken
 
 | Risiko | Wahrscheinlichkeit | Gegenmaßnahme |
 |---|---|---|
-| Die Deklaration wird gröber als ADR-0001 und ist damit schwächer als der Bestandssensor | mittel | Die Regeln des Bestandssensors vor der Config auflisten und jede gegen eine Kante halten (der Befund aus dem C++-Pilot) |
-| Vier Pins altern unabhängig voneinander | mittel | Anheben trifft alle verdrahteten Skelette in einem Commit; kein Freshness-Sensor deckt das ab (ADR-0016 §Konsequenzen) |
-| Rollen werden gesetzt, wo der Code sie nicht einlöst | mittel | ADR-0016 §Entscheidung 3 — nur modellieren, was gebaut ist; im Zweifel reine Kanten |
+| Die Deklaration wird gröber als [ADR-0001](../../adr/0001-hexagonale-architektur.md) und ist damit schwächer als der Bestandssensor | mittel | Die Regeln des Bestandssensors vor der Config auflisten und jede gegen eine Kante halten (der Befund aus dem C++-Pilot) |
+| Vier Pins altern unabhängig voneinander | mittel | Anheben trifft alle verdrahteten Skelette in einem Commit; kein Freshness-Sensor deckt das ab ([ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md) §Konsequenzen) |
+| Rollen werden gesetzt, wo der Code sie nicht einlöst | mittel | [ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md) §Entscheidung 3 — nur modellieren, was gebaut ist; im Zweifel reine Kanten |
 
 ## 6. Offene Risiken zur Welle-Closure
 

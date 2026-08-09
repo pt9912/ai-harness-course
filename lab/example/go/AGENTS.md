@@ -13,7 +13,7 @@ Ausnahmen werden mit Begründung und ADR-/Slice-ID dort dokumentiert.
 
 ### G-2 — Layering via depguard und a-check
 
-Die Architektur-Constraints aus ADR-0001 werden von **zwei** Sensoren
+Die Architektur-Constraints aus [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) werden von **zwei** Sensoren
 durchgesetzt, beide hinter `make arch-check`
 ([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)):
 `depguard` in `.golangci.yml` und die Deklaration in `.a-check.yml`.

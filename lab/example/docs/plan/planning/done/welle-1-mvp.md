@@ -54,7 +54,7 @@ liegt hier eine Welle vor und nicht wellenlose Arbeit
 |---|---|---|
 | slice-001 | Repo-Bootstrap, Gate-Baseline | LH-QA-02 |
 | slice-002 | Dokument-Parser und Chunking | LH-FA-01 |
-| slice-003 | Embedding-Adapter (ADR-0002) | LH-FA-01 |
+| slice-003 | Embedding-Adapter ([ADR-0002](../../adr/0002-modellwahl-embedding.md)) | LH-FA-01 |
 | slice-004 | Index-Persistenz | LH-FA-01 |
 | slice-005 | Golden Set anlegen | LH-QA-02 |
 | slice-006 | Index-Storage | LH-FA-01 |

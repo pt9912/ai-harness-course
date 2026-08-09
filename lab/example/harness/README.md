@@ -91,7 +91,7 @@ Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 
 DocSearch ist **kein produktives System**. Es ist ein Lehr-Beispiel.
 
 - Keine personenbezogenen Klartext-Daten in Logs (siehe LH-QA-04, geprüft in `make lint`).
-- Embedding-Adapter muss On-Prem-Fähigkeit haben (siehe ADR-0002, InfoSec-Constraint).
+- Embedding-Adapter muss On-Prem-Fähigkeit haben (siehe [ADR-0002](../docs/plan/adr/0002-modellwahl-embedding.md), InfoSec-Constraint).
 - Reindex ist nicht atomar gegenüber paralleler Search — `make test` deckt das ab, Multi-Worker-Setup ist out-of-scope (siehe Lastenheft §5).
 - Tie-Break in sortierenden Operationen ist explizit (AGENTS.md §2.7).
 

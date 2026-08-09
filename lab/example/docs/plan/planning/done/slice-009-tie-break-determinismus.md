@@ -7,7 +7,7 @@ nur durch `git mv` (Kurs
 
 **Welle:** welle-1-mvp
 
-**Bezug:** LH-QA-02 (Reproduzierbarkeit, primär), ADR-0003 (Index-Format).
+**Bezug:** LH-QA-02 (Reproduzierbarkeit, primär), [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format).
 
 **Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
 

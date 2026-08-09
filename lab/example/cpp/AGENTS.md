@@ -15,7 +15,7 @@ ADR-/Slice-ID zentral in `.clang-tidy` dokumentiert.
 
 ### C-2 — Layering via arch-check
 
-Die Architektur-Constraints aus ADR-0001 werden von **zwei** Sensoren
+Die Architektur-Constraints aus [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) werden von **zwei** Sensoren
 durchgesetzt, beide hinter `make arch-check`
 ([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)):
 `.a-check.yml` (Deklaration) und `cmake/arch-check.sh` (Include-Heuristik).

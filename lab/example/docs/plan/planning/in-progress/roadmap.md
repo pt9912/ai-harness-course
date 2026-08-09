@@ -27,7 +27,7 @@ Terminen. Daten sind Schätzungen, korrigierbar.
 
 | Welle | Trigger | Wichtigste Slices | Geschätzter Aufwand |
 |---|---|---|---|
-| welle-3-skalierung | welle-2 done | slice-014 (ANN-Suche, bringt ADR-0004), slice-015 (Multi-Sprach-Adapter-Cleanup) | L |
+| welle-3-skalierung | welle-2 done | slice-014 (ANN-Suche, bringt ADR-0004), slice-015 (Multi-Sprach-Adapter-Cleanup) | L | <!-- d-check:ignore (ADR entsteht erst in slice-014) -->
 | welle-4-betrieb | welle-3 done | slice-016 (k8s-Helm-Chart), slice-017 (OTel-Collector) | M |
 
 ## Meilensteine
