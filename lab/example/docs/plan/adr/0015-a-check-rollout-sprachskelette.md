@@ -66,7 +66,10 @@ kein Altlast-Zustand.
    grün, obwohl der Verstoß compiliert. Eine `constructs`-Regel verbietet die
    Schreibweise und macht damit beide Sensoren erst belastbar. C# hat kein
    Gegenstück: `using` ist immer voll qualifiziert.
-5. **Umsetzung skelettweise**, nicht in einem Zug. Stand:
+5. **Umsetzung skelettweise**, nicht in einem Zug — als
+   [slice-021](../planning/next/slice-021-a-check-restliche-skelette.md), dessen
+   DoD die Schreibweisen-Frage aus den Konsequenzen als **Schritt 0** vor die
+   Config zieht. Stand:
 
    | Skelett | Bestandssensor | a-check |
    |---|---|---|

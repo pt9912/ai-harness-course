@@ -16,8 +16,8 @@ Dokument-Abschnitte. Die Embedding-Erzeugung läuft über ein LLM.
   für Layering-ADRs und Architekturtests.
 - **Realistische ADRs**: Modellwahl für Embeddings, Vektor-Datenbank,
   hexagonale Architektur.
-- **Slices in jedem Lifecycle-Status**: einer in `open/`, einer in
-  `in-progress/`, mehrere in `done/`.
+- **Slices in jedem Lifecycle-Status**: zwei in `open/`, einer in `next/`,
+  einer in `in-progress/`, mehrere in `done/`.
 - **Ein Carveout** für eine Bootstrap-Coverage.
 - **Ein Replay-Beispiel** in `evals/golden/` für [Modul 12](../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md).
 - **Ein fingiertes Review-Fixture** in `exercises/09-review-fixture/`
