@@ -5,7 +5,7 @@
 
 **Welle:** welle-2-qualitaet
 
-**Bezug:** LH-QA-01 (Performance)
+**Bezug:** [LH-QA-01](../../spec/lastenheft.md#lh-qa-01--performance) (Performance)
 
 **Autor:** Kurs-Lab-Übung. **Datum:** 2026-06-02.
 

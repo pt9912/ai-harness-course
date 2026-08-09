@@ -14,7 +14,7 @@ Der Reviewer muss als Eingaben mindestens haben:
 - den Slice-Plan,
 - [`../../AGENTS.md`](../../AGENTS.md) (Hard Rules),
 - [`../../docs/plan/adr/0001-hexagonale-architektur.md`](../../docs/plan/adr/0001-hexagonale-architektur.md) (Layering),
-- [`../../spec/lastenheft.md`](../../spec/lastenheft.md) (LH-FA-02, LH-QA-01).
+- [`../../spec/lastenheft.md`](../../spec/lastenheft.md) ([LH-FA-02](../../spec/lastenheft.md#lh-fa-02--semantische-suche), [LH-QA-01](../../spec/lastenheft.md#lh-qa-01--performance)).
 
 Ohne diesen Kontext findet der Reviewer höchstens die LOW-Probleme —
 das ist selbst Lehrstoff.

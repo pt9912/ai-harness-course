@@ -7,7 +7,7 @@ nur durch `git mv` (Kurs
 
 **Welle:** welle-2-qualitaet
 
-**Bezug:** LH-QA-02 (Reproduzierbarkeit), LH-FA-02 (Suche)
+**Bezug:** [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit), [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche) (Suche)
 
 **Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
 
@@ -63,7 +63,7 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 
 **Status:** alle berührten Sub-Areas GF (siehe
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
-für das DocSearch-Lab als Ganzes). Spec-Anker LH-QA-02 führt
+für das DocSearch-Lab als Ganzes). Spec-Anker [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) führt
 (Determinismus-Anforderung), Code folgt — Test-Infrastruktur (`FsCheck`-
 Adaption) hat zwar Adaptions-Aufwand, aber keinen Inventur-Auftrag
 (es wird neu gebaut, nichts retrofittet).

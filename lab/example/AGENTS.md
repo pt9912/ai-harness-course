@@ -162,8 +162,8 @@ Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 
 - **Ein Gate ist dort definiert, wo seine Bindung steht** — nicht an einem
   zentralen Ort. Welche Bindung ein Target hat, sagt die Spalte *Bindung* in
   [`harness/README.md` §Sensors](harness/README.md#sensors-feedback-gates);
-  von dort führt der Weg weiter, z. B. `lint` → LH-QA-04, `arch-check` →
-  [ADR-0001](docs/plan/adr/0001-hexagonale-architektur.md), `test-determinism` → LH-QA-02, `coverage-gate` und
+  von dort führt der Weg weiter, z. B. `lint` → [LH-QA-04](spec/lastenheft.md#lh-qa-04--audit-datenschutz), `arch-check` →
+  [ADR-0001](docs/plan/adr/0001-hexagonale-architektur.md), `test-determinism` → [LH-QA-02](spec/lastenheft.md#lh-qa-02--reproduzierbarkeit), `coverage-gate` und
   `coverage-gate-critical` → [ADR-0013](docs/plan/adr/0013-coverage-schwellen.md) — und für die Ausnahme des kritischen
   Gates weiter zu
   [CO-001 §Geltungs-Konfiguration](docs/plan/carveouts/CO-001-index-coverage.md#geltungs-konfiguration).

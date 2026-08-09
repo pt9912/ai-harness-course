@@ -7,7 +7,7 @@
 ## Was wurde geliefert?
 
 - Lauffähiger DocSearch-Stack in allen sechs Sprach-Skeletten; Go führt als Referenz-Sprache, die übrigen fünf ziehen nach (Meilenstein M1).
-- Indexierung (LH-FA-01) und Suche (LH-FA-02) mit Akzeptanzkriterien grün.
+- Indexierung ([LH-FA-01](../../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung)) und Suche ([LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche)) mit Akzeptanzkriterien grün.
 - [ADR-0001](../../adr/0001-hexagonale-architektur.md), [ADR-0002](../../adr/0002-modellwahl-embedding.md) und [ADR-0003](../../adr/0003-index-storage-format.md) Accepted (siehe [`../../adr/README.md`](../../adr/README.md)).
 - `make gates` mit Linter, Typecheck, Architekturtest, Coverage (bootstrap-aware), Tests.
 - Erstes Golden Set `evals/golden/welle-1-baseline/` mit drei Cases.

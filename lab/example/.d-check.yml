@@ -138,3 +138,18 @@ ids:
   patterns:
     - regex: 'ADR-\d{4}'
       target: docs/plan/adr/
+    # LH-Kennungen zeigen aufwaerts ins Lastenheft — Ziel und Anker sind
+    # stabil. `docs/plan/adr/**` ist ausgenommen, und zwar zwingend: Jede ADR
+    # ist `Accepted` oder `Superseded`, und einen Link im Koerper zu ergaenzen
+    # ist eine Kern-Aenderung (AGENTS.md §2.5). Nachgestellt — `make
+    # doc-immutable` meldet dafuer `core-drift-vcs`. Die 19 nackten Nennungen
+    # dort sind nicht Nachlaessigkeit, sondern unzulaessig zu beheben.
+    - regex: 'LH-(FA|QA)-\d{2}'
+      target: spec/lastenheft.md
+      exempt-paths: ["docs/plan/adr/**"]
+
+# KEINE Linkpflicht fuer `slice-NNN`. Der Kurs nennt die Slice-ID einen
+# "stabilen Token, auch nachdem die Datei nach done/ wandert" — ein Pfad-Link
+# macht sie instabil: Jeder Zustandswechsel per `git mv` braeche ihn repo-weit.
+# Im ganzen Beispiel gibt es deshalb keinen einzigen Slice-Link, und das bleibt
+# so.

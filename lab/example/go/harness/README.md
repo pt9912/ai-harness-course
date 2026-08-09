@@ -32,7 +32,7 @@ um Go-spezifische Pfade:
 | `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
 | (in `arch-check`) | depguard (Teil von `golangci-lint`) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, vier Deny-Listen |
 | `make test` | `go test ./...` | Unit + Tie-Break |
-| `make test-determinism` | `go test -run TestDeterminism -count=100` | LH-QA-02 |
+| `make test-determinism` | `go test -run TestDeterminism -count=100` | [LH-QA-02](../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
 | `make coverage-gate` | `go test -coverprofile` + Schwelle-Check | [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 70 %, M2 → 80 % |
 | `make coverage-gate-critical` | wie oben, nur Critical-Paths | [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 90 %, Index-Layer via CO-001 ausgenommen |
 | `make build` | Multi-Stage Dockerfile | Distroless, nonroot |

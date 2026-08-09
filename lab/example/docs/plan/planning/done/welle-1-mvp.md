@@ -52,18 +52,18 @@ liegt hier eine Welle vor und nicht wellenlose Arbeit
 
 | Slice | Titel | Bezug |
 |---|---|---|
-| slice-001 | Repo-Bootstrap, Gate-Baseline | LH-QA-02 |
-| slice-002 | Dokument-Parser und Chunking | LH-FA-01 |
-| slice-003 | Embedding-Adapter ([ADR-0002](../../adr/0002-modellwahl-embedding.md)) | LH-FA-01 |
-| slice-004 | Index-Persistenz | LH-FA-01 |
-| slice-005 | Golden Set anlegen | LH-QA-02 |
-| slice-006 | Index-Storage | LH-FA-01 |
-| slice-007 | Top-K-Boundary nachziehen (Lastenheft v0.2.0) | LH-FA-02 |
-| slice-008 | Spec-Stratum-Pflege | LH-QA-02 |
-| slice-009 | Tie-Break-Determinismus | LH-QA-02 |
-| slice-010 | Replay-Harness | LH-QA-02 |
-| slice-011 | Golden-Set-Erweiterung | LH-QA-02 |
-| slice-012 | Such-Endpoint | LH-FA-02 |
+| slice-001 | Repo-Bootstrap, Gate-Baseline | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
+| slice-002 | Dokument-Parser und Chunking | [LH-FA-01](../../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung) |
+| slice-003 | Embedding-Adapter ([ADR-0002](../../adr/0002-modellwahl-embedding.md)) | [LH-FA-01](../../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung) |
+| slice-004 | Index-Persistenz | [LH-FA-01](../../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung) |
+| slice-005 | Golden Set anlegen | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
+| slice-006 | Index-Storage | [LH-FA-01](../../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung) |
+| slice-007 | Top-K-Boundary nachziehen (Lastenheft v0.2.0) | [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche) |
+| slice-008 | Spec-Stratum-Pflege | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
+| slice-009 | Tie-Break-Determinismus | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
+| slice-010 | Replay-Harness | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
+| slice-011 | Golden-Set-Erweiterung | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
+| slice-012 | Such-Endpoint | [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche) |
 
 Der Zustand jedes Slice ist sein Lifecycle-Verzeichnis und wird hier **nicht**
 gespiegelt — eine Status-Spalte driftete gegen die Verzeichnisse.

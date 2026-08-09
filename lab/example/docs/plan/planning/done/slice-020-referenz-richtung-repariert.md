@@ -7,7 +7,7 @@ nur durch `git mv` (Kurs
 
 **Welle:** ohne Welle
 
-**Bezug:** LH-QA-02 (Reproduzierbarkeit, primär — eine Spec, die auf Slices zeigt, ist nicht reproduzierbar lesbar), [ADR-0011](../../adr/0011-closure-note-pflicht.md) (Closure-Note-Pflicht, sekundär)
+**Bezug:** [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit, primär — eine Spec, die auf Slices zeigt, ist nicht reproduzierbar lesbar), [ADR-0011](../../adr/0011-closure-note-pflicht.md) (Closure-Note-Pflicht, sekundär)
 
 **Berührte Spec-Stellen:** [`spezifikation.md` §7](../../../../spec/spezifikation.md#7-historie) (Historie — die Sektion vergibt keine Kennungen)
 

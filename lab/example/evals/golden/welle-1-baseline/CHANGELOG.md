@@ -24,9 +24,9 @@ Befunde auf den falschen Case.
 
 Welle-1-Closure-Replay. Drei Cases:
 
-- case-001: Happy Path (LH-FA-02)
-- case-002: Boundary (`k > 100`, clamped auf 100; LH-FA-02 Boundary)
-- case-003: Negative (leere Query → E002; LH-FA-02 Negative)
+- case-001: Happy Path (LH-FA-02) <!-- d-check:ignore (Protokoll-Fixture, ein Link hier rottet) -->
+- case-002: Boundary (`k > 100`, clamped auf 100; LH-FA-02 Boundary) <!-- d-check:ignore (Protokoll-Fixture, ein Link hier rottet) -->
+- case-003: Negative (leere Query → E002; LH-FA-02 Negative) <!-- d-check:ignore (Protokoll-Fixture, ein Link hier rottet) -->
 
 Modellversion: `local-embed-v3@2026-05-22`. Determinismus-Strategie aus
 [ADR-0003](../../../docs/plan/adr/0003-index-storage-format.md) + slice-009 (Tie-Break-Determinismus).

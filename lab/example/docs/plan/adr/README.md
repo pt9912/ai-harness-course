@@ -3,11 +3,11 @@
 | ID | Titel | Status | Bezug |
 |---|---|---|---|
 | [0001](0001-hexagonale-architektur.md) | Hexagonale Architektur mit Layering | Accepted (2026-05-15) | LH-FA-* |
-| [0002](0002-modellwahl-embedding.md) | Modellwahl für Embedding | Accepted (2026-05-22) | LH-FA-01, LH-QA-01 |
-| [0003](0003-index-storage-format.md) | Index-Storage-Format Custom Binary v1 | Accepted (2026-05-25) | LH-QA-01, LH-QA-02 |
-| [0011](0011-closure-note-pflicht.md) | Closure-Note-Pflicht für `done/`-Slices | Accepted (2026-06-02) | LH-QA-02, Modul 1 §Closure, Modul 11 |
+| [0002](0002-modellwahl-embedding.md) | Modellwahl für Embedding | Accepted (2026-05-22) | [LH-FA-01](../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung), [LH-QA-01](../../../spec/lastenheft.md#lh-qa-01--performance) |
+| [0003](0003-index-storage-format.md) | Index-Storage-Format Custom Binary v1 | Accepted (2026-05-25) | [LH-QA-01](../../../spec/lastenheft.md#lh-qa-01--performance), [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
+| [0011](0011-closure-note-pflicht.md) | Closure-Note-Pflicht für `done/`-Slices | Accepted (2026-06-02) | [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit), Modul 1 §Closure, Modul 11 |
 | [0012](0012-index-write-strategy.md) | Index-Write-Strategie (Temp-File + Atomic Rename) | Accepted (2026-06-02) | LH-FA-IDX-003, ADR-0003, Modul 15 |
-| [0013](0013-coverage-schwellen.md) | Coverage-Schwellen — bootstrap-aware 70 %, kritisch 90 % | Accepted (2026-06-02) | CO-001, LH-QA-02, Modul 13 |
+| [0013](0013-coverage-schwellen.md) | Coverage-Schwellen — bootstrap-aware 70 %, kritisch 90 % | Accepted (2026-06-02) | CO-001, [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit), Modul 13 |
 | [0014](0014-a-check-zweites-layering-gate.md) | a-check als zweites Layering-Gate im C++-Skelett | Superseded by 0015 (2026-08-09) | ADR-0001, Modul 4 |
 | [0015](0015-a-check-rollout-sprachskelette.md) | a-check als zweites Layering-Gate — Rollout über die Sprach-Skelette | Superseded by 0016 (2026-08-09) | ADR-0001, Supersedes 0014 |
 | [0016](0016-a-check-in-allen-skeletten.md) | a-check ist das zweite Layering-Gate in allen Sprach-Skeletten | Superseded by 0017 (2026-08-09) | ADR-0001, Supersedes 0015 |

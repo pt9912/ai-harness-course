@@ -14,7 +14,7 @@ Sprach-spezifischer Einstieg. Übergeordnete Quelle:
 | `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
 | (in `arch-check`) | `lint-imports` (import-linter) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, aufgezählte Contracts; sieht jede Import-Schreibweise |
 | `make test` | `pytest` | Unit + Tie-Break |
-| `make test-determinism` | `pytest -k determinism --count=100` (pytest-repeat) | LH-QA-02 |
+| `make test-determinism` | `pytest -k determinism --count=100` (pytest-repeat) | [LH-QA-02](../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
 | `make coverage-gate` | `pytest --cov` mit Schwelle | [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 70 %, M2 → 80 % |
 | `make coverage-gate-critical` | wie oben, nur `docsearch/service` | [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 90 %, Index-Layer via CO-001 ausgenommen |
 | `make build` | Multi-Stage Dockerfile | python-slim, nonroot |

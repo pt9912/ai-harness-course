@@ -29,7 +29,7 @@ gar keine Regel und wird nur von a-check geprüft.
 `Directory.Packages.props` definiert alle `PackageVersion`-Pins.
 Einzelne `.csproj`-Dateien nutzen `PackageReference` ohne `Version`-Attribut.
 `RestoreLockedMode=true` verlangt aktuelle `packages.lock.json`.
-Begründung: Reproduzierbarkeit (LH-QA-03).
+Begründung: Reproduzierbarkeit ([LH-QA-03](../spec/lastenheft.md#lh-qa-03--container-reproduzierbarkeit)).
 
 ### C-4 — Stable-Sort plus Tie-Break
 

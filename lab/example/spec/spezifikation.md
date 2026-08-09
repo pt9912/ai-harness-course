@@ -43,7 +43,7 @@ Embedding-Latenz (≈ 50 ms / Abschnitt).
 2. `k = min(k, MAX_TOPK)`. Wenn geklemmt: Response-Header `X-Topk-Clamped: <MAX_TOPK>`.
 3. Embedding für `q` berechnen.
 4. Cosinus-Ähnlichkeit zwischen `q`-Embedding und allen Index-Einträgen berechnen.
-5. Top `k` nach Score sortieren. **Tie-Break:** bei gleichem Score nach `(doc_path, section_index)` lexikographisch (deterministisch, siehe LH-QA-02).
+5. Top `k` nach Score sortieren. **Tie-Break:** bei gleichem Score nach `(doc_path, section_index)` lexikographisch (deterministisch, siehe [LH-QA-02](lastenheft.md#lh-qa-02--reproduzierbarkeit)).
 6. Antwort `{"results": [{"doc": ..., "section": ..., "score": ...}, ...]}` zurückgeben.
 
 **Komplexität:** O(n) in Anzahl Index-Einträge. Optimierung über
@@ -118,10 +118,10 @@ Ergebnis an der Reihenfolge, in der das Dateisystem den Scan beantwortet.
 | ID | Name | Wert | Begründung |
 |---|---|---|---|
 | `SPEC-004` | `EMBEDDING_DIM` | 1024 | Vorgegeben durch das Embedding-Modell. |
-| `SPEC-005` | `MAX_TOPK` | 100 | Lasttest-Grenze, höher → p95 reißt LH-QA-01. |
+| `SPEC-005` | `MAX_TOPK` | 100 | Lasttest-Grenze, höher → p95 reißt [LH-QA-01](lastenheft.md#lh-qa-01--performance). |
 | `SPEC-006` | `SECTION_MAX_CHARS` | 4000 | Embedding-Modell-Kontext-Fenster. |
 | `SPEC-007` | `QUERY_MAX_CHARS` | 1000 | UX + Embedding-Grenzen. |
-| `SPEC-008` | `USER_HASH_SALT` | aus `config/secrets.env`, niemals im Repo. | DSGVO + LH-QA-04. |
+| `SPEC-008` | `USER_HASH_SALT` | aus `config/secrets.env`, niemals im Repo. | DSGVO + [LH-QA-04](lastenheft.md#lh-qa-04--audit-datenschutz). |
 | `SPEC-009` | `INDEX_STORAGE` | `data/index/index.bin` | Gewähltes Index-Storage-Format. |
 
 ## 4. Fehler-Codes und Logging-Felder
@@ -137,10 +137,10 @@ Ergebnis an der Reihenfolge, in der das Dateisystem den Scan beantwortet.
 
 | ID | Span | Pflicht-Attribute | Quelle |
 |---|---|---|---|
-| `SPEC-014` | `docsearch.reindex` | `indexed_docs`, `indexed_sections`, `duration_ms`, `embedding_calls` | LH-FA-01 |
-| `SPEC-015` | `docsearch.search` | `q_hash`, `k`, `k_clamped`, `result_count`, `duration_ms`, `top_score` | LH-FA-02 |
-| `SPEC-016` | `docsearch.embedding` | `model`, `cache_hit`, `tokens`, `duration_ms`, `cost_usd_estimate` | LH-FA-01, LH-FA-02 |
-| `SPEC-017` | `docsearch.audit` | `event`, `user_id_hash`, `q_hash`, `result_count`, `latency_ms` | LH-FA-03 |
+| `SPEC-014` | `docsearch.reindex` | `indexed_docs`, `indexed_sections`, `duration_ms`, `embedding_calls` | [LH-FA-01](lastenheft.md#lh-fa-01--dokument-indexierung) |
+| `SPEC-015` | `docsearch.search` | `q_hash`, `k`, `k_clamped`, `result_count`, `duration_ms`, `top_score` | [LH-FA-02](lastenheft.md#lh-fa-02--semantische-suche) |
+| `SPEC-016` | `docsearch.embedding` | `model`, `cache_hit`, `tokens`, `duration_ms`, `cost_usd_estimate` | [LH-FA-01](lastenheft.md#lh-fa-01--dokument-indexierung), [LH-FA-02](lastenheft.md#lh-fa-02--semantische-suche) |
+| `SPEC-017` | `docsearch.audit` | `event`, `user_id_hash`, `q_hash`, `result_count`, `latency_ms` | [LH-FA-03](lastenheft.md#lh-fa-03--audit-logging) |
 
 ## 6. Externe Verträge
 
@@ -157,7 +157,7 @@ Ergebnis an der Reihenfolge, in der das Dateisystem den Scan beantwortet.
 | 2026-05-22 | `MAX_TOPK = 100` ergänzt |
 | 2026-05-22 | §3 `EMBEDDING_DIM`, `SECTION_MAX_CHARS` festgeschrieben |
 | 2026-05-25 | §3 `INDEX_STORAGE`, §6 Vektor-Storage-Format festgeschrieben |
-| 2026-05-26 | §1 LH-FA-02.a Schritt 5: Tie-Break präzisiert |
+| 2026-05-26 | §1 [LH-FA-02](lastenheft.md#lh-fa-02--semantische-suche).a Schritt 5: Tie-Break präzisiert |
 | 2026-06-02 | `docsearch.audit`-Span ergänzt |
 | 2026-06-02 | §1 Schreib-Semantik: Atomic-Replace präzisiert |
 | 2026-06-03 | Abwärtszeiger auf einen Slice-Plan entfernt (Referenz-Richtung) |

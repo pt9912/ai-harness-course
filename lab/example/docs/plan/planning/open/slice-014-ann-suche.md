@@ -7,7 +7,7 @@ nur durch `git mv` (Kurs
 
 **Welle:** welle-3-skalierung
 
-**Bezug:** LH-QA-01 (Performance), implizit [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format)
+**Bezug:** [LH-QA-01](../../../../spec/lastenheft.md#lh-qa-01--performance) (Performance), implizit [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format)
 
 **Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Komplexität), [`ARC-002`](../../../../spec/architecture.md#1-komponenten-übersicht) (Index-Layer)
 
@@ -50,7 +50,7 @@ auch bei > 100k Index-Einträgen zu halten.
 ## 6. Risiken und offene Punkte
 
 - ANN-Bibliotheken haben unterschiedliche Lizenz-Charakteristiken — InfoSec-Review nötig.
-- Deterministischer Tie-Break ist bei ANN nicht-trivial (siehe LH-QA-02).
+- Deterministischer Tie-Break ist bei ANN nicht-trivial (siehe [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit)).
 - Möglicher Carveout, wenn recall@5 nicht haltbar.
 
 ## 7. Closure-Notiz
@@ -61,7 +61,7 @@ auch bei > 100k Index-Einträgen zu halten.
 
 **Status:** alle berührten Sub-Areas GF (siehe
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
-für das DocSearch-Lab als Ganzes). Spec-Anker LH-QA-01 führt
+für das DocSearch-Lab als Ganzes). Spec-Anker [LH-QA-01](../../../../spec/lastenheft.md#lh-qa-01--performance) führt
 (Performance-Anforderung), flankiert von ADR-0004 (in Outline), Code folgt — <!-- d-check:ignore (ADR entsteht erst in slice-014) -->
 kein Reconciliation, keine BF/Hybrid-Begründung nötig.
 

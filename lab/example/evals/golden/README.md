@@ -6,7 +6,7 @@ Replay-Eingaben mit Erwartungen für [Modul 12](../../../../kurs/de/04-qualitaet
 
 | Set | Beschreibung |
 |---|---|
-| [`welle-1-baseline/`](welle-1-baseline/) | Baseline nach Welle-1-Abschluss: Happy + Boundary + Negative für LH-FA-02 — `manifest.yaml` + `inputs/case-{001,002,003}.json` + `expectations/case-{001,002,003}.json` + `CHANGELOG.md` |
+| [`welle-1-baseline/`](welle-1-baseline/) | Baseline nach Welle-1-Abschluss: Happy + Boundary + Negative für [LH-FA-02](../../spec/lastenheft.md#lh-fa-02--semantische-suche) — `manifest.yaml` + `inputs/case-{001,002,003}.json` + `expectations/case-{001,002,003}.json` + `CHANGELOG.md` |
 
 **Verzeichnisform.** Bis Kurs-Welle 9 lag jedes Set als einzelne JSON-Datei.
 Seit dem Lab-Ausbau (Kurs-Welle 9) folgen die Sets dem Schema aus

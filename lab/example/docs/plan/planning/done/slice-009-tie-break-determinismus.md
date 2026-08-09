@@ -7,7 +7,7 @@ nur durch `git mv` (Kurs
 
 **Welle:** welle-1-mvp
 
-**Bezug:** LH-QA-02 (Reproduzierbarkeit, primär), [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format).
+**Bezug:** [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit, primär), [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format).
 
 **Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
 
@@ -30,7 +30,7 @@ sortiert werden (siehe Lastenheft, Spezifikation §1).
 
 - [x] `internal/index/index.go`: Tie-Break implementiert (`sort.SliceStable` + lexikographischer Zweitschlüssel).
 - [x] `make test-determinism` läuft 100 Iterationen identische Eingabe, vergleicht Hashes.
-- [x] Doku-Update in `spec/spezifikation.md` §1 LH-FA-02.a.
+- [x] Doku-Update in `spec/spezifikation.md` §1 [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche).a.
 - [x] `make gates` grün.
 - [x] Closure-Notiz (siehe §7).
 
@@ -42,7 +42,7 @@ sortiert werden (siehe Lastenheft, Spezifikation §1).
 | `internal/index/index_test.go` | update | Test mit zwei identischen Scores |
 | `internal/service/search_test.go` | update | Tie-Break-Reihenfolge auf Service-Ebene abgesichert |
 | `<sprache>/Makefile` | update | `test-determinism` als eigenes Target |
-| `spec/spezifikation.md` | update | §1 LH-FA-02.a Schritt 5 präzisiert |
+| `spec/spezifikation.md` | update | §1 [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche).a Schritt 5 präzisiert |
 
 ## 4. Trigger
 

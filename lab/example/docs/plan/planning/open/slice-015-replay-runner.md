@@ -8,7 +8,7 @@ nur durch `git mv` (Kurs
 **Welle:** ohne Welle — die Closure-Bedingung ist die DoD dieses Slice, es
 gibt keine darüber hinausgehende repo-weite Zusage.
 
-**Bezug:** LH-QA-02 (Determinismus), [CO-002](../../carveouts/CO-002-replay-verifikation.md)
+**Bezug:** [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Determinismus), [CO-002](../../carveouts/CO-002-replay-verifikation.md)
 
 **Berührte Spec-Stellen:** —
 

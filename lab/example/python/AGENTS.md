@@ -33,7 +33,7 @@ Schreiben Sie kanten-relevante Importe deshalb absolut und einzeln.
 ### P-3 — Kein `.venv` im Repo, kein `pip install`
 
 Toolchain läuft über `uv` im Docker-Image (siehe AGENTS.md §2.1). Lokales
-`pip install ...` ist verboten — bricht Reproduzierbarkeit (LH-QA-03).
+`pip install ...` ist verboten — bricht Reproduzierbarkeit ([LH-QA-03](../spec/lastenheft.md#lh-qa-03--container-reproduzierbarkeit)).
 
 ### P-4 — Sortier-Stabilität explizit
 
