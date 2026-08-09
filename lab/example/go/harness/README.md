@@ -10,7 +10,7 @@ Wie in [`../../harness/README.md`](../../harness/README.md), erweitert
 um Go-spezifische Pfade:
 
 - `go/.golangci.yml` — Linter + depguard (Layering-Gate, Deny-Listen, ADR-0001).
-- `go/.a-check.yml` — Layering-Gate, deklarativer Sensor (ADR-0001, Werkzeugwahl [ADR-0015](../../docs/plan/adr/0015-a-check-rollout-sprachskelette.md)).
+- `go/.a-check.yml` — Layering-Gate, deklarativer Sensor (ADR-0001, Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md)).
 - `go/go.mod`, `go/go.sum` — Toolchain-Pin und Lockfile.
 
 ## Guides (Go-spezifisch)
@@ -28,7 +28,7 @@ um Go-spezifische Pfade:
 | `make lint` | `golangci-lint` | Stil + Suppression-Gate |
 | `make typecheck` | `go vet` + Build | Statisch |
 | `make arch-check` | beide Sensoren unten | ADR-0001 Layering |
-| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | ADR-0001 Layering, deklariert — Werkzeugwahl [ADR-0015](../../docs/plan/adr/0015-a-check-rollout-sprachskelette.md) |
+| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | ADR-0001 Layering, deklariert — Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md) |
 | `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
 | (in `arch-check`) | depguard (Teil von `golangci-lint`) | ADR-0001 Layering, vier Deny-Listen |
 | `make test` | `go test ./...` | Unit + Tie-Break |

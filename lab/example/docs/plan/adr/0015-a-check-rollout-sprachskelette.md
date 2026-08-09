@@ -1,6 +1,6 @@
 # ADR-0015: a-check als zweites Layering-Gate — Rollout über die Sprach-Skelette
 
-**Status:** Accepted
+**Status:** Superseded by [ADR-0016](0016-a-check-in-allen-skeletten.md)
 
 **Datum:** 2026-08-09
 
@@ -178,3 +178,4 @@ kein Altlast-Zustand.
 | 2026-08-09 | Beleg | Die Asymmetrie der beiden Sensoren in beide Richtungen gemessen: `typeof(DocSearch.UI.Handler)` ohne `using` — a-check 0 Befunde, NetArchTest `Service_Should_Not_Depend_On_UI` rot; `Types → Service` — a-check rot, NetArchTest ohne Regel |
 | 2026-08-09 | Nachtrag | Review-Befunde: elternrelativer Include passierte beide C++-Sensoren (`constructs`-Regel ergänzt); Pin auf v0.16.0 korrigiert — der `--print-mk`-Versatz hatte auf den Vorgänger gezeigt; `make arch-check` führt beide Sensoren vollständig aus; AGENTS.md und README beider Skelette nachgezogen |
 | 2026-08-09 | Rollout | Go, Python, Kotlin und Java verdrahtet; Stand-Tabelle vollständig, Re-Evaluierungs-Trigger „Alle sechs verdrahtet" damit eingetreten. Zwei Grenzen kamen dabei dazu: Python (a-check ist dort der schwächere Sensor) und Kotlin (geteilter blinder Fleck, weil Konsists Regeln gegen `file.imports` geschrieben sind) |
+| 2026-08-09 | Superseded | [ADR-0016](0016-a-check-in-allen-skeletten.md) — Rollout abgeschlossen, die Stand-Tabelle in §Entscheidung 5 ist gegenstandslos |

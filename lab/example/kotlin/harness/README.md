@@ -5,7 +5,7 @@
 | `make lint` | `detekt` (inkl. Suppression-Verbot) |
 | `make typecheck` | Kotlin-Compiler |
 | `make arch-check` | beide Sensoren unten |
-| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) — Werkzeugwahl [ADR-0015](../../docs/plan/adr/0015-a-check-rollout-sprachskelette.md) |
+| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) — Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md) |
 | `make a-check-graph` | a-check `--print-graph`, Schichtbild aus derselben Deklaration |
 | (in `arch-check`) | **Konsist** (in JUnit-Tests integriert), prüft `file.imports` |
 | `make test` | JUnit 5 |

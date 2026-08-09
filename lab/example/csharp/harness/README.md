@@ -7,7 +7,7 @@
 | `make lint` | `dotnet format` + `solid-suppression-gate` (Custom) | — |
 | `make typecheck` | `dotnet build -warnaserror` | — |
 | `make arch-check` | beide Sensoren unten | ADR-0001 Layering |
-| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | ADR-0001 Layering, deklariert — Werkzeugwahl [ADR-0015](../../docs/plan/adr/0015-a-check-rollout-sprachskelette.md) |
+| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | ADR-0001 Layering, deklariert — Werkzeugwahl [ADR-0016](../../docs/plan/adr/0016-a-check-in-allen-skeletten.md) |
 | `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
 | (in `arch-check`) | **NetArchTest** (in xUnit-Tests) | ADR-0001 Layering, vier Namespace-Paare |
 | `make test` | `dotnet test` (xUnit) | — |

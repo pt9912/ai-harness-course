@@ -13,7 +13,7 @@ Ergänzt [`../AGENTS.md`](../AGENTS.md). Bei Konflikt gilt `../AGENTS.md`.
 
 ADR-0001 Layering wird von **zwei** Sensoren durchgesetzt, beide hinter
 `make arch-check`
-([ADR-0015](../docs/plan/adr/0015-a-check-rollout-sprachskelette.md)): die
+([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)): die
 Konsist-Tests in `src/test/kotlin/com/example/docsearch/ArchitectureTest.kt`
 und die Deklaration in `.a-check.yml`. Verstöße brechen `make arch-check`.
 

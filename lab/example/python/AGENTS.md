@@ -16,7 +16,7 @@ oder `[tool.mypy.overrides]` mit Begründung und Slice-ID.
 
 Architektur-Constraints aus ADR-0001 werden von **zwei** Sensoren durchgesetzt,
 beide hinter `make arch-check`
-([ADR-0015](../docs/plan/adr/0015-a-check-rollout-sprachskelette.md)):
+([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)):
 `import-linter` mit `importlinter.cfg` und die Deklaration in `.a-check.yml`.
 Verstöße brechen `make arch-check`.
 

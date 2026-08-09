@@ -13,7 +13,7 @@ help: ## Targets anzeigen
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-28s %s\n", $$1, $$2}'
 
-# Zweites Layering-Gate (ADR-0015). `a-check.mk` ist tool-generiert
+# Zweites Layering-Gate (ADR-0016). `a-check.mk` ist tool-generiert
 # (`a-check --print-mk`), die Regeln stehen in `.a-check.yml` — beide nicht
 # im Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment;
 # gepinnt ist v0.16.0, der geprüfte Stand. Anheben ist ein eigener Commit.
@@ -36,7 +36,7 @@ typecheck: ## dotnet build -warnaserror, Lock-Mode aktiv
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(DOTNET_SDK) \
 		dotnet build DocSearch.sln -warnaserror /p:RestoreLockedMode=true
 
-# Beide Sensoren laufen, auch wenn der erste rot ist: ADR-0015 laesst die
+# Beide Sensoren laufen, auch wenn der erste rot ist: ADR-0016 laesst die
 # beiden Befund-Mengen vergleichen, und ein Abbruch nach dem ersten zeigt
 # immer nur eine.
 arch-check: ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + NetArchTest (Test-Framework)

@@ -7,7 +7,7 @@ nur durch `git mv` (Kurs
 
 **Welle:** ohne Welle — die Closure-Bedingung ist die DoD dieses Slice.
 
-**Bezug:** [ADR-0015](../../adr/0015-a-check-rollout-sprachskelette.md)
+**Bezug:** [ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md)
 (Entscheidung und Stand-Tabelle), [ADR-0001](../../adr/0001-hexagonale-architektur.md)
 (die Aussage, die beide Sensoren prüfen)
 
@@ -18,7 +18,7 @@ nur durch `git mv` (Kurs
 ## 1. Ziel
 
 Go, Python, Java und Kotlin bekommen a-check als zweiten Layering-Sensor, wie
-ADR-0015 es entschieden hat. C++ und C# sind verdrahtet und dienen als Vorlage.
+ADR-0016 es entschieden hat. C++ und C# sind verdrahtet und dienen als Vorlage.
 
 ## 2. Definition of Done
 
@@ -43,13 +43,13 @@ verdrahtet):
 - [x] `<sprache>/AGENTS.md` §C-2 nennt beide Sensoren.
 - [x] Break-Test je Regel rot mit Exit 1, sauberer Baum grün.
 - [x] `make gates` grün.
-- [x] Stand-Tabelle in ADR-0015 §Entscheidung 5 nachgezogen.
+- [x] Stand-Tabelle in ADR-0016 §Entscheidung 5 nachgezogen.
 
-Am Ende aller vier — **noch offen**:
+Am Ende aller vier:
 
-- [ ] Nachfolge-ADR, die die Stand-Tabelle durch die schlichte Aussage ersetzt
-      (Re-Evaluierungs-Trigger von ADR-0015).
-- [ ] Closure-Notiz mit den Break-Test-Ausgaben je Skelett.
+- [x] Nachfolge-ADR, die die Stand-Tabelle durch die schlichte Aussage ersetzt
+      (Re-Evaluierungs-Trigger der abgelösten ADR) — [ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md).
+- [x] Closure-Notiz mit den Break-Test-Ausgaben je Skelett (§9).
 
 ## 3. Plan (vor Code)
 
@@ -75,7 +75,7 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 
 | Datei / Komponente | Änderungs-Art | Begründung |
 |---|---|---|
-| `go/`, `python/`, `java/`, `kotlin/` je `.a-check.yml` | neu | Deklaration je Skelett; eine Scan-Wurzel pro Sprachverzeichnis (ADR-0015 §1) |
+| `go/`, `python/`, `java/`, `kotlin/` je `.a-check.yml` | neu | Deklaration je Skelett; eine Scan-Wurzel pro Sprachverzeichnis (ADR-0016 §1) |
 | dieselben vier je `a-check.mk` | neu | tool-generiert, keine Skript-Kopie |
 | dieselben vier `Makefile` | update | Pin, `include`, `arch-check` mit beiden Sensoren |
 | dieselben vier `harness/README.md`, `AGENTS.md` | update | Bindung und Sensor-Nennung |
@@ -84,18 +84,18 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 
 ## 4. Trigger
 
-- Auslöser ist ADR-0015; C++ und C# sind verdrahtet, die Entscheidung gilt für
+- Auslöser ist ADR-0016; C++ und C# sind verdrahtet, die Entscheidung gilt für
   alle sechs.
 - Reihenfolge-Vorschlag: Go zuerst — dort hängt die Mono-Scan-Grenze aus
-  ADR-0015 §1, und die Auflösung läuft ohne `resolution`-Block.
+  ADR-0016 §1, und die Auflösung läuft ohne `resolution`-Block.
 
 ## 5. Risiken
 
 | Risiko | Wahrscheinlichkeit | Gegenmaßnahme |
 |---|---|---|
 | Die Deklaration wird gröber als ADR-0001 und ist damit schwächer als der Bestandssensor | mittel | Die Regeln des Bestandssensors vor der Config auflisten und jede gegen eine Kante halten (der Befund aus dem C++-Pilot) |
-| Vier Pins altern unabhängig voneinander | mittel | Anheben trifft alle verdrahteten Skelette in einem Commit; kein Freshness-Sensor deckt das ab (ADR-0015 §Konsequenzen) |
-| Rollen werden gesetzt, wo der Code sie nicht einlöst | mittel | ADR-0015 §Entscheidung 2 — nur modellieren, was gebaut ist; im Zweifel reine Kanten |
+| Vier Pins altern unabhängig voneinander | mittel | Anheben trifft alle verdrahteten Skelette in einem Commit; kein Freshness-Sensor deckt das ab (ADR-0016 §Konsequenzen) |
+| Rollen werden gesetzt, wo der Code sie nicht einlöst | mittel | ADR-0016 §Entscheidung 2 — nur modellieren, was gebaut ist; im Zweifel reine Kanten |
 
 ## 6. Offene Risiken zur Welle-Closure
 
@@ -134,4 +134,46 @@ Konvention entsteht nicht neu, sie muss den vorhandenen Stand einholen.
 
 ## 9. Closure
 
-- Noch offen.
+**Ergebnis.** Alle sechs Skelette tragen a-check als zweiten Layering-Sensor
+hinter `make arch-check`. Die Entscheidung steht in
+[ADR-0016](../../adr/0016-a-check-in-allen-skeletten.md); dieser Slice hat sie
+umgesetzt und dabei zwei Dinge korrigiert, die vorher als sicher galten.
+
+**Schritt 0 hat je Skelett etwas geändert, nicht nur dokumentiert.**
+
+| Skelett | Ergebnis von Schritt 0 | Folge für die Config |
+|---|---|---|
+| Go | Der Compiler weist relative Importe ab (`relative import paths are not supported in module mode`); Dot- und Blank-Import bleiben volle Modulpfade | keine `resolution`, keine `constructs` — die Voraussetzung erzwingt die Sprache |
+| Python | Drei umgehende Schreibweisen gemessen, je 0 a-check-Befunde: `from ..ui import x`, `from docsearch import ui`, `import a, b` | keine Zusatzregel; `import-linter` fängt alle drei, a-check ist hier der schwächere Sensor — als Grenze deklariert |
+| Kotlin | `com.example.docsearch.ui.Handler` ohne Import: compiliert, a-check 0 Befunde, Konsist `BUILD SUCCESSFUL` — **geteilter blinder Fleck** | `constructs`-Regel für die Richtung auf `ui`; die übrigen Kanten bleiben ausgewiesen offen |
+| Java | Dieselbe Sonde: a-check 0 Befunde, ArchUnit `serviceDoesNotDependOnUi` rot (2 Verstöße) — Bytecode deckt es ab | keine Zusatzregel nötig |
+
+**Break-Tests, je Regel des Bestandssensors, alle rot mit Exit 1:**
+
+- Go — vier depguard-Blöcke (`ui→index`, `ui→embedding`, `service→ui`,
+  `index→service`, `embedding→index`) plus `types→service`, für das depguard
+  keine Deny-Liste führt.
+- Python — die Contracts von `importlinter.cfg`; zusätzlich das neue Modul
+  `docsearch.audit` mit Import auf `docsearch.ui`: a-check exit 1,
+  `import-linter` „4 kept, 0 broken".
+- Kotlin — alle fünf Konsist-Tests, plus `types→service` (kein Test dafür),
+  plus der FQN-Fall über `construct-leak`.
+- Java — alle vier ArchUnit-Regeln plus `types→service` (keine Regel dafür).
+- Sauberer Baum: in allen sechs Skeletten `0 Befund(e)`.
+
+**Das Muster, das die Reihe ergeben hat.** a-check ist blind für die
+Schreibweise, die an der Import-Anweisung vorbei koppelt; ob daraus eine
+Gate-Lücke wird, entscheidet der Bestandssensor. Das Kriterium dafür ist
+**nicht** die Werkzeugklasse — Konsist könnte den AST lesen und tut es in seinen
+Regeln nicht — sondern die Bauform der Regel. Sie steht in keinem Datenblatt,
+nur im Regel-Quelltext des jeweiligen Skeletts.
+
+**Gates zum Zeitpunkt der Closure:** `make gates` in allen sechs Skeletten grün,
+`make arch-check` je beide Sensoren grün, Root `make check` 0 ERROR / 0 WARN,
+`make verify` ok.
+
+**Offen geblieben, bewusst:** Konsists Regeln auf Typ-Referenzen statt
+`file.imports` zu heben (eigener Slice, siehe §7) und die vier Befunde an
+a-check selbst — Laufzeit-Diagnose der Heuristik-Grenze, Mehrfach-Direktiven pro
+Zeile, `--print-mk`-Digest-Versatz, `docker` statt `$(DOCKER)`. Beides liegt
+außerhalb dieses Repos bzw. dieses Slice.

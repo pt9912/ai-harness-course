@@ -9,7 +9,8 @@
 | [0012](0012-index-write-strategy.md) | Index-Write-Strategie (Temp-File + Atomic Rename) | Accepted (2026-06-02) | LH-FA-IDX-003, ADR-0003, Modul 15 |
 | [0013](0013-coverage-schwellen.md) | Coverage-Schwellen — bootstrap-aware 70 %, kritisch 90 % | Accepted (2026-06-02) | CO-001, LH-QA-02, Modul 13 |
 | [0014](0014-a-check-zweites-layering-gate.md) | a-check als zweites Layering-Gate im C++-Skelett | Superseded by 0015 (2026-08-09) | ADR-0001, Modul 4 |
-| [0015](0015-a-check-rollout-sprachskelette.md) | a-check als zweites Layering-Gate — Rollout über die Sprach-Skelette | Accepted (2026-08-09) | ADR-0001, Supersedes 0014 |
+| [0015](0015-a-check-rollout-sprachskelette.md) | a-check als zweites Layering-Gate — Rollout über die Sprach-Skelette | Superseded by 0016 (2026-08-09) | ADR-0001, Supersedes 0014 |
+| [0016](0016-a-check-in-allen-skeletten.md) | a-check ist das zweite Layering-Gate in allen Sprach-Skeletten | Accepted (2026-08-09) | ADR-0001, Supersedes 0015 |
 
 ## Konventionen
 

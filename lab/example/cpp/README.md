@@ -58,4 +58,4 @@ Make-Target-Kommentaren und Test-Namen referenziert. Das Layering folgt
 [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md): Adapter zeigen
 nach innen auf den Kern, nie umgekehrt — durchgesetzt von zwei Sensoren hinter
 `make arch-check`: `.a-check.yml` und `cmake/arch-check.sh`
-([ADR-0015](../docs/plan/adr/0015-a-check-rollout-sprachskelette.md)).
+([ADR-0016](../docs/plan/adr/0016-a-check-in-allen-skeletten.md)).
