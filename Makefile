@@ -22,7 +22,7 @@ check: docs-check alignment-check ## beide Validatoren nacheinander
 # DCHECK_DIGEST (sticht den Tag von DCHECK_IMAGE); Konfiguration in .d-check.yml.
 # Bei d-check-Release neu erzeugen: `d-check --print-mk > d-check.mk`, DCHECK_DIGEST
 # neu setzen. Der Node-Validator bleibt Rest-Sensor für die Modul-Nummern-Checks.
-DCHECK_DIGEST ?= sha256:fede3d027b2ebc1dd8534460853e57b67cc7a9a182cad2e2138c8eebf7a2d03c
+DCHECK_DIGEST ?= sha256:412a6fd3100601775b40dbbcf87365635f8a1e5deab21cdb8e83aa979b24662c
 include d-check.mk
 
 # docs-check brückt das tool-generierte `doc-check` (reiner d-check) und hängt
