@@ -147,15 +147,16 @@ häufigste Pfad zu blinden Flecken.
 
 ### Welche Rolle braucht welche Artefaktklasse (Modul 8)
 
-Sechs Rollen heißt **nicht** sechs Skill-Dateien. Jede Rolle wird über
-die Artefaktklasse geführt, die ihr Urteil trägt:
+Sechs Rollen heißt **nicht** sechs Skill-Dateien. Eine Rolle wird über
+genau die Artefaktklasse geführt, die ihr Urteil trägt — und das ist
+meistens kein Skill:
 
 | Artefaktklasse | Wann | Rollen |
 |---|---|---|
-| **Template** (Slice, Roadmap, ADR) | Das Urteil ist an einem Artefakt verankert. | Planner · Architect |
+| **Template** (Slice, Roadmap, ADR) | Das Urteil ist an einem Artefakt verankert: *was* zu tun ist, steht in der Vorlage und im Vorgänger-Artefakt. | Planner · Architect |
 | **Briefing** (`AGENTS.md` + 8-Schritt-Workflow) | Das Urteil folgt einem festen Ablauf mit repo-weiten Regeln. | Implementer |
-| **Skill-Datei** (`.harness/skills/*.md`) | Das Urteil ist *inferential* **und** beruht auf repo-spezifischem Wissen, das aus keinem Artefakt ableitbar ist. | Reviewer |
-| **keins** | Die Prüfgrundlage steht im Slice (DoD, ADR-Bezüge) oder liegt außerhalb des Repos. | Verifier · Validator |
+| **Skill-Datei** (`.harness/skills/*.md`) | Das Urteil ist *inferential* **und** beruht auf repo-spezifischem Wissen, das **aus keinem Artefakt ableitbar** ist. | Reviewer |
+| **keins** | Die Prüfgrundlage steht bereits im Slice (DoD, ADR-Bezüge) — oder liegt außerhalb des Repos. | Verifier · Validator |
 
 - **Kriterium für eine Skill-Datei:** nicht „die Rolle ist wichtig",
   sondern *ohne fixierte Urteilsgrundlage driftet dasselbe Verhalten

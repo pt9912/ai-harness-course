@@ -165,6 +165,31 @@ Beispiels zu retiren — die Messung sagte nein: Zwei Klassen (unausgefüllte
 Template-Platzhalter, Nicht-`slice-*`-Dateien in `done/`) fängt nur das Skript.
 Als Faden mit zwei CR-Kandidaten in der Roadmap.
 
+### Nachtrag aus einem Konsumenten-Befund: der Spiegel war verdünnt
+
+`ai-harness-init` meldete, die Tabelle *Welche Rolle braucht welche
+Artefaktklasse* (Modul 8) lasse sich als Zuweisung von **Schreibrechten**
+lesen, im Widerspruch zu den zwei Stellen desselben Moduls, die Schreibrechte
+wirklich verteilen. Vorgeschlagen war ein klarstellender Satz unter der
+Tabelle, ausdrücklich mit der Bitte um Gegenprüfung.
+
+Die Gegenprüfung ergab etwas anderes. Die Achse steht im Kurs deutlich —
+*„Eine Rolle wird über **genau die** Artefaktklasse geführt, die ihr Urteil
+trägt — und das ist meistens kein Skill"* —, im **Spiegel** aber verkürzt auf
+*„Jede Rolle wird über die Artefaktklasse geführt, die ihr Urteil trägt"*.
+Verloren waren die Exklusivität und die Pointe des Abschnitts; dazu in zwei
+Tabellenzellen das Kriterium selbst. Auf Rückfrage bestätigte der Konsument,
+nur den Spiegel gelesen zu haben — die Fehllesart ist damit erklärt und die
+Ursache gemessen, nicht vermutet.
+
+Der Spiegel darf **Didaktik weglassen, Operatives aber nur quelltreu
+übernehmen**. Vier Stellen sind wiederhergestellt; kein neuer Satz. Die einzige
+verbleibende Abweichung ist eine verankerte Auflösung fürs Alleinstehen
+(`AGENTS.md + 8-Schritt-Workflow` statt `+ Workflow`).
+
+Der Befund ist älter als diese Welle — er stammt aus dem Split des Moduls. Er
+wird hier korrigiert, weil das Release noch nicht draußen war.
+
 ### Was diese Welle ändert — und was das für Adopter heißt
 
 Der Schwerpunkt liegt in `lab/example`, aber **nicht nur dort**: Kurs,
