@@ -132,7 +132,7 @@ Modus **RK** — jedes Skelett trägt einen gewachsenen Bestandssensor mit
 eigenen Regeln, gegen den die neue Deklaration zu rekonziliieren ist; die
 Konvention entsteht nicht neu, sie muss den vorhandenen Stand einholen.
 
-## 9. Closure
+## 9. Closure-Notiz
 
 **Ergebnis.** Alle sechs Skelette tragen a-check als zweiten Layering-Sensor
 hinter `make arch-check`. Die Entscheidung steht in
@@ -170,7 +170,7 @@ nur im Regel-Quelltext des jeweiligen Skeletts.
 
 **Gates zum Zeitpunkt der Closure:** `make gates` in allen sechs Skeletten grün,
 `make arch-check` je beide Sensoren grün, Root `make check` 0 ERROR / 0 WARN,
-`make verify` ok.
+`make verify` ohne Befund.
 
 **Offen geblieben, bewusst:** Konsists Regeln auf Typ-Referenzen statt
 `file.imports` zu heben (eigener Slice, siehe §7) und die vier Befunde an

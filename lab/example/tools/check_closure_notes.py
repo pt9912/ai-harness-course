@@ -18,6 +18,7 @@ FLOSKELN = {
     "war ganz okay", "passt schon",
 }
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
+NUMBERING_RE = re.compile(r"^\d+\.\s*")
 CODEBLOCK_RE = re.compile(r"```.*?```", re.DOTALL)
 INLINE_CODE_RE = re.compile(r"`[^`]+`")
 # Template-Platzhalter: spitze Klammern ausserhalb von Code. Eine ausgefuellte
@@ -51,8 +52,18 @@ def find_closure_section(text: str) -> str | None:
     "3. Closure-Trigger", der hier nicht gemeint ist."""
     headings = [(m.start(), m.end(), len(m.group(1)), m.group(2)) for m in HEADING_RE.finditer(text)]
     for i, (start, end, level, title) in enumerate(headings):
-        low = title.lower()
-        if "closure" not in low or "trigger" in low:
+        # Die Ueberschrift muss die Notiz BENENNEN, nicht "closure" irgendwo
+        # enthalten: "Offene Risiken zur Welle-Closure" ist keine Notiz, stand
+        # aber als erster Treffer im Weg. Der Gate band dann an jene Sektion —
+        # und war gruen, sobald SIE zwei Saetze hatte, auch bei leerer Notiz.
+        # Falsch-gruen, nicht nur falsch-rot.
+        #
+        # Zwei Formen tragen, beide im Bestand: der Abschnitt "Closure-Notiz"
+        # (Slice-Template, auch als Suffix eines Welle-Titels: "Welle 1 — MVP
+        # — Closure-Notiz") und der schlichte Abschnitt "Closure".
+        low = NUMBERING_RE.sub("", title).lower().strip()
+        is_note = low.endswith("closure-notiz") or low == "closure"
+        if not is_note or "trigger" in low:
             continue
         body_start = end
         body_end = len(text)
