@@ -211,7 +211,7 @@ anderes.
 entscheidbare* und *semantische* Kanten; ein einzelner grep deckt nur die
 erste Hälfte ab.
 
-*Maschineller Gate (fail-closed im repo-weiten Verifikations-Target)* —
+*Maschineller Gate (fail-closed in `make verify`)* —
 eine *computational feedforward*-Kontrolle wie der
 [Traceability-Constraint](traceability.md#traceability-constraint):
 
