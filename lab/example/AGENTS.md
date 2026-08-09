@@ -137,10 +137,12 @@ durch, die übrigen nicht:
 | `make verify` | Closure-Pflicht + Referenz-Richtung; mit `SLICE=` zusätzlich die Slice-DoD |
 | `make verify-closure-notes` | jede Datei in `done/` trägt eine Closure-Notiz |
 | `make doc-check` | Referenz-Richtung via d-check (Modul `matrix`): keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise, keine ADR→Slice-Kante ohne Provenance-Marker |
-| `make verify-slice SLICE=<id>` | DoD eines Slice plausibilisieren |
+| `make verify-slice` | DoD eines Slice plausibilisieren; Aufruf mit `SLICE=<id>` |
 | `make plan-status` | Slice-Verteilung über die Lifecycle-Verzeichnisse |
-| `make replay RUN=<set-name>` | Golden-Set-Fixture validieren — **kein Lauf**, siehe den Absatz am Ende dieses Abschnitts |
-| `make trace RUN=<name>` | Agentenlauf-Trace-Fixture ausgeben |
+| `make agent-implement` | Kontextpaket für einen Implementer-Agenten zeigen; Aufruf mit `SLICE=<id>` |
+| `make agent-review` | Review-Fixture für Modul 10 zeigen |
+| `make replay` | Golden-Set-Fixture validieren, Aufruf mit `RUN=<set-name>` — **kein Lauf**, siehe den Absatz am Ende dieses Abschnitts |
+| `make trace` | Agentenlauf-Trace-Fixture ausgeben; Aufruf mit `RUN=<name>` |
 | `make release` | Release-Checkliste und Runbook-Fixtures prüfen |
 
 Weder **Golden-Set-Replay** noch **Image-Scan** hängen an `ci`. Einen

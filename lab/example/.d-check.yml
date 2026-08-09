@@ -9,7 +9,7 @@
 # in den Kurs; ein `links`-Lauf in diesem Scope meldete 63 Repo-Escapes.
 scan:
   roots: ["spec", "docs/plan"]
-modules: [matrix]
+modules: [matrix, targets]
 
 matrix:
   classes:
@@ -53,3 +53,51 @@ matrix:
   # hier `Geschichte`. `Historie` gehoert NICHT dazu: So heisst nur die Sektion
   # der Spec-Straten, und fuer die gilt die Ausnahme ausdruecklich nicht.
   exclude-sections: [Geschichte]
+
+# Deklarations-Konsistenz Doku <-> Build-Targets. AGENTS.md §3 nennt
+# halluzinierte Gates "die haeufigste Form von Harness-Luege" und beruft sich
+# auf `make help` als autoritative Liste — bis hierher pruefte das niemand.
+# Zwei Richtungen: jedes in einer Doku-Tabelle behauptete `make X` ist eine
+# reale Regel (gate-phantom), und jede Regel steht in der Autoritaets-Doku
+# (gate-undocumented).
+targets:
+  # Beide Tabellen aus AGENTS.md §3 zusammen: die Skelett-Targets leben in
+  # <sprache>/Makefile, die repo-weiten hier.
+  makefiles:
+    - Makefile
+    # Das Gate-Fragment traegt `doc-check` selbst.
+    - d-check.mk
+    - cpp/Makefile
+    - csharp/Makefile
+    - go/Makefile
+    - java/Makefile
+    - kotlin/Makefile
+    - python/Makefile
+  doc-tables: [AGENTS.md]
+  authority: AGENTS.md
+  # Utility ohne Doku-Pflicht: Sie tragen kein Gate, und AGENTS.md §3 listet
+  # bewusst die Gates, nicht jede Regel. Exakte Namen, kein Glob.
+  exempt-targets:
+    - help
+    - build
+    - run
+    - clean
+    - toolchain
+    - configure
+    - a-check
+    - a-check-graph
+    # Die uebrigen Regeln des tool-generierten Fragments: optionale
+    # d-check-Laeufe, die dieses Repo nicht als Gate fuehrt. Bewusst
+    # einzeln — bringt ein d-check-Release ein neues Target mit, meldet
+    # es der Sensor, und jemand entscheidet.
+    - doc-check
+    - doc-trace
+    - doc-complete
+    - doc-doctor
+    - doc-repair
+    - doc-immutable
+    - doc-commits
+    - doc-planning
+    - doc-tracked
+    - doc-targets
+    - doc-help
