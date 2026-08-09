@@ -23,3 +23,18 @@ jobs:
       - uses: actions/checkout@v6
       - name: Lernziel-Alignment (strict, WARN = rot)
         run: make alignment-check ARGS="--strict"
+
+  # ADR-Immutabilitaet braucht eine Commit-Range, deshalb ein eigener Job und
+  # nicht `make check`. Nur am Pull Request: Dort liefert `base.sha` einen
+  # verlaesslichen Bezugspunkt, waehrend `github.event.before` beim ersten Push
+  # eines Branches Nullen ist. Pushes nach main kommen aus gemergten PRs und
+  # sind dort bereits geprueft.
+  adr-immutability:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: ADRs sind nach Accepted immutable (AGENTS.md §2.5)
+        run: make doc-immutable RANGE=${{ github.event.pull_request.base.sha }}..${{ github.sha }}

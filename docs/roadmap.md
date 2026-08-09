@@ -7,6 +7,11 @@ Wellen-Register (Closure-Log), `make check` sind die Gates, d-check ist per
 Digest gepinnt. Kein Slice-Lifecycle, keine ADRs, keine Spec — für ein
 Doku-Repo wäre das Zeremonie ohne Substanz.
 
+Eine Ausnahme steht neben `make check`: `make doc-immutable RANGE=base..head`
+prüft, dass die ADRs des Beispiels nach `Accepted` unverändert bleiben. Es
+braucht eine Commit-Range und läuft deshalb nicht im hermetischen Sammel-Target,
+sondern als eigener CI-Job am Pull Request.
+
 Diese Datei ist das **Gegenstück zum CHANGELOG**: dort steht, was geschlossen
 wurde, hier, was offen ist und *woran man erkennt, dass es dran ist*. Ohne sie
 liegen offene Fäden als Fließtext in alten Wellen-Einträgen und werden nie

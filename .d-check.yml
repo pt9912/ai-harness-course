@@ -40,6 +40,27 @@ ignore-refs:
 # grep-bar. Der Kurs loest das ueber den umgekehrten Default: Die Kante gilt als
 # verboten, die Ausnahme wird am Ort deklariert. Genau diese Bauform hat
 # d-check als Modul `matrix`.
+
+# ADR-Immutabilitaet (Beispiel-Repo AGENTS.md §2.5: ADRs sind nach `Accepted`
+# immutable, Korrekturen entstehen als neue ADR mit Supersedes). Laeuft NICHT
+# in `make check` — das Modul braucht eine Commit-Range und ist deshalb an
+# `make doc-immutable RANGE=base..head` gebunden, im CI am Pull Request.
+#
+# Belegt, dass es traegt: Mit BASE auf dem Commit, der ADR-0015 als `Accepted`
+# anlegte, meldet es `core-drift-vcs` fuer die spaetere Ueberarbeitung ihres
+# §Entscheidung — genau der Verstoss, den §2.5 verbietet und den zum Zeitpunkt
+# der Aenderung kein Sensor sah.
+vcs:
+  # Der Kurs selbst fuehrt keine ADRs; geschuetzt wird die Klasse im Beispiel.
+  paths: ["lab/example/docs/plan/adr/[0-9]*.md"]
+  immutable-when: '^\*\*Status:\*\* Accepted'
+  status-line: '^\*\*Status:\*\*'
+  # Der einzige erlaubte Uebergang ist die Ablloesung — so schreibt es die
+  # ADR-Konvention des Beispiels.
+  head-allow: '^\*\*Status:\*\* (Accepted|Superseded by \[?ADR-[0-9]{4})'
+  # Geschichte-Zeilen sind Protokoll und zaehlen nicht zum Kern.
+  exclude-sections: [Geschichte]
+
 matrix:
   classes:
     # Die drei Spec-Straten (Vertrag, Technik, Sicht). Sie duerfen ADR und
