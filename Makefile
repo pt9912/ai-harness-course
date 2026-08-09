@@ -8,8 +8,10 @@ ARGS ?=
 
 .PHONY: help check docs-check alignment-check
 
+# `-h`: MAKEFILE_LIST trägt mehrere Dateien, und grep stellt dann jeder
+# Zeile den Dateinamen voran — er verdrängt den Target-Namen.
 help: ## Targets anzeigen
-	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
+	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-24s %s\n", $$1, $$2}'
 
 check: docs-check alignment-check ## beide Validatoren nacheinander
