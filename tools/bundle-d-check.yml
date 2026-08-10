@@ -14,9 +14,16 @@
 #       template-interne Navigation.
 # `keep: ["regelwerk/**"]` ist der Kern: Eine umbenannte Regelwerk-Überschrift
 # verschickt sonst unbemerkt einen toten Anker ins Adopter-Repo.
+#
+# `spans` läuft mit, obwohl das Bundle keine Code-Pfade prüft: Ein bis zum
+# Dateiende offener Fence lässt d-checks Vorverarbeitung den Rest der Datei
+# überspringen — dann melden `links` und `anchors` grün, ohne geprüft zu haben
+# (d-check v0.53.0, `fence-unclosed`). Das trifft hier härter als im Repo, weil
+# der Release-Rewrite die Dateien anfasst: Ein Fence, der erst durch das
+# Umschreiben aufgeht, ist im Repo-Stand nicht sichtbar.
 scan:
   roots: ["."]
-modules: [links, anchors]
+modules: [links, anchors, spans]
 ignore-refs:
   - in:   "templates/**"
     refs: ["templates/**", "tools/check_*.py", "**/*.md"]
