@@ -1,18 +1,19 @@
 # Closure-Note-Reviewer-Skill — <Repo-Name>
 
 > **Template-Hinweis.** Vorlage für den *inferentiellen* Closure-Note-Reviewer
-> (Modul 11 §Schritt 5, ADR-0011-Folgepflicht, Modul 15 Doku-Konsistenz-Agent).
+> (Modul 11 §Schritt 5, Folgepflicht der Closure-ADR, Modul 15
+> Doku-Konsistenz-Agent).
 > Kopiere nach `.harness/skills/closure-note-reviewer.md`, ersetze `<Platzhalter>`
 > und lösche diesen Block. Er ist die *semantische* Schicht **über** dem
-> *computational* Gate `make verify-closure-notes`
-> (`tools/check_closure_notes.py`): das Gate prüft Struktur (Heading + Satzzahl),
-> dieser Skill prüft *Inhalt vs. Floskel*. Sechs-Schritt-Muster wie der
+> *computational* Closure-Struktur-Gate deines Repos — wie immer es dort heißt
+> und womit es gebaut ist: Das Gate prüft Struktur (Heading + Satzzahl +
+> Floskel-Liste), dieser Skill prüft *Inhalt vs. Floskel*. Sechs-Schritt-Muster wie der
 > allgemeine `reviewer.md` (Modul 10), aber eng auf Closure-Notes fokussiert.
 
 * Status: Accepted
-* Bezug: ADR-0011 (Closure-Note-Pflicht), `tools/check_closure_notes.py`,
+* Bezug: <ADR, die die Closure-Note-Pflicht setzt>, <dein Closure-Struktur-Gate>,
   Modul 11 §Schritt 5, Modul 15 (Doku-Konsistenz-Agent) · <!-- d-check:ignore (Kurs-/ADR-Referenzen; Pfade gelten im Ziel-Repo) -->
-* Gilt für: den *inferentiellen* Nachlauf zu `make verify-closure-notes` —
+* Gilt für: den *inferentiellen* Nachlauf zum Struktur-Gate —
   greift dort, wo Struktur allein die Floskel nicht fängt
 
 ## Kontext-Eingang (Pflicht)
@@ -22,8 +23,8 @@ Was der Reviewer *immer* mitbringt, bevor er urteilt:
 - alle `closure_note`-Abschnitte der Slices in `docs/plan/planning/done/`
 - das Slice-Template `docs/plan/planning/slice.template.md` §"Closure-Notiz"
   (welche drei Inhalte Pflicht sind)
-- ADR-0011 — *warum* Closure-Notes existieren (Auditierbarkeit, Lernsignal)
-- das Ergebnis von `make verify-closure-notes` für denselben Stand — was das
+- die Closure-ADR — *warum* Closure-Notes existieren (Auditierbarkeit, Lernsignal)
+- das Ergebnis des Struktur-Gates für denselben Stand — was das
   Struktur-Gate bereits abgedeckt hat, wird **nicht** doppelt gemeldet
 
 Ohne diesen Block prüft der Reviewer Text, aber nicht *gegen die drei
@@ -42,7 +43,7 @@ deckt nur die Struktur (Heading, Satzzahl außerhalb Code-Blöcken, Floskel-List
 ## Klassifikation
 
 **HIGH** — Floskel ohne Substanz: die `closure_note` ist syntaktisch vorhanden
-(überlebt `check_closure_notes.py`), trägt aber *keinen* der drei Pflicht-Inhalte.
+(überlebt das Struktur-Gate), trägt aber *keinen* der drei Pflicht-Inhalte.
 Beispiele: „war ganz okay, läuft jetzt", „Fertig.", „wie geplant umgesetzt".
 
 **MEDIUM** — genau *einer* der drei Pflicht-Inhalte fehlt oder ist unkonkret:
@@ -58,8 +59,8 @@ das noch nicht in `open/` liegt — Tracker-Nachtrag durch die Planning-Rolle").
 
 ## Was dieser Skill NICHT macht
 
-- Keine Struktur-Prüfung (Heading vorhanden? ≥ 2 Sätze?) — das ist
-  `tools/check_closure_notes.py`; nicht doppeln.
+- Keine Struktur-Prüfung (Heading vorhanden? ≥ 2 Sätze?) — das ist das
+  Struktur-Gate; nicht doppeln.
 - Keine Bewertung, ob der Slice *fachlich* korrekt abgeschlossen wurde —
   Verifier/Validator (Modul 11).
 - Keine Umschreibung der `closure_note` — der Autor formuliert nach, der
@@ -72,12 +73,12 @@ das noch nicht in `open/` liegt — Tracker-Nachtrag durch die Planning-Rolle").
 Jedes Finding:
 
 - `kategorie`: HIGH | MEDIUM | LOW | INFO
-- `quelle`: `ADR-0011` | `Closure-Inhaltspflicht (a/b/c)`
+- `quelle`: `<ADR-NNNN>` | `Closure-Inhaltspflicht (a/b/c)`
 - `pfad`: `docs/plan/planning/done/<slice>.md`:<Zeile>
 - `befund`: *welcher* der drei Pflicht-Inhalte fehlt, 1–2 Sätze, beobachtbar,
   ohne Formulierungs-Vorschlag
 - `verifizierbar`: nein — Floskel-Erkennung ist inferentiell;
-  `check_closure_notes.py` bestätigt nur die Struktur, nicht den Inhalt
+  das Struktur-Gate bestätigt nur die Struktur, nicht den Inhalt
 
 Zusätzlich am Ende: eine Zeile „geprüft, ohne Befund: `done/<Charge>`" pro
 betrachteter Slice-Charge (Negativbefund — macht die Abdeckung sichtbar).
@@ -86,9 +87,9 @@ betrachteter Slice-Charge (Negativbefund — macht die Abdeckung sichtbar).
 
 Bei dreimaligem HIGH derselben Floskel-Art:
 
-- Muster in ADR-0011 bzw. `AGENTS.md` §"Closure" als benanntes Anti-Pattern
+- Muster in der Closure-ADR bzw. `AGENTS.md` §"Closure" als benanntes Anti-Pattern
   aufnehmen
-- prüfen, ob `check_closure_notes.py` die Floskel *strukturell* fangen könnte
+- prüfen, ob das Struktur-Gate die Floskel *strukturell* fangen könnte
   (Floskel-Liste erweitern) → dann ins computational Gate heben; ein
   computational Feedforward-Marker ist billiger als inferentielles Nachlesen
 - Slice-Template §"Closure-Notiz" schärfen, falls das Feld die drei

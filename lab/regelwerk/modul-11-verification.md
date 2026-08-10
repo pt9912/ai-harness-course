@@ -72,3 +72,26 @@ Fitness Function selbst bauen. Der Ablauf:
   fängt der Verifier genau das, was Tests nicht prüfen und der Reviewer
   übersieht — die fehlende Closure-Note ist kein Diff-Symptom.
 
+**Ein selbstgebautes Gate ist auf Zeit gebaut.** „Kein Standard-Tool prüft das"
+ist eine Aussage über *heute*. Erscheint später eines, ist die Frage nicht, ob
+das eigene Skript stört, sondern ob das Werkzeug eine **Obermenge** ist — und
+das hat drei Teile, die einzeln nachgewiesen werden: dieselbe
+**Kandidaten-Menge** (welche Dateien werden überhaupt geprüft), dieselben
+**Bedingungen**, und dieselbe **Schwelle, wie die ADR sie setzt** — nicht die
+Vorbelegung des Werkzeugs. Ein Gate, das schärfer ist als seine ADR, ist
+genauso falsch wie eines, das lascher ist; beides prüft eine Entscheidung, die
+niemand getroffen hat.
+
+Der Nachweis ist nicht der Datenblatt-Vergleich, sondern **je Verstoßklasse ein
+Break-Test mit beiden Sensoren nebeneinander**, plus der unveränderte Bestand,
+auf dem beide schweigen müssen. Ist das Werkzeug Obermenge, wird das Skript
+retired — sonst benennt man die fehlende Klasse und behält es. Beides ist ein
+Ergebnis; was nicht zählt, ist die Vermutung.
+
+Und eine dritte Antwort gibt es auch: Ein Skript kann **einen anderen
+Konsumenten bekommen**, als es hatte. Dient es inzwischen der Lehre, dem
+Onboarding oder einem Fixture, dann trägt es nicht mehr die Deckung, sondern
+eine Rolle — und die gehört dann ausgeschrieben, sonst liest die nächste Person
+es weiterhin als Gate
+([`grundlagen-harness-dateien.md` §Jedes Artefakt hat einen Konsumenten](grundlagen-harness-dateien.md#jedes-artefakt-hat-einen-konsumenten)).
+

@@ -118,3 +118,7 @@ für wellenlos verkörperte Regeln
 §7.
 
 <a id="jedes-artefakt-hat-einen-konsumenten"></a>
+
+**Jedes Artefakt hat einen Konsumenten** — die Regel steht in
+[`grundlagen-harness-dateien.md` §Jedes Artefakt hat einen Konsumenten](grundlagen-harness-dateien.md#jedes-artefakt-hat-einen-konsumenten).
+Diese Adresse bleibt bestehen, weil sie vor dem Umzug vergeben wurde.

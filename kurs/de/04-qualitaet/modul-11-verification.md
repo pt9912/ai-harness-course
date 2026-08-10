@@ -198,7 +198,31 @@ Damit liegt die Hard Rule in zwei Quadranten: *inferential feedforward*
 (AGENTS.md sagt es) + *computational feedback* (Make-Target prüft es).
 
 Sieben Schritte, eine Fitness Function für eine ADR-Aussage, die kein
-Standard-Tool prüft. Vergleich im Lab:
+Standard-Tool prüft.
+
+**Schritt 8 — der, den man später geht: Ein selbstgebautes Gate ist auf Zeit
+gebaut.** „Kein Standard-Tool prüft das" ist eine Aussage über *heute*. Erscheint
+später eines, ist die Frage nicht, ob das eigene Skript stört, sondern ob das
+Werkzeug eine **Obermenge** ist — und das hat drei Teile, die einzeln nachgewiesen
+werden: dieselbe **Kandidaten-Menge** (welche Dateien werden überhaupt geprüft),
+dieselben **Bedingungen**, und dieselbe **Schwelle, wie die ADR sie setzt** — nicht
+die Vorbelegung des Werkzeugs. Ein Gate, das schärfer ist als seine ADR, ist
+genauso falsch wie eines, das lascher ist; beides prüft eine Entscheidung, die
+niemand getroffen hat.
+
+Der Nachweis ist nicht der Datenblatt-Vergleich, sondern **je Verstoßklasse ein
+Break-Test mit beiden Sensoren nebeneinander**, plus der unveränderte Bestand, auf
+dem beide schweigen müssen. Ist das Werkzeug Obermenge, wird das Skript retired —
+sonst benennt man die fehlende Klasse und behält es. Beides ist ein Ergebnis; was
+nicht zählt, ist die Vermutung.
+
+Und eine dritte Antwort gibt es auch: Ein Skript kann **einen anderen Konsumenten
+bekommen**, als es hatte. Dient es inzwischen der Lehre, dem Onboarding oder einem
+Fixture, dann trägt es nicht mehr die Deckung, sondern eine Rolle — und die gehört
+dann ausgeschrieben, sonst liest die nächste Person es weiterhin als Gate
+([Jedes Artefakt hat einen Konsumenten](../grundlagen/harness-dateien.md#jedes-artefakt-hat-einen-konsumenten)).
+
+Vergleich im Lab:
 [`../../../lab/example/docs/plan/adr/0011-closure-note-pflicht.md`](../../../lab/example/docs/plan/adr/0011-closure-note-pflicht.md),
 [`../../../lab/example/tools/check_closure_notes.py`](../../../lab/example/tools/check_closure_notes.py)
 und das `verify-closure-notes`-Target im
