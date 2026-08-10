@@ -13,7 +13,7 @@ Slice-ID.
 
 [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) wird von **zwei** Sensoren durchgesetzt, beide hinter
 `make arch-check`
-([ADR-0017](../docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)): die
+([ADR-0018](../docs/plan/adr/0018-grenzen-gehoeren-in-die-konfiguration.md)): die
 ArchUnit-Tests in `src/test/java/com/example/docsearch/ArchitectureTest.java`
 und die Deklaration in `.a-check.yml`.
 

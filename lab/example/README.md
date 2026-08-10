@@ -96,7 +96,7 @@ zeigen Schichtung, Gates und Traceability — nicht das fertige Produkt.
 | Konzept | Was unterscheidet sich? |
 |---|---|
 | Suppression-Verbot | `//nolint` vs. `# noqa` vs. `@Suppress` vs. `@SuppressWarnings` vs. `#pragma warning disable` vs. C++ `// NOLINT` / `#pragma GCC diagnostic` — siehe [Modul 9](../../kurs/de/03-agenten/modul-09-implementierung.md) |
-| Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) vs. Skript (C++ `arch-check.sh`) — und in **jedem** Skelett derselbe deklarative Zweitsensor daneben ([ADR-0017](docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)). Der Vergleich zeigt damit auch, was die Bauform einer Regel ausmacht: Konsist prüft `file.imports`, ArchUnit den Bytecode — dieselbe Umgehung, verschiedene Sichtbarkeit |
+| Architekturtest | Konfig (depguard, import-linter) vs. Test-Framework (Konsist, ArchUnit, NetArchTest) vs. Skript (C++ `arch-check.sh`) — und in **jedem** Skelett derselbe deklarative Zweitsensor daneben ([ADR-0018](docs/plan/adr/0018-grenzen-gehoeren-in-die-konfiguration.md)). Der Vergleich zeigt damit auch, was die Bauform einer Regel ausmacht: Konsist prüft `file.imports`, ArchUnit den Bytecode — dieselbe Umgehung, verschiedene Sichtbarkeit |
 | Lockfile | `go.sum`, `uv.lock`, `gradle.lockfile`, Maven (transitive), CPM `packages.lock.json`, FetchContent-`GIT_TAG` (C++) |
 | Container | Distroless Static (Go), python-slim, Distroless Java, Distroless .NET, Distroless cc (C++) |
 | Tie-Break | `sort.SliceStable` vs. `sorted(key=…)` vs. `compareBy(…).thenBy(…)` vs. `Comparator.thenComparing` vs. LINQ `OrderBy().ThenBy()` vs. `std::stable_sort` (C++) |

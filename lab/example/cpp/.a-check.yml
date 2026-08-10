@@ -1,13 +1,19 @@
 # .a-check.yml — Layering des C++-Skeletts als deklarierte Architektur
-# (ADR-0001, Gate-Bindung ADR-0017). Zweites Gate neben
+# (ADR-0001, Gate-Bindung ADR-0018). Zweites Gate neben
 # `cmake/arch-check.sh`: dasselbe Layering, andere Ausdrucksform —
 # Konfiguration statt Skript.
 #
 # Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Audit ->
 # Service -> UI. Audit ist dort deklariert, aber in keinem Skelett gebaut und
-# hat deshalb hier keine Schicht.
-# Im C++-Baum heißen sie: hexagon/model (Types), hexagon/index,
-# hexagon/ports, hexagon/service, adapters/{embedding,ui}.
+# hat deshalb hier keine Schicht. Im C++-Baum heißen sie: hexagon/model
+# (Types), hexagon/index, hexagon/ports, hexagon/service,
+# adapters/{embedding,ui}.
+#
+# GRENZE dieses Skeletts: a-check liest `#include`, `cmake/arch-check.sh`
+# grept Text — BEIDE Sensoren sind textnah. Der elternrelative Include
+# (`"../../adapters/ui/x.h"`) passierte deshalb beide; die `constructs`-Regel
+# unten verbietet ihn. Offen bleibt, was ein Praeprozessor erzeugt: Das saehe
+# nur ein echter Parser, und den hat hier keiner der beiden.
 version: 1
 languages:
   cpp: ["**/*.h", "**/*.cpp"]

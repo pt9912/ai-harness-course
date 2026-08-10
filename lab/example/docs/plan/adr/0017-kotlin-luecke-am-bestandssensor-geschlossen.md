@@ -1,6 +1,6 @@
 # ADR-0017: Die Kotlin-Lücke gehört in den Bestandssensor, nicht in eine Zusatzregel
 
-**Status:** Accepted
+**Status:** Superseded by [ADR-0018](0018-grenzen-gehoeren-in-die-konfiguration.md)
 
 **Datum:** 2026-08-09
 
@@ -137,3 +137,4 @@ absichtlich dieselbe**; neu ist allein Punkt 6.
 |---|---|---|
 | 2026-08-09 | Proposed | Re-Evaluierungs-Trigger von ADR-0016 eingetreten: Konsists Regeln auf Quelltext gehoben |
 | 2026-08-09 | Accepted | `constructs`-Regel im Kotlin-Skelett entfernt; Grenzen-Tabelle fortgeschrieben; Verweise auf diese ADR umgehängt |
+| 2026-08-09 | Superseded | [ADR-0018](0018-grenzen-gehoeren-in-die-konfiguration.md) — die Grenzen-Tabelle war versionsabhaengig und zwang bei jedem Werkzeug-Release eine Abloesung; sie steht jetzt je Skelett in der Konfiguration |

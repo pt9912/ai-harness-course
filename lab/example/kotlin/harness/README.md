@@ -5,7 +5,7 @@
 | `make lint` | `detekt` (inkl. Suppression-Verbot) |
 | `make typecheck` | Kotlin-Compiler |
 | `make arch-check` | beide Sensoren unten |
-| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) — Werkzeugwahl [ADR-0017](../../docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md) |
+| `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) — Werkzeugwahl [ADR-0018](../../docs/plan/adr/0018-grenzen-gehoeren-in-die-konfiguration.md) |
 | `make a-check-graph` | a-check `--print-graph`, Schichtbild aus derselben Deklaration |
 | (in `arch-check`) | **Konsist** (in JUnit-Tests integriert), prüft den Quelltext — Import **und** voll qualifizierte Nennung |
 | `make test` | JUnit 5 |

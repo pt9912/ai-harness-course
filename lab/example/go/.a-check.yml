@@ -1,11 +1,16 @@
 # .a-check.yml — Layering des Go-Skeletts als deklarierte Architektur
-# (ADR-0001, Gate-Bindung ADR-0017). Zweites Gate neben den depguard-Regeln
+# (ADR-0001, Gate-Bindung ADR-0018). Zweites Gate neben den depguard-Regeln
 # in .golangci.yml: dasselbe Layering, andere Ausdrucksform — Allow-Liste
 # statt Deny-Listen.
 #
 # Layer-Reihenfolge aus ADR-0001: Types -> Index -> Embedding -> Audit ->
 # Service -> UI. Audit ist dort deklariert, aber in keinem Skelett gebaut und
 # hat deshalb hier keine Schicht.
+#
+# GRENZE dieses Skeletts: keine offene. Die umgehende Schreibweise, die a-check
+# anderswo blind macht, gibt es in Go nicht — der Compiler weist relative
+# Importe in Modul-Modus ab, Dot- und Blank-Import tragen den vollen Modulpfad.
+# Gleiches Paket braucht keinen Import, ist aber dieselbe Schicht.
 version: 1
 languages:
   go: ["**/*.go"]

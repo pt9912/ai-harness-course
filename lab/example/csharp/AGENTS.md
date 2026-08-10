@@ -14,7 +14,7 @@ Slice-ID. Nach Vorbild bess-ems.
 ### C-2 — Layering via NetArchTest und a-check
 
 [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) wird von **zwei** Sensoren durchgesetzt, beide hinter
-`make arch-check` ([ADR-0017](../docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)):
+`make arch-check` ([ADR-0018](../docs/plan/adr/0018-grenzen-gehoeren-in-die-konfiguration.md)):
 die NetArchTest-Fakten in `tests/DocSearch.Tests/ArchitectureTests.cs` und die
 Deklaration in `.a-check.yml`.
 

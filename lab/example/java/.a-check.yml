@@ -1,5 +1,5 @@
 # .a-check.yml — Layering des Java-Skeletts als deklarierte Architektur
-# (ADR-0001, Gate-Bindung ADR-0017). Zweites Gate neben den ArchUnit-Tests in
+# (ADR-0001, Gate-Bindung ADR-0018). Zweites Gate neben den ArchUnit-Tests in
 # src/test/java/com/example/docsearch/ArchitectureTest.java: dasselbe
 # Layering, andere Ausdrucksform — Allow-Liste statt aufgezaehlter Regeln.
 #

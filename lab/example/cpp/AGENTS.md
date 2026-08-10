@@ -17,7 +17,7 @@ ADR-/Slice-ID zentral in `.clang-tidy` dokumentiert.
 
 Die Architektur-Constraints aus [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) werden von **zwei** Sensoren
 durchgesetzt, beide hinter `make arch-check`
-([ADR-0017](../docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)):
+([ADR-0018](../docs/plan/adr/0018-grenzen-gehoeren-in-die-konfiguration.md)):
 `.a-check.yml` (Deklaration) und `cmake/arch-check.sh` (Include-Heuristik).
 Verstöße brechen `make arch-check`.
 

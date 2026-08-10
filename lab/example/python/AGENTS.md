@@ -16,7 +16,7 @@ oder `[tool.mypy.overrides]` mit Begründung und Slice-ID.
 
 Architektur-Constraints aus [ADR-0001](../docs/plan/adr/0001-hexagonale-architektur.md) werden von **zwei** Sensoren durchgesetzt,
 beide hinter `make arch-check`
-([ADR-0017](../docs/plan/adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)):
+([ADR-0018](../docs/plan/adr/0018-grenzen-gehoeren-in-die-konfiguration.md)):
 `import-linter` mit `importlinter.cfg` und die Deklaration in `.a-check.yml`.
 Verstöße brechen `make arch-check`.
 

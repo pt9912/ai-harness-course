@@ -7,7 +7,7 @@ nur durch `git mv` (Kurs
 
 **Welle:** ohne Welle — die Closure-Bedingung ist die DoD dieses Slice.
 
-**Bezug:** [ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)
+**Bezug:** [ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md)
 (Entscheidung und Stand-Tabelle), [ADR-0001](../../adr/0001-hexagonale-architektur.md)
 (die Aussage, die beide Sensoren prüfen)
 
@@ -18,7 +18,7 @@ nur durch `git mv` (Kurs
 ## 1. Ziel
 
 Go, Python, Java und Kotlin bekommen a-check als zweiten Layering-Sensor, wie
-[ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md) es entschieden hat. C++ und C# sind verdrahtet und dienen als Vorlage.
+[ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md) es entschieden hat. C++ und C# sind verdrahtet und dienen als Vorlage.
 
 ## 2. Definition of Done
 
@@ -44,12 +44,12 @@ verdrahtet):
 - [x] Break-Test je Regel rot mit Exit 1, sauberer Baum grün.
 - [x] `make gates` grün.
 - [x] Stand der Umsetzung je Skelett in der Rollout-ADR nachgezogen (die
-      Tabelle ist mit [ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md) entfallen, weil der Rollout abgeschlossen ist).
+      Tabelle ist mit [ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md) entfallen, weil der Rollout abgeschlossen ist).
 
 Am Ende aller vier:
 
 - [x] Nachfolge-ADR, die die Stand-Tabelle durch die schlichte Aussage ersetzt
-      (Re-Evaluierungs-Trigger der abgelösten ADR) — [ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md).
+      (Re-Evaluierungs-Trigger der abgelösten ADR) — [ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md).
 - [x] Closure-Notiz mit den Break-Test-Ausgaben je Skelett (§9).
 
 ## 3. Plan (vor Code)
@@ -76,7 +76,7 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 
 | Datei / Komponente | Änderungs-Art | Begründung |
 |---|---|---|
-| `go/`, `python/`, `java/`, `kotlin/` je `.a-check.yml` | neu | Deklaration je Skelett; eine Scan-Wurzel pro Sprachverzeichnis ([ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md) §Entscheidung 2) |
+| `go/`, `python/`, `java/`, `kotlin/` je `.a-check.yml` | neu | Deklaration je Skelett; eine Scan-Wurzel pro Sprachverzeichnis ([ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md) §Entscheidung 2) |
 | dieselben vier je `a-check.mk` | neu | tool-generiert, keine Skript-Kopie |
 | dieselben vier `Makefile` | update | Pin, `include`, `arch-check` mit beiden Sensoren |
 | dieselben vier `harness/README.md`, `AGENTS.md` | update | Bindung und Sensor-Nennung |
@@ -85,18 +85,18 @@ Tabelle. Sie ist die Ausgangslage, nicht der Nachweis.
 
 ## 4. Trigger
 
-- Auslöser ist [ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md); C++ und C# sind verdrahtet, die Entscheidung gilt für
+- Auslöser ist [ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md); C++ und C# sind verdrahtet, die Entscheidung gilt für
   alle sechs.
 - Reihenfolge-Vorschlag: Go zuerst — dort hängt die Mono-Scan-Grenze aus
-  [ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md) §Entscheidung 2, und die Auflösung läuft ohne `resolution`-Block.
+  [ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md) §Entscheidung 2, und die Auflösung läuft ohne `resolution`-Block.
 
 ## 5. Risiken
 
 | Risiko | Wahrscheinlichkeit | Gegenmaßnahme |
 |---|---|---|
 | Die Deklaration wird gröber als [ADR-0001](../../adr/0001-hexagonale-architektur.md) und ist damit schwächer als der Bestandssensor | mittel | Die Regeln des Bestandssensors vor der Config auflisten und jede gegen eine Kante halten (der Befund aus dem C++-Pilot) |
-| Vier Pins altern unabhängig voneinander | mittel | Anheben trifft alle verdrahteten Skelette in einem Commit; kein Freshness-Sensor deckt das ab ([ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md) §Konsequenzen) |
-| Rollen werden gesetzt, wo der Code sie nicht einlöst | mittel | [ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md) §Entscheidung 3 — nur modellieren, was gebaut ist; im Zweifel reine Kanten |
+| Vier Pins altern unabhängig voneinander | mittel | Anheben trifft alle verdrahteten Skelette in einem Commit; kein Freshness-Sensor deckt das ab ([ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md) §Konsequenzen) |
+| Rollen werden gesetzt, wo der Code sie nicht einlöst | mittel | [ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md) §Entscheidung 3 — nur modellieren, was gebaut ist; im Zweifel reine Kanten |
 
 ## 6. Offene Risiken zur Welle-Closure
 
@@ -137,7 +137,7 @@ Konvention entsteht nicht neu, sie muss den vorhandenen Stand einholen.
 
 **Ergebnis.** Alle sechs Skelette tragen a-check als zweiten Layering-Sensor
 hinter `make arch-check`. Die Entscheidung steht in
-[ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md); dieser Slice hat sie
+[ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md); dieser Slice hat sie
 umgesetzt und dabei zwei Dinge korrigiert, die vorher als sicher galten.
 
 **Schritt 0 hat je Skelett etwas geändert, nicht nur dokumentiert.**

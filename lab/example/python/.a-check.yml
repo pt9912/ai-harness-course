@@ -1,5 +1,5 @@
 # .a-check.yml — Layering des Python-Skeletts als deklarierte Architektur
-# (ADR-0001, Gate-Bindung ADR-0017). Zweites Gate neben den
+# (ADR-0001, Gate-Bindung ADR-0018). Zweites Gate neben den
 # import-linter-Contracts in importlinter.cfg: dasselbe Layering, andere
 # Ausdrucksform — Allow-Liste statt aufgezaehlter Contracts.
 #

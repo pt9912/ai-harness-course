@@ -9,7 +9,7 @@ nur durch `git mv` (Kurs
 
 **Bezug:** [ADR-0001](../../adr/0001-hexagonale-architektur.md) (die Aussage,
 die beide Sensoren prüfen),
-[ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)
+[ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md)
 (Entscheidung)
 
 **Berührte Spec-Stellen:** —
@@ -33,7 +33,7 @@ derselben Ebene wie a-check.
       qualifiziert ohne Import → rot; unveränderter Baum → grün.
 - [x] `constructs`-Regel in `kotlin/.a-check.yml` entfernt, nachdem gemessen
       ist, dass sie nichts mehr trägt.
-- [x] `ADR-0017` löst `ADR-0016` ab und trägt deren Entscheidung **vollständig**
+- [x] `ADR-0018` löst `ADR-0016` ab und trägt deren Entscheidung **vollständig**
       weiter; Verweise umgehängt, Abschnitts-Zeiger geprüft.
 - [x] `make gates` grün (`COURSE_LANG=kotlin`), `make verify` grün.
 - [x] Closure-Notiz.
@@ -72,7 +72,7 @@ derselben Ebene wie a-check.
   die es in der schmalen Fassung gar nicht gab. Dasselbe war beim vorigen Supersede-Übergang
   passiert und dort einzeln repariert worden; die Ursache ist
   nicht das Umhängen, sondern eine Nachfolge-ADR, die weniger trägt als ihre
-  Vorgängerin. [ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md)
+  Vorgängerin. [ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md)
   übernimmt die Nummerierung deshalb **absichtlich**.
 - **Konsist kann keine Typ-Auflösung.** Es ist quell-basiert (PSI), nicht
   Bytecode-basiert wie ArchUnit. Die neue Prüfung ist ein Text-Vergleich —
@@ -107,7 +107,7 @@ ist die Allow-Liste über Importe, der Bestandssensor sieht tiefer.
 
 **Was bleibt:** C++ ist das einzige Skelett mit zwei textnahen Sensoren; dort
 trägt die `constructs`-Regel weiter. Der Trigger dafür steht in
-[ADR-0017](../../adr/0017-kotlin-luecke-am-bestandssensor-geschlossen.md).
+[ADR-0018](../../adr/0018-grenzen-gehoeren-in-die-konfiguration.md).
 
 **Gates:** `make gates COURSE_LANG=kotlin` grün, `make verify` grün, Root
 `make check` 0 ERROR / 0 WARN.

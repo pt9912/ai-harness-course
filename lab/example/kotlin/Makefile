@@ -14,7 +14,7 @@ help: ## Targets anzeigen
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-28s %s\n", $$1, $$2}'
 
-# Zweites Layering-Gate (ADR-0017). `a-check.mk` ist tool-generiert
+# Zweites Layering-Gate (ADR-0018). `a-check.mk` ist tool-generiert
 # (`a-check --print-mk`), die Regeln stehen in `.a-check.yml` — beide nicht
 # im Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment;
 # gepinnt ist v0.17.0, der geprüfte Stand. Anheben ist ein eigener Commit.
@@ -35,7 +35,7 @@ lint: ## detekt
 typecheck: ## Kotlin-Compiler
 	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(GRADLE_IMAGE) gradle compileKotlin compileTestKotlin
 
-# Beide Sensoren laufen, auch wenn der erste rot ist: ADR-0017 laesst die
+# Beide Sensoren laufen, auch wenn der erste rot ist: ADR-0018 laesst die
 # beiden Befund-Mengen vergleichen, und ein Abbruch nach dem ersten zeigt
 # immer nur eine.
 arch-check: ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + Konsist (Test-Framework)
