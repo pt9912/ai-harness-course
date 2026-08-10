@@ -11,6 +11,251 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 73 — 2026-08-10 · Zwei Kopien, zwei Antworten
+
+Welle 72 schloss mit einem Konsumenten-Befund: `ai-harness-init` las Modul 8
+falsch, und die Ursache lag nicht im Kurs, sondern im **Spiegel** — dort war
+der Satz verdünnt, der die Achse trägt. Vier Stellen wiederhergestellt, Release
+raus. Offen blieb die Frage dahinter: **War das systematisch?**
+
+Diese Welle beantwortet sie — und trifft dabei auf denselben Fehlermodus in
+einer zweiten Bauform. Beide Male steht eine Aussage an einem Ort, dessen
+Wahrheit woanders wohnt: Der Regelwerks-Spiegel kopiert den Kurs, eine ADR
+kopierte Fakten über ein Fremdwerkzeug. Die Antworten fallen entgegengesetzt
+aus — die eine Kopie ist unvermeidlich, die andere nicht.
+
+### Antwort eins: systematisch nein — vier Stellen aber doch
+
+Alle **26 Dateipaare** Kurs ↔ Spiegel, satzweise geprüft. Maßstab war die
+Regel, die der Spiegel sich selbst gibt: Didaktik darf weg, Operatives nur
+quelltreu. Vier Defekte, alle behoben, kein neuer Satz:
+
+1. **`modul-06`** — die Taxonomie eines Steering-Loop-Eintrags fehlte:
+   *„(geschärfte Regel / neuer Sensor / benannte Spec-Lücke)"*. Das ist die
+   Angabe, an der ein Leser erkennt, *was* er eintragen soll — operativ, nicht
+   didaktisch.
+2. **`grundlagen-traceability`** — Paraphrase ohne Bedeutungsverlust:
+   *„es gewöhnliche Wörter"* statt *„dieselben zwei Wörter gewöhnliche
+   Sprache"*, *„Trigger-Sprachgebrauch"* statt *„Trigger-Formulierung"*. Heute
+   harmlos; genau diese Umformulierungen verlieren beim nächsten Mal ein Wort
+   zu viel — der Modul-8-Defekt war eine Generation weiter.
+3. **`modul-13`** — der Spiegel behauptete *„Die Übersetzung in **fünf**
+   Schritten"*, die Quelle nummeriert **sechs**. Weggelassen ist der
+   sprachkonkrete Implementierungs-Schritt, zu Recht — falsch war die Zahl.
+   Jetzt ohne Zahl, mit benannter Auslassung.
+4. **`modul-06`** — Fettung verloren bei erhaltenem Satz: *„**Ohne diesen
+   Lese-Schritt ist das Register write-only**"*. Der Satz stand da, seine
+   Betonung nicht.
+
+Nicht behoben, weil legitim: umgehängte Link-Texte, angepasste
+Überschriften-Ebenen, generalisierte Kennungen, weggelassene
+Fehlvorstellungs-Zitate, Fallstudien, Übungen und Verweise auf nicht
+mitreisendes Material.
+
+### Was die Methode über sich selbst ergab
+
+Der erste Durchlauf meldete **666 Abweichungen**. Als Defektzahl wertlos — zur
+Kalibrierung eine Datei bekannter Treue gegengelesen: dort waren **alle neun**
+Abweichungen legitim. Erst die Umstellung auf die *Defekt-Signatur* — der
+Spiegel sagt **weniger** — und das Filtern der Didaktik-Muster gab Signal:
+10 Kandidaten, davon 8 legitim, **2 echte Defekte**.
+
+Die anderen beiden Defekte fand keine der Satz-Prüfungen, sondern zwei
+Stichproben — und die Stichproben zeigten dabei, wo die Grenze liegt:
+
+- **Zahlwörter** („fünf" vs. „sechs" beim selben Substantiv) fand Defekt 3. Der
+  Satz ist eine bewusste Verdichtung und lag unter jeder Ähnlichkeitsschwelle;
+  der Satz-Vergleich konnte ihn nicht sehen. Case-sensitiv gezählt erzeugte
+  dieselbe Probe drei Falsch-Positive.
+- **Fettungs-Vergleich über die ganze Datei**: 136 Fälle, ausnahmslos Rauschen
+  — ein Begriff wird bei seiner Definition gefettet und danach normal genannt,
+  und der Definitionssatz fehlt im Spiegel zu Recht. Erst der Vergleich am
+  **erhaltenen** Satz gibt Signal: genau ein Treffer, Defekt 4.
+
+**Kein Gate daraus.** Die Trennung legitim/Paraphrase steckt in Filtern nach
+Augenschein; ein Sensor mit dieser Trefferquote wäre ein Vorschlag, kein Gate.
+Was bleibt, ist die Methode, nicht das Skript.
+
+### Antwort zwei: a-check meldet seine Blindheit jetzt selbst
+
+Welle 72 endete mit vier Befunden an a-check, „allen voran eine Laufzeit-Diagnose
+der eigenen Heuristik-Grenze". Aus vieren wurden sechs; **v0.17.0 setzt sie
+praktisch alle um**. Der Pin steht auf
+`ghcr.io/pt9912/a-check@sha256:665540114aea…` in allen sechs Skeletten.
+
+Die zwei neuen Diagnosen beantworten genau die Frage, die im Rollout sechsmal
+von Hand gestellt wurde:
+
+| Diagnose | Aussage |
+|---|---|
+| Grenz-Hinweis | *„N Import-Zeile(n) unterliegen einer Heuristik-Grenze"* — mit Datei, Zeile, Grund |
+| Auflösungs-Hinweis | *„Schicht X: N Datei(en), 0 von M Import-Symbolen lösen auf eine Schicht auf"* |
+
+Gegen die sechs Konfigurationen gelaufen: **alle sechs schweigen**. Damit ist
+zum ersten Mal *belegt* statt angenommen, dass keine der Deklarationen still
+blind ist. Dass das Schweigen etwas bedeutet, ist nachgestellt: Ein
+Komma-Import in Python meldet den Grenz-Hinweis punktgenau, und der Mono-Scan
+mit sprach-präfixierten Globs — der Fall, der ganz am Anfang vollständig grün
+und vollständig blind war — meldet jetzt *„0 von 14 Import-Symbolen lösen auf"*.
+Damit ist **Schritt 0 vom Handgriff zur Werkzeug-Eigenschaft** geworden: Was
+die Diagnose meldet, muss niemand mehr durch einen eingebauten Verstoß suchen.
+
+Zwei der Änderungen sind BREAKING, beide zu unseren Gunsten:
+
+- **`--print-mk` gibt einen Platzhalter statt eines Digests aus.** Genau der
+  Fehlpin, der hier v0.15.0 statt v0.16.0 kostete, ist damit unmöglich: Der
+  Platzhalter bricht laut, statt gültig auszusehen und falsch zu sein.
+- **`forbidden_constructs` bricht fail-closed**, wenn die Schicht keine
+  `port`-Rolle trägt, statt still wirkungslos zu bleiben.
+
+Dazu `$(DOCKER)` im generierten Fragment — verifiziert mit
+`make a-check DOCKER=podman`.
+
+### Antwort zwei, Teil zwei: die Grenze zieht dorthin, wo sie gelesen wird
+
+Und damit zur zweiten Kopie. Die ADR-Kette des a-check-Rollouts wurde an zwei
+Tagen **viermal** abgelöst, die letzten beiden Male aus demselben Grund: Eine
+Tabelle im Entscheidungs-Körper führte **Fakten über ein Fremdwerkzeug** —
+welche Schreibweise welcher Sensor sieht. Solche Fakten ändern sich mit jedem
+Release, und weil eine `Accepted`-ADR immutabel ist, erzwingt jede Änderung
+eine Nachfolge-ADR samt Umhängen aller Verweise.
+
+v0.17.0 hätte die vierte Ablösung in zwei Tagen ausgelöst: Die dort notierte
+Grenze *„das generierte Fragment ruft `docker` wörtlich auf"* ist behoben —
+upstream, an der Stelle, die die ADR selbst benannt hatte.
+
+Das Problem ist nicht die Kette, sondern der **Ort**. Eine Grenze wird
+gebraucht, wenn jemand die Konfiguration liest oder ändert, nicht wenn jemand
+die Entscheidung nachvollzieht. `ADR-0018` trägt die Entscheidung der
+Vorgängerin vollständig weiter — mit **derselben Nummerierung**, die Lehre aus
+dem vorigen Supersede — und ergänzt Punkt 7: Jede `<sprache>/.a-check.yml`
+trägt einen `GRENZE`-Block. Welche Schreibweise dieses Skelett umgehen könnte,
+ob der Bestandssensor sie sieht, was daraus folgt. Die ADR führt **kein
+Inventar mehr**; sie entscheidet, *dass* deklariert wird. Ein Werkzeug-Release
+ändert damit Kommentare, keine ADR.
+
+Drei Skelette trugen ihre Grenze bisher nur als Prosa (cpp, csharp, go) — jetzt
+alle sechs als benannter Block, damit die ADR-Aussage auch stimmt.
+
+Der Preis steht als Contra in der ADR: Es gibt keinen Ort mehr, an dem alle
+sechs Grenzen nebeneinander stehen, und keinen Sensor, der sie gegeneinander
+hält. Der Re-Evaluierungs-Trigger benennt genau das — und verlangt für einen
+gemeinsamen Ort dann einen Sensor, nicht wieder eine Tabelle.
+
+### Am Konsumenten abgelesen: die Adresse einer Adaption
+
+Anders als der Modul-8-Befund oben ist das **keine** Meldung eines Konsumenten,
+sondern eine Beobachtung an seinem Artefakt: `d-check` trägt in seinem
+Adaptions-Index `<a id>`-Anker, die der Kurs nirgends verlangt. Frage war, ob
+sie in die Vorlage gehören. Sie gehören — und der Grund ist stärker als
+Kosmetik.
+
+Der Kurs schreibt für `harness/conventions.md` die Verzeichnis-Form vor: Index
+hier, ein `MR` je Datei, und bei Auflösung wandert die Datei per `git mv` nach
+`conventions/done/`. Damit **bricht ein Pfad-Link auf eine Adaption genau in
+dem Moment, in dem die Adaption sich auflöst** — die Referenz stirbt am
+Erfolgsfall. Die Index-Zeile dagegen wechselt nur von einer Tabelle in die
+andere, innerhalb derselben Datei. Trägt sie einen expliziten Anker, überlebt
+die Adresse den Übergang.
+
+Es ist wortgleich das Argument, mit dem der Kurs die Slice-ID als Token statt
+als Pfad führt. Ausgeschrieben war es für Adaptionen nicht — und deshalb fehlte
+in der Vorlage die Stelle, an der die Adresse entsteht.
+
+Am realen Konsumenten gemessen statt hergeleitet: `d-check` hat **265**
+eingehende `conventions.md#mr-…`-Links, und `AGENTS.md` verweist dort auf
+`MR-022`, dessen Datei längst in `conventions/done/` liegt. Der Link hält,
+weil der Anker mitgewandert ist. Derselbe Verweis als Pfad wäre tot.
+
+Encodiert von der Quelle abwärts, nicht als Template-Drift:
+
+- **Kurs** ([`grundlagen/harness-dateien.md`](kurs/de/grundlagen/harness-dateien.md)) —
+  von außen wird der Index adressiert, nicht die Eintrags-Datei; der Anker
+  trägt die **Kennung, nie den Titel** (ein Titel-Slug bricht bei der ersten
+  Umformulierung und wäre genau die instabile Adresse, die er ersetzen soll);
+  und wer von der Inline- in die Verzeichnis-Form wandert, behält den alten
+  Überschriften-Slug **zusätzlich**, sonst rotten die schon veröffentlichten
+  Verweise.
+- **Kurs** ([`grundlagen/source-precedence.md`](kurs/de/grundlagen/source-precedence.md)) —
+  dieselbe Stelle sagte bisher, Kennungen in Tabellenzellen hätten „keinen
+  eigenen HTML-Anker". Wahr über den *automatischen*, und als unbedingter Satz
+  hätte er der neuen Regel widersprochen. Jetzt qualifiziert, mit der
+  Abgrenzung: Für die Spec-Straten lohnt es nicht — dort wandert nichts.
+- **Regelwerk**, beide Spiegel quelltreu; **Vorlagen**, `conventions.template.md`
+  (beide Tabellen) und `MR-NNN-titel.template.md` (Feld *Löst auf*).
+- **Worked Example** — und dort lag der Defekt, den die Regel voraussagt:
+  `done/MR-001` verwies per Pfad auf `MR-003`, das noch aktiv ist. Wäre `MR-003`
+  aufgelöst worden, wäre der Verweis gebrochen. Jetzt Index-Anker, wie gelehrt.
+
+**Ein Gate steht dahinter, und es ist gemessen.** Der `anchors`-Sensor deckt
+Inline-HTML-Anker mit ab; der Break-Test meldet den verfälschten Anker
+punktgenau als `anchor-missing`. Kein neues Skript, kein neues Modul.
+
+### Derselbe Faden, eine Frage weiter: der Ausgang, der die Wahl verschluckte
+
+Die Anschlussfrage lautete: Was passiert mit einer bestehenden `MR`, wenn die
+neue Baseline ihr **widerspricht** — und man die neue Regel eigentlich
+übernehmen will? Der Freshness-Audit (Modul 2) führt dafür fünf Ausgänge, und
+sie sind ausdrücklich als Klassifikation des *Deltas* eingeführt. Bei vieren
+folgt die Auflösung aus dem Delta. Beim fünften nicht: Dort sprang der Text
+direkt zu *„dann gilt sie in ihrem Geltungsbereich weiter"* — als hätte das
+Repo keine Wahl. Genau die hat es aber, und die Frage war der Beleg, dass der
+Abschnitt sie nicht beantwortet.
+
+Ausgang 5 nennt jetzt beide Zweige und die Abgrenzung dazwischen:
+
+- **Abweichung behalten** → der Widerspruch gehört benannt, sonst adoptiert das
+  Repo eine Regel, die es nicht befolgt (das stand schon da).
+- **Neue Regel übernehmen** → Rückbau wie bei *gegenstandslos*, aber aus dem
+  umgekehrten Grund: Dort hat die Baseline dem Repo recht gegeben, hier gibt
+  das Repo der Baseline recht. Der Unterschied gehört in die `Begründung` des
+  Nachfolge-Eintrags, weil er eine **Entscheidung** ist und kein Befund.
+- **Übernehmen wollen, aber noch nicht können** → keine `MR`. Eine Adaption
+  sagt *„diese Regel gilt hier nicht"*, ein Carveout sagt *„sie gilt, wir
+  erfüllen sie noch nicht"* — befristet, mit Trigger und Folge-Slice. Für den
+  Teilfall *Lockerung trifft verschärfte Baseline* stand das zwei Sätze weiter
+  schon; jetzt steht die Regel dahinter.
+
+Nebenbefund am Worked Example, gefunden beim Prüfen derselben Mechanik:
+`MR-003` des Beispiels löst `MR-001` auf, trug aber **weder `Löst auf` noch
+`Ausgelöst durch Baseline-Stand`** — beide Pflicht, sobald ein Eintrag einen
+früheren ablöst. Die Ablösung stand nur im Fließtext, und `Geltungsbereich`
+zeigte ersatzweise auf `MR-001` statt auf die Artefakte. Ausgerechnet die
+Datei, die diese Mechanik vorführen soll. Nachgetragen als deklarierter
+Konventions-Backfill — Append-only schützt die *Aussage*, nicht die Nachpflege,
+dieselbe Unterscheidung wie beim `Schärft:`-Backfill im ADR-Index.
+
+Kein Sensor prüft `MR`-Feldvollständigkeit; deshalb ist es nie aufgefallen und
+wird auch künftig nicht auffallen. Als Sensor-Kandidat notiert, nicht behauptet.
+
+### Was diese Welle ändert — und was das für Adopter heißt
+
+Am **Bundle** kommen an: die vier Treuekorrekturen
+(`grundlagen-traceability.md`, `modul-06-roadmap.md`,
+`modul-13-quality-gates.md`) und die neue Adress-Regel in beiden
+Regelwerks-Spiegeln plus beiden `conventions`-Vorlagen.
+
+Die Treuekorrekturen allein wären PATCH gewesen. Mit der Adress-Regel kommt
+eine **Regel hinzu** — additiv, nichts entfällt, kein Asset entfernt, kein
+Layout gebrochen: **MINOR**. Wer die Vorlage schon ausgefüllt hat, ergänzt die
+Anker in seinem Index und hängt Pfad-Verweise auf Adaptionen um; wer nichts
+tut, verliert nichts Bestehendes — er behält nur die Verweise, die beim
+nächsten `git mv` brechen.
+
+Die Stand-Zeile von [`lab/regelwerk/README.md`](lab/regelwerk/README.md) zieht
+auf Welle 73 nach.
+
+Der übrige Umfang liegt in `lab/example` (a-check-Pin, `GRENZE`-Blöcke,
+ADR-0018) und reist im Bundle nicht mit.
+
+Offen und als Fäden notiert: die 48 nackten ADR-Kennungen in `docs/plan/adr/`
+selbst (unzulässig zu beheben — Immutabilität, am eigenen `core-drift-vcs`
+belegt); und das Retiren von `check_closure_notes.py`, dessen Trigger jetzt
+**beobachtbar** ist statt erhofft — beide CRs sind bei d-check angenommen und
+liegen als `slice-097` und `slice-098` im Backlog. Der d-check-Pin bleibt auf
+`v0.52.0`: Die dortige unveröffentlichte Arbeit wird erst mit einem Tag
+relevant, auf ungetaggte Commits pinnen wir nicht.
+
 ## Welle 72 — 2026-08-09 · Zwei Sensoren an derselben Aussage
 
 ADR-0001 des Beispiel-Repos verlangt „pro Sprach-Skelett ein Architekturtest",
