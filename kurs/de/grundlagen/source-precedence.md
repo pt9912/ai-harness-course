@@ -240,11 +240,18 @@ nummeriert nur. Der Carveout bleibt grundsätzlich beim Abschnitt
 (Begründung in [§Referenz-Richtung (SDP)](referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
 
 **Der Link trägt den Abschnitt, der Text die Kennung.** Kennungen in
-Tabellenzellen haben keinen eigenen HTML-Anker; ein Verweis auf `SPEC-015`
-zeigt technisch auf die Sektion, in der die Zeile steht. Ein Doku-Sensor prüft
-darum den Anker, nie die Kennung: Wird eine `SPEC-*` umbenannt oder gestrichen,
-bleiben verweisende ADRs still veraltet. Das ist ein Review-Griff, kein Gate —
-wer eine Kennung anfasst, sucht ihre Nennungen selbst.
+Tabellenzellen bekommen keinen *automatischen* HTML-Anker; ein Verweis auf
+`SPEC-015` zeigt technisch auf die Sektion, in der die Zeile steht. Ein
+Doku-Sensor prüft darum den Anker, nie die Kennung: Wird eine `SPEC-*`
+umbenannt oder gestrichen, bleiben verweisende ADRs still veraltet. Das ist ein
+Review-Griff, kein Gate — wer eine Kennung anfasst, sucht ihre Nennungen selbst.
+
+Eine Zeile lässt sich **explizit** adressierbar machen — ein `<a id="…"></a>` in
+der Kennungs-Zelle —, und das lohnt genau dann, wenn ihre Datei-Position
+wandert, ihre Zeile aber bleibt: bei den `MR`-Zeilen des Adaptions-Index
+([§`harness/conventions.md`](harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
+Für die Spec-Straten gilt das nicht — dort wandert nichts, und ein Anker je
+Zeile wäre Pflege ohne Gegenwert.
 
 ### Vergabe: woher die nächste Nummer kommt
 

@@ -25,5 +25,5 @@ keine benannte Regel ersetzt, ist ein **Fork**, keine Adaption.
 - **Adaption:** <was stattdessen gilt — z. B. „Source-Precedence-Tabelle führt keinen eigenen Rang für `spec/spezifikation.md`: acht statt neun Ränge">
 - **Begründung:** <warum, idealerweise mit Praxis-Bezug — z. B. „reines Policy-Repo, in dem keine eigenen technischen Festlegungen entstehen">
 - **Auflösungs-Trigger:** <Trigger oder "permanent" — z. B. „sobald das Repo eigene technische Festlegungen trägt">
-- **Löst auf:** <MR-NNN> *(nur, wenn dieser Eintrag einen früheren ablöst — sonst Zeile weglassen)*
+- **Löst auf:** [`MR-<NNN>`](../conventions.md#mr-<NNN>) *(nur, wenn dieser Eintrag einen früheren ablöst — sonst Zeile weglassen; der Verweis geht auf die Index-Zeile, nicht auf die Eintrags-Datei: die wandert bei Auflösung nach `done/` und ein Pfad-Link bricht genau dann)*
 - **Ausgelöst durch Baseline-Stand:** <tag> *(Pflicht zusammen mit „Löst auf" — welcher Baseline-Stand die Ablösung ausgelöst hat)*

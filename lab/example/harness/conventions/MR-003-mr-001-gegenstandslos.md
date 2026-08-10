@@ -3,7 +3,8 @@
 **Status:** Accepted
 
 - **Datum:** 2026-08-01
-- **Geltungsbereich:** [`MR-001`](done/MR-001-source-precedence-mit-spezifikations-schicht.md)
+- **Geltungsbereich:** [`harness/README.md` §Source precedence](../README.md#source-precedence)
+  und `AGENTS.md` §Kanonische Quellen — derselbe Bereich, den `MR-001` abdeckte
 - **Ersetzt-Baseline-Regel:** — *(keine; dieser Eintrag löst eine eigene
   frühere Adaption auf und tritt nicht an die Stelle einer Baseline-Regel)*
 - **Adaption:** *keine* — dieser Eintrag löst `MR-001` auf. Die Baseline führt
@@ -17,3 +18,6 @@
   Baseline-Stand nennt — dieselbe Append-only-Disziplin wie bei ADRs
   ([`source-precedence.md` §Source Precedence](../../../../kurs/de/grundlagen/source-precedence.md#source-precedence)).
 - **Auflösungs-Trigger:** permanent.
+- **Löst auf:** [`MR-001`](../conventions.md#mr-001)
+- **Ausgelöst durch Baseline-Stand:** Kurs-Welle 62 (2026-08-01) — die Welle,
+  die alle drei Spec-Straten obligatorisch machte.

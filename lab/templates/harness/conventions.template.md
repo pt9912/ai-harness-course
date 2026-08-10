@@ -113,20 +113,34 @@ sie gilt für jeden Lauf.
 
 <!-- Eine Zeile je Datei in harness/conventions/. Geltungsbereich und
      Ersetzt-Baseline-Regel stehen hier, damit ein Agent ohne Öffnen
-     entscheiden kann, ob der Eintrag ihn betrifft. -->
+     entscheiden kann, ob der Eintrag ihn betrifft.
+
+     Das <a id="mr-<NNN>"> in der MR-Zelle ist die Adresse, unter der andere
+     Dateien diese Adaption referenzieren: conventions.md#mr-<NNN>. Es steht
+     hier und nicht in der Eintrags-Datei, weil die Datei bei Auflösung nach
+     conventions/done/ wandert und ein Pfad-Link dabei bricht — die Zeile
+     wechselt nur die Tabelle, der Anker reist mit. Der Anker trägt die
+     Kennung, nie den Titel: Titel werden umformuliert, Kennungen nicht.
+
+     Kam dieses Repo von der Inline-Form (### MR-NNN — Titel), trägt die
+     Zeile den alten Überschriften-Slug als ZWEITEN Anker daneben, sonst
+     rotten die bereits veröffentlichten Verweise. -->
 
 | MR | Titel | Geltungsbereich | Ersetzt-Baseline-Regel |
 |---|---|---|---|
-| [\<NNN\>](conventions/MR-<NNN>-<titel>.md) | <Titel> | <Dateien / Sub-Areas> | <§Abschnitt der Baseline> |
+| [\<NNN\>](conventions/MR-<NNN>-<titel>.md) <a id="mr-<NNN>"></a> | <Titel> | <Dateien / Sub-Areas> | <§Abschnitt der Baseline> |
 
 ### Aufgelöste Adaptionen
 
 <!-- Eine Zeile je Datei in harness/conventions/done/ — nur ID und
-     Nachfolger, damit die Kette auffindbar bleibt, ohne gelesen zu werden. -->
+     Nachfolger, damit die Kette auffindbar bleibt, ohne gelesen zu werden.
+
+     Der Anker der Zeile zieht aus der Tabelle oben mit um; er ist der Grund,
+     warum ein Verweis auf eine aufgelöste Adaption nicht bricht. -->
 
 | MR | aufgelöst durch |
 |---|---|
-| [\<NNN\>](conventions/done/MR-<NNN>-<titel>.md) | [MR-\<NNN\>](conventions/MR-<NNN>-<titel>.md) |
+| [\<NNN\>](conventions/done/MR-<NNN>-<titel>.md) <a id="mr-<NNN>"></a> | [MR-\<NNN\>](conventions/MR-<NNN>-<titel>.md) |
 
 ## Zusatzklassen-Deklaration für Sensors-Bindung
 

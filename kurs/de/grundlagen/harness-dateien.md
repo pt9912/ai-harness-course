@@ -248,6 +248,28 @@ Die Form bleibt Wahl: Ein Repo mit zwei permanenten Adaptionen darf sie
 inline führen. Der **Default** ist die Verzeichnis-Form, weil sie mit der
 Adaptions-Zahl nicht mitwächst.
 
+**Von außen wird der Index adressiert, nicht die Eintrags-Datei — und dafür
+braucht die Index-Zeile einen expliziten Anker.** Wer aus `AGENTS.md`, einem
+Slice oder einer ADR auf eine Adaption zeigt, verlinkt
+`harness/conventions.md#mr-<NNN>`, nicht `conventions/MR-<NNN>-<titel>.md`. Der
+Grund ist der Lifecycle: Die Eintrags-Datei wandert bei Auflösung per `git mv`
+nach `conventions/done/` — ein Pfad-Link darauf bricht **genau in dem Moment,
+in dem die Adaption sich auflöst**. Die Index-Zeile wandert dabei nur von einer
+Tabelle in die andere, innerhalb derselben Datei; der Anker reist mit. Es ist
+dasselbe Argument, mit dem die Slice-ID ein Token bleibt statt ein Pfad
+([Modul 5](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
+
+Ein solcher Anker muss **explizit** gesetzt werden: Eine Tabellenzeile bekommt
+keinen automatischen Anker
+([§ID-Schema als Klammer](source-precedence.md#id-schema-als-klammer)),
+also trägt die `MR`-Zelle ein `<a id="mr-<NNN>"></a>`. Adressiert wird die
+**Kennung**, nicht der Titel — ein Anker, der den Titel enthält, bricht bei der
+ersten Umformulierung und wäre damit genau die instabile Adresse, die er
+ersetzen soll. Wandert ein Repo von der Inline- in die Verzeichnis-Form,
+verschwinden mit den `### MR-<NNN> — <Titel>`-Überschriften auch deren
+Auto-Anker: Dann trägt die Index-Zeile den alten Überschriften-Slug **zusätzlich**,
+sonst rottet jeder bereits veröffentlichte Verweis.
+
 Nebeneffekt, kein Selbstzweck: Ein Eintrag je Datei ist auch die einzige
 Form, in der die Append-only-Disziplin *prüfbar* wird — eine wachsende
 Sammeldatei lässt sich nicht gegen Core-Drift pinnen, eine akzeptierte

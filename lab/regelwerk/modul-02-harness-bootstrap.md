@@ -238,10 +238,19 @@ Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
   und hält fest, dass die Baseline dazu seit `<tag>` schweigt — wo die Setzung
   selbst künftig lebt, entscheidet das Repo), oder sie **widerspricht** der
   neuen Fassung — die regelt das
-  Thema **neu und anders**, als die Adaption es setzt; dann gilt sie in ihrem
-  Geltungsbereich
-  weiter, aber der Widerspruch gehört benannt — sonst adoptiert das Repo eine
-  Regel, die es nicht befolgt. **Auch `permanent`-Einträge werden mitgeprüft:**
+  Thema **neu und anders**, als die Adaption es setzt. Das ist der einzige
+  Ausgang, an dem das Delta die Antwort **nicht** vorgibt, denn hier hat das
+  Repo eine Wahl: Entweder die Adaption gilt in ihrem Geltungsbereich weiter —
+  dann gehört der Widerspruch benannt, sonst adoptiert das Repo eine Regel, die
+  es nicht befolgt —, oder das Repo **übernimmt** die neue Regel. Übernehmen ist
+  ein Rückbau wie oben, nur aus einem anderen Grund: Bei *gegenstandslos* hat
+  die Baseline dem Repo recht gegeben, hier gibt das Repo der Baseline recht.
+  Dieser Unterschied gehört in die `Begründung` des Nachfolge-Eintrags, weil er
+  eine **Entscheidung** ist und kein Befund. Und will das Repo übernehmen, kann
+  es aber noch nicht, ist das keine `MR` mehr: Eine Adaption sagt *„diese Regel
+  gilt hier nicht"*, ein Carveout sagt *„sie gilt, wir erfüllen sie noch
+  nicht"* — befristet, mit Auflösungs-Trigger und Folge-Slice
+  ([Modul 7](modul-07-carveouts.md)). **Auch `permanent`-Einträge werden mitgeprüft:**
   *permanent* heißt „kein automatischer Auflösungs-Trigger", nicht
   „unauflösbar". War die Adaption eine *Lockerung* und die neue Baseline
   verschärft, ist die richtige Antwort ein **Carveout** mit Auflösungs-Trigger

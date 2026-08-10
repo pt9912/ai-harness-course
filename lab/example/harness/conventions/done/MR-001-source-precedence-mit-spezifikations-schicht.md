@@ -2,7 +2,7 @@
 
 **Status:** Accepted · aufgelöst durch MR-003
 
-> **Aufgelöst durch [`MR-003`](../MR-003-mr-001-gegenstandslos.md)
+> **Aufgelöst durch [`MR-003`](../../conventions.md#mr-003)
 > (2026-08-01).** Der Eintrag bleibt unverändert stehen — Adaptionen werden
 > nicht überschrieben, sondern von einem Nachfolger abgelöst
 > ([`source-precedence.md` §Source Precedence](../../../../../kurs/de/grundlagen/source-precedence.md#source-precedence)).

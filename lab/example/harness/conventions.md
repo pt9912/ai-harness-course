@@ -35,6 +35,13 @@ Diese Datei trägt den **Index**; die Einträge liegen einzeln unter
 die Verzeichnis-Position, kein Status-Feld
 ([`harness-dateien.md` §Konventionsspeicher](../../../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
 
+Die Pflichtfelder `Löst auf` und `Ausgelöst durch Baseline-Stand` wurden am
+2026-08-10 als Konventions-Backfill in `MR-003` ergänzt; der Eintrag hatte
+seine Ablösung bis dahin nur im Fließtext geführt. Traceability-Metadata, keine
+Adaptions-Änderung — Append-only schützt die *Aussage*, nicht die Nachpflege
+(dieselbe Unterscheidung wie beim `Schärft:`-Backfill im
+[ADR-Index](../docs/plan/adr/README.md#konventionen)).
+
 ### MR-000 — Baseline-Aussage
 
 - **Datum:** 2026-05-15
@@ -65,14 +72,14 @@ die Verzeichnis-Position, kein Status-Feld
 
 | MR | Titel | Geltungsbereich | Ersetzt-Baseline-Regel |
 |---|---|---|---|
-| [002](conventions/MR-002-konventions-bindung-als-sensors-klasse.md) | Konventions-Bindung als Sensors-Klasse | Bindung-Spalte in `harness/README.md` §Sensors | [`harness-dateien.md` §Sensors-Bindung](../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
-| [003](conventions/MR-003-mr-001-gegenstandslos.md) | MR-001 gegenstandslos durch Baseline-Update | `MR-001` | — |
+| [002](conventions/MR-002-konventions-bindung-als-sensors-klasse.md) <a id="mr-002"></a> | Konventions-Bindung als Sensors-Klasse | Bindung-Spalte in `harness/README.md` §Sensors | [`harness-dateien.md` §Sensors-Bindung](../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
+| [003](conventions/MR-003-mr-001-gegenstandslos.md) <a id="mr-003"></a> | MR-001 gegenstandslos durch Baseline-Update | `harness/README.md` §Source precedence, `AGENTS.md` §Kanonische Quellen | — |
 
 ### Aufgelöste Adaptionen
 
 | MR | aufgelöst durch |
 |---|---|
-| [001](conventions/done/MR-001-source-precedence-mit-spezifikations-schicht.md) | [MR-003](conventions/MR-003-mr-001-gegenstandslos.md) |
+| [001](conventions/done/MR-001-source-precedence-mit-spezifikations-schicht.md) <a id="mr-001"></a> | [MR-003](#mr-003) |
 
 ## Zusatzklassen-Deklaration für Sensors-Bindung
 
