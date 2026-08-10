@@ -18,7 +18,7 @@ help: ## Targets anzeigen
 # Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment.
 # Der `include` steht hinter `help`, weil das erste gelesene Target das
 # Default-Goal ist.
-DCHECK_DIGEST := sha256:412a6fd3100601775b40dbbcf87365635f8a1e5deab21cdb8e83aa979b24662c
+DCHECK_DIGEST := sha256:f505578490bb53b9171b383dfaec0811f5154133df76d5d730796e8a07f2dda3
 include d-check.mk
 
 gates: ## Sprachskelett-Gates ausführen: make gates COURSE_LANG=go|python|kotlin|java|csharp|cpp
@@ -64,7 +64,7 @@ agent-review: ## Review-Fixture fuer Modul 10 anzeigen
 	echo "3. spec/lastenheft.md"; \
 	echo "Expected: HIGH, MEDIUM and LOW finding categories"
 
-verify-closure-notes: ## ADR-0011 — Closure-Note-Pflicht fuer done/-Slices pruefen
+verify-closure-notes: ## ADR-0019 — Vorfuehr-Gegenstand fuer Modul 11; die Deckung traegt doc-check
 	@python3 tools/check_closure_notes.py
 
 verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-009

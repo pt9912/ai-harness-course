@@ -13,6 +13,7 @@
 | [0016](0016-a-check-in-allen-skeletten.md) | a-check ist das zweite Layering-Gate in allen Sprach-Skeletten | Superseded by 0017 (2026-08-09) | ADR-0001, Supersedes 0015 |
 | [0017](0017-kotlin-luecke-am-bestandssensor-geschlossen.md) | Die Kotlin-Lücke gehört in den Bestandssensor, nicht in eine Zusatzregel | Superseded by 0018 (2026-08-09) | ADR-0001, Supersedes 0016 |
 | [0018](0018-grenzen-gehoeren-in-die-konfiguration.md) | Grenzen stehen in der Konfiguration, nicht im Entscheidungs-Körper | Accepted (2026-08-09) | ADR-0001, Supersedes 0017 |
+| [0019](0019-closure-sensor-und-skript-rolle.md) | Das Closure-Gate trägt der Doku-Prüfer, das Skript trägt die Lehre | Accepted (2026-08-10) | [ADR-0011](0011-closure-note-pflicht.md), Modul 11 |
 
 ## Konventionen
 

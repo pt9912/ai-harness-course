@@ -119,6 +119,54 @@ targets:
 # widersprechen.
 planning:
   roadmap: docs/plan/planning/in-progress/roadmap.md
+  # Zweite Faehigkeit desselben Moduls: die STRUKTUR der Closure-Notizen im
+  # Ruheort — dieselbe Aussage, die `tools/check_closure_notes.py` prueft, an
+  # denselben acht Dateien und mit denselben vier Bedingungen (12 Break-Tests,
+  # je beide Sensoren am selben Fund). Das Skript bleibt trotzdem: Es ist der
+  # Vergleichsgegenstand des Worked Example von Kurs-Modul 11 und wird von dort
+  # per Pfad verlinkt. Seine Existenz ist didaktisch begruendet, nicht durch
+  # Deckung — die traegt seit d-check v0.56.0 dieses Modul allein.
+  closure:
+    dir: docs/plan/planning/done
+    # Kandidaten-Menge = ALLE Dateien im Ruheort, nicht nur die Slices.
+    # ADR-0011 §Geschichte zaehlt `welle-1-mvp.md` ausdruecklich zu den Dateien,
+    # fuer die die Pflicht gilt; `slice-*.md` waere unter-gefasst.
+    glob: '*.md'
+    # Die Schwelle ist eine ENTSCHEIDUNG, keine Einstellung: ADR-0011
+    # §Entscheidung 1 sagt "mindestens zwei Saetze". d-checks Default ist 4 —
+    # ein Gate schaerfer als seine bindende ADR, und genau daran scheiterte
+    # zuerst `welle-1-mvp.md`, dessen §7 laut `welle.template.md` ein Zeiger auf
+    # die Ergebnis-Notiz ist und keine Notiz.
+    min-sentences: 2
+    # Um Ebene 1 geweitet gegenueber dem Default `^#{2,3} `: Die Welle-Ergebnis-
+    # notiz fuehrt ihre Bestimmung im TITEL (`welle-results.template.md` beginnt
+    # mit `# Welle <NN> — <Titel> — Closure-Notiz`). Ohne die Weitung meldet
+    # ausgerechnet die Datei `closure-note-missing`, die die Notiz IST.
+    # `Closure-Trigger` und `Offene Risiken zur Welle-Closure` bleiben draussen,
+    # weil das Muster die Notiz benennen muss.
+    heading-pattern: '^#{1,3} .*Closure-Notiz'
+    # Vierte Bedingung (d-check v0.55.0, opt-in): der unausgefuellte Rumpf einer
+    # Vorlage. Ein Template-Rumpf ist syntaktisch vollstaendig und passiert die
+    # drei anderen Bedingungen — Abschnitt da, Schwelle erreicht, keine Floskel.
+    # Inline-Code zaehlt nicht mit, dort wird Syntax GEZEIGT; genau daran hing
+    # die Falsch-Positiv-Sorge des abgeloesten Skripts (`p95 < 1 s`).
+    placeholder: true
+    # Vollstaendig uebernommen aus `tools/check_closure_notes.py`. Bis v0.55.0
+    # gingen nur acht der zehn Phrasen: d-check matchte den literalen Substring,
+    # `ok` traf damit in `dokumentiert`. Seit v0.56.0 vergleicht das Modul an
+    # WORTGRENZEN, und beide sind benutzbar — die Vorbedingung des Handbuchs
+    # (null Treffer im Bestand) ist mit der neuen Lexik nachgezaehlt.
+    boilerplate:
+      - "see pr"
+      - "n/a"
+      - "ok"
+      - "siehe ticket"
+      - "wird nachgereicht"
+      - "fertig"
+      - "läuft jetzt"
+      - "lauft jetzt"
+      - "war ganz okay"
+      - "passt schon"
 
 # Linkpflicht fuer ADR-Kennungen. Nicht Kosmetik: `matrix` prueft den STATUS
 # eines Ziels nur an Links — eine nackte Kennung im Fliesstext ist fuer das
