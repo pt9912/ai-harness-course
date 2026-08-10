@@ -228,19 +228,217 @@ dieselbe Unterscheidung wie beim `Schärft:`-Backfill im ADR-Index.
 Kein Sensor prüft `MR`-Feldvollständigkeit; deshalb ist es nie aufgefallen und
 wird auch künftig nicht auffallen. Als Sensor-Kandidat notiert, nicht behauptet.
 
+### d-check v0.53.0 bis v0.56.0: ein stiller Grün-Pfad und zwei gelieferte CRs
+
+Vier Releases an einem Tag, der Pin steht auf **v0.56.0**.
+
+**v0.53.0 nennt als Anlass einen ausgelieferten stillen Grün-Pfad in v0.52.0**
+— genau unserem damaligen Pin: Hinter einem bis zum Dateiende offenen Fence
+übersprang die Vorverarbeitung den Rest der Datei, und Module meldeten grün,
+ohne gelesen zu haben. Kein Ausfall, den man sieht: Ein Gate, das nichts gelesen
+hat, sieht aus wie ein Gate, das nichts gefunden hat. Gemessen, bevor der Pin
+stieg — Kurs-Repo 0 Befunde, Beispiel 0 Befunde: Wir waren nicht betroffen.
+
+**Der Bundle-Check bekommt `spans` dazu.** `tools/bundle-d-check.yml` fuhr nur
+`[links, anchors]` — und beide sind genau die Module, die hinter einem offenen
+Fence still werden. Im Bundle wiegt das schwerer als im Repo: Der
+Release-Rewrite fasst die Dateien an, ein Fence, der erst dabei aufgeht, ist im
+geprüften Repo-Stand nicht sichtbar. Das ist derselbe Grund, aus dem es diesen
+Check überhaupt gibt. Break-Test am **gebauten** Bundle: offener Fence →
+`fence-unclosed` an der Öffnungszeile, 1 Befund; entfernt → 0.
+
+**v0.54.0 liefert `slice-097` — den ersten unserer beiden CRs.**
+`planning.closure.glob` entkoppelt den Kandidaten-Filter der Closure-Prüfung von
+`slice-glob`. Damit ist die Closure-Fähigkeit im Beispiel **verdrahtet**, und
+zwar mit zwei bewussten Setzungen:
+
+- `glob: '*.md'` — im Ruheort liegen neben Slices die Welle-Dokumente, und die
+  tragen dieselbe Pflicht. `slice-glob` zu weiten wäre der falsche Knopf: Es
+  zählt, was *in Arbeit* ist, und die Lifecycle-Invariante meldete danach falsch.
+- `heading-pattern: '^#{1,3} .*Closure-Notiz'` statt des Defaults `^#{2,3}`.
+  Grund ist eine Form des Korpus selbst: `welle-results.template.md` führt die
+  Bestimmung im **Titel** (`# Welle <NN> — <Titel> — Closure-Notiz`), nicht in
+  einem Abschnitt. Gemessen: Mit dem Default meldet ausgerechnet die Datei
+  `closure-note-missing`, **die die Notiz ist**. `Closure-Trigger` und `Offene
+  Risiken zur Welle-Closure` bleiben draußen, weil das Muster die Notiz benennen
+  muss — genau die Falsch-grün-Falle, die das Skript in Welle 72 hatte.
+
+Break-Tests: H1-Notiz entfernt → `closure-note-missing`; Notiz auf einen Satz
+gekürzt → `closure-note-thin`. Beide punktgenau.
+
+**Wo diese Prüfung läuft, ist die schwächere Aussage.** `make -C lab/example
+verify` steht in keinem Workflow — weder die neue Closure-Fähigkeit noch die
+vier Module des Beispiels (`matrix`, `targets`, `planning`, `ids`) noch das
+Skript daneben laufen in CI. Das ist älter als diese Welle und keine Folge der
+Verdrahtung, aber `checks.yml` trägt im eigenen Kopf den Satz, den das verletzt:
+*„Ein Gate, das nur lokal läuft, ist ein Vorschlag."* Als Faden notiert, nicht
+still gelassen.
+
+**v0.55.0 liefert `slice-098` — den zweiten CR.** `closure.placeholder: true`
+meldet den unausgefüllten Rumpf einer Vorlage; Inline-Code zählt nicht mit, weil
+dort Syntax *gezeigt* wird — genau die Falsch-Positiv-Sorge, gegen die die
+Regex des Skripts eigens gebaut war.
+
+Damit sind **beide** CRs geliefert, und die Kongruenz ist Klasse für Klasse
+gemessen, je Verstoß beide Sensoren nebeneinander:
+
+| Klasse | d-check | Skript |
+|---|---|---|
+| Bestand unverändert | still | still |
+| Sektion entfernt | `closure-note-missing` | rot |
+| Notiz auf einen Satz | `closure-note-thin` | rot |
+| unausgefüllter Platzhalter | `closure-note-placeholder` | rot |
+| Floskel (8 von 10 Phrasen) | `closure-note-boilerplate` | rot |
+| Floskel `ok` / `n/a` | **still** | rot |
+
+**Beim Portieren der Floskel-Liste ging es schief.** Der *unveränderte* Bestand
+meldete plötzlich vier `closure-note-boilerplate`. Ursache: d-check matchte den
+**literalen Substring**, das Skript die **Wortgrenze** — `ok` trifft in
+`dokumentiert`, `n/a` in Pfaden. Kontrolliert nachgewiesen an einer Probe, deren
+einziges Vorkommen in `dokumentiert` steckt: mit `ok` rot, nach Ersetzen des
+einen Wortes grün. **v0.56.0 behebt es** (`slice-104`, mit derselben Messung —
+„68 Treffer, davon einer echt"); alle zehn Phrasen des Skripts stehen jetzt in
+der Konfiguration.
+
+Die Lehre daran überlebt den Fix: **Die Vorbedingung des Handbuchs — „Phrase nur
+aufnehmen, wenn sie im Bestand null Treffer hat" — ist nur so gut wie die Lexik,
+mit der man zählt.** Mit Wortgrenzen gezählt: zehnmal Null. Mit d-checks
+damaliger Lexik: achtmal Null, einmal 18, einmal 6. Dieselbe Frage, zwei
+Antworten, und die falsche hätte ein dauerhaft rotes Gate eingebaut.
+
+### v0.56.0 macht `closure-note-thin` schärfer — und deckt einen Denkfehler auf
+
+Das Release warnt: *„Ein grüner Lauf kann rot werden."* Vor dem Pin gemessen,
+und genau so trat es ein: `welle-1-mvp.md:81` meldete neu `closure-note-thin`.
+
+Der Befund ist **richtig am Kandidaten und falsch an der Kandidaten-Menge**.
+Jene Datei ist der Welle-*Plan*, und ihr §7 lautet vollständig:
+
+```markdown
+## 7. Closure-Notiz
+
+Ergebnis: [`welle-1-results.md`](welle-1-results.md).
+Zähler: [`../observations.md`](../observations.md).
+```
+
+Das ist die von `welle.template.md` **vorgeschriebene** Form — die Notiz selbst
+lebt in `welle-<NN>-results.md`. Vier Sätze dort zu verlangen hieße, die
+Ergebnis-Notiz zu duplizieren, also genau die Drift zu erzeugen, gegen die der
+Kurs sonst antritt. Bis v0.55.0 rutschte die Datei nur durch, weil die Punkte in
+den Link-Pfaden als Satzenden zählten — grün aus dem falschen Grund.
+
+Der Kandidatenfilter steht deshalb jetzt auf `slice-*.md`. Der Wunsch wäre
+„Slices **plus** Ergebnis-Notizen, **ohne** den Plan", und er lässt sich nicht
+schreiben: `glob` ist ein einzelner String, eine Liste wird abgelehnt
+(`cannot unmarshal !!seq into string`), Brace-Ausdrücke erzeugen einen
+Phantom-Kandidaten, Negations-Klassen greifen nicht. Mit dem engeren Glob
+entfällt auch die `heading-pattern`-Weitung auf Ebene 1 — sie trug nur die
+Ergebnis-Notiz, und eine Einstellung, die nicht beißt, ist eine Behauptung.
+
+### Kongruenz unter v0.56.0 — und zwei eigene Fehler auf dem Weg dorthin
+
+| Klasse | d-check | Skript |
+|---|---|---|
+| Bestand unverändert | still | still |
+| Sektion entfernt | `closure-note-missing` | rot |
+| Notiz auf einen Satz | `closure-note-thin` | rot |
+| Floskel, mehrwortig | `closure-note-boilerplate` | rot |
+| Floskel `Ok.` allein | `closure-note-boilerplate` | rot |
+| unausgefüllter Platzhalter | `closure-note-placeholder` | rot |
+
+Der erste Anlauf sagte: *„gleichauf in der Sache, aber d-check prüft nur die 6
+Slices statt aller 8 Dateien — retiren hieße Deckung verlieren."* Das war
+**falsch, und zwar zweifach an meiner eigenen Konfiguration**:
+
+- **Die Schwelle stand auf der Werkzeug-Vorbelegung, nicht auf der
+  Entscheidung.** `min-sentences` lag bei d-checks Default 4; **ADR-0011
+  §Entscheidung 1 sagt „mindestens zwei Sätze"**. Ein Gate, das schärfer ist als
+  seine ADR, ist genauso falsch wie eines, das lascher ist — beides setzt eine
+  Entscheidung durch, die niemand getroffen hat. Und genau daran scheiterte
+  `welle-1-mvp.md`, was ich dann fälschlich als Werkzeug-Mangel deutete.
+- **Die Kandidaten-Menge war unter-, nicht über-gefasst.** ADR-0011 zählt in
+  ihrer Geschichte `welle-1-mvp.md` **ausdrücklich** zu den betroffenen Dateien.
+  `glob: 'slice-*.md'` war der Fehler, `*.md` die richtige Antwort.
+
+Mit beiden Werten aus der ADR ist der Bestand grün und d-check echte Obermenge —
+belegt mit **12 Break-Tests über alle drei Dateiarten** des Ruheorts (Slice,
+Welle-Ergebnisnotiz, Welle-Plan), je beide Sensoren am selben Fund, Bestand
+beidseitig still. Nicht gebraucht wurde damit ein Glob wie `*[^p].md`, der zwar
+funktioniert, aber nur, weil *diese* Welle „mvp" heißt; die nächste
+(`welle-3-skalierung` im Kurs) hätte ihn still gebrochen.
+
+### Das Skript bleibt trotzdem — und der Grund stand nicht im Code
+
+Technisch war es ab hier ablösbar. Der Fußabdruck sagte etwas anderes:
+[Modul 11](kurs/de/04-qualitaet/modul-11-verification.md) ist das Worked Example
+*„Fitness Function ohne Standard-Tool"* — sieben Schritte, an deren Ende man das
+Skript selbst schreibt —, und es verlinkt `lab/example/tools/check_closure_notes.py`
+per Pfad als Vergleichsgegenstand. Dazu hing die Skill-Vorlage
+`closure-note-reviewer` mit dreizehn Nennungen daran.
+
+Löschen hätte also nicht Redundanz entfernt, sondern **dem Kurs seinen Gegenstand
+genommen**. Die Norm-Hierarchie entscheidet das eindeutig: Ein Beispiel zu
+löschen, auf das der Kurs zeigt, macht den *Kurs* falsch, nicht das Beispiel
+richtig.
+
+Entschieden in [ADR-0019](lab/example/docs/plan/adr/0019-closure-sensor-und-skript-rolle.md)
+(Bezug auf ADR-0011, kein Supersede — dieselbe Form wie beim zweiten
+Layering-Sensor): **Die Deckung trägt `planning.closure`, das Skript trägt die
+Lehre.** Beide laufen weiter, denn ein Worked Example, dessen Gegenstand nicht
+mehr läuft, ist ein totes Beispiel. Wo das Skript als *Gate* dokumentiert war —
+`AGENTS.md` §3, `harness/README.md` §Sensors, `docs/plan/planning/README.md` —
+steht jetzt seine Rolle.
+
+**Der Kurs bekommt daraus einen achten Schritt**, werkzeug-agnostisch formuliert:
+*Ein selbstgebautes Gate ist auf Zeit gebaut.* „Kein Standard-Tool prüft das" ist
+eine Aussage über heute. Erscheint später eines, ist die Frage, ob es eine
+Obermenge ist — Kandidaten-Menge, Bedingungen und **die Schwelle, wie die ADR sie
+setzt**, jeweils einzeln nachgewiesen, je Verstoßklasse mit beiden Sensoren
+nebeneinander. Und es gibt eine dritte Antwort neben *retiren* und *behalten*:
+Ein Skript kann einen **anderen Konsumenten** bekommen — dann trägt es nicht mehr
+Deckung, sondern eine Rolle, und die gehört ausgeschrieben.
+
+Die Skill-Vorlage nennt jetzt kein Beispiel-Werkzeug mehr, sondern „das
+Struktur-Gate deines Repos" — dieselbe Korrektur wie beim retirten
+`check-references` in Welle 72: Die Norm beschreibt den Gate, nicht sein Target.
+
+Zwei Lehren aus dem Verlauf:
+
+- **Ein Trigger auf fremde Buchführung misst deren Ordnung, nicht die eigene
+  Vorbedingung.** Der Faden nannte zwischenzeitlich *„`slice-098` landet in
+  d-checks `done/`"* — beobachtbar, aber am falschen Gegenstand: Die Fähigkeit
+  war ausgeliefert, während die Slice-Datei im Tag noch in `in-progress/` stand.
+- **Ein Tag ist kein Release.** v0.56.0 existierte zwischenzeitlich als Tag ohne
+  veröffentlichtes Release und ohne Image in der Registry — nichts, worauf sich
+  pinnen ließe. Geprüft mit Gegenprobe, damit die Feststellung nicht selbst ein
+  stiller Fehlschlag war.
+
 ### Was diese Welle ändert — und was das für Adopter heißt
 
-Am **Bundle** kommen an: die vier Treuekorrekturen
-(`grundlagen-traceability.md`, `modul-06-roadmap.md`,
-`modul-13-quality-gates.md`) und die neue Adress-Regel in beiden
-Regelwerks-Spiegeln plus beiden `conventions`-Vorlagen.
+Am **Bundle** kommen an:
 
-Die Treuekorrekturen allein wären PATCH gewesen. Mit der Adress-Regel kommt
-eine **Regel hinzu** — additiv, nichts entfällt, kein Asset entfernt, kein
-Layout gebrochen: **MINOR**. Wer die Vorlage schon ausgefüllt hat, ergänzt die
-Anker in seinem Index und hängt Pfad-Verweise auf Adaptionen um; wer nichts
-tut, verliert nichts Bestehendes — er behält nur die Verweise, die beim
-nächsten `git mv` brechen.
+- die vier Treuekorrekturen (`grundlagen-traceability.md`,
+  `modul-06-roadmap.md`, `modul-13-quality-gates.md`);
+- die **Adress-Regel für Adaptionen** in `grundlagen-harness-dateien.md` und
+  `grundlagen-source-precedence.md` plus beiden `conventions`-Vorlagen;
+- der geschärfte **Ausgang 5** des Freshness-Audits in
+  `modul-02-harness-bootstrap.md`;
+- **„Ein selbstgebautes Gate ist auf Zeit gebaut"** in
+  `modul-11-verification.md` — mitsamt der dritten Antwort neben retiren und
+  behalten: das Skript mit dem anderen Konsumenten;
+- die **Skill-Vorlage** `closure-note-reviewer.template.md`, die kein
+  Beispiel-Werkzeug mehr nennt, sondern „das Struktur-Gate deines Repos";
+- ein Nebenbefund am Rand: In `grundlagen-traceability.md` stand als letzte
+  Zeile ein **nackter Anker ohne Inhalt** — Rest eines Umzugs, auf den
+  niemand zeigte. Er bleibt (eine vergebene Adresse verfällt nicht), trägt
+  jetzt aber den Zeiger auf die Stelle, an der die Regel wirklich steht.
+
+Die Treuekorrekturen allein wären PATCH gewesen. Mit Adress-Regel, Ausgang 5
+und dem achten Schritt kommen **Regeln hinzu** — additiv, nichts entfällt, kein
+Asset entfernt, kein Layout gebrochen: **MINOR**. Wer die `conventions`-Vorlage
+schon ausgefüllt hat, ergänzt die Anker in seinem Index und hängt Pfad-Verweise
+auf Adaptionen um; wer nichts tut, verliert nichts Bestehendes — er behält nur
+die Verweise, die beim nächsten `git mv` brechen.
 
 Die Stand-Zeile von [`lab/regelwerk/README.md`](lab/regelwerk/README.md) zieht
 auf Welle 73 nach.
