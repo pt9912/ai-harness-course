@@ -47,6 +47,53 @@ vier Bedingungen aus ADR-0011), `ids` (ADR-Kennungen sind Links) — dazu
 Deckung, aber lauffähig bleiben muss, weil ein Worked Example mit totem
 Gegenstand keines ist.
 
+### Der erste Lauf fand sofort etwas — an uns
+
+Der Job war grün, und das Log zeigte trotzdem einen Unterschied: **CI meldete 73
+geprüfte Dateien, lokal waren es 74.** Ein grüner Job, der eine andere Menge
+sieht als der lokale Lauf, ist nicht dasselbe Gate — und die Differenz fällt nur
+auf, wenn man die Zahlen liest statt der Farbe.
+
+Ursache: `python/.pytest_cache/README.md`. Die `scan.ignore` des Beispiels führte
+`build`, `build-cov`, `target` und `.gradle`, aber keine der Python-Caches. Lokal
+scannte der Prüfer die Datei mit, in CI existiert sie nicht — dort gibt es nur
+den Checkout.
+
+**Und es blieb nicht bei einem Sensor.** Dieselbe Frage eine Ebene höher
+gestellt, mit demselben Verfahren — CI-Log gegen lokalen Lauf:
+
+| Sensor | CI | lokal | Differenz |
+|---|---|---|---|
+| `d-check`, Beispiel | 73 | 74 | `.pytest_cache/README.md` |
+| `d-check`, Wurzel | 198 | 199 | dieselbe Datei |
+| `docs-check.js`, Wurzel | 176 | **200** | 23 × `cpp/build-cov/**` + dieselbe Datei |
+
+Der Node-Rest-Sensor war der schlimmste Fall: Seine `SKIP_DIRS` kannte `build`,
+aber nicht `build-cov` — er las lokal die 23 vendorierten Markdown-Dateien von
+doctest mit. **Ein Viertel seines lokalen Korpus war Fremdmaterial**, das in CI
+nie auftaucht.
+
+Heute war alles harmlos (0 Befunde überall), aber die Bauform ist es nicht: Ein
+Treffer in einem Werkzeug-Cache oder in vendoriertem Fremdcode hätte lokal rot
+und in CI grün gemeldet — und Modul 14 verlangt ausdrücklich, dass beide Läufe
+identisch sind.
+
+Behoben an allen drei Stellen; danach 73 = 73, 198 = 198, 176 = 176. Die
+Gegenprobe, die auch künftig trägt, steht als Kommentar an jeder der drei
+Listen: Weichen die Dateizahlen ab, die CI-Sicht mit `git archive HEAD`
+nachstellen und dagegen laufen lassen.
+
+**`.gitignore` musste dafür nicht angefasst werden** — die Pfade sind dort längst
+abgedeckt, und genau deshalb sieht CI sie nicht. Die Duplizierung bleibt: d-check
+interpretiert `.gitignore` nicht, und `docs-check.js` führt seine eigene Liste.
+Drei Listen für dieselbe Aussage, von Hand parallel zu halten; kein Sensor prüft
+ihre Gleichheit. Der Symptom-Test dafür ist die Dateizahl, und der steht jetzt
+überall dabei.
+
+Das ist der Ertrag des Jobs am ersten Tag — nicht ein gefundener Doku-Fehler,
+sondern der Nachweis, dass Läufe, die man für identisch hielt, es an drei
+Stellen nicht waren.
+
 **Am Bundle ändert die Welle nichts** — ein Workflow reist nicht mit. Kein
 Versions-Bump.
 

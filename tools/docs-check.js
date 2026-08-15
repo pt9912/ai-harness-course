@@ -85,9 +85,15 @@ const startPaths = targets.length > 0 ? targets : ["."];
 
 // ---- Markdown-Datei-Liste ermitteln ----
 const ignoreAbs = options.ignore.map((i) => resolve(i));
+// Werkzeug-Ausgaben. Die Liste bestimmt, welchen Korpus der Sensor sieht: Was
+// hier fehlt, wird lokal mitgeprüft und im CI nicht, weil dort nur der Checkout
+// liegt. Ein Sensor, der lokal eine andere Menge sieht als im CI, ist nicht
+// derselbe Sensor (Modul 14). Gegenprobe bei abweichender Dateizahl: die
+// CI-Sicht mit `git archive HEAD` nachstellen und dagegen laufen lassen.
 const SKIP_DIRS = new Set([
-  "node_modules", ".git", "target", "build", ".gradle",
+  "node_modules", ".git", "target", "build", "build-cov", ".gradle",
   "dist", ".next", ".venv", "__pycache__", "vendor", "bin", "obj",
+  ".pytest_cache", ".mypy_cache", ".import_linter_cache",
 ]);
 
 function isIgnored(absPath) {

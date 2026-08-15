@@ -7,7 +7,15 @@ scan:
   # CHANGELOG = historisches Register: Verweise sind zeitpunkt-korrekt (nennen
   # Dateien, wie sie zur jeweiligen Welle existierten, z. B. retired
   # agents-regelwerk.md) — nicht gegen den aktuellen Stand prüfen.
-  ignore: ["lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md"]
+  # Werkzeug-Caches gehören dazu, nicht nur Build-Verzeichnisse: Was hier fehlt,
+  # scannt der Prüfer LOKAL mit und in CI nicht — dort gibt es nur den Checkout.
+  # Gemessen: CI 198 Dateien, lokal 199; die Differenz war
+  # `lab/example/python/.pytest_cache/README.md`. Ein Gate, das lokal eine andere
+  # Menge sieht als in CI, ist nicht dasselbe Gate (Modul 14). `.gitignore` deckt
+  # diese Pfade längst ab — d-check interpretiert es aber nicht, die Liste ist
+  # also von Hand parallel zu halten.
+  ignore: ["lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md",
+           "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**"]
 modules: [links, anchors, codepaths, matrix, hostpaths, spans, tracked]
 
 # lab/templates mischt ZWEI Referenzklassen in denselben Dateien:

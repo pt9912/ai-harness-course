@@ -13,7 +13,15 @@ scan:
   # Mit engeren Wurzeln waere die Linkpflicht dort unbemerkt verletzbar — im
   # Break-Test aufgefallen, nicht beim Konfigurieren.
   roots: ["."]
-  ignore: ["**/build/**", "**/build-cov/**", "**/target/**", "**/.gradle/**"]
+  # Werkzeug-Ausgaben, die nicht ins Repo gehoeren. Die Liste ist nicht Kosmetik:
+  # Was hier fehlt, scannt der Pruefer LOKAL mit und in CI nicht — dort gibt es
+  # nur den Checkout. Das war gemessen: CI meldete 73 Dateien, lokal 74; die
+  # Differenz war `python/.pytest_cache/README.md`. Ein Gate, das lokal eine
+  # andere Menge sieht als in CI, ist nicht dasselbe Gate (Modul 14).
+  # Symptom und Gegenprobe: weichen die Dateizahlen ab, die CI-Sicht mit
+  # `git archive HEAD lab/example` nachstellen und dagegen laufen lassen.
+  ignore: ["**/build/**", "**/build-cov/**", "**/target/**", "**/.gradle/**",
+           "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**"]
 modules: [matrix, targets, planning, ids]
 
 matrix:
