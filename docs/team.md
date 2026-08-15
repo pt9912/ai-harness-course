@@ -158,7 +158,7 @@ und ohne den Grund prüft der Nächste dieselbe Sackgasse noch einmal.
 | [TB-007](#tb-007) | Einarbeitung wurde nie als Kosten geführt | offen · Auslöser ist die *zweite* Person |
 | TB-008 | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
 | [TB-009](#tb-009) | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
-| [TB-010](#tb-010) | „Lokal ableitbar" gilt nicht bei Vorvergabe | offen · **kein Team nötig**, am Bestand gemessen |
+| [TB-010](#tb-010) | „Lokal ableitbar" gilt nicht bei Vorvergabe | offen · **kein Team nötig**, am Bestand gemessen; trägt die **Lösungs-Skizze zur Vergabe** (gilt auch für [TB-009](#tb-009)/[TB-011](#tb-011)) |
 | [TB-011](#tb-011) | Auswertbar erst nach dem Merge | offen · Vorbedingung mehrerer anderer |
 | [TB-012](#tb-012) | Die Planning-README trägt zwei Begriffe ohne Quelle | offen · **kein Team nötig**, Template-Drift |
 | [TB-013](#tb-013) | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
@@ -228,9 +228,8 @@ Supersede-Status tun es — bei ihnen gibt es eine *richtige* Auflösung, man mu
 sie nur finden. *Aktuelle Welle* tut es nicht ([TB-014](#tb-014)): Schreiben
 zwei Personen dorthin, sind **beide Angaben wahr**, und jede Auflösung verwirft
 eine wahre Aussage. Ein solcher Konflikt ist kein Nebenläufigkeits-Problem,
-sondern das Symptom eines Modellfehlers — und deshalb der einzige in dieser
-Tabelle, den man nicht durch Sorgfalt beim Mergen vermeidet, sondern nur durch
-Streichen des Feldes.
+sondern das Symptom eines Modellfehlers — und nicht durch Sorgfalt beim Mergen
+zu vermeiden, sondern nur durch Streichen des Feldes.
 
 **Eine dritte Art: der Ganz-Wert ohne Ort.** Die laufende Nummer — `slice-086`,
 `welle-11`, `ADR-0019` — ist ebenfalls ein Wert über das Ganze („die höchste
@@ -255,14 +254,24 @@ gleiche Lage wie beim Lastenheft.
 
 Gemessen an `ai-harness-init` über 764 Commits:
 
-| Datei | Ganz-Wert | Schreiber | Risiko |
+| Datei / Ort | Ganz-Wert — und bezeichnet er etwas? | Schreiber | Risiko |
 |---|---|---|---|
-| `planning/in-progress/roadmap.md` | **zwei, verschiedener Art**: die Ordnung von *Nächste Wellen* (bezeichnet eine echte Planungs-Entscheidung) und *Aktuelle Welle* — ein Singleton, der **keinen Sachverhalt bezeichnet** ([TB-014](#tb-014)) | 127 Änderungen — jede Welle, jede Umplanung | **hoch**, und beim zweiten Ganz-Wert von besonderer Art: siehe unten |
-| `planning/observations.md` | der `BEO`-Zähler | per Konvention **jede** Slice-Closure | **hoch**, aber ungemessen — dieser Konsument hat das Register nicht adoptiert |
-| `docs/plan/adr/README.md` | nur die Status-Spalte (zwei Ablösungen derselben ADR mergen sauber) | 40 | mittel; die Zeilen selbst sind unabhängig |
-| `harness/conventions.md` (MR-Index) | keiner | 78 | niedrig — laut, bis auf die halbstille Nummer aus [TB-009](#tb-009) |
-| `spec/lastenheft.md` | die Version im Kopf | **ein externer, sequentieller Prozess** — *„weder ADR noch Slice dürfen `LH-*` je ändern"* ([§Spec-Stratifizierung](../kurs/de/grundlagen/source-precedence.md#spec-stratifizierung)) | **niedrig**: Ganz-Wert ohne Nebenläufigkeit |
+| **keine Datei** — `slice-<NNN>` | „höchste plus eins"; bezeichnet einen Sachverhalt, hat aber **keine Zeile**. Der Slice ist die **einzige Kennungs-Klasse ohne Index** — das Verzeichnis *ist* ihr Register, und ein Verzeichnis kollidiert nicht | **85 Vergaben, kein Serialisierer** | **hoch** — die größte stille Fläche des Korpus; ein Konflikt ist nicht selten, sondern **unmöglich**. Heute schützt nur die Vergabe-Regel; Optionen in der [Lösungs-Skizze](#tb-010) |
+| **keine Datei** — `ADR-<NNNN>` · `MR-<NNN>` · `CO-<NNN>` | dieselbe Bauart, aber **jede hat einen Index**: die Eintragsdatei kollidiert still, die Index-Zeile laut | 18 · 24 · 1 | **mittel, halb laut** — zwei Ansprüche erzeugen zwei Dateien *und* zwei Index-Zeilen; letztere kollidieren, wenn sie benachbart landen. Genau diese Zwischenlage benennt [TB-009](#tb-009) |
+| **keine Datei** — `welle-<NN>` | dieselbe Bauart, ohne Index | 10, durch die Planner-Eröffnung in *einem* Kontext serialisiert | **niedrig** — Ganz-Wert mit praktisch keiner Nebenläufigkeit. Dass das Schema für sie trotzdem keine Antwort hat, ist [TB-013](#tb-013) |
+| `planning/in-progress/roadmap.md` | **zwei**: die Ordnung von *Nächste Wellen* (bezeichnet eine getroffene Entscheidung) · *Aktuelle Welle* — Singleton, **bezeichnet nichts** ([TB-014](#tb-014)) | 127 Änderungen — jede Welle, jede Umplanung | **hoch**; beim zweiten Wert unauflösbar. Entfällt mit der in [TB-014](#tb-014) benannten Auflösung, danach bleibt die Ordnung |
+| `planning/observations.md` | der `BEO`-Zähler; bezeichnet einen Sachverhalt | per Konvention **jede** Slice-Closure | **hoch**, aber ungemessen — dieser Konsument hat das Register nicht adoptiert. Betrifft die *Merge*-Mechanik, nicht das Zählen selbst (dafür siehe das gestrichene TB-002) |
+| `docs/plan/adr/README.md` | nur die Status-Spalte; bezeichnet einen Sachverhalt | 40 | mittel — die Zeilen selbst sind unabhängig, zwei Ablösungen derselben ADR mergen sauber |
+| `harness/conventions.md` (MR-Index) | keiner — der Index selbst ist eine Zeilentabelle | 78 | niedrig — laut. Die halbstille `MR`-Nummer ist eine Zeile darüber beurteilt, nicht hier |
+| `AGENTS.md` §3 Hard Rules · `harness/README.md` §Sensors | keiner — nummerierte bzw. unabhängige Zeilen, Zusätze landen an derselben Stelle | 42 · 25 | niedrig — laut |
+| `spec/lastenheft.md` | die Version im Kopf; bezeichnet einen Sachverhalt | **ein externer, sequentieller Prozess** — *„weder ADR noch Slice dürfen `LH-*` je ändern"* ([§Spec-Stratifizierung](../kurs/de/grundlagen/source-precedence.md#spec-stratifizierung)) | **niedrig**: Ganz-Wert ohne Nebenläufigkeit |
 | `planning/README.md` · `carveouts/README.md` | keiner | **2** | vernachlässigbar |
+
+Die drei Kennungs-Zeilen stehen bewusst oben: Nach Schadensart sind sie die
+schwersten Einträge, und sie haben als einzige **keinen Ort**, an dem man
+nachsehen könnte. Ihr Unterschied ist der **Index** — wer einen hat, bekommt
+eine zweite, laute Chance; der Slice hat keinen und ist deshalb allein an der
+Spitze.
 
 **Die Index-READMEs sind die sichersten Dateien im Baum, und das ist kein
 Zufall.** Die Planning-README trägt eine Sektion *Aktueller Stand*, und darin
@@ -714,6 +723,73 @@ Ableitbarkeits-Zusage gilt aber gerade dem Fall, in dem das nicht so ist.
 vergeben ist richtig — der [Traceability-Constraint](../kurs/de/grundlagen/traceability.md#traceability-constraint)
 verlangt die Kennung, *sobald die Arbeit läuft*. Unvollständig ist nur die
 Beschreibung, wo man nachsieht.
+
+### Lösungs-Skizze — Skizze, keine Entscheidung
+
+Sie gilt der Vergabe insgesamt, betrifft also auch [TB-009](#tb-009) und
+[TB-011](#tb-011). Aufgenommen, damit die Abwägung nicht zweimal geführt wird.
+
+**Die Randbedingung streicht die Standardantwort.** Der übliche Weg gegen
+Vergabe-Kollisionen ist ein zentraler Allokator (Sequenz, Ticket-System, Bot
+beim Merge). Der [Traceability-Constraint](../kurs/de/grundlagen/traceability.md#traceability-constraint)
+verbietet ihn: *„wer sie erst beim Landen bekommt, hat sie im entscheidenden
+Moment nicht."* Die Kennung muss **lokal, offline, vor dem ersten Push**
+ableitbar sein.
+
+**Was der Zähler dafür einbringt — nachgerechnet:**
+
+| | trägt es? |
+|---|---|
+| Reihenfolge | nein — Datum/Zeit, und ohnehin `git` |
+| Anzahl | nein — `ls \| wc -l` |
+| Kürze | nein — der nackte Zähler ist zwar kürzer (`slice-086`, 9 Zeichen), aber die **Reparatur des Schemas gibt sie auf**: `slice-IDX-007` (13) ist länger als eine segmentlose Zufalls-ID (`slice-7f3a2b`, 12). Verteidigt wird die Kürze also nicht vom Zähler, sondern von seiner ungelösten Fassung |
+| Sub-Area | **ja — gehört aber dem Präfix**, nicht dem Zähler; jedes Schema kann es tragen |
+| Lückenlosigkeit als Vollständigkeitsprobe | schwach: hat genau diesen Befund zutage gefördert, aber Lücken sind laut Korpus legitim |
+
+Die einzige Eigenschaft, die **nur** der Zähler hat — man kennt die nächste
+Nummer, ohne jemanden zu fragen —, *ist* der Defekt. Nutzen und Fehler sind
+dieselbe Sache; deshalb kann keine Lösung innerhalb des Schemas mehr als
+mildern.
+
+**Drei Familien, nach der Randbedingung gefiltert.** *Partitionieren* (die Wahl
+des Korpus) senkt die Wahrscheinlichkeit; *Block-Reservierung* (Hi/Lo) beseitigt
+sie, koordiniert aber selten statt nie; *den geteilten Wert abschaffen*
+(Zufall · Zeitstempel · Slug) braucht überhaupt keine Koordination. Quer dazu
+liegt ein **Detektor**: ein Eindeutigkeits-Gate macht die stille Klasse laut,
+ohne das Schema anzufassen — und der Korpus räumt selbst ein, dass es baubar
+wäre: *„kein Modul des Doku-Gates prüft Eindeutigkeit heute … ein
+Review-Griff."*
+
+**Segment behalten, Zähler ersetzen.** Dass das Segment nicht dem Zähler
+gehört, zeigt der Korpus selbst: Er verwirft ein Personen- oder Branch-Segment,
+obwohl es *„die Garantie gäbe"* — weil es *„dem Reviewer nichts sagt"*.
+Ausgewählt wird das Segment also nach **Lesbarkeit**, nicht nach
+Kollisionsschutz. Zwei Kandidaten:
+
+- `slice-IDX-7f3a` — kollisionsfrei, Länge wie heute, aber eine Kollision
+  bliebe bedeutungslos.
+- `slice-IDX-cache-invalidation` — **der Slug steht schon in jedem Dateinamen**
+  (`slice-072-adr-verweist-nicht-auf-lifecycle.md`); die Umstellung *entfernt*
+  den Zähler, statt etwas hinzuzufügen. Zwei Personen am selben Gegenstand
+  erzeugen denselben Pfad und damit einen add/add-Konflikt — der Anspruch des
+  Korpus, *„einen stillen Merge-Unfall in ein inhaltliches Signal"* zu
+  verwandeln, vollständig eingelöst statt teilweise.
+
+**Ehrliche Kosten.** Der Slug kostet Token-Länge (9 → 34–42 Zeichen, gemessen
+an realen Slices) und hat eine gespiegelte Schwäche: Dieselbe Arbeit unter
+verschiedenen Namen kollidiert **nicht**. Und zwei Stellen tragen die Form
+maschinell — `token: 'slice-\d{3}'` im `matrix`-Modul beider Konfigurationen
+sowie die Beleg-Formprobe des Registers; beide müssten dauerhaft *zwei* Muster
+kennen.
+
+**Migration ist keine Kostenposition.** Vergebene Nummern kollidieren nicht —
+das Risiko liegt ausschließlich in der *nächsten* Vergabe, ein Wechsel wirkt
+also sofort, obwohl er nur nach vorn gilt. Der Korpus schreibt genau das vor:
+*„Mischung ist billiger als Migration … behält die alten Kennungen und vergibt
+nur neue … Wer später wechselt, notiert den Wechselpunkt."* Der Ort dafür ist
+die ID-Schema-Deklaration in `harness/conventions.md`. Bemerkenswert dabei:
+Dass Kennungen nie umbenannt werden, sieht wie Starrheit aus — es ist die
+Eigenschaft, die jeden Schema-Wechsel additiv und damit billig macht.
 
 ## Wo man anfinge
 
