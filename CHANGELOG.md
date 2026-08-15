@@ -11,6 +11,45 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 74 — 2026-08-15 · Zwei Wellen lang ein Vorschlag
+
+Welle 72 verdrahtete vier d-check-Module im Beispiel-Repo, Welle 73 kam die
+Closure-Fähigkeit dazu und mit ADR-0019 ein Vorführ-Gegenstand daneben. Beim
+Review der Verdrahtung fiel auf, was keiner der Läufe zeigen kann: **Nichts
+davon lief je in CI.** `checks.yml` fährt `docs-check`, `alignment-check` und
+`adr-immutability` — `make -C lab/example verify` steht in keinem Workflow.
+
+Die Datei trägt den Satz, den das verletzt, im **eigenen Kopf**: *„Ein Gate, das
+nur lokal läuft, ist ein Vorschlag (Modul 13)."*
+
+### Entschieden
+
+- **Ein Job, ein `make`-Aufruf.** `example-verify` ruft
+  `make -C lab/example verify` — dieselbe Zeile wie lokal. Der Lauf ist
+  hermetisch (Prüfer im Container, digest-gepinnt, `--network none`), also
+  braucht es keine Workflow-Nachbildung; und eine Nachbildung prüfte ohnehin
+  nicht das, was lokal läuft. Dieselbe Begründung, aus der der Bundle-Bau in
+  `tools/build-bundle.sh` liegt statt im Workflow.
+- **`make -C` gegengeprüft, nicht angenommen.** Der Prüfer mountet `$(CURDIR)`;
+  aus der Wurzel aufgerufen zeigt das auf `lab/example`. Gemessen: beide
+  Sensoren melden dieselben Zahlen wie beim Aufruf aus dem Verzeichnis.
+- **Der Preis steht im Faden, nicht im Kleingedruckten.** `main` färbt sich
+  künftig rot, sobald das Beispiel driftet. Das ist der Zweck — aber es ist eine
+  Setzung über den Merge-Pfad und war deshalb eine Entscheidung, keine
+  Aufräumarbeit.
+
+### Was der Job abdeckt
+
+`matrix` (Referenz-Richtung), `targets` (kein behauptetes Gate ohne Regel, keine
+Regel ohne Doku), `planning` inklusive `closure` (Lifecycle-Invariante und die
+vier Bedingungen aus ADR-0011), `ids` (ADR-Kennungen sind Links) — dazu
+`check_closure_notes.py`, das seit ADR-0019 die Lehre trägt und nicht mehr die
+Deckung, aber lauffähig bleiben muss, weil ein Worked Example mit totem
+Gegenstand keines ist.
+
+**Am Bundle ändert die Welle nichts** — ein Workflow reist nicht mit. Kein
+Versions-Bump.
+
 ## Welle 73 — 2026-08-10 · Zwei Kopien, zwei Antworten
 
 Welle 72 schloss mit einem Konsumenten-Befund: `ai-harness-init` las Modul 8

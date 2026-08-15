@@ -24,6 +24,19 @@ jobs:
       - name: Lernziel-Alignment (strict, WARN = rot)
         run: make alignment-check ARGS="--strict"
 
+  # `make check` sieht das Beispiel-Repo nicht: Es traegt eine eigene
+  # `.d-check.yml` mit vier Modulen (matrix, targets, planning, ids) und daneben
+  # den Vorfuehr-Gegenstand aus Modul 11. Beides lief bis hierher nur lokal —
+  # also nach dem Satz oben ein Vorschlag, kein Gate. Der Lauf ist hermetisch
+  # (Container digest-gepinnt, `--network none`), deshalb ist der Job ein
+  # einzelner make-Aufruf und keine Nachbildung.
+  example-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Referenz-Richtung, Gate-Deklarationen, Planning-Lifecycle, Closure-Notizen
+        run: make -C lab/example verify
+
   # ADR-Immutabilitaet braucht eine Commit-Range, deshalb ein eigener Job und
   # nicht `make check`.
   #
