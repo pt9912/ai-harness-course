@@ -128,9 +128,11 @@ targets:
 planning:
   roadmap: docs/plan/planning/in-progress/roadmap.md
   # Seit dem Umbau auf "Offene Wellen" (derivativ, Kurs-Modul 6) heisst der
-  # Aktiv-Block so; der Werkzeug-Default ist noch "## Aktuelle Welle" — Override,
-  # bis ein d-check-Release den Default nachzieht. Der Ruhe-Marker folgt der
-  # gelehrten Formulierung.
+  # Aktiv-Block so. heading/marker sind laut Handbuch der vorgesehene Weg
+  # "fuer abweichende Layouts" — kein Provisorium, kein CR noetig. GRENZE:
+  # Die waves.dir-Faehigkeit desselben Moduls kodiert den Singleton ("genau
+  # ein flaches Wellendokument") und ist mit mehreren offenen Wellen
+  # unvereinbar — deshalb hier bewusst kein Opt-in.
   heading: '## Offene Wellen'
   marker: 'Nichts in Arbeit'
   # Zweite Faehigkeit desselben Moduls: die STRUKTUR der Closure-Notizen im
