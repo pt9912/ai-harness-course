@@ -1,0 +1,9 @@
+# Team-Sim-Seed — planning nach dem Offene-Wellen-Modell.
+# waves ist bewusst AUS (Singleton-Semantik); Szenario s04 schaltet es ein.
+scan:
+  roots: ["."]
+modules: [links, anchors, planning]
+planning:
+  roadmap: docs/plan/planning/in-progress/roadmap.md
+  heading: '## Offene Wellen'
+  marker: 'Nichts in Arbeit'

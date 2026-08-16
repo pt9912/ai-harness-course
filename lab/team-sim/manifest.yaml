@@ -1,0 +1,8 @@
+# Team-Sim-Manifest (Modul-12-Bauform: was den Lauf rekonstruierbar macht)
+runner: run.sh
+seed: seed/            # fester Baum, keine Zeitstempel in Erwartungen
+image: ghcr.io/pt9912/d-check
+# Digest wird zur Laufzeit aus dem Repo-Makefile gelesen (eine Quelle, kein
+# zweiter Pin); Stand des ersten Laufs: v0.59.0 / sha256:b1cc65df3dc1…
+szenarien: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07]
+erster_lauf: { datum: 2026-08-16, ergebnis: "9 PASS, 0 FAIL" }

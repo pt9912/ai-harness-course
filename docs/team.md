@@ -10,19 +10,31 @@ Kurs ([README §Zielgruppe](../kurs/de/README.md#zielgruppe)) und im Bundle
 (`lab/regelwerk/README.md` §Geltungsbereich); ein Adopter erfährt damit, dass
 die Mehr-Schreiber-Fassung entworfen und nicht belegt ist.
 
-**SOLL.** Teamfähigkeit — **in zwei Stufen**, weil nur die erste von uns
-herstellbar ist. **Die erste ist seit Welle 79 erreicht** (alle Anpassungen
-verkörpert, Wellen 76–79); die zweite wartet auf ein adoptierendes Team:
+**SOLL.** Teamfähigkeit — **in drei Stufen**, von denen nur die ersten beiden
+von uns herstellbar sind. **Erreicht sind die ersten beiden** (Wellen 76–79;
+Probelauf 2026-08-16):
 
 * **entworfen** — alle Anpassungen sind in Kurs, Regelwerk und Templates
-  verkörpert. Beobachtbar, und allein an uns.
+  verkörpert. Beobachtbar, und allein an uns. *Seit Welle 79.*
+* **geprobt** — die **Nebenläufigkeits-Mechanik** der Anpassungen ist unter
+  simuliertem Mehr-Schreiber-Betrieb provoziert worden und hat gehalten:
+  [`lab/team-sim/`](../lab/team-sim/README.md), neun Szenarien, 9/9 — laute
+  und *stille* Ausgänge je vorab notiert. Die Grenze gehört zur Stufe: geprüft
+  ist die Mechanik mit kooperativen Akteuren; **Dissens, Lesarten-Divergenz
+  zwischen Menschen und echte Einarbeitung bleiben bei 0×**, und es ist
+  Eigenprüfung. *Seit 2026-08-16.*
 * **belegt** — ein Repo mit ≥ 3 Schreibern adoptiert die Baseline und meldet
   keinen der beschriebenen Ausfälle. Ebenso beobachtbar, aber **nicht von uns
   herbeiführbar**.
 
-Wir können also alles umsetzen und es trotzdem nicht wissen. Das ist kein
-Einwand gegen das Vorhaben, sondern der Grund, die beiden Stufen zu trennen —
-sonst liest jemand später *„SOLL erreicht"*, wo *„SOLL entworfen"* gemeint war.
+Wir können also entwerfen und proben und es trotzdem nicht wissen. Das ist
+kein Einwand gegen das Vorhaben, sondern der Grund, die Stufen zu trennen —
+sonst liest jemand später *„SOLL erreicht"*, wo eine frühere Stufe gemeint
+war. Der Probelauf lieferte nebenbei eine **Verfeinerung**: Die stille
+Register-Doppel-Zählung ([TB-011](#tb-011)) braucht **Abstand** — in kleinen
+Registern kollidiert sie laut, still wird sie erst in großen, also genau dort,
+wo auch das Wiedererkennen am teuersten ist. Und die TA-7-Reibung mit
+Branch-Protection ist gemessen, nicht mehr vermutet (s06).
 
 **Diese Datei** misst den Abstand und schlägt vor, wie er geschlossen wird. Sie
 hat zwei Hälften: die [sieben Änderungen](#die-sieben-änderungen), die das SOLL
