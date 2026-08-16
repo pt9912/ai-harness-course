@@ -179,8 +179,9 @@ Das ist genau der Fall, für den
 die stabile Kennung vorsieht, und adressiert wird deshalb die **Kennung, nicht
 der Titel** — jeder Eintrag trägt ein `<a id="tb-NNN">`.
 
-`TB-<NNN>` (Befund) und `TA-<N>` (Anpassung) gelten **nur in dieser Datei**, steht in keinem Commit und in keinem
-Gate; vergeben wird chronologisch nach Fund, Lücken werden nicht nachbelegt.
+`TB-<NNN>` (Befund) und `TA-<N>` (Anpassung) werden **nur in dieser Datei
+vergeben** und sind überall im Repo zitierbar (Plan, CHANGELOG); in keinem Gate.
+Vergeben wird chronologisch nach Fund, Lücken werden nicht nachbelegt.
 Die `TA-`-Spalte verweist auf die [Änderung](#die-sieben-änderungen), die den
 Befund schließt — jeder offene Befund hat genau eine oder zwei.
 Gestrichene Einträge bleiben mit Grund stehen — eine still gelöschte Zeile ist
@@ -449,7 +450,8 @@ Skill-HIGH-Einträge** keinen Rückbau — für `MR`, Carveout und ADR schon.
 
 | Ort | Änderung |
 |---|---|
-| `harness/README.template.md` | eine Pflicht-Sektion *Leseordnung* — was zuerst, was bei Bedarf; die sieben Nachschlage-Sektionen bleiben, was sie sind |
+| [§harness/README.md als Einstiegspunkt](../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt) | die **Pflichtgliederung** bekommt die Zeile *Leseordnung* — zuerst die Quelle, sonst wäre die Template-Sektion unten Template-Drift ([TB-012](#tb-012)-Klasse) |
+| `harness/README.template.md` | die Pflicht-Sektion *Leseordnung* — was zuerst, was bei Bedarf; die sieben Nachschlage-Sektionen bleiben, was sie sind |
 | Modul 9 / Modul 13, Hard Rules | jede Hard Rule bekommt wie ein Carveout einen **Auflösungs-Trigger oder die Kennzeichnung permanent** |
 | Modul 10 §Pflege | dasselbe für HIGH-Einträge des Reviewer-Skills |
 
