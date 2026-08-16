@@ -211,7 +211,7 @@ ist nicht Geschmacksfrage; sie folgt zwei Achsen:
 
 1. **Vertragliche Bindung absteigend.** Lastenheft (Abnahme-bindend) →
    Spezifikation (technisch fortschreibbar) → Architektur (Konstanten
-   der Lösung) → ADRs (Einzelentscheidungen) → Roadmap (aktuelle Welle)
+   der Lösung) → ADRs (Einzelentscheidungen) → Roadmap (Wellen-Sequenz)
    → Operativ-Doku → Allgemein-Doku.
 2. **Schreib-Frequenz absteigend.** Lastenheft wird selten geändert
    (jedes Update ist Spec-Disziplin). `AGENTS.md` wird oft angepasst.
@@ -233,7 +233,7 @@ Einstiegspunkt, keine neue Quelle.
 | 2 | [`spec/spezifikation.md`](../spec/spezifikation.md) | technisch fortschreibbar |
 | 3 | [`spec/architecture.md`](../spec/architecture.md) | Komponenten/Sequenzen, meilensteinfrei |
 | 4 | [`docs/plan/adr/`](../docs/plan/adr/) | Architekturentscheidungen |
-| 5 | [`docs/plan/planning/in-progress/roadmap.md`](../docs/plan/planning/in-progress/roadmap.md) | aktuelle Welle |
+| 5 | [`docs/plan/planning/in-progress/roadmap.md`](../docs/plan/planning/in-progress/roadmap.md) | Wellen-Sequenz |
 | 6 | [`docs/user/*`](../docs/user/) | Operations, Quality, Releasing |
 | 7 | [`README.md`](../README.md) | Projekt-Überblick |
 | 8 | [`AGENTS.md`](../AGENTS.md) | Agent-Briefing |
