@@ -23,7 +23,7 @@ Einwand gegen das Vorhaben, sondern der Grund, die beiden Stufen zu trennen —
 sonst liest jemand später *„SOLL erreicht"*, wo *„SOLL entworfen"* gemeint war.
 
 **Diese Datei** misst den Abstand und schlägt vor, wie er geschlossen wird. Sie
-hat zwei Hälften: die [sechs Änderungen](#die-sechs-änderungen), die das SOLL
+hat zwei Hälften: die [sieben Änderungen](#die-sieben-änderungen), die das SOLL
 herstellen würden, und die [Bestandsaufnahme](#bestandsaufnahme), aus der sie
 folgen. Die Einträge dort sind die **Belege** der Änderungen, nicht die
 Gliederung.
@@ -181,7 +181,7 @@ der Titel** — jeder Eintrag trägt ein `<a id="tb-NNN">`.
 
 `TB-<NNN>` (Befund) und `TA-<N>` (Anpassung) gelten **nur in dieser Datei**, steht in keinem Commit und in keinem
 Gate; vergeben wird chronologisch nach Fund, Lücken werden nicht nachbelegt.
-Die `TA-`-Spalte verweist auf die [Änderung](#die-sechs-änderungen), die den
+Die `TA-`-Spalte verweist auf die [Änderung](#die-sieben-änderungen), die den
 Befund schließt — jeder offene Befund hat genau eine oder zwei.
 Gestrichene Einträge bleiben mit Grund stehen — eine still gelöschte Zeile ist
 von einer nie vergebenen nicht zu unterscheiden
@@ -206,14 +206,14 @@ darf, ohne etwas zu bewegen.
 | TB-008 | — | — | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
 | [TB-009](#tb-009) | Text | [TA-3](#ta-3) | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
 | [TB-010](#tb-010) | **Sensor** | [TA-3](#ta-3) | „Lokal ableitbar" gilt nicht bei Vorvergabe | offen · **kein Team nötig**, am Bestand gemessen; Entwurf in [TA-3](#ta-3) |
-| [TB-011](#tb-011) | Verhalten | [TA-4](#ta-4) | Auswertbar erst nach dem Merge | offen · Vorbedingung mehrerer anderer |
+| [TB-011](#tb-011) | Verhalten | [TA-4](#ta-4) [TA-7](#ta-7) | Auswertbar erst nach dem Merge | offen · Vorbedingung mehrerer anderer |
 | [TB-012](#tb-012) | Text | [TA-2](#ta-2) [TA-4](#ta-4) | Die Planning-README trägt zwei Begriffe ohne Quelle | offen · **kein Team nötig**, Template-Drift |
 | [TB-013](#tb-013) | Text | [TA-3](#ta-3) | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
 | [TB-014](#tb-014) | Verhalten | [TA-2](#ta-2) | „Aktuelle Welle" ist keine Eigenschaft des Repos | offen · löst [TB-003](#tb-003) ab; leerer Fall bei *einem* Schreiber belegt. **Auflösung benannt:** flache Dateien + `**Welle:**` in `in-progress/` — das Feld entfällt |
 
-## Die sechs Änderungen
+## Die sieben Änderungen
 
-Die zehn Einträge der Bestandsaufnahme fallen auf sechs Änderungen zusammen;
+Die zehn Einträge der Bestandsaufnahme fallen auf sieben Änderungen zusammen;
 keiner fällt heraus. Jede ist **additiv und deklariert** — sie verschlechtert
 den Ein-Personen-Fall nicht, und sie lässt sich zurücknehmen.
 
@@ -334,12 +334,13 @@ nicht für alle — und eine seiner Zusagen hält nicht.
 
 **Optional, größer:** das Schema selbst. Die Abwägung dazu steht unten.
 
-**Und ein Gate ist möglich.** Als einzige der sechs Änderungen hat diese eine
+**Und ein Gate ist möglich.** Als einzige der sieben Änderungen hat diese eine
 computationale Hälfte: Eindeutigkeit der Kennungen ist prüfbar, und der Korpus
 räumt selbst ein, dass heute kein Modul es tut.
 
 **Was es nicht löst.** Zwei Personen, die dasselbe unter verschiedenen Namen
-tun, kollidieren in keinem Schema.
+tun, kollidieren in keinem Schema — das ist keine Frage des Schemas, sondern
+der Sichtbarkeit des Plans, und damit [TA-7](#ta-7).
 
 #### Die Abwägung — Skizze, keine Entscheidung
 
@@ -430,8 +431,9 @@ die Verzeichnis-Position bekommt ihren Geltungs-Stand.
 **Preis.** Eine bequeme Vereinfachung wird ausdrücklich, und mehrere Sätze
 werden länger.
 
-**Was es nicht löst.** Es macht Zweig-Stände nicht sichtbar. Es hindert den
-Korpus nur daran, mehr zu versprechen, als er halten kann.
+**Was es nicht löst.** Es macht Zweig-Stände nicht sichtbar — es hindert den
+Korpus nur daran, mehr zu versprechen, als er halten kann. Sichtbar macht sie
+[TA-7](#ta-7).
 
 <a id="ta-5"></a>
 
@@ -451,11 +453,16 @@ Skill-HIGH-Einträge** keinen Rückbau — für `MR`, Carveout und ADR schon.
 | Modul 9 / Modul 13, Hard Rules | jede Hard Rule bekommt wie ein Carveout einen **Auflösungs-Trigger oder die Kennzeichnung permanent** |
 | Modul 10 §Pflege | dasselbe für HIGH-Einträge des Reviewer-Skills |
 
-**Preis.** Der teuerste der sechs. Der Rückbau-Trigger belastet jede Hard Rule
+**Preis.** Der teuerste der sieben. Der Rückbau-Trigger belastet jede Hard Rule
 mit einem Feld, und die Leseordnung ist ein Artefakt, das gepflegt werden will.
 
-**Was es nicht löst.** Es verkleinert den bestehenden Korpus nicht, es bremst
-nur sein Wachstum.
+**Grenze, ausdrücklich deklariert.** Den **Bestand zu verkleinern ist nicht
+Gegenstand dieser Anpassung** und auch nicht dieses Dokuments. Der
+Rückbau-Trigger bremst das Wachstum, und das ist für Teamfähigkeit das Nötige;
+eine Verschlankung des vorhandenen Korpus ist ein eigenes Vorhaben mit eigenem
+Maßstab — was gestrichen werden darf, entscheidet nicht die Team-Frage. Wird sie
+gebraucht, gehört sie als eigener Faden in die [Roadmap](roadmap.md), nicht
+hierher.
 
 <a id="ta-6"></a>
 
@@ -496,11 +503,61 @@ jedem HIGH-Finding.
 **Was es nicht löst.** Es erzwingt keine Einigkeit, sondern beendet die
 Wiederholung. Wer die Entscheidung weiter für falsch hält, braucht Evidenz.
 
+<a id="ta-7"></a>
+
+### TA-7 — Der Lifecycle-Übergang landet auf dem Hauptzweig
+
+**Deckt** den Rest von [TA-4](#ta-4) (Zweig-Stände unsichtbar) und den von
+[TA-3](#ta-3) (dieselbe Arbeit unter verschiedenen Namen); Beleg ist
+[TB-011](#tb-011).
+
+**Was fehlt.** [TA-4](#ta-4) sagt ehrlich, über *welchen* Stand die Regeln
+sprechen — es macht den Zweig-Stand aber nicht sichtbar. Solange der `git mv`
+nach `in-progress/` im PR mitreist, ist `ls in-progress/` auf dem Hauptzweig
+für laufende Arbeit leer, und niemand sieht, was ein anderer angefangen hat.
+
+**Vorschlag.** Die Mechanik ist schon da, nur der Zeitpunkt fehlt: Der Übergang
+ist bereits ein **reiner `git mv` in einem eigenen Commit**
+([Modul 9 §Hard Rules](../kurs/de/03-agenten/modul-09-implementierung.md#hard-rules-repo-spezifisch)).
+Ergänzt wird, **wann** er landet — **vor** der Arbeit und direkt auf dem
+Hauptzweig, nicht im PR.
+
+Damit wird `ls in-progress/` team-weit wahr, das `**Verantwortlich:**`-Feld aus
+[TA-2](#ta-2) wird im Moment des Anspruchs sichtbar, und der Doppelarbeits-Fall
+löst sich: Wer anfangen will, sieht den Anspruch, bevor er anfängt.
+
+**Warum das den TA-3-Rest miterledigt.** Zwei Personen können nur dann unbemerkt
+dasselbe tun, wenn **mindestens eine nicht geplant hat** — ein Slice muss
+geschnitten sein, bevor er läuft. Der Rest war also nie ein Loch im
+Kennungs-Schema, sondern eines in der Sichtbarkeit des Plans.
+
+**Wo es landet.**
+
+| Ort | Änderung |
+|---|---|
+| Modul 5 §Trigger je Lifecycle-Übergang | `next→in-progress` landet **auf dem Hauptzweig, vor der Arbeit** |
+| Modul 5 §Lifecycle als State Machine | ein Satz, warum: sonst ist der Zustand zweigelokal und die `ls`-Zusage gilt nur für den eigenen Baum |
+| Modul 9 §Hard Rules | der bestehende „reiner `git mv`"-Satz bekommt den Zeitpunkt dazu |
+
+**Preis.** Schreibzugriff auf den Hauptzweig für einen inhaltslosen Commit. Das
+berührt [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+(*„braucht dafür weder eine Absprache noch einen Schreibzugriff auf den
+Hauptzweig"*) — dort geht es aber um das **Ableiten einer Nummer**, nicht um
+das **Beanspruchen einer Arbeit**. Die beiden Aussagen müssen im selben Zug
+gegeneinander abgegrenzt werden, sonst widersprechen sie sich dem Anschein nach.
+
+Und der gemessene Konsument tut es faktisch schon so: In `ai-harness-init` lagen
+Slices historisch in `in-progress/` auf `main`.
+
+**Was es nicht löst.** Das Beobachtungs-Register: `BEO`-Erhöhungen entstehen bei
+der Closure und reisen weiter im PR mit. Der Sichtungs-Schritt liest also
+weiterhin einen Stand, der bis zu einen Merge alt ist.
+
 <a id="bestandsaufnahme"></a>
 
 ## Bestandsaufnahme
 
-Die Belege der sechs Änderungen. Reihenfolge numerisch, nicht nach Schwere —
+Die Belege der sieben Änderungen. Reihenfolge numerisch, nicht nach Schwere —
 siehe [Register](#register).
 
 <a id="tb-001"></a>
@@ -1065,14 +1122,18 @@ Deklaration ohne Mechanik.
 **TA-6 hängt an TA-1** — erst mit einem Wort für den Rolleninhaber lässt sich
 sagen, *wessen* Verdikt bestritten wird. Danach ist es ein Absatz.
 
+**TA-7 sofort nach TA-2** — es macht dessen Feld überhaupt erst sichtbar und
+erledigt zugleich die Reste von TA-3 und TA-4. Von allen sieben die kleinste
+Textänderung: ein Zeitpunkt zu einer Regel, die es schon gibt.
+
 **TA-5 zuletzt** — eigenständig, am teuersten, und als einzige nicht durch einen
 Team-Fall ausgelöst, sondern durch die zweite Person überhaupt.
 
-**Was für alle sechs gilt.** Die Bauform steht bereits im Korpus:
+**Was für alle sieben gilt.** Die Bauform steht bereits im Korpus:
 [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
 hat die Mehr-Personen-Frage für Kennungen beantwortet, **ohne den
 Ein-Personen-Fall zu verschlechtern** — Default für einen Schreiber,
-deklarierte Variante für mehrere, Grenze offen benannt. Jede der sechs Änderungen
+deklarierte Variante für mehrere, Grenze offen benannt. Jede der sieben Änderungen
 lässt sich so schneiden.
 
 **Und eine Änderung fehlt in dieser Liste**, weil sie keine am Korpus ist,
