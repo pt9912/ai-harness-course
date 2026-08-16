@@ -11,6 +11,106 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 75 — 2026-08-16 · Der Spiegel formuliert nicht
+
+Zwei Fäden, ein Auslöser. Die Frage *„das Regelwerk trägt bei einem Schreiber —
+was bricht bei dreien?"* wurde als Bestandsaufnahme geführt und landete in
+[`docs/team.md`](docs/team.md). Beim Review dieser Datei wurden ihre **60
+Zitate** wortweise gegen `kurs/de` geprüft — und drei der Abweichungen lagen
+nicht in der Datei, sondern **im Regelwerk-Spiegel**: `lab/regelwerk` zitierte
+an diesen Stellen etwas, das die Quelle so nie gesagt hat. Aus dem ersten Faden
+wurde ein Register mit Anpassungs-Entwürfen, aus dem zweiten eine Regel, zehn
+Korrekturen und eine Messung.
+
+### Faden 1 — Team-Tauglichkeit: IST deklariert, sieben Anpassungen entworfen
+
+[`docs/team.md`](docs/team.md) hält fest, was vorher nirgends stand: **IST ist
+ein schreibender Mensch plus Agenten** — und das ist nicht deklariert; ein
+Adopter mit drei Leuten erfährt an keiner Stelle, dass er außerhalb des
+Getesteten arbeitet. **SOLL ist Teamfähigkeit, zweistufig**: *entworfen* (an
+uns) gegen *belegt* (braucht ein adoptierendes Team, nicht herbeiführbar).
+
+- **14 Befunde** (`TB-001`–`TB-014`), davon vier begründet gestrichen oder
+  abgelöst — die Streichungen bleiben mit Grund stehen, nach dem Muster des
+  Beobachtungs-Registers. Ordnendes Prinzip: drei Achsen — *Rolle* ist im
+  Korpus voll ausgearbeitet, *Person* kommt nur als „eine Person, mehrere
+  Rollen" vor (die Gegenrichtung nirgends), *Zuweisung* hat kein Wort.
+- **Sieben Anpassungen** (`TA-1`–`TA-7`) mit Entwurfsteil — je *wo es landet*,
+  Preis und Grenze. Die zehn offenen Befunde fallen ohne Rest auf sie. Kern:
+  ein Wort für den **Rolleninhaber**, ein `Verantwortlich:`-Feld im Slice-Kopf
+  (die Welle hat es schon), der Lifecycle-`git mv` landet **vor** der Arbeit
+  auf dem Hauptzweig, und der Konflikt-Pfad bekommt ein Terminal — das
+  bestrittene Verdikt wird ADR.
+- **Am Konsumenten gemessen statt hergeleitet**: `git shortlog` über die vier
+  Baseline-Repos (je eine Autoren-Identität — alle Verhaltens-Befunde stehen
+  bei 0× und sind als Vorhersagen deklariert); in `ai-harness-init` die
+  Slice-Lücke `061`–`064` (im Wellen-Plan vergeben, als Datei nie entstanden —
+  widerlegt „lokal ableitbar"), `MR` als mit 24 Einträgen zweitgrößte
+  Kennungs-Klasse ohne Vergabe-Regel, und ADR-0015 als unabhängiger Beleg der
+  fehlenden Eigentums-Achse.
+- Die tragendste Einzeleinsicht: ***„Aktuelle Welle" ist keine Eigenschaft des
+  Repos*** — sie beschreibt die Aufmerksamkeit *einer* Person; bei mehreren
+  gibt es keine oder mehrere. Der leere Fall ist beim Konsumenten belegt (ein
+  23-Zeilen-Abschnitt für „Keine aktive Welle"). Die Auflösung liegt im Repo:
+  flache Wellen-Dateien plus das `Welle:`-Feld in `in-progress/`.
+
+Alles davon ist **Entwurf, nicht Verkörperung** — 0×-Befunde lösen nach der
+Zählregel keine Regeländerung aus; die Roadmap trägt den Faden mit dem
+Trigger der zweiten SOLL-Stufe.
+
+### Faden 2 — die Schnittregel und zehn behobene Paraphrasen
+
+`lab/README.md` versprach *„wortgleich zur Quelle"*. Der Spiegel trägt je nach
+Datei **32–62 %** seiner Quelle — die Zusage war nicht unerfüllt, sondern
+falsch: Didaktik entfällt, Verweise werden umgehängt. Was dabei erlaubt ist,
+stand nirgends; die Review-Runden 7–11 (99 Spiegel-Erwähnungen) korrigierten
+Einzelfälle ohne Maßstab.
+
+**Entschieden:** [`docs/regelwerk-extrakt.md`](docs/regelwerk-extrakt.md)
+trägt die Regel, `lab/README.md` verweist statt zu behaupten. Erste Fassung
+als Verbotsliste — **an sechs realen Formen gescheitert**, jedes Mal war das
+Spiegel-Ergebnis richtig und die Regel dagegen. Deshalb positiv neu gefasst:
+
+> **Der Spiegel formuliert nicht.** Er wählt aus, setzt zusammen, bindet an
+> und benennt.
+
+Fünf Operationen (Weglassen ganzer Einheiten · Zusammensetzen wörtlicher
+Fragmente · Anbinden von Verweisen und Pronomen · Benennen · Frage→Aussage),
+abschließend gemeint, nicht abschließend bewiesen — die Beweislast dreht sich:
+Unvorhergesehenes ist ein Befund, bis die Liste erweitert wird. Dazu zwei
+Proben: **Teilfolge** (fängt Ersetzung und Umstellung) und **Wortdeckung**
+(fängt Zusätze); keine fängt den gestrichenen Teilsatz, der eine Bedingung
+trug — das bleibt ein Urteil je Streichung.
+
+**Zehn Paraphrasen behoben**, in sieben Spiegel-Dateien, jede gegen die Quelle
+gegengeprüft. Die markantesten: der gestrichene Qualifikator *„nach der
+dritten Welle"* (`grundlagen-harness-dateien`); die zu Prosa umgeschriebene
+Übungstabelle in `modul-06` — sie ist als **Tabelle wortgleich zurück**, die
+Prosa hatte aus *„fehlende Latenz"* still *„fehlenden Beleg"* gemacht; und
+`modul-12`, kein Paraphrase- sondern ein **Verfasser-Fall**: vier Aussagen
+ohne jede Quell-Entsprechung, entfernt statt umformuliert — ein Spiegel darf
+nichts sagen, was seine Quelle nicht sagt.
+
+**Gemessen, nicht nur behoben:** Der Kandidaten-Durchgang (14 fettgesetzte
+Vorspänne: 3 Falsch-Positive · 5 zulässig · 6 Befunde) und ein
+Wortdeckungs-Prototyp über alle 26 Dateien: **63 Kandidaten-Absätze** tragen
+Wörter, die ihre Quelle nicht kennt — eine **Altbestands-Schicht** im
+Digest-Stil von vor der Quelltreue-Disziplin, vorn `modul-12` (9) und
+`modul-13` (8). Als eigenes Vorhaben eingeordnet; der dauerhafte Sensor wäre
+ein Change Request an den Doku-Prüfer und ergibt erst danach Sinn — vorher
+liefe er dauerhaft rot. Der Prototyp bleibt bewusst kein Repo-Skript
+(Skriptflächen-Regel).
+
+### Bundle-Bilanz
+
+Von der Welle reisen **die sieben korrigierten Spiegel-Dateien** im Bundle;
+`docs/team.md`, `docs/regelwerk-extrakt.md` und die Roadmap-Fäden sind
+Kurs-Repo-Artefakte und reisen nicht. Am ausgelieferten Artefakt sind es
+Treue-Korrekturen ohne Regel-Änderung — nach dem v5.3.1-Präzedenzfall
+**PATCH**, wenn released wird. Die Release-Stichprobe sollte die
+`modul-06`-Tabelle (mit `slice-019`) und den Qualifikator *„nach der dritten
+Welle"* prüfen.
+
 ## Welle 74 — 2026-08-15 · Zwei Wellen lang ein Vorschlag
 
 Welle 72 verdrahtete vier d-check-Module im Beispiel-Repo, Welle 73 kam die
