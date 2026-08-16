@@ -198,7 +198,9 @@ Auflösung, nicht "der Strengere gewinnt"):
 
 Jedes Verdikt endet mit einem Artefakt, das der Reviewer in seine
 Skill-Datei übernehmen kann — "mündliche Klärung" ist keine Übergabe,
-sondern Drift mit Kaffeepause.
+sondern Drift mit Kaffeepause. Wird keines der Verdikte akzeptiert, greift
+das Terminal aus dem Worked Example: Das Verdikt wird ADR, und Widerspruch
+braucht danach eine Folge-ADR mit neuer Evidenz.
 
 ## Häufige Fehler
 

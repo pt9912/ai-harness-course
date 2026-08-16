@@ -87,6 +87,12 @@ Wächter ist eine Absichtserklärung mit Verfallsdatum. Bei Eintreten:
 Entscheidung bestätigen oder Folge-ADR mit `supersedes` (Accepted-ADRs
 werden nie überschrieben).
 
+**Eine ADR entsteht nicht nur aus Architektur-Fragen.** Auch ein Rollen-Konflikt
+endet als ADR, wenn sein Verdikt bestritten wird — das Terminal des
+Konflikt-Pfads ([Modul 8](../03-agenten/modul-08-agentenrollen.md#worked-example-einen-konflikt-pfad-als-rollen-sequenz-mit-übergabe-artefakten-modellieren)):
+Die Entscheidung wird immutabel, Widerspruch braucht danach eine Folge-ADR mit
+neuer Evidenz.
+
 ## Hard Rule (Beispiel aus c-hsm-doc, ADR 0001)
 
 Begriff *Hard Rule* siehe Glossar in

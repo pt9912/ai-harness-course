@@ -2,6 +2,10 @@
 
 **Stand:** Kurs-Welle 75 · 2026-08-16.
 
+**Geltungsbereich:** getestet und gelebt mit **einem schreibenden Menschen plus
+Agenten** je Repository; die Mehr-Schreiber-Fassung ist entworfen, nicht
+belegt.
+
 Die 17 Module (0–16) **und die Grundlagen-Abschnitte** des Kurses als
 **Betriebsregelwerk für Code-Agenten** — didaktik-freier Extrakt (Regeln, Konventionen, Abläufe in
 Quellformulierung; weggelassen ist die Didaktik-Schicht, nicht verdichtet der

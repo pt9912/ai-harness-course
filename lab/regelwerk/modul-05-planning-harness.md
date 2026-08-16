@@ -67,7 +67,9 @@ und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit
 aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört
 sichtbar zurück, nicht still weitergeschoben.
 
-WIP-Limit pro Implementer = 1 ist eine harte Größe, kein Vorschlag — wer
+WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro
+Mensch in der Implementer-Rolle, nicht pro Rolle
+([Modul 8](modul-08-agentenrollen.md#rollen-regeln-modul-8)); wer
 mehrere Slices gleichzeitig in `in-progress/` hat, hat keine Lifecycle,
 sondern ein Buffet.
 

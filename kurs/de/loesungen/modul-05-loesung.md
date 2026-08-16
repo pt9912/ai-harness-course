@@ -14,7 +14,7 @@ Plus zwei Rückführungen, die im Lifecycle-State-Diagramm explizit sind:
 - `in-progress/ → open/` — Slice ist blockiert (typisch mit Carveout,
   siehe Modul 7).
 
-Faustregel: WIP-Limit auf 1 pro Implementer. Wer mehrere Slices
+Faustregel: WIP-Limit auf 1 pro Rolleninhaber (Modul 8). Wer mehrere Slices
 gleichzeitig in `in-progress/` hat, hat kein Lifecycle, sondern ein
 Buffet — und keinen Punkt, an dem reproduzierbar geprüft wird, ob der
 8-Schritt-Workflow durchlaufen wurde.

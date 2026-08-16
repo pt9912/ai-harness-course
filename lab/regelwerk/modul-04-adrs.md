@@ -31,6 +31,12 @@ nicht verteidigen.
   Voraussetzung weg ist. Geprüft im **Trigger-Audit** der Welle-Closure
   ([Modul 6](modul-06-roadmap.md)); bei Eintreten: bestätigen oder Folge-ADR
   mit `supersedes` (Accepted-ADRs werden nie überschrieben).
+- **Eine ADR entsteht nicht nur aus Architektur-Fragen.** Auch ein
+  Rollen-Konflikt endet als ADR, wenn sein Verdikt bestritten wird — das
+  Terminal des Konflikt-Pfads
+  ([Modul 8](modul-08-agentenrollen.md#konflikt-pfad-als-rollen-sequenz-modul-8)):
+  Die Entscheidung wird immutabel, Widerspruch braucht danach eine Folge-ADR
+  mit neuer Evidenz.
 
 ### Hard Rule für Accepted-ADRs
 

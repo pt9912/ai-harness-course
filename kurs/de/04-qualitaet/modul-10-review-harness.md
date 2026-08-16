@@ -93,7 +93,11 @@ Kategorisierung ist eine Entscheidungsvorlage.
 
 > **Wenn du Reviewer-Skills bereits versioniert pflegst und HIGH/MEDIUM/LOW/INFO repo-spezifisch verankerst, springe zu [§Übungen](#übungen).** Die sechs Schritte unten sind die Schablone für den ersten oder zweiten Skill; ab dem dritten kostet sie eher Last als sie gibt (Expertise-Reversal).
 
-Ein Reviewer-Agent ohne Skill-Datei driftet zwischen Sessions. Dieselbe
+Ein Reviewer-Agent ohne Skill-Datei driftet zwischen Sessions — und zwischen
+**Rolleninhabern** ([Modul 8](../03-agenten/modul-08-agentenrollen.md#typische-fehlvorstellungen)):
+Füllen mehrere Menschen die Rolle, ist dieselbe Abweichung kein
+Nicht-Determinismus, sondern ein **Dissens** — auch dann wird der Skill
+geschärft, nicht die mildere Lesart gewählt. Dieselbe
 Eingabe → unterschiedliche Findings, unterschiedliche Kategorien.
 Skill-Dateien leben in `.harness/` und sind das Repo-spezifische
 "worauf achtest du" eines Agenten.
@@ -260,7 +264,7 @@ dafür braucht sie den wiedererkennbaren Namen.
 
 - **"Reviewer ist ein zweiter Implementer."** — Reviewer kategorisiert. Vorschläge "wie ich es geschrieben hätte" sind nett, aber kein Reviewer-Ergebnis.
 - **"Findings ohne Prioritätssortierung."** — Implementer arbeitet sequentiell ab und bleibt am LOW hängen. HIGH zuerst, immer.
-- **"Reviewer-Agent läuft ohne Skill-Datei."** — Verhalten driftet zwischen Sessions. Jeder Reviewer-Agent braucht eine Skill-Datei in `.harness/` mit "worauf achtest du in diesem Repo".
+- **"Reviewer-Agent läuft ohne Skill-Datei."** — Verhalten driftet zwischen Sessions und zwischen Rolleninhabern. Jeder Reviewer-Agent braucht eine Skill-Datei in `.harness/` mit "worauf achtest du in diesem Repo".
 - **"Wenn der Reviewer-Agent dasselbe zweimal anders kategorisiert, nehmen wir die mildere."** — Genau das belohnt Inkonsistenz. Stattdessen: Skill schärfen, bis die Klassifikation reproduzierbar ist.
 
 ## Übungen

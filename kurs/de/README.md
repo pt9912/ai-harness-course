@@ -21,6 +21,11 @@ eingeführt und in [`abschluss/quellen.md`](abschluss/quellen.md) belegt.
 * DevOps Engineers
 * KI-Plattform-Teams
 
+**Geltungsbereich.** Getestet und gelebt ist dieser Kurs mit **einem
+schreibenden Menschen plus Agenten** je Repository. Die Mehr-Schreiber-Fassung
+ist entworfen, nicht belegt: Wo eine Regel den Mehr-Schreiber-Fall schon
+benennt, ist das Entwurf — kein Team hat ihn im Betrieb bestätigt.
+
 Voraussetzungen:
 
 * Git

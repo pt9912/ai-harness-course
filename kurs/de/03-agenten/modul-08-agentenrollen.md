@@ -244,7 +244,7 @@ macht. Wer geplant hat, prüft nicht; wer geschrieben hat, reviewt nicht.
 
 ## Typische Fehlvorstellungen
 
-- **"Eine Person spielt alle Rollen."** — Geht — *aber mit unterschiedlichem Eingabe-Kontext und der je passenden Artefaktklasse* ([§Welche Rolle braucht welche Artefaktklasse](#welche-rolle-braucht-welche-artefaktklasse)). Sonst wiederholen sich die blinden Flecken. Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung.
+- **"Eine Person spielt alle Rollen."** — Geht — *aber mit unterschiedlichem Eingabe-Kontext und der je passenden Artefaktklasse* ([§Welche Rolle braucht welche Artefaktklasse](#welche-rolle-braucht-welche-artefaktklasse)). Sonst wiederholen sich die blinden Flecken. Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung. **Und die Gegenrichtung braucht ein Wort:** Eine Rolle kann von mehreren Menschen gefüllt werden — wer sie in einem konkreten Lauf füllt, ist ihr **Rolleninhaber**. Der Begriff steht neben der Kontext-Trennung, nicht gegen sie: Die Rolle bleibt personen-ungebunden; er macht nur Regeln eindeutig, die sonst in zwei Lesarten zerfallen — *pro Rolle* oder *pro Mensch, der sie gerade füllt* (etwa das WIP-Limit, [Modul 5](../02-planung/modul-05-planning-harness.md#selbstcheck-rubrik)).
 - **"Reviewer macht das Verification gleich mit."** — Nein. Reviewer prüft gegen Plan/ADR (Maintainability). Verification prüft gegen DoD/Spec (Behaviour/Architecture Fitness). Zwei Fragen, zwei Antworten.
 - **"Validation machen wir vor Release."** — Zu spät. Validation gehört *vor* die Implementation größerer Wellen (Spec-Validierung beim Kunden) und nach jedem MVP-Slice.
 - **"Architect entscheidet, Implementer widerspricht nicht."** — Der Implementer darf Folge-ADRs vorschlagen. Was er *nicht* darf: stillschweigend einer ADR widersprechen.
@@ -309,7 +309,9 @@ nur, wenn jeder Pfeil ein *konkretes* Artefakt trägt. Tabelle:
 Die zentrale Disziplin: das Verdikt von Architect nach Reviewer (Pfeil
 A → R) *muss* ein Artefakt sein, das Reviewer in seine Skill-Datei
 übernehmen kann. *"Mündliche Klärung"* ist keine Übergabe; sie ist
-Drift mit Kaffeepause.
+Drift mit Kaffeepause. Und füllen mehrere Menschen die Architect-Rolle,
+nennt das Verdikt seinen **Rolleninhaber** — *„der Architect"* ist sonst
+eine Adresse, die zwei Antworten geben kann.
 
 **Schritt 4 — Drei mögliche Verdikte mit Folge-Sequenzen.** Konflikt
 hat drei Auflösungs-Klassen, jede mit eigener Folge-Sequenz. Wer das
@@ -326,6 +328,17 @@ drei sauberen Klassen ist:
 *Keine* dieser Sequenzen enthält "Reviewer-Finding herabstufen, weil
 Implementer widerspricht". Das wäre der vierte, *falsche* Pfad — und
 er existiert nur, weil Übergabe-Artefakte fehlen.
+
+**Und wenn das Verdikt selbst bestritten wird?** Zwischen Kontextfenstern
+endet der Konflikt beim besseren Argument. Zwischen Menschen braucht er ein
+**letztes Artefakt**, sonst ersetzt Wiederholung die Auflösung. Das Terminal
+ist die ADR: Wird keines der drei Verdikte akzeptiert, nimmt der Architect
+sein Verdikt als ADR an — der Vorgang endet nicht, weil jemand recht bekommt,
+sondern weil die Entscheidung **immutabel** wird. Widerspruch geht danach den
+Folge-ADR-Weg (`supersedes`) und braucht **neue Evidenz statt Wiederholung**;
+die abweichende Position steht dokumentiert in §Verglichene Alternativen. Das
+Senioritäts-Verbot bleibt unberührt: Verboten ist Seniorität als *Argument*
+— die ADR schließt durch die Immutabilitäts-Regel, die für alle gleich gilt.
 
 **Schritt 5 — Sequenz auf "kein Sprung ohne Artefakt" prüfen.** Lege
 die gezeichnete Sequenz aus Schritt 2 neben die Tabelle aus Schritt 3.

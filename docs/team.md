@@ -4,10 +4,11 @@
 
 ## IST, SOLL und was diese Datei dazwischen tut
 
-**IST.** Der Korpus ist für **einen schreibenden Menschen plus Agenten** gebaut.
-Das ist keine Unterstellung, sondern das Ergebnis der Bestandsaufnahme unten —
-und es ist **nirgends deklariert**: Ein Adopter mit drei Leuten erfährt an
-keiner Stelle, dass er sich außerhalb des Getesteten bewegt.
+**IST.** Der Korpus ist für **einen schreibenden Menschen plus Agenten** gebaut
+— das Ergebnis der Bestandsaufnahme unten. Seit P0 ist das **deklariert**: im
+Kurs ([README §Zielgruppe](../kurs/de/README.md#zielgruppe)) und im Bundle
+(`lab/regelwerk/README.md` §Geltungsbereich); ein Adopter erfährt damit, dass
+die Mehr-Schreiber-Fassung entworfen und nicht belegt ist.
 
 **SOLL.** Teamfähigkeit — **in zwei Stufen**, weil nur die erste von uns
 herstellbar ist:
@@ -240,7 +241,7 @@ dort schon der Träger einer Pflicht.
 | Modul 8 §Rollen-Regeln | ein Satz: *Eine Rolle kann von mehreren Menschen gefüllt werden; wer sie in einem Lauf füllt, ist ihr Rolleninhaber.* |
 | Modul 5 §Selbstcheck-Rubrik | „WIP-Limit pro Implementer" → **pro Rolleninhaber** |
 | Modul 8 §Konflikt-Pfad | das Verdikt nennt den entscheidenden Rolleninhaber, nicht nur die Rolle |
-| Modul 10 §Pflege | Drift „zwischen Sessions" → „zwischen Sessions **und zwischen Rolleninhabern**" |
+| Modul 10, die zwei Drift-Sätze (Worked-Example-Intro · Fehlvorstellung) | Drift „zwischen Sessions" → „zwischen Sessions **und zwischen Rolleninhabern**"; Abweichung zwischen Inhabern ist **Dissens**, nicht Nicht-Determinismus |
 
 **Preis.** Ein neuer Begriff in einem Korpus, der mit Vokabular sparsam ist.
 Und er muss ausdrücklich *nicht* als Rückkehr zur Personen-Bindung gelesen

@@ -128,7 +128,14 @@ häufigste Pfad zu blinden Flecken.
 
 - Rollen-Trennung ist Kontext-Trennung, nicht Personen-Trennung. Eine
   Person kann mehrere Rollen spielen — aber nicht im selben
-  Kontextfenster, sonst wiederholen sich blinde Flecken.
+  Kontextfenster, sonst wiederholen sich blinde Flecken. **Und die
+  Gegenrichtung braucht ein Wort:** Eine Rolle kann von mehreren Menschen
+  gefüllt werden — wer sie in einem konkreten Lauf füllt, ist ihr
+  **Rolleninhaber**. Der Begriff steht neben der Kontext-Trennung, nicht
+  gegen sie: Die Rolle bleibt personen-ungebunden; er macht nur Regeln
+  eindeutig, die sonst in zwei Lesarten zerfallen — *pro Rolle* oder *pro
+  Mensch, der sie gerade füllt* (etwa das WIP-Limit,
+  [Modul 5](modul-05-planning-harness.md#trigger-je-lifecycle-übergang-und-wip-limit-modul-5)).
 - Verification: "Bauen wir es richtig?" (gegen Plan/DoD); Validation:
   "Bauen wir das Richtige?" (gegen realen Bedarf). Gefährlichster Fall:
   Verifikation grün, Validation rot — Team baut *perfekt das Falsche*.
@@ -191,7 +198,9 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
   beschriften kann, hat einen blinden Übergang. Das Architect→Reviewer-
   **Verdikt muss ein Artefakt** sein, das der Reviewer in seine
   Skill-Datei übernehmen kann — „mündliche Klärung" ist keine Übergabe,
-  sondern Drift mit Kaffeepause.
+  sondern Drift mit Kaffeepause. Und füllen mehrere Menschen die
+  Architect-Rolle, nennt das Verdikt seinen **Rolleninhaber** — „der
+  Architect" ist sonst eine Adresse, die zwei Antworten geben kann.
 - **Drei legitime Verdikte.** „Reviewer-Finding herabstufen, weil Implementer
   widerspricht" — das wäre der vierte, *falsche* Pfad, und er existiert nur,
   weil Übergabe-Artefakte fehlen:
@@ -202,6 +211,17 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
 | ADR wird per Folge-ADR `supersedes`d | A → R Folge-ADR (`supersedes`); R aktualisiert Skill-Datei | Folge-ADR (Accepted) · Skill-Patch |
 | Lockerung legitim, aber undokumentiert | A → P → I Sofort-PR zieht Lockerung als Folge-ADR nach; Slice nicht still abschließen | Folge-ADR + Erinnerungs-Slice in `next/` |
 
+- **Und wenn das Verdikt selbst bestritten wird?** Zwischen Kontextfenstern
+  endet der Konflikt beim besseren Argument. Zwischen Menschen braucht er ein
+  **letztes Artefakt**, sonst ersetzt Wiederholung die Auflösung. Das Terminal
+  ist die ADR: Wird keines der drei Verdikte akzeptiert, nimmt der Architect
+  sein Verdikt als ADR an — der Vorgang endet nicht, weil jemand recht
+  bekommt, sondern weil die Entscheidung **immutabel** wird. Widerspruch geht
+  danach den Folge-ADR-Weg (`supersedes`) und braucht **neue Evidenz statt
+  Wiederholung**; die abweichende Position steht dokumentiert in §Verglichene
+  Alternativen. Das Senioritäts-Verbot bleibt unberührt: Verboten ist
+  Seniorität als *Argument* — die ADR schließt durch die Immutabilitäts-Regel,
+  die für alle gleich gilt.
 - **Folge-ADR-Hülle vorab bereithalten** (Vorlage
   [`templates/docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md)),
   damit Verdikt 2 nicht die aufwändigste — und deshalb ungewählte —

@@ -92,7 +92,7 @@ das Feld — Quell-Anker, gleiche Logik wie in P6) · Modul 5 (Übergangs-Trigge
 Zeitpunkt des `git mv`)
 · Modul 9 §Hard Rules (Zeitpunkt-Zusatz) · §Vergabe (Abgrenzung Ableiten vs.
 Beanspruchen, sonst Scheinwiderspruch) → Spiegel → `lab/example`
-(Slice-Köpfe? nur **neue** Slices — Altbestand bleibt, wie bei Kennungen).
+(nur **neue** Slice-Köpfe — Altbestand bleibt, wie bei Kennungen).
 **DoD zusätzlich:** ein Break-Test der Doku-Gates gegen das neue Pflichtfeld,
 falls eines es prüfen soll — sonst ausdrücklich *kein Sensor* deklarieren.
 
@@ -110,6 +110,10 @@ eigene Entscheidung vor Beginn:
   `roadmap.md §Aktuelle Welle` per Anker; bleibt sie stehen, meldet
   `example-verify` einen toten Verweis.
 - Modul 8 §Rollen-Sequenz für eine Welle: Schritt-5-Zeile anpassen.
+
+**Erste Aufgabe von P3** ist der Zielform-Entwurf des Ersatz-Abschnitts —
+bewusst nicht hier vorweggenommen, weil er auf dem `Verantwortlich:`-Feld aus
+P2 ruht.
 
 **Entschieden: MINOR.** Die MAJOR-Politik des Repos bindet an
 **Asset-Entfernung und Layout-Bruch** — die Datei-Ebene des Bundles
