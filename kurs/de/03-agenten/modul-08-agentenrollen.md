@@ -129,7 +129,7 @@ alle fünf, damit der Verweis dort einlösbar ist. Schritt 3 hat drei Teile.
 | **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel oder Folge-Slice |
 | **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<NN>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
 | **4** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit — der Audit sieht einen Punkt, kein verstreutes Verschwinden |
-| **5** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, nächste Zeile wird *Aktuelle Welle*, ggf. Eintrag in *Historische Trigger-Verschiebungen* |
+| **5** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, ihr Zeiger verlässt *Offene Wellen* — befördert wird niemand; ggf. Eintrag in *Historische Trigger-Verschiebungen* |
 
 Nur Schritt 1, 2 und 3b tragen einen Rollenwechsel — je einen Zug aus Anfrage
 und Antwort; 3a, 3c, 4 und 5 laufen im Planner-Kontext. Die drei Paarungen in 3c sind eine **Deckungs**-Prüfung, deren

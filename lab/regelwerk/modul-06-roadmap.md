@@ -54,10 +54,10 @@ Form, die Regeln der Inhalt.
 
 Die Form liefert die Vorlage
 [`templates/docs/plan/planning/roadmap.template.md`](../templates/docs/plan/planning/roadmap.template.md)
-— fünf Abschnitte: *Aktuelle Welle · Nächste Wellen · Meilensteine ·
+— fünf Abschnitte: *Offene Wellen · Nächste Wellen · Meilensteine ·
 Abgeschlossene Wellen · Historische Trigger-Verschiebungen*. Operative Lesart:
 
-- **Aktuelle Welle** — die laufende Welle mit den drei Pflicht-Bestandteilen (Slice-IDs · Trigger · Closure-Kriterien). Das *Geplante Ende* ist Schätzung, kein Closure-Kriterium: kippt sie, kippt sie als Schätzung.
+- **Offene Wellen** — *derivativ*: Der Zustand sind die flachen Welle-Dateien, und woran gerade gearbeitet wird, sagt das `Welle:`-Feld der Slices in `in-progress/` ([Modul 5](modul-05-planning-harness.md#lifecycle-als-state-machine)). Ziel, Trigger und Closure-Kriterien stehen in der Welle-Datei, nicht hier. Ist nichts beansprucht (`in-progress/` ohne Slices), trägt der Abschnitt stattdessen den Ruhe-Marker *Nichts in Arbeit* — eine deklarierte Redundanz **mit Wächter**: Ein Doku-Sensor hält den Marker gegen das Verzeichnis. Das *Geplante Ende* in der Welle-Datei ist Schätzung, kein Closure-Kriterium: kippt sie, kippt sie als Schätzung.
 - **Nächste Wellen** — die geordnete Vorschau; jede Zeile trägt Welle, Trigger (die Abhängigkeit als beobachtbare Bedingung), wichtigste Slices und geschätzten Aufwand (S/M/L, kein Termin). Eine Welle, die ohne fertige Vorgängerin nicht starten kann, ist eine Phantom-Welle — die Abhängigkeit steht explizit in der `Trigger`-Spalte und als gerichtete Kante im Abhängigkeitsgraphen.
 - **Meilensteine** — extern beobachtbare Zustände, orthogonal zur Welle: die Welle endet *durch* Closure-Kriterien (intern), der Meilenstein durch externe Bestätigung (Audit, Release, Kunde). Der Meilenstein liegt *neben* der Welle, nicht in ihr; ein Audit-*Termin* ist Anhang im Meilenstein-Eintrag, nie Trigger der Welle. Ist das externe Datum unverrückbar, aber die Closure-Trigger unerreichbar, ist die richtige Antwort ein *Carveout* (Modul 7), kein halbfertiges `done/`.
 - **Abgeschlossene Wellen** — das Closure-Log (ruhender Audit-Bestand): welche Welle wann geschlossen wurde, mit Zeiger auf ihre `done/welle-NN-results.md`.
@@ -134,7 +134,8 @@ selbst** (§8 des Slice-Plans, Block *Vorgelagert — offene Beobachtungen
 sichten*, unabhängig vom Sub-Area-Modus). (3) Welle-Datei flach
 anlegen (`docs/plan/planning/<welle-id>.md`, Ziel-Form
 [`../templates/docs/plan/planning/welle.template.md`](../templates/docs/plan/planning/welle.template.md))
-und in der Roadmap als *Aktuelle Welle* eintragen.
+— ihre Zeile verlässt *Nächste Wellen*, unter *Offene Wellen* steht der
+Zeiger auf die Datei.
 
 **Nicht** in den Lauf-Kontext: `done/` wird dem Implementer-Agenten
 nicht geladen. Schritt 2 ist Planungs-Leistung — was die Schwelle
@@ -180,7 +181,7 @@ fünf Schritte in
    Ohne Lerneintrag ist die Welle nicht „fertig", nur „weg"
    (Modul 1). **Und die Welle-Plan-Datei wandert per `git mv` von flach nach
    `done/`** — neben ihre Ergebnis-Notiz; der Zustand ist die
-   Verzeichnis-Position, kein `Status`-Feld (wie beim Slice). Aktive Welle
+   Verzeichnis-Position, kein `Status`-Feld (wie beim Slice). Offene Wellen
    flach, geschlossene in `done/`, die Roadmap bleibt Sequenzierungs-Autorität.
    **Zum Schluss alle drei Paarungen prüfen** — erst jetzt, weil sie die gerade
    entstandenen Einträge prüfen; in Schritt 2 gäbe es sie noch nicht. (Die
@@ -208,10 +209,11 @@ fünf Schritte in
 4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
    Welle schloss, statt eines verstreuten Verschwindens.
-5. **Roadmap fortschreiben.** Die Welle wandert aus *Aktuelle Welle* in
-   die Tabelle *Abgeschlossene Wellen* (mit Zeiger auf ihre
-   Closure-Notiz); die erste Zeile aus *Nächste Wellen* wird zur neuen
-   *Aktuellen Welle*. Löste dabei ein Trigger eine Umplanung aus, bekommt
+5. **Roadmap fortschreiben.** Die Welle bekommt ihre Zeile in der Tabelle
+   *Abgeschlossene Wellen* (mit Zeiger auf ihre Closure-Notiz), ihr Zeiger
+   verlässt *Offene Wellen*. **Befördert wird niemand**: Welche Wellen offen
+   sind, sagen die flachen Dateien; woran gearbeitet wird, das `Welle:`-Feld
+   der Slices in `in-progress/`. Löste ein Trigger eine Umplanung aus, bekommt
    die *Historische Trigger-Verschiebungen*-Tabelle ihren Eintrag.
 
 Erst wenn alle fünf Belege vorliegen, ist die Welle *auditierbar*

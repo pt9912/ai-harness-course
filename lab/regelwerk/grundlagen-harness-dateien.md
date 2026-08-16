@@ -13,7 +13,7 @@ docs/plan/planning/done/    # abgeschlossene Slices
 docs/plan/planning/<welle-id>.md            # offene Wellen, flach (Modul 6)
 docs/plan/planning/observations.md          # Beobachtungs-Register: der Steering-Loop-Zähler
 docs/plan/planning/reconciliation.md        # Reconciliation-Register: nur im Brownfield-Bootstrap
-docs/plan/planning/in-progress/roadmap.md   # Meilensteine, Wellen, aktive Welle
+docs/plan/planning/in-progress/roadmap.md   # Meilensteine, nächste Wellen, Zeiger auf offene
 docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
 docs/reviews/               # Review-Reports, ein Report pro Lauf (Modul 10)
 AGENTS.md                   # maschinell lesbare Projekt-Konventionen für Agenten

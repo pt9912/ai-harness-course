@@ -127,6 +127,12 @@ targets:
 # widersprechen.
 planning:
   roadmap: docs/plan/planning/in-progress/roadmap.md
+  # Seit dem Umbau auf "Offene Wellen" (derivativ, Kurs-Modul 6) heisst der
+  # Aktiv-Block so; der Werkzeug-Default ist noch "## Aktuelle Welle" — Override,
+  # bis ein d-check-Release den Default nachzieht. Der Ruhe-Marker folgt der
+  # gelehrten Formulierung.
+  heading: '## Offene Wellen'
+  marker: 'Nichts in Arbeit'
   # Zweite Faehigkeit desselben Moduls: die STRUKTUR der Closure-Notizen im
   # Ruheort — dieselbe Aussage, die `tools/check_closure_notes.py` prueft, an
   # denselben acht Dateien und mit denselben vier Bedingungen (12 Break-Tests,

@@ -38,8 +38,8 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
   `in-progress/` durchläuft er nicht; `done/` ist sein einziges
   Lifecycle-Verzeichnis. **Geplante** Wellen haben noch keine Datei — sie
   stehen in der Roadmap, die auch Sequenzierungs-Autorität bleibt
-  ([`in-progress/roadmap.md`](in-progress/roadmap.md): Meilensteine, Wellen,
-  aktive Welle).
+  ([`in-progress/roadmap.md`](in-progress/roadmap.md): Meilensteine, nächste
+  Wellen, Zeiger auf die offenen).
 - Der aktive Durchlauf `open/` → `next/` → `in-progress/` nimmt ausschließlich
   **Slices** auf; `done/` archiviert **zusätzlich** abgeschlossene
   **Nicht-Slice-Records** — Welle-Plan und Welle-Closure

@@ -3,8 +3,10 @@
 **Lifecycle:** Diese Datei liegt **flach** unter `docs/plan/planning/`, solange
 die Welle läuft; bei Closure wandert sie per `git mv` nach `done/`, neben ihre
 `welle-2-results.md`. Der Zustand ist die Verzeichnis-Position, kein
-Status-Feld. Dass sie die *aktuelle* Welle ist, sagt die Roadmap
-([`in-progress/roadmap.md`](in-progress/roadmap.md) §Aktuelle Welle).
+Status-Feld. Dass sie **offen** ist, sagt die Lage — flach; die Roadmap führt
+unter [§Offene Wellen](in-progress/roadmap.md#offene-wellen) nur den Zeiger,
+und woran gerade gearbeitet wird, das `Welle:`-Feld der Slices in
+`in-progress/`.
 
 **Zielmeilenstein:** M2 — Qualitätsschwelle.
 

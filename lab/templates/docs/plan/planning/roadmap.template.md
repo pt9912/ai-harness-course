@@ -14,18 +14,19 @@ gezeigt, nicht als Treiber.
 
 ---
 
-## Aktuelle Welle
+## Offene Wellen
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Roadmap-Struktur: fünf Abschnitte — *Aktuelle Welle* ist **die laufende**, mit
-den drei Pflicht-Bestandteilen (Slice-IDs · Trigger · Closure-Kriterien); das
-*Geplante Ende* ist Schätzung, kein Closure-Kriterium.
+§Roadmap-Struktur: fünf Abschnitte — *Offene Wellen* ist **derivativ**: Der
+Zustand sind die flachen Welle-Dateien; woran gearbeitet wird, sagt das
+`Welle:`-Feld der Slices in `in-progress/`. Ziel, Trigger und
+Closure-Kriterien stehen in der Welle-Datei, nicht hier.
 
-**Welle-ID:** <welle-NN-titel>
-**Start:** YYYY-MM-DD
-**Geplantes Ende:** YYYY-MM-DD (Schätzung, korrigierbar)
+- [<welle-NN-titel>](../<welle-NN-titel>.md)
 
-**Closure-Trigger:** <siehe Welle-Datei>
+<!-- BEDIENHINWEIS: Ist nichts beansprucht (in-progress/ ohne Slices), steht
+hier statt der Liste der Ruhe-Marker: Nichts in Arbeit. Ein Doku-Sensor kann
+den Marker gegen das Verzeichnis halten. -->
 
 ## Nächste Wellen
 

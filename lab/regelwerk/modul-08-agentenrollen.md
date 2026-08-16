@@ -63,7 +63,7 @@ drei Teile.
 | **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel (Hard Rule · Gate · Skill · `MR`) oder Folge-Slice |
 | **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<NN>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
 | **4** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit statt eines verstreuten Verschwindens |
-| **5** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, nächste Zeile wird *Aktuelle Welle*, ggf. Drift-Eintrag |
+| **5** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, ihr Zeiger verlässt *Offene Wellen* — befördert wird niemand; ggf. Drift-Eintrag |
 
 Nur 1, 2 und 3b tragen einen Rollenwechsel; 3a, 3c, 4 und 5 laufen im
 Planner-Kontext. Die drei Paarungen sind eine **Deckungs**-Prüfung, deren

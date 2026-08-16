@@ -117,27 +117,30 @@ Termin):
 Der Aufwand bleibt Schätzung (S/M/L) — dieselbe Größe, die in der
 30-%-Bewertung wieder auftaucht; er triggert nichts.
 
-**Schritt 4 — Welle-Eintrag mit den drei Pflicht-Bestandteilen
-schreiben.** Closure-Kriterien · Slice-IDs · Abhängigkeits-Trigger.
-Vorbild aus dem Lab
+**Schritt 4 — Die Welle-Datei trägt die drei Pflicht-Bestandteile; die
+Roadmap zeigt nur darauf.** Closure-Kriterien · Slice-IDs ·
+Abhängigkeits-Trigger stehen in der **flachen Welle-Datei** (Ziel-Form
+[`welle.template.md`](../../../lab/templates/docs/plan/planning/welle.template.md));
+der Abschnitt **Offene Wellen** der Roadmap ist *derivativ*: Der Zustand sind
+die flachen Welle-Dateien, und woran gerade gearbeitet wird, sagt das
+`Welle:`-Feld der Slices in `in-progress/`
+([Modul 5](modul-05-planning-harness.md#lifecycle-als-state-machine)). Vorbild
+aus dem Lab
 ([`../../../lab/example/docs/plan/planning/in-progress/roadmap.md`](../../../lab/example/docs/plan/planning/in-progress/roadmap.md)):
 
 ```markdown
-## Aktuelle Welle
+## Offene Wellen
 
-**Welle-ID:** welle-3-skalierung
-**Geplantes Ende:** 2026-07-24 (Schätzung)
+*Derivativ* — Ziel, Trigger und Closure-Kriterien stehen in der Welle-Datei,
+nicht hier.
 
-**Closure-Trigger:**
-- slice-014 (ANN-Bibliothek) done in allen Sprachen.
-- slice-015 (Multi-Sprach-Adapter-Cleanup) done.
-- slice-019 (Latenz-Replay) grün: p95 < 1 s bei 100k Korpus.
-- ADR-0004 (ANN-Bibliothek-Wahl) `Accepted`.
-
-**Vorgänger-Trigger:** welle-2-qualitaet done.
+- [welle-3-skalierung](../welle-3-skalierung.md)
 ```
 
-Datum *erscheint* als "Geplantes Ende (Schätzung)" — es triggert
+Ist nichts beansprucht (`in-progress/` ohne Slices), trägt der Abschnitt
+stattdessen den Ruhe-Marker *Nichts in Arbeit* — eine deklarierte Redundanz
+**mit Wächter**: Ein Doku-Sensor hält den Marker gegen das Verzeichnis. Das
+*Geplante Ende* in der Welle-Datei *erscheint* als Schätzung — es triggert
 nichts, es prognostiziert. Wenn die Schätzung kippt, kippt sie als
 Schätzung, nicht als Closure-Kriterium.
 
@@ -318,8 +321,8 @@ ausgelöst" ohne benannten Zeitpunkt ist selbst ein Trigger ohne Wächter.
 
 Der Fehlgebrauch, den diese Regel verhindert, ist beobachtet: Wer das
 Format für vollständig hält, presst den einzelnen Slice in eine
-Pseudo-Welle oder trägt ihn unter *Aktuelle Welle* ein — bis der
-Abschnitt seitenlang ist und gleichzeitig meldet, dass keine Welle läuft.
+Pseudo-Welle oder trägt ihn in die Roadmap ein — bis der Abschnitt
+seitenlang ist und gleichzeitig meldet, dass nichts in Arbeit ist.
 
 ## Das Beobachtungs-Register
 
@@ -461,7 +464,7 @@ Eröffnung braucht drei, und der mittlere ist der, den Teams zuerst
 weglassen:
 
 1. **Welle-Ziel, Out-of-Scope und Closure-Trigger festlegen.**
-   Beobachtbare Bedingung, kein Datum (§Aktuelle Welle). Erst danach
+   Beobachtbare Bedingung, kein Datum (§Roadmap-Regeln). Erst danach
    werden Slices zugeordnet — sonst schneidet die Slice-Liste das Ziel
    statt umgekehrt. **Out-of-Scope gehört dazu**: dieselbe Disziplin wie
    im Lastenheft ([Modul 3](../01-spec-und-architektur/modul-03-spec.md))
@@ -486,8 +489,9 @@ weglassen:
    ist *das* die Antwort und wird notiert.
 3. **Welle-Datei flach anlegen** (`docs/plan/planning/<welle-id>.md`,
    Ziel-Form [`welle.template.md`](../../../lab/templates/docs/plan/planning/welle.template.md))
-   **und in die Roadmap als *Aktuelle Welle* eintragen.** Der Zustand ist
-   die Verzeichnis-Position, nicht ein Status-Feld.
+   **— ihre Zeile verlässt *Nächste Wellen*, unter *Offene Wellen* steht der
+   Zeiger auf die Datei.** Der Zustand ist die Verzeichnis-Position, nicht ein
+   Status-Feld.
 
 **Was hier bewusst *nicht* passiert:** Der Implementer-Agent bekommt
 `done/` nicht in seinen Lauf-Kontext. Schritt 2 ist eine
@@ -554,8 +558,8 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 
    **Und die Welle-Plan-Datei wandert per `git mv` von flach nach `done/`** —
    neben ihre Ergebnis-Notiz. Der Zustand ist die Verzeichnis-Position, kein
-   `Status`-Feld (wie beim Slice, [Modul 5](modul-05-planning-harness.md)): die
-   aktive Welle liegt flach unter `docs/plan/planning/`, geschlossenes
+   `Status`-Feld (wie beim Slice, [Modul 5](modul-05-planning-harness.md)): offene
+   Wellen liegen flach unter `docs/plan/planning/`, geschlossenes
    Planungs-Material in `done/`, und die Roadmap bleibt die
    Sequenzierungs-Autorität — so füllt sich der Ordner nicht mit Abgeschlossenem.
 
@@ -605,10 +609,11 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
    Welle schloss, statt eines verstreuten Verschwindens.
-5. **Roadmap fortschreiben.** Die Welle wandert aus *Aktuelle Welle* in
-   die Tabelle *Abgeschlossene Wellen* (mit Zeiger auf ihre
-   Closure-Notiz); die erste Zeile aus *Nächste Wellen* wird zur neuen
-   *Aktuellen Welle*. Löste dabei ein Trigger eine Umplanung aus, bekommt
+5. **Roadmap fortschreiben.** Die Welle bekommt ihre Zeile in der Tabelle
+   *Abgeschlossene Wellen* (mit Zeiger auf ihre Closure-Notiz), ihr Zeiger
+   verlässt *Offene Wellen*. **Befördert wird niemand**: Welche Wellen offen
+   sind, sagen die flachen Dateien; woran gearbeitet wird, das `Welle:`-Feld
+   der Slices in `in-progress/`. Löste ein Trigger eine Umplanung aus, bekommt
    die *Historische Trigger-Verschiebungen*-Tabelle ihren Eintrag.
 
 Erst wenn alle fünf Belege vorliegen, ist die Welle *auditierbar*
