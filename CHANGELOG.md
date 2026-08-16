@@ -11,6 +11,63 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 80 — 2026-08-16 · Geprobt, nicht belegt
+
+Zwischen *entworfen* (Welle 79) und *belegt* (braucht ein adoptierendes Team)
+fehlte eine Stufe, die von uns herstellbar ist: **geprobt** — die
+Nebenläufigkeits-Mechanik der sieben Anpassungen unter simuliertem
+Mehr-Schreiber-Betrieb provoziert, mit vorab notierten Erwartungen.
+
+### Entschieden
+
+- **`lab/team-sim/` — ein Replay für Nebenläufigkeits-Szenarien**, nach der
+  Bauform von Modul 12: Je Szenario eine frische Team-Topologie (bare
+  `origin.git` + zwei Clones — bewusst keine Worktrees, die modellieren
+  *einen* Entwickler), Aktionen als `alice`/`bob`, Erwartung als Verhalten —
+  laut, still oder Gate-Befund. **Auch die stillen Ausgänge sind
+  Erwartungen**: Verläuft die Nummern-Kollision *nicht* still, hätte die
+  Lehre die Falle falsch beschrieben. Kein Gate — läuft auf Anlass, steht
+  nicht in `make check`; der d-check-Digest kommt aus dem Repo-Makefile
+  (eine Quelle), fail-closed außerhalb des Repos.
+- **`team.md` §SOLL ist dreistufig.** Die Grenze steht in der Stufe selbst:
+  Geprüft ist die Mechanik mit kooperativen Akteuren, die die Regeln kennen —
+  **Dissens, Lesarten-Divergenz zwischen Menschen und echte Einarbeitung
+  bleiben bei 0×**, und es ist Eigenprüfung.
+
+### Der erste Lauf: 9/9 — und drei Erträge darüber hinaus
+
+Alle Vorhersagen der Team-Strecke hielten der Mechanik stand: Der
+Doppel-Anspruch wird non-fast-forward **abgelehnt** (TA-7), die stille
+Nummern-Kollision tritt exakt wie in §Vergabe gelehrt ein, das `MR`-Hybrid
+verhält sich wie beschrieben (Dateien still, Index-Zeile laut), zwei offene
+Wellen sind für `planning` grün, und die Sichtung liest den gemergten Stand.
+
+1. **Die Stille braucht Abstand** (s03): Im einzeiligen Register kollidierten
+   Zeilen-Änderung und Anhang **laut** — still wird die Doppel-Zählung erst
+   in großen Registern, genau dort, wo auch das Wiedererkennen am teuersten
+   ist. Das schärft `TB-011`, statt es zu widerlegen.
+2. **Die `waves.dir`-Unvereinbarkeit ist gemessen** (s04b): zwei offene
+   Wellen, `planning` grün — `waves.dir` dazugeschaltet meldet `wave-drift`.
+   Der Roadmap-Faden trägt jetzt einen reproduzierbaren Befund statt einer
+   Lesart.
+3. **Die Branch-Protection-Reibung ist real** (s06): Ein `pre-receive`-Hook
+   auf `main` lässt den TA-7-Anspruch scheitern — die Grenze, die bisher nur
+   als Beispiel für „entworfen ≠ belegt" diente, ist jetzt Messwert.
+
+### Ehrlichkeit über den Bau
+
+Der Harness selbst brauchte drei Anläufe, und beide Werkzeug-Lehren stehen im
+README: `git init --bare` ohne `-b main` ließ drei Szenarien gegen **leere
+Verzeichnisse** „bestehen" — die Klasse *Prüfung, die nicht prüft*, jetzt mit
+Wachsamkeits-Zeile in der Topologie; und der zweite Merge braucht eine
+Git-Identität. Danach dreifach im Scratchpad abgesichert: seiteneffektfrei
+(`git status` vor/nach identisch), deterministisch (zwei Läufe
+zeilenidentisch), fail-closed als Kopie außerhalb des Repos — der Kopie-Test
+fand den Halb-Läufer-Defekt, bevor er jemanden täuschen konnte.
+
+**Am Bundle ändert die Welle nichts** — `lab/team-sim/` reist nicht mit
+(`build-bundle.sh` kopiert `regelwerk/` und `templates/`). Kein Versions-Bump.
+
 ## Welle 79 — 2026-08-16 · Das SOLL ist entworfen
 
 Vierte und letzte Umsetzungs-Welle des [Team-Plans](docs/team-plan.md):
