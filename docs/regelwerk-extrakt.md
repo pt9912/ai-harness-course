@@ -60,7 +60,7 @@ einleitet. Dafür gilt:
 > **Weglass-Probe aus Teil 1, rückwärts**: Ändert der Zusatz einen Ausgang, ist
 > er Aussage und gehört in die Quelle, nicht in den Spiegel.
 
-Ohne diese Hälfte ist die [Kandidatenliste](#kandidatenliste) nicht
+Ohne diese Hälfte ist die [Kandidatenliste](#kandidatenliste--durchgang-abgeschlossen) nicht
 abarbeitbar: Ein fettgesetzter Vorspann ohne Quelle wäre sonst weder erlaubt
 noch verboten.
 
@@ -155,25 +155,79 @@ Zwei Nebenwirkungen, beide gewollt:
 * Im `traceability`-Fall kommt der Link auf *Harness-Lüge* zurück, den die
   Paraphrase fallen gelassen hatte — umgehängt auf `grundlagen-begriffe.md`.
 
-## Kandidatenliste
+## Kandidatenliste — Durchgang abgeschlossen
 
 Ein enger Test — nur fettgesetzte Regel-Vorspänne, operativ per Konstruktion und
-keine Tabellenzellen — liefert **14 Treffer** in sieben Dateien:
-`grundlagen-harness-dateien` · `grundlagen-traceability` · `modul-06` ·
-`modul-08` (3) · `modul-12` (4) · `modul-13` · `modul-15` (2).
+keine Tabellenzellen — lieferte **14 Treffer** in sieben Dateien. Stand
+2026-08-16 sind alle entschieden: **3 Falsch-Positive · 5 zulässig · 6 Befunde.**
 
-**Das ist eine Kandidatenliste, keine Defektzahl.** In einer Stichprobe von fünf
-war einer ein Falsch-Positiv (*„Warum Architect und nicht Planner allein"* steht
-sehr wohl in der Quelle); andere könnten legitime Gliederungs-Zusätze sein. Jeder
-Eintrag braucht die Proben aus Teil 1 und 2.
+**Falsch-Positive der Erkennung — 3.** Volle Übereinstimmung in der Quelle; der
+Normalisierer scheiterte an Zeilenumbrüchen: *Warum Architect und nicht Planner
+allein* (`modul-08`) · *Ins Manifest gehört nur, was der Lauf selbst noch tut*
+(`modul-12`) · *Cache-Miss in den Metriken erkennen* (`modul-15`).
+
+**Zulässig — 5.** Vier sind reine Gliederung, die benennt statt zu behaupten:
+*„Sensor 2 —"* (`grundlagen-traceability`) · *„Eröffnung — drei Schritte."*
+(`modul-06`) · *„Wovon diese Regeln sprechen …"* (`modul-12`) ·
+*„Drift-Signal und Schwelle:"* (`modul-15`, der Inhalt darunter ist quelltreu —
+`Doku-Konsistenz-Agent` und `consistency_ratio` stehen so in der Quelle).
+
+Der fünfte liegt am Rand: *„Mindestens drei Fälle — Happy · Boundary ·
+Negative"* (`modul-12`) zieht **zwei Quellstellen** zusammen, beide wörtlich —
+*„mindestens drei Fälle"* und *„Happy, Boundary, Negative"* stehen an
+verschiedenen Orten der Quelle. Kein Wort ist geändert, aber die Verbindung ist
+die des Spiegels. Siehe unten, Lücke 6.
+
+**Befunde — 6, noch nicht behoben.**
+
+| Datei | Spiegel | Quelle |
+|---|---|---|
+| `grundlagen-harness-dateien` | „würde **übersprungen**" | „würde **nach der dritten Welle** übersprungen" |
+| `modul-06-roadmap` | Prosa mit *„drei Ausgängen (a)/(b)/(c)"* | eine **Übungs-Tabelle** *„Drei mögliche Antworten"* mit `slice-019`-Beispiel |
+| `modul-08-agentenrollen` | „**Im Repo ohne Wellen-Betrieb** läuft…" | „**Und im Repo ohne Wellen-Betrieb?** Dort läuft…" |
+| `modul-08-agentenrollen` | „**Der Validator gehört nicht** in diese Prozedur" · „(nach MVP-Slice, vor größeren Wellen)" | „**Wo der Validator bleibt.** … gehören aber **nicht** in diese Prozedur" · „Validierung greift **nach einem MVP-Slice und vor der Implementation größerer Wellen**" |
+| `modul-12-replay-evaluierung` | „**Jeder Fall fängt eine andere Fehlerklasse.**" | „Drei Fälle sichern die *Abdeckung* — **je eine Fehlerklasse** Happy, Boundary, Negative" |
+| `modul-13-quality-gates` | „**Make-Gate mit ADR-ID-Kommentar** … **bewusstes Brechen** … (`ADR-<NNNN> violated`)" | keine dieser Formulierungen kommt vor |
+
+Zwei stechen heraus. **`harness-dateien`** streicht einen **Qualifikator**: aus
+*„wird nach der dritten Welle übersprungen"* wird *„wird übersprungen"* — genau
+die Klasse, die [Teil 3](#teil-3--die-probe) als Blindstelle der Teilfolgen-Probe
+benennt. Und **`modul-06`** wandelt eine *didaktische Übungstabelle* in
+operative Prosa: Dabei wird `slice-019` zu „Slices" generalisiert und
+*„Trigger-Disziplin wirkt"* aus der zweiten Zeile als *„blieb Theorie"* nach (a)
+verschoben und negiert.
+
+**Trefferquote.** 6 von 14 des engen Tests sind echte Befunde; zusammen mit den
+vier bereits behobenen sind damit **zehn Paraphrasen** im Spiegel belegt. Der
+Test ist eng — er sieht nur fettgesetzte Vorspänne. Was in normaler Prosa steht,
+hat ihn nie erreicht.
+
+## Die Regel ist noch nicht fertig
+
+Der Durchgang hat **zwei weitere Lücken** offengelegt, zusätzlich zu den drei
+aus der ersten Anwendung:
+
+* **Pronomen-Auflösung.** Fällt der Bezugssatz weg, muss *„sie"* zu *„die
+  Regel"* werden — notwendig, und nach der Regel eine verbotene Ersetzung.
+  Braucht dieselbe Behandlung wie die Verweis-Phrasen.
+* **Didaktische Frageform.** *„Und im Repo ohne Wellen-Betrieb?"* → Aussage ist
+  Didaktik-Weglassen, geht aber nicht durch Streichen allein.
+* **Zusammenziehen zweier Quellstellen.** *„Mindestens drei Fälle — Happy ·
+  Boundary · Negative"* verbindet zwei wörtliche Fragmente von verschiedenen
+  Orten. Kein Wort geändert, und trotzdem von *„nie zusammengefasst"* verboten.
+  Das Verbot zielt auf Umformulieren, nicht auf Komposition — es trennt beides
+  nicht.
+
+Sechs Nachschärfungen in zwei Runden. Das Muster ist deutlich: **Die Regel ist
+als Verbotsliste gebaut und stößt bei jedem realen Fall auf eine Form, die sie
+nicht vorgesehen hat.** Sie wird deshalb **nicht weiter angestückelt**, sondern
+nach dem vollständigen Durchgang **einmal neu formuliert** — vermutlich
+positiv (*was der Spiegel tun darf*) statt negativ.
 
 ## Offen
 
-- Die Regel ist jung: Ihre erste Anwendung hat **drei** eigene Lücken
-  offengelegt (Wort-Ebene · Zusätze · Verweis-Phrasen). Nach dem Durchgang durch
-  die Kandidatenliste gehört sie noch einmal geprüft — es ist wahrscheinlich,
-  dass weitere auftauchen.
-- Die 14 Kandidaten mit dem Maßstab aus Teil 1/2 durchgehen.
+- Die **sechs Befunde** aus dem Durchgang beheben.
+- Die Regel **neu formulieren** statt weiter nachzuschärfen — siehe oben.
 - Den Teilfolgen-Test auf Absatz-Knoten bauen — dann wäre er ein Gate.
 
 Wird die Schnittregel zur **zweiten** repo-lokalen Strukturregel, wandert sie
