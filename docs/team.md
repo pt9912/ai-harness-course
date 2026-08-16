@@ -198,12 +198,12 @@ darf, ohne etwas zu bewegen.
 
 | Kennung | Klasse | Änderung | Eintrag | Stand |
 |---|---|---|---|---|
-| [TB-001](#tb-001) | Verhalten | [TA-1](#ta-1) [TA-2](#ta-2) | Der Lifecycle ist ein Zustand ohne Subjekt | offen · Achse am Konsumenten belegt |
+| [TB-001](#tb-001) | Verhalten | [TA-1](#ta-1) [TA-2](#ta-2) | Der Lifecycle ist ein Zustand ohne Subjekt | offen · TA-1-Hälfte umgesetzt (Welle 76), Rest in TA-2 · Achse am Konsumenten belegt |
 | TB-002 | — | — | *Der Zähler zählt Beobachtungen, nicht Beobachter* | **gestrichen** — der Zähler steht in einer stehenden Datei und wird bei jeder Slice-Closure fortgeschrieben, gleich von wem; das Register-Beispiel des Kurses ist selbst der Drei-Slices-Fall. Der Sichtungs-Schritt (§8) ist Pflicht in *jedem* Slice-Plan, und die Sub-Area-Spalte trägt bewusst die normative Sub-Area. Person-unabhängig gebaut |
 | TB-003 | — | — | *Die Welle ist ein Join-Barrier* | **abgelöst** durch [TB-014](#tb-014) — die Barriere setzt voraus, dass die Einzahl von *Aktuelle Welle* bindet; sie bindet nicht |
-| [TB-004](#tb-004) | Verhalten | [TA-1](#ta-1) | Eine Rolle, mehrere Personen | offen |
+| [TB-004](#tb-004) | Verhalten | [TA-1](#ta-1) | Eine Rolle, mehrere Personen | **umgesetzt (Welle 76)** |
 | TB-005 | — | — | *Der Planner ist Single Writer* | **gestrichen** — kein eigener Befund: „Durchsatz-Engpass" ist Volumen, nicht Lücke; der Rest ist [TB-004](#tb-004) |
-| [TB-006](#tb-006) | Verhalten | [TA-1](#ta-1) [TA-6](#ta-6) | Der Konflikt-Pfad hat kein Terminal | offen |
+| [TB-006](#tb-006) | Verhalten | [TA-1](#ta-1) [TA-6](#ta-6) | Der Konflikt-Pfad hat kein Terminal | **umgesetzt (Welle 76)** |
 | [TB-007](#tb-007) | Verhalten | [TA-5](#ta-5) | Einarbeitung wurde nie als Kosten geführt | offen · Auslöser ist die *zweite* Person |
 | TB-008 | — | — | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
 | [TB-009](#tb-009) | Text | [TA-3](#ta-3) | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
@@ -221,7 +221,7 @@ den Ein-Personen-Fall nicht, und sie lässt sich zurücknehmen.
 
 <a id="ta-1"></a>
 
-### TA-1 — Ein Wort für die Person, die eine Rolle gerade füllt
+### TA-1 — Ein Wort für die Person, die eine Rolle gerade füllt · **umgesetzt (Welle 76)**
 
 **Deckt** [TB-004](#tb-004) (definitorisch) · [TB-001](#tb-001) (WIP-Lesart) ·
 [TB-006](#tb-006) (welcher Architect).
@@ -469,7 +469,7 @@ hierher.
 
 <a id="ta-6"></a>
 
-### TA-6 — Ein letztes Artefakt im Konflikt-Pfad
+### TA-6 — Ein letztes Artefakt im Konflikt-Pfad · **umgesetzt (Welle 76)**
 
 **Deckt** [TB-006](#tb-006).
 

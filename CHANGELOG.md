@@ -11,6 +11,60 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 76 — 2026-08-16 · Ein Wort für die Gegenrichtung
+
+Erste Umsetzungs-Welle des [Team-Plans](docs/team-plan.md): Pakete **P0** und
+**P1** — die Anpassungen `TA-1` und `TA-6` aus [`docs/team.md`](docs/team.md).
+Der Korpus modellierte Rollen und Personen nur in einer Richtung: *eine Person,
+mehrere Rollen*. Für die Gegenrichtung — eine Rolle, mehrere Menschen — fehlte
+das Wort, und Regeln der Form *„die Rolle X tut Y"* zerfielen in zwei Lesarten.
+
+### Entschieden
+
+- **Der Rolleninhaber** (`TA-1`). *Wer eine Rolle in einem konkreten Lauf
+  füllt, ist ihr Rolleninhaber* (Modul 8). Der Begriff steht **neben** der
+  Kontext-Trennung, nicht gegen sie — die Rolle bleibt personen-ungebunden.
+  Damit werden drei Regeln eindeutig: das WIP-Limit (Modul 5 — *pro
+  Rolleninhaber = 1, pro Mensch in der Implementer-Rolle, nicht pro Rolle*),
+  die Reviewer-Drift (Modul 10 — *zwischen Sessions und zwischen
+  Rolleninhabern*; Abweichung zwischen Inhabern ist **Dissens**, kein
+  Nicht-Determinismus, geschärft wird der Skill, nicht die mildere Lesart
+  gewählt) und das Architect-Verdikt (Modul 8 — es nennt seinen Inhaber,
+  *„der Architect" ist sonst eine Adresse, die zwei Antworten geben kann*).
+- **Das Konflikt-Terminal** (`TA-6`). Der Konflikt-Pfad verbot die
+  Entscheidung nach Seniorität, benannte aber kein **letztes** Artefakt —
+  zwischen Menschen dokumentiert ein Artefakt die Uneinigkeit, es beendet sie
+  nicht. Jetzt: Wird keines der drei Verdikte akzeptiert, nimmt der Architect
+  sein Verdikt **als ADR** an. Der Vorgang endet nicht, weil jemand recht
+  bekommt, sondern weil die Entscheidung immutabel wird; Widerspruch geht den
+  Folge-ADR-Weg und braucht **neue Evidenz statt Wiederholung**. Das
+  Senioritäts-Verbot bleibt unberührt — verboten ist Seniorität als
+  *Argument*. Dazu Modul 4: Eine ADR entsteht nicht nur aus
+  Architektur-Fragen.
+- **Der Geltungsbereich** (P0). Erstmals deklariert, an beiden Enden:
+  `kurs/de/README.md` §Zielgruppe und — weil der Adopter das Bundle liest,
+  nicht den Kurs — als Zeile in `lab/regelwerk/README.md`. *Getestet und
+  gelebt mit einem schreibenden Menschen plus Agenten je Repository; die
+  Mehr-Schreiber-Fassung ist entworfen, nicht belegt.*
+
+### Bauform und Beleg
+
+Alle Änderungen sind **additiv** — kein bestehender Satz wurde entfernt, der
+Ein-Personen-Fall bleibt unverändert gültig. Kette vollständig gelaufen:
+Quelle → Spiegel (Schnittregel, Deixis auf Spiegel-Anker) → Lösungen;
+Templates bewusst unberührt (Plan P1). Vollständigkeit gemessen statt
+behauptet: `Rolleninhaber` steht in sieben Dateien der Kette, das Terminal in
+Quelle, Lösung und Spiegel.
+
+Eine Korrektur am eigenen Entwurf noch vor dem Commit: Der P0-Absatz
+behauptete zunächst *„Rolleninhaber und Zuweisung"* — die Zuweisung landet
+erst mit P2. Ein Geltungsbereichs-Absatz, der Konstrukte nennt, die es noch
+nicht gibt, wäre selbst die Klasse Harness-Lüge gewesen.
+
+**Bundle-Bilanz:** Die drei geänderten Spiegel-Module, der Modul-4-Spiegel und
+die `README`-Zeile reisen im Bundle. Additive Regeln → **MINOR**, wenn
+released wird.
+
 ## Welle 75 — 2026-08-16 · Der Spiegel formuliert nicht
 
 Zwei Fäden, ein Auslöser. Die Frage *„das Regelwerk trägt bei einem Schreiber —
