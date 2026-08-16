@@ -3,7 +3,9 @@
 **Stand:** 2026-08-16.
 
 Wie aus `kurs/de` der Betriebsregelwerk-Spiegel unter `lab/regelwerk/` entsteht,
-woran sich das Ergebnis prüfen lässt und was daran offen ist. **Leser ist, wer
+woran sich das Ergebnis prüfen lässt und was daran offen ist. Die Regel steht
+**positiv**: Erlaubt sind [fünf Operationen](#teil-2--was-der-spiegel-tun-darf),
+alles andere ist ein Befund. **Leser ist, wer
 den Spiegel pflegt** — nicht der Lernende und nicht der Adopter. Das *Was* steht
 im [README](../README.md#betriebsregelwerk): didaktikfreier Extrakt in
 Quellformulierung, derivativ, bei Konflikt gilt das Kursmaterial.
@@ -29,89 +31,71 @@ Drei Proben trennen operativ von didaktisch:
 | **Weglass-Probe** | gestrichen ändert sich ein **Ausgang** — jemand handelt in einem konkreten Fall anders | gestrichen ändert sich nur das Verständnis |
 | **Nachbarschaft** | steht für sich | braucht den Aufbau des Moduls (*„wie eben gesehen"*, Antwort auf eine erwartete Fehlvorstellung) |
 
-## Teil 2 — Wie ein gemischter Satz geschnitten wird
+## Teil 2 — Was der Spiegel tun darf
 
-Viele Sätze tragen beides. Für sie gilt:
+Die Regel stand zuerst als **Verbotsliste** da. Sechs Anwendungen, sechs
+Formen, die sie nicht vorgesehen hatte — bei jeder war das Ergebnis richtig und
+die Regel dagegen. Deshalb steht sie jetzt **positiv**: Erlaubt ist, was hier
+steht; alles andere ist ein Befund.
 
-> **Gestrichen werden nur ganze Teilsätze, an syntaktischen Fugen** —
-> Gedankenstrich, Semikolon, Doppelpunkt, Komma vor Nebensatz. **Nie
-> umgestellt, nie ersetzt, nie zusammengefasst**, und **kein einzelnes Wort
-> innerhalb eines bleibenden Teilsatzes**. Was stehen bleibt, steht in
-> Reihenfolge und Wortlaut der Quelle. Umgehängt werden allein die Verweise,
-> weil der Split ihre Nachbarschaft ändert.
+Der Kern in einem Satz:
 
-**Ein Verweis ist dabei als Ganzes eine Einheit** — die einleitenden Wörter
-(*„siehe"*, *„vgl."*) gehören dazu und werden mit ihm umgeformt. Das ist keine
-Ausnahme, sondern gelebte Form: Der Spiegel setzt Verweise **18-mal** in
-Klammern ans Satzende, wo die Quelle sie in den Satz einbindet; `siehe [` fällt
-dabei von 37 Vorkommen auf 7. Ohne diese Klarstellung verböte die Wort-Regel
-oben eine Konvention, die der Spiegel braucht, weil seine Verweise ohne die
-Modul-Erzählung stehen müssen.
+> **Der Spiegel formuliert nicht.** Er **wählt aus**, **setzt zusammen**,
+> **bindet an** und **benennt**.
 
-**Und was hinzukommen darf.** Die Regel oben sagt, was *entfällt*. Der Spiegel
-muss aber auch etwas *hinzufügen*, weil er anders gegliedert ist als die
-Quelle — `modul-08` etwa braucht einen Vorspann, der die Verdikt-Tabelle
-einleitet. Dafür gilt:
+Daraus fünf Operationen:
 
-> **Zusätze sind nur Gliederung, nie Aussage.** Erlaubt ist, was eine
-> Aufzählung, Tabelle oder Sektion *benennt* (*„Drei legitime Verdikte."*).
-> Unzulässig ist jeder Satz, der etwas behauptet, was in der Quelle nicht
-> steht — auch ein zusammenfassender. Die Probe dafür ist die
-> **Weglass-Probe aus Teil 1, rückwärts**: Ändert der Zusatz einen Ausgang, ist
-> er Aussage und gehört in die Quelle, nicht in den Spiegel.
+| | Operation | erlaubt ist |
+|---|---|---|
+| **1** | **Weglassen** | ganze Einheiten: Satz, Teilsatz an einer syntaktischen Fuge, Listenpunkt, Tabellenzeile, Abschnitt. **Nicht** ein einzelnes Wort innerhalb einer bleibenden Einheit |
+| **2** | **Zusammensetzen** | wörtliche Fragmente von verschiedenen Stellen der Quelle verbinden — auch aus Tabellenzellen, die der Spiegel zu Fließtext fügt. Die Fragmente bleiben unverändert, die Verbindung ist die des Spiegels |
+| **3** | **Anbinden** | Verweise samt ihrer einleitenden Wörter umformen (*„siehe X"* → *„(X)"*), und ein Pronomen auflösen, dessen Bezug weggefallen ist (*„sie"* → *„die Regel"*) |
+| **4** | **Benennen** | Vorspänne, die eine Aufzählung, Tabelle oder Sektion **benennen** (*„Drei legitime Verdikte."*). Probe: die [Weglass-Probe](#teil-1--was-operativ-ist) rückwärts — ändert der Vorspann einen Ausgang, ist er Aussage und unzulässig |
+| **5** | **Aussageform** | eine didaktische Frage, die eine operative Aussage enthält, in diese Aussage überführen (*„Und im Repo ohne Wellen-Betrieb?"* → *„Im Repo ohne Wellen-Betrieb …"*) |
 
-Ohne diese Hälfte ist die [Kandidatenliste](#kandidatenliste--durchgang-abgeschlossen) nicht
-abarbeitbar: Ein fettgesetzter Vorspann ohne Quelle wäre sonst weder erlaubt
-noch verboten.
+**Was damit ausgeschlossen ist**, ohne dass es einzeln aufgezählt werden müsste:
+Ersetzen, Umstellen, Verallgemeinern (`slice-019` → *„Slices"*), Verdichten
+eines bleibenden Satzes, und jede Aussage, die die Quelle nicht macht.
 
-Zulässig — ein ganzer Teilsatz entfällt:
+**Die Liste ist abschließend gemeint, nicht abschließend bewiesen** — sie ist
+aus sechs Anwendungen am eigenen Bestand gewonnen. Wer eine sechste Operation
+findet, die keine der fünf trägt, erweitert sie; das ist der reguläre Weg, nicht
+die Ausnahme. Der Unterschied zur Verbotsliste ist die **Beweislast**: Dort war
+eine unvorhergesehene Form stillschweigend erlaubt, hier ist sie ein Befund, bis
+jemand die Liste erweitert.
 
-> **Quelle:** „Die Eröffnung ist Planner-Arbeit — *und das ist eine Aussage,
-> keine Leerstelle.* Alle drei Schritte (…) laufen in einem Kontext."
-> **Spiegel:** „Die Eröffnung ist Planner-Arbeit — alle drei Schritte laufen in
-> einem Kontext."
+## Teil 3 — Zwei Proben, und was keine von beiden fängt
 
-Unzulässig — umgestellt und ersetzt (der Fall ist inzwischen behoben, siehe
-unten; er steht hier als Beispiel):
+Die fünf Operationen sind nicht als Ganzes maschinell prüfbar — Operation 4
+verlangt ein Urteil. Zwei Hälften sind es aber, und sie fangen verschiedene
+Fehler.
 
-> **Quelle:** „er existiert nur, weil Übergabe-Artefakte fehlen"
-> **Spiegel:** „der nur bei fehlenden Artefakten existiert"
+**Probe A — Teilfolge.** Weil nichts umgestellt und nichts ersetzt wird:
 
-## Teil 3 — Die Probe
+> Jeder Spiegel-Satz ist eine **Wort-Teilfolge** der Quellstelle, aus der er
+> stammt.
 
-Wenn nur ganze Teilsätze entfallen und nichts umgestellt wird, folgt daraus eine
-maschinell entscheidbare Eigenschaft:
+Fängt Ersetzung und Umstellung. Fängt **nicht** Auslassungen unterhalb der
+Satzglied-Ebene (ein gestrichenes `siehe` bleibt teilfolgen-legal) und muss
+Verweis-Phrasen aus Operation 3 ausnehmen.
 
-> **Jeder Regelwerks-Satz ist eine Wort-Teilfolge eines Quellsatzes.**
+**Probe B — Wortdeckung.** Weil der Spiegel nichts formuliert:
 
-Damit wandert die Treue-Regel aus der inferentiellen in die computationale
-Hälfte — der Spiegel bekäme den Sensor, den er heute nicht hat, und die
-Review-Runden müssten keinen Wortlaut mehr vergleichen.
+> Jedes inhaltstragende Wort des Spiegels kommt in seiner Quelldatei vor.
 
-**Belegt an vier Fällen von Hand:** Die Probe akzeptiert den Planner-Schnitt
-oben und weist die drei Paraphrasen zurück, die unten behoben sind —
-deckungsgleich mit dem Urteil beim Lesen. Auch die drei Korrekturen selbst sind
-gegen sie geprüft und bestehen sie.
+Fängt **Zusätze** — die vier quellenlosen Aussagen in `modul-12` und
+`„Make-Gate mit ADR-ID-Kommentar"` in `modul-13` sind so gefunden worden. Fängt
+nicht, wenn ein Wort zwar vorkommt, aber etwas anderes bedeutet.
 
-**Nicht belegt im Maßstab.** Vier Anläufe scheiterten an der Text-Extraktion,
-nicht an der Regel: Quelle und Spiegel sind bei ~78 Zeichen umgebrochen, an
-verschiedenen Stellen; dazu speist der Spiegel sich teils aus Tabellenzellen der
-Selbstcheck-Rubriken. Ein tragfähiger Lauf muss **ganze Absatz-Knoten**
-vergleichen statt Zeilen und Tabellen gesondert behandeln.
+**Was keine von beiden fängt.** Ein gestrichener Teilsatz kann eine
+**Bedingung** getragen haben — aus einer bedingten Regel wird eine unbedingte.
+Das ist Operation 1, korrekt ausgeführt und trotzdem falsch. Es bleibt ein
+Urteil; nur eines je Streichung statt eines je Satz, und im Diff sichtbar.
 
-**Was die Probe nicht fängt — zwei Dinge.**
-
-*Erstens: Sie prüft die Reihenfolge, nicht die Vollständigkeit.* Ein einzelnes
-gestrichenes Wort — `siehe` aus *„(siehe ADR-Hard-Rule, Modul 4)"* — ist
-teilfolgen-legal und nach Teil 2 trotzdem unzulässig, weil es kein ganzer
-Teilsatz ist. Die Probe ist damit **notwendig, nicht hinreichend**; sie fängt
-Umstellungen und Ersetzungen, nicht Auslassungen unterhalb der Satzglied-Ebene.
-Eine Vollständigkeits-Probe muss **Verweis-Phrasen ausnehmen**, sonst meldet sie
-jede der 18 Klammer-Umformungen als Defekt.
-
-*Zweitens: Ein gestrichener Teilsatz kann eine Bedingung getragen haben*; aus
-einer bedingten Regel wird dann eine unbedingte. Das bleibt ein Urteil — aber
-eines je Streichung statt eines je Satz, und im Diff sichtbar.
+**Beide Proben brauchen absatzweise Extraktion.** Vier Anläufe scheiterten
+daran, dass Quelle und Spiegel bei ~78 Zeichen an verschiedenen Stellen
+umbrechen und der Spiegel sich teils aus Tabellenzellen speist. Wer sie baut,
+vergleicht **Absatz-Knoten**, nicht Zeilen.
 
 ## Teil 4 — Durchsetzungsstand
 
@@ -191,7 +175,7 @@ die des Spiegels. Siehe unten, Lücke 6.
 
 Zwei stechen heraus. **`harness-dateien`** streicht einen **Qualifikator**: aus
 *„wird nach der dritten Welle übersprungen"* wird *„wird übersprungen"* — genau
-die Klasse, die [Teil 3](#teil-3--die-probe) als Blindstelle der Teilfolgen-Probe
+die Klasse, die [Probe A](#teil-3--zwei-proben-und-was-keine-von-beiden-fängt) als Blindstelle der Teilfolgen-Probe
 benennt. Und **`modul-12`** ist kein Paraphrase-Fall, sondern ein **verfasster**:
 Vier Aussagen des Absatzes haben in der Quelle **keine Entsprechung** — *„Jeder
 Fall fängt eine andere Fehlerklasse"*, *„Drei Varianten desselben Happy Path
@@ -215,33 +199,31 @@ vier bereits behobenen sind damit **zehn Paraphrasen** im Spiegel belegt. Der
 Test ist eng — er sieht nur fettgesetzte Vorspänne. Was in normaler Prosa steht,
 hat ihn nie erreicht.
 
-## Die Regel ist noch nicht fertig
+## Woraus die fünf Operationen gewonnen sind
 
-Der Durchgang hat **zwei weitere Lücken** offengelegt, zusätzlich zu den drei
-aus der ersten Anwendung:
+Die Verbotsliste der ersten Fassung ist an **sechs** realen Formen gescheitert —
+jedes Mal war das Ergebnis im Spiegel richtig und die Regel dagegen. Sie sind
+die Vorlage der fünf Operationen in [Teil 2](#teil-2--was-der-spiegel-tun-darf):
 
-* **Pronomen-Auflösung.** Fällt der Bezugssatz weg, muss *„sie"* zu *„die
-  Regel"* werden — notwendig, und nach der Regel eine verbotene Ersetzung.
-  Braucht dieselbe Behandlung wie die Verweis-Phrasen.
-* **Didaktische Frageform.** *„Und im Repo ohne Wellen-Betrieb?"* → Aussage ist
-  Didaktik-Weglassen, geht aber nicht durch Streichen allein.
-* **Zusammenziehen zweier Quellstellen.** *„Mindestens drei Fälle — Happy ·
-  Boundary · Negative"* verbindet zwei wörtliche Fragmente von verschiedenen
-  Orten. Kein Wort geändert, und trotzdem von *„nie zusammengefasst"* verboten.
-  Das Verbot zielt auf Umformulieren, nicht auf Komposition — es trennt beides
-  nicht.
+| gescheiterte Verbots-Fassung | Fall | jetzt Operation |
+|---|---|---|
+| „nur ganze Teilsätze" — sagte nichts über Wörter | `siehe` aus *„(siehe ADR-Hard-Rule …)"* gestrichen | **1**, mit ausdrücklicher Wort-Grenze |
+| sagte nichts über **Zusätze** | *„Drei legitime Verdikte."* als Tabellen-Vorspann | **4** |
+| „umgehängt werden allein die Verweise" — ohne ihre einleitenden Wörter | *„— siehe [X]"* → *„([X])"*, im Spiegel **18-mal** | **3** |
+| verbot jede Ersetzung | *„sie"* → *„die Regel"*, weil der Bezugssatz entfällt | **3** |
+| „Didaktik weglassen" — ging nicht durch Streichen allein | *„Und im Repo ohne Wellen-Betrieb?"* → Aussage | **5** |
+| „nie zusammengefasst" — traf auch Komposition | zwei wörtliche Fragmente verbunden | **2** |
 
-Sechs Nachschärfungen in zwei Runden. Das Muster ist deutlich: **Die Regel ist
-als Verbotsliste gebaut und stößt bei jedem realen Fall auf eine Form, die sie
-nicht vorgesehen hat.** Sie wird deshalb **nicht weiter angestückelt**, sondern
-nach dem vollständigen Durchgang **einmal neu formuliert** — vermutlich
-positiv (*was der Spiegel tun darf*) statt negativ.
+Der Unterschied ist nicht die Länge der Liste, sondern die **Beweislast**. Eine
+Verbotsliste erlaubt stillschweigend, was sie nicht vorhergesehen hat; die
+positive Fassung macht daraus einen Befund, bis jemand die Liste erweitert.
 
 ## Offen
 
-- Die **sechs Befunde** aus dem Durchgang beheben.
-- Die Regel **neu formulieren** statt weiter nachzuschärfen — siehe oben.
-- Den Teilfolgen-Test auf Absatz-Knoten bauen — dann wäre er ein Gate.
+- **Probe A und B auf Absatz-Knoten bauen** — dann wären sie ein Gate. Beide
+  brauchen dieselbe Extraktion; wer eine baut, hat die andere fast geschenkt.
+- Die fünf Operationen an einer **anderen Datei** erproben als denen, aus
+  denen sie gewonnen wurden. Bisher sind sie am eigenen Befund kalibriert.
 
 Wird die Schnittregel zur **zweiten** repo-lokalen Strukturregel, wandert sie
 nach `harness/conventions.md`; der Trigger dafür steht in der
