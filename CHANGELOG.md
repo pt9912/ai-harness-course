@@ -11,6 +11,65 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 78 — 2026-08-16 · Befördert wird niemand
+
+Dritte Umsetzungs-Welle des [Team-Plans](docs/team-plan.md): Paket **P3**, die
+`TA-2`-Restzeile — *„Aktuelle Welle" entfällt*. Der Abschnitt war keine
+Eigenschaft des Repos, sondern eine Aussage über die Aufmerksamkeit **einer**
+Person (`TB-014`): Bei mehreren Menschen gibt es keine oder mehrere laufende
+Wellen, und der leere Fall war beim Konsumenten belegt — ein 23-Zeilen-Block
+für *„Keine aktive Welle"*. Zugleich war er eine Kopie der Wellen-Plan-Datei,
+deren Drift dieselbe Roadmap an anderer Stelle als real dokumentiert.
+
+### Entschieden
+
+- **Offene Wellen, derivativ.** Der Ersatz-Abschnitt zeigt, statt zu führen:
+  Der Zustand sind die **flachen Welle-Dateien**; woran gerade gearbeitet
+  wird, sagt das `Welle:`-Feld der Slices in `in-progress/` (aus Welle 77);
+  Ziel, Trigger und Closure-Kriterien stehen in der Welle-Datei, nicht hier.
+  Ist nichts beansprucht, trägt der Abschnitt den Ruhe-Marker *„Nichts in
+  Arbeit"* — die eine deklarierte Redundanz, und sie hat einen **Wächter**.
+- **Befördert wird niemand.** Closure-Schritt 5 verliert seine zweite Hälfte
+  (*„die erste Zeile aus Nächste Wellen wird zur neuen Aktuellen Welle"*) —
+  die Beförderung setzte genau einen Fokus voraus. Die Rollen-Tabelle in
+  Modul 8 zieht nach.
+- **Die Präzedenz-Tabelle zieht nach** (Review-Fund nach dem Umbau): Rang 5
+  hieß an vier Orten noch *„aktuelle Welle"*, jetzt *„Wellen-Sequenz"* — was
+  die Roadmap tatsächlich noch trägt.
+
+### Der kritische Fund: der Sensor las die alte Überschrift
+
+d-checks `planning`-Modul prüft den Ruhe-Marker **im Block `## Aktuelle
+Welle`** — der Umbau hätte den CI-Job `example-verify` gebrochen. `heading`
+und `marker` sind konfigurierbar; das Beispiel überschreibt beide
+(`.d-check.yml`), mit dem Vermerk, dass der Werkzeug-Default nachziehen
+könnte — ein CR-Kandidat, kein stiller Bruch.
+
+**Break-Tests statt grünem Vertrauen:** Falsche Überschrift →
+`planning-drift` (fail-closed); Ruhe-Marker trotz laufendem `slice-013` →
+`planning-drift`. Beide beißen auf die neue Konfiguration — und belegen
+nebenbei, dass die Overrides gelesen werden, nicht still ignoriert.
+
+### Bauform und Beleg
+
+Kette: Modul 6 (sechs Stellen, samt Beispiel-Block des Worked Example) ·
+Modul 8 · Modul 1 · Verzeichniskonvention → drei Spiegel (Probe A auf allen
+geänderten Passagen: 5/5) → `roadmap.template.md` (Sektion ersetzt) ·
+`README.template.md` · `AGENTS.template.md` → Beispiel (Roadmap, Wellen-Datei,
+`.d-check.yml`, Sensors-Zeile, `AGENTS`/`harness`-Kette). Die
+Lab-Grenze-Notiz ging nicht verloren — sie stand schon in der Wellen-Datei;
+die Roadmap-Kopie entfällt ersatzlos.
+
+Restsuche inklusive Deklinationen: **0 Treffer** außer dem dokumentierten
+Werkzeug-Default in der Sensors-Zeile.
+
+**Bundle-Bilanz:** Spiegel, Templates und die Beispiel-Kette reisen. Ein
+Template-**Abschnitt** entfällt zugunsten einer derivativen Form — nach der
+im [Plan](docs/team-plan.md) abgeleiteten Entscheidung **MINOR**: Die
+MAJOR-Politik bindet an Asset-Entfernung und Layout-Bruch der Datei-Ebene;
+den Widerspruchsfall beim Adopter behandelt der Freshness-Audit-Ausgang 5
+per `MR`.
+
 ## Welle 77 — 2026-08-16 · Der Anspruch wird sichtbar, bevor die Arbeit beginnt
 
 Zweite Umsetzungs-Welle des [Team-Plans](docs/team-plan.md): Pakete **P2** und

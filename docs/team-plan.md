@@ -165,7 +165,7 @@ CHANGELOG kanonisch, und zwischenrein kann anderes landen:
 |---|---|---|
 | 1. | P1 + P0 | Vokabular zuerst; P0 füllt auf — **umgesetzt als Welle 76** |
 | 2. | P2 + P4 | Feld und Sichtbarkeit; P4 füllt auf — **umgesetzt als Welle 77** |
-| 3. | P3 | allein, wegen der Entfernungs-Entscheidung |
+| 3. | P3 | allein, wegen der Entfernungs-Entscheidung — **umgesetzt als Welle 78** |
 | 4. | P5 + P6 | Abschluss; danach Register-Abgleich in `team.md` und SOLL-Stufe *entworfen* im CHANGELOG festhalten |
 
 Der Vorschlag ist Reihenfolge, kein Terminplan — jede Welle schließt durch

@@ -211,7 +211,7 @@ darf, ohne etwas zu bewegen.
 | [TB-011](#tb-011) | Verhalten | [TA-4](#ta-4) [TA-7](#ta-7) | Auswertbar erst nach dem Merge | **umgesetzt (Welle 77)** |
 | [TB-012](#tb-012) | Text | [TA-2](#ta-2) [TA-4](#ta-4) | Die Planning-README trägt zwei Begriffe ohne Quelle | **umgesetzt (Welle 77)** |
 | [TB-013](#tb-013) | Text | [TA-3](#ta-3) | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
-| [TB-014](#tb-014) | Verhalten | [TA-2](#ta-2) | „Aktuelle Welle" ist keine Eigenschaft des Repos | offen · löst [TB-003](#tb-003) ab; leerer Fall bei *einem* Schreiber belegt. **Auflösung benannt:** flache Dateien + `**Welle:**` in `in-progress/` — das Feld entfällt |
+| [TB-014](#tb-014) | Verhalten | [TA-2](#ta-2) | „Aktuelle Welle" ist keine Eigenschaft des Repos | **umgesetzt (Welle 78)** — *Offene Wellen* derivativ, Beförderung entfällt |
 
 ## Die sieben Änderungen
 
@@ -253,7 +253,7 @@ nichts. [TB-006](#tb-006) braucht zusätzlich ein letztes Artefakt — das ist [
 
 <a id="ta-2"></a>
 
-### TA-2 — Ein Ort für die Zuweisung · **teilumgesetzt (Welle 77), Rest in P3**
+### TA-2 — Ein Ort für die Zuweisung · **umgesetzt (Welle 77/78)**
 
 **Deckt** [TB-001](#tb-001) · [TB-014](#tb-014) · [TB-012](#tb-012) (erste Hälfte).
 
@@ -1023,7 +1023,7 @@ der Praxis.
 
 ## TB-014 — „Aktuelle Welle" ist keine Eigenschaft des Repos
 
-**Was dasteht.** Die Roadmap führt einen Abschnitt *Aktuelle Welle* mit drei
+**Was dastand** (behoben in Welle 78 — die Zitate unten sind der Zustand davor). Die Roadmap führt einen Abschnitt *Aktuelle Welle* mit drei
 Pflicht-Bestandteilen, und Closure-Schritt 5 befördert die nächste
 ([Modul 6 §Die Wellen-Closure-Prozedur](../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)):
 *„Die Welle wandert aus Aktuelle Welle in die Tabelle Abgeschlossene Wellen
