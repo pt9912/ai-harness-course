@@ -11,7 +11,8 @@ Kurs ([README §Zielgruppe](../kurs/de/README.md#zielgruppe)) und im Bundle
 die Mehr-Schreiber-Fassung entworfen und nicht belegt ist.
 
 **SOLL.** Teamfähigkeit — **in zwei Stufen**, weil nur die erste von uns
-herstellbar ist:
+herstellbar ist. **Die erste ist seit Welle 79 erreicht** (alle Anpassungen
+verkörpert, Wellen 76–79); die zweite wartet auf ein adoptierendes Team:
 
 * **entworfen** — alle Anpassungen sind in Kurs, Regelwerk und Templates
   verkörpert. Beobachtbar, und allein an uns.
@@ -204,13 +205,13 @@ darf, ohne etwas zu bewegen.
 | [TB-004](#tb-004) | Verhalten | [TA-1](#ta-1) | Eine Rolle, mehrere Personen | **umgesetzt (Welle 76)** |
 | TB-005 | — | — | *Der Planner ist Single Writer* | **gestrichen** — kein eigener Befund: „Durchsatz-Engpass" ist Volumen, nicht Lücke; der Rest ist [TB-004](#tb-004) |
 | [TB-006](#tb-006) | Verhalten | [TA-1](#ta-1) [TA-6](#ta-6) | Der Konflikt-Pfad hat kein Terminal | **umgesetzt (Welle 76)** |
-| [TB-007](#tb-007) | Verhalten | [TA-5](#ta-5) | Einarbeitung wurde nie als Kosten geführt | offen · Auslöser ist die *zweite* Person |
+| [TB-007](#tb-007) | Verhalten | [TA-5](#ta-5) | Einarbeitung wurde nie als Kosten geführt | **umgesetzt (Welle 79)** |
 | TB-008 | — | — | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
-| [TB-009](#tb-009) | Text | [TA-3](#ta-3) | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
-| [TB-010](#tb-010) | **Sensor** | [TA-3](#ta-3) | „Lokal ableitbar" gilt nicht bei Vorvergabe | offen · **kein Team nötig**, am Bestand gemessen; Entwurf in [TA-3](#ta-3) |
+| [TB-009](#tb-009) | Text | [TA-3](#ta-3) | MR steht in keiner der beiden Vergabe-Klassen | **umgesetzt (Welle 79)** |
+| [TB-010](#tb-010) | **Sensor** | [TA-3](#ta-3) | „Lokal ableitbar" gilt nicht bei Vorvergabe | **umgesetzt (Welle 79)** — die Zusage trägt ihre Grenze; das Eindeutigkeits-Gate bleibt Option |
 | [TB-011](#tb-011) | Verhalten | [TA-4](#ta-4) [TA-7](#ta-7) | Auswertbar erst nach dem Merge | **umgesetzt (Welle 77)** |
 | [TB-012](#tb-012) | Text | [TA-2](#ta-2) [TA-4](#ta-4) | Die Planning-README trägt zwei Begriffe ohne Quelle | **umgesetzt (Welle 77)** |
-| [TB-013](#tb-013) | Text | [TA-3](#ta-3) | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
+| [TB-013](#tb-013) | Text | [TA-3](#ta-3) | Die Welle fällt aus dem Zählraum-Schema | **umgesetzt (Welle 79)** |
 | [TB-014](#tb-014) | Verhalten | [TA-2](#ta-2) | „Aktuelle Welle" ist keine Eigenschaft des Repos | **umgesetzt (Welle 78)** — *Offene Wellen* derivativ, Beförderung entfällt |
 
 ## Die sieben Änderungen
@@ -319,7 +320,7 @@ verschwindet.
 
 <a id="ta-3"></a>
 
-### TA-3 — Kennungs-Vergabe unter Nebenläufigkeit
+### TA-3 — Kennungs-Vergabe unter Nebenläufigkeit · **umgesetzt (Welle 79)** — Text-Korrekturen; die Schema-Frage bleibt Abwägung
 
 **Deckt** [TB-009](#tb-009) · [TB-010](#tb-010) · [TB-013](#tb-013).
 
@@ -439,7 +440,7 @@ Korpus nur daran, mehr zu versprechen, als er halten kann. Sichtbar macht sie
 
 <a id="ta-5"></a>
 
-### TA-5 — Leseordnung und Rückbau von Regeln
+### TA-5 — Leseordnung und Rückbau von Regeln · **umgesetzt (Welle 79)**
 
 **Deckt** [TB-007](#tb-007).
 
@@ -715,7 +716,7 @@ ist.
 
 ## TB-007 — Einarbeitung wurde nie als Kosten geführt
 
-**Was dasteht.** Der Index/Eintrag-Schnitt ist ausdrücklich mit
+**Was dastand** (behoben in Welle 79 — die Zitate unten sind der Zustand davor). Der Index/Eintrag-Schnitt ist ausdrücklich mit
 Agenten-Kontextkosten begründet: *„`conventions.md` liest **jeder**
 Agentenlauf"*
 ([§harness/conventions.md als Konventionsspeicher](../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
@@ -753,7 +754,7 @@ Bei einer Person fällt das nie auf, weil niemand neu dazukommt.
 
 ## TB-009 — MR steht in keiner der beiden Vergabe-Klassen
 
-**Was dasteht.**
+**Was dastand** (behoben in Welle 79 — die Zitate unten sind der Zustand davor).
 [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
 teilt die Kennungen in zwei Klassen: die *laute* Ablage (`LH-*`, `SPEC-*`,
 `ARC-*` — viele in einer Datei, Doppelvergabe erzeugt einen Git-Konflikt) und
@@ -790,7 +791,7 @@ also die zweitmeistgenutzte.
 
 ## TB-010 — „Lokal ableitbar" gilt nicht, wenn die Welle vorvergibt
 
-**Was dasteht.** §Vergabe begründet den Verzicht auf eine Absprache damit, dass
+**Was dastand** (behoben in Welle 79 — die Zitate unten sind der Zustand davor). §Vergabe begründet den Verzicht auf eine Absprache damit, dass
 die nächste Nummer **lokal ableitbar** sei: *„Wer in `IDX` arbeitet, sieht im
 eigenen Checkout, welche `IDX`-Kennungen vergeben sind, und braucht dafür weder
 eine Absprache noch einen Schreibzugriff auf den Hauptzweig."*
@@ -992,7 +993,7 @@ sondern die Stelle, an der jene operativ werden:
 
 ## TB-013 — Die Welle fällt aus dem Zählraum-Schema
 
-**Was dasteht.**
+**Was dastand** (behoben in Welle 79 — die Zitate unten sind der Zustand davor).
 [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
 zählt vier Artefakte zur stillen Klasse — *„ADR, Slice, **Welle** und Carveout
 sind je eine eigene Datei"* — und gibt eine Antwort: *„Für die Artefakte mit je

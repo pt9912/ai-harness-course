@@ -1,6 +1,6 @@
 # Team-Plan — Umsetzung der sieben Anpassungen
 
-**Stand:** 2026-08-16. **Konsument:** wer die Umsetzung fährt — diese und die
+**Stand:** 2026-08-16 — **alle vier Wellen umgesetzt (76–79), die SOLL-Stufe *entworfen* ist erreicht.** Diese Datei ist damit Historie. **Konsument:** wer die Umsetzung fährt — diese und die
 nächsten Sessions. Nach Abschluss aller Pakete ist die SOLL-Stufe **entworfen**
 aus [`team.md`](team.md) erreicht; dann trägt diese Datei nur noch Historie und
 wird auf einen Verweis eingedampft.
@@ -166,7 +166,7 @@ CHANGELOG kanonisch, und zwischenrein kann anderes landen:
 | 1. | P1 + P0 | Vokabular zuerst; P0 füllt auf — **umgesetzt als Welle 76** |
 | 2. | P2 + P4 | Feld und Sichtbarkeit; P4 füllt auf — **umgesetzt als Welle 77** |
 | 3. | P3 | allein, wegen der Entfernungs-Entscheidung — **umgesetzt als Welle 78** |
-| 4. | P5 + P6 | Abschluss; danach Register-Abgleich in `team.md` und SOLL-Stufe *entworfen* im CHANGELOG festhalten |
+| 4. | P5 + P6 | Abschluss — **umgesetzt als Welle 79**; SOLL-Stufe *entworfen* erreicht und im CHANGELOG festgehalten |
 
 Der Vorschlag ist Reihenfolge, kein Terminplan — jede Welle schließt durch
 ihre Kette und `make check`, nicht durch ein Datum.

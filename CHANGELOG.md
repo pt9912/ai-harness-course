@@ -11,6 +11,59 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 79 — 2026-08-16 · Das SOLL ist entworfen
+
+Vierte und letzte Umsetzungs-Welle des [Team-Plans](docs/team-plan.md):
+Pakete **P5** und **P6** — `TA-3` und `TA-5` aus [`docs/team.md`](docs/team.md).
+Mit ihr ist die erste SOLL-Stufe der Team-Frage erreicht: **entworfen** — alle
+sieben Anpassungen sind in Kurs, Regelwerk, Templates und Beispiel verkörpert.
+
+### Entschieden
+
+- **§Vergabe kennt jetzt seine Grenzen** (`TA-3`). `MR-<NNN>` ist als
+  **Hybrid** benannt (Eintragsdatei still, Index-Zeile laut — die
+  zweitgrößte Kennungs-Klasse des gemessenen Konsumenten hatte keine
+  Vergabe-Regel); die **Welle** fällt aus dem Zählraum-Schema (sie bündelt
+  Slices über Sub-Areas hinweg — repo-weit dicht bleibt richtig, das Risiko
+  trägt die Planner-Eröffnung); und *„lokal ableitbar"* hat seine Grenze:
+  Der Zählraum ist Verzeichnis **plus offene Welle-Dateien** — der gemessene
+  `061`–`064`-Fall —, den PR-Rest fängt das Schema nicht, und das gehört
+  gesagt. Die Schema-Frage selbst (Zähler ersetzen) bleibt ausdrücklich
+  draußen; ihre Abwägung liegt in `team.md`.
+- **Die Leseordnung** (`TA-5`, erste Hälfte). Die Pflichtgliederung von
+  `harness/README.md` bekommt die achte Zeile — **Quelle zuerst**, sonst wäre
+  die Template-Sektion selbst Template-Drift. Die Menschen-Hälfte des
+  Einstiegs: drei bis fünf **geordnete** Zeiger; eine Leseordnung, die alles
+  nennt, ist keine. Beispiel mit gefüllter Fassung.
+- **Der Rückbau-Trigger** (`TA-5`, zweite Hälfte). Eine **neue** Hard Rule
+  trägt ab Einführung einen Auflösungs-Trigger oder *permanent* — dieselbe
+  Disziplin wie ADR und Carveout; dieselbe Regel für neue HIGH-Einträge des
+  Reviewer-Skills. Für den Altbestand gilt kein Nachrüsten (die
+  Herkunfts-Anker-Präzedenz: ein nachgetragener Trigger wäre erfunden, nicht
+  rekonstruiert); deklarierter Backfill bleibt möglich.
+
+### Die Team-Strecke in einer Bilanz
+
+Wellen 76–79, sieben Anpassungen, zehn Befunde — **alle umgesetzt**. Was der
+Korpus jetzt kann, was er vorher nicht konnte: die Person in der Rolle
+benennen (Rolleninhaber), die Zuweisung tragen (`Verantwortlich:`), den
+Anspruch sichtbar machen, bevor die Arbeit beginnt (Hauptzweig-`git mv`),
+sagen, über welchen Stand seine Regeln sprechen (gemergter Stand), einen
+Konflikt beenden statt dokumentieren (Verdikt wird ADR), auf *„Aktuelle
+Welle"* verzichten (Offene Wellen, derivativ), seine Vergabe-Grenzen nennen
+und einem neuen Menschen eine Reihenfolge geben.
+
+**Erreicht ist die Stufe *entworfen*, nicht *belegt*** — die Unterscheidung
+aus `team.md` §SOLL: Belegt wird erst, wenn ein Repo mit ≥ 3 Schreibern die
+Baseline adoptiert und keinen der beschriebenen Ausfälle meldet. Das ist
+nicht von uns herbeiführbar; der Trigger steht in der
+[Roadmap](docs/roadmap.md). Der Geltungsbereich sagt es den Adoptern
+(*entworfen, nicht belegt*) und bleibt, bis die zweite Stufe erreicht ist.
+
+**Bundle-Bilanz:** Fünf Spiegel, ein Template, die Beispiel-Kette. Additive
+Regeln → **MINOR**, wenn released wird — die Wellen 76–79 zusammen sind ein
+natürlicher Release-Schnitt.
+
 ## Welle 78 — 2026-08-16 · Befördert wird niemand
 
 Dritte Umsetzungs-Welle des [Team-Plans](docs/team-plan.md): Paket **P3**, die
