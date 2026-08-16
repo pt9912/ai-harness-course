@@ -65,8 +65,22 @@ Git-Identität. Danach dreifach im Scratchpad abgesichert: seiteneffektfrei
 zeilenidentisch), fail-closed als Kopie außerhalb des Repos — der Kopie-Test
 fand den Halb-Läufer-Defekt, bevor er jemanden täuschen konnte.
 
-**Am Bundle ändert die Welle nichts** — `lab/team-sim/` reist nicht mit
-(`build-bundle.sh` kopiert `regelwerk/` und `templates/`). Kein Versions-Bump.
+### Konsequenz aus s06 — die Regel nennt jetzt ihre Wirkung
+
+Die TA-7-Regel schrieb das **Mittel** fest (Direkt-Commit auf den Hauptzweig);
+gemessen scheitert es an Branch-Protection, die reale Teams standardmäßig
+fahren — die erste Team-Adoption hätte die Regel als unbefolgbar gelesen und
+wäre still abgewichen. Modul 5 trägt jetzt: *Die Regel trägt die Wirkung,
+nicht das Mittel* — sichtbar werden muss der Anspruch vor der Arbeit; wo der
+Direkt-Commit scheitert, deklariert das Repo seinen Träger als `MR` (etwa
+Claim-Ausnahme im Schutzregime oder sofort gemergter Anspruchs-PR). Still
+abweichen ist keiner der beiden. Spiegel nach der Schnittregel (der
+Lab-Verweis reist nicht mit — Operation 1).
+
+**Damit ändert die Welle doch etwas am Bundle** — der eine
+Modul-5-Spiegel-Absatz. Additiv; er reist mit dem nächsten Release.
+`lab/team-sim/` selbst reist nicht mit (`build-bundle.sh` kopiert
+`regelwerk/` und `templates/`).
 
 ## Welle 79 — 2026-08-16 · Das SOLL ist entworfen
 

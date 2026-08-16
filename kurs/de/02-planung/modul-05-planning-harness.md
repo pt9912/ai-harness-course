@@ -75,6 +75,14 @@ laufende Arbeit benennt, wäre genau für laufende Arbeit unzuverlässig. Der
 Übergangs-Commit auf dem Hauptzweig macht den Anspruch sichtbar, **bevor**
 jemand anderes dieselbe Arbeit beginnt; der Branch entsteht danach.
 
+**Die Regel trägt die Wirkung, nicht das Mittel.** Sichtbar werden muss der
+Anspruch vor der Arbeit; der Direkt-Commit ist nur der Default-Träger. Wo der
+Hauptzweig push-geschützt ist, scheitert er (gemessen im Kurs-Lab:
+[`lab/team-sim`](../../../lab/team-sim/README.md), Szenario s06) — dann
+deklariert das Repo seinen Träger als `MR`: etwa eine Claim-Ausnahme im
+Schutzregime oder ein Anspruchs-PR, der sofort gemergt wird. Still abweichen
+ist keiner der beiden.
+
 **Aussagen über die Verzeichnis-Position gelten für den gemergten Stand.**
 Auf einem Zweig sieht man den eigenen — vollständiger als den Hauptzweig, aber
 nur für sich. Wer eine `ls`-Antwort als team-weit liest, liest den Hauptzweig;
