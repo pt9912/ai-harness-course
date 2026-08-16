@@ -40,6 +40,14 @@ Viele Sätze tragen beides. Für sie gilt:
 > Reihenfolge und Wortlaut der Quelle. Umgehängt werden allein die Verweise,
 > weil der Split ihre Nachbarschaft ändert.
 
+**Ein Verweis ist dabei als Ganzes eine Einheit** — die einleitenden Wörter
+(*„siehe"*, *„vgl."*) gehören dazu und werden mit ihm umgeformt. Das ist keine
+Ausnahme, sondern gelebte Form: Der Spiegel setzt Verweise **18-mal** in
+Klammern ans Satzende, wo die Quelle sie in den Satz einbindet; `siehe [` fällt
+dabei von 37 Vorkommen auf 7. Ohne diese Klarstellung verböte die Wort-Regel
+oben eine Konvention, die der Spiegel braucht, weil seine Verweise ohne die
+Modul-Erzählung stehen müssen.
+
 **Und was hinzukommen darf.** Die Regel oben sagt, was *entfällt*. Der Spiegel
 muss aber auch etwas *hinzufügen*, weil er anders gegliedert ist als die
 Quelle — `modul-08` etwa braucht einen Vorspann, der die Verdikt-Tabelle
@@ -98,6 +106,8 @@ gestrichenes Wort — `siehe` aus *„(siehe ADR-Hard-Rule, Modul 4)"* — ist
 teilfolgen-legal und nach Teil 2 trotzdem unzulässig, weil es kein ganzer
 Teilsatz ist. Die Probe ist damit **notwendig, nicht hinreichend**; sie fängt
 Umstellungen und Ersetzungen, nicht Auslassungen unterhalb der Satzglied-Ebene.
+Eine Vollständigkeits-Probe muss **Verweis-Phrasen ausnehmen**, sonst meldet sie
+jede der 18 Klammer-Umformungen als Defekt.
 
 *Zweitens: Ein gestrichener Teilsatz kann eine Bedingung getragen haben*; aus
 einer bedingten Regel wird dann eine unbedingte. Das bleibt ein Urteil — aber
@@ -159,6 +169,10 @@ Eintrag braucht die Proben aus Teil 1 und 2.
 
 ## Offen
 
+- Die Regel ist jung: Ihre erste Anwendung hat **drei** eigene Lücken
+  offengelegt (Wort-Ebene · Zusätze · Verweis-Phrasen). Nach dem Durchgang durch
+  die Kandidatenliste gehört sie noch einmal geprüft — es ist wahrscheinlich,
+  dass weitere auftauchen.
 - Die 14 Kandidaten mit dem Maßstab aus Teil 1/2 durchgehen.
 - Den Teilfolgen-Test auf Absatz-Knoten bauen — dann wäre er ein Gate.
 
