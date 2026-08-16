@@ -48,6 +48,14 @@ ausgelassen, nicht geschönt, nicht in einer Status-Spalte versteckt
 (die Sensors-Tabelle trägt keinen Lauf-Status; Lauf-Wahrheit pro Commit
 liegt in CI, siehe
 [`grundlagen-harness-dateien.md`](grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
+**Eine neue Hard Rule trägt ab ihrer Einführung einen Auflösungs-Trigger oder
+die Kennzeichnung *permanent*** — dieselbe Disziplin, die ADR
+(Re-Evaluierungs-Trigger, [Modul 4](modul-04-adrs.md)) und Carveout
+([Modul 7](modul-07-carveouts.md)) längst tragen. Für den **Altbestand** gilt:
+kein Nachrüsten — ein nachgetragener Trigger wäre erfunden, nicht
+rekonstruiert; der leere Zustand ist die ehrliche Information. Deklarierter
+Backfill bleibt möglich, wo sich der Trigger wirklich herleiten lässt.
+
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
 Implementer-Agent vertraut ihnen.
 

@@ -266,6 +266,12 @@ gelingt, und im Repo stehen zwei Artefakte unter derselben Kennung — die
 Klammer zwischen Spec, Commit und Gate ist zerrissen, ohne dass ein Sensor
 angeschlagen hätte.
 
+**`MR-<NNN>` ist ein Hybrid aus beiden Klassen.** Der Eintrag lebt als eigene
+Datei (still), seine Index-Zeile in `harness/conventions.md` als Zeile einer
+Tabelle (laut): Zwei gleichzeitige `MR-005` erzeugen zwei Dateien, die lautlos
+nebeneinander liegen — und zwei Index-Zeilen, die kollidieren, wenn sie
+benachbart landen. Lauter als ADR und Slice, aber nicht garantiert laut.
+
 **Struktur-IDs stehen auf der lauten Seite.** `SPEC-*` und `ARC-*` leben zu
 vielen in *einer* Datei und teilen damit die Eigenschaft von `LH-*`: Zwei
 gleichzeitig vergebene Nummern stehen hinterher sichtbar untereinander, im
@@ -293,6 +299,20 @@ Absprache noch einen Schreibzugriff auf den Hauptzweig. Das ist die
 Bedingung, die aus dem [Traceability-Constraint](grundlagen-traceability.md#traceability-constraint)
 folgt: Die Kennung steht in Commits, **sobald die Arbeit läuft** — wer sie erst
 beim Landen bekommt, hat sie im entscheidenden Moment nicht.
+
+**Die Welle fällt aus diesem Schema.** Sie bündelt Slices über Sub-Areas
+hinweg — es gibt keine Sub-Area, in der man sie zählen könnte; ein
+`welle-IDX-03` wäre eine falsche Aussage über den Geltungsbereich. Für die
+Welle bleibt es beim dichten, repo-weiten Zählraum, und das Risiko trägt die
+Eröffnung: Sie ist Planner-Arbeit und schreibt die Roadmap — den lauten
+Kollisionspunkt.
+
+**Und „lokal ableitbar" hat eine Grenze: Der Zählraum ist größer als das
+Verzeichnis.** Auch eine offene Welle vergibt Nummern — ihr §4 nennt Slices,
+die noch keine Datei haben —, und was in einem offenen PR liegt, ist im
+eigenen Checkout nicht sichtbar. Wer die nächste Nummer zieht, liest deshalb
+Verzeichnis **und** offene Welle-Dateien; den PR-Rest fängt das Schema nicht,
+und das gehört gesagt.
 
 **Abzugrenzen vom Beanspruchen.** Ohne Schreibzugriff auf den Hauptzweig kommt
 nur die *Nummer* aus. Das *Beanspruchen* einer Arbeit landet dort sehr wohl —

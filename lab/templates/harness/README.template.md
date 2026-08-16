@@ -141,3 +141,14 @@ Für ein Policy/Compliance-Repo:
 6. Repo-weiten Gate-Lauf vor Handoff (`make gates`).
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt.
 8. Ausgeführte Sensors und verbleibende Risiken berichten.
+
+## Leseordnung
+
+Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-harness-dateien.md`
+§harness/README.md als Einstiegspunkt — die Menschen-Hälfte des Einstiegs:
+drei bis fünf **geordnete** Zeiger, was ein neuer Mensch zuerst liest und was
+bei Bedarf; eine Leseordnung, die alles nennt, ist keine.
+
+1. [<zuerst — z. B. `AGENTS.md` §Hard Rules>](<pfad>)
+2. [<dann — z. B. `spec/lastenheft.md`>](<pfad>)
+3. [<bei Bedarf — z. B. `harness/conventions.md`>](<pfad>)

@@ -171,7 +171,14 @@ Mensch zuerst lesen muss. Pflichtgliederung:
 ## Traceability rules       # Welche IDs müssen in Commits/PRs auftauchen?
 ## Safety and scope boundaries  # repo-spezifische Hard Rules
 ## Minimal agent workflow   # der 8-Schritt-Pfad (siehe Modul 9)
+## Leseordnung              # für den neuen Menschen: was zuerst, was bei Bedarf
 ```
+
+**Die Leseordnung ist die Menschen-Hälfte des Einstiegs.** Die sieben
+Sektionen darüber sind eine Referenzfläche — richtig für den Lauf, der
+nachschlägt; ein neuer Mensch braucht eine **Reihenfolge**: was zuerst, was
+bei Bedarf. Drei bis fünf geordnete Zeiger genügen; eine Leseordnung, die
+alles nennt, ist keine.
 
 Wichtig: Die Sensors-Tabelle darf keine Befehle behaupten, die es im Repo
 nicht gibt. Halluzinierte Gates sind die häufigste Form von Harness-Lüge.

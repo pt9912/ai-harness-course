@@ -115,6 +115,16 @@ liegt in CI, siehe
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
 Implementer-Agent vertraut ihnen.
 
+**Eine neue Hard Rule trägt ab ihrer Einführung einen Auflösungs-Trigger oder
+die Kennzeichnung *permanent*** — dieselbe Disziplin, die ADR
+(Re-Evaluierungs-Trigger, [Modul 4](../01-spec-und-architektur/modul-04-adrs.md))
+und Carveout ([Modul 7](../02-planung/modul-07-carveouts.md)) längst tragen:
+Ein Korpus, der nur wächst, kostet den nächsten Leser jedes Jahr mehr. Für den
+**Altbestand** gilt: kein Nachrüsten — ein nachgetragener Trigger wäre
+erfunden, nicht rekonstruiert; der leere Zustand ist die ehrliche Information.
+Deklarierter Backfill bleibt möglich, wo sich der Trigger wirklich herleiten
+lässt.
+
 **Vorhanden ≠ behauptet.** Die Regel verbietet ein *behauptetes* Gate ohne
 Deckung — nicht ein *vorhandenes* Target ohne Anspruch. Ein tool-generiertes
 Gate-Fragment (`d-check.mk` aus `d-check --print-mk`, per `-include` eingebunden

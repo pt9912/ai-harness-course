@@ -76,7 +76,11 @@ achtest du"; Vorlage
   Slice-Closure §7 → Eintrag ins Beobachtungs-Register. Bei dreimaligem gleichem Finding
   Klassifikation schärfen / Folge-ADR bzw. `AGENTS.md`-Update / Gate
   (Modul 13). Skill-Datei selbst wird **nicht** überschrieben, sondern
-  versioniert (siehe ADR-Hard-Rule, Modul 4). Ein HIGH-Eintrag, der aus dem
+  versioniert (siehe ADR-Hard-Rule, Modul 4). Ein **neuer** HIGH-Eintrag trägt
+  ab Einführung einen Auflösungs-Trigger oder *permanent* — dieselbe Disziplin
+  wie bei Hard Rules
+  ([Modul 13](modul-13-quality-gates.md#hard-rule-doku-disziplin)); der
+  Altbestand bleibt ohne. Ein HIGH-Eintrag, der aus dem
   Steering Loop kam, trägt den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle
   `(seit slice-<NNN>)`
   ([`grundlagen-traceability.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker)).

@@ -214,7 +214,10 @@ Bei dreimaligem Auftreten desselben Findings:
   → Modul 13, Gate hinzufügen
 
 Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
-(siehe ADR-Hard-Rule, Modul 4). Ein HIGH-Eintrag, der aus dem Steering
+(siehe ADR-Hard-Rule, Modul 4). Ein **neuer** HIGH-Eintrag trägt ab Einführung
+einen Auflösungs-Trigger oder *permanent* — dieselbe Disziplin wie bei Hard
+Rules ([Modul 13 §Hard Rule](modul-13-quality-gates.md#hard-rule-doku-disziplin));
+der Altbestand bleibt ohne. Ein HIGH-Eintrag, der aus dem Steering
 Loop kam, trägt den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)` — siehe
 [`traceability.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln).
 ```

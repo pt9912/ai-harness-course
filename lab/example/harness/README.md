@@ -106,3 +106,14 @@ DocSearch ist **kein produktives System**. Es ist ein Lehr-Beispiel.
    `make verify` (Closure-Pflicht + Referenz-Richtung).
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt.
 8. Ausgeführte Sensors und verbleibende Risiken berichten — keine Erfolgsmeldung ohne Gate-Ausführung.
+
+## Leseordnung
+
+Die Menschen-Hälfte des Einstiegs (Baseline:
+[`grundlagen-harness-dateien.md` §Einstiegspunkt](../../regelwerk/grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt)) —
+drei geordnete Zeiger, der Rest dieser Datei ist Referenzfläche:
+
+1. [`AGENTS.md` §Hard Rules](../AGENTS.md) — was in diesem Repo nie passieren darf.
+2. [`spec/lastenheft.md`](../spec/lastenheft.md) — wogegen abgenommen wird.
+3. Bei Bedarf: [`harness/conventions.md`](conventions.md) — die repo-lokalen
+   Adaptionen, eine Zeile pro aktiver.

@@ -101,7 +101,10 @@ Bewährte Muster:
 Hard Rules sind *computational + inferential feedforward* zugleich: sie
 stehen in AGENTS.md (Agent liest sie) **und** werden idealerweise durch
 eine Fitness Function geprüft (Linter schlägt an). Wenn nur eines von
-beiden existiert, ist die Regel nur halb durchgesetzt.
+beiden existiert, ist die Regel nur halb durchgesetzt. Und eine **neue** Hard
+Rule trägt ab Einführung einen Auflösungs-Trigger oder *permanent*
+([Modul 13](modul-13-quality-gates.md#hard-rule-doku-disziplin)); der
+Altbestand bleibt, wie er ist.
 
 ### Kontext-Verdichtung (Kehrseite der Lopopolo-Maxime)
 
