@@ -9,10 +9,21 @@ Das ist keine Unterstellung, sondern das Ergebnis der Bestandsaufnahme unten —
 und es ist **nirgends deklariert**: Ein Adopter mit drei Leuten erfährt an
 keiner Stelle, dass er sich außerhalb des Getesteten bewegt.
 
-**SOLL.** Teamfähigkeit.
+**SOLL.** Teamfähigkeit — **in zwei Stufen**, weil nur die erste von uns
+herstellbar ist:
+
+* **entworfen** — alle Anpassungen sind in Kurs, Regelwerk und Templates
+  verkörpert. Beobachtbar, und allein an uns.
+* **belegt** — ein Repo mit ≥ 3 Schreibern adoptiert die Baseline und meldet
+  keinen der beschriebenen Ausfälle. Ebenso beobachtbar, aber **nicht von uns
+  herbeiführbar**.
+
+Wir können also alles umsetzen und es trotzdem nicht wissen. Das ist kein
+Einwand gegen das Vorhaben, sondern der Grund, die beiden Stufen zu trennen —
+sonst liest jemand später *„SOLL erreicht"*, wo *„SOLL entworfen"* gemeint war.
 
 **Diese Datei** misst den Abstand und schlägt vor, wie er geschlossen wird. Sie
-hat zwei Hälften: die [fünf Änderungen](#die-fünf-änderungen), die das SOLL
+hat zwei Hälften: die [sechs Änderungen](#die-sechs-änderungen), die das SOLL
 herstellen würden, und die [Bestandsaufnahme](#bestandsaufnahme), aus der sie
 folgen. Die Einträge dort sind die **Belege** der Änderungen, nicht die
 Gliederung.
@@ -170,7 +181,7 @@ der Titel** — jeder Eintrag trägt ein `<a id="tb-NNN">`.
 
 `TB-<NNN>` (Befund) und `TA-<N>` (Anpassung) gelten **nur in dieser Datei**, steht in keinem Commit und in keinem
 Gate; vergeben wird chronologisch nach Fund, Lücken werden nicht nachbelegt.
-Die `TA-`-Spalte verweist auf die [Änderung](#die-fünf-änderungen), die den
+Die `TA-`-Spalte verweist auf die [Änderung](#die-sechs-änderungen), die den
 Befund schließt — jeder offene Befund hat genau eine oder zwei.
 Gestrichene Einträge bleiben mit Grund stehen — eine still gelöschte Zeile ist
 von einer nie vergebenen nicht zu unterscheiden
@@ -190,7 +201,7 @@ darf, ohne etwas zu bewegen.
 | TB-003 | — | — | *Die Welle ist ein Join-Barrier* | **abgelöst** durch [TB-014](#tb-014) — die Barriere setzt voraus, dass die Einzahl von *Aktuelle Welle* bindet; sie bindet nicht |
 | [TB-004](#tb-004) | Verhalten | [TA-1](#ta-1) | Eine Rolle, mehrere Personen | offen |
 | TB-005 | — | — | *Der Planner ist Single Writer* | **gestrichen** — kein eigener Befund: „Durchsatz-Engpass" ist Volumen, nicht Lücke; der Rest ist [TB-004](#tb-004) |
-| [TB-006](#tb-006) | Verhalten | [TA-1](#ta-1) | Der Konflikt-Pfad hat kein Terminal | offen |
+| [TB-006](#tb-006) | Verhalten | [TA-1](#ta-1) [TA-6](#ta-6) | Der Konflikt-Pfad hat kein Terminal | offen |
 | [TB-007](#tb-007) | Verhalten | [TA-5](#ta-5) | Einarbeitung wurde nie als Kosten geführt | offen · Auslöser ist die *zweite* Person |
 | TB-008 | — | — | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
 | [TB-009](#tb-009) | Text | [TA-3](#ta-3) | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
@@ -200,9 +211,9 @@ darf, ohne etwas zu bewegen.
 | [TB-013](#tb-013) | Text | [TA-3](#ta-3) | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
 | [TB-014](#tb-014) | Verhalten | [TA-2](#ta-2) | „Aktuelle Welle" ist keine Eigenschaft des Repos | offen · löst [TB-003](#tb-003) ab; leerer Fall bei *einem* Schreiber belegt. **Auflösung benannt:** flache Dateien + `**Welle:**` in `in-progress/` — das Feld entfällt |
 
-## Die fünf Änderungen
+## Die sechs Änderungen
 
-Die zehn Einträge der Bestandsaufnahme fallen auf fünf Änderungen zusammen;
+Die zehn Einträge der Bestandsaufnahme fallen auf sechs Änderungen zusammen;
 keiner fällt heraus. Jede ist **additiv und deklariert** — sie verschlechtert
 den Ein-Personen-Fall nicht, und sie lässt sich zurücknehmen.
 
@@ -236,7 +247,7 @@ werden — *„Rollen-Trennung ist Kontext-Trennung"* bleibt unverändert gülti
 der Rolleninhaber steht daneben, nicht dagegen.
 
 **Was es nicht löst.** Es macht die Zweideutigkeit *sagbar*, es entscheidet
-nichts. [TB-006](#tb-006) braucht zusätzlich ein letztes Artefakt.
+nichts. [TB-006](#tb-006) braucht zusätzlich ein letztes Artefakt — das ist [TA-6](#ta-6).
 
 <a id="ta-2"></a>
 
@@ -323,7 +334,7 @@ nicht für alle — und eine seiner Zusagen hält nicht.
 
 **Optional, größer:** das Schema selbst. Die Abwägung dazu steht unten.
 
-**Und ein Gate ist möglich.** Als einzige der fünf Änderungen hat diese eine
+**Und ein Gate ist möglich.** Als einzige der sechs Änderungen hat diese eine
 computationale Hälfte: Eindeutigkeit der Kennungen ist prüfbar, und der Korpus
 räumt selbst ein, dass heute kein Modul es tut.
 
@@ -440,17 +451,56 @@ Skill-HIGH-Einträge** keinen Rückbau — für `MR`, Carveout und ADR schon.
 | Modul 9 / Modul 13, Hard Rules | jede Hard Rule bekommt wie ein Carveout einen **Auflösungs-Trigger oder die Kennzeichnung permanent** |
 | Modul 10 §Pflege | dasselbe für HIGH-Einträge des Reviewer-Skills |
 
-**Preis.** Der teuerste der fünf. Der Rückbau-Trigger belastet jede Hard Rule
+**Preis.** Der teuerste der sechs. Der Rückbau-Trigger belastet jede Hard Rule
 mit einem Feld, und die Leseordnung ist ein Artefakt, das gepflegt werden will.
 
 **Was es nicht löst.** Es verkleinert den bestehenden Korpus nicht, es bremst
 nur sein Wachstum.
 
+<a id="ta-6"></a>
+
+### TA-6 — Ein letztes Artefakt im Konflikt-Pfad
+
+**Deckt** [TB-006](#tb-006).
+
+**Was fehlt.** Modul 8 modelliert den Rollen-Konflikt als Sequenz mit
+Übergabe-Artefakten und verbietet die Entscheidung nach Seniorität — benennt
+aber kein **letztes** Artefakt. Zwischen Kontextfenstern fällt das nicht auf,
+weil dort niemand widerspricht. Zwischen Menschen *dokumentiert* ein Artefakt
+die Uneinigkeit; es beendet sie nicht.
+
+**Vorschlag.** Kein neues Konstrukt: **Übersteht die Uneinigkeit das
+Architect-Verdikt, wird das Verdikt zur ADR.** Der Vorgang endet dann nicht
+dadurch, dass jemand recht bekommt, sondern dadurch, dass die Entscheidung
+**immutabel** wird. Widerspruch muss danach den ADR-Weg gehen — Folge-ADR mit
+`Supersedes` —, und der verlangt **neue Evidenz statt Wiederholung**. Die
+abweichende Position verliert nichts: Sie steht in §Verglichene Alternativen.
+
+**Warum das das Seniorität-Verbot nicht verletzt.** Der Korpus verbietet
+Seniorität als *Argument*. Eine Instanz, die *abschließt*, ist etwas anderes —
+und die ADR schließt nicht durch Autorität einer Person, sondern durch die
+Immutabilitäts-Regel, die für alle gleich gilt.
+
+**Wo es landet.**
+
+| Ort | Änderung |
+|---|---|
+| Modul 8 §Konflikt-Pfad | ein vierter, *terminaler* Ausgang: Verdikt bestritten → Verdikt wird ADR; danach nur noch Folge-ADR mit neuer Evidenz |
+| Modul 8, Verdikt-Tabelle | die drei Verdikte bleiben; das Terminal greift, wenn keines akzeptiert wird |
+| Modul 4 | ein Satz, dass eine ADR auch aus einem beigelegten Rollen-Konflikt entstehen kann — heute entsteht sie nur aus Architektur-Entscheidungen |
+
+**Preis.** ADR-Inflation, wenn der Weg zu leicht beschritten wird. Gemildert
+dadurch, dass er erst greift, wenn ein Verdikt *bestritten* wird — nicht bei
+jedem HIGH-Finding.
+
+**Was es nicht löst.** Es erzwingt keine Einigkeit, sondern beendet die
+Wiederholung. Wer die Entscheidung weiter für falsch hält, braucht Evidenz.
+
 <a id="bestandsaufnahme"></a>
 
 ## Bestandsaufnahme
 
-Die Belege der fünf Änderungen. Reihenfolge numerisch, nicht nach Schwere —
+Die Belege der sechs Änderungen. Reihenfolge numerisch, nicht nach Schwere —
 siehe [Register](#register).
 
 <a id="tb-001"></a>
@@ -1012,14 +1062,17 @@ ersatzweise trägt.
 billige Text-Korrekturen und eine große optionale Schema-Frage; TA-4 ist eine
 Deklaration ohne Mechanik.
 
+**TA-6 hängt an TA-1** — erst mit einem Wort für den Rolleninhaber lässt sich
+sagen, *wessen* Verdikt bestritten wird. Danach ist es ein Absatz.
+
 **TA-5 zuletzt** — eigenständig, am teuersten, und als einzige nicht durch einen
 Team-Fall ausgelöst, sondern durch die zweite Person überhaupt.
 
-**Was für alle fünf gilt.** Die Bauform steht bereits im Korpus:
+**Was für alle sechs gilt.** Die Bauform steht bereits im Korpus:
 [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
 hat die Mehr-Personen-Frage für Kennungen beantwortet, **ohne den
 Ein-Personen-Fall zu verschlechtern** — Default für einen Schreiber,
-deklarierte Variante für mehrere, Grenze offen benannt. Jede der fünf Änderungen
+deklarierte Variante für mehrere, Grenze offen benannt. Jede der sechs Änderungen
 lässt sich so schneiden.
 
 **Und eine Änderung fehlt in dieser Liste**, weil sie keine am Korpus ist,
