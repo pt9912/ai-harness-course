@@ -35,9 +35,26 @@ Viele Sätze tragen beides. Für sie gilt:
 
 > **Gestrichen werden nur ganze Teilsätze, an syntaktischen Fugen** —
 > Gedankenstrich, Semikolon, Doppelpunkt, Komma vor Nebensatz. **Nie
-> umgestellt, nie ersetzt, nie zusammengefasst.** Was stehen bleibt, steht in
+> umgestellt, nie ersetzt, nie zusammengefasst**, und **kein einzelnes Wort
+> innerhalb eines bleibenden Teilsatzes**. Was stehen bleibt, steht in
 > Reihenfolge und Wortlaut der Quelle. Umgehängt werden allein die Verweise,
 > weil der Split ihre Nachbarschaft ändert.
+
+**Und was hinzukommen darf.** Die Regel oben sagt, was *entfällt*. Der Spiegel
+muss aber auch etwas *hinzufügen*, weil er anders gegliedert ist als die
+Quelle — `modul-08` etwa braucht einen Vorspann, der die Verdikt-Tabelle
+einleitet. Dafür gilt:
+
+> **Zusätze sind nur Gliederung, nie Aussage.** Erlaubt ist, was eine
+> Aufzählung, Tabelle oder Sektion *benennt* (*„Drei legitime Verdikte."*).
+> Unzulässig ist jeder Satz, der etwas behauptet, was in der Quelle nicht
+> steht — auch ein zusammenfassender. Die Probe dafür ist die
+> **Weglass-Probe aus Teil 1, rückwärts**: Ändert der Zusatz einen Ausgang, ist
+> er Aussage und gehört in die Quelle, nicht in den Spiegel.
+
+Ohne diese Hälfte ist die [Kandidatenliste](#kandidatenliste) nicht
+abarbeitbar: Ein fettgesetzter Vorspann ohne Quelle wäre sonst weder erlaubt
+noch verboten.
 
 Zulässig — ein ganzer Teilsatz entfällt:
 
@@ -46,7 +63,8 @@ Zulässig — ein ganzer Teilsatz entfällt:
 > **Spiegel:** „Die Eröffnung ist Planner-Arbeit — alle drei Schritte laufen in
 > einem Kontext."
 
-Unzulässig — umgestellt und ersetzt:
+Unzulässig — umgestellt und ersetzt (der Fall ist inzwischen behoben, siehe
+unten; er steht hier als Beispiel):
 
 > **Quelle:** „er existiert nur, weil Übergabe-Artefakte fehlen"
 > **Spiegel:** „der nur bei fehlenden Artefakten existiert"
@@ -63,8 +81,9 @@ Hälfte — der Spiegel bekäme den Sensor, den er heute nicht hat, und die
 Review-Runden müssten keinen Wortlaut mehr vergleichen.
 
 **Belegt an vier Fällen von Hand:** Die Probe akzeptiert den Planner-Schnitt
-oben und weist alle drei bestätigten Paraphrasen unten zurück — deckungsgleich
-mit dem Urteil beim Lesen.
+oben und weist die drei Paraphrasen zurück, die unten behoben sind —
+deckungsgleich mit dem Urteil beim Lesen. Auch die drei Korrekturen selbst sind
+gegen sie geprüft und bestehen sie.
 
 **Nicht belegt im Maßstab.** Vier Anläufe scheiterten an der Text-Extraktion,
 nicht an der Regel: Quelle und Spiegel sind bei ~78 Zeichen umgebrochen, an
@@ -72,9 +91,17 @@ verschiedenen Stellen; dazu speist der Spiegel sich teils aus Tabellenzellen der
 Selbstcheck-Rubriken. Ein tragfähiger Lauf muss **ganze Absatz-Knoten**
 vergleichen statt Zeilen und Tabellen gesondert behandeln.
 
-**Was die Probe nicht fängt.** Ein gestrichener Teilsatz kann eine **Bedingung**
-getragen haben; aus einer bedingten Regel wird dann eine unbedingte. Das bleibt
-ein Urteil — aber eines je Streichung statt eines je Satz, und im Diff sichtbar.
+**Was die Probe nicht fängt — zwei Dinge.**
+
+*Erstens: Sie prüft die Reihenfolge, nicht die Vollständigkeit.* Ein einzelnes
+gestrichenes Wort — `siehe` aus *„(siehe ADR-Hard-Rule, Modul 4)"* — ist
+teilfolgen-legal und nach Teil 2 trotzdem unzulässig, weil es kein ganzer
+Teilsatz ist. Die Probe ist damit **notwendig, nicht hinreichend**; sie fängt
+Umstellungen und Ersetzungen, nicht Auslassungen unterhalb der Satzglied-Ebene.
+
+*Zweitens: Ein gestrichener Teilsatz kann eine Bedingung getragen haben*; aus
+einer bedingten Regel wird dann eine unbedingte. Das bleibt ein Urteil — aber
+eines je Streichung statt eines je Satz, und im Diff sichtbar.
 
 ## Teil 4 — Durchsetzungsstand
 
@@ -93,18 +120,30 @@ Baseline vendort, hat Rang 2 und 3, nie Rang 1. Die Rangfolge
 macht den Korpus nicht bei uns inkonsistent — sie ändert den Normtext, den
 jemand anderes bekommt, und kumuliert über Releases.
 
-## Bestätigte Abweichungen
+## Bestätigte Abweichungen — behoben
 
-Von Hand geprüft, noch nicht behoben:
+Am 2026-08-16 nach der Schnittregel korrigiert; jede Korrektur ist gegen die
+Teilfolgen-Probe aus Teil 3 gegengeprüft und besteht sie.
 
-| Datei | Spiegel | Quelle |
+| Datei | vorher | jetzt (Quellwortlaut) |
 |---|---|---|
-| `modul-08-agentenrollen.md` | „der nur bei fehlenden Artefakten existiert" | „er existiert nur, weil Übergabe-Artefakte fehlen" |
-| `modul-10-review-harness.md` | „versioniert, nicht überschrieben" | „nicht überschrieben, sondern versioniert" |
-| `grundlagen-traceability.md` | „Altbestand bleibt ohne Anker" | „Bestehende Regeln haben keinen rekonstruierbaren Ursprung mehr" |
+| `modul-08-agentenrollen.md` | „der nur bei fehlenden Artefakten existiert" | „das wäre der vierte, *falsche* Pfad, und **er existiert nur, weil Übergabe-Artefakte fehlen**" |
+| `modul-10-review-harness.md` | „versioniert, nicht überschrieben" | „Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert" |
+| `modul-10-review-harness.md` | „Ein **so entstandener** HIGH-Eintrag" · fehlendes „siehe" | „Ein HIGH-Eintrag, **der aus dem Steering Loop kam**" · „(**siehe** ADR-Hard-Rule …)" |
+| `grundlagen-traceability.md` | „Altbestand bleibt ohne Anker" | „**Bestehende Regeln haben keinen rekonstruierbaren Ursprung mehr**" |
 
-Die dritte wiegt am schwersten: Sie ersetzt eine **Begründung** durch eine
-**Behauptung** und lässt den Verweis auf *Harness-Lüge* fallen.
+Der zweite `modul-10`-Eintrag kam erst beim Review der Korrektur dazu: Er steht
+im **unmittelbar anschließenden Satz** des ersten. Wer eine Fundliste abarbeitet
+statt die Passage zu lesen, findet ihn nicht — dieselbe Arbeitsweise, die die
+Review-Runden 7–11 zu Einzelfall-Korrekturen gemacht hat.
+
+Zwei Nebenwirkungen, beide gewollt:
+
+* Im `modul-08`-Fall entfällt der Vordersatz *„Keine dieser Sequenzen enthält …"*
+  — er zeigt auf die Worked-Example-Sequenzen, die im Spiegel nicht mitreisen.
+  Das ist die Deixis-Regel, nicht die Schnittregel.
+* Im `traceability`-Fall kommt der Link auf *Harness-Lüge* zurück, den die
+  Paraphrase fallen gelassen hatte — umgehängt auf `grundlagen-begriffe.md`.
 
 ## Kandidatenliste
 
@@ -120,7 +159,6 @@ Eintrag braucht die Proben aus Teil 1 und 2.
 
 ## Offen
 
-- Die drei bestätigten Abweichungen beheben.
 - Die 14 Kandidaten mit dem Maßstab aus Teil 1/2 durchgehen.
 - Den Teilfolgen-Test auf Absatz-Knoten bauen — dann wäre er ein Gate.
 

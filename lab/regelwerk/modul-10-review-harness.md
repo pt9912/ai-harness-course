@@ -71,9 +71,10 @@ achtest du"; Vorlage
   jeder Lauf steht für sich; gezählt wird über Finding-Klasse →
   Slice-Closure §7 → Eintrag ins Beobachtungs-Register. Bei dreimaligem gleichem Finding
   Klassifikation schärfen / Folge-ADR bzw. `AGENTS.md`-Update / Gate
-  (Modul 13). Die Skill-Datei wird **versioniert, nicht überschrieben**
-  (ADR-Hard-Rule, Modul 4). Ein so entstandener HIGH-Eintrag trägt den
-  Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)`
+  (Modul 13). Skill-Datei selbst wird **nicht** überschrieben, sondern
+  versioniert (siehe ADR-Hard-Rule, Modul 4). Ein HIGH-Eintrag, der aus dem
+  Steering Loop kam, trägt den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle
+  `(seit slice-<NNN>)`
   ([`grundlagen-traceability.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker)).
 
 Vergleichbares Skill-Pattern für *Verifier* und *Validator* in Modul 11

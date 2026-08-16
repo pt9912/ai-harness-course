@@ -44,9 +44,10 @@ wenn sie ohne Welle verkörpert wurde, den Slice: `seit welle-<NN>` bzw.
   ist der Slice die einzige auflösbare Herkunft (`seit slice-<NNN>`, löst über
   `done/slice-<NNN>-<kurzer-titel>.md` §7 auf — die Nummer ist eindeutig, der
   Titelrest gehört zum Dateinamen; maschinell also `done/slice-<NNN>-*.md`).
-- **Ab Einführung, kein Nachrüsten.** Altbestand bleibt ohne Anker;
-  `seit unbekannt` wäre eine Harness-Lüge, der leere Zustand ist die
-  ehrliche Information.
+- **Ab Einführung, kein Nachrüsten.** Bestehende Regeln haben keinen
+  rekonstruierbaren Ursprung mehr; `seit unbekannt` wäre eine
+  [Harness-Lüge](grundlagen-begriffe.md#kernbegriffe). Der leere Zustand *ist*
+  die ehrliche Information.
 
 **Sensor 1 — Anker-Paarung** (*computational feedback*). Die Prüfung läuft
 **von der Closure-Notiz nach außen**, nicht von der Regel nach innen: von

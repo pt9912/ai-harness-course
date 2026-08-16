@@ -191,9 +191,9 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
   **Verdikt muss ein Artefakt** sein, das der Reviewer in seine
   Skill-Datei übernehmen kann — „mündliche Klärung" ist keine Übergabe,
   sondern Drift mit Kaffeepause.
-- **Drei legitime Verdikte** (der vierte — „Reviewer-Finding herabstufen,
-  weil Implementer widerspricht" — ist der falsche Pfad, der nur bei
-  fehlenden Artefakten existiert):
+- **Drei legitime Verdikte.** „Reviewer-Finding herabstufen, weil Implementer
+  widerspricht" — das wäre der vierte, *falsche* Pfad, und er existiert nur,
+  weil Übergabe-Artefakte fehlen:
 
 | Verdikt | Folge-Sequenz | Übergabe-Artefakt |
 |---|---|---|
