@@ -92,10 +92,24 @@ nicht, wenn ein Wort zwar vorkommt, aber etwas anderes bedeutet.
 Das ist Operation 1, korrekt ausgeführt und trotzdem falsch. Es bleibt ein
 Urteil; nur eines je Streichung statt eines je Satz, und im Diff sichtbar.
 
-**Beide Proben brauchen absatzweise Extraktion.** Vier Anläufe scheiterten
-daran, dass Quelle und Spiegel bei ~78 Zeichen an verschiedenen Stellen
-umbrechen und der Spiegel sich teils aus Tabellenzellen speist. Wer sie baut,
-vergleicht **Absatz-Knoten**, nicht Zeilen.
+**Beide Proben brauchen absatzweise Extraktion.** Vier frühe Anläufe
+scheiterten daran, dass Quelle und Spiegel bei ~78 Zeichen an verschiedenen
+Stellen umbrechen und der Spiegel sich teils aus Tabellenzellen speist. Wer sie
+baut, vergleicht **Absatz-Knoten**, nicht Zeilen.
+
+**Probe B ist als Prototyp gelaufen** (2026-08-16, absatzweise, mit
+Flexions-Toleranz und den Freistellungen für Operation 3 und 4). Erster Lauf
+über alle 26 Dateien: **63 Kandidaten-Absätze** mit Wörtern, die ihre Quelle
+nicht kennt — vorn `modul-12` (9) und `modul-13` (8). Die Hand-Stichprobe
+zeigt das erwartbare Bild einer **Altbestands-Schicht**: Die Absätze tragen
+Quell-Inhalt, aber mit eigenem Bindegewebe (*„Merkformel"*, *„üblicherweise"*,
+*„gewachsene Landschaft"* — alle quellenlos). Das ist der Digest-Stil von vor
+der Quelltreue-Disziplin, und er ist **Prosa**, die der enge
+Vorspann-Test nie erreicht hat.
+
+Der Prototyp bleibt bewusst **kein Repo-Skript** — die Skriptflächen-Regel
+dieses Repos gilt; ein dauerhafter Sensor wäre ein Change Request an den
+Doku-Prüfer, nicht ein weiteres `tools/`-Skript.
 
 ## Teil 4 — Durchsetzungsstand
 
@@ -220,10 +234,12 @@ positive Fassung macht daraus einen Befund, bis jemand die Liste erweitert.
 
 ## Offen
 
-- **Probe A und B auf Absatz-Knoten bauen** — dann wären sie ein Gate. Beide
-  brauchen dieselbe Extraktion; wer eine baut, hat die andere fast geschenkt.
-- Die fünf Operationen an einer **anderen Datei** erproben als denen, aus
-  denen sie gewonnen wurden. Bisher sind sie am eigenen Befund kalibriert.
+- Die **63 Kandidaten-Absätze** der Altbestands-Schicht durchgehen — nach
+  Dateien, nicht nach Liste, mit den fünf Operationen als Maßstab. Das ist
+  ein eigenes Vorhaben in `modul-12`/`modul-13`-Größe, kein Nachmittag.
+- Einen dauerhaften Sensor als **Change Request an den Doku-Prüfer**
+  formulieren, sobald die Altbestands-Schicht abgetragen ist — vorher liefe
+  er dauerhaft rot.
 
 Wird die Schnittregel zur **zweiten** repo-lokalen Strukturregel, wandert sie
 nach `harness/conventions.md`; der Trigger dafür steht in der
