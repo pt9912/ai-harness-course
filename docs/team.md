@@ -2,44 +2,51 @@
 
 **Stand:** 2026-08-15.
 
-## Was diese Datei ist
+## IST, SOLL und was diese Datei dazwischen tut
 
-**Gegenstand ist der gelehrte Korpus** — `kurs/de` als Quelle, `lab/regelwerk`
-als Spiegel —, nicht der Harness dieses Repos. Die Frage lautet: *Welche Regeln
-funktionieren, weil genau ein Mensch am Repo schreibt, und was passiert bei
-drei?*
+**IST.** Der Korpus ist für **einen schreibenden Menschen plus Agenten** gebaut.
+Das ist keine Unterstellung, sondern das Ergebnis der Bestandsaufnahme unten —
+und es ist **nirgends deklariert**: Ein Adopter mit drei Leuten erfährt an
+keiner Stelle, dass er sich außerhalb des Getesteten bewegt.
+
+**SOLL.** Teamfähigkeit.
+
+**Diese Datei** misst den Abstand und schlägt vor, wie er geschlossen wird. Sie
+hat zwei Hälften: die [fünf Änderungen](#die-fünf-änderungen), die das SOLL
+herstellen würden, und die [Bestandsaufnahme](#bestandsaufnahme), aus der sie
+folgen. Die Einträge dort sind die **Belege** der Änderungen, nicht die
+Gliederung.
 
 **Abgrenzung zur [Roadmap](roadmap.md).** Dort stehen offene Fäden **dieses
-Repos**, jeder mit einem Trigger, an dem man erkennt, dass er dran ist. Hier
-steht ein **Befund-Register über das Produkt**. Keine Zeile hier verspricht
-eine Handlung, keine hat einen Trigger. Wird ein Befund zur Arbeit, bekommt er
-dort eine Zeile — nicht hier.
+Repos** mit Trigger. Hier steht die Vorarbeit für eine Änderung am **Produkt**.
+Wird eine Änderung beschlossen, bekommt sie dort eine Zeile — nicht hier.
 
-**Konsument.** Der Kurs-Autor zur **Entwurfszeit** — wenn entschieden wird, ob
-der Korpus die Mehr-Personen-Frage aufnimmt. Erreichbar ist er über die
-Faden-Zeile *Team-Tauglichkeit des Korpus* in [`roadmap.md`](roadmap.md); ohne
-sie wäre diese Datei Ablage
-([*Jedes Artefakt hat einen Konsumenten*](../kurs/de/grundlagen/harness-dateien.md#jedes-artefakt-hat-einen-konsumenten)).
+**Gegenstand** ist der gelehrte Korpus: `kurs/de` als Quelle, `lab/regelwerk`
+als Spiegel, `lab/templates` als Ziel-Formen. Erreichbar ist diese Datei über
+die Faden-Zeile *Team-Tauglichkeit des Korpus* in [`roadmap.md`](roadmap.md).
 
 ## Beleglage — was hier *nicht* gemessen ist
 
-**Alle Einträge sind team-*motiviert*: Sie folgen aus der Annahme, dass genau
-ein Mensch schreibt.** Was sie unterscheidet, ist die **Evidenz** — die
-Klasse-Spalte des Registers führt sie.
+**Alle Einträge folgen aus der Ein-Schreiber-Annahme.** Was sie unterscheidet,
+ist die **Evidenz** — die Klasse-Spalte des Registers führt sie.
 
 **Klasse *Verhalten*** braucht ein Team, um beobachtet zu werden. Gemessen ist
 dort nur die Beleglage: `git shortlog -sne HEAD` über die vier bekannten Repos,
 die die Baseline tragen oder vendorn — `d-check`, `ai-harness-init`, `a-check`
 und dieses — liefert **je genau eine Autoren-Identität**. Nach der Zählregel
 ([§Steering Loop](../kurs/de/grundlagen/klassifikation.md#steering-loop) —
-1× Vorfall · 2× Symptom · 3× Lücke) stehen diese Einträge **bei 0×**, nicht
-einmal bei 1×: Vorhersagen, keine Beobachtungen. Wer das überliest, verkörpert
-eine Regel gegen ein Problem, das noch niemand gehabt hat.
+1× Vorfall · 2× Symptom · 3× Lücke) stehen diese Einträge **bei 0×**.
 
 **Klasse *Text* und *Sensor*** sind heute prüfbar — Lücken im Korpustext und am
-Bestand, nachlesbar und nachgemessen. Dass sie team-motiviert sind, ändert daran
-nichts: Ein Abschnitt, der wegen Nebenläufigkeit geschrieben wurde, kann heute
-unvollständig sein.
+Bestand, nachlesbar und nachgemessen.
+
+**Was 0× bedeutet und was nicht.** Bei erklärtem SOLL ist die fehlende
+Feld-Evidenz **kein Veto**, sondern eine **Design-Auflage**: *Entwurf* jetzt,
+*Verkörperung* auf Trigger. Wir entwerfen ohne Praxis-Rückmeldung, also muss
+jede Änderung so gebaut sein, dass sie sich zurücknehmen lässt — additiv,
+deklariert, ohne den Ein-Personen-Fall zu verschlechtern. Das ist die Bauform,
+die [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+bereits vorführt: Default für einen Schreiber, deklarierte Variante für mehrere.
 
 **Eine Zwischenlage:** Die *Eigentums-Achse* unter [TB-001](#tb-001) fehlt
 nachweislich — `ai-harness-init` hat sie gemessen und mit einer eigenen ADR
@@ -161,8 +168,10 @@ Das ist genau der Fall, für den
 die stabile Kennung vorsieht, und adressiert wird deshalb die **Kennung, nicht
 der Titel** — jeder Eintrag trägt ein `<a id="tb-NNN">`.
 
-`TB-<NNN>` gilt **nur in dieser Datei**, steht in keinem Commit und in keinem
+`TB-<NNN>` (Befund) und `TA-<N>` (Anpassung) gelten **nur in dieser Datei**, steht in keinem Commit und in keinem
 Gate; vergeben wird chronologisch nach Fund, Lücken werden nicht nachbelegt.
+Die `TA-`-Spalte verweist auf die [Änderung](#die-fünf-änderungen), die den
+Befund schließt — jeder offene Befund hat genau eine oder zwei.
 Gestrichene Einträge bleiben mit Grund stehen — eine still gelöschte Zeile ist
 von einer nie vergebenen nicht zu unterscheiden
 ([Modul 6 §Das Beobachtungs-Register](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register)),
@@ -171,25 +180,278 @@ und ohne den Grund prüft der Nächste dieselbe Sackgasse noch einmal.
 **Die Abschnitte unten stehen numerisch, nicht nach Schwere.** Das ist
 Absicht: Trüge die Position eine Bewertung, verschöbe jede Neubewertung
 Abschnitte — genau die Wanderung, gegen die die Kennungen eingeführt wurden.
-Die Rangfolge steht in [§Wo man anfinge](#wo-man-anfinge), wo sie sich ändern
+Die Rangfolge steht in [§Reihenfolge und Abhängigkeiten](#reihenfolge-und-abhängigkeiten), wo sie sich ändern
 darf, ohne etwas zu bewegen.
 
-| Kennung | Klasse | Eintrag | Stand |
-|---|---|---|---|
-| [TB-001](#tb-001) | Verhalten | Der Lifecycle ist ein Zustand ohne Subjekt | offen · Achse am Konsumenten belegt |
-| TB-002 | — | *Der Zähler zählt Beobachtungen, nicht Beobachter* | **gestrichen** — der Zähler steht in einer stehenden Datei und wird bei jeder Slice-Closure fortgeschrieben, gleich von wem; das Register-Beispiel des Kurses ist selbst der Drei-Slices-Fall. Der Sichtungs-Schritt (§8) ist Pflicht in *jedem* Slice-Plan, und die Sub-Area-Spalte trägt bewusst die normative Sub-Area. Person-unabhängig gebaut |
-| TB-003 | — | *Die Welle ist ein Join-Barrier* | **abgelöst** durch [TB-014](#tb-014) — die Barriere setzt voraus, dass die Einzahl von *Aktuelle Welle* bindet; sie bindet nicht |
-| [TB-004](#tb-004) | Verhalten | Eine Rolle, mehrere Personen | offen |
-| TB-005 | — | *Der Planner ist Single Writer* | **gestrichen** — kein eigener Befund: „Durchsatz-Engpass" ist Volumen, nicht Lücke; der Rest ist [TB-004](#tb-004) |
-| [TB-006](#tb-006) | Verhalten | Der Konflikt-Pfad hat kein Terminal | offen |
-| [TB-007](#tb-007) | Verhalten | Einarbeitung wurde nie als Kosten geführt | offen · Auslöser ist die *zweite* Person |
-| TB-008 | — | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
-| [TB-009](#tb-009) | Text | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
-| [TB-010](#tb-010) | **Sensor** | „Lokal ableitbar" gilt nicht bei Vorvergabe | offen · **kein Team nötig**, am Bestand gemessen; trägt die **Lösungs-Skizze zur Vergabe** (gilt auch für [TB-009](#tb-009)/[TB-011](#tb-011)) |
-| [TB-011](#tb-011) | Verhalten | Auswertbar erst nach dem Merge | offen · Vorbedingung mehrerer anderer |
-| [TB-012](#tb-012) | Text | Die Planning-README trägt zwei Begriffe ohne Quelle | offen · **kein Team nötig**, Template-Drift |
-| [TB-013](#tb-013) | Text | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
-| [TB-014](#tb-014) | Verhalten | „Aktuelle Welle" ist keine Eigenschaft des Repos | offen · löst [TB-003](#tb-003) ab; leerer Fall bei *einem* Schreiber belegt. **Auflösung benannt:** flache Dateien + `**Welle:**` in `in-progress/` — das Feld entfällt |
+| Kennung | Klasse | Änderung | Eintrag | Stand |
+|---|---|---|---|---|
+| [TB-001](#tb-001) | Verhalten | [TA-1](#ta-1) [TA-2](#ta-2) | Der Lifecycle ist ein Zustand ohne Subjekt | offen · Achse am Konsumenten belegt |
+| TB-002 | — | — | *Der Zähler zählt Beobachtungen, nicht Beobachter* | **gestrichen** — der Zähler steht in einer stehenden Datei und wird bei jeder Slice-Closure fortgeschrieben, gleich von wem; das Register-Beispiel des Kurses ist selbst der Drei-Slices-Fall. Der Sichtungs-Schritt (§8) ist Pflicht in *jedem* Slice-Plan, und die Sub-Area-Spalte trägt bewusst die normative Sub-Area. Person-unabhängig gebaut |
+| TB-003 | — | — | *Die Welle ist ein Join-Barrier* | **abgelöst** durch [TB-014](#tb-014) — die Barriere setzt voraus, dass die Einzahl von *Aktuelle Welle* bindet; sie bindet nicht |
+| [TB-004](#tb-004) | Verhalten | [TA-1](#ta-1) | Eine Rolle, mehrere Personen | offen |
+| TB-005 | — | — | *Der Planner ist Single Writer* | **gestrichen** — kein eigener Befund: „Durchsatz-Engpass" ist Volumen, nicht Lücke; der Rest ist [TB-004](#tb-004) |
+| [TB-006](#tb-006) | Verhalten | [TA-1](#ta-1) | Der Konflikt-Pfad hat kein Terminal | offen |
+| [TB-007](#tb-007) | Verhalten | [TA-5](#ta-5) | Einarbeitung wurde nie als Kosten geführt | offen · Auslöser ist die *zweite* Person |
+| TB-008 | — | — | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
+| [TB-009](#tb-009) | Text | [TA-3](#ta-3) | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
+| [TB-010](#tb-010) | **Sensor** | [TA-3](#ta-3) | „Lokal ableitbar" gilt nicht bei Vorvergabe | offen · **kein Team nötig**, am Bestand gemessen; Entwurf in [TA-3](#ta-3) |
+| [TB-011](#tb-011) | Verhalten | [TA-4](#ta-4) | Auswertbar erst nach dem Merge | offen · Vorbedingung mehrerer anderer |
+| [TB-012](#tb-012) | Text | [TA-2](#ta-2) [TA-4](#ta-4) | Die Planning-README trägt zwei Begriffe ohne Quelle | offen · **kein Team nötig**, Template-Drift |
+| [TB-013](#tb-013) | Text | [TA-3](#ta-3) | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
+| [TB-014](#tb-014) | Verhalten | [TA-2](#ta-2) | „Aktuelle Welle" ist keine Eigenschaft des Repos | offen · löst [TB-003](#tb-003) ab; leerer Fall bei *einem* Schreiber belegt. **Auflösung benannt:** flache Dateien + `**Welle:**` in `in-progress/` — das Feld entfällt |
+
+## Die fünf Änderungen
+
+Die zehn Einträge der Bestandsaufnahme fallen auf fünf Änderungen zusammen;
+keiner fällt heraus. Jede ist **additiv und deklariert** — sie verschlechtert
+den Ein-Personen-Fall nicht, und sie lässt sich zurücknehmen.
+
+<a id="ta-1"></a>
+
+### TA-1 — Ein Wort für die Person, die eine Rolle gerade füllt
+
+**Deckt** [TB-004](#tb-004) (definitorisch) · [TB-001](#tb-001) (WIP-Lesart) ·
+[TB-006](#tb-006) (welcher Architect).
+
+**Was fehlt.** Der Korpus modelliert nur *n Rollen ← 1 Person*. Für die
+Gegenrichtung — eine Rolle, mehrere Menschen — gibt es kein Wort, und deshalb
+zerfällt jede Regel der Form *„die Rolle X tut Y"* in zwei Lesarten.
+
+**Vorschlag.** Der Begriff **Rolleninhaber**: *wer eine Rolle in einem
+konkreten Lauf füllt*. Im Korpus heute unbelegt; `Träger` scheidet aus, das ist
+dort schon der Träger einer Pflicht.
+
+**Wo es landet.**
+
+| Ort | Änderung |
+|---|---|
+| Modul 8 §Rollen-Regeln | ein Satz: *Eine Rolle kann von mehreren Menschen gefüllt werden; wer sie in einem Lauf füllt, ist ihr Rolleninhaber.* |
+| Modul 5 §Selbstcheck-Rubrik | „WIP-Limit pro Implementer" → **pro Rolleninhaber** |
+| Modul 8 §Konflikt-Pfad | das Verdikt nennt den entscheidenden Rolleninhaber, nicht nur die Rolle |
+| Modul 10 §Pflege | Drift „zwischen Sessions" → „zwischen Sessions **und zwischen Rolleninhabern**" |
+
+**Preis.** Ein neuer Begriff in einem Korpus, der mit Vokabular sparsam ist.
+Und er muss ausdrücklich *nicht* als Rückkehr zur Personen-Bindung gelesen
+werden — *„Rollen-Trennung ist Kontext-Trennung"* bleibt unverändert gültig;
+der Rolleninhaber steht daneben, nicht dagegen.
+
+**Was es nicht löst.** Es macht die Zweideutigkeit *sagbar*, es entscheidet
+nichts. [TB-006](#tb-006) braucht zusätzlich ein letztes Artefakt.
+
+<a id="ta-2"></a>
+
+### TA-2 — Ein Ort für die Zuweisung
+
+**Deckt** [TB-001](#tb-001) · [TB-014](#tb-014) · [TB-012](#tb-012) (erste Hälfte).
+
+**Was fehlt.** *Wer hält diese Instanz gerade* hat im Korpus keinen Ort. Die
+Verzeichnis-Position trägt den **Zustand**, nicht den **Inhaber**.
+
+**Vorschlag.** Die Hälfte existiert bereits: `welle.template.md` führt
+`**Verantwortlich:** <Name>`, `welle-results.template.md` ebenso. Der Slice —
+das Artefakt, das den Lifecycle *trägt* — hat kein solches Feld. Also
+**dasselbe Feld im Slice-Kopf**, symmetrisch zur Welle.
+
+**Wo es landet.**
+
+| Ort | Änderung |
+|---|---|
+| `slice.template.md` | Kopf-Feld `**Verantwortlich:** <Name>` oder `—` |
+| Modul 5 §Trigger je Lifecycle-Übergang | `open→next` setzt es — was die Planning-README-Vorlage heute schon behauptet, ohne dass es ein Feld gäbe |
+| Modul 6 §Aktuelle Welle | entfällt zugunsten der Ableitung, siehe [TB-014](#tb-014) |
+
+**Warum das kein Status-Feld ist.** Modul 5 verbietet eine *zweite Quelle für
+denselben Zustand*. Eigentümerschaft ist eine **orthogonale Achse** zur
+Lifecycle-Position, keine zweite Fassung davon — die Warnung trifft sie nicht.
+
+**Preis.** Ein Feld, das altern kann (jemand geht, übergibt). Gemildert
+dadurch, dass es je Datei liegt und der Lifecycle-`git mv` die Datei ohnehin
+anfasst.
+
+**Was es nicht löst.** Auf einem Zweig ist das Feld so unsichtbar wie die
+Verzeichnis-Position — das ist TA-4.
+
+#### Die Welle braucht dafür kein Feld
+
+Für die *Welle* ist die Zuweisung schon ableitbar — zwei positionale Tatsachen genügen, ein Feld braucht es dort nicht:
+
+- **Welche Wellen offen sind** — die flachen Dateien unter `planning/`.
+- **An welchen davon gearbeitet wird** — das Kopf-Feld `**Welle:**` der Dateien
+  in `in-progress/`. Es existiert in jedem Slice-Plan
+  ([`slice.template.md`](../lab/templates/docs/plan/planning/slice.template.md))
+  und trägt entweder die Wellen-Kennung oder *„ohne Welle"*.
+
+Damit braucht die Roadmap das Feld nicht. Keine der beiden Tatsachen ist ein
+Ganz-Wert; beide liegen je Datei und können deshalb **nicht still falsch
+mergen**.
+
+**Warum „ableiten" vorher wie ein schlechter Weg aussah.** Der naheliegende
+Einwand lautet, die Ableitung versage bei *keiner* und bei *mehreren* laufenden
+Wellen. Unter diesem Befund sind das keine Fehlschläge, sondern die **richtigen
+Antworten** — der Einwand lebte von genau der Einzahl-Annahme, die hier fällt.
+
+**Was es kostet.** Das `**Welle:**`-Feld wird tragend, und
+[Modul 6](../kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)
+spielt es derzeit herunter: *„Das Kopf-Feld `**Welle:**` eines Slice-Plans sagt
+**etwas anderes** — ob *dieser* Slice in ein Bündel gehört —, und daraus folgt
+für die Vorgänge unten **nichts**."* Das zielt auf eine andere Frage — ob das *Repo* Wellen führt —, ist
+also kein Widerspruch; aber die neue Last müsste dort ausgesprochen werden.
+
+**Was es nicht behebt.** `in-progress/` ist zweigelokal ([TB-011](#tb-011)), die
+Ableitung erbt das. Sie verschlechtert nichts: Statt eines Feldes, in das zwei
+Personen Wahres schreiben und eines davon verlieren, sieht man den Stand von
+`main` — unvollständig, aber nie falsch. Die unauflösbare Konfliktklasse
+verschwindet.
+
+
+<a id="ta-3"></a>
+
+### TA-3 — Kennungs-Vergabe unter Nebenläufigkeit
+
+**Deckt** [TB-009](#tb-009) · [TB-010](#tb-010) · [TB-013](#tb-013).
+
+**Was fehlt.** §Vergabe beantwortet die Kollisionsfrage für einige Kennungen,
+nicht für alle — und eine seiner Zusagen hält nicht.
+
+**Wo es landet.**
+
+| Ort | Änderung |
+|---|---|
+| §Vergabe, Klassen-Aufzählung | `MR-<NNN>` aufnehmen und als **Hybrid** führen: Eintragsdatei still, Index-Zeile laut |
+| §Vergabe, Zählraum | die Welle beantworten — repo-weit dicht, **kein** Bereichssegment, weil sie Slices über Sub-Areas hinweg bündelt |
+| §Vergabe, Ableitbarkeit | die Zusage einschränken: Der Zählraum ist Verzeichnis **plus offene Wellen plus offene PRs**; letztere sind lokal nicht auflistbar |
+
+**Optional, größer:** das Schema selbst. Die Abwägung dazu steht unten.
+
+**Und ein Gate ist möglich.** Als einzige der fünf Änderungen hat diese eine
+computationale Hälfte: Eindeutigkeit der Kennungen ist prüfbar, und der Korpus
+räumt selbst ein, dass heute kein Modul es tut.
+
+**Was es nicht löst.** Zwei Personen, die dasselbe unter verschiedenen Namen
+tun, kollidieren in keinem Schema.
+
+#### Die Abwägung — Skizze, keine Entscheidung
+
+**Die Randbedingung streicht die Standardantwort.** Der übliche Weg gegen
+Vergabe-Kollisionen ist ein zentraler Allokator (Sequenz, Ticket-System, Bot
+beim Merge). Der [Traceability-Constraint](../kurs/de/grundlagen/traceability.md#traceability-constraint)
+verbietet ihn: *„wer sie erst beim Landen bekommt, hat sie im entscheidenden
+Moment nicht."* Die Kennung muss **lokal, offline, vor dem ersten Push**
+ableitbar sein.
+
+**Was der Zähler dafür einbringt — nachgerechnet:**
+
+| | trägt es? |
+|---|---|
+| Reihenfolge | nein — Datum/Zeit, und ohnehin `git` |
+| Anzahl | nein — `ls \| wc -l` |
+| Kürze | nein — der nackte Zähler ist zwar kürzer (`slice-086`, 9 Zeichen), aber die **Reparatur des Schemas gibt sie auf**: `slice-IDX-007` (13) ist länger als eine segmentlose Zufalls-ID (`slice-7f3a2b`, 12). Verteidigt wird die Kürze also nicht vom Zähler, sondern von seiner ungelösten Fassung |
+| Sub-Area | **ja — gehört aber dem Präfix**, nicht dem Zähler; jedes Schema kann es tragen |
+| Lückenlosigkeit als Vollständigkeitsprobe | schwach: hat genau diesen Befund zutage gefördert, aber Lücken sind laut Korpus legitim |
+
+Die einzige Eigenschaft, die **nur** der Zähler hat — man kennt die nächste
+Nummer, ohne jemanden zu fragen —, *ist* der Defekt. Nutzen und Fehler sind
+dieselbe Sache; deshalb kann keine Lösung innerhalb des Schemas mehr als
+mildern.
+
+**Drei Familien, nach der Randbedingung gefiltert.** *Partitionieren* (die Wahl
+des Korpus) senkt die Wahrscheinlichkeit; *Block-Reservierung* (Hi/Lo) beseitigt
+sie, koordiniert aber selten statt nie; *den geteilten Wert abschaffen*
+(Zufall · Zeitstempel · Slug) braucht überhaupt keine Koordination. Quer dazu
+liegt ein **Detektor**: ein Eindeutigkeits-Gate macht die stille Klasse laut,
+ohne das Schema anzufassen — und der Korpus räumt selbst ein, dass es baubar
+wäre: *„kein Modul des Doku-Gates prüft Eindeutigkeit heute … ein
+Review-Griff."*
+
+**Segment behalten, Zähler ersetzen.** Dass das Segment nicht dem Zähler
+gehört, zeigt der Korpus selbst: Er verwirft ein Personen- oder Branch-Segment,
+obwohl es *„die Garantie gäbe"* — weil es *„dem Reviewer nichts"* sagt.
+Ausgewählt wird das Segment also nach **Lesbarkeit**, nicht nach
+Kollisionsschutz. Zwei Kandidaten:
+
+- `slice-IDX-7f3a` — kollisionsfrei, Länge wie heute, aber eine Kollision
+  bliebe bedeutungslos.
+- `slice-IDX-cache-invalidation` — **der Slug steht schon in jedem Dateinamen**
+  (`slice-072-adr-verweist-nicht-auf-lifecycle.md`); die Umstellung *entfernt*
+  den Zähler, statt etwas hinzuzufügen. Zwei Personen am selben Gegenstand
+  erzeugen denselben Pfad und damit einen add/add-Konflikt — der Anspruch des
+  Korpus, *„einen stillen Merge-Unfall in ein inhaltliches Signal"* zu
+  verwandeln, vollständig eingelöst statt teilweise.
+
+**Ehrliche Kosten.** Der Slug kostet Token-Länge (9 → 34–42 Zeichen, gemessen
+an realen Slices) und hat eine gespiegelte Schwäche: Dieselbe Arbeit unter
+verschiedenen Namen kollidiert **nicht**. Und zwei Stellen tragen die Form
+maschinell — `token: 'slice-\d{3}'` im `matrix`-Modul beider Konfigurationen
+sowie die Beleg-Formprobe des Registers; beide müssten dauerhaft *zwei* Muster
+kennen.
+
+**Migration ist keine Kostenposition.** Vergebene Nummern kollidieren nicht —
+das Risiko liegt ausschließlich in der *nächsten* Vergabe, ein Wechsel wirkt
+also sofort, obwohl er nur nach vorn gilt. Der Korpus schreibt genau das vor:
+*„Mischung ist billiger als Migration … behält die alten Kennungen und vergibt
+nur neue … Wer später wechselt, notiert den Wechselpunkt."* Der Ort dafür ist
+die ID-Schema-Deklaration in `harness/conventions.md`. Bemerkenswert dabei:
+Dass Kennungen nie umbenannt werden, sieht wie Starrheit aus — es ist die
+Eigenschaft, die jeden Schema-Wechsel additiv und damit billig macht.
+
+<a id="ta-4"></a>
+
+### TA-4 — Sagen, über welchen Stand die Regeln sprechen
+
+**Deckt** [TB-011](#tb-011) · [TB-012](#tb-012) (zweite Hälfte).
+
+**Was fehlt.** Der Korpus behandelt das Repo als **einen** fortlaufend
+beobachtbaren Zustand. Mit Pull Requests sind es n + 1, und jede Lese-Operation
+der Planung trifft den gemergten.
+
+**Vorschlag.** Keine neue Mechanik — eine **Deklaration**. Jede Aussage über
+die Verzeichnis-Position bekommt ihren Geltungs-Stand.
+
+**Wo es landet.**
+
+| Ort | Änderung |
+|---|---|
+| Modul 5 §Lifecycle als State Machine | ein Absatz: Aussagen über die Verzeichnis-Position gelten für den **gemergten** Stand; auf einem Zweig sieht man den eigenen |
+| Modul 6, `ls`-Zusage | „autoritativ und ohne Pflegeaufwand" um den Stand ergänzen |
+| Modul 5/6, Sichtungs-Schritt | benennen, dass das Register beim Lesen so alt ist wie der letzte Merge |
+| `planning/README.template.md` | `in-progress/` = *„Branch / PR existiert"* bekommt eine Quelle — heute steht das nur auf Rang 3 |
+
+**Preis.** Eine bequeme Vereinfachung wird ausdrücklich, und mehrere Sätze
+werden länger.
+
+**Was es nicht löst.** Es macht Zweig-Stände nicht sichtbar. Es hindert den
+Korpus nur daran, mehr zu versprechen, als er halten kann.
+
+<a id="ta-5"></a>
+
+### TA-5 — Leseordnung und Rückbau von Regeln
+
+**Deckt** [TB-007](#tb-007).
+
+**Was fehlt.** Zwei Dinge, die dieselbe Wurzel haben: Es gibt keine
+**Leseordnung** für einen neuen Menschen, und es gibt für **Hard Rules und
+Skill-HIGH-Einträge** keinen Rückbau — für `MR`, Carveout und ADR schon.
+
+**Wo es landet.**
+
+| Ort | Änderung |
+|---|---|
+| `harness/README.template.md` | eine Pflicht-Sektion *Leseordnung* — was zuerst, was bei Bedarf; die sieben Nachschlage-Sektionen bleiben, was sie sind |
+| Modul 9 / Modul 13, Hard Rules | jede Hard Rule bekommt wie ein Carveout einen **Auflösungs-Trigger oder die Kennzeichnung permanent** |
+| Modul 10 §Pflege | dasselbe für HIGH-Einträge des Reviewer-Skills |
+
+**Preis.** Der teuerste der fünf. Der Rückbau-Trigger belastet jede Hard Rule
+mit einem Feld, und die Leseordnung ist ein Artefakt, das gepflegt werden will.
+
+**Was es nicht löst.** Es verkleinert den bestehenden Korpus nicht, es bremst
+nur sein Wachstum.
+
+<a id="bestandsaufnahme"></a>
+
+## Bestandsaufnahme
+
+Die Belege der fünf Änderungen. Reihenfolge numerisch, nicht nach Schwere —
+siehe [Register](#register).
 
 <a id="tb-001"></a>
 
@@ -449,72 +711,8 @@ vergeben ist richtig — der [Traceability-Constraint](../kurs/de/grundlagen/tra
 verlangt die Kennung, *sobald die Arbeit läuft*. Unvollständig ist nur die
 Beschreibung, wo man nachsieht.
 
-### Lösungs-Skizze — Skizze, keine Entscheidung
-
-Sie gilt der Vergabe insgesamt, betrifft also auch [TB-009](#tb-009),
-[TB-011](#tb-011) und [TB-013](#tb-013). Aufgenommen, damit die Abwägung nicht zweimal geführt wird.
-
-**Die Randbedingung streicht die Standardantwort.** Der übliche Weg gegen
-Vergabe-Kollisionen ist ein zentraler Allokator (Sequenz, Ticket-System, Bot
-beim Merge). Der [Traceability-Constraint](../kurs/de/grundlagen/traceability.md#traceability-constraint)
-verbietet ihn: *„wer sie erst beim Landen bekommt, hat sie im entscheidenden
-Moment nicht."* Die Kennung muss **lokal, offline, vor dem ersten Push**
-ableitbar sein.
-
-**Was der Zähler dafür einbringt — nachgerechnet:**
-
-| | trägt es? |
-|---|---|
-| Reihenfolge | nein — Datum/Zeit, und ohnehin `git` |
-| Anzahl | nein — `ls \| wc -l` |
-| Kürze | nein — der nackte Zähler ist zwar kürzer (`slice-086`, 9 Zeichen), aber die **Reparatur des Schemas gibt sie auf**: `slice-IDX-007` (13) ist länger als eine segmentlose Zufalls-ID (`slice-7f3a2b`, 12). Verteidigt wird die Kürze also nicht vom Zähler, sondern von seiner ungelösten Fassung |
-| Sub-Area | **ja — gehört aber dem Präfix**, nicht dem Zähler; jedes Schema kann es tragen |
-| Lückenlosigkeit als Vollständigkeitsprobe | schwach: hat genau diesen Befund zutage gefördert, aber Lücken sind laut Korpus legitim |
-
-Die einzige Eigenschaft, die **nur** der Zähler hat — man kennt die nächste
-Nummer, ohne jemanden zu fragen —, *ist* der Defekt. Nutzen und Fehler sind
-dieselbe Sache; deshalb kann keine Lösung innerhalb des Schemas mehr als
-mildern.
-
-**Drei Familien, nach der Randbedingung gefiltert.** *Partitionieren* (die Wahl
-des Korpus) senkt die Wahrscheinlichkeit; *Block-Reservierung* (Hi/Lo) beseitigt
-sie, koordiniert aber selten statt nie; *den geteilten Wert abschaffen*
-(Zufall · Zeitstempel · Slug) braucht überhaupt keine Koordination. Quer dazu
-liegt ein **Detektor**: ein Eindeutigkeits-Gate macht die stille Klasse laut,
-ohne das Schema anzufassen — und der Korpus räumt selbst ein, dass es baubar
-wäre: *„kein Modul des Doku-Gates prüft Eindeutigkeit heute … ein
-Review-Griff."*
-
-**Segment behalten, Zähler ersetzen.** Dass das Segment nicht dem Zähler
-gehört, zeigt der Korpus selbst: Er verwirft ein Personen- oder Branch-Segment,
-obwohl es *„die Garantie gäbe"* — weil es *„dem Reviewer nichts"* sagt.
-Ausgewählt wird das Segment also nach **Lesbarkeit**, nicht nach
-Kollisionsschutz. Zwei Kandidaten:
-
-- `slice-IDX-7f3a` — kollisionsfrei, Länge wie heute, aber eine Kollision
-  bliebe bedeutungslos.
-- `slice-IDX-cache-invalidation` — **der Slug steht schon in jedem Dateinamen**
-  (`slice-072-adr-verweist-nicht-auf-lifecycle.md`); die Umstellung *entfernt*
-  den Zähler, statt etwas hinzuzufügen. Zwei Personen am selben Gegenstand
-  erzeugen denselben Pfad und damit einen add/add-Konflikt — der Anspruch des
-  Korpus, *„einen stillen Merge-Unfall in ein inhaltliches Signal"* zu
-  verwandeln, vollständig eingelöst statt teilweise.
-
-**Ehrliche Kosten.** Der Slug kostet Token-Länge (9 → 34–42 Zeichen, gemessen
-an realen Slices) und hat eine gespiegelte Schwäche: Dieselbe Arbeit unter
-verschiedenen Namen kollidiert **nicht**. Und zwei Stellen tragen die Form
-maschinell — `token: 'slice-\d{3}'` im `matrix`-Modul beider Konfigurationen
-sowie die Beleg-Formprobe des Registers; beide müssten dauerhaft *zwei* Muster
-kennen.
-
-**Migration ist keine Kostenposition.** Vergebene Nummern kollidieren nicht —
-das Risiko liegt ausschließlich in der *nächsten* Vergabe, ein Wechsel wirkt
-also sofort, obwohl er nur nach vorn gilt. Der Korpus schreibt genau das vor:
-*„Mischung ist billiger als Migration … behält die alten Kennungen und vergibt
-nur neue … Wer später wechselt, notiert den Wechselpunkt."* Der Ort dafür ist
-die ID-Schema-Deklaration in `harness/conventions.md`. Bemerkenswert dabei:
-Dass Kennungen nie umbenannt werden, sieht wie Starrheit aus — es ist die
-Eigenschaft, die jeden Schema-Wechsel additiv und damit billig macht.
+**Der Entwurf dazu steht in [TA-3](#ta-3)** — er gilt der Vergabe insgesamt und
+damit auch [TB-009](#tb-009), [TB-011](#tb-011) und [TB-013](#tb-013).
 
 <a id="tb-011"></a>
 
@@ -608,7 +806,7 @@ Gemessen an `ai-harness-init` über 764 Commits:
 
 | Datei / Ort | Ganz-Wert — und bezeichnet er etwas? | Schreiber | Risiko |
 |---|---|---|---|
-| **keine Datei** — `slice-<NNN>` | „die höchste vergebene plus eins"; bezeichnet einen Sachverhalt, hat aber **keine Zeile**. Der Slice ist die **einzige Kennungs-Klasse ohne Index** — das Verzeichnis *ist* ihr Register, und ein Verzeichnis kollidiert nicht | **83 Vergaben, kein Serialisierer** | **hoch** — die größte stille Fläche des Korpus; ein Konflikt ist nicht selten, sondern **unmöglich**. Heute schützt nur die Vergabe-Regel; Optionen in der [Lösungs-Skizze](#tb-010) |
+| **keine Datei** — `slice-<NNN>` | „die höchste vergebene plus eins"; bezeichnet einen Sachverhalt, hat aber **keine Zeile**. Der Slice ist die **einzige Kennungs-Klasse ohne Index** — das Verzeichnis *ist* ihr Register, und ein Verzeichnis kollidiert nicht | **83 Vergaben, kein Serialisierer** | **hoch** — die größte stille Fläche des Korpus; ein Konflikt ist nicht selten, sondern **unmöglich**. Heute schützt nur die Vergabe-Regel; Optionen in [TA-3](#ta-3) |
 | **keine Datei** — `ADR-<NNNN>` · `MR-<NNN>` · `CO-<NNN>` | dieselbe Bauart, aber **jede hat einen Index**: die Eintragsdatei kollidiert still, die Index-Zeile laut | 19 · 24 · 2 | **mittel, halb laut** — zwei Ansprüche erzeugen zwei Dateien *und* zwei Index-Zeilen; letztere kollidieren, wenn sie benachbart landen. Genau diese Zwischenlage benennt [TB-009](#tb-009) |
 | **keine Datei** — `welle-<NN>` | dieselbe Bauart, ohne Index | 10, durch die Planner-Eröffnung in *einem* Kontext serialisiert | **niedrig** — Ganz-Wert mit praktisch keiner Nebenläufigkeit. Dass das Schema für sie trotzdem keine Antwort hat, ist [TB-013](#tb-013) |
 | `planning/in-progress/roadmap.md` | **zwei**: die Ordnung von *Nächste Wellen* (bezeichnet eine getroffene Entscheidung) · *Aktuelle Welle* — Singleton, **bezeichnet nichts** ([TB-014](#tb-014)) | 128 Änderungen — jede Welle, jede Umplanung | **hoch**; beim zweiten Wert unauflösbar. Entfällt mit der in [TB-014](#tb-014) benannten Auflösung, danach bleibt die Ordnung |
@@ -790,35 +988,8 @@ geschnitten, *nächste* sind es nicht. Vorher lagen „aktuell" und „nächste"
 zwei verschiedenen Achsen — Aufmerksamkeit gegen Existenz —, und das war Teil
 der Verwirrung.
 
-**Die Auflösung steht schon im Repo: zwei positionale Tatsachen genügen.**
-
-- **Welche Wellen offen sind** — die flachen Dateien unter `planning/`.
-- **An welchen davon gearbeitet wird** — das Kopf-Feld `**Welle:**` der Dateien
-  in `in-progress/`. Es existiert in jedem Slice-Plan
-  ([`slice.template.md`](../lab/templates/docs/plan/planning/slice.template.md))
-  und trägt entweder die Wellen-Kennung oder *„ohne Welle"*.
-
-Damit braucht die Roadmap das Feld nicht. Keine der beiden Tatsachen ist ein
-Ganz-Wert; beide liegen je Datei und können deshalb **nicht still falsch
-mergen**.
-
-**Warum „ableiten" vorher wie ein schlechter Weg aussah.** Der naheliegende
-Einwand lautet, die Ableitung versage bei *keiner* und bei *mehreren* laufenden
-Wellen. Unter diesem Befund sind das keine Fehlschläge, sondern die **richtigen
-Antworten** — der Einwand lebte von genau der Einzahl-Annahme, die hier fällt.
-
-**Was es kostet.** Das `**Welle:**`-Feld wird tragend, und
-[Modul 6](../kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)
-spielt es derzeit herunter: *„Das Kopf-Feld `**Welle:**` eines Slice-Plans sagt
-**etwas anderes** — ob *dieser* Slice in ein Bündel gehört —, und daraus folgt
-für die Vorgänge unten **nichts**."* Das zielt auf eine andere Frage — ob das *Repo* Wellen führt —, ist
-also kein Widerspruch; aber die neue Last müsste dort ausgesprochen werden.
-
-**Was es nicht behebt.** `in-progress/` ist zweigelokal ([TB-011](#tb-011)), die
-Ableitung erbt das. Sie verschlechtert nichts: Statt eines Feldes, in das zwei
-Personen Wahres schreiben und eines davon verlieren, sieht man den Stand von
-`main` — unvollständig, aber nie falsch. Die unauflösbare Konfliktklasse
-verschwindet.
+**Der Entwurf dazu steht in [TA-2](#ta-2)** — die Auflösung liegt bereits im
+Repo und braucht keinen neuen Mechanismus.
 
 **Nebenwirkungen.** `roadmap.md` verliert seinen Singleton und fällt in der
 Risiko-Tabelle unter [TB-011](#tb-011) von *hoch* auf die bloße Ordnung von
@@ -826,32 +997,33 @@ Risiko-Tabelle unter [TB-011](#tb-011) von *hoch* auf die bloße Ordnung von
 Die Welle wandert nach `done/`, das Closure-Log bekommt seine Zeile —
 **befördert wird niemand**.
 
-## Wo man anfinge
+## Reihenfolge und Abhängigkeiten
 
-**Zuerst die Beobachtbarkeit.** Ob eine Zusage wie *„der Zustand ist das
-Verzeichnis"* überhaupt gilt, entscheidet sich vor jeder Regel darüber, wer was
-wann sieht — [TB-011](#tb-011) sitzt deshalb unter den übrigen und wird von
-keiner Formulierung erledigt.
+**TA-1 zuerst** — es ist die billigste Änderung und Vorbedingung für drei
+Einträge. Solange es kein Wort für den Rolleninhaber gibt, lässt sich weder das
+WIP-Limit eindeutig lesen noch der Architect als Instanz adressieren noch eine
+Zuweisung sauber formulieren.
 
-**Dann das Vokabular.** [TB-004](#tb-004) ist die billigste Lücke und trägt die
-meisten anderen: Solange es kein Wort für *„die Person, die diese Rolle gerade
-füllt"* gibt, lässt sich weder das WIP-Limit eindeutig lesen noch der Architect
-als Instanz adressieren noch eine Zuweisung notieren.
+**Dann TA-2** — es hängt an TA-1 (das Feld benennt einen Rolleninhaber) und schließt
+mit [TB-014](#tb-014) zugleich den Abschnitt, der die Zuweisung heute
+ersatzweise trägt.
 
-**Dann** [TB-001](#tb-001) und [TB-014](#tb-014) — beide sind dieselbe
-Zuweisungs-Frage an zwei Artefakten. [TB-006](#tb-006) ist ein
-Absatz, sobald die Achse steht; [TB-007](#tb-007) ist eigenständig, teuer und
-hängt an keinem anderen.
+**TA-3 und TA-4 sind unabhängig** und können jederzeit laufen. TA-3 zerfällt in drei
+billige Text-Korrekturen und eine große optionale Schema-Frage; TA-4 ist eine
+Deklaration ohne Mechanik.
 
-Und die Bauform steht bereits im Korpus:
+**TA-5 zuletzt** — eigenständig, am teuersten, und als einzige nicht durch einen
+Team-Fall ausgelöst, sondern durch die zweite Person überhaupt.
+
+**Was für alle fünf gilt.** Die Bauform steht bereits im Korpus:
 [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
 hat die Mehr-Personen-Frage für Kennungen beantwortet, **ohne den
 Ein-Personen-Fall zu verschlechtern** — Default für einen Schreiber,
-deklarierte Variante für mehrere, Grenze offen benannt. Dieselbe Form passt auf
-die Eigentums- und die Wellen-Frage.
+deklarierte Variante für mehrere, Grenze offen benannt. Jede der fünf Änderungen
+lässt sich so schneiden.
 
-Was sie **nicht** ersetzt, ist die Beleglage oben. Solange kein Repo mit drei
-Schreibern die Baseline adoptiert hat, wäre der Ausbau der übrigen eine Regel
-gegen ein ungemessenes Problem. Alles der Klassen *Text* und *Sensor* wartet
-dagegen auf nichts, ebenso die Eigentums-Achse aus [TB-001](#tb-001) — die ist am Konsumenten belegt und dort bereits mit einer
-eigenen ADR beantwortet worden.
+**Und eine Änderung fehlt in dieser Liste**, weil sie keine am Korpus ist,
+sondern an seiner Selbstauskunft: Der IST — *ein Schreiber plus Agenten* — ist
+nirgends deklariert. Solange das SOLL nicht erreicht ist, gehört der
+Geltungsbereich ausgesprochen, damit ein Adopter mit drei Leuten weiß, woran er
+ist. Das kostet einen Absatz und ist von allen fünf unabhängig.
