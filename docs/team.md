@@ -24,25 +24,22 @@ sie wäre diese Datei Ablage
 ## Beleglage — was hier *nicht* gemessen ist
 
 **Alle Einträge sind team-*motiviert*: Sie folgen aus der Annahme, dass genau
-ein Mensch schreibt.** Wovon sie sich unterscheiden, ist nicht die Motivation,
-sondern die **Evidenz** — und die zerfällt in zwei Hälften.
+ein Mensch schreibt.** Was sie unterscheidet, ist die **Evidenz** — die
+Klasse-Spalte des Registers führt sie.
 
-**Sechs brauchen ein Team, um beobachtet zu werden** — [TB-001](#tb-001),
-[TB-004](#tb-004), [TB-006](#tb-006), [TB-007](#tb-007), [TB-011](#tb-011),
-[TB-014](#tb-014). Gemessen ist bei ihnen nur die Beleglage: `git shortlog -sne
-HEAD` über die vier bekannten Repos, die die Baseline tragen oder vendorn —
-`d-check`, `ai-harness-init`, `a-check` und dieses — liefert **je genau eine
-Autoren-Identität**. Nach der Zählregel
+**Klasse *Verhalten*** braucht ein Team, um beobachtet zu werden. Gemessen ist
+dort nur die Beleglage: `git shortlog -sne HEAD` über die vier bekannten Repos,
+die die Baseline tragen oder vendorn — `d-check`, `ai-harness-init`, `a-check`
+und dieses — liefert **je genau eine Autoren-Identität**. Nach der Zählregel
 ([§Steering Loop](../kurs/de/grundlagen/klassifikation.md#steering-loop) —
-1× Vorfall · 2× Symptom · 3× Lücke) stehen sie damit **bei 0×**, nicht einmal
-bei 1×: Vorhersagen, keine Beobachtungen. Wer das überliest, verkörpert eine
-Regel gegen ein Problem, das noch niemand gehabt hat.
+1× Vorfall · 2× Symptom · 3× Lücke) stehen diese Einträge **bei 0×**, nicht
+einmal bei 1×: Vorhersagen, keine Beobachtungen. Wer das überliest, verkörpert
+eine Regel gegen ein Problem, das noch niemand gehabt hat.
 
-**Vier sind heute prüfbar** — [TB-009](#tb-009), [TB-010](#tb-010),
-[TB-012](#tb-012), [TB-013](#tb-013). Sie hängen an keiner Team-Größe: Es sind
-Lücken im Text und am Bestand, nachlesbar und nachgemessen. Dass sie
-team-motiviert sind, ändert daran nichts — ein Abschnitt, der wegen
-Nebenläufigkeit geschrieben wurde, kann heute unvollständig sein.
+**Klasse *Text* und *Sensor*** sind heute prüfbar — Lücken im Korpustext und am
+Bestand, nachlesbar und nachgemessen. Dass sie team-motiviert sind, ändert daran
+nichts: Ein Abschnitt, der wegen Nebenläufigkeit geschrieben wurde, kann heute
+unvollständig sein.
 
 **Eine Zwischenlage:** Die *Eigentums-Achse* unter [TB-001](#tb-001) fehlt
 nachweislich — `ai-harness-init` hat sie gemessen und mit einer eigenen ADR
@@ -83,7 +80,7 @@ Mehr-Personen-Fall stand — dazu kommen die drei gestrichenen Einträge im
 
 | Ort | Warum es trägt |
 |---|---|
-| [§Vergabe: woher die nächste Nummer kommt](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt) | Die Frage ist dort **ausdrücklich gestellt und beantwortet** — laute Ablage (`LH-*`, `SPEC-*`, `ARC-*`: viele IDs in einer Datei → Git-Konflikt) gegen stille (ADR, Slice, Carveout: je eigene Datei → lautloser Doppelvergabe-Merge), Bereichssegment als Antwort, Grenze benannt (*„Zwei in derselben Sub-Area können kollidieren — und das ist Absicht"*), Wahl deklarationspflichtig (*„Welche Form gilt, deklariert das Repo"*). Die Prognose für einen Schreiber — *„braucht kein Segment"* — trifft am Bestand zu: In `ai-harness-init` zählen ADR (`0001`–`0018`), Welle (`01`–`10`), `MR` (`000`–`023`) und Carveout (`CO-001`) dicht und **ohne** Segment. Zwei Einzelheiten hält der Abschnitt trotzdem nicht, siehe [TB-009](#tb-009) und [TB-010](#tb-010) |
+| [§Vergabe: woher die nächste Nummer kommt](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt) | Die Frage ist dort **ausdrücklich gestellt und beantwortet** — laute Ablage (`LH-*`, `SPEC-*`, `ARC-*`: viele IDs in einer Datei → Git-Konflikt) gegen stille (ADR, Slice, Carveout: je eigene Datei → lautloser Doppelvergabe-Merge), Bereichssegment als Antwort, Grenze benannt (*„Zwei in derselben Sub-Area können kollidieren — und das ist Absicht"*), Wahl deklarationspflichtig (*„Welche Form gilt, deklariert das Repo"*). Die Prognose für einen Schreiber — *„braucht kein Segment"* — trifft am Bestand zu: In `ai-harness-init` zählen ADR (`0001`–`0018`), Welle (`01`–`10`), `MR` (`000`–`023`) und Carveout (`CO-001`) dicht und **ohne** Segment. Drei Einzelheiten hält der Abschnitt trotzdem nicht — [TB-009](#tb-009), [TB-010](#tb-010), [TB-013](#tb-013) |
 | Index + eine Datei je `MR` ([§harness/conventions.md als Konventionsspeicher](../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)) | Begründet ist der Schnitt mit Agenten-Kontextkosten. Er hat einen **nicht genannten Nebeneffekt**: Zwei Leute können parallel an `MR-005` und `MR-006` schreiben, ohne dieselbe Datei zu berühren, während ihre beiden Index-Zeilen in *einer* Tabelle landen und dort als Git-Konflikt sichtbar werden. Der Index ist damit ein teilweiser Wächter — vollständig ist er nicht, siehe [TB-009](#tb-009) |
 | Append-only für ADR und `MR` (Folge-ADR mit `supersedes`, Rückbau als neuer Eintrag) | Zwei Leute überschreiben nie denselben Text. Die Disziplin, die für Auditierbarkeit erfunden wurde, ist zugleich die konfliktärmste Schreibform, die es gibt |
 
@@ -124,36 +121,33 @@ daneben, nicht dagegen.
 
 ## Was ein Gate davon sähe — und was nicht
 
-Die Einträge unten zerfallen in **drei** Klassen, und nur bei einer ist „kein
-Sensor möglich" die richtige Aussage.
+Die drei Klassen des Registers beantworten zwei Fragen auf einmal — ob ein Team
+nötig ist, um den Befund zu *sehen*, und ob eine Maschine ihn sehen könnte. Das
+ist kein Zufall: Was ein Team hinzufügt, sind **Vorkommen**; was ein Sensor
+braucht, sind **Artefakte**. Was heute im Artefakt steht, ist ohne Team sichtbar.
 
-**(a) Verhaltens-Befunde in der inferentiellen Hälfte** — [TB-001](#tb-001),
-[TB-004](#tb-004), [TB-006](#tb-006), [TB-007](#tb-007), [TB-011](#tb-011),
-[TB-014](#tb-014). Der Korpus teilt fast jede Regel in eine Hälfte, in der ein
-Mensch urteilt, und eine, in der ein Sensor Deckung prüft. Diese sechs fallen
+**Verhalten** — der Korpus teilt fast jede Regel in eine Hälfte, in der ein
+Mensch urteilt, und eine, in der ein Sensor Deckung prüft. Diese Einträge fallen
 ganz in die erste. Ein Sensor sieht einen fehlenden Anker, eine nach `Accepted`
-veränderte ADR oder eine `BEO-<NNN>` ohne Registerzeile. Er sieht **nicht**,
-dass eine Regel von zwei Personen verschieden gelesen wird, dass ein Streit nie
+veränderte ADR oder eine `BEO-<NNN>` ohne Registerzeile. Er sieht **nicht**, dass
+eine Regel von zwei Personen verschieden gelesen wird, dass ein Streit nie
 entschieden wurde oder dass niemand weiß, wem ein Slice gehört.
 
-**(b) Redaktionelle Lücken im Korpustext** — [TB-009](#tb-009),
-[TB-012](#tb-012), [TB-013](#tb-013). Auch sie fängt kein Gate, aber aus einem
-anderen Grund: Sie sind kein Urteil, sondern ein **fehlender Satz**. „Diese
-Aufzählung ist unvollständig" ist keine Prüfung, die man konfiguriert, sondern
-eine, die man liest.
+**Text** — auch hier fängt kein Gate etwas, aber aus anderem Grund: Es fehlt
+kein Urteil, sondern ein **Satz**. *„Diese Aufzählung ist unvollständig"*
+konfiguriert man nicht, das liest man.
 
-**(c) Was ein Gate sehr wohl könnte** — die Doppelvergabe aus
-[TB-010](#tb-010). Der Korpus räumt es selbst ein: *„kein Modul des Doku-Gates
-prüft Eindeutigkeit heute … ein Review-Griff."* Hier fehlt kein Sensor-*Prinzip*,
-sondern ein Sensor.
+**Sensor** — hier fehlt kein Sensor-*Prinzip*, sondern ein Sensor. Der Korpus
+räumt es für die Doppelvergabe selbst ein: *„kein Modul des Doku-Gates prüft
+Eindeutigkeit heute … ein Review-Griff."*
 
-**Was daraus folgt.** Für die sechs aus (a) — die Mehrheit — gilt weiterhin:
-**Ein Repo mit drei Schreibern wäre nach jeder Messung, die der Harness
-anbietet, kerngesund**, während genau diese Stellen nachgeben. Das ist keine
-Schwäche der Gates, sondern die Grenze, die der Korpus selbst zieht; sie gehört
-nur mitgedacht, wenn man aus „alles grün" auf „trägt auch zu dritt" schließt.
-Für (c) gilt das Gegenteil, und der Unterschied ist keine Feinheit: Er
-entscheidet, ob ein Befund auf eine Regeländerung wartet oder auf ein Target.
+**Was daraus folgt.** Für die Klasse *Verhalten* — die Mehrheit — gilt: **Ein
+Repo mit drei Schreibern wäre nach jeder Messung, die der Harness anbietet,
+kerngesund**, während genau diese Stellen nachgeben. Das ist keine Schwäche der
+Gates, sondern die Grenze, die der Korpus selbst zieht; sie gehört nur
+mitgedacht, wenn man aus „alles grün" auf „trägt auch zu dritt" schließt. Die
+Unterscheidung ist keine Feinheit: Sie entscheidet, ob ein Befund auf eine
+Regeländerung wartet oder auf ein Target.
 
 ## Register
 
@@ -178,22 +172,22 @@ Abschnitte — genau die Wanderung, gegen die die Kennungen eingeführt wurden.
 Die Rangfolge steht in [§Wo man anfinge](#wo-man-anfinge), wo sie sich ändern
 darf, ohne etwas zu bewegen.
 
-| Kennung | Eintrag | Stand |
-|---|---|---|
-| [TB-001](#tb-001) | Der Lifecycle ist ein Zustand ohne Subjekt | offen · Achse am Konsumenten belegt |
-| TB-002 | *Der Zähler zählt Beobachtungen, nicht Beobachter* | **gestrichen** — der Zähler steht in einer stehenden Datei und wird bei jeder Slice-Closure fortgeschrieben, gleich von wem; das Register-Beispiel des Kurses ist selbst der Drei-Slices-Fall. Der Sichtungs-Schritt (§8) ist Pflicht in *jedem* Slice-Plan, und die Sub-Area-Spalte trägt bewusst die normative Sub-Area. Person-unabhängig gebaut |
-| TB-003 | *Die Welle ist ein Join-Barrier* | **abgelöst** durch [TB-014](#tb-014) — die Barriere setzt voraus, dass die Einzahl von *Aktuelle Welle* bindet; sie bindet nicht |
-| [TB-004](#tb-004) | Eine Rolle, mehrere Personen | offen |
-| TB-005 | *Der Planner ist Single Writer* | **gestrichen** — kein eigener Befund: „Durchsatz-Engpass" ist Volumen, nicht Lücke; der Rest ist [TB-004](#tb-004) |
-| [TB-006](#tb-006) | Der Konflikt-Pfad hat kein Terminal | offen |
-| [TB-007](#tb-007) | Einarbeitung wurde nie als Kosten geführt | offen · Auslöser ist die *zweite* Person |
-| TB-008 | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
-| [TB-009](#tb-009) | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
-| [TB-010](#tb-010) | „Lokal ableitbar" gilt nicht bei Vorvergabe | offen · **kein Team nötig**, am Bestand gemessen; trägt die **Lösungs-Skizze zur Vergabe** (gilt auch für [TB-009](#tb-009)/[TB-011](#tb-011)) |
-| [TB-011](#tb-011) | Auswertbar erst nach dem Merge | offen · Vorbedingung mehrerer anderer |
-| [TB-012](#tb-012) | Die Planning-README trägt zwei Begriffe ohne Quelle | offen · **kein Team nötig**, Template-Drift |
-| [TB-013](#tb-013) | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
-| [TB-014](#tb-014) | „Aktuelle Welle" ist keine Eigenschaft des Repos | offen · löst [TB-003](#tb-003) ab; leerer Fall bei *einem* Schreiber belegt. **Auflösung benannt:** flache Dateien + `**Welle:**` in `in-progress/` — das Feld entfällt |
+| Kennung | Klasse | Eintrag | Stand |
+|---|---|---|---|
+| [TB-001](#tb-001) | Verhalten | Der Lifecycle ist ein Zustand ohne Subjekt | offen · Achse am Konsumenten belegt |
+| TB-002 | — | *Der Zähler zählt Beobachtungen, nicht Beobachter* | **gestrichen** — der Zähler steht in einer stehenden Datei und wird bei jeder Slice-Closure fortgeschrieben, gleich von wem; das Register-Beispiel des Kurses ist selbst der Drei-Slices-Fall. Der Sichtungs-Schritt (§8) ist Pflicht in *jedem* Slice-Plan, und die Sub-Area-Spalte trägt bewusst die normative Sub-Area. Person-unabhängig gebaut |
+| TB-003 | — | *Die Welle ist ein Join-Barrier* | **abgelöst** durch [TB-014](#tb-014) — die Barriere setzt voraus, dass die Einzahl von *Aktuelle Welle* bindet; sie bindet nicht |
+| [TB-004](#tb-004) | Verhalten | Eine Rolle, mehrere Personen | offen |
+| TB-005 | — | *Der Planner ist Single Writer* | **gestrichen** — kein eigener Befund: „Durchsatz-Engpass" ist Volumen, nicht Lücke; der Rest ist [TB-004](#tb-004) |
+| [TB-006](#tb-006) | Verhalten | Der Konflikt-Pfad hat kein Terminal | offen |
+| [TB-007](#tb-007) | Verhalten | Einarbeitung wurde nie als Kosten geführt | offen · Auslöser ist die *zweite* Person |
+| TB-008 | — | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
+| [TB-009](#tb-009) | Text | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
+| [TB-010](#tb-010) | **Sensor** | „Lokal ableitbar" gilt nicht bei Vorvergabe | offen · **kein Team nötig**, am Bestand gemessen; trägt die **Lösungs-Skizze zur Vergabe** (gilt auch für [TB-009](#tb-009)/[TB-011](#tb-011)) |
+| [TB-011](#tb-011) | Verhalten | Auswertbar erst nach dem Merge | offen · Vorbedingung mehrerer anderer |
+| [TB-012](#tb-012) | Text | Die Planning-README trägt zwei Begriffe ohne Quelle | offen · **kein Team nötig**, Template-Drift |
+| [TB-013](#tb-013) | Text | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
+| [TB-014](#tb-014) | Verhalten | „Aktuelle Welle" ist keine Eigenschaft des Repos | offen · löst [TB-003](#tb-003) ab; leerer Fall bei *einem* Schreiber belegt. **Auflösung benannt:** flache Dateien + `**Welle:**` in `in-progress/` — das Feld entfällt |
 
 <a id="tb-001"></a>
 
@@ -447,8 +441,8 @@ Beschreibung, wo man nachsieht.
 
 ### Lösungs-Skizze — Skizze, keine Entscheidung
 
-Sie gilt der Vergabe insgesamt, betrifft also auch [TB-009](#tb-009) und
-[TB-011](#tb-011). Aufgenommen, damit die Abwägung nicht zweimal geführt wird.
+Sie gilt der Vergabe insgesamt, betrifft also auch [TB-009](#tb-009),
+[TB-011](#tb-011) und [TB-013](#tb-013). Aufgenommen, damit die Abwägung nicht zweimal geführt wird.
 
 **Die Randbedingung streicht die Standardantwort.** Der übliche Weg gegen
 Vergabe-Kollisionen ist ein zentraler Allokator (Sequenz, Ticket-System, Bot
@@ -847,7 +841,6 @@ die Eigentums- und die Wellen-Frage.
 
 Was sie **nicht** ersetzt, ist die Beleglage oben. Solange kein Repo mit drei
 Schreibern die Baseline adoptiert hat, wäre der Ausbau der übrigen eine Regel
-gegen ein ungemessenes Problem. Drei Einträge warten dagegen auf nichts:
-[TB-009](#tb-009), [TB-010](#tb-010) und die Eigentums-Achse aus
-[TB-001](#tb-001) — die ist am Konsumenten belegt und dort bereits mit einer
+gegen ein ungemessenes Problem. Alles der Klassen *Text* und *Sensor* wartet
+dagegen auf nichts, ebenso die Eigentums-Achse aus [TB-001](#tb-001) — die ist am Konsumenten belegt und dort bereits mit einer
 eigenen ADR beantwortet worden.
