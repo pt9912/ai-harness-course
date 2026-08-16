@@ -3,8 +3,11 @@
 > **Template-Hinweis.** Vorlage für den allgemeinen Code-/Plan-/Design-Reviewer
 > (Modul 10, Worked Example „eine Reviewer-Skill-Datei schreiben"). Kopiere nach
 > `.harness/skills/reviewer.md`, ersetze `<Platzhalter>` und lösche diesen Block.
-> Ein Reviewer ohne Skill-Datei driftet zwischen Sessions (gleiche Eingabe →
-> andere Findings/Kategorien); diese Datei ist das repo-spezifische „worauf
+> Ein Reviewer ohne Skill-Datei driftet zwischen Sessions — und zwischen
+> Rolleninhabern: Füllen mehrere Menschen die Rolle, ist dieselbe Abweichung
+> kein Nicht-Determinismus, sondern ein Dissens; auch dann wird der Skill
+> geschärft, nicht die mildere Lesart gewählt (gleiche Eingabe →
+> andere Findings/Kategorien). Diese Datei ist das repo-spezifische „worauf
 > achtest du". Für die *engere* Closure-Note-Prüfung gibt es den
 > Schwester-Skill `closure-note-reviewer.md` (Modul 11). Report-Gerüst pro Lauf:
 > `docs/reviews/review-report.template.md`.

@@ -11,6 +11,8 @@ nur durch `git mv` (Kurs
 
 **Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
 
+**Verantwortlich:** Kurs-Lab.
+
 **Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 
 ## 1. Ziel
