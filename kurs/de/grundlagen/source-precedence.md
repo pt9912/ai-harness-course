@@ -296,6 +296,13 @@ Bedingung, die aus dem [Traceability-Constraint](traceability.md#traceability-co
 folgt: Die Kennung steht in Commits, **sobald die Arbeit läuft** — wer sie erst
 beim Landen bekommt, hat sie im entscheidenden Moment nicht.
 
+**Abzugrenzen vom Beanspruchen.** Ohne Schreibzugriff auf den Hauptzweig kommt
+nur die *Nummer* aus. Das *Beanspruchen* einer Arbeit landet dort sehr wohl —
+der Lifecycle-Übergang `next → in-progress` ist ein Commit auf dem Hauptzweig,
+vor der Arbeit ([Modul 5 §Lifecycle als State Machine](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
+Die beiden Aussagen widersprechen sich nicht: Die eine gilt dem **Ableiten
+einer Kennung**, die andere dem **Sichtbarmachen eines Anspruchs**.
+
 **Was das leistet, und was nicht.** Zwei Entwickler in *verschiedenen*
 Sub-Areas können nicht kollidieren. Zwei in *derselben* schon — und das ist
 Absicht: Sie entscheiden gleichzeitig über denselben Bereich und sollten

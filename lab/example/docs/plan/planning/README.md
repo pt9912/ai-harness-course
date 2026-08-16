@@ -11,8 +11,8 @@ Hard Rule "git mv + Inhaltsänderung = zwei Commits" in
 | Verzeichnis | Bedeutung |
 |---|---|
 | `open/` | Geplant, noch nicht priorisiert. Keine Garantie auf Umsetzung. |
-| `next/` | Als Nächstes priorisiert. Verantwortlicher zugeordnet. |
-| `in-progress/` | Branch / PR existiert. |
+| `next/` | Als Nächstes priorisiert. Verantwortlicher zugeordnet (`Verantwortlich:`-Feld im Slice-Kopf). |
+| `in-progress/` | Beansprucht: Der `git mv` hierher liegt auf dem **Hauptzweig, vor der Arbeit** — Branch/PR entsteht danach. |
 | `done/` | DoD erfüllt, gemerged, Closure-Notiz vorhanden. |
 
 ## Aktueller Stand

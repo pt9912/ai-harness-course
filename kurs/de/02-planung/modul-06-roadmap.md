@@ -252,7 +252,9 @@ Trigger repo-weite Belege fordert, die der Slice allein nicht liefert.
 **Wellenlose Arbeit erscheint nicht in der Roadmap** — weder beim Start
 noch beim Abschluss. Ihr Zustand ist die Verzeichnis-Position
 ([Modul 5](modul-05-planning-harness.md)); `ls docs/plan/planning/in-progress/`
-beantwortet "was läuft gerade" autoritativ und ohne Pflegeaufwand. Ein
+beantwortet "was läuft gerade" autoritativ und ohne Pflegeaufwand — gelesen auf
+dem **Hauptzweig**: Der Übergang hierher landet dort, vor der Arbeit
+([Modul 5 §Lifecycle als State Machine](modul-05-planning-harness.md#lifecycle-als-state-machine)). Ein
 Eintrag daneben wäre eine zweite Quelle für denselben Zustand, und die
 altert: Sie wird nachgezogen, solange jemand daran denkt, und meldet
 danach einen Slice als laufend, der längst in `done/` liegt. Die Belege

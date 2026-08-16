@@ -33,6 +33,24 @@ stehen in einem eigenen Commit
 bei der Closure nach `done/` in dem *davor*: DoD-Häkchen und Closure-Notiz
 sind die Bedingung dafür, dass die Datei überhaupt nach `done/` darf.
 
+**`open → next` setzt den Verantwortlichen.** Der Slice-Kopf trägt das Feld
+`Verantwortlich:` — den Rolleninhaber der Implementer-Rolle, der die Arbeit
+hält; bis zur Priorisierung steht dort `—`. Der **Autor** bleibt davon
+getrennt: Er schrieb den Plan. Kein Statuswert: Der Zustand bleibt das
+Verzeichnis, das Feld sagt *wer*, nicht *wo*. Ein Sensor prüft das Feld
+nicht; es ist Deklaration.
+
+**`next → in-progress` landet auf dem Hauptzweig, vor der Arbeit.** Reist der
+`git mv` erst im PR mit, ist der Zustand **zweigelokal**: `in-progress/` ist
+für alle anderen leer, bis die Arbeit fertig ist. Der Übergangs-Commit auf dem
+Hauptzweig macht den Anspruch sichtbar, **bevor** jemand anderes dieselbe
+Arbeit beginnt; der Branch entsteht danach.
+
+**Aussagen über die Verzeichnis-Position gelten für den gemergten Stand.**
+Auf einem Zweig sieht man den eigenen — vollständiger als den Hauptzweig, aber
+nur für sich. Wer eine `ls`-Antwort als team-weit liest, liest den Hauptzweig;
+was in einem offenen PR liegt, ist für alle anderen noch nicht da.
+
 **Drei Übergänge tragen eine Pflicht**, die über „Arbeit erledigt" hinausgeht.
 `in_progress → done` ist der einzige Weg nach `done` und verlangt
 *Lerneintrag* **und einen Ausgang für jedes offene Risiko**, nicht nur
@@ -55,8 +73,9 @@ der Herkunfts-Anker `seit slice-<NNN>` auf genau dieses §7 in `done/` zurück.
 
 Alle fünf Übergänge mit Triggerbedingung:
 
-- `open→next` — priorisiert/eingeplant.
-- `next→in-progress` — Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei.
+- `open→next` — priorisiert/eingeplant, `Verantwortlich:` gesetzt.
+- `next→in-progress` — Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit
+  frei; der `git mv` landet auf dem Hauptzweig, vor der Arbeit.
 - `in-progress→done` — Closure-Kriterien erfüllt, Lerneintrag geschrieben,
   jedes Risiko aus dem Slice-Plan mit Ausgang.
 - `in-progress→next` — Slice zu groß, zurück zum Schneiden.
@@ -134,7 +153,8 @@ Größen- und Schnitt-Regeln:
   ([`grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren));
   damit sie auffindbar ist statt im Fließtext zu verschwinden, trägt der Kopf
   ein Feld dafür — Kennung, wo das Zielelement eine trägt, sonst der
-  `§`-Anker, und `—`, wenn der Slice keine Spec-Stelle berührt.
+  `§`-Anker, und `—`, wenn der Slice keine Spec-Stelle berührt. Daneben trägt
+  der Kopf `Verantwortlich:` (§Lifecycle als State Machine) und `Autor:`.
 
 ### Ziel-Form: Sub-Area-Modus-Begründung
 
@@ -184,7 +204,9 @@ auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht:
    Zähler-Stand ins Kriterium *Evidenz-/Diskrepanz-Risiko* — und erreicht der
    Eintrag mit diesem Slice 3×, ist er keine Notiz mehr, sondern eine Lücke und
    braucht einen eigenen Folge-Slice. **Keine Treffer sind ebenfalls eine
-   Antwort** und werden notiert.
+   Antwort** und werden notiert. Gelesen wird der **gemergte** Stand: Das
+   Register ist beim Lesen so alt wie der letzte Merge — Erhöhungen reisen im
+   PR mit.
 
 In einem Repo **ohne Wellen-Betrieb** ist der zweite Schritt der *einzige*
 Leser für alles, was unter der Schwelle steht — dort gibt es keine

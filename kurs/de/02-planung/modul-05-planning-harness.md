@@ -61,6 +61,25 @@ stehen in einem eigenen Commit
 bei der Closure nach `done/` in dem *davor*: DoD-Häkchen und Closure-Notiz
 sind die Bedingung dafür, dass die Datei überhaupt nach `done/` darf.
 
+**`open → next` setzt den Verantwortlichen.** Der Slice-Kopf trägt das Feld
+`Verantwortlich:` — den Rolleninhaber der Implementer-Rolle, der die Arbeit
+hält; bis zur Priorisierung steht dort `—`. Der **Autor** bleibt davon
+getrennt: Er schrieb den Plan. Zwei Felder, zwei Fragen — und kein
+Statuswert: Der Zustand bleibt das Verzeichnis, das Feld sagt *wer*, nicht
+*wo*. Ein Sensor prüft das Feld nicht; es ist Deklaration.
+
+**`next → in-progress` landet auf dem Hauptzweig, vor der Arbeit.** Reist der
+`git mv` erst im PR mit, ist der Zustand **zweigelokal**: `in-progress/` ist
+für alle anderen leer, bis die Arbeit fertig ist — das Verzeichnis, das
+laufende Arbeit benennt, wäre genau für laufende Arbeit unzuverlässig. Der
+Übergangs-Commit auf dem Hauptzweig macht den Anspruch sichtbar, **bevor**
+jemand anderes dieselbe Arbeit beginnt; der Branch entsteht danach.
+
+**Aussagen über die Verzeichnis-Position gelten für den gemergten Stand.**
+Auf einem Zweig sieht man den eigenen — vollständiger als den Hauptzweig, aber
+nur für sich. Wer eine `ls`-Antwort als team-weit liest, liest den Hauptzweig;
+was in einem offenen PR liegt, ist für alle anderen noch nicht da.
+
 **Drei Übergänge tragen eine Pflicht**, die über „Arbeit erledigt" hinausgeht.
 `in_progress → done` ist der einzige Weg nach `done` und verlangt
 *Lerneintrag* **und einen Ausgang für jedes offene Risiko**
@@ -211,7 +230,8 @@ normative Kante nach Technik und Sicht zu
 ([§Referenz-Richtung (SDP)](../grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren));
 damit sie auffindbar ist, statt im Fließtext zu verschwinden, trägt der Kopf
 ein Feld dafür — die Kennung, wo das Zielelement eine trägt, sonst der
-`§`-Anker, und `—`, wenn der Slice keine Spec-Stelle berührt. Das ist die
+`§`-Anker, und `—`, wenn der Slice keine Spec-Stelle berührt. Daneben trägt
+der Kopf `Verantwortlich:` (§Lifecycle als State Machine) und `Autor:`. Das ist die
 Gegenprobe zum Schnitt: Ein Slice, der drei Spec-Stellen aus zwei Straten
 nennt, ist meist zu groß geschnitten.
 
@@ -284,7 +304,9 @@ auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht:
    Eintrag mit diesem Slice 3×, ist er keine Notiz mehr, sondern eine Lücke und
    braucht einen eigenen Folge-Slice. **Keine Treffer sind ebenfalls eine
    Antwort** und werden notiert; sonst ist ein ungeprüfter Slice nicht von
-   einem geprüften ohne Fund zu unterscheiden.
+   einem geprüften ohne Fund zu unterscheiden. Gelesen wird der **gemergte**
+   Stand: Das Register ist beim Lesen so alt wie der letzte Merge —
+   Erhöhungen reisen im PR mit.
 
 Der zweite Schritt ist nicht nur Zuarbeit fürs dritte Kriterium. In einem Repo
 **ohne Wellen-Betrieb** ist er der *einzige* Leser für alles, was unter der
@@ -413,7 +435,7 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Vier Lifecycle-Verzeichnisse in Reihenfolge? | zwei oder drei genannt | `open/` → `next/` → `in-progress/` → `done/`. Plus Rückführungen: `in-progress/ → next/` (zu groß), `in-progress/ → open/` (Blocker). | + Hinweis: WIP-Limit pro **Rolleninhaber** ([Modul 8](../03-agenten/modul-08-agentenrollen.md#typische-fehlvorstellungen)) auf 1 — wer mehrere Slices gleichzeitig in `in-progress/` hat, hat keine Lifecycle, sondern ein Buffet. |
-| Trigger je Lifecycle-Übergang benannt? | nur ein oder zwei Übergänge, Rest "wenn jemand anfängt". | Alle fünf benannt: `open→next` (priorisiert/eingeplant) · `next→in-progress` (Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei) · `in-progress→done` (Closure-Kriterien erfüllt, Lerneintrag geschrieben, jedes Risiko mit Ausgang) · `in-progress→next` (Slice zu groß, zurück zum Schneiden) · `in-progress→open` (Blocker, Priorität offen). | + Pointe: am leichtesten übersehen werden die *Rückführungen* — `in-progress→next` und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört sichtbar zurück, nicht still weitergeschoben. WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro Mensch in der Implementer-Rolle, nicht pro Rolle. |
+| Trigger je Lifecycle-Übergang benannt? | nur ein oder zwei Übergänge, Rest "wenn jemand anfängt". | Alle fünf benannt: `open→next` (priorisiert/eingeplant, `Verantwortlich:` gesetzt) · `next→in-progress` (Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei; der `git mv` landet auf dem Hauptzweig, vor der Arbeit) · `in-progress→done` (Closure-Kriterien erfüllt, Lerneintrag geschrieben, jedes Risiko mit Ausgang) · `in-progress→next` (Slice zu groß, zurück zum Schneiden) · `in-progress→open` (Blocker, Priorität offen). | + Pointe: am leichtesten übersehen werden die *Rückführungen* — `in-progress→next` und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört sichtbar zurück, nicht still weitergeschoben. WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro Mensch in der Implementer-Rolle, nicht pro Rolle. |
 | Slice in `done/` bei rotem Gate — wann? | "Gar nicht." | Nur mit dokumentiertem Carveout (Modul 7), der den roten Gate-Status auf Trigger schaltet. | + Unterscheidung Carveout (Ausnahme, mit Folge-Slice) vs. bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). Die volle Werkzeug-Triade inkl. *BF-Sub-Area-Markierung* (Sub-Area-Kontext, kein Closure-Werkzeug) wird in [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren) disambiguiert. |
 | Closure-Kriterien + Lerneintrag formuliert? | "Tests grün, fertig." — kein beobachtbares Kriterium, kein Lerneintrag. | Zwei beobachtbare Closure-Kriterien (z. B. Replay grün, DoD-Punkte als Test verlinkt) *und* ein Lerneintrag in einer der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke). | + Pointe: der Lerneintrag schließt den Steering Loop — ohne ihn bleibt das Versagensmuster unsichtbar und wiederholt sich. Exzellent benennt, *welche* künftige Wiederholung der Eintrag verhindert (Vorhersage), nicht nur, was passiert ist. |
 | `slice-031` (5-Punkte-DoD) bewerten und schneiden? | "Zu groß, irgendwie aufteilen." — kein Kriterien-Bezug, kein benannter Schnitt-Typ. | Gegen beide Größen-Kriterien begründet zu groß (>3 DoD-Punkte, nicht in einem Lauf abschließbar/einer Sitzung prüfbar) + konkreter Schnitt in einzeln lieferbare Slices mit benanntem Schnitt-Typ (Lieferwert: z. B. „Warenkorb→Zahlung→Bestätigung“ je eigenständig). | + Begründung, *warum* Lieferwert statt Schichten: jeder Schnitt-Slice liefert allein Wert und wartet nicht auf den nächsten; Gegenbeispiel, wann ein Schichtschnitt Zombie-Slices erzeugt (Lager-Abbuchung ohne Checkout liefert nichts Prüfbares). |

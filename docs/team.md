@@ -649,7 +649,7 @@ der Barriere fällt auch der Zweitrundeneffekt, den der Eintrag daran hängte
 
 ## TB-004 — Eine Rolle, mehrere Personen
 
-**Was dasteht.** Der Korpus modelliert durchgängig *n Rollen ← 1 Person*
+**Was dastand** (behoben in Welle 76 — die Zitate unten sind der Zustand davor). Der Korpus modelliert durchgängig *n Rollen ← 1 Person*
 ([Modul 8 §Typische Fehlvorstellungen](../kurs/de/03-agenten/modul-08-agentenrollen.md#typische-fehlvorstellungen),
 Modul 15 §Lab-Grenze). Die Umkehrung fehlt, gemessen — siehe
 [§Rolle, Person, Zuweisung](#rolle-person-zuweisung--drei-achsen-zwei-ohne-wort).
@@ -687,7 +687,7 @@ richtig; die Lücke liegt daneben, nicht dagegen.
 
 ## TB-006 — Der Konflikt-Pfad hat kein Terminal
 
-**Was dasteht.** Modul 8 modelliert den Rollen-Konflikt als Sequenz mit
+**Was dastand** (behoben in Welle 76 — die Zitate unten sind der Zustand davor). Modul 8 modelliert den Rollen-Konflikt als Sequenz mit
 Übergabe-Artefakten (Reviewer-HIGH gegen Implementer → Architect → drei
 legitime Verdikte), verbietet die Entscheidung nach Seniorität und nennt den
 falschen vierten Ausgang, von dem es heißt, *„er existiert nur, weil
@@ -905,8 +905,8 @@ der nie stattfinden kann.
 Nach Verkehr geordnet ist die **Slice-Nummer** die größte stille Fläche des
 Korpus — in `ai-harness-init` 83 Vergaben gegen 24 `MR`, 19 ADRs, 10 Wellen und
 2 Carveouts, und ohne jeden Serialisierer. Die **Welle-Nummer** teilt die
-Bauart, nicht das Risiko: Bei ihrer Eröffnung *„laufen alle drei Schritte …
-in **einem** Kontext"*
+Bauart, nicht das Risiko: Bei ihrer Eröffnung gilt *„Alle drei Schritte (…)
+laufen in **einem** Kontext"*
 ([Modul 8](../kurs/de/03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle)),
 und wer eine Welle schneidet, schreibt die Roadmap, deren *Aktuelle Welle* der
 laute Kollisionspunkt ist. Ganz-Wert ja, Nebenläufigkeit praktisch null — die
