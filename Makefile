@@ -18,11 +18,11 @@ check: docs-check alignment-check ## beide Validatoren nacheinander
 
 # Referenz-Checks (Links, Anker, Bilder, Inline-Code-Pfade) via d-check:
 # das Gate-Fragment `d-check.mk` ist tool-generiert (`d-check --print-mk`,
-# v0.56.0) und wird included — kein handgepflegtes Recipe. Re-Pin über
+# v0.59.0) und wird included — kein handgepflegtes Recipe. Re-Pin über
 # DCHECK_DIGEST (sticht den Tag von DCHECK_IMAGE); Konfiguration in .d-check.yml.
 # Bei d-check-Release neu erzeugen: `d-check --print-mk > d-check.mk`, DCHECK_DIGEST
 # neu setzen. Der Node-Validator bleibt Rest-Sensor für die Modul-Nummern-Checks.
-DCHECK_DIGEST ?= sha256:f505578490bb53b9171b383dfaec0811f5154133df76d5d730796e8a07f2dda3
+DCHECK_DIGEST ?= sha256:b1cc65df3dc1ea194918c7cc9fcd04a0779c7be8dc6ee5e6abad70676fabb493
 include d-check.mk
 
 # docs-check brückt das tool-generierte `doc-check` (reiner d-check) und hängt
