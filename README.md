@@ -81,6 +81,10 @@ Das Regelwerk ist der didaktikfreie Extrakt des Kurses: Konventionen, Regeln und
 Für jedes Modul sowie jeden Grundlagenabschnitt existiert eine Regelwerksdatei.
 Das Regelwerk ist derivativ — bei Konflikt gilt das Kursmaterial.
 
+Wie der operative Teil vom didaktischen getrennt wird und woran sich der
+Extrakt prüfen lässt, steht in
+[`docs/regelwerk-extrakt.md`](docs/regelwerk-extrakt.md).
+
 Die Überarbeitungs-Wellen des Kurses registriert das [`CHANGELOG.md`](CHANGELOG.md); was **offen** ist und woran man erkennt, dass es dran ist, steht in [`docs/roadmap.md`](docs/roadmap.md).
 
 ---
