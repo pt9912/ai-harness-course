@@ -72,14 +72,11 @@ mehr erkennbar, welche Zusage an einem Fall hängt.
 Spec-Disziplin wie Akzeptanzkriterien, [Modul 3](modul-03-spec.md)).
 Ein Replay mit einem Fall ist eine Demo.
 
-**Jeder Fall fängt eine andere Fehlerklasse.** Zu jedem Fall gehört ein
-Auswahlkriterium in einem Satz: *Welche Fehlerklasse fängt genau dieser
-Fall, die die anderen nicht fangen?* Drei Varianten desselben Happy Path
-sind ein Demo-Set, kein Golden Set — sie fangen alle dieselbe Klasse.
-Der Boundary-Fall ist dabei meist der wichtigste, weil er oft der
-einzige ist, der die Entscheidungsregeln aus `determinism:` überhaupt
-auslöst. Fehlt er, ist der Replay grün und die Realität rot. Der Ort für
-das Kriterium ist der `CHANGELOG.md`-Eintrag, der den Fall anlegt.
+Zu jedem Fall gehört **ein Auswahlkriterium in einem Satz** — welche
+Fehlerklasse fängt genau dieser Fall, die die anderen zwei nicht fangen?
+Hättest du nur die Fälle im Set, die eine Fehlerklasse nicht sehen, wäre der
+Replay grün und die Realität rot. Genau das ist der Unterschied zwischen einem
+Demo-Set und einem Golden Set.
 
 #### Ziel-Form: manifest.yaml
 

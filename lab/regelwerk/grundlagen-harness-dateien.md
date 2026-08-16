@@ -269,10 +269,12 @@ keine Steuerung, und gehört nicht angelegt.
   im Vorgang selbst und danach im Audit; über Läufe hinweg werden sie nicht
   wieder gelesen und müssen es nicht.
 
-**Einordnung und Grenze:** *inferential feedforward*, greift zur
-**Entwurfszeit** — beim Erweitern des Harness, nicht in seinem Betrieb.
-**Kein Prüfpunkt der Closure-Prozedur**: dort spräche die Regel in den meisten
-Wellen auf nichts an, würde übersprungen und wäre danach eine Harness-Lüge.
+**Einordnung — und ihre Grenze.** Die Regel ist *inferential feedforward* und
+greift zur **Entwurfszeit**: wenn jemand den Harness *erweitert*, nicht wenn er
+ihn *betreibt*. Sie ist ausdrücklich **kein Prüfpunkt der Closure-Prozedur** —
+dort spräche sie in den meisten Wellen auf nichts an, würde nach der dritten
+Welle übersprungen und wäre danach eine
+[Harness-Lüge](grundlagen-begriffe.md#kernbegriffe).
 Der häufige Fall ist gedeckt — eine Beobachtung, die die Schwelle erreicht und
 zur Regel wird, hat ihren Leser automatisch (die verkörperte Form wird in jedem
 Lauf gelesen), und die Anker-Paarung prüft deterministisch, dass sie landete.

@@ -178,7 +178,7 @@ Negative"* (`modul-12`) zieht **zwei Quellstellen** zusammen, beide wörtlich �
 verschiedenen Orten der Quelle. Kein Wort ist geändert, aber die Verbindung ist
 die des Spiegels. Siehe unten, Lücke 6.
 
-**Befunde — 6, noch nicht behoben.**
+**Befunde — 6, am 2026-08-16 behoben.**
 
 | Datei | Spiegel | Quelle |
 |---|---|---|
@@ -192,10 +192,23 @@ die des Spiegels. Siehe unten, Lücke 6.
 Zwei stechen heraus. **`harness-dateien`** streicht einen **Qualifikator**: aus
 *„wird nach der dritten Welle übersprungen"* wird *„wird übersprungen"* — genau
 die Klasse, die [Teil 3](#teil-3--die-probe) als Blindstelle der Teilfolgen-Probe
-benennt. Und **`modul-06`** wandelt eine *didaktische Übungstabelle* in
-operative Prosa: Dabei wird `slice-019` zu „Slices" generalisiert und
-*„Trigger-Disziplin wirkt"* aus der zweiten Zeile als *„blieb Theorie"* nach (a)
-verschoben und negiert.
+benennt. Und **`modul-12`** ist kein Paraphrase-Fall, sondern ein **verfasster**:
+Vier Aussagen des Absatzes haben in der Quelle **keine Entsprechung** — *„Jeder
+Fall fängt eine andere Fehlerklasse"*, *„Drei Varianten desselben Happy Path
+sind ein Demo-Set"*, die Begründung zum Boundary-Fall und der `CHANGELOG.md` als
+Ort des Kriteriums.
+
+**Wie behoben wurde.** Vier Fälle sind auf Quellwortlaut gezogen. `modul-06`
+bekommt die **Tabelle der Quelle zurück** statt der Prosa — sie steht jetzt
+wörtlich dort, samt `slice-019` und `CO-009`; die Prosa hatte daraus unter
+anderem *„Carveout für die fehlende **Latenz**"* zu *„für den fehlenden
+**Beleg**"* gemacht. Und bei `modul-12` wurden die vier quellenlosen Aussagen
+**entfernt statt umformuliert** — nach der Fix-Richtung *Quelle → Spiegel*. Sind
+sie richtig, gehören sie zuerst in den Kurs.
+
+Eine eigene Diagnose ist dabei gefallen: *„Trigger-Disziplin blieb Theorie"* war
+als aus Zeile 2 verschoben und negiert notiert. Falsch — *„Trigger-Disziplin ist
+Theorie geblieben"* steht in Zeile 1 der Quelltabelle.
 
 **Trefferquote.** 6 von 14 des engen Tests sind echte Befunde; zusammen mit den
 vier bereits behobenen sind damit **zehn Paraphrasen** im Spiegel belegt. Der

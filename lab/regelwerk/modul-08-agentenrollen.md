@@ -74,8 +74,8 @@ Reifestufen-Hochschaltung sind **Entscheidungen**, keine Planung. Wer beide in
 einem Kontext erledigt, setzt Schwellen ohne ADR-Bezug oder beschließt ADRs ohne
 Umsetzungspfad.
 
-**Im Repo ohne Wellen-Betrieb** läuft diese Prozedur nicht; die Vorgänge laufen
-trotzdem, getragen von Slice-Closure und Slice-Planung
+**Und im Repo ohne Wellen-Betrieb?** Dort läuft diese Prozedur nicht — die
+Vorgänge laufen trotzdem, getragen von der Slice-Closure und der Slice-Planung
 ([Modul 6](modul-06-roadmap.md#wann-arbeit-eine-welle-braucht-modul-6), Tabelle
 *Träger im Repo ohne Wellen*). Für die Rollen: **zwei der drei Züge
 bleiben, einer entfällt ganz.**
@@ -91,9 +91,10 @@ Beleg über die Slice-DoDs hinaus **ist** das *Mehr*, an dem sich entscheidet, o
 eine Welle vorliegt. Gibt es die Übergabe, hast du eine Welle; gibt es sie nicht,
 keine.
 
-**Der Validator gehört nicht in diese Prozedur.** Seine zwei Kanten hängen an
-einem Wellen-*Ereignis* (nach MVP-Slice, vor größeren Wellen), aber am Slice —
-nicht an der Closure.
+**Wo der Validator bleibt.** Seine zwei Kanten hängen an einem
+Wellen-*Ereignis* — Validierung greift nach einem MVP-Slice und vor der
+Implementation größerer Wellen —, gehören aber **nicht** in diese Prozedur: Sie
+hängen am Slice, nicht an der Closure.
 
 ### Die neun Übergaben und ihre Artefakte (Modul 8)
 

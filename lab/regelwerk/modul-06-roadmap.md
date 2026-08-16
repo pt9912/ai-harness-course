@@ -64,13 +64,13 @@ Abgeschlossene Wellen · Historische Trigger-Verschiebungen*. Operative Lesart:
 - **Historische Trigger-Verschiebungen** — das Drift-Log (Bewegungs-Signal): jede Umplanung mit Datum, Änderung, Grund. Wer es leer hat, hat eine starre Roadmap; wer *jeden* Eintrag voll hat, eine treibende. Closure-Log und Drift-Log zusammen machen die Vergangenheit der Roadmap auditierbar.
 
 **Wird ein Closure-Trigger doch als Datum geschrieben** und der Kalendertag
-erreicht, bevor die Slices grün sind, gibt es drei Ausgänge: (a) Welle
-trotzdem schließen → der Audit fällt durch, weil Slices unbelegt sind
-(Trigger-Disziplin blieb Theorie); (b) Welle offen lassen, Datum
-verschieben → sauber, aber der Eintrag *muss* in die Drift-Tabelle, sonst
-ist die Verschiebung still; (c) Carveout für den fehlenden Beleg, Welle
-schließt mit Carveout → das Versprechen wird offen reduziert, Folge-Slice
-verdrahtet.
+erreicht, bevor die Slices grün sind, gibt es drei mögliche Antworten:
+
+| Antwort | Diagnose |
+|---|---|
+| Welle wird trotzdem geschlossen, `slice-019` wandert in `welle-4`. | Datum hat Closure überschrieben — der Audit fällt durch, weil `slice-019` nicht belegt ist. Trigger-Disziplin ist Theorie geblieben. |
+| Welle bleibt offen, das Datum wird verschoben. | Trigger-Disziplin wirkt, aber die Roadmap-Drift-Tabelle muss den Eintrag bekommen — sonst ist die Verschiebung still. |
+| Carveout `CO-009` für die fehlende Latenz, Welle schließt mit Carveout. | Sauber: das Versprechen wird offen reduziert, Folge-Slice ist verdrahtet, Audit weiß, was er ansieht. |
 
 *Eine Roadmap ist nicht „wann?", sondern „in welcher Reihenfolge wovon?"*.
 
