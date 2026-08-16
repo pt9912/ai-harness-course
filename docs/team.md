@@ -23,23 +23,33 @@ sie wäre diese Datei Ablage
 
 ## Beleglage — was hier *nicht* gemessen ist
 
-**Alle offenen Befunde sind aus dem Text abgeleitet, keiner an einem realen Team
-gemessen.** Gemessen ist nur die Beleglage: `git shortlog -sne HEAD` über die
-vier bekannten Repos, die die Baseline tragen oder vendorn — `d-check`,
-`ai-harness-init`, `a-check` und dieses — liefert **je genau eine
+**Alle Einträge sind team-*motiviert*: Sie folgen aus der Annahme, dass genau
+ein Mensch schreibt.** Wovon sie sich unterscheiden, ist nicht die Motivation,
+sondern die **Evidenz** — und die zerfällt in zwei Hälften.
+
+**Sechs brauchen ein Team, um beobachtet zu werden** — [TB-001](#tb-001),
+[TB-004](#tb-004), [TB-006](#tb-006), [TB-007](#tb-007), [TB-011](#tb-011),
+[TB-014](#tb-014). Gemessen ist bei ihnen nur die Beleglage: `git shortlog -sne
+HEAD` über die vier bekannten Repos, die die Baseline tragen oder vendorn —
+`d-check`, `ai-harness-init`, `a-check` und dieses — liefert **je genau eine
 Autoren-Identität**. Nach der Zählregel
 ([§Steering Loop](../kurs/de/grundlagen/klassifikation.md#steering-loop) —
 1× Vorfall · 2× Symptom · 3× Lücke) stehen sie damit **bei 0×**, nicht einmal
 bei 1×: Vorhersagen, keine Beobachtungen. Wer das überliest, verkörpert eine
 Regel gegen ein Problem, das noch niemand gehabt hat.
 
-**Zwei Dinge sind trotzdem belegt**, beide an `ai-harness-init` — dem einzigen
-der vier mit vollem Lifecycle (85 Slices, 18 ADRs, 10 Wellen, 24 `MR`):
+**Vier sind heute prüfbar** — [TB-009](#tb-009), [TB-010](#tb-010),
+[TB-012](#tb-012), [TB-013](#tb-013). Sie hängen an keiner Team-Größe: Es sind
+Lücken im Text und am Bestand, nachlesbar und nachgemessen. Dass sie
+team-motiviert sind, ändert daran nichts — ein Abschnitt, der wegen
+Nebenläufigkeit geschrieben wurde, kann heute unvollständig sein.
 
-- Die **Eigentums-Achse** unter [TB-001](#tb-001) fehlt dort nachweislich und wurde mit
-  einer eigenen ADR beantwortet. Nur die *Team*-Folge bleibt Vorhersage.
-- [TB-009](#tb-009) und [TB-010](#tb-010) hängen an keiner Team-Größe; beide
-  sind am realen Bestand nachgemessen.
+**Eine Zwischenlage:** Die *Eigentums-Achse* unter [TB-001](#tb-001) fehlt
+nachweislich — `ai-harness-init` hat sie gemessen und mit einer eigenen ADR
+beantwortet. Belegt ist damit die Lücke, nicht ihre Team-Folge.
+
+Vollen Lifecycle führt von den vier Repos nur `ai-harness-init` (85 Slices,
+18 ADRs, 10 Wellen, 24 `MR`); alle Bestands-Zahlen unten stammen von dort.
 
 **Aufnahmekriterium.** Ein Befund steht hier nur, wenn er eine *Lücke im
 Korpus* benennt, die aus der Ein-Personen-Annahme folgt. Nicht aufgenommen wird,
@@ -112,23 +122,38 @@ Kontext-Trennung, nicht Personen-Trennung"* bleibt richtig — Rollen an Persone
 zu binden wäre der Fehler, gegen den der Satz geschrieben ist. Was fehlt, steht
 daneben, nicht dagegen.
 
-## Warum kein Gate das je meldet
+## Was ein Gate davon sähe — und was nicht
 
-Alle Befunde unten liegen in der **inferentiellen Hälfte** des Harness — dort,
-wo ein Mensch urteilt. Der Korpus teilt fast jede Regel in diese Hälfte und
-eine **computationale**, in der ein Sensor Deckung prüft; die Arbeitsteilung ist
-richtig und die computationale Hälfte ist stark. Nur fällt keiner dieser
-Befunde in sie.
+Die Einträge unten zerfallen in **drei** Klassen, und nur bei einer ist „kein
+Sensor möglich" die richtige Aussage.
 
-Ein Sensor kann sehen, dass ein Anker fehlt, eine ADR nach `Accepted` verändert
-wurde oder eine `BEO-<NNN>` ohne Registerzeile zitiert wird. Er kann nicht
-sehen, dass eine Regel von zwei Personen verschieden gelesen wird, dass ein
-Streit nie entschieden wurde oder dass niemand weiß, wem ein Slice gehört.
+**(a) Verhaltens-Befunde in der inferentiellen Hälfte** — [TB-001](#tb-001),
+[TB-004](#tb-004), [TB-006](#tb-006), [TB-007](#tb-007), [TB-011](#tb-011),
+[TB-014](#tb-014). Der Korpus teilt fast jede Regel in eine Hälfte, in der ein
+Mensch urteilt, und eine, in der ein Sensor Deckung prüft. Diese sechs fallen
+ganz in die erste. Ein Sensor sieht einen fehlenden Anker, eine nach `Accepted`
+veränderte ADR oder eine `BEO-<NNN>` ohne Registerzeile. Er sieht **nicht**,
+dass eine Regel von zwei Personen verschieden gelesen wird, dass ein Streit nie
+entschieden wurde oder dass niemand weiß, wem ein Slice gehört.
 
-**Ein Repo mit drei Schreibern wäre daher nach jeder Messung, die der Harness
-anbietet, kerngesund** — während genau diese Stellen nachgeben. Das ist keine
-Schwäche der Gates; es ist die Grenze, die der Korpus selbst zieht. Sie gehört
+**(b) Redaktionelle Lücken im Korpustext** — [TB-009](#tb-009),
+[TB-012](#tb-012), [TB-013](#tb-013). Auch sie fängt kein Gate, aber aus einem
+anderen Grund: Sie sind kein Urteil, sondern ein **fehlender Satz**. „Diese
+Aufzählung ist unvollständig" ist keine Prüfung, die man konfiguriert, sondern
+eine, die man liest.
+
+**(c) Was ein Gate sehr wohl könnte** — die Doppelvergabe aus
+[TB-010](#tb-010). Der Korpus räumt es selbst ein: *„kein Modul des Doku-Gates
+prüft Eindeutigkeit heute … ein Review-Griff."* Hier fehlt kein Sensor-*Prinzip*,
+sondern ein Sensor.
+
+**Was daraus folgt.** Für die sechs aus (a) — die Mehrheit — gilt weiterhin:
+**Ein Repo mit drei Schreibern wäre nach jeder Messung, die der Harness
+anbietet, kerngesund**, während genau diese Stellen nachgeben. Das ist keine
+Schwäche der Gates, sondern die Grenze, die der Korpus selbst zieht; sie gehört
 nur mitgedacht, wenn man aus „alles grün" auf „trägt auch zu dritt" schließt.
+Für (c) gilt das Gegenteil, und der Unterschied ist keine Feinheit: Er
+entscheidet, ob ein Befund auf eine Regeländerung wartet oder auf ein Target.
 
 ## Register
 
@@ -147,6 +172,12 @@ von einer nie vergebenen nicht zu unterscheiden
 ([Modul 6 §Das Beobachtungs-Register](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register)),
 und ohne den Grund prüft der Nächste dieselbe Sackgasse noch einmal.
 
+**Die Abschnitte unten stehen numerisch, nicht nach Schwere.** Das ist
+Absicht: Trüge die Position eine Bewertung, verschöbe jede Neubewertung
+Abschnitte — genau die Wanderung, gegen die die Kennungen eingeführt wurden.
+Die Rangfolge steht in [§Wo man anfinge](#wo-man-anfinge), wo sie sich ändern
+darf, ohne etwas zu bewegen.
+
 | Kennung | Eintrag | Stand |
 |---|---|---|
 | [TB-001](#tb-001) | Der Lifecycle ist ein Zustand ohne Subjekt | offen · Achse am Konsumenten belegt |
@@ -163,200 +194,6 @@ und ohne den Grund prüft der Nächste dieselbe Sackgasse noch einmal.
 | [TB-012](#tb-012) | Die Planning-README trägt zwei Begriffe ohne Quelle | offen · **kein Team nötig**, Template-Drift |
 | [TB-013](#tb-013) | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
 | [TB-014](#tb-014) | „Aktuelle Welle" ist keine Eigenschaft des Repos | offen · löst [TB-003](#tb-003) ab; leerer Fall bei *einem* Schreiber belegt. **Auflösung benannt:** flache Dateien + `**Welle:**` in `in-progress/` — das Feld entfällt |
-
-<a id="tb-011"></a>
-
-## TB-011 — Auswertbar erst nach dem Merge
-
-**Was dasteht.** Der Korpus behandelt das Repo als **einen fortlaufend
-beobachtbaren Zustand**: *„Der Zustand ist das Verzeichnis"*, und
-*„`ls docs/plan/planning/in-progress/` beantwortet »was läuft gerade«
-autoritativ"*. Ebenso die Vergabe: Die nächste Nummer sei *„lokal ableitbar …
-ohne Absprache und ohne **Schreibzugriff auf den Hauptzweig**"*
-([§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
-Und der Sichtungs-Schritt liest bei *jedem* Slice-Plan das Beobachtungs-Register
-([Modul 5 §Zwei Schritte vor der Modus-Begründung](../kurs/de/02-planung/modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)).
-
-**Warum es bei einem trägt.** Es gibt praktisch einen Zustand. Weicht der
-Arbeitsbaum ab, ist es die eigene Abweichung — der Leser kennt sie.
-
-**Was bei dreien bricht.** Mit Pull Requests gibt es **n + 1 Zustände**, und
-jede Lese-Operation der Planung trifft den gemergten. Alles, was in einem
-offenen PR steht, ist für die anderen **nicht vorhanden**:
-
-- **`ls in-progress/` ist zweigelokal.** Der `git mv` nach `in-progress/`
-  reist im PR mit; bis zum Merge sieht ihn niemand sonst. Das Verzeichnis, das
-  laufende Arbeit benennt, ist damit genau für laufende Arbeit unzuverlässig —
-  verlässlich wird es erst, wenn sie nicht mehr läuft.
-- **Der Sichtungs-Schritt liest veraltet.** Schließt A einen Slice, der
-  `BEO-014` auf 3× hebt, und plant B am selben Tag von `main` aus, sieht B
-  `2×` und notiert *„unter Schwelle"*. Nach dem Merge trägt Bs Plan eine
-  falsche Aussage, und nichts prüft sie nach.
-- **Das Register kann still doppelt zählen.** Zwei gleiche Erhöhungen derselben
-  Zeile kollidieren laut — gut. Legt A dagegen eine *neue* Zeile für dasselbe
-  Phänomen an, während B die bestehende erhöht, sind es zwei verschiedene
-  Zeilen: Der Merge gelingt, die Beobachtung steht zweimal, und keine der
-  beiden Hälften erreicht die Schwelle.
-- **Vergebene Nummern sind unsichtbar.** Eine Kennung, die in einem offenen PR
-  gezogen wurde, steht in keinem Checkout. Das verschärft
-  [TB-010](#tb-010): Dort war der Zählraum Verzeichnis *plus offene Wellen*,
-  hier kommt *plus jeder offene PR* hinzu — und den kann man nicht auflisten, ohne die Forge zu fragen.
-
-**Was der Korpus zu PRs sagt.** Sie kommen vor — als Übergabe-Artefakt
-(*„PR mit Diff + Plan-Verweis"*), als Ort der Traceability-IDs und als
-Self-Check-Punkt vor dem Öffnen. **Als Zustands-Divergenz nirgends**;
-*vor Merge* und *nach Merge* stehen allein in der Gate-Timing-Tabelle
-([§Lifecycle-Verteilung](../kurs/de/grundlagen/klassifikation.md#lifecycle-verteilung)),
-also über den Zeitpunkt von Prüfungen, nicht über den Zustand der
-Planungs-Artefakte.
-
-**Welche Dateien es trifft — und die Regel dahinter.** Nicht die
-Änderungshäufigkeit entscheidet, sondern ein Produkt:
-
-> **Risiko = Wert über das Ganze × nebenläufige Schreiber.**
-
-Ein **Ganz-Wert** ist alles, was sich nicht aus einer Zeile allein ergibt: ein
-Zähler, eine Ordnung, ein „aktuell", eine Version. Fehlt er, stehen die Zeilen
-unabhängig nebeneinander, zwei Ansprüche auf dieselbe Kennung landen an
-derselben Tabellenposition, und git meldet — **laut, und danach stimmt es**.
-Fehlt umgekehrt die Nebenläufigkeit, ist auch ein Ganz-Wert harmlos. Gefährlich
-ist nur beides zusammen: Dann mergt git sauber und das Ergebnis ist falsch.
-
-**Ein dritter Faktor entscheidet, ob der Konflikt überhaupt auflösbar ist:
-bezeichnet der Ganz-Wert einen Sachverhalt?** Zähler, Version und
-Supersede-Status tun es — bei ihnen gibt es eine *richtige* Auflösung, man muss
-sie nur finden. *Aktuelle Welle* tut es nicht ([TB-014](#tb-014)): Schreiben
-zwei Personen dorthin, sind **beide Angaben wahr**, und jede Auflösung verwirft
-eine wahre Aussage. Ein solcher Konflikt ist kein Nebenläufigkeits-Problem,
-sondern das Symptom eines Modellfehlers — und nicht durch Sorgfalt beim Mergen
-zu vermeiden, sondern nur durch Streichen des Feldes.
-
-**Eine dritte Art: der Ganz-Wert ohne Ort.** Die laufende Nummer — `slice-086`,
-`welle-11`, `ADR-0019` — ist ebenfalls ein Wert über das Ganze („die höchste
-plus eins"), aber sie steht in **keiner Zeile**. Es gibt keine Datei, die die
-nächste freie Nummer führt; sie ist in der Sammlung implizit. Damit ist ein
-Merge-Konflikt darauf nicht bloß unwahrscheinlich, sondern **unmöglich** — zwei
-Ansprüche erzeugen zwei verschiedene Dateien, die klaglos nebeneinander liegen.
-Für diese Klasse gibt es keinen lauten Ausgang, und genau deshalb existiert
-[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
-als eigener Mechanismus: Die Vergabe-Regel ist der Ersatz für einen Konflikt,
-der nie stattfinden kann.
-
-Nach Verkehr geordnet ist die **Slice-Nummer** die größte stille Fläche des
-Korpus — in `ai-harness-init` 85 Vergaben gegen 24 `MR`, 18 ADRs, 10 Wellen und
-einen Carveout, und ohne jeden Serialisierer. Die **Welle-Nummer** teilt die
-Bauart, nicht das Risiko: Ihre Eröffnung ist *„Planner-Arbeit — alle drei
-Schritte laufen in **einem** Kontext"*
-([Modul 8](../kurs/de/03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle)),
-und wer eine Welle schneidet, schreibt die Roadmap, deren *Aktuelle Welle* der
-laute Kollisionspunkt ist. Ganz-Wert ja, Nebenläufigkeit praktisch null — die
-gleiche Lage wie beim Lastenheft.
-
-Gemessen an `ai-harness-init` über 764 Commits:
-
-| Datei / Ort | Ganz-Wert — und bezeichnet er etwas? | Schreiber | Risiko |
-|---|---|---|---|
-| **keine Datei** — `slice-<NNN>` | „höchste plus eins"; bezeichnet einen Sachverhalt, hat aber **keine Zeile**. Der Slice ist die **einzige Kennungs-Klasse ohne Index** — das Verzeichnis *ist* ihr Register, und ein Verzeichnis kollidiert nicht | **85 Vergaben, kein Serialisierer** | **hoch** — die größte stille Fläche des Korpus; ein Konflikt ist nicht selten, sondern **unmöglich**. Heute schützt nur die Vergabe-Regel; Optionen in der [Lösungs-Skizze](#tb-010) |
-| **keine Datei** — `ADR-<NNNN>` · `MR-<NNN>` · `CO-<NNN>` | dieselbe Bauart, aber **jede hat einen Index**: die Eintragsdatei kollidiert still, die Index-Zeile laut | 18 · 24 · 1 | **mittel, halb laut** — zwei Ansprüche erzeugen zwei Dateien *und* zwei Index-Zeilen; letztere kollidieren, wenn sie benachbart landen. Genau diese Zwischenlage benennt [TB-009](#tb-009) |
-| **keine Datei** — `welle-<NN>` | dieselbe Bauart, ohne Index | 10, durch die Planner-Eröffnung in *einem* Kontext serialisiert | **niedrig** — Ganz-Wert mit praktisch keiner Nebenläufigkeit. Dass das Schema für sie trotzdem keine Antwort hat, ist [TB-013](#tb-013) |
-| `planning/in-progress/roadmap.md` | **zwei**: die Ordnung von *Nächste Wellen* (bezeichnet eine getroffene Entscheidung) · *Aktuelle Welle* — Singleton, **bezeichnet nichts** ([TB-014](#tb-014)) | 127 Änderungen — jede Welle, jede Umplanung | **hoch**; beim zweiten Wert unauflösbar. Entfällt mit der in [TB-014](#tb-014) benannten Auflösung, danach bleibt die Ordnung |
-| `planning/observations.md` | der `BEO`-Zähler; bezeichnet einen Sachverhalt | per Konvention **jede** Slice-Closure | **hoch**, aber ungemessen — dieser Konsument hat das Register nicht adoptiert. Betrifft die *Merge*-Mechanik, nicht das Zählen selbst (dafür siehe das gestrichene TB-002) |
-| `docs/plan/adr/README.md` | nur die Status-Spalte; bezeichnet einen Sachverhalt | 40 | mittel — die Zeilen selbst sind unabhängig, zwei Ablösungen derselben ADR mergen sauber |
-| `harness/conventions.md` (MR-Index) | keiner — der Index selbst ist eine Zeilentabelle | 78 | niedrig — laut. Die halbstille `MR`-Nummer ist eine Zeile darüber beurteilt, nicht hier |
-| `AGENTS.md` §3 Hard Rules · `harness/README.md` §Sensors | keiner — nummerierte bzw. unabhängige Zeilen, Zusätze landen an derselben Stelle | 42 · 25 | niedrig — laut |
-| `spec/lastenheft.md` | die Version im Kopf; bezeichnet einen Sachverhalt | **ein externer, sequentieller Prozess** — *„weder ADR noch Slice dürfen `LH-*` je ändern"* ([§Spec-Stratifizierung](../kurs/de/grundlagen/source-precedence.md#spec-stratifizierung)) | **niedrig**: Ganz-Wert ohne Nebenläufigkeit |
-| `planning/README.md` · `carveouts/README.md` | keiner | **2** | vernachlässigbar |
-
-Die drei Kennungs-Zeilen stehen bewusst oben: Nach Schadensart sind sie die
-schwersten Einträge, und sie haben als einzige **keinen Ort**, an dem man
-nachsehen könnte. Ihr Unterschied ist der **Index** — wer einen hat, bekommt
-eine zweite, laute Chance; der Slice hat keinen und ist deshalb allein an der
-Spitze.
-
-**Die Index-READMEs sind die sichersten Dateien im Baum, und das ist kein
-Zufall.** Die Planning-README trägt eine Sektion *Aktueller Stand*, und darin
-steht kein Stand, sondern eine Absage: *„Nicht als Snapshot hier eintragen —
-der Stand ergibt sich aus den Verzeichnissen, sonst driftet die Tabelle."* Das
-ist *„der Zustand ist das Verzeichnis"*, angewandt auf einen Index — und die
-2 von 764 sind die Auszahlung. Eine Datei ohne Ganz-Wert wird nicht angefasst.
-
-Damit ist die Frage für die drei verbliebenen Ganz-Werte offen, nicht für die
-Indizes: *Aktuelle Welle*, der `BEO`-Zähler und die Lastenheft-Version sind nie
-nach demselben Maßstab geprüft worden wie der Slice-Status.
-
-**Warum das unter den anderen sitzt.** Es ist keine weitere Lücke neben ihnen,
-sondern eine Vorbedingung, die mehrere teilen: Wer *„der Zustand ist das
-Verzeichnis"* liest, liest eine Zusage über **Beobachtbarkeit**. Die gilt nur
-für gemergten Stand.
-
-<a id="tb-012"></a>
-
-## TB-012 — Die Planning-README trägt zwei Begriffe ohne Quelle
-
-**Was dasteht.** Die Lifecycle-Tabelle in
-`lab/templates/docs/plan/planning/README.template.md` — wortgleich im realen
-Konsumenten — definiert drei der vier Verzeichnisse über Begriffe, die der
-Kurs nicht führt:
-
-| Verzeichnis | Bedeutung laut Vorlage | in `kurs/de` |
-|---|---|---|
-| `next/` | „Als Nächstes priorisiert. **Verantwortlicher zugeordnet**." | *priorisiert/eingeplant* — von einem Verantwortlichen keine Rede |
-| `in-progress/` | „**Branch / PR existiert**." | kein Treffer für `Branch` oder `PR existiert` in Modul 5 oder 6 |
-| `done/` | „DoD erfüllt, **gemerged**, Closure-Notiz vorhanden." | *Closure-Kriterien, Lerneintrag, Risiko-Ausgänge* — „gemerged" fehlt |
-
-**Warum das zählt — zweimal.**
-
-*Erstens: eine Zuweisung ohne Ort.* Die Vorlage erklärt `open→next` zum
-Moment, in dem ein Verantwortlicher zugeordnet wird. `slice.template.md` hat
-dafür **kein Feld** — anders als `welle.template.md`, das
-`**Verantwortlich:** <Name>` führt. Der Index behauptet eine Zuordnung, die das
-Artefakt nicht aufnehmen kann. Das ist [TB-001](#tb-001), einen Schritt
-konkreter: nicht „die Achse fehlt", sondern „sie ist am falschen Artefakt".
-
-*Zweitens: der Lifecycle hängt an PR-Zuständen, ohne dass es die Lehre sagt.*
-Wenn `in-progress/` heißt *„ein Branch/PR existiert"*, muss der `git mv` auf
-dem Hauptzweig liegen, **bevor** der PR merged — sonst ist `in-progress/` dort
-dauerhaft leer und `ls` beantwortet nichts. Genau das sagt keine Quelle. Es ist
-[TB-011](#tb-011) an der Stelle, an der es operativ wird.
-
-**Einordnung: Template-Drift.** Die Rangfolge des Korpus ist
-`kurs/de` → `lab/regelwerk` → `lab/templates`; eine Struktur, die nur auf
-Rang 3 steht, hat keine Quell-Verankerung, und die Fix-Richtung ist
-**Quelle → Template**, nicht umgekehrt. Die drei Begriffe sind nicht falsch —
-sie sind vermutlich genau richtig und gehören nach oben.
-
-**Status: kein Team nötig.** Am Text belegt, unabhängig von jeder Größe.
-
-<a id="tb-013"></a>
-
-## TB-013 — Die Welle fällt aus dem Zählraum-Schema
-
-**Was dasteht.**
-[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
-zählt vier Artefakte zur stillen Klasse — *„ADR, Slice, **Welle** und Carveout
-sind je eine eigene Datei"* — und gibt eine Antwort: *„Für die Artefakte mit je
-eigener Datei ist der Zählraum die Sub-Area."* Das Beispiel dazu lautet
-`ADR-IDX-0004 · ADR-AUTH-0001 · slice-IDX-007 · CO-AUTH-002`.
-
-**Was fehlt.** Die Welle steht in der Aufzählung, aber **nicht im Beispiel** —
-und die Antwort passt auch nicht auf sie. Eine Welle *bündelt* Slices, und ein
-Slice berührt bereits mehrere Sub-Areas; es gibt für eine Welle also keine
-Sub-Area, in der man zählen könnte. Ein `welle-IDX-03` wäre keine Verengung des
-Zählraums, sondern eine falsche Behauptung über den Geltungsbereich.
-
-**Was daraus folgt.** Für die Welle bleibt es beim dichten, repo-weiten
-Zählraum — was **richtig** ist, nur steht es nirgends. Der Abschnitt liest sich,
-als sei die Frage für alle vier beantwortet; für eines der vier ist sie es
-nicht. Dasselbe Muster wie bei [TB-009](#tb-009), einen Schritt schärfer: Dort
-fehlt das Artefakt in der Einteilung, hier ist es eingeteilt und die Antwort
-trägt nicht.
-
-**Warum es trotzdem nicht drängt.** Das *Risiko* ist gering — die Vergabe einer
-Welle-Nummer ist durch die Planner-Eröffnung und die Roadmap serialisiert
-(siehe die Regel unter [TB-011](#tb-011)). Es ist ein Defekt im Text, nicht in
-der Praxis.
-
-**Status: kein Team nötig.** Am Text belegt.
 
 <a id="tb-001"></a>
 
@@ -439,123 +276,6 @@ Einzahl von *Aktuelle Welle* bindet — sie tut es nicht, und damit wartet
 niemand: Wer fertig ist, arbeitet an einer anderen offenen Welle weiter. Mit
 der Barriere fällt auch der Zweitrundeneffekt, den der Eintrag daran hängte
 (ein Carveout je Welle, gedehnte Carveout-Frist).
-
-<a id="tb-014"></a>
-
-## TB-014 — „Aktuelle Welle" ist keine Eigenschaft des Repos
-
-**Was dasteht.** Die Roadmap führt einen Abschnitt *Aktuelle Welle* mit drei
-Pflicht-Bestandteilen, und Closure-Schritt 5 befördert die nächste
-([Modul 6 §Die Wellen-Closure-Prozedur](../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)):
-*„Die Welle wandert aus Aktuelle Welle in die Tabelle Abgeschlossene Wellen;
-die erste Zeile aus Nächste Wellen wird zur neuen Aktuellen Welle."*
-
-**Warum es bei einem trägt.** Was eine Welle zur *aktuellen* macht, ist, dass
-jemand an ihr arbeitet — eine Tatsache über **Aufmerksamkeit**, nicht über den
-Repo-Zustand. Bei einem Schreiber gibt es genau einen Fokus; er fällt mit dem
-Repo zusammen und lässt sich als dessen Eigenschaft aufschreiben.
-
-**Was bei dreien bricht.** Aufmerksamkeit ist pro Person, also gibt es keine
-„aktuelle" Welle mehr — sondern **keine oder mehrere**. Der Abschnitt zerfällt
-in zwei Dinge, die es wirklich gibt:
-
-- **welche Wellen offen sind** — die flachen Dateien; objektiv und positional,
-  schon vorhanden;
-- **wer woran arbeitet** — eine Zuweisung, und die hat im Korpus keinen Ort
-  ([TB-001](#tb-001)).
-
-*Aktuelle Welle* ist damit **Zuweisungs-Information im Roadmap-Gewand**. Sie
-beantwortet nicht, welche Welle läuft, sondern woran der eine Mensch sitzt.
-
-**Beide Fälle sind belegt — einer schon bei einem Schreiber.**
-
-*Keine:* In `ai-harness-init` steht im Drift-Log *„ein Abschnitt, der »Keine
-aktive Welle« meldet, war **23 Zeilen lang**"*. Der leere Fall hat keine Form;
-eine Sektion, die eine Pflichtangabe verlangt, die es gerade nicht gibt, füllt
-sich mit Prosa. Und der Zustand ist normal — zwischen zwei Wellen, oder wenn
-gerade wellenlos gearbeitet wird, was der Kurs ausdrücklich vorsieht.
-
-*Mehrere:* Modul 6 enthält **keine Regel**, die mehr als eine laufende Welle
-verbietet; die Einzahl trägt allein die Überschrift. Derselbe Konsument führt
-bereits zwei flache Welle-Dateien nebeneinander.
-
-**Was gegenstandslos wird.** Die Beförderung in Closure-Schritt 5 setzt einen
-einzigen Fokus voraus. Schließt A seine Welle, wird nicht „die nächste" zur
-aktuellen — B und C arbeiten unverändert weiter. Der Schritt ist nicht falsch,
-er hat keinen Gegenstand.
-
-**Nachgeordnet, aber billig zu beheben: der Abschnitt ist überdies eine Kopie.**
-Er wiederholt §2 Trigger, §3 Closure-Trigger und §4 Slices der Wellen-Plan-Datei.
-Dieselbe Roadmap behandelt die *geplante* Welle gegenteilig — *„Trigger und
-Closure-Kriterien stehen in der Plan-Datei, nicht hier"* —, warnt in der
-Kandidaten-Tabelle ausdrücklich vor dieser Drift-Klasse *„(real passiert mit
-slice-047/048)"* und muss im Abschnitt selbst dementieren: *„Ihr
-Lifecycle-Zustand ist ihr Verzeichnis, nicht diese Zeile."* Ein Abschnitt, der
-seine eigene Autorität bestreiten muss, trägt Information, die anderswo wohnt.
-
-**Was unberührt bleibt.** Das Wellen-Konzept fällt nicht, und die Positionen
-flach/`done/` sind echte Repo-Eigenschaften. Es fällt allein die Behauptung, es
-gebe **eine** laufende — und mit ihr der Abschnitt, der sie trägt. Hier wird
-auch **nicht** behauptet, parallele Wellen seien gut; nur, dass der Korpus sie
-nicht modelliert.
-
-**Und ausdrücklich unberührt: *Nächste Wellen*.** Derselbe Test fällt dort
-umgekehrt aus, an beiden entscheidenden Punkten — wer diesen Befund als
-Verdacht gegen Roadmap-Abschnitte überhaupt liest, liest ihn falsch.
-
-| | *Aktuelle Welle* | *Nächste Wellen* |
-|---|---|---|
-| **Gegenstand** | ein Artefakt, das **existiert** (die flache Datei) → Kopie, ableitbar | Wellen, die **noch nicht existieren** → einziger Ort, nirgends ableitbar |
-| **Ganz-Wert bezeichnet einen Sachverhalt?** | nein — zwei Angaben sind **beide wahr**, jede Auflösung verwirft eine | ja — eine getroffene Priorisierungs-Entscheidung |
-| **Konflikt** | unauflösbar; Symptom eines Modellfehlers | auflösbar, und **erwünscht**: Uneinigkeit über die Reihenfolge *soll* sichtbar werden |
-
-Der Kurs setzt das selbst als Ziel: *„Das Schema verwandelt einen stillen
-Merge-Unfall in ein inhaltliches Signal."* Bei *Nächste Wellen* ist genau das
-der Fall. Und abgeleitet werden kann die Reihenfolge auch aus den Slices nicht
-— *„eine Reihenfolge einzelner Slices kennt der Harness überhaupt nicht; die
-Roadmap ordnet Wellen"*
-([Modul 6](../kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
-
-Nach dem Streichen wird die Benennung sogar schärfer: *offene* Wellen sind
-geschnitten, *nächste* sind es nicht. Vorher lagen „aktuell" und „nächste" auf
-zwei verschiedenen Achsen — Aufmerksamkeit gegen Existenz —, und das war Teil
-der Verwirrung.
-
-**Die Auflösung steht schon im Repo: zwei positionale Tatsachen genügen.**
-
-- **Welche Wellen offen sind** — die flachen Dateien unter `planning/`.
-- **An welchen davon gearbeitet wird** — das Kopf-Feld `**Welle:**` der Dateien
-  in `in-progress/`. Es existiert in jedem Slice-Plan
-  ([`slice.template.md`](../lab/templates/docs/plan/planning/slice.template.md))
-  und trägt entweder die Wellen-Kennung oder *„ohne Welle"*.
-
-Damit braucht die Roadmap das Feld nicht. Keine der beiden Tatsachen ist ein
-Ganz-Wert; beide liegen je Datei und können deshalb **nicht still falsch
-mergen**.
-
-**Warum „ableiten" vorher wie ein schlechter Weg aussah.** Der naheliegende
-Einwand lautet, die Ableitung versage bei *keiner* und bei *mehreren* laufenden
-Wellen. Unter diesem Befund sind das keine Fehlschläge, sondern die **richtigen
-Antworten** — der Einwand lebte von genau der Einzahl-Annahme, die hier fällt.
-
-**Was es kostet.** Das `**Welle:**`-Feld wird tragend, und
-[Modul 6](../kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)
-spielt es derzeit herunter: *„Das Kopf-Feld `**Welle:**` eines Slice-Plans sagt
-nur, ob dieser Slice in ein Bündel gehört; daraus folgt für die Vorgänge unten
-nichts."* Das zielt auf eine andere Frage — ob das *Repo* Wellen führt —, ist
-also kein Widerspruch; aber die neue Last müsste dort ausgesprochen werden.
-
-**Was es nicht behebt.** `in-progress/` ist zweigelokal ([TB-011](#tb-011)), die
-Ableitung erbt das. Sie verschlechtert nichts: Statt eines Feldes, in das zwei
-Personen Wahres schreiben und eines davon verlieren, sieht man den Stand von
-`main` — unvollständig, aber nie falsch. Die unauflösbare Konfliktklasse
-verschwindet.
-
-**Nebenwirkungen.** `roadmap.md` verliert seinen Singleton und fällt in der
-Risiko-Tabelle unter [TB-011](#tb-011) von *hoch* auf die bloße Ordnung von
-*Nächste Wellen* zurück. Und Closure-Schritt 5 verliert seine zweite Hälfte:
-Die Welle wandert nach `done/`, das Closure-Log bekommt seine Zeile —
-**befördert wird niemand**.
 
 <a id="tb-004"></a>
 
@@ -642,9 +362,7 @@ relevante Größe *ist* der Kontext pro Lauf.
 weil er dieselbe Wurzel hat: Der Korpus rechnet mit einem Leser, der alles
 mitgebaut hat.
 
-**Was bricht — zwei Dinge.**
-
-*Erstens die Kostenfunktion.* Ein neuer Mensch braucht nicht wenig pro Lauf,
+**Was bricht.** Ein neuer Mensch braucht nicht wenig pro Lauf,
 sondern einmal alles. Die Pflichtgliederung von `harness/README.md` sind sieben
 Nachschlage-Sektionen — eine **Referenzfläche, kein Lesepfad**. Der Begriff
 „Lesepfad" kommt in `kurs/de` viermal vor: einmal für Agenten-Kontextkosten
@@ -652,10 +370,13 @@ Nachschlage-Sektionen — eine **Referenzfläche, kein Lesepfad**. Der Begriff
 Slice-Datei und ADRs. **Keine dieser Fundstellen ist eine Leseordnung für einen
 Menschen**, und einen anderen Begriff dafür führt der Korpus nicht.
 
-*Zweitens die Richtung.* Jede Welle darf per Lerneintrag eine Regel
+**Und die Kosten wachsen monoton.** Jede Welle darf per Lerneintrag eine Regel
 verkörpern. Für `MR`, Carveout und ADR gibt es Auflösung, Frist und Supersede —
-**für Hard Rules und Skill-HIGH-Einträge nicht**. Ein Korpus, der durch
-Verkörperung wächst und nie schrumpft, macht Einarbeitung monoton teurer.
+**für Hard Rules und Skill-HIGH-Einträge nicht** (geprüft: kein Rückbau-Vokabular
+in `kurs/de`; die Gegenprobe zeigt 29 Nennungen von *Hard Rule*, der Grep könnte
+also treffen). Das ist keine zweite Lücke, sondern dieselbe von der Zeitachse
+gesehen: Ein Korpus, der nur wächst, kostet den nächsten Leser jedes Jahr mehr —
+und *nur* ihn, weil niemand sonst ihn frisch liest.
 
 Bei einer Person fällt das nie auf, weil niemand neu dazukommt.
 
@@ -790,6 +511,315 @@ nur neue … Wer später wechselt, notiert den Wechselpunkt."* Der Ort dafür is
 die ID-Schema-Deklaration in `harness/conventions.md`. Bemerkenswert dabei:
 Dass Kennungen nie umbenannt werden, sieht wie Starrheit aus — es ist die
 Eigenschaft, die jeden Schema-Wechsel additiv und damit billig macht.
+
+<a id="tb-011"></a>
+
+## TB-011 — Auswertbar erst nach dem Merge
+
+**Was dasteht.** Der Korpus behandelt das Repo als **einen fortlaufend
+beobachtbaren Zustand**: *„Der Zustand ist das Verzeichnis"*, und
+*„`ls docs/plan/planning/in-progress/` beantwortet »was läuft gerade«
+autoritativ"*. Ebenso die Vergabe: Die nächste Nummer sei *„lokal ableitbar …
+ohne Absprache und ohne **Schreibzugriff auf den Hauptzweig**"*
+([§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+Und der Sichtungs-Schritt liest bei *jedem* Slice-Plan das Beobachtungs-Register
+([Modul 5 §Zwei Schritte vor der Modus-Begründung](../kurs/de/02-planung/modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)).
+
+**Warum es bei einem trägt.** Es gibt praktisch einen Zustand. Weicht der
+Arbeitsbaum ab, ist es die eigene Abweichung — der Leser kennt sie.
+
+**Was bei dreien bricht.** Mit Pull Requests gibt es **n + 1 Zustände**, und
+jede Lese-Operation der Planung trifft den gemergten. Alles, was in einem
+offenen PR steht, ist für die anderen **nicht vorhanden**:
+
+- **`ls in-progress/` ist zweigelokal.** Der `git mv` nach `in-progress/`
+  reist im PR mit; bis zum Merge sieht ihn niemand sonst. Das Verzeichnis, das
+  laufende Arbeit benennt, ist damit genau für laufende Arbeit unzuverlässig —
+  verlässlich wird es erst, wenn sie nicht mehr läuft.
+- **Der Sichtungs-Schritt liest veraltet.** Schließt A einen Slice, der
+  `BEO-014` auf 3× hebt, und plant B am selben Tag von `main` aus, sieht B
+  `2×` und notiert *„unter Schwelle"*. Nach dem Merge trägt Bs Plan eine
+  falsche Aussage, und nichts prüft sie nach.
+- **Das Register kann still doppelt zählen.** Zwei gleiche Erhöhungen derselben
+  Zeile kollidieren laut — gut. Legt A dagegen eine *neue* Zeile für dasselbe
+  Phänomen an, während B die bestehende erhöht, sind es zwei verschiedene
+  Zeilen: Der Merge gelingt, die Beobachtung steht zweimal, und keine der
+  beiden Hälften erreicht die Schwelle.
+- **Vergebene Nummern sind unsichtbar.** Eine Kennung, die in einem offenen PR
+  gezogen wurde, steht in keinem Checkout. Das verschärft
+  [TB-010](#tb-010): Dort war der Zählraum Verzeichnis *plus offene Wellen*,
+  hier kommt *plus jeder offene PR* hinzu — und den kann man nicht auflisten, ohne die Forge zu fragen.
+
+**Was der Korpus zu PRs sagt.** Sie kommen vor — als Übergabe-Artefakt
+(*„PR mit Diff + Plan-Verweis"*), als Ort der Traceability-IDs und als
+Self-Check-Punkt vor dem Öffnen. **Als Zustands-Divergenz nirgends**;
+*vor Merge* und *nach Merge* stehen allein in der Gate-Timing-Tabelle
+([§Lifecycle-Verteilung](../kurs/de/grundlagen/klassifikation.md#lifecycle-verteilung)),
+also über den Zeitpunkt von Prüfungen, nicht über den Zustand der
+Planungs-Artefakte.
+
+**Welche Dateien es trifft — und die Regel dahinter.** Nicht die
+Änderungshäufigkeit entscheidet, sondern ein Produkt:
+
+> **Risiko = Wert über das Ganze × nebenläufige Schreiber.**
+
+Ein **Ganz-Wert** ist alles, was sich nicht aus einer Zeile allein ergibt: ein
+Zähler, eine Ordnung, ein „aktuell", eine Version. Fehlt er, stehen die Zeilen
+unabhängig nebeneinander, zwei Ansprüche auf dieselbe Kennung landen an
+derselben Tabellenposition, und git meldet — **laut, und danach stimmt es**.
+Fehlt umgekehrt die Nebenläufigkeit, ist auch ein Ganz-Wert harmlos. Gefährlich
+ist nur beides zusammen: Dann mergt git sauber und das Ergebnis ist falsch.
+
+**Ein dritter Faktor entscheidet, ob der Konflikt überhaupt auflösbar ist:
+bezeichnet der Ganz-Wert einen Sachverhalt?** Zähler, Version und
+Supersede-Status tun es — bei ihnen gibt es eine *richtige* Auflösung, man muss
+sie nur finden. *Aktuelle Welle* tut es nicht ([TB-014](#tb-014)): Schreiben
+zwei Personen dorthin, sind **beide Angaben wahr**, und jede Auflösung verwirft
+eine wahre Aussage. Ein solcher Konflikt ist kein Nebenläufigkeits-Problem,
+sondern das Symptom eines Modellfehlers — und nicht durch Sorgfalt beim Mergen
+zu vermeiden, sondern nur durch Streichen des Feldes.
+
+**Eine dritte Art: der Ganz-Wert ohne Ort.** Die laufende Nummer — `slice-086`,
+`welle-11`, `ADR-0019` — ist ebenfalls ein Wert über das Ganze („die höchste
+plus eins"), aber sie steht in **keiner Zeile**. Es gibt keine Datei, die die
+nächste freie Nummer führt; sie ist in der Sammlung implizit. Damit ist ein
+Merge-Konflikt darauf nicht bloß unwahrscheinlich, sondern **unmöglich** — zwei
+Ansprüche erzeugen zwei verschiedene Dateien, die klaglos nebeneinander liegen.
+Für diese Klasse gibt es keinen lauten Ausgang, und genau deshalb existiert
+[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+als eigener Mechanismus: Die Vergabe-Regel ist der Ersatz für einen Konflikt,
+der nie stattfinden kann.
+
+Nach Verkehr geordnet ist die **Slice-Nummer** die größte stille Fläche des
+Korpus — in `ai-harness-init` 85 Vergaben gegen 24 `MR`, 18 ADRs, 10 Wellen und
+einen Carveout, und ohne jeden Serialisierer. Die **Welle-Nummer** teilt die
+Bauart, nicht das Risiko: Ihre Eröffnung ist *„Planner-Arbeit — alle drei
+Schritte laufen in **einem** Kontext"*
+([Modul 8](../kurs/de/03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle)),
+und wer eine Welle schneidet, schreibt die Roadmap, deren *Aktuelle Welle* der
+laute Kollisionspunkt ist. Ganz-Wert ja, Nebenläufigkeit praktisch null — die
+gleiche Lage wie beim Lastenheft.
+
+Gemessen an `ai-harness-init` über 764 Commits:
+
+| Datei / Ort | Ganz-Wert — und bezeichnet er etwas? | Schreiber | Risiko |
+|---|---|---|---|
+| **keine Datei** — `slice-<NNN>` | „höchste plus eins"; bezeichnet einen Sachverhalt, hat aber **keine Zeile**. Der Slice ist die **einzige Kennungs-Klasse ohne Index** — das Verzeichnis *ist* ihr Register, und ein Verzeichnis kollidiert nicht | **85 Vergaben, kein Serialisierer** | **hoch** — die größte stille Fläche des Korpus; ein Konflikt ist nicht selten, sondern **unmöglich**. Heute schützt nur die Vergabe-Regel; Optionen in der [Lösungs-Skizze](#tb-010) |
+| **keine Datei** — `ADR-<NNNN>` · `MR-<NNN>` · `CO-<NNN>` | dieselbe Bauart, aber **jede hat einen Index**: die Eintragsdatei kollidiert still, die Index-Zeile laut | 18 · 24 · 1 | **mittel, halb laut** — zwei Ansprüche erzeugen zwei Dateien *und* zwei Index-Zeilen; letztere kollidieren, wenn sie benachbart landen. Genau diese Zwischenlage benennt [TB-009](#tb-009) |
+| **keine Datei** — `welle-<NN>` | dieselbe Bauart, ohne Index | 10, durch die Planner-Eröffnung in *einem* Kontext serialisiert | **niedrig** — Ganz-Wert mit praktisch keiner Nebenläufigkeit. Dass das Schema für sie trotzdem keine Antwort hat, ist [TB-013](#tb-013) |
+| `planning/in-progress/roadmap.md` | **zwei**: die Ordnung von *Nächste Wellen* (bezeichnet eine getroffene Entscheidung) · *Aktuelle Welle* — Singleton, **bezeichnet nichts** ([TB-014](#tb-014)) | 127 Änderungen — jede Welle, jede Umplanung | **hoch**; beim zweiten Wert unauflösbar. Entfällt mit der in [TB-014](#tb-014) benannten Auflösung, danach bleibt die Ordnung |
+| `planning/observations.md` | der `BEO`-Zähler; bezeichnet einen Sachverhalt | per Konvention **jede** Slice-Closure | **hoch**, aber ungemessen — dieser Konsument hat das Register nicht adoptiert. Betrifft die *Merge*-Mechanik, nicht das Zählen selbst (dafür siehe das gestrichene TB-002) |
+| `docs/plan/adr/README.md` | nur die Status-Spalte; bezeichnet einen Sachverhalt | 40 | mittel — die Zeilen selbst sind unabhängig, zwei Ablösungen derselben ADR mergen sauber |
+| `harness/conventions.md` (MR-Index) | keiner — der Index selbst ist eine Zeilentabelle | 78 | niedrig — laut. Die halbstille `MR`-Nummer beurteilt die zweite Kennungs-Zeile, nicht diese |
+| `AGENTS.md` §3 Hard Rules · `harness/README.md` §Sensors | keiner — nummerierte bzw. unabhängige Zeilen, Zusätze landen an derselben Stelle | 42 · 25 | niedrig — laut |
+| `spec/lastenheft.md` | die Version im Kopf; bezeichnet einen Sachverhalt | **ein externer, sequentieller Prozess** — *„weder ADR noch Slice dürfen `LH-*` je ändern"* ([§Spec-Stratifizierung](../kurs/de/grundlagen/source-precedence.md#spec-stratifizierung)) | **niedrig**: Ganz-Wert ohne Nebenläufigkeit |
+| `planning/README.md` · `carveouts/README.md` | keiner | **2** | vernachlässigbar |
+
+Die drei Kennungs-Zeilen stehen bewusst oben: Nach Schadensart sind sie die
+schwersten Einträge, und sie haben als einzige **keinen Ort**, an dem man
+nachsehen könnte. Ihr Unterschied ist der **Index** — wer einen hat, bekommt
+eine zweite, laute Chance; der Slice hat keinen und ist deshalb allein an der
+Spitze.
+
+**Die Index-READMEs sind die sichersten Dateien im Baum, und das ist kein
+Zufall.** Die Planning-README trägt eine Sektion *Aktueller Stand*, und darin
+steht kein Stand, sondern eine Absage: *„Nicht als Snapshot hier eintragen —
+der Stand ergibt sich aus den Verzeichnissen, sonst driftet die Tabelle."* Das
+ist *„der Zustand ist das Verzeichnis"*, angewandt auf einen Index — und die
+2 von 764 sind die Auszahlung. Eine Datei ohne Ganz-Wert wird nicht angefasst.
+
+Damit ist die Frage für die drei verbliebenen Ganz-Werte offen, nicht für die
+Indizes: *Aktuelle Welle*, der `BEO`-Zähler und die Lastenheft-Version sind nie
+nach demselben Maßstab geprüft worden wie der Slice-Status.
+
+**Warum das unter den anderen sitzt.** Es ist keine weitere Lücke neben ihnen,
+sondern eine Vorbedingung, die mehrere teilen: Wer *„der Zustand ist das
+Verzeichnis"* liest, liest eine Zusage über **Beobachtbarkeit**. Die gilt nur
+für gemergten Stand.
+
+<a id="tb-012"></a>
+
+## TB-012 — Die Planning-README trägt zwei Begriffe ohne Quelle
+
+**Der Befund ist Template-Drift.** Die Rangfolge des Korpus ist `kurs/de` →
+`lab/regelwerk` → `lab/templates`. Die Lifecycle-Tabelle in
+`lab/templates/docs/plan/planning/README.template.md` — wortgleich im realen
+Konsumenten — definiert drei der vier Verzeichnisse über Begriffe, die **nur
+auf Rang 3 stehen**:
+
+| Verzeichnis | Bedeutung laut Vorlage | in `kurs/de` |
+|---|---|---|
+| `next/` | „Als Nächstes priorisiert. **Verantwortlicher zugeordnet**." | *priorisiert/eingeplant* — von einem Verantwortlichen keine Rede |
+| `in-progress/` | „**Branch / PR existiert**." | kein Treffer für `Branch` oder `PR existiert` in Modul 5 oder 6 |
+| `done/` | „DoD erfüllt, **gemerged**, Closure-Notiz vorhanden." | *Closure-Kriterien, Lerneintrag, Risiko-Ausgänge* — „gemerged" fehlt |
+
+Eine Struktur ohne Quell-Verankerung ist keine Kleinigkeit: Sie reist ins
+Adopter-Repo, wird dort normativ gelesen und hat keine Instanz, die sie
+fortschreibt. Die Fix-Richtung ist **Quelle → Template**, nicht umgekehrt — die
+drei Begriffe sind vermutlich genau richtig und gehören nach oben.
+
+**Zwei Folgen, die andere Einträge konkret machen.** Sie sind keine Dubletten,
+sondern die Stelle, an der jene operativ werden:
+
+- *Eine Zuweisung ohne Ort.* Die Vorlage erklärt `open→next` zum Moment, in dem
+  ein Verantwortlicher zugeordnet wird. `slice.template.md` hat dafür **kein
+  Feld** — anders als `welle.template.md`, das `**Verantwortlich:** <Name>`
+  führt. Der Index behauptet eine Zuordnung, die das Artefakt nicht aufnehmen
+  kann ([TB-001](#tb-001)).
+- *Der Lifecycle hängt an PR-Zuständen.* Wenn `in-progress/` heißt *„ein
+  Branch/PR existiert"*, muss der `git mv` auf dem Hauptzweig liegen, **bevor**
+  der PR merged — sonst ist das Verzeichnis dort dauerhaft leer und `ls`
+  beantwortet nichts. Das sagt keine Quelle ([TB-011](#tb-011)).
+
+**Status: kein Team nötig.** Am Text belegt, unabhängig von jeder Größe.
+
+<a id="tb-013"></a>
+
+## TB-013 — Die Welle fällt aus dem Zählraum-Schema
+
+**Was dasteht.**
+[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+zählt vier Artefakte zur stillen Klasse — *„ADR, Slice, **Welle** und Carveout
+sind je eine eigene Datei"* — und gibt eine Antwort: *„Für die Artefakte mit je
+eigener Datei ist der Zählraum die Sub-Area."* Das Beispiel dazu lautet
+`ADR-IDX-0004 · ADR-AUTH-0001 · slice-IDX-007 · CO-AUTH-002`.
+
+**Was fehlt.** Die Welle steht in der Aufzählung, aber **nicht im Beispiel** —
+und die Antwort passt auch nicht auf sie. Eine Welle *bündelt* Slices, und ein
+Slice berührt bereits mehrere Sub-Areas; es gibt für eine Welle also keine
+Sub-Area, in der man zählen könnte. Ein `welle-IDX-03` wäre keine Verengung des
+Zählraums, sondern eine falsche Behauptung über den Geltungsbereich.
+
+**Was daraus folgt.** Für die Welle bleibt es beim dichten, repo-weiten
+Zählraum — was **richtig** ist, nur steht es nirgends. Der Abschnitt liest sich,
+als sei die Frage für alle vier beantwortet; für eines der vier ist sie es
+nicht. Dasselbe Muster wie bei [TB-009](#tb-009), einen Schritt schärfer: Dort
+fehlt das Artefakt in der Einteilung, hier ist es eingeteilt und die Antwort
+trägt nicht.
+
+**Warum es trotzdem nicht drängt.** Das *Risiko* ist gering — die Vergabe einer
+Welle-Nummer ist durch die Planner-Eröffnung und die Roadmap serialisiert
+(siehe die Regel unter [TB-011](#tb-011)). Es ist ein Defekt im Text, nicht in
+der Praxis.
+
+**Status: kein Team nötig.** Am Text belegt.
+
+<a id="tb-014"></a>
+
+## TB-014 — „Aktuelle Welle" ist keine Eigenschaft des Repos
+
+**Was dasteht.** Die Roadmap führt einen Abschnitt *Aktuelle Welle* mit drei
+Pflicht-Bestandteilen, und Closure-Schritt 5 befördert die nächste
+([Modul 6 §Die Wellen-Closure-Prozedur](../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)):
+*„Die Welle wandert aus Aktuelle Welle in die Tabelle Abgeschlossene Wellen;
+die erste Zeile aus Nächste Wellen wird zur neuen Aktuellen Welle."*
+
+**Warum es bei einem trägt.** Was eine Welle zur *aktuellen* macht, ist, dass
+jemand an ihr arbeitet — eine Tatsache über **Aufmerksamkeit**, nicht über den
+Repo-Zustand. Bei einem Schreiber gibt es genau einen Fokus; er fällt mit dem
+Repo zusammen und lässt sich als dessen Eigenschaft aufschreiben.
+
+**Was bei dreien bricht.** Aufmerksamkeit ist pro Person, also gibt es keine
+„aktuelle" Welle mehr — sondern **keine oder mehrere**. Der Abschnitt zerfällt
+in zwei Dinge, die es wirklich gibt:
+
+- **welche Wellen offen sind** — die flachen Dateien; objektiv und positional,
+  schon vorhanden;
+- **wer woran arbeitet** — eine Zuweisung, und die hat im Korpus keinen Ort
+  ([TB-001](#tb-001)).
+
+*Aktuelle Welle* ist damit **Zuweisungs-Information im Roadmap-Gewand**. Sie
+beantwortet nicht, welche Welle läuft, sondern woran der eine Mensch sitzt.
+
+**Beide Fälle sind belegt — einer schon bei einem Schreiber.**
+
+*Keine:* In `ai-harness-init` steht im Drift-Log *„ein Abschnitt, der »Keine
+aktive Welle« meldet, war **23 Zeilen lang**"*. Der leere Fall hat keine Form;
+eine Sektion, die eine Pflichtangabe verlangt, die es gerade nicht gibt, füllt
+sich mit Prosa. Und der Zustand ist normal — zwischen zwei Wellen, oder wenn
+gerade wellenlos gearbeitet wird, was der Kurs ausdrücklich vorsieht.
+
+*Mehrere:* Modul 6 enthält **keine Regel**, die mehr als eine laufende Welle
+verbietet; die Einzahl trägt allein die Überschrift. Derselbe Konsument führt
+bereits zwei flache Welle-Dateien nebeneinander.
+
+**Was gegenstandslos wird.** Die Beförderung in Closure-Schritt 5 setzt einen
+einzigen Fokus voraus. Schließt A seine Welle, wird nicht „die nächste" zur
+aktuellen — B und C arbeiten unverändert weiter. Der Schritt ist nicht falsch,
+er hat keinen Gegenstand.
+
+**Nachgeordnet, aber billig zu beheben: der Abschnitt ist überdies eine Kopie.**
+Er wiederholt §2 Trigger, §3 Closure-Trigger und §4 Slices der Wellen-Plan-Datei.
+Dieselbe Roadmap behandelt die *geplante* Welle gegenteilig — *„Trigger und
+Closure-Kriterien stehen in der Plan-Datei, nicht hier"* —, warnt in der
+Kandidaten-Tabelle ausdrücklich vor dieser Drift-Klasse *„(real passiert mit
+slice-047/048)"* und muss im Abschnitt selbst dementieren: *„Ihr
+Lifecycle-Zustand ist ihr Verzeichnis, nicht diese Zeile."* Ein Abschnitt, der
+seine eigene Autorität bestreiten muss, trägt Information, die anderswo wohnt.
+
+**Was unberührt bleibt.** Das Wellen-Konzept fällt nicht, und die Positionen
+flach/`done/` sind echte Repo-Eigenschaften. Es fällt allein die Behauptung, es
+gebe **eine** laufende — und mit ihr der Abschnitt, der sie trägt. Hier wird
+auch **nicht** behauptet, parallele Wellen seien gut; nur, dass der Korpus sie
+nicht modelliert.
+
+**Und ausdrücklich unberührt: *Nächste Wellen*.** Derselbe Test fällt dort
+umgekehrt aus, an beiden entscheidenden Punkten — wer diesen Befund als
+Verdacht gegen Roadmap-Abschnitte überhaupt liest, liest ihn falsch.
+
+| | *Aktuelle Welle* | *Nächste Wellen* |
+|---|---|---|
+| **Gegenstand** | ein Artefakt, das **existiert** (die flache Datei) → Kopie, ableitbar | Wellen, die **noch nicht existieren** → einziger Ort, nirgends ableitbar |
+| **Ganz-Wert bezeichnet einen Sachverhalt?** | nein — zwei Angaben sind **beide wahr**, jede Auflösung verwirft eine | ja — eine getroffene Priorisierungs-Entscheidung |
+| **Konflikt** | unauflösbar; Symptom eines Modellfehlers | auflösbar, und **erwünscht**: Uneinigkeit über die Reihenfolge *soll* sichtbar werden |
+
+Der Kurs setzt das selbst als Ziel: *„Das Schema verwandelt einen stillen
+Merge-Unfall in ein inhaltliches Signal."* Bei *Nächste Wellen* ist genau das
+der Fall. Und abgeleitet werden kann die Reihenfolge auch aus den Slices nicht
+— *„eine Reihenfolge einzelner Slices kennt der Harness überhaupt nicht; die
+Roadmap ordnet Wellen"*
+([Modul 6](../kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
+
+Nach dem Streichen wird die Benennung sogar schärfer: *offene* Wellen sind
+geschnitten, *nächste* sind es nicht. Vorher lagen „aktuell" und „nächste" auf
+zwei verschiedenen Achsen — Aufmerksamkeit gegen Existenz —, und das war Teil
+der Verwirrung.
+
+**Die Auflösung steht schon im Repo: zwei positionale Tatsachen genügen.**
+
+- **Welche Wellen offen sind** — die flachen Dateien unter `planning/`.
+- **An welchen davon gearbeitet wird** — das Kopf-Feld `**Welle:**` der Dateien
+  in `in-progress/`. Es existiert in jedem Slice-Plan
+  ([`slice.template.md`](../lab/templates/docs/plan/planning/slice.template.md))
+  und trägt entweder die Wellen-Kennung oder *„ohne Welle"*.
+
+Damit braucht die Roadmap das Feld nicht. Keine der beiden Tatsachen ist ein
+Ganz-Wert; beide liegen je Datei und können deshalb **nicht still falsch
+mergen**.
+
+**Warum „ableiten" vorher wie ein schlechter Weg aussah.** Der naheliegende
+Einwand lautet, die Ableitung versage bei *keiner* und bei *mehreren* laufenden
+Wellen. Unter diesem Befund sind das keine Fehlschläge, sondern die **richtigen
+Antworten** — der Einwand lebte von genau der Einzahl-Annahme, die hier fällt.
+
+**Was es kostet.** Das `**Welle:**`-Feld wird tragend, und
+[Modul 6](../kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)
+spielt es derzeit herunter: *„Das Kopf-Feld `**Welle:**` eines Slice-Plans sagt
+nur, ob dieser Slice in ein Bündel gehört; daraus folgt für die Vorgänge unten
+nichts."* Das zielt auf eine andere Frage — ob das *Repo* Wellen führt —, ist
+also kein Widerspruch; aber die neue Last müsste dort ausgesprochen werden.
+
+**Was es nicht behebt.** `in-progress/` ist zweigelokal ([TB-011](#tb-011)), die
+Ableitung erbt das. Sie verschlechtert nichts: Statt eines Feldes, in das zwei
+Personen Wahres schreiben und eines davon verlieren, sieht man den Stand von
+`main` — unvollständig, aber nie falsch. Die unauflösbare Konfliktklasse
+verschwindet.
+
+**Nebenwirkungen.** `roadmap.md` verliert seinen Singleton und fällt in der
+Risiko-Tabelle unter [TB-011](#tb-011) von *hoch* auf die bloße Ordnung von
+*Nächste Wellen* zurück. Und Closure-Schritt 5 verliert seine zweite Hälfte:
+Die Welle wandert nach `done/`, das Closure-Log bekommt seine Zeile —
+**befördert wird niemand**.
 
 ## Wo man anfinge
 
