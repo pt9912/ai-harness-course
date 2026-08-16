@@ -11,6 +11,60 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 77 — 2026-08-16 · Der Anspruch wird sichtbar, bevor die Arbeit beginnt
+
+Zweite Umsetzungs-Welle des [Team-Plans](docs/team-plan.md): Pakete **P2** und
+**P4** — `TA-2` (ohne die P3-Zeile), `TA-7` und `TA-4` aus
+[`docs/team.md`](docs/team.md). Welle 76 gab der Person in der Rolle ein Wort;
+diese Welle gibt der **Zuweisung einen Ort** und dem **Zustand einen
+Geltungs-Stand**.
+
+### Entschieden
+
+- **Die Zuweisung hat einen Ort** (`TA-2`). `open → next` setzt den
+  Verantwortlichen: Das Feld `Verantwortlich:` im Slice-Kopf trägt den
+  Rolleninhaber der Implementer-Rolle, der die Arbeit hält — `—` bis zur
+  Priorisierung. Der **Autor** bleibt getrennt (er schrieb den Plan), und das
+  Feld ist **kein Statuswert**: Der Zustand bleibt das Verzeichnis, das Feld
+  sagt *wer*, nicht *wo*. Kein Sensor prüft es — als Deklaration
+  ausgesprochen, statt ein Gate zu behaupten. Die Welle hatte das Feld schon
+  (`welle.template.md`); jetzt hat es der Slice, das Artefakt, das den
+  Lifecycle trägt.
+- **Der Übergang landet auf dem Hauptzweig, vor der Arbeit** (`TA-7`). Reist
+  der `git mv` erst im PR mit, ist der Zustand **zweigelokal** —
+  `in-progress/` ist für alle anderen leer, bis die Arbeit fertig ist; das
+  Verzeichnis, das laufende Arbeit benennt, wäre genau für laufende Arbeit
+  unzuverlässig. Der Übergangs-Commit macht den Anspruch sichtbar, **bevor**
+  jemand anderes dieselbe Arbeit beginnt. Dazu die Abgrenzung in §Vergabe,
+  damit kein Scheinwiderspruch entsteht: Das *Ableiten* einer Kennung braucht
+  keinen Hauptzweig-Zugriff, das *Beanspruchen* einer Arbeit landet dort.
+- **Der Stand wird gesagt** (`TA-4`). *Aussagen über die Verzeichnis-Position
+  gelten für den gemergten Stand* (Modul 5); die `ls`-Zusage in Modul 6 ist
+  entsprechend qualifiziert, und der Sichtungs-Schritt benennt, dass das
+  Beobachtungs-Register beim Lesen so alt ist wie der letzte Merge.
+- **`TB-012` schließt nebenbei.** Die Lifecycle-Tabelle der Planning-README
+  (Vorlage und Beispiel) sagt jetzt, was gelehrt wird: `next/` mit dem Feld,
+  `in-progress/` = *„Beansprucht: Der `git mv` liegt auf dem Hauptzweig, vor
+  der Arbeit — Branch/PR entsteht danach."* Die quellenlose Formulierung
+  *„Branch / PR existiert"* existiert nirgends mehr.
+
+### Bauform und Beleg
+
+Additiv bis auf die zwei Template-Zeilen, die von quellenlos auf gelehrt
+wechseln. Kette vollständig: Quelle (Modul 5, 6, 9, §Vergabe) → vier Spiegel
+(Schnittregel, per Teilfolgen-Probe verifiziert) → zwei Templates →
+Beispiel-README; Vollständigkeit per grep über alle drei Konstrukte belegt.
+
+Der Review vor dem Commit fand zwei Dinge — beide in `team.md`, nicht in der
+Umsetzung: ein Umstellungs-Zitat aus einer eigenen früheren Korrektur, und
+den strukturellen Effekt, dass **umgesetzte Befunde jetzt Text zitieren, den
+es nicht mehr gibt**. Die Zitate sind der Zustand *davor* und bleiben; die
+Abschnitte sagen es jetzt (*„Was dastand — behoben in Welle NN"*).
+
+**Bundle-Bilanz:** Vier Spiegel-Dateien, zwei Templates und die
+`README`-Kette reisen im Bundle. Neue Regeln plus zwei begründete
+Zeilen-Wechsel → **MINOR**, wenn released wird.
+
 ## Welle 76 — 2026-08-16 · Ein Wort für die Gegenrichtung
 
 Erste Umsetzungs-Welle des [Team-Plans](docs/team-plan.md): Pakete **P0** und

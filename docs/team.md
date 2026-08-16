@@ -198,7 +198,7 @@ darf, ohne etwas zu bewegen.
 
 | Kennung | Klasse | Änderung | Eintrag | Stand |
 |---|---|---|---|---|
-| [TB-001](#tb-001) | Verhalten | [TA-1](#ta-1) [TA-2](#ta-2) | Der Lifecycle ist ein Zustand ohne Subjekt | offen · TA-1-Hälfte umgesetzt (Welle 76), Rest in TA-2 · Achse am Konsumenten belegt |
+| [TB-001](#tb-001) | Verhalten | [TA-1](#ta-1) [TA-2](#ta-2) | Der Lifecycle ist ein Zustand ohne Subjekt | **umgesetzt (Welle 76/77)** — das Feld existiert; die TA-2-Restzeile (P3) betrifft [TB-014](#tb-014), nicht diesen Befund |
 | TB-002 | — | — | *Der Zähler zählt Beobachtungen, nicht Beobachter* | **gestrichen** — der Zähler steht in einer stehenden Datei und wird bei jeder Slice-Closure fortgeschrieben, gleich von wem; das Register-Beispiel des Kurses ist selbst der Drei-Slices-Fall. Der Sichtungs-Schritt (§8) ist Pflicht in *jedem* Slice-Plan, und die Sub-Area-Spalte trägt bewusst die normative Sub-Area. Person-unabhängig gebaut |
 | TB-003 | — | — | *Die Welle ist ein Join-Barrier* | **abgelöst** durch [TB-014](#tb-014) — die Barriere setzt voraus, dass die Einzahl von *Aktuelle Welle* bindet; sie bindet nicht |
 | [TB-004](#tb-004) | Verhalten | [TA-1](#ta-1) | Eine Rolle, mehrere Personen | **umgesetzt (Welle 76)** |
@@ -208,8 +208,8 @@ darf, ohne etwas zu bewegen.
 | TB-008 | — | — | *Lokale Gates mal drei Maschinen* | **gestrichen** — die Regel steht richtig da, und die Messung dazu (lokal gegen CI) betrifft zwei Umgebungen, nicht zwei Menschen. Reiner Druckunterschied |
 | [TB-009](#tb-009) | Text | [TA-3](#ta-3) | MR steht in keiner der beiden Vergabe-Klassen | offen · **kein Team nötig**, am Text belegt |
 | [TB-010](#tb-010) | **Sensor** | [TA-3](#ta-3) | „Lokal ableitbar" gilt nicht bei Vorvergabe | offen · **kein Team nötig**, am Bestand gemessen; Entwurf in [TA-3](#ta-3) |
-| [TB-011](#tb-011) | Verhalten | [TA-4](#ta-4) [TA-7](#ta-7) | Auswertbar erst nach dem Merge | offen · Vorbedingung mehrerer anderer |
-| [TB-012](#tb-012) | Text | [TA-2](#ta-2) [TA-4](#ta-4) | Die Planning-README trägt zwei Begriffe ohne Quelle | offen · **kein Team nötig**, Template-Drift |
+| [TB-011](#tb-011) | Verhalten | [TA-4](#ta-4) [TA-7](#ta-7) | Auswertbar erst nach dem Merge | **umgesetzt (Welle 77)** |
+| [TB-012](#tb-012) | Text | [TA-2](#ta-2) [TA-4](#ta-4) | Die Planning-README trägt zwei Begriffe ohne Quelle | **umgesetzt (Welle 77)** |
 | [TB-013](#tb-013) | Text | [TA-3](#ta-3) | Die Welle fällt aus dem Zählraum-Schema | offen · **kein Team nötig**, Risiko gering |
 | [TB-014](#tb-014) | Verhalten | [TA-2](#ta-2) | „Aktuelle Welle" ist keine Eigenschaft des Repos | offen · löst [TB-003](#tb-003) ab; leerer Fall bei *einem* Schreiber belegt. **Auflösung benannt:** flache Dateien + `**Welle:**` in `in-progress/` — das Feld entfällt |
 
@@ -253,7 +253,7 @@ nichts. [TB-006](#tb-006) braucht zusätzlich ein letztes Artefakt — das ist [
 
 <a id="ta-2"></a>
 
-### TA-2 — Ein Ort für die Zuweisung
+### TA-2 — Ein Ort für die Zuweisung · **teilumgesetzt (Welle 77), Rest in P3**
 
 **Deckt** [TB-001](#tb-001) · [TB-014](#tb-014) · [TB-012](#tb-012) (erste Hälfte).
 
@@ -410,7 +410,7 @@ Eigenschaft, die jeden Schema-Wechsel additiv und damit billig macht.
 
 <a id="ta-4"></a>
 
-### TA-4 — Sagen, über welchen Stand die Regeln sprechen
+### TA-4 — Sagen, über welchen Stand die Regeln sprechen · **umgesetzt (Welle 77)**
 
 **Deckt** [TB-011](#tb-011) · [TB-012](#tb-012) (zweite Hälfte).
 
@@ -508,7 +508,7 @@ Wiederholung. Wer die Entscheidung weiter für falsch hält, braucht Evidenz.
 
 <a id="ta-7"></a>
 
-### TA-7 — Der Lifecycle-Übergang landet auf dem Hauptzweig
+### TA-7 — Der Lifecycle-Übergang landet auf dem Hauptzweig · **umgesetzt (Welle 77)**
 
 **Deckt** den Rest von [TA-4](#ta-4) (Zweig-Stände unsichtbar) und den von
 [TA-3](#ta-3) (dieselbe Arbeit unter verschiedenen Namen); Beleg ist
@@ -567,7 +567,7 @@ siehe [Register](#register).
 
 ## TB-001 — Der Lifecycle ist ein Zustand ohne Subjekt
 
-**Was dasteht.** *„Der Zustand ist das Verzeichnis, nicht ein Kopffeld"*
+**Was dastand** (behoben in Welle 76/77 — die Zitate unten sind der Zustand davor). *„Der Zustand ist das Verzeichnis, nicht ein Kopffeld"*
 ([Modul 5 §Lifecycle als State Machine](../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine))
 und *„`ls docs/plan/planning/in-progress/` beantwortet »was läuft gerade«
 autoritativ und ohne Pflegeaufwand"*
@@ -828,7 +828,7 @@ damit auch [TB-009](#tb-009), [TB-011](#tb-011) und [TB-013](#tb-013).
 
 ## TB-011 — Auswertbar erst nach dem Merge
 
-**Was dasteht.** Der Korpus behandelt das Repo als **einen fortlaufend
+**Was dastand** (behoben in Welle 77 — die Zitate unten sind der Zustand davor). Der Korpus behandelt das Repo als **einen fortlaufend
 beobachtbaren Zustand**: *„Der Zustand ist das Verzeichnis"*, und
 *„`ls docs/plan/planning/in-progress/` beantwortet »was läuft gerade«
 autoritativ"*. Ebenso die Vergabe: Die nächste Nummer sei *„lokal ableitbar … und braucht dafür weder eine Absprache noch einen
@@ -954,7 +954,9 @@ für gemergten Stand.
 
 ## TB-012 — Die Planning-README trägt zwei Begriffe ohne Quelle
 
-**Der Befund ist Template-Drift.** Die Rangfolge des Korpus ist `kurs/de` →
+**Behoben in Welle 77** — die Tabelle unten zeigt den Zustand davor.
+
+**Der Befund war Template-Drift.** Die Rangfolge des Korpus ist `kurs/de` →
 `lab/regelwerk` → `lab/templates`. Die Lifecycle-Tabelle in
 `lab/templates/docs/plan/planning/README.template.md` — wortgleich im realen
 Konsumenten — definiert drei der vier Verzeichnisse über Begriffe, die **nur
