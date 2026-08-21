@@ -22,7 +22,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihr erster Lauf (2026-08-16, 9/9)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11)
 
 | # | Szenario | Erwartung | beobachtet |
 |---|---|---|---|
@@ -32,6 +32,8 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | s03 | Register: A erhöht Zeile, B legt neue fürs selbe Phänomen an | Merge **still**, Beobachtung halbiert | ✓ — **mit Befund, siehe unten** |
 | s04a | zwei offene Wellen, flach + Liste | `planning` grün | ✓ Offene-Wellen-Modell trägt |
 | s04b | dazu `waves.dir` aktiviert | **`wave-drift`** | ✓ Singleton-Semantik gemessen |
+| s04c | Wellen offen **und** nichts beansprucht: Ruhe-Marker *neben* der Liste | `planning` grün | ✓ der Leer-Anspruch-Fall ist legitim |
+| s04d | Gegenprobe: Marker weg, `in-progress/` weiter leer | **`planning-drift`** | ✓ die Äquivalenz hält in beide Richtungen |
 | s05 | zwei `MR`s parallel | Dateien still, Index-Zeile **laut** | ✓ Hybrid-These bestätigt |
 | s06 | `pre-receive`-Hook schützt `main` | TA-7-Anspruch **scheitert** | ✓ Branch-Protection-Reibung real |
 | s07 | Sichtung, während Erhöhung im offenen PR liegt | liest den **gemergten** Stand | ✓ „so alt wie der letzte Merge" |
@@ -42,6 +44,17 @@ Edit-Regionen); erst ab mehreren Zeilen Abstand mergt die Doppel-Zeile still.
 Die stille Doppel-Zählung ist also eine Eigenschaft **großer** Register — genau
 dort, wo auch das Wiedererkennen am teuersten ist. Das verfeinert die Lehre,
 widerlegt sie nicht.
+
+**Befund aus s04c/s04d — der Wächter prüft die Marker-Hälfte, nicht die
+Liste.** Der Abschnitt *Offene Wellen* trägt zwei unabhängige Aussagen: Die
+Liste folgt den **Dateien**, der Ruhe-Marker folgt dem **Anspruch**. Beides
+zugleich (Wellen gelistet, nichts beansprucht) ist der Normalfall direkt nach
+der Wellen-Eröffnung — und `planning` bleibt dabei grün (s04c); fehlt der
+Marker bei leerem `in-progress/`, meldet derselbe Sensor `planning-drift`
+(s04d). Damit ist die Äquivalenz *Marker ⟺ kein Slice in `in-progress/`* in
+**beiden** Richtungen gemessen statt behauptet. Was **nicht** gewächtert ist:
+die Liste gegen die Welle-Dateien — das wäre eine Bijektion und braucht ein
+eigenes Prädikat (offener `waves.dir`-CR, siehe s04b).
 
 **Zwei Werkzeug-Lehren aus dem Bau** (beide kosteten je einen Fehllauf):
 `git init --bare` ohne `-b main` lässt Clones leer auschecken — drei Szenarien

@@ -94,6 +94,31 @@ s04_zwei_wellen_und_waves() {
   verdikt "s04b waves.dir an: Singleton meldet wave-drift" "wave-drift" "$(echo "$out"|tail -1)" $ok
 }
 
+s04c_leerer_anspruch() {
+  # Spiegelrichtung zur bekannten Negativ-Probe (Marker BEI beanspruchtem Slice
+  # meldet rot): offene Wellen in der Liste UND nichts beansprucht — der
+  # baseline-legitime Zustand nach der Wellen-Eroeffnung. Misst, dass der
+  # Waechter die MARKER-Haelfte prueft und die Liste ihn nicht stoert.
+  topo
+  cd "$WORK/sim/alice"
+  printf '# Welle welle-2-ausbau: Ausbau\n\n**Verantwortlich:** bob. **Datum:** 2026-08-16.\n' > docs/plan/planning/welle-2-ausbau.md
+  sed -i 's|- \[welle-1-basis\](../welle-1-basis.md)|- [welle-1-basis](../welle-1-basis.md)\n- [welle-2-ausbau](../welle-2-ausbau.md)|' docs/plan/planning/in-progress/roadmap.md
+  sed -i '/welle-2-ausbau | welle-1 done/d' docs/plan/planning/in-progress/roadmap.md
+  # Anspruch zuruecknehmen: in-progress/ traegt keinen Slice mehr ...
+  git mv docs/plan/planning/in-progress/slice-001-kern.md docs/plan/planning/open/
+  # ... und der Ruhe-Marker tritt NEBEN die Liste, nicht an ihre Stelle.
+  sed -i 's|- \[welle-2-ausbau\](../welle-2-ausbau.md)|- [welle-2-ausbau](../welle-2-ausbau.md)\n\nNichts in Arbeit.|' docs/plan/planning/in-progress/roadmap.md
+  git add -A && git commit -qm "Anspruch zurueck, Ruhe-Marker neben der Liste" && git push -q origin main
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s04c Marker NEBEN Liste (Wellen offen, nichts beansprucht): planning GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
+  # Gegenprobe, zweite Richtung derselben Aequivalenz: Marker weg, in-progress/
+  # weiter leer. Ohne diesen Lauf waere "haelt in BEIDE Richtungen" behauptet.
+  sed -i '/^Nichts in Arbeit\.$/d' docs/plan/planning/in-progress/roadmap.md
+  git add -A && git commit -qm "Marker entfernt (Gegenprobe)" && git push -q origin main
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=1 || ok=0
+  verdikt "s04d Marker FEHLT bei leerem in-progress/: planning ROT" "Befund (Ruhe-Marker fehlt)" "$(echo "$out"|tail -1)" $ok
+}
+
 s05_mr_hybrid() {
   topo
   cd "$WORK/sim/alice"; git switch -qc a/mr
@@ -142,5 +167,6 @@ s07_sichtung_liest_alt() {
 
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; echo
 s01_doppel_anspruch; s02_stille_nummer; s03_register_doppelzeile
-s04_zwei_wellen_und_waves; s05_mr_hybrid; s06_branch_protection; s07_sichtung_liest_alt
+s04_zwei_wellen_und_waves; s04c_leerer_anspruch
+s05_mr_hybrid; s06_branch_protection; s07_sichtung_liest_alt
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL"; [ $FAIL -eq 0 ]
