@@ -24,9 +24,21 @@ Closure-Kriterien stehen in der Welle-Datei, nicht hier.
 
 - [<welle-NN-titel>](../<welle-NN-titel>.md)
 
-<!-- BEDIENHINWEIS: Ist nichts beansprucht (in-progress/ ohne Slices), steht
-hier statt der Liste der Ruhe-Marker: Nichts in Arbeit. Ein Doku-Sensor kann
-den Marker gegen das Verzeichnis halten. -->
+<!-- BEDIENHINWEIS: Zwei unabhängige Aussagen in diesem Block. Die Liste oben
+folgt den Dateien (ein Zeiger je offener Welle-Datei). Trägt in-progress/
+keinen Slice, kommt der Ruhe-Marker ZUSÄTZLICH dazu — nicht an Stelle der
+Liste; beides zugleich ist der Normalfall direkt nach der Wellen-Eröffnung.
+Gewächtert ist nur die Marker-Hälfte (Marker genau dann, wenn in-progress/
+keinen Slice trägt), die Liste nicht.
+
+WORTLAUT des Markers: Baseline-Regelwerk modul-06-roadmap.md, Bullet
+"Offene Wellen". Hier bewusst NICHT zitiert, und das ist eine Regel, keine
+Nachlässigkeit: Ein Doku-Sensor matcht den Marker als Substring dieses
+Blocks, also matcht sich jeder Regel-, Hinweis- oder Beispieltext selbst,
+der den Wortlaut literal trägt — der Block meldete "Ruhe" bei beanspruchtem
+Slice. Aus demselben Grund gehört der Wortlaut in keine Sektions-Regel-Zeile
+oben. Wer den Sensor selbst baut: Code-Fences beim Matchen aus dem Block
+nehmen, sonst schlägt ein Beispiel-Auszug durch. -->
 
 ## Nächste Wellen
 

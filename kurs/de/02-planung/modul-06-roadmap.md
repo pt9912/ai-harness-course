@@ -137,11 +137,28 @@ nicht hier.
 - [welle-3-skalierung](../welle-3-skalierung.md)
 ```
 
-Ist nichts beansprucht (`in-progress/` ohne Slices), trägt der Abschnitt
-stattdessen den Ruhe-Marker *Nichts in Arbeit* — eine deklarierte Redundanz
-**mit Wächter**: Ein Doku-Sensor hält den Marker gegen das Verzeichnis. Das
-*Geplante Ende* in der Welle-Datei *erscheint* als Schätzung — es triggert
-nichts, es prognostiziert. Wenn die Schätzung kippt, kippt sie als
+Der Abschnitt trägt **zwei unabhängige Aussagen**. Die *Liste* folgt den
+Dateien: ein Zeiger je offener Welle-Datei. Der Ruhe-Marker *Nichts in
+Arbeit* folgt dem Anspruch: Er steht genau dann, wenn `in-progress/` keinen
+Slice trägt — **zusätzlich zur Liste, nicht an ihrer Stelle**. Beides
+zugleich ist der Normalfall direkt nach der
+[Wellen-Eröffnung](#die-wellen-eröffnungs-prozedur): Die Welle ist eröffnet
+(ihr Zeiger steht), beansprucht hat sie noch niemand (der Marker steht). Der
+Marker sagt, was sein Wortlaut sagt — *nichts in Arbeit*, nicht *keine
+offene Welle*.
+
+Gewächtert ist davon nur die Marker-Hälfte; sie ist die **deklarierte
+Redundanz**: Ein Doku-Sensor hält den Marker gegen das Verzeichnis, und zwar
+in **beide** Richtungen — ein fehlender Marker bei leerem `in-progress/` und
+ein stehengebliebener Marker bei beanspruchtem Slice sind derselbe Defekt.
+Die Liste ist Ableitung **ohne** Wächter: Sie gegen die Welle-Dateien zu
+halten wäre eine Bijektion, kein Marker-Vergleich, und braucht ein eigenes
+Prädikat. Das ist keine Lücke, die man verschweigt, sondern eine, die man
+kennt — wer die Kopplung mechanisiert, muss wissen, *welche* Hälfte sein
+Sensor prüft, sonst hält er einen halben Wächter für einen ganzen.
+
+Das *Geplante Ende* in der Welle-Datei *erscheint* als Schätzung — es
+triggert nichts, es prognostiziert. Wenn die Schätzung kippt, kippt sie als
 Schätzung, nicht als Closure-Kriterium.
 
 **Schritt 5 — Meilenstein neben die Welle setzen, nicht in sie.** Der
@@ -491,7 +508,9 @@ weglassen:
    Ziel-Form [`welle.template.md`](../../../lab/templates/docs/plan/planning/welle.template.md))
    **— ihre Zeile verlässt *Nächste Wellen*, unter *Offene Wellen* steht der
    Zeiger auf die Datei.** Der Zustand ist die Verzeichnis-Position, nicht ein
-   Status-Feld.
+   Status-Feld. Ein etwaiger Ruhe-Marker **bleibt dabei stehen**: Die Welle ist
+   eröffnet, beansprucht ist sie erst mit dem ersten Slice in `in-progress/`
+   (§*Offene Wellen* — zwei unabhängige Aussagen).
 
 **Was hier bewusst *nicht* passiert:** Der Implementer-Agent bekommt
 `done/` nicht in seinen Lauf-Kontext. Schritt 2 ist eine
