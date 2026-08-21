@@ -190,6 +190,9 @@ Jedes Finding:
 - `pfad`: Datei:Zeile
 - `befund`: 1–2 Sätze, beobachtbar, ohne Lösungsvorschlag
 - `verifizierbar`: ja/nein — gibt es einen Gate-Lauf, der es bestätigen würde?
+- `klasse`: stabile Kurz-Bezeichnung des Fehlermusters, z. B. "Tie-Break in
+  sortierender Operation nicht dokumentiert" — speist den
+  Steering-Loop-Zähler (siehe §Pflege)
 
 Zusätzlich am Ende: eine Zeile "geprüft, ohne Befund" pro betrachtetem
 Verzeichnis (Negativbefund-Zeile — siehe Modul 10 §"Reviewer berichtet

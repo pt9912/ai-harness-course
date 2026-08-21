@@ -69,7 +69,9 @@ achtest du"; Vorlage
   11), keine Validation (Validator) — sonst wird der Reviewer zum zweiten
   Implementer. Auffälliges außerhalb → INFO-Finding mit Rollen-Verweis.
 - **Output-Schema strukturiert** (`kategorie · quelle · pfad · befund ·
-  verifizierbar`) plus je betrachtetem Bereich eine **Negativbefund-Zeile**
+  verifizierbar · klasse`; `klasse` = stabile Kurz-Bezeichnung des
+  Fehlermusters, speist den Steering-Loop-Zähler — siehe Pflege unten) plus
+  je betrachtetem Bereich eine **Negativbefund-Zeile**
   („geprüft, ohne Befund"; eigene Sektion unten).
 - **Pflege (Steering-Loop):** Das „dreimal" zählt der Skill nicht selbst —
   jeder Lauf steht für sich; gezählt wird über Finding-Klasse →
