@@ -11,6 +11,61 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 81 — 2026-08-21 · Zwei Hälften, ein Wächter
+
+Zwei Befunde aus einem Konsumenten-Audit, beide von derselben Bauart: Die
+Regel nennt ihr Mittel und lässt offen, was sie trägt — und wer sie
+mechanisiert, merkt es als Erster.
+
+### Entschieden
+
+- **`klasse` ist das sechste Feld des Output-Schemas** (Modul 10). Welle 43
+  führte die Finding-Klasse als Übergabepunkt in den Steering-Loop-Zähler ein
+  und verankerte sie im Report-Template — das §Output-Schema der **Quelle**
+  zählte weiter fünf Felder. Das Template erklärt seine Felder zugleich für
+  *„nur gespiegelt, bei Abweichung gilt der Skill"*: Nach seiner eigenen
+  Konfliktregel war `klasse` damit nichtig, während der Zähler daran hing.
+  Fix-Richtung Quelle — Modul 10 führt das Feld, Regelwerk-Split und
+  `reviewer.template.md` ziehen wortgleich mit; ohne den Skill-Mitzieh wäre
+  die Drift nur eine Ebene tiefer gewandert (Report-Template sechs Felder,
+  Reviewer-Skill fünf).
+- **Der Ruhe-Marker steht *zusätzlich* zur Liste, nicht an ihrer Stelle**
+  (Modul 6 §Offene Wellen). Der Abschnitt trägt zwei **unabhängige**
+  Aussagen: Die Liste folgt den **Dateien** (ein Zeiger je offener
+  Welle-Datei), der Marker folgt dem **Anspruch** (`in-progress/` ohne
+  Slice). Das alte „stattdessen" stellte beide gegeneinander und widersprach
+  damit der eigenen Wellen-Eröffnungs-Prozedur, deren Schritt 3 den Zeiger
+  setzt, *bevor* ein Slice beansprucht ist — der Normalfall nach jeder
+  Eröffnung war unter der Struktur-Regel nicht darstellbar. Der Marker sagt
+  jetzt, was sein Wortlaut sagt: *nichts in Arbeit*, nicht *keine offene
+  Welle*.
+- **Die Wächter-Semantik ist benannt statt angedeutet.** Gewächtert ist nur
+  die Marker-Hälfte, und zwar in **beide** Richtungen: fehlender Marker bei
+  leerem `in-progress/` und stehengebliebener Marker bei beanspruchtem Slice
+  sind derselbe Defekt. Die Liste ist Ableitung **ohne** Wächter — sie gegen
+  die Welle-Dateien zu halten wäre eine Bijektion, kein Marker-Vergleich, und
+  braucht ein eigenes Prädikat. Das steht ausdrücklich da: Wer die Kopplung
+  mechanisiert, soll wissen, *welche* Hälfte sein Sensor prüft, statt einen
+  halben Wächter für einen ganzen zu halten.
+- **Der Marker-Wortlaut gehört in keinen Sektions-Text** — neu im
+  Bedienhinweis von `roadmap.template.md`, der ihn selbst literal trug. Ein
+  Doku-Sensor matcht den Marker als Substring des Blocks; ein Hinweis- oder
+  Regeltext, der den Wortlaut zitiert, matcht sich selbst und meldete „Ruhe"
+  bei beanspruchtem Slice. Die Vorlage verweist für den Wortlaut jetzt aufs
+  Regelwerk, statt ihn zu nennen, und sagt Sensor-Bauern dazu: Code-Fences
+  beim Matchen aus dem Block nehmen.
+
+### Gemessen, nicht behauptet: Team-Sim 11/11
+
+„Hält in beide Richtungen" wäre ohne Lauf eine Behauptung gewesen.
+`lab/team-sim/` bekommt zwei Szenarien (Lauf 2026-08-21, 11/11): **s04c**
+stellt den baseline-legitimen Zustand her — zwei Wellen gelistet,
+`in-progress/` leer, Marker neben der Liste — und `planning` bleibt grün;
+**s04d** nimmt allein den Marker weg, und derselbe Sensor meldet
+`planning-drift`. Damit ist die Äquivalenz gemessen statt gelesen. Der
+`waves.dir`-CR-Faden bleibt unberührt offen: Die Bijektion Liste ↔ Dateien
+prüft weiterhin niemand.
+
 ## Welle 80 — 2026-08-16 · Geprobt, nicht belegt
 
 Zwischen *entworfen* (Welle 79) und *belegt* (braucht ein adoptierendes Team)
