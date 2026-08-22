@@ -1,6 +1,6 @@
 # Roadmap — DocSearch
 
-**Status:** Aktiv. **Letzte Änderung:** 2026-06-03.
+**Status:** Aktiv. **Letzte Änderung:** 2026-08-22.
 
 **Format-Regel:** Reihenfolge von **Wellen**, keine Reihenfolge von
 Terminen. Daten sind Schätzungen, korrigierbar.
@@ -27,7 +27,7 @@ der Welle-Datei, nicht hier:
 
 | Meilenstein | Welle(n) | Trigger | Status |
 |---|---|---|---|
-| M1 — Lauffähiger Stack | welle-1-mvp | DoD `make gates` grün, ein Lab-Beispiel pro Sprache | erreicht 2026-06-02 |
+| M1 — Lauffähiger Stack | welle-1-mvp | DoD `make gates` grün, ein Lab-Beispiel pro Sprache | erreicht 2026-06-02 — [`../done/welle-1-results.md`](../done/welle-1-results.md) |
 | M2 — Qualitätsschwelle | welle-2-qualitaet | welle-2-qualitaet geschlossen (slice-013 in `done/`, Property-Suite läuft 100 Generationen) | offen |
 | M3 — Skalierbar | welle-3-skalierung | p95 < 1 s auch bei 100k Einträgen | offen |
 | M4 — Produktionsreif | welle-4-betrieb | Releases, Runbook, OTel-Pipeline | offen |

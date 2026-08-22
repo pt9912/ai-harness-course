@@ -48,6 +48,12 @@ bewusst kurz (Ergänzungs-Kanal, nicht Hauptkanal).
   abwesenden Text („früher stand hier …") oder bricht mitten im Satz ab, weil
   eine Teilersetzung den Rest stehen ließ. Kein Gate fängt das (siehe
   Baseline-Regelwerk `grundlagen-harness-dateien.md` §Was ein Kommentar trägt)
+- **Zustandsfeld trägt Chronik** — eine `Stand`-/`Status`-Zelle (Roadmap,
+  Beobachtungs-Register, Meilenstein) erzählt, wie der Zustand entstand, statt
+  Zustand und Beleg als Anker zu nennen; oder ein Drift-Log protokolliert
+  Schließungen und erreichte Meilensteine. Kein Gate fängt das (siehe
+  Baseline-Regelwerk `grundlagen-harness-dateien.md` §Was ein Kommentar trägt,
+  *Dieselbe Regel für Zustandsfelder*)
 - <**repo-spezifisch #1** — eine Regel, die ein generischer Skill nicht abdeckt,
   z. B. „git mv + Inhalt = zwei Commits" oder „Accepted-ADRs immutable">
 - <**repo-spezifisch #2** — eine zweite solche Regel>

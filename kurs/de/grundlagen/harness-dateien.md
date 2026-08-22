@@ -137,6 +137,27 @@ nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit welle-<NN>
 ([`traceability.md` §Herkunfts-Anker](traceability.md#herkunfts-anker-für-steering-loop-regeln)) —
 und nie als Absatz.
 
+**Dieselbe Regel für Zustandsfelder.** Ein Feld, das einen *Zustand* trägt —
+`Stand` oder `Status` einer Register-Zeile, die Stand-Zelle eines
+Roadmap-Fadens, die Status-Spalte eines Meilensteins —, ist ein
+Zustands-Artefakt wie der Kommentar, nur im Rumpf. Es nennt den Zustand und
+den Beleg — als auflösbaren Anker (Welle, Commit, Register-Zeile, Messdatei),
+nicht als Chronik, wie der Zustand zustande kam; eine Begründung des Zustands
+(*gestrichen — tritt nicht mehr auf, weil …*) ist Zustand, nicht Chronik.
+Was sonst in der Zelle stand, hat seine Orte: Behauptung und vorgeschlagene
+Handlung beim Vorhaben selbst, die Schließung im Closure-Log (im
+Wellen-Betrieb *Abgeschlossene Wellen*; sonst dort, wo das Repo Schließungen
+führt — die Slice-Datei in `done/` und `git`, ohne Slice-Lifecycle etwa ein
+`CHANGELOG`), die Umplanung im Drift-Log, und was keines davon ist, hält
+`git`. Ein zweites Log neben dem Closure-Log — ein Drift-Log, das
+Schließungen und erreichte Meilensteine protokolliert — ist eine Kopie, und
+Kopien driften
+([§Source Precedence](source-precedence.md#source-precedence)). Die zwei Tests
+oben gelten unverändert: Adressat ist, wer den Zustand liest, um zu handeln —
+nicht, wer die Geschichte hören will; die Zeitform ist der Indikativ über
+das, was ist. Wie das in der Roadmap aussieht, sagt
+[Modul 6, Schritt 6](../02-planung/modul-06-roadmap.md#worked-example-einen-datumswunsch-in-eine-trigger-welle-übersetzen).
+
 **Emittierte Artefakte tragen keinen Anker.** Erzeugt ein Werkzeug Code,
 Konfiguration oder Skripte *in ein anderes Repo*, reist der Erzeuger-Kontext
 nicht mit: Eine Slice- oder Befund-Nummer des Erzeugers löst dort in **null**
@@ -149,8 +170,11 @@ Material, das nicht mitreist*.
 > der Sensor dafür nicht, und bis dahin trägt sie denselben Weg wie die
 > anderen. **Deliberation** und **Herkunfts-Prosa** sind Urteile, dieselbe
 > Klasse wie *„ist dieser Satz eine Norm?"* im Abschnitt oben. Träger aller
-> drei ist deshalb das Briefing plus der Reviewer-Skill, nicht ein Gate. Und
-> was ein Briefing allein erreicht, ist gemessen: Auf ausdrückliche Anweisung
+> drei ist deshalb das Briefing plus der Reviewer-Skill, nicht ein Gate — für
+> Zustandsfelder ebenso: *„ist das eine Chronik?"* ist ein Urteil, Träger sind
+> das Briefing (`AGENTS.md` §3.7) und der HIGH-Eintrag *Zustandsfeld trägt
+> Chronik* im Reviewer-Skill. Und was ein Briefing allein erreicht, ist
+> gemessen: Auf ausdrückliche Anweisung
 > korrigierte ein Agent sieben Kommentare — fünf sauber, einen reproduzierte er
 > im selben Diff, einen ließ er als Trümmer stehen. Wer hier ein Gate
 > behauptet, wo keines steht, betreibt *halluziniertes Gate*

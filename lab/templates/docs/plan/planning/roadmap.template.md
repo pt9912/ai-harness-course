@@ -66,6 +66,12 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 <!--
 Externe Versprechen oder interne Trigger-Punkte.
 "M2: erste lauffähige Fassung" ist ein Meilenstein.
+Status: "offen" oder "erreicht YYYY-MM-DD" plus Beleg als auflösbarer
+Anker (z. B. Tag, Workflow-Lauf, Ergebnis-Notiz). Erreichte Meilensteine
+bleiben hier in der Tabelle —
+sie gehören nicht ins Drift-Log, und die Status-Zelle erzählt nicht, wie es
+dazu kam (Baseline-Regelwerk grundlagen-harness-dateien.md §Was ein
+Kommentar trägt, "Dieselbe Regel für Zustandsfelder").
 -->
 
 | Meilenstein | Welle(n) | Trigger | Status |
@@ -112,6 +118,10 @@ Roadmap, jede Zeile voll heißt treibende.
 <!--
 Wenn Wellen umgeplant wurden: Datum, Grund, neue Reihenfolge.
 Steering-Loop-relevant.
+NUR Umplanungen: Trigger verschoben, präzisiert oder ersetzt; Slice oder
+Welle umgehängt. KEINE Schließungen (die stehen im Closure-Log oben) und
+KEINE erreichten Meilensteine (Status-Spalte) — sonst führt diese Tabelle ein
+zweites Closure-Log, und zwei Logs driften.
 -->
 
 | Datum | Was wurde geändert? | Warum? |

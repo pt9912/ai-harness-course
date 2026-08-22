@@ -101,6 +101,25 @@ ist, sondern was er zu tragen hat.
   nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit welle-<NN>`
   ([`grundlagen-traceability.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker))
   — und nie als Absatz.
+- **Dieselbe Regel für Zustandsfelder.** Ein Feld, das einen *Zustand* trägt —
+  `Stand` oder `Status` einer Register-Zeile, die Stand-Zelle eines
+  Roadmap-Fadens, die Status-Spalte eines Meilensteins —, ist ein
+  Zustands-Artefakt wie der Kommentar, nur im Rumpf. Es nennt den Zustand und
+  den Beleg — als auflösbaren Anker (Welle, Commit, Register-Zeile,
+  Messdatei), nicht als Chronik, wie der Zustand zustande kam; eine Begründung
+  des Zustands (*gestrichen — tritt nicht mehr auf, weil …*) ist Zustand,
+  nicht Chronik. Was sonst in der Zelle stand, hat seine Orte: Behauptung und
+  vorgeschlagene Handlung beim Vorhaben selbst, die Schließung im Closure-Log
+  (im Wellen-Betrieb *Abgeschlossene Wellen*; sonst dort, wo das Repo
+  Schließungen führt — die Slice-Datei in `done/` und `git`, ohne
+  Slice-Lifecycle etwa ein `CHANGELOG`), die Umplanung im Drift-Log, und was
+  keines davon ist, hält `git`. Ein zweites Log neben dem Closure-Log — ein Drift-Log, das
+  Schließungen und erreichte Meilensteine protokolliert — ist eine Kopie, und
+  Kopien driften ([`grundlagen-source-precedence.md` §Source Precedence](grundlagen-source-precedence.md#source-precedence)).
+  Die zwei Tests oben gelten unverändert: Adressat ist, wer den Zustand
+  liest, um zu handeln — nicht, wer die Geschichte hören will; die Zeitform
+  ist der Indikativ über das, was ist. Wie das in der Roadmap aussieht, sagt
+  [`modul-06-roadmap.md` §Roadmap-Struktur](modul-06-roadmap.md#roadmap-struktur-fünf-abschnitte-modul-6).
 - **Emittierte Artefakte tragen keinen Anker.** Erzeugt ein Werkzeug Code,
   Konfiguration oder Skripte *in ein anderes Repo*, reist der Erzeuger-Kontext
   nicht mit: Eine Slice- oder Befund-Nummer des Erzeugers löst dort in **null**
@@ -120,7 +139,9 @@ ist, sondern was er zu tragen hat.
   drei ist das Briefing (Ziel-Form
   `../templates/AGENTS.template.md` §3) plus der HIGH-Eintrag
   *Kommentar trägt keine der fünf Klassen* im Reviewer-Skill (Ziel-Form
-  `../templates/.harness/skills/reviewer.template.md`).
+  `../templates/.harness/skills/reviewer.template.md`). Für Zustandsfelder
+  ebenso: *„ist das eine Chronik?"* ist ein Urteil — Träger sind das Briefing
+  (§3.7) und der HIGH-Eintrag *Zustandsfeld trägt Chronik* im Reviewer-Skill.
 - **Grenze:** Einen *Sensor* zu behaupten, wo keiner steht, wäre die Klasse
   *halluziniertes Gate* (Modul 13). Gemessen: Auf ausdrückliche Anweisung
   korrigierte ein Agent sieben Kommentare — fünf sauber, einen reproduzierte er

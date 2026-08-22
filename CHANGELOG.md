@@ -11,6 +11,73 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 83 — 2026-08-22 · Zustand und Anker — die zweite Hälfte der Zeitform-Regel
+
+Welle 71 bestimmte, was ein Kommentar trägt, und nannte die Klasse beim Namen:
+*Zeitform im Zustands-Artefakt*. Ihre zweite Hälfte — die Rümpfe von Registern
+und Roadmap — blieb unbestimmt, und die Roadmap dieses Repos zeigte, was dann
+passiert. Gemessen am 2026-08-22, bevor eine Zeile Norm geschrieben war.
+
+### Gemessen, nicht behauptet
+
+`docs/roadmap.md` vor dem Umbau: die `Stand`-Zellen dreier offener Fäden mit
+894, 1.174 und 1.303 Zeichen — Chroniken statt Zustände, eine davon mit zwei
+Punkten, die laut `docs/team.md` seit Welle 79 umgesetzt waren; das Drift-Log
+mit der Zeile „Noch keine." und darunter **18 Zeilen** — neun Meilensteine,
+neun Faden-Schließungen, **null** Trigger-Verschiebungen —, während der
+CHANGELOG dieselben neun Schließungen längst führte (Wellen 49, 52, 54, 55, 58,
+73, 74) und §Abgeschlossene Wellen Nicht-Duplikation zusagte; dazu zwei
+stehengebliebene Zustandssätze (`Stand: 2026-07-31`, „Der letzte war v5.6.0").
+Die Regel existierte schon — für Kommentare (Hard Rule *Herkunft als ein
+auflösbares Feld, nie als Absatz*), und ihr Vorbild auch: die `Stand`-Spalte
+des Beobachtungs-Registers (*„verkörpert in `AGENTS.md` §2.7 (`seit welle-1`)"*).
+
+### Entschieden
+
+- **Dieselbe Regel für Zustandsfelder** (`harness-dateien.md` §Was ein
+  Kommentar trägt, Quelle): Eine `Stand`-/`Status`-Zelle nennt den Zustand
+  und den Beleg — als auflösbaren Anker, nie als Chronik; eine Begründung des
+  Zustands ist Zustand. Was sonst in der Zelle stand, hat seine Orte:
+  Behauptung und Handlung beim Vorhaben, Schließung im Closure-Log
+  (Wellen-Betrieb: *Abgeschlossene Wellen*; sonst dort, wo das Repo
+  Schließungen führt — `done/` und `git`, ohne Slice-Lifecycle etwa der
+  `CHANGELOG`), Umplanung im Drift-Log, der Rest in `git`. Ein Drift-Log, das
+  Schließungen und Meilensteine protokolliert, ist ein zweites Closure-Log —
+  eine Kopie, und Kopien driften. Adressaten- und Zeitform-Test gelten
+  unverändert; Träger sind Briefing (`AGENTS` §3.7) und Reviewer-Skill, kein
+  Gate — „ist das eine Chronik?" ist ein Urteil.
+- **Modul 6, Schritt 6 sagt, was die Register tragen — und was nicht:**
+  Closure-Log = was geschlossen ist; Drift-Log = was umgeplant wurde
+  (Trigger verschoben, präzisiert, ersetzt; Slice oder Welle umgehängt) und
+  sonst nichts; erreichte Meilensteine stehen mit Datum und Beleg in der
+  `Status`-Spalte ihrer Tabelle. Regelwerk-Spiegel (beide) wortgleich im
+  Operativen; `roadmap.template.md` trägt die Regel als Bedienhinweis an
+  Meilenstein- und Drift-Tabelle; der Reviewer-Skill bekommt den HIGH-Eintrag
+  *Zustandsfeld trägt Chronik*, `AGENTS.template.md` §3.7 den Zusatz; kein
+  Sensor behauptet. Das Beispiel zieht nach: M1 trägt seinen Beleg.
+- **`docs/roadmap.md` nach der Regel umgebaut** (Commit `aaf1145`, vor der
+  Norm — das Artefakt war das Audit): `Stand`-Zellen 21–358 Zeichen, Behauptung
+  und Handlung in der Faden-Zelle, Messungen als Commit-/Register-Anker;
+  Drift-Log mit fünf echten, aus git datierten Umplanungen; erreichte
+  Meilensteine unter §Meilensteine in der Modul-6-Form; geschlossene Fäden
+  verlassen die Tabelle.
+- **Faden *Roadmap-Rumpf trägt Entstehungsgeschichte* geschlossen** — Norm
+  geschrieben, Artefakt umgebaut; die Zeile verlässt die Tabelle, wie die Regel
+  es sagt.
+
+**Nachgetragen:** Zwei Schließungen standen bisher nur in der `Stand`-Zelle
+ihres Fadens, nicht im Register — der Faden *d-check-Pin-Sprung (v0.56.0 →
+v0.59.0)*, geschlossen am 2026-08-16 (Commit `061fe8f`), und der Faden
+*`waves.dir` und das Offene-Wellen-Modell*, geschlossen in Welle 82 (Commit
+`f108b1e`). Die neun Schließungen der alten Drift-Tabelle standen bereits in
+ihren Wellen.
+
+**Neuer Faden:** die Kopfzeile `Status:`/`Letzte Änderung:` der Roadmap
+(Template-Form) war in Kurs-Roadmap und Beispiel stale — gepflegtes Feld oder
+`git`? In `docs/roadmap.md` eingetragen, nicht entschieden.
+
+Gates grün: `make check` 0 ERROR / 0 WARN, `make bundle-check`.
+
 ## Welle 82 — 2026-08-22 · Die zweite Hälfte bekommt ihren Wächter
 
 Welle 81 hatte die Lücke benannt: Der Abschnitt *Offene Wellen* trägt zwei

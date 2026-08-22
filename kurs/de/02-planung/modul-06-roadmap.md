@@ -198,6 +198,9 @@ Das ist der einzige Ort, an dem wellenlose Arbeit die Roadmap überhaupt
 berührt — und auch hier nicht als Zustand, sondern als Beleg für eine
 *externe* Bedingung, die ohnehin außerhalb der Welle liegt.
 
+Ein erreichter Meilenstein bleibt in der Tabelle: `Status` sagt *erreicht* mit
+Datum und Beleg (Schritt 6).
+
 Der Audit-Termin (`2026-07-31`) ist Anhang im Meilenstein-Eintrag, nicht
 Trigger der Welle. Das hat eine harte Konsequenz: wenn das Audit-Datum
 gehalten werden *muss*, aber die Closure-Trigger nicht erreichbar sind,
@@ -233,6 +236,23 @@ Die Drift-Tabelle ist nicht Hilfsmittel; sie ist das Audit-Signal. Wer sie
 leer hat, hat eine starre Roadmap. Wer sie *jeden* Eintrag voll hat,
 hat eine treibende Roadmap. Closure-Log (ruhender Bestand) und Drift-Log
 (Bewegung) zusammen machen die Vergangenheit der Roadmap auditierbar.
+
+**Was die Register tragen — und was nicht.** Die drei rückblickenden Stellen
+der Roadmap beantworten je genau eine Frage. Das Closure-Log sagt, *was*
+geschlossen ist: Welle, Datum, Zeiger auf die Ergebnis-Notiz — und es ist das
+einzige Closure-Log der Roadmap. Das Drift-Log
+sagt, *was umgeplant* wurde — ein Trigger verschoben, präzisiert oder ersetzt,
+ein Slice oder eine Welle umgehängt — und sonst nichts: Eine Schließung ist
+keine Umplanung, ein erreichter Meilenstein auch nicht; für den sagt die
+`Status`-Spalte der Meilenstein-Tabelle *erreicht* mit Datum und Beleg. Wer
+Schließungen oder Meilensteine ins Drift-Log schreibt, führt ein zweites
+Closure-Log, und zwei Logs driften. Und jede `Stand`-/`Status`-Zelle — in der
+Roadmap wie im Beobachtungs-Register — trägt den Zustand und den Beleg als
+auflösbaren Anker, nie die Chronik
+([`harness-dateien.md` §Was ein Kommentar trägt](../grundlagen/harness-dateien.md#was-ein-kommentar-trägt--code-konfiguration-skripte),
+*Dieselbe Regel für Zustandsfelder*): *„verkörpert in `AGENTS.md` §2.7
+(`seit welle-1`)"* ist eine Zustandszelle; ein Absatz darüber, wie die Regel
+entstand, ist Herkunfts-Prosa im Rumpf.
 
 **Schritt 7 — Bewusstes Brechen: Datum als Trigger schreiben.**
 Formuliere einen Closure-Trigger absichtlich als Datum (*"welle-3-
@@ -375,7 +395,7 @@ keinen Träger. Ein fester Ort streicht alle drei Fälle — die Datei existiert
 Repo-Beginn, unabhängig davon, ob je eine Welle geschnitten wurde.
 
 **Form.** Sechs Spalten; die Kennung ist die erste, die letzte trägt den
-Verbleib:
+Verbleib — Zustand und Beleg als Anker, keine Chronik (Schritt 6):
 
 ```markdown
 <!-- Auszug: BEO-002 bis BEO-004, BEO-006 und BEO-007 hier weggelassen -->

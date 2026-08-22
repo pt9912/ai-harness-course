@@ -149,9 +149,9 @@ ist ein ADR, kein PR-Kommentar.
 
 ### 3.7 Ein Kommentar beschreibt, was da ist
 
-Gilt für Code, Konfiguration und Skripte. Ein Kommentar trägt eine dieser
-Klassen — **Zusage · Kopplung · Abgrenzung · Rang-Zeiger · Grenze** —
-und schreibt an den, der die Stelle *ändert*, nicht an den, der die
+Gilt für Code, Konfiguration und Skripte — und für Zustandsfelder (unten).
+Ein Kommentar trägt eine dieser Klassen — **Zusage · Kopplung · Abgrenzung ·
+Rang-Zeiger · Grenze** — und schreibt an den, der die Stelle *ändert*, nicht an den, der die
 Entscheidung *trifft*. Regeln dieser Sektion: Baseline-Regelwerk
 `grundlagen-harness-dateien.md` §Was ein Kommentar trägt.
 
@@ -163,6 +163,11 @@ werden konnte"> — Indikativ über den Zustand.
 **Falsch:** <z.B. „die frühere Fassung prüfte nur die Länge"> — beschreibt
 abwesenden Text.
 **Richtig:** die geltende Zusage nennen; die vorige hält `git`.
+
+**Zustandsfelder ebenso:** Eine `Stand`-/`Status`-Zelle in Roadmap,
+Beobachtungs-Register oder Meilenstein-Tabelle nennt den Zustand und den Beleg
+als auflösbaren Anker, nicht die Chronik; das Drift-Log der Roadmap trägt nur
+Umplanungen, keine Schließungen und keine erreichten Meilensteine.
 
 **Begründung:** Die Abwägung gehört in die ADR, die Historie in `git`, die
 Herkunft in **ein** auflösbares Feld (`LH-*`, `ADR-*`, `· seit welle-<NN>`).

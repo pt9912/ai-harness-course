@@ -21,7 +21,7 @@ liest, lädt sich Modul-2-Tiefe auf, bevor ein Kontext dafür existiert.
 | [`begriffe.md`](begriffe.md) | Glossar der Kernbegriffe, Trennschärfen |
 | [`source-precedence.md`](source-precedence.md) | Source Precedence, Spec-Stratifizierung, ID-Schema als Klammer |
 | [`referenz-richtung.md`](referenz-richtung.md) | Referenz-Richtung (SDP), Referenzmatrix, Spec-Straten |
-| [`harness-dateien.md`](harness-dateien.md) | Verzeichniskonvention, Template-Schichtung, was ein Kommentar trägt (Code/Config/Skripte), `harness/README.md`- und `conventions.md`-Pattern |
+| [`harness-dateien.md`](harness-dateien.md) | Verzeichniskonvention, Template-Schichtung, was ein Kommentar trägt (Code/Config/Skripte) und was Zustandsfelder tragen, `harness/README.md`- und `conventions.md`-Pattern |
 | [`bootstrap.md`](bootstrap.md) | Harness-Bootstrap, Sub-Area, Modus pro Sub-Area, Trigger-Klassen |
 | [`traceability.md`](traceability.md) | Traceability-Constraint, Herkunfts-Anker für Steering-Loop-Regeln |
 | [`konzeptkarte.md`](konzeptkarte.md) | Reduzierte Artefaktkette, vier Leitfragen, 2×2-Schnellanker gegen kognitive Überlast |
