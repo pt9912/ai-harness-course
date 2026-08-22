@@ -165,8 +165,10 @@ Register je wechselt, und ein Datum, das niemand pflegt, behauptet einen —
 gemessen an Roadmap und Beobachtungs-Register des Labs, die Wochen hinter
 `git` standen. Der Zustand eines Registers ist sein Inhalt (die Zeilen mit
 ihren Belegen, das Drift-Log mit seinen Daten), sein Änderungsdatum hält
-`git`. Anders die Sicht-Straten der Spec: Dort ist `Letzte Änderung` der
-bewusste **Frische-Marker**
+`git`. Ein Datum, das ein benannter Trigger pflegt, ist kein solcher Kopf —
+der Unterschied ist der Trigger, nicht die Zeile: Der Wellen-Stand des
+Regelwerks wird mit jeder Welle gesetzt, und im Sicht-Stratum der Spec ist
+`Letzte Änderung` der bewusste **Frische-Marker**
 ([Modul 3 §Die Architektur-Sicht](../01-spec-und-architektur/modul-03-spec.md#die-architektur-sicht-specarchitecturemd))
 — die Aussage, wann die Sicht zuletzt gegen den Code gehalten wurde, und
 kein Inhalt darunter trägt sie.

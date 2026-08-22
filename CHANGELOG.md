@@ -19,12 +19,15 @@ Der kleine Faden aus Welle 83: Die Kopfzeile `**Status:** Aktiv. **Letzte
 ### Gemessen, nicht behauptet
 
 Die Kopfzeile ist eine Template-Familie: `spezifikation`, `architecture`,
-`reconciliation`, `observations`, `roadmap`. Für die Spec-Straten ist sie
+`reconciliation`, `observations`, `roadmap`. Für das Sicht-Stratum ist sie
 Quelle-verankert (Modul 3: *Frische-Marker, kein Änderungs-Protokoll*), und
-das Beispiel pflegt sie (architecture 08-08 = letzter Commit). Für die drei
+das Beispiel pflegt sie (architecture 08-08 = letzter Commit); die Technik
+trägt sie im Template neben ihrer Historie, ohne Quell-Satz — als Faden
+eingetragen, nicht Gegenstand dieser Welle. Für die drei
 lebenden Planning-Register schreibt keine Quelle sie vor — und dort stand sie
 stale: Beispiel-`observations.md` 06-03 bei letztem Commit 08-09,
-Beispiel-Roadmap 06-03 bei 08-16, Kurs-Roadmap `Stand: 07-31` über 40 Commits.
+Beispiel-Roadmap 06-03 bei 08-16, Kurs-Roadmap `Stand: 07-31` über 26
+Datei-Commits (`50d726e..aaf1145`, drei Wochen).
 `Status: Aktiv` hatte in keinem Register je einen anderen Wert.
 
 ### Entschieden
@@ -34,14 +37,16 @@ Beispiel-Roadmap 06-03 bei 08-16, Kurs-Roadmap `Stand: 07-31` über 40 Commits.
   derselbe Fall*; Regelwerk-Spiegel): *Aktiv* ist kein Zustand, den ein
   Register wechselt, und ein Datum, das niemand pflegt, behauptet einen — die
   Stand-Zellen-Regel aus Welle 83, nur im Kopf. Der Zustand eines Registers
-  ist sein Inhalt, sein Änderungsdatum hält `git`. **Der Frische-Marker der
-  Sicht-Straten bleibt** — er ist die bewusste Aussage, die kein Inhalt
+  ist sein Inhalt, sein Änderungsdatum hält `git`. **Der Frische-Marker des
+  Sicht-Stratums bleibt** — er ist die bewusste Aussage, die kein Inhalt
   darunter trägt; die Abgrenzung steht im selben Absatz.
 - `roadmap.template.md`, `observations.template.md` und
   `reconciliation.template.md` verlieren die Zeile; Spec-Templates unberührt.
   Beispiel-Roadmap und -Beobachtungs-Register ohne Kopfzeile; die Kurs-Roadmap
-  ohne `Stand:`. Snapshot-Dokumente (`docs/team.md` u. a.), deren `Stand` das
-  Datum einer Erhebung ist, sind nicht gemeint.
+  ohne `Stand:`; `docs/team.md` ebenso — es ist ein Register (`TB-`/`TA-`
+  mit `Stand`-Spalte), und sein Kopf stand einen Tag hinter der letzten
+  Inhaltsänderung. Nicht gemeint ist ein Kopfdatum, das ein benannter Trigger
+  pflegt — der Wellen-Stand des Regelwerks, der Frische-Marker der Sicht.
 - **Faden *Kopfzeile `Status:`/`Letzte Änderung:` der Roadmap* geschlossen**
   — entschieden für `git`; die Zeile verlässt die Tabelle.
 

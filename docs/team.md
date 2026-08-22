@@ -1,7 +1,5 @@
 # Team-Tauglichkeit — wo das Regelwerk einen einzelnen Schreiber voraussetzt
 
-**Stand:** 2026-08-15.
-
 ## IST, SOLL und was diese Datei dazwischen tut
 
 **IST.** Der Korpus ist für **einen schreibenden Menschen plus Agenten** gebaut

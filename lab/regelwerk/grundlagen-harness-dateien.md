@@ -126,8 +126,10 @@ ist, sondern was er zu tragen hat.
   ein Register je wechselt, und ein Datum, das niemand pflegt, behauptet
   einen. Der Zustand eines Registers ist sein Inhalt (die Zeilen mit ihren
   Belegen, das Drift-Log mit seinen Daten), sein Änderungsdatum hält `git`.
-  Anders die Sicht-Straten der Spec: Dort ist `Letzte Änderung` der bewusste
-  **Frische-Marker** ([`modul-03-spec.md` §Ziel-Form: Architektur-Sicht](modul-03-spec.md#ziel-form-architektur-sicht))
+  Ein Datum, das ein benannter Trigger pflegt, ist kein solcher Kopf — der
+  Unterschied ist der Trigger, nicht die Zeile: Der Wellen-Stand des
+  Regelwerks wird mit jeder Welle gesetzt, und im Sicht-Stratum der Spec ist
+  `Letzte Änderung` der bewusste **Frische-Marker** ([`modul-03-spec.md` §Ziel-Form: Architektur-Sicht](modul-03-spec.md#ziel-form-architektur-sicht))
   — die Aussage, wann die Sicht zuletzt gegen den Code gehalten wurde, und
   kein Inhalt darunter trägt sie.
 - **Emittierte Artefakte tragen keinen Anker.** Erzeugt ein Werkzeug Code,
