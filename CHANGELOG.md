@@ -11,6 +11,30 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 85 — 2026-08-22 · Die Technik hat eine Historie, keinen Kopf
+
+Der Faden aus dem Welle-84-Review: `spezifikation.template.md` trug
+`**Status:** Aktiv. **Letzte Änderung:** <Datum>` **neben** seiner Historie —
+ohne Quell-Satz. Modul 3 nennt das Frische-Datum nur für die Sicht (*„Keine
+Historie, nur ein Frische-Datum … Vertrag und Technik führen eine"*); das
+Template hatte die Kopfzeile aus der Familie geerbt.
+
+### Entschieden
+
+- **Kein Kopf-Datum, kein Kopf-Status für die Spezifikation** (Modul 3 §Die
+  Spezifikation, Quelle; Regelwerk §Ziel-Form: Spezifikation): Ihre Änderungen
+  stehen in der Historie, die letzte Zeile ist das Datum — ein Frische-Marker
+  im Kopf wäre dasselbe Datum ein zweites Mal, und zwei Felder für eines
+  driften. Das unterscheidet sie von der Sicht, die keine Historie hat. Einen
+  eigenen Status trägt sie nicht: verbindlich, solange das Lastenheft es ist,
+  dessen Status die IDs steuert. Der Frische-Marker der Sicht und die
+  Kopfzeile des Lastenhefts (Version · Status · Autor/Datum, der
+  CR-Fußabdruck) bleiben.
+- `spezifikation.template.md` und das Beispiel verlieren die Zeile; der Faden
+  ist geschlossen und verlässt die Tabelle.
+
+Gates grün: `make check` 0 ERROR / 0 WARN, Beispiel `verify`, `make bundle-check`.
+
 ## Welle 84 — 2026-08-22 · Ein Register hat keinen Kopf
 
 Der kleine Faden aus Welle 83: Die Kopfzeile `**Status:** Aktiv. **Letzte

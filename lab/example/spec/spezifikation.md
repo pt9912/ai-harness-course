@@ -1,7 +1,5 @@
 # Spezifikation — DocSearch
 
-**Status:** Aktiv. **Letzte Änderung:** 2026-08-08.
-
 **Bezug zum Lastenheft:** Diese Spezifikation präzisiert die in
 [`lastenheft.md`](lastenheft.md) formulierten Anforderungen (`LH-*`-IDs).
 Bei Konflikt gewinnt das Lastenheft.

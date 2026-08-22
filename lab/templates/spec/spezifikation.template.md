@@ -7,8 +7,6 @@
 > Kopiere sie nach `spec/spezifikation.md`, ersetze `<Platzhalter>` und
 > lösche diesen Block.
 
-**Status:** Aktiv. **Letzte Änderung:** YYYY-MM-DD.
-
 **Bezug zum Lastenheft:** Diese Spezifikation präzisiert die in
 `spec/lastenheft.md` formulierten Anforderungen (`LH-*`-IDs). Bei
 Konflikt gewinnt das Lastenheft — präzisieren ja, erweitern nie.

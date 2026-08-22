@@ -101,6 +101,13 @@ externe Verträge · Historie. Operative Regeln:
   Abschnitt werden ununterscheidbar. Eine `SPEC-*` ist **keine**
   Anforderungs-ID; sie benennt, was gilt, und verspricht nichts
   ([`grundlagen-source-precedence.md` §ID-Schema](grundlagen-source-precedence.md#id-schema-als-klammer)).
+* **Kein Kopf-Datum, kein Kopf-Status** — die Spezifikation trägt ihre
+  Änderungen in der Historie; die letzte Zeile ist das Datum, ein
+  Frische-Marker im Kopf (`Letzte Änderung`) wäre dasselbe Datum ein zweites
+  Mal, und zwei Felder für eines driften. Das unterscheidet sie von der Sicht,
+  die keine Historie hat (§Ziel-Form: Architektur-Sicht). Einen eigenen Status
+  trägt sie nicht: Verbindlich ist sie, solange das Lastenheft es ist — dessen
+  Status steuert die Verbindlichkeit der IDs, die sie präzisiert.
 
 ### Ziel-Form: Architektur-Sicht
 
