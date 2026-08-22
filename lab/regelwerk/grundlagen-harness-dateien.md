@@ -120,6 +120,16 @@ ist, sondern was er zu tragen hat.
   liest, um zu handeln — nicht, wer die Geschichte hören will; die Zeitform
   ist der Indikativ über das, was ist. Wie das in der Roadmap aussieht, sagt
   [`modul-06-roadmap.md` §Roadmap-Struktur](modul-06-roadmap.md#roadmap-struktur-fünf-abschnitte-modul-6).
+- **Die Kopfzeile eines lebenden Registers ist derselbe Fall.** Roadmap,
+  Beobachtungs- und Reconciliation-Register tragen keine Zeile
+  `Status: Aktiv. Letzte Änderung: <Datum>`: *Aktiv* ist kein Zustand, den
+  ein Register je wechselt, und ein Datum, das niemand pflegt, behauptet
+  einen. Der Zustand eines Registers ist sein Inhalt (die Zeilen mit ihren
+  Belegen, das Drift-Log mit seinen Daten), sein Änderungsdatum hält `git`.
+  Anders die Sicht-Straten der Spec: Dort ist `Letzte Änderung` der bewusste
+  **Frische-Marker** ([`modul-03-spec.md` §Ziel-Form: Architektur-Sicht](modul-03-spec.md#ziel-form-architektur-sicht))
+  — die Aussage, wann die Sicht zuletzt gegen den Code gehalten wurde, und
+  kein Inhalt darunter trägt sie.
 - **Emittierte Artefakte tragen keinen Anker.** Erzeugt ein Werkzeug Code,
   Konfiguration oder Skripte *in ein anderes Repo*, reist der Erzeuger-Kontext
   nicht mit: Eine Slice- oder Befund-Nummer des Erzeugers löst dort in **null**

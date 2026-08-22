@@ -4,8 +4,6 @@
 > `docs/plan/planning/in-progress/roadmap.md` (oder dem in deinem Repo
 > üblichen Pfad) und ersetze Platzhalter. Lösche diesen Block.
 
-**Status:** Aktiv. **Letzte Änderung:** YYYY-MM-DD.
-
 **Format-Regel:** Die Roadmap ist eine Reihenfolge von **Wellen**,
 keine Reihenfolge von Terminen (siehe
 Baseline-Regelwerk `modul-06-roadmap.md`).

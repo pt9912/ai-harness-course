@@ -11,6 +11,42 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 84 — 2026-08-22 · Ein Register hat keinen Kopf
+
+Der kleine Faden aus Welle 83: Die Kopfzeile `**Status:** Aktiv. **Letzte
+Änderung:** <Datum>` über Roadmap und Registern — gepflegtes Feld oder `git`?
+
+### Gemessen, nicht behauptet
+
+Die Kopfzeile ist eine Template-Familie: `spezifikation`, `architecture`,
+`reconciliation`, `observations`, `roadmap`. Für die Spec-Straten ist sie
+Quelle-verankert (Modul 3: *Frische-Marker, kein Änderungs-Protokoll*), und
+das Beispiel pflegt sie (architecture 08-08 = letzter Commit). Für die drei
+lebenden Planning-Register schreibt keine Quelle sie vor — und dort stand sie
+stale: Beispiel-`observations.md` 06-03 bei letztem Commit 08-09,
+Beispiel-Roadmap 06-03 bei 08-16, Kurs-Roadmap `Stand: 07-31` über 40 Commits.
+`Status: Aktiv` hatte in keinem Register je einen anderen Wert.
+
+### Entschieden
+
+- **Lebende Register tragen keine Kopfzeile** (`harness-dateien.md` §Was ein
+  Kommentar trägt, Absatz *Die Kopfzeile eines lebenden Registers ist
+  derselbe Fall*; Regelwerk-Spiegel): *Aktiv* ist kein Zustand, den ein
+  Register wechselt, und ein Datum, das niemand pflegt, behauptet einen — die
+  Stand-Zellen-Regel aus Welle 83, nur im Kopf. Der Zustand eines Registers
+  ist sein Inhalt, sein Änderungsdatum hält `git`. **Der Frische-Marker der
+  Sicht-Straten bleibt** — er ist die bewusste Aussage, die kein Inhalt
+  darunter trägt; die Abgrenzung steht im selben Absatz.
+- `roadmap.template.md`, `observations.template.md` und
+  `reconciliation.template.md` verlieren die Zeile; Spec-Templates unberührt.
+  Beispiel-Roadmap und -Beobachtungs-Register ohne Kopfzeile; die Kurs-Roadmap
+  ohne `Stand:`. Snapshot-Dokumente (`docs/team.md` u. a.), deren `Stand` das
+  Datum einer Erhebung ist, sind nicht gemeint.
+- **Faden *Kopfzeile `Status:`/`Letzte Änderung:` der Roadmap* geschlossen**
+  — entschieden für `git`; die Zeile verlässt die Tabelle.
+
+Gates grün: `make check` 0 ERROR / 0 WARN, Beispiel `verify`, `make bundle-check`.
+
 ## Welle 83 — 2026-08-22 · Zustand und Anker — die zweite Hälfte der Zeitform-Regel
 
 Welle 71 bestimmte, was ein Kommentar trägt, und nannte die Klasse beim Namen:

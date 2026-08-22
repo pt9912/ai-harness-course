@@ -1,7 +1,5 @@
 # Beobachtungs-Register
 
-**Status:** Aktiv. **Letzte Änderung:** 2026-06-03.
-
 Der Zähler des Steering Loops (1× notieren · 2× Symptom · 3× Lücke).
 
 Regeln dieses Registers: Kurs-Regelwerk `modul-06-roadmap.md`

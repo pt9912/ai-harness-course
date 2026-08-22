@@ -158,6 +158,19 @@ nicht, wer die Geschichte hören will; die Zeitform ist der Indikativ über
 das, was ist. Wie das in der Roadmap aussieht, sagt
 [Modul 6, Schritt 6](../02-planung/modul-06-roadmap.md#worked-example-einen-datumswunsch-in-eine-trigger-welle-übersetzen).
 
+**Die Kopfzeile eines lebenden Registers ist derselbe Fall.** Roadmap,
+Beobachtungs- und Reconciliation-Register tragen keine Zeile
+`Status: Aktiv. Letzte Änderung: <Datum>`: *Aktiv* ist kein Zustand, den ein
+Register je wechselt, und ein Datum, das niemand pflegt, behauptet einen —
+gemessen an Roadmap und Beobachtungs-Register des Labs, die Wochen hinter
+`git` standen. Der Zustand eines Registers ist sein Inhalt (die Zeilen mit
+ihren Belegen, das Drift-Log mit seinen Daten), sein Änderungsdatum hält
+`git`. Anders die Sicht-Straten der Spec: Dort ist `Letzte Änderung` der
+bewusste **Frische-Marker**
+([Modul 3 §Die Architektur-Sicht](../01-spec-und-architektur/modul-03-spec.md#die-architektur-sicht-specarchitecturemd))
+— die Aussage, wann die Sicht zuletzt gegen den Code gehalten wurde, und
+kein Inhalt darunter trägt sie.
+
 **Emittierte Artefakte tragen keinen Anker.** Erzeugt ein Werkzeug Code,
 Konfiguration oder Skripte *in ein anderes Repo*, reist der Erzeuger-Kontext
 nicht mit: Eine Slice- oder Befund-Nummer des Erzeugers löst dort in **null**

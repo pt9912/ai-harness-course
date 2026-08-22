@@ -1,7 +1,5 @@
 # Roadmap — DocSearch
 
-**Status:** Aktiv. **Letzte Änderung:** 2026-08-22.
-
 **Format-Regel:** Reihenfolge von **Wellen**, keine Reihenfolge von
 Terminen. Daten sind Schätzungen, korrigierbar.
 

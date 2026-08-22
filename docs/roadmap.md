@@ -1,7 +1,5 @@
 # Roadmap — offene Fäden des Kurs-Repos
 
-**Stand:** 2026-08-22.
-
 Dieses Repo führt einen **bewusst reduzierten Harness**: `CHANGELOG.md` ist das
 Wellen-Register (Closure-Log), `make check` sind die Gates, d-check ist per
 Digest gepinnt. Kein Slice-Lifecycle, keine ADRs, keine Spec — für ein
@@ -73,7 +71,6 @@ sonst bestätigt es nur, dass der Faden ordentlich *formuliert* ist.
 | **Repo-eigener Harness ausbauen** — `harness/conventions.md` mit `MR-000` (Baseline) und einem `MR` für die Pfad-Abweichung oben | **eine zweite Adaption gegenüber dem gelehrten Aufbau — oder eine zweite repo-lokale Strukturregel** | zurückgestellt — heute genügt der Kommentar in dieser Datei; die erste ausdrücklich als solche geführte Strukturregel ist die [Schnittregel des Regelwerk-Extrakts](regelwerk-extrakt.md) |
 | **Technik-Historie: `Verweis`-Spalte für Aufwärts-Bezüge (`LH-*`) behalten?** Restfrage des in Welle 72 geschlossenen Fadens *Provenance in der Historie* — die Decken-Regel ([`referenz-richtung.md` §Referenz-Richtung](../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren), Regel 5) verbietet Abwärts-Zeiger in jeder Sektion, auch der Historie; über Aufwärts-Zeiger dort sagt sie nichts. Entweder die Spalte bleibt und die Regel sagt das ausdrücklich, oder sie fällt | *nicht gesetzt* — Entscheidung, kein Ereignis | offen seit Welle 72 (Commit `662b777`) |
 | **`architecture.template.md` nennt die Spezifikation nicht.** Die Matrix führt `Sicht → Technik` als *Normativ: visualisiert*, und `lab/example/spec/architecture.md` §5 zeigt `E001`/`E003`/`E099` samt `event=`-Feldern aus `spezifikation.md` §4. Die Vorlage bietet dafür keinen Zeiger | **eingetreten** — die Kante ist seit Welle 61 in der Matrix benannt | offen, aber entscheidungsfrei: Die Sektionspaare stehen fest (§5 Fehlermodelle ← §4 Fehler-Codes; §3 Externe Abhängigkeiten ← §6 Externe Verträge) |
-| **Kopfzeile `Status:`/`Letzte Änderung:` der Roadmap — gepflegtes Feld oder `git`?** [`roadmap.template.md`](../lab/templates/docs/plan/planning/roadmap.template.md) führt die Zeile; in dieser Datei (`Stand: 2026-07-31` bis Welle 83) und in der Beispiel-Roadmap (`Letzte Änderung: 2026-06-03` bei letzter Inhaltsänderung 2026-08-16) stand sie stale — ein Datumsfeld, das niemand pflegt, behauptet einen Zustand, den `git log` richtig kennt. **Handlung:** entweder die Zeile streichen (Zustand ist `git`; Template und Modul 6 betroffen) oder einen Pflege-Trigger benennen; heute beide nachgezogen, die Regel fehlt | die Kopfzeile fällt ein zweites Mal stale auf (Kurs-Roadmap oder Beispiel) — oder die nächste Änderung am Template | offen seit Welle 83 |
 
 ## Meilensteine
 

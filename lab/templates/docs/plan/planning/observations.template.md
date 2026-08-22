@@ -4,8 +4,6 @@
 > Repos. Kopiere nach `docs/plan/planning/observations.md` (flach, neben den
 > offenen Wellen) und ersetze Platzhalter. Lösche diesen Block.
 
-**Status:** Aktiv. **Letzte Änderung:** YYYY-MM-DD.
-
 Regeln dieses Registers: Baseline-Regelwerk `modul-06-roadmap.md`
 §Das Beobachtungs-Register — wer schreibt, wer liest, wann gestrichen wird,
 welche Form ein Beleg hat, und dass eine leere Tabelle `— keine —` trägt statt

@@ -6,8 +6,6 @@
 > Ein reines Greenfield-Repo braucht die Datei nicht — dort gab es nie einen
 > Bestand, gegen den abgeglichen wurde.
 
-**Status:** Aktiv. **Letzte Änderung:** YYYY-MM-DD.
-
 Regeln dieses Registers: Baseline-Regelwerk `modul-02-harness-bootstrap.md`
 §Das Reconciliation-Register — Kennungs-Schema `RC-<NNN>`, die drei Klassen,
 wer fortschreibt, wann das Register *steht* und wann eine Sub-Area graduiert.
