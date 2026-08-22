@@ -1,13 +1,28 @@
-# Team-Sim-Manifest (Modul-12-Bauform: was den Lauf rekonstruierbar macht)
-runner: run.sh
-seed: seed/            # fester Baum, keine Zeitstempel in Erwartungen
-image: ghcr.io/pt9912/d-check
-# Digest wird zur Laufzeit aus dem Repo-Makefile gelesen (eine Quelle, kein
-# zweiter Pin); Stand des ersten Laufs: v0.59.0 / sha256:b1cc65df3dc1…
-szenarien: [s01, s01b, s02, s03, s04a, s04b, s04c, s04d, s04e, s04f, s04g, s04h, s04i, s05, s06, s07]
-erster_lauf: { datum: 2026-08-16, ergebnis: "9 PASS, 0 FAIL" }
-# Erweiterungen: jede Zeile ein Lauf mit neuem Szenarien-Satz (Modul-12-Form:
-# der Lauf ist rekonstruierbar, wenn Datum, Satz und Ergebnis beieinander stehen).
-erweitert:
-  - { datum: 2026-08-21, neu: [s04c, s04d], ergebnis: "11 PASS, 0 FAIL" }
-  - { datum: 2026-08-22, neu: [s04e, s04f, s04g, s04h, s04i], image: v0.62.0, ergebnis: "16 PASS, 0 FAIL" }
+# Team-Sim-Manifest (Modul-12-Bauform: was den Lauf rekonstruierbar macht).
+# Ins Manifest gehoert, was den Lauf BESTIMMT — nicht, was er erzeugt.
+runner: run.sh                       # bash run.sh [sNN ...]; Verdikte = Erwartungen unten
+seed: seed/                          # fester Baum, keine Zeitstempel in Erwartungen;
+                                     # Hash je Lauf im Kopf von ergebnis.tsv
+runtime:
+  image: ghcr.io/pt9912/d-check      # Digest zur Laufzeit aus ../../Makefile (DCHECK_DIGEST):
+  digest_source: ../../Makefile      # eine Quelle, kein zweiter Pin; der benutzte Digest
+                                     # steht im Kopf jeder ergebnis.tsv
+  env: { network: none, git: ">= 2.43", topologie: "bare origin.git + Clones alice, bob" }
+expectations_ref: run.sh             # die Erwartung steht bei jedem Verdikt (2. Argument)
+                                     # und als Satz in README §Szenarien
+results: "$WORK/ergebnis.tsv"        # je Verdikt: szenario, erwartet, beobachtet, PASS|FAIL|KAPUTT
+# Gruppen (= Auswahl-Kennungen) und ihre Verdikte, in Lauf-Reihenfolge:
+gruppen:
+  s01: [s01, s01b]                   # Doppel-Anspruch auf main: laut vor der Arbeit
+  s02: [s02]                         # gleiche Nummer, zwei Branches: still
+  s03: [s03]                         # Register-Doppelzeile mit Abstand: still
+  s04: [s04a, s04b, s04e, s04f, s04i, s04g, s04h, s04c, s04d]   # Offene Wellen: Singleton vs. Bijektion; Marker-Haelfte
+  s05: [s05]                         # MR-Hybrid: Dateien still, Index-Zeile laut
+  s06: [s06]                         # Branch-Protection: TA-7-Anspruch scheitert
+  s07: [s07]                         # Sichtung liest den gemergten Stand
+# Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
+laeufe:
+  - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
+  - { datum: 2026-08-21, image: v0.59.0, neu: [s04c, s04d], ergebnis: "11 PASS, 0 FAIL" }
+  - { datum: 2026-08-22, image: v0.62.0, neu: [s04e, s04f, s04g, s04h, s04i], ergebnis: "16 PASS, 0 FAIL" }
+  - { datum: 2026-08-22, image: v0.62.0, neu: [], form: "Welle 87 — Auswahl, ergebnis.tsv, Schritt-Waechter, Befund gezielt", ergebnis: "16 PASS, 0 FAIL, 0 KAPUTT" }

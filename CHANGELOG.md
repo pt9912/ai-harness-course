@@ -11,6 +11,46 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 87 — 2026-08-22 · Team-Sim in Modul-12-Form
+
+`lab/team-sim` hat heute zwei Kursaussagen getragen (Modul 5 s06, Modul 6
+s04b/g/e/h) und einen d-check-CR belegt — als Runner war es ein Skript mit
+Verdikten nach stdout, ohne Auswahl, ohne Ergebnisdatei, mit einem Manifest,
+das den Lauf nicht bestimmte. Das ist die Replay-Form, die Modul 12 lehrt,
+nur zur Hälfte. Nachgezogen, ohne eine Kennung zu ändern.
+
+### Entschieden
+
+- **Runner:** `bash run.sh [sNN …]` läuft Gruppen einzeln (Kennung = Präfix
+  der Verdikte); `SIM_CLEAN=1` räumt auf; jeder Lauf schreibt
+  `$WORK/ergebnis.tsv` mit Kopf (Datum, Image-Digest, Repo-Stand, Seed-Hash)
+  und je Verdikt Szenario · erwartet · beobachtet · Verdikt — der Lauf ist
+  belegbar, nicht nur notiert. Vorbedingungs-Schritte laufen durch
+  `schritt`: scheitert einer, ist das Szenario **`KAPUTT`**, nicht `FAIL` —
+  ein Verdikt über einen nie hergestellten Zustand wäre keines (Exit-Code
+  schlägt bei beidem). Befund-Erwartungen prüfen Code **und** Ziel
+  (`wave-drift` auf `welle-5`, `planning-drift`), nicht „Code irgendwo".
+  Reihenfolge nach Aussage gruppiert, Kennungen **stabil** — Modul 5 und 6
+  zitieren sie.
+- **Manifest nach Modul 12:** was den Lauf bestimmt — Runner, Seed,
+  Runtime (Image, Digest-Quelle, Netz, Topologie), wo die Erwartungen stehen,
+  wo das Ergebnis landet, Gruppen → Verdikte, Läufe mit Datum, Image, Satz
+  und Ergebnis. Vorher: Name, Seed-Pfad, eine Szenarien-Liste und der
+  Digest als Kommentar.
+- README: §Aufruf, Tabelle in Runner-Reihenfolge, Kopfzeile der Läufe
+  fortgeschrieben. Kein Gate, wie gehabt; Regelwerk unberührt
+  (Regelwerk-Stand bleibt 86 — Welle-72-Präzedenz: Lab-only).
+- **Nicht in dieser Welle:** neue Szenarien. Die Closure-Seite unter
+  Nebenläufigkeit (Welle schließen, während ein PR einen Slice beansprucht),
+  die Vorvergabe (`slice-002` im Wellen-Plan ohne Datei, TB-010), der
+  Rolleninhaber-Doppelanspruch im Feld (TA-1) und `doc-immutable` im Team
+  sind unbelegte Aussagen — als Faden in `docs/roadmap.md` eingetragen.
+
+Gemessen: 16/16 · 0 KAPUTT auf d-check v0.62.0 (`ergebnis.tsv` im Lauf);
+Auswahl `s06` einzeln grün; `SIM_CLEAN` entfernt das Arbeitsverzeichnis; der
+`KAPUTT`-Pfad meldet, zählt und schreibt die Zeile. Gates grün: `make check`
+0 ERROR / 0 WARN.
+
 ## Welle 86 — 2026-08-22 · Versionen hat der Vertrag
 
 Nachlese zu Welle 85: Die Historie der Spezifikation hatte im Template die

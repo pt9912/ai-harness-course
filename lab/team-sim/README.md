@@ -17,12 +17,28 @@ behauptet.
 fail-closed ab — eine Kopie ohne Repo liefe sonst halb: Git-Szenarien grün,
 Docker-Szenarien kryptisch rot.
 
+**Aufruf.** `bash run.sh` läuft alle Gruppen, `bash run.sh s04 s06` nur
+diese (Gruppen-Kennung = Präfix der Verdikte, siehe `manifest.yaml`).
+`SIM_WORK=<dir>` setzt das Arbeitsverzeichnis (sonst `mktemp`, bleibt
+liegen), `SIM_CLEAN=1` räumt es nach dem Lauf weg. Jeder Lauf schreibt
+`$WORK/ergebnis.tsv`: ein Kopf mit Datum, Image-Digest, Repo-Stand und
+Seed-Hash, dann je Verdikt Szenario · erwartet · beobachtet · `PASS`/`FAIL`/
+`KAPUTT` — `KAPUTT` heißt: ein Vorbedingungs-Schritt (Commit, Push, `git mv`)
+ist gescheitert, das Verdikt wurde nie gefällt; das ist kein `FAIL`, sondern
+ein kaputter Lauf. Befund-Erwartungen prüfen Code **und** Ziel
+(`wave-drift` auf `welle-5`, nicht irgendwo) — ein Code allein wäre auch bei
+falscher Ursache „bestanden".
+
 **Warum Clones statt Worktrees:** Worktrees teilen ein `.git` und verbieten
 denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT)
+
+Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
+Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
+Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 
 | # | Szenario | Erwartung | beobachtet |
 |---|---|---|---|
@@ -32,13 +48,13 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | s03 | Register: A erhöht Zeile, B legt neue fürs selbe Phänomen an | Merge **still**, Beobachtung halbiert | ✓ — **mit Befund, siehe unten** |
 | s04a | zwei offene Wellen, flach + Liste | `planning` grün | ✓ Offene-Wellen-Modell trägt |
 | s04b | dazu `waves.dir` aktiviert | **`wave-drift`** | ✓ Singleton-Semantik gemessen |
-| s04c | Wellen offen **und** nichts beansprucht: Ruhe-Marker *neben* der Liste | `planning` grün | ✓ der Leer-Anspruch-Fall ist legitim |
-| s04d | Gegenprobe: Marker weg, `in-progress/` weiter leer | **`planning-drift`** | ✓ die Äquivalenz hält in beide Richtungen |
 | s04e | wie s04b, aber `waves.mode: many` (d-check v0.62.0) | `planning` grün | ✓ Bijektion statt Singleton — der CR dieses Repos, geliefert |
 | s04f | dazu eine dritte Welle flach **ohne** Zeiger | **`wave-drift`** | ✓ die Bijektion beißt; `many` ist kein stilles Grün |
 | s04i | stattdessen ein Zeiger **ohne** Datei | **`wave-drift`** | ✓ die Bijektion beißt in beide Richtungen |
 | s04g | **eine** Welle eröffnet (Zeiger) und nichts beansprucht (Marker), `waves` im Default `one` | **`wave-drift`** | ✓ der Handbuch-Fall: Singleton hält den Block gegen genau eine Datei |
 | s04h | derselbe Zustand, `mode: many` | `planning` grün | ✓ der Marker geht in die Bijektion nicht ein |
+| s04c | Wellen offen **und** nichts beansprucht: Ruhe-Marker *neben* der Liste | `planning` grün | ✓ der Leer-Anspruch-Fall ist legitim |
+| s04d | Gegenprobe: Marker weg, `in-progress/` weiter leer | **`planning-drift`** | ✓ die Äquivalenz hält in beide Richtungen |
 | s05 | zwei `MR`s parallel | Dateien still, Index-Zeile **laut** | ✓ Hybrid-These bestätigt |
 | s06 | `pre-receive`-Hook schützt `main` | TA-7-Anspruch **scheitert** | ✓ Branch-Protection-Reibung real |
 | s07 | Sichtung, während Erhöhung im offenen PR liegt | liest den **gemergten** Stand | ✓ „so alt wie der letzte Merge" |
