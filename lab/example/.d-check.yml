@@ -118,6 +118,7 @@ targets:
     - doc-planning
     - doc-tracked
     - doc-targets
+    - doc-structure
     - doc-help
 
 # Planning-Lifecycle-Invariante: Der Ruhe-Marker steht im Block
@@ -130,9 +131,11 @@ planning:
   # Seit dem Umbau auf "Offene Wellen" (derivativ, Kurs-Modul 6) heisst der
   # Aktiv-Block so. heading/marker sind laut Handbuch der vorgesehene Weg
   # "fuer abweichende Layouts" — kein Provisorium, kein CR noetig. GRENZE:
-  # Die waves.dir-Faehigkeit desselben Moduls kodiert den Singleton ("genau
-  # ein flaches Wellendokument") und ist mit mehreren offenen Wellen
-  # unvereinbar — deshalb hier bewusst kein Opt-in.
+  # Die waves.dir-Faehigkeit desselben Moduls kodiert im Default `mode: one`
+  # den Singleton ("genau ein flaches Wellendokument"), unvereinbar mit
+  # mehreren offenen Wellen; `mode: many` (seit d-check v0.62.0) prueft
+  # stattdessen die Bijektion Liste <-> Dateien. Hier bewusst noch kein
+  # Opt-in — eine eigene Entscheidung, kein Nebeneffekt des Pin-Sprungs.
   heading: '## Offene Wellen'
   marker: 'Nichts in Arbeit'
   # Zweite Faehigkeit desselben Moduls: die STRUKTUR der Closure-Notizen im
