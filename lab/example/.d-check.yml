@@ -4,7 +4,7 @@
 # fuer nicht grep-bar. Der Kurs loest sie ueber den umgekehrten Default: Die
 # Kante gilt als verboten, die Ausnahme wird am Ort deklariert.
 #
-# NUR `matrix`. Link- und Anker-Pruefung laeuft an der Kurs-Wurzel, die den
+# Vier Module, aber kein `links`/`anchors`: Link- und Anker-Pruefung laeuft an der Kurs-Wurzel, die den
 # ganzen Baum sieht: Dieses Verzeichnis ist ein Teilbaum und verlinkt bewusst
 # in den Kurs; ein `links`-Lauf in diesem Scope meldete 63 Repo-Escapes.
 scan:
@@ -122,7 +122,7 @@ targets:
     - doc-help
 
 # Planning-Lifecycle-Invariante: Der Ruhe-Marker steht im Block
-# `## Aktuelle Welle` genau dann, wenn kein Slice im Roadmap-Verzeichnis
+# `## Offene Wellen` genau dann, wenn kein Slice im Roadmap-Verzeichnis
 # liegt. Haelt zusammen, was sonst beim `git mv` auseinanderlaeuft — der
 # Zustand ergibt sich aus dem Verzeichnis, die Roadmap darf ihm nicht
 # widersprechen.
@@ -130,12 +130,7 @@ planning:
   roadmap: docs/plan/planning/in-progress/roadmap.md
   # Seit dem Umbau auf "Offene Wellen" (derivativ, Kurs-Modul 6) heisst der
   # Aktiv-Block so. heading/marker sind laut Handbuch der vorgesehene Weg
-  # "fuer abweichende Layouts" — kein Provisorium, kein CR noetig. GRENZE:
-  # Die waves.dir-Faehigkeit desselben Moduls kodiert im Default `mode: one`
-  # den Singleton ("genau ein flaches Wellendokument"), unvereinbar mit
-  # mehreren offenen Wellen; `mode: many` (seit d-check v0.62.0) prueft
-  # stattdessen die Bijektion Liste <-> Dateien. Hier bewusst noch kein
-  # Opt-in — eine eigene Entscheidung, kein Nebeneffekt des Pin-Sprungs.
+  # "fuer abweichende Layouts" — kein Provisorium, kein CR noetig.
   heading: '## Offene Wellen'
   marker: 'Nichts in Arbeit'
   # Zweite Faehigkeit desselben Moduls: die STRUKTUR der Closure-Notizen im
@@ -186,6 +181,34 @@ planning:
       - "lauft jetzt"
       - "war ganz okay"
       - "passt schon"
+
+  # Dritte Faehigkeit desselben Moduls (slice-025): die Wellen-Invariante.
+  # Der Abschnitt `## Offene Wellen` traegt zwei unabhaengige Aussagen (Kurs
+  # Modul 6 §Offene Wellen) — der Marker folgt dem Anspruch (oben), die Liste
+  # folgt den Dateien. Diese zweite Haelfte haelt `waves`: die Zeiger im Block
+  # <-> die flachen Welle-Dateien, in BEIDE Richtungen (`wave-drift`, target =
+  # Kennung); dazu keine Vorschau-Zeile fuer eine Welle, die schon eine Datei
+  # hat (`wave-preview-exists`), und Abschluss-Register <-> Ergebnisnotizen in
+  # `done/` in beide Richtungen (`wave-results-missing`/`wave-unregistered`).
+  # `mode: many` ist die BEDINGUNG, nicht Kosmetik: Der Werkzeug-Default `one`
+  # kodiert den Singleton ("genau ein flaches Wellendokument") und meldet
+  # unter Offene Wellen legitime Zustaende als Drift — zwei offene Wellen, oder
+  # Welle eroeffnet und nichts beansprucht. Gemessen, nicht gelesen: auf einer
+  # Kopie dieses Repos mit zweiter offener Welle beisst nur `one`; im
+  # Kurs-Team-Sim ist `one` rot und `many` gruen — bei zwei offenen Wellen
+  # (s04b/s04e) wie bei einer eroeffneten, nicht beanspruchten Welle mit
+  # Marker neben dem Zeiger (s04g/s04h) —, und die Bijektion beisst unter
+  # `many` in beide Richtungen (s04f: Datei ohne Zeiger, s04i: Zeiger ohne
+  # Datei). Der Ruhe-Marker geht unter `many` NICHT ein — seine Aussage liegt
+  # vollstaendig bei `planning-drift`.
+  # GRENZE: Unter `many` zaehlt jede Wellen-Kennung in der Prosa des Blocks als
+  # Zeiger; der Erklaertext dort bleibt deshalb kennungsfrei. Die uebrigen
+  # Schluessel (glob `welle-*.md`, results-glob `welle-*-results.md`,
+  # next-/closed-heading, done-dir `<dir>/done`) treffen die Defaults dieses
+  # Repos und stehen darum nicht hier — wer das Layout aendert, setzt sie.
+  waves:
+    dir: docs/plan/planning
+    mode: many
 
 # Linkpflicht fuer ADR-Kennungen. Nicht Kosmetik: `matrix` prueft den STATUS
 # eines Ziels nur an Links — eine nackte Kennung im Fliesstext ist fuer das

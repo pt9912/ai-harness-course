@@ -136,7 +136,7 @@ durch, die übrigen nicht:
 |---|---|
 | `make verify` | Closure-Pflicht + Referenz-Richtung; mit `SLICE=` zusätzlich die Slice-DoD |
 | `make verify-closure-notes` | **Vorführ-Gegenstand für Modul 11**, nicht die Deckung: Die Closure-Pflicht prüft `doc-check` (`planning.closure`) — [ADR-0019](docs/plan/adr/0019-closure-sensor-und-skript-rolle.md) |
-| `make doc-check` | Vier d-check-Module: `matrix` (Referenz-Richtung — keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise, keine ADR→Slice-Kante ohne Provenance-Marker), `ids` (ADR-Kennungen sind Links), `targets` (kein behauptetes Gate ohne Regel, keine Regel ohne Doku), `planning` (Roadmap-Ruhemarker ↔ `in-progress/`) |
+| `make doc-check` | Vier d-check-Module: `matrix` (Referenz-Richtung — keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise, keine ADR→Slice-Kante ohne Provenance-Marker), `ids` (ADR-Kennungen sind Links), `targets` (kein behauptetes Gate ohne Regel, keine Regel ohne Doku), `planning` (Roadmap-Ruhemarker ↔ `in-progress/`; Offene-Wellen-Zeiger ↔ flache Welle-Dateien, keine Vorschau-Zeile mit Datei, Abschluss-Register ↔ Ergebnisnotizen) |
 | `make verify-slice` | DoD eines Slice plausibilisieren; Aufruf mit `SLICE=<id>` |
 | `make plan-status` | Slice-Verteilung über die Lifecycle-Verzeichnisse |
 | `make agent-implement` | Kontextpaket für einen Implementer-Agenten zeigen; Aufruf mit `SLICE=<id>` |

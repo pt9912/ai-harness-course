@@ -1,5 +1,6 @@
 # Team-Sim-Seed — planning nach dem Offene-Wellen-Modell.
-# waves ist bewusst AUS (Singleton-Semantik); Szenario s04 schaltet es ein.
+# waves ist bewusst AUS; s04b/s04g schalten es ein (Default mode: one = Singleton),
+# s04e/s04f/s04h/s04i setzen mode: many (Bijektion Liste <-> Dateien, d-check v0.62.0).
 scan:
   roots: ["."]
 modules: [links, anchors, planning]

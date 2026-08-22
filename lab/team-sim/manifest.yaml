@@ -4,5 +4,10 @@ seed: seed/            # fester Baum, keine Zeitstempel in Erwartungen
 image: ghcr.io/pt9912/d-check
 # Digest wird zur Laufzeit aus dem Repo-Makefile gelesen (eine Quelle, kein
 # zweiter Pin); Stand des ersten Laufs: v0.59.0 / sha256:b1cc65df3dc1…
-szenarien: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07]
+szenarien: [s01, s01b, s02, s03, s04a, s04b, s04c, s04d, s04e, s04f, s04g, s04h, s04i, s05, s06, s07]
 erster_lauf: { datum: 2026-08-16, ergebnis: "9 PASS, 0 FAIL" }
+# Erweiterungen: jede Zeile ein Lauf mit neuem Szenarien-Satz (Modul-12-Form:
+# der Lauf ist rekonstruierbar, wenn Datum, Satz und Ergebnis beieinander stehen).
+erweitert:
+  - { datum: 2026-08-21, neu: [s04c, s04d], ergebnis: "11 PASS, 0 FAIL" }
+  - { datum: 2026-08-22, neu: [s04e, s04f, s04g, s04h, s04i], image: v0.62.0, ergebnis: "16 PASS, 0 FAIL" }

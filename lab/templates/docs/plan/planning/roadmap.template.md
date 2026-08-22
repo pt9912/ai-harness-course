@@ -28,8 +28,14 @@ Closure-Kriterien stehen in der Welle-Datei, nicht hier.
 folgt den Dateien (ein Zeiger je offener Welle-Datei). Trägt in-progress/
 keinen Slice, kommt der Ruhe-Marker ZUSÄTZLICH dazu — nicht an Stelle der
 Liste; beides zugleich ist der Normalfall direkt nach der Wellen-Eröffnung.
-Gewächtert ist nur die Marker-Hälfte (Marker genau dann, wenn in-progress/
-keinen Slice trägt), die Liste nicht.
+Zwei Aussagen, zwei Wächter: die Marker-Hälfte (Marker genau dann, wenn
+in-progress/ keinen Slice trägt) und die Listen-Hälfte (Bijektion Zeiger <->
+flache Welle-Dateien, in beide Richtungen; der Marker geht nicht ein). Die
+Listen-Hälfte braucht einen Sensor, der das Kardinalitäts-Modell kennt — ein
+Ein-Wellen-Wächter hält den Block gegen GENAU EINE Datei und meldet legitime
+Zustände (mehrere offene Wellen; eine Welle eröffnet, nichts beansprucht) als
+Drift. Welche Hälfte dein Sensor prüft, musst du wissen; eine ungewächterte
+Hälfte ist zulässig, wenn sie benannt ist.
 
 WORTLAUT des Markers: Baseline-Regelwerk modul-06-roadmap.md, Bullet
 "Offene Wellen". Hier bewusst NICHT zitiert, und das ist eine Regel, keine

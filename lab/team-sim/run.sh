@@ -27,7 +27,9 @@ topo() {  # frische Topologie
   [ -f alice/.d-check.yml ] || { echo "TOPO-DEFEKT: alice leer"; exit 9; }
   for w in alice bob seedclone; do git -C $w config user.name $w; git -C $w config user.email $w@sim; done
 }
-dcheck() { docker run --rm --network none -v "$1:/repo:ro" "$IMG" 2>&1 | tail -2; }
+# Volle Ausgabe, kein tail: ein zweiter Befund schoebe den erwarteten Code
+# sonst aus dem Fenster; die Verdikte zeigen selbst nur die letzte Zeile.
+dcheck() { docker run --rm --network none -v "$1:/repo:ro" "$IMG" 2>&1; }
 verdikt() { # $1 name  $2 erwartet  $3 beobachtet  $4 ok(0/1)
   if [ "$4" = 0 ]; then echo "  PASS  $1"; PASS=$((PASS+1));
   else echo "  FAIL  $1"; echo "        erwartet:  $2"; echo "        beobachtet: $3"; FAIL=$((FAIL+1)); fi
@@ -88,10 +90,46 @@ s04_zwei_wellen_und_waves() {
   git add -A && git commit -qm "zweite offene Welle" && git push -q origin main
   out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
   verdikt "s04a zwei offene Wellen: planning ohne waves GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
-  # waves einschalten -> Singleton-Semantik muss beissen
+  # waves einschalten -> Singleton-Semantik (Default mode: one) muss beissen
   printf '  waves:\n    dir: docs/plan/planning\n' >> .d-check.yml
   out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "wave-drift" && ok=0 || ok=1
   verdikt "s04b waves.dir an: Singleton meldet wave-drift" "wave-drift" "$(echo "$out"|tail -1)" $ok
+  # Bijektion statt Singleton (d-check v0.62.0, unser CR): derselbe Zustand
+  # unter mode: many — Kennungs-Mengen in beide Richtungen, Marker aussen vor.
+  printf '    mode: many\n' >> .d-check.yml
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s04e waves.dir + mode: many: zwei offene Wellen GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
+  # Gegenprobe: die Bijektion muss beissen — dritte Welle flach OHNE Zeiger.
+  # Ohne diesen Lauf waere "many prueft die Liste" nur behauptet (gruen ist
+  # auch ein Sensor, der nichts liest).
+  printf '# Welle welle-3-x: X\n\n**Verantwortlich:** alice. **Datum:** 2026-08-22.\n' > docs/plan/planning/welle-3-x.md
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "wave-drift" && ok=0 || ok=1
+  verdikt "s04f many: Datei ohne Zeiger meldet wave-drift (Bijektion beisst)" "wave-drift" "$(echo "$out"|tail -1)" $ok
+  # Die andere Richtung: Zeiger ohne Datei. Bare Kennung statt Link, damit
+  # allein die Bijektion spricht und nicht zusaetzlich `links` (target-missing).
+  rm docs/plan/planning/welle-3-x.md
+  sed -i 's|^- \[welle-2-ausbau\](../welle-2-ausbau.md)$|- [welle-2-ausbau](../welle-2-ausbau.md)\n- welle-5-x (Zeiger ohne Datei)|' docs/plan/planning/in-progress/roadmap.md
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "wave-drift" && ok=0 || ok=1
+  verdikt "s04i many: Zeiger ohne Datei meldet wave-drift (beide Richtungen)" "wave-drift" "$(echo "$out"|tail -1)" $ok
+}
+
+s04g_eroeffnet_unter_waves() {
+  # Der Handbuch-Fall: EINE Welle eroeffnet (Zeiger steht), nichts beansprucht
+  # (Marker steht, in-progress/ leer). Unter mode: one absichtlich rot — der
+  # Block wird gegen genau eine Datei gehalten —, unter many gruen. Bewusst
+  # NICHT der s04c-Zustand mit zwei flachen Wellen: dort ist one zufaellig
+  # gruen, weil der Bool-Vergleich bei stehendem Marker nur "ungleich 1" prueft.
+  topo
+  cd "$WORK/sim/alice"
+  git mv docs/plan/planning/in-progress/slice-001-kern.md docs/plan/planning/open/
+  sed -i 's|^- \[welle-1-basis\](../welle-1-basis.md)$|- [welle-1-basis](../welle-1-basis.md)\n\nNichts in Arbeit.|' docs/plan/planning/in-progress/roadmap.md
+  printf '  waves:\n    dir: docs/plan/planning\n' >> .d-check.yml
+  git add -A && git commit -qm "Welle eroeffnet, nichts beansprucht, waves im Default" && git push -q origin main
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "wave-drift" && ok=0 || ok=1
+  verdikt "s04g eine Welle eroeffnet + Marker, mode one: wave-drift (Singleton)" "wave-drift" "$(echo "$out"|tail -1)" $ok
+  printf '    mode: many\n' >> .d-check.yml
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s04h dito unter mode many: GRUEN (Marker geht nicht ein)" "0 Befunde" "$(echo "$out"|tail -1)" $ok
 }
 
 s04c_leerer_anspruch() {
@@ -167,6 +205,6 @@ s07_sichtung_liest_alt() {
 
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; echo
 s01_doppel_anspruch; s02_stille_nummer; s03_register_doppelzeile
-s04_zwei_wellen_und_waves; s04c_leerer_anspruch
+s04_zwei_wellen_und_waves; s04c_leerer_anspruch; s04g_eroeffnet_unter_waves
 s05_mr_hybrid; s06_branch_protection; s07_sichtung_liest_alt
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL"; [ $FAIL -eq 0 ]

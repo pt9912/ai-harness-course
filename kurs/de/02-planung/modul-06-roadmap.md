@@ -147,15 +147,28 @@ zugleich ist der Normalfall direkt nach der
 Marker sagt, was sein Wortlaut sagt — *nichts in Arbeit*, nicht *keine
 offene Welle*.
 
-Gewächtert ist davon nur die Marker-Hälfte; sie ist die **deklarierte
+Zwei Aussagen, zwei Wächter — und wer die Kopplung mechanisiert, muss
+wissen, *welche* Hälfte sein Sensor prüft, sonst hält er einen halben
+Wächter für einen ganzen. Die Marker-Hälfte ist die **deklarierte
 Redundanz**: Ein Doku-Sensor hält den Marker gegen das Verzeichnis, und zwar
 in **beide** Richtungen — ein fehlender Marker bei leerem `in-progress/` und
 ein stehengebliebener Marker bei beanspruchtem Slice sind derselbe Defekt.
-Die Liste ist Ableitung **ohne** Wächter: Sie gegen die Welle-Dateien zu
-halten wäre eine Bijektion, kein Marker-Vergleich, und braucht ein eigenes
-Prädikat. Das ist keine Lücke, die man verschweigt, sondern eine, die man
-kennt — wer die Kopplung mechanisiert, muss wissen, *welche* Hälfte sein
-Sensor prüft, sonst hält er einen halben Wächter für einen ganzen.
+Die Listen-Hälfte ist kein Marker-Vergleich, sondern eine **Bijektion**: die
+im Abschnitt genannten Wellen-Kennungen gegen die flachen Welle-Dateien,
+ebenfalls in beide Richtungen — ein Zeiger ohne Datei und eine Datei ohne
+Zeiger sind derselbe Defekt. Sie hat eine Vorbedingung, die der Marker nicht
+hat: Der Sensor muss das **Kardinalitäts-Modell** kennen. Ein Wächter, der
+den Abschnitt gegen *genau eine* Datei hält (Ein-Wellen-Betrieb), meldet
+unter *Offene Wellen* legitime Zustände als Drift — zwei offene Wellen, oder
+eine Welle eröffnet und nichts beansprucht (Zeiger und Marker nebeneinander);
+gemessen im Kurs-Lab: [`lab/team-sim`](../../../lab/team-sim/README.md),
+Szenarien s04b und s04g gegen s04e und s04h. Der Ruhe-Marker geht in die
+Bijektion **nicht** ein; er bleibt Sache des Marker-Wächters. Wer eine Hälfte
+ungewächtert lässt, benennt die Lücke — bekannt ist sie zulässig,
+verschwiegen nicht. Vorbild aus dem Lab (werkzeugspezifisch): der
+`planning`-Block in
+[`lab/example/.d-check.yml`](../../../lab/example/.d-check.yml) hält beide
+Hälften.
 
 Das *Geplante Ende* in der Welle-Datei *erscheint* als Schätzung — es
 triggert nichts, es prognostiziert. Wenn die Schätzung kippt, kippt sie als

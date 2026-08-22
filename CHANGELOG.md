@@ -11,6 +11,79 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 82 — 2026-08-22 · Die zweite Hälfte bekommt ihren Wächter
+
+Welle 81 hatte die Lücke benannt: Der Abschnitt *Offene Wellen* trägt zwei
+Aussagen, gewächtert war nur eine. Noch am selben Tag liefert d-check v0.62.0
+genau das Prädikat, das der Kurs als Change Request erbeten hatte; einen Tag
+später schaltet das Lab es ein — gemessen statt gelesen.
+
+### Entschieden
+
+- **Zwei Aussagen, zwei Wächter** (Modul 6 §Offene Wellen, Quelle). Die
+  Marker-Hälfte bleibt die deklarierte Redundanz (Marker ⟺ `in-progress/`
+  ohne Slice, beide Richtungen). Die Listen-Hälfte ist kein Marker-Vergleich,
+  sondern eine **Bijektion** — Kennungen im Block ⟺ flache Welle-Dateien,
+  beide Richtungen —, und sie hat eine Vorbedingung, die der Marker nicht
+  hat: Der Sensor muss das **Kardinalitäts-Modell** kennen. Ein Wächter, der
+  den Block gegen *genau eine* Datei hält, meldet unter *Offene Wellen* zwei
+  legitime Zustände als Drift (zwei offene Wellen; Welle eröffnet, nichts
+  beansprucht). Der Ruhe-Marker geht in die Bijektion nicht ein. Das
+  „bekannte Lücke statt verschwiegener" aus Welle 81 bleibt als Regel
+  stehen: Wer eine Hälfte ungewächtert lässt, benennt sie. Der
+  Regelwerk-Split zieht quelltreu nach, der Bedienhinweis in
+  `roadmap.template.md` in Template-Form; die Template-`.d-check.yml` trägt
+  weiter keinen `planning`-Block — die Quelle schreibt keinen vor.
+- **`lab/example` hält beide Hälften** (`slice-025`): `planning.waves` mit
+  `dir: docs/plan/planning` und `mode: many`; die übrigen Schlüssel treffen
+  die Repo-Defaults und stehen deshalb nicht in der Config. Bestand 73/0 ohne
+  eine Änderung an Roadmap oder Welle-Dateien; AGENTS.md §3,
+  `harness/README.md` und `docs/plan/planning/README.md` nennen den Wächter.
+  Die GRENZE-Notiz „bewusst kein Opt-in" ist damit Geschichte.
+- **d-check-Pin v0.59.0 → v0.62.0** (Digest `sha256:3996a593…4cacf`;
+  Gegenprobe aus Welle 73 bestanden: Release **und** Image publiziert).
+  Prozedur wie beim
+  letzten Sprung: Trockenlauf auf beiden Konfigurationen identisch (Wurzel
+  207/0, Beispiel 73/0), die zwei `planning`-Break-Tests aus Welle 78 beißen
+  auf dem neuen Image mit unverändertem Code `planning-drift`, beide
+  `d-check.mk`-Fragmente regeneriert — **auch das des Beispiels, das seit
+  v0.56.0 stehengeblieben war**; das neue Target `doc-structure` hat der
+  `targets`-Sensor des Beispiels wie vorgesehen als `gate-undocumented`
+  gemeldet, es steht jetzt in `exempt-targets` (optionaler d-check-Lauf,
+  kein Gate). bundle-check 49/0. v0.60.0 (`links.resolve-from`) und v0.61.0
+  (`structure`, Chronologie-Monotonie) sind opt-in und bleiben aus.
+- **Team-Sim-Manifest vollständig.** `manifest.yaml` führte neun Szenarien,
+  `run.sh`/README elf — s04c/s04d fehlten seit Welle 81. Jetzt sechzehn, und
+  jede Erweiterung steht mit Datum, neuem Satz und Ergebnis im Manifest.
+  `dcheck()` im Runner reicht die volle Ausgabe durch statt `tail -2` — ein
+  zweiter Befund hätte den erwarteten Code sonst aus dem Fenster geschoben.
+
+### Gemessen, nicht behauptet
+
+| Zustand | `mode: one` (Default) | `mode: many` |
+|---|---|---|
+| Team-Sim-Seed, zwei offene Wellen (flach + gelistet) | `wave-drift` (**s04b**) | grün (**s04e**) |
+| Seed, **eine** Welle eröffnet und nichts beansprucht (Zeiger und Marker nebeneinander) | `wave-drift` (**s04g**) | grün (**s04h**) |
+| Seed, dritte Welle flach **ohne** Zeiger | — | `wave-drift` (**s04f**) |
+| Seed, Zeiger **ohne** Datei | — | `wave-drift` (**s04i**) |
+| Beispiel, heutiger Bestand | grün (genau eine offene Welle — der Singleton gilt zufällig) | grün |
+| Beispiel-Kopie, zweite offene Welle | `wave-drift` | grün |
+| Beispiel, vier Experimente, fünf Codes | — | `wave-drift` in beide Richtungen, `wave-preview-exists` (Beifang des welle-3-Tests), `wave-results-missing`, `wave-unregistered` |
+
+Team-Sim 16/16 (Lauf 2026-08-22, d-check v0.62.0). Die ersten zwei Zeilen
+sind der Kern: derselbe Zustand, zwei Verdikte — das Modell entscheidet,
+nicht der Bestand. Die Beispiel-Zeile „heutiger Bestand" ist die Warnung: Ein
+grüner Opt-in-Lauf beweist nur, dass der Bestand konsistent ist, nicht,
+welches Modell der Sensor prüft. Nicht geskriptet, ad hoc am Seed gemessen:
+`mode: ""` → Exit 2 mit Schlüssel-Nennung (fail-closed); und zwei flache
+Wellen **mit** Marker sind unter `one` zufällig grün — der Bool-Vergleich
+zählt bei stehendem Marker nur „ungleich eins" —, deshalb misst s04g den
+Ein-Wellen-Fall.
+
+Gates grün: `make check` 0 ERROR / 0 WARN (d-check 208 Dateien, 0 Befunde),
+`make -C lab/example verify` 74/0, `make -C lab/example gates COURSE_LANG=go`,
+`make bundle-check` 49/0.
+
 ## Welle 81 — 2026-08-21 · Zwei Hälften, ein Wächter
 
 Zwei Befunde aus einem Konsumenten-Audit, beide von derselben Bauart: Die

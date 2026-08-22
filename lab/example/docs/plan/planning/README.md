@@ -45,7 +45,11 @@ dieses Repo nicht — das wäre der Repo-Modus, und der lautet hier: mit Wellen.
   einziges Lifecycle-Verzeichnis. **Geplante Wellen bekommen noch keine
   Datei** — sie stehen in der Roadmap unter *Nächste Wellen* und nirgends
   sonst. Eine flache Datei bedeutet damit immer *läuft*: zwei Positionen,
-  nicht drei.
+  nicht drei. **Und `make doc-check` hält das** (`planning.waves`,
+  `mode: many`): Zeiger unter *Offene Wellen* ↔ flache Welle-Dateien in
+  beide Richtungen, keine Vorschau-Zeile für eine Welle mit Datei,
+  Abschluss-Register ↔ Ergebnisnotizen — die Listen-Hälfte neben der
+  Marker-Hälfte (Kurs Modul 6 §Offene Wellen: zwei Aussagen, zwei Wächter).
 - Der aktive Durchlauf nimmt ausschließlich **Slices** auf; `done/` archiviert
   **zusätzlich** abgeschlossene **Nicht-Slice-Records** — Welle-Plan und
   Welle-Closure.
