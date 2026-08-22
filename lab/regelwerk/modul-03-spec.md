@@ -107,7 +107,11 @@ externe Verträge · Historie. Operative Regeln:
   Mal, und zwei Felder für eines driften. Das unterscheidet sie von der Sicht,
   die keine Historie hat (§Ziel-Form: Architektur-Sicht). Einen eigenen Status
   trägt sie nicht: Verbindlich ist sie, solange das Lastenheft es ist — dessen
-  Status steuert die Verbindlichkeit der IDs, die sie präzisiert.
+  Status steuert die Verbindlichkeit der IDs, die sie präzisiert. Ihre
+  Historie führt Datum und Änderung — keine Version: Versionen hat der
+  Vertrag, dessen Version-Bump der Fußabdruck des Change Requests ist
+  ([`grundlagen-source-precedence.md` §Spec-Stratifizierung](grundlagen-source-precedence.md#spec-stratifizierung));
+  die Technik ist fortschreibbar ohne ihn.
 
 ### Ziel-Form: Architektur-Sicht
 

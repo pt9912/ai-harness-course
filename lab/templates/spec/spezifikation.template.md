@@ -119,6 +119,6 @@ gilt für alle drei Spec-Straten, auch hier — welche ADR eine Festlegung
 schärft, deklariert die ADR aufwärts in ihrem `Schärft:`-Feld
 (Baseline-Regelwerk `modul-03-spec.md` §Ziel-Form: Spezifikation).
 
-| Version | Datum | Änderung |
-|---|---|---|
-| 0.1.0 | YYYY-MM-DD | Initial |
+| Datum | Änderung |
+|---|---|
+| YYYY-MM-DD | Initial |

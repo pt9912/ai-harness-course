@@ -11,6 +11,25 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 86 — 2026-08-22 · Versionen hat der Vertrag
+
+Nachlese zu Welle 85: Die Historie der Spezifikation hatte im Template die
+Spalten `Version | Datum | Änderung`, im Beispiel `Datum | Änderung` — und die
+Quelle entschied es nicht. Gemessen an den Konsumenten: d-check führt seine
+Spezifikations-Historie als `Datum | Änderung`, a-check (Template-Erbe) mit
+`Version`. Der Vertrag trägt die Version, weil ihr Bump der Fußabdruck des
+Change Requests ist (§Spec-Stratifizierung); die Technik ist fortschreibbar
+ohne ihn — eine Technik-Version versioniert nichts, was jemand bezieht.
+
+### Entschieden
+
+- **Die Historie der Spezifikation führt Datum und Änderung — keine Version**
+  (Modul 3 §Die Spezifikation, Quelle; Regelwerk §Ziel-Form: Spezifikation).
+  `spezifikation.template.md` verliert die Spalte; das Beispiel hatte sie nie.
+  Lastenheft-Historie (`Version | Datum | Änderung | Verweis`) unverändert.
+
+Gates grün: `make check` 0 ERROR / 0 WARN, Beispiel `verify`, `make bundle-check`.
+
 ## Welle 85 — 2026-08-22 · Die Technik hat eine Historie, keinen Kopf
 
 Der Faden aus dem Welle-84-Review: `spezifikation.template.md` trug

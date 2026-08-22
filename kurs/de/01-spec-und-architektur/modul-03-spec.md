@@ -163,6 +163,10 @@ eines driften. Das unterscheidet sie von der Sicht, die keine Historie hat
 ([§Die Architektur-Sicht](#die-architektur-sicht-specarchitecturemd)). Einen
 eigenen Status trägt sie nicht: Verbindlich ist sie, solange das Lastenheft es
 ist — dessen Status steuert die Verbindlichkeit der IDs, die sie präzisiert.
+Und ihre Historie führt Datum und Änderung — keine Version: Versionen hat der
+Vertrag, dessen Version-Bump der Fußabdruck des Change Requests ist
+([§Spec-Stratifizierung](../grundlagen/source-precedence.md#spec-stratifizierung));
+die Technik ist fortschreibbar ohne ihn.
 
 Vorlage: [`spec/spezifikation.template.md`](../../../lab/templates/spec/spezifikation.template.md).
 
