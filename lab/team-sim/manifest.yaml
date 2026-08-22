@@ -20,9 +20,14 @@ gruppen:
   s05: [s05]                         # MR-Hybrid: Dateien still, Index-Zeile laut
   s06: [s06]                         # Branch-Protection: TA-7-Anspruch scheitert
   s07: [s07]                         # Sichtung liest den gemergten Stand
+  s08: [s08a, s08b]                  # Closure unter Anspruch: schlampig laut, sauber still
+  s09: [s09]                         # Vorvergabe aus dem Wellen-Plan anderswo gezogen: still
+  s10: [s10a, s10b]                  # Inhaber-Feld: beide -> Konflikt; Uebernahme -> still
+  s11: [s11a, s11b]                  # doc-immutable (vcs, Range): Geschichte frei, Kern core-drift-vcs
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
   - { datum: 2026-08-21, image: v0.59.0, neu: [s04c, s04d], ergebnis: "11 PASS, 0 FAIL" }
   - { datum: 2026-08-22, image: v0.62.0, neu: [s04e, s04f, s04g, s04h, s04i], ergebnis: "16 PASS, 0 FAIL" }
   - { datum: 2026-08-22, image: v0.62.0, neu: [], form: "Welle 87 — Auswahl, ergebnis.tsv, Schritt-Waechter, Befund gezielt", ergebnis: "16 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-08-22, image: v0.62.0, neu: [s08a, s08b, s09, s10a, s10b, s11a, s11b], seed: "ADR-0001 + vcs-Block", ergebnis: "23 PASS, 0 FAIL, 0 KAPUTT" }

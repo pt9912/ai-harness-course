@@ -11,6 +11,48 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 88 — 2026-08-22 · Vier unbelegte Aussagen, sieben Verdikte
+
+Der Faden aus Welle 87: Closure-Seite, Vorvergabe, Rolleninhaber-Feld und
+`doc-immutable` unter Nebenläufigkeit — vier Aussagen des Korpus, bis hierher
+aus dem Text abgeleitet. Jetzt je ein Szenario mit vorab notierter Erwartung,
+und jedes nennt die Kursstelle, die es trägt.
+
+### Gemessen, nicht behauptet (Lauf 2026-08-22, d-check v0.62.0, 23/23 · 0 KAPUTT)
+
+| # | Zustand | erwartet | beobachtet |
+|---|---|---|---|
+| s08a | Welle auf `main` geschlossen, Register-Zeile ohne Ergebnisnotiz (`waves`, `many`) | `wave-results-missing` | ✓ laut |
+| s08b | dieselbe Closure sauber — der Slice der Welle bleibt beansprucht (`in-progress/`, offener PR) | **still** | ✓ kein Sensor sieht den Widerspruch |
+| s09 | `slice-002` im Wellen-Plan vorvergeben, im PR anders gezogen | **still** | ✓ „den PR-Rest fängt das Schema nicht" |
+| s10a | beide setzen `Verantwortlich:` desselben Slice | Konflikt, laut | ✓ |
+| s10b | Übernahme des Feldes, Gegenseite ändert nur den Rumpf | **still** | ✓ Inhaber gewechselt, niemand hat es gesehen |
+| s11a | Geschichte-Zeile einer Accepted-ADR per PR, `vcs` auf der Range | 0 Befunde | ✓ `exclude-sections` trägt |
+| s11b | Entscheidung derselben ADR per PR gelandet | `core-drift-vcs` | ✓ auch durch den Merge-Commit |
+
+### Entschieden
+
+- **Drei stille Ausgänge sind Lehre, keine Defekte.** Die Planning-Sensoren
+  halten Form gegen Form (Marker ↔ Verzeichnis, Zeiger ↔ Dateien, Zeile ↔
+  Notiz, Kern ↔ Range); das `Welle:`-Feld eines beanspruchten Slice gegen
+  eine geschlossene Welle (Modul 6 §Wellen-Closure-Prozedur, Schritt 1), die
+  Vorvergabe im Wellen-Plan (source-precedence §Vergabe) und das
+  Rolleninhaber-Feld (TA-1) haben keinen Wächter — und der Korpus sagt das
+  an allen drei Stellen schon. Kein Sensor behauptet; die README benennt die
+  Grenze und was ein Wächter messen müsste.
+- **`doc-immutable` läuft jetzt im Team-Kontext:** der einzige Sensor mit
+  Commit-Range sieht den Kern-Eingriff auch, wenn er per Merge-Commit landet,
+  und lässt die Geschichte-Zeile durch. Seed erweitert um `ADR-0001` und den
+  `vcs`-Block (nicht in `modules:` — s11 schaltet ihn per `--enable vcs
+  --range` ein, wie der PR-Job); `planning` steht im Seed zuletzt, damit die
+  Szenarien ihren `waves`-Block weiter anhängen können — der erste Lauf fand
+  genau diesen Fehler (`field waves not found`, 2 FAIL) und einen zweiten im
+  Schnitt von s10b (zweite Probe vom halb gemergten Stand statt vom Seed).
+- Faden geschlossen (verlässt die Tabelle); Regelwerk unberührt, Stand bleibt
+  86 (Lab-only).
+
+Gates grün: `make check` 0 ERROR / 0 WARN.
+
 ## Welle 87 — 2026-08-22 · Team-Sim in Modul-12-Form
 
 `lab/team-sim` hat heute zwei Kursaussagen getragen (Modul 5 s06, Modul 6

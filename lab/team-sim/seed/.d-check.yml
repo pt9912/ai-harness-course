@@ -1,9 +1,18 @@
 # Team-Sim-Seed — planning nach dem Offene-Wellen-Modell.
 # waves ist bewusst AUS; s04b/s04g schalten es ein (Default mode: one = Singleton),
-# s04e/s04f/s04h/s04i setzen mode: many (Bijektion Liste <-> Dateien, d-check v0.62.0).
+# s04e/s04f/s04h/s04i und s08 setzen mode: many (Bijektion Liste <-> Dateien,
+# d-check v0.62.0). vcs ist konfiguriert, aber nicht in modules: s11 schaltet
+# es per --enable vcs --range ein (braucht eine Commit-Range, wie doc-immutable).
 scan:
   roots: ["."]
 modules: [links, anchors, planning]
+# planning steht zuletzt: die Szenarien haengen ihren waves-Block per >> an.
+vcs:
+  paths: ["docs/plan/adr/[0-9]*.md"]
+  immutable-when: '^\*\*Status:\*\* Accepted'
+  status-line: '^\*\*Status:\*\*'
+  head-allow: '^\*\*Status:\*\* (Accepted|Superseded by \[?ADR-[0-9]{4})'
+  exclude-sections: [Geschichte]
 planning:
   roadmap: docs/plan/planning/in-progress/roadmap.md
   heading: '## Offene Wellen'

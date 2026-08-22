@@ -239,6 +239,94 @@ s07_sichtung_liest_alt() {
   verdikt "s07 Sichtung liest gemergten Stand: 1x trotz 3x im offenen PR" "1×" "$stand" $ok
 }
 
+# s08 — Closure-Seite unter Nebenlaeufigkeit (Modul 6 §Wellen-Closure-Prozedur,
+# Schritt 1 "Alle Slices der Welle liegen in done/" ist Prozedur, kein Sensor).
+s08_closure_unter_anspruch() {
+  topo
+  cd "$WORK/sim/bob"; schritt git switch -qc b/arbeit || return 1
+  sed -i 's/^Offen\.$/In Arbeit: Kern-Modul, erster Schnitt./' docs/plan/planning/in-progress/slice-001-kern.md
+  schritt git add -A && schritt git commit -qm "slice-001: Arbeit im PR" && schritt git push -q origin b/arbeit || return 1
+  # alice schliesst welle-1-basis auf main — schlampig: Zeile im Register, keine Ergebnisnotiz
+  cd "$WORK/sim/alice"
+  printf '  waves:\n    dir: docs/plan/planning\n    mode: many\n' >> .d-check.yml
+  schritt git mv docs/plan/planning/welle-1-basis.md docs/plan/planning/done/ || return 1
+  sed -i '/^- \[welle-1-basis\](..\/welle-1-basis.md)$/d' docs/plan/planning/in-progress/roadmap.md
+  printf '| welle-1-basis | 2026-08-22 | done/welle-1-results.md |\n' >> docs/plan/planning/in-progress/roadmap.md
+  schritt git add -A && schritt git commit -qm "welle-1-basis geschlossen (ohne Notiz)" && schritt git push -q origin main || return 1
+  out=$(dcheck "$WORK/sim/alice"); befund "$out" "welle-1" "wave-results-missing" && ok=0 || ok=1
+  verdikt "s08a Welle geschlossen ohne Ergebnisnotiz: wave-results-missing" "wave-results-missing (target: welle-1)" "$(echo "$out"|tail -1)" $ok
+  # sauber nachgezogen: Ergebnisnotiz liegt — der Slice der Welle ist weiter
+  # beansprucht (in-progress/, und in bobs offenem PR): sieht das ein Sensor?
+  printf '# Welle 1 — Basis — Closure-Notiz\n\n**Welle:** welle-1-basis\n\nGeliefert: Kern-Schnittstelle. Offen geblieben: slice-001.\n' > docs/plan/planning/done/welle-1-results.md
+  schritt git add -A && schritt git commit -qm "welle-1-results" && schritt git push -q origin main || return 1
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s08b Welle sauber geschlossen, Slice der Welle weiter beansprucht: STILL" "0 Befunde (kein Sensor sieht den Widerspruch)" "$(echo "$out"|tail -1)" $ok
+}
+
+# s09 — Vorvergabe (source-precedence §Vergabe: "lokal ableitbar hat eine
+# Grenze — den PR-Rest faengt das Schema nicht"; TB-010).
+s09_vorvergabe() {
+  topo
+  # welle-1-basis §4 vergibt slice-002 (Rand) — ohne Datei. bob zieht dieselbe
+  # Nummer fuer etwas anderes, im PR.
+  cd "$WORK/sim/bob"; schritt git switch -qc b/cache || return 1
+  printf '# Slice slice-002: Cache\n\n**Welle:** ohne Welle\n\n**Verantwortlich:** bob.\n' > docs/plan/planning/open/slice-002-cache.md
+  schritt git add -A && schritt git commit -qm "slice-002-cache" && schritt git push -q origin b/cache || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q && git merge -q --no-edit origin/b/cache >/dev/null 2>&1; rc=$?
+  plan=$(grep -c "slice-002 (Rand)" docs/plan/planning/welle-1-basis.md)
+  out=$(dcheck "$WORK/sim/seedclone"); echo "$out" | grep -q "0 Befund" && d=0 || d=1
+  [ $rc -eq 0 ] && [ "$plan" = 1 ] && [ $d = 0 ] && ok=0 || ok=1
+  verdikt "s09 Vorvergabe: slice-002 im Wellen-Plan, anderswo vergeben — STILL" "Merge rc=0, beide Bedeutungen, 0 Befunde" "rc=$rc, Plan-Nennung=$plan, $(echo "$out"|tail -1)" $ok
+}
+
+# s10 — Rolleninhaber-Feld (TA-1; Modul 5 §Lifecycle: Verantwortlich wird
+# beim Uebergang gesetzt). Laut nur, wenn beide dieselbe Zeile anfassen.
+s10_inhaber_feld() {
+  topo
+  cd "$WORK/sim/alice"; schritt git switch -qc a/own || return 1
+  sed -i 's/^\*\*Verantwortlich:\*\* alice\.$/**Verantwortlich:** alice (bestaetigt 2026-08-22)./' docs/plan/planning/in-progress/slice-001-kern.md
+  schritt git add -A && schritt git commit -qm "Inhaber bestaetigt (alice)" && schritt git push -q origin a/own || return 1
+  cd "$WORK/sim/bob"; schritt git switch -qc b/own || return 1
+  sed -i 's/^\*\*Verantwortlich:\*\* alice\.$/**Verantwortlich:** bob./' docs/plan/planning/in-progress/slice-001-kern.md
+  schritt git add -A && schritt git commit -qm "Inhaber uebernommen (bob)" && schritt git push -q origin b/own || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q && git merge -q --no-edit origin/a/own >/dev/null 2>&1
+  git merge --no-edit origin/b/own >/dev/null 2>&1; rc=$?
+  konflikt=$([ $rc -ne 0 ] && git ls-files -u | grep -q slice-001 && echo ja || echo nein)
+  [ "$konflikt" = ja ] && ok=0 || ok=1
+  verdikt "s10a beide setzen das Inhaber-Feld: Konflikt (LAUT)" "Merge-Konflikt in der Slice-Datei" "rc=$rc, Konflikt=$konflikt" $ok
+  git merge --abort 2>/dev/null || true
+  # zweite Probe vom Seed-Stand aus, nicht vom halb gemergten
+  schritt git reset -q --hard origin/main || return 1
+  # Uebernahme ohne Gegenwehr: bob setzt das Feld, alice aendert nur den Rumpf
+  cd "$WORK/sim/alice"; schritt git switch -q main || return 1; git pull -q origin main 2>/dev/null; schritt git switch -qc a/body || return 1
+  sed -i 's/^Offen\.$/In Arbeit: Kern-Modul./' docs/plan/planning/in-progress/slice-001-kern.md
+  schritt git add -A && schritt git commit -qm "Rumpf (alice)" && schritt git push -q origin a/body || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q && git merge -q --no-edit origin/a/body >/dev/null 2>&1 && git merge -q --no-edit origin/b/own >/dev/null 2>&1; rc=$?
+  inhaber=$(grep -o "Verantwortlich:\*\* [a-z]*" docs/plan/planning/in-progress/slice-001-kern.md | head -1)
+  [ $rc -eq 0 ] && [ "$inhaber" = "Verantwortlich:** bob" ] && ok=0 || ok=1
+  verdikt "s10b Uebernahme des Feldes, alice aendert nur den Rumpf: STILL" "rc=0, Inhaber=bob" "rc=$rc, $inhaber" $ok
+}
+
+# s11 — doc-immutable im Team (Modul 4: Accepted-ADR ist immutabel; Modul vcs
+# braucht eine Commit-Range — der PR-Job). Geschichte-Zeile erlaubt, Kern nicht.
+s11_adr_immutabel_im_team() {
+  topo
+  base=$(git -C "$WORK/sim/seedclone" rev-parse HEAD)
+  cd "$WORK/sim/bob"; schritt git switch -qc b/geschichte || return 1
+  printf -- '- 2026-08-22: im Team gesichtet.\n' >> docs/plan/adr/0001-kern.md
+  schritt git add -A && schritt git commit -qm "ADR-0001 Geschichte" && schritt git push -q origin b/geschichte || return 1
+  cd "$WORK/sim/alice"; schritt git switch -qc a/kern || return 1
+  sed -i 's/^Der Kern ist ein eigenes Modul mit eigener Schnittstelle;/Der Kern ist ein Paket ohne eigene Schnittstelle;/' docs/plan/adr/0001-kern.md
+  schritt git add -A && schritt git commit -qm "ADR-0001 Entscheidung geaendert" && schritt git push -q origin a/kern || return 1
+  vcs() { docker run --rm --network none -v "$1:/repo:ro" "$IMG" --enable vcs --disable links --disable anchors --disable planning --range "$2" 2>&1; }
+  cd "$WORK/sim/seedclone" && git fetch -q && git merge -q --no-edit origin/b/geschichte >/dev/null 2>&1
+  out=$(vcs "$WORK/sim/seedclone" "$base..HEAD"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s11a Geschichte-Zeile per PR gelandet: kein Befund" "0 Befunde (Geschichte ist ausgenommen)" "$(echo "$out"|tail -1)" $ok
+  git merge -q --no-edit origin/a/kern >/dev/null 2>&1
+  out=$(vcs "$WORK/sim/seedclone" "$base..HEAD"); befund "$out" "docs/plan/adr/0001-kern.md" "core-drift-vcs" && ok=0 || ok=1
+  verdikt "s11b Entscheidung einer Accepted-ADR per PR gelandet: core-drift-vcs" "core-drift-vcs auf der Range" "$(echo "$out"|tail -1)" $ok
+}
+
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -249,6 +337,10 @@ lauf s04 s04c_leerer_anspruch
 lauf s05 s05_mr_hybrid
 lauf s06 s06_branch_protection
 lauf s07 s07_sichtung_liest_alt
+lauf s08 s08_closure_unter_anspruch
+lauf s09 s09_vorvergabe
+lauf s10 s10_inhaber_feld
+lauf s11 s11_adr_immutabel_im_team
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

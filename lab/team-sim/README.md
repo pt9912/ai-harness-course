@@ -34,7 +34,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -58,6 +58,13 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s05 | zwei `MR`s parallel | Dateien still, Index-Zeile **laut** | ✓ Hybrid-These bestätigt |
 | s06 | `pre-receive`-Hook schützt `main` | TA-7-Anspruch **scheitert** | ✓ Branch-Protection-Reibung real |
 | s07 | Sichtung, während Erhöhung im offenen PR liegt | liest den **gemergten** Stand | ✓ „so alt wie der letzte Merge" |
+| s08a | Welle auf `main` geschlossen — Register-Zeile, aber keine Ergebnisnotiz (`waves`, `many`) | **`wave-results-missing`** | ✓ die schlampige Closure ist laut |
+| s08b | dieselbe Closure sauber (Notiz liegt) — der Slice der Welle ist weiter beansprucht, in `in-progress/` und in bobs offenem PR | **still** (0 Befunde) | ✓ Closure-Prozedur Schritt 1 ist Prozedur, kein Sensor |
+| s09 | `slice-002` im Wellen-Plan vorvergeben ohne Datei; bob vergibt die Nummer im PR anders | **still** | ✓ „den PR-Rest fängt das Schema nicht" — gemessen |
+| s10a | beide setzen `Verantwortlich:` desselben Slice in zwei PRs | Merge-Konflikt, **laut** | ✓ das Feld streitet, wenn beide es anfassen |
+| s10b | bob setzt sich als Inhaber, alice ändert nur den Rumpf | **still**, Inhaber = bob | ✓ Übernahme ohne Gegenwehr bleibt unbemerkt |
+| s11a | Geschichte-Zeile einer Accepted-ADR per PR gelandet, `vcs` auf der Range | 0 Befunde | ✓ `exclude-sections` trägt |
+| s11b | Entscheidung derselben ADR per PR gelandet | **`core-drift-vcs`** | ✓ `doc-immutable` sieht den Kern auch durch den Merge |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte
@@ -83,6 +90,23 @@ ein (s04g/s04h). Eine Nuance aus dem Bau: Mit **zwei** flachen Wellen und
 stehendem Marker ist `one` zufällig grün — der Bool-Vergleich prüft bei
 stehendem Marker nur „ungleich eins" —, deshalb misst s04g den Ein-Wellen-Fall
 auf frischer Topologie statt den s04c-Zustand.
+
+**Befund aus s08b, s09, s10b — drei stille Ausgänge, alle drei Lehre.** Die
+Sensoren des Planning-Harness halten Form gegen Form: Marker gegen
+Verzeichnis, Zeiger gegen Dateien, Register-Zeile gegen Notiz, ADR-Kern gegen
+Range. Drei Aussagen des Korpus liegen daneben und haben heute keinen
+Wächter — und jetzt ist das gemessen, nicht gelesen: **(1)** Eine Welle lässt
+sich sauber schließen, während ein Slice mit ihrem `Welle:`-Feld beansprucht
+ist (Modul 6 §Wellen-Closure-Prozedur, Schritt 1 „Alle Slices der Welle liegen
+in `done/`" — Prozedur, kein Sensor; `waves` hält Zeiger und Notiz, nicht das
+Feld des Slice). **(2)** Eine im offenen Wellen-Plan vorvergebene Nummer kann
+im PR anderweitig gezogen werden; source-precedence §Vergabe sagt genau das
+(„den PR-Rest fängt das Schema nicht"), s09 zeigt, dass auch der Wellen-Plan-
+Rest nicht gefangen wird. **(3)** Das Rolleninhaber-Feld (TA-1) streitet nur,
+wenn beide es anfassen; eine Übernahme gegen einen, der gerade den Rumpf
+ändert, mergt still — das Feld ist Zustand ohne Wächter, wie der Kurs es
+deklariert. Konsequenz: keine neuen Sensoren behaupten; die drei Stellen sind
+als Grenze benannt, und wer einen Wächter will, weiß jetzt, was er messen muss.
 
 **Zwei Werkzeug-Lehren aus dem Bau** (beide kosteten je einen Fehllauf):
 `git init --bare` ohne `-b main` lässt Clones leer auschecken — drei Szenarien
