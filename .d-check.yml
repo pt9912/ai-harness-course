@@ -16,7 +16,7 @@ scan:
   # also von Hand parallel zu halten.
   ignore: ["lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md",
            "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**"]
-modules: [links, anchors, codepaths, matrix, hostpaths, spans, tracked]
+modules: [links, anchors, codepaths, matrix, hostpaths, spans, tracked, structure]
 
 # lab/templates mischt ZWEI Referenzklassen in denselben Dateien:
 #   (a) SYMBOLISCH — Ziel-Repo-Pfade, die erst nach dem Ausfüllen existieren
@@ -142,3 +142,24 @@ codepaths:
   ignore-refs: ["kurs/de/agents-regelwerk.md",
                 "kurs/de/grundlagen/konventionen.md",
                 "lab/regelwerk/grundlagen-konventionen.md"]
+
+# structure haelt zwei Form-Invarianten, die bisher nur Gewohnheit waren.
+# Das Modul benennt seine Dateien SELBST (kein scope) — CHANGELOG.md steht
+# oben in scan.ignore und wird hier trotzdem geprueft.
+structure:
+  # (1) Jede Wellen-Ueberschrift traegt ihre Nummer. Beide Schreibweisen sind
+  #     zulaessig: "Welle 91" und die Sammel-Ueberschrift "Wellen 1-16" aus der
+  #     Zeit vor diesem Register — ein naives '^Welle ' meldete sie rot.
+  #     Ueberschriften in Fences (zitierte Beispiele wie "## 7. Closure-Notiz")
+  #     zaehlen nicht; gemessen, nicht angenommen.
+  - files: "CHANGELOG.md"
+    section-pattern: '^# Changelog$'
+    headings-match: '^Wellen? [0-9]+'
+    headings-level: 2
+  # (2) Die Meilenstein-Tabelle laeuft absteigend — neuester Tag oben. Die
+  #     Schluesselzelle wird ROH gelesen, die Backticks um `v5.10.0` stoeren
+  #     also nicht (dafuer ist die Roh-Lesung gebaut).
+  - files: "docs/roadmap.md"
+    section: "## Meilensteine"
+    table-order: desc
+    table-column: 1

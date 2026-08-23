@@ -11,6 +11,52 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 92 — 2026-08-23 · Zwei Gewohnheiten werden Invarianten
+
+Das Register und die Meilenstein-Tabelle hielten ihre Form bisher nur, weil
+niemand sie brach. d-check v0.63.0 brachte die achte `structure`-Bedingung
+(`headings-match`), v0.61.0 die siebte (`table-order`) — damit sind beide
+Formen prüfbar statt nur gewohnt.
+
+### Entschieden
+
+- **Jede Wellen-Überschrift trägt ihre Nummer.** `headings-match: '^Wellen? [0-9]+'`
+  auf Ebene 2 innerhalb von `# Changelog`. Das `?` ist kein Schnörkel: Die
+  Sammel-Überschrift `## Wellen 1–16` aus der Zeit vor diesem Register ist
+  legitim, und ein naives `^Welle ` hätte sie rot gemeldet — der erste Entwurf
+  tat genau das.
+- **Die Meilenstein-Tabelle läuft absteigend.** `table-order: desc` auf
+  Spalte 1 im Abschnitt `## Meilensteine`. Die Schlüsselzelle wird **roh**
+  gelesen, die Backticks um `` `v5.10.0` `` stören also nicht — dafür ist die
+  Roh-Lesung gebaut.
+- **Beide sind break-getestet, nicht nur grün.** Wellen-Nummer aus der
+  Überschrift entfernt → `CHANGELOG.md:14 section-heading-mismatch`;
+  zwei Meilenstein-Zeilen vertauscht → `docs/roadmap.md:89 section-unordered`,
+  je auf der Bruchzeile. Gegenprobe: `## Wellen 1–16` bleibt still, und ein in
+  einem ```markdown-Fence zitiertes `## 7. Closure-Notiz` ebenfalls — Fences
+  zählen nicht. Wiederherstellung je per sha256 verifiziert.
+- **`CHANGELOG.md` steht in `scan.ignore` und wird trotzdem geprüft.**
+  `structure` benennt seine Dateien selbst und kennt deshalb kein `scope`. Das
+  steht als Kommentar im Block, weil es beim Lesen der Konfiguration sonst wie
+  ein Widerspruch aussieht.
+- **`CLAUDE.md` bekommt Titel und Anweisung.** Statt des nackten Verweises
+  jetzt „Claude Code Einstieg — ai-harness-course" plus einen Satz: vor jeder
+  Änderung `AGENTS.md` lesen und befolgen. Der Titel sagt, um welches Repo es
+  geht; die Anweisung ist eine, keine Fußnote. Eigene Regeln trägt sie
+  weiterhin nicht. Der Welle-91-Eintrag sagt „ist eine Zeile" — das galt für
+  den Stand von Welle 91 und bleibt stehen; ein Register wird nicht rückwirkend
+  umgeschrieben.
+- **`targets` bleibt aus — die Absage ist gemessen, nicht geraten.** Die
+  Vermutung war, die `make X`-Zeilen der Kurs-Tabellen (Lehrbeispiele über
+  *fremde* Makefiles) würden das Modul fluten: **`gate-phantom: 0`**, sie
+  schlagen gar nicht an. Der echte Preis ist die andere Hälfte —
+  **`gate-undocumented: 19`**, weil `AGENTS.md` `make check` nur im Fließtext
+  nennt und `targets` ausschließlich Tabellenzeilen sieht. Ob dieses Repo eine
+  Target-Tabelle bekommt, ist eine eigene Frage mit eigenem Nutzen, keine
+  Sensor-Entscheidung.
+
+Regelwerk unberührt, Stand bleibt 90. Gates grün: `make check` 0 ERROR / 0 WARN.
+
 ## Welle 91 — 2026-08-23 · Das Kurs-Repo sagt, wie an ihm gearbeitet wird
 
 Die Konventionen dieses Repos lagen verstreut: Rangfolge in einem behobenen
