@@ -44,6 +44,25 @@ Was offen ist, führt [`docs/roadmap.md`](docs/roadmap.md).
 
 `make check` vor jedem Commit — `docs-check` 0 ERROR, `alignment-check` 0 WARN.
 
+| Target | Zweck |
+|---|---|
+| `make help` | Targets anzeigen |
+| `make check` | beide Validatoren nacheinander — das Gate vor jedem Commit |
+| `make docs-check` | Referenzen (d-check) + Modul-Nummern (Rest-Sensor) prüfen |
+| `make alignment-check` | Lernziel-Alignment-Prüfschritt (Docker) |
+| `make bundle-build` | Bundle nach `DEST` bauen (`DEST=<dir> REF=<tag\|main>`) |
+| `make bundle-verify` | Referenzen eines gebauten Bundles prüfen (`DEST=<dir>`) |
+| `make bundle-check` | Bundle bauen und prüfen, in einem Wegwerf-Verzeichnis |
+
+Diese Tabelle ist die **Autorität**: Das Modul `targets` prüft beide
+Richtungen — jedes hier behauptete Target ist eine Makefile-Regel, und jede
+Regel steht hier. Die `doc-*`-Targets sind ausgenommen; sie kommen aus dem
+tool-generierten `d-check.mk`, tragen dort ihre eigene `##`-Beschreibung und
+werden von `make doc-help` gelistet. Sie hier zu wiederholen hieße, eine
+generierte Datei ein zweites Mal zu führen. Die Ausnahmen stehen **namentlich**
+in `.d-check.yml` — kommt bei einer Fragment-Regeneration ein Target dazu,
+meldet das Gate es als `gate-undocumented`, statt es still durchzulassen.
+
 `lab/templates/` ist in `.d-check.yml` bewusst scoped-ignoriert (die Dateien
 mischen zwei Referenzklassen). **Keine neuen Prüf-Skripte anlegen** — d-check
 ist das Werkzeug; ein Sensor-Vorschlag wird vorher gegen Ignores und Scan-Roots

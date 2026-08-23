@@ -11,6 +11,45 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 93 — 2026-08-23 · AGENTS.md §4 wird die Autorität über die Targets
+
+Welle 92 hatte `targets` mit der Rechnung „19 undokumentierte Targets"
+zurückgestellt. Die Rechnung stimmte, ihre Begründung nicht — und die Tabelle,
+die sie verlangt, hat eigenen Nutzen: Wer hier arbeitet, findet die Gates jetzt
+an einer Stelle statt im Makefile.
+
+### Entschieden
+
+- **§4 trägt eine Target-Tabelle, und sie ist die Autorität.** Sieben Zeilen,
+  eine je Wurzel-Target. `targets` prüft beide Richtungen gegen sie: jedes
+  behauptete Target ist eine Regel (`gate-phantom`), und jede Regel steht in
+  der Tabelle (`gate-undocumented`).
+- **Die zwölf `doc-*` sind namentlich ausgenommen, nicht per Glob.** Sie
+  stammen aus dem tool-generierten `d-check.mk`, tragen dort ihre eigene
+  `##`-Beschreibung und werden von `make doc-help` gelistet; sie in `AGENTS.md`
+  zu wiederholen hieße, eine generierte Datei ein zweites Mal zu führen.
+  Namentlich statt per Muster, damit eine Fragment-Regeneration mit einem neuen
+  Target **auffällt** statt still durchzurutschen — geprüft: `doc-planning` aus
+  der Liste genommen ⇒ `d-check.mk:51 gate-undocumented`.
+- **Drei Break-Tests, alle beißen.** Erfundenes Target in die Tabelle ⇒
+  `AGENTS.md:50 gate-phantom`; `make bundle-check` aus der Tabelle entfernt ⇒
+  `Makefile:57 gate-undocumented`; Ausnahme entfernt ⇒ wie oben.
+  Wiederherstellung je per sha256 verifiziert.
+
+### Korrektur zu Welle 92
+
+Der dortige Eintrag sagt, die `make X`-Zeilen der Kurs-Tabellen „schlagen gar
+nicht an — `gate-phantom: 0`", und gibt das als Messung aus. Das war ein
+**Artefakt einer unvollständigen Konfiguration**: Der Probelauf setzte nur
+`makefiles` und `authority`, nicht `doc-tables` — und ohne `doc-tables` wird
+überhaupt keine Behauptung gelesen. Die Kurs-Tabellen bleiben tatsächlich
+außen vor, aber aus einem anderen Grund: `doc-tables` **benennt die Dateien**,
+und dort steht nur `AGENTS.md`. Eine Eigenschaft der Konfiguration, keine des
+Moduls. Der Welle-92-Eintrag bleibt stehen; ein Register wird nicht rückwirkend
+umgeschrieben.
+
+Regelwerk unberührt, Stand bleibt 90. Gates grün: `make check` 0 ERROR / 0 WARN.
+
 ## Welle 92 — 2026-08-23 · Zwei Gewohnheiten werden Invarianten
 
 Das Register und die Meilenstein-Tabelle hielten ihre Form bisher nur, weil

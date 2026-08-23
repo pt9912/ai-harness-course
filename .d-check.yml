@@ -16,7 +16,7 @@ scan:
   # also von Hand parallel zu halten.
   ignore: ["lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md",
            "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**"]
-modules: [links, anchors, codepaths, matrix, hostpaths, spans, tracked, structure]
+modules: [links, anchors, codepaths, matrix, hostpaths, spans, tracked, structure, targets]
 
 # lab/templates mischt ZWEI Referenzklassen in denselben Dateien:
 #   (a) SYMBOLISCH — Ziel-Repo-Pfade, die erst nach dem Ausfüllen existieren
@@ -163,3 +163,21 @@ structure:
     section: "## Meilensteine"
     table-order: desc
     table-column: 1
+
+# targets prueft die Deklarations-Konsistenz Doku <-> Build-Targets in BEIDEN
+# Richtungen. doc-tables ist die Quelle der make-X-Behauptungen (=> gate-phantom),
+# authority die Vollstaendigkeits-Quelle (=> gate-undocumented). Beide zeigen auf
+# AGENTS.md §4; die make-X-Zeilen in kurs/ sind Lehrbeispiele ueber FREMDE
+# Makefiles und bleiben ausserhalb, weil doc-tables die Dateien benennt.
+targets:
+  makefiles: [Makefile, d-check.mk]
+  doc-tables: [AGENTS.md]
+  authority: AGENTS.md
+  # Die doc-*-Regeln stammen aus dem tool-generierten d-check.mk und tragen dort
+  # ihre eigene ##-Beschreibung (make doc-help). Sie in AGENTS.md zu wiederholen
+  # hiesse, eine generierte Datei ein zweites Mal zu fuehren. NAMENTLICH
+  # ausgenommen, nicht per Glob: kommt bei einer Regeneration ein Target dazu,
+  # meldet das Gate es, statt es still durchzulassen.
+  exempt-targets: [doc-check, doc-trace, doc-complete, doc-doctor, doc-repair,
+                   doc-immutable, doc-commits, doc-planning, doc-tracked,
+                   doc-targets, doc-structure, doc-help]
