@@ -11,6 +11,91 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 94 — 2026-08-23 · Eine Rangliste ordnet, jetzt deckt sie auch ab
+
+Auslöser ist ein **Konsumenten-CR von `d-check`** („ein Artefakt ohne Rolle, und
+keine Vollständigkeits-Zusage", 2026-08-23, geprüft gegen Baseline `v5.9.0` und
+Kurs-`HEAD`). Zwei belegte Auslassungen, beide klein, beide mit Schaden am
+realen Konsumenten.
+
+### Entschieden
+
+- **Der Werkzeug-Einstieg bekommt eine Rolle.**
+  `durchsetzungsschicht.md` §Referenz-Implementierung nannte „das
+  **vollständige** Artefakt-Set" und ließ ausgerechnet die Datei aus, die
+  **immer** im Lauf-Kontext liegt — die Wurzel-Datei, die das Werkzeug
+  automatisch lädt. Nicht bloß eine Auslassung: eine Vollständigkeits-Behauptung,
+  die nicht hielt. Sie steht jetzt in der Liste, ausdrücklich als **Artefakt
+  vierter Art** — die drei Bindepunkte bleiben drei, der Einstieg ist keiner.
+  Ihre Rolle: Sie bringt `AGENTS.md` in den Lauf-Kontext (wo Modul 9 es für
+  jeden Lauf verlangt) und **verweist** dorthin, statt festzulegen.
+- **Die Rangliste sagt jetzt auch, was *nicht* außerhalb stehen darf.**
+  `source-precedence.md` führte neun Ränge und zwei bewusste Nicht-Ränge; eine
+  Datei außerhalb war damit **nicht verboten, nur unsichtbar**. Neu: Jede Regel,
+  der ein Agent folgen muss, steht in einer gerankten Quelle oder im
+  Konventionsspeicher; Artefakte außerhalb dürfen verweisen und ausführen, aber
+  nichts festlegen. Das ist die **Mengen-Hälfte** der Zwei-Quadranten-Regel —
+  jene sagt, *wo* eine Hard Rule steht, dieser Satz, dass es keine außerhalb
+  gibt.
+- **Der Anschluss läuft über die bestehende Nicht-Rangliste, nicht daneben.**
+  Aus „zwei Dinge stehen bewusst nicht in der Rangliste" werden drei, mit dem
+  Unterschied, der sonst verlorenginge: Konventionsspeicher und Baseline
+  *dürfen* festlegen, jeder in seiner Rolle — der Einstieg nicht. Ein frei
+  formulierter Satz hätte dem Absatz zwei Bildschirme weiter oben
+  widersprochen.
+- **Die Reihenfolge beim Aufräumen ist das Eigentliche.** (1) zeilenweise
+  belegen, wo jede Aussage gerankt steht; (2) Waisen nach `AGENTS.md` umziehen;
+  (3) *erst dann* kürzen. Der CR belegt den Beinahe-Unfall: Ein Slice wollte
+  eine ungerankte Datei auf einen Verweis kürzen, weil ihr Inhalt „ohnehin
+  gerankt" stehe — ein Review widerlegte die Annahme, sonst wäre eine Hard Rule
+  gelöscht worden, und kein Gate hätte es gemeldet.
+- **Kein Sensor, und das steht dabei.** Welche Datei normativen Text trägt,
+  steht nicht in der Datei — es bleibt ein Review-Griff. Die frühere CR-Fassung
+  forderte eine Audit-Hälfte; sie ist zu Recht gefallen, denn ohne Baubarkeit
+  wäre sie ein behauptetes Gate.
+
+Der CR nimmt in seiner eigenen §5 mehrere frühere Behauptungen zurück
+(`.claude/` sei unbekannt; ein Slash-Command mit eigener Schrittfolge sei eine
+Abweichung; mehrere Hard Rules seien heimatlos). Diese Welle folgt der
+geprüften Fassung: belegt ist **eine** heimatlose Regel, und das genügt.
+
+### Review-Nacharbeit (sieben Befunde, alle behoben)
+
+Ein Review über den ungecommitteten Stand fand sieben Stellen, keine
+gate-sichtbar. Zwei davon hätten die Welle in ihr Gegenteil verkehrt:
+
+- **Die Zusage verbot, was das Regelwerk fordert** (MAJOR der Wirkung nach):
+  Sie zählte „Skill- und Command-Dateien" unter die Artefakte, die nichts
+  festlegen dürfen — während `durchsetzungsschicht.md` §Drei Bindepunkte dem
+  Workflow-Skelett (einem Slash-Command) ausdrücklich aufgibt, *„den Ablauf
+  vorzugeben (Slice-Workflow als feste Schrittfolge)"*. Ein Adopter hätte
+  seinen dritten Bindepunkt auf einen Verweis gekürzt. Aufgelöst über die
+  Unterscheidung, die fehlte: **ausbuchstabieren ≠ festlegen** — ein Skelett,
+  das die kanonische Schrittfolge vorgibt, buchstabiert aus; eines, das eine
+  eigene Regel einführt, legt fest.
+- **Die adoptierte Baseline fehlte in der Aufzählung.** Der Satz nannte zwei
+  Orte (gerankte Quelle, Konventionsspeicher), der Absatz darüber aber drei
+  Nicht-Ränge. Eine Baseline-Regel, die nirgends restated ist, wäre nach dem
+  Wortlaut ein illegales „Artefakt außerhalb" gewesen — also löschbar. Genau
+  der stille Lösch-Unfall, gegen den diese Welle geschrieben ist. Jetzt drei
+  Orte.
+
+Dazu fünf kleinere: **„Zwei-Quadranten-Regel"** war eine Wortprägung, die es im
+Korpus nicht gibt, und ihre Glosse gab die bestehende Regel falsch wieder
+(sie fordert Verdopplung über zwei Quadranten, nicht eine Rang-Position) —
+gestrichen. **„Artefakt vierter Art"** zählte falsch: Die Liste trägt mit
+Hook-Verdrahtung und Nachweis-Quelle längst Artefakte, die keine Bindepunkte
+sind — jetzt „kein vierter Bindepunkt … ein Artefakt eigener Art". Das
+**Mermaid-Diagramm** der Nicht-Rang-Schicht kannte den neuen dritten Eintrag
+nicht — Knoten und Legende ergänzt. Im **Spiegel** war der Link-*Text* nicht
+mit umgeschrieben (`source-precedence.md` statt `grundlagen-…`), was im
+netzlosen Bundle auf eine nicht existierende Datei zeigt. Und eine Prosa-Zeile
+lief auf 99 Zeichen statt der üblichen ~75.
+
+Quelle `kurs/de/grundlagen/{source-precedence,durchsetzungsschicht}.md`, beide
+Splits wortgleich mitgezogen (nur die Link-Umschreibung des Spiegels).
+Regelwerk-Stand auf 94. Gates grün: `make check` 0 ERROR / 0 WARN.
+
 ## Welle 93 — 2026-08-23 · AGENTS.md §4 wird die Autorität über die Targets
 
 Welle 92 hatte `targets` mit der Rechnung „19 undokumentierte Targets"

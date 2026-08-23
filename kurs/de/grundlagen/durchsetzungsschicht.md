@@ -96,6 +96,13 @@ Das vollständige Artefakt-Set einer Durchsetzungsschicht:
 - `tools/harness/working-tree-hash.sh` + `record-gates.sh` — gemeinsame, <!-- d-check:ignore (Referenz-Artefakt im Fallstudien-Repo) -->
   inhaltsbasierte Nachweis-Quelle für Gate-Lauf *und* Handoff-Gate (eine
   Wahrheit, keine Logik-Dopplung)
+- die **Wurzel-Einstiegsdatei** des Werkzeugs (bei Claude Code `CLAUDE.md`) —
+  **kein Bindepunkt**, sondern der Einstieg: Sie bringt `AGENTS.md` in den
+  Lauf-Kontext, wo Modul 9 es für jeden Lauf verlangt. Sie **verweist** dorthin
+  und legt nichts fest ([`source-precedence.md` §Source Precedence](source-precedence.md#source-precedence),
+  Absatz *Vollständigkeit*). **Kein vierter Bindepunkt** — die drei bleiben
+  drei; wie Hook-Verdrahtung und Nachweis-Quelle ist dies ein Artefakt eigener
+  Art, und es fehlte hier.
 
 Die Gate- und Traceability-Mechanik, an die das andockt, läuft in den
 Fallstudien-Repos ([`fallstudien.md`](fallstudien.md)) bereits real; die

@@ -29,6 +29,7 @@ flowchart TD
     AG --> H["9. harness/README.md"]
     H -. "delegiert Form-/Strukturfragen" .-> C["harness/conventions.md<br/>(Konventionsspeicher —<br/>außerhalb der Rang-Zählung)"]
     C -. "ersetzt eine benannte Regel,<br/>gilt in ihrem Geltungsbereich" .-> B["vendored Baseline<br/>.harness/baseline/&lt;tag&gt;/"]
+    E["Werkzeug-Einstieg<br/>(z. B. CLAUDE.md)<br/>verweist, legt nichts fest"] -. "bringt in den Lauf-Kontext" .-> AG
     style L fill:#fff4d6,stroke:#d4a017
     style T fill:#fff4d6,stroke:#d4a017
     style S fill:#fff4d6,stroke:#d4a017
@@ -37,6 +38,7 @@ flowchart TD
     style H fill:#dceaff,stroke:#3366cc
     style C fill:#dceaff,stroke:#3366cc
     style B fill:#eeeeee,stroke:#999999
+    style E fill:#ffffff,stroke:#999999,stroke-dasharray: 4 3
 
     Conflict[/"Konflikt zwischen<br/>AGENTS.md und Spec?"/] -. "AGENTS.md anpassen,<br/>nie die Spec" .-> AG
 ```
@@ -45,7 +47,9 @@ Gelb: kanonische Quellen — Spec, Architektur, ADRs. Blau: Harness-Index
 und Agenten-Konventionen — sie *beschreiben* die kanonischen Quellen,
 sie *ersetzen* sie nicht — `harness/conventions.md` beschreibt sie nicht,
 sondern setzt repo-lokale Struktur. Grau: adoptierte Baseline, kein
-Repo-Dokument. Durchgezogene Kanten sind die Rangfolge, gestrichelte sind
+Repo-Dokument. Weiß gestrichelt: der Werkzeug-Einstieg — er steht in keinem
+Rang und legt nichts fest, er bringt `AGENTS.md` in den Lauf-Kontext.
+Durchgezogene Kanten sind die Rangfolge, gestrichelte sind
 Zuständigkeits- und Auflösungsbeziehungen.
 
 Regel: Widerspricht `AGENTS.md`, `harness/README.md` oder
@@ -53,8 +57,9 @@ Regel: Widerspricht `AGENTS.md`, `harness/README.md` oder
 rangierte Datei angepasst — nie die kanonische Quelle. Der Harness folgt
 der Spec, nicht umgekehrt.
 
-**Die Harness-Schicht darunter: `conventions.md` und die Baseline.**
-Zwei Dinge stehen bewusst **nicht** in der Rangliste. `harness/conventions.md`
+**Die Harness-Schicht darunter: `conventions.md`, die Baseline und der
+Werkzeug-Einstieg.** Drei Dinge stehen bewusst **nicht** in der Rangliste.
+`harness/conventions.md`
 ist kein weiterer Rang, sondern der **Konventionsspeicher**, an den die
 rangierten Dokumente Form- und Strukturfragen *abtreten*: ID-Schemata,
 Verzeichniskonvention, Zusatzklassen, Modus-Deklarationen, Adaptionen
@@ -72,6 +77,35 @@ deklarierten Geltungsbereichs vor der Baseline; außerhalb davon gilt die
 Baseline unverändert.** Das ist keine zusätzliche Regel, sondern die
 Definition einer Adaption — sie steht hier, weil ein Agent, der nur die
 Rangliste liest, die Antwort sonst nicht findet.
+
+**Das Dritte ist der Werkzeug-Einstieg.** Die Wurzel-Datei, die ein
+Agenten-Werkzeug automatisch lädt, ist kein Rang, sondern der **Mechanismus**,
+der die geforderte Quelle in den Lauf-Kontext bringt: `AGENTS.md` gehört dort in
+**jeden** Lauf, und bei einem Werkzeug, das eine andere Datei zuerst liest, löst
+genau diese Datei die Forderung ein. Sie **verweist** deshalb — und legt nichts
+fest. Anders als die zwei davor: Konventionsspeicher und Baseline *dürfen*
+festlegen, jeder in seiner Rolle; der Einstieg nicht.
+
+**Vollständigkeit.** Jede Regel, der ein Agent folgen muss, steht in einer
+gerankten Quelle, im Konventionsspeicher oder in der adoptierten Baseline —
+den drei Orten dieser Schicht. Artefakte außerhalb — Werkzeug-Einstiege,
+Skill- und Command-Dateien, emittierte Fragmente — dürfen **verweisen**,
+**ausführen** und einen dort gerankten Ablauf **ausbuchstabieren**, aber nichts
+**festlegen**, was nicht dort steht. Ein Workflow-Skelett, das die kanonische
+Schrittfolge vorgibt, buchstabiert aus; eines, das eine eigene Regel einführt,
+legt fest. Ohne diesen Satz ist eine Datei außerhalb der Rangliste nicht
+verboten, sondern nur unsichtbar.
+
+**Prüffrage.** *Steht jede Aussage dieser Datei auch in einer gerankten Quelle?*
+Nein ⇒ die Aussage ist eine **Waise**: Sie gehört nach `AGENTS.md`
+**umgezogen**, nicht gelöscht.
+
+**Reihenfolge beim Aufräumen** — sie ist das Eigentliche: **(1)** zeilenweise
+belegen, wo jede Aussage gerankt steht; **(2)** Waisen umziehen und dabei am
+Kanon ausrichten; **(3)** *erst dann* kürzen. Wer mit (3) beginnt, löscht
+bindende Regeln — und merkt es nicht, weil sie nirgends sonst standen. Einen
+Sensor dafür gibt es nicht: Welche Datei normativen Text trägt, steht nicht in
+der Datei. Es bleibt ein Review-Griff.
 
 Daraus folgt die Grenze — sie liegt in der *Wirkung*, nicht im Feld
 `Geltungsbereich` (das nennt den Repo-Ausschnitt; den Baseline-Ausschnitt nennt

@@ -1,6 +1,6 @@
 # Regelwerk — der Kurs als Betriebsregelwerk, nach Modulen
 
-**Stand:** Kurs-Welle 90 · 2026-08-23.
+**Stand:** Kurs-Welle 94 · 2026-08-23.
 
 **Geltungsbereich:** getestet und gelebt mit **einem schreibenden Menschen plus
 Agenten** je Repository; die Mehr-Schreiber-Fassung ist entworfen, nicht
