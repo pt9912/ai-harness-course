@@ -11,6 +11,43 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 91 — 2026-08-23 · Das Kurs-Repo sagt, wie an ihm gearbeitet wird
+
+Die Konventionen dieses Repos lagen verstreut: Rangfolge in einem behobenen
+Review-Befund, Schnittregel in `docs/regelwerk-extrakt.md`, SemVer-Politik in
+`docs/team-plan.md`, Commit-Form nur in der Historie, Gate-Pflicht nirgends.
+Ein Agent, der hier zu arbeiten anfängt, musste sie sich zusammensuchen — oder
+raten.
+
+### Entschieden
+
+- **`AGENTS.md` trägt sie, mit einer Warnung im Kopf.** Der Kurs lehrt
+  `AGENTS.md` als Einstieg eines *adoptierenden* Repos (README §Einstiegspunkt
+  für Code-Agenten); dieses Repo ist die **Quelle** der Lehre und kein Adopter
+  — es führt kein `spec/`, keine Slices, kein `harness/`. Die Datei sagt das in
+  ihrem ersten Absatz und verweist für die gelehrte Form auf
+  `lab/example/AGENTS.md`. Ohne diesen Hinweis wäre die sichtbarste
+  `AGENTS.md` des Repos ein Nicht-Beispiel für das, was es lehrt.
+- **Zeigen statt wiederholen.** Rangfolge, Schnittregel und SemVer-Politik
+  stehen bereits an ihren Orten; `AGENTS.md` verweist dorthin, statt sie zweite
+  Fassung werden zu lassen. Neu niedergeschrieben ist nur, was nirgends stand:
+  Commit-Form, Gate-Pflicht vor dem Commit, die Regel gegen neue Prüf-Skripte,
+  und dass ein Meilenstein erst mit der Stichprobe im **veröffentlichten**
+  Bundle gilt — nicht schon bei grünem Workflow.
+- **`CLAUDE.md` ist eine Zeile.** Werkzeug-Verkabelung, kein Harness-Konstrukt:
+  Claude Code liest sie von selbst, sie zeigt auf `AGENTS.md` und trägt
+  **keinen** eigenen Inhalt. Sobald sie eine Regel selbst formulierte, stünden
+  zwei Fassungen derselben Regel im Repo.
+- **Kein `Co-Authored-By` mehr, und die Datei sagt warum.** Neue Commits führen
+  den Trailer nicht; 47 der 50 Commits davor führen ihn. `AGENTS.md` weist das
+  als bewussten Bruch aus statt als Abbild der Historie — eine Konventionsdatei,
+  die das Gegenteil ihrer eigenen Historie behauptet, wäre genau die
+  Harness-Lüge, vor der Modul 2 warnt.
+
+Regelwerk unberührt, Stand bleibt 90. Gates grün: `make check` 0 ERROR / 0 WARN
+(`d-check` sieht die getrackte Sicht — neue Wurzeldateien müssen vor dem Lauf
+im Index liegen, sonst meldet er `target-untracked`).
+
 ## Welle 90 — 2026-08-23 · Ab Accepted zählt jede Zeile
 
 Vier Befunde am Lastenheft, aus dem Audit nach Welle 89. Der Kern: Die Quelle
