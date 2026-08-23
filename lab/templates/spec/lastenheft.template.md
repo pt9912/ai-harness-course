@@ -5,11 +5,16 @@
 > Lösche diesen Hinweis-Block und alle Kommentar-Zeilen (`<!-- -->`)
 > nach dem Ausfüllen.
 
-**Version:** 0.1.0 (`Major.Minor.Patch` — erhöhen bei Änderungen, siehe
-Baseline-Regelwerk `modul-03-spec.md`).
+**Version:** 0.1.0 (`Major.Minor.Patch`). Ab `Accepted` ist der Bump der
+Fußabdruck des Change Requests; **welche Stelle** steigt, deklariert dein Repo
+in `harness/conventions.md` (Baseline-Regelwerk
+`grundlagen-source-precedence.md` §Spec-Stratifizierung).
 
-**Status:** Draft | In Review | Accepted (entwurfsstatus, der die
-Verbindlichkeit der IDs steuert).
+**Status:** Draft | In Review | Accepted — gilt dem **Dokument**, nicht der
+einzelnen Anforderung. Vor `Accepted` frei änderbar, ohne Change Request, ohne
+Historie-Zeile; ab `Accepted` ist jede Änderung eine Vertragsänderung
+(Baseline-Regelwerk `grundlagen-source-precedence.md`
+§Spec-Stratifizierung).
 
 **Autor:** <Name>, **Datum:** YYYY-MM-DD.
 
@@ -46,7 +51,10 @@ Regeln dieser Sektion: ID-Schema `<PREFIX>-FA-<NN>` — mit Bereichssegment
 Repo dasselbe und taucht in Make-Target-Kommentaren, ADRs und Commits wieder auf
 (Baseline-Regelwerk `grundlagen-source-precedence.md` §ID-Schema als Klammer). Jede
 Anforderung trägt drei Pfade — Happy · Boundary · Negative — plus Out-of-Scope
-(Baseline-Regelwerk `modul-03-spec.md` §Ziel-Form: Akzeptanzkriterium).
+(Baseline-Regelwerk `modul-03-spec.md` §Ziel-Form: Akzeptanzkriterium). Eine
+Anforderung, deren Bedarf ersatzlos entfällt, wird **nicht gelöscht**, sondern
+trägt den Vermerk *zurückgezogen* im Titel; die Nummer bleibt vergeben
+(Baseline-Regelwerk `grundlagen-source-precedence.md` §Spec-Stratifizierung).
 
 <!-- Format: ID — Titel — Beschreibung — Akzeptanzkriterien
      (Given/When/Then, Boundary, Negative). -->
@@ -114,11 +122,18 @@ Ohne diesen Abschnitt baut der Agent gerne Plausibles.
 
 ## 7. Historie
 
-Regeln dieser Sektion: Jede Änderung an *angenommenen* Anforderungen ist eine
-Vertragsänderung. Sie entsteht **nur** aus einem Change Request, nie aus einem
+Regeln dieser Sektion: Ab Status `Accepted` ist **jede** Änderung an diesem
+Dokument eine Vertragsänderung — auch das **Hinzufügen** einer neuen
+Anforderung. Sie entsteht **nur** aus einem Change Request, nie aus einem
 ADR oder Slice. Fußabdruck pro angenommenem CR: Version-Bump oben plus eine
 Zeile hier, mit dem CR unter „Verweis" (Baseline-Regelwerk
 `grundlagen-source-precedence.md` §Spec-Stratifizierung).
+
+**Einzige Ausnahme: die Tatsachenberichtigung** — eine Stelle, die etwas anderes
+behauptete, als vereinbart war. Sie braucht keinen Change Request, wenn sie hier
+**als solche ausgewiesen** ist und keine Aussage einer Anforderung berührt;
+„Verweis" trägt dann `—`. Wer eine Sinn-Änderung so etikettiert, hat die
+Trennung von Entscheidung und Umsetzung verloren.
 
 Sind Auftraggeber und Entwickler **dieselbe Person**, fehlt nur die
 Ticket-Form, nicht der Vorgang. Dann trägt der **Commit** die Trennung: Die

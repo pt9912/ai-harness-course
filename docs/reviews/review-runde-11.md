@@ -4,7 +4,7 @@
 Sie sammelt drei Dinge: was **vor** der Runde auffiel (`V11-01`, `V11-02` —
 beide behoben), die **Befunde des Drei-Linsen-Reviews** (21 offen, 6 behoben)
 und die übernommenen Ü-Posten (`Ü-02`, `Ü-03`, `Ü-04`, `Ü-07`, `Ü-08` behoben;
-offen: `Ü-01`, `Ü-06`, `Ü-12`; `Ü-05`, `Ü-09`, `Ü-10`, `Ü-11` behoben).
+offen: `Ü-01`, `Ü-06`; `Ü-05`, `Ü-09`, `Ü-10`, `Ü-11`, `Ü-12` behoben).
 
 **Gegenstand, wenn die Runde läuft:** der Diff `5e061dc..HEAD` — die Nacharbeit
 zu [Runde 10](review-runde-10.md) (dort abgelegt, vollständig behoben).
@@ -807,7 +807,7 @@ aufgeräumt. Zwei Vorlagen tragen weiterhin Normen in Kommentaren
 mehrzeiliger `<!-- … -->`-Blöcke als Rumpf und meldete darum zwei betroffene
 Dateien statt vier. Blockweise nachgemessen.
 
-### Ü-12 — Die Lastenheft-Historie des Beispiels nennt Slices und eine ADR als Änderungsgrund
+### Ü-12 — Die Lastenheft-Historie des Beispiels nennt Slices und eine ADR als Änderungsgrund ✅
 
 Die encodierte CR-Regel aus Welle 34 (`lastenheft.template.md` §7, seit heute
 im Rumpf):
@@ -841,6 +841,19 @@ nicht offensichtlich: Entweder die zwei Zeilen benennen einen CR (den es nie
 gab), oder sie werden als *Korrektur* statt *Vertragsänderung* ausgewiesen,
 oder das Beispiel führt sie bewusst als Negativfall. Das ist eine
 Entscheidung, keine Nacharbeit.
+
+**Behoben in Welle 62** (2026-08-01, `50d726e`): keine der drei hier genannten
+Optionen, sondern eine vierte — die Zeilen bleiben stehen, ihre verbotenen
+Verweise fallen auf `—`, und ein Absatz davor weist sie als *älter als die
+Regel* aus („eine Historie ist ein Protokoll"). `0.4.1` trägt zusätzlich die
+Einordnung *Tatsachenberichtigung, keine Vertragsänderung*. Damit ist weder ein
+CR erfunden noch ein Protokoll umgeschrieben.
+
+**Nachtrag Welle 90** (2026-08-23): Die Einordnung, die das Beispiel hier
+erfunden hatte, ist jetzt quellseitig verankert — `kurs/de/grundlagen/source-precedence.md`
+§Spec-Stratifizierung (mit Split in `lab/regelwerk/`) nennt die Tatsachenberichtigung als einzige Ausnahme von
+der CR-Pflicht, mit zwei Bedingungen (in der Historie ausgewiesen · berührt
+keine Aussage einer Anforderung).
 
 ### Ü-09 — `modul-03-lastenheft.md` heißt nach einer Hälfte seines Titels ✅
 

@@ -172,6 +172,43 @@ die Trennung verloren — gleich, ob ein Ticket existiert oder nicht. Ein Sensor
 dafür existiert nicht (kein d-check-Modul prüft, welche Dateien ein Commit
 zusammen anfasst); es bleibt ein Review-Griff.
 
+**Wann die CR-Pflicht beginnt, sagt der Status des Lastenhefts.** Er steht in
+dessen Kopf und gilt dem **Dokument**, nicht der einzelnen Anforderung:
+*Draft* · *In Review* · *Accepted*. Vor `Accepted` ist das Lastenheft ein
+Entwurf — frei änderbar, ohne Change Request, ohne Historie-Zeile; die Trennung
+von Entscheidung und Umsetzung greift noch nicht, weil noch nichts versprochen
+wurde. Ab `Accepted` ist **jede** Änderung am Dokument eine Vertragsänderung:
+auch das **Hinzufügen** einer neuen `LH-*`. „Neu" ist keine Ausnahme — eine
+zusätzliche Anforderung erweitert das Versprechen, und genau diesen Vorgang
+trägt der Change Request.
+
+**Die eine Ausnahme ist die Tatsachenberichtigung**: eine Stelle, die etwas
+anderes behauptete, als vereinbart war. Sie ändert nicht das Versprechen,
+sondern dessen falsche Wiedergabe, und braucht deshalb keinen Change Request —
+unter zwei Bedingungen: Sie wird in der Historie **als solche ausgewiesen**,
+und sie berührt keine Aussage einer Anforderung. Wer eine Sinn-Änderung als
+Berichtigung etikettiert, hat nicht abgekürzt, sondern die Trennung von
+Entscheidung und Umsetzung verloren; eine Umformulierung, die den Sinn
+*berührt*, ist Vertragsänderung. Ihr Fußabdruck ist derselbe **minus CR**:
+Version-Bump und Historie-Zeile bleiben — der Vorgang ist belegt —, und die
+Spalte „Verweis" trägt `—`, weil es keinen externen Vorgang gibt, den sie
+nennen könnte.
+
+**Zurückgezogen wird markiert, nicht gelöscht.** Eine `LH-*`, deren Bedarf
+ersatzlos entfällt, bleibt mit dem Vermerk *zurückgezogen* im Titel stehen —
+sichtbar beim Überfliegen, ohne eigene Notation; ihre Nummer
+bleibt vergeben ([§Vergabe](#vergabe-woher-die-nächste-nummer-kommt) — Lücken
+werden nicht nachbelegt). Das ist dieselbe Unterscheidung, die die ADR zwischen
+`superseded` und `deprecated` trifft: *Bedarf bleibt, Antwort wechselt* ist eine
+gewöhnliche CR-Änderung; *Bedarf existiert nicht mehr* ist die Rücknahme.
+Gelöscht wären beide unsichtbar — und jeder Slice, der die Kennung nennt, zeigte
+ins Leere.
+
+**Welche Stelle der Version steigt, entscheidet das Repo** und gehört in den
+Adaptions-Block von `harness/conventions.md` — wie die Rangwahl innerhalb des
+Vertrags-Stratums. Verlangt ist der Bump als Fußabdruck, nicht eine bestimmte
+Stelle.
+
 ### ID-Schema als Klammer
 
 Ein konsistentes Präfix (`LH-*`, `HSM-*`, `GG-*`) verbindet:

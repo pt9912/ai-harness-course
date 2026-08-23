@@ -11,6 +11,92 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 90 — 2026-08-23 · Ab Accepted zählt jede Zeile
+
+Vier Befunde am Lastenheft, aus dem Audit nach Welle 89. Der Kern: Die Quelle
+lehrte nie, dass das Lastenheft einen Lebenszyklus hat — also hat das Template
+ihn erfunden (`Status: Draft | In Review | Accepted`, nirgends sonst im Korpus)
+und seine Hauptregel darauf gestützt.
+
+### Entschieden
+
+- **Der Status gilt dem Dokument, nicht der Anforderung.** Vor `Accepted` ist
+  das Lastenheft ein Entwurf — frei änderbar, ohne Change Request, ohne
+  Historie-Zeile. Ab `Accepted` ist **jede** Änderung eine Vertragsänderung.
+  Damit ist auch das **Hinzufügen** einer neuen `LH-*` CR-pflichtig: Die
+  Template-Regel sprach von „Änderung an *angenommenen* Anforderungen" und ließ
+  damit offen, ob eine *neue* Anforderung darunterfällt — der Scope konnte
+  still wachsen, genau an der Decke. Element-Ebene raus, Dokument-Ebene rein,
+  wie die Quelle es ohnehin formuliert („Das Lastenheft ändert nur ein externer
+  Change Request").
+- **Zurückgezogen wird markiert, nicht gelöscht.** Eine `LH-*`, deren Bedarf
+  ersatzlos entfällt, bleibt mit `[zurückgezogen]` stehen; die Nummer bleibt
+  vergeben (§Vergabe — Lücken werden nicht nachbelegt). Das spiegelt die
+  Unterscheidung, die die ADR längst trifft (`superseded` = Antwort wechselt,
+  `deprecated` = Bedarf entfällt); für `LH-*` fehlte sie. Gelöscht wären beide
+  Fälle unsichtbar, und jeder Slice auf die Kennung zeigte ins Leere.
+- **Die Ziffernwahl ist projektlokal.** Das Template verwies für
+  `Major.Minor.Patch` auf `modul-03-spec.md` — das dort nichts zur Stelle sagt.
+  Verlangt ist der Bump als Fußabdruck; **welche** Stelle steigt, gehört in den
+  Adaptions-Block von `harness/conventions.md`, wie die Rangwahl innerhalb des
+  Vertrags-Stratums. Kein SemVer-Regime für Anforderungen erfunden.
+- **Die Tatsachenberichtigung ist die einzige Ausnahme — und war unverankert.**
+  Eine Stelle, die etwas anderes behauptete als vereinbart, ändert nicht das
+  Versprechen, sondern dessen falsche Wiedergabe; sie braucht keinen CR, wenn
+  sie in der Historie als solche ausgewiesen ist und keine Aussage einer
+  Anforderung berührt. Das Beispiel-Repo führte diese Einordnung seit Welle 62
+  (`0.4.1` — „Tatsachenberichtigung, keine Vertragsänderung"), Quelle und
+  Regelwerk kannten sie nicht: eine Struktur im Beispiel ohne Quell-Verankerung.
+  Der erste Entwurf dieser Welle machte es umgekehrt falsch und erklärte **jede**
+  Umformulierung zur Vertragsänderung — das hätte einen Tippfehler
+  CR-pflichtig gemacht und der besseren Position des Beispiels widersprochen.
+  Jetzt trägt die Quelle die Ausnahme, mit den zwei Bedingungen als Wächter.
+- **Ein Befund hat die Gegenprüfung nicht überlebt.** „Quelle und Template
+  widersprechen sich" war zu scharf: Das Template ist über neue Anforderungen
+  *stumm*, nicht gegenteilig — Unterbestimmung, kein Konflikt. Die Behauptung
+  steht korrigiert; der Fix ist derselbe.
+
+Quelle `kurs/de/grundlagen/source-precedence.md` §Spec-Stratifizierung, Split
+`lab/regelwerk/grundlagen-source-precedence.md` wortgleich mitgezogen; vier
+Stellen in `lab/templates/spec/lastenheft.template.md` angeglichen.
+`lab/example/spec/lastenheft.md` nicht angefasst — es stand bereits konform,
+Kopf wie Historie. `Ü-12` in
+[`docs/reviews/review-runde-11.md`](docs/reviews/review-runde-11.md) stand
+fälschlich noch als offen; behoben war der Befund seit Welle 62 (`50d726e`),
+der Eintrag ist jetzt entsprechend markiert. Kein neues Kennungsschema, kein Sensor: Weder Status noch
+Rücknahme sind maschinell prüfbar, beides bleibt Review-Griff.
+Regelwerk-Stand auf 90.
+
+### Review-Nacharbeit (sieben Befunde, alle behoben)
+
+Ein Review über den ungecommitteten Stand fand sieben Stellen — keine davon
+gate-sichtbar, alle semantisch:
+
+- **Template §7 widersprach der Quelle, die es zitiert** (MAJOR): die
+  Tatsachenberichtigung fehlte dort, ein Tippfehler wäre CR-pflichtig gewesen.
+- **Das Beispiel trug noch die zurückgezogene Element-Formulierung** (MAJOR):
+  `lab/example/spec/lastenheft.md` §7 war die *letzte* Fundstelle von „Änderung
+  an angenommenen Anforderungen" im Korpus. Die Behauptung dieser Welle, das
+  Beispiel stehe konform, galt für Kopf und Historie — nicht für seinen
+  Regeltext.
+- **`[zurückgezogen]` war eine Template-Erfindung** (MEDIUM): eine Notation, die
+  in Quelle und Regelwerk nirgends stand — derselbe Fehlertyp, den diese Welle
+  beseitigt. Jetzt trägt die Quelle die Ziel-Form (*Vermerk im Titel, ohne
+  eigene Notation*), das Template spiegelt sie.
+- **Ein Split-Absatz war paraphrasiert statt weggelassen** (MEDIUM):
+  `grundlagen-referenz-richtung.md` schrieb die User-Story-Probe um, statt die
+  Sätze der Quelle zu übernehmen und die Literatur zu streichen. Jetzt exakt
+  das: reine Auslassung von 103 Zeichen, sonst wortgleich.
+- **„Form ist kein Beleg" stand unversöhnt neben Mechanismus 1** (MEDIUM), der
+  das Stratum gerade über die Kennungs-*Form* bestimmt. Aufgelöst: Die
+  Kennungs-Form **deklariert**, sie belegt nicht — sie ist die Erklärung des
+  Autors, nicht das Aussehen der Gattung.
+- **Der Berichtigung fehlte der eigene Fußabdruck** (LOW): Version-Bump und
+  Historie-Zeile bleiben, „Verweis" trägt `—`.
+- **Der Ü-12-Nachtrag nannte den Split als Quelle** (LOW), nicht `kurs/de/`.
+
+Gates grün: `make check` 0 ERROR / 0 WARN.
+
 ## Welle 89 — 2026-08-23 · Form ist kein Beleg
 
 §Spec-Straten nennt zwei Achsen — *normativer Gehalt* und *Änderungs-Prozess* —
