@@ -350,6 +350,35 @@ Mechanismen:
    undeklariertes Gate — und **nicht normativ zitierbar**, bis es deklariert
    ist (analog Phase 4 „freigegeben für Verweise von außen").
 
+**Die zwei Achsen sind nicht gleich belastbar.** Widersprechen sie einander,
+entscheidet der **Änderungs-Prozess**. Der normative Gehalt ist Auslegung —
+zwei kompetente Leser können dauerhaft uneins bleiben, ob ein Dokument eigene
+Anforderungen *trägt* oder eine fremde nur *identifiziert*. Der
+Änderungs-Prozess ist dagegen beobachtbar: *Wer darf diese Datei ändern, und
+mit wessen Einverständnis?* Die Stratum-Definitionen selbst sind über den
+Prozess formuliert („Change Request", „fortschreibbar", „Diagramm-Update") —
+die Gehalts-Spalte beschreibt, die Prozess-Spalte entscheidet.
+
+**Die Genre-Falle.** Eine vertraute Dokument-Gattung legt ein Stratum nahe,
+weil ihre *Form* an eines erinnert. **Form ist kein Beleg** — sie sagt, wie
+ein Dokument aussieht, nicht, wer es ändern darf. Ein Genre-Name ersetzt die
+zwei Achsen nicht, er verdeckt sie nur. Das steht **nicht** gegen Mechanismus 1:
+Die Kennungs-Form *deklariert* das Stratum, sie belegt es nicht — sie ist die
+Erklärung des Autors, nicht das Aussehen der Gattung. Wer eine
+`<PREFIX>-FA-<NN>` vergibt, sagt „Vertrag"; wer Given/When/Then schreibt, sagt
+gar nichts.
+
+Probe am Fall: die **User Story**. Sie schreibt ihre Akzeptanzkriterien in
+Given/When/Then — in genau der Form, die auch das Lastenheft für seine
+`LH-FA-*` verlangt. Nach Form gälte: Vertrag. Nach Achse 2 nicht: Eine Story
+wird im Refinement geändert, laufend und teamintern, ohne Vereinbarung mit dem
+Auftraggeber. Damit scheidet das Vertrags-Stratum aus, das über den Change
+Request definiert ist — und mit ihm Technik (sie trifft keine technische
+Festlegung) und Sicht (sie ist nicht derivativ). Die User Story ist **kein
+Spec-Dokument**, sondern **Slice-Klasse**: kleinste lieferbare Einheit, eigener
+Plan, eigene DoD, volatil. Sie gehört unter `docs/plan/planning/`. Ein
+`spec/user-stories/` hebt ein volatiles Artefakt über die Decke.
+
 **Die Decke ist nicht fix.** Ein Policy/Compliance-Repo rankt Regulatorik
 *über* das Lastenheft („wir müssen" begrenzt „wir versprechen", siehe
 [§Source Precedence](grundlagen-source-precedence.md#source-precedence)). Die Stratum-*Klassen* sind

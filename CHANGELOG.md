@@ -11,6 +11,51 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 89 — 2026-08-23 · Form ist kein Beleg
+
+§Spec-Straten nennt zwei Achsen — *normativer Gehalt* und *Änderungs-Prozess* —
+und sagte nicht, welche bei Dissens sticht. Aufgefallen ist es an der User
+Story: Sie schreibt Given/When/Then wie das Lastenheft, wird aber im Refinement
+geändert. Nach Form gälte Vertrag, nach Prozess nicht.
+
+### Entschieden
+
+- **Bei Dissens entscheidet der Änderungs-Prozess.** Der normative Gehalt ist
+  Auslegung — die Fachliteratur streitet ihn am selben Artefakt aus (Cohn:
+  „represents a requirement"; Jeffries: die Karte enthält „not all the
+  information that makes up the requirement … just enough text to identify"
+  sie). Der Änderungs-Prozess ist dagegen beobachtbar, und die
+  Stratum-Definitionen sind ohnehin über ihn formuliert („Change Request",
+  „fortschreibbar", „Diagramm-Update"): Die Gehalts-Spalte beschreibt, die
+  Prozess-Spalte entscheidet.
+- **Die Genre-Falle ist benannt.** Eine vertraute Dokument-Gattung legt ein
+  Stratum durch ihre *Form* nahe; Form ist kein Beleg. Das trifft jeden
+  Adopter, der ein benanntes Genre mitbringt — die Kollision steckt im eigenen
+  Lastenheft-Template (Given/When/Then für `LH-FA-*`), nicht nur in fremden
+  Gewohnheiten.
+- **Beide Änderungs-Prozesse stehen jetzt im Glossar.** §Trennschärfen
+  unterscheidet *Refinement* (teamintern, laufend, ohne Vertragspartner) von
+  *Change Request* (extern mit dem Auftraggeber vereinbart) — das Paar, das
+  nach dieser Welle über das Stratum entscheidet. „Change Request" ist
+  zusätzlich Kernbegriff, quelltreu aus §Spec-Stratifizierung verdichtet; der
+  `Stratum`-Eintrag nennt den Tie-Break. Ohne das trüge der neue Text mit
+  „Refinement" einen tragenden Begriff, den der Korpus nirgends führt — der
+  Fehlertyp, den dieselbe Welle am Lastenheft-Template benennt.
+- **Kein viertes Stratum, kein neues Kennungsschema, kein Sensor.** Die User
+  Story ist Slice-Klasse und liegt unter `docs/plan/planning/`; ein
+  `spec/user-stories/` hebt ein volatiles Artefakt über die Decke. „Wer darf
+  diese Datei ändern" steht nicht in der Datei und ist damit nicht maschinell
+  prüfbar — Review-Griff, kein Gate. Templates und `lab/example` unberührt.
+
+Quelle `kurs/de/grundlagen/referenz-richtung.md` §Spec-Straten und
+`begriffe.md`, Splits `lab/regelwerk/grundlagen-referenz-richtung.md` und
+`grundlagen-begriffe.md` quelltreu mitgezogen (Didaktik und Literatur
+weggelassen); Regelwerk-Stand auf 89. Kein neuer Anker, keine
+neuen Verweise — die 17 Dateien, die auf §Spec-Straten zeigen, bleiben
+unberührt.
+
+Gates grün: `make check` 0 ERROR / 0 WARN.
+
 ## Welle 88 — 2026-08-22 · Vier unbelegte Aussagen, sieben Verdikte
 
 Der Faden aus Welle 87: Closure-Seite, Vorvergabe, Rolleninhaber-Feld und
