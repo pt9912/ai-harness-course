@@ -271,6 +271,25 @@ Toolchain (Modul 14).**
 `ADR-0007 violated`. Genau der Effekt, der eine ADR von einer
 Absichtserklärung trennt.
 
+**Und das Rot muss von *dieser* Regel kommen.** Ein roter Exit ist
+erstaunlich leicht aus dem falschen Grund zu bekommen: ein Nachbar-Gate, das
+ohnehin schon rot war · ein Tippfehler, an dem das Werkzeug abbricht, bevor
+es prüft · eine Probe, die im Abschnitt landet, den die Prüfung ausnimmt —
+dann schweigt der Wächter zu Recht und man verbucht es als *„greift nicht"*.
+Der Nachweis ist deshalb nicht *„es wurde rot"*, sondern die **gelesene
+Ursache**: Die Meldung nennt die gebrochene Regel und die Fundstelle, und
+beides gehört angesehen. Wer das überspringt, hat den Lauf gegen eine
+Behauptung eingetauscht — und die Behauptung ist das, was Schritt 6
+widerlegen soll.
+
+Das ist die eine Richtung. Die andere führt
+[Modul 11 §Worked Example, Schritt 8](modul-11-verification.md#worked-example-eine-adr-aussage-ohne-fertiges-tool-als-fitness-function-bauen):
+der **unveränderte Bestand**, auf dem der Sensor schweigen muss. Zusammen
+sind sie ein Paar — er wird aus dem richtigen Grund rot und bleibt sonst
+still. Fällt eine der beiden Proben aus, sagt die verbleibende nichts über
+die andere: Ein Wächter, der immer rot wird, besteht die Positivkontrolle;
+einer, der nie rot wird, die Negativkontrolle.
+
 ## Worked Example B: Guard-Härtung als Steering-Loop am Wächter
 
 > **Voraussetzung:** [`../grundlagen/durchsetzungsschicht.md`](../grundlagen/durchsetzungsschicht.md) (drei Bindepunkte, vier Design-Eigenschaften). Dieses Beispiel zeigt nicht, *wie* man einen Wächter baut, sondern wie er **über Wellen reift** — und wo diese Reifung dokumentarisch landet.

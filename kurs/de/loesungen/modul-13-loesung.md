@@ -165,7 +165,10 @@ Vorgehen:
 
 1. Lege eine neue Funktion in `optimizer/critical.go` (oder Äquivalent) ohne Test an.
 2. Stelle sicher, dass `coverage-gate-critical` die Datei sieht.
-3. Führe `make coverage-gate-critical` aus → muss rot werden.
+3. Führe `make coverage-gate-critical` aus → muss rot werden, **und die
+   Meldung muss diese Datei nennen**. Rot allein genügt nicht
+   ([Modul 13 §Worked Example A](../04-qualitaet/modul-13-quality-gates.md#worked-example-a-vom-adr-satz-zur-fitness-function),
+   Schritt 6): Ein Gate, das ohnehin schon rot war, sieht genauso aus.
 4. Schreibe minimalen Test → grün.
 
 Warum diese Übung wichtig ist: Sie validiert, dass dein

@@ -173,6 +173,14 @@ Die **maschinelle Formulierung** ist die eigentliche Arbeit: aus
 beginnt oder Standardbibliothek ist" — erst diese Präzision ist als
 `forbidden`-Contract eines Import-Linters prüfbar.
 
+Und das Rot muss von *dieser* Regel kommen. Der Nachweis ist deshalb nicht
+*„es wurde rot"*, sondern die **gelesene Ursache**: Die Meldung nennt die
+gebrochene Regel und die Fundstelle, und beides gehört angesehen. Das ist die
+eine Richtung. Die andere führt
+[Modul 11 §Fitness Function ohne Standard-Tool](modul-11-verification.md#fitness-function-ohne-standard-tool-modul-11):
+der **unveränderte Bestand**, auf dem der Sensor schweigen muss. Zusammen sind
+sie ein Paar — er wird aus dem richtigen Grund rot und bleibt sonst still.
+
 <a id="guard-haertung"></a>
 
 ### Guard-Härtung: Wächter reifen in Wellen (Modul 13)

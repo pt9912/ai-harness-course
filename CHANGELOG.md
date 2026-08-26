@@ -80,6 +80,35 @@ Adaptions-Eintrag.
   Verbot. Ohne diesen Zusatz bliebe die Frage nur halb beantwortet: Wer
   Code-Pfade *verbietet*, verschärft.
 
+## Welle 97 — Bewusstes Brechen verlangt die gelesene Ursache
+
+`modul-13` §*Fitness Function aus einem ADR-Satz*, sechster Schritt, war
+erfüllt, sobald *irgendetwas* rot wurde. Ein roter Exit ist aus dem falschen
+Grund leicht zu bekommen — der CR belegt drei Fehlläufe aus zwei
+aufeinanderfolgenden Arbeitstagen: ein Nachbarlinter, der das Rot lieferte ·
+eine nie gefahrene Direktiv-Form, deren Wohlgeformtheit aus der Annahme
+stammte · eine Probe im einzigen ausgenommenen Abschnitt, deren berechtigtes
+Schweigen fast als *„greift nicht"* verbucht worden wäre.
+
+### Entschieden
+
+- **Das Rot muss von *dieser* Regel kommen**, und der Nachweis ist nicht *„es
+  wurde rot"*, sondern die **gelesene Ursache**: Die Meldung nennt die
+  gebrochene Regel und die Fundstelle, beides gehört angesehen.
+- **Als Paar mit der Gegenrichtung geschrieben.** Der Kanon führte bereits die
+  Negativkontrolle — `modul-11` §Schritt 8 verlangt den *unveränderten
+  Bestand*, auf dem der Sensor schweigen muss. Was fehlte, ist die
+  Positivkontrolle. `modul-13` verweist jetzt auf `modul-11`, sodass die zwei
+  Richtungen von dort als Paar lesbar sind — der Rückverweis bleibt aus, weil
+  der CR ihn nicht verlangt und Modul 11 seine Probe für sich vollständig
+  beschreibt. Ein Wächter, der immer rot wird, besteht die eine Probe; einer,
+  der nie rot wird, die andere; eine bestandene Probe sagt nichts über die
+  jeweils andere.
+- **Satellit nachgezogen.** `modul-13-loesung.md` §*Provoziere absichtlich
+  einen Coverage-Gate-Failure* ließ Schritt 3 bei *„muss rot werden"* stehen —
+  genau die Formulierung, die diese Welle als unzureichend benennt. Die Übung
+  verlangt jetzt, dass die Meldung die provozierte Datei nennt.
+
 ## Welle 94 — 2026-08-23 · Eine Rangliste ordnet, jetzt deckt sie auch ab
 
 Auslöser ist ein **Konsumenten-CR von `d-check`** („ein Artefakt ohne Rolle, und
