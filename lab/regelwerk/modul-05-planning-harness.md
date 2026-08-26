@@ -134,6 +134,17 @@ sie ist es stilles Vergessen) · *weiter offen* → wandert ins
 dritte Ausgang hängt das Risiko an den Zähler, statt einen zweiten
 Mechanismus zu erfinden: drei Slices lang offen heißt Schwelle erreicht.
 Ein Slice geht nicht nach `done/`, während ein Risiko ohne Ausgang dasteht.
+**Urteilsfrei** ist, *dass* zu jedem notierten Risiko ein Ausgang dasteht und
+*welcher der drei* es ist: Die drei sind eine geschlossene Menge, kein Freitext
+— ein Risiko ohne Ausgang und ein Ausgang, der keiner der drei ist, sind an der
+**Form** erkennbar, nicht am Inhalt. **Urteil** bleibt, ob der eingetragene
+Ausgang *trägt*: ob das Risiko wirklich nicht mehr eintreten kann, ob die
+genannte Folge-Slice-ID die Realisierung tatsächlich auffängt. Das ist
+dieselbe Arbeitsteilung wie beim Beobachtungs-Register
+([Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)) — Mensch
+urteilt, Maschine prüft Deckung —, und sie bindet an denselben Punkt: den
+Übergang nach `done`. *Welches* Werkzeug die urteilsfreie Hälfte prüft, ist
+Repo-Entscheidung; dass sie eine hat, ist es nicht.
 
 ### Ziel-Form: Slice
 

@@ -141,6 +141,25 @@ Ein Slice geht nicht nach `done`, während ein Risiko ohne Ausgang
 dasteht. Das ist dieselbe Disziplin wie beim Lerneintrag: *abgelegt* ist
 nicht *abgeschlossen*.
 
+**Was Maschine hier kann.** Die Regel hat zwei Hälften, und nur eine
+braucht ein Urteil. **Urteilsfrei** ist, *dass* zu jedem notierten Risiko
+ein Ausgang dasteht und *welcher der drei* es ist: Die drei sind eine
+geschlossene Menge, kein Freitext — ein Risiko ohne Ausgang und ein
+Ausgang, der keiner der drei ist, sind an der **Form** erkennbar, nicht
+am Inhalt. **Urteil** bleibt, ob der eingetragene Ausgang *trägt*: ob das
+Risiko wirklich nicht mehr eintreten kann, ob die genannte Folge-Slice-ID
+die Realisierung tatsächlich auffängt. Das ist dieselbe Arbeitsteilung wie
+beim Beobachtungs-Register
+([Modul 6 §Das Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register)) —
+Mensch urteilt, Maschine prüft Deckung —, und sie bindet an denselben
+Punkt: den Übergang nach `done`. *Welches* Werkzeug die urteilsfreie
+Hälfte prüft, ist Repo-Entscheidung; dass sie eine hat, ist es nicht.
+
+Ohne diese Trennung liest sich die Regel als reine Disziplin. Disziplin
+ist aber das, was unter Druck zuerst nachlässt — und was dann ausfällt,
+fällt still aus: Ein offener Punkt, der als Fließtext stehen bleibt statt
+als einer der drei Ausgänge, sieht aus wie erledigte Arbeit.
+
 Dieselbe Route nehmen die **Finding-Klassen aus dem Review** dieses
 Slice: Der Review-Report ist ein Lauf-Beleg, der über Läufe hinweg nicht
 gelesen wird ([Modul 10](../04-qualitaet/modul-10-review-harness.md)) —

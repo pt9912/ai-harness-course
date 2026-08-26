@@ -11,6 +11,49 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Wellen 95–98 — 2026-08-26 · Vier Punkte aus einem Konsumenten-CR
+
+Auslöser ist ein **Konsumenten-CR von `d-check`** (2026-08-25, geprüft gegen
+Baseline `v5.11.0`). Vier Beobachtungen aus dem laufenden Betrieb, jede an
+eigenem Bestand belegt, jede einzeln annehmbar gehalten — und **keine**
+verlangt ein Gate. Alle vier sind angenommen; einer wird anders encodiert als
+beantragt.
+
+## Welle 95 — Die Drei-Ausgänge-Regel bekommt ihre urteilsfreie Hälfte
+
+`modul-05` §*Offene Risiken werden bei Closure aufgelöst* las sich als reine
+Disziplin. `modul-06` macht an derselben Lage vor, wie der Kanon damit umgeht
+— *Mensch urteilt, Maschine prüft Deckung*, gefolgt davon, was ohne Urteil
+prüfbar ist. Für die Drei-Ausgänge-Regel fehlte diese Trennung, obwohl sie
+eine hat.
+
+### Entschieden
+
+- **Urteilsfrei ist Form, nicht Inhalt.** *Dass* zu jedem notierten Risiko ein
+  Ausgang dasteht und *welcher der drei* es ist — die drei sind eine
+  geschlossene Menge, kein Freitext. Ein Risiko ohne Ausgang und ein Ausgang,
+  der keiner der drei ist, sind an der Form erkennbar. **Urteil** bleibt, ob
+  der eingetragene Ausgang *trägt*.
+- **Die Wirkung ist encodiert, nicht der Träger.** Der CR schlug vor: *„ein
+  Slice in `done/` trägt keinen unaufgelösten Vorlagen-Platzhalter"*. Das
+  steht so **nicht** da, aus zwei Gründen. Erstens Referenz-Richtung — der
+  Satz stünde im Kursmodul und setzte die Platzhalter-Form von
+  `slice.template.md` voraus; die Vorlage ist abgeleitet und illustrativ, und
+  eine Regel, die die Form ihrer eigenen Ableitung zur Bedingung macht, dreht
+  die Richtung um. Zweitens Reichweite — der stehengebliebene Platzhalter ist
+  ein *Fall* von „kein Ausgang", nicht der Regelinhalt. Ein Adopter ohne
+  unsere Vorlage fiele aus der Träger-Fassung heraus.
+- **Werkzeug-agnostisch, wie beim Register.** *Welches* Werkzeug die
+  urteilsfreie Hälfte prüft, ist Repo-Entscheidung; dass sie eine hat, ist es
+  nicht. Der Bindepunkt ist derselbe wie bei der Regel selbst: der Übergang
+  nach `done`.
+
+Der CR belegt die Klasse an eigenem Bestand (über drei aufeinanderfolgende
+Closures landeten benannte offene Punkte in Closure-Notizen statt in einem der
+drei Ausgänge; kein Gate war dafür zuständig) und hat die Prüfung netzlos
+gebaut — 137 Slices, null Treffer, vier konstruierte Verstöße rot gesehen. Die
+Belege begründen die Regel; sie werden nicht Teil von ihr.
+
 ## Welle 94 — 2026-08-23 · Eine Rangliste ordnet, jetzt deckt sie auch ab
 
 Auslöser ist ein **Konsumenten-CR von `d-check`** („ein Artefakt ohne Rolle, und
