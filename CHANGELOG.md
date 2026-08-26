@@ -54,6 +54,32 @@ drei Ausgänge; kein Gate war dafür zuständig) und hat die Prüfung netzlos
 gebaut — 137 Slices, null Treffer, vier konstruierte Verstöße rot gesehen. Die
 Belege begründen die Regel; sie werden nicht Teil von ihr.
 
+## Welle 96 — *„referenziert Modul-Pfade"* sagt jetzt, welche Pfade
+
+Zwei Fundstellen im Bundle, `modul-03` §*Ziel-Form: Architektur-Sicht* und
+`AGENTS.template.md` §3.4, beide wörtlich parallel — der CR hat den vendorten
+Baum durchsucht und keine dritte gefunden. Im Kurs-Repo kommt der Spiegel in
+`lab/example/AGENTS.md` dazu, der nicht mitreist; er zieht mit. Ob
+*Modul-Pfad* einen Code-Pfad oder einen Dokument-Pfad meint, sagte keine von
+beiden — und für den Adopter ist die Folge binär: konform oder verschärft mit
+Adaptions-Eintrag.
+
+### Entschieden
+
+- **Gemeint sind Pfade zu Code-Modulen** (`src/service/`). Der
+  Aufzählungspunkt trägt zwei Eigenschaften und der Satz bedient beide: „darf
+  Code-Modul-Pfade referenzieren" trägt die *sprachfreie* Hälfte — ein Pfad
+  benennt den Ort, ohne ein Sprachkonstrukt zu nennen —, „aber keine Wellen,
+  Slices, Commit-Hashes oder Closure-Daten" die *meilensteinfreie*. Gegen
+  „Wellen" hätte ein Dokument-Pfad keinen Kontrast; die Achse ist räumlich
+  gegen zeitlich.
+- **Die Erlaubnis ist keine Pflicht, und das steht jetzt dabei.** Der Satz ist
+  asymmetrisch: Der erste Teil erlaubt, der zweite verbietet. Dass
+  `architecture.template.md` ihre Komponenten über Rollen und `ARC-*` führt,
+  ist deshalb kein Gegenbeleg — eine nicht ausgeübte Erlaubnis ist kein
+  Verbot. Ohne diesen Zusatz bliebe die Frage nur halb beantwortet: Wer
+  Code-Pfade *verbietet*, verschärft.
+
 ## Welle 94 — 2026-08-23 · Eine Rangliste ordnet, jetzt deckt sie auch ab
 
 Auslöser ist ein **Konsumenten-CR von `d-check`** („ein Artefakt ohne Rolle, und

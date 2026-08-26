@@ -182,9 +182,12 @@ Vier Regeln, die anderswo festgelegt sind und hier zusammenlaufen:
 
 * **Derivativ.** Konfliktregel *Lastenheft › Spezifikation › Architektur* —
   die untere Schicht darf *präzisieren*, nie *erweitern*.
-* **Sprach- und meilensteinfrei.** Die Sicht referenziert Modul-Pfade, aber
-  keine Wellen, Slices, Commit-Hashes oder Closure-Daten. Die zeitliche
-  Schicht lebt in `docs/plan/planning/`.
+* **Sprach- und meilensteinfrei.** Die Sicht **darf** Pfade zu
+  **Code-Modulen** referenzieren (`src/service/`) — ein Pfad benennt den Ort,
+  ohne ein Sprachkonstrukt zu nennen —, aber **keine** Wellen, Slices,
+  Commit-Hashes oder Closure-Daten. Die zeitliche Schicht lebt in
+  `docs/plan/planning/`. Die Erlaubnis ist keine Pflicht: Eine Sicht, die
+  ihre Komponenten nur über Rollen und `ARC-*` führt, ist ebenso konform.
 * **Keine Historie, nur ein Frische-Datum.** Vertrag und Technik führen eine,
   weil ihr Änderungs-Prozess einen benennbaren Urheber hat — der externe
   Change Request bzw. die schärfende ADR. Die Sicht hat keinen: Jede Änderung

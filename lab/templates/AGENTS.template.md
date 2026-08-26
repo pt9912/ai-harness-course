@@ -127,8 +127,9 @@ Similarity-Schwelle und `git log --follow` wird unzuverlässig.
 
 ### 3.4 Architektur ist sprach- und meilensteinfrei
 
-`spec/architecture.md` referenziert Modul-Pfade, aber **keine** Wellen,
-Slices, Commit-Hashes oder Closure-Daten. Die zeitliche Schicht lebt in
+`spec/architecture.md` darf Pfade zu **Code-Modulen** referenzieren
+(`src/service/`), aber **keine** Wellen, Slices, Commit-Hashes oder
+Closure-Daten. Die zeitliche Schicht lebt in
 `docs/plan/planning/` und den späteren Closure-Notizen. Auch **keine
 ADR-Bezüge**: Die Sicht steht im Stabilitäts-Rang über der ADR; welche ADR
 eine Aussage verbindlich macht, deklariert die ADR in ihrem `Schärft:`-Feld.

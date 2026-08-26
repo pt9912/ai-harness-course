@@ -123,8 +123,11 @@ Operative Regeln, die die Vorlage nicht selbst erzwingt:
 
 * Derivativ — Konfliktregel *Lastenheft › Spezifikation › Architektur*; die
   untere Schicht präzisiert, erweitert nie.
-* Sprach- und meilensteinfrei — referenziert Modul-Pfade, aber keine Wellen,
-  Slices, Commit-Hashes oder Closure-Daten.
+* Sprach- und meilensteinfrei — **darf** Pfade zu **Code-Modulen**
+  referenzieren (`src/service/`), aber **keine** Wellen, Slices,
+  Commit-Hashes oder Closure-Daten. Die Erlaubnis ist keine Pflicht: Eine
+  Sicht, die ihre Komponenten nur über Rollen und `ARC-*` führt, ist ebenso
+  konform.
 * Keine Historie, nur `**Letzte Änderung:**` im Kopf — ein Frische-Marker,
   kein Protokoll. Vertrag und Technik führen eine, weil ihr Änderungs-Prozess
   einen benennbaren Urheber hat (externer Change Request bzw. schärfende ADR);

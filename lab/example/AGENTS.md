@@ -66,8 +66,9 @@ sonst der Move.
 
 ### 2.4 Architektur ist sprach- und meilensteinfrei
 
-`spec/architecture.md` referenziert Modul-Pfade, aber **keine** Wellen,
-Slices, Commit-Hashes oder Closure-Daten — und **keine ADR-Bezüge**: Welche
+`spec/architecture.md` darf Pfade zu **Code-Modulen** referenzieren
+(`src/service/`), aber **keine** Wellen, Slices, Commit-Hashes oder
+Closure-Daten — und **keine ADR-Bezüge**: Welche
 ADR eine Aussage der Sicht verbindlich macht, deklariert die ADR in ihrem
 `Schärft:`-Feld.
 
