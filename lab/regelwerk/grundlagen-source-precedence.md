@@ -142,6 +142,12 @@ wird). Die konkret getroffene Rangwahl und ihre Begründung gehören in
 den Adaptions-Block des repo-lokalen Konventionsdokuments (Default-Pfad
 `harness/conventions.md`).
 
+**Wie weit trägt ein zitierter Satz?** Die zwei Antworten oben — die
+`MR-<NNN>` in ihrem Geltungsbereich, die Rangordnung in ihrer universalen
+Hälfte — beantworten die Frage je für ihren Fall. Sie ist an **jede**
+zitierte Aussage zu stellen, auch an einen Satz der Baseline: *Gilt er auch
+außerhalb des Falls, für den er geschrieben wurde?*
+
 ### Spec-Stratifizierung
 
 `spec/` zerfällt selbst in drei Straten mit eigener Precedence — alle drei

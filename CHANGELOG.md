@@ -109,6 +109,28 @@ Schweigen fast als *„greift nicht"* verbucht worden wäre.
   genau die Formulierung, die diese Welle als unzureichend benennt. Die Übung
   verlangt jetzt, dass die Meldung die provozierte Datei nennt.
 
+## Welle 98 — Die Reichweite eines Zitats ist jetzt eine Frage, kein Einzelfall
+
+`grundlagen-source-precedence.md` beantwortete die Reichweitenfrage zweimal —
+für die `MR-<NNN>` in ihrem Geltungsbereich und für die eigene Rangordnung in
+ihrer universalen Hälfte —, beide Male **für sich selbst**. Der Schritt von
+den zwei Einzelfällen zur Frage als solcher fehlte, und dort sitzt eine eigene
+Fehlerklasse: Der Text stimmt, die in Anspruch genommene Reichweite nicht.
+
+### Entschieden
+
+- **Ein Satz, der die Frage stellt**, an jede zitierte Aussage und auch an
+  einen Satz der Baseline: *Gilt er auch außerhalb des Falls, für den er
+  geschrieben wurde?*
+- **Kein Katalog von Verstoßformen.** Der CR nennt drei beobachtete Formen;
+  eine davon ist bereits geregelt und wurde nur überlesen — dafür entsteht
+  keine zweite Regel. Die anderen sind Instanzen derselben Frage. Ein Katalog
+  deckte die vierte Form nicht ab, die Frage schon.
+- **Verortet bei den zwei Stellen**, nicht in `grundlagen-referenz-richtung.md`:
+  Die regelt die *Richtung* (welche Artefakt-Klasse welche referenzieren darf)
+  und ist als Matrix gebaut; Reichweite ist eine Eigenschaft der zitierten
+  Aussage, kein Matrix-Feld.
+
 ## Welle 94 — 2026-08-23 · Eine Rangliste ordnet, jetzt deckt sie auch ab
 
 Auslöser ist ein **Konsumenten-CR von `d-check`** („ein Artefakt ohne Rolle, und
