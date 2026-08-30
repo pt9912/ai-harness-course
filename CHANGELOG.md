@@ -11,6 +11,73 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 100 — 2026-08-30 · Zwei Konsumenten lesen mit
+
+Auslöser sind die zwei realen Adopter der Baseline: `d-check` (vendort seit
+Längerem) und `claude-ai-harness` (adoptiert gerade, `v5.12.0`). Fünf Befunde,
+alle an ihrem oder unserem Bestand belegt — drei sind Lücken **unseres**
+Korpus, die erst auffielen, weil jemand anders damit arbeitet.
+
+### Entschieden
+
+- **`MR-<NNN>` steht jetzt im Glossar.** Die Kennung wurde in `modul-02`
+  13-mal, in `modul-13` 10-mal und in `grundlagen-source-precedence` 8-mal
+  benutzt — und in **zwei Zeilen des Glossars selbst** (`harness/conventions.md`,
+  `Stratum`), ohne dass es sie führte. Die neue Zeile definiert sie über ihre
+  Rolle, nach dem Vorbild von `BEO-<NNN>`: Adaptions-Eintrag, Vergabestelle ist
+  der Adaptions-Block, Zustand ist die Verzeichnis-Position. **Die Buchstaben
+  bleiben bewusst unaufgelöst** — nirgends im Korpus und in keinem der beiden
+  Adopter-Repos steht, wofür „MR" ausgeschrieben steht; eine Expansion wäre
+  eine neue Behauptung, keine Wiedergabe.
+- **Die MR-Vorlage verliert ihr `Status:`-Feld.** `MR-NNN-titel.template.md`
+  druckte `- **Status:** Accepted` — obwohl ihr eigener Kopfhinweis dreizehn
+  Zeilen darüber sagt *„der Zustand ist die Verzeichnis-Position, kein
+  Status-Feld"*, die Quelle das Feld nicht unter den Pflichtfeldern führt und
+  `lab/example` es nie hatte. Familien-Erbe aus der ADR-Vorlage, dieselbe
+  Bauform wie der Befund aus Welle 85. Gewandert ist es trotzdem: `MR-001` in
+  `claude-ai-harness` trägt es, weil die Vorlage es vorgab.
+- **Modul 14: Der Reproduzierbarkeits-Anker hat zwei Formen.** Der Kurs lehrte
+  nur die Archiv-Form (*„brauchst du den Image-Hash von damals"*) und nannte
+  ihre Bedingung nicht — die Wörter *Registry*, *push*, *aufbewahren* kamen im
+  Modul nicht vor. Neu: **Archiv** (Digest des gebauten Images, Bedingung: das
+  Image wird aufbewahrt) neben **Rezept** (Commit plus gepinnte
+  Eingangs-Digests, Bedingung: nichts wird beim Build installiert). Mit der
+  Präzision, die beide trennt: Der Digest des *gebauten* Images ist nicht
+  reproduzierbar — Zeitstempel wandern in die `COPY`-Schichten —, in der
+  Rezept-Form hält `harness/image-hash.txt` deshalb fest, *welches* Image lief,
+  und ist kein Wiederholungs-Schlüssel.
+- **Modul 14: `nonroot` endet nicht am Runtime-Image.** Schritt 4 härtet die
+  ausgelieferte Stage; den Arbeitsbaum berührt die Toolchain-Stage. Der Beleg
+  lag im eigenen Repo: `lab/example` trug `build/`, `build-cov/`, `target/`,
+  `.gradle/`, `.mypy_cache/`, `.coverage` als **`root:root`** — `touch` in
+  `build-cov/` scheiterte mit *Permission denied*. Neu ist die Frage *Wem
+  gehören die Belege, die ein containerisierter Gate schreibt?* samt der drei
+  Antworten und ihrer Preise (`:ro` + Umleitung · `--user` · Rückweg über
+  `stdout`), inklusive der Grenze: Der Rückweg löst **Ausgaben**, nicht
+  Eingaben — ein erneuertes Lock-File muss zurück in den Baum.
+- **Modul 13: Gate und Beleg sind zwei Rollen derselben Prüfung.** Bisher
+  nirgends verankert. Ein Befund darf den Report nicht verhindern; das Urteil
+  fällt im Gate, nicht im Beleg. `|| true` gehört an den Beleg-Lauf und nie an
+  den Gate-Lauf, dort wäre es ein behauptetes Gate. Aufbau-Folge: Die
+  einsammelnde Stelle darf nicht vom Gate abhängen — sonst macht ein roter Gate
+  das Werkzeug unbaubar, mit dem man ihn untersucht.
+
+### Mitgezogen: der Befund am eigenen Bestand
+
+Die Regel gilt zuerst für uns, und der Bestand war rot: `lab/example` trug
+`build/`, `build-cov/`, `target/`, `.gradle/`, `.kotlin/`, `.mypy_cache/`,
+`.coverage` und ein leeres `.git` als **`root:root`** — `touch` in `build-cov/`
+scheiterte mit *Permission denied*. Ursache in jedem Fall dieselbe: ein
+beschreibbarer Bind-Mount und ein Container, der als root lief. Auch die
+Wurzel-Gates mounteten `-v "$(CURDIR)":/work` ohne `:ro`, obwohl sie nur lesen.
+
+Die **Antwort** darauf steht nicht hier, sondern in Welle 101: Sie wechselt die
+Baseline auf den hermetischen Prüflauf und räumt damit alle drei Schäden
+zugleich ab — Besitz, Schreibzugriff auf die Quellen und die root-eigenen
+Mountpunkt-Hüllen.
+
+Gates: `make check` 0 ERROR / 0 WARN, `make bundle-check` 0 Befunde.
+
 ## Welle 99 — 2026-08-30 · Der Spiegel zeigt nicht nach draußen
 
 Auslöser ist die Lese-Sicht eines **Code-Agenten auf das vendorte Regelwerk**:

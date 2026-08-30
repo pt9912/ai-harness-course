@@ -155,6 +155,27 @@ interpretierbares Runtime — siehe
 [`../../../lab/example/go/Dockerfile`](../../../lab/example/go/Dockerfile)
 als Vorbild.
 
+**`nonroot` endet nicht am Runtime-Image.** Schritt 4 härtet die Stage, die
+*ausgeliefert* wird. Den Arbeitsbaum auf deiner Platte berührt aber eine
+andere: die Toolchain-Stage, in der die Gates laufen. Läuft sie als root über
+einem beschreibbaren Mount (`-v "$(pwd)":/src`), gehören Build-Verzeichnisse,
+Coverage-Dateien und Werkzeug-Caches danach `root:root` — der Mensch, der den
+Lauf angefordert hat, kann sie nicht einmal löschen. Die Frage ist deshalb
+nicht nur, wer im Runtime-Image läuft, sondern: **Wem gehören die Belege, die
+ein containerisierter Gate schreibt?** Wer sie nicht beantwortet, beantwortet
+sie faktisch mit *root*.
+
+Drei Antworten, jede mit Preis:
+
+| Antwort | Preis |
+|---|---|
+| Mount `:ro`, und alles Schreibende wird umgeleitet (Cache-Verzeichnisse per Flag/Env nach `/tmp`) | trägt nur, solange die Prüfung nichts in den Baum schreiben *muss* |
+| `--user $(id -u):$(id -g)` | hebt die `nonroot`-Zusage des Images zur Laufzeit auf; Werkzeuge, die ein schreibbares `HOME` erwarten, brauchen eines |
+| Ergebnisse über `stdout` herausreichen und host-seitig auspacken | der schreibende Prozess ist der Host, damit stimmt der Besitz; löst **Ausgaben**, nicht Eingaben — ein erneuertes Lock-File muss zurück in den Baum |
+
+Der Testfall kostet nichts: `ls -l` auf das Build-Verzeichnis nach dem ersten
+Gate-Lauf.
+
 **Schritt 5 — Image-Hash im Build-Output festhalten.** Damit das Image
 in einem Replay-Manifest (Modul 12) referenzierbar wird:
 
@@ -175,6 +196,26 @@ build:  ## LH-QA-03 — reproduzierbarer Build, Image-Hash erfasst
 [`/lab/templates/harness/README.template.md`](../../../lab/templates/harness/README.template.md)).
 Ohne diesen Schritt ist das Replay-Manifest in Modul 12 zur Hälfte
 blind — der `image_hash`-Slot bleibt unbelegt.
+
+**Was der festgehaltene Hash trägt — und was nicht.** Der Hash adressiert
+*ein* Image; er trägt, solange dieses Image noch existiert — in einer Registry
+oder im lokalen Cache. Ein Tag, den jeder Build überschreibt, ist keine
+Adresse, sondern eine Notiz. Der Reproduzierbarkeits-Anker hat deshalb zwei
+Formen, und du solltest wissen, welche du hast:
+
+| Form | Was den Lauf adressiert | Bedingung |
+|---|---|---|
+| **Archiv** | der Digest des gebauten Images | das Image wird aufbewahrt — gepusht oder nachweislich vorgehalten |
+| **Rezept** | Commit der Quellen **und** die gepinnten Digests der Eingangs-Images | beim Build wird nichts installiert, jede Eingabe ist digest-gepinnt |
+
+Die Rezept-Form braucht kein Lager: Wer den Commit hat, baut die Umgebung neu.
+Ihr Preis ist, dass der Digest des *gebauten* Images nicht ihr Griff sein kann
+— Datei-Zeitstempel wandern in die `COPY`-Schichten, ein frischer Checkout
+stempelt sie neu, und die Normalisierungs-Schalter der Build-Werkzeuge räumen
+das nicht zuverlässig aus. `harness/image-hash.txt` hält dann fest, *welches*
+Image einen Lauf gemacht hat; ein Wiederholungs-Schlüssel ist es nicht. Wer die
+Archiv-Form will, muss das Image aufbewahren — wer das nicht tut, hat die
+Rezept-Form und benennt sie besser auch so.
 
 **Schritt 6 — Bewusstes Brechen: Drift provozieren.** Ändere in einer
 Kopie *eine* Zeile zurück auf den unsicheren Stand und messe die

@@ -37,6 +37,27 @@ Mustererkennung, Security-Regeln verlangen Datenfluss-Analyse,
 Architekturtests prüfen Struktur, Integrationstests Verhalten im
 Zusammenspiel.
 
+### Gate und Beleg — zwei Rollen derselben Prüfung
+
+| Rolle | Aufgabe | Verhalten bei Befund |
+|---|---|---|
+| **Gate** | urteilen | Exit ≠ 0, der Lauf bricht ab |
+| **Beleg** | berichten | schreibt **immer** — auch, gerade dann, wenn die Prüfung rot ist |
+
+Ein Befund darf den Report nicht verhindern, sonst fehlt die Diagnose genau
+dann, wenn man sie braucht. **Das Urteil fällt im Gate, nicht im Beleg** —
+deshalb gehört ein `|| true` an den Beleg-Lauf und **nie** an den Gate-Lauf;
+dort wäre es ein [behauptetes Gate](#hard-rule-doku-disziplin).
+
+**Die Stelle, die Belege einsammelt, darf nicht vom Gate abhängen.** In einem
+Multi-Stage-Build erbt die sammelnde Stage von der Quell-Stage, nicht von der
+Gate-Stage — sonst macht ein roter Gate genau das Werkzeug unbaubar, mit dem
+man ihn untersucht. In einem Makefile ist es dieselbe Regel: Der Beleg-Lauf
+hängt nicht am Gate-Target.
+
+Zwei Rollen sind keine zwei Wahrheiten: Beide laufen auf demselben Stand und
+mit derselben Konfiguration.
+
 ### Hard Rule (Doku-Disziplin)
 
 In `harness/README.md` und in jeder Doku, die Gates aufzählt: keine

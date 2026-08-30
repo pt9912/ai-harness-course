@@ -51,6 +51,47 @@ der lokal und in CI denselben Image-Hash produziert, verlangt:
 - **Drei Stage-Schnitte mit Härtung:** **deps** (gepinnte Base + Lock-File-Install gegen Toolchain-/Dependency-Drift) · **build** (`FROM deps`, Code-Kompilierung getrennt vom Cache-sensiblen Layer) · **runtime** (Distroless/nonroot, nur Artefakte kopiert — kleinere Angriffsfläche, kein Build-Layer im Image). Image-Hash macht den Schnitt erst messbar.
 - **Warum `make gates` im Host-OS keine valide Gate-Ausführung ist:** Host-Toolchain ist nicht versionsgleich mit CI; Gate-Ergebnisse divergieren; Debugging erfolgt am Unterschied, nicht am Bug. Konsequenz: ohne Image-Hash-Vertrag zwischen lokal und CI sind grüne lokale Gates *kein* Vertrag — sie sind eine private Information.
 
+### Zwei Formen des Reproduzierbarkeits-Ankers
+
+Der Hash adressiert *ein* Image; er trägt, solange dieses Image noch existiert
+— in einer Registry oder im lokalen Cache. Ein Tag, den jeder Build
+überschreibt, ist keine Adresse, sondern eine Notiz.
+
+| Form | Was den Lauf adressiert | Bedingung |
+|---|---|---|
+| **Archiv** | der Digest des gebauten Images | das Image wird aufbewahrt — gepusht oder nachweislich vorgehalten |
+| **Rezept** | Commit der Quellen **und** die gepinnten Digests der Eingangs-Images | beim Build wird nichts installiert, jede Eingabe ist digest-gepinnt |
+
+Die Rezept-Form braucht kein Lager: Wer den Commit hat, baut die Umgebung neu.
+Ihr Preis ist, dass der Digest des *gebauten* Images nicht ihr Griff sein kann
+— Datei-Zeitstempel wandern in die `COPY`-Schichten, ein frischer Checkout
+stempelt sie neu, und die Normalisierungs-Schalter der Build-Werkzeuge räumen
+das nicht zuverlässig aus. `harness/image-hash.txt` hält dann fest, *welches*
+Image einen Lauf gemacht hat; ein Wiederholungs-Schlüssel ist es nicht. Wer die
+Archiv-Form will, muss das Image aufbewahren — wer das nicht tut, hat die
+Rezept-Form und benennt sie besser auch so.
+
+### Besitz der Belege eines containerisierten Gates
+
+**`nonroot` endet nicht am Runtime-Image.** Den Arbeitsbaum auf deiner Platte
+berührt die Toolchain-Stage, in der die Gates laufen. Läuft sie als root über
+einem beschreibbaren Mount (`-v "$(pwd)":/src`), gehören Build-Verzeichnisse,
+Coverage-Dateien und Werkzeug-Caches danach `root:root` — der Mensch, der den
+Lauf angefordert hat, kann sie nicht einmal löschen. **Wem gehören die Belege,
+die ein containerisierter Gate schreibt?** Wer sie nicht beantwortet,
+beantwortet sie faktisch mit *root*.
+
+Drei Antworten, jede mit Preis:
+
+| Antwort | Preis |
+|---|---|
+| Mount `:ro`, und alles Schreibende wird umgeleitet (Cache-Verzeichnisse per Flag/Env nach `/tmp`) | trägt nur, solange die Prüfung nichts in den Baum schreiben *muss* |
+| `--user $(id -u):$(id -g)` | hebt die `nonroot`-Zusage des Images zur Laufzeit auf; Werkzeuge, die ein schreibbares `HOME` erwarten, brauchen eines |
+| Ergebnisse über `stdout` herausreichen und host-seitig auspacken | der schreibende Prozess ist der Host, damit stimmt der Besitz; löst **Ausgaben**, nicht Eingaben — ein erneuertes Lock-File muss zurück in den Baum |
+
+Der Testfall kostet nichts: `ls -l` auf das Build-Verzeichnis nach dem ersten
+Gate-Lauf.
+
 ### Devcontainer/Compose-Kriterium
 
 Devcontainer für IDE-Setup (Sprache-Server, Debugger-Anschluss). Compose

@@ -101,6 +101,32 @@ Begründung des Unterscheidungs-Kriteriums); genau diese Sensor-Literacy
 ruft auch [Checkpoint D](../grundlagen/checkpoints.md#checkpoint-d--nach-phase-04-qualität)
 ab.
 
+## Gate und Beleg — zwei Rollen derselben Prüfung
+
+Dieselbe Prüfung tritt in zwei Rollen auf, und sie dürfen einander nicht
+behindern:
+
+| Rolle | Aufgabe | Verhalten bei Befund |
+|---|---|---|
+| **Gate** | urteilen | Exit ≠ 0, der Lauf bricht ab |
+| **Beleg** | berichten | schreibt **immer** — auch, gerade dann, wenn die Prüfung rot ist |
+
+Ein Befund darf den Report nicht verhindern, sonst fehlt die Diagnose genau
+dann, wenn man sie braucht. **Das Urteil fällt im Gate, nicht im Beleg** —
+deshalb gehört ein `|| true` an den Beleg-Lauf und **nie** an den Gate-Lauf;
+dort wäre es ein [behauptetes Gate](#hard-rule-doku-disziplin).
+
+Daraus folgt eine Aufbau-Regel: **Die Stelle, die Belege einsammelt, darf
+nicht vom Gate abhängen.** In einem Multi-Stage-Build erbt die sammelnde
+Stage von der Quell-Stage, nicht von der Gate-Stage — sonst macht ein roter
+Gate genau das Werkzeug unbaubar, mit dem man ihn untersucht. In einem
+Makefile ist es dieselbe Regel: Der Beleg-Lauf hängt nicht am Gate-Target.
+
+Zwei Rollen sind keine zwei Wahrheiten: Beide laufen auf demselben Stand und
+mit derselben Konfiguration. Wer sie auseinanderlaufen lässt — der Beleg mit
+lockereren Regeln als der Gate —, hat keinen Report, sondern eine zweite
+Meinung.
+
 ## Hard Rule (Doku-Disziplin)
 
 In `harness/README.md` und in jeder Doku, die Gates aufzählt: keine

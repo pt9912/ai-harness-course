@@ -18,7 +18,6 @@ Abschnitts-Anker in die vendored Fassung; ein Datei-Link benennt keine Regel.
 Wer mehrere Regeln ersetzen will, schreibt mehrere Einträge. Ein Eintrag, der
 keine benannte Regel ersetzt, ist ein **Fork**, keine Adaption.
 
-- **Status:** Accepted
 - **Datum:** <Datum>
 - **Geltungsbereich:** <Dateien / Module / Sub-Areas in DIESEM Repo — z. B. „`harness/README.md` §Source precedence und `AGENTS.md` §Kanonische Quellen">
 - **Ersetzt-Baseline-Regel:** <genau eine Regel der Baseline, als Link mit Anker — z. B. [`grundlagen-referenz-richtung.md` §Spec-Straten](../../.harness/baseline/<tag>/regelwerk/grundlagen-referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)>
