@@ -158,11 +158,14 @@ structure:
     headings-level: 2
   # (2) Die Meilenstein-Tabelle laeuft absteigend — neuester Tag oben. Die
   #     Schluesselzelle wird ROH gelesen, die Backticks um `v5.10.0` stoeren
-  #     also nicht (dafuer ist die Roh-Lesung gebaut).
+  #     also nicht (dafuer ist die Roh-Lesung gebaut). Die `table:`-Klammer
+  #     verlangt d-check >= v0.66.1 (davor hiessen die Schluessel `table-order`
+  #     und `table-column`, ADR-0070) — ein aelterer Pin bricht an dieser Datei.
   - files: "docs/roadmap.md"
     section: "## Meilensteine"
-    table-order: desc
-    table-column: 1
+    table:
+      order: desc
+      order-column: 1
 
 # targets prueft die Deklarations-Konsistenz Doku <-> Build-Targets in BEIDEN
 # Richtungen. doc-tables ist die Quelle der make-X-Behauptungen (=> gate-phantom),
