@@ -3,10 +3,16 @@
 
 IMAGE := docsearch-python
 DOCKER := docker
-PY_IMAGE := python:3.12-slim
 
-.PHONY: help build run lint typecheck arch-check test test-determinism \
-        coverage-gate coverage-gate-critical gates ci fullbuild clean
+# Kein Bind-Mount: Die Quellen wandern beim Build ins Image (Dockerfile,
+# Stage `repo`), die Werkzeuge laufen darin, die Belege kommen ueber stdout
+# heraus (Modul 14 §Der Prueflauf ist hermetisch). Damit kann kein Gate den
+# Arbeitsbaum veraendern, und nichts bleibt als root:root liegen.
+GATES := docsearch-python-gates
+RUN := --rm --network none $(GATES)
+
+.PHONY: help build run gate-image lint typecheck arch-check test test-determinism \
+        coverage-gate coverage-gate-critical export gates ci fullbuild clean
 
 # `-h`: MAKEFILE_LIST trägt mehrere Dateien, und grep stellt dann jeder
 # Zeile den Dateinamen voran — er verdrängt den Target-Namen.
@@ -29,41 +35,41 @@ build: ## Image bauen
 run: build ## Smoke: --help
 	$(DOCKER) run --rm $(IMAGE):latest --help
 
-lint: ## ruff inkl. noqa-Gate (LH-QA-* Stil)
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
-		sh -c "pip install -q ruff==0.6.0 && ruff check ."
+gate-image: ## Pruef-Image bauen (Stage `export`: Quellen + Werkzeuge im Image)
+	$(DOCKER) build -q --target repo -t $(GATES) . >/dev/null
 
-typecheck: ## mypy --strict
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
-		sh -c "pip install -q mypy==1.11.0 && mypy --strict src/"
+lint: gate-image ## ruff inkl. noqa-Gate (LH-QA-* Stil)
+	$(DOCKER) run $(RUN) ruff check .
+
+typecheck: gate-image ## mypy --strict
+	$(DOCKER) run $(RUN) mypy --cache-dir=/tmp/mypy --strict src/
 
 # Beide Sensoren laufen, auch wenn der erste rot ist: ADR-0018 laesst die
 # beiden Befund-Mengen vergleichen, und ein Abbruch nach dem ersten zeigt
 # immer nur eine.
 arch-check: ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + import-linter (Contracts)
 	@rc=0; $(MAKE) --no-print-directory a-check || rc=1; \
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
-		sh -c "pip install -q import-linter==2.0 && PYTHONPATH=src lint-imports --config importlinter.cfg" || rc=1; \
+	$(MAKE) --no-print-directory gate-image; \
+	$(DOCKER) run $(RUN) sh -c "PYTHONPATH=src lint-imports --config importlinter.cfg --no-cache" || rc=1; \
 	exit $$rc
 
-test: ## pytest
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
-		sh -c "pip install -q pytest pytest-cov && pytest -v"
+test: gate-image ## pytest
+	$(DOCKER) run $(RUN) pytest -v -p no:cacheprovider
 
-test-determinism: ## LH-QA-02: 100 Iter
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
-		sh -c "pip install -q pytest pytest-repeat && pytest -k determinism --count=100"
+test-determinism: gate-image ## LH-QA-02: 100 Iter
+	$(DOCKER) run $(RUN) pytest -k determinism --count=100 -p no:cacheprovider
 
-coverage-gate: ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
-		sh -c "pip install -q pytest pytest-cov && \
-			pytest --cov=src/docsearch --cov-report=term --cov-fail-under=70"
+coverage-gate: gate-image ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
+	$(DOCKER) run $(RUN) sh -c "COVERAGE_FILE=/tmp/.coverage pytest -p no:cacheprovider --cov=src/docsearch --cov-report=term --cov-fail-under=70"
 
-coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)
+coverage-gate-critical: gate-image ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)
 	@echo "Critical coverage — CO-001 (index-Layer) ausgenommen"
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(PY_IMAGE) \
-		sh -c "pip install -q pytest pytest-cov && \
-			pytest --cov=src/docsearch/service --cov-fail-under=90 tests/"
+	$(DOCKER) run $(RUN) sh -c "COVERAGE_FILE=/tmp/.coverage pytest -p no:cacheprovider --cov=src/docsearch/service --cov-fail-under=90 tests/"
+
+export: ## Belege der Beleg-Stages nach ./out holen (Rueckweg ohne Mount)
+	$(DOCKER) build -q --target export -t $(GATES)-export . >/dev/null
+	@mkdir -p out && $(DOCKER) run --rm --network none $(GATES)-export tar -cf - -C /out . | tar -xf - -C out
+	@echo "-> ./out"
 
 gates: lint typecheck arch-check test coverage-gate ## mandatory
 	@echo "gates grün."

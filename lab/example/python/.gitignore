@@ -5,3 +5,7 @@
 __pycache__/
 htmlcov/
 .coverage
+
+# Belege des hermetischen Prueflaufs: `make export` packt die /out-Baeume der
+# Beleg-Stages hierher aus (Modul 14 §Der Prueflauf ist hermetisch).
+out/

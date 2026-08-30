@@ -25,8 +25,7 @@ lokal und im CI identisch, kein separater CI-Pfad, der driften könnte.
 Manuell gebaut wird per `--target`:
 
 ```bash
-docker build -t docs-check       --target docs-check       tools/
-docker build -t alignment-check  --target alignment-check  tools/
+docker build -f tools/Dockerfile --target repo -t ai-harness-course-gates .
 ```
 
 ## alignment-check
@@ -41,10 +40,10 @@ LZ-Verbs.
 ### Bauen und Verwenden (Docker)
 
 ```bash
-docker build -t alignment-check --target alignment-check tools/
-docker run --rm -v "$PWD":/work alignment-check            # Default: kurs/de
-docker run --rm -v "$PWD":/work alignment-check --verbose   # auch volle Abdeckung
-docker run --rm -v "$PWD":/work alignment-check --strict    # Exit 1 bei WARN
+docker build -f tools/Dockerfile --target repo -t ai-harness-course-gates .
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/alignment-check.js            # Default: kurs/de
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/alignment-check.js --verbose   # auch volle Abdeckung
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/alignment-check.js --strict    # Exit 1 bei WARN
 ```
 
 ### Schweregrade
@@ -105,7 +104,7 @@ Nummern-Checks irrelevant und werden ignoriert.
 ### Bauen
 
 ```bash
-docker build -t docs-check --target docs-check tools/
+docker build -f tools/Dockerfile --target repo -t ai-harness-course-gates .
 ```
 
 ### Verwenden
@@ -113,33 +112,33 @@ docker build -t docs-check --target docs-check tools/
 Vom Repo-Root aus, prüft alle `*.md` rekursiv:
 
 ```bash
-docker run --rm -v "$PWD":/work docs-check
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/docs-check.js
 ```
 
 Nur einen Unterbaum prüfen:
 
 ```bash
-docker run --rm -v "$PWD":/work docs-check kurs/de/
-docker run --rm -v "$PWD":/work docs-check lab/
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/docs-check.js kurs/de/
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/docs-check.js lab/
 ```
 
 Mit OK-Meldungen:
 
 ```bash
-docker run --rm -v "$PWD":/work docs-check --verbose
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/docs-check.js --verbose
 ```
 
 Eigenen Pfad ausnehmen (mehrfach erlaubt, beide Schreibweisen):
 
 ```bash
-docker run --rm -v "$PWD":/work docs-check --ignore lab/templates
-docker run --rm -v "$PWD":/work docs-check --ignore=lab/templates
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/docs-check.js --ignore lab/templates
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/docs-check.js --ignore=lab/templates
 ```
 
 Warnungen unterdrücken (Exit-Code unverändert):
 
 ```bash
-docker run --rm -v "$PWD":/work docs-check --no-warn
+docker run --rm --network none ai-harness-course-gates node /usr/local/bin/docs-check.js --no-warn
 ```
 
 ### Schweregrade

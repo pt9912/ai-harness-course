@@ -327,6 +327,16 @@ mitgeliefert (tool-/versionsspezifisch); bei jedem d-check-Bump neu erzeugen.
 Das Tool pflegt die Recipe-Form (`--network none`, Target-Set); die
 advisory-Targets sind verfügbar, nicht als Gate behauptet (Modul 13).
 
+**Und das Fragment mountet.** Der Prüflauf ist hermetisch — Quellen per `COPY`
+ins Image, Ergebnisse über `stdout`
+([Modul 14 §Der Prüflauf ist hermetisch](modul-14-docker-harness.md#der-prüflauf-ist-hermetisch--kein-mount)).
+Ein generiertes Fragment kennt diese Form nicht; es reicht den Baum read-only
+herein. Das ist **zulässig, solange das Werkzeug nur liest** — der Schaden der
+Mount-Form entsteht am Schreiben. Wer auch diesen Lauf hermetisch will, bindet
+das Fragment **nicht** ein und schreibt die Recipe aus. Dann pflegt nicht mehr
+das Tool die Recipe-Form, sondern du, und die Abweichung gehört als `MR-<NNN>`
+deklariert.
+
 #### T1/T2 als Sync-Trigger konkret (Schritt 3)
 
 Sobald

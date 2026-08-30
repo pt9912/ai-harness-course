@@ -562,6 +562,16 @@ Tool die Recipe-Form (`--network none`, Target-Set), nichts driftet von Hand —
 die advisory-Targets, die es mitbringt, sind *verfügbar, nicht als Gate behauptet*
 (Modul 13).
 
+**Und das Fragment mountet.** Der gelehrte Prüflauf ist hermetisch — Quellen
+per `COPY` ins Image, Ergebnisse über `stdout`
+([Modul 14 §Der Prüflauf ist hermetisch](../05-betrieb/modul-14-docker-harness.md#der-prüflauf-ist-hermetisch--kein-mount)).
+Ein generiertes Fragment kennt diese Form nicht; es reicht den Baum read-only
+herein. Das ist **zulässig, solange das Werkzeug nur liest** — der Schaden der
+Mount-Form entsteht am Schreiben, und ein Doku-Prüfer schreibt nichts. Wer auch
+diesen Lauf hermetisch will, bindet das Fragment **nicht** ein und schreibt die
+Recipe aus. Dann pflegt nicht mehr das Tool die Recipe-Form, sondern du — das
+ist der Preis, und die Abweichung gehört als `MR-<NNN>` deklariert.
+
 ### Wie sehen T1 und T2 konkret aus?
 
 Schritt 3 ist die erste Stelle, an der Trigger entstehen — Lerner

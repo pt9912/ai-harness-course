@@ -15,7 +15,8 @@ scan:
   # diese Pfade längst ab — d-check interpretiert es aber nicht, die Liste ist
   # also von Hand parallel zu halten.
   ignore: ["lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md",
-           "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**"]
+           "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**",
+           "lab/example/*/out/**"]
 modules: [links, anchors, codepaths, matrix, hostpaths, spans, tracked, structure, targets]
 
 # lab/templates mischt ZWEI Referenzklassen in denselben Dateien:

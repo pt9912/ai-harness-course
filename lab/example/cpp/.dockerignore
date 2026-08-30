@@ -2,3 +2,6 @@
 # den Bind-Mount-Gates auf dem Host; im Image wird frisch konfiguriert).
 build/
 build-cov/
+# Build-Kontext des hermetischen Prueflaufs: Was der Lauf selbst erzeugt,
+# gehoert nicht in sein eigenes Image (Modul 14 §Der Prueflauf ist hermetisch).
+out/

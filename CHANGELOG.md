@@ -11,6 +11,81 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 101 — 2026-08-30 · Der Prüflauf verliert den Mount
+
+Nachlese zu Welle 100, und diesmal wechselt die **Baseline**. Die Besitzfrage
+dort hatte drei Antworten; die dritte — Quellen per `COPY` ins Image, Ergebnisse
+über `stdout` — ist keine Variante unter anderen, sondern die einzige, die auch
+die zwei übrigen Schäden beseitigt: dass ein Gate den Arbeitsbaum *ändern* kann,
+und dass Docker Mountpunkte host-seitig als root anlegt. Belegt am eigenen
+Bestand: Der `--tmpfs /src/.git`-Kniff des Kotlin-Skeletts hinterließ die
+root-eigene `.git`-Hülle auch dann noch, als der Container unter der Host-UID
+lief. Vorbild ist `MR-001` von `claude-ai-harness` — die Adaption eines
+Konsumenten wird damit zur Regel für alle.
+
+### Entschieden
+
+- **Modul 14 §Der Prüflauf ist hermetisch — kein Mount** ist die neue gelehrte
+  Form: `COPY` statt Bind-Mount, Rückweg über `stdout`, Gate-Stage und
+  Beleg-Stage getrennt, `export` erbt von `repo` und nicht vom Gate. Vier
+  Eigenschaften, vier Wirkungen — und der Preis steht dabei: Rebuild je
+  Änderung, und der Rückweg löst **Ausgaben**, nicht Eingaben.
+- **Die Besitz-Tabelle aus Welle 100 wird nachgeordnet.** Sie zählt jetzt die
+  zwei Mount-Preise für den auf, der trotzdem mountet — die Antwort steht davor.
+- **Die Ausnahme ist benannt und bedingt** (Modul 2 §Anmerkung zum
+  Gate-Fragment): Ein tool-generiertes Fragment mountet read-only; das bleibt
+  zulässig, **solange das Werkzeug nur liest** — der Besitz-Schaden entsteht am
+  Schreiben. Wer auch das hermetisch will, bindet das Fragment nicht ein,
+  schreibt die Recipe aus und deklariert die Abweichung als `MR-<NNN>`. Genau
+  darunter fällt `MR-001` des Konsumenten.
+- **Alle sechs Sprach-Skelette sind umgebaut** — kein `-v` mehr in den Gates.
+  Zwei Bauformen, je nach Werkzeug: `python`, `go` und `cpp` tragen ihre
+  Werkzeuge im Image und rufen sie per `docker run`; `java`, `kotlin` und
+  `csharp` ziehen ihre Abhängigkeiten beim Build, dort **ist** die Gate-Stage
+  das Gate. Damit die zweite Form denselben Vertrag hat wie die erste, braucht
+  sie zwei Griffe: **`--no-cache-filter <stage>`** führt die Stage bei jedem
+  Aufruf neu aus (gecacht bleiben `repo` und die Werkzeug-Layer — gemessen: nur
+  zwei Layer `CACHED`, die Gate-Stage läuft), und **kein `-q`**, sonst zeigt ein
+  roter Gate nur den Exit-Code statt der Befunde. Beides steht in Modul 14.
+- **Der Beleg-Satz ist in allen sechs Skeletten derselbe**: Lint-Befunde,
+  Coverage-Zusammenfassung und der maschinenlesbare Coverage-Report
+  (`coverage.xml` · `coverage.out` · `jacoco.xml` · `report.xml` ·
+  `coverage.cobertura.xml`, je nach Werkzeug). Vorher hatten nur `python` und
+  `java` einen Coverage-Beleg — `make export` versprach überall dasselbe und
+  lieferte in vier Skeletten weniger.
+- **Die Gates dieses Repos ebenso.** `tools/Dockerfile` baut jetzt aus der
+  Repo-Wurzel, `docs-check` und `alignment-check` laufen im Image statt über
+  `-v "$(CURDIR)":/work`. Neu: `make gate-image` (in AGENTS.md §4 eingetragen)
+  und eine `.dockerignore` — ohne sie wanderten 46 MB `.git` in jeden Kontext.
+  `d-check.mk` bleibt beim `:ro`-Mount: Es liest nur, und das Fragment gehört
+  dem Werkzeug.
+
+### Was der Umbau gefunden hat
+
+Drei Befunde, die es ohne ihn nicht gegeben hätte:
+
+- **Ein selbstgebautes behauptetes Gate.** Die erste Fassung der `export`-Stage
+  trug ein `ENTRYPOINT ["sh","-c","tar …"]`. Docker hängt die `run`-Argumente
+  daran an, also führte `docker run IMG ruff check .` in Wahrheit *tar* aus —
+  `make gates` meldete **grün, ohne eine Prüfung auszuführen**. Gefunden hat es
+  der Break-Test, nicht der grüne Lauf. Konsequenz im Dockerfile-Kommentar
+  festgehalten: kein `ENTRYPOINT` auf einer Stage, in der man Werkzeuge aufruft.
+- **Was nicht kopiert wird, gilt nicht.** `csharp` verlor beim COPY die
+  `.editorconfig` — die Analyzer urteilten im Image anders als im Arbeitsbaum
+  (CA1707 als Fehler). Dasselbe drohte `java` mit `checkstyle-suppressions.xml`.
+  Beide stehen jetzt in der COPY-Liste, mit Begründung an der Zeile.
+- **Der `targets`-Sensor hat jede neue Regel gemeldet** — `gate-image`,
+  `cov-image`, `export` in fünf Makefiles. `export` steht jetzt in der
+  Target-Tabelle des Beispiels (aus „alle zehn" wird „alle elf"), die
+  Bau-Schritte in `exempt-targets`; das abgelöste `configure` ist dort raus.
+
+Break-Tests je Skelett (Befund eingebaut → rot, entfernt → grün): `python`
+(ruff), `go` (golangci-lint), `cpp` (Compiler), `java` (Checkstyle), `csharp`
+(dotnet format), `kotlin` (Kotlin-Compiler).
+
+Gates: `make check` 0 ERROR / 0 WARN, `make bundle-check` 0 Befunde,
+`make -C lab/example verify` 74/0, `make gates` in allen sechs Skeletten grün.
+
 ## Welle 100 — 2026-08-30 · Zwei Konsumenten lesen mit
 
 Auslöser sind die zwei realen Adopter der Baseline: `d-check` (vendort seit

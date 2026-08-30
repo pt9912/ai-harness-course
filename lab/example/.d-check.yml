@@ -101,7 +101,10 @@ targets:
     - run
     - clean
     - toolchain
-    - configure
+    # Bau-Schritte des hermetischen Prueflaufs: Sie stellen das Pruef-Image
+    # her, urteilen aber nicht — wie `toolchain` kein Gate.
+    - gate-image
+    - cov-image
     - a-check
     - a-check-graph
     # Die uebrigen Regeln des tool-generierten Fragments: optionale

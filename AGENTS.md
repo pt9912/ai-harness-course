@@ -48,6 +48,7 @@ Was offen ist, führt [`docs/roadmap.md`](docs/roadmap.md).
 |---|---|
 | `make help` | Targets anzeigen |
 | `make check` | beide Validatoren nacheinander — das Gate vor jedem Commit |
+| `make gate-image` | Prüf-Image bauen: das Repo wandert per `COPY` hinein, kein Mount |
 | `make docs-check` | Referenzen (d-check) + Modul-Nummern (Rest-Sensor) prüfen |
 | `make alignment-check` | Lernziel-Alignment-Prüfschritt (Docker) |
 | `make bundle-build` | Bundle nach `DEST` bauen (`DEST=<dir> REF=<tag\|main>`) |

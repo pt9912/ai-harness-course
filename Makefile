@@ -22,18 +22,20 @@ check: docs-check alignment-check ## beide Validatoren nacheinander
 # DCHECK_DIGEST (sticht den Tag von DCHECK_IMAGE); Konfiguration in .d-check.yml.
 # Bei d-check-Release neu erzeugen: `d-check --print-mk > d-check.mk`, DCHECK_DIGEST
 # neu setzen. Der Node-Validator bleibt Rest-Sensor für die Modul-Nummern-Checks.
+GATE_IMAGE ?= ai-harness-course-gates
 DCHECK_DIGEST ?= sha256:c6c1465b94f07ab24439665be40a3107df51a3c0c62d0159a4e4a915fb03ca7c
 include d-check.mk
 
 # docs-check brückt das tool-generierte `doc-check` (reiner d-check) und hängt
 # den Node-Rest-Sensor an; beide Runs hermetisch (--network none).
-docs-check: doc-check ## Referenzen (d-check) + Modul-Nummern (Rest-Sensor) prüfen
-	docker build -q -t docs-check --target docs-check tools/
-	docker run --rm --network none -v "$(CURDIR)":/work docs-check $(ARGS)
+gate-image: ## Prüf-Image bauen (Kurs-Repo per COPY, kein Mount)
+	@docker build -q -f tools/Dockerfile --target repo -t $(GATE_IMAGE) . >/dev/null
 
-alignment-check: ## Lernziel-Alignment-Prüfschritt (Docker)
-	docker build -q -t alignment-check --target alignment-check tools/
-	docker run --rm -v "$(CURDIR)":/work alignment-check $(ARGS)
+docs-check: doc-check gate-image ## Referenzen (d-check) + Modul-Nummern (Rest-Sensor) prüfen
+	docker run --rm --network none $(GATE_IMAGE) node /usr/local/bin/docs-check.js $(ARGS)
+
+alignment-check: gate-image ## Lernziel-Alignment-Prüfschritt (Docker)
+	docker run --rm --network none $(GATE_IMAGE) node /usr/local/bin/alignment-check.js $(ARGS)
 
 # Prüft das AUSGELIEFERTE Artefakt, nicht den Repo-Stand: `make check` sieht die
 # Links VOR dem Release-Rewrite, der Workflow zippte danach ungeprüft. Ein

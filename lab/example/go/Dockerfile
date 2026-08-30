@@ -7,6 +7,46 @@ WORKDIR /src
 COPY go.mod go.sum* ./
 RUN go mod download
 
+# ---- tools: Pruefwerkzeuge per COPY --from, nichts installiert ausser dem,
+#      was der Race-Detector braucht. Getrennt von den Quellen, damit der
+#      Layer-Cache ueber Code-Aenderungen haelt.
+FROM deps AS tools
+COPY --from=golangci/golangci-lint:v1.62-alpine /usr/bin/golangci-lint /usr/local/bin/golangci-lint
+RUN apk add --no-cache gcc musl-dev
+
+# ---- repo: der Pruefgegenstand ist ab hier Teil des Images (Modul 14 §Der
+#      Prueflauf ist hermetisch). Kein Bind-Mount.
+FROM tools AS repo
+COPY . .
+
+# ---- ausfuehrende Stages: je Pruefung ein Gate, dazu ein Beleg ------------
+FROM repo AS lint-gate
+RUN golangci-lint run ./...
+
+FROM repo AS lint-report
+RUN mkdir -p /out/lint && golangci-lint run ./... > /out/lint/findings.txt 2>&1 || true
+
+FROM repo AS typecheck-gate
+RUN go vet ./...
+
+FROM repo AS arch-gate
+RUN golangci-lint run --disable-all --enable=depguard ./...
+
+FROM repo AS test-gate
+RUN CGO_ENABLED=1 go test -race ./...
+
+FROM repo AS coverage-report
+RUN mkdir -p /out/coverage \
+    && sh scripts/coverage-gate.sh ./... 70 > /out/coverage/summary.txt 2>&1 || true \
+    && cp coverage.out /out/coverage/coverage.out 2>/dev/null || true
+
+# ---- export: Sammelstelle; erbt von `repo`, nicht von einem Gate.
+#      Der Beleg-Satz ist in allen Skeletten derselbe: lint/findings.txt und
+#      coverage/summary.txt, dazu der maschinenlesbare Coverage-Report.
+FROM repo AS export
+COPY --from=lint-report /out /out
+COPY --from=coverage-report /out /out
+
 # ---- Stage 2: build ----
 FROM deps AS build
 COPY . .

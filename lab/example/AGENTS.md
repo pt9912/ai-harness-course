@@ -128,8 +128,9 @@ durch, die übrigen nicht:
 | `make gates` | alle inneren Gates (mandatory vor PR) |
 | `make ci` | gates + `test-determinism` + `coverage-gate-critical` |
 | `make fullbuild` | volle Closure inkl. Runtime-Image |
+| `make export` | Belege der Beleg-Stages host-seitig auspacken (Rückweg ohne Mount): Lint-Befunde, Coverage-Zusammenfassung und der maschinenlesbare Coverage-Report — in allen sechs Skeletten derselbe Satz |
 
-(Alle zehn sind in den sechs Sprach-Skeletten real implementiert.)
+(Alle elf sind in den sechs Sprach-Skeletten real implementiert.)
 
 **Repo-weite Verifikation** (nur im Root, sprachunabhängig):
 

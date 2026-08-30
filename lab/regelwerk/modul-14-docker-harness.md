@@ -81,16 +81,55 @@ Lauf angefordert hat, kann sie nicht einmal löschen. **Wem gehören die Belege,
 die ein containerisierter Gate schreibt?** Wer sie nicht beantwortet,
 beantwortet sie faktisch mit *root*.
 
-Drei Antworten, jede mit Preis:
-
-| Antwort | Preis |
-|---|---|
-| Mount `:ro`, und alles Schreibende wird umgeleitet (Cache-Verzeichnisse per Flag/Env nach `/tmp`) | trägt nur, solange die Prüfung nichts in den Baum schreiben *muss* |
-| `--user $(id -u):$(id -g)` | hebt die `nonroot`-Zusage des Images zur Laufzeit auf; Werkzeuge, die ein schreibbares `HOME` erwarten, brauchen eines |
-| Ergebnisse über `stdout` herausreichen und host-seitig auspacken | der schreibende Prozess ist der Host, damit stimmt der Besitz; löst **Ausgaben**, nicht Eingaben — ein erneuertes Lock-File muss zurück in den Baum |
+Die Antwort dieses Regelwerks steht im nächsten Abschnitt: **kein Mount**. Wer
+trotzdem mountet, wählt zwischen zwei Preisen — `:ro` plus Umleitung alles
+Schreibenden (trägt nur, solange die Prüfung nichts in den Baum schreiben
+*muss*) oder `--user $(id -u):$(id -g)` (hebt die `nonroot`-Zusage des Images
+zur Laufzeit auf und verlangt Werkzeuge, die ohne eigenes `HOME` auskommen).
 
 Der Testfall kostet nichts: `ls -l` auf das Build-Verzeichnis nach dem ersten
 Gate-Lauf.
+
+### Der Prüflauf ist hermetisch — kein Mount
+
+Ein Bind-Mount reicht dem Container den Arbeitsbaum **von außen** herein. Das
+kostet drei Dinge: Der Prüfgegenstand ist nicht Teil des Images, also sagt kein
+Digest, *was* geprüft wurde; ein schreibender Lauf verändert den Baum, und die
+Besitzfrage stellt sich überhaupt erst; und Docker legt Mountpunkte host-seitig
+als root an — auch ein `--tmpfs` hinterlässt eine root-eigene Hülle, die keine
+UID-Option wegräumt.
+
+**Die Quellen wandern beim Build ins Image, die Ergebnisse kommen über `stdout`
+heraus.**
+
+**Zwei Wege, die Prüfung auszulösen — und was der zweite braucht.** Liegt das
+Werkzeug im Image, ruft man es per `docker run` auf: jeder Lauf prüft frisch.
+Zieht das Werkzeug seine Abhängigkeiten dagegen beim Build (Maven, Gradle,
+NuGet), ist die **Gate-Stage selbst** das Gate — `docker build --target
+lint-gate`. Dann aber zwei Griffe, sonst ist es kein Gate mehr:
+
+| Griff | Warum |
+|---|---|
+| `--no-cache-filter <stage>` | führt genau diese Stage neu aus, während `repo` und die Werkzeug-Layer gecacht bleiben. Ohne ihn wiederholt ein gecachtes Grün nur, dass *dieser Stand* schon einmal durchlief — der Gate urteilt nicht, er erinnert sich. |
+| **kein** `-q` | mit `-q` zeigt ein roter Gate nur *„exit code: 1"*. Die Befunde des Werkzeugs stehen im Build-Log, und genau die braucht der, der sie beheben soll. |
+
+| Eigenschaft | Wirkung |
+|---|---|
+| Quellen per `COPY`, kein Mount | der Baum ist während des Laufs unerreichbar — ein Gate *kann* ihn nicht ändern |
+| Rückweg über `stdout`, host-seitig ausgepackt | der schreibende Prozess ist der Host: die Belege gehören dem, der sie angefordert hat |
+| Gate-Stage und Beleg-Stage getrennt | das Urteil bricht den Build, der Report entsteht trotzdem ([Modul 13](modul-13-quality-gates.md#gate-und-beleg--zwei-rollen-derselben-prüfung)) |
+| `export` erbt von `repo` | ein roter Gate macht das Werkzeug nicht unbaubar, mit dem man ihn untersucht |
+
+**Der Preis, offen benannt:** Jede Quelländerung verlangt einen Rebuild — der
+Layer-Cache trägt ihn, aber ein Lauf gegen ungespeicherte Änderungen ist nicht
+möglich. Und der Rückweg löst **Ausgaben**, nicht Eingaben: Ein erneuertes
+Lock-File ist eine Quelle und muss zurück in den Baum.
+
+**Die Ausnahme, und ihre Bedingung:** Ein Werkzeug, das seine Recipe-Form
+selbst mitbringt, mountet in der Regel read-only. Das ist zulässig, solange es
+**nur liest** — der Besitz-Schaden entsteht am Schreiben. Wer es hermetisch
+will, bindet das Fragment nicht ein und schreibt die Recipe aus; das ist eine
+Abweichung von der Werkzeug-Form und gehört als `MR-<NNN>` deklariert.
 
 ### Devcontainer/Compose-Kriterium
 

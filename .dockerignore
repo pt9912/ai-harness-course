@@ -1,1 +1,19 @@
+# Build-Kontext der Kurs-Gates: Der Pruefgegenstand wandert per COPY ins Image
+# (Modul 14 §Der Prueflauf ist hermetisch). Was die Validatoren nicht lesen,
+# gehoert nicht in den Kontext — .git allein waeren 46 MB je Build.
+.git
 .tmp/
+lab/example/*/out
+lab/example/*/build
+lab/example/*/build-cov
+lab/example/*/target
+lab/example/*/bin
+lab/example/*/obj
+lab/example/*/.gradle
+lab/example/*/.kotlin
+lab/example/*/TestResults
+**/__pycache__
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/.import_linter_cache

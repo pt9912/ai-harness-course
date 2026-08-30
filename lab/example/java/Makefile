@@ -3,6 +3,19 @@
 IMAGE := docsearch-java
 DOCKER := docker
 MVN_IMAGE := maven:3.9-eclipse-temurin-21-alpine
+# Kein Bind-Mount: Die Quellen wandern beim Build ins Image, und weil Maven
+# seine Abhaengigkeiten dabei zieht, ist die Gate-Stage selbst das Gate — ihr
+# Bau schlaegt fehl, wenn die Pruefung rot ist (Modul 14 §Der Prueflauf ist
+# hermetisch). Sichtbare Befunde holt `make export` aus den Beleg-Stages.
+# GATE = docker build --target <stage>: kein Mount, kein Schreiben in den Baum.
+# `--no-cache-filter <stage>` fuehrt genau diese Stage neu aus, waehrend
+# `repo` und die Werkzeug-Layer gecacht bleiben: Ein Gate urteilt so bei jedem
+# Aufruf ueber den aktuellen Stand, statt ein gecachtes Gruen zu wiederholen.
+# Und kein `-q`: Sonst zeigt ein roter Gate nur den Exit-Code, nicht die
+# Befunde (Modul 13, Gate und Beleg).
+GATE = $(DOCKER) build --no-cache-filter $(1) --target $(1) . >/dev/null
+GATES := docsearch-java-gates
+
 
 .PHONY: help build run lint typecheck arch-check test test-determinism \
         coverage-gate coverage-gate-critical gates ci fullbuild clean
@@ -29,38 +42,36 @@ run: build
 	$(DOCKER) run --rm $(IMAGE):latest --help
 
 lint: ## Checkstyle
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
-		mvn -q checkstyle:check
+	$(call GATE,lint-gate)
 
 typecheck: ## javac
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
-		mvn -q compile
+	$(call GATE,typecheck-gate)
 
 # Beide Sensoren laufen, auch wenn der erste rot ist: ADR-0018 laesst die
 # beiden Befund-Mengen vergleichen, und ein Abbruch nach dem ersten zeigt
 # immer nur eine.
 arch-check: ## ADR-0001 Layering — zwei Sensoren: a-check (Konfiguration) + ArchUnit (Test-Framework)
 	@rc=0; $(MAKE) --no-print-directory a-check || rc=1; \
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
-		mvn -q test -Dtest=ArchitectureTest || rc=1; \
+	$(call GATE,arch-gate) || rc=1; \
 	exit $$rc
 
-test:
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
-		mvn -q test
+test: ## JUnit-Tests
+	$(call GATE,test-gate)
 
 test-determinism: ## LH-QA-02: @RepeatedTest(100) in DeterminismTest
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
-		mvn -q test -Dtest=DeterminismTest
+	$(call GATE,determinism-gate)
 
 coverage-gate: ## Gesamt-Coverage via JaCoCo (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
-		mvn -q verify
+	$(call GATE,coverage-gate)
 
 coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)
 	@echo "Critical coverage — CO-001 (index) ausgenommen"
-	$(DOCKER) run --rm -v "$$(pwd)":/src -w /src $(MVN_IMAGE) \
-		mvn -q verify -Pcritical-coverage
+	$(call GATE,critical-coverage-gate)
+
+export: ## Belege der Beleg-Stages nach ./out holen (Rueckweg ohne Mount)
+	$(DOCKER) build -q --target export -t $(GATES) . >/dev/null
+	@mkdir -p out && $(DOCKER) run --rm --network none $(GATES) tar -cf - -C /out . | tar -xf - -C out
+	@echo "-> ./out"
 
 gates: lint typecheck arch-check test coverage-gate
 	@echo "gates grün."
