@@ -101,7 +101,7 @@ Diese drei Anzeichen sind die Sensor-Seite der Bootstrap-Diagnose.
   Geschaffenen*. Die vier Klassen gelten in jedem Modus; was sich
   ändert, ist die Frequenz und die typische Auslöse-Quelle.
 * BF ist der *typische* Ausgangspunkt
-  realer Repos. Die vier Fallstudien sind alle in BF (siehe oben).
+  realer Repos.
   BF kann systematisch in Richtung GF graduieren — *Graduation* ist
   eine ausgewiesene Bedingung mit Konvergenz-Auftrag, kein
   Wunschdenken. Die Frage ist nicht *ob* graduiert wird, sondern

@@ -11,6 +11,78 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 99 — 2026-08-30 · Der Spiegel zeigt nicht nach draußen
+
+Auslöser ist die Lese-Sicht eines **Code-Agenten auf das vendorte Regelwerk**:
+Der Schluss von `grundlagen-durchsetzungsschicht.md` §Referenz-Implementierung
+schickte ihn zu einem Projekt, das nicht mitreist — *„läuft in realen Repos
+bereits produktiv … die Details holt man aus der Referenz."* Die Referenz liegt
+nicht im Bundle; der Absatz löst nichts auf und kostet Kontext.
+
+Der Absatz ist doppelt defekt. Welle 35 hat ihn beim Entfernen der
+Kurs-Verweise **umformuliert statt gestrichen**: Die Quelle sagt *„läuft in den
+Fallstudien-Repos (`fallstudien.md`) bereits real"*, der Spiegel sagte *„läuft
+in realen Repos bereits produktiv"* — **`produktiv` kommt in der Quelldatei
+nicht vor** (`grep -c`). Das ist eine verfasste Aussage, die
+[Probe B](docs/regelwerk-extrakt.md#teil-3--zwei-proben-und-was-keine-von-beiden-fängt)
+fängt; gefunden hat sie ein Leser, kein Sensor.
+
+### Entschieden — die Netzlos-Nachlese zu Welle 35
+
+- **Der Absatz entfällt ganz** (Operation 1, ganze Einheit —
+  [`docs/regelwerk-extrakt.md` §Teil 2](docs/regelwerk-extrakt.md#teil-2--was-der-spiegel-tun-darf)).
+  Operatives geht nicht verloren: *„die Skripte werden hier referenziert, nicht
+  inline ausgerollt"* beschreibt die Entscheidung der **Kursseite** über ihre
+  eigene Darstellung, keine Regel des Adopters. Fix-Richtung Quelle → Spiegel
+  heißt hier **entfernen**, nicht netzlos umformulieren — dieselbe Behandlung
+  wie die vier quellenlosen Aussagen in `modul-12` (2026-08-16).
+- **`modul-00` fällt mit, aus demselben Griff.** Quelle: *„Lopopolo (OpenAI
+  2026) und die Fallstudien in [`fallstudien.md`] belegen das"*; Spiegel seit
+  W35: *„… und die **dokumentierten Repo-Fallstudien** belegen das"* —
+  `Repo-Fallstudien` steht in der Quelldatei **null**-mal. Der ganze Beleg-Satz
+  geht; der tragende bleibt wortgleich (*„Das Modell rät, weil nichts in der
+  Eingabe widerspricht"*). Den Quellwortlaut ohne Link zu retten hätte die
+  baumelnde Deixis erzeugt, nur den Fallstudien-Teil zu streichen die Flexion
+  eines bleibenden Satzes geändert — keine der fünf Operationen.
+- **`modul-02` fällt mit, aus anderem Grund.** *„Die vier Fallstudien sind alle
+  in BF (siehe oben)"* stand seit Welle 20 **quelltreu** da — im Spiegel zeigt
+  aber weder *„die vier Fallstudien"* noch *„siehe oben"* auf etwas, das
+  mitreist. Der tragende Satz *„BF ist der typische Ausgangspunkt realer Repos"*
+  bleibt.
+- **Die Quelle behält ihre Fallstudien-Verweise.** Netzlos zu sein ist die
+  Pflicht des Spiegels, nicht des Kurses.
+
+### Entschieden — der Abschnitt sagt jetzt, wozu er da ist
+
+Die Anschlussfrage war *„Das Regelwerk ist für einen Code-Agenten — was soll er
+mit einer Referenz-Implementierung anfangen?"*. Antwort: nichts, aber mit einer
+**Vollständigkeits-Checkliste** sehr wohl — und genau als solche ist der
+Abschnitt am realen Konsumenten belegt (Welle 94: der `d-check`-CR maß gegen die
+Zusage *„das vollständige Artefakt-Set"* und fand eine fehlende Klasse). Beide
+Korrekturen laufen quell-seitig, der Spiegel erbt sie.
+
+- **Der Titel benennt die Sache statt eines fremden Repos**: `##
+  Referenz-Implementierung` → `## Das vollständige Artefakt-Set`. Eine Referenz,
+  die der vendorte Leser nicht hat, ist derselbe Defekt wie der gestrichene
+  Absatz, eine Ebene höher. Der Anker `#referenz-implementierung` war
+  **unreferenziert** (repo-weit geprüft) — der Umbau kostet keinen Link.
+- **Der Nachweis-Bullet trägt die Wirkung, nicht den Träger** (Präzedenz Welle
+  95): *„eine gemeinsame, inhaltsbasierte Nachweis-Quelle für Gate-Lauf und
+  Handoff-Gate (eine Wahrheit, keine Logik-Dopplung)"*. Die Skriptnamen des
+  Referenz-Repos stehen im Kurs als **eigener Satz** dahinter — damit sind sie
+  im Spiegel als ganze Einheit weglassbar, und der `d-check:ignore`-Marker
+  entfällt dort ersatzlos. Ein Pfad, den ein Gate ausnehmen muss, ist kein Pfad,
+  sondern eine Illustration; als Regelträger taugt er nicht.
+- **Der Vorspann ist die Prüfaussage**: *„Eine Durchsetzungsschicht ist erst
+  vollständig, wenn es alle fünf gibt"* statt der Wiederholung des Titels. Damit
+  ist zählbar, was vorher Behauptung war.
+
+Die Lehre der Welle steht quer zu beiden Hälften: Eine Netzlos-Runde, die
+Verweise **umschreibt** statt sie zu streichen, hinterlässt zwei Schäden statt
+keinem — einen quellenlosen Satz und einen Zeigefinger ins Leere.
+
+Gates: `make check` 0 ERROR / 0 WARN, `make bundle-check` 0 Befunde.
+
 ## Wellen 95–98 — 2026-08-26 · Vier Punkte aus einem Konsumenten-CR
 
 Auslöser ist ein **Konsumenten-CR von `d-check`** (2026-08-25, geprüft gegen

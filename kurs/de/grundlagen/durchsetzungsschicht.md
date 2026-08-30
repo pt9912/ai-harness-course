@@ -85,17 +85,17 @@ Wellen, je mit Beobachtung, verworfener Alternative und Landung als
 `MR-<NNN>` im Adaptions-Block — in
 [Modul 13 §Worked Example B](../04-qualitaet/modul-13-quality-gates.md#worked-example-b-guard-härtung-als-steering-loop-am-wächter).
 
-## Referenz-Implementierung
+## Das vollständige Artefakt-Set
 
-Das vollständige Artefakt-Set einer Durchsetzungsschicht:
+Eine Durchsetzungsschicht ist erst vollständig, wenn es alle fünf gibt:
 
 - `.claude/settings.json` — Hook-Verdrahtung (welcher Hook an welchem Punkt)
 - `.claude/hooks/*.sh` — Tool-Call-Gate (Befehls-Guard) und Handoff-Gate
   (Stop-/Gate-Nachweis)
 - `.claude/commands/*.md` — Workflow-Skelett als Slash-Command
-- `tools/harness/working-tree-hash.sh` + `record-gates.sh` — gemeinsame, <!-- d-check:ignore (Referenz-Artefakt im Fallstudien-Repo) -->
-  inhaltsbasierte Nachweis-Quelle für Gate-Lauf *und* Handoff-Gate (eine
-  Wahrheit, keine Logik-Dopplung)
+- eine gemeinsame, **inhaltsbasierte Nachweis-Quelle** für Gate-Lauf *und*
+  Handoff-Gate (eine Wahrheit, keine Logik-Dopplung). Im Referenz-Repo sind das
+  `tools/harness/working-tree-hash.sh` und `record-gates.sh`. <!-- d-check:ignore (Referenz-Artefakt im Fallstudien-Repo) -->
 - die **Wurzel-Einstiegsdatei** des Werkzeugs (bei Claude Code `CLAUDE.md`) —
   **kein Bindepunkt**, sondern der Einstieg: Sie bringt `AGENTS.md` in den
   Lauf-Kontext, wo Modul 9 es für jeden Lauf verlangt. Sie **verweist** dorthin

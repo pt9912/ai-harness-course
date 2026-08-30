@@ -86,17 +86,16 @@ dieser Härtung — Auslöser, Landung als `MR-<NNN>`, Mitziehen der
 Grenz-Zeile — stehen in
 [Modul 13 §Guard-Härtung](modul-13-quality-gates.md#guard-haertung).
 
-### Referenz-Implementierung
+### Das vollständige Artefakt-Set
 
-Das vollständige Artefakt-Set einer Durchsetzungsschicht:
+Eine Durchsetzungsschicht ist erst vollständig, wenn es alle fünf gibt:
 
 - `.claude/settings.json` — Hook-Verdrahtung (welcher Hook an welchem Punkt)
 - `.claude/hooks/*.sh` — Tool-Call-Gate (Befehls-Guard) und Handoff-Gate
   (Stop-/Gate-Nachweis)
 - `.claude/commands/*.md` — Workflow-Skelett als Slash-Command
-- `tools/harness/working-tree-hash.sh` + `record-gates.sh` — gemeinsame, <!-- d-check:ignore (Referenz-Artefakt im Fallstudien-Repo) -->
-  inhaltsbasierte Nachweis-Quelle für Gate-Lauf *und* Handoff-Gate (eine
-  Wahrheit, keine Logik-Dopplung)
+- eine gemeinsame, **inhaltsbasierte Nachweis-Quelle** für Gate-Lauf *und*
+  Handoff-Gate (eine Wahrheit, keine Logik-Dopplung).
 - die **Wurzel-Einstiegsdatei** des Werkzeugs (bei Claude Code `CLAUDE.md`) —
   **kein Bindepunkt**, sondern der Einstieg: Sie bringt `AGENTS.md` in den
   Lauf-Kontext, wo Modul 9 es für jeden Lauf verlangt. Sie **verweist** dorthin
@@ -104,9 +103,3 @@ Das vollständige Artefakt-Set einer Durchsetzungsschicht:
   Absatz *Vollständigkeit*). **Kein vierter Bindepunkt** — die drei bleiben
   drei; wie Hook-Verdrahtung und Nachweis-Quelle ist dies ein Artefakt eigener
   Art, und es fehlte hier.
-
-Die Gate- und Traceability-Mechanik, an die das andockt, läuft in realen
-Repos bereits produktiv; die
-Skripte werden hier **referenziert, nicht inline ausgerollt** — die
-mechanische Hälfte bleibt klein und lesbar, die Details holt man aus der
-Referenz.
