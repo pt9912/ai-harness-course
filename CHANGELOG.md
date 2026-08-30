@@ -11,6 +11,45 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 102 — 2026-08-30 · Ein Beispiel, das nie traf
+
+Zwei Nachträge zum Release `v5.13.0`, beide von außen gemeldet.
+
+### Entschieden
+
+- **Das `vcs`-Beispiel der Vorlage schützte nichts.** `lab/templates/.d-check.yml`
+  führt einen auskommentierten Block *Append-only der Adaptions-Einträge* mit
+  `immutable-when: '^\*\*Status:\*\* Accepted'`. Der Konsument `d-check` meldete,
+  das kollidiere mit der in Welle 100 aus der MR-Vorlage entfernten
+  `Status`-Zeile. Nachgemessen ist es schlimmer und älter: Die Vorlage trug die
+  Zeile als **Listenpunkt** (`- **Status:** Accepted`), die Regex ankert am
+  Zeilenanfang ohne Strich — **0 Treffer, auch vor Welle 100**. Wer den Block
+  aktivierte, bekam ein Modul, dessen Datei-Menge leer ist: ein Gate, das nie
+  etwas zu prüfen fand und trotzdem grün meldete.
+- **Die Reparatur folgt der Regel, nicht dem alten Feld.** Der Konventions-
+  speicher sagt *„Einträge werden nie überschrieben"* — Unveränderlichkeit gilt
+  **ab dem ersten Commit, nicht ab einem Status**. Deshalb keilt
+  `immutable-when` jetzt auf die Datums-Zeile (`^- \*\*Datum:\*\*`), die jeder
+  Eintrag trägt, und `status-line`/`head-allow` entfallen: Ein MR-Eintrag hat
+  keinen erlaubten Übergang *in* der Datei, sein Zustand ist die
+  Verzeichnis-Position. Gegenprobe: 1/1 in der Vorlage, **33/33** in den
+  MR-Dateien des meldenden Konsumenten.
+- **Das ADR-Pendant ist gegengeprüft und intakt.** Dieselbe Bauform steht in
+  `.d-check.yml` dieses Repos für `lab/example`-ADRs; dort schreiben die Dateien
+  `**Status:** Accepted` ohne Strich, die Regex trifft 8 von 12. Der Defekt war
+  auf das Vorlagen-Beispiel beschränkt.
+- **Das Release trägt künftig eine Prüfsumme.** Kein Release seit `v3.7.0` hatte
+  eine; `templates-release` hängt jetzt `SHA256SUMS` neben das Bundle. Der Nutzen
+  ist nicht *„dem Release vertrauen"* — wer das Asset ersetzen kann, ersetzt auch
+  die Summe —, sondern die **Archiv-Form** aus Modul 14: Wer die Baseline
+  vendort, hält fest, *was* er vendort hat, und kann es später gegenprüfen. Der
+  Tag allein trägt das nicht; er ist verschiebbar.
+
+Einordnung: **PATCH** (`v5.13.1`) — ein kaputtes Beispiel wird richtig, eine
+Release-Mechanik kommt dazu; kein Regeltext ändert sich.
+
+Gates: `make check` 0 ERROR / 0 WARN, `make bundle-check` 0 Befunde.
+
 ## Welle 101 — 2026-08-30 · Der Prüflauf verliert den Mount
 
 Nachlese zu Welle 100, und diesmal wechselt die **Baseline**. Die Besitzfrage

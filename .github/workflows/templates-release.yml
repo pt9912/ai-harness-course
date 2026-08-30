@@ -34,11 +34,17 @@ jobs:
         run: make bundle-verify DEST="$RUNNER_TEMP/baseline"
       - name: ZIP packen
         run: ( cd "$RUNNER_TEMP/baseline" && zip -r "$GITHUB_WORKSPACE/lab-regelwerk.zip" . )
+      # Prüfsumme als eigenes Asset: Der Tag allein ist kein Anker — er ist
+      # verschiebbar, und das Asset ist ersetzbar. Wer die Baseline vendort,
+      # kann mit SHA256SUMS festhalten, WAS er vendort hat, und es spaeter
+      # gegenpruefen (Modul 14, Archiv-Form des Reproduzierbarkeits-Ankers).
+      - name: Pruefsumme erzeugen
+        run: sha256sum lab-regelwerk.zip > SHA256SUMS
       - name: Release anlegen, Assets anhängen
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" lab-regelwerk.zip \
+          gh release create "$GITHUB_REF_NAME" lab-regelwerk.zip SHA256SUMS \
             --verify-tag \
             --title "Release $GITHUB_REF_NAME" \
             --notes "ZIP-Stand beim Tag \`$GITHUB_REF_NAME\`. \`lab-regelwerk.zip\` = self-contained Baseline (\`regelwerk/\` 17 Module + Grundlagen-Rahmen + README, \`templates/\` parallel) — nach \`.harness/baseline/$GITHUB_REF_NAME/\` entpacken, dann lösen die \`../templates/\`-Ziel-Form-Verweise netzlos auf. Wer nur die Skelette will, nimmt \`templates/\` aus dem Bundle."
