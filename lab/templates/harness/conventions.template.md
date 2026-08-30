@@ -44,8 +44,16 @@ damit spätere Adaptionen einen Bezugspunkt haben.
 -->
 
 - **Konvention:** <Name, z. B. "AI-Harness-Kurs", interner Standard, Industrie-Norm>
-- **Stand:** <Datum oder Version, z. B. "Template-Set 2026-06">
+- **Stand:** <Version/Tag des adoptierten Standes, z. B. "v5.13.1">
 - **Datum der Adoption:** <Datum>
+
+<!--
+Der Stand ist eine VERSION, kein Datum: Er ist der Bezugspunkt, gegen den ein
+Versions-Sensor die Baseline-Pins in den Adaptions-Eintraegen prueft (Muster in
+`.d-check.yml`). Steht hier ein Datum, findet der Sensor keine Version und
+bricht fail-closed ab — der Gate laeuft dann gar nicht mehr. Das Datum der
+Adoption steht in der Zeile darunter.
+-->
 
 ## Adoptierte Konventions-Quellen
 

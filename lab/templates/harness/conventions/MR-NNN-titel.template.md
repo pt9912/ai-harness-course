@@ -15,6 +15,13 @@ Regeln dieser Datei: Pflichtfelder sind Datum, Geltungsbereich,
 früheren ablöst. `Ersetzt-Baseline-Regel` nennt **genau eine** Regel der
 Baseline, an deren Stelle dieser Eintrag tritt — als Link mit
 Abschnitts-Anker in die vendored Fassung; ein Datei-Link benennt keine Regel.
+**Dieser Link trägt zwei Dinge, die sich bewegen, und für beide gibt es einen
+Wächter statt einer Formregel:** die *Tiefe* (nach dem `git mv` nach `done/`
+zeigt der relative Pfad eine Ebene zu hoch — der Umzug zieht die
+Pfad-Berichtigung nach sich, als eigener Commit; die Existenzprüfung des Links
+meldet sie, wenn sie ausbleibt) und die *Version* (jeder Baseline-Bump
+entwertet `<tag>` — der adoptierte Stand steht einmal im Adaptions-Block, ein
+Versions-Sensor prüft jeden Pin dagegen; Muster in `.d-check.yml`).
 Wer mehrere Regeln ersetzen will, schreibt mehrere Einträge. Ein Eintrag, der
 keine benannte Regel ersetzt, ist ein **Fork**, keine Adaption.
 

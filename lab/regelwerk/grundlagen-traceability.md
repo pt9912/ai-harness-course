@@ -72,6 +72,21 @@ kanonischen Formen liefern `welle-results.template.md` bzw.
   Präfix), das Beobachtungs-Register eine Ebene höher (Eltern-Verzeichnis, also mit `..`-Präfix).
   Ein im Schreibmoment richtiges `done/…` bricht für jeden Leser danach, und
   zwar still: Der Pfad bleibt syntaktisch intakt und zeigt ins Leere.
+- **Und wo die Regel nicht anwendbar ist — die Gegenrichtung.** Sie setzt
+  voraus, dass die Datei kurz am Schreibort und lange am Ruheort gelesen wird.
+  Für einen Adaptions-Eintrag (`MR-<NNN>`) ist es umgekehrt: Er lebt seine
+  ganze aktive Zeit in `harness/conventions/` und wandert erst bei der
+  Auflösung nach `done/` — vom Ruheort geschriebene Pfade wären die ganze Zeit
+  rot. Dort gilt deshalb die andere Hälfte: **Der `git mv` zieht die
+  Pfad-Berichtigung nach sich**, als eigener Commit nach dem Umzug. Der
+  Wächter ist die Existenzprüfung des Links.
+- **Zwei Rot-Quellen, ein Prinzip.** Ein Verweis in die vendorte Baseline
+  trägt neben der Tiefe auch deren **Version** (`.harness/baseline/<tag>/…`),
+  und die bewegt sich bei jedem Baseline-Bump. Beide Male gilt dasselbe: nicht
+  die Form wechseln, damit nichts mehr rotten kann, sondern das Rotten
+  **sichtbar** machen. Für die Version heißt das: Der adoptierte Stand steht
+  **einmal** im Adaptions-Block, und ein Versions-Sensor prüft jeden Pin
+  dagegen. Ein vergessener Nachzug ist dann ein Befund, kein toter Link.
 - **In den Backticks steht ein Zielort, nicht immer eine Datei** — drei
   kanonische Füllungen: `AGENTS.md §<N>` · `Makefile:<target>` ·
   `.harness/skills/<name>.md`.

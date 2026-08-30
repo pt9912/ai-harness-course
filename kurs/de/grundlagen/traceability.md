@@ -98,6 +98,26 @@ das Beobachtungs-Register eine Ebene höher (Eltern-Verzeichnis, also mit `..`-P
 Schreibmoment richtiges `done/…` bricht für jeden Leser danach, und zwar
 still: Der Pfad bleibt syntaktisch intakt und zeigt ins Leere.
 
+**Und wo die Regel nicht anwendbar ist — die Gegenrichtung.** Sie setzt
+voraus, dass die Datei kurz am Schreibort und lange am Ruheort gelesen wird.
+Für einen Adaptions-Eintrag (`MR-<NNN>`) ist es umgekehrt: Er lebt seine
+ganze aktive Zeit in `harness/conventions/` und wandert erst bei der Auflösung
+nach `done/` — vom Ruheort geschriebene Pfade wären die ganze Zeit rot. Dort
+gilt deshalb die andere Hälfte: **Der `git mv` zieht die Pfad-Berichtigung nach
+sich**, als eigener Commit nach dem Umzug (Modul 9 trennt Umzug und Inhalt
+ohnehin). Erfunden werden muss dafür nichts — der Wächter ist die
+Existenzprüfung des Links, die den zu hoch zeigenden Pfad nach dem Umzug
+meldet.
+
+**Zwei Rot-Quellen, ein Prinzip.** Ein Verweis in die vendorte Baseline trägt
+neben der Tiefe auch deren **Version** (`.harness/baseline/<tag>/…`), und die
+bewegt sich bei jedem Baseline-Bump. Beide Male gilt dasselbe: nicht die Form
+wechseln, damit nichts mehr rotten kann, sondern das Rotten **sichtbar**
+machen. Für die Version heißt das: Der adoptierte Stand steht **einmal** im
+Adaptions-Block (dort verlangt ihn die Pflichtgliederung ohnehin), und ein
+Versions-Sensor prüft jeden Pin dagegen. Ein vergessener Nachzug ist dann ein
+Befund, kein toter Link.
+
 **Was in den Backticks steht, ist ein Zielort, nicht immer eine Datei** — drei
 kanonische Füllungen: `AGENTS.md §<N>` (Datei + Abschnitt) ·
 `Makefile:<target>` (Datei + Make-Target) · `.harness/skills/<name>.md`

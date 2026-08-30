@@ -38,6 +38,19 @@ modules: [links, anchors]
 # ueberhaupt —, regelt das Baseline-Regelwerk `grundlagen-referenz-richtung.md`
 # §Referenz-Richtung (SDP); diese Datei bildet die dortige Setzung nur ab.
 #
+# Baseline-Pin gegen Tag-Drift — aktivieren, sobald harness/conventions.md
+# einen Baseline-Stand deklariert. Jeder Verweis in die vendorte Baseline
+# traegt deren Version im Pfad (`.harness/baseline/<tag>/…`); nach einem
+# Baseline-Bump zeigen die nicht nachgezogenen ins Leere. `versions` liest den
+# adoptierten Stand aus EINER Deklaration und meldet jeden abweichenden Pin
+# als `version-stale` — der vergessene Nachzug wird ein Befund statt eines
+# toten Links. Der Anker zeigt auf die Zeile, die den Stand nennt, nie auf
+# eine feste Nummer.
+# versions:
+#   pin-pattern: '\.harness/baseline/(v\d+\.\d+\.\d+)/'
+#   current-from: harness/conventions.md#baseline
+#   exempt-paths: ["harness/conventions/done/**"]   # aufgeloeste Eintraege sind eingefroren
+
 # Append-only der Adaptions-Eintraege — aktivieren, sobald harness/conventions/
 # existiert. Braucht git und eine Commit-Range (Target `doc-immutable` aus
 # `d-check --print-mk`); prueft, dass der Core einer MR-Datei ueber die Range

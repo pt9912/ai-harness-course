@@ -11,6 +11,69 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 103 — 2026-08-30 · Zwei Rot-Quellen, ein Prinzip
+
+Zweiter Befund desselben Konsumenten: Der Beispielpfad der MR-Vorlage
+(`../../.harness/baseline/<tag>/…`) löst nur aus `conventions/` auf; nach dem
+`git mv` nach `done/` zeigt er eine Ebene zu hoch. Ihr Gate meldete es sofort
+(2 × `target-missing`), die Pfade wurden nach dem Umzug berichtigt. Die
+Ruheort-Regel des Kanons gilt laut eigenem Wortlaut *„für jede Datei, die per
+`git mv` wandert"* — die Vorlage folgte ihr nicht.
+
+**Der Einwand gegen die naive Anwendung ist richtig.** Ein Slice-Plan wird kurz
+am Schreibort und lange am Ruheort gelesen; ein Adaptions-Eintrag umgekehrt —
+er lebt seine ganze aktive Zeit in `conventions/`. „Vom Ruheort schreiben"
+hieße dort: die ganze Zeit rot.
+
+**Und die gemeldete Tiefe ist die kleinere Hälfte.** Derselbe Link trägt die
+Baseline-**Version** im Pfad, und die bewegt sich bei jedem Bump. Am Bestand
+des Meldenden gemessen: **45 Vorkommen in 29 aktiven** Einträgen, alle auf
+`v5.12.0` — sie entwerten sich mit seinem nächsten Pin-Bump, ohne dass jemand
+etwas verschiebt. Für die 3 Vorkommen in `done/` hat er die richtige Antwort
+schon (scoped `ignore-refs`, damit eingefrorene Belege nicht verfälscht werden).
+
+### Entschieden
+
+- **Nicht die Form wechseln, das Rotten sichtbar machen.** Drei Auswege wurden
+  erwogen und verworfen: den Link durch ein Abschnitts-Zitat ersetzen (löst
+  beide Rot-Quellen, wirft aber die Existenz- und Anker-Prüfung weg), ihn in
+  die Index-Zeile verschieben (halbe Prüfung), oder nur Pflichten schreiben
+  (Tag-Rot bleibt still). Alle drei kaufen Wartungsruhe mit Blindheit — der
+  Tausch, den dieser Korpus sonst ablehnt.
+- **Die Ruheort-Regel bekommt ihre Gegenrichtung** (`grundlagen-traceability.md`):
+  Wo eine Datei lange aktiv und kurz im Ruheort lebt, wird **nicht** vom
+  Ruheort geschrieben — der `git mv` zieht die Pfad-Berichtigung nach sich, als
+  eigener Commit (Modul 9 trennt Umzug und Inhalt ohnehin). Der Wächter ist die
+  Existenzprüfung des Links, die genau diesen Fall gemeldet hat.
+- **Die Version wird eine geprüfte Größe.** Der adoptierte Stand steht
+  **einmal** im Adaptions-Block — die Pflichtgliederung verlangt ihn dort
+  ohnehin —, und ein Versions-Sensor prüft jeden Pin dagegen: Ein vergessener
+  Nachzug ist ein Befund, kein toter Link. `lab/templates/.d-check.yml` trägt
+  das Muster als auskommentierten Block, mit `exempt-paths` für `done/`.
+- **Die MR-Vorlage nennt beide Pflichten an der Feld-Zeile**, statt sie dem
+  Adopter zu überlassen.
+- **Der `Stand` im Adaptions-Block ist eine Version, kein Datum.** Das Review
+  des eigenen Beispiels fand den Defekt an der Fixture: Die Vorlage schlug
+  bisher *„Datum oder Version, z. B. Template-Set 2026-06"* vor — steht dort
+  ein Datum, findet der Versions-Sensor keine Version und bricht **fail-closed
+  den ganzen Lauf ab** (`versions.current-from: keine Version im adressierten
+  Span`), statt einen Befund zu melden. Ein ausgeliefertes Beispiel hätte den
+  Gate des Adopters lahmgelegt, sobald er die Vorlage so ausfüllt, wie sie es
+  vorschlug. Der Stand trägt jetzt Version/Tag, das Adoptions-Datum steht in
+  der Zeile darunter.
+
+Der Weg dorthin kam aus dem Handbuch des Konsumenten selbst: Es führt
+`versions` mit `pin-pattern`/`current-from` und dokumentiert die Anker-Wanderung
+mit derselben Begründung — *„ein vergessener Versions-Bump fällt so auf, statt
+still auf eine alte Version zu zeigen"*.
+
+Einordnung: **MINOR** — die Ruheort-Regel bekommt eine Hälfte dazu.
+
+Am Fixture belegt, nicht behauptet: Ein Eintrag auf altem Stand meldet
+`version-stale` mit Zeile und Ist-Version; nachgezogen meldet derselbe Lauf 0.
+
+Gates: `make check` 0 ERROR / 0 WARN, `make bundle-check` 0 Befunde.
+
 ## Welle 102 — 2026-08-30 · Ein Beispiel, das nie traf
 
 Zwei Nachträge zum Release `v5.13.0`, beide von außen gemeldet.
