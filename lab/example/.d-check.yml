@@ -122,6 +122,9 @@ targets:
     - doc-tracked
     - doc-targets
     - doc-structure
+    # Kam mit d-check v0.71.1 ins Fragment (die Hilfe des Werkzeugs als
+    # Target); der Sensor hat es gemeldet, wie der Kommentar oben zusagt.
+    - doc-usage
     - doc-help
 
 # Planning-Lifecycle-Invariante: Der Ruhe-Marker steht im Block
