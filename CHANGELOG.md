@@ -11,6 +11,57 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 107 — 2026-08-31 · Zeitdokumente bekommen einen Ausgang aus dem Arbeitsbaum
+
+Nicht der Platz ist das Problem, sondern das **Rauschen im Agentenlauf**: Ein
+`grep` nach einem Begriff trifft Dokumente, die ihn in einem Zustand tragen,
+den es nicht mehr gibt — ein Review-Satz von vor drei Monaten liest sich in
+einer Trefferzeile wie die geltende Regel. Der Korpus kennt die Diagnose eine
+Ebene tiefer und löst sie dort über die Verzeichnis-Position: Aufgelöste
+`MR`-Einträge wandern nach `conventions/done/`, „ein aufgelöster Eintrag liest
+sich wie ein geltender … ein Korrektheits-Risiko". Für Reviews und
+geschlossene Slices fehlt diese Bewegung.
+
+Gemessen an einem Adopter-Repo: 245 Review-Reports und 113 geschlossene
+Slices; zehn realistische Suchbegriffe über die Slices ergeben **3320
+Trefferzeilen**.
+
+[`docs/zeitdokument-archiv.md`](docs/zeitdokument-archiv.md) hält den
+Entwurfsstand fest, bewusst **noch nicht normativ**:
+
+- **Werkzeugseitige Abhilfen scheiden aus**, weil sie an der lokalen
+  Installation hängen — `.ignore` wirkt nur unter ripgrep bzw. einem `ugrep`
+  mit `--ignore-files`, `GREP_OPTIONS` ist seit GNU grep 2.21 wirkungslos, eine
+  Wrapper-Funktion wird im nicht-interaktiven Lauf nicht geladen. Alles
+  gemessen. Bleibt der werkzeugunabhängige Hebel: Was nicht im Arbeitsbaum
+  steht, kann nicht getroffen werden.
+- **Mit der Closure einer Welle** wandern ihre Zeitdokumente in ein
+  unveränderliches `welle-<NN>-archiv.zip`. Slices und Welle-Pläne bleiben als
+  **gekürzter Stub** liegen, Review-Reports gehen ganz, die **Ergebnisnotiz
+  bleibt vollständig** — sie ist die Bedeutung, das Archiv nur die Koordinate.
+- **Der Stub statt eines zentralen Registers:** Beim Rauschen sind beide
+  gleichwertig (3320 → 38 Trefferzeilen, fast alle in der Titelzeile), aber der
+  Stub hält die **Verzeichnis-Position als Zustand** und lässt eingehende
+  Verweise gültig — keine fünfte Lifecycle-Position, keine Verweis-Einlösung.
+- **Zip, nicht tar.gz**, gemessen über drei Runden: 2,94 gegen 9,56 MiB. gzip
+  komprimiert den ganzen Strom, Zip je Eintrag, und git deltat unveränderte
+  Einträge. `tar` scheidet aus, weil der Klartext roh im Archiv liegt.
+- **Zwei Felder statt einem:** `Welle:` trägt die Mitgliedschaft,
+  `Archiviert mit:` die Einsammlung. Sie fallen auseinander, sobald ein Slice
+  keiner Welle angehört — **40 von 95** im gemessenen Bestand —, und ein
+  Zustandsfeld darf keine Mitgliedschaft behaupten, die es nie gab.
+- **Der Sensor in zwei Hälften** (Mitgliedschaft und Abzählung) plus die
+  Grenze, die keine Form-Prüfung schließt: ein geschlossener Slice ohne
+  Zugehörigkeit, den niemand eingesammelt hat, fehlt in beiden Zählungen. Das
+  ist das Argument dafür, dass die Operation ins Werkzeug gehört.
+
+Keine Änderung an `kurs/de`, `lab/regelwerk`, Templates oder Beispiel; das
+Bundle ist unberührt. Offen bleibt der Fall des Repos **ganz ohne** Wellen —
+dort fehlt der Sammelpunkt, und eine Schwelle bleibt der Fallback.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN.
+
 ## Welle 106 — 2026-08-31 · Die Schwelle bekommt ihre drei Ausgänge
 
 Modul 5 verlangt für jedes notierte Risiko **genau einen von drei Ausgängen** —
