@@ -14,7 +14,7 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 ## Welle 108 — 2026-08-31 · Die Archiv-Form, geprobt — und zweimal korrigiert
 
 Welle 107 hielt den Entwurf fest und nannte sechs Proben. Sie sind gefahren
-(`lab/team-sim` s19, neun Verdikte, Gesamtlauf 45/45 · 0 KAPUTT) — und **zwei
+(`lab/team-sim` s19, zehn Verdikte, Gesamtlauf 46/46 · 0 KAPUTT) — und **zwei
 davon haben den Entwurf geändert, bevor eine Zeile Kanon geschrieben wurde.**
 Genau dafür ist die Reihenfolge *erst proben, dann verkörpern* da.
 
@@ -52,10 +52,16 @@ steht im README so.
 im Entwurf standen und nicht stimmten.** Erstens: `s19b` prüfte nur, dass die
 Trefferzahl *fällt* — das erreicht auch bloßes Löschen; das Verdikt hängt jetzt
 zusätzlich an den vier Stubs. Zweitens, und schwerer: **Der Deckungs-Sensor
-prüft die Marke, nicht die Kürzung.** Ein Stub mit `Archiviert mit:`, der den
-vollen Text behalten hat, kommt durch — die zentrale Zusage des Entwurfs kann
-dieses Gate nicht durchsetzen. Das steht jetzt als dritte benannte Lücke im
-Entwurf, neben der Abzählung und dem nie eingesammelten Slice.
+prüfte die Marke, nicht die Kürzung.** Ein Stub mit `Archiviert mit:`, der den
+vollen Text behalten hatte, kam durch — die zentrale Zusage des Entwurfs.
+**Behoben:** eine zweite Bedingung `forbid-pattern: '(?m)^## '`. Ein Stub trägt
+eine Überschrift und Felder, ein ungekürzter Plan seine Abschnitte; unter
+derselben Mutation wird der Lauf jetzt rot, und s19j prüft den Fall
+vorab-registriert. Das `(?m)` ist notwendig — ohne Multiline-Flag ankert RE2 am
+Textanfang und die Bedingung schweigt (gemessen). Geprüft ist damit die
+**Form**, nicht die Länge: Ein Stub, der die Überschriften entfernt und den
+Fließtext stehen lässt, käme weiter durch. Das ist die schwächere Restlücke,
+und sie steht im Entwurf.
 
 **Und der s19g-Befund hat die Probe an der richtigen Stelle repariert.** Er
 lautete: *s19g wird unter keiner Mutation des Werkzeugs rot.* Der Grund war

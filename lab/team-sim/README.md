@@ -44,7 +44,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 45/45 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -96,6 +96,7 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s19f | nicht gekürzter Slice im Wellen-Verzeichnis | **`section-pattern-missing`** | ✓ der Deckungs-Sensor beißt, mit `structure` allein |
 | s19g | Slice der **offenen** Welle | nicht eingesammelt, liegt flach, 0 Meldungen | ✓ prüft die **Auswahl** der Operation — rot, sobald sie zu viel greift |
 | s19i | Welle-Stub trägt seine **eigene** Form | Zeiger auf die Ergebnisnotiz + Vorgangszahl | ✓ nachgetragen: die Probe schrieb erst beide Stub-Formen gleich |
+| s19j | Marker da, aber **nicht gekürzt** | **`section-forbidden`** | ✓ die zweite Sensor-Bedingung: ein Stub trägt keine H2 |
 | s19h | Rückgriff im `--depth 1`-Klon | Archiv liefert, `git show` scheitert | ✓ die Grenze des Entwurfs, gemessen |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*

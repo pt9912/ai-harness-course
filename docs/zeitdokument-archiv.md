@@ -200,19 +200,24 @@ einer Urteilsfrage. **Gemessen an d-check `v0.71.1`, Modul `structure`:**
 > - files: "docs/plan/planning/done/welle-*/slice-*.md"
 >   section-pattern: '^# slice-'
 >   require-pattern: '\*\*Archiviert mit:\*\*'
+>   forbid-pattern: '(?m)^## '
 > ```
 
-Ein Slice im Verzeichnis einer archivierten Welle **ohne** den
-`Archiviert mit:`-Marker wird gemeldet; ein Slice der noch **offenen** Welle
-bleibt still. Ein Befund, korrekt — kein CR nötig, das vorhandene Modul trägt
-es.
+**Zwei Bedingungen, weil die Marke allein die Kürzung nicht belegt.** Die erste
+verlangt den Marker, die zweite verbietet eine **H2**: Ein Stub trägt eine
+Überschrift und Felder, ein ungekürzter Slice-Plan trägt seine Abschnitte
+(`## 7. Lerneintrag`, `## 8. Abnahme`). Damit meldet der Sensor beide Fälle —
+den Slice ohne Marker und den **mit** Marker und vollem Text — und bleibt still
+beim Slice der offenen Welle. Das `(?m)` ist nicht Kosmetik: Ohne
+Multiline-Flag ankert RE2 am Textanfang, und die Bedingung schweigt (gemessen).
 
-**Was er dabei nicht prüft, und das ist wichtiger als es klingt:** Er sieht die
-**Marke**, nicht die **Kürzung**. Ein Stub, der den Marker trägt und trotzdem
-den vollen Text behalten hat, kommt durch. Gemessen an einer Mutationsprobe:
-Marker geschrieben, Kürzung ausgelassen — der Sensor blieb still, und einzig
-die Trefferzahl-Heuristik der Probe fiel auf. Die zentrale Zusage des Entwurfs
-— *es wurde wirklich gekürzt* — kann dieses Gate nicht durchsetzen.
+Die zweite Bedingung entstand aus einer Mutationsprobe: *Marker schreiben,
+Kürzung auslassen* ließ die erste Fassung still — sie sah die Marke, nicht den
+Volltext. Mit der H2-Bedingung wird derselbe Lauf rot.
+
+**Was der Sensor weiterhin nicht sieht:** eine Kürzung, die die Überschriften
+entfernt und den Fließtext stehen lässt. Geprüft ist die **Form**, nicht die
+Länge. Das ist eine schwächere Lücke als die vorige, aber sie gehört benannt.
 
 **Und genau daran ist die erste Fassung gescheitert.** Ohne das
 Wellen-Verzeichnis lautet der Glob `done/slice-*.md`, und `require-pattern`

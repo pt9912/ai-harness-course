@@ -573,10 +573,14 @@ s18_alias_und_invalidierung() {
 #   done/welle-<NN>/archiv.zip + die Stubs der Welle
 #   done/welle-<NN>-results.md   bleibt vollstaendig, bleibt flach
 #   done/slice-<NNN>-*.md        Slices der noch OFFENEN Welle, unberuehrt
+# Zwei Bedingungen, weil die Marke allein die Kuerzung nicht belegt: Ein Stub
+# traegt `Archiviert mit:` UND keine H2 — ein ungekuerzter Plan hat seine
+# Abschnitte noch. Das (?m) ist noetig: RE2 ankert `^` sonst am Textanfang.
 ARCHIVSENSOR='structure:
   - files: "docs/plan/planning/done/welle-*/slice-*.md"
     section-pattern: "^# slice-"
     require-pattern: "\\*\\*Archiviert mit:\\*\\*"
+    forbid-pattern: "(?m)^## "
 '
 # Der Volltext eines Vorgangs: lang genug, dass die Kuerzung messbar ist.
 volltext() { # $1 datei  $2 titel  $3 welle-feld
@@ -721,6 +725,15 @@ s19_archivierung() {
   [ "$imarchiv" = 0 ] && [ "$flach" = ja ] && [ "$gemeldet" = 0 ] && ok=0 || ok=1
   verdikt "s19g Slice der offenen Welle: nicht eingesammelt, nicht gemeldet" "nicht im Archiv, liegt flach, 0 Meldungen" "Archiv=$imarchiv, flach=$flach, gemeldet=$gemeldet" $ok
   rm -f "$P/done/welle-2-ausbau/slice-006-vergessen.md"
+
+  # Die schaerfere Haelfte: Marke da, Kuerzung NICHT. Genau der Fall, den der
+  # Sensor vorher durchliess — er sah die Marke, nicht den Volltext.
+  volltext "$P/done/welle-2-ausbau/slice-007-luege.md" "slice-007 — Marke ohne Kuerzung" "welle-2-ausbau"
+  printf '**Archiviert mit:** welle-2-ausbau\n' >> "$P/done/welle-2-ausbau/slice-007-luege.md"
+  out=$(dcheck "$WORK/sim/alice")
+  printf '%s' "$out" | grep -qF "slice-007-luege.md:1" && printf '%s' "$out" | grep -qF "section-forbidden" && ok=0 || ok=1
+  verdikt "s19j Marke da, aber nicht gekuerzt: section-forbidden (der Plan hat noch H2)" "section-forbidden auf slice-007" "$(echo "$out"|tail -1)" $ok
+  rm -f "$P/done/welle-2-ausbau/slice-007-luege.md"
 
   rm -rf "$WORK/sim/flach"
   git clone -q --depth 1 "file://$WORK/sim/origin.git" "$WORK/sim/flach" 2>/dev/null
