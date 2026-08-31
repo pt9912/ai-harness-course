@@ -118,6 +118,16 @@ ohnehin). Erfunden werden muss dafür nichts — der Wächter ist die
 Existenzprüfung des Links, die den zu hoch zeigenden Pfad nach dem Umzug
 meldet.
 
+**Und beide Commits gehören in denselben Push.** Zwischen ihnen ist das Repo
+kurz rot: Der Move ist getan, die Verweise zeigen noch zu hoch. Das ist
+zulässig — ein Zwischenstand in der Historie, den kein Leser als Stand
+missversteht —, aber nur, solange er nicht der **Spitze** eines Push wird. Eine
+CI, die den Push-Tip prüft, sieht genau diese Spitze; wandern beide Commits
+zusammen, ist der Tip der zweite und der Zwischenstand nie geprüft. Wer den
+Move allein pusht, macht den roten Zwischenstand zum geprüften Stand — und die
+naheliegende Reparatur, die Berichtigung in den Move-Commit zu bündeln, kostet
+genau das, wofür die Trennung da ist: den lesbaren Move-Diff.
+
 **Zwei Rot-Quellen, ein Prinzip.** Ein Verweis in die vendorte Baseline trägt
 neben der Tiefe auch deren **Version** (`.harness/baseline/<tag>/…`), und die
 bewegt sich bei jedem Baseline-Bump. Beide Male gilt dasselbe: nicht die Form

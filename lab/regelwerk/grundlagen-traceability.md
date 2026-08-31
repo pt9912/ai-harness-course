@@ -110,6 +110,12 @@ kanonischen Formen liefern `welle-results.template.md` bzw.
   `LH-*`-ID; an der Register-Paarung (Modul 6) nimmt sie teil wie jeder
   andere Eintrag.
 
+  **Beide Commits gehören in denselben Push.** Zwischen ihnen ist das Repo kurz
+  rot; das ist zulässig, solange dieser Zwischenstand nicht die **Spitze** eines
+  Push wird. Eine CI, die den Push-Tip prüft, sieht genau die Spitze — wandern
+  beide Commits zusammen, ist der Tip der zweite. Wer den Move allein pusht,
+  macht den roten Zwischenstand zum geprüften Stand.
+
 Rot bei: Regel nie geschrieben · still gelöscht · Anker vergessen —
 dieselbe Klasse wie ein halluziniertes Gate
 ([Modul 13](modul-13-quality-gates.md)).

@@ -11,6 +11,43 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 110 — 2026-08-31 · Die Trennung von Umzug und Berichtigung bekommt ihre Bedingung
+
+Ein Adopter hat eine **Kollision gemeldet statt sie aufzulösen** — und beim
+Nachmessen war die Regel nicht falsch, sondern unvollständig.
+
+Kurs-Welle 103 gab dem Adaptions-Eintrag die Gegenrichtung der Ruheort-Regel:
+*„Der `git mv` zieht die Pfad-Berichtigung nach sich, als eigener Commit nach
+dem Umzug."* Die Adaption des Adopters bündelt sie umgekehrt **in** den
+Move-Commit, mit einem konkreten Grund: Seine CI prüfe den Push-Tip, und der
+könne ein Zwischen-Commit sein; ein roter Zwischenstand sei dort nicht
+folgenlos. Er hat beide Begründungen nebeneinandergestellt, der Baseline den
+Vorrang gegeben und die Auflösung ausdrücklich offen gelassen.
+
+**Nachgemessen an seiner CI-Konfiguration:** Kein Schritt checkt je einen
+Zwischen-Commit aus. Der Checkout holt den **Tip** des Push; die zwei
+Range-Gates lesen Commit-**Botschaften** beziehungsweise BASE-Baum gegen
+HEAD-Baum — die Enden, nicht die Mitte; die übrigen Gates laufen über den
+ausgecheckten Arbeitsbaum, also wieder den Tip.
+
+Damit ist seine Sorge **zu breit formuliert, nicht falsch**: Der gefürchtete
+Fall entsteht in genau einer Lage — wenn jemand den Move **allein** pusht und
+die Berichtigung nachschiebt. Dagegen schützt seine Adaption wirksam, aber der
+Preis ist der Move-Diff, für dessen Lesbarkeit die Trennung existiert.
+
+- [`traceability.md` §Herkunfts-Anker](kurs/de/grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln):
+  **Beide Commits gehören in denselben Push.** Zwischen ihnen ist das Repo kurz
+  rot — zulässig, solange dieser Zwischenstand nicht die **Spitze** eines Push
+  wird. Wer den Move allein pusht, macht den roten Zwischenstand zum geprüften
+  Stand.
+
+Die Regel gewinnt damit ihre fehlende Bedingung, und der Adopter kann seine
+Adaption auflösen, statt ihr einen Nachfolger zu geben. Spiegel zieht mit,
+`Stand:` auf Kurs-Welle 110 — die Bedingung ist operativ und reist mit.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN.
+
 ## Welle 109 — 2026-08-31 · Die Wellen-Closure archiviert ihre Zeitdokumente
 
 Die in Welle 107 entworfene und in Welle 108 geprobte Form geht in den Kanon.
