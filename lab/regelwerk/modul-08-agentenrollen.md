@@ -42,7 +42,7 @@ dieselbe Sicht denselben Fehler übersieht.
 ### Rollen-Sequenz für eine Welle
 
 Die Sequenz oben ist **slice-skopiert**. Die Welle hat ihre eigene Prozedur —
-drei Eröffnungs- und fünf Closure-Schritte
+drei Eröffnungs- und sechs Closure-Schritte
 ([Modul 6](modul-06-roadmap.md#wellen-closure-prozedur-modul-6)). Es gilt
 dieselbe Regel: **kein Rollenwechsel ohne Artefakt.** Nur sind es **sechs**
 Übergaben, nicht neun — gezählt wie oben, ein Pfeil je Übergabe; sie bilden drei

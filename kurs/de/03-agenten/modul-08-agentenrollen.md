@@ -86,7 +86,7 @@ Artefaktkette (Modul 1).
 ## Rollen-Sequenz für eine Welle
 
 Die Sequenz oben ist **slice-skopiert**. Eine Welle liegt eine Ebene darüber
-und hat ihre eigene Prozedur — drei Eröffnungs- und fünf Closure-Schritte
+und hat ihre eigene Prozedur — drei Eröffnungs- und sechs Closure-Schritte
 ([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) §Die Wellen-Eröffnungs-Prozedur und [§Die Wellen-Closure-Prozedur](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)).
 Auch dort gilt die Regel von oben: **kein Rollenwechsel ohne Artefakt.** Nur
 sind es **sechs** Übergaben, nicht neun — gezählt wie oben, ein Pfeil je

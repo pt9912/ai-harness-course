@@ -568,7 +568,7 @@ wird nur mit Begründung, warum die Beobachtung nicht mehr auftreten kann.
 
 ## Die Wellen-Eröffnungs-Prozedur
 
-Die Closure-Seite ist unten in fünf Schritten ausbuchstabiert — die
+Die Closure-Seite ist unten in sechs Schritten ausbuchstabiert — die
 Eröffnung braucht drei, und der mittlere ist der, den Teams zuerst
 weglassen:
 
@@ -615,8 +615,8 @@ für Wissen, das schon wirkt.
 ## Die Wellen-Closure-Prozedur
 
 > **Wer führt die Schritte aus?** Die Eröffnung ist Planner-Arbeit, die Closure
-> hat fünf Übergaben in drei Zügen — Träger und Übergabe-Artefakt für **jeden**
-> der fünf Schritte stehen in
+> hat ihre Übergaben in drei Zügen — Träger und Übergabe-Artefakt für **jeden**
+> ihrer Schritte stehen in
 > [Modul 8 §Rollen-Sequenz für eine Welle](../03-agenten/modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle).
 > Dort und nicht hier, weil die sechs Rollen erst in Modul 8 eingeführt werden.
 

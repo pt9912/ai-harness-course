@@ -171,11 +171,11 @@ erreicht hat, ist in AGENTS.md, Gates und Skills verkörpert und wirkt
 dort automatisch (Modul-0-Prinzip).
 
 **Wer führt die Schritte aus?** Die Eröffnung ist Planner-Arbeit, die Closure
-hat fünf Übergaben in drei Zügen — Träger und Übergabe-Artefakt für **jeden** der
-fünf Schritte in
+hat ihre Übergaben in drei Zügen — Träger und Übergabe-Artefakt für **jeden**
+ihrer Schritte in
 [Modul 8 §Rollen-Sequenz für eine Welle](modul-08-agentenrollen.md#rollen-sequenz-für-eine-welle).
 
-**Closure — fünf Schritte.**
+**Closure — sechs Schritte.**
 
 1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,
    `make gates` und der Replay-Lauf sind grün. Das ist die *beobachtbare*
