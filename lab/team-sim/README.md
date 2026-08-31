@@ -7,8 +7,11 @@ als `alice`/`bob`, und eine **vorab notierte Erwartung als Verhalten** — laut,
 still oder Gate-Befund. Auch die stillen Ausgänge sind Erwartungen: s02/s03
 *sollen* still verlaufen, sonst hätte die Lehre die Falle falsch beschrieben.
 
-**Zwei Gegenstände, sauber getrennt.** s01–s11 proben den **gelehrten**
-Korpus. s12–s18 proben einen **Entwurf**: die Verzeichnisform des
+**Drei Gegenstände, sauber getrennt.** s01–s11 proben den **gelehrten**
+Korpus. **s19 probt eine Operation und ihren Sensor** — die ersten Szenarien
+hier, die *keine* Nebenläufigkeit prüfen; die Topologie bleibt trotzdem, sie
+kostet nichts und hält die Bauform gleich (Entwurf:
+`docs/zeitdokument-archiv.md`). s12–s18 proben einen **Entwurf**: die Verzeichnisform des
 Beobachtungs-Registers aus `docs/steering-loop-team.md` (Diskussionsstand,
 nicht normativ) gegen die sieben Fälle, die dort unter §Nächster belastbarer
 Schritt stehen. Der Seed trägt weiter die flache `observations.md` aus
@@ -41,7 +44,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 44/44 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -85,6 +88,14 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s17 | dasselbe Phänomen unter zwei Slugs | **still** | ✓ die bewusst menschliche Grenze, gemessen statt behauptet |
 | s18a | Alias-Gruppe: Beleg unterm Alias, Slice-Kennung doppelt, eine Invalidierung | **still** | ✓ alle Eingaben der Ableitung liegen vor, niemand liest sie |
 | s18b | Alias-Zyklus A → B → A | **still** | ✓ die Kette hat keinen Leser |
+| s19a | Archivierungs-Lauf über eine geschlossene Welle | 6 Volltexte im Zip, 4 Stubs | ✓ Reviews bekommen keinen Stub — sie haben keine eigene Identität |
+| s19b | Trefferzeilen am selben Bestand, vorher/nachher | fallen | ✓ 17 → 5 an der Fixture |
+| s19c | Slice **ohne** Wellen-Zugehörigkeit | `Welle:` bleibt `ohne Welle`, `Archiviert mit:` nennt die einsammelnde | ✓ zwei Tatsachen, zwei Felder |
+| s19d | beide Verweis-Formen nach dem Umzug | 0 Befunde | ✓ — **erst nach einer Reparatur, siehe unten** |
+| s19e | Gegenprobe: ohne Verweis-Nachzug | **`target-missing`** | ✓ die Zusage ist belegt, nicht behauptet |
+| s19f | nicht gekürzter Slice im Wellen-Verzeichnis | **`section-pattern-missing`** | ✓ der Deckungs-Sensor beißt, mit `structure` allein |
+| s19g | Slice der **offenen** Welle, flach in `done/` | **still** | ✓ kein Falsch-Positiv — der Grund für das Wellen-Verzeichnis |
+| s19h | Rückgriff im `--depth 1`-Klon | Archiv liefert, `git show` scheitert | ✓ die Grenze des Entwurfs, gemessen |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte
@@ -149,6 +160,16 @@ nicht falsch, sie war nicht eingelöst). Seit dem Pin-Bump messen s15b und s16c
 den Fix — beide Modi antworten gleich. Die schärfste Folge misst s16c: Weil
 der Dateiname eines Belegs **die** Slice-Kennung ist, hätte ein reiner Rename
 den Zähler richtig gelassen und den Beleg falsch gemacht; heute meldet es.
+
+**Befund aus s19 — der Verweis-Nachzug braucht zwei Formen, nicht eine.** Der
+erste Lauf war rot: Der Nachzug traf nur Verweise mit `done/`-Präfix, wie das
+Register sie schreibt. Die **Ergebnisnotiz** schreibt aber
+geschwister-relativ — sie liegt selbst in `done/` und **bleibt** dort, während
+ihre Slices ins Wellen-Verzeichnis wandern. Das ist kein Sonderfall, sondern
+der garantierte Fall dieses Entwurfs, und es ist dieselbe Blindstelle, die der
+Skriptkopf von `slice-mv.sh` im Nachbar-Repo für sich benennt. Mit beiden
+Formen ist s19d grün; s19e zeigt per Gegenprobe, dass die Zusage ohne Nachzug
+wirklich bricht.
 
 **Befund aus s12–s18 — was die Form ohne Werkzeug gewinnt, und was sie ihm
 schuldet.** Drei der sieben Fälle entscheidet **git** allein: getrennte

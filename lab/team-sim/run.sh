@@ -561,6 +561,134 @@ s18_alias_und_invalidierung() {
   verdikt "s18b Alias-Zyklus A -> B -> A: STILL" "0 Befunde (kein Sensor folgt der Kette)" "$(echo "$out"|tail -1)" $ok
 }
 
+# ---------------------------------------------------------------------------
+# s19 — Zeitdokumente archivieren (ENTWURF, docs/zeitdokument-archiv.md).
+# ERSTE Szenarien dieses Harness, die KEINE Nebenlaeufigkeit pruefen: Gegenstand
+# ist eine Operation und ihr Sensor. Die Topologie bleibt trotzdem die des
+# Harness — sie kostet nichts und haelt die Bauform gleich.
+#
+# Zielform nach Probe 2 (die den Entwurf geaendert hat): Der Geltungsbereich
+# steht im PFAD, weil require-pattern ihn nicht ausdruecken kann.
+#
+#   done/welle-<NN>/archiv.zip + die Stubs der Welle
+#   done/welle-<NN>-results.md   bleibt vollstaendig, bleibt flach
+#   done/slice-<NNN>-*.md        Slices der noch OFFENEN Welle, unberuehrt
+ARCHIVSENSOR='structure:
+  - files: "docs/plan/planning/done/welle-*/slice-*.md"
+    section-pattern: "^# slice-"
+    require-pattern: "\\*\\*Archiviert mit:\\*\\*"
+'
+# Der Volltext eines Vorgangs: lang genug, dass die Kuerzung messbar ist.
+volltext() { # $1 datei  $2 titel  $3 welle-feld
+  printf '# %s\n\n**Welle:** %s\n\n## 7. Lerneintrag\n\nBeobachtung: die Zusage traegt den Sensor nicht, das Gate blieb still.\nDas Regelwerk nennt den Anker, der Beleg fehlt.\n\n## 8. Abnahme\n\nDoD erfuellt, Gate gruen, Zusage belegt.\n' "$2" "$3" > "$1"
+}
+stub() { # $1 datei  $2 titel  $3 welle-feld  $4 archiviert-mit  $5 innen-pfad
+  printf '# %s\n\n> **ARCHIVIERT** — Volltext:\n> `unzip -p done/%s/archiv.zip %s`\n\n**Welle:** %s\n**Archiviert mit:** %s · **Geschlossen:** 2026-08-31\n**Hervorgegangen:** BEO-001\n' \
+    "$2" "$4" "$5" "$3" "$4" > "$1"
+}
+# Die Operation selbst: zippen, kuerzen, Verweise nachziehen. Sie gehoert laut
+# Entwurf in ein Werkzeug — hier ist sie die Probe dieses Werkzeugs.
+archiviere() { # $1 clone  $2 welle  $3.. dateien (relativ zu docs/plan/planning)
+  local w="$1" welle="$2"; shift 2
+  local P="$w/docs/plan/planning" d="$w/docs/plan/planning/done/$welle"
+  mkdir -p "$d"
+  ( cd "$w" && zip -qrX "docs/plan/planning/done/$welle/archiv.zip" "$@" ) || return 1
+  local f
+  for f in "$@"; do
+    local base; base="$(basename "$f")"
+    case "$base" in
+      slice-*) local wf="$welle"; grep -q '^\*\*Welle:\*\* ohne Welle' "$w/$f" && wf="ohne Welle"
+               stub "$d/$base" "${base%.md}" "$wf" "$welle" "$f" ;;
+      welle-*) stub "$d/$base" "${base%.md}" "$welle" "$welle" "$f" ;;
+      *)       ;;   # Reviews bekommen KEINEN Stub — sie haben keine eigene Identitaet
+    esac
+    rm -f "$w/$f"
+  done
+  # Verweis-Nachzug — und er braucht ZWEI Formen, nicht eine:
+  #  (a) mit done/-Praefix, wie das Register sie schreibt,
+  #  (b) geschwister-relativ, wie die Ergebnisnotiz sie schreibt, die selbst in
+  #      done/ liegt und dort BLEIBT, waehrend ihre Slices wegwandern.
+  # Form (b) ist der garantierte Fall dieses Entwurfs, nicht der Sonderfall.
+  ( cd "$w" && grep -rl "done/slice-" --include=*.md . 2>/dev/null | while read -r t; do
+      sed -i "s|done/\(slice-[0-9A-Za-z._-]*\.md\)|done/$welle/\1|g" "$t"; done ) || true
+  local b2
+  for f in "$@"; do
+    b2="$(basename "$f")"
+    case "$b2" in slice-*|welle-*) ;; *) continue;; esac
+    ( cd "$w/docs/plan/planning/done" && grep -rl "]($b2)" --include=*.md . 2>/dev/null | while read -r t; do
+        sed -i "s|]($b2)|]($welle/$b2)|g" "$t"; done ) || true
+  done
+}
+
+s19_archivierung() {
+  topo
+  cd "$WORK/sim/alice"
+  P=docs/plan/planning
+  mkdir -p docs/reviews
+  volltext "$P/done/slice-003-cache.md"   "slice-003 — Cache"        "welle-2-ausbau"
+  volltext "$P/done/slice-004-fixture.md" "slice-004 — Fixture"      "welle-2-ausbau"
+  volltext "$P/done/slice-005-wartung.md" "slice-005 — Wartung"      "ohne Welle"
+  volltext "$P/done/slice-051-laufend.md" "slice-051 — Laufend"      "welle-3-offen"
+  volltext "$P/done/welle-2-ausbau.md"    "welle-2-ausbau — Ausbau"  "welle-2-ausbau"
+  printf '# Review slice-003\n\nHIGH-1: die Zusage traegt den Sensor nicht.\n' > docs/reviews/2026-08-30-slice-003-review.md
+  printf '# Review slice-004\n\nMEDIUM-2: das Gate blieb still.\n' > docs/reviews/2026-08-30-slice-004-review.md
+  # Zwei ECHTE Verweis-Formen auf die Slices: aus dem Register (mit done/-Praefix)
+  # und aus der Ergebnisnotiz, die selbst in done/ liegt (geschwister-relativ).
+  printf '# Welle 2 — Ergebnisnotiz\n\nGeliefert: Cache und Fixture.\nSlices: [slice-003](slice-003-cache.md), [slice-004](slice-004-fixture.md).\n' > "$P/done/welle-2-results.md"
+  printf '| BEO-009 | Zusage ohne Sensor | Kern | 1× | [slice-003](done/slice-003-cache.md) | offen |\n' >> "$P/observations.md"
+  printf '%s' "$ARCHIVSENSOR" >> .d-check.yml
+  sed -i 's/^modules: \[links, anchors, planning\]$/modules: [links, anchors, planning, structure]/' .d-check.yml
+  schritt git add -A && schritt git commit -qm "welle-2 geschlossen, Volltexte liegen" || return 1
+  base=$(git rev-parse HEAD)
+  vorher=$(grep -rc "Zusage\|Gate\|Anker" $P/done docs/reviews 2>/dev/null | awk -F: '{s+=$2} END{print s+0}')
+
+  archiviere "$WORK/sim/alice" welle-2-ausbau \
+    docs/plan/planning/done/slice-003-cache.md \
+    docs/plan/planning/done/slice-004-fixture.md \
+    docs/plan/planning/done/slice-005-wartung.md \
+    docs/plan/planning/done/welle-2-ausbau.md \
+    docs/reviews/2026-08-30-slice-003-review.md \
+    docs/reviews/2026-08-30-slice-004-review.md || { echo "  KAPUTT ($CUR): archiviere fehlgeschlagen"; return 1; }
+  schritt git add -A && schritt git commit -qm "welle-2 archiviert" && schritt git push -q origin main || return 1
+
+  imzip=$(unzip -Z1 "$P/done/welle-2-ausbau/archiv.zip" | grep -c '\.md$')
+  stubs=$(ls "$P/done/welle-2-ausbau"/*.md 2>/dev/null | wc -l)
+  [ "$imzip" = 6 ] && [ "$stubs" = 4 ] && ok=0 || ok=1
+  verdikt "s19a Archivierungs-Lauf: 6 Volltexte im Zip, 4 Stubs (Reviews ohne)" "Zip 6, Stubs 4" "Zip $imzip, Stubs $stubs" $ok
+
+  nachher=$(grep -rc "Zusage\|Gate\|Anker" $P/done docs/reviews 2>/dev/null | awk -F: '{s+=$2} END{print s+0}')
+  [ "$vorher" -gt 0 ] && [ "$nachher" -lt "$vorher" ] && ok=0 || ok=1
+  verdikt "s19b Trefferzeilen fallen (Volltext -> Stub)" "nachher < vorher, vorher > 0" "vorher=$vorher, nachher=$nachher" $ok
+
+  wf=$(grep -m1 '^\*\*Welle:\*\*' "$P/done/welle-2-ausbau/slice-005-wartung.md" | sed 's/\*\*//g')
+  am=$(grep -m1 -o 'Archiviert mit:\*\* [a-z0-9-]*' "$P/done/welle-2-ausbau/slice-005-wartung.md" | sed 's/\*\*//')
+  [ "$wf" = "Welle: ohne Welle" ] && [ "$am" = "Archiviert mit: welle-2-ausbau" ] && ok=0 || ok=1
+  verdikt "s19c wellenloser Slice: Welle bleibt 'ohne Welle', Archiviert mit nennt die einsammelnde" "beide Felder getrennt" "$wf / $am" $ok
+
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s19d beide Verweis-Formen loesen nach dem Umzug auf" "0 Befunde" "$(echo "$out"|tail -1)" $ok
+
+  sed -i 's|(welle-2-ausbau/slice-003-cache.md)|(slice-003-cache.md)|' "$P/done/welle-2-results.md"
+  out=$(dcheck "$WORK/sim/alice"); befund "$out" "slice-003-cache.md" "target-missing" && ok=0 || ok=1
+  verdikt "s19e Gegenprobe: ohne Verweis-Nachzug meldet links target-missing" "target-missing auf dem alten Pfad" "$(echo "$out"|tail -1)" $ok
+  sed -i 's|(slice-003-cache.md)|(welle-2-ausbau/slice-003-cache.md)|' "$P/done/welle-2-results.md"
+
+  volltext "$P/done/welle-2-ausbau/slice-006-vergessen.md" "slice-006 — Vergessen" "welle-2-ausbau"
+  out=$(dcheck "$WORK/sim/alice")
+  printf '%s' "$out" | grep -qF "slice-006-vergessen.md:1" && printf '%s' "$out" | grep -qF "section-pattern-missing" && ok=0 || ok=1
+  verdikt "s19f Deckungs-Sensor: nicht gekuerzter Slice im Wellen-Verzeichnis wird gemeldet" "section-pattern-missing auf slice-006" "$(echo "$out"|tail -1)" $ok
+  printf '%s' "$out" | grep -qF "slice-051-laufend.md" && ok=1 || ok=0
+  verdikt "s19g Slice der offenen Welle bleibt still (kein Falsch-Positiv)" "keine Meldung zu slice-051" "$(printf '%s' "$out" | grep -cF 'slice-051') Treffer" $ok
+  rm -f "$P/done/welle-2-ausbau/slice-006-vergessen.md"
+
+  rm -rf "$WORK/sim/flach"
+  git clone -q --depth 1 "file://$WORK/sim/origin.git" "$WORK/sim/flach" 2>/dev/null
+  aus=$(cd "$WORK/sim/flach" && unzip -p "$P/done/welle-2-ausbau/archiv.zip" docs/plan/planning/done/slice-003-cache.md 2>/dev/null | head -1)
+  hist=$(cd "$WORK/sim/flach" && git show "$base:docs/plan/planning/done/slice-003-cache.md" 2>&1 | head -1)
+  echo "$aus" | grep -q "slice-003" && echo "$hist" | grep -qi "objektname\|object name\|fatal" && ok=0 || ok=1
+  verdikt "s19h flacher Klon: Archiv liefert den Volltext, die git-Historie nicht" "unzip ok, git show scheitert" "unzip='${aus:0:22}' git='${hist:0:34}'" $ok
+}
+
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -582,6 +710,7 @@ lauf s15 s15_pfadidentitaet
 lauf s16 s16_beleg_immutabel
 lauf s17 s17_zwei_slugs_still
 lauf s18 s18_alias_und_invalidierung
+lauf s19 s19_archivierung
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

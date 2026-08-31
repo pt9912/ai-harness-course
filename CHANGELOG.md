@@ -11,6 +11,51 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 108 — 2026-08-31 · Die Archiv-Form, geprobt — und zweimal korrigiert
+
+Welle 107 hielt den Entwurf fest und nannte sechs Proben. Sie sind gefahren
+(`lab/team-sim` s19, acht Verdikte, Gesamtlauf 44/44 · 0 KAPUTT) — und **zwei
+davon haben den Entwurf geändert, bevor eine Zeile Kanon geschrieben wurde.**
+Genau dafür ist die Reihenfolge *erst proben, dann verkörpern* da.
+
+**Der Sensor erzwingt ein Wellen-Verzeichnis.** Die Deckungs-Prüfung sollte mit
+`structure` und `require-pattern` baubar sein. Gemessen ist sie das auch — aber
+`require-pattern` gilt **unbedingt** über seinen Glob. Über dem flachen
+`done/slice-*.md` meldete sie den vergessenen Slice richtig **und den zur noch
+offenen Welle gehörenden falsch mit**: ein Sensor, der bei jeder korrekt
+geschlossenen Arbeit rot wird. Über `done/welle-<NN>/slice-*.md` meldet dieselbe
+Regel nur den vergessenen (s19f), der offene bleibt still (s19g). **Der
+Geltungsbereich steht seither im Pfad, weil die Bedingung ihn nicht ausdrücken
+kann** — und die Zielform ist ein Wellen-*Verzeichnis*, nicht nur ein
+Wellen-*Zip*.
+
+**Der Verweis-Nachzug braucht zwei Formen.** Der erste Lauf war rot: Der Nachzug
+traf nur Verweise mit `done/`-Präfix, wie das Register sie schreibt. Die
+**Ergebnisnotiz** schreibt geschwister-relativ — sie liegt selbst in `done/`
+und *bleibt* dort, während ihre Slices umziehen. Das ist der garantierte Fall
+dieser Regel, nicht ihr Randfall, und dieselbe Blindstelle, die `slice-mv.sh`
+im Nachbar-Repo für sich benennt. Mit beiden Formen ist s19d grün, und s19e
+belegt per Gegenprobe, dass die Zusage ohne Nachzug wirklich bricht.
+
+Die übrigen vier Proben tragen: 6 Volltexte im Zip gegen 4 Stubs — Reviews
+bekommen keinen, sie haben keine eigene Identität (s19a); die Trefferzahl fällt
+am selben Bestand von 17 auf 5 (s19b); der wellenlose Slice behält `ohne Welle`
+und nennt die einsammelnde Welle im zweiten Feld (s19c); und im `--depth 1`-Klon
+liefert das Archiv den Volltext, während `git show` scheitert (s19h).
+
+`lab/team-sim` bekommt damit die ersten Szenarien, die **keine**
+Nebenläufigkeit prüfen — Gegenstand ist eine Operation und ihr Sensor. Die
+Topologie bleibt trotzdem; sie kostet nichts und hält die Bauform gleich. Das
+steht im README so.
+
+Kein Gate daraus: `lab/team-sim` läuft auf Anlass. Keine Änderung an `kurs/de`,
+`lab/regelwerk`, Templates oder Beispiel; das Bundle ist unberührt. Offen
+bleiben das Repo ganz ohne Wellen und die Vollständigkeit des Archivs, die nur
+der Archivierungs-Commit bezeugen kann.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN.
+
 ## Welle 107 — 2026-08-31 · Zeitdokumente bekommen einen Ausgang aus dem Arbeitsbaum
 
 Nicht der Platz ist das Problem, sondern das **Rauschen im Agentenlauf**: Ein

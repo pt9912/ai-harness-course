@@ -281,26 +281,51 @@ angefasst.
   offenen Welle plus eine Handvoll Wellen-Verzeichnisse statt aller
   geschlossenen Slices.
 
-## Nächster belastbarer Schritt
+## Die Proben, gefahren
 
-Vor einer Regeländerung ist zu proben:
+Alle sechs sind am 2026-08-31 in [`lab/team-sim`](../lab/team-sim/README.md)
+als s19 gelaufen (d-check `v0.71.1`, 8 Verdikte, Gesamtlauf 44/44 · 0 KAPUTT):
 
-1. ein Archivierungs-Lauf über eine echte geschlossene Welle, mit Zählung
-   *gekürzte Dateien = Einträge im Zip*,
-2. ~~der Deckungs-Sensor gegen einen absichtlich nicht gekürzten Slice~~ —
-   **gefahren, 2026-08-31.** Ergebnis in §Der Sensor: Die Mitgliedschafts-Hälfte
-   ist mit `structure` baubar, **aber nur mit dem Wellen-Verzeichnis**; die
-   flache Fassung meldete den laufenden Slice falsch mit. Die Zielform hat sich
-   daraufhin geändert. Die Abzähl-Hälfte ist nicht baubar.
-3. ein Rückgriff aus dem Archiv in einem `--depth 1`-Klon,
-4. eine Messung der Trefferzahl vorher/nachher am realen Bestand,
-5. der Nachweis, dass die eingehenden Verweise auf Stubs weiterhin auflösen
-   (`links`, `codepaths`),
-6. ein Slice **ohne** Wellen-Zugehörigkeit in einem Repo **mit** Wellen: Er
-   landet im Archiv der Welle, deren Closure ihn eingesammelt hat; `Welle:`
-   bleibt `ohne Welle`, `Archiviert mit:` nennt die einsammelnde Welle, und
-   die Abzähl-Hälfte des Sensors greift trotzdem.
+| Probe | Szenario | Ergebnis |
+|---|---|---|
+| Archivierungs-Lauf mit Zählung | s19a | 6 Volltexte im Zip, 4 Stubs — Reviews bekommen keinen |
+| Deckungs-Sensor gegen einen nicht gekürzten Slice | s19f | `section-pattern-missing`, mit `structure` allein |
+| Rückgriff im `--depth 1`-Klon | s19h | Archiv liefert, `git show` scheitert |
+| Trefferzahl vorher/nachher | s19b | 17 → 5 an der Fixture |
+| Verweise lösen nach dem Umzug auf | s19d/e | grün — **nach einer Reparatur**, mit Gegenprobe |
+| Slice ohne Wellen-Zugehörigkeit | s19c | `Welle:` bleibt `ohne Welle`, `Archiviert mit:` nennt die einsammelnde |
 
-Erst danach entscheidet sich, ob die Form in den Kanon geht. Sie berührt
-Modul 5 (Lifecycle), Modul 6 (Wellen-Closure) und Modul 10 (Review-Report als
-Lauf-Beleg); Spiegel, Vorlagen und Beispiel folgen, nicht umgekehrt.
+Dazu eine Gegenkontrolle, die im Entwurf nicht stand und die eigentliche
+Rechtfertigung des Wellen-Verzeichnisses ist: **s19g** — der Slice der noch
+**offenen** Welle liegt flach in `done/` und bleibt still. Ohne ihn wäre „der
+Sensor beißt" belegt, „er beißt nur die Richtigen" aber nicht.
+
+### Was die Proben geändert haben
+
+**Der Verweis-Nachzug braucht zwei Formen, nicht eine.** Der erste Lauf war
+rot. Der Nachzug traf nur Verweise mit `done/`-Präfix, wie das Register sie
+schreibt. Die **Ergebnisnotiz** schreibt aber geschwister-relativ — sie liegt
+selbst in `done/` und **bleibt** dort, während ihre Slices ins
+Wellen-Verzeichnis wandern. Das ist kein Sonderfall, sondern der garantierte
+Fall dieses Entwurfs: Die Notiz bleibt per Regel flach, ihre Slices ziehen per
+Regel um. Dieselbe Blindstelle benennt der Skriptkopf von `slice-mv.sh` im
+Nachbar-Repo für sich selbst.
+
+Für die Regel heißt das: Die Archivierungs-Operation zieht **beide** Formen
+nach, und die Ergebnisnotiz ist ihr Pflichtfall — nicht ihr Randfall.
+
+## Was noch offen ist
+
+Zwei Dinge, beide benannt statt überspielt:
+
+1. **Das Repo ganz ohne Wellen.** Dort fehlt der Sammelpunkt; eine Schwelle
+   bleibt der Fallback. Unverändert offen.
+2. **Die Vollständigkeit des Archivs** — jede gekürzte Datei liegt als
+   Volltext darin — bezeugt nur der Archivierungs-Commit. s19a misst die
+   Zählung *gekürzte Dateien = Einträge im Zip* an einem Lauf; ein Gate danach
+   kann sie nicht wiederholen, weil das Zip opak ist.
+
+Damit ist die Form geprobt. Ob sie in den Kanon geht, ist die nächste
+Entscheidung; sie berührt Modul 5 (Lifecycle), Modul 6 (Wellen-Closure) und
+Modul 10 (Review-Report als Lauf-Beleg) — Spiegel, Vorlagen und Beispiel
+folgen, nicht umgekehrt.
