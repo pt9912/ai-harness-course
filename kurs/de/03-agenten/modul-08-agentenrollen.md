@@ -119,7 +119,7 @@ sequenceDiagram
 
 Die Schritt-Nummern sind die von
 [Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur) —
-alle fünf, damit der Verweis dort einlösbar ist. Schritt 3 hat drei Teile.
+alle sechs, damit der Verweis dort einlösbar ist. Schritt 3 hat drei Teile.
 
 | Closure-Schritt | Träger | Übergabe-Artefakt |
 |---|---|---|
@@ -128,11 +128,12 @@ alle fünf, damit der Verweis dort einlösbar ist. Schritt 3 hat drei Teile.
 | **3a** — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
 | **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel oder Folge-Slice |
 | **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<NN>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
-| **4** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit — der Audit sieht einen Punkt, kein verstreutes Verschwinden |
-| **5** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, ihr Zeiger verlässt *Offene Wellen* — befördert wird niemand; ggf. Eintrag in *Historische Trigger-Verschiebungen* |
+| **4** — Zeitdokumente archivieren | **Planner** | `done/<welle-id>/archiv.zip` plus die gekürzten Stubs; die Ergebnisnotiz bleibt vollständig und flach |
+| **5** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit — der Audit sieht einen Punkt, kein verstreutes Verschwinden |
+| **6** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, ihr Zeiger verlässt *Offene Wellen* — befördert wird niemand; ggf. Eintrag in *Historische Trigger-Verschiebungen* |
 
 Nur Schritt 1, 2 und 3b tragen einen Rollenwechsel — je einen Zug aus Anfrage
-und Antwort; 3a, 3c, 4 und 5 laufen im Planner-Kontext. Die drei Paarungen in 3c sind eine **Deckungs**-Prüfung, deren
+und Antwort; 3a, 3c, 4, 5 und 6 laufen im Planner-Kontext. Die drei Paarungen in 3c sind eine **Deckungs**-Prüfung, deren
 Werkzeug der Kurs offen lässt
 ([Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register): *„Welches
 Werkzeug, ist Repo-Entscheidung"*) — das Urteil fiel schon beim Schreiben.

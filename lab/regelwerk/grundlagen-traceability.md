@@ -44,6 +44,11 @@ wenn sie ohne Welle verkörpert wurde, den Slice: `seit welle-<NN>` bzw.
   ist der Slice die einzige auflösbare Herkunft (`seit slice-<NNN>`, löst über
   `done/slice-<NNN>-<kurzer-titel>.md` §7 auf — die Nummer ist eindeutig, der
   Titelrest gehört zum Dateinamen; maschinell also `done/slice-<NNN>-*.md`).
+  **Nach dem Archivieren ist es ein Hop mehr** ([Modul 6](modul-06-roadmap.md),
+  Schritt 4): An der Stelle des Slice liegt ein Stub unter `done/<welle-id>/`,
+  §7 steht im Archiv. Der Anker bleibt gültig, die Auflösung ist zweistufig —
+  erst der Stub, dann sein Archiv-Zeiger; die `Hervorgegangen:`-Zeile des Stubs
+  nennt die Kennungen, die aus dem Slice hervorgingen.
 - **Ab Einführung, kein Nachrüsten.** Bestehende Regeln haben keinen
   rekonstruierbaren Ursprung mehr; `seit unbekannt` wäre eine
   [Harness-Lüge](grundlagen-begriffe.md#kernbegriffe). Der leere Zustand *ist*

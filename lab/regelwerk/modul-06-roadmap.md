@@ -141,7 +141,7 @@ Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
 Modul 5 gibt den *Slice*-Zyklus als Zustandsmaschine vor (`open/` →
 `next/` → `in-progress/` → `done/`). Die *Welle* liegt eine Ebene
 darüber: Sie schließt nicht durch einen einzelnen Slice-Übergang, sondern
-durch einen geordneten Ablauf, der alle ihre Slices bündelt. Fünf
+durch einen geordneten Ablauf, der alle ihre Slices bündelt. Sechs
 Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 
 **Eröffnung — drei Schritte.** (1) Welle-Ziel, **Out-of-Scope** und
@@ -242,9 +242,13 @@ ihrer Schritte in
    Die **Ergebnisnotiz** bleibt vollständig und flach. Slice-Dateien und
    Welle-Plan bleiben als **gekürzter Stub** im Wellen-Verzeichnis:
    Überschrift, Archiv-Zeiger, Zustand, und die Kennungen, die den Vorgang
-   überlebt haben. Review-Reports bekommen keinen Stub; sie haben keine
+   überlebt haben Der Stub des **Welle-Plans**
+   trägt statt der Kennungen den Zeiger auf seine Ergebnisnotiz und die Zahl
+   der archivierten Vorgänge — die Zahl, gegen die sich die Vollständigkeit
+   des Archivs abzählen lässt. Review-Reports bekommen keinen Stub; sie haben keine
    Identität jenseits ihres Slice. Ziel-Form:
-   [`../templates/docs/plan/planning/archiv-stub.template.md`](../templates/docs/plan/planning/archiv-stub.template.md).
+   [`archiv-stub-slice.template.md`](../templates/docs/plan/planning/archiv-stub-slice.template.md)
+   und [`archiv-stub-welle.template.md`](../templates/docs/plan/planning/archiv-stub-welle.template.md).
 
    **Eingesammelt wird nach der Welle, nicht nach dem Verzeichnis:** die
    Slices, deren `Welle:` diese Welle nennt, **und** die wellenlosen, die seit
@@ -259,9 +263,20 @@ ihrer Schritte in
    schlossen, bleiben, wie sie sind.
 
    **Urteilsfrei** ist die **Form** des Stubs: dass er den Archiv-Zeiger trägt
-   und die Abschnitte des vollen Plans **nicht** mehr. **Grenze:** Geprüft ist
-   die Form, nicht die Länge; ob das Archiv vollständig ist, bezeugt nur der
-   Archivierungs-Commit.
+   und die Abschnitte des vollen Plans **nicht** mehr. Zwei Bedingungen, kein
+   Urteil — **die zweite ist die wichtigere**, denn ein Stub, der nur den
+   Zeiger trägt und den Text behält, wäre die Archivierung, die es nicht gab.
+
+   **Drei Grenzen:** Geprüft ist die Form, nicht die Länge. Ob das Archiv
+   vollständig ist, bezeugt nur der Archivierungs-Commit — deshalb gehört die
+   Operation in ein Werkzeug und nicht in Handarbeit. Und in einem Repo **ohne**
+   Wellen-Betrieb fehlt der Auslöser ganz; die Frage bleibt offen.
+
+   **Vor der ersten Archivierung ist der Geltungsbereich der vorhandenen
+   Sensoren zu prüfen.** Ein Sensor, der auf `done/*.md` keilt, sieht die
+   archivierten Stubs im Unterverzeichnis nicht mehr und bleibt grün, ohne
+   noch etwas zu prüfen. Wer archiviert, zieht den Geltungsbereich mit — oder
+   benennt, dass die Zusage für Stubs nicht mehr gilt.
 
 5. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die

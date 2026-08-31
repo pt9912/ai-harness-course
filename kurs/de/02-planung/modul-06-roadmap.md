@@ -623,7 +623,7 @@ für Wissen, das schon wirkt.
 Modul 5 gibt den *Slice*-Zyklus als Zustandsmaschine vor (`open/` →
 `next/` → `in-progress/` → `done/`). Die *Welle* liegt eine Ebene
 darüber: Sie schließt nicht durch einen einzelnen Slice-Übergang, sondern
-durch einen geordneten Ablauf, der alle ihre Slices bündelt. Fünf
+durch einen geordneten Ablauf, der alle ihre Slices bündelt. Sechs
 Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 
 1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,
@@ -729,16 +729,22 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    vollständig und flach — sie ist die Bedeutung, das Archiv nur die
    Koordinate. Slice-Dateien und Welle-Plan bleiben als **gekürzter Stub** im
    Wellen-Verzeichnis: Überschrift, Archiv-Zeiger, Zustand, und die
-   Kennungen, die den Vorgang überlebt haben. Review-Reports bekommen keinen
+   Kennungen, die den Vorgang überlebt haben Der Stub des **Welle-Plans**
+   trägt statt der Kennungen den Zeiger auf seine Ergebnisnotiz und die Zahl
+   der archivierten Vorgänge — die Zahl, gegen die sich die Vollständigkeit
+   des Archivs abzählen lässt. Review-Reports bekommen keinen
    Stub; sie haben keine Identität jenseits ihres Slice und sind im Archiv
    unter ihm zu finden. Ziel-Form:
-   [`/lab/templates/docs/plan/planning/archiv-stub.template.md`](../../../lab/templates/docs/plan/planning/archiv-stub.template.md).
+   [`archiv-stub-slice.template.md`](../../../lab/templates/docs/plan/planning/archiv-stub-slice.template.md)
+   und [`archiv-stub-welle.template.md`](../../../lab/templates/docs/plan/planning/archiv-stub-welle.template.md).
 
    **Eingesammelt wird nach der Welle, nicht nach dem Verzeichnis:** die
    Slices, deren `Welle:` diese Welle nennt, **und** die wellenlosen, die
-   seit der letzten Closure geschlossen wurden — dieselbe Menge, die der
-   Lese-Schritt ohnehin liest (§Wann Arbeit eine Welle braucht). Slices einer
-   noch **offenen** Welle bleiben liegen. Diese Auswahl gehört in die
+   seit der letzten Closure geschlossen wurden — dieselbe Menge, die die
+   Welle-Closure ohnehin sichtet (§Wann Arbeit eine Welle braucht: sie *liest
+   und prüft alles, was seit der letzten Welle in `done/` gelandet ist, auch
+   Slices ohne Wellen-Zugehörigkeit*). Slices einer noch **offenen** Welle
+   bleiben liegen. Diese Auswahl gehört in die
    Operation, nicht in ihren Aufrufer: Wer ihr die Liste vorgibt, nimmt ihr
    die Entscheidung ab, an der sie scheitern könnte.
 
@@ -760,10 +766,21 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    er den Archiv-Zeiger trägt und die Abschnitte des vollen Plans *nicht*
    mehr. Zwei Bedingungen, kein Urteil — die zweite ist die wichtigere, denn
    ein Stub, der nur den Zeiger trägt und den Text behält, wäre die
-   Archivierung, die es nicht gab. **Grenze:** Geprüft ist die Form, nicht
-   die Länge; und ob das Archiv *vollständig* ist, bezeugt nur der
-   Archivierungs-Commit — danach ist es für jedes Gate opak. Deshalb gehört
-   die Operation in ein Werkzeug und nicht in Handarbeit.
+   Archivierung, die es nicht gab. **Drei Grenzen, benannt statt überspielt.** Geprüft ist die Form, nicht die
+   Länge. Ob das Archiv *vollständig* ist, bezeugt nur der
+   Archivierungs-Commit — danach ist es für jedes Gate opak; deshalb gehört
+   die Operation in ein Werkzeug und nicht in Handarbeit. Und in einem Repo
+   **ohne** Wellen-Betrieb fehlt der Auslöser ganz: Dort gibt es keine
+   Closure, an der das Archivieren hängen könnte, und die Frage bleibt offen.
+
+   **Vor der ersten Archivierung ist der Geltungsbereich der vorhandenen
+   Sensoren zu prüfen.** Ein Sensor, der heute auf `done/*.md` keilt — etwa
+   eine Closure-Notiz-Pflicht —, sieht die archivierten Stubs im
+   Unterverzeichnis nicht mehr und bleibt grün, ohne noch etwas zu prüfen.
+   Das ist dieselbe Bauform wie ein halluziniertes Gate, nur von der anderen
+   Seite: Die Zusage bleibt stehen, ihr Prüfbereich schrumpft. Wer archiviert,
+   zieht den Geltungsbereich mit — oder benennt, dass die Zusage für Stubs
+   nicht mehr gilt.
 
 5. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die

@@ -52,7 +52,7 @@ dieselbe Regel: **kein Rollenwechsel ohne Artefakt.** Nur sind es **sechs**
 Kontext. Es gibt keine Eröffnungs-Sequenz, weil es keine Übergabe gibt; wer
 hier eine zeichnet, erfindet einen Rollenwechsel.
 
-Die Schritt-Nummern sind die der Closure-Prozedur, alle fünf; Schritt 3 hat
+Die Schritt-Nummern sind die der Closure-Prozedur, alle sechs; Schritt 3 hat
 drei Teile.
 
 | Closure-Schritt | Träger | Übergabe-Artefakt |
@@ -62,10 +62,11 @@ drei Teile.
 | **3a** — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
 | **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel (Hard Rule · Gate · Skill · `MR`) oder Folge-Slice |
 | **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<NN>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
-| **4** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit statt eines verstreuten Verschwindens |
-| **5** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, ihr Zeiger verlässt *Offene Wellen* — befördert wird niemand; ggf. Drift-Eintrag |
+| **4** — Zeitdokumente archivieren | **Planner** | `done/<welle-id>/archiv.zip` plus die gekürzten Stubs; die Ergebnisnotiz bleibt vollständig und flach |
+| **5** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit statt eines verstreuten Verschwindens |
+| **6** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, ihr Zeiger verlässt *Offene Wellen* — befördert wird niemand; ggf. Drift-Eintrag |
 
-Nur 1, 2 und 3b tragen einen Rollenwechsel; 3a, 3c, 4 und 5 laufen im
+Nur 1, 2 und 3b tragen einen Rollenwechsel; 3a, 3c, 4, 5 und 6 laufen im
 Planner-Kontext. Die drei Paarungen sind eine **Deckungs**-Prüfung, deren
 Werkzeug Repo-Entscheidung ist (§Das Beobachtungs-Register).
 

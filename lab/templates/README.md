@@ -27,7 +27,8 @@ Klassen**, nicht 24 gleichartige Vorlagen:
 | [`docs/plan/planning/welle-results.template.md`](docs/plan/planning/welle-results.template.md) | Welle-Closure-Notiz: Ergebnis, Steering-Loop-Einträge, Zeiger aufs Beobachtungs-Register | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/roadmap.template.md`](docs/plan/planning/roadmap.template.md) | Roadmap als Reihenfolge von Wellen, nicht Termine | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/observations.template.md`](docs/plan/planning/observations.template.md) | Beobachtungs-Register: der Steering-Loop-Zähler, stehend statt in der Welle-Closure | [Modul 6](../regelwerk/modul-06-roadmap.md#das-beobachtungs-register-modul-6) |
-| [`docs/plan/planning/archiv-stub.template.md`](docs/plan/planning/archiv-stub.template.md) | Gekürzter Stub, der beim Archivieren einer Welle an der Stelle des Volltexts bleibt | [Modul 6](../regelwerk/modul-06-roadmap.md) |
+| [`docs/plan/planning/archiv-stub-slice.template.md`](docs/plan/planning/archiv-stub-slice.template.md) | Gekürzter Stub an der Stelle eines archivierten Slice-Volltexts | [Modul 6](../regelwerk/modul-06-roadmap.md) |
+| [`docs/plan/planning/archiv-stub-welle.template.md`](docs/plan/planning/archiv-stub-welle.template.md) | Gekürzter Stub an der Stelle eines archivierten Welle-Plans | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/reconciliation.template.md`](docs/plan/planning/reconciliation.template.md) | Reconciliation-Register: die offenen Funde der Brownfield-Inventur; nur für Repos im BF-Bootstrap | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
 | [`docs/plan/planning/README.template.md`](docs/plan/planning/README.template.md) | Planning-Index: Slice-Lifecycle + Slice-vs-Welle-Konvention | [Modul 5](../regelwerk/modul-05-planning-harness.md) |
 | [`docs/plan/carveouts/carveout.template.md`](docs/plan/carveouts/carveout.template.md) | Dokumentierte Ausnahme mit Auflösungs-Trigger | [Modul 7](../regelwerk/modul-07-carveouts.md) |
@@ -84,7 +85,8 @@ Die Templates haben zwei Lebenszyklen:
   die Vergleichsgrundlage für die Form deiner gefüllten Artefakte.
 - **Wiederkehrend** — als `.template.md` **co-located** im Repo behalten;
   jede neue Instanz wird daneben kopiert: `adr/NNNN-titel`, `slice`,
-  `welle`, `carveout`, `review-report`.
+  `welle`, `carveout`, `review-report`, `archiv-stub-slice`,
+  `archiv-stub-welle` (die beiden entstehen bei jeder Wellen-Closure neu).
 
 Wiederkehrende Templates bleiben also dauerhaft im Repo (z. B.
 `docs/plan/adr/NNNN-titel.template.md` neben den echten ADRs). Damit ihre

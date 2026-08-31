@@ -33,8 +33,9 @@ Identität jenseits ihres Slice.
   *„Lauf-Beleg, kein Wissensspeicher"* folgt, wohin er am Ende geht — ganz ins
   Archiv, ohne Stub. Und: Ein Rang-Dokument, das einen einzelnen Report
   verlinkt, hat ein Problem, das älter ist als das Archiv.
-- Neue Vorlage `archiv-stub.template.md` mit beiden Formen; die tragende
-  Bedingung steht als Fließtext, nicht im Bedienhinweis.
+- Neue Vorlagen `archiv-stub-slice.template.md` und
+  `archiv-stub-welle.template.md`; die tragenden Bedingungen stehen als
+  Fließtext, nicht im Bedienhinweis.
 
 **Zwei Sätze tragen die Regel, und beide kommen aus Messungen der Welle 108:**
 Die **Auswahl gehört in die Operation**, nicht in ihren Aufrufer — wer ihr die
@@ -48,11 +49,32 @@ Archivierung, die es nicht gab.
 sie sind; eine Rück-Archivierung wäre Bewegung ohne Anlass. Das Beispiel-Repo
 ist damit unverändert konform.
 
-**Grenzen, im Kanon benannt statt überspielt:** Geprüft ist die Form, nicht die
-Länge. Ob das Archiv vollständig ist, bezeugt nur der Archivierungs-Commit —
-danach ist es für jedes Gate opak. Deshalb gehört die Operation in ein
-Werkzeug. Und für ein Repo **ganz ohne** Wellen fehlt der Auslöser; dort bleibt
-das Archivieren offen.
+**Vier Grenzen, im Kanon benannt statt überspielt:** Geprüft ist die Form,
+nicht die Länge. Ob das Archiv vollständig ist, bezeugt nur der
+Archivierungs-Commit — danach ist es für jedes Gate opak; deshalb gehört die
+Operation in ein Werkzeug. Für ein Repo **ganz ohne** Wellen fehlt der
+Auslöser. Und: **Vor der ersten Archivierung ist der Geltungsbereich der
+vorhandenen Sensoren zu prüfen** — ein Sensor, der auf `done/*.md` keilt,
+sieht die Stubs im Unterverzeichnis nicht mehr und bleibt grün, ohne noch
+etwas zu prüfen. Dieselbe Bauform wie ein halluziniertes Gate, nur von der
+anderen Seite: Die Zusage bleibt, ihr Prüfbereich schrumpft.
+
+**Zwei Review-Runden, sieben Befunde — und zwei davon zeigen die Grenze der
+eigenen Gegenprobe.** Die Aufzählung „fünf Schritte" stand nach `293a010`
+noch an zwei Stellen: einmal als *„alle fünf"* ohne das Wort *Schritte*,
+einmal über einen Zeilenumbruch getrennt (`Fünf\nSchritte`). Mein Grep hat
+beide nicht gefunden, und meine Gegenprobe war derselbe Grep — sie war für
+genau das blind, wofür er blind war. Dazu stand die **Rollen-Sequenz-Tabelle
+in Modul 8** vollständig auf dem Fünf-Schritt-Stand (Zeilen 4/5 falsch
+nummeriert, der neue Schritt fehlte). Der **Herkunfts-Anker** in
+`traceability.md` versprach eine Auflösung *„in einem Hop"* über
+`done/slice-<NNN>-*.md` §7 — nach dem Archivieren sind es zwei, und §7 steht
+im Zip; die Stelle sagt das jetzt. Im **Spiegel** fehlten zwei operative
+Sätze (Werkzeug statt Handarbeit; die Rang-Dokument-Regel aus Modul 10). Und
+die **neue Vorlage** wiederholte die Falle aus Welle 105 — zwei tragende
+Aussagen standen nur im Bedienhinweis, der beim Kopieren wegfällt. Sie ist
+jetzt in zwei Vorlagen geteilt (eine H1 je Datei, wie die übrigen 21), und
+beide Aussagen stehen als Fließtext.
 
 Nachgemessen, bevor die Regel geschrieben wurde: Weder `planning` noch `waves`
 bricht an einem Unterverzeichnis in `done/` — beide lesen das

@@ -109,7 +109,10 @@ Verdikt — liefert
 **Mit der Closure der Welle, die seinen Slice einsammelt, wandert der Report
 vollständig ins Archiv — ohne Stub** ([Modul 6](modul-06-roadmap.md), Schritt
 4). Er hat keine Identität jenseits seines Slice; wer ihn sucht, sucht ihn
-unter dem Slice, den er geprüft hat.
+unter dem Slice, den er geprüft hat. **Ein Rang-Dokument, das einen einzelnen
+Report als Beleg verlinkt, hat damit ein Problem, das älter ist als das
+Archiv** — es macht ein Zeitdokument zur Quelle. Die Aussage gehört an den
+zitierenden Ort, die Report-Kennung bleibt im Text.
 
 **Der Report ist ein Lauf-Beleg, kein Wissensspeicher**: Konsument ist der
 Implementer im selben Zyklus, danach der Audit. Über Läufe hinweg wird er

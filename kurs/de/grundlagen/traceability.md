@@ -64,6 +64,15 @@ Nummer ist eindeutig, der Titelrest gehört zum Dateinamen
 ([`slice.template.md`](../../../lab/templates/docs/plan/planning/slice.template.md)),
 und wer den Anker maschinell auflöst, sucht auf `done/slice-<NNN>-*.md`.
 
+**Nach dem Archivieren ist es ein Hop mehr.** Schließt die Welle, die diesen
+Slice einsammelt, wandert sein Volltext ins Archiv
+([Modul 6 §Die Wellen-Closure-Prozedur](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur),
+Schritt 4); an seiner Stelle liegt ein Stub unter `done/<welle-id>/`, und §7
+steht im Zip. Der Anker bleibt gültig — die Kennung ist dieselbe —, aber die
+Auflösung ist zweistufig: erst der Stub, dann sein Archiv-Zeiger. Was der
+Anker *belegen* soll, steht dabei schon im Stub selbst: seine
+`Hervorgegangen:`-Zeile nennt die Kennungen, die aus dem Slice hervorgingen.
+
 **Ab Einführung, kein Nachrüsten.** Bestehende Regeln haben keinen
 rekonstruierbaren Ursprung mehr; `seit unbekannt` wäre eine
 [Harness-Lüge](begriffe.md#kernbegriffe). Der leere Zustand *ist* die ehrliche
@@ -216,3 +225,13 @@ Die beiden Schleifen tragen unterschiedliche Mengen: Die linke hält die
 Beobachtungen **unter** der Schwelle am Leben (sonst zählt niemand hoch),
 die rechte hält die Begründung der **verkörperten** Regeln greifbar (sonst
 werden sie beim Aufräumen still entfernt). Keine ersetzt die andere.
+
+**Und was hier *nicht* blau ist, sagt genauso viel.** Der Volltext eines
+geschlossenen Slice kommt in keinem lesenden Knoten vor: Gelesen werden das
+Register, die verkörperte Form und — beim Retirement-Check — die Herkunft.
+Genau deshalb darf er mit der Wellen-Closure ins Archiv wandern, während
+Register, Regel und Anker bleiben
+([Modul 6 §Die Wellen-Closure-Prozedur](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur),
+Schritt 4). Der eine Knoten, den das teurer macht, ist der Retirement-Check:
+Er liest die Herkunft dann über den Stub und dessen Archiv-Zeiger statt
+direkt.
