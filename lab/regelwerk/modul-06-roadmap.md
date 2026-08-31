@@ -235,17 +235,45 @@ fünf Schritte in
    Beleg. *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo zitiert".
    Rot heißt in allen drei Fällen: etwas wurde
    versprochen und nicht angelegt.
-4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
+4. **Zeitdokumente der Welle archivieren.** Die Slice-Dateien, die sie
+   einsammelt, ihr eigener Plan und die Review-Reports dieser Slices wandern
+   in ein unveränderliches Archiv `done/<welle-id>/archiv.zip`.
+
+   Die **Ergebnisnotiz** bleibt vollständig und flach. Slice-Dateien und
+   Welle-Plan bleiben als **gekürzter Stub** im Wellen-Verzeichnis:
+   Überschrift, Archiv-Zeiger, Zustand, und die Kennungen, die den Vorgang
+   überlebt haben. Review-Reports bekommen keinen Stub; sie haben keine
+   Identität jenseits ihres Slice. Ziel-Form:
+   [`../templates/docs/plan/planning/archiv-stub.template.md`](../templates/docs/plan/planning/archiv-stub.template.md).
+
+   **Eingesammelt wird nach der Welle, nicht nach dem Verzeichnis:** die
+   Slices, deren `Welle:` diese Welle nennt, **und** die wellenlosen, die seit
+   der letzten Closure geschlossen wurden. Slices einer noch **offenen** Welle
+   bleiben liegen. Diese Auswahl gehört in die Operation, nicht in ihren
+   Aufrufer.
+
+   Der Stub hält die Verzeichnis-Position als Zustand und lässt eingehende
+   Verweise gültig. Der Umzug ändert Pfade; die Operation zieht die Verweise
+   nach — in **beiden** Formen, mit Verzeichnis-Präfix und
+   geschwister-relativ. **Ab Einführung, kein Nachrüsten:** Wellen, die vorher
+   schlossen, bleiben, wie sie sind.
+
+   **Urteilsfrei** ist die **Form** des Stubs: dass er den Archiv-Zeiger trägt
+   und die Abschnitte des vollen Plans **nicht** mehr. **Grenze:** Geprüft ist
+   die Form, nicht die Länge; ob das Archiv vollständig ist, bezeugt nur der
+   Archivierungs-Commit.
+
+5. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
    Welle schloss, statt eines verstreuten Verschwindens.
-5. **Roadmap fortschreiben.** Die Welle bekommt ihre Zeile in der Tabelle
+6. **Roadmap fortschreiben.** Die Welle bekommt ihre Zeile in der Tabelle
    *Abgeschlossene Wellen* (mit Zeiger auf ihre Closure-Notiz), ihr Zeiger
    verlässt *Offene Wellen*. **Befördert wird niemand**: Welche Wellen offen
    sind, sagen die flachen Dateien; woran gearbeitet wird, das `Welle:`-Feld
    der Slices in `in-progress/`. Löste ein Trigger eine Umplanung aus, bekommt
    die *Historische Trigger-Verschiebungen*-Tabelle ihren Eintrag.
 
-Erst wenn alle fünf Belege vorliegen, ist die Welle *auditierbar*
+Erst wenn alle sechs Belege vorliegen, ist die Welle *auditierbar*
 geschlossen.
 
 ### Regeln gegen typische Fehlannahmen (Modul 6)

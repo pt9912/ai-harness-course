@@ -11,6 +11,59 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 109 — 2026-08-31 · Die Wellen-Closure archiviert ihre Zeitdokumente
+
+Die in Welle 107 entworfene und in Welle 108 geprobte Form geht in den Kanon.
+Die Wellen-Closure bekommt einen **vierten Schritt**: Was die Welle einsammelt
+— ihre Slice-Dateien, ihr eigener Plan, die Review-Reports dieser Slices —
+wandert in ein unveränderliches `done/<welle-id>/archiv.zip`. Die
+**Ergebnisnotiz bleibt vollständig und flach**; Slices und Welle-Plan bleiben
+als **gekürzter Stub**; Review-Reports bekommen keinen, sie haben keine
+Identität jenseits ihres Slice.
+
+- [`modul-06` §Die Wellen-Closure-Prozedur](kurs/de/02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)
+  trägt den Schritt: was archiviert wird, was liegen bleibt, in welcher Form —
+  und die **Auswahl nach der Welle, nicht nach dem Verzeichnis**: die Slices
+  dieser Welle *und* die wellenlosen seit der letzten Closure, nicht die einer
+  offenen. Aus fünf Belegen werden sechs.
+- [`modul-05`](kurs/de/02-planung/modul-05-planning-harness.md): `done/` ist
+  nicht die letzte Station der Datei. Der Stub hält die Verzeichnis-Position
+  als Zustand, und wer auf den Slice zeigt, zeigt weiter auf etwas.
+- [`modul-10`](kurs/de/04-qualitaet/modul-10-review-harness.md): Aus
+  *„Lauf-Beleg, kein Wissensspeicher"* folgt, wohin er am Ende geht — ganz ins
+  Archiv, ohne Stub. Und: Ein Rang-Dokument, das einen einzelnen Report
+  verlinkt, hat ein Problem, das älter ist als das Archiv.
+- Neue Vorlage `archiv-stub.template.md` mit beiden Formen; die tragende
+  Bedingung steht als Fließtext, nicht im Bedienhinweis.
+
+**Zwei Sätze tragen die Regel, und beide kommen aus Messungen der Welle 108:**
+Die **Auswahl gehört in die Operation**, nicht in ihren Aufrufer — wer ihr die
+Liste vorgibt, nimmt ihr die Entscheidung ab, an der sie scheitern könnte. Und
+**urteilsfrei ist die Form des Stubs**: dass er den Archiv-Zeiger trägt *und
+die Abschnitte des vollen Plans nicht mehr*. Die zweite Bedingung ist die
+wichtigere — ein Stub, der nur den Zeiger trägt und den Text behält, wäre die
+Archivierung, die es nicht gab.
+
+**Ab Einführung, kein Nachrüsten.** Wellen, die vorher schlossen, bleiben, wie
+sie sind; eine Rück-Archivierung wäre Bewegung ohne Anlass. Das Beispiel-Repo
+ist damit unverändert konform.
+
+**Grenzen, im Kanon benannt statt überspielt:** Geprüft ist die Form, nicht die
+Länge. Ob das Archiv vollständig ist, bezeugt nur der Archivierungs-Commit —
+danach ist es für jedes Gate opak. Deshalb gehört die Operation in ein
+Werkzeug. Und für ein Repo **ganz ohne** Wellen fehlt der Auslöser; dort bleibt
+das Archivieren offen.
+
+Nachgemessen, bevor die Regel geschrieben wurde: Weder `planning` noch `waves`
+bricht an einem Unterverzeichnis in `done/` — beide lesen das
+Roadmap-Verzeichnis, nicht das Archiv; die Gegenprobe (`planning-drift` bei
+belegtem `in-progress/`) beißt weiter.
+
+Spiegel und Vorlagen ziehen mit; `Stand:` auf Kurs-Welle 109.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN; `make bundle-check` grün.
+
 ## Welle 108 — 2026-08-31 · Die Archiv-Form, geprobt — und zweimal korrigiert
 
 Welle 107 hielt den Entwurf fest und nannte sechs Proben. Sie sind gefahren

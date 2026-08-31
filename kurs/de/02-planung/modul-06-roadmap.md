@@ -718,17 +718,64 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    rot. Rot heißt in allen drei Fällen: etwas wurde
    versprochen und nicht angelegt — dieselbe Klasse wie ein halluziniertes
    Gate.
-4. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
+4. **Zeitdokumente der Welle archivieren.** Was jetzt geschlossen ist, hat
+   keinen Leser mehr über Läufe hinweg — und liest sich trotzdem weiter wie
+   geltender Text. Die Welle nimmt deshalb ihre **Zeitdokumente** mit: die
+   Slice-Dateien, die sie einsammelt, ihren eigenen Plan und die
+   Review-Reports dieser Slices wandern in ein unveränderliches Archiv
+   `done/<welle-id>/archiv.zip`.
+
+   **Was liegen bleibt, und in welcher Form.** Die **Ergebnisnotiz** bleibt
+   vollständig und flach — sie ist die Bedeutung, das Archiv nur die
+   Koordinate. Slice-Dateien und Welle-Plan bleiben als **gekürzter Stub** im
+   Wellen-Verzeichnis: Überschrift, Archiv-Zeiger, Zustand, und die
+   Kennungen, die den Vorgang überlebt haben. Review-Reports bekommen keinen
+   Stub; sie haben keine Identität jenseits ihres Slice und sind im Archiv
+   unter ihm zu finden. Ziel-Form:
+   [`/lab/templates/docs/plan/planning/archiv-stub.template.md`](../../../lab/templates/docs/plan/planning/archiv-stub.template.md).
+
+   **Eingesammelt wird nach der Welle, nicht nach dem Verzeichnis:** die
+   Slices, deren `Welle:` diese Welle nennt, **und** die wellenlosen, die
+   seit der letzten Closure geschlossen wurden — dieselbe Menge, die der
+   Lese-Schritt ohnehin liest (§Wann Arbeit eine Welle braucht). Slices einer
+   noch **offenen** Welle bleiben liegen. Diese Auswahl gehört in die
+   Operation, nicht in ihren Aufrufer: Wer ihr die Liste vorgibt, nimmt ihr
+   die Entscheidung ab, an der sie scheitern könnte.
+
+   **Warum gekürzt und nicht gelöscht.** Der Stub hält die
+   Verzeichnis-Position als Zustand und lässt eingehende Verweise gültig —
+   Register-Belege, Herkunfts-Anker, Zeiger aus Rollen- und Regel-Dateien.
+   Was den Vorgang überlebt, steht ohnehin schon dort, wo es gelesen wird:
+   die Beobachtung im Register, die Entscheidung als ADR, die Folgearbeit als
+   Slice. Genau diese Orte nennt der Stub.
+
+   **Der Preis, benannt:** Der Umzug ändert Pfade. Die Operation zieht die
+   eingehenden Verweise nach — in **beiden** Formen, mit Verzeichnis-Präfix
+   und geschwister-relativ; die Ergebnisnotiz bleibt flach, während ihre
+   Slices umziehen, und ist damit der Pflichtfall, nicht der Randfall.
+   **Und: ab Einführung, kein Nachrüsten.** Wellen, die vorher schlossen,
+   bleiben, wie sie sind; eine Rück-Archivierung wäre Bewegung ohne Anlass.
+
+   **Was Maschine hier kann.** Urteilsfrei ist die **Form** des Stubs: dass
+   er den Archiv-Zeiger trägt und die Abschnitte des vollen Plans *nicht*
+   mehr. Zwei Bedingungen, kein Urteil — die zweite ist die wichtigere, denn
+   ein Stub, der nur den Zeiger trägt und den Text behält, wäre die
+   Archivierung, die es nicht gab. **Grenze:** Geprüft ist die Form, nicht
+   die Länge; und ob das Archiv *vollständig* ist, bezeugt nur der
+   Archivierungs-Commit — danach ist es für jedes Gate opak. Deshalb gehört
+   die Operation in ein Werkzeug und nicht in Handarbeit.
+
+5. **Wave-Self-Close-Commit.** Ein einzelner, beobachtbarer Commit
    markiert den Abschluss — der Audit sieht *einen* Punkt, an dem die
    Welle schloss, statt eines verstreuten Verschwindens.
-5. **Roadmap fortschreiben.** Die Welle bekommt ihre Zeile in der Tabelle
+6. **Roadmap fortschreiben.** Die Welle bekommt ihre Zeile in der Tabelle
    *Abgeschlossene Wellen* (mit Zeiger auf ihre Closure-Notiz), ihr Zeiger
    verlässt *Offene Wellen*. **Befördert wird niemand**: Welche Wellen offen
    sind, sagen die flachen Dateien; woran gearbeitet wird, das `Welle:`-Feld
    der Slices in `in-progress/`. Löste ein Trigger eine Umplanung aus, bekommt
    die *Historische Trigger-Verschiebungen*-Tabelle ihren Eintrag.
 
-Erst wenn alle fünf Belege vorliegen, ist die Welle *auditierbar*
+Erst wenn alle sechs Belege vorliegen, ist die Welle *auditierbar*
 geschlossen.
 
 ## Übungen

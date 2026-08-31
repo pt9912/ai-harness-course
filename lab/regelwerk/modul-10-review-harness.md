@@ -106,6 +106,11 @@ Das Dokument-Gerüst für den **ganzen Report** — Kopf-Metadaten
 Findings nach Output-Schema, Negativbefunde, Kategorie-Summary,
 Verdikt — liefert
 [`review-report.template.md`](../templates/docs/reviews/review-report.template.md);
+**Mit der Closure der Welle, die seinen Slice einsammelt, wandert der Report
+vollständig ins Archiv — ohne Stub** ([Modul 6](modul-06-roadmap.md), Schritt
+4). Er hat keine Identität jenseits seines Slice; wer ihn sucht, sucht ihn
+unter dem Slice, den er geprüft hat.
+
 **Der Report ist ein Lauf-Beleg, kein Wissensspeicher**: Konsument ist der
 Implementer im selben Zyklus, danach der Audit. Über Läufe hinweg wird er
 nicht wieder gelesen — das steuerungsrelevante Signal ist die

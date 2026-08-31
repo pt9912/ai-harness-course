@@ -101,6 +101,15 @@ Nachhinein**, beim Übergang selbst, wird der *Grund* nachgetragen: was
 tatsächlich eintrat. Ohne die Bedingung vorab ist die Rückführung eine
 Ad-hoc-Entscheidung; ohne den Grund im Nachhinein ist sie nicht nachvollziehbar.
 
+**`done/` ist auch nicht die letzte Station der Datei.** Schließt die Welle,
+die diesen Slice einsammelt, wandert sein Volltext ins Archiv, und an seiner
+Stelle bleibt ein gekürzter **Stub** — Identität, Archiv-Zeiger, Zustand und
+die Kennungen, die den Slice überlebt haben
+([Modul 6 §Die Wellen-Closure-Prozedur](modul-06-roadmap.md#die-wellen-closure-prozedur),
+Schritt 4). Die Verzeichnis-Position bleibt damit der Zustand, und wer auf den
+Slice zeigt, zeigt weiter auf etwas. Was der Stub nicht mehr trägt, steht
+ohnehin dort, wo es gelesen wird.
+
 `done` ist dabei **kein Endzustand der Information**: Die Beobachtungen aus
 §7 sind bei der Slice-Closure bereits ins Beobachtungs-Register eingetragen
 (Notiz im Diagramm) und werden **von dort** weitergelesen — vom Lese-Schritt

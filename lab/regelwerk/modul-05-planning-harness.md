@@ -69,6 +69,12 @@ Zeitpunkten, die nicht zusammenfallen: **Vorab** benennt §4 des Slice-Plans die
 Nachhinein**, beim Übergang selbst, wird der *Grund* nachgetragen: was
 tatsächlich eintrat.
 
+**`done/` ist auch nicht die letzte Station der Datei.** Schließt die Welle,
+die diesen Slice einsammelt, wandert sein Volltext ins Archiv, und an seiner
+Stelle bleibt ein gekürzter **Stub** — Identität, Archiv-Zeiger, Zustand und
+die Kennungen, die den Slice überlebt haben ([Modul 6](modul-06-roadmap.md),
+Schritt 4). Die Verzeichnis-Position bleibt der Zustand.
+
 `done` ist **kein Endzustand der Information**: Die Beobachtungen aus §7 sind
 bei der Slice-Closure ins Beobachtungs-Register eingetragen und werden **von
 dort** weitergelesen — vom Lese-Schritt (Welle-Closure; in einem Repo ohne

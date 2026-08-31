@@ -248,6 +248,15 @@ Verdikt — liefert
 abgelegt wird ein Report pro Lauf unter `docs/reviews/`, Folgeläufe
 als neue Datei statt Überschreibung.
 
+**Und daraus folgt, wohin er am Ende geht.** Mit der Closure der Welle, die
+seinen Slice einsammelt, wandert der Report vollständig ins Archiv
+([Modul 6 §Die Wellen-Closure-Prozedur](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur),
+Schritt 4) — **ohne Stub**. Er hat keine Identität jenseits seines Slice: Wer
+ihn sucht, sucht ihn unter dem Slice, den er geprüft hat. Ein Rang-Dokument,
+das einen einzelnen Report als Beleg *verlinkt*, hat damit ein Problem, das
+älter ist als das Archiv — es macht ein Zeitdokument zur Quelle. Die Aussage
+gehört an den zitierenden Ort, die Report-Kennung bleibt im Text.
+
 **Der Report ist ein Lauf-Beleg, kein Wissensspeicher.** Er belegt
 *diesen Diff, mit diesem Skill, diesem Modell, diesem Verdikt* — sein
 Konsument ist der Implementer im selben Zyklus (Rückkante Review →
