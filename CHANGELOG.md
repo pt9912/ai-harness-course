@@ -57,13 +57,23 @@ vollen Text behalten hat, kommt durch — die zentrale Zusage des Entwurfs kann
 dieses Gate nicht durchsetzen. Das steht jetzt als dritte benannte Lücke im
 Entwurf, neben der Abzählung und dem nie eingesammelten Slice.
 
-Dazu drei kleinere Nachzüge: Der **Welle-Stub** trägt im Entwurf eine eigene
+**Und der s19g-Befund hat die Probe an der richtigen Stelle repariert.** Er
+lautete: *s19g wird unter keiner Mutation des Werkzeugs rot.* Der Grund war
+nicht das Verdikt, sondern die **Grenze der Probe** — das Szenario übergab der
+Operation eine fertige Dateiliste, also konnte sie gar nicht falsch auswählen,
+und *sie greift den offenen Slice nicht* war per Konstruktion wahr. Die
+**Auswahl** steht jetzt in der Operation, wo der Entwurf sie ohnehin verlangt:
+Slices der geschlossenen Welle **und** wellenlose, aber nicht die einer
+offenen. Damit prüft s19g die Operation statt der Konfiguration —
+gegengeprüft mit zwei Auswahl-Mutationen: *sammelt alles ein* macht s19g rot,
+*vergisst den wellenlosen Slice* macht s19c rot.
+
+Dazu zwei kleinere Nachzüge: Der **Welle-Stub** trägt im Entwurf eine eigene
 Form (Zeiger auf die Ergebnisnotiz, Zahl der Vorgänge) — die Probe schrieb
 beide Stub-Formen gleich; jetzt geprüft als s19i. Die **Gegenprobe s19e** kann
 zum No-op werden, wenn der Nachzug ohnehin fehlt — sie prüft jetzt vorab, dass
-ihr injizierter Defekt gegriffen hat. Und **s19g** wird unter keiner Mutation
-des Werkzeugs rot: Es sichert die Sensor-*Konfiguration* ab, nicht die
-Operation. Als Regressions-Wächter richtig, aber im README benannt.
+ihr injizierter Defekt gegriffen hat. Und dass Review-Reports **keinen** Stub
+bekommen, prüft nichts — dritte benannte Sensor-Lücke.
 
 **Eine Zahl ist präzisiert, nicht korrigiert.** Der Review konnte die
 tar.gz-Messung mit **synthetischen** Korpora nicht reproduzieren. Am realen

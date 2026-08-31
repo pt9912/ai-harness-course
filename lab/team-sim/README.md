@@ -94,7 +94,7 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s19d | beide Verweis-Formen nach dem Umzug | 0 Befunde | ✓ — **erst nach einer Reparatur, siehe unten** |
 | s19e | Gegenprobe: ohne Verweis-Nachzug | **`target-missing`** | ✓ die Zusage ist belegt, nicht behauptet |
 | s19f | nicht gekürzter Slice im Wellen-Verzeichnis | **`section-pattern-missing`** | ✓ der Deckungs-Sensor beißt, mit `structure` allein |
-| s19g | Slice der **offenen** Welle, flach in `done/` | **still** | ✓ kein Falsch-Positiv — prüft die Sensor-**Konfiguration**, nicht das Werkzeug (s. u.) |
+| s19g | Slice der **offenen** Welle | nicht eingesammelt, liegt flach, 0 Meldungen | ✓ prüft die **Auswahl** der Operation — rot, sobald sie zu viel greift |
 | s19i | Welle-Stub trägt seine **eigene** Form | Zeiger auf die Ergebnisnotiz + Vorgangszahl | ✓ nachgetragen: die Probe schrieb erst beide Stub-Formen gleich |
 | s19h | Rückgriff im `--depth 1`-Klon | Archiv liefert, `git show` scheitert | ✓ die Grenze des Entwurfs, gemessen |
 
@@ -164,12 +164,15 @@ den Zähler richtig gelassen und den Beleg falsch gemacht; heute meldet es.
 
 **Befund aus s19 — was jedes Verdikt absichert, und was nicht.** Ein Review
 hat acht Mutationen gegen die Archivierungs-Operation gefahren. Zwei Ergebnisse
-gehören benannt: **s19g** wird unter *keiner* Mutation des Werkzeugs rot — es
-sichert die Sensor-**Konfiguration** ab (der welle-gescopte Glob), nicht die
-Operation; rot wird es erst, wenn man den Glob auf die flache Vor-Probe-Form
-zurückstellt. Das ist als Regressions-Wächter richtig, aber es sagt nichts über
-das Archivieren. Und **der Deckungs-Sensor prüft die Marke, nicht die
-Kürzung**: Ein Stub mit `Archiviert mit:`, der den vollen Text behalten hat,
+gehören benannt. Das erste war **s19g**: Es wurde unter *keiner* Mutation des
+Werkzeugs rot. Der Grund war nicht das Verdikt, sondern die **Grenze der
+Probe** — das Szenario übergab der Operation eine fertige Dateiliste, also
+konnte sie gar nicht falsch auswählen. Die **Auswahl** steht jetzt in der
+Operation (`waehle()`), wo der Entwurf sie verlangt: Slices der geschlossenen
+Welle *und* wellenlose, aber nicht die einer offenen. Damit beißt s19g —
+gegengeprüft mit zwei Auswahl-Mutationen: *sammelt alles ein* macht s19g rot,
+*vergisst den wellenlosen Slice* macht s19c rot. Das zweite: **der
+Deckungs-Sensor prüft die Marke, nicht die Kürzung**: Ein Stub mit `Archiviert mit:`, der den vollen Text behalten hat,
 kommt durch — nur die Trefferzahl von s19b fällt darauf.
 
 **Befund aus s19 — ein Verdikt maß die falsche Größe.** `s19b` prüfte nur, dass

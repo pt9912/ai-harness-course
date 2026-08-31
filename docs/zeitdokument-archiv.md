@@ -314,10 +314,19 @@ als s19 gelaufen (d-check `v0.71.1`, 8 Verdikte, Gesamtlauf 44/44 · 0 KAPUTT):
 | Verweise lösen nach dem Umzug auf | s19d/e | grün — **nach einer Reparatur**, mit Gegenprobe |
 | Slice ohne Wellen-Zugehörigkeit | s19c | `Welle:` bleibt `ohne Welle`, `Archiviert mit:` nennt die einsammelnde |
 
-Dazu eine Gegenkontrolle, die im Entwurf nicht stand und die eigentliche
-Rechtfertigung des Wellen-Verzeichnisses ist: **s19g** — der Slice der noch
-**offenen** Welle liegt flach in `done/` und bleibt still. Ohne ihn wäre „der
-Sensor beißt" belegt, „er beißt nur die Richtigen" aber nicht.
+Dazu eine Gegenkontrolle, die im Entwurf nicht stand: **s19g** — der Slice der
+noch **offenen** Welle wird nicht eingesammelt, bleibt flach in `done/` liegen
+und wird nicht gemeldet. Ohne ihn wäre „der Sensor beißt" belegt, „er beißt nur
+die Richtigen" aber nicht.
+
+**Die Auswahl gehört in die Operation, nicht in ihren Aufrufer** — und das ist
+ein Ergebnis der Probe, kein Entwurfs-Detail. Solange das Szenario der
+Operation eine fertige Dateiliste übergab, war *sie greift den offenen Slice
+nicht* per Konstruktion wahr und durch keine Mutation widerlegbar. Erst mit der
+Auswahl in der Operation prüft s19g etwas: Sie sammelt die Slices der
+geschlossenen Welle **und** die wellenlosen ein, aber nicht die einer offenen.
+Gegengeprüft mit zwei Mutationen — *sammelt alles ein* macht s19g rot,
+*vergisst den wellenlosen Slice* macht s19c rot.
 
 ### Was die Proben geändert haben
 

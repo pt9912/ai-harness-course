@@ -586,10 +586,37 @@ stub() { # $1 datei  $2 titel  $3 welle-feld  $4 archiviert-mit  $5 innen-pfad
   printf '# %s\n\n> **ARCHIVIERT** — Volltext:\n> `unzip -p done/%s/archiv.zip %s`\n\n**Welle:** %s\n**Archiviert mit:** %s · **Geschlossen:** 2026-08-31\n**Hervorgegangen:** BEO-001\n' \
     "$2" "$4" "$5" "$3" "$4" > "$1"
 }
-# Die Operation selbst: zippen, kuerzen, Verweise nachziehen. Sie gehoert laut
-# Entwurf in ein Werkzeug — hier ist sie die Probe dieses Werkzeugs.
-archiviere() { # $1 clone  $2 welle  $3.. dateien (relativ zu docs/plan/planning)
+# Die AUSWAHL — der Teil, an dem die Operation falsch liegen kann. Der Entwurf
+# verlangt hier zweierlei: Slices der geschlossenen Welle UND wellenlose Slices,
+# die diese Closure einsammelt; NICHT die Slices einer anderen, offenen Welle.
+# Sie steht bewusst in der Operation und nicht im Szenario: Waehlt das Szenario
+# aus, kann kein Verdikt je eine Auswahl-Luecke finden.
+waehle() { # $1 clone  $2 welle  ->  Zeilen: Pfade relativ zur Repo-Wurzel
+  local w="$1" welle="$2" f b
+  for f in "$w"/docs/plan/planning/done/slice-*.md; do
+    [ -e "$f" ] || continue
+    if grep -q "^\*\*Welle:\*\* $welle\$" "$f" || grep -q '^\*\*Welle:\*\* ohne Welle$' "$f"; then
+      echo "docs/plan/planning/done/$(basename "$f")"
+    fi
+  done
+  [ -e "$w/docs/plan/planning/done/$welle.md" ] && echo "docs/plan/planning/done/$welle.md"
+  # Reviews reisen mit dem Slice, den sie pruefen.
+  for f in "$w"/docs/reviews/*.md; do
+    [ -e "$f" ] || continue
+    b=$(basename "$f")
+    case "$b" in *slice-*) local sl; sl=$(echo "$b" | grep -o 'slice-[0-9]*')
+      ls "$w"/docs/plan/planning/done/"$sl"-*.md >/dev/null 2>&1 && \
+        grep -q "^\*\*Welle:\*\* $welle\$\|^\*\*Welle:\*\* ohne Welle\$" "$w"/docs/plan/planning/done/"$sl"-*.md 2>/dev/null && \
+        echo "docs/reviews/$b" ;;
+    esac
+  done
+}
+# Die Operation selbst: auswaehlen, zippen, kuerzen, Verweise nachziehen. Sie
+# gehoert laut Entwurf in ein Werkzeug — hier ist sie die Probe dieses Werkzeugs.
+archiviere() { # $1 clone  $2 welle   (die Auswahl trifft die Operation, nicht der Aufrufer)
   local w="$1" welle="$2"; shift 2
+  set -- $(waehle "$w" "$welle")
+  [ $# -gt 0 ] || return 1
   ARCHIVZAHL="$(printf '%s\n' "$@" | grep -c '/slice-') Slices, $(printf '%s\n' "$@" | grep -c '/2026-') Reviews"
   local P="$w/docs/plan/planning" d="$w/docs/plan/planning/done/$welle"
   mkdir -p "$d"
@@ -645,13 +672,7 @@ s19_archivierung() {
   base=$(git rev-parse HEAD)
   vorher=$(grep -rc "Zusage\|Gate\|Anker" $P/done docs/reviews 2>/dev/null | awk -F: '{s+=$2} END{print s+0}')
 
-  archiviere "$WORK/sim/alice" welle-2-ausbau \
-    docs/plan/planning/done/slice-003-cache.md \
-    docs/plan/planning/done/slice-004-fixture.md \
-    docs/plan/planning/done/slice-005-wartung.md \
-    docs/plan/planning/done/welle-2-ausbau.md \
-    docs/reviews/2026-08-30-slice-003-review.md \
-    docs/reviews/2026-08-30-slice-004-review.md || { echo "  KAPUTT ($CUR): archiviere fehlgeschlagen"; return 1; }
+  archiviere "$WORK/sim/alice" welle-2-ausbau || { echo "  KAPUTT ($CUR): archiviere fehlgeschlagen"; return 1; }
   schritt git add -A && schritt git commit -qm "welle-2 archiviert" && schritt git push -q origin main || return 1
 
   imzip=$(unzip -Z1 "$P/done/welle-2-ausbau/archiv.zip" | grep -c '\.md$')
@@ -692,8 +713,13 @@ s19_archivierung() {
   out=$(dcheck "$WORK/sim/alice")
   printf '%s' "$out" | grep -qF "slice-006-vergessen.md:1" && printf '%s' "$out" | grep -qF "section-pattern-missing" && ok=0 || ok=1
   verdikt "s19f Deckungs-Sensor: nicht gekuerzter Slice im Wellen-Verzeichnis wird gemeldet" "section-pattern-missing auf slice-006" "$(echo "$out"|tail -1)" $ok
-  printf '%s' "$out" | grep -qF "slice-051-laufend.md" && ok=1 || ok=0
-  verdikt "s19g Slice der offenen Welle bleibt still (kein Falsch-Positiv)" "keine Meldung zu slice-051" "$(printf '%s' "$out" | grep -cF 'slice-051') Treffer" $ok
+  # s19g prueft die AUSWAHL: Der Slice der offenen Welle darf weder im Archiv
+  # landen noch aus done/ verschwinden — und der Sensor darf ihn nicht melden.
+  imarchiv=$(unzip -Z1 "$P/done/welle-2-ausbau/archiv.zip" | grep -c 'slice-051' || true)
+  flach=$([ -f "$P/done/slice-051-laufend.md" ] && echo ja || echo nein)
+  gemeldet=$(printf '%s' "$out" | grep -cF 'slice-051')
+  [ "$imarchiv" = 0 ] && [ "$flach" = ja ] && [ "$gemeldet" = 0 ] && ok=0 || ok=1
+  verdikt "s19g Slice der offenen Welle: nicht eingesammelt, nicht gemeldet" "nicht im Archiv, liegt flach, 0 Meldungen" "Archiv=$imarchiv, flach=$flach, gemeldet=$gemeldet" $ok
   rm -f "$P/done/welle-2-ausbau/slice-006-vergessen.md"
 
   rm -rf "$WORK/sim/flach"
