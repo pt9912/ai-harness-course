@@ -182,6 +182,9 @@ targets:
   # hiesse, eine generierte Datei ein zweites Mal zu fuehren. NAMENTLICH
   # ausgenommen, nicht per Glob: kommt bei einer Regeneration ein Target dazu,
   # meldet das Gate es, statt es still durchzulassen.
+  # Belegt: Beim Pin-Bump v0.67.0 -> v0.71.1 kam `doc-usage` neu ins Fragment,
+  # und das Gate meldete es als gate-undocumented — die Zusage oben ist keine
+  # Behauptung geblieben. Aufgenommen nach derselben Regel wie die uebrigen.
   exempt-targets: [doc-check, doc-trace, doc-complete, doc-doctor, doc-repair,
                    doc-immutable, doc-commits, doc-planning, doc-tracked,
-                   doc-targets, doc-structure, doc-help]
+                   doc-targets, doc-structure, doc-usage, doc-help]

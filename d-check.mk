@@ -7,7 +7,10 @@
 # Für strikte Reproduzierbarkeit den Digest aus den Release-Notes pinnen —
 # direkt über DCHECK_IMAGE oder bequemer über DCHECK_DIGEST (sticht den Tag):
 #   DCHECK_DIGEST = sha256:<digest>
-DCHECK_IMAGE ?= ghcr.io/pt9912/d-check:v0.67.0
+#
+# Benutzerhandbuch (aufgabenorientiert, deutsch):
+#   https://github.com/pt9912/d-check/blob/main/docs/user/benutzerhandbuch.md
+DCHECK_IMAGE ?= ghcr.io/pt9912/d-check:v0.71.1
 DCHECK_DIGEST ?=
 # TRACE_FLAGS: optionale Flags für die RTM-Targets (z. B. --json).
 TRACE_FLAGS ?=
@@ -62,6 +65,10 @@ doc-targets: ## Deklarations-Konsistenz Doku<->Build-Targets via Modul targets; 
 .PHONY: doc-structure
 doc-structure: ## Struktur-Invarianten innerhalb der Dokumente via Modul structure; hermetisch, ohne Range (DC-FA-STRUCT-001)
 	docker run --rm --network none -v "$(CURDIR):/repo:ro" $(DCHECK_REF) --enable structure --disable links --disable anchors --disable ids --disable matrix --disable external --disable codepaths --disable spans --disable hostpaths --disable diagrams --disable versions --disable pins --disable immutable --disable vcs --disable commits --disable planning --disable tracked --disable targets --disable citations --disable sources --disable workflows
+
+.PHONY: doc-usage
+doc-usage: ## Aufruf und Optionen von d-check selbst (--help)
+	@docker run --rm --network none -v "$(CURDIR):/repo:ro" $(DCHECK_REF) --help
 
 .PHONY: doc-help
 doc-help: ## diese Liste der doc-*-Targets

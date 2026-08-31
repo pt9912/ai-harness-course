@@ -18,12 +18,12 @@ check: docs-check alignment-check ## beide Validatoren nacheinander
 
 # Referenz-Checks (Links, Anker, Bilder, Inline-Code-Pfade) via d-check:
 # das Gate-Fragment `d-check.mk` ist tool-generiert (`d-check --print-mk`,
-# v0.67.0) und wird included — kein handgepflegtes Recipe. Re-Pin über
+# v0.71.1) und wird included — kein handgepflegtes Recipe. Re-Pin über
 # DCHECK_DIGEST (sticht den Tag von DCHECK_IMAGE); Konfiguration in .d-check.yml.
 # Bei d-check-Release neu erzeugen: `d-check --print-mk > d-check.mk`, DCHECK_DIGEST
 # neu setzen. Der Node-Validator bleibt Rest-Sensor für die Modul-Nummern-Checks.
 GATE_IMAGE ?= ai-harness-course-gates
-DCHECK_DIGEST ?= sha256:c6c1465b94f07ab24439665be40a3107df51a3c0c62d0159a4e4a915fb03ca7c
+DCHECK_DIGEST ?= sha256:7d3d3041ec7b0b0e4e7f78b45d02e08ed4e17f61d119b47f050784230cf46d53
 include d-check.mk
 
 # docs-check brückt das tool-generierte `doc-check` (reiner d-check) und hängt
