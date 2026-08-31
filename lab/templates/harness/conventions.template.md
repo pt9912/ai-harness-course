@@ -176,6 +176,11 @@ halluziniertes Gate (Modul 13).
 
 ## Modus-Deklaration pro Sub-Area
 
+Die **Kürzel**-Spalte tragen nur Repos, deren Kennungen ein Bereichssegment
+führen (`ADR-<KUERZEL>-NNNN`, `slice-<KUERZEL>-NNN`); wer ohne Segment zählt,
+streicht sie. Regel: Baseline-Regelwerk `grundlagen-harness-dateien.md`
+§Konventionsspeicher.
+
 <!--
 Pro Modul / Verzeichnis / Sub-Area: Modus festlegen.
 - Greenfield (GF): Doc führt, Code folgt. Steady-State.
@@ -188,10 +193,9 @@ Pro Modul / Verzeichnis / Sub-Area: Modus festlegen.
 Eine Sub-Area in BF *ohne* Graduation-Plan ist eine Harness-Lüge:
 "permanente Ausnahme als temporär getarnt" (Modul 7 Analogie).
 
-Die Kürzel-Spalte tragen nur Repos, deren Kennungen ein Bereichssegment
-führen (ADR-<KUERZEL>-NNNN, slice-<KUERZEL>-NNN). Kurz, GROSS, ohne
-Leerzeichen — und nach der ersten vergebenen Kennung unveränderlich.
-Wer ohne Segment zählt (ein Schreiber), streicht die Spalte.
+Kuerzel: kurz, GROSS, ohne Leerzeichen — und nach der ersten vergebenen
+Kennung unveraenderlich. Die Bedingung, wann die Spalte ueberhaupt gefuehrt
+wird, steht oben im Fliesstext, weil dieser Kommentar beim Kopieren wegfaellt.
 -->
 
 | Sub-Area (Pfad / Modul) | Kürzel | Modus | Begründung | Graduation-Bedingung / Folge-Slice |

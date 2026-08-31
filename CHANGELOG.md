@@ -65,15 +65,23 @@ Der Kanon vergibt Kennungen mit Bereichssegment — `ADR-IDX-0004`,
 `slice-IDX-007` — und sagt, die Bereiche seien „nicht neu zu erfinden, es sind
 die Sub-Areas, die `harness/conventions.md` ohnehin einzeln deklariert". Den
 **Ort** benennt er damit. Die **Gestalt** nicht: Die Modus-Deklaration führt
-Pfade und Prosa-Namen, das Beobachtungs-Register führt Prosa-Namen, und das
-Kürzel `IDX` steht in keiner der beiden Tabellen. Wer eine Kennung vergibt,
-erfindet es also doch — jeder für sich.
+Pfade und Prosa-Namen, und das Kürzel `IDX` steht in keiner Tabelle. Wer eine
+Kennung vergibt, erfindet es also doch — jeder für sich.
 
-Gemessen an zwei Adopter-Repos: Weder die Modus-Deklaration von `d-check`
-(führt Pfade: `*`, `tools/harness/`) noch die des Beispiel-Repos (führt
-Prosa-Namen) enthält ein Kürzel. Aufgefallen ist die Lücke, als ein
-Konsumenten-CR verlangte, eine Herkunfts-Sub-Area gegen den deklarierten
-Bestand zu prüfen: Die Prüfung hätte keine auflösbare Autorität gehabt.
+Gemessen an zwei Adopter-Repos führt keine Modus-Deklaration ein Kürzel —
+`d-check` Pfade (`*`, `tools/harness/`), das Beispiel-Repo Prosa-Namen. **Beide
+sind damit nicht mangelhaft, sondern korrekt ausgenommen:** An beiden schreibt
+ein Mensch, ihre Kennungen tragen kein Bereichssegment, und `d-check` sagt das
+in seiner eigenen `conventions.md` ausdrücklich. Die Lücke wurde denn auch
+nicht an ihnen sichtbar, sondern an einem Konsumenten-CR für den
+Mehr-Schreiber-Fall: Er verlangte, eine Herkunfts-Sub-Area gegen den
+deklarierten Bestand zu prüfen — und die Prüfung hätte keine auflösbare
+Autorität gehabt.
+
+**Nicht behoben und hier benannt:** Die Sub-Area-Spalte des
+Beobachtungs-Registers führt weiterhin Prosa-Namen, also denselben Namen, der
+laut dieser Welle umformuliert werden darf. Das ist dieselbe Fragilität eine
+Ebene weiter; sie bleibt offen, bis ein Anlass sie misst.
 
 - [`source-precedence.md` §Vergabe](kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt):
   Das Segment wird **nachgeschlagen, nicht formuliert**. Fehlt das Kürzel in
