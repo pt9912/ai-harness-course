@@ -208,7 +208,8 @@ läuft mit jedem geschlossenen Slice, auch mit wellenlosen.
 die Slice-Closure selbst aus, und der Herkunfts-Anker lautet
 `seit slice-<NNN>`. Ein Eintrag kann
 also bei 3× stehen und trotzdem noch keine Regel sein. Was dann fehlt, ist
-nicht der Zähler, sondern der Lese-Schritt. Und die `BEO-<NNN>` macht die
+nicht der Zähler, sondern der Lese-Schritt — und bis er läuft, trägt der
+Eintrag `geplant` mit Kennung, nicht `offen`. Und die `BEO-<NNN>` macht die
 Zählung **unabhängig vom Wortlaut der Bezeichnung**: Ohne Kennung zählt eine
 Umformulierung als zweite Beobachtung, und keine der beiden erreicht je 3×.
 
@@ -306,10 +307,13 @@ getrennt.
 dafür steht das Register außerhalb der Welle-Closure.
 
 **(c)** Bis zur nächsten **Welle-Closure** steht der Eintrag bei 3× und ist
-**gezählt, aber nicht verkörpert**. Erst ihr Lese-Schritt macht daraus eine
-Regel in `AGENTS.md`, einem Gate, einem Skill oder einer `MR-*`, mit
-Herkunfts-Anker `seit welle-<NN>`. Wer beides gleichsetzt, hält eine Notiz für
-einen Wächter.
+**gezählt, aber nicht verkörpert** — und dieser Zwischenzustand hat einen
+Namen: Der Stand lautet **`geplant`**, mit der Kennung der Welle (oder des
+Slice), die die Regel schreibt. Erst ihr Lese-Schritt macht daraus eine Regel
+in `AGENTS.md`, einem Gate, einem Skill oder einer `MR-*`, und der Stand wird
+**`verkörpert`** mit Herkunfts-Anker `seit welle-<NN>`. Wer beides
+gleichsetzt, hält eine Notiz für einen Wächter — und wer den Eintrag
+stattdessen auf `offen` stehen lässt, hat die Schwelle folgenlos gemacht.
 
 **Nicht zu verwechseln — die Achse aus (b) ist eine andere:** Dass *dieser
 Slice* zu keiner Welle gehört, heißt nicht, dass das Repo keine Wellen

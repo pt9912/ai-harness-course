@@ -101,12 +101,34 @@ Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
   je 3×. Das Register ist zugleich die Vergabestelle.
 - **Wer schreibt, wer liest:** Eingetragen wird bei der **Slice-Closure** — neuer Eintrag mit neuer `BEO-<NNN>` oder Zähler erhöhen und Beleg ergänzen. Das macht den Zähler von der Welle unabhängig: Er läuft mit jedem geschlossenen Slice. **Gelesen wird an zwei Stellen:** die **Welle-Closure** liest, was 3× erreicht hat (*Lese-Schritt*, verkörpert); die **Slice-Planung** liest, was darunter steht (*Sichtungs-Schritt*, §8 des Slice-Plans — [Modul 5](modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)). Wer nur den ersten kennt, sieht alles unter 3× nie wieder an.
 - **Mensch urteilt, Maschine prüft Deckung.** Das Urteil *ist das dieselbe Beobachtung?* fällt beim Schreiben (Kennung vergeben oder zitieren). Maschinell entscheidbar ist nur die Deckung: ob eine in `done/` zitierte `BEO-<NNN>` eine Registerzeile hat **und ob jede Registerzeile mindestens einen Beleg trägt** — die maschinelle Hälfte der Register-Paarung (c). *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo zitiert": Die allermeisten stehen unter der Schwelle und sind nirgends zitiert. Muster: schreiben → committen → Gate prüft. Welches Werkzeug, ist Repo-Entscheidung.
-- **Der Beleg ist formgebunden** — drei Prüfungen ohne Urteil: **Form** (Slice-Kennung `slice-<NNN>`, kein Freitext) · **Anzahl** (so viele wie der Zähler) · **Lage** (führt das Repo die Slice-Datei, liegt sie in `done/`) — diese dritte Prüfung läuft **nach** dem `git mv`, zusammen mit der Register-Paarung (c): Der Beleg wird vor dem `mv` geschrieben, der `mv` ist ein eigener Commit; auf dem Schreib-Commit läge die Datei noch nicht in `done/`, ein Sensor dort meldete bei jeder korrekten Closure rot. Form und Anzahl prüfen den Registereintrag und sind davon unabhängig. **Grenze:** Die *Existenz* der Datei wird nicht verlangt — ein Repo darf Slices führen, die es nicht als Plan-Datei ablegt; ein Sensor, der sie einforderte, liefe auf jedem gewachsenen Repo rot. Ein erfundenes `slice-999` bleibt damit unentdeckt; das ist die Grenze der Deklaration und gehört benannt.
+- **Der Beleg ist formgebunden** — drei Prüfungen ohne Urteil: **Form** (die Kennung eines abgeschlossenen **Vorgangs**, kein Freitext) · **Anzahl** (so viele wie der Zähler) · **Lage** (führt das Repo die genannte Datei, liegt sie dort, wo ihre Klasse abgeschlossen wird — für den Regelfall Slice also in `done/`) — diese dritte Prüfung läuft **nach** dem `git mv`, zusammen mit der Register-Paarung (c): Der Beleg wird vor dem `mv` geschrieben, der `mv` ist ein eigener Commit; auf dem Schreib-Commit läge die Datei noch nicht in `done/`, ein Sensor dort meldete bei jeder korrekten Closure rot. Form und Anzahl prüfen den Registereintrag und sind davon unabhängig. **Grenze:** Die *Existenz* der Datei wird nicht verlangt — ein Repo darf Slices führen, die es nicht als Plan-Datei ablegt; ein Sensor, der sie einforderte, liefe auf jedem gewachsenen Repo rot. Ein erfundenes `slice-999` bleibt damit unentdeckt; das ist die Grenze der Deklaration und gehört benannt.
+- **Ein Vorgang zählt einmal — und was keinen hat, zählt gar nicht.** Regelfall
+  eines Belegs ist die Slice-Kennung; auch eine Welle und ein Review-Report sind
+  abgeschlossene Vorgänge und taugen als Beleg. Zwei Funde **im selben** Vorgang
+  sind *eine* Gelegenheit, kein zweites Auftreten: Der Zähler misst Wiederholung
+  über Vorgänge hinweg, nicht die Zahl der Funde. Ein Vorkommen **ohne**
+  abgeschlossenen Vorgang bekommt keinen Beleg und bewegt den Zähler nicht; es
+  gehört trotzdem in den Eintrag — *benannt, nicht gezählt.*
 - **Bei 3×** wandert der Eintrag in die Steering-Loop-Einträge der laufenden
   Welle-Closure und wird zur verkörperten Regel (mit Herkunfts-Anker) — ohne
   Wellen-Betrieb beim Lese-Schritt, den dann die Slice-Closure selbst auslöst, Anker `seit slice-<NNN>`. Die
   Zeile bleibt im Register mit Vermerk stehen; gestrichen wird nur mit
   Begründung, warum die Beobachtung nicht mehr auftreten kann.
+- **Der Stand wird dabei zu einem von drei Ausgängen** — geschlossene Menge wie
+  beim offenen Risiko ([Modul 5](modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst)):
+
+  | Ausgang | Wann | Wohin |
+  |---|---|---|
+  | **verkörpert** | die Regel steht | Zielort **und** Herkunfts-Anker (`seit welle-<NN>` bzw. `seit slice-<NNN>`) |
+  | **geplant** | die Regel ist beschlossen, aber noch nicht geschrieben | Kennung des Slice oder der Welle, die sie schreibt |
+  | **gestrichen** | die Beobachtung kann nicht mehr auftreten | §Gestrichene Einträge, **mit Begründung** |
+
+  Unterhalb der Schwelle ist `offen` der Stand — dort kein Ausgang, sondern der
+  Normalzustand. Nur *verkörpert* und *geplant* hängen an der Schwelle;
+  *gestrichen* steht jederzeit offen, wenn die Ursache wegfällt. *Geplant* ist ein Ausgang **mit Kennung**, kein Vorsatz.
+  **Urteilsfrei** ist, *dass* ab 3× ein Ausgang dasteht, *welcher der drei* es
+  ist und ob die genannte Kennung auflöst; **Urteil** bleibt, ob der Ausgang
+  trägt.
 
 ### Wellen-Closure-Prozedur (Modul 6)
 

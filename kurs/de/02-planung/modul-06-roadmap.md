@@ -469,9 +469,10 @@ Daraus folgt eine Arbeitsteilung:
    maschinelle Hälfte der Register-Paarung (c) aus der Welle-Closure. Damit die
    zweite Hälfte mehr ist als eine Nicht-leer-Prüfung, ist der **Beleg
    formgebunden** — drei Prüfungen, die ohne Urteil auskommen:
-   **Form** (eine Slice-Kennung `slice-<NNN>`, kein Freitext) ·
+   **Form** (die Kennung eines abgeschlossenen **Vorgangs**, kein Freitext) ·
    **Anzahl** (so viele Belege, wie der Zähler behauptet) ·
-   **Lage** (führt das Repo die Slice-Datei, liegt sie in `done/`).
+   **Lage** (führt das Repo die genannte Datei, liegt sie dort, wo ihre Klasse
+   abgeschlossen wird — für den Regelfall Slice also in `done/`).
 
    > **Wann die Lage-Prüfung läuft — und warum das nicht beliebig ist.** Der
    > Beleg wird **vor** dem `git mv` geschrieben, und die Hard Rule *git mv +
@@ -482,6 +483,19 @@ Daraus folgt eine Arbeitsteilung:
    > Register-Paarung (c) und läuft mit ihr **nach** dem `git mv`, wie die
    > beiden anderen Paarungen auch. Form und Anzahl sind davon unabhängig; sie
    > prüfen den Registereintrag, nicht die Ablage.
+
+   > **Ein Vorgang zählt einmal — und was keinen hat, zählt gar nicht.** Der
+   > Regelfall eines Belegs ist die Slice-Kennung; auch eine Welle und ein
+   > Review-Report sind abgeschlossene Vorgänge und taugen als Beleg. Zwei
+   > Funde **im selben** Vorgang sind dagegen *eine* Gelegenheit, kein zweites
+   > Auftreten: Der Zähler misst Wiederholung über Vorgänge hinweg, nicht die
+   > Zahl der Funde — ein zweites Mal derselbe Kopf, derselbe Kontext, dieselbe
+   > Sitzung belegt nichts über die Hartnäckigkeit des Phänomens. Und ein
+   > Vorkommen **ohne** abgeschlossenen Vorgang — beim Lesen von Code, im
+   > Gespräch, bei einer Freigabe — bekommt keinen Beleg und bewegt den Zähler
+   > nicht. Es gehört trotzdem in den Eintrag: *benannt, nicht gezählt.* Der
+   > Preis ist ein Zähler, der langsamer steigt als das Phänomen auftritt; der
+   > Gegenwert ist einer, der nie mehr behauptet, als seine Belegliste trägt.
 
    > **Grenze — ehrlich benannt:** Die *Existenz* der Datei wird **nicht**
    > verlangt. Ein Repo darf Slices führen, die es nicht als Plan-Datei ablegt
@@ -504,6 +518,41 @@ verkörperten Regel — mit Herkunfts-Anker
 Ohne Wellen-Betrieb geschieht dasselbe beim Lese-Schritt, den dann die
 Slice-Closure selbst auslöst (§Wann Arbeit eine Welle braucht); der Anker
 lautet dann `seit slice-<NNN>`.
+
+**Und der Stand wird dabei zu einem von drei Ausgängen** — dieselbe
+geschlossene Menge wie beim offenen Risiko
+([Modul 5 §Offene Risiken](modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst)),
+eine Ebene höher:
+
+| Ausgang | Wann | Wohin |
+|---|---|---|
+| **verkörpert** | die Regel steht | Zielort **und** Herkunfts-Anker (`seit welle-<NN>` bzw. `seit slice-<NNN>`) |
+| **geplant** | die Regel ist beschlossen, aber noch nicht geschrieben | Kennung des Slice oder der Welle, die sie schreibt — mit ID, wie beim Risiko-Ausgang *eingetreten* |
+| **gestrichen** | die Beobachtung kann nicht mehr auftreten | §Gestrichene Einträge, **mit Begründung** |
+
+Unterhalb der Schwelle ist `offen` der Stand — dort ist er kein Ausgang,
+sondern der Normalzustand. **Nur zwei der drei hängen an der Schwelle:**
+*verkörpert* und *geplant* sind ihre Antwort. *Gestrichen* steht jederzeit
+offen — fällt die Ursache weg, bevor der Zähler 3 erreicht, wandert die Zeile
+mit Begründung in §Gestrichene Einträge, statt als *offen* weiterzuzählen für
+etwas, das nicht mehr auftreten kann.
+
+**Warum es einen dritten Ausgang braucht.** Die Schwelle fällt nicht immer
+dort, wo die Regel geschrieben werden kann: Sie kann mitten in einer Welle
+fallen, oder die fällige Regel braucht einen eigenen Slice. Ohne *geplant*
+bliebe nur, den Eintrag `offen` stehen zu lassen — dann ist die Schwelle
+folgenlos — oder eine Verkörperung zu behaupten, die es noch nicht gibt.
+*Geplant* ist deshalb ein Ausgang **mit Kennung**, kein Vorsatz: Ein Stand,
+der nur „wird gemacht" sagt, ist derselbe Freitext, den die drei Ausgänge
+gerade ersetzen.
+
+**Was Maschine hier kann** — dieselbe Trennung wie beim Risiko. **Urteilsfrei**
+ist, *dass* ein Eintrag ab 3× einen Ausgang trägt, *welcher der drei* es ist,
+und ob die genannte Kennung im Repo auflöst: Die drei sind eine geschlossene
+Menge, kein Freitext. **Urteil** bleibt, ob der Ausgang trägt — ob die
+Verkörperung das Phänomen wirklich deckt, ob die Beobachtung wirklich nicht
+mehr auftreten kann.
+
 Im Register bleibt die Zeile mit dem Vermerk stehen, wohin sie ging; gestrichen
 wird nur mit Begründung, warum die Beobachtung nicht mehr auftreten kann.
 

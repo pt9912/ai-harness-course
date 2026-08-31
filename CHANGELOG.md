@@ -11,6 +11,54 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 106 — 2026-08-31 · Die Schwelle bekommt ihre drei Ausgänge
+
+Modul 5 verlangt für jedes notierte Risiko **genau einen von drei Ausgängen** —
+eine geschlossene Menge, kein Freitext, mit sauber benannter urteilsfreier
+Hälfte. Eine Ebene höher fehlte dieselbe Form: Was ein Eintrag *tut*, wenn er
+3× erreicht, stand als Fließtext in der Stand-Spalte. Damit war der teuerste
+Moment des Steering Loops der einzige ohne Formvorgabe.
+
+- [`modul-06` §Das Beobachtungs-Register](kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register):
+  Ab 3× trägt der Stand **verkörpert** (Zielort *und* Herkunfts-Anker),
+  **geplant** (Kennung des Slice oder der Welle, die die Regel schreibt) oder
+  **gestrichen** (mit Begründung). Unterhalb der Schwelle ist `offen` der
+  Normalzustand; *gestrichen* hängt als einziges nicht an der Schwelle, denn
+  eine weggefallene Ursache wartet nicht auf den dritten Beleg.
+- **Warum ein dritter Ausgang.** Die Schwelle fällt nicht immer dort, wo die
+  Regel geschrieben werden kann. Ohne *geplant* bliebe nur, den Eintrag `offen`
+  stehen zu lassen — dann ist die Schwelle folgenlos — oder eine Verkörperung
+  zu behaupten, die es nicht gibt. *Geplant* ist deshalb ein Ausgang **mit
+  Kennung**, kein Vorsatz.
+
+**Und der Beleg zählt jetzt Vorgänge, nicht Funde.** Zwei Fälle, beide an einem
+fremden Register gemessen, beide dort bewusst und begründet abweichend:
+
+- **Ein Vorgang zählt einmal.** Zwei Funde im selben Slice sind *eine*
+  Gelegenheit — derselbe Kopf, derselbe Kontext, dieselbe Sitzung belegen
+  nichts über die Hartnäckigkeit eines Phänomens. Gegenprobe: ein Register
+  führte einen Slice zweimal und stand damit auf 7 statt 6.
+- **Was keinen Vorgang hat, zählt nicht — wird aber benannt.** Neben dem Slice
+  taugen auch Welle und Review-Report als Beleg; ein Vorkommen beim Lesen von
+  Code oder im Gespräch bewegt den Zähler nicht. Gegenprobe: ein Eintrag stand
+  auf Zähler 3 mit *einem* Slice-Beleg, mit der Notiz „die Klasse ist dichter
+  als der Zähler". Der Preis ist ein Zähler, der langsamer steigt als das
+  Phänomen auftritt; der Gegenwert ist einer, der nie mehr behauptet, als
+  seine Belegliste trägt.
+
+Spiegel, Vorlage und die Lösung zu Modul 6 ziehen mit — dort war der
+Zwischenzustand als *„gezählt, aber nicht verkörpert"* beschrieben, also genau
+die Lücke, die der dritte Ausgang schließt. Das Beispiel-Register hat die Regel beim
+Nachziehen selbst geprüft: `BEO-006` stand mit Zähler 1× auf *geschlossen in
+`slice-022`* — ein vierter Ausgang im Freitext, und zugleich der Fall, der
+zeigt, dass *gestrichen* nicht an der Schwelle hängen darf. Die Zeile ist
+jetzt dort, wo sie hingehört, und die Regel sagt es ausdrücklich.
+
+Damit sind beide Quell-Wellen erledigt, auf die der d-check-CR wartet.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN. `make bundle-check` grün.
+
 ## Welle 105 — 2026-08-31 · Das Bereichssegment bekommt einen Ort
 
 Der Kanon vergibt Kennungen mit Bereichssegment — `ADR-IDX-0004`,
