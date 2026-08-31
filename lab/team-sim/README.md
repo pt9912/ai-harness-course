@@ -89,7 +89,7 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s18a | Alias-Gruppe: Beleg unterm Alias, Slice-Kennung doppelt, eine Invalidierung | **still** | ✓ alle Eingaben der Ableitung liegen vor, niemand liest sie |
 | s18b | Alias-Zyklus A → B → A | **still** | ✓ die Kette hat keinen Leser |
 | s19a | Archivierungs-Lauf über eine geschlossene Welle | 6 Volltexte im Zip, 4 Stubs | ✓ Reviews bekommen keinen Stub — sie haben keine eigene Identität |
-| s19b | Trefferzeilen am selben Bestand, vorher/nachher | fallen | ✓ 17 → 5 an der Fixture |
+| s19b | Trefferzeilen vorher/nachher **und** die vier Stubs stehen | fallen, Stubs da | ✓ 17 → 5; die zweite Hälfte kam aus einer Mutationsprobe |
 | s19c | Slice **ohne** Wellen-Zugehörigkeit | `Welle:` bleibt `ohne Welle`, `Archiviert mit:` nennt die einsammelnde | ✓ zwei Tatsachen, zwei Felder |
 | s19d | beide Verweis-Formen nach dem Umzug | 0 Befunde | ✓ — **erst nach einer Reparatur, siehe unten** |
 | s19e | Gegenprobe: ohne Verweis-Nachzug | **`target-missing`** | ✓ die Zusage ist belegt, nicht behauptet |
@@ -160,6 +160,14 @@ nicht falsch, sie war nicht eingelöst). Seit dem Pin-Bump messen s15b und s16c
 den Fix — beide Modi antworten gleich. Die schärfste Folge misst s16c: Weil
 der Dateiname eines Belegs **die** Slice-Kennung ist, hätte ein reiner Rename
 den Zähler richtig gelassen und den Beleg falsch gemacht; heute meldet es.
+
+**Befund aus s19 — ein Verdikt maß die falsche Größe.** `s19b` prüfte nur, dass
+die Trefferzahl *fällt*. Eine Mutationsprobe — die Kürzung fällt aus, es
+entstehen gar keine Stubs — ließ es **grün**: Löschen senkt die Zahl genauso
+wie Kürzen. Das Verdikt hängt jetzt zusätzlich an den vier Stubs, und dieselbe
+Mutation macht es rot. Genau die Klasse, die ein Konsumenten-Register als
+*„ein Test, dessen Umkehrung grün bleibt"* führt — hier an der eigenen Suite
+gefunden, nicht am Gegenstand.
 
 **Befund aus s19 — der Verweis-Nachzug braucht zwei Formen, nicht eine.** Der
 erste Lauf war rot: Der Nachzug traf nur Verweise mit `done/`-Präfix, wie das

@@ -656,9 +656,13 @@ s19_archivierung() {
   [ "$imzip" = 6 ] && [ "$stubs" = 4 ] && ok=0 || ok=1
   verdikt "s19a Archivierungs-Lauf: 6 Volltexte im Zip, 4 Stubs (Reviews ohne)" "Zip 6, Stubs 4" "Zip $imzip, Stubs $stubs" $ok
 
+  # Die Zahl allein traegt die Aussage NICHT: Loeschen senkt sie genauso wie
+  # Kuerzen. Gemessen an einer Mutation (Stubs faellt aus) blieb dieses Verdikt
+  # gruen — deshalb haengt es jetzt zusaetzlich an den vier Stubs.
   nachher=$(grep -rc "Zusage\|Gate\|Anker" $P/done docs/reviews 2>/dev/null | awk -F: '{s+=$2} END{print s+0}')
-  [ "$vorher" -gt 0 ] && [ "$nachher" -lt "$vorher" ] && ok=0 || ok=1
-  verdikt "s19b Trefferzeilen fallen (Volltext -> Stub)" "nachher < vorher, vorher > 0" "vorher=$vorher, nachher=$nachher" $ok
+  n_stubs=$(ls "$P/done/welle-2-ausbau"/*.md 2>/dev/null | wc -l)
+  [ "$vorher" -gt 0 ] && [ "$nachher" -lt "$vorher" ] && [ "$n_stubs" = 4 ] && ok=0 || ok=1
+  verdikt "s19b Trefferzeilen fallen, UND die vier Stubs stehen (gekuerzt, nicht geloescht)" "nachher < vorher > 0, 4 Stubs" "vorher=$vorher, nachher=$nachher, Stubs=$n_stubs" $ok
 
   wf=$(grep -m1 '^\*\*Welle:\*\*' "$P/done/welle-2-ausbau/slice-005-wartung.md" | sed 's/\*\*//g')
   am=$(grep -m1 -o 'Archiviert mit:\*\* [a-z0-9-]*' "$P/done/welle-2-ausbau/slice-005-wartung.md" | sed 's/\*\*//')
