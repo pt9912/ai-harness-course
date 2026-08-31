@@ -327,6 +327,240 @@ s11_adr_immutabel_im_team() {
   verdikt "s11b Entscheidung einer Accepted-ADR per PR gelandet: core-drift-vcs" "core-drift-vcs auf der Range" "$(echo "$out"|tail -1)" $ok
 }
 
+# ---------------------------------------------------------------------------
+# s12-s18 — die Verzeichnisform des Beobachtungs-Registers (ENTWURF).
+# Gegenstand ist NICHT die gelehrte Form: Der Seed traegt weiter die flache
+# observations.md aus Modul 6 (s03/s07 messen sie). Die Verzeichnisform steht
+# in docs/steering-loop-team.md als Diskussionsstand; ihr §Naechster
+# belastbarer Schritt nennt genau die sieben Faelle, die hier laufen. Sie
+# gehoert darum in die Szenarien, nicht in den Seed.
+#
+# Die drei Dateiklassen der Zielstruktur:
+#   observation.md      Kennung + Herkunfts-Sub-Area   (immutabel)
+#   state.md            Zustand, Ausgang               (veraenderlich)
+#   evidence/<slice>.md genau ein belegtes Auftreten   (immutabel)
+# `**Kennung:**` steht in beiden immutablen Klassen und in state.md nicht —
+# damit traegt EIN `vcs.immutable-when` genau die Klassen, die es soll.
+BEOWURZEL="docs/plan/planning/observations"
+
+beleg() { # $1 clone  $2 kennung(NS/slug)  $3 slice-kennung
+  printf '# Beleg %s\n\n**Kennung:** %s\n\n**Slice:** %s\n' "$3" "$2" "$3" \
+    > "$1/$BEOWURZEL/$2/evidence/$3.md"
+}
+beo() { # $1 clone  $2 kennung(NS/slug)  $3.. slice-kennungen
+  local w="$1" k="$2" s; shift 2
+  mkdir -p "$w/$BEOWURZEL/$k/evidence"
+  printf '# Beobachtung %s\n\n**Kennung:** %s\n\n**Herkunfts-Sub-Area:** %s\n' "$k" "$k" "${k%%/*}" \
+    > "$w/$BEOWURZEL/$k/observation.md"
+  printf '# Stand\n\n**Zustand:** offen\n' > "$w/$BEOWURZEL/$k/state.md"
+  for s in "$@"; do beleg "$w" "$k" "$s"; done
+}
+belege() { ls "$1/$BEOWURZEL/$2/evidence" 2>/dev/null | wc -l; }   # abgeleiteter Zaehler
+# vcs fokussiert wie in s11: nur das Modul, das die Aussage traegt.
+vcslauf() { docker run --rm --network none -v "$1:/repo:ro" "$IMG" \
+  --enable vcs --disable links --disable anchors --disable planning --range "$2" 2>&1; }
+# derselbe Lauf ueber den zweiten dokumentierten Eingabe-Modus: HEAD gegen Index.
+vcsstaged() { docker run --rm --network none -v "$1:/repo:ro" "$IMG" \
+  --enable vcs --disable links --disable anchors --disable planning --staged 2>&1; }
+# Config-Variante fuer die Pfadidentitaet: dieselbe vcs-Mechanik wie beim
+# ADR-Kern (s11), nur auf die Beobachtungs-Klasse gerichtet.
+beo_vcs_config() { cat > "$1/.d-check.yml" <<'YML'
+scan:
+  roots: ["."]
+modules: [links, anchors, planning]
+vcs:
+  paths: ["docs/plan/planning/observations/**/*.md"]
+  immutable-when: '^\*\*Kennung:\*\*'
+planning:
+  roadmap: docs/plan/planning/in-progress/roadmap.md
+  heading: '## Offene Wellen'
+  marker: 'Nichts in Arbeit'
+YML
+}
+
+# s12 — Fall 1: zwei Evidence-Dateien fuer dieselbe BEO mergen und korrekt
+# zaehlen. Die Gegenprobe zu s03: dort kollidiert oder verdoppelt sich die
+# gemeinsame Zeile, hier addieren sich getrennte Dateien ohne Zutun.
+s12_belege_mergen() {
+  topo
+  beo "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary" slice-001
+  cd "$WORK/sim/alice"
+  schritt git add -A && schritt git commit -qm "BEO-REPLAY/golden-set-ohne-boundary (1 Beleg)" && schritt git push -q origin main || return 1
+  schritt git switch -qc a/beleg || return 1
+  beleg "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary" slice-003
+  schritt git add -A && schritt git commit -qm "Beleg slice-003" && schritt git push -q origin a/beleg || return 1
+  cd "$WORK/sim/bob"; schritt git pull -q origin main || return 1; schritt git switch -qc b/beleg || return 1
+  beleg "$WORK/sim/bob" "BEO-REPLAY/golden-set-ohne-boundary" slice-004
+  schritt git add -A && schritt git commit -qm "Beleg slice-004" && schritt git push -q origin b/beleg || return 1
+  cd "$WORK/sim/seedclone"; schritt git pull -q --no-rebase origin main || return 1
+  git fetch -q origin && git merge -q --no-edit origin/a/beleg >/dev/null 2>&1 && git merge -q --no-edit origin/b/beleg >/dev/null 2>&1; rc=$?
+  n=$(belege "$WORK/sim/seedclone" "BEO-REPLAY/golden-set-ohne-boundary")
+  [ $rc -eq 0 ] && [ "$n" = 3 ] && ok=0 || ok=1
+  verdikt "s12 zwei Belege aus zwei PRs: Merge glatt, abgeleiteter Zaehler 3" "rc=0, 3 Evidence-Dateien" "rc=$rc, $n Dateien" $ok
+}
+
+# s13 — Fall 2: gleichzeitige Neuanlage desselben Namespace/Slug-Pfads wird
+# laut. Der Pfad IST die Kennung; zwei Formulierungen desselben Phaenomens
+# treffen sich in derselben Datei. (Wortgleich angelegt bliebe es still —
+# deshalb formulieren beide eigenstaendig, wie im echten Fall.)
+s13_gleicher_pfad_laut() {
+  topo
+  cd "$WORK/sim/alice"; schritt git switch -qc a/neu || return 1
+  beo "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary" slice-003
+  printf '\nGolden Set nimmt keinen Boundary-Fall auf (alice).\n' >> "$WORK/sim/alice/$BEOWURZEL/BEO-REPLAY/golden-set-ohne-boundary/observation.md"
+  schritt git add -A && schritt git commit -qm "BEO angelegt (alice)" && schritt git push -q origin a/neu || return 1
+  cd "$WORK/sim/bob"; schritt git switch -qc b/neu || return 1
+  beo "$WORK/sim/bob" "BEO-REPLAY/golden-set-ohne-boundary" slice-004
+  printf '\nDer Grenzfall fehlt im Golden Set (bob).\n' >> "$WORK/sim/bob/$BEOWURZEL/BEO-REPLAY/golden-set-ohne-boundary/observation.md"
+  schritt git add -A && schritt git commit -qm "BEO angelegt (bob)" && schritt git push -q origin b/neu || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin && git merge -q --no-edit origin/a/neu >/dev/null 2>&1
+  git merge --no-edit origin/b/neu >/dev/null 2>&1; rc=$?
+  konflikt=$([ $rc -ne 0 ] && git ls-files -u | grep -q "BEO-REPLAY/golden-set-ohne-boundary/observation.md" && echo ja || echo nein)
+  [ "$konflikt" = ja ] && ok=0 || ok=1
+  verdikt "s13 derselbe Namespace/Slug in zwei PRs: add/add-Konflikt auf observation.md" "Konflikt auf observation.md (laut)" "rc=$rc, Konflikt=$konflikt" $ok
+}
+
+# s14 — Fall 3: paralleler Uebergang von 1x auf zusammen 3x. Der Zaehler ist
+# nach dem Merge richtig (das leistet die Form); dass der Uebertritt einen
+# Ausgang verlangt, leistet heute niemand — genau dafuer liegt der CR.
+s14_schwelle_im_merge() {
+  topo
+  beo "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary" slice-001
+  cd "$WORK/sim/alice"
+  schritt git add -A && schritt git commit -qm "BEO mit einem Beleg" && schritt git push -q origin main || return 1
+  schritt git switch -qc a/zwei || return 1
+  beleg "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary" slice-003
+  schritt git add -A && schritt git commit -qm "zweiter Beleg (alice)" && schritt git push -q origin a/zwei || return 1
+  cd "$WORK/sim/bob"; schritt git pull -q origin main || return 1; schritt git switch -qc b/zwei || return 1
+  beleg "$WORK/sim/bob" "BEO-REPLAY/golden-set-ohne-boundary" slice-004
+  schritt git add -A && schritt git commit -qm "zweiter Beleg (bob)" && schritt git push -q origin b/zwei || return 1
+  na=$(belege "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary")
+  nb=$(belege "$WORK/sim/bob" "BEO-REPLAY/golden-set-ohne-boundary")
+  [ "$na" = 2 ] && [ "$nb" = 2 ] && ok=0 || ok=1
+  verdikt "s14a beide Branches zaehlen lokal 2 (unter der Schwelle)" "alice=2, bob=2" "alice=$na, bob=$nb" $ok
+  cd "$WORK/sim/seedclone"; schritt git pull -q --no-rebase origin main || return 1
+  git fetch -q origin && git merge -q --no-edit origin/a/zwei >/dev/null 2>&1 && git merge -q --no-edit origin/b/zwei >/dev/null 2>&1; rc=$?
+  n=$(belege "$WORK/sim/seedclone" "BEO-REPLAY/golden-set-ohne-boundary")
+  zustand=$(grep -o "Zustand:\*\* [a-z]*" "$BEOWURZEL/BEO-REPLAY/golden-set-ohne-boundary/state.md")
+  out=$(dcheck "$WORK/sim/seedclone")
+  [ $rc -eq 0 ] && [ "$n" = 3 ] && echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s14b Merge-Stand 3x mit Zustand offen ohne Ausgang: STILL" "3 Belege, kein Befund (kein Sensor haelt die Schwelle)" "$n Belege, $zustand, $(echo "$out"|tail -1)" $ok
+}
+
+# s15 — Fall 4: Rename von Namespace oder Slug. Der Antrag stuetzte die
+# Pfadidentitaet auf DC-FA-VCS-001 ("geloeschte oder umbenannte immutable
+# Datei"). Unter v0.67.0 hielt die Zusage nur ueber `--staged`; ueber `--range`
+# — den CI-Pfad — blieb derselbe Rename still, weil go-gits Tree-Diff ihn als
+# Rename erkannte und d-check ihn auf dem NEUEN Pfad buchte, wo BASE nichts
+# hat. Das war ein WERKZEUG-Befund dieses Repos; d-check hat ihn bestaetigt
+# und in v0.71.1 behoben (Range-Diff ohne Rename-Erkennung). Seit dem
+# Pin-Bump misst s15b den FIX: beide Eingabe-Modi antworten gleich.
+# PIN-GEBUNDEN bleibt es trotzdem — wer auf < v0.71.1 zurueckgeht, dreht
+# s15b und s16c wieder auf "still".
+s15_pfadidentitaet() {
+  topo
+  beo_vcs_config "$WORK/sim/alice"
+  beo "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary" slice-001 slice-003
+  cd "$WORK/sim/alice"
+  schritt git add -A && schritt git commit -qm "BEO angelegt (vcs auf die Beobachtungs-Klasse)" || return 1
+  base=$(git rev-parse HEAD)
+  alt="$BEOWURZEL/BEO-REPLAY/golden-set-ohne-boundary/observation.md"
+  # Ein und derselbe Rename, zweimal gemessen: erst gestaged, dann committet.
+  schritt git mv "$BEOWURZEL/BEO-REPLAY/golden-set-ohne-boundary" "$BEOWURZEL/BEO-REPLAY/golden-set-luecke" || return 1
+  out=$(vcsstaged "$WORK/sim/alice"); befund "$out" "$alt" "core-drift-vcs" && ok=0 || ok=1
+  verdikt "s15a Slug umbenannt, --staged: core-drift-vcs" "core-drift-vcs (target: alter Pfad)" "$(echo "$out"|tail -1)" $ok
+  schritt git commit -qm "Slug umbenannt, Inhalt unveraendert" || return 1
+  out=$(vcslauf "$WORK/sim/alice" "$base..HEAD"); befund "$out" "$alt" "core-drift-vcs" && ok=0 || ok=1
+  verdikt "s15b derselbe Rename, --range: core-drift-vcs (Fix in v0.71.1)" "core-drift-vcs (target: alter Pfad) — beide Eingabe-Modi antworten gleich" "$(echo "$out"|tail -1)" $ok
+  # Die Grenze des stillen Falls: faellt die Aehnlichkeit, greift die Delete-Haelfte.
+  schritt git reset -q --hard "$base" || return 1
+  schritt git mv "$BEOWURZEL/BEO-REPLAY" "$BEOWURZEL/BEO-TEST" || return 1
+  printf '# Beobachtung\n\n**Kennung:** BEO-TEST/golden-set-ohne-boundary\n\n**Herkunfts-Sub-Area:** BEO-TEST\n\nVollstaendig neu formuliert, kein Satz des alten Textes bleibt stehen.\n' \
+    > "$BEOWURZEL/BEO-TEST/golden-set-ohne-boundary/observation.md"
+  schritt git add -A && schritt git commit -qm "Namespace umbenannt und neu formuliert" || return 1
+  out=$(vcslauf "$WORK/sim/alice" "$base..HEAD"); befund "$out" "$alt" "core-drift-vcs" && ok=0 || ok=1
+  verdikt "s15c Namespace umbenannt UND umformuliert, --range: core-drift-vcs" "core-drift-vcs (target: alter Pfad) — ohne Rename-Aehnlichkeit greift die Delete-Haelfte" "$(echo "$out"|tail -1)" $ok
+}
+
+# s16 — Fall 5: Aenderung oder Loeschung eines bestehenden Belegs wird
+# gemeldet. Das ist die append-only-Zusage des Entwurfs: Ein falscher Beleg
+# wird invalidiert (s18), nicht editiert und nicht geloescht.
+s16_beleg_immutabel() {
+  topo
+  beo_vcs_config "$WORK/sim/alice"
+  beo "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary" slice-001 slice-003
+  cd "$WORK/sim/alice"
+  schritt git add -A && schritt git commit -qm "BEO mit zwei Belegen" || return 1
+  base=$(git rev-parse HEAD)
+  bel="$BEOWURZEL/BEO-REPLAY/golden-set-ohne-boundary/evidence/slice-001.md"
+  printf '\nNachtraeglich umformuliert.\n' >> "$bel"
+  schritt git add -A && schritt git commit -qm "Beleg nachtraeglich geaendert" || return 1
+  out=$(vcslauf "$WORK/sim/alice" "$base..HEAD"); befund "$out" "$bel" "core-drift-vcs" && ok=0 || ok=1
+  verdikt "s16a bestehenden Beleg geaendert: core-drift-vcs" "core-drift-vcs (target: Evidence-Datei)" "$(echo "$out"|tail -1)" $ok
+  schritt git reset -q --hard "$base" || return 1
+  schritt git rm -q "$bel" || return 1
+  schritt git commit -qm "Beleg geloescht" || return 1
+  out=$(vcslauf "$WORK/sim/alice" "$base..HEAD"); befund "$out" "$bel" "core-drift-vcs" && ok=0 || ok=1
+  verdikt "s16b bestehenden Beleg geloescht: core-drift-vcs" "core-drift-vcs (target: Evidence-Datei)" "$(echo "$out"|tail -1)" $ok
+  # Die schaerfste Folge des s15-Befunds, jetzt die schaerfste Deckung: Der
+  # Dateiname IST die Slice-Kennung. Vor v0.71.1 liess ein reiner Rename den
+  # Zaehler richtig und machte den Beleg falsch — dieselbe Datei behauptete
+  # danach einen anderen Slice, ohne Befund. Seit dem Fix meldet es.
+  schritt git reset -q --hard "$base" || return 1
+  schritt git mv "$bel" "$BEOWURZEL/BEO-REPLAY/golden-set-ohne-boundary/evidence/slice-009.md" || return 1
+  schritt git commit -qm "Beleg auf eine andere Slice-Kennung umbenannt" || return 1
+  n=$(belege "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary")
+  out=$(vcslauf "$WORK/sim/alice" "$base..HEAD")
+  [ "$n" = 2 ] && befund "$out" "$bel" "core-drift-vcs" && ok=0 || ok=1
+  verdikt "s16c Beleg auf andere Slice-Kennung umbenannt, --range: core-drift-vcs" "Zaehler bleibt 2, core-drift-vcs (target: alter Beleg-Pfad)" "$n Belege, $(echo "$out"|tail -1)" $ok
+}
+
+# s17 — Fall 6: zwei verschiedene Slugs fuer dasselbe Phaenomen bleiben als
+# bewusst erwartete Grenze sichtbar. Das Beispielpaar stammt aus dem Entwurf
+# selbst. Still ist hier die ERWARTUNG, nicht das Versaeumnis: semantische
+# Gleichheit entscheidet ein Mensch, und das ist der Punkt.
+s17_zwei_slugs_still() {
+  topo
+  cd "$WORK/sim/alice"; schritt git switch -qc a/replay || return 1
+  beo "$WORK/sim/alice" "BEO-REPLAY/golden-set-ohne-boundary" slice-003
+  schritt git add -A && schritt git commit -qm "BEO-REPLAY/golden-set-ohne-boundary" && schritt git push -q origin a/replay || return 1
+  cd "$WORK/sim/bob"; schritt git switch -qc b/test || return 1
+  beo "$WORK/sim/bob" "BEO-TEST/grenzfall-fehlt-im-golden-set" slice-004
+  schritt git add -A && schritt git commit -qm "BEO-TEST/grenzfall-fehlt-im-golden-set" && schritt git push -q origin b/test || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin && git merge -q --no-edit origin/a/replay >/dev/null 2>&1 && git merge -q --no-edit origin/b/test >/dev/null 2>&1; rc=$?
+  n=$(ls -d "$BEOWURZEL"/*/*/ 2>/dev/null | wc -l)
+  out=$(dcheck "$WORK/sim/seedclone")
+  [ $rc -eq 0 ] && [ "$n" = 2 ] && echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s17 dasselbe Phaenomen unter zwei Slugs: STILL (bewusste Grenze)" "rc=0, 2 BEO-Verzeichnisse, 0 Befunde" "rc=$rc, $n Verzeichnisse, $(echo "$out"|tail -1)" $ok
+}
+
+# s18 — Fall 7: Invalidierung und Alias-Aufloesung. Der Merge legt alle
+# Eingaben der Ableitung vor — Alias-Ziel, doppelte Slice-Kennung ueber die
+# Gruppe, Invalidierung, Zyklus. Gelesen wird davon heute nichts. Die
+# Ableitung ist genau das, was der CR beantragt; hier steht, was ohne ihn
+# uebrig bleibt.
+s18_alias_und_invalidierung() {
+  topo
+  kan="BEO-REPLAY/golden-set-ohne-boundary"; ali="BEO-TEST/grenzfall-fehlt-im-golden-set"
+  beo "$WORK/sim/alice" "$kan" slice-001 slice-003
+  beo "$WORK/sim/alice" "$ali" slice-003 slice-004
+  cd "$WORK/sim/alice"
+  printf '# Stand\n\n**Zustand:** alias\n\n**Alias-von:** %s\n' "$kan" > "$BEOWURZEL/$ali/state.md"
+  mkdir -p "$BEOWURZEL/$kan/invalidations"
+  printf '# Invalidierung slice-001\n\n**Nimmt zurueck:** slice-001\n\n**Grund:** falsch zugeordnet.\n' > "$BEOWURZEL/$kan/invalidations/slice-001.md"
+  schritt git add -A && schritt git commit -qm "Alias-Gruppe mit Invalidierung" && schritt git push -q origin main || return 1
+  dat=$( { ls "$BEOWURZEL/$kan/evidence"; ls "$BEOWURZEL/$ali/evidence"; } | wc -l )
+  eind=$( { ls "$BEOWURZEL/$kan/evidence"; ls "$BEOWURZEL/$ali/evidence"; } | sort -u | wc -l )
+  inv=$(ls "$BEOWURZEL/$kan/invalidations" | wc -l)
+  out=$(dcheck "$WORK/sim/alice")
+  [ "$dat" = 4 ] && [ "$eind" = 3 ] && [ "$inv" = 1 ] && echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s18a Alias-Gruppe: Beleg unter dem Alias, Kennung doppelt, eine Invalidierung: STILL" "4 Dateien / 3 eindeutige Kennungen, 1 Invalidierung, 0 Befunde" "$dat/$eind Dateien, $inv Invalidierung, $(echo "$out"|tail -1)" $ok
+  printf '# Stand\n\n**Zustand:** alias\n\n**Alias-von:** %s\n' "$ali" > "$BEOWURZEL/$kan/state.md"
+  schritt git add -A && schritt git commit -qm "Alias-Zyklus A -> B -> A" && schritt git push -q origin main || return 1
+  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  verdikt "s18b Alias-Zyklus A -> B -> A: STILL" "0 Befunde (kein Sensor folgt der Kette)" "$(echo "$out"|tail -1)" $ok
+}
+
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -341,6 +575,13 @@ lauf s08 s08_closure_unter_anspruch
 lauf s09 s09_vorvergabe
 lauf s10 s10_inhaber_feld
 lauf s11 s11_adr_immutabel_im_team
+lauf s12 s12_belege_mergen
+lauf s13 s13_gleicher_pfad_laut
+lauf s14 s14_schwelle_im_merge
+lauf s15 s15_pfadidentitaet
+lauf s16 s16_beleg_immutabel
+lauf s17 s17_zwei_slugs_still
+lauf s18 s18_alias_und_invalidierung
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

@@ -24,6 +24,17 @@ gruppen:
   s09: [s09]                         # Vorvergabe aus dem Wellen-Plan anderswo gezogen: still
   s10: [s10a, s10b]                  # Inhaber-Feld: beide -> Konflikt; Uebernahme -> still
   s11: [s11a, s11b]                  # doc-immutable (vcs, Range): Geschichte frei, Kern core-drift-vcs
+  # s12-s18: ENTWURFS-Gegenstand (Verzeichnisform des Registers, docs/steering-loop-team.md
+  # §Naechster belastbarer Schritt) — nicht der gelehrte Korpus. Seed unveraendert.
+  s12: [s12]                         # zwei Belege, zwei PRs: Merge addiert die Dateien
+  s13: [s13]                         # derselbe Namespace/Slug: add/add-Konflikt, laut
+  s14: [s14a, s14b]                  # 1x + 1x + 1x = 3x erst im Merge-Stand: still
+  s15: [s15a, s15b, s15c]            # Pfadidentitaet: beide Eingabe-Modi melden den Rename (seit v0.71.1)
+                                     # PIN-GEBUNDEN: s15b + s16c erwarten den FIX aus v0.71.1. Unter < v0.71.1
+                                     # sind beide wieder still — Erwartungen dann zurueckdrehen.
+  s16: [s16a, s16b, s16c]            # Beleg geaendert/geloescht/umbenannt: core-drift-vcs
+  s17: [s17]                         # zwei Slugs fuer dasselbe Phaenomen: still (bewusste Grenze)
+  s18: [s18a, s18b]                  # Alias-Gruppe und Alias-Zyklus: still
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -31,3 +42,5 @@ laeufe:
   - { datum: 2026-08-22, image: v0.62.0, neu: [s04e, s04f, s04g, s04h, s04i], ergebnis: "16 PASS, 0 FAIL" }
   - { datum: 2026-08-22, image: v0.62.0, neu: [], form: "Welle 87 — Auswahl, ergebnis.tsv, Schritt-Waechter, Befund gezielt", ergebnis: "16 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-08-22, image: v0.62.0, neu: [s08a, s08b, s09, s10a, s10b, s11a, s11b], seed: "ADR-0001 + vcs-Block", ergebnis: "23 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-08-31, image: v0.67.0, neu: [s12, s13, s14a, s14b, s15a, s15b, s15c, s16a, s16b, s16c, s17, s18a, s18b], gegenstand: "Entwurf: Verzeichnisform des Beobachtungs-Registers (7 Faelle)", ergebnis: "36 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-08-31, image: v0.71.1, neu: [], gegenstand: "Pin-Bump: der s15-Befund ist behoben, s15b + s16c drehen von still auf core-drift-vcs", ergebnis: "36 PASS, 0 FAIL, 0 KAPUTT" }

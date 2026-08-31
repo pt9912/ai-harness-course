@@ -7,6 +7,13 @@ als `alice`/`bob`, und eine **vorab notierte Erwartung als Verhalten** — laut,
 still oder Gate-Befund. Auch die stillen Ausgänge sind Erwartungen: s02/s03
 *sollen* still verlaufen, sonst hätte die Lehre die Falle falsch beschrieben.
 
+**Zwei Gegenstände, sauber getrennt.** s01–s11 proben den **gelehrten**
+Korpus. s12–s18 proben einen **Entwurf**: die Verzeichnisform des
+Beobachtungs-Registers aus `docs/steering-loop-team.md` (Diskussionsstand,
+nicht normativ) gegen die sieben Fälle, die dort unter §Nächster belastbarer
+Schritt stehen. Der Seed trägt weiter die flache `observations.md` aus
+Modul 6; die Verzeichnisform legen die Szenarien selbst an.
+
 **Konsument:** wer die SOLL-Stufe *geprobt* der Team-Frage herstellt oder
 wiederholt (`docs/team.md` §SOLL). **Kein Gate:** läuft auf Anlass
 (`bash run.sh`), steht nicht in `make check` und wird nirgends als Sensor
@@ -34,7 +41,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -65,6 +72,19 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s10b | bob setzt sich als Inhaber, alice ändert nur den Rumpf | **still**, Inhaber = bob | ✓ Übernahme ohne Gegenwehr bleibt unbemerkt |
 | s11a | Geschichte-Zeile einer Accepted-ADR per PR gelandet, `vcs` auf der Range | 0 Befunde | ✓ `exclude-sections` trägt |
 | s11b | Entscheidung derselben ADR per PR gelandet | **`core-drift-vcs`** | ✓ `doc-immutable` sieht den Kern auch durch den Merge |
+| s12 | zwei Belege derselben BEO aus zwei PRs (Verzeichnisform) | Merge glatt, abgeleiteter Zähler 3 | ✓ getrennte Dateien addieren sich ohne Zutun |
+| s13 | derselbe Namespace/Slug in zwei PRs neu angelegt | add/add-Konflikt auf `observation.md` | ✓ der Pfad **ist** die Kennung, und er streitet |
+| s14a | 1× auf `main`, beide Branches legen je einen Beleg nach | beide lokal 2× | ✓ die Schwelle ist auf keinem Branch sichtbar |
+| s14b | ihr Merge-Stand: 3 Belege, `Zustand: offen` ohne Ausgang | **still** | ✓ kein Sensor hält die Schwelle — der Anlass des CR, gemessen |
+| s15a | Slug-Verzeichnis umbenannt, Inhalt unverändert, `--staged` | **`core-drift-vcs`** (alter Pfad) | ✓ der lokale Hook sieht den Rename |
+| s15b | **derselbe** Rename, committet, `--range` | **`core-drift-vcs`** (alter Pfad) | ✓ seit dem Fix in v0.71.1; unter v0.67.0 war hier **still** — siehe unten |
+| s15c | Namespace umbenannt **und** umformuliert, `--range` | **`core-drift-vcs`** (alter Pfad) | ✓ ohne Rename-Ähnlichkeit greift die Delete-Hälfte |
+| s16a | bestehenden Beleg geändert | **`core-drift-vcs`** | ✓ append-only hält, solange der Pfad bleibt |
+| s16b | bestehenden Beleg gelöscht | **`core-drift-vcs`** | ✓ dieselbe Hälfte, andere Richtung |
+| s16c | Beleg auf eine **andere Slice-Kennung** umbenannt, `--range` | **`core-drift-vcs`**, Zähler bleibt 2 | ✓ die schärfste Deckung: der Beleg kann den Slice nicht mehr still wechseln |
+| s17 | dasselbe Phänomen unter zwei Slugs | **still** | ✓ die bewusst menschliche Grenze, gemessen statt behauptet |
+| s18a | Alias-Gruppe: Beleg unterm Alias, Slice-Kennung doppelt, eine Invalidierung | **still** | ✓ alle Eingaben der Ableitung liegen vor, niemand liest sie |
+| s18b | Alias-Zyklus A → B → A | **still** | ✓ die Kette hat keinen Leser |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte
@@ -113,6 +133,35 @@ als Grenze benannt, und wer einen Wächter will, weiß jetzt, was er messen muss
 „bestanden" gegen leere Verzeichnisse, die Wachsamkeits-Zeile in `topo()`
 verhindert das jetzt; und ein Merge-Commit braucht eine Git-Identität — der
 erste Merge (fast-forward) läuft ohne, der zweite bricht mit rc=128.
+
+**Befund aus s15 — dieselbe Umbenennung, zwei Modi, gegenteilige Antwort;
+gemeldet, bestätigt, behoben.** Der Entwurf stützte die Unveränderlichkeit von
+Namespace und Slug auf `vcs`:
+[`DC-FA-VCS-001`](https://github.com/pt9912/d-check/blob/main/spec/lastenheft.md#dc-fa-vcs-001--git-diff-immutabilität-des-core-über-eine-commit-range-modul-vcs-opt-in)
+nennt die **umbenannte** immutable Datei ausdrücklich als `core-drift-vcs`.
+Unter `v0.67.0` hing die Zusage am Eingabe-Modus: Über `--staged` meldete der
+Rename (s15a), über `--range` — den CI-Pfad — blieb derselbe Rename still.
+Erst wenn die Ähnlichkeit unter die Schwelle fiel, entstand die Delete-Hälfte
+(s15c). Reproduziert auch an d-checks eigener Dogfood-Klasse, als
+**Werkzeug-Befund** gemeldet und dort bestätigt und in **`v0.71.1`** behoben
+(Range-Diff ohne Rename-Erkennung, kein Lastenheft-Bump: die Anforderung war
+nicht falsch, sie war nicht eingelöst). Seit dem Pin-Bump messen s15b und s16c
+den Fix — beide Modi antworten gleich. Die schärfste Folge misst s16c: Weil
+der Dateiname eines Belegs **die** Slice-Kennung ist, hätte ein reiner Rename
+den Zähler richtig gelassen und den Beleg falsch gemacht; heute meldet es.
+
+**Befund aus s12–s18 — was die Form ohne Werkzeug gewinnt, und was sie ihm
+schuldet.** Drei der sieben Fälle entscheidet **git** allein: getrennte
+Belege addieren sich beim Merge (s12), derselbe Pfad streitet laut (s13), ein
+geänderter oder gelöschter Beleg meldet sich (s16a/b) — keiner davon braucht
+eine CI-Zusage über den Merge-Stand. Ein vierter ist **bewusst** still (s17):
+semantische Gleichheit bleibt menschlich. Zwei sind der Gegenstand des CR und
+haben heute keinen Leser: die Schwelle im Merge-Stand (s14b) und die
+Alias-/Invalidierungs-Ableitung samt Zyklus (s18). Der siebte galt als gelöst,
+war es nicht — und ist es seit `v0.71.1` (s15b). Damit ist die Aussage des Entwurfs — *die
+deterministische Hälfte braucht einen CR* — auf ihre belastbare Fassung
+gebracht: Sie braucht ihn für **zwei** Aussagen, und für eine dritte braucht
+sie eine Reparatur am vorhandenen Modul.
 
 ## Grenzen — ausdrücklich
 

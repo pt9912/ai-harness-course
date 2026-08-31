@@ -11,6 +11,102 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 104 — 2026-08-31 · Der Steering-Loop-Zähler wird für Teams neu geschnitten
+
+Ein Team mit einem Feature- oder Bugfix-Branch je Aufgabe schreibt bei jeder
+Slice-Closure in dieselbe `observations.md`. Der Zähler ist fachlich
+personenunabhängig, seine Ablage aber ein gemeinsamer Ganz-Wert: offene PRs
+sind beim Sichten unsichtbar, zwei Hälften derselben Beobachtung können still
+nebeneinander mergen, und eine nächste `BEO-<NNN>` ist über offene Branches
+nicht lokal ableitbar.
+
+[`docs/steering-loop-team.md`](docs/steering-loop-team.md) hält den aktuellen
+Entwurfsstand fest, bewusst **noch nicht normativ**:
+
+- Beobachtungen liegen unter `observations/BEO-<SUB-AREA>/<slug>/` statt als
+  Zeilen einer gemeinsamen Tabelle.
+- `observation.md` trägt die stabile Identität, `state.md` den veränderlichen
+  Stand und `evidence/<slice-id>.md` je ein Auftreten. Der Zähler wird aus den
+  gültigen Evidence-Dateien abgeleitet und nicht gespeichert.
+- Für den Slug hielt der Entwurf das vorhandene Modul `vcs` für ausreichend
+  (`--range`/`--staged` meldet Rename und Delete einer immutablen Datei). Die
+  Probe widerlegt das für den **reinen** Rename; siehe unten. Davon abgegrenzt
+  bleibt das hermetische Modul `immutable`: Es schützt den Core per Hash,
+  bindet aber den Pfad nicht.
+- Der Entwurf behandelt neun Problemfelder: unter anderem semantische
+  Doppelbenennung, den parallelen 3×-Übergang, Status und Invalidierung,
+  Alias-Auflösung, erzeugte Sicht und die Migration bestehender
+  `BEO-<NNN>`.
+- Eine Lösungsmatrix stellt jedem dieser neun Punkte einen konkreten
+  Schreibweg, die maschinelle Absicherung und die verbleibende menschliche
+  Restgrenze gegenüber. Sie entscheidet unter anderem für Merge-Queue plus
+  3×-Gate, append-only Invalidierungen, azyklische Aliase, beidseitige
+  Evidence-Paarung und einen deklarierten Legacy-Cutover.
+- Die deterministische Aggregation — Evidence zählen, Schwelle und
+  Folgeaktion paaren, Pfad und Inhalt decken — kann der heutige d-check-
+  Modulsatz nicht als Ganzes ausdrücken. Beides ist deshalb passiert: ein
+  Werkzeug-CR und das Replay.
+
+**Der CR und die Rückfragen.** Ein Change Request an d-check beantragt die
+relationale und aggregierende Prüfung; d-check hat mit vier Fragen und einer
+Abhängigkeit geantwortet, wir mit einem Antwortschreiben. Beide Dokumente sind
+zugestellt und liegen beim Empfänger — dieses Repo hält davon keine Kopie
+(Change Request ist ein externer Prozess, kein Harness-Konstrukt).
+Sechs Punkte ändern den Antrag — §1 vertagt, §2 als Verschärfung gegen den
+eigenen Kanon markiert, §5 und §6 zurückgezogen, der Abschnitt *Bereits
+gelöst: Immutabilität* zurückgezogen, zwei Mutationsproben ergänzt. Die drei
+tragenden: Die Diagnosesicht (§6) ist als
+`--doctor`-Erweiterung zurückgezogen — sie ersetzt eine verlorene Lesefläche
+und gehört in die Berichts-Klasse. Die Drei ist **Konvention**, nicht
+Konfiguration; die freie Zustands-Liste ist gestrichen, weil sie verdeckte,
+dass unser Zustands-Vokabular noch kein Kanon ist. Die Sub-Area-Autorität ist
+als Kreuz-Dokument-Bindung angenommen — und älter als der Antrag: Modul 6
+trägt die Regel seit ihrer Niederschrift ohne Mechanik.
+
+**Das Replay: sieben Fälle, gemessen.** `lab/team-sim` bekommt s12–s18 für die
+Verzeichnisform (36/36 · 0 KAPUTT, erst auf Image-Pin v0.67.0, nach dem Bump auf v0.71.1 erneut). Der Seed bleibt
+unverändert — die Szenarien legen die Entwurfsform selbst an, weil sie kein
+Kanon ist. Ergebnis: **Drei** Aussagen trägt git ohne Werkzeug und ohne
+CI-Zusage über den Merge-Stand (getrennte Belege addieren sich, s12; derselbe
+Namespace/Slug streitet laut, s13; ein geänderter oder gelöschter Beleg meldet
+`core-drift-vcs`, s16a/b). **Eine** ist bewusst still (zwei Slugs für dasselbe
+Phänomen, s17). **Zwei** sind der Gegenstand des Gates und haben heute keinen
+Leser (die Schwelle im Merge-Stand, s14b; Alias-Auflösung, Invalidierung und
+Zyklus, s18).
+
+**Und einer galt als gelöst und ist es nicht (s15).** Dieselbe Umbenennung
+einer immutablen Datei, über beide dokumentierten Eingabe-Modi derselben
+Anforderung: Über `--staged` meldet `vcs` `core-drift-vcs` (s15a), über
+`--range` bleibt sie still (s15b) — und der stille ist der CI-Pfad. Erst wenn
+die Datei dabei umformuliert wird, erscheint auch dort die Delete-Hälfte
+(s15c). `DC-FA-VCS-001` nennt die umbenannte immutable Datei ausdrücklich,
+ohne einen Modus einzuschränken. Der Befund geht als eigener Bericht an
+d-check;
+der Abschnitt *Bereits gelöst: Immutabilität* des CR ist zurückgezogen. Die
+schärfste Folge misst s16c: Weil der Dateiname eines Belegs die Slice-Kennung
+ist, lässt ein reiner Rename den Zähler richtig und macht den Beleg falsch.
+
+**Der Ausgang, am selben Tag.** d-check hat geantwortet: **angenommen und
+aufgeschoben**, auf unseren eigenen Vorschlag hin — §1–§5 entstehen nach
+unseren zwei Quell-Wellen. Die Sub-Area-Autorität und die CI-Voraussetzung
+gelten als gesetzt, §6 wird als eigener Ausgabemodus entgegengenommen. Die von
+uns als Zwischenschritt vorgeschlagene Anzahl-Prüfung am flachen Register
+lehnt d-check ab, mit unserem eigenen Argument: Ein Gate gegen eine Regel, deren
+Quelle sich unvollständig nennt, erzwänge am ersten Tag Informationsverlust
+oder einen Carveout. Der `vcs`-Befund ist **bestätigt und behoben** in
+`v0.71.1` — Range-Diff ohne Rename-Erkennung, alle vier Fälle nachgefahren,
+kein Lastenheft-Bump: die Anforderung war nicht falsch, sie war nicht
+eingelöst. Der Pin dieses Repos steht seither auf `v0.71.1` (eigener
+`chore(d-check)`); mit ihm sind s15b und s16c von *still* auf
+`core-drift-vcs` gedreht — die Probe misst jetzt den Fix.
+
+Keine Änderung an `kurs/de`, `lab/regelwerk`, Templates oder Beispiel; die
+`Stand:`-Zeile des Regelwerk-Spiegels bleibt unverändert. Die Welle
+dokumentiert einen Entwurf samt Probe, keine neue Baseline-Regel.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN.
+
 ## Welle 103 — 2026-08-30 · Zwei Rot-Quellen, ein Prinzip
 
 Zweiter Befund desselben Konsumenten: Der Beispielpfad der MR-Vorlage
