@@ -187,11 +187,16 @@ Pro Modul / Verzeichnis / Sub-Area: Modus festlegen.
 
 Eine Sub-Area in BF *ohne* Graduation-Plan ist eine Harness-Lüge:
 "permanente Ausnahme als temporär getarnt" (Modul 7 Analogie).
+
+Die Kürzel-Spalte tragen nur Repos, deren Kennungen ein Bereichssegment
+führen (ADR-<KUERZEL>-NNNN, slice-<KUERZEL>-NNN). Kurz, GROSS, ohne
+Leerzeichen — und nach der ersten vergebenen Kennung unveränderlich.
+Wer ohne Segment zählt (ein Schreiber), streicht die Spalte.
 -->
 
-| Sub-Area (Pfad / Modul) | Modus | Begründung | Graduation-Bedingung / Folge-Slice |
-|---|---|---|---|
-| `*` (Default für gesamtes Repo) | <Greenfield / Brownfield / Hybrid> | <warum> | <Bedingung oder "n/a (GF)" oder "permanent + slice-Ref"> |
+| Sub-Area (Pfad / Modul) | Kürzel | Modus | Begründung | Graduation-Bedingung / Folge-Slice |
+|---|---|---|---|---|
+| `*` (Default für gesamtes Repo) | `<KUERZEL>` | <Greenfield / Brownfield / Hybrid> | <warum> | <Bedingung oder "n/a (GF)" oder "permanent + slice-Ref"> |
 
 ## Glossar (optional)
 

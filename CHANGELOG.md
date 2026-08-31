@@ -11,6 +11,48 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 105 — 2026-08-31 · Das Bereichssegment bekommt einen Ort
+
+Der Kanon vergibt Kennungen mit Bereichssegment — `ADR-IDX-0004`,
+`slice-IDX-007` — und sagt, die Bereiche seien „nicht neu zu erfinden, es sind
+die Sub-Areas, die `harness/conventions.md` ohnehin einzeln deklariert". Den
+**Ort** benennt er damit. Die **Gestalt** nicht: Die Modus-Deklaration führt
+Pfade und Prosa-Namen, das Beobachtungs-Register führt Prosa-Namen, und das
+Kürzel `IDX` steht in keiner der beiden Tabellen. Wer eine Kennung vergibt,
+erfindet es also doch — jeder für sich.
+
+Gemessen an zwei Adopter-Repos: Weder die Modus-Deklaration von `d-check`
+(führt Pfade: `*`, `tools/harness/`) noch die des Beispiel-Repos (führt
+Prosa-Namen) enthält ein Kürzel. Aufgefallen ist die Lücke, als ein
+Konsumenten-CR verlangte, eine Herkunfts-Sub-Area gegen den deklarierten
+Bestand zu prüfen: Die Prüfung hätte keine auflösbare Autorität gehabt.
+
+- [`source-precedence.md` §Vergabe](kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt):
+  Das Segment wird **nachgeschlagen, nicht formuliert**. Fehlt das Kürzel in
+  der Deklaration, zählen zwei Schreiber in zwei Räumen, ohne dass etwas
+  kollidiert — dieselbe stille Teilung wie bei einer Beobachtung unter zwei
+  Namen, nur eine Ebene tiefer: dort teilt sich der Zähler, hier der Zählraum.
+- [`harness-dateien.md` §Konventionsspeicher](kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher):
+  Die Modus-Deklaration führt eine **Kürzel-Spalte** — kurz, GROSS, ohne
+  Leerzeichen. Der Name taugt nicht als Segment, weil er umformuliert werden
+  darf und das Segment nicht; ein vergebenes Kürzel ist **unveränderlich**.
+- **Bedingt, nicht absolut.** Wo Kennungen kein Segment tragen, entfällt die
+  Spalte. Die Frage nach dem Zählraum entsteht erst mit dem zweiten Menschen
+  am Repo — der Kanon sagt das selbst, und das Beispiel-Repo ist genau dieser
+  Fall. Eine Kürzel-Spalte ohne Kennungen, die sie benutzen, deklariert
+  nichts.
+
+Spiegel und Vorlage ziehen mit (`conventions.template.md` bekommt die Spalte
+samt Streich-Hinweis für Ein-Schreiber-Repos); das Beispiel-Repo bekommt
+**keine** Spalte, sondern den Satz, warum es keine hat.
+
+Damit ist die erste der zwei Quell-Wellen erledigt, auf die der d-check-CR
+wartet. Die zweite — die geschlossene Menge der Ausgänge bei 3× samt der
+beiden Beleg-Fälle — steht aus.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN.
+
 ## Welle 104 — 2026-08-31 · Der Steering-Loop-Zähler wird für Teams neu geschnitten
 
 Ein Team mit einem Feature- oder Bugfix-Branch je Aufgabe schreibt bei jeder

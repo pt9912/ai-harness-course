@@ -233,7 +233,7 @@ Pflichtgliederung (Default-Form als Einzeldatei):
 | Adoptierte Konventions-Quellen                | Pointer extern (Kurs/Standard) und in-Repo (Templates)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | Adaptions-Block | **Index** der Abweichungen ggü. Baseline, nicht die Einträge selbst: `MR-000` (Adoptions-Erklärung) plus je eine Tabellenzeile pro Adaption. Pflichtfelder eines Eintrags: Datum, Geltungsbereich, `Ersetzt-Baseline-Regel`, Adaption, Begründung, Auflösungs-Trigger oder "permanent"). Löst ein Eintrag einen früheren **ab**, nennt er zusätzlich *Löst auf* und *Ausgelöst durch Baseline-Stand*; *schärft* er ihn nur (der alte gilt weiter, die Regel wird **strenger**), steht das im Titel — `(schärft MR-<NNN>)`. Verliert ein Eintrag durch die Baseline dagegen einen *Teil seines Geltungsbereichs*, ist das eine **Ablösung** mit engerem Nachfolger, keine Schärfung. Einträge werden nie überschrieben. |
 | Zusatzklassen-Deklaration für Sensors-Bindung | repo-spezifische Bindung-Klassen jenseits der vier kanonischen (`LH-…`, Compliance, Modell-Version)                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Modus-Deklaration pro Sub-Area                | Greenfield · Brownfield (mit Konvergenz-Auftrag) · Hybrid                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Modus-Deklaration pro Sub-Area                | Greenfield · Brownfield (mit Konvergenz-Auftrag) · Hybrid; dazu je Sub-Area ihr **Kürzel**, sobald Kennungen dieses Repos ein Bereichssegment tragen                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Glossar (optional)                            | repo-spezifische Begriffe, die nicht im Regelwerk-Glossar stehen                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 **Ein Eintrag je Datei — und der Grund ist der Kontext des Agenten.**
@@ -282,6 +282,19 @@ Nebeneffekt, kein Selbstzweck: Ein Eintrag je Datei ist auch die einzige
 Form, in der die Append-only-Disziplin *prüfbar* wird — eine wachsende
 Sammeldatei lässt sich nicht gegen Core-Drift pinnen, eine akzeptierte
 Einzeldatei schon.
+
+**Das Kürzel der Sub-Area gehört in ihre Zeile.** Sobald Kennungen ein
+Bereichssegment tragen
+([§Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)),
+führt die Modus-Deklaration neben dem Namen eine **Kürzel-Spalte**: kurz,
+GROSS, ohne Leerzeichen. Sie ist die einzige Stelle, an der das Segment
+deklariert wird; der Name der Sub-Area taugt nicht dafür, weil er
+umformuliert werden darf und das Segment nicht. **Ein vergebenes Kürzel ist
+unveränderlich** — es steht in Kennungen, in Commits und in Verweisen.
+
+Wo Kennungen **kein** Segment tragen, entfällt die Spalte. Die Frage nach dem
+Zählraum entsteht erst mit dem zweiten Menschen am Repo
+([§Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
 
 Wichtig: `harness/conventions.md` dupliziert keinen Baseline-Text — sie
 verweist und ergänzt. Eine Kopie ginge gegen die Baseline in Drift,

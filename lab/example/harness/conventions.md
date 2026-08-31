@@ -103,6 +103,11 @@ hat. Jede Zeile weist die erfüllten Inklusions-Achsen aus
 ([`bootstrap.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area),
 Schwelle ≥ 2 von 3: 1 Konventions-Härte · 2 Inventur-Linie · 3 Struktureller Cluster).
 
+Eine **Kürzel-Spalte** führt diese Tabelle bewusst nicht: Die Kennungen
+dieses Repos tragen kein Bereichssegment (`ADR-0012`, nicht `ADR-IDX-0012`),
+weil an ihm ein Mensch schreibt. Die Spalte entsteht mit dem zweiten
+([`source-precedence.md` §Vergabe](../../../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+
 | Sub-Area | Pfad-Cluster | Erfüllte Inklusions-Achsen | Modus |
 |---|---|---|---|
 | Spec-Schreibung | `spec/` | 1 (eigene Spec-Stil-`MR` plausibel formulierbar, z. B. AK-Format-Standard) · 2 (Spec↔Code abgleichbar) · 3 (`spec/`) → **3/3** | Greenfield |

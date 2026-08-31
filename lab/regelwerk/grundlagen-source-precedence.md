@@ -377,6 +377,11 @@ Bedingung, die aus dem [Traceability-Constraint](grundlagen-traceability.md#trac
 folgt: Die Kennung steht in Commits, **sobald die Arbeit läuft** — wer sie erst
 beim Landen bekommt, hat sie im entscheidenden Moment nicht.
 
+**Das Segment wird nachgeschlagen, nicht formuliert.** Welches Kürzel eine
+Sub-Area trägt, steht in ihrer Modus-Deklaration
+([§Konventionsspeicher](grundlagen-harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)) —
+nicht im Kopf dessen, der gerade eine Kennung vergibt.
+
 **Die Welle fällt aus diesem Schema.** Sie bündelt Slices über Sub-Areas
 hinweg — es gibt keine Sub-Area, in der man sie zählen könnte; ein
 `welle-IDX-03` wäre eine falsche Aussage über den Geltungsbereich. Für die

@@ -382,6 +382,16 @@ Bedingung, die aus dem [Traceability-Constraint](traceability.md#traceability-co
 folgt: Die Kennung steht in Commits, **sobald die Arbeit läuft** — wer sie erst
 beim Landen bekommt, hat sie im entscheidenden Moment nicht.
 
+**Das Segment wird nachgeschlagen, nicht formuliert.** Welches Kürzel eine
+Sub-Area trägt, steht in ihrer Modus-Deklaration
+([`harness-dateien.md` §Konventionsspeicher](harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)) —
+nicht im Kopf dessen, der gerade eine Kennung vergibt. Fehlt es dort,
+entscheidet jeder Schreiber neu, ob die *Replay-/Eval-Infrastruktur* `REPLAY`,
+`EVAL` oder `RPL` heißt; danach zählen zwei Schreiber in zwei Räumen, und
+nichts kollidiert. Das ist dieselbe stille Teilung wie bei einer Beobachtung
+unter zwei Namen ([Modul 6 §Das Beobachtungs-Register](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)),
+nur eine Ebene tiefer: Dort teilt sich der Zähler, hier der Zählraum.
+
 **Die Welle fällt aus diesem Schema.** Sie bündelt Slices über Sub-Areas
 hinweg — es gibt keine Sub-Area, in der man sie zählen könnte; ein
 `welle-IDX-03` wäre eine falsche Aussage über den Geltungsbereich. Für die
