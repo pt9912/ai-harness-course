@@ -11,6 +11,42 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 111 — 2026-08-31 · Kein Zwang zum Nachrüsten ist kein Verbot
+
+Welle 109 schrieb: *„Ab Einführung, kein Nachrüsten. Wellen, die vorher
+schlossen, bleiben, wie sie sind."* Gemeint war die **fehlende Pflicht** — eine
+Rück-Archivierung als Regel-Zwang wäre eine Massenbewegung, die jedes
+Adopter-Repo auf einen Schlag umgräbt. Dagestanden ist ein **Verbot**, und es
+traf ausgerechnet den Anlass, aus dem die Regel überhaupt entstand: einen
+gewachsenen Bestand von Zeitdokumenten loszuwerden. Wer nur den laufenden
+Betrieb archivieren darf, hält das Wachstum an und gewinnt am Bestand nichts.
+
+- [`modul-06` §Die Wellen-Closure-Prozedur](kurs/de/02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur),
+  Schritt 4: **Kein Zwang zum Nachrüsten — und kein Verbot.** Wer den
+  Altbestand loswerden will, führt die Archivierung als eigenen, bewussten
+  Vorgang aus: dieselbe Operation, je geschlossener Welle einmal.
+- **Und der tragende Grund steht jetzt dort, wo er hingehört.** Die Pflicht
+  entfällt nicht aus Rücksicht auf irgendein Repo — sie entfällt, weil **der
+  Kanon nicht verlangen kann, was er nicht spezifizieren kann**: Die Auswahl
+  hängt an der Closure, die einen Slice einsammelt, und rückwirkend gibt es
+  keine. Eine Regel, deren Eingabe im Rückblick fehlt, ist als Pflicht nicht
+  formulierbar — als erlaubter Vorgang mit benannter Entscheidung sehr wohl.
+- **Die eine Entscheidung, die die laufende Regel nicht liefert**, ist dabei
+  benannt statt überlassen: Welche Welle sammelt die Slices ein, die keiner
+  angehören? Im Regelbetrieb ist das die Closure, die sie einsammelt —
+  rückwirkend gibt es keine. Zulässig ist die chronologisch nächste
+  geschlossene Welle oder ein einzelnes Sammel-Archiv für den Bestand vor der
+  Einführung; das Repo benennt die Zuordnung, statt sie zu erfinden.
+
+Der Anlass war eine Rückfrage am eigenen Text: *„Dann hätten wir nichts
+gewonnen."* Sie stimmte — für den Bestand. Gewonnen war der Zufluss, verloren
+die Möglichkeit, ihn aufzuräumen; die Regel sagt jetzt beides.
+
+Spiegel zieht mit, `Stand:` auf Kurs-Welle 111.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN.
+
 ## Welle 110 — 2026-08-31 · Die Trennung von Umzug und Berichtigung bekommt ihre Bedingung
 
 Ein Adopter hat eine **Kollision gemeldet statt sie aufzulösen** — und beim
@@ -83,8 +119,10 @@ wichtigere — ein Stub, der nur den Zeiger trägt und den Text behält, wäre d
 Archivierung, die es nicht gab.
 
 **Ab Einführung, kein Nachrüsten.** Wellen, die vorher schlossen, bleiben, wie
-sie sind; eine Rück-Archivierung wäre Bewegung ohne Anlass. Das Beispiel-Repo
-ist damit unverändert konform.
+sie sind. Dass das Beispiel-Repo damit unverändert konform bleibt, ist eine
+**Folge**, kein Grund — widerspräche es der Regel, wäre das Beispiel
+nachzuziehen, nicht die Regel zu schwächen (Rangfolge `kurs/de` vor
+`lab/example`).
 
 **Vier Grenzen, im Kanon benannt statt überspielt:** Geprüft ist die Form,
 nicht die Länge. Ob das Archiv vollständig ist, bezeugt nur der

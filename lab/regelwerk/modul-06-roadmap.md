@@ -259,8 +259,14 @@ ihrer Schritte in
    Der Stub hält die Verzeichnis-Position als Zustand und lässt eingehende
    Verweise gültig. Der Umzug ändert Pfade; die Operation zieht die Verweise
    nach — in **beiden** Formen, mit Verzeichnis-Präfix und
-   geschwister-relativ. **Ab Einführung, kein Nachrüsten:** Wellen, die vorher
-   schlossen, bleiben, wie sie sind.
+   geschwister-relativ. **Kein Zwang zum Nachrüsten — und kein Verbot:**
+   Wellen, die vor der Einführung schlossen, müssen nicht archiviert werden;
+   ein Repo bleibt ohne das konform. Wer den Altbestand loswerden will, führt
+   die Archivierung als eigenen Vorgang aus, je geschlossener Welle einmal.
+   Sie braucht dafür eine Entscheidung, die die laufende Regel nicht liefert:
+   welche Welle die Slices einsammelt, die keiner angehören. Das Repo benennt
+   die Zuordnung — die chronologisch nächste geschlossene Welle oder ein
+   einzelnes Sammel-Archiv für den Bestand vor der Einführung.
 
    **Urteilsfrei** ist die **Form** des Stubs: dass er den Archiv-Zeiger trägt
    und die Abschnitte des vollen Plans **nicht** mehr. Zwei Bedingungen, kein

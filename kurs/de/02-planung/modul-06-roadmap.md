@@ -759,8 +759,19 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    eingehenden Verweise nach — in **beiden** Formen, mit Verzeichnis-Präfix
    und geschwister-relativ; die Ergebnisnotiz bleibt flach, während ihre
    Slices umziehen, und ist damit der Pflichtfall, nicht der Randfall.
-   **Und: ab Einführung, kein Nachrüsten.** Wellen, die vorher schlossen,
-   bleiben, wie sie sind; eine Rück-Archivierung wäre Bewegung ohne Anlass.
+   **Kein Zwang zum Nachrüsten — und kein Verbot.** Wellen, die vor der
+   Einführung schlossen, *müssen* nicht archiviert werden: Als Pflicht wäre
+   das eine Massenbewegung ohne Anlass, und ein Repo bleibt ohne sie konform.
+   Wer den Altbestand aber loswerden *will* — und das ist der übliche Anlass,
+   die Regel überhaupt zu adoptieren —, führt die Archivierung als eigenen,
+   bewussten Vorgang aus: dieselbe Operation, je geschlossener Welle einmal.
+
+   Dafür braucht sie **eine** Entscheidung, die die laufende Regel nicht
+   liefert: **Welche Welle sammelt die Slices ein, die keiner angehören?**
+   Im Regelbetrieb ist das die Closure, die sie einsammelt — rückwirkend gibt
+   es keine. Das Repo benennt die Zuordnung, statt sie zu erfinden; zulässig
+   ist beides, die chronologisch nächste geschlossene Welle oder ein einzelnes
+   Sammel-Archiv für den Bestand vor der Einführung.
 
    **Was Maschine hier kann.** Urteilsfrei ist die **Form** des Stubs: dass
    er den Archiv-Zeiger trägt und die Abschnitte des vollen Plans *nicht*
