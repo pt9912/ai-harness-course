@@ -202,9 +202,17 @@ einer Urteilsfrage. **Gemessen an d-check `v0.71.1`, Modul `structure`:**
 >   require-pattern: '\*\*Archiviert mit:\*\*'
 > ```
 
-Ein vergessener, nicht gekürzter Slice im Verzeichnis einer archivierten Welle
-wird gemeldet; ein Slice der noch **offenen** Welle bleibt still. Ein Befund,
-korrekt — kein CR nötig, das vorhandene Modul trägt es.
+Ein Slice im Verzeichnis einer archivierten Welle **ohne** den
+`Archiviert mit:`-Marker wird gemeldet; ein Slice der noch **offenen** Welle
+bleibt still. Ein Befund, korrekt — kein CR nötig, das vorhandene Modul trägt
+es.
+
+**Was er dabei nicht prüft, und das ist wichtiger als es klingt:** Er sieht die
+**Marke**, nicht die **Kürzung**. Ein Stub, der den Marker trägt und trotzdem
+den vollen Text behalten hat, kommt durch. Gemessen an einer Mutationsprobe:
+Marker geschrieben, Kürzung ausgelassen — der Sensor blieb still, und einzig
+die Trefferzahl-Heuristik der Probe fiel auf. Die zentrale Zusage des Entwurfs
+— *es wurde wirklich gekürzt* — kann dieses Gate nicht durchsetzen.
 
 **Und genau daran ist die erste Fassung gescheitert.** Ohne das
 Wellen-Verzeichnis lautet der Glob `done/slice-*.md`, und `require-pattern`
@@ -220,6 +228,10 @@ die Bedingung ihn nicht ausdrücken kann.**
 verlangt einen Vergleich **über Dateien hinweg**; `structure` prüft je Datei
 und Abschnitt. Sie bleibt damit eine Zusage des Archivierungs-Werkzeugs, kein
 Gate.
+
+**Und eine dritte Lücke:** Dass Review-Reports **keinen** Stub bekommen, prüft
+nichts. Ein versehentlich erzeugter Review-Stub liegt einfach da; nur die fest
+verdrahtete Zahl der Probe fällt darauf.
 
 **Was auch damit nicht prüfbar bleibt:** Ein geschlossener Slice **ohne**
 Zugehörigkeit, den beim Archivieren niemand eingesammelt hat, liegt weiter
@@ -249,8 +261,15 @@ Stub.
 |---|---|---|
 | Text (heute) | 2,93 MiB | nein |
 | **Zip** | **2,94 MiB** | ja |
-| tar | 2,77 MiB | **nein** — Klartext liegt roh im Archiv |
-| tar.gz | **9,56 MiB** | ja |
+| tar | 2,57 MiB | **nein** — Klartext liegt roh im Archiv |
+| tar.gz | **6,54 – 9,56 MiB** | ja |
+
+**Die tar.gz-Zahl ist methodenabhängig, und das gehört dazu:** 9,56 MiB bei
+Verzeichnis-Reihenfolge im `tar`, 7,26 mit `--sort=name`, 6,54 zusätzlich mit
+`git repack -adq`. Ein Review konnte sie mit **synthetischen** Korpora nicht
+reproduzieren und kam in die Gegenrichtung — an diesem realen Bestand hält die
+Richtung dreimal. Die Aussage ist also *tar.gz kostet ein Vielfaches*, nicht
+*tar.gz kostet 9,56 MiB*.
 
 `tar.gz` scheidet aus: gzip komprimiert den ganzen Strom, jede Neuverpackung
 ist ein neuer, nicht deltabarer Blob. Zip komprimiert je Eintrag, unveränderte
@@ -321,9 +340,9 @@ Zwei Dinge, beide benannt statt überspielt:
 1. **Das Repo ganz ohne Wellen.** Dort fehlt der Sammelpunkt; eine Schwelle
    bleibt der Fallback. Unverändert offen.
 2. **Die Vollständigkeit des Archivs** — jede gekürzte Datei liegt als
-   Volltext darin — bezeugt nur der Archivierungs-Commit. s19a misst die
-   Zählung *gekürzte Dateien = Einträge im Zip* an einem Lauf; ein Gate danach
-   kann sie nicht wiederholen, weil das Zip opak ist.
+   Volltext darin — bezeugt nur der Archivierungs-Commit. s19a prüft beide Zahlen
+   gegen die erwarteten Werte des Laufs — nicht gegeneinander; ein Gate danach
+   kann sie ohnehin nicht wiederholen, weil das Zip opak ist.
 
 Damit ist die Form geprobt. Ob sie in den Kanon geht, ist die nächste
 Entscheidung; sie berührt Modul 5 (Lifecycle), Modul 6 (Wellen-Closure) und

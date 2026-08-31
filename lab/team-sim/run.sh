@@ -590,6 +590,7 @@ stub() { # $1 datei  $2 titel  $3 welle-feld  $4 archiviert-mit  $5 innen-pfad
 # Entwurf in ein Werkzeug — hier ist sie die Probe dieses Werkzeugs.
 archiviere() { # $1 clone  $2 welle  $3.. dateien (relativ zu docs/plan/planning)
   local w="$1" welle="$2"; shift 2
+  ARCHIVZAHL="$(printf '%s\n' "$@" | grep -c '/slice-') Slices, $(printf '%s\n' "$@" | grep -c '/2026-') Reviews"
   local P="$w/docs/plan/planning" d="$w/docs/plan/planning/done/$welle"
   mkdir -p "$d"
   ( cd "$w" && zip -qrX "docs/plan/planning/done/$welle/archiv.zip" "$@" ) || return 1
@@ -599,7 +600,9 @@ archiviere() { # $1 clone  $2 welle  $3.. dateien (relativ zu docs/plan/planning
     case "$base" in
       slice-*) local wf="$welle"; grep -q '^\*\*Welle:\*\* ohne Welle' "$w/$f" && wf="ohne Welle"
                stub "$d/$base" "${base%.md}" "$wf" "$welle" "$f" ;;
-      welle-*) stub "$d/$base" "${base%.md}" "$welle" "$welle" "$f" ;;
+      welle-*) # eigene Form: Zeiger auf die Ergebnisnotiz + Zahl der Vorgaenge
+               printf '# %s\n\n> **ARCHIVIERT** — Volltext:\n> `unzip -p done/%s/archiv.zip %s`\n\n**Geschlossen:** 2026-08-31 · **Ergebnisnotiz:** %s-results.md\n**Archivierte Vorgaenge:** %s\n' \
+                 "${base%.md}" "$welle" "$f" "$welle" "$ARCHIVZAHL" > "$d/$base" ;;
       *)       ;;   # Reviews bekommen KEINEN Stub — sie haben keine eigene Identitaet
     esac
     rm -f "$w/$f"
@@ -669,10 +672,18 @@ s19_archivierung() {
   [ "$wf" = "Welle: ohne Welle" ] && [ "$am" = "Archiviert mit: welle-2-ausbau" ] && ok=0 || ok=1
   verdikt "s19c wellenloser Slice: Welle bleibt 'ohne Welle', Archiviert mit nennt die einsammelnde" "beide Felder getrennt" "$wf / $am" $ok
 
+  ez=$(grep -c 'Ergebnisnotiz:\*\* welle-2-ausbau-results.md' "$P/done/welle-2-ausbau/welle-2-ausbau.md")
+  vz=$(grep -o 'Archivierte Vorgaenge:\*\* [0-9]* Slices, [0-9]* Reviews' "$P/done/welle-2-ausbau/welle-2-ausbau.md" | sed 's/.*\*\* //')
+  [ "$ez" = 1 ] && [ "$vz" = "3 Slices, 2 Reviews" ] && ok=0 || ok=1
+  verdikt "s19i Welle-Stub traegt seine EIGENE Form (Ergebnisnotiz + Vorgangszahl)" "Zeiger auf results.md, '3 Slices, 2 Reviews'" "Zeiger=$ez, Zahl='$vz'" $ok
+
   out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
   verdikt "s19d beide Verweis-Formen loesen nach dem Umzug auf" "0 Befunde" "$(echo "$out"|tail -1)" $ok
 
   sed -i 's|(welle-2-ausbau/slice-003-cache.md)|(slice-003-cache.md)|' "$P/done/welle-2-results.md"
+  # Vorbedingung: der injizierte Defekt muss wirklich drinstehen — sonst pruefte
+  # die Gegenprobe ein No-op und bliebe aus dem falschen Grund gruen.
+  grep -q '](slice-003-cache.md)' "$P/done/welle-2-results.md" || { echo "  KAPUTT ($CUR): Defekt-Injektion griff nicht"; return 1; }
   out=$(dcheck "$WORK/sim/alice"); befund "$out" "slice-003-cache.md" "target-missing" && ok=0 || ok=1
   verdikt "s19e Gegenprobe: ohne Verweis-Nachzug meldet links target-missing" "target-missing auf dem alten Pfad" "$(echo "$out"|tail -1)" $ok
   sed -i 's|(slice-003-cache.md)|(welle-2-ausbau/slice-003-cache.md)|' "$P/done/welle-2-results.md"

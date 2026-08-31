@@ -44,7 +44,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 44/44 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 45/45 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -94,7 +94,8 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s19d | beide Verweis-Formen nach dem Umzug | 0 Befunde | ✓ — **erst nach einer Reparatur, siehe unten** |
 | s19e | Gegenprobe: ohne Verweis-Nachzug | **`target-missing`** | ✓ die Zusage ist belegt, nicht behauptet |
 | s19f | nicht gekürzter Slice im Wellen-Verzeichnis | **`section-pattern-missing`** | ✓ der Deckungs-Sensor beißt, mit `structure` allein |
-| s19g | Slice der **offenen** Welle, flach in `done/` | **still** | ✓ kein Falsch-Positiv — der Grund für das Wellen-Verzeichnis |
+| s19g | Slice der **offenen** Welle, flach in `done/` | **still** | ✓ kein Falsch-Positiv — prüft die Sensor-**Konfiguration**, nicht das Werkzeug (s. u.) |
+| s19i | Welle-Stub trägt seine **eigene** Form | Zeiger auf die Ergebnisnotiz + Vorgangszahl | ✓ nachgetragen: die Probe schrieb erst beide Stub-Formen gleich |
 | s19h | Rückgriff im `--depth 1`-Klon | Archiv liefert, `git show` scheitert | ✓ die Grenze des Entwurfs, gemessen |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
@@ -160,6 +161,16 @@ nicht falsch, sie war nicht eingelöst). Seit dem Pin-Bump messen s15b und s16c
 den Fix — beide Modi antworten gleich. Die schärfste Folge misst s16c: Weil
 der Dateiname eines Belegs **die** Slice-Kennung ist, hätte ein reiner Rename
 den Zähler richtig gelassen und den Beleg falsch gemacht; heute meldet es.
+
+**Befund aus s19 — was jedes Verdikt absichert, und was nicht.** Ein Review
+hat acht Mutationen gegen die Archivierungs-Operation gefahren. Zwei Ergebnisse
+gehören benannt: **s19g** wird unter *keiner* Mutation des Werkzeugs rot — es
+sichert die Sensor-**Konfiguration** ab (der welle-gescopte Glob), nicht die
+Operation; rot wird es erst, wenn man den Glob auf die flache Vor-Probe-Form
+zurückstellt. Das ist als Regressions-Wächter richtig, aber es sagt nichts über
+das Archivieren. Und **der Deckungs-Sensor prüft die Marke, nicht die
+Kürzung**: Ein Stub mit `Archiviert mit:`, der den vollen Text behalten hat,
+kommt durch — nur die Trefferzahl von s19b fällt darauf.
 
 **Befund aus s19 — ein Verdikt maß die falsche Größe.** `s19b` prüfte nur, dass
 die Trefferzahl *fällt*. Eine Mutationsprobe — die Kürzung fällt aus, es

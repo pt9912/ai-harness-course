@@ -14,7 +14,7 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 ## Welle 108 — 2026-08-31 · Die Archiv-Form, geprobt — und zweimal korrigiert
 
 Welle 107 hielt den Entwurf fest und nannte sechs Proben. Sie sind gefahren
-(`lab/team-sim` s19, acht Verdikte, Gesamtlauf 44/44 · 0 KAPUTT) — und **zwei
+(`lab/team-sim` s19, neun Verdikte, Gesamtlauf 45/45 · 0 KAPUTT) — und **zwei
 davon haben den Entwurf geändert, bevor eine Zeile Kanon geschrieben wurde.**
 Genau dafür ist die Reihenfolge *erst proben, dann verkörpern* da.
 
@@ -47,6 +47,30 @@ liefert das Archiv den Volltext, während `git show` scheitert (s19h).
 Nebenläufigkeit prüfen — Gegenstand ist eine Operation und ihr Sensor. Die
 Topologie bleibt trotzdem; sie kostet nichts und hält die Bauform gleich. Das
 steht im README so.
+
+**Und dann hat ein Review neun Mutationen gefahren — mit zwei Ergebnissen, die
+im Entwurf standen und nicht stimmten.** Erstens: `s19b` prüfte nur, dass die
+Trefferzahl *fällt* — das erreicht auch bloßes Löschen; das Verdikt hängt jetzt
+zusätzlich an den vier Stubs. Zweitens, und schwerer: **Der Deckungs-Sensor
+prüft die Marke, nicht die Kürzung.** Ein Stub mit `Archiviert mit:`, der den
+vollen Text behalten hat, kommt durch — die zentrale Zusage des Entwurfs kann
+dieses Gate nicht durchsetzen. Das steht jetzt als dritte benannte Lücke im
+Entwurf, neben der Abzählung und dem nie eingesammelten Slice.
+
+Dazu drei kleinere Nachzüge: Der **Welle-Stub** trägt im Entwurf eine eigene
+Form (Zeiger auf die Ergebnisnotiz, Zahl der Vorgänge) — die Probe schrieb
+beide Stub-Formen gleich; jetzt geprüft als s19i. Die **Gegenprobe s19e** kann
+zum No-op werden, wenn der Nachzug ohnehin fehlt — sie prüft jetzt vorab, dass
+ihr injizierter Defekt gegriffen hat. Und **s19g** wird unter keiner Mutation
+des Werkzeugs rot: Es sichert die Sensor-*Konfiguration* ab, nicht die
+Operation. Als Regressions-Wächter richtig, aber im README benannt.
+
+**Eine Zahl ist präzisiert, nicht korrigiert.** Der Review konnte die
+tar.gz-Messung mit **synthetischen** Korpora nicht reproduzieren. Am realen
+Bestand nachgemessen hält die Richtung dreimal — 9,56 MiB bei
+Verzeichnis-Reihenfolge, 7,26 mit `--sort=name`, 6,54 zusätzlich mit
+`git repack -adq`, gegen 2,94 für Zip. Die Aussage lautet damit *tar.gz kostet
+ein Vielfaches*, nicht *tar.gz kostet 9,56 MiB*; die Methode steht jetzt dabei.
 
 Kein Gate daraus: `lab/team-sim` läuft auf Anlass. Keine Änderung an `kurs/de`,
 `lab/regelwerk`, Templates oder Beispiel; das Bundle ist unberührt. Offen

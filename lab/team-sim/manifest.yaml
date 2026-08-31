@@ -37,7 +37,7 @@ gruppen:
   s18: [s18a, s18b]                  # Alias-Gruppe und Alias-Zyklus: still
   # s19: ENTWURF Zeitdokument-Archiv (docs/zeitdokument-archiv.md) — erste
   # Szenarien ohne Nebenlaeufigkeits-Gegenstand: eine Operation und ihr Sensor.
-  s19: [s19a, s19b, s19c, s19d, s19e, s19f, s19g, s19h]
+  s19: [s19a, s19b, s19c, s19i, s19d, s19e, s19f, s19g, s19h]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -47,4 +47,4 @@ laeufe:
   - { datum: 2026-08-22, image: v0.62.0, neu: [s08a, s08b, s09, s10a, s10b, s11a, s11b], seed: "ADR-0001 + vcs-Block", ergebnis: "23 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-08-31, image: v0.67.0, neu: [s12, s13, s14a, s14b, s15a, s15b, s15c, s16a, s16b, s16c, s17, s18a, s18b], gegenstand: "Entwurf: Verzeichnisform des Beobachtungs-Registers (7 Faelle)", ergebnis: "36 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-08-31, image: v0.71.1, neu: [], gegenstand: "Pin-Bump: der s15-Befund ist behoben, s15b + s16c drehen von still auf core-drift-vcs", ergebnis: "36 PASS, 0 FAIL, 0 KAPUTT" }
-  - { datum: 2026-08-31, image: v0.71.1, neu: [s19a, s19b, s19c, s19d, s19e, s19f, s19g, s19h], gegenstand: "Entwurf: Zeitdokumente archivieren — die sechs Proben", ergebnis: "44 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-08-31, image: v0.71.1, neu: [s19a, s19b, s19c, s19i, s19d, s19e, s19f, s19g, s19h], gegenstand: "Entwurf: Zeitdokumente archivieren — die sechs Proben, nach Review-Mutationen nachgeschaerft", ergebnis: "45 PASS, 0 FAIL, 0 KAPUTT" }
