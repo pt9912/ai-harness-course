@@ -355,7 +355,7 @@ Wellen gibt, fehlt dieser Sammelpunkt — und dann greift die Tabelle:
 | Vorgang | Träger im Repo **ohne** Wellen | Wann |
 |---|---|---|
 | **Zähler** | Slice-Closure §7 | vor dem `git mv` nach `done/` |
-| **Lese-Schritt** (was hat 3× erreicht → verkörpern) | Slice-Closure §7 | vor dem `git mv`; der Herkunfts-Anker lautet dann `seit slice-<NNN>` statt `seit welle-<NN>` |
+| **Lese-Schritt** (was hat 3× erreicht → Ausgang zuweisen) | Slice-Closure §7 | vor dem `git mv`; der Herkunfts-Anker lautet dann `seit slice-<NNN>` statt `seit welle-<NN>` |
 | **Sichtungs-Schritt** (offene Beobachtungen unter der Schwelle) | Slice-**Planung**, §8 *Vorgelagert — offene Beobachtungen sichten* | beim Anlegen jedes Slice, unabhängig vom Sub-Area-Modus |
 | **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
 | **Alle drei Paarungen** (a/b/c aus Closure-Schritt 3) | Slice-Closure | **nach** dem `git mv` — die Paarungen suchen in `done/`, vorher liegt die Datei dort nicht |
@@ -445,7 +445,8 @@ wird** — er läuft mit jedem geschlossenen Slice, ob dieser zu einer Welle geh
 oder nicht.
 
 **Gelesen wird an zwei Stellen, nicht an einer.** Die **Welle-Closure** liest,
-was 3× erreicht hat — das ist der *Lese-Schritt*, und er verkörpert. Die
+was 3× erreicht hat — das ist der *Lese-Schritt*, und er weist den Ausgang
+zu. Die
 **Slice-Planung** liest, was darunter steht — das ist der *Sichtungs-Schritt*
 (§8 des Slice-Plans, [Modul 5](modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)),
 und er hält die Einträge unter der Schwelle am Leben. Wer nur den ersten
@@ -502,7 +503,9 @@ Daraus folgt eine Arbeitsteilung:
    > (ältere Arbeit, importierter Bestand); ein Sensor, der sie einforderte,
    > liefe auf jedem gewachsenen Repo rot und wäre selbst das, wogegen er
    > gebaut ist. Damit bleibt ein erfundenes `slice-999` unentdeckt — das ist
-   > die Grenze der Deklaration, dieselbe wie beim Anker-Sensor
+   > die Grenze der Deklaration — und sie gilt für jede Vorgangs-Klasse
+   > gleich: Eine erfundene Welle- oder Review-Kennung bleibt aus demselben
+   > Grund unentdeckt. Es ist dieselbe Grenze wie beim Anker-Sensor
    > ([`traceability.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln)),
    > und sie gehört benannt statt überspielt.
 
@@ -530,12 +533,19 @@ eine Ebene höher:
 | **geplant** | die Regel ist beschlossen, aber noch nicht geschrieben | Kennung des Slice oder der Welle, die sie schreibt — mit ID, wie beim Risiko-Ausgang *eingetreten* |
 | **gestrichen** | die Beobachtung kann nicht mehr auftreten | §Gestrichene Einträge, **mit Begründung** |
 
+**Zugewiesen wird der Ausgang vom Lese-Schritt** — von der Welle-Closure, in
+einem Repo ohne Wellen-Betrieb von der Slice-Closure selbst. Zwischen dem
+Beleg, der den Zähler auf 3 hebt, und diesem Schritt steht der Eintrag noch
+`offen`; das ist zulässig und vorübergehend. **Nicht** zulässig ist ein
+Eintrag, der eine Closure ohne Ausgang übersteht — dann hat der Lese-Schritt
+nicht stattgefunden, und die Schwelle war folgenlos.
+
 Unterhalb der Schwelle ist `offen` der Stand — dort ist er kein Ausgang,
 sondern der Normalzustand. **Nur zwei der drei hängen an der Schwelle:**
-*verkörpert* und *geplant* sind ihre Antwort. *Gestrichen* steht jederzeit
-offen — fällt die Ursache weg, bevor der Zähler 3 erreicht, wandert die Zeile
-mit Begründung in §Gestrichene Einträge, statt als *offen* weiterzuzählen für
-etwas, das nicht mehr auftreten kann.
+*verkörpert* und *geplant* sind ihre Antwort. *Gestrichen* ist an sie nicht
+gebunden — fällt die Ursache weg, bevor der Zähler 3 erreicht, wandert die
+Zeile mit Begründung in §Gestrichene Einträge, statt als *offen* weiterzuzählen
+für etwas, das nicht mehr auftreten kann.
 
 **Warum es einen dritten Ausgang braucht.** Die Schwelle fällt nicht immer
 dort, wo die Regel geschrieben werden kann: Sie kann mitten in einer Welle
@@ -596,8 +606,8 @@ weglassen:
 
 **Was hier bewusst *nicht* passiert:** Der Implementer-Agent bekommt
 `done/` nicht in seinen Lauf-Kontext. Schritt 2 ist eine
-*Planungs*-Leistung — was die Schwelle erreicht hat, ist ohnehin in
-AGENTS.md, Gates und Skills verkörpert und wirkt dort automatisch
+*Planungs*-Leistung — was die Schwelle erreicht hat und *verkörpert* ist,
+wirkt ohnehin in AGENTS.md, Gates und Skills automatisch
 (Modul-0-Prinzip: *Per-Lauf-Relevantes gehört verkörpert, nicht extern
 nachgeladen*). Ein Archiv pro Lauf zu laden wäre Kontext-Verschwendung
 für Wissen, das schon wirkt.
@@ -642,8 +652,9 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    Closure-Notizen. Dort steht der Zähler bereits, fortgeschrieben von jeder
    Slice-Closure seit Repo-Beginn, wellenlose eingeschlossen. Die Welle-Closure
    ist der **Lese-Schritt**: Welche Einträge haben **3×** erreicht? Die werden zu
-   *Steering-Loop-Einträgen* und verkörpert; im Register bleibt die Zeile mit dem
-   Vermerk stehen, wohin sie ging. Was darunter liegt, bleibt offen und wartet.
+   *Steering-Loop-Einträgen* und bekommen ihren Ausgang — im Regelfall
+   *verkörpert*; im Register bleibt die Zeile mit dem Vermerk stehen, wohin sie
+   ging. Was darunter liegt, bleibt offen und wartet.
    **Ohne diesen Lese-Schritt ist das Register write-only** — gezählt würde
    weiter, aber nichts würde je zur Regel.
    Die Closure-Notiz
@@ -668,8 +679,8 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    Steering Loop zählt *1× notieren · 2× Symptom · 3× Lücke*
    ([`klassifikation.md`](../grundlagen/klassifikation.md#steering-loop)) —
    das setzt ein Gedächtnis über Läufe hinweg voraus. Was die Schwelle
-   erreicht hat, ist bereits **verkörpert** (AGENTS-Regel, Gate, Skill) und
-   wirkt von selbst weiter. Was *darunter* liegt, ist nirgends verkörpert:
+   erreicht hat und **verkörpert** ist, wirkt als AGENTS-Regel, Gate oder Skill
+   von selbst weiter. Was *darunter* liegt, ist nirgends verkörpert:
    ohne eigenes Register versickert es in der Closure-Prosa, und der Zähler
    fängt mit jeder Welle bei null an. Ein Fehler, der einmal pro Welle
    auftritt, wäre nach fünf Wellen eine 5×-Lücke, die niemand je als Lücke

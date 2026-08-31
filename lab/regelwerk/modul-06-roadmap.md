@@ -42,7 +42,7 @@ Form, die Regeln der Inhalt.
   | Vorgang | Träger im Repo **ohne** Wellen | Wann |
   |---|---|---|
   | **Zähler** | Slice-Closure §7 | vor dem `git mv` nach `done/` |
-  | **Lese-Schritt** (was hat 3× erreicht → verkörpern) | Slice-Closure §7 | vor dem `git mv`; Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
+  | **Lese-Schritt** (was hat 3× erreicht → Ausgang zuweisen) | Slice-Closure §7 | vor dem `git mv`; Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
   | **Sichtungs-Schritt** (offene Beobachtungen unter der Schwelle) | Slice-**Planung**, §8 *Vorgelagert — offene Beobachtungen sichten* | beim Anlegen jedes Slice, unabhängig vom Sub-Area-Modus |
   | **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
   | **Alle drei Paarungen** (a/b/c aus Closure-Schritt 3) | Slice-Closure | **nach** dem `git mv` — sie suchen in `done/` |
@@ -101,11 +101,11 @@ Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
   je 3×. Das Register ist zugleich die Vergabestelle.
 - **Wer schreibt, wer liest:** Eingetragen wird bei der **Slice-Closure** — neuer Eintrag mit neuer `BEO-<NNN>` oder Zähler erhöhen und Beleg ergänzen. Das macht den Zähler von der Welle unabhängig: Er läuft mit jedem geschlossenen Slice. **Gelesen wird an zwei Stellen:** die **Welle-Closure** liest, was 3× erreicht hat (*Lese-Schritt*, verkörpert); die **Slice-Planung** liest, was darunter steht (*Sichtungs-Schritt*, §8 des Slice-Plans — [Modul 5](modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)). Wer nur den ersten kennt, sieht alles unter 3× nie wieder an.
 - **Mensch urteilt, Maschine prüft Deckung.** Das Urteil *ist das dieselbe Beobachtung?* fällt beim Schreiben (Kennung vergeben oder zitieren). Maschinell entscheidbar ist nur die Deckung: ob eine in `done/` zitierte `BEO-<NNN>` eine Registerzeile hat **und ob jede Registerzeile mindestens einen Beleg trägt** — die maschinelle Hälfte der Register-Paarung (c). *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo zitiert": Die allermeisten stehen unter der Schwelle und sind nirgends zitiert. Muster: schreiben → committen → Gate prüft. Welches Werkzeug, ist Repo-Entscheidung.
-- **Der Beleg ist formgebunden** — drei Prüfungen ohne Urteil: **Form** (die Kennung eines abgeschlossenen **Vorgangs**, kein Freitext) · **Anzahl** (so viele wie der Zähler) · **Lage** (führt das Repo die genannte Datei, liegt sie dort, wo ihre Klasse abgeschlossen wird — für den Regelfall Slice also in `done/`) — diese dritte Prüfung läuft **nach** dem `git mv`, zusammen mit der Register-Paarung (c): Der Beleg wird vor dem `mv` geschrieben, der `mv` ist ein eigener Commit; auf dem Schreib-Commit läge die Datei noch nicht in `done/`, ein Sensor dort meldete bei jeder korrekten Closure rot. Form und Anzahl prüfen den Registereintrag und sind davon unabhängig. **Grenze:** Die *Existenz* der Datei wird nicht verlangt — ein Repo darf Slices führen, die es nicht als Plan-Datei ablegt; ein Sensor, der sie einforderte, liefe auf jedem gewachsenen Repo rot. Ein erfundenes `slice-999` bleibt damit unentdeckt; das ist die Grenze der Deklaration und gehört benannt.
-- **Ein Vorgang zählt einmal — und was keinen hat, zählt gar nicht.** Regelfall
+- **Der Beleg ist formgebunden** — drei Prüfungen ohne Urteil: **Form** (die Kennung eines abgeschlossenen **Vorgangs**, kein Freitext) · **Anzahl** (so viele wie der Zähler) · **Lage** (führt das Repo die genannte Datei, liegt sie dort, wo ihre Klasse abgeschlossen wird — für den Regelfall Slice also in `done/`) — diese dritte Prüfung läuft **nach** dem `git mv`, zusammen mit der Register-Paarung (c): Der Beleg wird vor dem `mv` geschrieben, der `mv` ist ein eigener Commit; auf dem Schreib-Commit läge die Datei noch nicht in `done/`, ein Sensor dort meldete bei jeder korrekten Closure rot. Form und Anzahl prüfen den Registereintrag und sind davon unabhängig. **Grenze:** Die *Existenz* der Datei wird nicht verlangt — ein Repo darf Slices führen, die es nicht als Plan-Datei ablegt; ein Sensor, der sie einforderte, liefe auf jedem gewachsenen Repo rot. Ein erfundenes `slice-999` bleibt damit unentdeckt — und die Grenze gilt für jede Vorgangs-Klasse gleich: Eine erfundene Welle- oder Review-Kennung bleibt aus demselben Grund unentdeckt. Das ist die Grenze der Deklaration und gehört benannt.
+- **Ein Vorgang zählt einmal — und was keinen hat, zählt gar nicht.** Der Regelfall
   eines Belegs ist die Slice-Kennung; auch eine Welle und ein Review-Report sind
   abgeschlossene Vorgänge und taugen als Beleg. Zwei Funde **im selben** Vorgang
-  sind *eine* Gelegenheit, kein zweites Auftreten: Der Zähler misst Wiederholung
+  sind dagegen *eine* Gelegenheit, kein zweites Auftreten: Der Zähler misst Wiederholung
   über Vorgänge hinweg, nicht die Zahl der Funde. Ein Vorkommen **ohne**
   abgeschlossenen Vorgang bekommt keinen Beleg und bewegt den Zähler nicht; es
   gehört trotzdem in den Eintrag — *benannt, nicht gezählt.*
@@ -114,7 +114,7 @@ Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
   Wellen-Betrieb beim Lese-Schritt, den dann die Slice-Closure selbst auslöst, Anker `seit slice-<NNN>`. Die
   Zeile bleibt im Register mit Vermerk stehen; gestrichen wird nur mit
   Begründung, warum die Beobachtung nicht mehr auftreten kann.
-- **Der Stand wird dabei zu einem von drei Ausgängen** — geschlossene Menge wie
+- **Der Stand wird dabei zu einem von drei Ausgängen** — dieselbe geschlossene Menge wie
   beim offenen Risiko ([Modul 5](modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst)):
 
   | Ausgang | Wann | Wohin |
@@ -123,11 +123,17 @@ Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
   | **geplant** | die Regel ist beschlossen, aber noch nicht geschrieben | Kennung des Slice oder der Welle, die sie schreibt |
   | **gestrichen** | die Beobachtung kann nicht mehr auftreten | §Gestrichene Einträge, **mit Begründung** |
 
-  Unterhalb der Schwelle ist `offen` der Stand — dort kein Ausgang, sondern der
-  Normalzustand. Nur *verkörpert* und *geplant* hängen an der Schwelle;
-  *gestrichen* steht jederzeit offen, wenn die Ursache wegfällt. *Geplant* ist ein Ausgang **mit Kennung**, kein Vorsatz.
-  **Urteilsfrei** ist, *dass* ab 3× ein Ausgang dasteht, *welcher der drei* es
-  ist und ob die genannte Kennung auflöst; **Urteil** bleibt, ob der Ausgang
+  Zugewiesen wird der Ausgang vom **Lese-Schritt**; zwischen dem Beleg, der den
+  Zähler auf 3 hebt, und diesem Schritt steht der Eintrag noch `offen` — das ist
+  zulässig und vorübergehend. **Nicht** zulässig ist ein Eintrag, der eine
+  Closure ohne Ausgang übersteht. Unterhalb der Schwelle ist `offen` der Stand —
+  dort ist er kein Ausgang, sondern der Normalzustand. **Nur zwei der drei
+  hängen an der Schwelle:** *verkörpert* und *geplant* sind ihre Antwort.
+  *Gestrichen* ist an sie nicht gebunden — fällt die Ursache weg, bevor der
+  Zähler 3 erreicht, wandert die Zeile mit Begründung in §Gestrichene Einträge. *Geplant* ist ein Ausgang **mit Kennung**, kein Vorsatz.
+  **Urteilsfrei** ist, *dass* ein Eintrag ab 3× einen Ausgang trägt, *welcher
+  der drei* es ist, und ob die genannte Kennung im Repo auflöst: Die drei sind
+  eine geschlossene Menge, kein Freitext. **Urteil** bleibt, ob der Ausgang
   trägt.
 
 ### Wellen-Closure-Prozedur (Modul 6)
@@ -187,8 +193,9 @@ fünf Schritte in
 3. **Welle nach `done/` schließen.** Grundlage ist das **Beobachtungs-Register**,
    nicht die einzelnen Closure-Notizen: Dort steht der Zähler bereits,
    fortgeschrieben von jeder Slice-Closure. Die Welle-Closure ist der
-   Lese-Schritt: Welche Einträge haben **3×** erreicht? Die werden zu
-   *Steering-Loop-Einträgen* und verkörpert; im Register bleibt die Zeile mit
+   Lese-Schritt: Welche Einträge haben **3×** erreicht? Die bekommen ihren
+   Ausgang — im Regelfall *verkörpert* — und werden zu
+   *Steering-Loop-Einträgen*; im Register bleibt die Zeile mit
    dem Vermerk stehen, wohin sie ging. Was darunter liegt, bleibt offen und
    wartet. **Ohne diesen Lese-Schritt ist das Register write-only** — gezählt würde
    weiter, aber nichts würde je zur Regel.
