@@ -55,12 +55,17 @@ gekürzter Stub liegen.
 
 ```text
 docs/plan/planning/done/
-├── welle-07-archiv.zip          alle Volltexte der Welle
-├── welle-07-cache.md            Stub
-├── welle-07-results.md          BLEIBT vollständig
-├── slice-042-cache.md           Stub
-└── slice-043-fixture-pfade.md   Stub
+├── welle-07/                    die archivierte Welle, als Verzeichnis
+│   ├── archiv.zip               alle Volltexte
+│   ├── welle-07-cache.md        Stub
+│   ├── slice-042-cache.md       Stub
+│   └── slice-043-fixture.md     Stub
+├── welle-07-results.md          BLEIBT vollständig, BLEIBT flach
+└── slice-051-laufend.md         Slice der noch offenen Welle, unberührt
 ```
+
+**Das Verzeichnis ist nicht Ordnungsliebe, sondern die Bedingung dafür, dass
+der Sensor überhaupt baubar ist** — gemessen, siehe §Der Sensor.
 
 Die **Ergebnisnotiz der Welle bleibt unangetastet**. Sie ist die Bedeutung,
 die die archivierten Dateien ersetzt; das Archiv ist nur die Koordinate.
@@ -71,7 +76,7 @@ die die archivierten Dateien ersetzt; das Archiv ist nur die Koordinate.
 # slice-<NNN> — <Titel>
 
 > **ARCHIVIERT** — Volltext:
-> `unzip -p welle-<NN>-archiv.zip done/slice-<NNN>-<slug>.md`
+> `unzip -p done/welle-<NN>/archiv.zip done/slice-<NNN>-<slug>.md`
 
 **Welle:** <welle-<NN> · oder `ohne Welle`>
 **Archiviert mit:** welle-<NN> · **Geschlossen:** <JJJJ-MM-TT>
@@ -82,7 +87,7 @@ die die archivierten Dateien ersetzt; das Archiv ist nur die Koordinate.
 # welle-<NN> — <Titel>
 
 > **ARCHIVIERT** — Volltext:
-> `unzip -p welle-<NN>-archiv.zip done/welle-<NN>-<slug>.md`
+> `unzip -p done/welle-<NN>/archiv.zip done/welle-<NN>-<slug>.md`
 
 **Geschlossen:** <JJJJ-MM-TT> · **Ergebnisnotiz:** welle-<NN>-results.md
 **Archivierte Vorgänge:** <N Slices, M Reviews>
@@ -189,30 +194,39 @@ die Aussage wird am zitierenden Ort zitiert, die Report-Kennung bleibt im Text.
 ## Der Sensor
 
 Die feste Stub-Form macht die Prüfung zu einer **Form-Prüfung**, nicht zu
-einer Urteilsfrage — in zwei Hälften, weil eine allein die 40 wellenlosen
-Slices nicht deckt:
+einer Urteilsfrage. **Gemessen an d-check `v0.71.1`, Modul `structure`:**
 
-> **Mitgliedschaft:** In `done/` liegt kein Slice, dessen `Welle:` eine
-> **archivierte** Welle nennt, ohne `Archiviert mit:`-Feld.
->
-> **Abzählung:** Die Zahl der Stubs mit `Archiviert mit: welle-<NN>` stimmt
-> mit der im Welle-Stub deklarierten Zahl archivierter Vorgänge überein.
+> ```yaml
+> - files: "docs/plan/planning/done/welle-*/slice-*.md"
+>   section-pattern: '^# slice-'
+>   require-pattern: '\*\*Archiviert mit:\*\*'
+> ```
 
-Die zweite Hälfte ist die, die das dritte Feld erst ermöglicht: Sie greift
-unabhängig von der Zugehörigkeit und deckt damit die wellenlosen Slices mit.
-Beide sind binär und urteilsfrei — dieselbe Bauform wie die Marker-Prüfung des
-Planning-Lifecycles: Form gegen Form.
+Ein vergessener, nicht gekürzter Slice im Verzeichnis einer archivierten Welle
+wird gemeldet; ein Slice der noch **offenen** Welle bleibt still. Ein Befund,
+korrekt — kein CR nötig, das vorhandene Modul trägt es.
 
-**Was auch damit nicht prüfbar bleibt** — und das gehört benannt statt
-überspielt: Ein geschlossener Slice **ohne** Zugehörigkeit, den beim
-Archivieren schlicht *niemand eingesammelt hat*, trägt kein Feld und fehlt in
-beiden Zählungen. Er ist von keiner Form-Prüfung zu finden; dafür bräuchte es
-einen Datumsvergleich gegen die letzte Wellen-Closure, und der prüft Inhalt,
-nicht Form. Ebenso wenig prüfbar ist, ob das Archiv **vollständig** ist — ob
-jede gekürzte Datei als Volltext darin liegt. Beides ist nur im
-Archivierungs-Commit feststellbar, danach ist das Zip für jedes Gate opak.
-Genau deshalb gehört die Operation in ein Werkzeug: Wer von Hand zippt, hat
-für diese zwei Zusagen keinen Zeugen.
+**Und genau daran ist die erste Fassung gescheitert.** Ohne das
+Wellen-Verzeichnis lautet der Glob `done/slice-*.md`, und `require-pattern`
+ist **unbedingt** über seinen Glob: Es kann *Slice einer archivierten Welle*
+nicht von *Slice einer offenen Welle* unterscheiden. Gemessen meldete diese
+Fassung beide — den vergessenen Slice richtig und den laufenden falsch. Ein
+Sensor, der bei jeder korrekt geschlossenen Arbeit rot wird, ist genau das,
+wogegen er gebaut ist. **Der Geltungsbereich muss also im Pfad stehen, weil
+die Bedingung ihn nicht ausdrücken kann.**
+
+**Die zweite Hälfte bleibt unbaubar.** Die Abzählung — *die Zahl der Stubs mit
+`Archiviert mit: welle-<NN>` stimmt mit der im Welle-Stub deklarierten Zahl* —
+verlangt einen Vergleich **über Dateien hinweg**; `structure` prüft je Datei
+und Abschnitt. Sie bleibt damit eine Zusage des Archivierungs-Werkzeugs, kein
+Gate.
+
+**Was auch damit nicht prüfbar bleibt:** Ein geschlossener Slice **ohne**
+Zugehörigkeit, den beim Archivieren niemand eingesammelt hat, liegt weiter
+flach in `done/` und fällt aus dem Glob. Er ist von keiner Form-Prüfung zu
+finden. Ebenso wenig prüfbar ist, ob das Archiv **vollständig** ist. Beides
+bezeugt nur der Archivierungs-Commit — deshalb gehört die Operation in ein
+Werkzeug.
 
 ## Messungen
 
@@ -257,9 +271,15 @@ angefasst.
 - **Das Archiv ist für jedes Gate opak.** Keine Link-, Anker- oder
   Pfadprüfung im Inneren. Was archiviert wird, ist vorher gate-grün und wird
   danach nicht mehr editiert.
-- **Die Verzeichnis-Sicht bleibt lang.** 113 Stubs sind 113 Einträge im
-  Listing. Gegen das Rauschen im Agentenlauf hilft das nichts und schadet auch
-  nichts — es ist die andere Frage.
+- **Der Umzug ins Wellen-Verzeichnis ändert Pfade.** Das ist der Preis für den
+  baubaren Sensor, und er trifft die Eigenschaft, die den Stub sonst auszeichnet:
+  Eingehende Verweise auf einen archivierten Slice brechen, wenn das Werkzeug
+  sie nicht mitzieht. Die Operation muss also nicht nur zippen und kürzen,
+  sondern auch die Verweise nachziehen — dieselbe Bauform wie ein
+  Lifecycle-`git mv`, der seine Referenzen mitnimmt.
+- **Die Verzeichnis-Sicht wird dafür kürzer:** `done/` zeigt die Slices der
+  offenen Welle plus eine Handvoll Wellen-Verzeichnisse statt aller
+  geschlossenen Slices.
 
 ## Nächster belastbarer Schritt
 
@@ -267,7 +287,11 @@ Vor einer Regeländerung ist zu proben:
 
 1. ein Archivierungs-Lauf über eine echte geschlossene Welle, mit Zählung
    *gekürzte Dateien = Einträge im Zip*,
-2. der Deckungs-Sensor gegen einen absichtlich nicht gekürzten Slice,
+2. ~~der Deckungs-Sensor gegen einen absichtlich nicht gekürzten Slice~~ —
+   **gefahren, 2026-08-31.** Ergebnis in §Der Sensor: Die Mitgliedschafts-Hälfte
+   ist mit `structure` baubar, **aber nur mit dem Wellen-Verzeichnis**; die
+   flache Fassung meldete den laufenden Slice falsch mit. Die Zielform hat sich
+   daraufhin geändert. Die Abzähl-Hälfte ist nicht baubar.
 3. ein Rückgriff aus dem Archiv in einem `--depth 1`-Klon,
 4. eine Messung der Trefferzahl vorher/nachher am realen Bestand,
 5. der Nachweis, dass die eingehenden Verweise auf Stubs weiterhin auflösen
