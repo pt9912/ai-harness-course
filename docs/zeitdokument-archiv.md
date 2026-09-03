@@ -1,6 +1,6 @@
 # Zeitdokumente archivieren — Entwurfsstand
 
-> **Stand:** 2026-08-31 · **Status:** Diskussionsstand, nicht normativ.
+> **Status:** Diskussionsstand, nicht normativ. Ihr Änderungsdatum hält `git`.
 >
 > Diese Datei hält einen möglichen Umgang mit abgeschlossenen Zeitdokumenten
 > fest — Review-Reports, geschlossene Slices, geschlossene Welle-Pläne. Sie

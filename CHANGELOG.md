@@ -11,6 +11,49 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 117 — 2026-09-03 · Der Entwurf weiß, dass er Kanon geworden ist
+
+Nachlauf zu Welle 116. [`docs/steering-loop-team.md`](docs/steering-loop-team.md)
+beschrieb einen *möglichen Ersatz* für das flache Register und führte den
+Geltungsbereich als offene Frage. Beides stimmt nicht mehr: Der Ersatz ist
+eingetreten, und zwar als **einzige** Form, nicht als Team-Variante daneben.
+
+- **Der Kopf sagt jetzt `verkörpert, in Teilen`** und eine Tabelle darunter
+  trennt, was Kanon wurde (Verzeichnisform, abgeleiteter Zähler, ein Vorgang
+  zählt einmal, Pfad-Grammatik, keine Vergabestelle) von dem, was es
+  ausdrücklich **nicht** wurde: `alias-of`, `invalidations/`, die erzeugte
+  Übersichts-Sicht, die Merge-Queue-Invariante. Ein Adopter soll nicht aus dem
+  Entwurf ableiten, was der Kurs nicht verlangt.
+- **Der tragende Grund wird richtiggestellt.** Die Datei argumentiert
+  durchgehend aus dem Mehr-Schreiber-Fall. Kanon wurde die Form aus einem
+  Grund, der bei **einem** Schreiber genauso greift — zwei Quellen für denselben
+  Zustand. Teamfähigkeit fällt an, statt das Argument zu sein; deshalb musste
+  sie auch nicht auf die Stufe *belegt* warten.
+- **§9 hat sich anders erledigt, als er geplant war.** Er entwarf einen Cutover
+  mit dauerhafter Doppel-Kennung. Gebraucht wurde er nicht: Die Migration des
+  Beispiel-Repos war mechanisch, und die Gegenprobe ist der abgeleitete Zähler,
+  der die alte Tabelle exakt reproduzieren muss. Was der Abschnitt jetzt sagt,
+  ist die Regel, die er hätte nennen sollen — **mechanisch für ein Register mit
+  einem Schreiber, nicht mechanisch für eines, das flach mit mehreren gefahren
+  wurde.** Dort findet kein Konverter, was still in zwei Hälften zerfiel.
+
+**Und beide Entwurfsstände verlieren ihr `Stand:`-Kopf-Datum.** Welle 112 hatte
+das als offene Form-Entscheidung benannt; sie ist entschieden, und zwar nach
+der Regel, die schon dastand: *Ein Datum, das ein benannter Trigger pflegt, ist
+kein solcher Kopf — der Unterschied ist der Trigger, nicht die Zeile*
+([`harness-dateien.md`](kurs/de/grundlagen/harness-dateien.md#was-ein-kommentar-trägt--code-konfiguration-skripte)).
+Für diese Dateien pflegt kein Trigger das Datum, und Welle 112 ist der Beleg,
+dass es dann etwas Falsches behauptet: Es stand korrekt auf dem Tag der letzten
+Berührung, während der Inhalt darunter überholt war. Das Änderungsdatum hält
+`git`. Der **Status** bleibt — er ist ein Zustand, den diese Dateien wirklich
+wechseln, und er hat es gerade getan.
+
+Kein Regelwerk, keine Templates, kein Kurs berührt — das Bundle führt `docs/`
+nicht.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN.
+
 ## Welle 116 — 2026-09-03 · Das Register hört auf, seinen eigenen Zähler zu führen
 
 Das Beobachtungs-Register war das letzte Kern-Artefakt in Sammeldatei-Form: eine

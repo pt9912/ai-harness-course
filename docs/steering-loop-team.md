@@ -1,19 +1,47 @@
 # Steering Loop im Team — Entwurfsstand der Beobachtungsablage
 
-> **Stand:** 2026-09-03 · **Status:** Diskussionsstand, nicht normativ; die
-> sieben Fälle des Schluss-Abschnitts sind geprobt
-> ([`lab/team-sim`](../lab/team-sim/README.md) s12–s18: 13 Verdikte,
-> Gesamtlauf 36/36), und die geschuldete Quell-Arbeit an `kurs/de` steht
-> (Wellen 105–106, veröffentlicht in `v5.15.0`). Offen ist die Entscheidung
-> über den Geltungsbereich — Default oder deklarierte Team-Variante.
+> **Status:** **verkörpert, in Teilen** — der Kern dieses Entwurfs ist mit
+> Welle 116 (`v6.0.0`) Kanon geworden. Was er darüber hinaus vorschlägt, ist
+> es **nicht**, und der Rest der Datei bleibt Diskussionsstand.
+> Ihr Änderungsdatum hält `git`.
 >
-> Diese Datei hält einen möglichen Ersatz für das stehende
-> `docs/plan/planning/observations.md` in Repos mit mehreren Schreibern fest.
-> Sie ändert weder den Kurs noch den Regelwerk-Spiegel oder die Templates.
-> Dort gilt weiter die in
+> Diese Datei war der Entwurf eines Ersatzes für das flache
+> `docs/plan/planning/observations.md`. Der Ersatz ist eingetreten:
 > [Modul 6 §Das Beobachtungs-Register](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register)
-> gelehrte Form. Eine Verkörperung folgt der Rangfolge dieses Repos:
-> `kurs/de` → `lab/regelwerk` → `lab/templates` → `lab/example`.
+> lehrt seit Welle 116 die Verzeichnisform, und zwar als **einzige** — nicht
+> als Team-Variante neben einer flachen. Die Frage nach dem Geltungsbereich,
+> die diese Datei offen führte, hat sich damit erledigt.
+
+## Was Kanon wurde — und was nicht
+
+| Aus diesem Entwurf | Stand |
+|---|---|
+| Verzeichnis je Beobachtung, `observation.md` · `state.md` · `evidence/<id>.md` | **Kanon** (`seit welle-116`) |
+| Zähler aus den Belegen abgeleitet statt gespeichert | **Kanon** — dazu ist die *Anzahl*-Prüfung ersatzlos entfallen |
+| Ein Vorgang zählt einmal, erzwungen durch den Dateinamen | **Kanon** |
+| Pfad `BEO-<KUERZEL>/<slug>`, Kürzel nachgeschlagen statt formuliert | **Kanon**; die Kürzel-Spalte der Modus-Deklaration ist dadurch unbedingt geworden |
+| keine fortlaufende Nummer, keine Vergabestelle | **Kanon** |
+| Zustandsmenge bei 3× | war schon Kanon (Welle 106): *verkörpert · geplant · gestrichen* |
+| `alias-of` für später erkannte Duplikate (§5) | **nicht normativ** — Repo-Entscheidung |
+| `invalidations/<slice-id>.md` für zurückgenommene Belege (§4) | **nicht normativ** |
+| erzeugte read-only Übersichts-Sicht (§7) | **nicht normativ** |
+| Merge-Queue-Invariante auf dem synthetischen Merge-Stand (§2) | **nicht normativ** — sie setzt eine CI-Zusage voraus, die der Kurs nicht verlangen kann |
+
+**Der tragende Grund war am Ende nicht der, mit dem diese Datei angetreten
+ist.** Sie argumentiert durchgehend aus dem Mehr-Schreiber-Fall. Kanon wurde
+die Form aus einem Grund, der auch bei **einem** Schreiber gilt: Zähler und
+Belegliste waren zwei Quellen für denselben Zustand, und das ist an fremden
+Ein-Schreiber-Registern gemessen schiefgegangen (7 statt 6; Zähler 3 bei einem
+Beleg). Teamfähigkeit fällt dabei an, statt das Argument zu sein — und musste
+deshalb auch nicht auf die Stufe *belegt* warten, die per Definition nicht
+herstellbar ist.
+
+**Was von dieser Datei bleibt.** Die neun Problemfelder mit ihren
+Restgrenzen — sie beschreiben, was die Form **nicht** löst, und das gilt
+unverändert. Dazu die Probe in [`lab/team-sim`](../lab/team-sim/README.md) als
+Beleg dafür, dass git die drei tragenden Aussagen ohne Werkzeug hält. Und die
+zwei Ausgänge ohne Leser (s14b, s18), die jetzt einen Konsumenten in der
+Baseline haben statt in einem Entwurf.
 
 ## Ausgangspunkt
 
@@ -347,17 +375,28 @@ ein Anlass sie misst.
 
 ### 9. Migration und Geltungsbereich
 
-Bestehende `BEO-<NNN>` werden nicht umbenannt: historische Slice-, Commit- und
-Closure-Verweise bleiben gültig. Beim deklarierten Cutover wird jede bestehende
-Zeile einmalig unter ihrer Herkunfts-Sub-Area in die Verzeichnisform
-übernommen; `observation.md` trägt weiterhin die alte kanonische Kennung, und
-die vorhandene Belegliste wird in einzelne Evidence-Dateien zerlegt.
-`observations.md` bleibt danach nur als statischer Migrationszeiger bestehen.
+**Dieser Abschnitt hat sich anders erledigt, als er geplant war.** Er entwarf
+einen Cutover mit dauerhafter Doppel-Kennung: bestehende `BEO-<NNN>` behalten
+ihre Nummer, Sensoren verstehen beide Formen, `observations.md` bleibt als
+statischer Migrationszeiger. Nichts davon ist Kanon geworden — und es wurde
+auch nicht gebraucht.
 
-Sensoren verstehen dauerhaft beide Kennungsformen, verbieten aber neue
-numerische Kennungen nach dem Cutover. Neue Beobachtungen erhalten nur noch
-`BEO-<SUB-AREA>/<slug>`. Offen sind das genaue Legacy-Pfadformat und der
-Replay-belegte Konverter; eine Massenumbenennung ist ausgeschlossen.
+**Gemessen, nicht behauptet.** Das Beispiel-Repo ist mit Welle 116 migriert
+worden: sieben Zeilen, sechs Sub-Areas, elf vergebene Kürzel, 28 Dateien.
+Die alten Kennungen sind **nicht** erhalten geblieben — zehn Dateien, die
+`BEO-<NNN>` zitierten, nennen jetzt den Pfad. Die Gegenprobe war der
+abgeleitete Zähler: Er reproduziert die alte Tabelle exakt (2·1·2·1·3·3·1).
+
+Daraus die Regel, die dieser Abschnitt hätte nennen sollen: **Für ein Register
+mit einem Schreiber ist die Migration mechanisch** — eine Zeile wird ein
+Verzeichnis, ein Beleg eine Datei, und der abgeleitete Zähler muss die alte
+Spalte treffen. Trifft er sie nicht, war die alte Spalte falsch; das ist dann
+kein Migrationsproblem, sondern der Fund. **Nicht mechanisch ist die Migration
+eines Registers, das flach mit mehreren Schreibern gefahren wurde:** Was dort
+still in zwei Hälften zerfallen ist, findet kein Konverter, weil semantische
+Gleichheit ein menschliches Urteil bleibt. Für dieses Repo gilt dann nicht
+*migrieren*, sondern *umstellen und wissen, dass der Zähler für alles davor
+keine belastbare Aussage über Wiederholung trägt.*
 
 ## Der belastbare Schritt, gefahren
 
@@ -402,11 +441,13 @@ veröffentlicht:
 Damit ist auch die Vorbedingung erfüllt, die d-check seiner Zusage
 mitgegeben hat: §1–§5 baut er nach diesen zwei Quell-Wellen.
 
-**Fällig ist jetzt die Entscheidung, die hinter dieser Hälfte stand:** Ersetzt
-die Verzeichnisform den heutigen Default, oder steht sie als deklarierte
-Team-Variante daneben? Sie ist der nächste Schritt dieser Datei und noch nicht
-getroffen. Mit ihr beginnt eine eigene Regel-Welle an der Quelle `kurs/de`;
-Spiegel, Templates und Beispiel folgen, nicht umgekehrt.
+**Die Entscheidung, die hinter dieser Hälfte stand, ist gefallen — und die
+Frage war falsch gestellt.** *Default oder Team-Variante daneben* setzt voraus,
+dass man später wechseln kann. Kann man nicht, jedenfalls nicht sauber (§9).
+Die Verzeichnisform ist deshalb mit Welle 116 die **einzige** geworden, und der
+tragende Grund ist einer, der bei einem Schreiber genauso greift: Zähler und
+Belegliste waren zwei Quellen für denselben Zustand. Regel-Welle gefahren,
+Spiegel, Templates und Beispiel nachgezogen — in dieser Reihenfolge.
 
 Daneben offen, jedes an seiner Stelle: der Rückweg aus einem verkörperten
 Zustand (§3), Darstellungsform und CLI-Einstieg der erzeugten Sicht (§7), die
