@@ -11,6 +11,60 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 112 — 2026-09-03 · Der Entwurfsstand behauptete eine Schuld, die beglichen war
+
+[`docs/steering-loop-team.md`](docs/steering-loop-team.md) band Ziel-Form und
+Zustandsmaschine der teamfähigen BEO-Ablage an drei Punkte Quell-Arbeit an
+`kurs/de`. Alle drei sind noch am selben Tag geschrieben worden — die
+geschlossene Menge der Ausgänge bei 3× und die zwei Beleg-Fälle in Welle 106,
+das Sub-Area-Kürzel in Welle 105, veröffentlicht in `v5.15.0`. Die Datei sagte
+weiter, sie stünden aus — an **fünf** Stellen: §2, §3, §8, Tabellenzeile 8 und
+Schluss-Abschnitt. Der Kopf behauptete nichts davon; er trug den Zustand
+überhaupt nicht und trägt ihn jetzt.
+
+- [`docs/steering-loop-team.md`](docs/steering-loop-team.md): Jede der sechs
+  Stellen trägt jetzt den Zustand mit auflösbarem Anker (`seit welle-105`,
+  `seit welle-106`) statt der offenen Frage. Der Schluss-Abschnitt führt die
+  drei erledigten Punkte als Tabelle *Quell-Arbeit · Verkörpert in · Anker*
+  und benennt, was übrig ist: der Rückweg aus einem verkörperten Zustand (§3),
+  Darstellungsform und CLI-Einstieg der erzeugten Sicht (§7), die
+  Sub-Area-Spalte mit ihren Prosa-Namen (§8), Legacy-Pfadformat und Konverter
+  (§9), dazu die zwei Probe-Ausgänge ohne Leser (s14b, s18).
+- **Fällig geworden ist damit eine Entscheidung, nicht eine Aufgabe.** Die
+  Datei stellte den Geltungsbereich ausdrücklich hinter die Quell-Arbeit —
+  *„erst wenn diese Hälfte steht, wird entschieden"*. Sie steht. Ob die
+  Verzeichnisform den heutigen Default ersetzt oder als deklarierte
+  Team-Variante daneben steht, ist jetzt der nächste Schritt der Datei; der
+  Schluss-Abschnitt sagt das als Zustand, nicht als Absicht.
+- **Auch die Vorbedingung des Konsumenten ist erfüllt.** d-check hat den CR
+  angenommen und aufgeschoben, mit §1–§5 gebunden an genau diese zwei
+  Quell-Wellen. Die Datei hielt die Bindung fest, aber nicht ihre Erfüllung.
+
+**Die Fehlerklasse ist die des Korpus selbst.** Ein nicht normativer
+Entwurfsstand ist ein Zustands-Artefakt wie ein Register-Feld, und es gilt
+dieselbe Regel: Indikativ über das, was ist, Zustand plus auflösbarer Anker
+([`harness-dateien.md` §Was ein Kommentar trägt](kurs/de/grundlagen/harness-dateien.md#was-ein-kommentar-trägt--code-konfiguration-skripte),
+*Zeitform-Test* und *Dieselbe Regel für Zustandsfelder*).
+Der Kopf war dabei nicht einmal falsch datiert — `Stand: 2026-08-31` traf den
+Tag der letzten Berührung genau. Falsch war, wofür das Datum bürgte. Das ist
+präzise der Satz, den der Kurs über die Kopfzeile eines lebenden Registers
+schreibt: *ein Datum, das niemand pflegt, behauptet einen Zustand.*
+
+**Nicht behoben und hier benannt:** Die zwei Entwurfsstände unter `docs/`
+([`steering-loop-team.md`](docs/steering-loop-team.md),
+[`zeitdokument-archiv.md`](docs/zeitdokument-archiv.md)) führen beide ein
+`Stand:`-Kopf-Datum ohne benannten Trigger, der es pflegt — genau die Bauform,
+die der Kurs für lebende Register verwirft. Ob diese Dateiklasse einen
+Frische-Marker wie das Sicht-Stratum der Spec rechtfertigt oder das Datum
+entfällt, ist eine Form-Entscheidung über die Klasse und keine Korrektur an
+einer Datei. Sie bleibt offen, bis sie entschieden wird.
+
+Kein Regelwerk, keine Templates, kein Kurs berührt — die Datei ist
+ausdrücklich nicht normativ, und das Bundle führt sie nicht.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN.
+
 ## Welle 111 — 2026-08-31 · Kein Zwang zum Nachrüsten ist kein Verbot
 
 Welle 109 schrieb: *„Ab Einführung, kein Nachrüsten. Wellen, die vorher

@@ -1,9 +1,11 @@
 # Steering Loop im Team — Entwurfsstand der Beobachtungsablage
 
-> **Stand:** 2026-08-31 · **Status:** Diskussionsstand, nicht normativ;
-> die sieben Fälle des Schluss-Abschnitts sind geprobt
+> **Stand:** 2026-09-03 · **Status:** Diskussionsstand, nicht normativ; die
+> sieben Fälle des Schluss-Abschnitts sind geprobt
 > ([`lab/team-sim`](../lab/team-sim/README.md) s12–s18: 13 Verdikte,
-> Gesamtlauf 36/36).
+> Gesamtlauf 36/36), und die geschuldete Quell-Arbeit an `kurs/de` steht
+> (Wellen 105–106, veröffentlicht in `v5.15.0`). Offen ist die Entscheidung
+> über den Geltungsbereich — Default oder deklarierte Team-Variante.
 >
 > Diese Datei hält einen möglichen Ersatz für das stehende
 > `docs/plan/planning/observations.md` in Repos mit mehreren Schreibern fest.
@@ -232,7 +234,7 @@ den Merge-Zeitpunkt und die maschinell entscheidbare Hälfte benennt.
 | 5 | Später erkannte BEO-Duplikate würden zwei stabile Pfade hinterlassen | Der nicht kanonische Pfad bleibt bestehen und erhält den Terminalzustand `alias` mit genau einem `alias-of`-Ziel. Neue Belege sind dort verboten; gezählt wird die Vereinigung eindeutiger Slice-IDs am kanonischen Ziel. | Alias-Ziel existiert, Graph ist azyklisch, genau ein terminales kanonisches Ziel, keine doppelten Slice-Belege. | Die Wahl, welche BEO kanonisch bleibt, ist eine menschliche Entscheidung. |
 | 6 | Syntaktisch gültige Evidence kann erfunden oder falsch zugeordnet sein | Beidseitige Paarung: Evidence verlinkt die `done/`-Slice-Closure, und diese zitiert dieselbe BEO. Ein Beleg zählt nur bei vollständiger Paarung. | Existenz, Lage, Kennungsgleichheit und Bijektion prüfen. | Ob der Vorfall wirklich eintrat und fachlich zur BEO gehört, bleibt Review. |
 | 7 | Ohne zentrale Tabelle fehlt der schnelle Überblick | Eine read-only, deterministisch erzeugte Sicht listet BEO, Sub-Area, Zustand, abgeleiteten Zähler und Aktion; Filter mindestens nach Sub-Area und Zustand. Sie erscheint als d-check-Ausgabe oder CI-Artefakt, nicht als gepflegte Repo-Datei. | Der Erzeuger liest ausschließlich die Artefakte und schreibt nicht ins Repo; Snapshot-/Determinismus-Test gegen denselben Baum. | Darstellungsform und genauer d-check-Einstieg sind noch zu entscheiden. |
-| 8 | Uneinheitliche oder nicht portable Slugs | Deklarierte Form `BEO-<SUB-AREA>/<slug>`; Sub-Area aus `harness/conventions.md`, Slug 3–80 Zeichen, lowercase ASCII-Kebab-Case, keine führenden, abschließenden oder doppelten Bindestriche. Namespace und Slug sind nach dem ersten Merge unveränderlich. | Pfad-Grammatik und Deckung Pfad ↔ `observation.md`; Delete und Rename über `vcs` (gemessen, s15 — Rename im Range-Modus seit `v0.71.1`). Die Prüfung gegen den deklarierten Sub-Area-Bestand braucht ein Kürzel, das heute keine Modus-Deklaration führt. | Gute, fachlich treffende Benennung lässt sich nicht mechanisieren. |
+| 8 | Uneinheitliche oder nicht portable Slugs | Deklarierte Form `BEO-<SUB-AREA>/<slug>`; Sub-Area aus `harness/conventions.md`, Slug 3–80 Zeichen, lowercase ASCII-Kebab-Case, keine führenden, abschließenden oder doppelten Bindestriche. Namespace und Slug sind nach dem ersten Merge unveränderlich. | Pfad-Grammatik und Deckung Pfad ↔ `observation.md`; Delete und Rename über `vcs` (gemessen, s15 — Rename im Range-Modus seit `v0.71.1`). Die Prüfung gegen den deklarierten Sub-Area-Bestand hat ihre Autorität: Die Modus-Deklaration führt eine Kürzel-Spalte (`seit welle-105`). | Gute, fachlich treffende Benennung lässt sich nicht mechanisieren. |
 | 9 | Bestehende `BEO-<NNN>` dürfen nicht umbenannt werden | Ein deklarierter Cutover konvertiert jede bestehende Zeile einmalig in einen BEO-Ordner unter ihrer Herkunfts-Sub-Area, behält aber `BEO-<NNN>` als kanonische Alt-Kennung. `observations.md` wird danach nur ein statischer Migrationszeiger; neue BEOs verwenden ausschließlich Slugs. | Gate akzeptiert beide Kennungsformen, verbietet neue numerische Kennungen nach dem Cutover und prüft die vollständige Übernahme aller alten Belege. | Der einmalige Konverter und das genaue Legacy-Pfadformat müssen im Replay festgelegt werden. |
 
 ### 1. Semantische Duplikate
@@ -253,13 +255,22 @@ tragen; eine bereits verkörperte Regel erfüllt die stärkere Form
 stoppt der Lauf den PR, der die Schwelle im Gesamtstand überschreitet, bevor
 ein unvollständiger Zustand auf dem Hauptzweig landet. Ohne diese Zusage der
 CI läuft dieselbe Prüfung erst auf dem Hauptzweig und wird dort rot — spät,
-aber nicht mehr still; heute erzeugt der Übertritt gar kein Rot (s14b). Offen
-bleibt, welche Zielklassen außer Folge-Slice und verkörperter Regel als Aktion
-zulässig sind — und diese Menge ist Quell-Arbeit, keine Konfiguration.
+aber nicht mehr still; heute erzeugt der Übertritt gar kein Rot (s14b). Die
+Zielklassen der Aktion sind keine offene Frage mehr: *geplant* trägt die
+**Kennung des Slice oder der Welle**, die die Regel schreibt, *verkörpert* den
+Zielort mit Herkunfts-Anker
+([`modul-06` §Das Beobachtungs-Register](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register),
+`seit welle-106`) — eine geschlossene Menge aus der Quelle, keine
+Konfiguration.
 
 ### 3. Statusmodell
 
-Vorgeschlagen ist `open` → `planned` → `embodied`, daneben `open` → `retired`
+Die drei Ausgänge bei 3× sind kein Vorschlag mehr: `modul-06` führt sie als
+geschlossene Menge — **verkörpert · geplant · gestrichen**
+([§Das Beobachtungs-Register](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register),
+`seit welle-106`). Der Entwurf trägt sie als Zustandsnamen und ergänzt, was
+die Quelle nicht regelt: die Übergänge `open` → `planned` → `embodied`,
+daneben `open` → `retired`
 und aus jedem noch nicht verkörperten Zustand → `alias`. `planned` verlangt
 einen Aktionszeiger, `embodied` das verkörperte Ziel mit Herkunfts-Anker,
 `retired` den Grund, warum das Phänomen nicht mehr auftreten kann, und `alias`
@@ -322,14 +333,17 @@ Merge nicht umbenannt — **maschinell gehalten seit `v0.71.1`**: Löschung wie
 Umbenennung meldet `vcs` in beiden Eingabe-Modi (s15a/b).
 Die Deckung Kennung ↔ Pfad ist Gegenstand des Antrags. Die Zusage, d-check
 prüfe zusätzlich den Namespace gegen `harness/conventions.md`, setzt ein
-**Sub-Area-Kürzel** voraus, das dort heute niemand deklariert: Die
-Modus-Deklaration führt Pfade, das Register führt Prosa-Namen, und
-[`source-precedence.md` §Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
-verwendet Kürzel in Kennungen. **Den Ort benennt der Kanon durchaus** — es
-seien „die Sub-Areas, die `harness/conventions.md` ohnehin einzeln
-deklariert"; was dort steht, sind aber Pfade und Prosa-Namen, kein Kürzel. Die
-Lücke ist also nicht der fehlende Ort, sondern die fehlende **Gestalt** an
-ihm. Sie zu schließen ist Quell-Arbeit und geht dem Sensor voraus.
+**Sub-Area-Kürzel** voraus — und das hat seit Welle 105 nicht nur seinen Ort,
+sondern seine Gestalt: Die Modus-Deklaration führt eine **Kürzel-Spalte**
+(kurz, GROSS, ohne Leerzeichen; ein vergebenes Kürzel ist unveränderlich)
+([`harness-dateien.md` §Konventionsspeicher](../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)),
+und das Segment wird nachgeschlagen statt formuliert
+([`source-precedence.md` §Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+Die zugesagte Prüfung hat damit eine auflösbare Autorität. **Offen bleibt eine
+Ebene weiter:** Die Sub-Area-Spalte des Beobachtungs-Registers führt weiterhin
+Prosa-Namen — also einen Namen, der umformuliert werden darf, während das
+Segment es nicht darf. Dieselbe Fragilität, benannt in Welle 105, offen bis
+ein Anlass sie misst.
 
 ### 9. Migration und Geltungsbereich
 
@@ -375,12 +389,27 @@ gehören nicht in einen Change Request. **Eine** ist bewusst still (s17).
 s18). **Eine** galt als gelöst, war es nicht — und ist es seit `v0.71.1` (s15b): Sie
 brauchte keine neue Fähigkeit, sondern eine Reparatur an einer vorhandenen.
 
-Offen bleibt damit dasselbe wie vorher, nur genauer benannt: Ziel-Form und
-Zustandsmaschine sind Quell-Arbeit an `kurs/de` — die geschlossene Menge der
-Ausgänge bei 3×, die Sub-Area-Kürzel und die zwei Beleg-Fälle, die ein
-abgeleiteter Zähler nicht mehr abbilden kann (Vorkommen außerhalb einer
-Slice-Closure; zweites Vorkommen derselben Klasse im selben Slice). Erst wenn
-diese Hälfte steht, wird entschieden, ob die Form den heutigen Default ersetzt
-oder als deklarierte Team-Variante danebensteht. Danach beginnt eine eigene
-Regel-Welle an der Quelle `kurs/de`; Spiegel, Templates und Beispiel folgen,
-nicht umgekehrt.
+**Die Quell-Arbeit steht.** Die drei Punkte, die Ziel-Form und Zustandsmaschine
+an `kurs/de` gebunden haben, sind an der Quelle geschrieben und in `v5.15.0`
+veröffentlicht:
+
+| Quell-Arbeit | Verkörpert in | Anker |
+|---|---|---|
+| die geschlossene Menge der Ausgänge bei 3× — *verkörpert · geplant · gestrichen* | [`modul-06` §Das Beobachtungs-Register](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register) | `seit welle-106` |
+| das Sub-Area-Kürzel — Ort **und** Gestalt | [`harness-dateien.md` §Konventionsspeicher](../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher) · [`source-precedence.md` §Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt) | `seit welle-105` |
+| die zwei Beleg-Fälle, die ein abgeleiteter Zähler nicht abbildet — ein Vorkommen ohne abgeschlossenen Vorgang ist *benannt, nicht gezählt*; zwei Funde im selben Vorgang sind *eine Gelegenheit* | [`modul-06` §Das Beobachtungs-Register](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register) | `seit welle-106` |
+
+Damit ist auch die Vorbedingung erfüllt, die d-check seiner Zusage
+mitgegeben hat: §1–§5 baut er nach diesen zwei Quell-Wellen.
+
+**Fällig ist jetzt die Entscheidung, die hinter dieser Hälfte stand:** Ersetzt
+die Verzeichnisform den heutigen Default, oder steht sie als deklarierte
+Team-Variante daneben? Sie ist der nächste Schritt dieser Datei und noch nicht
+getroffen. Mit ihr beginnt eine eigene Regel-Welle an der Quelle `kurs/de`;
+Spiegel, Templates und Beispiel folgen, nicht umgekehrt.
+
+Daneben offen, jedes an seiner Stelle: der Rückweg aus einem verkörperten
+Zustand (§3), Darstellungsform und CLI-Einstieg der erzeugten Sicht (§7), die
+Sub-Area-Spalte des Beobachtungs-Registers mit ihren Prosa-Namen (§8),
+Legacy-Pfadformat und Replay-belegter Konverter (§9) — und die zwei
+Probe-Ausgänge ohne Leser (s14b, s18), die beim aufgeschobenen Antrag liegen.
