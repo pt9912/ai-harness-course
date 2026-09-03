@@ -333,33 +333,25 @@ Closure-Notiz §7 wie jeder andere **und trägt seine Beobachtungen ins
 unterscheidet nicht nach Welle-Zugehörigkeit. Damit zählt
 der Steering Loop weiter vollständig und offene Risiken finden ihren Ausgang.
 
-**Was offen bleibt.** Das sind **zwei** Dinge, und für beide gibt es keinen
-wellenlosen Ersatz-Träger.
+**Was offen bleibt.** Das ist genau eine Sache: die **Carveout-Frist**. Sie
+misst in Wellen („seit > 2 Wellen aktiv", [Modul 7](modul-07-carveouts.md)).
+Wer lange wellenlos arbeitet, dehnt sie damit — ein Carveout steht dann bei
+„0 Wellen aktiv", obwohl Monate vergangen sind. Für sie gibt es keinen
+wellenlosen Ersatz-Träger; das bleibt eine benannte Lücke, keine Pflicht, und
+ein Repo bleibt ohne sie konform. Eine Frist, die in Wellen misst, braucht kein
+Ereignis, sondern ein anderes **Maß** — und welches das wäre, sagt der Kurs
+nicht.
 
-Die **Carveout-Frist** misst in Wellen („seit > 2 Wellen aktiv",
-[Modul 7](modul-07-carveouts.md)). Wer lange wellenlos arbeitet, dehnt sie
-damit — ein Carveout steht dann bei „0 Wellen aktiv", obwohl Monate vergangen
-sind.
-
-Das **Archivieren der Zeitdokumente** (§Die Wellen-Closure-Prozedur, Schritt 4)
-hängt an der Closure, die die Slices einsammelt — ohne Wellen findet sie nie
-statt. Es trifft vor allem die **Review-Reports**: Sie haben nach der
-Slice-Closure keinen Leser mehr über Läufe hinweg
-([Modul 10](../04-qualitaet/modul-10-review-harness.md#reviewer-berichtet-auch-was-er-nicht-gefunden-hat)),
-wachsen linear mit der Arbeit und sprechen im Agentenlauf weiter mit. **Das
-Sammel-Archiv aus Schritt 4 trägt hier nicht:** Es löst den Bestand *vor* der
-Einführung, eine einmalige und abgezählte Menge mit bekanntem Ende. Wellenloser
-Dauerbetrieb hat keins. Was ihm fehlt, ist deshalb nicht das **Ziel** des
-Umzugs — das steht —, sondern sein **Auslöser**; und einen Auslöser zu
-erfinden, der nichts beobachtet, wäre genau die Zeremonie, gegen die dieser
-Abschnitt argumentiert.
-
-Beides ist eine **benannte Lücke**, keine Pflicht: Ein Repo, das wellenlos
-arbeitet und beide ungelöst lässt, bleibt konform. Wer die **zweite** schließen
-will, benennt ihren Auslöser selbst — dieselbe Repo-Entscheidung wie die
-Zuordnung des Altbestands in Schritt 4. Für die **erste** gibt es diesen Weg
-nicht: Eine Frist, die in Wellen misst, braucht kein Ereignis, sondern ein
-anderes Maß, und welches das wäre, sagt der Kurs nicht.
+**Warum hier nichts über das Archivieren steht.** Es gehört in die Tabelle, wie
+die anderen fünf Vorgänge, und es hat denselben Träger wie sie. Die Erlaubnis
+zu archivieren hängt nämlich nicht an der Welle: Der Volltext eines
+geschlossenen Slice *„kommt in keinem lesenden Knoten vor"*, und **genau
+deshalb** darf er ins Archiv
+([`traceability.md`](../grundlagen/traceability.md#traceability-constraint)).
+Diese Eigenschaft entsteht mit der Slice-Closure; die Welle trägt zur
+Begründung nichts bei — sie ist die Bündelungs-Einheit, nicht die Bedingung.
+Was sie liefert, ist ein einzelner beobachtbarer Commit für viele Slices; ohne
+sie liefert jede Slice-Closure ihren eigenen.
 
 **Was der wellenlose Betrieb selbst auslöst.** Alles, was am Slice hängt — und
 der Slice bleibt, auch wenn keine Welle läuft.
@@ -380,6 +372,7 @@ Wellen gibt, fehlt dieser Sammelpunkt — und dann greift die Tabelle:
 | **Sichtungs-Schritt** (offene Beobachtungen unter der Schwelle) | Slice-**Planung**, §8 *Vorgelagert — offene Beobachtungen sichten* | beim Anlegen jedes Slice, unabhängig vom Sub-Area-Modus |
 | **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
 | **Alle drei Paarungen** (a/b/c aus Closure-Schritt 3) | Slice-Closure | **nach** dem `git mv` — die Paarungen suchen in `done/`, vorher liegt die Datei dort nicht |
+| **Zeitdokumente archivieren** (Closure-Schritt 4) | Slice-Closure | **nach** den Paarungen — sie lesen den Volltext in `done/`, den das Archiv dort schließt. Der Schlüssel ist der Slice: `done/slice-<NNN>-archiv.zip`, **flach** neben dem Stub |
 
 Ohne den Lese-Schritt bliebe ausgerechnet der einzige Fall ungeprüft, in dem
 `seit slice-<NNN>` überhaupt entsteht, und eine `BEO-<NNN>` ohne Registerzeile
@@ -801,9 +794,16 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    Archivierung, die es nicht gab. **Drei Grenzen, benannt statt überspielt.** Geprüft ist die Form, nicht die
    Länge. Ob das Archiv *vollständig* ist, bezeugt nur der
    Archivierungs-Commit — danach ist es für jedes Gate opak; deshalb gehört
-   die Operation in ein Werkzeug und nicht in Handarbeit. Und in einem Repo
-   **ohne** Wellen-Betrieb fehlt der Auslöser ganz: Dort gibt es keine
-   Closure, an der das Archivieren hängen könnte, und die Frage bleibt offen.
+   die Operation in ein Werkzeug und nicht in Handarbeit. **Ohne** Wellen-Betrieb
+   trägt die **Slice-Closure** den Schritt selbst — nach den Paarungen, die den
+   Volltext in `done/` noch lesen —, und der Schlüssel ist dann der Slice:
+   `done/slice-<NNN>-archiv.zip`, flach neben dem Stub statt in einem
+   Wellen-Verzeichnis (§Wann Arbeit eine Welle braucht). **Flach ist hier nicht
+   Geschmack:** Der Stub bleibt damit auf `done/slice-<NNN>-*.md` liegen, wo
+   die Lage-Prüfung der Register-Paarung ihn sucht — die Sensor-Falle des
+   nächsten Absatzes entsteht gar nicht erst. Zu bündeln gibt es ohnehin
+   nichts: Ein Wellen-Archiv fasst mehrere Slices und einen Welle-Plan unter
+   einen Schlüssel, ein Slice ist schon einer.
 
    **Vor der ersten Archivierung ist der Geltungsbereich der vorhandenen
    Sensoren zu prüfen.** Ein Sensor, der heute auf `done/*.md` keilt — etwa

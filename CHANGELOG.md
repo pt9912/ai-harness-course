@@ -11,6 +11,66 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 114 — 2026-09-03 · Die Lücke war keine — sie hatte nur den falschen Träger gesucht
+
+Welle 113 hat eine Lücke benannt, wo ein Träger stand. Der Anlass war eine
+Nutzer-Frage, die den Zweck gegen die Regel hielt: *Archiviert wurde doch,
+damit das Rauschen verschwindet — warum bleibt es dann ausgerechnet dort
+liegen, wo am meisten davon anfällt?*
+
+**Zwei Fehler in der Begründung von Welle 113, beide nachgewiesen.**
+
+- **Der Zeremonie-Satz wurde außerhalb seines Geltungsbereichs benutzt.** Er
+  steht unmittelbar unter dem Wellen-Kriterium und beantwortet genau eine
+  Frage: *ob eine Welle vorliegt* — „mehr beobachtet, als die DoDs ihrer Slices
+  schon belegen". Er ist keine allgemeine Regel, dass jeder Vorgang einen
+  eigenen beobachtenden Auslöser braucht. Welle 113 hat ein Wellen-Kriterium
+  auf eine Archivierungs-Operation angewandt.
+- **Die Erlaubnis zu archivieren hängt gar nicht an der Welle.**
+  [`traceability.md`](kurs/de/grundlagen/traceability.md#traceability-constraint)
+  begründet sie so: Der Volltext eines geschlossenen Slice *„kommt in keinem
+  lesenden Knoten vor [...] genau deshalb"* darf er ins Archiv. Das *genau
+  deshalb* zeigt auf **geschlossen**, nicht auf *Welle geschlossen*. Die
+  Eigenschaft entsteht mit der Slice-Closure; die Welle trägt zur Rechtfertigung
+  nichts bei — sie ist die Bündelungs-Einheit, nicht die Bedingung.
+
+Damit fehlte der Auslöser nie. Er stand in derselben Tabelle, in der Welle 113
+behauptete, er fehle: Vier der fünf Zeilen hängen ihren Wellen-Vorgang an die
+**Slice-Closure** um.
+
+- [`modul-06` §Wann Arbeit eine Welle braucht](kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht):
+  Die Träger-Tabelle bekommt ihre **sechste Zeile** — *Zeitdokumente
+  archivieren*, Träger **Slice-Closure**, Moment **nach den Paarungen** (die
+  lesen den Volltext in `done/`, den das Archiv dort schließt). *Was offen
+  bleibt* führt wieder **eine** Sache, die Carveout-Frist — nicht weil die
+  zweite verschwunden wäre, sondern weil sie einen Träger hat.
+- **Der Schlüssel ist flach:** `done/slice-<NNN>-archiv.zip` neben dem Stub,
+  nicht `done/slice-<NNN>/`. Das ist keine Geschmacksfrage. Schritt 4 warnt
+  selbst, dass die Verzeichnis-Form Sensoren blendet, die auf `done/*.md`
+  keilen; flach bleibt der Stub auf `done/slice-<NNN>-*.md` liegen, wo die
+  **Lage-Prüfung** der Register-Paarung ihn sucht — die Falle entsteht gar
+  nicht erst. Und zu bündeln gibt es nichts: Ein Wellen-Archiv fasst mehrere
+  Slices und einen Welle-Plan unter einen Schlüssel, ein Slice ist schon einer.
+- [`modul-06` Schritt 4](kurs/de/02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur):
+  Die dritte der *drei Grenzen* ist keine mehr. Statt *„die Frage bleibt
+  offen"* steht dort der Träger.
+- [`modul-05`](kurs/de/02-planung/modul-05-planning-harness.md) und
+  [`modul-10`](kurs/de/04-qualitaet/modul-10-review-harness.md): Beide sagten,
+  ohne Wellen ende der Weg. Beide sagen jetzt, wer ihn weitergeht.
+
+**Was von Welle 113 stehen bleibt.** Ihr Kern war richtig und ist es geblieben:
+`modul-06` widersprach sich, und `modul-05`/`modul-10` behaupteten unbedingt,
+was ohne Wellen nicht gilt. Falsch war nur die Antwort auf das *Warum* — und
+die stand einen Tag lang in einem veröffentlichten Bundle. Der Konsument, der
+den Punkt gemeldet hat, bekommt einen Nachtrag; seine ursprünglich beantragte
+sechste Tabellenzeile ist damit doch die richtige Form gewesen, nur nicht mit
+dem Inhalt *„kein Träger"*, den er selbst vorgeschlagen hatte.
+
+Spiegel zieht mit (Modul 5, 6, 10), Stand-Zeile auf Kurs-Welle 114.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN.
+
 ## Welle 113 — 2026-09-03 · Zwei Lücken, aber das Modul zählte nur eine
 
 Konsumenten-CR von d-check (Baseline-Pin `v5.18.0`), an eigenem Bestand

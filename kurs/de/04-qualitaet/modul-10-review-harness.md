@@ -253,10 +253,10 @@ seinen Slice einsammelt, wandert der Report vollständig ins Archiv
 ([Modul 6 §Die Wellen-Closure-Prozedur](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur),
 Schritt 4) — **ohne Stub**. Er hat keine Identität jenseits seines Slice: Wer
 ihn sucht, sucht ihn unter dem Slice, den er geprüft hat. **In einem Repo ohne
-Wellen tritt dieses Ereignis nie ein**: Der Report bleibt liegen, und einen
-Ersatz-Auslöser schreibt der Kurs nicht vor — die Lücke steht dort benannt, wo
-auch die übrigen wellenlosen Träger stehen
-([Modul 6 §Wann Arbeit eine Welle braucht](../02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)). Ein Rang-Dokument,
+Wellen archiviert ihn die Slice-Closure selbst** — dieselbe, die seinen Slice
+schließt, nach den Paarungen, nach `done/slice-<NNN>-archiv.zip`
+([Modul 6 §Wann Arbeit eine Welle braucht](../02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
+Er wartet also nicht auf ein Ereignis, das es dort nie gibt. Ein Rang-Dokument,
 das einen einzelnen Report als Beleg *verlinkt*, hat damit ein Problem, das
 älter ist als das Archiv — es macht ein Zeitdokument zur Quelle. Die Aussage
 gehört an den zitierenden Ort, die Report-Kennung bleibt im Text.

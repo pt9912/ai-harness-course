@@ -74,10 +74,10 @@ Schließt die Welle, die diesen Slice einsammelt, wandert sein Volltext ins
 Archiv, und an seiner Stelle bleibt ein gekürzter **Stub** — Identität,
 Archiv-Zeiger, Zustand und die Kennungen, die den Slice überlebt haben
 ([Modul 6](modul-06-roadmap.md), Schritt 4). Die Verzeichnis-Position bleibt
-der Zustand. **In einem Repo ohne Wellen endet der Weg hier:** Es gibt keine
-Closure, die den Slice einsammelt, und einen Ersatz-Auslöser gibt die Regel
-nicht vor — eine benannte Lücke ([Modul 6](modul-06-roadmap.md), *Was offen
-bleibt*).
+der Zustand. **Ohne Wellen tut es die Slice-Closure selbst** — nach den
+Paarungen, nach `done/slice-<NNN>-archiv.zip` flach neben dem Stub
+([Modul 6](modul-06-roadmap.md), *Wann Arbeit eine Welle braucht*). Die Station
+ist dieselbe, nur der Träger ein anderer.
 
 `done` ist **kein Endzustand der Information**: Die Beobachtungen aus §7 sind
 bei der Slice-Closure ins Beobachtungs-Register eingetragen und werden **von
