@@ -11,6 +11,72 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 113 — 2026-09-03 · Zwei Lücken, aber das Modul zählte nur eine
+
+Konsumenten-CR von d-check (Baseline-Pin `v5.18.0`), an eigenem Bestand
+gemessen: 45 bewusst wellenlose Slices mit 57 Review-Reports, die nach dem
+Wortlaut des Kurses **nie** archiviert werden, weil das Archivierungs-Ereignis
+an einer Welle-Closure hängt, die es dort nicht gibt.
+
+**Der Befund war schärfer als der Antrag: `modul-06` widersprach sich selbst.**
+§Wann Arbeit eine Welle braucht sagte, was ohne wellenlosen Ersatz-Träger
+offen bleibt, sei *„genau eine Sache: die Carveout-Frist"*. Schritt 4 derselben
+Datei nannte längst eine zweite — *„in einem Repo ohne Wellen-Betrieb fehlt der
+Auslöser ganz [...] und die Frage bleibt offen"*. Zwei Abschnitte eines Moduls,
+uneins über die Zahl der eigenen Lücken; und die Zahl stand ausgerechnet dort
+falsch, wo ein wellenlos arbeitendes Repo nachschlägt.
+
+- [`modul-06` §Wann Arbeit eine Welle braucht](kurs/de/02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht):
+  *Was offen bleibt* führt jetzt **zwei** Dinge — die Carveout-Frist und das
+  Archivieren der Zeitdokumente. Die zweite nennt, wen es trifft
+  (Review-Reports, die nach der Slice-Closure keinen Leser mehr haben, linear
+  wachsen und im Agentenlauf weiter mitsprechen), und dass beides eine
+  **benannte Lücke** ist: keine Pflicht, ein Repo bleibt ohne sie konform.
+- [`modul-10` §Reviewer berichtet auch, was er nicht gefunden hat](kurs/de/04-qualitaet/modul-10-review-harness.md#reviewer-berichtet-auch-was-er-nicht-gefunden-hat):
+  Die Archivierung stand dort unbedingt an der Welle-Closure. Sie sagt jetzt,
+  dass dieses Ereignis ohne Wellen nie eintritt, und verweist auf die Stelle,
+  an der die übrigen wellenlosen Träger stehen.
+
+- [`modul-05` §Lifecycle](kurs/de/02-planung/modul-05-planning-harness.md):
+  **Nicht aus dem CR, sondern aus dem Review dieser Welle.** Der Absatz führte
+  mit *„`done/` ist auch nicht die letzte Station der Datei"* — unbedingt
+  behauptet, und in einem wellenlosen Repo falsch: Dort *ist* `done/` die
+  letzte Station. Der Führungssatz gilt jetzt ausdrücklich dem Wellen-Betrieb,
+  und der wellenlose Ausgang steht daneben. Eine schwächere Instanz derselben
+  Klasse — sie danebenstehen zu lassen, während `modul-10` den Zusatz bekommt,
+  wäre die halbe Korrektur.
+
+**Warum das Sammel-Archiv die Antwort nicht ist.** Der CR schlug es vor, weil
+Schritt 4 es für den Altbestand kennt. Die Form überträgt sich aber nicht: Der
+Altbestand ist eine einmalige, abgezählte Menge mit bekanntem Ende, wellenloser
+Dauerbetrieb hat keins. Was fehlt, ist nicht das **Ziel** des Umzugs — das
+steht —, sondern sein **Auslöser**. Einen zu erfinden, der nichts beobachtet,
+wäre die Zeremonie, gegen die derselbe Abschnitt argumentiert; deshalb ist die
+Lücke benannt und nicht geschlossen.
+
+**Abweichung vom Antrag, begründet.** Der CR bat um eine **sechste Zeile** in
+der Träger-Tabelle. Sie hat sie nicht bekommen: Die Tabelle trägt in ihrer
+mittleren Spalte *Träger im Repo ohne Wellen* — eine Zeile, deren Träger „kein
+Träger" wäre, bricht ihren eigenen Vertrag. Das Modul hat für diesen Fall
+bereits eine Form, und dort steht seit jeher die Carveout-Frist: den Absatz
+*Was offen bleibt*. Die Wirkung, um die der CR bittet, ist damit erreicht — ein
+wellenlos arbeitendes Repo liest die Lücke an der Stelle, an der es nachschlägt
+—, ohne der Tabelle eine Zeile aufzuzwingen, die ihre Spaltenlogik verletzt.
+
+Spiegel zieht mit (Modul 5, 6 und 10); Templates, Beispiel und Lösungen sind
+unberührt — die Welle ändert keine Form, sie benennt eine Lücke.
+
+**Gegengeprüft, was die Welle selbst behauptet.** *„Zwei Dinge"* ist eine
+abschließende Aufzählung, also derselbe Satzbau, der eben noch falsch war.
+Nachgezählt an allen sechs Closure- und drei Eröffnungs-Schritten: Schritt 2,
+3a/3b/3c und Eröffnung-2 stehen in der Träger-Tabelle, Schritt 4 ist die neue
+Lücke, Schritt 1 und 5 sind wellen-konstitutiv — ohne Welle gibt es dort nichts
+zu tragen —, und Schritt 6 ist ausdrücklich ausgenommen, weil wellenlose Arbeit
+nicht in der Roadmap erscheint. Die Aufzählung hält.
+
+Gates: `make check` — d-check 0 Befunde, `docs-check` 0 ERROR / 0 WARN,
+`alignment-check` 0 WARN. `make bundle-check` grün.
+
 ## Welle 112 — 2026-09-03 · Der Entwurfsstand behauptete eine Schuld, die beglichen war
 
 [`docs/steering-loop-team.md`](docs/steering-loop-team.md) band Ziel-Form und

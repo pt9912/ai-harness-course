@@ -109,7 +109,11 @@ Verdikt — liefert
 **Mit der Closure der Welle, die seinen Slice einsammelt, wandert der Report
 vollständig ins Archiv — ohne Stub** ([Modul 6](modul-06-roadmap.md), Schritt
 4). Er hat keine Identität jenseits seines Slice; wer ihn sucht, sucht ihn
-unter dem Slice, den er geprüft hat. **Ein Rang-Dokument, das einen einzelnen
+unter dem Slice, den er geprüft hat. **In einem Repo ohne Wellen tritt dieses
+Ereignis nie ein**: Der Report bleibt liegen, und einen Ersatz-Auslöser gibt
+die Regel nicht vor — die Lücke steht dort benannt, wo auch die übrigen
+wellenlosen Träger stehen ([Modul 6](modul-06-roadmap.md), *Was offen
+bleibt*). **Ein Rang-Dokument, das einen einzelnen
 Report als Beleg verlinkt, hat damit ein Problem, das älter ist als das
 Archiv** — es macht ein Zeitdokument zur Quelle. Die Aussage gehört an den
 zitierenden Ort, die Report-Kennung bleibt im Text.
