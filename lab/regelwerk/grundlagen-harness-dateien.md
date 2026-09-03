@@ -11,7 +11,7 @@ docs/plan/planning/next/    # priorisiert/eingeplant
 docs/plan/planning/in-progress/  # aktive Slices
 docs/plan/planning/done/    # abgeschlossene Slices
 docs/plan/planning/<welle-id>.md            # offene Wellen, flach (Modul 6)
-docs/plan/planning/observations.md          # Beobachtungs-Register: der Steering-Loop-Zähler
+docs/plan/planning/observations/            # Beobachtungs-Register: je Beobachtung ein Verzeichnis
 docs/plan/planning/reconciliation.md        # Reconciliation-Register: nur im Brownfield-Bootstrap
 docs/plan/planning/in-progress/roadmap.md   # Meilensteine, nächste Wellen, Zeiger auf offene
 docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
@@ -292,8 +292,13 @@ deklariert wird; der Name der Sub-Area taugt nicht dafür, weil er
 umformuliert werden darf und das Segment nicht. **Ein vergebenes Kürzel ist
 unveränderlich** — es steht in Kennungen, in Commits und in Verweisen.
 
-Wo Kennungen **kein** Segment tragen, entfällt die Spalte. Die Frage nach dem
-Zählraum entsteht erst mit dem zweiten Menschen am Repo
+**Die Spalte ist nicht bedingt.** Sie war es, solange kein Kern-Artefakt ein
+Segment verlangte. Seit die Kennung einer Beobachtung der Pfad
+`BEO-<KUERZEL>/<slug>` **ist** ([Modul 6](modul-06-roadmap.md),
+*Das Beobachtungs-Register*), trägt jedes Repo mindestens eine Kennungsklasse
+mit Segment; die Bedingung ist erfüllt, nicht aufgehoben. Ein Prosa-Name taugt
+im Pfad nicht — er darf umformuliert werden, ein Pfad nicht; ohne deklariertes
+Kürzel zählen zwei Schreiber in zwei Räumen, ohne dass etwas kollidiert
 ([§Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
 
 Wichtig: `harness/conventions.md` dupliziert keinen Baseline-Text — sie

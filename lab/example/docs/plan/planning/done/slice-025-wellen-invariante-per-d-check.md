@@ -125,8 +125,8 @@ konsistent; der Slice ändert den Wächter, nicht den Bestand.
 Sub-Area dieses Repos (eigene Konventionen in `.d-check.yml`, eigene Gates,
 eigene Änderungsrate); nichts ist auszudifferenzieren.
 
-**Vorgelagert — offene Beobachtungen sichten:** `BEO-003` (ADR-Bezug im
-Commit vergessen) und `BEO-006` (geschlossen in `slice-022`) sind die
+**Vorgelagert — offene Beobachtungen sichten:** `BEO-PLAN/adr-bezug-im-commit-vergessen` (ADR-Bezug im
+Commit vergessen) und `BEO-TOOLS/check-references-deckt-adr-nicht` (geschlossen in `slice-022`) sind die
 Planning-Lifecycle-Einträge des Registers; keiner betrifft die Wellen-Liste.
 Neu zu zählen ist nichts — der Anlass war eine Werkzeug-Grenze, kein
 wiederholtes Symptom.

@@ -27,8 +27,8 @@
 
 ## Steering-Loop-Einträge
 
-Alle Einträge kommen aus dem [Beobachtungs-Register](../observations.md) und
-nennen ihre `BEO-<NNN>` — die Schwelle ist 3×. Eine **geschärfte Regel** trägt
+Alle Einträge kommen aus dem [Beobachtungs-Register](../observations/README.md) und
+nennen ihren Beobachtungs-Pfad — die Schwelle ist 3×. Eine **geschärfte Regel** trägt
 das Pflichtfeld `liegt in <Zielort>`, und das Ziel trägt den Herkunfts-Anker
 `seit welle-1`; geprüft wird die Paarung **am Ende von Closure-Schritt 3**,
 nicht schon im Trigger-Audit (Schritt 2): dort gäbe es diese Einträge noch
@@ -38,13 +38,13 @@ Zielort, und ihr Gegenstück ist die `LH-*`-ID. Sie ist damit kein Gegenstand
 der **Anker**-Paarung; an der **Register**-Paarung nimmt sie teil wie jeder
 andere Eintrag.
 
-- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — liegt in `AGENTS.md §2.7` (trägt dort `seit welle-1`). Auslöser: `BEO-005` (slice-006, slice-009, slice-012 — 3×).
-- **Spec-Lücke** benannt: Grenzwerte der Suche waren im Lastenheft nicht behandelt (zuletzt Top-K, `k > 100`) — aufgelöst über Lastenheft v0.2.0 (`LH-FA-02`), kein Herkunfts-Anker nötig. Auslöser: `BEO-007` (slice-003, slice-005, slice-007 — 3×).
+- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — liegt in `AGENTS.md §2.7` (trägt dort `seit welle-1`). Auslöser: `BEO-IMPL/tie-break-nicht-dokumentiert` (slice-006, slice-009, slice-012 — 3×).
+- **Spec-Lücke** benannt: Grenzwerte der Suche waren im Lastenheft nicht behandelt (zuletzt Top-K, `k > 100`) — aufgelöst über Lastenheft v0.2.0 (`LH-FA-02`), kein Herkunfts-Anker nötig. Auslöser: `BEO-SPEC/grenzwert-suche-im-lastenheft` (slice-003, slice-005, slice-007 — 3×).
 
 ## Beobachtungs-Register (Zeiger)
 
 Der Zähler steht seit Kurs-Welle 59 als stehende Datei in
-[`../observations.md`](../observations.md) — nicht mehr hier. Was in dieser
+[`../observations/`](../observations/README.md) — nicht mehr hier. Was in dieser
 Welle 3× erreicht hat, steht oben unter *Steering-Loop-Einträge*.
 
 ## Folge-Slices

@@ -201,7 +201,7 @@ behebt.
 ```mermaid
 flowchart TB
     A["Beobachtungs-Quellen<br/>Agentenlauf · Review-Findings<br/>Verifikation · Validierung"] --> B["Slice-Closure §7<br/>Steering-Loop-Eintrag<br/>+ Risiko-Ausgänge"]
-    B --> V["Beobachtungs-Register<br/>observations.md<br/>(neu oder Zähler +1)"]
+    B --> V["Beobachtungs-Register<br/>observations/<br/>(neues Verzeichnis oder neue Evidence-Datei)"]
     V --> C{"Wie oft?"}
     C -- "3x" --> E["Verkörperung<br/>Lese-Schritt: Welle-Closure —<br/>Repo ohne Wellen: die Slice-Closure<br/>Steering-Loop-Eintrag + Zielort<br/>(Regel/Sensor: liegt in; Spec-Lücke: LH-*)"]
 

@@ -116,7 +116,7 @@ sondern ein Buffet.
   dem Review** dieses Slice (Summary-Zeile des Review-Reports; der Report
   selbst ist Lauf-Beleg und wird über Läufe hinweg nicht gelesen,
   [Modul 10](modul-10-review-harness.md)). Alle drei nehmen dieselbe
-  Route in den Zähler; die Kennung `BEO-<NNN>` hält sie zusammen, die
+  Route in den Zähler; der Pfad `BEO-<KUERZEL>/<slug>` hält sie zusammen, die
   Bezeichnung ist stabil zu halten, damit die Zuordnung gelingt.
 - Übergang nach `done/` verlangt zwei beobachtbare Closure-Kriterien
   (z. B. Replay grün, DoD-Punkte als Test verlinkt) *und* einen

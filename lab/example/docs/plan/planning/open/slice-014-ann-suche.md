@@ -73,7 +73,7 @@ Service-Schicht teilen hier dieselbe Konvention und dieselbe Inventur-Linie
 (`harness/conventions.md`), sind also eine Sub-Area, nicht zwei.
 
 **Vorgelagert — offene Beobachtungen sichten:** Register
-(`../observations.md`) durchgegangen. Berührt sind drei Sub-Areas aus der
+(`../observations/`) durchgegangen. Berührt sind drei Sub-Areas aus der
 Modus-Tabelle (`harness/conventions.md`): *Planning-Lifecycle* (ADR-0004, §3), <!-- d-check:ignore (ADR entsteht erst in slice-014) -->
 *Implementierung* (`internal/index/`, `internal/service/`, §3) und
 *Replay-/Eval-Infrastruktur* (Replay gegen das Golden Set, recall@5, DoD).
@@ -84,20 +84,20 @@ er bewegt sie nicht — genau der Fall, den
 [`bootstrap.md` §Was ist eine Sub-Area?](../../../../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area)
 von der Berührung ausnimmt.
 
-**Zwei offene Treffer**, beide auf *Replay-/Eval-Infrastruktur*: `BEO-001` (2×)
-und `BEO-002` (1×) — der Zähler-Stand steht hier, weil dieser Slice keinen
+**Zwei offene Treffer**, beide auf *Replay-/Eval-Infrastruktur*: `BEO-EVAL/golden-set-ohne-boundary` (2×)
+und `BEO-EVAL/gleichstands-eingaben-fehlen` (1×) — der Zähler-Stand steht hier, weil dieser Slice keinen
 Modus-Begründungsblock trägt: Alle berührten Sub-Areas sind GF, das Feld
 *Evidenz-/Diskrepanz-Risiko* existiert in dieser Datei also gar nicht.
-Dazu eine **verkörperte** Zeile auf *Implementierung*, `BEO-005`: Sie steht mit
+Dazu eine **verkörperte** Zeile auf *Implementierung*, `BEO-IMPL/tie-break-nicht-dokumentiert`: Sie steht mit
 Zähler und Belegen im Register, trägt aber den Vermerk, wohin sie ging, und
 wirkt über `AGENTS.md` §2.7 von selbst — der Tie-Break dieses Slice fällt
 darunter. Auf *Planning-Lifecycle* steht keine Zeile.
 
-Keiner der beiden offenen erreicht **mit diesem Slice** 3×. `BEO-002` steht bei
+Keiner der beiden offenen erreicht **mit diesem Slice** 3×. `BEO-EVAL/gleichstands-eingaben-fehlen` steht bei
 1× und kann die Schwelle mit einem einzelnen Slice ohnehin nicht erreichen —
 inhaltlich einschlägig ist es sehr wohl, die Gleichstands-Eingaben sind genau
 die Tie-Break-Frage aus §6; der Zähler geht also auf 2×, wenn der Fall hier
-wieder auftritt. `BEO-001` stünde bei 3×, wenn dieser Slice einen Golden-Set-Case ohne
+wieder auftritt. `BEO-EVAL/golden-set-ohne-boundary` stünde bei 3×, wenn dieser Slice einen Golden-Set-Case ohne
 Boundary-Anteil aufnähme; seine DoD sieht das nicht vor — sie *misst* gegen den
 bestehenden Satz. Kein Folge-Slice also; die Frage ist bei der Closure erneut zu
 stellen, weil der Zähler bis dahin weitergelaufen sein kann.

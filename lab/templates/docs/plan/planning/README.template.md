@@ -48,7 +48,7 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
   `modul-07-carveouts.md`).
 
 Neben den Lifecycle-Verzeichnissen liegt **flach** in `planning/` das
-**Beobachtungs-Register** (`observations.md`): Es trägt den
+**Beobachtungs-Register** (`observations/`): Es trägt den
 Steering-Loop-Zähler, wird bei jeder Slice-Closure fortgeschrieben und
 überlebt jede Welle (Baseline-Regelwerk `modul-06-roadmap.md`
 §Das Beobachtungs-Register).

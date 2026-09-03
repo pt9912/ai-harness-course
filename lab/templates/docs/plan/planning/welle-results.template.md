@@ -72,7 +72,7 @@ und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der Backticks; die
 <!--
 NICHT MEHR HIER PFLEGEN. Der Zaehler lebt seit Kurs-Welle 59 als stehende
 Datei: `docs/plan/planning/observations.md` (Ziel-Form
-[`observations.template.md`](observations.template.md), Regeln im
+[`observation.template.md`](observation.template.md), Regeln im
 Baseline-Regelwerk `modul-06-roadmap.md` §Das Beobachtungs-Register).
 
 Grund: Eine hier gepflegte Sektion muss von Closure zu Closure UEBERNOMMEN

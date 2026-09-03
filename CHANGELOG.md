@@ -11,6 +11,101 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 116 — 2026-09-03 · Das Register hört auf, seinen eigenen Zähler zu führen
+
+Das Beobachtungs-Register war das letzte Kern-Artefakt in Sammeldatei-Form: eine
+flache Tabelle mit **Zähler** *und* **Belegliste** nebeneinander. Das sind zwei
+Quellen für denselben Zustand, und der Korpus hat dafür ein Urteil — *Kopien
+driften* ([§Source Precedence](kurs/de/grundlagen/source-precedence.md#source-precedence)).
+Das Register verletzte die Regel gegen sich selbst.
+
+**Der Beleg stand seit Welle 106 im eigenen CHANGELOG**, an *Ein-Schreiber*-Repos
+gemessen: eines stand auf 7 statt 6, weil ein Vorgang zweimal als Beleg geführt
+war; ein Eintrag stand auf 3 mit einem einzigen Beleg. Welle 106 hat darauf mit
+einer **Anzahl-Prüfung** geantwortet — einem Gate, das es nur gibt, *weil* der
+Zähler gespeichert wird.
+
+- [`modul-06` §Das Beobachtungs-Register](kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register):
+  Je Beobachtung ein Verzeichnis `observations/BEO-<KUERZEL>/<slug>/` mit drei
+  Dateien und drei Lebensdauern — `observation.md` (unveränderlich ab Anlage),
+  `state.md` (veränderlich), `evidence/<vorgangs-id>.md` (unveränderlich ab
+  Merge, **eine je Auftreten**). **Der Zähler wird abgeleitet, nicht geführt:**
+  Es gibt kein Feld, in das man ihn schreibt, und deshalb keines, das falsch
+  stehen kann.
+- **Die Anzahl-Prüfung ist ersatzlos entfallen.** Ein abgeleiteter Zähler kann
+  seiner Belegliste nicht widersprechen — die Prüfung hat kein Objekt mehr. Eine
+  Fehlerklasse verschwinden zu lassen ist besser, als ihr einen Wächter zu geben.
+- **Und die Zählregel wird strukturell.** *Ein Vorgang zählt einmal* ist kein
+  Satz mehr, den jemand befolgen muss: Derselbe Vorgang kann nicht zweimal
+  dieselbe Datei anlegen.
+- **Keine fortlaufende Nummer mehr.** Eine nächste freie `BEO-<NNN>` setzt
+  voraus, dass man alle vergebenen kennt — über offene Branches kann das
+  niemand. Der Pfad braucht keine Vergabestelle; er entsteht aus dem, was die
+  Beobachtung ist.
+
+**Teamfähigkeit fällt dabei an, statt das Argument zu sein.** Die stille
+Teilung — zwei Branches legen dasselbe Phänomen unter zwei Kennungen an, git
+merged beide klaglos, die Schwelle fällt nie — ist dieselbe Krankheit im
+Spätstadium. Sie verschwindet mit dem Ganz-Wert. Damit ist das SOLL aus
+[`docs/team.md`](docs/team.md) an seinem heikelsten Punkt eingelöst, ohne auf
+Stufe *belegt* zu warten: Diese Stufe ist per Definition nicht von uns
+herstellbar, und eine Auslieferung von ihr abhängig zu machen, wäre zirkulär
+gewesen.
+
+- [`harness-dateien.md` §Konventionsspeicher](kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher):
+  Die **Kürzel-Spalte ist nicht mehr bedingt.** Welle 105 hatte sie an eine
+  Eigenschaft der Kennungen gebunden — *„sobald Kennungen ein Bereichssegment
+  tragen"* —, nicht an die Zahl der Menschen. Seit die Kennung einer Beobachtung
+  der Pfad `BEO-<KUERZEL>/<slug>` **ist**, trägt jedes Repo mindestens eine
+  Kennungsklasse mit Segment. Die Bedingung ist **erfüllt, nicht aufgehoben**;
+  die Regel hat sich nicht geändert, ihr Eingang hat sich geändert.
+- **Warum Kürzel und nicht Prosa-Name:** Ein Name darf umformuliert werden, ein
+  Pfad nicht. Ohne deklariertes Kürzel leiten zwei Schreiber zwei Pfade für
+  dasselbe Phänomen ab — die stille Teilung, eine Ebene höher. Mit Kürzel
+  leiten beide **denselben** Pfad ab, und die gleichzeitige Neuanlage wird ein
+  lauter `git`-Konflikt.
+
+**MAJOR, weil ein Asset verschwindet.** `observations.template.md` ist
+zurückgezogen; an seiner Stelle steht
+[`observation.template.md`](lab/templates/docs/plan/planning/observation.template.md)
+für **eine** Beobachtung. Spiegel, Vorlagen, Lösung und das Beispiel-Repo ziehen
+mit: Dessen Register liegt jetzt als 28 Dateien in Verzeichnisform, seine
+Modus-Deklaration führt elf Kürzel, und die zehn Dateien, die `BEO-<NNN>`
+zitierten, nennen den Pfad.
+
+**Zwei Dinge, die die Umstellung erzwungen hat.** `observations/README.md`
+existiert ab Repo-Beginn — ein leeres Verzeichnis führt `git` nicht, und ohne
+sie wäre *nichts beobachtet* nicht von *nie geführt* zu unterscheiden. Und zwei
+Zeilen in [`review-runde-7.md`](docs/reviews/review-runde-7.md) tragen jetzt ein
+`d-check:ignore` mit Grund: Sie zeigen auf den alten Pfad und hatten zum
+Review-Zeitpunkt recht. Ein Zeitdokument wird nicht umgeschrieben, damit ein
+heutiger Sensor schweigt.
+
+**Aus dem Review: der Spiegel bekommt den Fluss.**
+[`grundlagen-traceability.md`](lab/regelwerk/grundlagen-traceability.md) führte
+den Anker `jedes-artefakt-hat-einen-konsumenten` samt Hinweis, dass die Adresse
+erhalten bleibt — aber nicht das Diagramm, das an ihr hing. Ein Agent, der dem
+Anker folgte, landete auf einem Zeiger auf die Nachbarregel. Das Bild reist
+jetzt mit, quelltreu: die einzige Ansicht, die den ganzen Steering-Loop in
+einem Bild zeigt — beide Schleifen, den Retirement-Pfad, die Anker-Paarung und
+an drei Knoten die wellenlose Variante. Es war zudem in dieser Welle geändert
+worden (`observations/`) und wäre im Spiegel gar nicht angekommen.
+
+**Gegengeprüft, ob der Spiegel weitere Diagramme verliert.** Sechs von neun
+Quelldateien geben ihre mermaid-Blöcke vollständig weiter (14 im Spiegel); die
+These *„Diagramme sind Didaktik"* trägt also nicht. Die drei Abweichungen sind
+einzeln geprüft, und zwei davon sind **richtig**: Die zwei Diagramme in
+`modul-02` stehen in *Worked Example 1* und *2*, das dritte in `modul-08` in
+dessen Worked Example — das ist die Didaktik-Schicht, die der Spiegel
+weglässt. Das zweite `modul-08`-Diagramm (Closure-Sequenz) fehlt zwar, aber
+sein Inhalt steht dort vollständig als Tabelle *Closure-Schritt · Träger ·
+Übergabe-Artefakt*; die Slice-Sequenz trägt umgekehrt das Diagramm und keine
+Tabelle. Jede Struktur wird **einmal** getragen, in der Form, die sie trägt —
+keine Kopie, kein Verlust.
+
+Gates: `make check` — d-check 0 Befunde (242 Dateien), `docs-check` 0 ERROR /
+0 WARN, `alignment-check` 0 WARN.
+
 ## Welle 114 — 2026-09-03 · Die Lücke war keine — sie hatte nur den falschen Träger gesucht
 
 Welle 113 hat eine Lücke benannt, wo ein Träger stand. Der Anlass war eine

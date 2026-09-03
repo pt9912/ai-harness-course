@@ -76,7 +76,7 @@ Harness-Doku*. `docs/user/` ist ebenfalls berührt, aber **Aspirantin** und
 trägt keine Modus-Aussage — deshalb steht sie hier und bekommt keinen Block.
 
 **Vorgelagert — offene Beobachtungen sichten:** Register
-(`../observations.md`) durchgegangen. Berührt sind drei Sub-Areas (§3):
+(`../observations/`) durchgegangen. Berührt sind drei Sub-Areas (§3):
 *Test-Infrastruktur* (`<sprache>/tests/property/` — die `FsCheck`-Adaption ist
 eine neue Konvention, keine additive Arbeit unter der alten),
 *Sensor-Werkzeuge* (`test-property` in der `gates`-Liste) und
@@ -84,7 +84,7 @@ eine neue Konvention, keine additive Arbeit unter der alten),
 `docs/user/` ist Aspirantin und trägt keine Modus-Aussage.
 
 **Keine Treffer auf den berührten Sub-Areas** — und das ist die Antwort, nicht
-ihr Fehlen. Die beiden offenen Zeilen `BEO-001` (2×) und `BEO-002` (1×) liegen
+ihr Fehlen. Die beiden offenen Zeilen `BEO-EVAL/golden-set-ohne-boundary` (2×) und `BEO-EVAL/gleichstands-eingaben-fehlen` (1×) liegen
 auf *Replay-/Eval-Infrastruktur*: Sie betreffen den Zuschnitt des Golden Sets,
 den dieser Slice nicht anfasst — er *misst* gegen den bestehenden Satz. Ihr
 Zähler geht durch diesen Slice also nicht hoch.

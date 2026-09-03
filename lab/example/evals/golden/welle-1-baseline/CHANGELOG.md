@@ -15,7 +15,7 @@ slice-005 (Golden Set anlegen) legt zwei Cases an: Happy Path und Negative
 
 slice-011 (Golden-Set-Erweiterung) nimmt den Fall `k > 100` aus Lastenheft
 v0.2.0 auf. Vorher deckte das Set nur Happy Path und Negative ab — notiert als
-`BEO-001` im Beobachtungs-Register. Die Cases stehen seither in der Reihenfolge
+`BEO-EVAL/golden-set-ohne-boundary` im Beobachtungs-Register. Die Cases stehen seither in der Reihenfolge
 Happy · Boundary · Negative; der Negative-Case heißt dabei von `case-002` nach
 `case-003` um. Umnummerierungen gehören in diese Datei, sonst zeigen ältere
 Befunde auf den falschen Case.

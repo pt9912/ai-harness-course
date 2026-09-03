@@ -8,7 +8,7 @@ nur durch `git mv` (Kurs
 **Welle:** ohne Welle — die Closure-Bedingung ist die DoD dieses Slice.
 
 **Bezug:** [Kurs §Referenz-Richtung](../../../../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)
-(`MR-002`-Bindung des Gates), [BEO-006](../observations.md)
+(`MR-002`-Bindung des Gates), [`BEO-TOOLS/check-references-deckt-adr-nicht`](../observations/BEO-TOOLS/check-references-deckt-adr-nicht/observation.md)
 
 **Berührte Spec-Stellen:** —
 
@@ -38,7 +38,7 @@ hat `matrix`.
 - [x] `tools/check_references.py` <!-- d-check:ignore (in diesem Slice entfernt) --> entfernt.
 - [x] Nachgezogen: `AGENTS.md` §3, `harness/README.md` §Sensors,
       `harness/conventions.md` (Beispiel der `MR-002`-Klasse), `MR-002`.
-- [x] `BEO-006` geschlossen — `matrix` prüft ADRs als Quellklasse mit.
+- [x] `BEO-TOOLS/check-references-deckt-adr-nicht` geschlossen — `matrix` prüft ADRs als Quellklasse mit.
 - [x] `make verify` grün.
 - [x] `make gates` grün — trivial, der Slice berührt keine Datei eines
       Sprach-Skeletts außer deren Doku; belegt an `COURSE_LANG=go`. Genannt
@@ -56,7 +56,7 @@ hat `matrix`.
 | `Makefile` | update | Pin, `include`, `verify`-Abhängigkeit; Ziel-Set sonst unverändert |
 | `tools/check_references.py` <!-- d-check:ignore (in diesem Slice entfernt) --> | entfernt | von `matrix` vollständig gedeckt |
 | `AGENTS.md`, `harness/README.md`, `harness/conventions.md`, `MR-002` | update | Target-Name und Bindung |
-| `docs/plan/planning/observations.md` | update | `BEO-006` geschlossen |
+| `docs/plan/planning/observations/` | update | `BEO-TOOLS/check-references-deckt-adr-nicht` geschlossen |
 
 ## 4. Trigger
 
@@ -121,7 +121,7 @@ Verstoß still. Die Erhebung ergab einen sauberen Schnitt: `Geschichte` gibt es
 nur in ADRs, `Historie` nur in Spec-Straten. `exclude-sections: [Geschichte]`
 ist damit durch Konstruktion richtig statt durch Zufall.
 
-**`BEO-006` ist geschlossen:** `matrix` führt `adr` als Quellklasse, das Skript
+**`BEO-TOOLS/check-references-deckt-adr-nicht` ist geschlossen:** `matrix` führt `adr` als Quellklasse, das Skript
 prüfte nur `spec/`.
 
 **Was verloren geht, bewusst:** Die Meldungen des Skripts erklärten die Regel;

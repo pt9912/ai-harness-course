@@ -149,3 +149,48 @@ für wellenlos verkörperte Regeln
 **Jedes Artefakt hat einen Konsumenten** — die Regel steht in
 [`grundlagen-harness-dateien.md` §Jedes Artefakt hat einen Konsumenten](grundlagen-harness-dateien.md#jedes-artefakt-hat-einen-konsumenten).
 Diese Adresse bleibt bestehen, weil sie vor dem Umzug vergeben wurde.
+
+**Der Fluss.** Gelb ist, was **geschrieben** wird, blau, was es **liest**:
+
+```mermaid
+flowchart TB
+    A["Beobachtungs-Quellen<br/>Agentenlauf · Review-Findings<br/>Verifikation · Validierung"] --> B["Slice-Closure §7<br/>Steering-Loop-Eintrag<br/>+ Risiko-Ausgänge"]
+    B --> V["Beobachtungs-Register<br/>observations/<br/>(neues Verzeichnis oder neue Evidence-Datei)"]
+    V --> C{"Wie oft?"}
+    C -- "3x" --> E["Verkörperung<br/>Lese-Schritt: Welle-Closure —<br/>Repo ohne Wellen: die Slice-Closure<br/>Steering-Loop-Eintrag + Zielort<br/>(Regel/Sensor: liegt in; Spec-Lücke: LH-*)"]
+
+    C -- "1x / 2x: bleibt offen" --> F["Repo mit Wellen:<br/>Wellen-Eröffnung Schritt 2<br/>sichtet"]
+    C -- "1x / 2x: bleibt offen (Repo ohne Wellen)" --> G
+    F --> G["Slice-Planung §8:<br/>Vorgelagert — offene<br/>Beobachtungen sichten<br/>→ Evidenz-/Diskrepanz-Risiko"]
+    G --> A
+
+    E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-NN</b><br/>(wellenlos: seit slice-NNN)"]
+    H --> I["jeder Agentenlauf<br/>liest die verkörperte Form"]
+    I --> A
+    E -. "Anker-Paarung prüft beide Enden" .-> H
+    H --> J{"Regel entfernen<br/>oder lockern?"}
+    J -- "ja" --> K["Retirement-Check:<br/>Herkunft konsultieren"]
+    J -- "nein" --> I
+    K --> E
+
+    style V fill:#fff4d6,stroke:#d4a017
+    style E fill:#fff4d6,stroke:#d4a017
+    style F fill:#d6ecff,stroke:#2a6fb5
+    style G fill:#d6ecff,stroke:#2a6fb5
+    style I fill:#d6ecff,stroke:#2a6fb5
+    style K fill:#d6ecff,stroke:#2a6fb5
+```
+
+Die beiden Schleifen tragen unterschiedliche Mengen: Die linke hält die
+Beobachtungen **unter** der Schwelle am Leben (sonst zählt niemand hoch), die
+rechte hält die Begründung der **verkörperten** Regeln greifbar (sonst werden
+sie beim Aufräumen still entfernt). Keine ersetzt die andere.
+
+**Und was hier *nicht* blau ist, sagt genauso viel.** Der Volltext eines
+geschlossenen Slice kommt in keinem lesenden Knoten vor: Gelesen werden das
+Register, die verkörperte Form und — beim Retirement-Check — die Herkunft.
+Genau deshalb darf er ins Archiv wandern, während Register, Regel und Anker
+bleiben ([Modul 6](modul-06-roadmap.md), Wellen-Closure Schritt 4; ohne Wellen
+trägt es die Slice-Closure). Der eine Knoten, den das teurer macht, ist der
+Retirement-Check: Er liest die Herkunft dann über den Stub und dessen
+Archiv-Zeiger statt direkt.

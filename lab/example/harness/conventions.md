@@ -51,7 +51,7 @@ Adaptions-Änderung — Append-only schützt die *Aussage*, nicht die Nachpflege
 - **Adaption:** *Keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
   ID-Schema (`LH-FA-*`, `LH-QA-*`, `SPEC-<NNN>`, `ARC-<NNN>`,
-  `ADR-<NNNN>`, `CO-<NNN>`, `slice-<NNN>`, `MR-<NNN>`, `BEO-<NNN>`).*
+  `ADR-<NNNN>`, `CO-<NNN>`, `slice-<NNN>`, `MR-<NNN>`, `BEO-<KUERZEL>/<slug>`).*
 - **ID-Schema-Deklaration:** `LH-*` läuft zweiformig. Bis Lastenheft v0.3.x
   dicht gezählt (`LH-FA-01..03`, `LH-QA-01..04`); **ab v0.4.0 tragen neue
   funktionale Anforderungen ein Bereichskürzel** (`LH-FA-<BEREICH>-<NNN>`,
@@ -103,24 +103,28 @@ hat. Jede Zeile weist die erfüllten Inklusions-Achsen aus
 ([`bootstrap.md` §Was ist eine Sub-Area?](../../../kurs/de/grundlagen/bootstrap.md#was-ist-eine-sub-area),
 Schwelle ≥ 2 von 3: 1 Konventions-Härte · 2 Inventur-Linie · 3 Struktureller Cluster).
 
-Eine **Kürzel-Spalte** führt diese Tabelle bewusst nicht: Die Kennungen
-dieses Repos tragen kein Bereichssegment (`ADR-0012`, nicht `ADR-IDX-0012`),
-weil an ihm ein Mensch schreibt. Die Spalte entsteht mit dem zweiten
-([`source-precedence.md` §Vergabe](../../../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+Die **Kürzel-Spalte** ist Pflicht, seit die Kennung einer Beobachtung der Pfad
+`BEO-<KUERZEL>/<slug>` ist
+([Modul 6 §Das Beobachtungs-Register](../../../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register)).
+Vorher führte dieses Repo keine — seine übrigen Kennungen tragen bis heute kein
+Bereichssegment (`ADR-0012`, nicht `ADR-SPEC-0012`), weil an ihm ein Mensch
+schreibt. Das ändert sich nicht; **eine** Kennungsklasse reicht aber, damit die
+Spalte etwas deklariert statt eine Tabelle zu füllen. **Jedes Kürzel ist
+unveränderlich** — es steht in Pfaden unter `docs/plan/planning/observations/`.
 
-| Sub-Area | Pfad-Cluster | Erfüllte Inklusions-Achsen | Modus |
-|---|---|---|---|
-| Spec-Schreibung | `spec/` | 1 (eigene Spec-Stil-`MR` plausibel formulierbar, z. B. AK-Format-Standard) · 2 (Spec↔Code abgleichbar) · 3 (`spec/`) → **3/3** | Greenfield |
-| Konventionen & Harness-Doku | `harness/`, `<lang>/harness/`, `AGENTS.md` + `<lang>/AGENTS.md`, `README.md` + `<lang>/README.md`, `docs/glossar.md` | 1 (Heimat der `MR-NNN`, hier `MR-000` bis `MR-003`) · 2 (Doku-Konsistenz-Linie) · 3 (`harness/`-Cluster plus die Agenten-/Einstiegs-Dateien, die dieselbe Konvention tragen) → **3/3** | Greenfield |
-| Planning-Lifecycle | `docs/plan/` | 1 (Slice-/ADR-/Carveout-Konvention) · 2 (`open`→`done`-Inventur) · 3 (`docs/plan/`) → **3/3** | Greenfield |
-| Implementierung | `<lang>/src/`, `<lang>/cmd/`, `<lang>/internal/`, `<lang>/.editorconfig` | 1 (eigene Implementierungs-Stil-`MR` plausibel formulierbar) · 2 (Code-Inventur) · 3 (`src/`-Cluster) → **3/3** | Greenfield |
-| Test-Infrastruktur | `<lang>/tests/` | 1 (Test-/Determinismus-Konvention, z. B. `make test-determinism`) · 2 (Test-ohne-`LH`-ID als Diskrepanz) · 3 (`tests/`) → **3/3** | Greenfield |
-| Verifikation | `verification/` | 1 (Plan-vs-Code-Check-Konvention, Modul 11 — *kein* Golden Set) · 2 (Slice-Beleg-Inventur) · 3 (`verification/`) → **3/3** | Greenfield |
-| Replay-/Eval-Infrastruktur | `evals/` | 1 (Golden-Set-/Replay-Konvention, Modul 12) · 2 (Golden-Set-Drift-Inventur) · 3 (`evals/`) → **3/3** | Greenfield |
-| Observability | `otel/` | 2 (Trace-Inventur) · 3 (`otel/`-Cluster); Achse 1 (Span-Schema-`MR`) noch schwach → **2/3** | Greenfield |
-| Container-/Build-Harness | `<lang>/Dockerfile`, `<lang>/.dockerignore` und die Build-Definitionen (`go.mod`, `pom.xml`, `build.gradle.kts` + `settings.gradle.kts`, `pyproject.toml`, `CMakeLists.txt` + `cmake/Dependencies.cmake`, `DocSearch.sln` + `Directory.*.props` + `global.json`) | 1 (Image-/Layer-Konvention, Modul 14) · 2 (Reproduzierbarkeits-Inventur: baut jedes Skelett aus demselben gepinnten Stand?) · 3 (`Dockerfile`- und Build-Definitions-Dateimuster) → **3/3** | Greenfield |
-| Betriebs-Runbooks | `runbooks/` | 1 (Runbook-Form-Konvention, Modul 16) · 2 (Szenario↔Runbook-Inventur: hat jeder benannte Ausfall ein Runbook?) · 3 (`runbooks/`) → **3/3** | Greenfield |
-| Sensor-Werkzeuge | `tools/`, jedes `Makefile` (Wurzel und `<lang>/`), `<lang>/scripts/`, `<lang>/cmake/*.sh` und die Gate-Konfiguration (`.golangci.yml`, `.clang-tidy`, `checkstyle.xml` + `checkstyle-suppressions.xml`, `importlinter.cfg`, `config/detekt.yml` + `config/detekt-baseline.xml`, `coverlet.runsettings`) | 1 (Skript-Konvention: netzlos, Exit-Code-basiert; jedes Target nennt seine Bindung) · 3 (`tools/` plus das Make-/Gate-Konfigurations-Dateimuster); Achse 2 schwach — die Doku-Aussage über ein Sensor-Werkzeug steht in `README.md` §Sensors, die Inventur zieht damit die Nachbar-Sub-Area mit → **2/3** | Greenfield |
+| Sub-Area | Kürzel | Pfad-Cluster | Erfüllte Inklusions-Achsen | Modus |
+|---|---|---|---|---|
+| Spec-Schreibung | `SPEC` | `spec/` | 1 (eigene Spec-Stil-`MR` plausibel formulierbar, z. B. AK-Format-Standard) · 2 (Spec↔Code abgleichbar) · 3 (`spec/`) → **3/3** | Greenfield |
+| Konventionen & Harness-Doku | `CONV` | `harness/`, `<lang>/harness/`, `AGENTS.md` + `<lang>/AGENTS.md`, `README.md` + `<lang>/README.md`, `docs/glossar.md` | 1 (Heimat der `MR-NNN`, hier `MR-000` bis `MR-003`) · 2 (Doku-Konsistenz-Linie) · 3 (`harness/`-Cluster plus die Agenten-/Einstiegs-Dateien, die dieselbe Konvention tragen) → **3/3** | Greenfield |
+| Planning-Lifecycle | `PLAN` | `docs/plan/` | 1 (Slice-/ADR-/Carveout-Konvention) · 2 (`open`→`done`-Inventur) · 3 (`docs/plan/`) → **3/3** | Greenfield |
+| Implementierung | `IMPL` | `<lang>/src/`, `<lang>/cmd/`, `<lang>/internal/`, `<lang>/.editorconfig` | 1 (eigene Implementierungs-Stil-`MR` plausibel formulierbar) · 2 (Code-Inventur) · 3 (`src/`-Cluster) → **3/3** | Greenfield |
+| Test-Infrastruktur | `TEST` | `<lang>/tests/` | 1 (Test-/Determinismus-Konvention, z. B. `make test-determinism`) · 2 (Test-ohne-`LH`-ID als Diskrepanz) · 3 (`tests/`) → **3/3** | Greenfield |
+| Verifikation | `VERIF` | `verification/` | 1 (Plan-vs-Code-Check-Konvention, Modul 11 — *kein* Golden Set) · 2 (Slice-Beleg-Inventur) · 3 (`verification/`) → **3/3** | Greenfield |
+| Replay-/Eval-Infrastruktur | `EVAL` | `evals/` | 1 (Golden-Set-/Replay-Konvention, Modul 12) · 2 (Golden-Set-Drift-Inventur) · 3 (`evals/`) → **3/3** | Greenfield |
+| Observability | `OTEL` | `otel/` | 2 (Trace-Inventur) · 3 (`otel/`-Cluster); Achse 1 (Span-Schema-`MR`) noch schwach → **2/3** | Greenfield |
+| Container-/Build-Harness | `BUILD` | `<lang>/Dockerfile`, `<lang>/.dockerignore` und die Build-Definitionen (`go.mod`, `pom.xml`, `build.gradle.kts` + `settings.gradle.kts`, `pyproject.toml`, `CMakeLists.txt` + `cmake/Dependencies.cmake`, `DocSearch.sln` + `Directory.*.props` + `global.json`) | 1 (Image-/Layer-Konvention, Modul 14) · 2 (Reproduzierbarkeits-Inventur: baut jedes Skelett aus demselben gepinnten Stand?) · 3 (`Dockerfile`- und Build-Definitions-Dateimuster) → **3/3** | Greenfield |
+| Betriebs-Runbooks | `RUN` | `runbooks/` | 1 (Runbook-Form-Konvention, Modul 16) · 2 (Szenario↔Runbook-Inventur: hat jeder benannte Ausfall ein Runbook?) · 3 (`runbooks/`) → **3/3** | Greenfield |
+| Sensor-Werkzeuge | `TOOLS` | `tools/`, jedes `Makefile` (Wurzel und `<lang>/`), `<lang>/scripts/`, `<lang>/cmake/*.sh` und die Gate-Konfiguration (`.golangci.yml`, `.clang-tidy`, `checkstyle.xml` + `checkstyle-suppressions.xml`, `importlinter.cfg`, `config/detekt.yml` + `config/detekt-baseline.xml`, `coverlet.runsettings`) | 1 (Skript-Konvention: netzlos, Exit-Code-basiert; jedes Target nennt seine Bindung) · 3 (`tools/` plus das Make-/Gate-Konfigurations-Dateimuster); Achse 2 schwach — die Doku-Aussage über ein Sensor-Werkzeug steht in `README.md` §Sensors, die Inventur zieht damit die Nachbar-Sub-Area mit → **2/3** | Greenfield |
 
 ### Warum drei Korrektheits-Sub-Areas und nicht eine
 

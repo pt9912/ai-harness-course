@@ -55,7 +55,7 @@ dieses Repo nicht — das wäre der Repo-Modus, und der lautet hier: mit Wellen.
   Welle-Closure.
 
 Neben den Lifecycle-Verzeichnissen liegt **flach** in `planning/` das
-[Beobachtungs-Register](observations.md): Es trägt den Steering-Loop-Zähler,
+[Beobachtungs-Register](observations/README.md): Es trägt den Steering-Loop-Zähler,
 wird bei jeder Slice-Closure fortgeschrieben und überlebt jede Welle
 (Kurs Modul 6 §Das Beobachtungs-Register).
 

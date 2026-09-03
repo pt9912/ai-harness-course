@@ -81,4 +81,4 @@ gespiegelt — eine Status-Spalte driftete gegen die Verzeichnisse.
 ## 7. Closure-Notiz
 
 Ergebnis: [`welle-1-results.md`](welle-1-results.md).
-Zähler: [`../observations.md`](../observations.md).
+Zähler: [`../observations/`](../observations/README.md).

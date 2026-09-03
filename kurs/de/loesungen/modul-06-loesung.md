@@ -104,7 +104,7 @@ Verzeichnis-Position (Modul 5), und `ls in-progress/` beantwortet
 autoritativ, was gerade läuft.
 
 **Wo der Steering-Loop-Eintrag landet:** im **Beobachtungs-Register**
-(`docs/plan/planning/observations.md`) — eingetragen bei der
+(`docs/plan/planning/observations/`) — eingetragen bei der
 Slice-Closure, unabhängig von jeder Welle. **Gelesen** wird er bei der
 nächsten Welle-Closure (was hat 3× erreicht → Ausgang zuweisen) — auch für diesen
 Slice, obwohl er zu keiner Welle gehört. Erst in einem Repo, das **gar keine**
@@ -192,7 +192,7 @@ drei — sie existiert ab Repo-Beginn.
 
 | Wer | Wann | Was |
 |---|---|---|
-| **Slice-Closure** | bei jeder Closure, *vor* dem `git mv` nach `done/` | schreibt: neuer Eintrag mit `BEO-<NNN>` oder Zähler +1 und Beleg |
+| **Slice-Closure** | bei jeder Closure, *vor* dem `git mv` nach `done/` | schreibt: neues Verzeichnis `BEO-<KUERZEL>/<slug>/` oder eine weitere Datei in dessen `evidence/` — **kein Zähler wird gesetzt** |
 | **Welle-Closure** | bei jeder Closure | liest: was hat 3× erreicht → Ausgang zuweisen |
 | **Wellen-Eröffnung, Schritt 2** | bei jeder Eröffnung | liest: was steht *unter* der Schwelle und betrifft die Sub-Areas dieser Welle? |
 
@@ -210,7 +210,7 @@ die Slice-Closure selbst aus, und der Herkunfts-Anker lautet
 also bei 3× stehen und trotzdem noch keine Regel sein. Was dann fehlt, ist
 nicht der Zähler, sondern der Lese-Schritt. Bis er läuft, steht der Eintrag
 noch `offen` — zulässig und vorübergehend; **er** weist den Ausgang zu, nicht
-der Beleg, der den Zähler gehoben hat. Und die `BEO-<NNN>` macht die
+der Beleg, der den Zähler gehoben hat. Und der Pfad `BEO-<KUERZEL>/<slug>` macht die
 Zählung **unabhängig vom Wortlaut der Bezeichnung**: Ohne Kennung zählt eine
 Umformulierung als zweite Beobachtung, und keine der beiden erreicht je 3×.
 
@@ -299,10 +299,11 @@ entscheidet nicht, der Trigger entscheidet.
 
 ### Wo landet die Beobachtung? (Analysieren — LZ 2)
 
-**(a)** In `observations.md` bei `BEO-001` den Zähler auf **3×** setzen und
-`slice-NNN` in die Belege aufnehmen. In §7 des Slice wird die `BEO-001`
-**zitiert**, nicht neu formuliert — sonst zählt das Register zwei Namen
-getrennt.
+**(a)** Unter `observations/BEO-EVAL/golden-set-ohne-boundary/evidence/` eine
+Datei `slice-NNN.md` anlegen. **Der Zähler wird nicht gesetzt** — er ist die
+Zahl der Evidence-Dateien und steht danach von selbst auf 3×. In §7 des Slice
+wird der **Pfad zitiert**, nicht neu formuliert, sonst zählt das Register zwei
+Ablagen getrennt.
 
 **(b) Nein.** Die Slice-Closure trägt ein, unabhängig von jeder Welle. Genau
 dafür steht das Register außerhalb der Welle-Closure.

@@ -34,7 +34,7 @@ Slice-Plan statt umgekehrt.
 - [x] `make verify` grün.
 - [x] `make gates` grün — **Nachtrag 2026-06-03**, siehe unten.
 - [x] Closure-Notiz (siehe §7).
-- [x] Beobachtungs-Register (`../observations.md`) fortgeschrieben — `BEO-004` neu (1×), `BEO-006` neu (1×, aus dem Risiko-Ausgang §6).
+- [x] Beobachtungs-Register (`../observations/`) fortgeschrieben — `BEO-SPEC/slice-bezuege-im-spec-text` neu (1×), `BEO-TOOLS/check-references-deckt-adr-nicht` neu (1×, aus dem Risiko-Ausgang §6).
 - [x] Jedes Risiko aus §6 trägt einen Ausgang.
 
 **Nachtrag 2026-06-03:** Die DoD nannte `make gates` nicht, obwohl
@@ -73,7 +73,7 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
   trägt die Aussage selbst.
 - `check-references` prüft nur `spec/`, nicht `docs/plan/adr/` — dort
   könnten dieselben Zeiger unbemerkt stehen — **Ausgang:** weiter offen →
-  `BEO-006` im **Beobachtungs-Register** (`../observations.md`)
+  `BEO-TOOLS/check-references-deckt-adr-nicht` im **Beobachtungs-Register** (`../observations/`)
   (Sub-Area *Planning-Lifecycle*: ungedeckt ist die Inventur-Linie der
   ADR-Ablage — ob ADRs aufwärts deklarieren, prüft niemand).
   Auch ein Slice ohne Wellen-Zugehörigkeit trägt selbst
@@ -89,12 +89,12 @@ ergänzt. Genau diese Bewegung kehrt die Referenz-Richtung um.
 
 **Steering-Loop-Eintrag:** noch keiner — also **kein** Feld `liegt in`. Die
 Beobachtung *„Spec-Text wird zur Nachvollziehbarkeit um Slice-Bezüge
-ergänzt"* ist als `BEO-004` im Register eingetragen und steht bei 1×. Bei 3×
+ergänzt"* ist als `BEO-SPEC/slice-bezuege-im-spec-text` im Register eingetragen und steht bei 1×. Bei 3×
 wird daraus eine Regel; bis dahin ist der Eintrag *gezählt, nicht verkörpert*
 und kein Gegenstand der Anker-Paarung.
 
-**Beobachtungs-Register (`../observations.md`):** `BEO-004` neu angelegt
-(Sub-Area *Spec-Schreibung*, 1×, Beleg `slice-020`); `BEO-006` neu angelegt
+**Beobachtungs-Register (`../observations/`):** `BEO-SPEC/slice-bezuege-im-spec-text` neu angelegt
+(Sub-Area *Spec-Schreibung*, 1×, Beleg `slice-020`); `BEO-TOOLS/check-references-deckt-adr-nicht` neu angelegt
 (1×, Beleg `slice-020`, aus dem Risiko-Ausgang §6).
 
 **Folge-Slice:** keiner.
@@ -102,7 +102,7 @@ und kein Gegenstand der Anker-Paarung.
 **Drei Paarungen:** hier nicht — dieses Repo schneidet Wellen. Dass *dieser
 Slice* zu keiner gehört, ändert daran nichts: Die nächste Welle-Closure
 (`welle-2-qualitaet`) prüft alles, was seit `welle-1` in `done/` gelandet ist,
-also auch `BEO-004` und `BEO-006` aus dieser Notiz.
+also auch `BEO-SPEC/slice-bezuege-im-spec-text` und `BEO-TOOLS/check-references-deckt-adr-nicht` aus dieser Notiz.
 
 ## 8. Sub-Area-Modus-Begründung
 
@@ -117,22 +117,22 @@ der Schwelle: *Spec-Schreibung* (`spec/spezifikation.md`) und
 keine musste ausdifferenziert werden.
 
 **Vorgelagert — offene Beobachtungen sichten:** Register
-(`../observations.md`) durchgegangen. Berührt sind zwei Sub-Areas aus der
+(`../observations/`) durchgegangen. Berührt sind zwei Sub-Areas aus der
 Modus-Tabelle (`harness/conventions.md`), abgelesen an §3: *Spec-Schreibung*
 (`spec/spezifikation.md`) und *Planning-Lifecycle* (dieser Slice-Plan selbst).
 
-**Ein offener Treffer:** `BEO-003` (*Planning-Lifecycle*, 2×) — der vergessene
+**Ein offener Treffer:** `BEO-PLAN/adr-bezug-im-commit-vergessen` (*Planning-Lifecycle*, 2×) — der vergessene
 ADR-Bezug betrifft die ADR-Konvention, nicht das Spec-Stratum. Dazu eine bereits
-**verkörperte** Zeile auf *Spec-Schreibung*, `BEO-007`: Sie steht mit Zähler
+**verkörperte** Zeile auf *Spec-Schreibung*, `BEO-SPEC/grenzwert-suche-im-lastenheft`: Sie steht mit Zähler
 und Belegen im Register, trägt aber den Vermerk, wohin sie ging, und wirkt über
 Lastenheft v0.2.0 von selbst.
 
-`BEO-003` erreicht **mit diesem Slice** nicht 3×: Es meint den vergessenen
+`BEO-PLAN/adr-bezug-im-commit-vergessen` erreicht **mit diesem Slice** nicht 3×: Es meint den vergessenen
 ADR-Bezug im Commit, und der ist hier nicht aufgetreten. Kein Folge-Slice. Was
 diesem Slice auffällt, sind zwei *neue* Beobachtungen, beide von §7 angelegt:
-`BEO-004` aus der Closure-Beobachtung auf *Spec-Schreibung* — verletzt ist eine
+`BEO-SPEC/slice-bezuege-im-spec-text` aus der Closure-Beobachtung auf *Spec-Schreibung* — verletzt ist eine
 Spec-Stil-Regel (ein Spec-Stratum nennt keine Slices), also Achse 1 dieser
-Sub-Area. `BEO-006` aus dem Risiko-Ausgang §6 auf *Planning-Lifecycle* —
+Sub-Area. `BEO-TOOLS/check-references-deckt-adr-nicht` aus dem Risiko-Ausgang §6 auf *Planning-Lifecycle* —
 ungedeckt ist deren Inventur-Linie, nicht die der Spec.
 
 Voraussetzung-Wissen für den Block-Aufbau: Kurs

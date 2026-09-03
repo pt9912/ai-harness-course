@@ -276,7 +276,7 @@ Läufe hinweg stabil sein.** Zwei Namen für dasselbe Muster werden
 getrennt gezählt und erreichen die Schwelle nie. Niemand muss dafür alte
 Reports durchsuchen — die Häufung steht im Register, nicht in einem
 Archiv-Scan. Der Report selbst kennt das Register nicht (er ist Lauf-Beleg);
-die Zuordnung zur `BEO-<NNN>` passiert erst bei der Slice-Closure — genau
+die Zuordnung zur Beobachtung passiert erst bei der Slice-Closure — genau
 dafür braucht sie den wiedererkennbaren Namen.
 
 ## Typische Fehlvorstellungen

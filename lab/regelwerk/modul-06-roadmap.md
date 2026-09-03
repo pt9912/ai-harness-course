@@ -78,32 +78,42 @@ erreicht, bevor die Slices grün sind, gibt es drei mögliche Antworten:
 
 ### Das Beobachtungs-Register (Modul 6)
 
-Der Zähler des Steering Loops liegt als **stehende Datei** flach im
-Planning-Layout, neben den offenen Wellen: `docs/plan/planning/observations.md`
-(Ziel-Form [`../templates/docs/plan/planning/observations.template.md`](../templates/docs/plan/planning/observations.template.md)).
+Der Zähler des Steering Loops liegt als **stehende Ablage** im
+Planning-Layout, neben den offenen Wellen — je Beobachtung ein Verzeichnis
+(Ziel-Form [`../templates/docs/plan/planning/observation.template.md`](../templates/docs/plan/planning/observation.template.md)):
+
+```text
+docs/plan/planning/observations/
+├── README.md                          existiert ab Repo-Beginn
+└── BEO-<KUERZEL>/<slug>/
+    ├── observation.md                 die Identität — einmal geschrieben
+    ├── state.md                       der veränderliche Stand
+    └── evidence/<vorgangs-id>.md      je Auftreten eine Datei
+```
 
 - **Warum stehend:** Eine von Closure zu Closure übernommene Sektion hängt an
   einer ungebrochenen Kette — vergessene Übernahme setzt den Zähler auf null,
   die erste Welle braucht eine Sonderregel, ohne Welle gibt es keinen Träger.
   Der feste Ort streicht alle drei Fälle.
-- **Form:** `| Kennung | Beobachtung | Sub-Area | Zähler | Belege | Stand |` — die Spalte `Stand` trägt den Zustand und den Beleg als auflösbaren Anker (*„verkörpert in `AGENTS.md` §2.7 (`seit welle-1`)"*), keine Chronik; zweite Sektion *Gestrichene Einträge* für das, was nicht mehr auftreten kann — mit Begründung. Wer eine Zeile still löscht, macht sie ununterscheidbar von einer, die es nie gab.
-- **Ist nichts offen**, trägt die Tabelle `— keine —` und bleibt stehen. Die
-  leere Liste **ist** die Aussage — und sie ist die, mit der jedes Repo
-  anfängt.
-- **Die Sub-Area-Spalte** trägt die Sub-Area, deren Konventions-Härte oder
+- **Form — drei Dateien, drei Lebensdauern:** `observation.md` (unveränderlich ab Anlage: Bezeichnung und Sub-Area) · `state.md` (veränderlich: `offen` oder einer der drei Ausgänge, Zustand und Beleg als auflösbarer Anker — *„verkörpert in `AGENTS.md` §2.7 (`seit welle-1`)"* —, keine Chronik) · `evidence/<vorgangs-id>.md` (unveränderlich ab Merge, **eine je Auftreten**).
+- **Der Zähler wird abgeleitet, nicht geführt** — er ist die Zahl der gültigen Evidence-Dateien. Es gibt kein Feld, in das man ihn schreibt, und deshalb keines, das falsch stehen kann. Ein gespeicherter Zähler neben einer Belegliste sind zwei Quellen für denselben Zustand, und Kopien driften (Grundlagen: Source Precedence). **Und `evidence/<vorgangs-id>.md` macht die Zählregel strukturell:** *Ein Vorgang zählt einmal* ist keine Disziplin mehr, sondern eine Eigenschaft des Dateisystems.
+- **Gestrichen heißt nicht gelöscht:** Das Verzeichnis bleibt liegen, `state.md` trägt `gestrichen` mit Begründung. Wer still löscht, macht die Beobachtung ununterscheidbar von einer, die es nie gab.
+- **Ist nichts offen**, steht in `observations/` nur die `README.md` — ein leeres Verzeichnis führt `git` nicht. Ohne sie wäre *nichts beobachtet* nicht von *nie geführt* zu unterscheiden. Die leere Ablage **ist** die Aussage, und sie ist die, mit der jedes Repo anfängt.
+- **Die Kennung ist der Pfad `BEO-<KUERZEL>/<slug>`.** Beide Segmente werden **nachgeschlagen, nicht erfunden**: `<KUERZEL>` ist das Sub-Area-Kürzel aus der Modus-Deklaration, `<slug>` lowercase Kebab-Case. Ein Prosa-Name taugt nicht — er darf umformuliert werden, ein Pfad nicht; leiten zwei Schreiber denselben Bereich unterschiedlich ab, entstehen zwei Pfade und die Beobachtung teilt sich still. Mit deklariertem Kürzel leiten beide **denselben** Pfad ab, und die gleichzeitige Neuanlage wird ein lauter `git`-Konflikt. **Eine fortlaufende Nummer gibt es nicht mehr** — sie setzte voraus, dass man alle vergebenen kennt, was über offene Branches niemand kann.
+- **Die Sub-Area** trägt die Sub-Area, deren Konventions-Härte oder
   Inventur-Linie die Beobachtung betrifft — **nicht** die, in deren Verzeichnis
   sie aufgefallen ist. Dieselbe Berührungs-Frage wie beim §8-Block des
   Slice-Plans ([`grundlagen-bootstrap.md` §Was ist eine Sub-Area?](grundlagen-bootstrap.md#was-ist-eine-sub-area)),
   rückwärts gestellt. Steht in der Spalte ein Name, den die Modus-Deklaration
   in `harness/conventions.md` nicht führt, ist entweder die Zuordnung falsch
   oder die Deklaration unvollständig.
-- **`BEO-<NNN>` ersetzt die Namens-Disziplin.** Erstauftreten benennt und
+- **Der Pfad ersetzt die Namens-Disziplin.** Erstauftreten benennt und
   vergibt die Kennung; Wiederauftreten zitiert sie und erhöht den Zähler. Ohne
   Kennung zählt eine Umformulierung als zweite Beobachtung, und keine erreicht
   je 3×. Das Register ist zugleich die Vergabestelle.
-- **Wer schreibt, wer liest:** Eingetragen wird bei der **Slice-Closure** — neuer Eintrag mit neuer `BEO-<NNN>` oder Zähler erhöhen und Beleg ergänzen. Das macht den Zähler von der Welle unabhängig: Er läuft mit jedem geschlossenen Slice. **Gelesen wird an zwei Stellen:** die **Welle-Closure** liest, was 3× erreicht hat (*Lese-Schritt*, verkörpert); die **Slice-Planung** liest, was darunter steht (*Sichtungs-Schritt*, §8 des Slice-Plans — [Modul 5](modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)). Wer nur den ersten kennt, sieht alles unter 3× nie wieder an.
-- **Mensch urteilt, Maschine prüft Deckung.** Das Urteil *ist das dieselbe Beobachtung?* fällt beim Schreiben (Kennung vergeben oder zitieren). Maschinell entscheidbar ist nur die Deckung: ob eine in `done/` zitierte `BEO-<NNN>` eine Registerzeile hat **und ob jede Registerzeile mindestens einen Beleg trägt** — die maschinelle Hälfte der Register-Paarung (c). *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo zitiert": Die allermeisten stehen unter der Schwelle und sind nirgends zitiert. Muster: schreiben → committen → Gate prüft. Welches Werkzeug, ist Repo-Entscheidung.
-- **Der Beleg ist formgebunden** — drei Prüfungen ohne Urteil: **Form** (die Kennung eines abgeschlossenen **Vorgangs**, kein Freitext) · **Anzahl** (so viele wie der Zähler) · **Lage** (führt das Repo die genannte Datei, liegt sie dort, wo ihre Klasse abgeschlossen wird — für den Regelfall Slice also in `done/`) — diese dritte Prüfung läuft **nach** dem `git mv`, zusammen mit der Register-Paarung (c): Der Beleg wird vor dem `mv` geschrieben, der `mv` ist ein eigener Commit; auf dem Schreib-Commit läge die Datei noch nicht in `done/`, ein Sensor dort meldete bei jeder korrekten Closure rot. Form und Anzahl prüfen den Registereintrag und sind davon unabhängig. **Grenze:** Die *Existenz* der Datei wird nicht verlangt — ein Repo darf Slices führen, die es nicht als Plan-Datei ablegt; ein Sensor, der sie einforderte, liefe auf jedem gewachsenen Repo rot. Ein erfundenes `slice-999` bleibt damit unentdeckt — und die Grenze gilt für jede Vorgangs-Klasse gleich: Eine erfundene Welle- oder Review-Kennung bleibt aus demselben Grund unentdeckt. Das ist die Grenze der Deklaration und gehört benannt.
+- **Wer schreibt, wer liest:** Eingetragen wird bei der **Slice-Closure** — neues Verzeichnis mit `observation.md`, oder eine weitere Datei in das vorhandene `evidence/`. **Erhöht wird nie etwas**; es wird nur angelegt, und der Zähler folgt. Das macht den Zähler von der Welle unabhängig: Er läuft mit jedem geschlossenen Slice. **Gelesen wird an zwei Stellen:** die **Welle-Closure** liest, was 3× erreicht hat (*Lese-Schritt*, verkörpert); die **Slice-Planung** liest, was darunter steht (*Sichtungs-Schritt*, §8 des Slice-Plans — [Modul 5](modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)). Wer nur den ersten kennt, sieht alles unter 3× nie wieder an.
+- **Mensch urteilt, Maschine prüft Deckung.** Das Urteil *ist das dieselbe Beobachtung?* fällt beim Schreiben (Kennung vergeben oder zitieren). Maschinell entscheidbar ist nur die Deckung: ob ein in `done/` zitierter Pfad in `observations/` existiert **und ob jedes Verzeichnis ein nicht leeres `evidence/` hat** — die maschinelle Hälfte der Register-Paarung (c). *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo zitiert": Die allermeisten stehen unter der Schwelle und sind nirgends zitiert. Muster: schreiben → committen → Gate prüft. Welches Werkzeug, ist Repo-Entscheidung.
+- **Der Beleg ist formgebunden** — zwei Prüfungen ohne Urteil: **Form** (der Dateiname *ist* die Kennung eines abgeschlossenen **Vorgangs**, kein Freitext-Feld, das ihr widersprechen könnte) · **Lage** (führt das Repo den genannten Vorgang, liegt er dort, wo seine Klasse abgeschlossen wird — für den Regelfall Slice also in `done/`) — die Lage-Prüfung läuft **nach** dem `git mv`, zusammen mit der Register-Paarung (c): Der Beleg wird vor dem `mv` geschrieben, der `mv` ist ein eigener Commit; auf dem Schreib-Commit läge die Datei noch nicht in `done/`, ein Sensor dort meldete bei jeder korrekten Closure rot. Die Form-Prüfung ist davon unabhängig. **Eine dritte Prüfung ist entfallen:** Solange der Zähler gespeichert wurde, musste ein Gate seine **Anzahl** gegen die Belegliste halten. Ein abgeleiteter Zähler kann seiner Belegliste nicht widersprechen — die Prüfung hat kein Objekt mehr. **Grenze:** Die *Existenz* der Datei wird nicht verlangt — ein Repo darf Slices führen, die es nicht als Plan-Datei ablegt; ein Sensor, der sie einforderte, liefe auf jedem gewachsenen Repo rot. Ein erfundenes `slice-999` bleibt damit unentdeckt — und die Grenze gilt für jede Vorgangs-Klasse gleich: Eine erfundene Welle- oder Review-Kennung bleibt aus demselben Grund unentdeckt. Das ist die Grenze der Deklaration und gehört benannt.
 - **Ein Vorgang zählt einmal — und was keinen hat, zählt gar nicht.** Der Regelfall
   eines Belegs ist die Slice-Kennung; auch eine Welle und ein Review-Report sind
   abgeschlossene Vorgänge und taugen als Beleg. Zwei Funde **im selben** Vorgang
@@ -152,7 +162,7 @@ Slices zuordnen. Out-of-Scope gehört dazu — dieselbe Disziplin wie im
 Lastenheft (Modul 3) und im Slice-Plan (Modul 9); was nicht ausdrücklich
 ausgeschlossen ist, dehnt die Welle, bis der Closure-Trigger unerreichbar
 wird. (2) **Offene Beobachtungen sichten** —
-Das Register `docs/plan/planning/observations.md` durchgehen: Betrifft eine davon die
+Das Register `docs/plan/planning/observations/` durchgehen: Betrifft eine davon die
 Sub-Areas dieser Welle, gehört sie in die Slice-Planung (Risiko im
 betroffenen Slice) oder, bei Erreichen von 3×, als eigener Slice, der die
 Lücke schließt. **Bei der ersten Welle entfällt dieser Schritt nicht** — das Register existiert
@@ -232,7 +242,7 @@ ihrer Schritte in
    **im Planning-Lifecycle** (`open/`, `next/`, `in-progress/`, `done/`), nicht
    nur in `open/`: bis zur Prüfung kann er weitergewandert sein.
    (c) **Register-Paarung** — zwei Hälften: jede in einer Closure-Notiz oder
-   einem Risiko-Ausgang genannte `BEO-<NNN>` existiert als Zeile im
+   einem Risiko-Ausgang genannte Beobachtung existiert als Verzeichnis im
    Beobachtungs-Register, **und** jede Registerzeile trägt mindestens einen
    Beleg. *Nicht* geprüft wird die Umkehrung „jede Zeile ist irgendwo zitiert".
    Rot heißt in allen drei Fällen: etwas wurde

@@ -61,7 +61,7 @@ Jedes Risiko trägt bei Closure genau einen Ausgang (Modul 5
 - Performance-Hit der Tie-Break-Vergleichsfunktion — **Ausgang:** entfallen.
   Gemessen < 1 % gegen den Benchmark aus `evals/`, damit kein Risiko mehr.
 - Golden-Set-Cases decken keine Gleichstands-Eingaben ab — **Ausgang:**
-  weiter offen → Beobachtungs-Register `BEO-002`
+  weiter offen → Beobachtungs-Register `BEO-EVAL/gleichstands-eingaben-fehlen`
   (Sub-Area *Replay-/Eval-Infrastruktur*: verletzt ist die Golden-Set-Konvention,
   nicht die Test-Konvention).
 
@@ -74,7 +74,7 @@ nicht stable ist. Wechsel zu `sort.SliceStable` plus expliziter
 Tie-Break-Closure macht die Reihenfolge deterministisch.
 
 **Steering-Loop-Eintrag:** Beobachtung im Register auf **2×** erhöht
-(`BEO-005`, Beleg `slice-009` ergänzt). Die Schwelle fällt erst mit
+(`BEO-IMPL/tie-break-nicht-dokumentiert`, Beleg `slice-009` ergänzt). Die Schwelle fällt erst mit
 `slice-012`. Die Verkörperung —
 AGENTS.md-Hard-Rule "Tie-Break in jeder sortierenden Operation muss explizit
 dokumentiert sein" — erfolgt beim Lese-Schritt der Welle-1-Closure, nicht
@@ -90,7 +90,7 @@ sortiert nach Sprach-Skelett-Roundtrip ab; siehe Roadmap M1).
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
 für das DocSearch-Lab als Ganzes). Der Slice setzt **keine** Konventions-Adaption; die
 `AGENTS.md`-Hard-Rule "Tie-Break explizit dokumentiert" entstand erst beim
-Lese-Schritt der Welle-1-Closure aus `BEO-005`. Reine GF-Bewegung —
+Lese-Schritt der Welle-1-Closure aus `BEO-IMPL/tie-break-nicht-dokumentiert`. Reine GF-Bewegung —
 keine BF/Hybrid-Begründung nötig.
 
 **Vorgelagert — Sub-Area-Wahl prüfen:** Drei berührte Sub-Areas, alle über der
@@ -102,9 +102,9 @@ Keine davon ist zu grob geschnitten; *Sensor-Werkzeuge* ist mitberührt, aber
 nur als Ablageort des Targets, nicht in seiner Konventions-Härte.
 
 **Vorgelagert — offene Beobachtungen sichten:** Register
-(`../observations.md`) durchgegangen. `BEO-005` (*Implementierung*) steht bei
+(`../observations/`) durchgegangen. `BEO-IMPL/tie-break-nicht-dokumentiert` (*Implementierung*) steht bei
 1× aus `slice-006` und trifft mit diesem Slice zum **zweiten** Mal dieselbe
-Sub-Area — Zähler auf 2×, Beleg ergänzt. Die Schwelle fällt erst mit
+Sub-Area — `evidence/slice-009.md` ergänzt, der abgeleitete Zähler steht damit auf 2×. Die Schwelle fällt erst mit
 `slice-012`; verkörpert wird beim Lese-Schritt der Welle-1-Closure, nicht
 hier. Auf *Test-Infrastruktur* und *Spec-Schreibung* steht keine Zeile.
 

@@ -2,7 +2,7 @@
 
 > **Template-Hinweis.** Vorlage für das Reconciliation-Register eines Repos im
 > **Brownfield-Bootstrap**. Kopiere nach `docs/plan/planning/reconciliation.md`
-> (flach, neben `observations.md`) und ersetze Platzhalter. Lösche diesen Block.
+> (flach, neben `observations/`) und ersetze Platzhalter. Lösche diesen Block.
 > Ein reines Greenfield-Repo braucht die Datei nicht — dort gab es nie einen
 > Bestand, gegen den abgeglichen wurde.
 

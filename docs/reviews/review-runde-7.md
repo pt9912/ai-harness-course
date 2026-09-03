@@ -339,7 +339,7 @@ zurück.
 
 `CHANGELOG.md` :84–87: „Die **drei** realen Zeilen … dazu neu `BEO-005` … und
 `BEO-006`" — 3 + 2 = 5.
-`lab/example/docs/plan/planning/observations.md` trägt **sechs** Zeilen;
+`lab/example/docs/plan/planning/observations.md` trägt **sechs** Zeilen; <!-- d-check:ignore (Zeitdokument: Pfad war zum Review-Zeitpunkt korrekt, das Register ist seit Welle 116 eine Verzeichnisablage) -->
 `BEO-004` (aus `slice-020` §7, ebenfalls neu in dieser Welle) kommt in der
 Aufzählung nicht vor.
 
@@ -369,7 +369,7 @@ Text korrekt als eigener Absatz außerhalb dieser Systematik.
 `kurs/de/02-planung/modul-06-roadmap.md` :322: `<!-- Auszug: BEO-002..004 hier
 weggelassen -->`.
 Im gezeigten Register fehlt auch `BEO-006`
-(`lab/example/docs/plan/planning/observations.md` :19).
+(`lab/example/docs/plan/planning/observations.md` :19). <!-- d-check:ignore (Zeitdokument: Pfad war zum Review-Zeitpunkt korrekt, das Register ist seit Welle 116 eine Verzeichnisablage) -->
 
 ---
 

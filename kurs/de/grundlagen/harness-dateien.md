@@ -10,7 +10,7 @@ docs/plan/planning/next/    # priorisiert/eingeplant
 docs/plan/planning/in-progress/  # aktive Slices
 docs/plan/planning/done/    # abgeschlossene Slices
 docs/plan/planning/<welle-id>.md            # offene Wellen, flach (Modul 6)
-docs/plan/planning/observations.md          # Beobachtungs-Register: der Steering-Loop-Zähler
+docs/plan/planning/observations/            # Beobachtungs-Register: je Beobachtung ein Verzeichnis
 docs/plan/planning/reconciliation.md        # Reconciliation-Register: nur im Brownfield-Bootstrap
 docs/plan/planning/in-progress/roadmap.md   # Meilensteine, nächste Wellen, Zeiger auf offene
 docs/plan/carveouts/        # Ausnahmen mit Plan zur Auflösung
@@ -332,12 +332,23 @@ unveränderlich** — es steht in Kennungen, in Commits und in Verweisen; eine
 Umbenennung würde sie alle still umlenken (dasselbe Argument wie beim
 Namespace einer Beobachtung).
 
-Wo Kennungen **kein** Segment tragen, entfällt die Spalte. Das ist kein
-Sonderfall, sondern der Normalfall des Ein-Schreiber-Repos: Die Frage nach
-dem Zählraum entsteht erst mit dem zweiten Menschen am Repo
-([§Vergabe](source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
-Eine Kürzel-Spalte ohne Kennungen, die sie benutzen, deklariert nichts — sie
-füllt eine Tabelle.
+**Die Spalte ist damit nicht mehr bedingt.** Sie war es, solange kein
+Kern-Artefakt ein Segment verlangte — dann führte ein Ein-Schreiber-Repo
+`ADR-0012` statt `ADR-IDX-0012`, und eine Kürzel-Spalte ohne Kennungen, die sie
+benutzen, hätte nichts deklariert. Seit die Kennung einer Beobachtung der Pfad
+`BEO-<KUERZEL>/<slug>` **ist**
+([Modul 6 §Das Beobachtungs-Register](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)),
+trägt jedes Repo mindestens eine Kennungsklasse mit Segment. Die Bedingung ist
+also erfüllt, nicht aufgehoben — die Regel hat sich nicht geändert, ihr Eingang
+hat sich geändert.
+
+**Warum der Pfad ein Kürzel braucht und keinen Namen.** Ein Name darf
+umformuliert werden, ein Pfad nicht. Leiten zwei Schreiber denselben Bereich
+unterschiedlich ab, entstehen zwei Pfade für dasselbe Phänomen, und es teilt
+sich still. Mit deklariertem Kürzel leiten beide denselben Pfad ab — die
+gleichzeitige Neuanlage wird ein lauter `git`-Konflikt statt eines stillen
+Merges. Ohne das Kürzel zählen zwei Schreiber in zwei Räumen, ohne dass etwas
+kollidiert ([§Vergabe](source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
 
 Wichtig: `harness/conventions.md` dupliziert keinen Baseline-Text — sie
 verweist und ergänzt. Eine Kopie ginge gegen die Baseline in Drift,

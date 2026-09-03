@@ -184,7 +184,8 @@ Risiko, wiederkehrende Finding-Klasse.
 Slice-Closure ins Beobachtungs-Register eingetragen**
 ([Modul 6 §Das Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register))
 — dort steht der Zähler, unabhängig von jeder Welle; die Welle-Closure
-liest ihn nur noch. Jede Beobachtung trägt dort eine `BEO-<NNN>`. Die
+liest ihn nur noch. Jede Beobachtung liegt dort unter ihrem Pfad
+`BEO-<KUERZEL>/<slug>`. Die
 Bezeichnung ist trotzdem stabil zu halten — die Zuordnung zur Kennung
 passiert beim Schreiben, und wer den Namen umformuliert, findet die Zeile
 nicht wieder.
