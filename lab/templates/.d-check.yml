@@ -67,3 +67,11 @@ modules: [links, anchors]
 # vcs:
 #   paths: ["harness/conventions/**/MR-[0-9]*.md"]
 #   immutable-when: '^- \*\*Datum:\*\*'
+
+# Review-Report-Deckung fuer `done/`-Slices mit Review-DoD-Haken (Kurs
+# `modul-05-planning-harness.md` §Ziel-Form: Slice, Review-Zeile seit Welle
+# 119) — aktivieren, sobald der erste Slice nach `done/` wandert. `done-dir`
+# ist der Aktivierungs-Schalter: ohne ihn oeffnet das Modul keine Datei.
+# reviews:
+#   done-dir: docs/plan/planning/done
+#   reviews-dir: docs/reviews

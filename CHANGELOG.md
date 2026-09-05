@@ -11,6 +11,53 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 119 — 2026-09-05 · Die Review-Zusage bekommt einen Wächter
+
+Welle 118 verankerte den Rollenwechsel nach Schritt 8 (Bericht → Handoff an
+Reviewer), aber die Slice-DoD selbst trug nirgends eine Review-Zeile — der
+d-check-Sensor `reviews`, den Modul 10 seither als "Werkzeug-Beispiel"
+nennt, hatte in keinem der vier Repos (Kurs-Wurzel, `lab/templates`,
+`lab/example`, `lab/team-sim/seed`) ein Ziel, an dem er greifen konnte.
+
+- **Modul 5** (`kurs/de/02-planung/modul-05-planning-harness.md` §Worked
+  Example: einen zu großen Slice schneiden): "Review-Report" ergänzt in die
+  Liste der Punkte, die jede Closure konstant trägt und die die
+  Liefer-Punkte-Faustregel nicht mitzählt — neben Gate-Läufen,
+  Closure-Notiz, Beobachtungs-Register, Risiko-Ausgängen, den drei
+  Paarungen. `lab/regelwerk/modul-05-planning-harness.md` wortgleich
+  nachgezogen.
+- **`lab/templates/docs/plan/planning/slice.template.md`**: die eigentliche
+  DoD-Zeile — "Review durchgeführt, Report unter `docs/reviews/` liegt vor"
+  — mit Pointer auf `.harness/skills/reviewer.md` und den Rollenwechsel aus
+  Welle 118. Fünf statt vier konstante Closure-Pflichten.
+- **`lab/templates/.d-check.yml`**: auskommentierter `reviews`-Block als
+  Adopter-Doku (Schema `done-dir`/`reviews-dir` aus `d-check --print-config`
+  übernommen) — aktivieren, sobald der erste Slice nach `done/` wandert.
+- **`lab/example`**: das Modul scharf geschaltet (`.d-check.yml`,
+  `harness/README.md` §Sensors) und mit `slice-026` selbst zum ersten
+  Dogfooding-Fall gemacht — der Slice trägt als erster die neue DoD-Zeile.
+  Break-Test vor der Behauptung: vor Anlage von `docs/reviews/` meldet
+  d-check `review-missing` fail-closed (leere Prüfmenge, 0
+  Review-Zusagen, reviews-dir unlesbar), danach grün. Ein unabhängiger
+  Review-Lauf (anderer Kontext, kein Self-Review, Modul 8) fand vier
+  MEDIUM-Findings am ersten Entwurf — zwei Fehlzitate (ein nur im
+  Regelwerk-Digest existierender Anker, ein vertauschter Modul-Abschnitt),
+  eine unbelegte Sub-Area-Zuordnung und ein DoD-Häkchen ohne tragende
+  Zitation —, alle vier im selben Slice behoben. Die unbelegte
+  Sub-Area-Zuordnung (`.d-check.yml` weder unter `Verifikation` noch unter
+  `Sensor-Werkzeuge` in `harness/conventions.md` explizit abgedeckt) ist
+  jetzt `BEO-TOOLS/d-check-yml-sub-area-unklar/` im Beobachtungs-Register,
+  nicht still korrigiert.
+- **Root `.d-check.yml`** (`codepaths`): Review-Reports zitieren ihren
+  Prüfgegenstand mit dem Pfad zum Zeitpunkt des Laufs (`in-progress/`) —
+  der Gegenstand wandert danach nach `done/`. Ohne Ausnahme bricht jeder
+  Review-Report am nächsten Lifecycle-Übergang seines eigenen Gegenstands;
+  neuer `exempt-paths: ["**/docs/reviews/**"]`-Eintrag, analog zur
+  bestehenden Tombstone-Praxis für `konventionen.md`.
+
+Gates: `make check` — docs-check 223 Dateien 0 ERROR/0 WARN, alignment-check
+0 WARN; `make -C lab/example verify` 106/0; `make bundle-check` 51/0.
+
 ## Welle 118 — 2026-09-05 · Schritt 8 wird zum Rollenwechsel, nicht zum Abschluss
 
 Ein realer Fall: ein Code-Agent lief den Minimal Agent Workflow (Modul 9)

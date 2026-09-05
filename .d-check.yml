@@ -143,6 +143,12 @@ codepaths:
   ignore-refs: ["kurs/de/agents-regelwerk.md",
                 "kurs/de/grundlagen/konventionen.md",
                 "lab/regelwerk/grundlagen-konventionen.md"]
+  # Review-Reports zitieren ihren Prüfgegenstand mit dem Pfad zum Zeitpunkt
+  # des Laufs (typischerweise `in-progress/`) — der Slice wandert danach per
+  # `git mv` nach `done/`. Ein Report ist Lauf-Beleg (wird über Läufe hinweg
+  # nicht editiert, seit slice-026); ohne diese Ausnahme bricht jeder
+  # Review-Report am nächsten Lifecycle-Übergang seines eigenen Gegenstands.
+  exempt-paths: ["**/docs/reviews/**"]
 
 # structure haelt zwei Form-Invarianten, die bisher nur Gewohnheit waren.
 # Das Modul benennt seine Dateien SELBST (kein scope) — CHANGELOG.md steht

@@ -4,7 +4,7 @@
 # fuer nicht grep-bar. Der Kurs loest sie ueber den umgekehrten Default: Die
 # Kante gilt als verboten, die Ausnahme wird am Ort deklariert.
 #
-# Vier Module, aber kein `links`/`anchors`: Link- und Anker-Pruefung laeuft an der Kurs-Wurzel, die den
+# Fuenf Module, aber kein `links`/`anchors`: Link- und Anker-Pruefung laeuft an der Kurs-Wurzel, die den
 # ganzen Baum sieht: Dieses Verzeichnis ist ein Teilbaum und verlinkt bewusst
 # in den Kurs; ein `links`-Lauf in diesem Scope meldete 63 Repo-Escapes.
 scan:
@@ -22,7 +22,7 @@ scan:
   # `git archive HEAD lab/example` nachstellen und dagegen laufen lassen.
   ignore: ["**/build/**", "**/build-cov/**", "**/target/**", "**/.gradle/**",
            "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**"]
-modules: [matrix, targets, planning, ids]
+modules: [matrix, targets, planning, ids, reviews]
 
 matrix:
   classes:
@@ -249,3 +249,14 @@ ids:
 # macht sie instabil: Jeder Zustandswechsel per `git mv` braeche ihn repo-weit.
 # Im ganzen Beispiel gibt es deshalb keinen einzigen Slice-Link, und das bleibt
 # so.
+
+# Review-Report-Deckung (Kurs `modul-05-planning-harness.md` §Ziel-Form:
+# Slice, Review-Zeile seit Welle 119, slice-026). `done-dir` ist der
+# Aktivierungs-Schalter: geprueft werden nur die neun bestehenden `done/`-
+# Dateien und alles Kuenftige — keine trifft heute die Review-DoD-Zeile
+# (Fliesstext-Nennungen zaehlen nicht, nur eine DoD-Haken-Zeile), daher ohne
+# `exempt-paths`: Grandfathering greift erst, wenn ein Alt-Slice tatsaechlich
+# einen Treffer produziert.
+reviews:
+  done-dir: docs/plan/planning/done
+  reviews-dir: docs/reviews

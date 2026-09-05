@@ -164,9 +164,9 @@ Größen- und Schnitt-Regeln:
 
 - **Zu groß**, wenn eines zutrifft: mehr als drei **Liefer-Punkte** — gezählt
   wird nur, was mit dem Umfang wächst (die Artefakte und Akzeptanzkriterien
-  dieses Slice). Nicht gezählt: Gate-Läufe, Closure-Notiz, Register,
-  Risiko-Ausgänge, die drei Paarungen; sie sind pro Slice konstant und sagen
-  über die Größe nichts · mehrere
+  dieses Slice). Nicht gezählt: Gate-Läufe, Review-Report, Closure-Notiz,
+  Register, Risiko-Ausgänge, die drei Paarungen; sie sind pro Slice konstant
+  und sagen über die Größe nichts · mehrere
   Schichten betroffen (Adapter + Service + UI + DB-Schema) · nicht in
   *einer* Review-Sitzung prüfbar. Dann zurück zum Schneiden
   (`in-progress→next`), nicht still weiterschieben.

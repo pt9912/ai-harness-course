@@ -240,7 +240,7 @@ Token-Revocation per Admin-Endpoint, Audit-Log auf Login-Versuche."
 1. Mehr als drei **Liefer-Punkte** (Faustregel). Gezählt wird nur, was mit dem
    Umfang *wächst*: die Artefakte und Akzeptanzkriterien, die dieser Slice
    herstellt. **Nicht** gezählt werden die Punkte, die jede Closure gleich oft
-   trägt — Gate-Läufe (`make gates` grün), Closure-Notiz,
+   trägt — Gate-Läufe (`make gates` grün), Review-Report, Closure-Notiz,
    Beobachtungs-Register, Risiko-Ausgänge, die drei Paarungen. Sie sind pro
    Slice konstant und sagen über die Größe nichts; wer sie mitzählt, hält jeden
    Slice für zu groß und die Faustregel für unbrauchbar.
