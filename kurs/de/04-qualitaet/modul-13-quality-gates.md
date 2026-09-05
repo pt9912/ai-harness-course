@@ -151,6 +151,12 @@ erfunden, nicht rekonstruiert; der leere Zustand ist die ehrliche Information.
 Deklarierter Backfill bleibt möglich, wo sich der Trigger wirklich herleiten
 lässt.
 
+**Feuert der Trigger, ist die Entfernung der Hard-Rule-Zeile aus `AGENTS.md`
+ein DoD-Punkt des auslösenden Slice** — derselbe Träger, den der Carveout
+für seine Bindung-Spalte hat ([Modul 7](../02-planung/modul-07-carveouts.md)).
+Eine Regel, die „irgendwann aufräumen" sagt, ohne einen Vorgang zu nennen,
+der es tut, wächst nur.
+
 **Vorhanden ≠ behauptet.** Die Regel verbietet ein *behauptetes* Gate ohne
 Deckung — nicht ein *vorhandenes* Target ohne Anspruch. Ein tool-generiertes
 Gate-Fragment (`d-check.mk` aus `d-check --print-mk`, per `-include` eingebunden

@@ -165,13 +165,19 @@ hinterlegen.** Damit nach Trigger-Eintritt klar ist, was zu tun ist:
       Index erweitert — nicht ganz entfernt, sonst misst
       `coverage-gate-critical` dasselbe wie `coverage-gate`.
 - [ ] `make coverage-gate-critical` grün ohne Ausnahmen.
+- [ ] `harness/README.md` §Sensors: Bindung-Spalte von `CO-001` auf den
+      Normalzustand zurückgesetzt (kein Carveout mehr aktiv).
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
 - [ ] slice-013 Closure-Notiz schließt diese Auflösung mit ein.
 ```
 
-Fünf Häkchen, eines davon ein `git mv`. Auflösung ohne Verschiebung in
+Sechs Häkchen, eines davon ein `git mv`. Auflösung ohne Verschiebung in
 `done/` ist eine zweite Lüge — der Carveout wirkt "aufgelöst", liegt
-aber weiter im aktiven Verzeichnis.
+aber weiter im aktiven Verzeichnis. Ohne die zurückgesetzte
+Bindung-Spalte ist es eine dritte: `harness/README.md` behauptet dann
+einen Carveout, der längst geschlossen ist — dieselbe Sorte Drift, die
+die Hard-Rule-Doku-Disziplin ([Modul 13](../04-qualitaet/modul-13-quality-gates.md))
+für Gates verbietet.
 
 **Schritt 6 — Carveout, BF-Sub-Area-Markierung oder ADR?** Bevor du
 Schritt 1–5 als endgültige Form annimmst, prüfe, ob das Werkzeug

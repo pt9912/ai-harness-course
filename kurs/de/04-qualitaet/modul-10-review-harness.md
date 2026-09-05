@@ -84,6 +84,13 @@ Review = *inferential feedback* (siehe
 Teurer als ein Linter, billiger als Verifikation. Adressiert primär die
 Maintainability-Kategorie.
 
+Die *Kategorisierung* eines Findings bleibt inferential — kein Gate
+entscheidet, ob ein Verstoß wirklich HIGH ist. Die *Deckung* dagegen ist
+mechanisierbar: trägt ein `done/`-Slice mit Review-Zusage tatsächlich
+einen Report? Das ist *computational feedback* und prüfbar, ohne die
+Kategorisierung selbst zu bewerten — Werkzeug-Beispiel: das d-check-Modul
+`reviews` (Review-Report-Deckung für `done/`-Slices).
+
 ## Kernidee
 
 Ein Review ohne Kategorisierung ist eine Mängelliste. Ein Review mit

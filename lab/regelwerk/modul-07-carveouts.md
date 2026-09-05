@@ -41,6 +41,9 @@ Operative Regeln, die das Template nicht selbst erzwingt:
   zurücknehmen, Gate grün ohne Ausnahmen). Auflösen ohne
   Verschiebung ist eine zweite Lüge: der Carveout wirkt „aufgelöst",
   liegt aber weiter im aktiven Verzeichnis.
+- **Auflösung setzt auch die Bindung-Spalte in `harness/README.md`
+  §Sensors zurück** (`CO-<NNN>` → Normalzustand) — sonst behauptet
+  `harness/README.md` einen Carveout, der längst geschlossen ist.
 
 <a id="werkzeug-wahl"></a>
 

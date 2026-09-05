@@ -186,3 +186,9 @@ Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 
    `make verify` (Closure-Pflicht + Referenz-Richtung).
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt.
 8. Ausgeführte Sensors und verbleibende Risiken berichten.
+
+Dieser Workflow deckt ausschließlich die Implementer-Rolle ab. Schritt 8
+ist der Rollenwechsel, kein Abschluss: Bericht → Handoff an Reviewer →
+Verifier. Kein Self-Review — anderer Kontext findet andere Findings,
+derselbe Kontext dieselben blinden Flecken (Baseline-Regelwerk
+`modul-08-agentenrollen.md`).

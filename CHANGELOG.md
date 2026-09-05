@@ -11,6 +11,37 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 118 — 2026-09-05 · Schritt 8 wird zum Rollenwechsel, nicht zum Abschluss
+
+Ein realer Fall: ein Code-Agent lief den Minimal Agent Workflow (Modul 9)
+vollstaendig durch und meldete Fertigstellung, ohne dass je ein Review
+stattfand. Der Workflow endete in Kurs, Regelwerk und Template nach
+Schritt 8 — und nirgends stand geschrieben, dass danach eine andere Rolle
+uebernimmt, geschweige denn, wo sie zu finden ist.
+
+- **`AGENTS.template.md` / `harness/README.template.md`**: Rollen-Scope-Satz
+  ergaenzt — der Workflow deckt nur die Implementer-Rolle ab, Schritt 8 ist
+  Rollenwechsel statt Abschluss. `.harness/skills/reviewer.md` bekommt einen
+  Pointer im Guides-Abschnitt, der bisher nur im Template-Index stand, nicht
+  in der Datei, die ein Agent tatsaechlich liest.
+- **Modul 10**: „HIGH blockiert Merge" war reine Behauptung ohne
+  mechanisierte Deckungs-Haelfte. Jetzt benannt: das d-check-Modul `reviews`
+  prueft, ob ein `done/`-Slice mit Review-Zusage tatsaechlich einen Report
+  traegt — Kategorisierung bleibt inferential, Deckung wird computational.
+- **Modul 7 / Modul 13**: zweite, verwandte Luecke — Pflicht-Dateien
+  (`AGENTS.md` Hard Rules, `harness/README.md` Sensors-Bindung) wuchsen ohne
+  Entfernungspflicht bei gefeuertem Auflösungs-Trigger. Jetzt expliziter
+  DoD-Punkt des aufloesenden Slice, gebunden an denselben Mechanismus, den
+  der Carveout fuer seine Bindung-Spalte schon traegt — keine neue
+  Regelwerk-Prosa ohne Traeger.
+- **`lab/example`**: beide Aenderungen nachgezogen (CO-001-Checkliste um die
+  Bindung-Zelle ergaenzt, `AGENTS.md`/`harness/README.md` Rollen-Scope) —
+  Kurs schlaegt Beispiel, sonst widerspricht das illustrative Repo dem
+  Modul, das es bebildert.
+
+Gates: `make check` — docs-check 218 Dateien 0 ERROR/0 WARN, alignment-check
+0 WARN; `make -C lab/example verify` 101/0; `make bundle-check` 51/0.
+
 ## Welle 117 — 2026-09-03 · Der Entwurf weiß, dass er Kanon geworden ist
 
 Nachlauf zu Welle 116. [`docs/steering-loop-team.md`](docs/steering-loop-team.md)

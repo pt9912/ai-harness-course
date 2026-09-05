@@ -60,6 +60,7 @@ Was lenkt den Agenten *vor* der Handlung? Pointer, kein Inhalt.
 | [`docs/plan/planning/`](../docs/plan/planning/) | Slice-Pläne und Roadmap |
 | [`AGENTS.md`](../AGENTS.md) | Hard Rules, Source Precedence, Workflow |
 | [`conventions.md`](conventions.md) | repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Modus-Deklarationen |
+| `.harness/skills/reviewer.md` | Reviewer-Skill: HIGH-Liste, Kategorien-Regeln, Negativbefund-Pflicht, Output-Schema (Modul 10) — nächste Rolle nach Schritt 8 des Minimal Agent Workflow, nicht Teil der Implementer-Eingabe |
 | `.harness/baseline/<tag>/regelwerk/` (vendored; `README.md` = Index) | adoptiertes Betriebsregelwerk in Agenten-Kurzform — **präsente nachschlagbare Vertiefung**, pro Entscheidung abschnittsweise (siehe [`AGENTS.md`](../AGENTS.md) §1); derivativ, Stand/Tag siehe [`conventions.md`](conventions.md) §Baseline |
 | `.harness/baseline/<tag>/templates/` (vendored, parallel) | Referenz-Form der Skelette, auf die das Regelwerk mit `../templates/…` als „Ziel-Form" verweist (netzlos, weil parallel zu `regelwerk/`); Vorlagen zum Kopieren-und-Ausfüllen |
 
@@ -82,6 +83,13 @@ Strukturell rote Gates (dauerhaft rot) bekommen einen Carveout in
 `docs/plan/carveouts/CO-<NNN>-…` mit Auflösungs-Trigger und Folge-Slice
 (Modul 7); die Bindung-Spalte verweist auf die `CO-<NNN>`-ID, die
 Begründung lebt im Carveout, nicht hier.
+
+Bei d-check-Einsatz (≥ v0.73.0) deckt Modul `reviews` (Ziel `doc-reviews`,
+Review-Report-Deckung für `done/`-Slices mit Review-DoD-Haken) die
+Code→Review-Kante ab, Modul `planning` (Ziel `doc-planning`,
+Planning-Lifecycle-Konsistenz) die Verify→Closure-Kante — beide aus dem
+Lebenszyklus-Diagramm in Modul 1. Nur eintragen, wenn das Ziel im
+Makefile existiert (siehe oben).
 -->
 
 | Target | Vertrag | Bindung |
@@ -141,6 +149,12 @@ Für ein Policy/Compliance-Repo:
 6. Repo-weiten Gate-Lauf vor Handoff (`make gates`).
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt.
 8. Ausgeführte Sensors und verbleibende Risiken berichten.
+
+Dieser Workflow deckt ausschließlich die Implementer-Rolle ab. Schritt 8
+ist der Rollenwechsel, kein Abschluss: Bericht → Handoff an Reviewer
+(`.harness/skills/reviewer.md`, siehe §Guides) → Verifier. Kein
+Self-Review — anderer Kontext findet andere Findings, derselbe Kontext
+dieselben blinden Flecken (Baseline-Regelwerk `modul-08-agentenrollen.md`).
 
 ## Leseordnung
 

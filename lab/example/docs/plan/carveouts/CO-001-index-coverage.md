@@ -98,6 +98,8 @@ in jeder Sprache durch einen Test belegt.
 - [x] C#: Service-Layer erreicht die 90 % aus [ADR-0013](../adr/0013-coverage-schwellen.md) (gemessen 2026-07-30) — die Lücke war der ungetestete E003-Pfad, nicht der Layer-Umfang.
 - [x] Jeder Fehler-Code aus spec §4 (E001, E002, E003, E099) ist in allen sechs Skeletten durch einen Test belegt (2026-07-30).
 - [ ] `make coverage-gate-critical` grün ohne Ausnahmen.
+- [ ] `harness/README.md` §Sensors: Bindung-Zelle von `make coverage-gate-critical`
+      um „Index-Layer via `CO-001` … ausgenommen" gekürzt (kein Carveout mehr aktiv).
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
 - [ ] slice-013 Closure-Notiz schließt diese Auflösung mit ein.
 

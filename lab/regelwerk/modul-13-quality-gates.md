@@ -77,6 +77,12 @@ kein Nachrüsten — ein nachgetragener Trigger wäre erfunden, nicht
 rekonstruiert; der leere Zustand ist die ehrliche Information. Deklarierter
 Backfill bleibt möglich, wo sich der Trigger wirklich herleiten lässt.
 
+**Feuert der Trigger, ist die Entfernung der Hard-Rule-Zeile aus `AGENTS.md`
+ein DoD-Punkt des auslösenden Slice** — derselbe Träger, den der Carveout
+für seine Bindung-Spalte hat ([Modul 7](modul-07-carveouts.md)). Eine Regel,
+die „irgendwann aufräumen" sagt, ohne einen Vorgang zu nennen, der es tut,
+wächst nur.
+
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
 Implementer-Agent vertraut ihnen.
 
