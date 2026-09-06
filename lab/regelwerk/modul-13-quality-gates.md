@@ -86,14 +86,17 @@ wächst nur.
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
 Implementer-Agent vertraut ihnen.
 
-**Vorhanden ≠ behauptet.** Verboten ist ein *behauptetes* Gate ohne Deckung,
-nicht ein *vorhandenes* Target ohne Anspruch. Ein tool-generiertes Gate-Fragment
-(`d-check.mk` aus `d-check --print-mk`, per `-include` eingebunden statt
-handgeschrieben) bringt mehr Targets mit, als du als Gate führst: nur das genutzte
+**Vorhanden ≠ behauptet.** Die Regel verbietet ein *behauptetes* Gate ohne
+Deckung — nicht ein *vorhandenes* Target ohne Anspruch. Ein tool-generiertes
+Gate-Fragment (`d-check.mk` aus `d-check --print-mk`, per `-include` eingebunden
+statt handgeschrieben — so pflegt das Tool die Recipe-Form und nichts driftet;
+`-include` bleibt still, bis das Fragment beim Bootstrap erzeugt ist)
+bringt oft mehr Targets mit, als du als Gate führst. Nur das genutzte
 (`docs-check`) steht in `harness/README.md`/`AGENTS.md` und `make gates`; die
-advisory-Targets (`doc-trace`, `doc-doctor`, …) sind **verfügbar, aber nicht als
-Gate behauptet** — wie ein Maintenance-Target (`regelwerk-check`), das nicht in
-`gates` läuft. Die Lüge wäre, ein Gate zu versprechen, das nicht läuft.
+übrigen (advisory: `doc-trace`, `doc-doctor`, …) sind **verfügbar, aber nicht als
+Gate behauptet** — genau wie ein Maintenance-Target (`regelwerk-check`), das
+bewusst nicht in `gates` läuft. Die Lüge wäre, ein Gate zu *versprechen*, das
+nicht läuft; ein reales Target *nicht* zu versprechen ist keine.
 
 **Die dritte Lage: genannt, aber kein Gate.** Weglassen ist die Antwort für ein
 Target *ohne* Anspruch — nicht für eines, das der nächste Lauf **braucht**:

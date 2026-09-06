@@ -11,6 +11,39 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 123 — 2026-09-06 · Zwei Altbefunde, die Welle 120 berührt hat
+
+Der Review von Welle 120 meldete zwei INFO — beide älter als die Welle, beide
+aber an Stellen, die sie angefasst hat.
+
+- **`lab/example`: eine Bindung für fünf Module war für vier davon die falsche.**
+  Der Review-Befund F-4 vom 2026-09-05 (`docs/reviews/2026-09-05-slice-026.md`)
+  hielt fest, dass die `make doc-check`-Zeile nur `MR-002` trug — die Bindung von
+  `ids`/`matrix` (Link-Richtung), fachlich unpassend für `reviews`, `planning`
+  und `targets`. Welle 120 hat genau diese Zeile neu geschrieben und die Datei
+  angelegt, in der die Vorlage einen `## Bindung`-Abschnitt vorsieht; der fehlte
+  dort noch. `harness/sensors/doc-check.md` trägt ihn jetzt: **je Modul eine
+  eigene Zitation**, alle als Konventions-Bindung der Klasse `MR-002`, deren Form
+  (`Kurs §<Abschnitt>` · `Modul <N> §<Abschnitt>`) genau das verlangt. Die
+  Index-Zeile nennt die Klasse und verweist auf die Aufschlüsselung. Der
+  Review-Report bleibt unverändert — er ist ein Zeitdokument und hält seinen
+  Befund zu seinem Datum fest.
+- **`lab/regelwerk/modul-13-quality-gates.md`: der Absatz „Vorhanden ≠
+  behauptet" war paraphrasiert.** Fünf Abweichungen, davon eine folgenreich:
+  Der Schluss-Halbsatz *„ein reales Target nicht zu versprechen ist keine [Lüge]"*
+  fehlte ganz — und genau darauf antwortet die „dritte Lage", die Welle 120
+  hinzugefügt hat. Der Spiegel war dadurch seit Welle 120 in sich unstimmig: eine
+  Antwort auf einen Satz, den er nicht führt. Jetzt quelltreu; der `diff` über den
+  Block zeigt nur noch den umgehängten Verweis (Operation 3).
+
+**Diese Welle behauptet kein beobachtbares Verhalten** — eine Bindungs-Zitation
+ist Doku-Konvention, und für die Spiegel-Treue gibt es laut
+`docs/regelwerk-extrakt.md` §Teil 4 keinen Sensor. Kein Szenario, und das steht
+hier, wie `AGENTS.md` §3 es seit Welle 122 verlangt.
+
+Gates: `make check` — d-check 251 Dateien 0 Befunde, docs-check 226 Dateien
+0 ERROR/0 WARN, alignment-check 0 WARN; `make -C lab/example verify` 108/0.
+
 ## Welle 122 — 2026-09-06 · Der Team-Sim bekommt seinen Auslöser
 
 `AGENTS.md` erwähnte den Team-Sim mit keinem Wort — 52 Verdikte, und die

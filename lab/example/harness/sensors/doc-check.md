@@ -1,8 +1,8 @@
 # `make doc-check` — fünf d-check-Module über die Doku-Referenzen
 
 Vertiefung zur Index-Zeile in [`../README.md` §Sensors](../README.md#sensors-feedback-gates).
-Bindung: [Kurs §Referenz-Richtung](../../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)
-(`MR-002`).
+Bindung je Modul unten — **eine** Zitation für fünf Module wäre für vier davon
+die falsche.
 
 ## Vertrag
 
@@ -53,3 +53,19 @@ Bindung: [Kurs §Referenz-Richtung](../../../../kurs/de/grundlagen/referenz-rich
 `sed -n '/^scan:/,/^[a-z]/p' ../../.d-check.yml` die Wurzeln und Ignores, aus
 denen sie entsteht. Eine eingefrorene Zahl stünde hier falsch, sobald jemand
 committet.
+
+## Bindung
+
+Alle fünf sind Konventions-Bindungen der Klasse `MR-002`
+([`../conventions.md`](../conventions.md#mr-002)); ihre Form ist
+`Kurs §<Abschnitt>` bzw. `Modul <N> §<Abschnitt>`. **Je Modul eine eigene** —
+die Zeile trug lange nur die Bindung von `ids`/`matrix`, und die ist für
+`reviews`, `planning` und `targets` fachlich unpassend (Review-Befund F-4 vom
+2026-09-05).
+
+| Modul | Bindung |
+|---|---|
+| `reviews` | [Modul 10 §Harness-Einordnung](../../../../kurs/de/04-qualitaet/modul-10-review-harness.md#harness-einordnung) — Review-Report-Deckung |
+| `ids`, `matrix` | [Kurs §Referenz-Richtung](../../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) |
+| `planning` | [Modul 6 §Die Wellen-Eröffnungs-Prozedur](../../../../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) — Ruhe-Marker und Wellen-Invariante |
+| `targets` | [`../../AGENTS.md`](../../AGENTS.md) §3 — halluzinierte Gates |
