@@ -3,13 +3,18 @@
 .codex/
 .tmp/
 
-# Ausnahme: Agenten-Skills sind Repo-Werkzeug, keine Maschinen-Konfiguration —
-# sie gehören zum Arbeiten an diesem Korpus und reisen deshalb mit. Der Rest von
-# .claude/ (Sitzungs-, Rechte- und lokale Einstellungen) bleibt ignoriert.
+# Ausnahme: Agenten-Skills, -Rules und die Repo-Einstellungen sind Repo-Werkzeug,
+# keine Maschinen-Konfiguration — sie gehören zum Arbeiten an diesem Korpus und
+# reisen deshalb mit. Ignoriert bleibt, was an eine einzelne Maschine gebunden ist:
+# Sitzungszustand und die Rechte-Liste (settings.local.json mit ihren absoluten
+# Pfaden).
 !.claude/
 .claude/*
 !.claude/skills/
 !.claude/skills/**
+!.claude/rules/
+!.claude/rules/**
+!.claude/settings.json
 
 __pycache__/
 
