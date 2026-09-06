@@ -166,14 +166,18 @@ besten zu deinem Projekt passt. Pflicht-Strukturen sind:
   `Supersedes` (Hard Rule, Baseline-Regelwerk `modul-04-adrs.md`).
 - Carveouts brauchen immer Trigger + Folge-Slice.
 - Slices brauchen DoD mit prüfbaren Kriterien.
-- §8 in `slice.template.md` steht in **jedem** Slice-Plan: Die beiden
-  *Vorgelagert*-Blöcke (Sub-Area-Wahl prüfen · offene Beobachtungen sichten)
-  sind immer auszufüllen. Der **Modus-Begründungsblock** darin ist Pflicht bei
-  mindestens einer in BF oder Hybrid berührten Sub-Area, pro berührter
-  Sub-Area einer; bei reinem GF genügt der Hinweis "alle berührten Sub-Areas
-  GF".
+- §8 `Sub-Area-Prüfungen und Modus-Begründung` trägt beide Hälften im Titel:
+  Die zwei *Vorgelagert*-Blöcke (Sub-Area-Wahl prüfen · offene Beobachtungen
+  sichten) sind immer auszufüllen, der **Modus-Begründungsblock** ist bedingt —
+  Pflicht bei mindestens einer in BF oder Hybrid berührten Sub-Area, pro
+  berührter Sub-Area einer; bei reinem GF genügt der Hinweis "alle berührten
+  Sub-Areas GF".
   Voraussetzung-Wissen: Baseline-Regelwerk `modul-05-planning-harness.md`
   §Ziel-Form: Sub-Area-Modus-Begründung.
+- §1 `Ziel und Abgrenzung` nennt beides: was der Slice liefert und was er
+  ausdrücklich **nicht** tut, je Ausschluss mit Begründung — keine
+  Mindestzahl. Voraussetzung-Wissen: Baseline-Regelwerk
+  `modul-05-planning-harness.md` §Ziel-Form: Slice.
 
 ## Ergänzungen
 

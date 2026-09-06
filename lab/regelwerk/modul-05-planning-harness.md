@@ -183,8 +183,43 @@ Größen- und Schnitt-Regeln:
   ein Feld dafür — Kennung, wo das Zielelement eine trägt, sonst der
   `§`-Anker, und `—`, wenn der Slice keine Spec-Stelle berührt. Daneben trägt
   der Kopf `Verantwortlich:` (§Lifecycle als State Machine) und `Autor:`.
+- **§1 nennt Ziel *und* Abgrenzung.** Was ein Slice ausdrücklich *nicht* tut,
+  gehört neben sein Ziel — das ist die **Out-of-Scope**-Disziplin des
+  Lastenhefts ([Modul 3](modul-03-spec.md)) auf den Slice-Plan angewandt, und
+  aus demselben Grund: Was nicht ausdrücklich ausgeschlossen ist, wandert im
+  Zweifel hinein. **Je Punkt eine Begründung** — ein Ausschluss ohne Grund ist
+  eine Behauptung, keine Grenze. Vier Klassen tragen den Abschnitt:
+
+  1. **Ein Folge-Slice übernimmt es** — mit Kennung. Das macht aus „später"
+     eine Adresse. Die Adresse muss die Sendung annehmen: Ein Folge-Slice, der
+     den verwiesenen Punkt selbst ausschließt oder vor dem verweisenden
+     schließt, ist keine.
+  2. **Bestand bleibt bewusst stehen** — mit Begründung. Sonst meldet ein
+     Sensor später gegen Altbestand, den niemand entschieden hat.
+  3. **Es wäre ein anderer Vorgang** — trennt Arbeit am Gegenstand von Arbeit
+     am Werkzeug.
+  4. **Schicht-Abgrenzung** — hält den Slice in seiner Schicht. Sie sagt nicht,
+     *wann* etwas kommt, sondern dass es *woanders* hingehört; für einen Slice,
+     der Doku ändert, ist „kein Produkt-Code" die wirksamste Selbstbindung,
+     weil sie beim Review sofort prüfbar ist.
+
+  **Keine Mindestzahl, und kein Sensor darauf.** Ein Slice mit *einem* echten
+  Ausschluss ist besser als einer mit vier erfundenen; ob ein Ausschluss trägt,
+  ist ein Urteil, und ein Pflichtfeld erzeugt Pflichterfüllung. **Die
+  Reichweite, beide Hälften:** Der Abschnitt hat bei einem Adopter dreimal
+  nachweisbar getragen — jedes Mal als Adresse für Wachstum, das sonst
+  stillschweigend mitgenommen worden wäre. Er hat aber nicht verhindert, dass
+  ein Slice wächst; derselbe Bestand führt einen, der *mit* vollständigem
+  Abschnitt von 3 auf 23 Träger wuchs. Er macht Wachstum **benennbar**, nicht
+  unmöglich: Wer später mitnimmt, was hier ausgeschlossen war, hat den Plan
+  geändert, nicht nur ergänzt.
 
 ### Ziel-Form: Sub-Area-Modus-Begründung
+
+> Der Abschnittsname nennt die bedingte Hälfte; die zwei vorgelagerten
+> Prüfungen darunter sind unbedingt. Der Name bleibt, weil er von Vorlage und
+> Index adressiert wird — die Ziel-Form im Slice-Plan führt deshalb beide
+> Hälften im Titel (§8 *Sub-Area-Prüfungen und Modus-Begründung*).
 
 Der Bootstrap-Modus ist Eigenschaft *pro Sub-Area*, nicht pro Slice; ein
 Slice berührt mehrere Sub-Areas und kann GF, BF und Hybrid gleichzeitig
@@ -218,7 +253,17 @@ erweitern):
 
 Bevor der erste Block geschrieben wird, laufen zwei Prüfungen. Sie hängen
 weder am Modus noch am Slice-Typ und stehen deshalb in **jedem** Slice-Plan —
-auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht:
+auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht.
+
+**Der Begründungsblock dagegen ist bedingt**, und das ist der Unterschied, den
+die Gliederung tragen muss: Pflicht, sobald mindestens eine berührte Sub-Area
+BF oder Hybrid ist — einer pro Sub-Area; bei reinem GF genügt der Hinweis
+*„alle berührten Sub-Areas GF"*; bei reinem Refactor ohne neue
+Sub-Area-Berührung entfällt **er** — nicht der Abschnitt, der ihn enthält. Ein
+Abschnitt, dessen Titel nur die bedingte Hälfte nennt, lädt dazu ein, die
+unbedingte mit ihr fallen zu lassen; deshalb nennt der Titel beide.
+
+Die zwei Prüfungen:
 
 1. **Sub-Area-Wahl prüfen.** Jede Sub-Area, die der Slice als berührt führt,
    muss das Inklusionskriterium erfüllen — drei Achsen, Schwelle ≥ 2

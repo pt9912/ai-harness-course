@@ -24,6 +24,15 @@ in `harness/conventions.md`:
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt ist.
 8. Ausgeführte Sensors und verbleibende Risiken berichten — keine Erfolgsmeldung ohne Gate-Ausführung.
 
+**Die Plan-Ausgabe in Schritt 4 nennt Out-of-Scope.** Das ist keine Zutat,
+sondern die Schritt-Hälfte einer Regel; ihre Dokument-Hälfte ist §1 *Ziel und
+Abgrenzung* des Slice-Plans (`modul-05-planning-harness.md` §Ziel-Form: Slice,
+dort auch die vier Klassen und die Begründungs-Pflicht je Punkt). Der Lauf
+schreibt fort, was der Plan schon ausschließt — er erfindet die Abgrenzung
+nicht neu und darf sie nicht stillschweigend weiten: Nimmt der Lauf etwas mit,
+das §1 ausschließt, ist das eine Plan-Änderung und gehört vor den Code, nicht
+in den Bericht danach.
+
 #### Workflow als Diagramm
 
 ```mermaid

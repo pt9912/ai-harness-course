@@ -303,7 +303,8 @@ enthält keinen direkten HTTP-Client (folgt ADR-7).
 Akzeptanzkriterien). ADR-0007 (Service-Adapter-Layer). *Nicht* gelesen:
 ältere ADRs, irrelevante Skills — siehe oben "Kontext-Verdichtung".
 
-**Auch hier gelesen, falls vorhanden:** §8 *Sub-Area-Modus-Begründung*
+**Auch hier gelesen, falls vorhanden:** §8 *Sub-Area-Prüfungen und
+Modus-Begründung*
 des Slice-Plans (siehe [Modul 5 §Worked Mini-Example](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)).
 Die in §8 benannten Sub-Areas tragen denselben Granularitäts-Maßstab wie
 in Modul 2: das Inklusionskriterium aus
@@ -329,6 +330,15 @@ aus:
 >    nach LH-FA-AUTH-001).
 > *Out-of-Scope dieses Slice:* Refresh-Token (slice-014b), Revocation
 > (slice-014c).
+
+**Die Out-of-Scope-Zeile der Plan-Ausgabe ist keine Zutat, sondern die
+Schritt-Hälfte einer Regel.** Ihre Dokument-Hälfte ist §1 *Ziel und Abgrenzung*
+des Slice-Plans ([Modul 5](../02-planung/modul-05-planning-harness.md#worked-example-einen-zu-großen-slice-schneiden),
+dort auch die vier Klassen und die Begründungs-Pflicht je Punkt). Der Lauf
+schreibt hier fort, was der Plan schon ausschließt — er erfindet die Abgrenzung
+nicht neu, und er darf sie nicht stillschweigend weiten: Nimmt der Lauf etwas
+mit, das §1 ausschließt, ist das eine Plan-Änderung und gehört vor den Code,
+nicht in den Bericht danach.
 
 **Schritt 5 — Engsten Sensor laufen (eine Testdatei).**
 `make test FILE=service/auth/login_test.go`. Erste Iteration rot

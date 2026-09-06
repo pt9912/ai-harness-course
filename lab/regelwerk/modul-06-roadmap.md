@@ -159,7 +159,9 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 **Eröffnung — drei Schritte.** (1) Welle-Ziel, **Out-of-Scope** und
 Closure-Trigger festlegen: beobachtbare Bedingung, kein Datum; erst danach
 Slices zuordnen. Out-of-Scope gehört dazu — dieselbe Disziplin wie im
-Lastenheft (Modul 3) und im Slice-Plan (Modul 9); was nicht ausdrücklich
+Lastenheft (Modul 3) und im Slice-Plan (§1 *Ziel und Abgrenzung*,
+`modul-05-planning-harness.md` §Ziel-Form: Slice; in der Plan-Ausgabe des Laufs
+`modul-09-implementierung.md`); was nicht ausdrücklich
 ausgeschlossen ist, dehnt die Welle, bis der Closure-Trigger unerreichbar
 wird. (2) **Offene Beobachtungen sichten** —
 Das Register `docs/plan/planning/observations/` durchgehen: Betrifft eine davon die

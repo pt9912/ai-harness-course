@@ -13,10 +13,25 @@ nur durch `git mv` (Kurs
 
 **Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 
-## 1. Ziel
+## 1. Ziel und Abgrenzung
 
 Lineare Cosinus-Suche durch Approximate-NN ersetzen, um p95-Latenz
 auch bei > 100k Index-Einträgen zu halten.
+
+**Ausdrücklich NICHT in diesem Slice:**
+
+- Das Nachziehen der Golden Sets auf die neuen Nachbarschaften. Kein
+  Folge-Slice trägt das heute: `slice-015` hebt den Runner und schließt vor
+  diesem Slice. Der Punkt bleibt als Beobachtung offen, bis er eine Kennung
+  hat — eine Weiterleitung an einen Slice, der ihn selbst ausschließt, wäre
+  keine Adresse.
+- Die lineare Suche entfernen. Sie bleibt als Referenz-Implementierung für den
+  Tie-Break-Vergleich stehen; ANN ist approximativ, die exakte Antwort bleibt
+  als Maßstab nötig.
+- Jede Änderung am Embedding-Adapter. Der Slice berührt den Index-Layer, nicht
+  `internal/embedding/` — die Modellwahl liegt in
+  [ADR-0002](../../adr/0002-modellwahl-embedding.md) und ist ein anderer
+  Vorgang.
 
 ## 2. Definition of Done
 
@@ -26,6 +41,7 @@ auch bei > 100k Index-Einträgen zu halten.
 - [ ] Replay gegen Golden Set: recall@5 verschlechtert sich um maximal 5 %.
 - [ ] `make gates` grün.
 - [ ] Closure-Notiz mit Recall-Vergleich (Linear vs. ANN).
+- [ ] Property-Tests für den Index-Layer aufgenommen (aus `slice-013` §1 weitergereicht).
 
 ## 3. Plan (vor Code)
 
@@ -57,7 +73,7 @@ auch bei > 100k Index-Einträgen zu halten.
 
 <!-- Bei der Closure füllen — vor dem `git mv` nach `done/`, nicht danach. -->
 
-## 8. Sub-Area-Modus-Begründung
+## 8. Sub-Area-Prüfungen und Modus-Begründung
 
 **Status:** alle berührten Sub-Areas GF (siehe
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF

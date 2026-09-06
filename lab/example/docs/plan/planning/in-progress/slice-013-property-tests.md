@@ -15,12 +15,25 @@ nur durch `git mv` (Kurs
 
 **Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 
-## 1. Ziel
+## 1. Ziel und Abgrenzung
 
 Property-Based Tests einführen, die die deterministische Sortierung der
 Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 `test-determinism` (heute: fixierte Inputs) um Eigenschaft-Suite
 (beliebige Inputs).
+
+**Ausdrücklich NICHT in diesem Slice:**
+
+- Das Ersetzen von `make test-determinism`. Es bleibt als fixierte Gegenprobe
+  stehen — die Eigenschaft-Suite deckt andere Eingaben ab, nicht dieselben
+  besser.
+- Property-Tests für den Index-Layer. Das ist `slice-014` vorbehalten, weil
+  dort erst die ANN-Struktur feststeht, gegen die Eigenschaften formuliert
+  werden könnten — `slice-014` liegt in `open/` und nimmt den Punkt in seine
+  DoD auf, bevor er startet.
+- Jede Änderung an der Sortier-Implementierung selbst. Der Slice bringt
+  Sensoren, keine Verhaltensänderung; findet die Suite einen Defekt, ist das
+  ein Folge-Slice.
 
 ## 2. Definition of Done
 
@@ -61,7 +74,7 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 
 <!-- Bei der Closure füllen — vor dem `git mv` nach `done/`, nicht danach. -->
 
-## 8. Sub-Area-Modus-Begründung
+## 8. Sub-Area-Prüfungen und Modus-Begründung
 
 **Status:** alle berührten Sub-Areas GF (siehe
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF

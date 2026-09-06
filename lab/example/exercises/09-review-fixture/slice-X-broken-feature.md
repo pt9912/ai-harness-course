@@ -2,6 +2,11 @@
 
 > **Hinweis:** Dieser Slice-Plan ist **absichtlich fehlerhaft** für die
 > Übung in Modul 10. Drei Fehler sind eingebaut.
+>
+> Er folgt bewusst der Slice-Form vom 2026-06-02 und wird bei Form-Änderungen
+> des Kurses **nicht** nachgezogen — sonst käme mit jeder Änderung ein vierter
+> Fehler dazu, den die Übung nicht meint. Der fehlende Abgrenzungs-Abschnitt in
+> §1 ist deshalb keiner der drei.
 
 **Welle:** welle-2-qualitaet
 

@@ -14,11 +14,21 @@ gibt keine darüber hinausgehende repo-weite Zusage.
 
 **Autor:** Kurs-Lab. **Datum:** 2026-07-31.
 
-## 1. Ziel
+## 1. Ziel und Abgrenzung
 
 `make replay` von der Struktur-Prüfung zur Ergebnis-Prüfung heben: Cases
 ausführen, gegen `expectations/` vergleichen, Case-Hash bilden — damit ein
 Modellwechsel das Target rot macht.
+
+**Ausdrücklich NICHT in diesem Slice:**
+
+- Die Aufnahme von `make replay` in `make ci`. Erst wenn der Runner über
+  mehrere Wellen stabil läuft, trägt er einen Pflicht-Lauf; bis dahin bleibt
+  er verfügbar und nicht als Gate behauptet.
+- Neue Golden Sets anlegen. Der Slice hebt den Runner, nicht den Bestand —
+  `welle-1-baseline` bleibt der einzige Satz.
+- Jede Änderung am Suchpfad. Der Slice berührt `evals/` und das Root-Makefile,
+  nicht `internal/` — was der Replay findet, löst ein Folge-Slice.
 
 ## 2. Definition of Done
 
@@ -61,7 +71,7 @@ Modellwechsel das Target rot macht.
 
 - Noch keine.
 
-## 8. Sub-Area-Modus-Begründung
+## 8. Sub-Area-Prüfungen und Modus-Begründung
 
 Berührte Sub-Area: *Evaluierung* (`evals/`, `tools/`). Modus **GF** — das
 Verzeichnis trägt heute nur ein Fixture, kein ausführendes Werkzeug; es gibt

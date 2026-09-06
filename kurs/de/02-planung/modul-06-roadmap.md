@@ -633,7 +633,9 @@ weglassen:
    werden Slices zugeordnet — sonst schneidet die Slice-Liste das Ziel
    statt umgekehrt. **Out-of-Scope gehört dazu**: dieselbe Disziplin wie
    im Lastenheft ([Modul 3](../01-spec-und-architektur/modul-03-spec.md))
-   und im Slice-Plan ([Modul 9](../03-agenten/modul-09-implementierung.md))
+   und im Slice-Plan (§1 *Ziel und Abgrenzung*,
+   [Modul 5](modul-05-planning-harness.md#worked-example-einen-zu-großen-slice-schneiden);
+   in der Plan-Ausgabe des Laufs [Modul 9](../03-agenten/modul-09-implementierung.md))
    — was nicht ausdrücklich ausgeschlossen ist, wandert im Zweifel in die
    Welle und dehnt sie, bis der Closure-Trigger unerreichbar wird.
 2. **Offene Beobachtungen sichten.** Das Register

@@ -6,6 +6,26 @@ Reine `git mv`-Commits beim Wechsel zwischen Verzeichnissen — siehe
 Hard Rule "git mv + Inhaltsänderung = zwei Commits" in
 [`../../../AGENTS.md`](../../../AGENTS.md).
 
+## Warum die `done/`-Slices älteren Formen folgen
+
+Slice-Pläne in `done/` werden nach ihrer Closure nicht mehr angefasst: Sie
+halten fest, was zu ihrem Datum geplant und geliefert wurde. Ändert der Kurs
+später die Ziel-Form — neue Kopf-Felder, ein neuer Abschnitt, ein anderer
+Abschnitts-Titel —, ziehen die **lebenden** Pläne (`open/`, `next/`,
+`in-progress/`) mit, die abgeschlossenen nicht. Wer hier neun Pläne mit
+`## 1. Ziel` und drei mit `## 1. Ziel und Abgrenzung` sieht, sieht keinen
+Fehler, sondern zwei Zeitpunkte.
+
+Das gilt nicht ausnahmslos: Wo ein Nachzug den *Nachweis* betrifft und nicht
+die Form — eine Kennung, die verlinkt sein muss, ein Register, das umzieht —,
+ist der Bestand in diesem Repo mehrfach nachgezogen worden. Die Grenze verläuft
+zwischen *was der Plan damals sagte* (bleibt) und *ob seine Verweise heute noch
+auflösen* (wird nachgezogen).
+
+Die Übungs-Fixture unter `exercises/09-review-fixture/` folgt derselben Ruhe,
+aber aus einem anderen Grund: Sie trägt genau die Fehler, die die Übung finden
+soll, und darf keine weiteren bekommen.
+
 ## Lifecycle-Bedeutungen
 
 | Verzeichnis | Bedeutung |

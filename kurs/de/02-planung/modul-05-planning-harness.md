@@ -276,6 +276,37 @@ der Kopf `Verantwortlich:` (§Lifecycle als State Machine) und `Autor:`. Das ist
 Gegenprobe zum Schnitt: Ein Slice, der drei Spec-Stellen aus zwei Straten
 nennt, ist meist zu groß geschnitten.
 
+**§1 nennt Ziel *und* Abgrenzung.** Was ein Slice ausdrücklich *nicht* tut,
+gehört neben sein Ziel — das ist die **Out-of-Scope**-Disziplin des Lastenhefts
+([Modul 3](../01-spec-und-architektur/modul-03-spec.md)) auf den Slice-Plan
+angewandt, und aus demselben Grund: Was nicht ausdrücklich ausgeschlossen ist,
+wandert im Zweifel hinein. **Je Punkt eine Begründung** — ein Ausschluss ohne
+Grund ist eine Behauptung, keine Grenze. Vier Klassen tragen den Abschnitt:
+
+1. **Ein Folge-Slice übernimmt es** — mit Kennung. Das macht aus „später" eine
+   Adresse. Die Adresse muss die Sendung annehmen: Ein Folge-Slice, der den
+   verwiesenen Punkt selbst ausschließt oder vor dem verweisenden schließt, ist
+   keine.
+2. **Bestand bleibt bewusst stehen** — mit Begründung. Sonst meldet ein Sensor
+   später gegen Altbestand, den niemand entschieden hat.
+3. **Es wäre ein anderer Vorgang** — trennt Arbeit am Gegenstand von Arbeit am
+   Werkzeug.
+4. **Schicht-Abgrenzung** — hält den Slice in seiner Schicht. Sie sagt nicht,
+   *wann* etwas kommt, sondern dass es *woanders* hingehört; für einen Slice,
+   der Doku ändert, ist „kein Produkt-Code" die wirksamste Selbstbindung, weil
+   sie beim Review sofort prüfbar ist.
+
+**Keine Mindestzahl, und kein Sensor darauf.** Ein Slice mit *einem* echten
+Ausschluss ist besser als einer mit vier erfundenen; ob ein Ausschluss trägt,
+ist ein Urteil, und ein Pflichtfeld erzeugt Pflichterfüllung. **Die Reichweite,
+beide Hälften:** Der Abschnitt hat bei einem Adopter dreimal nachweisbar
+getragen — jedes Mal als Adresse für Wachstum, das sonst stillschweigend
+mitgenommen worden wäre. Er hat aber nicht verhindert, dass ein Slice wächst;
+derselbe Bestand führt einen, der *mit* vollständigem Abschnitt von 3 auf 23
+Träger wuchs. Er macht Wachstum **benennbar**, nicht unmöglich: Wer später
+mitnimmt, was hier ausgeschlossen war, hat den Plan geändert, nicht nur
+ergänzt.
+
 ## Worked Mini-Example: Bootstrap-Modus pro Sub-Area für einen Slice begründen
 
 > **Wenn du Bootstrap-Modi schon routinemäßig pro Sub-Area gegen Kriterien wählst, springe zu [§Übungen](#übungen).** (Expertise-Reversal-Schutz analog zum Slice-Schnitt-Beispiel oben — wer das Modus-Konzept aus [Modul 2](../01-spec-und-architektur/modul-02-harness-bootstrap.md) bereits in der Slice-Planung einsetzt, zahlt sonst extraneous Load fürs Nochmal-Durchgehen.)
@@ -330,7 +361,17 @@ Bewertungsleistung — Letztere folgt in Schritt 1.
 
 Bevor der erste Block geschrieben wird, laufen zwei Prüfungen. Sie hängen
 weder am Modus noch am Slice-Typ und stehen deshalb in **jedem** Slice-Plan —
-auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht:
+auch bei reinem Refactor, auch wenn am Ende „alles GF" dasteht.
+
+**Der Begründungsblock dagegen ist bedingt**, und das ist der Unterschied, den
+die Gliederung tragen muss: Pflicht, sobald mindestens eine berührte Sub-Area
+BF oder Hybrid ist — einer pro Sub-Area; bei reinem GF genügt der Hinweis
+*„alle berührten Sub-Areas GF"*; bei reinem Refactor ohne neue
+Sub-Area-Berührung entfällt **er** — nicht der Abschnitt, der ihn enthält. Ein
+Abschnitt, dessen Titel nur die bedingte Hälfte nennt, lädt dazu ein, die
+unbedingte mit ihr fallen zu lassen; deshalb nennt der Titel beide.
+
+Die zwei Prüfungen:
 
 1. **Sub-Area-Wahl prüfen.** Jede Sub-Area, die der Slice als berührt führt,
    muss das Inklusionskriterium erfüllen — drei Achsen, Schwelle ≥ 2
@@ -421,7 +462,7 @@ Reconciliation — **Modus: GF.** Hier reicht ein Verweis; die volle
 Begründungs-Tiefe demonstrieren Sub-Areas 1–3.
 
 **Template für den Begründungsblock** — kanonisch in
-[§8 Sub-Area-Modus-Begründung](../../../lab/templates/docs/plan/planning/slice.template.md)
+[§8 Sub-Area-Prüfungen und Modus-Begründung](../../../lab/templates/docs/plan/planning/slice.template.md)
 des Slice-Plan-Templates; hier zum Lesen abgedruckt, **byte-identisch
 mit dem dortigen Format**, damit Kopieren von hier oder vom Template
 denselben Block ergibt:
@@ -470,6 +511,14 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 * **(Erschaffen — aktiviert LZ 4)** Formuliere für einen Slice, den du nach `done/` bewegst, *zwei* beobachtbare Closure-Kriterien *und* einen Lerneintrag. Woran erkennst du, dass dein Lerneintrag mehr ist als "Tests grün" — welche der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke) trägt er?
 * **(Analysieren — Transfer aus Modul 2)** Welche Sub-Areas berührt der nächste anstehende Slice — und welcher Modus passt für jede dieser Sub-Areas? Begründe je gegen mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand) — eine Begründung wägt die Kriterien gegeneinander, eine reine "Modus, weil Doku fehlt"-Zuordnung ist Klassifikation, kein Bewerten.
 * **(Erschaffen + Bewerten — aktiviert LZ 3)** Gegeben `slice-031 — Bestell-Checkout` mit DoD aus fünf Punkten (Warenkorb-API · Zahlungs-Integration · Bestätigungs-Mail · Lager-Abbuchung · Audit-Log): (a) Bewerte gegen die zwei Größen-Kriterien — *in einem Agenten-Lauf abschließbar* und *in einer Review-Sitzung prüfbar* — ob er zu groß ist. (b) Schlage *einen* konkreten Schnitt in zwei (oder mehr) lieferbare Slices vor und begründe den Schnitt-Typ (nach Schichten vs. nach Lieferwert).
+
+* **(Bewerten)** Ein Slice-Plan führt vier Ausschlüsse in §1, alle ohne
+  Begründung, und einer davon lautet „keine Migration auf eine andere
+  Datenbank" — etwas, das ohnehin niemand erwogen hat. Welche der vier Klassen
+  trägt er, welche nicht, und warum ist *ein* begründeter Ausschluss hier mehr
+  wert als diese vier? Prüfe zusätzlich, ob eine Weiterleitung *„das übernimmt
+  slice-NNN"* eine Adresse ist: Was muss bei `slice-NNN` gelten, damit sie eine
+  ist?
 
 ### Selbstcheck-Rubrik
 

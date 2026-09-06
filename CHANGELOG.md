@@ -11,6 +11,106 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 124 — 2026-09-06 · Der Slice-Plan bekommt seine Abgrenzung
+
+Change Request von d-check (Adopter, 2026-09-06, gegen Baseline `v6.3.1`), zwei
+Bitten, beide angenommen — die zweite mit abweichender Lösung, die der
+Antragsteller anerkannt hat.
+
+**Bitte 1 — Out-of-Scope im Slice-Plan.** `modul-06-roadmap.md` behauptet über
+die Wellen-Eröffnung: *„Out-of-Scope gehört dazu — dieselbe Disziplin wie im
+Lastenheft (Modul 3) und im Slice-Plan (Modul 9)."* Für das Lastenheft stimmt
+das (`lastenheft.template.md` führt `**Out-of-Scope:**` je Anforderung und einen
+globalen Abschnitt), für den Slice-Plan nicht. **Die Diagnose ist dabei eine
+andere als die des CR:** Modul 9 führt Out-of-Scope an drei Stellen — in der
+Plan-Ausgabe des Worked Example, als Review-Kriterium und in einem
+voraussetzenden Nebensatz. Alle drei sind Didaktik-Formen, und der Spiegel lässt
+Didaktik weg; deshalb steht dort 0, und deshalb erreichte nichts die Vorlage.
+Nicht „Regel fehlt", sondern **„Regel existiert nur als Erzählung"**.
+
+Modul 5 trägt sie jetzt als Norm, im selben Absatz-Muster wie „Der Kopf nennt
+die berührten Spec-Stellen": **§1 nennt Ziel und Abgrenzung**, je Punkt eine
+Begründung — ein Ausschluss ohne Grund ist eine Behauptung. Die **vier Klassen**
+kommen von d-check — drei aus dem CR, die vierte aus ihrer nachgereichten
+Formulierungs-Vorlage, gelebt an fünf geschlossenen Slices (CR-Text): Folge-Slice mit Kennung · Bestand
+bleibt bewusst stehen · es wäre ein anderer Vorgang · Schicht-Abgrenzung. Die
+vierte hatten sie im CR selbst übersehen und nachgereicht; sie ist laut ihrer Vorlage die
+häufigste (vier von sechs Abschnitten), weil sie beim Review sofort prüfbar
+ist — und sie hält den Slice in seiner Schicht. Ebenfalls übernommen: keine
+Mindestzahl, kein Sensor darauf (*„ein Pflichtfeld erzeugt Pflichterfüllung"*)
+— und die **gemessene Reichweite**: Der Abschnitt verhindert Wachstum nicht, ein
+Slice des Adopters wuchs *mit* vollständigem Abschnitt von 3 auf 23 Träger. Er
+macht das Wachstum benennbar; wer später mitnimmt, was ausgeschlossen war, hat
+den Plan geändert, nicht ergänzt.
+
+**Bitte 2 — die Vorgelagert-Blöcke standen im Abschnitt, der entfallen darf.**
+Der Widerspruch war real und zweimal in Prosa überbrückt (im Template und in
+`lab/templates/README.md`). d-check schlug einen eigenen Abschnitt davor vor;
+das hätte umnummeriert. **Gemessen: `§8` ist eine Adresse, 38-mal genannt, davon
+6-mal in Zeitdokumenten** (Review-Report, Beobachtungs-Beleg, Übungs-Fixture),
+die nach der Zeitform-Regel nicht nachgezogen werden — Kommando:
+`git grep -o '§8' HEAD -- 'kurs/de' 'lab' | wc -l`, für die Teilmenge dieselbe
+Zeile über `lab/example/docs/reviews`, `…/observations` und `lab/example/exercises`.
+Und `modul-06-roadmap.md` adressiert §8 heute schon für den Vorgelagert-Block —
+falsch war also nicht die Nummer, sondern der **Titel**, der allein die bedingte
+Hälfte nannte. §8 heißt jetzt `Sub-Area-Prüfungen und Modus-Begründung`, die
+zwei Prüfungen stehen als unbedingter Kopf voran, der Modus-Begründungsblock als
+bedingter Rumpf. Die zwei Prosa-Pflaster sind damit **nicht verschwunden,
+sondern entlastet**: Sie erklären jetzt die Gliederung, statt gegen sie
+anzuschreiben — der Satz „Die beiden *Vorgelagert*-Blöcke entfallen nie" ist
+weg, weil die Reihenfolge ihn trägt; was steht, benennt die Bedingtheit des
+Rumpfs. Die Bedingungen selbst (BF/Hybrid-Pflicht, GF-Kurzform,
+Refactor-Ausnahme) standen bisher **nur** in `lab/templates` und sind jetzt in
+Modul 5 und im Spiegel verankert.
+
+**Dieselbe Messung entschied die Platzierung von Bitte 1.** Der CR schlug den
+Abschnitt zwischen Vorgehen und DoD vor; unsere Folge ist §1 Ziel → §2 DoD →
+§3 Plan, die Einfügung läge also **vor §2** und verschöbe alles danach —
+gemessen **158 Nennungen** von §2, §3, §7 und §8 plus 13 Slice-Dateien
+(`for n in 2 3 7 8; do git grep -o "§$n" HEAD -- 'kurs/de' 'lab' | wc -l; done`).
+Also derselbe Zug: **§1 heißt `Ziel und Abgrenzung`** und trägt beide Hälften,
+Scope neben Gegen-Scope wie im Lastenheft, ohne dass eine Nummer sich bewegt.
+
+**Titel-Abweichung, benannt:** Die Vorlage führt den Abschnitt als *„Ausdrücklich
+NICHT in diesem Slice"* — d-checks Frageform, weil ihr Argument trägt
+(*„Out-of-Scope" lädt zur Aufzählung des Fernliegenden ein*). Damit der Kanon
+trotzdem an einem Wort hängt, nennt die Regel selbst die Herkunft: *„das ist die
+**Out-of-Scope**-Disziplin des Lastenhefts, auf den Slice-Plan angewandt"* —
+`git grep -c 'Out-of-Scope'` findet beide Enden.
+
+**Und Modul 6 zeigte weiter ins Leere.** Sein Satz nannte für die Slice-Hälfte
+allein Modul 9, das die Disziplin nur erzählt. Er nennt jetzt **beide Ebenen**,
+weil es zwei sind: die **Dokument**-Hälfte (§1 des Slice-Plans, Modul 5) und die
+**Schritt**-Hälfte (die Out-of-Scope-Zeile der Plan-Ausgabe, Modul 9). Modul 9
+sagt das jetzt auch selbst — bisher stand dort nur ein Worked Example, weshalb
+sein Spiegel null Treffer hatte; er trägt die Regel jetzt. Ohne das hätte diese
+Welle die Lücke nur verschoben statt geschlossen.
+
+**`lab/example` nur zur Hälfte nachgezogen — und die Grenze ist enger, als sie
+zunächst formuliert war.** Die drei **lebenden** Slices (`open/`,
+`in-progress/`) tragen die neue Form samt Abgrenzung; die acht in `done/` und
+die Übungs-Fixture bleiben. „Abgeschlossenes wird nie nachgezogen" wäre
+allerdings falsch: `git log -S` zeigt mehrere strukturelle Nachzüge am
+Altbestand — Welle 68 rüstete ein Kopf-Feld in alle acht `done/`-Slices nach,
+Welle 116 zog die Register-Verweise. Die Grenze verläuft nicht zwischen alt und
+neu, sondern zwischen **was der Plan damals sagte** (bleibt) und **ob seine
+Verweise heute noch auflösen** (wird nachgezogen). Ein Abschnitt, den es damals
+nicht gab, fällt in die erste Hälfte. Das steht jetzt auch im Beispiel selbst
+(`lab/example/docs/plan/planning/README.md`), damit ein Leser die neun alten
+Formen nicht für einen Fehler hält; die Fixture sagt es in ihrem eigenen Kopf,
+denn bei ihr ist der Grund ein anderer — sie trägt genau drei Fehler und darf
+keinen vierten bekommen.
+
+**Diese Welle behauptet kein beobachtbares Verhalten** — Abschnitts-Form und
+Abschnitts-Titel sind Doku-Konvention, und d-check bittet ausdrücklich um
+*keinen* Sensor darauf. Kein Szenario, und das steht hier, wie `AGENTS.md` §3
+es seit Welle 122 verlangt.
+
+Gates: `make check` — d-check 251 Dateien 0 Befunde, docs-check 226 Dateien
+0 ERROR/0 WARN, alignment-check 0 WARN; `make -C lab/example verify` 108/0
+(der `ids`-Sensor fing dabei eine nackte `ADR-0002`-Kennung im neuen
+Abgrenzungs-Block — behoben, nicht umgangen); `make bundle-check` 52/0.
+
 ## Welle 123 — 2026-09-06 · Zwei Altbefunde, die Welle 120 berührt hat
 
 Der Review von Welle 120 meldete zwei INFO — beide älter als die Welle, beide

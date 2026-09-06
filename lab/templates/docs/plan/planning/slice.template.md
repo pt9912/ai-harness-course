@@ -36,15 +36,37 @@ Verzeichnis. Kein Sensor prüft das Feld — es ist Deklaration. -->
 
 ---
 
-## 1. Ziel
+## 1. Ziel und Abgrenzung
 
-<!-- BEDIENHINWEIS: ein Satz, Liefer-Fokus, kein "wir machen aufraeumen". -->
+<!-- BEDIENHINWEIS: Ziel = ein Satz, Liefer-Fokus, kein "wir machen
+aufraeumen". Abgrenzung = je Punkt eine Begruendung, nicht nur eine Nennung:
+ein Ausschluss ohne Grund ist eine Behauptung. Keine Mindestzahl — ein echter
+Ausschluss ist besser als vier erfundene. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
 §Ziel-Form: Slice — Schnitt nach Lieferwert, nicht nach Schichten; jeder Slice
-ist einzeln lieferbar.
+ist einzeln lieferbar. **§1 nennt Ziel und Abgrenzung** (Out-of-Scope-Disziplin
+des Lastenhefts, auf den Slice-Plan angewandt); die vier Klassen des
+Ausschlusses stehen in **eben diesem Abschnitt** des Baseline-Regelwerks,
+zusammen mit der Begründungs-Pflicht je Punkt.
 
-<…>
+**Ziel:** <…>
+
+**Ausdrücklich NICHT in diesem Slice** — je Punkt mit Begründung:
+
+- <Ausschluss — Begründung.>
+- <weiterer, falls es einen gibt>
+
+**Keine Mindestzahl.** Ein Slice mit *einem* echten Ausschluss ist besser als
+einer mit vier erfundenen; die vier Klassen sind ein Suchraster, keine
+Ausfüll-Liste. Suchreihenfolge: Was übernimmt ein **Folge-Slice** (mit
+Kennung — und die Kennung muss den Punkt auch annehmen)? Was bleibt als
+**Bestand** bewusst stehen (mit Begründung)? Was wäre ein **anderer Vorgang**?
+Welche **Schicht** rührt der Slice nicht an?
+
+Was hier steht, ist die Grenze, an der ein wachsender Slice sich messen lässt:
+Wer später etwas mitnimmt, das hier ausgeschlossen war, hat den Plan
+**geändert**, nicht nur ergänzt.
 
 ## 2. Definition of Done
 
@@ -150,7 +172,7 @@ Backticks).
 - **Risiken aus §6:** <jedes mit genau einem Ausgang — siehe §6>
 - **Drei Paarungen:** <nur im Repo ohne Wellen-Betrieb — Anker · Folge-Slice · Register, Ergebnis>
 
-## 8. Sub-Area-Modus-Begründung
+## 8. Sub-Area-Prüfungen und Modus-Begründung
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
 §Ziel-Form: Sub-Area-Modus-Begründung — dort die **zwei vorgelagerten
@@ -159,17 +181,21 @@ Slice-Typ) und die **vier Pflichtkriterien** (Konventionen-Dichte ·
 Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand), vier und
 nicht mehr.
 
-**Umfang.** Der **Modus-Begründungsblock** unten ist Pflicht, sobald
-mindestens eine berührte Sub-Area BF oder Hybrid ist — einer pro Sub-Area. Bei
-reinem GF genügt der Hinweis *"alle berührten Sub-Areas GF"*; bei reinem
-Refactor ohne neue Sub-Area-Berührung entfällt er ganz. Die beiden
-*Vorgelagert*-Blöcke entfallen nie.
+**Der Abschnitt selbst entfällt nie.** Die zwei vorgelagerten Prüfungen laufen
+in **jedem** Slice-Plan — sie hängen weder am Modus noch am Slice-Typ. Bedingt
+ist allein der Modus-Begründungsblock am Ende; deshalb nennt der Titel beide
+Hälften.
 
 **Vorgelagert — Sub-Area-Wahl prüfen:** <je berührter Sub-Area: erfüllt sie
 die Schwelle ≥ 2 von 3 Achsen? zu grobe vorher ausdifferenzieren>
 
 **Vorgelagert — offene Beobachtungen sichten:** <Register durchgegangen;
 je berührter Sub-Area der Treffer mit Zähler-Stand — oder "keine Treffer">
+
+**Modus-Begründungsblock — Umfang.** Pflicht, sobald mindestens eine berührte
+Sub-Area BF oder Hybrid ist — einer pro Sub-Area. Bei reinem GF genügt der
+Hinweis *"alle berührten Sub-Areas GF"*; bei reinem Refactor ohne neue
+Sub-Area-Berührung entfällt **er** — nicht der Abschnitt.
 
 <!-- Block für jede berührte Sub-Area duplizieren. Format identisch
 mit dem im Baseline-Regelwerk §Ziel-Form: Sub-Area-Modus-Begründung
