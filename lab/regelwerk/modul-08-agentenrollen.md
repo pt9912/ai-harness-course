@@ -56,7 +56,7 @@ Die Schritt-Nummern sind die der Closure-Prozedur, alle sechs; Schritt 3 hat
 drei Teile.
 
 | Closure-Schritt | Träger | Übergabe-Artefakt |
-|---|---|---|
+| --- | --- | --- |
 | **1** — Trigger prüfen | **Verifier** → Planner | repo-weiter Verifikations-Beleg (`fullbuild`-Hash, Replay-Ergebnis); er geht über die Slice-DoDs hinaus und steht in keiner von ihnen |
 | **2** — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage (fällige Trigger) → Verdikt (bestätigt / Folge-ADR mit `supersedes` / neue Stufe) |
 | **3a** — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
@@ -82,7 +82,7 @@ Vorgänge laufen trotzdem, getragen von der Slice-Closure und der Slice-Planung
 bleiben, einer entfällt ganz.**
 
 | Übergabe | ohne Wellen-Betrieb |
-|---|---|
+| --- | --- |
 | Planner → Architect → Planner (Trigger-Audit) | **bleibt** — bei jeder Slice-Closure statt einmal pro Welle |
 | Planner → Architect → Planner (Verkörperung) | **bleibt** — Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
 | Planner → Verifier → Planner (repo-weiter Verifikations-Beleg) | **entfällt** |
@@ -161,7 +161,7 @@ genau die Artefaktklasse geführt, die ihr Urteil trägt — und das ist
 meistens kein Skill:
 
 | Artefaktklasse | Wann | Rollen |
-|---|---|---|
+| --- | --- | --- |
 | **Template** (Slice, Roadmap, ADR) | Das Urteil ist an einem Artefakt verankert: *was* zu tun ist, steht in der Vorlage und im Vorgänger-Artefakt. | Planner · Architect |
 | **Briefing** (`AGENTS.md` + 8-Schritt-Workflow) | Das Urteil folgt einem festen Ablauf mit repo-weiten Regeln. | Implementer |
 | **Skill-Datei** (`.harness/skills/*.md`) | Das Urteil ist *inferential* **und** beruht auf repo-spezifischem Wissen, das **aus keinem Artefakt ableitbar** ist. | Reviewer |
@@ -207,7 +207,7 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
   weil Übergabe-Artefakte fehlen:
 
 | Verdikt | Folge-Sequenz | Übergabe-Artefakt |
-|---|---|---|
+| --- | --- | --- |
 | ADR gilt, Slice-Plan hat falsch behauptet | A → P Plan-Korrektur; P → I neuer Plan; ADR-konforme Neu-Implementierung | Plan-Diff mit Korrektur-Begründung |
 | ADR wird per Folge-ADR `supersedes`d | A → R Folge-ADR (`supersedes`); R aktualisiert Skill-Datei | Folge-ADR (Accepted) · Skill-Patch |
 | Lockerung legitim, aber undokumentiert | A → P → I Sofort-PR zieht Lockerung als Folge-ADR nach; Slice nicht still abschließen | Folge-ADR + Erinnerungs-Slice in `next/` |

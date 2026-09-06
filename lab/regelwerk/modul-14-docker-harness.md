@@ -58,7 +58,7 @@ Der Hash adressiert *ein* Image; er trägt, solange dieses Image noch existiert
 überschreibt, ist keine Adresse, sondern eine Notiz.
 
 | Form | Was den Lauf adressiert | Bedingung |
-|---|---|---|
+| --- | --- | --- |
 | **Archiv** | der Digest des gebauten Images | das Image wird aufbewahrt — gepusht oder nachweislich vorgehalten |
 | **Rezept** | Commit der Quellen **und** die gepinnten Digests der Eingangs-Images | beim Build wird nichts installiert, jede Eingabe ist digest-gepinnt |
 
@@ -109,12 +109,12 @@ NuGet), ist die **Gate-Stage selbst** das Gate — `docker build --target
 lint-gate`. Dann aber zwei Griffe, sonst ist es kein Gate mehr:
 
 | Griff | Warum |
-|---|---|
+| --- | --- |
 | `--no-cache-filter <stage>` | führt genau diese Stage neu aus, während `repo` und die Werkzeug-Layer gecacht bleiben. Ohne ihn wiederholt ein gecachtes Grün nur, dass *dieser Stand* schon einmal durchlief — der Gate urteilt nicht, er erinnert sich. |
 | **kein** `-q` | mit `-q` zeigt ein roter Gate nur *„exit code: 1"*. Die Befunde des Werkzeugs stehen im Build-Log, und genau die braucht der, der sie beheben soll. |
 
 | Eigenschaft | Wirkung |
-|---|---|
+| --- | --- |
 | Quellen per `COPY`, kein Mount | der Baum ist während des Laufs unerreichbar — ein Gate *kann* ihn nicht ändern |
 | Rückweg über `stdout`, host-seitig ausgepackt | der schreibende Prozess ist der Host: die Belege gehören dem, der sie angefordert hat |
 | Gate-Stage und Beleg-Stage getrennt | das Urteil bricht den Build, der Report entsteht trotzdem ([Modul 13](modul-13-quality-gates.md#gate-und-beleg--zwei-rollen-derselben-prüfung)) |

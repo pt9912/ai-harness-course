@@ -26,6 +26,7 @@
 | Guide | Feedforward-Kontrolle: lenkt den Agenten *vor* der Handlung (Spec, ADR, AGENTS.md, Skill, Tool-Constraint). |
 | Sensor | Feedback-Kontrolle: prüft *nach* der Handlung (Linter, Test, ArchUnit, Reviewer-Agent). |
 | Fitness Function | Maschinell prüfbare Architektur-Aussage (z. B. Modulgrenze, Latenzbudget). |
+| RTM | *Requirements Traceability Matrix*, deutsch Anforderungs-Rückverfolgbarkeits-Matrix: je Anforderung ihre Belege, und sichtbar die **Waisen** ohne einen. **Auslesestand, kein Artefakt** — erzeugt aus den Verweis-Quellen, die das Repo als entlastend deklariert (im Kurs-Vorschlag: der Slice), nicht daneben gepflegt; als Dokument geführt wäre sie eine Kopie und driftete. Bericht und Vollständigkeits-Gate sind derselbe Lauf ([§Die zweite Richtung](traceability.md#die-zweite-richtung-anforderung--beleg)). Nicht die Richtungs-Prüfung über die Spec-Straten — die prüft, ob ein Verweis *erlaubt* ist, die RTM, ob es ihn *gibt*. |
 | Steering Loop | Wiederkehrendes Muster: beobachtetes Agenten-Versagen → Guide/Sensor verbessern → Wiederholung reduzieren. |
 | AGENTS.md | Maschinell lesbare Projekt-Konventionen für Agenten (Codestil, Tool-Regeln, Layering, Verbote). Quasi-Standard nach OpenAI/Codex. |
 | Constrain / Inform | OpenAI-Doppelaufgabe des Harness: *constrain* = Grenzen ziehen (Architektur, Tools, Layer), *inform* = Kontext liefern (Spec, ADR, AGENTS.md, Skills). |

@@ -57,6 +57,16 @@ Daraus fünf Operationen:
 Ersetzen, Umstellen, Verallgemeinern (`slice-019` → *„Slices"*), Verdichten
 eines bleibenden Satzes, und jede Aussage, die die Quelle nicht macht.
 
+**Auch die Form zählt, nicht nur der Wortlaut.** Zellen ausrichten, eine Liste
+zu Fließtext fügen, eine Überschrift umstufen — nichts davon ändert ein Wort,
+und deshalb bestehen beide Proben aus Teil 3. Erlaubt ist es trotzdem nicht:
+Keine der fünf Operationen deckt es, und der Spiegel ist das ausgelieferte
+Artefakt, das Adopter pro Entscheidung abschnittsweise laden. Am eigenen Bestand
+gemessen (Welle 128): 18.254 Füll-Leerzeichen in ausgerichteten Tabellen, 58 je
+Tabellenzeile gegen 3,6 in der Quelle — wortgleich, formfremd, und von keiner
+Probe gefangen. Wer eine Formänderung für nötig hält, erweitert die Liste, wie
+bei jeder anderen sechsten Operation.
+
 **Die Liste ist abschließend gemeint, nicht abschließend bewiesen** — sie ist
 aus sechs Anwendungen am eigenen Bestand gewonnen. Wer eine sechste Operation
 findet, die keine der fünf trägt, erweitert sie; das ist der reguläre Weg, nicht

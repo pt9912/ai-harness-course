@@ -11,6 +11,240 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 128 — 2026-09-06 · Der Spiegel richtet keine Tabellen aus
+
+Beobachtung an den Bundle-Dateien: Die Tabellen in `lab/regelwerk/` sind auf
+feste Spaltenbreite gepaddet, die Quelle ist es nicht.
+
+| | Tabellenzeilen | Füll-Leerzeichen | je Zeile |
+|---|---|---|---|
+| Quelle `kurs/de` | 1.161 | 4.233 | 3,6 |
+| Spiegel `lab/regelwerk` | 317 | 18.254 | **58** |
+
+Bei einem Viertel der Zeilen sechzehnmal so viel Füllung; `grundlagen-begriffe.md`
+allein trug 10.575 Leerzeichen in 44 Zeilen. Der Vergleich zeigt zugleich, dass
+der **Split** sie eingeführt hat — nicht der Kurs.
+
+**Zwei Gründe, warum das mehr ist als Kosmetik.** Der Spiegel ist genau das
+Artefakt, das Adopter vendorn und ihre Agenten pro Entscheidung abschnittsweise
+nachschlagen; 18.254 Zeichen Füllung sind Kontext-Kosten, die bei jedem Lauf
+anfallen und nichts tragen — gegen die Disziplin, die das Regelwerk für sich
+selbst verlangt. Und formal ist Ausrichten **keine** der fünf erlaubten
+Spiegel-Operationen (`docs/regelwerk-extrakt.md` Teil 2).
+
+- **`lab/regelwerk/*.md`**: Padding entfernt, rein mechanisch. **Kein Zeichen
+  außer Whitespace hat sich geändert** — belegt, nicht behauptet: Nach Entfernen
+  aller Leerzeichen und Tabs ist jede Datei byte-identisch zu vorher (MD5 über
+  `tr -d ' \t'`), und die Zeilenzahl stimmt überall. Der erste Entwurf des
+  Skripts verletzte diese Invariante (er normalisierte Trennzeilen `-----` →
+  `---`, markdown-äquivalent, aber eine Zeichen-Änderung); die Probe meldete es
+  an sechs Dateien. Die dadurch ungesparten 2.745 Zeichen sind der Preis dafür,
+  dass die Prüfung eine Prüfung bleibt.
+- **`docs/regelwerk-extrakt.md` Teil 2**: der Satz, der erklärt, warum es
+  jahrelang durchkam — eine Formänderung **besteht beide Proben aus Teil 3**,
+  weil sie kein Wort ändert. Erlaubt ist sie trotzdem nicht; wer eine für nötig
+  hält, erweitert die Fünfer-Liste, wie bei jeder anderen sechsten Operation.
+
+**Diese Welle behauptet kein beobachtbares Verhalten** — der Bestand ist
+byte-identisch bis auf Whitespace, kein Sensor sieht einen Unterschied. Kein
+Szenario, wie `AGENTS.md` §3 es verlangt zu benennen.
+
+Gates: `make check` — d-check 251 Dateien 0 Befunde, docs-check 226 Dateien
+0 ERROR/0 WARN, alignment-check 0 WARN; `make bundle-check` 52/0.
+
+## Welle 127 — 2026-09-06 · Die zweite Traceability-Richtung
+
+Anlass war eine Rückfrage nach dem Kürzel **RTM**. Der Korpus führte es
+dreifach und verband es nirgends:
+
+- `grundlagen/fallstudien.md` nennt „Traceability-Matrix" als Harness-Schwerpunkt
+  der Klasse *Policy/Compliance-Flagship* — ohne Erklärung, ohne Zeiger.
+- Modul 13 nennt `doc-trace` als advisory-Target — ohne zu sagen, was es ausgibt.
+- Das Werkzeug selbst sagt es: `--trace` gibt die **Requirements Traceability
+  Matrix (RTM)** auf stdout aus, *read-only, kein Dokument erzeugt*; mit
+  `--require-complete` fällt der Lauf bei ≥ 1 Waise.
+
+**Die Lücke war größer als ein Glossar-Eintrag.** `traceability.md` lehrt eine
+Richtung — *keine Änderung ohne Bezug zu einer ID*, ein Commit-Hook prüft sie.
+Die Gegenrichtung fehlte: Anforderungen, die **nie** eine Änderung ausgelöst
+haben. Ein Repo kann jede Commit-Message sauber verankert haben und trotzdem
+Anforderungen ohne Test, Gate oder Slice führen — lückenlos in der geprüften
+Richtung, leer in der anderen.
+
+- **`grundlagen/traceability.md` §Die zweite Richtung** (Quelle und Spiegel):
+  die RTM als **Auslesestand, nicht Artefakt** — erzeugt aus den Ankern, nicht
+  daneben gepflegt; als Dokument geführt wäre sie eine Kopie, und Kopien
+  driften. Bericht und Gate sind **derselbe Lauf**, nicht zwei Werkzeuge.
+- **Glossar** (Quelle und Spiegel): `RTM` mit Auflösung und der Abgrenzung
+  gegen die Richtungs-Prüfung über die Spec-Straten — die prüft, ob ein Verweis
+  *erlaubt* ist, die RTM, ob es ihn *gibt*. Werkzeuge benennen beides ähnlich;
+  der Unterschied ist Richtung gegen Abdeckung.
+- **`fallstudien.md`**: Die Compliance-Zeile bekommt den Zeiger, den sie
+  schuldig blieb.
+
+**Zwei Fassungen dieser Regel waren falsch, bevor die dritte stand.** Der erste
+Entwurf zählte den ADR-Verweis als entlastenden Anker; der Lauf widerlegte das.
+Die zweite Fassung deutete den Lauf als *Semantik der Straten* — und der Review
+widerlegte auch das, mit zwei Gegen-Läufen: Zeigt `trace.slices.dir` auf das
+ADR-Verzeichnis, entlastet dieselbe ADR; eine kuratierte Nachweis-Datei
+entlastet ganz ohne Slice. Das Werkzeug kennt keine Straten, es kennt eine
+Spalte, die gatet, und die Zuordnung ist Konfiguration.
+
+Die Regel steht jetzt als das, was sie ist: **eine Setzung, die aufgeschrieben
+gehört.** Nicht *„welche Spalte gatet"*, sondern *welche Zusage eine Anforderung
+schließt* — der Vorschlag dieses Kurses ist der **Slice**, weil eine ADR
+begründet und ein Slice verpflichtet; eine Anforderung mit ADR und ohne Slice
+ist begründet und ungebaut. Ein Repo, das anders schneidet, trifft eine legitime
+Wahl und deklariert sie. `s22b` belegt die Kurs-Setzung am Konventions-Default,
+nicht ein Naturgesetz.
+
+**Szenario `s22`**, vier Verdikte: **a** Anforderung ohne Verweis → Exit 1 ·
+**b** nur eine ADR → ADR steht in der Zeile, Status bleibt WAISE · **c** ein
+Slice → grün, keine WAISE-Zelle · **d** derselbe Befund ohne Schalter → Exit 0.
+Geprüft wird die **Status-Zelle** `| WAISE |`, nicht das Wort irgendwo: Die
+Test-Kennung heißt darum `LH-FA-OFFEN-001` — die erste Fassung hieß
+`…-WAISE-…` und fand ihren eigenen Abdruck in der Kennungs-Spalte (Review-Befund
+MEDIUM). Jede Ergänzung hängt an einer `schritt`-Vorbedingung, dass sie
+tatsächlich in der Datei steht.
+
+**Nicht mitgenommen:** Kein Repo dieses Korpus schaltet `--require-complete`
+scharf — weder der Kurs noch `lab/example`; das Target steht in beiden nur als
+*vorhanden, nicht als Gate behauptet*. Die Welle lehrt den Träger, sie aktiviert
+ihn nicht. Wer ihn scharf schaltet, braucht zuerst ein Lastenheft ohne
+Alt-Waisen, und das ist ein eigener Vorgang.
+
+Läufe: Gruppe `s22` 4/4; voller Lauf **58 PASS, 0 FAIL, 0 KAPUTT**.
+
+Gates: `make check` — d-check 251 Dateien 0 Befunde, docs-check 226 Dateien
+0 ERROR/0 WARN, alignment-check 0 WARN.
+
+## Welle 126 — 2026-09-06 · Drei Freigaben, nicht eine
+
+Steering-Loop-Eintrag aus einem beobachteten Fehllauf in dieser Sitzung, nicht
+aus einer Überlegung: Auf die Frage *„Soll ich Welle 124 committen und als
+v6.4.0 releasen?"* lautete die Freigabe **„erst 124 committen"**. Der Agent hat
+committet, gepusht, getaggt und den Tag gepusht — womit der Workflow das Bundle
+veröffentlichte. Die Freigabe nannte einen Schritt, ausgeführt wurden vier.
+
+Der Mechanismus ist benennbar und deshalb encodierbar: In derselben Sitzung war
+zweimal zuvor (`v6.3.0`, `v6.3.1`) die **ganze** Kette freigegeben worden. Die
+Freigabe wurde mitgenommen statt neu geholt, und eine enge Antwort auf eine
+Doppelfrage als Ja auf die ganze Frage gelesen.
+
+- **`AGENTS.md` §5**: *Committen, Pushen und Taggen sind drei Freigaben, nicht
+  eine.* Ein Wort, das eine davon nennt, erstreckt sich nicht auf die nächste;
+  die Antwort auf eine Doppelfrage reicht so weit wie ihr **Wortlaut**, nicht
+  wie die Frage. Im Zweifel die engere Lesart und nachfragen. Und der Satz, der
+  den beobachteten Fall trifft: Eine frühere Freigabe für alle drei Schritte
+  gilt für den Vorgang, in dem sie gegeben wurde, nicht für den nächsten.
+- **`AGENTS.md` §6**: *Ein veröffentlichter Tag wird weder bewegt noch
+  zurückgezogen.* Adopter vendorn den Baum unter seinem Tag und prüfen ihn
+  gegen das `SHA256SUMS` des Releases; nach einem Zug wäre `vX.Y.Z` bei ihnen
+  etwas anderes als hier, und sie erführen es erst beim nächsten
+  `baseline-verify`. Ein Fehler im Release wird durch das **nächste** Release
+  behoben, nicht durch das vorige — deshalb steht die Tag-Freigabe in §5
+  gesondert: Er ist der einzige Schritt der Kette, den keiner zurücknehmen kann.
+
+**Der Fehllauf ist nicht rückgängig gemacht, und das folgt aus der neuen Regel
+selbst.** `v6.4.0` bleibt stehen; der Inhalt war die reviewte, korrigierte
+Welle 124 mit geprüftem Bundle. Falsch war nicht, *was* veröffentlicht wurde,
+sondern *wer es entschieden hat*. Welle 125 geht deshalb auf `v6.5.0`.
+
+**Kein Spiegel-Nachzug, keine `Stand:`-Zeile:** `AGENTS.md` ist das Briefing
+dieses Repos, nicht das gelehrte Artefakt — die gelehrte Form steht in
+`lab/templates/AGENTS.template.md` und bleibt unberührt. Ob die Regel dorthin
+gehört, ist eine eigene Frage: Sie ist allgemein genug (jedes adoptierende Repo
+hat unumkehrbare Außenschritte), aber sie beschreibt die Grenze zwischen Mensch
+und Agent, nicht die zwischen Artefakten. Vertagt, nicht übersehen.
+
+**Diese Welle behauptet kein beobachtbares Verhalten** — Freigabe-Semantik ist
+Briefing, kein Sensor-Fall. Kein Szenario, wie `AGENTS.md` §3 es verlangt zu
+benennen.
+
+Gates: `make check` — d-check 251 Dateien 0 Befunde, docs-check 226 Dateien
+0 ERROR/0 WARN, alignment-check 0 WARN.
+
+## Welle 125 — 2026-09-06 · Kennung statt Adresse, als Klasse
+
+Change Request von `ai-harness-init` (Adopter, 2026-09-06, gegen vendored
+`v6.0.0`): Die Report-Vorlage schweigt zur Zitier-Form auf den vendored Baum.
+Gemessen dort und nachgerechnet: **32 Links auf den tag-gepinnten Baum in 14
+Reports**, alle innerhalb von zwei Tagen entstanden
+(`grep -roE '\]\([^)]*\.harness/baseline/[^)]*\)' docs/reviews/`; die zwei
+Rohtreffer darüber sind ein Platzhalter und ein zitiertes Kommando). Die
+zusätzliche Erzählung des CR — sieben Reports einer Prüfreihe hätten genau
+diese Klasse untersucht und dabei siebenmal reproduziert — ist **nicht**
+übernommen: nachgemessen sind es acht Dateien mit zehn Links, und ihr
+Gegenstand ist eine andere ADR. Die Häufungs-Aussage trägt auch ohne sie. Reports frieren nach Modul 10 ein; der Vendoring-Pfad ist
+`<tag>`-gescopt, alte und neue Form liegen beim Bump also eine Weile
+nebeneinander (Modul 2 §Freshness-Audit), und der Link bricht, wenn das alte
+Verzeichnis fällt — nicht beim Bump, sondern später, in Artefakten, die niemand
+mehr editieren darf. Die Absolutaussage des CR („der Baum trägt genau einen Tag,
+der Sprung löscht den alten") ist so **nicht** übernommen; sie widerspräche
+Modul 2.
+Der Einreicher hat die naheliegende Fehlvermutung selbst widerlegt: Es ist
+**keine** stille Verrottung, `links` prüft Zeitdokumente wie jede andere Datei;
+nur `ids` und `codepaths` nehmen sie aus.
+
+**Der Befund trifft härter, als der CR weiß — der Korpus hat diese Klasse
+dreimal beantwortet, jedes Mal anders, und sie nie benannt.** Der
+Adaptions-Block löst sie seit jeher über die **Anker-Indirektion**: Von außen
+wird der Index adressiert, weil die Eintrags-Datei bei Auflösung wandert.
+Welle 120 löste sie für das Gate-Target über eine **Formregel** (Token statt
+Pfad) — die richtige Antwort, aber nur für einen Instanzfall. Und Welle 119
+löste einen **benachbarten** Fall über ein Ausnahme-Ventil
+(`codepaths.exempt-paths`): Dort zitiert ein Report seinen Prüfgegenstand als
+Pfad in Inline-Code, nicht als Link — eine andere Sensor-Achse, die der CR-Fall
+nie berührt hätte. Drei Antworten, keine Klasse. Ohne sie bekäme der vierte Fall
+eine vierte Ad-hoc-Antwort.
+
+- **Quelle und Spiegel** (`grundlagen/harness-dateien.md` §harness/README.md als
+  Einstiegspunkt): Der Welle-120-Absatz ist von der Instanz zur **Klasse**
+  gehoben — *ein einfrierendes Artefakt nennt ein prozess-bewegtes bei seiner
+  Kennung, nicht unter seiner Adresse* —, mit den drei Formen (Gate-Target ·
+  Slice-Kennung · Baseline-Stelle als Tag + Pfad in Inline-Code). Der CR nannte
+  nur die dritte; die zweite steht dabei, weil unsere eigene Welle-119-Ausnahme
+  belegt, dass derselbe Fehler beim Lifecycle-Pfad auftritt.
+- **Die Grenze steht dabei:** Sie gilt für *einfrierende* Artefakte. Ein
+  lebendes verlinkt weiter, und dort ist der Bruch das gewollte Signal
+  (Welle 120, gemessen in `s20f`). Der Unterschied ist nicht die Wichtigkeit des
+  Ziels, sondern ob der Zeiger nachgezogen werden **darf**.
+- **Alle einfrierenden Vorlagen**, nicht nur die des CR: Report-Vorlage
+  (Zitier-Form im Kopf plus die Feldform bei `quelle`), Welle-Ergebnisnotiz und
+  die zwei Archiv-Stubs. Die Regel nennt „Review-Report **und** Closure-Notiz" —
+  nur eine davon zu ziehen wäre derselbe Fehler, den dieser Eintrag Welle 120
+  vorwirft. **Die Vorlagen halten die Form jetzt auch selbst:** Ihre eigenen
+  Baseline-Zitate wandern beim Kopieren in das eingefrorene Artefakt und tragen
+  deshalb den Tag-Platzhalter; der Zitier-Form-Block ist als *bleibend*
+  markiert, damit er nicht mit dem Template-Hinweis gelöscht wird. Ausdrücklich ausgenommen:
+  ein `pfad`-Feld auf den **geprüften Gegenstand** — es zitiert den Stand des
+  Laufs und darf ihn festhalten.
+- **Nicht mitgenommen:** kein Nachrüsten des Bestands (der CR verlangt es
+  ausdrücklich nicht) und kein Gate über den Report-Baum. Die
+  Welle-119-Ausnahme bleibt ebenfalls — aber **nicht**, weil sie überflüssig
+  würde: Sie deckt das `pfad`-Feld auf den geprüften Gegenstand, und genau das
+  nimmt die neue Zitier-Form ausdrücklich aus. Ein Report entstünde darunter
+  zeichengleich weiter; das Ventil deckt laufende Produktion, nicht Altbestand.
+  Ob diese Ausnahme selbst noch die richtige Antwort ist, entscheidet ein
+  eigener Vorgang — sie hier mitzuerledigen hieße, eine Gate-Senkung nebenbei
+  zu revidieren.
+
+**Diese Welle behauptet beobachtbares Verhalten, also hat sie ein Szenario** —
+`AGENTS.md` §3 seit Welle 122. Der CR lieferte das Akzeptanzkriterium fertig
+mit; `s21` fährt es: **s21a** Report verlinkt die Baseline, Tag springt →
+`target-missing` im eingefrorenen Artefakt; **s21b** ein Token-Report bleibt still,
+**während ein Link-Report im selben Baum laut ist**. Die zweite Hälfte ist der
+Wächter: Ohne sie bestünde s21b auch dort, wo der Lauf `docs/reviews/` gar nicht
+sieht. Gegenprobe gefahren — entfernt man den Kontroll-Report, endet der Lauf
+`KAPUTT` und rot. **Was das Szenario nicht entscheidet, steht dabei:** Die
+Tag-Hälfte der Zitier-Form prüft kein Sensor, ein Token bleibt ein Token; sie
+trägt gegen den Menschen, der den Report später liest, nicht gegen das Gate.
+
+Läufe: Gruppe `s21` 2/2; voller Lauf **54 PASS, 0 FAIL, 0 KAPUTT**.
+
+Gates: `make check` — d-check 251 Dateien 0 Befunde, docs-check 226 Dateien
+0 ERROR/0 WARN, alignment-check 0 WARN; `make bundle-check` 52/0.
+
 ## Welle 124 — 2026-09-06 · Der Slice-Plan bekommt seine Abgrenzung
 
 Change Request von d-check (Adopter, 2026-09-06, gegen Baseline `v6.3.1`), zwei

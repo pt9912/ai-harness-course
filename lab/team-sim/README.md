@@ -44,7 +44,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -104,6 +104,12 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s20d | Retirierung sauber: Zeile **und** Datei weg | grün | ✓ „ein retiriertes Gate ist weg" kostet nichts |
 | s20e | Zeitdokument nennt `make <target>` als Token, Gate retiriert | **still** | ✓ der Report bleibt grün |
 | s20f | lebendes Artefakt verlinkt den Pfad, Gate retiriert | **`target-missing`** | ✓ das Paar zu s20e: der Bruch ist das gewollte Signal |
+| s21a | Report **verlinkt** eine Baseline-Stelle, Tag springt | **`target-missing`** | ✓ im eingefrorenen Artefakt, das niemand mehr anfassen darf |
+| s21b | Token-Form still, **während die Link-Form im selben Lauf laut ist** | **still** | ✓ die Link-Hälfte der Regel, gemessen; die Tag-Hälfte prüft kein Sensor — ein Token bleibt ein Token |
+| s22a | Anforderung ohne jeden Verweis, `--require-complete` | **Exit 1**, Status-Zelle WAISE | ✓ die zweite Richtung beißt |
+| s22b | **nur** eine ADR nennt sie | **Exit 1** — ADR in der Zeile, Status bleibt WAISE | ✓ die Setzung des Kurses, gemessen am Konventions-Default: eine ADR begründet, sie verpflichtet nicht |
+| s22c | ein **Slice** nennt sie | Exit 0, keine WAISE-Zelle | ✓ erst die als entlastend deklarierte Quelle zählt |
+| s22d | Bericht **ohne** Schalter, dieselbe Waise | Exit 0 trotz WAISE-Zelle | ✓ urteilsfrei — der Bericht listet, er gatet nicht |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

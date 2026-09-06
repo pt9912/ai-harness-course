@@ -5,6 +5,14 @@
 > (`docs/plan/planning/done/<welle-id>/`). Kopiere, ersetze Platzhalter,
 > lösche diesen Block. Für den Welle-Plan gilt `archiv-stub-welle.template.md`.
 
+> **Zitier-Form** *(bleibt stehen — Norm, kein Ausfüll-Hinweis).* Dieses
+> Artefakt friert ein; was es zitiert, bewegt sich weiter. Deshalb: **Kennung,
+> nicht Adresse** — `slice-NNN` statt seines Lifecycle-Pfads, `make <target>`
+> statt eines Links auf die Sensor-Datei, eine Baseline-Stelle als
+> `v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt> statt als Link
+> (Baseline-Regelwerk `grundlagen-harness-dateien.md` §harness/README.md als
+> Einstiegspunkt — beim Ausfüllen mit dem adoptierten Tag schreiben).
+
 Regeln dieses Artefakts: Baseline-Regelwerk `modul-06-roadmap.md`
 §Wellen-Closure-Prozedur (Modul 6), Schritt 4 — was archiviert wird, was
 liegen bleibt, in welcher Form, und dass die Ergebnisnotiz vollständig **und

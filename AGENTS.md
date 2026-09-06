@@ -105,6 +105,14 @@ Historie, kein Abbild von ihr.
 Nicht ungefragt committen: Änderungen liegen lassen, Gates laufen lassen,
 berichten — committen auf ausdrückliches Wort.
 
+**Committen, Pushen und Taggen sind drei Freigaben, nicht eine.** Ein Wort, das
+eine davon nennt, erstreckt sich nicht auf die nächste. Die Antwort auf eine
+Doppelfrage reicht so weit wie ihr **Wortlaut**, nicht wie die Frage: „committen"
+heißt committen, auch wenn gefragt war „committen und releasen". Im Zweifel gilt
+die engere Lesart, und es wird nachgefragt — die Rückfrage kostet einen Zug, der
+Tag ist draußen (§6). Eine frühere Freigabe für alle drei Schritte gilt für den
+Vorgang, in dem sie gegeben wurde, nicht für den nächsten.
+
 ## 6. Release
 
 Tag `vX.Y.Z` → Workflow `templates-release` → Roadmap-Zeile mit Lauf-ID
@@ -116,3 +124,11 @@ Regel-Änderung ([`docs/team-plan.md`](docs/team-plan.md)).
 
 Der Meilenstein gilt erst als erreicht, wenn das **veröffentlichte** Bundle
 stichprobenartig geprüft ist — nicht schon bei grünem Workflow.
+
+**Ein veröffentlichter Tag wird weder bewegt noch zurückgezogen.** Adopter
+vendorn den Baum unter seinem Tag und prüfen ihn gegen das `SHA256SUMS` des
+Releases; nach einem Zug wäre `vX.Y.Z` bei ihnen etwas anderes als hier, und sie
+erführen es erst beim nächsten `baseline-verify`. Ein Fehler im Release wird
+durch das **nächste** Release behoben, nicht durch das vorige. Deshalb steht die
+Freigabe für den Tag oben in §5 gesondert: Er ist der einzige Schritt der Kette,
+den keiner zurücknehmen kann.

@@ -29,7 +29,7 @@ damit wird die Regel lehr- und prüfbar.
 > regelt [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument) unten.
 
 | Dokument ↓ referenziert → | Vertrag `lastenheft.md` | Technik `spezifikation.md` | Sicht `architecture.md` | ADR | Slice | Carveout | Welle | Roadmap |
-|---|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Vertrag** (Decke) | intra (Peers) — nur `LH-*` untereinander | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Technik** | Normativ: präzisiert Vertrag, Vertrag gewinnt | intra (Peers) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Sicht** | Normativ: Use-Case ↔ Vertrags-ID | Normativ: visualisiert | intra (Peers) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -198,9 +198,9 @@ aber nichts.
 Die Diagonalzellen ADR→ADR und Carveout→Carveout sehen identisch aus
 (supersede / depends-on / merged), tragen aber entgegengesetzte Kraft:
 
-|                   | Form                     |     Normativ?      | Warum                                            |
+|  | Form | Normativ? | Warum |
 | ----------------- | ------------------------ | :----------------: | ------------------------------------------------ |
-| ADR→ADR           | Supersedes, Depends-on   |  **ja** (Lineage)  | ADRs sind *Entscheidungen* → tragen Autorität    |
+| ADR→ADR | Supersedes, Depends-on | **ja** (Lineage) | ADRs sind *Entscheidungen* → tragen Autorität |
 | Carveout→Carveout | ersetzt, zusammengeführt | **nein** (Kontext) | Carveouts sind *Schuld* → tragen nur Buchführung |
 
 Die Matrix entscheidet damit nicht über *Linktypen*, sondern über
@@ -270,11 +270,11 @@ auf **Stratum-Klassen** (Rolle), nicht auf Dateinamen. Jedes Spec-Dokument
 fällt über zwei Achsen — *normativer Gehalt* und *Änderungs-Prozess* — in
 genau ein Stratum:
 
-| Stratum             | Normativer Gehalt                        | Änderungs-Prozess                     | Default-Datei      | typisch auch                   |
+| Stratum | Normativer Gehalt | Änderungs-Prozess | Default-Datei | typisch auch |
 | ------------------- | ---------------------------------------- | ------------------------------------- | ------------------ | ------------------------------ |
-| **Vertrag** (Decke) | eigene Anforderungen, abnahmebindend     | Change Request                        | `lastenheft.md`    | `compliance.md`, `sla.md`      |
-| **Technik**         | eigene technische Festlegungen           | fortschreibbar, ADR-Schärfung erlaubt | `spezifikation.md` | `api-spec.md`, `data-model.md` |
-| **Sicht**           | *keine* eigenen Anforderungen, derivativ | Diagramm-/View-Update                 | `architecture.md`  | `deployment.md`, Sequenz-Views |
+| **Vertrag** (Decke) | eigene Anforderungen, abnahmebindend | Change Request | `lastenheft.md` | `compliance.md`, `sla.md` |
+| **Technik** | eigene technische Festlegungen | fortschreibbar, ADR-Schärfung erlaubt | `spezifikation.md` | `api-spec.md`, `data-model.md` |
+| **Sicht** | *keine* eigenen Anforderungen, derivativ | Diagramm-/View-Update | `architecture.md` | `deployment.md`, Sequenz-Views |
 
 **Alle drei Straten sind obligatorisch.** Ein Repo, das etwas baut, trifft
 technische Festlegungen — und für die gibt es keinen anderen zulässigen Ort.

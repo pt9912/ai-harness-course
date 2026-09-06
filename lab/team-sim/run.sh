@@ -53,6 +53,9 @@ topo() {  # frische Topologie
 # Volle Ausgabe, kein tail: ein zweiter Befund schoebe den erwarteten Code
 # sonst aus dem Fenster; die Verdikte zeigen selbst nur die letzte Zeile.
 dcheck() { docker run --rm --network none -v "$1:/repo:ro" "$IMG" 2>&1; }
+# Wie dcheck, aber mit eigenen Argumenten. Den Exit-Code traegt die
+# Kommando-Substitution selbst: out=$(dcheck_args "$d" --trace); rc=$?
+dcheck_args() { docker run --rm --network none -v "$1:/repo:ro" "$IMG" "${@:2}" 2>&1; }
 # Befund-Zeile gezielt: <datei>:<zeile> TAB <target> TAB <code>. Ein Code
 # irgendwo in der Ausgabe reichte nicht — wave-drift auf dem falschen Ziel
 # waere sonst auch "bestanden".
@@ -860,6 +863,111 @@ EOF
   verdikt "s20f lebendes Artefakt verlinkt den Pfad, Gate retiriert: LAUT" "target-missing aus harness/conventions.md" "$(echo "$out"|tail -1)" $ok
 }
 
+# ---------------------------------------------------------------------------
+# s21: ENTWURFS-Gegenstand — Zitier-Form im einfrierenden Artefakt (Welle 125,
+# grundlagen/harness-dateien.md). Kein Nebenlaeufigkeits-Gegenstand, wie s19/s20.
+# Der Report zitiert eine Baseline-Stelle einmal als LINK und einmal als
+# Tag+Pfad-Token; danach springt der vendored Tag. Akzeptanzkriterium des CR:
+# Link-Form -> target-missing, Token-Form -> gruen.
+s21_zitierform() {
+  # --- s21a: Link-Form, Tag springt -> LAUT
+  topo; cd "$WORK/sim/alice" || return 1
+  mkdir -p .harness/baseline/v1.0.0/regelwerk docs/reviews
+  printf '# Modul 10 — Review-Harness\n\n## Ziel-Form: Reviewer-Skill\n\nRegeln.\n' \
+    > .harness/baseline/v1.0.0/regelwerk/modul-10-review-harness.md
+  printf '# Review-Report slice-001 — 2026-09-06\n\nBefund gegen [Modul 10 §Ziel-Form](../../.harness/baseline/v1.0.0/regelwerk/modul-10-review-harness.md).\n' \
+    > docs/reviews/2026-09-06-slice-001.md
+  schritt git add -A && schritt git commit -qm "Baseline v1.0.0 vendored, Report mit Link-Form" || return 1
+  schritt grep -qF '](../../.harness/baseline/v1.0.0/' docs/reviews/2026-09-06-slice-001.md || return 1
+  schritt git mv .harness/baseline/v1.0.0 .harness/baseline/v2.0.0 || return 1
+  schritt git commit -qm "Baseline-Bump v1.0.0 -> v2.0.0" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund "$out" "../../.harness/baseline/v1.0.0/regelwerk/modul-10-review-harness.md" "target-missing" && ok=0 || ok=1
+  verdikt "s21a Report verlinkt die Baseline, Tag springt: LAUT" "target-missing auf dem v1.0.0-Pfad im Report" "$(echo "$out"|tail -1)" $ok
+
+  # --- s21b: Token-Form (Tag + Pfad in Inline-Code), Tag springt -> STILL.
+  # Erwartete Stille: genau das sagt die Regel zu. Waere sie laut, truege sie nicht.
+  topo; cd "$WORK/sim/alice" || return 1
+  mkdir -p .harness/baseline/v1.0.0/regelwerk docs/reviews
+  printf '# Modul 10 — Review-Harness\n\n## Ziel-Form: Reviewer-Skill\n\nRegeln.\n' \
+    > .harness/baseline/v1.0.0/regelwerk/modul-10-review-harness.md
+  printf '# Review-Report slice-001 — 2026-09-06\n\nBefund gegen `v1.0.0` `regelwerk/modul-10-review-harness.md` §Ziel-Form: Reviewer-Skill.\n' \
+    > docs/reviews/2026-09-06-slice-001.md
+  schritt git add -A && schritt git commit -qm "Baseline v1.0.0 vendored, Report mit Token-Form" || return 1
+  # Ohne diese Probe bestuende s21b auch ueber einem Report ohne jede Zitation.
+  schritt grep -qF '`v1.0.0` `regelwerk/modul-10-review-harness.md`' docs/reviews/2026-09-06-slice-001.md || return 1
+  # Kontroll-Report im SELBEN Baum: er verlinkt und MUSS laut werden. Ohne ihn
+  # bestuende s21b auch dort, wo d-check docs/reviews/ gar nicht sieht (Ignore,
+  # Scan-Root, Pin) — die Stille bewiese dann nichts. Dieselbe Absicherung wie
+  # bei s20e.
+  printf '# Review-Report slice-002 — 2026-09-06\n\nBefund gegen [Modul 10](../../.harness/baseline/v1.0.0/regelwerk/modul-10-review-harness.md).\n' \
+    > docs/reviews/2026-09-06-slice-002.md
+  schritt git add -A && schritt git commit -qm "Kontroll-Report mit Link-Form" || return 1
+  schritt git mv .harness/baseline/v1.0.0 .harness/baseline/v2.0.0 || return 1
+  schritt git commit -qm "Baseline-Bump v1.0.0 -> v2.0.0" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund "$out" "../../.harness/baseline/v1.0.0/regelwerk/modul-10-review-harness.md" "target-missing" \
+    || { echo "  KAPUTT ($CUR): der Kontroll-Report ist nicht laut — der Lauf sieht docs/reviews/ nicht"; \
+         printf '%s\t%s\t%s\t%s\n' "$CUR" "Vorbedingung" "Kontroll-Report still" "KAPUTT" >> "$TSV"; KAPUTT=$((KAPUTT+1)); return 1; }
+  n=$(printf '%s' "$out" | grep -c 'slice-001' || true)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s21b Token-Form still, waehrend die Link-Form im selben Lauf laut ist" "0 Befunde auf dem Token-Report" "$n Treffer / $(echo "$out"|tail -1)" $ok
+}
+
+# ---------------------------------------------------------------------------
+# s22: ENTWURFS-Gegenstand — die zweite Traceability-Richtung (Welle 127,
+# grundlagen/traceability.md §Die zweite Richtung). Der Commit-Hook prueft
+# Aenderung -> ID; hier die Gegenrichtung Anforderung -> Beleg. Bericht und
+# Gate sind derselbe Lauf: --trace listet, --trace --require-complete urteilt.
+s22_rtm_vollstaendigkeit() {
+  # Die Kennung traegt bewusst NICHT das Wort WAISE: sonst faende ein grep auf
+  # den Status seinen eigenen Abdruck in der Kennungs-Spalte (Befund im Review
+  # zu Welle 127). Geprueft wird die Status-Zelle '| WAISE |'.
+  REQ=LH-FA-OFFEN-001
+  # --- s22a: Anforderung ohne jeden Verweis -> das Gate faellt
+  topo; cd "$WORK/sim/alice" || return 1
+  mkdir -p spec
+  printf '# Lastenheft\n\n## %s — Der Punkt MUSS gedeckt sein\n\nText.\n' "$REQ" > spec/lastenheft.md
+  schritt git add -A && schritt git commit -qm "Lastenheft mit einer unbelegten Anforderung" || return 1
+  belegt=$(grep -rc "$REQ" docs/plan/ | awk -F: '{s+=$2} END{print s+0}')
+  schritt test "$belegt" = 0 || return 1
+  out=$(dcheck_args "$WORK/sim/alice" --trace --require-complete); rc=$?
+  st=$(printf '%s' "$out" | grep -c '| WAISE |' || true)
+  [ "$rc" = 1 ] && [ "$st" = 1 ] && ok=0 || ok=1
+  verdikt "s22a Anforderung ohne Verweis: --require-complete faellt" "Exit 1, Status-Zelle WAISE" "rc=$rc, WAISE-Zellen=$st" $ok
+
+  # --- s22b: NUR eine ADR nennt sie -> bleibt Waise. Die Setzung, die ueberrascht.
+  printf '\n**Deckt:** %s — Entscheidung traegt die Anforderung.\n' "$REQ" >> docs/plan/adr/0001-kern.md
+  schritt git add -A && schritt git commit -qm "ADR nennt die Anforderung" || return 1
+  schritt grep -qF "$REQ" docs/plan/adr/0001-kern.md || return 1
+  out=$(dcheck_args "$WORK/sim/alice" --trace --require-complete); rc=$?
+  # Gezielt: die ADR steht in der Zeile UND der Status ist weiter WAISE.
+  zeile=$(printf '%s' "$out" | grep "^| $REQ " || true)
+  printf '%s' "$zeile" | grep -q 'ADR-0001' && printf '%s' "$zeile" | grep -q '| WAISE |' && [ "$rc" = 1 ] && ok=0 || ok=1
+  verdikt "s22b nur eine ADR nennt sie: ADR in der Zeile, Status bleibt WAISE" "Exit 1, ADR-0001 und WAISE in derselben Zeile" "rc=$rc | $(printf '%s' "$zeile" | cut -c1-60)" $ok
+
+  # --- s22c: ein Slice nennt sie -> gruen. Erst die als entlastend deklarierte Quelle zaehlt.
+  printf '\n**Deckt:** %s — Nachweis im Slice-Plan.\n' "$REQ" >> docs/plan/planning/in-progress/slice-001-kern.md
+  schritt git add -A && schritt git commit -qm "Slice nennt die Anforderung" || return 1
+  schritt grep -qF "$REQ" docs/plan/planning/in-progress/slice-001-kern.md || return 1
+  out=$(dcheck_args "$WORK/sim/alice" --trace --require-complete); rc=$?
+  st=$(printf '%s' "$out" | grep -c '| WAISE |' || true)
+  [ "$rc" = 0 ] && [ "$st" = 0 ] && ok=0 || ok=1
+  verdikt "s22c Slice nennt sie: GRUEN, keine WAISE-Zelle mehr" "Exit 0, 0 WAISE-Zellen" "rc=$rc, WAISE-Zellen=$st" $ok
+
+  # --- s22d: derselbe Befund, aber ohne Schalter -> der Bericht urteilt nicht.
+  topo; cd "$WORK/sim/alice" || return 1
+  mkdir -p spec
+  printf '# Lastenheft\n\n## %s — Der Punkt MUSS gedeckt sein\n\nText.\n' "$REQ" > spec/lastenheft.md
+  schritt git add -A && schritt git commit -qm "Lastenheft mit einer unbelegten Anforderung" || return 1
+  out=$(dcheck_args "$WORK/sim/alice" --trace); rc=$?
+  st=$(printf '%s' "$out" | grep -c '| WAISE |' || true)
+  # Ohne diese Probe bestuende s22d auch ueber einem Lauf ohne jede Anforderung.
+  schritt test "$st" = 1 || return 1
+  [ "$rc" = 0 ] && ok=0 || ok=1
+  verdikt "s22d Bericht ohne Schalter: nennt die Waise, urteilt nicht" "Exit 0 trotz WAISE-Zelle" "rc=$rc, WAISE-Zellen=$st" $ok
+}
+
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -883,6 +991,8 @@ lauf s17 s17_zwei_slugs_still
 lauf s18 s18_alias_und_invalidierung
 lauf s19 s19_archivierung
 lauf s20 s20_sensor_datei
+lauf s21 s21_zitierform
+lauf s22 s22_rtm_vollstaendigkeit
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

@@ -71,7 +71,7 @@ führen):
    übergeführt in ADR-<NNNN>`).
 
 | Wahl | Symptom-Indikator | Träger | Folge-Artefakt |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Carveout** | Eine konkrete Gate-/Regelausnahme, klar abgrenzbar, mit Folge-Slice und ernst erreichbarem Trigger. | einzelne Diskrepanz | `docs/plan/carveouts/CO-<NNN>-*.md` |
 | **BF-Sub-Area-Markierung** | Diskrepanz-Cluster im selben Geltungsbereich, oder generelles *„Code-vor-Doku"*-Muster. | ganze Sub-Area | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
 | **ADR (permanent)** | Trigger ist ehrlich nie zu erreichen — die Senkung ist Architekturentscheidung, kein Übergang. | dauerhafte Architekturregel | `docs/architecture/ADR-<NNNN>-*.md` |

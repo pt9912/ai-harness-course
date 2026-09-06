@@ -16,6 +16,20 @@ Code-Review gegen Plan + Konventionen (Modul 10 §Drei Review-Arten).
 **Skill:** `.harness/skills/reviewer.md` @ <Version/Commit> · <!-- d-check:ignore (Adopter-spezifischer Skill-Pfad, existiert im Ziel-Repo ggf. nicht) -->
 **Modell:** <Modell-ID> · **Datum:** <YYYY-MM-DD>
 
+> **Zitier-Form** *(dieser Block bleibt stehen — er ist Norm, kein
+> Ausfüll-Hinweis; die `<Platzhalter>` darin sind Formbeispiele)*. Dieser
+> Report friert ein; was er zitiert, bewegt sich
+> weiter. Deshalb: **Kennung, nicht Adresse** — `slice-NNN` statt seines
+> Lifecycle-Pfads, `make <target>` statt eines Links auf die Sensor-Datei, eine
+> Baseline-Stelle als **Tag + Pfad in Inline-Code** statt als Link
+> (`v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt>). Der vendored Baum trägt
+> genau einen Tag; der Sprung löscht den alten, und ein Link darauf färbt beim
+> nächsten Bump ein Artefakt rot, das niemand mehr anfassen darf. Ein `pfad`-Feld
+> auf den **geprüften Gegenstand** ist davon nicht betroffen — es zitiert den
+> Stand des Laufs und darf ihn festhalten (`v<X.Y.Z>` ·
+> `regelwerk/grundlagen-harness-dateien.md` §harness/README.md als
+> Einstiegspunkt — diese Zeile ist selbst ein Beispiel der Form).
+
 **Eingangs-Kontext** (die Verträge, gegen die geprüft wurde — ohne
 diese Liste ist der Lauf nicht reproduzierbar):
 
@@ -32,14 +46,16 @@ Jedes Finding folgt dem **§Output-Schema des Reviewer-Skills** — der
 verbindlichen Single Source of Truth. Die Felder unten sind nur
 **gespiegelt** (Bequemlichkeit beim Ausfüllen), nicht neu definiert; bei
 Abweichung gilt der Skill bzw. dessen Quelle
-Baseline-Regelwerk `modul-10-review-harness.md` §Ziel-Form: Reviewer-Skill.
+`v<X.Y.Z>` · `regelwerk/modul-10-review-harness.md` §Ziel-Form: Reviewer-Skill
+— Tag einsetzen, denn diese Zeile wandert in den eingefrorenen Report.
 
 <!-- Kein Fließtext, kein Lösungsvorschlag im Befund. -->
 
 ### F-1 — <Kurztitel>
 
 - `kategorie`: HIGH | MEDIUM | LOW | INFO
-- `quelle`: <ADR-ID, LH-ID, Hard-Rule-Name oder "Maintainability">
+- `quelle`: <ADR-ID, LH-ID, Hard-Rule-Name oder "Maintainability" — bei einer
+  Baseline-Regel: `v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt>, kein Link>
 - `pfad`: <Datei:Zeile>
 - `befund`: <1–2 Sätze, beobachtbar, ohne Lösungsvorschlag>
 - `verifizierbar`: ja/nein — <welcher Gate-Lauf würde es bestätigen?>

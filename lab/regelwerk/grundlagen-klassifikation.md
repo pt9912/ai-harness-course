@@ -9,7 +9,7 @@ Playbook.
 ### Die 2×2-Matrix (Böckeler) <a id="2x2-matrix"></a>
 
 |  | **Feedforward** (Guide, präventiv) | **Feedback** (Sensor, detektiv) |
-|---|---|---|
+| --- | --- | --- |
 | **Computational** (deterministisch) | Typsignaturen, JSON-Schema, Tool-Allowlists, generierte Skeletons | Linter, Typecheck, ArchUnit, Coverage Gate, Schema-Validierung |
 | **Inferential** (LLM-gestützt) | Spec, ADR, AGENTS.md, Skills, Beispiel-Korpora | Reviewer-Agent, Verifier-Agent, Validator-Agent, semantischer Diff |
 
@@ -57,7 +57,7 @@ Kotlin, Java, C#/.NET, C++ …).
 Jede Kontrolle adressiert genau eine der drei Kategorien:
 
 | Kategorie | Frage | Typische Werkzeuge | Schwerpunkt-Module |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Maintainability Harness** | Ist der Code lesbar, modular, wartbar? | Linter, Komplexitätsmetriken, ArchUnit, Reviewer-Agent | 10, 13 |
 | **Architecture Fitness Harness** | Hält die Lösung Architektur-, Performance- und Observability-Constraints ein? | Fitness Functions, Latenz-Budgets, OTel-Assertions | 4, 11, 15 |
 | **Behaviour Harness** | Tut die Lösung das Richtige? | Tests, Replay, Golden Sets, Validator | 11, 12 |
@@ -94,7 +94,7 @@ Lopopolo zerlegt die tägliche Harness-Arbeit in drei Säulen, die
 orthogonal zu Böckelers Kategorien stehen:
 
 | Säule | Was sie tut | Werkzeuge | Schwerpunkt-Module |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Context Engineering** | dem Agenten das Richtige zur Verfügung stellen | Spec, ADR, AGENTS.md, Skills, dynamisches Verzeichnis-Mapping beim Start | 3, 4, 5 |
 | **Architectural Constraints** | dem Agenten das Falsche unmöglich machen | Layering-Regeln, Import-Allowlists, Tool-Allowlists, ArchUnit | 4, 13 |
 | **Entropy Management** | den Harness gegen Verfall pflegen | Doku-Konsistenz-Agent, Carveout-Audit, Golden-Set-Rotation | 7, 12, 15 |
@@ -196,7 +196,7 @@ Kontrollen werden über den Lebenszyklus verteilt — je früher und billiger,
 desto besser:
 
 | Stufe | Kontrollen | Begründung |
-|---|---|---|
+| --- | --- | --- |
 | Pre-commit / IDE | LSP, Linter, schnelle Tests, einfacher Review-Agent | billig, sofort |
 | Pre-integration | volle Testsuite, ArchUnit, Reviewer-Agent | vor Merge, noch billig genug |
 | Post-integration | Mutation Tests, vollständige Verifikation, Validator-Agent | teurer, aber tolerierbar |

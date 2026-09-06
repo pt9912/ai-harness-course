@@ -141,7 +141,7 @@ Regel-Stufe, stehen **beide Blöcke**: der Prompt-Kontext für das Modell,
 Was die einzelnen Felder festhalten:
 
 | Feld | Was hineingehört | Wozu |
-|---|---|---|
+| --- | --- | --- |
 | `slice` | die Closure, die das Set **erzeugt** hat — spätere Änderungen stehen im `CHANGELOG.md`, nicht hier | Traceability zurück auf den Plan; wer das Feld fortschreibt, überschreibt den Anker bei jeder Rotation |
 | `recorded_at` | Zeitpunkt der Aufnahme | damit spätere Läufe ihren Diff datieren können |
 | `model.name` | Bezeichnung des Messgegenstands; beim Inferenz-Modell die Modell-Kennung **ohne gleitenden Alias** | ein Alias zeigt morgen auf etwas anderes |
@@ -212,7 +212,7 @@ eine Abhängigkeit, die im Replay gar nicht mehr wirkt.
   tippt, baut den Carveout an der falschen Stelle ein):
 
 | Reihenfolge | Verdächtiger | Belegquelle |
-|---|---|---|
+| --- | --- | --- |
 | 1 | Toolchain-Drift | `runtime.image_hash` verglichen |
 | 2 | Modell-Drift | `model.version` · `model.seed` · `determinism:` bzw. `prompt_context:` verglichen |
 | 3 | Erwartungs-Drift | Eingaben vs. Spec (Modul 3) |

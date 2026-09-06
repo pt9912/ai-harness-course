@@ -23,7 +23,7 @@ auf einen wiederkehrenden Fehler mit dem falschen Sensor, und der
 Steering Loop läuft leer. Die Zuordnung in Kurzform:
 
 | Gate-Typ | typisches Fehlerbild | was er NICHT fängt |
-|---|---|---|
+| --- | --- | --- |
 | Linter | lokale Muster: toter Import, verbotenes Idiom, Suppression-Marker | Datenfluss über Funktionsgrenzen, Struktur-Regeln |
 | Typecheck | Typgrenzen-Verstoß: falsche Signatur, `None` am falschen Ort | Vertrauensgrenzen — `str` bleibt `str`, ob nutzerkontrolliert oder nicht |
 | Architekturtest | Struktur-/Import-Regel: Layer-Bruch, Domäne importiert Infrastruktur | Verhalten zur Laufzeit, lokale Muster |
@@ -40,7 +40,7 @@ Zusammenspiel.
 ### Gate und Beleg — zwei Rollen derselben Prüfung
 
 | Rolle | Aufgabe | Verhalten bei Befund |
-|---|---|---|
+| --- | --- | --- |
 | **Gate** | urteilen | Exit ≠ 0, der Lauf bricht ab |
 | **Beleg** | berichten | schreibt **immer** — auch, gerade dann, wenn die Prüfung rot ist |
 
@@ -221,7 +221,7 @@ Toolchain** (Modul 14) → **Bewusstes Brechen**: das Gate läuft rot mit
 Absichtserklärung trennt.
 
 | ADR-Satz (Beispiel) | Werkzeug | Make-Target | Failure-Beispiel |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | „Service importiert nur aus `adapter/`" | `import-linter`/`grimp` (Py) · `ArchUnit` (Java) · `depguard` (Go) · `dep-cruiser` (Node) | `arch-check:` ## LH-QA-COUPLING-002 / ADR-0007 | `import requests` in `service/foo.py` → `make arch-check` rot mit `ADR-0007 violated` |
 
 Die **maschinelle Formulierung** ist die eigentliche Arbeit: aus

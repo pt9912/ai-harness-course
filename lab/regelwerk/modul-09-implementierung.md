@@ -141,7 +141,7 @@ Folge: Context Engineering ist *auch* eine Reduktions-Aufgabe.
 Konkret gehört in den Lauf-Kontext:
 
 | Pflicht | Wer? |
-|---|---|
+| --- | --- |
 | `harness/README.md` | jeder Lauf |
 | relevante kanonische Quelle (Source Precedence) | jeder Lauf, gezielt |
 | Requirement-/ADR-IDs des Slice | jeder Lauf |
@@ -149,7 +149,7 @@ Konkret gehört in den Lauf-Kontext:
 | Tool-Allowlist | jeder Lauf |
 
 | Nicht in den Lauf-Kontext (Anti-Pattern) |
-|---|
+| --- |
 | `superseded`/`deprecated` ADRs ohne Folge-Bezug |
 | historische Spec-Diff-Notizen, die jetzt in ADR-Form gegossen sind |
 | Skills, die nicht zu dieser Rolle gehören |

@@ -153,11 +153,11 @@ außerhalb des Falls, für den er geschrieben wurde?*
 `spec/` zerfällt selbst in drei Straten mit eigener Precedence — alle drei
 obligatorisch ([§Spec-Straten](grundlagen-referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)):
 
-| Datei                   | Charakter                                                                     | Änderungs-Prozess     |
+| Datei | Charakter | Änderungs-Prozess |
 | ----------------------- | ----------------------------------------------------------------------------- | --------------------- |
-| `spec/lastenheft.md`    | **vertraglich abnahmebindend** (`LH-*` / `HSM-*`-IDs)                         | Change Request        |
+| `spec/lastenheft.md` | **vertraglich abnahmebindend** (`LH-*` / `HSM-*`-IDs) | Change Request |
 | `spec/spezifikation.md` | **technisch verbindlich, fortschreibbar** (Algorithmen, Defaults, Protokolle) | ADR-Schärfung erlaubt |
-| `spec/architecture.md`  | Diagramme, Komponentensicht, **keine eigenen Anforderungen**                  | Diagramm-Update       |
+| `spec/architecture.md` | Diagramme, Komponentensicht, **keine eigenen Anforderungen** | Diagramm-Update |
 
 ```mermaid
 flowchart TD
@@ -270,7 +270,7 @@ Technik-Stratum. Wer nur aufs Präfix schaut, ordnet die Verfeinerung eine
 Schicht zu hoch ein.
 
 | Kennung | Stratum | Art |
-|---|---|---|
+| --- | --- | --- |
 | `<PREFIX>-FA-<NN>`, `<PREFIX>-QA-<NN>` | Vertrag (`spec/lastenheft.md`) | **Anforderungs-ID** — das Einzige, was abgenommen wird |
 | `<PREFIX>-FA-<NN>.<Buchstabe>` | Technik (`spec/spezifikation.md`) | **Verfeinerung** genau einer Anforderungs-ID |
 | `SPEC-<NNN>` | Technik (`spec/spezifikation.md`) | **Struktur-ID** für eine technische Festlegung ohne eigene Anforderung |

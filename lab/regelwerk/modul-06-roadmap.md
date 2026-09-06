@@ -69,7 +69,7 @@ Abgeschlossene Wellen · Historische Trigger-Verschiebungen*. Operative Lesart:
 erreicht, bevor die Slices grün sind, gibt es drei mögliche Antworten:
 
 | Antwort | Diagnose |
-|---|---|
+| --- | --- |
 | Welle wird trotzdem geschlossen, `slice-019` wandert in `welle-4`. | Datum hat Closure überschrieben — der Audit fällt durch, weil `slice-019` nicht belegt ist. Trigger-Disziplin ist Theorie geblieben. |
 | Welle bleibt offen, das Datum wird verschoben. | Trigger-Disziplin wirkt, aber die Roadmap-Drift-Tabelle muss den Eintrag bekommen — sonst ist die Verschiebung still. |
 | Carveout `CO-009` für die fehlende Latenz, Welle schließt mit Carveout. | Sauber: das Versprechen wird offen reduziert, Folge-Slice ist verdrahtet, Audit weiß, was er ansieht. |

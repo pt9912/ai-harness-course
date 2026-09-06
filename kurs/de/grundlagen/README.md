@@ -23,7 +23,7 @@ liest, lädt sich Modul-2-Tiefe auf, bevor ein Kontext dafür existiert.
 | [`referenz-richtung.md`](referenz-richtung.md) | Referenz-Richtung (SDP), Referenzmatrix, Spec-Straten |
 | [`harness-dateien.md`](harness-dateien.md) | Verzeichniskonvention, Template-Schichtung, was ein Kommentar trägt (Code/Config/Skripte) und was Zustandsfelder tragen, `harness/README.md`- und `conventions.md`-Pattern |
 | [`bootstrap.md`](bootstrap.md) | Harness-Bootstrap, Sub-Area, Modus pro Sub-Area, Trigger-Klassen |
-| [`traceability.md`](traceability.md) | Traceability-Constraint, Herkunfts-Anker für Steering-Loop-Regeln |
+| [`traceability.md`](traceability.md) | Traceability-Constraint, die zweite Richtung (Anforderung → Beleg, RTM), Herkunfts-Anker für Steering-Loop-Regeln |
 | [`konzeptkarte.md`](konzeptkarte.md) | Reduzierte Artefaktkette, vier Leitfragen, 2×2-Schnellanker gegen kognitive Überlast |
 | [`klassifikation.md`](klassifikation.md) | Böckelers 2×2 (Feedforward/Feedback × Computational/Inferential), drei Harness-Kategorien (Maintainability, Architecture Fitness, Behaviour), OpenAIs drei operative Säulen (Context Engineering, Architectural Constraints, Entropy Management), Steering Loop, Lifecycle-Verteilung |
 | [`durchsetzungsschicht.md`](durchsetzungsschicht.md) | Fail-closed Bindung von Konventionen an die Agent-Schleife: drei Bindepunkte (Tool-Call-/Handoff-Gate, Workflow-Skelett) auf der 2×2-Matrix, vier Design-Eigenschaften, ehrliche Grenzen, Referenz-Artefakte (Claude-Code-Hooks) |

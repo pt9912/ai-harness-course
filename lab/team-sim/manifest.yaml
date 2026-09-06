@@ -42,6 +42,13 @@ gruppen:
   # §harness/README.md als Einstiegspunkt) — wie s19 ohne Nebenlaeufigkeits-
   # Gegenstand. Seed unveraendert; die Form legen die Szenarien selbst an.
   s20: [s20a, s20b, s20c, s20d, s20e, s20f]
+  # s21: ENTWURF Zitier-Form im einfrierenden Artefakt (Welle 125). Akzeptanz-
+  # kriterium aus dem CR von ai-harness-init: Link-Form rot, Token-Form gruen.
+  s21: [s21a, s21b]
+  # s22: ENTWURF zweite Traceability-Richtung (Welle 127). Bericht und Gate sind
+  # derselbe Lauf (--trace / --trace --require-complete); und erst ein Slice
+  # entlastet eine Anforderung, eine ADR nicht.
+  s22: [s22a, s22b, s22c, s22d]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -53,3 +60,5 @@ laeufe:
   - { datum: 2026-08-31, image: v0.71.1, neu: [], gegenstand: "Pin-Bump: der s15-Befund ist behoben, s15b + s16c drehen von still auf core-drift-vcs", ergebnis: "36 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-08-31, image: v0.71.1, neu: [s19a, s19b, s19c, s19i, s19d, s19e, s19f, s19g, s19j, s19h], gegenstand: "Entwurf: Zeitdokumente archivieren — die sechs Proben, nach Review-Mutationen nachgeschaerft", ergebnis: "46 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-06, image: v0.74.1, neu: [s20a, s20b, s20c, s20d, s20e, s20f], gegenstand: "Entwurf: die Sensor-Datei (Welle 120) — was der Link-Sensor faengt, seine zwei benannten Loecher, Retirierung, und das Paar Token/Pfad", ergebnis: "52 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-09-06, image: v0.74.1, neu: [s21a, s21b], gegenstand: "Entwurf: Zitier-Form im einfrierenden Artefakt (Welle 125) — Baseline-Tag springt, Link-Form rot, Token-Form gruen", ergebnis: "54 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-09-06, image: v0.74.1, neu: [s22a, s22b, s22c, s22d], gegenstand: "Entwurf: Anforderung -> Beleg (Welle 127) — Waise faellt, ADR entlastet nicht, Slice entlastet, Bericht urteilt nicht", ergebnis: "58 PASS, 0 FAIL, 0 KAPUTT" }

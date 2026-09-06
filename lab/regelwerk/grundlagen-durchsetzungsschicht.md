@@ -25,7 +25,7 @@ Jeder bindet einen anderen Punkt der Agent-Schleife — und fällt in einen
 Quadranten, den du schon kennst:
 
 | Bindepunkt | Wann | 2×2-Quadrant | Wirkung |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Tool-Call-Gate** | vor jedem Tool-Call | computational **feedforward** | falsche Handlung technisch verhindern (Tool-Allowlist / Befehls-Guard) |
 | **Handoff-Gate** | bevor der Agent „fertig" meldet | computational **feedback** | deterministisch prüfen, dass die Gates wirklich liefen |
 | **Workflow-Skelett** | beim Start einer Aufgabe | inferential feedforward | den Ablauf vorgeben (Slice-Workflow als feste Schrittfolge) |

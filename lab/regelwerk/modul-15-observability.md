@@ -54,7 +54,7 @@ Die *drei* OTel-Counter, die du brauchst, um Cache-Hit-Rate *und*
 Cache-Miss-Spikes zu unterscheiden — pro Counter:
 
 | Frage | Antwort |
-|---|---|
+| --- | --- |
 | Name | z. B. `prompt_cache_hits_total` |
 | Unit | Cardinality (Counter, Gauge, Histogram?) |
 | Labels | mindestens `slice.id`, `agent.role`, `model.version` |
@@ -78,7 +78,7 @@ realen Make-Targets / Skill-Dateien / `harness/README.md` prüft — pro
 Regel:
 
 | Feld | Inhalt |
-|---|---|
+| --- | --- |
 | **Regel-Name** | z. B. *"AGENTS.md-Befehl existiert im Makefile"* |
 | **Quelle** | welche Datei wird gelesen (z. B. `AGENTS.md` §Tool-Regeln) |
 | **Vergleichs-Ziel** | welche Datei wird dagegen geprüft (z. B. `Makefile`-Target-Namen) |

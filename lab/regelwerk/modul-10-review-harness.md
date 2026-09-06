@@ -23,7 +23,7 @@ Code-Review kostet den ganzen Implementierungs-Lauf.
 ### Finding-Kategorien
 
 | Kategorie | Bedeutung |
-|---|---|
+| --- | --- |
 | HIGH | blockiert Merge: Sicherheits-, Korrektheits- oder ADR-Verstoß |
 | MEDIUM | sollte vor Merge geklärt werden |
 | LOW | nice-to-fix, blockiert nicht |

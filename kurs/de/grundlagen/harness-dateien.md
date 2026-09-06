@@ -320,8 +320,11 @@ Zustand eines Gates ist sein Lauf, und der lebt in CI; ihr Änderungsdatum hält
 `git`.
 
 **Deshalb wird die Datei direkt adressiert, nicht über den Index.** Wer aus
-`AGENTS.md`, einer ADR oder einem Slice auf eine Gate-Grenze zeigt, verlinkt
-`harness/sensors/<target>.md`. Die Anker-Indirektion, die der Adaptions-Block
+einem **lebenden** Artefakt auf eine Gate-Grenze zeigt — `AGENTS.md`, einer
+Spec, einem offenen Slice —, verlinkt `harness/sensors/<target>.md`. Ein
+einfrierendes nennt statt dessen `make <target>` als Token (§Ein einfrierendes
+Artefakt … unten); das gilt auch für eine `Accepted`-ADR und einen
+geschlossenen Slice, die beide nicht mehr nachgezogen werden. Die Anker-Indirektion, die der Adaptions-Block
 unten braucht, hat hier keinen Träger: Dort existiert sie, weil die
 Eintrags-Datei bei Auflösung *wandert* — diese wandert nie, sie verschwindet.
 Und der Bruch bei Retirierung ist das gewollte Signal: Ein lebendes Artefakt,
@@ -329,13 +332,44 @@ das auf ein Gate zeigt, das es nicht mehr gibt, behauptet eine Deckung, die
 nicht mehr besteht. Der rote Link-Sensor ist die richtige Antwort darauf, kein
 Anker, der ihn verschluckt.
 
-**Zeitdokumente verlinken nicht, sie nennen das Target.** Ein Review-Report und
-eine Closure-Notiz halten eine Messung zu ihrem Datum fest und werden nicht
-nachgezogen. Sie schreiben deshalb `make <target>` als Token, nicht als Pfad —
-sonst reißt die Retirierung eines Gates rückwirkend Dokumente rot, die zu ihrem
-Datum korrekt waren. Es ist dieselbe Trennung, mit der die Slice-ID ein Token
-bleibt statt ein Pfad
-([Modul 5](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
+**Ein einfrierendes Artefakt nennt ein prozess-bewegtes bei seiner Kennung,
+nicht unter seiner Adresse.** Einfrierend sind die **Zeitdokumente** — Review-
+Report, Closure-Notiz, Archiv-Stub, `Accepted`-ADR, geschlossener Slice: Sie
+halten eine Messung oder Entscheidung zu ihrem Datum fest und werden nicht
+nachgezogen. Was sie zitieren, bewegt sich weiter. Wer die **Adresse** schreibt,
+koppelt ein Dokument, das stillsteht, an einen Ort, der wandert — und der
+nächste Lifecycle-Übergang, Baseline-Bump oder Retirierungs-Schnitt färbt
+rückwirkend Dokumente rot, die zu ihrem Datum korrekt waren. Wer die **Kennung**
+schreibt, koppelt an das, was bleibt. Drei Formen derselben Regel:
+
+- Ein Gate heißt `make <target>` als Token, nicht als Pfad auf seine
+  Sensor-Datei.
+- Ein Slice heißt `slice-NNN`, nicht
+  `docs/plan/planning/in-progress/slice-NNN-….md` — das Verzeichnis ist sein
+  Zustand und wechselt
+  ([Modul 5](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
+- Eine Stelle der vendored Baseline heißt Tag **und** Pfad in Inline-Code, nicht
+  als Link. Der Vendoring-Pfad ist `<tag>`-gescopt, alte und neue Form liegen
+  beim Bump also eine Weile nebeneinander
+  ([Modul 2 §Freshness-Audit](../01-spec-und-architektur/modul-02-harness-bootstrap.md#freshness-audit--die-kehrseite-des-vendorings-schritt-2))
+  — der Link bricht nicht sofort, sondern wenn das alte Verzeichnis fällt. Genau
+  das macht ihn gefährlich: Er bricht nicht beim Bump, sondern später, in einem
+  Artefakt, das niemand mehr anfasst.
+
+**Die Grenze: Sie gilt für einfrierende Artefakte.** Ein *lebendes* — `AGENTS.md`,
+eine Spec, ein offener Slice — verlinkt weiter, und dort ist der Bruch das
+gewollte Signal: Wer auf etwas zeigt, das es nicht mehr gibt, behauptet eine
+Deckung, die nicht mehr besteht. Der Unterschied ist nicht die Wichtigkeit des
+Ziels, sondern ob der Zeiger nachgezogen werden **darf**.
+
+**Und die Reparatur ist teurer als die Vermeidung.** Steht die Adresse erst im
+eingefrorenen Artefakt, bleiben zwei Wege: es doch anfassen — dann ist es kein
+Zeitdokument mehr — oder ein Ausnahme-Ventil im Prüfbereich, also eine
+Gate-Senkung mit eigener Begründungslast. Dass die Form sich häuft, sobald sie
+nicht vorgegeben ist, ist gemessen: In einem adoptierenden Repo
+(`ai-harness-init`) standen 32 solche Links in 14 Reports, sämtlich innerhalb
+von zwei Tagen entstanden — `grep -roE '\]\([^)]*\.harness/baseline/[^)]*\)' docs/reviews/`,
+die Zahlen wandern mit jenem Repo, das Kommando nicht.
 
 ## harness/conventions.md als Konventionsspeicher
 

@@ -141,7 +141,7 @@ auf — er erscheint im Brownfield-Walkthrough als Sync-Trigger in
 BF-Diskrepanz-Auslöse-Variante.
 
 | # | Aktion | Berührte Dateien (Phasen-Übergang) | Trigger |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
 | 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schema festlegen: Vertrags-Präfix wählen (`LH-*`), `SPEC-*`/`ARC-*`/`MR-*` aus der Baseline übernehmen | keine | reift 2/3 |
 | 2 | **Baseline vendoren** — Regelwerk *und* Templates nach `.harness/baseline/<tag>/{regelwerk,templates}/` (+ `SHA256SUMS`, netzlos) als präsente, gepinnte Referenz; **Tooling** (`Makefile` mit d-check-Doku-Gate, `.d-check.yml`) als Startgerüst übernehmen; **Dokument-Skelette** aus der vendored Baseline (`…/templates/`) kopieren *und ausfüllen* | Dokument-Skelette **0 → 1**; vendored Baseline + Tooling tragen keine Phase-Reife | keine |
@@ -151,7 +151,7 @@ BF-Diskrepanz-Auslöse-Variante.
 #### Detail-Tabelle (Schritte 5–8: Inhalts-Phase)
 
 | # | Aktion | Berührte Dateien (Phasen-Übergang) | Trigger |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 5 | `docs/plan/planning/roadmap.md` mit Welle + Release-Mapping; `releasing.md` mit Release-Strategie | `roadmap.md` 1 → 2; `releasing.md` 1 → 2 | keine |
 | 6 | Sensors-Roster im "Nicht behauptet"-Block (Prosa-Pointer-Liste, kein Status) | `harness/README.md` §Sensors Sub-1 → Sub-2; `AGENTS.md` §4 Sub-1 → Sub-2 | **T4** (Promotion-Auslöser bei erstem Code-Slice) |
 | 7 | `spec/architecture.md` + `spec/spezifikation.md` Outline mit `ARC-*`/`SPEC-*` | beide 1 → 2 | **T5** (erste ADR-Vorschläge aus Architektur-Outline) |
@@ -363,7 +363,7 @@ dem ersten Hinschauen entschieden werden. Daher die asymmetrische
 Nummerierung GF 0–8 vs. BF 1–9.
 
 | # | Aktion | BF-Besonderheit gegenüber GF |
-|---|---|---|
+| --- | --- | --- |
 | 1 | GF-Schritte 0 und 1 in einem Schritt zusammengefasst: Modus-Antizipation "BF pro Sub-Area" + Baseline-Auswahl + Repo-Klasse + ID-Schema festlegen (Vertrags-Präfix wählen, `SPEC-*`/`ARC-*`/`MR-*` aus der Baseline) | + explizite Modus-Setzung mit Sub-Area-Aufzählung; Repo-Klassen-Wahl und Modus-Antizipation fallen zusammen |
 | 2 | **Code-Inventur (Discovery):** Makefile, CI, Tests, README, Commit-Messages inventarisieren als Lerner-Schritt | **neu in BF** — kein Repo-Artefakt entsteht, nur Lerner-Wissen |
 | 3 | **Baseline vendoren** — Regelwerk + Templates (`.harness/baseline/<tag>/{regelwerk,templates}/` + `SHA256SUMS`) + Skelette kopieren-und-ausfüllen | wie GF |
@@ -372,7 +372,7 @@ Nummerierung GF 0–8 vs. BF 1–9.
 #### Detail-Tabelle (Schritte 5–9: Reconciliation-Phase)
 
 | # | Aktion | BF-Besonderheit gegenüber GF |
-|---|---|---|
+| --- | --- | --- |
 | 5 | Sensors-Haupt-Tabelle direkt aus Makefile-Kommentaren entstehen lassen | **gegenteilig zu GF** — Targets existieren, keine "Nicht behauptet"-Promotion nötig; **T3** (Sync-Trigger in BF-Diskrepanz-Auslöse-Variante: Sensor-Lücke = impliziter Pointer-Mismatch zwischen Makefile-Realität und Sensor-Tabelle) wird sichtbar |
 | 6 | Lastenheft aus Code/Tests/CI rückbauen | Inventur-Umkehr; Diskrepanz-Material entsteht (Code ohne Anforderung, Test ohne LH-Bezug) |
 | 7 | Architektur + Spezifikation aus `src/` rückbauen; **retroaktive ADRs** für implizite Entscheidungen | ADRs teils retroaktiv mit Status *Accepted* (oder *Superseded*, falls Entscheidung schon revidiert) |
@@ -399,7 +399,7 @@ Sub-Area steht als eigene Spalte, und alle Zeilen liegen in *einer* Datei
 **Drei Klassen, aus Schritt 8 — sie bestimmen, was in der Spalte *Auflösung* steht:**
 
 | Klasse | Was gefunden wurde | Auflösung |
-|---|---|---|
+| --- | --- | --- |
 | Code ohne Anforderung | Code, den keine Anforderung deckt | `CO-<NNN>` samt dessen Folge-Slice |
 | Anforderung ohne Code | zugesagt, aber nicht geliefert | der Reconciliation-Slice |
 | Entscheidung ohne Beleg | im Code getroffen, nirgends begründet | die retroaktive `ADR-<NNNN>` |
@@ -431,8 +431,8 @@ Die folgende Matrix macht sichtbar, *was Phase-N in GF bedeutet
 versus was sie in BF bedeutet* — dieselbe Phase-Stufe,
 unterschiedliche Bewegungsrichtung:
 
-| | Greenfield (Doc → Code) | Brownfield (Code → Doc) |
-|---|---|---|
+|  | Greenfield (Doc → Code) | Brownfield (Code → Doc) |
+| --- | --- | --- |
 | **Phase 0 leer** | Datei existiert nicht — Pflicht zur Anlage aus Konvention | Datei existiert nicht — Inventur stellt fest, dass Doku-Anker fehlt |
 | **Phase 1 Skelett** | Template kopiert, *Versprechen* zu füllen | Template kopiert, *Inventur-Auftrag* an Code |
 | **Phase 2 Outline** | Top-Level-Wunschbild | Top-Level-Bestandsaufnahme |

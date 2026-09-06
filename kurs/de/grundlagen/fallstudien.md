@@ -35,7 +35,7 @@ wiederkehrende Charaktere:
 |---|---|---|---|
 | **Referenz-Repo** | Die saubere Vorlage, an der alle anderen sich orientieren. | strenge Determinismus-/Replay-Gates, Doku-Disziplin | Simulator, Beispiel-Stack |
 | **Safety/Control-Flagship** | Berührt reale Hardware oder Geld. | Hard Rules, Adapter-Disziplin, fail-closed in Produktion | EMS, Trading-Bot, Steueranlage |
-| **Policy/Compliance-Flagship** | Erzeugt Artefakte mit Außenwirkung (Anträge, Bescheinigungen). | Traceability-Matrix, ID-Disziplin, Disclaimer-Pflicht | Antragsgenerator, Compliance-Werkzeug |
+| **Policy/Compliance-Flagship** | Erzeugt Artefakte mit Außenwirkung (Anträge, Bescheinigungen). | [Traceability-Matrix (RTM)](traceability.md#die-zweite-richtung-anforderung--beleg), ID-Disziplin, Disclaimer-Pflicht | Antragsgenerator, Compliance-Werkzeug |
 
 ### Konsequenzen pro Klasse
 

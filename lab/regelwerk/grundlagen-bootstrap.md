@@ -31,11 +31,11 @@ die **typischen Träger** — sie nennen, *welche Strukturen* eine Sub-Area
 sein können. Ob eine konkrete Struktur als Sub-Area **qualifiziert**,
 entscheiden drei Inklusions-Achsen (bottom-up):
 
-| Achse                         | Test                                                      | erfüllt, wenn …                                                                                                                   |
+| Achse | Test | erfüllt, wenn … |
 | ----------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **1 — Konventions-Härte**     | Ist eine eigene `MR-NNN`-Adaption plausibel formulierbar? | … die Sektion eine eigene Strukturregel tragen *könnte* (nicht: schon trägt).                                                     |
-| **2 — Inventur-Linie**        | Ist eine eigene Diskrepanz-Bericht-Zeile sinnvoll?        | … Code-Bestand und Doku-Aussage dieser Sektion als Paar abgleichbar sind, ohne dass eine Nachbar-Sub-Area mitgezogen werden muss. |
-| **3 — Struktureller Cluster** | Gibt es eine eigene Pfad-/Datei-Familie?                  | … ein eigenes Verzeichnis, Dateimuster oder Konventions-Präfix die Sektion trägt.                                                 |
+| **1 — Konventions-Härte** | Ist eine eigene `MR-NNN`-Adaption plausibel formulierbar? | … die Sektion eine eigene Strukturregel tragen *könnte* (nicht: schon trägt). |
+| **2 — Inventur-Linie** | Ist eine eigene Diskrepanz-Bericht-Zeile sinnvoll? | … Code-Bestand und Doku-Aussage dieser Sektion als Paar abgleichbar sind, ohne dass eine Nachbar-Sub-Area mitgezogen werden muss. |
+| **3 — Struktureller Cluster** | Gibt es eine eigene Pfad-/Datei-Familie? | … ein eigenes Verzeichnis, Dateimuster oder Konventions-Präfix die Sektion trägt. |
 
 **Schwelle: mindestens zwei der drei Achsen.** Eine Achse allein ist zu
 schwach — der typische Fall ist *Struktur ohne Substanz*: ein Verzeichnis
@@ -130,11 +130,11 @@ Pro Sub-Area eines Repos (Modul, Verzeichnis, Komponente) wird ein
 `harness/conventions.md`). Die Modus-Wahl bestimmt die
 *Trigger-Richtung* — wer wem folgt:
 
-| Modus               | Trigger-Richtung          | Bild im Kopf                                                                                         |
+| Modus | Trigger-Richtung | Bild im Kopf |
 | ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------- |
-| **Greenfield** (GF) | Doc → Code                | Spec führt, Code folgt. "Wir versprechen X, dann liefern wir X." Steady-State.                       |
-| **Brownfield** (BF) | Code → Doc                | Code existiert, Doku folgt. Inventur des Bestands. **Übergangs-Modus mit Konvergenz-Auftrag** zu GF. |
-| **Hybrid**          | gemischt pro Sub-Sub-Area | Realistisch: alte Komponenten BF, neue GF.                                                           |
+| **Greenfield** (GF) | Doc → Code | Spec führt, Code folgt. "Wir versprechen X, dann liefern wir X." Steady-State. |
+| **Brownfield** (BF) | Code → Doc | Code existiert, Doku folgt. Inventur des Bestands. **Übergangs-Modus mit Konvergenz-Auftrag** zu GF. |
+| **Hybrid** | gemischt pro Sub-Sub-Area | Realistisch: alte Komponenten BF, neue GF. |
 
 **Konvergenz-Auftrag.** BF ist *keine Daueroption*. Jede BF-Sub-Area
 trägt eine **Graduation-Bedingung** (im Adaptions-Block dokumentiert):
@@ -167,14 +167,14 @@ Ein Harness-Dokument ist während Bootstrap nicht "entweder leer oder
 fertig". Sektionen reifen mit unterschiedlichem Tempo durch fünf
 Phasen:
 
-| Phase        | Beschreibung                                                                     |
+| Phase | Beschreibung |
 | ------------ | -------------------------------------------------------------------------------- |
-| 0 — leer     | Datei existiert nicht                                                            |
-| 1 — Skelett  | Template kopiert, Pflichtgliederung mit Platzhaltern                             |
-| 2 — Outline  | Top-Level ausformuliert, Details `<…>`                                           |
-| 3 — partiell | einige Sektionen voll, andere noch `<…>`                                         |
+| 0 — leer | Datei existiert nicht |
+| 1 — Skelett | Template kopiert, Pflichtgliederung mit Platzhaltern |
+| 2 — Outline | Top-Level ausformuliert, Details `<…>` |
+| 3 — partiell | einige Sektionen voll, andere noch `<…>` |
 | 4 — kohärent | alle Sektionen gefüllt, intern konsistent — *freigegeben* für Verweise von außen |
-| 5 — stabil   | Änderungen nur über Change-Process                                               |
+| 5 — stabil | Änderungen nur über Change-Process |
 
 *Sektionen* eines Dokuments können in unterschiedlichen Phasen sein.
 Beispiel: §Source precedence von `harness/README.md` kann durch
@@ -188,12 +188,12 @@ dateiweise.
 Während Bootstrap (und auch danach im Steering-Loop) lösen Änderungen
 in einem Dokument *Folgeaktionen* in anderen aus. Vier Klassen:
 
-| Klasse                      | Wirkung                                                                                                                        | Beispiel                                                                                                                                                                                                                                                                                                                                     |
+| Klasse | Wirkung | Beispiel |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Sync-Trigger**            | Pointer in einem Dokument muss in einem anderen ergänzt werden                                                                 | Neuer Eintrag in `conventions.md` → Pointer in `harness/README.md`                                                                                                                                                                                                                                                                           |
-| **Promotion-Trigger**       | Eintrag wandert aus "Nicht behauptet"-Block in Haupt-Tabelle                                                                   | Make-Target real im Makefile entstanden → Sensor-Zeile gepromoted                                                                                                                                                                                                                                                                            |
+| **Sync-Trigger** | Pointer in einem Dokument muss in einem anderen ergänzt werden | Neuer Eintrag in `conventions.md` → Pointer in `harness/README.md` |
+| **Promotion-Trigger** | Eintrag wandert aus "Nicht behauptet"-Block in Haupt-Tabelle | Make-Target real im Makefile entstanden → Sensor-Zeile gepromoted |
 | **Cross-Reference-Trigger** | Verlinkung zwischen Dokumenten, normativ **nur volatil→stabil** ([`grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)) | Neue ADR *deklariert aufwärts, was sie schärft* (ADR → Spec-§) und referenziert die Anforderung; der Acceptance-Trigger zieht die Spec nach. Ein Spec→ADR-Rückzeiger im bindenden Text existiert nicht (auch nicht als Quellen-Spalte) — Provenance nur in der Historie-Tabelle (Regel 5); der Referenz-Richtungs-Gate erzwingt das über alle Straten |
-| **Acceptance-Trigger**      | Phase-Übergang via Sign-off (z. B. ADR Proposed → Accepted)                                                                    | ADR-Review-Runde abgeschlossen → bindend                                                                                                                                                                                                                                                                                                     |
+| **Acceptance-Trigger** | Phase-Übergang via Sign-off (z. B. ADR Proposed → Accepted) | ADR-Review-Runde abgeschlossen → bindend |
 
 Trigger werden zwischen Bootstrap-Schritten ausgewertet — sie sind die
 "Inbox" der nicht-Vorderscene-Arbeit. Eine zwischen Schritten

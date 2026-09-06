@@ -51,7 +51,7 @@ Fitness Function selbst bauen. Der Ablauf:
 - **Sensor-Schicht nach Kosten wählen:**
 
 | Option | Kosten | Wann sinnvoll |
-|---|---|---|
+| --- | --- | --- |
 | Pre-commit-Hook (Autoren-Maschine) | niedrig | nur lokale Disziplin gefragt |
 | Make-Target im `make gates`/`verify`-Block | mittel | auch CI soll prüfen — Standardweg |
 | Doku-Konsistenz-Agent (Modul 15) | hoch | semantische Prüfung nötig (Floskel-Erkennung) |

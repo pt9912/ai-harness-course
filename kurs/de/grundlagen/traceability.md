@@ -16,6 +16,55 @@ Das ist eine *computational feedforward*-Kontrolle (siehe
 die Nachricht mindestens eine ID enthält. Billig, deterministisch, und
 sie zwingt den Implementer-Agent in die Source-Precedence-Kette zurück.
 
+### Die zweite Richtung: Anforderung → Beleg
+
+Der Constraint oben bindet **Änderungen** an eine ID. Er sagt nichts über
+Anforderungen, die **nie** eine Änderung ausgelöst haben. Ein Repo kann jede
+Commit-Message sauber verankert haben und trotzdem Anforderungen führen, zu
+denen es keinen Test, kein Gate und keine ADR gibt — die Kette ist dann
+lückenlos in der Richtung, die geprüft wird, und leer in der anderen.
+
+Der Auslesestand dieser zweiten Richtung heißt **Requirements Traceability
+Matrix (RTM)**: je Anforderung ihre Belege, und sichtbar die **Waisen** — die
+Anforderungen ohne einen. In regulierten Domänen wird sie von außen verlangt
+(siehe [`fallstudien.md`](fallstudien.md), Klasse *Policy/Compliance-Flagship*).
+
+**Sie wird erzeugt, nicht gepflegt.** Eine RTM als eigenes Dokument neben Tests,
+Gates und ADRs ist ein zweites Verzeichnis von Beziehungen, die schon dastehen —
+eine Kopie, und Kopien driften
+([§Source Precedence](source-precedence.md#source-precedence)). Der Auslesestand
+entsteht aus den Ankern, die der Constraint ohnehin erzwingt. Wer die Anker
+pflegt, hat die Matrix; wer die Matrix pflegt, hat eine zweite Wahrheit.
+
+**Was eine Anforderung entlastet, ist eine Setzung — und sie gehört
+aufgeschrieben.** Ein Werkzeug listet Verweis-Quellen in Spalten, und nur die
+Spalte, die du als *entlastend* deklarierst, macht aus einer Waise ein *ok*. Das
+ist Konfiguration, keine Naturgesetzlichkeit: Dieselbe ADR entlastet oder
+entlastet nicht, je nachdem, in welchen Slot ihr Verzeichnis zeigt.
+
+Deshalb ist die Frage nicht *„welche Spalte gatet"*, sondern **welche Zusage
+eine Anforderung schließt**. Der Vorschlag dieses Kurses: der **Slice**. Eine
+ADR sagt *warum so* und begründet; ein Slice sagt *dass und wann gebaut wird*
+und verpflichtet. Eine Anforderung mit ADR und ohne Slice ist begründet und
+ungebaut — genau der Zustand, den die Matrix sichtbar machen soll, und deshalb
+steht die ADR als eigene Spalte da und nicht als Quittung. Ein Repo, das das
+anders schneidet — etwa eine kuratierte Nachweis-Datei als entlastende Quelle —,
+trifft eine legitime andere Wahl und **deklariert sie**, wie jede Abweichung von
+der Baseline.
+
+**Bericht und Gate sind derselbe Lauf, nicht zwei Werkzeuge.** Der Bericht
+listet auf; dasselbe mit einem Vollständigkeits-Schalter urteilt: mindestens
+eine Waise, und der Lauf fällt. Das ist die Gegenrichtung zum Commit-Hook
+oben — dort *computational feedforward* je Änderung, hier *computational
+feedback* über den Bestand. Ein Repo, das nur die erste Hälfte fährt, prüft,
+dass jede Änderung eine Anforderung nennt, und nie, dass jede Anforderung
+ankommt.
+
+**Nicht zu verwechseln** mit einer Richtungs-Prüfung über die Spec-Straten
+(*welches Stratum darf wen nennen*, [§Referenz-Richtung](referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren)).
+Die prüft, ob ein Verweis erlaubt ist; die RTM, ob es ihn gibt. Werkzeuge
+benennen beides gern ähnlich — der Unterschied ist Richtung gegen Abdeckung.
+
 ### Herkunfts-Anker für Steering-Loop-Regeln
 
 Der Traceability-Constraint bindet **Änderungen** an eine ID. Der
