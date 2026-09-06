@@ -11,6 +11,113 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 120 — 2026-09-06 · Die Sensors-Sektion wächst unter der Tabelle, nicht in ihr
+
+Anlass ist eine Messung in einem adoptierenden Repo (`ai-harness-init`): dessen
+`harness/README.md` stand am 2026-09-06 bei 40.228 Zeichen — 1.874 davon die
+elfzeilige Sensors-Tabelle, 35.137 die Prosa darunter (87 % der Datei, mehr als
+elfmal so viel wie die sechs anderen Sektionen zusammen, 3.120). Alle Zahlen
+`wc -m` über die Zeilenbereiche, die `grep -n '^## '` abgrenzt; sie wandern mit
+jenem Repo — es wuchs allein im Lauf dieser Welle um 1.428 Zeichen, sämtlich in
+der Sensors-Prosa. Die Tabelle war nie das Problem. Die
+Prosa trug zwei Klassen, für die der Korpus keine Form hatte: die Deckungsgrenze
+eines gelisteten Gates und das existierende Target, das kein Gate ist — an fünf
+Stellen von Hand nachgebaut, viermal davon mit derselben Wendung „kein Gate(,|
+und) in keiner Prerequisite-Kette".
+
+- **Modul 13** (§Hard Rule (Doku-Disziplin)): zwei Absätze hinter
+  „Vorhanden ≠ behauptet". Dessen Auflösung — ein reales Target *nicht* zu
+  versprechen ist keine Lüge — deckt den Fall nicht, in dem der nächste Lauf
+  das Target **braucht** (Slice-Move, Messung, Vorschau). Dritte Lage: genannt
+  **und** gekennzeichnet, `kein Gate` in der Bindung-Spalte. Das Kriterium ist
+  nicht die Mitgliedschaft in `gates`, sondern worüber ein Target urteilt — ein
+  Gate über den Zustand des Repos, ein Werkzeug über die Vorbedingungen seines
+  eigenen Laufs. Zweiter Absatz: Ein Gate ohne seine Grenze behauptet ebenso zu
+  viel; die Differenz gehört benannt, und zwar mit dem Kommando, das den
+  Ausschnitt zeigt, nicht mit einer eingefrorenen Zahl.
+  `lab/regelwerk/modul-13-quality-gates.md` wortgleich nachgezogen.
+- **Grundlagen §harness/README.md als Einstiegspunkt**: die Form.
+  `harness/sensors/<target>.md`, ein Gate je Datei — **sobald es Prosa trägt**.
+  Der Default bleibt die Tabellenzeile, anders als beim Adaptions-Block, wo
+  jeder Eintrag Pflichtfelder hat. Das Lesepfad-Argument der `MR`-Verzeichnisform
+  überträgt sich und wiegt hier schwerer: `harness/README.md` ist Schritt 1 des
+  Minimal Agent Workflow, jeder Lauf liest sie ganz. Zwei Träger übertragen sich
+  **nicht** und stehen darum ausdrücklich dabei — die Append-only-Disziplin (ein
+  Gate-Vertrag wird fortgeschrieben, wenn sein Mechanismus sich ändert) und die
+  Anker-Indirektion (sie existiert beim Adaptions-Block, weil die Eintrags-Datei
+  bei Auflösung *wandert*; diese wandert nie, sie verschwindet).
+- **Kein `sensors/done/`:** Ein retiriertes Gate ist weg, `git` hält seine
+  Geschichte. Der Bruch eines eingehenden Links ist dann das gewollte Signal —
+  ein lebendes Artefakt, das auf ein verschwundenes Gate zeigt, behauptet eine
+  Deckung, die es nicht mehr gibt. Zeitdokumente (Review-Report, Closure-Notiz)
+  nennen `make <target>` deshalb als Token statt als Pfad, sonst reißt eine
+  Retirierung rückwirkend Dokumente rot, die zu ihrem Datum korrekt waren.
+- **Die Grenze gegen die nächste Halde:** Die Datei trägt Grenze und
+  Bedienvertrag, **nicht** den Deckungsnachweis. Womit ein Test oder ein
+  Mutations-Fall das Werkzeug deckt, lebt bei ihm (ADR, Spec-Zeile, Skriptkopf);
+  sonst hätte nur der Ort gewechselt, nicht die Menge. Am Anlass-Repo gemessen
+  ist die andere Hälfte real: Dessen `ADR-0033` hat 34.006 Zeichen und nennt
+  `vorschau`, `untergrenze`, Exit-Codes und Blast-Radius kein einziges Mal —
+  dieses Material ist nicht dupliziert, es hatte bisher keinen Ort.
+- **`lab/templates`**: neue Vorlage `harness/sensors/gate.template.md` (Vertrag ·
+  Grenze · Ausgabe und Ausgänge · Sperren · Bindung, mit der Negativliste „kein
+  Status- und kein Datumsfeld, kein Deckungsnachweis") plus Index-Zeile in
+  `lab/templates/README.md`; in `harness/README.template.md` die zweite Tabelle
+  für Nicht-Gates und die Target-Zelle als Link. `harness/sensors/` steht in der
+  Verzeichniskonvention der Quelle (`grundlagen/harness-dateien.md`) und ihres
+  Spiegels.
+- **`lab/example`**: Die `make doc-check`-Zelle war selbst die beschriebene Wand
+  — 2.472 Zeichen in einer Tabellenzeile, davon 2.313 in der `Vertrag`-Zelle.
+  Sie liegt jetzt als
+  `harness/sensors/doc-check.md` (fünf Module als Vertrag, drei Grenzen einzeln
+  benannt, darunter eine permanente und eine durch Konfiguration heilbare); die
+  Zeile verlinkt sie. In allen sechs Sprach-Skeletten wandert `make a-check-graph`
+  aus der Sensors-Tabelle in eine eigene Werkzeug-Tabelle — damit stimmt dort
+  auch die Zeile „`make gates` | alle obigen" wieder.
+- **Der Link ist die geprüfte Fassung der Zuordnung**, nicht Komfort: Eine
+  Namenskonvention `make X` → `sensors/X.md` bliebe still grün, wenn die Datei
+  verschwindet und die Zeile stehen bleibt. Break-Test vor der Behauptung:
+  `sensors/doc-check.md` umbenannt → `target-missing`, 1 Befund; zurück →
+  0 Befunde.
+
+Ein unabhängiger Review-Lauf (anderer Kontext, kein Self-Review, Modul 8) fand
+drei HIGH am ersten Entwurf, alle drei bestätigt und behoben: die Kern-Messung
+schlug den ersten Prosa-Absatz der Tabelle zu und zählte eine Sektion zu viel
+(korrigiert und mit ihrem Kommando versehen); die Norm „kein Status- und kein
+Datumsfeld" stand nur im Template und ist jetzt in der Quelle verankert; und die
+Sprach-Skelette sind sechs, nicht vier — `java` und `kotlin` blieben beim ersten
+Lauf zurück. Dazu vier Zahl- und Zitat-Korrekturen im Eintrag selbst.
+
+Die acht MEDIUM desselben Laufs sind ebenfalls abgearbeitet; drei davon haben
+die Regel geschärft statt nur die Ausführung:
+
+- **Der Auslöser ist jetzt „mehr als ein Satz", nicht „Prosa".** Der im Beispiel
+  behobene Fall war eine 2.472-Zeichen-*Zelle* — nach dem alten Wortlaut hätte
+  man die Prosa schlicht eine Spalte weiter schreiben können und wäre
+  regelkonform gewesen. Dazu der Satz, der das Schlupfloch schließt: ob der
+  Überhang unter der Tabelle steht oder in die Zelle gedrängt wurde, ist
+  dieselbe Sache.
+- **Die Regel schrieb einen Spaltennamen fest und meinte eine Wirkung.** Kurs
+  verlangte `kein Gate` „in der Bindung-Spalte", das Beispiel führt die Spalte
+  als `Charakter`. Jetzt trägt die Regel die Wirkung — die Kennzeichnung steht
+  in der Zeile selbst, nicht in Prosa daneben —, der Spaltenname ist repo-lokal.
+- **Die Zusage über den Link-Sensor nennt jetzt ihre eigene Grenze**, weil
+  dieselbe Welle das verlangt: Er prüft eine Richtung. Eine Sensor-Datei ohne
+  Index-Zeile und eine Zeile auf die falsche Datei bleiben still grün, und
+  geprüft wird nur, wo ein Link-Sensor über `harness/` läuft.
+
+Der Spiegel ist an drei Stellen quelltreu nachgezogen (eine Umformulierung, ein
+gestrichenes Kriterium, ein gestrichener Schluss-Satz); `harness/sensors/<target>.md`
+hat eine Glossar-Zeile bekommen; und `lab/example` trägt seine eigene Regel
+jetzt vollständig — `make replay` war der wörtliche Fall (mehrsätziger Vertrag
+als Prosa unter der Tabelle) und ist die zweite Sensor-Datei, die
+`doc-check`-Grenzen sind vollständig als permanent/heilbar klassifiziert, und
+die Prüfbereichs-Aussage nennt zwei Kommandos statt einer Ausgabezeile.
+
+Gates: `make check` — d-check 251 Dateien 0 Befunde, docs-check 226 Dateien
+0 ERROR/0 WARN, alignment-check 0 WARN; `make -C lab/example verify` — closure
+notes 10 ok, d-check 108/0; `make bundle-check` 52/0.
+
 ## Welle 119 — 2026-09-05 · Die Review-Zusage bekommt einen Wächter
 
 Welle 118 verankerte den Rollenwechsel nach Schritt 8 (Bericht → Handoff an

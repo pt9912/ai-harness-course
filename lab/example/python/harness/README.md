@@ -11,7 +11,6 @@ Sprach-spezifischer Einstieg. Übergeordnete Quelle:
 | `make typecheck` | `mypy --strict src/` | Statisch |
 | `make arch-check` | beide Sensoren unten | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering |
 | `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, deklariert — Werkzeugwahl [ADR-0018](../../docs/plan/adr/0018-grenzen-gehoeren-in-die-konfiguration.md) |
-| `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
 | (in `arch-check`) | `lint-imports` (import-linter) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, aufgezählte Contracts; sieht jede Import-Schreibweise |
 | `make test` | `pytest` | Unit + Tie-Break |
 | `make test-determinism` | `pytest -k determinism --count=100` (pytest-repeat) | [LH-QA-02](../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
@@ -19,6 +18,12 @@ Sprach-spezifischer Einstieg. Übergeordnete Quelle:
 | `make coverage-gate-critical` | wie oben, nur `docsearch/service` | [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 90 %, Index-Layer via CO-001 ausgenommen |
 | `make build` | Multi-Stage Dockerfile | python-slim, nonroot |
 | `make gates` | alle obigen | mandatory vor PR |
+
+**Werkzeuge — genannt, weil der Lauf sie braucht, aber kein Gate:**
+
+| Target | Werkzeug | Charakter |
+|---|---|---|
+| `make a-check-graph` | a-check `--print-graph` | kein Gate — Schichtbild aus derselben Deklaration wie `make a-check`, gibt aus statt zu urteilen |
 
 ## Safety boundaries (Python-spezifisch)
 

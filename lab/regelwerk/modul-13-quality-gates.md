@@ -95,6 +95,33 @@ advisory-Targets (`doc-trace`, `doc-doctor`, …) sind **verfügbar, aber nicht 
 Gate behauptet** — wie ein Maintenance-Target (`regelwerk-check`), das nicht in
 `gates` läuft. Die Lüge wäre, ein Gate zu versprechen, das nicht läuft.
 
+**Die dritte Lage: genannt, aber kein Gate.** Weglassen ist die Antwort für ein
+Target *ohne* Anspruch — nicht für eines, das der nächste Lauf **braucht**:
+etwas, das einen Slice in den nächsten Lifecycle-Zustand *bewegt*, etwas, das
+eine Latenz gegen eine Schwelle *misst*, etwas, das *sagt*, was ein schreibender
+Lauf täte. Wer sie verschweigt, zwingt den Agenten, das Makefile zu lesen statt
+den Einstieg; wer sie unmarkiert in die Gate-Tabelle stellt, hat sie als Gate
+behauptet. Sie gehören genannt **und** gekennzeichnet: `kein Gate` **in der Zeile selbst** —
+in der Spalte, die dort Bindung oder Charakter führt, nicht in Prosa daneben, wo
+es beim Überfliegen der Tabelle fehlt —, dazu in einem Halbsatz, was sie
+stattdessen tun
+([`grundlagen-harness-dateien.md` §harness/README.md als Einstiegspunkt](grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
+Das Kriterium ist nicht, ob ein Target in `gates` läuft, sondern **worüber es
+urteilt**: Ein Gate prüft den Zustand des Repos, ein Werkzeug die Vorbedingungen
+seines eigenen Laufs. Ein Vorlauf-Wächter, der eine leere Commit-Range abfängt,
+bevor ein historien-lesendes Modul blind grün meldet, ist damit kein Gate — er
+schützt einen Job, nicht den Baum.
+
+**Ein Gate ohne seine Grenze behauptet ebenfalls zu viel.** Ein grünes Gate sagt
+etwas über den Ausschnitt, den es prüft, und nichts über den Rest. Fällt dieser
+Ausschnitt enger aus als der Bereich, über den sein Grün gelesen wird, gehört
+die Differenz benannt — und zwar mit dem **Kommando**, das den Ausschnitt zeigt,
+nicht mit einer eingefrorenen Zahl, die beim nächsten Commit falsch ist. Eine
+Vollständigkeits-Zeile (*N Dateien geprüft, 0 Befunde*) ist die Stelle, an der
+es auffliegt: Sie liest sich als Aussage über das Repo und ist eine über den
+Ausschnitt. Auch das ist ein behauptetes Gate ohne Deckung — nur eines, bei dem
+jedes einzelne Wort stimmt.
+
 ### Bootstrap-aware Gates
 
 In der Frühphase eines Projekts ist eine harte Coverage-Schwelle Unsinn.

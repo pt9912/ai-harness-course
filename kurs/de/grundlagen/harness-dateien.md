@@ -19,6 +19,8 @@ AGENTS.md                   # maschinell lesbare Projekt-Konventionen für Agent
 harness/README.md           # Einstiegspunkt: Precedence, Guides, Sensors, Safety
 harness/conventions.md      # Index: repo-lokale Regeln, Adaptionen, Modus pro Sub-Area
 harness/conventions/        # ein MR je Datei; done/ = aufgelöst
+harness/sensors/            # ein Gate je Datei, sobald sein Vertrag mehr als
+                            # einen Satz braucht; kein done/
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
 
@@ -206,7 +208,8 @@ Mensch zuerst lesen muss. Pflichtgliederung:
 ## Purpose                  # ein Absatz, was diese Datei ist (und was nicht)
 ## Source precedence        # die obige Tabelle, repo-spezifisch
 ## Guides                   # Tabelle der Feedforward-Quellen
-## Sensors                  # Tabelle der Feedback-Gates (nur real existierende!)
+## Sensors                  # Tabelle der Feedback-Gates (nur real existierende!);
+                            # Prosa je Gate unter harness/sensors/<target>.md
 ## Traceability rules       # Welche IDs müssen in Commits/PRs auftauchen?
 ## Safety and scope boundaries  # repo-spezifische Hard Rules
 ## Minimal agent workflow   # der 8-Schritt-Pfad (siehe Modul 9)
@@ -251,6 +254,88 @@ Form projektabhängig), damit ein Reviewer sie als legitim erkennt und
 nicht als Tippfehler abtut. Eine Bindung ohne Deklaration ist eine
 stille Setzung — und damit eine Harness-Lüge in derselben Klasse wie
 ein halluziniertes Gate.
+
+**Die Sensors-Sektion wächst nicht in der Tabelle, sondern unter ihr.** Grenze
+und Nicht-Gate
+([Modul 13 §Hard Rule](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin))
+brauchen je ein paar Sätze, und die Tabelle hat dafür keine Spalte — also
+sammeln sie sich als Prosa darunter. In einem adoptierenden Repo
+(`ai-harness-init`) gemessen, Stand 2026-09-06 (`wc -m` über die
+Zeilenbereiche, die `grep -n '^## '` abgrenzt — die Zahlen wandern mit jenem
+Repo, das Kommando nicht): elf Tabellenzeilen mit 1.874 Zeichen, darunter
+35.137 Zeichen Prosa — 87 % der Datei, und mehr als elfmal so viel wie die
+sechs anderen Sektionen zusammen (3.120). Die Tabelle selbst war nie das
+Problem; sie stand bei elf Zeilen.
+
+**Ein Gate je Datei, sobald sein Vertrag mehr braucht als einen Satz.** Diese
+Prosa lebt dann unter
+`harness/sensors/<target>.md`, die Tabellenzeile bleibt stehen und wird ihr
+Index — die **Target-Zelle wird zum Link auf die Datei**, wie die `MR`-Zelle im
+Adaptions-Block. Dieser Link ist kein Komfort, sondern die einzige Fassung der
+Zuordnung, die ein Sensor prüft: Eine bloße Namenskonvention (`make X` →
+`sensors/X.md`) bleibt still grün, wenn die Datei verschwindet und die Zeile
+stehen bleibt. Auch diese Zusage hat ihre Grenze, und sie steht hier, weil
+[Modul 13](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)
+sie verlangt: Der Sensor prüft **eine** Richtung — ob das Ziel existiert. Eine
+Sensor-Datei ohne Index-Zeile und eine Zeile, die auf die *falsche* Datei zeigt,
+bleiben still grün; und geprüft wird überhaupt nur, wo ein Link-Sensor über
+`harness/` läuft. Das ist derselbe Schnitt wie beim Adaptions-Block unten und aus
+demselben Grund — er wiegt hier sogar schwerer: `harness/README.md` ist
+**Schritt 1** des Minimal Agent Workflow
+([Modul 9](../03-agenten/modul-09-implementierung.md#minimal-agent-workflow-8-schritte)),
+jeder Lauf liest sie ganz, und relevant ist meist eine Zeile. Auch das
+Korrektheits-Risiko ist dasselbe: Ein Nicht-Gate liest sich wie ein Gate, ein
+Gate mit Loch wie ein dichtes.
+
+Der **Default ist hier die Tabellenzeile**, nicht die Datei — anders als beim
+Adaptions-Block, wo jeder Eintrag Pflichtfelder trägt. Ein Gate, dessen Vertrag
+in einen Satz passt, ist mit seiner Zeile vollständig beschrieben; für dieses
+eine Datei anzulegen streut den Lesepfad, ohne etwas zu gewinnen. **Ob der
+Überhang schon unter der Tabelle steht oder in die Zelle gedrängt wurde, ist
+dieselbe Sache** — eine Zelle, die zum Absatz geworden ist, ist der Fund, nicht
+die Ausnahme; sonst genügte es, die Prosa eine Spalte weiter zu schreiben. Ein
+Träger
+der Verzeichnis-Form trägt hier ebenfalls nicht: Ein Gate-Vertrag wird
+fortgeschrieben, wenn sein Mechanismus sich ändert — die Append-only-Disziplin
+der `MR`-Einträge gilt für ihn nicht.
+
+**Die Datei trägt die Grenze und den Bedienvertrag — nicht den
+Deckungsnachweis.** Hinein gehört, was die Lesart eines Laufs steuert: was sein
+Grün nicht abdeckt, was seine Ausgabe bedeutet, wofür welcher Exit-Code steht,
+woran er abbricht. Nicht hinein gehört, womit das Werkzeug selbst gedeckt ist —
+welcher Test welche Hälfte trägt, welcher Mutations-Fall welchen Zweig bewacht.
+Das ist die Frage *„ist das Werkzeug richtig?"*, und ihre Antwort lebt bei ihm:
+in seiner ADR, seiner Spec-Zeile, seinem Skriptkopf. Ohne diese Grenze wird
+`harness/sensors/` die Halde, die die Sektion vorher war — der Ort hätte
+gewechselt, die Menge nicht.
+
+**Kein Verzeichnis-Lifecycle: ein retiriertes Gate ist weg.** Es gibt kein
+`sensors/done/`. Ein aufgelöster `MR`-Eintrag erklärt weiter, welche Form das
+Repo einmal hatte, und wird deshalb aufbewahrt; ein Gate, das nicht mehr läuft,
+erklärt nichts, was `git` nicht hält
+([§Was ein Kommentar trägt](#was-ein-kommentar-trägt--code-konfiguration-skripte)).
+Die Zeile verschwindet aus der Tabelle, die Datei aus dem Verzeichnis. Aus
+demselben Grund trägt die Sensor-Datei **kein Status- und kein Datumsfeld**: Der
+Zustand eines Gates ist sein Lauf, und der lebt in CI; ihr Änderungsdatum hält
+`git`.
+
+**Deshalb wird die Datei direkt adressiert, nicht über den Index.** Wer aus
+`AGENTS.md`, einer ADR oder einem Slice auf eine Gate-Grenze zeigt, verlinkt
+`harness/sensors/<target>.md`. Die Anker-Indirektion, die der Adaptions-Block
+unten braucht, hat hier keinen Träger: Dort existiert sie, weil die
+Eintrags-Datei bei Auflösung *wandert* — diese wandert nie, sie verschwindet.
+Und der Bruch bei Retirierung ist das gewollte Signal: Ein lebendes Artefakt,
+das auf ein Gate zeigt, das es nicht mehr gibt, behauptet eine Deckung, die
+nicht mehr besteht. Der rote Link-Sensor ist die richtige Antwort darauf, kein
+Anker, der ihn verschluckt.
+
+**Zeitdokumente verlinken nicht, sie nennen das Target.** Ein Review-Report und
+eine Closure-Notiz halten eine Messung zu ihrem Datum fest und werden nicht
+nachgezogen. Sie schreiben deshalb `make <target>` als Token, nicht als Pfad —
+sonst reißt die Retirierung eines Gates rückwirkend Dokumente rot, die zu ihrem
+Datum korrekt waren. Es ist dieselbe Trennung, mit der die Slice-ID ein Token
+bleibt statt ein Pfad
+([Modul 5](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
 
 ## harness/conventions.md als Konventionsspeicher
 

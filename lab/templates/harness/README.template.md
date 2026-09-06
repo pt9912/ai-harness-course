@@ -90,6 +90,30 @@ Code→Review-Kante ab, Modul `planning` (Ziel `doc-planning`,
 Planning-Lifecycle-Konsistenz) die Verify→Closure-Kante — beide aus dem
 Lebenszyklus-Diagramm in Modul 1. Nur eintragen, wenn das Ziel im
 Makefile existiert (siehe oben).
+
+NICHT-GATES: Ein Target, das der Agent braucht, aber das nichts über den
+Zustand des Repos urteilt — es *bewegt* (Slice-Move), *misst* (Latenz) oder
+*sagt*, was ein schreibender Lauf täte — steht in der zweiten Tabelle und
+trägt `kein Gate` IN DER ZEILE SELBST, in der Spalte, die hier die Bindung
+führt — nicht in Prosa daneben. Weglassen ist nur für Targets richtig, die
+niemand braucht (Modul 13 §Vorhanden ≠ behauptet).
+
+WÄCHST DIE SEKTION: Die Tabelle bleibt klein, die Prosa darunter nicht.
+Braucht ein Gate mehr als EINEN SATZ — Deckungsgrenze, Ausgabe-Bedeutung,
+Exit-Codes, Abbruch-Bedingungen —, wandert das nach. Ob der Überhang schon
+unter der Tabelle steht oder in die Zelle gedrängt wurde, ist dieselbe Sache:
+eine Zelle, die zum Absatz geworden ist, ist der Fund, nicht die Ausnahme.
+`harness/sensors/<target>.md`, und die **Target-Zelle wird zum Link darauf**
+— wie die `MR`-Zelle im Adaptions-Block. Der Link ist kein Komfort: Er ist die
+einzige Fassung dieser Zuordnung, die der Link-Sensor prüft. Eine bloße
+Namenskonvention (`make X` -> `sensors/X.md`) bleibt still grün, wenn die
+Datei verschwindet und die Zeile stehen bleibt. Seine Grenze: Er prüft EINE
+Richtung — ob das Ziel existiert; eine Datei ohne Index-Zeile und eine Zeile
+auf die falsche Datei bleiben still grün, und geprüft wird nur, wo ein
+Link-Sensor über `harness/` läuft. Kein `sensors/done/`:
+ein retiriertes Gate verschwindet, `git` hält seine Geschichte. Was das
+Werkzeug selbst deckt (welcher Test welche Hälfte trägt), gehört NICHT
+dorthin, sondern in seine ADR/Spec-Zeile/seinen Skriptkopf.
 -->
 
 | Target | Vertrag | Bindung |
@@ -102,6 +126,15 @@ Makefile existiert (siehe oben).
 | `make gates` | alle inneren Gates | — |
 | `make ci` | gates + extras | — |
 | `make fullbuild` | volle Closure | Image-Hash `sha256:…` (Modul 14) |
+| [`make <gate-mit-grenze>`](sensors/<target>.md) | <…>; Grenze und Ausgänge in der verlinkten Datei | ADR-<NNNN> |
+
+**Werkzeuge — genannt, weil der Lauf sie braucht, aber kein Gate:**
+
+| Target | Tut was | Bindung |
+|---|---|---|
+| `make <mover>` | bewegt <…>, prüft nichts | kein Gate |
+| `make <messung>` | misst <…> gegen <Schwelle> | kein Gate, ADR-<NNNN> |
+| [`make <vorschau>`](sensors/<vorschau>.md) | sagt, was <schreibender Lauf> täte; Ausgänge und Sperren in der verlinkten Datei | kein Gate |
 
 **Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates`.
 **Rote Gates:** Begründung im verlinkten `CO-<NNN>` (siehe Bindung-Spalte), Modul 7.

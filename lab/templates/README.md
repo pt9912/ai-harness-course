@@ -39,6 +39,7 @@ Klassen**, nicht 24 gleichartige Vorlagen:
 | [`harness/README.template.md`](harness/README.template.md) | Repo-Einstiegspunkt mit Guides, Sensors, Safety | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
 | [`harness/conventions.template.md`](harness/conventions.template.md) | Repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Zusatzklassen-Deklaration, Modus-Deklaration pro Sub-Area | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessconventionsmd-als-konventionsspeicher) |
 | [`harness/conventions/MR-NNN-titel.template.md`](harness/conventions/MR-NNN-titel.template.md) | Ein Adaptions-Eintrag (`MR-<NNN>`); Index in `conventions.md` | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
+| [`harness/sensors/gate.template.md`](harness/sensors/gate.template.md) | Ein Gate oder Werkzeug, sobald es mehr braucht als seine Tabellenzelle: Grenze, Ausgänge, Sperren; Index in `harness/README.md` | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
 
 ## Download als ZIP
 

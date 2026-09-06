@@ -6,12 +6,17 @@
 | `make typecheck` | `javac` |
 | `make arch-check` | beide Sensoren unten |
 | `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) — Werkzeugwahl [ADR-0018](../../docs/plan/adr/0018-grenzen-gehoeren-in-die-konfiguration.md) |
-| `make a-check-graph` | a-check `--print-graph`, Schichtbild aus derselben Deklaration |
 | (in `arch-check`) | **ArchUnit** in JUnit, importiert Bytecode |
 | `make test` | JUnit 5 |
 | `make coverage-gate` | JaCoCo mit Schwelle |
 | `make coverage-gate-critical` | JaCoCo, nur `docsearch/service/` (Profil `critical-coverage`; [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md): 90 %, Index via CO-001 ausgenommen) |
 | `make build` | Maven + Distroless |
+
+**Werkzeuge — genannt, weil der Lauf sie braucht, aber kein Gate:**
+
+| Target | Werkzeug |
+|---|---|
+| `make a-check-graph` | a-check `--print-graph`, Schichtbild aus derselben Deklaration wie `make a-check` — **kein Gate**, gibt aus statt zu urteilen |
 
 Übergeordnet: [`../../harness/README.md`](../../harness/README.md).
 

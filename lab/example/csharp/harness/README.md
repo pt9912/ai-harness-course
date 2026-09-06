@@ -8,11 +8,16 @@
 | `make typecheck` | `dotnet build -warnaserror` | — |
 | `make arch-check` | beide Sensoren unten | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering |
 | `make a-check` | a-check-Container, `.a-check.yml` (netzlos, read-only) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, deklariert — Werkzeugwahl [ADR-0018](../../docs/plan/adr/0018-grenzen-gehoeren-in-die-konfiguration.md) |
-| `make a-check-graph` | a-check `--print-graph` | Schichtbild aus derselben Deklaration, kein Gate |
 | (in `arch-check`) | **NetArchTest** (in xUnit-Tests) | [ADR-0001](../../docs/plan/adr/0001-hexagonale-architektur.md) Layering, vier Namespace-Paare |
 | `make test` | `dotnet test` (xUnit) | — |
 | `make coverage-gate` | `coverlet` + Schwelle | [ADR-0013](../../docs/plan/adr/0013-coverage-schwellen.md) |
 | `make build` | `dotnet publish` + Distroless | — |
+
+**Werkzeuge — genannt, weil der Lauf sie braucht, aber kein Gate:**
+
+| Target | Werkzeug | Charakter |
+|---|---|---|
+| `make a-check-graph` | a-check `--print-graph` | kein Gate — Schichtbild aus derselben Deklaration wie `make a-check`, gibt aus statt zu urteilen |
 
 Die beiden Layering-Sensoren sehen Verschiedenes: a-check liest
 `using`-Direktiven im Quelltext, NetArchTest die kompilierte Assembly. Ein voll
