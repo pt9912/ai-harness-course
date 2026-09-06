@@ -743,6 +743,123 @@ s19_archivierung() {
   verdikt "s19h flacher Klon: Archiv liefert den Volltext, die git-Historie nicht" "unzip ok, git show scheitert" "unzip='${aus:0:22}' git='${hist:0:34}'" $ok
 }
 
+# ---------------------------------------------------------------------------
+# s20: ENTWURFS-Gegenstand — die Sensor-Datei (Welle 120,
+# grundlagen/harness-dateien.md §harness/README.md als Einstiegspunkt).
+# Wie s19 ohne Nebenlaeufigkeits-Gegenstand: eine Regel und ihr Sensor. Die
+# Topologie bleibt, sie kostet nichts und haelt die Bauform gleich. Der Seed
+# ist unveraendert; die Form legen die Szenarien selbst an.
+# Geprobt werden die drei Aussagen der Regel ueber den Link-Sensor: was er
+# faengt (s20a), die zwei Loecher, die sie seit dem Review selbst benennt
+# (s20b/s20c), die Retirierung (s20d) und das Paar Token/Pfad (s20e/s20f).
+sensorbaum() { # $1 = Clone-Verzeichnis; legt Index-Zeile + Sensor-Datei an
+  mkdir -p "$1/harness/sensors"
+  cat > "$1/harness/README.md" <<'EOF'
+# Harness
+
+## Sensors (Feedback-Gates)
+
+| Target | Vertrag | Bindung |
+|---|---|---|
+| [`make doc-check`](sensors/doc-check.md) | Doku-Referenzen gruen | — |
+| `make lint` | Stil | — |
+EOF
+  cat > "$1/harness/sensors/doc-check.md" <<'EOF'
+# `make doc-check` — Doku-Referenzen
+
+## Vertrag
+
+Rot, wenn ein Verweis nicht aufloest.
+
+## Grenze — was das Gruen nicht abdeckt
+
+1. Die inhaltliche Richtigkeit eines aufgeloesten Verweises. Permanent.
+EOF
+}
+
+s20_sensor_datei() {
+  # --- s20a: Datei weg, Index-Zeile bleibt -> der Sensor beisst
+  topo; cd "$WORK/sim/alice" || return 1
+  sensorbaum .
+  schritt git add -A && schritt git commit -qm "sensors-Form angelegt" || return 1
+  rm harness/sensors/doc-check.md
+  schritt git add -A && schritt git commit -qm "Sensor-Datei entfernt, Zeile bleibt" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund "$out" "sensors/doc-check.md" "target-missing" && ok=0 || ok=1
+  verdikt "s20a Sensor-Datei weg, Index-Zeile bleibt: LAUT" "target-missing auf sensors/doc-check.md" "$(echo "$out"|tail -1)" $ok
+
+  # --- s20b: Waise (Datei ohne Index-Zeile) -> STILL. Erwartete Stille: die
+  # Regel nennt dieses Loch seit dem Review selbst; waere es laut, waere die
+  # Grenz-Aussage falsch.
+  topo; cd "$WORK/sim/alice" || return 1
+  sensorbaum .
+  cat > harness/sensors/verwaist.md <<'EOF'
+# `make verwaist` — auf diese Datei zeigt keine Index-Zeile
+
+## Vertrag
+
+Existiert, wird von niemandem genannt.
+EOF
+  schritt git add -A && schritt git commit -qm "Waise angelegt" || return 1
+  # Stille traegt nur, wenn der Zustand wirklich steht: Datei da, von niemandem
+  # genannt. Sonst bestuende dieses Verdikt auch ueber einem leeren Baum.
+  schritt test -f harness/sensors/verwaist.md || return 1
+  verlinkt=$(grep -rc 'verwaist' harness/README.md || true)
+  schritt test "$verlinkt" = 0 || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  n=$(printf '%s' "$out" | grep -c 'verwaist' || true)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s20b Sensor-Datei ohne Index-Zeile (Waise): STILL" "0 Befunde zur Waise" "$n Treffer / $(echo "$out"|tail -1)" $ok
+
+  # --- s20c: Index-Zeile zeigt auf die FALSCHE, aber existierende Datei
+  # -> STILL. Zweites benanntes Loch.
+  topo; cd "$WORK/sim/alice" || return 1
+  sensorbaum .
+  sed -i 's#| `make lint` | Stil | — |#| [`make lint`](sensors/doc-check.md) | Stil | — |#' harness/README.md
+  schritt git add -A && schritt git commit -qm "lint-Zeile auf die falsche Datei" || return 1
+  # Ohne diese Probe bestuende s20c auch, wenn das sed nicht gegriffen haette
+  # und die Zeile gar kein Link waere — dieselbe Falle wie bei s19b.
+  schritt grep -q '\[`make lint`\](sensors/doc-check.md)' harness/README.md || return 1
+  schritt test -f harness/sensors/doc-check.md || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  n=$(printf '%s' "$out" | grep -c 'harness/README.md' || true)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s20c Index-Zeile auf falsche, existierende Sensor-Datei: STILL" "0 Befunde auf harness/README.md" "$n Treffer / $(echo "$out"|tail -1)" $ok
+
+  # --- s20d: saubere Retirierung (Zeile UND Datei weg) -> gruen
+  topo; cd "$WORK/sim/alice" || return 1
+  sensorbaum .
+  schritt git add -A && schritt git commit -qm "sensors-Form angelegt" || return 1
+  rm harness/sensors/doc-check.md
+  sed -i '/sensors\/doc-check.md/d' harness/README.md
+  schritt git add -A && schritt git commit -qm "Gate retiriert: Zeile und Datei weg" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  echo "$out" | tail -1 | grep -q '0 Befund' && ok=0 || ok=1
+  verdikt "s20d Retirierung sauber (Zeile UND Datei weg): GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
+
+  # --- s20e/s20f: dieselbe Retirierung, zwei Verweis-Formen daneben.
+  # Zeitdokument nennt das Token, lebendes Artefakt verlinkt den Pfad.
+  topo; cd "$WORK/sim/alice" || return 1
+  sensorbaum .
+  mkdir -p docs/reviews
+  printf '# Review slice-001\n\nGate-Lauf: `make doc-check` gruen (Stand des Laufs).\n' > docs/reviews/2026-09-06-slice-001.md
+  printf '\nGrenze des Doku-Gates: [`sensors/doc-check.md`](sensors/doc-check.md).\n' >> harness/conventions.md
+  schritt git add -A && schritt git commit -qm "Zeitdokument nennt Token, conventions.md verlinkt Pfad" || return 1
+  rm harness/sensors/doc-check.md
+  sed -i '/sensors\/doc-check.md/d' harness/README.md
+  schritt git add -A && schritt git commit -qm "Gate retiriert" || return 1
+  schritt grep -q 'make doc-check' docs/reviews/2026-09-06-slice-001.md || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  # Die Stille des Zeitdokuments zaehlt nur, weil derselbe Lauf LAUT ist (s20f).
+  # Ein rundum stiller Lauf bewiese nichts ueber die Token-Form.
+  laut=$(printf '%s' "$out" | grep -c 'target-missing' || true)
+  schritt test "$laut" -gt 0 || return 1
+  printf '%s' "$out" | grep -q 'docs/reviews/' && ok=1 || ok=0
+  verdikt "s20e Zeitdokument nennt make <target> als Token, Gate retiriert: STILL" "kein Befund auf docs/reviews/" "$(printf '%s' "$out" | grep -c 'docs/reviews/' || true) Treffer" $ok
+  befund "$out" "sensors/doc-check.md" "target-missing" && ok=0 || ok=1
+  verdikt "s20f lebendes Artefakt verlinkt den Pfad, Gate retiriert: LAUT" "target-missing aus harness/conventions.md" "$(echo "$out"|tail -1)" $ok
+}
+
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -765,6 +882,7 @@ lauf s16 s16_beleg_immutabel
 lauf s17 s17_zwei_slugs_still
 lauf s18 s18_alias_und_invalidierung
 lauf s19 s19_archivierung
+lauf s20 s20_sensor_datei
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

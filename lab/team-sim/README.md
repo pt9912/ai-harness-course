@@ -44,7 +44,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -98,6 +98,12 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s19i | Welle-Stub trägt seine **eigene** Form | Zeiger auf die Ergebnisnotiz + Vorgangszahl | ✓ nachgetragen: die Probe schrieb erst beide Stub-Formen gleich |
 | s19j | Marker da, aber **nicht gekürzt** | **`section-forbidden`** | ✓ die zweite Sensor-Bedingung: ein Stub trägt keine H2 |
 | s19h | Rückgriff im `--depth 1`-Klon | Archiv liefert, `git show` scheitert | ✓ die Grenze des Entwurfs, gemessen |
+| s20a | Sensor-Datei entfernt, Index-Zeile bleibt | **`target-missing`** | ✓ die Zusage der Regel, gemessen statt behauptet |
+| s20b | Sensor-Datei ohne Index-Zeile (Waise) | **still** | ✓ erstes benanntes Loch — wäre es laut, wäre die Grenz-Aussage falsch |
+| s20c | Index-Zeile auf die falsche, aber existierende Datei | **still** | ✓ zweites benanntes Loch |
+| s20d | Retirierung sauber: Zeile **und** Datei weg | grün | ✓ „ein retiriertes Gate ist weg" kostet nichts |
+| s20e | Zeitdokument nennt `make <target>` als Token, Gate retiriert | **still** | ✓ der Report bleibt grün |
+| s20f | lebendes Artefakt verlinkt den Pfad, Gate retiriert | **`target-missing`** | ✓ das Paar zu s20e: der Bruch ist das gewollte Signal |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

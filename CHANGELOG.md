@@ -11,6 +11,54 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 121 — 2026-09-06 · Die Sensor-Datei wird geprobt, nicht behauptet
+
+Welle 120 macht drei Aussagen über den Link-Sensor, die niemand gemessen hatte:
+dass er die Zuordnung Index-Zeile → Datei hält, dass er dabei genau zwei Löcher
+lässt, und dass die Retirierung eines Gates lebende Verweise reißt, Zeitdokumente
+aber nicht. Der Review von Welle 120 hat sie zu Recht als `verifizierbar: nein`
+geführt. Neue Gruppe `s20` im Team-Sim (`lab/team-sim/`), Bauform wie `s19`: ohne
+Nebenläufigkeits-Gegenstand, Topologie bleibt, Seed **unverändert** — die Form
+legen die Szenarien selbst an.
+
+| # | Szenario | Erwartung |
+|---|---|---|
+| s20a | Sensor-Datei entfernt, Index-Zeile bleibt | `target-missing` |
+| s20b | Sensor-Datei ohne Index-Zeile (Waise) | still |
+| s20c | Index-Zeile auf die falsche, aber existierende Datei | still |
+| s20d | Retirierung sauber: Zeile **und** Datei weg | grün |
+| s20e | Zeitdokument nennt `make <target>` als Token, Gate retiriert | still |
+| s20f | lebendes Artefakt verlinkt den Pfad, Gate retiriert | `target-missing` |
+
+**s20b und s20c sind die zwei Löcher, die Welle 120 auf den Review hin selbst
+benannt hat** — dort standen sie als Behauptung, hier sind sie gemessen; wären
+sie laut, wäre die Grenz-Aussage falsch. **s20e/s20f sind das Paar zur Setzung
+„Zeitdokumente nennen das Token, lebende Artefakte verlinken"**, aus der Welle
+120 ihr „ein retiriertes Gate ist einfach weg" ableitet: Bliebe s20f still,
+trüge die Begründung nicht.
+
+**Was die Sim nicht entscheidet, steht dabei:** Der Auslöser („mehr als ein
+Satz") und die Trennung Bedienvertrag/Deckungsnachweis sind Urteile, kein
+Sensor-Fall — ein Szenario dazu wäre ein halluziniertes Gate.
+
+**Ein Defekt im eigenen Szenario-Code, im Mutations-Test gefunden.** Drei der
+sechs Verdikte bestehen durch Abwesenheit und hätten auch über einem kaputten
+Aufbau bestanden. Die erste Fassung der Wächter dagegen meldete zwar
+`KAPUTT (s20)`, ging aber an `schritt` vorbei — die Bilanz sagte weiter
+`0 KAPUTT` und der Lauf endete mit Exit 0: ein kaputter Lauf, der sich sauber
+ausgibt, genau die Klasse, für die der Runner sein `KAPUTT` überhaupt führt.
+Jetzt laufen alle drei über `schritt`. Belegt in beide Richtungen: Mit
+entferntem `sed` in s20c meldet der Lauf `1 KAPUTT` und endet rot; unverändert
+6 PASS.
+
+Läufe: Gruppe `s20` 6/6; voller Lauf **52 PASS, 0 FAIL, 0 KAPUTT** (Image
+`d-check@sha256:e31a372…`, Repo `dcbdbbc`, Seed `669c9a1836a8`) — die 46
+bestehenden Verdikte stehen unverändert. Der Team-Sim ist **kein Gate**: läuft
+auf Anlass, nicht in `make check`.
+
+Gates: `make check` — d-check 251 Dateien 0 Befunde, docs-check 226 Dateien
+0 ERROR/0 WARN, alignment-check 0 WARN.
+
 ## Welle 120 — 2026-09-06 · Die Sensors-Sektion wächst unter der Tabelle, nicht in ihr
 
 Anlass ist eine Messung in einem adoptierenden Repo (`ai-harness-init`): dessen
