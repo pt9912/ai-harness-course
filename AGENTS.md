@@ -38,6 +38,25 @@ Berührt eine Welle `lab/regelwerk/`, zieht die `Stand:`-Zeile in
 [`lab/regelwerk/README.md`](lab/regelwerk/README.md) nach. Lab-only-Wellen
 lassen sie stehen.
 
+Behauptet eine Welle ein **beobachtbares Verhalten** — ein Sensor feuert, ein
+Sensor bleibt still, eine Operation tut oder lässt etwas —, bekommt diese Aussage
+eine Szenario-Gruppe in [`lab/team-sim/`](lab/team-sim/README.md), bevor sie
+stehen bleibt: Das hebt sie von *entworfen* auf *geprobt*
+([`docs/team.md`](docs/team.md)). **Erwartete Stille ist eine Aussage** und
+braucht ihr Szenario genauso.
+
+Behauptet die Welle kein beobachtbares Verhalten, steht das im Wellen-Eintrag —
+sonst liest sich das Fehlen wie ein Versäumnis. **Urteile sind keine
+Szenario-Fälle** („ist das ein Satz?", „trägt das der Bedienvertrag?"); ein
+Szenario darüber wäre ein halluziniertes Gate.
+
+Ein Verdikt, das durch **Abwesenheit** besteht, hängt an einer positiven
+Vorbedingung über `schritt` — sonst besteht es auch über einem kaputten Aufbau
+(gemessen in Welle 121).
+
+Der Team-Sim ist **kein Gate**: Er läuft auf Anlass (`bash lab/team-sim/run.sh`),
+steht nicht in `make check` und wird in §4 nicht geführt.
+
 Was offen ist, führt [`docs/roadmap.md`](docs/roadmap.md).
 
 ## 4. Gates

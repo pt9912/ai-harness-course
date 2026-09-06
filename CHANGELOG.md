@@ -11,6 +11,44 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 122 — 2026-09-06 · Der Team-Sim bekommt seinen Auslöser
+
+`AGENTS.md` erwähnte den Team-Sim mit keinem Wort — 52 Verdikte, und die
+Arbeitskonventionen kannten ihn nicht. Seit s19/s20 ist er die Art, wie ein
+Entwurf von *entworfen* auf *geprobt* kommt (`docs/team.md`); das stand nirgends
+als Regel, sondern nur als gelebte Praxis in zwei Wellen.
+
+- **`AGENTS.md` §3 (Wellen)**: vier Absätze, in derselben bedingten Satzform wie
+  die `Stand:`-Zeilen-Regel darüber. Auslöser ist **die Art der Aussage**, nicht
+  die Änderung: Behauptet eine Welle ein beobachtbares Verhalten — ein Sensor
+  feuert, ein Sensor bleibt still, eine Operation tut oder lässt etwas —, bekommt
+  die Aussage eine Szenario-Gruppe, bevor sie stehen bleibt. Erwartete Stille
+  zählt als Aussage.
+- **Die Gegenrichtung steht dabei:** Behauptet eine Welle kein beobachtbares
+  Verhalten, steht das im Eintrag — sonst liest sich das Fehlen wie ein
+  Versäumnis. Urteile sind ausdrücklich **keine** Szenario-Fälle; ein Szenario
+  über „ist das ein Satz?" wäre ein halluziniertes Gate in Szenario-Form.
+- **Die Lehre aus Welle 121 ist mitverankert:** Ein Verdikt, das durch
+  Abwesenheit besteht, hängt an einer positiven Vorbedingung über `schritt` —
+  sonst besteht es auch über einem kaputten Aufbau.
+- **Und der Sim wird als Nicht-Gate benannt** (läuft auf Anlass, nicht in
+  `make check`, nicht in §4) — dieselbe Kennzeichnungspflicht, die Welle 120 für
+  die Sensors-Tabelle eines adoptierenden Repos einführt, hier auf das eigene
+  Briefing angewandt.
+
+**Warum die Regel nicht „für jede Änderung" lautet:** Gemessen an den letzten
+Wellen trüge das nicht. Welle 118 (Rollenwechsel-Satz) hat nichts Beobachtbares —
+ein Szenario müsste man erfinden. Welle 116 (Verzeichnisform des Registers)
+bekam s12–s18. Welle 119 (Review-DoD) bekam einen Break-Test. Eine
+Blankett-Regel wäre entweder tot oder produzierte erfundene Szenarien.
+
+**Diese Welle behauptet selbst kein beobachtbares Verhalten** — sie ändert das
+Briefing, nicht einen Sensor; kein Szenario, und das steht hier, wie die Regel
+es ab sofort verlangt.
+
+Gates: `make check` — d-check 251 Dateien 0 Befunde, docs-check 226 Dateien
+0 ERROR/0 WARN, alignment-check 0 WARN.
+
 ## Welle 121 — 2026-09-06 · Die Sensor-Datei wird geprobt, nicht behauptet
 
 Welle 120 macht drei Aussagen über den Link-Sensor, die niemand gemessen hatte:
