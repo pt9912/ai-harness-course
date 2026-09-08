@@ -60,6 +60,18 @@ dcheck_args() { docker run --rm --network none -v "$1:/repo:ro" "$IMG" "${@:2}" 
 # irgendwo in der Ausgabe reichte nicht — wave-drift auf dem falschen Ziel
 # waere sonst auch "bestanden".
 befund() { printf '%s' "$1" | grep -q "$(printf '\t%s\t%s' "$2" "$3")"; }
+# Wie befund(), pinnt zusaetzlich den FUNDORT: Datei, Ziel und Code muessen in
+# DERSELBEN Zeile stehen. Zwei Bedingungen, die verschiedene Zeilen erfuellen,
+# sind kein Nachweis — der Verdikt-Text nennt die Datei, also gehoert sie in
+# die Pruefung.
+befund_in() { # $1 out  $2 datei  $3 target  $4 code
+  printf '%s' "$1" | grep -q "^$2:[0-9]*$(printf '\t%s\t%s' "$3" "$4")"
+}
+# Stille: die Summenzeile nennt NULL Befunde. Ein blosses "0 Befund" traefe
+# auch "10 Befund(e)" und meldete Stille ueber einem lauten Lauf; das Komma
+# davor macht die Ziffer eindeutig. Ueber die ganze Ausgabe statt `tail -1`,
+# weil die Zeilenreihenfolge von d-check nicht festgelegt ist.
+still() { printf '%s' "$1" | grep -qE ', 0 Befund'; }
 verdikt() { # $1 name  $2 erwartet  $3 beobachtet  $4 ok(0/1)
   if [ "$4" = 0 ]; then echo "  PASS  $1"; PASS=$((PASS+1)); v=PASS;
   else echo "  FAIL  $1"; echo "        erwartet:  $2"; echo "        beobachtet: $3"; FAIL=$((FAIL+1)); v=FAIL; fi
@@ -127,7 +139,7 @@ s04_zwei_wellen_und_waves() {
   sed -i 's|- \[welle-1-basis\](../welle-1-basis.md)|- [welle-1-basis](../welle-1-basis.md)\n- [welle-2-ausbau](../welle-2-ausbau.md)|' docs/plan/planning/in-progress/roadmap.md
   sed -i '/welle-2-ausbau | welle-1 done/d' docs/plan/planning/in-progress/roadmap.md
   schritt git add -A && schritt git commit -qm "zweite offene Welle" && schritt git push -q origin main || return 1
-  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s04a zwei offene Wellen: planning ohne waves GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
   # waves einschalten -> Singleton-Semantik (Default mode: one) muss beissen
   printf '  waves:\n    dir: docs/plan/planning\n' >> .d-check.yml
@@ -136,7 +148,7 @@ s04_zwei_wellen_und_waves() {
   # Bijektion statt Singleton (d-check v0.62.0, der CR dieses Repos): derselbe
   # Zustand unter mode: many — Kennungs-Mengen in beide Richtungen, Marker aussen vor.
   printf '    mode: many\n' >> .d-check.yml
-  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s04e waves.dir + mode: many: zwei offene Wellen GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
   # Gegenprobe: die Bijektion muss beissen — dritte Welle flach OHNE Zeiger.
   # Ohne diesen Lauf waere "many prueft die Liste" nur behauptet (gruen ist
@@ -167,7 +179,7 @@ s04g_eroeffnet_unter_waves() {
   out=$(dcheck "$WORK/sim/alice"); befund "$out" "docs/plan/planning" "wave-drift" && ok=0 || ok=1
   verdikt "s04g eine Welle eroeffnet + Marker, mode one: wave-drift (Singleton)" "wave-drift (target: Verzeichnis)" "$(echo "$out"|tail -1)" $ok
   printf '    mode: many\n' >> .d-check.yml
-  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s04h dito unter mode many: GRUEN (Marker geht nicht ein)" "0 Befunde" "$(echo "$out"|tail -1)" $ok
 }
 
@@ -186,7 +198,7 @@ s04c_leerer_anspruch() {
   # ... und der Ruhe-Marker tritt NEBEN die Liste, nicht an ihre Stelle.
   sed -i 's|- \[welle-2-ausbau\](../welle-2-ausbau.md)|- [welle-2-ausbau](../welle-2-ausbau.md)\n\nNichts in Arbeit.|' docs/plan/planning/in-progress/roadmap.md
   schritt git add -A && schritt git commit -qm "Anspruch zurueck, Ruhe-Marker neben der Liste" && schritt git push -q origin main || return 1
-  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s04c Marker NEBEN Liste (Wellen offen, nichts beansprucht): planning GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
   # Gegenprobe, zweite Richtung derselben Aequivalenz: Marker weg, in-progress/
   # weiter leer. Ohne diesen Lauf waere "haelt in BEIDE Richtungen" behauptet.
@@ -262,7 +274,7 @@ s08_closure_unter_anspruch() {
   # beansprucht (in-progress/, und in bobs offenem PR): sieht das ein Sensor?
   printf '# Welle 1 — Basis — Closure-Notiz\n\n**Welle:** welle-1-basis\n\nGeliefert: Kern-Schnittstelle. Offen geblieben: slice-001.\n' > docs/plan/planning/done/welle-1-results.md
   schritt git add -A && schritt git commit -qm "welle-1-results" && schritt git push -q origin main || return 1
-  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s08b Welle sauber geschlossen, Slice der Welle weiter beansprucht: STILL" "0 Befunde (kein Sensor sieht den Widerspruch)" "$(echo "$out"|tail -1)" $ok
 }
 
@@ -277,7 +289,7 @@ s09_vorvergabe() {
   schritt git add -A && schritt git commit -qm "slice-002-cache" && schritt git push -q origin b/cache || return 1
   cd "$WORK/sim/seedclone" && git fetch -q && git merge -q --no-edit origin/b/cache >/dev/null 2>&1; rc=$?
   plan=$(grep -c "slice-002 (Rand)" docs/plan/planning/welle-1-basis.md)
-  out=$(dcheck "$WORK/sim/seedclone"); echo "$out" | grep -q "0 Befund" && d=0 || d=1
+  out=$(dcheck "$WORK/sim/seedclone"); still "$out" && d=0 || d=1
   [ $rc -eq 0 ] && [ "$plan" = 1 ] && [ $d = 0 ] && ok=0 || ok=1
   verdikt "s09 Vorvergabe: slice-002 im Wellen-Plan, anderswo vergeben — STILL" "Merge rc=0, beide Bedeutungen, 0 Befunde" "rc=$rc, Plan-Nennung=$plan, $(echo "$out"|tail -1)" $ok
 }
@@ -323,7 +335,7 @@ s11_adr_immutabel_im_team() {
   schritt git add -A && schritt git commit -qm "ADR-0001 Entscheidung geaendert" && schritt git push -q origin a/kern || return 1
   vcs() { docker run --rm --network none -v "$1:/repo:ro" "$IMG" --enable vcs --disable links --disable anchors --disable planning --range "$2" 2>&1; }
   cd "$WORK/sim/seedclone" && git fetch -q && git merge -q --no-edit origin/b/geschichte >/dev/null 2>&1
-  out=$(vcs "$WORK/sim/seedclone" "$base..HEAD"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  out=$(vcs "$WORK/sim/seedclone" "$base..HEAD"); still "$out" && ok=0 || ok=1
   verdikt "s11a Geschichte-Zeile per PR gelandet: kein Befund" "0 Befunde (Geschichte ist ausgenommen)" "$(echo "$out"|tail -1)" $ok
   git merge -q --no-edit origin/a/kern >/dev/null 2>&1
   out=$(vcs "$WORK/sim/seedclone" "$base..HEAD"); befund "$out" "docs/plan/adr/0001-kern.md" "core-drift-vcs" && ok=0 || ok=1
@@ -446,7 +458,7 @@ s14_schwelle_im_merge() {
   n=$(belege "$WORK/sim/seedclone" "BEO-REPLAY/golden-set-ohne-boundary")
   zustand=$(grep -o "Zustand:\*\* [a-z]*" "$BEOWURZEL/BEO-REPLAY/golden-set-ohne-boundary/state.md")
   out=$(dcheck "$WORK/sim/seedclone")
-  [ $rc -eq 0 ] && [ "$n" = 3 ] && echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  [ $rc -eq 0 ] && [ "$n" = 3 ] && still "$out" && ok=0 || ok=1
   verdikt "s14b Merge-Stand 3x mit Zustand offen ohne Ausgang: STILL" "3 Belege, kein Befund (kein Sensor haelt die Schwelle)" "$n Belege, $zustand, $(echo "$out"|tail -1)" $ok
 }
 
@@ -533,7 +545,7 @@ s17_zwei_slugs_still() {
   cd "$WORK/sim/seedclone" && git fetch -q origin && git merge -q --no-edit origin/a/replay >/dev/null 2>&1 && git merge -q --no-edit origin/b/test >/dev/null 2>&1; rc=$?
   n=$(ls -d "$BEOWURZEL"/*/*/ 2>/dev/null | wc -l)
   out=$(dcheck "$WORK/sim/seedclone")
-  [ $rc -eq 0 ] && [ "$n" = 2 ] && echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  [ $rc -eq 0 ] && [ "$n" = 2 ] && still "$out" && ok=0 || ok=1
   verdikt "s17 dasselbe Phaenomen unter zwei Slugs: STILL (bewusste Grenze)" "rc=0, 2 BEO-Verzeichnisse, 0 Befunde" "rc=$rc, $n Verzeichnisse, $(echo "$out"|tail -1)" $ok
 }
 
@@ -556,11 +568,11 @@ s18_alias_und_invalidierung() {
   eind=$( { ls "$BEOWURZEL/$kan/evidence"; ls "$BEOWURZEL/$ali/evidence"; } | sort -u | wc -l )
   inv=$(ls "$BEOWURZEL/$kan/invalidations" | wc -l)
   out=$(dcheck "$WORK/sim/alice")
-  [ "$dat" = 4 ] && [ "$eind" = 3 ] && [ "$inv" = 1 ] && echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  [ "$dat" = 4 ] && [ "$eind" = 3 ] && [ "$inv" = 1 ] && still "$out" && ok=0 || ok=1
   verdikt "s18a Alias-Gruppe: Beleg unter dem Alias, Kennung doppelt, eine Invalidierung: STILL" "4 Dateien / 3 eindeutige Kennungen, 1 Invalidierung, 0 Befunde" "$dat/$eind Dateien, $inv Invalidierung, $(echo "$out"|tail -1)" $ok
   printf '# Stand\n\n**Zustand:** alias\n\n**Alias-von:** %s\n' "$ali" > "$BEOWURZEL/$kan/state.md"
   schritt git add -A && schritt git commit -qm "Alias-Zyklus A -> B -> A" && schritt git push -q origin main || return 1
-  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s18b Alias-Zyklus A -> B -> A: STILL" "0 Befunde (kein Sensor folgt der Kette)" "$(echo "$out"|tail -1)" $ok
 }
 
@@ -705,7 +717,7 @@ s19_archivierung() {
   [ "$ez" = 1 ] && [ "$vz" = "3 Slices, 2 Reviews" ] && ok=0 || ok=1
   verdikt "s19i Welle-Stub traegt seine EIGENE Form (Ergebnisnotiz + Vorgangszahl)" "Zeiger auf results.md, '3 Slices, 2 Reviews'" "Zeiger=$ez, Zahl='$vz'" $ok
 
-  out=$(dcheck "$WORK/sim/alice"); echo "$out" | grep -q "0 Befund" && ok=0 || ok=1
+  out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s19d beide Verweis-Formen loesen nach dem Umzug auf" "0 Befunde" "$(echo "$out"|tail -1)" $ok
 
   sed -i 's|(welle-2-ausbau/slice-003-cache.md)|(slice-003-cache.md)|' "$P/done/welle-2-results.md"
@@ -837,7 +849,7 @@ EOF
   sed -i '/sensors\/doc-check.md/d' harness/README.md
   schritt git add -A && schritt git commit -qm "Gate retiriert: Zeile und Datei weg" || return 1
   out=$(dcheck "$WORK/sim/alice")
-  echo "$out" | tail -1 | grep -q '0 Befund' && ok=0 || ok=1
+  still "$out" && ok=0 || ok=1
   verdikt "s20d Retirierung sauber (Zeile UND Datei weg): GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
 
   # --- s20e/s20f: dieselbe Retirierung, zwei Verweis-Formen daneben.
@@ -968,6 +980,168 @@ s22_rtm_vollstaendigkeit() {
   verdikt "s22d Bericht ohne Schalter: nennt die Waise, urteilt nicht" "Exit 0 trotz WAISE-Zelle" "rc=$rc, WAISE-Zellen=$st" $ok
 }
 
+# s23: ENTWURFS-Gegenstand — der EINE Gate-Index (Welle 129,
+# grundlagen/harness-dateien.md §harness/README.md als Einstiegspunkt).
+# Wie s19-s22 ohne Nebenlaeufigkeits-Gegenstand: eine Regel und ihr Sensor.
+# Autoritaet ist der Index; das Briefing traegt Regel und Zeiger. Geprobt wird
+# die Phantom-Richtung im Index (s23a), dass eine Nennung im Briefing nicht
+# entlastet (s23b), das Paar Aufruf-Argument/Link in der Code-Span der
+# Target-Zelle (s23c/s23e) und der Ziel-Zustand (s23d).
+gateindex() { # $1 = Clone-Verzeichnis; Makefile + Index + Briefing + targets-Modul
+  mkdir -p "$1/harness"
+  cat > "$1/Makefile" <<'EOF'
+.PHONY: lint test verify-slice mover
+lint: ## Linter
+	@true
+test: ## Tests
+	@true
+verify-slice: ## DoD eines Slice
+	@true
+mover: ## bewegt einen Slice
+	@true
+EOF
+  cat > "$1/harness/README.md" <<'EOF'
+# Harness
+
+## Sensors (Feedback-Gates)
+
+| Target | Vertrag | Bindung |
+|---|---|---|
+| `make lint` | Stil | — |
+| `make test` | Unit-Tests | — |
+| `make verify-slice` | DoD eines Slice; Aufruf mit `SLICE=<id>` | — |
+
+**Werkzeuge — genannt, weil der Lauf sie braucht, aber kein Gate:**
+
+| Target | Tut was | Bindung |
+|---|---|---|
+| `make mover` | bewegt einen Slice, prueft nichts | kein Gate |
+EOF
+  cat > "$1/AGENTS.md" <<'EOF'
+# AGENTS.md
+
+## Quality Gates
+
+Der Gate-Index steht einmal, in `harness/README.md` §Sensors. Diese Datei
+fuehrt die Liste nicht.
+EOF
+  # Autoritaet ist der Index: dieselbe Datei in beiden Feldern. `targets` muss
+  # dafuer in `modules` stehen — ein auskommentierter Block allein greift nicht.
+  sed -i 's/^modules: .*/modules: [targets]/' "$1/.d-check.yml"
+  cat >> "$1/.d-check.yml" <<'EOF'
+targets:
+  makefiles: [Makefile]
+  doc-tables: [harness/README.md]
+  authority: harness/README.md
+EOF
+  grep -q '^modules: \[targets\]$' "$1/.d-check.yml"   # der Helfer buergt fuer sich selbst
+}
+
+# Die beiden Tabellen des Index getrennt lesbar: eine Zeile "steht in der
+# Gate-Tabelle" ist etwas anderes als "kommt in der Datei vor", und genau
+# darauf zielen die Verdikt-Titel.
+gate_tabelle()     { awk '/^## Sensors/{f=1} /^\*\*Werkzeuge/{f=0} f' "$1/harness/README.md"; }
+werkzeug_tabelle() { awk '/^\*\*Werkzeuge/{f=1} f' "$1/harness/README.md"; }
+
+# Belegt, dass die Sensors-TABELLE gelesen wird: eine Phantom-Zeile in die
+# Gate-Tabelle, Lauf muss genau darauf zeigen, Zeile wieder raus. Ein
+# Stille-Verdikt ohne diese Kontrolle besteht auch bei abgeschaltetem Modul.
+scharf_kontrolle() { # $1 = Clone-Verzeichnis
+  local k rc
+  sed -i 's#^| `make lint` | Stil | — |#| `make lint` | Stil | — |\n| `make scharf-probe` | Kontrolle | — |#' "$1/harness/README.md"
+  k=$(dcheck "$1")
+  befund_in "$k" "harness/README.md" "scharf-probe" "gate-phantom"; rc=$?
+  sed -i '/scharf-probe/d' "$1/harness/README.md"
+  return $rc
+}
+
+s23_gate_index() {
+  # --- s23a: Phantom-Target IM INDEX -> laut, und zwar dort.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt gateindex . || return 1
+  sed -i 's#| `make test` | Unit-Tests | — |#| `make test` | Unit-Tests | — |\n| `make halluziniert` | gibt es nicht | — |#' harness/README.md
+  ing=$(gate_tabelle . | grep -c '| `make halluziniert` |' || true)
+  schritt test "$ing" = 1 || return 1
+  schritt git add -A && schritt git commit -qm "Phantom-Gate im Index" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  # Datei, Ziel und Code in EINER Zeile — der Verdikt-Text nennt die Datei.
+  befund_in "$out" "harness/README.md" "halluziniert" "gate-phantom" && ok=0 || ok=1
+  verdikt "s23a Phantom-Target im Gate-Index: LAUT" "gate-phantom auf harness/README.md" "$(echo "$out"|tail -1)" $ok
+
+  # --- s23b: Target in der ALTEN Briefing-Tabelle, nicht im Index -> laut.
+  # Die Kontrolle macht das Verdikt unterscheidend: unter Briefing-Autoritaet
+  # urteilt derselbe Lauf (mehrere gate-undocumented), aber nicht ueber dieses
+  # Target. Nur so belegt s23b die Autoritaets-Aussage statt der Grundrichtung.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt gateindex . || return 1
+  printf '\n.PHONY: nur-im-briefing\nnur-im-briefing: ## nur in AGENTS.md genannt\n\t@true\n' >> Makefile
+  cat >> AGENTS.md <<'EOF'
+
+| Target | Zweck |
+|---|---|
+| `make nur-im-briefing` | steht nur hier |
+EOF
+  schritt grep -q '| `make nur-im-briefing` |' AGENTS.md || return 1
+  # grep -qv waere hier wertlos (invertiert zeilenweise, fast immer wahr) —
+  # die Abwesenheit im Index braucht die Trefferzahl, wie bei s20b.
+  im_index=$(grep -c 'nur-im-briefing' harness/README.md || true)
+  schritt test "$im_index" = 0 || return 1
+  schritt git add -A && schritt git commit -qm "Regel in der Briefing-Tabelle" || return 1
+  sed -i 's#^  doc-tables: \[harness/README.md\]#  doc-tables: [AGENTS.md]#; s#^  authority: harness/README.md#  authority: AGENTS.md#' .d-check.yml
+  kontrolle=$(dcheck "$WORK/sim/alice")
+  # Positiv zuerst: der Kontroll-Lauf hat berichtet UND urteilt. Ohne das
+  # bestuende die Kontrolle auch ueber einem fail-closed abgebrochenen d-check,
+  # der gar keine Ausgabe macht.
+  berichtet=$(printf '%s' "$kontrolle" | grep -c 'Datei(en) geprüft' || true)
+  schritt test "$berichtet" -gt 0 || return 1
+  urteilt=$(printf '%s' "$kontrolle" | grep -c 'gate-undocumented' || true)
+  schritt test "$urteilt" -gt 0 || return 1
+  entlastet=$(printf '%s' "$kontrolle" | grep -c 'nur-im-briefing' || true)
+  schritt test "$entlastet" = 0 || return 1
+  sed -i 's#^  doc-tables: \[AGENTS.md\]#  doc-tables: [harness/README.md]#; s#^  authority: AGENTS.md#  authority: harness/README.md#' .d-check.yml
+  out=$(dcheck "$WORK/sim/alice")
+  befund "$out" "nur-im-briefing" "gate-undocumented" && ok=0 || ok=1
+  verdikt "s23b Briefing-Tabelle entlastet unter Index-Autoritaet nicht" "gate-undocumented, waehrend derselbe Lauf unter AGENTS.md-Autoritaet ueber andere Targets urteilt und ueber dieses nicht" "$(echo "$out"|tail -1)" $ok
+
+  # --- s23c/s23e: zwei Formen der Code-Span im SELBEN Lauf. Aufruf-Argument
+  # macht die Zeile unsichtbar (laut), der Link nicht (still).
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt gateindex . || return 1
+  sed -i 's#| `make verify-slice` | DoD eines Slice; Aufruf mit `SLICE=<id>` |#| `make verify-slice SLICE=<id>` | DoD eines Slice |#' harness/README.md
+  sed -i 's#| `make test` | Unit-Tests |#| [`make test`](sensors/test.md) | Unit-Tests |#' harness/README.md
+  schritt grep -q '| `make verify-slice SLICE=<id>` |' harness/README.md || return 1
+  schritt grep -q '| \[`make test`\](sensors/test.md) |' harness/README.md || return 1
+  schritt git add -A && schritt git commit -qm "Zellformen: Argument und Link" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "Makefile" "verify-slice" "gate-undocumented" && ok=0 || ok=1
+  verdikt "s23c Aufruf-Argument in der Code-Span: LAUT (Zeile unsichtbar)" "gate-undocumented auf verify-slice" "$(echo "$out"|tail -1)" $ok
+  # Der laute Gegenpol wird am ZIEL festgemacht: ein fremdes lautes Target
+  # duerfte die Stille von s23e nicht tragen.
+  laut=$(printf '%s' "$out" | grep -c "$(printf '\t%s\t%s' verify-slice gate-undocumented)" || true)
+  schritt test "$laut" -gt 0 || return 1
+  n=$(printf '%s' "$out" | grep -c "$(printf '\t%s\t' test)" || true)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s23e verlinkte Code-Span bleibt sichtbar: STILL" "kein Befund zu test, waehrend verify-slice im selben Lauf laut ist" "$n Treffer / $(echo "$out"|tail -1)" $ok
+
+  # --- s23d: Ziel-Zustand -> STILL. Die Vorbedingungen binden den ZUSTAND,
+  # den der Titel nennt: mover in der Werkzeuge-Tabelle, verify-slice in der
+  # Gate-Tabelle, beide mit realer Regel — Textpraesenz allein traegt das nicht.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt gateindex . || return 1
+  schritt git add -A && schritt git commit -qm "Ziel-Zustand" || return 1
+  inw=$(werkzeug_tabelle . | grep -c '| `make mover` |' || true)
+  schritt test "$inw" = 1 || return 1
+  ing=$(gate_tabelle . | grep -c '| `make verify-slice` |' || true)
+  schritt test "$ing" = 1 || return 1
+  schritt grep -qE '^mover:' Makefile || return 1
+  schritt grep -qE '^verify-slice:' Makefile || return 1
+  schritt scharf_kontrolle "$WORK/sim/alice" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  still "$out" && ok=0 || ok=1
+  verdikt "s23d Ziel-Zustand (nackte Namen, Nicht-Gate in zweiter Tabelle): STILL" "0 Befunde bei nachweislich scharfem Sensor" "$(echo "$out"|tail -1)" $ok
+}
+
+# ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -993,6 +1167,7 @@ lauf s19 s19_archivierung
 lauf s20 s20_sensor_datei
 lauf s21 s21_zitierform
 lauf s22 s22_rtm_vollstaendigkeit
+lauf s23 s23_gate_index
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

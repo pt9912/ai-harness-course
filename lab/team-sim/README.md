@@ -22,6 +22,13 @@ wiederholt (`docs/team.md` §SOLL). **Kein Gate:** läuft auf Anlass
 (`bash run.sh`), steht nicht in `make check` und wird nirgends als Sensor
 behauptet.
 
+**Abbruch-Grenze:** Alle Verdikte einer Gruppe liegen in einer Funktion; ein
+gescheiterter `schritt` beendet sie. Die folgenden Verdikte laufen dann nicht
+und stehen weder in der Konsole noch in `ergebnis.tsv` — sichtbar ist eine
+`KAPUTT`-Zeile mit der Gruppen-Kennung, nicht mit dem Verdikt. Nichts prüft die
+Soll-Zahl je Gruppe gegen `manifest.yaml`; wer einen Lauf beurteilt, liest
+deshalb die Gesamtzahl mit.
+
 **Standort-Grenze:** `run.sh` liest den d-check-Digest aus dem Repo-Makefile
 (eine Quelle, kein zweiter Pin) und bricht außerhalb des Kurs-Repos
 fail-closed ab — eine Kopie ohne Repo liefe sonst halb: Git-Szenarien grün,
@@ -44,7 +51,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -110,6 +117,11 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s22b | **nur** eine ADR nennt sie | **Exit 1** — ADR in der Zeile, Status bleibt WAISE | ✓ die Setzung des Kurses, gemessen am Konventions-Default: eine ADR begründet, sie verpflichtet nicht |
 | s22c | ein **Slice** nennt sie | Exit 0, keine WAISE-Zelle | ✓ erst die als entlastend deklarierte Quelle zählt |
 | s22d | Bericht **ohne** Schalter, dieselbe Waise | Exit 0 trotz WAISE-Zelle | ✓ urteilsfrei — der Bericht listet, er gatet nicht |
+| s23a | Phantom-Target **im Gate-Index** (`harness/README.md`) | **`gate-phantom`** auf genau dieser Datei | ✓ Datei, Ziel und Code in einer Zeile gepinnt — ein Phantom anderswo trägt das Verdikt nicht |
+| s23b | Target in einer Briefing-Tabelle, nicht im Index | **`gate-undocumented`** | ✓ unterscheidend: derselbe Lauf urteilt unter Briefing-Autorität über andere Targets und über dieses nicht |
+| s23c | Aufruf-Argument in der **Code-Span** (`make verify-slice SLICE=<id>`) | **`gate-undocumented`** | ✓ die Zeile zählt als nicht vorhanden; der Befund zeigt aufs `Makefile`, nicht auf die Zelle |
+| s23e | **verlinkte** Code-Span im selben Lauf | **still** | ✓ das Paar zu s23c: der Link schadet nicht, das Argument schon — der laute Gegenpol ist am Ziel festgemacht |
+| s23d | Ziel-Zustand: nackte Namen, Nicht-Gate in der zweiten Tabelle | **still** | ✓ Stille bei **nachweislich scharfem** Sensor; die Vorbedingungen binden die Tabellen-Zugehörigkeit und die reale Regel, nicht die Textpräsenz |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

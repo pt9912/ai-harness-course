@@ -2,7 +2,8 @@
 # (`d-check --print-mk`) und wird included — daher `--network none` + DCHECK_DIGEST-
 # Re-Pin, kein handgepflegtes Recipe. Nur `docs-check` ist ein *behaupteter* Gate
 # (die doc-*-Targets sind verfügbar, nicht behauptet, Modul 13); nur behauptete
-# Targets in AGENTS.md / harness/README.md eintragen (keine halluzinierten Gates).
+# Targets in harness/README.md §Sensors eintragen — dem EINEN Gate-Index
+# (AGENTS.md trägt die Regel und den Zeiger, nicht die Liste).
 # Code-Gates (lint/test/build) repo-spezifisch — Vorbild: lab/example/<lang> im Kurs.
 # `d-check.mk` wird NICHT mitgeliefert (tool-/versionsspezifisch) — beim Bootstrap
 # aus deiner d-check erzeugen (Modul 2) und bei jedem d-check-Bump neu:

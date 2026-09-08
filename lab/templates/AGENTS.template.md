@@ -189,24 +189,12 @@ Repo-spezifische Hard Rules ergänzen, z.B. für Safety/Control:
 
 ## 4. Quality Gates
 
-Regeln dieser Sektion: Nur Targets aufzählen, die im Makefile **existieren**.
-Halluzinierte Gates sind die häufigste Form von Harness-Lüge
-(Baseline-Regelwerk `modul-13-quality-gates.md`).
+Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-harness-dateien.md`
+§harness/README.md als Einstiegspunkt. Der Gate-Index steht **einmal**, in
+[`harness/README.md`](harness/README.md) §Sensors — dort steht auch die
+*Bindung* jedes Targets. Diese Datei führt die Liste nicht.
 
-| Target | Zweck |
-|---|---|
-| `make lint` | <…> |
-| `make test` | <…> |
-| `make arch-check` | <…> |
-| `make coverage-gate` | <…> |
-| `make gates` | alle inneren Gates (mandatory vor PR) |
-| `make ci` | CI-äquivalent (gates + zusätzliche) |
-| `make fullbuild` | volle Closure (vor Welle-Merge) |
-
-Diese Tabelle **listet auf**; definiert wird hier nichts. Die *Bindung* eines
-Targets — welche Anforderung oder Entscheidung es durchsetzt — steht in
-`harness/README.md` §Sensors; von dort führt der Weg zur `LH-*`-ID, zur ADR
-oder zum Carveout.
+Kein Target nennen, das im Makefile nicht existiert — auch nicht in Prosa.
 
 ## 5. Dokumentations-Regeln
 

@@ -129,7 +129,9 @@ Meinung.
 
 ## Hard Rule (Doku-Disziplin)
 
-In `harness/README.md` und in jeder Doku, die Gates aufzählt: keine
+In `harness/README.md` §Sensors — dem **einen** Gate-Index des Repos
+([`harness-dateien.md`](../grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt))
+— und überall sonst, wo ein Target genannt wird: keine
 Befehle behaupten, die es nicht gibt. Wenn `make fullbuild` strukturell
 rot ist, wird das als Carveout in `docs/plan/carveouts/CO-<NNN>-…`
 dokumentiert ([Modul 7](../02-planung/modul-07-carveouts.md)) und in
@@ -140,6 +142,20 @@ liegt in CI, siehe
 [`harness-dateien.md`](../grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge — und der
 Implementer-Agent vertraut ihnen.
+
+**Diese Hard Rule hat eine maschinelle Hälfte, und sie ist billig.** Nach
+[Modul 9](../03-agenten/modul-09-implementierung.md#hard-rules-repo-spezifisch)
+ist eine Regel, die nur im Briefing steht, halb durchgesetzt; hier ist die
+andere Hälfte ein **Deklarations-Sensor**, der den Gate-Index gegen die
+`Makefile`-Regeln hält — in *beiden* Richtungen: kein behauptetes Target ohne
+Regel (das halluzinierte Gate) und keine Regel ohne Eintrag im Index (das
+stille, das niemand kennt). Der Index ist dafür die **Autoritäts-Doku**, und es
+gibt genau eine — der zweite Grund, warum er nur einmal dasteht. §Vorhanden ≠
+behauptet ist in einem solchen Sensor kein Sonderfall, sondern eine
+**namentliche** Ausnahmeliste: Wer ein Target dort einträgt, hat entschieden,
+dass es kein Gate ist; kommt bei einer Regeneration des Fragments ein Target
+dazu, meldet der Sensor es, statt es still durchzulassen. Ein Glob an dieser
+Stelle gäbe die Zusage wieder auf.
 
 **Eine neue Hard Rule trägt ab ihrer Einführung einen Auflösungs-Trigger oder
 die Kennzeichnung *permanent*** — dieselbe Disziplin, die ADR
@@ -163,7 +179,7 @@ Gate-Fragment (`d-check.mk` aus `d-check --print-mk`, per `-include` eingebunden
 statt handgeschrieben — so pflegt das Tool die Recipe-Form und nichts driftet;
 `-include` bleibt still, bis das Fragment beim Bootstrap erzeugt ist)
 bringt oft mehr Targets mit, als du als Gate führst. Nur das genutzte
-(`docs-check`) steht in `harness/README.md`/`AGENTS.md` und `make gates`; die
+(`docs-check`) steht in `harness/README.md` §Sensors und `make gates`; die
 übrigen (advisory: `doc-trace`, `doc-doctor`, …) sind **verfügbar, aber nicht als
 Gate behauptet** — genau wie ein Maintenance-Target (`regelwerk-check`), das
 bewusst nicht in `gates` läuft. Die Lüge wäre, ein Gate zu *versprechen*, das

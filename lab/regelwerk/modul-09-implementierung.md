@@ -223,5 +223,6 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
 
 Die repo-weite Konventionsdatei folgt der Vorlage
 [`templates/AGENTS.template.md`](../templates/AGENTS.template.md): Hard Rules
-mit Herkunfts-Anker, Source Precedence, Gate-Tabelle. Die Regeln zum Inhalt
+mit Herkunfts-Anker, Source Precedence, Gate-Regel und Zeiger auf den
+Gate-Index; die Liste selbst steht in `harness/README.md` §Sensors. Die Regeln zum Inhalt
 stehen oben in §AGENTS.md-Regeln und §Hard Rules; die Vorlage liefert die Form.

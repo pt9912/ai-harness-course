@@ -44,6 +44,10 @@ Diese Datei dupliziert sie nicht.
 
 ## Sensors (Feedback-Gates)
 
+**Sprach-Skelett-Gates** — im jeweiligen Skelett aufzurufen; `gates`, `ci` und
+`fullbuild` reicht das Root-`Makefile` zusätzlich per `COURSE_LANG=<sprache>`
+durch, die übrigen nicht. Alle sind in den sechs Skeletten real implementiert.
+
 | Target | Vertrag | Bindung |
 |---|---|---|
 | `make lint` | Linter + Suppression-Gate | [LH-QA-04](../spec/lastenheft.md#lh-qa-04--audit-datenschutz) (Regel `no-userid-in-log`) |
@@ -64,11 +68,21 @@ Repo-weit, sprachunabhängig (nur im Root-`Makefile`):
 | `make verify` | Closure-Pflicht + Referenz-Richtung; mit `SLICE=` zusätzlich die Slice-DoD | — (Aggregat) |
 | `make verify-closure-notes` | dieselbe Aussage wie `planning.closure` unten, **als Vorführ-Gegenstand**: An diesem Skript zeigt [Modul 11](../../../kurs/de/04-qualitaet/modul-11-verification.md) „Fitness Function ohne Standard-Tool". Die Deckung trägt es nicht mehr — belegt, nicht behauptet: je Verstoßklasse ein Break-Test mit beiden Sensoren, über alle drei Dateiarten des Ruheorts | [ADR-0019](../docs/plan/adr/0019-closure-sensor-und-skript-rolle.md) |
 | [`make doc-check`](sensors/doc-check.md) | **Fünf Module** (`reviews`, `ids`, `planning`, `targets`, `matrix`) über die Doku-Referenzen: Review-Report-Deckung, ADR-Kennung als Link, Roadmap- und Wellen-Invarianten, reale Make-Targets, Referenz-Richtung; Vertrag, drei Grenzen und **je Modul eine eigene Bindung** in der verlinkten Datei | fünf Konventions-Bindungen (`MR-002`), einzeln in [`sensors/doc-check.md`](sensors/doc-check.md#bindung) |
-| `make verify-slice SLICE=<id>` | DoD eines Slice plausibilisieren | — |
+| `make verify-slice` | DoD eines Slice plausibilisieren; Aufruf mit `SLICE=<id>` | — |
 | `make plan-status` | Slice-Verteilung über die Lifecycle-Verzeichnisse; rot, wenn ein Lifecycle-Verzeichnis fehlt | — |
-| [`make replay RUN=<set-name>`](sensors/replay.md) | Golden-Set-Fixture validieren, **kein Lauf**; Vertrag und zwei Grenzen in der verlinkten Datei | [Modul 12 §Golden-Set-Form](../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md) (`MR-002`) |
-| `make trace RUN=<name>` | Trace-Fixture ausgeben; rot, wenn sie fehlt oder keine Spans trägt | — |
+| [`make replay`](sensors/replay.md) | Golden-Set-Fixture validieren, Aufruf mit `RUN=<set-name>`, **kein Lauf**; Vertrag und zwei Grenzen in der verlinkten Datei | [Modul 12 §Golden-Set-Form](../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md) (`MR-002`) |
+| `make trace` | Trace-Fixture ausgeben, Aufruf mit `RUN=<name>`; rot, wenn sie fehlt oder keine Spans trägt | — |
 | `make release` | Release-Checkliste und Runbook-Fixtures prüfen | [Modul 16 §Release-Disziplin](../../../kurs/de/05-betrieb/modul-16-produktiver-betrieb.md) (`MR-002`); Fixture: [`../runbooks/release-checklist.md`](../runbooks/release-checklist.md) |
+
+**Werkzeuge — genannt, weil der Lauf sie braucht, aber kein Gate.** `export`
+lebt in den sechs `<sprache>/Makefile` und wird vom Root **nicht**
+durchgereicht; die beiden `agent-*` nur im Root:
+
+| Target | Tut was | Bindung |
+|---|---|---|
+| `make export` | packt die Belege der Beleg-Stages host-seitig aus (Rückweg ohne Mount): Lint-Befunde, Coverage-Zusammenfassung, maschinenlesbarer Coverage-Report — in allen sechs Skeletten derselbe Satz | kein Gate |
+| `make agent-implement` | zeigt das Kontextpaket eines Implementer-Agenten; Aufruf mit `SLICE=<id>` | kein Gate |
+| `make agent-review` | zeigt die Review-Fixture zu [Modul 10](../../../kurs/de/04-qualitaet/modul-10-review-harness.md) | kein Gate |
 
 **Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates` (keine Status-Spalte hier, siehe [Konventionen §`harness/README.md` als Einstiegspunkt](../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
 **Rote Gates:** Begründung im verlinkten `CO-<NNN>` (Bindung-Spalte), Modul 7.

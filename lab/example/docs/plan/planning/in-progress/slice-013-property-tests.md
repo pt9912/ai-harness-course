@@ -42,6 +42,7 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 - [ ] Neues Make-Target `test-property` läuft in `make gates`.
 - [ ] `test-property` läuft 100 Generationen, fail-closed.
 - [ ] Closure-Notiz mit gefundenen Counter-Examples (falls welche).
+- [ ] `make test-property` aus dem **Nicht behauptet**-Block von `harness/README.md` in die §Sensors-Tabelle promoted (Vertrag + Bindung); `make doc-check` grün.
 - [ ] `docs/user/quality.md` angelegt; die drei Platzhalter-Vermerke nachgeführt: `AGENTS.md` §4, `docs/user/README.md`, `harness/README.md` Rang 6.
 
 ## 3. Plan (vor Code)
@@ -53,7 +54,7 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 | `docs/user/quality.md` | neu | `test-property` dokumentieren — der Ordner ist bis dahin Platzhalter |
 | `AGENTS.md` | update | §4 nennt `quality.md` als ops-gerichteten Einstieg; die Bindungs-Kette bleibt |
 | `docs/user/README.md` | update | Platzhalter-Vermerk entfernen |
-| `harness/README.md` | update | Platzhalter-Vermerk in der Source-Precedence-Zeile (Rang 6) entfernen |
+| `harness/README.md` | update | §Sensors: `make test-property` aus dem **Nicht behauptet**-Block in die Tabelle promoten — der Gate-Index ist die einzige Registrierungsstelle, `targets` meldet eine Regel ohne Eintrag als `gate-undocumented`; dazu den Platzhalter-Vermerk in der Source-Precedence-Zeile (Rang 6) entfernen |
 
 ## 4. Trigger
 

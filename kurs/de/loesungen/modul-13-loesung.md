@@ -185,7 +185,7 @@ noch nicht). Die drei verlangten Artefakte:
 **(a) Make-Target-Kommentar:**
 
 ```makefile
-docs-consistency-gate: ## Doku-Konsistenz AGENTS.md/harness-README vs. Code (bootstrap-aware, LH-QA-DOC-004).
+docs-consistency-gate: ## Doku-Konsistenz Gate-Index vs. Code (bootstrap-aware, LH-QA-DOC-004).
 ```
 
 **(b) Hochschalt-Tabelle** — drei Stufen, Trigger als Repo-Ereignis,
@@ -195,7 +195,7 @@ nicht als Datum:
 |---|---|---|
 | heute (Bootstrap) | nur *Existenz*-Checks: `harness/README.md` und `AGENTS.md` vorhanden, Sensors-Tabelle nicht leer | — |
 | Meilenstein M1 | kein halluziniertes Gate: jedes in der Sensors-Tabelle gelistete Target existiert im Makefile | Trigger: erstes `make gates` läuft repo-weit grün (alle sechs generischen Gates aktiv) |
-| Meilenstein M2 | Voll-Konsistenz: Doku-Konsistenz-Agent (Modul 15) meldet keine HIGH-Drift zwischen AGENTS.md, `harness/README.md` und realem Gate-Stand | Trigger: zehnter Slice in `done/` (genug Steering-Loop-Historie, dass Drift überhaupt entstehen kann) |
+| Meilenstein M2 | Voll-Konsistenz: Doku-Konsistenz-Agent (Modul 15) meldet keine HIGH-Drift zwischen `harness/README.md` §Sensors und realem Gate-Stand — in beiden Richtungen | Trigger: zehnter Slice in `done/` (genug Steering-Loop-Historie, dass Drift überhaupt entstehen kann) |
 
 **(c) Hard Rule für den Konfliktfall** (Trigger eingetreten, Schwelle
 nicht gehalten):

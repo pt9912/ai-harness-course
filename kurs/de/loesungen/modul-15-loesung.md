@@ -86,7 +86,7 @@ Aggregat-Signal über Zeit.
   gate-relevant — Schwelle 1, nicht X % — denn das ist die Hard Rule
   aus Modul 13 §Doku-Disziplin ("keine Befehle behaupten, die es nicht
   gibt"), und der Implementer-Agent vertraut ihnen.
-- **Vorwärts-Drift** (neues Target ohne AGENTS.md-Eintrag — die Doku
+- **Vorwärts-Drift** (neues Target ohne Eintrag im Gate-Index — die Doku
   hinkt nach) ist Rauschen bzw. MEDIUM-Pflegebedarf: niemand wird in
   die Irre geführt, es fehlt nur Abdeckung.
 
@@ -202,8 +202,8 @@ verschiedene Reaktionen, eine Ratio: nicht unterscheidbar.
 
 | Feld | Regel 1 | Regel 2 | Regel 3 |
 |---|---|---|---|
-| **Regel-Name** | AGENTS.md-Befehl existiert im Makefile | Sensors-Tabelle ohne Geister-Gates | Skill-Datei referenziert nur existierende ADRs |
-| **Quelle** | AGENTS.md §Tool-Regeln (alle `make …`-Nennungen) | `harness/README.md` Sensors-Tabelle | `.harness/skills/*.md` (alle `ADR-…`-Nennungen) |
+| **Regel-Name** | `make`-Nennung im Briefing existiert | Sensors-Tabelle ohne Geister-Gates | Skill-Datei referenziert nur existierende ADRs |
+| **Quelle** | AGENTS.md, alle `make …`-Nennungen in Prosa (das Briefing führt keinen Gate-Index) | `harness/README.md` Sensors-Tabelle | `.harness/skills/*.md` (alle `ADR-…`-Nennungen) |
 | **Vergleichs-Ziel** | `Makefile`-Target-Namen | `Makefile`-Target-Namen + CI-Workflow-Schritte | Datei-Liste `docs/plan/adr/` + deren Status-Feld |
 | **Drift-Symptom** | AGENTS.md nennt `make fullbuild`, Makefile kennt nur `make build` | Tabelle listet `coverage-gate-critical`, das Target existiert nicht oder läuft nirgends | Skill zitiert `ADR-0019`, die Datei fehlt — oder die ADR ist `superseded`, der Skill prüft die alte Regel |
 | **Lebenszyklus** | Pre-integration (jeder PR, der AGENTS.md oder Makefile berührt) | Pre-integration + Continuous (Geister-Gates entstehen auch durch CI-Umbau ohne Doku-PR) | Continuous (ADR-Status ändert sich ohne Skill-Berührung) |

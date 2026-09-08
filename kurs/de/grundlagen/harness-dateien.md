@@ -225,6 +225,27 @@ alles nennt, ist keine.
 Wichtig: Die Sensors-Tabelle darf keine Befehle behaupten, die es im Repo
 nicht gibt. Halluzinierte Gates sind die häufigste Form von Harness-Lüge.
 
+**Der Gate-Index steht einmal, und zwar hier.** `AGENTS.md` trägt die *Regel*
+(kein behauptetes Gate ohne Deckung) und den *Zeiger* auf diese Sektion — nicht
+die Liste. Der Grund ist nicht Ordnungsliebe: Beide Dateien liegen in **jedem**
+Lauf-Kontext ([Modul 9 §Kontext-Verdichtung](../03-agenten/modul-09-implementierung.md#kontext-verdichtung-kehrseite-der-lopopolo-maxime)),
+ein zweiter Index wird also pro Lauf zweimal bezahlt — und er läuft auseinander,
+weil die Pflicht, ihn nachzuziehen, nirgends steht. Gemessen an einem Repo, das
+ihn doppelt führte (`lab/example`, vor der Entdopplung in Welle 129): 19 von 22 Targets in
+beiden Dateien, 7 Zellen wortgleich, und eine Zelle behauptete „vier Module",
+wo die andere längst „fünf" sagte. Ein Gate hatte das nie gesehen, weil es die
+Gleichheit zweier Tabellen war, die niemand prüft.
+
+**Die Target-Zelle trägt den nackten Target-Namen.** Der Aufruf — `SLICE=<id>`,
+`RUN=<name>` — gehört in die Nachbarspalte, nicht in die Code-Span des Targets.
+Für den Menschen ist das Geschmack, für den Sensor nicht: Ein
+Deklarations-Sensor, der diese Sektion gegen das `Makefile` hält, sucht die
+Kennung, und `make verify-slice SLICE=<id>` ist keine. Gemessen (d-check
+v0.74.1): Die Zelle mit Argument meldet `gate-undocumented`, als gäbe es die
+Zeile nicht — ein **stiller** Verlust, denn der Befund zeigt aufs `Makefile`,
+nicht auf die Zelle, die ihn verursacht. Eine **verlinkte** Target-Zelle —
+der Name als Link auf `sensors/<target>.md` — ist davon nicht betroffen.
+
 Die Sensors-Tabelle trägt **keinen Lauf-Status** ("grün"/"rot"):
 Lauf-Wahrheit pro Commit lebt in CI (Badges/Dashboard), also in höher
 rangierten Quellen, nicht in `harness/README.md` (unterster Rang). Strukturell

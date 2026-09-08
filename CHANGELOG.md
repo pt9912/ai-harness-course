@@ -11,6 +11,90 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 129 — 2026-09-08 · Der Gate-Index steht einmal
+
+Anlass war eine Beobachtung an den Vorlagen: `AGENTS.template.md` §4 und
+`harness/README.template.md` §Sensors zählen beide Make-Targets auf. Gemessen
+am ausgefüllten Beispiel, das die Lehre trägt (alle Zahlen `wc -m`):
+
+| | Zeichen | Targets |
+|---|---|---|
+| `lab/example/AGENTS.md` §3 | 3.385 | 22 |
+| `lab/example/harness/README.md` §Sensors | 3.759 | 19 |
+| davon in **beiden** | | **19**, 7 Zellen wortgleich |
+
+Beide Dateien liegen laut Modul 9 §Kontext-Verdichtung in **jedem** Lauf-Kontext
+— die Doppelung wird pro Lauf zweimal bezahlt. Und sie war bereits
+auseinandergelaufen: `make doc-check` stand im Briefing als „**Vier**
+d-check-Module", im Index längst als „**Fünf** Module"; `.d-check.yml` führt
+fünf. Welle 118/119 hatte `reviews` scharf gestellt und nur eine der beiden
+Fassungen nachgezogen. Kein Sensor sah das, weil die Gleichheit zweier Tabellen
+niemand prüft. Eine **dritte** Fassung derselben Zählung stand in
+`.github/workflows/checks.yml` — auch sie sagte „vier Module".
+
+**Die Setzung.** Der Gate-Index steht **einmal**, in `harness/README.md`
+§Sensors — dort, wo ohnehin die Bindung jedes Targets steht. `AGENTS.md` trägt
+die Regel („kein behauptetes Gate ohne Deckung") und den Zeiger, nicht die
+Liste. Keine der sechs `<sprache>/AGENTS.md` des Beispiels führte je eine
+Target-Tabelle; nur das oberste Paar hat dupliziert.
+
+- **Kurs**: `grundlagen/harness-dateien.md` §harness/README.md als
+  Einstiegspunkt trägt die Regel; `modul-09` §Kontext-Verdichtung das Argument;
+  `modul-13` §Hard Rule die maschinelle Hälfte. `modul-02` Bootstrap-Schritt 6
+  nannte `AGENTS.md` §4 als zweiten Ort des „Nicht behauptet"-Blocks — die
+  Nennung fällt, statt ins Template nachgezogen zu werden; der Phasen-Übergang
+  des Briefings sitzt jetzt bei Schritt 3, wo T2 ohnehin feuert. Modul 15 und
+  die Lösungen 13/15 nannten `AGENTS.md` als Ort der Target-Liste und sind
+  nachgezogen — samt der Vergleichsseite, die alle drei Lösungs-Regeln decken
+  muss (Regel 3 prüft Skill gegen ADR-Dateien, nicht gegen Make-Targets).
+- **Zweite Regel, gemessen statt vermutet:** Die Target-Zelle trägt den
+  **nackten** Namen. `make verify-slice SLICE=<id>` in der Code-Span meldet
+  `gate-undocumented`, als gäbe es die Zeile nicht — und der Befund zeigt aufs
+  `Makefile`, nicht auf die Zelle, die ihn verursacht. Eine **verlinkte**
+  Code-Span ist nicht betroffen.
+- **Templates**: `AGENTS.template.md` §4 von 754 auf 379 Zeichen (Tabelle raus,
+  Regel und Zeiger rein); `.d-check.yml` bekommt den fehlenden `targets`-Block
+  als Aktivierungs-Vorlage. Der Dateikopf sagt jetzt, dass Aktivieren ZWEI
+  Schritte sind: entkommentieren **und** den Modulnamen in `modules` aufnehmen —
+  nur der erste lässt das Modul stumm, also gültig und wirkungslos. Der
+  Vorlage-Index führt jetzt `make docs-check`, das Gate, das die Vorlage selbst
+  mitbringt; ohne die Zeile meldete der frisch aktivierte Sensor es als
+  `gate-undocumented`.
+- **Beispiel**: `AGENTS.md` §3 von 3.385 auf 511 Zeichen. Die drei Nicht-Gates,
+  die dort unmarkiert unter „Quality Gates" standen (`export`,
+  `agent-implement`, `agent-review`), stehen jetzt in der Werkzeuge-Tabelle des
+  Index mit `kein Gate` und mit ihrem Geltungsbereich — `export` lebt in den
+  sechs `<sprache>/Makefile` und wird vom Root nicht durchgereicht.
+  `slice-013` promotet `make test-property` aus dem „Nicht behauptet"-Block in
+  die Tabelle: der Index ist die einzige Registrierungsstelle, die der Sensor
+  erzwingt.
+
+**Die Kehrseite der Ein-Ort-Setzung, benannt statt verschwiegen:** `doc-tables`
+ist getauscht, nicht erweitert. `AGENTS.md` steht damit in **keiner** der beiden
+Richtungen mehr im Prüfbereich; es führt keinen Index mehr, nennt aber weiter
+Targets in Prosa, und ein Phantom dort passiert still. Steht als zweite Grenze
+im `targets`-Block von `lab/example/.d-check.yml`. Die Wurzel-`AGENTS.md` dieses
+Repos behält ihre Target-Tabelle: Das Kurs-Repo ist kein Adopter und führt kein
+`harness/` — der Index ist dort ohnehin einmalig.
+
+**Beobachtbares Verhalten, geprobt** (`AGENTS.md` §3): Szenario-Gruppe s23,
+5 Verdikte, 63/63 · 0 KAPUTT auf d-check v0.74.1. s23a Phantom im Index laut
+(Datei, Ziel und Code in *einer* Zeile gepinnt), s23b unterscheidend — derselbe
+Lauf urteilt unter Briefing-Autorität über andere Targets und über dieses
+nicht —, s23c/s23e das Paar Aufruf-Argument/Link in der Code-Span im selben
+Lauf, s23d Ziel-Zustand still bei **nachweislich scharfem** Sensor. Die
+Vorbedingungen binden den Zustand, nicht die Textpräsenz: Tabellen-Zugehörigkeit
+und reale `Makefile`-Regel, dazu eine Phantom-Probe in der Gate-Tabelle.
+
+**Ein Fund aus dem Review, der älter ist als diese Welle.** Die Stille-Prüfung
+des Team-Sim lautete `grep -q "0 Befund"` — das trifft auch „**1**0 Befund(e)"
+und meldete Stille über einem lauten Lauf. An **14** Stellen, quer durch s04,
+s08, s09, s11, s16, s17, s18, s19, s20 und s23. Ersetzt durch den Helfer
+`still()` mit Komma-Anker, gegen 0/1/10/20 Befunde break-getestet. Die
+Verdikte selbst bleiben, wie sie waren; geprüft wird jetzt, was sie behaupten.
+
+Gates: `make check`, `make bundle-check`, `bash lab/team-sim/run.sh`.
+
 ## Welle 128 — 2026-09-06 · Der Spiegel richtet keine Tabellen aus
 
 Beobachtung an den Bundle-Dateien: Die Tabellen in `lab/regelwerk/` sind auf

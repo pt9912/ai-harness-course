@@ -106,53 +106,14 @@ Commits, in dieser Reihenfolge:
 
 ## 3. Quality Gates
 
-Nur Befehle, die im Makefile existieren — halluzinierte Gates sind die
-häufigste Form von Harness-Lüge. Autoritativ ist `make help` (im Root und je
-Sprach-Skelett); die beiden Tabellen unten sind der Auszug, den ein Agent kennen
-muss, kein Snapshot des Makefiles. Die *Bindung* jedes Targets steht in
-[`harness/README.md` §Sensors](harness/README.md#sensors-feedback-gates), nicht hier.
+Der Gate-Index dieses Repos steht **einmal**, in
+[`harness/README.md` §Sensors](harness/README.md#sensors-feedback-gates) — dort
+steht auch die *Bindung* jedes Targets. Diese Datei führt die Liste nicht.
+Autoritativ über den Bestand ist `make help` (im Root und je Sprach-Skelett).
 
-**Sprach-Skelett-Gates** — im jeweiligen Skelett aufzurufen; `gates`, `ci` und
-`fullbuild` reicht das Root-`Makefile` zusätzlich per `COURSE_LANG=<sprache>`
-durch, die übrigen nicht:
-
-| Target | Zweck |
-|---|---|
-| `make lint` | Linter + Suppression-Gate |
-| `make typecheck` | Statische Typprüfung |
-| `make arch-check` | Layering-Constraints |
-| `make test` | Unit-Tests |
-| `make test-determinism` | 100 identische Läufe, Hash-Vergleich |
-| `make coverage-gate` | Gesamt-Coverage (bootstrap-aware) |
-| `make coverage-gate-critical` | Critical-Path-Coverage |
-| `make gates` | alle inneren Gates (mandatory vor PR) |
-| `make ci` | gates + `test-determinism` + `coverage-gate-critical` |
-| `make fullbuild` | volle Closure inkl. Runtime-Image |
-| `make export` | Belege der Beleg-Stages host-seitig auspacken (Rückweg ohne Mount): Lint-Befunde, Coverage-Zusammenfassung und der maschinenlesbare Coverage-Report — in allen sechs Skeletten derselbe Satz |
-
-(Alle elf sind in den sechs Sprach-Skeletten real implementiert.)
-
-**Repo-weite Verifikation** (nur im Root, sprachunabhängig):
-
-| Target | Zweck |
-|---|---|
-| `make verify` | Closure-Pflicht + Referenz-Richtung; mit `SLICE=` zusätzlich die Slice-DoD |
-| `make verify-closure-notes` | **Vorführ-Gegenstand für Modul 11**, nicht die Deckung: Die Closure-Pflicht prüft `doc-check` (`planning.closure`) — [ADR-0019](docs/plan/adr/0019-closure-sensor-und-skript-rolle.md) |
-| `make doc-check` | Vier d-check-Module: `matrix` (Referenz-Richtung — keine Abwärtszeiger im Spec-Stratum, keine superseded-ADR-Verweise, keine ADR→Slice-Kante ohne Provenance-Marker), `ids` (ADR-Kennungen sind Links), `targets` (kein behauptetes Gate ohne Regel, keine Regel ohne Doku), `planning` (Roadmap-Ruhemarker ↔ `in-progress/`; Offene-Wellen-Zeiger ↔ flache Welle-Dateien, keine Vorschau-Zeile mit Datei, Abschluss-Register ↔ Ergebnisnotizen) |
-| `make verify-slice` | DoD eines Slice plausibilisieren; Aufruf mit `SLICE=<id>` |
-| `make plan-status` | Slice-Verteilung über die Lifecycle-Verzeichnisse |
-| `make agent-implement` | Kontextpaket für einen Implementer-Agenten zeigen; Aufruf mit `SLICE=<id>` |
-| `make agent-review` | Review-Fixture für Modul 10 zeigen |
-| `make replay` | Golden-Set-Fixture validieren, Aufruf mit `RUN=<set-name>` — **kein Lauf**, siehe den Absatz am Ende dieses Abschnitts |
-| `make trace` | Agentenlauf-Trace-Fixture ausgeben; Aufruf mit `RUN=<name>` |
-| `make release` | Release-Checkliste und Runbook-Fixtures prüfen |
-
-Weder **Golden-Set-Replay** noch **Image-Scan** hängen an `ci`. Einen
-Image-Scan gibt es im Repo überhaupt nicht. Für das Golden Set existiert das
-Root-Target `make replay RUN=<set-name>` (der Name unterhalb
-`evals/golden/`, z. B. `welle-1-baseline`); es prüft, ob das Golden-Set-Verzeichnis vollständig ist (Manifest mit
-`model:`- und `runtime:`-Block, `inputs/`, `expectations/`, mindestens drei
-Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 12).
+Nur Befehle behaupten, die es gibt: Halluzinierte Gates sind die häufigste Form
+von Harness-Lüge. Der Index *verzeichnet* die Targets; *definiert* ist ein Gate
+dort, wohin seine Bindung auflöst — siehe §4.
 
 ## 4. Dokumentations-Regeln
 
@@ -169,7 +130,6 @@ Cases, gleiche Anzahl beider Seiten) und **führt den Replay nicht aus** (Modul 
   `coverage-gate-critical` → [ADR-0013](docs/plan/adr/0013-coverage-schwellen.md) — und für die Ausnahme des kritischen
   Gates weiter zu
   [CO-001 §Geltungs-Konfiguration](docs/plan/carveouts/CO-001-index-coverage.md#geltungs-konfiguration).
-  §3 dieser Datei listet die Targets nur auf; definiert wird dort nichts.
   Sprach-spezifische Ergänzungen stehen in `<sprache>/harness/README.md` —
   unvollständig, nicht jedes Skelett führt jedes Target.
 - `docs/user/` ist **Platzhalter** (siehe [`docs/user/README.md`](docs/user/README.md)).

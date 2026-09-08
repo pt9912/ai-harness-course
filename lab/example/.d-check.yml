@@ -67,14 +67,14 @@ matrix:
   # der Spec-Straten, und fuer die gilt die Ausnahme ausdruecklich nicht.
   exclude-sections: [Geschichte]
 
-# Deklarations-Konsistenz Doku <-> Build-Targets. AGENTS.md §3 nennt
-# halluzinierte Gates "die haeufigste Form von Harness-Luege" und beruft sich
-# auf `make help` als autoritative Liste — bis hierher pruefte das niemand.
+# Deklarations-Konsistenz Doku <-> Build-Targets — die maschinelle Haelfte
+# der Hard Rule aus AGENTS.md §3 ("halluzinierte Gates sind die haeufigste
+# Form von Harness-Luege", autoritativ ist `make help`).
 # Zwei Richtungen: jedes in einer Doku-Tabelle behauptete `make X` ist eine
 # reale Regel (gate-phantom), und jede Regel steht in der Autoritaets-Doku
 # (gate-undocumented).
 targets:
-  # Beide Tabellen aus AGENTS.md §3 zusammen: die Skelett-Targets leben in
+  # Beide Tabellen des Index zusammen: die Skelett-Targets leben in
   # <sprache>/Makefile, die repo-weiten hier.
   makefiles:
     - Makefile
@@ -86,14 +86,22 @@ targets:
     - java/Makefile
     - kotlin/Makefile
     - python/Makefile
-  # GRENZE: nur die oberste AGENTS.md. Die sechs <sprache>/AGENTS.md und die
-  # sechs <sprache>/harness/README.md tragen ebenfalls Sensors-Tabellen —
-  # laut AGENTS.md §4 sogar die Stelle, an der ein Gate DEFINIERT ist —, und
-  # ein Phantom-Target dort bleibt unentdeckt. Nachgestellt. Die andere
-  # Richtung (gate-undocumented) greift ueber alle Makefiles.
-  doc-tables: [AGENTS.md]
-  authority: AGENTS.md
-  # Utility ohne Doku-Pflicht: Sie tragen kein Gate, und AGENTS.md §3 listet
+  # Autoritaet ist der EINE Gate-Index (Kurs `grundlagen/harness-dateien.md`
+  # §harness/README.md als Einstiegspunkt): dieselbe Datei in beiden Feldern,
+  # weil es nur einen Index gibt. AGENTS.md traegt die Regel und den Zeiger.
+  # ZWEI GRENZEN, beide benannt:
+  # (1) Nur die oberste harness/README.md. Die sechs <sprache>/harness/README.md
+  #     tragen ebenfalls Target-Tabellen (vier davon unter einer §Sensors-
+  #     Ueberschrift); ein Phantom-Target dort bleibt unentdeckt. Die andere Richtung (gate-undocumented) greift ueber alle
+  #     Makefiles.
+  # (2) `doc-tables` ist getauscht, nicht erweitert: AGENTS.md steht in keiner
+  #     der beiden Richtungen mehr im Pruefbereich. Das Briefing fuehrt keinen
+  #     Index mehr, nennt aber weiter Targets in Prosa (`make help`,
+  #     `make doc-check`) — ein Phantom DORT passiert still. Der Preis der
+  #     Ein-Ort-Setzung, hier genannt statt verschwiegen.
+  doc-tables: [harness/README.md]
+  authority: harness/README.md
+  # Utility ohne Doku-Pflicht: Sie tragen kein Gate, und der Index fuehrt
   # bewusst die Gates, nicht jede Regel. Exakte Namen, kein Glob.
   exempt-targets:
     - help

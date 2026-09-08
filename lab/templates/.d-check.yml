@@ -2,6 +2,11 @@
 # Ins Repo-Root kopieren. Wächst mit den Artefakten: ids/codepaths erst
 # aktivieren, wenn Targets/roots existieren — sonst Config-Fehler bzw. ein
 # behaupteter, aber leerer Gate (Modul 13).
+# AKTIVIEREN HEISST ZWEI SCHRITTE: den Block entkommentieren UND den Modulnamen
+# in `modules` unten aufnehmen. Nur der erste Schritt laesst das Modul stumm —
+# die Konfiguration ist dann gueltig und wirkungslos, also genau die
+# Gate-Luege, gegen die Modul 13 antritt. Gegenprobe nach dem Aktivieren:
+# einen Verstoss der Klasse einbauen und den Befund sehen.
 scan:
   roots: ["."]
   ignore: ["**/*.template.md", ".tmp/**"]
@@ -12,6 +17,25 @@ modules: [links, anchors]
 #     - {regex: '<PREFIX>-[A-Z]{2}-\d{2}', target: spec/lastenheft.md}  # Präfix setzen; aktivieren, sobald spec/lastenheft.md existiert
 # codepaths:
 #   roots: [spec, docs, harness]                                        # aktivieren, sobald diese Verzeichnisse existieren
+#
+# Deklarations-Konsistenz Gate-Index <-> Makefile — aktivieren, sobald das
+# erste Gate-Target im Makefile steht. Die MASCHINELLE HAELFTE der Hard Rule
+# aus `modul-13-quality-gates.md` §Hard Rule: Ohne sie lebt "kein behauptetes
+# Gate ohne Deckung" nur im Briefing, und eine Regel in nur einem Quadranten
+# ist halb durchgesetzt (`modul-09-implementierung.md` §Hard Rules). Zwei
+# Richtungen: jedes im Index behauptete `make X` ist eine reale Regel
+# (gate-phantom), und jede Regel steht im Index (gate-undocumented).
+# targets:                                                              # + `targets` in `modules` aufnehmen
+#   makefiles: [Makefile]                                               # d-check.mk erst ergaenzen, wenn `d-check --print-mk` gelaufen ist
+#   doc-tables: [harness/README.md]                                     # der EINE Gate-Index (`grundlagen-harness-dateien.md`)
+#   authority: harness/README.md                                        # dieselbe Datei — es gibt nur einen Index
+#   # Utility ohne Gate-Anspruch (§Vorhanden != behauptet). NAMENTLICH, nie
+#   # als Glob: Kommt bei einer Regeneration ein Target dazu, soll der Sensor
+#   # es melden, statt es still durchzulassen.
+#   exempt-targets: [help, build, run, clean,
+#                    doc-check, doc-trace, doc-complete, doc-doctor, doc-repair,
+#                    doc-immutable, doc-commits, doc-planning, doc-tracked,
+#                    doc-targets, doc-structure, doc-usage, doc-help]
 #
 # Referenz-Richtung (SDP) mechanisch — aktivieren, sobald spec/ und docs/plan/
 # existieren. Bildet die Referenzmatrix des Regelwerks ab

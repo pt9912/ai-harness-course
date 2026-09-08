@@ -73,14 +73,14 @@ Metrik dient also gleichzeitig Kosten- *und* Sicherheitsüberwachung.
 
 ### Doku-Konsistenz-Drift-Regeln
 
-Konsistenz-Regeln, die ein Doku-Konsistenz-Agent zwischen AGENTS.md und
-realen Make-Targets / Skill-Dateien / `harness/README.md` prüft — pro
-Regel:
+Konsistenz-Regeln, die ein Doku-Konsistenz-Agent zwischen den Harness-Dateien
+(AGENTS.md, `harness/README.md` §Sensors, Skill-Dateien) und dem, was sie
+behaupten (Make-Targets, ADR-Dateien), prüft — pro Regel:
 
 | Feld | Inhalt |
 | --- | --- |
-| **Regel-Name** | z. B. *"AGENTS.md-Befehl existiert im Makefile"* |
-| **Quelle** | welche Datei wird gelesen (z. B. `AGENTS.md` §Tool-Regeln) |
+| **Regel-Name** | z. B. *"`make`-Nennung im Briefing existiert"* |
+| **Quelle** | welche Datei wird gelesen (z. B. `AGENTS.md`, alle `make …`-Nennungen in Prosa — den Gate-Index führt `harness/README.md` §Sensors) |
 | **Vergleichs-Ziel** | welche Datei wird dagegen geprüft (z. B. `Makefile`-Target-Namen) |
 | **Drift-Symptom** | wie sieht ein Drift-Treffer konkret aus (z. B. *"AGENTS.md nennt `make fullbuild`, Makefile kennt nur `make build`"*) |
 | **Lebenszyklus** | ist das ein Pre-commit-Check, Pre-integration, oder Continuous (vgl. [`grundlagen/klassifikation.md`](grundlagen-klassifikation.md))? |
@@ -90,13 +90,13 @@ Mindestens *eine* Regel muss die Hard Rule aus
 durchsetzen ("keine Befehle behaupten, die es nicht gibt").
 
 **Drift-Signal und Schwelle:** Konkretes Signal: Doku-Konsistenz-Agent
-meldet AGENTS.md-Befehl ohne passendes Make-Target (z. B.
+meldet einen behaupteten Befehl ohne passendes Make-Target (z. B.
 `make fullbuild` behauptet, Makefile kennt nur `make build`);
 Konsistenz-Score als Metrik (`agents_md.consistency_ratio`) fällt unter
 einen Schwellwert. Schwelle begründet: jeder behauptete-aber-fehlende
 Befehl ist *sofort* gate-relevant (Hard Rule Modul 13, keine Befehle
 erfinden), nicht erst ab einem Prozentsatz — Score-Verfall ist nur das
 Aggregat-Signal. Gegenbeispiel-Rauschen: ein neu hinzugefügtes Target
-ohne AGENTS.md-Eintrag ist *Vorwärts*-Drift (Doku hinkt nach), andere
+ohne Eintrag im Gate-Index ist *Vorwärts*-Drift (Doku hinkt nach), andere
 Härte als behauptete Geister-Befehle.
 

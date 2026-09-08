@@ -49,6 +49,9 @@ gruppen:
   # derselbe Lauf (--trace / --trace --require-complete); und erst ein Slice
   # entlastet eine Anforderung, eine ADR nicht.
   s22: [s22a, s22b, s22c, s22d]
+  # s23: ENTWURF der EINE Gate-Index (Welle 129). Autoritaet ist der Index, nicht
+  # das Briefing; die Code-Span der Target-Zelle traegt den nackten Namen.
+  s23: [s23a, s23b, s23c, s23e, s23d]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -62,3 +65,4 @@ laeufe:
   - { datum: 2026-09-06, image: v0.74.1, neu: [s20a, s20b, s20c, s20d, s20e, s20f], gegenstand: "Entwurf: die Sensor-Datei (Welle 120) — was der Link-Sensor faengt, seine zwei benannten Loecher, Retirierung, und das Paar Token/Pfad", ergebnis: "52 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-06, image: v0.74.1, neu: [s21a, s21b], gegenstand: "Entwurf: Zitier-Form im einfrierenden Artefakt (Welle 125) — Baseline-Tag springt, Link-Form rot, Token-Form gruen", ergebnis: "54 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-06, image: v0.74.1, neu: [s22a, s22b, s22c, s22d], gegenstand: "Entwurf: Anforderung -> Beleg (Welle 127) — Waise faellt, ADR entlastet nicht, Slice entlastet, Bericht urteilt nicht", ergebnis: "58 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-09-08, image: v0.74.1, neu: [s23a, s23b, s23c, s23e, s23d], gegenstand: "Entwurf: der EINE Gate-Index (Welle 129) — Phantom im Index laut, Briefing-Tabelle entlastet nur unter Briefing-Autoritaet, Paar Aufruf-Argument/Link in der Code-Span, Ziel-Zustand still bei nachweislich scharfem Sensor", ergebnis: "63 PASS, 0 FAIL, 0 KAPUTT" }

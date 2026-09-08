@@ -70,6 +70,13 @@ Was lenkt den Agenten *vor* der Handlung? Pointer, kein Inhalt.
 WICHTIG: Nur Befehle aufzählen, die im Makefile *existieren*.
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge (Modul 13).
 
+DIES IST DER EINZIGE GATE-INDEX. Kommt ein Target dazu, wird es HIER
+eingetragen, nirgends sonst; AGENTS.md trägt die Regel und den Zeiger.
+
+TARGET-ZELLE = NACKTER NAME. Der Aufruf (`SLICE=<id>`) steht in der
+Nachbarspalte: `make verify-slice SLICE=<id>` in der Code-Span macht die
+Zeile für den Sensor unsichtbar. Ein LINK auf der Zelle schadet nicht.
+
 Drei Spalten — kein Lauf-Status:
 - Target:  der Make-Befehl.
 - Vertrag: was prüft das Gate (was wäre verletzt, wenn es rot wird).
@@ -118,6 +125,7 @@ dorthin, sondern in seine ADR/Spec-Zeile/seinen Skriptkopf.
 
 | Target | Vertrag | Bindung |
 |---|---|---|
+| `make docs-check` | Doku-Referenzen (d-check); das Gate, das die Vorlage mitbringt | — |
 | `make lint` | <was prüft es> | — |
 | `make test` | <…> | — |
 | `make arch-check` | <…> | ADR-<NNNN> |

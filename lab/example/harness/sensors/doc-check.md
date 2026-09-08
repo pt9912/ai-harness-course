@@ -26,8 +26,9 @@ die falsche.
   Ergebnisnotiz in `done/` und umgekehrt.
 - **`targets`**: jedes in einer Doku-Tabelle behauptete `make X` ist eine reale
   Regel (`gate-phantom`), und jede Regel steht in der Autoritäts-Doku
-  (`gate-undocumented`) — AGENTS.md §3 nennt halluzinierte Gates die häufigste
-  Form von Harness-Lüge, bis hierher prüfte das niemand.
+  (`gate-undocumented`). Autoritäts-Doku ist der Gate-Index
+  [`../README.md` §Sensors](../README.md#sensors-feedback-gates); die Hard Rule
+  dahinter trägt `AGENTS.md` §3.
 - **`matrix`**: Referenz-Richtung als Deklaration: kein Spec-Stratum nennt ADR
   oder Slice — **in keinem Abschnitt, auch nicht in seiner Historie**; kein
   Slice referenziert eine superseded ADR; eine ADR nennt einen Slice nur als
@@ -68,4 +69,4 @@ die Zeile trug lange nur die Bindung von `ids`/`matrix`, und die ist für
 | `reviews` | [Modul 10 §Harness-Einordnung](../../../../kurs/de/04-qualitaet/modul-10-review-harness.md#harness-einordnung) — Review-Report-Deckung |
 | `ids`, `matrix` | [Kurs §Referenz-Richtung](../../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) |
 | `planning` | [Modul 6 §Die Wellen-Eröffnungs-Prozedur](../../../../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) — Ruhe-Marker und Wellen-Invariante |
-| `targets` | [`../../AGENTS.md`](../../AGENTS.md) §3 — halluzinierte Gates |
+| `targets` | [Modul 13 §Hard Rule](../../../../kurs/de/04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin) — halluzinierte Gates; verkoerpert in `AGENTS.md` §3 |

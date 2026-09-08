@@ -145,7 +145,7 @@ BF-Diskrepanz-Auslöse-Variante.
 | 0 | Modus pro Sub-Area entscheiden: GF für *Konventionen*, *Spec*, *Architektur*, *ADR* (alle vier Doku-führt). | keine | keine — Vorbedingung |
 | 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schema festlegen: Vertrags-Präfix wählen (`LH-*`), `SPEC-*`/`ARC-*`/`MR-*` aus der Baseline übernehmen | keine | reift 2/3 |
 | 2 | **Baseline vendoren** — Regelwerk *und* Templates nach `.harness/baseline/<tag>/{regelwerk,templates}/` (+ `SHA256SUMS`, netzlos) als präsente, gepinnte Referenz; **Tooling** (`Makefile` mit d-check-Doku-Gate, `.d-check.yml`) als Startgerüst übernehmen; **Dokument-Skelette** aus der vendored Baseline (`…/templates/`) kopieren *und ausfüllen* | Dokument-Skelette **0 → 1**; vendored Baseline + Tooling tragen keine Phase-Reife | keine |
-| 3 | `harness/conventions.md` mit MR-000 (Baseline-Aussage inkl. ID-Schema) + leerer Index-Tabelle — dieses Repo weicht nirgends ab, also entsteht **keine** `MR-<NNN>`-Datei | `conventions.md` 0 → 1 | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
+| 3 | `harness/conventions.md` mit MR-000 (Baseline-Aussage inkl. ID-Schema) + leerer Index-Tabelle — dieses Repo weicht nirgends ab, also entsteht **keine** `MR-<NNN>`-Datei | `conventions.md` 0 → 1; `AGENTS.md` 1 → 2 (Source Precedence + Hard Rules) | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
 | 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
 
 #### Detail-Tabelle (Schritte 5–8: Inhalts-Phase)
@@ -153,7 +153,7 @@ BF-Diskrepanz-Auslöse-Variante.
 | # | Aktion | Berührte Dateien (Phasen-Übergang) | Trigger |
 | --- | --- | --- | --- |
 | 5 | `docs/plan/planning/roadmap.md` mit Welle + Release-Mapping; `releasing.md` mit Release-Strategie | `roadmap.md` 1 → 2; `releasing.md` 1 → 2 | keine |
-| 6 | Sensors-Roster im "Nicht behauptet"-Block (Prosa-Pointer-Liste, kein Status) | `harness/README.md` §Sensors Sub-1 → Sub-2; `AGENTS.md` §4 Sub-1 → Sub-2 | **T4** (Promotion-Auslöser bei erstem Code-Slice) |
+| 6 | Sensors-Roster im "Nicht behauptet"-Block (Prosa-Pointer-Liste, kein Status) | `harness/README.md` §Sensors Sub-1 → Sub-2 | **T4** (Promotion-Auslöser bei erstem Code-Slice) |
 | 7 | `spec/architecture.md` + `spec/spezifikation.md` Outline mit `ARC-*`/`SPEC-*` | beide 1 → 2 | **T5** (erste ADR-Vorschläge aus Architektur-Outline) |
 | 8 | `docs/plan/adr/0001-doc-source-of-truth.md` mit Status *Proposed* | `0001-…md` 0 → 2; ADR-Index 1 → 2 | **T6** (Cross-Reference: ADR → Spec, aufwärts), **T7** (ADR-Review-Auslöser) |
 | Bootstrap-Ende | Bereit für ersten Code-Slice — Workflow-Übergang | — | — |

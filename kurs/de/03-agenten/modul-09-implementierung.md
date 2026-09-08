@@ -273,6 +273,12 @@ Konkret gehört in den Lauf-Kontext:
 | Skills, die nicht zu dieser Rolle gehören |
 | ältere Carveouts, deren Auflösungs-Trigger bereits eingetreten ist |
 
+**Die Pflicht-Tabelle nennt zwei Dateien — also zählt, was in beiden steht.**
+Ein Block, der doppelt dasteht, kostet pro Lauf zweimal und läuft auseinander;
+nachgezogen wird die Fassung, an der gerade gearbeitet wird. Deshalb steht der
+Gate-Index nur an einer Stelle
+([`harness-dateien.md`](../grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
+
 Die Verdichtungs-Sensoren dafür sind in [Modul 15](../05-betrieb/modul-15-observability.md):
 Token-Eingabe-Metrik pro Slice, Cache-Hit-Rate (siehe Mini-Glossar in
 Modul 15), und der **Doku-Konsistenz-Agent** als Drift-Detektor für tote
