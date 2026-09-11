@@ -17,7 +17,7 @@ Form, die Regeln der Inhalt.
 ### Roadmap-Regeln (Modul 6)
 
 - Ein Welle-Eintrag braucht minimal drei Bestandteile: Slice-IDs (Inhalt) · Trigger als beobachtbare Bedingung (kein Datum) · Closure-Kriterien (z. B. Replay grün, alle Slices in `done/`). Datum darf *erwähnt* werden (Prognose), darf aber nie Trigger sein — sonst kappt die Welle halbfertige Slices am Kalendertag und das Auditierbarkeits-Versprechen bricht.
-- Ein Trigger ist beobachtbar dann, wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er eingetreten ist. "Sobald wir Zeit haben" scheitert daran; "slice-024 in `done/`" besteht. Beispiele für beobachtbare Trigger: "slice-024 liegt in `done/`" · "Replay-Lauf gegen Golden Set grün" · "Carveout `CO-007` aufgelöst".
+- Ein Trigger ist beobachtbar dann, wenn ein *anderer* Mensch ohne Rückfrage sagen kann, ob er eingetreten ist. "Sobald wir Zeit haben" scheitert daran; "slice-audit-log-hardening in `done/`" besteht. Beispiele für beobachtbare Trigger: "slice-audit-log-hardening liegt in `done/`" · "Replay-Lauf gegen Golden Set grün" · "Carveout `CO-007` aufgelöst".
 - **Der Start-Trigger darf kein Ergebnis dieser Welle sein** — Beobachtbarkeit allein genügt nicht. "Alle Slices in `done/`" ist beobachtbar *und* ein Ergebnis: als Closure-Trigger richtig, als Start-Trigger zirkulär. Zwei Prüfungen, nicht eine. Test: Steht der Trigger in der Slice-Liste *dieser* Welle, ist er falsch platziert.
 - Welle 30 % über Schätzung — Diagnose vor Aktion: liegt es an Slice-Größe (→ neu schneiden), an Reihenfolge (→ neu planen), oder an unerwarteter Komplexität (→ Carveout)? 30 % früh können ein Steering-Loop-Signal sein (Slice-Sizing-Regel schärfen), 30 % spät (vor Welle-Closure) eher Carveout.
 
@@ -43,13 +43,13 @@ Form, die Regeln der Inhalt.
   | Vorgang | Träger im Repo **ohne** Wellen | Wann |
   |---|---|---|
   | **Zähler** | Slice-Closure §7 | vor dem `git mv` nach `done/` |
-  | **Lese-Schritt** (was hat 3× erreicht → Ausgang zuweisen) | Slice-Closure §7 | vor dem `git mv`; Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
+  | **Lese-Schritt** (was hat 3× erreicht → Ausgang zuweisen) | Slice-Closure §7 | vor dem `git mv`; Anker `seit slice-<Kennung>` statt `seit welle-<Kennung>` |
   | **Sichtungs-Schritt** (offene Beobachtungen unter der Schwelle) | Slice-**Planung**, §8 *Vorgelagert — offene Beobachtungen sichten* | beim Anlegen jedes Slice, unabhängig vom Sub-Area-Modus |
   | **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
   | **Alle drei Paarungen** (a/b/c aus Closure-Schritt 3) | Slice-Closure | **nach** dem `git mv` — sie suchen in `done/` |
-  | **Zeitdokumente archivieren** (Closure-Schritt 4) | Slice-Closure | **nach** den Paarungen — sie lesen den Volltext in `done/`, den das Archiv dort schließt. Schlüssel ist der Slice: `done/slice-<NNN>-archiv.zip`, **flach** neben dem Stub |
+  | **Zeitdokumente archivieren** (Closure-Schritt 4) | Slice-Closure | **nach** den Paarungen — sie lesen den Volltext in `done/`, den das Archiv dort schließt. Schlüssel ist der Slice: `done/slice-<Kennung>-archiv.zip`, **flach** neben dem Stub |
 
-  Ohne den Lese-Schritt bliebe der einzige Fall ungeprüft, in dem `seit slice-<NNN>` entsteht. Ohne den Sichtungs-Schritt hätte alles *unter* der Schwelle keinen Leser: In einem Repo mit Wellen trägt ihn die Wellen-Eröffnung Schritt 2 — ohne Wellen-Betrieb findet die nicht statt.
+  Ohne den Lese-Schritt bliebe der einzige Fall ungeprüft, in dem `seit slice-<Kennung>` entsteht. Ohne den Sichtungs-Schritt hätte alles *unter* der Schwelle keinen Leser: In einem Repo mit Wellen trägt ihn die Wellen-Eröffnung Schritt 2 — ohne Wellen-Betrieb findet die nicht statt.
 - **Einzige Berührung mit der Roadmap:** Liefert wellenlose Arbeit den letzten Beleg eines Meilensteins, bleibt die Spalte `Welle(n)` leer (`—`) und der Beleg steht als Slice-ID daneben — Beleg für eine externe Bedingung, nicht Zustand.
 
 ### Roadmap-Struktur: fünf Abschnitte (Modul 6)
@@ -62,7 +62,7 @@ Abgeschlossene Wellen · Historische Trigger-Verschiebungen*. Operative Lesart:
 - **Offene Wellen** — *derivativ*: Der Zustand sind die flachen Welle-Dateien, und woran gerade gearbeitet wird, sagt das `Welle:`-Feld der Slices in `in-progress/` ([Modul 5](modul-05-planning-harness.md#lifecycle-als-state-machine)). Ziel, Trigger und Closure-Kriterien stehen in der Welle-Datei, nicht hier. Der Abschnitt trägt **zwei unabhängige Aussagen**: Die *Liste* folgt den Dateien (ein Zeiger je offener Welle-Datei). Der Ruhe-Marker *Nichts in Arbeit* folgt dem Anspruch — er steht genau dann, wenn `in-progress/` keinen Slice trägt, **zusätzlich zur Liste, nicht an ihrer Stelle**; beides zugleich ist der Normalfall direkt nach der Wellen-Eröffnung (Welle eröffnet, noch nicht beansprucht). Zwei Aussagen, zwei Wächter — wer die Kopplung mechanisiert, muss wissen, *welche* Hälfte sein Sensor prüft, sonst hält er einen halben Wächter für einen ganzen. Die Marker-Hälfte ist die **deklarierte Redundanz**: Ein Doku-Sensor hält den Marker gegen das Verzeichnis, und zwar in **beide** Richtungen — ein fehlender Marker bei leerem `in-progress/` und ein stehengebliebener Marker bei beanspruchtem Slice sind derselbe Defekt. Die Listen-Hälfte ist kein Marker-Vergleich, sondern eine **Bijektion**: die im Abschnitt genannten Wellen-Kennungen gegen die flachen Welle-Dateien, ebenfalls in beide Richtungen — ein Zeiger ohne Datei und eine Datei ohne Zeiger sind derselbe Defekt. Sie hat eine Vorbedingung, die der Marker nicht hat: Der Sensor muss das **Kardinalitäts-Modell** kennen. Ein Wächter, der den Abschnitt gegen *genau eine* Datei hält (Ein-Wellen-Betrieb), meldet unter *Offene Wellen* legitime Zustände als Drift — zwei offene Wellen, oder eine Welle eröffnet und nichts beansprucht (Zeiger und Marker nebeneinander). Der Ruhe-Marker geht in die Bijektion **nicht** ein; er bleibt Sache des Marker-Wächters. Wer eine Hälfte ungewächtert lässt, benennt die Lücke — bekannt ist sie zulässig, verschwiegen nicht. Das *Geplante Ende* in der Welle-Datei ist Schätzung, kein Closure-Kriterium: kippt sie, kippt sie als Schätzung.
 - **Nächste Wellen** — die geordnete Vorschau; jede Zeile trägt Welle, Trigger (die Abhängigkeit als beobachtbare Bedingung), wichtigste Slices und geschätzten Aufwand (S/M/L, kein Termin). Eine Welle, die ohne fertige Vorgängerin nicht starten kann, ist eine Phantom-Welle — die Abhängigkeit steht explizit in der `Trigger`-Spalte und als gerichtete Kante im Abhängigkeitsgraphen.
 - **Meilensteine** — extern beobachtbare Zustände, orthogonal zur Welle: die Welle endet *durch* Closure-Kriterien (intern), der Meilenstein durch externe Bestätigung (Audit, Release, Kunde). Der Meilenstein liegt *neben* der Welle, nicht in ihr; ein Audit-*Termin* ist Anhang im Meilenstein-Eintrag, nie Trigger der Welle. Ist das externe Datum unverrückbar, aber die Closure-Trigger unerreichbar, ist die richtige Antwort ein *Carveout* (Modul 7), kein halbfertiges `done/`. Ein erreichter Meilenstein bleibt in der Tabelle: `Status` sagt *erreicht* mit Datum und Beleg.
-- **Abgeschlossene Wellen** — das Closure-Log (ruhender Audit-Bestand): welche Welle wann geschlossen wurde, mit Zeiger auf ihre `done/welle-NN-results.md`. Es sagt, *was* geschlossen ist — Welle, Datum, Zeiger auf die Ergebnis-Notiz — und ist das einzige Closure-Log der Roadmap.
+- **Abgeschlossene Wellen** — das Closure-Log (ruhender Audit-Bestand): welche Welle wann geschlossen wurde, mit Zeiger auf ihre `done/welle-<Kennung>-results.md`. Es sagt, *was* geschlossen ist — Welle, Datum, Zeiger auf die Ergebnis-Notiz — und ist das einzige Closure-Log der Roadmap.
 - **Historische Trigger-Verschiebungen** — das Drift-Log (Bewegungs-Signal): jede Umplanung mit Datum, Änderung, Grund. Wer es leer hat, hat eine starre Roadmap; wer *jeden* Eintrag voll hat, eine treibende. Closure-Log und Drift-Log zusammen machen die Vergangenheit der Roadmap auditierbar. Das Drift-Log sagt, *was umgeplant* wurde — ein Trigger verschoben, präzisiert oder ersetzt, ein Slice oder eine Welle umgehängt — und sonst nichts: Eine Schließung ist keine Umplanung, ein erreichter Meilenstein auch nicht; für den sagt die `Status`-Spalte der Meilenstein-Tabelle *erreicht* mit Datum und Beleg. Wer Schließungen oder Meilensteine ins Drift-Log schreibt, führt ein zweites Closure-Log, und zwei Logs driften. Jede `Stand`-/`Status`-Zelle — in der Roadmap wie im Beobachtungs-Register — trägt den Zustand und den Beleg als auflösbaren Anker, nie die Chronik ([`grundlagen-harness-dateien.md` §Was ein Kommentar trägt](grundlagen-harness-dateien.md#was-ein-kommentar-trägt--code-konfiguration-skripte), *Dieselbe Regel für Zustandsfelder*).
 
 **Wird ein Closure-Trigger doch als Datum geschrieben** und der Kalendertag
@@ -70,7 +70,7 @@ erreicht, bevor die Slices grün sind, gibt es drei mögliche Antworten:
 
 | Antwort | Diagnose |
 | --- | --- |
-| Welle wird trotzdem geschlossen, `slice-019` wandert in `welle-4`. | Datum hat Closure überschrieben — der Audit fällt durch, weil `slice-019` nicht belegt ist. Trigger-Disziplin ist Theorie geblieben. |
+| Welle wird trotzdem geschlossen, `slice-latenz-replay-100k` wandert in `welle-betrieb`. | Datum hat Closure überschrieben — der Audit fällt durch, weil `slice-latenz-replay-100k` nicht belegt ist. Trigger-Disziplin ist Theorie geblieben. |
 | Welle bleibt offen, das Datum wird verschoben. | Trigger-Disziplin wirkt, aber die Roadmap-Drift-Tabelle muss den Eintrag bekommen — sonst ist die Verschiebung still. |
 | Carveout `CO-009` für die fehlende Latenz, Welle schließt mit Carveout. | Sauber: das Versprechen wird offen reduziert, Folge-Slice ist verdrahtet, Audit weiß, was er ansieht. |
 
@@ -123,7 +123,7 @@ docs/plan/planning/observations/
   gehört trotzdem in den Eintrag — *benannt, nicht gezählt.*
 - **Bei 3×** wandert der Eintrag in die Steering-Loop-Einträge der laufenden
   Welle-Closure und wird zur verkörperten Regel (mit Herkunfts-Anker) — ohne
-  Wellen-Betrieb beim Lese-Schritt, den dann die Slice-Closure selbst auslöst, Anker `seit slice-<NNN>`. Die
+  Wellen-Betrieb beim Lese-Schritt, den dann die Slice-Closure selbst auslöst, Anker `seit slice-<Kennung>`. Die
   Zeile bleibt im Register mit Vermerk stehen; gestrichen wird nur mit
   Begründung, warum die Beobachtung nicht mehr auftreten kann.
 - **Der Stand wird dabei zu einem von drei Ausgängen** — dieselbe geschlossene Menge wie
@@ -131,7 +131,7 @@ docs/plan/planning/observations/
 
   | Ausgang | Wann | Wohin |
   |---|---|---|
-  | **verkörpert** | die Regel steht | Zielort **und** Herkunfts-Anker (`seit welle-<NN>` bzw. `seit slice-<NNN>`) |
+  | **verkörpert** | die Regel steht | Zielort **und** Herkunfts-Anker (`seit welle-<Kennung>` bzw. `seit slice-<Kennung>`) |
   | **geplant** | die Regel ist beschlossen, aber noch nicht geschrieben | Kennung des Slice oder der Welle, die sie schreibt |
   | **gestrichen** | die Beobachtung kann nicht mehr auftreten | §Gestrichene Einträge, **mit Begründung** |
 
@@ -213,7 +213,7 @@ ihrer Schritte in
    dem Vermerk stehen, wohin sie ging. Was darunter liegt, bleibt offen und
    wartet. **Ohne diesen Lese-Schritt ist das Register write-only** — gezählt würde
    weiter, aber nichts würde je zur Regel.
-   Closure-Notiz `done/welle-NN-results.md`
+   Closure-Notiz `done/welle-<Kennung>-results.md`
    schreiben (*was gelernt wurde*: geliefert · was funktionierte · was anders
    lief · **Steering-Loop-Einträge** (geschärfte Regel / neuer Sensor /
    benannte Spec-Lücke) · Zeiger aufs **Beobachtungs-Register** ·
@@ -232,9 +232,9 @@ ihrer Schritte in
    betrifft die Welle-*Plan*-Datei, die keine Paarung trägt.)
    (a) **Anker-Paarung** — ausgelöst durch das Pflichtfeld `liegt in <Zielort>`,
    **innerhalb dieser Sektion** und nicht durch die Semantik des Eintrags
-   (der Trigger-Sprachgebrauch „`slice-024` liegt in `done/`“ aus
+   (der Trigger-Sprachgebrauch „`slice-audit-log-hardening` liegt in `done/`“ aus
    §Roadmap-Regeln löst also nichts aus): Wo das Feld steht, existiert der
-   Zielort und trägt `seit welle-<NN>` bzw. `seit slice-<NNN>`. Ein Eintrag
+   Zielort und trägt `seit welle-<Kennung>` bzw. `seit slice-<Kennung>`. Ein Eintrag
    **ohne** dieses Feld ist *gezählt, nicht verkörpert* und kein Gegenstand der
    Paarung. Die **benannte Spec-Lücke** ist der eine Fall, der ohne Feld
    trotzdem verkörpert ist — in einer versionierten Spec statt an einem
@@ -317,4 +317,4 @@ geschlossen.
 - **Gegen "Burndown ist Fortschritt":** Burndown ist *Tempo*. Fortschritt ist, ob die Welle das verspricht, was sie sollte.
 - **Gegen "Eine Roadmap ist statisch":** Eine Roadmap, die nach drei Wellen nicht angepasst wurde, hat den Steering Loop nicht durchlaufen.
 - **Gegen "Welle = Sprint":** Ein Sprint endet durch *Datum* (zwei Wochen sind um). Eine Welle endet durch *Closure-Kriterien* (alle ihre Slices in `done/`, Replay-Lauf grün, Closure-Einträge geschrieben). Wer Wellen wie Sprints schneidet, kappt halbfertige Slices am Datum — und produziert genau die Auditierbarkeits-Lücke, die der Harness verhindern soll.
-- **Gegen "Trigger = Datum":** Ein Trigger ist eine *beobachtbare Bedingung* ("slice-024 liegt in `done/`", "Replay-Lauf gegen Golden Set grün", "Carveout `CO-007` aufgelöst"). Ein Datum ist kein Trigger, sondern eine Prognose. Wenn das einzige Trigger-Kriterium ein Kalendertag ist, plant die Roadmap nicht — sie hofft.
+- **Gegen "Trigger = Datum":** Ein Trigger ist eine *beobachtbare Bedingung* ("slice-audit-log-hardening liegt in `done/`", "Replay-Lauf gegen Golden Set grün", "Carveout `CO-007` aufgelöst"). Ein Datum ist kein Trigger, sondern eine Prognose. Wenn das einzige Trigger-Kriterium ein Kalendertag ist, plant die Roadmap nicht — sie hofft.

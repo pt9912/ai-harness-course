@@ -31,7 +31,7 @@ func (i *Index) Size() int {
 }
 
 // TopK — sortierte Top-K-Treffer für eine Anfrage-Embedding.
-// Tie-Break (AGENTS.md §G-3, slice-009): sort.SliceStable + lexikographisch
+// Tie-Break (AGENTS.md §G-3, slice-tie-break-determinismus): sort.SliceStable + lexikographisch
 // (DocPath, SectionIndex).
 func (i *Index) TopK(query [types.EmbeddingDim]float32, k int) []types.SearchResult {
 	if k <= 0 || i.Size() == 0 {
@@ -87,7 +87,7 @@ func cosine(a, b [types.EmbeddingDim]float32) float32 {
 		return 0
 	}
 	res := float32(dot / (math.Sqrt(na) * math.Sqrt(nb)))
-	// NaN auf 0 mappen — sonst ist slice-009 Tie-Break undefiniert.
+	// NaN auf 0 mappen — sonst ist slice-tie-break-determinismus Tie-Break undefiniert.
 	if res != res {
 		return 0
 	}

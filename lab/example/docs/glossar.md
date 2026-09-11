@@ -7,7 +7,7 @@ DocSearch-Beispiel.
 | Begriff | Bedeutung im Lab |
 |---|---|
 | LLM | Textmodell, das Such-, Review- oder Verifikationsschritte unterstuetzen kann. |
-| Tool-Call | Strukturierter Aufruf eines Werkzeugs, z. B. `make verify SLICE=slice-009`. |
+| Tool-Call | Strukturierter Aufruf eines Werkzeugs, z. B. `make verify SLICE=slice-tie-break-determinismus`. |
 | Agent | LLM plus Tool-Ausfuehrung plus Schleife ueber Plan, Diff, Sensors und Bericht. |
 | Harness | Spec, ADRs, Planning, AGENTS.md, Make-Gates, Replay und Telemetrie rund um den Agenten. |
 | Guide | Feedforward-Quelle vor der Handlung, z. B. Lastenheft, ADR oder AGENTS.md. |

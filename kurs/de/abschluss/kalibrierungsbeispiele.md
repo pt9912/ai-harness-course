@@ -70,7 +70,7 @@ Bewertung:
 Das Projekt **besteht** — gerade noch. Die Bestehens-Regel
 ([`abschlussprojekt.md`](abschlussprojekt.md#bestanden)) erlaubt *eine*
 funktional-Achse, wenn die Lücke dokumentiert und mit einem Folge-Slice
-verknüpft ist. Das Begleitprotokoll referenziert `slice-018`
+verknüpft ist. Das Begleitprotokoll referenziert `slice-suppression-counter`
 ("Sensor *suppression-counter* implementieren") in `next/` — damit ist
 die Auflage erfüllt.
 

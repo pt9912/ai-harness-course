@@ -9,7 +9,7 @@ namespace docsearch {
 namespace {
 
 // Cosinus-Ähnlichkeit mit double-Akkumulation. NaN wird auf 0 gemappt —
-// sonst ist der slice-009-Tie-Break undefiniert.
+// sonst ist der slice-tie-break-determinismus-Tie-Break undefiniert.
 float cosine(const Embedding& a, const Embedding& b) {
     double dot = 0.0;
     double na = 0.0;

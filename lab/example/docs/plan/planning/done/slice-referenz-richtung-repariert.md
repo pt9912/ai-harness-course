@@ -94,14 +94,14 @@ wird daraus eine Regel; bis dahin ist der Eintrag *gezählt, nicht verkörpert*
 und kein Gegenstand der Anker-Paarung.
 
 **Beobachtungs-Register (`../observations/`):** `BEO-SPEC/slice-bezuege-im-spec-text` neu angelegt
-(Sub-Area *Spec-Schreibung*, 1×, Beleg `slice-020`); `BEO-TOOLS/check-references-deckt-adr-nicht` neu angelegt
-(1×, Beleg `slice-020`, aus dem Risiko-Ausgang §6).
+(Sub-Area *Spec-Schreibung*, 1×, Beleg `slice-referenz-richtung-repariert`); `BEO-TOOLS/check-references-deckt-adr-nicht` neu angelegt
+(1×, Beleg `slice-referenz-richtung-repariert`, aus dem Risiko-Ausgang §6).
 
 **Folge-Slice:** keiner.
 
 **Drei Paarungen:** hier nicht — dieses Repo schneidet Wellen. Dass *dieser
 Slice* zu keiner gehört, ändert daran nichts: Die nächste Welle-Closure
-(`welle-2-qualitaet`) prüft alles, was seit `welle-1` in `done/` gelandet ist,
+(`welle-qualitaet`) prüft alles, was seit `welle-mvp` in `done/` gelandet ist,
 also auch `BEO-SPEC/slice-bezuege-im-spec-text` und `BEO-TOOLS/check-references-deckt-adr-nicht` aus dieser Notiz.
 
 ## 8. Sub-Area-Modus-Begründung

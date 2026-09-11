@@ -72,7 +72,7 @@ func TestDeterminism(t *testing.T) {
 	}
 }
 
-// TestSearch_TieBreak — slice-009: bei gleichem Score lexikographisch
+// TestSearch_TieBreak — slice-tie-break-determinismus: bei gleichem Score lexikographisch
 // nach (DocPath, SectionIndex).
 func TestSearch_TieBreak(t *testing.T) {
 	idx := index.New()

@@ -34,7 +34,7 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
   Verzeichnis-Position, kein `Status:`-Feld. Der Welle-Plan (`<welle-id>.md`)
   liegt **flach** in `planning/`, solange die Welle läuft, und wandert bei
   Closure per `git mv` nach `done/` — neben seine
-  `welle-<NN>-results.md`. Den aktiven Durchlauf `open/` → `next/` →
+  `welle-<Kennung>-results.md`. Den aktiven Durchlauf `open/` → `next/` →
   `in-progress/` durchläuft er nicht; `done/` ist sein einziges
   Lifecycle-Verzeichnis. **Geplante** Wellen haben noch keine Datei — sie
   stehen in der Roadmap, die auch Sequenzierungs-Autorität bleibt
@@ -43,7 +43,7 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 - Der aktive Durchlauf `open/` → `next/` → `in-progress/` nimmt ausschließlich
   **Slices** auf; `done/` archiviert **zusätzlich** abgeschlossene
   **Nicht-Slice-Records** — Welle-Plan und Welle-Closure
-  `done/welle-<NN>-results.md`. Aufgelöste Carveouts wandern **nicht** hierher,
+  `done/welle-<Kennung>-results.md`. Aufgelöste Carveouts wandern **nicht** hierher,
   sondern in ihr eigenes `docs/plan/carveouts/done/` (Baseline-Regelwerk
   `modul-07-carveouts.md`).
 

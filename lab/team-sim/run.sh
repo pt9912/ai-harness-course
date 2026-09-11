@@ -585,9 +585,9 @@ s18_alias_und_invalidierung() {
 # Zielform nach Probe 2 (die den Entwurf geaendert hat): Der Geltungsbereich
 # steht im PFAD, weil require-pattern ihn nicht ausdruecken kann.
 #
-#   done/welle-<NN>/archiv.zip + die Stubs der Welle
-#   done/welle-<NN>-results.md   bleibt vollstaendig, bleibt flach
-#   done/slice-<NNN>-*.md        Slices der noch OFFENEN Welle, unberuehrt
+#   done/<welle-id>/archiv.zip + die Stubs der Welle
+#   done/<welle-id>-results.md   bleibt vollstaendig, bleibt flach
+#   done/slice-*.md              Slices der noch OFFENEN Welle, unberuehrt
 # Zwei Bedingungen, weil die Marke allein die Kuerzung nicht belegt: Ein Stub
 # traegt `Archiviert mit:` UND keine H2 — ein ungekuerzter Plan hat seine
 # Abschnitte noch. Das (?m) ist noetig: RE2 ankert `^` sonst am Textanfang.
@@ -1055,6 +1055,215 @@ scharf_kontrolle() { # $1 = Clone-Verzeichnis
   return $rc
 }
 
+# s24: ENTWURFS-Gegenstand — Vorabvergabe als dritte Vergabe-Form (Welle 130,
+# grundlagen/source-precedence.md §Vergabe). Nebenlaeufigkeits-Gegenstand wie
+# s01-s11: zwei Schreiber ziehen dieselbe Slice-Nummer. Geprobt wird das Paar —
+# als eigene Dateien still (s24b), als Zeilen derselben Welle-Datei laut (s24a).
+# Die Stille von s24b zaehlt nur, weil s24a im selben Aufbau laut ist.
+s24_vorabvergabe() {
+  # --- s24a: beide tragen ihre Nummer in §4 DERSELBEN Welle-Datei ein -> LAUT
+  topo
+  cd "$WORK/sim/alice" || return 1
+  schritt git switch -qc a/vorab || return 1
+  printf -- '- slice-003 (Cache) — vorvergeben, noch keine Datei.\n' >> docs/plan/planning/welle-1-basis.md
+  schritt git add -A && schritt git commit -qm "slice-003 vorvergeben (alice)" && schritt git push -q origin a/vorab || return 1
+  cd "$WORK/sim/bob" || return 1
+  schritt git switch -qc b/vorab || return 1
+  printf -- '- slice-003 (Index) — vorvergeben, noch keine Datei.\n' >> docs/plan/planning/welle-1-basis.md
+  schritt git add -A && schritt git commit -qm "slice-003 vorvergeben (bob)" && schritt git push -q origin b/vorab || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin
+  schritt git merge -q --no-edit origin/a/vorab || return 1
+  git merge -q --no-edit origin/b/vorab >/dev/null 2>&1; rc=$?
+  konflikt=$(git ls-files -u | grep -c 'welle-1-basis.md' || true)
+  [ $rc -ne 0 ] && [ "$konflikt" -gt 0 ] && ok=0 || ok=1
+  verdikt "s24a Vorabvergabe in EINER Welle-Datei: LAUT" "Merge-Konflikt auf welle-1-basis.md" "rc=$rc, $konflikt Konflikt-Eintraege" $ok
+
+  # --- s24b: dieselben zwei Ansprueche als je eigene Slice-Datei -> STILL.
+  # Erwartete Stille an einer positiven Vorbedingung: beide Dateien liegen
+  # wirklich, und die Nummer ist wirklich dieselbe.
+  topo
+  cd "$WORK/sim/alice" || return 1
+  schritt git switch -qc a/datei || return 1
+  printf '# Slice slice-003: Cache\n' > docs/plan/planning/open/slice-003-cache.md
+  schritt git add -A && schritt git commit -qm "slice-003-cache" && schritt git push -q origin a/datei || return 1
+  cd "$WORK/sim/bob" || return 1
+  schritt git switch -qc b/datei || return 1
+  printf '# Slice slice-003: Index\n' > docs/plan/planning/open/slice-003-index.md
+  schritt git add -A && schritt git commit -qm "slice-003-index" && schritt git push -q origin b/datei || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin
+  schritt git merge -q --no-edit origin/a/datei || return 1
+  git merge -q --no-edit origin/b/datei >/dev/null 2>&1; rc=$?
+  n=$(ls docs/plan/planning/open/slice-003-*.md 2>/dev/null | wc -l)
+  schritt test "$n" = 2 || return 1
+  konflikt=$(git ls-files -u | wc -l)
+  [ $rc -eq 0 ] && [ "$konflikt" = 0 ] && ok=0 || ok=1
+  verdikt "s24b dieselbe Nummer als zwei Dateien: STILL" "Merge rc=0, 0 Konflikte, 2 Dateien unter slice-003" "rc=$rc, $konflikt Konflikt-Eintraege, $n Dateien" $ok
+
+  # --- s24c: die Grenze der dritten Form. Dieselbe Datei, aber die beiden
+  # Eintraege liegen weit auseinander -> git uebernimmt beide, ohne Abbruch.
+  # Deshalb heisst die Form "lauter, aber nicht garantiert laut".
+  topo
+  cd "$WORK/sim/seedclone" || return 1
+  { printf '\n## 4. Lange Liste\n\n'; i=1; while [ $i -le 40 ]; do printf -- '- slice-%03d (Fuellung).\n' $i; i=$((i+1)); done; } >> docs/plan/planning/welle-1-basis.md
+  schritt git add -A && schritt git commit -qm "lange Slice-Liste" && schritt git push -q origin main || return 1
+  cd "$WORK/sim/alice" && schritt git pull -q --no-rebase origin main || return 1
+  schritt git switch -qc a/weit || return 1
+  sed -i '0,/^- slice-001 (Fuellung)\.$/s//- slice-001 (Fuellung).\n- slice-101 (Cache) — vorvergeben./' docs/plan/planning/welle-1-basis.md
+  schritt grep -q 'slice-101 (Cache)' docs/plan/planning/welle-1-basis.md || return 1
+  schritt git commit -qam "slice-101 oben (alice)" && schritt git push -q origin a/weit || return 1
+  cd "$WORK/sim/bob" && schritt git pull -q --no-rebase origin main || return 1
+  schritt git switch -qc b/weit || return 1
+  printf -- '- slice-101 (Index) — vorvergeben.\n' >> docs/plan/planning/welle-1-basis.md
+  schritt git commit -qam "slice-101 unten (bob)" && schritt git push -q origin b/weit || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin
+  schritt git merge -q --no-edit origin/a/weit || return 1
+  git merge -q --no-edit origin/b/weit >/dev/null 2>&1; rc=$?
+  # Positive Vorbedingung: die Nummer steht wirklich zweimal, sonst bestuende
+  # die Stille auch ueber einem Baum, in dem gar nichts angekommen ist.
+  doppelt=$(grep -c 'slice-101' docs/plan/planning/welle-1-basis.md || true)
+  schritt test "$doppelt" = 2 || return 1
+  konflikt=$(git ls-files -u | wc -l)
+  [ $rc -eq 0 ] && [ "$konflikt" = 0 ] && ok=0 || ok=1
+  verdikt "s24c Vorabvergabe weit auseinander in DERSELBEN Datei: STILL" "Merge rc=0, 0 Konflikte, slice-101 steht zweimal" "rc=$rc, $konflikt Konflikt-Eintraege, $doppelt Nennungen" $ok
+
+  # --- s24d: andere Topologie, anderes Fehlerbild. Zwei Schreiber in EINER
+  # Arbeitskopie, kein Zweig, kein Zusammenfuehren: Beide lesen den Stand, dann
+  # schreibt jeder seinen. Der zweite gewinnt, der Anspruch des ersten ist weg.
+  # Im Zweig-Fall (s24c) blieben beide erhalten.
+  topo
+  cd "$WORK/sim/alice" || return 1
+  A=$(cat docs/plan/planning/welle-1-basis.md)
+  B=$(cat docs/plan/planning/welle-1-basis.md)
+  printf '%s\n- slice-003 (Cache) — vorvergeben.\n' "$A" > docs/plan/planning/welle-1-basis.md
+  # Positive Vorbedingung: der erste Anspruch steht wirklich, bevor der zweite
+  # schreibt. Ohne sie bestuende das Verdikt auch, wenn nie einer da war.
+  schritt grep -q 'slice-003 (Cache)' docs/plan/planning/welle-1-basis.md || return 1
+  printf '%s\n- slice-003 (Index) — vorvergeben.\n' "$B" > docs/plan/planning/welle-1-basis.md
+  cache=$(grep -c 'slice-003 (Cache)' docs/plan/planning/welle-1-basis.md || true)
+  index=$(grep -c 'slice-003 (Index)' docs/plan/planning/welle-1-basis.md || true)
+  konflikt=$(git ls-files -u | wc -l)
+  [ "$cache" = 0 ] && [ "$index" = 1 ] && [ "$konflikt" = 0 ] && ok=0 || ok=1
+  verdikt "s24d dieselbe Arbeitskopie, zwei Schreiber: ANSPRUCH VERLOREN, still" "erster Anspruch weg (0x Cache), zweiter steht (1x Index), 0 Konflikte" "Cache=$cache, Index=$index, $konflikt Konflikt-Eintraege" $ok
+
+  # --- s24e: der zweite Hebel. Zwei Schreiber eroeffnen VERSCHIEDENE Wellen mit
+  # VERSCHIEDENEN Nummern in eigenen Zweigen — und kollidieren trotzdem, weil
+  # beide dieselbe Liste unter "Offene Wellen" ergaenzen. Der laute Ausgang hat
+  # mit der Kennung nichts zu tun.
+  topo
+  cd "$WORK/sim/alice" || return 1
+  schritt git switch -qc a/welle || return 1
+  printf '# Welle welle-2-ausbau: Ausbau\n' > docs/plan/planning/welle-2-ausbau.md
+  sed -i 's#^- \[welle-1-basis\](../welle-1-basis.md)$#- [welle-1-basis](../welle-1-basis.md)\n- [welle-2-ausbau](../welle-2-ausbau.md)#' docs/plan/planning/in-progress/roadmap.md
+  schritt grep -q 'welle-2-ausbau' docs/plan/planning/in-progress/roadmap.md || return 1
+  schritt git add -A && schritt git commit -qm "welle-2 eroeffnet (alice)" && schritt git push -q origin a/welle || return 1
+  cd "$WORK/sim/bob" || return 1
+  schritt git switch -qc b/welle || return 1
+  printf '# Welle welle-3-betrieb: Betrieb\n' > docs/plan/planning/welle-3-betrieb.md
+  sed -i 's#^- \[welle-1-basis\](../welle-1-basis.md)$#- [welle-1-basis](../welle-1-basis.md)\n- [welle-3-betrieb](../welle-3-betrieb.md)#' docs/plan/planning/in-progress/roadmap.md
+  schritt grep -q 'welle-3-betrieb' docs/plan/planning/in-progress/roadmap.md || return 1
+  schritt git add -A && schritt git commit -qm "welle-3 eroeffnet (bob)" && schritt git push -q origin b/welle || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin
+  schritt git merge -q --no-edit origin/a/welle || return 1
+  git merge -q --no-edit origin/b/welle >/dev/null 2>&1; rc=$?
+  konflikt=$(git ls-files -u | grep -c 'roadmap.md' || true)
+  wellen=$(git ls-files -u | grep -c 'welle-[23]' || true)
+  [ $rc -ne 0 ] && [ "$konflikt" -gt 0 ] && [ "$wellen" = 0 ] && ok=0 || ok=1
+  verdikt "s24e zwei verschiedene Wellen, eigene Zweige: LAUT auf der Liste" "Konflikt auf roadmap.md, KEINER auf den Welle-Dateien" "rc=$rc, $konflikt Roadmap-Eintraege, $wellen Welle-Datei-Eintraege" $ok
+
+  # --- s24f: zwei Planner ziehen DIESELBE Welle-Nummer. Jeder leitet sie aus
+  # seinem eigenen Checkout ab ("hoechste plus eins"), beide kommen auf welle-2.
+  # Ohne Listen-Eintrag beruehren sie nur ihre eigenen Dateien — und dann ist
+  # der Ausgang still. Das trennt die Nummer vom Register: s24e ist laut, weil
+  # die Liste angefasst wird; hier wird sie nicht angefasst.
+  topo
+  cd "$WORK/sim/alice" || return 1
+  schritt git switch -qc a/nummer || return 1
+  # Positive Vorbedingung: welle-2 ist im eigenen Checkout wirklich frei.
+  frei=$(ls docs/plan/planning/welle-2-*.md 2>/dev/null | wc -l)
+  schritt test "$frei" = 0 || return 1
+  printf '# Welle welle-2-cache: Cache\n' > docs/plan/planning/welle-2-cache.md
+  schritt git add -A && schritt git commit -qm "welle-2 (alice)" && schritt git push -q origin a/nummer || return 1
+  cd "$WORK/sim/bob" || return 1
+  schritt git switch -qc b/nummer || return 1
+  frei=$(ls docs/plan/planning/welle-2-*.md 2>/dev/null | wc -l)
+  schritt test "$frei" = 0 || return 1
+  printf '# Welle welle-2-index: Index\n' > docs/plan/planning/welle-2-index.md
+  schritt git add -A && schritt git commit -qm "welle-2 (bob)" && schritt git push -q origin b/nummer || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin
+  schritt git merge -q --no-edit origin/a/nummer || return 1
+  git merge -q --no-edit origin/b/nummer >/dev/null 2>&1; rc=$?
+  doppelt=$(ls docs/plan/planning/welle-2-*.md 2>/dev/null | wc -l)
+  konflikt=$(git ls-files -u | wc -l)
+  [ $rc -eq 0 ] && [ "$konflikt" = 0 ] && [ "$doppelt" = 2 ] && ok=0 || ok=1
+  verdikt "s24f zwei Planner, dieselbe Welle-Nummer: STILL" "Merge rc=0, 0 Konflikte, zwei Dateien unter welle-2" "rc=$rc, $konflikt Konflikt-Eintraege, $doppelt Dateien" $ok
+
+  # --- s24g/s24h: Namens-Identitaet statt Nummer. Ohne Zaehler gibt es nichts
+  # abzuleiten. Verschiedene Vorhaben -> verschiedene Namen -> sauber (s24g);
+  # dasselbe Vorhaben -> derselbe Name -> add/add-Konflikt, und der ist richtig,
+  # weil zwei dieselbe Welle beanspruchen (s24h).
+  topo
+  cd "$WORK/sim/alice" || return 1
+  schritt git switch -qc a/name || return 1
+  printf '# Welle welle-cache-warmup: Cache\n' > docs/plan/planning/welle-cache-warmup.md
+  schritt git add -A && schritt git commit -qm "welle-cache-warmup (alice)" && schritt git push -q origin a/name || return 1
+  cd "$WORK/sim/bob" || return 1
+  schritt git switch -qc b/name || return 1
+  printf '# Welle welle-index-rebuild: Index\n' > docs/plan/planning/welle-index-rebuild.md
+  schritt git add -A && schritt git commit -qm "welle-index-rebuild (bob)" && schritt git push -q origin b/name || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin
+  schritt git merge -q --no-edit origin/a/name || return 1
+  git merge -q --no-edit origin/b/name >/dev/null 2>&1; rc=$?
+  konflikt=$(git ls-files -u | wc -l)
+  # Positive Vorbedingung: beide Vorhaben sind wirklich angekommen und
+  # unterscheidbar — sonst bestuende die Stille auch ueber einem leeren Merge.
+  beide=$(ls docs/plan/planning/welle-cache-warmup.md docs/plan/planning/welle-index-rebuild.md 2>/dev/null | wc -l)
+  schritt test "$beide" = 2 || return 1
+  [ $rc -eq 0 ] && [ "$konflikt" = 0 ] && ok=0 || ok=1
+  verdikt "s24g Namens-Identitaet, verschiedene Vorhaben: SAUBER" "Merge rc=0, 0 Konflikte, beide Wellen unterscheidbar" "rc=$rc, $konflikt Konflikt-Eintraege, $beide Dateien" $ok
+
+  # --- s24h: dasselbe Vorhaben, derselbe Name -> LAUT, und zwar richtig.
+  topo
+  cd "$WORK/sim/alice" || return 1
+  schritt git switch -qc a/gleich || return 1
+  printf '# Welle welle-cache-warmup: Cache (alice)\n' > docs/plan/planning/welle-cache-warmup.md
+  schritt git add -A && schritt git commit -qm "welle-cache-warmup (alice)" && schritt git push -q origin a/gleich || return 1
+  cd "$WORK/sim/bob" || return 1
+  schritt git switch -qc b/gleich || return 1
+  printf '# Welle welle-cache-warmup: Cache (bob)\n' > docs/plan/planning/welle-cache-warmup.md
+  schritt git add -A && schritt git commit -qm "welle-cache-warmup (bob)" && schritt git push -q origin b/gleich || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin
+  schritt git merge -q --no-edit origin/a/gleich || return 1
+  git merge -q --no-edit origin/b/gleich >/dev/null 2>&1; rc=$?
+  konflikt=$(git ls-files -u | grep -c 'welle-cache-warmup.md' || true)
+  [ $rc -ne 0 ] && [ "$konflikt" -gt 0 ] && ok=0 || ok=1
+  verdikt "s24h Namens-Identitaet, dasselbe Vorhaben: LAUT (add/add)" "Konflikt auf welle-cache-warmup.md" "rc=$rc, $konflikt Konflikt-Eintraege" $ok
+
+  # --- s24i: Zuteilung setzt EINE zuteilende Instanz voraus. Zwei Planner
+  # eroeffnen je EIGENE Welle (Namens-Identitaet, kollidiert nicht) und teilen
+  # DARIN Slice-Nummern zu -- aus dem je eigenen Checkout. Beide sehen nur
+  # slice-001 und ziehen unabhaengig slice-002. Dieselbe Falle wie s24f, eine
+  # Ebene tiefer: Zuteilung verschiebt das Ableitungsproblem, sie loest es nur,
+  # wenn die zuteilende Instanz SINGULAER ist.
+  topo
+  cd "$WORK/sim/alice" || return 1
+  schritt git switch -qc a/zuteil || return 1
+  printf '# Welle welle-cache: Cache\n\n## 4. Slices\n\n- slice-002 (Cache).\n' > docs/plan/planning/welle-cache.md
+  schritt grep -q 'slice-002 (Cache)' docs/plan/planning/welle-cache.md || return 1
+  schritt git add -A && schritt git commit -qm "welle-cache, slice-002 zugeteilt (alice)" && schritt git push -q origin a/zuteil || return 1
+  cd "$WORK/sim/bob" || return 1
+  schritt git switch -qc b/zuteil || return 1
+  printf '# Welle welle-index: Index\n\n## 4. Slices\n\n- slice-002 (Index).\n' > docs/plan/planning/welle-index.md
+  schritt grep -q 'slice-002 (Index)' docs/plan/planning/welle-index.md || return 1
+  schritt git add -A && schritt git commit -qm "welle-index, slice-002 zugeteilt (bob)" && schritt git push -q origin b/zuteil || return 1
+  cd "$WORK/sim/seedclone" && git fetch -q origin
+  schritt git merge -q --no-edit origin/a/zuteil || return 1
+  git merge -q --no-edit origin/b/zuteil >/dev/null 2>&1; rc=$?
+  konflikt=$(git ls-files -u | wc -l)
+  doppelt=$(grep -c 'slice-002' docs/plan/planning/welle-cache.md docs/plan/planning/welle-index.md 2>/dev/null | awk -F: '{s+=$2} END{print s}')
+  [ $rc -eq 0 ] && [ "$konflikt" = 0 ] && [ "$doppelt" = 2 ] && ok=0 || ok=1
+  verdikt "s24i zwei Planner, je eigene Welle, dieselbe Slice-Nummer zugeteilt: STILL" "Merge rc=0, 0 Konflikte, slice-002 in ZWEI Wellen" "rc=$rc, $konflikt Konflikt-Eintraege, $doppelt Nennungen" $ok
+}
+
 s23_gate_index() {
   # --- s23a: Phantom-Target IM INDEX -> laut, und zwar dort.
   topo; cd "$WORK/sim/alice" || return 1
@@ -1168,6 +1377,7 @@ lauf s20 s20_sensor_datei
 lauf s21 s21_zitierform
 lauf s22 s22_rtm_vollstaendigkeit
 lauf s23 s23_gate_index
+lauf s24 s24_vorabvergabe
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

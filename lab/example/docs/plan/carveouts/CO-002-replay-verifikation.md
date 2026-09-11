@@ -7,10 +7,10 @@
 **Betroffenes Gate:** `make replay` (validiert die *Struktur* des
 Golden-Set-Verzeichnisses; es führt keinen Lauf aus).
 
-**Geltungsbereich:** `evals/golden/welle-1-baseline/` — der `verification`-
+**Geltungsbereich:** `evals/golden/welle-mvp-baseline/` — der `verification`-
 und der `runtime`-Block des Manifests.
 
-**Folge-Slice:** [`slice-015-replay-runner.md`](../planning/open/slice-015-replay-runner.md)
+**Folge-Slice:** [`slice-replay-runner.md`](../planning/open/slice-replay-runner.md)
 
 ---
 
@@ -47,7 +47,7 @@ werde durchgesetzt — die ist entfernt.
 
 ## Auflösungs-Trigger
 
-- Wenn `slice-015-replay-runner` done ist: Der Runner vergleicht
+- Wenn `slice-replay-runner` done ist: Der Runner vergleicht
   `runtime.image_hash`, `model.name`/`model.version` und den Case-Hash gegen
   den Vorlauf; `make replay` wird von der Struktur- zur Ergebnis-Prüfung.
 - Ersatzweise permanent, falls entschieden wird, dass das Lab bewusst kein
@@ -59,12 +59,12 @@ werde durchgesetzt — die ist entfernt.
 
 | Datei | Zeile/Section | Wert |
 |---|---|---|
-| `evals/golden/welle-1-baseline/manifest.yaml` | `verification:` | mit `# CO-002` markiert: deklariert, nicht durchgesetzt |
+| `evals/golden/welle-mvp-baseline/manifest.yaml` | `verification:` | mit `# CO-002` markiert: deklariert, nicht durchgesetzt |
 | `Makefile` | Target `replay` | Struktur-Validierung; Beschreibung nennt die Grenze |
 
 ## Verifikation (nach Auflösung)
 
-- [ ] `make replay RUN=welle-1-baseline` führt die Cases aus und vergleicht gegen `expectations/`.
+- [ ] `make replay RUN=welle-mvp-baseline` führt die Cases aus und vergleicht gegen `expectations/`.
 - [ ] Ein geändertes `model.version` macht das Target **rot** (Break-Test).
 - [ ] Eine verfälschte Erwartung macht das Target **rot** (Break-Test).
 - [ ] `verification.determinism_check` ist eingelöst: zwei Läufe, gleicher Case-Hash.

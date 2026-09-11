@@ -1,15 +1,15 @@
-# Review-Report: slice-026 — 2026-09-05
+# Review-Report: slice-review-report-deckung-per-d-check — 2026-09-05
 
-**Review-Art:** Code — geprüft gegen den Slice-Plan (`docs/plan/planning/in-progress/slice-026-review-report-deckung-per-d-check.md`), `harness/conventions.md` und `AGENTS.md` (Modul 10 §Drei Review-Arten).
+**Review-Art:** Code — geprüft gegen den Slice-Plan (`docs/plan/planning/in-progress/slice-review-report-deckung-per-d-check.md`), `harness/conventions.md` und `AGENTS.md` (Modul 10 §Drei Review-Arten).
 
-**Gegenstand:** Working-Tree-Diff (uncommittet) — `lab/example/.d-check.yml`, `lab/example/harness/README.md` sowie die neue Datei `lab/example/docs/plan/planning/in-progress/slice-026-review-report-deckung-per-d-check.md`. Da derselbe Änderungssatz auch `kurs/de/02-planung/modul-05-planning-harness.md`, `lab/regelwerk/modul-05-planning-harness.md`, `lab/templates/.d-check.yml` und `lab/templates/docs/plan/planning/slice.template.md` berührt (nicht committet, gleicher Arbeitsbaum), wurden diese als Kontext mitgelesen, aber nicht als eigener Prüfgegenstand behandelt — sie liegen außerhalb des Lab-`example`-Scopes, den dieser Review-Auftrag benennt.
+**Gegenstand:** Working-Tree-Diff (uncommittet) — `lab/example/.d-check.yml`, `lab/example/harness/README.md` sowie die neue Datei `lab/example/docs/plan/planning/in-progress/slice-review-report-deckung-per-d-check.md`. Da derselbe Änderungssatz auch `kurs/de/02-planung/modul-05-planning-harness.md`, `lab/regelwerk/modul-05-planning-harness.md`, `lab/templates/.d-check.yml` und `lab/templates/docs/plan/planning/slice.template.md` berührt (nicht committet, gleicher Arbeitsbaum), wurden diese als Kontext mitgelesen, aber nicht als eigener Prüfgegenstand behandelt — sie liegen außerhalb des Lab-`example`-Scopes, den dieser Review-Auftrag benennt.
 
 **Skill:** kein `lab/example/.harness/skills/reviewer.md` vorhanden (nur die unausgefüllte Vorlage `lab/templates/.harness/skills/reviewer.template.md`) — Klassifikation nach deren generischem §Klassifikation-Schema, angewendet auf die Verträge dieses Repos. <!-- d-check:ignore (Adopter-spezifischer Skill-Pfad, existiert im Ziel-Repo ggf. nicht) -->
 **Modell:** claude-sonnet-5 · **Datum:** 2026-09-05.
 
 **Eingangs-Kontext** (die Verträge, gegen die geprüft wurde):
 
-- Slice-Plan `slice-026-review-report-deckung-per-d-check.md` (vollständig)
+- Slice-Plan `slice-review-report-deckung-per-d-check.md` (vollständig)
 - `lab/example/AGENTS.md` (Hard Rules, insb. §3 Quality Gates, §5 Minimal Agent Workflow)
 - `lab/example/harness/conventions.md` (Sub-Area-Tabelle, Sensors-Bindung-Klassen `MR-002`)
 - `kurs/de/02-planung/modul-05-planning-harness.md` (§Lifecycle, §Worked Example zu Slice-Größe — kein `§Ziel-Form: Slice`-Abschnitt im Quelltext, siehe F-1)
@@ -24,7 +24,7 @@
 
 - `kategorie`: MEDIUM
 - `quelle`: Referenz-Richtung / Anker-Integrität (kein einzelnes ADR; berührt die Norm-Hierarchie Kurs → Regelwerk → Templates → Beispiel)
-- `pfad`: `lab/example/docs/plan/planning/in-progress/slice-026-review-report-deckung-per-d-check.md` Zeile 11 (und wortgleich Z. 25): „`[Modul 5 §Ziel-Form: Slice](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#ziel-form-slice)`"
+- `pfad`: `lab/example/docs/plan/planning/in-progress/slice-review-report-deckung-per-d-check.md` Zeile 11 (und wortgleich Z. 25): „`[Modul 5 §Ziel-Form: Slice](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#ziel-form-slice)`"
 - `befund`: Der Anker `#ziel-form-slice` existiert nicht in `kurs/de/02-planung/modul-05-planning-harness.md` — die Kurs-Quelle hat dort keine `### Ziel-Form: Slice`-Überschrift (bestätigt per Grep über alle Überschriften der Datei), sondern gliedert über `## Worked Example: einen zu großen Slice schneiden` etc. Der Abschnitt `### Ziel-Form: Slice` existiert nur im *abgeleiteten* Digest `lab/regelwerk/modul-05-planning-harness.md`. Der Link zeigt auf die falsche Ebene der Norm-Hierarchie (Quelle vs. Regelwerk-Split) und landet im Zielbrowser auf dem Datei-Anfang statt auf dem gemeinten Abschnitt.
 - `verifizierbar`: ja — die repo-eigene Kurs-Wurzel-Prüfung (`links`/`anchors`, siehe Kommentarblock oben in `.d-check.yml`: „Link- und Anker-Pruefung laeuft an der Kurs-Wurzel, die den ganzen Baum sieht") deckt genau diesen Anker-Typ ab; ein Lauf mit aktivem `anchors`-Modul über die Repo-Wurzel würde ihn als Broken-Anchor melden.
 - `klasse`: „Slice-Kopf zitiert Regelwerk-Split-Überschrift als Kurs-Anker"
@@ -33,7 +33,7 @@
 
 - `kategorie`: MEDIUM
 - `quelle`: Zitat-Genauigkeit (kein Gate deckt Ziel-Abschnitts-Korrektheit ab)
-- `pfad`: `lab/example/docs/plan/planning/in-progress/slice-026-review-report-deckung-per-d-check.md` Zeile 13–14: „`[Modul 10 §Kernidee](...#kernidee)` (Kategorisierung bleibt inferential, Deckung wird computational)"
+- `pfad`: `lab/example/docs/plan/planning/in-progress/slice-review-report-deckung-per-d-check.md` Zeile 13–14: „`[Modul 10 §Kernidee](...#kernidee)` (Kategorisierung bleibt inferential, Deckung wird computational)"
 - `befund`: Der zitierte Anker `#kernidee` existiert (Link bricht nicht), aber die Aussage „Kategorisierung bleibt inferential, Deckung wird computational" steht dort nicht — `## Kernidee` in `modul-10-review-harness.md` sagt nur „Ein Review ohne Kategorisierung ist eine Mängelliste. Ein Review mit Kategorisierung ist eine Entscheidungsvorlage." Die zitierte Unterscheidung (inferential vs. computational feedback, inkl. der namentlichen Nennung des d-check-Moduls `reviews`) steht tatsächlich im vorangehenden Abschnitt `## Harness-Einordnung` (Zeilen 82–93 der Kurs-Datei). Der Slice zitiert damit den falschen Abschnitt für seine zentrale Begründung.
 - `verifizierbar`: nein — kein Gate prüft, ob ein aufgelöster Anker auch inhaltlich zur zitierten Aussage passt.
 - `klasse`: „Zitat zeigt auf falschen Abschnitt derselben Datei"
@@ -42,7 +42,7 @@
 
 - `kategorie`: MEDIUM
 - `quelle`: `harness/conventions.md` §Modus-Deklaration pro Sub-Area (repo-eigene Autorität für Sub-Area-Grenzen)
-- `pfad`: `lab/example/docs/plan/planning/in-progress/slice-026-review-report-deckung-per-d-check.md` Zeile 120–123 (§8 Sub-Area-Modus-Begründung): „Beide berührten Sub-Areas (`Verifikation` für `.d-check.yml`, ...) sind laut `harness/conventions.md` bereits Greenfield, 3/3"
+- `pfad`: `lab/example/docs/plan/planning/in-progress/slice-review-report-deckung-per-d-check.md` Zeile 120–123 (§8 Sub-Area-Modus-Begründung): „Beide berührten Sub-Areas (`Verifikation` für `.d-check.yml`, ...) sind laut `harness/conventions.md` bereits Greenfield, 3/3"
 - `befund`: In `harness/conventions.md`s Sub-Area-Tabelle hat `Verifikation` (`VERIF`) den Pfad-Cluster `verification/` — ein eigenes Verzeichnis für die Plan-vs-Code-Check-Konvention aus Modul 11, nicht `.d-check.yml`. `.d-check.yml` liegt an der Repo-Wurzel und ist Gate-Konfiguration; der besser belegte Kandidat wäre `Sensor-Werkzeuge` (`TOOLS`, Pfad-Cluster u. a. „jedes Makefile" und „die Gate-Konfiguration"), dessen Tabellenzeile zudem nur **2/3** Achsen ausweist, nicht 3/3 wie behauptet. Die praktische Schlussfolgerung des Slice (Modus-Begründungsblock entfällt, da GF) ändert sich dadurch nicht — TOOLS ist ebenfalls Greenfield —, aber die Sub-Area-Kennung und der Achsen-Stand sind beide falsch zitiert, in einer Sektion, deren ganzer Zweck präzise Sub-Area-Grenzen sind (Kurs Modul 5 §Ziel-Form: Sub-Area-Modus-Begründung). Ergänzend: `.d-check.yml` ist auch in `TOOLS`s Pfad-Cluster-Liste nicht wörtlich aufgeführt (nur sprachspezifische Lint-Configs) — das ist eine vorbestehende Lücke in `harness/conventions.md` selbst, nicht neu durch diesen Diff, aber sie hätte den Slice zu einer expliziten Notiz statt einer falschen Zuordnung veranlassen sollen.
 - `verifizierbar`: nein — Sub-Area-Zuordnung ist laut Modul 5 Urteilssache, kein Gate prüft sie.
 - `klasse`: „Sub-Area-Pfad-Cluster ohne Beleg aus der Konventions-Tabelle zugeordnet"
@@ -51,7 +51,7 @@
 
 - `kategorie`: MEDIUM
 - `quelle`: `MR-002` (Konventions-Bindung als Sensors-Klasse, `harness/conventions.md`)
-- `pfad`: `lab/example/harness/README.md` Zeile 66 (geänderte Zeile) und `lab/example/docs/plan/planning/in-progress/slice-026-review-report-deckung-per-d-check.md` Zeile 38–39 (DoD-Punkt, mit `[x]` markiert)
+- `pfad`: `lab/example/harness/README.md` Zeile 66 (geänderte Zeile) und `lab/example/docs/plan/planning/in-progress/slice-review-report-deckung-per-d-check.md` Zeile 38–39 (DoD-Punkt, mit `[x]` markiert)
 - `befund`: Der DoD-Punkt verlangt, dass die `make doc-check`-Zeile „das fünfte Modul und seine Bindung" nennt. Die Zeile beschreibt `reviews` inhaltlich, trägt aber keine eigene Bindungs-Zitation (kein `Modul 10 §...`, kein `MR-00x`) — anders als `targets`, das inline „AGENTS.md §3" zitiert. Die einzige Bindung der Zeile ist die gemeinsame Spalte am Zeilenende, `[Kurs §Referenz-Richtung](...) (MR-002)` — das ist die Bindung von `matrix`/`ids` (Link-Richtung), fachlich unpassend für `reviews` (Review-Report-Deckung, Modul 10). Der DoD-Punkt ist damit nicht vollständig erfüllt, obwohl er `[x]` markiert ist.
 - `verifizierbar`: nein — die `Bindung`-Spalte ist Doku-Konvention, kein automatisch geprüftes Feld.
 - `klasse`: „DoD-Häkchen ohne vollständig erfüllte eigene Bedingung"
@@ -60,7 +60,7 @@
 
 - geprüft, ohne Befund: `.d-check.yml`-Schema für das `reviews`-Modul (`done-dir`/`reviews-dir`) — per YAML-Parse und `docker run ... --print-config` exakt gegen die vom Werkzeug selbst dokumentierten Default-Schlüssel abgeglichen; Feldnamen und -reihenfolge stimmen.
 - geprüft, ohne Befund: empirischer Lauf (`docker run --rm --network none -v lab/example:/repo:ro ghcr.io/pt9912/d-check:v0.74.1`) — Modul-Aktivierung fehlerfrei, Ergebnis „102 Datei(en) geprüft, 1 Befund(e)" mit exakt dem im Slice-§6 dokumentierten Text (`review-missing — leere Pruefmenge: 7 Kandidat(en), 0 Review-Zusage(n), reviews-dir lesbar: false`); die vier bestehenden Module (`matrix`, `targets`, `planning`, `ids`) zeigen keine neuen Befunde durch die Aktivierung.
-- geprüft, ohne Befund: Zahlenangaben in `.d-check.yml`-Kommentar („neun bestehende `done/`-Dateien") und Slice-§6 („sieben ... Slices plus zwei Welle-Dateien") — `docs/plan/planning/done/` enthält tatsächlich 7 `slice-*.md` + 2 `welle-1-*.md` = 9 Dateien; beide Angaben stimmen.
+- geprüft, ohne Befund: Zahlenangaben in `.d-check.yml`-Kommentar („neun bestehende `done/`-Dateien") und Slice-§6 („sieben ... Slices plus zwei Welle-Dateien") — `docs/plan/planning/done/` enthält tatsächlich 7 `slice-*.md` + 2 `welle-mvp-*.md` = 9 Dateien; beide Angaben stimmen.
 - geprüft, ohne Befund: Sub-Area-Zuordnung von `harness/README.md` selbst zu `Konventionen & Harness-Doku` (§8) — deckt sich mit dem Pfad-Cluster `harness/` in `harness/conventions.md`.
 - geprüft, ohne Befund: `AGENTS.md` Hard Rules 2.1–2.8 (Docker-only, Suppression, `git mv`, ADR-Immutabilität, Gate-Lockerung, Tie-Break, Closure-Commit-Konvention) — dieser Diff berührt keine dieser Flächen.
 - geprüft, ohne Befund: DoD-Reihenfolge und -Vollständigkeit gegen die (im selben Arbeitsbaum aktualisierte) Vorlage `lab/templates/docs/plan/planning/slice.template.md` — die neun Punkte in Slice-026 §2 folgen Reihenfolge und Wortlaut der Vorlage.

@@ -36,8 +36,8 @@ hinzufügt, ändert `.a-check.yml` **und** `.golangci.yml`, nicht diese Tabelle.
 
 ### G-3 — Stable-Sort plus Tie-Break
 
-Aus AGENTS.md §2.7 plus slice-009 (siehe
-[`../docs/plan/planning/done/slice-009-tie-break-determinismus.md`](../docs/plan/planning/done/slice-009-tie-break-determinismus.md)):
+Aus AGENTS.md §2.7 plus slice-tie-break-determinismus (siehe
+[`../docs/plan/planning/done/slice-tie-break-determinismus.md`](../docs/plan/planning/done/slice-tie-break-determinismus.md)):
 **`sort.Slice` ist verboten**. Verwende `sort.SliceStable` mit
 explizitem Tie-Break.
 

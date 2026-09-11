@@ -44,7 +44,7 @@ hat `matrix`.
       Sprach-Skeletts außer deren Doku; belegt an `COURSE_LANG=go`. Genannt
       wird er trotzdem: Ein Gate, das trivial grün ist, ist nicht davon zu
       unterscheiden, ob es lief oder vergessen wurde (Nachtrag-Argument aus
-      `slice-020`).
+      `slice-referenz-richtung-repariert`).
 - [x] Closure-Notiz mit den Kongruenz-Ausgaben.
 
 ## 3. Plan (vor Code)
@@ -102,9 +102,9 @@ Kurs-Wurzel, die den ganzen Baum sieht.
 | sauberer Baum (Kontrolle) | grün | grün |
 | Lastenheft, Körper: `ADR-0001` | rot | rot |
 | Lastenheft, `## 7. Historie`: `ADR-0001` | rot | rot |
-| Spezifikation, Körper: `slice-009` | rot | rot |
+| Spezifikation, Körper: `slice-tie-break-determinismus` | rot | rot |
 | Slice → superseded `ADR-0015` | rot | rot |
-| `ADR-0018` → `slice-021` | rot | **grün** |
+| `ADR-0018` → `slice-a-check-restliche-skelette` | rot | **grün** |
 
 Die letzte Zeile ist der Grund für den Tausch: Das Skript erklärte diese Zelle
 im eigenen Kopf für nicht grep-bar und überließ sie dem Review-Agenten. Der

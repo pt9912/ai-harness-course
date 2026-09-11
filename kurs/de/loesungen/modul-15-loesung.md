@@ -128,7 +128,7 @@ Maßstab:
 ### (Anwenden — aktiviert LZ 2) Token-Kosten attribuieren
 
 **Teil 1 — teuerster Tool-Call.** Im Lab-Fixture
-(`lab/example/otel/sl-009-agent-run.trace.json`) ist es `impl-2`
+(`lab/example/otel/sl-tie-break-determinismus-agent-run.trace.json`) ist es `impl-2`
 (`writer.write_index`): 2480 Input- + 187 Output-Token = 2667, dazu
 412 ms und `cache.hit: false`. (Der Reviewer-Span `review-1` trägt
 zwar mehr Token — 3110 —, ist aber kein Tool-Call, sondern ein
@@ -258,8 +258,8 @@ Original bleibt unverändert):
 wird der **Kosten-Drill-down des teuersten Calls** und damit die
 vollständige Token-Attribuierung pro Slice: Die Implementer-Rolle
 schrumpft scheinbar von 3737 auf 1070 Token, der Lauf von 9797 auf
-7130 — die Buchhaltungs-Frage aus dem Engage ("Was hat slice-024 / hier
-slice-009 gekostet?") bekommt eine *falsche*, keine fehlende Antwort.
+7130 — die Buchhaltungs-Frage aus dem Engage ("Was hat slice-ranking-drift / hier
+slice-tie-break-determinismus gekostet?") bekommt eine *falsche*, keine fehlende Antwort.
 Das ist die gefährlichere Form: nichts sieht kaputt aus.
 Kompensation: **Metriken** könnten den Verlust auffangen — wenn ein
 separater Token-Counter (`llm.tokens_in` mit `slice.id`-Label) am
@@ -268,7 +268,7 @@ Logs helfen nicht (sie tragen typischerweise keine Token-Zahlen),
 Traces sind die verlorene Quelle selbst.
 
 **Variante 2 — `slice.id` im Trace-Kopf gefälscht** (z. B.
-`slice-010`). Unbeantwortbar wird die **Zuordnung Kosten ↔
+`slice-cache-eviction`). Unbeantwortbar wird die **Zuordnung Kosten ↔
 Anforderung**: alle fünf Spans buchen auf den falschen Slice; die
 Kette Span → Slice-Datei → ADR → LH-ID startet beim falschen
 Dokument. Teil-Kompensation: *innerhalb* des Traces trägt `impl-2`
@@ -284,19 +284,19 @@ agent-berichtet) in den Steering Loop.
 ### End-to-End-Trace bis zur LH-ID
 
 Die vollständige Kette für den Span `impl-2` aus
-`make trace RUN=sl-009-agent-run`, pro Pfeil-Stufe mit der konkreten
+`make trace RUN=sl-tie-break-determinismus-agent-run`, pro Pfeil-Stufe mit der konkreten
 Dokumentations-Stelle:
 
 ```
-span impl-2 (trace-Kopf: slice.id)   →  slice-009
-                                     →  docs/plan/planning/done/slice-009-tie-break-determinismus.md
+span impl-2 (trace-Kopf: slice.id)   →  slice-tie-break-determinismus
+                                     →  docs/plan/planning/done/slice-tie-break-determinismus.md
                                      →  ADR-0012 (Index-Write-Strategie)
                                      →  LH-FA-IDX-003 (Lastenheft)
 ```
 
 | Pfeil | Konkrete Stelle der Verbindung |
 |---|---|
-| Span → Slice | Trace-Kopf `"slice.id": "slice-009"`; der Span selbst trägt zusätzlich `requirement.id` und `adr.id` als Direkt-Anker |
+| Span → Slice | Trace-Kopf `"slice.id": "slice-tie-break-determinismus"`; der Span selbst trägt zusätzlich `requirement.id` und `adr.id` als Direkt-Anker |
 | Slice → ADR | **Bezug-Zeile** (Klartext, kein Frontmatter) in der Slice-Datei: "… ADR-0012 (Index-Write-Strategie, sekundär)" |
 | ADR → LH-ID | Bezug-Feld im ADR-Kopf: "**Bezug:** LH-FA-IDX-003 (Index-Schreib-Idempotenz und Atomarität)" |
 | LH-ID → Akzeptanzkriterien | `spec/lastenheft.md` § LH-FA-IDX-003 (Happy / Boundary / Negative) |

@@ -46,7 +46,7 @@ Die `done/`-Slices sind im Beispiel nur exemplarisch vertreten; welche, sagt
 `make plan-status`. Jede Datei dort trägt eine Closure-Sektion — Slice-Plan wie
 Welle-Plan wie Closure-Notiz —, das verlangt [ADR-0011](../adr/0011-closure-note-pflicht.md), und
 `make doc-check` prüft es (`planning.closure`, Schwelle und Kandidaten-Menge aus
-der ADR — [ADR-0019](../adr/0019-closure-sensor-und-skript-rolle.md)). `slice-020` ist das Vorbild
+der ADR — [ADR-0019](../adr/0019-closure-sensor-und-skript-rolle.md)). `slice-referenz-richtung-repariert` ist das Vorbild
 für einen Slice **ohne Wellen-Zugehörigkeit** in einem Repo, das Wellen
 schneidet (Kurs Modul 6 §Wann Arbeit eine Welle braucht). *Wellenlos* ist
 dieses Repo nicht — das wäre der Repo-Modus, und der lautet hier: mit Wellen.
@@ -57,10 +57,10 @@ dieses Repo nicht — das wäre der Repo-Modus, und der lautet hier: mit Wellen.
   (`open/` → `next/` → `in-progress/` → `done/`).
 - Eine **Welle** ebenso: Der Welle-Plan (`<welle-id>.md`) liegt **flach** in
   `planning/`, solange die Welle läuft — hier
-  [`welle-2-qualitaet.md`](welle-2-qualitaet.md) —, und wandert bei Closure
-  per `git mv` nach `done/`, neben seine `welle-<NN>-results.md`:
-  [`done/welle-1-mvp.md`](done/welle-1-mvp.md) neben
-  [`done/welle-1-results.md`](done/welle-1-results.md). Den aktiven Durchlauf
+  [`welle-qualitaet.md`](welle-qualitaet.md) —, und wandert bei Closure
+  per `git mv` nach `done/`, neben seine `<welle-id>-results.md`:
+  [`done/welle-mvp.md`](done/welle-mvp.md) neben
+  [`done/welle-mvp-results.md`](done/welle-mvp-results.md). Den aktiven Durchlauf
   `open/` → `next/` → `in-progress/` durchläuft er nicht; `done/` ist sein
   einziges Lifecycle-Verzeichnis. **Geplante Wellen bekommen noch keine
   Datei** — sie stehen in der Roadmap unter *Nächste Wellen* und nirgends

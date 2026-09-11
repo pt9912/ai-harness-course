@@ -28,7 +28,7 @@ Roadmap.
 
 Aus den Engage-/Fehlvorstellungs-Blöcken des Moduls:
 
-1. *"slice-024 liegt in `done/`."*
+1. *"slice-audit-log-hardening liegt in `done/`."*
 2. *"Replay-Lauf gegen Golden Set grün."*
 3. *"Carveout `CO-007` aufgelöst."*
 
@@ -109,7 +109,7 @@ Slice-Closure, unabhängig von jeder Welle. **Gelesen** wird er bei der
 nächsten Welle-Closure (was hat 3× erreicht → Ausgang zuweisen) — auch für diesen
 Slice, obwohl er zu keiner Welle gehört. Erst in einem Repo, das **gar keine**
 Wellen schneidet, löst die Slice-Closure den Lese-Schritt selbst aus, und der
-Anker lautet `seit slice-<NNN>`. Beide Hälften gehören zur
+Anker lautet `seit slice-<Kennung>`. Beide Hälften gehören zur
 Antwort — eintragen ohne benannten Leser wäre genau die Ablage, gegen die
 das Register gebaut ist. Der Zähler
 unterscheidet nicht nach Welle-Zugehörigkeit, sonst zählte er an
@@ -182,7 +182,7 @@ Dritter ohne Rückfrage über "Welle fertig" entscheiden kann.
 ### (Analysieren) Warum steht der Zähler in einer eigenen Datei?
 
 **Weil die Übernahme-Kette bricht.** Die Sektion lag früher *in*
-`welle-NN-results.md` und wurde von Closure zu Closure kopiert und
+`welle-<Kennung>-results.md` und wurde von Closure zu Closure kopiert und
 hochgezählt. Drei Bruchstellen: Wer die Übernahme vergisst, setzt den
 Zähler auf null; die erste Welle braucht eine Sonderregel; und wer keine
 Welle eröffnet, hat gar keinen Träger. Eine stehende Datei streicht alle
@@ -206,7 +206,7 @@ läuft mit jedem geschlossenen Slice, auch mit wellenlosen.
 **Der Unterschied *gezählt* vs. *verkörpert*** (exzellent): In einem Repo
 **ohne Wellen-Betrieb** zählt das Register weiter; den Lese-Schritt löst dann
 die Slice-Closure selbst aus, und der Herkunfts-Anker lautet
-`seit slice-<NNN>`. Ein Eintrag kann
+`seit slice-<Kennung>`. Ein Eintrag kann
 also bei 3× stehen und trotzdem noch keine Regel sein. Was dann fehlt, ist
 nicht der Zähler, sondern der Lese-Schritt. Bis er läuft, steht der Eintrag
 noch `offen` — zulässig und vorübergehend; **er** weist den Ausgang zu, nicht
@@ -223,12 +223,12 @@ Die Abhängigkeit gehört als *expliziter Abhängigkeits-Trigger* in die
 `Trigger`-Spalte von Welle 3 — nicht als bloße Reihenfolge-Notiz:
 
 ```text
-## welle-3-skalierung
-Trigger:  startet, wenn welle-2-qualitaet in Closure
+## welle-skalierung
+Trigger:  startet, wenn welle-qualitaet in Closure
           (Property-Tests grün, Coverage-Critical-Gate steht)
 ```
 
-Plus eine gerichtete Kante `welle-2-qualitaet → welle-3-skalierung` im
+Plus eine gerichtete Kante `welle-qualitaet → welle-skalierung` im
 Abhängigkeitsgraphen.
 
 Wann wird Welle 2 zum *Blocker* (nicht bloß Vorgängerin)? Test: Würde
@@ -246,7 +246,7 @@ ohne sie laufen) wäre kein Blocker, nur eine Sortier-Präferenz.
 Wer das Worked Example übersprungen hat, holt vor den Übungen dessen
 Schritt 7 nach — die einzige Fehler-Provokation des Moduls: einen
 Closure-Trigger absichtlich als Datum schreiben und am Stichtag (bei
-nicht-grünem `slice-019`) beobachten, was passiert. Erwartung: Eine
+nicht-grünem `slice-latenz-replay-100k`) beobachten, was passiert. Erwartung: Eine
 der drei Diagnosen aus der Schritt-7-Tabelle tritt ein — Welle wird
 trotzdem geschlossen (Datum hat Closure überschrieben, Audit fällt
 durch), Welle bleibt offen und das Datum verschiebt sich (Disziplin
@@ -300,7 +300,7 @@ entscheidet nicht, der Trigger entscheidet.
 ### Wo landet die Beobachtung? (Analysieren — LZ 2)
 
 **(a)** Unter `observations/BEO-EVAL/golden-set-ohne-boundary/evidence/` eine
-Datei `slice-NNN.md` anlegen. **Der Zähler wird nicht gesetzt** — er ist die
+Datei `slice-<Kennung>.md` anlegen. **Der Zähler wird nicht gesetzt** — er ist die
 Zahl der Evidence-Dateien und steht danach von selbst auf 3×. In §7 des Slice
 wird der **Pfad zitiert**, nicht neu formuliert, sonst zählt das Register zwei
 Ablagen getrennt.
@@ -312,7 +312,7 @@ dafür steht das Register außerhalb der Welle-Closure.
 **gezählt, aber nicht verkörpert**; sein Stand bleibt so lange `offen`. Ihr
 Lese-Schritt weist dann den Ausgang zu: **`verkörpert`**, wenn die Regel dabei
 entsteht — in `AGENTS.md`, einem Gate, einem Skill oder einer `MR-*`, mit
-Herkunfts-Anker `seit welle-<NN>` —, sonst **`geplant`** mit der Kennung des
+Herkunfts-Anker `seit welle-<Kennung>` —, sonst **`geplant`** mit der Kennung des
 Slice, der sie schreibt. Wer Zählen und Verkörpern gleichsetzt, hält eine Notiz
 für einen Wächter; wer den Eintrag die Closure **ohne** Ausgang überstehen
 lässt, hat die Schwelle folgenlos gemacht.
@@ -321,7 +321,7 @@ lässt, hat die Schwelle folgenlos gemacht.
 Slice* zu keiner Welle gehört, heißt nicht, dass das Repo keine Wellen
 schneidet. Das `grid-gym`-Repo tut es; seine nächste Welle-Closure liest das
 Register und findet den Eintrag, egal aus welchem Slice er stammt. Der Anker
-`seit slice-<NNN>` und die Slice-Closure als Lese-Schritt gehören zum
+`seit slice-<Kennung>` und die Slice-Closure als Lese-Schritt gehören zum
 **wellenlosen Repo** — dem Fall, in dem es gar keine Welle-Closure gibt
 ([Modul 6 §Wann Arbeit eine Welle braucht](../02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
 Wer die Slice-Zugehörigkeit mit dem Repo-Modus verwechselt, verlegt den

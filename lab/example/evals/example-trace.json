@@ -1,7 +1,7 @@
 {
   "trace_id": "trace-docsearch-module-00",
   "purpose": "Kommentierter Minimal-Trace fuer Modul 0",
-  "slice_id": "slice-009",
+  "slice_id": "slice-tie-break-determinismus",
   "spans": [
     {
       "span_id": "s1",
@@ -10,14 +10,14 @@
       "summary": "Slice-Plan und Source-Precedence werden gelesen.",
       "artifacts": [
         "harness/README.md",
-        "docs/plan/planning/done/slice-009-tie-break-determinismus.md"
+        "docs/plan/planning/done/slice-tie-break-determinismus.md"
       ]
     },
     {
       "span_id": "s2",
       "kind": "tool_call",
       "tool": "make verify",
-      "arguments": {"SLICE": "slice-009"},
+      "arguments": {"SLICE": "slice-tie-break-determinismus"},
       "result": {"status": "ok", "evidence": "DoD, LH-/ADR-IDs und make gates gefunden"}
     },
     {

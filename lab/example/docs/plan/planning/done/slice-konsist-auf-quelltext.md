@@ -68,7 +68,7 @@ derselben Ebene wie a-check.
 
 - **Ein Nachfolger muss die Entscheidung seiner Vorgängerin vollständig
   tragen.** Die erste Fassung dieser Nachfolge-ADR entschied nur den Kotlin-Fall. Damit
-  zeigten drei Verweise aus `slice-021` auf `§Entscheidung 2` und `3` — Punkte,
+  zeigten drei Verweise aus `slice-a-check-restliche-skelette` auf `§Entscheidung 2` und `3` — Punkte,
   die es in der schmalen Fassung gar nicht gab. Dasselbe war beim vorigen Supersede-Übergang
   passiert und dort einzeln repariert worden; die Ursache ist
   nicht das Umhängen, sondern eine Nachfolge-ADR, die weniger trägt als ihre

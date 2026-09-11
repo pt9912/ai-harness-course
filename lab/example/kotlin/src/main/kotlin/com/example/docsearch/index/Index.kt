@@ -19,7 +19,7 @@ class Index {
         if (k <= 0 || entries.isEmpty()) return emptyList()
         val effectiveK = minOf(k, MAX_TOPK)
 
-        // Tie-Break (slice-009, AGENTS.md §K-3): Comparator absteigend Score,
+        // Tie-Break (slice-tie-break-determinismus, AGENTS.md §K-3): Comparator absteigend Score,
         // dann lexikographisch (docPath, sectionIndex). sortedWith ist stable.
         val scored = entries
             .map { it to cosine(query, it.embedding) }

@@ -52,10 +52,10 @@ Opt-in eine Wächter-Entscheidung und kein Dauerbefund.
       Sensor, der den Bestand rot meldet, wird erst eingeschaltet, wenn der
       Bestand stimmt *oder* der Sensor widerlegt ist.
 - [x] Break-Tests am echten Repo — vier Experimente, fünf Codes: Datei ohne
-      Zeiger → `wave-drift` (`welle-3`) und als Beifang `wave-preview-exists`
-      (`welle-3` steht noch in *Nächste Wellen*); Zeiger ohne Datei →
+      Zeiger → `wave-drift` (`welle-skalierung`) und als Beifang `wave-preview-exists`
+      (`welle-skalierung` steht noch in *Nächste Wellen*); Zeiger ohne Datei →
       `wave-drift` (`welle-5`); Ergebnisnotiz entfernt →
-      `wave-results-missing` (`welle-1`); Ergebnisnotiz ohne Register-Zeile →
+      `wave-results-missing` (`welle-mvp`); Ergebnisnotiz ohne Register-Zeile →
       `wave-unregistered`. Nach jedem Test Wiederherstellung, `git diff`
       leer, Nachlauf 73/0.
 - [x] Kontrolle des Modells: derselbe Bestand unter `mode: one` ebenfalls
@@ -68,7 +68,7 @@ Opt-in eine Wächter-Entscheidung und kein Dauerbefund.
       (§Slices vs. Wellen).
 - [x] `make verify` grün, `make gates COURSE_LANG=go` grün (trivial — der
       Slice berührt kein Skelett; genannt aus dem Nachtrag-Argument von
-      `slice-020`: ein trivial grünes Gate ist nicht davon zu unterscheiden,
+      `slice-referenz-richtung-repariert`: ein trivial grünes Gate ist nicht davon zu unterscheiden,
       ob es lief oder vergessen wurde).
 - [x] Closure-Notiz.
 
@@ -110,10 +110,10 @@ konsistent; der Slice ändert den Wächter, nicht den Bestand.
   nicht, dass der Sensor das prüft.** Unter `mode: one` wäre das Repo heute
   ebenso grün gewesen, weil genau eine Welle offen ist. Erst die zweite
   offene Welle in einer Kopie trennt die beiden Modelle. Die Lehre aus
-  `slice-023` (§7, „ein grüner Lauf nach dem Aufräumen beweist gar nichts")
+  `slice-adr-kennungen-linkpflichtig` (§7, „ein grüner Lauf nach dem Aufräumen beweist gar nichts")
   gilt auch, wenn es nichts aufzuräumen gab.
 - **Der Break-Test „Datei ohne Zeiger" meldet zwei Codes auf einmal** —
-  `wave-drift` und `wave-preview-exists` —, weil `welle-3` in diesem Repo
+  `wave-drift` und `wave-preview-exists` —, weil `welle-skalierung` in diesem Repo
   noch in *Nächste Wellen* steht. Das ist kein Doppelbefund, sondern zwei
   Aussagen: Die Datei ist nicht gelistet, *und* sie widerspricht der
   Vorschau („zwei Positionen, nicht drei"). Wer nur auf den ersten Code
@@ -126,7 +126,7 @@ Sub-Area dieses Repos (eigene Konventionen in `.d-check.yml`, eigene Gates,
 eigene Änderungsrate); nichts ist auszudifferenzieren.
 
 **Vorgelagert — offene Beobachtungen sichten:** `BEO-PLAN/adr-bezug-im-commit-vergessen` (ADR-Bezug im
-Commit vergessen) und `BEO-TOOLS/check-references-deckt-adr-nicht` (geschlossen in `slice-022`) sind die
+Commit vergessen) und `BEO-TOOLS/check-references-deckt-adr-nicht` (geschlossen in `slice-referenz-richtung-per-d-check`) sind die
 Planning-Lifecycle-Einträge des Registers; keiner betrifft die Wellen-Liste.
 Neu zu zählen ist nichts — der Anlass war eine Werkzeug-Grenze, kein
 wiederholtes Symptom.
@@ -145,11 +145,11 @@ Listen-Hälfte des Abschnitts *Offene Wellen* hat damit ihren Wächter, die
 Marker-Hälfte behält ihren; der Ruhe-Marker geht in die Bijektion nicht ein.
 
 **Break-Tests am echten Repo — vier Experimente, fünf Codes:** flache
-`welle-3-x.md` ohne Zeiger → `wave-drift` auf `welle-3` (als Beifang
-`wave-preview-exists`, weil `welle-3` noch in der Vorschau steht — nicht
+`welle-skalierung-x.md` ohne Zeiger → `wave-drift` auf `welle-skalierung` (als Beifang
+`wave-preview-exists`, weil `welle-skalierung` noch in der Vorschau steht — nicht
 isoliert gebrochen); Zeiger auf `welle-5-x` ohne Datei →
-`wave-drift` auf `welle-5`; `done/welle-1-results.md` entfernt →
-`wave-results-missing` auf `welle-1`; `done/welle-9-results.md` ohne
+`wave-drift` auf `welle-5`; `done/welle-mvp-results.md` entfernt →
+`wave-results-missing` auf `welle-mvp`; `done/welle-9-results.md` ohne
 Register-Zeile → `wave-unregistered`. Jede Richtung per Diff und Nachlauf
 wiederhergestellt (73/0).
 

@@ -55,7 +55,7 @@
                     <failOnViolation>true</failOnViolation>
                 </configuration>
             </plugin>
-            <!-- JaCoCo: Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR) -->
+            <!-- JaCoCo: Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-qualitaet geschlossen) -> 80 % via Nachfolge-ADR) -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

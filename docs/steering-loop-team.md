@@ -366,7 +366,7 @@ sondern seine Gestalt: Die Modus-Deklaration führt eine **Kürzel-Spalte**
 (kurz, GROSS, ohne Leerzeichen; ein vergebenes Kürzel ist unveränderlich)
 ([`harness-dateien.md` §Konventionsspeicher](../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)),
 und das Segment wird nachgeschlagen statt formuliert
-([`source-precedence.md` §Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+([`source-precedence.md` §Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)).
 Die zugesagte Prüfung hat damit eine auflösbare Autorität. **Offen bleibt eine
 Ebene weiter:** Die Sub-Area-Spalte des Beobachtungs-Registers führt weiterhin
 Prosa-Namen — also einen Namen, der umformuliert werden darf, während das
@@ -435,7 +435,7 @@ veröffentlicht:
 | Quell-Arbeit | Verkörpert in | Anker |
 |---|---|---|
 | die geschlossene Menge der Ausgänge bei 3× — *verkörpert · geplant · gestrichen* | [`modul-06` §Das Beobachtungs-Register](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register) | `seit welle-106` |
-| das Sub-Area-Kürzel — Ort **und** Gestalt | [`harness-dateien.md` §Konventionsspeicher](../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher) · [`source-precedence.md` §Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt) | `seit welle-105` |
+| das Sub-Area-Kürzel — Ort **und** Gestalt | [`harness-dateien.md` §Konventionsspeicher](../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher) · [`source-precedence.md` §Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt) | `seit welle-105` |
 | die zwei Beleg-Fälle, die ein abgeleiteter Zähler nicht abbildet — ein Vorkommen ohne abgeschlossenen Vorgang ist *benannt, nicht gezählt*; zwei Funde im selben Vorgang sind *eine Gelegenheit* | [`modul-06` §Das Beobachtungs-Register](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register) | `seit welle-106` |
 
 Damit ist auch die Vorbedingung erfüllt, die d-check seiner Zusage

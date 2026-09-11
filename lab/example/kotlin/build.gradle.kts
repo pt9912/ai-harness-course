@@ -68,7 +68,7 @@ kover {
         verify {
             rule {
                 bound {
-                    // Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR);
+                    // Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-qualitaet geschlossen) -> 80 % via Nachfolge-ADR);
                     // 90 % auf dem kritischen Layer
                     minValue = if (criticalOnly) 90 else 70
                 }

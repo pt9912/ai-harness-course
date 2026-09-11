@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Index — Vektor-Storage, Cosinus, Tie-Break (AGENTS.md §J-3, slice-009).
+ * Index — Vektor-Storage, Cosinus, Tie-Break (AGENTS.md §J-3, slice-tie-break-determinismus).
  */
 public final class Index {
     private final List<IndexEntry> entries = new ArrayList<>();

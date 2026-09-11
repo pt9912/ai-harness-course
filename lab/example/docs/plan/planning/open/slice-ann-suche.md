@@ -5,7 +5,7 @@ Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er wechselt
 nur durch `git mv` (Kurs
 [Modul 5 §Lifecycle als State Machine](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
 
-**Welle:** welle-3-skalierung
+**Welle:** welle-skalierung
 
 **Bezug:** [LH-QA-01](../../../../spec/lastenheft.md#lh-qa-01--performance) (Performance), implizit [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format)
 
@@ -21,7 +21,7 @@ auch bei > 100k Index-Einträgen zu halten.
 **Ausdrücklich NICHT in diesem Slice:**
 
 - Das Nachziehen der Golden Sets auf die neuen Nachbarschaften. Kein
-  Folge-Slice trägt das heute: `slice-015` hebt den Runner und schließt vor
+  Folge-Slice trägt das heute: `slice-replay-runner` hebt den Runner und schließt vor
   diesem Slice. Der Punkt bleibt als Beobachtung offen, bis er eine Kennung
   hat — eine Weiterleitung an einen Slice, der ihn selbst ausschließt, wäre
   keine Adresse.
@@ -35,13 +35,13 @@ auch bei > 100k Index-Einträgen zu halten.
 
 ## 2. Definition of Done
 
-- [ ] ADR-0004 "ANN-Bibliothek-Wahl" Accepted. <!-- d-check:ignore (ADR entsteht erst in slice-014) -->
+- [ ] ADR-0004 "ANN-Bibliothek-Wahl" Accepted. <!-- d-check:ignore (ADR entsteht erst in slice-ann-suche) -->
 - [ ] Adapter `IndexSearcher` mit Implementierungen `Linear` (Default) und `ANN` (neue).
 - [ ] `make test-determinism` weiterhin grün (deterministischer Tie-Break auch bei ANN).
 - [ ] Replay gegen Golden Set: recall@5 verschlechtert sich um maximal 5 %.
 - [ ] `make gates` grün.
 - [ ] Closure-Notiz mit Recall-Vergleich (Linear vs. ANN).
-- [ ] Property-Tests für den Index-Layer aufgenommen (aus `slice-013` §1 weitergereicht).
+- [ ] Property-Tests für den Index-Layer aufgenommen (aus `slice-property-tests` §1 weitergereicht).
 
 ## 3. Plan (vor Code)
 
@@ -55,7 +55,7 @@ auch bei > 100k Index-Einträgen zu halten.
 
 ## 4. Trigger
 
-- Wenn slice-013-property-tests done (Replay-Suite muss stabil sein, bevor Searcher-Wechsel valides Messen erlaubt).
+- Wenn slice-property-tests done (Replay-Suite muss stabil sein, bevor Searcher-Wechsel valides Messen erlaubt).
 
 ## 5. Closure-Trigger
 
@@ -78,7 +78,7 @@ auch bei > 100k Index-Einträgen zu halten.
 **Status:** alle berührten Sub-Areas GF (siehe
 `harness/conventions.md` §Modus-Deklaration pro Sub-Area: `*` = GF
 für das DocSearch-Lab als Ganzes). Spec-Anker [LH-QA-01](../../../../spec/lastenheft.md#lh-qa-01--performance) führt
-(Performance-Anforderung), flankiert von ADR-0004 (in Outline), Code folgt — <!-- d-check:ignore (ADR entsteht erst in slice-014) -->
+(Performance-Anforderung), flankiert von ADR-0004 (in Outline), Code folgt — <!-- d-check:ignore (ADR entsteht erst in slice-ann-suche) -->
 kein Reconciliation, keine BF/Hybrid-Begründung nötig.
 
 **Vorgelagert — Sub-Area-Wahl prüfen:** Drei berührte Sub-Areas, alle über der
@@ -90,7 +90,7 @@ Service-Schicht teilen hier dieselbe Konvention und dieselbe Inventur-Linie
 
 **Vorgelagert — offene Beobachtungen sichten:** Register
 (`../observations/`) durchgegangen. Berührt sind drei Sub-Areas aus der
-Modus-Tabelle (`harness/conventions.md`): *Planning-Lifecycle* (ADR-0004, §3), <!-- d-check:ignore (ADR entsteht erst in slice-014) -->
+Modus-Tabelle (`harness/conventions.md`): *Planning-Lifecycle* (ADR-0004, §3), <!-- d-check:ignore (ADR entsteht erst in slice-ann-suche) -->
 *Implementierung* (`internal/index/`, `internal/service/`, §3) und
 *Replay-/Eval-Infrastruktur* (Replay gegen das Golden Set, recall@5, DoD).
 

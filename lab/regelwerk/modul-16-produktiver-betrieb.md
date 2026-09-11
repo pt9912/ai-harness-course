@@ -40,7 +40,7 @@ Freigabe-Checkliste ist das Audit-Artefakt dafür. Regeln:
 - **Incident-Klausel verlinken:** wer in den ersten 15 Minuten welche der
   drei Optionen wählt (Rollback · Fix-Forward · Datenkorrektur), steht
   *vor* dem Incident fest (siehe §Rollback-vs-Fix-Forward-Regeln unten).
-- **Freigabe-Eintrag** in `done/welle-NN-closure.md`: Status · Datum ·
+- **Freigabe-Eintrag** in `done/welle-<Kennung>-closure.md`: Status · Datum ·
   Checklisten-Pfad (alle Items mit Beleg) · Restrisiken (Zeiger auf
   Anti-Items + Folge-Slices) · Steering-Loop-Eintrag.
 

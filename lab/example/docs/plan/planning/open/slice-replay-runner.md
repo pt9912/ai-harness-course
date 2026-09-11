@@ -26,7 +26,7 @@ Modellwechsel das Target rot macht.
   mehrere Wellen stabil läuft, trägt er einen Pflicht-Lauf; bis dahin bleibt
   er verfügbar und nicht als Gate behauptet.
 - Neue Golden Sets anlegen. Der Slice hebt den Runner, nicht den Bestand —
-  `welle-1-baseline` bleibt der einzige Satz.
+  `welle-mvp-baseline` bleibt der einzige Satz.
 - Jede Änderung am Suchpfad. Der Slice berührt `evals/` und das Root-Makefile,
   nicht `internal/` — was der Replay findet, löst ein Folge-Slice.
 
@@ -48,8 +48,8 @@ Modellwechsel das Target rot macht.
 | `evals/corpus/` | neu | Ohne Korpus ist kein Lauf ausführbar |
 | `tools/replay.py` <!-- d-check:ignore (entsteht erst in diesem Slice) --> | neu | Runner; Python steht schon als Toolchain im Manifest |
 | `Makefile` Target `replay` | update | Struktur-Prüfung bleibt Vorstufe, Lauf kommt dazu |
-| `evals/golden/welle-1-baseline/expectations/*.json` | update | Kalibrierte Schwellen |
-| `evals/golden/welle-1-baseline/manifest.yaml` | update | `# CO-002`-Markierung entfernen |
+| `evals/golden/welle-mvp-baseline/expectations/*.json` | update | Kalibrierte Schwellen |
+| `evals/golden/welle-mvp-baseline/manifest.yaml` | update | `# CO-002`-Markierung entfernen |
 | `docs/plan/carveouts/CO-002-replay-verifikation.md` | `git mv` → `done/` | Auflösung |
 
 ## 4. Trigger

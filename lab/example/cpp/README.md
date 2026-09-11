@@ -49,7 +49,7 @@ cpp/
 │   └── adapters/
 │       ├── embedding/         MockEmbedder (implementiert EmbedderPort)
 │       └── ui/                SearchHandler (HTTP-Fassade)
-└── tests/search_test.cpp      LH-FA-02 + LH-QA-02 + slice-009 (doctest)
+└── tests/search_test.cpp      LH-FA-02 + LH-QA-02 + slice-tie-break-determinismus (doctest)
 ```
 
 Bezug zur Spec: alle `LH-*`-IDs aus

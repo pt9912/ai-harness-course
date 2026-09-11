@@ -14,7 +14,7 @@
 
 **Geltungsbereich:** <Pfad / Modul / Datei>
 
-**Folge-Slice:** [`slice-<NN>-...md`](../planning/<state>/slice-NN-...md)
+**Folge-Slice:** [`slice-<Kennung>.md`](../planning/<state>/slice-<Kennung>.md)
 
 Regeln: Baseline-Regelwerk `modul-07-carveouts.md` §Ziel-Form: Carveout — ein
 Carveout braucht immer einen Auflösungs-Trigger **und** einen Folge-Slice.

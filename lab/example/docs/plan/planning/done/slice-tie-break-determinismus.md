@@ -5,7 +5,7 @@ Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er wechselt
 nur durch `git mv` (Kurs
 [Modul 5 §Lifecycle als State Machine](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
 
-**Welle:** welle-1-mvp
+**Welle:** welle-mvp
 
 **Bezug:** [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit, primär), [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format).
 
@@ -74,7 +74,7 @@ nicht stable ist. Wechsel zu `sort.SliceStable` plus expliziter
 Tie-Break-Closure macht die Reihenfolge deterministisch.
 
 **Steering-Loop-Eintrag:** Beobachtung im Register auf **2×** erhöht
-(`BEO-IMPL/tie-break-nicht-dokumentiert`, Beleg `slice-009` ergänzt). Die Schwelle fällt erst mit
+(`BEO-IMPL/tie-break-nicht-dokumentiert`, Beleg `slice-tie-break-determinismus` ergänzt). Die Schwelle fällt erst mit
 `slice-012`. Die Verkörperung —
 AGENTS.md-Hard-Rule "Tie-Break in jeder sortierenden Operation muss explizit
 dokumentiert sein" — erfolgt beim Lese-Schritt der Welle-1-Closure, nicht
@@ -104,7 +104,7 @@ nur als Ablageort des Targets, nicht in seiner Konventions-Härte.
 **Vorgelagert — offene Beobachtungen sichten:** Register
 (`../observations/`) durchgegangen. `BEO-IMPL/tie-break-nicht-dokumentiert` (*Implementierung*) steht bei
 1× aus `slice-006` und trifft mit diesem Slice zum **zweiten** Mal dieselbe
-Sub-Area — `evidence/slice-009.md` ergänzt, der abgeleitete Zähler steht damit auf 2×. Die Schwelle fällt erst mit
+Sub-Area — `evidence/slice-tie-break-determinismus.md` ergänzt, der abgeleitete Zähler steht damit auf 2×. Die Schwelle fällt erst mit
 `slice-012`; verkörpert wird beim Lese-Schritt der Welle-1-Closure, nicht
 hier. Auf *Test-Infrastruktur* und *Spec-Schreibung* steht keine Zeile.
 

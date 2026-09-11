@@ -37,7 +37,7 @@ func TestTopK_EmptyAndNonPositiveK(t *testing.T) {
 	}
 }
 
-// slice-009: bei gleichem Score lexikographisch nach (DocPath, SectionIndex).
+// slice-tie-break-determinismus: bei gleichem Score lexikographisch nach (DocPath, SectionIndex).
 func TestTopK_TieBreakAndLimit(t *testing.T) {
 	idx := New()
 	q := uniformVec(1)

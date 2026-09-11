@@ -71,7 +71,10 @@ Der Traceability-Constraint bindet **Änderungen** an eine ID. Der
 Herkunfts-Anker ist dieselbe Regel, angewandt auf das **Artefakt**: Eine
 Regel, die aus dem Steering Loop entstand, nennt die Welle, in der sie
 entstand — oder, wenn sie ohne Welle verkörpert wurde, den Slice:
-`seit welle-<NN>` bzw. `seit slice-<NNN>`.
+`seit welle-<Kennung>` bzw. `seit slice-<Kennung>`. Welche Form eine
+Welle- oder Slice-Kennung hat, definiert
+[§Vergabe](source-precedence.md#vergabe-woher-die-nächste-kennung-kommt) —
+ein Anker verweist darauf, statt sie zu wiederholen.
 
 **Warum.** Eine Regel aus Spec oder ADR trägt ihre Begründung im
 `LH-*`/`ADR-*`-Bezug. Eine Regel aus *Beobachtung* hat keine solche ID —
@@ -87,31 +90,33 @@ ADR folgt, trägt bereits eine ID und braucht keinen zweiten Anker.
 **Form** — ein Feld, kein Konstrukt:
 
 ```makefile
-noqa-gate:  ## LH-QA-SUP-002 · seit welle-3        # Make-Target, Welle
-coverage-floor: ## LH-QA-SUP-004 · seit slice-047 # Make-Target, wellenlos
+noqa-gate:  ## LH-QA-SUP-002 · seit welle-cache-warmup        # Make-Target, Welle
+coverage-floor: ## LH-QA-SUP-004 · seit slice-audit-log-hardening # Make-Target, wellenlos
 ```
 ```markdown
-### 3.3 git mv + Inhaltsänderung = zwei Commits   (seit welle-3)   <!-- AGENTS.md -->
-- Tie-Break in sortierenden Operationen dokumentiert  (seit welle-3)  <!--
+### 3.3 git mv + Inhaltsänderung = zwei Commits   (seit welle-cache-warmup)   <!-- AGENTS.md -->
+- Tie-Break in sortierenden Operationen dokumentiert  (seit welle-cache-warmup)  <!--
 Reviewer-Skill -->
 ```
 
 Der Adaptions-Block trägt das Muster bereits über sein Feld *Begründung*
-(„Drei Vorfälle in Folge: `slice-041/044/047`") — der Anker
-verallgemeinert es auf Gates, Skills und Hard Rules.
+(„Drei Vorfälle in Folge", mit den drei Slice-Kennungen als Beleg) — der
+Anker verallgemeinert es auf Gates, Skills und Hard Rules.
 
 **Warum die Welle der Regelfall ist — und wann der Slice an ihre Stelle tritt.**
-`done/welle-<NN>-results.md` §Steering-Loop-Einträge nennt beim
+`done/welle-<Kennung>-results.md` §Steering-Loop-Einträge nennt beim
 Schwellen-Übertritt das Trio *Regel · stabile Bezeichnung · Slice-Belege*.
-Ein Anker `seit welle-3` löst damit in **einem Hop** auf und bleibt grob
-genug, um nicht zu verrotten. Wurde die Regel **ohne Welle** verkörpert
+Ein Anker `seit welle-<Kennung>` löst damit in **einem Hop** auf und bleibt
+grob genug, um nicht zu verrotten. Wurde die Regel **ohne Welle** verkörpert
 ([Modul 6 §Das Beobachtungs-Register](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)),
 gibt es diese Datei nicht — dann ist der Slice die einzige auflösbare
-Herkunft, und der Anker lautet `seit slice-<NNN>`. Er löst über
-`done/slice-<NNN>-<kurzer-titel>.md` §7 auf, ebenfalls in einem Hop: Die
-Nummer ist eindeutig, der Titelrest gehört zum Dateinamen
+Herkunft, und der Anker lautet `seit slice-<Kennung>`. Er löst über
+`done/slice-<Kennung>.md` §7 auf, ebenfalls in einem Hop: Die Kennung **ist**
+der Dateiname
 ([`slice.template.md`](../../../lab/templates/docs/plan/planning/slice.template.md)),
-und wer den Anker maschinell auflöst, sucht auf `done/slice-<NNN>-*.md`.
+und wer den Anker maschinell auflöst, sucht den exakten Treffer
+`done/slice-<Kennung>.md` — kein Glob mehr nötig, weil kein kurzer Zahl-Teil
+mehr einen freien Titelrest trägt.
 
 **Nach dem Archivieren ist es ein Hop mehr.** Schließt die Welle, die diesen
 Slice einsammelt, wandert sein Volltext ins Archiv
@@ -135,14 +140,14 @@ Regel aus ist nicht entscheidbar, ob sie einen Anker braucht.
 
 **Ausgelöst wird durch ein Feld, nicht durch die Semantik des Eintrags und
 nicht durch Prosa:** durch das Pflichtfeld **`liegt in <Zielort>`**. Es steht in
-`## Steering-Loop-Einträge` jeder `welle-<NN>-results.md` und — für wellenlos
-verkörperte Regeln — in §7 jeder `done/slice-<NNN>-<kurzer-titel>.md`; die
+`## Steering-Loop-Einträge` jeder `welle-<Kennung>-results.md` und — für
+wellenlos verkörperte Regeln — in §7 jeder `done/slice-<Kennung>.md`; die
 kanonischen Formen liefern `welle-results.template.md` bzw.
 `slice.template.md` §7.
 
 **Das Feld gilt nur in diesen beiden Sektionen.** Überall sonst sind dieselben
 zwei Wörter gewöhnliche Sprache und lösen nichts aus — die Trigger-Formulierung
-„`slice-024` liegt in `done/`" ([Modul 6](../02-planung/modul-06-roadmap.md))
+„`slice-audit-log-hardening` liegt in `done/`" ([Modul 6](../02-planung/modul-06-roadmap.md))
 ebenso wenig wie eine bloße **Erwähnung** eines Pfades im Fließtext. Der
 Sektions-Scope grenzt den Auslöser ein, ersetzt ihn aber nicht: *innerhalb* der
 Sektion entscheidet das Feld.
@@ -199,7 +204,7 @@ kanonische Füllungen: `AGENTS.md §<N>` (Datei + Abschnitt) ·
    Nachbar-Artefakte setzt — der Zeiger aufs Beobachtungs-Register etwa ist
    datei-relativ und folgt der Ruheort-Regel. Der Zielort ist die Ausnahme, und er ist es, weil
    er aus dem Planungs-Baum hinauszeigt.)*
-2. **Das Ziel trägt** `seit welle-<NN>` bzw. `seit slice-<NNN>` — bei einem
+2. **Das Ziel trägt** `seit welle-<Kennung>` bzw. `seit slice-<Kennung>` — bei einem
    Make-Target auf dessen Target-Zeile, bei einem Abschnitt in dessen
    Überschrift, bei einer Datei ohne Suffix irgendwo in ihr.
 
@@ -231,7 +236,7 @@ auftritt:
 
 > Eine Regel mit Herkunfts-Anker wird **nicht entfernt oder gelockert**,
 > ohne dass die Herkunft konsultiert und das Ergebnis dokumentiert wurde:
-> *Regel seit `welle-3` — ist die Beobachtung seither wieder aufgetreten?*
+> *Regel seit `welle-cache-warmup` — ist die Beobachtung seither wieder aufgetreten?*
 
 Dieselbe Bauart wie „Gates dürfen nicht ohne ADR gelockert werden" —
 aber **kumulativ, nicht ersetzend**: Ist das verankerte Artefakt selbst ein
@@ -259,7 +264,7 @@ flowchart TB
     F --> G["Slice-Planung §8:<br/>Vorgelagert — offene<br/>Beobachtungen sichten<br/>→ Evidenz-/Diskrepanz-Risiko"]
     G --> A
 
-    E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-NN</b><br/>(wellenlos: seit slice-NNN)"]
+    E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-Kennung</b><br/>(wellenlos: seit slice-Kennung)"]
     H --> I["jeder Agentenlauf<br/>liest die verkörperte Form"]
     I --> A
     E -. "Anker-Paarung prüft beide Enden" .-> H

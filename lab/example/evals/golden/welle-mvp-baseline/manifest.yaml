@@ -1,4 +1,4 @@
-# Replay-Manifest für welle-1-baseline.
+# Replay-Manifest für welle-mvp-baseline.
 # Layout und Feldgewichtung entsprechen Kurs Modul 12, Worked Example A; der
 # Messgegenstand ist ein Inferenz-Modell wie in Worked Example B. Gemischter
 # Fall: Die `inputs/` sind Such-Anfragen, das Embedding-Modell laeuft im Replay
@@ -6,8 +6,8 @@
 # `model.seed` — und die Regeln der nachgelagerten Ranking-Stufe stehen im
 # `determinism:`-Block darunter, nicht in einem `prompt_context:`.
 
-set_name: welle-1-baseline
-slice: welle-1-mvp
+set_name: welle-mvp-baseline
+slice: welle-mvp
 description: >
   Baseline-Replays für DocSearch nach Welle-1-Abschluss.
   Drei Cases decken Happy Path, Boundary und Negative je LH-FA-02 ab.
@@ -27,7 +27,7 @@ runtime:
   image_hash: sha256:abc123def4567890abc123def4567890abc123def4567890abc123def4567890
   toolchain:
     go: "1.23"        # Implementierung
-    python: "3.12.4"  # vorgesehen für den Replay-Runner (CO-002, slice-015)
+    python: "3.12.4"  # vorgesehen für den Replay-Runner (CO-002, slice-replay-runner)
   env:                # was der Image-Hash nicht pinnt
     tz: UTC
     locale: C.UTF-8
@@ -42,7 +42,7 @@ expectations_ref: expectations/
 # Determinismus-Anker, gelten für alle Cases dieses Sets.
 determinism:
   seed_derivation: substream_je_fall                                # der Seed allein reicht nicht
-  tie_break_strategy: sort_stable_then_doc_path_then_section_index  # siehe ADR-0003 + slice-009
+  tie_break_strategy: sort_stable_then_doc_path_then_section_index  # siehe ADR-0003 + slice-tie-break-determinismus
   max_topk: 100                                                     # siehe LH-FA-02 Boundary
   embedding_dim: 1024
 
@@ -54,7 +54,7 @@ determinism:
 # Lauf aus; es validiert nur die Struktur dieses Verzeichnisses. Kein Target
 # vergleicht Hashes, und `runtime.image_hash` wird gegen nichts gehalten.
 # Der Block steht als Ziel-Form hier, weil Modul 12 ihn als Pflichtinhalt
-# eines Replay-Manifests lehrt. Auflösung: slice-015-replay-runner.
+# eines Replay-Manifests lehrt. Auflösung: slice-replay-runner.
 verification:
   per_case_hash: sha256
   determinism_check: two_runs_same_hash

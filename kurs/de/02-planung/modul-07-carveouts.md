@@ -104,7 +104,7 @@ sechs Felder:
 **Datum angelegt:** 2026-05-20. **Letzte Prüfung:** 2026-06-01.
 **Betroffenes Gate:** `coverage-gate-critical`.
 **Geltungsbereich:** der Index-Layer in allen sechs Sprach-Skeletten.
-**Folge-Slice:** [`slice-013-property-tests.md`](../planning/in-progress/slice-013-property-tests.md)
+**Folge-Slice:** [`slice-property-tests.md`](../planning/in-progress/slice-property-tests.md)
 ```
 
 Wenn `Folge-Slice` fehlt oder leer ist, ist der Carveout *de facto*
@@ -119,7 +119,7 @@ nicht eingetreten beurteilen kann.
 ```markdown
 ## Auflösungs-Trigger
 
-Welle 2 (welle-2-qualitaet) done — Property-Test-Suite läuft 100
+Welle 2 (welle-qualitaet) done — Property-Test-Suite läuft 100
 Generationen und deckt die Fehlerpfade.
 
 Konkret: die Index-Layer-Coverage erreicht ≥ 90 % — dieselbe Schwelle, die
@@ -168,7 +168,7 @@ hinterlegen.** Damit nach Trigger-Eintritt klar ist, was zu tun ist:
 - [ ] `harness/README.md` §Sensors: Bindung-Spalte von `CO-001` auf den
       Normalzustand zurückgesetzt (kein Carveout mehr aktiv).
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
-- [ ] slice-013 Closure-Notiz schließt diese Auflösung mit ein.
+- [ ] slice-property-tests Closure-Notiz schließt diese Auflösung mit ein.
 ```
 
 Sechs Häkchen, eines davon ein `git mv`. Auflösung ohne Verschiebung in
@@ -285,7 +285,7 @@ das Schema noch frisch im Kopf hält, spart sich hier Last
 > **Sync-Trigger:** nach Graduation einen Pointer-Eintrag in
 > `harness/README.md` §Sensors, der die Sub-Area als GF-bewertet
 > ausweist.
-> **Folge-Slice (für Reconciliation):** `slice-021-bf-index-reconciliation.md` (legt die Inventur und die ersten Reconciliation-Häppchen fest).
+> **Folge-Slice (für Reconciliation):** `slice-bf-index-reconciliation.md` (legt die Inventur und die ersten Reconciliation-Häppchen fest).
 > ```
 >
 > Das ersetzt eine Carveout-Kaskade (`CO-001`/`CO-002`/`CO-003` auf
@@ -340,7 +340,7 @@ ein Präfix, das sie vom regulären Implementierungs-Slice unterscheidet
 — sie liefern *keinen Code*, nur Doku-Updates.
 
 ```markdown
-# slice-CO-AUDIT-welle-2: Carveout-Audit vor Welle-2-Closure
+# slice-CO-AUDIT: Carveout-Audit vor Wellen-Closure
 
 **DoD:**
 - Jeder aktive Carveout in `docs/plan/carveouts/` hat ein aktuelles
@@ -349,7 +349,7 @@ ein Präfix, das sie vom regulären Implementierungs-Slice unterscheidet
   verschoben.
 - Jeder Carveout, der seit > 2 Wellen "aktiv" ist, wurde *explizit*
   entweder als weiter-gültig bestätigt oder in eine ADR überführt.
-- Audit-Bericht als Closure-Notiz in `done/welle-2-results.md`.
+- Audit-Bericht als Closure-Notiz in `done/<welle-id>-results.md`.
 ```
 
 Vier DoD-Punkte: drei Status-Aktionen plus ein Belegartefakt. Mehr
@@ -366,7 +366,7 @@ Closure-Notiz-Block:
 |---|---|---|---|
 | CO-001 (Index-Coverage) | aktiv, Trigger Welle 2 | aufgelöst | git mv nach `done/`; Mess-Verengung im Gate auf Index erweitert |
 | CO-004 (Compose-Devmode) | aktiv, Trigger "Compose v2.20" | permanent | überführt in ADR-0014 (Devmode als bewusste Architektur) |
-| CO-005 (Lock-File-Pin) | aktiv, Letzte Prüfung 2025-12 | aktiv, geprüft | Datum 2026-06-12 nachgetragen, Folge-Slice slice-018 angelegt |
+| CO-005 (Lock-File-Pin) | aktiv, Letzte Prüfung 2025-12 | aktiv, geprüft | Datum 2026-06-12 nachgetragen, Folge-Slice slice-lock-file-pin-upgrade angelegt |
 ```
 
 Drei Status-Übergänge sind möglich: *aufgelöst* (Trigger eingetreten),

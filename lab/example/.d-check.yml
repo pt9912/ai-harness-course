@@ -1,5 +1,5 @@
 # Referenz-Richtung (Kurs §Referenz-Richtung) als Deklaration, geprueft vom
-# d-check-Modul `matrix`. Ersetzt tools/check_references.py (slice-022): Das
+# d-check-Modul `matrix`. Ersetzt tools/check_references.py (slice-referenz-richtung-per-d-check): Das
 # Skript trug zwei Zellen der Matrix und erklaerte die dritte — ADR -> Slice —
 # fuer nicht grep-bar. Der Kurs loest sie ueber den umgekehrten Default: Die
 # Kante gilt als verboten, die Ausnahme wird am Ort deklariert.
@@ -38,7 +38,10 @@ matrix:
     # kein Link sein.
     - name: slice
       paths: ["docs/plan/planning/**/slice-*.md"]
-      token: 'slice-\d{3}'
+      # Kennung ist ein Slug (Kurs §Vergabe), nicht mehr nur eine Zahl —
+      # das Token fasst beide Formen, solange Alt- und Neubestand
+      # nebeneinander stehen.
+      token: 'slice-[a-z0-9]+(-[a-z0-9]+)*'
   rules:
     # Kontext-Zeiger sind erlaubt und werden am Ort markiert
     # (<!-- d-check:status-provenance -->); alles Uebrige faellt.
@@ -157,13 +160,13 @@ planning:
   closure:
     dir: docs/plan/planning/done
     # Kandidaten-Menge = ALLE Dateien im Ruheort, nicht nur die Slices.
-    # ADR-0011 §Geschichte zaehlt `welle-1-mvp.md` ausdruecklich zu den Dateien,
+    # ADR-0011 §Geschichte zaehlt `welle-mvp.md` ausdruecklich zu den Dateien,
     # fuer die die Pflicht gilt; `slice-*.md` waere unter-gefasst.
     glob: '*.md'
     # Die Schwelle ist eine ENTSCHEIDUNG, keine Einstellung: ADR-0011
     # §Entscheidung 1 sagt "mindestens zwei Saetze". d-checks Default ist 4 —
     # ein Gate schaerfer als seine bindende ADR, und genau daran scheiterte
-    # zuerst `welle-1-mvp.md`, dessen §7 laut `welle.template.md` ein Zeiger auf
+    # zuerst `welle-mvp.md`, dessen §7 laut `welle.template.md` ein Zeiger auf
     # die Ergebnis-Notiz ist und keine Notiz.
     min-sentences: 2
     # Um Ebene 1 geweitet gegenueber dem Default `^#{2,3} `: Die Welle-Ergebnis-
@@ -196,7 +199,7 @@ planning:
       - "war ganz okay"
       - "passt schon"
 
-  # Dritte Faehigkeit desselben Moduls (slice-025): die Wellen-Invariante.
+  # Dritte Faehigkeit desselben Moduls (slice-wellen-invariante-per-d-check): die Wellen-Invariante.
   # Der Abschnitt `## Offene Wellen` traegt zwei unabhaengige Aussagen (Kurs
   # Modul 6 §Offene Wellen) — der Marker folgt dem Anspruch (oben), die Liste
   # folgt den Dateien. Diese zweite Haelfte haelt `waves`: die Zeiger im Block
@@ -235,7 +238,7 @@ planning:
 # hier erst scharf, wenn seine Klasse sauber ist.
 #
 # Zwei Ausnahmen stehen als Zeilen-Marker im Text, nicht als Pfad-Liste:
-# geplante Vorwaerts-Verweise (ADR-0004, die slice-014 erst bringt) und
+# geplante Vorwaerts-Verweise (ADR-0004, die slice-ann-suche erst bringt) und
 # Protokollzeilen in Geschichte-Sektionen, in denen ein Link rotten wuerde
 # (Kurs §Referenz-Richtung, Regel 5).
 ids:
@@ -259,7 +262,7 @@ ids:
 # so.
 
 # Review-Report-Deckung (Kurs `modul-05-planning-harness.md` §Ziel-Form:
-# Slice, Review-Zeile seit Welle 119, slice-026). `done-dir` ist der
+# Slice, Review-Zeile seit Welle 119, slice-review-report-deckung-per-d-check). `done-dir` ist der
 # Aktivierungs-Schalter: geprueft werden nur die neun bestehenden `done/`-
 # Dateien und alles Kuenftige — keine trifft heute die Review-DoD-Zeile
 # (Fliesstext-Nennungen zaehlen nicht, nur eine DoD-Haken-Zeile), daher ohne

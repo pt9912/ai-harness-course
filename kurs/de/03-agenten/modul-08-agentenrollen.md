@@ -127,7 +127,7 @@ alle sechs, damit der Verweis dort einlösbar ist. Schritt 3 hat drei Teile.
 | **2** — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage → Verdikt |
 | **3a** — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
 | **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel oder Folge-Slice |
-| **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<NN>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
+| **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<Kennung>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
 | **4** — Zeitdokumente archivieren | **Planner** | `done/<welle-id>/archiv.zip` plus die gekürzten Stubs; die Ergebnisnotiz bleibt vollständig und flach |
 | **5** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit — der Audit sieht einen Punkt, kein verstreutes Verschwinden |
 | **6** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, ihr Zeiger verlässt *Offene Wellen* — befördert wird niemand; ggf. Eintrag in *Historische Trigger-Verschiebungen* |
@@ -156,7 +156,7 @@ Züge bleiben, einer verschwindet ganz.**
 | Übergabe | ohne Wellen-Betrieb |
 |---|---|
 | Planner → Architect → Planner (Trigger-Audit) | **bleibt** — bei jeder Slice-Closure statt einmal pro Welle |
-| Planner → Architect → Planner (Verkörperung) | **bleibt** — Anker `seit slice-<NNN>` statt `seit welle-<NN>` |
+| Planner → Architect → Planner (Verkörperung) | **bleibt** — Anker `seit slice-<Kennung>` statt `seit welle-<Kennung>` |
 | Planner → Verifier → Planner (repo-weiter Verifikations-Beleg) | **entfällt** |
 
 Dass gerade diese entfällt, ist kein Verlust, sondern die Definition: Ein
@@ -258,7 +258,7 @@ macht. Wer geplant hat, prüft nicht; wer geschrieben hat, reviewt nicht.
 verstößt gegen ADR-0001 (hexagonale Architektur) — Optimizer schreibt
 direkt aufs Device."* Implementer-Agent widerspricht: *"ADR-0001 wurde
 in der letzten Welle gelockert; ich verweise auf die Diskussion in
-Slice-Plan slice-024."*
+Slice-Plan slice-audit-log-hardening."*
 
 Wer entscheidet? Wer übergibt was an wen? Der naive Pfad — *"Reviewer
 hat mehr Senioritätsgefühl, also Reviewer"* — wiederholt blinde Flecken
@@ -284,10 +284,10 @@ sequenceDiagram
     participant P as Planner
 
     R->>I: Finding HIGH (ADR-0001-Verstoß)
-    I->>A: Widerspruch + Verweis auf slice-024
-    A->>P: ADR-0001-Aktualität prüfen, slice-024 vorlegen
-    P-->>A: Slice-Plan slice-024 (Lockerung erwähnt?)
-    A-->>R: Verdikt (ADR gilt / Folge-ADR / slice-024 falsch)
+    I->>A: Widerspruch + Verweis auf slice-audit-log-hardening
+    A->>P: ADR-0001-Aktualität prüfen, slice-audit-log-hardening vorlegen
+    P-->>A: Slice-Plan slice-audit-log-hardening (Lockerung erwähnt?)
+    A-->>R: Verdikt (ADR gilt / Folge-ADR / slice-audit-log-hardening falsch)
     A->>I: Übergabe-Artefakt (Folge-ADR-Hülle oder Bestätigung HIGH)
 ```
 
@@ -303,8 +303,8 @@ nur, wenn jeder Pfeil ein *konkretes* Artefakt trägt. Tabelle:
 | R → I | Finding HIGH | Datei:Zeile · ADR-ID · Kategorie HIGH · ein-Satz-Begründung |
 | I → A | Widerspruchs-Notiz | Verweis auf Slice-Plan + behauptete Lockerung + Position des Implementers |
 | A → P | ADR-Aktualitäts-Anfrage | ADR-ID · Welle, in der gelockert worden sein soll · konkrete Frage |
-| P → A | Slice-Plan-Auszug | exakte Textstelle aus slice-024, die die Lockerung enthält *oder nicht enthält* |
-| A → R | Verdikt | ADR-Stand bestätigt / Folge-ADR-Hülle / slice-024-Korrektur |
+| P → A | Slice-Plan-Auszug | exakte Textstelle aus slice-audit-log-hardening, die die Lockerung enthält *oder nicht enthält* |
+| A → R | Verdikt | ADR-Stand bestätigt / Folge-ADR-Hülle / slice-audit-log-hardening-Korrektur |
 | A → I | Folge-Übergabe | Folge-ADR-Hülle ODER Pflicht zur Korrektur ODER Bestätigung der Lockerung mit ID |
 
 Die zentrale Disziplin: das Verdikt von Architect nach Reviewer (Pfeil
@@ -322,7 +322,7 @@ drei sauberen Klassen ist:
 
 | Verdikt | Folge-Sequenz | Übergabe-Artefakt |
 |---|---|---|
-| ADR-0001 gilt unverändert, slice-024 hat falsch behauptet | A → P: Slice-Plan-Korrektur; P → I: aktualisierter Plan; I implementiert ADR-konform neu | Plan-Diff mit Korrektur-Begründung |
+| ADR-0001 gilt unverändert, slice-audit-log-hardening hat falsch behauptet | A → P: Slice-Plan-Korrektur; P → I: aktualisierter Plan; I implementiert ADR-konform neu | Plan-Diff mit Korrektur-Begründung |
 | ADR-0001 wird per Folge-ADR `supersedes`d | A → R: Folge-ADR mit `supersedes: ADR-0001`; R aktualisiert Skill-Datei (welche Regel jetzt gilt) | Folge-ADR (Accepted) · Skill-Patch |
 | Lockerung war legitim, aber nicht dokumentiert | A → P → I: Sofort-PR, der die Lockerung als Folge-ADR nachzieht; bestehender Slice darf trotzdem nicht stillschweigend abgeschlossen werden | Folge-ADR + Erinnerungs-Slice in `next/` |
 

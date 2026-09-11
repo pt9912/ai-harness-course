@@ -265,7 +265,7 @@ Score-Verschiebung in der vierten Nachkommastelle, ein wörtlich
 hier dagegen richtig: Die Stufe ist deterministisch, die Falle ist die
 umgekehrte — eine zu weiche Erwartung, die eine echte Abweichung
 durchwinkt. Struktur-Vergleich: das Lab-Set
-`lab/example/evals/golden/welle-1-baseline/` (drei Cases
+`lab/example/evals/golden/welle-mvp-baseline/` (drei Cases
 Happy/Boundary/Negative je LH-FA-02) nutzt dasselbe Schema für einen
 gemischten Fall, in dem zusätzlich ein Embedding-Modell mitläuft.
 
@@ -312,7 +312,7 @@ Diagnose-Reihenfolge existiert genau dagegen.
 Erwartetes Ergebnis — **dreimal grün**:
 
 ```
-cp -r evals/golden/welle-1-baseline evals/golden/drift-test
+cp -r evals/golden/welle-mvp-baseline evals/golden/drift-test
 make replay RUN=drift-test                     -> replay set ok (3 cases)
 # model.name + model.version im Manifest aendern
 make replay RUN=drift-test                     -> replay set ok (3 cases)

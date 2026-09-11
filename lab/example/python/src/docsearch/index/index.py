@@ -18,7 +18,7 @@ class Index:
         return len(self._entries)
 
     def top_k(self, query: tuple[float, ...], k: int) -> list[SearchResult]:
-        """Top-K mit Stable-Sort und Tie-Break (slice-009, AGENTS.md §P-4)."""
+        """Top-K mit Stable-Sort und Tie-Break (slice-tie-break-determinismus, AGENTS.md §P-4)."""
         if k <= 0 or not self._entries:
             return []
         k = min(k, MAX_TOPK)

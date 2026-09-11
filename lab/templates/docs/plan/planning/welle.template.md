@@ -9,7 +9,7 @@
 
 **Lifecycle:** Diese Datei entsteht bei der **Eröffnung** der Welle und liegt
 flach unter `docs/plan/planning/`; bei Closure wandert sie per `git mv` nach
-`done/` (neben ihre `welle-<NN>-results.md`). Der Zustand ist die
+`done/` (neben ihre `welle-<Kennung>-results.md`). Der Zustand ist die
 Verzeichnis-Position — kein Status-Feld. **Geplante Wellen bekommen noch keine
 Datei:** Sie stehen in der Roadmap unter *Nächste Wellen* und nirgends sonst —
 zwei Positionen, nicht drei.
@@ -54,7 +54,7 @@ einzelnen Slice-DoDs benennen; kann er das nicht, liegt keine Welle vor.
 - <z.B. Alle Slices done.>
 - <z.B. `make fullbuild` grün.>
 - <z.B. Replay-Lauf gegen Golden Set durchläuft.>
-- <z.B. Closure-Notiz in `welle-<NN>-results.md`.>
+- <z.B. Closure-Notiz in `welle-<Kennung>-results.md`.>
 
 ## 4. Slices in dieser Welle
 
@@ -66,8 +66,8 @@ Lifecycle-Verzeichnis und wird hier **nicht** gespiegelt.
 
 | Slice | Titel | Bezug |
 |---|---|---|
-| slice-<NN-A> | <…> | LH-FA-<NN> |
-| slice-<NN-B> | <…> | LH-FA-<NN> |
+| slice-<Kennung-A> | <…> | LH-FA-<NN> |
+| slice-<Kennung-B> | <…> | LH-FA-<NN> |
 
 ## 5. Abhängigkeiten
 
@@ -107,5 +107,5 @@ Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-traceability.md`
 beiden Zeiger unten sind so zu schreiben, wie sie vom Ruheort `done/` auflösen,
 nicht vom Schreibort.
 
-Ergebnis: <Zeiger auf `welle-<NN>-results.md`, Geschwister im Ruheort `done/`>
+Ergebnis: <Zeiger auf `welle-<Kennung>-results.md`, Geschwister im Ruheort `done/`>
 Zähler: <Zeiger aufs Beobachtungs-Register, eine Ebene über dem Ruheort>

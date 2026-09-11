@@ -1,22 +1,22 @@
-# Welle <NN> — <Titel> — Closure-Notiz
+# Welle <welle-id> — <Titel> — Closure-Notiz
 
 > **Template-Hinweis.** Vorlage für die Ergebnis-Notiz einer Welle.
-> Kopiere nach `docs/plan/planning/done/welle-<NN>-results.md` — nur die
-> Nummer, nicht die volle Welle-ID (die Welle `welle-1-mvp` schließt mit
-> `welle-1-results.md`). Ersetze Platzhalter und lösche diesen Block.
-> Zugleich wandert die Welle-*Plan*-Datei per `git mv` nach `done/`, neben
-> diese Notiz. Pflichtteile und Ablauf: Baseline-Regelwerk
+> Kopiere nach `docs/plan/planning/done/<welle-id>-results.md` — die volle
+> Kennung, unverändert (die Welle `welle-cache-warmup` schließt mit
+> `welle-cache-warmup-results.md`). Ersetze Platzhalter und lösche diesen
+> Block. Zugleich wandert die Welle-*Plan*-Datei per `git mv` nach `done/`,
+> neben diese Notiz. Pflichtteile und Ablauf: Baseline-Regelwerk
 > `modul-06-roadmap.md` §Wellen-Closure-Prozedur (Modul 6), Schritt 3.
 
 > **Zitier-Form** *(bleibt stehen — Norm, kein Ausfüll-Hinweis).* Dieses
 > Artefakt friert ein; was es zitiert, bewegt sich weiter. Deshalb: **Kennung,
-> nicht Adresse** — `slice-NNN` statt seines Lifecycle-Pfads, `make <target>`
+> nicht Adresse** — `slice-<Kennung>` statt seines Lifecycle-Pfads, `make <target>`
 > statt eines Links auf die Sensor-Datei, eine Baseline-Stelle als
 > `v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt> statt als Link
 > (Baseline-Regelwerk `grundlagen-harness-dateien.md` §harness/README.md als
 > Einstiegspunkt — beim Ausfüllen mit dem adoptierten Tag schreiben).
 
-**Welle:** <welle-id, z. B. welle-1-mvp>
+**Welle:** <welle-id, z. B. welle-cache-warmup>
 **Abschluss:** YYYY-MM-DD
 **Verantwortlich:** <Name>
 
@@ -64,16 +64,16 @@ und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der Backticks; die
 
 - **<Guide oder Sensor>** <geschärft/ergänzt>: <was genau>
   — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.
-  Auslöser: `BEO-<NNN>` (<slice-NNN>, <slice-MMM>, <slice-KKK> — 3×).
+  Auslöser: `BEO-<NNN>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).
 - **Spec-Lücke** benannt: <was fehlte> — aufgelöst über <Lastenheft v<X.Y.Z> (`LH-FA-NN`) | ADR-<NNNN>>.
-  Auslöser: `BEO-<NNN>` (<slice-NNN>, <slice-MMM>, <slice-KKK> — 3×).
+  Auslöser: `BEO-<NNN>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).
 - <…>
 
 <!-- Gegenstück am Ziel, nicht vergessen — es ist die andere Hälfte des Paares:
-     noqa-gate:  ## LH-QA-SUP-002 · seit welle-<NN>
-     ### 3.3 <Hard Rule>   (seit welle-<NN>)
+     noqa-gate:  ## LH-QA-SUP-002 · seit welle-<Kennung>
+     ### 3.3 <Hard Rule>   (seit welle-<Kennung>)
      Entfernen oder Lockern dieser Regel setzt später den Retirement-Check
-     voraus: „seit welle-<NN> — ist die Beobachtung wieder aufgetreten?" -->
+     voraus: „seit welle-<Kennung> — ist die Beobachtung wieder aufgetreten?" -->
 
 ## Beobachtungs-Register (Zeiger)
 
@@ -118,7 +118,7 @@ das Original ist die Slice-Datei. Jeder genannte Folge-Slice muss als Datei im
 Planning-Lifecycle existieren; genannt ohne angelegt ist dieselbe Klasse wie
 ein halluziniertes Gate.
 
-- <slice-NNN (<Titel>) — startet welle-<NN+1>.>
+- <slice-<Kennung> (<Titel>) — startet die nächste Welle.>
 
 ## Verifikation
 

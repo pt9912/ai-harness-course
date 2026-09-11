@@ -77,7 +77,7 @@ Toolchain:
 Jedes Skelett implementiert:
 
 - Hexagonales Layering ([ADR-0001](docs/plan/adr/0001-hexagonale-architektur.md)) — UI → Service → {Index, Embedding} → Types.
-- Tie-Break-Logik aus slice-009 (deterministische Sortierung bei gleichem Score).
+- Tie-Break-Logik aus slice-tie-break-determinismus (deterministische Sortierung bei gleichem Score).
 - [LH-FA-01](spec/lastenheft.md#lh-fa-01--dokument-indexierung) und [LH-FA-02](spec/lastenheft.md#lh-fa-02--semantische-suche) Akzeptanzkriterien (Happy/Boundary/Negative) als Tests.
 - Die vier Fehler-Codes aus [spec §4](spec/spezifikation.md#4-fehler-codes-und-logging-felder)
   (E001, E002, E003, E099) mit HTTP-Status an einer Stelle abgebildet.

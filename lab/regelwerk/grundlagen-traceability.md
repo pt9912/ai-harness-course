@@ -65,26 +65,29 @@ benennen beides gern ähnlich — der Unterschied ist Richtung gegen Abdeckung.
 Der Traceability-Constraint bindet **Änderungen** an eine ID. Der
 Herkunfts-Anker ist dieselbe Regel auf dem **Artefakt**: Eine Regel, die
 aus dem Steering Loop entstand, nennt die Welle, in der sie entstand — oder,
-wenn sie ohne Welle verkörpert wurde, den Slice: `seit welle-<NN>` bzw.
-`seit slice-<NNN>`.
+wenn sie ohne Welle verkörpert wurde, den Slice: `seit welle-<Kennung>` bzw.
+`seit slice-<Kennung>`. Welche Form eine Welle- oder Slice-Kennung hat,
+definiert [§Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-kennung-kommt) —
+ein Anker verweist darauf, statt sie zu wiederholen.
 
 - **Geltungsbereich — eng.** Nur Regeln, die die 3×-Schwelle erreicht
   haben. Was aus Lastenheft, Spezifikation oder ADR folgt, trägt bereits
   eine ID und braucht keinen zweiten Anker.
 - **Form** — ein Feld, kein Konstrukt:
-  `noqa-gate:  ## LH-QA-SUP-002 · seit welle-3` (Make-Target) ·
-  `coverage-floor: ## LH-QA-SUP-004 · seit slice-047` (wellenlos) ·
-  `### 3.3 <Hard Rule>   (seit welle-3)` (AGENTS.md) ·
-  `- <HIGH-Regel>  (seit welle-3)` (Reviewer-Skill). Der Adaptions-Block
+  `noqa-gate:  ## LH-QA-SUP-002 · seit welle-cache-warmup` (Make-Target) ·
+  `coverage-floor: ## LH-QA-SUP-004 · seit slice-audit-log-hardening` (wellenlos) ·
+  `### 3.3 <Hard Rule>   (seit welle-cache-warmup)` (AGENTS.md) ·
+  `- <HIGH-Regel>  (seit welle-cache-warmup)` (Reviewer-Skill). Der Adaptions-Block
   trägt das Muster bereits über sein Feld *Begründung*.
 - **Die Welle ist der Regelfall, der Slice die Ausnahme.**
-  `done/welle-<NN>-results.md` §Steering-Loop-Einträge nennt beim
+  `done/welle-<Kennung>-results.md` §Steering-Loop-Einträge nennt beim
   Schwellen-Übertritt *Regel · stabile Bezeichnung · Slice-Belege* — ein Anker
   löst damit in einem Hop auf und bleibt grob genug, um nicht zu verrotten.
   Wurde die Regel **ohne Welle** verkörpert, gibt es diese Datei nicht; dann
-  ist der Slice die einzige auflösbare Herkunft (`seit slice-<NNN>`, löst über
-  `done/slice-<NNN>-<kurzer-titel>.md` §7 auf — die Nummer ist eindeutig, der
-  Titelrest gehört zum Dateinamen; maschinell also `done/slice-<NNN>-*.md`).
+  ist der Slice die einzige auflösbare Herkunft (`seit slice-<Kennung>`). Die
+  Kennung **ist** der Dateiname — er löst über `done/slice-<Kennung>.md` §7
+  auf, kein Glob mehr nötig, weil kein kurzer Zahl-Teil mehr einen freien
+  Titelrest trägt.
   **Nach dem Archivieren ist es ein Hop mehr** ([Modul 6](modul-06-roadmap.md),
   Schritt 4): An der Stelle des Slice liegt ein Stub unter `done/<welle-id>/`,
   §7 steht im Archiv. Der Anker bleibt gültig, die Auflösung ist zweistufig —
@@ -100,14 +103,14 @@ wenn sie ohne Welle verkörpert wurde, den Slice: `seit welle-<NN>` bzw.
 der Regel aus ist nicht entscheidbar, ob sie einen Anker braucht.
 **Ausgelöst wird durch ein Feld, nicht durch die Semantik des Eintrags und
 nicht durch Prosa:** durch das Pflichtfeld **`liegt in <Zielort>`** — in
-`## Steering-Loop-Einträge` jeder `welle-<NN>-results.md` und, für wellenlos
-verkörperte Regeln, in §7 jeder `done/slice-<NNN>-<kurzer-titel>.md`; die
+`## Steering-Loop-Einträge` jeder `welle-<Kennung>-results.md` und, für wellenlos
+verkörperte Regeln, in §7 jeder `done/slice-<Kennung>.md`; die
 kanonischen Formen liefern `welle-results.template.md` bzw.
 `slice.template.md` §7 (siehe Ziel-Form unten).
 
 - **Das Feld gilt nur in diesen beiden Sektionen.** Überall sonst sind
   dieselben zwei Wörter gewöhnliche Sprache und lösen nichts aus — die
-  Trigger-Formulierung „`slice-024` liegt in `done/`" (Modul 6) ebenso wenig
+  Trigger-Formulierung „`slice-audit-log-hardening` liegt in `done/`" (Modul 6) ebenso wenig
   wie eine bloße **Erwähnung** eines Pfades im Fließtext. Der Sektions-Scope grenzt den Auslöser ein,
   ersetzt ihn aber nicht: *innerhalb* der Sektion entscheidet das Feld.
 - **Die Ruheort-Regel — für jede Datei, die per `git mv` wandert.** Ein
@@ -141,8 +144,8 @@ kanonischen Formen liefern `welle-results.template.md` bzw.
   nicht mit, wenn die Notiz nach `done/` wandert. Dafür wird ein Suffix ab
   ` §` oder ab `:` abgetrennt und der Rest als Pfad geprüft. (Die Pfade auf
   Nachbar-Artefakte — der Zeiger aufs Beobachtungs-Register — bleiben
-  datei-relativ und folgen der Ruheort-Regel.) (2) Das Ziel trägt `seit welle-<NN>` bzw.
-  `seit slice-<NNN>` — beim Make-Target auf dessen Target-Zeile, beim
+  datei-relativ und folgen der Ruheort-Regel.) (2) Das Ziel trägt `seit welle-<Kennung>` bzw.
+  `seit slice-<Kennung>` — beim Make-Target auf dessen Target-Zeile, beim
   Abschnitt in dessen Überschrift, bei einer Datei ohne Suffix irgendwo in ihr.
 - **Fehlt das Feld**, ist der Eintrag *gezählt, nicht verkörpert* und kein
   Gegenstand der Paarung. Ausnahme ohne Gegenausnahme: Eine **benannte
@@ -170,7 +173,7 @@ dieselbe Klasse wie ein halluziniertes Gate
 ereignis-getriggert, kein periodischer Sweep): Eine Regel mit
 Herkunfts-Anker wird **nicht entfernt oder gelockert**, ohne dass die
 Herkunft konsultiert und das Ergebnis dokumentiert wurde — *„Regel seit
-`welle-3` — ist die Beobachtung seither wieder aufgetreten?"*. Dieselbe
+`welle-cache-warmup` — ist die Beobachtung seither wieder aufgetreten?"*. Dieselbe
 Bauart wie „Gates dürfen nicht ohne ADR gelockert werden", aber **kumulativ,
 nicht ersetzend**: ist das verankerte Artefakt selbst ein Gate, gilt die
 ADR-Pflicht unverändert weiter — der Retirement-Check beantwortet eine andere
@@ -205,7 +208,7 @@ flowchart TB
     F --> G["Slice-Planung §8:<br/>Vorgelagert — offene<br/>Beobachtungen sichten<br/>→ Evidenz-/Diskrepanz-Risiko"]
     G --> A
 
-    E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-NN</b><br/>(wellenlos: seit slice-NNN)"]
+    E --> H["Regel verkörpert<br/>AGENTS.md / Gate / Skill / MR<br/><b>seit welle-Kennung</b><br/>(wellenlos: seit slice-Kennung)"]
     H --> I["jeder Agentenlauf<br/>liest die verkörperte Form"]
     I --> A
     E -. "Anker-Paarung prüft beide Enden" .-> H

@@ -61,7 +61,7 @@ test: ## JUnit-Tests
 test-determinism: ## LH-QA-02: @RepeatedTest(100) in DeterminismTest
 	$(call GATE,determinism-gate)
 
-coverage-gate: ## Gesamt-Coverage via JaCoCo (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
+coverage-gate: ## Gesamt-Coverage via JaCoCo (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-qualitaet geschlossen) -> 80 % via Nachfolge-ADR)
 	$(call GATE,coverage-gate)
 
 coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)

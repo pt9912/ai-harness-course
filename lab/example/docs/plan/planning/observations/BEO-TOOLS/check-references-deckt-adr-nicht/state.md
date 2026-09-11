@@ -1,1 +1,1 @@
-**Stand:** gestrichen — Ursache beseitigt: `slice-022` löst den Skript-Sensor durch d-check `matrix` ab, das `adr` als Quellklasse führt. Die Lücke kann nicht wieder entstehen.
+**Stand:** gestrichen — Ursache beseitigt: `slice-referenz-richtung-per-d-check` löst den Skript-Sensor durch d-check `matrix` ab, das `adr` als Quellklasse führt. Die Lücke kann nicht wieder entstehen.

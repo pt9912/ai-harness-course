@@ -144,7 +144,7 @@ TEST_CASE("LH-QA-02 Determinism — identische Eingabe, identische Ausgabe") {
     }
 }
 
-TEST_CASE("slice-009 TieBreak — gleicher Score, lexikographisch (doc, section_index)") {
+TEST_CASE("slice-tie-break-determinismus TieBreak — gleicher Score, lexikographisch (doc, section_index)") {
     const MockEmbedder emb;
     Index idx;
     // Drei Einträge mit identischem Embedding → identischer Score.

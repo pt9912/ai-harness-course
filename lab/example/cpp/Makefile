@@ -72,7 +72,7 @@ test: gate-image ## doctest via ctest (Unit + Tie-Break)
 test-determinism: gate-image ## LH-QA-02: Determinismus-Case (100 Iterationen)
 	$(DOCKER) run $(RUN) ctest --test-dir $(BUILD_DIR) -R determinism --output-on-failure
 
-coverage-gate: cov-image ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR; Composition Root ausgenommen)
+coverage-gate: cov-image ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-qualitaet geschlossen) -> 80 % via Nachfolge-ADR; Composition Root ausgenommen)
 	$(DOCKER) run --rm --network none $(COV_IMAGE) \
 		gcovr --root . --filter "src/" --exclude ".*/main\.cpp" \
 			--fail-under-line $(COVERAGE_THRESHOLD) $(COV_DIR)

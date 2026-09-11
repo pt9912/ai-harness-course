@@ -16,7 +16,7 @@ A_CHECK_IMAGE ?= ghcr.io/pt9912/a-check@sha256:SETZE-HIER-DEN-RELEASE-DIGEST-EIN
 
 # Container-Runtime ueber eine Indirektion, damit ein Repo mit podman/nerdctl
 # oder einem docker-Wrapper nicht die Haelfte seiner Targets anders faehrt als
-# die andere (slice-082).
+# die andere (slice-container-runtime-indirektion).
 #
 # REIHENFOLGE ZAEHLT: `?=` setzt nur, wenn DOCKER noch nicht belegt ist.
 # Wer eine eigene Runtime nutzt, definiert sie VOR dem `include` — oder

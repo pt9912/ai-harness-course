@@ -59,7 +59,7 @@ test: gate-image ## Unit-Tests (Race-Detector braucht cgo: gcc/musl-dev in der t
 test-determinism: gate-image ## LH-QA-02: 100 Wiederholungen identischer Eingabe
 	$(DOCKER) run $(RUN) sh -c "go test -run 'TestDeterminism' -count=100 ./..."
 
-coverage-gate: ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR; hermetisch via coverage-Stage)
+coverage-gate: ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-qualitaet geschlossen) -> 80 % via Nachfolge-ADR; hermetisch via coverage-Stage)
 	$(DOCKER) build --target coverage -t $(IMAGE)-coverage .
 	$(DOCKER) run --rm $(IMAGE)-coverage ./... 70
 

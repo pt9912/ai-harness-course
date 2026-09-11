@@ -68,7 +68,7 @@ Feld-Evidenz **kein Veto**, sondern eine **Design-Auflage**: *Entwurf* jetzt,
 *Verkörperung* auf Trigger. Wir entwerfen ohne Praxis-Rückmeldung, also muss
 jede Änderung so gebaut sein, dass sie sich zurücknehmen lässt — additiv,
 deklariert, ohne den Ein-Personen-Fall zu verschlechtern. Das ist die Bauform,
-die [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+die [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
 bereits vorführt: Default für einen Schreiber, deklarierte Variante für mehrere.
 
 **Eine Zwischenlage:** Die *Eigentums-Achse* unter [TB-001](#tb-001) fehlt
@@ -112,7 +112,7 @@ Mehr-Personen-Fall stand — dazu kommen die drei gestrichenen Einträge im
 
 | Ort | Warum es trägt |
 |---|---|
-| [§Vergabe: woher die nächste Nummer kommt](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt) | Die Frage ist dort **ausdrücklich gestellt und beantwortet** — laute Ablage (`LH-*`, `SPEC-*`, `ARC-*`: viele IDs in einer Datei → Git-Konflikt) gegen stille (ADR, Slice, Carveout: je eigene Datei → lautloser Doppelvergabe-Merge), Bereichssegment als Antwort, Grenze benannt (*„Zwei in **derselben** schon — und das ist Absicht"*), Wahl deklarationspflichtig (*„Welche Form gilt, deklariert das Repo"*). Die Prognose für einen Schreiber — *„braucht kein Segment"* — trifft am Bestand zu: In `ai-harness-init` zählen ADR (`0001`–`0019`), Welle (`01`–`10`), `MR` (`000`–`023`) und Carveout (`CO-001`/`CO-002`) dicht und **ohne** Segment. Drei Einzelheiten hält der Abschnitt trotzdem nicht — [TB-009](#tb-009), [TB-010](#tb-010), [TB-013](#tb-013) |
+| [§Vergabe: woher die nächste Kennung kommt](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt) | Die Frage ist dort **ausdrücklich gestellt und beantwortet** — laute Ablage (`LH-*`, `SPEC-*`, `ARC-*`: viele IDs in einer Datei → Git-Konflikt) gegen stille (ADR, Slice, Carveout: je eigene Datei → lautloser Doppelvergabe-Merge), Bereichssegment als Antwort, Grenze benannt (*„Zwei in **derselben** schon — und das ist Absicht"*), Wahl deklarationspflichtig (*„Welche Form gilt, deklariert das Repo"*). Die Prognose für einen Schreiber — *„braucht kein Segment"* — trifft am Bestand zu: In `ai-harness-init` zählen ADR (`0001`–`0019`), Welle (`01`–`10`), `MR` (`000`–`023`) und Carveout (`CO-001`/`CO-002`) dicht und **ohne** Segment. Vier Einzelheiten hält der Abschnitt trotzdem nicht — [TB-009](#tb-009), [TB-010](#tb-010), [TB-013](#tb-013), [TB-015](#tb-015) |
 | Index + eine Datei je `MR` ([§harness/conventions.md als Konventionsspeicher](../kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)) | Begründet ist der Schnitt mit Agenten-Kontextkosten. Er hat einen **nicht genannten Nebeneffekt**: Zwei Leute können parallel an `MR-005` und `MR-006` schreiben, ohne dieselbe Datei zu berühren, während ihre beiden Index-Zeilen in *einer* Tabelle landen und dort als Git-Konflikt sichtbar werden. Der Index ist damit ein teilweiser Wächter — vollständig ist er nicht, siehe [TB-009](#tb-009) |
 | Append-only für ADR und `MR` (Folge-ADR mit `supersedes`, Rückbau als neuer Eintrag) | Zwei Leute überschreiben nie denselben Text. Die Disziplin, die für Auditierbarkeit erfunden wurde, ist zugleich die konfliktärmste Schreibform, die es gibt |
 
@@ -223,6 +223,7 @@ darf, ohne etwas zu bewegen.
 | [TB-012](#tb-012) | Text | [TA-2](#ta-2) [TA-4](#ta-4) | Die Planning-README trägt zwei Begriffe ohne Quelle | **umgesetzt (Welle 77)** |
 | [TB-013](#tb-013) | Text | [TA-3](#ta-3) | Die Welle fällt aus dem Zählraum-Schema | **umgesetzt (Welle 79)** |
 | [TB-014](#tb-014) | Verhalten | [TA-2](#ta-2) | „Aktuelle Welle" ist keine Eigenschaft des Repos | **umgesetzt (Welle 78)** — *Offene Wellen* derivativ, Beförderung entfällt |
+| [TB-015](#tb-015) | Verhalten | [TA-3](#ta-3) | Die Achse ist der Schreiber, nicht der Mensch | **umgesetzt (Welle 130)** — Populations-Prinzip, drei Vergabe-Formen mit Grenzen, Welle-als-Segment |
 
 ## Die sieben Änderungen
 
@@ -330,9 +331,9 @@ verschwindet.
 
 <a id="ta-3"></a>
 
-### TA-3 — Kennungs-Vergabe unter Nebenläufigkeit · **umgesetzt (Welle 79)** — Text-Korrekturen; die Schema-Frage bleibt Abwägung
+### TA-3 — Kennungs-Vergabe unter Nebenläufigkeit · **umgesetzt (Welle 79/130)** — Schema-Frage von TB-015 beantwortet
 
-**Deckt** [TB-009](#tb-009) · [TB-010](#tb-010) · [TB-013](#tb-013).
+**Deckt** [TB-009](#tb-009) · [TB-010](#tb-010) · [TB-013](#tb-013) · [TB-015](#tb-015).
 
 **Was fehlt.** §Vergabe beantwortet die Kollisionsfrage für einige Kennungen,
 nicht für alle — und eine seiner Zusagen hält nicht.
@@ -342,7 +343,7 @@ nicht für alle — und eine seiner Zusagen hält nicht.
 | Ort | Änderung |
 |---|---|
 | §Vergabe, Klassen-Aufzählung | `MR-<NNN>` aufnehmen und als **Hybrid** führen: Eintragsdatei still, Index-Zeile laut |
-| §Vergabe, Zählraum | die Welle beantworten — repo-weit dicht, **kein** Bereichssegment, weil sie Slices über Sub-Areas hinweg bündelt |
+| §Vergabe, Zählraum | die Welle beantworten — [TB-015](#tb-015): Namens-Identität statt Nummer, unabhängig von der Schreiberzahl |
 | §Vergabe, Ableitbarkeit | die Zusage einschränken: Der Zählraum ist Verzeichnis **plus offene Wellen plus offene PRs**; letztere sind lokal nicht auflistbar |
 
 **Optional, größer:** das Schema selbst. Die Abwägung dazu steht unten.
@@ -554,7 +555,7 @@ Kennungs-Schema, sondern eines in der Sichtbarkeit des Plans.
 | Modul 9 §Hard Rules | der bestehende „reiner `git mv`"-Satz bekommt den Zeitpunkt dazu |
 
 **Preis.** Schreibzugriff auf den Hauptzweig für einen inhaltslosen Commit. Das
-berührt [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+berührt [§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
 (*„braucht dafür weder eine Absprache noch einen Schreibzugriff auf den
 Hauptzweig"*) — dort geht es aber um das **Ableiten einer Nummer**, nicht um
 das **Beanspruchen einer Arbeit**. Die beiden Aussagen müssen im selben Zug
@@ -765,7 +766,7 @@ Bei einer Person fällt das nie auf, weil niemand neu dazukommt.
 ## TB-009 — MR steht in keiner der beiden Vergabe-Klassen
 
 **Was dastand** (behoben in Welle 79 — die Zitate unten sind der Zustand davor).
-[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
 teilt die Kennungen in zwei Klassen: die *laute* Ablage (`LH-*`, `SPEC-*`,
 `ARC-*` — viele in einer Datei, Doppelvergabe erzeugt einen Git-Konflikt) und
 die *stille* (*„ADR, Slice, Welle und Carveout sind **je eine eigene Datei**"*
@@ -844,7 +845,7 @@ beobachtbaren Zustand**: *„Der Zustand ist das Verzeichnis"*, und
 *„`ls docs/plan/planning/in-progress/` beantwortet »was läuft gerade«
 autoritativ"*. Ebenso die Vergabe: Die nächste Nummer sei *„lokal ableitbar … und braucht dafür weder eine Absprache noch einen
 **Schreibzugriff auf den Hauptzweig**"*
-([§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+([§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)).
 Und der Sichtungs-Schritt liest bei *jedem* Slice-Plan das Beobachtungs-Register
 ([Modul 5 §Zwei Schritte vor der Modus-Begründung](../kurs/de/02-planung/modul-05-planning-harness.md#zwei-schritte-vor-der-modus-begründung)).
 
@@ -909,7 +910,7 @@ nächste freie Nummer führt; sie ist in der Sammlung implizit. Damit ist ein
 Merge-Konflikt darauf nicht bloß unwahrscheinlich, sondern **unmöglich** — zwei
 Ansprüche erzeugen zwei verschiedene Dateien, die klaglos nebeneinander liegen.
 Für diese Klasse gibt es keinen lauten Ausgang, und genau deshalb existiert
-[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
 als eigener Mechanismus: Die Vergabe-Regel ist der Ersatz für einen Konflikt,
 der nie stattfinden kann.
 
@@ -929,7 +930,7 @@ Gemessen an `ai-harness-init` über 764 Commits:
 |---|---|---|---|
 | **keine Datei** — `slice-<NNN>` | „die höchste vergebene plus eins"; bezeichnet einen Sachverhalt, hat aber **keine Zeile**. Der Slice ist die **einzige Kennungs-Klasse ohne Index** — das Verzeichnis *ist* ihr Register, und ein Verzeichnis kollidiert nicht | **83 Vergaben, kein Serialisierer** | **hoch** — die größte stille Fläche des Korpus; ein Konflikt ist nicht selten, sondern **unmöglich**. Heute schützt nur die Vergabe-Regel; Optionen in [TA-3](#ta-3) |
 | **keine Datei** — `ADR-<NNNN>` · `MR-<NNN>` · `CO-<NNN>` | dieselbe Bauart, aber **jede hat einen Index**: die Eintragsdatei kollidiert still, die Index-Zeile laut | 19 · 24 · 2 | **mittel, halb laut** — zwei Ansprüche erzeugen zwei Dateien *und* zwei Index-Zeilen; letztere kollidieren, wenn sie benachbart landen. Genau diese Zwischenlage benennt [TB-009](#tb-009) |
-| **keine Datei** — `welle-<NN>` | dieselbe Bauart, ohne Index | 10, durch die Planner-Eröffnung in *einem* Kontext serialisiert | **niedrig** — Ganz-Wert mit praktisch keiner Nebenläufigkeit. Dass das Schema für sie trotzdem keine Antwort hat, ist [TB-013](#tb-013) |
+| **keine Datei** — `welle-<NN>` | dieselbe Bauart, ohne Index | 10, gemessen an einem Repo mit **einem** Schreiber | **niedrig in diesem Bestand** — und nur dort. Die Zahl belegt fehlende Nebenläufigkeit, nicht deren Unmöglichkeit: Dass die drei Eröffnungs-Schritte in *einem* Kontext laufen, sagt, dass es **keine Übergabe** gibt, nicht, dass es **einen Planner** gibt ([TB-015](#tb-015)). Bei mehreren Schreibern hat jeder seinen Planner-Kontext, und die Kennung liegt in derselben stillen Klasse wie der Slice. Dass das Schema für sie keine Antwort hat, ist [TB-013](#tb-013) |
 | `planning/in-progress/roadmap.md` | **zwei**: die Ordnung von *Nächste Wellen* (bezeichnet eine getroffene Entscheidung) · *Aktuelle Welle* — Singleton, **bezeichnet nichts** ([TB-014](#tb-014)) | 128 Änderungen — jede Welle, jede Umplanung | **hoch**; beim zweiten Wert unauflösbar. Entfällt mit der in [TB-014](#tb-014) benannten Auflösung, danach bleibt die Ordnung |
 | `planning/observations.md` | der `BEO`-Zähler; bezeichnet einen Sachverhalt | per Konvention **jede** Slice-Closure | **hoch**, aber ungemessen — dieser Konsument hat das Register nicht adoptiert. Betrifft die *Merge*-Mechanik, nicht das Zählen selbst (dafür siehe das gestrichene TB-002) |
 | `docs/plan/adr/README.md` | nur die Status-Spalte; bezeichnet einen Sachverhalt | 42 | mittel — die Zeilen selbst sind unabhängig, zwei Ablösungen derselben ADR mergen sauber |
@@ -1004,7 +1005,7 @@ sondern die Stelle, an der jene operativ werden:
 ## TB-013 — Die Welle fällt aus dem Zählraum-Schema
 
 **Was dastand** (behoben in Welle 79 — die Zitate unten sind der Zustand davor).
-[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
 zählt vier Artefakte zur stillen Klasse — *„ADR, Slice, **Welle** und Carveout
 sind je eine eigene Datei"* — und gibt eine Antwort: *„Für die Artefakte mit je
 eigener Datei ist der Zählraum die Sub-Area."* Das Beispiel dazu lautet
@@ -1120,6 +1121,50 @@ Risiko-Tabelle unter [TB-011](#tb-011) von *hoch* auf die bloße Ordnung von
 Die Welle wandert nach `done/`, das Closure-Log bekommt seine Zeile —
 **befördert wird niemand**.
 
+<a id="tb-015"></a>
+
+## TB-015 — Die Achse ist der Schreiber, nicht der Mensch
+
+**Was das Vokabular trennt.** Diese Datei misst Risiko als *Ganz-Wert ×
+nebenläufige Schreiber*;
+[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
+knüpfte die Vergabe-Form bisher an die Zahl der **Menschen**. Für einen
+Menschen, der mehrere Agenten nebenläufig in eigenen Zweigen arbeiten lässt,
+fallen beide Zählungen auseinander. §Vergabe ist umgestellt: Schreiber ist,
+was committet.
+
+**Der Kernsatz.** Segmentierung, Zuteilung und Vorabvergabe verkleinern die
+Population möglicher Kollidierender — keine davon macht eine Kollision
+hörbar. Hörbarkeit hängt allein an der Ablage: eigene Datei je Artefakt
+bleibt still, Segment hin oder her; eine geteilte Liste ist laut, sobald
+zwei Einträge sich nahekommen, ebenfalls unabhängig vom Segment. Auch
+Struktur-IDs (`LH-*`, `SPEC-*`, `ARC-*`) sind nicht ausgenommen: sicher nur,
+solange ihr Dokument flach bleibt — `lab/example` löst das strukturierte
+Lastenheft bereits mit `LH-FA-IDX-003` (Bereichskürzel).
+
+**Welle- und Slice-Nummern sind deshalb abgeschafft, nicht nur unter
+mehreren Schreibern eingeschränkt.** Eine Nummer trägt immer eine
+Vorbedingung — nur ein Ableiter, nur ein Zuteilender —, die sich lautlos
+verletzen lässt, sobald ein zweiter Schreiber dazukommt, egal ob geplant
+oder nicht ([`lab/team-sim`](../lab/team-sim/README.md) s24f–i: zwei Planner
+ziehen unabhängig dieselbe Nummer, der Merge bleibt still). Namens-Identität
+trägt unbedingt: verschiedene Absicht, verschiedener Name, kein Konflikt;
+gleiche Absicht, gleicher Name, add/add, korrekt laut (s24g/h). Der Name
+trägt das Präfix eines vorhandenen Ankers (`LH-*`, `ADR-*`, `CO-*`) für
+Traceability, sonst einen freien Slug; ein Slice, der während einer Welle
+entsteht, trägt die Welle als Namensraum-Präfix.
+
+**Die Vergabe ist nur die eine Hälfte.** Das Anlegen fasst daneben eine
+gemeinsame Liste an (*Offene Wellen*, ein §4) — zwei Schreiber mit
+verschiedenen, kollisionsfreien Namen kollidieren dort trotzdem. Schnitt:
+Planung serialisiert, Ausführung nebenläufig; wer die Welle schneidet,
+eröffnet sie und benennt ihre Slices in einem Vorgang.
+
+**Stand.** In §Vergabe eingearbeitet. Geprobt in
+[`lab/team-sim`](../lab/team-sim/README.md), Gruppe s24 (a–i, 9 Verdikte,
+72/72 · 0 KAPUTT). Offen bleibt, ob der Block *Offene Wellen* selbst
+entfallen kann — eigener Faden in [`roadmap.md`](roadmap.md).
+
 ## Reihenfolge und Abhängigkeiten
 
 **TA-1 zuerst** — es ist die billigste Änderung und Vorbedingung für drei
@@ -1146,7 +1191,7 @@ Textänderung: ein Zeitpunkt zu einer Regel, die es schon gibt.
 Team-Fall ausgelöst, sondern durch die zweite Person überhaupt.
 
 **Was für alle sieben gilt.** Die Bauform steht bereits im Korpus:
-[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)
+[§Vergabe](../kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
 hat die Mehr-Personen-Frage für Kennungen beantwortet, **ohne den
 Ein-Personen-Fall zu verschlechtern** — Default für einen Schreiber,
 deklarierte Variante für mehrere, Grenze offen benannt. Jede der sieben Änderungen

@@ -59,7 +59,7 @@ test: ## xUnit-Tests
 test-determinism: ## LH-QA-02: Determinismus-Case
 	$(call GATE,determinism-gate)
 
-coverage-gate: ## Gesamt-Coverage via coverlet (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
+coverage-gate: ## Gesamt-Coverage via coverlet (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-qualitaet geschlossen) -> 80 % via Nachfolge-ADR)
 # Zwei Integrationen, die sich ausschliessen: `--settings coverlet.runsettings`
 # ist die COLLECTOR-, `/p:Threshold` die MSBUILD-Integration — die Schwelle
 # wertet nur die MSBUILD-Seite aus. Beide zugleich gesetzt: es wird gemessen,

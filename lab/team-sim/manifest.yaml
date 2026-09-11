@@ -52,6 +52,13 @@ gruppen:
   # s23: ENTWURF der EINE Gate-Index (Welle 129). Autoritaet ist der Index, nicht
   # das Briefing; die Code-Span der Target-Zelle traegt den nackten Namen.
   s23: [s23a, s23b, s23c, s23e, s23d]
+  # s24: ENTWURF Zuteilung statt Ableitung (Welle 130). Nebenlaeufig wie s01-s11.
+  # s24a/s24b zeigen den Wechsel still -> laut, s24c die Grenze (git streitet
+  # ueber benachbarte Zeilen, nicht ueber Dateien), s24d die zweite Topologie:
+  # in EINER Arbeitskopie gibt es kein Zusammenfuehren und keinen lauten Ausgang.
+  # s24e/s24f trennen die beiden Hebel: mit Listen-Eintrag laut, ohne still —
+  # der Konflikt sitzt auf der Liste, die Doppelvergabe auf der Kennung.
+  s24: [s24a, s24b, s24c, s24d, s24e, s24f, s24g, s24h, s24i]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -66,3 +73,4 @@ laeufe:
   - { datum: 2026-09-06, image: v0.74.1, neu: [s21a, s21b], gegenstand: "Entwurf: Zitier-Form im einfrierenden Artefakt (Welle 125) — Baseline-Tag springt, Link-Form rot, Token-Form gruen", ergebnis: "54 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-06, image: v0.74.1, neu: [s22a, s22b, s22c, s22d], gegenstand: "Entwurf: Anforderung -> Beleg (Welle 127) — Waise faellt, ADR entlastet nicht, Slice entlastet, Bericht urteilt nicht", ergebnis: "58 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-08, image: v0.74.1, neu: [s23a, s23b, s23c, s23e, s23d], gegenstand: "Entwurf: der EINE Gate-Index (Welle 129) — Phantom im Index laut, Briefing-Tabelle entlastet nur unter Briefing-Autoritaet, Paar Aufruf-Argument/Link in der Code-Span, Ziel-Zustand still bei nachweislich scharfem Sensor", ergebnis: "63 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-09-08, image: v0.74.1, neu: [s24a, s24b, s24c, s24d, s24e, s24f, s24g, s24h, s24i], gegenstand: "Entwurf: Kennungs-Vergabe unter mehreren Schreibern (Welle 130) — Ablage entscheidet ueber laut/still, Register gegen Kennung getrennt, Namens-Identitaet in beiden Richtungen korrekt, und s24i zeigt: Zuteilung braucht eine singulaere Instanz — mehrere parallele Welle-Oeffner sind wieder isolierte Ableiter", ergebnis: "72 PASS, 0 FAIL, 0 KAPUTT" }

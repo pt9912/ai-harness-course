@@ -86,8 +86,8 @@ durchgereicht; die beiden `agent-*` nur im Root:
 
 **Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates` (keine Status-Spalte hier, siehe [Konventionen §`harness/README.md` als Einstiegspunkt](../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
 **Rote Gates:** Begründung im verlinkten `CO-<NNN>` (Bindung-Spalte), Modul 7.
-**Nicht behauptet** (geplant, nicht in Makefile): `make test-property` (Property-Based-Suite, slice-013, in-progress), `make sbom`, `make security-scan` (welle-4-betrieb).
-**Weder vorhanden noch in der Roadmap:** ein Image-Scan — anders als `make sbom` und `make security-scan`, die für `welle-4-betrieb` vorgemerkt sind.
+**Nicht behauptet** (geplant, nicht in Makefile): `make test-property` (Property-Based-Suite, slice-property-tests, in-progress), `make sbom`, `make security-scan` (welle-betrieb).
+**Weder vorhanden noch in der Roadmap:** ein Image-Scan — anders als `make sbom` und `make security-scan`, die für `welle-betrieb` vorgemerkt sind.
 
 **Nicht Teil von `ci`:** das Golden Set ([`sensors/replay.md`](sensors/replay.md) §Grenze).
 

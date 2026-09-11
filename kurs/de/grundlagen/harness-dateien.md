@@ -5,10 +5,10 @@
 ```
 spec/                       # Spec-Straten: Vertrag · Technik · Sicht
 docs/plan/adr/              # Architecture Decision Records
-docs/plan/planning/open/    # geplante, noch nicht gestartete Slices
-docs/plan/planning/next/    # priorisiert/eingeplant
-docs/plan/planning/in-progress/  # aktive Slices
-docs/plan/planning/done/    # abgeschlossene Slices
+docs/plan/planning/open/<slice-kennung>.md          # geplant, noch nicht gestartet
+docs/plan/planning/next/<slice-kennung>.md          # priorisiert/eingeplant
+docs/plan/planning/in-progress/<slice-kennung>.md   # aktiv
+docs/plan/planning/done/<slice-kennung>.md          # abgeschlossen — ein Slice, eine Datei, derselbe Name über den ganzen Lifecycle
 docs/plan/planning/<welle-id>.md            # offene Wellen, flach (Modul 6)
 docs/plan/planning/observations/            # Beobachtungs-Register: je Beobachtung ein Verzeichnis
 docs/plan/planning/reconciliation.md        # Reconciliation-Register: nur im Brownfield-Bootstrap
@@ -23,6 +23,10 @@ harness/sensors/            # ein Gate je Datei, sobald sein Vertrag mehr als
                             # einen Satz braucht; kein done/
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
+
+Welche Form `<welle-id>` und `<slice-kennung>` haben, legt
+[`source-precedence.md` §Vergabe](source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
+fest — hier steht nur, wo die Datei liegt, nicht, wie ihr Name entsteht.
 
 ## Template-Schichtung — was der Rumpf trägt und was der Kommentar
 
@@ -135,7 +139,7 @@ nicht die Ausnahme.
 | **Ersetzungs-Trümmer** | *„… und nicht in eine Fussnote: ein"*, gefolgt von einem neuen Satz | nirgends — eine Teilersetzung hat den Rest des alten Satzes stehen lassen |
 
 **Hard Rule.** *Ein Kommentar beschreibt, was da ist.* Wer Herkunft nennt,
-nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit welle-<NN>`
+nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit welle-<Kennung>`
 ([`traceability.md` §Herkunfts-Anker](traceability.md#herkunfts-anker-für-steering-loop-regeln)) —
 und nie als Absatz.
 
@@ -365,9 +369,9 @@ schreibt, koppelt an das, was bleibt. Drei Formen derselben Regel:
 
 - Ein Gate heißt `make <target>` als Token, nicht als Pfad auf seine
   Sensor-Datei.
-- Ein Slice heißt `slice-NNN`, nicht
-  `docs/plan/planning/in-progress/slice-NNN-….md` — das Verzeichnis ist sein
-  Zustand und wechselt
+- Ein Slice heißt `slice-<Kennung>`, nicht
+  `docs/plan/planning/in-progress/slice-<Kennung>.md` — das Verzeichnis ist
+  sein Zustand und wechselt
   ([Modul 5](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
 - Eine Stelle der vendored Baseline heißt Tag **und** Pfad in Inline-Code, nicht
   als Link. Der Vendoring-Pfad ist `<tag>`-gescopt, alte und neue Form liegen
@@ -463,7 +467,7 @@ Einzeldatei schon.
 
 **Das Kürzel der Sub-Area gehört in ihre Zeile.** Sobald Kennungen ein
 Bereichssegment tragen — `ADR-IDX-0004`, `slice-IDX-007`
-([§Vergabe](source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)) —,
+([§Vergabe](source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)) —,
 führt die Modus-Deklaration neben dem Namen eine **Kürzel-Spalte**: kurz,
 GROSS, ohne Leerzeichen. Sie ist die einzige Stelle, an der das Segment
 deklariert wird; der Name der Sub-Area taugt nicht dafür, weil er
@@ -488,7 +492,7 @@ unterschiedlich ab, entstehen zwei Pfade für dasselbe Phänomen, und es teilt
 sich still. Mit deklariertem Kürzel leiten beide denselben Pfad ab — die
 gleichzeitige Neuanlage wird ein lauter `git`-Konflikt statt eines stillen
 Merges. Ohne das Kürzel zählen zwei Schreiber in zwei Räumen, ohne dass etwas
-kollidiert ([§Vergabe](source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+kollidiert ([§Vergabe](source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)).
 
 Wichtig: `harness/conventions.md` dupliziert keinen Baseline-Text — sie
 verweist und ergänzt. Eine Kopie ginge gegen die Baseline in Drift,

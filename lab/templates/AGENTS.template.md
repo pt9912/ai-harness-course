@@ -171,12 +171,12 @@ als auflösbaren Anker, nicht die Chronik; das Drift-Log der Roadmap trägt nur
 Umplanungen, keine Schließungen und keine erreichten Meilensteine.
 
 **Begründung:** Die Abwägung gehört in die ADR, die Historie in `git`, die
-Herkunft in **ein** auflösbares Feld (`LH-*`, `ADR-*`, `· seit welle-<NN>`).
+Herkunft in **ein** auflösbares Feld (`LH-*`, `ADR-*`, `· seit welle-<Kennung>`).
 Was daneben steht, liest jeder Lauf mit und bezahlt es mit Kontext.
 
 <!--
 In emittierten Artefakten (ein Werkzeug erzeugt Repos) entfällt der
-Herkunfts-Anker: Die Slice-Nummer des Erzeugers existiert im erzeugten Repo
+Herkunfts-Anker: Die Slice-Kennung des Erzeugers existiert im erzeugten Repo
 nicht und löst ins Leere auf.
 -->
 

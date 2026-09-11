@@ -1,6 +1,6 @@
 {
-  "trace_id": "trace-sl-009-agent-run",
-  "slice.id": "slice-009",
+  "trace_id": "trace-sl-tie-break-determinismus-agent-run",
+  "slice.id": "slice-tie-break-determinismus",
   "requirement.refs": ["LH-QA-02", "LH-FA-IDX-003"],
   "adr.refs": ["ADR-0003", "ADR-0012"],
   "spans": [
@@ -17,7 +17,7 @@
       "agent.role": "Implementer",
       "name": "tool_call",
       "tool.name": "make verify",
-      "tool.arguments.redacted": {"SLICE": "slice-009"},
+      "tool.arguments.redacted": {"SLICE": "slice-tie-break-determinismus"},
       "tool.result.status": "ok",
       "duration_ms": 310,
       "tokens": {"input": 950, "output": 120},
@@ -50,7 +50,7 @@
       "agent.role": "Verifier",
       "name": "dod_check",
       "tool.name": "make verify",
-      "tool.arguments.redacted": {"SLICE": "slice-009"},
+      "tool.arguments.redacted": {"SLICE": "slice-tie-break-determinismus"},
       "tool.result.status": "ok",
       "duration_ms": 290,
       "tokens": {"input": 820, "output": 90},

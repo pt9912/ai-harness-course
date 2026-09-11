@@ -6,10 +6,10 @@
 ```
 spec/                       # Spec-Straten: Vertrag · Technik · Sicht
 docs/plan/adr/              # Architecture Decision Records
-docs/plan/planning/open/    # geplante, noch nicht gestartete Slices
-docs/plan/planning/next/    # priorisiert/eingeplant
-docs/plan/planning/in-progress/  # aktive Slices
-docs/plan/planning/done/    # abgeschlossene Slices
+docs/plan/planning/open/<slice-kennung>.md          # geplant, noch nicht gestartet
+docs/plan/planning/next/<slice-kennung>.md          # priorisiert/eingeplant
+docs/plan/planning/in-progress/<slice-kennung>.md   # aktiv
+docs/plan/planning/done/<slice-kennung>.md          # abgeschlossen — ein Slice, eine Datei, derselbe Name über den ganzen Lifecycle
 docs/plan/planning/<welle-id>.md            # offene Wellen, flach (Modul 6)
 docs/plan/planning/observations/            # Beobachtungs-Register: je Beobachtung ein Verzeichnis
 docs/plan/planning/reconciliation.md        # Reconciliation-Register: nur im Brownfield-Bootstrap
@@ -24,6 +24,10 @@ harness/sensors/            # ein Gate je Datei, sobald sein Vertrag mehr als
                             # einen Satz braucht; kein done/
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
+
+Welche Form `<welle-id>` und `<slice-kennung>` haben, legt
+[`grundlagen-source-precedence.md` §Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
+fest — hier steht nur, wo die Datei liegt, nicht, wie ihr Name entsteht.
 
 ### Template-Schichtung — was der Rumpf trägt und was der Kommentar
 
@@ -100,7 +104,7 @@ ist, sondern was er zu tragen hat.
   ist entschieden, und die Entscheidung steht in der ADR. Die Probe dafür ist
   die Zeitrichtung — zeigt der Konjunktiv nach vorn oder zurück?
 - **Hard Rule:** *Ein Kommentar beschreibt, was da ist.* Wer Herkunft nennt,
-  nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit welle-<NN>`
+  nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit welle-<Kennung>`
   ([`grundlagen-traceability.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker))
   — und nie als Absatz.
 - **Dieselbe Regel für Zustandsfelder.** Ein Feld, das einen *Zustand* trägt —
@@ -319,8 +323,8 @@ schreibt, koppelt an das, was bleibt. Drei Formen derselben Regel:
 
 - Ein Gate heißt `make <target>` als Token, nicht als Pfad auf seine
   Sensor-Datei.
-- Ein Slice heißt `slice-NNN`, nicht
-  `docs/plan/planning/in-progress/slice-NNN-….md` — das Verzeichnis ist sein
+- Ein Slice heißt `slice-<Kennung>`, nicht
+  `docs/plan/planning/in-progress/slice-<Kennung>.md` — das Verzeichnis ist sein
   Zustand und wechselt
   ([`modul-05-planning-harness.md` §Lifecycle als State Machine](modul-05-planning-harness.md#lifecycle-als-state-machine)).
 - Eine Stelle der vendored Baseline heißt Tag **und** Pfad in Inline-Code, nicht
@@ -411,7 +415,7 @@ Einzeldatei schon.
 
 **Das Kürzel der Sub-Area gehört in ihre Zeile.** Sobald Kennungen ein
 Bereichssegment tragen
-([§Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)),
+([§Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)),
 führt die Modus-Deklaration neben dem Namen eine **Kürzel-Spalte**: kurz,
 GROSS, ohne Leerzeichen. Sie ist die einzige Stelle, an der das Segment
 deklariert wird; der Name der Sub-Area taugt nicht dafür, weil er
@@ -425,7 +429,7 @@ Segment verlangte. Seit die Kennung einer Beobachtung der Pfad
 mit Segment; die Bedingung ist erfüllt, nicht aufgehoben. Ein Prosa-Name taugt
 im Pfad nicht — er darf umformuliert werden, ein Pfad nicht; ohne deklariertes
 Kürzel zählen zwei Schreiber in zwei Räumen, ohne dass etwas kollidiert
-([§Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+([§Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)).
 
 Wichtig: `harness/conventions.md` dupliziert keinen Baseline-Text — sie
 verweist und ergänzt. Eine Kopie ginge gegen die Baseline in Drift,

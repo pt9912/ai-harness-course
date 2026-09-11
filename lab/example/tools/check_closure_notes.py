@@ -48,7 +48,7 @@ def find_closure_section(text: str) -> str | None:
     PLANUNG geschrieben und steht als erster Treffer im Weg — ohne diese
     Unterscheidung ist der Gate gruen, auch wenn die Closure-Notiz leer
     bleibt. Ein Welle-PLAN in
-    done/ (welle-<NN>-<titel>.md) hat aus demselben Grund einen
+    done/ (<welle-id>.md) hat aus demselben Grund einen
     "3. Closure-Trigger", der hier nicht gemeint ist."""
     headings = [(m.start(), m.end(), len(m.group(1)), m.group(2)) for m in HEADING_RE.finditer(text)]
     for i, (start, end, level, title) in enumerate(headings):

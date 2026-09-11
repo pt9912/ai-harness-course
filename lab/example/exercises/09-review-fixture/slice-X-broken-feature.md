@@ -8,7 +8,7 @@
 > Fehler dazu, den die Übung nicht meint. Der fehlende Abgrenzungs-Abschnitt in
 > §1 ist deshalb keiner der drei.
 
-**Welle:** welle-2-qualitaet
+**Welle:** welle-qualitaet
 
 **Bezug:** [LH-QA-01](../../spec/lastenheft.md#lh-qa-01--performance) (Performance)
 
@@ -36,7 +36,7 @@ ihren Ergebnissen direkt im Service-Layer.
 
 ## 4. Trigger
 
-Sofort. Lasttests in welle-1 zeigten 50 ms Reserve im p95-Budget; wir
+Sofort. Lasttests in welle-mvp zeigten 50 ms Reserve im p95-Budget; wir
 nutzen die für UX-Spürbarkeit.
 
 ## 5. Closure-Trigger

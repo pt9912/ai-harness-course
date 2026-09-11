@@ -1,10 +1,10 @@
 # Regelwerk-Extrakt — Schnittregel und Prüfung
 
-**Stand:** 2026-08-16.
+**Stand:** 2026-09-08 (Operation 6 ergänzt, Welle 130).
 
 Wie aus `kurs/de` der Betriebsregelwerk-Spiegel unter `lab/regelwerk/` entsteht,
 woran sich das Ergebnis prüfen lässt und was daran offen ist. Die Regel steht
-**positiv**: Erlaubt sind [fünf Operationen](#teil-2--was-der-spiegel-tun-darf),
+**positiv**: Erlaubt sind [sechs Operationen](#teil-2--was-der-spiegel-tun-darf),
 alles andere ist ein Befund. **Leser ist, wer
 den Spiegel pflegt** — nicht der Lernende und nicht der Adopter. Das *Was* steht
 im [README](../README.md#betriebsregelwerk): didaktikfreier Extrakt in
@@ -43,7 +43,7 @@ Der Kern in einem Satz:
 > **Der Spiegel formuliert nicht.** Er **wählt aus**, **setzt zusammen**,
 > **bindet an** und **benennt**.
 
-Daraus fünf Operationen:
+Daraus sechs Operationen — die sechste erst seit Welle 130, mit eigener Bedingung:
 
 | | Operation | erlaubt ist |
 |---|---|---|
@@ -52,10 +52,21 @@ Daraus fünf Operationen:
 | **3** | **Anbinden** | Verweise samt ihrer einleitenden Wörter umformen (*„siehe X"* → *„(X)"*), und ein Pronomen auflösen, dessen Bezug weggefallen ist (*„sie"* → *„die Regel"*) |
 | **4** | **Benennen** | Vorspänne, die eine Aufzählung, Tabelle oder Sektion **benennen** (*„Drei legitime Verdikte."*). Probe: die [Weglass-Probe](#teil-1--was-operativ-ist) rückwärts — ändert der Vorspann einen Ausgang, ist er Aussage und unzulässig |
 | **5** | **Aussageform** | eine didaktische Frage, die eine operative Aussage enthält, in diese Aussage überführen (*„Und im Repo ohne Wellen-Betrieb?"* → *„Im Repo ohne Wellen-Betrieb …"*) |
+| **6** | **Verdichten** | mehrere operative Aussagen zu einer neuen, kürzeren Formulierung zusammenziehen — **nur** wenn Kontext-Kosten es verlangen (der Spiegel ist Agenten-Kontext, geladen bei jedem Lauf; Modul 9 §Kontext-Verdichtung). Bedingung: keine Aussage geht verloren, nur Redundanz, Begründung und Beleg fallen. Wortlaut ist danach **frei**, Inhalt **gebunden** — die Umkehrung von Operation 1–5 |
 
 **Was damit ausgeschlossen ist**, ohne dass es einzeln aufgezählt werden müsste:
-Ersetzen, Umstellen, Verallgemeinern (`slice-019` → *„Slices"*), Verdichten
-eines bleibenden Satzes, und jede Aussage, die die Quelle nicht macht.
+Ersetzen, Umstellen, Verallgemeinern (`slice-019` → *„Slices"*) außerhalb von
+Operation 6, und jede Aussage, die die Quelle nicht macht — auch verdichtet
+bleibt der **Inhalt** an die Quelle gebunden, nur der Wortlaut nicht.
+
+**Operation 6 gibt die automatische Prüfbarkeit auf, bewusst.** Probe A
+(Teilfolge) und Probe B (Wortdeckung) setzen beide voraus, dass der Spiegel
+nicht formuliert; ein verdichteter Absatz besteht keine von beiden, weil er
+neue Sätze trägt. Für Abschnitte, die Operation 6 nutzen, bleibt nur die
+manuelle Probe: Jede Aussage der Quelle muss sich im verdichteten Text
+wiederfinden, keine neue darf hinzukommen — geprüft beim Verdichten selbst,
+nicht danach automatisch. Das ist der Preis; er wird nur gezahlt, wo der
+Kontext-Gewinn ihn aufwiegt.
 
 **Auch die Form zählt, nicht nur der Wortlaut.** Zellen ausrichten, eine Liste
 zu Fließtext fügen, eine Überschrift umstufen — nichts davon ändert ein Wort,
@@ -245,7 +256,7 @@ positive Fassung macht daraus einen Befund, bis jemand die Liste erweitert.
 ## Offen
 
 - Die **63 Kandidaten-Absätze** der Altbestands-Schicht durchgehen — nach
-  Dateien, nicht nach Liste, mit den fünf Operationen als Maßstab. Das ist
+  Dateien, nicht nach Liste, mit den sechs Operationen als Maßstab. Das ist
   ein eigenes Vorhaben in `modul-12`/`modul-13`-Größe, kein Nachmittag.
 - Einen dauerhaften Sensor als **Change Request an den Doku-Prüfer**
   formulieren, sobald die Altbestands-Schicht abgetragen ist — vorher liefe

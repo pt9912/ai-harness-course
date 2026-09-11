@@ -41,8 +41,8 @@ Sensoren und ist deshalb per `constructs`-Regel verboten.
 
 ### C-3 — Stable-Sort plus Tie-Break
 
-Aus `../AGENTS.md` §2.7 plus slice-009 (siehe
-[`../docs/plan/planning/done/slice-009-tie-break-determinismus.md`](../docs/plan/planning/done/slice-009-tie-break-determinismus.md)):
+Aus `../AGENTS.md` §2.7 plus slice-tie-break-determinismus (siehe
+[`../docs/plan/planning/done/slice-tie-break-determinismus.md`](../docs/plan/planning/done/slice-tie-break-determinismus.md)):
 **`std::sort` ohne expliziten Tie-Break ist verboten** (instabil →
 nicht-deterministische Reihenfolge bei gleichem Score). Verwende
 `std::stable_sort` mit explizitem Vergleich nach `(doc_path,
@@ -63,4 +63,4 @@ Vor der `make test`-Erfolgsmeldung muss der Implementer prüfen:
 - [ ] `make lint` grün (clang-tidy + suppression-gate).
 - [ ] `make arch-check` grün.
 - [ ] `make coverage-gate` grün (oder Carveout dokumentiert).
-- [ ] Spec-Bezug in Test-Namen (`LH-FA-02 Boundary …`, `slice-009 TieBreak`).
+- [ ] Spec-Bezug in Test-Namen (`LH-FA-02 Boundary …`, `slice-tie-break-determinismus TieBreak`).

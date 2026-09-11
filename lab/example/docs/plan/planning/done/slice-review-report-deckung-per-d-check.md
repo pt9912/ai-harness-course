@@ -41,7 +41,7 @@ Dogfooding statt Behauptung.
       Befunde): reiner Doku-/Config-Slice, kein Sprachskelett berührt, das
       per-Sprach-`make gates COURSE_LANG=…` etwas prüfen würde.
 - [x] Review durchgeführt, Report unter `docs/reviews/` liegt vor
-      (`docs/reviews/2026-09-05-slice-026.md`, generisches
+      (`docs/reviews/2026-09-05-slice-review-report-deckung-per-d-check.md`, generisches
       Klassifikationsschema aus `lab/templates/.harness/skills/reviewer.template.md`
       — `lab/example` führt noch kein ausgefülltes `.harness/skills/reviewer.md`)
       — Rollenwechsel nach Schritt 8 des Minimal Agent Workflow (`AGENTS.md`
@@ -55,10 +55,10 @@ Dogfooding statt Behauptung.
 - [ ] Reconciliation-Register: entfällt — kein Inventur-Fund, dieser Slice
       löst keinen auf.
 - [x] Beobachtungs-Register (`../observations/`) fortgeschrieben —
-      `BEO-TOOLS/d-check-yml-sub-area-unklar/`, Beleg `evidence/slice-026.md`.
+      `BEO-TOOLS/d-check-yml-sub-area-unklar/`, Beleg `evidence/slice-review-report-deckung-per-d-check.md`.
 - [x] Jedes Risiko aus §6 trägt einen Ausgang.
 - [ ] Die drei Paarungen — dieses Repo führt Wellen-Betrieb
-      (`welle-2-qualitaet` läuft); geprüft von deren Closure, auch für
+      (`welle-qualitaet` läuft); geprüft von deren Closure, auch für
       diesen wellenlosen Slice.
 
 ## 3. Plan (vor Code)
@@ -132,21 +132,21 @@ Welle-2-Closure. -->
   gelöst, keine Regel geschärft (kein wiederkehrendes Muster bislang — bei
   3× wiederkehrend wäre die Report-Vorlage selbst der Ort).
 - **Beobachtungs-Register (`../observations/`):** `BEO-TOOLS/
-  d-check-yml-sub-area-unklar/` neu angelegt, Beleg `evidence/slice-026.md`
+  d-check-yml-sub-area-unklar/` neu angelegt, Beleg `evidence/slice-review-report-deckung-per-d-check.md`
   (Fund F-3 des Reviews: `.d-check.yml` ist weder unter `Verifikation` noch
   unter `Sensor-Werkzeuge` in `harness/conventions.md` explizit abgedeckt).
 - **Folge-Slices:** keine — die offene Sub-Area-Zuordnung wartet auf 3×
   im Register, bevor sie einen eigenen Slice rechtfertigt (Modul 6
   §Beobachtungs-Register).
 - **Risiken aus §6:** beide mit Ausgang — siehe §6.
-- **Drei Paarungen:** wird von der `welle-2-qualitaet`-Closure geprüft
+- **Drei Paarungen:** wird von der `welle-qualitaet`-Closure geprüft
   (Repo mit Wellen-Betrieb, auch für Slices ohne Wellen-Zugehörigkeit).
 
 ## 8. Sub-Area-Modus-Begründung
 
 **Umfang.** `harness/README.md` liegt eindeutig unter `Konventionen &
 Harness-Doku` (**Greenfield, 3/3**). `.d-check.yml` klassifiziert dieser
-Slice — wie schon `slice-025` — als `Verifikation`; `harness/conventions.md`
+Slice — wie schon `slice-wellen-invariante-per-d-check` — als `Verifikation`; `harness/conventions.md`
 deckt die Datei dort aber nicht explizit ab (auch nicht unter
 `Sensor-Werkzeuge`) — siehe die neue Beobachtung unten. Beide Kandidaten
 sind ohnehin **Greenfield**, die praktische Einordnung (Modus-Begründungs-

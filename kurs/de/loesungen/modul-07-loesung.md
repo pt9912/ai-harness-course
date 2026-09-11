@@ -113,7 +113,7 @@ Skizze entlang der Schablone aus Worked Example B:
   vor Welle-Closure; Architect entscheidet bei Permanenz über die
   ADR-Überführung; Implementer führt `git mv` und Config-Updates aus.
 - **Belegartefakt:** die Audit-Bericht-Tabelle in
-  `done/welle-<NN>-results.md`.
+  `done/welle-<Kennung>-results.md`.
 
 **Die drei Status-Übergänge**, die der Slice möglich machen muss:
 *aufgelöst* (Trigger eingetreten → `done/`), *permanent* (Trigger
@@ -175,7 +175,7 @@ eigene Carveouts, eigene Welle einsetzen. Beispiel-Instanz für eine
 Welle 3:
 
 ```markdown
-# slice-CO-AUDIT-welle-3: Carveout-Audit vor Welle-3-Closure
+# slice-CO-AUDIT: Carveout-Audit vor Wellen-Closure
 
 **DoD:**
 - Jeder aktive Carveout in `docs/plan/carveouts/` hat ein aktuelles
@@ -184,7 +184,7 @@ Welle 3:
   verschoben.
 - Jeder Carveout, der seit > 2 Wellen "aktiv" ist, wurde explizit
   als weiter-gültig bestätigt oder in eine ADR überführt.
-- Audit-Bericht als Closure-Notiz in `done/welle-3-results.md`.
+- Audit-Bericht als Closure-Notiz in `done/<welle-id>-results.md`.
 
 **Rollen:** Planner identifiziert · Architect entscheidet bei
 Permanenz · Implementer führt `git mv`/Config-Updates aus.
@@ -198,7 +198,7 @@ Einträge statt der WE-B-Beispiele):
 
 | Carveout | Status vorher | Status nachher | Aktion |
 |---|---|---|---|
-| CO-005 (Lock-File-Pin) | aktiv, Trigger "Folge-Slice slice-018 done" | aufgelöst | git mv nach `done/`; Pin entfernt |
+| CO-005 (Lock-File-Pin) | aktiv, Trigger "Folge-Slice slice-lock-file-pin-upgrade done" | aufgelöst | git mv nach `done/`; Pin entfernt |
 | CO-009 (Latenz-Schwelle) | aktiv, Trigger "100k-Korpus verfügbar" | aktiv, geprüft | Datum 2026-07-02 nachgetragen |
 | CO-011 (Mock-Auth im Devmode) | aktiv seit Welle 1 | permanent | überführt in ADR-0016 |
 ```

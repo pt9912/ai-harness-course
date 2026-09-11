@@ -51,7 +51,7 @@ Adaptions-Änderung — Append-only schützt die *Aussage*, nicht die Nachpflege
 - **Adaption:** *Keine inhaltlichen Adaptionen ggü. Baseline-Default
   für Verzeichniskonvention, Lifecycle-Regeln, Carveout-Disziplin,
   ID-Schema (`LH-FA-*`, `LH-QA-*`, `SPEC-<NNN>`, `ARC-<NNN>`,
-  `ADR-<NNNN>`, `CO-<NNN>`, `slice-<NNN>`, `MR-<NNN>`, `BEO-<KUERZEL>/<slug>`).*
+  `ADR-<NNNN>`, `CO-<NNN>`, `slice-<Kennung>`, `MR-<NNN>`, `BEO-<KUERZEL>/<slug>`).*
 - **ID-Schema-Deklaration:** `LH-*` läuft zweiformig. Bis Lastenheft v0.3.x
   dicht gezählt (`LH-FA-01..03`, `LH-QA-01..04`); **ab v0.4.0 tragen neue
   funktionale Anforderungen ein Bereichskürzel** (`LH-FA-<BEREICH>-<NNN>`,

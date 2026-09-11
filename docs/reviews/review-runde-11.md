@@ -754,7 +754,7 @@ kalibrieren statt zu raten. Das ist ein Slice.
 | Manifest | drei Angaben berichtigt; `verification` mit `# CO-002` als *deklariert, nicht durchgesetzt* markiert |
 | `Makefile` | Target-Beschreibung und Ausgabe nennen die Grenze: *„Struktur geprüft, kein Lauf ausgeführt (CO-002)"* |
 | [`CO-002`](../../lab/example/docs/plan/carveouts/CO-002-replay-verifikation.md) | Carveout mit Auflösungs-Trigger und Folge-Slice |
-| [`slice-015`](../../lab/example/docs/plan/planning/open/slice-015-replay-runner.md) | Korpus · Runner · Kalibrierung · zwei Break-Tests in der DoD |
+| [`slice-015`](../../lab/example/docs/plan/planning/open/slice-replay-runner.md) | Korpus · Runner · Kalibrierung · zwei Break-Tests in der DoD |
 
 Der `verification`-Block bleibt stehen: Modul 12 lehrt ihn als Pflichtinhalt
 eines Replay-Manifests. Falsch war nie der Block, sondern die Behauptung, er

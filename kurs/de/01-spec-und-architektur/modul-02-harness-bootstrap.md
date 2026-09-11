@@ -729,7 +729,7 @@ das dieselbe Form hat: eine stehende Datei mit einer Zeile je Fund
 
 **Kennungen sind `RC-<NNN>`**, fortlaufend je Datei, ohne Bereichssegment — die
 Sub-Area steht als eigene Spalte, und alle Zeilen liegen in *einer* Datei
-([§Vergabe](../grundlagen/source-precedence.md#vergabe-woher-die-nächste-nummer-kommt)).
+([§Vergabe](../grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)).
 
 **Drei Klassen, aus Schritt 8 — sie bestimmen, was in der Spalte *Auflösung* steht:**
 

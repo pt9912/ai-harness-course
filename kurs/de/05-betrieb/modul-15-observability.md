@@ -30,7 +30,7 @@ Fünf neue Begriffe — Volldefinitionen in
 
 ## Engage
 
-Buchhaltung fragt: *"Was hat der Slice slice-024 gekostet?"* Du weißt:
+Buchhaltung fragt: *"Was hat der Slice slice-ranking-drift gekostet?"* Du weißt:
 es waren Modell-X-Tokens, aber wie viele und in welcher Verteilung über
 die acht Tool-Calls? Wenn du nicht antworten kannst, bist du in einer
 Klasse von KI-Projekten, die spätestens beim zweiten Kostenreport gestoppt
@@ -51,7 +51,7 @@ Nach diesem Modul kannst du:
 ## Lab-Bezug
 
 * [`../../../lab/example/otel/`](../../../lab/example/otel/) — reduziertes Trace-Fixture
-* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make trace RUN=sl-009-agent-run`
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make trace RUN=sl-tie-break-determinismus-agent-run`
 
 ## Lab-Grenze
 
@@ -61,7 +61,7 @@ verlangt — einen Trace *lesen*, Token *attribuieren*, ein Span-Schema
 *entwerfen* —, und es fehlt ihm die Ebene, die ein echter Emissions-Pfad
 mitbringt. Beides gehört benannt.
 
-**Was das Fixture ist:** ein **Slice**-Trace. Ein Trace über `slice-009`, dessen
+**Was das Fixture ist:** ein **Slice**-Trace. Ein Trace über `slice-tie-break-determinismus`, dessen
 Spans je ein `agent.role` tragen. Deshalb enthält *ein* Trace vier Rollen — nicht
 weil ein Kontext vier Rollen spielte, sondern weil der Trace den Slice umspannt
 und nicht den Lauf.
@@ -149,7 +149,7 @@ es passiert ist; du weißt nicht, *was* passiert ist.
 
 > **Wenn du End-to-End-Traces in deinem Repo bis zur Anforderungs-ID rückverfolgen kannst, springe zu [§Übungen](#übungen).** Die sechs Schritte sind die Schablone für den ersten oder zweiten Fall — wer die Kette beherrscht, gewinnt durch erneutes Mitlesen wenig (Expertise-Reversal). Übung 3 (End-to-End-Trace bis LH-ID) setzt das Worked Example sofort in die eigene Repo-Realität.
 
-**Ausgangs-Span:** Du öffnest den Trace zu `sl-009-agent-run`. Der
+**Ausgangs-Span:** Du öffnest den Trace zu `sl-tie-break-determinismus-agent-run`. Der
 teuerste Span trägt:
 
 ```json
@@ -168,14 +168,14 @@ teuerste Span trägt:
 ```
 
 **Schritt 1 — Slice-ID aus dem Trace lesen.**
-Der Trace-Header trägt `slice.id = slice-009` (Lab-Schreibweise mit
+Der Trace-Header trägt `slice.id = slice-tie-break-determinismus` (Lab-Schreibweise mit
 Bindestrich) und `requirement.refs = ["LH-QA-02", "LH-FA-IDX-003"]`.
 Innerhalb des Spans selbst hängt der teure `writer.write_index`-Call
 zusätzlich an `requirement.id = LH-FA-IDX-003` — der direkte Anker
 zur konkreten Anforderung.
 
 **Schritt 2 — Slice-Datei finden.**
-[`docs/plan/planning/done/slice-009-tie-break-determinismus.md`](../../../lab/example/docs/plan/planning/done/slice-009-tie-break-determinismus.md).
+[`docs/plan/planning/done/slice-tie-break-determinismus.md`](../../../lab/example/docs/plan/planning/done/slice-tie-break-determinismus.md).
 Die Lab-Datei trägt keine YAML-Frontmatter, sondern eine Klartext-
 Bezug-Zeile:
 ```markdown
@@ -216,7 +216,7 @@ Lastenheft-Anforderung mit Akzeptanzkriterien.
 **Schritt 5 — Make-Target-Kommentar gegenprüfen.**
 ADR-0012 §Fitness Function definiert die maschinelle Prüfung:
 Architekturtest pro Sprache erzwingt die `rename`-Sequenz im
-Writer-Code; Property-Test (slice-013) vergleicht zwei aufeinander
+Writer-Code; Property-Test (slice-property-tests) vergleicht zwei aufeinander
 folgende `writer.write_index`-Hashes. Damit ist die Kette **auch
 maschinell prüfbar**: ein Commit, der den `rename`-Aufruf entfernt,
 würde `make arch-check` rot machen
@@ -225,9 +225,9 @@ würde `make arch-check` rot machen
 **Schritt 6 — Bruchpunkt benennen.**
 Vollständige Kette:
 ```
-trace.slice.id            →  slice-009
+trace.slice.id            →  slice-tie-break-determinismus
 span.requirement.id       →  LH-FA-IDX-003
-                          →  done/slice-009-tie-break-determinismus.md (Bezug-Zeile)
+                          →  done/slice-tie-break-determinismus.md (Bezug-Zeile)
                           →  ADR-0012 (Bezug: LH-FA-IDX-003)
                           →  LH-FA-IDX-003 (Akzeptanzkriterien)
                           ↩  ADR-0012 §Fitness Function prüft Architekturregel
@@ -244,7 +244,7 @@ oder einen Doku-Konsistenz-Agenten die Bezug-Zeile prüfen lassen
 > Lesepfad über YAML-Frontmatter abbilden:
 > ```yaml
 > ---
-> id: slice-009
+> id: slice-tie-break-determinismus
 > adr_refs: [ADR-0012]
 > lastenheft_refs: [LH-FA-IDX-003]
 > ---
@@ -257,7 +257,7 @@ oder einen Doku-Konsistenz-Agenten die Bezug-Zeile prüfen lassen
 > Slice-Seite wählt, ist Repo-spezifisch.
 
 Sechs Schritte, eine durchgängige Traceability. Vergleich im Lab:
-[`../../../lab/example/otel/sl-009-agent-run.trace.json`](../../../lab/example/otel/sl-009-agent-run.trace.json)
+[`../../../lab/example/otel/sl-tie-break-determinismus-agent-run.trace.json`](../../../lab/example/otel/sl-tie-break-determinismus-agent-run.trace.json)
 (Span `impl-2` ist der `writer.write_index`-Call mit `requirement.id`
 und `adr.id`).
 
@@ -342,7 +342,7 @@ und `adr.id`).
 
 * **(Analysieren — aktiviert LZ 3)** *Fehlerfall: ein Span-Attribut
   fehlt.* Kopiere das Trace-Fixture
-  [`../../../lab/example/otel/sl-009-agent-run.trace.json`](../../../lab/example/otel/sl-009-agent-run.trace.json)
+  [`../../../lab/example/otel/sl-tie-break-determinismus-agent-run.trace.json`](../../../lab/example/otel/sl-tie-break-determinismus-agent-run.trace.json)
   (das Original bleibt unverändert — die Kopie ist der Fehlerfall) und
   entferne in der Kopie das `tokens`-Feld des Spans `impl-2` *oder*
   fälsche das `slice.id`-Feld im Trace-Kopf. Diagnostiziere dann:
@@ -355,11 +355,11 @@ und `adr.id`).
 * **End-to-End-Trace bis LH-ID** — aktiviert die Abschluss-Achse
   *Auditierbarkeit/exzellent* (siehe
   [`../abschluss/abschlussprojekt.md`](../abschluss/abschlussprojekt.md#achse-auditierbarkeit)).
-  Nimm einen Span aus `make trace RUN=sl-009-agent-run`. Zeige
+  Nimm einen Span aus `make trace RUN=sl-tie-break-determinismus-agent-run`. Zeige
   **schriftlich** die vollständige Kette:
 
   ```
-  span.attributes.slice.id  →  slice-<NNN>
+  span.attributes.slice.id  →  slice-<Kennung>
                             →  Slice-Datei in docs/plan/planning/done/<NNN>.md
                             →  zugehöriger ADR-<NNNN>
                             →  Lastenheft-ID LH-FA-<KÜRZEL>-<NNN>
@@ -383,7 +383,7 @@ und `adr.id`).
 
 ```bash
 cd lab/example
-make trace RUN=sl-009-agent-run
+make trace RUN=sl-tie-break-determinismus-agent-run
 ```
 
 Erwartete Beobachtung: Das Fixture enthält Rollen-, Slice-, Tool- und

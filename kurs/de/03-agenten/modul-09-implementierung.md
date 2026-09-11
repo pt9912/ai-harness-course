@@ -59,7 +59,7 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make agent-implement SLICE=slice-009`
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make agent-implement SLICE=slice-tie-break-determinismus`
 * [`../../../lab/example/exercises/08-implementation.md`](../../../lab/example/exercises/08-implementation.md)
 * `AGENTS.md` — Vorlage:
   [`AGENTS.template.md`](../../../lab/templates/AGENTS.template.md)
@@ -149,7 +149,7 @@ gelesen.
 Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 *Falsch/Richtig*-Beispiele **und** eine *technische Begründung*.
 Entstand sie aus dem Steering Loop und nicht aus einer Anforderung, trägt
-sie zusätzlich den Herkunfts-Anker `(seit welle-<NN>)` — ohne Welle `(seit slice-<NNN>)`
+sie zusätzlich den Herkunfts-Anker `(seit welle-<Kennung>)` — ohne Welle `(seit slice-<Kennung>)`
 ([`traceability.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln)).
 Nicht jede Hard Rule in `AGENTS.md` ist repo-spezifisch: *„Architektur ist
 sprach- und meilensteinfrei"* etwa **folgt** aus dem Sicht-Stratum und der
@@ -378,7 +378,7 @@ gehört in den nächsten Steering-Loop-Eintrag.
 
 Vergleich:
 [`../../../lab/example/Makefile`](../../../lab/example/Makefile) Target
-`make agent-implement SLICE=slice-009` zeigt das Kontextpaket aus
+`make agent-implement SLICE=slice-tie-break-determinismus` zeigt das Kontextpaket aus
 Schritten 1–3, bevor Schritt 4 anfängt.
 
 ## Übungen
@@ -391,7 +391,7 @@ Schritten 1–3, bevor Schritt 4 anfängt.
 
 ```bash
 cd lab/example
-make agent-implement SLICE=slice-009
+make agent-implement SLICE=slice-tie-break-determinismus
 ```
 
 Erwartete Beobachtung: Das Target erzeugt keinen Code. Es zeigt das

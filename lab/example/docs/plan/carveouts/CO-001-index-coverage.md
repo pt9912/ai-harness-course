@@ -11,7 +11,7 @@
 `java/.../docsearch/index/`, `kotlin/.../docsearch/index/`,
 `csharp/src/DocSearch/Index/`, `cpp/src/hexagon/index/`.
 
-**Folge-Slice:** [`slice-013-property-tests.md`](../planning/in-progress/slice-013-property-tests.md)
+**Folge-Slice:** [`slice-property-tests.md`](../planning/in-progress/slice-property-tests.md)
 
 ---
 
@@ -22,7 +22,7 @@ schärfer als die Gesamt-Coverage (70 %, ab M2 80 %). Begründet in
 [ADR-0013](../adr/0013-coverage-schwellen.md); dieser Carveout setzt die
 Schwelle nicht, er nimmt einen Layer davon aus. Der Index-Layer enthält Binär-Format-Parser, deren
 Fehlerpfade (`E099` bei korrupter Datei) durch Unit-Tests nur partiell
-abgedeckt werden — eine Property-Test-Suite (slice-013) wird die
+abgedeckt werden — eine Property-Test-Suite (slice-property-tests) wird die
 verbleibenden Pfade abdecken.
 
 Aktueller Stand: 76 % statt 90 %. Ohne Property-Tests bliebe
@@ -32,7 +32,7 @@ aus, indem die Messung auf `service` verengt wird (siehe
 
 ## Auflösungs-Trigger
 
-Welle 2 (welle-2-qualitaet) done — Property-Test-Suite läuft 100
+Welle 2 (welle-qualitaet) done — Property-Test-Suite läuft 100
 Generationen und deckt die Fehlerpfade.
 
 Konkret: die Index-Layer-Coverage erreicht ≥ 90 % — dieselbe Schwelle, die
@@ -101,7 +101,7 @@ in jeder Sprache durch einen Test belegt.
 - [ ] `harness/README.md` §Sensors: Bindung-Zelle von `make coverage-gate-critical`
       um „Index-Layer via `CO-001` … ausgenommen" gekürzt (kein Carveout mehr aktiv).
 - [ ] Diese Datei nach `done/CO-001-index-coverage.md` bewegt (reiner `git mv`).
-- [ ] slice-013 Closure-Notiz schließt diese Auflösung mit ein.
+- [ ] slice-property-tests Closure-Notiz schließt diese Auflösung mit ein.
 
 ## Geschichte
 
@@ -109,4 +109,4 @@ in jeder Sprache durch einen Test belegt.
 |---|---|---|
 | 2026-05-25 | Angelegt | slice-006 (Index-Storage) |
 | 2026-06-02 | Schwelle an ADR-0013 gebunden statt selbst behauptet (Nachtrag, keine Entscheidungs-Änderung) | ADR-0013 | <!-- d-check:ignore (Protokollzeile: ein Link hier rottet, Kurs §Referenz-Richtung Regel 5) -->
-| 2026-06-03 | Geprüft, weiterhin gültig — Welle 2 läuft | slice-013 |
+| 2026-06-03 | Geprüft, weiterhin gültig — Welle 2 läuft | slice-property-tests |

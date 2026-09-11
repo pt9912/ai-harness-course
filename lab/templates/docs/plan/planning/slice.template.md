@@ -1,9 +1,8 @@
 # Slice <slice-id>: <Titel>
 
 > **Template-Hinweis.** Vorlage für einen Slice-Plan. Kopiere nach
-> `docs/plan/planning/open/slice-<NNN>-<kurzer-titel>.md` — bzw.
-> `slice-<BEREICH>-<NNN>-…`, wenn dein Repo den Zählraum je Sub-Area führt
-> (Deklaration in `harness/conventions.md`) — und ersetze
+> `docs/plan/planning/open/<slice-kennung>.md` — welche Form die Kennung hat,
+> legt `harness/conventions.md` fest (siehe Kurs §Vergabe) — und ersetze
 > Platzhalter. Lösche diesen Block.
 
 **Lifecycle:** Der Zustand dieses Slice ist das Verzeichnis, in dem diese
@@ -140,7 +139,7 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
 **einen** Ausgang, und kein Slice geht nach `done/`, während eines ohne Ausgang
 dasteht.
 
-- <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-NNN | entfallen: Grund | weiter offen: → BEO-NNN im Register>
+- <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-<Kennung> | entfallen: Grund | weiter offen: → BEO-NNN im Register>
 
 ## 7. Closure-Notiz
 
@@ -163,12 +162,12 @@ Backticks).
 - **Was ging anders als geplant:** <…>
 - **Steering-Loop-Eintrag:** <Guide oder Sensor> <geschärft/ergänzt>: <was genau>
   — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.
-  Auslöser: `BEO-<NNN>` (<slice-NNN>, <slice-MMM>, <slice-KKK> — 3×).
+  Auslöser: `BEO-<NNN>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).
   *(Wurde mit diesem Slice nichts verkörpert — der Normalfall —, entfällt die
   Teil-Zeile `— liegt in …` ersatzlos. Der Eintrag ist dann gezählt, nicht
   verkörpert.)*
-- **Beobachtungs-Register (`../observations/`):** <`BEO-<KUERZEL>/<slug>/` neu angelegt, Beleg `evidence/slice-NNN.md` | `evidence/slice-NNN.md` in `BEO-<KUERZEL>/<slug>/` ergaenzt — Zaehler steht damit bei <N>x | keine Beobachtung angefallen>
-- **Folge-Slices:** <slice-NNN (<Titel>) — ist eine Datei in `open/`>
+- **Beobachtungs-Register (`../observations/`):** <`BEO-<KUERZEL>/<slug>/` neu angelegt, Beleg `evidence/slice-<Kennung>.md` | `evidence/slice-<Kennung>.md` in `BEO-<KUERZEL>/<slug>/` ergaenzt — Zaehler steht damit bei <N>x | keine Beobachtung angefallen>
+- **Folge-Slices:** <slice-<Kennung> (<Titel>) — ist eine Datei in `open/`>
 - **Risiken aus §6:** <jedes mit genau einem Ausgang — siehe §6>
 - **Drei Paarungen:** <nur im Repo ohne Wellen-Betrieb — Anker · Folge-Slice · Register, Ergebnis>
 

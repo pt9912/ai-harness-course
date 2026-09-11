@@ -1,4 +1,4 @@
-# Welle welle-1-mvp: Lauffähiger DocSearch-Stack
+# Welle welle-mvp: Lauffähiger DocSearch-Stack
 
 **Lifecycle:** Diese Datei lag flach unter `docs/plan/planning/`, solange die
 Welle lief, und ist bei Closure per `git mv` hierher nach `done/` gewandert —
@@ -35,8 +35,8 @@ zeitlich am Anfang stehen.
 
 - Alle Slices dieser Welle in `done/`.
 - `make fullbuild` grün.
-- Replay gegen das Golden Set `evals/golden/welle-1-baseline/` grün.
-- Closure-Notiz in `welle-1-results.md`.
+- Replay gegen das Golden Set `evals/golden/welle-mvp-baseline/` grün.
+- Closure-Notiz in `welle-mvp-results.md`.
 
 > *Lab-Grenze:* Das Kurs-Skelett kann den Replay nicht ausführen; es liefert
 > nur die Fixture-Prüfung `make replay`. Der Trigger oben ist die Bedingung
@@ -60,7 +60,7 @@ liegt hier eine Welle vor und nicht wellenlose Arbeit
 | slice-006 | Index-Storage | [LH-FA-01](../../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung) |
 | slice-007 | Top-K-Boundary nachziehen (Lastenheft v0.2.0) | [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche) |
 | slice-008 | Spec-Stratum-Pflege | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
-| slice-009 | Tie-Break-Determinismus | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
+| slice-tie-break-determinismus | Tie-Break-Determinismus | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
 | slice-010 | Replay-Harness | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
 | slice-011 | Golden-Set-Erweiterung | [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
 | slice-012 | Such-Endpoint | [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche) |
@@ -70,15 +70,15 @@ gespiegelt — eine Status-Spalte driftete gegen die Verzeichnisse.
 
 ## 5. Abhängigkeiten
 
-- Blockiert: `welle-2-qualitaet` (die Property-Tests brauchen den Stack).
+- Blockiert: `welle-qualitaet` (die Property-Tests brauchen den Stack).
 - Wird blockiert von: keiner Welle.
 
 ## 6. Out-of-Scope für diese Welle
 
-- ANN-Suche (→ `welle-3-skalierung`).
-- Betrieb, Helm-Chart, OTel-Pipeline (→ `welle-4-betrieb`).
+- ANN-Suche (→ `welle-skalierung`).
+- Betrieb, Helm-Chart, OTel-Pipeline (→ `welle-betrieb`).
 
 ## 7. Closure-Notiz
 
-Ergebnis: [`welle-1-results.md`](welle-1-results.md).
+Ergebnis: [`welle-mvp-results.md`](welle-mvp-results.md).
 Zähler: [`../observations/`](../observations/README.md).

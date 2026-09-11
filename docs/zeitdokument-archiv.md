@@ -55,13 +55,13 @@ gekürzter Stub liegen.
 
 ```text
 docs/plan/planning/done/
-├── welle-07/                    die archivierte Welle, als Verzeichnis
+├── welle-cache-warmup/          die archivierte Welle, als Verzeichnis
 │   ├── archiv.zip               alle Volltexte
-│   ├── welle-07-cache.md        Stub
-│   ├── slice-042-cache.md       Stub
-│   └── slice-043-fixture.md     Stub
-├── welle-07-results.md          BLEIBT vollständig, BLEIBT flach
-└── slice-051-laufend.md         Slice der noch offenen Welle, unberührt
+│   ├── welle-cache-warmup.md    Stub
+│   ├── slice-cache-eviction.md  Stub
+│   └── slice-fixture-cleanup.md Stub
+├── welle-cache-warmup-results.md   BLEIBT vollständig, BLEIBT flach
+└── slice-latenz-replay-100k.md     Slice der noch offenen Welle, unberührt
 ```
 
 **Das Verzeichnis ist nicht Ordnungsliebe, sondern die Bedingung dafür, dass
@@ -73,23 +73,23 @@ die die archivierten Dateien ersetzt; das Archiv ist nur die Koordinate.
 ### Die zwei Stub-Formen
 
 ```markdown
-# slice-<NNN> — <Titel>
+# slice-<Kennung> — <Titel>
 
 > **ARCHIVIERT** — Volltext:
-> `unzip -p done/welle-<NN>/archiv.zip done/slice-<NNN>-<slug>.md`
+> `unzip -p done/<welle-id>/archiv.zip done/slice-<Kennung>.md`
 
-**Welle:** <welle-<NN> · oder `ohne Welle`>
-**Archiviert mit:** welle-<NN> · **Geschlossen:** <JJJJ-MM-TT>
+**Welle:** <welle-id · oder `ohne Welle`>
+**Archiviert mit:** <welle-id> · **Geschlossen:** <JJJJ-MM-TT>
 **Hervorgegangen:** <BEO-*, ADR-*, Folge-Slice — oder `— keine —`>
 ```
 
 ```markdown
-# welle-<NN> — <Titel>
+# <welle-id> — <Titel>
 
 > **ARCHIVIERT** — Volltext:
-> `unzip -p done/welle-<NN>/archiv.zip done/welle-<NN>-<slug>.md`
+> `unzip -p done/<welle-id>/archiv.zip done/<welle-id>.md`
 
-**Geschlossen:** <JJJJ-MM-TT> · **Ergebnisnotiz:** welle-<NN>-results.md
+**Geschlossen:** <JJJJ-MM-TT> · **Ergebnisnotiz:** <welle-id>-results.md
 **Archivierte Vorgänge:** <N Slices, M Reviews>
 ```
 
@@ -229,7 +229,7 @@ wogegen er gebaut ist. **Der Geltungsbereich muss also im Pfad stehen, weil
 die Bedingung ihn nicht ausdrücken kann.**
 
 **Die zweite Hälfte bleibt unbaubar.** Die Abzählung — *die Zahl der Stubs mit
-`Archiviert mit: welle-<NN>` stimmt mit der im Welle-Stub deklarierten Zahl* —
+`Archiviert mit: <welle-id>` stimmt mit der im Welle-Stub deklarierten Zahl* —
 verlangt einen Vergleich **über Dateien hinweg**; `structure` prüft je Datei
 und Abschnitt. Sie bleibt damit eine Zusage des Archivierungs-Werkzeugs, kein
 Gate.

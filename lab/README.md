@@ -91,11 +91,11 @@ Root-Harness-Targets für die späteren Module:
 
 ```bash
 cd lab/example
-make agent-implement SLICE=slice-009
+make agent-implement SLICE=slice-tie-break-determinismus
 make agent-review
-make verify SLICE=slice-009
-make replay RUN=welle-1-baseline
-make trace RUN=sl-009-agent-run
+make verify SLICE=slice-tie-break-determinismus
+make replay RUN=welle-mvp-baseline
+make trace RUN=sl-tie-break-determinismus-agent-run
 make release
 ```
 

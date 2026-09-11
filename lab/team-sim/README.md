@@ -51,7 +51,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT; erweitert 2026-09-08 um s24, 72/72 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -122,6 +122,15 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s23c | Aufruf-Argument in der **Code-Span** (`make verify-slice SLICE=<id>`) | **`gate-undocumented`** | ✓ die Zeile zählt als nicht vorhanden; der Befund zeigt aufs `Makefile`, nicht auf die Zelle |
 | s23e | **verlinkte** Code-Span im selben Lauf | **still** | ✓ das Paar zu s23c: der Link schadet nicht, das Argument schon — der laute Gegenpol ist am Ziel festgemacht |
 | s23d | Ziel-Zustand: nackte Namen, Nicht-Gate in der zweiten Tabelle | **still** | ✓ Stille bei **nachweislich scharfem** Sensor; die Vorbedingungen binden die Tabellen-Zugehörigkeit und die reale Regel, nicht die Textpräsenz |
+| s24a | dieselbe Slice-Nummer, beide in §4 **derselben** Welle-Datei, benachbart | Merge-Konflikt, **laut** | ✓ der Rückfall der Zuteilungs-Form greift, wenn jemand daneben vergibt |
+| s24b | dieselbe Nummer als **je eigene** Slice-Datei | **still**, beide Dateien | ✓ der Gegenpol: ohne Vorabvergabe gibt es keinen lauten Ausgang |
+| s24c | dieselbe Nummer, dieselbe Datei, **weit auseinander** | **still**, Nummer steht zweimal | ✓ die Grenze des Rückfalls: git streitet über benachbarte Zeilen, nicht über Dateien — deshalb ist die Zuteilung die Zusage, nicht der Rückfall |
+| s24d | zwei Schreiber in **derselben Arbeitskopie**, kein Zweig | **still**, und ein Anspruch ist **weg** | ✓ die andere Topologie: ohne Zusammenführen gibt es keinen lauten Ausgang; der Verlust liest sich als gewöhnliche Änderung |
+| s24e | zwei **verschiedene** Wellen, verschiedene Nummern, eigene Zweige | Konflikt auf `roadmap.md`, **keiner** auf den Welle-Dateien | ✓ der zweite Hebel, sauber getrennt: die Kollision sitzt auf der gemeinsamen Liste, nicht auf der Kennung |
+| s24f | zwei Planner ziehen **dieselbe** Welle-Nummer, ohne Listen-Eintrag | **still**, zwei Dateien unter `welle-2` | ✓ das Gegenstück zu s24e: ohne Liste ist der Ausgang still — die Welle-Nummer liegt in derselben stillen Klasse wie der Slice |
+| s24g | **Namens-Identität** statt Nummer, verschiedene Vorhaben | **sauber**, beide unterscheidbar | ✓ ohne Zähler gibt es nichts abzuleiten, also auch nichts doppelt zu ziehen |
+| s24h | Namens-Identität, **dasselbe** Vorhaben | add/add-**Konflikt** | ✓ das Gegenstück zu s24g: laut genau dann, wenn zwei dasselbe beanspruchen — die Richtung, die der Nummer fehlt |
+| s24i | zwei Planner, je **eigene** Welle (Namens-Identität), teilen **darin** dieselbe Slice-Nummer zu | **still**, `slice-002` in zwei Wellen | ✓ Zuteilung verschiebt das Ableitungsproblem, sie löst es nicht — sie trägt nur unter einer singulären zuteilenden Instanz |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

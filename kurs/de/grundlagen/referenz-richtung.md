@@ -245,7 +245,7 @@ kein Startwert.
 ein erlaubter *Verifikations-Zeiger/Provenance* oder eine verbotene
 *Entscheidungsgrundlage* ist, ist eine semantische Unterscheidung. Sie ist
 darum aber **nicht unprüfbar**: Ein naiver grep über den ADR-Body flaggte
-legitime Zeiger falsch-positiv (etwa „`make test-determinism` (slice-009)
+legitime Zeiger falsch-positiv (etwa „`make test-determinism` (slice-tie-break-determinismus)
 verifiziert auch LH-FA-IDX-003") — die Bauform, die trägt, ist eine andere.
 **Die Kante gilt als verboten, und die Ausnahme wird am Ort deklariert.**
 Der Autor markiert den zulässigen Zeiger in seiner Zeile, der Sensor
@@ -338,14 +338,10 @@ ADR → Spec-§); das Lastenheft wird dabei *nie* geschärft.
 **Platzierung wird deklariert, nicht geraten** — über zwei bestehende
 Mechanismen:
 
-1. **Die Kennungs-Form kodiert das Stratum** — und die Muster sind disjunkt zu
-   lesen: `<PREFIX>-FA-<NN>` **ohne** Suffix → Vertrag; derselbe Name **mit**
-   `.<Buchstabe>` sowie `SPEC-*` → Technik; `ARC-*` → Sicht; die Matrix
-   adressiert Technik und Sicht darüber, mit dem `§`-Anker als Rückfallweg,
-   wo ein Element keine Kennung trägt. Eine
-   Sicht-Datei trägt sehr wohl `ARC-*`-*Struktur*-IDs
-   (Komponenten, Schnittstellen), nur keine eigenen *Anforderungs*-IDs —
-   das macht sie derivativ. Siehe [§ID-Schema](source-precedence.md#id-schema-als-klammer).
+1. **Die Kennungs-Form kodiert das Stratum** — die Matrix adressiert Technik
+   und Sicht darüber, mit dem `§`-Anker als Rückfallweg, wo ein Element keine
+   Kennung trägt. Welche Form welchem Stratum entspricht, steht in
+   [§ID-Schema](source-precedence.md#id-schema-als-klammer).
 2. **Deklaration in `harness/conventions.md`** (Adaptions-Block, wie die
    Zusatzklassen für Sensors-Bindung). Ein Spec-Dokument ohne deklariertes
    Stratum ist eine *stille Setzung* — dieselbe Harness-Lüge-Klasse wie ein

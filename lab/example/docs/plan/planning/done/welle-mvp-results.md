@@ -1,6 +1,6 @@
 # Welle 1 — MVP — Closure-Notiz
 
-**Welle:** welle-1-mvp
+**Welle:** welle-mvp
 **Abschluss:** 2026-06-02
 **Verantwortlich:** Kurs-Lab
 
@@ -10,10 +10,10 @@
 - Indexierung ([LH-FA-01](../../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung)) und Suche ([LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche)) mit Akzeptanzkriterien grün.
 - [ADR-0001](../../adr/0001-hexagonale-architektur.md), [ADR-0002](../../adr/0002-modellwahl-embedding.md) und [ADR-0003](../../adr/0003-index-storage-format.md) Accepted (siehe [`../../adr/README.md`](../../adr/README.md)).
 - `make gates` mit Linter, Typecheck, Architekturtest, Coverage (bootstrap-aware), Tests.
-- Erstes Golden Set `evals/golden/welle-1-baseline/` mit drei Cases.
+- Erstes Golden Set `evals/golden/welle-mvp-baseline/` mit drei Cases.
   *(Die Verzeichnisform — `manifest.yaml` + `inputs/` + `expectations/` — kam mit
   dem Lab-Ausbau (Kurs-Welle 9) am 2026-06-02; bis dahin lag das Set als eine JSON-Datei,
-  siehe [`evals/golden/welle-1-baseline/CHANGELOG.md`](../../../../evals/golden/welle-1-baseline/CHANGELOG.md).)
+  siehe [`evals/golden/welle-mvp-baseline/CHANGELOG.md`](../../../../evals/golden/welle-mvp-baseline/CHANGELOG.md).)
 
 ## Was hat funktioniert?
 
@@ -23,14 +23,14 @@
 ## Was ging anders als geplant?
 
 - Top-K-Boundary (`k > 100`) war im Original-Lastenheft nicht behandelt — Spec-Lücke. Folge: slice-007 plus Lastenheft v0.2.0.
-- `make test-determinism` brachte einen nicht-deterministischen Tie-Break im Index-Storage zu Tage — slice-009 nachgezogen.
+- `make test-determinism` brachte einen nicht-deterministischen Tie-Break im Index-Storage zu Tage — slice-tie-break-determinismus nachgezogen.
 
 ## Steering-Loop-Einträge
 
 Alle Einträge kommen aus dem [Beobachtungs-Register](../observations/README.md) und
 nennen ihren Beobachtungs-Pfad — die Schwelle ist 3×. Eine **geschärfte Regel** trägt
 das Pflichtfeld `liegt in <Zielort>`, und das Ziel trägt den Herkunfts-Anker
-`seit welle-1`; geprüft wird die Paarung **am Ende von Closure-Schritt 3**,
+`seit welle-mvp`; geprüft wird die Paarung **am Ende von Closure-Schritt 3**,
 nicht schon im Trigger-Audit (Schritt 2): dort gäbe es diese Einträge noch
 nicht. Eine **benannte Spec-Lücke** trägt das Feld nicht — sie ist verkörpert
 wie die anderen Klassen, nur in einer Lastenheft-Version statt an einem
@@ -38,7 +38,7 @@ Zielort, und ihr Gegenstück ist die `LH-*`-ID. Sie ist damit kein Gegenstand
 der **Anker**-Paarung; an der **Register**-Paarung nimmt sie teil wie jeder
 andere Eintrag.
 
-- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — liegt in `AGENTS.md §2.7` (trägt dort `seit welle-1`). Auslöser: `BEO-IMPL/tie-break-nicht-dokumentiert` (slice-006, slice-009, slice-012 — 3×).
+- **AGENTS.md-Hard-Rule** ergänzt: "Tie-Break in jeder sortierenden Operation muss explizit dokumentiert sein" — liegt in `AGENTS.md §2.7` (trägt dort `seit welle-mvp`). Auslöser: `BEO-IMPL/tie-break-nicht-dokumentiert` (slice-006, slice-tie-break-determinismus, slice-012 — 3×).
 - **Spec-Lücke** benannt: Grenzwerte der Suche waren im Lastenheft nicht behandelt (zuletzt Top-K, `k > 100`) — aufgelöst über Lastenheft v0.2.0 (`LH-FA-02`), kein Herkunfts-Anker nötig. Auslöser: `BEO-SPEC/grenzwert-suche-im-lastenheft` (slice-003, slice-005, slice-007 — 3×).
 
 ## Beobachtungs-Register (Zeiger)
@@ -49,14 +49,14 @@ Welle 3× erreicht hat, steht oben unter *Steering-Loop-Einträge*.
 
 ## Folge-Slices
 
-- slice-013 (Property-Tests) — startet welle-2.
-- slice-014 (ANN-Suche) — startet welle-3.
+- slice-property-tests (Property-Tests) — startet welle-qualitaet.
+- slice-ann-suche (ANN-Suche) — startet welle-skalierung.
 
 ## Verifikation
 
 - `make fullbuild` grün (Build-Hash `sha256:abc123…`).
-- Replay-Lauf gegen das Golden Set `welle-1-baseline`: 3/3 Cases grün.
+- Replay-Lauf gegen das Golden Set `welle-mvp-baseline`: 3/3 Cases grün.
   *Lab-Grenze:* Im Kurs-Skelett belegbar ist davon nur die Fixture-Form
-  (`make replay RUN=welle-1-baseline`) — siehe
+  (`make replay RUN=welle-mvp-baseline`) — siehe
   [`evals/golden/README.md`](../../../../evals/golden/README.md), Absatz *Lab-Grenze*.
 - Coverage gesamt: 78 %, kritisch: 92 % (siehe Carveout CO-001 für Index-Layer).

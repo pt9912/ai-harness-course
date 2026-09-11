@@ -101,7 +101,10 @@ matrix:
     # Referenz muss kein Link sein.
     - name: slice
       paths: ["lab/example/docs/plan/planning/**/slice-*.md"]
-      token: 'slice-\d{3}'
+      # Kennung ist ein Slug (Kurs §Vergabe), nicht mehr nur eine Zahl —
+      # das Token fasst beide Formen, solange Alt- und Neubestand
+      # nebeneinander stehen.
+      token: 'slice-[a-z0-9]+(-[a-z0-9]+)*'
   rules:
     # Kontext-Zeiger sind erlaubt und werden am Ort markiert
     # (<!-- d-check:status-provenance -->); alles Uebrige faellt.

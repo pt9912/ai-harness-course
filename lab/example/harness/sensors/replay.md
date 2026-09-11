@@ -7,7 +7,7 @@ Bindung: [Modul 12 §Golden-Set-Form](../../../../kurs/de/04-qualitaet/modul-12-
 ## Vertrag
 
 Root-Target; `<set-name>` ist der Name unterhalb `evals/golden/`, z. B.
-`welle-1-baseline`. Rot, wenn das Golden-Set-Verzeichnis unvollständig ist:
+`welle-mvp-baseline`. Rot, wenn das Golden-Set-Verzeichnis unvollständig ist:
 Manifest mit `model:`- und `runtime:`-Block, `inputs/`, `expectations/`,
 mindestens drei Cases, gleiche Anzahl auf beiden Seiten.
 

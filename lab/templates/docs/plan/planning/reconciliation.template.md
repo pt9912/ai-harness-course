@@ -16,8 +16,8 @@ wer fortschreibt, wann das Register *steht* und wann eine Sub-Area graduiert.
 Eine Zeile entsteht beim Rueckbau (Schritte 6-7), wenn Doku und Code
 auseinanderfallen. Form einer gefuellten Zeile, zum Abschreiben:
 
-| RC-001 | Rate-Begrenzung im Gateway, von keiner Anforderung gedeckt | api | Code ohne Anforderung | CO-004 -> slice-021 | offen |
-| RC-002 | README verspricht CSV-Export, nicht implementiert | export | Anforderung ohne Code | slice-022 | offen |
+| RC-001 | Rate-Begrenzung im Gateway, von keiner Anforderung gedeckt | api | Code ohne Anforderung | CO-004 -> slice-rate-limit-gateway | offen |
+| RC-002 | README verspricht CSV-Export, nicht implementiert | export | Anforderung ohne Code | slice-csv-export | offen |
 
 Erfinde keine Zeilen: Eine Kennung entsteht beim ERSTauftreten einer echten
 Diskrepanz, nicht beim Adoptieren dieser Vorlage.

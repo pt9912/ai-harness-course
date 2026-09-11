@@ -9,13 +9,13 @@ den 8-Schritt-Workflow laufen.
 
 Nutze den abgeschlossenen Slice als Referenz:
 
-- [`../docs/plan/planning/done/slice-009-tie-break-determinismus.md`](../docs/plan/planning/done/slice-009-tie-break-determinismus.md)
+- [`../docs/plan/planning/done/slice-tie-break-determinismus.md`](../docs/plan/planning/done/slice-tie-break-determinismus.md)
 - [`../AGENTS.md`](../AGENTS.md)
 - [`../harness/README.md`](../harness/README.md)
 
 ## Aufgabe
 
-1. Fuehre `make agent-implement SLICE=slice-009` im Verzeichnis
+1. Fuehre `make agent-implement SLICE=slice-tie-break-determinismus` im Verzeichnis
    `lab/example/` aus.
 2. Notiere, welche Quellen der Agent mindestens lesen muss.
 3. Formuliere einen Plan vor Code fuer eine analoge Aenderung in deinem

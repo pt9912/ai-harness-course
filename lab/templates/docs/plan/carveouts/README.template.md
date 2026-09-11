@@ -12,7 +12,7 @@ Aktive Carveouts mit Auflösungs-Trigger. Aufgelöste Carveouts wandern nach
 
 | ID | Titel | Gate | Trigger | Folge-Slice |
 |---|---|---|---|---|
-| [CO-<NNN>](CO-<NNN>-<titel>.md) | <Kurztitel> | `<make-target>` | <Trigger> | `slice-<NNN>` |
+| [CO-<NNN>](CO-<NNN>-<titel>.md) | <Kurztitel> | `<make-target>` | <Trigger> | `slice-<Kennung>` |
 
 ## Aufgelöste Carveouts
 

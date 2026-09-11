@@ -63,7 +63,7 @@ test: ## JUnit-Tests
 test-determinism: ## LH-QA-02 100 Iter
 	$(call GATE,determinism-gate)
 
-coverage-gate: ## Gesamt-Coverage via kover (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
+coverage-gate: ## Gesamt-Coverage via kover (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-qualitaet geschlossen) -> 80 % via Nachfolge-ADR)
 	$(call GATE,coverage-gate)
 
 coverage-gate-critical: ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)

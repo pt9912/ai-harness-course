@@ -8,14 +8,14 @@ werden.
 ## Ausfuehren
 
 ```bash
-make trace RUN=sl-009-agent-run
+make trace RUN=sl-tie-break-determinismus-agent-run
 ```
 
 ## Worauf achten?
 
 - `slice.id` verbindet Kosten und Tool-Calls mit dem Slice.
 - `agent.role` trennt Planner, Implementer, Reviewer und Verifier. Das Fixture
-  ist ein **Slice**-Trace: Ein Trace umspannt `slice-009`, die Rolle steht am
+  ist ein **Slice**-Trace: Ein Trace umspannt `slice-tie-break-determinismus`, die Rolle steht am
   Span. In einer instrumentierten Umgebung stünde sie auf der *Resource* des
   Laufs — siehe Kurs Modul 15 §Lab-Grenze.
 - `tool.name`, `tool.arguments.redacted` und `tool.result.status`

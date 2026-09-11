@@ -1,4 +1,4 @@
-// Index — Vektor-Storage, Cosinus, Tie-Break (slice-009, AGENTS.md §C-4).
+// Index — Vektor-Storage, Cosinus, Tie-Break (slice-tie-break-determinismus, AGENTS.md §C-4).
 using DocSearch.Types;
 
 namespace DocSearch.Index

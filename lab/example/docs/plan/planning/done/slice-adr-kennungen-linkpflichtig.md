@@ -42,7 +42,7 @@ beurteilt ihn.
       Sprach-Skeletts außer deren Doku; belegt an `COURSE_LANG=go`. Genannt
       wird er trotzdem: Ein Gate, das trivial grün ist, ist nicht davon zu
       unterscheiden, ob es lief oder vergessen wurde (Nachtrag-Argument aus
-      `slice-020`).
+      `slice-referenz-richtung-repariert`).
 - [x] Closure-Notiz.
 
 ## 3. Plan (vor Code)
@@ -107,7 +107,7 @@ aktiv; `make doc-check` prüft jetzt 70 statt 29 Dateien.
 **Die zwei Ausnahme-Klassen**, beide als Marker im Text statt als Pfad-Liste in
 der Config — die Begründung steht dann dort, wo jemand sie liest:
 
-- **Geplante Vorwärts-Verweise** (4×): `ADR-0004` existiert nicht, `slice-014`
+- **Geplante Vorwärts-Verweise** (4×): `ADR-0004` existiert nicht, `slice-ann-suche`
   *bringt* sie erst — „ADR-0004 'ANN-Bibliothek-Wahl' Accepted" steht in dessen <!-- d-check:ignore (Zitat der geplanten Kennung, kein Verweis) -->
   DoD. Ein Link wäre `target-missing`.
 - **Protokollzeile in einer Geschichte-Sektion** (1×, `CO-001`): Regel 5 nennt

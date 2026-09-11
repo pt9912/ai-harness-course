@@ -237,7 +237,7 @@ nennen könnte.
 **Zurückgezogen wird markiert, nicht gelöscht.** Eine `LH-*`, deren Bedarf
 ersatzlos entfällt, bleibt mit dem Vermerk *zurückgezogen* im Titel stehen —
 sichtbar beim Überfliegen, ohne eigene Notation; ihre Nummer
-bleibt vergeben ([§Vergabe](#vergabe-woher-die-nächste-nummer-kommt) — Lücken
+bleibt vergeben ([§Vergabe](#vergabe-woher-die-nächste-kennung-kommt) — Lücken
 werden nicht nachbelegt). Das ist dieselbe Unterscheidung, die die ADR zwischen
 `superseded` und `deprecated` trifft: *Bedarf bleibt, Antwort wechselt* ist eine
 gewöhnliche CR-Änderung; *Bedarf existiert nicht mehr* ist die Rücknahme.
@@ -278,7 +278,7 @@ Schicht zu hoch ein.
 
 Die Zählteile stehen hier ohne Bereichssegment; `LH-FA-03` und `LH-FA-IDX-003`
 sind beide wohlgeformt. Welche Kennung eines braucht, entscheidet
-[§Vergabe](#vergabe-woher-die-nächste-nummer-kommt) unten.
+[§Vergabe](#vergabe-woher-die-nächste-kennung-kommt) unten.
 
 `SPEC-*` und `ARC-*` sind **keine** Anforderungs-IDs. Sie machen adressierbar,
 was in ihrem Stratum ohnehin steht — ein Datenschema, ein Default, ein
@@ -328,109 +328,45 @@ wandert, ihre Zeile aber bleibt: bei den `MR`-Zeilen des Adaptions-Index
 Für die Spec-Straten gilt das nicht — dort wandert nichts, und ein Anker je
 Zeile wäre Pflege ohne Gegenwert.
 
-#### Vergabe: woher die nächste Nummer kommt
+#### Vergabe: woher die nächste Kennung kommt
 
-Das Präfix sagt, *wozu* eine Kennung gehört. Offen bleibt, **wer die Nummer
-vergibt** — und diese Frage hat nur solange keine Antwort nötig, wie genau ein
-Mensch am Repo schreibt.
+**Wer die Nummer vergibt, hat nur solange keine Antwort nötig, wie genau ein
+Schreiber am Repo arbeitet.** Schreiber ist, was committet: ein Mensch, ein
+Agent, ein Automat.
 
-**Die Kollisionsfläche ist nicht die Nummer, sondern die Ablage.** `LH-*` lebt
-in *einer* Datei: Zwei gleichzeitige Anforderungen erzeugen einen
-Git-Konflikt — laut, sofort, unübersehbar. ADR, Slice, Welle und Carveout sind
-**je eine eigene Datei**: Zwei Entwickler, die unabhängig `0012` ziehen,
-erzeugen `0012-cache.md` und `0012-index.md`. Git meldet nichts, der Merge
-gelingt, und im Repo stehen zwei Artefakte unter derselben Kennung — die
-Klammer zwischen Spec, Commit und Gate ist zerrissen, ohne dass ein Sensor
-angeschlagen hätte.
+**Regel: Eine Kennung mit eigener Datei (ADR, Carveout) bleibt bei Kollision
+still, mit oder ohne Bereichssegment.** Eine Kennung in einer geteilten Liste
+(`LH-*`, `SPEC-*`, `ARC-*`, ein `MR`-Index) ist laut, sobald zwei Einträge
+sich in der Datei nahekommen. Ein Segment ändert nur, **wer** kollidieren
+kann, nie **ob** es hörbar ist.
 
-**`MR-<NNN>` ist ein Hybrid aus beiden Klassen.** Der Eintrag lebt als eigene
-Datei (still), seine Index-Zeile in `harness/conventions.md` als Zeile einer
-Tabelle (laut): Zwei gleichzeitige `MR-005` erzeugen zwei Dateien, die lautlos
-nebeneinander liegen — und zwei Index-Zeilen, die kollidieren, wenn sie
-benachbart landen. Lauter als ADR und Slice, aber nicht garantiert laut.
+**`LH-*`/`SPEC-*`/`ARC-*` brauchen kein Bereichssegment, solange das Dokument
+flach bleibt.** Wächst es in fachliche Abschnitte, trägt die Kennung ein
+Bereichskürzel (`LH-FA-<BEREICH>-<NNN>`) — belegt an einem realen
+Lastenheft ab `LH-FA-IDX-003`.
 
-**Struktur-IDs stehen auf der lauten Seite.** `SPEC-*` und `ARC-*` leben zu
-vielen in *einer* Datei und teilen damit die Eigenschaft von `LH-*`: Zwei
-gleichzeitig vergebene Nummern stehen hinterher sichtbar untereinander, im
-selben Diff, im selben Merge-Konflikt. Sie brauchen deshalb **kein
-Bereichssegment**. Gezählt wird **fortlaufend je Datei** — die nächste freie
-Nummer ist die höchste vergebene plus eins, gleich in welchem Abschnitt sie
-steht; Lücken werden nicht nachbelegt, weil eine wiederverwendete Kennung
-ältere Verweise stillschweigend umlenkt. Ein Segment sicherte hier nichts, was
-der Diff nicht ohnehin zeigt, und bände den Zählraum an eine Sub-Area, die für
-ein Spec-Dokument gar nicht definiert ist.
-
-**Für die Artefakte mit je eigener Datei ist der Zählraum die Sub-Area.** Die
-Kennung trägt ein Bereichssegment, und gezählt wird *innerhalb* dieses Bereichs:
+**ADR und Carveout tragen ein Bereichssegment, gezählt innerhalb der
+Sub-Area:**
 
 ```
-ADR-IDX-0004      ADR-AUTH-0001      slice-IDX-007      CO-AUTH-002
+ADR-IDX-0004      ADR-AUTH-0001      CO-AUTH-002
 ```
 
-Die Bereiche sind nicht neu zu erfinden — es sind die **Sub-Areas**, die
-`harness/conventions.md` ohnehin einzeln deklariert
-([§Was ist eine Sub-Area?](grundlagen-bootstrap.md#was-ist-eine-sub-area)). Damit ist die
-nächste Nummer **lokal ableitbar**: Wer in `IDX` arbeitet, sieht im eigenen
-Checkout, welche `IDX`-Kennungen vergeben sind, und braucht dafür weder eine
-Absprache noch einen Schreibzugriff auf den Hauptzweig. Das ist die
-Bedingung, die aus dem [Traceability-Constraint](grundlagen-traceability.md#traceability-constraint)
-folgt: Die Kennung steht in Commits, **sobald die Arbeit läuft** — wer sie erst
-beim Landen bekommt, hat sie im entscheidenden Moment nicht.
+Die Bereiche sind die **Sub-Areas** aus `harness/conventions.md`. Das
+Segment ändert sich nicht rückwirkend, wenn eine Sub-Area später geteilt
+wird; ein Repo, das das Segment später einführt, vergibt nur neue Kennungen
+damit.
 
-**Das Segment wird nachgeschlagen, nicht formuliert.** Welches Kürzel eine
-Sub-Area trägt, steht in ihrer Modus-Deklaration
-([§Konventionsspeicher](grundlagen-harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)) —
-nicht im Kopf dessen, der gerade eine Kennung vergibt.
+**Welle- und Slice-Kennungen sind Namen, nicht Nummern — unabhängig von der
+Schreiberzahl.** Der Name trägt das Präfix eines vorhandenen Ankers (`LH-*`,
+`ADR-*`, `CO-*`), sonst einen freien Slug; ein Slice, der während einer
+Welle entsteht, trägt die Welle als Namensraum-Präfix
+(`slice-<welle-name>-<aspekt-slug>`).
 
-**Die Welle fällt aus diesem Schema.** Sie bündelt Slices über Sub-Areas
-hinweg — es gibt keine Sub-Area, in der man sie zählen könnte; ein
-`welle-IDX-03` wäre eine falsche Aussage über den Geltungsbereich. Für die
-Welle bleibt es beim dichten, repo-weiten Zählraum, und das Risiko trägt die
-Eröffnung: Sie ist Planner-Arbeit und schreibt die Roadmap — den lauten
-Kollisionspunkt.
+**Die Vergabe ist nur die eine Hälfte.** Das Anlegen fasst daneben eine
+gemeinsame Liste an (*Offene Wellen*, ein §4) — kollisionsfreie Kennungen
+schützen davor nicht. Schnitt: Planung serialisiert, Ausführung nebenläufig.
 
-**Und „lokal ableitbar" hat eine Grenze: Der Zählraum ist größer als das
-Verzeichnis.** Auch eine offene Welle vergibt Nummern — ihr §4 nennt Slices,
-die noch keine Datei haben —, und was in einem offenen PR liegt, ist im
-eigenen Checkout nicht sichtbar. Wer die nächste Nummer zieht, liest deshalb
-Verzeichnis **und** offene Welle-Dateien; den PR-Rest fängt das Schema nicht,
-und das gehört gesagt.
+**Welche Form gilt, deklariert das Repo — in `harness/conventions.md`.**
 
-**Abzugrenzen vom Beanspruchen.** Ohne Schreibzugriff auf den Hauptzweig kommt
-nur die *Nummer* aus. Das *Beanspruchen* einer Arbeit landet dort sehr wohl —
-der Lifecycle-Übergang `next → in-progress` ist ein Commit auf dem Hauptzweig,
-vor der Arbeit ([Modul 5 §Lifecycle als State Machine](modul-05-planning-harness.md#lifecycle-als-state-machine)).
-Die beiden Aussagen widersprechen sich nicht: Die eine gilt dem **Ableiten
-einer Kennung**, die andere dem **Sichtbarmachen eines Anspruchs**.
-
-**Was das leistet, und was nicht.** Zwei Entwickler in *verschiedenen*
-Sub-Areas können nicht kollidieren. Zwei in *derselben* schon — und das ist
-Absicht: Sie entscheiden gleichzeitig über denselben Bereich und sollten
-voneinander wissen. Das Schema verwandelt einen stillen Merge-Unfall in ein
-inhaltliches Signal; es beseitigt ihn nicht. Ein Personen- oder Branch-Segment
-gäbe die Garantie, altert aber mit der Person und sagt dem Reviewer nichts.
-
-**Das Segment ist Herkunft, nicht Zugehörigkeit.** Es hält fest, in welchem
-Bereich das Artefakt *entstand*. Wird eine Sub-Area später geteilt oder
-umbenannt, ändern sich **keine** bestehenden Kennungen — dieselbe Stabilität
-wie bei der Slice-ID, die nach dem Wandern in `done/` ein stabiler Token
-bleibt.
-
-**Mischung ist billiger als Migration.** Ein Repo, das das Segment später
-einführt, behält die alten Kennungen und vergibt nur neue mit Bereich. Zwei
-Formen nebeneinander sind unschön, aber harmlos; ein Umbenennen aller
-bestehenden Kennungen bräche jede Commit-Message, die sie zitiert.
-
-**Welche Form gilt, deklariert das Repo.** Ein Repo mit einem schreibenden
-Menschen braucht kein Segment — dichte Nummern sind dort billiger und
-lesbarer. Die Wahl gehört in die ID-Schema-Deklaration in
-`harness/conventions.md`, wo `<PREFIX>-FA-*`, `ADR-<NNNN>` und `CO-<NNN>`
-ohnehin festgelegt werden — nicht in eine stille Gewohnheit. Wer später von
-dicht auf Bereich wechselt, notiert den Wechselpunkt; bestehende Kennungen
-bleiben, wie sie sind.
-
-**Kein Sensor.** Die Doppelvergabe wäre in beiden Formen erkennbar — zwei
-Dateien mit demselben Bereich-Nummer-Paar in einem Verzeichnis, oder zwei
-gleiche `SPEC-*` in einer Datei —, aber
-kein Modul des Doku-Gates prüft Eindeutigkeit heute. Bis dahin ist es ein
-Review-Griff, und das gehört gesagt, statt einen Gate zu behaupten.
+**Kein Sensor.** Doppelvergabe ist heute ein Review-Griff, kein Gate.

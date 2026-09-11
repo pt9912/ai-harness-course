@@ -8,7 +8,7 @@ die falsche.
 
 **Fünf Module.**
 
-- **`reviews`** (seit slice-026): Ein `done/`-Slice mit Review-DoD-Zeile
+- **`reviews`** (seit slice-review-report-deckung-per-d-check): Ein `done/`-Slice mit Review-DoD-Zeile
   („Review durchgeführt …") braucht einen Report unter `docs/reviews/` mit
   derselben Slice-Kennung im Dateinamen — fail-closed auch bei 0
   Review-Zusagen, solange `docs/reviews/` fehlt oder unlesbar ist.
@@ -20,7 +20,7 @@ die falsche.
   (Config-Override `heading:`/`marker:`; der Werkzeug-Default ist noch
   `## Aktuelle Welle`) — hält zusammen, was sonst beim `git mv`
   auseinanderläuft. Dazu die **Wellen-Invariante** (`planning.waves`, seit
-  slice-025): die Zeiger unter `## Offene Wellen` ↔ die flachen Welle-Dateien,
+  slice-wellen-invariante-per-d-check): die Zeiger unter `## Offene Wellen` ↔ die flachen Welle-Dateien,
   in beide Richtungen; keine Vorschau-Zeile für eine Welle, die schon eine
   Datei hat; jede Zeile unter `## Abgeschlossene Wellen` hat ihre
   Ergebnisnotiz in `done/` und umgekehrt.

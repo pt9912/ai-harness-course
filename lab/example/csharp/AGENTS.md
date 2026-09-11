@@ -36,7 +36,7 @@ Begründung: Reproduzierbarkeit ([LH-QA-03](../spec/lastenheft.md#lh-qa-03--cont
 LINQ `.OrderByDescending(x => x.Score)` ist nicht stable. Pflicht:
 `.OrderByDescending(...).ThenBy(...).ThenBy(...)` mit explizitem Tie-Break.
 LINQ `OrderBy` ist tatsächlich stable, aber expliziter Tie-Break ist
-weiterhin Pflicht (slice-009).
+weiterhin Pflicht (slice-tie-break-determinismus).
 
 ### C-5 — `record` für Domain-Modell
 

@@ -5,7 +5,7 @@ Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er wechselt
 nur durch `git mv` (Kurs
 [Modul 5 §Lifecycle als State Machine](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
 
-**Welle:** welle-2-qualitaet
+**Welle:** welle-qualitaet
 
 **Bezug:** [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit), [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche) (Suche)
 
@@ -27,9 +27,9 @@ Suchergebnisse über generierte Eingaben sicherstellen. Ergänzt
 - Das Ersetzen von `make test-determinism`. Es bleibt als fixierte Gegenprobe
   stehen — die Eigenschaft-Suite deckt andere Eingaben ab, nicht dieselben
   besser.
-- Property-Tests für den Index-Layer. Das ist `slice-014` vorbehalten, weil
+- Property-Tests für den Index-Layer. Das ist `slice-ann-suche` vorbehalten, weil
   dort erst die ANN-Struktur feststeht, gegen die Eigenschaften formuliert
-  werden könnten — `slice-014` liegt in `open/` und nimmt den Punkt in seine
+  werden könnten — `slice-ann-suche` liegt in `open/` und nimmt den Punkt in seine
   DoD auf, bevor er startet.
 - Jede Änderung an der Sortier-Implementierung selbst. Der Slice bringt
   Sensoren, keine Verhaltensänderung; findet die Suite einen Defekt, ist das

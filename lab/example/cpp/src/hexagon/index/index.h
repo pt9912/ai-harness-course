@@ -16,7 +16,7 @@ class Index {
     [[nodiscard]] std::size_t size() const;
 
     // top_k — sortierte Top-K-Treffer für ein Anfrage-Embedding.
-    // Tie-Break (AGENTS.md §2.7, slice-009): std::stable_sort +
+    // Tie-Break (AGENTS.md §2.7, slice-tie-break-determinismus): std::stable_sort +
     // lexikographisch nach (doc_path, section_index).
     [[nodiscard]] std::vector<SearchResult> top_k(const Embedding& query, int k) const;
 

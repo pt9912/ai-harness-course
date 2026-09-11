@@ -68,7 +68,7 @@ kein Freitext:
 
 | Ausgang | Was dazugehört |
 |---|---|
-| `verkörpert` | Zielort **und** Herkunfts-Anker (`seit welle-<NN>` / `seit slice-<NNN>`) |
+| `verkörpert` | Zielort **und** Herkunfts-Anker (`seit welle-<Kennung>` / `seit slice-<Kennung>`) |
 | `geplant` | Kennung des Slice oder der Welle, die die Regel schreibt |
 | `gestrichen` | die Begründung, warum die Beobachtung nicht mehr auftreten kann |
 
@@ -81,8 +81,9 @@ entferntes ist nicht von einem zu unterscheiden, das es nie gab.
 ## `evidence/<vorgangs-id>.md` — je Auftreten eine Datei
 
 ```markdown
-**Vorgang:** <slice-NNN | welle-NN | review-YYYY-MM-DD-<kurz>>
+**Vorgang:** <slice-<Kennung> | welle-<Kennung> | review-YYYY-MM-DD-<kurz>>
 **Fund:** <ein Satz, was in genau diesem Vorgang auftrat>
 ```
 
-Der Dateiname **ist** die Kennung: `slice-042.md`, nicht `beleg-3.md`.
+Der Dateiname **ist** die Kennung: `slice-audit-log-hardening.md`, nicht
+`beleg-3.md`.

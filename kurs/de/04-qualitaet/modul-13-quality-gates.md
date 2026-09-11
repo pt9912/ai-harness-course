@@ -224,7 +224,7 @@ coverage-gate: ## Coverage threshold gate (bootstrap-aware, LH-FA-BUILD-008).
 ```
 
 **Kam das Gate aus dem Steering Loop statt aus einer Anforderung**, trägt
-der Kommentar zusätzlich den Herkunfts-Anker `· seit welle-<NN>` — ohne Welle `· seit slice-<NNN>`
+der Kommentar zusätzlich den Herkunfts-Anker `· seit welle-<Kennung>` — ohne Welle `· seit slice-<Kennung>`
 ([`traceability.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln))
 — sonst ist beim nächsten Aufräumen nicht mehr rekonstruierbar, welche
 Beobachtung es erzwungen hat.
@@ -411,7 +411,7 @@ Ersatz-Target (`pytest` → `make test-unit`).
 - **Adaption:** Die Baseline-Regel „make/Docker-only" wird von *inferential*
   auf *computational feedforward* gehoben: ein `PreToolUse`-Hook blockiert
   Tool-Calls, deren Befehlsposition auf der Denylist steht.
-- **Begründung:** Drei Vorfälle in Folge (Lerneinträge slice-041/044/047):
+- **Begründung:** Drei Vorfälle in Folge, mit den drei Slice-Kennungen als Beleg:
   direkter `pytest`-Aufruf, lokal grün / CI rot durch ungepinnte
   Interpreter-Version.
 - **Grenze:** Stolperdraht, keine Sandbox — geprüft wird die Befehlsposition,
@@ -465,7 +465,7 @@ die Liste.
 - **Adaption:** Befehlspositionen werden zusätzlich *innerhalb* der
   `-c`-Payloads von `bash`/`sh`/`zsh` geprüft, inkl. kombinierter Flags
   (`-lc`, `-ec`, `-lec`); Rekursionstiefe 3, darüber fail-closed blockiert.
-- **Begründung:** Drei Umgehungen in Folge (Lerneinträge slice-052/053/056)
+- **Begründung:** Drei Umgehungen in Folge, mit den drei Slice-Kennungen als Beleg
   über `bash -c "pytest …"`. Die Denylist um `bash` zu erweitern wurde
   verworfen: sie blockiert legitime Shell-Arbeit inklusive `make`-Aufrufen.
 - **Grenze:** unverändert Stolperdraht — `python -c "…"`, `env`-Umwege und

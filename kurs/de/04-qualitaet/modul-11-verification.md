@@ -21,7 +21,7 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make verify SLICE=slice-009`
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make verify SLICE=slice-tie-break-determinismus`
 * [`../../../lab/example/verification/checks/`](../../../lab/example/verification/checks/)
 
 ## Themen
@@ -179,7 +179,7 @@ deckt nur die Struktur.
 
 **Schritt 6 — Bewusstes Brechen.** Ein Slice landet in `done/` mit
 `closure_note: "Fertig."`. `make verify-closure-notes` läuft rot mit
-`docs/plan/planning/done/slice-024.md: closure_note hat nur 1 Satz`. Der
+`docs/plan/planning/done/slice-ranking-drift.md: closure_note hat nur 1 Satz`. Der
 Verifier hat *genau das* erkannt, was Tests nicht erkannt hätten und
 Reviewer übersehen würde (Reviewer prüft Diff gegen Plan/ADR — der
 fehlende Closure-Eintrag ist *kein* Diff-Symptom).
@@ -244,7 +244,7 @@ Erschaffens-Leistung dieses Moduls.
 
 ```bash
 cd lab/example
-make verify SLICE=slice-009
+make verify SLICE=slice-tie-break-determinismus
 ```
 
 Erwartete Beobachtung: Der Check ist bewusst klein. Er prüft, ob der

@@ -3,12 +3,12 @@
 Diese Checks sind absichtlich leichtgewichtig. Sie zeigen fuer Modul 11,
 welche Belege ein Verifier mindestens gegen einen Slice prueft.
 
-## Minimaler Check fuer `slice-009`
+## Minimaler Check fuer `slice-tie-break-determinismus`
 
 Der Root-Target
 
 ```bash
-make verify SLICE=slice-009
+make verify SLICE=slice-tie-break-determinismus
 ```
 
 prueft:

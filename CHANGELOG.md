@@ -11,6 +11,78 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 130 — 2026-09-08 · Welle- und Slice-Kennungen sind Namen
+
+`grundlagen/source-precedence.md` §Vergabe knüpfte die Vergabe-Form an die
+Zahl der **Menschen**; `docs/team.md` misst dasselbe Risiko als *Ganz-Wert ×
+nebenläufige **Schreiber***. §Vergabe stellt jetzt auf die Achse Schreiber um
+(Mensch, Agent, Automat) — `docs/team.md` trägt den Fall als `TB-015`.
+
+**Kernsatz:** Segmentierung, Zuteilung und Vorabvergabe verkleinern die
+Population möglicher Kollidierender, keine davon macht eine Kollision
+hörbar. Hörbarkeit hängt allein an der Ablage: eine Kennung mit eigener
+Datei je Artefakt (ADR, Slice, Welle, Carveout) bleibt still, mit oder ohne
+Segment; eine geteilte Liste ist laut, sobald zwei Einträge sich nahekommen,
+ebenfalls unabhängig vom Segment. Struktur-IDs (`LH-*`, `SPEC-*`, `ARC-*`)
+sind davon nicht ausgenommen: „kein Bereichssegment nötig" gilt nur, solange
+sie flach bleiben — `lab/example` löst das strukturierte Lastenheft bereits
+korrekt mit `LH-FA-IDX-003`.
+
+**Welle- und Slice-Kennungen sind Namen, nicht Nummern — unabhängig von der
+Schreiberzahl.** Eine Nummer trägt immer die Vorbedingung eines einzigen
+Ablegers oder Zuteilenden, die sich lautlos verletzen lässt, sobald ein
+zweiter Schreiber dazukommt, geplant oder nicht. Der Name trägt das Präfix
+eines vorhandenen Ankers (`LH-*`, `ADR-*`, `CO-*`), wenn einer existiert —
+reine Traceability, keine zusätzliche Sicherheit —, sonst einen freien Slug;
+ein während einer Welle neu entstehender Slice trägt denselben Mechanismus
+mit der Welle als Namensraum-Präfix. Die Vergabe ist nur die eine Hälfte:
+Das Anlegen fasst daneben eine gemeinsame Liste an (*Offene Wellen*, ein
+§4) — Schnitt: Planung serialisiert, Ausführung nebenläufig.
+
+**Beobachtbares Verhalten, geprobt** (`AGENTS.md` §3): Szenario-Gruppe s24,
+9 Verdikte, 72/72 · 0 KAPUTT.
+
+Gates: `make check`, `make bundle-check`, `bash lab/team-sim/run.sh`.
+
+## Welle 131 — 2026-09-11 · Der Rest der Zählraum-Ablösung
+
+Welle 130 setzte die Regel; dieser Wellenblock trägt die vollständige
+Ausrollung, geplant in [`docs/kennungs-namen-plan.md`](docs/kennungs-namen-plan.md)
+(P1–P7, alle umgesetzt).
+
+- **Templates** (`lab/templates/`): jeder `<NN>`/`<NNN>`-Platzhalter auf
+  `<Kennung>`/Namensform — Slice- und Welle-Vorlagen, Carveout-Vorlage,
+  Review-Report-Vorlage.
+- **Regelwerk-Spiegel:** Definitions-Echos des Herkunfts-Ankers auf Pointer
+  auf `traceability.md` §Herkunfts-Anker umgestellt, wortgleich gehalten.
+- **`.d-check.yml`** (Wurzel + `lab/example`): `matrix`-Sensor-Token von
+  `slice-\d{3}` auf ein Kennungs-Slug-Muster erweitert — sonst wird die
+  ADR→Slice-Prüfung für jeden namensbasierten Slice still blind.
+- **`lab/example` vollständig migriert:** 12 reale Slice-Dateien,
+  `welle-mvp`(-results), `welle-qualitaet`, das Golden-Set-Verzeichnis, der
+  Otel-Trace-Fixture, die Konventions-Deklaration und jeder reale
+  Querverweis (Carveouts, Roadmap, sechs Sprachvarianten-Makefiles,
+  Review-Report) — mit einer Ausnahme: Accepted-ADR-Rumpftext bleibt
+  unangetastet (Immutability-Gate, `lab/example/AGENTS.md` §2.5) und
+  Phantom-Slices (001–008/010–012, nie eigene Dateien) bleiben numerisch,
+  als das, was sie sind — Zeitdokument, nicht Lehrbeispiel.
+- **Modul-6-Fallbeispiel** und verstreute Einzelbeispiele in Modulen und
+  Lösungen: jede eigenständige Illustrationszahl bekam einen eigenen
+  Namens-Slug.
+- **Review-Report-Vorlage:** Findings und Negativbefunde als Tabellen statt
+  Bullet-Listen (`Befund` an dritter Stelle, nach `Kategorie`); eine
+  Zellenlängen-Prüfung per d-check `structure`/`cell-max-chars` ist
+  vorbereitet, aber bewusst noch nicht scharf — der einzige reale
+  Review-Report trägt Befund-Zellen von 591–1156 Zeichen, eine
+  „1–2 Sätze"-Grenze bräche ihn sofort und d-check verweigert ohnehin eine
+  Regel ohne Treffer.
+- Drei Review-Befunde behoben: `docs/team.md` TB-015 stand vor TB-014
+  (Reihenfolge korrigiert), zwei übersehene `welle-1-mvp`-Reste
+  (`modul-06-roadmap.md`, `welle-results.template.md`).
+
+Gates: `make check`, `make bundle-check`, `lab/example`s eigenes
+`make verify`, `bash lab/team-sim/run.sh` (72/72).
+
 ## Welle 129 — 2026-09-08 · Der Gate-Index steht einmal
 
 Anlass war eine Beobachtung an den Vorlagen: `AGENTS.template.md` §4 und
@@ -435,7 +507,7 @@ Der Review von Welle 120 meldete zwei INFO — beide älter als die Welle, beide
 aber an Stellen, die sie angefasst hat.
 
 - **`lab/example`: eine Bindung für fünf Module war für vier davon die falsche.**
-  Der Review-Befund F-4 vom 2026-09-05 (`docs/reviews/2026-09-05-slice-026.md`)
+  Der Review-Befund F-4 vom 2026-09-05 (`docs/reviews/2026-09-05-slice-review-report-deckung-per-d-check.md`)
   hielt fest, dass die `make doc-check`-Zeile nur `MR-002` trug — die Bindung von
   `ids`/`matrix` (Link-Richtung), fachlich unpassend für `reviews`, `planning`
   und `targets`. Welle 120 hat genau diese Zeile neu geschrieben und die Datei

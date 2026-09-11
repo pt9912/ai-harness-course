@@ -2,7 +2,7 @@
 
 ## Ausgangslage
 
-Ein Implementer-Agent sollte `slice-009` umsetzen. Er hat direkt Code
+Ein Implementer-Agent sollte `slice-tie-break-determinismus` umsetzen. Er hat direkt Code
 geschrieben, ohne `harness/README.md` zu lesen. Die Tests waren lokal
 gruen, aber die Reihenfolge gleicher Scores war im CI nicht
 deterministisch.
@@ -16,7 +16,7 @@ deterministisch.
 
 ## Material
 
-- [`../docs/plan/planning/done/slice-009-tie-break-determinismus.md`](../docs/plan/planning/done/slice-009-tie-break-determinismus.md)
+- [`../docs/plan/planning/done/slice-tie-break-determinismus.md`](../docs/plan/planning/done/slice-tie-break-determinismus.md)
 - [`../harness/README.md`](../harness/README.md)
 - [`../evals/example-trace.json`](../evals/example-trace.json)
 

@@ -59,7 +59,7 @@ test: gate-image ## pytest
 test-determinism: gate-image ## LH-QA-02: 100 Iter
 	$(DOCKER) run $(RUN) pytest -k determinism --count=100 -p no:cacheprovider
 
-coverage-gate: gate-image ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-2 geschlossen) -> 80 % via Nachfolge-ADR)
+coverage-gate: gate-image ## Gesamt-Coverage (ADR-0013, bootstrap-aware: 70 %, Hochschalt-Trigger M2 (welle-qualitaet geschlossen) -> 80 % via Nachfolge-ADR)
 	$(DOCKER) run $(RUN) sh -c "COVERAGE_FILE=/tmp/.coverage pytest -p no:cacheprovider --cov=src/docsearch --cov-report=term --cov-fail-under=70"
 
 coverage-gate-critical: gate-image ## Critical Coverage (ADR-0013: 90 %; CO-001: Index-Layer ausgenommen)

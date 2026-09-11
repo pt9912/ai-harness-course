@@ -10,7 +10,7 @@
 # GRENZE: a-check liest Import-Zeilen und sieht eine voll qualifizierte
 # Nutzung OHNE Import nicht (`com.example.docsearch.ui.Handler` mitten im
 # Code). Das deckt der Bestandssensor: Die Konsist-Regeln pruefen seit
-# slice-024 den Quelltext, nicht nur `file.imports`. Damit verhaelt sich
+# slice-konsist-auf-quelltext den Quelltext, nicht nur `file.imports`. Damit verhaelt sich
 # dieses Skelett wie Java und C# — a-check ist die Allow-Liste ueber Importe,
 # der Bestandssensor sieht tiefer.
 version: 1

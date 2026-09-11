@@ -1,4 +1,4 @@
-# Review-Report: <slice-NN | PR-Ref> — <YYYY-MM-DD>
+# Review-Report: <slice-Kennung | PR-Ref> — <YYYY-MM-DD>
 
 > **Template-Hinweis.** Vorlage für einen Review-Report (das
 > Übergabe-Artefakt Reviewer → Implementer, Modul 8/10). Kopiere
@@ -19,7 +19,7 @@ Code-Review gegen Plan + Konventionen (Modul 10 §Drei Review-Arten).
 > **Zitier-Form** *(dieser Block bleibt stehen — er ist Norm, kein
 > Ausfüll-Hinweis; die `<Platzhalter>` darin sind Formbeispiele)*. Dieser
 > Report friert ein; was er zitiert, bewegt sich
-> weiter. Deshalb: **Kennung, nicht Adresse** — `slice-NNN` statt seines
+> weiter. Deshalb: **Kennung, nicht Adresse** — `slice-<Kennung>` statt seines
 > Lifecycle-Pfads, `make <target>` statt eines Links auf die Sensor-Datei, eine
 > Baseline-Stelle als **Tag + Pfad in Inline-Code** statt als Link
 > (`v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt>). Der vendored Baum trägt
@@ -43,24 +43,22 @@ diese Liste ist der Lauf nicht reproduzierbar):
 ## Findings
 
 Jedes Finding folgt dem **§Output-Schema des Reviewer-Skills** — der
-verbindlichen Single Source of Truth. Die Felder unten sind nur
+verbindlichen Single Source of Truth. Die Spalten unten sind nur
 **gespiegelt** (Bequemlichkeit beim Ausfüllen), nicht neu definiert; bei
 Abweichung gilt der Skill bzw. dessen Quelle
 `v<X.Y.Z>` · `regelwerk/modul-10-review-harness.md` §Ziel-Form: Reviewer-Skill
 — Tag einsetzen, denn diese Zeile wandert in den eingefrorenen Report.
 
-<!-- Kein Fließtext, kein Lösungsvorschlag im Befund. -->
+<!-- Kein Fließtext, kein Lösungsvorschlag im Befund — je ein Finding pro
+     Zeile, 1-2 Sätze. Absichtlich (noch) nicht gate-geprüft: d-check
+     `structure` (`table.column[].cell-max-chars`) könnte die Spalten
+     `Befund`/`Klasse` zellenlängen-prüfen, sobald genug reale Reports
+     zeigen, welche Grenze die gelebte Praxis trägt — verfrüht gesetzt,
+     bricht sie am ersten gründlichen Befund. -->
 
-### F-1 — <Kurztitel>
-
-- `kategorie`: HIGH | MEDIUM | LOW | INFO
-- `quelle`: <ADR-ID, LH-ID, Hard-Rule-Name oder "Maintainability" — bei einer
-  Baseline-Regel: `v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt>, kein Link>
-- `pfad`: <Datei:Zeile>
-- `befund`: <1–2 Sätze, beobachtbar, ohne Lösungsvorschlag>
-- `verifizierbar`: ja/nein — <welcher Gate-Lauf würde es bestätigen?>
-- `klasse`: <stabile Kurz-Bezeichnung des Fehlermusters, z. B.
-  „Tie-Break in sortierender Operation nicht dokumentiert">
+| ID | Kategorie | Befund | Quelle | Pfad | Verifizierbar | Klasse |
+|---|---|---|---|---|---|---|
+| F-1 | HIGH \| MEDIUM \| LOW \| INFO | <1–2 Sätze, beobachtbar, ohne Lösungsvorschlag> | <ADR-ID, LH-ID, Hard-Rule-Name oder „Maintainability" — bei einer Baseline-Regel: `v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt>, kein Link> | <Datei:Zeile> | ja/nein — <welcher Gate-Lauf würde es bestätigen?> | <stabile Kurz-Bezeichnung des Fehlermusters, z. B. „Tie-Break in sortierender Operation nicht dokumentiert"> |
 
 ## Negativbefunde
 
@@ -70,8 +68,10 @@ Findings" nicht von "nicht geprüft" unterscheidbar (Modul 10
 §Reviewer berichtet auch, was er nicht gefunden hat).
 -->
 
-- geprüft, ohne Befund: <Verzeichnis/Bereich>
-- geprüft, ohne Befund: <Verzeichnis/Bereich>
+| Bereich | Ergebnis |
+|---|---|
+| <Verzeichnis/Bereich> | geprüft, ohne Befund |
+| <Verzeichnis/Bereich> | geprüft, ohne Befund |
 
 ## Summary
 

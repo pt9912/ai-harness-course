@@ -109,7 +109,7 @@ Archiv-Zeiger, Zustand und die Kennungen, die den Slice überlebt haben
 Schritt 4). Die Verzeichnis-Position bleibt damit der Zustand, und wer auf den
 Slice zeigt, zeigt weiter auf etwas. Was der Stub nicht mehr trägt, steht
 ohnehin dort, wo es gelesen wird. **Ohne Wellen tut es die Slice-Closure
-selbst** — nach den Paarungen, nach `done/slice-<NNN>-archiv.zip` flach neben
+selbst** — nach den Paarungen, nach `done/slice-<Kennung>-archiv.zip` flach neben
 dem Stub
 ([Modul 6 §Wann Arbeit eine Welle braucht](modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
 Die Station ist dieselbe, nur der Träger ein anderer.
@@ -120,7 +120,7 @@ Die Station ist dieselbe, nur der Träger ein anderer.
 (Welle-Closure; in einem Repo ohne Wellen-Betrieb löst ihn die Slice-Closure
 selbst aus) und vom
 Sichtungs-Schritt der Slice-Planung. Auch die Datei in `done/` bleibt Quelle:
-Für wellenlos verkörperte Regeln zeigt der Herkunfts-Anker `seit slice-<NNN>`
+Für wellenlos verkörperte Regeln zeigt der Herkunfts-Anker `seit slice-<Kennung>`
 auf genau dieses §7 zurück. Und am anderen
 Ende speist sich `Slice angelegt` aus derselben Quelle — §8 des
 Slice-Plans sichtet die offenen Beobachtungen im Register, unabhängig vom
@@ -225,16 +225,16 @@ Erweiterte Sammlung mit Conceptual-Change-Anker in
 
 > **Wenn du Slices schon routinemäßig nach Vertikal-Schnitt schneidest und einen Lifecycle mit `open/next/in-progress/done/` einsetzt, springe zu [§Übungen](#übungen).** (Expertise-Reversal-Schutz: das Beispiel zeigt elementar, was du dann bereits internalisiert hast.)
 
-**Ausgangs-Slice:** `slice-014 — Authentifizierung implementieren`. DoD:
+**Ausgangs-Slice:** `slice-authentifizierung — Authentifizierung implementieren`. DoD:
 "Login funktioniert, JWT wird ausgegeben, Refresh-Token-Flow läuft,
 Token-Revocation per Admin-Endpoint, Audit-Log auf Login-Versuche."
 
-> **ID-Hinweis:** `slice-014` (und die Sub-Slices `slice-014a/b/c`) sind ein
+> **ID-Hinweis:** `slice-authentifizierung` (und die Sub-Slices `slice-authentifizierung-a/b/c`) sind ein
 > kurs-interner Anker für dieses Worked Example und Modul 9 §Worked
 > Example. Der ID-Raum *im Kurs* ist eigenständig — das DocSearch-
-> Lab-Beispiel in `lab/example/` führt unter `slice-014-ann-suche.md`
-> einen ganz anderen Slice (ANN-Suche). Die numerische Überlappung
-> ist Zufall der Beispielwahl, kein gemeinsamer Slice.
+> Lab-Beispiel in `lab/example/` führt den entsprechenden Slice unter
+> `slice-ann-suche.md`: ein ganz anderer, eigenständig benannter Slice
+> (ANN-Suche), kein gemeinsamer.
 
 **Diagnose:** zu groß. Anzeichen:
 1. Mehr als drei **Liefer-Punkte** (Faustregel). Gezählt wird nur, was mit dem
@@ -254,16 +254,16 @@ nach Schichten führen oft zu Zombie-Slices, die "fast fertig" sind.
 
 | ID | DoD | Liefert |
 |---|---|---|
-| `slice-014a` | Login-Endpoint akzeptiert User/Passwort, gibt JWT zurück, Audit-Log-Eintrag entsteht. | Funktion |
-| `slice-014b` | Refresh-Token-Flow gegen JWT, mit Ablauf-Tests. | Sicherheit |
-| `slice-014c` | Admin-Endpoint zur Token-Revocation, mit Architekturtest gegen Direkt-DB-Zugriff. | Operativität |
+| `slice-authentifizierung-a` | Login-Endpoint akzeptiert User/Passwort, gibt JWT zurück, Audit-Log-Eintrag entsteht. | Funktion |
+| `slice-authentifizierung-b` | Refresh-Token-Flow gegen JWT, mit Ablauf-Tests. | Sicherheit |
+| `slice-authentifizierung-c` | Admin-Endpoint zur Token-Revocation, mit Architekturtest gegen Direkt-DB-Zugriff. | Operativität |
 
 **Begründung:** Jeder Schnitt-Slice ist einzeln lieferbar (kein Slice
 wartet auf den nächsten). Jeder hat ≤3 *Liefer-Punkte*. Jeder berührt
 höchstens zwei Schichten.
 
-**Was *nicht* geht:** "Schicht-Slice" wie `slice-014-db`, `slice-014-service`,
-`slice-014-ui` — diese sind voneinander abhängig und einzeln nutzlos. Sie
+**Was *nicht* geht:** "Schicht-Slice" wie `slice-authentifizierung-db`, `slice-authentifizierung-service`,
+`slice-authentifizierung-ui` — diese sind voneinander abhängig und einzeln nutzlos. Sie
 landen mit hoher Wahrscheinlichkeit als Zombie in `in-progress/`.
 
 **Der Kopf nennt die berührten Spec-Stellen.** Die Matrix weist dem Slice eine
@@ -317,7 +317,7 @@ Hier wird keine neue Modus-Theorie eingeführt — das Konzept wandert von
 der *Diagnose* (Klassifikation des Ist-Zustands, Modul 2 §Übung 1) in die
 *Wahl* (Begründung pro Sub-Area für einen kommenden Slice).
 
-**Beispiel-Slice:** `slice-014a` aus dem Worked Example oben. Spec-Anker
+**Beispiel-Slice:** `slice-authentifizierung-a` aus dem Worked Example oben. Spec-Anker
 und ADR werden in [Modul 9 §Worked Example](../03-agenten/modul-09-implementierung.md#worked-example-ein-slice-durch-den-8-schritt-workflow)
 mit `LH-FA-AUTH-001` und `ADR-0007` (Service-Adapter-Layer)
 konkretisiert; wir nutzen dieselben IDs hier konsistent.
@@ -490,7 +490,7 @@ Closure-Notiz prüfbar.
 * Bewege einen Slice durch alle vier Verzeichnisse
 * **(Erschaffen — aktiviert LZ 4)** *Closure-Kriterien mit Lerneintrag formulieren.* Nimm den Slice, den du gerade nach `done/` bewegst, und schreibe seinen Closure-Block: (a) *zwei bis drei beobachtbare* Closure-Kriterien (z. B. "Replay gegen Golden Set grün", "alle DoD-Punkte als Test verlinkt") — kein "fühlt sich fertig an"; (b) *einen Lerneintrag*, der benennt, **was der Harness aus diesem Slice gelernt hat** (eine geschärfte Regel, ein neuer Sensor, eine Spec-Lücke), nicht nur "Tests grün". Pointe: Ein `done/`-Slice ohne Lerneintrag macht das Versagensmuster unsichtbar — und derselbe Fehler wird dreimal gemacht. Vorlage: §Closure im [`slice.template.md`](../../../lab/templates/docs/plan/planning/slice.template.md).
 * Schneide einen zu großen Slice in zwei umsetzbare Slices
-* **Bestimme und begründe Bootstrap-Modus für die vom nächsten Slice berührten Sub-Areas** — nimm einen kommenden Slice aus deinem eigenen Repo (Transferform) *oder* arbeite am Beispiel-Slice `slice-014a` weiter (Fallback). Schritt 0: berührte Sub-Areas identifizieren. Schritt 1: pro Sub-Area Modus bestimmen und gegen alle vier Pflichtkriterien begründen. Schritt 2: für die Hybrid-Sub-Area `Audit-Logging` aus dem Worked Mini-Example die zwei offenen Kriterien-Zeilen (*Evidenz-/Diskrepanz-Risiko*, *Reconciliation-Aufwand*) ergänzen. Output: Begründungsblock je Sub-Area aus dem Template oben, in §8 des Slice-Plans (siehe [`slice.template.md`](../../../lab/templates/docs/plan/planning/slice.template.md)). Lösungshinweise in [`../loesungen/modul-05-loesung.md`](../loesungen/modul-05-loesung.md#bestimme-und-begründe-bootstrap-modus-pro-sub-area).
+* **Bestimme und begründe Bootstrap-Modus für die vom nächsten Slice berührten Sub-Areas** — nimm einen kommenden Slice aus deinem eigenen Repo (Transferform) *oder* arbeite am Beispiel-Slice `slice-authentifizierung-a` weiter (Fallback). Schritt 0: berührte Sub-Areas identifizieren. Schritt 1: pro Sub-Area Modus bestimmen und gegen alle vier Pflichtkriterien begründen. Schritt 2: für die Hybrid-Sub-Area `Audit-Logging` aus dem Worked Mini-Example die zwei offenen Kriterien-Zeilen (*Evidenz-/Diskrepanz-Risiko*, *Reconciliation-Aufwand*) ergänzen. Output: Begründungsblock je Sub-Area aus dem Template oben, in §8 des Slice-Plans (siehe [`slice.template.md`](../../../lab/templates/docs/plan/planning/slice.template.md)). Lösungshinweise in [`../loesungen/modul-05-loesung.md`](../loesungen/modul-05-loesung.md#bestimme-und-begründe-bootstrap-modus-pro-sub-area).
 
 ## Reflexion
 
@@ -510,14 +510,14 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 * Wann darf ein Slice in `done/` landen, obwohl ein Gate rot ist?
 * **(Erschaffen — aktiviert LZ 4)** Formuliere für einen Slice, den du nach `done/` bewegst, *zwei* beobachtbare Closure-Kriterien *und* einen Lerneintrag. Woran erkennst du, dass dein Lerneintrag mehr ist als "Tests grün" — welche der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke) trägt er?
 * **(Analysieren — Transfer aus Modul 2)** Welche Sub-Areas berührt der nächste anstehende Slice — und welcher Modus passt für jede dieser Sub-Areas? Begründe je gegen mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand) — eine Begründung wägt die Kriterien gegeneinander, eine reine "Modus, weil Doku fehlt"-Zuordnung ist Klassifikation, kein Bewerten.
-* **(Erschaffen + Bewerten — aktiviert LZ 3)** Gegeben `slice-031 — Bestell-Checkout` mit DoD aus fünf Punkten (Warenkorb-API · Zahlungs-Integration · Bestätigungs-Mail · Lager-Abbuchung · Audit-Log): (a) Bewerte gegen die zwei Größen-Kriterien — *in einem Agenten-Lauf abschließbar* und *in einer Review-Sitzung prüfbar* — ob er zu groß ist. (b) Schlage *einen* konkreten Schnitt in zwei (oder mehr) lieferbare Slices vor und begründe den Schnitt-Typ (nach Schichten vs. nach Lieferwert).
+* **(Erschaffen + Bewerten — aktiviert LZ 3)** Gegeben `slice-bestell-checkout — Bestell-Checkout` mit DoD aus fünf Punkten (Warenkorb-API · Zahlungs-Integration · Bestätigungs-Mail · Lager-Abbuchung · Audit-Log): (a) Bewerte gegen die zwei Größen-Kriterien — *in einem Agenten-Lauf abschließbar* und *in einer Review-Sitzung prüfbar* — ob er zu groß ist. (b) Schlage *einen* konkreten Schnitt in zwei (oder mehr) lieferbare Slices vor und begründe den Schnitt-Typ (nach Schichten vs. nach Lieferwert).
 
 * **(Bewerten)** Ein Slice-Plan führt vier Ausschlüsse in §1, alle ohne
   Begründung, und einer davon lautet „keine Migration auf eine andere
   Datenbank" — etwas, das ohnehin niemand erwogen hat. Welche der vier Klassen
   trägt er, welche nicht, und warum ist *ein* begründeter Ausschluss hier mehr
   wert als diese vier? Prüfe zusätzlich, ob eine Weiterleitung *„das übernimmt
-  slice-NNN"* eine Adresse ist: Was muss bei `slice-NNN` gelten, damit sie eine
+  slice-<Kennung>"* eine Adresse ist: Was muss bei `slice-<Kennung>` gelten, damit sie eine
   ist?
 
 ### Selbstcheck-Rubrik
@@ -528,7 +528,7 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 | Trigger je Lifecycle-Übergang benannt? | nur ein oder zwei Übergänge, Rest "wenn jemand anfängt". | Alle fünf benannt: `open→next` (priorisiert/eingeplant, `Verantwortlich:` gesetzt) · `next→in-progress` (Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei; der `git mv` landet auf dem Hauptzweig, vor der Arbeit) · `in-progress→done` (Closure-Kriterien erfüllt, Lerneintrag geschrieben, jedes Risiko mit Ausgang) · `in-progress→next` (Slice zu groß, zurück zum Schneiden) · `in-progress→open` (Blocker, Priorität offen). | + Pointe: am leichtesten übersehen werden die *Rückführungen* — `in-progress→next` und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört sichtbar zurück, nicht still weitergeschoben. WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro Mensch in der Implementer-Rolle, nicht pro Rolle. |
 | Slice in `done/` bei rotem Gate — wann? | "Gar nicht." | Nur mit dokumentiertem Carveout (Modul 7), der den roten Gate-Status auf Trigger schaltet. | + Unterscheidung Carveout (Ausnahme, mit Folge-Slice) vs. bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). Die volle Werkzeug-Triade inkl. *BF-Sub-Area-Markierung* (Sub-Area-Kontext, kein Closure-Werkzeug) wird in [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren) disambiguiert. |
 | Closure-Kriterien + Lerneintrag formuliert? | "Tests grün, fertig." — kein beobachtbares Kriterium, kein Lerneintrag. | Zwei beobachtbare Closure-Kriterien (z. B. Replay grün, DoD-Punkte als Test verlinkt) *und* ein Lerneintrag in einer der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke). | + Pointe: der Lerneintrag schließt den Steering Loop — ohne ihn bleibt das Versagensmuster unsichtbar und wiederholt sich. Exzellent benennt, *welche* künftige Wiederholung der Eintrag verhindert (Vorhersage), nicht nur, was passiert ist. |
-| `slice-031` (5-Punkte-DoD) bewerten und schneiden? | "Zu groß, irgendwie aufteilen." — kein Kriterien-Bezug, kein benannter Schnitt-Typ. | Gegen beide Größen-Kriterien begründet zu groß (>3 DoD-Punkte, nicht in einem Lauf abschließbar/einer Sitzung prüfbar) + konkreter Schnitt in einzeln lieferbare Slices mit benanntem Schnitt-Typ (Lieferwert: z. B. „Warenkorb→Zahlung→Bestätigung“ je eigenständig). | + Begründung, *warum* Lieferwert statt Schichten: jeder Schnitt-Slice liefert allein Wert und wartet nicht auf den nächsten; Gegenbeispiel, wann ein Schichtschnitt Zombie-Slices erzeugt (Lager-Abbuchung ohne Checkout liefert nichts Prüfbares). |
+| `slice-bestell-checkout` (5-Punkte-DoD) bewerten und schneiden? | "Zu groß, irgendwie aufteilen." — kein Kriterien-Bezug, kein benannter Schnitt-Typ. | Gegen beide Größen-Kriterien begründet zu groß (>3 DoD-Punkte, nicht in einem Lauf abschließbar/einer Sitzung prüfbar) + konkreter Schnitt in einzeln lieferbare Slices mit benanntem Schnitt-Typ (Lieferwert: z. B. „Warenkorb→Zahlung→Bestätigung“ je eigenständig). | + Begründung, *warum* Lieferwert statt Schichten: jeder Schnitt-Slice liefert allein Wert und wartet nicht auf den nächsten; Gegenbeispiel, wann ein Schichtschnitt Zombie-Slices erzeugt (Lager-Abbuchung ohne Checkout liefert nichts Prüfbares). |
 | Modus pro Sub-Area für den nächsten Slice? | berührte Sub-Areas nur teilweise identifiziert; Modus genannt ohne Kriterien-Bezug ("BF, weil Doku fehlt"). | berührte Sub-Areas vollständig identifiziert *und in passender Granularität* (Sub-Area-Wahl gegen die drei Inklusions-Achsen aus [`bootstrap.md` §Was ist eine Sub-Area?](../grundlagen/bootstrap.md#was-ist-eine-sub-area) prüfbar — vorgelagertes Granularitäts-Gate, *nicht* zu verwechseln mit den vier Modus-Kriterien); Modus je Sub-Area bestimmt; Begründung nutzt mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte, Phase-Reife, Evidenz-/Diskrepanz-Risiko, Reconciliation-Aufwand). | + Begründung nutzt *alle vier* Pflichtkriterien · BF/Hybrid benennt expliziten Reconciliation- oder Graduation-Trigger (Trigger-Klasse nach [`bootstrap.md` §Vier Trigger-Klassen](../grundlagen/bootstrap.md#vier-trigger-klassen) — Sync/Promotion/Cross-Reference/Acceptance — oder Folge-Slice-ID) · Evidenz aus Code, Doku oder `harness/conventions.md` namentlich genannt. |
 
 ## Weiterlesen

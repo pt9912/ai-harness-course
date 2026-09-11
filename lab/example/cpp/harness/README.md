@@ -46,7 +46,7 @@ um C++-spezifische Pfade:
 
 ## Traceability
 
-- Test-Namen tragen LH-/slice-IDs: `LH-FA-02 Boundary …`, `slice-009 TieBreak`.
+- Test-Namen tragen LH-/slice-IDs: `LH-FA-02 Boundary …`, `slice-tie-break-determinismus TieBreak`.
 - Make-Target-Kommentare nennen LH-IDs, **wo eine LH-Bindung besteht**:
   `test-determinism: configure ## LH-QA-02`. `coverage-gate` gehört zu keiner Lastenheft-Anforderung und zitiert
   deshalb die ADR, die seine Schwelle setzt (`ADR-0013`) — siehe [`../../harness/README.md` §Sensors](../../harness/README.md#sensors-feedback-gates).

@@ -1,4 +1,4 @@
-# slice-<NNN> — <Titel>
+# slice-<Kennung> — <Titel>
 
 > **Template-Hinweis.** Vorlage für den gekürzten Stub, der beim Archivieren
 > einer Welle an der Stelle des Slice-Volltexts liegen bleibt
@@ -7,7 +7,7 @@
 
 > **Zitier-Form** *(bleibt stehen — Norm, kein Ausfüll-Hinweis).* Dieses
 > Artefakt friert ein; was es zitiert, bewegt sich weiter. Deshalb: **Kennung,
-> nicht Adresse** — `slice-NNN` statt seines Lifecycle-Pfads, `make <target>`
+> nicht Adresse** — `slice-<Kennung>` statt seines Lifecycle-Pfads, `make <target>`
 > statt eines Links auf die Sensor-Datei, eine Baseline-Stelle als
 > `v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt> statt als Link
 > (Baseline-Regelwerk `grundlagen-harness-dateien.md` §harness/README.md als
