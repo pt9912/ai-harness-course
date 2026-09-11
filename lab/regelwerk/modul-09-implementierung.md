@@ -24,6 +24,22 @@ in `harness/conventions.md`:
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt ist.
 8. Ausgeführte Sensors und verbleibende Risiken berichten — keine Erfolgsmeldung ohne Gate-Ausführung.
 
+**Die Tests-Zeile bindet an die Akzeptanzkriterien der in Schritt 3
+identifizierten Requirement-ID, statt sie zu wiederholen.** Die
+Plan-Ausgabe zitiert die ID, nicht den Text — dieselbe
+Kennung-statt-Wiederholung-Disziplin wie überall im Korpus. Ohne diese
+Zeile sagt der Plan nur, *was* sich ändert; mit ihr sagt er zusätzlich,
+*woran* das Ergebnis gemessen wird — vor dem ersten Diff, nicht erst im
+Bericht danach.
+
+**Betrifft dieselbe Ursache viele gleichrangige Dateien, nennt der Plan sie
+einmal — nicht pro Datei.** Eine Schnittstellenänderung über zwölf
+Implementierer bekommt eine Begründung, nicht zwölf wortgleiche; die
+Datei-Liste wird zum Muster oder zur Aufzählung ohne Einzel-Begründung.
+Zwölf wortgleiche Begründungen tragen dieselbe Wiederholungs-Last wie eine
+ausgeschriebene Kennung statt eines Verweises — sie driften beim nächsten
+Refactor gegeneinander, ein einmal genannter Grund nicht.
+
 **Die Plan-Ausgabe in Schritt 4 nennt Out-of-Scope.** Das ist keine Zutat,
 sondern die Schritt-Hälfte einer Regel; ihre Dokument-Hälfte ist §1 *Ziel und
 Abgrenzung* des Slice-Plans (`modul-05-planning-harness.md` §Ziel-Form: Slice,
@@ -62,6 +78,11 @@ gelesen.
   und 6→4 (Plan korrigieren wegen Gate). Wer in Schritt 1 zurückspringt,
   hat einen Kontext-Defekt, keinen Plan-Defekt — das ist eine andere
   Ursache und gehört in den nächsten Steering-Loop-Eintrag.
+- **Der Plan lebt in §3 des Slice-Plans, nicht im Chat-Verlauf.** Was
+  Schritt 4 ausgibt, erweitert die Datei-Tabelle aus §3 derselben Datei,
+  in der Planner zuvor §1/§2 geschrieben hat (`slice.template.md`);
+  „Plan verfeinern" (5→4) und „Plan korrigieren" (6→4) schreiben dort
+  fort, kein separates Artefakt entsteht neu.
 - Roter `arch-check` in Schritt 6 (ADR-Verstoß durch direkten Import):
   Rücksprung zu **Schritt 4** (Plan verfeinern) — der ADR-Verstoß ist
   ein *Plan*-Defekt, nicht ein Kontext-Defekt; der Agent kannte die ADR,

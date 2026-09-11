@@ -92,7 +92,9 @@ Gate-Läufe und die fünf Closure-Pflichten darunter zählen nicht mit.
 ## 3. Plan (vor Code)
 
 <!-- BEDIENHINWEIS: Datei- oder Komponenten-Ebene reicht; der
-Implementer-Agent erweitert die Liste in seinem ersten Lauf. -->
+Implementer-Agent erweitert die Liste in seinem ersten Lauf, inklusive
+einer Testdatei-Zeile mit der Akzeptanzkriterien-ID in `Begründung`
+(Modul 9 §Minimal Agent Workflow). -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-bootstrap.md`
 §Was ist eine Sub-Area? — diese Liste liefert die **Pfad-Kandidaten** für §8,
@@ -102,6 +104,17 @@ Aussagen-Berührung steht hier gar nicht.
 | Datei / Komponente | Änderungs-Art | Begründung |
 |---|---|---|
 | <…> | neu / update / refactor | <…> |
+| <Testdatei> | neu / update | <Testarten, z. B. Happy/Boundary/Negative — nach <Akzeptanzkriterien-ID>> |
+
+**Optional: Ansatz als Liste, wenn eine Zeile pro Datei nicht trägt** — z. B.
+eine Schnittstellenänderung über viele gleichrangige Dateien mit derselben
+Begründung, oder ein Ansatz, der sich nicht auf eine Datei herunterbrechen
+lässt. Ergänzt die Tabelle, ersetzt sie nicht:
+
+- <Ansatz oder Gruppen-Änderung in einem Satz — z. B. „Schnittstelle
+  `AuthProvider.Login` bekommt Parameter `ctx`; alle zwölf Implementierer in
+  `adapter/*/auth.go` folgen mechanisch.">
+- <…>
 
 ## 4. Trigger
 

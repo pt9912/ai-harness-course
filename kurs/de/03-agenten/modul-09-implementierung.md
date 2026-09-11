@@ -337,6 +337,24 @@ aus:
 > *Out-of-Scope dieses Slice:* Refresh-Token (slice-014b), Revocation
 > (slice-014c).
 
+**Die Tests-Zeile bindet an die Akzeptanzkriterien der in Schritt 3
+identifizierten Requirement-ID, statt sie zu wiederholen.**
+`LH-FA-AUTH-001` trägt drei Akzeptanzkriterien
+([Modul 5 §Worked Mini-Example](../02-planung/modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen)).
+Die Plan-Ausgabe zitiert die ID, nicht den Text — dieselbe
+Kennung-statt-Wiederholung-Disziplin wie überall im Korpus. Ohne diese
+Zeile sagt der Plan nur, *was* sich ändert; mit ihr sagt er zusätzlich,
+*woran* das Ergebnis gemessen wird — vor dem ersten Diff, nicht erst im
+Bericht danach.
+
+**Betrifft dieselbe Ursache viele gleichrangige Dateien, nennt der Plan sie
+einmal — nicht pro Datei.** Eine Schnittstellenänderung über zwölf
+Implementierer bekommt eine Begründung, nicht zwölf wortgleiche; die
+Datei-Liste wird zum Muster oder zur Aufzählung ohne Einzel-Begründung.
+Zwölf wortgleiche Begründungen tragen dieselbe Wiederholungs-Last wie eine
+ausgeschriebene Kennung statt eines Verweises — sie driften beim nächsten
+Refactor gegeneinander, ein einmal genannter Grund nicht.
+
 **Die Out-of-Scope-Zeile der Plan-Ausgabe ist keine Zutat, sondern die
 Schritt-Hälfte einer Regel.** Ihre Dokument-Hälfte ist §1 *Ziel und Abgrenzung*
 des Slice-Plans ([Modul 5](../02-planung/modul-05-planning-harness.md#worked-example-einen-zu-großen-slice-schneiden),
@@ -375,6 +393,15 @@ Rücksprung zu Schritt 1**, sondern nur 5→4 (Plan verfeinern) und 6→4
 (Plan korrigieren wegen Gate). Wer in Schritt 1 zurückspringt, hat einen
 Kontext-Defekt, keinen Plan-Defekt — das ist eine andere Ursache und
 gehört in den nächsten Steering-Loop-Eintrag.
+
+**Der Plan lebt in §3 des Slice-Plans, nicht im Chat-Verlauf.** Was
+Schritt 4 ausgibt, erweitert die Datei-Tabelle aus §3 derselben Datei, in
+der Planner zuvor §1/§2 geschrieben hat
+([`slice.template.md`](../../../lab/templates/docs/plan/planning/slice.template.md));
+„Plan verfeinern" (5→4) und „Plan korrigieren" (6→4) schreiben dort fort,
+kein separates Artefakt entsteht neu. Schritt 8s Rückverweis *„das ist im
+Plan dokumentiert"* setzt genau das voraus — am Ende trägt §3 den
+**verfeinerten** Plan, nicht den ersten Wurf.
 
 Vergleich:
 [`../../../lab/example/Makefile`](../../../lab/example/Makefile) Target

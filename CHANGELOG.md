@@ -11,38 +11,30 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
-## Welle 130 — 2026-09-08 · Welle- und Slice-Kennungen sind Namen
+## Welle 132 — 2026-09-11 · Plan vor Code bindet an Akzeptanzkriterien
 
-`grundlagen/source-precedence.md` §Vergabe knüpfte die Vergabe-Form an die
-Zahl der **Menschen**; `docs/team.md` misst dasselbe Risiko als *Ganz-Wert ×
-nebenläufige **Schreiber***. §Vergabe stellt jetzt auf die Achse Schreiber um
-(Mensch, Agent, Automat) — `docs/team.md` trägt den Fall als `TB-015`.
+Anlass war eine Nachfrage zu `modul-08-agentenrollen.md`s Anker-Tabelle:
+*„Plan vor Code"* versprach dort einen *„Plan mit Akzeptanzkriterien"* —
+Modul 9s Worked Example zeigte die Tests-Zeile, erklärte aber nie, dass sie
+genau das leistet, und das Regelwerk trug die Bindung gar nicht.
 
-**Kernsatz:** Segmentierung, Zuteilung und Vorabvergabe verkleinern die
-Population möglicher Kollidierender, keine davon macht eine Kollision
-hörbar. Hörbarkeit hängt allein an der Ablage: eine Kennung mit eigener
-Datei je Artefakt (ADR, Slice, Welle, Carveout) bleibt still, mit oder ohne
-Segment; eine geteilte Liste ist laut, sobald zwei Einträge sich nahekommen,
-ebenfalls unabhängig vom Segment. Struktur-IDs (`LH-*`, `SPEC-*`, `ARC-*`)
-sind davon nicht ausgenommen: „kein Bereichssegment nötig" gilt nur, solange
-sie flach bleiben — `lab/example` löst das strukturierte Lastenheft bereits
-korrekt mit `LH-FA-IDX-003`.
+- **Modul 9 Schritt 4, drei Absätze statt einem:** Die Tests-Zeile bindet an
+  die Akzeptanzkriterien der in Schritt 3 identifizierten Requirement-ID
+  (Kennung-statt-Wiederholung-Disziplin) · betrifft dieselbe Ursache viele
+  gleichrangige Dateien, nennt der Plan sie einmal, nicht pro Datei · der
+  Plan lebt in §3 des Slice-Plans, nicht im Chat-Verlauf, und wird über die
+  Rückkanten (5→4, 6→4) verfeinert, nicht neu geschrieben. Regelwerk-Spiegel
+  wortgleich nachgezogen — mit eigenem Antezedens für „die ID", da der
+  Spiegel das Kurs-Beispiel `LH-FA-AUTH-001` nicht trägt.
+- **`slice.template.md` §3:** BEDIENHINWEIS nennt die Testdatei-Zeile
+  namentlich, eine zweite Beispielzeile zeigt sie; darunter eine optionale
+  Prosa-Liste für Ansätze, die eine Datei-Zeile nicht abbildet (z. B. eine
+  Schnittstellenänderung über viele gleichrangige Dateien).
+- **Begriffs-Lücke geschlossen:** `begriffe.md` (Kurs + Spiegel) bekommt den
+  Eintrag *„Plan (vor Code)"*, mit *„Umsetzungsplan"* als genanntem Synonym —
+  eine Suche nach dem gebräuchlicheren Wort findet jetzt einen Treffer.
 
-**Welle- und Slice-Kennungen sind Namen, nicht Nummern — unabhängig von der
-Schreiberzahl.** Eine Nummer trägt immer die Vorbedingung eines einzigen
-Ablegers oder Zuteilenden, die sich lautlos verletzen lässt, sobald ein
-zweiter Schreiber dazukommt, geplant oder nicht. Der Name trägt das Präfix
-eines vorhandenen Ankers (`LH-*`, `ADR-*`, `CO-*`), wenn einer existiert —
-reine Traceability, keine zusätzliche Sicherheit —, sonst einen freien Slug;
-ein während einer Welle neu entstehender Slice trägt denselben Mechanismus
-mit der Welle als Namensraum-Präfix. Die Vergabe ist nur die eine Hälfte:
-Das Anlegen fasst daneben eine gemeinsame Liste an (*Offene Wellen*, ein
-§4) — Schnitt: Planung serialisiert, Ausführung nebenläufig.
-
-**Beobachtbares Verhalten, geprobt** (`AGENTS.md` §3): Szenario-Gruppe s24,
-9 Verdikte, 72/72 · 0 KAPUTT.
-
-Gates: `make check`, `make bundle-check`, `bash lab/team-sim/run.sh`.
+Gates: `make check`, `make bundle-check`.
 
 ## Welle 131 — 2026-09-11 · Der Rest der Zählraum-Ablösung
 
@@ -82,6 +74,39 @@ Ausrollung, geplant in [`docs/kennungs-namen-plan.md`](docs/kennungs-namen-plan.
 
 Gates: `make check`, `make bundle-check`, `lab/example`s eigenes
 `make verify`, `bash lab/team-sim/run.sh` (72/72).
+
+## Welle 130 — 2026-09-08 · Welle- und Slice-Kennungen sind Namen
+
+`grundlagen/source-precedence.md` §Vergabe knüpfte die Vergabe-Form an die
+Zahl der **Menschen**; `docs/team.md` misst dasselbe Risiko als *Ganz-Wert ×
+nebenläufige **Schreiber***. §Vergabe stellt jetzt auf die Achse Schreiber um
+(Mensch, Agent, Automat) — `docs/team.md` trägt den Fall als `TB-015`.
+
+**Kernsatz:** Segmentierung, Zuteilung und Vorabvergabe verkleinern die
+Population möglicher Kollidierender, keine davon macht eine Kollision
+hörbar. Hörbarkeit hängt allein an der Ablage: eine Kennung mit eigener
+Datei je Artefakt (ADR, Slice, Welle, Carveout) bleibt still, mit oder ohne
+Segment; eine geteilte Liste ist laut, sobald zwei Einträge sich nahekommen,
+ebenfalls unabhängig vom Segment. Struktur-IDs (`LH-*`, `SPEC-*`, `ARC-*`)
+sind davon nicht ausgenommen: „kein Bereichssegment nötig" gilt nur, solange
+sie flach bleiben — `lab/example` löst das strukturierte Lastenheft bereits
+korrekt mit `LH-FA-IDX-003`.
+
+**Welle- und Slice-Kennungen sind Namen, nicht Nummern — unabhängig von der
+Schreiberzahl.** Eine Nummer trägt immer die Vorbedingung eines einzigen
+Ablegers oder Zuteilenden, die sich lautlos verletzen lässt, sobald ein
+zweiter Schreiber dazukommt, geplant oder nicht. Der Name trägt das Präfix
+eines vorhandenen Ankers (`LH-*`, `ADR-*`, `CO-*`), wenn einer existiert —
+reine Traceability, keine zusätzliche Sicherheit —, sonst einen freien Slug;
+ein während einer Welle neu entstehender Slice trägt denselben Mechanismus
+mit der Welle als Namensraum-Präfix. Die Vergabe ist nur die eine Hälfte:
+Das Anlegen fasst daneben eine gemeinsame Liste an (*Offene Wellen*, ein
+§4) — Schnitt: Planung serialisiert, Ausführung nebenläufig.
+
+**Beobachtbares Verhalten, geprobt** (`AGENTS.md` §3): Szenario-Gruppe s24,
+9 Verdikte, 72/72 · 0 KAPUTT.
+
+Gates: `make check`, `make bundle-check`, `bash lab/team-sim/run.sh`.
 
 ## Welle 129 — 2026-09-08 · Der Gate-Index steht einmal
 

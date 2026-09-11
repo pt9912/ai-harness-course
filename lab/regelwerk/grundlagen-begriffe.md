@@ -12,6 +12,7 @@
 | Spec | Die Artefakte unter `spec/` — die drei Straten *Vertrag* · *Technik* · *Sicht*. Quelle der Wahrheit für *was gilt*; das *warum* trägt die ADR. |
 | ADR | Architecture Decision Record unter `docs/plan/adr/`. Quelle der Wahrheit für *warum so*. |
 | Slice | Kleinste lieferbare Einheit eines Features. Hat eigenen Plan, eigene DoD. |
+| Plan (vor Code) | Auch *Umsetzungsplan* genannt. Datei-Tabelle in §3 des Slice-Plans: Der Implementer-Agent gibt sie vor dem ersten Diff aus und verfeinert sie über die Rückkanten (Schritt 5/6 → 4) — bindet an Akzeptanzkriterien, wiederholt die Out-of-Scope-Zeile aus §1. Siehe [`modul-09-implementierung.md` §Minimal Agent Workflow](modul-09-implementierung.md#minimal-agent-workflow-8-schritte). |
 | Welle | Bündel von Slices, das gemeinsam geplant und abgeschlossen wird. |
 | Trigger | Beobachtbare Bedingung, bei der ein Slice/Welle/Carveout in den nächsten Status wandert. |
 | Closure | Abschluss eines Slice oder einer Welle, dokumentiert mit Lerneintrag in `done/`. |
