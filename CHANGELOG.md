@@ -11,6 +11,32 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 133 — 2026-09-12 · Linkerhalt bei Operation 3 (Anbinden)
+
+Anlass: gemeldeter Befund — zwei Verweise in
+`kurs/de/02-planung/modul-06-roadmap.md` mit unvollständigem Etikett (nur
+Dateiname *oder* nur §-Abschnitt, aber vollständig auflösendem Linkziel)
+verloren beim Umhängen in den Spiegel den Link selbst und wurden zu Prosa
+(„(Grundlagen: Traceability-Constraint)" / „(Grundlagen: Source
+Precedence)"). Dieselbe Fehlerklasse wie „0 Befund(e) bei leerem
+Prüfbereich": ein stiller Fallback verliert eine prüfbare Referenz, statt
+sie als Befund zu melden.
+
+- `lab/regelwerk/modul-06-roadmap.md`: beide Stellen auf echten Link
+  umgehängt (`` [`grundlagen-traceability.md` §Traceability-Constraint] ``
+  / `` [`grundlagen-source-precedence.md` §Source Precedence] ``, flacher
+  Mirror-Dateiname, Anker aus der Zieldatei). Sweep über den gesamten
+  Spiegel nach demselben Prosa-Muster (`(Grundlagen: …)` u. ä.) fand keine
+  weiteren Vorkommen.
+- `docs/regelwerk-extrakt.md`: Operation 3 (Anbinden) präzisiert — das
+  Linkziel entscheidet, ob ein Verweis ein Link bleibt, nicht das Etikett;
+  ein nicht sauber umhängbarer Verweis ist ein Befund, keine legitime
+  Prosa-Form. Nachtrag-Tabelle mit den zwei Fällen, plus Offen-Punkt für
+  den weiterhin fehlenden Sensor (Linkerhalt ist bisher keine der beiden
+  Proben aus Teil 3).
+
+Gates: `make check`.
+
 ## Welle 132 — 2026-09-11 · Plan vor Code bindet an Akzeptanzkriterien
 
 Anlass war eine Nachfrage zu `modul-08-agentenrollen.md`s Anker-Tabelle:

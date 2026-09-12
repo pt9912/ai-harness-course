@@ -1,6 +1,6 @@
 # Regelwerk-Extrakt — Schnittregel und Prüfung
 
-**Stand:** 2026-09-08 (Operation 6 ergänzt, Welle 130).
+**Stand:** 2026-09-12 (Linkerhalt bei Operation 3 präzisiert, Welle 133).
 
 Wie aus `kurs/de` der Betriebsregelwerk-Spiegel unter `lab/regelwerk/` entsteht,
 woran sich das Ergebnis prüfen lässt und was daran offen ist. Die Regel steht
@@ -53,6 +53,17 @@ Daraus sechs Operationen — die sechste erst seit Welle 130, mit eigener Beding
 | **4** | **Benennen** | Vorspänne, die eine Aufzählung, Tabelle oder Sektion **benennen** (*„Drei legitime Verdikte."*). Probe: die [Weglass-Probe](#teil-1--was-operativ-ist) rückwärts — ändert der Vorspann einen Ausgang, ist er Aussage und unzulässig |
 | **5** | **Aussageform** | eine didaktische Frage, die eine operative Aussage enthält, in diese Aussage überführen (*„Und im Repo ohne Wellen-Betrieb?"* → *„Im Repo ohne Wellen-Betrieb …"*) |
 | **6** | **Verdichten** | mehrere operative Aussagen zu einer neuen, kürzeren Formulierung zusammenziehen — **nur** wenn Kontext-Kosten es verlangen (der Spiegel ist Agenten-Kontext, geladen bei jedem Lauf; Modul 9 §Kontext-Verdichtung). Bedingung: keine Aussage geht verloren, nur Redundanz, Begründung und Beleg fallen. Wortlaut ist danach **frei**, Inhalt **gebunden** — die Umkehrung von Operation 1–5 |
+
+**Operation 3 bindet an das Linkziel, nicht an das Etikett.** Ob ein
+Kurs-Verweis im Spiegel ein Link bleibt, entscheidet sich daran, wohin er
+zeigt — nicht daran, ob das sichtbare Etikett in der Quelle beide Hälften
+trägt (Dateiname *und* §-Abschnitt). Ein Verweis mit vollständigem Ziel, dessen
+Etikett nur eine Hälfte zeigt (*„[`traceability.md`]"* ohne §-Teil, oder
+*„[§Source Precedence]"* ohne Dateiname), bleibt trotzdem ein Link — umgehängt
+auf den flachen Mirror-Dateinamen, mit ergänztem Etikett. **Ein Verweis, den
+Operation 3 nicht sauber umhängen kann, wird zu Prosa degradiert, ist ein
+Befund** (Klasse in der Tabelle unten) und kein legitimer Ausgang der
+Operation.
 
 **Was damit ausgeschlossen ist**, ohne dass es einzeln aufgezählt werden müsste:
 Ersetzen, Umstellen, Verallgemeinern (`slice-019` → *„Slices"*) außerhalb von
@@ -161,6 +172,27 @@ Teilfolgen-Probe aus Teil 3 gegengeprüft und besteht sie.
 | `modul-10-review-harness.md` | „Ein **so entstandener** HIGH-Eintrag" · fehlendes „siehe" | „Ein HIGH-Eintrag, **der aus dem Steering Loop kam**" · „(**siehe** ADR-Hard-Rule …)" |
 | `grundlagen-traceability.md` | „Altbestand bleibt ohne Anker" | „**Bestehende Regeln haben keinen rekonstruierbaren Ursprung mehr**" |
 
+## Bestätigte Abweichungen — Nachtrag (2026-09-12)
+
+Eigene Fehlerklasse, nicht Paraphrase: ein vollständig auflösender Kurs-Link
+mit unvollständigem Etikett (nur Dateiname *oder* nur §-Abschnitt) verlor beim
+Umhängen den Link selbst und wurde zu Prosa. Zwei Fälle, beide in
+`modul-06-roadmap.md`, aus derselben Quelldatei
+`kurs/de/02-planung/modul-06-roadmap.md`:
+
+| Stelle | Spiegel vorher | Spiegel jetzt |
+|---|---|---|
+| Zeile 350 der Quelle (`` [`traceability.md`](...) `` ohne §-Teil) | „…darf er ins Archiv (Grundlagen: Traceability-Constraint)." | „…darf er ins Archiv (`` [`grundlagen-traceability.md` §Traceability-Constraint](grundlagen-traceability.md#traceability-constraint) ``)." |
+| Zeile 429 der Quelle (`` [§Source Precedence](...) `` ohne Dateiname) | „…und Kopien driften (Grundlagen: Source Precedence)." | „…und Kopien driften (`` [`grundlagen-source-precedence.md` §Source Precedence](grundlagen-source-precedence.md#source-precedence) ``)." |
+
+Ein Sweep über `lab/regelwerk/*.md` nach demselben Prosa-Muster
+(`(Grundlagen: …)`, `(Modul N: …)`, `(Kurs: …)`) fand keine weiteren
+Vorkommen — die Klasse war auf diese zwei Stellen begrenzt, Stand heute. Die
+Regel dagegen steht jetzt in [Operation 3](#teil-2--was-der-spiegel-tun-darf):
+das Ziel entscheidet, nicht das Etikett. Ein Sensor dafür fehlt weiterhin
+(Teil 4) — die zwei Proben aus Teil 3 prüfen Wortlaut-Teilfolge und
+-Deckung, nicht Linkerhalt.
+
 Der zweite `modul-10`-Eintrag kam erst beim Review der Korrektur dazu: Er steht
 im **unmittelbar anschließenden Satz** des ersten. Wer eine Fundliste abarbeitet
 statt die Passage zu lesen, findet ihn nicht — dieselbe Arbeitsweise, die die
@@ -261,6 +293,11 @@ positive Fassung macht daraus einen Befund, bis jemand die Liste erweitert.
 - Einen dauerhaften Sensor als **Change Request an den Doku-Prüfer**
   formulieren, sobald die Altbestands-Schicht abgetragen ist — vorher liefe
   er dauerhaft rot.
+- **Linkerhalt bei Operation 3** ist noch kein Sensor, nur eine Regel (siehe
+  Nachtrag oben): dass ein vollständig auflösender Kurs-Link im Spiegel ein
+  Link bleibt, statt zu Prosa zu werden, prüft bisher niemand automatisch.
+  Gehört in denselben Doku-Prüfer-CR wie der Zeilen-oben-Punkt, wenn der
+  gestellt wird.
 
 Wird die Schnittregel zur **zweiten** repo-lokalen Strukturregel, wandert sie
 nach `harness/conventions.md`; der Trigger dafür steht in der
