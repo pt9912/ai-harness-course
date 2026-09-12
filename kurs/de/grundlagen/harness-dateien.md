@@ -294,7 +294,9 @@ Problem; sie stand bei elf Zeilen.
 
 **Ein Gate je Datei, sobald sein Vertrag mehr braucht als einen Satz.** Diese
 Prosa lebt dann unter
-`harness/sensors/<target>.md`, die Tabellenzeile bleibt stehen und wird ihr
+`harness/sensors/<target>.md` (Ziel-Form
+[`gate.template.md`](../../../lab/templates/harness/sensors/gate.template.md)),
+die Tabellenzeile bleibt stehen und wird ihr
 Index — die **Target-Zelle wird zum Link auf die Datei**, wie die `MR`-Zelle im
 Adaptions-Block. Dieser Link ist kein Komfort, sondern die einzige Fassung der
 Zuordnung, die ein Sensor prüft: Eine bloße Namenskonvention (`make X` →

@@ -11,6 +11,31 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 134 — 2026-09-12 · Sensor-Vorlage referenziert, auf allen drei Ebenen
+
+Anlass: gemeldeter Befund — `lab/templates/harness/README.template.md`s
+Sensors-Abschnitt sagt, dass ein Gate mit Erklärungsbedarf nach
+`harness/sensors/<target>.md` wandert, nennt aber nicht die Vorlage dafür.
+`conventions.template.md` macht es vor: dort steht explizit „kopiert aus
+`harness/conventions/MR-NNN-titel.template.md` der vendored Baseline", wenn
+eine neue Datei aus einer Vorlage entsteht. Die Nachfrage, ob dieselbe Lücke
+auch im Regelwerk fehlt, zeigte: der erste Fix war zu tief angesetzt — die
+Quelle selbst (`kurs/de/grundlagen/harness-dateien.md`) trug die Vorlage
+ebenfalls nicht, obwohl `harness/sensors/gate.template.md` seit ihrer
+eigenen Einführung existiert und im Templates-Index (`lab/templates/README.md`)
+längst gelistet ist, und `MR-NNN-titel.template.md` als Ziel-Form-Verweis auf
+allen drei Rangfolge-Ebenen steht (Kurs → Regelwerk → Templates). Fix-Richtung
+korrigiert: Quelle zuerst.
+
+- `kurs/de/grundlagen/harness-dateien.md`: „Ein Gate je Datei"-Absatz nennt
+  jetzt `gate.template.md` als Ziel-Form neben `harness/sensors/<target>.md`.
+- `lab/regelwerk/grundlagen-harness-dateien.md`: wortgleich nachgezogen.
+- `lab/templates/harness/README.template.md`: Sensors-Abschnitt nennt
+  `harness/sensors/gate.template.md` als Kopiervorlage, an derselben Stelle,
+  die bisher nur den Ziel-Pfad `harness/sensors/<target>.md` nannte.
+
+Gates: `make check`, `make bundle-check`.
+
 ## Welle 133 — 2026-09-12 · Linkerhalt bei Operation 3 (Anbinden)
 
 Anlass: gemeldeter Befund — zwei Verweise in

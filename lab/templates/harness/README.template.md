@@ -110,8 +110,9 @@ Braucht ein Gate mehr als EINEN SATZ — Deckungsgrenze, Ausgabe-Bedeutung,
 Exit-Codes, Abbruch-Bedingungen —, wandert das nach. Ob der Überhang schon
 unter der Tabelle steht oder in die Zelle gedrängt wurde, ist dieselbe Sache:
 eine Zelle, die zum Absatz geworden ist, ist der Fund, nicht die Ausnahme.
-`harness/sensors/<target>.md`, und die **Target-Zelle wird zum Link darauf**
-— wie die `MR`-Zelle im Adaptions-Block. Der Link ist kein Komfort: Er ist die
+`harness/sensors/<target>.md` — kopiert aus `harness/sensors/gate.template.md`
+der vendored Baseline —, und die **Target-Zelle wird zum Link darauf** — wie
+die `MR`-Zelle im Adaptions-Block. Der Link ist kein Komfort: Er ist die
 einzige Fassung dieser Zuordnung, die der Link-Sensor prüft. Eine bloße
 Namenskonvention (`make X` -> `sensors/X.md`) bleibt still grün, wenn die
 Datei verschwindet und die Zeile stehen bleibt. Seine Grenze: Er prüft EINE
