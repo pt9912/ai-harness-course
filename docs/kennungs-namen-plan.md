@@ -3,8 +3,8 @@
 **Stand:** 2026-09-11 — **alle sieben Pakete (P1–P7) umgesetzt, Gates grün**
 (`make check`, `make bundle-check`, `lab/example`s eigenes `make verify`,
 `bash lab/team-sim/run.sh` — 72/72). Diese Datei ist damit Historie: Sie
-dokumentiert, was gesucht und in welcher Reihenfolge behoben wurde. Noch
-nicht committet.
+dokumentiert, was gesucht und in welcher Reihenfolge behoben wurde.
+Committet und gepusht als Wellen 130–131 (`80b0968`).
 
 Ursprünglich: Welle 130 hat die Regel gesetzt (`kurs/de/grundlagen/source-precedence.md`
 §Vergabe) und den Herkunfts-Anker (`grundlagen/traceability.md`) auf sie umgestellt.
