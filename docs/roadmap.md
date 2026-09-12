@@ -87,6 +87,7 @@ CHANGELOG sind ihr Register.
 
 | Meilenstein | Welle(n) | Trigger | Status |
 |---|---|---|---|
+| `v6.7.2` | 134 | erfüllt | erreicht 2026-09-12 (Lauf 34703505867) |
 | `v6.7.1` | 133 | erfüllt | erreicht 2026-09-12 (Lauf 34673938325) |
 | `v6.7.0` | 130, 131, 132 | erfüllt | erreicht 2026-09-11 (Lauf 34621764934) |
 | `v6.6.0` | 129 | erfüllt | erreicht 2026-09-08 (Lauf 34217058901) |
