@@ -37,6 +37,25 @@ nicht: "Ist es gut?"
 - Tests prüfen ob *Code tut, was Tests testen*. Verifikation prüft, ob *Code tut, was Plan/DoD/Spec verlangt*. Lücken zwischen Tests und Spec sind genau das, was Verifikation findet.
 - Nein. Reviewer hat *Plan + ADR*. Verifier hat *DoD + Spec + Plan*. Andere Eingabe, andere Findings.
 - Falsch. Die wahrscheinlichere Erklärung: Reviewer hat gegen einen veralteten Plan geprüft, oder der Plan hat eine DoD-Lücke. Architect klärt — *nicht* "wir nehmen das mildere Ergebnis".
+- Ein grüner Test beweist nur, was er tatsächlich prüft, nicht, was der DoD-Punkt behauptet. Bestätigt ist die Verknüpfung erst, wenn gezeigt ist, dass der Test ohne den Fix aus dem *richtigen* Grund rot liefe — dasselbe „Bewusstes Brechen" wie bei einer ADR-Fitness-Function ([Modul 13 §Fitness Function aus einem ADR-Satz](modul-13-quality-gates.md#adr-zur-fitness-function)), nur auf eine Testbehauptung statt auf eine Architektur-Regel angewandt.
+
+### Bewusstes Brechen für DoD-Testbehauptungen (Modul 11)
+
+Ein DoD-Punkt der Form „real getestet" ist mit der Verlinkung auf einen
+grünen Test allein noch nicht bestätigt — ein grüner, verlinkter Test ist
+selbst eine Behauptung, die Bestätigung braucht, dieselbe Verifier-Lücke wie
+beim Implementer-Bericht, nur eine Ebene tiefer.
+[Modul 13 §Fitness Function aus einem ADR-Satz](modul-13-quality-gates.md#adr-zur-fitness-function)
+verlangt für eine ADR-Fitness-Function bereits genau diesen Nachweis: zeigen,
+dass die Prüfung aus dem richtigen Grund rot wird. Für einen DoD-Punkt, der
+sich auf einen Test beruft, gilt dieselbe Pflicht — den Fix testweise
+zurücknehmen (Mutationstest, oder der reale Vorzustand) und prüfen, ob der
+benannte Test dann mit der behaupteten Fehlermeldung rot läuft, nicht nur
+irgendwie.
+
+Fehlt dieser Rot-Beleg bei einem sicherheits- oder korrektheitskritischen
+DoD-Punkt, trägt der Verifier ihn nach, statt die grüne Suite ungeprüft als
+Bestätigung zu übernehmen.
 
 ### Fitness Function ohne Standard-Tool (Modul 11)
 

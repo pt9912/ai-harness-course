@@ -11,6 +11,48 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 135 — 2026-09-13 · E2E-Gate-Typ + Bewusstes-Brechen-Pflicht für DoD-Testbehauptungen
+
+Anlass: Praxis-Rückmeldung, dass DoDs mit Verifier-Schritt nicht immer
+vollständig eingelöst werden, obwohl Tests existieren — Audit an einem
+realen Fall (adoptierendes Repo `pg-change-feed`, slice-023): ein DoD-Punkt
+trug bereits einen verlinkten, grünen, benannten Test; die reale Lücke
+bestand trotzdem, weil niemand geprüft hatte, ob der Test aus dem
+*richtigen* Grund grün war (Diskussionsdokument
+[`docs/dod-verifikation-testbindung.md`](docs/dod-verifikation-testbindung.md),
+Vorschläge F + C). Der Audit widerlegt die naive Fassung „DoD-Punkt braucht
+nur einen verlinkten Test" — was am Fall griff, ist Modul 13s „Bewusstes
+Brechen" (bisher nur für ADR-Fitness-Functions vorgesehen), angewandt auf
+eine DoD-Testbehauptung; eine zweite, bis heute offene Teil-Lücke im
+selben Fall (Replication-Pfad ungetestet gegen Rollen-Vertauschung) zeigte
+zusätzlich das fehlende Vokabular für einen eigenen E2E-Gate-Typ.
+
+- `kurs/de/04-qualitaet/modul-13-quality-gates.md`: neue Zeile „E2E-Test"
+  in der Gate-Typ-↔-Fehlerbild-Tabelle, mit Radius-Abgrenzung zum
+  bestehenden Integrationstest-Eintrag (Integrationstest = zwei/drei
+  Komponenten isoliert, E2E-Test = kompletter Pfad in echter Konfiguration,
+  einziger Fänger für Verdrahtungsfehler selbst).
+- `kurs/de/04-qualitaet/modul-11-verification.md`: neue Fehlvorstellung
+  „Ein DoD-Punkt mit verlinktem, grünem Test ist bestätigt" plus neuer
+  Abschnitt „Bewusstes Brechen für DoD-Testbehauptungen" — ein DoD-Punkt
+  der Form „real getestet" gilt erst als bestätigt, wenn zusätzlich zum
+  grünen Test gezeigt ist, dass er ohne den Fix aus dem richtigen Grund rot
+  liefe; fehlt dieser Rot-Beleg bei einem sicherheits-/korrektheitskritischen
+  DoD-Punkt, trägt der Verifier ihn nach.
+- `kurs/de/02-planung/modul-05-planning-harness.md`: Closure-Regel um einen
+  Verweis auf Modul 11s neue Regel ergänzt — sonst widerspricht ein isoliert
+  gelesenes Modul 5 der neuen Fehlvorstellung in Modul 11 (Befund aus der
+  Review dieser Welle).
+- `lab/regelwerk/modul-13-quality-gates.md`,
+  `lab/regelwerk/modul-11-verification.md`,
+  `lab/regelwerk/modul-05-planning-harness.md`: wortgleich nachgezogen.
+- `lab/regelwerk/README.md`: `Stand:`-Zeile auf Welle 135 gezogen.
+
+Diese Welle behauptet kein beobachtbares Verhalten — reine Text-/Regel-
+Ergänzung in Kurs und Regelwerk, kein neuer oder geänderter Sensor.
+
+Gates: `make check`, `make bundle-check`.
+
 ## Welle 134 — 2026-09-12 · Sensor-Vorlage referenziert, auf allen drei Ebenen
 
 Anlass: gemeldeter Befund — `lab/templates/harness/README.template.md`s

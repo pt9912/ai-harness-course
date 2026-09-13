@@ -92,7 +92,11 @@ was in einem offenen PR liegt, ist für alle anderen noch nicht da.
 `in_progress → done` ist der einzige Weg nach `done` und verlangt
 *Lerneintrag* **und einen Ausgang für jedes offene Risiko**
 ([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)), nicht nur
-"Tests grün". Die beiden **Rückführungen** `in_progress → next` (zu groß —
+"Tests grün" — und ein DoD-Punkt, der sich auf einen Test beruft, ist mit
+der Verlinkung allein noch nicht bestätigt: erst wenn gezeigt ist, dass der
+Test ohne den Fix aus dem richtigen Grund rot liefe
+([Modul 11 §Bewusstes Brechen für DoD-Testbehauptungen](../04-qualitaet/modul-11-verification.md#bewusstes-brechen-für-dod-testbehauptungen)).
+Die beiden **Rückführungen** `in_progress → next` (zu groß —
 zurück zur Zerlegung) und `in_progress → open` (Blocker — meist mit Carveout,
 siehe [Modul 7](modul-07-carveouts.md)) tragen **zwei** Pflichten an zwei
 Zeitpunkten, die nicht zusammenfallen: **Vorab** benennt §4 des Slice-Plans die

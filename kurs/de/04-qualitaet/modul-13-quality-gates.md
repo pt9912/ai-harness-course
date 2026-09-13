@@ -91,11 +91,21 @@ Steering Loop läuft leer. Die Zuordnung in Kurzform:
 | Coverage / Critical Coverage | Coverage-Loch — gesamt bzw. auf dem kritischen Pfad | Qualität der Tests, Spec-Lücken ([Modul 11](modul-11-verification.md)) |
 | Replay-/Determinism-Gate | nicht-deterministischer Test oder Lauf | semantische Drift außerhalb des Golden Sets ([Modul 12](modul-12-replay-evaluierung.md)) |
 | Integrationstest | Verhalten im Zusammenspiel: Komponenten-Vertrag bricht erst in Kombination | lokale Muster und Typgrenzen — dafür zu teuer und zu spät |
+| E2E-Test | Vertragsbruch über den vollen Pfad: Wiring, Deployment-Annahmen, Cross-Komponenten-Reihenfolge — bricht erst, wenn alle Teile *zusammen und in echter Konfiguration* laufen | lokale Muster, einzelne Komponentengrenzen (das leistet der günstigere Integrationstest) |
+
+Integrationstest und E2E-Test teilen sich das Fehlerbild "Verhalten im
+Zusammenspiel", trennen sich aber im *Radius*: Ein Integrationstest hält
+zwei oder drei Komponenten in Isolation gegeneinander, ein E2E-Test lässt
+den kompletten Pfad in echter oder repräsentativer Konfiguration laufen —
+und ist deshalb der einzige der beiden, der einen Fehler in der
+*Verdrahtung selbst* (welche Komponente an welcher Stelle hängt) fängt,
+nicht nur einen Fehler im Vertrag zwischen zweien.
 
 Trennlinie ist die *Regel-Klasse*, nicht das Tool: Linter machen lokale
 Mustererkennung, Security-Regeln verlangen Datenfluss-Analyse,
-Architekturtests prüfen Struktur, Integrationstests Verhalten im
-Zusammenspiel. Die Zuordnung selbst probst du im
+Architekturtests prüfen Struktur, Integrationstests und E2E-Tests
+Verhalten im Zusammenspiel, in unterschiedlichem Radius. Die Zuordnung
+selbst probst du im
 [Selbstcheck](#selbstcheck) (Item zu LZ 5 — vier Fehlerbilder mit
 Begründung des Unterscheidungs-Kriteriums); genau diese Sensor-Literacy
 ruft auch [Checkpoint D](../grundlagen/checkpoints.md#checkpoint-d--nach-phase-04-qualität)

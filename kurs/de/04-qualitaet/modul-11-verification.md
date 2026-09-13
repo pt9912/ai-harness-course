@@ -31,6 +31,7 @@ Nach diesem Modul kannst du:
 * ADR-Konformität
 * Architekturkonformität
 * Pre-completion Checklist Middleware (vom Agenten selbst durchlaufen, bevor er "fertig" meldet — siehe [Modul 9 Schritt 8](../03-agenten/modul-09-implementierung.md#minimal-agent-workflow-8-schritte))
+* Bewusstes Brechen für DoD-Testbehauptungen
 
 ## Vorgriff: zwei Begriffe aus späteren bzw. früheren Modulen
 
@@ -72,6 +73,37 @@ nicht: "Ist es gut?"
 - **"Grüne Tests sind Verifikation."** — Tests prüfen ob *Code tut, was Tests testen*. Verifikation prüft, ob *Code tut, was Plan/DoD/Spec verlangt*. Lücken zwischen Tests und Spec sind genau das, was Verifikation findet.
 - **"Verifier braucht denselben Kontext wie Reviewer."** — Nein. Reviewer hat *Plan + ADR*. Verifier hat *DoD + Spec + Plan*. Andere Eingabe, andere Findings.
 - **"Wenn Verifier rot und Reviewer grün, hat Reviewer recht."** — Falsch. Die wahrscheinlichere Erklärung: Reviewer hat gegen einen veralteten Plan geprüft, oder der Plan hat eine DoD-Lücke. Architect klärt — *nicht* "wir nehmen das mildere Ergebnis".
+- **"Ein DoD-Punkt mit verlinktem, grünem Test ist bestätigt."** — Ein grüner Test beweist nur, was er tatsächlich prüft, nicht, was der DoD-Punkt behauptet. Bestätigt ist die Verknüpfung erst, wenn gezeigt ist, dass der Test ohne den Fix aus dem *richtigen* Grund rot liefe — dasselbe „Bewusstes Brechen" wie bei einer ADR-Fitness-Function ([Modul 13 §Worked Example A](../04-qualitaet/modul-13-quality-gates.md#worked-example-a-vom-adr-satz-zur-fitness-function)), nur auf eine Testbehauptung statt auf eine Architektur-Regel angewandt. Siehe [§Bewusstes Brechen für DoD-Testbehauptungen](#bewusstes-brechen-für-dod-testbehauptungen).
+
+## Bewusstes Brechen für DoD-Testbehauptungen
+
+Ein DoD-Punkt der Form *„real getestet"* ist mit der Verlinkung auf einen
+grünen Test allein noch nicht bestätigt. Beispiel: Ein DoD-Punkt verlangt,
+dass ein privilegierter Datenbankzugriff ohne die passende Rolle scheitert,
+real getestet. Der verlinkte Test entzieht beim Setup *alle* Rechte und
+erteilt sie am Ende vollständig wieder — er beweist „0 Rechte scheitert"
+und „alle Rechte gelingt", nie die eigentlich relevante Zwischenstufe
+(*ein* fehlendes Recht). Nimmt man probeweise genau das eine Recht zurück,
+das die Regel eigentlich schützen soll, bleibt der Test **grün** — er hätte
+die Regression, die er angeblich abdeckt, nie angezeigt.
+
+Ein grüner, verlinkter Test ist damit selbst eine Behauptung, die
+Bestätigung braucht — dieselbe Verifier-Lücke wie beim
+Implementer-Bericht (siehe oben, *„Behauptung ohne Bestätigung"*), nur eine
+Ebene tiefer. [Modul 13 §Worked Example A](../04-qualitaet/modul-13-quality-gates.md#worked-example-a-vom-adr-satz-zur-fitness-function)
+verlangt für eine ADR-Fitness-Function bereits genau diesen Nachweis:
+zeigen, dass die Prüfung aus dem *richtigen* Grund rot wird. Für einen
+DoD-Punkt, der sich auf einen Test beruft, gilt dieselbe Pflicht — den Fix
+testweise zurücknehmen (Mutationstest, oder der reale Vorzustand) und
+prüfen, ob der benannte Test dann mit der behaupteten Fehlermeldung rot
+läuft, nicht nur irgendwie.
+
+Fehlt dieser Rot-Beleg bei einem sicherheits- oder korrektheitskritischen
+DoD-Punkt, trägt der Verifier ihn nach, statt die grüne Suite ungeprüft als
+Bestätigung zu übernehmen — dieselbe Kosten-Abwägung wie in
+[§Worked Example, Schritt 2](#worked-example-eine-adr-aussage-ohne-fertiges-tool-als-fitness-function-bauen):
+ein einzelner Mutationstest ist billiger als ein DoD-Punkt, der sich auf
+einen Test beruft, der etwas anderes beweist, als er soll.
 
 ## Worked Example: eine ADR-Aussage ohne fertiges Tool als Fitness Function bauen
 
