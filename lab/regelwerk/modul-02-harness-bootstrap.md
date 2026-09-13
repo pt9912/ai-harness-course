@@ -279,9 +279,27 @@ Pinnen ohne Überwachung ist die halbe Maßnahme (Doktrin „pinnen und
   Artefakt, neue **Pflicht**-Felder und umbenannte Sektionen schon — sonst
   behauptet das Repo
   eine Baseline-Konformität, die seine Artefakte nicht tragen. Für
-  **wiederkehrende** Templates (ADR, Slice, Welle, Carveout, Review-Report)
-  gilt die Append-only-Logik: Neue Instanzen folgen der neuen Form, bestehende
-  werden nicht rückwirkend umgeschrieben.
+  **wiederkehrende** Templates (ADR, Slice, Welle, Carveout, Review-Report,
+  `MR`) gilt die Append-only-Logik: Neue Instanzen folgen der neuen Form,
+  bestehende werden nicht rückwirkend umgeschrieben. Das Wort **Templates** benennt hier
+  die Artefakt-Klasse, nicht 1:1 eine einzelne Vorlagen-Datei: Wo eine Klasse
+  mehrere vendored Vorlagen über ihren Lebenszyklus trägt — Slice
+  `slice.template.md` **und** `archiv-stub-slice.template.md`, Welle
+  `welle.template.md`, `welle-results.template.md` **und**
+  `archiv-stub-welle.template.md`
+  ([Modul 6 §Wellen-Closure-Prozedur, Schritt 4](modul-06-roadmap.md#wellen-closure-prozedur-modul-6)) —,
+  gilt die Append-only-Logik für **jede** von ihnen: Auch ein Archiv-Stub ist
+  eine eingefrorene historische Form und wird bei einem neuen Baseline-Stand
+  nicht rückwirkend umgeschrieben. `MR`-Einträge
+  (`harness/conventions/MR-NNN-titel.template.md`) gehören ebenfalls dazu —
+  der nächste Punkt zieht dieselbe Append-only-Disziplin explizit heran ("wie
+  bei ADRs"). **Sensor-Gate-Dateien (`harness/sensors/gate.template.md`)
+  dagegen nicht**, obwohl auch sie mehrfach vendored vorliegen: Ihr Vertrag
+  wird bei einer Mechanismus-Änderung fortgeschrieben statt durch einen neuen
+  Eintrag abgelöst, und es gibt kein Lifecycle-Verzeichnis, das eine alte
+  Fassung hielte — ein retiriertes Gate verschwindet, statt einen Nachfolger
+  zu bekommen
+  ([§Einstiegspunkt](grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
 * **Rückbau ist ein neuer Eintrag, kein Edit** — eine aufgelöste `MR-<NNN>`
   wird nicht überschrieben, sondern bekommt einen Nachfolger, der sie auflöst
   und den Baseline-Stand nennt, der den Trigger gefeuert hat. Die alte Zeile

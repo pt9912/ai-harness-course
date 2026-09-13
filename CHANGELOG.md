@@ -11,6 +11,58 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 136 — 2026-09-13 · Append-only-Klausel: welche Artefakt-Klassen sie trägt
+
+Anlass: Befund aus Review-Runde 2 eines adoptierenden Repos
+(`ai-harness-init`, `slice-migration-hat-ein-instanz-register`), unabhängig
+reproduziert beim Versuch, ein vollständiges Instanz-Register über alle
+vendorten Vorlagen zu führen. Modul 2 nennt die Append-only-Logik für
+„wiederkehrende Templates (ADR, Slice, Welle, Carveout, Review-Report)" an
+zwei Stellen (§Anmerkung zum Instanziierungs-Zeitpunkt, §Freshness-Audit),
+zählt dabei aber **Artefakt-Klassen**, nicht Vorlagen-Dateien — für zwei der
+fünf Klassen fällt das auseinander: Slice trägt zwei vendored Vorlagen
+(`slice.template.md`, `archiv-stub-slice.template.md`), Welle drei
+(`welle.template.md`, `welle-results.template.md`,
+`archiv-stub-welle.template.md`, siehe Modul 6 §Wellen-Closure-Prozedur
+Schritt 4). Ob die Append-only-Klausel die Archiv-Stub-Vorlagen mitträgt, sagt
+der Abschnitt nicht — ein zweiter Leser kommt je nach Lesart auf fünf, sechs
+oder acht betroffene Vorlagen-Zeilen.
+
+Dieselbe Enumeration lässt zwei weitere mehrinstanzige Vorlagen offen, die
+`harness/migration.md` des Adopters als eigene offene Fragen führt: `MR`
+(`harness/conventions/MR-NNN-titel.template.md`, 59 Instanzen) und
+Sensor-Gate (`harness/sensors/gate.template.md`, 15 Instanzen). Für `MR` gibt
+Modul 2 selbst die Antwort im übernächsten Absatz („Rückbau ist ein neuer
+Eintrag, kein Edit … dieselbe Append-only-Disziplin wie bei ADRs") — nur ohne
+Rückbezug auf die Enumeration. Für Sensor-Gate gibt
+`kurs/de/grundlagen/harness-dateien.md` §Einstiegspunkt die Gegenantwort:
+„Ein Gate-Vertrag wird fortgeschrieben, wenn sein Mechanismus sich ändert —
+die Append-only-Disziplin der `MR`-Einträge gilt für ihn nicht", und es gibt
+kein Lifecycle-Verzeichnis, das eine retirierte Fassung hielte. Beide
+Antworten standen schon im Korpus, nur nicht an der Stelle verknüpft, an der
+ein Freshness-Audit sie braucht. Die dritte mehrinstanzige Vorlage aus
+derselben offenen Frage, Observation (`observation.template.md`,
+104 Instanzen), bleibt bewusst **unangetastet**: Modul 6 beschreibt nur die
+Unveränderlichkeit einer einzelnen Beobachtung, nicht, ob eine geänderte
+Template-Form auf bestehende Instanzen zurückwirkt — dazu trägt der Korpus
+bislang keine Aussage, die diese Welle zitieren könnte.
+
+- `kurs/de/01-spec-und-architektur/modul-02-harness-bootstrap.md`:
+  §Freshness-Audit, Eigenschaft „Der Review vergleicht auch die Form" —
+  Klarstellung ergänzt, dass „Templates" die Artefakt-Klasse benennt und sich
+  die Append-only-Logik auf jede vendorte Vorlage der Klasse über ihren
+  Lebenszyklus erstreckt (Slice- und Welle-Archiv-Stubs eingeschlossen), mit
+  Verweis auf Modul 6 §Wellen-Closure-Prozedur Schritt 4; `MR` in die
+  Enumeration aufgenommen; Sensor-Gate explizit als Gegenbeispiel benannt und
+  gegen §Einstiegspunkt belegt.
+- `lab/regelwerk/modul-02-harness-bootstrap.md`: wortgleich nachgezogen.
+- `lab/regelwerk/README.md`: `Stand:`-Zeile auf Welle 136 gezogen.
+
+Diese Welle behauptet kein beobachtbares Verhalten — reine Text-/Regel-
+Klärung in Kurs und Regelwerk, kein neuer oder geänderter Sensor.
+
+Gates: `make check`, `make bundle-check`.
+
 ## Welle 135 — 2026-09-13 · E2E-Gate-Typ + Bewusstes-Brechen-Pflicht für DoD-Testbehauptungen
 
 Anlass: Praxis-Rückmeldung, dass DoDs mit Verifier-Schritt nicht immer
