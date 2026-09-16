@@ -18,6 +18,8 @@ stateDiagram-v2
     in_progress --> done: DoD + Lerneintrag + Risiko-Ausgänge
     in_progress --> next: zu groß — zurück zur Zerlegung
     in_progress --> open: blockiert (Carveout?)
+    open --> done: Gegenstand übernommen oder entfallen — §7 nennt Kennung oder Grund, Liefer-Punkte leer
+    next --> done: Gegenstand übernommen oder entfallen — §7 nennt Kennung oder Grund, Liefer-Punkte leer
     done --> [*]
     note right of done
         §7 → Beobachtungs-Register
@@ -31,7 +33,9 @@ Ablage. Ein Übergang ist deshalb ein **reiner `git mv`** — Inhaltsänderungen
 stehen in einem eigenen Commit
 ([Modul 9 §Hard Rules](modul-09-implementierung.md#hard-rules-repo-spezifisch)),
 bei der Closure nach `done/` in dem *davor*: DoD-Häkchen und Closure-Notiz
-sind die Bedingung dafür, dass die Datei überhaupt nach `done/` darf.
+sind die Bedingung dafür, dass die Datei überhaupt nach `done/` darf — mit
+einer Ausnahme für die Liefer-Häkchen
+([§Ein Slice, dessen Gegenstand ein anderer übernimmt](#ein-slice-dessen-gegenstand-ein-anderer-übernimmt)).
 
 **`open → next` setzt den Verantwortlichen.** Der Slice-Kopf trägt das Feld
 `Verantwortlich:` — den Rolleninhaber der Implementer-Rolle, der die Arbeit
@@ -58,9 +62,12 @@ Auf einem Zweig sieht man den eigenen — vollständiger als den Hauptzweig, abe
 nur für sich. Wer eine `ls`-Antwort als team-weit liest, liest den Hauptzweig;
 was in einem offenen PR liegt, ist für alle anderen noch nicht da.
 
-**Drei Übergänge tragen eine Pflicht**, die über „Arbeit erledigt" hinausgeht.
-`in_progress → done` ist der einzige Weg nach `done` und verlangt
-*Lerneintrag* **und einen Ausgang für jedes offene Risiko**, nicht nur
+**Vier Übergänge tragen eine Pflicht**, die über „Arbeit erledigt" hinausgeht.
+`in_progress → done` ist der einzige Weg nach `done` für einen Slice, der
+gearbeitet wurde — den vierten, `open|next → done`, beschreibt
+[§Ein Slice, dessen Gegenstand ein anderer übernimmt](#ein-slice-dessen-gegenstand-ein-anderer-übernimmt) —
+und verlangt *Lerneintrag* **und einen Ausgang für jedes offene Risiko**
+([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)), nicht nur
 "Tests grün" — und ein DoD-Punkt, der sich auf einen Test beruft, ist mit
 der Verlinkung allein noch nicht bestätigt: erst wenn gezeigt ist, dass der
 Test ohne den Fix aus dem richtigen Grund rot liefe
@@ -92,7 +99,7 @@ der Herkunfts-Anker `seit slice-<Kennung>` auf genau dieses §7 in `done/` zurü
 
 ### Trigger je Lifecycle-Übergang und WIP-Limit (Modul 5)
 
-Alle fünf Übergänge mit Triggerbedingung:
+Alle sechs Übergänge mit Triggerbedingung:
 
 - `open→next` — priorisiert/eingeplant, `Verantwortlich:` gesetzt.
 - `next→in-progress` — Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit
@@ -101,6 +108,9 @@ Alle fünf Übergänge mit Triggerbedingung:
   jedes Risiko aus dem Slice-Plan mit Ausgang.
 - `in-progress→next` — Slice zu groß, zurück zum Schneiden.
 - `in-progress→open` — Blocker, Priorität offen.
+- `open|next→done` — Gegenstand von einem anderen Slice übernommen oder
+  entfallen — §7 nennt Kennung oder Grund, jedes Risiko hat einen Ausgang,
+  die Liefer-Punkte bleiben leer.
 
 Am leichtesten übersehen werden die *Rückführungen* — `in-progress→next`
 und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit
@@ -159,6 +169,87 @@ dieselbe Arbeitsteilung wie beim Beobachtungs-Register
 urteilt, Maschine prüft Deckung —, und sie bindet an denselben Punkt: den
 Übergang nach `done`. *Welches* Werkzeug die urteilsfreie Hälfte prüft, ist
 Repo-Entscheidung; dass sie eine hat, ist es nicht.
+
+#### Ein Slice, dessen Gegenstand ein anderer übernimmt
+
+Nicht jeder Slice in `open/` oder `next/` wird gearbeitet. Wer mehrere zu
+einem zusammenfasst, einen zu großen zerlegt oder feststellt, dass ein
+späterer Slice denselben Gegenstand ohnehin liefert, hat eine Datei, für die
+die State Machine keinen Zug kennt: Sie ist nicht `done`, weil nichts
+geliefert wurde, und sie ist keine Arbeit mehr. Löschen macht ihre Kennung
+ununterscheidbar von einer, die es nie gab
+([Modul 6 §Das Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register-modul-6)),
+und die Kennung ist Adresse: für `Folge-Slice:`-Felder, Risiko-Ausgänge
+*eingetreten*, Register-Ausgänge *geplant* und die Abgrenzungen anderer
+Slices.
+
+**Der Ausgang ist ein `git mv` nach `done/` — ohne Lieferung, mit Closure.**
+Das ist die einzige Ausnahme davon, dass DoD-Häkchen Bedingung für `done/`
+sind — und sie gilt nur für die **Liefer-Punkte** der DoD: Die bleiben leer,
+denn geliefert hat dieser Slice nichts, und ein Haken behauptete es. Die
+Closure-Pflichten darunter (Notiz, Register, Risiko-Ausgänge, Paarungen)
+werden abgehakt wie bei jeder Closure. §7 trägt dafür **eine Zeile mit
+geschlossenem Paar**, `Gegenstand:` — *übernommen von* `slice-<Kennung>`
+oder *entfallen:* Grund —, und gibt jedem Risiko aus §6 seinen Ausgang; das
+alles im Commit *vor* dem `git mv`, wie immer. `done/` heißt damit *keine
+Arbeit mehr*, nicht *geliefert* — dieselbe Lesart, unter der ein aufgelöster
+Carveout in seinem eigenen `done/` liegt ([Modul 7](modul-07-carveouts.md))
+und die Welle-Closure in diesem; was mit dem Gegenstand geschah, sagt die
+Zeile. Aus `in-progress/` führt der Weg zuerst zurück (die Rückführungen
+oben): Wer begonnene Arbeit abgibt, hat einen Grund, und der gehört dorthin.
+`Verantwortlich:` bleibt stehen — das Feld sagt, wer die Arbeit hielt; der
+Nehmer bekommt seinen Inhaber bei seinem eigenen `open → next`.
+
+**Drei Bedingungen, keine davon Freitext:**
+
+1. **Die Adresse nimmt an.** Der Nehmer ist ein Slice, der noch nicht
+   geschlossen ist, und nennt in §1 unter `Übernimmt:` die Kennungen, die er
+   übernimmt — sonst ist er keine Adresse, aus demselben Grund wie beim
+   Folge-Slice-Ausschluss ([§Ziel-Form: Slice](#ziel-form-slice), Klasse 1):
+   Ein Zeiger auf einen Slice, der den Gegenstand nicht führt, zeigt ins
+   Leere. Ein geschlossener Slice nimmt nichts mehr an; hat er den Gegenstand
+   schon geliefert, ist das die Wegfall-Hälfte unten, mit ihm als Grund. Die
+   Übernahme ändert die Größenregel nicht.
+2. **Jedes Risiko aus §6 hat einen Ausgang** — *eingetreten* mit der Kennung
+   des Nehmers, *entfallen* mit Grund, *weiter offen* ins Register
+   ([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)). Die
+   Notiz ist Originalinformation; mit dem Slice stürbe sie.
+3. **Die Wellen-Zugehörigkeit wandert mit dem Gegenstand.** Trägt der Geber
+   eine `Welle:`, verlässt er §4 ihres Welle-Plans, und der Nehmer steht in
+   der Welle, die ihn führt; sonst zählt Schritt 1 der Wellen-Closure
+   ([Modul 6 §Wellen-Closure-Prozedur](modul-06-roadmap.md#wellen-closure-prozedur-modul-6))
+   einen Slice als geliefert, der nichts geliefert hat. Diese Umplanung steht
+   im Drift-Log der Roadmap — dort als *in einem anderen aufgegangen*, mit
+   Datum und Grund. Wellenlose Arbeit erscheint in der Roadmap nicht; für sie
+   trägt §7 allein.
+
+**Entfällt der Gegenstand ganz** — die Anforderung ist gestrichen, der Befund
+hat sich erledigt, ein geschlossener Slice hat ihn schon geliefert —, trägt
+die Zeile statt einer Kennung den Grund. Das ist dieselbe
+Zweiteilung wie beim Risiko-Ausgang (*eingetreten* mit Kennung, *entfallen*
+mit Grund) und im Register (*geplant* mit Kennung, *gestrichen* mit Grund):
+Eine Übernahme hat eine Adresse, ein Wegfall einen Grund, und welches von
+beiden vorliegt, ist an der Form erkennbar.
+
+**Die Kennung bleibt Adresse — einen Hop länger.** Wer auf den Geber zeigt,
+zeigt weiter auf etwas: Seine Datei liegt in `done/`, ihre `Gegenstand:`-Zeile
+nennt den Nehmer, und umgeschrieben wird kein Zeiger. Archiviert eine Welle
+den Geber später, nennt sein Stub den Nehmer unter `Hervorgegangen:`.
+
+**Und der Lerneintrag?** §7 trägt ihn in der gewohnten Form, Register-Zeile
+eingeschlossen. Dass ein Slice geplant wurde, den keiner gearbeitet hat, ist
+eine Beobachtung wie jede andere — und drei davon sind das Muster *tote
+Slices* aus [§Regeln gegen typische Fehlannahmen](#regeln-gegen-typische-fehlannahmen-modul-5):
+geplant, bevor die erste Implementation den Schnitt geprüft hat.
+
+**Was Maschine hier kann.** Urteilsfrei ist, *dass* die `Gegenstand:`-Zeile
+eine Kennung oder einen Grund trägt und dass jedes Risiko einen Ausgang hat —
+dieselbe Deckung, die die Closure ohnehin prüft. Ob die Kennung im Repo
+auflöst, ist ebenfalls urteilsfrei, aber nicht umsonst: Als Token prüft sie
+kein Link-Sensor — das bleibt Urteil oder ein eigener Sensor; als Link löste
+sie auf, bräche aber beim nächsten `git mv` des Nehmers, und die Zeile friert
+mit dem Slice ein (Kennung, nicht Adresse, wie im Archiv-Stub). **Urteil**
+bleibt, ob der Nehmer den Gegenstand wirklich führt.
 
 ### Ziel-Form: Slice
 

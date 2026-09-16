@@ -14,6 +14,12 @@ Plus zwei Rückführungen, die im Lifecycle-State-Diagramm explizit sind:
 - `in-progress/ → open/` — Slice ist blockiert (typisch mit Carveout,
   siehe Modul 7).
 
+Und ein Ausgang ohne Arbeit: `open/` oder `next/` → `done/`, wenn ein anderer
+Slice den Gegenstand übernimmt oder er entfällt — §7 nennt in der Zeile
+`Gegenstand:` Kennung oder Grund, jedes Risiko bekommt einen Ausgang, die
+Liefer-Punkte der DoD bleiben leer (Modul 5 §Ein Slice, dessen Gegenstand ein
+anderer übernimmt).
+
 Faustregel: WIP-Limit auf 1 pro Rolleninhaber (Modul 8). Wer mehrere Slices
 gleichzeitig in `in-progress/` hat, hat kein Lifecycle, sondern ein
 Buffet — und keinen Punkt, an dem reproduzierbar geprüft wird, ob der
@@ -21,7 +27,7 @@ Buffet — und keinen Punkt, an dem reproduzierbar geprüft wird, ob der
 
 ### (Anwenden) Triggerbedingung für jeden Lifecycle-Übergang benennen
 
-Fünf Übergänge, jeder mit einem *beobachtbaren* Trigger:
+Sechs Übergänge, jeder mit einem *beobachtbaren* Trigger:
 
 - `open → next`: Slice wird priorisiert und eingeplant (kommt in die
   Reihenfolge des nächsten Arbeitsfensters).
@@ -34,6 +40,10 @@ Fünf Übergänge, jeder mit einem *beobachtbaren* Trigger:
   Zerlegung.
 - `in-progress → open`: ein Blocker tritt auf, die Priorität ist wieder
   offen (typisch mit Carveout, Modul 7).
+- `open|next → done`: ein noch offener Slice nimmt den Gegenstand in seinem
+  §1 auf (`Übernimmt:`) — erst dann —, oder der Gegenstand entfällt mit
+  Grund; die Datei geht mit Closure-Notiz (Zeile `Gegenstand:`) und
+  Risiko-Ausgängen, aber ohne Liefer-Haken nach `done/`.
 
 Am leichtesten übersehen werden die zwei **Rückführungen**
 (`in-progress → next/open`): Sie sehen aus wie Scheitern und werden

@@ -117,7 +117,7 @@ Roadmap, jede Zeile voll heißt treibende.
 Wenn Wellen umgeplant wurden: Datum, Grund, neue Reihenfolge.
 Steering-Loop-relevant.
 NUR Umplanungen: Trigger verschoben, präzisiert oder ersetzt; Slice oder
-Welle umgehängt. KEINE Schließungen (die stehen im Closure-Log oben) und
+Welle umgehängt, Slice in einem anderen aufgegangen. KEINE Schließungen (die stehen im Closure-Log oben) und
 KEINE erreichten Meilensteine (Status-Spalte) — sonst führt diese Tabelle ein
 zweites Closure-Log, und zwei Logs driften.
 -->

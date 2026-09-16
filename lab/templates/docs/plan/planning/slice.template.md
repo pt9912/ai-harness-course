@@ -9,6 +9,10 @@
 Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er
 wechselt nur durch `git mv`, siehe
 Baseline-Regelwerk `modul-05-planning-harness.md` §Lifecycle als State Machine.
+Übernimmt ein anderer Slice den Gegenstand oder entfällt er, geht diese Datei
+aus `open/` oder `next/` nach `done/` — §7 nennt in der Zeile `Gegenstand:`
+Kennung oder Grund, die Liefer-Punkte der DoD bleiben leer
+(§Ein Slice, dessen Gegenstand ein anderer übernimmt).
 
 **Welle:** <welle-id> oder "ohne Welle" — ohne Welle immer dann, wenn es
 keine Closure-Bedingung gibt, die von der DoD dieses Slice verschieden
@@ -50,6 +54,11 @@ Ausschlusses stehen in **eben diesem Abschnitt** des Baseline-Regelwerks,
 zusammen mit der Begründungs-Pflicht je Punkt.
 
 **Ziel:** <…>
+
+**Übernimmt:** `slice-<Kennung>`, `slice-<Kennung>`. *(Nur, wenn dieser Slice
+den Gegenstand anderer aufnimmt; sonst Zeile löschen. Ohne sie ist er keine
+Adresse — Baseline-Regelwerk `modul-05-planning-harness.md` §Ein Slice, dessen
+Gegenstand ein anderer übernimmt.)*
 
 **Ausdrücklich NICHT in diesem Slice** — je Punkt mit Begründung:
 
@@ -169,10 +178,16 @@ formulieren — sonst zählt das Register zwei Namen getrennt) ·
 `grundlagen-traceability.md` §Herkunfts-Anker für Steering-Loop-Regeln (das
 Feld `liegt in` steht **nur**, wenn mit diesem Slice wirklich etwas verkörpert
 wurde; Feld und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der
-Backticks).
+Backticks). Ging der Gegenstand an einen anderen Slice oder entfiel er, trägt
+diese Sektion die Zeile `Gegenstand:` mit Kennung oder Grund und jedes Risiko
+aus §6 seinen Ausgang; die Liefer-Punkte der DoD bleiben leer
+(`modul-05-planning-harness.md` §Ein Slice, dessen Gegenstand ein anderer
+übernimmt).
 
 - **Was hat funktioniert:** <…>
 - **Was ging anders als geplant:** <…>
+- **Gegenstand:** <übernommen von `slice-<Kennung>` | entfallen: <Grund>>
+  *(nur beim Ausgang ohne Arbeit; sonst Zeile löschen)*
 - **Steering-Loop-Eintrag:** <Guide oder Sensor> <geschärft/ergänzt>: <was genau>
   — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.
   Auslöser: `BEO-<NNN>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).

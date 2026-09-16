@@ -11,6 +11,92 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 137 — 2026-09-16 · Ein Slice, dessen Gegenstand ein anderer übernimmt: der Ausgang aus `open/` und `next/`
+
+Anlass: ein adoptierendes Repo (`ai-harness-init`) will viele offene Slices
+zusammenfassen und gruppieren — und findet für die Dateien, deren Gegenstand
+dabei in einen anderen Slice wandert, keinen Zug. Die State Machine in Modul 5
+kennt aus `open/` und `next/` nur den Weg nach vorn; `in_progress → done` ist
+„der einzige Weg nach `done`" und verlangt DoD, Lerneintrag und
+Risiko-Ausgänge. Löschen kollidiert mit Modul 6 („Wer eine Zeile still löscht,
+macht sie ununterscheidbar von einer, die es nie gab") und tötet eine Kennung,
+die Adresse ist (`Folge-Slice:`-Felder, Risiko-Ausgang *eingetreten*,
+Register-Ausgang *geplant*, fremde §1-Abgrenzungen). Der Kurs produziert den
+Fall selbst: Das Worked Example zerlegt `slice-authentifizierung` in `-a/-b/-c`
+und sagt nicht, was mit der Ausgangsdatei geschieht.
+
+Vier Antworten wurden gegen den Korpus geprüft: `git rm` (Kennung tot), in
+`open/` lassen und §1 umschreiben (die Drift, die Welle 26 beseitigt hat), ein
+fünftes Verzeichnis (gegen Welle 107, schwerster Eingriff) und der `git mv`
+nach `done/` mit minimaler Closure-Notiz. Gewählt ist der vierte: Er braucht
+nur Formen, die es gibt — §7, die drei Risiko-Ausgänge, das Drift-Log —, und
+`done/` trägt seit Welle 33 und dem Carveout-„Überführt" (Modul 7) ohnehin die
+Lesart *keine Arbeit mehr*, nicht nur *geliefert*. Die Regel deckt beide
+Hälften der Klasse — *übernommen* mit Kennung, *entfallen* mit Grund —,
+dieselbe Zweiteilung wie Risiko-Ausgang und Register-Ausgang.
+
+- `kurs/de/02-planung/modul-05-planning-harness.md`: Zustandsdiagramm um
+  `open|next → done` (Gegenstand übernommen oder entfallen) ergänzt; „einziger
+  Weg nach `done`" auf gearbeitete Slices eingeschränkt, „Vier Übergänge
+  tragen eine Pflicht", Bedingungs-Satz mit Ausnahme-Zeiger, Glossar; neuer
+  Abschnitt §Ein Slice, dessen Gegenstand ein anderer übernimmt — der Ausgang
+  (nur die **Liefer-Punkte** der DoD bleiben leer, die Closure-Pflichten
+  werden abgehakt; §7 trägt die Zeile `Gegenstand:` mit geschlossenem Paar
+  *übernommen von* Kennung | *entfallen:* Grund; `Verantwortlich:` bleibt),
+  drei Bedingungen (der **ungeschlossene** Nehmer nennt die Geber unter
+  `Übernimmt:` · jedes Risiko mit Ausgang · die **Wellen-Zugehörigkeit wandert
+  mit dem Gegenstand** — §4 des Welle-Plans zieht nach, sonst zählte Schritt 1
+  der Wellen-Closure einen Slice als geliefert, der nichts geliefert hat;
+  Drift-Log nur für Wellen-Slices, wellenlose Arbeit bleibt ohne Roadmap),
+  Wegfall-Hälfte (auch: ein geschlossener Slice hat den Gegenstand schon
+  geliefert), die Kennung bleibt Adresse einen Hop länger, Lerneintrag, Was
+  Maschine hier kann (die Token-Kennung prüft kein Link-Sensor — Urteil oder
+  eigener Sensor; als Link bräche sie beim nächsten `git mv`); Worked Example
+  nennt den Verbleib der Ausgangsdatei; Selbstcheck-Frage und -Rubrik zählen
+  sechs Übergänge.
+- `kurs/de/02-planung/modul-06-roadmap.md`: Drift-Log-Enumeration um „ein
+  Slice in einem anderen aufgegangen" erweitert.
+- `kurs/de/loesungen/modul-05-loesung.md`: sechster Übergang in beiden
+  Antworten.
+- `lab/regelwerk/modul-05-planning-harness.md`,
+  `lab/regelwerk/modul-06-roadmap.md`: wortgleich nachgezogen (Weglassen der
+  didaktischen Zeiger; Verweise auf §Ziel-Form: Slice, §Wellen-Closure-Prozedur
+  und §Regeln gegen typische Fehlannahmen angebunden).
+- `lab/templates/docs/plan/planning/slice.template.md`: Lifecycle-Hinweis
+  nennt den Ausgang; §1 bekommt die optionale Zeile `Übernimmt:`; §7 bekommt
+  die Zeile `Gegenstand:`. `README.template.md`: `done/`-Zeile trägt die
+  zweite Lesart. `roadmap.template.md`: Drift-Log-Kommentar erweitert.
+- `lab/example/docs/plan/planning/README.md` und `lab/example/AGENTS.md`:
+  `done/`-Definition um die zweite Lesart ergänzt.
+- `lab/team-sim`: neue Gruppe **s25** (vier Verdikte, Seed unverändert,
+  `planning.closure` wie in `lab/example` zugeschaltet, bis auf
+  `boilerplate`): s25a die Übernahme-Closure mit leeren Liefer-Punkten ist
+  **still**, während s25b im selben Lauf die Notiz ohne Satzende-Zeichen als
+  `closure-note-thin` meldet; s25c der bloße `git mv` ohne §7 ist
+  `closure-note-missing`; s25d die Kennung des Nehmers löst als Token kein
+  Sensor auf — **still**, das benannte Loch (s21b: ein Token bleibt ein
+  Token). Die Lautheit ist je am Vergleichsziel gepinnt. Volllauf 76/76,
+  0 KAPUTT.
+- `lab/regelwerk/README.md`: `Stand:`-Zeile auf Welle 137 gezogen.
+
+Review vor dem Commit: drei Reviewer mit getrennten Linsen und getrenntem
+Kontext (Regel-Konsistenz · Spiegel-Treue · Team-Sim/Buchführung — das
+Verfahren aus Review-Runde 10). 18 Befunde, 16 in dieser Welle behoben —
+darunter die Wellen-Closure, die einen übernommenen Geber als geliefert
+gezählt hätte, das Drift-Log für wellenlose Arbeit, die Freitext-Form von §7,
+der Nehmer, der schon geschlossen ist, und der Spiegel, der die Loch-Aussage
+mit dem Lab-Zeiger verloren hatte. Nicht übernommen, weil Vorbestand
+außerhalb der Welle: der Spiegel-Zusatz „aus dem Slice-Plan" in der
+Übergangs-Liste und der `tail -1`-Beleg des Team-Sim (offener Roadmap-Faden
+seit Welle 129).
+
+Diese Welle behauptet ein beobachtbares Verhalten — der Closure-Sensor trägt
+die Closure ohne Liefer-Haken und meldet die fehlende oder zu dünne Notiz —
+und belegt es mit s25; die Kennungs-Auflösung ist als Loch benannt, nicht als
+Zusage.
+
+Gates: `make check`, `make bundle-check`.
+
 ## Welle 136 — 2026-09-13 · Append-only-Klausel: welche Artefakt-Klassen sie trägt
 
 Anlass: Befund aus Review-Runde 2 eines adoptierenden Repos

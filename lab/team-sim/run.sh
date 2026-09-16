@@ -1351,6 +1351,144 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# s25: ENTWURFS-Gegenstand — ein Slice, dessen Gegenstand ein anderer
+# uebernimmt (Welle 137, Modul 5). Kein Nebenlaeufigkeits-Gegenstand, wie
+# s19/s20: eine Operation und ihr Sensor. Der Ausgang ist `open/|next/ ->
+# done/` OHNE DoD-Haken, MIT Closure-Notiz. Gemessen: traegt der
+# Closure-Sensor (planning.closure, Konfiguration wie lab/example) diese
+# Closure (still), meldet er die zu duenne und die fehlende Notiz (laut), und
+# loest irgendein Sensor die Kennung des Nehmers auf (das benannte Loch).
+closure_sensor_an() { cat >> "$1/.d-check.yml" <<'YML'
+  closure:
+    dir: docs/plan/planning/done
+    glob: '*.md'
+    min-sentences: 2
+    heading-pattern: '^#{1,3} .*Closure-Notiz'
+    placeholder: true
+YML
+}
+uebergabe_paar() { # $1 = Clone; Geber (slice-002) und Nehmer (slice-003), beide in open/
+  cat > "$1/docs/plan/planning/open/slice-002-suche.md" <<'EOF'
+# Slice slice-002: Suche
+
+**Welle:** ohne Welle
+
+**Verantwortlich:** —.
+
+**Autor:** alice. **Datum:** 2026-09-16.
+
+## 1. Ziel und Abgrenzung
+
+**Ziel:** Suche ueber den Kern.
+
+## 2. Definition of Done
+
+- [ ] Suche liefert Treffer, Test referenziert.
+- [ ] Review durchgefuehrt, Report liegt vor.
+
+## 6. Risiken und offene Punkte
+
+- Ranking-Drift — **Ausgang:** eingetreten: slice-003-suche-und-index.
+
+## 7. Closure-Notiz
+
+- **Was ging anders als geplant:** Der Gegenstand dieses Slice ist in slice-003-suche-und-index aufgegangen. Geliefert hat dieser Slice nichts, die Liefer-Punkte bleiben leer.
+- **Gegenstand:** uebernommen von slice-003-suche-und-index.
+- **Folge-Slices:** slice-003-suche-und-index.
+EOF
+  cat > "$1/docs/plan/planning/open/slice-003-suche-und-index.md" <<'EOF'
+# Slice slice-003: Suche und Index
+
+**Welle:** ohne Welle
+
+**Verantwortlich:** —.
+
+**Autor:** alice. **Datum:** 2026-09-16.
+
+## 1. Ziel und Abgrenzung
+
+**Ziel:** Suche und Index in einem Schnitt.
+
+**Uebernimmt:** slice-002-suche — Suche ueber den Kern.
+
+## 7. Closure-Notiz
+
+Offen.
+EOF
+}
+
+s25_gegenstand_uebernommen() {
+  # --- s25a/s25b: Uebernahme-Closure (DoD leer, §7 zwei Saetze, Kennung des
+  # Nehmers) neben einer zu duennen Notiz im selben Lauf. Die Stille von s25a
+  # zaehlt nur, weil derselbe Lauf auf s25b LAUT ist — sonst bestuende sie
+  # auch ueber einem Sensor, der gar nicht zugeschaltet ist (s20e-Muster).
+  topo; cd "$WORK/sim/alice" || return 1
+  closure_sensor_an .
+  uebergabe_paar .
+  schritt git add -A && schritt git commit -qm "Geber und Nehmer in open/" || return 1
+  schritt git mv docs/plan/planning/open/slice-002-suche.md docs/plan/planning/done/ || return 1
+  schritt git commit -qm "slice-002-suche: Gegenstand an slice-003 uebergegangen" || return 1
+  sed 's/^- \*\*Was ging anders als geplant:\*\* .*$/- **Was ging anders als geplant:** uebernommen/; /^- \*\*Gegenstand:\*\*/d; /^- \*\*Folge-Slices:\*\*/d; s/slice-002: Suche/slice-009: Duenn/' \
+    docs/plan/planning/done/slice-002-suche.md > docs/plan/planning/done/slice-009-duenn.md
+  schritt git add -A && schritt git commit -qm "Vergleichsdatei mit duenner Notiz" || return 1
+  # Vorbedingungen: der Zustand, den der Titel nennt, steht wirklich — Sensor
+  # zugeschaltet, Datei in done/, kein DoD-Haken, §7 da, Nehmer nennt den Geber.
+  schritt grep -q '^  closure:' .d-check.yml || return 1
+  schritt test -f docs/plan/planning/done/slice-002-suche.md || return 1
+  haken=$(grep -c '\[x\]' docs/plan/planning/done/slice-002-suche.md || true)
+  schritt test "$haken" = 0 || return 1
+  schritt grep -q '^## 7. Closure-Notiz' docs/plan/planning/done/slice-002-suche.md || return 1
+  schritt grep -q 'Uebernimmt:.*slice-002-suche' docs/plan/planning/open/slice-003-suche-und-index.md || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  # Die Lautheit ist am VERGLEICHSZIEL gepinnt, nicht irgendwo im Lauf.
+  schritt befund_in "$out" "docs/plan/planning/done/slice-009-duenn.md" "docs/plan/planning/done" "closure-note-thin" || return 1
+  n=$(printf '%s' "$out" | grep -c 'slice-002-suche' || true)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s25a Uebernahme-Closure: Liefer-Punkte leer, §7 nennt den Nehmer: STILL" "kein Befund auf slice-002-suche, waehrend slice-009 im selben Lauf laut ist" "$n Treffer / $(echo "$out"|tail -1)" $ok
+  befund_in "$out" "docs/plan/planning/done/slice-009-duenn.md" "docs/plan/planning/done" "closure-note-thin" && ok=0 || ok=1
+  verdikt "s25b dieselbe Form, §7 ein Satz ohne Satzende: LAUT" "closure-note-thin auf slice-009-duenn" "$(echo "$out"|tail -1)" $ok
+
+  # --- s25c: nur verschoben, keine Closure-Notiz -> LAUT. Der git mv allein
+  # ist kein Ausgang; die Notiz ist die Bedingung.
+  topo; cd "$WORK/sim/alice" || return 1
+  closure_sensor_an .
+  uebergabe_paar .
+  sed -i '/^## 7. Closure-Notiz/,$d' docs/plan/planning/open/slice-002-suche.md
+  schritt git add -A && schritt git commit -qm "Geber ohne §7" || return 1
+  schritt git mv docs/plan/planning/open/slice-002-suche.md docs/plan/planning/done/ || return 1
+  schritt git commit -qm "nur verschoben" || return 1
+  schritt test -f docs/plan/planning/done/slice-002-suche.md || return 1
+  n=$(grep -c 'Closure-Notiz' docs/plan/planning/done/slice-002-suche.md || true)
+  schritt test "$n" = 0 || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "docs/plan/planning/done/slice-002-suche.md" "docs/plan/planning/done" "closure-note-missing" && ok=0 || ok=1
+  verdikt "s25c nur git mv, keine Closure-Notiz: LAUT" "closure-note-missing auf slice-002-suche" "$(echo "$out"|tail -1)" $ok
+
+  # --- s25d: §7 nennt einen Nehmer, den es nicht gibt -> STILL. Das benannte
+  # Loch: eine Kennung als Token loest kein Sensor auf (s21b: ein Token bleibt
+  # ein Token). "Die Kennung loest auf" ist urteilsfrei pruefbar, aber hier
+  # ungeprueft. Die Stille zaehlt, weil der Sensor im selben Lauf nachweislich
+  # done/ liest (leere Vergleichsdatei daneben, laut).
+  topo; cd "$WORK/sim/alice" || return 1
+  closure_sensor_an .
+  uebergabe_paar .
+  rm docs/plan/planning/open/slice-003-suche-und-index.md
+  sed -i 's/slice-003-suche-und-index/slice-999-nirgends/g' docs/plan/planning/open/slice-002-suche.md
+  schritt git add -A && schritt git commit -qm "Geber nennt slice-999-nirgends" || return 1
+  schritt git mv docs/plan/planning/open/slice-002-suche.md docs/plan/planning/done/ || return 1
+  printf '# Slice slice-008: Leer\n\n**Welle:** ohne Welle\n' > docs/plan/planning/done/slice-008-leer.md
+  schritt git add -A && schritt git commit -qm "verschoben; leere Vergleichsdatei" || return 1
+  schritt grep -q 'slice-999-nirgends' docs/plan/planning/done/slice-002-suche.md || return 1
+  gibt=$(find docs/plan/planning -name 'slice-999-nirgends*' | wc -l)
+  schritt test "$gibt" = 0 || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  schritt befund_in "$out" "docs/plan/planning/done/slice-008-leer.md" "docs/plan/planning/done" "closure-note-missing" || return 1
+  n=$(printf '%s' "$out" | grep -c 'slice-002-suche' || true)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s25d §7 nennt einen Nehmer, den es nicht gibt (Token): STILL" "kein Befund auf slice-002-suche, waehrend slice-008 im selben Lauf laut ist" "$n Treffer / $(echo "$out"|tail -1)" $ok
+}
+
+# ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -1378,6 +1516,7 @@ lauf s21 s21_zitierform
 lauf s22 s22_rtm_vollstaendigkeit
 lauf s23 s23_gate_index
 lauf s24 s24_vorabvergabe
+lauf s25 s25_gegenstand_uebernommen
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

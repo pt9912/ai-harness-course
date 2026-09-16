@@ -242,7 +242,9 @@ der Roadmap beantworten je genau eine Frage. Das Closure-Log sagt, *was*
 geschlossen ist: Welle, Datum, Zeiger auf die Ergebnis-Notiz — und es ist das
 einzige Closure-Log der Roadmap. Das Drift-Log
 sagt, *was umgeplant* wurde — ein Trigger verschoben, präzisiert oder ersetzt,
-ein Slice oder eine Welle umgehängt — und sonst nichts: Eine Schließung ist
+ein Slice oder eine Welle umgehängt, ein Slice in einem anderen aufgegangen
+([Modul 5 §Ein Slice, dessen Gegenstand ein anderer übernimmt](modul-05-planning-harness.md#ein-slice-dessen-gegenstand-ein-anderer-übernimmt))
+— und sonst nichts: Eine Schließung ist
 keine Umplanung, ein erreichter Meilenstein auch nicht; für den sagt die
 `Status`-Spalte der Meilenstein-Tabelle *erreicht* mit Datum und Beleg. Wer
 Schließungen oder Meilensteine ins Drift-Log schreibt, führt ein zweites

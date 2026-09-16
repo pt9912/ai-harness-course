@@ -51,7 +51,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT; erweitert 2026-09-08 um s24, 72/72 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT; erweitert 2026-09-08 um s24, 72/72 · 0 KAPUTT; erweitert 2026-09-16 um s25, 76/76 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -131,6 +131,10 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s24g | **Namens-Identität** statt Nummer, verschiedene Vorhaben | **sauber**, beide unterscheidbar | ✓ ohne Zähler gibt es nichts abzuleiten, also auch nichts doppelt zu ziehen |
 | s24h | Namens-Identität, **dasselbe** Vorhaben | add/add-**Konflikt** | ✓ das Gegenstück zu s24g: laut genau dann, wenn zwei dasselbe beanspruchen — die Richtung, die der Nummer fehlt |
 | s24i | zwei Planner, je **eigene** Welle (Namens-Identität), teilen **darin** dieselbe Slice-Nummer zu | **still**, `slice-002` in zwei Wellen | ✓ Zuteilung verschiebt das Ableitungsproblem, sie löst es nicht — sie trägt nur unter einer singulären zuteilenden Instanz |
+| s25a | Übernahme-Closure: Liefer-Punkte leer, §7 nennt den Nehmer, `git mv` aus `open/` nach `done/` | **still**, während s25b im selben Lauf laut ist | ✓ der Ausgang ohne Arbeit kostet keine Sensor-Ausnahme |
+| s25b | dieselbe Form, §7 ein Satz ohne Satzende | **`closure-note-thin`** | ✓ das Paar zu s25a: die Notiz ist die Bedingung, nicht der `git mv` |
+| s25c | nur `git mv`, keine Closure-Notiz | **`closure-note-missing`** | ✓ verschieben allein ist kein Ausgang |
+| s25d | §7 nennt einen Nehmer, den es nicht gibt (Token) | **still**, während die leere Vergleichsdatei laut ist | ✓ benanntes Loch: „die Kennung löst auf" prüft hier kein Sensor — Urteil oder eigener Sensor |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte
@@ -239,6 +243,19 @@ war es nicht — und ist es seit `v0.71.1` (s15b). Damit ist die Aussage des Ent
 deterministische Hälfte braucht einen CR* — auf ihre belastbare Fassung
 gebracht: Sie braucht ihn für **zwei** Aussagen, und für eine dritte braucht
 sie eine Reparatur am vorhandenen Modul.
+
+**Befund aus s25 — der Ausgang ohne Arbeit braucht keine Sensor-Ausnahme,
+aber er hat ein Loch.** Die Übernahme-Closure aus Modul 5 (§Ein Slice, dessen
+Gegenstand ein anderer übernimmt) ist für `planning.closure` eine Closure wie
+jede andere: Genug Satzende-Zeichen in §7 (≥ 2) tragen sie (s25a), null nicht
+(s25b), keine Notiz nicht (s25c) — die DoD-Haken liest der Sensor nicht, und
+das ist hier richtig, denn die Regel lässt die Liefer-Punkte bewusst leer. Was
+der Sensor **nicht** liest, ist die Kennung des Nehmers: Als Token in §7 löst
+sie nichts aus, auch wenn es den Slice nicht gibt (s25d). Als Link schlösse
+der `links`-Sensor das Loch — und bräche beim nächsten `git mv` des Nehmers,
+weshalb die Regel die Token-Form vorschreibt. Die urteilsfreie Hälfte „die
+Kennung löst im Repo auf" ist damit prüfbar, aber ungeprüft — dieselbe Grenze
+wie bei s21b, und sie steht im Modul als Grenze, nicht als Zusage.
 
 ## Grenzen — ausdrücklich
 

@@ -99,7 +99,10 @@ Commits, in dieser Reihenfolge:
 
 1. **Inhalt:** DoD abhaken und Closure-Notiz (§7 des Slice-Plans) schreiben — beides *vor*
    dem Move, weil `done/` als „DoD erfüllt, gemerged, Closure-Notiz
-   vorhanden" definiert ist.
+   vorhanden" definiert ist — oder, beim Ausgang ohne Arbeit, als „Gegenstand
+   übernommen oder entfallen, Closure-Notiz vorhanden": Dann bleiben die
+   Liefer-Punkte leer und §7 trägt die Zeile `Gegenstand:` (Kurs Modul 5 §Ein
+   Slice, dessen Gegenstand ein anderer übernimmt).
 2. **Reiner `git mv`** nach `done/`, ohne Inhaltsänderung (§2.3).
 3. **Folge-Edits** im unmittelbar nachfolgenden Commit: relative Links, die
    sich durch die neue Verzeichnistiefe verschoben haben.

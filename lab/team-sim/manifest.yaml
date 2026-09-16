@@ -59,6 +59,12 @@ gruppen:
   # s24e/s24f trennen die beiden Hebel: mit Listen-Eintrag laut, ohne still —
   # der Konflikt sitzt auf der Liste, die Doppelvergabe auf der Kennung.
   s24: [s24a, s24b, s24c, s24d, s24e, s24f, s24g, s24h, s24i]
+  # s25: ENTWURF ein Slice, dessen Gegenstand ein anderer uebernimmt (Welle 137).
+  # Wie s19/s20 ohne Nebenlaeufigkeits-Gegenstand: der Ausgang open/|next/ -> done/
+  # ohne DoD-Haken, mit Closure-Notiz — und was der Closure-Sensor davon traegt.
+  # s25a still neben s25b laut (derselbe Lauf), s25c die fehlende Notiz, s25d das
+  # benannte Loch: die Kennung des Nehmers loest als Token kein Sensor auf.
+  s25: [s25a, s25b, s25c, s25d]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -74,3 +80,4 @@ laeufe:
   - { datum: 2026-09-06, image: v0.74.1, neu: [s22a, s22b, s22c, s22d], gegenstand: "Entwurf: Anforderung -> Beleg (Welle 127) — Waise faellt, ADR entlastet nicht, Slice entlastet, Bericht urteilt nicht", ergebnis: "58 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-08, image: v0.74.1, neu: [s23a, s23b, s23c, s23e, s23d], gegenstand: "Entwurf: der EINE Gate-Index (Welle 129) — Phantom im Index laut, Briefing-Tabelle entlastet nur unter Briefing-Autoritaet, Paar Aufruf-Argument/Link in der Code-Span, Ziel-Zustand still bei nachweislich scharfem Sensor", ergebnis: "63 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-08, image: v0.74.1, neu: [s24a, s24b, s24c, s24d, s24e, s24f, s24g, s24h, s24i], gegenstand: "Entwurf: Kennungs-Vergabe unter mehreren Schreibern (Welle 130) — Ablage entscheidet ueber laut/still, Register gegen Kennung getrennt, Namens-Identitaet in beiden Richtungen korrekt, und s24i zeigt: Zuteilung braucht eine singulaere Instanz — mehrere parallele Welle-Oeffner sind wieder isolierte Ableiter", ergebnis: "72 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-09-16, image: v0.74.1, neu: [s25a, s25b, s25c, s25d], gegenstand: "Entwurf: ein Slice, dessen Gegenstand ein anderer uebernimmt (Welle 137) — die DoD-lose Uebernahme-Closure ist fuer planning.closure eine Closure wie jede andere (still neben laut im selben Lauf), der blosse git mv ist keine, und die Kennung des Nehmers loest als Token kein Sensor auf", ergebnis: "76 PASS, 0 FAIL, 0 KAPUTT" }

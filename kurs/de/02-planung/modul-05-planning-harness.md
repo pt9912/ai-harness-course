@@ -15,7 +15,7 @@ für die ersten Seiten reichen die Ein-Satz-Anker:
 | **Welle** | Bündel von Slices, das gemeinsam geplant und abgeschlossen wird. | eine Welle bricht — alle ihre Slices liegen am Strand. |
 | **Trigger** | Beobachtbare Bedingung, bei der ein Slice/Welle/Carveout in den nächsten Status wandert. | nicht der Tag, sondern das Ereignis. |
 | **Closure** | Abschluss eines Slice oder einer Welle mit Lerneintrag in `done/`. | das Türklappen *mit* Notiz, was beim Schließen klemmte. |
-| **Lifecycle-Verzeichnis** | Eines von `open/`, `next/`, `in-progress/`, `done/` — die vier Stationen eines Slice. | vier Schubladen mit Einbahnstraße — und zwei Rückwege. |
+| **Lifecycle-Verzeichnis** | Eines von `open/`, `next/`, `in-progress/`, `done/` — die vier Stationen eines Slice. | vier Schubladen mit Einbahnstraße — zwei Rückwege, und ein Ausgang ohne Arbeit. |
 | **Bootstrap-Modus** *(Vorwissen aus Modul 2)* | Eigenschaft *pro Sub-Area*, die die Trigger-Richtung Doc↔Code festlegt (GF: Doc→Code, BF: Code→Doc, Hybrid: gemischt). Volldefinition in [Modul 2 §Kernidee](../01-spec-und-architektur/modul-02-harness-bootstrap.md#kernidee). | nicht eine Eigenschaft des Slice oder des Repos — der Slice ist *Anlass*, die Sub-Area ist *Träger*. |
 
 ## Engage
@@ -46,6 +46,8 @@ stateDiagram-v2
     in_progress --> done: DoD + Lerneintrag + Risiko-Ausgänge
     in_progress --> next: zu groß — zurück zur Zerlegung
     in_progress --> open: blockiert (Carveout?)
+    open --> done: Gegenstand übernommen oder entfallen — §7 nennt Kennung oder Grund, Liefer-Punkte leer
+    next --> done: Gegenstand übernommen oder entfallen — §7 nennt Kennung oder Grund, Liefer-Punkte leer
     done --> [*]
     note right of done
         §7 → Beobachtungs-Register
@@ -59,7 +61,9 @@ Ablage. Ein Übergang ist deshalb ein **reiner `git mv`** — Inhaltsänderungen
 stehen in einem eigenen Commit
 ([Modul 9 §Hard Rules](../03-agenten/modul-09-implementierung.md#hard-rules-repo-spezifisch)),
 bei der Closure nach `done/` in dem *davor*: DoD-Häkchen und Closure-Notiz
-sind die Bedingung dafür, dass die Datei überhaupt nach `done/` darf.
+sind die Bedingung dafür, dass die Datei überhaupt nach `done/` darf — mit
+einer Ausnahme für die Liefer-Häkchen
+([§Ein Slice, dessen Gegenstand ein anderer übernimmt](#ein-slice-dessen-gegenstand-ein-anderer-übernimmt)).
 
 **`open → next` setzt den Verantwortlichen.** Der Slice-Kopf trägt das Feld
 `Verantwortlich:` — den Rolleninhaber der Implementer-Rolle, der die Arbeit
@@ -88,9 +92,11 @@ Auf einem Zweig sieht man den eigenen — vollständiger als den Hauptzweig, abe
 nur für sich. Wer eine `ls`-Antwort als team-weit liest, liest den Hauptzweig;
 was in einem offenen PR liegt, ist für alle anderen noch nicht da.
 
-**Drei Übergänge tragen eine Pflicht**, die über „Arbeit erledigt" hinausgeht.
-`in_progress → done` ist der einzige Weg nach `done` und verlangt
-*Lerneintrag* **und einen Ausgang für jedes offene Risiko**
+**Vier Übergänge tragen eine Pflicht**, die über „Arbeit erledigt" hinausgeht.
+`in_progress → done` ist der einzige Weg nach `done` für einen Slice, der
+gearbeitet wurde — den vierten, `open|next → done`, beschreibt
+[§Ein Slice, dessen Gegenstand ein anderer übernimmt](#ein-slice-dessen-gegenstand-ein-anderer-übernimmt) —
+und verlangt *Lerneintrag* **und einen Ausgang für jedes offene Risiko**
 ([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)), nicht nur
 "Tests grün" — und ein DoD-Punkt, der sich auf einen Test beruft, ist mit
 der Verlinkung allein noch nicht bestätigt: erst wenn gezeigt ist, dass der
@@ -194,6 +200,95 @@ Bezeichnung ist trotzdem stabil zu halten — die Zuordnung zur Kennung
 passiert beim Schreiben, und wer den Namen umformuliert, findet die Zeile
 nicht wieder.
 
+### Ein Slice, dessen Gegenstand ein anderer übernimmt
+
+Nicht jeder Slice in `open/` oder `next/` wird gearbeitet. Wer mehrere zu
+einem zusammenfasst, einen zu großen zerlegt — wie `slice-authentifizierung`
+im Worked Example unten — oder feststellt, dass ein späterer Slice denselben
+Gegenstand ohnehin liefert, hat eine Datei, für die die State Machine keinen
+Zug kennt: Sie ist nicht `done`, weil nichts geliefert wurde, und sie ist
+keine Arbeit mehr. Liegen lassen macht sie zum Zombie eine Station vor dem
+aus §Engage — `make plan-status` zählt sie als geplant, die Roadmap führt sie
+als kommend. Löschen macht ihre Kennung ununterscheidbar von einer, die es
+nie gab ([Modul 6 §Das Beobachtungs-Register](modul-06-roadmap.md#das-beobachtungs-register)),
+und die Kennung ist Adresse: für `Folge-Slice:`-Felder, Risiko-Ausgänge
+*eingetreten*, Register-Ausgänge *geplant* und die Abgrenzungen anderer
+Slices.
+
+**Der Ausgang ist ein `git mv` nach `done/` — ohne Lieferung, mit Closure.**
+Das ist die einzige Ausnahme davon, dass DoD-Häkchen Bedingung für `done/`
+sind — und sie gilt nur für die **Liefer-Punkte** der DoD: Die bleiben leer,
+denn geliefert hat dieser Slice nichts, und ein Haken behauptete es. Die
+Closure-Pflichten darunter (Notiz, Register, Risiko-Ausgänge, Paarungen)
+werden abgehakt wie bei jeder Closure. §7 trägt dafür **eine Zeile mit
+geschlossenem Paar**, `Gegenstand:` — *übernommen von* `slice-<Kennung>`
+oder *entfallen:* Grund —, und gibt jedem Risiko aus §6 seinen Ausgang; das
+alles im Commit *vor* dem `git mv`, wie immer. `done/` heißt damit *keine
+Arbeit mehr*, nicht *geliefert* — dieselbe Lesart, unter der ein aufgelöster
+Carveout in seinem eigenen `done/` liegt ([Modul 7](modul-07-carveouts.md))
+und die Welle-Closure in diesem; was mit dem Gegenstand geschah, sagt die
+Zeile. Aus `in-progress/` führt der Weg zuerst zurück (die Rückführungen
+oben): Wer begonnene Arbeit abgibt, hat einen Grund, und der gehört dorthin.
+`Verantwortlich:` bleibt stehen — das Feld sagt, wer die Arbeit hielt; der
+Nehmer bekommt seinen Inhaber bei seinem eigenen `open → next`.
+
+**Drei Bedingungen, keine davon Freitext:**
+
+1. **Die Adresse nimmt an.** Der Nehmer ist ein Slice, der noch nicht
+   geschlossen ist, und nennt in §1 unter `Übernimmt:` die Kennungen, die er
+   übernimmt — sonst ist er keine Adresse, aus demselben Grund wie beim
+   Folge-Slice-Ausschluss
+   ([§Worked Example](#worked-example-einen-zu-großen-slice-schneiden),
+   Klasse 1): Ein Zeiger auf einen Slice, der den Gegenstand nicht führt,
+   zeigt ins Leere. Ein geschlossener Slice nimmt nichts mehr an; hat er den
+   Gegenstand schon geliefert, ist das die Wegfall-Hälfte unten, mit ihm als
+   Grund. Die Übernahme ändert die Größenregel nicht — wer drei Slices in
+   einen zieht und danach vier Liefer-Punkte hat, hat den Ausgangs-Slice des
+   Worked Example unter neuem Namen.
+2. **Jedes Risiko aus §6 hat einen Ausgang** — *eingetreten* mit der Kennung
+   des Nehmers, *entfallen* mit Grund, *weiter offen* ins Register
+   ([§Offene Risiken](#offene-risiken-werden-bei-closure-aufgelöst)). Die
+   Notiz ist Originalinformation; mit dem Slice stürbe sie.
+3. **Die Wellen-Zugehörigkeit wandert mit dem Gegenstand.** Trägt der Geber
+   eine `Welle:`, verlässt er §4 ihres Welle-Plans, und der Nehmer steht in
+   der Welle, die ihn führt; sonst zählt Schritt 1 der Wellen-Closure
+   ([Modul 6 §Die Wellen-Closure-Prozedur](modul-06-roadmap.md#die-wellen-closure-prozedur))
+   einen Slice als geliefert, der nichts geliefert hat. Diese Umplanung steht
+   im Drift-Log der Roadmap — dort als *in einem anderen aufgegangen*, mit
+   Datum und Grund. Wellenlose Arbeit erscheint in der Roadmap nicht; für sie
+   trägt §7 allein.
+
+**Entfällt der Gegenstand ganz** — die Anforderung ist gestrichen, der Befund
+hat sich erledigt, ein geschlossener Slice hat ihn schon geliefert —, trägt
+die Zeile statt einer Kennung den Grund. Das ist dieselbe
+Zweiteilung wie beim Risiko-Ausgang (*eingetreten* mit Kennung, *entfallen*
+mit Grund) und im Register (*geplant* mit Kennung, *gestrichen* mit Grund):
+Eine Übernahme hat eine Adresse, ein Wegfall einen Grund, und welches von
+beiden vorliegt, ist an der Form erkennbar.
+
+**Die Kennung bleibt Adresse — einen Hop länger.** Wer auf den Geber zeigt,
+zeigt weiter auf etwas: Seine Datei liegt in `done/`, ihre `Gegenstand:`-Zeile
+nennt den Nehmer, und umgeschrieben wird kein Zeiger. Archiviert eine Welle
+den Geber später, nennt sein Stub den Nehmer unter `Hervorgegangen:`.
+
+**Und der Lerneintrag?** §7 trägt ihn in der gewohnten Form, Register-Zeile
+eingeschlossen. Dass ein Slice geplant wurde, den keiner gearbeitet hat, ist
+eine Beobachtung wie jede andere — und drei davon sind das Muster *tote
+Slices* aus [§Typische Fehlvorstellungen](#typische-fehlvorstellungen):
+geplant, bevor die erste Implementation den Schnitt geprüft hat.
+
+**Was Maschine hier kann.** Urteilsfrei ist, *dass* die `Gegenstand:`-Zeile
+eine Kennung oder einen Grund trägt und dass jedes Risiko einen Ausgang hat —
+dieselbe Deckung, die die Closure ohnehin prüft. Ob die Kennung im Repo
+auflöst, ist ebenfalls urteilsfrei, aber nicht umsonst: Als Token prüft sie
+kein Link-Sensor — das bleibt Urteil oder ein eigener Sensor; als Link löste
+sie auf, bräche aber beim nächsten `git mv` des Nehmers, und die Zeile friert
+mit dem Slice ein (Kennung, nicht Adresse, wie im Archiv-Stub). Gemessen im
+Kurs-Lab: [`lab/team-sim`](../../../lab/team-sim/README.md), Gruppe s25 —
+der Closure-Sensor trägt die Closure ohne Liefer-Haken und meldet die
+fehlende oder zu dünne Notiz. **Urteil** bleibt, ob der Nehmer den Gegenstand
+wirklich führt.
+
 ## Lab-Bezug
 
 * `docs/plan/planning/{open,next,in-progress,done}/`
@@ -265,6 +360,11 @@ nach Schichten führen oft zu Zombie-Slices, die "fast fertig" sind.
 **Begründung:** Jeder Schnitt-Slice ist einzeln lieferbar (kein Slice
 wartet auf den nächsten). Jeder hat ≤3 *Liefer-Punkte*. Jeder berührt
 höchstens zwei Schichten.
+
+**Und die Ausgangsdatei?** `slice-authentifizierung.md` geht nach `done/`, ihre
+`Gegenstand:`-Zeile nennt `-a`, `-b` und `-c`, die Liefer-Punkte bleiben leer —
+die drei nennen sie in §1 unter `Übernimmt:`
+([§Ein Slice, dessen Gegenstand ein anderer übernimmt](#ein-slice-dessen-gegenstand-ein-anderer-übernimmt)).
 
 **Was *nicht* geht:** "Schicht-Slice" wie `slice-authentifizierung-db`, `slice-authentifizierung-service`,
 `slice-authentifizierung-ui` — diese sind voneinander abhängig und einzeln nutzlos. Sie
@@ -510,7 +610,7 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 ## Selbstcheck
 
 * **(Erinnern)** Nenne die vier Lifecycle-Verzeichnisse in der Reihenfolge eines normalen Slice-Durchlaufs.
-* **(Anwenden — aktiviert LZ 1)** Benenne die Triggerbedingung für *jeden* Lifecycle-Übergang: die drei Vorwärts-Übergänge (`open→next`, `next→in-progress`, `in-progress→done`) *und* die zwei Rückführungen (`in-progress→next` zu groß, `in-progress→open` Blocker). Welcher der fünf ist am leichtesten zu übersehen — und warum?
+* **(Anwenden — aktiviert LZ 1)** Benenne die Triggerbedingung für *jeden* Lifecycle-Übergang: die drei Vorwärts-Übergänge (`open→next`, `next→in-progress`, `in-progress→done`) *und* die zwei Rückführungen (`in-progress→next` zu groß, `in-progress→open` Blocker) *und* den Ausgang ohne Arbeit (`open|next→done`, Gegenstand übernommen oder entfallen). Welcher der sechs ist am leichtesten zu übersehen — und warum?
 * Wann darf ein Slice in `done/` landen, obwohl ein Gate rot ist?
 * **(Erschaffen — aktiviert LZ 4)** Formuliere für einen Slice, den du nach `done/` bewegst, *zwei* beobachtbare Closure-Kriterien *und* einen Lerneintrag. Woran erkennst du, dass dein Lerneintrag mehr ist als "Tests grün" — welche der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke) trägt er?
 * **(Analysieren — Transfer aus Modul 2)** Welche Sub-Areas berührt der nächste anstehende Slice — und welcher Modus passt für jede dieser Sub-Areas? Begründe je gegen mindestens zwei der vier Pflichtkriterien (Konventionen-Dichte · Phase-Reife · Evidenz-/Diskrepanz-Risiko · Reconciliation-Aufwand) — eine Begründung wägt die Kriterien gegeneinander, eine reine "Modus, weil Doku fehlt"-Zuordnung ist Klassifikation, kein Bewerten.
@@ -529,7 +629,7 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Vier Lifecycle-Verzeichnisse in Reihenfolge? | zwei oder drei genannt | `open/` → `next/` → `in-progress/` → `done/`. Plus Rückführungen: `in-progress/ → next/` (zu groß), `in-progress/ → open/` (Blocker). | + Hinweis: WIP-Limit pro **Rolleninhaber** ([Modul 8](../03-agenten/modul-08-agentenrollen.md#typische-fehlvorstellungen)) auf 1 — wer mehrere Slices gleichzeitig in `in-progress/` hat, hat keine Lifecycle, sondern ein Buffet. |
-| Trigger je Lifecycle-Übergang benannt? | nur ein oder zwei Übergänge, Rest "wenn jemand anfängt". | Alle fünf benannt: `open→next` (priorisiert/eingeplant, `Verantwortlich:` gesetzt) · `next→in-progress` (Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei; der `git mv` landet auf dem Hauptzweig, vor der Arbeit) · `in-progress→done` (Closure-Kriterien erfüllt, Lerneintrag geschrieben, jedes Risiko mit Ausgang) · `in-progress→next` (Slice zu groß, zurück zum Schneiden) · `in-progress→open` (Blocker, Priorität offen). | + Pointe: am leichtesten übersehen werden die *Rückführungen* — `in-progress→next` und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört sichtbar zurück, nicht still weitergeschoben. WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro Mensch in der Implementer-Rolle, nicht pro Rolle. |
+| Trigger je Lifecycle-Übergang benannt? | nur ein oder zwei Übergänge, Rest "wenn jemand anfängt". | Alle sechs benannt: `open→next` (priorisiert/eingeplant, `Verantwortlich:` gesetzt) · `next→in-progress` (Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei; der `git mv` landet auf dem Hauptzweig, vor der Arbeit) · `in-progress→done` (Closure-Kriterien erfüllt, Lerneintrag geschrieben, jedes Risiko mit Ausgang) · `in-progress→next` (Slice zu groß, zurück zum Schneiden) · `in-progress→open` (Blocker, Priorität offen) · `open|next→done` (Gegenstand von einem anderen Slice übernommen oder entfallen — §7 nennt Kennung oder Grund, jedes Risiko hat einen Ausgang, die Liefer-Punkte bleiben leer). | + Pointe: am leichtesten übersehen werden die *Rückführungen* — `in-progress→next` und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört sichtbar zurück, nicht still weitergeschoben. WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro Mensch in der Implementer-Rolle, nicht pro Rolle. |
 | Slice in `done/` bei rotem Gate — wann? | "Gar nicht." | Nur mit dokumentiertem Carveout (Modul 7), der den roten Gate-Status auf Trigger schaltet. | + Unterscheidung Carveout (Ausnahme, mit Folge-Slice) vs. bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). Die volle Werkzeug-Triade inkl. *BF-Sub-Area-Markierung* (Sub-Area-Kontext, kein Closure-Werkzeug) wird in [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren) disambiguiert. |
 | Closure-Kriterien + Lerneintrag formuliert? | "Tests grün, fertig." — kein beobachtbares Kriterium, kein Lerneintrag. | Zwei beobachtbare Closure-Kriterien (z. B. Replay grün, DoD-Punkte als Test verlinkt) *und* ein Lerneintrag in einer der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke). | + Pointe: der Lerneintrag schließt den Steering Loop — ohne ihn bleibt das Versagensmuster unsichtbar und wiederholt sich. Exzellent benennt, *welche* künftige Wiederholung der Eintrag verhindert (Vorhersage), nicht nur, was passiert ist. |
 | `slice-bestell-checkout` (5-Punkte-DoD) bewerten und schneiden? | "Zu groß, irgendwie aufteilen." — kein Kriterien-Bezug, kein benannter Schnitt-Typ. | Gegen beide Größen-Kriterien begründet zu groß (>3 DoD-Punkte, nicht in einem Lauf abschließbar/einer Sitzung prüfbar) + konkreter Schnitt in einzeln lieferbare Slices mit benanntem Schnitt-Typ (Lieferwert: z. B. „Warenkorb→Zahlung→Bestätigung“ je eigenständig). | + Begründung, *warum* Lieferwert statt Schichten: jeder Schnitt-Slice liefert allein Wert und wartet nicht auf den nächsten; Gegenbeispiel, wann ein Schichtschnitt Zombie-Slices erzeugt (Lager-Abbuchung ohne Checkout liefert nichts Prüfbares). |
