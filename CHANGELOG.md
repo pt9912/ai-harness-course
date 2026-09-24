@@ -11,6 +11,46 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 138 — 2026-09-24 · Die Referenzmatrix mechanisch vollständig: Welle, Carveout und Roadmap bekommen eine Klasse
+
+Anlass: Die Matrix in `grundlagen-referenz-richtung.md` führt acht Spalten;
+für Vertrag, Technik, Sicht und ADR sind **Welle, Carveout und Roadmap** dort
+durchgehend ❌. Die Vorlage `lab/templates/.d-check.yml` und das Beispiel
+`lab/example/.d-check.yml` bildeten nur `spec`, `adr` und `slice` ab — die drei
+Kanten waren verboten, aber ungeprüft (die Klasse fehlte, nicht die Regel).
+Beim Nachsehen fiel zugleich das Slice-Token der Vorlage auf: `slice-\d{3}`
+war seit dem Umbau der Kennungen auf Slugs (Welle 131) veraltet und hätte
+in einem Adopter-Repo keine der neuen Kennungen gefangen.
+
+- `lab/templates/.d-check.yml`: Slice-Token auf den Slug
+  (`slice-[a-z0-9]+(-[a-z0-9]+)*`); neue Klassen `welle` (Token), `carveout`
+  (Token `CO-\d{3}`) und `roadmap` (ohne Token — sie wird nur über Links
+  erreicht); sechs neue Regeln `spec|adr → welle|carveout|roadmap`. Bleibt
+  auskommentiert, wie der übrige Block.
+- `lab/example/.d-check.yml`: dieselben drei Klassen und sechs Regeln, live.
+  Sie fanden **zwei echte Befunde**, beide behoben: `spec/architecture.md`
+  **verlinkte** die Roadmap in der Hard Rule (Sicht → Roadmap ist ❌; Kurs und
+  Vorlage nennen den Pfad nur als Inline-Code — das Beispiel war kaputt, nicht
+  die Regel), und ADR-0019 nennt `welle-1-mvp.md` als Fundort in ADR-0011s
+  Geschichte — jetzt mit dem Zeilen-Marker `d-check:status-provenance`
+  (der vorgesehene Ausweg, enger als ein `exempt-paths`-Eintrag).
+- `lab/team-sim/`: neue Gruppe **s26** (`s26a–d`): drei laute Kanten
+  (spec → welle, adr → carveout, adr → roadmap) und die Stille des Markers am
+  Ort — im selben Lauf wie die lauten, sonst bestünde sie auch über einem
+  abgeschalteten Modul. Manifest, README-Tabelle und -Kopf nachgezogen.
+
+Kein Regelwerk-Eingriff (`lab/regelwerk/` unverändert, `Stand:`-Zeile bleibt);
+der Kurs lehrt die Konfiguration nicht, die Quelle ist die Matrix. **Nicht
+behauptet:** die Klassen erfassen nur, was die `paths` glob-fassen — ein
+Adopter mit anderem Verzeichnisschnitt passt sie an; und `roadmap` prüft nur
+Links, keine Meilenstein-Kennung (`M<NN>` trägt kein festes Muster).
+**Beobachtet, nicht übernommen:** ein Konsumenten-Repo führt zusätzlich eine
+Auffang-Klasse `aussen` (`**`, letzte Klasse) und eine Klasse für den
+Adaptionsblock; die Auffang-Klasse zieht die Status-Prüfung auf jede Datei und
+braucht eigene `exempt-paths` — ein eigenes Thema, hier nicht gemessen. Sein
+Slice-/Welle-Token (`slice-\d{3}`, `welle-\d{2}`) ist derselbe Zahlen-Stand,
+den diese Welle in der Vorlage ablöst.
+
 ## Welle 137 — 2026-09-16 · Ein Slice, dessen Gegenstand ein anderer übernimmt: der Ausgang aus `open/` und `next/`
 
 Anlass: ein adoptierendes Repo (`ai-harness-init`) will viele offene Slices

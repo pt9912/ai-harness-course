@@ -1488,6 +1488,53 @@ s25_gegenstand_uebernommen() {
   verdikt "s25d §7 nennt einen Nehmer, den es nicht gibt (Token): STILL" "kein Befund auf slice-002-suche, waehrend slice-008 im selben Lauf laut ist" "$n Treffer / $(echo "$out"|tail -1)" $ok
 }
 
+s26_matrix_planungsspalten() {
+  # --- s26a-d: die Planungs-Spalten der Referenzmatrix (Welle, Carveout,
+  # Roadmap) sind fuer Spec und ADR verboten. Ohne eine Klasse je Spalte waere
+  # die Kante verboten, aber ungeprueft — die Klassen sind der Gegenstand. Die
+  # Stille von s26d (Marker am Ort) zaehlt nur, weil derselbe Lauf s26a-c laut
+  # meldet: sonst bestuende sie auch ueber einem abgeschalteten Modul.
+  topo; cd "$WORK/sim/alice" || return 1
+  sed -i 's/^modules: \[/modules: [matrix, /' .d-check.yml
+  cat >> .d-check.yml <<'EOF'
+matrix:
+  classes:
+    - {name: spec, paths: [spec/lastenheft.md, spec/spezifikation.md, spec/architecture.md]}
+    - {name: adr, paths: ["docs/plan/adr/[0-9]*.md"], token: 'ADR-\d{4}'}
+    - {name: slice, paths: ["docs/plan/planning/**/slice-*.md"], token: 'slice-[a-z0-9]+(-[a-z0-9]+)*'}
+    - {name: welle, paths: ["docs/plan/planning/**/welle-*.md"], token: 'welle-[a-z0-9]+(-[a-z0-9]+)*'}
+    - {name: carveout, paths: ["docs/plan/carveouts/CO-*.md"], token: 'CO-\d{3}'}
+    - {name: roadmap, paths: ["docs/plan/planning/**/roadmap.md"]}
+  rules:
+    - {from: spec, to: welle, allow: false}
+    - {from: spec, to: carveout, allow: false}
+    - {from: spec, to: roadmap, allow: false}
+    - {from: adr, to: welle, allow: false}
+    - {from: adr, to: carveout, allow: false}
+    - {from: adr, to: roadmap, allow: false}
+EOF
+  mkdir -p spec docs/plan/carveouts
+  printf '# Spezifikation\n\nDie Basis liefert welle-1-basis.\n' > spec/spezifikation.md
+  printf '# CO-001: Schuld\n' > docs/plan/carveouts/CO-001-schuld.md
+  # Drei laute Zeilen und eine mit Marker, alle im Koerper (Geschichte ist ausgenommen).
+  { head -1 docs/plan/adr/0001-kern.md
+    printf '\nSchuld: CO-001.\nZeitplan: [Roadmap](../planning/in-progress/roadmap.md).\nEntstanden in welle-1-basis. <!-- d-check:status-provenance -->\n'
+    tail -n +2 docs/plan/adr/0001-kern.md; } > "$WORK/adr.tmp" && cp "$WORK/adr.tmp" docs/plan/adr/0001-kern.md
+  schritt git add -A && schritt git commit -qm "Spalten-Verweise aus Spec und ADR" || return 1
+  schritt grep -q '^modules: \[matrix' .d-check.yml || return 1
+  schritt grep -q 'status-provenance' docs/plan/adr/0001-kern.md || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "spec/spezifikation.md" "welle-1-basis" "matrix-forbidden" && ok=0 || ok=1
+  verdikt "s26a spec nennt eine Welle (Token): LAUT" "matrix-forbidden spec -> welle" "$(echo "$out"|tail -1)" $ok
+  befund_in "$out" "docs/plan/adr/0001-kern.md" "CO-001" "matrix-forbidden" && ok=0 || ok=1
+  verdikt "s26b ADR nennt einen Carveout (Token): LAUT" "matrix-forbidden adr -> carveout" "$(echo "$out"|tail -1)" $ok
+  befund_in "$out" "docs/plan/adr/0001-kern.md" "../planning/in-progress/roadmap.md" "matrix-forbidden" && ok=0 || ok=1
+  verdikt "s26c ADR verlinkt die Roadmap: LAUT" "matrix-forbidden adr -> roadmap" "$(echo "$out"|tail -1)" $ok
+  n=$(printf '%s' "$out" | grep "^docs/plan/adr/0001-kern.md:[0-9]*$(printf '\t')welle-1-basis" | wc -l)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s26d ADR nennt die Welle mit Marker am Ort: STILL" "kein Befund auf ADR -> welle, waehrend s26a-c im selben Lauf laut sind" "$n Treffer / $(echo "$out"|tail -1)" $ok
+}
+
 # ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
@@ -1517,6 +1564,7 @@ lauf s22 s22_rtm_vollstaendigkeit
 lauf s23 s23_gate_index
 lauf s24 s24_vorabvergabe
 lauf s25 s25_gegenstand_uebernommen
+lauf s26 s26_matrix_planungsspalten
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

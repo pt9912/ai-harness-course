@@ -42,13 +42,31 @@ matrix:
       # das Token fasst beide Formen, solange Alt- und Neubestand
       # nebeneinander stehen.
       token: 'slice-[a-z0-9]+(-[a-z0-9]+)*'
+    # Welle, Carveout und Roadmap: die drei uebrigen Planungs-Spalten der
+    # Matrix (Regelwerk grundlagen-referenz-richtung.md). Fuer Spec-Straten und
+    # ADR sind sie ❌ — ohne Klasse waere die Kante verboten, aber ungeprueft.
+    # Die Roadmap traegt kein Token: Sie wird nur ueber Links erreicht.
+    - name: welle
+      paths: ["docs/plan/planning/**/welle-*.md"]
+      token: 'welle-[a-z0-9]+(-[a-z0-9]+)*'
+    - name: carveout
+      paths: ["docs/plan/carveouts/CO-*.md"]
+      token: 'CO-\d{3}'
+    - name: roadmap
+      paths: ["docs/plan/planning/**/roadmap.md"]
   rules:
     # Kontext-Zeiger sind erlaubt und werden am Ort markiert
     # (<!-- d-check:status-provenance -->); alles Uebrige faellt.
-    - {from: adr,  to: slice, allow: false}
+    - {from: adr,  to: slice,   allow: false}
+    - {from: adr,  to: welle,   allow: false}
+    - {from: adr,  to: carveout, allow: false}
+    - {from: adr,  to: roadmap, allow: false}
     # Decken-Regel der Spec-Straten (Kurs §Referenz-Richtung, Regel 5).
-    - {from: spec, to: adr,   allow: false}
-    - {from: spec, to: slice, allow: false}
+    - {from: spec, to: adr,     allow: false}
+    - {from: spec, to: slice,   allow: false}
+    - {from: spec, to: welle,   allow: false}
+    - {from: spec, to: carveout, allow: false}
+    - {from: spec, to: roadmap, allow: false}
   status:
     forbidden: [superseded, deprecated]
     # Die Abloesung steht in diesem Korpus in der Status-Zeile ("Superseded by

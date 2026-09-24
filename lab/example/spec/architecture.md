@@ -4,7 +4,7 @@
 
 **Hard Rule:** Diese Datei enthält *keine* Wellen, Slices, Commit-Hashes
 oder Closure-Daten. Die zeitliche Schicht lebt in
-[`../docs/plan/planning/in-progress/roadmap.md`](../docs/plan/planning/in-progress/roadmap.md).
+`docs/plan/planning/in-progress/roadmap.md`.
 
 ---
 

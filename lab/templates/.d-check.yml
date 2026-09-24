@@ -52,11 +52,25 @@ modules: [links, anchors]
 #       token: 'ADR-\d{4}'                                              # auch die blosse Kennung im Fliesstext zaehlt als Referenz
 #     - name: slice
 #       paths: ["docs/plan/planning/**/slice-*.md"]
-#       token: 'slice-\d{3}'
+#       token: 'slice-[a-z0-9]+(-[a-z0-9]+)*'                           # die Kennung ist ein Slug, keine laufende Nummer
+#     - name: welle
+#       paths: ["docs/plan/planning/**/welle-*.md"]
+#       token: 'welle-[a-z0-9]+(-[a-z0-9]+)*'
+#     - name: carveout
+#       paths: ["docs/plan/carveouts/CO-*.md"]
+#       token: 'CO-\d{3}'
+#     - name: roadmap                                                   # ohne Token: nur ueber Links erreichbar
+#       paths: ["docs/plan/planning/**/roadmap.md"]
 #   rules:
 #     - {from: spec, to: adr, allow: false}                             # Decken-Regel: kein Spec-Stratum nennt eine ADR …
 #     - {from: spec, to: slice, allow: false}                           # … und keinen Slice
+#     - {from: spec, to: welle, allow: false}                           # … keine Welle
+#     - {from: spec, to: carveout, allow: false}                        # … keinen Carveout
+#     - {from: spec, to: roadmap, allow: false}                         # … und keine Roadmap
 #     - {from: adr, to: slice, allow: false}                            # Ausnahme je Zeile: <!-- d-check:status-provenance -->
+#     - {from: adr, to: welle, allow: false}                            # dieselbe Ausnahme
+#     - {from: adr, to: carveout, allow: false}
+#     - {from: adr, to: roadmap, allow: false}
 #   status: {forbidden: [superseded, deprecated]}                       # nur aktive ADRs referenzieren
 # Ohne `exclude-sections`. Welche Abschnitte ausgenommen werden — und ob
 # ueberhaupt —, regelt das Baseline-Regelwerk `grundlagen-referenz-richtung.md`

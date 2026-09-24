@@ -51,7 +51,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT; erweitert 2026-09-08 um s24, 72/72 · 0 KAPUTT; erweitert 2026-09-16 um s25, 76/76 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT; erweitert 2026-09-08 um s24, 72/72 · 0 KAPUTT; erweitert 2026-09-16 um s25, 76/76 · 0 KAPUTT; erweitert 2026-09-24 um s26, 80/80 · 0 KAPUTT; nachgefahren 2026-09-24 auf d-check v0.77.0, 80/80 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -135,6 +135,10 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s25b | dieselbe Form, §7 ein Satz ohne Satzende | **`closure-note-thin`** | ✓ das Paar zu s25a: die Notiz ist die Bedingung, nicht der `git mv` |
 | s25c | nur `git mv`, keine Closure-Notiz | **`closure-note-missing`** | ✓ verschieben allein ist kein Ausgang |
 | s25d | §7 nennt einen Nehmer, den es nicht gibt (Token) | **still**, während die leere Vergleichsdatei laut ist | ✓ benanntes Loch: „die Kennung löst auf" prüft hier kein Sensor — Urteil oder eigener Sensor |
+| s26a | `spec/spezifikation.md` nennt `welle-1-basis` im Text | **`matrix-forbidden`** spec → welle | ✓ die Spalte Welle hat eine Klasse; ohne sie wäre die Kante verboten und ungeprüft |
+| s26b | eine ADR nennt `CO-001` im Text | **`matrix-forbidden`** adr → carveout | ✓ dasselbe für Carveout — die Kennung ist ein Token, kein Link |
+| s26c | eine ADR **verlinkt** die Roadmap | **`matrix-forbidden`** adr → roadmap | ✓ die Roadmap trägt kein Token, sie wird nur über Links erreicht |
+| s26d | dieselbe ADR nennt die Welle mit `<!-- d-check:status-provenance -->` in der Zeile | **still**, während s26a–c im selben Lauf laut sind | ✓ der Marker am Ort ist der vorgesehene Ausweg; die Stille zählt nur neben dem lauten Lauf |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte
