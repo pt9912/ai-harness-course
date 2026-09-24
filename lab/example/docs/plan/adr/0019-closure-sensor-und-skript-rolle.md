@@ -40,7 +40,7 @@ Worked Example von Modul 11.
    Die Vorbelegung des Werkzeugs ist 4; sie zu übernehmen hieße, eine
    Entscheidung durchzusetzen, die niemand getroffen hat.
 3. **Die Kandidaten-Menge ist `done/*.md`, nicht `done/slice-*.md`.** ADR-0011
-   zählt in ihrer Geschichte `welle-1-mvp.md` ausdrücklich zu den betroffenen <!-- d-check:status-provenance -->
+   zählt in ihrer Geschichte `welle-1-mvp.md` ausdrücklich zu den betroffenen
    Dateien. Ein Filter auf Slices wäre unter-gefasst.
 4. **[`tools/check_closure_notes.py`](../../../tools/check_closure_notes.py) bleibt — als Artefakt der Lehre, nicht als
    Deckung.** Es ist der Gegenstand, an dem Modul 11 „Fitness Function ohne

@@ -83,6 +83,12 @@ matrix:
     - "docs/plan/adr/0011-*.md"
     - "docs/plan/adr/0012-*.md"
     - "docs/plan/adr/0013-*.md"
+    # ADR-0019 nennt `welle-1-mvp.md` als Fundort in ADR-0011s Geschichte —
+    # vor der Klasse `welle` entstanden. Ein Marker in der Zeile waere eine
+    # Aenderung am Koerper einer Accepted-ADR (AGENTS.md §2.5, Kern-Aenderung);
+    # die Ausnahme steht darum hier. Eine Accepted-ADR waechst nicht mehr, der
+    # Eintrag deckt also keinen kuenftigen Verstoss still mit.
+    - "docs/plan/adr/0019-*.md"
   # Provenance in der ADR-Historie ist Kontext (Regel 5) — die Sektion heisst
   # hier `Geschichte`. `Historie` gehoert NICHT dazu: So heisst nur die Sektion
   # der Spec-Straten, und fuer die gilt die Ausnahme ausdruecklich nicht.

@@ -32,8 +32,10 @@ in einem Adopter-Repo keine der neuen Kennungen gefangen.
   **verlinkte** die Roadmap in der Hard Rule (Sicht → Roadmap ist ❌; Kurs und
   Vorlage nennen den Pfad nur als Inline-Code — das Beispiel war kaputt, nicht
   die Regel), und ADR-0019 nennt `welle-1-mvp.md` als Fundort in ADR-0011s
-  Geschichte — jetzt mit dem Zeilen-Marker `d-check:status-provenance`
-  (der vorgesehene Ausweg, enger als ein `exempt-paths`-Eintrag).
+  Geschichte — jetzt in `exempt-paths` (Einzel-Eintrag, wie 0011–0013). Ein
+  Zeilen-Marker im ADR-Körper wäre der engere Ausweg gewesen, ist aber eine
+  Änderung an einer Accepted-ADR (`lab/example/AGENTS.md` §2.5, Kern-Änderung);
+  das Review der Welle hat das gefunden, der erste Stand trug den Marker.
 - `lab/team-sim/`: neue Gruppe **s26** (`s26a–d`): drei laute Kanten
   (spec → welle, adr → carveout, adr → roadmap) und die Stille des Markers am
   Ort — im selben Lauf wie die lauten, sonst bestünde sie auch über einem
