@@ -70,6 +70,11 @@ gruppen:
   # Carveout, Roadmap. s26a-c laut (spec->welle, adr->carveout, adr->roadmap),
   # s26d still (Marker am Ort) neben s26a-c im selben Lauf.
   s26: [s26a, s26b, s26c, s26d]
+  # s27: die ADR-Kennungs-Konfiguration der Vorlage (Welle 139). Gegenstand ist die
+  # Deckung durch `ids` allein — Segment im Muster, link-policy: always, adr-Klasse
+  # ohne token. s27a-c laut (Fliesstext, Bereichssegment, Inline-Code), s27d still
+  # (verlinkte Kennung, das Wort ADR- ohne Nummer) neben s27a-c im selben Lauf.
+  s27: [s27a, s27b, s27c, s27d]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -88,3 +93,4 @@ laeufe:
   - { datum: 2026-09-16, image: v0.74.1, neu: [s25a, s25b, s25c, s25d], gegenstand: "Entwurf: ein Slice, dessen Gegenstand ein anderer uebernimmt (Welle 137) — die DoD-lose Uebernahme-Closure ist fuer planning.closure eine Closure wie jede andere (still neben laut im selben Lauf), der blosse git mv ist keine, und die Kennung des Nehmers loest als Token kein Sensor auf", ergebnis: "76 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-24, image: v0.74.1, neu: [s26a, s26b, s26c, s26d], gegenstand: "Entwurf: die Planungs-Spalten der Referenzmatrix (Welle 138) — Welle, Carveout und Roadmap haben je eine Klasse; spec/adr -> welle|carveout|roadmap sind laut, der Marker am Ort ist still (neben dem lauten Lauf)", ergebnis: "80 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-24, image: v0.77.0, neu: [], gegenstand: "Pin-Bump v0.74.1 -> v0.77.0 (Zwischenversionen opt-in, kein Breaking Change): alle 80 Verdikte unveraendert, keine gedrehte Erwartung", ergebnis: "80 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-09-25, image: v0.77.0, neu: [s27a, s27b, s27c, s27d], gegenstand: "Entwurf: die ADR-Kennungs-Konfiguration der Vorlage (Welle 139) — `ids` traegt die nackte Kennung allein (Fliesstext, Bereichssegment, Inline-Code laut), das token der adr-Klasse ist redundant; verlinkte Kennung und das Wort ADR- ohne Nummer sind still", ergebnis: "84 PASS, 0 FAIL, 0 KAPUTT" }

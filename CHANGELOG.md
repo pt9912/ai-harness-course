@@ -11,6 +11,58 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 139 — 2026-09-25 · Die ADR-Kennung in der Vorlage: Segment, Linkpflicht und kein doppeltes Token
+
+Anlass: Die emittierte Vorlage des Konsumenten-Werkzeugs (`ai-harness-init`)
+führt die ADR-Konfiguration anders als `lab/templates/.d-check.yml`: das
+`ids`-Muster nimmt das Bereichssegment (`ADR-IDX-0004`, so nennt es
+`source-precedence.md` §Vergabe), die `adr`-Klasse fasst neben `[0-9]*.md`
+auch die Dateien mit Segment, und ihr `token: 'ADR-\d{4}'` fehlt. Die Vorlage
+hier hing hinter dem Kurs: Ein Adopter, der der Vergabe-Regel folgt, hätte
+`ADR-IDX-0004` weder als Kennung noch als Klasse gefasst.
+
+- `lab/templates/.d-check.yml`: `ids`-Muster `ADR-([A-Z]+-)?\d{4}` mit
+  `link-policy: always`; `adr`-Klasse mit zweitem Glob
+  `docs/plan/adr/[A-Z]*-[0-9]*.md` (die `README.md` trägt kein Segment und
+  bleibt draußen), `token` entfernt. Ein Kommentar über dem `ids`-Block nennt
+  den Grund der Linkpflicht (die Status-Prüfung der Matrix sieht nur Links,
+  Kurs `referenz-richtung.md`); er und der Kommentar an der `adr`-Klasse sagen
+  beide, dass `ids` mit aktiviert werden muss, wenn die Klasse ohne `token` steht. Bleibt auskommentiert, wie der übrige Block.
+- `lab/example/.d-check.yml`: `link-policy: always` auf dem ADR-Muster, live.
+  Sie fand **13 Stellen**, die das Gate nicht sah (Kennung in Inline-Code, ein
+  Verweis ohne Link): vier sind jetzt Links (`cpp/`- und `go/harness/README.md`,
+  `runbooks/release-checklist.md`, `slice-tie-break-determinismus`), neun
+  (auf acht Zeilen) tragen einen Zeilen-Marker, weil die Kennung dort der
+  Gegenstand ist (Messbeispiel, Testfall-Tabelle, Beispiel einer Form,
+  Protokollzeile über eine abgelöste ADR — ein Link wäre dort `matrix-inactive`).
+  Keine ADR berührt; vier der Dateien liegen in `done/`, dort nur Link und
+  Marker, kein Inhalt.
+- `lab/team-sim/`: neue Gruppe **s27** (`s27a–d`): nackte Kennung im Fließtext,
+  mit Bereichssegment und in Inline-Code laut; verlinkte Kennung und das Wort
+  `ADR-` ohne Nummer still — im selben Lauf, sonst bestünde die Stille auch
+  über einem abgeschalteten Modul. Manifest, README-Tabelle und -Kopf nachgezogen.
+
+Gemessen (d-check v0.77.0, Scratch-Ziel): das `token` fing die blanke Kennung
+im Fließtext nicht zusätzlich zu `ids` und Inline-Code auch mit `token` nicht —
+es zu entfernen kostet nichts; ohne `link-policy: always` bleibt Inline-Code
+unbeanstandet, mit ihr nicht. **Break-Test je Verdikt:** ohne Segment im
+Muster fällt s27b, ohne `link-policy` s27c, mit nackter Kennung in der Notiz
+s27d; ohne `ids` in `modules` stoppt der Schritt-Wächter (`KAPUTT`), ebenso ein
+`token` an der `adr`-Klasse des Szenarios — sonst finge `matrix` dieselbe Zeile
+mit, und s27a bewiese nicht mehr, dass `ids` allein trägt. **Grenze:** das
+Szenario trägt seine Konfiguration selbst; die auskommentierte Vorlage lässt
+sich nicht einlesen, ihre Gleichheit mit dem Szenario bleibt Handarbeit.
+
+Kein Regelwerk-Eingriff (`lab/regelwerk/` unverändert, `Stand:`-Zeile bleibt);
+die Konfiguration steht nur in der Vorlage, der Kurs lehrt sie nicht.
+**Nicht behauptet:** dass das Beispiel der Vorlage in allem folgt. Es führt
+weiter das Muster ohne Segment (`harness/conventions.md` nennt den Grund: ein
+Mensch schreibt, die Kennungen tragen kein Bereichssegment) und behält das
+`token` an der `adr`-Klasse — dort ist es keine Lücke, sondern verschiebt nur
+den Befund von `id-unlinked` auf `matrix-forbidden`. Ebenso unverändert: die
+Slice-/Welle-Token der Vorlage bleiben in der Slug-Form (Welle 138), die des
+Konsumenten-Werkzeugs sind Präfixe.
+
 ## Welle 138 — 2026-09-24 · Die Referenzmatrix mechanisch vollständig: Welle, Carveout und Roadmap bekommen eine Klasse
 
 Anlass: Die Matrix in `grundlagen-referenz-richtung.md` führt acht Spalten;

@@ -1535,6 +1535,46 @@ EOF
   verdikt "s26d ADR nennt die Welle mit Marker am Ort: STILL" "kein Befund auf ADR -> welle, waehrend s26a-c im selben Lauf laut sind" "$n Treffer / $(echo "$out"|tail -1)" $ok
 }
 
+s27_adr_kennung_linkpflicht() {
+  # --- s27a-d: die Vorlage-Konfiguration fuer ADR-Kennungen (Welle 139): ids mit
+  # Bereichssegment und link-policy: always, die adr-Klasse OHNE token. Gegenstand
+  # ist, dass `ids` die nackte Kennung allein traegt — das token waere redundant.
+  # Die Stille von s27d zaehlt nur neben den lauten s27a-c im selben Lauf.
+  topo; cd "$WORK/sim/alice" || return 1
+  sed -i 's/^modules: \[/modules: [ids, matrix, /' .d-check.yml
+  cat >> .d-check.yml <<'EOF'
+ids:
+  patterns:
+    - {regex: 'ADR-([A-Z]+-)?\d{4}', target: docs/plan/adr/, link-policy: always}
+matrix:
+  classes:
+    - {name: spec, paths: [spec/lastenheft.md, spec/spezifikation.md, spec/architecture.md]}
+    - {name: adr, paths: ["docs/plan/adr/[0-9]*.md", "docs/plan/adr/[A-Z]*-[0-9]*.md"]}
+  rules:
+    - {from: spec, to: adr, allow: false}
+EOF
+  mkdir -p spec
+  printf '# Lastenheft\n\nDie Basis folgt ADR-0001 im Text.\n' > spec/lastenheft.md
+  printf '# Spezifikation\n\nDer Bereich folgt ADR-IDX-0004 im Text.\n' > spec/spezifikation.md
+  printf '# Architektur\n\nDie Basis folgt `ADR-0001` als Code.\n' > spec/architecture.md
+  printf '# ADR-IDX-0004: Bereich\n\n**Status:** Accepted\n' > docs/plan/adr/IDX-0004-bereich.md
+  printf '# Notiz\n\nDas Wort ADR- ohne Nummer. Verlinkt: [ADR-0001](plan/adr/0001-kern.md).\n' > docs/notiz.md
+  schritt git add -A && schritt git commit -qm "ADR-Kennungen in Spec und Notiz" || return 1
+  schritt grep -q '^modules: \[ids' .d-check.yml || return 1
+  # Praemisse: die adr-Klasse traegt kein token — sonst faengt matrix dieselbe Zeile mit.
+  schritt test -z "$(grep "token: 'ADR" .d-check.yml)" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "spec/lastenheft.md" "ADR-0001" "id-unlinked" && ok=0 || ok=1
+  verdikt "s27a nackte ADR-Kennung im Fliesstext: LAUT" "id-unlinked auf spec/lastenheft.md, obwohl die adr-Klasse kein token traegt" "$(echo "$out"|tail -1)" $ok
+  befund_in "$out" "spec/spezifikation.md" "ADR-IDX-0004" "id-unlinked" && ok=0 || ok=1
+  verdikt "s27b nackte Kennung mit Bereichssegment: LAUT" "id-unlinked auf ADR-IDX-0004 (das Muster nimmt das Segment)" "$(echo "$out"|tail -1)" $ok
+  befund_in "$out" "spec/architecture.md" "ADR-0001" "id-unlinked" && ok=0 || ok=1
+  verdikt "s27c Kennung in Inline-Code: LAUT" "id-unlinked (link-policy: always)" "$(echo "$out"|tail -1)" $ok
+  n=$(printf '%s' "$out" | grep "^docs/notiz.md:" | wc -l)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s27d verlinkte Kennung und das Wort ADR- ohne Nummer: STILL" "kein Befund auf docs/notiz.md, waehrend s27a-c im selben Lauf laut sind" "$n Treffer / $(echo "$out"|tail -1)" $ok
+}
+
 # ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
@@ -1565,6 +1605,7 @@ lauf s23 s23_gate_index
 lauf s24 s24_vorabvergabe
 lauf s25 s25_gegenstand_uebernommen
 lauf s26 s26_matrix_planungsspalten
+lauf s27 s27_adr_kennung_linkpflicht
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

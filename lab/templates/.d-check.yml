@@ -11,9 +11,15 @@ scan:
   roots: ["."]
   ignore: ["**/*.template.md", ".tmp/**"]
 modules: [links, anchors]
+# Linkpflicht fuer ADR-Kennungen: `matrix` beurteilt den Status eines Ziels nur an
+# Links (Kurs `referenz-richtung.md`: Slice -> ADR mit Status Superseded faellt); eine
+# nackte Kennung ist fuer diese Pruefung unsichtbar. `ids` erzwingt den Link, `link-policy:
+# always` auch fuer die Kennung in Inline-Code — ohne sie bleibt sie dort unbeanstandet.
+# Die `adr`-Klasse in `matrix` traegt deshalb kein `token`: steht sie ohne diesen `ids`-Block,
+# bleibt die nackte Kennung ungeprueft — beide Bloecke zusammen aktivieren.
 # ids:
 #   patterns:
-#     - {regex: 'ADR-\d{4}', target: docs/plan/adr/}                    # aktivieren, sobald docs/plan/adr/ existiert
+#     - {regex: 'ADR-([A-Z]+-)?\d{4}', target: docs/plan/adr/, link-policy: always}  # aktivieren, sobald docs/plan/adr/ existiert; Segment optional (ADR-IDX-0004); always: auch die Kennung in Inline-Code ist linkpflichtig
 #     - {regex: '<PREFIX>-[A-Z]{2}-\d{2}', target: spec/lastenheft.md}  # Präfix setzen; aktivieren, sobald spec/lastenheft.md existiert
 # codepaths:
 #   roots: [spec, docs, harness]                                        # aktivieren, sobald diese Verzeichnisse existieren
@@ -48,8 +54,8 @@ modules: [links, anchors]
 #       order: [spec/lastenheft.md, spec/spezifikation.md, spec/architecture.md]  # Vertrag > Technik > Sicht
 #       direction: no-downward                                          # Abwaertslink innerhalb der Spec -> matrix-downward
 #     - name: adr
-#       paths: ["docs/plan/adr/[0-9]*.md"]
-#       token: 'ADR-\d{4}'                                              # auch die blosse Kennung im Fliesstext zaehlt als Referenz
+#       paths: ["docs/plan/adr/[0-9]*.md", "docs/plan/adr/[A-Z]*-[0-9]*.md"]  # ohne und mit Bereichssegment; README.md traegt keins und bleibt draussen
+#                                                                       # kein `token`: das ids-Muster oben faengt die blosse Kennung im Fliesstext (id-unlinked) — `ids` dann MIT aktivieren
 #     - name: slice
 #       paths: ["docs/plan/planning/**/slice-*.md"]
 #       token: 'slice-[a-z0-9]+(-[a-z0-9]+)*'                           # die Kennung ist ein Slug, keine laufende Nummer

@@ -51,7 +51,7 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT; erweitert 2026-09-08 um s24, 72/72 · 0 KAPUTT; erweitert 2026-09-16 um s25, 76/76 · 0 KAPUTT; erweitert 2026-09-24 um s26, 80/80 · 0 KAPUTT; nachgefahren 2026-09-24 auf d-check v0.77.0, 80/80 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT; erweitert 2026-09-08 um s24, 72/72 · 0 KAPUTT; erweitert 2026-09-16 um s25, 76/76 · 0 KAPUTT; erweitert 2026-09-24 um s26, 80/80 · 0 KAPUTT; nachgefahren 2026-09-24 auf d-check v0.77.0, 80/80 · 0 KAPUTT; erweitert 2026-09-25 um s27, 84/84 · 0 KAPUTT)
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -139,6 +139,10 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s26b | eine ADR nennt `CO-001` im Text | **`matrix-forbidden`** adr → carveout | ✓ dasselbe für Carveout — die Kennung ist ein Token, kein Link |
 | s26c | eine ADR **verlinkt** die Roadmap | **`matrix-forbidden`** adr → roadmap | ✓ die Roadmap trägt kein Token, sie wird nur über Links erreicht |
 | s26d | dieselbe ADR nennt die Welle mit `<!-- d-check:status-provenance -->` in der Zeile | **still**, während s26a–c im selben Lauf laut sind | ✓ der Marker am Ort ist der vorgesehene Ausweg; die Stille zählt nur neben dem lauten Lauf |
+| s27a | `spec/lastenheft.md` nennt `ADR-0001` blank im Text, die `adr`-Klasse trägt kein `token` | **`id-unlinked`** | ✓ `ids` trägt die nackte Kennung allein; das `token` wäre redundant |
+| s27b | `spec/spezifikation.md` nennt `ADR-IDX-0004` blank | **`id-unlinked`** | ✓ das Muster nimmt das Bereichssegment; ohne es bliebe die Kennung unbeanstandet |
+| s27c | `spec/architecture.md` nennt `ADR-0001` in Inline-Code | **`id-unlinked`** | ✓ `link-policy: always`; ohne sie ist Inline-Code frei |
+| s27d | eine Notiz **verlinkt** `ADR-0001` und nennt das Wort `ADR-` ohne Nummer | **still**, während s27a–c im selben Lauf laut sind | ✓ der Link ist der Ausweg; das Wort ohne Nummer ist ein hingenommenes Negativ |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte
