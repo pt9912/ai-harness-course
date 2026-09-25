@@ -100,11 +100,11 @@ Kurs-Wurzel, die den ganzen Baum sieht.
 | Verstoß | `matrix` | altes Skript |
 |---|---|---|
 | sauberer Baum (Kontrolle) | grün | grün |
-| Lastenheft, Körper: `ADR-0001` | rot | rot |
-| Lastenheft, `## 7. Historie`: `ADR-0001` | rot | rot |
+| Lastenheft, Körper: `ADR-0001` | rot | rot <!-- d-check:ignore (Testfall der Tabelle: die Kennung ist der Prüfgegenstand) --> |
+| Lastenheft, `## 7. Historie`: `ADR-0001` | rot | rot <!-- d-check:ignore (Testfall der Tabelle: die Kennung ist der Prüfgegenstand) --> |
 | Spezifikation, Körper: `slice-tie-break-determinismus` | rot | rot |
-| Slice → superseded `ADR-0015` | rot | rot |
-| `ADR-0018` → `slice-a-check-restliche-skelette` | rot | **grün** |
+| Slice → superseded `ADR-0015` | rot | rot <!-- d-check:ignore (Testfall der Tabelle: die Kennung ist der Prüfgegenstand) --> |
+| `ADR-0018` → `slice-a-check-restliche-skelette` | rot | **grün** <!-- d-check:ignore (Testfall der Tabelle: die Kennung ist der Prüfgegenstand) --> |
 
 Die letzte Zeile ist der Grund für den Tausch: Das Skript erklärte diese Zelle
 im eigenen Kopf für nicht grep-bar und überließ sie dem Review-Agenten. Der

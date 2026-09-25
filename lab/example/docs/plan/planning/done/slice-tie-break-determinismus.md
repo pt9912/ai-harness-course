@@ -14,7 +14,7 @@ nur durch `git mv` (Kurs
 **Nachtrag 2026-06-02** (Lab-Ausbau (Kurs-Welle 9); Traceability-Metadata, keine
 Änderung am Slice): Der hier gebaute Tie-Break belegt zusätzlich
 `LH-FA-IDX-003` (Index-Schreib-Idempotenz — Determinismus ist Voraussetzung für
-bit-identische Schreib-Ergebnisse) und wird von `ADR-0012` als Verifikation
+bit-identische Schreib-Ergebnisse) und wird von [`ADR-0012`](../../adr/0012-index-write-strategy.md) als Verifikation
 herangezogen. Beide entstanden nach diesem Slice; die Verweise sind rückwirkend
 eingetragen.
 

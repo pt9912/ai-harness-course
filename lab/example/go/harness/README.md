@@ -48,7 +48,7 @@ um Go-spezifische Pfade:
 - Test-Namen tragen LH-IDs: `TestSearch_LHFA02_Boundary_KClamped`.
 - Make-Target-Kommentare nennen LH-IDs, **wo eine LH-Bindung besteht**:
   `test-determinism: ## LH-QA-02`. `coverage-gate` gehört zu keiner Lastenheft-Anforderung und zitiert
-  deshalb die ADR, die seine Schwelle setzt (`ADR-0013`) — siehe [`../../harness/README.md` §Sensors](../../harness/README.md#sensors-feedback-gates).
+  deshalb die ADR, die seine Schwelle setzt ([`ADR-0013`](../../docs/plan/adr/0013-coverage-schwellen.md)) — siehe [`../../harness/README.md` §Sensors](../../harness/README.md#sensors-feedback-gates).
 - ADR-Verweise in Code-Kommentaren bei nicht-trivialen Entscheidungen.
 
 ## Safety boundaries (Go-spezifisch)

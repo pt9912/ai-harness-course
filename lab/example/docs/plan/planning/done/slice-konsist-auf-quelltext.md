@@ -33,7 +33,7 @@ derselben Ebene wie a-check.
       qualifiziert ohne Import → rot; unveränderter Baum → grün.
 - [x] `constructs`-Regel in `kotlin/.a-check.yml` entfernt, nachdem gemessen
       ist, dass sie nichts mehr trägt.
-- [x] `ADR-0018` löst `ADR-0016` ab und trägt deren Entscheidung **vollständig**
+- [x] `ADR-0018` löst `ADR-0016` ab und trägt deren Entscheidung **vollständig** <!-- d-check:ignore (Protokollzeile: die abgelöste ADR wird genannt, nicht referenziert) -->
       weiter; Verweise umgehängt, Abschnitts-Zeiger geprüft.
 - [x] `make gates` grün (`COURSE_LANG=kotlin`), `make verify` grün.
 - [x] Closure-Notiz.

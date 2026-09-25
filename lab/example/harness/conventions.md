@@ -107,7 +107,7 @@ Die **Kürzel-Spalte** ist Pflicht, seit die Kennung einer Beobachtung der Pfad
 `BEO-<KUERZEL>/<slug>` ist
 ([Modul 6 §Das Beobachtungs-Register](../../../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register)).
 Vorher führte dieses Repo keine — seine übrigen Kennungen tragen bis heute kein
-Bereichssegment (`ADR-0012`, nicht `ADR-SPEC-0012`), weil an ihm ein Mensch
+Bereichssegment (`ADR-0012`, nicht `ADR-SPEC-0012`), weil an ihm ein Mensch <!-- d-check:ignore (Beispiel der Form, kein Verweis) -->
 schreibt. Das ändert sich nicht; **eine** Kennungsklasse reicht aber, damit die
 Spalte etwas deklariert statt eine Tabelle zu füllen. **Jedes Kürzel ist
 unveränderlich** — es steht in Pfaden unter `docs/plan/planning/observations/`.

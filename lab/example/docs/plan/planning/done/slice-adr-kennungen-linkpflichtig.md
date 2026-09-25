@@ -21,7 +21,7 @@ Definition, und das d-check-Modul `ids` hält das offen.
 
 Der Anlass ist kein Ordnungssinn: `matrix` prüft den **Status** eines Ziels
 nur an Links. Eine nackte Kennung ist für das Gate unsichtbar — gemessen,
-`ADR-0015` (superseded) nackt in einem Slice ergibt 0 Befunde, derselbe
+`ADR-0015` (superseded) nackt in einem Slice ergibt 0 Befunde, derselbe <!-- d-check:ignore (Messbeispiel der Regel: die nackte Kennung ist der Gegenstand) -->
 Verweis als Link `matrix-inactive`. `ids` erzwingt den Link, `matrix`
 beurteilt ihn.
 
@@ -107,7 +107,7 @@ aktiv; `make doc-check` prüft jetzt 70 statt 29 Dateien.
 **Die zwei Ausnahme-Klassen**, beide als Marker im Text statt als Pfad-Liste in
 der Config — die Begründung steht dann dort, wo jemand sie liest:
 
-- **Geplante Vorwärts-Verweise** (4×): `ADR-0004` existiert nicht, `slice-ann-suche`
+- **Geplante Vorwärts-Verweise** (4×): `ADR-0004` existiert nicht, `slice-ann-suche` <!-- d-check:ignore (Zitat der geplanten Kennung, kein Verweis) -->
   *bringt* sie erst — „ADR-0004 'ANN-Bibliothek-Wahl' Accepted" steht in dessen <!-- d-check:ignore (Zitat der geplanten Kennung, kein Verweis) -->
   DoD. Ein Link wäre `target-missing`.
 - **Protokollzeile in einer Geschichte-Sektion** (1×, `CO-001`): Regel 5 nennt

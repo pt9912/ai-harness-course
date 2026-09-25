@@ -261,14 +261,22 @@ planning:
 # (89 weitere Stellen), aber das ist eigene Aufraeum-Arbeit — ein Modul wird
 # hier erst scharf, wenn seine Klasse sauber ist.
 #
-# Zwei Ausnahmen stehen als Zeilen-Marker im Text, nicht als Pfad-Liste:
-# geplante Vorwaerts-Verweise (ADR-0004, die slice-ann-suche erst bringt) und
-# Protokollzeilen in Geschichte-Sektionen, in denen ein Link rotten wuerde
-# (Kurs §Referenz-Richtung, Regel 5).
+# `link-policy: always`: auch die Kennung in Inline-Code ist linkpflichtig. Ohne
+# sie bliebe dort jede Nennung unbeanstandet und das Gate saehe sie nicht. Jede
+# Stelle ist verlinkt oder traegt einen Zeilen-Marker.
+#
+# Die Ausnahmen stehen als Zeilen-Marker im Text, nicht als Pfad-Liste: geplante
+# Vorwaerts-Verweise (ADR-0004, die slice-ann-suche erst bringt), Protokollzeilen
+# in Geschichte-Sektionen, in denen ein Link rotten wuerde (Kurs §Referenz-Richtung,
+# Regel 5), und Stellen, an denen die Kennung selbst der Gegenstand ist (Messbeispiel,
+# Testfall-Tabelle, Beispiel einer Form). Der Marker steht als HTML-Kommentar NEBEN
+# der Kennung, nicht in Inline-Code, und nimmt die GANZE Zeile aus: eine zweite
+# Kennung auf derselben Zeile bliebe ungeprueft.
 ids:
   patterns:
     - regex: 'ADR-\d{4}'
       target: docs/plan/adr/
+      link-policy: always
     # LH-Kennungen zeigen aufwaerts ins Lastenheft — Ziel und Anker sind
     # stabil. `docs/plan/adr/**` ist ausgenommen, und zwar zwingend: Jede ADR
     # ist `Accepted` oder `Superseded`, und einen Link im Koerper zu ergaenzen
