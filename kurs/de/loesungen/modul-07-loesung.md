@@ -139,7 +139,8 @@ zurück.
 Pflicht-Inhalt einer Carveout-Datei:
 
 - **ID** (`CO-NNN`)
-- **Betroffenes Gate** (`coverage-gate`, `coverage-gate-critical`)
+- **Betroffenes Gate** (`coverage-gate`, `coverage-gate-critical`) — mit der ADR,
+  die die Schwelle setzt
 - **Geltungsbereich** (Pfad, Modul, Datei)
 - **Begründung** (technisch, nicht "noch nicht geschafft")
 - **Auflösungs-Trigger** (Meilenstein, Code-Eigenschaft, externes Ereignis)

@@ -11,6 +11,9 @@
 
 **Betroffenes Gate:** `<make-target>` (z.B. `coverage-gate`, `noqa-gate`,
 `arch-check`).
+<!-- Hat das Gate eine Schwelle: hänge "(Schwelle aus
+[`ADR-NNNN`](../adr/NNNN-<titel>.md))" an — die ADR setzt sie, der Carveout
+nicht. Sonst weglassen. -->
 
 **Geltungsbereich:** <Pfad / Modul / Datei>
 

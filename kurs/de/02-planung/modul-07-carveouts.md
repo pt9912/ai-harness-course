@@ -102,13 +102,18 @@ sechs Felder:
 
 **Status:** Aktiv.
 **Datum angelegt:** 2026-05-20. **Letzte Prüfung:** 2026-06-01.
-**Betroffenes Gate:** `coverage-gate-critical`.
+**Betroffenes Gate:** `coverage-gate-critical` (Schwelle aus [ADR-0013](../adr/0013-coverage-schwellen.md)).
 **Geltungsbereich:** der Index-Layer in allen sechs Sprach-Skeletten.
 **Folge-Slice:** [`slice-property-tests.md`](../planning/in-progress/slice-property-tests.md)
 ```
 
 Wenn `Folge-Slice` fehlt oder leer ist, ist der Carveout *de facto*
 permanent — und gehört dann offen so markiert (siehe Schritt 6).
+
+Hat das Gate eine Schwelle, nennt `Betroffenes Gate` die ADR, die sie
+setzt: Der Carveout setzt die Schwelle nicht, er nimmt einen Teil davon
+aus. Ohne diesen Verweis steht die Zahl an zwei Orten, und der Carveout
+muss sie selbst behaupten.
 
 **Schritt 3 — Auflösungs-Trigger als beobachtbare Bedingung
 formulieren.** Anti-Form: *"sobald wir Zeit haben"*, *"nach dem nächsten
@@ -229,7 +234,7 @@ Diskrepanz erst entsteht.
 |----------------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------|-------------------------------------------------------------------------------------------|
 | **Carveout**               | Eine konkrete Gate-/Regelausnahme, klar abgrenzbar, mit Folge-Slice und ernst erreichbarem Auflösungs-Trigger.     | einzelne Diskrepanz               | `docs/plan/carveouts/CO-<NNN>-*.md` (Schritt 1–5)                                          |
 | **BF-Sub-Area-Markierung** | Diskrepanz-Cluster im selben Geltungsbereich, oder generelles *"Code-vor-Doku"*-Muster.                            | ganze Sub-Area                    | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
-| **ADR (permanent)**        | Trigger ist ehrlich nie zu erreichen — die Senkung ist Architekturentscheidung, nicht Übergang.                    | dauerhafte Architekturregel       | `docs/architecture/ADR-<NNNN>-*.md`; `Status: Permanent — übergeführt in ADR-<NNNN>`      |
+| **ADR (permanent)**        | Trigger ist ehrlich nie zu erreichen — die Senkung ist Architekturentscheidung, nicht Übergang.                    | dauerhafte Architekturregel       | `docs/plan/adr/<NNNN>-*.md`; `Status: Permanent — übergeführt in ADR-<NNNN>`      |
 
 Drei verwandte Begriffe waren hier nebeneinander im Spiel und meinen
 Verschiedenes: *Disambiguierung* ist die kognitive Operation, die du in

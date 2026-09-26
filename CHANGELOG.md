@@ -11,6 +11,43 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 141 — 2026-09-26 · Ein Carveout auf einer Schwelle nennt die ADR, die sie setzt
+
+Anlass: Welle 140 hat Senkung (ADR) und Carveout (Ausnahme für einen Teil)
+getrennt und dabei gefunden, dass `lab/example` den Carveout an die Schwellen-ADR
+bindet (`CO-001` → `ADR-0013`: „dieser Carveout setzt die Schwelle nicht, er
+nimmt einen Layer davon aus"), der Kurs und die Vorlage das aber nicht sagen. Ohne
+den Verweis steht die Zahl an zwei Orten; `ADR-0013` beschreibt die Folge: Die
+kritische Schwelle war gedriftet, `CO-001` verlangte 90 %, sechs
+Implementierungen prüften 80 %.
+
+- Kurs `modul-07` (Quelle): das Beispiel-Kopfstück trägt `(Schwelle aus
+  [ADR-0013](…))`; ein Satz nach dem Kopf sagt es als Regel. Kein siebtes
+  Pflichtfeld — die Angabe steht im Feld `Betroffenes Gate`, die Zahl „sechs
+  Felder" bleibt.
+- Spiegel `modul-07`: derselbe Satz als eigener Listenpunkt hinter den
+  Header-Feldern (wortgleich, auf Zeilenbreite umbrochen).
+- `carveout.template.md`: `Betroffenes Gate` nennt bei einer Schwelle ihre ADR.
+- `modul-07-loesung.md`: die Pflichtfeld-Liste nennt sie ebenfalls.
+- `modul-07` (Kurs und Spiegel), Tabelle der Werkzeug-Wahl: der ADR-Pfad hieß
+  `docs/architecture/ADR-<NNNN>-*.md` — im ganzen übrigen Korpus, in der Vorlage
+  und im Beispiel liegen ADRs unter `docs/plan/adr/<NNNN>-*.md`. Der Review der
+  Welle hat den Widerspruch neben dem neuen Beispiel-Link gefunden.
+- `lab/regelwerk/README.md`: `Stand:` auf Welle 141.
+
+Gilt für **jedes** Gate mit Schwelle, nicht nur für Critical Coverage. Die
+Aufwärts-Kante Carveout → ADR ist in der Referenz-Matrix ohnehin normativ
+(„betroffene aktive ADRs"); die Regel benennt sie für diesen Fall. **Korrektur
+an Welle 140:** dort steht als Folge, der Carveout „wiederhole die Zahl nicht".
+Das war zu streng — der Auflösungs-Trigger nennt legitim eine Zahl (`≥ 90 %`,
+so auch in `CO-001`). Maßgeblich ist: Der Carveout **setzt** die Schwelle nicht.
+
+**Nicht behauptet:** dass ein Sensor die Angabe prüft. `lab/example` erfüllt die
+Regel bereits (`CO-001`; `CO-002` betrifft `make replay`, ein Gate ohne
+Schwelle); kein beobachtbares Verhalten, kein Team-Sim-Szenario. **Nicht
+verlangt:** eine eigene ADR je Carveout und eine Nennung des Carveouts in der ADR
+(Kante ADR → Carveout, in der Matrix ❌).
+
 ## Welle 140 — 2026-09-26 · Acht Stellen, an denen das Regelwerk dem Leser eine andere Antwort gibt als seine Quelle
 
 Anlass: ein Eval-Lauf gegen das Regelwerk (waza, `lab-regelwerk.zip` v6.9.0, GLM

@@ -27,6 +27,10 @@ Operative Regeln, die das Template nicht selbst erzwingt:
   Prüfung · betroffenes Gate · Geltungsbereich · **Folge-Slice**. Fehlt
   der Folge-Slice, ist der Carveout *de facto* permanent — dann gehört
   er nicht in `carveouts/`, sondern über den Trichter unten in eine ADR.
+- Hat das Gate eine Schwelle, nennt `Betroffenes Gate` die ADR, die sie
+  setzt: Der Carveout setzt die Schwelle nicht, er nimmt einen Teil
+  davon aus. Ohne diesen Verweis steht die Zahl an zwei Orten, und der
+  Carveout muss sie selbst behaupten.
 - **Auflösungs-Trigger als beobachtbare, messbare Bedingung** — nicht
   „sobald wir Zeit haben", sondern eine Schwelle, die ein anderer Mensch
   ohne Rückfrage als erreicht beurteilen kann (z. B. „`internal/parser/`-
@@ -74,7 +78,7 @@ führen):
 | --- | --- | --- | --- |
 | **Carveout** | Eine konkrete Gate-/Regelausnahme, klar abgrenzbar, mit Folge-Slice und ernst erreichbarem Trigger. | einzelne Diskrepanz | `docs/plan/carveouts/CO-<NNN>-*.md` |
 | **BF-Sub-Area-Markierung** | Diskrepanz-Cluster im selben Geltungsbereich, oder generelles *„Code-vor-Doku"*-Muster. | ganze Sub-Area | Modus-Deklaration im Adaptions-Block von `harness/conventions.md`, mit Graduation-Trigger |
-| **ADR (permanent)** | Trigger ist ehrlich nie zu erreichen — die Senkung ist Architekturentscheidung, kein Übergang. | dauerhafte Architekturregel | `docs/architecture/ADR-<NNNN>-*.md` |
+| **ADR (permanent)** | Trigger ist ehrlich nie zu erreichen — die Senkung ist Architekturentscheidung, kein Übergang. | dauerhafte Architekturregel | `docs/plan/adr/<NNNN>-*.md` |
 
 **Bootstrap-aware Gate** (Modul 13) erscheint hier absichtlich nicht: es
 regelt *Gate-Reifestufung des Gates selbst* (z. B. 40 % heute → 70 % bei
