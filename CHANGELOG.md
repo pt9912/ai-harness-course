@@ -11,6 +11,59 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 142 — 2026-09-26 · Fehlannahmen im Spiegel: jeder Punkt trägt seine Behauptung
+
+Anlass: Der Bericht zum Eval-Lauf (Welle 140) meldete, die „Fehlannahmen"-Absätze
+von `modul-11` nennten „nur die Antwort (‚Nein.', ‚Falsch.'), nicht die widerlegte
+Behauptung". Das stimmt für den Spiegel: Der Kurs führt jeden Punkt als
+`**„Behauptung."** — Antwort`; der Spiegel hatte die Behauptung bei einem Teil der
+Punkte als Didaktik weggelassen (`docs/regelwerk-extrakt.md` Teil 1), bei den
+anderen nicht.
+
+Gemessen an allen Regelwerk-Modulen (74 Punkte): **44** trugen die Behauptung
+schon, in zwei Formen (`**„…"** — Antwort` und `**Gegen „…":** Antwort`), **30**
+nicht. Von diesen 30 stehen etliche ohne ihre Behauptung nicht für sich: die
+Antwort beginnt mit einem Urteilswort („Nein.", „Falsch."), mit einem Bezugswort
+(„Dann ist es kein Gate …", „Nur wenn lokal und CI dasselbe Image benutzen …",
+„Im Gegenteil: …", „Genau das …") oder mit einer Sachaussage, deren Gegenstand die
+Behauptung nennt.
+
+- Spiegel `modul-00`, `-01`, `-03`, `-04`, `-11`, `-12`, `-13`: die Behauptung
+  steht bei allen 30 wieder vor der Antwort, **wortgleich** aus dem Kurs. Die
+  Antwort ist byte-gleich geblieben: Es ist ein Präfix und keine Umformulierung.
+  Kein Punkt wird neu gepaart. Kontrolle (mechanisch): Alle 74 Punkte tragen jetzt
+  eine Behauptung; jede der 30 geänderten Zeilen besteht aus der wortgleichen
+  Behauptung aus dem Kurs, dem Gedankenstrich und der unveränderten Antwort.
+- Die Behauptung ist keine Didaktik im Sinn der Weglass-Probe: Sie bestimmt, worauf
+  die Antwort antwortet. Ohne sie ändert sich nicht nur die Lesbarkeit, sondern bei
+  „Dann …", „Nur wenn …" und „Im Gegenteil" der Bezug.
+- `lab/regelwerk/README.md`: `Stand:` auf Welle 142.
+
+Keine Regel geändert, kein Kurs-Eingriff; die Behauptung stand dort schon. Kein
+beobachtbares Verhalten, kein Team-Sim-Szenario (AGENTS.md §3). **Nicht
+behauptet:** dass der Eval-Fehlschlag verschwindet — das zeigt erst ein Lauf gegen
+das neue Bundle. **Beobachtet, nicht geändert:** In fünf der 30 Punkte weicht die Antwort im
+Spiegel schon im Vorbestand vom Kurs ab (`modul-01`, `modul-03`, `modul-04` ×2,
+`modul-11`): umgehängte Links und Etiketten, „in diesem Regelwerk" statt „in
+diesem Kurs", „Das Muster" für „Engage-Geschichte oben", ein weggelassener
+Anfangssatz („Klingt harmlos, ist die folgenreichste Fehlvorstellung in diesem
+Modul."; „Verbreitet aus der agil/Lean-Ecke …"). Der Sinn ändert sich in diesen
+fünf nirgends. Eine grobe Heuristik (Teilfolge und Antwortanfang) über alle 74
+Punkte markiert insgesamt 15; die übrigen zehn habe ich **nicht einzeln gelesen**.
+
+**Zwei Fehlmessungen auf dem Weg, beide vom Review gefunden:** Die erste Zählung
+suchte nur nach „Nein"/„Falsch"/„Doch" und kam auf 6 betroffene Punkte; die zweite
+erkannte die Form `**Gegen „…":**` nicht und kam auf 15 von 74 mit Behauptung.
+Richtig sind 44 und 30. Die Lehre steht in Welle 140 schon einmal: erst die
+Erkennung am Bestand prüfen, dann zählen.
+
+**Bewusst nicht im Kurs:** die Einstellung `link-policy: always` aus Welle 139 —
+sie ist ein Werkzeug-Detail des Gate-Werkzeugs, der Kurs führt keine
+Werkzeug-Konfiguration; die Kurs-Regel, auf die sich der Vorlagen-Kommentar stützt
+(Slice → ADR mit `Status: Superseded` fällt, `referenz-richtung.md`), steht
+schon. Ein Kurs-Satz „jede ADR-Nennung wird verlinkt" wäre eine neue Pflicht für
+alle Adopter, weit über die Einstellung hinaus, und eine eigene Entscheidung.
+
 ## Welle 141 — 2026-09-26 · Ein Carveout auf einer Schwelle nennt die ADR, die sie setzt
 
 Anlass: Welle 140 hat Senkung (ADR) und Carveout (Ausnahme für einen Teil)

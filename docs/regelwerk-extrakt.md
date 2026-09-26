@@ -31,6 +31,12 @@ Drei Proben trennen operativ von didaktisch:
 | **Weglass-Probe** | gestrichen ändert sich ein **Ausgang** — jemand handelt in einem konkreten Fall anders | gestrichen ändert sich nur das Verständnis |
 | **Nachbarschaft** | steht für sich | braucht den Aufbau des Moduls (*„wie eben gesehen"*, Antwort auf eine erwartete Fehlvorstellung) |
 
+Bei einem Fehlannahmen-Punkt gilt die Nachbarschafts-Probe für den **Vorbau** — die
+Erwartung, die Wertung, den Modul-Bezug —, nicht für die **Behauptung** selbst: Sie
+sagt, worauf die Antwort antwortet, und ohne sie ändert sich bei Antworten wie
+*„Dann ist es kein Gate …"*, *„Nur wenn …"*, *„Im Gegenteil: …"* der Bezug, also ein
+Ausgang. Sie bleibt im Spiegel (Welle 142).
+
 ## Teil 2 — Was der Spiegel tun darf
 
 Die Regel stand zuerst als **Verbotsliste** da. Sechs Anwendungen, sechs

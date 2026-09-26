@@ -34,10 +34,10 @@ nicht: "Ist es gut?"
 
 ### Regeln gegen typische Fehlannahmen (Modul 11)
 
-- Tests prüfen ob *Code tut, was Tests testen*. Verifikation prüft, ob *Code tut, was Plan/DoD/Spec verlangt*. Lücken zwischen Tests und Spec sind genau das, was Verifikation findet.
-- Nein. Reviewer hat *Plan + ADR*. Verifier hat *DoD + Spec + Plan*. Andere Eingabe, andere Findings.
-- Falsch. Die wahrscheinlichere Erklärung: Reviewer hat gegen einen veralteten Plan geprüft, oder der Plan hat eine DoD-Lücke. Architect klärt — *nicht* "wir nehmen das mildere Ergebnis".
-- Ein grüner Test beweist nur, was er tatsächlich prüft, nicht, was der DoD-Punkt behauptet. Bestätigt ist die Verknüpfung erst, wenn gezeigt ist, dass der Test ohne den Fix aus dem *richtigen* Grund rot liefe — dasselbe „Bewusstes Brechen" wie bei einer ADR-Fitness-Function ([Modul 13 §Fitness Function aus einem ADR-Satz](modul-13-quality-gates.md#adr-zur-fitness-function)), nur auf eine Testbehauptung statt auf eine Architektur-Regel angewandt.
+- **"Grüne Tests sind Verifikation."** — Tests prüfen ob *Code tut, was Tests testen*. Verifikation prüft, ob *Code tut, was Plan/DoD/Spec verlangt*. Lücken zwischen Tests und Spec sind genau das, was Verifikation findet.
+- **"Verifier braucht denselben Kontext wie Reviewer."** — Nein. Reviewer hat *Plan + ADR*. Verifier hat *DoD + Spec + Plan*. Andere Eingabe, andere Findings.
+- **"Wenn Verifier rot und Reviewer grün, hat Reviewer recht."** — Falsch. Die wahrscheinlichere Erklärung: Reviewer hat gegen einen veralteten Plan geprüft, oder der Plan hat eine DoD-Lücke. Architect klärt — *nicht* "wir nehmen das mildere Ergebnis".
+- **"Ein DoD-Punkt mit verlinktem, grünem Test ist bestätigt."** — Ein grüner Test beweist nur, was er tatsächlich prüft, nicht, was der DoD-Punkt behauptet. Bestätigt ist die Verknüpfung erst, wenn gezeigt ist, dass der Test ohne den Fix aus dem *richtigen* Grund rot liefe — dasselbe „Bewusstes Brechen" wie bei einer ADR-Fitness-Function ([Modul 13 §Fitness Function aus einem ADR-Satz](modul-13-quality-gates.md#adr-zur-fitness-function)), nur auf eine Testbehauptung statt auf eine Architektur-Regel angewandt.
 
 ### Bewusstes Brechen für DoD-Testbehauptungen (Modul 11)
 
