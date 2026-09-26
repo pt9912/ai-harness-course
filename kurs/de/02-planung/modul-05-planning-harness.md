@@ -343,7 +343,7 @@ Token-Revocation per Admin-Endpoint, Audit-Log auf Login-Versuche."
    Beobachtungs-Register, Risiko-Ausgänge, die drei Paarungen. Sie sind pro
    Slice konstant und sagen über die Größe nichts; wer sie mitzählt, hält jeden
    Slice für zu groß und die Faustregel für unbrauchbar.
-2. Mehrere Schichten betroffen (Adapter + Service + UI + DB-Schema).
+2. Mehr als zwei Schichten betroffen (Adapter + Service + UI + DB-Schema).
 3. Kann nicht in einer Review-Sitzung geprüft werden.
 
 **Schnitt nach Schichten oder nach Lieferwert?** Lieferwert. Schnitte

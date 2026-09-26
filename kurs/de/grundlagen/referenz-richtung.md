@@ -315,11 +315,12 @@ Die ADR ist die *Begründungs*-Schicht **unter** den Spec-Straten — und
 Die Gegenrichtung **Spec → ADR existiert im bindenden Text nicht** — und
 auch nicht als geduldete Quellen-Spalte: der Wert steht für sich, das Warum
 findet man über die *aufwärts* zeigende ADR. Die einzige tolerierte
-Provenance ist die Historie-/Changelog-Tabelle am Dokument-Rand (Regel 5),
-sonst nichts — ein Abwärts-Zeiger im Spec-Körper rottet, sobald ADRs
+Provenance ist die Historie-/Changelog-Tabelle am Dokument-Rand (Regel 5) — und
+sie nennt dort keine ADR und keinen Slice, sondern beim Vertrag den externen
+CR; sonst nichts. Ein Abwärts-Zeiger im Spec-Körper rottet, sobald ADRs
 superseded werden, und die Discovery läuft ohnehin von der ADR-Seite. Damit
 zeigt **jede** Kante strikt aufwärts; null Abwärts-Kanten im bindenden Text,
-Provenance nur unter `## Historie`. Der Referenz-Richtungs-Gate setzt diese
+Provenance nur unter `## Historie`, ohne ADR- oder Slice-Verweis. Der Referenz-Richtungs-Gate setzt diese
 Decken-Regel über *alle* Spec-Straten durch, nicht nur über das Lastenheft.
 **Innerhalb** eines Stratums sind Dokumente *Peers*: Intra-Referenzen
 erlaubt (wie intra-`LH-*`), keine normative Querabhängigkeit, die Zyklen

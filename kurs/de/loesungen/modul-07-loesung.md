@@ -32,7 +32,7 @@ Issue-Tracker.
 
 Warum das zählt: Ein Carveout, der nur im Tracker existiert, taucht
 im `make gates`-Kontext nicht auf — ein Implementer-Agent sieht
-dann nicht, dass die Schwelle *bewusst* gesenkt wurde, und behandelt
+dann nicht, dass ein Teil *bewusst* von der Schwelle ausgenommen ist, und behandelt
 die Ausnahme als Normalzustand oder "repariert" sie wild. Das ist
 eine versteckte Spec-Lücke: Lopopolos Maxime gilt auch hier — was der
 Agent nicht im Kontext erreicht, existiert für ihn nicht.

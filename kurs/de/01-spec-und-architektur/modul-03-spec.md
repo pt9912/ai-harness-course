@@ -257,6 +257,8 @@ Vorlage: [`spec/architecture.template.md`](../../../lab/templates/spec/architect
 Sechs Schritte, ein vollständig prüfbares Akzeptanzkriterium. Vergleich
 mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../../../lab/example/spec/lastenheft.md).
 
+**Given/When/Then macht noch kein Lastenheft.** Eine User Story schreibt ihre Akzeptanzkriterien in derselben Form und ist trotzdem Slice-Klasse, kein Spec-Dokument: Sie gehört unter `docs/plan/planning/`, nicht nach `spec/` ([Referenz-Richtung §Spec-Straten](../grundlagen/referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)).
+
 ## Übungen
 
 * Erstellung eines vollständigen Lastenhefts für ein kleines Feature

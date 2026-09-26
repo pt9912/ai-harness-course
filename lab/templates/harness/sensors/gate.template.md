@@ -15,9 +15,11 @@ Regeln dieser Datei:
 
 - **Die Index-Zeile bleibt.** Diese Datei ersetzt die Tabellenzeile nicht, sie
   vertieft sie; die Target-Zelle verlinkt hierher — und dieser Link ist das
-  einzige, was ein Sensor an der Zuordnung prüfen kann. Von außen — aus
-  `AGENTS.md`, einer ADR, einem Slice — wird **diese Datei direkt** adressiert,
-  nicht der Index: sie wandert nie.
+  einzige, was ein Sensor an der Zuordnung prüfen kann. Aus einem **lebenden**
+  Artefakt — `AGENTS.md`, einer Spec, einem offenen Slice — wird **diese Datei
+  direkt** adressiert, nicht der Index: sie wandert nie. Ein **einfrierendes** —
+  eine `Accepted`-ADR, ein geschlossener Slice — nennt statt dessen
+  `make <target>` als Token.
 - **Kein Status- und kein Datumsfeld.** Der Zustand des Gates ist sein Lauf, und
   der lebt in CI; das Änderungsdatum hält `git`.
 - **Kein Lifecycle-Verzeichnis.** Es gibt kein `sensors/done/`: Wird das Target

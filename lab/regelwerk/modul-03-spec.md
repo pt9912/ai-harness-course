@@ -43,6 +43,8 @@ im Given/When/Then-Stil — **Happy · Boundary · Negative** — plus einen
 genau · welche Felder · welcher Speicherort*), bevor die Pfade formuliert
 werden; das Negative (`darf nicht …`) spart die spätere Review.
 
+**Given/When/Then macht noch kein Lastenheft.** Eine User Story schreibt ihre Akzeptanzkriterien in derselben Form und ist trotzdem Slice-Klasse, kein Spec-Dokument: Sie gehört unter `docs/plan/planning/`, nicht nach `spec/` ([Referenz-Richtung §Spec-Straten](grundlagen-referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)).
+
 Das Lastenheft ist die **Decke** der Straten-Ordnung: Es referenziert nur
 innerhalb der eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts, Wellen,
 und auch nicht `spezifikation.md` oder `architecture.md`

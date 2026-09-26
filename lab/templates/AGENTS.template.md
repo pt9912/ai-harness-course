@@ -146,7 +146,9 @@ Korrekturen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 ### 3.6 Gates dürfen nicht ohne ADR gelockert werden
 
 Jede Schwellen-Senkung (Coverage, Linter-Strenge, Architekturregel)
-ist ein ADR, kein PR-Kommentar.
+ist ein ADR, kein PR-Kommentar. Eine befristete Ausnahme für einen Teil (einen
+Layer, einen Pfad) ist keine Senkung, sondern ein Carveout mit Trigger und
+Folge-Slice; die Schwelle selbst bleibt.
 
 ### 3.7 Ein Kommentar beschreibt, was da ist
 

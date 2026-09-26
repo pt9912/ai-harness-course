@@ -126,7 +126,7 @@ Bewährte Muster:
   Gerät schreiben** — Output fließt durch Statemachine, Constraint-Limiter,
   Ramp-Limiter. Steht hier als Muster: Die härtesten Hard Rules einer Domäne
   kommen aus ihrer Fehlerkultur, nicht aus einem Standard-Satz.
-* **Gates dürfen nicht ohne ADR gelockert werden**: jede Schwellen-Senkung ist ein ADR, kein PR-Kommentar.
+* **Gates dürfen nicht ohne ADR gelockert werden**: jede Schwellen-Senkung ist ein ADR, kein PR-Kommentar. Eine befristete Ausnahme für einen Teil (einen Layer, einen Pfad) ist keine Senkung, sondern ein Carveout mit Trigger und Folge-Slice ([Modul 7](modul-07-carveouts.md)); die Schwelle selbst bleibt.
 
 Hard Rules sind *computational + inferential feedforward* zugleich: sie
 stehen in AGENTS.md (Agent liest sie) **und** werden idealerweise durch

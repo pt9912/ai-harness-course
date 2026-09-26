@@ -25,6 +25,15 @@ gestrichelten der *Rückwärtspfad* (was lernt der Harness daraus). Beide
 Richtungen sind Pflicht — eine Kette ohne Rückverweise ist nicht
 auditierbar.
 
+**Validierung hat hier bewusst keine Station.** Die Kette ist eine Kette
+von *Repo-Artefakten*; Validierung prüft gegen den realen Bedarf
+**außerhalb** des Repos und hinterlässt deshalb keines. Ihr Ort ist die
+Rollen-Sequenz ([Modul 8](modul-08-agentenrollen.md)), nicht
+die Artefaktkette — und sie läuft in anderer Kadenz: nach einem
+MVP-Slice und vor größeren Wellen, nicht nach jedem Slice. Was aus einer
+Validierung *ins Repo* zurückwirkt, ist eine Spec-Änderung oder ein
+Lerneintrag; der Beleg selbst bleibt draußen.
+
 Review prüft Code gegen *Plan und ADR*.
 Wenn der Plan die ADR-Verletzung nicht antizipiert hat, sieht Review
 sie nicht. Verifikation prüft Code gegen *DoD und Spec* (und dort

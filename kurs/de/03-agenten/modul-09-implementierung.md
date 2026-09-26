@@ -175,7 +175,7 @@ Beispiele aus realen Repos (siehe
 * **git mv + Inhaltsänderung = zwei Commits** (grid-gym): Move und Inhalt nie im selben Commit — der Move-Commit bleibt rein (Git erkennt R-Rename). Welcher der beiden zuerst kommt, sagt der Vorgang: im Regelfall der Move, dann der Inhalt; beim Lifecycle-Übergang nach `done/` umgekehrt, weil `done/` „Closure-Notiz vorhanden" bedeutet und die Notiz deshalb im Commit davor steht ([Modul 5 §Lifecycle als State Machine](../02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)). Und der Übergang `next → in-progress` landet auf dem **Hauptzweig, vor der Arbeit** — sonst ist der Zustand zweigelokal und niemand sieht den Anspruch.
   *Begründung:* Sonst fällt die Rename-Detection unter die 50 %-Similarity-Schwelle und `git log --follow` wird unzuverlässig.
 * **Optimierer darf nie direkt aufs Gerät schreiben** (bess-ems-Klasse): Output fließt durch Statemachine, Constraint-Limiter, Ramp-Limiter.
-* **Gates dürfen nicht ohne ADR gelockert werden**: jede Schwellen-Senkung ist ein ADR, kein PR-Kommentar.
+* **Gates dürfen nicht ohne ADR gelockert werden**: jede Schwellen-Senkung ist ein ADR, kein PR-Kommentar. Eine befristete Ausnahme für einen Teil (einen Layer, einen Pfad) ist keine Senkung, sondern ein Carveout mit Trigger und Folge-Slice ([Modul 7](../02-planung/modul-07-carveouts.md)); die Schwelle selbst bleibt.
 
 Hard Rules sind *computational + inferential feedforward* zugleich: sie
 stehen in AGENTS.md (Agent liest sie) **und** werden idealerweise durch

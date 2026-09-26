@@ -261,7 +261,7 @@ Größen- und Schnitt-Regeln:
   wird nur, was mit dem Umfang wächst (die Artefakte und Akzeptanzkriterien
   dieses Slice). Nicht gezählt: Gate-Läufe, Review-Report, Closure-Notiz,
   Register, Risiko-Ausgänge, die drei Paarungen; sie sind pro Slice konstant
-  und sagen über die Größe nichts · mehrere
+  und sagen über die Größe nichts · mehr als zwei
   Schichten betroffen (Adapter + Service + UI + DB-Schema) · nicht in
   *einer* Review-Sitzung prüfbar. Dann zurück zum Schneiden
   (`in-progress→next`), nicht still weiterschieben.

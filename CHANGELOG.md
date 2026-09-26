@@ -11,6 +11,90 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 140 — 2026-09-26 · Acht Stellen, an denen das Regelwerk dem Leser eine andere Antwort gibt als seine Quelle
+
+Anlass: ein Eval-Lauf gegen das Regelwerk (waza, `lab-regelwerk.zip` v6.9.0, GLM
+als geprüftes Modell, ein Trial: 73/85 Tasks bestanden) und ein Bericht daraus.
+Jeder Punkt wurde vor dem Schreiben gegen den Text geprüft; drei weitere
+Vorwürfe hielten der Prüfung nicht stand oder waren nicht prüfbar (unten).
+
+- **Modul 9 gegen Modul 7.** Die Hard Rule „Gates dürfen nicht ohne ADR gelockert
+  werden" sagte „jede Schwellen-Senkung ist ein ADR"; Modul 7 lehrt für
+  denselben Fall den befristeten Carveout, und nichts verband die beiden. Der
+  Eval-Autor musste die Referenz der Aufgabe auf „Carveout oder ADR" öffnen, das
+  Modell wurde trotzdem abgelehnt. Die Unterscheidung, die fehlte: eine
+  **Senkung** ändert die Zahl (ADR), ein **Carveout** nimmt einen Teil aus und
+  lässt die Schwelle stehen (`lab/example/CO-001`: „setzt die Schwelle nicht, er
+  nimmt einen Layer davon aus"). Jetzt steht sie im Satz: „Eine befristete
+  Ausnahme für einen Teil … ist keine Senkung, sondern ein Carveout mit Trigger
+  und Folge-Slice; die Schwelle selbst bleibt." Kurs `modul-09` (Quelle),
+  Spiegel, `AGENTS.template.md` §3.6, `lab/example/AGENTS.md` §2.6. **Erster
+  Anlauf war falsch:** „ADR — oder als Übergang ein Carveout" machte den Carveout
+  zu einer Form der Senkung; das Review und ein Blick auf `CO-001` haben es
+  gefunden.
+- **Modul 13, Critical Coverage.** „Carveout auf Critical Coverage ist immer ein
+  HIGH-Finding im Review" widersprach Modul 7, das genau diesen Carveout als den
+  besseren Weg lehrt (Modul 10 definiert HIGH als „blockiert Merge"). Jetzt: der
+  Review prüft ihn immer ausdrücklich (Trigger, Folge-Slice, sichtbar), er
+  blockiert nicht, wenn beides vorliegt; stillschweigend ist er ein HIGH-Finding
+  (Gate-Suppression ohne ADR, Modul 10). Der erste Anlauf „HIGH-Warnsignal"
+  mischte zwei Begriffe (das Review hat es gefunden). Nur Kurs; die Stelle
+  steht in einer Selbstcheck-Antwort, der Spiegel führt sie nicht. **Folge:**
+  ein Carveout auf einer Schwelle nennt die ADR, die die Schwelle setzt
+  (Aufwärts-Verweis, wie die Matrix es für Carveouts ohnehin führt), und
+  wiederholt die Zahl nicht — für jedes Gate, nicht nur für Critical Coverage.
+  `lab/example` tut es (`CO-001` an `ADR-0013`), der Kurs und
+  `carveout.template.md` sagen es nicht; das ist eine eigene Regel-Änderung und
+  hier nicht enthalten.
+- **Modul 7, Glossar.** „mit Trigger oder explizit als permanent markiert"
+  stand neben „Permanente Carveouts gehören nicht in `carveouts/`, sondern in
+  eine ADR". Jetzt: ohne erreichbaren Trigger ist sie permanent, wird offen so
+  markiert und in eine ADR übergeführt (Schritt 6). Selbstcheck-Antwort und Lösung von Modul 7
+  sprachen noch von „Schwelle gesenkt" für den Carveout; jetzt „ein Teil ist
+  von der Schwelle ausgenommen". Nur Kurs.
+- **Referenz-Richtung, Schluss.** Regel 5 und der Gate-Abschnitt verbieten ADR-
+  und Slice-Verweise in den Spec-Straten „in keinem Abschnitt, auch nicht in
+  ihrer Historie"; der Schluss nannte die Historie-Tabelle „die einzige
+  tolerierte Provenance", ohne zu sagen, was sie dort trägt. Jetzt: beim Vertrag
+  den externen CR, nie eine ADR oder einen Slice (Kurs `referenz-richtung.md`,
+  Spiegel). **Erster Anlauf war zu weit:** „Provenance gibt es in den Spec-Straten
+  nicht" hätte die CR-Spalte der Historie verboten, die Regel 5 und die
+  Lastenheft-Vorlage ausdrücklich führen; das Review hat es gefunden.
+- **`gate.template.md`.** Die Vorlage nannte „`AGENTS.md`, eine ADR, einen
+  Slice" gleichermaßen als Stellen, die die Sensor-Datei direkt adressieren;
+  `harness-dateien.md` trennt lebend (verlinkt) von einfrierend (nennt
+  `make <target>` als Token). Die Vorlage folgt jetzt der Regel — Fix-Richtung
+  Quelle → Vorlage.
+- **Modul 1, Spiegel.** Der Absatz „Validierung hat hier bewusst keine Station"
+  stand im Kurs, fehlte im Spiegel; im Lauf setzte das Modell Verifikation und
+  Validierung gleich. Wortgleich übernommen (Weglass-Probe: er ändert einen
+  Ausgang, ist also operativ), der Modul-8-Verweis auf den Spiegel-Dateinamen
+  umgehängt.
+- **Modul 5, Schichten.** „Mehrere Schichten betroffen" als Größen-Symptom stand
+  neben „höchstens zwei Schichten" als Schnittgrenze; zwei sind „mehrere". Jetzt
+  „mehr als zwei" (Kurs, Spiegel).
+- **User Story (rr-13).** Die Regel steht genau einmal (`referenz-richtung.md`
+  §Spec-Straten): Given/When/Then deklariert kein Stratum, eine User Story ist
+  Slice-Klasse. Sie war von den Modulen aus nicht auffindbar; im Lauf legte das
+  Modell Stories ins Lastenheft. Ein Satz mit Verweis steht jetzt bei der
+  Given/When/Then-Form in Modul 3 (Kurs, Spiegel).
+
+`lab/regelwerk/README.md`: `Stand:` auf Welle 140. **Keine Regel geändert, die
+ein Sensor prüft;** kein beobachtbares Verhalten behauptet — die Wellen-Behauptung
+ist Textklarheit, ein Team-Sim-Szenario wäre ein Urteil über Prosa (AGENTS.md §3).
+
+**Nicht übernommen, mit Grund.** *Modul 12, Drift-Rate:* Kurs und Spiegel nennen
+`X` ausdrücklich als Platzhalter und die Rate bei drei Fällen „eine Notiz, keine
+Schwelle" — kein Mangel im Text; dass ein Eval dafür keinen Zahlenwert prüfen
+kann, ist Absicht. *Modul 11, „Fehlannahmen":* der Spiegel führt dort nur die
+Antworten („Nein.", „Falsch."), die widerlegte Behauptung fehlt; das Muster
+steht in allen 17 Modulen und ist eine Entscheidung über die Bauform des
+Spiegels, nicht eine Korrektur — hier nicht behandelt. *HD-05, TR-11, TR-13,
+DS-11, BS-04, BS-12:* die Nummern stammen aus der Regelextraktion des Evals; zu
+ihnen liegen weder Tasks noch eine Regelliste vor. **Nicht behauptet:** dass die
+Änderungen die Fehlschläge beheben — das zeigt erst ein Eval-Lauf gegen das
+neue Bundle, und der steht aus.
+
 ## Welle 139 — 2026-09-25 · Die ADR-Kennung in der Vorlage: Segment, Linkpflicht und kein doppeltes Token
 
 Anlass: Die emittierte Vorlage des Konsumenten-Werkzeugs (`ai-harness-init`)
