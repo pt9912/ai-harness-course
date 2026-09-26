@@ -49,7 +49,25 @@ diesem Kurs", „Das Muster" für „Engage-Geschichte oben", ein weggelassener
 Anfangssatz („Klingt harmlos, ist die folgenreichste Fehlvorstellung in diesem
 Modul."; „Verbreitet aus der agil/Lean-Ecke …"). Der Sinn ändert sich in diesen
 fünf nirgends. Eine grobe Heuristik (Teilfolge und Antwortanfang) über alle 74
-Punkte markiert insgesamt 15; die übrigen zehn habe ich **nicht einzeln gelesen**.
+Punkte markiert insgesamt 15; die übrigen zehn (`modul-05` ×2, `-07` ×2, `-08` ×2,
+`-09` ×2, `-13`, `-14`) sind **nachträglich einzeln gelesen**, keiner ändert den
+Sinn:
+
+- *Urteilswort:* Bei fünf fehlt das einleitende „Nein." des Kurses (`modul-05` ×2,
+  `-07` ×2, `-08` „Reviewer macht das Verification gleich mit"). Sie stehen im
+  Spiegel als `**Gegen „…":** Antwort`, und „Gegen" trägt das Urteil. Nach
+  einer Prüfung über alle 74 Punkte fehlt in **keinem** der 45 Punkte der Form
+  `**„Behauptung."** — Antwort` ein Urteilswort, das der Kurs führt.
+- *Weggelassene Sätze (Weglassen ganzer Einheiten):* die Erklärung, wie die
+  Verwechslung entsteht (`modul-05`), der Satz über ein Dutzend Carveouts und der
+  Pendel-Satz (`modul-07`), die Engage-Geschichte (`modul-09`), „Ergänze deine
+  eigenen" (`modul-13`), der Verweis auf `bess-ems` (`modul-14`, Material, das
+  nicht mitreist). Der Absatz zum „Rolleninhaber" in `modul-08` fehlt an dieser
+  Stelle; der Begriff steht im Spiegel an anderer Stelle (zweimal).
+- *Umgehängte Verweise:* `modul-07` „§Worked Example A Schritt 6" wird zu
+  „§Werkzeug-Wahl bei Diskrepanz" (der Anker existiert im Spiegel und trägt das
+  Frage-Schema), `modul-09` „nächster Block" zu einem Link auf
+  „§Kontext-Verdichtung", `modul-14` „Kurs" zu „Regelwerk".
 
 **Zwei Fehlmessungen auf dem Weg, beide vom Review gefunden:** Die erste Zählung
 suchte nur nach „Nein"/„Falsch"/„Doch" und kam auf 6 betroffene Punkte; die zweite
