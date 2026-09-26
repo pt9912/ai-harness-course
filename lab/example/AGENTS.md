@@ -78,7 +78,9 @@ Korrekturen entstehen als neue ADR mit `Supersedes ADR-NNNN`.
 
 ### 2.6 Gates dürfen nicht ohne ADR gelockert werden
 
-Jede Schwellen-Senkung ist ein ADR plus Carveout, kein PR-Kommentar.
+Jede Schwellen-Senkung ist ein ADR, kein PR-Kommentar. Eine befristete Ausnahme
+für einen Teil (einen Layer, einen Pfad) ist keine Senkung, sondern ein Carveout
+mit Trigger und Folge-Slice; die Schwelle selbst bleibt.
 
 ### 2.7 Tie-Break in sortierenden Operationen ist explizit   (seit welle-mvp)
 
