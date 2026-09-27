@@ -41,6 +41,22 @@ verdrahtet in `.claude/settings.json`. Portierbar: andere Harnesses haben
 äquivalente Punkte (Pre-/Post-Tool-Hooks, Pre-Commit-Hooks, Pflicht-CI-
 Jobs). Der Bindepunkt ist das Konzept, der Hook nur eine Form.
 
+**Das Workflow-Skelett wächst wie AGENTS.md — und braucht dieselbe
+Disziplin.** Eine aus dem Beobachtungs-Register graduierte Regel
+([Modul 6](../02-planung/modul-06-roadmap.md#das-beobachtungs-register)),
+die als Anweisung in den Slash-Command eingebettet wird, trägt ab ihrer
+Einführung einen Auflösungs-Trigger oder die Kennzeichnung *permanent* —
+dieselbe Disziplin wie bei Hard Rules
+([Modul 13 §Hard Rule](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)),
+geprüft beim selben Trigger-Audit
+([Modul 6](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)).
+Ist die Regel mechanisierbar — ein Kandidatenlauf wird ein echtes
+`make`-Target —, ist das Scharfschalten des Gates selbst der Trigger: Die
+Entfernung des Prosa-Absatzes aus dem Skelett ist ein DoD-Punkt
+**desselben** Slice, der den Gate verdrahtet, kein separater Audit nötig.
+Bleibt sie ein Urteilsfall, trägt sie *permanent* und wird beim
+Trigger-Audit trotzdem mitgeprüft: ist ihre Klasse inzwischen doch gedeckt?
+
 ## Vier Design-Eigenschaften
 
 1. **fail-closed.** Fehlt das Prüfmittel (Interpreter nicht da, Input

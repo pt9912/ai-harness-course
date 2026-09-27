@@ -11,6 +11,43 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 146 — 2026-09-27 · Auch das Workflow-Skelett braucht einen Trigger
+
+Anlass: die Folge-Lücke aus Welle 145. Dort wurde Hard Rule die vierte
+Trigger-Klasse im Trigger-Audit; `.claude/commands/*.md` (Workflow-Skelett,
+[`durchsetzungsschicht.md`](kurs/de/grundlagen/durchsetzungsschicht.md) §Das
+vollständige Artefakt-Set) kennt den Trigger-Begriff noch gar nicht. Gemessen
+an einem Konsumenten-Repo: sein Workflow-Skelett wuchs 175 → 367 Zeilen über
+26 Commits in 18 Tagen — dieselbe Pathologie wie bei `AGENTS.md`, an derselben
+Artefaktklasse, die die Durchsetzungsschicht selbst als „schwächsten
+Bindepunkt" benennt (inferential, nicht erzwungen, das einzige der drei, das
+ein Agent noch ignorieren kann).
+
+- Kurs `durchsetzungsschicht.md` (Quelle), §Drei Bindepunkte: neuer Absatz
+  „Das Workflow-Skelett wächst wie AGENTS.md — und braucht dieselbe
+  Disziplin." Eine aus dem Beobachtungs-Register graduierte, in den
+  Slash-Command eingebettete Regel trägt ab Einführung einen
+  Auflösungs-Trigger oder *permanent* — dieselbe Disziplin wie bei Hard Rules
+  (Modul 13 §Hard Rule), geprüft beim selben Trigger-Audit (Modul 6). Neu
+  benannt: Ist die Regel mechanisierbar, ist das Scharfschalten des Gates
+  selbst der Trigger — die Entfernung des Prosa-Absatzes ist ein DoD-Punkt
+  **desselben** Slice, der den Gate verdrahtet, kein separater Audit nötig.
+- Spiegel wortgleich, Links auf die Spiegel-Dateinamen umgehängt.
+- `lab/regelwerk/README.md`: `Stand:` auf Welle 146.
+
+**Bewusst keine neue Zeile in Modul 6s Trigger-Audit-Tabelle** — dieselbe
+Zurückhaltung wie bei Modul 10s HIGH-Eintrag, der ebenfalls nur „dieselbe
+Disziplin wie bei Hard Rules" referenziert, ohne eine fünfte Tabellenzeile zu
+werden. Kein Sensor: kein `.d-check.yml` geändert, keine Struktur in
+`.claude/commands/*.md` existiert, die ein Werkzeug heute lesen könnte. Kein
+Team-Sim-Szenario (AGENTS.md §3) — dieselbe Begründung wie bei Welle 145: ein
+Rollen-Zug ohne Datei-Ergebnis ist nichts, das sich beobachten lässt.
+
+**Nicht in dieser Welle:** die mechanische Seite (`structure.max-lines`,
+CR an d-check unterwegs, siehe `docs/roadmap.md`); eine Anwendung auf
+`harness/conventions.md` (hat mit dem Verzeichnis-Modell schon eine eigene
+Lösung, kein Trigger-Begriff nötig).
+
 ## Welle 145 — 2026-09-27 · Hard Rule als vierte Trigger-Klasse: der Wildwuchs, den der Trigger-Audit nicht sah
 
 Anlass: eine Beobachtung aus einem Konsumenten-Repo — `AGENTS.md` wächst dort
