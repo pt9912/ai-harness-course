@@ -20,10 +20,12 @@ Slice den Gegenstand übernimmt oder er entfällt — §7 nennt in der Zeile
 Liefer-Punkte der DoD bleiben leer (Modul 5 §Ein Slice, dessen Gegenstand ein
 anderer übernimmt).
 
-Faustregel: WIP-Limit auf 1 pro Rolleninhaber (Modul 8). Wer mehrere Slices
-gleichzeitig in `in-progress/` hat, hat kein Lifecycle, sondern ein
-Buffet — und keinen Punkt, an dem reproduzierbar geprüft wird, ob der
-8-Schritt-Workflow durchlaufen wurde.
+Faustregel: WIP-Limit auf 1 pro Rolleninhaber (Modul 8) — pro Lauf, nicht pro
+Rolle: mehrere Läufe derselben Person zählen einzeln, wenn `Verantwortlich:`
+sie per Zweig unterscheidet. Wer mehrere Slices gleichzeitig in
+`in-progress/` hat, hat kein Lifecycle, sondern ein Buffet — und keinen
+Punkt, an dem reproduzierbar geprüft wird, ob der 8-Schritt-Workflow
+durchlaufen wurde.
 
 ### (Anwenden) Triggerbedingung für jeden Lifecycle-Übergang benennen
 

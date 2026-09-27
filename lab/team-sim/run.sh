@@ -1635,6 +1635,43 @@ EOF
   verdikt "s28d Kuerzung auf das gesenkte Budget (190/190): STILL wieder" "kein Befund auf below.md nach dem Pruning" "$n Treffer / $(echo "$out"|tail -1)" $ok
 }
 
+s29_wip_lauf_zweig_feld() {
+  # --- s29a-b: das Zweig-Kennzeichen im `Verantwortlich:`-Feld (Welle 148,
+  # WIP-Limit zaehlt den Lauf, nicht den Menschen) darf keine bestehende
+  # Pruefung anschlagen — der Kurs behauptet das ("Gemessen", CHANGELOG Welle
+  # 148), bisher nur an einem Scratch-Fixture, nicht in Team-Sim (AGENTS.md
+  # §3: erwartete Stille braucht ihr Szenario genauso). s29b zaehlt nur, weil
+  # s29a im selben Lauf zeigt, dass matrix Slice-Tokens ueberhaupt erkennt und
+  # meldet — sonst bestuende die Stille auch ueber einem abgeschalteten Modul.
+  topo; cd "$WORK/sim/alice" || return 1
+  sed -i 's/^modules: \[/modules: [matrix, /' .d-check.yml
+  cat >> .d-check.yml <<'EOF'
+matrix:
+  classes:
+    - {name: adr, paths: ["docs/plan/adr/[0-9]*.md"]}
+    - {name: slice, paths: ["docs/plan/planning/**/slice-*.md"], token: 'slice-[a-z0-9]+(-[a-z0-9]+)*'}
+  rules:
+    - {from: adr, to: slice, allow: false}
+EOF
+  # ADR nennt einen Slice-Token im Koerper — beweist, dass matrix Slice-Tokens
+  # erkennt und meldet, bevor s29b sich auf ihre Abwesenheit verlaesst.
+  printf '\nSchuld: slice-001.\n' >> docs/plan/adr/0001-kern.md
+  # Das Zweig-Kennzeichen selbst: derselbe Slice nennt seine eigene Kennung im
+  # Verantwortlich-Feld (Welle 148s Kandidat-Schreibweise).
+  sed -i 's/\*\*Verantwortlich:\*\* alice\./\*\*Verantwortlich:\*\* alice (Zweig `slice-001`)./' docs/plan/planning/in-progress/slice-001-kern.md
+  # Vorbedingung prueft die WIRKUNG des sed am Zielsatz, nicht nur, dass die
+  # Zeichenkette irgendwo im Baum steht (Welle 121, AGENTS.md §3).
+  schritt grep -q 'Verantwortlich:\*\* alice (Zweig `slice-001`)\.' docs/plan/planning/in-progress/slice-001-kern.md || return 1
+  schritt git add -A && schritt git commit -qm "ADR nennt Slice-Token; Slice-Kopf mit Zweig-Kennzeichen" || return 1
+  schritt grep -q '^modules: \[matrix' .d-check.yml || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "docs/plan/adr/0001-kern.md" "slice-001" "matrix-forbidden" && ok=0 || ok=1
+  verdikt "s29a ADR nennt einen Slice-Token: LAUT" "matrix-forbidden adr -> slice" "$(echo "$out"|tail -1)" $ok
+  n=$(printf '%s' "$out" | grep "^docs/plan/planning/in-progress/slice-001-kern.md:" | wc -l)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s29b Slice-Kopf mit Zweig-Kennzeichen (Selbstbezug): STILL" "kein Befund auf den eigenen Slice-Kopf, waehrend s29a im selben Lauf laut ist" "$n Treffer / $(echo "$out"|tail -1)" $ok
+}
+
 # ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
@@ -1667,6 +1704,7 @@ lauf s25 s25_gegenstand_uebernommen
 lauf s26 s26_matrix_planungsspalten
 lauf s27 s27_adr_kennung_linkpflicht
 lauf s28 s28_guide_datei_wildwuchs
+lauf s29 s29_wip_lauf_zweig_feld
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

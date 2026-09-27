@@ -50,6 +50,15 @@ für alle anderen leer, bis die Arbeit fertig ist. Der Übergangs-Commit auf dem
 Hauptzweig macht den Anspruch sichtbar, **bevor** jemand anderes dieselbe
 Arbeit beginnt; der Branch entsteht danach.
 
+**Ab hier trägt `Verantwortlich:` bei einem parallelen Lauf den Zweig.** Erst
+jetzt existiert er. Hält ein Mensch mehrere Implementer-Läufe parallel
+(eigene Zweige, eigene Agenten-Instanzen,
+[Modul 8 §Rollen-Regeln](modul-08-agentenrollen.md#rollen-regeln-modul-8)),
+ergänzt das Feld Person **und** Zweig — `<Person> (Zweig <branch-name>)` —,
+sonst zeigen zwei Dateien in `in-progress/` denselben Namen, und die Ablage
+kann die Läufe nicht mehr unterscheiden. Ohne Parallel-Lauf bleibt die
+einfache Form aus dem vorigen Absatz.
+
 **Die Regel trägt die Wirkung, nicht das Mittel.** Sichtbar werden muss der
 Anspruch vor der Arbeit; der Direkt-Commit ist nur der Default-Träger. Wo der
 Hauptzweig push-geschützt ist, scheitert er — dann
@@ -118,7 +127,8 @@ aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört
 sichtbar zurück, nicht still weitergeschoben.
 
 WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro
-Mensch in der Implementer-Rolle, nicht pro Rolle
+Lauf, nicht pro Rolle: mehrere Läufe derselben Person zählen einzeln, wenn
+`Verantwortlich:` sie per Zweig unterscheidet
 ([Modul 8](modul-08-agentenrollen.md#rollen-regeln-modul-8)); wer
 mehrere Slices gleichzeitig in `in-progress/` hat, hat keine Lifecycle,
 sondern ein Buffet.

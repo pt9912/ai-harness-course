@@ -11,6 +11,71 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 148 — 2026-09-27 · WIP-Limit zählt den Lauf, nicht den Menschen
+
+Anlass: die Frage, ob eine Person mehrere Implementer-Läufe parallel (eigene
+Zweige, eigene Agenten-Instanzen) unter sich selbst führen darf. Modul 5s
+Selbstcheck-Rubrik band das WIP-Limit ausdrücklich „pro Mensch … nicht pro
+Rolle" — für den Ein-Mensch-mit-mehreren-Läufen-Fall die falsche Achse: Der
+Kurs hat für die strukturell verwandte Frage der Kennungsvergabe bereits
+`docs/team.md` TB-015 entschieden (dort außerhalb der Rangfolge, nicht als
+Regelwerk-Autorität zitierfähig) — „Schreiber ist, was committet", nicht der
+Mensch dahinter. Für das WIP-Limit war diese Umstellung nicht nachvollzogen.
+
+- Kurs `modul-08-agentenrollen.md` §Typische Fehlvorstellungen, Rolleninhaber-
+  Absatz: dritte, engere Lesart neben *pro Rolle*/*pro Mensch* ergänzt: **pro
+  Lauf** — ein Mensch kann mehrere Läufe parallel halten, dann ist jeder Lauf
+  sein eigener Rolleninhaber. Der Rolleninhaber hängt an Person **und** Zweig,
+  nicht an der Person allein.
+- Kurs `modul-05-planning-harness.md`: neuer Absatz nach dem
+  `Verantwortlich:`-Absatz — mehrere Läufe derselben Person tragen den Zweig
+  im Feld (`<Person> (Zweig <branch-name>)`), sonst zeigen zwei Dateien in
+  `in-progress/` denselben Namen und die Ablage kann die Läufe nicht mehr
+  unterscheiden. Selbstcheck-Rubrik-Zeile „pro Mensch … nicht pro Rolle" auf
+  „pro Lauf, nicht pro Rolle" umgestellt.
+- Spiegel wortgleich in `lab/regelwerk/modul-08-agentenrollen.md` und
+  `lab/regelwerk/modul-05-planning-harness.md`, Links umgehängt.
+- `lab/regelwerk/README.md`: `Stand:` auf Welle 148.
+
+**Warum keine Zahl statt Zweig-Name.** Ein Kandidat war ein Lauf-Zähler
+(„Lauf 2"). Verworfen aus demselben Grund, aus dem `docs/team.md` TB-015
+Wellen-/Slice-Nummern insgesamt abgeschafft hat: eine Zahl braucht einen
+Ableiter, der bei zwei unkoordiniert startenden Agenten unter derselben
+Person lautlos kollidieren kann. Der Branch-Name ist dagegen bereits
+git-eindeutig, ohne zusätzliche Buchführung.
+
+**Kein d-check nötig.** Das `Verantwortlich:`-Feld ist laut Kurs bewusst nicht
+sensor-geprüft, auch nicht für den einfachen Mehr-Menschen-Fall
+(`docs/team.md` TB-004: WIP-Limit generell unprüfbar) — den engeren
+Ein-Mensch-Fall strenger zu behandeln als den allgemeinen wäre inkonsistent.
+Das ist eine andere Frage als die Team-Sim-Pflicht: Kein neues Modul nötig,
+aber die „bleibt still"-Behauptung unten braucht trotzdem ihr Szenario
+(AGENTS.md §3: erwartete Stille zählt genauso) — siehe **s29** unten.
+
+**Gemessen** (Scratch-Fixture gegen d-check v0.78.0, `--network none`, echte
+Modul-Konfiguration aus `lab/example/.d-check.yml` nachgebaut): ein
+Slice-Kopf mit ``**Verantwortlich:** pt9912 (Zweig `slice-a`)`` löst weder im
+`ids`-Modul (ADR-/LH-Muster) noch im `matrix`-Modul (Selbstbezug der eigenen
+`slice-`-Klasse, keine `slice→slice`-Regel definiert) einen Befund aus — 0
+Befunde in beiden Läufen. `lab/team-sim`: neue Gruppe **s29** (`s29a-b`) probt
+dieselbe Behauptung (AGENTS.md §3: erwartete Stille braucht ihr Szenario) —
+ADR nennt einen Slice-Token laut, derselbe Slice nennt sich per
+Zweig-Kennzeichen selbst still, im selben Lauf; 91/91, 0 KAPUTT.
+
+**Erste Review-Runde, vier Funde.** Verschachtelte Backticks im
+`Verantwortlich:`-Beispiel oben ergaben kaputtes Markdown (einfacher Code-Span
+mit unescapten inneren Backticks) — auf doppelte Backticks als Fenz
+umgestellt. Der Satz „Kein Team-Sim-Szenario nötig" widersprach der eigenen
+„Gemessen"-Behauptung direkt darunter — AGENTS.md §3 nennt erwartete Stille
+ausdrücklich eine Aussage, die ihr Szenario braucht; Gruppe **s29** ergänzt
+(mutationsgetestet: Regel deaktiviert → s29a kippt korrekt auf FAIL,
+sed-Ziel zerstört → Vorbedingung bricht korrekt mit KAPUTT). Die Lösungsdatei
+`kurs/de/loesungen/modul-05-loesung.md` blieb bei „pro Rolleninhaber", ohne
+die neue Rubrik-Nuance „pro Lauf, nicht pro Rolle" — nachgezogen. Der neue
+Absatz im Kurs stand beim `open → next`-Übergang, obwohl der Folgeabsatz
+selbst sagt, der Zweig „entsteht danach" — an die richtige Stelle (nach
+`next → in-progress`) verschoben, Spiegel mitgezogen.
+
 ## Welle 147 — 2026-09-27 · Guide-Datei-Wildwuchs: eine Zeilen-Obergrenze, die nur mit sichtbarem Commit steigt
 
 Anlass: d-check v0.78.0 beantwortet die beiden offenen CRs dieses Repos

@@ -134,9 +134,15 @@ häufigste Pfad zu blinden Flecken.
   gefüllt werden — wer sie in einem konkreten Lauf füllt, ist ihr
   **Rolleninhaber**. Der Begriff steht neben der Kontext-Trennung, nicht
   gegen sie: Die Rolle bleibt personen-ungebunden; er macht nur Regeln
-  eindeutig, die sonst in zwei Lesarten zerfallen — *pro Rolle* oder *pro
-  Mensch, der sie gerade füllt* (etwa das WIP-Limit,
-  [Modul 5](modul-05-planning-harness.md#trigger-je-lifecycle-übergang-und-wip-limit-modul-5)).
+  eindeutig, die sonst in Lesarten zerfallen — *pro Rolle* oder *pro
+  Mensch, der sie gerade füllt*. Für das WIP-Limit
+  ([Modul 5](modul-05-planning-harness.md#trigger-je-lifecycle-übergang-und-wip-limit-modul-5))
+  gilt eine dritte, engere Lesart: **pro Lauf.** Ein Mensch kann mehrere
+  Läufe parallel halten — mehrere Implementer-Agenten in eigenen Zweigen —,
+  dann ist jeder Lauf sein eigener Rolleninhaber, mit eigenem WIP-Slot. Der
+  Rolleninhaber hängt dann an Person **und** Zweig, nicht an der Person
+  allein — sonst zeigen zwei Dateien in `in-progress/` denselben Namen, und
+  die Ablage kann die Läufe nicht mehr unterscheiden.
 - Verification: "Bauen wir es richtig?" (gegen Plan/DoD); Validation:
   "Bauen wir das Richtige?" (gegen realen Bedarf). Gefährlichster Fall:
   Verifikation grün, Validation rot — Team baut *perfekt das Falsche*.
