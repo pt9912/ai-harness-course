@@ -11,6 +11,89 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 144 — 2026-09-27 · Randbedingungen im Lastenheft: eine eigene Reihe `LH-RB-NN`
+
+Anlass: der Vergleich eines Generierungs-Prompts für ein Pflichtenheft (d-kit,
+`pflichtenheft.md`) mit den Vorlagen. Der Prompt gleicht inhaltlich dem Lastenheft,
+nicht der Spezifikation, und führt drei Rubriken, die die Lastenheft-Vorlage nicht
+hat: nichtfunktionale Anforderungen mit festen Unterkategorien, Systemgrenzen und
+**Randbedingungen** (technisch, rechtlich, Budget, Zeit). Nur Randbedingungen fehlten
+wirklich: „Systemgrenzen" deckt „Zweck und Geltungsbereich" plus „Globale
+Out-of-Scope-Punkte" (externe Schnittstellen stehen in der Spezifikation §6), und die
+NFA-Kategorien stehen als Hinweis im Kommentar von §4.
+
+- Kurs `modul-03` (Quelle): „Randbedingungen (technisch, rechtlich)" in der
+  Themenliste und ein Punkt in „Typische Fehlvorstellungen": *„Eine Randbedingung
+  ist ein Out-of-Scope-Punkt."* — Out-of-Scope schließt eine *Funktion* aus, eine
+  Randbedingung schränkt die *Umsetzung* ein; sie steht im Lastenheft, weil sie vom
+  Auftraggeber kommt, als `<PREFIX>-RB-<NN>`; wie sie erfüllt wird, steht in
+  Spezifikation und ADRs. Spiegel `modul-03`: derselbe Punkt mit Behauptung.
+- **Eigene Kennungsreihe** `<PREFIX>-RB-<NN>` (Entscheidung, nicht Nebenprodukt): an
+  den Stellen nachgezogen, die das ID-Schema führen — `source-precedence.md`
+  (Diagramm und ID-Tabelle, Kurs und Spiegel), `modul-02-harness-bootstrap.md`
+  (Outline-Zeile und Liste der ID-Klassen, Kurs; Outline-Zeile im Spiegel),
+  `AGENTS.template.md` und `harness/conventions.template.md` (MR-000). Das
+  generische `ids`-Muster der d-check-Vorlage
+  (`<PREFIX>-[A-Z]{2}-\d{2}`, auskommentiert in `lab/templates/.d-check.yml`) fängt
+  `RB` ohne Änderung; der **Generator** `d-check --suggest-config ai-harness-init`
+  (Stand v0.77.0) erzeugt das Anforderungs-Muster dagegen nur für `-FA-` und
+  `-QA-` — für `LH-RB-*` prüft er weder Existenz noch Link. Das ist ein Konsumenten-CR
+  an d-check und hier nicht behoben.
+- `lab/templates/spec/lastenheft.template.md`: §4 heißt jetzt „Nichtfunktionale
+  Anforderungen und Randbedingungen" (die Nummern der Folgeabschnitte bleiben);
+  der Kommentar von §4 nennt die Reihe und die Abgrenzung zu Out-of-Scope, und
+  `LH-RB-01` (Art · Vorgabe · Nachweis) steht als H3 neben `LH-FA-` und `LH-QA-`. `slice.template.md`: `Bezug:` nennt `<LH-RB-NN>`, die DoD trägt eine
+  Zeile „LH-RB-<NN> erfüllt, Nachweis dokumentiert" — sonst gäbe es zu einer
+  Randbedingung mit Nachweis keinen Slice, der sie zitieren kann. `modul-03-loesung.md`:
+  der Maßstab für ein gutes Lastenheft nennt die Reihe und die Abgrenzung. Ein erster Entwurf führte Randbedingungen als Kategorie unter
+  `LH-QA`; er ist zurückgenommen.
+- **Usability und Systemgrenze** (eine Nachfrage zum selben Vergleich): Von den
+  NFA-Rubriken des Prompts (Performance, Sicherheit, Usability, Wartbarkeit,
+  Verfügbarkeit) fehlte im Korpus nur *Usability* — „Usability", „Accessibility" und
+  „Internationalisierung" kamen in Kurs, Regelwerk, Vorlagen und Beispiel-Lastenheft
+  nicht vor; die Systemgrenze war verteilt (Geltungsbereich §1, Out-of-Scope §5,
+  externe Verträge in der Spezifikation §6) und hatte keinen Namen. Kurs `modul-03`
+  und Spiegel: zwei Punkte in „Typische Fehlvorstellungen" („Usability und
+  Internationalisierung sind Sache der UI, nicht der Spec", „Die Systemgrenze ergibt
+  sich aus dem Code") und „Systemgrenzen" in der Themenliste. Vorlage: *Usability*
+  im Kategorien-Hinweis von §4, ein Absatz „Systemgrenze" im Kommentar von §1. Die
+  Unterpunkte der Kategorien (Response-Zeiten, Uptime, Backup …) übernimmt die
+  Vorlage nicht: Jede Anforderung trägt eine ID mit Messmethode, eine Aufzählung
+  ohne Kennung wäre nicht prüfbar.
+- Die zwei Formen im Kommentar von §4 (`-QA-`: Kategorie · messbare Anforderung ·
+  Messmethode; `-RB-`: Art · Vorgabe · Nachweis) sind benannt, und der Kurs-Punkt zu
+  Randbedingungen verlangt den Nachweis — sonst stünde das Feld nur in der Vorlage.
+- Anbindung an ein vorgegebenes System: Die Randbedingung im Lastenheft nennt sie,
+  Version und Vertrag stehen in der Spezifikation §6 (Externe Verträge) — so steht
+  jede Tatsache an einer Stelle, und der Kurs-Punkt, der Spiegel und der Kommentar
+  von §1 sagen es. `slice.template.md`: `<LH-RB-NN>` und die DoD-Zeile gelten nur,
+  wenn eine Randbedingung im Scope ist.
+- `lab/regelwerk/README.md`: `Stand:` auf Welle 144.
+
+**Bewusst nicht übernommen:** Budget und Zeit als Randbedingungen; MoSCoW-Priorität;
+die Verknüpfung je Anforderung mit User Stories und Use-Cases (eine User Story ist
+Slice-Klasse, die Kante Spec → Slice ist verboten); die Traceability-Matrix mit
+Status-Spalte (Fortschritt gehört in Slice und Roadmap); der Abhängigkeitsbaum. **Nicht
+geändert:** das Beispiel führt weiterhin keine Randbedingung (nur seine
+Deklaration des ID-Schemas und das `ids`-Muster, seine MR-000-Deklaration und die Bindungs-Klassen bleiben
+unverändert: MR-000 ist ein datierter, append-only geführter Eintrag von vor der
+Reihe, und ein Muster für eine Reihe, die das Beispiel nicht führt, prüft nichts;
+`harness/README.md` nennt die im Beispiel-Lastenheft vorhandenen Reihen, `FA` und
+`QA`). **Offen, nicht in dieser Welle:** Die Verfeinerungs-Kennung der Spezifikation
+(`<PREFIX>-FA-<NN>.<Buchstabe>`, `source-precedence.md` §ID-Schema) kennt nur `-FA-`;
+eine Randbedingung, die die Spezifikation umsetzt, hat damit keine eigene Form (die
+Lücke bestand für `-QA-` schon). Das wäre eine eigene Regel-Entscheidung. Kein Sensor, kein beobachtbares Verhalten,
+kein Team-Sim-Szenario (AGENTS.md §3). Neue Kennungsreihe = Regel-Änderung, nach §6
+MINOR. **Aus dem Review (fünf Befunde):** `conventions.template.md`, `modul-03-loesung.md`, `slice.template.md` und
+`NNNN-titel.template.md` (`Bezug:` der ADR) trugen das ID-Schema oder einen Bezug ohne
+`RB` — ein erster Stand hatte sie ausdrücklich unverändert gelassen. Das Beispiel
+(Deklaration, Bindungs-Klasse, `ids`-Muster) hatte ich danach ebenfalls angepasst und
+wieder zurückgenommen: MR-000 ist ein datierter Eintrag, dessen Inhalt nicht
+nachträglich wächst (dieselbe Lehre wie Welle 138). Die Lösung nennt
+neben `LH-RB-*` das eigene Schema, das ihr Maßstab davor schon erlaubt. Die Vorlage
+führte `LH-RB-01` zuerst als H4 unter einer Unter-Sektion; jetzt ein H3 wie die
+übrigen Anforderungen, die Regeln stehen im Kommentar von §4.
+
 ## Welle 143 — 2026-09-27 · Einordnung: das Regelwerk ist spec-anchored
 
 Anlass: Die Frage, ob das Regelwerk Spec-Driven Development (SDD) abdeckt. Im

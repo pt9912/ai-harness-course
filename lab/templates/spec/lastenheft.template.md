@@ -29,6 +29,11 @@ Service, der …" ist OK.
 
 Nicht hier: wie das System gebaut wird (das gehört in spezifikation.md
 oder die ADRs).
+
+Systemgrenze: was zum System gehört, steht hier; was nicht dazugehört, unter
+§5. Ein von außen vorgegebenes System, an das es anbinden muss, ist eine
+technische Randbedingung (§4, `<PREFIX>-RB-<NN>`); Version und Vertrag der
+Anbindung stehen in spezifikation.md §6 (Externe Verträge).
 -->
 
 ## 2. Stakeholder
@@ -79,15 +84,22 @@ trägt den Vermerk *zurückgezogen* im Titel; die Nummer bleibt vergeben
 
 ---
 
-## 4. Nichtfunktionale Anforderungen
+## 4. Nichtfunktionale Anforderungen und Randbedingungen
 
 <!--
-Format: ID — Kategorie — messbare Anforderung — Messmethode.
+Format `-QA-`: ID — Kategorie — messbare Anforderung — Messmethode.
+Format `-RB-`: ID — Art (technisch | rechtlich) — Vorgabe — Nachweis.
 
-ID-Schema: <PREFIX>-QA-<NN>.
+ID-Schema: <PREFIX>-QA-<NN> für Qualitätsanforderungen,
+<PREFIX>-RB-<NN> für Randbedingungen — eine eigene Reihe neben -FA- und -QA-.
 
 Kategorien (typische): Performance, Skalierbarkeit, Verfügbarkeit,
-Sicherheit, Wartbarkeit, Betriebskosten.
+Sicherheit, Wartbarkeit, Betriebskosten, Usability (Bedienbarkeit,
+Barrierefreiheit, Internationalisierung).
+
+Eine Randbedingung schränkt die Umsetzung ein, ohne eine Funktion zu
+beschreiben: technisch oder rechtlich. Sie ist kein Out-of-Scope-Punkt
+(Baseline-Regelwerk `modul-03-spec.md` §Regeln gegen typische Fehlannahmen).
 -->
 
 ### LH-QA-01 — <Performance>
@@ -99,6 +111,12 @@ Sicherheit, Wartbarkeit, Betriebskosten.
 
 - **Anforderung:** <…>
 - **Messmethode:** <…>
+
+### LH-RB-01 — <Randbedingung>
+
+- **Art:** <technisch | rechtlich>
+- **Vorgabe:** <z.B. Läuft auf Postgres 15. Personenbezogene Daten verlassen die EU nicht.>
+- **Nachweis:** <Wie wird die Einhaltung nachgewiesen?>
 
 ---
 

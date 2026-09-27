@@ -206,7 +206,7 @@ Kein Target nennen, das im Makefile nicht existiert — auch nicht in Prosa.
   nicht in die Commit-Message.
 - Vergeben werden IDs beim Spec-/ADR-Schreiben nach dem in
   `harness/conventions.md` deklarierten ID-Schema (Default:
-  `<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>` aus dem Lastenheft,
+  `<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>` / `<PREFIX>-RB-<NN>` aus dem Lastenheft,
   `SPEC-<NNN>` in der Spezifikation, `ARC-<NNN>` in der Sicht, ADR-Nummern
   über den ADR-Index) — nie ad hoc im PR.
 - Neue ADRs müssen den ADR-Index aktualisieren.

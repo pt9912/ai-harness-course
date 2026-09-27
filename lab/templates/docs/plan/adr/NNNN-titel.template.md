@@ -14,7 +14,7 @@
 
 **Autor:** <Name>
 
-**Bezug:** [`<LH-FA-NN>`](../../../spec/lastenheft.md#<anker>), [`<LH-QA-NN>`](../../../spec/lastenheft.md#<anker>), [ADR-<NNNN>](<NNNN>-<titel>.md) (optional)
+**Bezug:** [`<LH-FA-NN>`](../../../spec/lastenheft.md#<anker>), [`<LH-QA-NN>`](../../../spec/lastenheft.md#<anker>), [`<LH-RB-NN>`](../../../spec/lastenheft.md#<anker>), [ADR-<NNNN>](<NNNN>-<titel>.md) (optional)
 
 **Schärft:** [`<SPEC-NNN>`](../../../spec/spezifikation.md#<anker>) / [`<PREFIX>-FA-<NN>.<Buchstabe>`](../../../spec/spezifikation.md#<anker>) / [`<ARC-NNN>`](../../../spec/architecture.md#<anker>) — welche
 Spec-Stelle diese ADR verbindlich macht. **Die Kennung nennen, wo das

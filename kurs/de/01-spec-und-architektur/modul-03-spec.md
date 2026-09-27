@@ -58,7 +58,8 @@ Nach diesem Modul kannst du:
 * Anforderungen
 * Nichtfunktionale Anforderungen
 * Akzeptanzkriterien
-* Scope und Out-of-Scope
+* Scope, Systemgrenzen und Out-of-Scope
+* Randbedingungen (technisch, rechtlich)
 * Spec-Qualität für Agentenkonsum (Eindeutigkeit, Negativbedingungen, Beispiele)
 * Spec-Stratifizierung (Lastenheft vertraglich, Spezifikation technisch, Architektur diagrammatisch)
 * Die Architektur-Sicht (`spec/architecture.md`) als derivatives Dokument
@@ -219,6 +220,9 @@ Vorlage: [`spec/architecture.template.md`](../../../lab/templates/spec/architect
 - **"Negativbedingungen sind unhöflich."** — Im Gegenteil: ein Satz "das System *darf nicht* …" spart später drei Reviews. Negativ ist genauso präzise wie positiv.
 - **"Performance gehört in den ADR."** — Nein, Performance gehört in den nichtfunktionalen Block der Spec (oder in `spec/spezifikation.md`, wenn stratifiziert). Der ADR begründet, *wie* man die Schwelle einhält.
 - **"Out-of-Scope kann implizit bleiben."** — Was nicht explizit ausgeschlossen ist, baut der Agent plausibel mit. Das ist die häufigste Quelle für "wir hatten das nie gefordert"-PRs.
+- **"Eine Randbedingung ist ein Out-of-Scope-Punkt."** — Nein. Out-of-Scope schließt eine *Funktion* aus („keine Echtzeit-Streaming-API"); eine Randbedingung schränkt die *Umsetzung* ein, ohne eine Funktion zu beschreiben — technisch („muss auf Postgres 15 laufen") oder rechtlich („personenbezogene Daten verlassen die EU nicht"). Sie steht im Lastenheft, weil sie vom Auftraggeber kommt, als `<PREFIX>-RB-<NN>` (eigene Reihe neben `-FA-` und `-QA-`); wie sie erfüllt wird, steht in Spezifikation und ADRs, und jede Randbedingung nennt, wie ihre Einhaltung nachgewiesen wird.
+- **"Usability und Internationalisierung sind Sache der UI, nicht der Spec."** — Nein. Was nicht in der Spec steht, existiert für den Agenten nicht (Kernidee). Bedienbarkeit, Barrierefreiheit und Internationalisierung stehen als nichtfunktionale Anforderung der Kategorie *Usability* im Lastenheft, mit Messmethode wie jede andere.
+- **"Die Systemgrenze ergibt sich aus dem Code."** — Nein. Was zum System gehört, steht in „Zweck und Geltungsbereich", was nicht dazugehört, unter Out-of-Scope; ein von außen vorgegebenes System, an das es anbinden muss, ist eine technische Randbedingung; Version und Vertrag der Anbindung stehen in der Spezifikation (Externe Verträge). Sonst legt der Agent die Grenze beim Bauen fest.
 - **"Prompts ersetzen Specs."** — Verbreitet aus der agil/Lean-Ecke ("Code statt Doku"). Falsch. Lopopolos Maxime *"Was der Agent nicht im Kontext erreicht, existiert für ihn nicht"* ist ein Plädoyer *für* Kontext-Verfügbarkeit — und sagt damit, dass Spec und Prompt *unterschiedliche* Lebenszyklen haben: Spec wird *gepflegt* (Versions-Geschichte, Bezüge, Audit), Prompt wird *für einen Lauf zusammengestellt*. Was im Prompt steht, aber nicht in der Spec, gilt nur für *diesen* Lauf — der nächste Agent sieht es nicht. Engage-Geschichte oben (Spec sagte *speichert*, Agent baute PostgreSQL) wäre mit einem Mega-Prompt nicht besser geworden — der Prompt würde im nächsten Lauf vergessen.
 
 ## Worked Example: vom vagen Satz zum prüfbaren Akzeptanzkriterium

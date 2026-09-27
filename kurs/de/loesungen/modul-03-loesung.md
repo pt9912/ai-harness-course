@@ -133,9 +133,10 @@ es keine Bewertung, sondern ein Schulterzucken.
 
 Maßstab für ein gutes Lastenheft:
 
-- Jede Anforderung hat eine ID (`LH-FA-*` für funktional, `LH-QA-*` für nichtfunktional, oder eigene Schema). Die IDs erscheinen später in Make-Target-Kommentaren, ADRs und Commits — sie sind die Klammer ([siehe ID-Schema](../grundlagen/source-precedence.md#id-schema-als-klammer)).
+- Jede Anforderung hat eine ID (`LH-FA-*` für funktional, `LH-QA-*` für nichtfunktional, `LH-RB-*` für Randbedingungen, oder eigene Schema). Die IDs erscheinen später in Make-Target-Kommentaren, ADRs und Commits — sie sind die Klammer ([siehe ID-Schema](../grundlagen/source-precedence.md#id-schema-als-klammer)).
 - Akzeptanzkriterien sind im Given/When/Then-Stil und enthalten Boundary + Negative.
 - Out-of-Scope ist *explizit* benannt — nicht weggelassen.
+- Randbedingungen (technisch, rechtlich) stehen als eigene Reihe (`LH-RB-*` oder eigenes Schema) im Lastenheft und sind nicht als Out-of-Scope-Punkt geführt.
 - Mindestens *eine* Negativbedingung pro Feature ("dieses System *darf nicht*…"). Negativ ist genauso präzise wie positiv.
 
 Vergleich-Möglichkeit: Das Lab-Beispiel unter

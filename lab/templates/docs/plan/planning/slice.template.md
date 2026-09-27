@@ -19,7 +19,7 @@ keine Closure-Bedingung gibt, die von der DoD dieses Slice verschieden
 ist, siehe Baseline-Regelwerk `modul-06-roadmap.md`
 §Wann Arbeit eine Welle braucht (Modul 6).
 
-**Bezug:** `<LH-FA-NN>`, `<LH-QA-NN>` (Scope), ADR-<NNNN> (nur *aktive* ADRs).
+**Bezug:** `<LH-FA-NN>`, `<LH-QA-NN>`, `<LH-RB-NN>` (falls eine Randbedingung betroffen ist) (Scope), ADR-<NNNN> (nur *aktive* ADRs).
 
 **Berührte Spec-Stellen:** `<SPEC-NNN>` · `<ARC-NNN>` — die Kennung nennen, wo
 das Zielelement eine trägt, sonst den Abschnitt (`spezifikation.md §N`,
@@ -87,6 +87,7 @@ Gate-Läufe und die fünf Closure-Pflichten darunter zählen nicht mit.
 
 - [ ] LH-FA-<NN> erfüllt, Test referenziert.
 - [ ] LH-QA-<NN> erfüllt, Messung dokumentiert.
+- [ ] LH-RB-<NN> erfüllt, Nachweis dokumentiert (nur wenn eine Randbedingung im Scope ist).
 - [ ] `make gates` grün.
 - [ ] Review durchgeführt, Report unter `docs/reviews/` liegt vor
       (`.harness/skills/reviewer.md`) — Rollenwechsel nach Schritt 8 des

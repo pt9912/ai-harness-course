@@ -164,7 +164,7 @@ obligatorisch ([§Spec-Straten](referenz-richtung.md#spec-straten-mehr-als-ein-s
 ```mermaid
 flowchart TD
     subgraph LH["lastenheft.md — vertraglich (wir versprechen)"]
-        LH1["LH-FA-*, LH-QA-*<br/>Anforderungen mit ID<br/>Akzeptanzkriterien"]
+        LH1["LH-FA-*, LH-QA-*, LH-RB-*<br/>Anforderungen mit ID<br/>Akzeptanzkriterien"]
     end
     subgraph SP["spezifikation.md — technisch (wir liefern wie)"]
         SP1["Algorithmen<br/>Defaults<br/>Protokolle"]
@@ -276,7 +276,7 @@ Schicht zu hoch ein.
 
 | Kennung | Stratum | Art |
 |---|---|---|
-| `<PREFIX>-FA-<NN>`, `<PREFIX>-QA-<NN>` | Vertrag (`spec/lastenheft.md`) | **Anforderungs-ID** — das Einzige, was abgenommen wird |
+| `<PREFIX>-FA-<NN>`, `<PREFIX>-QA-<NN>`, `<PREFIX>-RB-<NN>` | Vertrag (`spec/lastenheft.md`) | **Anforderungs-ID** — das Einzige, was abgenommen wird |
 | `<PREFIX>-FA-<NN>.<Buchstabe>` | Technik (`spec/spezifikation.md`) | **Verfeinerung** genau einer Anforderungs-ID |
 | `SPEC-<NNN>` | Technik (`spec/spezifikation.md`) | **Struktur-ID** für eine technische Festlegung ohne eigene Anforderung |
 | `ARC-<NNN>` | Sicht (`spec/architecture.md`) | **Struktur-ID** für Komponente oder Schnittstelle |

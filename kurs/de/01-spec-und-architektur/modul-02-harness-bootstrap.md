@@ -344,7 +344,7 @@ BF-Diskrepanz-Auslöse-Variante.
 | 1 | Baseline-Auswahl (Kurs-Harness) + Repo-Klasse (Tooling) + ID-Schema festlegen: Vertrags-Präfix wählen (`LH-*`), `SPEC-*`/`ARC-*`/`MR-*` aus der Baseline übernehmen | keine | reift 2/3 |
 | 2 | **Baseline vendoren** — Regelwerk *und* Templates nach `.harness/baseline/<tag>/{regelwerk,templates}/` (+ `SHA256SUMS`, netzlos) als präsente, gepinnte Referenz; **Tooling** (`Makefile` mit d-check-Doku-Gate, `.d-check.yml`) als Startgerüst übernehmen; **Dokument-Skelette** aus der vendored Baseline (`…/templates/`) kopieren *und ausfüllen* | Dokument-Skelette **0 → 1**; vendored Baseline + Tooling tragen keine Phase-Reife | keine |
 | 3 | `harness/conventions.md` mit MR-000 (Baseline-Aussage inkl. ID-Schema) + leerer Index-Tabelle — dieses Repo weicht nirgends ab, also entsteht **keine** `MR-<NNN>`-Datei | `conventions.md` 0 → 1; `AGENTS.md` 1 → 2 (Source Precedence + Hard Rules) | **T1** (Pointer auf `conventions.md` in `harness/README.md`), **T2** (Pointer in `AGENTS.md`) |
-| 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*` | `lastenheft.md` 1 → 2 | keine direkt |
+| 4 | `spec/lastenheft.md` Outline mit `LH-FA-*`/`LH-QA-*`/`LH-RB-*` | `lastenheft.md` 1 → 2 | keine direkt |
 
 ### Detail-Tabelle (Schritte 5–8: Inhalts-Phase)
 
@@ -611,7 +611,7 @@ das konkret:
 - **Geltungsbereich:** gesamtes Repo
 - **Ersetzt-Baseline-Regel:** — (Adoptions-Erklärung, keine Adaption)
 - **Adaption:** keine — ID-Schema = Baseline-Default
-  (`LH-FA-*`, `LH-QA-*`, `SPEC-<NNN>`, `ARC-<NNN>`, `MR-<NNN>`)
+  (`LH-FA-*`, `LH-QA-*`, `LH-RB-*`, `SPEC-<NNN>`, `ARC-<NNN>`, `MR-<NNN>`)
 - **Begründung:** Initial-Setzung.
 - **Auflösungs-Trigger:** permanent.
 
