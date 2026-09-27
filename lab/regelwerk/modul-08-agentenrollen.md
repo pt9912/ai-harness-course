@@ -58,7 +58,7 @@ drei Teile.
 | Closure-Schritt | Träger | Übergabe-Artefakt |
 | --- | --- | --- |
 | **1** — Trigger prüfen | **Verifier** → Planner | repo-weiter Verifikations-Beleg (`fullbuild`-Hash, Replay-Ergebnis); er geht über die Slice-DoDs hinaus und steht in keiner von ihnen |
-| **2** — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage (fällige Trigger) → Verdikt (bestätigt / Folge-ADR mit `supersedes` / neue Stufe) |
+| **2** — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR-, Reifestufen- und Hard-Rule-Zweig) | Audit-Vorlage (fällige Trigger) → Verdikt (bestätigt / Folge-ADR mit `supersedes` / neue Stufe / Hard-Rule-Zeile entfernt) |
 | **3a** — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
 | **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel (Hard Rule · Gate · Skill · `MR`) oder Folge-Slice |
 | **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<Kennung>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |

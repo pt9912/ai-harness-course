@@ -372,7 +372,7 @@ Wellen gibt, fehlt dieser Sammelpunkt — und dann greift die Tabelle:
 | **Zähler** | Slice-Closure §7 | vor dem `git mv` nach `done/` |
 | **Lese-Schritt** (was hat 3× erreicht → Ausgang zuweisen) | Slice-Closure §7 | vor dem `git mv`; der Herkunfts-Anker lautet dann `seit slice-<Kennung>` statt `seit welle-<Kennung>` |
 | **Sichtungs-Schritt** (offene Beobachtungen unter der Schwelle) | Slice-**Planung**, §8 *Vorgelagert — offene Beobachtungen sichten* | beim Anlegen jedes Slice, unabhängig vom Sub-Area-Modus |
-| **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
+| **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR · Hard Rule) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
 | **Alle drei Paarungen** (a/b/c aus Closure-Schritt 3) | Slice-Closure | **nach** dem `git mv` — die Paarungen suchen in `done/`, vorher liegt die Datei dort nicht |
 | **Zeitdokumente archivieren** (Closure-Schritt 4) | Slice-Closure | **nach** den Paarungen — sie lesen den Volltext in `done/`, den das Archiv dort schließt. Der Schlüssel ist der Slice: `done/slice-<Kennung>-archiv.zip`, **flach** neben dem Stub |
 
@@ -689,22 +689,25 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
 1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,
    `make gates` und der Replay-Lauf sind grün. Das ist die *beobachtbare*
    Closure-Bedingung aus der Welle-Definition — nicht der Kalendertag.
-2. **Trigger-Audit der Welle.** Der Harness kennt **drei** Artefaktklassen,
+2. **Trigger-Audit der Welle.** Der Harness kennt **vier** Artefaktklassen,
    die einen Trigger tragen — eine Bedingung, deren Eintreten eine Handlung
-   auslösen soll. Alle drei werden hier geprüft, nicht nur die erste:
+   auslösen soll. Alle vier werden hier geprüft, nicht nur die erste:
 
    | Artefakt | Trigger | Bei Eintreten |
    |---|---|---|
    | **Carveout** ([Modul 7](modul-07-carveouts.md)) | Auflösungs-Trigger | aufgelöst · verlängert (mit Folge-Slice) · permanent akzeptiert |
    | **Bootstrap-aware Gate** ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#bootstrap-aware-gates)) | Hochschalt-Trigger | Stufe hochschalten — oder Carveout eröffnen, wenn die neue Schwelle rot ist |
    | **ADR** ([Modul 4](../01-spec-und-architektur/modul-04-adrs.md)) | Re-Evaluierungs-Trigger | Entscheidung neu bewerten → bestätigt oder Folge-ADR mit `supersedes` |
+   | **Hard Rule** ([Modul 13](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin)) | Auflösungs-Trigger oder *permanent* | Zeile aus `AGENTS.md` entfernen — DoD-Punkt des auslösenden Slice — oder unverändert bei *permanent* |
 
    Eine Welle darf *mit* dokumentiertem Carveout schließen — aber nie mit
-   einem stillen roten Gate, einer stehengebliebenen Reifestufe oder einer
-   Entscheidung, deren Re-Evaluierungs-Bedingung vor drei Wellen eintrat.
-   Der Kurs benannte diese Pathologie bisher nur für Carveouts
+   einem stillen roten Gate, einer stehengebliebenen Reifestufe, einer
+   Entscheidung, deren Re-Evaluierungs-Bedingung vor drei Wellen eintrat, oder
+   einer Hard Rule, deren Auflösungs-Trigger eintrat und die noch in
+   `AGENTS.md` steht.
+   Der Kurs benannte diese Pathologie zuerst für Carveouts
    (*Carveout-Wildwuchs*, [`klassifikation.md`](../grundlagen/klassifikation.md#entropy-management));
-   sie gilt für alle drei Klassen — **ein Trigger ohne Wächter ist eine
+   sie gilt für alle vier Klassen — **ein Trigger ohne Wächter ist eine
    Absichtserklärung mit Verfallsdatum.**
 
 3. **Welle nach `done/` schließen.** *Grundlage ist das

@@ -45,7 +45,7 @@ Form, die Regeln der Inhalt.
   | **Zähler** | Slice-Closure §7 | vor dem `git mv` nach `done/` |
   | **Lese-Schritt** (was hat 3× erreicht → Ausgang zuweisen) | Slice-Closure §7 | vor dem `git mv`; Anker `seit slice-<Kennung>` statt `seit welle-<Kennung>` |
   | **Sichtungs-Schritt** (offene Beobachtungen unter der Schwelle) | Slice-**Planung**, §8 *Vorgelagert — offene Beobachtungen sichten* | beim Anlegen jedes Slice, unabhängig vom Sub-Area-Modus |
-  | **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
+  | **Trigger-Audit** (Carveout · Bootstrap-aware Gate · ADR · Hard Rule) | Slice-Closure | bei jeder Closure, zusammen mit dem Lese-Schritt |
   | **Alle drei Paarungen** (a/b/c aus Closure-Schritt 3) | Slice-Closure | **nach** dem `git mv` — sie suchen in `done/` |
   | **Zeitdokumente archivieren** (Closure-Schritt 4) | Slice-Closure | **nach** den Paarungen — sie lesen den Volltext in `done/`, den das Archiv dort schließt. Schlüssel ist der Slice: `done/slice-<Kennung>-archiv.zip`, **flach** neben dem Stub |
 
@@ -194,16 +194,19 @@ ihrer Schritte in
 1. **Trigger prüfen.** Alle Slices der Welle liegen in `done/`,
    `make gates` und der Replay-Lauf sind grün. Das ist die *beobachtbare*
    Closure-Bedingung aus der Welle-Definition — nicht der Kalendertag.
-2. **Trigger-Audit der Welle.** Drei Artefaktklassen tragen einen Trigger,
-   alle drei werden geprüft: **Carveout** (Auflösungs-Trigger → aufgelöst ·
+2. **Trigger-Audit der Welle.** Vier Artefaktklassen tragen einen Trigger,
+   alle vier werden geprüft: **Carveout** (Auflösungs-Trigger → aufgelöst ·
    verlängert mit Folge-Slice · permanent, Modul 7) · **bootstrap-aware Gate**
    (Hochschalt-Trigger → Stufe hochschalten, oder Carveout eröffnen wenn die
    neue Schwelle rot ist, Modul 13) · **ADR** (Re-Evaluierungs-Trigger →
-   bestätigen oder Folge-ADR mit `supersedes`, Modul 4). Eine Welle darf *mit*
+   bestätigen oder Folge-ADR mit `supersedes`, Modul 4) · **Hard Rule**
+   (Auflösungs-Trigger oder *permanent* → Zeile aus `AGENTS.md` entfernen,
+   DoD-Punkt des auslösenden Slice, Modul 13). Eine Welle darf *mit*
    dokumentiertem Carveout schließen — aber nie mit einem stillen roten Gate,
-   einer stehengebliebenen Reifestufe oder einer Entscheidung, deren
-   Re-Evaluierungs-Bedingung vor drei Wellen eintrat. **Ein Trigger ohne
-   Wächter ist eine Absichtserklärung mit Verfallsdatum.**
+   einer stehengebliebenen Reifestufe, einer Entscheidung, deren
+   Re-Evaluierungs-Bedingung vor drei Wellen eintrat, oder einer Hard Rule,
+   deren Auflösungs-Trigger eintrat und die noch in `AGENTS.md` steht. **Ein
+   Trigger ohne Wächter ist eine Absichtserklärung mit Verfallsdatum.**
 3. **Welle nach `done/` schließen.** Grundlage ist das **Beobachtungs-Register**,
    nicht die einzelnen Closure-Notizen: Dort steht der Zähler bereits,
    fortgeschrieben von jeder Slice-Closure. Die Welle-Closure ist der

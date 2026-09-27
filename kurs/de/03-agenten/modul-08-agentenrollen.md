@@ -111,8 +111,8 @@ sequenceDiagram
 
     P->>Vf: Closure-Trigger prüfen — alle Slices in done/, gates, Replay
     Vf-->>P: repo-weiter Verifikations-Beleg (fullbuild-Hash, Replay-Ergebnis)
-    P->>A: Trigger-Audit — welche ADRs und Reifestufen sind fällig?
-    A-->>P: Verdikt (bestätigt / Folge-ADR mit supersedes / neue Stufe)
+    P->>A: Trigger-Audit — welche ADRs, Reifestufen und Hard Rules sind fällig?
+    A-->>P: Verdikt (bestätigt / Folge-ADR mit supersedes / neue Stufe / Hard-Rule-Zeile entfernt)
     P->>A: Steering-Loop-Eintrag: was 3× erreicht hat, plus Zielort
     A-->>P: Regel verkörpert (Hard Rule · Gate · Skill · MR) oder Slice nötig
 ```
@@ -124,7 +124,7 @@ alle sechs, damit der Verweis dort einlösbar ist. Schritt 3 hat drei Teile.
 | Closure-Schritt | Träger | Übergabe-Artefakt |
 |---|---|---|
 | **1** — Trigger prüfen | **Verifier** → Planner | repo-weiter Verifikations-Beleg; er geht über die Slice-DoDs hinaus und steht in keiner von ihnen |
-| **2** — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR- und Reifestufen-Zweig) | Audit-Vorlage → Verdikt |
+| **2** — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR-, Reifestufen- und Hard-Rule-Zweig) | Audit-Vorlage → Verdikt |
 | **3a** — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
 | **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel oder Folge-Slice |
 | **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<Kennung>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |

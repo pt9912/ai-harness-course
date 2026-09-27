@@ -11,6 +11,53 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 145 — 2026-09-27 · Hard Rule als vierte Trigger-Klasse: der Wildwuchs, den der Trigger-Audit nicht sah
+
+Anlass: eine Beobachtung aus einem Konsumenten-Repo — `AGENTS.md` wächst dort
+trotz der Hard-Rule-Disziplin aus Modul 13 stetig an. Die Ursache: Modul 13
+§Hard Rule (Doku-Disziplin) verspricht der Hard Rule „dieselbe Disziplin, die
+ADR … und Carveout … längst tragen" (Auflösungs-Trigger oder *permanent*), aber
+der Ort, der diese Disziplin plant und durchsetzt, kannte Hard Rules nicht:
+Modul 6 sagte wörtlich „Der Harness kennt **drei** Artefaktklassen, die einen
+Trigger tragen" (Carveout, Bootstrap-aware Gate, ADR) — dieselbe Aufzählung im
+„ohne Wellen"-Pfad und in `grundlagen/klassifikation.md` §Entropy Management
+(„Lösung für alle **drei**"). Ohne einen geplanten Prüfmoment feuert ein
+Trigger nur zufällig, wenn ihn jemand bemerkt — kein Ritus, keine Routine.
+
+- Kurs `modul-06-roadmap.md` (Quelle), Wellen-Closure-Prozedur Schritt 2 und die
+  „ohne Wellen"-Tabelle: **Hard Rule** als vierte Artefaktklasse mit Trigger
+  (Auflösungs-Trigger oder *permanent*; bei Eintreten: Zeile aus `AGENTS.md`
+  entfernen, DoD-Punkt des auslösenden Slice — wörtlich aus Modul 13
+  übernommen). „drei"/„alle drei" → „vier"/„alle vier".
+- Kurs `grundlagen/klassifikation.md` §Entropy Management: vierte Verfallsform
+  „AGENTS.md-Wildwuchs — eine Hard Rule, deren Auflösungs-Trigger eintrat, steht
+  unbesehen weiter. Gleiche Klasse wie Carveout-Wildwuchs."
+- Spiegel beider Dateien nachgezogen (verdichtete Aufzählung in
+  `modul-06-roadmap.md` bleibt in ihrer Form, Zahl und vierter Eintrag folgen).
+- `lab/regelwerk/README.md`: `Stand:` auf Welle 145.
+
+Keine neue Regel — Modul 13 behauptete die Disziplin schon; sie war nur nicht
+verdrahtet. Kein Sensor: der Trigger-Audit ist ein Rollen-Zug (Planner bei der
+Closure), kein Grep-Muster; d-check prüft nicht, ob ein Audit stattfand. Kein
+Team-Sim-Szenario (AGENTS.md §3) — dieselbe Einordnung wie bei den Wellen 140/143.
+
+**Nicht in dieser Welle:** die analoge Lücke bei `.claude/commands/*.md`
+(Slash-Command/Workflow-Skelett) — dort gibt es noch gar keinen
+Trigger-Begriff, nur ein Artefakt-Eintrag in `durchsetzungsschicht.md` §Das
+vollständige Artefakt-Set. Eigene, kleinere Folge-Welle. Ebenso nicht
+geprüft: ob Modul 10s HIGH-Eintrag-Trigger („dieselbe Disziplin wie bei Hard
+Rules") jetzt ebenfalls einen Platz im Trigger-Audit braucht, oder ob er
+implizit über die Hard-Rule-Zeile mitläuft.
+
+`docs/roadmap.md`: neuer Faden „Trigger-Form und -Alter sind ungeprüft" —
+Carveout, Bootstrap-aware Gate, ADR und Hard Rule tragen den Trigger-Begriff
+nur als Prosa-Erwartung, kein Sensor prüft Form oder Alter. Reihenfolge, falls
+das je angegangen wird: erst eine Schreibform (Tabelle statt Prosa, damit
+d-checks vorhandenes `structure`-Modul „Spalte gefüllt" ohne neuen Code
+greift), dann prüfen ob das reicht, erst danach ein CR an d-check für eine
+Staleness-Prüfung. 1× beobachtet (`pg-change-feed`), unter der 3×-Schwelle —
+kein Sensor-Vorschlag, nur der Faden.
+
 ## Welle 144 — 2026-09-27 · Randbedingungen im Lastenheft: eine eigene Reihe `LH-RB-NN`
 
 Anlass: der Vergleich eines Generierungs-Prompts für ein Pflichtenheft (d-kit,

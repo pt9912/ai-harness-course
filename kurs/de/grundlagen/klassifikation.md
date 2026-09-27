@@ -158,7 +158,8 @@ Code, den er schützen soll. Die typischen Verfallsformen:
 * **Tote Constraints** — ADR-Regel hat keinen Codepfad mehr. Lösung: regelmäßiger Constraint-Scan.
 * **Carveout-Wildwuchs** — temporäre Ausnahmen, deren Trigger längst eingetreten ist. Lösung: Carveout-Audit als geplante Welle.
 * **Stehengebliebene Reifestufe** — ein bootstrap-aware Gate, dessen Hochschalt-Trigger eintrat, prüft weiter die alte Schwelle. Gleiche Klasse wie Carveout-Wildwuchs.
-* **Abgelaufene Entscheidung** — eine ADR, deren Re-Evaluierungs-Trigger eintrat, gilt unbesehen weiter. Lösung für alle drei: **Trigger-Audit** in der Welle-Closure ([Modul 6](../02-planung/modul-06-roadmap.md)).
+* **Abgelaufene Entscheidung** — eine ADR, deren Re-Evaluierungs-Trigger eintrat, gilt unbesehen weiter. Gleiche Klasse wie Carveout-Wildwuchs.
+* **AGENTS.md-Wildwuchs** — eine Hard Rule, deren Auflösungs-Trigger eintrat, steht unbesehen weiter. Gleiche Klasse wie Carveout-Wildwuchs. Lösung für alle vier: **Trigger-Audit** in der Welle-Closure ([Modul 6](../02-planung/modul-06-roadmap.md)).
 * **Golden-Set-Überfitting** — Replay grün, Realität rot. Lösung: Golden Sets rotieren, neue Beispiele ziehen.
 
 Entropy Management ist nicht ein eigenes Modul, sondern eine Pflicht, die
