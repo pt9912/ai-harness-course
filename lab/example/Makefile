@@ -18,7 +18,7 @@ help: ## Targets anzeigen
 # Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment.
 # Der `include` steht hinter `help`, weil das erste gelesene Target das
 # Default-Goal ist.
-DCHECK_DIGEST := sha256:3f84502b09af65246fff38b1c3893130050e50581943a0434da95bf68091e337
+DCHECK_DIGEST := sha256:f6170cd09b0156097a5a88f5d8fe66f1367a040f949a03cad9207b65bc20939f
 include d-check.mk
 
 gates: ## Sprachskelett-Gates ausführen: make gates COURSE_LANG=go|python|kotlin|java|csharp|cpp

@@ -23,7 +23,7 @@ check: docs-check alignment-check ## beide Validatoren nacheinander
 # Bei d-check-Release neu erzeugen: `d-check --print-mk > d-check.mk`, DCHECK_DIGEST
 # neu setzen. Der Node-Validator bleibt Rest-Sensor für die Modul-Nummern-Checks.
 GATE_IMAGE ?= ai-harness-course-gates
-DCHECK_DIGEST ?= sha256:3f84502b09af65246fff38b1c3893130050e50581943a0434da95bf68091e337
+DCHECK_DIGEST ?= sha256:f6170cd09b0156097a5a88f5d8fe66f1367a040f949a03cad9207b65bc20939f
 include d-check.mk
 
 # docs-check brückt das tool-generierte `doc-check` (reiner d-check) und hängt
