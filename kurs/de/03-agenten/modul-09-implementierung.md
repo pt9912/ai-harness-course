@@ -185,6 +185,13 @@ Rule trägt ab Einführung einen Auflösungs-Trigger oder *permanent*
 ([Modul 13 §Hard Rule](../04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin));
 der Altbestand bleibt, wie er ist.
 
+**Wächst ein Repos eigene Hard-Rule-Liste in `AGENTS.md` über die Zeit, trägt
+sie dasselbe Schnitt-Prinzip wie `harness/conventions.md`** — eine kurze Zeile in `AGENTS.md`, der Volltext
+(Begründung, Grund-Codes, Beispiele) in einer eigenen Datei
+([`harness-dateien.md` §Konventionsspeicher](../grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
+Gegenmittel zum „Guide-Datei-Wildwuchs"
+([`klassifikation.md` §Entropy Management](../grundlagen/klassifikation.md#entropy-management)).
+
 ## Was der Agent in den Kommentar schreibt
 
 Zwischen Schritt 4 (Plan) und Schritt 5 (engster Sensor) entsteht der Code —

@@ -83,6 +83,15 @@ In dieser Reihenfolge:
 <!--
 Eigene Hard Rules ergänzen, basierend auf der Repo-Klasse. Beispiele
 zur Inspiration:
+
+Wächst diese Liste, trägt sie dasselbe Schnitt-Prinzip wie
+harness/conventions.md: eine kurze Zeile/ein kurzer Absatz bleibt hier,
+der Volltext (Begründung, Grund-Codes, Randfälle) wandert in eine eigene
+Datei unter harness/rules/<name>.md (Baseline-Regelwerk
+grundlagen-harness-dateien.md §harness/conventions.md als
+Konventionsspeicher — Gegenmittel zu "Guide-Datei-Wildwuchs",
+grundlagen-klassifikation.md §Entropy Management). Form ist Wahl, lohnt
+erst beim tatsächlichen Wachstum, nicht vorab.
 -->
 
 ### 3.1 Docker-only
@@ -200,17 +209,27 @@ Kein Target nennen, das im Makefile nicht existiert — auch nicht in Prosa.
 
 ## 5. Dokumentations-Regeln
 
-- **Anforderungs-IDs und ADR-Nummern** müssen in PRs/Commits referenziert
-  sein — sie sagen, welche Zusage oder Entscheidung berührt ist. Struktur-IDs
-  (`SPEC-<NNN>`, `ARC-<NNN>`) adressieren *innerhalb* der Spec und gehören
-  nicht in die Commit-Message.
-- Vergeben werden IDs beim Spec-/ADR-Schreiben nach dem in
-  `harness/conventions.md` deklarierten ID-Schema (Default:
-  `<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>` / `<PREFIX>-RB-<NN>` aus dem Lastenheft,
-  `SPEC-<NNN>` in der Spezifikation, `ARC-<NNN>` in der Sicht, ADR-Nummern
-  über den ADR-Index) — nie ad hoc im PR.
-- Neue ADRs müssen den ADR-Index aktualisieren.
-- Roadmap/Status-Geschichte lebt in `docs/plan/planning/`, nicht in `spec/architecture.md`.
+<!--
+Index-Tabelle nach dem Muster des Adaptions-Blocks in
+harness/conventions.md (Baseline-Regelwerk grundlagen-harness-dateien.md
+§harness/conventions.md als Konventionsspeicher — dort ist die
+Verzeichnis-Form ebenfalls von Anfang an der Default, keine spätere
+Umstellung, "weil sie mit der Adaptions-Zahl nicht mitwächst"). Kurze
+Regeln stehen vollständig in der Tabelle (Datei-Spalte: "—"); wächst eine
+Regel über einen Satz hinaus oder kommt eine mit eigener Begründung/
+Grund-Codes dazu, wandert ihr Volltext nach harness/rules/<name>.md und
+die Tabellenzeile bleibt der Kurzform-Zeiger darauf. Gegenmittel zu
+"Guide-Datei-Wildwuchs" (grundlagen-klassifikation.md §Entropy
+Management). `file.max-lines` (falls aktiviert) deckt nur die ganze
+Datei, nicht diesen Abschnitt gezielt.
+-->
+
+| # | Regel | Datei |
+|---|---|---|
+| 1 | **Anforderungs-IDs und ADR-Nummern** müssen in PRs/Commits referenziert sein — sie sagen, welche Zusage oder Entscheidung berührt ist. Struktur-IDs (`SPEC-<NNN>`, `ARC-<NNN>`) adressieren *innerhalb* der Spec und gehören nicht in die Commit-Message. | — |
+| 2 | Vergeben werden IDs beim Spec-/ADR-Schreiben nach dem in `harness/conventions.md` deklarierten ID-Schema (Default: `<PREFIX>-FA-<NN>` / `<PREFIX>-QA-<NN>` / `<PREFIX>-RB-<NN>` aus dem Lastenheft, `SPEC-<NNN>` in der Spezifikation, `ARC-<NNN>` in der Sicht, ADR-Nummern über den ADR-Index) — nie ad hoc im PR. | — |
+| 3 | Neue ADRs müssen den ADR-Index aktualisieren. | — |
+| 4 | Roadmap/Status-Geschichte lebt in `docs/plan/planning/`, nicht in `spec/architecture.md`. | — |
 
 ## 6. Minimal Agent Workflow
 

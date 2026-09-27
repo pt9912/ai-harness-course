@@ -720,6 +720,36 @@ Schritte — jeder hinterlässt einen Beleg, keiner ein Datum:
    ging. Was darunter liegt, bleibt offen und wartet.
    **Ohne diesen Lese-Schritt ist das Register write-only** — gezählt würde
    weiter, aber nichts würde je zur Regel.
+
+   **Was den Bestand überlebt hat, bekommt denselben Lese-Schritt.** Ein
+   Slice in `open/` oder `next/`, der diese Closure bereits unverändert
+   überstanden hat, stellt dieselbe Frage wie das Register, eine Ebene
+   höher: Wächst der Bestand schneller, als er sich abbaut? Gemessen an
+   einem Konsumenten-Repo: 100 % der offenen Slices waren wellenlose
+   Wartung, keiner geplante Feature-Arbeit; 70 % gingen auf das
+   Beobachtungs-Register zurück, und ein einziger geschlossener Slice hatte
+   sieben liegen gebliebene Folge-Slices erzeugt. Die eigene Diagnose jenes
+   Repos benennt die Ursache: *„Jeder geschlossene Slice bringt Review- und
+   Verifikations-Befunde; jeder Befund nimmt eine der drei Routen —
+   Register-Eintrag, Folge-Slice, ausdrückliche Ablehnung —, und die ersten
+   zwei legen wieder ein Artefakt an […]. Die einzige Route, die nichts
+   anlegt, ist die Ablehnung, und sie verlangt ein Urteil, während die zwei
+   anderen einer Form folgen."* Bestehenbleiben wird deshalb hier zum
+   selben Urteil wie Ablehnung — nicht zur Stille.
+
+   **Erst gruppieren, dann entscheiden.** Slices mit demselben
+   Auslöser-Slice oder derselben Sensor-/Regel-Klasse werden vor jedem
+   Einzelurteil zusammengefasst: **konsolidiert** — derselbe Übergang, den
+   ein Slice ohnehin kennt
+   ([Modul 5 §Ein Slice, dessen Gegenstand ein anderer übernimmt](modul-05-planning-harness.md#ein-slice-dessen-gegenstand-ein-anderer-übernimmt)),
+   `open|next → done`, Gegenstand: *übernommen von* einem neu geschnittenen
+   Sammel-Slice, der die geteilte Ursache in einem Rutsch trägt. Erst für
+   den Rest ohne Gruppe: **bestätigt** (bleibt, mit einem Satz zur
+   fortbestehenden Priorität) oder **entfallen** (derselbe Übergang,
+   Gegenstand: *entfallen*, mit Begründung). Eine geschlossene Menge wie
+   beim Register-Ausgang, kein Freitext — und kein Sensor prüft heute, ob
+   dieser Schritt stattfand, dieselbe Lücke wie beim Trigger-Audit.
+
    Die Closure-Notiz
    `done/welle-<Kennung>-results.md` hält fest, *was gelernt wurde*: geliefert · was
    funktionierte · was anders lief · **Steering-Loop-Einträge** (geschärfte

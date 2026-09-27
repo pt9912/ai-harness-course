@@ -439,6 +439,20 @@ sobald letztere sich weiterentwickelt. Zwei Quellen derselben
 Konvention sind dasselbe Drift-Risiko, das die Source-Precedence-Regel
 für Spec/ADR adressiert — hier in der Form-Ebene.
 
+**Dasselbe Schnitt-Prinzip trägt jede Guide-Datei, die jeder Agentenlauf
+liest — `AGENTS.md` eingeschlossen, sobald seine Hard-Rule-Liste wächst**
+([Modul 9 §Hard Rules](modul-09-implementierung.md#hard-rules-repo-spezifisch);
+Gegenmittel zum „Guide-Datei-Wildwuchs",
+[`grundlagen-klassifikation.md` §Entropy Management](grundlagen-klassifikation.md#entropy-management)):
+eine kurze Zeile oder ein kurzer Absatz bleibt in `AGENTS.md`, der Volltext —
+Begründung, Grund-Codes, Beispiele — wandert in eine eigene Datei unter
+`harness/rules/<name>.md`. Ein realer Konsument belegt die Form über 17
+Regeln hinweg: eine Index-Tabelle trägt die kürzesten vollständig, die
+übrigen als Ein-Zeiler mit Pointer. Wie bei `harness/conventions.md` bleibt
+die Form Wahl — sie lohnt erst, sobald die Liste tatsächlich wächst, nicht
+vorab (derselbe Startwert-Vorbehalt wie bei `file.max-lines`,
+[`grundlagen-klassifikation.md` §Entropy Management](grundlagen-klassifikation.md#entropy-management)).
+
 Vorlagen:
 [`templates/harness/conventions.template.md`](../templates/harness/conventions.template.md)
 (Index) und

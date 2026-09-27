@@ -11,6 +11,128 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 150 — 2026-09-27 · Der Planungs-Bestand bekommt seinen eigenen Lese-Schritt
+
+Anlass: Ein Konsumenten-Repo hat selbst benannt und quantifiziert, dass sein
+Planungs-Bestand strukturell schneller wächst, als er sich abbaut — nicht
+durch schlechtes Schneiden, sondern durch die Form des Verfahrens: Review-
+und Verifikations-Befunde nehmen eine von drei Routen (Register-Eintrag,
+Folge-Slice, Ablehnung); die ersten zwei legen ein neues Artefakt an, das
+selbst wieder Abschluss verlangt, nur die dritte nicht — und sie allein
+verlangt ein Urteil. Gemessen an diesem Repo: `open/` trug 77 Slice-Dateien
+gegen 7 in `next/` und 1 in `in-progress/`; **100 %** waren wellenlose
+Wartung, keine geplante Feature-Arbeit; **70 %** gingen auf das
+Beobachtungs-Register zurück; ein einziger geschlossener Slice hatte
+**sieben** liegen gebliebene Folge-Slices erzeugt.
+
+- Kurs `modul-06-roadmap.md` §Die Wellen-Closure-Prozedur, Schritt 3 (der
+  Lese-Schritt des Beobachtungs-Registers): neuer Absatz — derselbe
+  Lese-Schritt gilt für Slices, die eine Closure unverändert überstanden
+  haben. Zuerst gruppieren (gleicher Auslöser-Slice oder gleiche
+  Sensor-/Regel-Klasse), dann entscheiden: **konsolidiert** zuerst (kein
+  neuer Mechanismus — derselbe Übergang aus Modul 5 §Ein Slice, dessen
+  Gegenstand ein anderer übernimmt, `open|next → done`, Gegenstand:
+  *übernommen von* einem neuen Sammel-Slice), erst für den Rest ohne Gruppe
+  **bestätigt** oder **entfallen**. Damit kostet Bestehenbleiben dasselbe
+  Urteil wie Ablehnung — nicht mehr die Stille.
+- Spiegel wortgleich in `lab/regelwerk/modul-06-roadmap.md`, Links
+  umgehängt. `Stand:` auf Welle 150.
+
+**Warum keine neue Route, kein neuer Mechanismus.** *Konsolidiert* ist
+`open|next → done` mit *übernommen von* — ein Übergang, den der Kurs schon
+seit Modul 5 kennt, hier nur zuerst geprüft statt nur im Zombie-Fall. Das
+vermeidet eine Parallel-Maschine neben dem Beobachtungs-Register-Ausgang
+(*verkörpert · geplant · gestrichen*) und dem Risiko-Ausgang — dieselbe
+geschlossene-Menge-Form ein drittes Mal, nicht eine vierte Erfindung.
+
+**Kein d-check, kein Team-Sim.** Der Schritt ist Prozedur, keine Sensor-
+Behauptung — dieselbe Lage wie beim Trigger-Audit selbst, den heute auch
+kein Modul auf tatsächliche Ausführung prüft. Die Zahlen oben sind eine
+punktuelle Messung an einem realen Repo, kein Sensor-Vertrag dieses Kurses.
+
+Gates: `make check` grün (0 ERROR/WARN); `make bundle-check` 0 Befunde.
+
+## Welle 149 — 2026-09-27 · Regel-Auslagerung: derselbe Schnitt wie `harness/conventions.md`, jetzt für `AGENTS.md`
+
+Anlass: `/Development/d-check`s eigene `AGENTS.md` zeigt eine zweite,
+komplementäre Technik gegen „Guide-Datei-Wildwuchs" (Welle 147) neben
+`file.max-lines` — eine Index-Tabelle mit Kurzregel je Zeile, Volltext
+(Begründung, Grund-Codes, Beispiele) in einer eigenen `harness/rules/<name>.md`
+je Regel (ADR-0096, „agents-md-regel-auslagerung-harness-rules"). Das ist kein
+neues Muster: Der Kurs lehrt es bereits, nur bisher ausschließlich für
+`harness/conventions.md` ([`harness-dateien.md` §Konventionsspeicher](kurs/de/grundlagen/harness-dateien.md#harnessconventionsmd-als-konventionsspeicher)).
+Diese Welle überträgt es explizit auf `AGENTS.md`s Hard-Rule-Liste, statt es
+ein zweites Mal herzuleiten.
+
+- Kurs `grundlagen/harness-dateien.md` §Konventionsspeicher: neuer Absatz —
+  dasselbe Schnitt-Prinzip trägt jede Guide-Datei, die jeder Agentenlauf
+  liest, `AGENTS.md` eingeschlossen, sobald die Hard-Rule-Liste wächst; Form
+  bleibt Wahl, lohnt erst beim tatsächlichen Wachstum (derselbe
+  Startwert-Vorbehalt wie `file.max-lines`).
+- Kurs `modul-09-implementierung.md` §Hard Rules (repo-spezifisch):
+  Cross-Reference-Absatz auf denselben Schnitt.
+- Kurs `grundlagen/klassifikation.md` §Entropy Management,
+  Guide-Datei-Wildwuchs: zweite, komplementäre Lösung ergänzt — die
+  Zeilen-Obergrenze deckelt die Summe, nachdem sie entsteht; die
+  Regel-Auslagerung verringert die Wachstumsrate an der Quelle. Ein realer
+  Konsument (d-check selbst, `.d-check.yml:789-793`, verifiziert) nutzt
+  beides zugleich.
+- Spiegel wortgleich in `lab/regelwerk`, Links umgehängt. `Stand:` auf
+  Welle 149.
+- `lab/templates/AGENTS.template.md`: §3 Harte Regeln bekommt einen
+  Kommentar-Hinweis auf denselben Schnitt, sobald die Liste wächst — die
+  Falsch/Richtig-Lehrform bleibt Prosa, nur der Volltext wandert bei Bedarf
+  aus. §5 Dokumentations-Regeln startet **direkt** als Index-Tabelle (vier
+  Regeln, Datei-Spalte vorerst „—") statt als Bullet-Liste — „nach dem
+  Muster des Adaptions-Blocks in `harness/conventions.md`", wörtlich
+  d-checks eigene Formulierung für dieselbe Sektion (ADR-0096). Dort ist die
+  Verzeichnis-Form seit jeher der Default, keine spätere Umstellung, „weil
+  sie mit der Adaptions-Zahl nicht mitwächst" — dieselbe Begründung trägt
+  hier von Anfang an.
+
+**Kein Kurs-Beispiel umgebaut.** `lab/example/AGENTS.md` liegt bei 159 von
+200 Zeilen (Welle 147) — kein tatsächliches Wachstum, das die Auslagerung
+rechtfertigt; sie vorab einzuführen wäre derselbe Fehler, den die
+Startwert-Politik bei `file.max-lines` vermeidet (einen Zielwert erfinden,
+statt eine Beobachtung abzuwarten). `harness/conventions.md`s eigenes
+Beispiel zeigt ohnehin schon beide Formen nebeneinander (`MR-000` inline,
+alles Weitere ausgelagert) — dasselbe Muster gilt, sobald `AGENTS.md` es
+braucht. Der Unterschied zur Vorlage ist kein Widerspruch: Ein bestehendes
+Beispiel migriert man nicht ohne echten Anlass — es hat echte Zeilen, echte
+Historie, echte Adopter, die sein `AGENTS.md` schon leben. Die Vorlage trägt
+zwar selbst schon vier konkrete Platzhalter-Regeln in §5 (auch sie wurden in
+dieser Welle auf Tabellenform umgestellt, siehe oben), aber keinen einzigen
+echten Adopter: Ihre Form umzustellen kostet niemanden eine Migration, weil
+niemand sie noch als `AGENTS.md` führt.
+
+**Erste Review-Runde:** kein Werkzeug-Befund, aber ein inhaltlicher Fund von
+außerhalb der Review — `lab/templates/AGENTS.template.md` fehlte in dieser
+Welle völlig, obwohl es §3 Harte Regeln und §5 Dokumentations-Regeln bereits
+in genau der Form trägt, die d-checks Konsumenten-Beispiel motiviert (§5
+sogar mit identischer Überschrift und Nummerierung — das eigentliche Indiz,
+dass d-checks `AGENTS.md` von dieser Vorlage abstammt). Nachgetragen; §5
+zunächst als Kommentar-Hinweis mit Bullet-Liste-bleibt-Default, dann
+korrigiert: eine Bullet-Liste „solange sie wenige sind" behauptete eine
+Schwelle, die kein Gate misst — `file.max-lines` deckt nur die ganze Datei,
+kein Modul zählt Listenpunkte in einem Abschnitt. Die eigentliche Antwort
+ist nicht „ungemessen bleiben", sondern derselbe Default wie bei
+`harness/conventions.md`: Tabelle von Anfang an.
+
+**Zweite Review-Runde:** In `modul-09-implementierung.md`s §Hard Rules war
+„Wächst diese Liste über die Zeit" mehrdeutig — die nächstliegende Liste im
+Text ist die Beispiel-Aufzählung aus mehreren realen Repos (grid-gym,
+bess-ems), nicht die Hard-Rule-Liste *eines* adoptierenden Repos in dessen
+eigener `AGENTS.md`. Die drei Geschwister-Einträge dieser Welle (in
+`harness-dateien.md`, `klassifikation.md`, deren Spiegel) benennen die Liste
+alle ausdrücklich; hier fehlte das. Nachgezogen, Spiegel mitgezogen.
+
+**Kein d-check, kein Team-Sim.** Die Form ist eine Autoren-Konvention wie bei
+`harness/conventions.md` selbst — kein dediziertes Modul prüft sie dort,
+gewöhnliche Link-Prüfung deckt kaputte Pointer wie jeden anderen Link. Keine
+neue Sensor-Behauptung, also kein Szenario fällig (AGENTS.md §3).
+
+Gates: `make check` grün (0 ERROR/WARN); `make bundle-check` 0 Befunde.
+
 ## Welle 148 — 2026-09-27 · WIP-Limit zählt den Lauf, nicht den Menschen
 
 Anlass: die Frage, ob eine Person mehrere Implementer-Läufe parallel (eigene
