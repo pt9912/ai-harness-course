@@ -52,11 +52,14 @@ implizit über die Hard-Rule-Zeile mitläuft.
 `docs/roadmap.md`: neuer Faden „Trigger-Form und -Alter sind ungeprüft" —
 Carveout, Bootstrap-aware Gate, ADR und Hard Rule tragen den Trigger-Begriff
 nur als Prosa-Erwartung, kein Sensor prüft Form oder Alter. Reihenfolge, falls
-das je angegangen wird: erst eine Schreibform (Tabelle statt Prosa, damit
-d-checks vorhandenes `structure`-Modul „Spalte gefüllt" ohne neuen Code
-greift), dann prüfen ob das reicht, erst danach ein CR an d-check für eine
-Staleness-Prüfung. 1× beobachtet (`pg-change-feed`), unter der 3×-Schwelle —
-kein Sensor-Vorschlag, nur der Faden.
+das je angegangen wird: erst eine Schreibform (kein Tabellen-Umbau — Hard
+Rules stehen als Unterabschnitt mit Falsch/Richtig-Beispiel, das würde eine
+Tabellenform zerstören; eher ein Pflichtfeld *innerhalb* des Abschnitts, wie
+bei Carveout), dann prüfen ob ein vorhandenes d-check-Modul reicht, erst
+danach ein CR für eine Staleness-Prüfung. **Korrektur:** der erste Stand
+schlug d-checks Tabellenspalten-Modul vor, ohne die tatsächliche Hard-Rule-Form
+zu prüfen. 1× beobachtet (`pg-change-feed`), unter der 3×-Schwelle — kein
+Sensor-Vorschlag, nur der Faden.
 
 ## Welle 144 — 2026-09-27 · Randbedingungen im Lastenheft: eine eigene Reihe `LH-RB-NN`
 
