@@ -49,6 +49,7 @@
 | Stratum | Rollen-Klasse eines Spec-Dokuments — *Vertrag* (Decke) · *Technik* · *Sicht* —, bestimmt über normativen Gehalt und Änderungs-Prozess, nicht über den Dateinamen. Widersprechen die Achsen einander, entscheidet der Änderungs-Prozess. Rang: Vertrag › Technik › Sicht; alle drei sind obligatorisch, eine Abweichung wird als `MR-<NNN>` deklariert. Siehe [§Spec-Straten](referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument). |
 | Change Request | Externer Vorgang, in dem eine Vertragsänderung mit dem Auftraggeber vereinbart wird — **bewusst kein Harness-Konstrukt**: kein ID-Schema, keine eigene Datei, kein Gate. Im Repo hinterlässt ein *angenommener* CR nur einen Fußabdruck — Version-Bump des Lastenhefts, Historie-Zeile mit Verweis, die geänderten `LH-*`. Siehe [§Spec-Stratifizierung](source-precedence.md#spec-stratifizierung). |
 | Bootstrap-aware Gate | Gate mit weicher Frühphase: kennt eine Reifestufe und greift erst ab Trigger hart. Dokumentiert, was die Stufe ist. |
+| Spec-Driven Development (SDD) | Sammelbegriff für Varianten, in denen eine Spec Coding-Agenten als Leitlinie dient. Böckeler definiert die Spec als „a structured, behavior-oriented artifact - or a set of related artifacts - written in natural language that expresses software functionality and serves as guidance to AI coding agents". Das Regelwerk ist *spec-anchored* („spec-verankert"); Einordnung und Zuordnung der Bausteine: [§Einordnung: Spec-Driven Development](#einordnung-spec-driven-development). |
 
 ## Trennschärfen
 
@@ -63,3 +64,26 @@ Reviews sind agentisch.
 Vertragspartner; ein *Change Request* vereinbart die Vertragsänderung extern mit
 dem Auftraggeber. Beide ändern Text — nur einer ändert ein Versprechen. Welcher
 von beiden ein Dokument ändern darf, entscheidet über sein Stratum.
+
+## Einordnung: Spec-Driven Development
+
+Birgitta Böckeler unterscheidet in *Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl* (martinfowler.com, 15. Oktober 2025) drei Stufen:
+
+- **spec-first:** „A well thought-out spec is written first, and then used in the AI-assisted development workflow for the task at hand".
+- **spec-anchored:** „The spec is kept even after the task is complete, to continue using it for evolution and maintenance of the respective feature".
+- **spec-as-source:** „The spec is the main source file over time, and only the spec is edited by the human, the human never touches the code".
+
+**Das Regelwerk ist spec-anchored** („spec-verankert"). Die Spec bleibt nach dem Slice bestehen und wird mitgeführt: Eine benannte Spec-Lücke aus Closure oder Verifikation fließt über den Rückwärtspfad in die Spec zurück (Modul 1), Gates und Fitness Functions setzen die Festlegungen aus Spec und ADR am Code durch (Modul 13). *Spec-as-source* schließt das Regelwerk nicht aus: Es setzt nicht voraus, dass ein Mensch Code schreibt (den schreibt der Implementer-Agent), und die Verifikation prüft den Code gegen die Spec (Modul 1). Dass die Spec die Quelle des Codes ist, der Code also aus ihr neu erzeugt werden kann, sagt das Regelwerk nicht; eigene Regeln dafür — etwa zur Regenerierbarkeit des Codes oder zur Kennzeichnung erzeugten Codes — enthält es nicht. Offen ist außerdem, wie die Gates und Hard Rules, die ein Mensch schreibt, zu „der Mensch fasst den Code nie an" passen. Belegt ist die Verträglichkeit damit nicht. Das Regelwerk schreibt kein SDD-Werkzeug und keinen Ablauf eines solchen Werkzeugs vor; sein eigener Ablauf ist der Entwicklungszyklus (Modul 1).
+
+Die Bausteine, die Böckeler bei Kiro und Spec Kit nennt, haben im Regelwerk diesen Ort:
+
+| Baustein | Ort im Regelwerk |
+|---|---|
+| Constitution (Spec Kit): Grundprinzipien des Projekts | `AGENTS.md` mit Hard Rules (Modul 9), ADRs (Modul 4) |
+| Requirements (Kiro), Specify (Spec Kit) | Lastenheft mit Akzeptanzkriterien im Given/When/Then-Stil (Modul 3); die User-Story-Form gehört nicht hierher, siehe Abweichung unten |
+| Design (Kiro), Plan (Spec Kit) | Spezifikation und Architektur-Sicht (Modul 3), ADRs (Modul 4) |
+| Tasks (Kiro, Spec Kit) | Slice mit DoD und Datei-Tabelle im Plan (Modul 5); Roadmap und Wellen (Modul 6) ordnen Slices, sie sind keine Tasks |
+
+Darüber hinaus führt das Regelwerk den Umsetzungs-Workflow (Modul 9), Review und Verifikation als getrennte Rollen (Modul 10 und 11), Gates (Modul 13) und den Rückwärtspfad von Closure und Verifikation zur Spec (Modul 1).
+
+**Abweichung bei User Stories.** Kiro führt die Requirements als User Stories mit Akzeptanzkriterien. Im Regelwerk ist eine User Story kein Spec-Dokument, sondern Slice-Klasse und gehört unter `docs/plan/planning/`: Given/When/Then deklariert kein Stratum ([Referenz-Richtung §Spec-Straten](referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)).

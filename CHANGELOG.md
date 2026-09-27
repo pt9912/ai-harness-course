@@ -11,6 +11,108 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 143 — 2026-09-27 · Einordnung: das Regelwerk ist spec-anchored
+
+Anlass: Die Frage, ob das Regelwerk Spec-Driven Development (SDD) abdeckt. Im
+Korpus kam der Begriff vor dieser Welle nirgends vor (`grep` über Kurs, Regelwerk
+und `docs/`: „Spec-Driven", „SDD", „spec-first", „Kiro", „Spec Kit", „Tessl" —
+kein Treffer), obwohl Modul 1, 3, 5 und 9 den Ablauf tragen.
+
+- Kurs `grundlagen/begriffe.md` (Quelle): neuer Abschnitt „Einordnung:
+  Spec-Driven Development" und eine Glossar-Zeile. Die drei Stufen *spec-first*,
+  *spec-anchored*, *spec-as-source* stehen wörtlich nach Böckeler
+  (*Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl*,
+  martinfowler.com, 15. Oktober 2025, im Originaltext gelesen). Das Regelwerk ist
+  *spec-anchored* („spec-verankert", ein Sprachvorschlag, kein etablierter
+  Fachbegriff). *Spec-as-source* **schließt das Regelwerk nicht aus**: Es setzt nicht
+  voraus, dass ein Mensch Code schreibt (den schreibt der Implementer-Agent), und
+  die Verifikation prüft den Code gegen die Spec (Modul 1) — das sind
+  Voraussetzungen, nicht der Betrieb. Dass die Spec die *Quelle* des Codes ist,
+  der Code also aus ihr neu erzeugt werden kann, sagt das Regelwerk nicht; eigene
+  Regeln dafür — Regenerierbarkeit des Codes, Kennzeichnung erzeugten Codes —
+  enthält es nicht (`grep` nach „generiert", „regeneriert", „erzeugter Code":
+  drei Treffer, keiner regelt Code aus der Spec). Eine Tabelle ordnet die
+  Bausteine, die Böckeler bei Kiro und Spec Kit nennt (Constitution,
+  Requirements/Specify, Design/Plan, Tasks), dem Regelwerk zu; die **Abweichung
+  bei User Stories** steht ausdrücklich: Kiro führt sie als Requirements, im
+  Regelwerk sind sie Slice-Klasse und keine Spec (`referenz-richtung.md`
+  §Spec-Straten).
+- Kurs `abschluss/quellen.md`: die Quelle ist eingetragen.
+- Wurzel-`README.md`: SDD (spec-anchored) an drei Stellen — ein Satz im Einstieg,
+  ein eigener Abschnitt „Spec-Driven Development (spec-anchored)" vor der
+  Zielgruppe (die drei Stufen, was der Kurs auf dieser Stufe tut, die Grenze zu
+  *spec-as-source*, Link auf das Glossar) und ein Punkt in „Einordnung der
+  Quellen". Das README hatte keinen Treffer für den Begriff; es ist der Einstieg
+  für Menschen (der Einstieg für Agenten ist das Regelwerk-README). Keine
+  Regelwerk-Datei, löst weder Spiegel noch `Stand:` aus.
+- GitHub-About (außerhalb des Repos, nicht Teil des Commits): Beschreibung um
+  „Spec-Driven Development (spec-anchored)" erweitert, Topic
+  `spec-driven-development` ergänzt; die Topics `sdd` und `spec-anchored` standen
+  schon.
+- `lab/regelwerk/README.md`: ein Satz im **Geltungsbereich**, **selbsttragend** und
+  mit Quelle — er nennt Böckeler und den Artikel, zitiert die Definitionen von
+  *spec-anchored* und *spec-as-source* im Wortlaut und verweist nicht auf den
+  Kurs, dessen Glossar im Bundle fehlt (der Regelwerk-Spiegel trägt keine
+  Verweise auf nicht mitreisendes Material). Zu *spec-as-source* sagt er „schließt
+  das Regelwerk nicht aus; belegt oder geregelt ist es nicht" — der Zusatz nimmt
+  dem Satz die Lesart eines getesteten Umfangs, die der Absatz (Test gegen
+  Entwurf) sonst nahelegt; `Stand:` auf Welle 143.
+- Spiegel `grundlagen-begriffe.md`: **unverändert**.
+
+**Warum nicht im Spiegel:** Das Wurzel-README (§Betriebsregelwerk) und
+`lab/regelwerk/README.md` nennen das Regelwerk einen didaktikfreien Extrakt. Ein
+erster Stand hatte Abschnitt und Zeile im Spiegel (gemessen: +2.865 Zeichen, +27 %
+der Datei, davon 434 die Stufen-Zitate). Die Weglass-Probe
+(`docs/regelwerk-extrakt.md` Teil 1) trug das nicht: Die User-Story-Regel steht
+schon im Spiegel (Referenz-Richtung, Modul 3 seit Welle 140), die Zuordnung der
+Bausteine ist Nachschlagen, keine Entscheidung. Übrig blieb eine Aussage zum
+Geltungsbereich, und die steht im README (rund 250 Zeichen statt 2.900).
+
+**Korrekturen auf dem Weg (Review):** Der erste Stand kürzte zwei der drei
+Definitionen (*spec-first* ohne „for the task at hand", *spec-anchored* ohne „of the
+respective feature") und nannte sie trotzdem wörtlich — die Sätze stammten aus der
+Zusammenfassung des Abruf-Werkzeugs, nicht aus dem Originaltext; berichtigt gegen
+den direkt abgerufenen Text, dort stehen auch Kiro (Requirements → Design → Tasks,
+User Stories mit Akzeptanzkriterien in „GIVEN… WHEN… THEN…") und Spec Kit
+(Constitution; die Schritte specify, plan, tasks). Weiter: Die Zeile „Requirements"
+verwies auf das Lastenheft und nahm die User-Story-Abweichung erst später zurück —
+sie verweist jetzt selbst darauf; „Tasks" stand auf Slice, Roadmap und Welle, die
+Zeile trennt jetzt Slice mit DoD und Datei-Tabelle von Roadmap und Wellen; die
+SDD-Definition war eine eigene Formulierung und steht jetzt in Böckelers Wortlaut
+zur *Spec*; „lehrt keinen bestimmten SDD-Ablauf" widersprach dem Umsetzungs-Workflow
+im selben Abschnitt und heißt jetzt: kein SDD-Werkzeug und kein Ablauf eines
+solchen Werkzeugs, der eigene Ablauf ist der Entwicklungszyklus (Modul 1). Der
+erste Wortlaut „*spec-as-source* ist nicht Gegenstand dieser Fassung" sagte zu viel
+(es ist nicht ausgeschlossen); der zweite, „ist mit dem Regelwerk möglich", zu
+viel in die andere Richtung — die beiden Gründe zeigen nur, dass ein Agent den Code
+schreiben darf, nicht dass die Spec dessen Quelle ist. Im Kurs heißt es jetzt „schließt das
+Regelwerk nicht aus", mit dem Zusatz, dass die Quelle-Eigenschaft nicht geregelt
+ist und offen bleibt, wie von Hand geschriebene Gates und Hard Rules zu „der
+Mensch fasst den Code nie an" passen; das Regelwerk-README sagt dasselbe
+knapper („belegt oder geregelt ist es nicht"). Der README-Satz verwies zuerst auf das Kurs-Glossar, das im Bundle
+fehlt, und erklärte die Stufen mit eigenen Worten statt im Wortlaut; das hat der
+Review gefunden.
+
+Kein Sensor, kein beobachtbares Verhalten, kein Team-Sim-Szenario (AGENTS.md §3).
+**Korrekturen aus dem letzten Review:** „Die Closure trägt einen Rückkanal zur
+Spec" gab Modul 1 stärker wieder, als es dort steht (das Wort „Rückkanal" kommt in
+keinem Modul vor; nur die *benannte Spec-Lücke* — aus Closure oder Verifikation —
+geht in die Spec, die anderen beiden Formen des Lerneintrags gehen in `AGENTS.md`,
+ein Gate oder eine Skill-Datei): jetzt im Vokabular von Modul 1 („Rückwärtspfad",
+„benannte Spec-Lücke"), in `README.md` und im Glossar. Der Index
+`kurs/de/grundlagen/README.md` nennt die Einordnung in der Zeile zu `begriffe.md`.
+Der Geltungsbereich-Satz im Regelwerk-README trägt seine zwei Gründe jetzt selbst
+(Implementer-Agent, Verifikation an der Spec), weil das Bundle den Kurs-Abschnitt
+nicht enthält.
+
+**Bewusst nicht enthalten:** eine Abkürzung („SAD" ist nicht etabliert: ein
+einzelnes Repo nennt „Goal-Gated Spec-Anchored Development" so, eine andere
+Methodik „Stakeholder-Anchored Development"; im Umfeld steht sie meist für
+„Software Architecture Document"), die Behauptung eines Werkzeug-Ablaufs
+(`clarify`, `analyze` und andere Spec-Kit-Befehle stehen nur in Zweitquellen, nicht
+im gelesenen Original) und ein Praxisbeleg für *spec-as-source*: „schließt nicht aus" stützt
+sich auf den Aufbau des Regelwerks, nicht auf einen Lauf.
+
 ## Welle 142 — 2026-09-26 · Fehlannahmen im Spiegel: jeder Punkt trägt seine Behauptung
 
 Anlass: Der Bericht zum Eval-Lauf (Welle 140) meldete, die „Fehlannahmen"-Absätze

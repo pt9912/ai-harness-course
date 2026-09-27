@@ -2,6 +2,8 @@
 
 Dieser Kurs vermittelt einen vollständigen, auditierbaren Entwicklungsprozess mit KI-Agenten — nicht primär, wie man einen KI-Agenten bedient, sondern wie man die Umgebung gestaltet, in der ein Agent reproduzierbar, überprüfbar und konsequent entlang einer Spezifikation arbeitet.
 
+Der Prozess ist **Spec-Driven Development auf der Stufe *spec-anchored***: Die Spec wird vor der Umsetzung geschrieben, bleibt danach bestehen und wird mitgeführt ([Einordnung](#spec-driven-development-spec-anchored)).
+
 **Harness Engineering** umfasst alles am Agentensystem außer dem Modell selbst.
 Der Kurs konkretisiert diesen Rahmen durch Spezifikationen, ADRs, Slice-Pläne, Werkzeuge, Quality Gates, Telemetrie und Betriebsregeln.
 **Guides und Sensors** klassifizieren die Kontrollen in einer 2×2-Matrix (Feedforward/Feedback × Computational/Inferential).
@@ -18,6 +20,18 @@ Herkunft und Verbindung dieser Ansätze erläutert die [Einordnung der Quellen](
 * **Regelwerk nachschlagen:** [Betriebsregelwerk für Code-Agenten](lab/regelwerk/README.md)
 * **Regelwerk und Templates ohne Installation ins eigene Repo holen:** [Baseline Bundle](#baseline-bundle)
 * **Ein Repo komplett aufsetzen, Gates inklusive:** [`ai-harness-init`](#automatisierter-bootstrap)
+
+---
+
+## Spec-Driven Development (spec-anchored)
+
+Birgitta Böckeler unterscheidet drei Stufen von Spec-Driven Development (SDD): *spec-first* (die Spec wird zuerst geschrieben), *spec-anchored* (die Spec bleibt bestehen und wird mitgeführt) und *spec-as-source* (nur die Spec wird von Menschen bearbeitet). Der Kurs arbeitet auf der Stufe **spec-anchored** („spec-verankert"):
+
+* Die Spec hat drei Straten (Lastenheft › Spezifikation › Architektur) und wird über ADRs geschärft.
+* Slices setzen sie um; eine benannte Spec-Lücke aus Closure oder Verifikation fließt über den Rückwärtspfad in die Spec zurück.
+* Gates und Fitness Functions setzen die Festlegungen am Code durch.
+
+*Spec-as-source* schließt der Kurs nicht aus, belegt oder regelt es aber nicht. Der Kurs schreibt kein SDD-Werkzeug und keinen Ablauf eines solchen Werkzeugs vor. Wo die Bausteine von Kiro und Spec Kit im Regelwerk liegen, zeigt die [Einordnung im Glossar](kurs/de/grundlagen/begriffe.md#einordnung-spec-driven-development).
 
 ---
 
@@ -190,6 +204,7 @@ Der Kurs verbindet mehrere veröffentlichte Ansätze zu einem konsistenten Entwi
 
 * **Birgitta Böckeler** beschreibt in [*Harness engineering for coding agent users*](https://martinfowler.com/articles/harness-engineering.html) Harness Engineering sowie die Klassifikation von Guides und Sensors anhand der 2×2-Matrix (Feedforward/Feedback × Computational/Inferential).
 * **Ryan Lopopolo** beschreibt im OpenAI-Beitrag [*Harness Engineering: Leveraging Codex in an Agent-First World*](https://openai.com/index/harness-engineering/) Context Engineering, Architectural Constraints und Entropy Management als operative Arbeitsschwerpunkte.
+* **Birgitta Böckeler** ordnet in [*Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl*](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html) Spec-Driven Development in drei Stufen (*spec-first*, *spec-anchored*, *spec-as-source*). Der Kurs arbeitet auf der Stufe *spec-anchored*; die [Einordnung im Glossar](kurs/de/grundlagen/begriffe.md#einordnung-spec-driven-development) zeigt, wo die Bausteine liegen.
 * Die konkrete Struktur des Kurses — insbesondere die Verbindung dieser Konzepte mit den sechs Agentenrollen und der Source Precedence — ist eine eigenständige didaktische und organisatorische Ausarbeitung.
 
 Weitere fachliche und didaktische Belege stehen im [Quellenverzeichnis](kurs/de/abschluss/quellen.md).

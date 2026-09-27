@@ -18,7 +18,7 @@ liest, lädt sich Modul-2-Tiefe auf, bevor ein Kontext dafür existiert.
 
 | Datei | Inhalt |
 |---|---|
-| [`begriffe.md`](begriffe.md) | Glossar der Kernbegriffe, Trennschärfen |
+| [`begriffe.md`](begriffe.md) | Glossar der Kernbegriffe, Trennschärfen, Einordnung: Spec-Driven Development |
 | [`source-precedence.md`](source-precedence.md) | Source Precedence, Spec-Stratifizierung, ID-Schema als Klammer |
 | [`referenz-richtung.md`](referenz-richtung.md) | Referenz-Richtung (SDP), Referenzmatrix, Spec-Straten |
 | [`harness-dateien.md`](harness-dateien.md) | Verzeichniskonvention, Template-Schichtung, was ein Kommentar trägt (Code/Config/Skripte) und was Zustandsfelder tragen, `harness/README.md`- und `conventions.md`-Pattern |

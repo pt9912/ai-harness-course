@@ -1,10 +1,16 @@
 # Regelwerk — der Kurs als Betriebsregelwerk, nach Modulen
 
-**Stand:** Kurs-Welle 142 · 2026-09-26.
+**Stand:** Kurs-Welle 143 · 2026-09-27.
 
 **Geltungsbereich:** getestet und gelebt mit **einem schreibenden Menschen plus
 Agenten** je Repository; die Mehr-Schreiber-Fassung ist entworfen, nicht
-belegt.
+belegt. Nach den Stufen von Böckeler (*Understanding Spec-Driven-Development*,
+martinfowler.com, 15. Oktober 2025) ist das Regelwerk *spec-anchored*
+(„spec-verankert"): „The spec is kept even after the task is complete, to continue
+using it for evolution and maintenance of the respective feature". *Spec-as-source*
+(„only the spec is edited by the human, the human never touches the code")
+schließt das Regelwerk nicht aus (der Implementer-Agent schreibt den Code, die
+Verifikation prüft ihn gegen die Spec); belegt oder geregelt ist es nicht.
 
 Die 17 Module (0–16) **und die Grundlagen-Abschnitte** des Kurses als
 **Betriebsregelwerk für Code-Agenten** — didaktik-freier Extrakt (Regeln, Konventionen, Abläufe in
