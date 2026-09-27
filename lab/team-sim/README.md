@@ -51,8 +51,29 @@ denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
 einem offenen PR liegt, ist für andere nicht da" real.
 
-## Die Szenarien und ihre Läufe (erster Lauf 2026-08-16, 9/9; erweitert 2026-08-21, 11/11; erweitert 2026-08-22 auf d-check v0.62.0, 16/16; Form Welle 87, 16/16 · 0 KAPUTT; erweitert Welle 88 um s08–s11, 23/23 · 0 KAPUTT; nachgeprüft 2026-08-23 auf d-check v0.63.0, 23/23 · 0 KAPUTT; erweitert 2026-08-31 um s12–s18 auf d-check v0.67.0, 36/36 · 0 KAPUTT; nachgefahren auf v0.71.1 mit gedrehten Erwartungen s15b/s16c, 36/36 · 0 KAPUTT; erweitert 2026-08-31 um s19, 46/46 · 0 KAPUTT; erweitert 2026-09-06 um s20 auf d-check v0.74.1, 52/52 · 0 KAPUTT; erweitert 2026-09-06 um s21, 54/54 · 0 KAPUTT; erweitert 2026-09-06 um s22, 58/58 · 0 KAPUTT; erweitert 2026-09-08 um s23, 63/63 · 0 KAPUTT; erweitert 2026-09-08 um s24, 72/72 · 0 KAPUTT; erweitert 2026-09-16 um s25, 76/76 · 0 KAPUTT; erweitert 2026-09-24 um s26, 80/80 · 0 KAPUTT; nachgefahren 2026-09-24 auf d-check v0.77.0, 80/80 · 0 KAPUTT; erweitert 2026-09-25 um s27, 84/84 · 0 KAPUTT)
+## Die Szenarien und ihre Läufe
 
+| Datum | d-check | Ergebnis (`ergebnis`-Feld aus `manifest.yaml`) | Was |
+|---|---|---|---|
+| 2026-08-16 | `v0.59.0` | 9 PASS, 0 FAIL | erster Lauf |
+| 2026-08-21 | `v0.59.0` | 11 PASS, 0 FAIL | erweitert um s04c–d |
+| 2026-08-22 | `v0.62.0` | 16 PASS, 0 FAIL | erweitert um s04e–i |
+| 2026-08-22 | `v0.62.0` | 16 PASS, 0 FAIL, 0 KAPUTT | Form Welle 87 — Auswahl, `ergebnis.tsv`, Schritt-Wächter, Befund gezielt |
+| 2026-08-22 | `v0.62.0` | 23 PASS, 0 FAIL, 0 KAPUTT | erweitert Welle 88 um s08–s11 |
+| 2026-08-23 | `v0.63.0` | 23 PASS, 0 FAIL, 0 KAPUTT | nachgeprüft |
+| 2026-08-31 | `v0.67.0` | 36 PASS, 0 FAIL, 0 KAPUTT | erweitert um s12–s18 |
+| 2026-08-31 | `v0.71.1` | 36 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, gedrehte Erwartungen s15b/s16c |
+| 2026-08-31 | `v0.71.1` | 46 PASS, 0 FAIL, 0 KAPUTT | erweitert um s19 |
+| 2026-09-06 | `v0.74.1` | 52 PASS, 0 FAIL, 0 KAPUTT | erweitert um s20 |
+| 2026-09-06 | `v0.74.1` | 54 PASS, 0 FAIL, 0 KAPUTT | erweitert um s21 |
+| 2026-09-06 | `v0.74.1` | 58 PASS, 0 FAIL, 0 KAPUTT | erweitert um s22 |
+| 2026-09-08 | `v0.74.1` | 63 PASS, 0 FAIL, 0 KAPUTT | erweitert um s23 |
+| 2026-09-08 | `v0.74.1` | 72 PASS, 0 FAIL, 0 KAPUTT | erweitert um s24 |
+| 2026-09-16 | `v0.74.1` | 76 PASS, 0 FAIL, 0 KAPUTT | erweitert um s25 |
+| 2026-09-24 | `v0.74.1` | 80 PASS, 0 FAIL, 0 KAPUTT | erweitert um s26 |
+| 2026-09-24 | `v0.77.0` | 80 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.74.1 → v0.77.0 |
+| 2026-09-25 | `v0.77.0` | 84 PASS, 0 FAIL, 0 KAPUTT | erweitert um s27 |
+| 2026-09-27 | `v0.78.0` | 89 PASS, 0 FAIL, 0 KAPUTT | erweitert um s28 |
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
 Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
@@ -143,6 +164,11 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s27b | `spec/spezifikation.md` nennt `ADR-IDX-0004` blank | **`id-unlinked`** | ✓ das Muster nimmt das Bereichssegment; ohne es bliebe die Kennung unbeanstandet |
 | s27c | `spec/architecture.md` nennt `ADR-0001` in Inline-Code | **`id-unlinked`** | ✓ `link-policy: always`; ohne sie ist Inline-Code frei |
 | s27d | eine Notiz **verlinkt** `ADR-0001` und nennt das Wort `ADR-` ohne Nummer | **still**, während s27a–c im selben Lauf laut sind | ✓ der Link ist der Ausweg; das Wort ohne Nummer ist ein hingenommenes Negativ |
+| s28a | `below.md` hat genau 200 Zeilen, Budget 200 | **still** | ✓ Grenzwert inklusiv |
+| s28b | `above.md` hat 201 Zeilen, Budget 200 | **`file-lines-exceeded`** | ✓ eine Zeile drüber ist schon zu viel |
+| s28e | eine Regel trifft mit ihrem Glob keine Datei | **`file-no-match`** | ✓ fail-closed, im selben Lauf wie s28a-b — die Behauptung stand vorher nur an einem Scratch-Fixture (Review-Nachtrag) |
+| s28c | Budget für `below.md` auf 190 gesenkt, Datei bleibt bei 200 | **`file-lines-exceeded`**, sofort | ✓ kein Gnadenfrist-Verhalten — die Zusage von d-check selbst |
+| s28d | `below.md` auf 190 Zeilen gekürzt, Budget bleibt 190 | **still** wieder | ✓ Kürzen stellt Grün wieder her |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

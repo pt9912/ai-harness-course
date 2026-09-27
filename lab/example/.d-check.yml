@@ -4,7 +4,7 @@
 # fuer nicht grep-bar. Der Kurs loest sie ueber den umgekehrten Default: Die
 # Kante gilt als verboten, die Ausnahme wird am Ort deklariert.
 #
-# Fuenf Module, aber kein `links`/`anchors`: Link- und Anker-Pruefung laeuft an der Kurs-Wurzel, die den
+# Sechs Module, aber kein `links`/`anchors`: Link- und Anker-Pruefung laeuft an der Kurs-Wurzel, die den
 # ganzen Baum sieht: Dieses Verzeichnis ist ein Teilbaum und verlinkt bewusst
 # in den Kurs; ein `links`-Lauf in diesem Scope meldete 63 Repo-Escapes.
 scan:
@@ -22,7 +22,7 @@ scan:
   # `git archive HEAD lab/example` nachstellen und dagegen laufen lassen.
   ignore: ["**/build/**", "**/build-cov/**", "**/target/**", "**/.gradle/**",
            "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**"]
-modules: [matrix, targets, planning, ids, reviews]
+modules: [matrix, targets, planning, ids, reviews, file]
 
 matrix:
   classes:
@@ -303,3 +303,14 @@ ids:
 reviews:
   done-dir: docs/plan/planning/done
   reviews-dir: docs/reviews
+
+# Guide-Datei-Wildwuchs (Kurs `grundlagen-klassifikation.md` §Entropy Management,
+# Welle 147): AGENTS.md wird bei jedem Lauf gelesen, und eine Regel, die einen
+# Einzelfall behebt, bleibt stehen, auch wenn ein Gate sie laengst deckt. `file`
+# prueft die ganze Datei, nicht nur einen Abschnitt (dafuer gibt es hier noch
+# keine wachsende Baustelle). Startwert: Ist-Zeilenzahl (159) plus Marge, kein
+# erfundener Zielwert — sinken ist immer erlaubt, steigen nur mit sichtbarem
+# Commit an dieser Zeile (Ratchet, kein Rueckbau-Zwang).
+file:
+  - files: AGENTS.md
+    max-lines: 200

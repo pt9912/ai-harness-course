@@ -1575,6 +1575,66 @@ EOF
   verdikt "s27d verlinkte Kennung und das Wort ADR- ohne Nummer: STILL" "kein Befund auf docs/notiz.md, waehrend s27a-c im selben Lauf laut sind" "$n Treffer / $(echo "$out"|tail -1)" $ok
 }
 
+s28_guide_datei_wildwuchs() {
+  # --- s28a-e: das file-Modul (d-check v0.78.0, Welle 147) als Gegenmittel
+  # gegen Guide-Datei-Wildwuchs. Gegenstand ist der Ratchet-Gedanke: senken
+  # wirkt sofort (kein Gnadenfrist-Verhalten, d-checks eigene Zusage), steigen
+  # nicht verhindert, aber nie still — und Kuerzen stellt Gruen wieder her.
+  # s28e prueft die dritte im CHANGELOG behauptete Eigenschaft (fail-closed
+  # bei Null-Treffern), vorher nur an einem Scratch-Fixture gemessen, nicht
+  # in Team-Sim (AGENTS.md §3: eine behauptete Sensor-Eigenschaft bekommt ihr
+  # Szenario, bevor sie stehen bleibt).
+  topo; cd "$WORK/sim/alice" || return 1
+  sed -i 's/^modules: \[/modules: [file, /' .d-check.yml
+  cat >> .d-check.yml <<'EOF'
+file:
+  - files: below.md
+    max-lines: 200
+  - files: above.md
+    max-lines: 200
+  - files: "nirgendwo-*.md"
+    max-lines: 5
+EOF
+  seq 1 200 | sed 's/^/zeile /' > below.md
+  seq 1 201 | sed 's/^/zeile /' > above.md
+  # Vorbedingung: below.md hat wirklich 200 Zeilen — sonst bestuende s28a auch
+  # ueber einer leeren/kaputten Datei (Welle 121, AGENTS.md §3).
+  schritt test "$(wc -l < below.md)" = 200 || return 1
+  schritt git add -A && schritt git commit -qm "zwei Dateien, eine im Budget, eine drueber" || return 1
+  schritt grep -q '^modules: \[file' .d-check.yml || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  n=$(printf '%s' "$out" | grep "^below.md:" | wc -l)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s28a Datei genau im Budget (200/200): STILL" "kein Befund auf below.md" "$n Treffer / $(echo "$out"|tail -1)" $ok
+  befund_in "$out" "above.md" "above.md" "file-lines-exceeded" && ok=0 || ok=1
+  verdikt "s28b Datei ueber dem Budget (201/200): LAUT" "file-lines-exceeded auf above.md, waehrend below.md im selben Lauf still ist" "$(echo "$out"|tail -1)" $ok
+  befund_in "$out" "nirgendwo-\*.md" "nirgendwo-\*.md" "file-no-match" && ok=0 || ok=1
+  verdikt "s28e Regel ohne Treffer: LAUT, fail-closed" "file-no-match auf dem Glob, im selben Lauf wie s28a-b" "$(echo "$out"|tail -1)" $ok
+
+  # Budget fuer below.md senken, Datei UNVERAENDERT (bleibt 200 Zeilen) —
+  # dieselbe Datei, die eben still war, wird jetzt laut. Kein Nachfrist-Effekt.
+  sed -i '/files: below.md/{n;s/max-lines: 200/max-lines: 190/}' .d-check.yml
+  # Vorbedingung prueft die Wirkung des sed auf der RICHTIGEN Zeile (below.mds
+  # eigener max-lines-Wert), nicht nur, dass die Zahl irgendwo im Dokument
+  # steht — above.md haette denselben String liefern koennen (Review-Fund).
+  schritt bash -c "awk '/files: below.md/{getline; print; exit}' .d-check.yml | grep -q 'max-lines: 190'" || return 1
+  schritt git add -A && schritt git commit -qm "Budget fuer below.md gesenkt, Datei nicht angefasst" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "below.md" "below.md" "file-lines-exceeded" && ok=0 || ok=1
+  verdikt "s28c gesenktes Budget (200 Zeilen gegen 190): LAUT, sofort" "file-lines-exceeded auf below.md, ohne dass die Datei sich geaendert hat — kein Gnadenfrist-Verhalten" "$(echo "$out"|tail -1)" $ok
+
+  # Jetzt tatsaechlich kuerzen (das eigentliche Pruning) — Budget bleibt 190.
+  seq 1 190 | sed 's/^/zeile /' > below.md
+  # Vorbedingung: die Kuerzung hat wirklich 190 Zeilen erzeugt — sonst bestuende
+  # s28d auch ueber einer leeren/zu kurzen Datei (Welle 121, AGENTS.md §3).
+  schritt test "$(wc -l < below.md)" = 190 || return 1
+  schritt git add -A && schritt git commit -qm "below.md auf 190 Zeilen gekuerzt" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  n=$(printf '%s' "$out" | grep "^below.md:" | wc -l)
+  [ "$n" = 0 ] && ok=0 || ok=1
+  verdikt "s28d Kuerzung auf das gesenkte Budget (190/190): STILL wieder" "kein Befund auf below.md nach dem Pruning" "$n Treffer / $(echo "$out"|tail -1)" $ok
+}
+
 # ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
@@ -1606,6 +1666,7 @@ lauf s24 s24_vorabvergabe
 lauf s25 s25_gegenstand_uebernommen
 lauf s26 s26_matrix_planungsspalten
 lauf s27 s27_adr_kennung_linkpflicht
+lauf s28 s28_guide_datei_wildwuchs
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

@@ -11,6 +11,142 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 147 — 2026-09-27 · Guide-Datei-Wildwuchs: eine Zeilen-Obergrenze, die nur mit sichtbarem Commit steigt
+
+Anlass: d-check v0.78.0 beantwortet die beiden offenen CRs dieses Repos
+(`--suggest-config` erkennt `-RB-` bedingt, `structure` bekommt `max-lines`)
+und liefert zusätzlich ein neues Modul `file` (Zeilen-/Byte-Obergrenzen einer
+**ganzen** Datei) — laut d-check-CHANGELOG mit dem Anlass, „den Umfang von
+`AGENTS.md` sichtbar zu machen". Das trifft die Frage der Wellen 145/146
+direkter als der ursprüngliche CR: kein Abschnitts-Format nötig, die ganze
+Datei zählt.
+
+- Kurs `grundlagen/klassifikation.md` §Entropy Management (Quelle): fünfte
+  Verfallsform „Guide-Datei-Wildwuchs" — anders als die vier Trigger-Klassen
+  keine einzelne unbesehene Zeile, sondern die Summe: die Datei wächst, ohne
+  dass je etwas weicht. Lösung: eine Zeilen-/Byte-Obergrenze, die nur mit
+  sichtbarem Commit steigt, nie still (`file.max-lines`/`max-bytes`). Spiegel
+  wortgleich.
+- `lab/example/.d-check.yml`: `file` aktiv, `AGENTS.md` mit `max-lines: 200`
+  (Ist-Zeilenzahl 159 plus Marge, kein erfundener Zielwert — Startwert-Politik
+  wie bei einem Bootstrap-aware Gate).
+- `lab/templates/.d-check.yml`: derselbe Block auskommentiert, mit der
+  Startwert-Regel im Kommentar (Ist-Zeilenzahl + Marge einsetzen, nicht
+  erfinden).
+- `lab/regelwerk/README.md`: `Stand:` auf Welle 147.
+- `docs/roadmap.md`: Faden „Trigger-Form und -Alter sind ungeprüft" zunächst
+  fälschlich vollständig geschlossen (siehe Korrektur unten) — richtig
+  geschlossen ist nur die Guide-Datei-Wildwuchs-Hälfte; ein neuer, engerer
+  Faden „Trigger-*Form* je Eintrag ist ungeprüft" bleibt offen (Pflichtfeld je
+  Carveout/ADR/Hard-Rule-Eintrag, danach Staleness — `file.max-lines` prüft nur
+  die Summe einer Datei, nicht die Form eines einzelnen Eintrags).
+- Pin-Bump auf v0.78.0 bereits separat committet (`chore(d-check)`, kein Teil
+  dieser Welle).
+
+**Gemessen** (Scratch-Fixture gegen d-check v0.78.0, `--network none`): 200
+Zeilen grün, 201 Zeilen `file-lines-exceeded`, eine Regel ohne Treffer
+`file-no-match` (fail-closed). `lab/team-sim`: neue Gruppe **s28** (`s28a–e`) —
+Datei im Budget still, drüber laut, eine Regel ohne Treffer laut (`file-no-match`,
+fail-closed), gesenktes Budget ohne Dateiänderung sofort laut (kein
+Gnadenfrist-Verhalten, d-checks eigene Zusage), Kürzung auf das neue Budget
+wieder still. Manifest, README-Tabelle und -Kopf nachgezogen; 89/89, 0 KAPUTT.
+
+**Bewusst nicht aktiviert:** `structure.max-lines` (der ursprüngliche CR) —
+`file` deckt den eigentlichen Fall (ganze Datei) einfacher; ein
+abschnittsweises Budget bliebe für Dateien mit mehreren Themen wie
+`harness/README.md` §Sensors ein eigener, späterer Schritt.
+`harness/conventions.md` bleibt ausgenommen: Das Verzeichnis-Modell
+(`conventions/`, `done/`) hat das Problem schon strukturell gelöst.
+
+**Korrekturen aus zwei Review-Runden:** `lab/example/.d-check.yml` aktivierte
+`file` als sechstes Modul, ohne die MR-002-Doku nachzuziehen —
+`harness/sensors/doc-check.md`, `harness/README.md` §Sensors (Zeile *und*
+Bindungs-Zahl) und der eigene `.d-check.yml`-Kommentar behaupteten weiter
+„Fünf Module" und hätten die Klasse dieser Welle selbst wieder eingeführt: ein
+Gate, das niemand dokumentiert, prüft niemand. Auf sechs Module nachgezogen,
+mit Bindung auf `klassifikation.md` §Entropy Management. Die drei
+`python3`-Aufrufe in `s28` (Fixture-Erzeugung) durch `seq | sed` ersetzt —
+dieselbe Ausgabe, keine neue Abhängigkeit, die `run.sh` vorher nicht hatte.
+Die Behauptung „`file-no-match` (fail-closed)" stand nur an einem
+Scratch-Fixture, nicht in Team-Sim (AGENTS.md §3) — jetzt `s28e`, im selben
+Lauf wie s28a-b (Manifest-`neu:` nachgezogen, hatte `s28e` zunächst
+vergessen). Und: die neue README-Tabelle hatte „0 KAPUTT" an drei Läufe vor
+Welle 87 geschrieben, die den Begriff noch gar nicht kannten (`manifest.yaml`
+selbst führt dort nur „PASS, FAIL") — die Spalte zitiert jetzt das
+`ergebnis`-Feld wörtlich, keine Zahl dazuerfunden. `harness/README.md` nannte
+nach der Vier-Grenzen-Ergänzung noch „drei Grenzen" — auf vier korrigiert.
+**Die grundsätzlichste Korrektur:** Der Roadmap-Faden wurde zu weit
+geschlossen — `file.max-lines` beantwortet „wächst die Datei insgesamt zu
+sehr", nicht „trägt dieser eine Eintrag überhaupt einen Trigger-Vermerk". Ein
+engerer Faden bleibt dafür offen (siehe oben). Zwei weitere Nachträge: die neue
+Roadmap-Zeile stand zunächst über echte Zeilenumbrüche statt einer physischen
+Zeile geschrieben und zerlegte die Markdown-Tabelle — korrigiert; die
+README-Szenario-Tabelle führte `s28e` nicht — Zeile ergänzt.
+
+**Fünfte Review-Runde:** Die Vorbedingung von `s28c` prüfte, ob `.d-check.yml`
+noch `files: below.md` enthält — eine Zeichenkette, die der vorangehende `sed`
+nie berührt, also nie gefährdet war. Sie prüft jetzt `max-lines: 190`, die
+tatsächliche Wirkung des `sed`; ein deaktivierter `sed` bricht jetzt an der
+Vorbedingung selbst (`KAPUTT`), nicht erst später an der Behauptung.
+
+**Sechste Review-Runde, dieselbe Klasse (Welle 121) an zwei weiteren Stellen:**
+s28a und s28d bestehen durch **Abwesenheit** eines Befunds — ohne positive
+Vorbedingung bestünden sie auch über einer leeren oder kaputten `below.md`
+(0 Zeilen liegen unter jedem Budget genauso wie 200 oder 190). Beide tragen
+jetzt `schritt test "$(wc -l < below.md)" = <erwartete Zahl>`. Zusätzlich prüfte
+die `s28c`-Vorbedingung nur, ob `max-lines: 190` irgendwo im Dokument steht —
+eine falsch adressierte Ersetzung (senkt `above.md` statt `below.md`) hätte
+denselben String geliefert und wäre unbemerkt geblieben. Die Vorbedingung liest
+jetzt gezielt die Zeile nach `files: below.md`. Alle drei Mutationen
+(below.md leer, Kürzung liefert 0 Zeilen, falsche Adressierung) durch Mutation
+geprüft: jede bricht jetzt an ihrer eigenen Vorbedingung (`KAPUTT`), keine mehr
+erst an der späteren Behauptung.
+
+**Siebte Review-Runde:** Die neue Tabelle behauptet, ihre Ergebnis-Spalte
+zitiere `manifest.yaml`s `ergebnis`-Feld wörtlich — die Zeile 2026-08-23/v0.63.0
+(„nachgeprüft") hatte dort aber gar keinen Eintrag: 18 `laeufe`-Einträge gegen
+19 Tabellenzeilen. Nachgetragen in `manifest.yaml`, mit offenem Beleg-Stand:
+die Zahl stammt aus der Vorgänger-Prosa dieser Datei, nicht aus einem
+archivierten `ergebnis.tsv`; unabhängig bestätigt ist nur der Pin-Bump selbst
+(CHANGELOG Welle 92). Kein neuer Lauf nachträglich erfunden — die Lücke war im
+Manifest, nicht in der Tabelle.
+
+**Achte Review-Runde:** `.github/workflows/checks.yml` nannte für das
+Beispiel-Repo weiter „fünf Modulen (matrix, targets, planning, ids, reviews)"
+— derselbe Job, den diese Welle jetzt mit sechs Modulen laufen lässt, in einer
+Datei, die keiner der bisherigen sieben Runden ansah. Nachgezogen (Kommentar
+und Step-Name). **Ein zweiter, gemeldeter Fund erwies sich als falsch:** `s28e`
+erkennt `file-no-match` über den Glob als `file`- *und* `target`-Feld — das sah
+nach einer Abweichung vom Muster anderer Config-Befunde aus, ist aber laut
+Spezifikation (`SPEC-084`: „target = die Regel-Identität") und meiner eigenen
+Sonde von vorhin (`kein-treffer-*.md:1 kein-treffer-*.md file-no-match …`,
+gegen das reale Image) genau das reale Verhalten — `s28e` lief seither immer
+gegen `ghcr.io/pt9912/d-check:v0.78.0`, nie gegen eine Annahme. Ein dritter,
+kleinerer Vorschlag (die Abwesenheits-Prüfung `grep "^<datei>:" | wc -l` dreimal
+inline statt als Helfer wie `befund()`/`befund_in()`) bleibt bewusst
+unangetastet — kosmetisch, kein Befund, und ein neuer Helfer bräuchte eine
+eigene Nachprüfung aller Stellen, die ihn nutzen würden.
+
+**Neunte Review-Runde:** Der Titel „sechs d-check-Module über die
+Doku-Referenzen" überzeichnete — fünf Module prüfen Referenzen, `file` prüft
+nur eine Zeilenzahl, gar keine Referenz. Titel und Vertragssatz in
+`doc-check.md` sowie die Sensors-Zeile in `harness/README.md` benennen jetzt
+den Unterschied, statt ihn zu verschweigen; die Seite bleibt eine (derselbe
+`make doc-check`-Lauf, keine Aufspaltung).
+
+**Zehnte Review-Runde:** Zwei Funde. Erstens verlor die neue Roadmap-Zeile die
+Spur der `structure.max-lines`-CR — die (unveränderte) Welle-146-Zeile im
+CHANGELOG verweist ausdrücklich auf `docs/roadmap.md` für deren Stand, die
+Zeile selbst nannte ihn aber nicht mehr, obwohl er inzwischen feststeht
+(beantwortet, bewusst nicht aktiviert, siehe „Bewusst nicht aktiviert" oben).
+Die Roadmap-Zeile trägt jetzt beides nach: die CR-Antwort und dass die alte
+Beobachtung (`pg-change-feed`, 1×) der jetzt gelösten Guide-Datei-Wildwuchs-
+Hälfte galt, nicht dem engeren Faden. Zweitens listete `manifest.yaml` die
+Gruppe als `[s28a, s28b, s28c, s28d, s28e]`, `run.sh` führt sie aber in der
+Reihenfolge a, b, e, c, d aus (wie die README-Tabelle) — rein dokumentarisch
+falsch (kein Skript liest die Reihenfolge aus `manifest.yaml`), auf die
+tatsächliche Lauf-Reihenfolge korrigiert, an beiden Stellen der Datei.
+
 ## Welle 146 — 2026-09-27 · Auch das Workflow-Skelett braucht einen Trigger
 
 Anlass: die Folge-Lücke aus Welle 145. Dort wurde Hard Rule die vierte

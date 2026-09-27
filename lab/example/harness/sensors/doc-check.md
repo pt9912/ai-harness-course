@@ -1,12 +1,13 @@
-# `make doc-check` — fünf d-check-Module über die Doku-Referenzen
+# `make doc-check` — sechs d-check-Module
 
 Vertiefung zur Index-Zeile in [`../README.md` §Sensors](../README.md#sensors-feedback-gates).
-Bindung je Modul unten — **eine** Zitation für fünf Module wäre für vier davon
+Bindung je Modul unten — **eine** Zitation für sechs Module wäre für fünf davon
 die falsche.
 
 ## Vertrag
 
-**Fünf Module.**
+**Sechs Module — fünf über Doku-Referenzen, eines über den Umfang einer
+Guide-Datei.**
 
 - **`reviews`** (seit slice-review-report-deckung-per-d-check): Ein `done/`-Slice mit Review-DoD-Zeile
   („Review durchgeführt …") braucht einen Report unter `docs/reviews/` mit
@@ -33,6 +34,10 @@ die falsche.
   oder Slice — **in keinem Abschnitt, auch nicht in seiner Historie**; kein
   Slice referenziert eine superseded ADR; eine ADR nennt einen Slice nur als
   Provenance, markiert mit `<!-- d-check:status-provenance -->`.
+- **`file`** (seit Welle 147, gegen Guide-Datei-Wildwuchs): `AGENTS.md` hat
+  eine Obergrenze von 200 Zeilen — Ist-Zeilenzahl 159 plus Marge, kein
+  erfundener Zielwert. Sinken ist immer erlaubt, steigen nur mit sichtbarem
+  Commit an dieser Zeile (Ratchet, kein Rückbau-Zwang).
 
 ## Grenze — was das Grün nicht abdeckt
 
@@ -48,6 +53,10 @@ die falsche.
    den Block gegen *genau eine* Datei und meldet unter Offene Wellen legitime
    Zustände als Drift; der Ruhe-Marker geht in die Bijektion nicht ein. Heilbar
    — durch die Konfiguration, nicht durch das Werkzeug.
+4. **`file` prüft nur `AGENTS.md`, nur die Zeilenzahl.** Keine Aussage über
+   Inhalt/Qualität, kein Rückbau erzwungen, keine Staleness-Prüfung (ist die
+   Zeile seit Langem unverändert rot). Nur diese eine Datei ist konfiguriert;
+   `harness/README.md` §Sensors trägt keine eigene Obergrenze.
 
 **Wie groß der Prüfbereich ist, sagen zwei Kommandos, nicht diese Datei:**
 `make doc-check 2>&1 | tail -1` nennt die Zahl der geprüften Dateien, und
@@ -57,7 +66,7 @@ committet.
 
 ## Bindung
 
-Alle fünf sind Konventions-Bindungen der Klasse `MR-002`
+Alle sechs sind Konventions-Bindungen der Klasse `MR-002`
 ([`../conventions.md`](../conventions.md#mr-002)); ihre Form ist
 `Kurs §<Abschnitt>` bzw. `Modul <N> §<Abschnitt>`. **Je Modul eine eigene** —
 die Zeile trug lange nur die Bindung von `ids`/`matrix`, und die ist für
@@ -70,3 +79,4 @@ die Zeile trug lange nur die Bindung von `ids`/`matrix`, und die ist für
 | `ids`, `matrix` | [Kurs §Referenz-Richtung](../../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) |
 | `planning` | [Modul 6 §Die Wellen-Eröffnungs-Prozedur](../../../../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) — Ruhe-Marker und Wellen-Invariante |
 | `targets` | [Modul 13 §Hard Rule](../../../../kurs/de/04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin) — halluzinierte Gates; verkoerpert in `AGENTS.md` §3 |
+| `file` | [Kurs §Entropy Management](../../../../kurs/de/grundlagen/klassifikation.md#entropy-management) — Guide-Datei-Wildwuchs |

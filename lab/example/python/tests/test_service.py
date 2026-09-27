@@ -69,7 +69,8 @@ def test_determinism() -> None:
 
 
 def test_search_tie_break() -> None:
-    """slice-tie-break-determinismus: bei gleichem Score lexikographisch nach (doc_path, section_index)."""
+    """slice-tie-break-determinismus: bei gleichem Score lexikographisch
+    nach (doc_path, section_index)."""
     idx = Index()
     emb = MockEmbedder()
     vec = emb.embed("seed")

@@ -119,3 +119,14 @@ modules: [links, anchors]
 # reviews:
 #   done-dir: docs/plan/planning/done
 #   reviews-dir: docs/reviews
+
+# Guide-Datei-Wildwuchs (Kurs `grundlagen-klassifikation.md` §Entropy
+# Management) — aktivieren, sobald AGENTS.md eine erste, gemessene
+# Ist-Zeilenzahl hat: den Startwert auf diese Zahl plus Marge setzen, keinen
+# erfundenen Zielwert eintragen. Sinken ist immer erlaubt, steigen nur mit
+# sichtbarem Commit an dieser Zeile (Ratchet, kein Rueckbau-Zwang). `file`
+# prueft die ganze Datei, unabhaengig von scan.roots/scan.ignore — kein
+# `<modul>.scope` noetig.
+# file:
+#   - files: AGENTS.md
+#     max-lines: <Ist-Zeilenzahl + Marge>

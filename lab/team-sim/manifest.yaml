@@ -75,6 +75,11 @@ gruppen:
   # ohne token. s27a-c laut (Fliesstext, Bereichssegment, Inline-Code), s27d still
   # (verlinkte Kennung, das Wort ADR- ohne Nummer) neben s27a-c im selben Lauf.
   s27: [s27a, s27b, s27c, s27d]
+  # s28: das file-Modul (d-check v0.78.0, Welle 147) gegen Guide-Datei-
+  # Wildwuchs. Gegenstand ist der Ratchet: senken wirkt sofort (kein
+  # Gnadenfrist-Verhalten), steigen wird nicht verhindert, aber nie still,
+  # und Kuerzen stellt Gruen wieder her.
+  s28: [s28a, s28b, s28e, s28c, s28d]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -82,6 +87,7 @@ laeufe:
   - { datum: 2026-08-22, image: v0.62.0, neu: [s04e, s04f, s04g, s04h, s04i], ergebnis: "16 PASS, 0 FAIL" }
   - { datum: 2026-08-22, image: v0.62.0, neu: [], form: "Welle 87 — Auswahl, ergebnis.tsv, Schritt-Waechter, Befund gezielt", ergebnis: "16 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-08-22, image: v0.62.0, neu: [s08a, s08b, s09, s10a, s10b, s11a, s11b], seed: "ADR-0001 + vcs-Block", ergebnis: "23 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-08-23, image: v0.63.0, neu: [], gegenstand: "Pin-Bump v0.62.0 -> v0.63.0 (Welle 92, achte structure-Bedingung); nachgetragen in Welle 147 aus der Vorgaenger-Prosa dieser Datei, nicht aus einem archivierten ergebnis.tsv -- Zahl unabhaengig nur durch den CHANGELOG-Eintrag der Welle bestaetigt, nicht durch einen frischen Lauf", ergebnis: "23 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-08-31, image: v0.67.0, neu: [s12, s13, s14a, s14b, s15a, s15b, s15c, s16a, s16b, s16c, s17, s18a, s18b], gegenstand: "Entwurf: Verzeichnisform des Beobachtungs-Registers (7 Faelle)", ergebnis: "36 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-08-31, image: v0.71.1, neu: [], gegenstand: "Pin-Bump: der s15-Befund ist behoben, s15b + s16c drehen von still auf core-drift-vcs", ergebnis: "36 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-08-31, image: v0.71.1, neu: [s19a, s19b, s19c, s19i, s19d, s19e, s19f, s19g, s19j, s19h], gegenstand: "Entwurf: Zeitdokumente archivieren — die sechs Proben, nach Review-Mutationen nachgeschaerft", ergebnis: "46 PASS, 0 FAIL, 0 KAPUTT" }
@@ -94,3 +100,4 @@ laeufe:
   - { datum: 2026-09-24, image: v0.74.1, neu: [s26a, s26b, s26c, s26d], gegenstand: "Entwurf: die Planungs-Spalten der Referenzmatrix (Welle 138) — Welle, Carveout und Roadmap haben je eine Klasse; spec/adr -> welle|carveout|roadmap sind laut, der Marker am Ort ist still (neben dem lauten Lauf)", ergebnis: "80 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-24, image: v0.77.0, neu: [], gegenstand: "Pin-Bump v0.74.1 -> v0.77.0 (Zwischenversionen opt-in, kein Breaking Change): alle 80 Verdikte unveraendert, keine gedrehte Erwartung", ergebnis: "80 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-25, image: v0.77.0, neu: [s27a, s27b, s27c, s27d], gegenstand: "Entwurf: die ADR-Kennungs-Konfiguration der Vorlage (Welle 139) — `ids` traegt die nackte Kennung allein (Fliesstext, Bereichssegment, Inline-Code laut), das token der adr-Klasse ist redundant; verlinkte Kennung und das Wort ADR- ohne Nummer sind still", ergebnis: "84 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-09-27, image: v0.78.0, neu: [s28a, s28b, s28e, s28c, s28d], gegenstand: "Entwurf: das file-Modul gegen Guide-Datei-Wildwuchs (Welle 147) — Datei im Budget still, drueber laut, gesenktes Budget ohne Aenderung sofort laut (kein Gnadenfrist-Verhalten), Kuerzung auf das neue Budget wieder still, Regel ohne Treffer fail-closed (s28e, Nachtrag nach Review: die Behauptung stand vorher nur an einem Scratch-Fixture)", ergebnis: "89 PASS, 0 FAIL, 0 KAPUTT" }

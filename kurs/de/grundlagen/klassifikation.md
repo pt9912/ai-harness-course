@@ -160,6 +160,7 @@ Code, den er schützen soll. Die typischen Verfallsformen:
 * **Stehengebliebene Reifestufe** — ein bootstrap-aware Gate, dessen Hochschalt-Trigger eintrat, prüft weiter die alte Schwelle. Gleiche Klasse wie Carveout-Wildwuchs.
 * **Abgelaufene Entscheidung** — eine ADR, deren Re-Evaluierungs-Trigger eintrat, gilt unbesehen weiter. Gleiche Klasse wie Carveout-Wildwuchs.
 * **AGENTS.md-Wildwuchs** — eine Hard Rule, deren Auflösungs-Trigger eintrat, steht unbesehen weiter. Gleiche Klasse wie Carveout-Wildwuchs. Lösung für alle vier: **Trigger-Audit** in der Welle-Closure ([Modul 6](../02-planung/modul-06-roadmap.md)).
+* **Guide-Datei-Wildwuchs** — eine Regel, die einen Einzelfall behebt, bleibt in `AGENTS.md`, `harness/README.md` oder einem Slash-Command stehen, auch wenn ein Gate sie längst deckt; niemand bemerkt es, weil kein Sensor die Größe misst. Anders als die vier Trigger-Klassen ist das kein einzelner unbesehener Eintrag, sondern die Summe: die Datei wächst, ohne dass je etwas weicht. Lösung: eine Zeilen-/Byte-Obergrenze der ganzen Datei, die nur mit sichtbarem Commit steigt, nie still (`file.max-lines`/`max-bytes`).
 * **Golden-Set-Überfitting** — Replay grün, Realität rot. Lösung: Golden Sets rotieren, neue Beispiele ziehen.
 
 Entropy Management ist nicht ein eigenes Modul, sondern eine Pflicht, die

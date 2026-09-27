@@ -25,16 +25,16 @@ jobs:
         run: make alignment-check ARGS="--strict"
 
   # `make check` sieht das Beispiel-Repo nicht: Es traegt eine eigene
-  # `.d-check.yml` mit fuenf Modulen (matrix, targets, planning, ids, reviews)
-  # und daneben den Vorfuehr-Gegenstand aus Modul 11. Dieser Job faehrt beides
-  # in CI — damit ist es ein Gate und kein Vorschlag. Der Lauf ist hermetisch
-  # (Container digest-gepinnt, `--network none`), deshalb ist der Job ein
-  # einzelner make-Aufruf und keine Nachbildung.
+  # `.d-check.yml` mit sechs Modulen (matrix, targets, planning, ids, reviews,
+  # file) und daneben den Vorfuehr-Gegenstand aus Modul 11. Dieser Job faehrt
+  # beides in CI — damit ist es ein Gate und kein Vorschlag. Der Lauf ist
+  # hermetisch (Container digest-gepinnt, `--network none`), deshalb ist der
+  # Job ein einzelner make-Aufruf und keine Nachbildung.
   example-verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Doku-Gates des Beispiels (matrix, targets, planning, ids, reviews) + Closure-Notizen
+      - name: Doku-Gates des Beispiels (matrix, targets, planning, ids, reviews, file) + Closure-Notizen
         run: make -C lab/example verify
 
   # ADR-Immutabilitaet braucht eine Commit-Range, deshalb ein eigener Job und
