@@ -11,6 +11,68 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 153 — 2026-09-28 · ADR-Nachzug bei sich änderndem Kontext
+
+Anlass: Vier Konsumenten-Repos haben unabhängig dasselbe Problem gelöst —
+eine `Accepted`-ADR bleibt inhaltlich unveränderlich, aber ihr Kontext
+ändert sich: ein neues Pflichtfeld kommt ins Template, ein automatisiertes
+Werkzeug verschiebt eine Datei, auf die die ADR zeigt, oder die ADR
+verlinkt ein vergängliches Artefakt (Review-Report). Ein Repo löste
+dasselbe Template-Feld-Problem zweimal, sechs Wochen auseinander, mit
+je eigener lokaler Konvention (`MR-002`, dann `MR-009` als Vorbild
+zitierend). Die Hard Rule kannte die Immutabilität, aber kein Verfahren
+für Kontext-Drift.
+
+- Kurs `modul-04-adrs.md` §Hard Rule: neuer Unterabschnitt „Nachzug ist
+  keine Überschreibung" — trennt Referenz-/Pfad-Nachzug und
+  Template-Feld-Nachzug ausdrücklich von einer inhaltlichen Änderung;
+  beide ohne Folge-ADR, solange die Entscheidung selbst unverändert
+  bleibt. Eine als Nachzug getarnte inhaltliche Änderung bleibt ein Bruch
+  der Hard Rule.
+- Spiegel wortgleich in `lab/regelwerk/modul-04-adrs.md`. Kein
+  beobachtbares Verhalten behauptet — eine Einordnungsregel für ADR-Autoren
+  und Reviewer, kein Sensor. `Stand:` auf Welle 153.
+
+## Welle 152 — 2026-09-28 · Vierter Fehlerklassen-Treffer erschöpft die Prosa-Verkörperung
+
+Anlass: Mehrere Konsumenten-Repos zeigen, dass ein 3×-verkörperter
+Steering-Loop-Eintrag — wenn die Verkörperung eine geschärfte
+Prosa-Instruktion statt eines Sensors ist — dieselbe Fehlerklasse nicht
+zuverlässig verhindert: ein Repo dokumentierte mehrere vierte Auftreten
+trotz vorherigem 3×-Verdikt, ein anderes flickte dieselbe Stelle viermal in
+Folge, bevor ein struktureller Umbau kam. Der bestehende
+3×-„im Regelfall verkörpert"-Mechanismus (Welle-Closure, Schritt 3) trifft
+keine Aussage über die *Form* der Verkörperung.
+
+- Kurs `modul-06-roadmap.md` §Die Wellen-Closure-Prozedur, Schritt 3: neuer
+  Absatz nach dem „write-only"-Satz — erreicht dieselbe Fehlerklasse ein
+  **viertes** Mal die Schwelle, gilt eine bereits verkörperte Prosa-Form
+  als ausgeschöpft; der neue Steering-Loop-Eintrag muss dann einen
+  mechanischen Sensor benennen oder explizit begründen, warum keiner
+  möglich ist.
+- Spiegel wortgleich in `lab/regelwerk/modul-06-roadmap.md`, Link auf
+  `grundlagen-durchsetzungsschicht.md` §Grenzen umgehängt. Kein
+  beobachtbares Verhalten behauptet — eine Lese-Regel für die
+  Welle-Closure, kein neuer Sensor. `Stand:` auf Welle 152.
+
+## Welle 151 — 2026-09-28 · Gate-Erweiterung ist nicht automatisch ein ADR-Anlass
+
+Anlass: Ein Konsumenten-Repo stellte zweimal unabhängig dieselbe Frage —
+braucht die Aufnahme eines bereits existierenden Wächters in den
+PR-blockierenden Satz (`make gates`) eine eigene ADR? — jedes Mal über
+Präzedenzfall statt Regel entschieden. `modul-04-adrs.md` kannte bereits den
+Fall „ADR entsteht nicht nur aus Architektur-Fragen" (Rollen-Konflikt), aber
+keine Antwort für Config-/Gate-Erweiterungen.
+
+- Kurs `modul-04-adrs.md` §Kernidee: neuer Absatz nach „Eine ADR entsteht
+  nicht nur aus Architektur-Fragen" — Aufnahme eines bereits existierenden,
+  unabhängig lauffähigen Wächters in `make gates` ist keine eigene
+  ADR-Entscheidung, sofern keine neue Fehlerklasse, kein neuer Scope und
+  kein Widerspruch zu einer bestehenden ADR vorliegt. Im Zweifel: ADR.
+- Spiegel wortgleich in `lab/regelwerk/modul-04-adrs.md` §Kernidee (Modul 4).
+  Kein beobachtbares Verhalten behauptet — eine Einordnungsregel für
+  Reviewer/Architect-Agenten, kein Sensor. `Stand:` auf Welle 151.
+
 ## Welle 150 — 2026-09-27 · Der Planungs-Bestand bekommt seinen eigenen Lese-Schritt
 
 Anlass: Ein Konsumenten-Repo hat selbst benannt und quantifiziert, dass sein

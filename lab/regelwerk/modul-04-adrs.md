@@ -37,6 +37,15 @@ nicht verteidigen.
   ([Modul 8](modul-08-agentenrollen.md#konflikt-pfad-als-rollen-sequenz-modul-8)):
   Die Entscheidung wird immutabel, Widerspruch braucht danach eine Folge-ADR
   mit neuer Evidenz.
+- **Eine Gate-Erweiterung ist nicht automatisch ein ADR-Anlass.** Nimmt
+  `make gates` ([Modul 13](modul-13-quality-gates.md)) einen bereits
+  existierenden, unabhängig lauffähigen Wächter neu in den
+  PR-blockierenden Satz auf, ist das keine neue Entscheidung — ein Verweis
+  auf die ADR reicht, die den Wächter ursprünglich trägt. Existiert keine,
+  trägt schon die *Einführung* des Wächters selbst eine, nicht seine
+  spätere Aufnahme in `make gates`. Eine neue Fehlerklasse, ein neuer Scope
+  oder ein Widerspruch zu einer bestehenden ADR braucht weiterhin eine
+  eigene ADR. Im Zweifel: ADR.
 
 ### Hard Rule für Accepted-ADRs
 
@@ -48,6 +57,30 @@ explizitem Verweis auf die abgelöste oder geschärfte Vorgängerin.
 
 Wirkung: ADRs sind Geschichtsdokumente, kein Wiki. Reviewer-Agent kann
 auf ältere Entscheidungen vertrauen, ohne Versionsstände zu vergleichen.
+
+### Nachzug ist keine Überschreibung
+
+Die Hard Rule verbietet eine *inhaltliche* Überschreibung — nicht jede
+spätere Berührung einer `Accepted`-ADR. Zwei Fälle bleiben davon
+ausdrücklich getrennt, beide ohne Folge-ADR:
+
+- **Referenz-/Pfad-Nachzug.** Eine ADR verweist über eine Kennung, nicht
+  über eine Adresse (dieselbe Doktrin wie bei einfrierenden Artefakten,
+  [`grundlagen-harness-dateien.md`](grundlagen-harness-dateien.md)) — wo
+  das nicht möglich ist, etwa bei einem Verweis auf ein vergängliches
+  Artefakt wie einen Review-Report, trägt die ADR einen deklarierten
+  Vermerk: Der Verweis *verfällt*, wenn sein Ziel verschwindet; die
+  Entscheidung bleibt davon unberührt gültig.
+- **Template-Feld-Nachzug.** Gewinnt die Ziel-Form ein neues Pflichtfeld
+  (etwa den Re-Evaluierungs-Trigger oben), tragen bestehende `Accepted`-ADRs es
+  nicht rückwirkend. Ein Grandfathering-Vermerk (Feld fehlt, Datum des
+  Feld-Zugangs) reicht.
+
+Beide Fälle ändern die Entscheidung nicht — nur ihre Adresse oder ihre
+Form. Was mehr ist als das, bleibt bei der Hard Rule: Folge-ADR mit
+`supersedes`. Eine Formulierung wie „ist ja nur ein Pfad-Nachzug" für eine
+tatsächlich geänderte Begründung ist selbst ein Bruch der Hard Rule, keine
+Ausnahme von ihr.
 
 ### Regeln gegen typische Fehlannahmen (Modul 4)
 

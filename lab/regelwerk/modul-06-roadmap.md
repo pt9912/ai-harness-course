@@ -217,6 +217,17 @@ ihrer Schritte in
    wartet. **Ohne diesen Lese-Schritt ist das Register write-only** — gezählt würde
    weiter, aber nichts würde je zur Regel.
 
+   **Verkörpert heißt nicht zwangsläufig automatisiert.** Ein
+   Steering-Loop-Eintrag, der zum dritten Mal auftritt, wird meist als
+   geschärfte Instruktion verkörpert — Prosa im Briefing, kein Sensor.
+   Erreicht dieselbe Fehlerklasse trotzdem ein **viertes** Mal die
+   Schwelle, gilt die Prosa-Form als ausgeschöpft: Der neue
+   Steering-Loop-Eintrag benennt dann entweder einen mechanischen Sensor,
+   der die Klasse künftig fängt, oder begründet explizit, warum keiner
+   möglich ist — dieselbe Ehrlichkeitspflicht wie bei einem Gate, das mehr
+   abzudecken behauptet, als es tut
+   ([`grundlagen-durchsetzungsschicht.md` §Grenzen](grundlagen-durchsetzungsschicht.md#grenzen--ehrlich-benannt)).
+
    **Was den Bestand überlebt hat, bekommt denselben Lese-Schritt.** Ein
    Slice in `open/` oder `next/`, der diese Closure bereits unverändert
    überstanden hat, stellt dieselbe Frage wie das Register, eine Ebene
