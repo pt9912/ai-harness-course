@@ -11,6 +11,22 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 154 — 2026-09-30 · Lücke der Quelle ist keine Abweichung (Modul 15)
+
+Anlass: Ein Konsumenten-Repo (`ai-harness-init`) misst, dass sein Werkzeug
+einzelne Pflicht-Werte des Audit-Span-Schemas nicht liefert, und führt sie als
+„erklärte Abweichungen". Das Modul kannte nur die Abweichung und schwieg zur
+Quelle, die ein Feld nicht liefert.
+
+- Kurs `modul-15-observability.md` (Schema-Übung) und Spiegel in
+  `lab/regelwerk/modul-15-observability.md`: ein Satz — liefert die Quelle den
+  Wert nicht, ist das keine Abweichung; das Feld bleibt Pflicht und ist als
+  nicht bekannt gekennzeichnet. `Stand:` auf Welle 154. Kein beobachtbares
+  Verhalten behauptet. Regel-Änderung, daher beim nächsten Release MINOR.
+- Bewusst nicht Teil der Welle: Token-Attribuierung, Hit-Rate und Form der
+  Kennzeichnung — Fäden in `docs/roadmap.md`; Lösung Modul 15 und die Regel
+  „Mindestfelder eines Tool-Call-Spans" bleiben unverändert.
+
 ## Welle 153 — 2026-09-28 · ADR-Nachzug bei sich änderndem Kontext
 
 Anlass: Vier Konsumenten-Repos haben unabhängig dasselbe Problem gelöst —

@@ -336,9 +336,12 @@ und `adr.id`).
   Rechnung lief der Schreibzugriff?"; `tool.arguments.redacted` → "was
   wurde wohin geschrieben — ohne Secrets im Log?"). Pflicht-Minimum aus
   dem Worked Example: Slice-ID, Agent-Rolle, Cache-Status,
-  `requirement.id` — jede Abweichung davon begründest du. Ein Attribut
-  ohne Incident-Frage fliegt raus: Schema-Felder ohne Abnehmer sind
-  Telemetrie-Boilerplate, kein Audit.
+  `requirement.id` — jede Abweichung davon begründest du. Liefert deine
+  Quelle den *Wert* nicht, ist das keine Abweichung: Das Pflicht-Feld bleibt
+  Pflicht und ist ausdrücklich als nicht bekannt gekennzeichnet (nicht `0`,
+  nicht `false`, nicht „keine Rolle") — unter Nennung der Quelle, die es nicht
+  liefert. Ein Attribut ohne Incident-Frage fliegt raus: Schema-Felder ohne
+  Abnehmer sind Telemetrie-Boilerplate, kein Audit.
 
 * **(Analysieren — aktiviert LZ 3)** *Fehlerfall: ein Span-Attribut
   fehlt.* Kopiere das Trace-Fixture
