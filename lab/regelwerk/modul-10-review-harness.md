@@ -74,9 +74,14 @@ achtest du"; Vorlage
 - **„Was dieser Skill NICHT macht":** kein Lösungsvorschlag, kein
   Refactoring über den Diff hinaus, keine Verifikation (Verifier, Modul
   11), keine Validation (Validator) — sonst wird der Reviewer zum zweiten
-  Implementer. Auffälliges außerhalb → INFO-Finding mit Rollen-Verweis.
+  Implementer. Kein Stil-Polizist: Formatierung oder Benennung ohne
+  Konventions-Anker ist kein Finding. Kein HIGH- oder
+  MEDIUM-Finding ohne Failure-Szenario: was sich nicht als konkretes
+  Versagen erzählen lässt, wird nicht als HIGH oder MEDIUM gemeldet. Auffälliges
+  außerhalb → INFO-Finding mit Rollen-Verweis.
 - **Output-Schema strukturiert** (`kategorie · quelle · pfad · befund ·
-  verifizierbar · klasse`; `klasse` = stabile Kurz-Bezeichnung des
+  verifizierbar · klasse`; `pfad` = Datei · wörtliches, in der Datei eindeutig
+  auffindbares Kurzzitat der Stelle als Anker, die Zeile nur als Lesehilfe; `klasse` = stabile Kurz-Bezeichnung des
   Fehlermusters, speist den Steering-Loop-Zähler — siehe Pflege unten) plus
   je betrachtetem Bereich eine **Negativbefund-Zeile**
   („geprüft, ohne Befund"; eigene Sektion unten).

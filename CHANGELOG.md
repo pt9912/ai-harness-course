@@ -11,6 +11,51 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 156 — 2026-10-03 · Finding-Pfad ist Datei plus Zitat, nicht Zeile (Modul 10)
+
+Anlass: `pfad: Datei:Zeile` ist eine Adresse in ein bewegliches Ziel. Ändert sich
+die Datei, zeigt die Zeilennummer still auf anderen Inhalt; das Report-Template
+verlangt für alle anderen Verweise „Kennung, nicht Adresse".
+
+- Kurs `modul-10-review-harness.md` (Output-Schema), `modul-08-agentenrollen.md`
+  (Übergabe R → I), Spiegel in `lab/regelwerk/modul-10-review-harness.md`,
+  `reviewer.template.md`, `closure-note-reviewer.template.md` und
+  `review-report.template.md`: `pfad` = Datei ·
+  wörtliches, in der Datei eindeutig auffindbares Kurzzitat der Stelle als Anker;
+  die Zeile darf als Lesehilfe dazu, ist aber nicht der Anker. `Stand:` in
+  `lab/regelwerk/README.md` auf Welle 156.
+- Belegt am Werkzeug (d-check v0.78.0, Modul `citations`, Wegwerf-Verzeichnis):
+  Verschiebung über die Spanne hinaus und geänderter Quelltext ⇒
+  `citation-mismatch`; nachgezogene Spanne ⇒ grün; Spanne über das Dateiende ⇒
+  `citation-out-of-range`; Zitat unter 16 Zeichen ⇒ ungeprüft. Der Kurs
+  behauptet kein Gate: Wer `citations` aktiviert, kann dem Zitat die Direktive
+  mit Spanne voranstellen; die Direktive verlangt selbst eine Zeilenspanne.
+- Kein beobachtbares Verhalten im Kurs behauptet — eine Format-Regel für
+  Reviewer. Regel-Änderung, daher beim nächsten Release MINOR.
+
+## Welle 155 — 2026-10-01 · Failure-Szenario für HIGH/MEDIUM, kein Stil-Polizist (Modul 10)
+
+Anlass: Der Abgleich des Reviewer-Skills von `ai-harness-init` mit
+`reviewer.template.md` zeigt drei Zusätze in „Was dieser Skill NICHT macht", die
+im Kurs fehlen. Zwei davon übernimmt die Welle: Ein HIGH- oder MEDIUM-Finding, das sich nicht
+als konkretes Versagen erzählen lässt, wird nicht gemeldet (INFO und LOW sind
+bewusst ausgenommen, ihnen fehlt das Versagen per Definition); Formatierung oder
+Benennung ohne Konventions-Anker ist kein Finding. Die offene LOW-Definition
+(„stilistisch unschön ohne semantische Auswirkung") lässt Reviews wachsen und
+Schleifen entstehen, weil jedes Stil-Detail zum Finding wird.
+
+- Kurs `modul-10-review-harness.md` (Worked Example), Spiegel in
+  `lab/regelwerk/modul-10-review-harness.md` und `reviewer.template.md`: zwei
+  Punkte in „Was dieser Skill NICHT macht". LOW trägt einen Konventions-Anker (ADR, Hard Rule, Linter-Regel, Eintrag im
+  Reviewer-Skill; Kurs, Vorlage). Selbstcheck-Zeile und Lösung Modul 10 nennen
+  den Skill-Eintrag als Anker für „unbenutzter Import". `Stand:` in `lab/regelwerk/README.md` auf Welle 155.
+- Bewusst nicht Teil der Welle: „REFUTED nur mit Beleg" (setzt eine
+  Verifikationsstufe voraus, die der Kurs nicht lehrt) — Faden in
+  `docs/roadmap.md`. `closure-note-reviewer.template.md` bleibt unverändert: Er
+  kategorisiert Closure-Notes, keine Diffs.
+- Kein beobachtbares Verhalten behauptet — eine Regel für Skill-Autoren, kein
+  Sensor. Regel-Änderung, daher beim nächsten Release MINOR.
+
 ## Welle 154 — 2026-09-30 · Lücke der Quelle ist keine Abweichung (Modul 15)
 
 Anlass: Ein Konsumenten-Repo (`ai-harness-init`) misst, dass sein Werkzeug

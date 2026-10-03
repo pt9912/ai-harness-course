@@ -39,7 +39,8 @@ gehört geschärft.
 
 - **A (unbenutzter Import im Auth-Modul) = LOW.** Stilistisch, keine
   semantische Auswirkung — exakt die LOW-Definition aus dem
-  Reviewer-Skill ("unbenutzte Imports"). Dass er im *Auth-Modul* liegt,
+  Reviewer-Skill ("unbenutzte Imports"), und dieser Skill-Eintrag ist
+  zugleich der Konventions-Anker. Dass er im *Auth-Modul* liegt,
   macht ihn nicht automatisch HIGH: der Anker ist die *Wirkung*, nicht
   der Ort. (Anders läge der Fall bei einer unbenutzten *Variable* in
   einem Sicherheits-Check-Pfad — die legt nahe, dass ein Check

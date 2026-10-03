@@ -58,7 +58,7 @@ Abweichung gilt der Skill bzw. dessen Quelle
 
 | ID | Kategorie | Befund | Quelle | Pfad | Verifizierbar | Klasse |
 |---|---|---|---|---|---|---|
-| F-1 | HIGH \| MEDIUM \| LOW \| INFO | <1–2 Sätze, beobachtbar, ohne Lösungsvorschlag> | <ADR-ID, LH-ID, Hard-Rule-Name oder „Maintainability" — bei einer Baseline-Regel: `v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt>, kein Link> | <Datei:Zeile> | ja/nein — <welcher Gate-Lauf würde es bestätigen?> | <stabile Kurz-Bezeichnung des Fehlermusters, z. B. „Tie-Break in sortierender Operation nicht dokumentiert"> |
+| F-1 | HIGH \| MEDIUM \| LOW \| INFO | <1–2 Sätze, beobachtbar, ohne Lösungsvorschlag> | <ADR-ID, LH-ID, Hard-Rule-Name oder „Maintainability" — bei einer Baseline-Regel: `v<X.Y.Z>` · `regelwerk/<datei>.md` §<Abschnitt>, kein Link> | <Datei · wörtliches Kurzzitat, Zeile optional> | ja/nein — <welcher Gate-Lauf würde es bestätigen?> | <stabile Kurz-Bezeichnung des Fehlermusters, z. B. „Tie-Break in sortierender Operation nicht dokumentiert"> |
 
 ## Negativbefunde
 

@@ -157,8 +157,9 @@ sondern konkret:
 - fehlende Negativtests bei neuem öffentlichen Vertrag
 - Wiederholung eines Musters, das schon zweimal LOW war
 
-**LOW** — stilistisch unschön ohne semantische Auswirkung,
-einmalige Tippfehler, unbenutzte Imports.
+**LOW** — *mit Konventions-Anker* (ADR, Hard Rule, Linter-Regel, Eintrag im
+Reviewer-Skill): stilistisch unschön ohne semantische Auswirkung, einmalige
+Tippfehler, unbenutzte Imports.
 
 **INFO** — Hinweis ohne erwartete Aktion (z. B. "diese Stelle hat
 ein passendes ArchUnit-Pendant, das du nicht kennst").
@@ -179,6 +180,10 @@ der Reviewer zum zweiten Implementer wird:
 - Kein Refactoring-Vorschlag, der über den Diff hinausgeht.
 - Keine Verifikation gegen DoD — das ist Verifier-Aufgabe (Modul 11).
 - Keine Validation gegen reale Bedürfnisse — das ist Validator-Aufgabe.
+- **Kein Stil-Polizist:** Formatierung oder Benennung ohne Konventions-Anker ist
+  kein Finding.
+- **Kein HIGH- oder MEDIUM-Finding ohne Failure-Szenario:** was sich nicht als
+  konkretes Versagen erzählen lässt, wird nicht als HIGH oder MEDIUM gemeldet.
 
 Wenn etwas auffällt, das in diese Kategorien gehört, ein INFO-Finding
 mit Verweis auf die zuständige Rolle.
@@ -194,7 +199,8 @@ Jedes Finding:
 
 - `kategorie`: HIGH | MEDIUM | LOW | INFO
 - `quelle`: ADR-ID, LH-ID, Hard-Rule-Name oder "Maintainability"
-- `pfad`: Datei:Zeile
+- `pfad`: Datei · wörtliches, in der Datei eindeutig auffindbares Kurzzitat
+  der Stelle als Anker; die Zeile darf als Lesehilfe dazu, ist aber nicht der Anker
 - `befund`: 1–2 Sätze, beobachtbar, ohne Lösungsvorschlag
 - `verifizierbar`: ja/nein — gibt es einen Gate-Lauf, der es bestätigen würde?
 - `klasse`: stabile Kurz-Bezeichnung des Fehlermusters, z. B. "Tie-Break in
@@ -334,7 +340,7 @@ Schreibübung. Modul-spezifische Trigger:
 | Vier Finding-Kategorien + welche blockieren? | drei genannt, ohne Blocker-Trennung | HIGH (blockiert Merge: Sicherheit, Korrektheit, ADR-Verstoß) · MEDIUM (sollte vor Merge geklärt sein, blockiert formal nicht immer) · LOW (nice-to-fix) · INFO (Hinweis, keine Aktion). HIGH ist der harte Blocker; MEDIUM ist Soll-Blocker. | + Trennlinie LOW/MEDIUM ist im Reviewer-Skill *repo-spezifisch* zu fixieren; ohne wandert dieselbe Beobachtung zwischen Läufen — das ist der Hauptgrund, warum Reviewer-Konsistenz ohne Skill-Datei bricht. |
 | Wann LOW → HIGH? | "Wenn es wichtig wird." | Vier Trigger: Geltungsbereich erweitert (z. B. Sicherheits-Check-Pfad), Wiederholungs-Muster (3×), externe Wirkung (Compliance), Slice geht in Produktion. | + Hinweis: Wenn Reviewer/Implementer über die Kategorie streiten, ist die Klassifikations-Regel im Reviewer-Skill zu vage — das ist ein Steering-Loop-Signal, kein Reviewer-Fehler. |
 | Drei Prüf-Situationen der Review-Art zuordnen? | Zuordnung geraten, ohne "wogegen"-Begründung | A = Plan-Review (Plan gegen Spec/ADR, *vor* Implementierung — der ADR-Verstoß steht schon im Vorhaben) · B = Code-Review (Diff gegen Plan + Konventionen) · C = Design-Review (Komponenten-Schnitt gegen Architektur/Layer-Grenzen, bevor Code existiert). | + Pro Fall das Prüf-Artefakt benannt (A: Plan + ADR-0012; B: Diff + Plan + AGENTS.md; C: Schnitt + Layer-Regel) und die Kosten-Pointe: A im Code-Review erst zu fangen kostet den ganzen Implementierungs-Lauf — je früher die Review-Art, desto billiger das Finding. |
-| Zwei konkurrierende Findings einordnen + Grenzfall begründen? | beide irgendwie kategorisiert, ohne Begründung | A (unbenutzter Import) = LOW: stilistisch, keine semantische Wirkung. B (fehlende Auth-Prüfung) = HIGH: Sicherheits-Anti-Pattern im kritischen Pfad — "noch nicht produktiv" mildert nicht, weil der Endpoint mit dem Merge erreichbar wird. | + Grenzfall sauber benannt: B kippt nicht durch "Wichtigkeit", sondern durch den Anker *Sicherheit/Korrektheit kritischer Pfad*; A bleibt LOW, würde aber nach MEDIUM wandern bei 3×-Wiederholung — die Trennlinie gehört repo-spezifisch in den Reviewer-Skill. |
+| Zwei konkurrierende Findings einordnen + Grenzfall begründen? | beide irgendwie kategorisiert, ohne Begründung | A (unbenutzter Import) = LOW: stilistisch, keine semantische Wirkung; Anker ist der Skill-Eintrag. B (fehlende Auth-Prüfung) = HIGH: Sicherheits-Anti-Pattern im kritischen Pfad — "noch nicht produktiv" mildert nicht, weil der Endpoint mit dem Merge erreichbar wird. | + Grenzfall sauber benannt: B kippt nicht durch "Wichtigkeit", sondern durch den Anker *Sicherheit/Korrektheit kritischer Pfad*; A bleibt LOW, würde aber nach MEDIUM wandern bei 3×-Wiederholung — die Trennlinie gehört repo-spezifisch in den Reviewer-Skill. |
 | Reviewer meldet dasselbe Finding zweimal anders kategorisiert? | "Die strengere nehmen." | Beide ernstnehmen → Differenz erklären (Kontext-Unterschied?) → Reviewer-Skill schärfen, nicht mildere/strengere Antwort auswählen. | + Anti-Antwort "Agent hat sich selbst korrigiert" — das belohnt Inkonsistenz; mildere Antwort als Wahrheit zu akzeptieren ist *Reward Hacking* der Klassifikations-Disziplin. |
 | 17 Findings — erste drei Aktionen? | sequentiell abarbeiten | (1) Nach Kategorie sortieren, HIGH zuerst lesen · (2) HIGH-Findings prüfen: ADR-Verstoß / Sicherheit / Korrektheit? gegen Plan oder gegen Spec? · (3) MEDIUM clustern, LOW/INFO erstmal überspringen — Reviewer-Skill anpassen, falls Cluster auf vage Regel hinweist. | + Falle: wer am ersten LOW-Finding hängenbleibt (typischer Fehler aus dem Engage), arbeitet HIGH-Findings nicht ab — und genau dadurch wird die Findings-Liste zur Mängelliste statt Entscheidungsvorlage. |
 

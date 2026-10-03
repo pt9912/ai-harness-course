@@ -300,7 +300,7 @@ nur, wenn jeder Pfeil ein *konkretes* Artefakt trägt. Tabelle:
 
 | Pfeil | Übergabe-Artefakt | Inhalt minimal |
 |---|---|---|
-| R → I | Finding HIGH | Datei:Zeile · ADR-ID · Kategorie HIGH · ein-Satz-Begründung |
+| R → I | Finding HIGH | Datei + wörtliches Zitat · ADR-ID · Kategorie HIGH · ein-Satz-Begründung |
 | I → A | Widerspruchs-Notiz | Verweis auf Slice-Plan + behauptete Lockerung + Position des Implementers |
 | A → P | ADR-Aktualitäts-Anfrage | ADR-ID · Welle, in der gelockert worden sein soll · konkrete Frage |
 | P → A | Slice-Plan-Auszug | exakte Textstelle aus slice-audit-log-hardening, die die Lockerung enthält *oder nicht enthält* |

@@ -63,8 +63,9 @@ bewusst kurz (Ergänzungs-Kanal, nicht Hauptkanal).
 - fehlende Negativtests bei neuem öffentlichem Vertrag
 - Wiederholung eines Musters, das schon zweimal LOW war
 
-**LOW** — stilistisch unschön ohne semantische Auswirkung, einmalige Tippfehler,
-unbenutzte Imports.
+**LOW** — *mit Konventions-Anker* (ADR, Hard Rule, Linter-Regel, Eintrag im
+Reviewer-Skill): stilistisch unschön ohne semantische Auswirkung, einmalige
+Tippfehler, unbenutzte Imports.
 
 **INFO** — Hinweis ohne erwartete Aktion (z. B. „diese Stelle hat ein passendes
 ArchUnit-Pendant, das du nicht kennst").
@@ -81,6 +82,10 @@ ArchUnit-Pendant, das du nicht kennst").
 - Kein Refactoring-Vorschlag, der über den Diff hinausgeht.
 - Keine Verifikation gegen DoD — das ist Verifier-Aufgabe (Modul 11).
 - Keine Validation gegen reale Bedürfnisse — das ist Validator-Aufgabe.
+- **Kein Stil-Polizist:** Formatierung oder Benennung ohne Konventions-Anker ist
+  kein Finding.
+- **Kein HIGH- oder MEDIUM-Finding ohne Failure-Szenario:** was sich nicht als
+  konkretes Versagen erzählen lässt, wird nicht als HIGH oder MEDIUM gemeldet.
 
 Wenn etwas auffällt, das in diese Kategorien gehört: ein INFO-Finding mit Verweis
 auf die zuständige Rolle.
@@ -91,7 +96,8 @@ Jedes Finding:
 
 - `kategorie`: HIGH | MEDIUM | LOW | INFO
 - `quelle`: ADR-ID, `LH-*`-ID, Hard-Rule-Name oder „Maintainability"
-- `pfad`: Datei:Zeile
+- `pfad`: Datei · wörtliches, in der Datei eindeutig auffindbares Kurzzitat
+  der Stelle als Anker; die Zeile darf als Lesehilfe dazu, ist aber nicht der Anker
 - `befund`: 1–2 Sätze, beobachtbar, ohne Lösungsvorschlag
 - `verifizierbar`: ja/nein — gibt es einen Gate-Lauf, der es bestätigen würde?
 - `klasse`: stabile Kurz-Bezeichnung des Fehlermusters, z. B. „Tie-Break in
