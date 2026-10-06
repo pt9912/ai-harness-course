@@ -8,7 +8,8 @@
 
 **Bezug:** [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit/Auditierbarkeit), Modul 1 §Closure, Modul 11 Worked Example
 
-**Schärft:** [`SPEC-027`](../../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) (Closure-Notiz-Pflicht in `done/`)
+**Schärft:** Planning-Closure-Konvention (`docs/plan/planning/`) + Gate
+`verify-closure-notes` — *kein* Spec-Stratum (Prozess-ADR).
 
 ---
 
@@ -124,4 +125,3 @@ Frage ist, keine Code-Architektur-Frage.
 | 2026-06-02 | Accepted | bestehende done-Dateien geprüft, beide bestehen |
 | 2026-06-03 | Vierte Pflicht ergänzt | *Ausgefülltheit*: kein unausgefüllter `<…>`-Platzhalter. Der Gate war grün auf dem blanken Template-Rumpf, weil dieser die Satz-Schwelle allein mitbringt. Zuerst als Zähl-Ausnahme zu Pflicht 1 formuliert — das war falsch: Der Code verbietet Platzhalter unabhängig von der Satzzahl, also ist es ein eigenes Verbot und eine echte Erweiterung der Entscheidung |
 | 2026-06-03 | Korrektur | „zwei done-Dateien" (Option A · Geschichte *Accepted*) war falsch: drei, mit `welle-1-mvp.md`. Tatsachenangabe, Text oben unverändert ([Modul 4](../../../../../kurs/de/01-spec-und-architektur/modul-04-adrs.md)) |
-| 2026-10-06 | `Schärft:` nachgepflegt | „kein Spec-Stratum (Prozess-ADR)" → `SPEC-027`: Die Festlegungen der Harness-Werkzeuge stehen seit Kurs-Welle 158 in der Spezifikation. Traceability-Metadata, Entscheidung unverändert ([ADR-Index](README.md)) |

@@ -51,9 +51,12 @@ Angenommen als Klarstellung, nicht als neues Stratum.
   `spec/spezifikation.md`; `## Vertrag` beider Dateien verweist nur noch,
   Herkunfts-Anker stehen in der Bindungs-Tabelle (die Spec nennt keinen
   Slice). Dazu `SPEC-027` für `planning.closure`, das der alte Vertrags-Text
-  ausließ; ADR-0011 schärft sie jetzt (Nachpflege des `Schärft:`-Felds nach dem
-  Präzedenzfall im ADR-Index des Beispiels, keine Entscheidungs-Änderung; Zeile
-  in ihrer Geschichte). Index-Zeilen in `harness/README.md` nennen die
+  ausließ. **Nachtrag:** Die zuerst committete Nachpflege des `Schärft:`-Felds
+  von ADR-0011 auf `SPEC-027` hat das CI-Gate `adr-immutability` rot gemacht
+  (`core-drift-vcs`) — das Feld gehört zum Kern einer `Accepted`-ADR. Sie ist
+  zurückgenommen; ADR-0011 ist Altbestand wie 0013 bis 0019, und der
+  ADR-Index des Beispiels sagt das. Das Bundle `v6.15.0` ist nicht betroffen,
+  es enthält das Beispiel nicht. Index-Zeilen in `harness/README.md` nennen die
   Kennungen; der Link eines geschlossenen Slice auf die Historie ist auf §8
   nachgezogen. Die `Accepted`-ADRs des Beispiels mit `Schärft: —` (0013 bis
   0019) bleiben unverändert: Ihre Festlegungen stehen nicht in der
