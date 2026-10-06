@@ -1673,6 +1673,117 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# s30: ENTWURFS-Gegenstand — der werkzeug-eigene Teil des Gate-Index (Welle 159, d-check
+# v0.82.0: targets.authority als Liste). Kein Nebenlaeufigkeits-Gegenstand: eine
+# Regel und ihr Sensor. Geprobt wird, was die Regel behauptet — die Vereinigung
+# traegt (s30a still, s30c die Kontrolle: ohne den zweiten Teil laut), ein
+# Target ohne Zeile in beiden Teilen ist laut (s30b), die Phantom-Richtung
+# greift auch im Werkzeug-Teil (s30e) — und die benannte Grenze: ein Target in
+# BEIDEN Teilen bleibt still (s30d). Jede Stille steht neben einem lauten Lauf
+# desselben Aufbaus (scharf_kontrolle bzw. s30c).
+werkzeugteil() { # $1 = Clone mit gateindex; Fragment + Werkzeug-Teil + Liste
+  mkdir -p "$1/harness/mk"
+  cat > "$1/harness/mk/werkzeug.mk" <<'EOF'
+.PHONY: wlint wmover
+wlint: ## Gate aus dem Werkzeug-Fragment
+	@true
+wmover: ## Werkzeug-Ziel, kein Gate
+	@true
+EOF
+  cat > "$1/harness/mk/werkzeug.md" <<'EOF'
+# Gate-Index — Teil des Werkzeugs
+
+| Target | Vertrag | Bindung |
+|---|---|---|
+| `make wlint` | Stil, aus dem Fragment | — |
+| `make wmover` | bewegt einen Slice, prueft nichts | kein Gate |
+EOF
+  printf '\nTargets der Werkzeug-Fragmente: [`mk/werkzeug.md`](mk/werkzeug.md).\n' >> "$1/harness/README.md"
+  sed -i 's#^  makefiles: \[Makefile\]#  makefiles: [Makefile, "harness/mk/*.mk"]#; s#^  doc-tables: \[harness/README.md\]#  doc-tables: [harness/README.md, harness/mk/werkzeug.md]#; s#^  authority: harness/README.md#  authority: [harness/README.md, harness/mk/werkzeug.md]#' "$1/.d-check.yml"
+  # Der Helfer buergt fuer alle drei Ersetzungen: Greift eine nicht, liest der
+  # Sensor das Fragment oder den Teil nicht, und die Stille-Verdikte bestuenden
+  # ueber einem Aufbau, der die Vereinigung gar nicht kennt (Review-Fund).
+  grep -q '^  makefiles: \[Makefile, "harness/mk/\*.mk"\]$' "$1/.d-check.yml" &&
+  grep -q '^  doc-tables: \[harness/README.md, harness/mk/werkzeug.md\]$' "$1/.d-check.yml" &&
+  grep -q '^  authority: \[harness/README.md, harness/mk/werkzeug.md\]$' "$1/.d-check.yml"
+}
+
+# Wie scharf_kontrolle, aber am TEIL DES WERKZEUGS: Phantom-Zeile dort, Lauf
+# muss genau darauf zeigen, Zeile wieder raus. Erst damit stehen die
+# Stille-Verdikte s30a/s30d neben einem lauten Lauf, der beweist, dass der
+# zweite Teil im selben Aufbau gelesen wird (Review-Fund).
+scharf_werkzeug() { # $1 = Clone-Verzeichnis
+  local k rc
+  printf '| `make wscharf-probe` | Kontrolle | — |\n' >> "$1/harness/mk/werkzeug.md"
+  k=$(dcheck "$1")
+  befund_in "$k" "harness/mk/werkzeug.md" "wscharf-probe" "gate-phantom"; rc=$?
+  sed -i '/wscharf-probe/d' "$1/harness/mk/werkzeug.md"
+  return $rc
+}
+
+s30_werkzeug_teil() {
+  # --- s30a: Vereinigung vollstaendig -> still, bei nachweislich scharfem Sensor.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt gateindex . || return 1
+  schritt werkzeugteil . || return 1
+  schritt git add -A && schritt git commit -qm "Werkzeug-Fragment mit eigenem Index-Teil" || return 1
+  schritt scharf_kontrolle "$WORK/sim/alice" || return 1
+  schritt scharf_werkzeug "$WORK/sim/alice" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  still "$out" && ok=0 || ok=1
+  verdikt "s30a Vereinigung beider Teile vollstaendig: STILL" "0 Befunde, waehrend die Phantom-Proben in beiden Teilen im selben Aufbau laut sind" "$(echo "$out"|tail -1)" $ok
+
+  # --- s30c: Kontrolle — derselbe Aufbau, Autoritaet nur der Repo-Teil -> laut
+  # auf den Werkzeug-Targets. Erst das macht s30a zur Aussage ueber den zweiten
+  # Teil statt ueber ein Modul, das das Fragment gar nicht liest.
+  # Beide Felder zurueck auf den Repo-Teil — derselbe Aufbau OHNE den zweiten
+  # Teil, nicht ein Teil, der Tabelle, aber keine Autoritaet ist (Review-Fund).
+  sed -i 's#^  authority: \[harness/README.md, harness/mk/werkzeug.md\]#  authority: harness/README.md#; s#^  doc-tables: \[harness/README.md, harness/mk/werkzeug.md\]#  doc-tables: [harness/README.md]#' .d-check.yml
+  schritt grep -q '^  authority: harness/README.md$' .d-check.yml || return 1
+  schritt grep -q '^  doc-tables: \[harness/README.md\]$' .d-check.yml || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "harness/mk/werkzeug.mk" "wlint" "gate-undocumented" && ok=0 || ok=1
+  verdikt "s30c Kontrolle — nur der Repo-Teil ist Autoritaet: LAUT" "gate-undocumented auf wlint in harness/mk/werkzeug.mk" "$(echo "$out"|tail -1)" $ok
+
+  # --- s30b: Fragment-Target ohne Zeile in beiden Teilen -> laut, Fundort Fragment.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt gateindex . || return 1
+  schritt werkzeugteil . || return 1
+  printf '\n.PHONY: wneu\nwneu: ## neu im Fragment, nirgends gefuehrt\n\t@true\n' >> harness/mk/werkzeug.mk
+  n=$(cat harness/README.md harness/mk/werkzeug.md | grep -c 'wneu' || true)
+  schritt test "$n" = 0 || return 1
+  schritt git add -A && schritt git commit -qm "Fragment waechst, Index nicht" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "harness/mk/werkzeug.mk" "wneu" "gate-undocumented" && ok=0 || ok=1
+  verdikt "s30b Fragment-Target in keinem Teil: LAUT" "gate-undocumented auf wneu in harness/mk/werkzeug.mk" "$(echo "$out"|tail -1)" $ok
+
+  # --- s30e: Phantom im Werkzeug-Teil -> laut, und zwar dort.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt gateindex . || return 1
+  schritt werkzeugteil . || return 1
+  printf '| `make wphantom` | gibt es nicht | — |\n' >> harness/mk/werkzeug.md
+  schritt grep -q '| `make wphantom` |' harness/mk/werkzeug.md || return 1
+  schritt git add -A && schritt git commit -qm "Phantom im Werkzeug-Teil" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "harness/mk/werkzeug.md" "wphantom" "gate-phantom" && ok=0 || ok=1
+  verdikt "s30e Phantom-Target im Werkzeug-Teil: LAUT" "gate-phantom auf harness/mk/werkzeug.md" "$(echo "$out"|tail -1)" $ok
+
+  # --- s30d: benannte Grenze — ein Target in BEIDEN Teilen -> still.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt gateindex . || return 1
+  schritt werkzeugteil . || return 1
+  sed -i 's#^| `make lint` | Stil | — |#| `make lint` | Stil | — |\n| `make wlint` | Stil, zweite Zeile im Repo-Teil | — |#' harness/README.md
+  n=$(cat harness/README.md harness/mk/werkzeug.md | grep -c '| `make wlint` |' || true)
+  schritt test "$n" = 2 || return 1
+  schritt git add -A && schritt git commit -qm "dasselbe Target in beiden Teilen" || return 1
+  schritt scharf_kontrolle "$WORK/sim/alice" || return 1
+  schritt scharf_werkzeug "$WORK/sim/alice" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  still "$out" && ok=0 || ok=1
+  verdikt "s30d Target in beiden Teilen: STILL (benannte Grenze)" "0 Befunde, obwohl wlint zweimal gefuehrt ist — die Vereinigung zaehlt es einmal; die Phantom-Proben in beiden Teilen sind im selben Aufbau laut" "$(echo "$out"|tail -1)" $ok
+}
+
+# ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -1705,6 +1816,7 @@ lauf s26 s26_matrix_planungsspalten
 lauf s27 s27_adr_kennung_linkpflicht
 lauf s28 s28_guide_datei_wildwuchs
 lauf s29 s29_wip_lauf_zweig_feld
+lauf s30 s30_werkzeug_teil
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

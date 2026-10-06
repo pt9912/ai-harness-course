@@ -85,6 +85,12 @@ gruppen:
   # (s29b) neben einem lauten matrix-Lauf im selben Aufbau (s29a). Nachgetragen
   # mit Welle 159: die Gruppe lief seit Welle 148, stand aber nicht im Register.
   s29: [s29a, s29b]
+  # s30: ENTWURFS-Gegenstand — der werkzeug-eigene Teil des Gate-Index (Welle 159, d-check
+  # v0.82.0, targets.authority als Liste). Die Vereinigung traegt (s30a still,
+  # s30c Kontrolle laut), ein Fragment-Target ohne Zeile ist laut (s30b), Phantom
+  # im Werkzeug-Teil laut (s30e), und die benannte Grenze: ein Target in beiden
+  # Teilen bleibt still (s30d).
+  s30: [s30a, s30c, s30b, s30e, s30d]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -108,3 +114,4 @@ laeufe:
   - { datum: 2026-09-27, image: v0.78.0, neu: [s28a, s28b, s28e, s28c, s28d], gegenstand: "Entwurf: das file-Modul gegen Guide-Datei-Wildwuchs (Welle 147) — Datei im Budget still, drueber laut, gesenktes Budget ohne Aenderung sofort laut (kein Gnadenfrist-Verhalten), Kuerzung auf das neue Budget wieder still, Regel ohne Treffer fail-closed (s28e, Nachtrag nach Review: die Behauptung stand vorher nur an einem Scratch-Fixture)", ergebnis: "89 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-27, image: v0.78.0, neu: [s29a, s29b], gegenstand: "Entwurf: das Zweig-Kennzeichen im Verantwortlich-Feld (Welle 148) — ADR nennt einen Slice-Token laut, derselbe Slice nennt sich per Zweig-Kennzeichen selbst still, im selben Lauf. Nachgetragen mit Welle 159 aus dem CHANGELOG-Eintrag von Welle 148, nicht aus einem archivierten ergebnis.tsv", ergebnis: "91 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-10-06, image: v0.82.0, neu: [], gegenstand: "Pin-Bump v0.78.0 -> v0.82.0 (targets.makefiles mit Glob, targets.authority als Liste; beides opt-in, mit einer Datei byte-identisch): alle Verdikte unveraendert, keine gedrehte Erwartung", ergebnis: "91 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-10-06, image: v0.82.0, neu: [s30a, s30c, s30b, s30e, s30d], gegenstand: "Entwurf: der werkzeug-eigene Teil des Gate-Index (Welle 159) — Vereinigung beider Teile still bei scharfem Sensor, ohne den zweiten Teil laut (Kontrolle), Fragment-Target ohne Zeile laut mit Fundort im Fragment, Phantom im Werkzeug-Teil laut, Target in beiden Teilen still (benannte Grenze: die Vereinigung zaehlt es einmal)", ergebnis: "96 PASS, 0 FAIL, 0 KAPUTT" }

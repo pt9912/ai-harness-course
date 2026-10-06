@@ -203,7 +203,8 @@ Repo-spezifische Hard Rules ergänzen, z.B. für Safety/Control:
 Regeln dieser Sektion: Baseline-Regelwerk `grundlagen-harness-dateien.md`
 §harness/README.md als Einstiegspunkt. Der Gate-Index steht **einmal**, in
 [`harness/README.md`](harness/README.md) §Sensors — dort steht auch die
-*Bindung* jedes Targets. Diese Datei führt die Liste nicht.
+*Bindung* jedes Targets; Targets aus Werkzeug-Fragmenten stehen in dem Teil des
+Werkzeugs, den §Sensors verlinkt. Diese Datei führt die Liste nicht.
 
 Kein Target nennen, das im Makefile nicht existiert — auch nicht in Prosa.
 

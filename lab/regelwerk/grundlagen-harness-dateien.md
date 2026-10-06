@@ -22,6 +22,8 @@ harness/conventions.md      # Index: repo-lokale Regeln, Adaptionen, Modus pro S
 harness/conventions/        # ein MR je Datei; done/ = aufgelöst
 harness/sensors/            # ein Gate je Datei, sobald sein Vertrag mehr als
                             # einen Satz braucht; kein done/
+harness/mk/                 # Make-Fragmente von Werkzeugen; <werkzeug>.md = der
+                            # Teil des Gate-Index, der dem Werkzeug gehört
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
 
@@ -193,12 +195,62 @@ alles nennt, ist keine.
 Wichtig: Die Sensors-Tabelle darf keine Befehle behaupten, die es im Repo
 nicht gibt. Halluzinierte Gates sind die häufigste Form von Harness-Lüge.
 
-**Der Gate-Index steht einmal, und zwar hier.** `AGENTS.md` trägt die *Regel*
+**Der Gate-Index steht einmal, und zwar hier** — bis auf die Teile, die
+Werkzeugen gehören (unten). `AGENTS.md` trägt die *Regel*
 (kein behauptetes Gate ohne Deckung) und den *Zeiger* auf diese Sektion — nicht
 die Liste. Der Grund ist nicht Ordnungsliebe: Beide Dateien liegen in **jedem**
 Lauf-Kontext ([Modul 9 §Kontext-Verdichtung](modul-09-implementierung.md#kontext-verdichtung-kehrseite-der-lopopolo-maxime)),
 ein zweiter Index wird also pro Lauf zweimal bezahlt — und er läuft auseinander,
 weil die Pflicht, ihn nachzuziehen, nirgends steht.
+
+**Ein Index, mehrere Eigentümer — wenn ein Werkzeug Fragmente mitbringt.** Ein
+Bootstrap-Werkzeug, das Make-Fragmente unter `harness/mk/` erzeugt, bringt
+Targets mit, die der Einstieg nennen muss: Gates, die es in `make gates`
+einhängt, und Werkzeug-Ziele, die der nächste Lauf braucht ([Modul 13 §Hard Rule (Doku-Disziplin)](modul-13-quality-gates.md#hard-rule-doku-disziplin), *Vorhanden ≠ behauptet*). In die
+Tabelle hier kann es sie nicht schreiben: Diese Datei gehört dem Repo, und ein
+Lauf, der in eine fremde Tabelle schreibt, überschreibt, was dort entschieden
+wurde. Die namentliche Ausnahmeliste ist auch keine Antwort — sie ist für
+Targets ohne Anspruch da, und ein Gate darin ist ein stilles Gate. Das Werkzeug
+führt deshalb einen eigenen Teil des Index, `harness/mk/<werkzeug>.md`, unter
+fünf Bedingungen:
+
+- **Werkzeug-eigen, einer je Werkzeug.** Das Werkzeug schreibt seinen Teil bei
+  jedem Lauf neu, im selben Lauf wie seine Fragmente; das Repo schreibt nicht
+  hinein, und kein zweites Werkzeug auch nicht. Die Pflicht zum Nachziehen steht
+  damit dort, wo das Fragment entsteht.
+- **Nur die eigenen Targets**, in denselben Tabellen wie hier — Gates mit
+  Target, Vertrag, Bindung; Werkzeug-Ziele, die kein Gate sind, mit `kein Gate`
+  in der Bindung. Die Targets des Repos stehen weiter hier.
+- **Disjunkt.** Kein Target steht in zwei Teilen. Sonst führen zwei Zeilen
+  dasselbe Target und laufen auseinander — der Fehler, den der eine Index
+  verhindern soll.
+- **Verlinkt.** Eine Zeile unter den Tabellen dieser Sektion verlinkt jeden
+  Teil. Der
+  Einstieg nennt ihn damit: Wer ein Werkzeug-Ziel sucht, folgt diesem einen
+  Link statt ins `Makefile` zu lesen. Automatisch geladen wird der Teil nicht —
+  das kostet einen Schritt, aber keinen zweiten Index im Lauf-Kontext.
+- **Eine Autorität aus mehreren Dateien.** Der Deklarations-Sensor misst gegen
+  die Vereinigung aller Teile, in beiden Richtungen.
+
+Ein Target, das eine Regeneration neu mitbringt, ist damit **deklariert, nicht
+still** — aber auch nicht gemeldet: Der Sensor sieht eine Zeile und schweigt.
+Sichtbar ist es im Diff des Laufs, den das Repo committet; ein Gate, das das
+Werkzeug neu in `make gates` hängt, fällt dort auf oder nirgends.
+
+Was das Repo über ein Werkzeug-Target entscheidet, steht nicht in dessen Zeile —
+der nächste Lauf überschriebe es. Es steht in der Zeile hier, die den Teil
+verlinkt: der Carveout auf ein strukturell rotes Werkzeug-Gate, die
+Sensor-Datei, wenn sein Vertrag mehr als einen Satz braucht, eine Bindung des
+Repos. Die Bindung-Spalte im Teil des Werkzeugs trägt nur, was das Werkzeug
+selbst bindet, und nur in den kanonischen Klassen — eine Zusatzklasse deklariert
+das Repo, und die kennt das Werkzeug nicht. Wer im Index liest, findet beides
+an einem Ort, und der Teil des Werkzeugs bleibt frei von Daten des Repos. Ein
+Repo ohne Werkzeug-Fragmente hat weiter genau eine Datei.
+
+**Die Vereinigung zählt ein doppelt genanntes Target einmal.** Ein Sensor, der
+gegen sie misst, sieht die Doppelung deshalb nicht: Steht ein Target in zwei
+Teilen, bleibt er still. Die Disjunktheit braucht eine eigene Prüfung; wer sie
+nicht hat, führt sie als benannte Grenze, nicht als Gate.
 
 **Die Target-Zelle trägt den nackten Target-Namen.** Der Aufruf — `SLICE=<id>`,
 `RUN=<name>` — gehört in die Nachbarspalte, nicht in die Code-Span des Targets.
@@ -215,7 +267,8 @@ Lauf-Wahrheit pro Commit lebt in CI (Badges/Dashboard), also in höher
 rangierten Quellen, nicht in `harness/README.md` (unterster Rang). Strukturell
 rote Gates werden als Carveout in `docs/plan/carveouts/` dokumentiert
 (Modul 7); die Bindung-Spalte der Tabelle (`Target | Vertrag | Bindung`)
-verweist auf die `CO-<NNN>`-ID, die Begründung lebt im Carveout, nicht
+verweist auf die `CO-<NNN>`-ID — bei einem Werkzeug-Gate die Zeile, die den
+Teil des Werkzeugs verlinkt —, die Begründung lebt im Carveout, nicht
 hier. Damit ist "rot dokumentieren, nicht verstecken" ortsdiszipliniert:
 es geschieht im Carveout-Index, nicht in einer Status-Spalte, die sich
 selbst grünfärben kann.

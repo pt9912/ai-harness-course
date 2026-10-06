@@ -11,6 +11,64 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 159 — 2026-10-06 · Ein Gate-Index, mehrere Eigentümer (Modul 13, Grundlagen)
+
+Anlass: Change Request von ai-harness-init, dem Werkzeug, das Ziel-Repos mit der
+Baseline bootstrappt (gemessen an v6.13.0). Ein gebootstrapptes Repo bekommt
+Make-Fragmente unter `harness/mk/` mit Gates (`build`, `lint`, `test`, über
+`make gates` eingehängt) und Werkzeug-Zielen (`slice-mv`, `archive-welle`, …).
+Der Korpus hatte dafür zwei Antworten, und keine trägt: Die namentliche
+Ausnahmeliste ist für Targets ohne Anspruch da — ein Gate darin ist ein stilles
+Gate, und Werkzeug-Ziele, die der nächste Lauf braucht, müssen nach der
+„dritten Lage" genannt werden. Sie in `harness/README.md` zu schreiben hieße,
+dass das Werkzeug bei jedem Lauf in eine Tabelle des Repos schreibt.
+
+- Grundlagen `harness-dateien.md` §harness/README.md als Einstiegspunkt: neuer
+  Abschnitt „Ein Index, mehrere Eigentümer". Ein Werkzeug, das Fragmente
+  erzeugt, führt deren Targets in `harness/mk/<werkzeug>.md` — einer je
+  Werkzeug, bei jedem Lauf neu geschrieben, weder vom Repo noch von einem
+  anderen Werkzeug beschrieben; nur die eigenen Targets in derselben
+  Tabellenform, disjunkt zu den anderen Teilen, von §Sensors verlinkt; der
+  Deklarations-Sensor misst gegen die Vereinigung, in beiden Richtungen. Ein
+  Target, das eine Regeneration neu mitbringt, ist deklariert, nicht gemeldet —
+  sichtbar im Diff des Laufs. Was das Repo über ein Werkzeug-Target entscheidet
+  — Carveout, Sensor-Datei, eigene Bindung —, steht in der Link-Zeile in
+  §Sensors; die Bindung-Spalte im Teil des Werkzeugs trägt nur dessen eigene
+  Bindung, in den kanonischen Klassen. Die Carveout-Stelle in §Sensors ist
+  entsprechend ergänzt. Ein Repo ohne
+  Fragmente hat weiter genau eine Datei. Benannte Grenze: Die Vereinigung zählt
+  ein doppelt genanntes Target einmal, ein Sensor über ihr bleibt bei einer
+  Doppelung still. Verzeichnisbaum um `harness/mk/` ergänzt.
+- Kurs `modul-13-quality-gates.md` §Hard Rule (Doku-Disziplin): „genau eine
+  Autoritäts-Doku" heißt nicht zwingend eine Datei; die Zusage der
+  Ausnahmeliste („eine Regeneration meldet ein neues Target") gilt für den
+  Teil des Werkzeugs nicht, dort ist es deklariert, nicht gemeldet. Die Hard
+  Rule nennt für ein strukturell rotes Werkzeug-Gate die Link-Zeile als Ort
+  des Carveouts.
+- Grundlagen `begriffe.md`: Eintrag `harness/mk/<werkzeug>.md`.
+- Vorlage `README.template.md` §Sensors: der Kommentar nennt die Ausnahme mit
+  eigenem Eigentümer und ein Beispiel der Link-Zeile samt Carveout. Keine
+  eigene Vorlage für den Teil des Werkzeugs — die Tabellenform ist dieselbe,
+  und das Werkzeug erzeugt die Datei. `.d-check.yml` zeigt die
+  `targets`-Konfiguration für Fragmente (Liste, Vereinigung, Grenze),
+  `AGENTS.template.md` §4 und der Kopf des `Makefile` nennen den Teil des
+  Werkzeugs.
+- Spiegel wortgleich in `lab/regelwerk/grundlagen-harness-dateien.md`,
+  `modul-13-quality-gates.md` und `grundlagen-begriffe.md`. `Stand:` auf
+  Welle 159.
+- Team-Sim, neue Gruppe `s30` (d-check v0.82.0, `targets.authority` als Liste):
+  Vereinigung vollständig still bei scharfem Sensor (s30a), ohne den zweiten
+  Teil laut (s30c, Kontrolle), Fragment-Target ohne Zeile laut mit Fundort im
+  Fragment (s30b), Phantom im Teil des Werkzeugs laut (s30e), Target in beiden
+  Teilen still — die benannte Grenze (s30d). Mutationstest: Ohne das Fragment
+  in `targets.makefiles` fallen vier der fünf; greift eine der drei
+  Konfigurations-Ersetzungen nicht, meldet der Helfer KAPUTT. Voller Lauf **96 PASS, 0 FAIL,
+  0 KAPUTT**.
+- Die Disjunktheit prüft d-check bewusst noch nicht (ADR-0100 dort: eine
+  Doppelnennung ist kein Befund, bis die Baseline die Regel führt). Mit dieser
+  Welle führt sie sie; der Re-Evaluierungs-Trigger der ADR ist erreicht.
+- Regel-Änderung, daher beim nächsten Release MINOR.
+
 ## Welle 158 — 2026-10-06 · Festlegungen der Harness-Werkzeuge gehören in die Spezifikation (Grundlagen, Modul 3)
 
 Anlass: Change Request eines Konsumenten-Repos (pgwire-recorder, Baseline

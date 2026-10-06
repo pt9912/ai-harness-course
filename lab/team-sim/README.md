@@ -76,6 +76,8 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-09-27 | `v0.78.0` | 89 PASS, 0 FAIL, 0 KAPUTT | erweitert um s28 |
 | 2026-09-27 | `v0.78.0` | 91 PASS, 0 FAIL, 0 KAPUTT | erweitert um s29 — nachgetragen mit Welle 159 aus dem CHANGELOG-Eintrag von Welle 148, kein archiviertes `ergebnis.tsv` |
 | 2026-10-06 | `v0.82.0` | 91 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.78.0 → v0.82.0 |
+| 2026-10-06 | `v0.82.0` | 96 PASS, 0 FAIL, 0 KAPUTT | erweitert um s30 |
+
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
 Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
@@ -173,6 +175,11 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s28d | `below.md` auf 190 Zeilen gekürzt, Budget bleibt 190 | **still** wieder | ✓ Kürzen stellt Grün wieder her |
 | s29a | eine ADR nennt einen Slice-Token, `matrix` verbietet adr → slice | **`matrix-forbidden`** | ✓ das Modul erkennt Slice-Tokens überhaupt |
 | s29b | derselbe Slice nennt sich im `Verantwortlich:`-Feld per Zweig-Kennzeichen selbst | **still**, während s29a im selben Lauf laut ist | ✓ das Zweig-Kennzeichen schlägt nichts an |
+| s30a | Fragment unter `harness/mk/`, seine Targets in `harness/mk/werkzeug.md`, `authority` als Liste beider Teile | **still**, während die Phantom-Proben in beiden Teilen im selben Aufbau laut sind | ✓ die Vereinigung trägt |
+| s30c | derselbe Aufbau, `authority` nur der Teil des Repos | **`gate-undocumented`** auf dem Fragment-Target | ✓ Kontrolle: s30a ist eine Aussage über den zweiten Teil |
+| s30b | das Fragment bekommt ein Target, das in keinem Teil steht | **`gate-undocumented`**, Fundort im Fragment | ✓ ein Fragment-Target ohne Zeile in einem Teil fällt auf. Schreibt das Werkzeug die Zeile im selben Lauf mit, ist es deklariert und **still** — sichtbar nur im Diff |
+| s30e | Phantom-Zeile im Teil des Werkzeugs | **`gate-phantom`** auf `harness/mk/werkzeug.md` | ✓ auch dieser Teil wird in beiden Richtungen gelesen |
+| s30d | dasselbe Target in beiden Teilen | **still** | ✓ benannte Grenze: die Vereinigung zählt es einmal — die Disjunktheit prüft dieser Sensor nicht |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

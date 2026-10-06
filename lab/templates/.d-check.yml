@@ -35,6 +35,14 @@ modules: [links, anchors]
 #   makefiles: [Makefile]                                               # d-check.mk erst ergaenzen, wenn `d-check --print-mk` gelaufen ist
 #   doc-tables: [harness/README.md]                                     # der EINE Gate-Index (`grundlagen-harness-dateien.md`)
 #   authority: harness/README.md                                        # dieselbe Datei — es gibt nur einen Index
+#   # Erzeugt ein Werkzeug Make-Fragmente unter harness/mk/, fuehrt es deren
+#   # Targets in harness/mk/<werkzeug>.md (`grundlagen-harness-dateien.md`
+#   # §harness/README.md als Einstiegspunkt). Dann misst der Sensor gegen die
+#   # Vereinigung aller Teile (d-check >= v0.82.0); eine Doppelnennung bleibt
+#   # still, die Disjunktheit prueft er nicht:
+#   # makefiles: [Makefile, "harness/mk/*.mk"]
+#   # doc-tables: [harness/README.md, harness/mk/<werkzeug>.md]
+#   # authority: [harness/README.md, harness/mk/<werkzeug>.md]
 #   # Utility ohne Gate-Anspruch (§Vorhanden != behauptet). NAMENTLICH, nie
 #   # als Glob: Kommt bei einer Regeneration ein Target dazu, soll der Sensor
 #   # es melden, statt es still durchzulassen.

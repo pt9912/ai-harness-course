@@ -3,7 +3,8 @@
 # Re-Pin, kein handgepflegtes Recipe. Nur `docs-check` ist ein *behaupteter* Gate
 # (die doc-*-Targets sind verfügbar, nicht behauptet, Modul 13); nur behauptete
 # Targets in harness/README.md §Sensors eintragen — dem EINEN Gate-Index
-# (AGENTS.md trägt die Regel und den Zeiger, nicht die Liste).
+# (AGENTS.md trägt die Regel und den Zeiger, nicht die Liste); Targets aus
+# Werkzeug-Fragmenten unter harness/mk/ führt das Werkzeug in seinem Teil.
 # Code-Gates (lint/test/build) repo-spezifisch — Vorbild: lab/example/<lang> im Kurs.
 # `d-check.mk` wird NICHT mitgeliefert (tool-/versionsspezifisch) — beim Bootstrap
 # aus deiner d-check erzeugen (Modul 2) und bei jedem d-check-Bump neu:

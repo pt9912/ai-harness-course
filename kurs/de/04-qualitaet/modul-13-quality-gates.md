@@ -139,13 +139,15 @@ Meinung.
 
 ## Hard Rule (Doku-Disziplin)
 
-In `harness/README.md` §Sensors — dem **einen** Gate-Index des Repos
+In `harness/README.md` §Sensors — dem **einen** Gate-Index des Repos, samt den
+Teilen, die Werkzeugen gehören
 ([`harness-dateien.md`](../grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt))
 — und überall sonst, wo ein Target genannt wird: keine
 Befehle behaupten, die es nicht gibt. Wenn `make fullbuild` strukturell
 rot ist, wird das als Carveout in `docs/plan/carveouts/CO-<NNN>-…`
 dokumentiert ([Modul 7](../02-planung/modul-07-carveouts.md)) und in
-der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt — nicht
+der Bindung-Spalte der Sensors-Tabelle per `CO-<NNN>`-ID verlinkt — bei
+einem Werkzeug-Gate in der Zeile, die den Teil des Werkzeugs verlinkt — nicht
 ausgelassen, nicht geschönt, nicht in einer Status-Spalte versteckt
 (die Sensors-Tabelle trägt keinen Lauf-Status; Lauf-Wahrheit pro Commit
 liegt in CI, siehe
@@ -165,7 +167,13 @@ behauptet ist in einem solchen Sensor kein Sonderfall, sondern eine
 **namentliche** Ausnahmeliste: Wer ein Target dort einträgt, hat entschieden,
 dass es kein Gate ist; kommt bei einer Regeneration des Fragments ein Target
 dazu, meldet der Sensor es, statt es still durchzulassen. Ein Glob an dieser
-Stelle gäbe die Zusage wieder auf.
+Stelle gäbe die Zusage wieder auf. Eine Autoritäts-Doku heißt dabei nicht
+zwingend eine Datei: Bringt ein Werkzeug Make-Fragmente mit, führt es deren
+Zeilen in einem eigenen Teil des Index, und der Sensor misst gegen die
+Vereinigung aller Teile. Dort gilt die Zusage der Ausnahmeliste nicht — ein
+Target, das eine Regeneration mitbringt, steht mit seiner Zeile im Teil des
+Werkzeugs und ist deklariert, nicht gemeldet
+([`harness-dateien.md` §harness/README.md als Einstiegspunkt](../grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
 
 **Eine neue Hard Rule trägt ab ihrer Einführung einen Auflösungs-Trigger oder
 die Kennzeichnung *permanent*** — dieselbe Disziplin, die ADR

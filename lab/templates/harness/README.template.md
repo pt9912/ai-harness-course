@@ -70,8 +70,16 @@ Was lenkt den Agenten *vor* der Handlung? Pointer, kein Inhalt.
 WICHTIG: Nur Befehle aufzählen, die im Makefile *existieren*.
 Halluzinierte Gates sind die häufigste Form von Harness-Lüge (Modul 13).
 
-DIES IST DER EINZIGE GATE-INDEX. Kommt ein Target dazu, wird es HIER
-eingetragen, nirgends sonst; AGENTS.md trägt die Regel und den Zeiger.
+DIES IST DER GATE-INDEX DES REPOS. Kommt ein Target des Repos dazu, wird es
+HIER eingetragen, nirgends sonst; AGENTS.md trägt die Regel und den Zeiger.
+Targets aus Werkzeug-Fragmenten gehören NICHT hierher, sondern in den Teil
+des Werkzeugs: Erzeugt ein Werkzeug Make-Fragmente unter
+`harness/mk/`, führt es deren Targets in `harness/mk/<werkzeug>.md`, einer
+Datei je Werkzeug. Dann verlinkt eine Zeile unter den Tabellen dieser Sektion jeden dieser
+Teile und nennt, was das Repo über deren Targets entscheidet (Carveout,
+Sensor-Datei, eigene Bindung); kein Target steht in zwei Teilen. Etwa:
+  Targets der Werkzeug-Fragmente: [`mk/<werkzeug>.md`](mk/<werkzeug>.md) — Carveout CO-<NNN> auf `make <target>`
+Regel: Baseline-Regelwerk §harness/README.md als Einstiegspunkt (Link oben).
 
 TARGET-ZELLE = NACKTER NAME. Der Aufruf (`SLICE=<id>`) steht in der
 Nachbarspalte: `make verify-slice SLICE=<id>` in der Code-Span macht die
