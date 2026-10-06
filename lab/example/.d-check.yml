@@ -310,7 +310,8 @@ reviews:
 # prueft die ganze Datei, nicht nur einen Abschnitt (dafuer gibt es hier noch
 # keine wachsende Baustelle). Startwert: Ist-Zeilenzahl (159) plus Marge, kein
 # erfundener Zielwert — sinken ist immer erlaubt, steigen nur mit sichtbarem
-# Commit an dieser Zeile (Ratchet, kein Rueckbau-Zwang).
+# Commit an dieser Zeile und an SPEC-025 (spec/spezifikation.md §7), die den
+# Wert festlegt (Ratchet, kein Rueckbau-Zwang).
 file:
   - files: AGENTS.md
     max-lines: 200

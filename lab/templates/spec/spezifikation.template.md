@@ -23,7 +23,7 @@ Regeln dieser Sektion: Tatsächlicher Code gehört in `src/`, nicht hierher.
 ID-Schema `<PREFIX>-FA-<NN>.<Buchstabe>` für Verfeinerungen einzelner
 Lastenheft-IDs (Baseline-Regelwerk `grundlagen-source-precedence.md`
 §ID-Schema als Klammer). Was **keine** einzelne Lastenheft-ID verfeinert,
-trägt eine `SPEC-<NNN>` — siehe §2 bis §6.
+trägt eine `SPEC-<NNN>` — siehe §2 bis §7.
 
 <!--
 Wie wird die funktionale Anforderung *technisch* erfüllt? Pseudocode
@@ -112,7 +112,20 @@ Regeln dieser Sektion: verbindliche OTel-Felder pro Span
 |---|---|---|---|
 | `SPEC-005` | <…> | <…> | <Pfad> |
 
-## 7. Historie
+## 7. Festlegungen der Harness-Werkzeuge
+
+Regeln dieser Sektion: was ein Gate, ein Prüfer, ein Hook prüft und wie er an
+seinen Randformen entscheidet. Setzt das Werkzeug genau eine Anforderung durch,
+steht die Festlegung als deren Verfeinerung in §1, nicht hier. Eine Randform, die nach `Accepted` der Gate-ADR
+auftaucht, wird dort fortgeschrieben, wo die Festlegung des Werkzeugs steht; womit das Werkzeug selbst gedeckt ist,
+steht nicht hier, sondern bei ihm (Baseline-Regelwerk
+`grundlagen-referenz-richtung.md` §Spec-Straten).
+
+| ID | Werkzeug | Festlegung |
+|---|---|---|
+| `SPEC-006` | `make <target>` | <was als Treffer gilt / wie eine Randform entschieden ist> |
+
+## 8. Historie
 
 Regeln dieser Sektion: **kein ADR- und kein Slice-Verweis.** Die Decken-Regel
 gilt für alle drei Spec-Straten, auch hier — welche ADR eine Festlegung

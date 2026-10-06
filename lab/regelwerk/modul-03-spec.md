@@ -76,7 +76,10 @@ Technische Festlegungen leben in der Spezifikation
 ([`templates/spec/spezifikation.template.md`](../templates/spec/spezifikation.template.md)):
 Algorithmen und Datenflüsse · Datenstrukturen und Schemas · Defaults und
 Konstanten · Fehler-Codes und Logging-Felder · Metriken und Tracing-Felder ·
-externe Verträge · Historie. Operative Regeln:
+externe Verträge · Festlegungen der Harness-Werkzeuge — was ein Gate, ein
+Prüfer, ein Hook prüft und wie er an seinen Randformen entscheidet
+([`grundlagen-referenz-richtung.md` §Spec-Straten](grundlagen-referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument))
+· Historie. Operative Regeln:
 
 * **Fortschreibbar** — kein Change Request nötig; eine ADR darf die
   Spezifikation schärfen, das Lastenheft nicht

@@ -81,7 +81,7 @@ Drei Spalten — kein Lauf-Status:
 - Target:  der Make-Befehl.
 - Vertrag: was prüft das Gate (was wäre verletzt, wenn es rot wird).
 - Bindung: strukturelle Referenzen — Carveout-ID (`CO-<NNN>`),
-  Slice-ID, Schwelle, Image-Hash, ADR-ID. NICHT der Lauf-Status,
+  Slice-ID, Spec-Kennung, Schwelle, Image-Hash, ADR-ID. NICHT der Lauf-Status,
   sondern was das Gate *strukturell trägt*.
 
 Lauf-Wahrheit pro Commit liegt in CI (Badge/Dashboard), nicht hier
@@ -121,7 +121,8 @@ auf die falsche Datei bleiben still grün, und geprüft wird nur, wo ein
 Link-Sensor über `harness/` läuft. Kein `sensors/done/`:
 ein retiriertes Gate verschwindet, `git` hält seine Geschichte. Was das
 Werkzeug selbst deckt (welcher Test welche Hälfte trägt), gehört NICHT
-dorthin, sondern in seine ADR/Spec-Zeile/seinen Skriptkopf.
+dorthin, sondern in seine ADR/seinen Skriptkopf; was es prüft und wie es an
+seinen Randformen entscheidet, steht in der Spezifikation.
 -->
 
 | Target | Vertrag | Bindung |

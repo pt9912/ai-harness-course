@@ -29,15 +29,21 @@ Regeln dieser Datei:
 - **Was hier NICHT steht:** womit das Werkzeug selbst gedeckt ist — welcher Test
   welche Hälfte trägt, welcher Mutations-Fall welchen Zweig bewacht. Das ist die
   Frage „ist das Werkzeug richtig?", und ihre Antwort lebt bei ihm: in seiner
-  ADR, seiner Spec-Zeile, seinem Skriptkopf. Diese Datei sagt, wie ein Lauf zu
-  **lesen** ist.
+  ADR und seinem Skriptkopf. Ebenso wenig wird hier entschieden, was das
+  Werkzeug prüft und wie es an einer Randform entscheidet — das steht in der
+  Spezifikation
+  (Baseline-Regelwerk `grundlagen-referenz-richtung.md` §Spec-Straten). Diese
+  Datei verlinkt dorthin und sagt, wie ein Lauf zu **lesen** ist.
 
 ---
 
 ## Vertrag
 
 <Was wäre verletzt, wenn dieses Target rot wird — derselbe Satz wie in der
-Index-Zelle, hier ausgeschrieben. Für ein Nicht-Gate stattdessen: was es tut
+Index-Zelle, dazu der Link auf die Spec-Kennung, die festlegt, was das Werkzeug
+prüft und wie es an seinen Randformen entscheidet. Keine Schwelle und keine
+Randform hier: Sie stehen in der Spezifikation, und an zwei Orten liefen sie
+auseinander. Für ein Nicht-Gate stattdessen: was es tut
 (bewegt · misst · sagt) und warum es kein Gate ist — es urteilt nicht über den
 Zustand des Repos, sondern über die Vorbedingungen seines eigenen Laufs.>
 
@@ -78,6 +84,6 @@ Abbruch-Meldung nennt, und was zu tun ist.>
 
 ## Bindung
 
-<`ADR-<NNNN>` · `CO-<NNN>` · `LH-<…>` · Schwelle · Image-Hash — dieselbe
+<`ADR-<NNNN>` · `CO-<NNN>` · `LH-<…>` · Spec-Kennung · Schwelle · Image-Hash — dieselbe
 Angabe wie in der Index-Zelle. Für ein Nicht-Gate: `kein Gate` plus die ID,
 die seine Existenz begründet.>

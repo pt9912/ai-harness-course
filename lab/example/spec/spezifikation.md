@@ -147,7 +147,20 @@ Ergebnis an der Reihenfolge, in der das Dateisystem den Scan beantwortet.
 | `SPEC-018` | Embedding-Modell | `local-embed-v3@2026-05-22`, gepinnt im Adapter | Adapter-Signatur im `embedding`-Paket je Sprache |
 | `SPEC-019` | Vektor-Storage | Custom Binary v1 | Serialisierungs-Format im `index`-Paket je Sprache |
 
-## 7. Historie
+## 7. Festlegungen der Harness-Werkzeuge
+
+| ID | Werkzeug | Festlegung |
+|---|---|---|
+| `SPEC-020` | `make doc-check`, Modul `reviews` | Ein `done/`-Slice mit Review-DoD-Zeile („Review durchgeführt …") braucht einen Report unter `docs/reviews/` mit derselben Slice-Kennung im Dateinamen — fail-closed auch bei 0 Review-Zusagen, solange `docs/reviews/` fehlt oder unlesbar ist. |
+| `SPEC-021` | `make doc-check`, Modul `ids` | Jede `ADR-NNNN`-Kennung im Fließtext ist ein Link — nicht Kosmetik, denn `matrix` prüft den Status eines Ziels nur an Links; eine nackte Kennung ist für die Richtungs-Prüfung unsichtbar. |
+| `SPEC-022` | `make doc-check`, Modul `planning` | Der Ruhe-Marker der Roadmap steht im Block `## Offene Wellen` genau dann, wenn kein Slice in `in-progress/` liegt (Config-Override `heading:`/`marker:`; der Werkzeug-Default ist noch `## Aktuelle Welle`) — hält zusammen, was sonst beim `git mv` auseinanderläuft. Dazu die Wellen-Invariante (`planning.waves`): die Zeiger unter `## Offene Wellen` ↔ die flachen Welle-Dateien, in beide Richtungen; keine Vorschau-Zeile für eine Welle, die schon eine Datei hat; jede Zeile unter `## Abgeschlossene Wellen` hat ihre Ergebnisnotiz in `done/` und umgekehrt. |
+| `SPEC-023` | `make doc-check`, Modul `targets` | Jedes in einer Doku-Tabelle behauptete `make X` ist eine reale Regel (`gate-phantom`), und jede Regel steht in der Autoritäts-Doku (`gate-undocumented`). Autoritäts-Doku ist der Gate-Index `harness/README.md` §Sensors. |
+| `SPEC-024` | `make doc-check`, Modul `matrix` | Referenz-Richtung als Deklaration: kein Spec-Stratum nennt ADR oder Slice — in keinem Abschnitt, auch nicht in seiner Historie; kein Slice referenziert eine superseded ADR; eine ADR nennt einen Slice nur als Provenance, markiert mit `<!-- d-check:status-provenance -->`. |
+| `SPEC-025` | `make doc-check`, Modul `file` | `AGENTS.md` hat eine Obergrenze von 200 Zeilen — Ist-Zeilenzahl 159 plus Marge, kein erfundener Zielwert. Sinken ist immer erlaubt, steigen nur mit sichtbarem Commit an dieser Festlegung und an `max-lines` in `.d-check.yml`, die sie umsetzt (Ratchet, kein Rückbau-Zwang). |
+| `SPEC-026` | `make replay RUN=<set-name>` | Rot, wenn das Golden-Set-Verzeichnis unter `evals/golden/<set-name>/` unvollständig ist: Manifest mit `model:`- und `runtime:`-Block, `inputs/`, `expectations/`, mindestens drei Cases, gleiche Anzahl auf beiden Seiten. |
+| `SPEC-027` | `make doc-check`, Modul `planning.closure` | Jede Datei in `docs/plan/planning/done/` (`*.md`, nicht nur Slices) trägt eine Closure-Notiz: ein Abschnitt, dessen Überschrift (Ebene 1 bis 3) „Closure-Notiz" nennt, mit mindestens zwei Sätzen, ohne Floskel (`see pr`, `n/a`, `ok`, `siehe ticket`, `wird nachgereicht`, `fertig`, `läuft jetzt`, `lauft jetzt`, `war ganz okay`, `passt schon` — an Wortgrenzen) und ohne unausgefüllten Vorlagen-Rumpf. |
+
+## 8. Historie
 
 | Datum | Änderung |
 |---|---|
@@ -161,3 +174,4 @@ Ergebnis an der Reihenfolge, in der das Dateisystem den Scan beantwortet.
 | 2026-06-03 | Abwärtszeiger auf einen Slice-Plan entfernt (Referenz-Richtung) |
 | 2026-08-08 | `SPEC-*`-Kennungen in §2 bis §6 vergeben (Baseline-ID-Schema) |
 | 2026-08-08 | §1 `LH-FA-IDX-003.a` ergänzt — die Anforderung hatte keinen Verfeinerungs-Abschnitt |
+| 2026-10-06 | §7 Festlegungen der Harness-Werkzeuge ergänzt (`SPEC-020` bis `SPEC-027`, bisher in den Sensor-Dateien und im Gate-Kommentar) |

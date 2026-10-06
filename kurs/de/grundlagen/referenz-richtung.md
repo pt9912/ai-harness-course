@@ -289,6 +289,23 @@ selbst gesetzt haben und selbst fortschreiben dürfen, und es ist das Ziel der
 `Schärft:`-Kante — ohne es hätte die einzige normative ADR→Spec-Kante nur noch
 die Sicht.
 
+**Auch die Werkzeuge des Harness treffen technische Festlegungen.** Ein Gate,
+ein Prüfer, ein Commit-Hook legt fest, was er prüft und wie er an seinen
+Randformen entscheidet — was als Treffer gilt, wie ein Kennungsbereich
+aufgelöst wird, was bei einer nicht lesbaren Datei geschieht. Das haben wir
+selbst gesetzt und dürfen es selbst fortschreiben; der Ort ist deshalb die
+Spezifikation, kein viertes Stratum. Die Kennung folgt derselben Regel wie an
+jeder anderen Spec-Stelle: Setzt das Werkzeug genau eine Anforderung durch,
+trägt die Festlegung deren Verfeinerung, sonst eine `SPEC-<NNN>`. Eine solche
+Festlegung erweitert das Lastenheft nicht — sie legt fest, wie geprüft wird,
+nicht, was das Produkt verspricht. Die ADR des Gates trägt Entscheidung und Gründe und zeigt mit
+`Schärft:` auf diese Stelle, wie jede andere ADR. Eine Randform, die
+erst nach `Accepted` auftaucht, wird dort fortgeschrieben, ohne Folge-ADR,
+solange sie die Entscheidung der ADR nicht ändert. Die gesperrte ADR ist dieser
+Ort nicht, der Slice-Plan, der mit der Closure ins Archiv geht, auch nicht, und
+ebenso wenig der Kopf des Skripts — der trägt, womit das Werkzeug gedeckt ist,
+nicht, was es zusagt ([`harness-dateien.md` §harness/README.md als Einstiegspunkt](harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
+
 Ein Repo *kann* mit zwei Straten fahren. Dann ist das eine **Abweichung von
 der Baseline und wird als `MR-<NNN>` deklariert**, nicht durch Weglassen
 erledigt — ein Stratum, das niemand deklariert hat, ist eine stille Setzung

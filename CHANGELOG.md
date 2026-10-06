@@ -11,6 +11,66 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 158 — 2026-10-06 · Festlegungen der Harness-Werkzeuge gehören in die Spezifikation (Grundlagen, Modul 3)
+
+Anlass: Change Request eines Konsumenten-Repos (pgwire-recorder, Baseline
+v6.13.0). Für die Verträge der Harness-Werkzeuge, also Gates, Prüfer und Hooks
+samt ihren Randformen, fand es keinen zulässigen Ort: Die Gate-ADR ist nach
+`Accepted` gesperrt, und §6 des Slice-Plans geht mit der Closure ins Archiv. Der
+CR schlug ein viertes Spec-Stratum vor. Die Prämisse, die Straten kennten nur
+das Produkt, trägt nicht: Das Technik-Stratum ist über „eigene technische
+Festlegungen" definiert, und `harness-dateien.md` setzte die „Spec-Zeile" eines
+Werkzeugs schon voraus. Ausdrücklich gesagt hat das aber keine Stelle.
+Angenommen als Klarstellung, nicht als neues Stratum.
+
+- Grundlagen `referenz-richtung.md` §Spec-Straten: neuer Absatz. Was ein
+  Harness-Werkzeug prüft und wie es an seinen Randformen entscheidet, ist eine
+  technische Festlegung und steht in der Spezifikation. Die Kennung folgt
+  §Zwei Kennungs-Arten: die Verfeinerung, wenn das Werkzeug genau eine
+  Anforderung durchsetzt, sonst `SPEC-<NNN>`. Die Gate-ADR zeigt mit `Schärft:`
+  darauf. Spätere Randformen werden ohne Folge-ADR fortgeschrieben, solange sie
+  die Entscheidung nicht ändern. Weder ADR noch Slice-Plan noch Skriptkopf sind
+  der Ort.
+- Kurs `modul-03-spec.md` §Die Spezifikation: ein Satz, der diese Festlegungen
+  zum Inhalt der Spezifikation zählt.
+- Grundlagen `harness-dateien.md` §harness/README.md als Einstiegspunkt: Die
+  Sensor-Datei entscheidet weder, was das Werkzeug prüft, noch wie es an einer
+  Randform entscheidet; sie verlinkt die Spec-Stelle und sagt, wie ein Lauf zu
+  lesen ist. Der Deckungsnachweis lebt in ADR und Skriptkopf, nicht mehr
+  „Spec-Zeile" — die Spec trägt die Festlegung, nicht ihren Nachweis.
+- Vorlagen: `spezifikation.template.md` bekommt §7 *Festlegungen der
+  Harness-Werkzeuge* (Historie wird §8). `gate.template.md`: `## Vertrag` trägt
+  den Satz der Index-Zelle und den Link auf die Spec-Kennung, keine Schwelle
+  und keine Randform; dieselbe Grenze unter „Was hier NICHT steht"; Bindung
+  nennt die Spec-Kennung, ebenso die Bindungs-Spalte in `README.template.md`.
+  ADR-Vorlage und ADR-Index: Die ADR eines Gates, dessen Werkzeug festlegt, was
+  es prüft, schärft dessen Spec-Stelle; `—` bleibt der Prozess-ADR ohne
+  Spec-Stratum.
+- Beispiel: Die Festlegungen aus `harness/sensors/doc-check.md` und
+  `replay.md` wandern als `SPEC-020` bis `SPEC-026` in §7 von
+  `spec/spezifikation.md`; `## Vertrag` beider Dateien verweist nur noch,
+  Herkunfts-Anker stehen in der Bindungs-Tabelle (die Spec nennt keinen
+  Slice). Dazu `SPEC-027` für `planning.closure`, das der alte Vertrags-Text
+  ausließ; ADR-0011 schärft sie jetzt (Nachpflege des `Schärft:`-Felds nach dem
+  Präzedenzfall im ADR-Index des Beispiels, keine Entscheidungs-Änderung; Zeile
+  in ihrer Geschichte). Index-Zeilen in `harness/README.md` nennen die
+  Kennungen; der Link eines geschlossenen Slice auf die Historie ist auf §8
+  nachgezogen. Die `Accepted`-ADRs des Beispiels mit `Schärft: —` (0013 bis
+  0019) bleiben unverändert: Ihre Festlegungen stehen nicht in der
+  Spezifikation; der ADR-Index des Beispiels nennt sie Altbestand, kein Vorbild.
+- Grundlagen `begriffe.md`: Eintrag `harness/sensors/<target>.md` nennt dieselbe Grenze.
+- Spiegel wortgleich in `lab/regelwerk/grundlagen-referenz-richtung.md`, `grundlagen-begriffe.md`,
+  `modul-03-spec.md` und
+  `grundlagen-harness-dateien.md`; in `modul-03-spec.md` steht der Kurs-Satz
+  als Punkt der Ziel-Form-Liste. `Stand:` auf Welle 158.
+- Nicht übernommen: der Gegenproben-Fall je Zusage im Vertragsdokument (er ist
+  Deckungsnachweis und lebt beim Werkzeug) und ein vierter Register-Ausgang
+  „urteilsgebunden" (abgedeckt durch Welle 152 und den Skill als Zielort von
+  *verkörpert*).
+- Kein beobachtbares Verhalten behauptet — eine Zuordnungsregel, kein Sensor;
+  `make doc-check` im Beispiel bleibt bei 0 Befunden. Regel-Änderung, daher
+  beim nächsten Release MINOR.
+
 ## Welle 157 — 2026-10-06 · Vorlagen führen die BEO-Kennung als Pfad (Nachzug zu Welle 116)
 
 Anlass: Hinweis aus einem Konsumenten-Repo — `conventions.template.md` führte im

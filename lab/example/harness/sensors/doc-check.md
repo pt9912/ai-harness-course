@@ -7,37 +7,10 @@ die falsche.
 ## Vertrag
 
 **Sechs Module — fünf über Doku-Referenzen, eines über den Umfang einer
-Guide-Datei.**
-
-- **`reviews`** (seit slice-review-report-deckung-per-d-check): Ein `done/`-Slice mit Review-DoD-Zeile
-  („Review durchgeführt …") braucht einen Report unter `docs/reviews/` mit
-  derselben Slice-Kennung im Dateinamen — fail-closed auch bei 0
-  Review-Zusagen, solange `docs/reviews/` fehlt oder unlesbar ist.
-- **`ids`**: Jede `ADR-NNNN`-Kennung im Fließtext ist ein Link — nicht
-  Kosmetik, denn `matrix` prüft den Status eines Ziels nur an Links; eine
-  nackte Kennung ist für die Richtungs-Prüfung unsichtbar.
-- **`planning`**: Der Ruhe-Marker der Roadmap steht im Block
-  `## Offene Wellen` genau dann, wenn kein Slice in `in-progress/` liegt
-  (Config-Override `heading:`/`marker:`; der Werkzeug-Default ist noch
-  `## Aktuelle Welle`) — hält zusammen, was sonst beim `git mv`
-  auseinanderläuft. Dazu die **Wellen-Invariante** (`planning.waves`, seit
-  slice-wellen-invariante-per-d-check): die Zeiger unter `## Offene Wellen` ↔ die flachen Welle-Dateien,
-  in beide Richtungen; keine Vorschau-Zeile für eine Welle, die schon eine
-  Datei hat; jede Zeile unter `## Abgeschlossene Wellen` hat ihre
-  Ergebnisnotiz in `done/` und umgekehrt.
-- **`targets`**: jedes in einer Doku-Tabelle behauptete `make X` ist eine reale
-  Regel (`gate-phantom`), und jede Regel steht in der Autoritäts-Doku
-  (`gate-undocumented`). Autoritäts-Doku ist der Gate-Index
-  [`../README.md` §Sensors](../README.md#sensors-feedback-gates); die Hard Rule
-  dahinter trägt `AGENTS.md` §3.
-- **`matrix`**: Referenz-Richtung als Deklaration: kein Spec-Stratum nennt ADR
-  oder Slice — **in keinem Abschnitt, auch nicht in seiner Historie**; kein
-  Slice referenziert eine superseded ADR; eine ADR nennt einen Slice nur als
-  Provenance, markiert mit `<!-- d-check:status-provenance -->`.
-- **`file`** (seit Welle 147, gegen Guide-Datei-Wildwuchs): `AGENTS.md` hat
-  eine Obergrenze von 200 Zeilen — Ist-Zeilenzahl 159 plus Marge, kein
-  erfundener Zielwert. Sinken ist immer erlaubt, steigen nur mit sichtbarem
-  Commit an dieser Zeile (Ratchet, kein Rückbau-Zwang).
+Guide-Datei.** Rot, wenn eines davon eine Festlegung verletzt; was jedes prüft
+und wie es an seinen Randformen entscheidet, legen
+[`SPEC-020` bis `SPEC-025` und `SPEC-027`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) fest; welche Kennung zu
+welchem Modul gehört, steht unten unter [Bindung](#bindung).
 
 ## Grenze — was das Grün nicht abdeckt
 
@@ -73,10 +46,10 @@ die Zeile trug lange nur die Bindung von `ids`/`matrix`, und die ist für
 `reviews`, `planning` und `targets` fachlich unpassend (Review-Befund F-4 vom
 2026-09-05).
 
-| Modul | Bindung |
-|---|---|
-| `reviews` | [Modul 10 §Harness-Einordnung](../../../../kurs/de/04-qualitaet/modul-10-review-harness.md#harness-einordnung) — Review-Report-Deckung |
-| `ids`, `matrix` | [Kurs §Referenz-Richtung](../../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) |
-| `planning` | [Modul 6 §Die Wellen-Eröffnungs-Prozedur](../../../../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) — Ruhe-Marker und Wellen-Invariante |
-| `targets` | [Modul 13 §Hard Rule](../../../../kurs/de/04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin) — halluzinierte Gates; verkoerpert in `AGENTS.md` §3 |
-| `file` | [Kurs §Entropy Management](../../../../kurs/de/grundlagen/klassifikation.md#entropy-management) — Guide-Datei-Wildwuchs |
+| Modul | Festlegung | Bindung |
+|---|---|---|
+| `reviews` | [`SPEC-020`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) (seit slice-review-report-deckung-per-d-check) | [Modul 10 §Harness-Einordnung](../../../../kurs/de/04-qualitaet/modul-10-review-harness.md#harness-einordnung) — Review-Report-Deckung |
+| `ids`, `matrix` | [`SPEC-021`, `SPEC-024`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) | [Kurs §Referenz-Richtung](../../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) |
+| `planning` | [`SPEC-022`, `SPEC-027`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) (Wellen-Invariante seit slice-wellen-invariante-per-d-check) | [Modul 6 §Die Wellen-Eröffnungs-Prozedur](../../../../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) — Ruhe-Marker und Wellen-Invariante |
+| `targets` | [`SPEC-023`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) | [Modul 13 §Hard Rule](../../../../kurs/de/04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin) — halluzinierte Gates; verkoerpert in `AGENTS.md` §3 |
+| `file` | [`SPEC-025`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) (seit Welle 147) | [Kurs §Entropy Management](../../../../kurs/de/grundlagen/klassifikation.md#entropy-management) — Guide-Datei-Wildwuchs |

@@ -1,15 +1,15 @@
 # `make replay RUN=<set-name>` — Golden-Set-Fixture validieren
 
 Vertiefung zur Index-Zeile in [`../README.md` §Sensors](../README.md#sensors-feedback-gates).
-Bindung: [Modul 12 §Golden-Set-Form](../../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)
+Bindung: [`SPEC-026`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge);
+[Modul 12 §Golden-Set-Form](../../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md)
 (`MR-002`).
 
 ## Vertrag
 
 Root-Target; `<set-name>` ist der Name unterhalb `evals/golden/`, z. B.
-`welle-mvp-baseline`. Rot, wenn das Golden-Set-Verzeichnis unvollständig ist:
-Manifest mit `model:`- und `runtime:`-Block, `inputs/`, `expectations/`,
-mindestens drei Cases, gleiche Anzahl auf beiden Seiten.
+`welle-mvp-baseline`. Rot, wenn das Golden-Set-Verzeichnis unvollständig ist —
+was vollständig heißt, legt [`SPEC-026`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) fest.
 
 ## Grenze — was das Grün nicht abdeckt
 

@@ -332,7 +332,11 @@ Grün nicht abdeckt, was seine Ausgabe bedeutet, wofür welcher Exit-Code steht,
 woran er abbricht. Nicht hinein gehört, womit das Werkzeug selbst gedeckt ist —
 welcher Test welche Hälfte trägt, welcher Mutations-Fall welchen Zweig bewacht.
 Das ist die Frage *„ist das Werkzeug richtig?"*, und ihre Antwort lebt bei ihm:
-in seiner ADR, seiner Spec-Zeile, seinem Skriptkopf. Ohne diese Grenze wird
+in seiner ADR und seinem Skriptkopf. Auch was das Werkzeug prüft und wie es an
+einer Randform entscheidet, wird hier nicht entschieden: Das ist eine
+technische Festlegung und steht in der Spezifikation
+([§Spec-Straten](referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)). Die Sensor-Datei
+verlinkt sie und sagt, wie ein Lauf zu lesen ist. Ohne diese Grenze wird
 `harness/sensors/` die Halde, die die Sektion vorher war — der Ort hätte
 gewechselt, die Menge nicht.
 

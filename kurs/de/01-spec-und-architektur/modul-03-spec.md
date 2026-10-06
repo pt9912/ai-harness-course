@@ -107,7 +107,9 @@ Das Lastenheft sagt, *was* geliefert wird; die Spezifikation sagt, *wie genau*.
 Sie trägt **eigene technische Festlegungen** — Algorithmen und Datenflüsse,
 Datenstrukturen, Defaults und Konstanten, Fehler-Codes, Metrik- und
 Tracing-Felder, externe Verträge — und ist damit normativ, nicht bloß
-beschreibend.
+beschreibend. Dazu gehören auch die Festlegungen der eigenen Harness-Werkzeuge
+— was ein Gate, ein Prüfer, ein Hook prüft und wie er an seinen Randformen
+entscheidet ([§Spec-Straten](../grundlagen/referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)).
 
 Fünf Regeln, alle aus der Straten-Ordnung
 ([§Spec-Straten](../grundlagen/referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)):

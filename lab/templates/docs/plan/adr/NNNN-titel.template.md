@@ -26,7 +26,10 @@ dort hat sie keinen eigenen Anker
 (Baseline-Regelwerk `grundlagen-source-precedence.md` §ID-Schema als Klammer).
 Aufwärts-Deklaration der
 Änderungskopplung: wer diese ADR ändert, zieht von hier die betroffenen
-Spec-Stellen nach. `—` eintragen, wenn Prozess-ADR ohne Spec-Stratum.
+Spec-Stellen nach. `—` eintragen, wenn Prozess-ADR ohne Spec-Stratum. Ein
+Gate, dessen Werkzeug festlegt, was es prüft und wie es an seinen Randformen
+entscheidet, hat eine Spec-Stelle: Seine ADR schärft sie (Baseline-Regelwerk
+`grundlagen-referenz-richtung.md` §Spec-Straten).
 
 **Regeln:** Baseline-Regelwerk `modul-04-adrs.md`
 §Ziel-Form: ADR (MADR).
