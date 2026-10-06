@@ -80,6 +80,11 @@ gruppen:
   # Gnadenfrist-Verhalten), steigen wird nicht verhindert, aber nie still,
   # und Kuerzen stellt Gruen wieder her.
   s28: [s28a, s28b, s28e, s28c, s28d]
+  # s29: das Zweig-Kennzeichen im `Verantwortlich:`-Feld (Welle 148, WIP-Limit
+  # zaehlt den Lauf) schlaegt keine bestehende Pruefung an — erwartete Stille
+  # (s29b) neben einem lauten matrix-Lauf im selben Aufbau (s29a). Nachgetragen
+  # mit Welle 159: die Gruppe lief seit Welle 148, stand aber nicht im Register.
+  s29: [s29a, s29b]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -101,3 +106,4 @@ laeufe:
   - { datum: 2026-09-24, image: v0.77.0, neu: [], gegenstand: "Pin-Bump v0.74.1 -> v0.77.0 (Zwischenversionen opt-in, kein Breaking Change): alle 80 Verdikte unveraendert, keine gedrehte Erwartung", ergebnis: "80 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-25, image: v0.77.0, neu: [s27a, s27b, s27c, s27d], gegenstand: "Entwurf: die ADR-Kennungs-Konfiguration der Vorlage (Welle 139) — `ids` traegt die nackte Kennung allein (Fliesstext, Bereichssegment, Inline-Code laut), das token der adr-Klasse ist redundant; verlinkte Kennung und das Wort ADR- ohne Nummer sind still", ergebnis: "84 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-09-27, image: v0.78.0, neu: [s28a, s28b, s28e, s28c, s28d], gegenstand: "Entwurf: das file-Modul gegen Guide-Datei-Wildwuchs (Welle 147) — Datei im Budget still, drueber laut, gesenktes Budget ohne Aenderung sofort laut (kein Gnadenfrist-Verhalten), Kuerzung auf das neue Budget wieder still, Regel ohne Treffer fail-closed (s28e, Nachtrag nach Review: die Behauptung stand vorher nur an einem Scratch-Fixture)", ergebnis: "89 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-09-27, image: v0.78.0, neu: [s29a, s29b], gegenstand: "Entwurf: das Zweig-Kennzeichen im Verantwortlich-Feld (Welle 148) — ADR nennt einen Slice-Token laut, derselbe Slice nennt sich per Zweig-Kennzeichen selbst still, im selben Lauf. Nachgetragen mit Welle 159 aus dem CHANGELOG-Eintrag von Welle 148, nicht aus einem archivierten ergebnis.tsv", ergebnis: "91 PASS, 0 FAIL, 0 KAPUTT" }

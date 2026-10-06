@@ -74,6 +74,7 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-09-24 | `v0.77.0` | 80 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.74.1 → v0.77.0 |
 | 2026-09-25 | `v0.77.0` | 84 PASS, 0 FAIL, 0 KAPUTT | erweitert um s27 |
 | 2026-09-27 | `v0.78.0` | 89 PASS, 0 FAIL, 0 KAPUTT | erweitert um s28 |
+| 2026-09-27 | `v0.78.0` | 91 PASS, 0 FAIL, 0 KAPUTT | erweitert um s29 — nachgetragen mit Welle 159 aus dem CHANGELOG-Eintrag von Welle 148, kein archiviertes `ergebnis.tsv` |
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
 Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
@@ -169,6 +170,8 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s28e | eine Regel trifft mit ihrem Glob keine Datei | **`file-no-match`** | ✓ fail-closed, im selben Lauf wie s28a-b — die Behauptung stand vorher nur an einem Scratch-Fixture (Review-Nachtrag) |
 | s28c | Budget für `below.md` auf 190 gesenkt, Datei bleibt bei 200 | **`file-lines-exceeded`**, sofort | ✓ kein Gnadenfrist-Verhalten — die Zusage von d-check selbst |
 | s28d | `below.md` auf 190 Zeilen gekürzt, Budget bleibt 190 | **still** wieder | ✓ Kürzen stellt Grün wieder her |
+| s29a | eine ADR nennt einen Slice-Token, `matrix` verbietet adr → slice | **`matrix-forbidden`** | ✓ das Modul erkennt Slice-Tokens überhaupt |
+| s29b | derselbe Slice nennt sich im `Verantwortlich:`-Feld per Zweig-Kennzeichen selbst | **still**, während s29a im selben Lauf laut ist | ✓ das Zweig-Kennzeichen schlägt nichts an |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte
