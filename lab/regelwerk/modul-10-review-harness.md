@@ -137,7 +137,7 @@ nicht wieder gelesen — das steuerungsrelevante Signal ist die
 **Beobachtungs-Register** wandert
 ([Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)). Bedingung: die
 Klassen-Bezeichnung ist über Läufe hinweg **stabil** — der Report kennt das
-Register nicht, die Zuordnung zur `BEO-<NNN>` passiert erst bei der
+Register nicht, die Zuordnung zur Beobachtung passiert erst bei der
 Slice-Closure und braucht den wiedererkennbaren Namen. Ein Archiv-Scan ist
 nicht nötig — die Häufung steht im Register.
 

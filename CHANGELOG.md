@@ -11,6 +11,30 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 157 — 2026-10-06 · Vorlagen führen die BEO-Kennung als Pfad (Nachzug zu Welle 116)
+
+Anlass: Hinweis aus einem Konsumenten-Repo — `conventions.template.md` führte im
+ID-Schema noch `BEO-<NNN>`, das Regelwerk seit Welle 116 `BEO-<KUERZEL>/<slug>`.
+Der Abgleich fand dieselbe Altform an acht weiteren Stellen, dazu zwei
+Verweise auf das seit Welle 116 abgeschaffte flache `observations.md`.
+
+- `lab/templates/harness/conventions.template.md` (ID-Schema),
+  `slice.template.md` (§6 Risiko-Ausgang, §7 Regel-Zeile und Auslöser),
+  `welle-results.template.md` (Regel-Zeile, beide Auslöser): `BEO-<NNN>` →
+  `BEO-<KUERZEL>/<slug>`. `review-report.template.md` (Klassen-Kommentar):
+  „Zuordnung zur Beobachtung", wie die Quelle.
+- Register-Pfad: `welle-results.template.md` (Zeiger-Sektion, Kommentar und
+  Link) und Kurs `modul-06-roadmap.md` §Wellen-Planung Schritt 2 nannten noch
+  `observations.md`; jetzt `observations/`, wie der Spiegel es schon trug.
+- Spiegel `lab/regelwerk/modul-10-review-harness.md`: „Zuordnung zur
+  `BEO-<NNN>`" → „Zuordnung zur Beobachtung", wortgleich mit der Quelle
+  (`kurs/de/04-qualitaet/modul-10-review-harness.md`); der Spiegel hatte hier
+  eine Form getragen, die die Quelle nie nannte. `Stand:` in
+  `lab/regelwerk/README.md` auf Welle 157.
+- Kein beobachtbares Verhalten behauptet — Platzhalter-Form in Vorlagen. Keine
+  Regel-Änderung (die Regel steht seit Welle 116), daher beim nächsten Release
+  PATCH.
+
 ## Welle 156 — 2026-10-03 · Finding-Pfad ist Datei plus Zitat, nicht Zeile (Modul 10)
 
 Anlass: `pfad: Datei:Zeile` ist eine Adresse in ein bewegliches Ziel. Ändert sich

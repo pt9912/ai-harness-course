@@ -90,7 +90,7 @@ wird bei der Slice-Closure (§7) ins Beobachtungs-Register eingetragen und
 dort gezählt; bei 3x wird der Reviewer-Skill geschärft (Modul 10 §Pflege).
 
 DIE KLASSEN-BEZEICHNUNG MUSS ÜBER LÄUFE HINWEG STABIL SEIN. Dieser Report
-kennt das Register NICHT (er ist Lauf-Beleg) — die Zuordnung zur BEO-<NNN>
+kennt das Register NICHT (er ist Lauf-Beleg) — die Zuordnung zur Beobachtung
 passiert erst bei der Slice-Closure und braucht den wiedererkennbaren Namen.
 Ab dann zitiert die Closure die Kennung; dort ist die Bezeichnung nur noch
 Label. Niemand muss alte Reports lesen: die Häufung steht im Register, nicht

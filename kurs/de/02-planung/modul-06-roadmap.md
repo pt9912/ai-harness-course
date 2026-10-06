@@ -641,7 +641,7 @@ weglassen:
    — was nicht ausdrücklich ausgeschlossen ist, wandert im Zweifel in die
    Welle und dehnt sie, bis der Closure-Trigger unerreichbar wird.
 2. **Offene Beobachtungen sichten.** Das Register
-   [`docs/plan/planning/observations.md`](#das-beobachtungs-register) wird
+   [`docs/plan/planning/observations/`](#das-beobachtungs-register) wird
    durchgegangen: Betrifft eine davon die Sub-Areas, die diese Welle
    berührt? Dann gehört sie in die Slice-Planung — entweder als Risiko im
    betroffenen Slice ([Modul 5 §Sub-Area-Modus-Begründung](modul-05-planning-harness.md#worked-mini-example-bootstrap-modus-pro-sub-area-für-einen-slice-begründen))

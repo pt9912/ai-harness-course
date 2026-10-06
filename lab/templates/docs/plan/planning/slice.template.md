@@ -162,7 +162,7 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
 **einen** Ausgang, und kein Slice geht nach `done/`, während eines ohne Ausgang
 dasteht.
 
-- <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-<Kennung> | entfallen: Grund | weiter offen: → BEO-NNN im Register>
+- <Risiko> — **Ausgang:** <eingetreten: CO-NNN / slice-<Kennung> | entfallen: Grund | weiter offen: → BEO-<KUERZEL>/<slug> im Register>
 
 ## 7. Closure-Notiz
 
@@ -174,7 +174,7 @@ Im Repo ohne Wellen-Betrieb braucht die Closure dadurch drei Commits: Inhalt,
 `git mv`, Haekchen — das folgt aus der Hard Rule, es widerspricht ihr nicht. -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
-§Das Beobachtungs-Register (vorhandene `BEO-<NNN>` **zitieren** statt neu
+§Das Beobachtungs-Register (vorhandene `BEO-<KUERZEL>/<slug>` **zitieren** statt neu
 formulieren — sonst zählt das Register zwei Namen getrennt) ·
 `grundlagen-traceability.md` §Herkunfts-Anker für Steering-Loop-Regeln (das
 Feld `liegt in` steht **nur**, wenn mit diesem Slice wirklich etwas verkörpert
@@ -191,7 +191,7 @@ aus §6 seinen Ausgang; die Liefer-Punkte der DoD bleiben leer
   *(nur beim Ausgang ohne Arbeit; sonst Zeile löschen)*
 - **Steering-Loop-Eintrag:** <Guide oder Sensor> <geschärft/ergänzt>: <was genau>
   — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.
-  Auslöser: `BEO-<NNN>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).
+  Auslöser: `BEO-<KUERZEL>/<slug>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).
   *(Wurde mit diesem Slice nichts verkörpert — der Normalfall —, entfällt die
   Teil-Zeile `— liegt in …` ersatzlos. Der Eintrag ist dann gezählt, nicht
   verkörpert.)*

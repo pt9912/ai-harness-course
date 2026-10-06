@@ -57,16 +57,16 @@ die daraus schon gezogen wurde (Folge-Slice, Spec-Version).
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 §Wellen-Closure-Prozedur, Schritt 3 (hier stehen **nur** Beobachtungen, die im
-Register 3× erreicht haben; jeder Eintrag nennt seine `BEO-<NNN>`) ·
+Register 3× erreicht haben; jeder Eintrag nennt seine `BEO-<KUERZEL>/<slug>`) ·
 `grundlagen-traceability.md` §Herkunfts-Anker für Steering-Loop-Regeln (Feld
 und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der Backticks; die
 **Spec-Lücke** trägt statt `liegt in` ihre `LH-*`-ID — das ist kein Versehen).
 
 - **<Guide oder Sensor>** <geschärft/ergänzt>: <was genau>
   — liegt in `<AGENTS.md §X | Makefile:<target> | .harness/skills/…>`.
-  Auslöser: `BEO-<NNN>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).
+  Auslöser: `BEO-<KUERZEL>/<slug>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).
 - **Spec-Lücke** benannt: <was fehlte> — aufgelöst über <Lastenheft v<X.Y.Z> (`LH-FA-NN`) | ADR-<NNNN>>.
-  Auslöser: `BEO-<NNN>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).
+  Auslöser: `BEO-<KUERZEL>/<slug>` (<slice-kennung-a>, <slice-kennung-b>, <slice-kennung-c> — 3×).
 - <…>
 
 <!-- Gegenstück am Ziel, nicht vergessen — es ist die andere Hälfte des Paares:
@@ -78,8 +78,8 @@ und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der Backticks; die
 ## Beobachtungs-Register (Zeiger)
 
 <!--
-NICHT MEHR HIER PFLEGEN. Der Zaehler lebt seit Kurs-Welle 59 als stehende
-Datei: `docs/plan/planning/observations.md` (Ziel-Form
+NICHT MEHR HIER PFLEGEN. Der Zaehler lebt als stehende Ablage
+`docs/plan/planning/observations/`, ein Verzeichnis je Beobachtung (Ziel-Form
 [`observation.template.md`](observation.template.md), Regeln im
 Baseline-Regelwerk `modul-06-roadmap.md` §Das Beobachtungs-Register).
 
@@ -96,7 +96,7 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 §Das Beobachtungs-Register — der Zähler wird **nicht** hier gepflegt; diese
 Sektion ist ein Zeiger und trägt keine Daten.
 
-Der Zähler steht in [`../observations.md`](../observations.md).
+Der Zähler steht in [`../observations/`](../observations/).
 Was in dieser Welle **3×** erreicht hat, steht oben unter
 *Steering-Loop-Einträge*.
 
