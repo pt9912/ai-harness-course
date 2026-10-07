@@ -27,10 +27,10 @@ help: ## Targets anzeigen
 # Zweites Layering-Gate (ADR-0018). `a-check.mk` ist tool-generiert
 # (`a-check --print-mk`), die Regeln stehen in `.a-check.yml` — beide nicht
 # im Recipe. Die Setzung vor dem `include` sticht das `?=` im Fragment;
-# gepinnt ist v0.17.0, der geprüfte Stand. Anheben ist ein eigener Commit.
+# gepinnt ist v0.22.0, der geprüfte Stand. Anheben ist ein eigener Commit.
 # Der `include` steht hinter `help`, weil das erste gelesene Target das
 # Default-Goal ist — davor gelesen, startet ein blankes `make` das Gate.
-A_CHECK_IMAGE := ghcr.io/pt9912/a-check@sha256:665540114aea653effcc0e0c96ada6e8da2e7bfa867cade74d418d541af88dda
+A_CHECK_IMAGE := ghcr.io/pt9912/a-check@sha256:12e961f799e6d50d25cf68f1a0b230cf222f51c2360bf91933cd7489174a26a9
 include a-check.mk
 
 build: ## Runtime-Image bauen (Multi-Stage, Distroless)

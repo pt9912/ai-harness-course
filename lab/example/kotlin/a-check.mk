@@ -1,6 +1,9 @@
 # a-check.mk — Architektur-Gate via a-check, zum `include` in das
 # Makefile des konsumierenden Repos. Erzeugt von `a-check --print-mk`.
 #
+# Benutzerhandbuch (aufgabenorientiert, deutsch):
+#   https://github.com/pt9912/a-check/blob/main/docs/user/benutzerhandbuch.md
+#
 # PFLICHT VOR DEM ERSTEN LAUF: A_CHECK_IMAGE auf den Release-Digest setzen.
 # Der Platzhalter unten ist KEIN gueltiger Verweis — `make a-check` bricht
 # damit ab. Das ist Absicht: a-check kann den Digest seines eigenen Image nicht
@@ -16,7 +19,7 @@ A_CHECK_IMAGE ?= ghcr.io/pt9912/a-check@sha256:SETZE-HIER-DEN-RELEASE-DIGEST-EIN
 
 # Container-Runtime ueber eine Indirektion, damit ein Repo mit podman/nerdctl
 # oder einem docker-Wrapper nicht die Haelfte seiner Targets anders faehrt als
-# die andere (slice-container-runtime-indirektion).
+# die andere (slice-082).
 #
 # REIHENFOLGE ZAEHLT: `?=` setzt nur, wenn DOCKER noch nicht belegt ist.
 # Wer eine eigene Runtime nutzt, definiert sie VOR dem `include` — oder
