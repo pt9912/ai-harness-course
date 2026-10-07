@@ -88,9 +88,10 @@ gruppen:
   # s30: ENTWURFS-Gegenstand — der werkzeug-eigene Teil des Gate-Index (Welle 159, d-check
   # v0.82.0, targets.authority als Liste). Die Vereinigung traegt (s30a still,
   # s30c Kontrolle laut), ein Fragment-Target ohne Zeile ist laut (s30b), Phantom
-  # im Werkzeug-Teil laut (s30e), und die benannte Grenze: ein Target in beiden
-  # Teilen bleibt still (s30d).
-  s30: [s30a, s30c, s30b, s30e, s30d]
+  # im Werkzeug-Teil laut (s30e); ein Target in beiden Teilen bleibt ohne
+  # Schalter still (s30d) und wird mit authority-disjoint laut (s30f, d-check
+  # v0.83.0, Welle 160).
+  s30: [s30a, s30c, s30b, s30e, s30d, s30f]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -116,3 +117,4 @@ laeufe:
   - { datum: 2026-10-06, image: v0.82.0, neu: [], gegenstand: "Pin-Bump v0.78.0 -> v0.82.0 (targets.makefiles mit Glob, targets.authority als Liste; beides opt-in, mit einer Datei byte-identisch): alle Verdikte unveraendert, keine gedrehte Erwartung", ergebnis: "91 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-10-06, image: v0.82.0, neu: [s30a, s30c, s30b, s30e, s30d], gegenstand: "Entwurf: der werkzeug-eigene Teil des Gate-Index (Welle 159) — Vereinigung beider Teile still bei scharfem Sensor, ohne den zweiten Teil laut (Kontrolle), Fragment-Target ohne Zeile laut mit Fundort im Fragment, Phantom im Werkzeug-Teil laut, Target in beiden Teilen still (benannte Grenze: die Vereinigung zaehlt es einmal)", ergebnis: "96 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-10-07, image: v0.83.0, neu: [], gegenstand: "Pin-Bump v0.82.0 -> v0.83.0 (targets.authority-disjoint, opt-in, ohne Schalter byte-identisch): alle Verdikte unveraendert, s30d bleibt still, weil der Schalter aus ist", ergebnis: "96 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-10-07, image: v0.83.0, neu: [s30f], gegenstand: "Entwurf: die Disjunktheit des Gate-Index als Gate (Welle 160) — dieselbe Doppelung wie s30d, mit targets.authority-disjoint: gate-declared-twice an der Zeile in der spaeteren Autoritaets-Datei und nur dort; s30d setzt den Schalter ausdruecklich auf false und bleibt still", ergebnis: "97 PASS, 0 FAIL, 0 KAPUTT" }

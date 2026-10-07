@@ -170,7 +170,8 @@ dazu, meldet der Sensor es, statt es still durchzulassen. Ein Glob an dieser
 Stelle gäbe die Zusage wieder auf. Eine Autoritäts-Doku heißt dabei nicht
 zwingend eine Datei: Bringt ein Werkzeug Make-Fragmente mit, führt es deren
 Zeilen in einem eigenen Teil des Index, und der Sensor misst gegen die
-Vereinigung aller Teile. Dort gilt die Zusage der Ausnahmeliste nicht — ein
+Vereinigung aller Teile — ein Target in zwei Teilen sieht er dabei nur, wenn die
+Disjunktheit eigens geprüft wird. Dort gilt die Zusage der Ausnahmeliste nicht — ein
 Target, das eine Regeneration mitbringt, steht mit seiner Zeile im Teil des
 Werkzeugs und ist deklariert, nicht gemeldet
 ([`harness-dateien.md` §harness/README.md als Einstiegspunkt](../grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).

@@ -38,11 +38,13 @@ modules: [links, anchors]
 #   # Erzeugt ein Werkzeug Make-Fragmente unter harness/mk/, fuehrt es deren
 #   # Targets in harness/mk/<werkzeug>.md (`grundlagen-harness-dateien.md`
 #   # §harness/README.md als Einstiegspunkt). Dann misst der Sensor gegen die
-#   # Vereinigung aller Teile (d-check >= v0.82.0); eine Doppelnennung bleibt
-#   # still, die Disjunktheit prueft er nicht:
+#   # Vereinigung aller Teile (d-check >= v0.82.0). Die Disjunktheit (kein
+#   # Target in zwei Teilen) prueft er nur mit dem Schalter (d-check >= v0.83.0,
+#   # gate-declared-twice) — ohne ihn bleibt eine Doppelnennung still:
 #   # makefiles: [Makefile, "harness/mk/*.mk"]
 #   # doc-tables: [harness/README.md, harness/mk/<werkzeug>.md]
 #   # authority: [harness/README.md, harness/mk/<werkzeug>.md]
+#   # authority-disjoint: true                                          # d-check >= v0.83.0; nur mit authority als Liste
 #   # Utility ohne Gate-Anspruch (§Vorhanden != behauptet). NAMENTLICH, nie
 #   # als Glob: Kommt bei einer Regeneration ein Target dazu, soll der Sensor
 #   # es melden, statt es still durchzulassen.

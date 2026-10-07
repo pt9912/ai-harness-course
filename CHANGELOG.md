@@ -11,6 +11,34 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 160 — 2026-10-07 · Die Disjunktheit des Gate-Index wird ein Gate (Grundlagen)
+
+Anlass: d-check v0.83.0 liefert, was Welle 159 als benannte Grenze führte — mit
+`targets.authority-disjoint: true` meldet `targets` ein Target, das in mehr als
+einer Autoritäts-Datei steht (`gate-declared-twice`, an der Zeile in der
+späteren Datei). Gebaut auf den Hinweis aus Welle 159 hin (ADR-0101 dort; der
+Re-Evaluierungs-Trigger von ADR-0100 war erreicht).
+
+- Grundlagen `harness-dateien.md` §harness/README.md als Einstiegspunkt: Die
+  Disjunktheit braucht eine eigene Prüfung — wer sie hat, schaltet sie zusammen
+  mit der Vereinigung ein, sonst steht die Regel nur im Briefing; wer sie nicht
+  hat, führt sie weiter als benannte Grenze. Modul 13 §Hard Rule sagt dasselbe
+  in einem Halbsatz. Spiegel wortgleich in
+  `lab/regelwerk/grundlagen-harness-dateien.md` und `modul-13-quality-gates.md`.
+  `Stand:` auf Welle 160.
+- Vorlage `.d-check.yml`: der Fragment-Block trägt `authority-disjoint: true`
+  (d-check ≥ v0.83.0) statt des Hinweises, die Doppelnennung bleibe still.
+- Team-Sim: neue Probe `s30f` — dieselbe Doppelung wie `s30d`, mit Schalter:
+  `gate-declared-twice` auf `harness/mk/werkzeug.md` und nur dort; `s30d` setzt
+  den Schalter jetzt ausdrücklich auf `false` statt sich auf den Default zu
+  verlassen. Erst das Paar belegt, dass die Stille am Schalter hängt.
+  Mutationstest: Schalter auf `false` → `s30f` FAIL. Voller Lauf **97 PASS,
+  0 FAIL, 0 KAPUTT**.
+- Vorher als eigener Commit: Pin d-check v0.82.0 → v0.83.0 (Trockenlauf
+  byte-identisch, Team-Sim 96/96).
+- Regel-Änderung (die Disjunktheit wird, wo prüfbar, eingeschaltet), daher beim
+  nächsten Release MINOR.
+
 ## Welle 159 — 2026-10-06 · Ein Gate-Index, mehrere Eigentümer (Modul 13, Grundlagen)
 
 Anlass: Change Request von ai-harness-init, dem Werkzeug, das Ziel-Repos mit der

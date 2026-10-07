@@ -1679,7 +1679,8 @@ EOF
 # traegt (s30a still, s30c die Kontrolle: ohne den zweiten Teil laut), ein
 # Target ohne Zeile in beiden Teilen ist laut (s30b), die Phantom-Richtung
 # greift auch im Werkzeug-Teil (s30e) — und die benannte Grenze: ein Target in
-# BEIDEN Teilen bleibt still (s30d). Jede Stille steht neben einem lauten Lauf
+# BEIDEN Teilen bleibt ohne Schalter still (s30d) und wird mit ihm laut (s30f,
+# d-check v0.83.0, Welle 160). Jede Stille steht neben einem lauten Lauf
 # desselben Aufbaus (scharf_kontrolle bzw. s30c).
 werkzeugteil() { # $1 = Clone mit gateindex; Fragment + Werkzeug-Teil + Liste
   mkdir -p "$1/harness/mk"
@@ -1768,11 +1769,15 @@ s30_werkzeug_teil() {
   befund_in "$out" "harness/mk/werkzeug.md" "wphantom" "gate-phantom" && ok=0 || ok=1
   verdikt "s30e Phantom-Target im Werkzeug-Teil: LAUT" "gate-phantom auf harness/mk/werkzeug.md" "$(echo "$out"|tail -1)" $ok
 
-  # --- s30d: benannte Grenze — ein Target in BEIDEN Teilen -> still.
+  # --- s30d: ein Target in BEIDEN Teilen, Schalter aus -> still.
   topo; cd "$WORK/sim/alice" || return 1
   schritt gateindex . || return 1
   schritt werkzeugteil . || return 1
   sed -i 's#^| `make lint` | Stil | — |#| `make lint` | Stil | — |\n| `make wlint` | Stil, zweite Zeile im Repo-Teil | — |#' harness/README.md
+  # Schalter AUSDRUECKLICH aus, nicht dem Werkzeug-Default ueberlassen — sonst
+  # haengt s30d an einem Default, den eine spaetere Version drehen darf.
+  sed -i 's#^  authority: \[harness/README.md, harness/mk/werkzeug.md\]$#&\n  authority-disjoint: false#' .d-check.yml
+  schritt bash -c "awk '/^targets:/{f=1;next} /^[^ ]/{f=0} f' .d-check.yml | grep -q '^  authority-disjoint: false$'" || return 1
   n=$(cat harness/README.md harness/mk/werkzeug.md | grep -c '| `make wlint` |' || true)
   schritt test "$n" = 2 || return 1
   schritt git add -A && schritt git commit -qm "dasselbe Target in beiden Teilen" || return 1
@@ -1780,7 +1785,24 @@ s30_werkzeug_teil() {
   schritt scharf_werkzeug "$WORK/sim/alice" || return 1
   out=$(dcheck "$WORK/sim/alice")
   still "$out" && ok=0 || ok=1
-  verdikt "s30d Target in beiden Teilen: STILL (benannte Grenze)" "0 Befunde, obwohl wlint zweimal gefuehrt ist — die Vereinigung zaehlt es einmal; die Phantom-Proben in beiden Teilen sind im selben Aufbau laut" "$(echo "$out"|tail -1)" $ok
+  verdikt "s30d Target in beiden Teilen, ohne Schalter: STILL" "0 Befunde, obwohl wlint zweimal gefuehrt ist — die Vereinigung zaehlt es einmal; die Phantom-Proben in beiden Teilen sind im selben Aufbau laut" "$(echo "$out"|tail -1)" $ok
+
+  # --- s30f: dieselbe Doppelung wie s30d, mit Schalter (d-check v0.83.0,
+  # Welle 160) -> laut, gemeldet an der Zeile in der SPAETEREN Autoritaets-
+  # Datei (Reihenfolge der Liste: Repo-Teil zuerst, also im Werkzeug-Teil).
+  # Erst das Paar s30d/s30f belegt, dass die Stille von s30d am Schalter
+  # haengt und nicht an der Doppelung selbst.
+  sed -i 's#^  authority-disjoint: false$#  authority-disjoint: true#' .d-check.yml
+  # Vorbedingung: der Schalter steht IM targets-Block, nicht irgendwo im File.
+  schritt bash -c "awk '/^targets:/{f=1;next} /^[^ ]/{f=0} f' .d-check.yml | grep -q '^  authority-disjoint: true$'" || return 1
+  schritt git add -A && schritt git commit -qm "Disjunktheit eingeschaltet" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  # Gemeldet an der Zeile der SPAETEREN Datei — und nur dort: dieselbe
+  # Meldung im Repo-Teil waere ein anderes Verhalten (Review-Fund).
+  ok=1
+  if befund_in "$out" "harness/mk/werkzeug.md" "wlint" "gate-declared-twice" &&
+     ! befund_in "$out" "harness/README.md" "wlint" "gate-declared-twice"; then ok=0; fi
+  verdikt "s30f Target in beiden Teilen, Disjunktheit eingeschaltet: LAUT" "gate-declared-twice auf wlint in harness/mk/werkzeug.md (der spaeteren Autoritaets-Datei)" "$(echo "$out"|tail -1)" $ok
 }
 
 # ---------------------------------------------------------------------------

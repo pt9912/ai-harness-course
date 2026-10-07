@@ -289,8 +289,10 @@ Repo ohne Werkzeug-Fragmente hat weiter genau eine Datei.
 
 **Die Vereinigung zählt ein doppelt genanntes Target einmal.** Ein Sensor, der
 gegen sie misst, sieht die Doppelung deshalb nicht: Steht ein Target in zwei
-Teilen, bleibt er still. Die Disjunktheit braucht eine eigene Prüfung; wer sie
-nicht hat, führt sie als benannte Grenze, nicht als Gate.
+Teilen, bleibt er still. Die Disjunktheit braucht eine eigene Prüfung. Wer sie
+hat, schaltet sie zusammen mit der Vereinigung ein; bleibt sie aus, steht die
+Regel nur im Briefing. Wer sie nicht hat, führt sie als benannte Grenze, nicht
+als Gate.
 
 **Die Target-Zelle trägt den nackten Target-Namen.** Der Aufruf — `SLICE=<id>`,
 `RUN=<name>` — gehört in die Nachbarspalte, nicht in die Code-Span des Targets.
