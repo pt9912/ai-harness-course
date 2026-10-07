@@ -77,6 +77,7 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-09-27 | `v0.78.0` | 91 PASS, 0 FAIL, 0 KAPUTT | erweitert um s29 — nachgetragen mit Welle 159 aus dem CHANGELOG-Eintrag von Welle 148, kein archiviertes `ergebnis.tsv` |
 | 2026-10-06 | `v0.82.0` | 91 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.78.0 → v0.82.0 |
 | 2026-10-06 | `v0.82.0` | 96 PASS, 0 FAIL, 0 KAPUTT | erweitert um s30 |
+| 2026-10-07 | `v0.83.0` | 96 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.82.0 → v0.83.0 |
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
