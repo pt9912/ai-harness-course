@@ -11,6 +11,68 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 161 — 2026-10-10 · Die Review-Deckung läuft nicht leer (Modul 10)
+
+Anlass: Change Request von d-check. Die `.d-check.yml`-Vorlage schaltete
+`reviews` nur mit `done-dir` und `reviews-dir` ein; bis d-check v0.84.0 erkannte
+das Modul als Zusage nur „unabhängiger Review", die Review-Zeile der
+Slice-Vorlage („Review durchgeführt") nicht. Ein Repo, das beiden Vorlagen
+folgte, hatte ein Review-Gate, das grün über einer leeren Menge lief.
+**Gemessen am eigenen Beispiel:** Report entfernt, `doc-check` weiter 0 Befunde —
+das Gate, das Welle 119 als scharf führte, lief leer.
+
+Der CR war unvollständig, und die Umsetzung hat drei weitere Fälle gefunden,
+alle gemessen und an d-check gegeben: Kurs-Slices tragen Slug-Kennungen, der
+Default `match: id` erwartet `slice-<NNN>` (ohne `match: name` meldet jede
+Zusage `review-missing`); `match: name` deckte einen Präfix-Slice mit (der
+Report zu `slice-cache-warmup` deckte `slice-cache`); und nach vollständigem
+Archivieren wurde das Gate in **beiden** Archivierungsformen des Kurses rot,
+obwohl nichts fehlte — mit Wellen als leere Kandidatenmenge, ohne Wellen als
+Stub ohne Zusage, ohne Ausweg in der Konfiguration. Die Welle wartete darauf;
+d-check v0.85.0 brachte die Vorlagen-Form, v0.86.0 `skip-allows-empty` und den
+längsten passenden Namen.
+
+- Kurs `modul-10-review-harness.md` §Harness-Einordnung: neuer Absatz — ein
+  Deckungs-Sensor prüft nur, was er als Zusage erkennt; trifft sein Muster die
+  Review-Zeile nicht, läuft er grün über einer leeren Menge. Er meldet deshalb
+  auch den Leerlauf und ordnet über dieselbe Kennung zu, die der Slice trägt.
+  Die Ablage-Regel nennt die volle Slice-Kennung im Dateinamen des Reports.
+  Spiegel wortgleich in `lab/regelwerk/modul-10-review-harness.md`; `Stand:`
+  in `lab/regelwerk/README.md` auf Welle 161.
+- Vorlage `.d-check.yml`: `reviews` mit `match: name`, `require-promises: true`
+  und für archivierte Slices `recursive: true`, `skip-pattern` auf den
+  Stub-Marker und `skip-allows-empty: true` (d-check ≥ v0.86.0) — alles
+  archiviert ist dann der Ruhezustand. Ein ungehakter Review-Punkt ist auch
+  eine Zusage. `harness/README.template.md` §Sensors nennt die
+  Voraussetzungen, statt die Deckung pauschal zuzusagen.
+  `review-report.template.md`: Dateiname `<YYYY-MM-DD>-<slice-Kennung>.md` mit
+  der **vollen** Kennung (vorher „`<slice-oder-diff-ref>`"), Folgeläufe mit
+  Suffix.
+- Beispiel: dieselbe Konfiguration (`match: name` kam schon mit dem Pin auf
+  v0.85.0, sonst wäre `main` rot geworden). `SPEC-020` nennt Zuordnung über den
+  längsten Namen, ungehakte Zusage, Ausnahme archivierter Slices, Ruhezustand
+  und Leerlauf; `harness/sensors/doc-check.md` führt zwei Grenzen von
+  `reviews` als eigene Punkte (jetzt sechs): eigene Formulierung fällt nur im
+  Totalausfall auf (`promise-pattern` deckt nur bekannte Formen), und
+  archivierte Slices werden gewollt nicht mehr geprüft — mit der Kehrseite,
+  dass das Beispiel nach Archivieren seines einzigen reviewten Slice den
+  Leerlauf meldet (heilbar über `exempt-paths` für die Alt-Slices).
+- Team-Sim, neue Gruppe `s31` (zwölf Proben): gedeckt still (s31a), Report fehlt
+  laut (s31b), eigene DoD-Formulierung mit `require-promises` laut (s31c) und
+  ohne still — der Leerlauf selbst (s31d), Slug ohne `match: name` laut trotz
+  Report (s31e); alles archiviert still mit Wellen (s31f) und ohne (s31h), je
+  mit lauter Kontrolle ohne den Schlüssel (s31g, s31j); Präfix-Slice laut
+  (s31i); ungehakte Zusage laut (s31k); lebender Slice im Unterverzeichnis
+  laut (s31l). Mutationstest: ohne `match: name` im Aufbau fällt s31a. Voller
+  Lauf **109 PASS, 0 FAIL, 0 KAPUTT**.
+- Nicht übernommen: Die Closure-Notiz des Beispiel-Slice
+  `slice-review-report-deckung-per-d-check` nennt einen grünen Break-Test, der
+  über der leeren Menge nichts prüfte; sie ist ein Zeitdokument und bleibt, wie
+  sie damals war — die Korrektur steht im Kommentar der Konfiguration.
+- Vorher als eigene Commits: Pin d-check v0.83.0 → v0.85.0 mit `match: name` im
+  Beispiel, dann v0.85.0 → v0.86.1.
+- Regel-Änderung, daher beim nächsten Release MINOR.
+
 ## Welle 160 — 2026-10-07 · Die Disjunktheit des Gate-Index wird ein Gate (Grundlagen)
 
 Anlass: d-check v0.83.0 liefert, was Welle 159 als benannte Grenze führte — mit

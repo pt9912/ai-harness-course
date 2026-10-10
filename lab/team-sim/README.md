@@ -81,6 +81,7 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-10-07 | `v0.83.0` | 97 PASS, 0 FAIL, 0 KAPUTT | erweitert um s30f |
 | 2026-10-09 | `v0.85.0` | 97 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.83.0 → v0.85.0 |
 | 2026-10-10 | `v0.86.1` | 97 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.85.0 → v0.86.1 |
+| 2026-10-10 | `v0.86.1` | 109 PASS, 0 FAIL, 0 KAPUTT | erweitert um s31 |
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -185,6 +186,18 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s30e | Phantom-Zeile im Teil des Werkzeugs | **`gate-phantom`** auf `harness/mk/werkzeug.md` | ✓ auch dieser Teil wird in beiden Richtungen gelesen |
 | s30d | dasselbe Target in beiden Teilen, `authority-disjoint: false` ausdrücklich gesetzt | **still** | ✓ die Vereinigung zählt es einmal — ohne Schalter prüft der Sensor die Disjunktheit nicht |
 | s30f | dieselbe Doppelung, `authority-disjoint: true` (d-check v0.83.0) | **`gate-declared-twice`** an der Zeile in `harness/mk/werkzeug.md`, der späteren Autoritäts-Datei — und nicht im Repo-Teil | ✓ die Stille von s30d hängt am Schalter, nicht an der Doppelung |
+| s31a | Slug-Slice mit der Vorlagen-Zeile „Review durchgeführt", Report vorhanden, `match: name`, `require-promises` | **still** | ✓ gedeckt |
+| s31b | derselbe Aufbau, Report entfernt | **`review-missing`** auf dem Slice | ✓ die Zusage wird gehalten |
+| s31c | DoD-Zeile in eigener Formulierung, die das Muster nicht trifft | **`review-missing`** auf `done/` | ✓ der Leerlauf wird gemeldet |
+| s31d | derselbe Aufbau ohne `require-promises` | **still** | ✓ der Leerlauf selbst: kein Slice geprüft, Gate grün — der Grund für den Schalter |
+| s31e | Vorlagen-Zeile, Slug, Report vorhanden, aber ohne `match: name` | **`review-missing`** trotz Report | ✓ ein Slug ist keine `slice-<NNN>` |
+| s31f | alles archiviert mit Wellen (Stub unter `done/welle-1/`, Ergebnisnotiz), Konfiguration der Vorlage | **still** | ✓ der Ruhezustand ist kein Befund (d-check v0.86.0) |
+| s31g | derselbe Aufbau ohne `skip-allows-empty` | **`review-missing`** auf `done/` | ✓ Kontrolle: s31f hängt am Schlüssel |
+| s31h | alles archiviert ohne Wellen (flacher Stub `done/slice-<Kennung>.md`) | **still** | ✓ der Stub fällt per `skip-pattern` heraus |
+| s31j | derselbe Aufbau ohne `skip-pattern` | **`review-missing`** auf `done/`, der Stub als Kandidat gezählt | ✓ Kontrolle: der Stub wäre sonst ein Kandidat ohne Zusage — anders als die leere Menge in s31g |
+| s31i | `slice-cache` und `slice-cache-warmup`, Report nur zum längeren | **`review-missing`** auf `slice-cache.md`, nicht auf dem längeren | ✓ der längste passende Name deckt (d-check v0.86.0) |
+| s31k | ungehakter Punkt `- [ ] Review durchgeführt`, wie die Vorlage ihn ausliefert, kein Report | **`review-missing`** | ✓ auch ungehakt ist eine Zusage |
+| s31l | lebender Slice (kein Stub) unter `done/welle-1/` mit Zusage, kein Report | **`review-missing`** auf ihm | ✓ `recursive` sieht Unterverzeichnisse |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

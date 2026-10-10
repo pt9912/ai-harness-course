@@ -99,9 +99,12 @@ Strukturell rote Gates (dauerhaft rot) bekommen einen Carveout in
 (Modul 7); die Bindung-Spalte verweist auf die `CO-<NNN>`-ID, die
 Begründung lebt im Carveout, nicht hier.
 
-Bei d-check-Einsatz (≥ v0.73.0) deckt Modul `reviews` (Ziel `doc-reviews`,
-Review-Report-Deckung für `done/`-Slices mit Review-DoD-Haken) die
-Code→Review-Kante ab, Modul `planning` (Ziel `doc-planning`,
+Bei d-check-Einsatz (≥ v0.86.0, mit `match: name`, `require-promises` und den
+Schlüsseln für archivierte Slices, siehe `.d-check.yml` — ohne `require-promises`
+läuft es leer, wenn sein Muster die Zeile nicht trifft) deckt
+Modul `reviews` (Ziel `doc-reviews`, Review-Report-Deckung für `done/`-Slices
+mit Review-DoD-Punkt, gehakt oder nicht)
+die Code→Review-Kante ab, Modul `planning` (Ziel `doc-planning`,
 Planning-Lifecycle-Konsistenz) die Verify→Closure-Kante — beide aus dem
 Lebenszyklus-Diagramm in Modul 1. Nur eintragen, wenn das Ziel im
 Makefile existiert (siehe oben).

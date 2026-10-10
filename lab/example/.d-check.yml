@@ -295,11 +295,12 @@ ids:
 
 # Review-Report-Deckung (Kurs `modul-05-planning-harness.md` §Ziel-Form:
 # Slice, Review-Zeile seit Welle 119, slice-review-report-deckung-per-d-check). `done-dir` ist der
-# Aktivierungs-Schalter: geprueft werden die `slice-*.md` direkt in `done/`
-# (nicht rekursiv — archivierte Stubs unter `done/<welle-id>/` sind keine
-# Kandidaten). Zusage ist nur ein DoD-Punkt, keine Fliesstext-Nennung — und
-# zwar gehakt ODER ungehakt: auch `- [ ] Review durchgefuehrt` verlangt einen
-# Report. Bis d-check v0.84.0 erkannte das Modul nur die Phrase
+# Aktivierungs-Schalter: geprueft werden die `slice-*.md` in `done/` und
+# seinen Unterverzeichnissen, archivierte Stubs (Marker-Zeile
+# `> **ARCHIVIERT** — Volltext:`) ausgenommen — sind alle archiviert, ist das
+# der Ruhezustand, kein Befund. Zusage ist nur ein DoD-Punkt, keine
+# Fliesstext-Nennung — und zwar gehakt ODER ungehakt: auch
+# `- [ ] Review durchgefuehrt` verlangt einen Report. Bis d-check v0.84.0 erkannte das Modul nur die Phrase
 # "unabhaengiger Review", die Vorlagen-Zeile "Review durchgefuehrt" nicht —
 # das Gate lief hier LEER (gemessen 2026-10-09: Report entfernt, 0 Befunde).
 # Seit v0.85.0 erkennt der Default die Vorlagen-Form; `match: name` ist dann
@@ -309,6 +310,15 @@ reviews:
   done-dir: docs/plan/planning/done
   reviews-dir: docs/reviews
   match: name
+  # Leerlauf laut (Kurs Modul 10 §Harness-Einordnung, Welle 161): aendert sich
+  # die DoD-Zeile oder der Werkzeug-Default, meldet der erste Lauf, dass unter
+  # den Slices keine Zusage mehr erkannt wird, statt still gruen zu bleiben.
+  require-promises: true
+  # Archivierte Slices: Volltext und Report liegen im Archiv, geprueft wird vor
+  # dem Archivieren (d-check >= v0.86.0 fuer skip-allows-empty).
+  recursive: true
+  skip-pattern: '(?m)^> \*\*ARCHIVIERT\*\* — Volltext:'
+  skip-allows-empty: true
 
 # Guide-Datei-Wildwuchs (Kurs `grundlagen-klassifikation.md` §Entropy Management,
 # Welle 147): AGENTS.md wird bei jedem Lauf gelesen, und eine Regel, die einen

@@ -1806,6 +1806,207 @@ s30_werkzeug_teil() {
 }
 
 # ---------------------------------------------------------------------------
+# s31: ENTWURFS-Gegenstand — die Review-Deckung laeuft nicht leer (Welle 161,
+# d-check >= v0.86.0: reviewbaum setzt skip-allows-empty, das es vorher nicht
+# gibt). Gegenstand ist die Konfiguration der Vorlage: `reviews` mit
+# `match: name` (Slug-Kennungen) und `require-promises`. Geprobt wird, was der
+# Kurs behauptet: gedeckt still (s31a), fehlender Report laut (s31b), eine
+# DoD-Zeile, die das Muster nicht trifft, ist mit dem Schalter laut (s31c) und
+# ohne ihn STILL (s31d — der Leerlauf, den der Schalter faengt), und ohne
+# `match: name` meldet die Zusage eines Slug-Slice review-missing (s31e).
+# Archivierte Slices (d-check v0.86.0): alles archiviert ist mit der
+# Konfiguration der Vorlage der Ruhezustand, mit Wellen (s31f, Kontrolle s31g)
+# und ohne (s31h, Kontrolle s31j); der Report zum laengeren Namen deckt den Praefix-Slice
+# nicht (s31i); ein ungehakter Punkt ist auch eine Zusage (s31k), und ein
+# lebender Slice in einem Unterverzeichnis wird geprueft (s31l).
+reviewbaum() { # $1 = Clone; Slug-Slice mit Vorlagen-Zeile + Report + reviews-Modul
+  mkdir -p "$1/docs/plan/planning/done" "$1/docs/reviews"
+  cat > "$1/docs/plan/planning/done/slice-tie-break.md" <<'EOF'
+# slice-tie-break — Tie-Break deterministisch
+
+## 2. Definition of Done
+
+- [x] Review durchgeführt, Report unter `docs/reviews/` liegt vor
+EOF
+  printf '# Review slice-tie-break\n\nkeine HIGH-Findings.\n' > "$1/docs/reviews/2026-10-09-slice-tie-break.md"
+  sed -i 's/^modules: .*/modules: [reviews]/' "$1/.d-check.yml"
+  cat >> "$1/.d-check.yml" <<'EOF'
+reviews:
+  done-dir: docs/plan/planning/done
+  reviews-dir: docs/reviews
+  match: name
+  require-promises: true
+  recursive: true
+  skip-pattern: '(?m)^> \*\*ARCHIVIERT\*\* — Volltext:'
+  skip-allows-empty: true
+EOF
+  grep -q '^modules: \[reviews\]$' "$1/.d-check.yml" && grep -q '^  require-promises: true$' "$1/.d-check.yml" &&
+  grep -q '^  skip-allows-empty: true$' "$1/.d-check.yml" &&
+  grep -q '^  recursive: true$' "$1/.d-check.yml" && grep -q '^  skip-pattern: ' "$1/.d-check.yml"   # der Helfer buergt fuer sich selbst
+}
+
+s31_review_deckung() {
+  # --- s31a: Vorlagen-Zeile, Slug, Report da -> still; s31b: Report weg -> laut.
+  # s31a zaehlt nur neben s31b im selben Aufbau: dieselbe Zusage, einmal gedeckt.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt reviewbaum . || return 1
+  # Positive Vorbedingungen fuer das Stille-Verdikt: die Zusage steht in der
+  # Form der Vorlage im Slice, und der Report existiert (AGENTS.md §3).
+  schritt grep -q '^- \[x\] Review durchgeführt, Report' docs/plan/planning/done/slice-tie-break.md || return 1
+  schritt test -f docs/reviews/2026-10-09-slice-tie-break.md || return 1
+  schritt git add -A && schritt git commit -qm "Slice mit Review-Zusage und Report" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  # still() verlangt die Summenzeile mit 0 Befunden — ein abgebrochener Lauf
+  # (Konfigurationsfehler, Exit 2) hat keine und faellt hier durch, statt als
+  # "kein review-missing" zu bestehen (Review-Fund, AGENTS.md §3).
+  still "$out" && ok=0 || ok=1
+  verdikt "s31a Vorlagen-Zeile, Slug, Report vorhanden: STILL" "0 Befunde, waehrend s31b im selben Aufbau ohne Report laut ist" "$(echo "$out"|tail -1)" $ok
+  schritt git rm -q docs/reviews/2026-10-09-slice-tie-break.md && schritt git commit -qm "Report fehlt" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "docs/plan/planning/done/slice-tie-break.md" "docs/reviews" "review-missing" && ok=0 || ok=1
+  verdikt "s31b Zusage ohne Report: LAUT" "review-missing auf slice-tie-break.md" "$(echo "$out"|tail -1)" $ok
+
+  # --- s31c: DoD-Zeile in eigener Formulierung, die das Muster nicht trifft ->
+  # mit require-promises laut (Leerlauf gemeldet, am done-dir).
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt reviewbaum . || return 1
+  sed -i 's/^- \[x\] Review durchgeführt, Report/- [x] Gegengelesen, Bericht/' docs/plan/planning/done/slice-tie-break.md
+  schritt grep -q '^- \[x\] Gegengelesen, Bericht' docs/plan/planning/done/slice-tie-break.md || return 1
+  schritt git add -A && schritt git commit -qm "eigene DoD-Formulierung" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "docs/plan/planning/done" "docs/plan/planning/done" "review-missing" && ok=0 || ok=1
+  verdikt "s31c Muster trifft keine Zusage, require-promises: LAUT (Leerlauf)" "review-missing auf docs/plan/planning/done" "$(echo "$out"|tail -1)" $ok
+
+  # --- s31d: derselbe Aufbau OHNE den Schalter -> still. Das ist der Leerlauf
+  # selbst: kein Slice wird geprueft, und das Gate ist gruen.
+  sed -i '/^  require-promises: true$/d' .d-check.yml
+  n=$(grep -c 'require-promises' .d-check.yml || true)
+  schritt test "$n" = 0 || return 1
+  schritt git add -A && schritt git commit -qm "Schalter aus" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  still "$out" && ok=0 || ok=1
+  verdikt "s31d derselbe Aufbau ohne require-promises: STILL (der Leerlauf)" "0 Befunde, waehrend s31c mit Schalter im selben Aufbau laut ist" "$(echo "$out"|tail -1)" $ok
+
+  # --- s31e: Vorlagen-Zeile, Slug, Report da, aber OHNE match: name -> laut:
+  # die Zusage wird gefunden, die Kennung nicht als slice-<NNN> gelesen.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt reviewbaum . || return 1
+  sed -i '/^  match: name$/d' .d-check.yml
+  n=$(grep -c '^  match:' .d-check.yml || true)
+  schritt test "$n" = 0 || return 1
+  schritt git add -A && schritt git commit -qm "ohne match: name" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "docs/plan/planning/done/slice-tie-break.md" "docs/reviews" "review-missing" && ok=0 || ok=1
+  verdikt "s31e Slug-Slice ohne match: name: LAUT, obwohl der Report da ist" "review-missing auf slice-tie-break.md (Kennung nicht als slice-<NNN> lesbar)" "$(echo "$out"|tail -1)" $ok
+
+  # --- s31f: Ruhezustand mit Wellen — nach vollstaendigem Archivieren liegen in
+  # done/ nur ein Stub unter done/<welle-id>/ und die Ergebnisnotiz. Mit der
+  # Konfiguration der Vorlage (recursive, skip-pattern, skip-allows-empty) ist
+  # das kein Befund (d-check v0.86.0). s31g ist die Kontrolle im selben Aufbau.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt reviewbaum . || return 1
+  mkdir -p docs/plan/planning/done/welle-1
+  printf '# slice-tie-break\n\n> **ARCHIVIERT** — Volltext: `unzip -p done/welle-1/archiv.zip slice-tie-break.md`\n' > docs/plan/planning/done/welle-1/slice-tie-break.md
+  printf '# Welle 1 — Closure-Notiz\n\nAlles archiviert.\n' > docs/plan/planning/done/welle-1-results.md
+  # Archiviert: Volltext und Report liegen im Archiv, nicht mehr flach.
+  schritt rm docs/plan/planning/done/slice-tie-break.md docs/reviews/2026-10-09-slice-tie-break.md || return 1
+  # Vorbedingungen: kein Volltext-Slice mehr in done/, aber der Stub existiert
+  # und traegt den Marker — sonst prueft das Verdikt etwas anderes.
+  n=$(find docs/plan/planning/done -maxdepth 1 -name 'slice-*.md' | wc -l)
+  schritt test "$n" = 0 || return 1
+  schritt grep -q '^> \*\*ARCHIVIERT\*\*' docs/plan/planning/done/welle-1/slice-tie-break.md || return 1
+  schritt git add -A && schritt git commit -qm "Welle archiviert, done/ nur Stub und Ergebnisnotiz" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  still "$out" && ok=0 || ok=1
+  verdikt "s31f alles archiviert (mit Wellen), Konfiguration der Vorlage: STILL (Ruhezustand)" "0 Befunde, waehrend s31g im selben Aufbau ohne skip-allows-empty laut ist" "$(echo "$out"|tail -1)" $ok
+
+  # --- s31g: Kontrolle — derselbe Aufbau ohne skip-allows-empty -> laut
+  # (leere Menge fail-closed). Erst das macht s31f zur Aussage ueber den
+  # Schluessel statt ueber ein Modul, das gar nicht laeuft.
+  sed -i '/^  skip-allows-empty: true$/d' .d-check.yml
+  n=$(grep -c 'skip-allows-empty' .d-check.yml || true)
+  schritt test "$n" = 0 || return 1
+  schritt git add -A && schritt git commit -qm "ohne skip-allows-empty" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "docs/plan/planning/done" "docs/plan/planning/done" "review-missing" && ok=0 || ok=1
+  verdikt "s31g derselbe Aufbau ohne skip-allows-empty: LAUT (leere Menge fail-closed)" "review-missing auf docs/plan/planning/done" "$(echo "$out"|tail -1)" $ok
+
+  # --- s31h: Ruhezustand ohne Wellen — der Stub liegt flach als
+  # done/slice-<Kennung>.md neben seinem Archiv. Ohne skip-pattern waere er
+  # ein Kandidat ohne Zusage (require-promises laut); mit der Konfiguration
+  # der Vorlage ist er ausgenommen und die leere Menge der Ruhezustand.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt reviewbaum . || return 1
+  printf '# slice-tie-break\n\n> **ARCHIVIERT** — Volltext: `unzip -p done/slice-tie-break-archiv.zip slice-tie-break.md`\n' > docs/plan/planning/done/slice-tie-break.md
+  schritt rm docs/reviews/2026-10-09-slice-tie-break.md || return 1
+  schritt grep -q '^> \*\*ARCHIVIERT\*\*' docs/plan/planning/done/slice-tie-break.md || return 1
+  schritt git add -A && schritt git commit -qm "wellenlos archiviert, flacher Stub" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  still "$out" && ok=0 || ok=1
+  verdikt "s31h alles archiviert (ohne Wellen, flacher Stub): STILL (Ruhezustand)" "0 Befunde, waehrend s31j im selben Aufbau ohne skip-pattern laut ist" "$(echo "$out"|tail -1)" $ok
+  # --- s31j: Kontrolle zu s31h — derselbe Aufbau ohne skip-pattern (und ohne
+  # skip-allows-empty, das ohne skip-pattern Exit 2 waere): der flache Stub ist
+  # wieder ein Kandidat ohne Zusage, require-promises meldet ihn.
+  schritt grep -q '^  skip-pattern: ' .d-check.yml || return 1
+  sed -i "/^  skip-pattern: /d; /^  skip-allows-empty: true\$/d" .d-check.yml
+  n=$(grep -c 'skip-' .d-check.yml || true)
+  schritt test "$n" = 0 || return 1
+  schritt git add -A && schritt git commit -qm "ohne skip-pattern" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  # Unterscheidet sich vom Fall "leere Menge" (s31g): hier ist der Stub ein
+  # Kandidat — die Meldung zaehlt ihn. Der Grund-Code ist in beiden Faellen
+  # derselbe, deshalb haengt das Verdikt zusaetzlich an der Kandidatenzahl
+  # (Review-Fund; bewusst an der Meldung, mangels eigenem Code).
+  ok=1
+  if befund_in "$out" "docs/plan/planning/done" "docs/plan/planning/done" "review-missing" &&
+     printf '%s' "$out" | grep -q 'unter 1 Kandidat'; then ok=0; fi
+  verdikt "s31j derselbe flache Stub ohne skip-pattern: LAUT (Kandidat ohne Zusage)" "review-missing auf docs/plan/planning/done" "$(echo "$out"|tail -1)" $ok
+
+  # --- s31i: Praefix — slice-cache und slice-cache-warmup, Report nur zum
+  # laengeren Namen. Seit d-check v0.86.0 deckt er nur den laengsten
+  # passenden Slice: slice-cache ist laut, slice-cache-warmup still.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt reviewbaum . || return 1
+  for k in slice-cache slice-cache-warmup; do
+    printf '# %s\n\n- [x] Review durchgeführt, Report unter `docs/reviews/` liegt vor\n' "$k" > "docs/plan/planning/done/$k.md"
+  done
+  printf '# Review slice-cache-warmup\n' > docs/reviews/2026-10-10-slice-cache-warmup.md
+  schritt test -f docs/plan/planning/done/slice-cache.md || return 1
+  schritt test -f docs/plan/planning/done/slice-cache-warmup.md || return 1
+  schritt test -f docs/reviews/2026-10-10-slice-cache-warmup.md || return 1
+  schritt git add -A && schritt git commit -qm "Praefix-Paar, Report nur zum laengeren" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  ok=1
+  if befund_in "$out" "docs/plan/planning/done/slice-cache.md" "docs/reviews" "review-missing" &&
+     ! befund_in "$out" "docs/plan/planning/done/slice-cache-warmup.md" "docs/reviews" "review-missing"; then ok=0; fi
+  verdikt "s31i Praefix-Slice, Report nur zum laengeren Namen: LAUT auf dem kuerzeren" "review-missing auf slice-cache.md, nicht auf slice-cache-warmup.md" "$(echo "$out"|tail -1)" $ok
+  # --- s31k: ungehakter Review-Punkt ist auch eine Zusage — so, wie
+  # slice.template.md ihn ausliefert (`- [ ]`). Ohne Report -> laut.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt reviewbaum . || return 1
+  sed -i 's/^- \[x\] Review durchgeführt/- [ ] Review durchgeführt/' docs/plan/planning/done/slice-tie-break.md
+  schritt grep -q '^- \[ \] Review durchgeführt' docs/plan/planning/done/slice-tie-break.md || return 1
+  schritt rm docs/reviews/2026-10-09-slice-tie-break.md || return 1
+  schritt git add -A && schritt git commit -qm "ungehakte Zusage, kein Report" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "docs/plan/planning/done/slice-tie-break.md" "docs/reviews" "review-missing" && ok=0 || ok=1
+  verdikt "s31k ungehakter Review-Punkt ohne Report: LAUT" "review-missing auf slice-tie-break.md" "$(echo "$out"|tail -1)" $ok
+
+  # --- s31l: recursive — ein LEBENDER Slice (kein Stub) in einem
+  # Unterverzeichnis von done/ mit Zusage und ohne Report ist laut. Belegt die
+  # Haelfte "Unterverzeichnisse werden gesehen", die s31f nur als Stille zeigt.
+  topo; cd "$WORK/sim/alice" || return 1
+  schritt reviewbaum . || return 1
+  mkdir -p docs/plan/planning/done/welle-1
+  printf '# slice-unten\n\n- [x] Review durchgeführt, Report unter `docs/reviews/` liegt vor\n' > docs/plan/planning/done/welle-1/slice-unten.md
+  schritt test -f docs/plan/planning/done/welle-1/slice-unten.md || return 1
+  schritt git add -A && schritt git commit -qm "lebender Slice im Unterverzeichnis, ohne Report" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  befund_in "$out" "docs/plan/planning/done/welle-1/slice-unten.md" "docs/reviews" "review-missing" && ok=0 || ok=1
+  verdikt "s31l lebender Slice in done/<welle-id>/ ohne Report: LAUT (recursive)" "review-missing auf done/welle-1/slice-unten.md" "$(echo "$out"|tail -1)" $ok
+}
+
+# ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -1839,6 +2040,7 @@ lauf s27 s27_adr_kennung_linkpflicht
 lauf s28 s28_guide_datei_wildwuchs
 lauf s29 s29_wip_lauf_zweig_feld
 lauf s30 s30_werkzeug_teil
+lauf s31 s31_review_deckung
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

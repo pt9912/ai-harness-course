@@ -2,10 +2,14 @@
 
 > **Template-Hinweis.** Vorlage für einen Review-Report (das
 > Übergabe-Artefakt Reviewer → Implementer, Modul 8/10). Kopiere
-> nach `docs/reviews/<YYYY-MM-DD>-<slice-oder-diff-ref>.md`, ersetze
-> `<Platzhalter>` und lösche diesen Block. Ein Report pro Lauf —
+> nach `docs/reviews/<YYYY-MM-DD>-<slice-Kennung>.md` (ein Review ohne
+> Slice: `<YYYY-MM-DD>-<diff-ref>.md`), ersetze `<Platzhalter>` und lösche
+> diesen Block. Die **volle** Slice-Kennung gehört in den Dateinamen —
+> über sie ordnet eine Deckungsprüfung den Report seinem Slice zu
+> (Baseline-Regelwerk `modul-10-review-harness.md` §Harness-Einordnung
+> (Modul 10)); eine gekürzte steht für keinen Slice. Ein Report pro Lauf —
 > Folgeläufe bekommen eine neue Datei, keine Überschreibung
-> (Auditierbarkeit).
+> (Auditierbarkeit), etwa mit Suffix `-r2`.
 
 **Review-Art:** Plan | Design | Code — *wogegen* geprüft wird:
 Plan-Review gegen Spec/ADR, Design-Review gegen Architektur,

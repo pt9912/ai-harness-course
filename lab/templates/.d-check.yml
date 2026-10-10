@@ -122,13 +122,28 @@ modules: [links, anchors]
 #   paths: ["harness/conventions/**/MR-[0-9]*.md"]
 #   immutable-when: '^- \*\*Datum:\*\*'
 
-# Review-Report-Deckung fuer `done/`-Slices mit Review-DoD-Haken (Kurs
+# Review-Report-Deckung fuer `done/`-Slices mit Review-DoD-Punkt (Kurs
 # `modul-05-planning-harness.md` §Ziel-Form: Slice, Review-Zeile seit Welle
 # 119) — aktivieren, sobald der erste Slice nach `done/` wandert. `done-dir`
 # ist der Aktivierungs-Schalter: ohne ihn oeffnet das Modul keine Datei.
 # reviews:
 #   done-dir: docs/plan/planning/done
 #   reviews-dir: docs/reviews
+#   match: name               # Slice-Kennungen sind Slugs (`slice-<titel>`), keine slice-<NNN> (d-check >= v0.85.0)
+#   require-promises: true    # null erkannte Zusagen unter vorhandenen Slices => Befund (Leerlauf laut)
+#   recursive: true           # Stubs unter done/<welle-id>/ werden gesehen ...
+#   skip-pattern: '(?m)^> \*\*ARCHIVIERT\*\* — Volltext:'   # ... und ausgenommen, flache Stubs ebenso
+#   skip-allows-empty: true   # alles archiviert = Ruhezustand, kein Befund (d-check >= v0.86.0)
+#   # Die Zusage-Form der Slice-Vorlage ("Review durchgefuehrt") erkennt der
+#   # Default ab d-check v0.85.0; davor lief das Gate ueber einer leeren Menge
+#   # gruen. Ein ungehakter Review-Punkt (`- [ ]`) ist ebenfalls eine Zusage.
+#   # Archivierte Slices (Stub mit `> **ARCHIVIERT**`) prueft das Modul nicht
+#   # mehr — Volltext und Report liegen im Archiv, geprueft wird vor dem
+#   # Archivieren. Ohne die drei Schluessel darueber wird es nach dem
+#   # Archivieren rot, obwohl nichts fehlt. Grenze: skip-pattern erkennt den
+#   # Stub an seiner Marker-Zeile — ein lebender Slice, der die Stub-Form
+#   # woertlich zitiert, gilt dann auch als Stub; ein solches Zitat eingerueckt
+#   # setzen.
 
 # Guide-Datei-Wildwuchs (Kurs `grundlagen-klassifikation.md` §Entropy
 # Management) — aktivieren, sobald AGENTS.md eine erste, gemessene

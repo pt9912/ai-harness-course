@@ -22,11 +22,29 @@ welchem Modul gehört, steht unten unter [Bindung](#bindung).
    die Bauform der Prüfung, nicht ihre Konfiguration
    ([Kurs Modul 5 §Worked Example: einen zu großen Slice schneiden](../../../../kurs/de/02-planung/modul-05-planning-harness.md#worked-example-einen-zu-großen-slice-schneiden),
    [Modul 10 §Harness-Einordnung](../../../../kurs/de/04-qualitaet/modul-10-review-harness.md#harness-einordnung)).
-3. **`planning.waves` braucht `mode: many`.** Der Werkzeug-Default `one` hält
+3. **`reviews` findet nur die Zusage, deren Wortlaut es kennt.** Eine
+   DoD-Zeile in eigener Formulierung trifft das Muster nicht; das fällt nur
+   auf, solange *gar keine* Zusage mehr erkannt wird (`require-promises`),
+   nicht bei einem einzelnen Slice neben anderen in Vorlagen-Form. Ein
+   `promise-pattern` mit Alternation deckt bekannte Formulierungen ab; eine
+   neue bleibt still. Permanent — das Muster kann nur kennen, was jemand
+   hineingeschrieben hat.
+4. **`reviews` prüft archivierte Slices nicht mehr.** Ein Stub mit
+   `> **ARCHIVIERT**` fällt per `skip-pattern` heraus, und sind alle
+   archiviert, ist die leere Menge der Ruhezustand (`skip-allows-empty`), kein
+   Befund. Permanent und gewollt: Volltext und Report liegen im Archiv, geprüft
+   wird vor dem Archivieren.
+   Mit `require-promises` hat das eine Kehrseite hier im Beispiel: Nur ein
+   Slice trägt die Review-Zeile, die sieben älteren stammen aus der Zeit davor.
+   Wird er archiviert, bleiben Kandidaten ohne eine einzige Zusage, und das
+   Modul meldet den Leerlauf, obwohl nichts fehlt. Heilbar in der
+   Konfiguration: die Alt-Slices namentlich in `reviews.exempt-paths`, sobald
+   es so weit ist — vorher wäre die Ausnahme eine Senkung ohne Anlass.
+5. **`planning.waves` braucht `mode: many`.** Der Werkzeug-Default `one` hält
    den Block gegen *genau eine* Datei und meldet unter Offene Wellen legitime
    Zustände als Drift; der Ruhe-Marker geht in die Bijektion nicht ein. Heilbar
    — durch die Konfiguration, nicht durch das Werkzeug.
-4. **`file` prüft nur `AGENTS.md`, nur die Zeilenzahl.** Keine Aussage über
+6. **`file` prüft nur `AGENTS.md`, nur die Zeilenzahl.** Keine Aussage über
    Inhalt/Qualität, kein Rückbau erzwungen, keine Staleness-Prüfung (ist die
    Zeile seit Langem unverändert rot). Nur diese eine Datei ist konfiguriert;
    `harness/README.md` §Sensors trägt keine eigene Obergrenze.

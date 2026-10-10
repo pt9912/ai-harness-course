@@ -43,6 +43,18 @@ einen Report? Das ist *computational feedback* und prüfbar, ohne die
 Kategorisierung selbst zu bewerten — Werkzeug-Beispiel: das d-check-Modul
 `reviews` (Review-Report-Deckung für `done/`-Slices).
 
+**Ein Deckungs-Sensor prüft nur, was er als Zusage erkennt.** Trifft sein
+Muster die Review-Zeile der eigenen Slice-Vorlage nicht, findet er keine
+Zusage, und ohne Zusage gibt es nichts zu decken: Er läuft grün über einer
+leeren Menge, und ein fehlender Report fällt nie auf. Vorlage und Sensor sind
+dabei zwei Orte für dieselbe Formulierung — ändert sich eine, läuft er wieder
+leer. Er meldet deshalb auch den Leerlauf: vorhandene Slices, unter denen keine
+einzige Zusage erkannt wird. Und er ordnet einen Report dem Slice über dieselbe
+Kennung zu, die der Slice trägt — ein Slug im Dateinamen ist keine Nummer. Ein
+archivierter Slice ist kein Kandidat mehr: Volltext und Report liegen im
+Archiv, geprüft wird vor dem Archivieren. Sind alle archiviert, ist die leere
+Menge der Ruhezustand, kein Leerlauf.
+
 ### Kernidee (Modul 10)
 
 Ein Review ohne Kategorisierung ist eine Mängelliste. Ein Review mit
@@ -141,7 +153,8 @@ Register nicht, die Zuordnung zur Beobachtung passiert erst bei der
 Slice-Closure und braucht den wiedererkennbaren Namen. Ein Archiv-Scan ist
 nicht nötig — die Häufung steht im Register.
 
-Abgelegt wird ein Report pro Lauf unter `docs/reviews/`, Folgeläufe
+Abgelegt wird ein Report pro Lauf unter `docs/reviews/`,
+die volle Slice-Kennung im Dateinamen, Folgeläufe
 als neue Datei statt Überschreibung.
 
 ### Regeln gegen typische Fehlannahmen (Modul 10)
