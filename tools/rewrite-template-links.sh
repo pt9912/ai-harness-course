@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# Pinnt verbliebene Kurs-Verweise in den ausgelieferten Templates auf
-# absolute, getaggte URLs.
+# Macht die ausgelieferten Templates beim Adopter lesbar: pinnt verbliebene
+# Kurs-Verweise auf absolute, getaggte URLs und schreibt Pfade auf andere
+# Vorlagen auf ihren vendorten Ort um (`.harness/baseline/<tag>/templates/…`;
+# tag-unabhaengig, `<tag>` bleibt Platzhalter — Block „Template-Pfade").
 #
 # STAND seit Welle 37: die Templates verweisen NICHT mehr in den Kurs, sondern
 # auf das parallel vendorte Regelwerk (`../regelwerk/…` in löschbaren
@@ -10,7 +12,8 @@
 # templates/ liegen parallel), die Zitate tragen gar keinen Pfad — wo die
 # Baseline liegt, steht beim Adopter einmalig in MR-003.
 #
-# Die kurs-sed unten ist damit im Normalfall ein No-op und bleibt als
+# Die kurs-sed unten ist damit im Normalfall ein No-op (die Pfad-Umschreibung
+# weiter unten dagegen nicht) und bleibt als
 # Sicherheitsnetz: wer künftig doch einen `../…/kurs/`-Link einbaut, bekommt
 # ihn wenigstens gepinnt statt gebrochen ins Ziel-Repo kopiert
 # (Defekt 1 des lab-templates-Reports).
@@ -41,6 +44,34 @@ find "$dir" -name '*.md' -print0 | while IFS= read -r -d '' f; do
   fi
 done
 
+# Template-Pfade in Code-Spans: Die Skelette nennen einander im Quell-Layout
+# (`docs/reviews/review-report.template.md`, gilt in lab/templates/). Beim
+# Adopter liegen sie aber vendored unter `.harness/baseline/<tag>/templates/`,
+# nur der kopierte Bericht liegt unter `docs/reviews/`. Umgeschrieben wird nur,
+# was (a) in einem Code-Span steht, der kein Link-Text ist, (b) auf
+# `.template.md` endet und (c) in $dir real existiert — Kopierziele und
+# Platzhalter-Pfade (`<…>`) treffen (c) nicht. `<tag>` bleibt Platzhalter wie
+# in MR-003/AGENTS.template.md. Nur *.template.md; die README bleibt unberührt.
+python3 - "$dir" <<'PY'
+import os, re, sys
+root = sys.argv[1]
+span = re.compile(r"(?<!\[)`([^`\s]+\.template\.md)`(?!\])")
+for d, _, files in os.walk(root):
+    for n in files:
+        if not n.endswith(".template.md"):
+            continue
+        p = os.path.join(d, n)
+        with open(p, encoding="utf-8") as fh:
+            text = fh.read()
+        new = span.sub(
+            lambda m: "`.harness/baseline/<tag>/templates/%s`" % m.group(1)
+            if os.path.isfile(os.path.join(root, m.group(1))) else m.group(0),
+            text)
+        if new != text:
+            with open(p, "w", encoding="utf-8") as fh:
+                fh.write(new)
+PY
+
 # Das d-check-Gate wird NICHT ins Template gespritzt: weder das tool-generierte
 # Fragment `d-check.mk` (Kopie eines Generats → Drift) noch der `DCHECK_DIGEST`-Pin.
 # Beides ist tool-/versionsspezifisch und wird vom Adopter beim Bootstrap gesetzt
@@ -48,4 +79,4 @@ done
 # führt `DCHECK_DIGEST` als auszufüllenden Platzhalter; das Bundle trägt nur
 # versions-agnostischen Inhalt.
 
-echo "rewrite-template-links: Kurs-Verweise in $dir auf '$ref' gepinnt."
+echo "rewrite-template-links: Kurs-Verweise in $dir auf '$ref' gepinnt, Template-Pfade auf die vendorte Baseline umgeschrieben."
