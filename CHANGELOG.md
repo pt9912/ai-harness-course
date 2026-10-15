@@ -11,6 +11,34 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 162 — 2026-10-15 · Template-Pfade zeigen beim Adopter auf die vendorte Baseline (Bundle-Bau)
+
+Anlass: Fund beim Lesen von `reviewer.template.md` — der Skill nennt den
+Report-Rahmen als `docs/reviews/review-report.template.md`. Das gilt im
+Quell-Layout (`lab/templates/`); beim Adopter liegen die Vorlagen vendored unter
+`.harness/baseline/<tag>/templates/`, und unter `docs/reviews/` liegen nur die
+daraus kopierten Reports. Der Pfad zeigte dort ins Leere.
+
+Die Quelle bleibt, wie sie ist: Eine Korrektur dort wäre im Quell-Layout falsch
+und würde jede Vorlage zwingen, den Adopter-Pfad zu kennen. Der Ort ändert sich
+beim Ausliefern, also korrigiert der Bundle-Bau.
+
+- `tools/rewrite-template-links.sh`: schreibt in der Bundle-**Kopie** in
+  `*.template.md` Code-Span-Pfade um, die auf `.template.md` enden, im
+  Template-Baum real existieren und kein Link-Text sind, auf
+  `.harness/baseline/<tag>/templates/<pfad>`. `<tag>` bleibt Platzhalter wie in
+  `AGENTS.template.md`. Kopierziele und Platzhalter-Pfade treffen die
+  Existenzprüfung nicht. Gemessen: fünf Treffer in vier Dateien
+  (`reviewer`, `closure-note-reviewer`, `harness/README`, `harness/conventions`),
+  zweiter Lauf idempotent, `lab/templates` unverändert.
+- Kein beobachtbares Verhalten behauptet — eine Textkorrektur im ausgelieferten
+  Bundle, kein Team-Sim-Szenario. Keine Regel-Änderung, `lab/regelwerk/`
+  unberührt (`Stand:` bleibt), daher beim nächsten Release PATCH.
+- Bekannte Grenzen (im Korpus nicht belegt, nicht gebaut): Pfade mit `./`,
+  Anker oder Zeilenangabe im Span und nackter Text werden nicht erfasst; ein
+  dateirelativer Verweis, dessen Name auch von der Wurzel aus existiert, würde
+  fälschlich umgeschrieben.
+
 ## Welle 161 — 2026-10-10 · Die Review-Deckung läuft nicht leer (Modul 10)
 
 Anlass: Change Request von d-check. Die `.d-check.yml`-Vorlage schaltete
