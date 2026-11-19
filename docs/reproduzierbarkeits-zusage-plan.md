@@ -92,21 +92,22 @@ Sie hat zwei Teile: Die Umgebung ist **festgelegt**
 (gepinnt) und sie ist **adressierbar** (es gibt einen Beleg, der sagt, welche es
 war).
 
-**Einschränkung der Gegenüberstellung.** Der Check ist **keine** Alternative zu
-Docker im Sinn von „legt die Umgebung fest“: Er stellt fest, ob sie die
-behauptete ist, und erfüllt damit den Teil *adressierbar/belegbar*, nicht den Teil
-*festgelegt*. „Selbst Träger“ gilt nur, wo die Festlegung anderswo liegt (Lock,
-Manifest, Betriebssystem-Paket). **Echte konstruktive Alternativen zu Docker**
-(Nix, devbox, asdf, mise, VM) fehlen in der Tabelle, weil der Korpus sie nicht
-behandelt; sie sind in A6 zu klären. Die Tabelle vergleicht daher
-*Konstruktion* (Docker) mit *Feststellung* (Check), nicht zwei Wege zum selben Ziel.
+**Beide Träger sind zulässig** (Maintainer, 2026-11-19): **Docker/Dockerfile**
+und **Tool-Pin mit Tool-/Versions-Check**. Der Check allein erfüllt nur den Teil
+*adressierbar/belegbar*, nicht *festgelegt*; der zweite Träger ist deshalb das
+Paar aus **Tool-Pin** (die Versionen der Werkzeuge sind deklariert oder gelockt:
+Manifest, Lock, Versionsmanager) und **Check** (stellt fest, ob die Umgebung sie
+trägt). Der Pin legt fest, der Check belegt. Beide Träger erfüllen damit beide
+Teile der Zusage, auf verschiedenem Weg. Weitere konstruktive Träger (Nix,
+devbox, asdf, mise, VM) behandelt der Korpus nicht; sie sind ein offener Faden
+(A6), keine Behauptung.
 
 **Zwei Träger, mit verschiedener Wirkungsweise:**
 
-| | **Docker / Dockerfile** | **Tool-/Versions-Check** |
+| | **Docker / Dockerfile** | **Tool-Pin + Tool-/Versions-Check** |
 |---|---|---|
-| Wirkungsweise | **konstruktiv** — baut die Umgebung aus gepinnten Eingaben; sie soll dann die behauptete sein | **detektiv** — nimmt die vorhandene Umgebung hin und stellt fest, ob sie die behauptete ist |
-| Festlegung durch | Digest, Lock-File, Stages | deklariertes Soll (Manifest oder aus dem Pin abgeleitet) |
+| Wirkungsweise | **konstruktiv** — baut die Umgebung aus gepinnten Eingaben; sie soll dann die behauptete sein | **deklarativ und feststellend** — der Pin legt die Versionen fest, der Check stellt fest, ob die vorhandene Umgebung sie trägt |
+| Festlegung durch | Digest, Lock-File, Stages | Tool-Pin: deklariertes Soll (Manifest, Lock oder aus der Pin-Stelle abgeleitet, A2) |
 | Beleg / Adresse | Image-Digest, `image-hash.txt` | Prüfprotokoll: Werkzeug, Soll, Ist |
 | Isolation | ja (eigenes Dateisystem; kein Netz nur mit `--network none`) | nein — die Umgebung bleibt die des Hosts |
 | Voraussetzung | Docker am Host (selbst ungepinnt) | Werkzeuge am Host; kein Container nötig |
@@ -119,12 +120,11 @@ gegen das Laufende verglichen). Wo Docker nicht trägt, ist der Check **selbst d
 Träger**. Das ist derselbe Mechanismus in zwei Rollen — und der Grund, ihn *nicht*
 als bloßes Anhängsel des Containers zu führen.
 
-**Was der Kurs daraus lehrt (Hypothese, zu bestätigen in A6):**
-Anforderung zuerst; dann *„welcher Träger erfüllt sie hier?“* als Entscheidung mit
-Begründung — nicht „Docker, weil Docker“. Die Wahl eines Trägers ist ein
-ADR-Fall; die Alternative gehört in dessen Abschnitt „Betrachtete Optionen“.
-Modul 14 behielte seine Disziplinen (Digest, Stages, Besitz der Belege) und
-bekäme davor die Abwägung.
+**Was der Kurs daraus lehrt:** Anforderung zuerst; dann zwei zulässige Träger mit
+ihren Folgen; die Wahl trifft der Adopter (wie bei A2) und kann sie als ADR
+festhalten, mit den betrachteten Optionen. Modul 14 behält seine Disziplinen
+(Digest, Stages, Besitz der Belege) und bekommt den zweiten Träger daneben
+(Welle B).
 
 ## 3. Das Tool-/Versions-Gate
 
@@ -310,8 +310,8 @@ Beispiel-Stufe es aktiviert, entscheidet sich nach dem Kurs (`AGENTS.md` §1).
 | **A2** | **Quelle des Solls.** | **entschieden (Maintainer, 2026-11-19): Der Adopter entscheidet; der Kurs lehrt beide Wege mit ihren Folgen.** **Weg 1, ableiten:** das Soll steht in der Pin-Stelle (`Dockerfile`, Lock, `go.mod`), das Gate liest sie. Eine Quelle, aber nur, wo eine maschinell lesbare Pin-Stelle existiert — je Sprache verschieden, und für Host-Werkzeuge (`bash` ≥, `make` ≥) gibt es keine. **Weg 2, Manifest:** eine eigene Deklaration (Werkzeug, Prüfform, Soll). Sprach-neutral und vollständig deklarierbar, aber eine **zweite Quelle**; sie driftet gegen die Pin-Stelle, wenn niemand sie gegeneinander hält (`pinsync` leistet das, wo d-check zur Verfügung steht). **Mischform:** ableiten, wo eine Pin-Stelle existiert, Manifest für den Rest. Der Kurs gibt **Entscheidungskriterien**, keine Vorgabe: Gibt es eine Pin-Stelle? Läuft ein Host-Teil? Ist `pinsync` oder ein Gleichwertiges verfügbar? **A2a, entschieden (Maintainer, 2026-11-19): Der Adopter deklariert seine Wahl in `harness/conventions.md` als `MR-<NNN>`** — die Wahl ist eine Adaption der Baseline, und dort steht, was ein Repo von ihr abweichen lässt. **Offen bleibt,** ob die Vorlage einen Default mitliefert. **Entwurfsrichtung (§3a, §3b):** Stellen-Abgleich und Laufzeit-Gate getrennt führen; das Inventar muss vollständig sein (A8). |
 | **A3** | **Prüfform je Werkzeug.** Welche der vier Formen (exakt · Mindestversion · Anwesenheit · Variante)? | **Entschieden in der Richtung (Maintainer, 2026-11-19): kein Werkzeug bleibt ungeprüft**; die Ausnahmeliste entfällt. Offen: welche Form je Werkzeug und warum — die Herleitung gehört in den Kurs (Host-Werkzeuge sind nicht versionsgleich mit dem Image), nicht in die Konsumenten-Repos. Exakt ist reproduzierbar, aber fehlalarm-anfällig bei Host-Werkzeugen; Mindestversion deckt den Host ab, fängt aber Drift im Image nicht. **Entwurfsrichtung (§3a):** je Werkzeug eine Form, in der Deklaration, nicht im Skript. |
 | **A4** | **Baubarkeit in d-check.** Trägt ein bestehendes Modul das Gate, oder bleibt es ein `make`-Target der Vorlage? | Vorab gegen Ignores und Scan-Roots prüfen (`lab/templates` ist gate-ignoriert). Kein neues Prüf-Skript hier. **Teilweise beantwortet (§3b):** Stellen-Abgleich → `pinsync` (ab v0.91.0, Pin steht dort); Laufzeit-Gate und Inventar-Vollständigkeit → kein d-check-Modul. |
-| **A5** | **Schnitt der Wellen.** | **Zwei Wellen (§6).** Welle A: Begriff und Docker-Wahl (A1, A6) — der Check wird als zweiter Träger **genannt**, seine Lehre folgt in Welle B. Welle B: das Gate (A3, A4, A7–A9). Das Gate braucht Vorlagen, ein Szenario je Verhalten und ggf. d-check. |
-| **A6** | **Docker: begründen oder offen setzen?** | Entweder die Wahl wird gegen Alternativen begründet (Abwägung in Modul 14, Muster-ADR), oder der Kurs benennt Docker offen als **gewählten Träger** („dieser Kurs wählt Docker, weil …“) und lässt die Anforderung davon unberührt. Beides ist ehrlich; die jetzige Form — Folge getarnt als Begründung — ist es nicht. Betrifft die Sätze in Modul 9 und `AGENTS.template.md` §3.1. |
+| **A5** | **Schnitt der Wellen.** | **Zwei Wellen (§6).** Welle A: Begriff und Bereinigung (A1; A6 entschieden) — der Satz zu den zwei Trägern **fehlt** dort bewusst und kommt in Welle B. Welle B: das Gate und der zweite Träger (A3, A4, A7–A9). Ob Welle A allein eine Welle trägt, ist beim Start zu entscheiden. |
+| **A6** | **Docker: Stand des Kurses.** | **Richtung entschieden (Maintainer, 2026-11-19): beide Träger zulässig — Docker/Dockerfile und Tool-Pin mit Tool-/Versions-Check.** Docker ist der heutige Stand des Kurses, keine Abwägung gegen andere Träger; ein „weil …“ behauptete eine Wahl, die es nicht gab. Betrifft Modul 14 (ein Docker-Modul), die Zeile in Modul 9 (ein „Beispiel aus realen Repos“, kein Kurs-Gebot; „Supply-Chain-Defense“ hat keinen Mechanismus) und `AGENTS.template.md` §3.1 (bedingt formuliert). **Wortlaut-Entwurf für Modul 14:** „Die Umgebungs-Zusage lässt sich auf zwei Wegen erfüllen: mit Docker und Dockerfile, die die Umgebung aus gepinnten Eingaben bauen, oder mit Tool-Pins und einem Tool-/Versions-Check, der feststellt, ob die vorhandene Umgebung sie trägt. Dieses Modul behandelt den ersten Weg; der zweite folgt. Das ist der heutige Stand des Kurses, keine Abwägung zwischen beiden oder gegen weitere Träger.“ Die Abwägung gegen weitere Träger bleibt ein offener Faden, den der Kurs nicht behauptet. **Offen:** ob Welle A den Satz schon setzt, bevor der zweite Träger gelehrt wird (Welle B) — er verspräche dann etwas, das noch fehlt. |
 | **A7** | **Bindepunkt, Ausführungsort, Prüfer des Prüfers.** | **Bindepunkt entschieden (Maintainer, 2026-11-19): der erste Check in `make gates`.** Das Gate steht vor den fachlichen Gates, ein Rot hier ist ein Umgebungs-Befund und kein Befund über den Code. **Folge, im Kurs zu nennen:** Der Check läuft *in* `make`; ein zu altes `make` oder eine zu alte Shell scheitert beim Einlesen des Makefiles, bevor der Check dran ist (u-boot führt deshalb zusätzlich eine Mindestversion im Makefile selbst, als Parse-Guard). Der Host-Teil, der `make` und `bash` prüft, prüft also nur noch, was *trotz* dieser Grenze startete. **Offen:** Wo läuft der Check (am Host, im Image)? Der Host-Soll wird am Host geprüft, das Image-Soll im Image — zwei Läufe oder einer? Wer prüft den Prüfer selbst (Pin des Prüfwerkzeugs, `DCHECK_DIGEST`)? Einordnung in die drei Bindepunkte der Durchsetzungsschicht. Ohne diese Antworten ist das Gate eine Idee, kein Entwurf. **Entwurfsrichtung (§3a):** das Gate hängt in `make gates`, läuft im laufenden Kontext und ist vom Träger unabhängig; zwei Stufen (Rot, Warnung) sind zu klären; **die Werkzeuge, mit denen das Gate seine Pins parst (`sed`, `awk`, `grep`), sind selbst Abhängigkeiten des Gates** und gehören in dieselbe Prüfung — sonst prüft der Prüfer mit ungeprüften Werkzeugen. Das Gate-Skript selbst muss unter der **ältesten zugelassenen** Bash laufen (Bash 3.2 am Mac, wenn der Host dort zugelassen ist), sonst scheitert es, bevor es prüft. |
 | **A8** | **Woher kommt das Werkzeug-Inventar?** | Wenn kein Werkzeug ungeprüft bleibt, muss das Inventar **vollständig** sein. Handgepflegt driftet es: Ein Skript ruft nach einem Jahr `jq` auf, das nirgends steht, und das Gate bleibt grün. Optionen: (a) handgepflegt, mit einem Sensor, der Aufrufe in den Skripten gegen das Inventar prüft (**mit d-check heute nicht baubar**, §3b); (b) aus den Skripten abgeleitet (vollständig, aber schwer: Aufrufe in Shell sind nicht sauber parsbar); (c) handgepflegt ohne Vollständigkeitsprüfung, mit dem **Prüfer des Prüfers** als Stichprobe; (d) handgepflegt, mit einer **Probe im leeren Kontext** als Beleg: `make gates` läuft in einem Kontext, der genau das Inventar enthält, und ein undeklariertes Werkzeug lässt es scheitern. **Träger-neutral als `PATH`-Käfig** (ein Wegwerf-Verzeichnis mit Verweisen nur auf die deklarierten Werkzeuge, `PATH` darauf gesetzt; läuft auch ohne Docker und deckt auch die Host-Werkzeuge); **im Docker-Repo als Image** mit genau dem Inventar, dort aber ohne Host-Werkzeuge. Grenzen, für beide Formen: Shell-Builtins liegen nicht im `PATH`; ein absoluter Pfad umgeht den Käfig; `make` und `sh` müssen im Käfig liegen und gehören ins Inventar; die Probe fängt nur Aufrufe, die in diesem Lauf passieren — ein **Beleg mit Lücke**, kein Beweis der Vollständigkeit, und der Kurs müsste das so sagen. **Ungeprüft:** Der Käfig ist nicht gebaut und nicht erprobt. Zu klären gegen die Baubarkeit in d-check (A4); keine neuen Prüf-Skripte hier (`AGENTS.md` §4). |
 | **A9** | **Was feuert im Team-Sim?** | Welle B braucht ein Szenario *Werkzeug fehlt → rot* (`AGENTS.md` §3). Das Laufzeit-Gate ist ein Skript des Adopters (§3b), dieses Repo legt kein neues Prüf-Skript an (§4), und der Team-Sim fährt d-check. Offen: ob der Team-Sim ein Vorlagen-Skript fahren kann, ohne ein Gate zu behaupten, das es hier nicht gibt; sonst bleibt Welle B ohne geprüftes Verhalten und das steht im Wellen-Eintrag. |
@@ -321,13 +321,18 @@ Beispiel-Stufe es aktiviert, entscheidet sich nach dem Kurs (`AGENTS.md` §1).
 **Reihenfolge nach Rangfolge** (`AGENTS.md` §1): Kurs → Regelwerk-Spiegel
 (wortgleich, netzlos) → Vorlagen → Beispiel.
 
-1. **Welle A — Begriff und Docker-Wahl** (hängt an A1 und A6; der Check wird als zweiter Träger genannt, nicht gelehrt). Modul 14
-   trennt Anforderung und Träger (§2a), definiert den Begriff und führt die
-   Frage-Tabelle (§2); die Docker-Wahl steht begründet oder offen gesetzt, und die
-   Formulierung in Modul 9 und `AGENTS.template.md` §3.1 zieht nach (Quelle
-   zuerst); Modul 12 und `harness-dateien.md` verlinken. Regelwerk-Spiegel;
-   `Stand:`-Zeile des Regelwerk-READMEs zieht nach. Kein beobachtbares Verhalten,
-   **kein Team-Sim-Szenario** — das steht im Wellen-Eintrag.
+1. **Welle A — Begriff und Bereinigung** (hängt an A1; A6 ist entschieden).
+   Modul 14 definiert die Umgebungs-Zusage als Anforderung und führt die
+   Frage-Tabelle (§2); Docker steht darin als **der heutige Träger**, **ohne** den
+   Satz zu den zwei Wegen — der kommt erst in Welle B, wenn beide Wege da sind
+   (A6). Modul 9: die Zeile „Supply-Chain-Defense“ entfällt, „Toolchain-
+   Reproduzierbarkeit“ bleibt; die Vorlage `AGENTS.template.md` §3.1 zieht nach
+   (Quelle zuerst). Modul 12 und `harness-dateien.md` verlinken. Regelwerk-
+   Spiegel; `Stand:`-Zeile des Regelwerk-READMEs zieht nach. Kein beobachtbares
+   Verhalten, **kein Team-Sim-Szenario** — das steht im Wellen-Eintrag. **Zu
+   prüfen vor dem Start:** Trägt Welle A allein (Umbenennung und Bereinigung)
+   eine eigene Welle, oder gehört sie in Welle B? Die Entscheidung fällt, wenn
+   der Umfang feststeht.
    **Satelliten des heutigen Begriffs** (jede Fundstelle des Begriffs
    „Reproduzierbarkeits-Anker“ zieht mit): Modul 14 (Lernziel, Fehlannahme,
    Abschnitt „Zwei Formen…“, Reflexion; „drei Drift-Anker“ und „drei Anker“ in Übung und Selbstcheck), die Fehlannahme im Regelwerk-Spiegel, die Überschrift „Zwei Formen des
