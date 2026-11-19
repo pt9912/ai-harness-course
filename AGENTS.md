@@ -18,6 +18,11 @@
 ein Modul und das Beispiel, ist **das Beispiel** kaputt. Die Fix-Richtung geht
 immer zur Quelle, nie von der Ableitung zurück in die Lehre.
 
+**Auch Begründungen laufen nur abwärts.** Ein Satellit (`lab/regelwerk`,
+`lab/templates`, `lab/example`) belegt nie die Gestalt einer Regel der Quelle,
+weder dafür noch dagegen, auch nicht implizit über „sonst müssten wir X
+anfassen“. Passt ein Satellit nicht mehr, zieht er nach.
+
 ## 2. Der Spiegel unter `lab/regelwerk/`
 
 Operatives wird **wortgleich** übernommen, Didaktik weggelassen — **nie
