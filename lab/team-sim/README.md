@@ -82,6 +82,7 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-10-09 | `v0.85.0` | 97 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.83.0 → v0.85.0 |
 | 2026-10-10 | `v0.86.1` | 97 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.85.0 → v0.86.1 |
 | 2026-10-10 | `v0.86.1` | 109 PASS, 0 FAIL, 0 KAPUTT | erweitert um s31 |
+| 2026-11-19 | `v0.91.0` | 109 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.86.1 → v0.91.0 |
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der

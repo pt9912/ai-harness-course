@@ -160,6 +160,9 @@ targets:
     # Kam mit d-check v0.71.1 ins Fragment (die Hilfe des Werkzeugs als
     # Target); der Sensor hat es gemeldet, wie der Kommentar oben zusagt.
     - doc-usage
+    # Kam mit d-check v0.89.0 ins Fragment (Handbuch und Spezifikation des
+    # Werkzeugs lesen, `MANUAL=<begriff>`); der Sensor hat es gemeldet.
+    - doc-manual
     - doc-help
 
 # Planning-Lifecycle-Invariante: Der Ruhe-Marker steht im Block

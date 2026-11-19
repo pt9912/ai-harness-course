@@ -196,4 +196,4 @@ targets:
   # Behauptung geblieben. Aufgenommen nach derselben Regel wie die uebrigen.
   exempt-targets: [doc-check, doc-trace, doc-complete, doc-doctor, doc-repair,
                    doc-immutable, doc-commits, doc-planning, doc-tracked,
-                   doc-targets, doc-structure, doc-usage, doc-help]
+                   doc-targets, doc-structure, doc-usage, doc-manual, doc-help]
