@@ -191,7 +191,7 @@ dazu. Ergebnis-Form: eine flache Liste *vor* der Ranking-Diskussion.
 
 ```
 spec/lastenheft.md
-spec/spezifikation.md            (existiert noch nicht — anlegen?)
+spec/specification.md            (existiert noch nicht — anlegen?)
 spec/architecture.md             (Umbenennung von docs/architecture.md)
 docs/plan/adr/*.md
 docs/plan/planning/in-progress/roadmap.md
@@ -201,7 +201,7 @@ AGENTS.md
 harness/README.md                (neue Datei dieses Moduls)
 ```
 
-Beobachtung: zwei Lücken (`spezifikation.md`, `docs/user/*`) und eine
+Beobachtung: zwei Lücken (`specification.md`, `docs/user/*`) und eine
 Umbenennung (`docs/architecture.md` → `spec/architecture.md`) tauchen
 *durch* das Listing auf. Das ist kein Nebenprodukt — das ist die
 Hauptwirkung von Schritt 1.
@@ -230,7 +230,7 @@ Einstiegspunkt, keine neue Quelle.
 | Rang | Datei | Charakter |
 |---|---|---|
 | 1 | [`spec/lastenheft.md`](../spec/lastenheft.md) | vertraglich abnahmebindend |
-| 2 | [`spec/spezifikation.md`](../spec/spezifikation.md) | technisch fortschreibbar |
+| 2 | [`spec/specification.md`](../spec/specification.md) | technisch fortschreibbar |
 | 3 | [`spec/architecture.md`](../spec/architecture.md) | Komponenten/Sequenzen, meilensteinfrei |
 | 4 | [`docs/plan/adr/`](../docs/plan/adr/) | Architekturentscheidungen |
 | 5 | [`docs/plan/planning/in-progress/roadmap.md`](../docs/plan/planning/in-progress/roadmap.md) | Wellen-Sequenz |

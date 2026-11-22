@@ -1,4 +1,4 @@
-# Welle welle-mvp: Lauffähiger DocSearch-Stack
+# Welle wave-mvp: Lauffähiger DocSearch-Stack
 
 **Lifecycle:** Diese Datei lag flach unter `docs/plan/planning/`, solange die
 Welle lief, und ist bei Closure per `git mv` hierher nach `done/` gewandert —
@@ -35,8 +35,8 @@ zeitlich am Anfang stehen.
 
 - Alle Slices dieser Welle in `done/`.
 - `make fullbuild` grün.
-- Replay gegen das Golden Set `evals/golden/welle-mvp-baseline/` grün.
-- Closure-Notiz in `welle-mvp-results.md`.
+- Replay gegen das Golden Set `evals/golden/wave-mvp-baseline/` grün.
+- Closure-Notiz in `wave-mvp-results.md`.
 
 > *Lab-Grenze:* Das Kurs-Skelett kann den Replay nicht ausführen; es liefert
 > nur die Fixture-Prüfung `make replay`. Der Trigger oben ist die Bedingung
@@ -70,15 +70,15 @@ gespiegelt — eine Status-Spalte driftete gegen die Verzeichnisse.
 
 ## 5. Abhängigkeiten
 
-- Blockiert: `welle-qualitaet` (die Property-Tests brauchen den Stack).
+- Blockiert: `wave-qualitaet` (die Property-Tests brauchen den Stack).
 - Wird blockiert von: keiner Welle.
 
 ## 6. Out-of-Scope für diese Welle
 
-- ANN-Suche (→ `welle-skalierung`).
-- Betrieb, Helm-Chart, OTel-Pipeline (→ `welle-betrieb`).
+- ANN-Suche (→ `wave-skalierung`).
+- Betrieb, Helm-Chart, OTel-Pipeline (→ `wave-betrieb`).
 
 ## 7. Closure-Notiz
 
-Ergebnis: [`welle-mvp-results.md`](welle-mvp-results.md).
+Ergebnis: [`wave-mvp-results.md`](wave-mvp-results.md).
 Zähler: [`../observations/`](../observations/README.md).

@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  */
 public final class Indexer {
 
-    /** E001 — Verzeichnis existiert nicht (spec/spezifikation.md §4). */
+    /** E001 — Verzeichnis existiert nicht (spec/specification.md §4). */
     public static final class DirectoryNotFoundException extends RuntimeException {
         private static final long serialVersionUID = 1L;
 

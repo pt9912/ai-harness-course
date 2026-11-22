@@ -1,4 +1,4 @@
-# Welle welle-1-basis: Basis
+# Welle wave-1-basis: Basis
 
 **Lifecycle:** flach, solange offen; bei Closure per git mv nach done.
 

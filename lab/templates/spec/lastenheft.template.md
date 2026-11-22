@@ -27,13 +27,13 @@ Ein bis zwei Absätze: Was leistet das System, für wen, gegen welche
 Annahme. Konkret, aber nicht implementierungs-nah. "Wir bauen einen
 Service, der …" ist OK.
 
-Nicht hier: wie das System gebaut wird (das gehört in spezifikation.md
+Nicht hier: wie das System gebaut wird (das gehört in specification.md
 oder die ADRs).
 
 Systemgrenze: was zum System gehört, steht hier; was nicht dazugehört, unter
 §5. Ein von außen vorgegebenes System, an das es anbinden muss, ist eine
 technische Randbedingung (§4, `<PREFIX>-RB-<NN>`); Version und Vertrag der
-Anbindung stehen in spezifikation.md §6 (Externe Verträge).
+Anbindung stehen in specification.md §6 (Externe Verträge).
 -->
 
 ## 2. Stakeholder
@@ -105,7 +105,7 @@ beschreiben: technisch oder rechtlich. Sie ist kein Out-of-Scope-Punkt
 ### LH-QA-01 — <Performance>
 
 - **Anforderung:** <z.B. p95-Latenz < 200 ms bei 100 RPS.>
-- **Messmethode:** <z.B. Lasttest unter Standardlast, definiert in spec/spezifikation.md.>
+- **Messmethode:** <z.B. Lasttest unter Standardlast, definiert in spec/specification.md.>
 
 ### LH-QA-02 — <Sicherheit>
 
@@ -159,7 +159,7 @@ Ticket-Form, nicht der Vorgang. Dann trägt der **Commit** die Trennung: Die
 sie umsetzt — und „Verweis" nennt diesen Vorgang statt eines Tickets.
 
 **Auch hier gilt die Decken-Regel:** keine ADR, kein Slice, kein Carveout,
-keine Welle, kein Verweis auf `spezifikation.md` oder `architecture.md` — in
+keine Welle, kein Verweis auf `specification.md` oder `architecture.md` — in
 keiner Spalte. Kein Spec-Stratum nimmt seine Historie davon aus. Die Spalte
 „Verweis" trägt den **externen** CR; der steht außerhalb des Repos und damit
 außerhalb der Referenz-Richtung. Wer im Repo bemerkt hat, dass eine Änderung

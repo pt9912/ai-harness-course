@@ -67,7 +67,7 @@ func TestReindexHTTP_LHFA01_Negative_E001(t *testing.T) {
 }
 
 // TestStatusFor_E099 — unklassifizierter Fehler wird zu 500/E099
-// (spec/spezifikation.md §4).
+// (spec/specification.md §4).
 func TestStatusFor_E099(t *testing.T) {
 	status, code := statusFor(errors.New("etwas Unerwartetes"))
 	if status != http.StatusInternalServerError || code != "E099" {
@@ -75,7 +75,7 @@ func TestStatusFor_E099(t *testing.T) {
 	}
 }
 
-// TestStatusFor_AlleCodes — die vier Codes aus spec/spezifikation.md §4.
+// TestStatusFor_AlleCodes — die vier Codes aus spec/specification.md §4.
 func TestStatusFor_AlleCodes(t *testing.T) {
 	cases := []struct {
 		err    error
@@ -101,7 +101,7 @@ func strconvQuote(s string) string {
 }
 
 // TestDecodeFehler_E099_500 — kaputter Body ist unklassifiziert: E099 mit
-// Status 500 (spec/spezifikation.md §4), nicht 400.
+// Status 500 (spec/specification.md §4), nicht 400.
 func TestDecodeFehler_E099_500(t *testing.T) {
 	for name, call := range map[string]func(*Handler, http.ResponseWriter, *http.Request){
 		"reindex": (*Handler).ReindexHTTP,

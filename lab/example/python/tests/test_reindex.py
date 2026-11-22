@@ -1,4 +1,4 @@
-"""Tests gegen LH-FA-01 und die Fehler-Codes aus spec/spezifikation.md §4."""
+"""Tests gegen LH-FA-01 und die Fehler-Codes aus spec/specification.md §4."""
 
 from __future__ import annotations
 
@@ -78,7 +78,7 @@ def test_handler_reindex_status_codes(tmp_path: Path) -> None:
 
 
 def test_status_for_alle_codes() -> None:
-    """Die vier Codes aus spec/spezifikation.md §4."""
+    """Die vier Codes aus spec/specification.md §4."""
     assert status_for(DirectoryNotFoundError("x")) == (400, "E001")
     assert status_for(EmptyQueryError("x")) == (400, "E002")
     assert status_for(EmbeddingUnavailableError("x")) == (503, "E003")

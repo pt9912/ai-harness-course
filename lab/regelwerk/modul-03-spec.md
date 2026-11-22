@@ -29,7 +29,7 @@ ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
 
 - **"Akzeptanzkriterien sind 'der Happy Path'."** — Happy Path widerlegt nur die These "es funktioniert gar nicht". Boundary und Negative widerlegen die stillen Annahmen, *die ein Agent am liebsten als selbstverständlich behandelt*.
 - **"Negativbedingungen sind unhöflich."** — Im Gegenteil: ein Satz "das System *darf nicht* …" spart später drei Reviews. Negativ ist genauso präzise wie positiv.
-- **"Performance gehört in den ADR."** — Nein, Performance gehört in den nichtfunktionalen Block der Spec (oder in `spec/spezifikation.md`, wenn stratifiziert). Der ADR begründet, *wie* man die Schwelle einhält.
+- **"Performance gehört in den ADR."** — Nein, Performance gehört in den nichtfunktionalen Block der Spec (oder in `spec/specification.md`, wenn stratifiziert). Der ADR begründet, *wie* man die Schwelle einhält.
 - **"Out-of-Scope kann implizit bleiben."** — Was nicht explizit ausgeschlossen ist, baut der Agent plausibel mit. Das ist die häufigste Quelle für "wir hatten das nie gefordert"-PRs.
 - **"Eine Randbedingung ist ein Out-of-Scope-Punkt."** — Nein. Out-of-Scope schließt eine *Funktion* aus („keine Echtzeit-Streaming-API"); eine Randbedingung schränkt die *Umsetzung* ein, ohne eine Funktion zu beschreiben — technisch („muss auf Postgres 15 laufen") oder rechtlich („personenbezogene Daten verlassen die EU nicht"). Sie steht im Lastenheft, weil sie vom Auftraggeber kommt, als `<PREFIX>-RB-<NN>` (eigene Reihe neben `-FA-` und `-QA-`); wie sie erfüllt wird, steht in Spezifikation und ADRs, und jede Randbedingung nennt, wie ihre Einhaltung nachgewiesen wird.
 - **"Usability und Internationalisierung sind Sache der UI, nicht der Spec."** — Nein. Was nicht in der Spec steht, existiert für den Agenten nicht (Kernidee). Bedienbarkeit, Barrierefreiheit und Internationalisierung stehen als nichtfunktionale Anforderung der Kategorie *Usability* im Lastenheft, mit Messmethode wie jede andere.
@@ -50,7 +50,7 @@ werden; das Negative (`darf nicht …`) spart die spätere Review.
 
 Das Lastenheft ist die **Decke** der Straten-Ordnung: Es referenziert nur
 innerhalb der eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts, Wellen,
-und auch nicht `spezifikation.md` oder `architecture.md`
+und auch nicht `specification.md` oder `architecture.md`
 ([`grundlagen-referenz-richtung.md` §Referenz-Richtung (SDP)](grundlagen-referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren);
 die drei Spec-Zeilen der Matrix tragen in jeder fremden Spalte ein ❌ **ohne**
 Kontext-Ausnahme).
@@ -73,7 +73,7 @@ hat.
 ### Ziel-Form: Spezifikation
 
 Technische Festlegungen leben in der Spezifikation
-([`templates/spec/spezifikation.template.md`](../templates/spec/spezifikation.template.md)):
+([`templates/spec/specification.template.md`](../templates/spec/specification.template.md)):
 Algorithmen und Datenflüsse · Datenstrukturen und Schemas · Defaults und
 Konstanten · Fehler-Codes und Logging-Felder · Metriken und Tracing-Felder ·
 externe Verträge · Festlegungen der Harness-Werkzeuge — was ein Gate, ein
@@ -157,8 +157,8 @@ Operative Regeln, die die Vorlage nicht selbst erzwingt:
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 
 Jede Spec zerfällt in drei obligatorische Schichten mit eigener Precedence:
-`lastenheft.md` (vertragliches *Was*) › `spezifikation.md` (präzisiertes
-*Wie genau*) › `architektur.md` (strukturelles *Wodurch*). Konfliktregel:
+`lastenheft.md` (vertragliches *Was*) › `specification.md` (präzisiertes
+*Wie genau*) › `architecture.md` (strukturelles *Wodurch*). Konfliktregel:
 **Lastenheft sticht Spezifikation sticht Architektur** — die untere
 Schicht darf *präzisieren*, nie *erweitern*. Vollform (Straten-Klassen,
 Referenz-Richtung, Durchsetzung) in

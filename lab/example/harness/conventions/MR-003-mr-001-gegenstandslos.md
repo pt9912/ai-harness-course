@@ -10,7 +10,7 @@
 - **Adaption:** *keine* — dieser Eintrag löst `MR-001` auf. Die Baseline führt
   seither **alle drei Spec-Straten als obligatorisch**
   ([`referenz-richtung.md` §Spec-Straten](../../../../kurs/de/grundlagen/referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument));
-  die Source-Precedence-Tabelle mit `spec/spezifikation.md` auf Rang 2 ist
+  die Source-Precedence-Tabelle mit `spec/specification.md` auf Rang 2 ist
   damit der Default und keine Abweichung mehr.
 - **Begründung:** Eine Adaption, die durch ein Baseline-Update
   gegenstandslos wird, wird nicht gelöscht und nicht überschrieben, sondern

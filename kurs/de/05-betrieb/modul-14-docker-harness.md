@@ -181,7 +181,7 @@ in einem Replay-Manifest (Modul 12) referenzierbar wird:
 build:  ## LH-QA-03 — reproduzierbarer Build, Image-Hash erfasst
 	docker buildx build \
 		--platform linux/amd64 \
-		--tag docsearch:welle-2 \
+		--tag docsearch:wave-2 \
 		--metadata-file build-metadata.json \
 		--load .
 	@jq -r '."containerimage.config.digest"' build-metadata.json > harness/image-hash.txt

@@ -7,7 +7,7 @@ muss vorher festlegen, wer gewinnt. Eine pragmatische Default-Reihenfolge
 für ein typisches Repo:
 
 1. `spec/lastenheft.md`
-2. `spec/spezifikation.md`
+2. `spec/specification.md`
 3. `spec/architecture.md`
 4. `docs/plan/adr/README.md` und die darin referenzierten ADRs
 5. `docs/plan/planning/in-progress/roadmap.md`
@@ -19,7 +19,7 @@ Runbook-*Sichten*)
 
 ```mermaid
 flowchart TD
-    L["1. spec/lastenheft.md<br/>(vertraglich)"] --> T["2. spec/spezifikation.md<br/>(technisch)"]
+    L["1. spec/lastenheft.md<br/>(vertraglich)"] --> T["2. spec/specification.md<br/>(technisch)"]
     T --> S["3. spec/architecture.md"]
     S --> A["4. docs/plan/adr/<br/>(ADRs)"]
     A --> R["5. roadmap.md"]
@@ -158,7 +158,7 @@ obligatorisch ([§Spec-Straten](referenz-richtung.md#spec-straten-mehr-als-ein-s
 | Datei | Charakter | Änderungs-Prozess |
 |---|---|---|
 | `spec/lastenheft.md` | **vertraglich abnahmebindend** (`LH-*` / `HSM-*`-IDs) | Change Request |
-| `spec/spezifikation.md` | **technisch verbindlich, fortschreibbar** (Algorithmen, Defaults, Protokolle) | ADR-Schärfung erlaubt |
+| `spec/specification.md` | **technisch verbindlich, fortschreibbar** (Algorithmen, Defaults, Protokolle) | ADR-Schärfung erlaubt |
 | `spec/architecture.md` | Diagramme, Komponentensicht, **keine eigenen Anforderungen** | Diagramm-Update |
 
 ```mermaid
@@ -166,7 +166,7 @@ flowchart TD
     subgraph LH["lastenheft.md — vertraglich (wir versprechen)"]
         LH1["LH-FA-*, LH-QA-*, LH-RB-*<br/>Anforderungen mit ID<br/>Akzeptanzkriterien"]
     end
-    subgraph SP["spezifikation.md — technisch (wir liefern wie)"]
+    subgraph SP["specification.md — technisch (wir liefern wie)"]
         SP1["Algorithmen<br/>Defaults<br/>Protokolle"]
     end
     subgraph AR["architecture.md — diagrammatisch (so sieht es aus)"]
@@ -277,8 +277,8 @@ Schicht zu hoch ein.
 | Kennung | Stratum | Art |
 |---|---|---|
 | `<PREFIX>-FA-<NN>`, `<PREFIX>-QA-<NN>`, `<PREFIX>-RB-<NN>` | Vertrag (`spec/lastenheft.md`) | **Anforderungs-ID** — das Einzige, was abgenommen wird |
-| `<PREFIX>-FA-<NN>.<Buchstabe>` | Technik (`spec/spezifikation.md`) | **Verfeinerung** genau einer Anforderungs-ID |
-| `SPEC-<NNN>` | Technik (`spec/spezifikation.md`) | **Struktur-ID** für eine technische Festlegung ohne eigene Anforderung |
+| `<PREFIX>-FA-<NN>.<Buchstabe>` | Technik (`spec/specification.md`) | **Verfeinerung** genau einer Anforderungs-ID |
+| `SPEC-<NNN>` | Technik (`spec/specification.md`) | **Struktur-ID** für eine technische Festlegung ohne eigene Anforderung |
 | `ARC-<NNN>` | Sicht (`spec/architecture.md`) | **Struktur-ID** für Komponente oder Schnittstelle |
 
 Die Zählteile stehen hier ohne Bereichssegment; `LH-FA-03` und `LH-FA-IDX-003`
@@ -467,13 +467,13 @@ mitwachsen.
 **Ein Weg, keine Auswahl: das Präfix des Ankers, wenn einer existiert — sonst
 ein freier Slug.** Setzt eine Welle oder ein Slice eine einzelne Anforderung,
 ADR oder Carveout um, liefert deren Kennung das Präfix
-(`welle-LH-FA-03-cache-warmup`) — reine Traceability, keine zusätzliche
+(`wave-LH-FA-03-cache-warmup`) — reine Traceability, keine zusätzliche
 Sicherheit: Die Lautstärke von `LH-FA-03` in `lastenheft.md` überträgt sich
 nicht auf die davon abgeleitete, neue Datei, die Sicherheit bleibt beim Slug.
 Ohne einen solchen Bezug (Tooling, Formatierung) trägt der Slug allein
 dieselbe Sicherheit, nur ohne die Traceability-Zugabe. Ein Slice, der während
 einer Welle neu entsteht, trägt denselben Mechanismus eine Ebene tiefer: die
-Welle als Namensraum-Präfix (`slice-<welle-name>-<aspekt-slug>`), kein Zähler.
+Welle als Namensraum-Präfix (`slice-<wave-name>-<aspekt-slug>`), kein Zähler.
 
 **Die Vergabe ist nur die eine Hälfte.** Das Anlegen fasst daneben eine
 gemeinsame Liste an — eine Welle die Zeile unter *Offene Wellen*, ein Slice

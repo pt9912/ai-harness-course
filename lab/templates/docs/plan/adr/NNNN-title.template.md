@@ -16,7 +16,7 @@
 
 **Bezug:** [`<LH-FA-NN>`](../../../spec/lastenheft.md#<anker>), [`<LH-QA-NN>`](../../../spec/lastenheft.md#<anker>), [`<LH-RB-NN>`](../../../spec/lastenheft.md#<anker>), [ADR-<NNNN>](<NNNN>-<titel>.md) (optional)
 
-**Schärft:** [`<SPEC-NNN>`](../../../spec/spezifikation.md#<anker>) / [`<PREFIX>-FA-<NN>.<Buchstabe>`](../../../spec/spezifikation.md#<anker>) / [`<ARC-NNN>`](../../../spec/architecture.md#<anker>) — welche
+**Schärft:** [`<SPEC-NNN>`](../../../spec/specification.md#<anker>) / [`<PREFIX>-FA-<NN>.<Buchstabe>`](../../../spec/specification.md#<anker>) / [`<ARC-NNN>`](../../../spec/architecture.md#<anker>) — welche
 Spec-Stelle diese ADR verbindlich macht. **Die Kennung nennen, wo das
 Zielelement eine trägt** — `SPEC-*`, die Verfeinerung `<PREFIX>-FA-<NN>.<Buchstabe>`
 oder `ARC-*`; erst wo eine Sektion keine vergibt, den Abschnitt

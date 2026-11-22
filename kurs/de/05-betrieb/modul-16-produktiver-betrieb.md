@@ -148,12 +148,12 @@ Beleg fehlt, ist das Item *nicht* abgehakt — auch wenn das Item
 inhaltlich erfüllt wäre. Eine Checkliste ohne Belege ist die
 Bürokratie-Form, gegen die der Kurs sich wendet.
 
-**Schritt 6 — Freigabe-Eintrag in `done/welle-1-closure.md`.**
+**Schritt 6 — Freigabe-Eintrag in `done/wave-1-results.md`.**
 ```markdown
 # Welle 1 — Closure-Eintrag
 Status: released
 Datum: 2026-06-30
-Checkliste: docs/release/welle-1-checkliste.md (alle Items mit Beleg)
+Checkliste: docs/release/wave-1-checklist.md (alle Items mit Beleg)
 Restrisiken: zwei (siehe §"Bewusst NICHT", plus Folge-Slice slice-audit-log-review für
              Coverage-Erhöhung auf Critical-Pfad).
 Steering-Loop-Eintrag (Modul 15 Doku-Konsistenz-Agent meldete vor

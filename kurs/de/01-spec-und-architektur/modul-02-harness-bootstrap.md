@@ -352,7 +352,7 @@ BF-Diskrepanz-Auslöse-Variante.
 |---|---|---|---|
 | 5 | `docs/plan/planning/roadmap.md` mit Welle + Release-Mapping; `releasing.md` mit Release-Strategie | `roadmap.md` 1 → 2; `releasing.md` 1 → 2 | keine |
 | 6 | Sensors-Roster im "Nicht behauptet"-Block (Prosa-Pointer-Liste, kein Status) | `harness/README.md` §Sensors Sub-1 → Sub-2 | **T4** (Promotion-Auslöser bei erstem Code-Slice) |
-| 7 | `spec/architecture.md` + `spec/spezifikation.md` Outline mit `ARC-*`/`SPEC-*` | beide 1 → 2 | **T5** (erste ADR-Vorschläge aus Architektur-Outline) |
+| 7 | `spec/architecture.md` + `spec/specification.md` Outline mit `ARC-*`/`SPEC-*` | beide 1 → 2 | **T5** (erste ADR-Vorschläge aus Architektur-Outline) |
 | 8 | `docs/plan/adr/0001-doc-source-of-truth.md` mit Status *Proposed* | `0001-…md` 0 → 2; ADR-Index 1 → 2 | **T6** (Cross-Reference: ADR → Spec, aufwärts), **T7** (ADR-Review-Auslöser) |
 | Bootstrap-Ende | Bereit für ersten Code-Slice — Workflow-Übergang | — | — |
 
@@ -366,11 +366,11 @@ kognitiv lesbar — die Phasen verschwimmen sonst.
 **Anmerkung zum Instanziierungs-Zeitpunkt (Schritt 2).** „Skelette kopieren
 und ausfüllen" meint beim Bootstrap **nur die Gründungs-Dokumente** — je genau
 eines pro Repo, hier gefüllt und behalten: `spec/lastenheft.md`,
-`spec/spezifikation.md`, `spec/architecture.md`, `harness/conventions.md`
+`spec/specification.md`, `spec/architecture.md`, `harness/conventions.md`
 (Index; einzelne `MR-<NNN>` entstehen pro Adaption, nicht beim Bootstrap),
 `harness/README.md`, `AGENTS.md`, `docs/plan/planning/roadmap.md` und der
 Gründungs-ADR `0001` (Skelette in Schritt 2, gefüllt in 3–8). Die
-**wiederkehrenden Artefakte** — `slice`, `welle`, weitere ADRs (`NNNN-*`),
+**wiederkehrenden Artefakte** — `slice`, `wave`, weitere ADRs (`NNNN-*`),
 `carveout`, `review-report` — werden **nicht** beim Bootstrap vorab kopiert,
 sondern **pro Instanz** aus der vendored Baseline
 (`.harness/baseline/<tag>/templates/…`), wenn der Workflow sie erreicht
@@ -505,13 +505,13 @@ Selbstführungs-Praxis, kein einmaliges Audit —, mit sieben Eigenschaften:
   Das Wort **Templates** benennt hier die Artefakt-Klasse, nicht 1:1 eine
   einzelne Vorlagen-Datei: Wo eine Klasse mehrere vendored Vorlagen über ihren
   Lebenszyklus trägt — Slice `slice.template.md` **und**
-  `archiv-stub-slice.template.md`, Welle `welle.template.md`,
-  `welle-results.template.md` **und** `archiv-stub-welle.template.md`
+  `archive-stub-slice.template.md`, Welle `wave.template.md`,
+  `wave-results.template.md` **und** `archive-stub-wave.template.md`
   ([Modul 6 §Die Wellen-Closure-Prozedur, Schritt 4](../02-planung/modul-06-roadmap.md#die-wellen-closure-prozedur)) —,
   gilt die Append-only-Logik für **jede** von ihnen: Auch ein Archiv-Stub ist
   eine eingefrorene historische Form und wird bei einem neuen Baseline-Stand
   nicht rückwirkend umgeschrieben. `MR`-Einträge
-  (`harness/conventions/MR-NNN-titel.template.md`) gehören ebenfalls dazu —
+  (`harness/conventions/MR-NNN-title.template.md`) gehören ebenfalls dazu —
   der nächste Punkt zieht dieselbe Append-only-Disziplin explizit heran ("wie
   bei ADRs"). **Sensor-Gate-Dateien (`harness/sensors/gate.template.md`)
   dagegen nicht**, obwohl auch sie mehrfach vendored vorliegen: Ihr Vertrag

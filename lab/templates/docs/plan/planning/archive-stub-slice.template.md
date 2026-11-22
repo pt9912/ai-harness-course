@@ -2,8 +2,8 @@
 
 > **Template-Hinweis.** Vorlage für den gekürzten Stub, der beim Archivieren
 > einer Welle an der Stelle des Slice-Volltexts liegen bleibt
-> (`docs/plan/planning/done/<welle-id>/`). Kopiere, ersetze Platzhalter,
-> lösche diesen Block. Für den Welle-Plan gilt `archiv-stub-welle.template.md`.
+> (`docs/plan/planning/done/<wave-id>/`). Kopiere, ersetze Platzhalter,
+> lösche diesen Block. Für den Welle-Plan gilt `archive-stub-wave.template.md`.
 
 > **Zitier-Form** *(bleibt stehen — Norm, kein Ausfüll-Hinweis).* Dieses
 > Artefakt friert ein; was es zitiert, bewegt sich weiter. Deshalb: **Kennung,
@@ -40,8 +40,8 @@ Review-Reports bekommen KEINEN Stub — sie liegen im Archiv unter ihrem Slice.
 -->
 
 > **ARCHIVIERT** — Volltext:
-> `unzip -p done/<welle-id>/archiv.zip <pfad-im-archiv>`
+> `unzip -p done/<wave-id>/archive.zip <pfad-im-archiv>`
 
-**Welle:** <welle-id | ohne Welle>
-**Archiviert mit:** <welle-id> · **Geschlossen:** <JJJJ-MM-TT>
+**Welle:** <wave-id | ohne Welle>
+**Archiviert mit:** <wave-id> · **Geschlossen:** <JJJJ-MM-TT>
 **Hervorgegangen:** <BEO-*, ADR-*, Folge-Slice — oder `— keine —`>

@@ -93,7 +93,7 @@ Ausnahme von ihr.
 
 ### Ziel-Form: ADR (MADR)
 
-Die Form liefert die Vorlage [`templates/docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md):
+Die Form liefert die Vorlage [`templates/docs/plan/adr/NNNN-title.template.md`](../templates/docs/plan/adr/NNNN-title.template.md):
 Kopf (Status · Datum · Bezug · Supersedes) plus Body (Kontext · Verglichene
 Alternativen · Entscheidung · Konsequenz mit Fitness Function). Operative
 Regeln zur Form:

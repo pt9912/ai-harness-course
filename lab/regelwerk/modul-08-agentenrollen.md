@@ -61,8 +61,8 @@ drei Teile.
 | **2** — Trigger-Audit | Planner (Carveout-Zweig) · **Planner → Architect → Planner** (ADR-, Reifestufen- und Hard-Rule-Zweig) | Audit-Vorlage (fällige Trigger) → Verdikt (bestätigt / Folge-ADR mit `supersedes` / neue Stufe / Hard-Rule-Zeile entfernt) |
 | **3a** — Lese-Schritt | **Planner** erkennt den 3×-Übertritt | Zähler-Stand aus dem Beobachtungs-Register |
 | **3b** — Verkörperung | **Planner → Architect → Planner** | Steering-Loop-Eintrag mit Zielort → verkörperte Regel (Hard Rule · Gate · Skill · `MR`) oder Folge-Slice |
-| **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `welle-<Kennung>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
-| **4** — Zeitdokumente archivieren | **Planner** | `done/<welle-id>/archiv.zip` plus die gekürzten Stubs; die Ergebnisnotiz bleibt vollständig und flach |
+| **3c** — Closure-Notiz und `git mv`, dann die drei Paarungen | **Planner** | `wave-<Kennung>-results.md`; die Paarungen prüfen die gerade entstandenen Einträge |
+| **4** — Zeitdokumente archivieren | **Planner** | `done/<wave-id>/archive.zip` plus die gekürzten Stubs; die Ergebnisnotiz bleibt vollständig und flach |
 | **5** — Wave-Self-Close-Commit | **Planner** | *ein* beobachtbarer Commit statt eines verstreuten Verschwindens |
 | **6** — Roadmap fortschreiben | **Planner** | Welle in *Abgeschlossene Wellen*, ihr Zeiger verlässt *Offene Wellen* — befördert wird niemand; ggf. Drift-Eintrag |
 
@@ -84,7 +84,7 @@ bleiben, einer entfällt ganz.**
 | Übergabe | ohne Wellen-Betrieb |
 | --- | --- |
 | Planner → Architect → Planner (Trigger-Audit) | **bleibt** — bei jeder Slice-Closure statt einmal pro Welle |
-| Planner → Architect → Planner (Verkörperung) | **bleibt** — Anker `seit slice-<Kennung>` statt `seit welle-<Kennung>` |
+| Planner → Architect → Planner (Verkörperung) | **bleibt** — Anker `seit slice-<Kennung>` statt `seit wave-<Kennung>` |
 | Planner → Verifier → Planner (repo-weiter Verifikations-Beleg) | **entfällt** |
 
 Dass gerade diese entfällt, ist die Definition und kein Verlust: Ein repo-weiter
@@ -230,7 +230,7 @@ Seniorität („Reviewer klingt senioriger") entschieden. Regeln:
   Seniorität als *Argument* — die ADR schließt durch die Immutabilitäts-Regel,
   die für alle gleich gilt.
 - **Folge-ADR-Hülle vorab bereithalten** (Vorlage
-  [`templates/docs/plan/adr/NNNN-titel.template.md`](../templates/docs/plan/adr/NNNN-titel.template.md)),
+  [`templates/docs/plan/adr/NNNN-title.template.md`](../templates/docs/plan/adr/NNNN-title.template.md)),
   damit Verdikt 2 nicht die aufwändigste — und deshalb ungewählte —
   Option ist.
 - **Wann *nicht* modellieren:** bei isolierten LOW/INFO-Findings ist die

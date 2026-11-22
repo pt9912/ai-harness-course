@@ -1,9 +1,9 @@
-# Welle <welle-id> — <Titel> — Closure-Notiz
+# Welle <wave-id> — <Titel> — Closure-Notiz
 
 > **Template-Hinweis.** Vorlage für die Ergebnis-Notiz einer Welle.
-> Kopiere nach `docs/plan/planning/done/<welle-id>-results.md` — die volle
-> Kennung, unverändert (die Welle `welle-cache-warmup` schließt mit
-> `welle-cache-warmup-results.md`). Ersetze Platzhalter und lösche diesen
+> Kopiere nach `docs/plan/planning/done/<wave-id>-results.md` — die volle
+> Kennung, unverändert (die Welle `wave-cache-warmup` schließt mit
+> `wave-cache-warmup-results.md`). Ersetze Platzhalter und lösche diesen
 > Block. Zugleich wandert die Welle-*Plan*-Datei per `git mv` nach `done/`,
 > neben diese Notiz. Pflichtteile und Ablauf: Baseline-Regelwerk
 > `modul-06-roadmap.md` §Wellen-Closure-Prozedur (Modul 6), Schritt 3.
@@ -16,7 +16,7 @@
 > (Baseline-Regelwerk `grundlagen-harness-dateien.md` §harness/README.md als
 > Einstiegspunkt — beim Ausfüllen mit dem adoptierten Tag schreiben).
 
-**Welle:** <welle-id, z. B. welle-cache-warmup>
+**Welle:** <wave-id, z. B. wave-cache-warmup>
 **Abschluss:** YYYY-MM-DD
 **Verantwortlich:** <Name>
 
@@ -70,10 +70,10 @@ und Zielort auf **einer** Zeile, Sektionsangabe innerhalb der Backticks; die
 - <…>
 
 <!-- Gegenstück am Ziel, nicht vergessen — es ist die andere Hälfte des Paares:
-     noqa-gate:  ## LH-QA-SUP-002 · seit welle-<Kennung>
-     ### 3.3 <Hard Rule>   (seit welle-<Kennung>)
+     noqa-gate:  ## LH-QA-SUP-002 · seit wave-<Kennung>
+     ### 3.3 <Hard Rule>   (seit wave-<Kennung>)
      Entfernen oder Lockern dieser Regel setzt später den Retirement-Check
-     voraus: „seit welle-<Kennung> — ist die Beobachtung wieder aufgetreten?" -->
+     voraus: „seit wave-<Kennung> — ist die Beobachtung wieder aufgetreten?" -->
 
 ## Beobachtungs-Register (Zeiger)
 

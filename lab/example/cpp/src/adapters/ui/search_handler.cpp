@@ -34,7 +34,7 @@ SearchHandler::SearchHandler(const Searcher& searcher) : searcher_(searcher) {}
 SearchHandler::SearchHandler(const Searcher& searcher, const Indexer& indexer)
     : searcher_(searcher), indexer_(&indexer) {}
 
-// status_for — die Zuordnung aus spec/spezifikation.md §4 an EINER Stelle.
+// status_for — die Zuordnung aus spec/specification.md §4 an EINER Stelle.
 int SearchHandler::status_for(const std::string& code) {
     if (code == "E001") {
         return 400;  // Verzeichnis fehlt

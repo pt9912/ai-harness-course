@@ -6,7 +6,7 @@ einen Beleg, nicht nur ein Haekchen.
 | Item | Beleg |
 |---|---|
 | Gates gruen | `make gates COURSE_LANG=go` oder Sprach-Aequivalent |
-| Golden-Set-Form geprueft | `make replay RUN=welle-mvp-baseline` (validiert die Form, fuehrt den Replay nicht aus) |
+| Golden-Set-Form geprueft | `make replay RUN=wave-mvp-baseline` (validiert die Form, fuehrt den Replay nicht aus) |
 | Trace vorhanden | `make trace RUN=sl-tie-break-determinismus-agent-run` |
 | ADR-/Requirement-IDs nachvollziehbar | `slice-tie-break-determinismus`, `LH-QA-02`, [`ADR-0003`](../docs/plan/adr/0003-index-storage-format.md) |
 | Rollback-Entscheidung bekannt | [`incident-agent-data-loss.md`](incident-agent-data-loss.md) |

@@ -58,7 +58,7 @@ Dogfooding statt Behauptung.
       `BEO-TOOLS/d-check-yml-sub-area-unklar/`, Beleg `evidence/slice-review-report-deckung-per-d-check.md`.
 - [x] Jedes Risiko aus §6 trägt einen Ausgang.
 - [ ] Die drei Paarungen — dieses Repo führt Wellen-Betrieb
-      (`welle-qualitaet` läuft); geprüft von deren Closure, auch für
+      (`wave-qualitaet` läuft); geprüft von deren Closure, auch für
       diesen wellenlosen Slice.
 
 ## 3. Plan (vor Code)
@@ -139,7 +139,7 @@ Welle-2-Closure. -->
   im Register, bevor sie einen eigenen Slice rechtfertigt (Modul 6
   §Beobachtungs-Register).
 - **Risiken aus §6:** beide mit Ausgang — siehe §6.
-- **Drei Paarungen:** wird von der `welle-qualitaet`-Closure geprüft
+- **Drei Paarungen:** wird von der `wave-qualitaet`-Closure geprüft
   (Repo mit Wellen-Betrieb, auch für Slices ohne Wellen-Zugehörigkeit).
 
 ## 8. Sub-Area-Modus-Begründung

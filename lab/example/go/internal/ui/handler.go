@@ -29,7 +29,7 @@ func NewHandlerWithIndexer(s *service.Searcher, ix *service.Indexer) *Handler {
 	return &Handler{s: s, ix: ix}
 }
 
-// statusFor bildet die Fehler-Codes aus spec/spezifikation.md §4 auf
+// statusFor bildet die Fehler-Codes aus spec/specification.md §4 auf
 // HTTP-Status ab. Unbekannte Fehler sind E099.
 func statusFor(err error) (int, string) {
 	switch {
@@ -51,7 +51,7 @@ func (h *Handler) ReindexHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		// Unklassifiziert -> E099/500, wie jeder andere unbekannte Fehler
-		// (spec/spezifikation.md §4). Eine Zuordnungsstelle, nicht zwei.
+		// (spec/specification.md §4). Eine Zuordnungsstelle, nicht zwei.
 		status, code := statusFor(err)
 		http.Error(w, `{"error":"`+code+`"}`, status)
 		return

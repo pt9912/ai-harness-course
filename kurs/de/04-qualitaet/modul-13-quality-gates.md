@@ -243,7 +243,7 @@ coverage-gate: ## Coverage threshold gate (bootstrap-aware, LH-FA-BUILD-008).
 ```
 
 **Kam das Gate aus dem Steering Loop statt aus einer Anforderung**, trägt
-der Kommentar zusätzlich den Herkunfts-Anker `· seit welle-<Kennung>` — ohne Welle `· seit slice-<Kennung>`
+der Kommentar zusätzlich den Herkunfts-Anker `· seit wave-<Kennung>` — ohne Welle `· seit slice-<Kennung>`
 ([`traceability.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln))
 — sonst ist beim nächsten Aufräumen nicht mehr rekonstruierbar, welche
 Beobachtung es erzwungen hat.

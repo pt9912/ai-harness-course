@@ -2,9 +2,9 @@
 package types
 
 const (
-	// EmbeddingDim aus spec/spezifikation.md §3.
+	// EmbeddingDim aus spec/specification.md §3.
 	EmbeddingDim = 1024
-	// MaxTopK aus spec/spezifikation.md §3, ADR-0001.
+	// MaxTopK aus spec/specification.md §3, ADR-0001.
 	MaxTopK = 100
 )
 

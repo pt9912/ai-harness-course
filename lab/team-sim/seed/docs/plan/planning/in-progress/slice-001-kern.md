@@ -1,6 +1,6 @@
 # Slice slice-001: Kern
 
-**Welle:** welle-1-basis
+**Welle:** wave-1-basis
 
 **Verantwortlich:** alice.
 

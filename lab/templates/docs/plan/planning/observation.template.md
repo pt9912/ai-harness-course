@@ -68,7 +68,7 @@ kein Freitext:
 
 | Ausgang | Was dazugehört |
 |---|---|
-| `verkörpert` | Zielort **und** Herkunfts-Anker (`seit welle-<Kennung>` / `seit slice-<Kennung>`) |
+| `verkörpert` | Zielort **und** Herkunfts-Anker (`seit wave-<Kennung>` / `seit slice-<Kennung>`) |
 | `geplant` | Kennung des Slice oder der Welle, die die Regel schreibt |
 | `gestrichen` | die Begründung, warum die Beobachtung nicht mehr auftreten kann |
 
@@ -81,7 +81,7 @@ entferntes ist nicht von einem zu unterscheiden, das es nie gab.
 ## `evidence/<vorgangs-id>.md` — je Auftreten eine Datei
 
 ```markdown
-**Vorgang:** <slice-<Kennung> | welle-<Kennung> | review-YYYY-MM-DD-<kurz>>
+**Vorgang:** <slice-<Kennung> | wave-<Kennung> | review-YYYY-MM-DD-<kurz>>
 **Fund:** <ein Satz, was in genau diesem Vorgang auftrat>
 ```
 

@@ -1,4 +1,4 @@
-# Replay-Manifest für welle-mvp-baseline.
+# Replay-Manifest für wave-mvp-baseline.
 # Layout und Feldgewichtung entsprechen Kurs Modul 12, Worked Example A; der
 # Messgegenstand ist ein Inferenz-Modell wie in Worked Example B. Gemischter
 # Fall: Die `inputs/` sind Such-Anfragen, das Embedding-Modell laeuft im Replay
@@ -6,8 +6,8 @@
 # `model.seed` — und die Regeln der nachgelagerten Ranking-Stufe stehen im
 # `determinism:`-Block darunter, nicht in einem `prompt_context:`.
 
-set_name: welle-mvp-baseline
-slice: welle-mvp
+set_name: wave-mvp-baseline
+slice: wave-mvp
 description: >
   Baseline-Replays für DocSearch nach Welle-1-Abschluss.
   Drei Cases decken Happy Path, Boundary und Negative je LH-FA-02 ab.

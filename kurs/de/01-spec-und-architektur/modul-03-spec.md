@@ -50,7 +50,7 @@ Nach diesem Modul kannst du:
 
 ## Lab-Bezug
 
-* `spec/lastenheft.md`, `spec/spezifikation.md`, `spec/architecture.md`
+* `spec/lastenheft.md`, `spec/specification.md`, `spec/architecture.md`
 * [`../../../lab/example/exercises/02-lastenheft.md`](../../../lab/example/exercises/02-lastenheft.md)
 
 ## Themen
@@ -101,7 +101,7 @@ LLM ist *stateless*). Wer die Metapher zu weit treibt, erwartet
 "Mitlernen" — und plant Reviews, als würden sie *einmal* erklärt
 ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
 
-## Die Spezifikation (`spec/spezifikation.md`)
+## Die Spezifikation (`spec/specification.md`)
 
 Das Lastenheft sagt, *was* geliefert wird; die Spezifikation sagt, *wie genau*.
 Sie trägt **eigene technische Festlegungen** — Algorithmen und Datenflüsse,
@@ -128,7 +128,7 @@ Fünf Regeln, alle aus der Straten-Ordnung
   deklariert das als `MR-<NNN>`.
 * **Das Lastenheft darüber ist die Decke.** Es referenziert nur innerhalb der
   eigenen `LH-*`-Reihe — keine ADRs, Slices, Carveouts, Wellen, und auch nicht
-  `spezifikation.md` oder `architecture.md`. **In jedem Abschnitt, auch in der
+  `specification.md` oder `architecture.md`. **In jedem Abschnitt, auch in der
   Historie** — und darin unterscheidet es sich von den anderen beiden Straten
   nicht: Keines nimmt seine Provenance-Sektion aus. Wer eine Anforderung mit
   einer ADR begründet, hat die Entscheidung zur Anforderung gemacht; wer den
@@ -171,7 +171,7 @@ Vertrag, dessen Version-Bump der Fußabdruck des Change Requests ist
 ([§Spec-Stratifizierung](../grundlagen/source-precedence.md#spec-stratifizierung));
 die Technik ist fortschreibbar ohne ihn.
 
-Vorlage: [`spec/spezifikation.template.md`](../../../lab/templates/spec/spezifikation.template.md).
+Vorlage: [`spec/specification.template.md`](../../../lab/templates/spec/specification.template.md).
 
 ## Die Architektur-Sicht (`spec/architecture.md`)
 
@@ -220,7 +220,7 @@ Vorlage: [`spec/architecture.template.md`](../../../lab/templates/spec/architect
 
 - **"Akzeptanzkriterien sind 'der Happy Path'."** — Happy Path widerlegt nur die These "es funktioniert gar nicht". Boundary und Negative widerlegen die stillen Annahmen, *die ein Agent am liebsten als selbstverständlich behandelt*.
 - **"Negativbedingungen sind unhöflich."** — Im Gegenteil: ein Satz "das System *darf nicht* …" spart später drei Reviews. Negativ ist genauso präzise wie positiv.
-- **"Performance gehört in den ADR."** — Nein, Performance gehört in den nichtfunktionalen Block der Spec (oder in `spec/spezifikation.md`, wenn stratifiziert). Der ADR begründet, *wie* man die Schwelle einhält.
+- **"Performance gehört in den ADR."** — Nein, Performance gehört in den nichtfunktionalen Block der Spec (oder in `spec/specification.md`, wenn stratifiziert). Der ADR begründet, *wie* man die Schwelle einhält.
 - **"Out-of-Scope kann implizit bleiben."** — Was nicht explizit ausgeschlossen ist, baut der Agent plausibel mit. Das ist die häufigste Quelle für "wir hatten das nie gefordert"-PRs.
 - **"Eine Randbedingung ist ein Out-of-Scope-Punkt."** — Nein. Out-of-Scope schließt eine *Funktion* aus („keine Echtzeit-Streaming-API"); eine Randbedingung schränkt die *Umsetzung* ein, ohne eine Funktion zu beschreiben — technisch („muss auf Postgres 15 laufen") oder rechtlich („personenbezogene Daten verlassen die EU nicht"). Sie steht im Lastenheft, weil sie vom Auftraggeber kommt, als `<PREFIX>-RB-<NN>` (eigene Reihe neben `-FA-` und `-QA-`); wie sie erfüllt wird, steht in Spezifikation und ADRs, und jede Randbedingung nennt, wie ihre Einhaltung nachgewiesen wird.
 - **"Usability und Internationalisierung sind Sache der UI, nicht der Spec."** — Nein. Was nicht in der Spec steht, existiert für den Agenten nicht (Kernidee). Bedienbarkeit, Barrierefreiheit und Internationalisierung stehen als nichtfunktionale Anforderung der Kategorie *Usability* im Lastenheft, mit Messmethode wie jede andere.
@@ -272,7 +272,7 @@ mit dem Lab-Beispiel: [`/lab/example/spec/lastenheft.md`](../../../lab/example/s
 * **Drei-Schichten-Übung** — aktiviert das Erschaffens-Lernziel (LZ 4) zur
   Spec-Stratifizierung. Nimm dein Mini-Feature aus der ersten Übung und
   verteile seinen Inhalt auf drei Dateien — `lastenheft.md` (vertragliches
-  *Was*), `spezifikation.md` (präzisiertes *Wie genau*), `architektur.md`
+  *Was*), `specification.md` (präzisiertes *Wie genau*), `architecture.md`
   (strukturelles *Wodurch*). Pflicht pro Schicht: *ein* Inhalt, der dort
   zwingend gehört, und *ein* Inhalt, der dort fehl am Platz wäre (z. B.
   gehört "Antwort als gültiges JSON" ins Lastenheft, "Service-Layer ruft
@@ -319,7 +319,7 @@ Modul-spezifische Trigger:
 * Welche drei Tests würden ein Akzeptanzkriterium falsifizieren?
 * Wo gehört "Performance < 200 ms" hin — funktional oder nichtfunktional?
 * **(Erschaffens-Prozess)** Welcher Schritt deines Lastenheft-Schreibens war der *unsicherste* — und warum? (Erfahrungsgemäß: Schritt 5 "Negative" oder Schritt 6 "Out-of-Scope".)
-* **(Erschaffen — aktiviert LZ 4)** Entwirf für dein Mini-Feature eine Drei-Schichten-Spec-Stratifizierung (`lastenheft.md` · `spezifikation.md` · `architektur.md`): nenne *je* einen Inhalt, der in dieser Schicht zwingend gehört, und einen Inhalt, der dort *fehl am Platz* wäre. Welche Regel löst den Konflikt, wenn dieselbe Aussage in zwei Schichten auftaucht?
+* **(Erschaffen — aktiviert LZ 4)** Entwirf für dein Mini-Feature eine Drei-Schichten-Spec-Stratifizierung (`lastenheft.md` · `specification.md` · `architecture.md`): nenne *je* einen Inhalt, der in dieser Schicht zwingend gehört, und einen Inhalt, der dort *fehl am Platz* wäre. Welche Regel löst den Konflikt, wenn dieselbe Aussage in zwei Schichten auftaucht?
 * **(Bewerten — aktiviert LZ 3)** Provoziere mit deinem Lastenheft einen Agentenlauf und benenne *eine* konkrete Lücke, die das beobachtete Verhalten offenlegt (z. B. Agent erfindet ein Default-Limit, weil kein Boundary-Kriterium existiert): Diagnostiziere, *welcher* fehlende Spec-Bestandteil die Fehlinterpretation zuließ. Und metakognitiv: welche *eigene* Annahme — die dir beim Schreiben selbstverständlich schien — hat genau diese Lücke verdeckt?
 
 ### Selbstcheck-Rubrik
@@ -328,7 +328,7 @@ Modul-spezifische Trigger:
 |---|---|---|---|
 | Drei Akzeptanzkriterien-Arten eines vollständigen `LH-FA-*`? | "Tests." | Happy Path, Boundary, Negative — alle drei im Given/When/Then-Stil, ergänzt um eine explizite Out-of-Scope-Liste. | + Begründung: ohne Boundary und Negative trifft der Agent die *für dich ungünstigste* Interpretation; Out-of-Scope ist die einzige Klammer, die plausibel-Anbau verhindert. |
 | Drei Tests, die ein Akzeptanzkriterium falsifizieren? | "Tests dagegen." | Happy Path · Boundary · Negative — drei verschiedene Test*arten*, nicht drei Test*fälle*. | + Hinweis, dass Boundary/Negative die stillen Annahmen des Happy Path widerlegen — *genau die*, die ein Agent als "selbstverständlich" behandelt. |
-| "Performance < 200 ms" — funktional oder nichtfunktional? | "Nichtfunktional." | Nichtfunktional, weil ohne Lasttest nicht prüfbar; gehört in QA-Block oder `spec/spezifikation.md`. | + Abgrenzung "*Antwort innerhalb von* 200 ms" ist Latenz-*Garantie* (nichtfunktional); "System antwortet mit gültigem JSON" wäre funktional. |
+| "Performance < 200 ms" — funktional oder nichtfunktional? | "Nichtfunktional." | Nichtfunktional, weil ohne Lasttest nicht prüfbar; gehört in QA-Block oder `spec/specification.md`. | + Abgrenzung "*Antwort innerhalb von* 200 ms" ist Latenz-*Garantie* (nichtfunktional); "System antwortet mit gültigem JSON" wäre funktional. |
 | Unsicherster Schritt des Lastenheft-Schreibens? | Schritt vage benannt ohne Begründung ("Schritt 5 war schwer."). | Konkret benannter Schritt + Begründung (z. B. "Schritt 5 Negative, weil ich erst beim Hinschreiben gemerkt habe, *was* ausgeschlossen werden muss"). | + Pointe: wer keinen unsicheren Schritt findet, hat den Worked Example *gelesen* statt *nachgebaut*. Schritte 5 (Negative) und 6 (Out-of-Scope) sind die häufigsten unsicheren Stellen — und damit auch die häufigsten Spec-Lücken. |
 | Spec-Lücke aus provoziertem Lauf diagnostiziert? | Lücke pauschal benannt ("Spec war unklar.") ohne Bezug zum beobachteten Agentenverhalten. | Konkrete Lücke aus dem Lauf benannt + welcher Bestandteil fehlte (z. B. Boundary-Kriterium), der die Fehlinterpretation zuließ. | + metakognitive Hälfte: die *eigene* stille Annahme benannt, die die Lücke verdeckte ("ich hielt das Default-Limit für offensichtlich") — und der Schluss, dass genau die selbstverständlichen Annahmen die teuersten Lücken sind. |
 | Drei-Schichten-Spec-Stratifizierung entworfen? | Drei Schichten genannt, aber Inhalt aus zwei Schichten austauschbar formuliert. | Pro Schicht ein Pflicht-Inhalt und ein Anti-Inhalt; Konfliktregel formuliert (z. B. "Lastenheft sticht Spezifikation sticht Architektur — Spezifikation darf Lastenheft *präzisieren*, nie *erweitern*"). | + Zweite Konfliktregel für den Fall, dass die Architektur eine Spezifikations-Aussage *technisch unmöglich* macht: Pfad zurück über ADR-Supersedure und Spec-Update, nicht durch stille Anpassung. Verweis auf Spec-Stratifizierung in `c-hsm-doc` ([`../grundlagen/fallstudien.md`](../grundlagen/fallstudien.md)). |

@@ -159,7 +159,7 @@ beobachtbaren Auslöser und macht die Zuordnung beliebig.
 ### (Erschaffen) Ersten Wellen-Eintrag aus `slice-101`/`slice-102`/`slice-103` entwerfen
 
 ```text
-## welle-1-api-mit-cache
+## wave-1-api-mit-cache
 Slices:   slice-101 (Such-API), slice-102 (Query-Cache mit TTL, konsumiert slice-101)
 Trigger:  startet, sobald ADR-Cache-Strategie (Read-through vs. Look-aside)
           akzeptiert ist  ← beobachtbarer Zustand, kein Datum
@@ -175,14 +175,14 @@ also *ein* Closure.
 Gegenprobe, warum `slice-103` *nicht* hineingehört: ein Dashboard über
 einer Suche ohne Cache zeigt keinen Mehrwert, den diese Welle belegen
 soll (Latenz-Gewinn durch Cache). `slice-103` zieht in die *nächste* Welle,
-sobald deren Trigger eintritt: "`welle-1-api-mit-cache` in Closure, Cache
+sobald deren Trigger eintritt: "`wave-1-api-mit-cache` in Closure, Cache
 liefert messbare Trefferquote". Der Trigger ist so formuliert, dass ein
 Dritter ohne Rückfrage über "Welle fertig" entscheiden kann.
 
 ### (Analysieren) Warum steht der Zähler in einer eigenen Datei?
 
 **Weil die Übernahme-Kette bricht.** Die Sektion lag früher *in*
-`welle-<Kennung>-results.md` und wurde von Closure zu Closure kopiert und
+`wave-<Kennung>-results.md` und wurde von Closure zu Closure kopiert und
 hochgezählt. Drei Bruchstellen: Wer die Übernahme vergisst, setzt den
 Zähler auf null; die erste Welle braucht eine Sonderregel; und wer keine
 Welle eröffnet, hat gar keinen Träger. Eine stehende Datei streicht alle
@@ -223,12 +223,12 @@ Die Abhängigkeit gehört als *expliziter Abhängigkeits-Trigger* in die
 `Trigger`-Spalte von Welle 3 — nicht als bloße Reihenfolge-Notiz:
 
 ```text
-## welle-skalierung
-Trigger:  startet, wenn welle-qualitaet in Closure
+## wave-skalierung
+Trigger:  startet, wenn wave-qualitaet in Closure
           (Property-Tests grün, Coverage-Critical-Gate steht)
 ```
 
-Plus eine gerichtete Kante `welle-qualitaet → welle-skalierung` im
+Plus eine gerichtete Kante `wave-qualitaet → wave-skalierung` im
 Abhängigkeitsgraphen.
 
 Wann wird Welle 2 zum *Blocker* (nicht bloß Vorgängerin)? Test: Würde
@@ -312,7 +312,7 @@ dafür steht das Register außerhalb der Welle-Closure.
 **gezählt, aber nicht verkörpert**; sein Stand bleibt so lange `offen`. Ihr
 Lese-Schritt weist dann den Ausgang zu: **`verkörpert`**, wenn die Regel dabei
 entsteht — in `AGENTS.md`, einem Gate, einem Skill oder einer `MR-*`, mit
-Herkunfts-Anker `seit welle-<Kennung>` —, sonst **`geplant`** mit der Kennung des
+Herkunfts-Anker `seit wave-<Kennung>` —, sonst **`geplant`** mit der Kennung des
 Slice, der sie schreibt. Wer Zählen und Verkörpern gleichsetzt, hält eine Notiz
 für einen Wächter; wer den Eintrag die Closure **ohne** Ausgang überstehen
 lässt, hat die Schwelle folgenlos gemacht.

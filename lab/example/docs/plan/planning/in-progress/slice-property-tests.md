@@ -5,11 +5,11 @@ Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er wechselt
 nur durch `git mv` (Kurs
 [Modul 5 §Lifecycle als State Machine](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
 
-**Welle:** welle-qualitaet
+**Welle:** wave-qualitaet
 
 **Bezug:** [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit), [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche) (Suche)
 
-**Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
+**Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/specification.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
 
 **Verantwortlich:** Kurs-Lab.
 

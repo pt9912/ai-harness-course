@@ -11,6 +11,96 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 165 — 2026-11-22 · Dateinamen sind englisch (MAJOR)
+
+Anlass: [`docs/dateinamen-sprache-plan.md`](docs/dateinamen-sprache-plan.md). In
+`lab/templates/spec/` hießen zwei Vorlagen deutsch und eine englisch, über alle
+Vorlagen mischten sich die Sprachen auch innerhalb eines Namens (`welle-results`,
+`archiv-stub-slice`). Die Vorgabe: durchgängig und erklärbar.
+
+- **Regel** — Kurs [`harness-dateien.md` §Verzeichniskonvention](kurs/de/grundlagen/harness-dateien.md#verzeichniskonvention),
+  wortgleich im Spiegel: Dateinamen sind englisch; deutsch bleibt ein Name nur ohne
+  gängiges englisches Wort (`lastenheft.md`); fest bleiben die Namen, die ein
+  fremdes Werkzeug erwartet; die Prosa bleibt deutsch; das Kennungs-Präfix der
+  Welle folgt, weil die Welle-Datei nach ihrer Kennung heißt; Platzhalter wie
+  `<Kennung>` bleiben deutsch.
+- **Kurs** — Ziel-Name `spec/specification.md`; Kennungs-Präfix `wave-` in allen
+  Beispielen und Platzhaltern (`<wave-id>`, `wave-<Kennung>-results.md`,
+  `done/<wave-id>/`); Verweise auf die umbenannten Vorlagen. Drei Stellen, die der
+  Plan nicht führte, nach der Regel mitgezogen: das Archiv heißt
+  `archive.zip` (`done/<wave-id>/archive.zip`, `slice-<Kennung>-archive.zip`);
+  Modul 3 schrieb `architektur.md`, wo Vorlage und Beispiel schon `architecture.md`
+  führten; Modul 16 Schritt 6 nannte `done/welle-1-closure.md` — gemeint ist die
+  Ergebnis-Notiz der Welle (die Vorlage heißt im Titel *Closure-Notiz*), jetzt
+  `done/wave-1-results.md`, die Checkliste `wave-1-checklist.md`.
+- **Regelwerk** — wortgleicher Nachzug, `Stand:` auf Welle 165.
+- **Vorlagen** — sieben Umbenennungen per `git mv`:
+  `spezifikation.template.md` → `specification.template.md`,
+  `welle.template.md` → `wave.template.md`,
+  `welle-results.template.md` → `wave-results.template.md`,
+  `archiv-stub-slice.template.md` → `archive-stub-slice.template.md`,
+  `archiv-stub-welle.template.md` → `archive-stub-wave.template.md`,
+  `NNNN-titel.template.md` → `NNNN-title.template.md`,
+  `MR-NNN-titel.template.md` → `MR-NNN-title.template.md`. Inhalte nachgezogen;
+  `.d-check.yml`: `matrix`-Klasse `wave`, `spec`-Klasse mit `specification.md`,
+  **neu** ein auskommentierter `planning`-Block mit `waves.glob: 'wave-*.md'` und
+  `waves.results-glob: 'wave-*-results.md'` — d-check behält seine Defaults
+  (`welle-*`), die Vorlage setzt die Globs ausdrücklich (Plan N2).
+- **Beispiel** — `spec/specification.md`, `wave-mvp.md`, `wave-mvp-results.md`,
+  `wave-qualitaet.md`, `evals/golden/wave-mvp-baseline/`; `.d-check.yml` setzt die
+  Globs. Die `matrix`-Ausnahme für ADR-0019 entfällt: Deren Text nennt
+  `welle-1-mvp.md`, das das neue Token `wave-…` nicht mehr trifft — gemessen ohne
+  die Ausnahme: HEAD 1 × `matrix-forbidden`, danach 0. Drei `Accepted`-ADRs
+  (0002, 0003, 0012) verlinken die Spezifikation im Kern; ihr Link-Ziel ist
+  nachgezogen, sonst nichts (Modul 4 §Nachzug ist keine Überschreibung).
+- **Angekündigt: ein roter `doc-immutable`-Lauf.** `vcs` wertet einen Nachzug auf
+  einen anderen Dateinamen als Drift, auch mit `ignore-link-targets`. Gemessen an
+  einer Kopie: 3 × `core-drift-vcs`, obwohl git die Datei als `R100` führt. Der
+  CI-Lauf des Pushs mit dieser Welle wird an genau diesen drei Befunden rot, der
+  nächste ist wieder grün. Der Widerspruch Kurs ↔ Werkzeug ist als CR an d-check
+  übergeben (Umbenennung in der Range als Identität lesen):
+  [d-check#18](https://github.com/pt9912/d-check/issues/18).
+- **Team-Sim** — Seed (`wave-1-basis.md`) und Szenarien nachgezogen, die drei
+  angehängten `waves`-Blöcke tragen die Globs. Vorher und nachher je 109 PASS;
+  die Verdikt-Zeilen sind nach der Namensersetzung identisch. **Neu s32:** s32a
+  `waves` mit den Globs meldet eine flache `wave-`-Datei ohne Zeiger
+  (`wave-drift`), s32b derselbe Aufbau ohne die zwei Zeilen bleibt still — die
+  behauptete Stille hängt an s32a als positiver Vorbedingung. 111 PASS.
+- **Historie** bleibt (Plan N6): dieser Eintrag, frühere Einträge, `docs/`. Der
+  Link-Check meldet dort keinen Verweis auf eine umbenannte Datei.
+
+**MAJOR**, weil Assets verschwinden (sieben Vorlagen-Namen) und das Layout auf
+Datei-Ebene bricht (Ziel-Namen beim Adopter).
+
+**Migration für Adopter** — bestehende Repos laufen unverändert, solange sie
+nicht migrieren.
+
+| Alt | Neu |
+|---|---|
+| `spec/spezifikation.md` | `spec/specification.md` |
+| `docs/plan/planning/welle-<Kennung>.md` | `docs/plan/planning/wave-<Kennung>.md` |
+| `done/welle-<Kennung>-results.md` | `done/wave-<Kennung>-results.md` |
+| `done/<welle-id>/archiv.zip` | `done/<wave-id>/archive.zip` |
+| `done/slice-<Kennung>-archiv.zip` | `done/slice-<Kennung>-archive.zip` |
+| Vorlagen | die sieben Namen oben |
+
+- **Pflichtschritt mit `planning.waves`:** `glob: 'wave-*.md'` und
+  `results-glob: 'wave-*-results.md'` setzen. Ohne die zwei Zeilen liest d-check
+  weiter `welle-*` und findet keine Welle-Datei — still, nicht rot (s32b).
+- **Bestehende Kennungen bleiben** ([`source-precedence.md` §Vergabe](kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt):
+  Wechselpunkt notieren). d-check liest aber **ein** Präfix: Laut Handbuch ist die
+  Kennung „literales Glob-Präfix plus Ziffernfolge“. Nach dem Wechsel liest
+  `waves` Dateien und Register-Zeilen mit `welle-` nicht mehr. Deshalb wechseln,
+  wenn keine Welle offen ist (nicht gemessen, aus dem Handbuch abgeleitet).
+- `matrix`: Klasse `welle` → `wave` (Pfad `wave-*.md`, Token `wave-…`).
+- Archive, die schon unter dem alten Namen liegen, bleiben, wie sie sind; ihre
+  Stubs zeigen auf sie.
+
+**Nebenbefund, nicht behoben:** `waves` läuft im Beispiel leer, schon vor dieser
+Welle. Die Kennungen dort sind Slugs ohne Ziffern (`wave-qualitaet`), und die
+Kennung bildet d-check aus Präfix plus Ziffernfolge. Gemessen: flache Welle-Datei
+ohne Zeiger → 0 Befunde, auf HEAD (`welle-probe`) wie danach. Faden in der Roadmap.
+
 ## Welle 164 — 2026-11-22 · Jira-Begriffe im Abgleich (`begriffe.md`)
 
 Anlass: die Frage, ob Welle und Slice in den Dateinamen `story` und `task` heißen

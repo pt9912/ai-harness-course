@@ -32,7 +32,7 @@ aus, indem die Messung auf `service` verengt wird (siehe
 
 ## Auflösungs-Trigger
 
-Welle 2 (welle-qualitaet) done — Property-Test-Suite läuft 100
+Welle 2 (wave-qualitaet) done — Property-Test-Suite läuft 100
 Generationen und deckt die Fehlerpfade.
 
 Konkret: die Index-Layer-Coverage erreicht ≥ 90 % — dieselbe Schwelle, die

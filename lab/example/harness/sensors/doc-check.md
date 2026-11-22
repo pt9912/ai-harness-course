@@ -9,7 +9,7 @@ die falsche.
 **Sechs Module — fünf über Doku-Referenzen, eines über den Umfang einer
 Guide-Datei.** Rot, wenn eines davon eine Festlegung verletzt; was jedes prüft
 und wie es an seinen Randformen entscheidet, legen
-[`SPEC-020` bis `SPEC-025` und `SPEC-027`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) fest; welche Kennung zu
+[`SPEC-020` bis `SPEC-025` und `SPEC-027`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) fest; welche Kennung zu
 welchem Modul gehört, steht unten unter [Bindung](#bindung).
 
 ## Grenze — was das Grün nicht abdeckt
@@ -66,8 +66,8 @@ die Zeile trug lange nur die Bindung von `ids`/`matrix`, und die ist für
 
 | Modul | Festlegung | Bindung |
 |---|---|---|
-| `reviews` | [`SPEC-020`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) (seit slice-review-report-deckung-per-d-check) | [Modul 10 §Harness-Einordnung](../../../../kurs/de/04-qualitaet/modul-10-review-harness.md#harness-einordnung) — Review-Report-Deckung |
-| `ids`, `matrix` | [`SPEC-021`, `SPEC-024`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) | [Kurs §Referenz-Richtung](../../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) |
-| `planning` | [`SPEC-022`, `SPEC-027`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) (Wellen-Invariante seit slice-wellen-invariante-per-d-check) | [Modul 6 §Die Wellen-Eröffnungs-Prozedur](../../../../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) — Ruhe-Marker und Wellen-Invariante |
-| `targets` | [`SPEC-023`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) | [Modul 13 §Hard Rule](../../../../kurs/de/04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin) — halluzinierte Gates; verkoerpert in `AGENTS.md` §3 |
-| `file` | [`SPEC-025`](../../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge) (seit Welle 147) | [Kurs §Entropy Management](../../../../kurs/de/grundlagen/klassifikation.md#entropy-management) — Guide-Datei-Wildwuchs |
+| `reviews` | [`SPEC-020`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) (seit slice-review-report-deckung-per-d-check) | [Modul 10 §Harness-Einordnung](../../../../kurs/de/04-qualitaet/modul-10-review-harness.md#harness-einordnung) — Review-Report-Deckung |
+| `ids`, `matrix` | [`SPEC-021`, `SPEC-024`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) | [Kurs §Referenz-Richtung](../../../../kurs/de/grundlagen/referenz-richtung.md#referenz-richtung-sdp-wer-darf-wen-referenzieren) |
+| `planning` | [`SPEC-022`, `SPEC-027`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) (Wellen-Invariante seit slice-wellen-invariante-per-d-check) | [Modul 6 §Die Wellen-Eröffnungs-Prozedur](../../../../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) — Ruhe-Marker und Wellen-Invariante |
+| `targets` | [`SPEC-023`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) | [Modul 13 §Hard Rule](../../../../kurs/de/04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin) — halluzinierte Gates; verkoerpert in `AGENTS.md` §3 |
+| `file` | [`SPEC-025`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) (seit Welle 147) | [Kurs §Entropy Management](../../../../kurs/de/grundlagen/klassifikation.md#entropy-management) — Guide-Datei-Wildwuchs |

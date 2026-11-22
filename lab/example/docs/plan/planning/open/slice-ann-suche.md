@@ -5,11 +5,11 @@ Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er wechselt
 nur durch `git mv` (Kurs
 [Modul 5 §Lifecycle als State Machine](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
 
-**Welle:** welle-skalierung
+**Welle:** wave-skalierung
 
 **Bezug:** [LH-QA-01](../../../../spec/lastenheft.md#lh-qa-01--performance) (Performance), implizit [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format)
 
-**Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Komplexität), [`ARC-002`](../../../../spec/architecture.md#1-komponenten-übersicht) (Index-Layer)
+**Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/specification.md#lh-fa-02a--suche) (Komplexität), [`ARC-002`](../../../../spec/architecture.md#1-komponenten-übersicht) (Index-Layer)
 
 **Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 

@@ -12,7 +12,7 @@
 
 namespace docsearch {
 
-// SearchError trägt den Fehler-Code aus spec/spezifikation.md §4
+// SearchError trägt den Fehler-Code aus spec/specification.md §4
 // (E002 leere Anfrage, E003 Embedding nicht verfügbar). Der UI-Adapter
 // mappt den Code auf den HTTP-Status.
 class SearchError : public std::runtime_error {

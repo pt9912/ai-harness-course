@@ -110,7 +110,7 @@ begründet sein):
 | Rang | Quelle | Charakter |
 |---|---|---|
 | 1 | `spec/lastenheft.md` | vertraglich abnahmebindend |
-| 2 | `spec/spezifikation.md` + `spec/architecture.md` | technisch fortschreibbar |
+| 2 | `spec/specification.md` + `spec/architecture.md` | technisch fortschreibbar |
 | 3 | `docs/plan/adr/` | Architekturentscheidungen |
 | 4 | `AGENTS.md` | Agent-Briefing |
 | 5 | `README.md` / Beispiel-Repos | Überblick, illustrativ |

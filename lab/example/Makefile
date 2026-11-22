@@ -3,7 +3,7 @@
 # stay in go/, python/, kotlin/, java/, csharp/, cpp/.
 
 COURSE_LANG ?= go
-RUN ?= welle-mvp-baseline
+RUN ?= wave-mvp-baseline
 
 .PHONY: help gates ci fullbuild plan-status agent-implement agent-review verify verify-slice verify-closure-notes replay trace release
 
@@ -83,7 +83,7 @@ verify-slice: ## Slice-DoD plausibilisieren: make verify-slice SLICE=slice-tie-b
 verify: verify-closure-notes doc-check ## Verifikation: Closure-Pflicht + Referenz-Richtung immer, Slice-DoD wenn SLICE gesetzt
 	@if [ -n "$(SLICE)" ]; then $(MAKE) verify-slice SLICE=$(SLICE); fi
 
-replay: ## Golden-Set-Struktur validieren (KEIN Lauf, siehe CO-002): make replay RUN=welle-mvp-baseline
+replay: ## Golden-Set-Struktur validieren (KEIN Lauf, siehe CO-002): make replay RUN=wave-mvp-baseline
 	@set -e; \
 	base="evals/golden/$(RUN)"; \
 	if [ ! -f "$$base/manifest.yaml" ]; then echo "Manifest fehlt: $$base/manifest.yaml"; exit 1; fi; \

@@ -128,7 +128,7 @@ Archiv-Zeiger, Zustand und die Kennungen, die den Slice überlebt haben
 Schritt 4). Die Verzeichnis-Position bleibt damit der Zustand, und wer auf den
 Slice zeigt, zeigt weiter auf etwas. Was der Stub nicht mehr trägt, steht
 ohnehin dort, wo es gelesen wird. **Ohne Wellen tut es die Slice-Closure
-selbst** — nach den Paarungen, nach `done/slice-<Kennung>-archiv.zip` flach neben
+selbst** — nach den Paarungen, nach `done/slice-<Kennung>-archive.zip` flach neben
 dem Stub
 ([Modul 6 §Wann Arbeit eine Welle braucht](modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
 Die Station ist dieselbe, nur der Träger ein anderer.

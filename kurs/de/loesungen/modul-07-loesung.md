@@ -113,7 +113,7 @@ Skizze entlang der Schablone aus Worked Example B:
   vor Welle-Closure; Architect entscheidet bei Permanenz über die
   ADR-Überführung; Implementer führt `git mv` und Config-Updates aus.
 - **Belegartefakt:** die Audit-Bericht-Tabelle in
-  `done/welle-<Kennung>-results.md`.
+  `done/wave-<Kennung>-results.md`.
 
 **Die drei Status-Übergänge**, die der Slice möglich machen muss:
 *aufgelöst* (Trigger eingetreten → `done/`), *permanent* (Trigger
@@ -185,7 +185,7 @@ Welle 3:
   verschoben.
 - Jeder Carveout, der seit > 2 Wellen "aktiv" ist, wurde explizit
   als weiter-gültig bestätigt oder in eine ADR überführt.
-- Audit-Bericht als Closure-Notiz in `done/<welle-id>-results.md`.
+- Audit-Bericht als Closure-Notiz in `done/<wave-id>-results.md`.
 
 **Rollen:** Planner identifiziert · Architect entscheidet bei
 Permanenz · Implementer führt `git mv`/Config-Updates aus.

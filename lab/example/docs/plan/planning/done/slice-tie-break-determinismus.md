@@ -5,11 +5,11 @@ Datei liegt — eines von `open/`, `next/`, `in-progress/`, `done/`. Er wechselt
 nur durch `git mv` (Kurs
 [Modul 5 §Lifecycle als State Machine](../../../../../../kurs/de/02-planung/modul-05-planning-harness.md#lifecycle-als-state-machine)).
 
-**Welle:** welle-mvp
+**Welle:** wave-mvp
 
 **Bezug:** [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit, primär), [ADR-0003](../../adr/0003-index-storage-format.md) (Index-Format).
 
-**Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/spezifikation.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
+**Berührte Spec-Stellen:** [`LH-FA-02.a`](../../../../spec/specification.md#lh-fa-02a--suche) (Tie-Break, Schritt 5)
 
 **Nachtrag 2026-06-02** (Lab-Ausbau (Kurs-Welle 9); Traceability-Metadata, keine
 Änderung am Slice): Der hier gebaute Tie-Break belegt zusätzlich
@@ -30,7 +30,7 @@ sortiert werden (siehe Lastenheft, Spezifikation §1).
 
 - [x] `internal/index/index.go`: Tie-Break implementiert (`sort.SliceStable` + lexikographischer Zweitschlüssel).
 - [x] `make test-determinism` läuft 100 Iterationen identische Eingabe, vergleicht Hashes.
-- [x] Doku-Update in `spec/spezifikation.md` §1 [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche).a.
+- [x] Doku-Update in `spec/specification.md` §1 [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche).a.
 - [x] `make gates` grün.
 - [x] Closure-Notiz (siehe §7).
 
@@ -42,7 +42,7 @@ sortiert werden (siehe Lastenheft, Spezifikation §1).
 | `internal/index/index_test.go` | update | Test mit zwei identischen Scores |
 | `internal/service/search_test.go` | update | Tie-Break-Reihenfolge auf Service-Ebene abgesichert |
 | `<sprache>/Makefile` | update | `test-determinism` als eigenes Target |
-| `spec/spezifikation.md` | update | §1 [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche).a Schritt 5 präzisiert |
+| `spec/specification.md` | update | §1 [LH-FA-02](../../../../spec/lastenheft.md#lh-fa-02--semantische-suche).a Schritt 5 präzisiert |
 
 ## 4. Trigger
 
@@ -97,7 +97,7 @@ keine BF/Hybrid-Begründung nötig.
 Schwelle (`harness/conventions.md` §Modus-Deklaration): *Implementierung*
 (`internal/index/`, `internal/service/`), *Test-Infrastruktur*
 (`test-determinism` als neues Target — eine neue Konvention, keine additive
-Arbeit unter der alten) und *Spec-Schreibung* (`spec/spezifikation.md` §1).
+Arbeit unter der alten) und *Spec-Schreibung* (`spec/specification.md` §1).
 Keine davon ist zu grob geschnitten; *Sensor-Werkzeuge* ist mitberührt, aber
 nur als Ablageort des Targets, nicht in seiner Konventions-Härte.
 

@@ -1,9 +1,9 @@
-# <welle-id> — <Titel>
+# <wave-id> — <Titel>
 
 > **Template-Hinweis.** Vorlage für den gekürzten Stub, der beim Archivieren
 > an der Stelle des Welle-**Plans** liegen bleibt
-> (`docs/plan/planning/done/<welle-id>/`). Kopiere, ersetze Platzhalter,
-> lösche diesen Block. Für die Slices gilt `archiv-stub-slice.template.md`.
+> (`docs/plan/planning/done/<wave-id>/`). Kopiere, ersetze Platzhalter,
+> lösche diesen Block. Für die Slices gilt `archive-stub-slice.template.md`.
 
 > **Zitier-Form** *(bleibt stehen — Norm, kein Ausfüll-Hinweis).* Dieses
 > Artefakt friert ein; was es zitiert, bewegt sich weiter. Deshalb: **Kennung,
@@ -31,7 +31,7 @@ Archivierungs-Commit schon.
 -->
 
 > **ARCHIVIERT** — Volltext:
-> `unzip -p done/<welle-id>/archiv.zip <pfad-im-archiv>`
+> `unzip -p done/<wave-id>/archive.zip <pfad-im-archiv>`
 
-**Geschlossen:** <JJJJ-MM-TT> · **Ergebnisnotiz:** <welle-id>-results.md
+**Geschlossen:** <JJJJ-MM-TT> · **Ergebnisnotiz:** <wave-id>-results.md
 **Archivierte Vorgänge:** <N Slices, M Reviews>

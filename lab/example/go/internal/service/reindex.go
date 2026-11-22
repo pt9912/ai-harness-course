@@ -16,7 +16,7 @@ import (
 	"github.com/example/docsearch/internal/types"
 )
 
-// ErrDirNotFound — spec/spezifikation.md §4: Verzeichnis existiert nicht.
+// ErrDirNotFound — spec/specification.md §4: Verzeichnis existiert nicht.
 var ErrDirNotFound = errors.New("E001: directory not found")
 
 // Indexer — Service-Fassade für die Indexierung (LH-FA-01).

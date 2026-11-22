@@ -39,7 +39,7 @@ example/
 ├── docs/glossar.md              Mini-Glossar für Modul 0
 ├── spec/
 │   ├── lastenheft.md            LH-*-IDs, Akzeptanzkriterien
-│   ├── spezifikation.md         Algorithmen, Defaults, Codes
+│   ├── specification.md         Algorithmen, Defaults, Codes
 │   └── architecture.md          Schichten, Sequenzen
 ├── docs/plan/
 │   ├── adr/                     ADR-Index + ADRs
@@ -79,13 +79,13 @@ Jedes Skelett implementiert:
 - Hexagonales Layering ([ADR-0001](docs/plan/adr/0001-hexagonale-architektur.md)) — UI → Service → {Index, Embedding} → Types.
 - Tie-Break-Logik aus slice-tie-break-determinismus (deterministische Sortierung bei gleichem Score).
 - [LH-FA-01](spec/lastenheft.md#lh-fa-01--dokument-indexierung) und [LH-FA-02](spec/lastenheft.md#lh-fa-02--semantische-suche) Akzeptanzkriterien (Happy/Boundary/Negative) als Tests.
-- Die vier Fehler-Codes aus [spec §4](spec/spezifikation.md#4-fehler-codes-und-logging-felder)
+- Die vier Fehler-Codes aus [spec §4](spec/specification.md#4-fehler-codes-und-logging-felder)
   (E001, E002, E003, E099) mit HTTP-Status an einer Stelle abgebildet.
 - [LH-QA-02](spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) Determinismus-Test (gleiche Eingabe → gleiches Ergebnis).
 - `make gates` als einheitlicher Vertrag.
 
 Nicht im Skelett: die Index-Persistenz aus
-[spec §1 LH-FA-IDX-003.a](spec/spezifikation.md#lh-fa-idx-003a--index-schreiben)
+[spec §1 LH-FA-IDX-003.a](spec/specification.md#lh-fa-idx-003a--index-schreiben)
 ([ADR-0003](docs/plan/adr/0003-index-storage-format.md), [ADR-0012](docs/plan/adr/0012-index-write-strategy.md)) und die Abschnitts-Zerlegung an `##`-Headings. Der Index
 lebt im Speicher, `reindex` zählt Dateien statt Abschnitte und antwortet
 deshalb nur mit `indexed_docs`, nicht mit `indexed_sections`. Die Skelette

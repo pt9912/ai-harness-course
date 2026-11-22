@@ -1,8 +1,8 @@
-# Welle welle-qualitaet: Qualitätsschwelle
+# Welle wave-qualitaet: Qualitätsschwelle
 
 **Lifecycle:** Diese Datei liegt **flach** unter `docs/plan/planning/`, solange
 die Welle läuft; bei Closure wandert sie per `git mv` nach `done/`, neben ihre
-`welle-qualitaet-results.md`. Der Zustand ist die Verzeichnis-Position, kein
+`wave-qualitaet-results.md`. Der Zustand ist die Verzeichnis-Position, kein
 Status-Feld. Dass sie **offen** ist, sagt die Lage — flach; die Roadmap führt
 unter [§Offene Wellen](in-progress/roadmap.md#offene-wellen) nur den Zeiger,
 und woran gerade gearbeitet wird, das `Welle:`-Feld der Slices in
@@ -24,15 +24,15 @@ Trigger die Closure dieser Welle ist.
 
 ## 2. Trigger (Welle startet)
 
-- `welle-mvp` geschlossen (2026-06-02).
-- Golden Set `evals/golden/welle-mvp-baseline/` existiert.
+- `wave-mvp` geschlossen (2026-06-02).
+- Golden Set `evals/golden/wave-mvp-baseline/` existiert.
 
 ## 3. Closure-Trigger (Welle schließt)
 
 - slice-property-tests (Property-Tests) in `done/`, in allen sechs Sprachen.
 - `make fullbuild` grün.
 - Replay gegen das Golden Set grün.
-- Closure-Notiz in `welle-qualitaet-results.md`.
+- Closure-Notiz in `wave-qualitaet-results.md`.
 
 > *Lab-Grenze:* Das Kurs-Skelett kann den Replay nicht ausführen; es liefert
 > nur die Fixture-Prüfung `make replay`. Der Trigger oben ist die Bedingung
@@ -55,12 +55,12 @@ Slices (Kurs [Modul 6 §Wann Arbeit eine Welle braucht](../../../../../kurs/de/0
 
 ## 5. Abhängigkeiten
 
-- Blockiert: `welle-skalierung` (ANN ohne Property-Tests wäre ungeprüfte Basis).
+- Blockiert: `wave-skalierung` (ANN ohne Property-Tests wäre ungeprüfte Basis).
 - Wird blockiert von: keiner offenen Welle.
 
 ## 6. Out-of-Scope für diese Welle
 
-- ANN-Suche und Multi-Sprach-Adapter-Cleanup (→ `welle-skalierung`).
+- ANN-Suche und Multi-Sprach-Adapter-Cleanup (→ `wave-skalierung`).
 - Alles, was `LH-FA-*` erweitert — diese Welle härtet, sie liefert keine
   neue Fähigkeit.
 
@@ -68,5 +68,5 @@ Slices (Kurs [Modul 6 §Wann Arbeit eine Welle braucht](../../../../../kurs/de/0
 
 <!-- Erst bei der Closure füllen — mit Pfaden vom Ruheort `done/` aus. -->
 
-Ergebnis: <Zeiger auf `welle-qualitaet-results.md`, Geschwister im Ruheort `done/`>
+Ergebnis: <Zeiger auf `wave-qualitaet-results.md`, Geschwister im Ruheort `done/`>
 Zähler: <Zeiger aufs Beobachtungs-Register, eine Ebene über dem Ruheort>

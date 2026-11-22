@@ -225,7 +225,7 @@ Selbstcheck-Items am Modul-Ende.
 1. Starte mit
    [`../../../lab/example/exercises/03-adr.md`](../../../lab/example/exercises/03-adr.md).
 2. Kopiere die Vorlage
-   [`../../../lab/templates/docs/plan/adr/NNNN-titel.template.md`](../../../lab/templates/docs/plan/adr/NNNN-titel.template.md)
+   [`../../../lab/templates/docs/plan/adr/NNNN-title.template.md`](../../../lab/templates/docs/plan/adr/NNNN-title.template.md)
    in dein Übungs-Repo.
 3. Prüfe am Ende, ob deine ADR mindestens eine spätere Fitness Function
    vorbereitet. Wenn nicht, ist sie nur Entscheidungsnotiz, noch kein

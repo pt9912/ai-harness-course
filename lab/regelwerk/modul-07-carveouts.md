@@ -126,7 +126,7 @@ nur Doku-Updates). Regeln:
   Carveout mit eingetretenem Trigger ist nach `done/` verschoben; jeder
   seit > 2 Wellen „aktive" Carveout wird *explizit* als weiter-gültig
   bestätigt **oder** in eine ADR überführt; Audit-Bericht als Block in
-  `done/welle-<Kennung>-results.md`.
+  `done/wave-<Kennung>-results.md`.
 - **Drei Status-Übergänge** je Carveout: *aufgelöst* (Trigger eingetreten
   → `git mv` nach `done/`), *permanent* (Trigger nie → ADR),
   *weiterhin aktiv* (Trigger sinnvoll → `Letzte Prüfung:`-Datum

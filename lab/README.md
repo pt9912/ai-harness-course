@@ -27,10 +27,10 @@ lab/
 ├── templates/                 sprachneutrale Skelett-Vorlagen
 │   ├── spec/
 │   │   ├── lastenheft.template.md
-│   │   ├── spezifikation.template.md
+│   │   ├── specification.template.md
 │   │   └── architecture.template.md
 │   ├── docs/plan/
-│   │   ├── adr/NNNN-titel.template.md
+│   │   ├── adr/NNNN-title.template.md
 │   │   ├── planning/{slice,welle,roadmap}.template.md
 │   │   └── carveouts/carveout.template.md
 │   ├── harness/README.template.md
@@ -94,7 +94,7 @@ cd lab/example
 make agent-implement SLICE=slice-tie-break-determinismus
 make agent-review
 make verify SLICE=slice-tie-break-determinismus
-make replay RUN=welle-mvp-baseline
+make replay RUN=wave-mvp-baseline
 make trace RUN=sl-tie-break-determinismus-agent-run
 make release
 ```

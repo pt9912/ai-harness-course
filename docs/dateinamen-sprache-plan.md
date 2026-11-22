@@ -1,7 +1,10 @@
 # Sprache der Dateinamen — Plan
 
-**Stand:** Plan-Entwurf, **nichts umgesetzt**. Kein Kurs-, Regelwerk-, Template-
-oder Beispiel-Text berührt. Zählungen in §3 gegen den Arbeitsbaum vom 2026-11-22.
+**Stand:** umgesetzt in Welle 165 ([`CHANGELOG.md`](../CHANGELOG.md)), MAJOR,
+nicht released. Zählungen in §3 gegen den Arbeitsbaum vom 2026-11-22, vor der
+Welle. Drei Stellen fehlten im Plan und sind nach der Regel mitgezogen
+(`archiv.zip`, `architektur.md` in Modul 3, die Ergebnis-Notiz in Modul 16);
+siehe den Welle-Eintrag.
 
 **Anlass.** In `lab/templates/spec/` heißen zwei Vorlagen deutsch
 (`lastenheft`, `spezifikation`) und eine englisch (`architecture`). Über alle

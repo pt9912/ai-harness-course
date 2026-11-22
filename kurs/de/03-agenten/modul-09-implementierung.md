@@ -149,7 +149,7 @@ gelesen.
 Negativregeln, die der Agent nie brechen darf. Eine gute Hard Rule hat
 *Falsch/Richtig*-Beispiele **und** eine *technische Begründung*.
 Entstand sie aus dem Steering Loop und nicht aus einer Anforderung, trägt
-sie zusätzlich den Herkunfts-Anker `(seit welle-<Kennung>)` — ohne Welle `(seit slice-<Kennung>)`
+sie zusätzlich den Herkunfts-Anker `(seit wave-<Kennung>)` — ohne Welle `(seit slice-<Kennung>)`
 ([`traceability.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln)).
 Nicht jede Hard Rule in `AGENTS.md` ist repo-spezifisch: *„Architektur ist
 sprach- und meilensteinfrei"* etwa **folgt** aus dem Sicht-Stratum und der

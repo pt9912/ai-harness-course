@@ -13,7 +13,7 @@ auf die ganze Artefakt-Kette aus.
 
 **Stabilitäts-Rang** (stabil → volatil):
 **Vertrag › Technik › Sicht › ADR › Slice**. `lastenheft.md` instanziiert das
-Vertrags-Stratum, `spezifikation.md` das Technik-, `architecture.md` das
+Vertrags-Stratum, `specification.md` das Technik-, `architecture.md` das
 Sicht-Stratum; welches Dokument in welches Stratum fällt, regelt
 [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument). Carveout liegt auf
 Slice-Ebene, Welle und Roadmap außerhalb. Wir kollabieren
@@ -28,7 +28,7 @@ damit wird die Regel lehr- und prüfbar.
 > zugeordnet wird — und warum die Decke nicht fix `lastenheft.md` ist —
 > regelt [§Spec-Straten](#spec-straten-mehr-als-ein-spec-dokument) unten.
 
-| Dokument ↓ referenziert → | Vertrag `lastenheft.md` | Technik `spezifikation.md` | Sicht `architecture.md` | ADR | Slice | Carveout | Welle | Roadmap |
+| Dokument ↓ referenziert → | Vertrag `lastenheft.md` | Technik `specification.md` | Sicht `architecture.md` | ADR | Slice | Carveout | Welle | Roadmap |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Vertrag** (Decke) | intra (Peers) — nur `LH-*` untereinander | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Technik** | Normativ: präzisiert Vertrag, Vertrag gewinnt | intra (Peers) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -68,7 +68,7 @@ Planung selbst.
 flowchart BT
     subgraph SPEC["Spec-Straten — hinein ja, hinaus nie"]
         direction BT
-        V["Sicht<br/>architecture.md"] -->|visualisiert| T["Technik<br/>spezifikation.md"]
+        V["Sicht<br/>architecture.md"] -->|visualisiert| T["Technik<br/>specification.md"]
         V -->|"Use-Case ↔ Vertrags-ID"| L["Vertrag<br/>lastenheft.md<br/>(Decke)"]
         T -->|präzisiert| L
     end
@@ -109,7 +109,7 @@ Spezifikations-Ebene.
 ```mermaid
 flowchart LR
     W["Welle"] -. "LH-*-Bezug der Slice-Liste" .-> L["Vertrag<br/>lastenheft.md"]
-    W -. "technischer Rahmen" .-> T["Technik<br/>spezifikation.md"]
+    W -. "technischer Rahmen" .-> T["Technik<br/>specification.md"]
     W -. "Architekturbild" .-> V["Sicht<br/>architecture.md"]
     W -. "Trigger: ADR accepted" .-> A["ADR"]
     R["Roadmap"] -. "Zielbild/Scope" .-> L
@@ -215,7 +215,7 @@ erste Hälfte ab.
 eine *computational feedforward*-Kontrolle wie der
 [Traceability-Constraint](grundlagen-traceability.md#traceability-constraint):
 
-- ein Spec-Stratum (`lastenheft.md`, `spezifikation.md`, `architecture.md`)
+- ein Spec-Stratum (`lastenheft.md`, `specification.md`, `architecture.md`)
 enthält `ADR-` oder `slice-` → fail, **ohne ausgenommene Sektion**
 - Slice referenziert eine ADR mit `Status: Superseded` → fail
 
@@ -273,7 +273,7 @@ genau ein Stratum:
 | Stratum | Normativer Gehalt | Änderungs-Prozess | Default-Datei | typisch auch |
 | ------------------- | ---------------------------------------- | ------------------------------------- | ------------------ | ------------------------------ |
 | **Vertrag** (Decke) | eigene Anforderungen, abnahmebindend | Change Request | `lastenheft.md` | `compliance.md`, `sla.md` |
-| **Technik** | eigene technische Festlegungen | fortschreibbar, ADR-Schärfung erlaubt | `spezifikation.md` | `api-spec.md`, `data-model.md` |
+| **Technik** | eigene technische Festlegungen | fortschreibbar, ADR-Schärfung erlaubt | `specification.md` | `api-spec.md`, `data-model.md` |
 | **Sicht** | *keine* eigenen Anforderungen, derivativ | Diagramm-/View-Update | `architecture.md` | `deployment.md`, Sequenz-Views |
 
 **Alle drei Straten sind obligatorisch.** Ein Repo, das etwas baut, trifft

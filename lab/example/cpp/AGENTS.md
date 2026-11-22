@@ -51,7 +51,7 @@ section_index)`.
 ### C-4 — Fehler tragen einen Code, kein roher Wurf
 
 Service-Fehler sind `SearchError` mit Spec-Code (`E002`, `E003` aus
-`spec/spezifikation.md` §4); der UI-Adapter mappt den Code auf den
+`spec/specification.md` §4); der UI-Adapter mappt den Code auf den
 HTTP-Status. Kein nacktes `throw std::runtime_error("...")` ohne Code im
 Service-Layer.
 

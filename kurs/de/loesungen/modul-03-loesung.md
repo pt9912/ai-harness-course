@@ -43,7 +43,7 @@ Sicherheit, Wartbarkeit).
 Praktischer Test: Wenn ein Akzeptanzkriterium ohne Messung im
 Lasttest nicht prüfbar ist, ist es nichtfunktional. "Performance
 < 200 ms p95 bei 100 RPS" gehört in den nichtfunktionalen Block der
-Spec — oder in `spec/spezifikation.md`, wenn dein Repo
+Spec — oder in `spec/specification.md`, wenn dein Repo
 [stratifiziert](../grundlagen/source-precedence.md#spec-stratifizierung).
 
 Falle: "Antwort innerhalb von 200 ms" klingt funktional, ist aber eine
@@ -79,8 +79,8 @@ aus dem Worked Example (`LH-FA-CFG-001`):
 | Schicht | Pflicht-Inhalt (gehört zwingend hierhin) | Anti-Inhalt (fehl am Platz) |
 |---|---|---|
 | `lastenheft.md` — vertragliches *Was* | "Das System liest beim Start `config.yaml` und gibt `name@version` aus; bei fehlender Datei Abbruch mit Exit-Code 1." (abnahmebindend, mit Akzeptanzkriterien) | "Das Parsen nutzt die Bibliothek `yaml.v3`." (Implementierungs-Detail — bindet den Vertrag an eine Lösung) |
-| `spezifikation.md` — präzisiertes *Wie genau* | "Pflichtfelder `name`, `version`; `name` matcht `^[a-z][a-z0-9-]{2,31}$`; Parse-Fehler werden mit Zeilennummer gemeldet." (präzisiert den Vertrag prüfbar) | "Der Kunde braucht das Feature für Audit-Zwecke." (Anforderungs-Begründung — gehört ins Lastenheft bzw. dessen Kontext) |
-| `architektur.md` — strukturelles *Wodurch* | "Config-Zugriff nur über den `ConfigLoader`-Port; der Service-Layer ruft nie direkt das Dateisystem." (Struktur-Invariante, von ArchUnit prüfbar) | "Bei leerer Datei Exit-Code 2." (Verhaltens-Vertrag — gehört ins Lastenheft, sonst entsteht eine zweite Wahrheitsquelle) |
+| `specification.md` — präzisiertes *Wie genau* | "Pflichtfelder `name`, `version`; `name` matcht `^[a-z][a-z0-9-]{2,31}$`; Parse-Fehler werden mit Zeilennummer gemeldet." (präzisiert den Vertrag prüfbar) | "Der Kunde braucht das Feature für Audit-Zwecke." (Anforderungs-Begründung — gehört ins Lastenheft bzw. dessen Kontext) |
+| `architecture.md` — strukturelles *Wodurch* | "Config-Zugriff nur über den `ConfigLoader`-Port; der Service-Layer ruft nie direkt das Dateisystem." (Struktur-Invariante, von ArchUnit prüfbar) | "Bei leerer Datei Exit-Code 2." (Verhaltens-Vertrag — gehört ins Lastenheft, sonst entsteht eine zweite Wahrheitsquelle) |
 
 **Konfliktregel:** Lastenheft sticht Spezifikation sticht Architektur.
 Die untere Schicht darf die obere *präzisieren*, nie *erweitern* —
@@ -180,7 +180,7 @@ oben in der Selbstcheck-Antwort zum Erschaffen-Item (LZ 4).
 
 ## Häufige Fehler
 
-- Lastenheft enthält Implementierungs-Details ("die REST-API verwendet POST"). → Implementierung gehört in `spec/spezifikation.md` oder ADR, nicht ins Lastenheft.
+- Lastenheft enthält Implementierungs-Details ("die REST-API verwendet POST"). → Implementierung gehört in `spec/specification.md` oder ADR, nicht ins Lastenheft.
 - Lastenheft wird ohne IDs geschrieben. → Spätere Traceability-Constraint ist nicht erzwingbar.
 - Akzeptanzkriterien enden nach dem Happy Path. → Agent baut nur den Happy Path zuverlässig.
 

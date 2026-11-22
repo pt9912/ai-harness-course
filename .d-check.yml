@@ -92,7 +92,7 @@ matrix:
     - name: spec
       paths:
         - "lab/example/spec/lastenheft.md"
-        - "lab/example/spec/spezifikation.md"
+        - "lab/example/spec/specification.md"
         - "lab/example/spec/architecture.md"
     - name: adr
       paths: ["lab/example/docs/plan/adr/[0-9]*.md"]

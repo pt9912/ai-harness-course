@@ -202,7 +202,7 @@ dieser Block in den nächsten Lauf — alle anderen nicht.
   Requirement/ADR-IDs + AGENTS.md + Tool-Allowlist. Fehlende Eingaben
   werden *durch Raten ersetzt*, nicht durch Schweigen.
 - Eine Hard Rule, die aus dem Steering Loop entstand (nicht aus einer
-  Anforderung), trägt den Herkunfts-Anker `(seit welle-<Kennung>)` — ohne Welle `(seit slice-<Kennung>)`
+  Anforderung), trägt den Herkunfts-Anker `(seit wave-<Kennung>)` — ohne Welle `(seit slice-<Kennung>)`
   ([`grundlagen-traceability.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker)).
 - Jede Hard Rule liegt in *zwei* Quadranten: inferential feedforward
   (steht in AGENTS.md) + computational feedback (Fitness

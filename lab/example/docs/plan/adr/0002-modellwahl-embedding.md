@@ -8,7 +8,7 @@
 
 **Bezug:** [LH-FA-01](../../../spec/lastenheft.md#lh-fa-01--dokument-indexierung), [LH-QA-01](../../../spec/lastenheft.md#lh-qa-01--performance)
 
-**Schärft:** [`SPEC-004`, `SPEC-006`](../../../spec/spezifikation.md#3-defaults-und-konstanten) (`EMBEDDING_DIM`, `SECTION_MAX_CHARS`);
+**Schärft:** [`SPEC-004`, `SPEC-006`](../../../spec/specification.md#3-defaults-und-konstanten) (`EMBEDDING_DIM`, `SECTION_MAX_CHARS`);
 [`ARC-007`](../../../spec/architecture.md#3-externe-abhängigkeiten) (Embedding-Modell).
 
 ---

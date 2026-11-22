@@ -60,8 +60,8 @@ modules: [links, anchors]
 # matrix:
 #   classes:
 #     - name: spec
-#       paths: [spec/lastenheft.md, spec/spezifikation.md, spec/architecture.md]
-#       order: [spec/lastenheft.md, spec/spezifikation.md, spec/architecture.md]  # Vertrag > Technik > Sicht
+#       paths: [spec/lastenheft.md, spec/specification.md, spec/architecture.md]
+#       order: [spec/lastenheft.md, spec/specification.md, spec/architecture.md]  # Vertrag > Technik > Sicht
 #       direction: no-downward                                          # Abwaertslink innerhalb der Spec -> matrix-downward
 #     - name: adr
 #       paths: ["docs/plan/adr/[0-9]*.md", "docs/plan/adr/[A-Z]*-[0-9]*.md"]  # ohne und mit Bereichssegment; README.md traegt keins und bleibt draussen
@@ -69,9 +69,9 @@ modules: [links, anchors]
 #     - name: slice
 #       paths: ["docs/plan/planning/**/slice-*.md"]
 #       token: 'slice-[a-z0-9]+(-[a-z0-9]+)*'                           # die Kennung ist ein Slug, keine laufende Nummer
-#     - name: welle
-#       paths: ["docs/plan/planning/**/welle-*.md"]
-#       token: 'welle-[a-z0-9]+(-[a-z0-9]+)*'
+#     - name: wave
+#       paths: ["docs/plan/planning/**/wave-*.md"]
+#       token: 'wave-[a-z0-9]+(-[a-z0-9]+)*'
 #     - name: carveout
 #       paths: ["docs/plan/carveouts/CO-*.md"]
 #       token: 'CO-\d{3}'
@@ -80,17 +80,37 @@ modules: [links, anchors]
 #   rules:
 #     - {from: spec, to: adr, allow: false}                             # Decken-Regel: kein Spec-Stratum nennt eine ADR …
 #     - {from: spec, to: slice, allow: false}                           # … und keinen Slice
-#     - {from: spec, to: welle, allow: false}                           # … keine Welle
+#     - {from: spec, to: wave, allow: false}                            # … keine Welle
 #     - {from: spec, to: carveout, allow: false}                        # … keinen Carveout
 #     - {from: spec, to: roadmap, allow: false}                         # … und keine Roadmap
 #     - {from: adr, to: slice, allow: false}                            # Ausnahme je Zeile: <!-- d-check:status-provenance -->
-#     - {from: adr, to: welle, allow: false}                            # dieselbe Ausnahme
+#     - {from: adr, to: wave, allow: false}                             # dieselbe Ausnahme
 #     - {from: adr, to: carveout, allow: false}
 #     - {from: adr, to: roadmap, allow: false}
 #   status: {forbidden: [superseded, deprecated]}                       # nur aktive ADRs referenzieren
 # Ohne `exclude-sections`. Welche Abschnitte ausgenommen werden — und ob
 # ueberhaupt —, regelt das Baseline-Regelwerk `grundlagen-referenz-richtung.md`
 # §Referenz-Richtung (SDP); diese Datei bildet die dortige Setzung nur ab.
+#
+# Planning-Lifecycle (Baseline-Regelwerk `modul-06-roadmap.md` §Roadmap-Struktur,
+# Bullet "Offene Wellen") — aktivieren, sobald die Roadmap und die erste
+# Welle-Datei existieren. `heading` und `marker` folgen dem Regelwerk, nicht dem
+# Werkzeug-Default (`## Aktuelle Welle`). `mode: many`: Mehrere offene Wellen und
+# eine eroeffnete, noch nicht beanspruchte Welle sind legitime Zustaende; der
+# Default `one` haelt den Block gegen genau eine Datei und meldet sie als Drift.
+# Die beiden Globs sind PFLICHT: Die Wellen-Kennung beginnt mit `wave-`
+# (`grundlagen-harness-dateien.md` §Verzeichniskonvention), der Werkzeug-Default
+# ist `welle-*.md` / `welle-*-results.md` — ohne die zwei Zeilen findet `waves`
+# keine Welle-Datei und bleibt still.
+# planning:                                                             # + `planning` in `modules` aufnehmen
+#   roadmap: docs/plan/planning/in-progress/roadmap.md
+#   heading: '## Offene Wellen'
+#   marker: 'Nichts in Arbeit'
+#   waves:
+#     dir: docs/plan/planning
+#     glob: 'wave-*.md'
+#     results-glob: 'wave-*-results.md'
+#     mode: many
 #
 # Baseline-Pin gegen Tag-Drift — aktivieren, sobald harness/conventions.md
 # einen Baseline-Stand deklariert. Jeder Verweis in die vendorte Baseline
@@ -131,7 +151,7 @@ modules: [links, anchors]
 #   reviews-dir: docs/reviews
 #   match: name               # Slice-Kennungen sind Slugs (`slice-<titel>`), keine slice-<NNN> (d-check >= v0.85.0)
 #   require-promises: true    # null erkannte Zusagen unter vorhandenen Slices => Befund (Leerlauf laut)
-#   recursive: true           # Stubs unter done/<welle-id>/ werden gesehen ...
+#   recursive: true           # Stubs unter done/<wave-id>/ werden gesehen ...
 #   skip-pattern: '(?m)^> \*\*ARCHIVIERT\*\* — Volltext:'   # ... und ausgenommen, flache Stubs ebenso
 #   skip-allows-empty: true   # alles archiviert = Ruhezustand, kein Befund (d-check >= v0.86.0)
 #   # Die Zusage-Form der Slice-Vorlage ("Review durchgefuehrt") erkennt der

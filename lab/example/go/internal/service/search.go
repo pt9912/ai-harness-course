@@ -10,7 +10,7 @@ import (
 	"github.com/example/docsearch/internal/types"
 )
 
-// Fehler aus spec/spezifikation.md §4.
+// Fehler aus spec/specification.md §4.
 var (
 	ErrEmptyQuery    = errors.New("E002: empty query")
 	ErrEmbeddingDown = errors.New("E003: embedding unavailable")

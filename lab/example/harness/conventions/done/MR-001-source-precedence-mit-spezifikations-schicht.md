@@ -10,7 +10,7 @@
 - **Datum:** 2026-05-15
 - **Geltungsbereich:** [`harness/README.md` §Source precedence](../../README.md#source-precedence) und `AGENTS.md` §Kanonische Quellen
 - **Adaption:** Die Source-Precedence-Tabelle führt
-  [`spec/spezifikation.md`](../../../spec/spezifikation.md) als eigenen
+  [`spec/specification.md`](../../../spec/specification.md) als eigenen
   **Rang 2** zwischen Lastenheft (Rang 1) und Architektur (Rang 3).
   Der Kurs-Default
   ([`source-precedence.md` §Source Precedence](../../../../../kurs/de/grundlagen/source-precedence.md#source-precedence))

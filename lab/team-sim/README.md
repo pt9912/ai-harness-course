@@ -43,7 +43,7 @@ Seed-Hash, dann je Verdikt Szenario · erwartet · beobachtet · `PASS`/`FAIL`/
 `KAPUTT` — `KAPUTT` heißt: ein Vorbedingungs-Schritt (Commit, Push, `git mv`)
 ist gescheitert, das Verdikt wurde nie gefällt; das ist kein `FAIL`, sondern
 ein kaputter Lauf. Befund-Erwartungen prüfen Code **und** Ziel
-(`wave-drift` auf `welle-5`, nicht irgendwo) — ein Code allein wäre auch bei
+(`wave-drift` auf `wave-5`, nicht irgendwo) — ein Code allein wäre auch bei
 falscher Ursache „bestanden".
 
 **Warum Clones statt Worktrees:** Worktrees teilen ein `.git` und verbieten
@@ -83,6 +83,8 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-10-10 | `v0.86.1` | 97 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.85.0 → v0.86.1 |
 | 2026-10-10 | `v0.86.1` | 109 PASS, 0 FAIL, 0 KAPUTT | erweitert um s31 |
 | 2026-11-19 | `v0.91.0` | 109 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.86.1 → v0.91.0 |
+| 2026-11-22 | `v0.91.0` | 109 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Umbenennung `welle-` → `wave-` (Welle 165); Verdikte gleich, nach Namensersetzung identisch |
+| 2026-11-22 | `v0.91.0` | 111 PASS, 0 FAIL, 0 KAPUTT | erweitert um s32 |
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -158,7 +160,7 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s24c | dieselbe Nummer, dieselbe Datei, **weit auseinander** | **still**, Nummer steht zweimal | ✓ die Grenze des Rückfalls: git streitet über benachbarte Zeilen, nicht über Dateien — deshalb ist die Zuteilung die Zusage, nicht der Rückfall |
 | s24d | zwei Schreiber in **derselben Arbeitskopie**, kein Zweig | **still**, und ein Anspruch ist **weg** | ✓ die andere Topologie: ohne Zusammenführen gibt es keinen lauten Ausgang; der Verlust liest sich als gewöhnliche Änderung |
 | s24e | zwei **verschiedene** Wellen, verschiedene Nummern, eigene Zweige | Konflikt auf `roadmap.md`, **keiner** auf den Welle-Dateien | ✓ der zweite Hebel, sauber getrennt: die Kollision sitzt auf der gemeinsamen Liste, nicht auf der Kennung |
-| s24f | zwei Planner ziehen **dieselbe** Welle-Nummer, ohne Listen-Eintrag | **still**, zwei Dateien unter `welle-2` | ✓ das Gegenstück zu s24e: ohne Liste ist der Ausgang still — die Welle-Nummer liegt in derselben stillen Klasse wie der Slice |
+| s24f | zwei Planner ziehen **dieselbe** Welle-Nummer, ohne Listen-Eintrag | **still**, zwei Dateien unter `wave-2` | ✓ das Gegenstück zu s24e: ohne Liste ist der Ausgang still — die Welle-Nummer liegt in derselben stillen Klasse wie der Slice |
 | s24g | **Namens-Identität** statt Nummer, verschiedene Vorhaben | **sauber**, beide unterscheidbar | ✓ ohne Zähler gibt es nichts abzuleiten, also auch nichts doppelt zu ziehen |
 | s24h | Namens-Identität, **dasselbe** Vorhaben | add/add-**Konflikt** | ✓ das Gegenstück zu s24g: laut genau dann, wenn zwei dasselbe beanspruchen — die Richtung, die der Nummer fehlt |
 | s24i | zwei Planner, je **eigene** Welle (Namens-Identität), teilen **darin** dieselbe Slice-Nummer zu | **still**, `slice-002` in zwei Wellen | ✓ Zuteilung verschiebt das Ableitungsproblem, sie löst es nicht — sie trägt nur unter einer singulären zuteilenden Instanz |
@@ -166,12 +168,12 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s25b | dieselbe Form, §7 ein Satz ohne Satzende | **`closure-note-thin`** | ✓ das Paar zu s25a: die Notiz ist die Bedingung, nicht der `git mv` |
 | s25c | nur `git mv`, keine Closure-Notiz | **`closure-note-missing`** | ✓ verschieben allein ist kein Ausgang |
 | s25d | §7 nennt einen Nehmer, den es nicht gibt (Token) | **still**, während die leere Vergleichsdatei laut ist | ✓ benanntes Loch: „die Kennung löst auf" prüft hier kein Sensor — Urteil oder eigener Sensor |
-| s26a | `spec/spezifikation.md` nennt `welle-1-basis` im Text | **`matrix-forbidden`** spec → welle | ✓ die Spalte Welle hat eine Klasse; ohne sie wäre die Kante verboten und ungeprüft |
+| s26a | `spec/specification.md` nennt `wave-1-basis` im Text | **`matrix-forbidden`** spec → welle | ✓ die Spalte Welle hat eine Klasse; ohne sie wäre die Kante verboten und ungeprüft |
 | s26b | eine ADR nennt `CO-001` im Text | **`matrix-forbidden`** adr → carveout | ✓ dasselbe für Carveout — die Kennung ist ein Token, kein Link |
 | s26c | eine ADR **verlinkt** die Roadmap | **`matrix-forbidden`** adr → roadmap | ✓ die Roadmap trägt kein Token, sie wird nur über Links erreicht |
 | s26d | dieselbe ADR nennt die Welle mit `<!-- d-check:status-provenance -->` in der Zeile | **still**, während s26a–c im selben Lauf laut sind | ✓ der Marker am Ort ist der vorgesehene Ausweg; die Stille zählt nur neben dem lauten Lauf |
 | s27a | `spec/lastenheft.md` nennt `ADR-0001` blank im Text, die `adr`-Klasse trägt kein `token` | **`id-unlinked`** | ✓ `ids` trägt die nackte Kennung allein; das `token` wäre redundant |
-| s27b | `spec/spezifikation.md` nennt `ADR-IDX-0004` blank | **`id-unlinked`** | ✓ das Muster nimmt das Bereichssegment; ohne es bliebe die Kennung unbeanstandet |
+| s27b | `spec/specification.md` nennt `ADR-IDX-0004` blank | **`id-unlinked`** | ✓ das Muster nimmt das Bereichssegment; ohne es bliebe die Kennung unbeanstandet |
 | s27c | `spec/architecture.md` nennt `ADR-0001` in Inline-Code | **`id-unlinked`** | ✓ `link-policy: always`; ohne sie ist Inline-Code frei |
 | s27d | eine Notiz **verlinkt** `ADR-0001` und nennt das Wort `ADR-` ohne Nummer | **still**, während s27a–c im selben Lauf laut sind | ✓ der Link ist der Ausweg; das Wort ohne Nummer ist ein hingenommenes Negativ |
 | s28a | `below.md` hat genau 200 Zeilen, Budget 200 | **still** | ✓ Grenzwert inklusiv |
@@ -192,13 +194,15 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s31c | DoD-Zeile in eigener Formulierung, die das Muster nicht trifft | **`review-missing`** auf `done/` | ✓ der Leerlauf wird gemeldet |
 | s31d | derselbe Aufbau ohne `require-promises` | **still** | ✓ der Leerlauf selbst: kein Slice geprüft, Gate grün — der Grund für den Schalter |
 | s31e | Vorlagen-Zeile, Slug, Report vorhanden, aber ohne `match: name` | **`review-missing`** trotz Report | ✓ ein Slug ist keine `slice-<NNN>` |
-| s31f | alles archiviert mit Wellen (Stub unter `done/welle-1/`, Ergebnisnotiz), Konfiguration der Vorlage | **still** | ✓ der Ruhezustand ist kein Befund (d-check v0.86.0) |
+| s31f | alles archiviert mit Wellen (Stub unter `done/wave-1/`, Ergebnisnotiz), Konfiguration der Vorlage | **still** | ✓ der Ruhezustand ist kein Befund (d-check v0.86.0) |
 | s31g | derselbe Aufbau ohne `skip-allows-empty` | **`review-missing`** auf `done/` | ✓ Kontrolle: s31f hängt am Schlüssel |
 | s31h | alles archiviert ohne Wellen (flacher Stub `done/slice-<Kennung>.md`) | **still** | ✓ der Stub fällt per `skip-pattern` heraus |
 | s31j | derselbe Aufbau ohne `skip-pattern` | **`review-missing`** auf `done/`, der Stub als Kandidat gezählt | ✓ Kontrolle: der Stub wäre sonst ein Kandidat ohne Zusage — anders als die leere Menge in s31g |
 | s31i | `slice-cache` und `slice-cache-warmup`, Report nur zum längeren | **`review-missing`** auf `slice-cache.md`, nicht auf dem längeren | ✓ der längste passende Name deckt (d-check v0.86.0) |
 | s31k | ungehakter Punkt `- [ ] Review durchgeführt`, wie die Vorlage ihn ausliefert, kein Report | **`review-missing`** | ✓ auch ungehakt ist eine Zusage |
-| s31l | lebender Slice (kein Stub) unter `done/welle-1/` mit Zusage, kein Report | **`review-missing`** auf ihm | ✓ `recursive` sieht Unterverzeichnisse |
+| s31l | lebender Slice (kein Stub) unter `done/wave-1/` mit Zusage, kein Report | **`review-missing`** auf ihm | ✓ `recursive` sieht Unterverzeichnisse |
+| s32a | `waves` mit `mode: many` und den Globs `wave-*.md` / `wave-*-results.md`, flache Welle `wave-3-x.md` ohne Zeiger | **`wave-drift`** (target `wave-3`) | ✓ Vorbedingung: `waves` liest die `wave-`-Dateien |
+| s32b | derselbe Aufbau ohne die beiden Glob-Zeilen | **still** | ✓ der Werkzeug-Default `welle-*` sieht keine `wave-`-Datei — deshalb setzt die Vorlage die Globs (Welle 165) |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

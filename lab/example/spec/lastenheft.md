@@ -51,7 +51,7 @@ und Quellen-Referenz.
 
 - **Happy Path:** Given indexierte Doku, when `POST /search` mit `{"q": "<Frage>", "k": 5}`, then Antwort `{"results": [{"doc":"...", "section":"...", "score": 0.0–1.0}, …]}` mit genau 5 Einträgen, absteigend sortiert.
 - **Boundary:** Given Index leer, when `POST /search`, then `{"results": []}`, Statuscode 200.
-- **Boundary:** Given `k > 100`, when `POST /search`, then `k` wird auf 100 begrenzt (siehe `spec/spezifikation.md` `MAX_TOPK`), Antwort enthält Hinweis-Header `X-Topk-Clamped: 100`.
+- **Boundary:** Given `k > 100`, when `POST /search`, then `k` wird auf 100 begrenzt (siehe `spec/specification.md` `MAX_TOPK`), Antwort enthält Hinweis-Header `X-Topk-Clamped: 100`.
 - **Negative:** Given leere Anfrage `q=""`, when `POST /search`, then Statuscode 400, Fehler-Code `E002`.
 
 **Out-of-Scope:** Filterung nach Metadaten (Autor, Datum).
@@ -109,7 +109,7 @@ zusammen garantieren bit-identische Index-Files bei identischer Eingabe.
 ### LH-QA-01 — Performance
 
 - **Anforderung:** Suchanfrage liefert Antwort in p95 < 1.000 ms bei 10 RPS auf einem Standard-Worker (2 vCPU, 4 GB RAM, 10.000 indexierte Abschnitte).
-- **Messmethode:** Lasttest gemäß `spec/spezifikation.md` §5.
+- **Messmethode:** Lasttest gemäß `spec/specification.md` §5.
 
 ### LH-QA-02 — Reproduzierbarkeit
 

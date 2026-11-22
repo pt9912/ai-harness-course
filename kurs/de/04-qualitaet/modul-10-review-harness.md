@@ -246,7 +246,7 @@ Skill-Datei selbst wird **nicht** überschrieben, sondern versioniert
 einen Auflösungs-Trigger oder *permanent* — dieselbe Disziplin wie bei Hard
 Rules ([Modul 13 §Hard Rule](modul-13-quality-gates.md#hard-rule-doku-disziplin));
 der Altbestand bleibt ohne. Ein HIGH-Eintrag, der aus dem Steering
-Loop kam, trägt den Herkunfts-Anker `(seit welle-<Kennung>)` — ohne Welle `(seit slice-<Kennung>)` — siehe
+Loop kam, trägt den Herkunfts-Anker `(seit wave-<Kennung>)` — ohne Welle `(seit slice-<Kennung>)` — siehe
 [`traceability.md` §Herkunfts-Anker](../grundlagen/traceability.md#herkunfts-anker-für-steering-loop-regeln).
 ```
 
@@ -280,7 +280,7 @@ seinen Slice einsammelt, wandert der Report vollständig ins Archiv
 Schritt 4) — **ohne Stub**. Er hat keine Identität jenseits seines Slice: Wer
 ihn sucht, sucht ihn unter dem Slice, den er geprüft hat. **In einem Repo ohne
 Wellen archiviert ihn die Slice-Closure selbst** — dieselbe, die seinen Slice
-schließt, nach den Paarungen, nach `done/slice-<Kennung>-archiv.zip`
+schließt, nach den Paarungen, nach `done/slice-<Kennung>-archive.zip`
 ([Modul 6 §Wann Arbeit eine Welle braucht](../02-planung/modul-06-roadmap.md#wann-arbeit-eine-welle-braucht--und-wann-nicht)).
 Er wartet also nicht auf ein Ereignis, das es dort nie gibt. Ein Rang-Dokument,
 das einen einzelnen Report als Beleg *verlinkt*, hat damit ein Problem, das

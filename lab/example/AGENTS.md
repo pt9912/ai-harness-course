@@ -22,7 +22,7 @@ Stand steht in [`harness/conventions.md`](harness/conventions.md) §Baseline.
 ## 1. Kanonische Quellen (Source Precedence)
 
 1. [`spec/lastenheft.md`](spec/lastenheft.md)
-2. [`spec/spezifikation.md`](spec/spezifikation.md)
+2. [`spec/specification.md`](spec/specification.md)
 3. [`spec/architecture.md`](spec/architecture.md)
 4. [`docs/plan/adr/README.md`](docs/plan/adr/README.md)
 5. [`docs/plan/planning/in-progress/roadmap.md`](docs/plan/planning/in-progress/roadmap.md)
@@ -82,11 +82,11 @@ Jede Schwellen-Senkung ist ein ADR, kein PR-Kommentar. Eine befristete Ausnahme
 für einen Teil (einen Layer, einen Pfad) ist keine Senkung, sondern ein Carveout
 mit Trigger und Folge-Slice; die Schwelle selbst bleibt.
 
-### 2.7 Tie-Break in sortierenden Operationen ist explizit   (seit welle-mvp)
+### 2.7 Tie-Break in sortierenden Operationen ist explizit   (seit wave-mvp)
 
 Jede `sort`-Operation muss bei gleichem Sortier-Schlüssel einen
-deterministischen Tie-Break benennen. Der Herkunfts-Anker `seit welle-mvp`
-zeigt auf [`docs/plan/planning/done/welle-mvp-results.md`](docs/plan/planning/done/welle-mvp-results.md)
+deterministischen Tie-Break benennen. Der Herkunfts-Anker `seit wave-mvp`
+zeigt auf [`docs/plan/planning/done/wave-mvp-results.md`](docs/plan/planning/done/wave-mvp-results.md)
 §Steering-Loop-Einträge — dort stehen die drei auslösenden Slices. Ohne
 diesen Rückweg wäre beim nächsten Aufräumen nicht mehr erkennbar, welche
 Beobachtung die Regel erzwungen hat.

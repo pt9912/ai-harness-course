@@ -30,7 +30,7 @@ class SearchHandler {
     // handle_reindex — POST /reindex (LH-FA-01).
     [[nodiscard]] HttpResult handle_reindex(const std::string& dir) const;
 
-    // status_for — Fehler-Code aus spec/spezifikation.md §4 auf HTTP-Status.
+    // status_for — Fehler-Code aus spec/specification.md §4 auf HTTP-Status.
     // Unbekannte Codes sind E099 (500).
     [[nodiscard]] static int status_for(const std::string& code);
 

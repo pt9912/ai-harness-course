@@ -13,7 +13,7 @@ namespace DocSearch.UI
     public sealed class Handler(Searcher searcher, Indexer? indexer = null)
     {
         /// <summary>
-        /// Bildet die Fehler-Codes aus spec/spezifikation.md §4 auf HTTP-Status
+        /// Bildet die Fehler-Codes aus spec/specification.md §4 auf HTTP-Status
         /// ab. Unbekannte Fehler sind E099.
         /// </summary>
         public static ErrorMapping StatusFor(Exception exc)
@@ -32,7 +32,7 @@ namespace DocSearch.UI
             return searcher.Search(req);
         }
 
-        /// <summary>Suche mit Fehler-Abbildung nach spec/spezifikation.md §4.</summary>
+        /// <summary>Suche mit Fehler-Abbildung nach spec/specification.md §4.</summary>
         public HttpResult HandleSearchHttp(SearchRequest req)
         {
             try

@@ -22,7 +22,7 @@ class HttpResult:
 
 
 def status_for(exc: Exception) -> tuple[int, str]:
-    """Bildet die Fehler-Codes aus spec/spezifikation.md §4 auf HTTP-Status ab.
+    """Bildet die Fehler-Codes aus spec/specification.md §4 auf HTTP-Status ab.
 
     Unbekannte Fehler sind E099.
     """

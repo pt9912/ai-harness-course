@@ -6,7 +6,7 @@ using DocSearch.Types;
 namespace DocSearch.Service
 {
     /// <summary>
-    /// E001 — Verzeichnis existiert nicht (spec/spezifikation.md §4).
+    /// E001 — Verzeichnis existiert nicht (spec/specification.md §4).
     /// Heißt bewusst nicht <c>DirectoryNotFoundException</c>: der Name
     /// gehört in C# zu <see cref="System.IO"/> und würde den BCL-Typ
     /// verdecken. Der Fehler-Code E001 ist sprachübergreifend derselbe.

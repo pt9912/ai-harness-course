@@ -18,17 +18,17 @@ Klassen**, nicht 24 gleichartige Vorlagen:
 | Template | Wofür | Regelwerk-Abschnitt |
 |---|---|---|
 | [`spec/lastenheft.template.md`](spec/lastenheft.template.md) | Vertraglich abnahmebindende Anforderungen (`LH-*`-IDs) | [Modul 3](../regelwerk/modul-03-spec.md) |
-| [`spec/spezifikation.template.md`](spec/spezifikation.template.md) | Technisch verbindlich, fortschreibbar — Algorithmen, Defaults, Codes | [Modul 3](../regelwerk/modul-03-spec.md) (Spec-Stratifizierung) |
+| [`spec/specification.template.md`](spec/specification.template.md) | Technisch verbindlich, fortschreibbar — Algorithmen, Defaults, Codes | [Modul 3](../regelwerk/modul-03-spec.md) (Spec-Stratifizierung) |
 | [`spec/architecture.template.md`](spec/architecture.template.md) | Komponenten- und Sequenzsicht, sprach- und meilensteinfrei | [Modul 3](../regelwerk/modul-03-spec.md) |
-| [`docs/plan/adr/NNNN-titel.template.md`](docs/plan/adr/NNNN-titel.template.md) | Architecture Decision Record im MADR/Nygard-Stil | [Modul 4](../regelwerk/modul-04-adrs.md) |
+| [`docs/plan/adr/NNNN-title.template.md`](docs/plan/adr/NNNN-title.template.md) | Architecture Decision Record im MADR/Nygard-Stil | [Modul 4](../regelwerk/modul-04-adrs.md) |
 | [`docs/plan/adr/README.template.md`](docs/plan/adr/README.template.md) | ADR-Index (derivativ; Liste aller ADRs mit Status) | [Modul 4](../regelwerk/modul-04-adrs.md) |
 | [`docs/plan/planning/slice.template.md`](docs/plan/planning/slice.template.md) | Slice-Plan mit DoD, Trigger, Closure | [Modul 5](../regelwerk/modul-05-planning-harness.md) |
-| [`docs/plan/planning/welle.template.md`](docs/plan/planning/welle.template.md) | Welle als Bündel von Slices | [Modul 5](../regelwerk/modul-05-planning-harness.md) + [Modul 6](../regelwerk/modul-06-roadmap.md) |
-| [`docs/plan/planning/welle-results.template.md`](docs/plan/planning/welle-results.template.md) | Welle-Closure-Notiz: Ergebnis, Steering-Loop-Einträge, Zeiger aufs Beobachtungs-Register | [Modul 6](../regelwerk/modul-06-roadmap.md) |
+| [`docs/plan/planning/wave.template.md`](docs/plan/planning/wave.template.md) | Welle als Bündel von Slices | [Modul 5](../regelwerk/modul-05-planning-harness.md) + [Modul 6](../regelwerk/modul-06-roadmap.md) |
+| [`docs/plan/planning/wave-results.template.md`](docs/plan/planning/wave-results.template.md) | Welle-Closure-Notiz: Ergebnis, Steering-Loop-Einträge, Zeiger aufs Beobachtungs-Register | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/roadmap.template.md`](docs/plan/planning/roadmap.template.md) | Roadmap als Reihenfolge von Wellen, nicht Termine | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/observation.template.md`](docs/plan/planning/observation.template.md) | **Eine** Beobachtung des Registers — `observation.md` · `state.md` · `evidence/<vorgangs-id>.md`; der Zähler wird aus den Evidence-Dateien abgeleitet, nicht geführt | [Modul 6](../regelwerk/modul-06-roadmap.md#das-beobachtungs-register-modul-6) |
-| [`docs/plan/planning/archiv-stub-slice.template.md`](docs/plan/planning/archiv-stub-slice.template.md) | Gekürzter Stub an der Stelle eines archivierten Slice-Volltexts | [Modul 6](../regelwerk/modul-06-roadmap.md) |
-| [`docs/plan/planning/archiv-stub-welle.template.md`](docs/plan/planning/archiv-stub-welle.template.md) | Gekürzter Stub an der Stelle eines archivierten Welle-Plans | [Modul 6](../regelwerk/modul-06-roadmap.md) |
+| [`docs/plan/planning/archive-stub-slice.template.md`](docs/plan/planning/archive-stub-slice.template.md) | Gekürzter Stub an der Stelle eines archivierten Slice-Volltexts | [Modul 6](../regelwerk/modul-06-roadmap.md) |
+| [`docs/plan/planning/archive-stub-wave.template.md`](docs/plan/planning/archive-stub-wave.template.md) | Gekürzter Stub an der Stelle eines archivierten Welle-Plans | [Modul 6](../regelwerk/modul-06-roadmap.md) |
 | [`docs/plan/planning/reconciliation.template.md`](docs/plan/planning/reconciliation.template.md) | Reconciliation-Register: die offenen Funde der Brownfield-Inventur; nur für Repos im BF-Bootstrap | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
 | [`docs/plan/planning/README.template.md`](docs/plan/planning/README.template.md) | Planning-Index: Slice-Lifecycle + Slice-vs-Welle-Konvention | [Modul 5](../regelwerk/modul-05-planning-harness.md) |
 | [`docs/plan/carveouts/carveout.template.md`](docs/plan/carveouts/carveout.template.md) | Dokumentierte Ausnahme mit Auflösungs-Trigger | [Modul 7](../regelwerk/modul-07-carveouts.md) |
@@ -38,7 +38,7 @@ Klassen**, nicht 24 gleichartige Vorlagen:
 | [`AGENTS.template.md`](AGENTS.template.md) | Repo-weite Hard Rules und Source Precedence | [Modul 9](../regelwerk/modul-09-implementierung.md) |
 | [`harness/README.template.md`](harness/README.template.md) | Repo-Einstiegspunkt mit Guides, Sensors, Safety | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
 | [`harness/conventions.template.md`](harness/conventions.template.md) | Repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Zusatzklassen-Deklaration, Modus-Deklaration pro Sub-Area | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessconventionsmd-als-konventionsspeicher) |
-| [`harness/conventions/MR-NNN-titel.template.md`](harness/conventions/MR-NNN-titel.template.md) | Ein Adaptions-Eintrag (`MR-<NNN>`); Index in `conventions.md` | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
+| [`harness/conventions/MR-NNN-title.template.md`](harness/conventions/MR-NNN-title.template.md) | Ein Adaptions-Eintrag (`MR-<NNN>`); Index in `conventions.md` | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
 | [`harness/sensors/gate.template.md`](harness/sensors/gate.template.md) | Ein Gate oder Werkzeug, sobald es mehr braucht als seine Tabellenzelle: Grenze, Ausgänge, Sperren; Index in `harness/README.md` | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
 
 ## Download als ZIP
@@ -85,12 +85,12 @@ Die Templates haben zwei Lebenszyklen:
   `.harness/baseline/<tag>/templates/` bleibt und ist beim Baseline-Update
   die Vergleichsgrundlage für die Form deiner gefüllten Artefakte.
 - **Wiederkehrend** — als `.template.md` **co-located** im Repo behalten;
-  jede neue Instanz wird daneben kopiert: `adr/NNNN-titel`, `slice`,
-  `welle`, `carveout`, `review-report`, `archiv-stub-slice`,
-  `archiv-stub-welle` (die beiden entstehen bei jeder Wellen-Closure neu).
+  jede neue Instanz wird daneben kopiert: `adr/NNNN-title`, `slice`,
+  `wave`, `carveout`, `review-report`, `archive-stub-slice`,
+  `archive-stub-wave` (die beiden entstehen bei jeder Wellen-Closure neu).
 
 Wiederkehrende Templates bleiben also dauerhaft im Repo (z. B.
-`docs/plan/adr/NNNN-titel.template.md` neben den echten ADRs). Damit ihre
+`docs/plan/adr/NNNN-title.template.md` neben den echten ADRs). Damit ihre
 Platzhalter den Gate nicht rot färben, ignoriert die mitgelieferte
 `.d-check.yml` sie per Suffix (`**/*.template.md`). `/tmp` ist nur die
 kurzlebige Entpack-Station — der `harness/`-Ordner ist **kein**

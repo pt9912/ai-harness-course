@@ -1,1 +1,1 @@
-**Stand:** verkörpert als benannte Spec-Lücke in Lastenheft v0.2.0 (`LH-FA-02`, `welle-mvp-results.md`)
+**Stand:** verkörpert als benannte Spec-Lücke in Lastenheft v0.2.0 (`LH-FA-02`, `wave-mvp-results.md`)

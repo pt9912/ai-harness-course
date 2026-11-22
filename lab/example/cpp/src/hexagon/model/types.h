@@ -10,9 +10,9 @@
 
 namespace docsearch {
 
-// kEmbeddingDim aus spec/spezifikation.md §3.
+// kEmbeddingDim aus spec/specification.md §3.
 inline constexpr std::size_t kEmbeddingDim = 1024;
-// kMaxTopK aus spec/spezifikation.md §3, ADR-0001.
+// kMaxTopK aus spec/specification.md §3, ADR-0001.
 inline constexpr int kMaxTopK = 100;
 
 using Embedding = std::array<float, kEmbeddingDim>;

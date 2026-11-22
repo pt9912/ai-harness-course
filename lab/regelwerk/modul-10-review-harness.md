@@ -107,7 +107,7 @@ achtest du"; Vorlage
   wie bei Hard Rules
   ([Modul 13](modul-13-quality-gates.md#hard-rule-doku-disziplin)); der
   Altbestand bleibt ohne. Ein HIGH-Eintrag, der aus dem
-  Steering Loop kam, trägt den Herkunfts-Anker `(seit welle-<Kennung>)` — ohne Welle
+  Steering Loop kam, trägt den Herkunfts-Anker `(seit wave-<Kennung>)` — ohne Welle
   `(seit slice-<Kennung>)`
   ([`grundlagen-traceability.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker)).
 
@@ -135,7 +135,7 @@ vollständig ins Archiv — ohne Stub** ([Modul 6](modul-06-roadmap.md), Schritt
 4). Er hat keine Identität jenseits seines Slice; wer ihn sucht, sucht ihn
 unter dem Slice, den er geprüft hat. **In einem Repo ohne Wellen archiviert ihn
 die Slice-Closure selbst** — dieselbe, die seinen Slice schließt, nach den
-Paarungen, nach `done/slice-<Kennung>-archiv.zip` ([Modul 6](modul-06-roadmap.md),
+Paarungen, nach `done/slice-<Kennung>-archive.zip` ([Modul 6](modul-06-roadmap.md),
 *Wann Arbeit eine Welle braucht*). Er wartet nicht auf ein Ereignis, das es
 dort nie gibt. **Ein Rang-Dokument, das einen einzelnen
 Report als Beleg verlinkt, hat damit ein Problem, das älter ist als das

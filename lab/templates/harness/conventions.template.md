@@ -84,7 +84,7 @@ ist derivativ — bei Konflikt gilt das Lehrmaterial.
 
 Regeln dieser Sektion: Diese Datei trägt den **Index**, nicht die Einträge.
 Jede Adaption ist eine eigene Datei unter `harness/conventions/`, kopiert aus
-`harness/conventions/MR-NNN-titel.template.md` der vendored Baseline;
+`harness/conventions/MR-NNN-title.template.md` der vendored Baseline;
 ist ihr Auflösungs-Trigger eingetreten, wandert sie per `git mv` nach
 `conventions/done/`. Der Zustand ist die Verzeichnis-Position, kein
 Status-Feld. Der Grund für den Schnitt: Was hier steht, liest **jeder**
@@ -109,7 +109,7 @@ sie gilt für jeden Lauf.
   `ARC-*` kodieren das Stratum und sind fest, siehe Baseline-Regelwerk
   `grundlagen-source-precedence.md` §ID-Schema als Klammer;
   bei mehreren gleichzeitig schreibenden Entwicklern für die Artefakte mit
-  je eigener Datei (`ADR-*`, `CO-*`, `slice-*`, `welle-*`) zusätzlich das
+  je eigener Datei (`ADR-*`, `CO-*`, `slice-*`, `wave-*`) zusätzlich das
   Bereichssegment und damit den Zählraum je Sub-Area festlegen —
   `SPEC-*`/`ARC-*` bleiben davon ausgenommen und zählen fortlaufend je
   Datei, siehe Baseline-Regelwerk `grundlagen-source-precedence.md` §Vergabe).*

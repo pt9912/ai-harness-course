@@ -18,7 +18,7 @@ private const val STATUS_UNAVAILABLE = 503
 data class HttpResult(val status: Int, val body: Map<String, Any>)
 
 /**
- * Bildet die Fehler-Codes aus spec/spezifikation.md §4 auf HTTP-Status ab.
+ * Bildet die Fehler-Codes aus spec/specification.md §4 auf HTTP-Status ab.
  * Unbekannte Fehler sind E099.
  */
 fun statusFor(exc: Throwable): Pair<Int, String> = when (exc) {
@@ -34,14 +34,14 @@ class Handler(
 ) {
     fun handleSearch(req: SearchRequest): SearchResponse = searcher.search(req)
 
-    /** Suche mit Fehler-Abbildung nach spec/spezifikation.md §4. */
+    /** Suche mit Fehler-Abbildung nach spec/specification.md §4. */
     fun handleSearchHttp(req: SearchRequest): HttpResult =
         runCatching { searcher.search(req) }.fold(
             onSuccess = { HttpResult(STATUS_OK, mapOf("results" to it.results)) },
             onFailure = { failure(it) },
         )
 
-    /** Reindex (LH-FA-01) mit Fehler-Abbildung nach spec/spezifikation.md §4. */
+    /** Reindex (LH-FA-01) mit Fehler-Abbildung nach spec/specification.md §4. */
     fun handleReindex(directory: String): HttpResult {
         val ix = indexer ?: return HttpResult(STATUS_SERVER_ERROR, mapOf("error" to "E099"))
         return runCatching { ix.reindex(directory) }.fold(

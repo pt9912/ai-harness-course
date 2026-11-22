@@ -9,13 +9,13 @@ nur durch `git mv` (Kurs
 
 **Bezug:** [LH-QA-02](../../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) (Reproduzierbarkeit, primär — eine Spec, die auf Slices zeigt, ist nicht reproduzierbar lesbar), [ADR-0011](../../adr/0011-closure-note-pflicht.md) (Closure-Note-Pflicht, sekundär)
 
-**Berührte Spec-Stellen:** [`spezifikation.md` §8](../../../../spec/spezifikation.md#8-historie) (Historie — die Sektion vergibt keine Kennungen)
+**Berührte Spec-Stellen:** [`specification.md` §8](../../../../spec/specification.md#8-historie) (Historie — die Sektion vergibt keine Kennungen)
 
 **Autor:** Kurs-Lab. **Datum:** 2026-06-03.
 
 ## 1. Ziel
 
-Den Abwärtszeiger aus `spec/spezifikation.md` entfernen, den
+Den Abwärtszeiger aus `spec/specification.md` entfernen, den
 `make check-references` gemeldet hat — die Spec verwies auf einen
 Slice-Plan statt umgekehrt.
 
@@ -29,7 +29,7 @@ Slice-Plan statt umgekehrt.
 
 ## 2. Definition of Done
 
-- [x] `spec/spezifikation.md`: Abwärtszeiger auf `slice-008` entfernt, Aussage ohne Slice-Bezug formuliert.
+- [x] `spec/specification.md`: Abwärtszeiger auf `slice-008` entfernt, Aussage ohne Slice-Bezug formuliert.
 - [x] `make check-references` grün.
 - [x] `make verify` grün.
 - [x] `make gates` grün — **Nachtrag 2026-06-03**, siehe unten.
@@ -51,7 +51,7 @@ sich mit `exit 0`.
 
 | Datei / Komponente | Änderungs-Art | Begründung |
 |---|---|---|
-| `spec/spezifikation.md` | update | Abwärtszeiger raus |
+| `spec/specification.md` | update | Abwärtszeiger raus |
 | `docs/plan/planning/done/` | add | dieser Slice-Plan |
 
 ## 4. Trigger
@@ -101,7 +101,7 @@ und kein Gegenstand der Anker-Paarung.
 
 **Drei Paarungen:** hier nicht — dieses Repo schneidet Wellen. Dass *dieser
 Slice* zu keiner gehört, ändert daran nichts: Die nächste Welle-Closure
-(`welle-qualitaet`) prüft alles, was seit `welle-mvp` in `done/` gelandet ist,
+(`wave-qualitaet`) prüft alles, was seit `wave-mvp` in `done/` gelandet ist,
 also auch `BEO-SPEC/slice-bezuege-im-spec-text` und `BEO-TOOLS/check-references-deckt-adr-nicht` aus dieser Notiz.
 
 ## 8. Sub-Area-Modus-Begründung
@@ -112,14 +112,14 @@ für das DocSearch-Lab als Ganzes). Reine Spec-Korrektur ohne
 Konventions-Adaption — keine BF/Hybrid-Begründung nötig.
 
 **Vorgelagert — Sub-Area-Wahl prüfen:** Zwei berührte Sub-Areas, beide über
-der Schwelle: *Spec-Schreibung* (`spec/spezifikation.md`) und
+der Schwelle: *Spec-Schreibung* (`spec/specification.md`) und
 *Planning-Lifecycle* (dieser Slice-Plan selbst). Keine ist zu grob geschnitten,
 keine musste ausdifferenziert werden.
 
 **Vorgelagert — offene Beobachtungen sichten:** Register
 (`../observations/`) durchgegangen. Berührt sind zwei Sub-Areas aus der
 Modus-Tabelle (`harness/conventions.md`), abgelesen an §3: *Spec-Schreibung*
-(`spec/spezifikation.md`) und *Planning-Lifecycle* (dieser Slice-Plan selbst).
+(`spec/specification.md`) und *Planning-Lifecycle* (dieser Slice-Plan selbst).
 
 **Ein offener Treffer:** `BEO-PLAN/adr-bezug-im-commit-vergessen` (*Planning-Lifecycle*, 2×) — der vergessene
 ADR-Bezug betrifft die ADR-Konvention, nicht das Spec-Stratum. Dazu eine bereits

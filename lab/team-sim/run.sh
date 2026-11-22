@@ -88,10 +88,10 @@ lauf() { # $1 gruppen-kennung  $2 funktion
 s01_doppel_anspruch() {
   topo
   # alice beansprucht slice-003 auf main (Datei anlegen + mv-Aequivalent: neu in in-progress)
-  cd "$WORK/sim/alice"; printf '# Slice slice-003\n\n**Welle:** welle-2-ausbau\n\n**Verantwortlich:** alice.\n' > docs/plan/planning/in-progress/slice-003-ausbau.md
+  cd "$WORK/sim/alice"; printf '# Slice slice-003\n\n**Welle:** wave-2-ausbau\n\n**Verantwortlich:** alice.\n' > docs/plan/planning/in-progress/slice-003-ausbau.md
   schritt git add -A && schritt git commit -qm "claim slice-003 (alice)" && schritt git push -q origin main || return 1
   # bob, OHNE zu pullen, beansprucht denselben Slice auf seinem main
-  cd "$WORK/sim/bob"; printf '# Slice slice-003\n\n**Welle:** welle-2-ausbau\n\n**Verantwortlich:** bob.\n' > docs/plan/planning/in-progress/slice-003-ausbau.md
+  cd "$WORK/sim/bob"; printf '# Slice slice-003\n\n**Welle:** wave-2-ausbau\n\n**Verantwortlich:** bob.\n' > docs/plan/planning/in-progress/slice-003-ausbau.md
   schritt git add -A && schritt git commit -qm "claim slice-003 (bob)" || return 1
   out=$(git push origin main 2>&1); rc=$?
   [ $rc -ne 0 ] && echo "$out" | grep -q "rejected\|fetch first\|fast-forward" && ok=0 || ok=1
@@ -135,14 +135,14 @@ s03_register_doppelzeile() {
 s04_zwei_wellen_und_waves() {
   topo
   cd "$WORK/sim/alice"
-  printf '# Welle welle-2-ausbau: Ausbau\n\n**Verantwortlich:** bob. **Datum:** 2026-08-16.\n' > docs/plan/planning/welle-2-ausbau.md
-  sed -i 's|- \[welle-1-basis\](../welle-1-basis.md)|- [welle-1-basis](../welle-1-basis.md)\n- [welle-2-ausbau](../welle-2-ausbau.md)|' docs/plan/planning/in-progress/roadmap.md
-  sed -i '/welle-2-ausbau | welle-1 done/d' docs/plan/planning/in-progress/roadmap.md
+  printf '# Welle wave-2-ausbau: Ausbau\n\n**Verantwortlich:** bob. **Datum:** 2026-08-16.\n' > docs/plan/planning/wave-2-ausbau.md
+  sed -i 's|- \[wave-1-basis\](../wave-1-basis.md)|- [wave-1-basis](../wave-1-basis.md)\n- [wave-2-ausbau](../wave-2-ausbau.md)|' docs/plan/planning/in-progress/roadmap.md
+  sed -i '/wave-2-ausbau | wave-1 done/d' docs/plan/planning/in-progress/roadmap.md
   schritt git add -A && schritt git commit -qm "zweite offene Welle" && schritt git push -q origin main || return 1
   out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s04a zwei offene Wellen: planning ohne waves GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
   # waves einschalten -> Singleton-Semantik (Default mode: one) muss beissen
-  printf '  waves:\n    dir: docs/plan/planning\n' >> .d-check.yml
+  printf '  waves:\n    dir: docs/plan/planning\n    glob: "wave-*.md"\n    results-glob: "wave-*-results.md"\n' >> .d-check.yml
   out=$(dcheck "$WORK/sim/alice"); befund "$out" "docs/plan/planning" "wave-drift" && ok=0 || ok=1
   verdikt "s04b waves.dir an: Singleton meldet wave-drift" "wave-drift (target: Verzeichnis)" "$(echo "$out"|tail -1)" $ok
   # Bijektion statt Singleton (d-check v0.62.0, der CR dieses Repos): derselbe
@@ -153,15 +153,15 @@ s04_zwei_wellen_und_waves() {
   # Gegenprobe: die Bijektion muss beissen — dritte Welle flach OHNE Zeiger.
   # Ohne diesen Lauf waere "many prueft die Liste" nur behauptet (gruen ist
   # auch ein Sensor, der nichts liest).
-  printf '# Welle welle-3-x: X\n\n**Verantwortlich:** alice. **Datum:** 2026-08-22.\n' > docs/plan/planning/welle-3-x.md
-  out=$(dcheck "$WORK/sim/alice"); befund "$out" "welle-3" "wave-drift" && ok=0 || ok=1
-  verdikt "s04f many: Datei ohne Zeiger meldet wave-drift (Bijektion beisst)" "wave-drift (target: welle-3)" "$(echo "$out"|tail -1)" $ok
+  printf '# Welle wave-3-x: X\n\n**Verantwortlich:** alice. **Datum:** 2026-08-22.\n' > docs/plan/planning/wave-3-x.md
+  out=$(dcheck "$WORK/sim/alice"); befund "$out" "wave-3" "wave-drift" && ok=0 || ok=1
+  verdikt "s04f many: Datei ohne Zeiger meldet wave-drift (Bijektion beisst)" "wave-drift (target: wave-3)" "$(echo "$out"|tail -1)" $ok
   # Die andere Richtung: Zeiger ohne Datei. Bare Kennung statt Link, damit
   # allein die Bijektion spricht und nicht zusaetzlich `links` (target-missing).
-  rm docs/plan/planning/welle-3-x.md
-  sed -i 's|^- \[welle-2-ausbau\](../welle-2-ausbau.md)$|- [welle-2-ausbau](../welle-2-ausbau.md)\n- welle-5-x (Zeiger ohne Datei)|' docs/plan/planning/in-progress/roadmap.md
-  out=$(dcheck "$WORK/sim/alice"); befund "$out" "welle-5" "wave-drift" && ok=0 || ok=1
-  verdikt "s04i many: Zeiger ohne Datei meldet wave-drift (beide Richtungen)" "wave-drift (target: welle-5)" "$(echo "$out"|tail -1)" $ok
+  rm docs/plan/planning/wave-3-x.md
+  sed -i 's|^- \[wave-2-ausbau\](../wave-2-ausbau.md)$|- [wave-2-ausbau](../wave-2-ausbau.md)\n- wave-5-x (Zeiger ohne Datei)|' docs/plan/planning/in-progress/roadmap.md
+  out=$(dcheck "$WORK/sim/alice"); befund "$out" "wave-5" "wave-drift" && ok=0 || ok=1
+  verdikt "s04i many: Zeiger ohne Datei meldet wave-drift (beide Richtungen)" "wave-drift (target: wave-5)" "$(echo "$out"|tail -1)" $ok
 }
 
 s04g_eroeffnet_unter_waves() {
@@ -173,8 +173,8 @@ s04g_eroeffnet_unter_waves() {
   topo
   cd "$WORK/sim/alice"
   schritt git mv docs/plan/planning/in-progress/slice-001-kern.md docs/plan/planning/open/ || return 1
-  sed -i 's|^- \[welle-1-basis\](../welle-1-basis.md)$|- [welle-1-basis](../welle-1-basis.md)\n\nNichts in Arbeit.|' docs/plan/planning/in-progress/roadmap.md
-  printf '  waves:\n    dir: docs/plan/planning\n' >> .d-check.yml
+  sed -i 's|^- \[wave-1-basis\](../wave-1-basis.md)$|- [wave-1-basis](../wave-1-basis.md)\n\nNichts in Arbeit.|' docs/plan/planning/in-progress/roadmap.md
+  printf '  waves:\n    dir: docs/plan/planning\n    glob: "wave-*.md"\n    results-glob: "wave-*-results.md"\n' >> .d-check.yml
   schritt git add -A && schritt git commit -qm "Welle eroeffnet, nichts beansprucht, waves im Default" && schritt git push -q origin main || return 1
   out=$(dcheck "$WORK/sim/alice"); befund "$out" "docs/plan/planning" "wave-drift" && ok=0 || ok=1
   verdikt "s04g eine Welle eroeffnet + Marker, mode one: wave-drift (Singleton)" "wave-drift (target: Verzeichnis)" "$(echo "$out"|tail -1)" $ok
@@ -190,13 +190,13 @@ s04c_leerer_anspruch() {
   # Waechter die MARKER-Haelfte prueft und die Liste ihn nicht stoert.
   topo
   cd "$WORK/sim/alice"
-  printf '# Welle welle-2-ausbau: Ausbau\n\n**Verantwortlich:** bob. **Datum:** 2026-08-16.\n' > docs/plan/planning/welle-2-ausbau.md
-  sed -i 's|- \[welle-1-basis\](../welle-1-basis.md)|- [welle-1-basis](../welle-1-basis.md)\n- [welle-2-ausbau](../welle-2-ausbau.md)|' docs/plan/planning/in-progress/roadmap.md
-  sed -i '/welle-2-ausbau | welle-1 done/d' docs/plan/planning/in-progress/roadmap.md
+  printf '# Welle wave-2-ausbau: Ausbau\n\n**Verantwortlich:** bob. **Datum:** 2026-08-16.\n' > docs/plan/planning/wave-2-ausbau.md
+  sed -i 's|- \[wave-1-basis\](../wave-1-basis.md)|- [wave-1-basis](../wave-1-basis.md)\n- [wave-2-ausbau](../wave-2-ausbau.md)|' docs/plan/planning/in-progress/roadmap.md
+  sed -i '/wave-2-ausbau | wave-1 done/d' docs/plan/planning/in-progress/roadmap.md
   # Anspruch zuruecknehmen: in-progress/ traegt keinen Slice mehr ...
   schritt git mv docs/plan/planning/in-progress/slice-001-kern.md docs/plan/planning/open/ || return 1
   # ... und der Ruhe-Marker tritt NEBEN die Liste, nicht an ihre Stelle.
-  sed -i 's|- \[welle-2-ausbau\](../welle-2-ausbau.md)|- [welle-2-ausbau](../welle-2-ausbau.md)\n\nNichts in Arbeit.|' docs/plan/planning/in-progress/roadmap.md
+  sed -i 's|- \[wave-2-ausbau\](../wave-2-ausbau.md)|- [wave-2-ausbau](../wave-2-ausbau.md)\n\nNichts in Arbeit.|' docs/plan/planning/in-progress/roadmap.md
   schritt git add -A && schritt git commit -qm "Anspruch zurueck, Ruhe-Marker neben der Liste" && schritt git push -q origin main || return 1
   out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s04c Marker NEBEN Liste (Wellen offen, nichts beansprucht): planning GRUEN" "0 Befunde" "$(echo "$out"|tail -1)" $ok
@@ -261,19 +261,19 @@ s08_closure_unter_anspruch() {
   cd "$WORK/sim/bob"; schritt git switch -qc b/arbeit || return 1
   sed -i 's/^Offen\.$/In Arbeit: Kern-Modul, erster Schnitt./' docs/plan/planning/in-progress/slice-001-kern.md
   schritt git add -A && schritt git commit -qm "slice-001: Arbeit im PR" && schritt git push -q origin b/arbeit || return 1
-  # alice schliesst welle-1-basis auf main — schlampig: Zeile im Register, keine Ergebnisnotiz
+  # alice schliesst wave-1-basis auf main — schlampig: Zeile im Register, keine Ergebnisnotiz
   cd "$WORK/sim/alice"
-  printf '  waves:\n    dir: docs/plan/planning\n    mode: many\n' >> .d-check.yml
-  schritt git mv docs/plan/planning/welle-1-basis.md docs/plan/planning/done/ || return 1
-  sed -i '/^- \[welle-1-basis\](..\/welle-1-basis.md)$/d' docs/plan/planning/in-progress/roadmap.md
-  printf '| welle-1-basis | 2026-08-22 | done/welle-1-results.md |\n' >> docs/plan/planning/in-progress/roadmap.md
-  schritt git add -A && schritt git commit -qm "welle-1-basis geschlossen (ohne Notiz)" && schritt git push -q origin main || return 1
-  out=$(dcheck "$WORK/sim/alice"); befund "$out" "welle-1" "wave-results-missing" && ok=0 || ok=1
-  verdikt "s08a Welle geschlossen ohne Ergebnisnotiz: wave-results-missing" "wave-results-missing (target: welle-1)" "$(echo "$out"|tail -1)" $ok
+  printf '  waves:\n    dir: docs/plan/planning\n    glob: "wave-*.md"\n    results-glob: "wave-*-results.md"\n    mode: many\n' >> .d-check.yml
+  schritt git mv docs/plan/planning/wave-1-basis.md docs/plan/planning/done/ || return 1
+  sed -i '/^- \[wave-1-basis\](..\/wave-1-basis.md)$/d' docs/plan/planning/in-progress/roadmap.md
+  printf '| wave-1-basis | 2026-08-22 | done/wave-1-results.md |\n' >> docs/plan/planning/in-progress/roadmap.md
+  schritt git add -A && schritt git commit -qm "wave-1-basis geschlossen (ohne Notiz)" && schritt git push -q origin main || return 1
+  out=$(dcheck "$WORK/sim/alice"); befund "$out" "wave-1" "wave-results-missing" && ok=0 || ok=1
+  verdikt "s08a Welle geschlossen ohne Ergebnisnotiz: wave-results-missing" "wave-results-missing (target: wave-1)" "$(echo "$out"|tail -1)" $ok
   # sauber nachgezogen: Ergebnisnotiz liegt — der Slice der Welle ist weiter
   # beansprucht (in-progress/, und in bobs offenem PR): sieht das ein Sensor?
-  printf '# Welle 1 — Basis — Closure-Notiz\n\n**Welle:** welle-1-basis\n\nGeliefert: Kern-Schnittstelle. Offen geblieben: slice-001.\n' > docs/plan/planning/done/welle-1-results.md
-  schritt git add -A && schritt git commit -qm "welle-1-results" && schritt git push -q origin main || return 1
+  printf '# Welle 1 — Basis — Closure-Notiz\n\n**Welle:** wave-1-basis\n\nGeliefert: Kern-Schnittstelle. Offen geblieben: slice-001.\n' > docs/plan/planning/done/wave-1-results.md
+  schritt git add -A && schritt git commit -qm "wave-1-results" && schritt git push -q origin main || return 1
   out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s08b Welle sauber geschlossen, Slice der Welle weiter beansprucht: STILL" "0 Befunde (kein Sensor sieht den Widerspruch)" "$(echo "$out"|tail -1)" $ok
 }
@@ -282,13 +282,13 @@ s08_closure_unter_anspruch() {
 # Grenze — den PR-Rest faengt das Schema nicht"; TB-010).
 s09_vorvergabe() {
   topo
-  # welle-1-basis §4 vergibt slice-002 (Rand) — ohne Datei. bob zieht dieselbe
+  # wave-1-basis §4 vergibt slice-002 (Rand) — ohne Datei. bob zieht dieselbe
   # Nummer fuer etwas anderes, im PR.
   cd "$WORK/sim/bob"; schritt git switch -qc b/cache || return 1
   printf '# Slice slice-002: Cache\n\n**Welle:** ohne Welle\n\n**Verantwortlich:** bob.\n' > docs/plan/planning/open/slice-002-cache.md
   schritt git add -A && schritt git commit -qm "slice-002-cache" && schritt git push -q origin b/cache || return 1
   cd "$WORK/sim/seedclone" && git fetch -q && git merge -q --no-edit origin/b/cache >/dev/null 2>&1; rc=$?
-  plan=$(grep -c "slice-002 (Rand)" docs/plan/planning/welle-1-basis.md)
+  plan=$(grep -c "slice-002 (Rand)" docs/plan/planning/wave-1-basis.md)
   out=$(dcheck "$WORK/sim/seedclone"); still "$out" && d=0 || d=1
   [ $rc -eq 0 ] && [ "$plan" = 1 ] && [ $d = 0 ] && ok=0 || ok=1
   verdikt "s09 Vorvergabe: slice-002 im Wellen-Plan, anderswo vergeben — STILL" "Merge rc=0, beide Bedeutungen, 0 Befunde" "rc=$rc, Plan-Nennung=$plan, $(echo "$out"|tail -1)" $ok
@@ -585,14 +585,14 @@ s18_alias_und_invalidierung() {
 # Zielform nach Probe 2 (die den Entwurf geaendert hat): Der Geltungsbereich
 # steht im PFAD, weil require-pattern ihn nicht ausdruecken kann.
 #
-#   done/<welle-id>/archiv.zip + die Stubs der Welle
-#   done/<welle-id>-results.md   bleibt vollstaendig, bleibt flach
+#   done/<wave-id>/archive.zip + die Stubs der Welle
+#   done/<wave-id>-results.md   bleibt vollstaendig, bleibt flach
 #   done/slice-*.md              Slices der noch OFFENEN Welle, unberuehrt
 # Zwei Bedingungen, weil die Marke allein die Kuerzung nicht belegt: Ein Stub
 # traegt `Archiviert mit:` UND keine H2 — ein ungekuerzter Plan hat seine
 # Abschnitte noch. Das (?m) ist noetig: RE2 ankert `^` sonst am Textanfang.
 ARCHIVSENSOR='structure:
-  - files: "docs/plan/planning/done/welle-*/slice-*.md"
+  - files: "docs/plan/planning/done/wave-*/slice-*.md"
     section-pattern: "^# slice-"
     require-pattern: "\\*\\*Archiviert mit:\\*\\*"
     forbid-pattern: "(?m)^## "
@@ -602,7 +602,7 @@ volltext() { # $1 datei  $2 titel  $3 welle-feld
   printf '# %s\n\n**Welle:** %s\n\n## 7. Lerneintrag\n\nBeobachtung: die Zusage traegt den Sensor nicht, das Gate blieb still.\nDas Regelwerk nennt den Anker, der Beleg fehlt.\n\n## 8. Abnahme\n\nDoD erfuellt, Gate gruen, Zusage belegt.\n' "$2" "$3" > "$1"
 }
 stub() { # $1 datei  $2 titel  $3 welle-feld  $4 archiviert-mit  $5 innen-pfad
-  printf '# %s\n\n> **ARCHIVIERT** — Volltext:\n> `unzip -p done/%s/archiv.zip %s`\n\n**Welle:** %s\n**Archiviert mit:** %s · **Geschlossen:** 2026-08-31\n**Hervorgegangen:** BEO-001\n' \
+  printf '# %s\n\n> **ARCHIVIERT** — Volltext:\n> `unzip -p done/%s/archive.zip %s`\n\n**Welle:** %s\n**Archiviert mit:** %s · **Geschlossen:** 2026-08-31\n**Hervorgegangen:** BEO-001\n' \
     "$2" "$4" "$5" "$3" "$4" > "$1"
 }
 # Die AUSWAHL — der Teil, an dem die Operation falsch liegen kann. Der Entwurf
@@ -639,15 +639,15 @@ archiviere() { # $1 clone  $2 welle   (die Auswahl trifft die Operation, nicht d
   ARCHIVZAHL="$(printf '%s\n' "$@" | grep -c '/slice-') Slices, $(printf '%s\n' "$@" | grep -c '/2026-') Reviews"
   local P="$w/docs/plan/planning" d="$w/docs/plan/planning/done/$welle"
   mkdir -p "$d"
-  ( cd "$w" && zip -qrX "docs/plan/planning/done/$welle/archiv.zip" "$@" ) || return 1
+  ( cd "$w" && zip -qrX "docs/plan/planning/done/$welle/archive.zip" "$@" ) || return 1
   local f
   for f in "$@"; do
     local base; base="$(basename "$f")"
     case "$base" in
       slice-*) local wf="$welle"; grep -q '^\*\*Welle:\*\* ohne Welle' "$w/$f" && wf="ohne Welle"
                stub "$d/$base" "${base%.md}" "$wf" "$welle" "$f" ;;
-      welle-*) # eigene Form: Zeiger auf die Ergebnisnotiz + Zahl der Vorgaenge
-               printf '# %s\n\n> **ARCHIVIERT** — Volltext:\n> `unzip -p done/%s/archiv.zip %s`\n\n**Geschlossen:** 2026-08-31 · **Ergebnisnotiz:** %s-results.md\n**Archivierte Vorgaenge:** %s\n' \
+      wave-*) # eigene Form: Zeiger auf die Ergebnisnotiz + Zahl der Vorgaenge
+               printf '# %s\n\n> **ARCHIVIERT** — Volltext:\n> `unzip -p done/%s/archive.zip %s`\n\n**Geschlossen:** 2026-08-31 · **Ergebnisnotiz:** %s-results.md\n**Archivierte Vorgaenge:** %s\n' \
                  "${base%.md}" "$welle" "$f" "$welle" "$ARCHIVZAHL" > "$d/$base" ;;
       *)       ;;   # Reviews bekommen KEINEN Stub — sie haben keine eigene Identitaet
     esac
@@ -663,7 +663,7 @@ archiviere() { # $1 clone  $2 welle   (die Auswahl trifft die Operation, nicht d
   local b2
   for f in "$@"; do
     b2="$(basename "$f")"
-    case "$b2" in slice-*|welle-*) ;; *) continue;; esac
+    case "$b2" in slice-*|wave-*) ;; *) continue;; esac
     ( cd "$w/docs/plan/planning/done" && grep -rl "]($b2)" --include=*.md . 2>/dev/null | while read -r t; do
         sed -i "s|]($b2)|]($welle/$b2)|g" "$t"; done ) || true
   done
@@ -674,28 +674,28 @@ s19_archivierung() {
   cd "$WORK/sim/alice"
   P=docs/plan/planning
   mkdir -p docs/reviews
-  volltext "$P/done/slice-003-cache.md"   "slice-003 — Cache"        "welle-2-ausbau"
-  volltext "$P/done/slice-004-fixture.md" "slice-004 — Fixture"      "welle-2-ausbau"
+  volltext "$P/done/slice-003-cache.md"   "slice-003 — Cache"        "wave-2-ausbau"
+  volltext "$P/done/slice-004-fixture.md" "slice-004 — Fixture"      "wave-2-ausbau"
   volltext "$P/done/slice-005-wartung.md" "slice-005 — Wartung"      "ohne Welle"
-  volltext "$P/done/slice-051-laufend.md" "slice-051 — Laufend"      "welle-3-offen"
-  volltext "$P/done/welle-2-ausbau.md"    "welle-2-ausbau — Ausbau"  "welle-2-ausbau"
+  volltext "$P/done/slice-051-laufend.md" "slice-051 — Laufend"      "wave-3-offen"
+  volltext "$P/done/wave-2-ausbau.md"    "wave-2-ausbau — Ausbau"  "wave-2-ausbau"
   printf '# Review slice-003\n\nHIGH-1: die Zusage traegt den Sensor nicht.\n' > docs/reviews/2026-08-30-slice-003-review.md
   printf '# Review slice-004\n\nMEDIUM-2: das Gate blieb still.\n' > docs/reviews/2026-08-30-slice-004-review.md
   # Zwei ECHTE Verweis-Formen auf die Slices: aus dem Register (mit done/-Praefix)
   # und aus der Ergebnisnotiz, die selbst in done/ liegt (geschwister-relativ).
-  printf '# Welle 2 — Ergebnisnotiz\n\nGeliefert: Cache und Fixture.\nSlices: [slice-003](slice-003-cache.md), [slice-004](slice-004-fixture.md).\n' > "$P/done/welle-2-results.md"
+  printf '# Welle 2 — Ergebnisnotiz\n\nGeliefert: Cache und Fixture.\nSlices: [slice-003](slice-003-cache.md), [slice-004](slice-004-fixture.md).\n' > "$P/done/wave-2-results.md"
   printf '| BEO-009 | Zusage ohne Sensor | Kern | 1× | [slice-003](done/slice-003-cache.md) | offen |\n' >> "$P/observations.md"
   printf '%s' "$ARCHIVSENSOR" >> .d-check.yml
   sed -i 's/^modules: \[links, anchors, planning\]$/modules: [links, anchors, planning, structure]/' .d-check.yml
-  schritt git add -A && schritt git commit -qm "welle-2 geschlossen, Volltexte liegen" || return 1
+  schritt git add -A && schritt git commit -qm "wave-2 geschlossen, Volltexte liegen" || return 1
   base=$(git rev-parse HEAD)
   vorher=$(grep -rc "Zusage\|Gate\|Anker" $P/done docs/reviews 2>/dev/null | awk -F: '{s+=$2} END{print s+0}')
 
-  archiviere "$WORK/sim/alice" welle-2-ausbau || { echo "  KAPUTT ($CUR): archiviere fehlgeschlagen"; return 1; }
-  schritt git add -A && schritt git commit -qm "welle-2 archiviert" && schritt git push -q origin main || return 1
+  archiviere "$WORK/sim/alice" wave-2-ausbau || { echo "  KAPUTT ($CUR): archiviere fehlgeschlagen"; return 1; }
+  schritt git add -A && schritt git commit -qm "wave-2 archiviert" && schritt git push -q origin main || return 1
 
-  imzip=$(unzip -Z1 "$P/done/welle-2-ausbau/archiv.zip" | grep -c '\.md$')
-  stubs=$(ls "$P/done/welle-2-ausbau"/*.md 2>/dev/null | wc -l)
+  imzip=$(unzip -Z1 "$P/done/wave-2-ausbau/archive.zip" | grep -c '\.md$')
+  stubs=$(ls "$P/done/wave-2-ausbau"/*.md 2>/dev/null | wc -l)
   [ "$imzip" = 6 ] && [ "$stubs" = 4 ] && ok=0 || ok=1
   verdikt "s19a Archivierungs-Lauf: 6 Volltexte im Zip, 4 Stubs (Reviews ohne)" "Zip 6, Stubs 4" "Zip $imzip, Stubs $stubs" $ok
 
@@ -703,56 +703,56 @@ s19_archivierung() {
   # Kuerzen. Gemessen an einer Mutation (Stubs faellt aus) blieb dieses Verdikt
   # gruen — deshalb haengt es jetzt zusaetzlich an den vier Stubs.
   nachher=$(grep -rc "Zusage\|Gate\|Anker" $P/done docs/reviews 2>/dev/null | awk -F: '{s+=$2} END{print s+0}')
-  n_stubs=$(ls "$P/done/welle-2-ausbau"/*.md 2>/dev/null | wc -l)
+  n_stubs=$(ls "$P/done/wave-2-ausbau"/*.md 2>/dev/null | wc -l)
   [ "$vorher" -gt 0 ] && [ "$nachher" -lt "$vorher" ] && [ "$n_stubs" = 4 ] && ok=0 || ok=1
   verdikt "s19b Trefferzeilen fallen, UND die vier Stubs stehen (gekuerzt, nicht geloescht)" "nachher < vorher > 0, 4 Stubs" "vorher=$vorher, nachher=$nachher, Stubs=$n_stubs" $ok
 
-  wf=$(grep -m1 '^\*\*Welle:\*\*' "$P/done/welle-2-ausbau/slice-005-wartung.md" | sed 's/\*\*//g')
-  am=$(grep -m1 -o 'Archiviert mit:\*\* [a-z0-9-]*' "$P/done/welle-2-ausbau/slice-005-wartung.md" | sed 's/\*\*//')
-  [ "$wf" = "Welle: ohne Welle" ] && [ "$am" = "Archiviert mit: welle-2-ausbau" ] && ok=0 || ok=1
+  wf=$(grep -m1 '^\*\*Welle:\*\*' "$P/done/wave-2-ausbau/slice-005-wartung.md" | sed 's/\*\*//g')
+  am=$(grep -m1 -o 'Archiviert mit:\*\* [a-z0-9-]*' "$P/done/wave-2-ausbau/slice-005-wartung.md" | sed 's/\*\*//')
+  [ "$wf" = "Welle: ohne Welle" ] && [ "$am" = "Archiviert mit: wave-2-ausbau" ] && ok=0 || ok=1
   verdikt "s19c wellenloser Slice: Welle bleibt 'ohne Welle', Archiviert mit nennt die einsammelnde" "beide Felder getrennt" "$wf / $am" $ok
 
-  ez=$(grep -c 'Ergebnisnotiz:\*\* welle-2-ausbau-results.md' "$P/done/welle-2-ausbau/welle-2-ausbau.md")
-  vz=$(grep -o 'Archivierte Vorgaenge:\*\* [0-9]* Slices, [0-9]* Reviews' "$P/done/welle-2-ausbau/welle-2-ausbau.md" | sed 's/.*\*\* //')
+  ez=$(grep -c 'Ergebnisnotiz:\*\* wave-2-ausbau-results.md' "$P/done/wave-2-ausbau/wave-2-ausbau.md")
+  vz=$(grep -o 'Archivierte Vorgaenge:\*\* [0-9]* Slices, [0-9]* Reviews' "$P/done/wave-2-ausbau/wave-2-ausbau.md" | sed 's/.*\*\* //')
   [ "$ez" = 1 ] && [ "$vz" = "3 Slices, 2 Reviews" ] && ok=0 || ok=1
   verdikt "s19i Welle-Stub traegt seine EIGENE Form (Ergebnisnotiz + Vorgangszahl)" "Zeiger auf results.md, '3 Slices, 2 Reviews'" "Zeiger=$ez, Zahl='$vz'" $ok
 
   out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
   verdikt "s19d beide Verweis-Formen loesen nach dem Umzug auf" "0 Befunde" "$(echo "$out"|tail -1)" $ok
 
-  sed -i 's|(welle-2-ausbau/slice-003-cache.md)|(slice-003-cache.md)|' "$P/done/welle-2-results.md"
+  sed -i 's|(wave-2-ausbau/slice-003-cache.md)|(slice-003-cache.md)|' "$P/done/wave-2-results.md"
   # Vorbedingung: der injizierte Defekt muss wirklich drinstehen — sonst pruefte
   # die Gegenprobe ein No-op und bliebe aus dem falschen Grund gruen.
-  grep -q '](slice-003-cache.md)' "$P/done/welle-2-results.md" || { echo "  KAPUTT ($CUR): Defekt-Injektion griff nicht"; return 1; }
+  grep -q '](slice-003-cache.md)' "$P/done/wave-2-results.md" || { echo "  KAPUTT ($CUR): Defekt-Injektion griff nicht"; return 1; }
   out=$(dcheck "$WORK/sim/alice"); befund "$out" "slice-003-cache.md" "target-missing" && ok=0 || ok=1
   verdikt "s19e Gegenprobe: ohne Verweis-Nachzug meldet links target-missing" "target-missing auf dem alten Pfad" "$(echo "$out"|tail -1)" $ok
-  sed -i 's|(slice-003-cache.md)|(welle-2-ausbau/slice-003-cache.md)|' "$P/done/welle-2-results.md"
+  sed -i 's|(slice-003-cache.md)|(wave-2-ausbau/slice-003-cache.md)|' "$P/done/wave-2-results.md"
 
-  volltext "$P/done/welle-2-ausbau/slice-006-vergessen.md" "slice-006 — Vergessen" "welle-2-ausbau"
+  volltext "$P/done/wave-2-ausbau/slice-006-vergessen.md" "slice-006 — Vergessen" "wave-2-ausbau"
   out=$(dcheck "$WORK/sim/alice")
   printf '%s' "$out" | grep -qF "slice-006-vergessen.md:1" && printf '%s' "$out" | grep -qF "section-pattern-missing" && ok=0 || ok=1
   verdikt "s19f Deckungs-Sensor: nicht gekuerzter Slice im Wellen-Verzeichnis wird gemeldet" "section-pattern-missing auf slice-006" "$(echo "$out"|tail -1)" $ok
   # s19g prueft die AUSWAHL: Der Slice der offenen Welle darf weder im Archiv
   # landen noch aus done/ verschwinden — und der Sensor darf ihn nicht melden.
-  imarchiv=$(unzip -Z1 "$P/done/welle-2-ausbau/archiv.zip" | grep -c 'slice-051' || true)
+  imarchiv=$(unzip -Z1 "$P/done/wave-2-ausbau/archive.zip" | grep -c 'slice-051' || true)
   flach=$([ -f "$P/done/slice-051-laufend.md" ] && echo ja || echo nein)
   gemeldet=$(printf '%s' "$out" | grep -cF 'slice-051')
   [ "$imarchiv" = 0 ] && [ "$flach" = ja ] && [ "$gemeldet" = 0 ] && ok=0 || ok=1
   verdikt "s19g Slice der offenen Welle: nicht eingesammelt, nicht gemeldet" "nicht im Archiv, liegt flach, 0 Meldungen" "Archiv=$imarchiv, flach=$flach, gemeldet=$gemeldet" $ok
-  rm -f "$P/done/welle-2-ausbau/slice-006-vergessen.md"
+  rm -f "$P/done/wave-2-ausbau/slice-006-vergessen.md"
 
   # Die schaerfere Haelfte: Marke da, Kuerzung NICHT. Genau der Fall, den der
   # Sensor vorher durchliess — er sah die Marke, nicht den Volltext.
-  volltext "$P/done/welle-2-ausbau/slice-007-luege.md" "slice-007 — Marke ohne Kuerzung" "welle-2-ausbau"
-  printf '**Archiviert mit:** welle-2-ausbau\n' >> "$P/done/welle-2-ausbau/slice-007-luege.md"
+  volltext "$P/done/wave-2-ausbau/slice-007-luege.md" "slice-007 — Marke ohne Kuerzung" "wave-2-ausbau"
+  printf '**Archiviert mit:** wave-2-ausbau\n' >> "$P/done/wave-2-ausbau/slice-007-luege.md"
   out=$(dcheck "$WORK/sim/alice")
   printf '%s' "$out" | grep -qF "slice-007-luege.md:1" && printf '%s' "$out" | grep -qF "section-forbidden" && ok=0 || ok=1
   verdikt "s19j Marke da, aber nicht gekuerzt: section-forbidden (der Plan hat noch H2)" "section-forbidden auf slice-007" "$(echo "$out"|tail -1)" $ok
-  rm -f "$P/done/welle-2-ausbau/slice-007-luege.md"
+  rm -f "$P/done/wave-2-ausbau/slice-007-luege.md"
 
   rm -rf "$WORK/sim/flach"
   git clone -q --depth 1 "file://$WORK/sim/origin.git" "$WORK/sim/flach" 2>/dev/null
-  aus=$(cd "$WORK/sim/flach" && unzip -p "$P/done/welle-2-ausbau/archiv.zip" docs/plan/planning/done/slice-003-cache.md 2>/dev/null | head -1)
+  aus=$(cd "$WORK/sim/flach" && unzip -p "$P/done/wave-2-ausbau/archive.zip" docs/plan/planning/done/slice-003-cache.md 2>/dev/null | head -1)
   hist=$(cd "$WORK/sim/flach" && git show "$base:docs/plan/planning/done/slice-003-cache.md" 2>&1 | head -1)
   echo "$aus" | grep -q "slice-003" && echo "$hist" | grep -qi "objektname\|object name\|fatal" && ok=0 || ok=1
   verdikt "s19h flacher Klon: Archiv liefert den Volltext, die git-Historie nicht" "unzip ok, git show scheitert" "unzip='${aus:0:22}' git='${hist:0:34}'" $ok
@@ -1065,18 +1065,18 @@ s24_vorabvergabe() {
   topo
   cd "$WORK/sim/alice" || return 1
   schritt git switch -qc a/vorab || return 1
-  printf -- '- slice-003 (Cache) — vorvergeben, noch keine Datei.\n' >> docs/plan/planning/welle-1-basis.md
+  printf -- '- slice-003 (Cache) — vorvergeben, noch keine Datei.\n' >> docs/plan/planning/wave-1-basis.md
   schritt git add -A && schritt git commit -qm "slice-003 vorvergeben (alice)" && schritt git push -q origin a/vorab || return 1
   cd "$WORK/sim/bob" || return 1
   schritt git switch -qc b/vorab || return 1
-  printf -- '- slice-003 (Index) — vorvergeben, noch keine Datei.\n' >> docs/plan/planning/welle-1-basis.md
+  printf -- '- slice-003 (Index) — vorvergeben, noch keine Datei.\n' >> docs/plan/planning/wave-1-basis.md
   schritt git add -A && schritt git commit -qm "slice-003 vorvergeben (bob)" && schritt git push -q origin b/vorab || return 1
   cd "$WORK/sim/seedclone" && git fetch -q origin
   schritt git merge -q --no-edit origin/a/vorab || return 1
   git merge -q --no-edit origin/b/vorab >/dev/null 2>&1; rc=$?
-  konflikt=$(git ls-files -u | grep -c 'welle-1-basis.md' || true)
+  konflikt=$(git ls-files -u | grep -c 'wave-1-basis.md' || true)
   [ $rc -ne 0 ] && [ "$konflikt" -gt 0 ] && ok=0 || ok=1
-  verdikt "s24a Vorabvergabe in EINER Welle-Datei: LAUT" "Merge-Konflikt auf welle-1-basis.md" "rc=$rc, $konflikt Konflikt-Eintraege" $ok
+  verdikt "s24a Vorabvergabe in EINER Welle-Datei: LAUT" "Merge-Konflikt auf wave-1-basis.md" "rc=$rc, $konflikt Konflikt-Eintraege" $ok
 
   # --- s24b: dieselben zwei Ansprueche als je eigene Slice-Datei -> STILL.
   # Erwartete Stille an einer positiven Vorbedingung: beide Dateien liegen
@@ -1104,23 +1104,23 @@ s24_vorabvergabe() {
   # Deshalb heisst die Form "lauter, aber nicht garantiert laut".
   topo
   cd "$WORK/sim/seedclone" || return 1
-  { printf '\n## 4. Lange Liste\n\n'; i=1; while [ $i -le 40 ]; do printf -- '- slice-%03d (Fuellung).\n' $i; i=$((i+1)); done; } >> docs/plan/planning/welle-1-basis.md
+  { printf '\n## 4. Lange Liste\n\n'; i=1; while [ $i -le 40 ]; do printf -- '- slice-%03d (Fuellung).\n' $i; i=$((i+1)); done; } >> docs/plan/planning/wave-1-basis.md
   schritt git add -A && schritt git commit -qm "lange Slice-Liste" && schritt git push -q origin main || return 1
   cd "$WORK/sim/alice" && schritt git pull -q --no-rebase origin main || return 1
   schritt git switch -qc a/weit || return 1
-  sed -i '0,/^- slice-001 (Fuellung)\.$/s//- slice-001 (Fuellung).\n- slice-101 (Cache) — vorvergeben./' docs/plan/planning/welle-1-basis.md
-  schritt grep -q 'slice-101 (Cache)' docs/plan/planning/welle-1-basis.md || return 1
+  sed -i '0,/^- slice-001 (Fuellung)\.$/s//- slice-001 (Fuellung).\n- slice-101 (Cache) — vorvergeben./' docs/plan/planning/wave-1-basis.md
+  schritt grep -q 'slice-101 (Cache)' docs/plan/planning/wave-1-basis.md || return 1
   schritt git commit -qam "slice-101 oben (alice)" && schritt git push -q origin a/weit || return 1
   cd "$WORK/sim/bob" && schritt git pull -q --no-rebase origin main || return 1
   schritt git switch -qc b/weit || return 1
-  printf -- '- slice-101 (Index) — vorvergeben.\n' >> docs/plan/planning/welle-1-basis.md
+  printf -- '- slice-101 (Index) — vorvergeben.\n' >> docs/plan/planning/wave-1-basis.md
   schritt git commit -qam "slice-101 unten (bob)" && schritt git push -q origin b/weit || return 1
   cd "$WORK/sim/seedclone" && git fetch -q origin
   schritt git merge -q --no-edit origin/a/weit || return 1
   git merge -q --no-edit origin/b/weit >/dev/null 2>&1; rc=$?
   # Positive Vorbedingung: die Nummer steht wirklich zweimal, sonst bestuende
   # die Stille auch ueber einem Baum, in dem gar nichts angekommen ist.
-  doppelt=$(grep -c 'slice-101' docs/plan/planning/welle-1-basis.md || true)
+  doppelt=$(grep -c 'slice-101' docs/plan/planning/wave-1-basis.md || true)
   schritt test "$doppelt" = 2 || return 1
   konflikt=$(git ls-files -u | wc -l)
   [ $rc -eq 0 ] && [ "$konflikt" = 0 ] && ok=0 || ok=1
@@ -1132,15 +1132,15 @@ s24_vorabvergabe() {
   # Im Zweig-Fall (s24c) blieben beide erhalten.
   topo
   cd "$WORK/sim/alice" || return 1
-  A=$(cat docs/plan/planning/welle-1-basis.md)
-  B=$(cat docs/plan/planning/welle-1-basis.md)
-  printf '%s\n- slice-003 (Cache) — vorvergeben.\n' "$A" > docs/plan/planning/welle-1-basis.md
+  A=$(cat docs/plan/planning/wave-1-basis.md)
+  B=$(cat docs/plan/planning/wave-1-basis.md)
+  printf '%s\n- slice-003 (Cache) — vorvergeben.\n' "$A" > docs/plan/planning/wave-1-basis.md
   # Positive Vorbedingung: der erste Anspruch steht wirklich, bevor der zweite
   # schreibt. Ohne sie bestuende das Verdikt auch, wenn nie einer da war.
-  schritt grep -q 'slice-003 (Cache)' docs/plan/planning/welle-1-basis.md || return 1
-  printf '%s\n- slice-003 (Index) — vorvergeben.\n' "$B" > docs/plan/planning/welle-1-basis.md
-  cache=$(grep -c 'slice-003 (Cache)' docs/plan/planning/welle-1-basis.md || true)
-  index=$(grep -c 'slice-003 (Index)' docs/plan/planning/welle-1-basis.md || true)
+  schritt grep -q 'slice-003 (Cache)' docs/plan/planning/wave-1-basis.md || return 1
+  printf '%s\n- slice-003 (Index) — vorvergeben.\n' "$B" > docs/plan/planning/wave-1-basis.md
+  cache=$(grep -c 'slice-003 (Cache)' docs/plan/planning/wave-1-basis.md || true)
+  index=$(grep -c 'slice-003 (Index)' docs/plan/planning/wave-1-basis.md || true)
   konflikt=$(git ls-files -u | wc -l)
   [ "$cache" = 0 ] && [ "$index" = 1 ] && [ "$konflikt" = 0 ] && ok=0 || ok=1
   verdikt "s24d dieselbe Arbeitskopie, zwei Schreiber: ANSPRUCH VERLOREN, still" "erster Anspruch weg (0x Cache), zweiter steht (1x Index), 0 Konflikte" "Cache=$cache, Index=$index, $konflikt Konflikt-Eintraege" $ok
@@ -1152,50 +1152,50 @@ s24_vorabvergabe() {
   topo
   cd "$WORK/sim/alice" || return 1
   schritt git switch -qc a/welle || return 1
-  printf '# Welle welle-2-ausbau: Ausbau\n' > docs/plan/planning/welle-2-ausbau.md
-  sed -i 's#^- \[welle-1-basis\](../welle-1-basis.md)$#- [welle-1-basis](../welle-1-basis.md)\n- [welle-2-ausbau](../welle-2-ausbau.md)#' docs/plan/planning/in-progress/roadmap.md
-  schritt grep -q 'welle-2-ausbau' docs/plan/planning/in-progress/roadmap.md || return 1
-  schritt git add -A && schritt git commit -qm "welle-2 eroeffnet (alice)" && schritt git push -q origin a/welle || return 1
+  printf '# Welle wave-2-ausbau: Ausbau\n' > docs/plan/planning/wave-2-ausbau.md
+  sed -i 's#^- \[wave-1-basis\](../wave-1-basis.md)$#- [wave-1-basis](../wave-1-basis.md)\n- [wave-2-ausbau](../wave-2-ausbau.md)#' docs/plan/planning/in-progress/roadmap.md
+  schritt grep -q 'wave-2-ausbau' docs/plan/planning/in-progress/roadmap.md || return 1
+  schritt git add -A && schritt git commit -qm "wave-2 eroeffnet (alice)" && schritt git push -q origin a/welle || return 1
   cd "$WORK/sim/bob" || return 1
   schritt git switch -qc b/welle || return 1
-  printf '# Welle welle-3-betrieb: Betrieb\n' > docs/plan/planning/welle-3-betrieb.md
-  sed -i 's#^- \[welle-1-basis\](../welle-1-basis.md)$#- [welle-1-basis](../welle-1-basis.md)\n- [welle-3-betrieb](../welle-3-betrieb.md)#' docs/plan/planning/in-progress/roadmap.md
-  schritt grep -q 'welle-3-betrieb' docs/plan/planning/in-progress/roadmap.md || return 1
-  schritt git add -A && schritt git commit -qm "welle-3 eroeffnet (bob)" && schritt git push -q origin b/welle || return 1
+  printf '# Welle wave-3-betrieb: Betrieb\n' > docs/plan/planning/wave-3-betrieb.md
+  sed -i 's#^- \[wave-1-basis\](../wave-1-basis.md)$#- [wave-1-basis](../wave-1-basis.md)\n- [wave-3-betrieb](../wave-3-betrieb.md)#' docs/plan/planning/in-progress/roadmap.md
+  schritt grep -q 'wave-3-betrieb' docs/plan/planning/in-progress/roadmap.md || return 1
+  schritt git add -A && schritt git commit -qm "wave-3 eroeffnet (bob)" && schritt git push -q origin b/welle || return 1
   cd "$WORK/sim/seedclone" && git fetch -q origin
   schritt git merge -q --no-edit origin/a/welle || return 1
   git merge -q --no-edit origin/b/welle >/dev/null 2>&1; rc=$?
   konflikt=$(git ls-files -u | grep -c 'roadmap.md' || true)
-  wellen=$(git ls-files -u | grep -c 'welle-[23]' || true)
+  wellen=$(git ls-files -u | grep -c 'wave-[23]' || true)
   [ $rc -ne 0 ] && [ "$konflikt" -gt 0 ] && [ "$wellen" = 0 ] && ok=0 || ok=1
   verdikt "s24e zwei verschiedene Wellen, eigene Zweige: LAUT auf der Liste" "Konflikt auf roadmap.md, KEINER auf den Welle-Dateien" "rc=$rc, $konflikt Roadmap-Eintraege, $wellen Welle-Datei-Eintraege" $ok
 
   # --- s24f: zwei Planner ziehen DIESELBE Welle-Nummer. Jeder leitet sie aus
-  # seinem eigenen Checkout ab ("hoechste plus eins"), beide kommen auf welle-2.
+  # seinem eigenen Checkout ab ("hoechste plus eins"), beide kommen auf wave-2.
   # Ohne Listen-Eintrag beruehren sie nur ihre eigenen Dateien — und dann ist
   # der Ausgang still. Das trennt die Nummer vom Register: s24e ist laut, weil
   # die Liste angefasst wird; hier wird sie nicht angefasst.
   topo
   cd "$WORK/sim/alice" || return 1
   schritt git switch -qc a/nummer || return 1
-  # Positive Vorbedingung: welle-2 ist im eigenen Checkout wirklich frei.
-  frei=$(ls docs/plan/planning/welle-2-*.md 2>/dev/null | wc -l)
+  # Positive Vorbedingung: wave-2 ist im eigenen Checkout wirklich frei.
+  frei=$(ls docs/plan/planning/wave-2-*.md 2>/dev/null | wc -l)
   schritt test "$frei" = 0 || return 1
-  printf '# Welle welle-2-cache: Cache\n' > docs/plan/planning/welle-2-cache.md
-  schritt git add -A && schritt git commit -qm "welle-2 (alice)" && schritt git push -q origin a/nummer || return 1
+  printf '# Welle wave-2-cache: Cache\n' > docs/plan/planning/wave-2-cache.md
+  schritt git add -A && schritt git commit -qm "wave-2 (alice)" && schritt git push -q origin a/nummer || return 1
   cd "$WORK/sim/bob" || return 1
   schritt git switch -qc b/nummer || return 1
-  frei=$(ls docs/plan/planning/welle-2-*.md 2>/dev/null | wc -l)
+  frei=$(ls docs/plan/planning/wave-2-*.md 2>/dev/null | wc -l)
   schritt test "$frei" = 0 || return 1
-  printf '# Welle welle-2-index: Index\n' > docs/plan/planning/welle-2-index.md
-  schritt git add -A && schritt git commit -qm "welle-2 (bob)" && schritt git push -q origin b/nummer || return 1
+  printf '# Welle wave-2-index: Index\n' > docs/plan/planning/wave-2-index.md
+  schritt git add -A && schritt git commit -qm "wave-2 (bob)" && schritt git push -q origin b/nummer || return 1
   cd "$WORK/sim/seedclone" && git fetch -q origin
   schritt git merge -q --no-edit origin/a/nummer || return 1
   git merge -q --no-edit origin/b/nummer >/dev/null 2>&1; rc=$?
-  doppelt=$(ls docs/plan/planning/welle-2-*.md 2>/dev/null | wc -l)
+  doppelt=$(ls docs/plan/planning/wave-2-*.md 2>/dev/null | wc -l)
   konflikt=$(git ls-files -u | wc -l)
   [ $rc -eq 0 ] && [ "$konflikt" = 0 ] && [ "$doppelt" = 2 ] && ok=0 || ok=1
-  verdikt "s24f zwei Planner, dieselbe Welle-Nummer: STILL" "Merge rc=0, 0 Konflikte, zwei Dateien unter welle-2" "rc=$rc, $konflikt Konflikt-Eintraege, $doppelt Dateien" $ok
+  verdikt "s24f zwei Planner, dieselbe Welle-Nummer: STILL" "Merge rc=0, 0 Konflikte, zwei Dateien unter wave-2" "rc=$rc, $konflikt Konflikt-Eintraege, $doppelt Dateien" $ok
 
   # --- s24g/s24h: Namens-Identitaet statt Nummer. Ohne Zaehler gibt es nichts
   # abzuleiten. Verschiedene Vorhaben -> verschiedene Namen -> sauber (s24g);
@@ -1204,19 +1204,19 @@ s24_vorabvergabe() {
   topo
   cd "$WORK/sim/alice" || return 1
   schritt git switch -qc a/name || return 1
-  printf '# Welle welle-cache-warmup: Cache\n' > docs/plan/planning/welle-cache-warmup.md
-  schritt git add -A && schritt git commit -qm "welle-cache-warmup (alice)" && schritt git push -q origin a/name || return 1
+  printf '# Welle wave-cache-warmup: Cache\n' > docs/plan/planning/wave-cache-warmup.md
+  schritt git add -A && schritt git commit -qm "wave-cache-warmup (alice)" && schritt git push -q origin a/name || return 1
   cd "$WORK/sim/bob" || return 1
   schritt git switch -qc b/name || return 1
-  printf '# Welle welle-index-rebuild: Index\n' > docs/plan/planning/welle-index-rebuild.md
-  schritt git add -A && schritt git commit -qm "welle-index-rebuild (bob)" && schritt git push -q origin b/name || return 1
+  printf '# Welle wave-index-rebuild: Index\n' > docs/plan/planning/wave-index-rebuild.md
+  schritt git add -A && schritt git commit -qm "wave-index-rebuild (bob)" && schritt git push -q origin b/name || return 1
   cd "$WORK/sim/seedclone" && git fetch -q origin
   schritt git merge -q --no-edit origin/a/name || return 1
   git merge -q --no-edit origin/b/name >/dev/null 2>&1; rc=$?
   konflikt=$(git ls-files -u | wc -l)
   # Positive Vorbedingung: beide Vorhaben sind wirklich angekommen und
   # unterscheidbar — sonst bestuende die Stille auch ueber einem leeren Merge.
-  beide=$(ls docs/plan/planning/welle-cache-warmup.md docs/plan/planning/welle-index-rebuild.md 2>/dev/null | wc -l)
+  beide=$(ls docs/plan/planning/wave-cache-warmup.md docs/plan/planning/wave-index-rebuild.md 2>/dev/null | wc -l)
   schritt test "$beide" = 2 || return 1
   [ $rc -eq 0 ] && [ "$konflikt" = 0 ] && ok=0 || ok=1
   verdikt "s24g Namens-Identitaet, verschiedene Vorhaben: SAUBER" "Merge rc=0, 0 Konflikte, beide Wellen unterscheidbar" "rc=$rc, $konflikt Konflikt-Eintraege, $beide Dateien" $ok
@@ -1225,18 +1225,18 @@ s24_vorabvergabe() {
   topo
   cd "$WORK/sim/alice" || return 1
   schritt git switch -qc a/gleich || return 1
-  printf '# Welle welle-cache-warmup: Cache (alice)\n' > docs/plan/planning/welle-cache-warmup.md
-  schritt git add -A && schritt git commit -qm "welle-cache-warmup (alice)" && schritt git push -q origin a/gleich || return 1
+  printf '# Welle wave-cache-warmup: Cache (alice)\n' > docs/plan/planning/wave-cache-warmup.md
+  schritt git add -A && schritt git commit -qm "wave-cache-warmup (alice)" && schritt git push -q origin a/gleich || return 1
   cd "$WORK/sim/bob" || return 1
   schritt git switch -qc b/gleich || return 1
-  printf '# Welle welle-cache-warmup: Cache (bob)\n' > docs/plan/planning/welle-cache-warmup.md
-  schritt git add -A && schritt git commit -qm "welle-cache-warmup (bob)" && schritt git push -q origin b/gleich || return 1
+  printf '# Welle wave-cache-warmup: Cache (bob)\n' > docs/plan/planning/wave-cache-warmup.md
+  schritt git add -A && schritt git commit -qm "wave-cache-warmup (bob)" && schritt git push -q origin b/gleich || return 1
   cd "$WORK/sim/seedclone" && git fetch -q origin
   schritt git merge -q --no-edit origin/a/gleich || return 1
   git merge -q --no-edit origin/b/gleich >/dev/null 2>&1; rc=$?
-  konflikt=$(git ls-files -u | grep -c 'welle-cache-warmup.md' || true)
+  konflikt=$(git ls-files -u | grep -c 'wave-cache-warmup.md' || true)
   [ $rc -ne 0 ] && [ "$konflikt" -gt 0 ] && ok=0 || ok=1
-  verdikt "s24h Namens-Identitaet, dasselbe Vorhaben: LAUT (add/add)" "Konflikt auf welle-cache-warmup.md" "rc=$rc, $konflikt Konflikt-Eintraege" $ok
+  verdikt "s24h Namens-Identitaet, dasselbe Vorhaben: LAUT (add/add)" "Konflikt auf wave-cache-warmup.md" "rc=$rc, $konflikt Konflikt-Eintraege" $ok
 
   # --- s24i: Zuteilung setzt EINE zuteilende Instanz voraus. Zwei Planner
   # eroeffnen je EIGENE Welle (Namens-Identitaet, kollidiert nicht) und teilen
@@ -1247,19 +1247,19 @@ s24_vorabvergabe() {
   topo
   cd "$WORK/sim/alice" || return 1
   schritt git switch -qc a/zuteil || return 1
-  printf '# Welle welle-cache: Cache\n\n## 4. Slices\n\n- slice-002 (Cache).\n' > docs/plan/planning/welle-cache.md
-  schritt grep -q 'slice-002 (Cache)' docs/plan/planning/welle-cache.md || return 1
-  schritt git add -A && schritt git commit -qm "welle-cache, slice-002 zugeteilt (alice)" && schritt git push -q origin a/zuteil || return 1
+  printf '# Welle wave-cache: Cache\n\n## 4. Slices\n\n- slice-002 (Cache).\n' > docs/plan/planning/wave-cache.md
+  schritt grep -q 'slice-002 (Cache)' docs/plan/planning/wave-cache.md || return 1
+  schritt git add -A && schritt git commit -qm "wave-cache, slice-002 zugeteilt (alice)" && schritt git push -q origin a/zuteil || return 1
   cd "$WORK/sim/bob" || return 1
   schritt git switch -qc b/zuteil || return 1
-  printf '# Welle welle-index: Index\n\n## 4. Slices\n\n- slice-002 (Index).\n' > docs/plan/planning/welle-index.md
-  schritt grep -q 'slice-002 (Index)' docs/plan/planning/welle-index.md || return 1
-  schritt git add -A && schritt git commit -qm "welle-index, slice-002 zugeteilt (bob)" && schritt git push -q origin b/zuteil || return 1
+  printf '# Welle wave-index: Index\n\n## 4. Slices\n\n- slice-002 (Index).\n' > docs/plan/planning/wave-index.md
+  schritt grep -q 'slice-002 (Index)' docs/plan/planning/wave-index.md || return 1
+  schritt git add -A && schritt git commit -qm "wave-index, slice-002 zugeteilt (bob)" && schritt git push -q origin b/zuteil || return 1
   cd "$WORK/sim/seedclone" && git fetch -q origin
   schritt git merge -q --no-edit origin/a/zuteil || return 1
   git merge -q --no-edit origin/b/zuteil >/dev/null 2>&1; rc=$?
   konflikt=$(git ls-files -u | wc -l)
-  doppelt=$(grep -c 'slice-002' docs/plan/planning/welle-cache.md docs/plan/planning/welle-index.md 2>/dev/null | awk -F: '{s+=$2} END{print s}')
+  doppelt=$(grep -c 'slice-002' docs/plan/planning/wave-cache.md docs/plan/planning/wave-index.md 2>/dev/null | awk -F: '{s+=$2} END{print s}')
   [ $rc -eq 0 ] && [ "$konflikt" = 0 ] && [ "$doppelt" = 2 ] && ok=0 || ok=1
   verdikt "s24i zwei Planner, je eigene Welle, dieselbe Slice-Nummer zugeteilt: STILL" "Merge rc=0, 0 Konflikte, slice-002 in ZWEI Wellen" "rc=$rc, $konflikt Konflikt-Eintraege, $doppelt Nennungen" $ok
 }
@@ -1499,38 +1499,38 @@ s26_matrix_planungsspalten() {
   cat >> .d-check.yml <<'EOF'
 matrix:
   classes:
-    - {name: spec, paths: [spec/lastenheft.md, spec/spezifikation.md, spec/architecture.md]}
+    - {name: spec, paths: [spec/lastenheft.md, spec/specification.md, spec/architecture.md]}
     - {name: adr, paths: ["docs/plan/adr/[0-9]*.md"], token: 'ADR-\d{4}'}
     - {name: slice, paths: ["docs/plan/planning/**/slice-*.md"], token: 'slice-[a-z0-9]+(-[a-z0-9]+)*'}
-    - {name: welle, paths: ["docs/plan/planning/**/welle-*.md"], token: 'welle-[a-z0-9]+(-[a-z0-9]+)*'}
+    - {name: wave, paths: ["docs/plan/planning/**/wave-*.md"], token: 'wave-[a-z0-9]+(-[a-z0-9]+)*'}
     - {name: carveout, paths: ["docs/plan/carveouts/CO-*.md"], token: 'CO-\d{3}'}
     - {name: roadmap, paths: ["docs/plan/planning/**/roadmap.md"]}
   rules:
-    - {from: spec, to: welle, allow: false}
+    - {from: spec, to: wave, allow: false}
     - {from: spec, to: carveout, allow: false}
     - {from: spec, to: roadmap, allow: false}
-    - {from: adr, to: welle, allow: false}
+    - {from: adr, to: wave, allow: false}
     - {from: adr, to: carveout, allow: false}
     - {from: adr, to: roadmap, allow: false}
 EOF
   mkdir -p spec docs/plan/carveouts
-  printf '# Spezifikation\n\nDie Basis liefert welle-1-basis.\n' > spec/spezifikation.md
+  printf '# Spezifikation\n\nDie Basis liefert wave-1-basis.\n' > spec/specification.md
   printf '# CO-001: Schuld\n' > docs/plan/carveouts/CO-001-schuld.md
   # Drei laute Zeilen und eine mit Marker, alle im Koerper (Geschichte ist ausgenommen).
   { head -1 docs/plan/adr/0001-kern.md
-    printf '\nSchuld: CO-001.\nZeitplan: [Roadmap](../planning/in-progress/roadmap.md).\nEntstanden in welle-1-basis. <!-- d-check:status-provenance -->\n'
+    printf '\nSchuld: CO-001.\nZeitplan: [Roadmap](../planning/in-progress/roadmap.md).\nEntstanden in wave-1-basis. <!-- d-check:status-provenance -->\n'
     tail -n +2 docs/plan/adr/0001-kern.md; } > "$WORK/adr.tmp" && cp "$WORK/adr.tmp" docs/plan/adr/0001-kern.md
   schritt git add -A && schritt git commit -qm "Spalten-Verweise aus Spec und ADR" || return 1
   schritt grep -q '^modules: \[matrix' .d-check.yml || return 1
   schritt grep -q 'status-provenance' docs/plan/adr/0001-kern.md || return 1
   out=$(dcheck "$WORK/sim/alice")
-  befund_in "$out" "spec/spezifikation.md" "welle-1-basis" "matrix-forbidden" && ok=0 || ok=1
+  befund_in "$out" "spec/specification.md" "wave-1-basis" "matrix-forbidden" && ok=0 || ok=1
   verdikt "s26a spec nennt eine Welle (Token): LAUT" "matrix-forbidden spec -> welle" "$(echo "$out"|tail -1)" $ok
   befund_in "$out" "docs/plan/adr/0001-kern.md" "CO-001" "matrix-forbidden" && ok=0 || ok=1
   verdikt "s26b ADR nennt einen Carveout (Token): LAUT" "matrix-forbidden adr -> carveout" "$(echo "$out"|tail -1)" $ok
   befund_in "$out" "docs/plan/adr/0001-kern.md" "../planning/in-progress/roadmap.md" "matrix-forbidden" && ok=0 || ok=1
   verdikt "s26c ADR verlinkt die Roadmap: LAUT" "matrix-forbidden adr -> roadmap" "$(echo "$out"|tail -1)" $ok
-  n=$(printf '%s' "$out" | grep "^docs/plan/adr/0001-kern.md:[0-9]*$(printf '\t')welle-1-basis" | wc -l)
+  n=$(printf '%s' "$out" | grep "^docs/plan/adr/0001-kern.md:[0-9]*$(printf '\t')wave-1-basis" | wc -l)
   [ "$n" = 0 ] && ok=0 || ok=1
   verdikt "s26d ADR nennt die Welle mit Marker am Ort: STILL" "kein Befund auf ADR -> welle, waehrend s26a-c im selben Lauf laut sind" "$n Treffer / $(echo "$out"|tail -1)" $ok
 }
@@ -1548,14 +1548,14 @@ ids:
     - {regex: 'ADR-([A-Z]+-)?\d{4}', target: docs/plan/adr/, link-policy: always}
 matrix:
   classes:
-    - {name: spec, paths: [spec/lastenheft.md, spec/spezifikation.md, spec/architecture.md]}
+    - {name: spec, paths: [spec/lastenheft.md, spec/specification.md, spec/architecture.md]}
     - {name: adr, paths: ["docs/plan/adr/[0-9]*.md", "docs/plan/adr/[A-Z]*-[0-9]*.md"]}
   rules:
     - {from: spec, to: adr, allow: false}
 EOF
   mkdir -p spec
   printf '# Lastenheft\n\nDie Basis folgt ADR-0001 im Text.\n' > spec/lastenheft.md
-  printf '# Spezifikation\n\nDer Bereich folgt ADR-IDX-0004 im Text.\n' > spec/spezifikation.md
+  printf '# Spezifikation\n\nDer Bereich folgt ADR-IDX-0004 im Text.\n' > spec/specification.md
   printf '# Architektur\n\nDie Basis folgt `ADR-0001` als Code.\n' > spec/architecture.md
   printf '# ADR-IDX-0004: Bereich\n\n**Status:** Accepted\n' > docs/plan/adr/IDX-0004-bereich.md
   printf '# Notiz\n\nDas Wort ADR- ohne Nummer. Verlinkt: [ADR-0001](plan/adr/0001-kern.md).\n' > docs/notiz.md
@@ -1566,7 +1566,7 @@ EOF
   out=$(dcheck "$WORK/sim/alice")
   befund_in "$out" "spec/lastenheft.md" "ADR-0001" "id-unlinked" && ok=0 || ok=1
   verdikt "s27a nackte ADR-Kennung im Fliesstext: LAUT" "id-unlinked auf spec/lastenheft.md, obwohl die adr-Klasse kein token traegt" "$(echo "$out"|tail -1)" $ok
-  befund_in "$out" "spec/spezifikation.md" "ADR-IDX-0004" "id-unlinked" && ok=0 || ok=1
+  befund_in "$out" "spec/specification.md" "ADR-IDX-0004" "id-unlinked" && ok=0 || ok=1
   verdikt "s27b nackte Kennung mit Bereichssegment: LAUT" "id-unlinked auf ADR-IDX-0004 (das Muster nimmt das Segment)" "$(echo "$out"|tail -1)" $ok
   befund_in "$out" "spec/architecture.md" "ADR-0001" "id-unlinked" && ok=0 || ok=1
   verdikt "s27c Kennung in Inline-Code: LAUT" "id-unlinked (link-policy: always)" "$(echo "$out"|tail -1)" $ok
@@ -1900,21 +1900,21 @@ s31_review_deckung() {
   verdikt "s31e Slug-Slice ohne match: name: LAUT, obwohl der Report da ist" "review-missing auf slice-tie-break.md (Kennung nicht als slice-<NNN> lesbar)" "$(echo "$out"|tail -1)" $ok
 
   # --- s31f: Ruhezustand mit Wellen — nach vollstaendigem Archivieren liegen in
-  # done/ nur ein Stub unter done/<welle-id>/ und die Ergebnisnotiz. Mit der
+  # done/ nur ein Stub unter done/<wave-id>/ und die Ergebnisnotiz. Mit der
   # Konfiguration der Vorlage (recursive, skip-pattern, skip-allows-empty) ist
   # das kein Befund (d-check v0.86.0). s31g ist die Kontrolle im selben Aufbau.
   topo; cd "$WORK/sim/alice" || return 1
   schritt reviewbaum . || return 1
-  mkdir -p docs/plan/planning/done/welle-1
-  printf '# slice-tie-break\n\n> **ARCHIVIERT** — Volltext: `unzip -p done/welle-1/archiv.zip slice-tie-break.md`\n' > docs/plan/planning/done/welle-1/slice-tie-break.md
-  printf '# Welle 1 — Closure-Notiz\n\nAlles archiviert.\n' > docs/plan/planning/done/welle-1-results.md
+  mkdir -p docs/plan/planning/done/wave-1
+  printf '# slice-tie-break\n\n> **ARCHIVIERT** — Volltext: `unzip -p done/wave-1/archive.zip slice-tie-break.md`\n' > docs/plan/planning/done/wave-1/slice-tie-break.md
+  printf '# Welle 1 — Closure-Notiz\n\nAlles archiviert.\n' > docs/plan/planning/done/wave-1-results.md
   # Archiviert: Volltext und Report liegen im Archiv, nicht mehr flach.
   schritt rm docs/plan/planning/done/slice-tie-break.md docs/reviews/2026-10-09-slice-tie-break.md || return 1
   # Vorbedingungen: kein Volltext-Slice mehr in done/, aber der Stub existiert
   # und traegt den Marker — sonst prueft das Verdikt etwas anderes.
   n=$(find docs/plan/planning/done -maxdepth 1 -name 'slice-*.md' | wc -l)
   schritt test "$n" = 0 || return 1
-  schritt grep -q '^> \*\*ARCHIVIERT\*\*' docs/plan/planning/done/welle-1/slice-tie-break.md || return 1
+  schritt grep -q '^> \*\*ARCHIVIERT\*\*' docs/plan/planning/done/wave-1/slice-tie-break.md || return 1
   schritt git add -A && schritt git commit -qm "Welle archiviert, done/ nur Stub und Ergebnisnotiz" || return 1
   out=$(dcheck "$WORK/sim/alice")
   still "$out" && ok=0 || ok=1
@@ -1937,7 +1937,7 @@ s31_review_deckung() {
   # der Vorlage ist er ausgenommen und die leere Menge der Ruhezustand.
   topo; cd "$WORK/sim/alice" || return 1
   schritt reviewbaum . || return 1
-  printf '# slice-tie-break\n\n> **ARCHIVIERT** — Volltext: `unzip -p done/slice-tie-break-archiv.zip slice-tie-break.md`\n' > docs/plan/planning/done/slice-tie-break.md
+  printf '# slice-tie-break\n\n> **ARCHIVIERT** — Volltext: `unzip -p done/slice-tie-break-archive.zip slice-tie-break.md`\n' > docs/plan/planning/done/slice-tie-break.md
   schritt rm docs/reviews/2026-10-09-slice-tie-break.md || return 1
   schritt grep -q '^> \*\*ARCHIVIERT\*\*' docs/plan/planning/done/slice-tie-break.md || return 1
   schritt git add -A && schritt git commit -qm "wellenlos archiviert, flacher Stub" || return 1
@@ -1997,13 +1997,33 @@ s31_review_deckung() {
   # Haelfte "Unterverzeichnisse werden gesehen", die s31f nur als Stille zeigt.
   topo; cd "$WORK/sim/alice" || return 1
   schritt reviewbaum . || return 1
-  mkdir -p docs/plan/planning/done/welle-1
-  printf '# slice-unten\n\n- [x] Review durchgeführt, Report unter `docs/reviews/` liegt vor\n' > docs/plan/planning/done/welle-1/slice-unten.md
-  schritt test -f docs/plan/planning/done/welle-1/slice-unten.md || return 1
+  mkdir -p docs/plan/planning/done/wave-1
+  printf '# slice-unten\n\n- [x] Review durchgeführt, Report unter `docs/reviews/` liegt vor\n' > docs/plan/planning/done/wave-1/slice-unten.md
+  schritt test -f docs/plan/planning/done/wave-1/slice-unten.md || return 1
   schritt git add -A && schritt git commit -qm "lebender Slice im Unterverzeichnis, ohne Report" || return 1
   out=$(dcheck "$WORK/sim/alice")
-  befund_in "$out" "docs/plan/planning/done/welle-1/slice-unten.md" "docs/reviews" "review-missing" && ok=0 || ok=1
-  verdikt "s31l lebender Slice in done/<welle-id>/ ohne Report: LAUT (recursive)" "review-missing auf done/welle-1/slice-unten.md" "$(echo "$out"|tail -1)" $ok
+  befund_in "$out" "docs/plan/planning/done/wave-1/slice-unten.md" "docs/reviews" "review-missing" && ok=0 || ok=1
+  verdikt "s31l lebender Slice in done/<wave-id>/ ohne Report: LAUT (recursive)" "review-missing auf done/wave-1/slice-unten.md" "$(echo "$out"|tail -1)" $ok
+}
+
+# s32 — Wellen-Praefix `wave-` und die beiden Globs (Kurs-Welle 165). Die
+# Vorlage setzt `glob`/`results-glob` ausdruecklich, weil der Werkzeug-Default
+# `welle-*` ist. Behauptet ist die Stille OHNE die Zeilen; sie zaehlt nur neben
+# s32a, das im selben Aufbau zeigt, dass `waves` die wave-Dateien liest.
+s32_wellen_praefix_globs() {
+  topo; cd "$WORK/sim/alice" || return 1
+  printf '  waves:\n    dir: docs/plan/planning\n    glob: "wave-*.md"\n    results-glob: "wave-*-results.md"\n    mode: many\n' >> .d-check.yml
+  printf '# Welle wave-3-x: X\n\n**Verantwortlich:** alice. **Datum:** 2026-11-22.\n' > docs/plan/planning/wave-3-x.md
+  schritt git add -A && schritt git commit -qm "flache Welle ohne Zeiger, Globs auf wave-" || return 1
+  out=$(dcheck "$WORK/sim/alice"); befund "$out" "wave-3" "wave-drift" && ok=0 || ok=1
+  verdikt "s32a Globs auf wave-*: Datei ohne Zeiger LAUT" "wave-drift (target: wave-3)" "$(echo "$out"|tail -1)" $ok
+  sed -i '/^    glob: "wave-\*\.md"$/d; /^    results-glob: "wave-\*-results\.md"$/d' .d-check.yml
+  n=$(grep -c 'glob:' .d-check.yml || true)
+  schritt test "$n" = 0 || return 1
+  schritt test -f docs/plan/planning/wave-3-x.md || return 1
+  schritt git commit -qam "Glob-Zeilen entfernt" || return 1
+  out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
+  verdikt "s32b derselbe Aufbau ohne die Glob-Zeilen: STILL (Default welle-* sieht keine wave-Datei)" "0 Befunde, waehrend s32a mit Globs im selben Aufbau laut ist" "$(echo "$out"|tail -1)" $ok
 }
 
 # ---------------------------------------------------------------------------
@@ -2041,6 +2061,7 @@ lauf s28 s28_guide_datei_wildwuchs
 lauf s29 s29_wip_lauf_zweig_feld
 lauf s30 s30_werkzeug_teil
 lauf s31 s31_review_deckung
+lauf s32 s32_wellen_praefix_globs
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

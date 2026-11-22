@@ -30,7 +30,7 @@ public final class Handler {
     }
 
     /**
-     * Bildet die Fehler-Codes aus spec/spezifikation.md §4 auf HTTP-Status ab.
+     * Bildet die Fehler-Codes aus spec/specification.md §4 auf HTTP-Status ab.
      * Unbekannte Fehler sind E099.
      */
     public static ErrorMapping statusFor(RuntimeException exc) {
@@ -50,7 +50,7 @@ public final class Handler {
         return searcher.search(req);
     }
 
-    /** Suche mit Fehler-Abbildung nach spec/spezifikation.md §4. */
+    /** Suche mit Fehler-Abbildung nach spec/specification.md §4. */
     public HttpResult handleSearchHttp(SearchRequest req) {
         try {
             final SearchResponse resp = searcher.search(req);
@@ -61,7 +61,7 @@ public final class Handler {
         }
     }
 
-    /** Reindex (LH-FA-01) mit Fehler-Abbildung nach spec/spezifikation.md §4. */
+    /** Reindex (LH-FA-01) mit Fehler-Abbildung nach spec/specification.md §4. */
     public HttpResult handleReindex(String directory) {
         if (indexer == null) {
             return new HttpResult(500, Map.of("error", "E099"));

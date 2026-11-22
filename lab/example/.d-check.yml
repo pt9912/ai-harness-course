@@ -30,7 +30,7 @@ matrix:
     # nennen — auch nicht in ihrer Historie; deshalb steht `Historie` unten
     # nicht in `exclude-sections`.
     - name: spec
-      paths: ["spec/lastenheft.md", "spec/spezifikation.md", "spec/architecture.md"]
+      paths: ["spec/lastenheft.md", "spec/specification.md", "spec/architecture.md"]
     - name: adr
       paths: ["docs/plan/adr/[0-9]*.md"]
       token: 'ADR-\d{4}'
@@ -46,9 +46,9 @@ matrix:
     # Matrix (Regelwerk grundlagen-referenz-richtung.md). Fuer Spec-Straten und
     # ADR sind sie ❌ — ohne Klasse waere die Kante verboten, aber ungeprueft.
     # Die Roadmap traegt kein Token: Sie wird nur ueber Links erreicht.
-    - name: welle
-      paths: ["docs/plan/planning/**/welle-*.md"]
-      token: 'welle-[a-z0-9]+(-[a-z0-9]+)*'
+    - name: wave
+      paths: ["docs/plan/planning/**/wave-*.md"]
+      token: 'wave-[a-z0-9]+(-[a-z0-9]+)*'
     - name: carveout
       paths: ["docs/plan/carveouts/CO-*.md"]
       token: 'CO-\d{3}'
@@ -58,13 +58,13 @@ matrix:
     # Kontext-Zeiger sind erlaubt und werden am Ort markiert
     # (<!-- d-check:status-provenance -->); alles Uebrige faellt.
     - {from: adr,  to: slice,   allow: false}
-    - {from: adr,  to: welle,   allow: false}
+    - {from: adr,  to: wave,    allow: false}
     - {from: adr,  to: carveout, allow: false}
     - {from: adr,  to: roadmap, allow: false}
     # Decken-Regel der Spec-Straten (Kurs §Referenz-Richtung, Regel 5).
     - {from: spec, to: adr,     allow: false}
     - {from: spec, to: slice,   allow: false}
-    - {from: spec, to: welle,   allow: false}
+    - {from: spec, to: wave,    allow: false}
     - {from: spec, to: carveout, allow: false}
     - {from: spec, to: roadmap, allow: false}
   status:
@@ -83,12 +83,6 @@ matrix:
     - "docs/plan/adr/0011-*.md"
     - "docs/plan/adr/0012-*.md"
     - "docs/plan/adr/0013-*.md"
-    # ADR-0019 nennt `welle-1-mvp.md` als Fundort in ADR-0011s Geschichte —
-    # vor der Klasse `welle` entstanden. Ein Marker in der Zeile waere eine
-    # Aenderung am Koerper einer Accepted-ADR (AGENTS.md §2.5, Kern-Aenderung);
-    # die Ausnahme steht darum hier. Eine Accepted-ADR waechst nicht mehr, der
-    # Eintrag deckt also keinen kuenftigen Verstoss still mit.
-    - "docs/plan/adr/0019-*.md"
   # Provenance in der ADR-Historie ist Kontext (Regel 5) — die Sektion heisst
   # hier `Geschichte`. `Historie` gehoert NICHT dazu: So heisst nur die Sektion
   # der Spec-Straten, und fuer die gilt die Ausnahme ausdruecklich nicht.
@@ -187,17 +181,18 @@ planning:
   closure:
     dir: docs/plan/planning/done
     # Kandidaten-Menge = ALLE Dateien im Ruheort, nicht nur die Slices.
-    # ADR-0011 §Geschichte zaehlt `welle-mvp.md` ausdruecklich zu den Dateien,
+    # ADR-0011 §Geschichte zaehlt die Welle-Datei (dort unter ihrem damaligen
+    # Namen `welle-1-mvp.md`, heute `wave-mvp.md`) ausdruecklich zu den Dateien,
     # fuer die die Pflicht gilt; `slice-*.md` waere unter-gefasst.
     glob: '*.md'
     # Die Schwelle ist eine ENTSCHEIDUNG, keine Einstellung: ADR-0011
     # §Entscheidung 1 sagt "mindestens zwei Saetze". d-checks Default ist 4 —
     # ein Gate schaerfer als seine bindende ADR, und genau daran scheiterte
-    # zuerst `welle-mvp.md`, dessen §7 laut `welle.template.md` ein Zeiger auf
+    # zuerst `wave-mvp.md`, dessen §7 laut `wave.template.md` ein Zeiger auf
     # die Ergebnis-Notiz ist und keine Notiz.
     min-sentences: 2
     # Um Ebene 1 geweitet gegenueber dem Default `^#{2,3} `: Die Welle-Ergebnis-
-    # notiz fuehrt ihre Bestimmung im TITEL (`welle-results.template.md` beginnt
+    # notiz fuehrt ihre Bestimmung im TITEL (`wave-results.template.md` beginnt
     # mit `# Welle <NN> — <Titel> — Closure-Notiz`). Ohne die Weitung meldet
     # ausgerechnet die Datei `closure-note-missing`, die die Notiz IST.
     # `Closure-Trigger` und `Offene Risiken zur Welle-Closure` bleiben draussen,
@@ -246,12 +241,16 @@ planning:
   # Datei). Der Ruhe-Marker geht unter `many` NICHT ein — seine Aussage liegt
   # vollstaendig bei `planning-drift`.
   # GRENZE: Unter `many` zaehlt jede Wellen-Kennung in der Prosa des Blocks als
-  # Zeiger; der Erklaertext dort bleibt deshalb kennungsfrei. Die uebrigen
-  # Schluessel (glob `welle-*.md`, results-glob `welle-*-results.md`,
-  # next-/closed-heading, done-dir `<dir>/done`) treffen die Defaults dieses
+  # Zeiger; der Erklaertext dort bleibt deshalb kennungsfrei.
+  # Die beiden Globs stehen ausdruecklich: Die Kennung beginnt mit `wave-`, der
+  # Werkzeug-Default ist `welle-*.md` / `welle-*-results.md`. Ohne die zwei
+  # Zeilen faende `waves` keine Wellen-Datei. Die uebrigen Schluessel
+  # (next-/closed-heading, done-dir `<dir>/done`) treffen die Defaults dieses
   # Repos und stehen darum nicht hier — wer das Layout aendert, setzt sie.
   waves:
     dir: docs/plan/planning
+    glob: 'wave-*.md'
+    results-glob: 'wave-*-results.md'
     mode: many
 
 # Linkpflicht fuer ADR-Kennungen. Nicht Kosmetik: `matrix` prueft den STATUS
@@ -294,7 +293,7 @@ ids:
 # Closure- und Ergebnis-Notizen) fuehren die Kennung, nicht die Adresse (Kurs
 # `referenz-richtung.md` Regel 5; Modul 5) — ein Pfad-Link bricht dort nach dem
 # Einfrieren und wird nie nachgezogen. Verlinkt ist die Slice-Kennung nur dort,
-# wo die Zeile lebt: in der Slice-Tabelle der Welle-Datei (`welle.template.md`
+# wo die Zeile lebt: in der Slice-Tabelle der Welle-Datei (`wave.template.md`
 # §4). Dort zieht der Uebergang den Link nach, `links` meldet das fehlende Ziel.
 
 # Review-Report-Deckung (Kurs `modul-05-planning-harness.md` §Ziel-Form:
@@ -330,7 +329,7 @@ reviews:
 # prueft die ganze Datei, nicht nur einen Abschnitt (dafuer gibt es hier noch
 # keine wachsende Baustelle). Startwert: Ist-Zeilenzahl (159) plus Marge, kein
 # erfundener Zielwert — sinken ist immer erlaubt, steigen nur mit sichtbarem
-# Commit an dieser Zeile und an SPEC-025 (spec/spezifikation.md §7), die den
+# Commit an dieser Zeile und an SPEC-025 (spec/specification.md §7), die den
 # Wert festlegt (Ratchet, kein Rueckbau-Zwang).
 file:
   - files: AGENTS.md

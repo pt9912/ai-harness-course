@@ -17,7 +17,7 @@ oder Adapter-Schicht mit austauschbarem Provider.
 
 - [`../docs/plan/adr/0001-hexagonale-architektur.md`](../docs/plan/adr/0001-hexagonale-architektur.md)
 - [`../docs/plan/adr/0002-modellwahl-embedding.md`](../docs/plan/adr/0002-modellwahl-embedding.md)
-- [`../../templates/docs/plan/adr/NNNN-titel.template.md`](../../templates/docs/plan/adr/NNNN-titel.template.md)
+- [`../../templates/docs/plan/adr/NNNN-title.template.md`](../../templates/docs/plan/adr/NNNN-title.template.md)
 
 ## Erwartetes Zwischenprodukt
 

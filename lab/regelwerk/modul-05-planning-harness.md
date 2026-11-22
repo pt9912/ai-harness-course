@@ -95,7 +95,7 @@ Archiv, und an seiner Stelle bleibt ein gekürzter **Stub** — Identität,
 Archiv-Zeiger, Zustand und die Kennungen, die den Slice überlebt haben
 ([Modul 6](modul-06-roadmap.md), Schritt 4). Die Verzeichnis-Position bleibt
 der Zustand. **Ohne Wellen tut es die Slice-Closure selbst** — nach den
-Paarungen, nach `done/slice-<Kennung>-archiv.zip` flach neben dem Stub
+Paarungen, nach `done/slice-<Kennung>-archive.zip` flach neben dem Stub
 ([Modul 6](modul-06-roadmap.md), *Wann Arbeit eine Welle braucht*). Die Station
 ist dieselbe, nur der Träger ein anderer.
 

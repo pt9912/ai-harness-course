@@ -10,7 +10,7 @@ docs/plan/planning/open/<slice-kennung>.md          # geplant, noch nicht gestar
 docs/plan/planning/next/<slice-kennung>.md          # priorisiert/eingeplant
 docs/plan/planning/in-progress/<slice-kennung>.md   # aktiv
 docs/plan/planning/done/<slice-kennung>.md          # abgeschlossen — ein Slice, eine Datei, derselbe Name über den ganzen Lifecycle
-docs/plan/planning/<welle-id>.md            # offene Wellen, flach (Modul 6)
+docs/plan/planning/<wave-id>.md            # offene Wellen, flach (Modul 6)
 docs/plan/planning/observations/            # Beobachtungs-Register: je Beobachtung ein Verzeichnis
 docs/plan/planning/reconciliation.md        # Reconciliation-Register: nur im Brownfield-Bootstrap
 docs/plan/planning/in-progress/roadmap.md   # Meilensteine, nächste Wellen, Zeiger auf offene
@@ -27,9 +27,17 @@ harness/mk/                 # Make-Fragmente von Werkzeugen; <werkzeug>.md = der
 .harness/                   # Skills, Tool-Allowlists, Checklisten-Middlewares
 ```
 
-Welche Form `<welle-id>` und `<slice-kennung>` haben, legt
+Welche Form `<wave-id>` und `<slice-kennung>` haben, legt
 [`grundlagen-source-precedence.md` §Vergabe](grundlagen-source-precedence.md#vergabe-woher-die-nächste-kennung-kommt)
 fest — hier steht nur, wo die Datei liegt, nicht, wie ihr Name entsteht.
+
+**Dateinamen sind englisch.** Deutsch bleibt ein Name nur, wenn das Artefakt
+kein gängiges englisches Wort hat: `lastenheft.md`. Fest bleiben die Namen, die
+ein fremdes Werkzeug erwartet (`AGENTS.md`, `README.md`, `Makefile`). Die Prosa
+bleibt deutsch — der Text sagt *Welle* und *Spezifikation*, die Dateien heißen
+`wave-<Kennung>.md` und `specification.md`. Das Kennungs-Präfix der Welle folgt
+derselben Regel, weil die Welle-Datei nach ihrer Kennung heißt. Platzhalter wie
+`<Kennung>` sind keine Namen und bleiben deutsch.
 
 ### Template-Schichtung — was der Rumpf trägt und was der Kommentar
 
@@ -106,7 +114,7 @@ ist, sondern was er zu tragen hat.
   ist entschieden, und die Entscheidung steht in der ADR. Die Probe dafür ist
   die Zeitrichtung — zeigt der Konjunktiv nach vorn oder zurück?
 - **Hard Rule:** *Ein Kommentar beschreibt, was da ist.* Wer Herkunft nennt,
-  nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit welle-<Kennung>`
+  nennt sie als **ein** auflösbares Feld — `LH-*`, `ADR-*`, `· seit wave-<Kennung>`
   ([`grundlagen-traceability.md` §Herkunfts-Anker](grundlagen-traceability.md#herkunfts-anker))
   — und nie als Absatz.
 - **Dieselbe Regel für Zustandsfelder.** Ein Feld, das einen *Zustand* trägt —
@@ -515,7 +523,7 @@ vorab (derselbe Startwert-Vorbehalt wie bei `file.max-lines`,
 Vorlagen:
 [`templates/harness/conventions.template.md`](../templates/harness/conventions.template.md)
 (Index) und
-[`templates/harness/conventions/MR-NNN-titel.template.md`](../templates/harness/conventions/MR-NNN-titel.template.md)
+[`templates/harness/conventions/MR-NNN-title.template.md`](../templates/harness/conventions/MR-NNN-title.template.md)
 (ein Eintrag).
 
 ### Jedes Artefakt hat einen Konsumenten

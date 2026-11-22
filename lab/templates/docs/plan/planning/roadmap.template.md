@@ -20,7 +20,7 @@ Zustand sind die flachen Welle-Dateien; woran gearbeitet wird, sagt das
 `Welle:`-Feld der Slices in `in-progress/`. Ziel, Trigger und
 Closure-Kriterien stehen in der Welle-Datei, nicht hier.
 
-- [<welle-id>](../<welle-id>.md)
+- [<wave-id>](../<wave-id>.md)
 
 <!-- BEDIENHINWEIS: Zwei unabhängige Aussagen in diesem Block. Die Liste oben
 folgt den Dateien (ein Zeiger je offener Welle-Datei). Trägt in-progress/
@@ -53,8 +53,8 @@ und geschätzter Aufwand (S/M/L, kein Termin).
 
 | Welle | Trigger | Wichtigste Slices | Geschätzter Aufwand |
 |---|---|---|---|
-| <welle-id-a> | <Vorgänger-Welle> done | <…> | S/M/L |
-| <welle-id-b> | <welle-id-a> done + ADR-<NNNN> accepted | <…> | S/M/L |
+| <wave-id-a> | <Vorgänger-Welle> done | <…> | S/M/L |
+| <wave-id-b> | <wave-id-a> done + ADR-<NNNN> accepted | <…> | S/M/L |
 
 ## Meilensteine
 
@@ -74,7 +74,7 @@ Kommentar trägt, "Dieselbe Regel für Zustandsfelder").
 
 | Meilenstein | Welle(n) | Trigger | Status |
 |---|---|---|---|
-| M1 | <welle-id> | <…> | erreicht / offen |
+| M1 | <wave-id> | <…> | erreicht / offen |
 
 ## Abhängigkeitsgraph
 
@@ -104,7 +104,7 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-06-roadmap.md`
 
 | Welle | Abschluss | Closure-Notiz |
 |---|---|---|
-| <welle-id> | YYYY-MM-DD | [`<welle-id>-results.md`](../done/<welle-id>-results.md) |
+| <wave-id> | YYYY-MM-DD | [`<wave-id>-results.md`](../done/<wave-id>-results.md) |
 
 ## Historische Trigger-Verschiebungen
 

@@ -69,7 +69,7 @@ statt frei zu formulieren.
 In dieser Reihenfolge:
 
 1. [`spec/lastenheft.md`](spec/lastenheft.md) — vertraglich abnahmebindend.
-2. [`spec/spezifikation.md`](spec/spezifikation.md) — technisch verbindlich, fortschreibbar.
+2. [`spec/specification.md`](spec/specification.md) — technisch verbindlich, fortschreibbar.
 3. [`spec/architecture.md`](spec/architecture.md) — Komponenten- und Sequenzsicht.
 4. [`docs/plan/adr/`](docs/plan/adr/) — ADR-Verzeichnis und -Index.
 5. [`docs/plan/planning/in-progress/roadmap.md`](docs/plan/planning/in-progress/roadmap.md) — Wellen-Sequenz.
@@ -182,7 +182,7 @@ als auflösbaren Anker, nicht die Chronik; das Drift-Log der Roadmap trägt nur
 Umplanungen, keine Schließungen und keine erreichten Meilensteine.
 
 **Begründung:** Die Abwägung gehört in die ADR, die Historie in `git`, die
-Herkunft in **ein** auflösbares Feld (`LH-*`, `ADR-*`, `· seit welle-<Kennung>`).
+Herkunft in **ein** auflösbares Feld (`LH-*`, `ADR-*`, `· seit wave-<Kennung>`).
 Was daneben steht, liest jeder Lauf mit und bezahlt es mit Kontext.
 
 <!--

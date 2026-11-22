@@ -20,7 +20,7 @@ Diese Datei dupliziert sie nicht.
 | Rang | Datei | Charakter |
 |---|---|---|
 | 1 | [`../spec/lastenheft.md`](../spec/lastenheft.md) | vertraglich abnahmebindend |
-| 2 | [`../spec/spezifikation.md`](../spec/spezifikation.md) | technisch fortschreibbar |
+| 2 | [`../spec/specification.md`](../spec/specification.md) | technisch fortschreibbar |
 | 3 | [`../spec/architecture.md`](../spec/architecture.md) | Komponenten/Sequenzen, meilensteinfrei |
 | 4 | [`../docs/plan/adr/`](../docs/plan/adr/) | Architekturentscheidungen |
 | 5 | [`../docs/plan/planning/in-progress/roadmap.md`](../docs/plan/planning/in-progress/roadmap.md) | Wellen-Sequenz |
@@ -34,7 +34,7 @@ Diese Datei dupliziert sie nicht.
 | Quelle | Inhalt |
 |---|---|
 | [`../spec/lastenheft.md`](../spec/lastenheft.md) | LH-FA-* und LH-QA-* mit Akzeptanzkriterien |
-| [`../spec/spezifikation.md`](../spec/spezifikation.md) | Algorithmen, Defaults (`MAX_TOPK`, `EMBEDDING_DIM`), Fehler-Codes |
+| [`../spec/specification.md`](../spec/specification.md) | Algorithmen, Defaults (`MAX_TOPK`, `EMBEDDING_DIM`), Fehler-Codes |
 | [`../spec/architecture.md`](../spec/architecture.md) | Schichten, Constraints, Sequenzen |
 | [`../docs/plan/adr/`](../docs/plan/adr/) | Architektur- und Prozess-Entscheidungen; Index: [`README.md`](../docs/plan/adr/README.md) |
 | [`../docs/plan/planning/`](../docs/plan/planning/) | aktuelle Slices, Roadmap |
@@ -67,10 +67,10 @@ Repo-weit, sprachunabhängig (nur im Root-`Makefile`):
 |---|---|---|
 | `make verify` | Closure-Pflicht + Referenz-Richtung; mit `SLICE=` zusätzlich die Slice-DoD | — (Aggregat) |
 | `make verify-closure-notes` | dieselbe Aussage wie `planning.closure` unten, **als Vorführ-Gegenstand**: An diesem Skript zeigt [Modul 11](../../../kurs/de/04-qualitaet/modul-11-verification.md) „Fitness Function ohne Standard-Tool". Die Deckung trägt es nicht mehr — belegt, nicht behauptet: je Verstoßklasse ein Break-Test mit beiden Sensoren, über alle drei Dateiarten des Ruheorts | [ADR-0019](../docs/plan/adr/0019-closure-sensor-und-skript-rolle.md) |
-| [`make doc-check`](sensors/doc-check.md) | **Sechs Module** (`reviews`, `ids`, `planning`, `targets`, `matrix`, `file`): fünf über die Doku-Referenzen — Review-Report-Deckung, ADR-Kennung als Link, Roadmap- und Wellen-Invarianten samt Closure-Notizen in `done/`, reale Make-Targets, Referenz-Richtung —, `file` über den Umfang von `AGENTS.md`; Vertrag, sechs Grenzen und **je Modul eine eigene Bindung** in der verlinkten Datei | [`SPEC-020` bis `SPEC-025`, `SPEC-027`](../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge); sechs Konventions-Bindungen (`MR-002`), einzeln in [`sensors/doc-check.md`](sensors/doc-check.md#bindung) |
+| [`make doc-check`](sensors/doc-check.md) | **Sechs Module** (`reviews`, `ids`, `planning`, `targets`, `matrix`, `file`): fünf über die Doku-Referenzen — Review-Report-Deckung, ADR-Kennung als Link, Roadmap- und Wellen-Invarianten samt Closure-Notizen in `done/`, reale Make-Targets, Referenz-Richtung —, `file` über den Umfang von `AGENTS.md`; Vertrag, sechs Grenzen und **je Modul eine eigene Bindung** in der verlinkten Datei | [`SPEC-020` bis `SPEC-025`, `SPEC-027`](../spec/specification.md#7-festlegungen-der-harness-werkzeuge); sechs Konventions-Bindungen (`MR-002`), einzeln in [`sensors/doc-check.md`](sensors/doc-check.md#bindung) |
 | `make verify-slice` | DoD eines Slice plausibilisieren; Aufruf mit `SLICE=<id>` | — |
 | `make plan-status` | Slice-Verteilung über die Lifecycle-Verzeichnisse; rot, wenn ein Lifecycle-Verzeichnis fehlt | — |
-| [`make replay`](sensors/replay.md) | Golden-Set-Fixture validieren, Aufruf mit `RUN=<set-name>`, **kein Lauf**; Vertrag und zwei Grenzen in der verlinkten Datei | [`SPEC-026`](../spec/spezifikation.md#7-festlegungen-der-harness-werkzeuge); [Modul 12 §Golden-Set-Form](../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md) (`MR-002`) |
+| [`make replay`](sensors/replay.md) | Golden-Set-Fixture validieren, Aufruf mit `RUN=<set-name>`, **kein Lauf**; Vertrag und zwei Grenzen in der verlinkten Datei | [`SPEC-026`](../spec/specification.md#7-festlegungen-der-harness-werkzeuge); [Modul 12 §Golden-Set-Form](../../../kurs/de/04-qualitaet/modul-12-replay-evaluierung.md) (`MR-002`) |
 | `make trace` | Trace-Fixture ausgeben, Aufruf mit `RUN=<name>`; rot, wenn sie fehlt oder keine Spans trägt | — |
 | `make release` | Release-Checkliste und Runbook-Fixtures prüfen | [Modul 16 §Release-Disziplin](../../../kurs/de/05-betrieb/modul-16-produktiver-betrieb.md) (`MR-002`); Fixture: [`../runbooks/release-checklist.md`](../runbooks/release-checklist.md) |
 
@@ -86,8 +86,8 @@ durchgereicht; die beiden `agent-*` nur im Root:
 
 **Aktueller Lauf-Status:** CI-Badge bzw. lokal `make help` / `make gates` (keine Status-Spalte hier, siehe [Konventionen §`harness/README.md` als Einstiegspunkt](../../../kurs/de/grundlagen/harness-dateien.md#harnessreadmemd-als-einstiegspunkt)).
 **Rote Gates:** Begründung im verlinkten `CO-<NNN>` (Bindung-Spalte), Modul 7.
-**Nicht behauptet** (geplant, nicht in Makefile): `make test-property` (Property-Based-Suite, slice-property-tests, in-progress), `make sbom`, `make security-scan` (welle-betrieb).
-**Weder vorhanden noch in der Roadmap:** ein Image-Scan — anders als `make sbom` und `make security-scan`, die für `welle-betrieb` vorgemerkt sind.
+**Nicht behauptet** (geplant, nicht in Makefile): `make test-property` (Property-Based-Suite, slice-property-tests, in-progress), `make sbom`, `make security-scan` (wave-betrieb).
+**Weder vorhanden noch in der Roadmap:** ein Image-Scan — anders als `make sbom` und `make security-scan`, die für `wave-betrieb` vorgemerkt sind.
 
 **Nicht Teil von `ci`:** das Golden Set ([`sensors/replay.md`](sensors/replay.md) §Grenze).
 

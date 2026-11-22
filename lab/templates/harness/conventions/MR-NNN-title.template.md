@@ -28,7 +28,7 @@ keine benannte Regel ersetzt, ist ein **Fork**, keine Adaption.
 - **Datum:** <Datum>
 - **Geltungsbereich:** <Dateien / Module / Sub-Areas in DIESEM Repo — z. B. „`harness/README.md` §Source precedence und `AGENTS.md` §Kanonische Quellen">
 - **Ersetzt-Baseline-Regel:** <genau eine Regel der Baseline, als Link mit Anker — z. B. [`grundlagen-referenz-richtung.md` §Spec-Straten](../../.harness/baseline/<tag>/regelwerk/grundlagen-referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)>
-- **Adaption:** <was stattdessen gilt — z. B. „Source-Precedence-Tabelle führt keinen eigenen Rang für `spec/spezifikation.md`: acht statt neun Ränge">
+- **Adaption:** <was stattdessen gilt — z. B. „Source-Precedence-Tabelle führt keinen eigenen Rang für `spec/specification.md`: acht statt neun Ränge">
 - **Begründung:** <warum, idealerweise mit Praxis-Bezug — z. B. „reines Policy-Repo, in dem keine eigenen technischen Festlegungen entstehen">
 - **Auflösungs-Trigger:** <Trigger oder "permanent" — z. B. „sobald das Repo eigene technische Festlegungen trägt">
 - **Löst auf:** [`MR-<NNN>`](../conventions.md#mr-<NNN>) *(nur, wenn dieser Eintrag einen früheren ablöst — sonst Zeile weglassen; der Verweis geht auf die Index-Zeile, nicht auf die Eintrags-Datei: die wandert bei Auflösung nach `done/` und ein Pfad-Link bricht genau dann)*

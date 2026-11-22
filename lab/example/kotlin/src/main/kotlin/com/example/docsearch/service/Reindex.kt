@@ -6,7 +6,7 @@ import com.example.docsearch.index.Index
 import com.example.docsearch.types.IndexEntry
 import java.io.File
 
-/** E001 — Verzeichnis existiert nicht (spec/spezifikation.md §4). */
+/** E001 — Verzeichnis existiert nicht (spec/specification.md §4). */
 class DirectoryNotFoundException(msg: String = "E001: directory not found") :
     IllegalArgumentException(msg)
 

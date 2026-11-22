@@ -55,12 +55,12 @@ dieses Repo nicht — das wäre der Repo-Modus, und der lautet hier: mit Wellen.
 
 - **Slices** tragen ihren Zustand über das **Verzeichnis**
   (`open/` → `next/` → `in-progress/` → `done/`).
-- Eine **Welle** ebenso: Der Welle-Plan (`<welle-id>.md`) liegt **flach** in
+- Eine **Welle** ebenso: Der Welle-Plan (`<wave-id>.md`) liegt **flach** in
   `planning/`, solange die Welle läuft — hier
-  [`welle-qualitaet.md`](welle-qualitaet.md) —, und wandert bei Closure
-  per `git mv` nach `done/`, neben seine `<welle-id>-results.md`:
-  [`done/welle-mvp.md`](done/welle-mvp.md) neben
-  [`done/welle-mvp-results.md`](done/welle-mvp-results.md). Den aktiven Durchlauf
+  [`wave-qualitaet.md`](wave-qualitaet.md) —, und wandert bei Closure
+  per `git mv` nach `done/`, neben seine `<wave-id>-results.md`:
+  [`done/wave-mvp.md`](done/wave-mvp.md) neben
+  [`done/wave-mvp-results.md`](done/wave-mvp-results.md). Den aktiven Durchlauf
   `open/` → `next/` → `in-progress/` durchläuft er nicht; `done/` ist sein
   einziges Lifecycle-Verzeichnis. **Geplante Wellen bekommen noch keine
   Datei** — sie stehen in der Roadmap unter *Nächste Wellen* und nirgends

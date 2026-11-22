@@ -124,7 +124,7 @@ nicht eingetreten beurteilen kann.
 ```markdown
 ## Auflösungs-Trigger
 
-Welle 2 (welle-qualitaet) done — Property-Test-Suite läuft 100
+Welle 2 (wave-qualitaet) done — Property-Test-Suite läuft 100
 Generationen und deckt die Fehlerpfade.
 
 Konkret: die Index-Layer-Coverage erreicht ≥ 90 % — dieselbe Schwelle, die
@@ -354,7 +354,7 @@ ein Präfix, das sie vom regulären Implementierungs-Slice unterscheidet
   verschoben.
 - Jeder Carveout, der seit > 2 Wellen "aktiv" ist, wurde *explizit*
   entweder als weiter-gültig bestätigt oder in eine ADR überführt.
-- Audit-Bericht als Closure-Notiz in `done/<welle-id>-results.md`.
+- Audit-Bericht als Closure-Notiz in `done/<wave-id>-results.md`.
 ```
 
 Vier DoD-Punkte: drei Status-Aktionen plus ein Belegartefakt. Mehr

@@ -47,7 +47,7 @@ Nach diesem Modul kannst du:
 ## Lab-Bezug
 
 * [`../../../lab/example/evals/golden/`](../../../lab/example/evals/golden/)
-* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make replay RUN=welle-mvp-baseline`
+* [`../../../lab/example/Makefile`](../../../lab/example/Makefile), Target `make replay RUN=wave-mvp-baseline`
 
 ## Themen
 
@@ -355,7 +355,7 @@ Ein *Agentenlauf* als Messgegenstand ist derselbe Fall eine Ebene höher
 — festgehalten wird dann nicht eine Antwort, sondern ein ganzer Lauf.
 
 **Beide Formen im Lab:**
-[`../../../lab/example/evals/golden/welle-mvp-baseline/`](../../../lab/example/evals/golden/welle-mvp-baseline/)
+[`../../../lab/example/evals/golden/wave-mvp-baseline/`](../../../lab/example/evals/golden/wave-mvp-baseline/)
 trägt `manifest.yaml`, `inputs/case-{001,002,003}.json`,
 `expectations/case-{001,002,003}.json` und `CHANGELOG.md` — die
 Verzeichnis-Struktur aus A. Inhaltlich ist es ein *gemischter* Fall:
@@ -372,15 +372,15 @@ sind. Meistens deckt sich beides. Hier nicht.
 ## Übungen
 
 * Reproduzierbare Testläufe gegen ein Golden Set
-* **(Erschaffen + Bewerten — aktiviert LZ 2)** *Mini-Golden-Set entwerfen und Auswahl begründen.* Gegeben die Ranking-Stufe aus Worked Example A: Zu einer Anfrage liefert die Suche die besten Treffer, bei Punktgleichstand entscheidet die Tie-Break-Regel. Entwirf ein Golden Set mit drei Fällen (Happy · Boundary · Negative — dieselbe Spec-Disziplin wie in Worked Example A Schritt 1): pro Fall die Eingabe, die Erwartung *als Verhalten, nicht als Wortlaut* (Schritt 3 — semantische Anker wie "dieses Dokument steht oben", "Mindest-Score wird erreicht", "die Reihenfolge bei Gleichstand ist stabil" statt eines wörtlich kopierten Ergebnis-Arrays) und ein *Auswahlkriterium* in einem Satz — welche Fehlerklasse fängt genau dieser Fall, die die anderen zwei nicht fangen? **Mindestens einer der drei Fälle muss den Gleichstand treffen** — das ist die Fehlerklasse aus der Engage-Situation, und kein Happy-Path-Fall sieht sie. Vergleiche die Struktur am Ende mit dem Lab-Set [`../../../lab/example/evals/golden/welle-mvp-baseline/`](../../../lab/example/evals/golden/welle-mvp-baseline/) (drei Cases Happy/Boundary/Negative je LH-FA-02). Anti-Antwort: drei Happy-Path-Varianten — das ist ein Demo-Set, kein Golden Set.
+* **(Erschaffen + Bewerten — aktiviert LZ 2)** *Mini-Golden-Set entwerfen und Auswahl begründen.* Gegeben die Ranking-Stufe aus Worked Example A: Zu einer Anfrage liefert die Suche die besten Treffer, bei Punktgleichstand entscheidet die Tie-Break-Regel. Entwirf ein Golden Set mit drei Fällen (Happy · Boundary · Negative — dieselbe Spec-Disziplin wie in Worked Example A Schritt 1): pro Fall die Eingabe, die Erwartung *als Verhalten, nicht als Wortlaut* (Schritt 3 — semantische Anker wie "dieses Dokument steht oben", "Mindest-Score wird erreicht", "die Reihenfolge bei Gleichstand ist stabil" statt eines wörtlich kopierten Ergebnis-Arrays) und ein *Auswahlkriterium* in einem Satz — welche Fehlerklasse fängt genau dieser Fall, die die anderen zwei nicht fangen? **Mindestens einer der drei Fälle muss den Gleichstand treffen** — das ist die Fehlerklasse aus der Engage-Situation, und kein Happy-Path-Fall sieht sie. Vergleiche die Struktur am Ende mit dem Lab-Set [`../../../lab/example/evals/golden/wave-mvp-baseline/`](../../../lab/example/evals/golden/wave-mvp-baseline/) (drei Cases Happy/Boundary/Negative je LH-FA-02). Anti-Antwort: drei Happy-Path-Varianten — das ist ein Demo-Set, kein Golden Set.
 * **(Analysieren — aktiviert LZ 3)** *Drift quantifizieren.* Erzeuge eine Regression an deinem nicht-deterministischen Kern — getauschte Tie-Break-Regel, geänderte Seed-Ableitung oder neue Modellversion — und gib die Drift-Rate (rote ÷ gesamte Fälle) als Zahl an; ordne den Befund dann der Diagnose-Reihenfolge aus Schritt 6 zu (Toolchain → Modell-Drift → Erwartung → echte Regression). **Wo:** im eigenen Repo mit echten Zahlen — das Lab-Target führt keinen Lauf aus und kann darum keine roten Fälle erzeugen (siehe Lab-Grenze unten). Ohne eigenen Replay-Lauf: an der Vorgabe aus dem Selbstcheck (3 von 20 rot).
-* **(Analysieren + Anwenden — aktiviert LZ 1)** *Zeige, dass der Lab-Sensor den Modellwechsel nicht sehen kann.* Kopiere `evals/golden/welle-mvp-baseline/` nach `evals/golden/drift-test/`, ändere in einem ersten Schritt `model.name` **und** `model.version` in `manifest.yaml`, verfälsche in einem zweiten eine Erwartung (`top_doc_path`, `top_score_min` — beide in `expectations/case-001.json`), und lasse `make replay RUN=drift-test` **einmal vor dem ersten Schritt und einmal nach jedem** laufen. Beobachtung: dreimal grün. Benenne dann, welche Felder ein *Runner* vergleichen müsste, damit der Wechsel rot wird — das Manifest deklariert sie bereits (`verification.per_case_hash`, `determinism_check: two_runs_same_hash`, `runtime.image_hash`), nur löst sie kein Target ein. Pointe: Ein Sensor, der die Sache nicht sehen kann, über die er eine Zusage macht, ist ein Vorschlag, kein Gate ([Modul 13 §Typische Fehlvorstellungen](modul-13-quality-gates.md#typische-fehlvorstellungen)).
+* **(Analysieren + Anwenden — aktiviert LZ 1)** *Zeige, dass der Lab-Sensor den Modellwechsel nicht sehen kann.* Kopiere `evals/golden/wave-mvp-baseline/` nach `evals/golden/drift-test/`, ändere in einem ersten Schritt `model.name` **und** `model.version` in `manifest.yaml`, verfälsche in einem zweiten eine Erwartung (`top_doc_path`, `top_score_min` — beide in `expectations/case-001.json`), und lasse `make replay RUN=drift-test` **einmal vor dem ersten Schritt und einmal nach jedem** laufen. Beobachtung: dreimal grün. Benenne dann, welche Felder ein *Runner* vergleichen müsste, damit der Wechsel rot wird — das Manifest deklariert sie bereits (`verification.per_case_hash`, `determinism_check: two_runs_same_hash`, `runtime.image_hash`), nur löst sie kein Target ein. Pointe: Ein Sensor, der die Sache nicht sehen kann, über die er eine Zusage macht, ist ein Vorschlag, kein Gate ([Modul 13 §Typische Fehlvorstellungen](modul-13-quality-gates.md#typische-fehlvorstellungen)).
 
 ### Minimaler Übungspfad
 
 ```bash
 cd lab/example
-make replay RUN=welle-mvp-baseline
+make replay RUN=wave-mvp-baseline
 ```
 
 Erwartete Beobachtung: Das Target validiert nur die *Struktur* des

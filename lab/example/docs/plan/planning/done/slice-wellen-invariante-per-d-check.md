@@ -43,7 +43,7 @@ Opt-in eine Wächter-Entscheidung und kein Dauerbefund.
 
 - [x] `planning.waves` in `.d-check.yml` aktiv mit `dir: docs/plan/planning`
       und `mode: many`; die übrigen Schlüssel treffen die Defaults dieses
-      Repos (`welle-*.md`, `welle-*-results.md`, `## Nächste Wellen`,
+      Repos (`wave-*.md`, `wave-*-results.md`, `## Nächste Wellen`,
       `## Abgeschlossene Wellen`, `done/`) und stehen deshalb nicht da — mit
       Begründung im Kommentar.
 - [x] Bestand grün: `make doc-check` 73 Dateien, 0 Befunde (74 mit diesem
@@ -52,10 +52,10 @@ Opt-in eine Wächter-Entscheidung und kein Dauerbefund.
       Sensor, der den Bestand rot meldet, wird erst eingeschaltet, wenn der
       Bestand stimmt *oder* der Sensor widerlegt ist.
 - [x] Break-Tests am echten Repo — vier Experimente, fünf Codes: Datei ohne
-      Zeiger → `wave-drift` (`welle-skalierung`) und als Beifang `wave-preview-exists`
-      (`welle-skalierung` steht noch in *Nächste Wellen*); Zeiger ohne Datei →
-      `wave-drift` (`welle-5`); Ergebnisnotiz entfernt →
-      `wave-results-missing` (`welle-mvp`); Ergebnisnotiz ohne Register-Zeile →
+      Zeiger → `wave-drift` (`wave-skalierung`) und als Beifang `wave-preview-exists`
+      (`wave-skalierung` steht noch in *Nächste Wellen*); Zeiger ohne Datei →
+      `wave-drift` (`wave-5`); Ergebnisnotiz entfernt →
+      `wave-results-missing` (`wave-mvp`); Ergebnisnotiz ohne Register-Zeile →
       `wave-unregistered`. Nach jedem Test Wiederherstellung, `git diff`
       leer, Nachlauf 73/0.
 - [x] Kontrolle des Modells: derselbe Bestand unter `mode: one` ebenfalls
@@ -113,7 +113,7 @@ konsistent; der Slice ändert den Wächter, nicht den Bestand.
   `slice-adr-kennungen-linkpflichtig` (§7, „ein grüner Lauf nach dem Aufräumen beweist gar nichts")
   gilt auch, wenn es nichts aufzuräumen gab.
 - **Der Break-Test „Datei ohne Zeiger" meldet zwei Codes auf einmal** —
-  `wave-drift` und `wave-preview-exists` —, weil `welle-skalierung` in diesem Repo
+  `wave-drift` und `wave-preview-exists` —, weil `wave-skalierung` in diesem Repo
   noch in *Nächste Wellen* steht. Das ist kein Doppelbefund, sondern zwei
   Aussagen: Die Datei ist nicht gelistet, *und* sie widerspricht der
   Vorschau („zwei Positionen, nicht drei"). Wer nur auf den ersten Code
@@ -145,11 +145,11 @@ Listen-Hälfte des Abschnitts *Offene Wellen* hat damit ihren Wächter, die
 Marker-Hälfte behält ihren; der Ruhe-Marker geht in die Bijektion nicht ein.
 
 **Break-Tests am echten Repo — vier Experimente, fünf Codes:** flache
-`welle-skalierung-x.md` ohne Zeiger → `wave-drift` auf `welle-skalierung` (als Beifang
-`wave-preview-exists`, weil `welle-skalierung` noch in der Vorschau steht — nicht
-isoliert gebrochen); Zeiger auf `welle-5-x` ohne Datei →
-`wave-drift` auf `welle-5`; `done/welle-mvp-results.md` entfernt →
-`wave-results-missing` auf `welle-mvp`; `done/welle-9-results.md` ohne
+`wave-skalierung-x.md` ohne Zeiger → `wave-drift` auf `wave-skalierung` (als Beifang
+`wave-preview-exists`, weil `wave-skalierung` noch in der Vorschau steht — nicht
+isoliert gebrochen); Zeiger auf `wave-5-x` ohne Datei →
+`wave-drift` auf `wave-5`; `done/wave-mvp-results.md` entfernt →
+`wave-results-missing` auf `wave-mvp`; `done/wave-9-results.md` ohne
 Register-Zeile → `wave-unregistered`. Jede Richtung per Diff und Nachlauf
 wiederhergestellt (73/0).
 
