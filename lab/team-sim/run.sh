@@ -2023,7 +2023,14 @@ s32_wellen_praefix_globs() {
   schritt test -f docs/plan/planning/wave-3-x.md || return 1
   schritt git commit -qam "Glob-Zeilen entfernt" || return 1
   out=$(dcheck "$WORK/sim/alice"); still "$out" && ok=0 || ok=1
-  verdikt "s32b derselbe Aufbau ohne die Glob-Zeilen: STILL (Default welle-* sieht keine wave-Datei)" "0 Befunde, waehrend s32a mit Globs im selben Aufbau laut ist" "$(echo "$out"|tail -1)" $ok
+  verdikt "s32b derselbe Aufbau ohne die Glob-Zeilen: STILL (Default welle-* sieht keine wave-Datei)" "0 Befunde, waehrend s32a mit Globs im selben Aufbau laut ist und s32c ohne Globs auf eine welle-Datei beisst" "$(echo "$out"|tail -1)" $ok
+  # Positivkontrolle fuer s32b: Der Block ist ohne die Globs nicht inert — unter
+  # dem Default beisst er auf eine welle-Datei ohne Zeiger. Sonst bestuende s32b
+  # auch ueber einem abgeschalteten waves.
+  printf '# Welle welle-3-x: X\n\n**Verantwortlich:** alice. **Datum:** 2026-11-22.\n' > docs/plan/planning/welle-3-x.md
+  schritt git add -A && schritt git commit -qm "welle-Datei ohne Zeiger, Default-Globs" || return 1
+  out=$(dcheck "$WORK/sim/alice"); befund "$out" "welle-3" "wave-drift" && ok=0 || ok=1
+  verdikt "s32c derselbe Aufbau, Default-Globs, welle-Datei ohne Zeiger: LAUT (waves ist aktiv)" "wave-drift (target: welle-3)" "$(echo "$out"|tail -1)" $ok
 }
 
 # ---------------------------------------------------------------------------

@@ -44,7 +44,14 @@ welchem Modul gehört, steht unten unter [Bindung](#bindung).
    den Block gegen *genau eine* Datei und meldet unter Offene Wellen legitime
    Zustände als Drift; der Ruhe-Marker geht in die Bijektion nicht ein. Heilbar
    — durch die Konfiguration, nicht durch das Werkzeug.
-6. **`file` prüft nur `AGENTS.md`, nur die Zeilenzahl.** Keine Aussage über
+6. **`planning.waves` liest nur Kennungen mit Ziffernfolge.** Die Kennung ist
+   für das Werkzeug das Glob-Präfix plus die folgende Ziffernfolge. Dieses
+   Repo vergibt Namen (`wave-qualitaet`, `wave-skalierung`) — die Zeiger unter
+   *Offene Wellen* und die flachen Welle-Dateien hält damit niemand gegeneinander.
+   Gemessen (Kurs-Welle 165): flache Welle-Datei ohne Zeiger → 0 Befunde. Nicht
+   heilbar in der Konfiguration (d-check v0.91.0); die Marker-Hälfte bleibt
+   gewächtert.
+7. **`file` prüft nur `AGENTS.md`, nur die Zeilenzahl.** Keine Aussage über
    Inhalt/Qualität, kein Rückbau erzwungen, keine Staleness-Prüfung (ist die
    Zeile seit Langem unverändert rot). Nur diese eine Datei ist konfiguriert;
    `harness/README.md` §Sensors trägt keine eigene Obergrenze.

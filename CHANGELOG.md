@@ -22,19 +22,24 @@ Vorlagen mischten sich die Sprachen auch innerhalb eines Namens (`welle-results`
   wortgleich im Spiegel: Dateinamen sind englisch; deutsch bleibt ein Name nur ohne
   gängiges englisches Wort (`lastenheft.md`); fest bleiben die Namen, die ein
   fremdes Werkzeug erwartet; die Prosa bleibt deutsch; das Kennungs-Präfix der
-  Welle folgt, weil die Welle-Datei nach ihrer Kennung heißt; Platzhalter wie
-  `<Kennung>` bleiben deutsch.
+  Welle folgt, weil die Welle-Datei nach ihrer Kennung heißt; die Regel gilt für
+  Namen, Präfixe und Endungen, die Kurs und Vorlagen vorgeben, nicht für den
+  Titel-Teil; ein Platzhalter, der für ein Präfix steht, folgt ihm (`<wave-id>`),
+  beschreibende wie `<Kennung>` bleiben deutsch.
 - **Kurs** — Ziel-Name `spec/specification.md`; Kennungs-Präfix `wave-` in allen
   Beispielen und Platzhaltern (`<wave-id>`, `wave-<Kennung>-results.md`,
   `done/<wave-id>/`); Verweise auf die umbenannten Vorlagen. Drei Stellen, die der
   Plan nicht führte, nach der Regel mitgezogen: das Archiv heißt
   `archive.zip` (`done/<wave-id>/archive.zip`, `slice-<Kennung>-archive.zip`);
   Modul 3 schrieb `architektur.md`, wo Vorlage und Beispiel schon `architecture.md`
-  führten; Modul 16 Schritt 6 nannte `done/welle-1-closure.md` — gemeint ist die
-  Ergebnis-Notiz der Welle (die Vorlage heißt im Titel *Closure-Notiz*), jetzt
-  `done/wave-1-results.md`, die Checkliste `wave-1-checklist.md`.
+  führten; Modul 16 Schritt 6 nennt den Freigabe-Eintrag jetzt
+  `done/wave-1-closure.md`, die Checkliste `wave-1-checklist.md`.
 - **Regelwerk** — wortgleicher Nachzug, `Stand:` auf Welle 165.
-- **Vorlagen** — sieben Umbenennungen per `git mv`:
+- **Vorlagen** — sieben Umbenennungen per `git mv`, Umbenennung und Inhalt in
+  **einem** Commit (Entscheidung des Maintainers, gegen Plan §5 Schritt 3): Ein
+  reiner Move-Commit hätte `make check` gebrochen, weil die Verweise bis zum
+  zweiten Commit ins Leere zeigten; git führt alle Umbenennungen trotzdem als
+  Rename (Ähnlichkeit 82–98 %):
   `spezifikation.template.md` → `specification.template.md`,
   `welle.template.md` → `wave.template.md`,
   `welle-results.template.md` → `wave-results.template.md`,
@@ -73,33 +78,78 @@ Vorlagen mischten sich die Sprachen auch innerhalb eines Namens (`welle-results`
 Datei-Ebene bricht (Ziel-Namen beim Adopter).
 
 **Migration für Adopter** — bestehende Repos laufen unverändert, solange sie
-nicht migrieren.
+nicht migrieren. Zwei Klassen von Namen werden verschieden behandelt.
+
+*Namen ohne Kennung* werden umbenannt:
 
 | Alt | Neu |
 |---|---|
 | `spec/spezifikation.md` | `spec/specification.md` |
-| `docs/plan/planning/welle-<Kennung>.md` | `docs/plan/planning/wave-<Kennung>.md` |
-| `done/welle-<Kennung>-results.md` | `done/wave-<Kennung>-results.md` |
-| `done/<welle-id>/archiv.zip` | `done/<wave-id>/archive.zip` |
-| `done/slice-<Kennung>-archiv.zip` | `done/slice-<Kennung>-archive.zip` |
 | Vorlagen | die sieben Namen oben |
+| `archiv.zip` neuer Archive | `archive.zip` (`done/<wave-id>/archive.zip`, `done/slice-<Kennung>-archive.zip`) |
 
-- **Pflichtschritt mit `planning.waves`:** `glob: 'wave-*.md'` und
-  `results-glob: 'wave-*-results.md'` setzen. Ohne die zwei Zeilen liest d-check
-  weiter `welle-*` und findet keine Welle-Datei — still, nicht rot (s32b).
-- **Bestehende Kennungen bleiben** ([`source-precedence.md` §Vergabe](kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt):
-  Wechselpunkt notieren). d-check liest aber **ein** Präfix: Laut Handbuch ist die
-  Kennung „literales Glob-Präfix plus Ziffernfolge“. Nach dem Wechsel liest
-  `waves` Dateien und Register-Zeilen mit `welle-` nicht mehr. Deshalb wechseln,
-  wenn keine Welle offen ist (nicht gemessen, aus dem Handbuch abgeleitet).
-- `matrix`: Klasse `welle` → `wave` (Pfad `wave-*.md`, Token `wave-…`).
-- Archive, die schon unter dem alten Namen liegen, bleiben, wie sie sind; ihre
-  Stubs zeigen auf sie.
+*Kennungen* bleiben, wie sie sind ([`source-precedence.md` §Vergabe](kurs/de/grundlagen/source-precedence.md#vergabe-woher-die-nächste-kennung-kommt):
+„bestehende Kennungen bleiben, wie sie sind“; den Wechselpunkt in
+`harness/conventions.md` notieren). Bestehende `welle-<Kennung>.md`,
+`welle-<Kennung>-results.md` und schon geschriebene `archiv.zip` behalten ihren
+Namen; erst neue Wellen heißen `wave-<Kennung>`.
 
-**Nebenbefund, nicht behoben:** `waves` läuft im Beispiel leer, schon vor dieser
-Welle. Die Kennungen dort sind Slugs ohne Ziffern (`wave-qualitaet`), und die
-Kennung bildet d-check aus Präfix plus Ziffernfolge. Gemessen: flache Welle-Datei
-ohne Zeiger → 0 Befunde, auf HEAD (`welle-probe`) wie danach. Faden in der Roadmap.
+- **`planning.waves` liest nur ein Präfix.** Die Kennung ist für d-check das
+  literale Glob-Präfix plus Ziffernfolge. Am Wechselpunkt `glob: 'wave-*.md'` und
+  `results-glob: 'wave-*-results.md'` setzen — ohne die zwei Zeilen liest
+  d-check weiter `welle-*` und findet keine neue Welle-Datei, still (s32b).
+  Danach liest `waves` die Dateien und Register-Zeilen mit `welle-` nicht mehr;
+  deshalb wechseln, wenn keine `welle-`-Welle mehr offen ist (aus dem Handbuch
+  abgeleitet, nicht gemessen).
+- **Kennungen ohne Ziffern liest `waves` gar nicht** — weder `welle-` noch
+  `wave-` (Vorlage `.d-check.yml` §GRENZE). Wer Namen vergibt, wie der Kurs es
+  lehrt, benennt die ungewächterte Listen-Hälfte.
+- `matrix`: Die Welle-Klasse heißt in der Vorlage `wave` (Pfad `wave-*.md`,
+  Token `wave-…`). Mit Kennungen beider Präfixe nimmt sie beide Pfade auf und ein
+  Token, das beide trifft.
+
+**Das Beispiel** zeigt das Repo, als stünde es von Beginn an unter der Regel —
+es führt die Migration nicht vor, sondern ihr Ergebnis. Seine Kennungen tragen
+deshalb `wave-`. Nur eingefrorene Messprotokolle nennen die Namen, die damals
+gemessen wurden (siehe *Aus dem Review*).
+
+**Aus dem Review** (unabhängiger Durchgang über den Commit, neun Befunde):
+
+- Die Vorlage nannte die Globs Pflicht und verschwieg, dass `waves` Namen ohne
+  Ziffern nicht liest. Jetzt benennt sie die Grenze im Kommentar, das Beispiel in
+  `harness/sensors/doc-check.md` §Grenze Punkt 6. Gemessen: flache Welle-Datei
+  ohne Zeiger → 0 Befunde, im Beispiel auf HEAD (`welle-probe`) wie danach. Der
+  Leerlauf besteht seit Welle 130–131, die die Kennungen des Beispiels zu Namen
+  machte; davor griff der Wächter (Messung in `slice-wellen-invariante-per-d-check`).
+- Die Ersetzung hatte eingefrorene Messprotokolle umgeschrieben: die Break-Test-
+  Ziele in `done/slice-wellen-invariante-per-d-check.md`, eine Zählung im
+  Review-Report vom 2026-09-05 und zwei Zeilen der Golden-Set-CHANGELOG. Sie
+  stehen jetzt auf den **gemessenen** Werten — auf dem Stand vor Welle 130–131,
+  die sie schon einmal per Ersetzung umgeschrieben hatte (80b0968): `welle-3`,
+  `welle-5`, `welle-1` als Befund-Ziele, `2 welle-1-*.md`, `welle-1-baseline.json`.
+  Der zweite Review-Durchgang hat die Messung nachgestellt: Default-Globs,
+  `mode: many`, flache `welle-3-x.md` ohne Zeiger → `wave-drift` und
+  `wave-preview-exists` auf `welle-3`, auf v0.62.0 wie auf v0.91.0; die
+  Slug-Variante ergibt auf beiden 0 Befunde. Verweise auf Slice-Kennungen, die
+  Welle 130–131 umbenannte, bleiben (Weg A).
+- Die Migrations-Liste schrieb `welle-<Kennung>.md` → `wave-<Kennung>.md` vor und
+  sagte zwei Zeilen tiefer „bestehende Kennungen bleiben“. Neu gefasst (oben).
+- Die Regel sagte „Platzhalter bleiben deutsch“, umbenannt war `<wave-id>`.
+  Präzisiert; nachgezogen `slice-CO-AUDIT-<wave-id>` (Modul 7, Spiegel) und
+  `<vorherige-wave-id>` (Vorlage). Dazu der Satz zum Titel-Teil und
+  `.d-check.yml` unter den festen Namen.
+- Modul 16: Der Freigabe-Eintrag trägt eigene Felder, die die Vorlage der
+  Ergebnis-Notiz nicht kennt — er bleibt eine eigene Datei,
+  `done/wave-1-closure.md`; nur das Präfix folgt der Regel.
+- s32 bekommt mit s32c eine Positivkontrolle: derselbe Aufbau mit Default-Globs
+  beißt auf eine `welle-`-Datei, also ist `waves` in s32b aktiv, nicht inert.
+  112 PASS.
+- Ein zweiter Durchgang über die Korrekturen fand: die erste Rückstellung der
+  Protokolle auf den Stand nach Welle 130–131 statt auf den gemessenen (oben
+  richtiggestellt), eine Lücke in der Nummerierung von §Grenze, die veraltete
+  Zählung „sechs Grenzen“ in `harness/README.md`, Beispiel-Namen im Regel-Absatz
+  des Spiegels (jetzt Formen statt Beispiel-Daten) und eine unscharfe
+  Platzhalter-Klausel (jetzt: nur das Präfix folgt der Regel).
 
 ## Welle 164 — 2026-11-22 · Jira-Begriffe im Abgleich (`begriffe.md`)
 

@@ -33,7 +33,7 @@ Modellversion: `local-embed-v3@2026-05-22`. Determinismus-Strategie aus
 
 ## 2026-06-02 — Umstellung von flacher JSON-Datei auf Verzeichnis-Struktur
 
-Bis Kurs-Welle 9 lag das Set als einzelne `wave-mvp-baseline.json`-Datei. Mit
+Bis Kurs-Welle 9 lag das Set als einzelne `welle-1-baseline.json`-Datei. Mit
 [ADR-0012](../../../docs/plan/adr/0012-index-write-strategy.md) (Index-Write-Strategie) und der Schema-Konvention für
 LH-FA-IDX-* ergänzt um die Verzeichnis-Struktur aus Modul 12 Worked
 Example. Inhalt unverändert; Form maschinell strenger prüfbar.
@@ -42,6 +42,6 @@ Example. Inhalt unverändert; Form maschinell strenger prüfbar.
 - `manifest.yaml` mit Top-Level-Feldern (`model`, `runtime`, `determinism`)
 - `inputs/case-*.json` getrennt von `expectations/case-*.json`
 - `tool_calls`-Erwartungen pro Case ergänzt (semantische Schicht, nicht nur Exact-Match)
-- `make replay RUN=wave-mvp-baseline` prüft jetzt die Verzeichnis-Form
+- `make replay RUN=welle-1-baseline` prüft jetzt die Verzeichnis-Form
 
 Folge-Slice: keiner — Form-Migration, kein semantischer Drift.

@@ -148,7 +148,7 @@ Beleg fehlt, ist das Item *nicht* abgehakt — auch wenn das Item
 inhaltlich erfüllt wäre. Eine Checkliste ohne Belege ist die
 Bürokratie-Form, gegen die der Kurs sich wendet.
 
-**Schritt 6 — Freigabe-Eintrag in `done/wave-1-results.md`.**
+**Schritt 6 — Freigabe-Eintrag in `done/wave-1-closure.md`.**
 ```markdown
 # Welle 1 — Closure-Eintrag
 Status: released

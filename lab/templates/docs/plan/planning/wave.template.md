@@ -40,7 +40,7 @@ Mensch ohne Rückfrage sagen kann, ob er eingetreten ist; ein Datum darf erwähn
 werden, aber nie Trigger sein. Und der **Start**-Trigger ist **kein Ergebnis
 dieser Welle**: Steht er in der Slice-Liste unten, ist er falsch platziert.
 
-- <z.B. Welle <wave-vorher-id> done.>
+- <z.B. Welle <vorherige-wave-id> done.>
 - <z.B. ADR-<NNNN> accepted.>
 
 ## 3. Closure-Trigger (Welle schließt)

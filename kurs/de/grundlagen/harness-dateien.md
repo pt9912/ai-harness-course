@@ -32,11 +32,15 @@ fest — hier steht nur, wo die Datei liegt, nicht, wie ihr Name entsteht.
 
 **Dateinamen sind englisch.** Deutsch bleibt ein Name nur, wenn das Artefakt
 kein gängiges englisches Wort hat: `lastenheft.md`. Fest bleiben die Namen, die
-ein fremdes Werkzeug erwartet (`AGENTS.md`, `README.md`, `Makefile`). Die Prosa
-bleibt deutsch — der Text sagt *Welle* und *Spezifikation*, die Dateien heißen
-`wave-<Kennung>.md` und `specification.md`. Das Kennungs-Präfix der Welle folgt
-derselben Regel, weil die Welle-Datei nach ihrer Kennung heißt. Platzhalter wie
-`<Kennung>` sind keine Namen und bleiben deutsch.
+ein fremdes Werkzeug erwartet (`AGENTS.md`, `README.md`, `Makefile`,
+`.d-check.yml`). Die Prosa bleibt deutsch — der Text sagt *Welle* und
+*Spezifikation*, die Dateien heißen `wave-<Kennung>.md` und `specification.md`.
+Das Kennungs-Präfix der Welle folgt derselben Regel, weil die Welle-Datei nach
+ihrer Kennung heißt. Die Regel gilt für das, was Kurs und Vorlagen vorgeben —
+Namen, Präfixe, Endungen —, nicht für den Titel-Teil: Den wählt das Repo, auch
+auf Deutsch (`NNNN-<titel>.md`, `wave-<Kennung>.md`). In einem Platzhalter folgt
+nur das Präfix der Regel (`<wave-id>`, `<slice-kennung>`); der beschreibende Teil
+ist Prosa, wie `<Kennung>` und `<titel>`.
 
 ## Template-Schichtung — was der Rumpf trägt und was der Kommentar
 

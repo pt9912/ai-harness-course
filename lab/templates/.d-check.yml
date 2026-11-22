@@ -102,6 +102,14 @@ modules: [links, anchors]
 # (`grundlagen-harness-dateien.md` §Verzeichniskonvention), der Werkzeug-Default
 # ist `welle-*.md` / `welle-*-results.md` — ohne die zwei Zeilen findet `waves`
 # keine Welle-Datei und bleibt still.
+# GRENZE (d-check v0.91.0): Die Kennung liest `waves` als literales Glob-Praefix
+# plus folgende Ziffernfolge (`wave-1-basis` -> `wave-1`). Eine Kennung ohne
+# Ziffern — ein reiner Name nach `grundlagen-source-precedence.md` §Vergabe,
+# etwa `wave-cache-warmup` — liest es nicht: Datei ohne Zeiger und Zeiger ohne
+# Datei bleiben dann still. Vergibt das Repo Namen, ist die Listen-Haelfte von
+# *Offene Wellen* ungewaechtert — im Gate-Index als Luecke benennen (harness/README.md
+# oder die Sensor-Datei unter harness/sensors/, Abschnitt Grenze)
+# (`modul-06-roadmap.md` §Roadmap-Struktur: bekannt zulaessig, verschwiegen nicht).
 # planning:                                                             # + `planning` in `modules` aufnehmen
 #   roadmap: docs/plan/planning/in-progress/roadmap.md
 #   heading: '## Offene Wellen'

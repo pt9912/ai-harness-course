@@ -116,7 +116,7 @@ selbst; sie wird korrigiert, nicht die Sub-Area umgestuft
 Der Carveout-Mechanismus hält nur, wenn ein *zweiter* Mechanismus ihn
 auditiert — sonst driften „aktive" Carveouts still in De-facto-Permanenz
 (genau die Doku-Drift, die Carveouts verhindern sollen). Pro
-Welle-Closure ein Audit-Slice `slice-CO-AUDIT-<welle>`, *bevor* die Welle
+Welle-Closure ein Audit-Slice `slice-CO-AUDIT-<wave-id>`, *bevor* die Welle
 nach `done/` wandert (eigenes Präfix laut
 [`grundlagen-source-precedence.md` §ID-Schema](grundlagen-source-precedence.md#id-schema-als-klammer) — liefert keinen Code,
 nur Doku-Updates). Regeln:

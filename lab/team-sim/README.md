@@ -85,6 +85,7 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-11-19 | `v0.91.0` | 109 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.86.1 → v0.91.0 |
 | 2026-11-22 | `v0.91.0` | 109 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Umbenennung `welle-` → `wave-` (Welle 165); Verdikte gleich, nach Namensersetzung identisch |
 | 2026-11-22 | `v0.91.0` | 111 PASS, 0 FAIL, 0 KAPUTT | erweitert um s32 |
+| 2026-11-22 | `v0.91.0` | 112 PASS, 0 FAIL, 0 KAPUTT | erweitert um s32c (Review zu Welle 165) |
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -202,7 +203,8 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s31k | ungehakter Punkt `- [ ] Review durchgeführt`, wie die Vorlage ihn ausliefert, kein Report | **`review-missing`** | ✓ auch ungehakt ist eine Zusage |
 | s31l | lebender Slice (kein Stub) unter `done/wave-1/` mit Zusage, kein Report | **`review-missing`** auf ihm | ✓ `recursive` sieht Unterverzeichnisse |
 | s32a | `waves` mit `mode: many` und den Globs `wave-*.md` / `wave-*-results.md`, flache Welle `wave-3-x.md` ohne Zeiger | **`wave-drift`** (target `wave-3`) | ✓ Vorbedingung: `waves` liest die `wave-`-Dateien |
-| s32b | derselbe Aufbau ohne die beiden Glob-Zeilen | **still** | ✓ der Werkzeug-Default `welle-*` sieht keine `wave-`-Datei — deshalb setzt die Vorlage die Globs (Welle 165) |
+| s32b | derselbe Aufbau ohne die beiden Glob-Zeilen | **still** | ✓ der Werkzeug-Default `welle-*` sieht keine `wave-`-Datei — deshalb setzt die Vorlage die Globs (Welle 165); belegt für Kennungen mit Ziffernfolge, Namen liest `waves` gar nicht (Vorlage §GRENZE) |
+| s32c | derselbe Aufbau mit Default-Globs, dazu `welle-3-x.md` ohne Zeiger | **`wave-drift`** (target `welle-3`) | ✓ Positivkontrolle für s32b: `waves` ist ohne die Globs aktiv, nicht inert |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

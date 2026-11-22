@@ -3,7 +3,8 @@
 **Stand:** umgesetzt in Welle 165 ([`CHANGELOG.md`](../CHANGELOG.md)), MAJOR,
 nicht released. Zählungen in §3 gegen den Arbeitsbaum vom 2026-11-22, vor der
 Welle. Drei Stellen fehlten im Plan und sind nach der Regel mitgezogen
-(`archiv.zip`, `architektur.md` in Modul 3, die Ergebnis-Notiz in Modul 16);
+(`archiv.zip`, `architektur.md` in Modul 3, der Freigabe-Eintrag in Modul 16 —
+`done/wave-1-closure.md`);
 siehe den Welle-Eintrag.
 
 **Anlass.** In `lab/templates/spec/` heißen zwei Vorlagen deutsch
