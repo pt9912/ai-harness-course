@@ -11,6 +11,27 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 164 — 2026-11-22 · Jira-Begriffe im Abgleich (`begriffe.md`)
+
+Anlass: die Frage, ob Welle und Slice in den Dateinamen `story` und `task` heißen
+könnten, wie in Jira. Der Kurs ordnet beide anders zu — die User Story ist dort
+Slice-Klasse, „Welle = Sprint“ eine Fehlannahme —, und die Jira-Namen brächten
+Zeitkasten und Status-Feld mit, die das Regelwerk ausdrücklich nicht teilt.
+Deshalb ein Abgleich statt einer Umbenennung.
+
+- `kurs/de/grundlagen/begriffe.md`: neuer Abschnitt *Einordnung: Jira-Begriffe*
+  nach dem SDD-Abschnitt — Story, Task, Subtask, Epic, Sprint, Workflow/Status
+  je mit Atlassians eigener Definition, dem Ort im Regelwerk und dem
+  Unterschied. Nicht in die SDD-Tabelle: Die ist an Böckelers Kiro/Spec-Kit
+  gebunden, Jira kommt dort nicht vor.
+- `kurs/de/abschluss/quellen.md`: Atlassian-Eintrag (drei Seiten, abgerufen am
+  2026-11-22); die Zitate sind wörtlich aus den Seiten übernommen.
+- Didaktik, kein Spiegel-Stoff: `lab/regelwerk/grundlagen-begriffe.md` führt nur
+  Kernbegriffe und Trennschärfen und bleibt unberührt (`Stand:` bleibt), wie beim
+  SDD-Abschnitt.
+- Kein beobachtbares Verhalten behauptet, kein Team-Sim-Szenario. Keine
+  Regel-Änderung.
+
 ## Welle 163 — 2026-11-22 · Slice-Tabelle der Welle-Vorlage verlinkt die Slice-Datei
 
 Anlass: Beim Lesen von `welle.template.md` §4 — die Tabelle nannte die Slices nur

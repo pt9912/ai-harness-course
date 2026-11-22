@@ -88,3 +88,16 @@ Die Bausteine, die Böckeler bei Kiro und Spec Kit nennt, haben im Regelwerk die
 Darüber hinaus führt das Regelwerk den Umsetzungs-Workflow (Modul 9), Review und Verifikation als getrennte Rollen (Modul 10 und 11), Gates (Modul 13) und den Rückwärtspfad von Closure und Verifikation zur Spec (Modul 1).
 
 **Abweichung bei User Stories.** Kiro führt die Requirements als User Stories mit Akzeptanzkriterien. Im Regelwerk ist eine User Story kein Spec-Dokument, sondern Slice-Klasse und gehört unter `docs/plan/planning/`: Given/When/Then deklariert kein Stratum ([Referenz-Richtung §Spec-Straten](referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)).
+
+## Einordnung: Jira-Begriffe
+
+Wer aus Jira kommt, findet die Begriffe des Regelwerks so wieder. Das ist ein Abgleich, keine Umbenennung: Die Jira-Namen tragen ein Modell, das das Regelwerk an zwei Stellen ausdrücklich nicht teilt — den Zeitkasten und das Status-Feld. Die Jira-Spalte zitiert Atlassians eigene Dokumentation (*What are work types?*, *Understand workflows*, *How to Start & Use Sprints in Jira*); Jira nennt die Einträge dort *work items*, früher *issues*.
+
+| Jira | Ort im Regelwerk | Unterschied |
+|---|---|---|
+| Story — „the smallest unit of work that needs to be done" | Slice ([Modul 5](../02-planung/modul-05-planning-harness.md)); die User Story ist Slice-Klasse ([Referenz-Richtung §Spec-Straten](referenz-richtung.md#spec-straten-mehr-als-ein-spec-dokument)) | Der Slice ist die kleinste *lieferbare* Einheit, mit eigenem Plan, eigener DoD und Closure-Notiz. |
+| Task — „work that needs to be done" | Slice | Jira trennt Story, Task und Bug als Typen derselben Ebene; das Regelwerk hat dafür ein Artefakt, den Slice. |
+| Subtask — „a piece of work that is required to complete a task" | kein eigenes Artefakt | Was einen Slice zerlegt, steht in seinem Plan (Datei-Tabelle in §3, DoD-Punkte) und hat keinen eigenen Zustand. |
+| Epic — „a big user story that needs to be broken down" | grob: Welle ([Modul 6](../02-planung/modul-06-roadmap.md)) | Atlassian: „Mark your epic as done whenever all work for the epic is complete." Eine Welle schließt erst über einen Closure-Trigger, der das *Mehr* gegenüber den Slice-DoDs benennt; kann er das nicht, liegt keine Welle vor. |
+| Sprint — „a fixed time period where teams complete work from their product backlog" | keine Entsprechung | Eine Welle endet durch Closure-Kriterien, nicht durch ein Datum; „Welle = Sprint" ist eine Fehlannahme ([Lernervorstellungen](lernervorstellungen.md)). |
+| Workflow, Status — „a set of statuses and transitions that a work item moves through" | Lifecycle-Verzeichnis ([Modul 5](../02-planung/modul-05-planning-harness.md)) | Der Zustand ist das Verzeichnis, kein Feld am Eintrag; ein Übergang ist ein reiner `git mv`. |
