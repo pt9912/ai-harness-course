@@ -3,7 +3,7 @@
 **Stand:** Konzept-Entwurf, **nichts umgesetzt**. Kein Kurs-, Regelwerk-,
 Template- oder Beispiel-Text berührt; diese Datei und ein Verweis in der
 [Roadmap](roadmap.md) sind das gesamte Ergebnis. Die Entscheidungen E1–E6 unten
-sind offen. Belegt ist der Befund (§1) gegen den Korpus-Stand von `2f30660`.
+sind entschieden (2026-11-22; E1 und E2 entfallen mit E6). Belegt ist der Befund (§1) gegen den Korpus-Stand von `2f30660`.
 
 Dieses Dokument beantwortet drei Fragen: **Fehlt das Thema?** (Befund) —
 **Wo gehört es im Prozess hin?** (Einordnung) — **Was wäre zu tun, und was ist
@@ -104,16 +104,16 @@ Injection-Symptomen in der Telemetrie. Ein Bedrohungsmodell des Harness
 (Prompt-Injection über Repo-Inhalte, Agent-Rechte, Container) überschnitte sich
 dort und müsste dessen Fundstellen benennen — siehe E3.
 
-## 4. Offene Entscheidungen
+## 4. Entscheidungen
 
 | | Frage | Stand der Abwägung |
 |---|---|---|
-| **E1** | **Register-Form** — Verzeichnis je Bedrohung oder eine Tabelle in einer Datei? | Das Beobachtungs-Register ([Modul 6](../kurs/de/02-planung/modul-06-roadmap.md#das-beobachtungs-register)) trägt drei Lebensdauern (unveränderliche Identität, veränderlicher Zustand, unveränderliche Belege je Auftreten) und einen **abgeleiteten Zähler mit 3×-Auslöser**. Bei Bedrohungen gibt es keinen Zähler und keinen 3×-Auslöser; „Evidence“ wäre ein Minderungs-Beleg, die Ausgänge (gemindert · akzeptiert · offen) sind andere. Das Verzeichnis lohnt sich nur, wenn Identität unveränderlich bleiben soll, während sich der Status ändert. Sonst genügt die Tabelle. Beide Formen wären eine **eigene Artefaktklasse im Planning-Baum** (neben `observations/`), mit eigener Zeile im Planning-README-Template, in Modul 6 und in `harness-dateien.md`. Ob es überhaupt ein Register braucht und wo es liegt, ist E6. |
-| **E2** | **Matrix-Klasse** — Wer darf das Register referenzieren, und worauf zeigt es? | Das Register braucht Zeile und Spalte in der Referenz-Matrix (Quelle: `referenz-richtung.md`). Ohne sie bleibt jede Aussage über Verweise ungedeckt. Das Beobachtungs-Register steht ebenfalls nicht in der Matrix und ist **kein** Präzedenzfall. |
-| **E3** | **Harness-Bedrohungsmodell** — eigene Folge-Welle? | Ein anderes Modell als das des Produkts (Angreifer, Grenzen, Assets sind andere). Überschneidet sich mit Modul 16; darf Wächter nur als Kandidaten speisen (§3). Erst nach der Produkt-Welle. |
-| **E4** | **Reviewer-Zeile** | Nur spiegelbar, wenn Modul 10 sie zuerst trägt (Quelle vor Spiegel). Eine zusätzliche DoD-Zeile im Slice wäre doppelt — **nach dem Ist-Zustand der Vorlage** (`slice.template.md` fordert `LH-QA` mit Messung); im Kurs (Modul 5) fand sich keine entsprechende Zeile, der Satz begründet also nichts für den Kurs. |
-| **E5** | **Kennungen im neuen Sicht-Abschnitt** | Quelle ist `source-precedence.md` §ID-Schema: `ARC-<NNN>` ist die Struktur-ID für **Komponente oder Schnittstelle**; die Vorlage führt das aus (auch der Berührungspunkt zu einem externen System trägt eine `ARC-*`). Eine Vertrauensgrenze **an einer Schnittstelle** trägt also schon heute eine Kennung. Offen ist, ob eine Grenze oder ein **Datenfluss ohne eigene Schnittstelle** eine bekommt: Entweder der Abschnitt trägt **keine neuen IDs** und verweist auf bestehende `ARC-*`, oder die Regel des ID-Schemas wird erweitert. Auch zu klären: Worüber die Sicht auf `LH-QA` zeigt — die Matrix kennt Sicht→Vertrag nur als „Use-Case ↔ Vertrags-ID“, ein Grenz-Abschnitt hätte ohne Use-Case keinen formalen Anker. |
-| **E6** | **Ablage und Scope** | (a) *Ob und wo:* ein **Sicht-Peer-Dokument** (z. B. ein `threat-model.md` neben `architecture.md`; `referenz-richtung.md` ordnet Zusatzdokumente wie `deployment.md` und Sequenz-Views dem Stratum Sicht zu) trüge die Regeln des Stratums und bräuchte weder Matrix-Klasse noch neue Artefaktklasse — es wäre aber derivativ und führte weder Status noch Historie, also **kein Bedrohungsregister mit Ausgängen**. Ein Register mit Ausgängen (gemindert · akzeptiert · offen) ist Planungsstand und gehört nach `planning/`. Beides zugleich ist möglich: Die *Sicht* der Grenzen im Spec-Stratum, der *Stand* im Register. (b) *Scope:* Lehrt ein Harness-Kurs Produkt-Threat-Modeling, oder nur, wie ein Harness es **aufnimmt**, wenn ein Repo es betreibt? Die Roadmap-Disziplin verlangt hier die Gegenprobe der Folgerung, nicht nur der Behauptung. |
+| **E1** | **Register-Form** — Verzeichnis je Bedrohung oder eine Tabelle in einer Datei? | **entfällt** mit E6(a): kein Register. Die Abwägung unten bleibt als Begründung stehen. Das Beobachtungs-Register trägt drei Lebensdauern und einen abgeleiteten Zähler mit 3×-Auslöser; Bedrohungen hätten weder Zähler noch Auslöser, und ihre Ausgänge leben in ADR, `LH-QA` und Slice. |
+| **E2** | **Matrix-Klasse** — Wer darf das Register referenzieren, und worauf zeigt es? | **entfällt** mit E6(a): keine neue Klasse, keine neue Matrix-Zeile. Alle Verweise laufen über bestehende Zellen (ADR → Sicht/`LH-*`, Slice → Sicht/`LH-*`). |
+| **E3** | **Harness-Bedrohungsmodell** — eigene Folge-Welle? | **entschieden (Maintainer, 2026-11-22, auf Empfehlung): zurückgestellt** auf eine Folge-Welle nach der Produkt-Welle. Ein anderes Modell als das des Produkts (Angreifer, Grenzen, Assets sind andere); überschneidet sich mit Modul 16; darf Wächter nur als Kandidaten speisen (§3). |
+| **E4** | **Reviewer-Zeile** | **entschieden (Maintainer, 2026-11-22, auf Empfehlung): ja, zuerst in Modul 10,** danach Spiegel und Vorlage (Quelle vor Spiegel). **Befund Modul 10 (2026-11-22):** Der Kurs führt Sicherheit heute **auf Code-Ebene** — Kategorie HIGH „blockiert Merge: Sicherheits-, Korrektheits- oder ADR-Verstoß“ und der HIGH-Anker „Sicherheits-Anti-Pattern (Injection, fehlende Auth-Prüfung)“ (Modul 10, `reviewer.template.md`). Eine Zeile auf **Grenz-Ebene** fehlt. Der Anschlusspunkt ist das **Design-Review**, das Modul 10 schon führt („Layer-Grenzen, Schnittstellen, ADR-Verträglichkeit einer neuen Komponente“), und das **Plan-Review**. **Prüffrage:** „Berührt der Schnitt eine Grenze (`ARC-*`)? Dann hat sie einen Ausgang — Anforderung mit Prüfung, ADR oder offener Slice.“ **Kategorie (entschieden, Maintainer, 2026-11-22):** MEDIUM („sollte vor Merge geklärt werden“) — ein fehlender Ausgang ist eine offene Frage, kein Verstoß; ein Sicherheits-Verstoß bleibt HIGH wie heute. Ein Urteil im Review, kein Sensor. Keine DoD-Zeile im Slice (sie wäre doppelt, siehe Ist-Zustand der Vorlage). |
+| **E5** | **Kennungen im neuen Sicht-Abschnitt** | **entschieden (Maintainer, 2026-11-22, auf Empfehlung): keine neuen IDs.** Quelle ist `source-precedence.md` §ID-Schema: `ARC-<NNN>` ist die Struktur-ID für Komponente oder Schnittstelle; eine Grenze an einer Schnittstelle trägt also schon eine Kennung. Ein **Datenfluss ohne eigene Schnittstelle** wird bei den `ARC-*` seiner Endpunkte beschrieben. Der Anker zu `LH-QA` entfällt als Frage: Die Sicht muss nicht auf `LH-QA` zeigen; der Verweis liegt in ADR und Slice. Das ID-Schema bleibt unverändert. |
+| **E6** | **Ablage und Scope** | **entschieden (Maintainer, 2026-11-22, auf Empfehlung).** **(b) Scope: nur die Aufnahme.** Der Kurs zeigt, wo Grenze, Bedrohung und Ausgang im Harness landen; er lehrt keine Threat-Modeling-Methode (STRIDE bleibt Denkhilfe in der Vorlage, werkzeug-agnostisch). **(a) Ablage: kein eigenes Register und kein Sicht-Peer-Dokument.** Jeder Ausgang hat ein Zuhause, und die Referenz-Matrix (`referenz-richtung.md`) erlaubt jeden nötigen Verweis: **Grenze und Datenfluss** → Abschnitt in `architecture.md` (Sicht; Grenze an einer Schnittstelle = `ARC-*`); **gemindert** → `LH-QA-*` mit Gate oder Test (Slice → `LH-*` und Sicht-ID, normativ); **akzeptiert** → ADR mit ihrem *Warum* (ADR → Sicht über `Schärft:`, ADR → `LH-*`, normativ); **offen** → Slice in `open/` (Slice → Sicht-ID und `LH-*`, normativ). Die **Übersicht** ist ein **Auslesestand** aus den Aufwärts-Verweisen, kein Artefakt — wie die RTM (`begriffe.md`). Die Sicht nennt weder ADR noch Slice (Matrix ❌); die Verbindung läuft von unten nach oben. **Abweichung von der frühen Wahl** „Verzeichnis je Bedrohung“ (2026-11-19): Ein Register mit Status wäre eine zweite Quelle für Ausgänge, die schon in ADR, `LH-QA` und Slice stehen, und driftete gegen sie — dieselbe Figur wie beim Status-Feld (Modul 5). |
 
 **Methode:** STRIDE nur als Denkhilfe in der Vorlage, nicht als Pflicht. Der Kurs
 lehrt das Prinzip (Grenze → Bedrohung → Ausgang) werkzeug-agnostisch.
@@ -125,8 +125,12 @@ lehrt das Prinzip (Grenze → Bedrohung → Ausgang) werkzeug-agnostisch.
 
 1. **Kurs.** Modul 3 (Architektur-Sicht: Vertrauensgrenzen; `LH-QA`-Sicherheit
    als Eigenschaft), Modul 4 (Worked Example Bedrohung → ADR), Modul 13
-   (optionaler Halbsatz zur Abgrenzung). Je nach E1/E2/E6 zusätzlich Modul 6,
-   `harness-dateien.md` und `referenz-richtung.md`. Ein neues Worked Example
+   (optionaler Halbsatz zur Abgrenzung), Modul 10 (Prüffrage im Design- und
+   Plan-Review, E4). Kein Register (E6): Modul 6, `harness-dateien.md` und die
+   Matrix in `referenz-richtung.md` brauchen keine neue Klasse; zu prüfen ist
+   nur, ob `begriffe.md` den Auslesestand „Übersicht der Bedrohungen“ neben der
+   RTM nennt. Das Worked Example in Modul 4 zeigt den Ausgang **akzeptiert** als
+   ADR (`Schärft:` auf die `ARC-*` der Grenze). Ein neues Worked Example
    trägt seine Lernziel-Kette: Lernziel, Übung, Selbstcheck, Lösung, und
    `make alignment-check` läuft darüber.
 2. **Regelwerk-Spiegel** der berührten Module; `Stand:`-Zeile in
@@ -135,8 +139,8 @@ lehrt das Prinzip (Grenze → Bedrohung → Ausgang) werkzeug-agnostisch.
    Architektur-Vorlage (ohne Historie; Kennungen nach E5); `LH-QA-02` ausfüllen
    statt neu anlegen — nur mit Kurs-Anker aus Schritt 1, sonst trüge das Template
    Struktur ohne Quelle; neue Pfade in `lab/templates` laufen durch die
-   Link-Umschreibung beim Bundle-Bau;
-   Register-Vorlage und eine Zeile im Planning-README-Template (nach E1/E2).
+   Link-Umschreibung beim Bundle-Bau; die Prüffrage aus E4 in
+   `reviewer.template.md` (nach Modul 10). **Keine** Register-Vorlage (E6).
 4. **Beispiel** nur, wo der Kurs ihn trägt.
 5. **Satelliten prüfen, nicht vorab festlegen:** Lösungen der berührten Module,
    Begriffe, Konzeptkarte, `make alignment-check`.
