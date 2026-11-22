@@ -64,9 +64,9 @@ umgeschrieben (N6). Die Zählung ist grob (Teilstring), sie zählt auch Fließte
 
 | Nr. | Frage | Stand / Empfehlung |
 |---|---|---|
-| **N1** | **Der Kennungs-Präfix `welle-`.** Die Welle-Datei heißt nach ihrer Kennung (`<welle-id>.md`, etwa `welle-mvp.md`), die Ergebnis-Notiz `welle-<Kennung>-results.md`. Ist die Kennung ein Dateiname, fällt sie unter die Regel → `wave-<Kennung>`. | **Empfehlung: ja, mit umbenennen** — sonst steht `wave.template.md` neben Instanzen `welle-*.md`, und die Regel braucht eine Ausnahme. Kosten: Kennungen in der Prosa (`welle-cache-warmup` u. a.), Team-Sim (197 Stellen), d-check-Defaults (N2). |
-| **N2** | **d-check-Defaults.** `planning.waves` erwartet standardmäßig `welle-*.md` und `welle-*-results.md` (Kommentar in `lab/example/.d-check.yml`). | Entweder setzt jeder Adopter die Globs, oder d-check ändert seine Defaults (CR an d-check). Zu klären mit d-check; **kein** Argument für oder gegen die Regel. |
-| **N3** | **Übergang für Adopter.** Jede Umbenennung ist Asset-Entfernung und Layout-Bruch auf Datei-Ebene → **MAJOR** (`AGENTS.md` §6). | Keine Doppelnamen (zwei Namen für dasselbe Artefakt driften). Eine Migrations-Liste im Release (alt → neu, je Datei und Glob). |
+| **N1** | **Der Kennungs-Präfix `welle-`.** Die Welle-Datei heißt nach ihrer Kennung (`<welle-id>.md`, etwa `welle-mvp.md`), die Ergebnis-Notiz `welle-<Kennung>-results.md`. | **entschieden (Maintainer, 2026-11-22): ja, `wave-<Kennung>`.** Die Datei heißt nach ihrer Kennung; bliebe der Präfix deutsch, stünde `wave.template.md` neben `welle-*.md`, und die Regel bräuchte eine Ausnahme. Folge: `wave-<x>.md`, `wave-<x>-results.md`, die Kennung in der Prosa (Kurs ~80 Stellen), Team-Sim (197) und Beispiel. Ob der Archiv-Pfad einer Welle `welle-` im Namen trägt, wird beim Umsetzen geprüft. |
+| **N2** | **d-check-Defaults.** `planning.waves.glob` (Default `welle-*.md`) und `planning.waves.results-glob` (Default `welle-*-results.md`) sind einstellbar (d-check `spec/spezifikation.md` §2-Schema). Unberührt: `trace.requirements.source` (`spec/lastenheft.md`) und die Überschriften-Defaults (Prosa). | **entschieden (Maintainer, 2026-11-22): d-check behält seine Defaults; die Vorlage setzt die Globs ausdrücklich** (`wave-*.md`, `wave-*-results.md` in `lab/templates/.d-check.yml`). Grund: Änderte d-check die Defaults, fänden alle Repos, die noch `welle-*` führen und keine Globs setzen, keine Wellen-Dateien mehr. Kein CR an d-check. |
+| **N3** | **Übergang für Adopter.** Jede Umbenennung ist Asset-Entfernung und Layout-Bruch auf Datei-Ebene → **MAJOR** (`AGENTS.md` §6). | Keine Doppelnamen (zwei Namen für dasselbe Artefakt driften). Eine Migrations-Liste im Release (alt → neu, je Datei), **Pflichtschritt: die beiden Glob-Zeilen aus N2 setzen**. Bestehende Repos laufen unverändert, bis sie migrieren. **Migrations-Hinweis:** d-check nutzt das Regelwerk selbst (vendored, `spec/spezifikation.md`, `welle-*`) und migriert als Konsument, wenn es den Tag übernimmt — eine Folge, kein Grund für oder gegen die Regel (`AGENTS.md` §1). |
 | **N4** | **Spiegel.** `lab/regelwerk` nennt dieselben Dateien. | Wortgleicher Nachzug (`AGENTS.md` §2), `Stand:`-Zeile zieht mit. |
 | **N5** | **Team-Sim.** Seed und Szenarien führen `welle-*`; Befund-Erwartungen prüfen Code **und** Ziel (`wave-drift` auf `welle-5`). | Seed und Erwartungen nachziehen, Lauf wiederholen; die Zahl der Verdikte bleibt gleich, sonst ist der Nachzug falsch. |
 | **N6** | **Historie.** `CHANGELOG.md`, abgeschlossene Pläne und Reviews nennen die alten Namen. | Nicht umschreiben — Protokoll, kein Verweis zum Reparieren. Links darin, die auf umbenannte Dateien zeigen, meldet der Link-Check; die werden nachgezogen. |
@@ -90,5 +90,5 @@ Migrations-Liste (N3).
 
 ## 6. Trigger
 
-*Nicht gesetzt* — eine Entscheidung, kein Ereignis. Vorher zu entscheiden: N1;
-vorher zu klären: N2 mit d-check.
+*Nicht gesetzt* — eine Entscheidung, kein Ereignis. N1 und N2 sind entschieden;
+offen sind die Umsetzungs-Punkte N3–N6.
