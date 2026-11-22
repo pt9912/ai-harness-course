@@ -11,6 +11,38 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 163 — 2026-11-22 · Slice-Tabelle der Welle-Vorlage verlinkt die Slice-Datei
+
+Anlass: Beim Lesen von `welle.template.md` §4 — die Tabelle nannte die Slices nur
+als Kennung, die Datei war nur über den Dateinamen zu finden, und ob die Zeile
+existiert, prüfte nichts.
+
+Die Gestalt der Tabelle trägt die Vorlage, nicht der Kurs: Modul 6 Schritt 4 legt
+nur fest, dass Slice-IDs in der Welle-Datei stehen, und nennt `welle.template.md`
+als Ziel-Form. Ein Link auf das Lifecycle-Verzeichnis bricht beim Übergang des
+Slice — wie jeder andere Link im Korpus auch, und `links` meldet das fehlende
+Ziel. Die Kennung statt der Adresse bleibt für eingefrorene Stellen (Historie,
+Closure- und Ergebnis-Notizen); die Welle-Datei lebt bis zur Closure und zieht
+mit.
+
+- `lab/templates/docs/plan/planning/welle.template.md` §4: Slice-Spalte als Link
+  `[slice-<Kennung>](<lifecycle>/slice-<Kennung>.md)`, dazu ein Absatz zu
+  `<lifecycle>` (`open`, `next`, `in-progress`, `done`) und zur Pflege beim
+  Übergang. Der Absatz nennt kein Werkzeug.
+- `lab/example`: `welle-qualitaet.md` §4 folgt der Vorlage;
+  der Kommentar im `.d-check.yml`, der Slice-Links als „instabil“ ausschloss,
+  entfällt zugunsten der Abgrenzung eingefroren/lebend. Er stützte sich auf eine
+  Aussage über die Gestalt der Quelle und war als Begründung nicht zulässig
+  (`AGENTS.md` §1).
+- Gemessen: Slice `property-tests` von `in-progress/` nach `done/` verschoben →
+  Wurzel-Gate meldet `target-missing` für `welle-qualitaet.md:46` und für
+  `CO-001-index-coverage.md:14` (dort bestand ein Slice-Link schon); zurück →
+  0 Befunde. Beobachtet am Rande: Das Beispiel-eigene `doc-check` führt `links`
+  nicht in `modules`; der Befund kommt aus dem Wurzel-Gate.
+- Kein beobachtbares Verhalten behauptet — der Befund ist bestehendes
+  d-check-Verhalten, kein Team-Sim-Szenario. Keine Regel-Änderung, `lab/regelwerk/`
+  unberührt (`Stand:` bleibt), daher beim nächsten Release PATCH.
+
 ## Welle 162 — 2026-10-15 · Template-Pfade zeigen beim Adopter auf die vendorte Baseline (Bundle-Bau)
 
 Anlass: Fund beim Lesen von `reviewer.template.md` — der Skill nennt den

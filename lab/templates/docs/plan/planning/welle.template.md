@@ -64,10 +64,16 @@ Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
 §Lifecycle als State Machine — der Zustand eines Slice ist sein
 Lifecycle-Verzeichnis und wird hier **nicht** gespiegelt.
 
+Die Kennung ist ein **Link auf die Slice-Datei**; `<lifecycle>` ist das
+Verzeichnis, in dem sie gerade liegt (`open`, `next`, `in-progress` oder `done`).
+Der Pfad nennt den Ort, keinen Status — er wird beim Übergang des Slice wie jeder
+andere Link nachgezogen, und ein Link-Check meldet das fehlende Ziel, wenn es
+vergessen wird.
+
 | Slice | Titel | Bezug |
 |---|---|---|
-| slice-<Kennung-A> | <…> | LH-FA-<NN> |
-| slice-<Kennung-B> | <…> | LH-FA-<NN> |
+| [slice-<Kennung-A>](<lifecycle>/slice-<Kennung-A>.md) | <…> | LH-FA-<NN> |
+| [slice-<Kennung-B>](<lifecycle>/slice-<Kennung-B>.md) | <…> | LH-FA-<NN> |
 
 ## 5. Abhängigkeiten
 

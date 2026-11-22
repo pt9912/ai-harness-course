@@ -43,7 +43,7 @@ Trigger die Closure dieser Welle ist.
 
 | Slice | Titel | Bezug |
 |---|---|---|
-| slice-property-tests | Property-Tests für Tie-Break und Ranking | [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
+| [slice-property-tests](in-progress/slice-property-tests.md) | Property-Tests für Tie-Break und Ranking | [LH-QA-02](../../../spec/lastenheft.md#lh-qa-02--reproduzierbarkeit) |
 
 Der Zustand jedes Slice ist sein Lifecycle-Verzeichnis und wird hier **nicht**
 gespiegelt.

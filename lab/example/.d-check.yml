@@ -290,11 +290,12 @@ ids:
       target: spec/lastenheft.md
       exempt-paths: ["docs/plan/adr/**"]
 
-# KEINE Linkpflicht fuer `slice-NNN`. Der Kurs nennt die Slice-ID einen
-# "stabilen Token, auch nachdem die Datei nach done/ wandert" — ein Pfad-Link
-# macht sie instabil: Jeder Zustandswechsel per `git mv` braeche ihn repo-weit.
-# Im ganzen Beispiel gibt es deshalb keinen einzigen Slice-Link, und das bleibt
-# so.
+# KEINE Linkpflicht fuer `slice-NNN`. Eingefrorene Stellen (Historie-Zeilen,
+# Closure- und Ergebnis-Notizen) fuehren die Kennung, nicht die Adresse (Kurs
+# `referenz-richtung.md` Regel 5; Modul 5) — ein Pfad-Link bricht dort nach dem
+# Einfrieren und wird nie nachgezogen. Verlinkt ist die Slice-Kennung nur dort,
+# wo die Zeile lebt: in der Slice-Tabelle der Welle-Datei (`welle.template.md`
+# §4). Dort zieht der Uebergang den Link nach, `links` meldet das fehlende Ziel.
 
 # Review-Report-Deckung (Kurs `modul-05-planning-harness.md` §Ziel-Form:
 # Slice, Review-Zeile seit Welle 119, slice-review-report-deckung-per-d-check). `done-dir` ist der
