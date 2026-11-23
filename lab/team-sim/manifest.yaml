@@ -114,6 +114,11 @@ gruppen:
   # lauter Kontrolle (s33d); die Fanggruppe legt die Feinheit fest (s33e still),
   # verglichen wird byte-genau (s33f laut).
   s33: [s33a, s33b, s33c, s33d, s33e, s33f]
+  # s34: ein WIP-Slot, ein Zweig, ein Arbeitsbaum (Welle 167, Modul 5) — Worktrees
+  # auf alices Klon: zweiter Arbeitsbaum auf denselben Zweig bricht ab (s34a), der
+  # Wechsel auf einen gehaltenen Zweig auch (s34b), zwei Arbeitsbaeume behalten
+  # beide Staende (s34c, Gegenstueck zu s24d), ein zweiter Klon sperrt nicht (s34d).
+  s34: [s34a, s34b, s34c, s34d]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -149,3 +154,4 @@ laeufe:
   - { datum: 2026-11-22, image: v0.91.0, neu: [s33a, s33b, s33c, s33d], gegenstand: "Entwurf: Stellen-Abgleich der Umgebungs-Zusage (Welle 166) mit dem pinsync-Block der Vorlage — gleich still mit positiver Vorbedingung, Abweichung laut, Ausdruck ohne Treffer laut, Block ohne Aktivierung still", ergebnis: "116 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-11-23, image: v0.91.0, neu: [s33e, s33f], gegenstand: "Review zu Welle 166: die Fanggruppe legt die Feinheit fest (still), verglichen wird byte-genau (laut); s33b pinnt go.mod:3, s33d bekommt Vorbedingung und laute Kontrolle am selben Baum", ergebnis: "118 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-11-23, image: v0.92.0, neu: [], gegenstand: "Pin-Bump v0.91.0 -> v0.92.0 (Modul linelength, opt-in, ohne Konfiguration byte-identisch; Security: golang.org/x/net gegen CVE-2026-78661): alle 118 Verdikte unveraendert", ergebnis: "118 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-11-23, image: v0.92.0, neu: [s34a, s34b, s34c, s34d], gegenstand: "Ein WIP-Slot, ein Zweig, ein Arbeitsbaum (Welle 167): git worktree sperrt denselben Zweig beim Anlegen und beim Wechsel, zwei Arbeitsbaeume behalten beide Staende, ein zweiter Klon sperrt nicht; Gegenprobe mit --force / --ignore-other-worktrees: s34a, s34b FAIL", ergebnis: "122 PASS, 0 FAIL, 0 KAPUTT" }

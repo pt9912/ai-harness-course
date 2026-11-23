@@ -247,6 +247,15 @@ Pro Slice:
 7. Doku/Indizes aktualisieren, falls ein öffentlicher Vertrag berührt.
 8. Ausgeführte Sensors und verbleibende Risiken berichten — keine Erfolgsmeldung ohne Gate-Ausführung.
 
+**Parallele Läufe: ein WIP-Slot, ein Zweig, ein `git worktree`.** Das
+WIP-Limit zählt pro Lauf, nicht pro Mensch. Läuft dieser Workflow parallel zu
+einem anderen, bekommt er nach dem Anspruchs-Commit auf dem Hauptzweig seinen
+eigenen Zweig **und** Arbeitsbaum — `git worktree add <pfad> -b <branch-name>`
+oder ein weiterer Klon —, und `Verantwortlich:` nennt Person und Zweig. Nie zwei
+Läufe in derselben Arbeitskopie: Der zweite überschreibt den ersten still. Ein
+Slice gehört einem Lauf (Baseline-Regelwerk `modul-05-planning-harness.md`
+§Lifecycle als State Machine).
+
 Dieser Workflow deckt ausschließlich die Implementer-Rolle ab. Schritt 8
 ist der Rollenwechsel, kein Abschluss: Bericht → Handoff an Reviewer
 (`.harness/skills/reviewer.md`, siehe `harness/README.md` §Guides) →

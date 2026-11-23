@@ -49,7 +49,9 @@ falscher Ursache „bestanden".
 **Warum Clones statt Worktrees:** Worktrees teilen ein `.git` und verbieten
 denselben Branch zweimal — sie modellieren *einen* Entwickler. Die
 Team-Topologie ist geteilter Remote plus lokale Sichten; erst damit ist „was in
-einem offenen PR liegt, ist für andere nicht da" real.
+einem offenen PR liegt, ist für andere nicht da" real. Die Ausnahme ist s34: Dort
+ist der eine Entwickler mit mehreren Läufen der Gegenstand, und die Worktrees
+entstehen auf alices Klon.
 
 ## Die Szenarien und ihre Läufe
 
@@ -89,6 +91,7 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-11-22 | `v0.91.0` | 116 PASS, 0 FAIL, 0 KAPUTT | erweitert um s33 (Welle 166) |
 | 2026-11-23 | `v0.91.0` | 118 PASS, 0 FAIL, 0 KAPUTT | erweitert um s33e, s33f; s33d mit Vorbedingung und lauter Kontrolle (Review zu Welle 166) |
 | 2026-11-23 | `v0.92.0` | 118 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.91.0 → v0.92.0; alle Verdikte unverändert |
+| 2026-11-23 | `v0.92.0` | 122 PASS, 0 FAIL, 0 KAPUTT | erweitert um s34 (Welle 167) |
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -214,6 +217,10 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s33d | Block steht, `pinsync` fehlt in `modules`, Abweichung | **still**, ohne `pinsync:`-Zeile | ✓ die zwei Schritte der Vorlage gelten auch hier — die fehlende Zeile ist das Zeichen; Vorbedingung `go 1.24` per `schritt`, laute Kontrolle `--enable pinsync` am selben Baum |
 | s33e | aktiviert, `go.mod` nennt `go 1.23.0`, Ausdruck der Vorlage (Major.Minor) | **still**, Zeile `pinsync: 1 Pin(s) geprüft` | ✓ die Fanggruppe legt fest, wie fein verglichen wird |
 | s33f | derselbe Baum, die Fanggruppe in `go.mod` fängt die ganze Version | **`pinsync-mismatch`** auf `go.mod:3` (target `go`) | ✓ byte-genau: `1.23` ist nicht `1.23.0` |
+| s34a | alice hält Lauf-Zweig `lauf/kern` in einem `git worktree`, legt einen zweiten Arbeitsbaum auf denselben Zweig an | **abgebrochen**, kein zweiter Arbeitsbaum | ✓ ein Zweig, ein Arbeitsbaum — git setzt es selbst durch |
+| s34b | im Lauf-Arbeitsbaum `git switch main`, während der Haupt-Arbeitsbaum `main` hält | **abgebrochen**, Arbeitsbaum bleibt auf `lauf/kern` | ✓ auch der Wechsel ist gesperrt, nicht nur das Anlegen |
+| s34c | zwei Läufe in zwei Arbeitsbäumen schreiben dieselbe Datei (die Schreibvorgänge aus s24d) | **beide Stände erhalten**, je einer auf seinem Zweig | ✓ das Gegenstück zu s24d: getrennte Arbeitsbäume verlieren keinen Anspruch |
+| s34d | ein zweiter Klon checkt `lauf/kern` aus, während der Arbeitsbaum ihn hält | **still**, keine Sperre | ✓ der Klon trägt die Trennung, setzt sie aber nicht durch |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

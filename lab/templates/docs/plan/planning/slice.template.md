@@ -33,7 +33,13 @@ Der Verweis zeigt **aufwärts**: Die Spec nennt diesen Slice nie
 Implementer-Rolle, gesetzt beim Übergang open→next (Baseline-Regelwerk
 modul-05-planning-harness.md §Lifecycle als State Machine). Der Autor schrieb
 den Plan; zwei Felder, zwei Fragen. Kein Statuswert: der Zustand bleibt das
-Verzeichnis. Kein Sensor prüft das Feld — es ist Deklaration. -->
+Verzeichnis. Kein Sensor prüft das Feld — es ist Deklaration.
+Paralleler Lauf — ein WIP-Slot, ein Zweig, ein `git worktree`: Das WIP-Limit
+zählt pro Lauf. Hält ein Mensch mehrere Implementer-Läufe parallel, trägt das
+Feld ab next→in-progress Person und Zweig — `<Name> (Zweig <branch-name>)` —,
+und jeder Lauf arbeitet in seinem eigenen Arbeitsbaum (`git worktree` oder ein
+weiterer Klon), nie zwei Läufe in derselben Arbeitskopie. Ein Slice gehört
+einem Lauf. -->
 
 **Autor:** <Name>. **Datum:** YYYY-MM-DD.
 

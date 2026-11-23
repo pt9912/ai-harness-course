@@ -22,7 +22,8 @@ anderer übernimmt).
 
 Faustregel: WIP-Limit auf 1 pro Rolleninhaber (Modul 8) — pro Lauf, nicht pro
 Rolle: mehrere Läufe derselben Person zählen einzeln, wenn `Verantwortlich:`
-sie per Zweig unterscheidet. Wer mehrere Slices gleichzeitig in
+sie per Zweig unterscheidet und jeder in seinem eigenen Arbeitsbaum läuft
+(`git worktree` oder Klon; ein Slice gehört einem Lauf). Wer mehrere Slices gleichzeitig in
 `in-progress/` hat, hat kein Lifecycle, sondern ein Buffet — und keinen
 Punkt, an dem reproduzierbar geprüft wird, ob der 8-Schritt-Workflow
 durchlaufen wurde.

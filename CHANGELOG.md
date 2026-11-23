@@ -11,6 +11,55 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 167 — 2026-11-23 · Ein WIP-Slot, ein Zweig, ein Arbeitsbaum
+
+Anlass: die Frage, ob die WIP-Regel Worktrees erwähnt, und ob sich die Arbeit
+damit auf mehrere Worktrees verteilen lässt (Roadmap-Faden *Paralleler Lauf
+braucht eine eigene Arbeitskopie*). Seit Welle 148 zählt das WIP-Limit pro Lauf
+und `Verantwortlich:` unterscheidet parallele Läufe per Zweig — dass ein
+Checkout nur einen Zweig zur Zeit trägt, sagte der Kurs nicht. Zwei Läufe in
+derselben Arbeitskopie überschreiben einander still (Team-Sim s24d, seit
+Welle 130 geprobt). Das Wort `worktree` kam in Kurs, Regelwerk und Vorlagen
+nicht vor; ein Agent, der danach sucht, fand nichts. Die Welle schließt den
+Faden; er ist aus der Roadmap entfernt.
+
+- **Modul 5** §Lifecycle als State Machine — zwei neue Absätze nach dem
+  Zweig-Absatz. *Ein WIP-Slot, ein Zweig, ein Arbeitsbaum*: Jeder parallele Lauf
+  bekommt nach dem Anspruch, mit dem Zweig, seinen eigenen Arbeitsbaum — ein
+  `git worktree` je Lauf oder ein weiterer Klon; der `worktree` sperrt denselben
+  Zweig in einem zweiten Arbeitsbaum, ein Klon nicht. *Ein Slice gehört einem
+  Lauf*: Einen Slice auf zwei Arbeitsbäume zu verteilen, setzte zwei Läufe in
+  einen WIP-Slot; parallel zu bearbeiten heißt schneiden (`in-progress → next`).
+  Selbstcheck-Rubrik: das WIP-Limit nennt den eigenen Arbeitsbaum mit.
+- **Modul 8** §Typische Fehlvorstellungen, Rolleninhaber-Absatz: „mehrere
+  Implementer-Agenten in eigenen Zweigen, jeder in seinem eigenen Arbeitsbaum
+  (`git worktree`)“, mit Verweis auf Modul 5.
+- **Lösung 5**: Faustregel zum WIP-Limit um Arbeitsbaum und „ein Slice gehört
+  einem Lauf“ ergänzt.
+- **Spiegel** `lab/regelwerk/modul-05-planning-harness.md` (Lifecycle und
+  §Trigger je Lifecycle-Übergang und WIP-Limit) und
+  `lab/regelwerk/modul-08-agentenrollen.md` wortgleich, ohne die
+  Team-Sim-Belege (netzlos); `lab/regelwerk/README.md`: `Stand:` auf Welle 167.
+- **Vorlagen**: `slice.template.md` — der Bedienhinweis zu `Verantwortlich:`
+  nennt den parallelen Lauf (Zweig-Form `<Name> (Zweig <branch-name>)` aus
+  Modul 5, die der Vorlage fehlte; eigener Arbeitsbaum). `AGENTS.template.md`
+  §6 Minimal Agent Workflow — neuer Absatz *Parallele Läufe: ein WIP-Slot, ein
+  Zweig, ein `git worktree`*: Die Datei liest ein Agent zuerst, und WIP-Limit
+  und `worktree` stehen dort im selben Satz.
+- **Nicht geändert**: [`source-precedence.md`](kurs/de/grundlagen/source-precedence.md)
+  §Vergabe nennt „eigene Zweige oder gemeinsame Arbeitskopie“ als Topologien
+  der Kennungs-Frage; seine Aussage gilt in beiden und bleibt richtig. Das
+  Beispiel führt keinen parallelen Lauf und bleibt unverändert.
+
+**Team-Sim:** neue Gruppe **s34** (Worktrees auf alices Klon; der Kopf von
+`run.sh` und das README nennen die Ausnahme von *Clones statt Worktrees*):
+zweiter Arbeitsbaum auf denselben Lauf-Zweig bricht ab (s34a), der Wechsel auf
+einen gehaltenen Zweig auch (s34b), zwei Arbeitsbäume behalten beide Stände
+(s34c, Gegenstück zu s24d), ein zweiter Klon sperrt nicht (s34d). Verdikte am
+Exit-Code und am Zustand, nicht am Meldungstext (Locale). Gegenprobe mit
+`--force` und `--ignore-other-worktrees`: s34a und s34b FAIL. 122 PASS, 0 FAIL,
+0 KAPUTT auf d-check v0.92.0.
+
 ## Welle 166 — 2026-11-22 · Die Umgebungs-Zusage: Anforderung, zwei Träger, ein Check
 
 Anlass: [`docs/reproduzierbarkeits-zusage-plan.md`](docs/reproduzierbarkeits-zusage-plan.md).

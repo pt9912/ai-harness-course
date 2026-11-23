@@ -2,7 +2,8 @@
 # Team-Sim — Replay fuer Nebenlaeufigkeits-Szenarien (Modul-12-Bauform).
 # KEIN Gate: laeuft auf Anlass, nicht in make check. Topologie je Lauf frisch:
 # bare origin.git + zwei Clones (alice, bob) — die Team-Topologie, nicht
-# Worktrees (die teilen ein .git und modellieren EINEN Entwickler).
+# Worktrees (die teilen ein .git und modellieren EINEN Entwickler — genau das
+# probt s34, dort auf alices Klon).
 # Erwartungen sind VORAB notiert (manifest.yaml, README-Tabelle); auch stille
 # Ausgaenge sind Erwartungen.
 #
@@ -2107,6 +2108,59 @@ s33_pinsync_stellen_abgleich() {
 }
 
 # ---------------------------------------------------------------------------
+# s34: ein WIP-Slot, ein Zweig, ein Arbeitsbaum (Welle 167, Modul 5 §Lifecycle
+# als State Machine). Hier sind Worktrees der Gegenstand, nicht die Topologie:
+# EIN Entwickler (alice) haelt mehrere Laeufe. git setzt "ein Zweig, ein
+# Arbeitsbaum" selbst durch (s34a, s34b); zwei Laeufe in zwei Arbeitsbaeumen
+# behalten beide ihren Stand (s34c, Gegenstueck zu s24d); ein zweiter Klon
+# sperrt nichts (s34d). Verdikte am Exit-Code und am Zustand, nicht am
+# Meldungstext — der haengt an der Locale.
+s34_worktree_lauf() {
+  topo; cd "$WORK/sim/alice" || return 1
+  local kern="$WORK/sim/alice-kern" index="$WORK/sim/alice-index"
+  # Der Anspruch steht im Seed (slice-001 in in-progress/, alice); der Lauf
+  # bekommt danach Zweig und Arbeitsbaum.
+  schritt git worktree add -q "$kern" -b lauf/kern || return 1
+  schritt test "$(git -C "$kern" branch --show-current)" = lauf/kern || return 1
+  # --- s34a: ein zweiter Arbeitsbaum auf denselben Lauf-Zweig
+  git worktree add -q "$WORK/sim/alice-kern2" lauf/kern >/dev/null 2>&1; rc=$?
+  da=$([ -e "$WORK/sim/alice-kern2" ] && echo ja || echo nein)
+  [ $rc -ne 0 ] && [ "$da" = nein ] && ok=0 || ok=1
+  verdikt "s34a zweiter Arbeitsbaum auf denselben Lauf-Zweig: LAUT (worktree add bricht ab)" "rc!=0, kein zweiter Arbeitsbaum" "rc=$rc, angelegt=$da" $ok
+  # --- s34b: im Lauf-Arbeitsbaum auf main wechseln, das der Haupt-Arbeitsbaum haelt
+  schritt test "$(git branch --show-current)" = main || return 1
+  git -C "$kern" switch -q main >/dev/null 2>&1; rc=$?
+  zweig=$(git -C "$kern" branch --show-current)
+  [ $rc -ne 0 ] && [ "$zweig" = lauf/kern ] && ok=0 || ok=1
+  verdikt "s34b switch auf den Zweig eines anderen Arbeitsbaums: LAUT" "rc!=0, Arbeitsbaum bleibt auf lauf/kern" "rc=$rc, Zweig=$zweig" $ok
+  # --- s34c: zwei Laeufe, zwei Arbeitsbaeume, dieselbe Datei — dieselben
+  # Schreibvorgaenge wie s24d, nur getrennt. Vorbedingung: jeder Arbeitsbaum
+  # steht auf seinem Lauf-Zweig — sonst haengt das Verdikt an s34b.
+  schritt git worktree add -q "$index" -b lauf/index || return 1
+  schritt test "$(git -C "$kern" branch --show-current)" = lauf/kern || return 1
+  schritt test "$(git -C "$index" branch --show-current)" = lauf/index || return 1
+  printf '%s\n' '- slice-003 (Cache) — vorvergeben.' >> "$kern/docs/plan/planning/wave-1-basis.md"
+  printf '%s\n' '- slice-003 (Index) — vorvergeben.' >> "$index/docs/plan/planning/wave-1-basis.md"
+  schritt git -C "$kern" commit -qam "Anspruch Cache (Lauf kern)" || return 1
+  schritt git -C "$index" commit -qam "Anspruch Index (Lauf index)" || return 1
+  cache=$(git show lauf/kern:docs/plan/planning/wave-1-basis.md | grep -c 'slice-003 (Cache)' || true)
+  idx=$(git show lauf/index:docs/plan/planning/wave-1-basis.md | grep -c 'slice-003 (Index)' || true)
+  [ "$cache" = 1 ] && [ "$idx" = 1 ] && ok=0 || ok=1
+  verdikt "s34c zwei Laeufe, zwei Arbeitsbaeume, dieselbe Datei: beide Staende erhalten" "1x Cache auf lauf/kern, 1x Index auf lauf/index" "Cache=$cache, Index=$idx" $ok
+  # --- s34d: ein zweiter Klon checkt denselben Lauf-Zweig aus — keine Sperre
+  schritt git push -q origin lauf/kern || return 1
+  cd "$WORK/sim" || return 1
+  schritt git clone -q origin.git alice-klon2 || return 1
+  git -C alice-klon2 switch -q lauf/kern >/dev/null 2>&1; rc=$?
+  zweig=$(git -C alice-klon2 branch --show-current)
+  # Vorbedingung: der Arbeitsbaum haelt den Zweig noch — sonst waere die
+  # Stille kein Befund ueber den Klon
+  schritt test "$(git -C "$kern" branch --show-current)" = lauf/kern || return 1
+  [ $rc -eq 0 ] && [ "$zweig" = lauf/kern ] && ok=0 || ok=1
+  verdikt "s34d zweiter Klon checkt denselben Lauf-Zweig aus: STILL (keine Sperre)" "rc=0, Klon auf lauf/kern, waehrend der Arbeitsbaum ihn haelt" "rc=$rc, Zweig=$zweig" $ok
+}
+
+# ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
 lauf s02 s02_stille_nummer
@@ -2143,6 +2197,7 @@ lauf s30 s30_werkzeug_teil
 lauf s31 s31_review_deckung
 lauf s32 s32_wellen_praefix_globs
 lauf s33 s33_pinsync_stellen_abgleich
+lauf s34 s34_worktree_lauf
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]
