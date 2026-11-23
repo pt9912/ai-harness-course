@@ -21,6 +21,7 @@
 | Skill | Repo-spezifisches Markdown/JSON-Artefakt, das einer Agenten-Rolle Checkliste oder Verhalten beibringt. Lebt typischerweise in `.harness/`. |
 | Replay | Deterministisch wiederholbarer Agentenlauf gegen fixierte Inputs. |
 | Golden Set | Kuratiertes Eingabe/Erwartungs-Paar für Regressionstests. |
+| Umgebungs-Zusage | Belegbare Aussage der Umgebung über sich selbst: *Die Umgebung, in der ein Lauf stattfindet, ist die behauptete — und das lässt sich belegen.* Zwei Teile: **festgelegt** (gepinnt) und **adressierbar** (belegt). Träger legen sie fest — Docker/Dockerfile oder Tool-Pin —, ein Tool-/Versions-Check prüft sie; wo kein Container festlegt, ist der Check selbst Träger. Nicht die Zusage des Lastenhefts an den Auftraggeber; das Präfix steht immer mit (Modul 14). |
 | Finding | Einzelne Beobachtung eines Reviewers, kategorisiert HIGH/MEDIUM/LOW/INFO. |
 | DoD | Definition of Done. Liste der Bedingungen, die ein Slice erfüllen muss. |
 | Guide | Feedforward-Kontrolle: lenkt den Agenten *vor* der Handlung (Spec, ADR, AGENTS.md, Skill, Tool-Constraint). |

@@ -108,7 +108,7 @@ Bewährte Muster:
 * **Docker-only**: kein lokales `.venv`, kein `pip install` außerhalb von Dockerfile-Stages.
   *Falsch:* `uv run python tools/foo.py`.
   *Richtig:* `docker compose run --rm test-runner uv run python tools/foo.py`.
-  *Begründung:* Toolchain-Reproduzierbarkeit + Supply-Chain-Defense.
+  *Begründung:* Toolchain-Reproduzierbarkeit — Docker ist hier der Träger der Umgebungs-Zusage (Modul 14).
 * **`# noqa` ist verboten**: bricht das `noqa-gate` in `make gates`. Ausnahmen werden in `pyproject.toml` mit Begründung dokumentiert.
 * **Suppression-Verbot pro Sprache** — derselbe Mechanismus, andere Syntax:
   * Python: `# noqa`

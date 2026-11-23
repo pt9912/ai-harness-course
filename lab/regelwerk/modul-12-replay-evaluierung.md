@@ -218,6 +218,12 @@ eine Abhängigkeit, die im Replay gar nicht mehr wirkt.
 | 3 | Erwartungs-Drift | Eingaben vs. Spec (Modul 3) |
 | 4 | echte Regression | alles oben ausgeschlossen |
 
+Rang 1 hat eine maschinelle Vorstufe: Der Tool-/Versions-Check
+([Modul 14](modul-14-docker-harness.md#der-zweite-träger-tool-pin-und-tool-versions-check))
+stellt vor jedem Gate-Lauf fest, ob die Umgebung die deklarierte ist — für die
+Werkzeuge im Image nur, sofern er im Image läuft (Ausführungsort, Modul 14). Ein Replay,
+das erst hier an Rang 1 scheitert, hätte dort schon rot werden können.
+
 Beim Inferenz-Modell kommt auf Rang 2 der **Provider-Status** hinzu:
 gleiche Version, anderes Subroute ist eine reale Drift-Quelle.
 

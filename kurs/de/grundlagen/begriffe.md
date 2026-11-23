@@ -22,6 +22,7 @@
 | Golden Set | Kuratiertes Eingabe/Erwartungs-Paar für Regressionstests. |
 | Drift | Abweichung des Verhaltens zwischen zwei Läufen, deren Manifeste eigentlich übereinstimmen sollten. |
 | Determinismus | Gleiche Eingabe → gleiche Ausgabe. Setzt voraus, dass *jede* Zufalls- und Umgebungsquelle des Laufs gepinnt ist: Seed samt Ableitungsregel, Modellversion, Toolchain, Umgebungszustand des Containers. |
+| Umgebungs-Zusage | Belegbare Aussage der Umgebung über sich selbst: *Die Umgebung, in der ein Lauf stattfindet, ist die behauptete — und das lässt sich belegen.* Zwei Teile: **festgelegt** (gepinnt) und **adressierbar** (belegt). Träger legen sie fest — Docker/Dockerfile oder Tool-Pin —, ein Tool-/Versions-Check prüft sie; wo kein Container festlegt, ist der Check selbst Träger. Nicht die Zusage des Lastenhefts an den Auftraggeber; das Präfix steht immer mit (Modul 14). |
 | Finding | Einzelne Beobachtung eines Reviewers, kategorisiert HIGH/MEDIUM/LOW/INFO. |
 | DoD | Definition of Done. Liste der Bedingungen, die ein Slice erfüllen muss. |
 | Guide | Feedforward-Kontrolle: lenkt den Agenten *vor* der Handlung (Spec, ADR, AGENTS.md, Skill, Tool-Constraint). |

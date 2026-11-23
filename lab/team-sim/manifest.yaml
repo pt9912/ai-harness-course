@@ -102,6 +102,18 @@ gruppen:
   # Dazu: ein ungehakter Punkt ist auch eine Zusage (s31k), ein lebender Slice
   # in einem Unterverzeichnis wird geprueft (s31l).
   s31: [s31a, s31b, s31c, s31d, s31e, s31f, s31g, s31h, s31j, s31i, s31k, s31l]
+  # s32: ENTWURFS-Gegenstand — englische Welle-Praefixe (Welle 165): mit den
+  # Globs der Vorlage beisst waves auf eine wave-Datei (s32a), ohne sie bleibt der
+  # Default welle-* still (s32b), und unter dem Default beisst er auf eine
+  # welle-Datei (s32c, Kontrolle fuer s32b).
+  s32: [s32a, s32b, s32c]
+  # s33: ENTWURFS-Gegenstand — der Stellen-Abgleich der Umgebungs-Zusage (Welle
+  # 166), mit DEMSELBEN pinsync-Block wie die Vorlage: gleich still mit
+  # positiver Vorbedingung (s33a), Abweichung laut an Datei:Zeile (s33b), Ausdruck
+  # ohne Treffer laut (s33c), Block ohne Aktivierung still trotz Abweichung mit
+  # lauter Kontrolle (s33d); die Fanggruppe legt die Feinheit fest (s33e still),
+  # verglichen wird byte-genau (s33f laut).
+  s33: [s33a, s33b, s33c, s33d, s33e, s33f]
 # Laeufe: Datum, Image, neuer Satz, Ergebnis — der Beleg ist die ergebnis.tsv des Laufs.
 laeufe:
   - { datum: 2026-08-16, image: v0.59.0, satz: [s01, s01b, s02, s03, s04a, s04b, s05, s06, s07], ergebnis: "9 PASS, 0 FAIL" }
@@ -132,3 +144,7 @@ laeufe:
   - { datum: 2026-10-10, image: v0.86.1, neu: [], gegenstand: "Pin-Bump v0.85.0 -> v0.86.1 (v0.86.0: skip-allows-empty opt-in, match: name deckt nur den laengsten Namen — im Team-Sim ohne Wirkung; v0.86.1 nur Security): alle Verdikte unveraendert", ergebnis: "97 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-10-10, image: v0.86.1, neu: [s31a, s31b, s31c, s31d, s31e, s31f, s31g, s31h, s31j, s31i, s31k, s31l], gegenstand: "Entwurf: die Review-Deckung laeuft nicht leer (Welle 161) — gedeckt still, ohne Report laut, eigene DoD-Formulierung mit require-promises laut und ohne still (der Leerlauf), Slug ohne match: name laut; alles archiviert mit recursive/skip-pattern/skip-allows-empty still (mit und ohne Wellen), je mit lauter Kontrolle; Praefix-Slice laut; ungehakte Zusage laut; lebender Slice im Unterverzeichnis laut", ergebnis: "109 PASS, 0 FAIL, 0 KAPUTT" }
   - { datum: 2026-11-19, image: v0.91.0, neu: [], gegenstand: "Pin-Bump v0.86.1 -> v0.91.0 (v0.89.0: Target doc-manual im Fragment; v0.90.0: Modul metrics; v0.91.0: Modul pinsync — beide opt-in, ohne Konfiguration byte-identisch): alle Verdikte unveraendert", ergebnis: "109 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-11-22, image: v0.91.0, neu: [s32a, s32b], gegenstand: "Entwurf: englische Welle-Praefixe (Welle 165) — mit den Globs der Vorlage beisst waves auf eine wave-Datei, ohne sie bleibt der Default welle-* still", ergebnis: "111 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-11-22, image: v0.91.0, neu: [s32c], gegenstand: "Review zu Welle 165: laute Kontrolle fuer s32b — unter dem Default beisst waves auf eine welle-Datei", ergebnis: "112 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-11-22, image: v0.91.0, neu: [s33a, s33b, s33c, s33d], gegenstand: "Entwurf: Stellen-Abgleich der Umgebungs-Zusage (Welle 166) mit dem pinsync-Block der Vorlage — gleich still mit positiver Vorbedingung, Abweichung laut, Ausdruck ohne Treffer laut, Block ohne Aktivierung still", ergebnis: "116 PASS, 0 FAIL, 0 KAPUTT" }
+  - { datum: 2026-11-23, image: v0.91.0, neu: [s33e, s33f], gegenstand: "Review zu Welle 166: die Fanggruppe legt die Feinheit fest (still), verglichen wird byte-genau (laut); s33b pinnt go.mod:3, s33d bekommt Vorbedingung und laute Kontrolle am selben Baum", ergebnis: "118 PASS, 0 FAIL, 0 KAPUTT" }

@@ -11,6 +11,121 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 166 — 2026-11-22 · Die Umgebungs-Zusage: Anforderung, zwei Träger, ein Check
+
+Anlass: [`docs/reproduzierbarkeits-zusage-plan.md`](docs/reproduzierbarkeits-zusage-plan.md).
+Modul 14 führte den Container als *den* „Reproduzierbarkeits-Anker“, ohne
+Definition und ohne Abwägung; bei den meisten Pins prüfte nichts, dass sie
+halten, und ein Gate für Vorhandensein und Version der Werkzeuge gab es nicht.
+Eine Welle in zwei Teilen (Plan A5).
+
+**Teil A — Begriff und Bereinigung.**
+
+- **Modul 14** — neuer Abschnitt *Die Umgebungs-Zusage — Anforderung vor
+  Träger*: die belegbare Aussage der Umgebung über sich selbst, zwei Teile
+  (festgelegt · adressierbar), Anforderung als `LH-QA-*` des Projekts, Abgrenzung
+  zur Lastenheft-Zusage; die Frage-Tabelle (Artefakt-Adresse · Versions-Pin ·
+  Lauf-Pin · Modell-Pin · Umgebungs-Pin · Prüfung); zwei Träger als heutiger Stand
+  des Kurses, keine Abwägung gegen weitere (Nix, devbox, asdf, mise, VM); die
+  Wahl *kann* das Repo als ADR festhalten. Der Begriff „Reproduzierbarkeits-Anker“
+  entfällt in Kurs, Regelwerk, Vorlagen und Beispiel: Lernziel 2, Fehlvorstellung
+  *Container = Deployment*, Engage, die zwei Belegformen (Archiv · Rezept), Rubrik;
+  neue Fehlvorstellung *„Reproduzierbar heißt: im Container.“* Er bleibt im
+  Kommentar von `.github/workflows/templates-release.yml` — Workflow-Dateien auf
+  `main` sperrt das Ruleset; der Kommentar zieht mit der nächsten Änderung am
+  Workflow nach.
+- **Modul 9** — die Begründung der Docker-only-Regel verliert
+  „Supply-Chain-Defense“ (kein Mechanismus); „Toolchain-Reproduzierbarkeit“ bleibt,
+  mit Verweis auf den Träger. `AGENTS.template.md` §3.1 und `lab/example/AGENTS.md`
+  ziehen nach.
+- **Satelliten** — `begriffe.md` (neuer Eintrag *Umgebungs-Zusage*, Kurs und
+  Spiegel), `lernpfade.md`, `fallstudien.md`, `lernervorstellungen.md`, Modul 16
+  (Phase der Freigabe-Checkliste), Lösung 16 (Abschnitt *Umgebungs-Zusage* mit
+  Check-Zeile), `harness-dateien.md` (Reproduzierbarkeits-Bindung setzt eine
+  Umgebungs-Zusage voraus), Modul 12 (Rang 1 hat eine maschinelle Vorstufe,
+  für die Werkzeuge im Image nur, sofern der Check dort läuft), Modul 16
+  (Fehlvorstellung *Deployt heißt produktiv*: der Container als Träger statt
+  „Container-Anker“).
+- Teil A ändert kein beobachtbares Verhalten — **kein Team-Sim-Szenario**.
+
+**Teil B — der zweite Träger und das Gate.**
+
+- **Modul 14** — neuer Abschnitt *Der zweite Träger: Tool-Pin und
+  Tool-/Versions-Check*: Pin legt fest, Check belegt; die beiden Träger schließen
+  sich nicht aus (wo Docker festlegt, ist der Check die Prüfung); zwei Prüfungen
+  derselben Zusage — **Stellen-Abgleich** (statisch, d-check `pinsync`) und
+  **Laufzeit-Gate** (dynamisch, Skript des Repos); Quelle des Solls (ableiten ·
+  Manifest · Mischform, Wahl als `MR-<NNN>`, **kein Default**); vier Prüfformen
+  (exakt · Mindestversion · Fähigkeit · Anwesenheit) an der Hauptachse *festlegen
+  oder fordern*, Pflichtfeld Grund, segmentweiser Vergleich und die zwei
+  Fehlerbilder (Teilstring, Dezimalzahl); Inventar mit Kontext, Rot als Standard,
+  Warnung nur für `optional` mit Angabe, was ausfällt; fünf Ausführungsorte mit
+  ihrer Lücke; die Pflichten des Skripts (Bash-Guard vor jeder Funktion, eigene
+  Werkzeuge im Inventar, Pin des Prüfwerkzeugs, Break-Test). Das Inventar ist
+  eine Datei des Repos, die das Skript liest; beim Weg *Ableiten* nennt es die
+  Pin-Stelle statt ihres Werts, am Host gilt die Mischform. Die Regel des Checks
+  steht in der Spezifikation, das Inventar trägt die Daten. Das Protokoll des
+  Break-Tests steht im Skriptkopf oder in der ADR, nicht in der Sensor-Datei. Die
+  Probe im `PATH`-Käfig als Beleg mit Lücke — sie greift nur, wo Fehler bis zu
+  `make` durchkommen (`set -e`, `pipefail`); ohne Probe sind die Pflichten des
+  Skripts die Mindestlage. Neue Übung *Werkzeug-Inventar aufstellen*
+  (LZ 2), Selbstcheck und Rubrik nachgezogen, Lösung 14 ebenso.
+- **Modul 13** — Gate-Typ-Tabelle um den Tool-/Versions-Check; Abgrenzung zu
+  `MR-004` als eigener Absatz, im Spiegel ebenso: Der Check erreicht einen
+  direkten Aufruf am Makefile vorbei nicht, er ergänzt den Wächter.
+- **Regelwerk** — wortgleicher Nachzug von Modul 9, 12, 13, 14, `begriffe` und
+  `harness-dateien`; die Überschrift *Zwei Formen des Reproduzierbarkeits-Ankers*
+  heißt *Zwei Formen des Belegs beim Docker-Träger* (kein Verweis auf den alten
+  Anker). `Stand:` auf Welle 166.
+- **Vorlagen** — neu `harness/sensors/environment-check.template.md` (Vertrag mit
+  Verweis auf die Festlegung `SPEC-<NNN>`, Pfad der Inventar-Datei, Soll-Quelle ohne Default, Ausführungsort, Grenze,
+  Ausgänge, Bash-Sperre; kein Inventar und kein Break-Test-Protokoll in der
+  Datei, **kein Skript**, Plan A4); `.d-check.yml` mit auskommentiertem
+  `pinsync`-Block (Beispiel `go` in `Dockerfile` und `go.mod`);
+  `AGENTS.template.md`: der Host braucht mindestens Docker und `make`, den Rest
+  nennt das Inventar, wenn das Repo einen Check führt; `README.md` listet die
+  Vorlage und zählt richtig (24 Skelette, 28 Dateien — die Zählung stand schon
+  vor der Welle falsch).
+- **Beispiel** — `pinsync` aktiv: die Go-Version im Base-Image von
+  `go/Dockerfile` und in der `go`-Direktive von `go/go.mod` (Major.Minor),
+  `SPEC-028` gebunden an `LH-QA-03`. Python, Java, C# und Kotlin tragen ihre
+  Toolchain ebenfalls an mehreren Stellen und sind nicht abgeglichen; Grenze 8
+  der Sensor-Datei sagt das. Gemessen: Bestand `pinsync: 1 Pin(s) geprüft`,
+  0 Befunde; `go 1.24` in einer Kopie → `pinsync-mismatch` auf `go/go.mod:3`.
+  `SPEC-028` in §7 der Spezifikation, Sensor-Datei (sieben Module, Grenze 8,
+  Bindung) und Gate-Index ziehen nach. Das Laufzeit-Gate ist im Beispiel nicht
+  gebaut; die Grenze sagt das.
+- **Team-Sim** — s33, **mit dem Block der Vorlage** (zwischen `# pinsync:` und
+  der nächsten leeren Kommentarzeile gezogen, ein leerer Auszug ist KAPUTT):
+  s33a gleich → still, positive Vorbedingung `pinsync: 1 Pin(s) geprüft`; s33b
+  Abweichung → `pinsync-mismatch` auf `go.mod:3`; s33c kein Treffer →
+  `pinsync-no-match` auf `Dockerfile`; s33d Block ohne Aktivierung → still und
+  ohne `pinsync:`-Zeile, mit Vorbedingung `go 1.24` und lauter Kontrolle
+  (`--enable pinsync` am selben Baum); s33e `go 1.23.0` unter dem Ausdruck der
+  Vorlage → still (die Fanggruppe legt fest, wie fein); s33f Fanggruppe über die
+  ganze Version → `pinsync-mismatch` (byte-genau). `manifest.yaml` trägt s32 und
+  s33 nach. 118 PASS.
+- **Kein Szenario für das Laufzeit-Gate und den Käfig** (Plan A9 E3): Beides ist
+  eine Anforderung an das Skript des Adopters, und dieses Repo legt kein
+  Prüf-Skript an (`AGENTS.md` §4). Die Belege dazu stehen im Plan (§5 A7, A8 V6):
+  Bash-Guard unter `bash:3.2` und `bash:5.2`, Käfig am Host und in
+  `debian:stable-slim`.
+
+**Aus dem Review** (16 Befunde, alle behoben): Die Sensor-Vorlage trug ein
+Datumsfeld, den Deckungsnachweis und eine Abschrift des Solls (`harness-dateien.md`);
+der Kommentar im Beispiel behauptete, die übrigen Skelette trügen ihre Toolchain
+nur an einer Stelle; Lösung 14 ließ den Check globale Pakete fangen; s33d bestand
+auch ohne Abweichung; Modul 14 nannte für den Käfig „Exit 127“ — gemessen endet
+`make` mit Exit 2 („Error 127“); „verbreitetster Träger“ war unbelegt. Die zweite
+Runde fand Folgefehler der Fixes, ebenfalls behoben: Die Probe scheitert nur,
+wenn der Fehler bis zu `make` durchkommt (gemessen: ohne `set -e` Exit 0); der
+Vorlage fehlte der Verweis auf die Spec; die `go`-Direktive taugt nicht als
+Pin-Stelle für die Prüfform *exakt* (Lösung 14); die Warnung bekam einen
+eigenen Exit, den der Kurs nicht kennt.
+
+**MINOR**: neue Regel (Anforderung und zweiter Träger), Umbau von Modul 9; kein
+Asset entfernt.
+
 ## Welle 165 — 2026-11-22 · Dateinamen sind englisch (MAJOR)
 
 Anlass: [`docs/dateinamen-sprache-plan.md`](docs/dateinamen-sprache-plan.md). In

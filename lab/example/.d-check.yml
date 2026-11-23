@@ -22,7 +22,7 @@ scan:
   # `git archive HEAD lab/example` nachstellen und dagegen laufen lassen.
   ignore: ["**/build/**", "**/build-cov/**", "**/target/**", "**/.gradle/**",
            "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**"]
-modules: [matrix, targets, planning, ids, reviews, file]
+modules: [matrix, targets, planning, ids, reviews, file, pinsync]
 
 matrix:
   classes:
@@ -334,3 +334,21 @@ reviews:
 file:
   - files: AGENTS.md
     max-lines: 200
+
+# Stellen-Abgleich der Umgebungs-Zusage (Kurs Modul 14 §Zwei Pruefungen derselben
+# Zusage): derselbe Block wie in der Vorlage, auf die Pfade dieses Repos gesetzt.
+# Die Go-Version steht im Dockerfile (`FROM golang:1.23-alpine@sha256:…`) und in
+# der `go`-Direktive von `go.mod` (`go 1.23`); verglichen wird Major.Minor,
+# byte-genau. Positiver Beleg: die Zeile `pinsync: 1 Pin(s) geprueft` in der
+# Ausgabe. Das Beispiel zeigt den Mechanismus an EINEM Pin: python, java, csharp
+# und kotlin tragen ihre Toolchain ebenfalls an mehreren Stellen (zweimal im
+# Dockerfile, dazu pyproject.toml, pom.xml, global.json, build.gradle.kts) und
+# sind NICHT abgeglichen — Grenze 8 in harness/sensors/doc-check.md. Das
+# Laufzeit-Gate (installierte Werkzeuge tragen den Pin) ist kein d-check-Modul
+# und hier nicht gebaut.
+pinsync:
+  pins:
+    - name: go
+      sources:
+        - {file: go/Dockerfile, pattern: '^FROM golang:([0-9]+\.[0-9]+)'}
+        - {file: go/go.mod, pattern: '^go ([0-9]+\.[0-9]+)'}

@@ -159,6 +159,7 @@ Ergebnis an der Reihenfolge, in der das Dateisystem den Scan beantwortet.
 | `SPEC-025` | `make doc-check`, Modul `file` | `AGENTS.md` hat eine Obergrenze von 200 Zeilen — Ist-Zeilenzahl 159 plus Marge, kein erfundener Zielwert. Sinken ist immer erlaubt, steigen nur mit sichtbarem Commit an dieser Festlegung und an `max-lines` in `.d-check.yml`, die sie umsetzt (Ratchet, kein Rückbau-Zwang). |
 | `SPEC-026` | `make replay RUN=<set-name>` | Rot, wenn das Golden-Set-Verzeichnis unter `evals/golden/<set-name>/` unvollständig ist: Manifest mit `model:`- und `runtime:`-Block, `inputs/`, `expectations/`, mindestens drei Cases, gleiche Anzahl auf beiden Seiten. |
 | `SPEC-027` | `make doc-check`, Modul `planning.closure` | Jede Datei in `docs/plan/planning/done/` (`*.md`, nicht nur Slices) trägt eine Closure-Notiz: ein Abschnitt, dessen Überschrift (Ebene 1 bis 3) „Closure-Notiz" nennt, mit mindestens zwei Sätzen, ohne Floskel (`see pr`, `n/a`, `ok`, `siehe ticket`, `wird nachgereicht`, `fertig`, `läuft jetzt`, `lauft jetzt`, `war ganz okay`, `passt schon` — an Wortgrenzen) und ohne unausgefüllten Vorlagen-Rumpf. |
+| `SPEC-028` | `make doc-check`, Modul `pinsync` | Die Go-Version steht im Base-Image von `go/Dockerfile` und in der `go`-Direktive von `go/go.mod` gleich (Major.Minor, byte-genau verglichen) — ein Stellen-Abgleich der Umgebungs-Zusage aus [LH-QA-03](lastenheft.md#lh-qa-03--container-reproduzierbarkeit), nicht ihre Prüfung am gebauten Image. Eine abweichende Quelle meldet `pinsync-mismatch` an ihrer Zeile, eine Quelle ohne treffende Zeile `pinsync-no-match`. Positiver Beleg des Laufs: die Zeile `pinsync: 1 Pin(s) geprüft`. |
 
 ## 8. Historie
 
@@ -176,3 +177,4 @@ Ergebnis an der Reihenfolge, in der das Dateisystem den Scan beantwortet.
 | 2026-08-08 | §1 `LH-FA-IDX-003.a` ergänzt — die Anforderung hatte keinen Verfeinerungs-Abschnitt |
 | 2026-10-06 | §7 Festlegungen der Harness-Werkzeuge ergänzt (`SPEC-020` bis `SPEC-027`, bisher in den Sensor-Dateien und im Gate-Kommentar) |
 | 2026-10-10 | `SPEC-020`: Zuordnung über den längsten Basisnamen, ungehakte Zusage, Leerlauf als Befund, archivierte Slices ausgenommen, Ruhezustand ohne Befund (d-check v0.86.1) |
+| 2026-11-22 | §7 `SPEC-028` ergänzt: Stellen-Abgleich der Go-Version (d-check `pinsync`) |

@@ -113,12 +113,14 @@ Phasen-Abschnitte, je zwei Items mit Beleg, plus Incident-Klausel:
 - [ ] Offene Carveouts haben Trigger + Folge-Slice.
       **Beleg:** make carveout-audit (Output angehängt).
 
-## Reproduzierbarkeits-Anker
+## Umgebungs-Zusage
 - [ ] Image-Hash des Release-Builds festgehalten.
       **Beleg:** harness/image-hash.txt (Commit-Stand).
 - [ ] make gates grün auf frischem Klon UND im CI mit
       identischem Image-Hash.
       **Beleg:** zwei Run-Links (Klon + CI).
+- [ ] Tool-/Versions-Check grün in jedem deklarierten Kontext.
+      **Beleg:** Prüfprotokoll (Werkzeug · Soll · Ist) je Kontext.
 
 ## Replay-Beleg
 - [ ] Golden-Set-Replay ≥ 3 Fälle, alle grün, Manifest aktuell.

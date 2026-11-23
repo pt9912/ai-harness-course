@@ -336,7 +336,8 @@ Die Bindung-Spalte trägt vier **kanonische Klassen**:
 - **Kalibrierungs-Bindung** (`Schwelle X %, M<n> → Y %`) — bewegliche
   Eichung mit Meilenstein-Schaltplan.
 - **Reproduzierbarkeits-Bindung** (Image-Hash, Toolchain-Pin) — Gate
-  hängt an bit-identischem Artefakt (Modul 14).
+  hängt an bit-identischem Artefakt; es setzt eine Umgebungs-Zusage voraus
+  ([Modul 14](../05-betrieb/modul-14-docker-harness.md#die-umgebungs-zusage--anforderung-vor-träger)).
 
 Repos können **weitere Klassen** einführen — etwa Anforderungs-Bindung
 (`LH-…`), Compliance-Bindung (Regulatorik-Artikel) oder

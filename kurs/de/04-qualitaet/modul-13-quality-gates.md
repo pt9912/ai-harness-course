@@ -90,6 +90,7 @@ Steering Loop läuft leer. Die Zuordnung in Kurzform:
 | Security-Gate | Datenfluss-Befund: SQL-Injection, Secret-/Entropie-Treffer | Architektur-Schnitt, Coverage-Lücken |
 | Coverage / Critical Coverage | Coverage-Loch — gesamt bzw. auf dem kritischen Pfad | Qualität der Tests, Spec-Lücken ([Modul 11](modul-11-verification.md)) |
 | Replay-/Determinism-Gate | nicht-deterministischer Test oder Lauf | semantische Drift außerhalb des Golden Sets ([Modul 12](modul-12-replay-evaluierung.md)) |
+| Tool-/Versions-Check | Umgebungs-Befund: ein Werkzeug fehlt, weicht vom Pin ab oder hat die Fähigkeit nicht, die ein Skript braucht | jeden Befund über den Code; ein Werkzeug, das nicht im Inventar steht ([Modul 14](../05-betrieb/modul-14-docker-harness.md#der-zweite-träger-tool-pin-und-tool-versions-check)) |
 | Integrationstest | Verhalten im Zusammenspiel: Komponenten-Vertrag bricht erst in Kombination | lokale Muster und Typgrenzen — dafür zu teuer und zu spät |
 | E2E-Test | Vertragsbruch über den vollen Pfad: Wiring, Deployment-Annahmen, Cross-Komponenten-Reihenfolge — bricht erst, wenn alle Teile *zusammen und in echter Konfiguration* laufen | lokale Muster, einzelne Komponentengrenzen (das leistet der günstigere Integrationstest) |
 
@@ -546,6 +547,12 @@ Reifungs-Mechanismus: Beobachtung → Häufung → Sensor, und die
 Härtung landet nachvollziehbar in einer ID. Wer nur Gates härtet und
 den Wächter für fertig hält, hat den Steering-Loop halb verstanden —
 **jede Komponente des Harness ist selbst Gegenstand des Harness.**
+
+**Abgrenzung zum Tool-/Versions-Check.** Der Tool-/Versions-Check
+([Modul 14](../05-betrieb/modul-14-docker-harness.md#der-zweite-träger-tool-pin-und-tool-versions-check)) steht als erster in
+`make gates` und stellt die Umgebung fest, nachdem `make` aufgerufen ist. Einen
+direkten `pytest`-Aufruf am Makefile vorbei erreicht er **nicht** — diesen Weg
+nimmt `MR-004` weg. Der Check ergänzt den Wächter, er ersetzt ihn nicht.
 
 ## Übungen
 

@@ -42,7 +42,7 @@ Folge für Modul 12: Ein Replay-Manifest referenziert *beide*. Ohne
 Image-Hash lässt sich Modell-Drift nicht von Toolchain-Drift trennen,
 ohne Lock-File-Stand nicht von Dependency-Drift.
 
-### Warum ist `make gates` im Host-OS keine valide Gate-Ausführung?
+### Warum ist `make gates` im Host-OS ohne Umgebungs-Zusage keine valide Gate-Ausführung — und was ändert ein Tool-/Versions-Check daran?
 
 Drei Gründe:
 
@@ -53,6 +53,15 @@ Drei Gründe:
 Wenn lokal und CI nicht *bit-identisch* dasselbe Image benutzen,
 debuggst du den Unterschied, nicht den Bug. Docker-only ist nicht
 Mode, sondern Kosten-Senkung.
+
+**Was der zweite Träger ändert.** Ein Tool-Pin mit Tool-/Versions-Check macht
+den Host-Lauf **belegbar**: Das Prüfprotokoll nennt je Werkzeug Soll und Ist,
+und ein Rot ist ein Umgebungs-Befund, bevor die fachlichen Gates laufen. Grund 1
+fängt er, soweit das Inventar die Werkzeuge nennt. Grund 2 fängt er nicht: Er
+prüft nur, was das Soll nennt, und globale Pakete am Host sind **zusätzlich**
+da — auch der `PATH`-Käfig fängt Werkzeuge, keine Python- oder Node-Pakete.
+Grund 3 fängt er ebenso wenig — er **isoliert** nicht. Der Host-Lauf wird damit ein Vertrag mit benannter Lücke,
+keine private Information mehr.
 
 ### (Analysieren — aktiviert LZ 3) Einstufiges Dockerfile in Drift-Klassen zerlegen + Stage-Schnitte begründen
 
@@ -179,6 +188,33 @@ Replay verlässlich laufen — der Vertrag fehlt, der Komfort bleibt.
 - **Multi-Stage ohne Cache-Trennung.** Dockerfile lädt Lockfile und Code im selben Layer. → Jede Code-Änderung triggert vollen Re-Download.
 - **Runtime-Stage enthält Dev-Tools.** Distroless wird ignoriert, "weil debugging einfacher ist". → Angriffsfläche balloniert.
 - **`make gates` startet kein eigenes Image, nutzt Host-Docker.** → Halber Schritt: Build im Container, Test am Host. Bringt die meisten Drift-Probleme zurück.
+
+### (Anwenden — aktiviert LZ 2) Werkzeug-Inventar aufstellen
+
+Ein solides Inventar hat für jedes Werkzeug, das ein Skript oder das `Makefile`
+aufruft, eine Zeile — auch für `sed`, `awk`, `grep` und für die Werkzeuge, mit
+denen der Check selbst Pins parst. Typische Entscheidungen an der Hauptachse:
+
+| Werkzeug | Prüfform | Warum |
+|---|---|---|
+| `go`, `golangci-lint` (im Image) | exakt | das Repo legt sie fest; jede Abweichung ist Drift |
+| `bash` (Host) | Mindestversion + Fähigkeit (`declare -A`) | nur forderbar; macOS liefert 3.2 |
+| `make` (Host) | Mindestversion | nur forderbar; 3.81 am Mac |
+| `sed`, `awk` (Host) | Fähigkeit | GNU, BSD, BusyBox verhalten sich verschieden |
+| `git`, `curl` | Anwesenheit — mit Grund | jede Version genügt, weil nur Grundfunktionen genutzt werden |
+
+Das Inventar steht in einer eigenen Datei, die das Skript liest, nicht in der
+Sensor-Datei. Wer für `go` den Weg *Ableiten* wählt, schreibt ins Feld *Soll* die
+Pin-Stelle, nicht ihren Wert — sonst steht das Soll zweimal. Die Pin-Stelle muss
+zur Prüfform passen: *exakt* vergleicht die ganze Zeichenkette, und `go version`
+meldet den Patch-Stand (`go1.23.4`). Die `go`-Direktive in `go.mod` (`go 1.23`)
+nennt die Sprachversion ohne ihn und gäbe ein falsches Rot; tragen kann es die
+`toolchain`-Zeile in `go.mod` oder ein Image-Tag mit Patch-Stand.
+
+Exzellent ist, wer die Käfig-Probe laufen lässt und **benennt, was sie nicht
+fangen konnte**: das Shebang `#!/bin/bash`, die Rezept-Shell `/bin/sh` von `make`,
+einen `command -v … ||`-Zweig, der still ausweicht. Ein Inventar ohne diese Zeile
+behauptet eine Vollständigkeit, die die Probe nicht belegt hat.
 
 ## Verweise
 

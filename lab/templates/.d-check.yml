@@ -120,6 +120,27 @@ modules: [links, anchors]
 #     results-glob: 'wave-*-results.md'
 #     mode: many
 #
+# Stellen-Abgleich der Umgebungs-Zusage — derselbe Pin an mehreren Stellen
+# (Baseline-Regelwerk `modul-14-docker-harness.md` §Zwei Pruefungen derselben
+# Zusage). Aktivieren, sobald ein Pin an zwei Stellen steht. Je Quelle ein Ausdruck
+# mit GENAU EINER Fanggruppe; verglichen wird byte-genau (`1.23` ist nicht
+# `1.23.0`), die Fanggruppe legt fest, wie fein. Der Pin unten ist ein Beispiel
+# (Go-Version im Base-Image des `Dockerfile` und in der `go`-Direktive von
+# `go.mod`) — Name, Dateien und Ausdruecke an das Repo anpassen. Den Pin des Pruefwerkzeugs selbst (DCHECK_DIGEST) aufnehmen, sobald
+# er an einer zweiten Stelle steht (etwa im CI-Workflow). Positiver Beleg, dass das
+# Modul lief: die Zeile `pinsync: <P> Pin(s) geprueft` in der Ausgabe — fehlt sie,
+# ist der Block nicht aktiv (zwei Schritte, oben), und eine Abweichung bleibt still.
+# Das Laufzeit-Gate (installierte Werkzeuge tragen den Pin) kann d-check nicht
+# leisten: es startet keine Programme. Ziel-Form dafuer:
+# `harness/sensors/environment-check.template.md`.
+# pinsync:                                                              # + `pinsync` in `modules` aufnehmen
+#   pins:
+#     - name: go
+#       sources:
+#         - {file: Dockerfile, pattern: '^FROM golang:([0-9]+\.[0-9]+)'}
+#         - {file: go.mod, pattern: '^go ([0-9]+\.[0-9]+)'}
+#
+
 # Baseline-Pin gegen Tag-Drift — aktivieren, sobald harness/conventions.md
 # einen Baseline-Stand deklariert. Jeder Verweis in die vendorte Baseline
 # traegt deren Version im Pfad (`.harness/baseline/<tag>/…`); nach einem

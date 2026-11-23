@@ -5,13 +5,13 @@ unabhängig davon, ob dein Repo Go, Python, Kotlin, Java oder C# nutzt.
 
 ## Übersicht
 
-Diese Tabelle listet die **20 Dokument-Skelette** (Phase 0 → 1 beim
-Bootstrap — das Repo füllt sie). Das Verzeichnis trägt **24 Dateien in drei
-Klassen**, nicht 24 gleichartige Vorlagen:
+Diese Tabelle listet die **24 Dokument-Skelette** (Phase 0 → 1 beim
+Bootstrap — das Repo füllt sie). Das Verzeichnis trägt **28 Dateien in drei
+Klassen**, nicht 28 gleichartige Vorlagen:
 
 | Klasse | Anzahl | Wo |
 |---|---|---|
-| **Dokument-Skelette** — Artefakte, die das Repo kopiert und ausfüllt | 20 | Tabelle unten |
+| **Dokument-Skelette** — Artefakte, die das Repo kopiert und ausfüllt | 24 | Tabelle unten |
 | **Skill-Dateien** — Urteilsgrundlage eines Agenten, nicht Artefakt | 2 | [§Skill-Dateien](#skill-dateien) |
 | **Tooling-Dateien** (`Makefile`, `.d-check.yml`) | 2 | [§Gate-Baseline](#gate-baseline) |
 
@@ -40,6 +40,7 @@ Klassen**, nicht 24 gleichartige Vorlagen:
 | [`harness/conventions.template.md`](harness/conventions.template.md) | Repo-lokale Strukturregeln, Adaptions-Block (`MR-*`), Zusatzklassen-Deklaration, Modus-Deklaration pro Sub-Area | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessconventionsmd-als-konventionsspeicher) |
 | [`harness/conventions/MR-NNN-title.template.md`](harness/conventions/MR-NNN-title.template.md) | Ein Adaptions-Eintrag (`MR-<NNN>`); Index in `conventions.md` | [Modul 2](../regelwerk/modul-02-harness-bootstrap.md) |
 | [`harness/sensors/gate.template.md`](harness/sensors/gate.template.md) | Ein Gate oder Werkzeug, sobald es mehr braucht als seine Tabellenzelle: Grenze, Ausgänge, Sperren; Index in `harness/README.md` | [Konventionen](../regelwerk/grundlagen-harness-dateien.md#harnessreadmemd-als-einstiegspunkt) |
+| [`harness/sensors/environment-check.template.md`](harness/sensors/environment-check.template.md) | Der Tool-/Versions-Check: Grenze und Ausgänge; nennt Inventar-Datei, Soll-Quelle und Ausführungsort — Muster, kein Skript | [Modul 14](../regelwerk/modul-14-docker-harness.md#der-zweite-träger-tool-pin-und-tool-versions-check) |
 
 ## Download als ZIP
 

@@ -86,6 +86,8 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-11-22 | `v0.91.0` | 109 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Umbenennung `welle-` → `wave-` (Welle 165); Verdikte gleich, nach Namensersetzung identisch |
 | 2026-11-22 | `v0.91.0` | 111 PASS, 0 FAIL, 0 KAPUTT | erweitert um s32 |
 | 2026-11-22 | `v0.91.0` | 112 PASS, 0 FAIL, 0 KAPUTT | erweitert um s32c (Review zu Welle 165) |
+| 2026-11-22 | `v0.91.0` | 116 PASS, 0 FAIL, 0 KAPUTT | erweitert um s33 (Welle 166) |
+| 2026-11-23 | `v0.91.0` | 118 PASS, 0 FAIL, 0 KAPUTT | erweitert um s33e, s33f; s33d mit Vorbedingung und lauter Kontrolle (Review zu Welle 166) |
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -205,6 +207,12 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s32a | `waves` mit `mode: many` und den Globs `wave-*.md` / `wave-*-results.md`, flache Welle `wave-3-x.md` ohne Zeiger | **`wave-drift`** (target `wave-3`) | ✓ Vorbedingung: `waves` liest die `wave-`-Dateien |
 | s32b | derselbe Aufbau ohne die beiden Glob-Zeilen | **still** | ✓ der Werkzeug-Default `welle-*` sieht keine `wave-`-Datei — deshalb setzt die Vorlage die Globs (Welle 165); belegt für Kennungen mit Ziffernfolge, Namen liest `waves` gar nicht (Vorlage §GRENZE) |
 | s32c | derselbe Aufbau mit Default-Globs, dazu `welle-3-x.md` ohne Zeiger | **`wave-drift`** (target `welle-3`) | ✓ Positivkontrolle für s32b: `waves` ist ohne die Globs aktiv, nicht inert |
+| s33a | `pinsync`-Block **aus der Vorlage gezogen**, aktiviert, Pin `go` in `Dockerfile` und `go.mod` gleich | **still**, Zeile `pinsync: 1 Pin(s) geprüft` | ✓ positive Vorbedingung: das Modul lief |
+| s33b | `go.mod` weicht ab | **`pinsync-mismatch`** auf `go.mod:3` (target `go`) | ✓ der Stellen-Abgleich beißt an der abweichenden Quelle |
+| s33c | Ausdruck trifft im `Dockerfile` keine Zeile (`golang:latest`) | **`pinsync-no-match`** auf `Dockerfile` | ✓ eine Quelle ohne Treffer ist laut, nicht still |
+| s33d | Block steht, `pinsync` fehlt in `modules`, Abweichung | **still**, ohne `pinsync:`-Zeile | ✓ die zwei Schritte der Vorlage gelten auch hier — die fehlende Zeile ist das Zeichen; Vorbedingung `go 1.24` per `schritt`, laute Kontrolle `--enable pinsync` am selben Baum |
+| s33e | aktiviert, `go.mod` nennt `go 1.23.0`, Ausdruck der Vorlage (Major.Minor) | **still**, Zeile `pinsync: 1 Pin(s) geprüft` | ✓ die Fanggruppe legt fest, wie fein verglichen wird |
+| s33f | derselbe Baum, die Fanggruppe in `go.mod` fängt die ganze Version | **`pinsync-mismatch`** auf `go.mod:3` (target `go`) | ✓ byte-genau: `1.23` ist nicht `1.23.0` |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

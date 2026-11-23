@@ -181,8 +181,12 @@ Iteration.
 - "Runbook beschreibt den Happy Path." — Modul 16
 - "Produktionsfreigabe ist eine formale Checkbox." — Modul 16
 - "Prompt-Injection ist eine Modell-Frage." — Modul 16
+- "Reproduzierbar heißt: im Container." — Modul 14 (seit Welle 166: die
+  Umgebungs-Zusage ist die Anforderung, Docker einer von zwei Trägern; der
+  Tool-/Versions-Check prüft auch den Container).
 - "DevOps ist YAML schreiben." — Modul 14 (Fehlvorstellungs-Block; seit
-  Welle 13 explizit benannt mit Reproduzierbarkeits-Anker-Argument und
+  Welle 13 explizit benannt mit dem Argument der Umgebungs-Zusage — bis
+  Welle 166 „Reproduzierbarkeits-Anker“ — und
   Replay-Brücke zu Modul 12).
 - "Postmortems sind Schuldzuweisung." — Modul 16 (Fehlvorstellungs-Block;
   seit Welle 7 explizit benannt mit Sensor-Schutz-Argument für blameless).

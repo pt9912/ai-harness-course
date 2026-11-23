@@ -136,7 +136,7 @@ weitergegangen wird.
 | Modul | Mindest-Stufe | Begründung |
 |---|---|---|
 | 13 (Quality Gates) | **exzellent** | Gate-Vertrag und bootstrap-aware Gate. |
-| 14 (Docker-Harness) | **exzellent** | Image-Hash und Lock-Files sind die Reproduzierbarkeits-Anker. |
+| 14 (Docker-Harness) | **exzellent** | Image-Hash, Lock-Files und Tool-Pins sind Träger der Umgebungs-Zusage; ein Tool-/Versions-Check prüft, dass sie halten. |
 | 15 (Observability) | **exzellent** | Cost-Attribution + Cache-Metrik + Doku-Konsistenz-Agent. |
 | 12 (Replay) | **solide** | Drift-Diagnose-Reihenfolge beherrschen. |
 | 16 (Produktiver Betrieb) | **solide** | Runbook-Trigger und Rollback-Anti-Reflex. |

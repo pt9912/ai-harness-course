@@ -276,6 +276,12 @@ die Reihenfolge der Verdächtigen *nicht beliebig*:
 | 3 | Erwartungs-Drift | Eingaben vs. Spec (Modul 3) |
 | 4 | echte Regression | alles oben ausgeschlossen |
 
+Rang 1 hat eine maschinelle Vorstufe: Der Tool-/Versions-Check
+([Modul 14](../05-betrieb/modul-14-docker-harness.md#der-zweite-träger-tool-pin-und-tool-versions-check))
+stellt vor jedem Gate-Lauf fest, ob die Umgebung die deklarierte ist — für die
+Werkzeuge im Image nur, sofern er im Image läuft (Ausführungsort, Modul 14). Ein Replay,
+das erst hier an Rang 1 scheitert, hätte dort schon rot werden können.
+
 Für case-002 durchlaufen: Der Image-Hash ist identisch — Rang 1 fällt
 weg. `model.version` und `model.seed` sind unverändert, aber
 `determinism.tie_break_strategy` weicht ab — Rang 2 trifft zu, die Suche

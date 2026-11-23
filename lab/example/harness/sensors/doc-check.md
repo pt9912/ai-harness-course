@@ -1,15 +1,15 @@
-# `make doc-check` — sechs d-check-Module
+# `make doc-check` — sieben d-check-Module
 
 Vertiefung zur Index-Zeile in [`../README.md` §Sensors](../README.md#sensors-feedback-gates).
-Bindung je Modul unten — **eine** Zitation für sechs Module wäre für fünf davon
+Bindung je Modul unten — **eine** Zitation für sieben Module wäre für sechs davon
 die falsche.
 
 ## Vertrag
 
-**Sechs Module — fünf über Doku-Referenzen, eines über den Umfang einer
-Guide-Datei.** Rot, wenn eines davon eine Festlegung verletzt; was jedes prüft
+**Sieben Module — fünf über Doku-Referenzen, eines über den Umfang einer
+Guide-Datei, eines über die Gleichheit eines Pins.** Rot, wenn eines davon eine Festlegung verletzt; was jedes prüft
 und wie es an seinen Randformen entscheidet, legen
-[`SPEC-020` bis `SPEC-025` und `SPEC-027`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) fest; welche Kennung zu
+[`SPEC-020` bis `SPEC-025`, `SPEC-027` und `SPEC-028`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) fest; welche Kennung zu
 welchem Modul gehört, steht unten unter [Bindung](#bindung).
 
 ## Grenze — was das Grün nicht abdeckt
@@ -55,6 +55,18 @@ welchem Modul gehört, steht unten unter [Bindung](#bindung).
    Inhalt/Qualität, kein Rückbau erzwungen, keine Staleness-Prüfung (ist die
    Zeile seit Langem unverändert rot). Nur diese eine Datei ist konfiguriert;
    `harness/README.md` §Sensors trägt keine eigene Obergrenze.
+8. **`pinsync` gleicht Stellen ab, nicht die Umgebung.** Es sagt, dass
+   `go/Dockerfile` und `go/go.mod` dieselbe Version nennen — nicht, dass das
+   gebaute Image sie trägt; das wäre das Laufzeit-Gate, und das ist hier nicht
+   gebaut. Verglichen wird byte-genau, und ein Treffer in einer Kommentarzeile mit
+   passendem Wortlaut zählt als Treffer. Permanent — die Bauform des Moduls.
+   Abgeglichen ist **nur das Go-Skelett**: Python, Java, C# und Kotlin tragen
+   ihre Toolchain ebenfalls an mehreren Stellen — das Base-Image zweimal im
+   `Dockerfile`, dazu `requires-python` in `pyproject.toml`,
+   `maven.compiler.release` in `pom.xml`, `global.json`, `jvmToolchain` in
+   `build.gradle.kts` —, und dort bleibt eine Abweichung still. Das Beispiel
+   zeigt den Mechanismus an einem Pin; jede weitere Stelle wäre ein weiterer
+   Eintrag unter `pinsync.pins`.
 
 **Wie groß der Prüfbereich ist, sagen zwei Kommandos, nicht diese Datei:**
 `make doc-check 2>&1 | tail -1` nennt die Zahl der geprüften Dateien, und
@@ -64,7 +76,7 @@ committet.
 
 ## Bindung
 
-Alle sechs sind Konventions-Bindungen der Klasse `MR-002`
+Alle sieben sind Konventions-Bindungen der Klasse `MR-002`
 ([`../conventions.md`](../conventions.md#mr-002)); ihre Form ist
 `Kurs §<Abschnitt>` bzw. `Modul <N> §<Abschnitt>`. **Je Modul eine eigene** —
 die Zeile trug lange nur die Bindung von `ids`/`matrix`, und die ist für
@@ -78,3 +90,4 @@ die Zeile trug lange nur die Bindung von `ids`/`matrix`, und die ist für
 | `planning` | [`SPEC-022`, `SPEC-027`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) (Wellen-Invariante seit slice-wellen-invariante-per-d-check) | [Modul 6 §Die Wellen-Eröffnungs-Prozedur](../../../../kurs/de/02-planung/modul-06-roadmap.md#die-wellen-eröffnungs-prozedur) — Ruhe-Marker und Wellen-Invariante |
 | `targets` | [`SPEC-023`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) | [Modul 13 §Hard Rule](../../../../kurs/de/04-qualitaet/modul-13-quality-gates.md#hard-rule-doku-disziplin) — halluzinierte Gates; verkoerpert in `AGENTS.md` §3 |
 | `file` | [`SPEC-025`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) (seit Welle 147) | [Kurs §Entropy Management](../../../../kurs/de/grundlagen/klassifikation.md#entropy-management) — Guide-Datei-Wildwuchs |
+| `pinsync` | [`SPEC-028`](../../spec/specification.md#7-festlegungen-der-harness-werkzeuge) (seit Kurs-Welle 166) | [Modul 14 §Der zweite Träger](../../../../kurs/de/05-betrieb/modul-14-docker-harness.md#der-zweite-träger-tool-pin-und-tool-versions-check) — Stellen-Abgleich der Umgebungs-Zusage |

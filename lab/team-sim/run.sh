@@ -67,6 +67,10 @@ befund() { printf '%s' "$1" | grep -q "$(printf '\t%s\t%s' "$2" "$3")"; }
 befund_in() { # $1 out  $2 datei  $3 target  $4 code
   printf '%s' "$1" | grep -q "^$2:[0-9]*$(printf '\t%s\t%s' "$3" "$4")"
 }
+# Wie befund_in(), mit fester Zeile: $2 ist <datei>:<zeile>.
+befund_an() { # $1 out  $2 datei:zeile  $3 target  $4 code
+  printf '%s' "$1" | grep -q "^$2$(printf '\t%s\t%s' "$3" "$4")"
+}
 # Stille: die Summenzeile nennt NULL Befunde. Ein blosses "0 Befund" traefe
 # auch "10 Befund(e)" und meldete Stille ueber einem lauten Lauf; das Komma
 # davor macht die Ziffer eindeutig. Ueber die ganze Ausgabe statt `tail -1`,
@@ -2033,6 +2037,75 @@ s32_wellen_praefix_globs() {
   verdikt "s32c derselbe Aufbau, Default-Globs, welle-Datei ohne Zeiger: LAUT (waves ist aktiv)" "wave-drift (target: welle-3)" "$(echo "$out"|tail -1)" $ok
 }
 
+# s33 — Stellen-Abgleich der Umgebungs-Zusage (Kurs-Welle 166, Modul 14 §Zwei
+# Pruefungen derselben Zusage). Das Szenario nutzt DENSELBEN Block wie die Vorlage:
+# zwischen `# pinsync:` und der naechsten leeren Kommentarzeile aus
+# lab/templates/.d-check.yml gezogen und entkommentiert. Ein leerer Auszug ist
+# KAPUTT — sonst bestuende die Stille ueber einem nicht gelesenen Block. Die Stille
+# (s33a, s33d) haengt an einer positiven Vorbedingung bzw. an ihrem Fehlen: der
+# Zeile `pinsync: 1 Pin(s) geprüft`.
+hat() { printf '%s' "$1" | grep -qF "$2"; }
+s33_pinsync_stellen_abgleich() {
+  topo; cd "$WORK/sim/alice" || return 1
+  block=$(sed -n '/^# pinsync:/,/^#$/p' "$REPO_ROOT/lab/templates/.d-check.yml" | sed 's/^# \{0,1\}//')
+  schritt test -n "$block" || return 1
+  schritt hat "$block" "pins:" || return 1
+  printf '%s\n' "$block" >> .d-check.yml
+  sed -i 's/^modules: \[links, anchors, planning\]$/modules: [links, anchors, planning, pinsync]/' .d-check.yml
+  schritt grep -q '^modules: \[links, anchors, planning, pinsync\]$' .d-check.yml || return 1
+  printf 'FROM golang:1.23-alpine AS deps\n' > Dockerfile
+  printf 'module sim\n\ngo 1.23\n' > go.mod
+  schritt git add -A && schritt git commit -qm "pinsync-Block der Vorlage, Pin go an zwei Stellen" || return 1
+  # --- s33a: gleich -> still, mit positiver Vorbedingung (das Modul lief)
+  out=$(dcheck "$WORK/sim/alice")
+  schritt hat "$out" "pinsync: 1 Pin(s) geprüft" || return 1
+  still "$out" && ok=0 || ok=1
+  verdikt "s33a Pin an zwei Stellen gleich: STILL (pinsync lief)" "0 Befunde, Zeile 'pinsync: 1 Pin(s) geprüft'" "$(echo "$out"|tail -1)" $ok
+  # --- s33b: Abweichung -> pinsync-mismatch an der abweichenden Quelle
+  sed -i 's/^go 1.23$/go 1.24/' go.mod
+  schritt git commit -qam "go.mod weicht ab" || return 1
+  out=$(dcheck "$WORK/sim/alice"); befund_an "$out" "go.mod:3" "go" "pinsync-mismatch" && ok=0 || ok=1
+  verdikt "s33b go.mod weicht vom Dockerfile ab: LAUT" "pinsync-mismatch auf go.mod:3 (target: go)" "$(echo "$out"|tail -1)" $ok
+  # --- s33c: Ausdruck trifft keine Zeile -> pinsync-no-match
+  sed -i 's/^go 1.24$/go 1.23/' go.mod
+  printf 'FROM golang:latest AS deps\n' > Dockerfile
+  schritt git commit -qam "Dockerfile ohne Versionsnummer" || return 1
+  out=$(dcheck "$WORK/sim/alice"); befund_in "$out" "Dockerfile" "go" "pinsync-no-match" && ok=0 || ok=1
+  verdikt "s33c Ausdruck trifft im Dockerfile keine Zeile: LAUT" "pinsync-no-match auf Dockerfile (target: go)" "$(echo "$out"|tail -1)" $ok
+  # --- s33d: Block steht, Modul nicht in modules -> still trotz Abweichung, und
+  # die Zeile fehlt: die Gate-Luege der Vorlage (zwei Schritte), geprobt.
+  printf 'FROM golang:1.23-alpine AS deps\n' > Dockerfile
+  sed -i 's/^go 1.23$/go 1.24/' go.mod
+  sed -i 's/^modules: \[links, anchors, planning, pinsync\]$/modules: [links, anchors, planning]/' .d-check.yml
+  schritt grep -q '^pinsync:' .d-check.yml || return 1
+  schritt grep -q '^go 1.24$' go.mod || return 1
+  schritt git commit -qam "Abweichung, Modul nicht aktiviert" || return 1
+  # Laute Kontrolle am SELBEN Baum: mit --enable sieht pinsync die Abweichung.
+  # Sonst bestuende s33d auch ohne Abweichung (Muster s32c).
+  ctrl=$(dcheck_args "$WORK/sim/alice" --enable pinsync)
+  schritt befund_an "$ctrl" "go.mod:3" "go" "pinsync-mismatch" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  if still "$out" && ! hat "$out" "pinsync:"; then ok=0; else ok=1; fi
+  verdikt "s33d Block ohne Aktivierung, Abweichung: STILL und ohne pinsync-Zeile" "0 Befunde, keine Zeile 'pinsync:', waehrend --enable pinsync am selben Baum laut ist" "$(echo "$out"|tail -1)" $ok
+  # --- s33e: die Fanggruppe legt fest, wie fein: go.mod nennt 1.23.0, der
+  # Ausdruck der Vorlage faengt Major.Minor -> 1.23 gegen 1.23, still.
+  sed -i 's/^modules: \[links, anchors, planning\]$/modules: [links, anchors, planning, pinsync]/' .d-check.yml
+  sed -i 's/^go 1.24$/go 1.23.0/' go.mod
+  schritt grep -q '^go 1.23.0$' go.mod || return 1
+  schritt git commit -qam "go.mod nennt den Patch-Stand, Ausdruck der Vorlage" || return 1
+  out=$(dcheck "$WORK/sim/alice")
+  schritt hat "$out" "pinsync: 1 Pin(s) geprüft" || return 1
+  still "$out" && ok=0 || ok=1
+  verdikt "s33e go.mod 1.23.0, Fanggruppe Major.Minor: STILL (pinsync lief)" "0 Befunde, Zeile 'pinsync: 1 Pin(s) geprüft'" "$(echo "$out"|tail -1)" $ok
+  # --- s33f: derselbe Baum, die Fanggruppe in go.mod faengt die ganze Version
+  # -> 1.23 gegen 1.23.0, byte-genau verschieden: laut.
+  sed -i "s/pattern: '^go (\[0-9\]+\\\\.\[0-9\]+)'/pattern: '^go ([0-9.]+)'/" .d-check.yml
+  schritt grep -qF "pattern: '^go ([0-9.]+)'" .d-check.yml || return 1
+  schritt git commit -qam "Fanggruppe in go.mod faengt die ganze Version" || return 1
+  out=$(dcheck "$WORK/sim/alice"); befund_an "$out" "go.mod:3" "go" "pinsync-mismatch" && ok=0 || ok=1
+  verdikt "s33f dieselben Versionen, Fanggruppe ganz: 1.23 gegen 1.23.0 LAUT (byte-genau)" "pinsync-mismatch auf go.mod:3 (target: go)" "$(echo "$out"|tail -1)" $ok
+}
+
 # ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
@@ -2069,6 +2142,7 @@ lauf s29 s29_wip_lauf_zweig_feld
 lauf s30 s30_werkzeug_teil
 lauf s31 s31_review_deckung
 lauf s32 s32_wellen_praefix_globs
+lauf s33 s33_pinsync_stellen_abgleich
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

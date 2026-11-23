@@ -40,7 +40,7 @@ Kein lokales SDK-Install. Alles über `make` (Docker im Hintergrund).
 **Falsch:** `go run ./cmd/docsearch`
 **Richtig:** `make run`
 
-**Begründung:** Toolchain-Reproduzierbarkeit + Supply-Chain-Defense.
+**Begründung:** Toolchain-Reproduzierbarkeit — Docker ist hier der Träger der Umgebungs-Zusage (Kurs Modul 14).
 
 ### 2.2 Suppression-Verbot
 

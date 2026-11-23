@@ -99,12 +99,14 @@ erst beim tatsächlichen Wachstum, nicht vorab.
 <!-- Wenn das Repo Docker-only ist (typisch für Multi-Toolchain-Repos): -->
 
 Kein lokales <venv/SDK/Toolchain-Install>. Alles läuft über `make`
-(das Docker nutzt). Host braucht nur Docker und GNU `make`.
+(das Docker nutzt). Der Host braucht mindestens Docker und `make`; führt das
+Repo einen Tool-/Versions-Check, nennt dessen Inventar den Rest (Pfad in
+`harness/sensors/environment-check.md`).
 
 **Falsch:** <z.B. `pip install ...`>
 **Richtig:** <z.B. `make test`>
 
-**Begründung:** Toolchain-Reproduzierbarkeit + Supply-Chain-Defense.
+**Begründung:** Toolchain-Reproduzierbarkeit — Docker ist hier der Träger der Umgebungs-Zusage (Baseline-Regelwerk `modul-14-docker-harness.md`).
 
 ### 3.2 Suppression-Verbot
 
