@@ -88,28 +88,46 @@ sonst zeigen zwei Dateien in `in-progress/` denselben Namen, und die Ablage
 kann die Läufe nicht mehr unterscheiden. Ohne Parallel-Lauf bleibt die
 einfache Form aus dem vorigen Absatz.
 
-**Ein WIP-Slot, ein Zweig, ein Arbeitsbaum — jeder parallele Lauf bekommt sein
-eigenes `git worktree`.** Das WIP-Limit zählt pro Lauf, und ein Lauf braucht
-eigene Dateien: Ein Checkout trägt immer nur einen Zweig. Zwei Läufe in
-derselben Arbeitskopie schreiben in dieselben Dateien, der zweite überschreibt
-den ersten, und kein Merge meldet etwas — der Anspruch des ersten ist still
-weg (gemessen im Kurs-Lab:
+**Ein WIP-Slot, ein Zweig, ein Arbeitsbaum — jeder parallele Lauf bekommt
+seinen eigenen, etwa einen `git worktree`.** Das WIP-Limit zählt pro Lauf, und
+ein Lauf braucht eigene Dateien: Ein Checkout trägt immer nur einen Zweig. Zwei
+Läufe in derselben Arbeitskopie schreiben in dieselben Dateien, der zweite
+überschreibt den ersten, und kein Merge meldet etwas — die Änderung des ersten
+ist still weg (gemessen im Kurs-Lab:
 [`lab/team-sim`](../../../lab/team-sim/README.md), Szenario s24d). Der
 Arbeitsbaum entsteht deshalb mit dem Zweig, nach dem Anspruch, vom Hauptzweig
-aus: ein `git worktree` je Lauf (`git worktree add <pfad> -b <branch-name>`)
-oder ein weiterer Klon. Der `worktree` setzt die Zuordnung selbst durch: Ein
-Zweig, der in einem Arbeitsbaum ausgecheckt ist, lässt sich in keinem zweiten
+aus: ein `git worktree` je Lauf
+(`git worktree add ../<repo>-<lauf> -b <branch-name>`) oder ein weiterer Klon.
+Der `worktree` setzt die Zuordnung selbst durch: Ein Zweig, der in einem
+Arbeitsbaum ausgecheckt ist, lässt sich ohne `--force` in keinem zweiten
 auschecken — `git worktree add` und `git switch` brechen ab (Szenarien s34a,
 s34b). Ein zweiter Klon prüft das nicht (s34d). Die Zählung bleibt dieselbe:
 ein Slice in `in-progress/` je Lauf, ein Lauf je Arbeitsbaum.
 
-**Ein Slice gehört einem Lauf.** `Verantwortlich:` nennt einen Rolleninhaber
-der Implementer-Rolle, also einen Lauf und einen WIP-Slot. Einen Slice auf zwei
+**Der Arbeitsbaum liegt neben dem Repo, nicht darin.** Ein Sensor, der das
+Dateisystem liest statt git, sieht einen Arbeitsbaum unter dem
+Repo-Verzeichnis als zweite Kopie des Repos: doppelte Dateien, und Befunde in
+der Kopie, weil die Pfad-Regeln der Konfiguration von der Repo-Wurzel aus
+gelten und die Kopie nicht treffen. Ein `.gitignore`-Eintrag ändert daran
+nichts (Szenarien s34e, s34f; an einer Kopie des Kurs-Beispiels mit d-check
+v0.92.0 gemessen: 216 statt 108 Dateien, 71 Befunde). Neben dem Repo sieht der
+Sensor nur das Repo (s34g). Legt ein Werkzeug seine Arbeitsbäume ins Repo
+(etwa Claude Code unter `.claude/worktrees/`), nimmt die Gate-Konfiguration
+den Pfad aus dem Scan (s34h); für git gehört er trotzdem ins `.gitignore`.
+
+**Ein Slice gehört einem Implementer-Lauf.** Das folgt aus der
+[§Kernidee](#kernidee) — ein Slice ist so klein, dass ein Agent ihn in *einem*
+Lauf abschließt —, und `Verantwortlich:` nennt einen Rolleninhaber der
+Implementer-Rolle, also einen Lauf und einen WIP-Slot. Einen Slice auf zwei
 Arbeitsbäume zu verteilen, setzte zwei Läufe in diesen einen Slot, und die
-Ablage könnte sie nicht unterscheiden. Soll ein Slice parallel bearbeitet
-werden, wird er geschnitten (`in-progress → next`,
-[§Worked Example](#worked-example-einen-zu-großen-slice-schneiden)), und jeder
-Teil bekommt seinen Lauf und seinen Arbeitsbaum.
+Ablage könnte sie nicht unterscheiden. Wer seine Arbeit auf mehrere
+Arbeitsbäume verteilen will, schneidet ihn wie im
+[§Worked Example](#worked-example-einen-zu-großen-slice-schneiden): nach
+Lieferwert, nicht nach Schicht; der Ausgangs-Slice geht mit `Gegenstand:` nach
+`done/`, aus `in-progress/` zuvor zurück nach `next/`. Jeder Teil bekommt
+seinen Lauf und seinen Arbeitsbaum. Trägt kein Teil einen eigenen Lieferwert,
+bleibt der Slice einer und läuft in einem Arbeitsbaum. Ein Reviewer- oder
+Verifier-Lauf am selben Slice ist kein zweiter Implementer-Lauf.
 
 **Die Regel trägt die Wirkung, nicht das Mittel.** Sichtbar werden muss der
 Anspruch vor der Arbeit; der Direkt-Commit ist nur der Default-Träger. Wo der
@@ -661,7 +679,7 @@ Sub-Area-Modus-Begründungs-Übung. Modul-spezifische Trigger:
 | Frage | rudimentär | solide | exzellent |
 |---|---|---|---|
 | Vier Lifecycle-Verzeichnisse in Reihenfolge? | zwei oder drei genannt | `open/` → `next/` → `in-progress/` → `done/`. Plus Rückführungen: `in-progress/ → next/` (zu groß), `in-progress/ → open/` (Blocker). | + Hinweis: WIP-Limit pro **Rolleninhaber** ([Modul 8](../03-agenten/modul-08-agentenrollen.md#typische-fehlvorstellungen)) auf 1 — wer mehrere Slices gleichzeitig in `in-progress/` hat, hat keine Lifecycle, sondern ein Buffet. |
-| Trigger je Lifecycle-Übergang benannt? | nur ein oder zwei Übergänge, Rest "wenn jemand anfängt". | Alle sechs benannt: `open→next` (priorisiert/eingeplant, `Verantwortlich:` gesetzt) · `next→in-progress` (Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei; der `git mv` landet auf dem Hauptzweig, vor der Arbeit) · `in-progress→done` (Closure-Kriterien erfüllt, Lerneintrag geschrieben, jedes Risiko mit Ausgang) · `in-progress→next` (Slice zu groß, zurück zum Schneiden) · `in-progress→open` (Blocker, Priorität offen) · `open|next→done` (Gegenstand von einem anderen Slice übernommen oder entfallen — §7 nennt Kennung oder Grund, jedes Risiko hat einen Ausgang, die Liefer-Punkte bleiben leer). | + Pointe: am leichtesten übersehen werden die *Rückführungen* — `in-progress→next` und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört sichtbar zurück, nicht still weitergeschoben. WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro Lauf, nicht pro Rolle: mehrere Läufe derselben Person zählen einzeln, wenn `Verantwortlich:` sie per Zweig unterscheidet und jeder in seinem eigenen Arbeitsbaum läuft (`git worktree` oder Klon, [§Lifecycle als State Machine](#lifecycle-als-state-machine)) ([Modul 8](../03-agenten/modul-08-agentenrollen.md#typische-fehlvorstellungen)). |
+| Trigger je Lifecycle-Übergang benannt? | nur ein oder zwei Übergänge, Rest "wenn jemand anfängt". | Alle sechs benannt: `open→next` (priorisiert/eingeplant, `Verantwortlich:` gesetzt) · `next→in-progress` (Implementer übernimmt, Abhängigkeiten gelöst, WIP-Limit frei; der `git mv` landet auf dem Hauptzweig, vor der Arbeit) · `in-progress→done` (Closure-Kriterien erfüllt, Lerneintrag geschrieben, jedes Risiko mit Ausgang) · `in-progress→next` (Slice zu groß, zurück zum Schneiden) · `in-progress→open` (Blocker, Priorität offen) · `open|next→done` (Gegenstand von einem anderen Slice übernommen oder entfallen — §7 nennt Kennung oder Grund, jedes Risiko hat einen Ausgang, die Liefer-Punkte bleiben leer). | + Pointe: am leichtesten übersehen werden die *Rückführungen* — `in-progress→next` und `in-progress→open` —, weil sie wie "Scheitern" aussehen, in Wahrheit aber die Lifecycle-Disziplin tragen: ein Slice, der zu groß war, gehört sichtbar zurück, nicht still weitergeschoben. WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro Lauf, nicht pro Rolle: mehrere Läufe derselben Person zählen einzeln, wenn `Verantwortlich:` sie per Zweig unterscheidet und jeder in seinem eigenen Arbeitsbaum läuft (`git worktree` oder Klon, [§Lifecycle als State Machine](#lifecycle-als-state-machine); [Modul 8](../03-agenten/modul-08-agentenrollen.md#typische-fehlvorstellungen)). |
 | Slice in `done/` bei rotem Gate — wann? | "Gar nicht." | Nur mit dokumentiertem Carveout (Modul 7), der den roten Gate-Status auf Trigger schaltet. | + Unterscheidung Carveout (Ausnahme, mit Folge-Slice) vs. bootstrap-aware Gate (Stufung, mit Hochschalt-Trigger, Modul 13). Die volle Werkzeug-Triade inkl. *BF-Sub-Area-Markierung* (Sub-Area-Kontext, kein Closure-Werkzeug) wird in [Modul 7 §Worked Example A Schritt 6](../02-planung/modul-07-carveouts.md#worked-example-a-einen-carveout-dokumentieren) disambiguiert. |
 | Closure-Kriterien + Lerneintrag formuliert? | "Tests grün, fertig." — kein beobachtbares Kriterium, kein Lerneintrag. | Zwei beobachtbare Closure-Kriterien (z. B. Replay grün, DoD-Punkte als Test verlinkt) *und* ein Lerneintrag in einer der drei Formen (geschärfte Regel · neuer Sensor · benannte Spec-Lücke). | + Pointe: der Lerneintrag schließt den Steering Loop — ohne ihn bleibt das Versagensmuster unsichtbar und wiederholt sich. Exzellent benennt, *welche* künftige Wiederholung der Eintrag verhindert (Vorhersage), nicht nur, was passiert ist. |
 | `slice-bestell-checkout` (5-Punkte-DoD) bewerten und schneiden? | "Zu groß, irgendwie aufteilen." — kein Kriterien-Bezug, kein benannter Schnitt-Typ. | Gegen beide Größen-Kriterien begründet zu groß (>3 DoD-Punkte, nicht in einem Lauf abschließbar/einer Sitzung prüfbar) + konkreter Schnitt in einzeln lieferbare Slices mit benanntem Schnitt-Typ (Lieferwert: z. B. „Warenkorb→Zahlung→Bestätigung“ je eigenständig). | + Begründung, *warum* Lieferwert statt Schichten: jeder Schnitt-Slice liefert allein Wert und wartet nicht auf den nächsten; Gegenbeispiel, wann ein Schichtschnitt Zombie-Slices erzeugt (Lager-Abbuchung ohne Checkout liefert nichts Prüfbares). |

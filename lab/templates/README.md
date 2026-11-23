@@ -137,7 +137,7 @@ Doku-Gate direkt, `.d-check.yml` die Modul-Auswahl:
 
 | Datei | Rolle |
 |---|---|
-| [`.d-check.yml`](.d-check.yml) | Modul-Auswahl + Suffix-Ignore; `ids`/`codepaths` wachsen mit den Artefakten |
+| [`.d-check.yml`](.d-check.yml) | Modul-Auswahl + Scan-Ausschlüsse (Vorlagen-Suffix, `.tmp/`, Arbeitsbäume unter `.claude/worktrees/`); `ids`/`codepaths` wachsen mit den Artefakten |
 | [`Makefile`](Makefile) | ruft d-check direkt (`docs-check`-Target, Image per Digest gepinnt); `gates: docs-check`, Code-Gates ergänzt der Adopter |
 
 Danach läuft `make docs-check` sofort (`links`/`anchors`). `ids` und

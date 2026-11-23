@@ -139,7 +139,7 @@ häufigste Pfad zu blinden Flecken.
   ([Modul 5](modul-05-planning-harness.md#trigger-je-lifecycle-übergang-und-wip-limit-modul-5))
   gilt eine dritte, engere Lesart: **pro Lauf.** Ein Mensch kann mehrere
   Läufe parallel halten — mehrere Implementer-Agenten in eigenen Zweigen,
-  jeder in seinem eigenen Arbeitsbaum (`git worktree`,
+  jeder in seinem eigenen Arbeitsbaum (`git worktree` oder Klon,
   [Modul 5 §Lifecycle als State Machine](modul-05-planning-harness.md#lifecycle-als-state-machine))
   —, dann ist jeder Lauf sein eigener Rolleninhaber, mit eigenem WIP-Slot. Der
   Rolleninhaber hängt dann an Person **und** Zweig, nicht an der Person

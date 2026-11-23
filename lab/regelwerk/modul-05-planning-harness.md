@@ -59,25 +59,43 @@ sonst zeigen zwei Dateien in `in-progress/` denselben Namen, und die Ablage
 kann die Läufe nicht mehr unterscheiden. Ohne Parallel-Lauf bleibt die
 einfache Form aus dem vorigen Absatz.
 
-**Ein WIP-Slot, ein Zweig, ein Arbeitsbaum — jeder parallele Lauf bekommt sein
-eigenes `git worktree`.** Das WIP-Limit zählt pro Lauf, und ein Lauf braucht
-eigene Dateien: Ein Checkout trägt immer nur einen Zweig. Zwei Läufe in
-derselben Arbeitskopie schreiben in dieselben Dateien, der zweite überschreibt
-den ersten, und kein Merge meldet etwas — der Anspruch des ersten ist still
-weg. Der Arbeitsbaum entsteht deshalb mit dem Zweig, nach dem Anspruch, vom
-Hauptzweig aus: ein `git worktree` je Lauf (`git worktree add <pfad> -b
-<branch-name>`) oder ein weiterer Klon. Der `worktree` setzt die Zuordnung
-selbst durch: Ein Zweig, der in einem Arbeitsbaum ausgecheckt ist, lässt sich
-in keinem zweiten auschecken — `git worktree add` und `git switch` brechen ab.
-Ein zweiter Klon prüft das nicht. Die Zählung bleibt dieselbe: ein Slice in
-`in-progress/` je Lauf, ein Lauf je Arbeitsbaum.
+**Ein WIP-Slot, ein Zweig, ein Arbeitsbaum — jeder parallele Lauf bekommt
+seinen eigenen, etwa einen `git worktree`.** Das WIP-Limit zählt pro Lauf, und
+ein Lauf braucht eigene Dateien: Ein Checkout trägt immer nur einen Zweig. Zwei
+Läufe in derselben Arbeitskopie schreiben in dieselben Dateien, der zweite
+überschreibt den ersten, und kein Merge meldet etwas — die Änderung des ersten
+ist still weg. Der Arbeitsbaum entsteht deshalb mit dem Zweig, nach dem
+Anspruch, vom Hauptzweig aus: ein `git worktree` je Lauf
+(`git worktree add ../<repo>-<lauf> -b <branch-name>`) oder ein weiterer Klon.
+Der `worktree` setzt die Zuordnung selbst durch: Ein Zweig, der in einem
+Arbeitsbaum ausgecheckt ist, lässt sich ohne `--force` in keinem zweiten
+auschecken — `git worktree add` und `git switch` brechen ab. Ein zweiter Klon
+prüft das nicht. Die Zählung bleibt dieselbe: ein Slice in `in-progress/` je
+Lauf, ein Lauf je Arbeitsbaum.
 
-**Ein Slice gehört einem Lauf.** `Verantwortlich:` nennt einen Rolleninhaber
-der Implementer-Rolle, also einen Lauf und einen WIP-Slot. Einen Slice auf zwei
+**Der Arbeitsbaum liegt neben dem Repo, nicht darin.** Ein Sensor, der das
+Dateisystem liest statt git, sieht einen Arbeitsbaum unter dem
+Repo-Verzeichnis als zweite Kopie des Repos: doppelte Dateien, und Befunde in
+der Kopie, weil die Pfad-Regeln der Konfiguration von der Repo-Wurzel aus
+gelten und die Kopie nicht treffen. Ein `.gitignore`-Eintrag ändert daran
+nichts. Neben dem Repo sieht der Sensor nur das Repo. Legt ein Werkzeug seine
+Arbeitsbäume ins Repo (etwa Claude Code unter `.claude/worktrees/`), nimmt die
+Gate-Konfiguration den Pfad aus dem Scan; für git gehört er trotzdem ins
+`.gitignore`.
+
+**Ein Slice gehört einem Implementer-Lauf.** Das folgt aus der
+[§Kernidee](#kernidee-modul-5) — ein Slice ist so klein, dass ein Agent ihn in
+*einem* Lauf abschließt —, und `Verantwortlich:` nennt einen Rolleninhaber der
+Implementer-Rolle, also einen Lauf und einen WIP-Slot. Einen Slice auf zwei
 Arbeitsbäume zu verteilen, setzte zwei Läufe in diesen einen Slot, und die
-Ablage könnte sie nicht unterscheiden. Soll ein Slice parallel bearbeitet
-werden, wird er geschnitten (`in-progress → next`), und jeder Teil bekommt
-seinen Lauf und seinen Arbeitsbaum.
+Ablage könnte sie nicht unterscheiden. Wer seine Arbeit auf mehrere
+Arbeitsbäume verteilen will, schneidet ihn wie in
+[§Ziel-Form: Slice](#ziel-form-slice): nach Lieferwert, nicht nach Schicht; der
+Ausgangs-Slice geht mit `Gegenstand:` nach `done/`, aus `in-progress/` zuvor
+zurück nach `next/`. Jeder Teil bekommt seinen Lauf und seinen Arbeitsbaum.
+Trägt kein Teil einen eigenen Lieferwert, bleibt der Slice einer und läuft in
+einem Arbeitsbaum. Ein Reviewer- oder Verifier-Lauf am selben Slice ist kein
+zweiter Implementer-Lauf.
 
 **Die Regel trägt die Wirkung, nicht das Mittel.** Sichtbar werden muss der
 Anspruch vor der Arbeit; der Direkt-Commit ist nur der Default-Träger. Wo der
@@ -150,8 +168,8 @@ WIP-Limit pro Rolleninhaber = 1 ist eine harte Größe, kein Vorschlag — pro
 Lauf, nicht pro Rolle: mehrere Läufe derselben Person zählen einzeln, wenn
 `Verantwortlich:` sie per Zweig unterscheidet und jeder in seinem eigenen
 Arbeitsbaum läuft (`git worktree` oder Klon,
-[§Lifecycle als State Machine](#lifecycle-als-state-machine))
-([Modul 8](modul-08-agentenrollen.md#rollen-regeln-modul-8)); wer
+[§Lifecycle als State Machine](#lifecycle-als-state-machine);
+[Modul 8](modul-08-agentenrollen.md#rollen-regeln-modul-8)); wer
 mehrere Slices gleichzeitig in `in-progress/` hat, hat keine Lifecycle,
 sondern ein Buffet.
 

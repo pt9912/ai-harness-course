@@ -39,7 +39,7 @@ zählt pro Lauf. Hält ein Mensch mehrere Implementer-Läufe parallel, trägt da
 Feld ab next→in-progress Person und Zweig — `<Name> (Zweig <branch-name>)` —,
 und jeder Lauf arbeitet in seinem eigenen Arbeitsbaum (`git worktree` oder ein
 weiterer Klon), nie zwei Läufe in derselben Arbeitskopie. Ein Slice gehört
-einem Lauf. -->
+einem Implementer-Lauf. -->
 
 **Autor:** <Name>. **Datum:** YYYY-MM-DD.
 

@@ -92,6 +92,7 @@ entstehen auf alices Klon.
 | 2026-11-23 | `v0.91.0` | 118 PASS, 0 FAIL, 0 KAPUTT | erweitert um s33e, s33f; s33d mit Vorbedingung und lauter Kontrolle (Review zu Welle 166) |
 | 2026-11-23 | `v0.92.0` | 118 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.91.0 → v0.92.0; alle Verdikte unverändert |
 | 2026-11-23 | `v0.92.0` | 122 PASS, 0 FAIL, 0 KAPUTT | erweitert um s34 (Welle 167) |
+| 2026-11-23 | `v0.92.0` | 126 PASS, 0 FAIL, 0 KAPUTT | erweitert um s34e–h, Lage des Arbeitsbaums (Welle 167) |
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
@@ -221,6 +222,10 @@ Handbuch-Fall (s04g h), die Marker-Hälfte (s04c d).
 | s34b | im Lauf-Arbeitsbaum `git switch main`, während der Haupt-Arbeitsbaum `main` hält | **abgebrochen**, Arbeitsbaum bleibt auf `lauf/kern` | ✓ auch der Wechsel ist gesperrt, nicht nur das Anlegen |
 | s34c | zwei Läufe in zwei Arbeitsbäumen schreiben dieselbe Datei (die Schreibvorgänge aus s24d) | **beide Stände erhalten**, je einer auf seinem Zweig | ✓ das Gegenstück zu s24d: getrennte Arbeitsbäume verlieren keinen Anspruch |
 | s34d | ein zweiter Klon checkt `lauf/kern` aus, während der Arbeitsbaum ihn hält | **still**, keine Sperre | ✓ der Klon trägt die Trennung, setzt sie aber nicht durch |
+| s34e | `ids` aktiv, ADR nennt ihre Kennung im Ziel-Verzeichnis nackt (ohne Arbeitsbaum still); Arbeitsbaum unter `.claude/worktrees/lauf-x` | **doppelte Dateizahl** und **`id-unlinked`** in der Kopie | ✓ für einen Sensor, der das Dateisystem liest, ist er eine zweite Kopie, und die Pfad-Regeln treffen sie nicht |
+| s34f | derselbe Aufbau, git ignoriert den Pfad (`git check-ignore`) | **weiter doppelt**, `id-unlinked` in der Kopie | ✓ d-check liest kein `.gitignore` |
+| s34g | Arbeitsbaum neben dem Repo, ohne Eintrag | **still**, Basis-Dateizahl | ✓ neben dem Repo sieht der Sensor nur das Repo — per Bauform: der Lauf hängt nur das Repo-Verzeichnis ein |
+| s34h | Arbeitsbaum im Repo, `scan.ignore` nennt den Pfad | **still**, Basis-Dateizahl | ✓ der Ausschluss gehört in die Gate-Konfiguration; Gegenprobe mit falschem Pfad: FAIL |
 
 **Befund aus s03 — die Stille braucht Abstand.** Mit einem *einzeiligen*
 Register kollidierten Zeilen-Änderung und Anhang **laut** (benachbarte

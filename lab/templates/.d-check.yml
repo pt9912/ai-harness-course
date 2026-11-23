@@ -9,7 +9,12 @@
 # einen Verstoss der Klasse einbauen und den Befund sehen.
 scan:
   roots: ["."]
-  ignore: ["**/*.template.md", ".tmp/**"]
+  # .claude/worktrees/: Arbeitsbaeume, die ein Werkzeug ins Repo legt (Claude Code
+  # legt sie dort an), waeren fuer d-check eine zweite Kopie des Repos — d-check
+  # liest das Dateisystem, nicht .gitignore (Baseline-Regelwerk
+  # modul-05-planning-harness.md §Lifecycle als State Machine). Ein Arbeitsbaum
+  # neben dem Repo braucht keinen Eintrag.
+  ignore: ["**/*.template.md", ".tmp/**", ".claude/worktrees/**"]
 modules: [links, anchors]
 # Linkpflicht fuer ADR-Kennungen: `matrix` beurteilt den Status eines Ziels nur an
 # Links (Kurs `referenz-richtung.md`: Slice -> ADR mit Status Superseded faellt); eine

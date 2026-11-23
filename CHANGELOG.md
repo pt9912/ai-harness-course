@@ -23,29 +23,46 @@ Welle 130 geprobt). Das Wort `worktree` kam in Kurs, Regelwerk und Vorlagen
 nicht vor; ein Agent, der danach sucht, fand nichts. Die Welle schließt den
 Faden; er ist aus der Roadmap entfernt.
 
-- **Modul 5** §Lifecycle als State Machine — zwei neue Absätze nach dem
+- **Modul 5** §Lifecycle als State Machine — drei neue Absätze nach dem
   Zweig-Absatz. *Ein WIP-Slot, ein Zweig, ein Arbeitsbaum*: Jeder parallele Lauf
   bekommt nach dem Anspruch, mit dem Zweig, seinen eigenen Arbeitsbaum — ein
-  `git worktree` je Lauf oder ein weiterer Klon; der `worktree` sperrt denselben
-  Zweig in einem zweiten Arbeitsbaum, ein Klon nicht. *Ein Slice gehört einem
-  Lauf*: Einen Slice auf zwei Arbeitsbäume zu verteilen, setzte zwei Läufe in
-  einen WIP-Slot; parallel zu bearbeiten heißt schneiden (`in-progress → next`).
-  Selbstcheck-Rubrik: das WIP-Limit nennt den eigenen Arbeitsbaum mit.
+  `git worktree` je Lauf (`git worktree add ../<repo>-<lauf> -b <branch-name>`)
+  oder ein weiterer Klon; der `worktree` sperrt denselben Zweig ohne `--force`
+  in einem zweiten Arbeitsbaum, ein Klon nicht. *Der Arbeitsbaum liegt neben dem
+  Repo, nicht darin*: Ein Sensor, der das Dateisystem liest, sieht einen
+  Arbeitsbaum im Repo als zweite Kopie, mit Befunden in der Kopie, weil die
+  Pfad-Regeln der Konfiguration von der Wurzel aus gelten; `.gitignore` ändert
+  daran nichts, die Gate-Konfiguration nimmt den Pfad aus (etwa Claude Code
+  unter `.claude/worktrees/`). Gemessen an einer Kopie von `lab/example` als
+  eigenem Repo (d-check v0.92.0): 216 statt 108 Dateien, 71 × `id-unlinked`;
+  mit `ignore`-Eintrag oder neben dem Repo 108 Dateien, 0 Befunde. *Ein Slice
+  gehört einem Implementer-Lauf*, hergeleitet aus der Kernidee (in *einem* Lauf
+  abschließbar): Wer die Arbeit auf mehrere Arbeitsbäume verteilen will,
+  schneidet wie im Worked Example nach Lieferwert, der Ausgangs-Slice geht mit
+  `Gegenstand:` nach `done/`; ein Reviewer- oder Verifier-Lauf ist kein zweiter
+  Implementer-Lauf. Selbstcheck-Rubrik: das WIP-Limit nennt den eigenen
+  Arbeitsbaum mit.
 - **Modul 8** §Typische Fehlvorstellungen, Rolleninhaber-Absatz: „mehrere
   Implementer-Agenten in eigenen Zweigen, jeder in seinem eigenen Arbeitsbaum
-  (`git worktree`)“, mit Verweis auf Modul 5.
+  (`git worktree` oder Klon)“, mit Verweis auf Modul 5.
 - **Lösung 5**: Faustregel zum WIP-Limit um Arbeitsbaum und „ein Slice gehört
-  einem Lauf“ ergänzt.
+  einem Implementer-Lauf“ ergänzt; der Trigger `next → in-progress` war noch
+  „der erste Commit … — Branch/PR existiert“ und widersprach Modul 5 (Anspruch
+  auf dem Hauptzweig vor der Arbeit, Zweig danach) — nachgezogen.
 - **Spiegel** `lab/regelwerk/modul-05-planning-harness.md` (Lifecycle und
   §Trigger je Lifecycle-Übergang und WIP-Limit) und
   `lab/regelwerk/modul-08-agentenrollen.md` wortgleich, ohne die
-  Team-Sim-Belege (netzlos); `lab/regelwerk/README.md`: `Stand:` auf Welle 167.
+  Team-Sim-Belege (netzlos); der Verweis aufs Worked Example zeigt im Spiegel
+  auf §Ziel-Form: Slice. `lab/regelwerk/README.md`: `Stand:` auf Welle 167.
 - **Vorlagen**: `slice.template.md` — der Bedienhinweis zu `Verantwortlich:`
   nennt den parallelen Lauf (Zweig-Form `<Name> (Zweig <branch-name>)` aus
   Modul 5, die der Vorlage fehlte; eigener Arbeitsbaum). `AGENTS.template.md`
-  §6 Minimal Agent Workflow — neuer Absatz *Parallele Läufe: ein WIP-Slot, ein
-  Zweig, ein `git worktree`*: Die Datei liest ein Agent zuerst, und WIP-Limit
-  und `worktree` stehen dort im selben Satz.
+  §6 Minimal Agent Workflow — neuer Absatz *Parallele Läufe*: „Das WIP-Limit
+  zählt pro Lauf — je Lauf ein `git worktree` (oder ein weiterer Klon) und ein
+  Zweig“; die Datei liest ein Agent zuerst, und eine Suche nach
+  `worktree` landet in der Zeile, die das WIP-Limit nennt. Die Vorlage
+  `.d-check.yml` nimmt `.claude/worktrees/**` aus dem Scan, mit Kommentar;
+  `lab/templates/README.md` beschreibt ihre Ausschlüsse.
 - **Nicht geändert**: [`source-precedence.md`](kurs/de/grundlagen/source-precedence.md)
   §Vergabe nennt „eigene Zweige oder gemeinsame Arbeitskopie“ als Topologien
   der Kennungs-Frage; seine Aussage gilt in beiden und bleibt richtig. Das
@@ -57,8 +74,30 @@ zweiter Arbeitsbaum auf denselben Lauf-Zweig bricht ab (s34a), der Wechsel auf
 einen gehaltenen Zweig auch (s34b), zwei Arbeitsbäume behalten beide Stände
 (s34c, Gegenstück zu s24d), ein zweiter Klon sperrt nicht (s34d). Verdikte am
 Exit-Code und am Zustand, nicht am Meldungstext (Locale). Gegenprobe mit
-`--force` und `--ignore-other-worktrees`: s34a und s34b FAIL. 122 PASS, 0 FAIL,
-0 KAPUTT auf d-check v0.92.0.
+`--force` und `--ignore-other-worktrees`: s34a und s34b FAIL. Zur Lage des
+Arbeitsbaums, mit `ids` aktiv und einer ADR, die ihre Kennung im
+Ziel-Verzeichnis nackt nennt (ohne Arbeitsbaum still): im Repo doppelte
+Dateizahl und `id-unlinked` in der Kopie (s34e), ebenso, wenn git den Pfad
+ignoriert (s34f, Vorbedingung `git check-ignore`); neben dem Repo (s34g) und mit
+`scan.ignore` (s34h) Basis-Dateizahl, kein Befund. Gegenprobe s34h mit falschem
+Pfad: FAIL. 126 PASS, 0 FAIL, 0 KAPUTT auf d-check v0.92.0.
+
+**Aus dem Review.** Eine Runde über Commit 6d425a5 und den Nachtrag, 14 Befunde,
+alle behoben: s34e/f prüften nur die Dateizahl, der Kurs behauptete aber auch
+Befunde in der Kopie (jetzt `ids` im Aufbau, Befund geprüft); „ein Slice gehört
+einem Lauf“ verwies auf `in-progress → next` als Schneide-Weg, ohne den
+Lieferwert-Schnitt und den Ausgangs-Slice zu nennen, und ohne Herleitung;
+`AGENTS.template.md` trug „WIP-Limit“ und `worktree` nicht in einer Zeile, der
+CHANGELOG behauptete es; s24d belegt den Verlust der *Änderung*, nicht des
+Anspruchs. Dazu Genus und Kopf (`worktree` als Beispiel, Klon gleichrangig),
+„ohne `--force`“, der Werkzeugname zu `.claude/worktrees/`, `.gitignore` für git
+weiter nötig, Spiegel-Link umgehängt statt weggelassen, Doppelklammer in der
+Rubrik, Umbrüche. Das Kurs-Repo selbst nimmt `.claude/worktrees/` jetzt aus
+`.d-check.yml` und `.dockerignore` aus (gemessen an einem Klon mit Arbeitsbaum
+dort: 519 statt 259 Dateien und 2149 Befunde; ohne den `.dockerignore`-Eintrag
+las docs-check 493 statt 233 Dateien). Beim Umbau von s34e–h lief ein Ersetzungs-Skript fehl und
+löschte im Repo `.gitignore` und änderte `.d-check.yml`; beides aus HEAD
+wiederhergestellt, vor jeder weiteren Änderung geprüft.
 
 ## Welle 166 — 2026-11-22 · Die Umgebungs-Zusage: Anforderung, zwei Träger, ein Check
 

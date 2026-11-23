@@ -2160,6 +2160,59 @@ s34_worktree_lauf() {
   verdikt "s34d zweiter Klon checkt denselben Lauf-Zweig aus: STILL (keine Sperre)" "rc=0, Klon auf lauf/kern, waehrend der Arbeitsbaum ihn haelt" "rc=$rc, Zweig=$zweig" $ok
 }
 
+# s34e-h: wo der Arbeitsbaum liegt. d-check liest das Dateisystem, nicht git —
+# ein Arbeitsbaum unter dem Repo-Verzeichnis ist fuer ihn eine zweite Kopie. Die
+# Pfad-Regeln der Konfiguration gelten von der Wurzel aus: Die ADR im Ziel-
+# Verzeichnis von `ids` darf ihre Kennung nackt nennen, dieselbe Datei in der
+# Kopie liegt ausserhalb und meldet id-unlinked. Verdikte an Dateizahl und Befund.
+dateien() { printf '%s' "$1" | grep -o '[0-9]* Datei(en) geprüft' | grep -o '^[0-9]*'; }
+s34_worktree_ort() {
+  topo; cd "$WORK/sim/alice" || return 1
+  local kopie=".claude/worktrees/lauf-x/docs/plan/adr/0001-kern.md"
+  sed -i 's/^modules: \[links, anchors, planning\]$/modules: [links, anchors, ids, planning]/' .d-check.yml
+  printf '%s\n' 'ids:' '  patterns:' "    - regex: 'ADR-\d{4}'" '      target: docs/plan/adr/' '      link-policy: always' >> .d-check.yml
+  printf '\nSiehe ADR-0001.\n' >> docs/plan/adr/0001-kern.md
+  schritt grep -q '^modules: \[links, anchors, ids, planning\]$' .d-check.yml || return 1
+  schritt grep -qF "regex: 'ADR-\d{4}'" .d-check.yml || return 1
+  schritt git add -A && schritt git commit -qm "ids aktiv, ADR nennt sich nackt" || return 1
+  # Vorbedingung: ohne Arbeitsbaum ist der Baum still — die nackte Kennung liegt
+  # im Ziel-Verzeichnis
+  out=$(dcheck "$WORK/sim/alice"); basis=$(dateien "$out")
+  schritt test -n "$basis" || return 1
+  schritt still "$out" || return 1
+  # --- s34e: Arbeitsbaum im Repo, wo ein Werkzeug ihn anlegt
+  schritt git worktree add -q .claude/worktrees/lauf-x -b lauf/x || return 1
+  schritt test -f "$kopie" || return 1
+  out=$(dcheck "$WORK/sim/alice"); n=$(dateien "$out")
+  [ "$n" = $((2*basis)) ] && befund_in "$out" "$kopie" "ADR-0001" "id-unlinked" && ok=0 || ok=1
+  verdikt "s34e Arbeitsbaum unter dem Repo-Verzeichnis: LAUT (doppelte Dateizahl, Befund in der Kopie)" "$((2*basis)) Dateien, id-unlinked auf $kopie" "$n Dateien / $(echo "$out"|tail -1)" $ok
+  # --- s34f: derselbe Aufbau, git ignoriert den Pfad
+  printf '.claude/worktrees/\n' >> .gitignore
+  schritt git check-ignore -q .claude/worktrees/lauf-x || return 1
+  out=$(dcheck "$WORK/sim/alice"); n=$(dateien "$out")
+  [ "$n" = $((2*basis)) ] && befund_in "$out" "$kopie" "ADR-0001" "id-unlinked" && ok=0 || ok=1
+  verdikt "s34f derselbe Arbeitsbaum, git ignoriert ihn: LAUT (d-check liest kein .gitignore)" "weiter $((2*basis)) Dateien und id-unlinked in der Kopie" "$n Dateien / $(echo "$out"|tail -1)" $ok
+  # --- s34g: Arbeitsbaum neben dem Repo, ohne Eintrag. Gilt per Bauform: der
+  # Lauf haengt nur das Repo-Verzeichnis ein, ein Geschwister-Verzeichnis sieht
+  # er nie — genau das ist die Aussage.
+  rm -f .gitignore
+  schritt git worktree remove --force .claude/worktrees/lauf-x || return 1
+  schritt git worktree add -q "$WORK/sim/alice-lauf-y" -b lauf/y || return 1
+  schritt test -f "$WORK/sim/alice-lauf-y/.d-check.yml" || return 1
+  schritt test ! -e .claude/worktrees/lauf-x || return 1
+  out=$(dcheck "$WORK/sim/alice"); n=$(dateien "$out")
+  [ "$n" = "$basis" ] && still "$out" && ok=0 || ok=1
+  verdikt "s34g Arbeitsbaum neben dem Repo: STILL (Basis-Dateizahl, kein Befund)" "$basis Dateien, 0 Befunde" "$n Dateien / $(echo "$out"|tail -1)" $ok
+  # --- s34h: wieder ein Arbeitsbaum im Repo, scan.ignore nennt den Pfad
+  schritt git worktree add -q .claude/worktrees/lauf-z -b lauf/z || return 1
+  schritt test -f .claude/worktrees/lauf-z/.d-check.yml || return 1
+  sed -i 's#^  roots: \["\."\]$#  roots: ["."]\n  ignore: [".claude/worktrees/**"]#' .d-check.yml
+  schritt grep -qF 'ignore: [".claude/worktrees/**"]' .d-check.yml || return 1
+  out=$(dcheck "$WORK/sim/alice"); n=$(dateien "$out")
+  [ "$n" = "$basis" ] && still "$out" && ok=0 || ok=1
+  verdikt "s34h Arbeitsbaum im Repo, scan.ignore nennt ihn: STILL (Basis-Dateizahl, kein Befund)" "$basis Dateien, 0 Befunde" "$n Dateien / $(echo "$out"|tail -1)" $ok
+}
+
 # ---------------------------------------------------------------------------
 echo "Team-Sim — Image: $IMG"; echo "Arbeitsverzeichnis: $WORK"; [ -n "$SELECT" ] && echo "Auswahl: $SELECT"; echo
 lauf s01 s01_doppel_anspruch
@@ -2198,6 +2251,7 @@ lauf s31 s31_review_deckung
 lauf s32 s32_wellen_praefix_globs
 lauf s33 s33_pinsync_stellen_abgleich
 lauf s34 s34_worktree_lauf
+lauf s34 s34_worktree_ort
 echo; echo "Ergebnis: $PASS PASS, $FAIL FAIL, $KAPUTT KAPUTT — Ergebnisdatei: $TSV"
 if [ "${SIM_CLEAN:-0}" = 1 ]; then cat "$TSV"; rm -rf "$WORK"; fi
 [ $FAIL -eq 0 ] && [ $KAPUTT -eq 0 ]

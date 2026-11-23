@@ -23,8 +23,9 @@ anderer übernimmt).
 Faustregel: WIP-Limit auf 1 pro Rolleninhaber (Modul 8) — pro Lauf, nicht pro
 Rolle: mehrere Läufe derselben Person zählen einzeln, wenn `Verantwortlich:`
 sie per Zweig unterscheidet und jeder in seinem eigenen Arbeitsbaum läuft
-(`git worktree` oder Klon; ein Slice gehört einem Lauf). Wer mehrere Slices gleichzeitig in
-`in-progress/` hat, hat kein Lifecycle, sondern ein Buffet — und keinen
+(`git worktree` oder Klon; ein Slice gehört einem Implementer-Lauf). Wer
+mehrere Slices gleichzeitig in `in-progress/` hat, hat kein Lifecycle, sondern
+ein Buffet — und keinen
 Punkt, an dem reproduzierbar geprüft wird, ob der 8-Schritt-Workflow
 durchlaufen wurde.
 
@@ -34,9 +35,10 @@ Sechs Übergänge, jeder mit einem *beobachtbaren* Trigger:
 
 - `open → next`: Slice wird priorisiert und eingeplant (kommt in die
   Reihenfolge des nächsten Arbeitsfensters).
-- `next → in-progress`: der erste Commit, der die Arbeit am Slice
-  *startet* — Branch/PR existiert, Abhängigkeiten gelöst, WIP-Slot frei.
-  *Nicht* der bloße Wunsch, ihn als nächstes zu machen.
+- `next → in-progress`: der Übergangs-Commit (`git mv`) auf dem Hauptzweig,
+  *vor* der Arbeit — Abhängigkeiten gelöst, WIP-Slot frei; Zweig und
+  Arbeitsbaum entstehen danach. *Nicht* der bloße Wunsch, ihn als nächstes zu
+  machen, und nicht erst der erste Commit auf dem Zweig.
 - `in-progress → done`: alle Closure-Kriterien erfüllt (Gates grün oder
   per Carveout gedeckt) *und* Lerneintrag geschrieben.
 - `in-progress → next`: der Slice erweist sich als zu groß — zurück zur
