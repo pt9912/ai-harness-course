@@ -271,8 +271,8 @@ Ein Eintrag nennt **Werkzeug · Prüfform · Soll · Kontext · Grund**.
 der Sensor-Datei. Beim Weg *Manifest* ist es das Manifest selbst, und das Feld
 *Soll* trägt den Wert. Beim Weg *Ableiten* nennt das Feld die Pin-Stelle statt
 ihres Werts; schriebe es den Wert ab, wäre es die zweite Quelle aus §Woher das
-Soll kommt. Ein Host-Werkzeug hat keine Pin-Stelle — wer am Host prüft, führt
-deshalb mindestens die Mischform. Die **Regel** des Checks — welche Prüfformen,
+Soll kommt. Für ein Werkzeug ohne Pin-Stelle (`bash` ≥ …, `make` ≥ …) trägt das
+Inventar den Wert selbst — dort gilt Manifest oder Mischform. Die **Regel** des Checks — welche Prüfformen,
 wie verglichen wird, was rot ist und was Warnung — legt das Repo in seiner
 Spezifikation fest; das Inventar trägt die **Daten**, die das Skript nach dieser
 Regel liest. Die Sensor-Datei verlinkt die Festlegung, nennt den Pfad des

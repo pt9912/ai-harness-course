@@ -116,12 +116,17 @@ Datumsfeld, den Deckungsnachweis und eine Abschrift des Solls (`harness-dateien.
 der Kommentar im Beispiel behauptete, die übrigen Skelette trügen ihre Toolchain
 nur an einer Stelle; Lösung 14 ließ den Check globale Pakete fangen; s33d bestand
 auch ohne Abweichung; Modul 14 nannte für den Käfig „Exit 127“ — gemessen endet
-`make` mit Exit 2 („Error 127“); „verbreitetster Träger“ war unbelegt. Die zweite
+`make` mit Exit 2 (in deutscher Locale „Fehler 127“); „verbreitetster Träger“ war unbelegt. Die zweite
 Runde fand Folgefehler der Fixes, ebenfalls behoben: Die Probe scheitert nur,
 wenn der Fehler bis zu `make` durchkommt (gemessen: ohne `set -e` Exit 0); der
 Vorlage fehlte der Verweis auf die Spec; die `go`-Direktive taugt nicht als
 Pin-Stelle für die Prüfform *exakt* (Lösung 14); die Warnung bekam einen
 eigenen Exit, den der Kurs nicht kennt.
+Die dritte Runde: „Ein Host-Werkzeug hat keine Pin-Stelle“ war zu pauschal (ein
+Versionsmanager ist eine) und machte in der Vorlage die Mischform zur Pflicht —
+jetzt: ohne Pin-Stelle (`bash`, `make`) trägt das Inventar den Wert, Manifest oder
+Mischform. Auch `.github/workflows/checks.yml` nennt noch sechs Module des
+Beispiels; der Roadmap-Faden zu den Workflows trägt beide Dateien.
 
 **MINOR**: neue Regel (Anforderung und zweiter Träger), Umbau von Modul 9; kein
 Asset entfernt.

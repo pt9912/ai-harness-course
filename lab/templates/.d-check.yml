@@ -102,7 +102,7 @@ modules: [links, anchors]
 # (`grundlagen-harness-dateien.md` §Verzeichniskonvention), der Werkzeug-Default
 # ist `welle-*.md` / `welle-*-results.md` — ohne die zwei Zeilen findet `waves`
 # keine Welle-Datei und bleibt still.
-# GRENZE (d-check v0.91.0): Die Kennung liest `waves` als literales Glob-Praefix
+# GRENZE (d-check v0.91.0, auf v0.92.0 nachgemessen): Die Kennung liest `waves` als literales Glob-Praefix
 # plus folgende Ziffernfolge (`wave-1-basis` -> `wave-1`). Eine Kennung ohne
 # Ziffern — ein reiner Name nach `grundlagen-source-precedence.md` §Vergabe,
 # etwa `wave-cache-warmup` — liest es nicht: Datei ohne Zeiger und Zeiger ohne

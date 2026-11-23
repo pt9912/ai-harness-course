@@ -32,8 +32,8 @@ Die Form der Datei wählt das Repo; das Skript liest sie nach der Regel aus
 
 **Woher das Soll kommt:** `MR-<NNN>` in `harness/conventions.md` — <Weg 1,
 ableiten: das Feld *Soll* nennt die Pin-Stelle, nicht ihren Wert · Weg 2,
-Manifest: das Inventar trägt den Wert · Mischform — sie ist Pflicht, sobald ein
-Host-Werkzeug dabei ist, denn das hat keine Pin-Stelle>. Einen voreingestellten
+Manifest: das Inventar trägt den Wert · Mischform. Für ein Werkzeug ohne
+Pin-Stelle (`bash`, `make`) trägt das Inventar den Wert selbst>. Einen voreingestellten
 Weg gibt es nicht. Hält ein Stellen-Abgleich Manifest und Pin-Stellen gegeneinander
 (d-check `pinsync`), steht sein Block in `.d-check.yml`.
 
