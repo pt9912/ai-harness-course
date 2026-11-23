@@ -88,6 +88,7 @@ einem offenen PR liegt, ist für andere nicht da" real.
 | 2026-11-22 | `v0.91.0` | 112 PASS, 0 FAIL, 0 KAPUTT | erweitert um s32c (Review zu Welle 165) |
 | 2026-11-22 | `v0.91.0` | 116 PASS, 0 FAIL, 0 KAPUTT | erweitert um s33 (Welle 166) |
 | 2026-11-23 | `v0.91.0` | 118 PASS, 0 FAIL, 0 KAPUTT | erweitert um s33e, s33f; s33d mit Vorbedingung und lauter Kontrolle (Review zu Welle 166) |
+| 2026-11-23 | `v0.92.0` | 118 PASS, 0 FAIL, 0 KAPUTT | nachgefahren, Pin-Bump v0.91.0 → v0.92.0; alle Verdikte unverändert |
 
 Kennungen sind stabil — Kursmodule zitieren sie —, die Reihenfolge ist die des
 Runners, nach Aussage gruppiert: Singleton gegen Bijektion (s04a b e f i), der
