@@ -3,6 +3,9 @@
 # gehoert nicht in den Kontext — .git allein waeren 46 MB je Build.
 .git
 .tmp/
+# Arbeitsbaeume von Claude Code: eine zweite Kopie des Repos im Build-Kontext
+# (Modul 5 §Lifecycle als State Machine)
+.claude/worktrees/
 lab/example/*/out
 lab/example/*/build
 lab/example/*/build-cov

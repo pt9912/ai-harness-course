@@ -14,9 +14,12 @@ scan:
   # Menge sieht als in CI, ist nicht dasselbe Gate (Modul 14). `.gitignore` deckt
   # diese Pfade längst ab — d-check interpretiert es aber nicht, die Liste ist
   # also von Hand parallel zu halten.
+  # Arbeitsbäume, die Claude Code unter `.claude/worktrees/` anlegt, wären eine
+  # zweite Kopie des Repos (Modul 5 §Lifecycle als State Machine). Gemessen an
+  # einem Klon mit einem Arbeitsbaum dort: 519 statt 259 Dateien, 2149 Befunde.
   ignore: ["lab/example/cpp/build-cov/**", ".tmp/**", "CHANGELOG.md",
            "**/.pytest_cache/**", "**/.mypy_cache/**", "**/.import_linter_cache/**",
-           "lab/example/*/out/**"]
+           "lab/example/*/out/**", ".claude/worktrees/**"]
 modules: [links, anchors, codepaths, matrix, hostpaths, spans, tracked, structure, targets]
 
 # lab/templates mischt ZWEI Referenzklassen in denselben Dateien:
