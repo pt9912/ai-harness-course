@@ -82,6 +82,51 @@ Form. Was mehr ist als das, bleibt bei der Hard Rule: Folge-ADR mit
 tatsächlich geänderte Begründung ist selbst ein Bruch der Hard Rule, keine
 Ausnahme von ihr.
 
+### Bedrohung, Grenze, Ausgang (Modul 4)
+
+Eine Bedrohung wird *vor* dem Code benannt, und ihr Ergebnis braucht einen Ort
+im Harness. Dieses Regelwerk lehrt dafür keine Methode — STRIDE (Spoofing,
+Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of
+Privilege) und Verwandte sind Denkhilfen, um Bedrohungen zu finden —, sondern
+die **Aufnahme**: wohin Grenze, Bedrohung und Ausgang gehören.
+
+**Die Grenze steht in der Sicht**, mit der `ARC-*` ihrer Schnittstelle
+([Modul 3 §Ziel-Form: Architektur-Sicht](modul-03-spec.md#ziel-form-architektur-sicht)).
+
+**Jede Bedrohung bekommt einen von drei Ausgängen, und jeder hat schon ein
+Zuhause:**
+
+| Ausgang | Zuhause | Verweis (aufwärts) |
+|---|---|---|
+| **gemindert** | `LH-QA` mit Messmethode — ein Gate oder Test, der die Eigenschaft prüft; *wie* sie gehalten wird, entscheidet eine ADR, wenn der Weg Architektur-Wirkung hat | Slice → `LH-QA` und `ARC-*` der Grenze |
+| **akzeptiert** | ADR mit ihrem *Warum* und einem Re-Evaluierungs-Trigger, der nennt, wann die Annahme kippt | ADR → `LH-*`, die den Rahmen setzt (`Bezug:`), ADR → `ARC-*` (`Schärft:`) |
+| **offen** | Slice in `open/` | Slice → `ARC-*` und, wo es sie gibt, `LH-QA` |
+
+Die Bedrohung selbst steht in ihrem Wortlaut beim Ausgang: im Kontext der ADR
+oder im Ziel des Slices. Eine `LH-QA` formuliert die *Eigenschaft*, nicht die
+Bedrohung
+([Modul 3 §Regeln gegen typische Fehlannahmen](modul-03-spec.md#regeln-gegen-typische-fehlannahmen-modul-3)).
+Eine neue `LH-QA` entsteht beim Schreiben des Lastenhefts, danach nur per
+Change Request
+([`grundlagen-source-precedence.md` §Spec-Stratifizierung](grundlagen-source-precedence.md#spec-stratifizierung)).
+
+**Kein eigenes Register.** Eine Bedrohungsliste mit Status-Spalte wäre eine
+zweite Quelle für Ausgänge, die schon in `LH-QA`, ADR und Slice stehen — und sie
+driftete gegen sie wie ein Status-Feld gegen das Verzeichnis
+([Modul 5 §Lifecycle als State Machine](modul-05-planning-harness.md#lifecycle-als-state-machine)).
+Die Übersicht je Grenze ist ein **Auslesestand** aus den Aufwärts-Verweisen:
+die ADRs, die die `ARC-*` schärfen, und die Slices, die sie nennen — soweit ihr
+Kontext oder Ziel eine Bedrohung nennt —, dazu die `LH-QA`. Wie die RTM
+([`grundlagen-begriffe.md`](grundlagen-begriffe.md#kernbegriffe)) ist sie kein Artefakt.
+
+**Für einen Wächter liefert das Modell nur Kandidaten.** Gehärtet wird ein
+Wächter erst nach Beobachtung
+([Modul 13 §Guard-Härtung](modul-13-quality-gates.md#guard-härtung-wächter-reifen-in-wellen-modul-13));
+das Bedrohungsmodell des Produkts speist Anforderung, Sicht und ADR, nicht den
+Hook. Das Modell des Harness selbst — Prompt-Injection über Repo-Inhalte, die
+Rechte des Agenten, der Container — hat andere Angreifer und andere Grenzen;
+dieser Abschnitt behandelt es nicht.
+
 ### Regeln gegen typische Fehlannahmen (Modul 4)
 
 - **"Eine ADR begründet eine Anforderung."** — Nein. ADRs begründen die *Lösung*. Anforderungen begründet die Spec. Wer ADRs zur Spec macht, kann später keine Architektur ohne Lastenheft-Änderung wechseln.

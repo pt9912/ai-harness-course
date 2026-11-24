@@ -1,9 +1,11 @@
 # Bedrohungsmodellierung — Konzept
 
-**Stand:** Konzept-Entwurf, **nichts umgesetzt**. Kein Kurs-, Regelwerk-,
-Template- oder Beispiel-Text berührt; diese Datei und ein Verweis in der
-[Roadmap](roadmap.md) sind das gesamte Ergebnis. Die Entscheidungen E1–E6 unten
-sind entschieden (2026-11-22; E1 und E2 entfallen mit E6). Belegt ist der Befund (§1) gegen den Korpus-Stand von `2f30660`.
+**Stand:** Produkt-Teil umgesetzt mit Welle 168 (siehe
+[`CHANGELOG.md`](../CHANGELOG.md)); das Harness-Bedrohungsmodell (E3) steht als
+eigener Faden in der [Roadmap](roadmap.md). Die Entscheidungen E1–E6 unten sind
+entschieden (2026-11-22; E1 und E2 entfallen mit E6). Belegt ist der Befund (§1)
+gegen den Korpus-Stand von `2f30660`; der Text unten beschreibt den Stand vor der
+Umsetzung.
 
 Dieses Dokument beantwortet drei Fragen: **Fehlt das Thema?** (Befund) —
 **Wo gehört es im Prozess hin?** (Einordnung) — **Was wäre zu tun, und was ist

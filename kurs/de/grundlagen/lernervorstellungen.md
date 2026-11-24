@@ -74,6 +74,9 @@ Iteration.
 - "Performance gehört in den ADR." — Modul 3
 - "Prompts ersetzen Specs." — Modul 3 (Fehlvorstellungs-Block; seit
   Welle 13 explizit benannt mit Lebenszyklus-Argument Spec vs. Prompt).
+- "Die Bedrohung gehört ins Lastenheft." — Modul 3 (Fehlvorstellungs-Block;
+  seit Welle 168: ins Lastenheft gehört die Eigenschaft, die Bedrohung steht
+  bei ihrem Ausgang, Modul 4 §Bedrohung, Grenze, Ausgang).
 
 ### Über ADRs (Modul 4)
 

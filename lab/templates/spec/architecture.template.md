@@ -136,3 +136,24 @@ sequenceDiagram
 | Fehlerquelle | Behandlung-Schicht | Logging |
 |---|---|---|
 | <…> | <…> | <…> |
+
+## 6. Vertrauensgrenzen und Datenflüsse
+
+Regeln dieser Sektion: Eine Vertrauensgrenze liegt dort, wo Daten oder Steuerung
+von außen nach innen kreuzen. Sie sitzt an einer Schnittstelle und trägt deren
+`ARC-*` aus §1 oder §3 — **keine neuen Kennungen**; ein Datenfluss ohne eigene
+Schnittstelle steht bei den `ARC-*` seiner Endpunkte. **Keine Bedrohungen, kein
+Minderungsstand**: Ihr Ausgang steht als `LH-QA` mit Messmethode, als ADR oder
+als Slice in `open/` (Baseline-Regelwerk `modul-04-adrs.md` §Bedrohung, Grenze,
+Ausgang; `modul-03-spec.md` §Ziel-Form: Architektur-Sicht).
+
+<!--
+Denkhilfe, keine Pflicht: Für jede Zeile die STRIDE-Fragen stellen —
+Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service,
+Elevation of Privilege. Was dabei herauskommt, gehört NICHT in diese Tabelle,
+sondern zu seinem Ausgang.
+-->
+
+| Grenze | Außen | Innen | Was kreuzt |
+|---|---|---|---|
+| `ARC-<NNN>` | <z. B. beliebiger Client im Netz> | <z. B. Service-Layer> | <z. B. Suchbegriff, `limit`-Parameter> |

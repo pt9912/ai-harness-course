@@ -11,6 +11,104 @@ Baseline-`Stand:`-Eintrag gegen dieses Register.
 > „Didaktik-Review Welle N") — Commit-Labels können daher von der
 > kanonischen Nummer abweichen; maßgeblich ist dieses Register.
 
+## Welle 168 — 2026-11-23 · Bedrohung, Grenze, Ausgang
+
+Anlass: [`docs/bedrohungsmodellierung-konzept.md`](docs/bedrohungsmodellierung-konzept.md).
+Security-*Erkennung* trug der Kurs (Review, Gate, Telemetrie); die Methode, aus
+der eine Sicherheitsanforderung und eine Entscheidung *vor* dem Code entstehen,
+fehlte, und `LH-QA-02` *Sicherheit* blieb in der Vorlage ein leerer Platzhalter.
+Umgesetzt nach Konzept §5 mit den Entscheidungen E4–E6 (E1/E2 entfallen mit E6):
+Der Kurs lehrt keine Threat-Modeling-Methode, sondern die **Aufnahme** — wohin
+Grenze, Bedrohung und Ausgang im Harness gehören. Kein Register, keine neue
+Matrix-Klasse, keine neuen Kennungen.
+
+- **Modul 4** — neuer Abschnitt *Bedrohung, Grenze, Ausgang*: Die Grenze steht
+  in der Sicht mit der `ARC-*` ihrer Schnittstelle; jede Bedrohung hat einen
+  von drei Ausgängen mit vorhandenem Zuhause — **gemindert** (`LH-QA` mit
+  Messmethode, Slice → `LH-QA` und `ARC-*`; das *Wie* in einer ADR, wenn es
+  Architektur-Wirkung hat), **akzeptiert** (ADR mit `Bezug:` auf die `LH-*`, die
+  den Rahmen setzt, und `Schärft:` auf die `ARC-*`; Re-Evaluierungs-Trigger nennt
+  die Annahmen), **offen** (Slice in `open/`). Die
+  Bedrohung im Wortlaut steht beim Ausgang; eine neue `LH-QA` entsteht beim
+  Schreiben des Lastenhefts, danach per Change Request. Kein Register — eine
+  Liste mit Status wäre eine zweite Quelle; die Übersicht je Grenze ist ein
+  Auslesestand wie die RTM. Für einen Wächter liefert das Modell nur Kandidaten
+  (Modul 13); das Modell des Harness selbst behandelt der Abschnitt nicht (E3).
+  STRIDE ist einmal ausgeschrieben. Neues Lernziel 5 (*zuordnen* · *verfassen*),
+  Thema, Worked Example *eine Vertrauensgrenze, drei Bedrohungen, eine ADR* (an
+  `ARC-006` des Beispiels: gemindert über eine angenommene `LH-QA-05`, offen als
+  Slice, akzeptiert als ADR-0020 mit `Bezug: LH-FA-02` und Trigger; der
+  Change-Request-Weg für eine spätere `LH-QA` ist genannt), Übung (LZ 5),
+  Selbstcheck mit Rubrik-Zeile (LZ 5, Bedrohungsliste mit Status).
+- **Modul 3** — §Die Architektur-Sicht: *Vertrauensgrenzen gehören in die
+  Sicht* (an der Schnittstelle, deren `ARC-*`; Datenfluss ohne eigene
+  Schnittstelle bei den Endpunkten; keine Bedrohung, kein Minderungsstand).
+  Neue Fehlvorstellung *„Die Bedrohung gehört ins Lastenheft.“* — dort steht
+  die Eigenschaft als `LH-QA` mit Messmethode. Thema ergänzt.
+- **Modul 10** (E4) — §Drei Review-Arten: Prüffrage für Plan- und Design-Review
+  *Berührt der Schnitt eine Vertrauensgrenze?*; fehlt einer Bedrohung dort der
+  Ausgang, ist das MEDIUM, ein Sicherheits-Verstoß im Code bleibt HIGH; ein
+  Urteil, kein Sensor. Ein akzeptierter Ausgang ist kein Verstoß; seine ADR
+  findet der Reviewer über `Schärft:`. Im Worked Example der Reviewer-Skill:
+  Kontext-Eingang um `spec/architecture.md` und die ADRs ergänzt, deren
+  `Schärft:` eine berührte `ARC-*` nennt; die MEDIUM-Zeile in der Klassifikation.
+- **Modul 13** — Entgleisung 1 der Guard-Härtung: Ein Bedrohungsmodell des
+  Produkts speist Anforderung, Sicht und ADR; für einen Wächter liefert es
+  höchstens Kandidaten.
+- **Spiegel** `lab/regelwerk/modul-03-spec.md` (Ziel-Form: Architektur-Sicht,
+  Fehlannahmen), `modul-04-adrs.md` (neuer Abschnitt, ohne die einleitende
+  Abgrenzung zu Modul 10/13/16 und ohne Worked Example), `modul-10-review-harness.md`
+  (Prüffrage, Kontext-Eingang), `modul-13-quality-gates.md` (Guard-Härtung);
+  `lab/regelwerk/README.md`: `Stand:` auf Welle 168.
+- **Vorlagen**: `architecture.template.md` — neuer Abschnitt *6. Vertrauensgrenzen
+  und Datenflüsse* (Grenze `ARC-*` · Außen · Innen · Was kreuzt; STRIDE als
+  Denkhilfe im Kommentar, Bedrohungen ausdrücklich nicht hier).
+  `lastenheft.template.md` — `LH-QA-02` nennt die Form (eine Eigenschaft, die
+  eine Bedrohung abwehrt, nicht die Bedrohung; Messmethode Gate oder Test),
+  statt neu angelegt zu werden.
+  ADR-Vorlage — der Kontext-Kommentar sagt, was eine ADR trägt, die eine
+  Bedrohung akzeptiert. `reviewer.template.md` — Kontext-Eingang und
+  MEDIUM-Zeile wie Modul 10. `lab/templates/README.md` beschreibt die
+  Architektur-Vorlage mit.
+- **Lösung 4**: Selbstcheck-Antwort (Bedrohungsliste mit Status) und
+  Übungshinweis (Vertrauensgrenze aufnehmen, an `ARC-006` des Beispiels: offen
+  wegen Change Request, akzeptiert als ADR-0021 mit Kopf).
+- **Satelliten**: `lernervorstellungen.md` (neue Fehlvorstellung unter Modul 3),
+  `konzeptkarte.md` (*Bedrohung ohne Ort* unter *Wann zurückspringen?*).
+- **Konzept und Roadmap**: Das Konzept trägt den Stand „Produkt-Teil umgesetzt“;
+  der Roadmap-Faden wird zum Faden *Bedrohungsmodell des Harness selbst* (E3,
+  Trigger nicht gesetzt).
+- **Nicht geändert**: die Referenz-Matrix (`referenz-richtung.md`) — jeder
+  nötige Verweis hat schon seine Zelle (Slice → Sicht-ID und `LH-*`, ADR →
+  Sicht über `Schärft:`, ADR → `LH-*`); `harness-dateien.md` und Modul 6 (kein
+  Register); `begriffe.md` (die Übersicht wird nur mit der RTM verglichen, kein
+  neuer Begriff); Modul 16 (Erkennung im Betrieb, gehört zu E3); das Beispiel —
+  der Kurs trägt keine Pflicht, die es erfüllen müsste. Worked Example und
+  Lösung 4 nutzen seine `ARC-006`, `ARC-004`, `LH-FA-02` und `LH-FA-03` in ihrer
+  Bedeutung; `LH-QA-05`, ADR-0020 und ADR-0021 sind dort frei.
+
+**Kein Team-Sim-Szenario.** Die Welle behauptet kein beobachtbares Verhalten:
+Ob etwas eine Vertrauensgrenze ist und ob eine Bedrohung einen Ausgang hat, sind
+Urteile im Review (`AGENTS.md` §3), kein Sensor feuert oder schweigt neu.
+
+**Release-Klasse:** MINOR — neue Regeln (Aufnahme, Prüffrage, Kontext-Eingang),
+nichts entfernt.
+
+**Aus dem Review.** Eine Runde, 5 mittlere und 12 niedrige Befunde, alle
+behoben. Das Worked Example nutzte `LH-QA-02` und ADR-0014, die im Beispiel
+etwas anderes sind (*Reproduzierbarkeit*, a-check-Gate); `Bezug:` zeigte auf
+eine Sicherheits-`LH-QA`, die die akzeptierte Bedrohung nicht trägt — eine
+solche `LH-QA` bräche die Akzeptanz; der Change-Request-Weg für eine neue
+`LH-QA` fehlte im Beispiel und in Lösung 4, die zudem einen Statuscode ins
+Lastenheft legte; der Spiegel hatte den Einleitungssatz umformuliert und den
+Zeitpunkt („vor dem Code") verloren; der Reviewer hätte die akzeptierte
+fehlende Authentifizierung als HIGH gemeldet, weil er die ADR von der
+`ARC-*` aus nicht fand. Dazu STRIDE-Zuordnung (fehlende Authentifizierung ist
+*Spoofing*), Bedrohungen passend zur Vektorsuche, Selbstcheck-Stufe,
+Blockzitat-Absätze, Anführungszeichen-Stil, Vorlage `LH-QA-02`, Anker in der
+Reviewer-Vorlage, Roadmap-Zeile, die Übersicht je Grenze nur über
+bedrohungsbezogene ADRs und Slices, Modul 13 „speist" statt „hat seinen Ort".
+
 ## Welle 167 — 2026-11-23 · Ein WIP-Slot, ein Zweig, ein Arbeitsbaum
 
 Anlass: die Frage, ob die WIP-Regel Worktrees erwähnt, und ob sich die Arbeit

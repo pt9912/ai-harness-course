@@ -19,7 +19,7 @@ Klassen**, nicht 28 gleichartige Vorlagen:
 |---|---|---|
 | [`spec/lastenheft.template.md`](spec/lastenheft.template.md) | Vertraglich abnahmebindende Anforderungen (`LH-*`-IDs) | [Modul 3](../regelwerk/modul-03-spec.md) |
 | [`spec/specification.template.md`](spec/specification.template.md) | Technisch verbindlich, fortschreibbar — Algorithmen, Defaults, Codes | [Modul 3](../regelwerk/modul-03-spec.md) (Spec-Stratifizierung) |
-| [`spec/architecture.template.md`](spec/architecture.template.md) | Komponenten- und Sequenzsicht, sprach- und meilensteinfrei | [Modul 3](../regelwerk/modul-03-spec.md) |
+| [`spec/architecture.template.md`](spec/architecture.template.md) | Komponenten- und Sequenzsicht, sprach- und meilensteinfrei; Vertrauensgrenzen ohne Bedrohungen | [Modul 3](../regelwerk/modul-03-spec.md) |
 | [`docs/plan/adr/NNNN-title.template.md`](docs/plan/adr/NNNN-title.template.md) | Architecture Decision Record im MADR/Nygard-Stil | [Modul 4](../regelwerk/modul-04-adrs.md) |
 | [`docs/plan/adr/README.template.md`](docs/plan/adr/README.template.md) | ADR-Index (derivativ; Liste aller ADRs mit Status) | [Modul 4](../regelwerk/modul-04-adrs.md) |
 | [`docs/plan/planning/slice.template.md`](docs/plan/planning/slice.template.md) | Slice-Plan mit DoD, Trigger, Closure | [Modul 5](../regelwerk/modul-05-planning-harness.md) |

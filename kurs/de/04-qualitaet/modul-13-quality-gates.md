@@ -523,7 +523,10 @@ und die genau deshalb beim ersten Fehlalarm gestrichen wird.
    Lücke wird ein Bedrohungsmodell abgearbeitet. Ergebnis: ein Wächter,
    der legitime Arbeit blockiert, bevor je eine Umgehung vorkam —
    Aufwand ohne Evidenz, und die Fehlalarm-Quote kostet den Wächter am
-   Ende die Existenz.
+   Ende die Existenz. Ein Bedrohungsmodell des Produkts speist Anforderung,
+   Sicht und ADR
+   ([Modul 4 §Bedrohung, Grenze, Ausgang](../01-spec-und-architektur/modul-04-adrs.md#bedrohung-grenze-ausgang));
+   für einen Wächter liefert es höchstens Kandidaten.
 2. **Die Härtung ohne `MR` landen.** Der Hook wird geschärft,
    `harness/conventions.md` bleibt auf dem Stand von Welle 1. Ab da
    beschreibt die Doku einen anderen Wächter als den, der läuft — Drift

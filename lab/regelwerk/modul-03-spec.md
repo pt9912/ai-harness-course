@@ -34,6 +34,7 @@ ausreichen. Sie reichen nicht. Jeder Lauf beginnt bei Null.
 - **"Eine Randbedingung ist ein Out-of-Scope-Punkt."** — Nein. Out-of-Scope schließt eine *Funktion* aus („keine Echtzeit-Streaming-API"); eine Randbedingung schränkt die *Umsetzung* ein, ohne eine Funktion zu beschreiben — technisch („muss auf Postgres 15 laufen") oder rechtlich („personenbezogene Daten verlassen die EU nicht"). Sie steht im Lastenheft, weil sie vom Auftraggeber kommt, als `<PREFIX>-RB-<NN>` (eigene Reihe neben `-FA-` und `-QA-`); wie sie erfüllt wird, steht in Spezifikation und ADRs, und jede Randbedingung nennt, wie ihre Einhaltung nachgewiesen wird.
 - **"Usability und Internationalisierung sind Sache der UI, nicht der Spec."** — Nein. Was nicht in der Spec steht, existiert für den Agenten nicht (Kernidee). Bedienbarkeit, Barrierefreiheit und Internationalisierung stehen als nichtfunktionale Anforderung der Kategorie *Usability* im Lastenheft, mit Messmethode wie jede andere.
 - **"Die Systemgrenze ergibt sich aus dem Code."** — Nein. Was zum System gehört, steht in „Zweck und Geltungsbereich", was nicht dazugehört, unter Out-of-Scope; ein von außen vorgegebenes System, an das es anbinden muss, ist eine technische Randbedingung; Version und Vertrag der Anbindung stehen in der Spezifikation (Externe Verträge). Sonst legt der Agent die Grenze beim Bauen fest.
+- **"Die Bedrohung gehört ins Lastenheft."** — Nein. Das Lastenheft sagt zu, was gilt; eine Bedrohung ist eine Hypothese darüber, was schiefgehen kann. Ins Lastenheft gehört die *Eigenschaft*, die sie abwehrt — als `LH-QA` der Kategorie Sicherheit, mit Messmethode wie jede andere („Eingaben werden als Literal behandelt", geprüft durch einen Test mit Metazeichen). Wo die Bedrohung selbst steht und welche Ausgänge sie hat, zeigt [Modul 4 §Bedrohung, Grenze, Ausgang](modul-04-adrs.md#bedrohung-grenze-ausgang-modul-4).
 - **"Prompts ersetzen Specs."** — Falsch. Lopopolos Maxime *"Was der Agent nicht im Kontext erreicht, existiert für ihn nicht"* ist ein Plädoyer *für* Kontext-Verfügbarkeit — und sagt damit, dass Spec und Prompt *unterschiedliche* Lebenszyklen haben: Spec wird *gepflegt* (Versions-Geschichte, Bezüge, Audit), Prompt wird *für einen Lauf zusammengestellt*. Was im Prompt steht, aber nicht in der Spec, gilt nur für *diesen* Lauf — der nächste Agent sieht es nicht. Das Muster (Spec sagte *speichert*, Agent baute PostgreSQL) wäre mit einem Mega-Prompt nicht besser geworden — der Prompt würde im nächsten Lauf vergessen.
 
 ### Ziel-Form: Akzeptanzkriterium
@@ -153,6 +154,16 @@ Operative Regeln, die die Vorlage nicht selbst erzwingt:
   Anforderung formuliert, hat nicht die Kennung falsch benutzt, sondern eine
   Anforderung am falschen Ort abgelegt
   ([`grundlagen-source-precedence.md` §ID-Schema](grundlagen-source-precedence.md#id-schema-als-klammer)).
+* Vertrauensgrenzen gehören in die Sicht: Wo Daten oder Steuerung von außen
+  nach innen kreuzen — von einem Nutzer, einem fremden System, einem Agenten,
+  aus einer Datei, die jemand anderes schreibt —, liegt eine Vertrauensgrenze.
+  Sie ist eine Eigenschaft der Komponenten- und Datenfluss-Sicht, keine
+  Anforderung. Sie sitzt an einer Schnittstelle und trägt deren `ARC-*`; einen
+  Datenfluss ohne eigene Schnittstelle beschreibt die Sicht bei den `ARC-*`
+  seiner Endpunkte. Neue Kennungen braucht das nicht. Bedrohungen und ihr
+  Minderungsstand stehen nicht in der Sicht — sie hat keine Historie, und
+  „gemindert" ist ein Zustand, der sich ändert —, sondern bei ihrem Ausgang
+  ([Modul 4 §Bedrohung, Grenze, Ausgang](modul-04-adrs.md#bedrohung-grenze-ausgang-modul-4)).
 
 ### Spec-Stratifizierung — Drei Schichten (Modul 3)
 

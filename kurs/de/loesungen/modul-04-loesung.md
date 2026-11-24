@@ -143,6 +143,29 @@ Anti-Antwort: "Alles klar." — verdächtig. Wer keinen unsicheren
 Schritt findet, hat die Schablone gelesen statt eine echte
 Entscheidung hindurchgeschickt.
 
+### (Bewerten) Bedrohungsliste mit Status bewerten (LZ 5)
+
+`docs/security/threats.md` trägt je Zeile Grenze, Beschreibung und Status. Jede
+Spalte hat schon ein Zuhause:
+
+| Spalte | Zuhause |
+|---|---|
+| Grenze | Sicht, `ARC-*` der Schnittstelle, Abschnitt Vertrauensgrenzen |
+| Beschreibung | beim Ausgang: Kontext der ADR oder Ziel des Slices |
+| Status `gemindert` | `LH-QA` mit Messmethode (Gate oder Test); der Slice nennt `LH-QA` und `ARC-*` |
+| Status `akzeptiert` | ADR mit `Bezug:` auf die `LH-QA`, `Schärft:` auf die `ARC-*`, Re-Evaluierungs-Trigger |
+| Status `offen` | Slice in `open/` |
+
+Urteil: Die Datei trägt nichts Eigenes. Ihre Status-Spalte ist eine zweite
+Quelle für Ausgänge, die schon anderswo stehen, und driftet gegen sie — ein
+gearbeiteter Slice ändert den Stand, die Tabelle nicht (dieselbe Figur wie ein
+Status-Feld neben dem Lifecycle-Verzeichnis, Modul 5). Die Übersicht je Grenze
+bleibt erreichbar, als Auslesestand aus den Aufwärts-Verweisen.
+
+Anti-Antwort: „Dann pflegen wir die Tabelle eben sorgfältig." — Sorgfalt ist
+der Träger, den ein Harness ersetzen soll. Und eine Zeile mit `offen` ist der
+eigentliche Befund: Sie gehört als Slice nach `open/`, nicht in eine Tabelle.
+
 ### (Erschaffen) Folge-ADR zu superseded ADR-0007 entwerfen
 
 Ausgearbeiteter Beispiel-Entwurf (ADR-0007 *"In-Memory-Cache vor
@@ -283,6 +306,47 @@ Anschlussfrage für die Reflexion: Welcher Sensor *hätte* die
 Verletzung deterministisch gemeldet (ArchUnit/import-linter im
 Pre-commit statt Reviewer-Urteil)? Je früher und maschineller, desto
 billiger.
+
+### Eine Vertrauensgrenze aufnehmen (LZ 5)
+
+Ein Lösungsweg an `ARC-006` (UI / HTTP-API) im Kurs-Beispiel. Dessen Lastenheft
+ist abgenommen und trägt keine Sicherheits-`LH-QA`:
+
+| Bedrohung | Ausgang | Zuhause |
+|---|---|---|
+| Steuerzeichen im Suchbegriff landen ungefiltert im Audit-Log und fälschen dort Zeilen (*Tampering*) | offen | eine Eigenschaft wie „Suchbegriffe erscheinen im Audit-Log nur maskiert" wäre eine neue `LH-QA` — nach der Abnahme nur per Change Request mit Version-Bump; bis dahin Slice in `open/`, nennt `ARC-006` und `ARC-004` (Audit-Layer) |
+| Die API hält keine Client-Identität fest; wer gesucht hat, ist nicht nachweisbar (*Repudiation*) | akzeptiert | ADR unten |
+
+```markdown
+# ADR-0021 — Suchanfragen ohne Client-Identität
+
+* Status: Accepted
+* Bezug: LH-FA-03
+* Schärft: ARC-006
+```
+
+Kontext: Die Bedrohung im Wortlaut; das Audit-Log (`LH-FA-03`) hält fest, *was*
+gesucht wurde, nicht *wer* — nachweisen müsste das erst eine Authentifizierung,
+und die gibt es an `ARC-006` nicht. Tragbar, solange niemand eine Suche einer
+Person zuordnen muss. Re-Evaluierungs-Trigger: Eine Prüf- oder Audit-Pflicht
+verlangt, Suchen einer Person zuzuordnen, oder der Index nimmt
+personenbezogene Daten auf.
+
+Prüfpunkte:
+
+- Die Sicht nennt die Grenze und was kreuzt — keine Bedrohung, keinen Status.
+- Eine `LH-QA` formuliert eine Eigenschaft mit Messmethode, nicht „schütze vor
+  DoS"; ein Statuscode oder ein Grenzwert gehört als Festlegung in die
+  Spezifikation.
+- Eine neue `LH-QA` gegen ein abgenommenes Lastenheft geht nur per Change
+  Request — bis dahin ist der Ausgang *offen*, nicht *gemindert*.
+- Die ADR nennt im Kontext die Bedrohung im Wortlaut, `Bezug:` die Anforderung,
+  die den Rahmen setzt, und ihr Trigger die Annahmen, unter denen das Risiko
+  tragbar bleibt. Ein Trigger wie „bei Bedarf" ist keiner.
+
+Die Schlussfrage der Übung fängt den häufigsten Fehler: Wer am Ende eine
+Status-Tabelle angelegt hat, hat dieselben drei Ausgänge ein zweites Mal
+abgelegt.
 
 ## Häufige Fehler
 

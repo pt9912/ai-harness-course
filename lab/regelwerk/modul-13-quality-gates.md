@@ -285,7 +285,10 @@ demselben Steering-Loop. Regeln für seine Härtung:
   gegen eine **dreimal beobachtete** Umgehung (Vorfall → Symptom →
   Lücke), belegt über Lerneinträge. Eine Wächter-Regel ohne
   Sensor-Evidenz ist Aufwand ohne Begründung und fällt beim ersten
-  Fehlalarm.
+  Fehlalarm. Ein Bedrohungsmodell des Produkts speist Anforderung,
+  Sicht und ADR
+  ([Modul 4 §Bedrohung, Grenze, Ausgang](modul-04-adrs.md#bedrohung-grenze-ausgang-modul-4));
+  für einen Wächter liefert es höchstens Kandidaten.
 - **Gehärtet wird die Zerlegung, nicht die Denylist.** Umgeht ein Aufruf
   den Guard über eine Sub-Shell (`bash -c "…"`, kombinierte Flags `-lc`,
   `-ec`), wird der Payload **rekursiv** derselben Prüfung unterworfen —

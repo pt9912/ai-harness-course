@@ -64,6 +64,16 @@ kategorisierte Findings), sondern im *Wogegen* und im *Wann*:
 * **Code-Review** prüft den fertigen Diff gegen Plan und Konventionen
   (AGENTS.md, Hard Rules) — die Findings-Kategorien dieses Moduls.
 
+**Eine Prüffrage für Plan- und Design-Review: Berührt der Schnitt eine
+Vertrauensgrenze?** Berührt er eine Schnittstelle, an der Daten oder Steuerung
+von außen kommen (ihre `ARC-*` in der Sicht), hat jede Bedrohung dort einen
+Ausgang — eine `LH-QA` mit Messmethode, eine ADR oder einen Slice in `open/`
+([Modul 4 §Bedrohung, Grenze, Ausgang](../01-spec-und-architektur/modul-04-adrs.md#bedrohung-grenze-ausgang)). Fehlt er, ist das ein MEDIUM: eine offene Frage, kein Verstoß. Ein
+Sicherheits-Verstoß im Code bleibt HIGH — ein akzeptierter Ausgang ist keiner:
+Was eine ADR für eine Grenze akzeptiert, meldet der Reviewer nicht als
+Anti-Pattern. Diese ADRs findet er über ihr `Schärft:` auf die `ARC-*`. Die
+Frage ist ein Urteil im Review, kein Sensor.
+
 Merkregel: je früher die Review-Art, desto billiger das Finding —
 ein Plan-Review-HIGH kostet eine Plan-Korrektur, dasselbe Finding im
 Code-Review kostet den ganzen Implementierungs-Lauf.
@@ -143,7 +153,8 @@ Skill-Dateien leben in `.harness/` und sind das Repo-spezifische
 
 - Diff des PR
 - `spec/lastenheft.md` (für referenzierte LH-IDs)
-- ADRs, deren ID im PR oder Commit-Message vorkommt
+- `spec/architecture.md` (Vertrauensgrenzen, `ARC-*`)
+- ADRs, deren ID im PR oder Commit-Message vorkommt, und ADRs, deren `Schärft:` eine berührte `ARC-*` nennt
 - AGENTS.md §"Hard Rules"
 - vorherige Findings am gleichen Modul (letzte 5 PRs)
 ```
@@ -168,6 +179,7 @@ sondern konkret:
 - unklare Fehlerbehandlung am Rand des Spec-Bereichs
 - fehlende Negativtests bei neuem öffentlichen Vertrag
 - Wiederholung eines Musters, das schon zweimal LOW war
+- Schnitt berührt eine Vertrauensgrenze (`ARC-*`), und eine Bedrohung dort hat keinen Ausgang
 
 **LOW** — *mit Konventions-Anker* (ADR, Hard Rule, Linter-Regel, Eintrag im
 Reviewer-Skill): stilistisch unschön ohne semantische Auswirkung, einmalige

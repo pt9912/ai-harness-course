@@ -109,8 +109,9 @@ beschreiben: technisch oder rechtlich. Sie ist kein Out-of-Scope-Punkt
 
 ### LH-QA-02 — <Sicherheit>
 
-- **Anforderung:** <…>
-- **Messmethode:** <…>
+- **Anforderung:** <eine prüfbare Eigenschaft, die eine Bedrohung abwehrt — nicht die
+  Bedrohung selbst, z.B. Kein Zugriff auf X ohne Y.>
+- **Messmethode:** <Gate oder Test, der die Eigenschaft prüft>
 
 ### LH-RB-01 — <Randbedingung>
 

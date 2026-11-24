@@ -22,7 +22,9 @@ Was der Reviewer *immer* mitbringt, bevor er den Diff liest:
 
 - Diff des PR
 - `spec/lastenheft.md` (für referenzierte `LH-*`-IDs)
-- ADRs, deren ID im PR oder in der Commit-Message vorkommt
+- `spec/architecture.md` (Vertrauensgrenzen, `ARC-*`)
+- ADRs, deren ID im PR oder in der Commit-Message vorkommt, und ADRs, deren
+  `Schärft:` eine berührte `ARC-*` nennt
 - `AGENTS.md` §"Hard Rules"
 - vorherige Findings am gleichen Modul (letzte ~5 PRs)
 
@@ -62,6 +64,10 @@ bewusst kurz (Ergänzungs-Kanal, nicht Hauptkanal).
 - unklare Fehlerbehandlung am Rand des Spec-Bereichs
 - fehlende Negativtests bei neuem öffentlichem Vertrag
 - Wiederholung eines Musters, das schon zweimal LOW war
+- Schnitt berührt eine Vertrauensgrenze (`ARC-*`), und eine Bedrohung dort hat
+  keinen Ausgang — `LH-QA` mit Messmethode, ADR oder Slice in `open/`
+  (Baseline-Regelwerk `modul-04-adrs.md` §Bedrohung, Grenze, Ausgang;
+  Einstufung `modul-10-review-harness.md` §Drei Review-Arten)
 
 **LOW** — *mit Konventions-Anker* (ADR, Hard Rule, Linter-Regel, Eintrag im
 Reviewer-Skill): stilistisch unschön ohne semantische Auswirkung, einmalige

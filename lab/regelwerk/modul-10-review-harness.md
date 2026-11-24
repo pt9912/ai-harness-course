@@ -16,6 +16,16 @@ kategorisierte Findings), sondern im *Wogegen* und im *Wann*:
 * **Code-Review** prüft den fertigen Diff gegen Plan und Konventionen
   (AGENTS.md, Hard Rules) — die Findings-Kategorien dieses Moduls.
 
+**Eine Prüffrage für Plan- und Design-Review: Berührt der Schnitt eine
+Vertrauensgrenze?** Berührt er eine Schnittstelle, an der Daten oder Steuerung
+von außen kommen (ihre `ARC-*` in der Sicht), hat jede Bedrohung dort einen
+Ausgang — eine `LH-QA` mit Messmethode, eine ADR oder einen Slice in `open/`
+([Modul 4 §Bedrohung, Grenze, Ausgang](modul-04-adrs.md#bedrohung-grenze-ausgang-modul-4)). Fehlt er, ist das ein MEDIUM: eine offene Frage, kein Verstoß. Ein
+Sicherheits-Verstoß im Code bleibt HIGH — ein akzeptierter Ausgang ist keiner:
+Was eine ADR für eine Grenze akzeptiert, meldet der Reviewer nicht als
+Anti-Pattern. Diese ADRs findet er über ihr `Schärft:` auf die `ARC-*`. Die
+Frage ist ein Urteil im Review, kein Sensor.
+
 Merkregel: je früher die Review-Art, desto billiger das Finding —
 ein Plan-Review-HIGH kostet eine Plan-Korrektur, dasselbe Finding im
 Code-Review kostet den ganzen Implementierungs-Lauf.
@@ -74,9 +84,10 @@ achtest du"; Vorlage
 (für die engere Closure-Note-Prüfung der Schwester-Skill
 `closure-note-reviewer.md`, Modul 11). Operative Pflichtteile:
 
-- **Kontext-Eingang (Pflicht):** Diff · `spec/lastenheft.md` · ADRs, deren
-  ID im PR/Commit vorkommt · `AGENTS.md` §Hard Rules · vorherige Findings
-  am gleichen Modul. Ohne den Block sieht der Reviewer Code, aber nicht
+- **Kontext-Eingang (Pflicht):** Diff · `spec/lastenheft.md` ·
+  `spec/architecture.md` (Vertrauensgrenzen, `ARC-*`) · ADRs, deren ID im
+  PR/Commit vorkommt, und ADRs, deren `Schärft:` eine berührte `ARC-*` nennt ·
+  `AGENTS.md` §Hard Rules · vorherige Findings am gleichen Modul. Ohne den Block sieht der Reviewer Code, aber nicht
   die Verträge, gegen die er prüft.
 - **Klassifikation repo-konkret**, nicht generisch: HIGH/MEDIUM/LOW je
   eine konkrete Liste, INFO kurz (Ergänzungs-Kanal, nicht Hauptkanal).

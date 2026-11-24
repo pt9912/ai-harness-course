@@ -49,6 +49,11 @@ entscheidet, hat eine Spec-Stelle: Seine ADR schärft sie (Baseline-Regelwerk
 Was ist die Ausgangslage? Welche Anforderung oder welcher Druck führt
 zu dieser Entscheidung? Welche Annahmen gelten? Wenn diese Annahmen
 kippen, kippt die Entscheidung.
+
+Akzeptiert die ADR eine Bedrohung: die Bedrohung im Wortlaut, die Grenze
+(ihre ARC-* steht in Schärft:), warum das Risiko tragbar ist. Der
+Re-Evaluierungs-Trigger nennt die Annahmen, unter denen es das bleibt
+(Baseline-Regelwerk modul-04-adrs.md §Bedrohung, Grenze, Ausgang).
 -->
 
 <…>
