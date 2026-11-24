@@ -85,7 +85,7 @@ Ausnahme von ihr.
 ### Bedrohung, Grenze, Ausgang (Modul 4)
 
 Eine Bedrohung wird *vor* dem Code benannt, und ihr Ergebnis braucht einen Ort
-im Harness. Dieses Regelwerk lehrt dafür keine Methode — STRIDE (Spoofing,
+im Harness. Der Kurs lehrt dafür keine Methode — STRIDE (Spoofing,
 Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of
 Privilege) und Verwandte sind Denkhilfen, um Bedrohungen zu finden —, sondern
 die **Aufnahme**: wohin Grenze, Bedrohung und Ausgang gehören.
@@ -98,25 +98,35 @@ Zuhause:**
 
 | Ausgang | Zuhause | Verweis (aufwärts) |
 |---|---|---|
-| **gemindert** | `LH-QA` mit Messmethode — ein Gate oder Test, der die Eigenschaft prüft; *wie* sie gehalten wird, entscheidet eine ADR, wenn der Weg Architektur-Wirkung hat | Slice → `LH-QA` und `ARC-*` der Grenze |
+| **gemindert** | eine `LH-*` mit Prüfung — eine `LH-QA` mit Messmethode oder ein Boundary- bzw. Negative-Kriterium einer `LH-FA`; *wie* die Eigenschaft gehalten wird, entscheidet eine ADR, wenn der Weg Architektur-Wirkung hat | Slice → `LH-*` und `ARC-*` der Grenze |
 | **akzeptiert** | ADR mit ihrem *Warum* und einem Re-Evaluierungs-Trigger, der nennt, wann die Annahme kippt | ADR → `LH-*`, die den Rahmen setzt (`Bezug:`), ADR → `ARC-*` (`Schärft:`) |
-| **offen** | Slice in `open/` | Slice → `ARC-*` und, wo es sie gibt, `LH-QA` |
+| **offen** | Slice in `open/` | Slice → `ARC-*` und, wo es sie gibt, `LH-*` |
 
 Die Bedrohung selbst steht in ihrem Wortlaut beim Ausgang: im Kontext der ADR
-oder im Ziel des Slices. Eine `LH-QA` formuliert die *Eigenschaft*, nicht die
+oder im Ziel des Slices. Eine `LH-*` formuliert die *Eigenschaft*, nicht die
 Bedrohung
 ([Modul 3 §Regeln gegen typische Fehlannahmen](modul-03-spec.md#regeln-gegen-typische-fehlannahmen-modul-3)).
-Eine neue `LH-QA` entsteht beim Schreiben des Lastenhefts, danach nur per
-Change Request
+Eine neue `LH-*` entsteht vor der Abnahme des Lastenhefts frei, danach nur per
+Change Request mit Version-Bump
 ([`grundlagen-source-precedence.md` §Spec-Stratifizierung](grundlagen-source-precedence.md#spec-stratifizierung)).
 
+**Eine Bedrohung ist kein Risiko des Slices.** Ein Risiko im Slice-Plan gehört
+zur Lieferung dieses Slices und schließt mit seiner Closure — eingetreten,
+entfallen oder weiter offen
+([Modul 5 §Offene Risiken](modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst)).
+Eine Bedrohung gehört zur Grenze und überdauert den Slice. Notiert ein
+Slice-Plan eine Bedrohung als Risiko, nennt ihr Closure-Ausgang die `LH-*`, die
+ADR oder den Slice in `open/`, der sie trägt; das Beobachtungs-Register ist
+nicht ihr Ort.
+
 **Kein eigenes Register.** Eine Bedrohungsliste mit Status-Spalte wäre eine
-zweite Quelle für Ausgänge, die schon in `LH-QA`, ADR und Slice stehen — und sie
+zweite Quelle für Ausgänge, die schon in `LH-*`, ADR und Slice stehen — und sie
 driftete gegen sie wie ein Status-Feld gegen das Verzeichnis
 ([Modul 5 §Lifecycle als State Machine](modul-05-planning-harness.md#lifecycle-als-state-machine)).
 Die Übersicht je Grenze ist ein **Auslesestand** aus den Aufwärts-Verweisen:
 die ADRs, die die `ARC-*` schärfen, und die Slices, die sie nennen — soweit ihr
-Kontext oder Ziel eine Bedrohung nennt —, dazu die `LH-QA`. Wie die RTM
+Kontext oder Ziel eine Bedrohung nennt —, dazu die `LH-*`, die diese Slices
+nennen. Wie die RTM
 ([`grundlagen-begriffe.md`](grundlagen-begriffe.md#kernbegriffe)) ist sie kein Artefakt.
 
 **Für einen Wächter liefert das Modell nur Kandidaten.** Gehärtet wird ein

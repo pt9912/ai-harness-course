@@ -143,7 +143,7 @@ Anti-Antwort: "Alles klar." — verdächtig. Wer keinen unsicheren
 Schritt findet, hat die Schablone gelesen statt eine echte
 Entscheidung hindurchgeschickt.
 
-### (Bewerten) Bedrohungsliste mit Status bewerten (LZ 5)
+### (Anwenden — aktiviert LZ 5) Bedrohungsliste mit Status bewerten
 
 `docs/security/threats.md` trägt je Zeile Grenze, Beschreibung und Status. Jede
 Spalte hat schon ein Zuhause:
@@ -152,8 +152,8 @@ Spalte hat schon ein Zuhause:
 |---|---|
 | Grenze | Sicht, `ARC-*` der Schnittstelle, Abschnitt Vertrauensgrenzen |
 | Beschreibung | beim Ausgang: Kontext der ADR oder Ziel des Slices |
-| Status `gemindert` | `LH-QA` mit Messmethode (Gate oder Test); der Slice nennt `LH-QA` und `ARC-*` |
-| Status `akzeptiert` | ADR mit `Bezug:` auf die `LH-QA`, `Schärft:` auf die `ARC-*`, Re-Evaluierungs-Trigger |
+| Status `gemindert` | `LH-*` mit Prüfung (`LH-QA` mit Messmethode oder Akzeptanzkriterium einer `LH-FA`); der Slice nennt `LH-*` und `ARC-*` |
+| Status `akzeptiert` | ADR mit `Bezug:` auf die `LH-*`, die den Rahmen setzt, `Schärft:` auf die `ARC-*`, Re-Evaluierungs-Trigger |
 | Status `offen` | Slice in `open/` |
 
 Urteil: Die Datei trägt nichts Eigenes. Ihre Status-Spalte ist eine zweite
@@ -162,7 +162,7 @@ gearbeiteter Slice ändert den Stand, die Tabelle nicht (dieselbe Figur wie ein
 Status-Feld neben dem Lifecycle-Verzeichnis, Modul 5). Die Übersicht je Grenze
 bleibt erreichbar, als Auslesestand aus den Aufwärts-Verweisen.
 
-Anti-Antwort: „Dann pflegen wir die Tabelle eben sorgfältig." — Sorgfalt ist
+Anti-Antwort: "Dann pflegen wir die Tabelle eben sorgfältig." — Sorgfalt ist
 der Träger, den ein Harness ersetzen soll. Und eine Zeile mit `offen` ist der
 eigentliche Befund: Sie gehört als Slice nach `open/`, nicht in eine Tabelle.
 
@@ -309,40 +309,43 @@ billiger.
 
 ### Eine Vertrauensgrenze aufnehmen (LZ 5)
 
-Ein Lösungsweg an `ARC-006` (UI / HTTP-API) im Kurs-Beispiel. Dessen Lastenheft
-ist abgenommen und trägt keine Sicherheits-`LH-QA`:
+Ein Lösungsweg an `ARC-006` (UI / HTTP-API) im Kurs-Beispiel, mit anderen
+Bedrohungen als im Worked Example. Das Lastenheft des Beispiels ist abgenommen;
+seine `LH-QA-04` (Audit-Datenschutz) betrifft das Log, nicht diese beiden:
 
 | Bedrohung | Ausgang | Zuhause |
 |---|---|---|
-| Steuerzeichen im Suchbegriff landen ungefiltert im Audit-Log und fälschen dort Zeilen (*Tampering*) | offen | eine Eigenschaft wie „Suchbegriffe erscheinen im Audit-Log nur maskiert" wäre eine neue `LH-QA` — nach der Abnahme nur per Change Request mit Version-Bump; bis dahin Slice in `open/`, nennt `ARC-006` und `ARC-004` (Audit-Layer) |
-| Die API hält keine Client-Identität fest; wer gesucht hat, ist nicht nachweisbar (*Repudiation*) | akzeptiert | ADR unten |
+| Eine Fehlerantwort könnte interne Adressen des Embedding-Adapters preisgeben, etwa wenn er nicht erreichbar ist (*Information Disclosure*) | offen | keine `LH-*` legt fest, was eine Fehlerantwort enthält; eine solche Eigenschaft wäre nach der Abnahme nur per Change Request mit Version-Bump zu haben → Slice in `open/`, der die Antworten prüft und den Change Request vorbereitet; er nennt `ARC-006` und `ARC-003` (Embedding-Adapter) |
+| `POST /reindex` kann jeder Client im Netz auslösen, und jeder Lauf kostet Embedding-Aufrufe für alle Dateien (*Elevation of Privilege*, *Denial of Service*) | akzeptiert | ADR unten |
 
 ```markdown
-# ADR-0021 — Suchanfragen ohne Client-Identität
+# ADR-0021 — Reindex für jeden Client im Team-Netz
 
 * Status: Accepted
-* Bezug: LH-FA-03
+* Bezug: LH-FA-01
 * Schärft: ARC-006
 ```
 
-Kontext: Die Bedrohung im Wortlaut; das Audit-Log (`LH-FA-03`) hält fest, *was*
-gesucht wurde, nicht *wer* — nachweisen müsste das erst eine Authentifizierung,
-und die gibt es an `ARC-006` nicht. Tragbar, solange niemand eine Suche einer
-Person zuordnen muss. Re-Evaluierungs-Trigger: Eine Prüf- oder Audit-Pflicht
-verlangt, Suchen einer Person zuzuordnen, oder der Index nimmt
-personenbezogene Daten auf.
+Kontext: die Bedrohung im Wortlaut; das Verzeichnis ist konfiguriert und nicht
+per Anfrage wählbar (`LH-FA-01`), ein Reindex kostet Zeit und Embedding-Aufrufe,
+richtet aber keinen Schaden an, und der Dienst läuft im Team-Netz. Tragbar,
+solange beides gilt. Re-Evaluierungs-Trigger: Ein Reindex wird teuer genug, um
+eine Kostengrenze zu reißen, oder das Verzeichnis wird per Anfrage wählbar.
 
 Prüfpunkte:
 
 - Die Sicht nennt die Grenze und was kreuzt — keine Bedrohung, keinen Status.
-- Eine `LH-QA` formuliert eine Eigenschaft mit Messmethode, nicht „schütze vor
+- Eine `LH-*` formuliert eine Eigenschaft mit Prüfung, nicht "schütze vor
   DoS"; ein Statuscode oder ein Grenzwert gehört als Festlegung in die
   Spezifikation.
-- Eine neue `LH-QA` gegen ein abgenommenes Lastenheft geht nur per Change
+- Eine neue `LH-*` gegen ein abgenommenes Lastenheft geht nur per Change
   Request — bis dahin ist der Ausgang *offen*, nicht *gemindert*.
 - Die ADR nennt im Kontext die Bedrohung im Wortlaut, `Bezug:` die Anforderung,
   die den Rahmen setzt, und ihr Trigger die Annahmen, unter denen das Risiko
-  tragbar bleibt. Ein Trigger wie „bei Bedarf" ist keiner.
+  tragbar bleibt. Ein Trigger wie "bei Bedarf" ist keiner.
+- Ist eine Bedrohung schon durch ein Akzeptanzkriterium gemindert (im Beispiel
+  begrenzt `LH-FA-02` die Trefferzahl `k`), ist das ihr Ausgang — keine neue
+  Anforderung nötig.
 
 Die Schlussfrage der Übung fängt den häufigsten Fehler: Wer am Ende eine
 Status-Tabelle angelegt hat, hat dieselben drei Ausgänge ein zweites Mal

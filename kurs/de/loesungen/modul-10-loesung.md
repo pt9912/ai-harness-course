@@ -46,7 +46,9 @@ gehört geschärft.
   einem Sicherheits-Check-Pfad — die legt nahe, dass ein Check
   vergessen wurde; siehe LOW→HIGH-Wanderung oben.)
 - **B (fehlende Auth-Prüfung an neuem Endpoint) = HIGH.**
-  Sicherheits-Anti-Pattern im kritischen Pfad. "Noch nicht produktiv"
+  Sicherheits-Anti-Pattern im kritischen Pfad — es sei denn, eine aktive
+  ADR akzeptiert genau diese Bedrohung an dieser `ARC-*` (Modul 10
+  §Finding-Kategorien); hier gibt es keine. "Noch nicht produktiv"
   mildert *nicht*: mit dem Merge wird der Endpoint erreichbar, und
   kein späteres Gate erinnert daran, die Prüfung nachzurüsten.
 

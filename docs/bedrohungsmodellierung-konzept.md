@@ -5,7 +5,13 @@
 eigener Faden in der [Roadmap](roadmap.md). Die Entscheidungen E1–E6 unten sind
 entschieden (2026-11-22; E1 und E2 entfallen mit E6). Belegt ist der Befund (§1)
 gegen den Korpus-Stand von `2f30660`; der Text unten beschreibt den Stand vor der
-Umsetzung.
+Umsetzung. **Nachentscheidungen (Maintainer, 2026-11-24, aus dem Review):**
+*gemindert* gilt auch über ein Boundary- oder Negative-Kriterium einer `LH-FA`,
+nicht nur über eine `LH-QA` (Erweiterung von E6); eine Bedrohung wird vom
+Risiko des Slices abgegrenzt (Modul 5 §Offene Risiken); der Reviewer lädt die
+aktiven ADRs, deren `Schärft:` eine berührte `ARC-*` nennt, und die offenen
+Slices dazu, und eine akzeptierte, im Kontext genannte Bedrohung ist kein HIGH
+(über E4 hinaus).
 
 Dieses Dokument beantwortet drei Fragen: **Fehlt das Thema?** (Befund) —
 **Wo gehört es im Prozess hin?** (Einordnung) — **Was wäre zu tun, und was ist

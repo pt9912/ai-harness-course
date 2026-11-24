@@ -72,7 +72,7 @@ Modul. Spring zu dem fehlenden Artefakt:
 
 - Kein klares Expected Result -> zur Spec.
 - Architekturstreit -> zur ADR.
-- Bedrohung ohne Ort -> zu ihrem Ausgang: `LH-QA`, ADR oder Slice in
+- Bedrohung ohne Ort -> zu ihrem Ausgang: `LH-*`, ADR oder Slice in
   `open/` (Modul 4).
 - Diff zu gross -> zum Slice-Schnitt.
 - Tests gruen, aber DoD unklar -> zur Verifikation.

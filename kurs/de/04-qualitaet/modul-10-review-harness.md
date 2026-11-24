@@ -67,12 +67,10 @@ kategorisierte Findings), sondern im *Wogegen* und im *Wann*:
 **Eine Prüffrage für Plan- und Design-Review: Berührt der Schnitt eine
 Vertrauensgrenze?** Berührt er eine Schnittstelle, an der Daten oder Steuerung
 von außen kommen (ihre `ARC-*` in der Sicht), hat jede Bedrohung dort einen
-Ausgang — eine `LH-QA` mit Messmethode, eine ADR oder einen Slice in `open/`
-([Modul 4 §Bedrohung, Grenze, Ausgang](../01-spec-und-architektur/modul-04-adrs.md#bedrohung-grenze-ausgang)). Fehlt er, ist das ein MEDIUM: eine offene Frage, kein Verstoß. Ein
-Sicherheits-Verstoß im Code bleibt HIGH — ein akzeptierter Ausgang ist keiner:
-Was eine ADR für eine Grenze akzeptiert, meldet der Reviewer nicht als
-Anti-Pattern. Diese ADRs findet er über ihr `Schärft:` auf die `ARC-*`. Die
-Frage ist ein Urteil im Review, kein Sensor.
+Ausgang — eine `LH-*` mit Prüfung, eine ADR oder einen Slice in `open/`
+([Modul 4 §Bedrohung, Grenze, Ausgang](../01-spec-und-architektur/modul-04-adrs.md#bedrohung-grenze-ausgang)).
+Fehlt er, ist das ein MEDIUM: eine offene Frage, kein Verstoß. Die Frage ist
+ein Urteil im Review, kein Sensor.
 
 Merkregel: je früher die Review-Art, desto billiger das Finding —
 ein Plan-Review-HIGH kostet eine Plan-Korrektur, dasselbe Finding im
@@ -86,6 +84,12 @@ Code-Review kostet den ganzen Implementierungs-Lauf.
 | MEDIUM | sollte vor Merge geklärt werden |
 | LOW | nice-to-fix, blockiert nicht |
 | INFO | Hinweis, keine Aktion erwartet |
+
+**Ein akzeptierter Ausgang ist kein Verstoß.** Was eine aktive ADR an einer
+Grenze akzeptiert und in ihrem Kontext beim Namen nennt, meldet der Reviewer in
+keiner Review-Art als Sicherheits-Anti-Pattern; er findet sie über ihr
+`Schärft:` auf die `ARC-*`. Eine ADR, die die Bedrohung nicht nennt, ist kein
+Freibrief. Jeder andere Sicherheits-Verstoß bleibt HIGH.
 
 ## Harness-Einordnung
 
@@ -154,7 +158,8 @@ Skill-Dateien leben in `.harness/` und sind das Repo-spezifische
 - Diff des PR
 - `spec/lastenheft.md` (für referenzierte LH-IDs)
 - `spec/architecture.md` (Vertrauensgrenzen, `ARC-*`)
-- ADRs, deren ID im PR oder Commit-Message vorkommt, und ADRs, deren `Schärft:` eine berührte `ARC-*` nennt
+- ADRs, deren ID im PR oder Commit-Message vorkommt, und aktive ADRs, deren `Schärft:` eine berührte `ARC-*` nennt
+- Slices in `open/`, die eine berührte `ARC-*` nennen
 - AGENTS.md §"Hard Rules"
 - vorherige Findings am gleichen Modul (letzte 5 PRs)
 ```
@@ -171,7 +176,8 @@ sondern konkret:
 
 **HIGH** — eines der folgenden:
 - ADR-Verstoß (Layer, Tool, Hard Rule)
-- Sicherheits-Anti-Pattern (Injection, fehlende Auth-Prüfung)
+- Sicherheits-Anti-Pattern (Injection, fehlende Auth-Prüfung) — es sei denn, eine
+  aktive ADR akzeptiert genau diese Bedrohung an der berührten `ARC-*`
 - Korrektheitsfehler im *kritischen* Pfad (Index-Schreiben, Auth)
 - Suppression eines Gates (#noqa, //nolint, [SuppressMessage]) ohne ADR
 
@@ -179,7 +185,7 @@ sondern konkret:
 - unklare Fehlerbehandlung am Rand des Spec-Bereichs
 - fehlende Negativtests bei neuem öffentlichen Vertrag
 - Wiederholung eines Musters, das schon zweimal LOW war
-- Schnitt berührt eine Vertrauensgrenze (`ARC-*`), und eine Bedrohung dort hat keinen Ausgang
+- im Plan- oder Design-Review: Schnitt berührt eine Vertrauensgrenze (`ARC-*`), und eine Bedrohung dort hat keinen Ausgang
 
 **LOW** — *mit Konventions-Anker* (ADR, Hard Rule, Linter-Regel, Eintrag im
 Reviewer-Skill): stilistisch unschön ohne semantische Auswirkung, einmalige

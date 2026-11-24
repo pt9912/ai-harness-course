@@ -19,12 +19,10 @@ kategorisierte Findings), sondern im *Wogegen* und im *Wann*:
 **Eine Prüffrage für Plan- und Design-Review: Berührt der Schnitt eine
 Vertrauensgrenze?** Berührt er eine Schnittstelle, an der Daten oder Steuerung
 von außen kommen (ihre `ARC-*` in der Sicht), hat jede Bedrohung dort einen
-Ausgang — eine `LH-QA` mit Messmethode, eine ADR oder einen Slice in `open/`
-([Modul 4 §Bedrohung, Grenze, Ausgang](modul-04-adrs.md#bedrohung-grenze-ausgang-modul-4)). Fehlt er, ist das ein MEDIUM: eine offene Frage, kein Verstoß. Ein
-Sicherheits-Verstoß im Code bleibt HIGH — ein akzeptierter Ausgang ist keiner:
-Was eine ADR für eine Grenze akzeptiert, meldet der Reviewer nicht als
-Anti-Pattern. Diese ADRs findet er über ihr `Schärft:` auf die `ARC-*`. Die
-Frage ist ein Urteil im Review, kein Sensor.
+Ausgang — eine `LH-*` mit Prüfung, eine ADR oder einen Slice in `open/`
+([Modul 4 §Bedrohung, Grenze, Ausgang](modul-04-adrs.md#bedrohung-grenze-ausgang-modul-4)).
+Fehlt er, ist das ein MEDIUM: eine offene Frage, kein Verstoß. Die Frage ist
+ein Urteil im Review, kein Sensor.
 
 Merkregel: je früher die Review-Art, desto billiger das Finding —
 ein Plan-Review-HIGH kostet eine Plan-Korrektur, dasselbe Finding im
@@ -38,6 +36,12 @@ Code-Review kostet den ganzen Implementierungs-Lauf.
 | MEDIUM | sollte vor Merge geklärt werden |
 | LOW | nice-to-fix, blockiert nicht |
 | INFO | Hinweis, keine Aktion erwartet |
+
+**Ein akzeptierter Ausgang ist kein Verstoß.** Was eine aktive ADR an einer
+Grenze akzeptiert und in ihrem Kontext beim Namen nennt, meldet der Reviewer in
+keiner Review-Art als Sicherheits-Anti-Pattern; er findet sie über ihr
+`Schärft:` auf die `ARC-*`. Eine ADR, die die Bedrohung nicht nennt, ist kein
+Freibrief. Jeder andere Sicherheits-Verstoß bleibt HIGH.
 
 ### Harness-Einordnung (Modul 10)
 
@@ -86,9 +90,10 @@ achtest du"; Vorlage
 
 - **Kontext-Eingang (Pflicht):** Diff · `spec/lastenheft.md` ·
   `spec/architecture.md` (Vertrauensgrenzen, `ARC-*`) · ADRs, deren ID im
-  PR/Commit vorkommt, und ADRs, deren `Schärft:` eine berührte `ARC-*` nennt ·
-  `AGENTS.md` §Hard Rules · vorherige Findings am gleichen Modul. Ohne den Block sieht der Reviewer Code, aber nicht
-  die Verträge, gegen die er prüft.
+  PR/Commit vorkommt, und aktive ADRs, deren `Schärft:` eine berührte `ARC-*`
+  nennt · Slices in `open/`, die eine berührte `ARC-*` nennen · `AGENTS.md`
+  §Hard Rules · vorherige Findings am gleichen Modul. Ohne den Block sieht der
+  Reviewer Code, aber nicht die Verträge, gegen die er prüft.
 - **Klassifikation repo-konkret**, nicht generisch: HIGH/MEDIUM/LOW je
   eine konkrete Liste, INFO kurz (Ergänzungs-Kanal, nicht Hauptkanal).
   Die HIGH-Liste muss **mindestens zwei repo-spezifische Regeln** nennen,

@@ -23,8 +23,9 @@ Was der Reviewer *immer* mitbringt, bevor er den Diff liest:
 - Diff des PR
 - `spec/lastenheft.md` (für referenzierte `LH-*`-IDs)
 - `spec/architecture.md` (Vertrauensgrenzen, `ARC-*`)
-- ADRs, deren ID im PR oder in der Commit-Message vorkommt, und ADRs, deren
-  `Schärft:` eine berührte `ARC-*` nennt
+- ADRs, deren ID im PR oder in der Commit-Message vorkommt, und aktive ADRs,
+  deren `Schärft:` eine berührte `ARC-*` nennt
+- Slices in `open/`, die eine berührte `ARC-*` nennen
 - `AGENTS.md` §"Hard Rules"
 - vorherige Findings am gleichen Modul (letzte ~5 PRs)
 
@@ -38,7 +39,8 @@ bewusst kurz (Ergänzungs-Kanal, nicht Hauptkanal).
 
 **HIGH** — eines der folgenden:
 - ADR-Verstoß (Layer, Tool, Hard Rule)
-- Sicherheits-Anti-Pattern (Injection, fehlende Auth-Prüfung)
+- Sicherheits-Anti-Pattern (Injection, fehlende Auth-Prüfung) — es sei denn, eine
+  aktive ADR akzeptiert genau diese Bedrohung an der berührten `ARC-*`
 - Korrektheitsfehler im *kritischen* Pfad (<z. B. Index-Schreiben, Auth>)
 - Suppression eines Gates (`#noqa`, `//nolint`, `[SuppressMessage]`) ohne ADR
 - **Norm nur im Template-Kommentar** — eine Regel steht im `<!-- -->`-Block
@@ -64,10 +66,12 @@ bewusst kurz (Ergänzungs-Kanal, nicht Hauptkanal).
 - unklare Fehlerbehandlung am Rand des Spec-Bereichs
 - fehlende Negativtests bei neuem öffentlichem Vertrag
 - Wiederholung eines Musters, das schon zweimal LOW war
-- Schnitt berührt eine Vertrauensgrenze (`ARC-*`), und eine Bedrohung dort hat
-  keinen Ausgang — `LH-QA` mit Messmethode, ADR oder Slice in `open/`
+- im Plan- oder Design-Review: Schnitt berührt eine Vertrauensgrenze (`ARC-*`),
+  und eine Bedrohung dort hat keinen Ausgang — `LH-*` mit Prüfung, ADR oder
+  Slice in `open/`
   (Baseline-Regelwerk `modul-04-adrs.md` §Bedrohung, Grenze, Ausgang;
-  Einstufung `modul-10-review-harness.md` §Drei Review-Arten)
+  Einstufung `modul-10-review-harness.md` §Drei Review-Arten, Ausnahme vom HIGH
+  §Finding-Kategorien)
 
 **LOW** — *mit Konventions-Anker* (ADR, Hard Rule, Linter-Regel, Eintrag im
 Reviewer-Skill): stilistisch unschön ohne semantische Auswirkung, einmalige
