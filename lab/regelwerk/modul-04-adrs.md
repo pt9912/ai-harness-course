@@ -115,8 +115,9 @@ zur Lieferung dieses Slices und bekommt bei seiner Closure einen Ausgang —
 eingetreten, entfallen oder weiter offen
 ([Modul 5 §Offene Risiken](modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst)).
 Eine Bedrohung gehört zur Grenze und hat ihre eigenen drei Ausgänge. Fällt im
-Slice eine Bedrohung auf, bekommt sie ihren Ausgang sofort — mindestens einen
-Slice in `open/` —, keinen Eintrag unter *Risiken und offene Punkte*.
+Slice eine Bedrohung auf, bekommt sie ihren Ausgang sofort — wenigstens *offen*,
+also einen Slice in `open/` —, keinen Eintrag unter *Risiken und offene
+Punkte*. Steht sie schon dort, zieht sie mit ihrem Ausgang aus.
 
 **Kein eigenes Register.** Eine Bedrohungsliste mit Status-Spalte wäre eine
 zweite Quelle für Ausgänge, die schon in `LH-*`, ADR und Slice stehen — und sie

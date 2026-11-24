@@ -48,8 +48,8 @@ gehört geschärft.
 - **B (fehlende Auth-Prüfung an neuem Endpoint) = HIGH.**
   Sicherheits-Anti-Pattern im kritischen Pfad — es sei denn, eine aktive
   ADR akzeptiert genau diese Bedrohung an der berührten `ARC-*` und nennt
-  sie im Kontext (Modul 10 §Finding-Kategorien); der Fall nennt keine. "Noch nicht produktiv"
-  mildert *nicht*: mit dem Merge wird der Endpoint erreichbar, und
+  sie im Kontext (Modul 10 §Finding-Kategorien); der Fall nennt keine.
+  "Noch nicht produktiv" mildert *nicht*: mit dem Merge wird der Endpoint erreichbar, und
   kein späteres Gate erinnert daran, die Prüfung nachzurüsten.
 
 Die Grenzfall-Begründung: B kippt nicht durch gefühlte "Wichtigkeit"

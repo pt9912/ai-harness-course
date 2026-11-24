@@ -181,8 +181,9 @@ zur Lieferung dieses Slices und bekommt bei seiner Closure einen Ausgang —
 eingetreten, entfallen oder weiter offen
 ([Modul 5 §Offene Risiken](../02-planung/modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst)).
 Eine Bedrohung gehört zur Grenze und hat ihre eigenen drei Ausgänge. Fällt im
-Slice eine Bedrohung auf, bekommt sie ihren Ausgang sofort — mindestens einen
-Slice in `open/` —, keinen Eintrag unter *Risiken und offene Punkte*.
+Slice eine Bedrohung auf, bekommt sie ihren Ausgang sofort — wenigstens *offen*,
+also einen Slice in `open/` —, keinen Eintrag unter *Risiken und offene
+Punkte*. Steht sie schon dort, zieht sie mit ihrem Ausgang aus.
 
 **Kein eigenes Register.** Eine Bedrohungsliste mit Status-Spalte wäre eine
 zweite Quelle für Ausgänge, die schon in `LH-*`, ADR und Slice stehen — und sie
@@ -316,10 +317,10 @@ kreuzen Suchbegriff `q`, Trefferzahl `k` und der Auslöser eines Reindex
 Sicherheits-Eigenschaft: Eine `LH-QA`, die Authentifizierung verlangte, würde
 die Akzeptanz brechen.
 
-> **Kontext:** Bedrohung: Die API hat keine Authentifizierung; jeder Client im
+> **Kontext:** Die Bedrohung: Die API hat keine Authentifizierung; jeder Client im
 > Netz tritt als berechtigter Nutzer auf (*Spoofing*). Jeder kann über `ARC-006`
-> suchen, ohne sich auszuweisen. Der Dienst läuft im Netz eines Teams, der Index enthält nur
-> Dokumente, die dort ohnehin jeder lesen darf.
+> suchen, ohne sich auszuweisen. Der Dienst läuft im Netz eines Teams, der
+> Index enthält nur Dokumente, die dort ohnehin jeder lesen darf.
 >
 > **Optionen:** (1) Token pro Client — Verwaltung ohne Gegenwert, solange
 > nichts Vertrauliches im Index liegt. (2) mTLS — schützt auch den

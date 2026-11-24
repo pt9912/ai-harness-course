@@ -200,15 +200,16 @@ sondern ein Buffet.
 #### Offene Risiken werden bei Closure aufgelöst
 
 Ein Risiko aus dem Slice-Plan (*Risiken und offene Punkte*) ist
-Originalinformation und steht nirgendwo sonst. Eine Bedrohung an einer Vertrauensgrenze ist kein Risiko in diesem Sinn: Sie
-bekommt ihren eigenen Ausgang, sobald sie auffällt ([Modul 4 §Bedrohung, Grenze, Ausgang](modul-04-adrs.md#bedrohung-grenze-ausgang-modul-4)).
-Jedes bekommt beim Übergang
+Originalinformation und steht nirgendwo sonst. Jedes bekommt beim Übergang
 nach `done/` genau **einen** Ausgang: *eingetreten* → Carveout (Modul 7)
 oder Folge-Slice mit ID · *entfallen* → gestrichen **mit Begründung** (ohne
 sie ist es stilles Vergessen) · *weiter offen* → wandert ins
 **Beobachtungs-Register** ([Modul 6](modul-06-roadmap.md#das-beobachtungs-register-modul-6)). Der
 dritte Ausgang hängt das Risiko an den Zähler, statt einen zweiten
 Mechanismus zu erfinden: drei Slices lang offen heißt Schwelle erreicht.
+Eine Bedrohung an einer Vertrauensgrenze ist kein Risiko in diesem Sinn: Sie
+bekommt ihren eigenen Ausgang, sobald sie auffällt
+([Modul 4 §Bedrohung, Grenze, Ausgang](modul-04-adrs.md#bedrohung-grenze-ausgang-modul-4)).
 Ein Slice geht nicht nach `done/`, während ein Risiko ohne Ausgang dasteht.
 **Urteilsfrei** ist, *dass* zu jedem notierten Risiko ein Ausgang dasteht und
 *welcher der drei* es ist: Die drei sind eine geschlossene Menge, kein Freitext

@@ -347,8 +347,8 @@ Prüfpunkte:
   die den Rahmen setzt, und ihr Trigger die Annahmen, unter denen das Risiko
   tragbar bleibt. Ein Trigger wie "bei Bedarf" ist keiner.
 - Ist eine Bedrohung schon durch ein Boundary- oder Negative-Kriterium
-  gemindert (im Beispiel begrenzt `LH-FA-02` die Trefferzahl `k`), ist das ihr Ausgang — keine neue
-  Anforderung nötig.
+  gemindert (im Beispiel begrenzt `LH-FA-02` die Trefferzahl `k`), ist das ihr
+  Ausgang — keine neue Anforderung nötig.
 
 Die Schlussfrage der Übung fängt den häufigsten Fehler: Wer am Ende eine
 Status-Tabelle angelegt hat, hat dieselben drei Ausgänge ein zweites Mal

@@ -35,8 +35,9 @@ Matrix-Klasse, keine neuen Kennungen.
   bestehenden entsteht vor der Abnahme frei, danach nur per Change Request mit
   Version-Bump. *Eine Bedrohung ist kein Risiko des Slices*: Das Risiko bekommt
   bei der Closure einen der drei Ausgänge aus Modul 5; eine Bedrohung, die im
-  Slice auffällt, bekommt ihren eigenen Ausgang sofort — mindestens einen Slice
-  in `open/` — und keinen Eintrag unter *Risiken und offene Punkte*. Kein
+  Slice auffällt, bekommt ihren eigenen Ausgang sofort — wenigstens *offen*,
+  also einen Slice in `open/` — und keinen Eintrag unter *Risiken und offene
+  Punkte*; steht sie schon dort, zieht sie mit ihrem Ausgang aus. Kein
   Register — eine Liste mit Status wäre eine zweite Quelle; die Übersicht je
   Grenze ist ein Auslesestand wie die RTM, über die bedrohungsbezogenen ADRs und
   Slices. Für einen Wächter liefert das Modell nur Kandidaten (Modul 13); das
@@ -143,14 +144,17 @@ widersprach Modul 5 — dort bekommt *jedes* notierte Risiko einen der drei
 Ausgänge, „weiter offen“ geht ins Beobachtungs-Register; der Maintainer hat
 entschieden, dass eine Bedrohung gar nicht unter die Risiken kommt (Modul 4,
 Modul 5, Slice-Vorlage), die geschlossene Menge bleibt. Dazu in Lösung 4 die
-Begründung für *offen* (die Fehler-Codes legt das Lastenheft fest, nicht, was
-eine Antwort preisgibt), die Form *Boundary-/Negative-Kriterium* statt
+Begründung für *offen* (keine `LH-*` begrenzt, was eine Fehlerantwort
+preisgibt; `E003` steht nur in der Spezifikation), die Form *Boundary-/Negative-Kriterium* statt
 *Akzeptanzkriterium* und der Trigger von ADR-0021 über alle drei Annahmen;
 Change Request auch für neue Kriterien; im Worked Example `POST /reindex` an der
 Grenze, Caching, der Wortlaut der Bedrohung in ADR und Slice-Ziel; der
 Kategorien-Absatz in Modul 10 („Jeder Sicherheits-Verstoß bleibt HIGH“); die
 Kontext-Bedingung an der HIGH-Ausnahme in Skill und Vorlage; Lösung 10; die
-Rubrik-Zeile.
+Rubrik-Zeile. Eine schmale vierte Runde über Commit 28c4eb6 fand keinen hohen
+Befund und fünf kleine, alle behoben: die Untergrenze „wenigstens *offen*“
+eindeutig, der Fall einer Bedrohung, die schon unter den Risiken steht, die
+Stellung des Satzes in Modul 5, ein CHANGELOG-Satz zu `E003`, Umbrüche.
 
 ## Welle 167 — 2026-11-23 · Ein WIP-Slot, ein Zweig, ein Arbeitsbaum
 
