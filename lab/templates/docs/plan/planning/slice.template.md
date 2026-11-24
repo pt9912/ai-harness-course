@@ -161,7 +161,10 @@ Lerneintrag; ohne ihn ist der Slice nur abgelegt.
 ## 6. Risiken und offene Punkte
 
 <!-- BEDIENHINWEIS: Was koennte schief gehen? Welche Carveouts entstehen
-ggf.? Die drei Ausgaenge stehen als Form in der Zeile darunter. -->
+ggf.? Die drei Ausgaenge stehen als Form in der Zeile darunter. Eine
+Bedrohung an einer Vertrauensgrenze gehoert nicht hierher: Sie bekommt sofort
+ihren eigenen Ausgang (Baseline-Regelwerk modul-04-adrs.md §Bedrohung, Grenze,
+Ausgang). -->
 
 Regeln dieser Sektion: Baseline-Regelwerk `modul-05-planning-harness.md`
 §Offene Risiken werden bei Closure aufgelöst — **jedes** Risiko bekommt genau

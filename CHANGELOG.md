@@ -31,11 +31,12 @@ Matrix-Klasse, keine neuen Kennungen.
   Architektur-Wirkung hat), **akzeptiert** (ADR mit `Bezug:` auf die `LH-*`, die
   den Rahmen setzt, und `Schärft:` auf die `ARC-*`; Re-Evaluierungs-Trigger
   nennt die Annahmen), **offen** (Slice in `open/`). Die Bedrohung im Wortlaut
-  steht beim Ausgang; eine neue `LH-*` entsteht vor der Abnahme frei, danach nur
-  per Change Request mit Version-Bump. *Eine Bedrohung ist kein Risiko des
-  Slices*: Das Risiko schließt mit der Closure (Modul 5), die Bedrohung
-  überdauert den Slice; als Risiko notiert, nennt ihr Closure-Ausgang die
-  `LH-*`, ADR oder den offenen Slice, nicht das Beobachtungs-Register. Kein
+  steht beim Ausgang; eine neue `LH-*` oder ein neues Kriterium einer
+  bestehenden entsteht vor der Abnahme frei, danach nur per Change Request mit
+  Version-Bump. *Eine Bedrohung ist kein Risiko des Slices*: Das Risiko bekommt
+  bei der Closure einen der drei Ausgänge aus Modul 5; eine Bedrohung, die im
+  Slice auffällt, bekommt ihren eigenen Ausgang sofort — mindestens einen Slice
+  in `open/` — und keinen Eintrag unter *Risiken und offene Punkte*. Kein
   Register — eine Liste mit Status wäre eine zweite Quelle; die Übersicht je
   Grenze ist ein Auslesestand wie die RTM, über die bedrohungsbezogenen ADRs und
   Slices. Für einen Wächter liefert das Modell nur Kandidaten (Modul 13); das
@@ -45,8 +46,11 @@ Matrix-Klasse, keine neuen Kennungen.
   `ARC-006` des Beispiels: gemindert über das Boundary-Kriterium von `LH-FA-02`
   (Trefferzahl `k`), offen als `slice-anfragerate` (keine `LH-*` begrenzt die
   Rate; der Change-Request-Weg ist genannt), akzeptiert als ADR-0020 mit
-  `Bezug: LH-FA-02` und Trigger. Übung (LZ 5), Selbstcheck mit Rubrik-Zeile
-  (LZ 5, Bedrohungsliste mit Status).
+  `Bezug: LH-FA-02`, der Bedrohung im Wortlaut im Kontext und Trigger. Übung
+  (LZ 5), Selbstcheck mit Rubrik-Zeile (LZ 5, Bedrohungsliste mit Status).
+- **Modul 5** — §Offene Risiken: Eine Bedrohung an einer Vertrauensgrenze ist
+  kein Risiko in diesem Sinn, sie bekommt ihren eigenen Ausgang, sobald sie
+  auffällt (Modul 4). Die geschlossene Menge der drei Risiko-Ausgänge bleibt.
 - **Modul 3** — §Die Architektur-Sicht: *Vertrauensgrenzen gehören in die
   Sicht* (an der Schnittstelle, deren `ARC-*`; Datenfluss ohne eigene
   Schnittstelle bei den Endpunkten; keine Bedrohung, kein Minderungsstand).
@@ -62,13 +66,15 @@ Matrix-Klasse, keine neuen Kennungen.
   Worked Example der Reviewer-Skill: Kontext-Eingang um `spec/architecture.md`,
   die aktiven ADRs, deren `Schärft:` eine berührte `ARC-*` nennt, und die Slices
   in `open/`, die sie nennen; der HIGH-Anker *Sicherheits-Anti-Pattern* trägt
-  die Ausnahme; die MEDIUM-Zeile gilt im Plan- und Design-Review.
+  die Ausnahme mit der Bedingung „im Kontext genannt“; die MEDIUM-Zeile gilt im
+  Plan- und Design-Review.
 - **Modul 13** — Entgleisung 1 der Guard-Härtung: Ein Bedrohungsmodell des
   Produkts speist Anforderung, Sicht und ADR; für einen Wächter liefert es
   höchstens Kandidaten.
 - **Spiegel** `lab/regelwerk/modul-03-spec.md` (Ziel-Form: Architektur-Sicht,
   Fehlannahmen), `modul-04-adrs.md` (neuer Abschnitt, ohne die einleitende
-  Abgrenzung zu Modul 10/13/16 und ohne Worked Example), `modul-10-review-harness.md`
+  Abgrenzung zu Modul 10/13/16 und ohne Worked Example),
+  `modul-05-planning-harness.md` (§Offene Risiken), `modul-10-review-harness.md`
   (Prüffrage, Finding-Kategorien, Kontext-Eingang), `modul-13-quality-gates.md`
   (Guard-Härtung); `lab/regelwerk/README.md`: `Stand:` auf Welle 168.
 - **Vorlagen**: `architecture.template.md` — neuer Abschnitt *6. Vertrauensgrenzen
@@ -79,13 +85,16 @@ Matrix-Klasse, keine neuen Kennungen.
   statt neu angelegt zu werden. ADR-Vorlage — der Kontext-Kommentar sagt, was
   eine ADR trägt, die eine Bedrohung akzeptiert. `reviewer.template.md` —
   Kontext-Eingang, HIGH-Ausnahme und MEDIUM-Zeile wie Modul 10.
+  `slice.template.md` — der Bedienhinweis zu §6 *Risiken und offene Punkte*
+  sagt, dass eine Bedrohung nicht dorthin gehört.
   `lab/templates/README.md` beschreibt die Architektur-Vorlage mit.
 - **Lösungen**: Lösung 4 — Selbstcheck-Antwort (Bedrohungsliste mit Status) und
   Übungshinweis an `ARC-006` mit anderen Bedrohungen als das Worked Example:
   offen (eine Fehlerantwort könnte interne Adressen preisgeben; keine `LH-*`
-  legt ihren Inhalt fest, Change Request nötig), akzeptiert als ADR-0021
-  (`POST /reindex` für jeden Client, `Bezug: LH-FA-01`). Lösung 10 — Fall B
-  (fehlende Auth-Prüfung) nennt die Ausnahme einer akzeptierenden ADR.
+  begrenzt, was sie preisgibt, Change Request nötig), akzeptiert als ADR-0021
+  (`POST /reindex` für jeden Client, `Bezug: LH-FA-01`, Trigger über alle drei
+  Annahmen). Lösung 10 — Fall B (fehlende Auth-Prüfung) nennt die Ausnahme
+  einer akzeptierenden ADR.
 - **Satelliten**: `lernervorstellungen.md` (neue Fehlvorstellung unter Modul 3),
   `konzeptkarte.md` (*Bedrohung ohne Ort* unter *Wann zurückspringen?*).
 - **Konzept und Roadmap**: Das Konzept trägt den Stand „Produkt-Teil umgesetzt“
@@ -97,8 +106,9 @@ Matrix-Klasse, keine neuen Kennungen.
   Register); `begriffe.md` (die Übersicht wird nur mit der RTM verglichen, kein
   neuer Begriff); Modul 16 (Erkennung im Betrieb, gehört zu E3); das Beispiel —
   der Kurs trägt keine Pflicht, die es erfüllen müsste. Worked Example und
-  Lösung 4 nutzen seine `ARC-003`, `ARC-006`, `ARC-007`, `LH-FA-01`, `LH-FA-02`
-  und `LH-FA-03` in ihrer Bedeutung; ADR-0020 und ADR-0021 sind dort frei.
+  Lösung 4 nutzen seine `ARC-003`, `ARC-006`, `ARC-007`, `LH-FA-01`, `LH-FA-02`,
+  `LH-FA-03` und `LH-QA-04` in ihrer Bedeutung; ADR-0020 und ADR-0021 sind dort
+  frei.
 
 **Kein Team-Sim-Szenario.** Die Welle behauptet kein beobachtbares Verhalten:
 Ob etwas eine Vertrauensgrenze ist und ob eine Bedrohung einen Ausgang hat, sind
@@ -121,12 +131,26 @@ zu); das Worked Example setzte einen `limit`-Parameter voraus, den das Beispiel
 als begrenztes `k` führt; `Bezug:` und Selbstcheck-Stufe waren in Lösung 4 nicht
 nachgezogen; der Reviewer fand den Ausgang *offen* nicht; die Ausnahme vom HIGH
 stand im Absatz zum Plan- und Design-Review statt bei den Kategorien. Drei
-Punkte hat der Maintainer entschieden: *gemindert* auch über ein
-Akzeptanzkriterium einer `LH-FA` (Erweiterung von E6); die Abgrenzung zum
+Punkte hat der Maintainer entschieden: *gemindert* auch über ein Boundary- oder
+Negative-Kriterium einer `LH-FA` (Erweiterung von E6); die Abgrenzung zum
 Slice-Risiko; die Regel zum Kontext-Eingang geschärft statt zurückgenommen (nur
-aktive ADRs, die die Bedrohung nennen; offene Slices dazu). Dazu Spiegel-Deixis,
-Abnahme-Zeitpunkt, `LH-*` über die Slices, `user_id_hash` in ADR-0020,
-Umbrüche, Anführungszeichen.
+aktive ADRs per `Schärft:` auf eine berührte `ARC-*`, offene Slices dazu; die
+Ausnahme vom HIGH nur für eine ADR, die die Bedrohung nennt). Dazu
+Spiegel-Deixis, Abnahme-Zeitpunkt, `LH-*` über die Slices, `user_id_hash` in
+ADR-0020, Umbrüche, Anführungszeichen. Dritte Runde über Commit ee612f8,
+1 hoher, 3 mittlere, 9 niedrige Befunde, alle behoben: Die Abgrenzung zum Risiko
+widersprach Modul 5 — dort bekommt *jedes* notierte Risiko einen der drei
+Ausgänge, „weiter offen“ geht ins Beobachtungs-Register; der Maintainer hat
+entschieden, dass eine Bedrohung gar nicht unter die Risiken kommt (Modul 4,
+Modul 5, Slice-Vorlage), die geschlossene Menge bleibt. Dazu in Lösung 4 die
+Begründung für *offen* (die Fehler-Codes legt das Lastenheft fest, nicht, was
+eine Antwort preisgibt), die Form *Boundary-/Negative-Kriterium* statt
+*Akzeptanzkriterium* und der Trigger von ADR-0021 über alle drei Annahmen;
+Change Request auch für neue Kriterien; im Worked Example `POST /reindex` an der
+Grenze, Caching, der Wortlaut der Bedrohung in ADR und Slice-Ziel; der
+Kategorien-Absatz in Modul 10 („Jeder Sicherheits-Verstoß bleibt HIGH“); die
+Kontext-Bedingung an der HIGH-Ausnahme in Skill und Vorlage; Lösung 10; die
+Rubrik-Zeile.
 
 ## Welle 167 — 2026-11-23 · Ein WIP-Slot, ein Zweig, ein Arbeitsbaum
 

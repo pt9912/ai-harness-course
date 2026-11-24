@@ -39,9 +39,9 @@ Code-Review kostet den ganzen Implementierungs-Lauf.
 
 **Ein akzeptierter Ausgang ist kein Verstoß.** Was eine aktive ADR an einer
 Grenze akzeptiert und in ihrem Kontext beim Namen nennt, meldet der Reviewer in
-keiner Review-Art als Sicherheits-Anti-Pattern; er findet sie über ihr
+keiner Review-Art als Sicherheits-Anti-Pattern; er findet die ADR über ihr
 `Schärft:` auf die `ARC-*`. Eine ADR, die die Bedrohung nicht nennt, ist kein
-Freibrief. Jeder andere Sicherheits-Verstoß bleibt HIGH.
+Freibrief. Jeder Sicherheits-Verstoß bleibt HIGH.
 
 ### Harness-Einordnung (Modul 10)
 

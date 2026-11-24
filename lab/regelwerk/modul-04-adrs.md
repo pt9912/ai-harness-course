@@ -106,18 +106,17 @@ Die Bedrohung selbst steht in ihrem Wortlaut beim Ausgang: im Kontext der ADR
 oder im Ziel des Slices. Eine `LH-*` formuliert die *Eigenschaft*, nicht die
 Bedrohung
 ([Modul 3 §Regeln gegen typische Fehlannahmen](modul-03-spec.md#regeln-gegen-typische-fehlannahmen-modul-3)).
-Eine neue `LH-*` entsteht vor der Abnahme des Lastenhefts frei, danach nur per
-Change Request mit Version-Bump
+Eine neue `LH-*` oder ein neues Kriterium einer bestehenden entsteht vor der
+Abnahme des Lastenhefts frei, danach nur per Change Request mit Version-Bump
 ([`grundlagen-source-precedence.md` §Spec-Stratifizierung](grundlagen-source-precedence.md#spec-stratifizierung)).
 
 **Eine Bedrohung ist kein Risiko des Slices.** Ein Risiko im Slice-Plan gehört
-zur Lieferung dieses Slices und schließt mit seiner Closure — eingetreten,
-entfallen oder weiter offen
+zur Lieferung dieses Slices und bekommt bei seiner Closure einen Ausgang —
+eingetreten, entfallen oder weiter offen
 ([Modul 5 §Offene Risiken](modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst)).
-Eine Bedrohung gehört zur Grenze und überdauert den Slice. Notiert ein
-Slice-Plan eine Bedrohung als Risiko, nennt ihr Closure-Ausgang die `LH-*`, die
-ADR oder den Slice in `open/`, der sie trägt; das Beobachtungs-Register ist
-nicht ihr Ort.
+Eine Bedrohung gehört zur Grenze und hat ihre eigenen drei Ausgänge. Fällt im
+Slice eine Bedrohung auf, bekommt sie ihren Ausgang sofort — mindestens einen
+Slice in `open/` —, keinen Eintrag unter *Risiken und offene Punkte*.
 
 **Kein eigenes Register.** Eine Bedrohungsliste mit Status-Spalte wäre eine
 zweite Quelle für Ausgänge, die schon in `LH-*`, ADR und Slice stehen — und sie

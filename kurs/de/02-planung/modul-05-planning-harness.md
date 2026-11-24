@@ -193,6 +193,8 @@ Ein Slice-Plan notiert unter *Risiken und offene Punkte*, was schiefgehen
 kann. Diese Notiz ist **Originalinformation** — sie steht nirgendwo
 sonst. Ohne einen Schritt, der sie wieder aufgreift, stirbt sie mit dem
 Slice: dreimal notiert, dreimal vergessen, nie als Muster erkannt.
+Eine Bedrohung an einer Vertrauensgrenze ist kein Risiko in diesem Sinn: Sie
+bekommt ihren eigenen Ausgang, sobald sie auffällt ([Modul 4 §Bedrohung, Grenze, Ausgang](../01-spec-und-architektur/modul-04-adrs.md#bedrohung-grenze-ausgang)).
 
 Deshalb hat der Übergang nach `done` eine zweite Pflicht neben dem
 Lerneintrag: **jedes notierte Risiko bekommt genau einen von drei

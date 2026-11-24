@@ -200,7 +200,9 @@ sondern ein Buffet.
 #### Offene Risiken werden bei Closure aufgelöst
 
 Ein Risiko aus dem Slice-Plan (*Risiken und offene Punkte*) ist
-Originalinformation und steht nirgendwo sonst. Jedes bekommt beim Übergang
+Originalinformation und steht nirgendwo sonst. Eine Bedrohung an einer Vertrauensgrenze ist kein Risiko in diesem Sinn: Sie
+bekommt ihren eigenen Ausgang, sobald sie auffällt ([Modul 4 §Bedrohung, Grenze, Ausgang](modul-04-adrs.md#bedrohung-grenze-ausgang-modul-4)).
+Jedes bekommt beim Übergang
 nach `done/` genau **einen** Ausgang: *eingetreten* → Carveout (Modul 7)
 oder Folge-Slice mit ID · *entfallen* → gestrichen **mit Begründung** (ohne
 sie ist es stilles Vergessen) · *weiter offen* → wandert ins

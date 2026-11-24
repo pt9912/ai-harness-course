@@ -152,13 +152,13 @@ Spalte hat schon ein Zuhause:
 |---|---|
 | Grenze | Sicht, `ARC-*` der Schnittstelle, Abschnitt Vertrauensgrenzen |
 | Beschreibung | beim Ausgang: Kontext der ADR oder Ziel des Slices |
-| Status `gemindert` | `LH-*` mit Prüfung (`LH-QA` mit Messmethode oder Akzeptanzkriterium einer `LH-FA`); der Slice nennt `LH-*` und `ARC-*` |
+| Status `gemindert` | `LH-*` mit Prüfung (`LH-QA` mit Messmethode oder Boundary- bzw. Negative-Kriterium einer `LH-FA`); der Slice nennt `LH-*` und `ARC-*` |
 | Status `akzeptiert` | ADR mit `Bezug:` auf die `LH-*`, die den Rahmen setzt, `Schärft:` auf die `ARC-*`, Re-Evaluierungs-Trigger |
 | Status `offen` | Slice in `open/` |
 
 Urteil: Die Datei trägt nichts Eigenes. Ihre Status-Spalte ist eine zweite
 Quelle für Ausgänge, die schon anderswo stehen, und driftet gegen sie — ein
-gearbeiteter Slice ändert den Stand, die Tabelle nicht (dieselbe Figur wie ein
+abgeschlossener Slice ändert den Stand, die Tabelle nicht (dieselbe Figur wie ein
 Status-Feld neben dem Lifecycle-Verzeichnis, Modul 5). Die Übersicht je Grenze
 bleibt erreichbar, als Auslesestand aus den Aufwärts-Verweisen.
 
@@ -315,8 +315,8 @@ seine `LH-QA-04` (Audit-Datenschutz) betrifft das Log, nicht diese beiden:
 
 | Bedrohung | Ausgang | Zuhause |
 |---|---|---|
-| Eine Fehlerantwort könnte interne Adressen des Embedding-Adapters preisgeben, etwa wenn er nicht erreichbar ist (*Information Disclosure*) | offen | keine `LH-*` legt fest, was eine Fehlerantwort enthält; eine solche Eigenschaft wäre nach der Abnahme nur per Change Request mit Version-Bump zu haben → Slice in `open/`, der die Antworten prüft und den Change Request vorbereitet; er nennt `ARC-006` und `ARC-003` (Embedding-Adapter) |
-| `POST /reindex` kann jeder Client im Netz auslösen, und jeder Lauf kostet Embedding-Aufrufe für alle Dateien (*Elevation of Privilege*, *Denial of Service*) | akzeptiert | ADR unten |
+| Eine Fehlerantwort könnte interne Adressen des Embedding-Adapters preisgeben, etwa wenn er nicht erreichbar ist (*Information Disclosure*) | offen | keine `LH-*` begrenzt, was eine Fehlerantwort preisgibt — die Antwort bei nicht erreichbarem Adapter (`E003`) steht nur in der Spezifikation; eine solche Eigenschaft wäre nach der Abnahme nur per Change Request mit Version-Bump zu haben → Slice in `open/`, der die Antworten prüft und den Change Request vorbereitet; er nennt `ARC-006` und `ARC-003` (Embedding-Adapter) |
+| `POST /reindex` kann jeder Client im Netz auslösen, und jeder Lauf kostet Embedding-Aufrufe für alle Abschnitte, soweit nicht gecacht (*Elevation of Privilege*, *Denial of Service*) | akzeptiert | ADR unten |
 
 ```markdown
 # ADR-0021 — Reindex für jeden Client im Team-Netz
@@ -326,11 +326,13 @@ seine `LH-QA-04` (Audit-Datenschutz) betrifft das Log, nicht diese beiden:
 * Schärft: ARC-006
 ```
 
-Kontext: die Bedrohung im Wortlaut; das Verzeichnis ist konfiguriert und nicht
-per Anfrage wählbar (`LH-FA-01`), ein Reindex kostet Zeit und Embedding-Aufrufe,
-richtet aber keinen Schaden an, und der Dienst läuft im Team-Netz. Tragbar,
-solange beides gilt. Re-Evaluierungs-Trigger: Ein Reindex wird teuer genug, um
-eine Kostengrenze zu reißen, oder das Verzeichnis wird per Anfrage wählbar.
+Kontext: die Bedrohung im Wortlaut; das Verzeichnis ist konfiguriert
+(`LH-FA-01`) — die ADR nimmt an, dass es per Anfrage nicht wählbar ist —, ein
+Reindex kostet Zeit und Embedding-Aufrufe, richtet aber keinen Schaden an, und
+der Dienst läuft im Team-Netz. Tragbar, solange alle drei Annahmen gelten.
+Re-Evaluierungs-Trigger: Ein Reindex wird teuer genug, um eine Kostengrenze zu
+reißen, das Verzeichnis wird per Anfrage wählbar, oder der Dienst wird außerhalb
+des Team-Netzes erreichbar.
 
 Prüfpunkte:
 
@@ -338,13 +340,14 @@ Prüfpunkte:
 - Eine `LH-*` formuliert eine Eigenschaft mit Prüfung, nicht "schütze vor
   DoS"; ein Statuscode oder ein Grenzwert gehört als Festlegung in die
   Spezifikation.
-- Eine neue `LH-*` gegen ein abgenommenes Lastenheft geht nur per Change
-  Request — bis dahin ist der Ausgang *offen*, nicht *gemindert*.
+- Eine neue `LH-*` oder ein neues Kriterium gegen ein abgenommenes Lastenheft
+  geht nur per Change Request — bis dahin ist der Ausgang *offen*, nicht
+  *gemindert*.
 - Die ADR nennt im Kontext die Bedrohung im Wortlaut, `Bezug:` die Anforderung,
   die den Rahmen setzt, und ihr Trigger die Annahmen, unter denen das Risiko
   tragbar bleibt. Ein Trigger wie "bei Bedarf" ist keiner.
-- Ist eine Bedrohung schon durch ein Akzeptanzkriterium gemindert (im Beispiel
-  begrenzt `LH-FA-02` die Trefferzahl `k`), ist das ihr Ausgang — keine neue
+- Ist eine Bedrohung schon durch ein Boundary- oder Negative-Kriterium
+  gemindert (im Beispiel begrenzt `LH-FA-02` die Trefferzahl `k`), ist das ihr Ausgang — keine neue
   Anforderung nötig.
 
 Die Schlussfrage der Übung fängt den häufigsten Fehler: Wer am Ende eine

@@ -40,7 +40,9 @@ bewusst kurz (Ergänzungs-Kanal, nicht Hauptkanal).
 **HIGH** — eines der folgenden:
 - ADR-Verstoß (Layer, Tool, Hard Rule)
 - Sicherheits-Anti-Pattern (Injection, fehlende Auth-Prüfung) — es sei denn, eine
-  aktive ADR akzeptiert genau diese Bedrohung an der berührten `ARC-*`
+  aktive ADR akzeptiert genau diese Bedrohung an der berührten `ARC-*` und nennt
+  sie im Kontext (Baseline-Regelwerk `modul-10-review-harness.md`
+  §Finding-Kategorien)
 - Korrektheitsfehler im *kritischen* Pfad (<z. B. Index-Schreiben, Auth>)
 - Suppression eines Gates (`#noqa`, `//nolint`, `[SuppressMessage]`) ohne ADR
 - **Norm nur im Template-Kommentar** — eine Regel steht im `<!-- -->`-Block
@@ -70,8 +72,7 @@ bewusst kurz (Ergänzungs-Kanal, nicht Hauptkanal).
   und eine Bedrohung dort hat keinen Ausgang — `LH-*` mit Prüfung, ADR oder
   Slice in `open/`
   (Baseline-Regelwerk `modul-04-adrs.md` §Bedrohung, Grenze, Ausgang;
-  Einstufung `modul-10-review-harness.md` §Drei Review-Arten, Ausnahme vom HIGH
-  §Finding-Kategorien)
+  Einstufung `modul-10-review-harness.md` §Drei Review-Arten)
 
 **LOW** — *mit Konventions-Anker* (ADR, Hard Rule, Linter-Regel, Eintrag im
 Reviewer-Skill): stilistisch unschön ohne semantische Auswirkung, einmalige

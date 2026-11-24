@@ -7,8 +7,10 @@ entschieden (2026-11-22; E1 und E2 entfallen mit E6). Belegt ist der Befund (§1
 gegen den Korpus-Stand von `2f30660`; der Text unten beschreibt den Stand vor der
 Umsetzung. **Nachentscheidungen (Maintainer, 2026-11-24, aus dem Review):**
 *gemindert* gilt auch über ein Boundary- oder Negative-Kriterium einer `LH-FA`,
-nicht nur über eine `LH-QA` (Erweiterung von E6); eine Bedrohung wird vom
-Risiko des Slices abgegrenzt (Modul 5 §Offene Risiken); der Reviewer lädt die
+nicht nur über eine `LH-QA` (Erweiterung von E6); eine Bedrohung ist kein
+Risiko des Slices und kommt nicht unter *Risiken und offene Punkte* — sie
+bekommt ihren Ausgang, sobald sie auffällt (Modul 5 §Offene Risiken bleibt eine
+geschlossene Menge); der Reviewer lädt die
 aktiven ADRs, deren `Schärft:` eine berührte `ARC-*` nennt, und die offenen
 Slices dazu, und eine akzeptierte, im Kontext genannte Bedrohung ist kein HIGH
 (über E4 hinaus).

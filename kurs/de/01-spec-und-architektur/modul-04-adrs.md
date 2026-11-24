@@ -172,18 +172,17 @@ Die Bedrohung selbst steht in ihrem Wortlaut beim Ausgang: im Kontext der ADR
 oder im Ziel des Slices. Eine `LH-*` formuliert die *Eigenschaft*, nicht die
 Bedrohung
 ([Modul 3 §Typische Fehlvorstellungen](modul-03-spec.md#typische-fehlvorstellungen)).
-Eine neue `LH-*` entsteht vor der Abnahme des Lastenhefts frei, danach nur per
-Change Request mit Version-Bump
+Eine neue `LH-*` oder ein neues Kriterium einer bestehenden entsteht vor der
+Abnahme des Lastenhefts frei, danach nur per Change Request mit Version-Bump
 ([§Spec-Stratifizierung](../grundlagen/source-precedence.md#spec-stratifizierung)).
 
 **Eine Bedrohung ist kein Risiko des Slices.** Ein Risiko im Slice-Plan gehört
-zur Lieferung dieses Slices und schließt mit seiner Closure — eingetreten,
-entfallen oder weiter offen
+zur Lieferung dieses Slices und bekommt bei seiner Closure einen Ausgang —
+eingetreten, entfallen oder weiter offen
 ([Modul 5 §Offene Risiken](../02-planung/modul-05-planning-harness.md#offene-risiken-werden-bei-closure-aufgelöst)).
-Eine Bedrohung gehört zur Grenze und überdauert den Slice. Notiert ein
-Slice-Plan eine Bedrohung als Risiko, nennt ihr Closure-Ausgang die `LH-*`, die
-ADR oder den Slice in `open/`, der sie trägt; das Beobachtungs-Register ist
-nicht ihr Ort.
+Eine Bedrohung gehört zur Grenze und hat ihre eigenen drei Ausgänge. Fällt im
+Slice eine Bedrohung auf, bekommt sie ihren Ausgang sofort — mindestens einen
+Slice in `open/` —, keinen Eintrag unter *Risiken und offene Punkte*.
 
 **Kein eigenes Register.** Eine Bedrohungsliste mit Status-Spalte wäre eine
 zweite Quelle für Ausgänge, die schon in `LH-*`, ADR und Slice stehen — und sie
@@ -280,15 +279,16 @@ Das Lastenheft ist abgenommen.
 
 **Schritt 1 — Grenze benennen.** In der Sicht, Abschnitt Vertrauensgrenzen:
 `ARC-006`, außen ein beliebiger Client im Netz, innen der Service-Layer; es
-kreuzen Suchbegriff `q` und Trefferzahl `k`. Kein Wort über Bedrohungen.
+kreuzen Suchbegriff `q`, Trefferzahl `k` und der Auslöser eines Reindex
+(`POST /reindex`). Kein Wort über Bedrohungen.
 
 **Schritt 2 — Bedrohungen finden.** STRIDE als Denkhilfe, keine Pflicht:
 
 > (a) Ein `k` von einer Million lädt den ganzen Index in eine Antwort —
 > *Denial of Service*.
 >
-> (b) Ein Client schickt Anfragen ohne Pause; jede kostet einen Aufruf des
-> Embedding-Modells — *Denial of Service*.
+> (b) Ein Client schickt Anfragen ohne Pause; jede mit neuem `q` kostet einen
+> Aufruf des Embedding-Modells — *Denial of Service*.
 >
 > (c) Die API hat keine Authentifizierung; jeder Client im Netz tritt als
 > berechtigter Nutzer auf — *Spoofing*.
@@ -297,8 +297,8 @@ kreuzen Suchbegriff `q` und Trefferzahl `k`. Kein Wort über Bedrohungen.
 
 | Bedrohung | Ausgang | Zuhause |
 |---|---|---|
-| (a) | gemindert | `LH-FA-02` begrenzt `k` schon in einem Boundary-Kriterium (der Wert steht in der Spezifikation); der Test dieses Kriteriums ist die Prüfung; der Slice, der die API freischaltet, nennt `LH-FA-02` und `ARC-006` |
-| (b) | offen | keine `LH-*` begrenzt die Anfragerate, und entschieden ist nichts → `slice-anfragerate` in `open/`, nennt `ARC-006` und `ARC-007` |
+| (a) | gemindert | `LH-FA-02` begrenzt `k` schon in einem Boundary-Kriterium (der Wert steht auch als `MAX_TOPK` in der Spezifikation); der Test dieses Kriteriums ist die Prüfung; der Slice, der die API freischaltet, nennt `LH-FA-02`, `ARC-006` und in seinem Ziel die Bedrohung |
+| (b) | offen | keine `LH-*` begrenzt die Anfragerate, und entschieden ist nichts → `slice-anfragerate` in `open/`, nennt `ARC-006`, `ARC-007` und in seinem Ziel die Bedrohung |
 | (c) | akzeptiert | ADR, Schritt 4 |
 
 **Schritt 4 — Die ADR für den akzeptierten Ausgang:**
@@ -316,8 +316,9 @@ kreuzen Suchbegriff `q` und Trefferzahl `k`. Kein Wort über Bedrohungen.
 Sicherheits-Eigenschaft: Eine `LH-QA`, die Authentifizierung verlangte, würde
 die Akzeptanz brechen.
 
-> **Kontext:** Jeder Client im Netz kann über `ARC-006` suchen, ohne sich
-> auszuweisen. Der Dienst läuft im Netz eines Teams, der Index enthält nur
+> **Kontext:** Bedrohung: Die API hat keine Authentifizierung; jeder Client im
+> Netz tritt als berechtigter Nutzer auf (*Spoofing*). Jeder kann über `ARC-006`
+> suchen, ohne sich auszuweisen. Der Dienst läuft im Netz eines Teams, der Index enthält nur
 > Dokumente, die dort ohnehin jeder lesen darf.
 >
 > **Optionen:** (1) Token pro Client — Verwaltung ohne Gegenwert, solange
@@ -418,7 +419,7 @@ Modul-spezifische Trigger:
 | `deprecated` ohne Nachfolger — korrekt gewählt oder verdeckte `superseded`-Lücke? | "Deprecated heißt alt, passt schon." — kein Urteil, nur Etikett wiederholt. | Urteil mit Kriterium: `deprecated` ist legitim, wenn die Regel *ersatzlos* entfällt (der Bedarf existiert nicht mehr). Es ist ein falsch etikettiertes `superseded`, wenn der *Bedarf bleibt*, aber kein Nachfolger benannt ist — dann ist `deprecated` nur ein Etikett für eine offene Entscheidung. Kriterium: existiert der zugrunde liegende Bedarf weiter? | + Folge für Reviewer und Steering Loop: bei verdeckter Lücke fordert der Reviewer einen Folge-ADR und markiert HIGH; tritt das Muster dreimal auf, ist die ADR-Status-Vergabe selbst die Lücke (Guide: Status-Definition in die ADR-Vorlage). Superseded → Reviewer prüft gegen Nachfolger; echtes deprecated → Constraint-Scan entfernt den toten Codepfad. |
 | Fitness-Function-Übersetzung in einem Satz?                                       | "Test schreiben."                                                           | Eine maschinell prüfbare Aussage in der Form "Komponente/Datei/Layer X darf (nicht) Y" — mit konkretem Werkzeug (ArchUnit/dep-cruiser/import-linter) und konkreter Gate-Verdrahtung (`make arch-check`).                                                                                                                                                        | + Wenn dir kein Satz einfällt: ADR-Aussage ist zu vage formuliert (nicht "lose koppeln", sondern "Service-Layer importiert nicht aus `runtime.*`"). Vage ADRs sind unprüfbare ADRs.                                                                                                                                                                          |
 | Unsicherster Schritt des ADR-Schreibens?                                          | "Alles klar." (verdächtig)                                                  | Konkret benannter Schritt + Begründung (z. B. "Schritt 4 Optionen, weil ich zwei der drei erst beim Hinschreiben nachträglich überhaupt erwogen habe").                                                                                                                                                                                                         | + Pointe: wer Schritt 4 (Optionen mit Trade-offs) überspringt oder schwammig hält, postet ein *Entscheidungs-Ergebnis* ohne *Entscheidungs-Belege* — und genau das macht ADRs unverteidigbar im Review. Schritt 6 (Fitness Function) ist die zweite häufige unsichere Stelle; wer hier "lässt sich nicht prüfen" schreibt, hat oft nur zu vage formuliert.   |
-| Bedrohungsliste mit Status bewertet? | „Gute Übersicht, behalten." | Die Status-Spalte doppelt die Ausgänge: gemindert steht als `LH-*` mit Prüfung, akzeptiert als ADR, offen als Slice in `open/` — die Liste driftet gegen sie wie ein Status-Feld gegen das Verzeichnis. Grenze → Sicht (`ARC-*`), Beschreibung → beim Ausgang (Kontext der ADR, Ziel des Slices). | + Die Übersicht bleibt erreichbar, als Auslesestand aus den Aufwärts-Verweisen wie die RTM; und eine Zeile ohne Ausgang ist der eigentliche Befund — sie wird ein Slice in `open/`, kein „offen" in einer Tabelle. |
+| Bedrohungsliste mit Status bewertet?                                              | "Gute Übersicht, behalten."                                                 | Die Status-Spalte doppelt die Ausgänge: gemindert steht als `LH-*` mit Prüfung, akzeptiert als ADR, offen als Slice in `open/` — die Liste driftet gegen sie wie ein Status-Feld gegen das Verzeichnis. Grenze → Sicht (`ARC-*`), Beschreibung → beim Ausgang (Kontext der ADR, Ziel des Slices).                                                               | + Die Übersicht bleibt erreichbar, als Auslesestand aus den Aufwärts-Verweisen wie die RTM; und eine Zeile ohne Ausgang ist der eigentliche Befund — sie wird ein Slice in `open/`, kein "offen" in einer Tabelle.                                                                                                                                           |
 | Folge-ADR zu superseded ADR-0007 entworfen?                                       | Kopf vorhanden, Body sagt nur "neue Entscheidung".                          | Kopf mit `supersedes: ADR-0007` und `LH-*`-Bezug; mindestens eine explizit benannte Option (z. B. *Read-through-Cache hinter Index-Layer* vs. *Cache entfernen*) plus ein Trade-off, der ADR-0007 widerlegt (z. B. *"Stale-Reads im Worked Example von Modul 10 zeigen, dass die ursprüngliche Annahme 'Cache kann nicht stale werden' nicht hält"*).           | + Eine Konsequenzen-Zeile, die explizit auf die Fitness Function des Vorgänger-ADR zurückwirkt: bleibt sie? wird sie verschärft? entfällt sie? Wer das offen lässt, verschiebt das Drift-Risiko nur.                                                                                                                                                         |
 
 ## Weiterlesen
